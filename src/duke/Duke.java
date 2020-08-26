@@ -1,7 +1,7 @@
 package duke;
 
-import java.io.IOException;
-import java.util.*;
+import duke.command.Command;
+import duke.task.TaskList;
 
 
 public class Duke {

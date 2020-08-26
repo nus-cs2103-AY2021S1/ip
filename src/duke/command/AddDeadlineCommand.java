@@ -1,4 +1,8 @@
-package duke;
+package duke.command;
+
+import duke.*;
+import duke.task.Deadline;
+import duke.task.TaskList;
 
 import java.io.IOException;
 

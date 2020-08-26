@@ -1,4 +1,4 @@
-package duke;
+package duke.task;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +10,7 @@ public class TaskList {
         this.list = new ArrayList<>();
     }
 
-    TaskList(List<Task> add) {
+    public TaskList(List<Task> add) {
         this.list = new ArrayList<>();
         this.list.addAll(add);
     }
