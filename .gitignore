@@ -19,5 +19,6 @@ bin/
 *.jar
 *.xml
 /assets/userData.txt
-
+/assets/
 /text-ui-test/ACTUAL.txt
+

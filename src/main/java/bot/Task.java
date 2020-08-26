@@ -14,14 +14,24 @@ public class Task {
         this.done = done;
     }
 
+    /**
+     * Changes the state of done to true.
+     */
     public void markAsDone() {
         this.done = true;
     }
 
+    /**
+     * Changes the state of done to false
+     */
     public void markAsUndone() {
         this.done = false;
     }
 
+    /**
+     * Returns the class in a String form that is suitable to be written to txt file
+     * @return String to be written to user's txt file
+     */
     public String toFileFormat() {
         String isDone = done ? "1" : "0";
         return isDone + " | " + name ;

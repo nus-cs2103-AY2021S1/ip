@@ -13,10 +13,21 @@ public class TaskList {
         this.list = new ArrayList<Task>();
     }
 
+    /**
+     * Adds newtask to list.
+     * @param newTask
+     */
     public void add(Task newTask) {
         this.list.add(newTask);
     }
 
+    /**
+     * Returns the Task at userIndex - 1.
+     * If no Task is found, throw IllegalArgumentException
+     * @param userIndex
+     * @return
+     * @throws IllegalArgumentException
+     */
     public Task get(int userIndex) throws IllegalArgumentException {
         try {
             int index = userIndex - 1;
@@ -27,6 +38,11 @@ public class TaskList {
 
     }
 
+    /**
+     * Removes the Task at userIndex - 1.
+     * @param userIndex
+     * @throws IllegalArgumentException
+     */
     public void remove(int userIndex) throws IllegalArgumentException {
         try {
             int index = userIndex - 1;
@@ -36,10 +52,18 @@ public class TaskList {
         }
     }
 
+    /**
+     * Returns the list
+     * @return ArrayList of Task
+     */
     public ArrayList<Task> getList() {
         return this.list;
     }
 
+    /**
+     * Returns the length of the list
+     * @return length of list
+     */
     public int getSize() {
         return this.list.size();
     }

@@ -15,6 +15,11 @@ public class Storage {
         this.filePath = filePath;
     }
 
+    /**
+     * Processes the text file and returns it as an ArrayList of Task.
+     * @return ArrayList of Tasks
+     * @throws IOException
+     */
     public ArrayList<Task> loadFileContents() throws IOException {
         ArrayList<Task> taskList = new ArrayList<>();
         File f = new File(filePath);
@@ -36,6 +41,12 @@ public class Storage {
         }
         return taskList;
     }
+
+    /**
+     * Updates the user's test file with the taskList.
+     * @param taskList
+     * @throws IOException
+     */
 
     public void saveUserData(TaskList taskList) throws IOException {
         FileWriter fw = new FileWriter(filePath);
@@ -59,7 +70,6 @@ public class Storage {
                 return new Todo(words[2], words[1].equals("1"));
         }
     }
-
 
     private String responseWrapper(String str) {
         final String TEXT_LINE = "________________________________________________________________";

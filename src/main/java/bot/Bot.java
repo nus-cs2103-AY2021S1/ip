@@ -10,6 +10,11 @@ public class Bot {
     private Parser parser;
     private Ui ui;
 
+    /**
+     * Constructor for bot.
+     * @param name name of the bot
+     * @param filePath the relative path where user's data is stored
+     */
     public Bot(String name, String filePath) {
         this.name = name;
         this.ui = new Ui(this.name);
