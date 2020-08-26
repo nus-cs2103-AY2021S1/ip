@@ -39,7 +39,7 @@ public class Task {
      * @return The string representation of the task for the data file.
      */
     public String toData(){
-        return (isDone ? "1|" : "0|") + name + "|";
+        return (isDone ? "1///" : "0///") + name + "///";
     }
 
     /**

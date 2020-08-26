@@ -19,7 +19,7 @@ public class ToDo extends Task {
      */
     @Override
     public String toData(){
-        return "D|" + super.toData();
+        return "T///" + super.toData();
     }
 
     /**

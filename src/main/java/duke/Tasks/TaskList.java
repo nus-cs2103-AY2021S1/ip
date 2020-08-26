@@ -1,10 +1,14 @@
 package duke.Tasks;
 
+import duke.Commands.AddCommand;
+import duke.Commands.Command;
 import duke.Exceptions.DukeException;
 import duke.Ui.Ui;
+import javafx.fxml.LoadException;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 /**
@@ -28,9 +32,10 @@ public class TaskList {
      * Constructor to load a taskList from the data file.
      * @param inputList List of tasks from data file.
      */
-    public TaskList(ArrayList<String> inputList){
+    public TaskList(ArrayList<String> inputList) throws DukeException {
         this.preProcessedTasks = inputList;
         this.listOfTasks = new ArrayList<>();
+        this.parseFile(this.preProcessedTasks);
     }
 
     /**
@@ -153,6 +158,72 @@ public class TaskList {
         for (Task task: result) {
             ui.printTask(counter, task);
             counter += 1;
+        }
+    }
+
+    public void parseFile(ArrayList<String> listOfTasks) throws DukeException {
+
+        for (String t: listOfTasks) {
+            String[] task = t.split("///", 4);
+            if (task.length != 4) {
+                throw new DukeException("    Error in data file dividers ///");
+            }
+
+            if (!task[1].equals("1") && !task[1].equals("0")) {
+                throw new DukeException("    Error encountered in reading task done status." + !task[1].equals("0") + task[1]);
+            }
+
+            switch (task[0]) {
+
+            case "T" :
+                ToDo newTask = new ToDo(task[2]);
+                if (task[1].equals("1")) {
+                    newTask.completed();
+                }
+                this.listOfTasks.add(newTask);
+                break;
+
+            case "E" :
+                String[] dateTime = task[3].split(" ", 2);
+                if (dateTime.length != 2) {
+                    throw new DukeException("    Error in date time formatting encountered in data file");
+                }
+                try {
+                    LocalDate localDate = LocalDate.parse(dateTime[0]);
+                    LocalTime localTime = LocalTime.parse(dateTime[1]);
+
+                    Event newEvent = new Event(task[2], localDate, localTime);
+                    if (task[1].equals("1")) {
+                        newEvent.completed();
+                    }
+                    this.listOfTasks.add(newEvent);
+                } catch (DateTimeParseException e) {
+                    throw new DukeException("    Error in date time formatting encountered in data file");
+                }
+                break;
+
+            case "D" :
+                String[] dateTime1 = task[3].split(" ", 2);
+                if (dateTime1.length != 2) {
+                    throw new DukeException("    Error in date time formatting encountered in data file");
+                }
+                try {
+                    LocalDate localDate = LocalDate.parse(dateTime1[0]);
+                    LocalTime localTime = LocalTime.parse(dateTime1[1]);
+
+                    Deadline newDeadline = new Deadline(task[2], localDate, localTime);
+                    if (task[1].equals("1")) {
+                        newDeadline.completed();
+                    }
+                    this.listOfTasks.add(newDeadline);
+                } catch (DateTimeParseException e) {
+                    throw new DukeException("    Error in date time formatting encountered in data file");
+                }
+                break;
+
+            default:
+                throw new DukeException("    Error parsing file.");
+            }
         }
     }
 }

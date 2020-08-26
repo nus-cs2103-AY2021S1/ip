@@ -33,7 +33,7 @@ public class Event extends Task {
      */
     @Override
     public String toData(){
-        return "E|" + super.toData() + localDate.toString() + ' ' + localTime.toString();
+        return "E///" + super.toData() + localDate.toString() + ' ' + localTime.toString();
     }
 
     /**

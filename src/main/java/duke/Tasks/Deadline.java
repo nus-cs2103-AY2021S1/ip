@@ -33,7 +33,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toData(){
-        return "D|" + super.toData() + localDate.toString() + " " + localTime.toString();
+        return "D///" + super.toData() + localDate.toString() + " " + localTime.toString();
     }
 
     /**
