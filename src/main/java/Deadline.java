@@ -1,13 +1,16 @@
 package main.java;
 
-public class Deadline extends Task {
-    protected String date;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
-     Deadline(String description, String date) {
+class Deadline extends Task {
+    protected LocalDate date;
+
+    Deadline(String description, LocalDate date) {
         super(description);
         this.date = date;
     }
-    Deadline (String description, String date, boolean isDone) {
+    Deadline (String description, LocalDate date, boolean isDone) {
         super(description, isDone);
         this.date = date;
     }
@@ -18,13 +21,17 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D] [" + this.getStatusIcon() + "] " + this.description + " ----- By: " + this.date;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy MM dd E");
+        String dateText = this.date.format(formatter);
+        return "[D] [" + this.getStatusIcon() + "] " + this.description + " ----- By: " + dateText;
     }
 
     @Override
     public String getStoreRepresentation() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("ddMMyyyy");
+        String dateText = this.date.format(formatter);
         String doneStatus = this.isDone ? "D," : "N,";
-        return "D," + doneStatus + this.description + "," + this.date;
+        return "D," + doneStatus + this.description + "," + dateText;
 
     }
 }

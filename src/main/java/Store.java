@@ -1,25 +1,23 @@
 package main.java;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.BufferedReader;
+import java.time.DateTimeException;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.time.LocalDate;
+import java.util.zip.DataFormatException;
 
-public class Store {
-    private List<Task> allItems;
-    private File savedCopy;
+class Store {
     private final String line = "____________________________________________________________\n";
+    private File savedCopy;
+    private List<Task> allItems;
 
-    enum TYPES {
-        TODO ("todo"),
-        DEADLINE("deadline"),
-        EVENT ("event")
-        ;
-        private String text;
-        TYPES(String text) {
-            this.text = text;
-        }
-    }
 //    private final String TODO = "todo";
 //    private final String DEADLINE = "deadline";
 //    private final String EVENT = "event";
@@ -60,16 +58,19 @@ public class Store {
                         String description = simplerData[2].strip();
                         boolean isDone = simplerData[1].strip().equals("N") ? false : true;
                         String date = simplerData[3].strip();
-                        toAdd = new Deadline(description, date, isDone);
+                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("ddMMyyyy");
+                        LocalDate actualDate = LocalDate.parse(date, formatter);
+                        toAdd = new Deadline(description, actualDate, isDone);
                         this.allItems.add(toAdd);
 
                     } else if (simplerData[0].equals("E")){
                         String description = simplerData[2].strip();
                         boolean isDone = simplerData[1].strip().equals("N") ? false : true;
                         String date = simplerData[3].strip();
-                        toAdd = new Event(description, date, isDone);
+                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("ddMMyyyy");
+                        LocalDate actualDate = LocalDate.parse(date, formatter);
+                        toAdd = new Event(description, actualDate, isDone);
                         this.allItems.add(toAdd);
-
                     }
                 }
                 eachLine = bufferedReader.readLine();
@@ -95,13 +96,24 @@ public class Store {
                     throw new DukeGotNoArgumentsException(instruction);
                 } else {
                     String description = partsOfTask[0];
-                    String duedate = partsOfTask[1];
+                    String date = partsOfTask[1].strip();
+
+//                    parsing the date
+                    if (date.length() != 8) {
+                        throw new DataFormatException();
+                    }
+
+                    Integer day = Integer.valueOf(date.substring(0,2));
+                    Integer month = Integer.valueOf(date.substring(2,4));
+                    Integer year = Integer.valueOf(date.substring(4,8));
+                    LocalDate actualDate = LocalDate.of(year,month,day);
+
                     if (type.equals(TYPES.DEADLINE.text)) {
-                        toAdd = new Deadline(description.strip(), duedate.strip());
+                        toAdd = new Deadline(description.strip(), actualDate);
                         this.addTask(toAdd);
 
                     } else if (type.equals(TYPES.EVENT.text)) {
-                        toAdd = new Event(description.strip(), duedate.strip());
+                        toAdd = new Event(description.strip(), actualDate);
                         this.addTask(toAdd);
 
                     } else {
@@ -113,6 +125,10 @@ public class Store {
             }
         } catch (DukeGotNoArgumentsException e) {
             System.out.println(e.getMessage() + "\n" + line);
+        } catch (DataFormatException e) {
+            System.out.println("Please key in again with the date in the ddmmyyyy format." + "\n" + line);
+        } catch (DateTimeException e) {
+            System.out.println("Please key in again with a valid date." + "\n" + line);
         }
     }
 
@@ -145,7 +161,7 @@ public class Store {
         } else {
             printList = "Please finish these tasks ASAP!\n";
             int counter = 1;
-            for (Task task: this.allItems) {
+            for (Task task : this.allItems) {
                 printList = printList.concat("[" + counter + "] " + task + "\n");
                 counter++;
             }
@@ -169,6 +185,7 @@ public class Store {
         }
         return true;
     }
+
     public boolean deleteTask(String answer) {
         try {
             int oneIndex = Integer.parseInt(answer);
@@ -182,5 +199,16 @@ public class Store {
             System.out.println("Hmm... I don't have a task numbered " + answer + "\n" + line);
         }
         return true;
+    }
+
+    enum TYPES {
+        TODO("todo"),
+        DEADLINE("deadline"),
+        EVENT("event");
+        private String text;
+
+        TYPES(String text) {
+            this.text = text;
+        }
     }
 }

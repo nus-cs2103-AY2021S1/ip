@@ -1,9 +1,9 @@
 package main.java;
 
-public class Task {
+class Task {
+    private final String line = "____________________________________________________________\n";
     protected String description;
     protected boolean isDone;
-    private final String line = "____________________________________________________________\n";
 
      Task(String description) {
         this.description = description;
@@ -16,9 +16,9 @@ public class Task {
 
     public void finishTask() {
         if (this.isDone) {
-            System.out.println("Task is already done!\n" + line );
+            System.out.println("Task is already done!\n" + line);
         } else {
-            System.out.println("Congratulations! I have marked this task done.\n" + line );
+            System.out.println("Congratulations! I have marked this task done.\n" + line);
             this.isDone = true;
         }
     }
