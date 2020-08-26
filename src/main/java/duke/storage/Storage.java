@@ -58,19 +58,19 @@ public class Storage {
                 String taskName = taskArray[2];
                 Task task = null;
                 switch (taskType) {
-                    case "T":
-                        task = new Todo(taskName);
-                        break;
-                    case "D":
-                        task = new Deadline(taskName,
-                                LocalDateTime.parse(taskArray[3].replace(", " , "T"),
-                                        DateTimeFormatter.ofPattern("dd/MM/yyyy'T'HHmm")));
-                        break;
-                    case "E":
-                        task = new Event(taskName,
-                                LocalDateTime.parse(taskArray[3].replace(", ", "T"),
-                                        DateTimeFormatter.ofPattern("dd/MM/yyyy'T'HHmm")));
-                        break;
+                case "T":
+                    task = new Todo(taskName);
+                    break;
+                case "D":
+                    task = new Deadline(taskName,
+                            LocalDateTime.parse(taskArray[3].replace(", " , "T"),
+                                    DateTimeFormatter.ofPattern("dd/MM/yyyy'T'HHmm")));
+                    break;
+                case "E":
+                    task = new Event(taskName,
+                            LocalDateTime.parse(taskArray[3].replace(", ", "T"),
+                                    DateTimeFormatter.ofPattern("dd/MM/yyyy'T'HHmm")));
+                    break;
                 }
                 if (isDone.equals("1")) {
                     assert task != null;

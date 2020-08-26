@@ -22,15 +22,15 @@ public class AddCommand extends Command {
     public void execute(TaskList taskList, Ui ui, Storage storage) throws IOException, DukeException {
         try {
             switch (commandWord) {
-                case "todo":
-                    taskList.addTodo(taskName, storage);
-                    break;
-                case "deadline":
-                    taskList.addDeadline(taskName, storage);
-                    break;
-                case "event":
-                    taskList.addEvent(taskName, storage);
-                    break;
+            case "todo":
+                taskList.addTodo(taskName, storage);
+                break;
+            case "deadline":
+                taskList.addDeadline(taskName, storage);
+                break;
+            case "event":
+                taskList.addEvent(taskName, storage);
+                break;
             }
         } catch (DateTimeException e) {
             throw new DukeException("Please enter dates in this format: dd/MM/yyyy timeIn24Hr" +
