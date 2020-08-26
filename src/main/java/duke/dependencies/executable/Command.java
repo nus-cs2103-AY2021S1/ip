@@ -93,15 +93,27 @@ public class Command implements Executable {
         return new Command(CommandType.FIND, task);
     }
 
-    public static Command createEventCommand(Task task) {
-        return new Command(CommandType.EVENT, task);
-    }
-
-    public static Command createDeadlineCommand(Task task) {
-        return new Command(CommandType.DEADLINE, task);
-    }
-
-    public static Command createTodoCommand(Task task) {
-        return new Command(CommandType.TODO, task);
-    }
+//    public static Command createEventCommand(Task task) {
+//        return new Command(CommandType.EVENT, task);
+//    }
+//
+//    public static Command createDeadlineCommand(Task task) {
+//        return new Command(CommandType.DEADLINE, task);
+//    }
+//
+//    public static Command createTodoCommand(Task task) {
+//        return new Command(CommandType.TODO, task);
+//    }
+//
+//    public static Command createGetCompletedCommand(Task task) {
+//        return new Command(CommandType.GETCOMPLETED, null);
+//    }
+//
+//    public static Command createGetIncompleteCommand(Task task) {
+//        return new Command(CommandType.GETINCOMPLETE, null);
+//    }
+//
+//    public static Command createGetListSizeCommand(Task task) {
+//        return new Command(CommandType.GETLISTSIZE, null);
+//    }
 }

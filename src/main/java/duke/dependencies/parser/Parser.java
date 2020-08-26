@@ -80,7 +80,7 @@ class Parser {
             e = Command.createDoneCommand(t);
 
         }
-        /* TODO_COMMAND */
+        /* TODO_COMMAND : ADD COMMAND */
         else if (checkForWord(s, "todo")) {
             String task = cutOutTheWord(s, "todo");
             Task t = Task.createTodo(task);
@@ -90,7 +90,7 @@ class Parser {
             e = Command.createAddCommand(t);
 
         }
-        /* EVENT COMMAND */
+        /* EVENT COMMAND : ADD COMMAND */
         else if (checkForWord(s, "event")) {
             String task = cutOutTheWord(s, "event");
             if (task.isBlank() || task.isEmpty()) {
@@ -104,7 +104,7 @@ class Parser {
             e = Command.createAddCommand(t);
 
         }
-        /* DEADLINE COMMAND */
+        /* DEADLINE COMMAND : ADD COMMAND */
         else  if (checkForWord(s, "deadline")) {
             String task = cutOutTheWord(s, "deadline");
             if (task.isEmpty() || task.isBlank()) {

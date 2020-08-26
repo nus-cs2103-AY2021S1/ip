@@ -1,5 +1,7 @@
 package duke.dependencies.executor;
 
+import duke.Duke;
+import duke.dependencies.dukeexceptions.DukeException;
 import duke.dependencies.executable.CommandType;
 import duke.dependencies.executable.Executable;
 
@@ -23,6 +25,9 @@ public class Executor {
     private static final String DELETE_COMMAND = "delete";
     private static final String FIND_COMMAND = "find";
 
+    /* Half-assed attempt at concurrency lock.
+    There should be no need for concurrency
+    in this application. */
     private CommandType commandState;
 
     /** Private constructor. */
@@ -46,32 +51,52 @@ public class Executor {
     public String receiveAndExec(Executable executable) {
         // TODO: Adding of new commands is to be done here.
         switch(executable.getType()) {
-            case LIST: {
+            case LIST:
                 setState(LIST);
                 break;
-            }
-            case ADD: {
+
+            case ADD:
                 setState(ADD);
                 break;
-            }
-            case DELETE: {
+
+            case DELETE:
                 setState(DELETE);
                 break;
-            }
-            case DONE: {
+
+            case DONE:
                 setState(DONE);
                 break;
-            }
-            case FIND: {
+
+            case FIND:
                 setState(FIND);
                 break;
-            }
-            default: {
+
+            case GETCOMPLETED:
+                setState(GETCOMPLETED);
+                break;
+
+            case GETINCOMPLETE:
+                setState(GETINCOMPLETE);
+                break;
+
+            default:
                 setState(INVALID);  // Should never reached this stage.
                 break;
-            }
+
         }
         return execAndReturn(executable);
+    }
+
+    public int getNumOfCompletedTasks() {
+        return storage.getNumOfCompleted();
+    }
+
+    public int getNumOfIncompleteTasks() {
+        return storage.getNumOfIncomplete();
+    }
+
+    public int getListSize() {
+        return storage.getListSize();
     }
 
 
@@ -80,22 +105,11 @@ public class Executor {
 
     // TODO: Ideally this class should not be returning strings. String should be returned in the Parser
     private String execAndReturn(Executable e) {
-        String reply;
+
+        // Block scoped the variable declaration in the cases.
         switch(commandState) {
             case LIST: {
-                reply = storage.getTodosInList();
-                StringBuilder sb = new StringBuilder();
-                sb.append("Here are the tasks in your list:\n")
-                        .append(reply);
-                return sb.toString();
-            }
-            case ADD: {
-                Task t = e.getTask();
-                reply = storage.add(t);
-                return String.format("Got it! I have added the task:\n%s\n"
-                        + "Now you have %d tasks in the list.",
-                        reply,
-                        storage.getListSize());
+                return storage.getTodosInList();
             }
             case DONE: {
                 // Done command would have a task of "1 2 3 4"
@@ -104,26 +118,19 @@ public class Executor {
                 for (int i = 0; i < nums.length; i++) {
                     arr[i] = Integer.valueOf(nums[i]);
                 }
-                reply = storage.done(arr);
-                return String.format("Congratz! I will marked this task as completed for you!\n%s\n" +
-                        "Keep up the good work and continue to stay motivated.\n" +
-                                "You've got %d task left to be completed!",
-                        reply,
-                        storage.getNumOfIncomplete());
+                return storage.done(arr);
             }
             case DELETE: {
                 String nums = e.getTask().showTaskDescription();
-                reply = storage.deleteTask(Integer.valueOf(nums));
-                return String.format("Noted. I've removed this task:\n%s\n" +
-                                "Now you have %d tasks left in the list.",
-                        reply,
-                        storage.getListSize());
+                return storage.deleteTask(Integer.valueOf(nums));
             }
             case FIND: {
                 String keyword = e.getTask().showTaskDescription();
-                reply = storage.findMatching(keyword);
-                return String.format("Here are the tasks matching: %s\n" +
-                        reply, keyword);
+                return storage.findMatching(keyword);
+            }
+            case ADD: {
+                Task t = e.getTask();
+                return storage.add(t);
             }
             default: {
                 return "Error";
