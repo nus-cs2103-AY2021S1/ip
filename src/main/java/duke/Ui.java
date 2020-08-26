@@ -1,26 +1,43 @@
 package duke;
 
+/**
+ * The Ui class deals with interactions with the user.
+ */
 public class Ui {
 
     private static String BORDER = "-----------------------------------------------------------";
     private static String INDENTATION = "    ";
 
+    /**
+     * Prints the formatting for the Duke application.
+     */
     public void printBorder() {
         System.out.println(INDENTATION + BORDER);
     }
 
+    /**
+     * Greets the user when Duke starts up.
+     */
     public void greet() {
         printBorder();
         System.out.println(INDENTATION + "Hello! I'm Duke\n    What can I do for you?");
         printBorder();
     }
 
+    /**
+     * Says goodbye to the user before terminating.
+     */
     public void exit() {
         printBorder();
         System.out.println(INDENTATION + "Bye. Hope to see you again soon!");
         printBorder();
     }
 
+    /**
+     * Displays a list of all the tasks.
+     *
+     * @param tasks a TaskList object containing a list of tasks
+     */
     public void list(TaskList tasks) {
         printBorder();
         System.out.println(INDENTATION + "Here are the tasks in your list:");
@@ -31,6 +48,12 @@ public class Ui {
         printBorder();
     }
 
+    /**
+     * Mark a task as done.
+     *
+     * @param tasks a TaskList object containing a list of tasks
+     * @param index position of the task in the list of tasks to be marked done
+     */
     public void markDone(TaskList tasks, int index) {
         Task oldTask = tasks.getTasks().get(index);
         Task newTask = oldTask.markAsDone();

@@ -11,15 +11,31 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * The Storage class deals with loading tasks from the file and saving tasks in the file
+ */
 public class Storage {
 
     private static String filePath;
     private List<Task> tasks = new ArrayList<>();
 
+    /**
+     * Constructor which takes in a specified filepath to create a Storage object.
+     *
+     * @param filePath the path location of the load or save file
+     */
     public Storage (String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Reads from the file specified by the filepath and creates each Task object
+     * to be stored a List of tasks so it can be passed as a parameter into
+     * a TaskList object so that it can be tracked.
+     *
+     * @return a List of tasks
+     * @throws FileNotFoundException thrown when an attempt to open the specified file has failed
+     */
     public List<Task> load() throws FileNotFoundException {
         File f = new File(filePath);
         Scanner s = new Scanner(f);
@@ -60,10 +76,21 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Returns the filepath of the specified file.
+     *
+     * @return the filepath
+     */
     public static String getFilePath() {
         return filePath;
     }
 
+    /**
+     * Prints out the contents of a file.
+     *
+     * @param filePath the path location of the load or save file
+     * @throws FileNotFoundException thrown when an attempt to open the specified file has failed
+     */
     public static void printFileContents(String filePath) throws FileNotFoundException {
         File f = new File(filePath); // create a File for the given file path
         Scanner s = new Scanner(f); // create a Scanner using the file as the source
@@ -72,18 +99,39 @@ public class Storage {
         }
     }
 
+    /**
+     * Writes content to a file based on the text specified and overwrites the file.
+     *
+     * @param filePath the path location of the load or save file
+     * @param textToAdd the text to be written to the file
+     * @throws IOException produced by failed or interrupted I/O operations
+     */
     public static void writeToFile(String filePath, String textToAdd) throws IOException {
         FileWriter fw = new FileWriter(filePath);
         fw.write(textToAdd);
         fw.close();
     }
 
+    /**
+     * Appends information to a file based on the text specified and overwrites the file.
+     *
+     * @param filePath the path location of the load or save file
+     * @param textToAppend the text to be appended to the file
+     * @throws IOException produced by failed or interrupted I/O operations
+     */
     public static void appendToFile(String filePath, String textToAppend) throws IOException {
         FileWriter fw = new FileWriter(filePath, true); // create a FileWriter in append mode
         fw.write(textToAppend);
         fw.close();
     }
 
+    /**
+     * Overwrites the file by adding in all the tasks from a list of tasks specified.
+     *
+     * @param filePath the path location of the load or save file
+     * @param tasks TaskList object that contains a list of tasks
+     * @throws IOException produced by failed or interrupted I/O operations
+     */
     public static void updateFile(String filePath, TaskList tasks) throws IOException {
         writeToFile(filePath, "");
         for (Task tsk : tasks.getTasks()) {
