@@ -41,7 +41,7 @@ public class Ui {
      * @param e the exception that contains the error message to be printed.
      */
     public void printExceptionMessage(Exception e) {
-        out.println(e);
+        out.println(e.getMessage());
     }
 
     /**
@@ -84,5 +84,9 @@ public class Ui {
      */
     public void printAllTasks(TaskList taskList) {
         out.println(taskList.getAllTasksAsString());
+    }
+    
+    public void printMessage(String message) {
+        out.println(message);
     }
 }

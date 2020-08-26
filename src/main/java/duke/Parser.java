@@ -39,12 +39,18 @@ public class Parser {
 
                         Task removedTask = taskList.getTask(taskIndex);
                         taskList.deleteTask(taskIndex);
-                        
+
                         ui.printRemoveTaskConfirmation(removedTask, taskList);
                         
                     } catch (NumberFormatException e) {
                         throw new DukeException(" OOPS!!! Please specify a valid task to delete.");
                     }
+                }
+            } else if (input.indexOf("find") == 0) {
+                if (input.length() == 4) {
+                    throw new DukeException(" OOPS!!! Please specify a keyword to search for.");
+                } else {
+                    ui.printMessage(taskList.find(input.substring(5)));
                 }
             } else {
                 // use indexOf() method to find substring
