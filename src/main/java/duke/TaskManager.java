@@ -7,6 +7,8 @@ import duke.tasks.Task;
 import duke.tasks.Todo;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class TaskManager {
@@ -61,11 +63,20 @@ public class TaskManager {
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
         return IntStream.range(0, taskStorage.getTaskCount())
-                .mapToObj(i -> String.format("%d. %s", i + 1, taskStorage.taskList.get(i).toString().concat("\n")))
-                .reduce("", String::concat);
+                .mapToObj(i -> String.format("%d. %s", i + 1, taskStorage.taskList.get(i).toString()))
+                .collect(Collectors.joining("\n"));
     }
 
     public int getTaskCount() {
         return taskStorage.getTaskCount();
+    }
+
+    /**
+     * Returns a list of tasks from the taskManager that contains the content
+     * @param content the search term used
+     * @return the list of tasks that contains the content specified
+     */
+    public List<Task> findAllContaining(String content) {
+        return taskStorage.findAllContaining(content);
     }
 }

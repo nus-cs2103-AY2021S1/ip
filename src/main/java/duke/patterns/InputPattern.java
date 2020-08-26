@@ -9,4 +9,5 @@ public class InputPattern {
     public static String addTodoPattern = "^todo (?<content>.+)$";
     public static String listPattern = "^list$";
     public static String byePattern = "^bye$";
+    public static final String FIND_ALL_CONTAINING = "^find (?<content>.+)$";
 }

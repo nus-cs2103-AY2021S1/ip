@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class TaskStorage {
     List<Task> taskList;
@@ -110,5 +111,16 @@ public class TaskStorage {
         Task task = taskList.remove(index);
         this.save();
         return task;
+    }
+
+    /**
+     * Returns a list of tasks that contains the content
+     * @param content the search term used
+     * @return the list of tasks that contains the content specified
+     */
+    public List<Task> findAllContaining(String content) {
+        return taskList.stream()
+                .filter(task -> task.content.contains(content))
+                .collect(Collectors.toList());
     }
 }

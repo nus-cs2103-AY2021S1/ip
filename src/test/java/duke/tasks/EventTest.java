@@ -1,11 +1,12 @@
-import duke.tasks.Event;
+package duke.tasks;
+
 import duke.exceptions.DukeException;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class EventTest {
+class EventTest {
 
     @Test
     public void testCreateEvent() throws DukeException {

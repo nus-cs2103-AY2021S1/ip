@@ -20,6 +20,8 @@ public class Parser {
             return new AddTodoCommand(input);
         } else if (input.matches(InputPattern.listPattern)) {
             return new ListCommand(input);
+        } else if (input.matches(InputPattern.FIND_ALL_CONTAINING)) {
+            return new FindAllContainingCommand(input);
         } else {
             return new InvalidCommand(input);
         }
