@@ -1,9 +1,12 @@
 package Command;
 
 import Command.Command;
+
 import Exceptions.MissingSpecifiedDeleteError;
 import Exceptions.WrongIndexError;
+
 import ParserStorageUi.*;
+
 import Task.*;
 
 public class DeleteCommand extends Command {
