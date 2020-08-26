@@ -7,6 +7,9 @@ public class Events extends Task {
     }
 
     @Override
+    public String saveAs() { return "E | " + super.saveAs() + " | " + at; }
+
+    @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + at + ")";
     }
