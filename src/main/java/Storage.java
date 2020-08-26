@@ -6,9 +6,21 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * <code>Storage</code> handles all file read and writes.
+ */
 class Storage {
     final static String TASKS_TEXT_FILE_PATH = "../tasks.txt";
 
+    /**
+     * Loads the information from the file "tasks.txt" into a
+     * <code>List</code>. Since each task from the file is
+     * comma seperated, it splits each string into a string array using ","
+     * as a delimiter. Then it creates objects of the child classes of
+     * <code>Task</code> according to the information provided.
+     * @return a list of tasks as a <code>List</code>
+     * @throws DukeException if there is an IOexception while creating a new empty file
+     */
     public List<Task> load() throws DukeException {
         List<Task> tasks = new ArrayList<>();
         
@@ -53,6 +65,10 @@ class Storage {
         }
     }
 
+    /**
+     * Writes the list of tasks to the file "tasks.txt".
+     * @param fileContent the comma seperated string information to be written to the file
+     */
     public static void writeTasksFile(String fileContent) {
         try {
             FileWriter fw = new FileWriter(TASKS_TEXT_FILE_PATH, false);
