@@ -5,8 +5,10 @@ import task.EventTask;
 import task.Task;
 import task.ToDoTask;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 public class TaskList {
     private enum TaskType {
@@ -56,5 +58,13 @@ public class TaskList {
     
     public Task get(int index) {
         return lst.get(index);
+    }
+    
+    public List<Task> filter(String query) {
+        return lst.stream().filter(task -> {
+            String taskDesc = task.getDescription();
+            String[] wordsInTask = taskDesc.split(" ");
+            return Arrays.asList(wordsInTask).contains(query);
+        }).collect(Collectors.toList());
     }
 }

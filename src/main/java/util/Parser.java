@@ -1,11 +1,6 @@
 package util;
 
-import command.AddCommand;
-import command.Command;
-import command.DeleteCommand;
-import command.DoneCommand;
-import command.ExitCommand;
-import command.ListCommand;
+import command.*;
 import duke.DukeException;
 
 public class Parser {
@@ -17,7 +12,8 @@ public class Parser {
         DEADLINE,
         EVENT,
         DONE,
-        DELETE
+        DELETE,
+        FIND
     }
     
     private final TaskList lst;
@@ -84,6 +80,9 @@ public class Parser {
                 break;
             case BYE:
                 resultantCommand = new ExitCommand();
+                break;
+            case FIND:
+                resultantCommand = new FindCommand(value);
                 break;
         }
         
