@@ -3,10 +3,8 @@ package duke;
 import java.io.IOException;
 
 public class Duke {
-    private Storage storage;
-    private TaskList taskList;
-    private Ui ui;
-    private Parser parser;
+    private final Ui ui;
+    private final Parser parser;
     String dest;
 
     /**
@@ -21,6 +19,8 @@ public class Duke {
     }
 
     private void run() {
+        Storage storage;
+        TaskList taskList;
         try {
             storage = new Storage(dest);
             taskList = storage.loadFile();

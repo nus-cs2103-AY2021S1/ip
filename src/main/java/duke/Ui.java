@@ -9,7 +9,7 @@ import java.util.Scanner;
  * Interacts with the user.
  */
 public class Ui {
-    private Scanner sc;
+    private final Scanner sc;
 
     public Ui() {
         sc = new Scanner(System.in);

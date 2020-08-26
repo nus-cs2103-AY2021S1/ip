@@ -25,7 +25,7 @@ public class EventTask extends Task {
                     period.getYear());
 
         } catch (Exception e) {
-            // Not parseable
+            // Not parsable
             periodString = periodParse;
         }
     }
