@@ -3,8 +3,18 @@ package duke;
 import duke.commands.*;
 import duke.patterns.InputPattern;
 
+/**
+ * Represents a parser.
+ * Used to parse user input into commands.
+ */
 public class Parser {
 
+    /**
+     * Returns the corresponding command for a users text input.
+     *
+     * @param input the user text input
+     * @return the command corresponding to the users input
+     */
     public static Command parse(String input) {
         if (input.matches(InputPattern.byePattern)) {
             return new ExitCommand(input);

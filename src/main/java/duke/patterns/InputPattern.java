@@ -1,5 +1,8 @@
 package duke.patterns;
 
+/**
+ * Represents the different types of input patterns.
+ */
 public class InputPattern {
 
     public static String deleteTaskPattern = "^delete (?<taskNumber>[0-9]+)$";
