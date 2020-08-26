@@ -1,6 +1,6 @@
 package main.java;
 
-public class DeadlineIncompleteException extends Exception {
+public class DeadlineIncompleteException extends DukeException {
 
     @Override
     public String getMessage() {

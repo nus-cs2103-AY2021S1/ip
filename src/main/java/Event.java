@@ -15,6 +15,10 @@ public class Event extends Task {
         this.date2 = date;
     }
 
+    public LocalDate getDate() {
+        return date;
+    }
+
     // Get info to store in hard disk
     @Override
     public String[] getInfo() {

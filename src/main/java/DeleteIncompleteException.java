@@ -1,6 +1,6 @@
 package main.java;
 
-public class DeleteIncompleteException extends Exception {
+public class DeleteIncompleteException extends DukeException {
 
     @Override
     public String getMessage() {

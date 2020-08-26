@@ -1,6 +1,6 @@
 package main.java;
 
-public class DoneIncompleteException extends Exception {
+public class DoneIncompleteException extends DukeException {
 
     @Override
     public String getMessage() {

@@ -1,6 +1,6 @@
 package main.java;
 
-public class EventIncompleteException extends Exception {
+public class EventIncompleteException extends DukeException {
 
     @Override
     public String getMessage() {

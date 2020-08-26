@@ -1,6 +1,6 @@
 package main.java;
 
-public class TodoIncompleteException extends Exception {
+public class TodoIncompleteException extends DukeException {
 
     @Override
     public String getMessage() {

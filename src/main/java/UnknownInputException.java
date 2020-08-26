@@ -1,6 +1,6 @@
 package main.java;
 
-public class UnknownInputException extends Exception {
+public class UnknownInputException extends DukeException {
 
     @Override
     public String getMessage() {

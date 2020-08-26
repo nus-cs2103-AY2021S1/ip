@@ -1,6 +1,6 @@
 package main.java;
 
-public class NoInputException extends Exception{
+public class NoInputException extends DukeException{
 
     @Override
     public String getMessage() {
