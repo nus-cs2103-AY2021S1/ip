@@ -1,4 +1,0 @@
-[T][✓] eat
-[T][✘] sleep
-[T][✓] play
-[T][✓] aaaa
