@@ -71,6 +71,8 @@ public class AddCommand extends Command {
                 e.printStackTrace();
             }
         } else {
+            System.out.println(Ui.line);
+            System.out.println(Ui.bot);
             throw new DukeException("The description of a deadline cannot be empty!");
         }
     }
