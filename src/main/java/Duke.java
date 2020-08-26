@@ -148,7 +148,7 @@ public class Duke {
                             break;
 
                         case "deadline":
-                            array = pieces[1].split("/by");
+                            array = pieces[1].split("/by ");
                             if (array.length == 1) {
                                 ex = new InvalidInputException("Sorry, but I can't help if you don't tell me the exact deadline!");
                                 System.err.println(line + ex.getMessage() + "\n" + line);
@@ -160,7 +160,7 @@ public class Duke {
 
 
                         case "event":
-                            array = pieces[1].split("/at");
+                            array = pieces[1].split("/at ");
                             if (array.length == 1) {
                                 ex = new InvalidInputException("I see...But what time is this event at?");
                                 System.err.println(line + ex.getMessage() + "\n" + line);
