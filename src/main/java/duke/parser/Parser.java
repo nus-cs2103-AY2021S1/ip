@@ -13,7 +13,17 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
 
+/**
+ * Represents the Parser used to make sense of user commands.
+ */
 public class Parser {
+    /**
+     * Parses user input into executable Commands.
+     *
+     * @param fullCommand Entire user input.
+     * @return Duke Command corresponding to input.
+     * @throws DukeException If task is not successfully parsed.
+     */
     public static Command parse(String fullCommand) throws DukeException {
         Command command;
 
@@ -37,6 +47,14 @@ public class Parser {
         return command;
     }
 
+    /**
+     * Parses a task input into Task objects.
+     *
+     * @param type Type of task (todo, deadline, or event).
+     * @param task The full input of the task.
+     * @return Task obtained from the input.
+     * @throws DukeException If task is not successfully parsed.
+     */
     public static Task parseTask(String type, String task) throws DukeException {
         Task t;
         switch (type) {

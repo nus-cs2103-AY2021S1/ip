@@ -13,17 +13,32 @@ import java.io.IOException;
 import java.io.FileReader;
 import java.io.BufferedReader;
 
+/**
+ * Represents the Storage manager used to save and load tasks from hard disk.
+ */
 public class Storage {
 
     private File file;
     private File folder;
 
+    /**
+     * Creates a Storage manager.
+     *
+     * @param filePath Directory where text file is saved.
+     * @param folderPath Path name of text file to be saved.
+     */
     public Storage(String filePath, String folderPath) {
         this.file = new File(System.getProperty("user.dir") + filePath);
         this.folder = new File(System.getProperty("user.dir") + folderPath);
 
     }
 
+    /**
+     * Loads task data from the text file if it exists.
+     *
+     * @return List of lines in the text files.
+     * @throws DukeException If file is not found or unable to write to file.
+     */
     public ArrayList<String> load() throws DukeException {
 
         if (!folder.exists()) {
@@ -52,6 +67,11 @@ public class Storage {
         return taskList;
     }
 
+    /**
+     * Writes task data to text file.
+     *
+     * @param taskList Tasklist containing the tasks to be saved.
+     */
     public void save(TaskList taskList) {
         try {
             file.createNewFile();
