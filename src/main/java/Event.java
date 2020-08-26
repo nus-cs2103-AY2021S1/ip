@@ -1,10 +1,18 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class Event extends Task {
 
     private String identifier;
+    private LocalDate date;
 
     public Event(String description) {
         super(description);
         this.identifier = "E";
+
+        String[] desArray = this.description.split("/", 2); //e.g. do homework/ by 1999-10-21
+        String[] dateArray = desArray[1].split(" ", 2); //1999-10-21
+        this.date = LocalDate.parse(dateArray[1]);
     }
 
     @Override
@@ -13,9 +21,7 @@ public class Event extends Task {
     }
 
     public String getDate() {
-        String[] desArray = this.description.split("/", 2);
-        String[] timeArray = desArray[1].split(" ", 2);
-        return timeArray[1];
+        return this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
     }
 
     //separates date from description
@@ -31,6 +37,6 @@ public class Event extends Task {
         String[] desArray = this.description.split("/", 2);
         String[] timeArray = desArray[1].split(" ", 2);
 
-        return "[E]" + "[" + getStatusIcon() + "] " + desArray[0] + "(" + timeArray[0] + ": " + timeArray[1] + ")";
+        return "[E]" + "[" + getStatusIcon() + "] " + getDescription() + "(" + timeArray[0] + ": " + getDate() + ")";
     }
 }

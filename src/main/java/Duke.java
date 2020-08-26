@@ -1,8 +1,10 @@
 import java.io.*;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Duke {
+
     public static void main(String[] args) {
         Greet();
 
@@ -11,8 +13,6 @@ public class Duke {
         String input = sc.nextLine();
         String file = "data/duke.txt";
 
-        StringBuffer buffer = new StringBuffer();
-        String fileContent = buffer.toString();
 
         try {
             while (!input.equals("bye")) {
@@ -79,6 +79,9 @@ public class Duke {
         catch (IOException e) {
             System.out.println("Something went wrong: " + e.getMessage());
         }
+        catch (DateTimeParseException e) {
+            System.out.println("Date must be in the YYYY-MM-DD format!");
+        }
 
     }
     public static void Greet() {
@@ -113,10 +116,10 @@ public class Duke {
             fw.write(((Todo) task).getIdentifier() + " | " + (task.getDone() ? 1 : 0) + " | " + task.getDescription() + "\n");
         }
         else if (task instanceof Deadline) {
-            fw.write(((Deadline) task).getIdentifier() + " | " + (task.getDone() ? 1 : 0) + " | " + task.getDescription() + " | " + ((Deadline) task).getDate() + "\n");
+            fw.write(((Deadline) task).getIdentifier() + " | " + (task.getDone() ? 1 : 0) + " | " + task.getDescription() + "| " + ((Deadline) task).getDate() + "\n");
         }
         else {
-            fw.write(((Event) task).getIdentifier() + " | " + (task.getDone() ? 1 : 0) + " | " + task.getDescription() + " | " + ((Event) task).getDate() + "\n");
+            fw.write(((Event) task).getIdentifier() + " | " + (task.getDone() ? 1 : 0) + " | " + task.getDescription() + "| " + ((Event) task).getDate() + "\n");
         }
         fw.close();
     }
