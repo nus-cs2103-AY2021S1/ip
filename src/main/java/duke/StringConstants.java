@@ -1,5 +1,8 @@
 package duke;
 
+/**
+ * String constants for printing to user.
+ */
 public class StringConstants {
     // Strings for printing
     public static final String LINE = "__________________________________________________";
@@ -7,8 +10,8 @@ public class StringConstants {
     public static final String SIX_SPACES = "      ";
 
     public static final String[] GREETING_MESSAGES = new String[]{
-            "Hello! I'm Duke",
-            "What can I do for you?"
+        "Hello! I'm Duke",
+        "What can I do for you?"
     };
     public static final String DONE_MESSAGE = "Nice! I've marked this task as done:";
     public static final String ADD_MESSAGE = "Got it. I've added this task: ";
