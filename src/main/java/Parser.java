@@ -141,9 +141,9 @@ public class Parser {
         }
     }
 
-    public static void handleFindInput(String input, TaskList taskList) throws DukeException {
+    public static TaskList handleFindInput(String input, TaskList taskList) throws DukeException {
         if (!input.substring(4).trim().isEmpty()) { //to make sure to do task is not empty
-            taskList.setTodo(input);
+           return taskList.find(input.substring(4).trim());
         } else {
             throw new DukeException("Please enter a valid search item");
         }
@@ -232,7 +232,7 @@ public class Parser {
             handleDeleteInput(input, taskList);
             return false;
         } else if (input.toLowerCase().startsWith("find")) {
-            handleFindInput(input, taskList);
+            ui.printMatchingTasks(handleFindInput(input, taskList));
             return false;
         } else if (input.toLowerCase().startsWith("todo")) {
             handleTodoInput(input, taskList);

@@ -16,6 +16,10 @@ public class Task {
         return (isDone ? "1" : "0"); //return tick or X symbols
     }
 
+    public String getDescription() {
+        return this.description;
+    }
+
     public Task markAsDone() {
         this.isDone = true;
         return this;
