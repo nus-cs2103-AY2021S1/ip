@@ -92,4 +92,20 @@ public class TaskList {
                     "   " + tasks.get(index - 1));
         }
     }
+    
+    public ArrayList<Task> findTasks(String keyword) {
+        int wordLength = keyword.length();
+        ArrayList<Task> matchingTasks = new ArrayList<>();
+        for (int i = 0; i < taskCount; i++) {
+            Task currentTask = tasks.get(i);
+            String description = currentTask.getDescription();
+            for (int j = 0; j <= description.length() - wordLength; j++) {
+                String currentSearch = description.substring(j, j + wordLength);
+                if (currentSearch.equals(keyword)) {
+                    matchingTasks.add(currentTask);
+                }
+            }
+        }
+        return matchingTasks;
+    }
 }

@@ -22,6 +22,7 @@ public class Parser {
         TODO,
         DEADLINE,
         EVENT,
+        FIND,
     }
 
     /**
@@ -106,6 +107,15 @@ public class Parser {
                     command = new EventCommand(description, time);
                     break;
                 }
+                break;
+            case FIND:
+                if (separated.length <= 1) {
+                    isError = true;
+                    errorMessage = " Keyword cannot be empty :(";
+                    break;
+                }
+                String keyword = input.substring(5);
+                command = new FindCommand(keyword);
                 break;
             }
             if (isError) {

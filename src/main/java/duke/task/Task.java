@@ -36,4 +36,8 @@ public class Task {
         int isDone = done ? 1 : 0;
         return " | " + isDone + " | " + description;
     }
+    
+    public String getDescription() {
+        return description;
+    }
 }
