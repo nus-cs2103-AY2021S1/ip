@@ -36,6 +36,9 @@ public class Duke {
             case "delete":
                 this.ui.deleteTask(this.tasks.deleteTask(Integer.valueOf(input[1])), this.tasks.getLength());
                 break;
+            case "find":
+                this.ui.find(this.tasks.findTasks(input[1]));
+                break;
             case "todo":
                 //Fallthrough
             case "event":
@@ -65,7 +68,7 @@ public class Duke {
         this.ui.greet();
         Scanner sc = new Scanner(System.in);
 
-        while (sc.hasNext()) {
+        while (sc.hasNextLine()) {
             String[] input = Parser.parse(sc.nextLine());
             handleInput(input);
         }

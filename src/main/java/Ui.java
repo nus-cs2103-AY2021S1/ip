@@ -99,4 +99,10 @@ public class Ui {
     public void showLoadError() {
         System.out.println(wrapMessage("Something went wrong while loading your tasks..."));
     }
+
+    public void find(String matchingTasks) {
+        String list = "Here are the matching tasks in your list: \n  ";
+        list += matchingTasks;
+        System.out.println(wrapMessage(list));
+    }
 }

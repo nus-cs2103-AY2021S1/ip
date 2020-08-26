@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -28,7 +29,6 @@ public class TaskList {
         return this.tasks.size();
     }
 
-
     Task createTask(String taskType, String desc) throws MissingDeadlineException{
         if (taskType.equals("todo")) {
             return new Todo(desc);
@@ -54,9 +54,9 @@ public class TaskList {
         return task;
     }
 
-    String formatTask(int num) {
-        String lineBreak = num != this.tasks.size() - 1 ? "\n  " : "";
-        return (num + 1) + "." + this.tasks.get(num) + lineBreak;
+    String formatTask(int num, List<Task> tasks) {
+        String lineBreak = num != tasks.size() - 1 ? "\n  " : "";
+        return (num + 1) + "." + tasks.get(num) + lineBreak;
     }
 
     /**
@@ -68,7 +68,7 @@ public class TaskList {
         String list = "";
 
         for (int i = 0; i < this.tasks.size(); i++) {
-            list += formatTask(i);
+            list += formatTask(i, this.tasks);
         }
 
         return list;
@@ -105,5 +105,20 @@ public class TaskList {
         } else {
             throw new MissingTaskException(num);
         }
+    }
+
+    String findTasks(String keyword) {
+        List<Task> matchingTasks = new ArrayList<>();
+        for (Task task: tasks) {
+            if (task.match(keyword)) {
+                matchingTasks.add(task);
+            }
+        }
+
+        String list = "";
+        for (int i = 0; i < matchingTasks.size(); i++) {
+            list += formatTask(i, matchingTasks);
+        }
+        return list;
     }
 }

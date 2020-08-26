@@ -50,6 +50,10 @@ abstract class Task {
      */
     abstract public String formatTaskForFile();
 
+    protected boolean match(String keyword) {
+        return this.description.contains(keyword);
+    }
+
     @Override
     public String toString() {
         return this.getStatusIcon() + this.description;
