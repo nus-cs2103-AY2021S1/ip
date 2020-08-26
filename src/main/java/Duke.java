@@ -1,9 +1,9 @@
 public class Duke {
     
     public static String filePath = "myTaskList.txt";
-    private Storage storage;
+    private final Storage storage;
     private TaskList tasks;
-    private Ui ui;
+    private final Ui ui;
 
     public Duke(String filePath) {
         ui = new Ui();
