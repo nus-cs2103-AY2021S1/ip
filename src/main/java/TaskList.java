@@ -6,7 +6,7 @@ import java.util.List;
 public class TaskList {
     private List<Task> list;
     private static final String starline = "**************************************************************************";
-
+    
     public TaskList() {
         this.list = new ArrayList<>();
     }
@@ -17,7 +17,7 @@ public class TaskList {
             String line = br.readLine();
             while (line != null) {
                 Task task = this.add(line, false);
-                boolean done = Boolean.valueOf(br.readLine());
+                boolean done = Boolean.parseBoolean(br.readLine());
                 if (done) task.markDone();
                 line = br.readLine();
             }
@@ -61,7 +61,7 @@ public class TaskList {
                 } else if (input.matches("todo\\s?")) {
                     throw new IllegalArgumentException("OOPS! The description of a todo cannot be empty.");
                 } else {
-                    throw new IllegalArgumentException("OOPS! Invalid syntax. To add a todo, use:\n         " + Todo.getFormat());
+                    throw new IllegalArgumentException("OOPS! Invalid syntax. To add a todo, use:\n         " + Task.getFormat("TODO"));
                 }
             case "deadline":
                 if (input.matches("deadline (\\S+\\s?)+ /by (\\S+\\s?)+")) {
@@ -73,7 +73,7 @@ public class TaskList {
                 } else if (input.matches("deadline\\s?") || !input.contains(" by ")){
                     throw new IllegalArgumentException("OOPS! The description/deadline of a deadline cannot be empty.");
                 } else {
-                    throw new IllegalArgumentException("OOPS! Invalid syntax. To add a deadline, use:\n         " + Deadline.getFormat());
+                    throw new IllegalArgumentException("OOPS! Invalid syntax. To add a deadline, use:\n         " + Task.getFormat("DEADLINE"));
                 }
             case "event":
                 if (input.matches("event (\\S+\\s?)+ /at (\\S+\\s?)+")) {
@@ -85,7 +85,7 @@ public class TaskList {
                 } else if (input.matches("event\\s?") || !input.contains(" at ")) {
                     throw new IllegalArgumentException("OOPS! The description/location of an event cannot be empty.");
                 } else {
-                    throw new IllegalArgumentException("OOPS! Invalid syntax. To add an event, use:\n         " + Event.getFormat());
+                    throw new IllegalArgumentException("OOPS! Invalid syntax. To add an event, use:\n         " + Task.getFormat("EVENT"));
                 }
             default:
                 throw new IllegalArgumentException("OOPS! There is no task of type " + taskType + "!");

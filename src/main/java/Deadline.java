@@ -4,11 +4,7 @@ import java.time.format.DateTimeParseException;
 
 public class Deadline extends Task {
     protected LocalDate by;
-    
-    static {
-        format = "deadline <task description> /by <yyyy-mm-dd>";
-    }
-    
+
     public Deadline(String description, String by) {
         super(description);
         try {

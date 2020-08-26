@@ -1,15 +1,31 @@
 public abstract class Task {
     protected final String description;
     protected Boolean done;
-    protected static String format = "<task description>";
-    
+
+    public enum TaskType {
+        DEADLINE("deadline <task description> /by <yyyy-mm-dd>"),
+        EVENT("event <event description> /at <event location>"),
+        TODO("todo <task description>");
+        
+        private String format;
+        
+        TaskType(String format) {
+            this.format = format;
+        }
+        
+        public String getFormat() {
+            return this.format;
+        }
+    }
+
+
     public Task(String description) {
         this.description = description;
         this.done = false;
     }
     
-    public static String getFormat() {
-        return format;
+    public static String getFormat(String taskTypeString) {
+        return TaskType.valueOf(taskTypeString).getFormat();
     }
     
     public abstract String getParsedTask();
