@@ -1,5 +1,13 @@
+package duke;
+
+import duke.command.Command;
+import duke.exception.InvalidInputException;
+import duke.parser.Parser;
+import duke.storage.Storage;
+import duke.task.TaskList;
+import duke.ui.Ui;
+
 import java.util.Scanner;
-import java.util.ArrayList;
 
 public class Duke {
     private Storage storage;

@@ -1,4 +1,8 @@
-import java.util.Scanner;
+package duke.ui;
+
+import duke.task.Task;
+import duke.task.TaskList;
+
 import java.util.ArrayList;
 
 public class Ui {

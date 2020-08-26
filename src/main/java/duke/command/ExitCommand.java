@@ -1,3 +1,9 @@
+package duke.command;
+import duke.storage.Storage;
+import duke.task.TaskList;
+import duke.ui.Ui;
+import duke.exception.InvalidInputException;
+
 public class ExitCommand extends Command {
 
     public ExitCommand() {

@@ -1,3 +1,6 @@
+package duke.task;
+import duke.parser.TimeParser;
+
 public class Event extends Task {
 
     public Event(String eventName, String eventTime) {

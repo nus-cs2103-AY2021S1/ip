@@ -1,3 +1,6 @@
+package duke.task;
+import duke.parser.TimeParser;
+
 public class Deadline extends Task {
 
     public Deadline(String deadlineName, String deadlineTime) {
