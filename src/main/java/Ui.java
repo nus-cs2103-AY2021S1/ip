@@ -42,8 +42,7 @@ public class Ui {
     }
 
     void showTaskList(String taskListString) {
-        System.out.println("     Here are the tasks in your list:\n");
-        System.out.println(taskListString);
+        System.out.println("     Here are the tasks in your list:\n" +  taskListString);
     }
 
     void showDoneTask(Task task) {

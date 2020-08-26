@@ -46,11 +46,15 @@ public class TaskList {
 
     @Override
     public String toString() {
-        StringBuilder taskListString = new StringBuilder();
-        for (int i = 1; i < myTaskList.size() + 1; i++) {
-            taskListString.append("     ").append(i).append(".").append(myTaskList.get(i - 1)).append("\n");
+        if (myTaskList.isEmpty()) {
+            return "";
+        } else {
+            StringBuilder taskListString = new StringBuilder();
+            for (int i = 1; i < myTaskList.size() + 1; i++) {
+                taskListString.append("     ").append(i).append(".").append(myTaskList.get(i - 1)).append("\n");
+            }
+            taskListString.delete(taskListString.length() - 1, taskListString.length());
+            return taskListString.toString();
         }
-        taskListString.delete(taskListString.length() - 1, taskListString.length());
-        return taskListString.toString();
     }
 }

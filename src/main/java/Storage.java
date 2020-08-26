@@ -17,6 +17,13 @@ public class Storage {
     
     ArrayList<Task> load() throws DukeException {
         ArrayList<Task> taskList = new ArrayList<>();
+        
+        try {
+            new File(filePath).createNewFile();
+        } catch (IOException e) {
+            throw new DukeException("☹ OOPS!!! There was an error creating a save file.");
+        }
+        
         try {
             Scanner fileReader = new Scanner(new File(filePath));
             while (fileReader.hasNextLine()) {
