@@ -103,6 +103,7 @@ public class Storage {
             int noOfTasks = Integer.parseInt(sc.nextLine());
             for (int i = 0; i < noOfTasks; i++) {
                 // Read all tasks from savefile
+
                 String input = sc.nextLine();
                 if (input.startsWith("todo")) {
                     Task newTodo = Parser.parseNewTaskCommand(input, Task.taskType.TODO);
