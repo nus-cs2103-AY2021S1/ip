@@ -53,6 +53,7 @@ public class Storage {
             }
             fileReader.close();
         } catch (IOException e) {
+            throw new DukeException("\tFile not Found.");
         } catch (Exception e) {
             throw new DukeException("\tError loading history. " + e.getMessage());
         }
