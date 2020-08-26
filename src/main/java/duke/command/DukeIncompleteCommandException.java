@@ -1,4 +1,4 @@
-package duke.task;
+package duke.command;
 
 /**
  * The class DukeIncompleteCommandException denotes a Duke IncompleteCommandException.

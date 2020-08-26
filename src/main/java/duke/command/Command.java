@@ -1,7 +1,9 @@
-package duke.task;
+package duke.command;
 
 import duke.storage.DukeIOException;
 import duke.storage.Storage;
+import duke.task.*;
+
 import java.util.List;
 
 /**
@@ -54,6 +56,9 @@ public class Command {
             case HANDLEVENT:
                 handleEvent(tasks, taskInfo);
                 break;
+            case DELETETASK:
+                tasks.deleteTask(taskInfo);
+                break;
             default :
                 isExit = false;
                 if (!foundMatchingTasks(tasks, taskInfo)) {
@@ -61,6 +66,7 @@ public class Command {
                 }
                 break;
             }
+            storage.saveTaskList();
         }  catch (DukeInvalidCommandException err) {
             System.out.println("\t" + err.getMessage());
         } catch (DukeIndexOutOfBoundsException err) {
@@ -70,6 +76,8 @@ public class Command {
         } catch (DukeIOException err) {
             System.out.println("\t" + err.getMessage());
         } catch (DukeDateTimeParseException err) {
+            System.out.println("\t" + err.getMessage());
+        } catch (DukeNumberFormatException err) {
             System.out.println("\t" + err.getMessage());
         }
     }

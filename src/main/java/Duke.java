@@ -1,10 +1,9 @@
 import java.nio.file.Paths;
 import java.nio.file.Path;
-import java.util.List;
-import java.util.Scanner;
 import duke.UI.UI;
-import duke.storage.DukeIOException;
-import duke.UI.UI;
+import duke.command.Command;
+import duke.command.DukeRunTimeException;
+import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.task.*;
 

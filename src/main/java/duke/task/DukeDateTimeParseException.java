@@ -1,5 +1,7 @@
 package duke.task;
 
+import duke.command.DukeRunTimeException;
+
 /**
  * The class DukeDateTimeParseException denotes a Duke DateTimeParseException.
  *

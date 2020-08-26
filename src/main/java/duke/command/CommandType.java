@@ -1,4 +1,5 @@
-package duke.task;
+package
+        duke.command;
 
 /**
  * The enum CommandType denotes the type of command.

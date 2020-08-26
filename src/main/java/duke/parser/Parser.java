@@ -1,5 +1,7 @@
-package duke.task;
+package duke.parser;
 
+import duke.command.Command;
+import duke.command.CommandType;
 import duke.storage.DukeIOException;
 
 import java.util.List;

@@ -1,4 +1,4 @@
-package duke.task;
+package duke.command;
 
 /**
  * The class DukeIndexOutOfBoundsException denotes a Duke IndexOutOfBoundsException.

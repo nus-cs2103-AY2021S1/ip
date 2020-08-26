@@ -1,5 +1,7 @@
 package duke.task;
 
+import duke.command.DukeIndexOutOfBoundsException;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -77,11 +79,17 @@ public class TaskList {
      *
      * @param taskInfo  Task information with task index information.
      */
-    public void deleteTask(String taskInfo) throws DukeIndexOutOfBoundsException{
+    public void deleteTask(String taskInfo) throws DukeIndexOutOfBoundsException {
         if (taskInfo.length() <= 7) {
             throw new DukeIndexOutOfBoundsException("The task you want to delete is invalid");
         }
-        int taskNo = Character.getNumericValue(taskInfo.charAt(7));
+        String taskNoString = taskInfo.replace("delete", "").trim();
+        int taskNo;
+        try {
+            taskNo = Integer.parseInt(taskNoString);
+        } catch (NumberFormatException err){
+            throw new DukeNumberFormatException("Please input a number for the task you want to delete.");
+        }
         if (taskNo < 1 || taskNo > taskList.size()) {
             throw new DukeIndexOutOfBoundsException("The task you want to delete is invalid");
         }
