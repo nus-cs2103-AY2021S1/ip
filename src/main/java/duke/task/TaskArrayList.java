@@ -3,6 +3,7 @@ package duke.task;
 import java.util.ArrayList;
 import java.util.function.Consumer;
 
+// An implementation of the TaskList interface using an ArrayList
 public class TaskArrayList implements TaskList {
     private final ArrayList<Task> TASK_LIST = new ArrayList<>();
 

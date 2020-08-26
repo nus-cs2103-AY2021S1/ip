@@ -9,6 +9,13 @@ public class Todo extends Task {
         super(desc);
     }
 
+    /**
+     * Factory method for creating a todo task.
+     *
+     * @param details String details of the task
+     * @return Todo the todo task
+     * @throws InvalidTodoException If the format of the details is invalid
+     */
     protected static Todo createTodo(String details) throws InvalidTodoException {
         if (details.equals("")) {
             throw new InvalidTodoException();

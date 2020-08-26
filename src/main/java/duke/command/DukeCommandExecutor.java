@@ -9,6 +9,16 @@ import duke.util.Storage;
 public class DukeCommandExecutor implements CommandExecutor {
     private boolean hasExited = false;
 
+    /**
+     * Processes the command issued by user and passes it on to the relevant Command class for its execution.
+     *
+     *
+     * @param in String command issued by user
+     * @param taskList TaskList list that contains tasks added by the user
+     * @param storage Storage object to help with updating the save file
+     * @return String response message to user
+     * @throws DukeException If the command is not formatted properly
+     */
     public String execute(String in, TaskList taskList, Storage storage) throws DukeException {
         if (hasExited) {
             throw new InvalidCommandException("Program has already exited!");
@@ -34,6 +44,11 @@ public class DukeCommandExecutor implements CommandExecutor {
         }
     }
 
+    /**
+     * Returns true if the "bye" command has been issued else returns false.
+     *
+     * @return boolean should the program exit
+     */
     public boolean shouldExit() {
         return hasExited;
     }

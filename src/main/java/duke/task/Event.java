@@ -1,5 +1,6 @@
 package duke.task;
 
+import duke.exception.InvalidDeadlineException;
 import duke.exception.InvalidEventException;
 import duke.util.DateTimeParsing;
 
@@ -16,6 +17,13 @@ public class Event extends Task {
         this.DATE = DATE;
     }
 
+    /**
+     * Factory method for creating an event task.
+     *
+     * @param details String details of the task
+     * @return Event the event task
+     * @throws InvalidEventException If the format of the details is invalid
+     */
     protected static Event createEvent(String details) throws InvalidEventException {
         String[] info = details.split("/");
         if (info.length == 1) {

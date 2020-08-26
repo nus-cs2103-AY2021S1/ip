@@ -5,7 +5,18 @@ import duke.task.TaskList;
 import duke.util.Storage;
 import duke.task.Task;
 
+// Handles all the logic behind any "delete" command from the user
 public class DeleteCommand {
+    /**
+     * Executes any "delete" command issued by the user.
+     * Removes the task specified by the user from taskList and updates save file after deletion.
+     *
+     * @param in String "delete" command issued by user
+     * @param taskList TaskList list that contains tasks added by the user
+     * @param storage Storage object to help with updating the save file
+     * @return String response message to user
+     * @throws InvalidCommandException If an invalid index is provided
+     */
     public static String execute(String in, TaskList taskList, Storage storage) throws InvalidCommandException {
         try {
             int index =
