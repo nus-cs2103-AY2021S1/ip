@@ -1,3 +1,4 @@
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -139,6 +140,8 @@ public class Duke {
                 System.out.println(e);
             } catch (DeleteOutOfRangeException e) {
                 System.out.println(e);
+            } catch (DateTimeParseException e) {
+                System.out.println("\uD83D\uDE41 OOPS! Date should be in the format: YYYY-MM-DD");
             }
 
 
