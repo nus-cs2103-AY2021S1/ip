@@ -9,9 +9,13 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class ParserTest {
     @Test
-    public void createExe_emptyInput_exceptionThrown() {
+    public void createExe_invalidArguments_exceptionThrown() {
         assertThrows(IncorrectArgumentException.class, () -> {
-            Parser.createExe("");
+            Parser.createExe("done book");
+        });
+
+        assertThrows(IncorrectArgumentException.class, () -> {
+            Parser.createExe("delete note");
         });
     }
 
