@@ -13,14 +13,29 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
+/**
+ * Deals with loading tasks from the local file and saving tasks in the local file.
+ */
 public class Storage {
 
-    protected String filePath;
+    /** Filepath to access the local file to read/write from/to. */
+    private String filePath;
 
+    /**
+     * Initialises the storage object with the local filepath.
+     *
+     * @param filePath Filepath that indicates where to access the local file.
+     */
     Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Modifies the string array to the requisite form by adding corresponding delimiters and removing the done status.
+     *
+     * @param input String array that is passed in / read from the local file.
+     * @return String that is modified and ready to be parsed by the Parser.
+     */
     //Remove done string and add in delimeter
     public String editFileInput(String[] input) {
         ArrayList<String> result = new ArrayList<>();
@@ -39,6 +54,12 @@ public class Storage {
         return Arrays.stream(result.toArray(returnArray)).collect(Collectors.joining(" "));
     }
 
+    /**
+     * Loads command strings from the local file and decipher them to tasks that can be added to the task list.
+     *
+     * @return Task list with tasks loaded from the local file.
+     * @throws DukeException If there are any issues with reading the commands from the file.
+     */
     public TaskList load() throws DukeException {
         try {
             File file = new File(this.filePath);
@@ -62,6 +83,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Writes the specified task list to the local file.
+     *
+     * @param taskList The task list to be written to file.
+     * @throws DukeException If there are issues writing to the local file.
+     */
     public void write(TaskList taskList) throws DukeException {
         try {
             File file = new File(filePath);
