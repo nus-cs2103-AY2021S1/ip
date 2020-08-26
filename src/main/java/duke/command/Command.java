@@ -1,8 +1,15 @@
+package duke.command;
+
+import duke.exception.InvalidInstructionException;
+import duke.logic.StorageManager;
+import duke.logic.TaskList;
+import duke.logic.UIManager;
+
 import java.io.IOException;
 
 public abstract class Command {
 
-    private boolean isExit;
+    private final boolean isExit;
 
     public Command(boolean isExit) {
         this.isExit = isExit;

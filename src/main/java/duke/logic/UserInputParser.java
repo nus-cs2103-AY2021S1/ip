@@ -1,9 +1,19 @@
-
+package duke.logic;
 // INPUT PARSER JUST CHECKS IF THE FIELDS ARE MISSING OR NOT
 // OR ARE IN THEIR CORRECT FORMATS
 // DOES NOT CHECK IF THE VALUES ARE VALID OR NOT
 // IN THE SENSE IT ASKS: IS YOUR COMMAND SOMETHING DUKE CAN UNDERSTAND?
 // THIS DOES NOT MEAN DUKE CAN EXECUTE IT BECAUSE THE DETAILS MAY NOT BE RIGHT
+
+import duke.CommonMethod;
+import duke.command.*;
+import duke.exception.InvalidFormatException;
+import duke.exception.InvalidInstructionException;
+import duke.exception.MissingFieldException;
+import duke.task.DeadlineTask;
+import duke.task.DukeTask;
+import duke.task.EventTask;
+import duke.task.TodoTask;
 
 import java.time.LocalDateTime;
 

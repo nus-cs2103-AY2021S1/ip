@@ -1,5 +1,6 @@
+package duke;
 
-// Enum class to denote commonly used, constant String values in Duke
+// Enum class to denote commonly used, constant String values in duke.Duke
 public enum CommonString {
     DELETE("DELETE"),
     DONE("DONE"),

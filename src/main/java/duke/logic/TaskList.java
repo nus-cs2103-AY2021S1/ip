@@ -1,3 +1,9 @@
+package duke.logic;
+
+import duke.CommonString;
+import duke.exception.InvalidInstructionException;
+import duke.task.DukeTask;
+
 import java.util.ArrayList;
 
 public class TaskList {
@@ -12,7 +18,7 @@ public class TaskList {
     }
 
     public DukeTask deleteFromList(int index) throws InvalidInstructionException {
-        if (index < 0 || index >= taskList.size()) { // check if loc is an existing DukeTask inside the array inputList
+        if (index < 0 || index >= taskList.size()) { // check if loc is an existing duke.task.DukeTask inside the array inputList
             throw new InvalidInstructionException(CommonString.DELETE + ": Invalid Task Number");
         }
         return taskList.remove(index);

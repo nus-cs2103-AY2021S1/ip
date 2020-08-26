@@ -1,3 +1,14 @@
+package duke;
+
+import duke.command.Command;
+import duke.exception.InvalidFormatException;
+import duke.exception.InvalidInstructionException;
+import duke.exception.MissingFieldException;
+import duke.logic.StorageManager;
+import duke.logic.TaskList;
+import duke.logic.UIManager;
+import duke.logic.UserInputParser;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -26,7 +37,7 @@ public class Duke {
         uiManager.printDukeIntro();
         boolean isExit = false;
 
-        // Execute Duke Functions
+        // Execute duke.Duke Functions
         while (!isExit) {
             try {
                 String userInput = uiManager.readCommand();
@@ -48,7 +59,7 @@ public class Duke {
 
     // MAIN FUNCTION
     public static void main(String[] args) {
-        // Initialisation of Duke
+        // Initialisation of duke.Duke
         Duke duke = new Duke();
         duke.run();
     }

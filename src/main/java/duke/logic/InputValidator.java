@@ -1,3 +1,10 @@
+package duke.logic;
+
+import duke.CommonMethod;
+import duke.exception.InvalidFormatException;
+import duke.exception.InvalidInstructionException;
+import duke.exception.MissingFieldException;
+
 public class InputValidator {
 
     // VALIDATION FUNCTIONS

@@ -1,3 +1,5 @@
+package duke.task;
+
 import java.util.Objects;
 
 public abstract class DukeTask {
@@ -37,17 +39,6 @@ public abstract class DukeTask {
         DukeTask dukeTask = (DukeTask) o;
         return isDone == dukeTask.isDone &&
                 description.equals(dukeTask.description);
-    }
-
-    @Override
-    protected Object clone() throws CloneNotSupportedException {
-        DukeTask clone = null;
-        try {
-            clone = (DukeTask) super.clone();
-        } catch (CloneNotSupportedException e) {
-            throw new RuntimeException(e);
-        }
-        return clone;
     }
 
     @Override

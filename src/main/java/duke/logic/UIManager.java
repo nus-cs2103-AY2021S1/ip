@@ -1,6 +1,11 @@
+package duke.logic;
+
+import duke.CommonString;
+import duke.task.DukeTask;
+
 import java.util.Scanner;
 
-// Manages the UI interaction with the User for Duke
+// Manages the UI interaction with the User for duke.Duke
 public class UIManager {
     Scanner scanner = new Scanner(System.in);
     // PRIVATE ENUMS OF THE UI MANAGER -- TO SAVE CONSTANTS TO BE PRINTED
@@ -18,7 +23,7 @@ public class UIManager {
 
         AvailableInstruction("AVAILABLE INSTRUCTIONS:\n" + // Available Instructions
                 " help - Display Available Instructions\n" +
-                " bye - Terminate Duke\n" +
+                " bye - Terminate duke.Duke\n" +
                 " list - Display current DukeTasks\n" +
                 " done [Task Number] - Complete the specified task number (Specify in numeric format!) Eg: \"done 3\"\n" +
                 " delete [Task Number] - Deletes the task number (Specify in numeric format!) Eg: \"delete 3\"\n" +
@@ -26,9 +31,9 @@ public class UIManager {
 
         TaskInputInstruction("TASK INPUT INSTRUCTIONS:\n" +
                 "IMPORTANT: DO AVOID USING THE VERTICAL BAR \"|\" IN YOUR TASK INSTRUCTIONS\n" +
-                " todo [Task Description] - Inputs a TODO DukeTask\n" +
-                " deadline [Task Description] /by [Date] - Inputs a DEADLINE DukeTask, using INDICATOR /by\n" +
-                " event [Task Description] /at [Date] - Inputs an EVENT DukeTask, using INDICATOR /at", false),
+                " todo [Task Description] - Inputs a TODO duke.task.DukeTask\n" +
+                " deadline [Task Description] /by [Date] - Inputs a DEADLINE duke.task.DukeTask, using INDICATOR /by\n" +
+                " event [Task Description] /at [Date] - Inputs an EVENT duke.task.DukeTask, using INDICATOR /at", false),
 
         TaskInputSpecification("TO NOTE:\n" +
                 "FORMAT FOR DATE: \"DD/MM/YYYY hh/mm/ss\"\n" +
@@ -55,12 +60,12 @@ public class UIManager {
         LINE("____________________________________________________________"), // Single Line for divider{
 
         INTRODUCTION(LINE + "\n" +
-                "Hello! I am Duke, your Personal Assistant!\n" + // START OF INTRODUCTIONS
+                "Hello! I am duke.Duke, your Personal Assistant!\n" + // START OF INTRODUCTIONS
                 "What can I do for you today?\n" +
                 "Type \"help\" to see the available instructions!\n" +
                 LINE), // END OF INTRODUCTIONS)
 
-        INSTRUCTIONS("How to use Duke:\n" + // Guide to Duke
+        INSTRUCTIONS("How to use duke.Duke:\n" + // Guide to duke.Duke
                 InstructionGuide.Level +
                 InstructionGuide.DeveloperUpdate +
                 InstructionGuide.AvailableInstruction +

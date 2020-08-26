@@ -1,3 +1,5 @@
+package duke.exception;
+
 public class MissingFieldException extends DukeException {
 
     public MissingFieldException(String missingFields) {

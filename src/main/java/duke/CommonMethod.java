@@ -1,3 +1,5 @@
+package duke;
+
 public class CommonMethod {
     // Merges the String array into one string, from index start, until (not including) index end
     public static String mergeArray(String[] array, int start, int end) {
