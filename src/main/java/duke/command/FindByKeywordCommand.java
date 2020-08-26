@@ -20,9 +20,7 @@ public class FindByKeywordCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
             try {
-                String keyword = this.parsedCommand[1].toLowerCase();
-                System.out.println(this.parsedCommand.length);
-                System.out.println(keyword.length());
+                String keyword = this.parsedCommand[1].trim().toLowerCase();
                 int index = 1;
                 ui.printReply("Search Results:");
                 for (Task task : tasks.getTaskList()) {
