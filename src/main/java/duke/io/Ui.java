@@ -9,10 +9,10 @@ import java.util.Scanner;
  */
 public class Ui {
     private final Layout layout;
-    private final TaskList tasks;
+    private final TaskList taskList;
     
-    public Ui(TaskList tasks) {
-        this.tasks = tasks;
+    public Ui(TaskList taskList) {
+        this.taskList = taskList;
         layout = new Layout();
     }
     
@@ -36,9 +36,8 @@ public class Ui {
         Scanner sc = new Scanner(System.in);
         while(sc.hasNextLine()) {
             String [] arr = sc.nextLine().split(" ");
-            
-            Parser parser = new Parser();
-            parser.readCommands(sc, arr, tasks);
+
+            taskList.readCommands(sc, arr);
         }
     }
 }

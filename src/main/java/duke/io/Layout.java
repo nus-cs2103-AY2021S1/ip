@@ -45,7 +45,7 @@ public class Layout {
 
     public void printMarkedDone(Task task) {
         printLine();
-        System.out.println("\tNice! I've marked this duke.task as done: ");
+        System.out.println("\tNice! I've marked this task as done: ");
         System.out.println("\t\t" + task.toString());
         printLine();
     }
@@ -53,7 +53,7 @@ public class Layout {
     public void printDeleted(Task task, int size) {
         String str = size > 1 ? "tasks" : "duke/task";
         printLine();
-        System.out.println("\tNoted. I've removed this duke.task: ");
+        System.out.println("\tNoted. I've removed this task: ");
         System.out.println("\t\t" + task.toString());
         System.out.println("\tNow you have " + size + " " + str + " in the list.");
         printLine();
@@ -62,7 +62,7 @@ public class Layout {
     public void printAddedMessage(String description, int size) {
         String str = size > 1 ? "tasks" : "duke/task";
         printLine();
-        System.out.println("\tGot it. I've added this duke.task:");
+        System.out.println("\tGot it. I've added this task:");
         System.out.println("\t\t" + description);
         System.out.println("\tNow you have " + size + " " + str + " in the list.");
         printLine();

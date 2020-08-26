@@ -1,11 +1,9 @@
 package duke.io;
 
 import duke.task.DukeException;
-import duke.task.TaskList;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Parser {
     private final Layout layout;
@@ -13,73 +11,7 @@ public class Parser {
     public Parser() {
         this.layout = new Layout();
     }
-
-    /**
-     * Return all valid commands that Duke can execute.
-     */
-    public void getCommands() {
-        String[] arr = new String[]{
-                "Here are all your commands:",
-                "list- list all tasks",
-                "todo <description> - add task",
-                "deadline <description> \\by <due date> -add task with deadline",
-                "event <description> \\at <event date> -add event with date ",
-                "date <one filter date> - finds task on specified date",
-                "\t date can be formatted as : yyyy-mm-dd or dd/mm/yyyy",
-                "\t time can be formatted as : HHmm or HH.mm a",
-                "done <duke.task number> - marks task as done",
-                "find <one filter word> - finds task with specified word",
-                "bye - goodbye!"
-        };
-        layout.printCommands(arr);
-    }
-
-    /**
-     * Read commands by user and execute associated action.
-     * 
-     * @param sc Scanner that listens to user input.
-     * @param arr Array of words in user input.
-     * @param tasks TaskList object to execute task management actions.
-     */
-    public void readCommands(Scanner sc, String[] arr, TaskList tasks) {
-        switch (arr[0]) {
-            case "bye":
-                sc.close();
-                tasks.closeDuke();
-                break;
-            case "list":
-                tasks.showTasks();
-                break;
-            case "done":
-                tasks.modifyTask(TaskList.Action.DONE, arr[1]);
-                break;
-            case "delete":
-                tasks.modifyTask(TaskList.Action.DELETE, arr[1]);
-                break;
-            case "help":
-                getCommands();
-                break;
-            case "deadline":
-                tasks.addTask(TaskList.Type.DEADLINE, arr);
-                break;
-            case "event":
-                tasks.addTask(TaskList.Type.EVENT, arr);
-                break;
-            case "todo":
-                tasks.addTask(TaskList.Type.TODO, arr);
-                break;
-            case "find":
-                tasks.findTask(arr);
-                break;
-            case "date":
-                tasks.findTaskByDate(arr);
-                break;
-            default:
-                DukeException e = new DukeException("I do not understand your command");
-                layout.print(e.getMessage());
-
-        }
-    }
+    
 
     /**
      * Return date and description of task from user input.

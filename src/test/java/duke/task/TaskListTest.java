@@ -12,20 +12,21 @@ public class TaskListTest {
     ArrayList<Task> actualTasks = new ArrayList<>();
     StorageStub storageStub = new StorageStub();
     TaskList taskList;
-    String dummyTask = "deadline week 3 ip and tp /by 26-8-2020 wednesday 2359";
+    String dummyAddTask = "deadline week 3 ip and tp /by 26-8-2020 wednesday 2359";
+    String dummyMarkDoneTask = "done 1";
     
     @Test
-    public void addTaskTest() {
-        taskList.addTask(TaskList.Type.DEADLINE, dummyTask.split(" "));
+    public void readCommandAddTaskTest() {
+        taskList.readCommands(null, dummyAddTask.split(" "));
         ArrayList<Task> expected = new ArrayList<>();
         expected.add(new Deadline("week 3 ip and tp", "26-8-2020 wednesday 2359"));
         assertEquals(actualTasks, expected);
     }
     
     @Test
-    public void modifyTaskTest() {
-        taskList.addTask(TaskList.Type.DEADLINE, dummyTask.split(" "));
-        taskList.modifyTask(TaskList.Action.DONE, "0");
+    public void readCommandManageTaskTest() {
+        taskList.readCommands(null, dummyAddTask.split(" "));
+        taskList.readCommands(null, dummyMarkDoneTask.split(" "));
         ArrayList<Task> expected = new ArrayList<>();
         Deadline deadline = new Deadline("week 3 ip and tp", "26-8-2020 wednesday 2359");
         deadline.markDone();
