@@ -9,6 +9,10 @@ public class TaskList implements java.io.Serializable {
         tasks = new ArrayList<>();
     }
 
+    private TaskList(ArrayList<Task> tasks) {
+        this.tasks = tasks;
+    }
+
     public void addTask(Task task) {
         tasks.add(task);
         UI.print("added: " + task.toString() + numTasks());
@@ -48,10 +52,6 @@ public class TaskList implements java.io.Serializable {
             throw new DukeException("invalid task number");
         }
         tasks.get(i).done = value;
-        Storage.store(this);
-    }
-
-    public void store() {
         Storage.store(this);
     }
 
