@@ -1,13 +1,24 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Class that handles user input
+ */
 public class Parser {
     TaskList tasks;
 
+    /**
+     * @param tasks TaskList to use
+     */
     public Parser(TaskList tasks) {
         this.tasks = tasks;
     }
 
+    /**
+     * Parses the user command
+     * @param input input from the user
+     * @throws DukeException
+     */
     void parse(String input) throws DukeException {
         String[] words = input.split(" ");
         String command = words[0];

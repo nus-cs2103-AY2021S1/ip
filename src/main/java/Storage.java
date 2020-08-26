@@ -1,12 +1,19 @@
 import java.io.*;
 import java.nio.file.Paths;
 
+/**
+ * Class that provides file storage utilities
+ */
 public class Storage {
     public static final File storage_file = Paths.get("tasks.ser").toFile();
 
     public Storage() {
     }
 
+    /**
+     * Serializes a TaskList and writes it to file
+     * @param t tasklist to be stored
+     */
     public static void store(TaskList t) {
         try {
             //noinspection ResultOfMethodCallIgnored
@@ -20,6 +27,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Reads a serialized TaskList
+     * @return tasklisk read from file
+     */
     public static TaskList read() {
         try {
             TaskList t = null;
