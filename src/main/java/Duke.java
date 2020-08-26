@@ -1,6 +1,4 @@
 import java.io.IOException;
-import java.time.LocalDate;
-import java.util.Arrays;
 import java.util.Scanner;
 
 /** Duke is a chatbot that allows users to send input to perform tasks.
