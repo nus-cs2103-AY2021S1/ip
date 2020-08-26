@@ -1,6 +1,7 @@
 package duke;
 
 import java.util.ArrayList;
+import java.util.stream.Stream;
 
 public class TaskList {
     private ArrayList<Task> tasks;
@@ -29,5 +30,9 @@ public class TaskList {
 
     public void add(Task task) {
         tasks.add(task);
+    }
+    
+    public Stream<Task> stream() {
+        return this.tasks.stream();
     }
 }

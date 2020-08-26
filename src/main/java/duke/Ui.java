@@ -15,6 +15,7 @@ public class Ui {
             "\tDeadline: \"deadline <description> /by <YYYY-MM-DD>\"\n" +
             "\tEvent: \"event <description> /at <YYYY-MM-DD>\"\n" +
             "Send \"list\" to see all tasks.\n" +
+            "Send \"find <string of choice>\" to see all related tasks.\n" +
             "Send \"done <item number>\" to mark an item as done\n" +
             "Send \"delete <item number>\" to delete and item from the list\n" +
             "Send \"bye\" to end our conversation.";
