@@ -1,3 +1,6 @@
+/**
+ * Represents a task to be done without a deadline.
+ */
 public class Todo extends Task {
 
     Todo(String desc) {
