@@ -9,6 +9,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Paths;
 
+/**
+ * Utility class to read and write data from and to the hard disk.
+ */
 public class Storage {
 
     File dataDirectory;
@@ -16,6 +19,9 @@ public class Storage {
     File dataFile;
     String dataFilePath;
 
+    /**
+     * Initialises a new Storage object.
+     */
     public Storage() {
         dataDirectoryPath = Paths.get("data").toString();
         dataDirectory = new File(dataDirectoryPath);
@@ -30,7 +36,12 @@ public class Storage {
     private void alertCorruptedData() {
         System.out.println("Data file is corrupted.");
     }
-    
+
+    /**
+     * Populates a TaskList with data saved in the hard disk. If the data directory or file does not exist,
+     * it will be created.
+     * @param taskList List to be populated.
+     */
     public void loadData(TaskList taskList) {
         dataDirectory.mkdirs();
         boolean toLoadFromDataFile;
