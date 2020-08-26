@@ -1,3 +1,7 @@
+/**
+ * Driver class for Duke
+ * @author Biao Yi
+ */
 public class Duke {
     private TaskList tasks;
     private Parser parser;

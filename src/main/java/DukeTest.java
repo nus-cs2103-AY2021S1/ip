@@ -6,10 +6,14 @@ import java.io.OutputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
 
+/**
+ * JUnit test class
+ * Used to test the individual class to ensure correctness
+ */
 public class DukeTest {
 
     @Test
-    public void todoTest() {
+    public void toDoTest() {
         ToDo todo = new ToDo("return book");
         Assert.assertEquals(todo.toString(), "[T][\u2718] return book");
     }

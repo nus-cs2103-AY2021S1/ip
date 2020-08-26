@@ -1,9 +1,15 @@
+/**
+ * Parser class
+ * Responsible for parsing user commands
+ */
 public class Parser {
 
-    public Parser() {
-
-    }
-
+    /**
+     * Takes in user commands in a tokenized string form
+     * Updates tasklsit accordingly
+     * @param inputs User inputs
+     * @param tasks TaskList
+     */
     public void parseCommand(String[] inputs, TaskList tasks) {
         String command = inputs[0];
         switch(command) {
@@ -44,6 +50,5 @@ public class Parser {
                     System.out.println(e);
                 }
             }
-
     }
 }
