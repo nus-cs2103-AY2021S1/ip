@@ -19,11 +19,19 @@ public class Storage {
         StringBuilder s = new StringBuilder();
         for (int i = 0; i < tasks.size(); i++) {
             if (tasks.get(i) instanceof Todo) {
-                s.append(String.format("T | %d | %s", tasks.get(i).getStatus() ? 1 : 0, tasks.get(i).getDescription()));
+                s.append(String.format("T | %d | %s", 
+                        tasks.get(i).getStatus() ? 1 : 0, 
+                        tasks.get(i).getDescription()));
             } else if (tasks.get(i) instanceof Deadline) {
-                s.append(String.format("D | %d | %s | %s", tasks.get(i).getStatus() ? 1 : 0, tasks.get(i).getDescription(), ((Deadline) tasks.get(i)).getDate()));
+                s.append(String.format("D | %d | %s | %s", 
+                        tasks.get(i).getStatus() ? 1 : 0, 
+                        tasks.get(i).getDescription(), 
+                        ((Deadline) tasks.get(i)).getDate()));
             } else if (tasks.get(i) instanceof Event) {
-                s.append(String.format("E | %d | %s | %s", tasks.get(i).getStatus() ? 1 : 0, tasks.get(i).getDescription(), ((Event) tasks.get(i)).getTime()));
+                s.append(String.format("E | %d | %s | %s", 
+                        tasks.get(i).getStatus() ? 1 : 0, 
+                        tasks.get(i).getDescription(), 
+                        ((Event) tasks.get(i)).getTime()));
             }
             s.append("\n");
         }
@@ -31,7 +39,7 @@ public class Storage {
         file.close();
     }
     
-    public ArrayList<Task> load() throws DukeException{
+    public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> tasks = new ArrayList<>();
         File file = new File(this.filePath);
         if (!file.exists()) {
@@ -49,14 +57,23 @@ public class Storage {
                 String[] strArray = row.split(" \\| ");
                 switch (strArray[0]) {
                 case "T":
-                    tasks.add(new Todo(strArray[2], "1".equals(strArray[1])));
+                    tasks.add(new Todo(strArray[2], 
+                            "1".equals(strArray[1])));
                     break;
                 case "D":
-                    tasks.add(new Deadline(strArray[2], "1".equals(strArray[1]), LocalDate.parse(strArray[3])));
+                    tasks.add(new Deadline(strArray[2], 
+                            "1".equals(strArray[1]), 
+                            LocalDate.parse(strArray[3])));
                     break;
                 case "E":
-                    tasks.add(new Event(strArray[2], "1".equals(strArray[1]), LocalDate.parse(strArray[3])));
+                    tasks.add(new Event(strArray[2], 
+                            "1".equals(strArray[1]), 
+                            LocalDate.parse(strArray[3])));
+                    break;
+                default:
+                    throw new DukeException("File in incorrect format.");
                 }
+                
             }
         } catch (IOException ex) {
             throw new DukeException("Error reading file.");

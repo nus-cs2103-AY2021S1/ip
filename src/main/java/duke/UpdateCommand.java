@@ -2,7 +2,7 @@ package duke;
 
 import java.io.IOException;
 
-public class UpdateCommand extends Command{
+public class UpdateCommand extends Command {
     UpdateCommand(String description) {
         this.description = description;
     }
