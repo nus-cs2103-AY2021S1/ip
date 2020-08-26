@@ -23,17 +23,17 @@ public class Task {
         return (isDone ? "1" : "0");
     }
 
-    public static void doneTask(int index, ArrayList<Task> tasks) {
-        tasks.get(index - 1).markAsDone();
-        Feedbacks.doneTaskMsg(index, tasks);
-    }
+//    public static void doneTask(int index, ArrayList<Task> tasks) {
+//        tasks.get(index - 1).markAsDone();
+//        Ui.doneTaskMsg(index, tasks);
+//    }
 
-    public static void deleteTask(int index, ArrayList<Task> tasks) {
-        Task taskToDelete = tasks.get(index - 1);
-        tasks.remove(index - 1);
-        int newSizeOfTasks = tasks.size();
-        Feedbacks.deleteTaskMsg(index, newSizeOfTasks, taskToDelete);
-    }
+//    public static void deleteTask(int index, ArrayList<Task> tasks) {
+//        Task taskToDelete = tasks.get(index - 1);
+//        tasks.remove(index - 1);
+//        int newSizeOfTasks = tasks.size();
+//        Ui.deleteTaskMsg(index, newSizeOfTasks, taskToDelete);
+//    }
 
     @Override
     public String toString() {

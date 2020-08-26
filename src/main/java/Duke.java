@@ -1,89 +1,31 @@
-import java.util.Scanner;
-import java.util.ArrayList;
-
 public class Duke {
-    public static void main(String[] args)
-            throws IndexOutOfBoundsException,
-            NumberFormatException {
+    private Storage storage;
+    private TaskList tasks;
+    private Ui ui;
 
-        FileOperation fileOperation = new FileOperation();
-        Scanner sc = new Scanner(System.in);
-        ArrayList<Task> tasks = new ArrayList<>();
+    public Duke(String filePath) {
+        ui = new Ui();
+        tasks = new TaskList();
+        storage = new Storage(filePath);
+//        try {
+            storage.load(tasks);
+//            tasks = new TaskList(storage.load(tasks));
+//        }
+//        catch (DukeException e) {
+//            ui.showLoadingError();
+//            tasks = new TaskList();
+//        }
+    }
 
-        fileOperation.readTasks(tasks);
+    public void run() {
+        ui.logoMsg();
+        ui.greetingMsg();
 
-        Feedbacks.logoMsg();
-        Feedbacks.greetingMsg();
-        String inputMsg = sc.nextLine();
+        Parser.parseUserInput(tasks);
+        storage.writeTasks(tasks);
+    }
 
-        // The program will continue looping if the user didn't enter "bye" to terminate the program
-        while (!inputMsg.equals("bye")) {
-            if (inputMsg.equals("list")) {
-                Feedbacks.getAllTasksMsg(tasks);
-            } else if (inputMsg.equals("help")) {
-                Feedbacks.helpMsg();
-            } else if (inputMsg.startsWith("done")) {
-                try {
-                    int index = Integer.parseInt(inputMsg.split("done ")[1]);
-                    Task.doneTask(index, tasks);
-                } catch (IndexOutOfBoundsException e) {
-                    // if the user doesn't type the index after the keyword "done"
-                    Warnings.invalidDoneTaskIndex(tasks.size());
-                } catch (NumberFormatException e) {
-                    // if the user doesn't key in a valid index after keyword "done"
-                    Warnings.invalidDoneTaskIndex(tasks.size());
-                }
-            } else if (inputMsg.startsWith("todo")) {
-                String taskTitle;
-                try {
-                    taskTitle = inputMsg.split("todo ")[1];
-                    ToDos.addNewTodoTask(taskTitle, tasks);
-                } catch (ArrayIndexOutOfBoundsException e) {
-                    // if the user doesn't type the the task description after the keyword "todo"
-                    Warnings.invalidToDo();
-                }
-            } else if (inputMsg.startsWith("deadline")) {
-                String taskTitle;
-                String deadlineTime;
-                try {
-                    taskTitle = inputMsg.split("deadline ")[1].split(" /by ")[0];
-                    deadlineTime = inputMsg.split("deadline ")[1].split(" /by ")[1];
-                    Deadlines.addNewDeadlineTask(taskTitle, deadlineTime, tasks);
-                } catch (ArrayIndexOutOfBoundsException e) {
-                    // if the user doesn't follow the correct format after the keyword "deadline"
-                    Warnings.invalidDeadline();
-                }
-            } else if (inputMsg.startsWith("event")) {
-                try {
-                    String taskTitle = inputMsg.split("event ")[1].split(" /at ")[0];
-                    String eventTime = inputMsg.split("event ")[1].split(" /at ")[1];
-                    Events.addNewEventTask(taskTitle, eventTime, tasks);
-                } catch (ArrayIndexOutOfBoundsException e) {
-                    // if the user doesn't follow the correct format after the keyword "event"
-                    Warnings.invalidEvent();
-                }
-            } else if (inputMsg.startsWith("delete")) {
-                try {
-                    int index = Integer.parseInt(inputMsg.split("delete ")[1]);
-                    Task.deleteTask(index, tasks);
-                } catch (IndexOutOfBoundsException e) {
-                    // if the user doesn't type the index after the keyword "delete"
-                    Warnings.invalidDelete(tasks.size());
-                } catch (NumberFormatException e) {
-                    // if the user doesn't key in a valid index after keyword "delete"
-                    Warnings.invalidDelete(tasks.size());
-                }
-
-            } else {
-                // if the user randomly enter any other commands which are not inside the command list
-                Warnings.invalidInput();
-            }
-            // waiting for user to key in the next request
-            inputMsg = sc.nextLine();
-        }
-        // say bye to the user
-        Feedbacks.byeMsg();
-        fileOperation.writeTasks(tasks);
-
+    public static void main(String[] args) {
+        new Duke("data/tasks.txt").run();  // storage path need to change
     }
 }

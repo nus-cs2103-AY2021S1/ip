@@ -5,11 +5,11 @@ public class ToDos extends Task {
         super(taskTitle, isDone, TaskTypes.TODO);
     }
 
-    public static void addNewTodoTask(String taskTitle, ArrayList<Task> tasks) {
-        ToDos newTodoTask = new ToDos(taskTitle, false);
-        tasks.add(newTodoTask);
-        Feedbacks.addTodoTaskMsg(tasks);
-    }
+//    public static void addNewTodoTask(String taskTitle, ArrayList<Task> tasks) {
+//        ToDos newTodoTask = new ToDos(taskTitle, false);
+//        tasks.add(newTodoTask);
+//        Ui.addTodoTaskMsg(tasks);
+//    }
 
     public static void loadTodoTask(String taskTitle, Boolean isDone, ArrayList<Task> tasks) {
         ToDos todoTask = new ToDos(taskTitle, isDone);

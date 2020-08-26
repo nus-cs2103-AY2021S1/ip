@@ -10,11 +10,11 @@ public class Events extends Task {
         this.eventTime = LocalDateTime.parse(eventTime, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
     }
 
-    public static void addNewEventTask(String taskTitle, String eventTime, ArrayList<Task> tasks) {
-        Events newEvent = new Events(taskTitle, eventTime, false);
-        tasks.add(newEvent);
-        Feedbacks.addEventTaskMsg(tasks);
-    }
+//    public static void addNewEventTask(String taskTitle, String eventTime, ArrayList<Task> tasks) {
+//        Events newEvent = new Events(taskTitle, eventTime, false);
+//        tasks.add(newEvent);
+//        Ui.addEventTaskMsg(tasks);
+//    }
 
 
     public static void loadEventTask(String taskTitle, String eventTime, Boolean isDone, ArrayList<Task> tasks) {

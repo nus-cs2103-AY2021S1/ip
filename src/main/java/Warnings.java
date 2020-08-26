@@ -1,6 +1,6 @@
 import java.io.IOException;
 
-public class Warnings extends Feedbacks {
+public class Warnings extends Ui {
     public static void invalidDoneTaskIndex(int tasksSize) {
         String warningMsg = "################################################################"
                 + "\n [• ▂ •]What? "
