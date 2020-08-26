@@ -1,5 +1,8 @@
 import java.util.ArrayList;
 
+/**
+ * <p>The UI class deals with interactions with the user.</p>
+ */
 public class UI {
     private String separationLine = "     _____________________________________________________\n";
     private String indentation = "      ";
