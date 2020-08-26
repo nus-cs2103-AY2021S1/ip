@@ -9,6 +9,7 @@ public class Duke {
         Storage storage = new Storage(FILE_PATH);
         try {
             Parser parser;
+            
             if (storage.doesExist()) {
                 TaskList savedList = storage.load();
                 parser = new Parser(storage, savedList);
@@ -17,6 +18,7 @@ public class Duke {
                 Ui.showNoExistingSave();
                 parser = new Parser(storage);
             }
+            
             Ui.readUserInput(parser);
         } catch (IOException e) {
             Ui.showErrorMessage("An exception occurred:", e);
