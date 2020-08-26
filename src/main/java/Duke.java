@@ -40,28 +40,21 @@ public class Duke {
         while(!msg.equals("bye")) {
             if(msg.equals("list")) {
                 displayList();
-            }
-            else if(msg.contains("done")) {
+            } else if(msg.contains("done")) {
                 int index = Integer.parseInt(msg.replace("done ", "").trim());
                 done(index);
-            }
-            else if(msg.contains("delete")) {
+            } else if(msg.contains("delete")) {
                 int index = Integer.parseInt(msg.replace("delete ", "").trim());
                 delete(index);
-            }
-            else if(msg.contains("todo")){
+            } else if(msg.contains("todo")){
                 addToList(msg.replace("todo ", ""), Type.TODO);
-            }
-            else if(msg.contains("event")) {
+            } else if(msg.contains("event")) {
                 addToList(msg.replace("event ", ""), Type.EVENT);
-            }
-            else if(msg.contains("deadline")) {
+            } else if(msg.contains("deadline")) {
                 addToList(msg.replace("deadline ", ""), Type.DEADLINE);
-            }
-            else if(msg.contains("find")) {
+            } else if(msg.contains("find")) {
                 find(msg.replace("find ", ""));
-            }
-            else {
+            } else {
                 System.out.println(sadFace + spacing + "Sorry, Poco does not understand. Try again?");
             }
 
@@ -151,8 +144,6 @@ public class Duke {
         System.out.println(face3);
         System.out.println(tasks.find(match));
     }
-
-
 }
 
 enum Type {
