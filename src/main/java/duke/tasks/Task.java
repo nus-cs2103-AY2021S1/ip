@@ -1,6 +1,6 @@
-package tasks;
+package duke.tasks;
 
-import exceptions.TaskCompletedException;
+import duke.exceptions.TaskCompletedException;
 
 /**
  * @author Damith C. Rajapakse

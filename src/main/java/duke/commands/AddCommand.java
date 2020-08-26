@@ -1,4 +1,4 @@
-package commands;
+package duke.commands;
 
 import duke.Parser;
 import duke.Storage;
@@ -6,19 +6,19 @@ import duke.TaskList;
 import duke.Ui;
 import duke.Time;
 
-import exceptions.InvalidCommandException;
-import exceptions.InvalidDeadlineFormatException;
-import exceptions.InvalidTimeException;
-import exceptions.InvalidToDoFormatException;
-import exceptions.InvalidEventFormatException;
+import duke.exceptions.InvalidCommandException;
+import duke.exceptions.InvalidDeadlineFormatException;
+import duke.exceptions.InvalidTimeException;
+import duke.exceptions.InvalidToDoFormatException;
+import duke.exceptions.InvalidEventFormatException;
 
-import tasks.Deadline;
-import tasks.Event;
-import tasks.ToDo;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.ToDo;
 
 /**
- * Class that contains commands that can add task to the task list.
- * Handles cases for event, todo and deadline commands.
+ * Class that contains duke.commands that can add task to the task list.
+ * Handles cases for event, todo and deadline duke.commands.
  */
 public class AddCommand extends Command{
 
@@ -32,7 +32,7 @@ public class AddCommand extends Command{
     }
 
     /**
-     * Executes event, todo or deadline commands and makes sure that the format of the given
+     * Executes event, todo or deadline duke.commands and makes sure that the format of the given
      * string is correct.
      * Throws InvalidCommandException if the command is unknown.
      *

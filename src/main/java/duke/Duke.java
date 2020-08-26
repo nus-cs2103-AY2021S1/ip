@@ -1,8 +1,8 @@
 package duke;
 
-import commands.Command;
+import duke.commands.Command;
 
-import exceptions.DukeException;
+import duke.exceptions.DukeException;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;

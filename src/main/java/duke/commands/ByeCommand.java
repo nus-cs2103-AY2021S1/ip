@@ -1,10 +1,10 @@
-package commands;
+package duke.commands;
 
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 
-import exceptions.InvalidByeCommandException;
+import duke.exceptions.InvalidByeCommandException;
 
 /**
  * Class to initiate the bye command.

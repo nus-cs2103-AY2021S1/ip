@@ -1,10 +1,10 @@
-package commands;
+package duke.commands;
 
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 
-import exceptions.InvalidFindFormatException;
+import duke.exceptions.InvalidFindFormatException;
 
 /**
  * Class to initiate the find command.

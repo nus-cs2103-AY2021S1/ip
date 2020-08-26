@@ -3,7 +3,7 @@ package duke;
 import java.util.Scanner;
 
 /**
- * Class to initiate the Ui object. Contains various methods to handle different commands.
+ * Class to initiate the Ui object. Contains various methods to handle different duke.commands.
  */
 public class Ui {
 

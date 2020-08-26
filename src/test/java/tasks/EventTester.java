@@ -1,5 +1,7 @@
 package tasks;
 
+import duke.tasks.Event;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -15,7 +17,7 @@ public class EventTester {
     public void testGetByTiming() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         LocalDateTime testDate = LocalDateTime.parse("2020-02-02 12:12", formatter);
-        assertEquals(new Event("test", testDate).getBy(), "2020-02-02 12:12");
+        Assertions.assertEquals(new Event("test", testDate).getBy(), "2020-02-02 12:12");
     }
 
     @Test

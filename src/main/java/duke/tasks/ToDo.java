@@ -1,4 +1,4 @@
-package tasks;
+package duke.tasks;
 
 /**
  * Class to initiate a ToDo task.

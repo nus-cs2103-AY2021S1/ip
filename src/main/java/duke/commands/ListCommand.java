@@ -1,10 +1,10 @@
-package commands;
+package duke.commands;
 
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 
-import exceptions.InvalidListCommandException;
+import duke.exceptions.InvalidListCommandException;
 
 /**
  * Class to initiate the list command.

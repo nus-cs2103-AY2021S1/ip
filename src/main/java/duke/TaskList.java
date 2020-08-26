@@ -1,8 +1,8 @@
 package duke;
 
-import exceptions.TaskCompletedException;
+import duke.exceptions.TaskCompletedException;
 
-import tasks.Task;
+import duke.tasks.Task;
 
 import java.util.ArrayList;
 
@@ -43,10 +43,10 @@ public class TaskList {
 
     /**
      * Finds task in the current taskList that matches the input keyword.
-     * Return TaskList containing the matching tasks.
+     * Return TaskList containing the matching duke.tasks.
      *
      * @param keyword Input keyword from the user.
-     * @return TaskList of the matching tasks.
+     * @return TaskList of the matching duke.tasks.
      */
     public TaskList findTask(String keyword) {
         ArrayList<Task> matchingTask = new ArrayList<>();

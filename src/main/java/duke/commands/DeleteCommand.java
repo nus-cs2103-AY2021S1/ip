@@ -1,15 +1,13 @@
-package commands;
+package duke.commands;
 
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 
-import exceptions.IncorrectDeleteInputException;
-import exceptions.IncorrectDoneInputException;
-import exceptions.InvalidByeCommandException;
-import exceptions.InvalidDeleteFormatException;
+import duke.exceptions.IncorrectDeleteInputException;
+import duke.exceptions.InvalidDeleteFormatException;
 
-import tasks.Task;
+import duke.tasks.Task;
 
 /**
  * Class to initiate the delete command.

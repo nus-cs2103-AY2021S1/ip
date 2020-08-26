@@ -1,11 +1,11 @@
 package duke;
 
-import exceptions.*;
+import duke.exceptions.InvalidTimeException;
 
-import tasks.Deadline;
-import tasks.Event;
-import tasks.Task;
-import tasks.ToDo;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.ToDo;
 
 import java.io.IOException;
 import java.nio.file.Path;

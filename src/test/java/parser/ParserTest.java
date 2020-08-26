@@ -1,14 +1,14 @@
 package parser;
 
-import commands.ByeCommand;
-import commands.DeleteCommand;
-import commands.DoneCommand;
-import commands.ListCommand;
-import commands.AddCommand;
+import duke.commands.ByeCommand;
+import duke.commands.DeleteCommand;
+import duke.commands.DoneCommand;
+import duke.commands.ListCommand;
+import duke.commands.AddCommand;
 
 import duke.Parser;
 
-import exceptions.InvalidCommandException;
+import duke.exceptions.InvalidCommandException;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
