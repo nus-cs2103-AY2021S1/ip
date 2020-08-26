@@ -1,25 +1,26 @@
-import java.io.File;
-import java.io.IOException;
-
 public class Duke {
-    public static void main(String[] args) {
-        File f = new File("data");
-        if (!f.exists()) {
-            f.mkdir();
-        }
 
+    private Storage storage;
+    private TaskList tasks;
+    private Ui ui;
+
+    public Duke(String filePath) {
+        storage = new Storage(filePath);
         try {
-            File duke = new File("data/duke.txt");
-            if (!duke.exists()) {
-                duke.createNewFile();
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
+            tasks = new TaskList(storage.load());
+        } catch (DukeException e) {
+            ui.showLoadingError();
+            tasks = new TaskList();
         }
+        ui = new Ui(tasks);
+    }
 
-        UpdateListFromFile.updateList("data/duke.txt");
+    public void run() {
+        ui.showWelcome();
+        ui.responder();
+    }
 
-        System.out.println(new GreetCommand().execute());
-        Responder.responder();
+    public static void main(String[] args) {
+        new Duke("data/tasks.txt").run();
     }
 }

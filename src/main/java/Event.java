@@ -4,8 +4,11 @@ import java.time.format.DateTimeFormatter;
 public class Event extends Task {
     protected LocalDate eventTime;
 
-    public Event(String event) {
+    public Event(String event) throws EmptyDescriptionException {
         super(event.substring(6, event.indexOf("/")-1));
+        if (description.length() <= 6) {
+            throw new EmptyDescriptionException("oops! the description of an event cannot be empty");
+        }
         this.eventTime = LocalDate.parse(event.substring(event.indexOf("/")+4));
     }
 
