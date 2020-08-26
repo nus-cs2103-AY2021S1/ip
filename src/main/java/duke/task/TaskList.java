@@ -28,12 +28,5 @@ public class TaskList {
     public void remove(int index) {
         taskList.remove(index);
     }
-    public void printTaskList() {
-        for (int i = 0; i < taskList.size(); i++) {
-            String num = (i + 1) + ". ";
-            Task current = taskList.get(i);
-            System.out.println(num + current);
-        }
-    }
 }
 

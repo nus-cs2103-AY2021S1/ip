@@ -14,6 +14,7 @@ public class Ui {
     private static String removeTaskMessage = "Alright~ I've removed this task:";
     private static String seperator = "____________________________________________________________";
     private static String listMessage = "Here are your tasks~";
+    private static String findMessage = "Here are the matching tasks in your list~";
     
     private Scanner sc;
     
@@ -45,10 +46,26 @@ public class Ui {
                 "\n" + String.format(numberOfTaskMessage, result.getSize()) +
                 "\n" + seperator);
     }
-    
-    public void listText(TaskList taskList) {
+
+    public void listText(TaskList tasks) {
         System.out.println(seperator + "\n" + listMessage + "\n");
-        taskList.printTaskList();
+        for (int i = 0; i < tasks.getSize(); i++) {
+            String num = (i + 1) + ". ";
+            Task current = tasks.get(i);
+            System.out.println(num + current);
+        }
+        System.out.println("\n" + seperator);
+    }
+
+    public void listRelevantTasks(TaskList tasks, String keyword) {
+        System.out.println(seperator + "\n" + findMessage + "\n");
+        for (int i = 0; i < tasks.getSize(); i++) {
+            Task current = tasks.get(i);
+            if (current.containsKeyword(keyword)) {
+                String num = (i + 1) + ". ";
+                System.out.println(num + current);
+            }
+        }
         System.out.println("\n" + seperator);
     }
     

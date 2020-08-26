@@ -26,6 +26,14 @@ public class Task {
     public String getTaskType() {
         return "[" + this.taskType + "]";
     }
+    
+    public boolean containsKeyword(String keyword) {
+        if (this.taskName.contains(keyword)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     @Override
     public String toString() {
