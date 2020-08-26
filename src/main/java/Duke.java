@@ -5,28 +5,18 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
-    private static final String LOGO =
-            "██████╗ ███████╗███╗   ██╗███████╗██████╗ ██╗ ██████╗████████╗\n"
-                    + "██╔══██╗██╔════╝████╗  ██║██╔════╝██╔══██╗██║██╔════╝╚══██╔══╝\n"
-                    + "██████╔╝█████╗  ██╔██╗ ██║█████╗  ██║  ██║██║██║        ██║\n"
-                    + "██╔══██╗██╔══╝  ██║╚██╗██║██╔══╝  ██║  ██║██║██║        ██║\n"
-                    + "██████╔╝███████╗██║ ╚████║███████╗██████╔╝██║╚██████╗   ██║\n"
-                    + "╚═════╝ ╚══════╝╚═╝  ╚═══╝╚══════╝╚═════╝ ╚═╝ ╚═════╝   ╚═╝\n";
     private static final String BYE = "bye";
-    private static final String GOODBYE_MESSAGE = "Ok lor like that lor.";
     private static final String SAVE_FILE_PATH =
             System.getProperty("user.home") + File.separator + ".duke" + File.separator + "tasks.txt";
 
     public static void main(String[] args) {
         try (Scanner scanner = new Scanner(System.in)) {
-            System.out.println("Hi, I'm\n" + LOGO);
+            Ui.displayGreeting();
+
             if (Duke.hasSavedTasks()) {
                 TaskList.addAllTasks(Duke.loadSavedTasks());
-                Duke.displayMessages(
-                        "Don't forget you already have " + TaskList.tasksCount() + " things to do.",
-                        "But okay.");
+                Ui.displayGreetingReminder(TaskList.tasksCount());
             }
-            Duke.displayMessages("What do you need this time 😫");
 
             System.out.print("> ");
             while (scanner.hasNextLine()) {
@@ -41,7 +31,7 @@ public class Duke {
                 System.out.print("> ");
             }
 
-            Duke.displayMessages(GOODBYE_MESSAGE);
+            Ui.displayGoodbye();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -92,7 +82,7 @@ public class Duke {
             String command = tokens[0].toLowerCase();
             switch (command) {
             case "list": // show tasks available
-                Duke.displayTasks();
+                Ui.displayTasks(TaskList.getTasks());
                 break;
             case "done": {
                 if (tokens.length < 2) {
@@ -101,7 +91,7 @@ public class Duke {
                 int index = Integer.parseInt(tokens[1]) - 1;
                 Task task = TaskList.getTask(index);
                 task.markDone();
-                Duke.displayMessages(
+                Ui.displayMessages(
                         "Okay. So you've done:",
                         task.toString());
             }
@@ -110,10 +100,10 @@ public class Duke {
                 int index = Integer.parseInt(tokens[1]) - 1;
                 Task task = TaskList.getTask(index);
                 TaskList.deleteTask(index);
-                Duke.displayMessages(
+                Ui.displayMessages(
                         "Right, you no longer want me to track:",
                         task.toString(),
-                        Duke.getTasksLeftMessage());
+                        Ui.getTasksLeftMessage(TaskList.tasksCount()));
                 break;
             case "todo":
             case "deadline":
@@ -121,11 +111,11 @@ public class Duke {
                 Duke.addTask(command, input);
                 break;
             default:
-                Duke.displayMessages("Um, I don't get what you're saying.");
+                Ui.displayMessages("Um, I don't get what you're saying.");
                 break;
             }
         } catch (InvalidInputException e) {
-            Duke.displayMessages(e.getMessage());
+            Ui.displayMessages(e.getMessage());
         }
     }
 
@@ -167,41 +157,9 @@ public class Duke {
             throw new InvalidTaskException("Um, I don't get what you're saying.");
         }
         TaskList.addTask(task);
-        Duke.displayMessages(
+        Ui.displayMessages(
                 "Okay, you want to:",
                 task.toString(),
-                Duke.getTasksLeftMessage());
-    }
-
-    private static String getTasksLeftMessage() {
-        return String.format(
-                "Now you have %d thing%s you need me to remind you about.",
-                TaskList.tasksCount(),
-                TaskList.tasksCount() == 1 ? "" : "s");
-    }
-
-    private static void displayTasks() {
-        int noOfTasks = TaskList.tasksCount();
-        if (noOfTasks == 0) {
-            Duke.displayMessages("You didn't tell me to remind you anything.");
-        } else {
-            String[] messages = new String[noOfTasks + 1];
-            messages[0] = "Right, you said you wanted to:";
-
-            for (int i = 0; i < noOfTasks; i++) {
-                messages[i + 1] = String.format("%3d: %s", i + 1, TaskList.getTask(i));
-            }
-
-            Duke.displayMessages(messages);
-        }
-    }
-
-    private static void displayMessages(String... messages) {
-        System.out.println("     ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――");
-        for (String message : messages) {
-            System.out.printf("     %s\n", message);
-        }
-        System.out.println("     ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――");
-        System.out.println();
+                Ui.getTasksLeftMessage(TaskList.tasksCount()));
     }
 }
