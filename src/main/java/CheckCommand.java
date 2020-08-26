@@ -1,8 +1,15 @@
 public class CheckCommand extends Command{
-    int checkInt;
+    private int checkInt;
     public CheckCommand(int checkInt) {
         this.checkInt = checkInt;
     }
+
+    /**
+     * Marks a task as done and prints a success message.
+     * txt file and prints a success message.
+     * @param ui a Ui instance to enable calling of Ui functions
+     * @param storage a Storage instance to enable calling of Storage functions
+     */
     @Override
     public void execute(Ui ui, Storage storage) {
         Task task = TaskList.toDoList.get(checkInt - 1);
