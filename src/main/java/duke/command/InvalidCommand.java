@@ -5,6 +5,9 @@ import duke.TaskManager;
 import duke.Ui;
 import duke.exception.DukeException;
 
+/**
+ * Represents an invalid command.
+ */
 public class InvalidCommand extends Command {
 
     @Override
@@ -12,5 +15,9 @@ public class InvalidCommand extends Command {
         String errorMessage = "Sorry! I don't know what that means...\n";
         throw new DukeException(errorMessage);
     }
-    
+
+    @Override
+    public boolean isExit() {
+        return false;
+    }
 }

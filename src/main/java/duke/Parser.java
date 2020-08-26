@@ -14,8 +14,18 @@ import duke.command.ListCommand;
 import duke.command.TodoCommand;
 import duke.exception.DukeException;
 
+/**
+ * Represents a helper class that deals with making sense of the user command.
+ */
 public class Parser {
-    
+
+    /**
+     * Returns a command instance after parsing the input command.
+     *
+     * @param fullCommand The command to be parsed.
+     * @return A command instance which its type is determined by the input command.
+     * @throws DukeException If the input command is deemed invalid or the format is incorrect.
+     */
     public static Command parseCommand(String fullCommand) throws DukeException {
         Command command;
         String[] splitCommand = fullCommand.split(" ", 2);

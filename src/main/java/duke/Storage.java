@@ -15,14 +15,32 @@ import duke.task.Todo;
 import duke.task.Deadline;
 import duke.task.Event;
 
+/**
+ * Represents a Duke storage that deals with
+ * loading tasks from the file and saving tasks in the file.
+ */
 public class Storage {
-    
+
+    /**
+     * The file path to load tasks from and save tasks to.
+     */
     private final String filePath;
 
+    /**
+     * Initializes a storage instance for a particular file path.
+     *
+     * @param filePath The path of the file.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Returns a list of tasks after loading them from the specified file.
+     *
+     * @return A list of tasks.
+     * @throws DukeException If the file is not found.
+     */
     public List<Task> loadTasks() throws DukeException {
         File file = new File(filePath);
         List<Task> tasks = new ArrayList<>();
@@ -58,6 +76,13 @@ public class Storage {
         }
     }
 
+    /**
+     * Saves tasks to the specified file.
+     *
+     * @param tasks The list of tasks to be saved.
+     * @throws DukeException If the path specified is a directory,
+     * or if the file cannot be created or opened.
+     */
     public void saveTasks(List<Task> tasks) throws DukeException {
         try {
             FileWriter myWriter = new FileWriter("data/duke.txt");
@@ -69,17 +94,17 @@ public class Storage {
                 if (letter == 'T') {
                     data = letter + " | " + bit + " | " + description;
                 } else if (letter == 'D') {
-                    String time = task.getTime().toString();
+                    String time = task.getDate().toString();
                     data = letter + " | " + bit + " | " + description + " | " + time; 
                 } else { // letter == 'E'
-                    String time = task.getTime().toString();
+                    String time = task.getDate().toString();
                     data = letter + " | " + bit + " | " + description + " | " + time; 
                 }
                 myWriter.write(data + "\n");
             }
             myWriter.close();
         } catch (IOException e) {
-            String errorMessage = "File not found, unable to save tasks :(";
+            String errorMessage = "File path specified could not be created or opened, unable to save tasks :(";
             throw new DukeException(errorMessage);
         }
     }

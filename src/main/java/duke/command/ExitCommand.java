@@ -5,6 +5,9 @@ import duke.TaskManager;
 import duke.Ui;
 import duke.exception.DukeException;
 
+/**
+ * Represents a command to exit the programme.
+ */
 public class ExitCommand extends Command {
 
     @Override

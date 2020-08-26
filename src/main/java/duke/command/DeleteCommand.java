@@ -6,10 +6,21 @@ import duke.Ui;
 import duke.exception.DukeException;
 import duke.task.Task;
 
+/**
+ * Represents a command to delete tasks.
+ */
 public class DeleteCommand extends Command {
 
+    /**
+     * The task number on the list to be deleted.
+     */
     private final String taskNumber;
 
+    /**
+     * Constructs a command that deletes a task.
+     *
+     * @param taskNumber The task number to be deleted.
+     */
     public DeleteCommand(String taskNumber) {
         this.taskNumber = taskNumber;
     }
@@ -27,5 +38,9 @@ public class DeleteCommand extends Command {
             throw new DukeException(errorMessage);
         }
     }
-    
+
+    @Override
+    public boolean isExit() {
+        return false;
+    }
 }
