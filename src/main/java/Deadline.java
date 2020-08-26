@@ -10,7 +10,22 @@ public class Deadline extends Task {
         this.date = Task.getDateString(itemString, Deadline.DELIMITER);
     }
 
-    // private static
+
+    public Deadline(String itemString, boolean isDone) {
+        super(Task.getTaskString(itemString, Deadline.DELIMITER), isDone);
+        this.date = Task.getDateString(itemString, Deadline.DELIMITER);
+    }
+
+
+    /**
+     * Gets string array for storage.
+     *
+     * @return string array for storage.
+     */
+    @Override
+    public String[] toStorageStringArr() {
+        return new String[]{"D", this.isDone ? "1" : "0", this.itemString, this.date};
+    }
 
 
     @Override
