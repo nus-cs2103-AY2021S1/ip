@@ -18,7 +18,7 @@ public class Duke {
                 "\nWelcome! I am\n" + logo +
                 "\nHere are some magic words to get you going:" +
                 "\nTo add a todo, say 'todo <task description>'." +
-                "\nTo add a deadline, say 'deadline <task description> /by <task deadline>'." +
+                "\nTo add a deadline, say 'deadline <task description> /by <yyyy-mm-dd>'." +
                 "\nTo add an event, say 'event <event description> /at <event location>'" +
                 "\nTo view your tasks, say 'list'." +
                 "\nTo check off a task, say 'done <task number>'." +

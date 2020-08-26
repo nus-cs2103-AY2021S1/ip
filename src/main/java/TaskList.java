@@ -70,7 +70,7 @@ public class TaskList {
                     String by = splitDeadline[1];
                     newTask = new Deadline(deadlineDesc, by);
                     break;
-                } else if (input.matches("deadline\\s?") || !input.contains("by")){
+                } else if (input.matches("deadline\\s?") || !input.contains(" by ")){
                     throw new IllegalArgumentException("OOPS! The description/deadline of a deadline cannot be empty.");
                 } else {
                     throw new IllegalArgumentException("OOPS! Invalid syntax. To add a deadline, use:\n         " + Deadline.getFormat());
@@ -82,8 +82,8 @@ public class TaskList {
                     String at = splitEvent[1];
                     newTask = new Event(eventDesc, at);
                     break;
-                } else if (input.matches("event\\s?") || !input.contains("at")) {
-                    throw new IllegalArgumentException("OOPS! The description/location of an event cannot be empty.\n");
+                } else if (input.matches("event\\s?") || !input.contains(" at ")) {
+                    throw new IllegalArgumentException("OOPS! The description/location of an event cannot be empty.");
                 } else {
                     throw new IllegalArgumentException("OOPS! Invalid syntax. To add an event, use:\n         " + Event.getFormat());
                 }
