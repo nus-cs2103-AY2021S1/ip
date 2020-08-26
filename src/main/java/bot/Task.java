@@ -14,6 +14,10 @@ public class Task {
         this.done = done;
     }
 
+    public String getName() {
+        return this.name;
+    }
+
     /**
      * Changes the state of done to true.
      */

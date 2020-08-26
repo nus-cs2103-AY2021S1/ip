@@ -24,13 +24,12 @@ public class Parser {
     }
 
     /**
-     * Returns the name of the To-do assuming the the input is the command for To-do.
+     * Returns the one and only argument assuming the the input is the command with only 1 arg.
      * @param input user's input
-     * @return To-do
+     * @return user's argument
      * @throws InvalidInputException command's argument is invalid
      */
-
-    public String parseTodo(String input) throws InvalidInputException {
+    public String parseSingleArg(String input) throws InvalidInputException {
         String[] words = input.split(" ");
         StringBuilder name = new StringBuilder();
         for (int i = 1; i < words.length; i++) {

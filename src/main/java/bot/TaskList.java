@@ -53,6 +53,20 @@ public class TaskList {
     }
 
     /**
+     * Returns a new ArrayList where the tasks contain the keyword name
+     * @param name keyword
+     * @return new ArrayList
+     */
+    public ArrayList<Task> filter(String name) {
+        ArrayList<Task> newList = new ArrayList<>();
+        for (Task task: this.list) {
+            newList.add(task);
+        }
+        newList.removeIf(x -> (!x.getName().contains(name)));
+        return newList;
+    }
+
+    /**
      * Returns the list
      * @return ArrayList of Task
      */
