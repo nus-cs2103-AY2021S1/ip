@@ -1,3 +1,4 @@
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 public class Duke {
@@ -66,6 +67,9 @@ public class Duke {
                 Task.saveTasks();
             } catch (DukeException e) {
                 System.out.println(HORIZONTAL_LINE + e + "\n" + HORIZONTAL_LINE);
+            } catch (DateTimeParseException e2) {
+                System.out.println(HORIZONTAL_LINE + "Error: Please key in date and time as follows: DD-MM-YYYY HHMM"
+                    + "\n" + HORIZONTAL_LINE);
             }
         }
         sc.close();

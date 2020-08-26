@@ -6,12 +6,12 @@ import java.io.FileWriter;
 import java.io.BufferedWriter;
 import java.io.BufferedReader;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public abstract class Task {
     protected Boolean isDone;
     protected String icon; //tick or cross
     protected String name;
+    protected String taskType;
 
     private final static String TICK = "O";
     private final static String CROSS = "X";
@@ -21,12 +21,14 @@ public abstract class Task {
         this.name = name;
         this.isDone = false;
         this.icon = CROSS;
+        this.taskType = "Task";
     }
     
     Task(String name, Boolean isDone) {
         this.name = name;
         this.isDone = isDone;
         this.icon = isDone ? TICK : CROSS;
+        this.taskType = "Task";
     }
 
     public static void addTask(Task task) {
@@ -41,7 +43,6 @@ public abstract class Task {
                 + String.format("Now you have %s tasks in the list.", Tasks.size()) + "\n"
                 + Duke.HORIZONTAL_LINE);
     }
-
     public static void deleteTask(int i) {
         Task task = Tasks.get(i - 1);
         Tasks.remove(i - 1);
@@ -93,17 +94,26 @@ public abstract class Task {
     }
     
     public static void showTasks() {
-        System.out.println(Duke.HORIZONTAL_LINE + "Here are the tasks in your list:");
-        int i = 1;
-        for (Task task : Task.Tasks) {
-            //print out task with numbering
-            System.out.println(String.format("%s.", i) + task.toString());
-            i++;
+        System.out.println(Duke.HORIZONTAL_LINE);
+        if(Tasks.size() > 0) {
+            System.out.println("Here are the tasks in your list:");
+            int i = 1;
+            for (Task task : Task.Tasks) {
+                //print out task with numbering
+                System.out.println(String.format("%s.", i) + task.toString());
+                i++;
+            }
+        } else { //no tasks
+            System.out.println("You have no tasks!");
         }
         System.out.println(Duke.HORIZONTAL_LINE);
     }
-    
-    abstract String encode();
+
+    public String encode() {
+        return isDone
+                ? String.format("%s | 1 | %s", taskType, name)
+                : String.format("%s | 0 | %s", taskType, name);
+    }
     
     private static void processTask(String line) {
         String[] task = line.split(" \\| ");

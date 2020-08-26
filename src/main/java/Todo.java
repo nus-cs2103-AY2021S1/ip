@@ -1,10 +1,12 @@
 public class Todo extends Task {
     Todo(String name) {
         super(name);
+        taskType = "T";
     }
     
     Todo(String name, Boolean isDone) {
         super(name, isDone);
+        taskType = "T";
     }
     public String encode() {
         return isDone
@@ -12,7 +14,8 @@ public class Todo extends Task {
                 : String.format("T | 0 | %s", name);
     }
     
+    @Override
     public String toString() {
-        return "[T]" + super.toString();
+        return String.format("[%s]%s", taskType, super.toString());
     }
 }

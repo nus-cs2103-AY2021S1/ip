@@ -1,25 +1,17 @@
-public class Deadline extends Task {
-    private String dateTime;
+public class Deadline extends TimedTask {
 
     Deadline(String name, String dateTime) {
-        super(name);
-        this.dateTime = dateTime;
+        super(name, dateTime);
+        taskType = "D";
     }
 
     Deadline(String name, Boolean isDone, String dateTime) {
-        super(name, isDone);
-        this.dateTime = dateTime;
-    }
-
-    public String encode() {
-        return isDone
-                ? String.format("D | 1 | %s | %s", name, dateTime)
-                : String.format("D | 0 | %s | %s", name, dateTime);
+        super(name, isDone, dateTime);
+        taskType = "D";
     }
     
     @Override
     public String toString() {
-        String dateTimeFormat = String.format(" (by: %s)", dateTime);
-        return "[D]" + super.toString() + dateTimeFormat;
+        return String.format("[%s]%s", taskType, super.toString());
     }
 }

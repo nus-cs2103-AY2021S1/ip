@@ -1,25 +1,17 @@
-public class Event extends Task {
-    private String dateTime;
-
+public class Event extends TimedTask {
+    
     Event(String name, String dateTime) {
-        super(name);
-        this.dateTime = dateTime;
+        super(name, dateTime);
+        taskType = "E";
     }
 
     Event(String name, Boolean isDone, String dateTime) {
-        super(name, isDone);
-        this.dateTime = dateTime;
-    }
-    
-    public String encode() {
-        return isDone
-                ? String.format("E | 1 | %s | %s", name, dateTime)
-                : String.format("E | 0 | %s | %s", name, dateTime);
+        super(name, isDone, dateTime);
+        taskType = "E";
     }
     
     @Override
     public String toString() {
-        String dateTimeFormat = String.format(" (at: %s)", dateTime);
-        return "[E]" + super.toString() + dateTimeFormat;
+        return String.format("[%s]%s", taskType, super.toString());
     }
 }
