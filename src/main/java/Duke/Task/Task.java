@@ -1,6 +1,7 @@
 package Duke.Task;
 
 public class Task {
+    
     protected String taskDescription;
     protected boolean isDone;
 
@@ -12,8 +13,7 @@ public class Task {
     public String getTaskDescription() {
         return this.taskDescription;
     }
-
-
+    
     public String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }

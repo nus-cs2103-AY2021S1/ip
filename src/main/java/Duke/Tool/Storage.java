@@ -1,7 +1,6 @@
 package Duke.Tool;
 
 import Duke.Task.*;
-
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -67,11 +66,8 @@ public class Storage {
                 } catch (IOException e) {
                     System.out.println(e.getMessage());
                 }
-                
             }
-            
         }
-        
         return taskList;
     }
     

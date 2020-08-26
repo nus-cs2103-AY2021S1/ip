@@ -1,7 +1,5 @@
 package Duke.Task;
 
-import Duke.Task.Task;
-
 public class Todo extends Task {
 
     public Todo(String description, boolean isDone) {
