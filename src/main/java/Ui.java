@@ -21,7 +21,7 @@ public class Ui {
 
             if (!parser.isBye(input)) {
 
-                if (!parser.isList(input)) {
+                if (!parser.isList(input) && !parser.isFind(input)) {
 
                     if (!parser.isDone(input) && !parser.isDelete(input)) {
 
@@ -164,8 +164,13 @@ public class Ui {
                     }
                 }else {
 
-                    TaskList.read();
+                    if(!parser.isFind(input)) {
+                        TaskList.read();
+                    }else{
+                        TaskList.find(input.substring(Parser.FIND.length() + 1));
+                    }
                 }
+
             } else {
                 System.out.println(" Bye. Hope to see you again soon!");
                 this.scanner.close();

@@ -18,6 +18,7 @@ public class Parser {
     public final static String DDL_VALIDATION = "deadline ";
     public final static String EMPTY = " ";
     public final static String BYORAT = "/by ";
+    public final static String FIND = "find";
 
     public Parser(){}
 
@@ -65,5 +66,8 @@ public class Parser {
         return input.equals(EMPTY);
     }
 
+    public boolean isFind(String input){
+        return input.contains(FIND);
+    }
 
 }
