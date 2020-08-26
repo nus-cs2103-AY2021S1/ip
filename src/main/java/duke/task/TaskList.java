@@ -45,6 +45,25 @@ public class TaskList {
     public int size() {
         return taskList.size();
     }
+
+    /**
+     * Finds and list tasks with description containing the keyword.
+     * @param keyword Keyword for the search.
+     * @return
+     */
+    public String listTasksWithKeyword(String keyword) {
+        StringBuilder output = new StringBuilder();
+        int i = 1;
+        
+        for (Task task : taskList) {
+            if (task.getDescription().contains(keyword)) {
+                output.append(i).append(". ").append(task).append("\n");
+            }
+        }
+        
+        output.deleteCharAt(output.length() - 1);
+        return output.toString();
+    }
     
     @Override
     public String toString() {

@@ -37,6 +37,8 @@ public class Parser {
             return new DoneCommand(commandArg);
         case DELETE:
             return new DeleteCommand(commandArg);
+        case FIND:
+            return new FindCommand(commandArg);
         case INVALID: 
         default:    
             return new InvalidCommand();
