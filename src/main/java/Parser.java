@@ -3,7 +3,7 @@ import java.time.format.DateTimeParseException;
 
 public class Parser {
     enum Command {
-        LIST, BYE, DONE, DELETE, DEADLINE, EVENT, TODO, EMPTY_TASK_TODO, EMPTY_TASK_EVENT_DEADLINE, EMPTY_DATE, NULL;
+        LIST, BYE, DONE, DELETE, DEADLINE, EVENT, TODO, EMPTY_TASK_TODO, EMPTY_TASK_EVENT_DEADLINE, EMPTY_DATE, NULL, FIND;
     }
 
     Command parse(String msg) {
@@ -21,6 +21,8 @@ public class Parser {
         } else if (msg.matches("^delete \\d+$")) {
             return Command.DELETE;
             //          CREATING NEW TASKS
+        } else if (msg.matches("^find \\S.*")) {
+            return Command.FIND;
         } else {
 
             //              DEADLINES

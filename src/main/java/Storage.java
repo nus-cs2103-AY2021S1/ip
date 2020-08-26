@@ -41,7 +41,7 @@ public class Storage {
             for (Task task : taskList) {
                 String taskString = task.getType() + " | " + (task.completed ? 1 : 0) + " | " + task.getTask();
                 if (task.getDate() != "") {
-                    taskString = taskString + "| " + task.getDate();
+                    taskString = taskString + " | " + task.getDate();
                 }
                 fw.write(taskString);
                 fw.write(System.getProperty( "line.separator" ));
@@ -67,6 +67,7 @@ public class Storage {
                     }
                     taskList.add(task);
                 } else if (taskParts[0].equals("E")) {
+                    System.out.println(Arrays.toString(taskParts));
                     Event task = new Event(taskParts[4], taskParts[6]);
                     if (taskParts[2].equals("1")) {
                         task.updateStatus(true);

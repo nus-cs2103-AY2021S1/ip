@@ -54,7 +54,7 @@ public class Duke {
 
                 } else if (parser.parse(msg) == Parser.Command.DELETE) {
                     int updateTaskIndex = Integer.valueOf(msg.substring(7, msg.length())) - 1;
-                    if (updateTaskIndex >= taskList.size() || updateTaskIndex <= 0) {
+                    if (updateTaskIndex >= taskList.size() || updateTaskIndex < 0) {
                         throw new DukeException(DukeExceptionType.TASK_NOT_FOUND);
                     }
                     Task taskToUpdate = taskList.get(updateTaskIndex);
@@ -66,6 +66,14 @@ public class Duke {
                     file.write(taskList.getList());
 
                     //          CREATING NEW TASKS
+                } else if (parser.parse(msg) == Parser.Command.FIND) {
+                    String query = msg.substring(5, msg.length());
+                    String output = "Here are the matching tasks in your list: \n";
+                    int i = 1;
+                    for (Task task : taskList.find(query).getList()) {
+                        output = output + i + "." + task.toString() + "\n";
+                    }
+                    printer.messagePrint(output);
                 } else {
 
                     //              DEADLINES
