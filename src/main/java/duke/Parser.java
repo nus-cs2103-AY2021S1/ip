@@ -1,14 +1,6 @@
 package duke;
 
-import duke.command.Command;
-import duke.command.DeadlineCommand;
-import duke.command.DeleteCommand;
-import duke.command.DoneCommand;
-import duke.command.EventCommand;
-import duke.command.ExitCommand;
-import duke.command.ListCommand;
-import duke.command.TodoCommand;
-import duke.command.UnknownCommand;
+import duke.command.*;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -20,6 +12,13 @@ public class Parser {
         switch (command) {
         case ("list"):
             return new ListCommand();
+        case ("find"):
+            if (inputBreakdown.length < 2) {
+                throw new DukeException("Error! Note the syntax: find [keyword]");
+            } else {
+                String keyword = inputBreakdown[1];
+                return new FindCommand(keyword);
+            }
         case ("done"):
             if (inputBreakdown.length < 2) {
                 throw new DukeException("Error! Note the syntax: done [task number]");

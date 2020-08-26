@@ -16,6 +16,10 @@ public class Task {
     public void markAsDone() {
         isDone = true;
     }
+    
+    public boolean contains(String keyword) {
+        return description.contains(keyword);
+    }
 
     public String toData() {
         int binary = isDone ? 1 : 0;

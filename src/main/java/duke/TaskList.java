@@ -2,6 +2,7 @@ package duke;
 
 import duke.task.Task;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class TaskList {
@@ -51,6 +52,28 @@ public class TaskList {
 
         Ui.addMessage("Nice! I've marked this task as done:");
         Ui.addMessage("  " + task);
+        Ui.sendMessages();
+    }
+    
+    public void findTasks(String keyword) {
+        List<Task> tasks = new ArrayList<>();
+        for (Task task : taskList) {
+            if (task.contains(keyword)) {
+                tasks.add(task);
+            }
+        }
+        
+        int size = tasks.size();
+        if (size == 0) {
+            Ui.addMessage("Sorry, I couldn't find any matching tasks.");
+        } else {
+            Ui.addMessage("Here are the matching tasks in your list:");
+            for (int i = 0; i < size; i++) {
+                int taskNumber = i + 1;
+                String task = String.format("%d. %s", taskNumber, tasks.get(i));
+                Ui.addMessage(task);
+            }
+        }
         Ui.sendMessages();
     }
     
