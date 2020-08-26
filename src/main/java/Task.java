@@ -4,6 +4,7 @@ public class Task {
 
     protected String description;
     protected boolean isDone;
+    //protected DateAndTime dateAndTime;
 
     public static ArrayList<Task> taskStorage = new ArrayList<>();
 
@@ -16,6 +17,12 @@ public class Task {
         this.description = description;
         this.isDone = isDone;
     }
+
+//    public Task(String description, Boolean isDone, DateAndTime dateAndTime){
+//        this.description = description;
+//        this.isDone = isDone;
+//        this.dateAndTime = dateAndTime;
+//    }
 
     public String getStatusIcon(){
         return (this.isDone ? "\u2713" : "\u2718");
@@ -35,7 +42,8 @@ public class Task {
 
     }
 
-    public static void write(String input, String type, String byOrAt){
+    public static void write(String input, String type, DateAndTime byOrAt){
+
         Task toBeAdded;
         if(type.equals( "todo")) {
             toBeAdded = new ToDo(input);
@@ -49,6 +57,7 @@ public class Task {
         }
         System.out.println("Got it. I've added this task: \n" + toBeAdded);
         System.out.println("Now you have " + taskStorage.size() + " tasks in the list.");
+
     }
 
     public static void read(){

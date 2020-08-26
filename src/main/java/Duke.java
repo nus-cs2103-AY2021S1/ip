@@ -36,7 +36,7 @@ public class Duke {
 
                             String description;
                             String correctedInput;
-                            String byOrAt;
+                            DateAndTime byOrAt;
 
                             if (input.contains("todo")) {
 
@@ -47,7 +47,7 @@ public class Duke {
                                     if (!description.equals(" ")) {
 
                                         correctedInput = input.substring("todo ".length());
-                                        byOrAt = "";
+                                        byOrAt = new DateAndTime();
                                         Task.write(correctedInput, "todo", byOrAt);
                                         Save.write(Task.taskStorage);
 
@@ -71,7 +71,8 @@ public class Duke {
 
                                     if (!description.equals(" ")) {
 
-                                        byOrAt = input.substring(input.indexOf("/") + "/at ".length());
+                                        byOrAt =new DateAndTime(input.substring(input.indexOf("/") + "/at ".length()));
+
                                         correctedInput = input.substring("event ".length());
                                         Task.write(correctedInput, "event", byOrAt);
                                         Save.write(Task.taskStorage);
@@ -90,7 +91,7 @@ public class Duke {
                                     description = input.substring("deadline ".length(), "deadline ".length() + 1);
 
                                     if (!description.equals(" ")) {
-                                        byOrAt = input.substring(input.indexOf("/") + "/by ".length());
+                                        byOrAt = new DateAndTime(input.substring(input.indexOf("/") + "/by ".length()));
                                         correctedInput = input.substring("deadline ".length());
                                         Task.write(correctedInput, "deadline", byOrAt);
                                         Save.write(Task.taskStorage);
