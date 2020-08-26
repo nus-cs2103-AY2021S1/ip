@@ -1,5 +1,4 @@
 package duke;
-
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -9,11 +8,19 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Storage class that deals with loading tasks from the file and saving tasks in the file.
+ */
 public class Storage {
     private final String dir_path = "data";
     private final String txt_path = "data/duke.txt";
     private String path;
 
+    /**
+     * Storage Class constructor. Create a new directory if there isn't one at the given path.
+     *
+     * @param path give the path of the save data
+     */
     public Storage(String path) {
         this.path = path;
         try {
@@ -23,6 +30,9 @@ public class Storage {
         }
     }
 
+    /**
+     * Method that creates a new folder at the root directory if there isn't one
+     */
     private void createFolder() throws IOException {
         File dir_folder = new File(dir_path);
         File txt = new File(txt_path);
@@ -34,6 +44,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Method that load saved data (past records) from the directory
+     * @return      a List of Task objects
+     */
     public List<Task> loadSavedData() {
         List<Task> list = new ArrayList<>();
 
@@ -63,6 +77,11 @@ public class Storage {
         return list;
     }
 
+    /**
+     * Method that add Task data to the save data txt file
+     *
+     * @param task  task in a String format
+     */
     public void addTask(String task) throws IOException {
         File file = new File(txt_path);
         FileWriter writer = new FileWriter(file, true);
@@ -72,6 +91,10 @@ public class Storage {
         writer.close();
     }
 
+    /**
+     * Method that mark a specific task as complete in the saved data
+     * @param number    index of the Task to be completed
+     */
     public void completeTask(int number) throws IOException {
         File file = new File(txt_path);
         FileReader fr = new FileReader(file);
@@ -95,6 +118,10 @@ public class Storage {
         writer.close();
     }
 
+    /**
+     * Method that delete a specific task from the saved data
+     * @param number    index of the Task to be deleted
+     */
     public void deleteTask(int number) throws IOException {
         File file = new File(txt_path);
         FileReader fr = new FileReader(file);

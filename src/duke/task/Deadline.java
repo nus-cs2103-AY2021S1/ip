@@ -4,12 +4,22 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Deadline class that represents a deadline task for the user
+ */
 public class Deadline extends Task {
     protected String by;
     protected LocalDate date;
     protected LocalTime time;
     protected boolean isFormatted = false;
 
+    /**
+     * Deadline Class constructor. Create a new Deadline with task description and time to be completed.
+     *
+     * @param description give the description of the Task
+     * @param by    the deadline of the task
+     *
+     */
     public Deadline(String description, String by) {
         super(description);
         try {
@@ -23,6 +33,10 @@ public class Deadline extends Task {
         }
     }
 
+    /**
+     * To String method of deadline
+     * @return  a String that describes the deadline task
+     */
     @Override
     public String toString() {
         if (isFormatted) {

@@ -1,9 +1,16 @@
 package duke;
-
 import duke.command.*;
 
+/**
+ * Parser class that deals with making sense of the user command
+ */
 public class Parser {
 
+    /**
+     * Static method that takes in the user's command and return a Command object. If no command matches, it will throw a DukeException
+     * @param  command input from the user
+     * @return      a Command object
+     */
     public static Command parse(String command) throws DukeException {
         String arr[] = command.split(" ");
         String keyWord = arr[0];

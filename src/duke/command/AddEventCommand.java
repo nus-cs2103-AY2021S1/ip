@@ -6,11 +6,25 @@ import duke.task.TaskList;
 
 import java.io.IOException;
 
+/**
+ * AddEventCommand class that represents add event commands
+ */
 public class AddEventCommand extends Command {
+
+    /**
+     * AddEventCommand Class constructor
+     * @param command the command from the user
+     */
     public AddEventCommand(String command) {
         super(command);
     }
 
+    /**
+     * Method that execute the current AddEventCommand object
+     * @param list TaskList object from the current Duke instance
+     * @param ui    UI object from the current Duke instance
+     * @param saveData Storage object from the current Duke instance
+     */
     public void execute(TaskList list, Ui ui, Storage saveData) {
         try {
             if (this.command.trim().length() == 5) {
@@ -33,9 +47,13 @@ public class AddEventCommand extends Command {
         }
     }
 
+    /**
+     * Method that return isExit of the current Command
+     * @return boolean object showing if Duke should terminate
+     */
     @Override
     public boolean isExit() {
-        return false;
+        return isExit;
     }
 
 }

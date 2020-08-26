@@ -6,12 +6,25 @@ import duke.task.TaskList;
 
 import java.io.IOException;
 
+/**
+ * DeleteTaskCommand class that represents delete task commands
+ */
 public class DeleteTaskCommand extends Command {
 
+    /**
+     * DeleteTaskCommand Class constructor
+     * @param command the command from the user
+     */
     public DeleteTaskCommand(String command) {
         super(command);
     }
 
+    /**
+     * Method that execute the current DeleteTaskCommand object
+     * @param list TaskList object from the current Duke instance
+     * @param ui    UI object from the current Duke instance
+     * @param saveData Storage object from the current Duke instance
+     */
     public void execute(TaskList list, Ui ui, Storage saveData) {
         try {
             if (this.command.trim().length() == 6) {
@@ -28,9 +41,14 @@ public class DeleteTaskCommand extends Command {
             ui.saySomthing(e.getMessage());
         }
     }
+
+    /**
+     * Method that return isExit of the current Command
+     * @return boolean object showing if Duke should terminate
+     */
     @Override
     public boolean isExit() {
-        return false;
+        return isExit;
     }
 
 

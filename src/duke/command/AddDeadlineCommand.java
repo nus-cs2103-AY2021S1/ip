@@ -5,14 +5,25 @@ import duke.task.Deadline;
 import duke.task.TaskList;
 
 import java.io.IOException;
-
+/**
+ * AddDeadlineCommand class that represents add deadline commands
+ */
 public class AddDeadlineCommand extends Command {
 
-
+    /**
+     * AddDeadlineCommand Class constructor
+     * @param command the command from the user
+     */
     public AddDeadlineCommand(String command) {
         super(command);
     }
 
+    /**
+     * Method that execute the current AddDeadlineCommand object
+     * @param list TaskList object from the current Duke instance
+     * @param ui    UI object from the current Duke instance
+     * @param saveData Storage object from the current Duke instance
+     */
     public void execute(TaskList list, Ui ui, Storage saveData) {
         try {
             if (this.command.trim().length() == 8) {
@@ -33,8 +44,12 @@ public class AddDeadlineCommand extends Command {
         }
     }
 
+    /**
+     * Method that return isExit of the current Command
+     * @return boolean object showing if Duke should terminate
+     */
     @Override
     public boolean isExit() {
-        return false;
+        return isExit;
     }
 }
