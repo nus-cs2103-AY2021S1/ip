@@ -30,7 +30,7 @@ import duke.task.TaskList;
 public class Storage {
 
     // DateTime format constant
-    private static final DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy h:mma");
+    private static final DateTimeFormatter DATE_TIME_FORMAT = DateTimeFormatter.ofPattern("dd-MM-yyyy h:mma");
 
     // instance variables
     String directory; // directory of data
@@ -75,13 +75,13 @@ public class Storage {
                 case "E":
                     String[] eventDetails = remaining.split("\\s\\|\\s");
                     desc = eventDetails[0];
-                    LocalDateTime date = LocalDateTime.parse(eventDetails[1], format);
+                    LocalDateTime date = LocalDateTime.parse(eventDetails[1], DATE_TIME_FORMAT);
                     res.add(new Event(desc, date, isDone));
                     break;
                 case "D":
                     String[] deadlineDetails = remaining.split("\\s\\|\\s");
                     desc = deadlineDetails[0];
-                    LocalDateTime deadline = LocalDateTime.parse(deadlineDetails[1], format);
+                    LocalDateTime deadline = LocalDateTime.parse(deadlineDetails[1], DATE_TIME_FORMAT);
                     res.add(new Deadline(desc, deadline, isDone));
                     break;
                 default:

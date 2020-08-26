@@ -13,9 +13,6 @@ public class TaskList {
     private List<Task> tasks;
 
     // constructors
-    public TaskList() {
-        tasks = new ArrayList<>();
-    }
 
     public TaskList(List<Task> tasks) {
         this.tasks = tasks;

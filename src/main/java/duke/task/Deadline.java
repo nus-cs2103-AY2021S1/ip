@@ -11,7 +11,8 @@ public class Deadline extends Task {
 
     // constants
     private static final String TYPE = "D";
-    private static final DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy h:mma");
+    private static final DateTimeFormatter DATABASE_DATE_TIME_FORMAT
+            = DateTimeFormatter.ofPattern("dd-MM-yyyy h:mma");
 
     // instance variables
     private LocalDateTime date;
@@ -28,7 +29,7 @@ public class Deadline extends Task {
 
     // private helper for returning formatted dates
     private String[] format(LocalDateTime date) {
-        return date.format(format).split(" ");
+        return date.format(DATABASE_DATE_TIME_FORMAT).split(" ");
     }
 
     // String representation methods
