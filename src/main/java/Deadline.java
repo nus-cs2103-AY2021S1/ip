@@ -12,6 +12,17 @@ public class Deadline extends Task {
     }
 
     @Override
+    public String getDescription() {
+        String[] desArray = this.description.split("/", 2);
+        return desArray[0];
+    }
+
+    public String getTime() {
+        String[] desArray = this.description.split("/", 2);
+        return desArray[1];
+    }
+
+    @Override
     public String toString() {
         String[] descriptionArray = new String[3];
         String[] split1 = this.description.split("/by ", 2);
@@ -21,10 +32,9 @@ public class Deadline extends Task {
         descriptionArray[1] = split2[0];
         descriptionArray[2] = split2[1];
         LocalDate d = LocalDate.parse(descriptionArray[1]);
-//        LocalTime t = LocalTime.parse(descriptionArray[2]);
-//        int time = t.getHour() + t.getMinute()
+        LocalTime t = LocalTime.parse(descriptionArray[2]);
 
         return "[D]" + getStatusIcon() + descriptionArray[0] + "(by: " +
-                d.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ", " + descriptionArray[2] + ")";
+                d.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ", " + t + ")";
     }
 }

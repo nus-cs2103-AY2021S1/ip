@@ -12,6 +12,14 @@ public class Task {
         return (isDone ? "\u2713" : "\u2718");
     }
 
+    public boolean getDone() {
+        return this.isDone;
+    }
+
+    public String getDescription() {
+        return this.description;
+    }
+
     public void setDone() {
         this.isDone = true;
     }
