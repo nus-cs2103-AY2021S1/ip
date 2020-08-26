@@ -29,6 +29,51 @@ class Task {
     }
 }
 
+class UnknownCommandException extends IndexOutOfBoundsException {
+    UnknownCommandException() {}
+    @Override
+    public String toString() {
+        return "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
+
+    }
+}
+
+class EmptyBodyException extends IndexOutOfBoundsException {
+    EmptyBodyException() {}
+}
+
+class TodoEmptyBodyException extends EmptyBodyException {
+    TodoEmptyBodyException() {}
+    @Override
+    public String toString() {
+        return "☹ OOPS!!! The description of a todo cannot be empty.";
+    }
+}
+
+class EventEmptyBodyException extends EmptyBodyException {
+    EventEmptyBodyException() {}
+    @Override
+    public String toString() {
+        return "☹ OOPS!!! The description of an event cannot be empty.";
+    }
+}
+
+class DeadlineEmptyBodyException extends EmptyBodyException {
+    DeadlineEmptyBodyException() {}
+    @Override
+    public String toString() {
+        return "☹ OOPS!!! The description of a deadline cannot be empty.";
+    }
+}
+
+class DeleteEmptyBodyException extends EmptyBodyException {
+    DeleteEmptyBodyException() {}
+    @Override
+    public String toString() {
+        return "☹ OOPS!!! Empty deletion is invalid.";
+    }
+}
+
 class Todo extends Task {
     Todo(String message) {
         super(message);
@@ -112,7 +157,7 @@ public class Duke {
         // echo the command or say bye
         while (scanner.hasNextLine()) {
             String currentCommand = scanner.nextLine();
-            String taskType = currentCommand.split(" ")[0];
+            String priorCommand = currentCommand.split(" ")[0];
 
             if (currentCommand.equals("bye")) {
                 System.out.println(format(messageBye));
@@ -130,7 +175,6 @@ public class Duke {
                 System.out.println(SPACE + LINE);
             } else {
                 try {
-                    String priorCommand = currentCommand.split(" ")[0];
                     String extraCommand = currentCommand.split(" ", 2)[1];
                     if (priorCommand.equals("done")) {
                         int index = Integer.parseInt(extraCommand) - 1;
@@ -140,17 +184,19 @@ public class Duke {
                                 + task.getTypeLetter() + task.getStatusIcon() + task.getMessage()));
                     } else {
                         Task task;
-                        if (priorCommand.equals("deadline")) {
-                            task = new Deadline(Convert.by(extraCommand));
-                        } else if (priorCommand.equals("event")) {
-                            task = new Event(Convert.at(extraCommand));
-                        } else if (priorCommand.equals("todo")) {
-                            task = new Todo(extraCommand);
-                        } else {
-                            // error
-                            // throw exception
-                            // dummy initialization
-                            task = new Task("");
+                        switch (priorCommand) {
+                            case "deadline":
+                                task = new Deadline(Convert.by(extraCommand));
+                                break;
+                            case "event":
+                                task = new Event(Convert.at(extraCommand));
+                                break;
+                            case "todo":
+                                task = new Todo(extraCommand);
+                                break;
+                            default:
+                                // throw exception
+                                throw new IndexOutOfBoundsException();
                         }
 
                         list.add(task);
@@ -160,6 +206,26 @@ public class Duke {
                     }
                 } catch (IndexOutOfBoundsException e) {
                     // handle exception
+                    IndexOutOfBoundsException ex;
+                    switch (priorCommand) {
+                        case "todo":
+                            ex = new TodoEmptyBodyException();
+                            break;
+                        case "event":
+                            ex = new EventEmptyBodyException();
+                            break;
+                        case "deadline":
+                            ex = new DeadlineEmptyBodyException();
+                            break;
+                        case "delete":
+                            ex = new DeleteEmptyBodyException();
+                            break;
+                        default:
+                            ex = new UnknownCommandException();
+                            break;
+                    }
+                    System.out.println(format(ex.toString()));
+
                 }
             }
         }
