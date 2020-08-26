@@ -1,5 +1,8 @@
 package main.java.duke.tasks;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class Task {
     protected String description;
     protected boolean isDone;
@@ -19,6 +22,10 @@ public class Task {
 
     public String getState() {
         return "";
+    }
+
+    public List<String> getWordsInTask() {
+        return Arrays.asList(description.split(" "));
     }
 
     @Override

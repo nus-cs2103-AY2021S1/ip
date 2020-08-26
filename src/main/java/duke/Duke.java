@@ -5,6 +5,10 @@ import main.java.duke.exceptions.DukeException;
 import main.java.duke.exceptions.InvalidFileException;
 import main.java.duke.tasks.TaskList;
 
+/**
+ * Duke class which initialize a Duke object that handles
+ * all of the bot logic sequences.
+ */
 
 public class Duke {
 
@@ -23,6 +27,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Main method for Duke to start running its processors.
+     */
     public void run() {
         this.ui.showWelcomeMessage();
         boolean isExit = false;

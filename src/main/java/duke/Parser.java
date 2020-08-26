@@ -14,6 +14,8 @@ public class Parser {
                 return new ExitCommand(userInput);
             } else if (userInput.equals("list")) {
                 return new ListCommand(userInput);
+            } else if (userInput.startsWith("find")) {
+                return new FindCommand(userInput);
             } else {
                 return addCommand(userInput);
             }
