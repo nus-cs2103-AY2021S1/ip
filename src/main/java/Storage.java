@@ -20,9 +20,14 @@ public class Storage {
         fw.close();
     }
 
-    public ArrayList<Task> load() throws DukeException {
+    public ArrayList<Task> load() throws DukeException, IOException {
         try {
             File f = new File(this.filePath);
+            if (!f.exists()) {
+                f = new File("data/duke.txt");
+                f.getParentFile().mkdir();
+                f.createNewFile();
+            }
             Scanner s = new Scanner(f);
             while (s.hasNext()) {
                 String nextLine = s.nextLine();
@@ -62,8 +67,10 @@ public class Storage {
                     }
                 }
             }
-        } catch(FileNotFoundException e) {
+        } catch (FileNotFoundException e) {
             throw new DukeException("File not found");
+        } catch (IOException e) {
+            throw new DukeException("Input-Output error");
         }
         return this.loadedTasks;
     }

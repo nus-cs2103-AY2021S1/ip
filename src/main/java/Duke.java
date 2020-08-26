@@ -1,3 +1,5 @@
+import java.io.IOException;
+
 public class Duke {
 
     private Storage storage;
@@ -9,7 +11,7 @@ public class Duke {
         storage = new Storage(filePath);
         try {
             tasks = new TaskList(storage.load());
-        } catch (DukeException e) {
+        } catch (DukeException | IOException e) {
             ui.showLoadingError();
             tasks = new TaskList();
         }
