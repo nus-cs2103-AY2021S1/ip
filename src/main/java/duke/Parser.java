@@ -39,6 +39,13 @@ public class Parser {
             case "list":
                 tl.display();
                 break;
+            case "find":
+                try {
+                    tl.find(input);
+                } catch (InvalidDescriptionException e) {
+                    Ui.addLine(e.toString());
+                }
+                break;
             case "done":
                 idx = Integer.parseInt(arr[1]) - 1;
                 try {
