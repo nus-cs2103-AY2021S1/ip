@@ -4,11 +4,11 @@ todo task1
 todo
 todo task1 2 3 4
 wrong command
-event event1 /at I dunno what time
+event event1 /at 2020-02-01 15:30
 event event2 /at
 event
 event event3
-deadline dl1 /by I dunno what time
+deadline dl1 /by 2020-02-01 05:30
 deadline dl2 /by
 deadline
 deadline dl3

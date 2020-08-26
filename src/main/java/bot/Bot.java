@@ -1,14 +1,7 @@
 package bot;
 
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.Scanner;
-import java.io.File;
 
 public class Bot {
     private String name;
@@ -33,9 +26,9 @@ public class Bot {
     /**
      * Start the bot's interaction with user.
      */
-    public void init() {
+    public void init(Scanner scanner) {
         ui.greet();
-        Scanner scanner = new Scanner(System.in);
+
         while (scanner.hasNextLine()) {
             String input = scanner.nextLine();
             try {
