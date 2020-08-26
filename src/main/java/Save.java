@@ -6,19 +6,21 @@ import java.util.Scanner;
 
 public class Save {
 
-    public static String home = System.getProperty("user.home");
+    //public static String home = System.getProperty("src/data/duke.txt");
+    public static final String home = "data";
 
-    public static java.nio.file.Path path = java.nio.file.Paths.get(home, "my", "app", "dir");
+    public static java.nio.file.Path path = java.nio.file.Paths.get(home, "duke.txt");
 
     public static boolean directoryExists = java.nio.file.Files.exists(path);
 
-    public static void read(){
+    public static void read() {
         try {
             File storage = new File(home);
 
             if(!directoryExists){
                 System.out.println("I am sorry, but the folder does not exist yet.\n" +
                         "Let me create one for you now :).");
+
                 if(storage.mkdir()){
                     System.out.println("Folder is created");
                 }else{
@@ -47,6 +49,7 @@ public class Save {
         }catch (IOException e){
 
             e.printStackTrace();
+            //throw e;
 
         }
     }
