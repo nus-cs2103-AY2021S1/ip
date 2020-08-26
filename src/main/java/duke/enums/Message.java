@@ -3,6 +3,9 @@ package duke.enums;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * An Enumeration of the various Messages words that shall be used by Duke's UI
+ */
 public enum Message {
     GREETING,
     EXIT_GREETING("Bye. Hope to see you again soon!"),
@@ -32,7 +35,9 @@ public enum Message {
         this.msg = msg;
     }
     
-    // init for the enums class: fills in the hashmap of message-label pairs
+    /*
+     * An Initialisation for the Hashmap that allows us to access keys from their values (message-label pairs)
+     */
     static {
         Map<String, Message> messageLabelMap = new HashMap<>();
         for (Message m : Message.values()) {
@@ -41,6 +46,11 @@ public enum Message {
         Message.keyableMap = messageLabelMap;
     }
     
+    /**
+     * Returns the string representation for that Message
+     *
+     * @return Message's String form
+     */
     public String getMsg() {
         return this.msg;
     }

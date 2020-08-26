@@ -12,6 +12,9 @@ import duke.exception.DukeException;
 
 import java.util.StringTokenizer;
 
+/**
+ * Parses the user input to determine what command the user intends to make
+ */
 public class Parser {
     
     private static final String DEADLINE_DELIMITER = "/by";
@@ -19,7 +22,15 @@ public class Parser {
     private static final String TIME_DELIMITER = "-";
     
     
-    // takes in the input and returns a string arr, does exception checking here as well:
+    /**
+     * Returns the correct command after parsing the user's input
+     *
+     * @param input user's input
+     *
+     * @return a Command that represents user's intended action
+     *
+     * @throws DukeException If User's input can't be understood or doesn't follow the correct format
+     */
     public Command parseCommand(String input) throws DukeException {
         input = input.trim();
         String[] words = input.split(" ");
@@ -45,6 +56,16 @@ public class Parser {
         }
     }
     
+    /**
+     * Parses user input that is related to the done and delete commands
+     *
+     * @param input User input related to Done and Delete commands
+     *
+     * @return Either Done or Delete Command
+     *
+     * @throws DukeException If the format is wrong or if a non-integer is passed in as argument or  multiple arguments
+     *                       are passed in
+     */
     private Command parseDoneDelete(String input) throws DukeException {
         StringTokenizer st = new StringTokenizer(input);
         // if there are more than 2 tokens, then it's wrong format:
@@ -62,6 +83,15 @@ public class Parser {
                : new DoneCommand(parsedInput);
     }
     
+    /**
+     * Parses user input that is related to the todo
+     *
+     * @param input User input related to todo command
+     *
+     * @return String array of format: {<"T"><description of todo>}
+     *
+     * @throws DukeException If no description is passed in
+     */
     private String[] parseToDo(String input) throws DukeException {
         StringTokenizer st = new StringTokenizer(input);
         st.nextToken();
@@ -75,7 +105,15 @@ public class Parser {
         return new String[]{"T", description.toString().stripTrailing()};
     }
     
-    
+    /**
+     * Parses user input that is related to the Deadline command
+     *
+     * @param input User input related to Deadline command
+     *
+     * @return String array of format: {<"D"><description of Deadline><String representation for the date>}
+     *
+     * @throws DukeException If the format is wrong or if it lacks proper description
+     */
     private String[] parseDeadline(String input) throws DukeException {
         String[] separatedInput = input.split(DEADLINE_DELIMITER);
         if (separatedInput.length <= 1) {
@@ -97,7 +135,16 @@ public class Parser {
                             dateString};
     }
     
-    // todo: refactor this later
+    /**
+     * Parses user input that is related to the Event command
+     *
+     * @param input User input related to Event command
+     *
+     * @return String array of format: {<"E"><description of Event><String representation for the date><start time><end
+     *         time>}
+     *
+     * @throws DukeException If the format is wrong or if it lacks proper description
+     */
     private String[] parseEvent(String input) throws DukeException {
         String[] separatedInput = input.split(EVENT_DELIMITER); //  <words> /at <timeInfo>
         // not enough info in user input:
@@ -137,6 +184,13 @@ public class Parser {
                             endTime};
     }
     
+    /**
+     * Checks if input is a string representation of an integer
+     *
+     * @param s input string
+     *
+     * @return True if input is representing an Integer
+     */
     private boolean isInteger(String s) {
         return s.matches("\\d+");
     }

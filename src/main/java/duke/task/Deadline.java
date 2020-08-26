@@ -8,7 +8,9 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-
+/**
+ * Contains information about a Task to be done by a particular date and time along with its description
+ */
 public class Deadline extends Task {
     private static final String DELIMITER = "by";
     private LocalDate date;
@@ -19,10 +21,16 @@ public class Deadline extends Task {
         setDateTime(dateString);
     }
     
-    // example: deadline return book /by Sunday
-    public static Deadline createDeadline(String[] parsedOutput) throws DukeException {
-        String description = parsedOutput[1];
-        String dateString = parsedOutput[2];
+    /**
+     * Creates a Deadline by extracting out relevant information from the parsed user input
+     *
+     * @param parsedInput Parser's output
+     *
+     * @return Deadline
+     */
+    public static Deadline createDeadline(String[] parsedInput) throws DukeException {
+        String description = parsedInput[1];
+        String dateString = parsedInput[2];
         return new Deadline(description, dateString);
     }
     
@@ -39,6 +47,14 @@ public class Deadline extends Task {
                 + " (" + DELIMITER + ":" + date + ", time:" + time + ")";
     }
     
+    /**
+     * Sets the Date and Time attributes of a Deadline by choosing the correct formatter and formatting the user input
+     * information for these fields
+     *
+     * @param dateString Unformatted date and time fields
+     *
+     * @throws DukeException If the Date and Time user input is not understandable
+     */
     public void setDateTime(String dateString) throws DukeException {
         try {
             dateString = dateString.strip();
@@ -58,6 +74,16 @@ public class Deadline extends Task {
         }
     }
     
+    /**
+     * Filters through the Enumeration for DateTime formatters and selects the correct Formatter based on the format
+     * that the user inputs the Date information in
+     *
+     * @param date String representation for a date
+     *
+     * @return DateTimeFormatter that can be used to format this user input for Date
+     *
+     * @throws DukeException If the User's date format isn't supported by the existing Formatters in the Enumeration
+     */
     private DateTimeFormatter chooseDateFormatter(String date) throws DukeException {
         return DateTimeFormat.getFormatterStream().filter
                 (formatter -> {
@@ -71,6 +97,16 @@ public class Deadline extends Task {
                 }).findAny().orElseThrow(() -> new DukeException("Can't find Date Formatter"));
     }
     
+    /**
+     * Filters through the Enumeration for DateTime formatters and selects the correct Formatter based on the format
+     * that the user inputs the Date information in
+     *
+     * @param time String representation for a time
+     *
+     * @return DateTimeFormatter that can be used to format this user input for Time
+     *
+     * @throws DukeException If the User's time format isn't supported by the existing Formatters in the Enumeration
+     */
     private DateTimeFormatter chooseTimeFormatter(String time) throws DukeException {
         return DateTimeFormat.getFormatterStream().filter
                 (formatter -> {
