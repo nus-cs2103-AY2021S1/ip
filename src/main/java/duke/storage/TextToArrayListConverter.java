@@ -15,12 +15,12 @@ import java.util.List;
 public class TextToArrayListConverter {
 
     /**
-     * @param filepath location of the file.
+     * @param filePath location of the file.
      * @return list containing the previously saved tasks.
      */
-    public static List<Task> readFile(String filepath) {
+    public static List<Task> readFile(String filePath) {
         try {
-            FileInputStream readData = new FileInputStream(filepath);
+            FileInputStream readData = new FileInputStream(filePath);
             ObjectInputStream readStream = new ObjectInputStream(readData);
             ArrayList<Task> taskList = (ArrayList<Task>) readStream.readObject();
             readStream.close();

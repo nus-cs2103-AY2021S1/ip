@@ -41,7 +41,7 @@ public class Ui {
      * @param taskList list containing all the tasks.
      */
     public void printList(TaskList taskList) {
-        List<Task> ls = taskList.getTaskList();
+        List<Task> ls = taskList.getTasks();
         for (int x = 0; x < ls.size(); x++) {
             System.out.println(x + 1 + ":" + ls.get(x).toString());
         }

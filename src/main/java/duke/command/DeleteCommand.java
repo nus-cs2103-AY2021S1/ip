@@ -27,7 +27,7 @@ public class DeleteCommand extends UserCommand {
      */
     @Override
     public void execute(TaskList taskList, Ui ui) throws DukeException {
-        List<Task> ls = taskList.getTaskList();
+        List<Task> ls = taskList.getTasks();
         String[] deleteCommandArray = userInput.split(" ");
         if (deleteCommandArray.length < 2) {
             throw new InvalidDeleteCommandException();

@@ -14,11 +14,11 @@ public class ArrayListToTextConverter {
 
     /**
      * @param tasks list containing the tasks to be converted to a txt file.
-     * @param filepath path to store the file.
+     * @param filePath path to store the file.
      */
-    public static void convertArrayListToText(List<Task> tasks, String filepath) {
+    public static void convertArrayListToText(List<Task> tasks, String filePath) {
         try {
-            FileOutputStream writeData = new FileOutputStream(filepath);
+            FileOutputStream writeData = new FileOutputStream(filePath);
             ObjectOutputStream writeStream = new ObjectOutputStream(writeData);
             writeStream.writeObject(tasks);
             writeStream.flush();

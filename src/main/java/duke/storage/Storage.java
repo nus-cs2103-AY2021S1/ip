@@ -10,10 +10,10 @@ import java.util.List;
  */
 public class Storage {
 
-    private String filepath;
+    private String filePath;
 
-    public Storage(String filepath) {
-        this.filepath = filepath;
+    public Storage(String filePath) {
+        this.filePath = filePath;
     }
 
     /**
@@ -22,7 +22,7 @@ public class Storage {
      * @return list containing the previously saved tasks.
      */
     public List<Task> load() {
-        return TextToArrayListConverter.readFile(filepath);
+        return TextToArrayListConverter.readFile(filePath);
     }
 
 
@@ -32,6 +32,6 @@ public class Storage {
      * @param tasks containing the tasks in the list.
      */
     public void save(TaskList tasks) {
-        ArrayListToTextConverter.convertArrayListToText(tasks.getTaskList(), filepath);
+        ArrayListToTextConverter.convertArrayListToText(tasks.getTasks(), filePath);
     }
 }

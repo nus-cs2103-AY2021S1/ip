@@ -2,7 +2,6 @@ package duke.command;
 
 import duke.exceptions.DukeException;
 import duke.exceptions.EmptyToDoException;
-import duke.storage.ArrayListToTextConverter;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
 import duke.tasks.ToDo;
@@ -22,7 +21,7 @@ public class ToDoCommand extends UserCommand {
      */
     @Override
     public void execute(TaskList taskList, Ui ui) throws DukeException {
-        List<Task> ls = taskList.getTaskList();
+        List<Task> ls = taskList.getTasks();
         if (userInput.trim().length() <= 4) {
             throw new EmptyToDoException();
         } else {
