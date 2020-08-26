@@ -78,8 +78,8 @@ public class Logic {
     }
 
     private boolean exit() {
+        this.store.saveIntoHarddisk();
         System.out.println("Bye! See you later :)" );
         return false;
     }
-
 }

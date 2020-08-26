@@ -5,9 +5,13 @@ public class Task {
     protected boolean isDone;
     private final String line = "____________________________________________________________\n";
 
-    public Task(String description) {
+     Task(String description) {
         this.description = description;
         this.isDone = false;
+    }
+    Task(String description, boolean isDone) {
+        this.description = description;
+        this.isDone = isDone;
     }
 
     public void finishTask() {
@@ -30,5 +34,10 @@ public class Task {
     @Override
     public String toString() {
         return "[T] [" + this.getStatusIcon() + "] " + this.description;
+    }
+
+    public String getStoreRepresentation() {
+        String doneStatus = this.isDone ? "D," : "N,";
+        return "T," + doneStatus + this.description;
     }
 }

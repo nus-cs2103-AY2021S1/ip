@@ -1,10 +1,13 @@
 package main.java;
 
+import java.io.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Store {
     private List<Task> allItems;
+    private File savedCopy;
     private final String line = "____________________________________________________________\n";
 
     enum TYPES {
@@ -22,40 +25,92 @@ public class Store {
 //    private final String EVENT = "event";
 
     Store() {
-        this.allItems = new ArrayList<>();
+        try {
+            this.allItems = new ArrayList<>();
+            this.savedCopy = new File("./data/save.txt");
+            if (!this.savedCopy.exists()) {
+                File directory = new File("./data");
+                directory.mkdir();
+                this.savedCopy.createNewFile();
+            } else {
+                this.retrieveStorage();
+            }
+        } catch (IOException e) {
+            System.out.println("Something went wrong:  " + e.getMessage());
+        }
+    }
+
+    private void retrieveStorage() {
+// LIMITATION CANNOT HAVE COMMA IN DESCRIPTION OF TASKS
+        try {
+            FileReader fileReader = new FileReader(this.savedCopy);
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+            String eachLine = bufferedReader.readLine();
+            while (eachLine != null) {
+                String[] simplerData = eachLine.split(",");
+                Task toAdd;
+                if (simplerData.length == 3) {
+                    String description = simplerData[2].strip();
+                    boolean isDone = simplerData[1].strip().equals("N") ? false : true;
+                    toAdd = new Task(description, isDone);
+                    this.allItems.add(toAdd);
+                } else {
+//                    assert simplerData.length == 4;
+                    if (simplerData[0].equals("D")) {
+                        String description = simplerData[2].strip();
+                        boolean isDone = simplerData[1].strip().equals("N") ? false : true;
+                        String date = simplerData[3].strip();
+                        toAdd = new Deadline(description, date, isDone);
+                        this.allItems.add(toAdd);
+
+                    } else if (simplerData[0].equals("E")){
+                        String description = simplerData[2].strip();
+                        boolean isDone = simplerData[1].strip().equals("N") ? false : true;
+                        String date = simplerData[3].strip();
+                        toAdd = new Event(description, date, isDone);
+                        this.allItems.add(toAdd);
+
+                    }
+                }
+                eachLine = bufferedReader.readLine();
+            }
+
+        } catch (IOException e) {
+            System.out.println("Something went wrong:  " + e.getMessage());
+        }
     }
 
     public void addToStore(String type, String item) {
         try {
             String actual_item = item.strip();
-        Task toAdd;
+            Task toAdd;
             if (type.equals(TYPES.TODO.text)) {
-            toAdd = new Task(actual_item);
-            this.addTask(toAdd);
-        } else {
-            String[] partsOfTask = actual_item.split("/");
-            if (partsOfTask.length != 2) {
-                String instruction = "<type of task> <description> / <deadline>";
-                if (type.equals(TYPES.EVENT.text)) instruction = "<type of task> <description> / <date of event>";
-                throw new DukeGotNoArgumentsException(instruction);
+                toAdd = new Task(actual_item);
+                this.addTask(toAdd);
             } else {
-                String description = partsOfTask[0];
-                String duedate = partsOfTask[1];
-                if (type.equals(TYPES.DEADLINE.text)) {
-                    toAdd = new Deadline(description.strip(), duedate.strip());
-                    this.addTask(toAdd);
-
-                } else if (type.equals(TYPES.EVENT.text)) {
-                    toAdd = new Event(description.strip(), duedate.strip());
-                    this.addTask(toAdd);
-
+                String[] partsOfTask = actual_item.split("/");
+                if (partsOfTask.length != 2) {
+                    String instruction = "<type of task> <description> / <deadline>";
+                    if (type.equals(TYPES.EVENT.text)) instruction = "<type of task> <description> / <date of event>";
+                    throw new DukeGotNoArgumentsException(instruction);
                 } else {
-                    // should not reach here
-                    System.out.println("It's not you, it's me. Something went wrong\n" +
-                            "Please try again.\n" + line);
+                    String description = partsOfTask[0];
+                    String duedate = partsOfTask[1];
+                    if (type.equals(TYPES.DEADLINE.text)) {
+                        toAdd = new Deadline(description.strip(), duedate.strip());
+                        this.addTask(toAdd);
+
+                    } else if (type.equals(TYPES.EVENT.text)) {
+                        toAdd = new Event(description.strip(), duedate.strip());
+                        this.addTask(toAdd);
+
+                    } else {
+                        // should not reach here
+                        System.out.println("It's not you, it's me. Something went wrong\n" +
+                                "Please try again.\n" + line);
+                    }
                 }
             }
-        }
         } catch (DukeGotNoArgumentsException e) {
             System.out.println(e.getMessage() + "\n" + line);
         }
@@ -66,6 +121,22 @@ public class Store {
         System.out.println("Alright, its in your list now!\n\t" + toAdd +
                 "\nNow you have " + this.allItems.size() + " tasks.\n" + line);
     }
+
+    public void saveIntoHarddisk() {
+        try {
+            FileWriter writer = new FileWriter("./data/save.txt", false);
+            writer.write("");
+            writer.close();
+            writer = new FileWriter("./data/save.txt", true);
+            for (Task task: this.allItems) {
+                writer.write(task.getStoreRepresentation() + "\n");
+            }
+            writer.close();
+        } catch (IOException e) {
+            System.out.println("Something went wrong:  " + e.getMessage());
+        }
+    }
+
 
     public boolean printStore() {
         String printList;
