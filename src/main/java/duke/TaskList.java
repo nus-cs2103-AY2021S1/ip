@@ -92,6 +92,13 @@ public class TaskList {
     }
 
     /**
+     * Clears all tasks in the task list.
+     */
+    public void clearTasks() {
+        tasks.clear();
+    }
+
+    /**
      * Adds a task to the pre-existing list of tasks according to the string input.
      *
      * @param tag   A string with a specific tag. (<code>todo</code>,

@@ -89,6 +89,13 @@ public class Ui {
     }
 
     /**
+     * Prints a chat window that informs the user that all tasks have been cleared.
+     */
+    public void printClearTasksWindow() {
+        printIndentedMessage("All tasks have been cleared!");
+    }
+
+    /**
      * Prints a chat window with a customised description that the task has been added.
      *
      * @param task            The task to be displayed as added.

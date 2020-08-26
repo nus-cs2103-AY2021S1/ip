@@ -27,6 +27,9 @@ public class Parser {
         case "delete":
             return new DeleteCommand(input);
 
+        case "clear":
+            return new ClearCommand();
+
         case "todo":
             return new AddTaskCommand("todo", input);
         case "event":
