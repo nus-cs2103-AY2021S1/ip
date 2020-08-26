@@ -1,5 +1,10 @@
 Hi, I'm your Professor, Martin.
-What can I do for you?
+What can I do for you? You can ask me to do these:
+list: List the current tasks in your list.
+todo: Add a To-Do task.
+event: Add an Event task.
+deadline: Add a deadline task.
+find: Find a task which matches your description.
 Enter input:
 Got it, I've added this task: [T][X] first task
 Now you have 1 tasks in the list.

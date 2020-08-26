@@ -1,87 +1,141 @@
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
 
-    public static ArrayList<Task> taskList = new ArrayList<>();
+    private ArrayList<Task> taskList;
+    private boolean isRunning;
+
+    private enum Command {
+        BYE, LIST, DONE, DELETE, TODO, EVENT, DEADLINE, FIND, INVALID
+    }
+
+    public Duke() {
+        this.taskList = new ArrayList<>();
+        this.isRunning = true;
+    }
+
+    /**
+     * Take the first keyword from the user's input, and return
+     * an integer corresponding to the right command.
+     *
+     * @param input
+     * @return
+     */
+    private Command getCommand(String input) {
+        String lowerCaseInput = input.toLowerCase();
+        switch (lowerCaseInput) {
+            case "bye":
+                return Command.BYE;
+            case "list":
+                return Command.LIST;
+            case "done":
+                return Command.DONE;
+            case "delete":
+                return Command.DELETE;
+            case "todo":
+                return Command.TODO;
+            case "event":
+                return Command.EVENT;
+            case "deadline":
+                return Command.DEADLINE;
+            case "find":
+                return Command.FIND;
+            default:
+                return Command.INVALID;
+        }
+    }
 
     /**
      * Main control system which loops user input until user exits with the
      * command 'bye'.
-     *
-     * @param args args supplied to main.
      */
-    public static void main(String[] args) {
+    private void run() {
+        // TODO Need to GET saved list file and process it into ArrayList.
+        openTaskList();
         String introduction =
                 "Hi, I'm your Professor, Martin." +
-                        "\nWhat can I do for you?";
+                        "\nWhat can I do for you? You can ask me to do these:" +
+                        "\nlist: List the current tasks in your list." +
+                        "\ntodo: Add a To-Do task." +
+                        "\nevent: Add an Event task." +
+                        "\ndeadline: Add a deadline task." +
+                        "\nfind: Find a task which matches your description.";
         System.out.println(introduction);
         Scanner sc = new Scanner(System.in);
         String input;
 
         // Loop program until command 'bye' is entered as input.
-        while (true) {
+        while (isRunning) {
             try {
-                System.out.println("Enter input: ");
+                System.out.println("Enter input:");
                 input = sc.nextLine();
-                if (input.equals("bye")) {
-                    System.out.println("Bye, see you soon. Exiting...");
-                    break;
-                } else if (input.equals("list")) {
-                    listAllTasks();
-                } else if (input.length() >= 8 && input.substring(0, 8).equals("deadline")) {
-                    if (input.substring(8).length() > 1) {
-                        String description = input.substring(9);
-                        String[] processedDesc = processTimedTask(description);
-                        Deadline d = new Deadline(processedDesc[0], processedDesc[1]);
-                        addTask(d);
-                    } else {
-                        throw new DukeException("The description of a deadline cannot be empty.");                    }
-                } else if (input.length() >= 6 && input.substring(0, 6).equals("delete")) {
-                    if (input.substring(6).length() > 1) {
-                        String numString = input.substring(7);
-                        int entryNum = Integer.parseInt(numString);
-                        deleteTask(entryNum);
-                    } else {
-                        throw new DukeException("Invalid number for delete command.");
-                    }
-                } else if (input.length() >= 5 && input.substring(0, 5).equals("event")) {
-                    if (input.substring(5).length() > 1) {
-                        String description = input.substring(6);
-                        String[] processedDesc = processTimedTask(description);
-                        Event e = new Event(processedDesc[0], processedDesc[1]);
-                        addTask(e);
-                    } else {
-                        throw new DukeException("The description of an event cannot be empty.");
-                    }
-                } else if (input.length() >= 4) {
-                    String command = input.substring(0, 4);
-                    // Navigate to either done or to-do.
-                    switch (command) {
-                        case "done":
-                            if (input.substring(4).length() > 1) {
-                                // For processing "done" command with the corresponding integer value.
-                                String numString = input.substring(5);
-                                int entryNum = Integer.parseInt(numString);
-                                markTaskDone(entryNum);
-                            } else {
-                                throw new DukeException("Invalid number for done command.");
-                            }
-                            break;
-                        case "todo":
-                            if (input.substring(4).length() > 1) {
-                                String description = input.substring(5);
-                                Todo d = new Todo(description);
-                                addTask(d);
-                            } else {
-                                throw new DukeException("The description of a todo cannot be empty.");
-                            }
-                            break;
-                        default:
-                            throw new DukeException("I'm sorry, but I don't know what that means :-(");
-                    }
-                } else {
-                    throw new DukeException("I'm sorry, but I don't know what that means :-(");                }
+                Command command = getCommand(input.split(" ")[0]);
+                switch (command) {
+                    case BYE:
+                        // TODO Need to implement saving mechanism.
+                        closeDuke();
+                        break;
+                    case LIST:
+                        listAllTasks();
+                        break;
+                    case DONE:
+                        if (input.substring(4).length() > 1) {
+                            // For processing "done" command with the corresponding integer value.
+                            String numString = input.substring(5);
+                            int entryNum = Integer.parseInt(numString);
+                            markTaskDone(entryNum);
+                        } else {
+                            throw new DukeException("Invalid number for done command.");
+                        }
+                        break;
+                    case DELETE:
+                        if (input.substring(6).length() > 1) {
+                            String numString = input.substring(7);
+                            int entryNum = Integer.parseInt(numString);
+                            deleteTask(entryNum);
+                        } else {
+                            throw new DukeException("Invalid number for delete command.");
+                        }
+                        break;
+                    case TODO:
+                        if (input.substring(4).length() > 1) {
+                            String description = input.substring(5);
+                            Todo d = new Todo(description);
+                            addTask(d);
+                        } else {
+                            throw new DukeException("The description of a todo cannot be empty.");
+                        }
+                        break;
+                    case EVENT:
+                        if (input.substring(5).length() > 1) {
+                            String description = input.substring(6);
+                            String[] processedDesc = processTimedTask(description);
+                            Event e = new Event(processedDesc[0], processedDesc[1]);
+                            addTask(e);
+                        } else {
+                            throw new DukeException("The description of an event cannot be empty.");
+                        }
+                        break;
+                    case DEADLINE:
+                        if (input.substring(8).length() > 1) {
+                            String description = input.substring(9);
+                            String[] processedDesc = processTimedTask(description);
+                            Deadline d = new Deadline(processedDesc[0], processedDesc[1]);
+                            addTask(d);
+                        } else {
+                            throw new DukeException("The description of a deadline cannot be empty.");
+                        }
+                        break;
+                    case FIND:
+                        break;
+
+                    // Default for INVALID command.
+                    default:
+                        throw new DukeException("I'm sorry, but I don't know what that means :-(");
+                }
             } catch (DukeException e) {
                 System.out.println("Exception occurred during main loop: " + e);
             }
@@ -90,9 +144,9 @@ public class Duke {
     }
 
     /**
-     * Lists all tasks currently stored in the system.
+     * List all tasks currently stored in the system.
      */
-    public static void listAllTasks() {
+    private void listAllTasks() {
         int numEntries = taskList.size();
         if (numEntries == 0) {
             System.out.println("No tasks found.");
@@ -105,11 +159,11 @@ public class Duke {
     }
 
     /**
-     * Stores task into the ArrayList.
+     * Store task into the ArrayList.
      *
      * @param t Task to be stored into the ArrayList.
      */
-    public static void addTask(Task t) {
+    private void addTask(Task t) {
         taskList.add(t);
         System.out.println("Got it, I've added this task: " + t);
         System.out.println("Now you have " + taskList.size() + " tasks in the list.");
@@ -121,7 +175,7 @@ public class Duke {
      *
      * @param taskNum The task number to mark as done.
      */
-    public static void markTaskDone(int taskNum) {
+    private void markTaskDone(int taskNum) {
         try {
             if (taskNum < 0 || taskNum > taskList.size()) {
                 throw new DukeException("Task number does not exist.");
@@ -136,7 +190,7 @@ public class Duke {
         }
     }
 
-    public static void deleteTask(int taskNum) {
+    private void deleteTask(int taskNum) {
         try {
             if (taskNum > 0 && taskNum <= taskList.size()) {
                 System.out.println("Noted. I have removed this task:");
@@ -159,7 +213,7 @@ public class Duke {
      * @return A String array of size 2. Index 0 contains the task's description,
      * index 1 contains the date of the task.
      */
-    public static String[] processTimedTask(String str) {
+    private String[] processTimedTask(String str) {
         String[] result = new String[2];
         try {
             // Split the string first then loop through to find the stop point at either /at or /by.
@@ -183,12 +237,50 @@ public class Duke {
             sb = new StringBuilder();
             for (int k = indexToStop + 1; k < arr.length; k++) {
                 sb.append(arr[k]);
-                if (k != arr.length - 1)  sb.append(" ");
+                if (k != arr.length - 1) sb.append(" ");
             }
             result[1] = sb.toString();
         } catch (DukeException e) {
             System.out.println("Exception occurred while processing timed task: " + e);
         }
         return result;
+    }
+
+    /**
+     * Get task list from the taskList.txt and transfer the contents
+     * to the taskList ArrayList.
+     */
+    private void openTaskList() {
+        File savedList = new File("src/main/data/taskList.txt");
+        try {
+            if (!savedList.exists()) {
+                savedList.createNewFile();
+                System.out.println("First time user.. Creating new database..");
+            } else {
+                // TODO Get content from file. Transfer to arraylist.
+
+            }
+        } catch (IOException exception) {
+            System.out.println("Exception while opening task list file:" + exception);
+        }
+    }
+
+    /**
+     * Save the current list into a file and closes the program
+     * by setting isRunning to false.
+     */
+    private void closeDuke() {
+        System.out.println("Bye, see you soon. Exiting...");
+        isRunning = false;
+    }
+
+    /**
+     * Initialise program with a new instance of Duke.
+     *
+     * @param args String array passed into main.
+     */
+    public static void main(String[] args) {
+        Duke dukeProgram = new Duke();
+        dukeProgram.run();
     }
 }

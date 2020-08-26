@@ -19,3 +19,10 @@ java -classpath ..\bin Duke < input.txt > ACTUAL.TXT
 
 REM compare the output to the expected output
 FC ACTUAL.TXT EXPECTED.TXT
+IF %ERRORLEVEL% EQU 0 (
+    echo Files are the same.
+)
+IF %ERRORLEVEL% EQU 1 (
+    echo Files are different.
+)
+
