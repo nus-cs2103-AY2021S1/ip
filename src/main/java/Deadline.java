@@ -1,12 +1,10 @@
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.Date;
+import java.time.LocalTime;
+
 
 public class Deadline extends Task{
     protected LocalDate date;
-    protected Date time;
+    protected LocalTime time;
 
     Deadline(String description, String dateAndTime, TaskType taskType) {
         super(description, taskType);
@@ -19,22 +17,13 @@ public class Deadline extends Task{
         String timeFormatted = timeUnformatted.substring(0, 2)
                 + ":"
                 + timeUnformatted.substring(2, 4);
-        SimpleDateFormat _24HourFormat = new SimpleDateFormat("HH:mm");
-        try {
-            this.time = _24HourFormat.parse(timeFormatted);
-        } catch (ParseException e) {
-            System.out.println("Hmm that didn't work... Is your time in HHMM format?");
-        }
+        this.time = LocalTime.parse(timeFormatted);
     }
 
-    public String printDate() {
-        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("E, MMM dd yyyy");
-        return dateTimeFormatter.format(date);
-    }
-
-    public String printTime() {
-        SimpleDateFormat _12HourFormat = new SimpleDateFormat("hh:mm a");
-        return _12HourFormat.format(time);
+    Deadline(String description, TaskType taskType, boolean isDone, LocalDate date, LocalTime time) {
+        super(description, taskType, isDone);
+        this.date = date;
+        this.time = time;
     }
 
     @Override
@@ -42,6 +31,6 @@ public class Deadline extends Task{
 
         return "[Deadline]"
                 + super.toString()
-                + "(by: " + this.printDate() + " " + this.printTime() + ")";
+                + "(by: " + this.date + " " + this.time + ")";
     }
 }

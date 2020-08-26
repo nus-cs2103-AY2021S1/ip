@@ -9,6 +9,12 @@ public class Task {
         this.taskType = taskType;
     }
 
+    public Task(String description, TaskType taskType, boolean isDone) {
+        this.description = description;
+        this.isDone = isDone;
+        this.taskType = taskType;
+    }
+
     public String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }

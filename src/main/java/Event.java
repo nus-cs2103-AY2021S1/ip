@@ -1,13 +1,11 @@
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.Date;
+import java.time.LocalTime;
+
 
 public class Event extends Task {
         protected LocalDate date;
-        protected Date timeStart;
-        protected Date timeEnd;
+        protected LocalTime timeStart;
+        protected LocalTime timeEnd;
 
     Event(String description, String dateAndTime, TaskType taskType) {
         super(description, taskType);
@@ -25,34 +23,20 @@ public class Event extends Task {
         String timeEndFormatted = timeEndUnformatted.substring(0, 2)
                 + ":"
                 + timeEndUnformatted.substring(2, 4);
-        SimpleDateFormat _24HourFormat = new SimpleDateFormat("HH:mm");
-        try {
-            this.timeStart = _24HourFormat.parse(timeStartFormatted);
-            this.timeEnd = _24HourFormat.parse(timeEndFormatted);
-        } catch (ParseException e) {
-            System.out.println("Hmm that didn't work... Is your time in HHMM format?");
-        }
+        this.timeStart = LocalTime.parse(timeStartFormatted);
+        this.timeEnd = LocalTime.parse(timeEndFormatted);
     }
 
-    public String printDate() {
-        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("E, MMM dd yyyy");
-        return dateTimeFormatter.format(date);
-    }
-
-    public String printTime() {
-        SimpleDateFormat _12HourFormat = new SimpleDateFormat("hh:mm a");
-        return _12HourFormat.format(timeStart)
-                + " to "
-                + _12HourFormat.format(timeEnd);
-    }
-
-    public boolean hasSameDateAs(LocalDate d1) {
-        return this.date.equals(d1);
+    Event(String description, TaskType taskType, boolean isDone, LocalDate date, LocalTime timeStart, LocalTime timeEnd) {
+        super(description, taskType, isDone);
+        this.date = date;
+        this.timeStart = timeStart;
+        this.timeEnd = timeEnd;
     }
 
     @Override
     public String toString() {
         return "[Event]" + super.toString()
-                + "(at: " + this.printDate() + " " + this.printTime() + ")";
+                + "(at: " + this.date + " " + this.timeStart + "-" + this.timeEnd + ")";
     }
 }
