@@ -27,7 +27,7 @@ public class Duke {
         tasks = storage.loadTask();
     }
 
-    // Driver method to respond to user input
+    // Driver method to respond to user inputs
     private void run(String userInput) {
         while (!userInput.equals("bye")) {
             try {
