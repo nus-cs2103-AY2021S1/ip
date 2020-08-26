@@ -36,6 +36,8 @@ public class Ui {
         printLogo();
         printBorder();
         printGeneralChatWindow("Greetings! I'm Awesome-O.", "What can I do for you?");
+        printGeneralChatWindow("");
+        printGeneralChatWindow("...PSST! Type \"help\" for more information!");
         printBorder();
     }
 
@@ -46,6 +48,15 @@ public class Ui {
      */
     public String readInput() {
         return scanner.nextLine();
+    }
+
+    /**
+     * Prints a chat window showing the list of available commands for the user input.
+     *
+     * @param commands A collection of commands whose description is to be printed.
+     */
+    public void printHelpWindow(String[] commands) {
+        printGeneralChatWindow(commands);
     }
 
     /**

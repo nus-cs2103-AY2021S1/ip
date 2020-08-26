@@ -8,6 +8,32 @@
     _________________________________________________________
     Greetings! I'm Awesome-O.
     What can I do for you?
+
+    ...PSST! Type "help" for more information!
+    _________________________________________________________
+    _________________________________________________________
+    - Help: Provides a list of possible commands
+        "help"
+    - List: Shows the list of tasks
+        "list"
+    - Done: Marks a task as complete
+        "done <task number>"
+    - Delete: Deletes a task from the list
+        "delete <task number>"
+    - Clear: Deletes ALL tasks from the list
+        "clear"
+    - Todo: Creates a todo task with specific description
+        "todo <description>"
+    - Event: Creates an event task with specific description and date/time
+        "event <description> /at <time>"
+        Time formatting: dd-MM-yyyy HH:mm
+    - Deadline: Creates a deadline task with specific description and date/time
+        "deadline <description> /at <time>"
+        Time formatting: dd-MM-yyyy HH:mm
+    - Find: Searches for task(s) which match the given keyword(s)
+        "find <keyword(s)>"
+    - Bye: Ends the conversation with Awesome-O
+        "bye"
     _________________________________________________________
     _________________________________________________________
     All tasks have been cleared!

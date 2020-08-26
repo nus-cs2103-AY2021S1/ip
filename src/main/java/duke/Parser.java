@@ -18,6 +18,9 @@ public class Parser {
         String tag = input.split(" ")[0];
 
         switch (tag) {
+        case "help":
+            return new HelpCommand();
+
         case "list":
             return new ListCommand();
 
