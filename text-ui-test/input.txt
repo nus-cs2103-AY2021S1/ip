@@ -1,0 +1,14 @@
+hi friend
+hi
+blah
+todo buy bread
+deadline submit lab report /by Thursday
+event project meeting /at Sunday 12pm
+list
+done 2
+list
+delete 2
+todo
+deadline
+bye
+

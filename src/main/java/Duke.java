@@ -65,6 +65,8 @@ public class Duke {
                     System.out.println("Noted. I've removed this task: " + "\n" +
                             r.toString() + "\n" + "Now you have " + listOfStuff.size() + " tasks in the list.");
 
+                }else{
+                    System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
             }catch (Exception ex){
                 System.out.println(new DukeException().toString());
