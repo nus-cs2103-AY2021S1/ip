@@ -52,6 +52,28 @@ public class Ui {
         );
     }
 
+    public static void printForFind(ArrayList<Task> arr) {
+        if (arr.size() == 0) {
+            System.out.println("There is no task that matches your searchword");
+        } else {
+            System.out.println("Here are the matching tasks in your list:");
+            int counter = 1;
+            for (Task t: arr) {
+                String keyword = "";
+                String toPrint = "";
+                if (t instanceof Deadline) {
+                    keyword = "by";
+                    toPrint = " (" + keyword + ": " + t.time + ")";
+                } else if (t instanceof Event) {
+                    keyword = "at";
+                    toPrint = " (" + keyword + ": " + t.time + ")";
+                }
+                System.out.println(counter + ". " + t.getIndicator() + t.getIcon() + t.name + toPrint);
+                counter++;
+            }
+        }
+    }
+
     public static void printForDone(ArrayList<Task> arr, Task t) {
         String keyword = "";
         String toPrint = "";
@@ -96,6 +118,24 @@ public class Ui {
     public void respondToList() throws Exception {
         System.out.println("Here are the tasks in the list: ");
         s.printList();
+    }
+
+    public void respondToFindFail() {
+        System.out.println("The specified todo does not exist!");
+    }
+
+    public void respondToFindWrongSyntax() {
+        System.out.println("Provide a number of the todo that you want to mark as done!");
+    }
+
+    public void respondToFind(String searchWord) throws Exception {
+        ArrayList<Task> temp = new ArrayList<>();
+        for (Task t: tl.arr) {
+            if (t.name.contains(searchWord)) {
+                temp.add(t);
+            }
+        }
+        printForFind(temp);
     }
 
     public void respondToDoneFail() {
