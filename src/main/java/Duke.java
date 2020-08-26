@@ -23,7 +23,7 @@ public class Duke {
     /**
      * UI line divider
      */
-    public static final String lineDivider = "------------------------------------------\n";
+    public static final String lineDivider = "----------------------------------------\n";
 
     /**
      * Introduction message
