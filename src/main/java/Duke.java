@@ -1,11 +1,14 @@
 /**
- * Duke is a personal chatbot with the following functionalities:
- * (i) Adding and removing of Tasks to a list
- * (ii) Checking Tasks as completed
- * (iii) Viewing current task list
+ * Duke is a personal chat bot with the following functionalities:
+ *     (i) Adding and removing of Tasks to a list
+ *     (ii) Checking Tasks as completed
+ *     (iii) Viewing current task list
  *
- * Duke stores the task list in a txt file which is first created
- * when the user does not have such a file.
+ * The bot has the following components:
+ *     - TaskList - to add, remove, mark tasks
+ *     - Ui - to provide basic displays for user to interact with
+ *     - Storage - to read and write tasks into a .txt file
+ *
  * @author Andy Wu
  */
 
@@ -40,8 +43,13 @@ public class Duke {
 
     /**
      * The main algorithm of the bot which runs indefinitely as long as
-     * the running flag is true. The bot takes in user input, processes
-     * it and detects command/keywords.
+     * the running flag is true. The algorithm can be summarised as:
+     *     0. Show the welcome message
+     *     1. Read raw user input
+     *     2. Parse user input and create the appropriate command
+     *     3. Execute the command
+     *     4. Repeat 1-3 until an exit command
+     *     5. Show the exit message
      */
     public void run() {
         ui.showWelcome();
@@ -59,8 +67,7 @@ public class Duke {
     }
 
     /**
-     * Prints a display of the bot's logo, level, and name,
-     * before instantiating and running the bot.
+     * Driver to create the chat bot object and run it.
      * @param args optional and will be treated as the first user input.
      */
     public static void main(String[] args) {

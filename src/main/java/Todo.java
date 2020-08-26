@@ -1,8 +1,11 @@
 /**
- * Todo is a subtype of Task which has a description
- * of the task to be done. This task is rather similar
- * to the parent Task class, but is necessary to have it
- * be on the same level as the other subtypes of Task.
+ * Todo is a simple subtype of Task which has a description.
+ * Example:
+ *
+ *     [T][✘] cry
+ *
+ * The task description has no further parsing and will be taken
+ * literally as a string.
  */
 
 public class Todo extends Task {

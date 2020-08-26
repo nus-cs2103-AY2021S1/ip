@@ -1,14 +1,29 @@
 import java.util.List;
 import java.util.ArrayList;
 
+/**
+ * The TaskList encapsulates the list of tasks and is in charge of
+ * creating tasks, adding or removing tasks from the list, marking
+ * tasks as completed, and generating a print message of the list.
+ *
+ */
 public class TaskList {
 
+    /** The list containing Tasks objects. */
     private final List<Task> list;
 
+    /**
+     * Constructor for TaskList. This constructor is usually
+     * used when loading a list of tasks from the txt file.
+     * @param list the list of tasks.
+     */
     public TaskList(List<Task> list) {
         this.list = list;
     }
 
+    /**
+     * Constructor for TaskList to create an empty list.
+     */
     public TaskList() {
         this.list = new ArrayList<>();
     }
@@ -21,6 +36,21 @@ public class TaskList {
         return list;
     }
 
+    /**
+     * The static factory method to create the subtypes of Tasks:
+     *
+     *     - Todo: A simple task with a description
+     *     - Event: A task requiring attendance at a date and time
+     *     - Deadline: A task requiring completion by a date and time
+     *
+     * Creation of these tasks are based on the type input. After which,
+     * the description of the task will be parsed and handled individually
+     * by the appropriate subclasses.
+     * @param type the subtype of the Task to be created.
+     * @param description the raw description of the task.
+     * @return the created Task object.
+     * @throws DukeException when creation fails usually due to improper format description.
+     */
     public static Task createTask(String type, String description) throws DukeException {
         Task task = new Task("", "");
         String[] split;
@@ -61,6 +91,15 @@ public class TaskList {
         list.add(task);
     }
 
+    /**
+     * Removes the task of the given task number. The removed task
+     * is then returned for the application to print or handle if required.
+     * Important to note that task numbers are based on their indices in the list,
+     * and tasks after a deleted task will have their indices shifted down by one value.
+     * @param i the index of the task to be removed.
+     * @return the removed task.
+     * @throws DukeException when the index does not contain a task.
+     */
     public Task remove(int i) throws DukeException {
         try {
             i--;
@@ -70,6 +109,14 @@ public class TaskList {
         }
     }
 
+    /**
+     * Marks a task as completed and returns the same task for the application
+     * to print of handle if required. Indices are based on the objects' indices
+     * in the list.
+     * @param i the index of the task.
+     * @return the task.
+     * @throws DukeException when the index does not contain a task.
+     */
     public Task markDone(int i) throws DukeException {
         try {
             i--;
@@ -85,6 +132,20 @@ public class TaskList {
         }
     }
 
+    /**
+     * Generates a print message containing the list of tasks. The message
+     * will go through Ui formatting and be printed out. Example:
+     *
+     * >> list
+     *     --------------------------------------------------------
+     *     Here are the tasks in your list:
+     *     1. [T][✘] Mop the floor
+     *     2. [D][✘] assignment (by: Aug 26 2020, 11:59 pm)
+     *     3. [E][✘] future date (at: Feb 14 2021, 07:00 pm)
+     *     --------------------------------------------------------
+     *
+     * @return the formatted print message of the list.
+     */
     public String getPrintMessage() {
         if (list.isEmpty()) {
             return "Your list is empty!";
