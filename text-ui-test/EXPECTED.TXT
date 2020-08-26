@@ -7,7 +7,7 @@
 
 **************************************************
 
-Hello! I'm Duke
+Hello! I'm duke.Duke
 What can I do for you?
 
 **************************************************
@@ -15,7 +15,7 @@ What can I do for you?
 
 **************************************************
 
-Got it. I've added this task:
+Got it. I've added this duke.task:
 [T][Not Done] borrow book
 Now you have 1 tasks in the list.
 
@@ -33,14 +33,14 @@ Current tasks:
 
 **************************************************
 
-Please follow the format of event <task description> /at <event time>
+Please follow the format of event <duke.task description> /at <event duke.time>
 
 **************************************************
 
 
 **************************************************
 
-Got it. I've added this task:
+Got it. I've added this duke.task:
 [D][Not Done] return book (by: Sunday)
 Now you have 2 tasks in the list.
 
@@ -52,7 +52,7 @@ Now you have 2 tasks in the list.
 
 **************************************************
 
-Nice, I've marked this task as done:
+Nice, I've marked this duke.task as done:
 [D][Done] return book (by: Sunday)
 
 **************************************************
@@ -63,7 +63,7 @@ Nice, I've marked this task as done:
 
 **************************************************
 
-Got it. I've added this task:
+Got it. I've added this duke.task:
 [E][Not Done] project meeting (at: Mon 2-4pm)
 Now you have 3 tasks in the list.
 
@@ -85,7 +85,7 @@ Sorry 5 is not a valid index
 
 **************************************************
 
-Nice, I've marked this task as done:
+Nice, I've marked this duke.task as done:
 [T][Done] borrow book
 
 **************************************************
@@ -131,14 +131,14 @@ OOPS!!! The description of a todo cannot be empty.
 
 **************************************************
 
-Please follow the format of deadline <task description> /by <deadline>
+Please follow the format of deadline <duke.task description> /by <deadline>
 
 **************************************************
 
 
 **************************************************
 
-Got it. I've added this task:
+Got it. I've added this duke.task:
 [T][Not Done] have dinner
 Now you have 4 tasks in the list.
 
