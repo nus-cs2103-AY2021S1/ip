@@ -2,8 +2,8 @@ import javax.sound.sampled.Line;
 
 public class Ui {
     private static final String LINE = "____________________________________________________________" + "\n";
-    
-    public void printLine() {
+
+    private void printLine() {
         System.out.println(LINE);
     }
     

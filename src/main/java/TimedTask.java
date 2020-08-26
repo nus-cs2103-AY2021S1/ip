@@ -18,7 +18,11 @@ public class TimedTask extends Task {
                 DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm"));
         this.taskType = "TimedTask";
     }
-    
+
+    public String getDateTime() {
+        return dateTime.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm"));
+    }
+
     @Override
     public String encode() {
         String dateTimeFormat = dateTime.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm"));

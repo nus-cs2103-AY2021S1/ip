@@ -31,6 +31,10 @@ public class Task {
         this.icon = TICK;
         this.isDone = true;
     }
+    
+    public String getName() {
+        return name;
+    }
 
     @Override
     public String toString() {
