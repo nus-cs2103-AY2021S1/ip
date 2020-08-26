@@ -16,13 +16,27 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * This class handles the saving and loading of the file that contains the TaskList.
+ */
 public class Storage {
     protected String filePath;
 
+    /**
+     * Constructor for storage object.
+     *
+     * @param filePath the file path of the save file.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * A method that loads and reads the save file and output the Tasks into an ArrayList.
+     *
+     * @return ArrayList of Tasks.
+     * @throws DukeException If the save file is blank or syntax error exists.
+     */
     public ArrayList<Task> loadFile() throws DukeException {
         ArrayList<Task> tasks = new ArrayList<>();
         try {
@@ -59,6 +73,12 @@ public class Storage {
         }
     }
 
+    /**
+     * A method that saves the TaskList into the save file specified.
+     *
+     * @param list TaskList object.
+     * @throws DukeException If IOException occurs.
+     */
     public void saveFile(TaskList list) throws DukeException {
         try {
             FileWriter fileWriter = new FileWriter(filePath);
