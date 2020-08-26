@@ -1,5 +1,12 @@
+package command;
+
+import logic.Storage;
+import logic.Ui;
+import tasks.Task;
+import tasks.TaskList;
+
 /**
- * List all tasks that Duke currently has.
+ * List all tasks that logic.Duke currently has.
  */
 public class ListCommand extends Command{
     
@@ -7,8 +14,8 @@ public class ListCommand extends Command{
         super(input);
     }
     /**
-     * List out all tasks that Duke is currently handling.
-     * @param tasks List of all tasks Duke has.
+     * List out all tasks that logic.Duke is currently handling.
+     * @param tasks List of all tasks logic.Duke has.
      * @param ui Handles the output that the user sees.
      * @param storage Writing of the save file.
      */

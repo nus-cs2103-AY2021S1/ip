@@ -1,3 +1,8 @@
+package logic;
+
+import command.*;
+import exception.InvalidInputException;
+
 /**
  * Takes in the input from the user and tries to make sense of it.
  * Throws error if input is incorrect

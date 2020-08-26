@@ -1,3 +1,6 @@
 [T][✘] oranges
 [E][✘] kiwi (at: 18:00 Sep 9 2020)
 [D][✘] ostrich (by: 19:00 Sep 9 2020)
+[T][✘] one
+[E][✘] five (at: 18:00 Aug 31 2020)
+[D][✘] six (by: 19:00 Aug 31 2020)

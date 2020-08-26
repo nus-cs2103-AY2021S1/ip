@@ -1,5 +1,7 @@
+package tasks;
+
 /**
- * Parent class of all tasks that Duke can handle
+ * Parent class of all tasks that logic.Duke can handle
  */
 
 public class Task {

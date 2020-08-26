@@ -1,5 +1,6 @@
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import tasks.Deadlines;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;

@@ -1,8 +1,12 @@
+package tasks;
+
+import tasks.Task;
+
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Represents the List of all the tasks that Duke
+ * Represents the List of all the tasks that logic.Duke
  * is handling this iteration
  */
 public class TaskList {
@@ -25,7 +29,7 @@ public class TaskList {
     }
 
     /**
-     * Removes Task at the given index.
+     * Removes tasks.Task at the given index.
      *
      * @param index Represents the index of the item to be removed.
      */

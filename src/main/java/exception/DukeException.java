@@ -1,6 +1,8 @@
+package exception;
+
 /**
  * Parent exception class of all exceptions that
- * Duke is expected to experience
+ * logic.Duke is expected to experience
  */
 
 public class DukeException extends Exception {

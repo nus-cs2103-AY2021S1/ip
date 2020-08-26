@@ -1,6 +1,8 @@
+package tasks;
+
 /**
  * Represents the todos of the user that he input
- * into Duke
+ * into logic.Duke
  */
 public class ToDos extends Task {
     public ToDos (String taskDesc) {

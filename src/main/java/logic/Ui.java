@@ -1,7 +1,9 @@
+package logic;
+
 import java.util.Scanner;
 
 /**
- * Handles what the user will be seeing when running Duke.
+ * Handles what the user will be seeing when running logic.Duke.
  */
 public class Ui {
 
@@ -24,7 +26,7 @@ public class Ui {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
         System.out.println("\t____________________________________________________________");
-        System.out.println("\tHello! I'm Duke\n\tWhat can I do for you?");
+        System.out.println("\tHello! I'm logic.Duke\n\tWhat can I do for you?");
         System.out.println("\t____________________________________________________________");
     }
 

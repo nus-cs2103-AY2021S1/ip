@@ -1,5 +1,12 @@
+package command;
+
+import exception.InvalidSaveFileException;
+import logic.Storage;
+import logic.Ui;
+import tasks.TaskList;
+
 /**
- * Represents the command to close Duke
+ * Represents the command to close logic.Duke
  */
 public class ExitCommand extends Command {
 
@@ -9,7 +16,7 @@ public class ExitCommand extends Command {
 
     /**
      * Executes the command to save the files for closing.
-     * @param tasks List of tasks that Duke is handling.
+     * @param tasks List of tasks that logic.Duke is handling.
      * @param ui Handles what the user reads.
      * @param storage Writes the save file.
      * @throws InvalidSaveFileException If there is an issue writing the save file.

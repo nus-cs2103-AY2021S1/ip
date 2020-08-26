@@ -1,3 +1,12 @@
+package command;
+
+import exception.InvalidInputException;
+import exception.InvalidSaveFileException;
+import logic.Storage;
+import logic.Ui;
+import tasks.Task;
+import tasks.TaskList;
+
 /**
  * Represents the command from the user to complete an
  * existing task.
@@ -11,7 +20,7 @@ public class DoneCommand extends Command{
     /**
      * Completes the task that the user specified.
      * @param tasks List of tasks.
-     * @param ui Ui Object that handles printing.
+     * @param ui logic.Ui Object that handles printing.
      * @param storage Handles the rewriting of save file.
      * @throws InvalidInputException If command is poorly written.
      * @throws InvalidSaveFileException If there is an issue writing the save file.

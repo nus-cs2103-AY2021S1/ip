@@ -1,3 +1,11 @@
+package logic;
+
+import exception.InvalidSaveFileException;
+import tasks.Deadlines;
+import tasks.Events;
+import tasks.Task;
+import tasks.ToDos;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -20,7 +28,7 @@ public class Storage {
      * Called upon startup. Reads save file if there is one, else creates
      * a blank save file.
      *
-     * @return A List populated by the Task from previous save file.
+     * @return A List populated by the tasks.Task from previous save file.
      * @throws InvalidSaveFileException If there is an issue with creating the save file.
      */
     public List<Task> readFile() throws InvalidSaveFileException {
@@ -73,9 +81,9 @@ public class Storage {
     }
 
     /**
-     * Called every time the list is updated or Duke is closed.
+     * Called every time the list is updated or logic.Duke is closed.
      *
-     * @param toDoList The current tasks in Duke.
+     * @param toDoList The current tasks in logic.Duke.
      * @throws InvalidSaveFileException If there is an issue creating or writing the save file.
      */
     public void saveFile(List<Task> toDoList) throws InvalidSaveFileException {
@@ -92,7 +100,7 @@ public class Storage {
             }
             fw.close();
         } catch (IOException e) {
-            throw new InvalidSaveFileException("\t☹ OOPS!!! Duke is experiencing IO errors when writing to save file!");
+            throw new InvalidSaveFileException("\t☹ OOPS!!! logic.Duke is experiencing IO errors when writing to save file!");
         }
     }
 }

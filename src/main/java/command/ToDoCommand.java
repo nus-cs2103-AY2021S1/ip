@@ -1,5 +1,14 @@
+package command;
+
+import exception.InvalidInputException;
+import exception.InvalidSaveFileException;
+import logic.Storage;
+import logic.Ui;
+import tasks.TaskList;
+import tasks.ToDos;
+
 /**
- * Adds the todos entry into Duke's list.
+ * Adds the todos entry into logic.Duke's list.
  */
 public class ToDoCommand extends Command {
     public ToDoCommand(String input) {

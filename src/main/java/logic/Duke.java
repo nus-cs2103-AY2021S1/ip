@@ -1,6 +1,13 @@
+package logic;
+
+import command.Command;
+import exception.DukeException;
+import exception.InvalidSaveFileException;
+import tasks.TaskList;
+
 /**
- * Represents a Duke object. Handles all the logic running
- * of Duke
+ * Represents a logic.Duke object. Handles all the logic running
+ * of logic.Duke
  */
 
 public class Duke {
@@ -23,7 +30,7 @@ public class Duke {
     }
 
     /**
-     * Driving method of Duke, handles all the running process
+     * Driving method of logic.Duke, handles all the running process
      *
      */
     public void run() {

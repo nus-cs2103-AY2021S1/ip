@@ -1,3 +1,11 @@
+package command;
+
+import exception.InvalidInputException;
+import logic.Storage;
+import logic.Ui;
+import tasks.Task;
+import tasks.TaskList;
+
 import java.util.List;
 
 /**
@@ -11,7 +19,7 @@ public class FindCommand extends Command{
     }
 
     @Override
-    void execute(TaskList tasks, Ui ui, Storage storage) throws InvalidInputException {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws InvalidInputException {
         if (super.input.length() <= 5) {
             throw new InvalidInputException("\tDescription of item to find cannot be empty! Please try again!");
         }
@@ -27,7 +35,7 @@ public class FindCommand extends Command{
     }
 
     @Override
-    boolean isExit() {
+    public boolean isExit() {
         return false;
     }
 }
