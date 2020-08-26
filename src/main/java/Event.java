@@ -1,11 +1,20 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Handles instances of Event, a subclass of Task that involves description and LocalDate
+ *
+ */
 public class Event extends Task {
 
     private String identifier;
     private LocalDate date;
 
+    /**
+     * Constructor for Event instance
+     *
+     * @param description includes specific details of event, and date in YYYY-MM-DD format
+     */
     public Event(String description) {
         super(description);
         this.identifier = "E";
@@ -15,16 +24,31 @@ public class Event extends Task {
         this.date = LocalDate.parse(dateArray[1]);
     }
 
+    /**
+     * Getter function to retrieve identifier to help with writing to duke.txt file
+     *
+     * @return
+     */
     @Override
     public String getIdentifier() {
         return identifier;
     }
 
+    /**
+     * Separates the date from description and reformats the date to MMM D YYY
+     *
+     * @return
+     */
     public String getDate() {
         return this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
     }
 
-    //separates date from description
+
+    /**
+     * Getter function that separates the event details from the date
+     *
+     * @return
+     */
     @Override
     public String getDescription() {
         String fullDescription = super.getDescription();

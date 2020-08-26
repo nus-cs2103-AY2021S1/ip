@@ -1,6 +1,9 @@
 import java.io.*;
 
-
+/**
+ * Utility class to help write to and modify .txt files
+ *
+ */
 public class Storage {
 
     private String filePath;
@@ -9,6 +12,12 @@ public class Storage {
         this.filePath = filePath;
     }
 
+    /**
+     * Appends task description to a .txt file
+     *
+     * @param task
+     * @throws IOException
+     */
     public void writeToFile(Task task) throws IOException {
         FileWriter fw = new FileWriter(this.filePath, true);
         if (task instanceof Todo) {
@@ -21,7 +30,11 @@ public class Storage {
         fw.close();
     }
 
-    //helper function to update done status of task
+    /**
+     * helper function to update the done status of task
+     *
+     * @param replaceWith
+     */
     public void replaceDone(String replaceWith) {
         try {
             // input the file content to the StringBuffer "input"

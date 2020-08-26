@@ -1,11 +1,20 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Handles instances of Deadline, a subclass of Task that involves description and LocalDate
+ *
+ */
 public class Deadline extends Task {
 
     private String identifier;
     private LocalDate date;
 
+    /**
+     * Constructor for Deadline instance
+     *
+     * @param description includes specific details of event, and date in YYYY-MM-DD format
+     */
     public Deadline(String description) {
         super(description);
         this.identifier = "D";
@@ -15,12 +24,21 @@ public class Deadline extends Task {
         this.date = LocalDate.parse(dateArray[1]);
     }
 
+    /**
+     * Getter function to retrieve identifier to help with writing to duke.txt file
+     *
+     * @return
+     */
     @Override
     public String getIdentifier() {
         return identifier;
     }
 
-    //separates date from description
+    /**
+     * Separates the date from description and reformats the date to MMM D YYY
+     *
+     * @return
+     */
     @Override
     public String getDescription() {
         String fullDescription = super.getDescription();
@@ -28,6 +46,11 @@ public class Deadline extends Task {
         return desArray[0];
     }
 
+    /**
+     * Getter function that separates the event details from the date
+     *
+     * @return
+     */
     public String getDate() {
         return this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
     }

@@ -1,5 +1,15 @@
+/**
+ * DukeExceptionHandler outputs exception messages
+ *
+ */
 public class DukeExceptionHandler {
 
+    /**
+     * Static method that handles exception by releasing error message
+     *
+     * @param input
+     * @return String of error message
+     */
     public static String handleException(String input) {
 
         if (input.equals("todo") || input.equals("deadline") || input.equals("event")) {

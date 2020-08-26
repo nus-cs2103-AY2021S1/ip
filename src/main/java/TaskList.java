@@ -1,15 +1,30 @@
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * TaskList class handles the operations to modify list of tasks given by the user
+ *
+ */
 public class TaskList {
 
     private ArrayList<Task> taskArrayList;
 
+    /**
+     * Constructor for TaskList with no argument, creates empty ArrayList
+     *
+     */
     public TaskList() {
         taskArrayList = new ArrayList<>();
     }
 
 
+    /**
+     * Adds task to taskArrayList, writes to duke.txt file
+     *
+     * @param storage to write to duke.txt file
+     * @param task to be printed and written
+     * @throws IOException for errors relating to parsing of the file in the storage.writeToFile function
+     */
     public void addTask(Storage storage, Task task) throws IOException {
         taskArrayList.add(task);
         Ui.print("     Got it. I've added this task:\n" + "     " + task.toString() +
@@ -18,13 +33,10 @@ public class TaskList {
     }
 
 
-    public Task getTask(int i) throws DukeException {
-        if (i < 0 || i >= taskArrayList.size()) {
-            throw new DukeException("invalid task number");
-        }
-        return taskArrayList.get(i);
-    }
-
+    /**
+     * prints list of tasks when user inputs "list"
+     *
+     */
     public void printTasks() {
         if (taskArrayList.size() == 0){
             Ui.print("There are no tasks!\n");
@@ -32,6 +44,12 @@ public class TaskList {
         else Ui.printList(this.taskArrayList);
     }
 
+    /**
+     * removes task of ith position (in a 1 to n index) from arrayList and prints the resulting list
+     *
+     * @param i
+     * @throws DukeException
+     */
     public void delete(int i) throws DukeException {
         if (i < 0 || i > taskArrayList.size()) {
             throw new DukeException("invalid task number");
@@ -40,6 +58,12 @@ public class TaskList {
         Ui.printList(this.taskArrayList);
     }
 
+    /**
+     * Marks list in taskArrayList as done, updates entries in duke.txt file
+     *
+     * @param i
+     * @param storage
+     */
     public void setDone(int i, Storage storage) {
         Task doneTask = taskArrayList.get(i - 1);
         doneTask.markAsDone();

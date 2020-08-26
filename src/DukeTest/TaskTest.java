@@ -2,6 +2,10 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * handles testing for the class Task toString() method
+ *
+ */
 class TaskTest {
 
     @Test
