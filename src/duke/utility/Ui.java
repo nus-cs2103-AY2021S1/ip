@@ -17,7 +17,7 @@ import java.util.Scanner;
  */
 public class Ui {
     private Scanner sc;
-    private final String indentation = "  ";
+    private final String INDENTATION = "  ";
 
     /**
      * Constructs a new Ui object.
@@ -59,7 +59,7 @@ public class Ui {
      * @return done success message
      */
     public String doneSuccess(Task task) {
-        return "Sucessfully marked this task as done:\n" + indentation + task.toString();
+        return "Sucessfully marked this task as done:\n" + INDENTATION + task.toString();
     }
 
     /**
@@ -71,7 +71,7 @@ public class Ui {
      * @return delete success message
      */
     public String deleteSuccess(Task task, int taskSize) {
-        return "Okay. I will delete this task:\n" + indentation + task + "\n" +
+        return "Okay. I will delete this task:\n" + INDENTATION + task + "\n" +
                 "Now you have " + taskSize + " " + (taskSize == 1 ? "task " : "tasks ") + "in the list.";
     }
 
@@ -84,7 +84,7 @@ public class Ui {
      * @return add success message
      */
     public String addSuccess(Task task, int taskSize) {
-        return "Okay. I will add this task:\n" + indentation + task + "\n" +
+        return "Okay. I will add this task:\n" + INDENTATION + task + "\n" +
                 "Now you have " + taskSize + " " + (taskSize == 1 ? "task " : "tasks ") + "in the list.";
     }
 
@@ -211,7 +211,7 @@ public class Ui {
         StringBuilder sb = new StringBuilder();
 
         while (sc.hasNext()) {
-            String textLine = indentation + sc.nextLine();
+            String textLine = INDENTATION + sc.nextLine();
             sb.append(textLine + "\n");
             width = Math.max(width, textLine.length() + 2);
         }

@@ -10,33 +10,32 @@ import duke.utility.Ui;
  * specific string for commands.
  */
 public abstract class Command {
-
     /** String to specify bye command. */
-    public static String BYE_COMMAND = "bye";
+    public static String COMMAND_BYE = "bye";
 
     /** String to specify list command. */
-    public static String LIST_COMMAND = "list";
+    public static String COMMAND_LIST = "list";
 
     /** String to specify done command. */
-    public static String DONE_COMMAND = "done";
+    public static String COMMAND_DONE = "done";
 
     /** String to specify delete command. */
-    public static String DELETE_COMMAND = "delete";
+    public static String COMMAND_DELETE = "delete";
 
     /** String to specify todo command. */
-    public static String TODO_COMMAND = "todo";
+    public static String COMMAND_TODO = "todo";
 
     /** String to specify deadline command. */
-    public static String DEADLINE_COMMAND = "deadline";
+    public static String COMMAND_DEADLINE = "deadline";
 
     /** String to specify event command. */
-    public static String EVENT_COMMAND = "event";
+    public static String COMMAND_EVENT = "event";
 
     /** String to specify taskafter command. */
-    public static String TASK_AFTER_COMMAND = "taskafter";
+    public static String COMMAND_TASK_AFTER = "taskafter";
 
     /** String to specify taskbefore command. */
-    public static String TASK_BEFORE_COMMAND = "taskbefore";
+    public static String COMMAND_TASK_BEFORE = "taskbefore";
 
     private boolean isExit;
 

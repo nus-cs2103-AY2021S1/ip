@@ -46,9 +46,10 @@ public class Parser {
      */
     public static String parseForSave(Task task) {
         String taskName = task.getTaskName();
-        String isDone = task.isDone() ? "1" : "0";
-
         String parsed = null;
+        String isDone = task.isDone()
+                ? "1"
+                : "0";
 
         if (task instanceof ToDoTask) {
             parsed = "T | " + isDone + " | " + taskName + "\n";
@@ -114,6 +115,7 @@ public class Parser {
      */
     public static Command parseUserInput(String userInput) throws DukeException {
         String[] userInputArr = userInput.split("\\s", 2);
+
         String command = userInputArr[0];
         String arg = null;
 
@@ -121,11 +123,11 @@ public class Parser {
             arg = userInputArr[1];
         }
 
-        if (command.equals(Command.BYE_COMMAND)) {
+        if (command.equals(Command.COMMAND_BYE)) {
             return new ExitCommand();
-        } else if (command.equals(Command.LIST_COMMAND)) {
+        } else if (command.equals(Command.COMMAND_LIST)) {
             return new ListCommand();
-        } else if (command.equals(Command.DONE_COMMAND)) {
+        } else if (command.equals(Command.COMMAND_DONE)) {
             if (arg == null) {
                 throw new DoneException();
             }
@@ -137,8 +139,9 @@ public class Parser {
             } catch (NumberFormatException e) {
                 throw new InvalidTaskNumberException();
             }
+
             return new DoneCommand(taskNumber);
-        } else if (command.equals(Command.DELETE_COMMAND)) {
+        } else if (command.equals(Command.COMMAND_DELETE)) {
             if (arg == null) {
                 throw new DeleteException();
             }
@@ -150,8 +153,9 @@ public class Parser {
             } catch (NumberFormatException e) {
                 throw new InvalidTaskNumberException();
             }
+
             return new DeleteCommand(taskNumber);
-        } else if (command.equals(Command.TASK_AFTER_COMMAND)) {
+        } else if (command.equals(Command.COMMAND_TASK_AFTER)) {
             if (arg == null) {
                 throw new InvalidDateFormatException();
             }
@@ -165,12 +169,13 @@ public class Parser {
             }
 
             return new TaskAfterCommand(parsedDate);
-        } else if (command.equals(Command.TASK_BEFORE_COMMAND)) {
+        } else if (command.equals(Command.COMMAND_TASK_BEFORE)) {
             if (arg == null) {
                 throw new InvalidDateFormatException();
             }
 
             LocalDate parsedDate;
+
             try {
                 parsedDate = LocalDate.parse(arg);
             } catch (DateTimeParseException e) {
@@ -178,12 +183,12 @@ public class Parser {
             }
 
             return new TaskBeforeCommand(parsedDate);
-        } else if (command.equals(Command.TODO_COMMAND)) {
+        } else if (command.equals(Command.COMMAND_TODO)) {
             if (arg == null) {
                 throw new ToDoException();
             }
             return new ToDoCommand(arg);
-        } else if (command.equals(Command.DEADLINE_COMMAND)) {
+        } else if (command.equals(Command.COMMAND_DEADLINE)) {
             if (arg == null) {
                 throw new DeadlineException();
             }
@@ -197,6 +202,7 @@ public class Parser {
             String taskForDeadline = arrForDeadline[0].trim();
             String dateForDeadline = arrForDeadline[1].trim();
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+
             LocalDateTime deadlineDate;
 
             try {
@@ -206,7 +212,7 @@ public class Parser {
             }
 
             return new DeadlineCommand(taskForDeadline, deadlineDate);
-        } else if (command.equals(Command.EVENT_COMMAND)) {
+        } else if (command.equals(Command.COMMAND_EVENT)) {
             if (arg == null) {
                 throw new EventException();
             }
@@ -219,6 +225,7 @@ public class Parser {
             String taskForEvent = arrForEvent[0].trim();
             String dateForEvent = arrForEvent[1].trim();
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+
             LocalDateTime eventDate;
 
             try {
