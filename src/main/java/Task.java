@@ -32,7 +32,7 @@ public class Task {
      * @return Icon corresponding to status.
      */
     protected String getStatusIcon() {
-        return (isDone ? "✓" : "X"); //return tick or X symbols
+        return (isDone ? "✓" : "X");
     }
 
     /**
