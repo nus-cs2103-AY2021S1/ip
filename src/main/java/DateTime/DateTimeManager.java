@@ -1,3 +1,8 @@
+package DateTime;
+
+import Errors.ErrorExceptions;
+import Tasks.task;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -15,7 +20,7 @@ public class DateTimeManager {
         LocalDate d = LocalDate.parse(s);
         return d;
     }
-    public static void addDate(task task, String date) throws ErrorExceptions{
+    public static void addDate(task task, String date) throws ErrorExceptions {
         Scanner sc = new Scanner(date);
         try{
             String d = sc.next();

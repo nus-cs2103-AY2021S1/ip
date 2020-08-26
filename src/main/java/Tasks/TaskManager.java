@@ -1,6 +1,12 @@
+package Tasks;
+
+import DateTime.DateTimeManager;
+import Errors.ErrorExceptions;
+import UI.UserInterface;
+import File.FileManager;
+
 import java.io.File;
 import java.io.IOException;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
@@ -86,5 +92,13 @@ public class TaskManager {
     }
     public static void fileDir(String d){
         fileDir = d;
+    }
+
+    public static ArrayList<task> getStore(){
+        ArrayList<task> clone = new ArrayList<>();
+        for(task i : store){
+            clone.add(i);
+        }
+        return clone;
     }
 }

@@ -1,73 +1,56 @@
-import java.time.LocalDateTime;
+package Parser;
+
+import Errors.ErrorExceptions;
+import Tasks.TaskManager;
+import Tasks.task;
+import UI.UserInterface;
+
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class InputManager {
     private static String fileDir;
 
-    public static void parse(String input) throws ErrorExceptions{
+    public static void parse(String input) throws ErrorExceptions {
         Scanner sc = new Scanner(input);
         String current = sc.next();
         TaskManager.fileDir(fileDir);
         if(current.equals("bye")){
-            UserInterface.stop();
+            ParseExit.execute();
         }
         else if(current.equals("delete")){
             try {
-                task t;
                 int index = sc.nextInt();
-                try {
-                    t = TaskManager.getTask(index);
-                    TaskManager.delete(index);
-                    UserInterface.done();
-                    System.out.println("    " + TaskManager.read(t));
-                    System.out.println("The tracked task has been deleted!");
-                } catch(NoSuchElementException e){
-                    throw new ErrorExceptions("There is no suck task!");
-                }
+                ParseDelete.execute(index);
             } catch(NoSuchElementException e){
-                throw new ErrorExceptions("There is no suck task!");
+                throw new ErrorExceptions("There is no such tasks!");
             }
         }
         else if(current.equals("done")){
             try {
                 task t;
                 int index = sc.nextInt();
-                try {
-                    t = TaskManager.getTask(index);
-                    TaskManager.completed(t);
-                    UserInterface.done();
-                    System.out.println("    " + TaskManager.read(t));
-                    System.out.println("The tracked task has been marked as completed! Congrats~~!");
-                } catch(IndexOutOfBoundsException e){
-                    throw new ErrorExceptions("There is no such task!");
-                }
+                ParseCompleted.execute(index);
             } catch(NoSuchElementException e){
-                throw new ErrorExceptions("There is no suck task!");
+                throw new ErrorExceptions("There is no such tasks!");
             }
         }
         else if(current.equals("list")){
-            TaskManager.listing();
+            ParseList.execute();
+        }
+        else if(current.equals("show")){
+            ParseShow.execute();
+        }
+        else if(current.equals("filter")){
+            String date = sc.next();
+            ParseFilter.execute(date);
         }
         else{ // add tasks
-            if(current.equals("todo")) {
-                String name = getName(input, 1);
-                TaskManager.newTask(name,"Todo",null, fileDir);
-            } else if(current.equals("deadline")){
-                String name = getName(input, 2);
-                String date = getDate(input,1);
-                TaskManager.newTask(name,"Deadline",date, fileDir);
-            } else if(current.equals("event")){
-                String name = getName(input, 2);
-                String date = getDate(input,2);
-                TaskManager.newTask(name,"Event",date, fileDir);
-            } else{
-                UserInterface.wrongCommand();
-            }
+            ParseAddTask.execute(current,input);
         }
     }
 
-    private static String getName(String input, int type) throws ErrorExceptions{
+    public static String getName(String input, int type) throws ErrorExceptions {
         Scanner sc = new Scanner(input);
         sc.next(); // skip first commandtype
         String name = "";
@@ -94,7 +77,7 @@ public class InputManager {
             throw new ErrorExceptions("Missing item name!");
         }
     }
-    private static String getDate(String input, int type) throws ErrorExceptions{
+    public static String getDate(String input, int type) throws ErrorExceptions {
         Scanner sc = new Scanner(input);
         String next = sc.next();
         String N = "" + next.charAt(0);
@@ -130,7 +113,7 @@ public class InputManager {
                 return date;
             }
             else{
-                throw new ErrorExceptions("Wrong deadline or event command format, missing /action: task");
+                throw new ErrorExceptions("Wrong deadline or event command format, missing /action: Tasks.task");
             }
         }
         return date;
@@ -138,4 +121,6 @@ public class InputManager {
     public static void fileDir(String d){
         fileDir = d;
     }
+
+    public static String getFileDir(){ return fileDir; }
 }

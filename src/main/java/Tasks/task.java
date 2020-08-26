@@ -1,8 +1,7 @@
+package Tasks;
+
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-import java.util.NoSuchElementException;
-import java.util.Scanner;
+
 
 public class task {
     protected static int count = 0;
@@ -44,5 +43,6 @@ public class task {
     public void setDate(LocalDateTime date){
         this.date = date;
     }
+
 
 }

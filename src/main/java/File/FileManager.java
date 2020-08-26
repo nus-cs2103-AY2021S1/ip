@@ -1,3 +1,9 @@
+package File;
+
+import DateTime.DateTimeManager;
+import Errors.ErrorExceptions;
+import Tasks.*;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -36,7 +42,7 @@ public class FileManager{
         } catch(NoSuchElementException e){}
         return name;
     }
-    private static String getDate(String s) throws ErrorExceptions{
+    private static String getDate(String s) throws ErrorExceptions {
         Scanner sc = new Scanner(s);
         String date = "";
         try{
@@ -63,7 +69,7 @@ public class FileManager{
         LocalDateTime dt = LocalDateTime.parse(date,d);
         return dt.format(DateTimeFormatter.ofPattern("dd-MM-uuuu HHmm"));
     }
-    private static int getType(String s) throws ErrorExceptions{
+    private static int getType(String s) throws ErrorExceptions {
         Scanner sc = new Scanner(s);
         try{
             String current = sc.next();
@@ -82,7 +88,7 @@ public class FileManager{
                     + e);
         }
     }
-    private static boolean getDone(String s) throws ErrorExceptions{
+    private static boolean getDone(String s) throws ErrorExceptions {
         Scanner sc = new Scanner(s);
         try{
             String current = sc.next();
