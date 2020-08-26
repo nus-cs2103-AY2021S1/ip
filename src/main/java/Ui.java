@@ -59,6 +59,20 @@ public class Ui {
         }
         System.out.println(LINE);
     }
+
+    // PRINT RELATED
+    public void printRelevant(TaskList taskList, String keyWord) {
+        System.out.println(LINE + "Here are the matching tasks in your list: \n");
+        for (int i = 1; i < taskList.getNoOfTasks() + 1; i++) {
+            Task cur = taskList.list.get(i - 1);
+            if (!cur.toString().contains(keyWord)) {
+                continue;
+            }
+            System.out.println("" + i + "." + cur);
+        }
+        System.out.println(LINE);
+    }
+
     public void emptyList() {
         Exception ex = new InvalidInputException("Oops, your list is currently empty. Add some tasks first!");
         System.err.println(LINE + ex.getMessage() + "\n" + LINE);

@@ -10,6 +10,12 @@ public class Parser {
             } else {
                 ui.printAll(taskList);
             }
+        } else if (pieces[0].equals("find")) { // listing command
+            if (taskList.list.isEmpty()) {
+                ui.emptyList();
+            } else {
+                ui.printRelevant(taskList, pieces[1]);
+            }
         } else if (pieces[0].equals("done")) { // Mark Done task command
             if (pieces.length == 1) { // task number is missing
                 ui.markDoneFailure();
