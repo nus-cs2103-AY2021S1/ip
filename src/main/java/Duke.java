@@ -1,16 +1,33 @@
+import java.io.File;
 import java.io.IOException;
 import java.util.Scanner;
 
 public class Duke {
+    private static final String SAVE_FILE_PATH =
+            System.getProperty("user.home") + File.separator + ".duke" + File.separator + "tasks.txt";
     private static final String BYE = "bye";
 
-    public static void main(String[] args) {
-        try (Scanner scanner = new Scanner(System.in)) {
-            Ui.displayGreeting();
+    private final Storage storage;
+    private final Ui ui;
+    private final TaskList tasks;
 
-            if (Storage.hasSavedTasks()) {
-                TaskList.addAllTasks(Storage.load());
-                Ui.displayGreetingReminder(TaskList.tasksCount());
+    public Duke(String filePath) {
+        this.ui = new Ui();
+        this.storage = new Storage(filePath);
+        this.tasks = new TaskList();
+        try {
+            this.tasks.addAllTasks(this.storage.load());
+        } catch (IOException e) {
+            this.ui.showLoadingError();
+        }
+    }
+
+    private void run() {
+        try (Scanner scanner = new Scanner(System.in)) {
+            this.ui.displayGreeting();
+
+            if (this.storage.hasSavedTasks()) {
+                this.ui.displayGreetingReminder(this.tasks.tasksCount());
             }
 
             System.out.print("> ");
@@ -18,69 +35,74 @@ public class Duke {
                 String input = scanner.nextLine();
 
                 if (input.equalsIgnoreCase(BYE)) {
-                    Storage.saveTasks(TaskList.getTasks());
+                    this.storage.saveTasks(this.tasks.getTasks());
                     break;
                 } else {
-                    Duke.handleCommand(input);
+                    this.handleCommand(input);
                 }
                 System.out.print("> ");
             }
 
-            Ui.displayGoodbye();
+            this.ui.displayGoodbye();
         } catch (IOException e) {
-            Ui.displayMessages(e.getMessage());
+            this.ui.displayMessages(e.getMessage());
         }
+
     }
 
-    private static void handleCommand(String input) {
+    public static void main(String[] args) {
+        new Duke(SAVE_FILE_PATH).run();
+    }
+
+    private void handleCommand(String input) {
         try {
             String[] tokens = input.split(" ");
             String command = tokens[0].toLowerCase();
             switch (command) {
             case "list": // show tasks available
-                Ui.displayTasks(TaskList.getTasks());
+                this.ui.displayTasks(this.tasks.getTasks());
                 break;
             case "done": {
                 if (tokens.length < 2) {
                     throw new InvalidInputException("Um, you need to tell me what it is you've done.");
                 }
                 int index = Integer.parseInt(tokens[1]) - 1;
-                Task task = TaskList.getTask(index);
+                Task task = this.tasks.getTask(index);
                 task.markDone();
-                Ui.displayMessages(
+                this.ui.displayMessages(
                         "Okay. So you've done:",
                         task.toString());
             }
             break;
             case "delete":
                 int index = Integer.parseInt(tokens[1]) - 1;
-                Task task = TaskList.getTask(index);
-                TaskList.deleteTask(index);
-                Ui.displayMessages(
+                Task task = this.tasks.getTask(index);
+                this.tasks.deleteTask(index);
+                this.ui.displayMessages(
                         "Right, you no longer want me to track:",
                         task.toString(),
-                        Ui.getTasksLeftMessage(TaskList.tasksCount()));
+                        this.ui.getTasksLeftMessage(this.tasks.tasksCount()));
                 break;
             case "todo":
             case "deadline":
             case "event": // it's a new task
-                Duke.addTask(command, input);
+                this.addTask(command, input);
                 break;
             default:
-                Ui.displayMessages("Um, I don't get what you're saying.");
+                this.ui.displayMessages("Um, I don't get what you're saying.");
                 break;
             }
         } catch (InvalidInputException e) {
-            Ui.displayMessages(e.getMessage());
+            this.ui.displayMessages(e.getMessage());
         }
     }
 
-    private static void addTask(String command, String input) throws InvalidTaskException {
+    private void addTask(String command, String input) throws InvalidTaskException {
         Task task = TaskParser.parseInput(command, input);
-        TaskList.addTask(task);
-        Ui.displayMessages(
+        this.tasks.addTask(task);
+        this.ui.displayMessages(
                 "Okay, you want to:",
                 task.toString(),
-                Ui.getTasksLeftMessage(TaskList.tasksCount()));
+                this.ui.getTasksLeftMessage(this.tasks.tasksCount()));
     }
 }

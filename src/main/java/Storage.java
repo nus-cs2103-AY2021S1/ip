@@ -3,13 +3,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Storage {
-    private static final String SAVE_FILE_PATH =
-            System.getProperty("user.home") + File.separator + ".duke" + File.separator + "tasks.txt";
+    private final String filePath;
+
+    public Storage(String filePath) {
+        this.filePath = filePath;
+    }
 
     // TODO: 26/8/20 Add more relevant error for parsing
-    public static List<Task> load() throws IOException {
+    public List<Task> load() throws IOException {
         List<Task> tasks = new ArrayList<>();
-        try (var br = new BufferedReader(new FileReader(SAVE_FILE_PATH))) {
+        try (var br = new BufferedReader(new FileReader(this.filePath))) {
             String line;
             while ((line = br.readLine()) != null) {
                 Task task = TaskParser.parse(line);
@@ -20,12 +23,12 @@ public class Storage {
     }
 
     // TODO: 26/8/20 consider a more robust check
-    public static boolean hasSavedTasks() {
-        return new File(SAVE_FILE_PATH).exists();
+    public boolean hasSavedTasks() {
+        return new File(this.filePath).exists();
     }
 
-    public static void saveTasks(List<Task> tasks) throws IOException {
-        File saveFile = new File(SAVE_FILE_PATH);
+    public void saveTasks(List<Task> tasks) throws IOException {
+        File saveFile = new File(this.filePath);
         if (!saveFile.exists()) {
             boolean directoryCreated = saveFile.getParentFile().mkdirs();
             if (!directoryCreated) {
@@ -38,7 +41,7 @@ public class Storage {
         }
 
         // Use PrintWriter wrapping BufferedWriter in FileWriter
-        try (var out = new PrintWriter(new BufferedWriter(new FileWriter(SAVE_FILE_PATH)))) {
+        try (var out = new PrintWriter(new BufferedWriter(new FileWriter(this.filePath)))) {
             for (Task task : tasks) {
                 out.println(task.toSaveString());
             }
