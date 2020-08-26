@@ -8,7 +8,7 @@ import java.time.format.FormatStyle;
 
 public class DateTimeConverter {
 
-    public DateTimeFormatter dtf;
+    protected DateTimeFormatter dtf;
 
     public DateTimeConverter(FormatStyle dateStyle, FormatStyle timeStyle) {
         this.dtf = DateTimeFormatter.ofLocalizedDateTime(dateStyle, timeStyle);
@@ -30,19 +30,18 @@ public class DateTimeConverter {
                     Integer.parseInt(time.substring(0, 2)), Integer.parseInt(time.substring(2)));
 
             date = date.replaceAll("\\D", "-");
-            String[] date_seg = date.split("-", 3);
-
-            if (date_seg[0].length() != 4) {
-                String temp = date_seg[0];
-                date_seg[0] = date_seg[2];
-                date_seg[2] = temp;
+            String[] dateSeg = date.split("-", 3);
+            if (dateSeg[0].length() != 4) {
+                String temp = dateSeg[0];
+                dateSeg[0] = dateSeg[2];
+                dateSeg[2] = temp;
             }
-            LocalDate ld = LocalDate.parse(date_seg[0] + "-" + date_seg[1] + "-" + date_seg[2]);
+            LocalDate ld = LocalDate.parse(dateSeg[0] + "-" + dateSeg[1] + "-" + dateSeg[2]);
 
             LocalDateTime ldt = LocalDateTime.of(ld, lt);
             return ldt.format(dtf);
         } catch (Exception ex) {
-            HandleException.handleException(DukeException.ExceptionType.improper_dateTime);
+            HandleException.handleException(DukeException.ExceptionType.IMPROPER_DATETIME);
             return dateTime;
         }
     }

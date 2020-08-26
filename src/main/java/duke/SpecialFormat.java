@@ -1,15 +1,13 @@
 package main.java.duke;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class SpecialFormat {
-    public static String separation_line = "    ____________________________________________________________";
-    public static String indent = "     ";
-    public static String starting_line = separation_line + "\n" + indent;
-    public static String ending_line = "\n" + separation_line + "\n";
-    public static String split_notn = "@#%#@%";
-    public static String CHANGE_LINE = "\n";
 
-    public SpecialFormat() {}
+    protected static String SEPARATION_LINE = "    ____________________________________________________________";
+    protected static String INDENT = "     ";
+    protected static String STARTING_LINE = SEPARATION_LINE + "\n" + INDENT;
+    protected static String ENDING_LINE = "\n" + SEPARATION_LINE + "\n";
+    protected static String SPLIT_NOTN = "@#%#@%";
+    protected static String CHANGE_LINE = "\n";
+
+    protected SpecialFormat() {}
 }
