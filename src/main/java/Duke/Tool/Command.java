@@ -72,6 +72,7 @@ public class Command {
     //handle deadline
     public void handleDeadline(String instruction, TaskList taskList, Ui ui) throws DukeException {
         int index = instruction.indexOf("/by");
+        
         if (index == 8) {
             String emoji = Emoji.SMILE.toString();
             String exceptionMsg = "OOPS!!! I'm sorry, but the description cannot be empty. \n"
@@ -107,13 +108,14 @@ public class Command {
     //handle event
     public void handleEvent(String instruction, TaskList taskList, Ui ui) throws DukeException {
         int index = instruction.indexOf("/at");
+        
         if (index == 5) {
             String emoji = Emoji.SMILE.toString();
             String exceptionMsg = "OOPS!!! I'm sorry, but the description cannot be empty. \n"
                     + "    You can do it by adding description after 'event '." + emoji ;
             throw new DukeException(exceptionMsg);
         }
-
+        
         if (index != -1) {
             String time = instruction.substring(index + 3);
             String description = instruction.substring(6, index);
@@ -131,7 +133,6 @@ public class Command {
             Event event = new Event(description, LocalDateTime.parse(time.substring(1), Parser.validFormat), false);
             taskList.addEvent(event);
             ui.printAddedEvent(taskList, event);
-
         } else {
             String emoji = Emoji.SMILE.toString();
             String exceptionMsg = "OOPS!!! I'm sorry, but you have to indicate the time of the event. \n"
@@ -139,4 +140,32 @@ public class Command {
             throw new DukeException(exceptionMsg);
         }
     }
+
+    /**
+     * Find a task by searching for a keyword.
+     * @param taskList a list of tasks.
+     * @param input find instructions.
+     * @throws DukeException indicates that the instruction is empty.
+     */
+    public void find(TaskList taskList, String input) throws DukeException {
+        if (input.length() == 4) {
+            String emoji = Emoji.SMILE.toString();
+            String exceptionMsg = "OOPS!!! I'm sorry, but the description cannot be empty. \n"
+                    + "    You can do it by adding description after 'find '." + emoji ;
+            throw new DukeException(exceptionMsg);
+        } else {
+            String query = input.substring(5);
+            int count = 0;
+            System.out.println("    ____________________________________________________________\n"
+                    + "    Here are the matching tasks in your list:");
+            for (int i = 0; i < taskList.getSize(); i++) {
+                if (taskList.get(i).getTaskDescription().contains(query)) {
+                    count += 1;
+                    System.out.println("    " + count + "." + taskList.get(i).toString());
+                }
+            }
+            System.out.println("    ____________________________________________________________\n");
+        }
+    } 
+    
 }
