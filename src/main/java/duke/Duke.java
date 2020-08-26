@@ -16,7 +16,7 @@ import java.util.Scanner;
 public class Duke {
     private TaskList tasks;
     private final Ui ui;
-    private boolean canExit = false;
+    private boolean canExit;
     private final Parser parser;
     
     /**

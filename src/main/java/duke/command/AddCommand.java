@@ -13,7 +13,7 @@ import java.util.ArrayList;
 public class AddCommand implements Command {
     
     private final String[] parsedInput;
-    private final String commandTag; // to tell what kind of new entry this is:
+    private final String commandTag; // indicates what kind of Task
     
     public AddCommand(String[] parsedInput) {
         this.parsedInput = parsedInput;
