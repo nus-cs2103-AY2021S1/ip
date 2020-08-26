@@ -17,6 +17,7 @@ public class Event extends Task {
     protected DateTimeFormatter dateParser = DateTimeFormatter.ofPattern("dd/MM/yy");
     protected DateTimeFormatter timeParser = DateTimeFormatter.ofPattern("HH:mm");
 
+
     /**
      * Constructor of a Event task with description, Date and/or Time and task status indicating
      * whether it is completed.
@@ -34,13 +35,6 @@ public class Event extends Task {
                 time = LocalTime.parse(dateTimeSplit[1], timeParser);
             }
             date = LocalDate.parse(dateTimeSplit[0], dateParser);
-            String s[] = at.split(" ");
-            if (s.length <= 1) {
-                time = null;
-            } else {
-                time = LocalTime.parse(s[1], timeParser);
-            }
-            date = LocalDate.parse(s[0], dateParser);
         } catch (DateTimeParseException e) {
             throw new DukeException("Yo! DateTime format is wrong. <dd/MM/yy [HH:MM]>");
         }

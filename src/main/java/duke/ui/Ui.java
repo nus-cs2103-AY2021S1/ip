@@ -141,11 +141,31 @@ public class Ui {
         System.out.println(duke + "I've deleted the task(s) you specified:");
     }
 
-
     /**
      * A message when the user quits duke using the command 'bye'.
      */
     public void showByeMsg() {
         System.out.println(duke + "See you soon!");
+    }
+
+    /**
+     * A message to user to prompt for input for 'find' command.
+     */
+    public void showFindPromptMsg() {
+        System.out.println(duke + "Enter a keyword:");
+    }
+
+    /**
+     * A header message to indicate the 'find' results.
+     */
+    public void showFoundMsg(String keyword) {
+        System.out.println(duke + "Here are the task(s) matching the keyword: " + keyword);
+    }
+
+    /**
+     * A header message to indicate no 'find' results.
+     */
+    public void showNotFoundMsg(String keyword) {
+        System.out.println(duke + "Found no task(s) matching the keyword: " + keyword);
     }
 }

@@ -45,7 +45,7 @@ public class Duke {
     public void run() {
         String userInput;
         String[] userInputArray;
-        boolean validInput = true;
+        boolean validInput;
 
         while (true) {
             userInput = ui.readInput();
@@ -91,6 +91,7 @@ public class Duke {
                             }
                             validInput = true;
                         } catch (DukeException e) {
+                            validInput = false;
                             ui.showErrorMsg(e);
                         }
                     } while (!validInput);
@@ -103,13 +104,39 @@ public class Duke {
                 }
 
                 break;
+            case "find":
+                if (tasks.isEmpty()) {
+                    ui.showListEmptyMsg();
+                } else {
+                    do {
+                        try {
+                            ui.showFindPromptMsg();
+                            userInput = ui.readInput();
+                            if (userInput.equals("")) {
+                                throw new DukeException("Yo! Enter a keyword.");
+                            }
+                            TaskList foundTasks;
+                            foundTasks = tasks.findTasks(userInput);
+                            if (!foundTasks.isEmpty()) {
+                                ui.showFoundMsg(userInput);
+                                ui.showTaskList(foundTasks);
+                            } else {
+                                ui.showNotFoundMsg(userInput);
+                            }
+                            validInput = true;
+                        } catch (DukeException e) {
+                            validInput = false;
+                            ui.showErrorMsg(e);
+                        }
+                    } while (!validInput);
+                }
+                break;
             case "todo":
                 do {
                     ui.showTaskAddAskMsg();
                     try {
                         userInput = ui.readInput();
                         if (userInput.equals("")) {
-                            validInput = false;
                             throw new DukeException("Yo! Task details are missing.");
                         }
                         Task toDo = new Todo(userInput);
@@ -117,6 +144,7 @@ public class Duke {
                         ui.showTaskAddedMsg(toDo);
                         validInput = true;
                     } catch (DukeException e) {
+                        validInput = false;
                         ui.showErrorMsg(e);
                     }
                 } while (!validInput);
