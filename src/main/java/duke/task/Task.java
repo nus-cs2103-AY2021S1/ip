@@ -17,6 +17,14 @@ public class Task {
         return new Task(name, isCompleted);
     }
 
+    public String getTaskName(){
+        return this.taskName;
+    }
+
+    public boolean getIsCompleted(){
+        return this.isCompleted;
+    }
+
     public Task markAsDone(){
         this.isCompleted = true;
         return this;
