@@ -1,3 +1,15 @@
+package duke.parser;
+
+import duke.command.Command;
+import duke.command.DoneCommand;
+import duke.command.ExitCommand;
+import duke.command.ListCommand;
+import duke.command.DeleteCommand;
+import duke.command.AddCommand;
+import duke.command.UnknownCommand;
+
+import duke.exception.DukeException;
+
 public class Parser {
     public static Command parse(String input) throws DukeException {
         String[] inputArr = input.split(" ");

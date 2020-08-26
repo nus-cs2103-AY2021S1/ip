@@ -1,6 +1,6 @@
-D:\CS2103T\ip\src\main\java\Deadline.java
+D:\CS2103T\ip\src\main\java\duke.task.Deadline.java
 D:\CS2103T\ip\src\main\java\Duke.java
-D:\CS2103T\ip\src\main\java\DukeException.java
-D:\CS2103T\ip\src\main\java\Event.java
-D:\CS2103T\ip\src\main\java\Task.java
-D:\CS2103T\ip\src\main\java\Todo.java
+D:\CS2103T\ip\src\main\java\duke.exception.DukeException.java
+D:\CS2103T\ip\src\main\java\duke.task.Event.java
+D:\CS2103T\ip\src\main\java\duke.task.Task.java
+D:\CS2103T\ip\src\main\java\duke.task.Todo.java

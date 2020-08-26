@@ -1,3 +1,10 @@
+package duke.command;
+
+import duke.exception.DukeException;
+import duke.storage.Storage;
+import duke.task.TaskList;
+import duke.ui.Ui;
+
 public class DeleteCommand extends Command {
     private final int index;
 
@@ -6,12 +13,12 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    protected void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         taskList.deleteTask(index, storage);
     }
 
     @Override
-    protected boolean isExit() {
+    public boolean isExit() {
         return false;
     }
 }
