@@ -1,3 +1,5 @@
+package bot;
+
 public class Ui {
     private String name;
 

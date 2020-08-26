@@ -1,3 +1,5 @@
+package bot;
+
 public class Parser {
     public Command parseInput(String input) throws InvalidInputException,
             InvalidCommandException {
