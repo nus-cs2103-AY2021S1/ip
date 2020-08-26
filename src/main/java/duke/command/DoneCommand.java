@@ -6,10 +6,20 @@ import duke.Ui;
 import duke.exception.DukeException;
 import duke.task.Task;
 
+/**
+ * Represents a command to mark tasks as done.
+ */
 public class DoneCommand extends Command {
 
+    /**
+     * The task number on the list to be marked as done.
+     */
     private final String taskNumber;
 
+    /**
+     * Constructs a command that marks a task as done.
+     * @param taskNumber the task number to be marked as done
+     */
     public DoneCommand(String taskNumber) {
         this.taskNumber = taskNumber;
     }
@@ -28,5 +38,9 @@ public class DoneCommand extends Command {
             throw new DukeException(errorMessage);
         }
     }
-    
+
+    @Override
+    public boolean isExit() {
+        return false;
+    }
 }

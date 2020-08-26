@@ -7,8 +7,15 @@ import duke.exception.DukeException;
 import duke.task.Task;
 import duke.task.Todo;
 
+/**
+ * Represents a command to add todos.
+ */
 public class TodoCommand extends AddCommand {
 
+    /**
+     * Constructs a command that adds a todo.
+     * @param description the description of the task
+     */
     public TodoCommand(String description) {
         super(description);
     }

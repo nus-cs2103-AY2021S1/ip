@@ -3,16 +3,28 @@ package duke.task;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents an Event task.
+ */
 public class Event extends Task {
+
+    /**
+     * The date of the event.
+     */
     private final LocalDate at;
 
+    /**
+     * Initializes an event object.
+     * @param description the description of the event
+     * @param at the date of the event
+     */
     public Event(String description, LocalDate at) {
         super(description);
         this.at = at;
     }
 
     @Override
-    public LocalDate getTime() {
+    public LocalDate getDate() {
         return this.at;
     }
 
