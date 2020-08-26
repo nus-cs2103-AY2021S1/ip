@@ -74,6 +74,30 @@ class DeleteEmptyBodyException extends EmptyBodyException {
     }
 }
 
+class DoneEmptyBodyException extends EmptyBodyException {
+    DoneEmptyBodyException() {}
+    @Override
+    public String toString() {
+        return "☹ OOPS!!! Empty done is invalid.";
+    }
+}
+
+class InvalidDeletionException extends Exception {
+    InvalidDeletionException() {}
+    @Override
+    public String toString() {
+        return "☹ OOPS!!! Deletion index is invalid.";
+    }
+}
+
+class InvalidDoneException extends Exception {
+    InvalidDoneException() {}
+    @Override
+    public String toString() {
+        return "☹ OOPS!!! Done index is invalid.";
+    }
+}
+
 class Todo extends Task {
     Todo(String message) {
         super(message);
@@ -143,6 +167,7 @@ public class Duke {
         final String messageList = "Here are the task(s) in your list:\n";
         final String messageMarked = "Nice! I've marked this task as done:\n";
         final String messageAdded = "Got it. I've added this task:\n";
+        final String messageDelete = "Noted. I've removed this task:\n";
 
         // set up scanner
         Scanner scanner = new Scanner(System.in);
@@ -178,10 +203,24 @@ public class Duke {
                     String extraCommand = currentCommand.split(" ", 2)[1];
                     if (priorCommand.equals("done")) {
                         int index = Integer.parseInt(extraCommand) - 1;
+                        if (index < 0 || index >= list.size()) {
+                            throw new InvalidDoneException();
+                        }
                         Task task = list.get(index);
                         task.setDone();
                         System.out.println(format(messageMarked + SPACE + "   "
                                 + task.getTypeLetter() + task.getStatusIcon() + task.getMessage()));
+                    } else if (priorCommand.equals("delete")) {
+                        int index = Integer.parseInt(extraCommand) - 1;
+                        if (index < 0 || index >= list.size()) {
+                            throw new InvalidDeletionException();
+                        }
+                        Task task = list.get(index);
+                        list.remove(index);
+                        String messageNum = "\n      Now you have " + list.size() + " task(s) in the list.";
+                        System.out.println(format(messageDelete + "        " + task.getTypeLetter()
+                                + task.getStatusIcon() + task.getMessage() + messageNum));
+
                     } else {
                         Task task;
                         switch (priorCommand) {
@@ -220,12 +259,16 @@ public class Duke {
                         case "delete":
                             ex = new DeleteEmptyBodyException();
                             break;
+                        case "done":
+                            ex = new DoneEmptyBodyException();
+                            break;
                         default:
                             ex = new UnknownCommandException();
                             break;
                     }
                     System.out.println(format(ex.toString()));
-
+                } catch (Exception e) {
+                    System.out.println(format(e.toString()));
                 }
             }
         }
