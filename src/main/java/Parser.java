@@ -110,6 +110,16 @@ public class Parser {
                 System.out.println(curr);
                 arr.add(curr);
                 System.out.println("Now you have " + arr.size() + " tasks in the list.");
+            } else if (in.equals("find")) {
+                System.out.println("Here are the matching tasks in your list:");
+                String match = scan.nextLine().substring(1);
+                for (int j = 1; j <= arr.size(); j++) {
+                    Task curr = arr.get(j - 1);
+                    if (curr.description.contains(match)) {
+                        String output = j + ". " + curr;
+                        System.out.println(output);
+                    }
+                }
             } else {
                 throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
