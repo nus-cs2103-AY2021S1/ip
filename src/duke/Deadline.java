@@ -19,7 +19,7 @@ public class Deadline extends Task {
             this.time = LocalTime.parse(arr[1]);
             this.isFormatted = true;
         } catch (DateTimeException e) {
-            System.out.println("Date format wrong!");
+            System.out.println("Date format wrong! eg. 2020-12-12 18:00");
             this.by = by;
         }
     }
