@@ -58,6 +58,7 @@ public class Cartona {
                 throw new InvalidTaskTimeException("");
             }
 
+            DateParser.parseDate(time);
             System.out.printf(taskList.addTask(new Deadline(name, time)));
 
         } else if (keyword.equals("event")) {

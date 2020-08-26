@@ -1,9 +1,11 @@
+import java.awt.*;
+
 public class Deadline extends Task {
-    private String dueTime;
+    private TaskDate dueTime;
 
     Deadline(String name, String dueTime) {
         super(name);
-        this.dueTime = dueTime;
+        this.dueTime = DateParser.parseDate(dueTime);
     }
 
     @Override
