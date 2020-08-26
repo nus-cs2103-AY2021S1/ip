@@ -1,6 +1,12 @@
 import java.io.IOException;
 
+/**
+ * A Duke program.
+ */
 public class Duke {
+    /**
+     * The file path for saving tasks.
+     */
     static final String FILE_PATH = "savedTasks.txt";
 
     public static void main(String[] args) {

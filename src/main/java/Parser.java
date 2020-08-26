@@ -4,23 +4,44 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+/**
+ * A parser for command-line user inputs.
+ */
 public class Parser {
-    // array of valid commands
+    /**
+     * An array of valid Duke commands to edit tasks.
+     */
     private final static List<String> COMMANDS = Arrays.asList("done",
                                                                "delete");
     private final TaskList userTaskList;
     private final Storage storage;
 
+    /**
+     * Constructs a Parser when no saved task list exists.
+     *
+     * @param storage A Storage instance to use when the parser needs to save to disk.
+     */
     Parser(Storage storage) {
         this.userTaskList = new TaskList();
         this.storage = storage;
     }
 
+    /**
+     * Constructs a Parser when a saved task list exists.
+     *
+     * @param storage A Storage instance to use when the parser needs to save to disk.
+     * @param userTaskList A TaskList instance that represents the existing save.
+     */
     Parser(Storage storage, TaskList userTaskList) {
        this.userTaskList = userTaskList;
        this.storage = storage;
     }
 
+    /**
+     * Parses user input strings from the command line.
+     *
+     * @throws IOException if an IO exception occurs when trying to read standard input.
+     */
     void scan() throws IOException {
         BufferedReader reader =
                 new BufferedReader(new InputStreamReader((System.in)));
