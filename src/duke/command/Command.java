@@ -15,6 +15,7 @@ public abstract class Command {
     public static String EVENT_COMMAND = "event";
     public static String TASK_AFTER_COMMAND = "taskafter";
     public static String TASK_BEFORE_COMMAND = "taskbefore";
+    public static String COMMAND_FIND = "find";
 
     private boolean isExit;
 

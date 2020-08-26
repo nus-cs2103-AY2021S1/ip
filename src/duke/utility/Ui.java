@@ -112,6 +112,26 @@ public class Ui {
         return sb.toString().trim();
     }
 
+    public String findTask(String keyword, TaskList tasks) {
+        StringBuilder sb = new StringBuilder();
+        boolean isFound = false;
+        int count = 1;
+
+        for (Task task : tasks.getTasks()) {
+            if (task.getTaskName().contains(keyword)) {
+                isFound = true;
+                sb.append(count + ". " + task + "\n");
+                count++;
+            }
+        }
+
+        if (isFound) {
+            return "Here are the matching tasks in your list:\n" + sb.toString().trim();
+        } else {
+            return "No task found with that keyword!";
+        }
+    }
+
     public void showError(DukeException e) {
         sendMessage(e.getMessage());
     }
