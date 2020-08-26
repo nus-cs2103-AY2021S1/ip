@@ -1,4 +1,4 @@
-package duke.Command;
+package duke.command;
 
 import duke.Storage;
 import duke.TaskList;

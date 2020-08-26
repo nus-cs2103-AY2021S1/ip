@@ -1,23 +1,22 @@
 package duke;
 
-import duke.Command.Command;
-import duke.Command.DeadlineCommand;
-import duke.Command.DeleteCommand;
-import duke.Command.DoneCommand;
-import duke.Command.EventCommand;
-import duke.Command.ExitCommand;
-import duke.Command.InvalidCommand;
-import duke.Command.ListCommand;
-import duke.Command.ToDoCommand;
-import duke.Command.FindCommand;
-
-import duke.Exception.DeadlineException;
-import duke.Exception.DeletionException;
-import duke.Exception.DoneException;
-import duke.Exception.DukeException;
-import duke.Exception.EventException;
-import duke.Exception.ToDoException;
-import duke.Exception.FindException;
+import duke.command.Command;
+import duke.command.DeadlineCommand;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.EventCommand;
+import duke.command.ExitCommand;
+import duke.command.FindCommand;
+import duke.command.InvalidCommand;
+import duke.command.ListCommand;
+import duke.command.ToDoCommand;
+import duke.exception.DeadlineException;
+import duke.exception.DeletionException;
+import duke.exception.DoneException;
+import duke.exception.DukeException;
+import duke.exception.EventException;
+import duke.exception.FindException;
+import duke.exception.ToDoException;
 
 public class Parser {
 
@@ -27,6 +26,7 @@ public class Parser {
      * @return Command object
      * @throws DukeException If input is wrong/not recognised
      */
+    @SuppressWarnings("checkstyle:AbbreviationAsWordInName")
     public static Command parse(String input) throws DukeException {
         if (input.equals("bye")) {
             // when user inputs bye
@@ -41,10 +41,12 @@ public class Parser {
 
             String[] temp = input.split(" ");
             if (temp.length == 1) {
-                throw new DoneException("Please input number after done! Example of input would be 'done 2' which checks item number 2 from list");
+                throw new DoneException("Please input number after done!"
+                        + " Example of input would be 'done 2' which checks item number 2 from list");
             }
             if (temp.length > 2) {
-                throw new DoneException("Too many arguements! Example of input would be 'done 2' which checks item number 2 from list");
+                throw new DoneException("Too many arguements!"
+                        + " Example of input would be 'done 2' which checks item number 2 from list");
             }
             int listNumber = Integer.parseInt(temp[1]);
             return new DoneCommand(input, listNumber);
@@ -57,8 +59,8 @@ public class Parser {
             if (temp.length != 2) {
                 if (temp.length > 2) {
                     // if user ended up using a dd/mm/yyyy HHHH format
-                    throw new DeadlineException("Please input date time format in DD-MM-YYYY HHHH format!\n" +
-                            "Eg: 2-12-2019 1800 OR 02-12-2019 1800");
+                    throw new DeadlineException("Please input date time format in DD-MM-YYYY HHHH format!\n"
+                            + "Eg: 2-12-2019 1800 OR 02-12-2019 1800");
                 } else {
                     throw new DeadlineException("Both time description and description of a deadline must be filled!");
                 }
@@ -76,25 +78,25 @@ public class Parser {
                 // timeTemp[0] = timeCommand which is a by or at
                 // timeTemp[1] = DDMMYYYY
                 // timeTemp[2] = HHHH
-                throw new DeadlineException("Please input date time format in DD-MM-YYYY HHHH format!\n" +
-                        "Eg: 2-12-2019 1800 OR 02-12-2019 1800");
+                throw new DeadlineException("Please input date time format in DD-MM-YYYY HHHH format!\n"
+                        + "Eg: 2-12-2019 1800 OR 02-12-2019 1800");
             }
 
             String timeCommand = timeTemp[0];
-            String DDMMYYYY = timeTemp[1];
-            String[] DDMMYYYtemp = DDMMYYYY.split("-");
-            String HHHH = timeTemp[2];
+            String dayMonthYear = timeTemp[1];
+            String[] dayMonthYearArr = dayMonthYear.split("-");
+            String twentyFourHourFormat = timeTemp[2];
 
-            if (DDMMYYYtemp.length != 3 || HHHH.length() != 4) {
-                throw new DeadlineException("Please input date time format in DD-MM-YYYY HHHH format!\n" +
-                        "Eg: 2-12-2019 1800 OR 02-12-2019 1800");
+            if (dayMonthYearArr.length != 3 || twentyFourHourFormat.length() != 4) {
+                throw new DeadlineException("Please input date time format in DD-MM-YYYY HHHH format!\n"
+                        + "Eg: 2-12-2019 1800 OR 02-12-2019 1800");
             }
 
-            int day = Integer.parseInt(DDMMYYYtemp[0]);
-            int month = Integer.parseInt(DDMMYYYtemp[1]);
-            int year = Integer.parseInt(DDMMYYYtemp[2]);
-            int hour = Integer.parseInt(HHHH.substring(0, 2));
-            int min = Integer.parseInt(HHHH.substring(2, 4));
+            int day = Integer.parseInt(dayMonthYearArr[0]);
+            int month = Integer.parseInt(dayMonthYearArr[1]);
+            int year = Integer.parseInt(dayMonthYearArr[2]);
+            int hour = Integer.parseInt(twentyFourHourFormat.substring(0, 2));
+            int min = Integer.parseInt(twentyFourHourFormat.substring(2, 4));
 
             return new DeadlineCommand(description, day, month, year, hour, min);
         } else if (input.startsWith("event")) {
@@ -106,8 +108,8 @@ public class Parser {
             if (temp.length != 2) {
                 if (temp.length > 2) {
                     // if user ended up using a dd/mm/yyyy HHHH format
-                    throw new EventException("Please input date time format in DD-MM-YYYY HHHH format!\n" +
-                            "Eg: 2-12-2019 1800 OR 02-12-2019 1800");
+                    throw new EventException("Please input date time format in DD-MM-YYYY HHHH format!\n"
+                            + "Eg: 2-12-2019 1800 OR 02-12-2019 1800");
                 } else {
                     throw new EventException("Both time description and description of a event must be filled!");
                 }
@@ -125,25 +127,25 @@ public class Parser {
                 // timeTemp[0] = timeCommand which is a by or at
                 // timeTemp[1] = DDMMYYYY
                 // timeTemp[2] = HHHH
-                throw new EventException("Please input date time format in DD-MM-YYYY HHHH format!\n" +
-                        "Eg: 2-12-2019 1800 OR 02-12-2019 1800");
+                throw new EventException("Please input date time format in DD-MM-YYYY HHHH format!\n"
+                        + "Eg: 2-12-2019 1800 OR 02-12-2019 1800");
             }
 
             String timeCommand = timeTemp[0];
-            String DDMMYYYY = timeTemp[1];
-            String[] DDMMYYYtemp = DDMMYYYY.split("-");
-            String HHHH = timeTemp[2];
+            String dayMonthYear = timeTemp[1];
+            String[] dayMonthYearArr = dayMonthYear.split("-");
+            String twentyFourHourFormat = timeTemp[2];
 
-            if (DDMMYYYtemp.length != 3 || HHHH.length() != 4) {
-                throw new EventException("Please input date time format in DD-MM-YYYY HHHH format!\n" +
-                        "Eg: 2-12-2019 1800 OR 02-12-2019 1800");
+            if (dayMonthYearArr.length != 3 || twentyFourHourFormat.length() != 4) {
+                throw new EventException("Please input date time format in DD-MM-YYYY HHHH format!\n"
+                        + "Eg: 2-12-2019 1800 OR 02-12-2019 1800");
             }
 
-            int day = Integer.parseInt(DDMMYYYtemp[0]);
-            int month = Integer.parseInt(DDMMYYYtemp[1]);
-            int year = Integer.parseInt(DDMMYYYtemp[2]);
-            int hour = Integer.parseInt(HHHH.substring(0, 2));
-            int min = Integer.parseInt(HHHH.substring(2, 4));
+            int day = Integer.parseInt(dayMonthYearArr[0]);
+            int month = Integer.parseInt(dayMonthYearArr[1]);
+            int year = Integer.parseInt(dayMonthYearArr[2]);
+            int hour = Integer.parseInt(twentyFourHourFormat.substring(0, 2));
+            int min = Integer.parseInt(twentyFourHourFormat.substring(2, 4));
 
             return new EventCommand(description, day, month, year, hour, min);
         } else if (input.startsWith("todo")) {
@@ -154,7 +156,7 @@ public class Parser {
             String command = temp[0];
             String description = "";
 
-            for(int i = 1; i < temp.length; i++) {
+            for (int i = 1; i < temp.length; i++) {
                 description += temp[i] + " ";
             }
 
@@ -168,10 +170,12 @@ public class Parser {
 
             String[] temp = input.split(" ");
             if (temp.length == 1) {
-                throw new DeletionException("Please input index after delete! Example of input would be 'delete 1' which deletes 1st item from list");
+                throw new DeletionException("Please input index after delete!"
+                        + " Example of input would be 'delete 1' which deletes 1st item from list");
             }
             if (temp.length > 2) {
-                throw new DeletionException("Too many arguments! Example of input would be 'delete 1' which deletes 1st item from list");
+                throw new DeletionException("Too many arguments!"
+                        + " Example of input would be 'delete 1' which deletes 1st item from list");
             }
 
             String command = temp[0];

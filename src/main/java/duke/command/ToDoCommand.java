@@ -1,10 +1,10 @@
-package duke.Command;
+package duke.command;
 
 import duke.Storage;
-import duke.Task.Task;
-import duke.Task.ToDo;
 import duke.TaskList;
 import duke.Ui;
+import duke.task.Task;
+import duke.task.ToDo;
 
 public class ToDoCommand extends Command {
 

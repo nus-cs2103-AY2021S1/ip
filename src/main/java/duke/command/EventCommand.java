@@ -1,16 +1,17 @@
-package duke.Command;
-
-import duke.Exception.DeadlineException;
-import duke.Storage;
-import duke.Task.Deadline;
-import duke.Task.Task;
-import duke.TaskList;
-import duke.Ui;
+package duke.command;
 
 import java.time.DateTimeException;
 import java.time.LocalDateTime;
 
-public class DeadlineCommand extends Command {
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
+import duke.exception.EventException;
+import duke.task.Event;
+import duke.task.Task;
+
+
+public class EventCommand extends Command {
 
     private final int day;
     private final int month;
@@ -19,7 +20,7 @@ public class DeadlineCommand extends Command {
     private final int min;
 
     /**
-     * Constructs a Deadline object with it's input, date and time specified
+     * Constructs a Event object with it's input, date and time specified
      * @param input User's input that is processed by the Deadline Object
      * @param day the day-of-month to represent, from 1 to 31
      * @param month the month-of-year to represent, from 1 (January) to 12 (December)
@@ -27,7 +28,7 @@ public class DeadlineCommand extends Command {
      * @param hour the hour-of-day to represent, from 0 to 23
      * @param min the minute-of-hour to represent, from 0 to 59
      */
-    public DeadlineCommand(String input, int day, int month, int year, int hour, int min) {
+    public EventCommand(String input, int day, int month, int year, int hour, int min) {
         super(input);
         this.day = day;
         this.month = month;
@@ -37,33 +38,31 @@ public class DeadlineCommand extends Command {
     }
 
     /**
-     * Invokes the DeadlineCommand object to process the User's request based on User's input
+     * Invokes the EventCommand object to process the User's request based on User's input
      * @param tasks TaskList that contains an ArrayList of Task
      * @param ui Ui object that interacts with User
      * @param storage Storage object that reads from/write to specified filePath
-     * @throws DeadlineException if User's input is invalid
+     * @throws EventException
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DeadlineException {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws EventException {
 
         LocalDateTime dateTime = null;
         try {
             dateTime = LocalDateTime.of(year, month, day, hour, min);
         } catch (DateTimeException e) {
-            throw new DeadlineException("Please input date time format in DD-MM-YYYY HHHH format!\n" +
-                    "Eg: 2-12-2019 1800 OR 02-12-2019 1800");
+            throw new EventException("Please input date time format in DD-MM-YYYY HHHH format!\n"
+                    + "Eg: 2-12-2019 1800 OR 02-12-2019 1800");
         }
-
         System.out.println("Got it. I've added this task:");
-        Task task = new Deadline(input, dateTime);
+        Task task = new Event(input, dateTime);
         tasks.add(task);
         System.out.println(task);
         System.out.println("Now you have " + tasks.size() + " tasks in the list.");
-
     }
 
     /**
-     * Returns false as DeadlineCommand is not for termination
+     * Returns false as EventCommand is not for termination
      * @return false
      */
     @Override

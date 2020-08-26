@@ -1,9 +1,9 @@
-package duke.Command;
+package duke.command;
 
-import duke.Exception.DoneException;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
+import duke.exception.DoneException;
 
 public class DoneCommand extends Command {
 

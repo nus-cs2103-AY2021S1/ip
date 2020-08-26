@@ -1,19 +1,18 @@
 package duke;
 
-import duke.Task.Deadline;
-import duke.Task.Event;
-import duke.Task.Task;
-import duke.Task.ToDo;
-
-import java.io.File;
 import java.io.BufferedReader;
-import java.io.FileWriter;
-import java.io.FileReader;
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
-
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
 
 public class Storage {
     private final String filePath;
@@ -35,7 +34,7 @@ public class Storage {
         if (isEmpty()) {
             // if file is totally new
             try {
-                FileWriter csvWriter = insertColumnHeadersToCSV();
+                FileWriter csvWriter = insertColumnHeadersToCsv();
                 csvWriter.flush();
                 csvWriter.close();
             } catch (IOException e) {
@@ -111,9 +110,9 @@ public class Storage {
      * @param taskList TaskList object
      * @throws IOException If filePath does not exist
      */
-    public void saveToCSV(TaskList taskList) throws IOException {
-        FileWriter csvWriter = insertColumnHeadersToCSV();
-        for(Task task : taskList.getList()) {
+    public void saveToCsv(TaskList taskList) throws IOException {
+        FileWriter csvWriter = insertColumnHeadersToCsv();
+        for (Task task : taskList.getList()) {
             String typeOfTask = task.getClass().getSimpleName();
             String isCompleted = Boolean.toString(task.isCompleted());
             String taskDescription = task.getTaskDescription();
@@ -138,7 +137,7 @@ public class Storage {
         csvWriter.close();
     }
 
-    private FileWriter insertColumnHeadersToCSV() throws IOException {
+    private FileWriter insertColumnHeadersToCsv() throws IOException {
         // writes column headers in
         FileWriter csvWriter = new FileWriter(filePath);
         csvWriter.append("typeOfTask");
@@ -175,8 +174,8 @@ public class Storage {
                     FileWriter csvWriter = new FileWriter(filePath);
                     csvWriter.flush();
                     csvWriter.close();
-                } catch (IOException IOError) {
-                    IOError.printStackTrace();
+                } catch (IOException IoError) {
+                    IoError.printStackTrace();
                 }
             }
         } else {
@@ -187,8 +186,8 @@ public class Storage {
                 FileWriter csvWriter = new FileWriter(filePath);
                 csvWriter.flush();
                 csvWriter.close();
-            } catch (IOException IOError) {
-                IOError.printStackTrace();
+            } catch (IOException IoError) {
+                IoError.printStackTrace();
             }
         }
     }

@@ -1,10 +1,11 @@
-package duke.Command;
+package duke.command;
+
+import java.io.IOException;
 
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 
-import java.io.IOException;
 
 public class ExitCommand extends Command {
 
@@ -27,7 +28,7 @@ public class ExitCommand extends Command {
         System.out.println("Bye. Hope to see you again soon!");
         // saves tasks to filePath
         try {
-            storage.saveToCSV(tasks);
+            storage.saveToCsv(tasks);
         } catch (IOException e) {
             e.printStackTrace();
         }

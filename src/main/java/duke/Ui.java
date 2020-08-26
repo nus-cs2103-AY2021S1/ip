@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Ui {
 
-    private final static Scanner sc = new Scanner(System.in);
+    private static final Scanner sc = new Scanner(System.in);
 
     /**
      * Prints welcome message

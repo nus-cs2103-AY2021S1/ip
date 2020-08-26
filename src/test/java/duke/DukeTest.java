@@ -1,9 +1,5 @@
 package duke;
 
-import org.junit.jupiter.api.Test;
-
-import java.io.PrintWriter;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 public class DukeTest {
 
