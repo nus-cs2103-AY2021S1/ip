@@ -24,7 +24,8 @@ public class Parser {
             System.out.println(Ui.getBot());
             throw new DukeException(
                     "You have keyed in an invalid command or formatting!\n" +
-                            "(Valid commands: todo, deadline, event, list, delete, bye, done)");
+                            "(Valid commands: todo, deadline, event, list," +
+                            " delete, bye, done, find)");
         }
 
         switch (command) {
