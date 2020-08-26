@@ -15,6 +15,7 @@ public class StringConstants {
     public static final String DELETE_MESSAGE = "Noted. I've removed this task:";
     public static final String COUNT_MESSAGE = "Now you have %d tasks in the list.";
     public static final String EXIT_MESSAGE = "Bye. Hope to see you again soon!";
-
+    public static final String TASK_FOUND_MESSAGE = "Here are the matching tasks in your list:";
+    public static final String NO_TASK_FOUND_MESSAGE = "No matching tasks found.";
 
 }
