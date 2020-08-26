@@ -11,7 +11,8 @@ public class DukeDateTimeParserException extends DukeException {
     /**
      * Returns a short description of this throwable.
      * The result is "OOPS!! You have to enter the
-     * date time format correctly"
+     * date time format correctly".
+     *
      * @return String exception message
      */
     @Override

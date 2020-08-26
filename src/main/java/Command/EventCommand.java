@@ -28,7 +28,8 @@ public class EventCommand extends Command {
 
     /**
      * Constructs a EventCommand with the given
-     * user command
+     * user command.
+     *
      * @param command String user command
      */
     public EventCommand(String command) {
@@ -38,10 +39,11 @@ public class EventCommand extends Command {
 
     /**
      * Executes parsed user command. The result is :
-     * 1. Creates a Task of type EventTask,
-     * 2. Adds the newly created to the list of task via TaskList,
-     * 3. Notifies the new created task to user via Ui object,
+     * 1. Creates a Task of type EventTask.
+     * 2. Adds the newly created to the list of task via TaskList.
+     * 3. Notifies the new created task to user via Ui object.
      * 4. Updates the external file via Storage object.
+     *
      * @param tasks TaskList List of task.
      * @param ui Ui updating user interface to show intended messages.
      * @param storage Storage to update external file whenever needed.

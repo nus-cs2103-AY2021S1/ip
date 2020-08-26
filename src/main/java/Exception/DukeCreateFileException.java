@@ -8,7 +8,8 @@ public class DukeCreateFileException extends DukeException {
 
     /**
      * Returns a short description of this throwable.
-     * The result is "OOPS!! Failed to create a file"
+     * The result is "OOPS!! Failed to create a file".
+     *
      * @return String exception message
      */
     @Override

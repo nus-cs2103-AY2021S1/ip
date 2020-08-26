@@ -22,7 +22,8 @@ public class DeleteCommand extends Command {
 
     /**
      * Constructs a DeleteCommand with the given
-     * user command
+     * user command.
+     *
      * @param command String user command
      */
     public DeleteCommand(String command) {
@@ -36,6 +37,7 @@ public class DeleteCommand extends Command {
      * in the user command in the task list
      * 2.Shows messages of the deleted task to the user via Ui object,
      * 3.Updates the external file via Storage object.
+     *
      * @param tasks TaskList List of task.
      * @param ui Ui updating user interface to show intended messages.
      * @param storage Storage to update external file whenever needed.

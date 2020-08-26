@@ -22,6 +22,7 @@ public class Ui {
 
     /**
      * Read the input command from user.
+     *
      * @return String user command
      */
     public String readCommand() {
@@ -36,6 +37,7 @@ public class Ui {
     /**
      * Gets the template of message, where messages
      * are in between two lines.
+     *
      * @param input String message.
      */
     public void getMessageTemplate(String input) {
@@ -46,7 +48,8 @@ public class Ui {
 
     /**
      * gets the template of exception message, where
-     * the excception messages are in between two lines.
+     * the exception messages are in between two lines.
+     *
      * @param exception String exception message.
      */
     public void getExceptionTemplate(Exception exception) {
@@ -58,9 +61,10 @@ public class Ui {
     /**
      * Formats the command and format message, so that
      * it follows some indentation.
+     *
      * @param command String existing command.
      * @param format String command's accepted format
-     * @return
+     * @return String Formats strings with some indentation.
      */
     public String formatCommandList(String command, String format) {
         String indentation = "%-20s%s%n" ;
@@ -87,8 +91,9 @@ public class Ui {
 
     /**
      * Indent the inputted message by two tabs.
-     * @param input String input
-     * @return String indented message
+     *
+     * @param input String input.
+     * @return String indented message.
      */
     public String formatMessage(String input) {
         return DOUBLE_TAB + input;
@@ -96,7 +101,8 @@ public class Ui {
 
     /**
      * Indent the inputted exception message by two tabs.
-     * @param message String exception message
+     *
+     * @param message String exception message.
      * @return String indented exception message.
      */
     public static String formatExceptionMessage(String message) {

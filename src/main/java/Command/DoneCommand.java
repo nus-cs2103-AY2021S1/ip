@@ -21,7 +21,8 @@ public class DoneCommand extends Command {
 
     /**
      * Constructs a DoneCommand with the given
-     * user command
+     * user command.
+     *
      * @param command String user command
      */
     public DoneCommand(String command) {
@@ -34,6 +35,7 @@ public class DoneCommand extends Command {
      * 1. Sets the specified task to done via TaskList.
      * 2. Shows the updated task to user via Ui object.
      * 3. Updates the external file via Storage object.
+     *
      * @param tasks TaskList List of task.
      * @param ui Ui updating user interface to show intended messages.
      * @param storage Storage to update external file whenever needed.

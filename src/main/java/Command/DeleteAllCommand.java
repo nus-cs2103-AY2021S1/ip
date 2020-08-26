@@ -29,6 +29,7 @@ public class DeleteAllCommand extends Command {
      * 1. Delete all the tasks in the task list .
      * 2.show messages to the user via Ui object.
      * 3. Updates the external file via Storage object.
+     *
      * @param tasks TaskList List of task.
      * @param ui Ui updating user interface to show intended messages.
      * @param storage Storage to update external file whenever needed.

@@ -8,7 +8,8 @@ public class DescriptionException extends DukeException {
 
     /**
      * Returns a short description of this throwable.
-     * The result is "OOPS!! Description cannot be empty"
+     * The result is "OOPS!! Description cannot be empty".
+     *
      * @return String exception message
      */
     @Override

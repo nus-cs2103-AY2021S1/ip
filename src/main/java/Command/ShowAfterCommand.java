@@ -23,7 +23,8 @@ public class ShowAfterCommand extends Command {
 
     /**
      * Constructs a ShowAfterCommand with the given
-     * user command
+     * user command.
+     *
      * @param command String user command
      */
     public ShowAfterCommand(String command) {
@@ -34,6 +35,7 @@ public class ShowAfterCommand extends Command {
     /**
      * Executes parsed user command. The result is:
      * 1. Shows user all the task that exist after the specified date.
+     *
      * @param tasks TaskList List of task.
      * @param ui Ui updating user interface to show intended messages.
      * @param storage Storage to update external file whenever needed.

@@ -23,7 +23,8 @@ public class ShowBeforeCommand extends Command {
 
     /**
      * Constructs a ShowBeforeCommand with the given
-     * user command
+     * user command.
+     *
      * @param command String user command
      */
     public ShowBeforeCommand(String command) {
@@ -34,6 +35,7 @@ public class ShowBeforeCommand extends Command {
     /**
      * Executes parsed user command. The result is:
      * 1. Shows user all the task that exist before the specified date.
+     *
      * @param tasks TaskList List of task.
      * @param ui Ui updating user interface to show intended messages.
      * @param storage Storage to update external file whenever needed.

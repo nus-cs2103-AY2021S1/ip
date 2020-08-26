@@ -24,6 +24,7 @@ public class HelpCommand extends Command {
      * Executes parsed user command. The result is :
      * 1. Shows  the existing command and its format to
      * the user via Ui object.
+     *
      * @param tasks TaskList List of task.
      * @param ui Ui updating user interface to show intended messages.
      * @param storage Storage to update external file whenever needed.

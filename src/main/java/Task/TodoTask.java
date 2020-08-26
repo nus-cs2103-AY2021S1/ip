@@ -9,7 +9,7 @@ public class TodoTask extends Task {
     private static final String TODO = "[T]";
 
     /**
-     * Constructs a new TodoTask with empty description
+     * Constructs a new TodoTask with empty description.
      */
     public TodoTask() {
         super("");
@@ -17,7 +17,7 @@ public class TodoTask extends Task {
 
     /**
      * Costructs a new TodoTask with the given task description.
-     * @param description todo task description
+     * @param description todo task description.
      */
     public TodoTask(String description) {
         super(description);
@@ -29,6 +29,7 @@ public class TodoTask extends Task {
      * 1. The type of the Task.
      * 2. The status of the task.
      * 3. The description of the task.
+     *
      * @return String Returns the task type ([T]]), its status as well
      * as its description.
      */

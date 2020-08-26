@@ -44,8 +44,9 @@ public class Parser {
 
     /**
      * This method parse a file path into parent directory and the file name.
+     *
      * @param filepath String The path of a file
-     * @return
+     * @return String[] array of separated String.
      */
     public static String[] fileParser(String filepath) {
         return filepath.split("/");
@@ -55,6 +56,7 @@ public class Parser {
     /**
      * This method parse the content of a file line by line and
      * turns into the correct Task object.
+     *
      * @param line String Each line of strings in the file.
      * @return Task Return the correct Task type from reading the file.
      */
@@ -101,8 +103,9 @@ public class Parser {
 
     /**
      * This method parse given user command and turns it into and
-     * Command object
-     * @param command String User command
+     * Command object.
+     *
+     * @param command String User command.
      * @return Command Return various Command type based on user input.
      */
     public static Command parseCommand(String command) {
@@ -138,6 +141,7 @@ public class Parser {
     /**
      * This method would parse user command(usually DeleteCommand and
      * DoneCommand), returns the number that was passed in the command.
+     *
      * @param input user command.
      * @return int The index specified by the user command.
      * @throws NoIndexException This exception is thrown when user forget
@@ -156,6 +160,7 @@ public class Parser {
      * This method would parse user command(usually ShowAfterCommand
      * or ShowBeforeCommand) and returns the date that was passed in the
      * command.
+     *
      * @param input String user command.
      * @return LocalDate The date that was passed in the user command.
      * @throws DukeDateTimeParserException This exception is thrown when user forget
@@ -173,6 +178,7 @@ public class Parser {
     /**
      * This method would return Map<String,String> that contains task's description and
      * task's date-time. Usually used by DeadlineCommand and EventCommand.
+     *
      * @param input user command.
      * @return Map<String,String> Returns map that contains task's description and task's date-time.
      * @throws DescriptionException This exception is thrown when user forget to specify
@@ -194,7 +200,8 @@ public class Parser {
 
     /**
      * This method would parse specific TodoCommand and return the task description.
-     * @param input user command
+     *
+     * @param input user command.
      * @return String task description of type TodoTask.
      * @throws DescriptionException This exception is thrown when user forget to specify
      * the task's description on the command.

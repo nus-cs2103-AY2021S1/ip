@@ -24,7 +24,8 @@ public class EventTask extends Task {
 
     /**
      * Constructs a new EventTask with task description
-     * and task date time that was parsed from user command
+     * and task date time that was parsed from user command.
+     *
      * @param description String event task description.
      * @param dateTime LocalDateTime event task date and time.
      */
@@ -35,6 +36,7 @@ public class EventTask extends Task {
 
     /**
      * Gets task date-time.
+     *
      * @return LocalDateTime This return event task date-time.
      */
     public LocalDateTime getDateTime() {
@@ -43,6 +45,7 @@ public class EventTask extends Task {
 
     /**
      * Sets set the current date-time to the given date-time.
+     *
      * @param dateTime LocalDateTime this argument would change the
      * current date-time.
      */
@@ -56,6 +59,7 @@ public class EventTask extends Task {
      * 2. The task's status.
      * 3. The description of the task.
      * 4. The date and time of the task (MMM d yyy, h a).
+     *
      * @return String Returns the task type ([E]), its status as well
      * as its description and date-time in an intended format.
      */

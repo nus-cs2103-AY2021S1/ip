@@ -21,9 +21,10 @@ public class ExitCommand extends Command {
 
     /**
      * Executes parsed user command. The result is:
-     * 1. Terminates the Duke program,
-     * 2. Sends a farewell message to the user via Ui,
+     * 1. Terminates the Duke program.
+     * 2. Sends a farewell message to the user via Ui.
      * 3. Alter the setExit field to true.
+     *
      * @param tasks TaskList List of task.
      * @param ui Ui updating user interface to show intended messages.
      * @param storage Storage to update external file whenever needed.

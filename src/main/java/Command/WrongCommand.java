@@ -16,7 +16,8 @@ public class WrongCommand extends Command {
 
     /**
      * Constructs a WrongCommand with the given
-     * user command
+     * user command.
+     *
      * @param command String user command
      */
     public WrongCommand(String command) {
@@ -29,6 +30,7 @@ public class WrongCommand extends Command {
      * 1. Notifies user that the input command does not exist in the program
      * and recommend the user to run the help command.
      * All the of the notification are run under Ui object.
+     *
      * @param tasks TaskList List of task.
      * @param ui Ui updating user interface to show intended messages.
      * @param storage Storage to update external file whenever needed.

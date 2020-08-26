@@ -21,7 +21,8 @@ public class TodoCommand extends Command {
 
     /**
      * Constructs a TodoCommand with the given
-     * user command
+     * user command.
+     *
      * @param command String user command
      */
     public TodoCommand(String command) {
@@ -33,7 +34,7 @@ public class TodoCommand extends Command {
      *Executes parsed user command. The result is:
      * 1. Creates a new Task of type TodoTask.
      * 2. Adds it to the tasks in TaskList.
-     * 3. Notifies the user about the newly created task via Ui object,
+     * 3. Notifies the user about the newly created task via Ui object.
      * 4. Updates the external file via Storage object.
      * @param tasks TaskList List of task.
      * @param ui Ui updating user interface to show intended messages.

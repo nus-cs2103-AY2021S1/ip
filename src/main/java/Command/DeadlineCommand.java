@@ -36,10 +36,11 @@ public class DeadlineCommand extends Command {
 
     /**
      * Executes parsed user command. The result is :
-     * 1. A new Task of type DeadlineTask,
-     * 2. Append the new task to the TaskList,
-     * 3. Notify the user about the newly created task via Ui object,
+     * 1. A new Task of type DeadlineTask.
+     * 2. Append the new task to the TaskList.
+     * 3. Notify the user about the newly created task via Ui object.
      * 4. Updates the external file via Storage object.
+     *
      * @param tasks TaskList List of task.
      * @param ui Ui updating user interface to show intended messages.
      * @param storage Storage to update external file whenever needed.

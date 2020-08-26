@@ -34,7 +34,8 @@ public class Storage {
      * A constructor to create Storage by taking file path as its arguments.
      * It would instantly create the directory and the file if
      * the filepath specified was not found in user's local.
-     * @param filepath String The path of the file
+     *
+     * @param filepath String The path of the file.
      * @throws IOException This is exception would be thrown if the system
      * could detect any file or directory with the specified filepath.
      */
@@ -58,6 +59,7 @@ public class Storage {
      * This would load the data from the given file path, turn into
      * various type of Task object (based on the data), and return
      * a list of task.
+     *
      * @return List<Task> Returns a list of type Task.
      * @throws FileNotFoundException This exception would be thrown if
      * the specified file was not found in user's local.
@@ -76,7 +78,8 @@ public class Storage {
     /**
      * This method would update the external file of the given
      * file path, by taking a list of Task as it's argument.
-     * @param tasks TaskList A list of task
+     *
+     * @param tasks TaskList A list of task.
      * @throws IOException This exception would be thrown if
      * the system was not able to write to the specified file path.
      */

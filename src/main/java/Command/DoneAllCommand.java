@@ -27,6 +27,7 @@ public class DoneAllCommand extends Command {
      * 1. Sets all task in the list to finished via TaskList.
      * 2. Shows the updates list of tasks to the user via UI.
      * 3. Updates the external file via Storage object.
+     *
      * @param tasks TaskList List of task.
      * @param ui Ui updating user interface to show intended messages.
      * @param storage Storage to update external file whenever needed.

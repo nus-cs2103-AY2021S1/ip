@@ -2,7 +2,7 @@ package main.java.Task;
 
 /**
  * The Task class implements methods that will be used
- * by its child class to create various task object
+ * by its child class to create various task object.
  */
 public class Task {
     private String description;
@@ -10,7 +10,7 @@ public class Task {
 
     /**
      * Constructs a new Task with empty string as  its
-     * description and false for isDone
+     * description and false for isDone.
      */
     public Task() {
         this.description = "";
@@ -20,7 +20,8 @@ public class Task {
     /**
      * Constructs a new Task with task description specified
      * by user command.
-     * @param description To define task description
+     *
+     * @param description To define task description.
      */
     public Task(String description) {
         this.description = description;
@@ -29,7 +30,8 @@ public class Task {
 
     /**
      * Gets the task's description.
-     * @return String task description
+     *
+     * @return String task description.
      */
     public String getDescription() {
         return description;
@@ -38,7 +40,8 @@ public class Task {
     /**
      * Sets the current task description to the specified
      * description.
-     * @param description The task's description
+     *
+     * @param description The task's description/
      */
     public void setDescription(String description) {
         this.description = description;
@@ -46,8 +49,9 @@ public class Task {
 
     /**
      * Returns whether a task is finished or not.
+     *
      * @return boolean Returns true if task is done,
-     * false otherwise
+     * false otherwise.
      */
     public boolean isDone() {
         return isDone;
@@ -56,6 +60,7 @@ public class Task {
     /**
      * Returns the status (done/undone) of the task
      * in symbolic form ([O]/[X]).
+     *
      * @return String Returns "[O]" if the task is done, and
      * return "[X]" otherwise.
      */
@@ -65,8 +70,9 @@ public class Task {
 
     /**
      * Sets the current isDone to the specified boolean.
+     *
      * @param isDone Sets isDone to true if task
-     * has finished, and false otherwise
+     * has finished, and false otherwise.
      */
     public void setStatus(boolean isDone) {
         this.isDone = isDone;
@@ -76,6 +82,7 @@ public class Task {
      * Returns messages to user. The result is the concatenation of :
      * 1. The status of the Task
      * 2. The description of the task.
+     *
      * @return String Returns the task type ([T]]), its status as well
      * as its description.
      */

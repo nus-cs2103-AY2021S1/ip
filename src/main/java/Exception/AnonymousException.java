@@ -15,7 +15,8 @@ public class AnonymousException extends DukeException {
      * Returns a short description of this throwable.
      * The result is the concatenation of the name of
      * the incorrect commend and a suggestion to run
-     * the help command
+     * the help command.
+     *
      * @return String exception message
      */
     @Override

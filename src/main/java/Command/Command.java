@@ -44,6 +44,7 @@ public abstract class Command {
     /**
      * A method template for child's classes to implement. It would execute any
      * action needed based on the type of the command.
+     *
      * @param tasks TaskList List of task.
      * @param ui Ui updating user interface to show intended messages.
      * @param storage Storage to update external file whenever needed.
@@ -61,6 +62,7 @@ public abstract class Command {
 
     /**
      * A getter method that returns the state whether a program is ready to exit or not.
+     *
      * @return boolean Returns true if the type of command is ExitCommand, and false otherwise.
      */
     public boolean isExit() {
@@ -69,6 +71,7 @@ public abstract class Command {
 
     /**
      * A setter method to set the state to true when the program is ready to be terminated.
+     *
      * @param exit boolean true if the program is set to be terminated, and false otherwise.
      */
     public void setExit(boolean exit) {
