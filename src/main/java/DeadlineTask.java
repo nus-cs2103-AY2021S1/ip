@@ -1,13 +1,17 @@
-public class DeadlineTask extends Task {
-    private String deadline;
+import java.time.LocalDate;
 
-    public DeadlineTask(String summary, String deadline) {
+public class DeadlineTask extends Task {
+    private LocalDate deadline;
+
+    public DeadlineTask(String summary, LocalDate deadline) {
         super(summary);
-        this.deadline = deadline;
+            this.deadline = deadline;
     }
 
     public String getDeadline() {
-        return deadline;
+        return deadline.getDayOfMonth() + " "
+                + deadline.getMonth().toString() + " "
+                + deadline.getYear();
     }
 
     @Override
