@@ -26,32 +26,35 @@ public class DeleteCommand extends Command {
      * @param storage Storage for storing and retrieving all tasks.
      * @param ui Handles printing of user interaction.
      * @throws DukeException When input for delete is invalid, respective error messages are printed.
+     * @throws IOException When input for delete is invalid, respective error messages are printed.
      */
     @Override
     public void execute(
-            TaskList taskList, Storage storage, Ui ui) throws DukeException {
-        if (!userInput.substring(6).isBlank()) {
-            try {
-                String toDelete = userInput.substring(7);
-                int index = Integer.parseInt(toDelete);
-                if (index <= taskList.size() && index > 0) {
-                    System.out.println(Ui.getLine());
-                    System.out.println(Ui.getBot());
-                    System.out.println("Noted! I've deleted this task:");
-                    System.out.println(taskList.getTasks().get(index - 1));
-                    taskList.getTasks().remove(index - 1);
-                    System.out.println("Now you have " + taskList.size()
-                            + " tasks in the list.");
-                    storage.writeToFile(taskList.getTasks());
-                } else {
-                    throw new IndexOutOfBoundsException();
-                }
-            } catch (NumberFormatException | IndexOutOfBoundsException
-                    | IOException ex) {
-                throw new DukeException("The number keyed in is invalid!");
-            }
-        } else {
-            throw new DukeException("The description of a delete cannot be empty!");
-        }
+            TaskList taskList, Storage storage, Ui ui) throws DukeException, IOException {
+        ui.printDelete(userInput, taskList);
+        storage.writeToFile(taskList.getTasks());
+//        if (!userInput.substring(6).isBlank()) {
+//            try {
+//                String toDelete = userInput.substring(7);
+//                int index = Integer.parseInt(toDelete);
+//                if (index <= taskList.size() && index > 0) {
+//                    System.out.println(Ui.getLine());
+//                    System.out.println(Ui.getBot());
+//                    System.out.println("Noted! I've deleted this task:");
+//                    System.out.println(taskList.getTasks().get(index - 1));
+//                    taskList.getTasks().remove(index - 1);
+//                    System.out.println("Now you have " + taskList.size()
+//                            + " tasks in the list.");
+//                    storage.writeToFile(taskList.getTasks());
+//                } else {
+//                    throw new IndexOutOfBoundsException();
+//                }
+//            } catch (NumberFormatException | IndexOutOfBoundsException
+//                    | IOException ex) {
+//                throw new DukeException("The number keyed in is invalid!");
+//            }
+//        } else {
+//            throw new DukeException("The description of a delete cannot be empty!");
+//        }
     }
 }

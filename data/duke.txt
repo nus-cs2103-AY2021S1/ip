@@ -1,3 +1,4 @@
-Event | done | swimming | 23/04/2020 12:30 PM
 Deadline | done | return book | 23/04/2020 12:50 AM
-ToDo | done | borrow book
+ToDo | undone | borrow book
+Deadline | undone | return book | 23/09/2020 12:40 PM
+Event | done | swimming | 23/05/2021 10:40 AM

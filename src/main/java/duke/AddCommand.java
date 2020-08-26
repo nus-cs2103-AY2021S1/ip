@@ -120,14 +120,12 @@ public class AddCommand extends Command {
                 System.out.println(Ui.getBot());
                 throw new DukeException(
                         "You have keyed in an invalid input for 'deadline'!");
-            } catch (DateTimeParseException ex) {
+            } catch (DateTimeParseException | IOException ex) {
                 System.out.println(Ui.getLine());
-                System.out.println(Ui.getLine());
+                System.out.println(Ui.getBot());
                 throw new DukeException(
                         "Please key in your deadline in the form:\n" +
                                 " /by <dd/MM/yyyy hh:mm AM/PM>");
-            } catch (IOException e) {
-                e.printStackTrace();
             }
         } else {
             System.out.println(Ui.getLine());
@@ -163,11 +161,11 @@ public class AddCommand extends Command {
                 System.out.println(Ui.getBot());
                 throw new DukeException("You have keyed in an " +
                         "invalid input for 'event'!");
-            } catch (DateTimeParseException ex) {
+            } catch (DateTimeParseException | IOException ex) {
+                System.out.println(Ui.getLine());
+                System.out.println(Ui.getBot());
                 throw new DukeException("Please key in your event " +
                         "in the form:\n /at <dd/MM/yyyy hh:mm AM/PM>");
-            } catch (IOException e) {
-                e.printStackTrace();
             }
         } else {
             System.out.println(Ui.getLine());

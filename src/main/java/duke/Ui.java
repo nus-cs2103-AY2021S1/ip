@@ -1,5 +1,6 @@
 package duke;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -65,10 +66,10 @@ public class Ui {
     /**
      * Prints tasks in task list.
      *
-     * @param tasks ArrayList containing tasks.
+     * @param tasks TaskList containing tasks.
      */
-    public void printTaskList(ArrayList<Task> tasks) {
-        if (tasks.isEmpty()) {
+    public void printTaskList(TaskList tasks) {
+        if (tasks.getTasks().isEmpty()) {
             System.out.println(line);
             System.out.println(bot);
             System.out.println("There are no tasks in your list yet! >_<");
@@ -78,8 +79,32 @@ public class Ui {
             System.out.println(bot);
             System.out.println("Here are the tasks in your list:");
             for (int i = 0; i < tasks.size(); i++) {
-                System.out.println(i + 1 + "." + " " + tasks.get(i));
+                System.out.println(i + 1 + "." + " " + tasks.getTasks().get(i));
             }
+        }
+    }
+
+    public void printDelete(String userInput, TaskList taskList) throws DukeException {
+        if (!userInput.substring(6).isBlank()) {
+            try {
+                String toDelete = userInput.substring(7);
+                int index = Integer.parseInt(toDelete);
+                if (index <= taskList.size() && index > 0) {
+                    System.out.println(Ui.getLine());
+                    System.out.println(Ui.getBot());
+                    System.out.println("Noted! I've deleted this task:");
+                    System.out.println(taskList.getTasks().get(index - 1));
+                    taskList.getTasks().remove(index - 1);
+                    System.out.println("Now you have " + taskList.size()
+                            + " tasks in the list.");
+                } else {
+                    throw new IndexOutOfBoundsException();
+                }
+            } catch (NumberFormatException | IndexOutOfBoundsException ex) {
+                throw new DukeException("The number keyed in is invalid!");
+            }
+        } else {
+            throw new DukeException("The description of a delete cannot be empty!");
         }
     }
 
