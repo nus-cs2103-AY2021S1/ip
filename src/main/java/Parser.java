@@ -81,6 +81,12 @@ public class Parser {
                     throw new DukeException(e.getMessage());
                 }
                 break;
+            case "find":
+                if (input.length() < 6) {
+                    throw new DukeException("Text to search for cannot be empty.");
+                }
+                tasks.find(input.substring(5));
+                break;
             default:
                 throw new DukeException("I'm sorry, but I don't know what that means :-(");
 //                        break;

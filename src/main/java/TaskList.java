@@ -85,4 +85,20 @@ public class TaskList implements java.io.Serializable {
         Storage.store(this);
     }
 
+    public void find(String substring) {
+        StringBuilder sb = new StringBuilder();
+        int counter = 0;
+        sb.append("Here are the matching tasks in your list:\n");
+        for (Task t : tasks) {
+            if (t.text.contains(substring)) {
+                counter++;
+                sb.append(counter + "." + t.toString());
+            }
+        }
+        if (counter > 0) {
+            UI.print(sb.toString());
+        } else {
+            UI.print("No match found!\n");
+        }
+    }
 }
