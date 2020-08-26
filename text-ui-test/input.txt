@@ -1,7 +1,8 @@
 todo t1
 todo t2
-deadline t3 /by 1 Jan, 2020 13:00
-event t4 /at 1 Jan, 2020 13:00 /to 02/01/2020, 2020 13:00
+deadline d1 /by 02/01/2020 13:00
+deadline d2 /by 2020-01-01 13:00
+event e1 /at 01 Jan, 2020 13:00 /to 02/01/2020 13:00
 list
 done 2
 list

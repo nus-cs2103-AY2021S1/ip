@@ -74,6 +74,6 @@ public class EventTask extends Task{
 
     @Override
     public String toString() {
-        return super.toString()+" (at: " + this.fromDateTime.toString()+ " - " + this.toDateTime.toString();
+        return super.toString()+" (at: " + this.fromDateTime.toString()+ " - " + this.toDateTime.toString() + ")";
     }
 }
