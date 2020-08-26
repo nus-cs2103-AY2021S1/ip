@@ -6,8 +6,8 @@ import java.time.format.DateTimeFormatter;
 public class Event extends Task {
     private final static DateTimeFormatter SAVE_READ_DATETIME_FORMAT = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
     private final static DateTimeFormatter NEW_DATETIME_FORMAT = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mma");
-    public Event(int position, String taskDescription) {
-        super(position, taskDescription);
+    public Event(String taskDescription) {
+        super(taskDescription);
     }
 
     public void setTime(LocalDateTime givenDate) {

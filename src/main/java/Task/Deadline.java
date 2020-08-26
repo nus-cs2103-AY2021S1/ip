@@ -8,8 +8,8 @@ import java.time.format.DateTimeFormatter;
 public class Deadline extends Task {
     private final static DateTimeFormatter NEW_DATETIME_FORMAT = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mma");
     private final static DateTimeFormatter SAVE_READ_DATETIME_FORMAT = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
-    public Deadline(int position, String taskDescription) {
-        super(position, taskDescription);
+    public Deadline(String taskDescription) {
+        super(taskDescription);
     }
 
     public void setTime(LocalDateTime givenDate) {

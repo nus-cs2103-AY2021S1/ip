@@ -8,13 +8,16 @@ public abstract class Task {
     protected boolean taskCompleted;
     protected LocalDateTime date;
 
-    public Task(int position, String taskDescription) {
-        this.position = position;
+    public Task(String taskDescription) {
         this.taskDescription = taskDescription;
         taskCompleted = false;
     }
 
     public abstract String saveFormat();
+
+    public void setPosition(int position) {
+        this.position = position;
+    }
 
     public void completeTask() {
         taskCompleted = true;
