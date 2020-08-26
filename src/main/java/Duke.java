@@ -112,13 +112,13 @@ public class Duke {
                 throw new DeadlineException();
             }
             // check for date time format
-            if(!task_deadline[1].trim().matches("\\d{4}-\\d{2}-\\d{2} \\d{4}")
-                    && !task_deadline[1].trim().matches("\\d{4}-\\d{2}-\\d{2}")){
+            try {
+                Task newTask = new Deadline(task_deadline[0].trim(), task_deadline[1].trim());
+                taskList.add(newTask);
+                newTaskItem(newTask, deadline_key);
+            } catch (Exception e){
+                throw new DeadlineException();
             }
-
-            Task newTask = new Deadline(task_deadline[0].trim(), task_deadline[1].trim());
-            taskList.add(newTask);
-            newTaskItem(newTask, deadline_key);
 
         } else if(nameList[0].trim().toLowerCase().equals(event_key)){
             String[] task_event = nameList[1].trim().split("/at", 2);
@@ -126,13 +126,13 @@ public class Duke {
                 throw new EventException();
             }
             // check for date time format
-            if(!task_event[1].matches("\\d{4}-\\d{2}-\\d{2} \\d{4}")
-                    && !task_event[1].matches("\\d{4}-\\d{2}-\\d{2}")){
+            try {
+                Task newTask = new Deadline(task_event[0].trim(), task_event[1].trim());
+                taskList.add(newTask);
+                newTaskItem(newTask, event_key);
+            } catch (Exception e){
                 throw new EventException();
             }
-            Task newTask = new Event(task_event[0].trim(), task_event[1].trim());
-            taskList.add(newTask);
-            newTaskItem(newTask, event_key);
 
         } else if(nameList[0].toLowerCase().equals(todo_key)){
             Task newTask = new ToDo(nameList[1].trim());
