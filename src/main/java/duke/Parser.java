@@ -106,6 +106,7 @@ public class Parser {
      * @throws IllegalArgumentException Unrecognizable command.
      */
     public PARSER_RESULT parseInput(String input) throws IllegalArgumentException {
+        input = input.trim();
         if (isBye(input)) {
             return PARSER_RESULT.BYE;
         } else if (isDelete(input)) {
