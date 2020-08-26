@@ -7,22 +7,43 @@ public class TaskList {
         ls.addAll(list);
     }
 
+    /**
+     * Adds param task into this.ls
+     * @param task
+     */
     void add(Task task) {
         ls.add(task);
     }
 
+    /**
+     * Returns size of this.ls
+     * @return int
+     */
     int size() {
         return ls.size();
     }
 
+    /**
+     * Marks the task at index in this.ls as done
+     * @param index
+     */
     void done(int index) {
         ls.get(index).done();
     }
 
+    /**
+     * Removes the task at index in this.ls
+     * @param index
+     */
     void remove(int index) {
         ls.remove(index);
     }
 
+    /**
+     * Returns task at index in this.ls
+     * @param index
+     * @return Task
+     */
     Task get(int index) {
         return ls.get(index);
     }

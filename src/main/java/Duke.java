@@ -29,6 +29,11 @@ public class Duke {
         tasks = new TaskList(storage.loadFile());
     }
 
+    /**
+     * Processes each command line by line,
+     * calling the corresponding methods
+     * Exits when user inputs "bye"
+     */
     void processInput() {
         Scanner sc = new Scanner(System.in);
         String msg = sc.nextLine();
@@ -63,6 +68,9 @@ public class Duke {
         System.out.println(face + spacing + "Bye bye. Talk again soon!");
     }
 
+    /**
+     * Prints each item in the task list
+     */
     void displayList() {
         System.out.println(face3);
         if(tasks.size() == 0) {
@@ -72,6 +80,11 @@ public class Duke {
         }
     }
 
+    /**
+     * Adds corresponding task to task list
+     * @param msg
+     * @param type
+     */
     void addToList(String msg, Type type) {
         if(msg.trim().isEmpty()) {
             System.out.println(sadFace + spacing + "Poco noticed that your task is empty");
@@ -98,6 +111,10 @@ public class Duke {
         storage.saveFile(tasks);
     }
 
+    /**
+     * Marks the task at index in task list as done
+     * @param index
+     */
     void done(int index) {
         index--;
         if(index < 0 || index >= tasks.size()) {
@@ -110,6 +127,10 @@ public class Duke {
         storage.saveFile(tasks);
     }
 
+    /**
+     * Deletes the task at index in task list
+     * @param index
+     */
     void delete(int index) {
         index--;
         if(index < 0 || index >= tasks.size()) {
