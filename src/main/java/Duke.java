@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 
 public class Duke {
-    
+
     private final DukeList list;
     private final Ui ui;
 
@@ -79,60 +79,73 @@ public class Duke {
      * Logic framework of Duke.
      */
     private void dukeLogic() {
+        boolean shouldQuit = false;
         String msgInput = "";
 
-        while (!shouldQuit(msgInput) && this.ui.hasNextLine()) {
+        String[] msgArr;
+        Command keyword;
+
+        while (!shouldQuit && this.ui.hasNextLine()) {
             msgInput = this.ui.nextLine();
 
-            if (!shouldQuit(msgInput)) {
-                String[] msgArr = msgInput.split(" ");
-                String keyword = msgArr[0];
+            msgArr = Parser.parseLineToArray(msgInput);
+            keyword = Parser.getCommand(msgInput);
 
-                switch (keyword) {
-                case ("list"):
-                    String listString = this.list.toString();
-                    this.ui.printMessage(listString);
-                    break;
-
-                case ("done"):
-                    try {
-                        String statusMsg = this.markAsDone(msgArr);
-                        this.ui.printMessage(statusMsg);
-                        break;
-                    } catch (ArrayIndexOutOfBoundsException e) {
-                        this.ui.printMessage("OOPS!!! The index of `done` cannot be empty.");
-                        break;
-                    } catch (IndexOutOfBoundsException e) {
-                        this.ui.printMessage("OOPS!!! The index given is invalid.");
-                        break;
-                    }
-
-                case ("delete"):
-                    try {
-                        String statusMsg = this.delete(msgArr);
-                        this.ui.printMessage(statusMsg);
-                        break;
-                    } catch (ArrayIndexOutOfBoundsException e) {
-                        this.ui.printMessage("OOPS!!! The index of `delete` cannot be empty.");
-                        break;
-                    } catch (IndexOutOfBoundsException e) {
-                        this.ui.printMessage("OOPS!!! The index given is invalid.");
-                        break;
-                    }
-
-
-                default:
-                    try {
-                        String statusString = this.list.add(msgInput);
-                        this.ui.printMessage(statusString);
-                        break;
-                    } catch (DukeException e) {
-                        this.ui.printMessage(e.getMessage());
-                        break;
-                    }
+            switch (keyword) {
+            case TERMINATE:
+                shouldQuit = true;
+                break;
+            case LIST:
+                String listString = this.list.toString();
+                this.ui.printMessage(listString);
+                break;
+            case DONE:
+                try {
+                    String statusMsg = this.markAsDone(msgArr);
+                    this.ui.printMessage(statusMsg);
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    this.printEmptyIndexErrorMsg(keyword.toString());
+                } catch (IndexOutOfBoundsException e) {
+                    this.printInvalidIndexErrorMsg();
                 }
+                break;
+
+            case DELETE:
+                try {
+                    String statusMsg = this.delete(msgArr);
+                    this.ui.printMessage(statusMsg);
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    this.printEmptyIndexErrorMsg(keyword.toString());
+                } catch (IndexOutOfBoundsException e) {
+                    this.printInvalidIndexErrorMsg();
+                }
+                break;
+
+            case TASK:
+                try {
+                    String statusString = this.list.add(msgInput);
+                    this.ui.printMessage(statusString);
+                } catch (DukeException e) {
+                    this.ui.printMessage(e.getMessage());
+                }
+                break;
             }
         }
+    }
+
+
+    private void printEmptyIndexErrorMsg(String commandStr) {
+        this.printErrorMessage(String.format("OOPS!!! The index of `%s` cannot be empty.", commandStr));
+    }
+
+
+    private void printInvalidIndexErrorMsg() {
+        this.printErrorMessage("OOPS!!! The index given is invalid.");
+    }
+
+
+    private void printErrorMessage(String errMsg) {
+        this.ui.printMessage(errMsg);
     }
 
 

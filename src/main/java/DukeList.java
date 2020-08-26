@@ -42,45 +42,45 @@ public class DukeList {
     private Task addHelper(String itemString) throws DukeException {
         Task newTask;
 
-        String[] strArr = itemString.split(" ");
-        String keyword = strArr[0];
+        String[] strArr = Parser.parseLineToArray(itemString);
+        TaskType taskType = Parser.getTaskKeyword(itemString);
 
         String formattedItemString;
 
-        switch (keyword) {
-        case ("todo"):
+        switch (taskType) {
+        case TODO:
             try {
                 formattedItemString = DukeList.getItemSubstring(strArr);
                 newTask = new Todo(formattedItemString);
                 break;
             } catch (DukeInvalidDescriptionException e) {
-                throw new DukeInvalidDescriptionException(String.format("OOPS!!! The description of a `%s` cannot be empty.", keyword));
+                throw new DukeInvalidDescriptionException(String.format("OOPS!!! The description of a `%s` cannot be empty.", taskType));
             }
 
-        case ("deadline"):
+        case DEADLINE:
             try {
                 formattedItemString = DukeList.getItemSubstring(strArr);
                 newTask = new Deadline(formattedItemString);
                 break;
             } catch (DukeNoDescriptionException e) {
-                throw new DukeInvalidDescriptionException(String.format("OOPS!!! The description of a `%s` cannot be empty.", keyword));
+                throw new DukeInvalidDescriptionException(String.format("OOPS!!! The description of a `%s` cannot be empty.", taskType));
             } catch (DukeNoDateException e) {
-                throw new DukeInvalidDescriptionException(String.format("OOPS!!! The description of `%s` is invalid.", keyword));
+                throw new DukeInvalidDescriptionException(String.format("OOPS!!! The description of `%s` is invalid.", taskType));
             }
 
-        case ("event"):
+        case EVENT:
             try {
                 formattedItemString = DukeList.getItemSubstring(strArr);
                 newTask = new Event(formattedItemString);
                 break;
             } catch (DukeNoDescriptionException e) {
-                throw new DukeInvalidDescriptionException(String.format("OOPS!!! The description of a `%s` cannot be empty.", keyword));
+                throw new DukeInvalidDescriptionException(String.format("OOPS!!! The description of a `%s` cannot be empty.", taskType));
             } catch (DukeNoDateException e) {
-                throw new DukeInvalidDescriptionException(String.format("OOPS!!! The description of `%s` is invalid.", keyword));
+                throw new DukeInvalidDescriptionException(String.format("OOPS!!! The description of `%s` is invalid.", taskType));
             }
 
         default:
-            throw new DukeInvalidCommandException(String.format("OOPS!!! I'm sorry, but I don't know what `%s` means :-(", keyword));
+            throw new DukeInvalidCommandException(String.format("OOPS!!! I'm sorry, but I don't know what `%s` means :-(", taskType));
         }
 
         this.list.add(newTask);
