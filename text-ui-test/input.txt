@@ -16,6 +16,9 @@ done 2
 done a
 done 0
 done -3
+find hello
+find home
+find
 list
 delete a
 delete 0
