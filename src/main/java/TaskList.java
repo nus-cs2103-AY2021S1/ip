@@ -70,4 +70,21 @@ public class TaskList {
         Ui.print("Nice! I've marked this task as done:\n" + doneTask);
         storage.replaceDone(doneTask.getDescription());
     }
+
+    public void find(String substring) {
+        StringBuilder sb = new StringBuilder();
+        int counter = 0;
+        sb.append("Here are the matching tasks in your list:\n");
+        for (Task t : taskArrayList) {
+            if (t.getDescription().contains(substring)) {
+                counter++;
+                sb.append(counter + "." + t.toString());
+            }
+        }
+        if (counter > 0) {
+            Ui.print(sb.toString());
+        } else {
+            Ui.print("No match found!\n");
+        }
+    }
 }

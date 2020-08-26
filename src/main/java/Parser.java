@@ -58,13 +58,17 @@ public class Parser {
                 } else if (inputType.equals("delete")) {
                     tasks.delete(Integer.parseInt(description));
                 }
+                else if (inputType.equals("find")) {
+                    tasks.find(input.substring(5));
+                }
             } catch (FileNotFoundException e) {
                 System.out.println("File not found");
             } catch (IOException e) {
                 System.out.println("Something went wrong: " + e.getMessage());
             } catch (DateTimeParseException e) {
                 System.out.println("Date must be in the YYYY-MM-DD format!");
-            } catch (DukeException e) {
+            }
+            catch (DukeException e) {
                 e.printStackTrace();
             }
         }
