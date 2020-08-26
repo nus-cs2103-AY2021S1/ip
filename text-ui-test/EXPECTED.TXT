@@ -1,112 +1,96 @@
+Hello from
+ ____        _
+|  _ \ _   _| | _____
+| | | | | | | |/ / _ \
+| |_| | |_| |   <  __/
+|____/ \__,_|_|\_\___|
+____________________________________________________________
+ Hello! I'm Duke
+ What can I do for you?
+____________________________________________________________
 #############################################################
-###|░██╗░░░░░░░██╗██╗░░░██╗███████╗|###############   #######
-###|░██║░░██╗░░██║██║░░░██║██╔════╝|###########   /~\   #####
-###|░╚██╗████╗██╔╝██║░░░██║█████╗░░|########   _- `~~~', ####
-###|░░████╔═████║░██║░░░██║██╔══╝░░|######  _-~       )  ####
-###|░░╚██╔╝░╚██╔╝░╚██████╔╝██║░░░░░|###  _-~          |  ####
-###|░░░╚═╝░░░╚═╝░░░╚═════╝░╚═╝░░░░░#  _-~            ;  #####
-##########################  __---___-~              |   #####
-#######################   _~   ,,                  ;  `,,  ##
-#####################  _-~    ;'                  |  ,'  ; ##
-###################  _~      '                    `~'   ; ###
-############   __---;                                 ,' ####
-########   __~~  ___                                ,' ######
-#####  _-~~   -~~ _                               ,' ########
-##### `-_         _                              ; ##########
-#######  ~~----~~~   ;                          ; ###########
-#########  /          ;                        ; ############
-#######  /             ;                      ; #############
-#####  /                `                    ; ##############
-###  /                                      ; ###############
-#                                            ################
-#############################################################
-#     Henlo! I am WUF,
-#     here to track yowr tasks!
-#############################################################
-
-#############################################################
-#    Got it. I've added this task:
-#      [T][✘] read book
-#    Now you have 1 tasks in the list.
+Got it. I've added this task:
+  [T][✘] read book
+Now you have 1 tasks in the list.
 #############################################################
 #############################################################
-#    Got it. I've added this task:
-#      [D][✘] return book (by: June 6th)
-#    Now you have 2 tasks in the list.
+Got it. I've added this task:
+  [D][✘] return book (by: June 6th)
+Now you have 2 tasks in the list.
 #############################################################
 #############################################################
-#    Got it. I've added this task:
-#      [E][✘] project meeting (at: Aug 6th 2-4pm)
-#    Now you have 3 tasks in the list.
+Got it. I've added this task:
+  [E][✘] project meeting (at: Aug 6th 2-4pm)
+Now you have 3 tasks in the list.
 #############################################################
 #############################################################
-#    Got it. I've added this task:
-#      [T][✘] join sports club
-#    Now you have 4 tasks in the list.
+Got it. I've added this task:
+  [T][✘] join sports club
+Now you have 4 tasks in the list.
 #############################################################
 #############################################################
-#    Nice! I've marked this task as done:
-#      [T][✓] read book
+Nice! I've marked this task as done:
+  [T][✓] read book
 #############################################################
 #############################################################
-#    Nice! I've marked this task as done:
-#      [T][✓] join sports club
+Nice! I've marked this task as done:
+  [T][✓] join sports club
 #############################################################
 #############################################################
-#    Got it. I've added this task:
-#      [T][✘] borrow book
-#    Now you have 5 tasks in the list.
+Got it. I've added this task:
+  [T][✘] borrow book
+Now you have 5 tasks in the list.
 #############################################################
 #############################################################
-#    Here are the tasks in your list:
-#    1.[T][✓] read book
-#    2.[D][✘] return book (by: June 6th)
-#    3.[E][✘] project meeting (at: Aug 6th 2-4pm)
-#    4.[T][✓] join sports club
-#    5.[T][✘] borrow book
+Here are the tasks in your list:
+1.[T][✓] read book
+2.[D][✘] return book (by: June 6th)
+3.[E][✘] project meeting (at: Aug 6th 2-4pm)
+4.[T][✓] join sports club
+5.[T][✘] borrow book
 #############################################################
 #############################################################
-#    Got it. I've added this task:
-#      [D][✘] return book (by: Sunday)
-#    Now you have 6 tasks in the list.
+Got it. I've added this task:
+  [D][✘] return book (by: Sunday)
+Now you have 6 tasks in the list.
 #############################################################
 #############################################################
-#    Got it. I've added this task:
-#      [E][✘] project meeting (at: Mon 2-4pm)
-#    Now you have 7 tasks in the list.
+Got it. I've added this task:
+  [E][✘] project meeting (at: Mon 2-4pm)
+Now you have 7 tasks in the list.
 #############################################################
 #############################################################
-#    Noted. I've removed this task:
-#      [E][✘] project meeting (at: Aug 6th 2-4pm)
-#    Now you have 6 tasks in the list.
+Noted. I've removed this task:
+  [E][✘] project meeting (at: Aug 6th 2-4pm)
+Now you have 6 tasks in the list.
 #############################################################
 #############################################################
-#    Here are the tasks in your list:
-#    1.[T][✓] read book
-#    2.[D][✘] return book (by: June 6th)
-#    3.[T][✓] join sports club
-#    4.[T][✘] borrow book
-#    5.[D][✘] return book (by: Sunday)
-#    6.[E][✘] project meeting (at: Mon 2-4pm)
+Here are the tasks in your list:
+1.[T][✓] read book
+2.[D][✘] return book (by: June 6th)
+3.[T][✓] join sports club
+4.[T][✘] borrow book
+5.[D][✘] return book (by: Sunday)
+6.[E][✘] project meeting (at: Mon 2-4pm)
 #############################################################
 #############################################################
-#    ☹ OOPS!!! Task does not exist/invalid task number.
+☹ OOPS!!! Task does not exist/invalid task number.
 #############################################################
 #############################################################
-#    ☹ OOPS!!! Task does not exist/invalid task number.
+☹ OOPS!!! Task does not exist/invalid task number.
 #############################################################
 #############################################################
-#    ☹ OOPS!!! I'm sorry, but I don't know what that means :-(
+☹ OOPS!!! I'm sorry, but I don't know what that means :-(
 #############################################################
 #############################################################
-#    ☹ OOPS!!! The description of a todo cannot be empty.
+☹ OOPS!!! The description of a todo cannot be empty.
 #############################################################
 #############################################################
-#    ☹ OOPS!!! Ensure that deadlines have correct description.
+☹ OOPS!!! Ensure that deadlines have correct description.
 #############################################################
 #############################################################
-#    ☹ OOPS!!! Ensure that events have correct description.
+☹ OOPS!!! Ensure that events have correct description.
 #############################################################
 #############################################################
-#    Bye. Hope to see you again soon!
+Bye. Hope to see you again soon!
 #############################################################
