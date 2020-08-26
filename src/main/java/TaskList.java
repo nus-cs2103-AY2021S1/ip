@@ -1,9 +1,8 @@
-import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class TaskList {
-    ArrayList<Task> taskList;
+    protected ArrayList<Task> taskList;
 
     public TaskList() {
         this.taskList = new ArrayList<>();
