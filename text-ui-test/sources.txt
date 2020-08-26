@@ -18,6 +18,6 @@
 ../src/main/java/duke.duke.java
 ../src/main/java/duke.duke.task.Deadline.java
 ../src/main/java/duke.duke.command.Command.DoneCommand.java
-../src/main/java/duke.task.Todo.java
+../src/main/java/duke.task.TodoTest.java
 ../src/main/java/duke.exception.InvalidTodoException.java
 ../src/main/java/duke.command.Command.ErrorCommand.java
