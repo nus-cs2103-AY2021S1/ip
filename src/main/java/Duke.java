@@ -12,6 +12,16 @@ import java.nio.file.Paths;
 
 public class Duke {
 
+    private Ui ui;
+
+    public Duke() {
+        this.ui = new Ui();
+    }
+
+    public void run() {
+        ui.welcomeMessage();
+    }
+
     // Loop through every task and transform it into a string
     public static String listToString(ArrayList<Task> taskList) {
         String taskListStr = "";
@@ -160,15 +170,17 @@ public class Duke {
 
     public static void main(String[] args) throws DukeException {
 
+        new Duke().run();
+
         // Initialise strings to separate messages from Duke
         // and commands from CLI
         String servantSpeak = "Duke:\n";
         String masterSpeak = "Your Command Sire:";
 
-        // Introduction at the beginning of the chat
-        System.out.println(servantSpeak
-                + "    Greetings my Liege.\n"
-                + "    Why have you summoned me?\n");
+//        // Introduction at the beginning of the chat
+//        System.out.println(servantSpeak
+//                + "    Greetings my Liege.\n"
+//                + "    Why have you summoned me?\n");
 
         // Initialise the Scanner object to get input from user
         Scanner myObj = new Scanner(System.in);
