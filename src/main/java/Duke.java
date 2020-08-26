@@ -22,6 +22,10 @@ public class Duke {
         }
     }
 
+    public static void main(String[] args) {
+        new Duke(SAVE_FILE_PATH).run();
+    }
+
     private void run() {
         try (Scanner scanner = new Scanner(System.in)) {
             this.ui.displayGreeting();
@@ -48,10 +52,6 @@ public class Duke {
             this.ui.displayMessages(e.getMessage());
         }
 
-    }
-
-    public static void main(String[] args) {
-        new Duke(SAVE_FILE_PATH).run();
     }
 
     private void handleCommand(String input) {

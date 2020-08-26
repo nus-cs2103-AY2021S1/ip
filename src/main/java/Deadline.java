@@ -3,8 +3,8 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 
 public class Deadline extends Task {
-    private final LocalDate deadline;
     private static final String SAVE_STRING = "DEADLINE|%s|%s|%s";
+    private final LocalDate deadline;
 
     public Deadline(String taskName, LocalDate deadline) {
         super(taskName);

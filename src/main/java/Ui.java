@@ -16,7 +16,7 @@ public class Ui {
         System.out.println("What do you need this time 😫");
     }
 
-    public void displayMessages(String...messages) {
+    public void displayMessages(String... messages) {
         System.out.println("     ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――");
         for (String message : messages) {
             System.out.printf("     %s\n", message);
