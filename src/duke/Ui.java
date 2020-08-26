@@ -1,5 +1,6 @@
 package duke;
 import java.io.File;
+import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -107,10 +108,11 @@ public class Ui {
     }
 
     public void respondToDone(int taskNumber) throws Exception {
-        Task t = tl.arr.get(taskNumber - 1);
+        ArrayList<Task> arr = tl.getArr();
+        Task t = arr.get(taskNumber - 1);
         t.taskIsDone();
-        printForDone(tl.arr, t);
-        s.listWriter(tl.arr);
+        printForDone(arr, t);
+        s.listWriter(arr);
     }
 
     public void respondToTodoWrongSyntax() {
@@ -121,8 +123,8 @@ public class Ui {
     public void respondToTodo(String name) throws Exception {
         Todo t = new Todo(name);
         tl.addTask(t);
-        print(tl.arr, t);
-        s.listWriter(tl.arr);
+        print(tl.getArr(), t);
+        s.listWriter(tl.getArr());
     }
 
     public void respondToEventFail() {
@@ -131,10 +133,11 @@ public class Ui {
     }
 
     public void respondToEvent(String name, String time) throws Exception {
+        ArrayList<Task> arr = tl.getArr();
         Event e = new Event(name, time);
         tl.addTask(e);
-        print(tl.arr, e);
-        s.listWriter(tl.arr);
+        print(arr, e);
+        s.listWriter(arr);
     }
 
     public void respondToDeleteWrongSyntax() {
@@ -146,10 +149,11 @@ public class Ui {
     }
 
     public void respondToDelete(int taskNumber) throws Exception {
-        Task t = tl.arr.get(taskNumber - 1);
+        ArrayList<Task> arr = tl.getArr();
+        Task t = arr.get(taskNumber - 1);
         tl.removeTask(t);
-        printForDelete(tl.arr, t);
-        s.listWriter(tl.arr);
+        printForDelete(arr, t);
+        s.listWriter(arr);
     }
 
     public void respondToDeadlineFail() {
@@ -158,10 +162,11 @@ public class Ui {
     }
 
     public void respondToDeadline(String name, String time) throws Exception {
+        ArrayList<Task> arr = tl.getArr();
         Deadline d = new Deadline(name, time);
         tl.addTask(d);
-        print(tl.arr, d);
-        s.listWriter(tl.arr);
+        print(arr, d);
+        s.listWriter(arr);
     }
 
     public void respondToCommandDoesNotExist() {
