@@ -11,8 +11,6 @@ public class Duke {
         this.storage = new Storage(filePath);
         try {
             this.tasks = new TaskList(this.storage.loadFile());
-        } catch (DukeException e) {
-            this.ui.showDukeError(e);
         } catch (IOException e) {
             this.ui.showLoadError();
         }

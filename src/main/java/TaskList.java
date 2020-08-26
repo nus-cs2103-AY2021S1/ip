@@ -26,7 +26,7 @@ public class TaskList {
         }
     }
 
-    Task addTask(String taskType, String desc) throws MissingDeadlineException {
+    public Task addTask(String taskType, String desc) throws MissingDeadlineException {
         Task task = createTask(taskType, desc);
         this.tasks.add(task);
         return task;

@@ -23,7 +23,7 @@ public class Storage {
         file.createNewFile();
     }
 
-    List<Task> loadFile() throws MissingDeadlineException, IOException {
+    public List<Task> loadFile() throws IOException {
         File file = new File(this.filePath);
         List<Task> tasks = new ArrayList<>();
         try {
@@ -39,7 +39,7 @@ public class Storage {
         return tasks;
     }
 
-    Task readData(String s) throws MissingDeadlineException {
+    Task readData(String s) {
         String[] arr = s.split(" \\| ");
         Task task;
         if (arr[0].equals("T")) {
@@ -57,7 +57,7 @@ public class Storage {
         return task;
     }
 
-    void saveFile(TaskList tasks) throws IOException {
+    public void saveFile(TaskList tasks) throws IOException {
         FileWriter fw = new FileWriter(this.filePath);
         String textToAdd = "";
         for (Task task: tasks.getList()) {
