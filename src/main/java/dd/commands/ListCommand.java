@@ -53,14 +53,33 @@ public class ListCommand extends Command {
         }
     }
 
+    private void checkDesc() throws DukeException {
+        ArrayList<Task> tasksWithDesc = new ArrayList<>();
+
+        for (Task t : tasks.getTaskList()) {
+            String taskDesc = t.getDescription();
+
+            if (taskDesc.contains(item)) {
+                tasksWithDesc.add(t);
+            }
+        }
+
+        if (tasksWithDesc.isEmpty()) {
+            throw new DukeException().emptyCheckDesc(item);
+        } else {
+            ui.startCheckDesc(item);
+            list(tasksWithDesc);
+        }
+    }
+
     /**
      * Executes the appropriate method based on command.
      *
      * @param taskList Current TaskList to modify.
      * @param u Ui used to print statements.
      * @param ds DataStorage used to load or write data.
-     * @throws DukeException If no date string contained in item,
-     * or invalid date string is given to a check command.
+     * @throws DukeException If invalid date string is given to a check command,
+     * or if no tasks match given date or description in check and find commands.
      */
     @Override
     public void execute(TaskList taskList, Ui u, DataStorage ds) throws DukeException {
@@ -72,6 +91,8 @@ public class ListCommand extends Command {
             list(tasks.getTaskList());
         } else if (command.equals("check")) {
             checkDate();
+        } else if (command.equals("find")) {
+            checkDesc();
         }
     }
 

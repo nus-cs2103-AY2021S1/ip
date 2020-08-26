@@ -42,6 +42,18 @@ public class DukeException extends Exception {
     }
 
     /**
+     * Creates a new exception for empty TaskList found for description given in find command.
+     *
+     * @param desc Description given in find command.
+     * @return A new DukeException containing no task found message.
+     */
+    public DukeException emptyCheckDesc(String desc) {
+        String msg = "No tasks related to " + desc + "!";
+
+        return new DukeException(msg);
+    }
+
+    /**
      * Creates a new exception for invalid date given in check command.
      *
      * @return A new DukeException containing invalid date message.

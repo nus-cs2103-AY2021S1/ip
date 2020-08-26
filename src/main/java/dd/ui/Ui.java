@@ -151,6 +151,15 @@ public class Ui {
     }
 
     /**
+     * Prints output to indicate description that is being checked.
+     *
+     * @param desc Description that is being checked.
+     */
+    public void startCheckDesc(String desc) {
+        System.out.println("Here is the list of task(s) related to " + desc + ":");
+    }
+
+    /**
      * Prints output to indicate start of listing of tasks.
      */
     public void startList() {
