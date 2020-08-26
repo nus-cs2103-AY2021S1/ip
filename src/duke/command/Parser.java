@@ -230,7 +230,14 @@ public class Parser {
             ui.showErrorMessage(e);
         }
     }
-    
+
+    /**
+     * Finds all the tasks in the task list that contains the keyword.
+     * 
+     * @param keyword Keyword found in the filtered tasks.
+     * @param ui User interface which displays the filtered tasks.
+     * @param storage ocal storage that loads the saved task list.
+     */
     private static void searchTaskListForKeyword(String keyword, Ui ui, Storage storage) {
         try {
             TaskList tasks = storage.load();

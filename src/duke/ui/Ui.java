@@ -74,6 +74,12 @@ public class Ui {
         System.out.println(USER);
     }
 
+    /**
+     * Displays the task list containing tasks that match a keyword.
+     * 
+     * @param tasks Task list containing the tasks that match the keyword.
+     * @param keyword Keyword found in the filtered tasks.
+     */
     public void showFilteredByKeywordTaskList(TaskList tasks, String keyword) {
         System.out.println(DIVIDER);
 
