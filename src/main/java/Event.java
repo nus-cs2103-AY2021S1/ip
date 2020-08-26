@@ -1,10 +1,11 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
+
 public class Event extends Task {
 
-    protected String at;
-
-    public Event(String description, String at) {
-        super(description);
-        this.at = at;
+    public Event(String description, LocalDate at) {
+        super(description, at);
     }
 
     public String getAt() {
@@ -13,6 +14,6 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + at + ")";
+        return "[E]" + super.toString() + " (at: " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 }
