@@ -2,7 +2,6 @@ package duke.command;
 
 import duke.exceptions.DukeException;
 import duke.exceptions.EmptyFindException;
-import duke.exceptions.EmptyToDoException;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
 import duke.ui.Ui;
@@ -10,6 +9,9 @@ import duke.ui.Ui;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Represent a command that search for tasks based on user's input.
+ */
 public class FindCommand extends UserCommand {
     /**
      * @param userInput user's input.
@@ -18,6 +20,11 @@ public class FindCommand extends UserCommand {
         super(userInput);
     }
 
+    /**
+     * @param taskList task list containing all the tasks.
+     * @param ui       ui that prints output.
+     * @throws DukeException
+     */
     @Override
     public void execute(TaskList taskList, Ui ui) throws DukeException {
         List<Task> ls = taskList.getTasks();
