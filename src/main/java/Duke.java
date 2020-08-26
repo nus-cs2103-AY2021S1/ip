@@ -38,7 +38,30 @@ public class Duke {
             if (fileCreated) {
                 System.out.println("Haven't seen a new face around 'ere for awhile, have a seat!");
             } else {
-                System.out.println("A regular! The usual, I presume?");
+                System.out.println("A regular! The usual, I presume?\n" + "I've still got your order history, care to take a look?");
+                Scanner saveReader = new Scanner(saveData);
+                while (saveReader.hasNextLine()) {
+                    String saveEntry = saveReader.nextLine();
+                    String[] keywords = saveEntry.split(":");
+                    Task savedTask = null;
+                    switch (keywords[0]) {
+                        case "T":
+                            savedTask = new Todo(keywords[2]);
+                            break;
+                        case "D":
+                            savedTask = new Deadline(keywords[2], keywords[3]);
+                            break;
+                        case "E":
+                            savedTask = new Event(keywords[2], keywords[3]);
+                            break;
+                        default:
+                            break;
+                    }
+                    if (savedTask != null) {
+                        if (keywords[1].equals("y")) savedTask.markAsDone();
+                        taskList.add(savedTask);
+                    }
+                }
             }
         } catch (IOException exception) {
             System.out.println(exception);
@@ -123,6 +146,8 @@ public class Duke {
                 System.out.println(e.toString());
             }
         }
+        userInput.close();
+
         BufferedWriter saveWriter = null;
         try {
             saveWriter = new BufferedWriter(new FileWriter(saveData));

@@ -6,7 +6,7 @@ public class Todo extends Task {
 
     @Override
     public String createSaveDataLine() {
-        return "T|" + getStatusLetter() + "|" + description;
+        return "T:" + getStatusLetter() + ":" + description;
     }
 
     @Override

@@ -9,7 +9,7 @@ public class Event extends Task {
 
     @Override
     public String createSaveDataLine() {
-        return "E|" + getStatusLetter() + "|" + description + "|" + time;
+        return "E:" + getStatusLetter() + ":" + description + ":" + time;
     }
 
     @Override

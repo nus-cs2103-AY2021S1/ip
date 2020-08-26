@@ -9,7 +9,7 @@ public class Deadline extends Task {
 
     @Override
     public String createSaveDataLine() {
-        return "D|" + getStatusLetter() + "|" + description + "|" + deadline;
+        return "D:" + getStatusLetter() + ":" + description + ":" + deadline;
     }
 
     @Override
