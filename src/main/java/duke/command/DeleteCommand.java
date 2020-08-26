@@ -6,6 +6,7 @@ import duke.exception.InvalidInputException;
 import duke.task.Task;
 
 public class DeleteCommand extends Command {
+
     private int index;
 
     /**

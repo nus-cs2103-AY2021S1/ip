@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class TimeParser {
+    
     private LocalDate localDate;
     private String time;
 

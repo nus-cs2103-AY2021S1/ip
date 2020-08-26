@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class Storage {
+
     /** The default file path if the user does not provide the file path.**/
     private static final String DEFAULT_FILE_PATH = "data/tasks.txt";
     private String filePath;

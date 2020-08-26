@@ -14,6 +14,7 @@ import java.util.Scanner;
  * Duke class is the control class of Duke, include the logic of Duke.
  */
 public class Duke {
+
     private Storage storage;
     private TaskList taskList;
     private Ui ui;
