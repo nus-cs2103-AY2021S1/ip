@@ -40,6 +40,5 @@ public class DeadlineCommand extends UserCommand {
         System.out.println("Got it. I've added this task:");
         System.out.println(deadline.toString());
         System.out.format("Now you have %d tasks in the list\n", ls.size());
-//        ArrayListToTextConverter.convertArrayListToText(ls);
     }
 }
