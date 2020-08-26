@@ -6,7 +6,7 @@ public class Deadlines extends Task {
         this.deadline = deadline;
     }
 
-    public Deadlines(String description, String deadline, boolean bool) {
+    private Deadlines(String description, String deadline, boolean bool) {
         super(description, bool);
         this.deadline = deadline;
     }
