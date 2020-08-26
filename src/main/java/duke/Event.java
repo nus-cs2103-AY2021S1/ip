@@ -1,7 +1,5 @@
 package main.java.duke;
 
-import main.java.duke.Task;
-
 public class Event extends Task {
 
     protected String at;
@@ -27,7 +25,7 @@ public class Event extends Task {
 
     @Override
     public String[] getInfo() {
-        return new String[]{this.getType(), this.isDone(), this.description, this.getAt()};
+        return new String[] {this.getType(), this.isDone(), this.description, this.getAt()};
     }
 
     @Override

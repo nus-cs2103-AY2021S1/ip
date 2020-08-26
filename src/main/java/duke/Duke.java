@@ -6,19 +6,19 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
-    public static String memory_file_dir = "./data/";
-    public static String memory_file_name = "task_list.txt";
+    protected static String MEMORY_FILE_DIR = "./data/";
+    protected static String MEMORY_FILE_NAME = "task_list.txt";
 
-    public Duke(String memory_file_dir, String memory_file_name) {
-        this.storage = new Storage(memory_file_dir, memory_file_name);
+    public Duke(String memoryFileDir, String memoryFileName) {
+        this.storage = new Storage(memoryFileDir, memoryFileName);
         try {
-            this.tasks = new TaskList(storage.readMemoTasks(), memory_file_dir, memory_file_name);
+            this.tasks = new TaskList(storage.readMemoTasks(), memoryFileDir, memoryFileName);
         } catch (Exception ex) {
-            HandleException.handleException(DukeException.ExceptionType.read_file);
+            HandleException.handleException(DukeException.ExceptionType.READ_FILE);
             tasks = new TaskList();
-            System.out.println(SpecialFormat.indent + "Let's start first without the task records!");
+            System.out.println(SpecialFormat.INDENT + "Let's start first without the task records!");
         }
-        this.ui = new Ui(memory_file_dir, memory_file_name, tasks.task_collections);
+        this.ui = new Ui(memoryFileDir, memoryFileName, tasks.showList());
     }
 
     public void run() {
@@ -26,7 +26,7 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke(memory_file_dir, memory_file_name).run();
+        new Duke(MEMORY_FILE_DIR, MEMORY_FILE_NAME).run();
     }
 
 }
