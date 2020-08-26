@@ -49,4 +49,8 @@ public class Ui {
         System.out.println(lines);
     }
 
+    protected void findMsg() {
+        System.out.println(" Here are the matching tasks in your list:");
+    }
+
 }

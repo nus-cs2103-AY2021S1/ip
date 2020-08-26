@@ -1,4 +1,5 @@
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class Parser {
 
@@ -15,17 +16,40 @@ public class Parser {
     protected void processInput(String input) throws DukeException {
         if (input.equals("list")) {
             this.provideList();
-        } else if (input.contains("done")) {
+        } else if (input.startsWith("done")) {
             this.markAsDone(input);
-        } else if (input.contains("todo") || input.contains("deadline") || input.contains("event")) {
+        } else if (input.startsWith("todo") || input.startsWith("deadline") || input.startsWith("event")) {
             this.newTaskEntry(input);
         } else if (input.equals("bye")) {
             this.end();
-        } else if (input.contains("delete")) {
+        } else if (input.startsWith("delete")) {
             this.delete(input);
+        } else if (input.startsWith("find")) {
+            this.find(input);
         } else {
             throw new InputNotRecognisedException();
         }
+    }
+
+    private void find(String input) {
+        String keyword = input.substring(5);
+        ArrayList<Task> temp = new ArrayList<>();
+        for (int i = 0; i < tasks.length(); i++) {
+            Task currentTask = tasks.get(i);
+            System.out.println(currentTask);
+            if (currentTask.getDescription().contains(keyword)) {
+                temp.add(currentTask);
+            }
+        }
+        ui.printLines();
+        ui.findMsg();
+        for (int i = 0; i < temp.size(); i++) {
+            Task task = temp.get(i);
+            String stringedIndex = Integer.toString(temp.indexOf(task) + 1);
+            String outputLine = stringedIndex + ". " + task;
+            System.out.println(outputLine);
+        }
+        ui.printLines();
     }
 
     private void provideList() {
