@@ -1,3 +1,5 @@
+import java.io.File;
+import java.io.IOException;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.List;
@@ -5,7 +7,7 @@ import java.util.Arrays;
 
 public class Duke {
 
-    private List<Task> tasks = new ArrayList<>();
+    UserData userData = new UserData();
 
     private void activate() {
         Scanner sc = new Scanner(System.in);
@@ -58,11 +60,16 @@ public class Duke {
     }
 
     private void showTasks() {
-        System.out.println("Here are the tasks in your list:");
-        for (int i = 0; i < tasks.size(); i++) {
-            String task = tasks.get(i).toString();
-            String message = String.valueOf(i + 1) + ". " + task;
-            System.out.println(message);
+        List<Task> tasks = userData.getTasks();
+        if (tasks.size() == 0) {
+            System.out.println("No tasks in the list wohoo!");
+        } else {
+            System.out.println("Here are the tasks in your list:");
+            for (int i = 0; i < tasks.size(); i++) {
+                String task = tasks.get(i).toString();
+                String message = (i + 1) + ". " + task;
+                System.out.println(message);
+            }
         }
         System.out.print("\n");
     }
@@ -70,16 +77,13 @@ public class Duke {
     private void markAsDone(String input) {
         String rawNum = input.replaceAll("[^0-9]", "");
         int taskId = Integer.parseInt(rawNum) - 1;
-        String message;
 
         try {
-            if (taskId < 0 || taskId >= tasks.size())
+            if (taskId < 0 || taskId >= userData.taskSize())
                 throw new InvalidTaskIdException(rawNum);
 
-            Task task = tasks.get(taskId).markAsDone();
-            tasks.set(taskId, task);
-            message = "Nice! I've marked it done - " + task.toString();
-            System.out.println(message);
+            Task task = userData.markAsDone(taskId);
+            System.out.println("Nice! I've marked it done - " + task.toString());
             System.out.print("\n");
 
         } catch (DukeException e) {
@@ -90,16 +94,13 @@ public class Duke {
     private void delete(String input) {
         String rawNum = input.replaceAll("[^0-9]", "");
         int taskId = Integer.parseInt(rawNum) - 1;
-        String message;
 
         try {
-            if (taskId < 0 || taskId >= tasks.size())
+            if (taskId < 0 || taskId >= userData.taskSize())
                 throw new InvalidTaskIdException(rawNum);
 
-            Task task = tasks.get(taskId);
-            tasks.remove(taskId);
-            message = "Noted! I've removed this task - " + task.toString();
-            System.out.println(message);
+            Task task = userData.delete(taskId);
+            System.out.println("Noted! I've removed this task - " + task.toString());
             summary();
             System.out.print("\n");
 
@@ -124,7 +125,7 @@ public class Duke {
                 throw new InvalidCommandException();
             }
 
-            tasks.add(task);
+            userData.create(task);
             System.out.println("Added '" + task.toString() + "' to list of tasks");
             summary();
             System.out.print("\n");
@@ -182,10 +183,10 @@ public class Duke {
     }
 
     private void summary() {
-        System.out.println("Now you have " + tasks.size() + " tasks in the list");
+        System.out.println("Now you have " + userData.taskSize() + " tasks in the list");
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         Duke duke = new Duke();
         duke.activate();
     }
