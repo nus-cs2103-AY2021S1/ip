@@ -21,7 +21,7 @@ public class ListCommand implements Command {
         ArrayList<Task> arr = tasks.getAllTasks();
         ArrayList<String> lines = new ArrayList<String>();
         lines.add(Message.FETCHING_MSG.getMsg());
-        for(Task t:arr) {
+        for (Task t : arr) {
             lines.add(t.getID() + "." + t.toString());
         }
         ui.display(lines);

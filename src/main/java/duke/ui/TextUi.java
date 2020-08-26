@@ -8,8 +8,8 @@ import java.util.Scanner;
 public class TextUi implements Ui {
     
     // constant strings:
-    private static final String lineBreak = "____________________________________________________________";
-    private static final String indent = "    ";
+    private static final String LINE_BREAK = "____________________________________________________________";
+    private static final String INDENT = "    ";
     
     @Override
     public String readCommand(Scanner sc) {
@@ -58,15 +58,15 @@ public class TextUi implements Ui {
     
     // encapsulates and indents response lines:
     private static ArrayList<String> prettify(ArrayList<String> rawResponse) {
-        rawResponse.add(0, lineBreak);
-        rawResponse.add(rawResponse.size(), lineBreak);
+        rawResponse.add(0, LINE_BREAK);
+        rawResponse.add(rawResponse.size(), LINE_BREAK);
         return indentLines(rawResponse);
     }
     
     private static ArrayList<String> indentLines(ArrayList<String> responseLines) {
         ArrayList<String> result = new ArrayList<>();
         for (String current : responseLines) {
-            current = TextUi.indent + current;
+            current = TextUi.INDENT + current;
             result.add(current);
         }
         return result;
