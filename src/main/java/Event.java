@@ -1,16 +1,17 @@
 public class Event extends Task{
 
-    protected String at;
+    protected DateAndTime at;
 
-    public Event(String description, String at){
+    public Event(String description, DateAndTime at){
         super(description);
         this.at = at;
     }
 
-    public Event(String description, String at, boolean isDone){
+    public Event(String description, DateAndTime at, boolean isDone){
         super(description, isDone);
         this.at = at;
     }
+
 
     @Override
     public String toString(){
