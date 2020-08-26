@@ -1,3 +1,8 @@
+/**
+ * A Todo is the simplest form of a Task, without any restrictions on when it occurs or when it is due.
+ *
+ * @author jingyenloh
+ */
 public class Todo extends Task {
     private static final String SAVE_STRING = "TODO|%s|%s";
 

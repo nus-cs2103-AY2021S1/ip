@@ -9,6 +9,11 @@ public class Storage {
         this.filePath = filePath;
     }
 
+    /**
+     * Deserializes a list of tasks stored at a given path into a list of Tasks.
+     * @return a list of Tasks that were stored at the path at <code>filePath</code>.
+     * @throws IOException if a problem was encountered while trying to access the file at <code>filePath</code>
+     */
     // TODO: 26/8/20 Add more relevant error for parsing
     public List<Task> load() throws IOException {
         List<Task> tasks = new ArrayList<>();
@@ -23,10 +28,19 @@ public class Storage {
     }
 
     // TODO: 26/8/20 consider a more robust check
+    /**
+     * Checks if the file at <code>filePath</code> exists.
+     * @return true if the file exists, otherwise false
+     */
     public boolean hasSavedTasks() {
         return new File(this.filePath).exists();
     }
 
+    /**
+     * Saves a list of tasks into a file.
+     * @param tasks the list of tasks to serialize and save
+     * @throws IOException if a problem was encountered while trying to access the file at <code>filePath</code>
+     */
     public void saveTasks(List<Task> tasks) throws IOException {
         File saveFile = new File(this.filePath);
         if (!saveFile.exists()) {

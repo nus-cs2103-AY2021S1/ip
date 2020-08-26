@@ -1,5 +1,10 @@
 import java.util.Objects;
 
+/**
+ * The Task represents something that can be done.
+ *
+ * @author jingyenloh
+ */
 public abstract class Task {
     protected boolean isDone;
     protected String taskName;
@@ -14,7 +19,7 @@ public abstract class Task {
     }
 
     /**
-     * Mark a task as done.
+     * Marks a task as done.
      */
     public void markDone() {
         this.isDone = true;
@@ -25,6 +30,10 @@ public abstract class Task {
         return String.format("[%s] %s", isDone ? "✓" : "✘", this.taskName);
     }
 
+    /**
+     * Formats the task into a String that is easy to parse.
+     * @return a formatted String, ready for saving into a file.
+     */
     public abstract String toSaveString();
 
     @Override

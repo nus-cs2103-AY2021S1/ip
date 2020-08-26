@@ -22,6 +22,15 @@ public class Duke {
         }
     }
 
+    /**
+     * Executes an instance of the Duke chatbot. While the user does not input a goodbye command, Duke interprets
+     * different commands passed to it and performs different actions, including but not limited to the following:
+     * - store a task to be done
+     * - mark a task as done
+     * - list the tasks to be done
+     * - find tasks that match a search term
+     * - remove a task from the list of tasks
+     */
     private void run() {
         try (Scanner scanner = new Scanner(System.in)) {
             this.ui.displayGreeting();
@@ -50,10 +59,20 @@ public class Duke {
 
     }
 
+    /**
+     * Initializes an instance of Duke, and runs it.
+     * @param args The command line args passed to the program
+     */
     public static void main(String[] args) {
         new Duke(SAVE_FILE_PATH).run();
     }
 
+    /**
+     * Interprets a command that was passed to Duke, and performs a corresponding action based on it. If the command or
+     * its arguments were malformed, display an error to the user.
+     *
+     * @param input The String containing the command, as well as its arguments
+     */
     private void handleCommand(String input) {
         try {
             String[] tokens = input.split(" ");
