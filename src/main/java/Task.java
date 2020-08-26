@@ -7,12 +7,22 @@ public class Task {
         this.done = false;
     }
 
+    public Task(String name, boolean done) {
+        this.name = name;
+        this.done = done;
+    }
+
     public void markAsDone() {
         this.done = true;
     }
 
     public void markAsUndone() {
         this.done = false;
+    }
+
+    public String toFileFormat() {
+        String isDone = done ? "1" : "0";
+        return isDone + " | " + name ;
     }
 
     @Override
