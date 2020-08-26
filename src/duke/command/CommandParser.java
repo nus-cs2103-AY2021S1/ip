@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.Duke;
 import duke.data.DukeCommandSet;
 
 import duke.exception.IncorrectFormatException;
@@ -9,19 +10,19 @@ import duke.exception.UnknownCommandException;
 
 public class CommandParser {
 
-    public static void parse(String str) {
+    public void parse(String str, Duke duke) {
         String[] splitParts = splitInputLine(str);
         String commandName = splitParts[0];
         String rest = splitParts[1];
 
-        Command command = tryGetCommand(commandName);
+        Command command = tryGetCommand(commandName, duke.commandSet);
 
         if (command != null) {
-            tryExecuteCommand(command, rest);
+            tryExecuteCommand(command, rest, duke);
         }
     }
 
-    private static String[] splitInputLine(String inputLine) {
+    private String[] splitInputLine(String inputLine) {
         String[] splitParts = new String[2];
 
         String[] inputParts = inputLine.split(" ", 2);
@@ -31,11 +32,11 @@ public class CommandParser {
         return splitParts;
     }
 
-    private static Command tryGetCommand(String commandName) {
+    private Command tryGetCommand(String commandName, DukeCommandSet commandSet) {
         Command command = null;
 
         try {
-            command = DukeCommandSet.getInstance().getCommand(commandName);
+            command = commandSet.getCommand(commandName);
         } catch (UnknownCommandException exception) {
             System.out.println(exception.getMessage());
         }
@@ -43,9 +44,9 @@ public class CommandParser {
         return command;
     }
 
-    private static void tryExecuteCommand(Command command, String rest) {
+    private void tryExecuteCommand(Command command, String rest, Duke duke) {
         try {
-            command.execute(rest);
+            command.execute(rest, duke);
         } catch (NoDescriptionException | IncorrectFormatException | InvalidIndexException exception) {
             System.out.println(exception.getMessage());
         }
