@@ -10,7 +10,7 @@ import duke.task.TaskType;
 import duke.util.Parser;
 import duke.util.Storage;
 
-public class TaskCommand {
+public class TaskCommand extends Command {
     public static String execute(String in, TaskList taskList, Storage storage) throws DukeException {
         TaskType taskType = Parser.parseTaskType(in);
         String taskDetails =

@@ -4,29 +4,32 @@ import duke.command.CommandType;
 import duke.task.TaskType;
 
 public class Parser {
-    private static final String CMD_EXIT = "bye";
-    private static final String CMD_LIST = "list";
-    private static final String CMD_DONE = "done";
-    private static final String CMD_DELETE = "delete";
-    private static final String CMD_DUE = "due";
     private static final String CMD_DEADLINE = "deadline";
-    private static final String CMD_TODO = "todo";
+    private static final String CMD_DELETE = "delete";
+    private static final String CMD_DONE = "done";
+    private static final String CMD_DUE = "due";
     private static final String CMD_EVENT = "event";
+    private static final String CMD_EXIT = "bye";
+    private static final String CMD_FIND = "find";
+    private static final String CMD_LIST = "list";
+    private static final String CMD_TODO = "todo";
 
     public static CommandType parseCmdWord(String in) {
         String[] input = in.split(" ");
         String cmdWord = input[0];
         switch (cmdWord) {
-        case CMD_EXIT:
-            return CommandType.Exit;
-        case CMD_LIST:
-            return CommandType.List;
-        case CMD_DONE:
-            return CommandType.Done;
         case CMD_DELETE:
             return CommandType.Delete;
+        case CMD_DONE:
+            return CommandType.Done;
         case CMD_DUE:
             return CommandType.Due;
+        case CMD_EXIT:
+            return CommandType.Exit;
+        case CMD_FIND:
+            return CommandType.Find;
+        case CMD_LIST:
+            return CommandType.List;
         case CMD_DEADLINE:
             // fallthrough
         case CMD_EVENT:

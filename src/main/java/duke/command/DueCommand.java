@@ -10,14 +10,14 @@ import java.time.format.DateTimeParseException;
 
 import java.util.ArrayList;
 
-public class DueCommand {
+public class DueCommand extends Command {
     public static String execute(String in, TaskList taskList) throws InvalidCommandException {
         String dateStr = in.replaceFirst("due ", "");
         try {
             LocalDate date = DateTimeParsing.parseDate(dateStr);
             String formattedDate = DateTimeParsing.localDateToFormattedString(date);
-            ArrayList<String> filteredTasks = new ArrayList<>();
 
+            ArrayList<String> filteredTasks = new ArrayList<>();
             int len = taskList.size();
             for (int i = 1; i <= len; i++) {
                 Task task = taskList.get(i - 1);

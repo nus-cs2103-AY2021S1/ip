@@ -1,6 +1,6 @@
 package duke.command;
 
 public enum CommandType {
-    Exit, List, Done, Delete, Due, Task, Invalid
+    Delete, Done, Due, Exit, Find, Invalid, List, Task
 }
 

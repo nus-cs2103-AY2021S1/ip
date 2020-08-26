@@ -5,7 +5,7 @@ import duke.task.TaskList;
 import duke.util.Storage;
 import duke.task.Task;
 
-public class DeleteCommand {
+public class DeleteCommand extends Command {
     public static String execute(String in, TaskList taskList, Storage storage) throws InvalidCommandException {
         try {
             int index =

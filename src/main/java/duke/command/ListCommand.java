@@ -5,7 +5,7 @@ import duke.task.TaskList;
 
 import java.util.ArrayList;
 
-public class ListCommand {
+public class ListCommand extends Command {
     public static String execute(TaskList taskList) {
         int len = taskList.size();
         ArrayList<String> msgBody = new ArrayList<>();

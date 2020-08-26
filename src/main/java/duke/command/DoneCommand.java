@@ -4,7 +4,7 @@ import duke.exception.InvalidCommandException;
 import duke.task.Task;
 import duke.task.TaskList;
 
-public class DoneCommand {
+public class DoneCommand extends Command {
     public static String execute(String in, TaskList taskList) throws InvalidCommandException {
         try {
             int index = Integer.parseInt(in.replaceFirst("done ", ""));

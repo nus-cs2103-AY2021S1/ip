@@ -18,7 +18,9 @@ public abstract class Task {
         return isDone ? "\u2713" : "\u2718";
     }
 
-    public abstract String toSaveString();
+    public boolean containsKeyword(String keyword) {
+        return description.contains(keyword);
+    }
 
     @Override
     public String toString() {
@@ -26,4 +28,6 @@ public abstract class Task {
     }
 
     public abstract boolean isDueOn(LocalDate date);
+
+    public abstract String toSaveString();
 }
