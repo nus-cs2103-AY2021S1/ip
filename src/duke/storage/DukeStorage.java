@@ -1,16 +1,22 @@
 package duke.storage;
 
-import duke.data.DukeTaskList;
+import duke.Duke;
 
 import java.io.IOException;
 
 public class DukeStorage {
 
-    public static void loadSavedTasks() throws IOException {
-        DukeTaskList.tasks = TaskStorage.getInstance().getSavedTasks();
+    private Duke duke;
+
+    public DukeStorage(Duke duke) {
+        this.duke = duke;
     }
 
-    public static void saveCurrentTasks() throws IOException {
-        TaskStorage.getInstance().saveTasks(DukeTaskList.tasks);
+    public void loadSavedTasks() throws IOException {
+        duke.taskList.tasks = TaskStorage.getInstance().getSavedTasks();
+    }
+
+    public void saveCurrentTasks() throws IOException {
+        TaskStorage.getInstance().saveTasks(duke.taskList.tasks);
     }
 }
