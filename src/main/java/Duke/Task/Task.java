@@ -3,8 +3,8 @@ package Duke.Task;
 /**
  * Represents an upcoming task in to-do list.
  */
-
 public class Task {
+    
     protected String taskDescription;
     protected boolean isDone;
 

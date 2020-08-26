@@ -7,6 +7,7 @@ import java.time.format.DateTimeFormatter;
  * Represent an event object with timing.
  */
 public class Event extends Task {
+    
     protected LocalDateTime time;
 
     /**
