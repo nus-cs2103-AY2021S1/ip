@@ -1,4 +1,2 @@
-T | 0 | hello
-T | 0 | eat
-T | 1 | bye
-E | 0 | eat | tmr
+E | 0 | eat  | tmr
+E | 0 | eat  | today

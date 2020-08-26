@@ -25,6 +25,16 @@ public class TaskList {
         return taskList.get(index);
     }
 
+    TaskList find(String query) {
+        ArrayList<Task> newTaskList = new ArrayList<Task>();
+        for (Task task : taskList) {
+            if (task.getTask().contains(query)) {
+                newTaskList.add(task);
+            }
+        }
+        return new TaskList(newTaskList);
+    }
+
     int size() {
         return taskList.size();
     }
