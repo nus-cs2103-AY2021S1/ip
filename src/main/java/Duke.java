@@ -1,9 +1,9 @@
-import duke.exceptions.DukeException;
-import duke.exceptions.IncompleteDukeCommandException;
-import duke.parser.Parser;
 import duke.Storage;
 import duke.Ui;
 import duke.command.Command;
+import duke.exceptions.DukeException;
+import duke.exceptions.IncompleteDukeCommandException;
+import duke.parser.Parser;
 import duke.task.TaskList;
 
 public class Duke {
