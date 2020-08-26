@@ -2,7 +2,7 @@ package duke;
 
 public class Parser {
 
-    public static Command parseCommands(String userInput) throws DukeException { //enum
+    public static Command parseCommands(String userInput) throws DukeException {
         CommandEnum command;
         try {
             String[] input = userInput.split(" ");

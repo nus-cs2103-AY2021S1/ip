@@ -7,7 +7,7 @@ import java.util.regex.PatternSyntaxException;
 
 public class AddCommand extends Command {
     private final CommandEnum command;
-    String userInput;
+    private final String userInput;
 
     AddCommand(CommandEnum command, String userInput) {
         this.command = command;
@@ -29,6 +29,11 @@ public class AddCommand extends Command {
                 break;
         }
     }
+
+    public String getUserInput() {
+        return this.userInput;
+    }
+
 
     public void addToDo(TaskList tasks, Storage storage, Ui ui, String userInput) throws DukeException, IOException {
         if (!userInput.substring(4).isBlank()) { //if got space behind, it will add also
