@@ -7,12 +7,18 @@ import duke.utility.Storage;
 import duke.utility.TaskList;
 import duke.utility.Ui;
 
+/**
+ * Class to represents the Duke.
+ */
 public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
-    Duke() {
+    /**
+     * Constructs a new Duke object to initialized the program.
+     */
+    public Duke() {
         ui = new Ui();
         storage = new Storage("data/storage.txt");
         try {
@@ -43,6 +49,10 @@ public class Duke {
         ui.exit();
     }
 
+    /**
+     * Run the Duke program.
+     * @param args The command line input
+     */
     public static void main(String[] args) {
         Duke duke = new Duke();
         duke.run();

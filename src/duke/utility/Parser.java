@@ -16,7 +16,7 @@ import duke.exception.DoneException;
 import duke.exception.DukeException;
 import duke.exception.EventException;
 import duke.exception.InvalidDateFormatException;
-import duke.exception.InvalidDateInputException;
+import duke.exception.InvalidDateTimeFormatException;
 import duke.exception.InvalidTaskNumberException;
 import duke.exception.NotACommandException;
 import duke.exception.ToDoException;
@@ -30,7 +30,20 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Class to parse the user input. This class will try to
+ * change the user input to a functional command.
+ */
 public class Parser {
+
+    /**
+     * Parses the task so that it will be saved in the specific format
+     * in the hard disk. This is done to make it easier to read the data
+     * that is stored locally when running the Duke again.
+     *
+     * @param task Task to be parsed
+     * @return parsed task for saving purpose
+     */
     public static String parseForSave(Task task) {
         String taskName = task.getTaskName();
         String isDone = task.isDone() ? "1" : "0";
@@ -52,6 +65,13 @@ public class Parser {
         return parsed;
     }
 
+    /**
+     * Parses the string that is being read in the hard disk and creates
+     * the task representation of the string.
+     *
+     * @param taskString String that represents a task in the hard disk
+     * @return The task representation of the string
+     */
     public static Task parseForReadingFile(String taskString) {
         String[] taskArr = taskString.split("\\|");
 
@@ -82,6 +102,16 @@ public class Parser {
         return newTask;
     }
 
+    /**
+     * Parses the user input in order to change it into a functional command.
+     * If the user input a wrong command or the user does not supply any arg
+     * while the command needs an arg, it will throws an exception.
+     *
+     * @param userInput The user input
+     * @return The command representation of the user input
+     * @throws DukeException If there is no arg or wrong arg for
+     * specific command or user input wrong command
+     */
     public static Command parseUserInput(String userInput) throws DukeException {
         String[] userInputArr = userInput.split("\\s", 2);
         String command = userInputArr[0];
@@ -172,7 +202,7 @@ public class Parser {
             try {
                 deadlineDate = LocalDateTime.parse(dateForDeadline, formatter);
             } catch (DateTimeParseException e) {
-                throw new InvalidDateInputException();
+                throw new InvalidDateTimeFormatException();
             }
 
             return new DeadlineCommand(taskForDeadline, deadlineDate);
@@ -194,7 +224,7 @@ public class Parser {
             try {
                 eventDate = LocalDateTime.parse(dateForEvent, formatter);
             } catch (DateTimeParseException e) {
-                throw new InvalidDateInputException();
+                throw new InvalidDateTimeFormatException();
             }
 
             return new EventCommand(taskForEvent, eventDate);

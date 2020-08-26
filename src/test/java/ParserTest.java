@@ -3,7 +3,7 @@ import duke.exception.DeleteException;
 import duke.exception.DoneException;
 import duke.exception.EventException;
 import duke.exception.InvalidDateFormatException;
-import duke.exception.InvalidDateInputException;
+import duke.exception.InvalidDateTimeFormatException;
 import duke.exception.InvalidTaskNumberException;
 import duke.exception.NotACommandException;
 import duke.exception.ToDoException;
@@ -233,7 +233,7 @@ public class ParserTest {
         });
 
         String userInputWrongDate = "deadline Sample task /by 01 January 2020";
-        Assertions.assertThrows(InvalidDateInputException.class, () -> {
+        Assertions.assertThrows(InvalidDateTimeFormatException.class, () -> {
             Parser.parseUserInput(userInputWrongDate);
         });
     }
@@ -261,7 +261,7 @@ public class ParserTest {
         });
 
         String userInputWrongDate = "event Sample task /at 01 January 2020";
-        Assertions.assertThrows(InvalidDateInputException.class, () -> {
+        Assertions.assertThrows(InvalidDateTimeFormatException.class, () -> {
             Parser.parseUserInput(userInputWrongDate);
         });
     }

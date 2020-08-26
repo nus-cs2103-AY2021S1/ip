@@ -12,13 +12,31 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * This class deals with saving, changing, or deleting
+ * data in the hard disk. These are done in order to remember
+ * all the current task when running the Duke again.
+ */
 public class Storage {
     private Path storagePath;
 
+    /**
+     * Constructs a Storage object with the specified file path.
+     *
+     * @param filePath The file path to the storage file
+     */
     public Storage(String filePath) {
         this.storagePath = Paths.get(filePath);
     }
 
+    /**
+     * Saves the task to the hard disk. The task will be parsed
+     * to the task's saving format before it is saved to the hard disk.
+     * Note that the new task will be appended to the end of the file.
+     *
+     * @param task The task to be saved
+     * @throws DukeException If the FileWriter fails to read the file
+     */
     public void saveTaskToFile(Task task) throws DukeException {
         try {
             FileWriter fw = new FileWriter(storagePath.toString(), true);
@@ -31,6 +49,14 @@ public class Storage {
         }
     }
 
+    /**
+     * Changes the task's status to done in the hard disk based on
+     * the line number specified. This will change '0' (which indicates
+     * ongoing task) in the hard disk to '1' (which indicates done task).
+     *
+     * @param line The task line that wanted to be changed
+     * @throws DukeException If the Scanner or FileWriter fails to read the file
+     */
     public void changeTaskInFile(int line) throws DukeException {
         try {
             StringBuilder sb = new StringBuilder();
@@ -62,6 +88,13 @@ public class Storage {
         }
     }
 
+    /**
+     * Delete a task in the hard disk based on the line number
+     * specified.
+     *
+     * @param line The task line that wanted to be changed
+     * @throws DukeException If the Scanner or FileWriter fails to read the file
+     */
     public void deleteTaskInFile(int line) throws DukeException {
         try {
             StringBuilder sb = new StringBuilder();
@@ -108,6 +141,17 @@ public class Storage {
         }
     }
 
+    /**
+     * Read the storage file in the hard disk. If no folder or
+     * file has been created, it will create the folder or file
+     * automatically. All the strings read from the hard disk
+     * will be parsed to their corresponding task and added to the
+     * list of task.
+     *
+     * @return List of task
+     * @throws DukeException If fails to create the new file locally
+     * or the Scanner fails to read the file
+     */
     public List<Task> load() throws DukeException {
         try {
             createStorageFile();
