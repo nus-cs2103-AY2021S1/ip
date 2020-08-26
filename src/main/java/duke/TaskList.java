@@ -38,12 +38,6 @@ public class TaskList {
         return this.todoList.size();
     }
 
-    public void addTask(String isCompleted, String task) {
-        Task newTask = new Task(isCompleted, task);
-        this.todoList.add(newTask);
-        System.out.println("added: " + task);
-    }
-
     public void addTodo(String isCompleted, String task) {
         Todo newTodo = new Todo(isCompleted, task);
         this.todoList.add(newTodo);
