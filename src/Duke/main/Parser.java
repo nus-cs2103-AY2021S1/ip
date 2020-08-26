@@ -33,11 +33,11 @@ public class Parser {
                     && order.substring(0, 4).equals(Status.DONE.name().toLowerCase())) {
                 done(order);
             } else if (order.length() >= 8
-                    && order.substring(0, 6).equals(Status.DELETE.name().toLowerCase())){
+                    && order.substring(0, 6).equals(Status.DELETE.name().toLowerCase())) {
                 delete(order);
-            } else if (order.length() == 0) { }
+            } else if (order.length() == 0) {
 
-            else {
+            } else {
                 identifier(order);
             }
         }
@@ -80,8 +80,9 @@ public class Parser {
                 String response =
                         Status.DELETE.toString() +
                                 task + "\n" +
-                                String.format
-                                        (Status.REPORT.toString(), taskList.getTaskList().size());
+                                String.format(
+                                        Status.REPORT.toString(), taskList.getTaskList().size()
+                                );
 
                 System.out.println(
                         new Formating<>(new Response(response)));

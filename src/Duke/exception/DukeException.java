@@ -27,11 +27,11 @@ public class DukeException {
         System.out.println(new Formating<>(Exceptions.NOTIMEEXCEPTION.toString()));
     }
 
-    public static void FileException() {
+    public static void fileException() {
         System.out.println(new Formating<>(Exceptions.FILEEXCEPTION.toString()));
     }
 
-    public static void ReadLineException() {
+    public static void readLineException() {
         System.out.println(new Formating<>(Exceptions.READLINEEXCEPTION.toString()));
     }
 

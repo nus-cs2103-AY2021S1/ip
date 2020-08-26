@@ -31,7 +31,7 @@ public class ReadFile {
             textReader.close();
 
         } catch (IOException e) {
-            DukeException.FileException();
+            DukeException.fileException();
         }
     }
 }
