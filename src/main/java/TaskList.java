@@ -97,6 +97,21 @@ public class TaskList {
     }
   }
 
+  /**
+   * Searches for a task with the specified keyword Prints it out
+   *
+   * @param inputs Userinput split into tokens
+   */
+  public void handleFind(String[] inputs) {
+    System.out.println("Here are the matching tasks in your list:");
+    int i = 1;
+    for (Task task : tasks) {
+      if (task.getDescription().contains(inputs[1])) {
+        System.out.println(i++ + ". " + task);
+      }
+    }
+  }
+
   /** Returns the ArrayList of tasks */
   public ArrayList<Task> getList() {
     return this.tasks;
