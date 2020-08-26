@@ -4,6 +4,9 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Duke class
+ */
 public class Duke {
 
     public static void main(String[] args) throws DukeException {
