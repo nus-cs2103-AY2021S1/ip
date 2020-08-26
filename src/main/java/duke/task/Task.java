@@ -20,17 +20,6 @@ public abstract class Task {
         return isDone ? "\u2713" : "\u2718";
     }
 
-    public static Task createTask(TaskType type, String details) throws InvalidTaskException {
-        switch (type) {
-        case Todo:
-            return Todo.createTodo(details);
-        case Deadline:
-            return Deadline.createDeadline(details);
-        default: // duke.task.Event
-            return Event.createEvent(details);
-        }
-    }
-
     public abstract String toSaveString();
 
     @Override

@@ -4,6 +4,7 @@ import duke.exception.DukeException;
 import duke.exception.InvalidCommandException;
 import duke.exception.InvalidTaskException;
 import duke.task.Task;
+import duke.task.TaskFactory;
 import duke.task.TaskList;
 import duke.task.TaskType;
 import duke.util.Parser;
@@ -26,7 +27,7 @@ public class TaskCommand {
 
     private static String createTask(TaskType taskType, String details, TaskList taskList, Storage storage)
             throws InvalidTaskException {
-        Task task = Task.createTask(taskType, details);
+        Task task = TaskFactory.createTask(taskType, details);
         taskList.add(task);
         storage.updateSaveFile(taskList);
         int len = taskList.size();
