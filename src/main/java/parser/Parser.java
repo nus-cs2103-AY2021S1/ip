@@ -2,7 +2,7 @@ package parser;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import taskList.TaskList;
+import tasklist.TaskList;
 import storage.Storage;
 import duke.DukeException;
 import task.Deadline;
@@ -19,27 +19,29 @@ public class Parser {
         String[] instructions = input.split(" ");
         String command = instructions[0];
         switch (command) {
-            case "bye":
-                storage.overwriteTodoList();
-                return command;
-            case "list":
-                return taskList.showList();
-            case "done":
-                return taskList.completeItem(input);
-            case "delete":
-                return taskList.deleteItem(input);
-            case "todo":
-                String todo = input.substring(4, input.length());
-                return taskList.addItem(command, todo);
-            case "deadline":
-                String deadline = input.substring(8, input.length());
-                return taskList.addItem(command, deadline);
-            case "event": {
-                String event = input.substring(5, input.length());
-                return taskList.addItem(command, event);
-            }
-            default:
-                throw new DukeException("Oops! I'm sorry but I have no idea what that means >.<");
+        case "bye":
+            storage.overwriteTodoList();
+            return command;
+        case "list":
+            return taskList.showList();
+        case "done":
+            return taskList.completeItem(input);
+        case "delete":
+            return taskList.deleteItem(input);
+        case "find":
+            return taskList.findItem(input);
+        case "todo":
+            String todo = input.substring(4, input.length());
+            return taskList.addItem(command, todo);
+        case "deadline":
+            String deadline = input.substring(8, input.length());
+            return taskList.addItem(command, deadline);
+        case "event": {
+            String event = input.substring(5, input.length());
+            return taskList.addItem(command, event);
+        }
+        default:
+            throw new DukeException("Oops! I'm sorry but I have no idea what that means >.<");
         }
     }
 

@@ -21,6 +21,14 @@ public class Task {
         }
     }
 
+    /**
+     * Returns the description of the task
+     * @return String description of task
+     */
+    public String getTask() {
+        return this.item;
+    }
+
     public String getInput() {
         return this.item;
     }

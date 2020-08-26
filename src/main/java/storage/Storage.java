@@ -4,7 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.util.Scanner;
-import taskList.TaskList;
+import tasklist.TaskList;
 import duke.DukeException;
 
 public class Storage {

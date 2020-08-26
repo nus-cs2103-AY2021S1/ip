@@ -1,4 +1,4 @@
-package taskList;
+package tasklist;
 
 import java.util.ArrayList;
 import task.Task;
@@ -94,6 +94,31 @@ public class TaskList {
         todoList.add(newTask);
         numberOfTasks += 1;
         return "  " + newTask.getItem();
+    }
+
+    /**
+     * Finds the tasks that match the search keywords inputted by the user
+     * and returns the String to be printed to the user.
+     *
+     * @param input input given by the user
+     * @return String returns all the tasks that match the search query
+     */
+    public String findItem(String input) {
+        String result = "";
+        String query = input.substring(4);
+        int count = 0;
+        for (Task task : todoList) {
+            if (task.getTask().contains(query)) {
+                count += 1;
+                result += "\n    " + count + "." + task.getItem();
+            }
+        }
+        if (count == 0) {
+            result = "  There is no matching tasks in your list.";
+        } else {
+            result = "  Here are the matching tasks in your list: " + result;
+        }
+        return result;
     }
 
     public String formatTodoListToString() {
