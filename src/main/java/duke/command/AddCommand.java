@@ -1,18 +1,33 @@
 package duke.command;
 
-import duke.exceptions.DukeException;
 import duke.Storage;
 import duke.Ui;
+import duke.exceptions.DukeException;
 import duke.exceptions.IncompleteDukeCommandException;
-import duke.task.*;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.TaskType;
+import duke.task.ToDo;
 
+/**
+ * The {@code CompleteCommand} class represents a command to create a new {@link Task}.
+ */
 public class AddCommand extends Command {
 
     private Task createdTask;
     private int remainingTaskCount;
 
+    /**
+     * Constructs an add command with the specified type and specified {@code Task} parameter.
+     *
+     * @param type           the type of {@code Task} to be added.
+     * @param taskParameters the parameters used for creating the task.
+     * @throws DukeException if the specified type is null.
+     */
     public AddCommand(TaskType type, String taskParameters) throws DukeException {
-        switch(type) {
+        switch (type) {
         case DEADLINE:
             createdTask = Deadline.createTask(taskParameters);
             break;
@@ -27,12 +42,24 @@ public class AddCommand extends Command {
         }
     }
 
+    /**
+     * Executes this {@code AddCommand} by adding the created {@code Task} to the specified {@code list}.
+     *
+     * @param list    the currently loaded {@link TaskList} object.
+     * @param storage the currently loaded {@link Storage} object.
+     */
     public void execute(TaskList list, Storage storage) {
         list.add(createdTask);
         this.remainingTaskCount = list.taskCount();
         super.completed = true;
     }
 
+    /**
+     * Prints a feedback confirming the execution of this {@code AddCommand}.
+     *
+     * @param ui the {@link Ui} instance to use for formatting.
+     * @throws IncompleteDukeCommandException if this {@code AddCommand} was not executed.
+     */
     public void printFeedback(Ui ui) throws IncompleteDukeCommandException {
         if (super.completed) {
             String feedback = String.format("Got it. I've added this task:\n  %s\nNow you have %d tasks in your list.\n", createdTask.toString(), remainingTaskCount);
@@ -42,6 +69,9 @@ public class AddCommand extends Command {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public boolean isExit() {
         return false;
     }
