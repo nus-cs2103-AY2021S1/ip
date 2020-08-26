@@ -23,9 +23,11 @@ public class Task {
     public String toString() {
         String task = "[";
         if (isCompleted) {
-            task += "\u2713";
+            task += "done";
+            // task += "\u2713";
         } else {
-            task += "\u274C";
+            task += "not done";
+            // task += "\u274C";
         }
         task += "] " + taskName;
         return task;
