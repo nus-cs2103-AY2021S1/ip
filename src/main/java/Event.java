@@ -1,20 +1,34 @@
-public class Event extends Task {
-    protected String start;
-    protected String end;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
-    public Event (String description, String start, String end) {
+public class Event extends Task {
+//    protected String start;
+//    protected String end;
+    protected LocalDate at;
+    protected LocalTime start;
+    protected LocalTime end;
+
+    public Event (String description, String at, String timeRange) {
         super(description);
-        this.start = start;
-        this.end = end;
+        this.at = LocalDate.parse(at);
+        this.start = LocalTime.parse(timeRange.split("-")[0]);
+        this.end = LocalTime.parse(timeRange.split("-")[1]);
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + start + "-" + end + ")";
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd MMM yyyy");
+        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("ha");
+        return "[E]" + super.toString() + " (at: "
+                + dateFormatter.format(at) + " "
+                + timeFormatter.format(start) + "-"
+                + timeFormatter.format(end) + ")";
     }
 
     @Override
     public String toStringFileFormat() {
-        return "[E]" + super.toStringFileFormat() + " (at: " + start + "-" + end + ")";
+        return "[E]" + super.toStringFileFormat() + " (at: "
+                + at + " " + start + "-" + end + ")";
     }
 }

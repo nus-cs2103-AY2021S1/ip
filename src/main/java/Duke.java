@@ -113,10 +113,10 @@ public class Duke {
                         String[] stringSplit = taskString.split("  ")[1]
                                 .split("\\s[(]at:\\s");
                         description = " " + stringSplit[0];
-                        String start = stringSplit[1].split("-")[0];
-                        String end = stringSplit[1].split("-")[1];
-                        end = end.substring(0, end.length() - 1); // remove parentheses at the end
-                        Event e = new Event(description, start, end);
+                        String at = stringSplit[1].split(" ")[0];
+                        String timeRange = stringSplit[1].split(" ")[1];
+                        timeRange = timeRange.substring(0, timeRange.length() - 1); // remove parentheses at the end
+                        Event e = new Event(description, at, timeRange);
                         if (isDone) {
                             e.setDone();
                         }
@@ -153,8 +153,9 @@ public class Duke {
     public static boolean hasEventStartEndTime(String input) {
         return input.contains("/at")
                 && input.split(" /at ").length == 2
-                && input.split(" /at ")[1].contains("-")
-                && input.split(" /at ")[1].split("-").length == 2;
+                && input.split(" /at ")[1].split(" ").length == 2
+                && input.split(" /at ")[1].split(" ")[1]
+                .split("-").length == 2;
     }
 
     public static void main(String[] args) throws DukeException {
@@ -312,10 +313,10 @@ public class Duke {
                         throw new DukeException("", ExceptionType.EVENT_NO_START_END);
                     }
                     inputSplit = input.split(" /at ");
-                    String start = inputSplit[1].split("-")[0];
-                    String end = inputSplit[1].split("-")[1];
+                    String at = inputSplit[1].split(" ")[0];
+                    String timeRange = inputSplit[1].split(" ")[1];
                     description = inputSplit[0].substring(5);
-                    t = new Event(description, start, end);
+                    t = new Event(description, at, timeRange);
                     userTasks.add(t);
                     break;
                 } catch (DukeException ex) {
