@@ -12,4 +12,9 @@ public class Event extends Task {
     public String toString() {
         return "[E]" + super.toString() + " (at: " + start + "-" + end + ")";
     }
+
+    @Override
+    public String toStringFileFormat() {
+        return "[E]" + super.toStringFileFormat() + " (at: " + start + "-" + end + ")";
+    }
 }
