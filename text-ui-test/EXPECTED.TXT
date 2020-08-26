@@ -19,6 +19,17 @@ _____________________________________________________________
 Sorry, I don't understand what you just said.
 _____________________________________________________________
 _____________________________________________________________
+These are the available commands:
+bye - exits the program
+deadline <description> /by <due date and time> - adds a deadline with the given description and due date to the task list
+delete <task number> - deletes the task corresponding to the number from the task list
+done <task number> - marks the task corresponding to the number as done
+event <description> /at <due date and time> - adds an event with the given description and due date to the task list
+help - shows this list of commands
+list - shows the contents of the task list
+todo <description> - adds a todo task with the given description to the task list
+_____________________________________________________________
+_____________________________________________________________
 Here is your list:
 1.[D][✗] test (by: August 23 2021, 00:00)
 _____________________________________________________________
@@ -85,6 +96,9 @@ _____________________________________________________________
 _____________________________________________________________
 Marked this task as done:
 [T][✓] that
+_____________________________________________________________
+_____________________________________________________________
+Sorry, I don't understand what you just said.
 _____________________________________________________________
 _____________________________________________________________
 Here is your list:

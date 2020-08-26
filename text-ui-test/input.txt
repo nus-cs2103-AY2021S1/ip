@@ -1,4 +1,5 @@
 test
+help
 list
 todo
 todo that
@@ -18,6 +19,7 @@ due in 1 hours
 due in 366 days
 list
 done 2
+find rest
 list
 delete 3
 delete 2

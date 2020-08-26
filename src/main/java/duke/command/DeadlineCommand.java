@@ -1,6 +1,7 @@
 package duke.command;
 
 import java.time.LocalDateTime;
+
 import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
@@ -21,9 +22,10 @@ public class DeadlineCommand extends Command {
             tasks.add(task, dateTime, TaskType.DEADLINE);
             ui.say("Added Deadline '" + task + "' to your list!");
         } else {
-            throw(DukeException.pastDateTime());
+            throw (DukeException.pastDateTime());
         }
     }
+
     @Override
     public boolean equals(Object obj) {
         return obj instanceof DeadlineCommand;

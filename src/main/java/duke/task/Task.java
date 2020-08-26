@@ -20,4 +20,9 @@ public abstract class Task {
     abstract public String toCommand();
 
     abstract public boolean compareTime(LocalDateTime now, long hours);
+
+    public boolean find(String keyword) {
+        String pattern = "(.*)" + keyword + "(.*)";
+        return text.matches(pattern);
+    }
 }

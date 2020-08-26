@@ -27,7 +27,7 @@ public class TaskList {
             }
             return text;
         } else {
-            throw(DukeException.emptyList());
+            throw (DukeException.emptyList());
         }
     }
 
@@ -59,7 +59,7 @@ public class TaskList {
             list.get(index).setDone();
             return list.get(index).toString();
         } catch (IndexOutOfBoundsException e) {
-            throw(DukeException.outOfBounds());
+            throw (DukeException.outOfBounds());
         }
     }
 
@@ -83,7 +83,7 @@ public class TaskList {
         for (Task t : list) {
             if (t.compareTime(LocalDateTime.now(), hours)) {
                 i++;
-                text += "\n" + i + "." + t;
+                text += "\n" + i + ". " + t;
             }
         }
         text += "\nCount: " + i;
@@ -96,7 +96,20 @@ public class TaskList {
         for (Task t : list) {
             if (t.compareTime(LocalDateTime.now(), days * 24)) {
                 i++;
-                text += "\n" + i + "." + t;
+                text += "\n" + i + ". " + t;
+            }
+        }
+        text += "\nCount: " + i;
+        return text;
+    }
+
+    public String findMatches(String keyword) {
+        int i = 0;
+        String text = "These tasks contains the keyword: " + keyword;
+        for (Task t : list) {
+            if (t.find(keyword)) {
+                i++;
+                text += "\n" + i + ". " + t;
             }
         }
         text += "\nCount: " + i;
