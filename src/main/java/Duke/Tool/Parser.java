@@ -37,6 +37,8 @@ public class Parser {
                     command.delete(num, taskList);
                 } else if (len >= 4 && instruction.substring(0, 4).equals("todo")) {
                     command.handleTodo(instruction, taskList, ui);
+                } else if (len >= 4 && instruction.substring(0, 4).equals("find")) {
+                    command.find(taskList, instruction);
                 } else if (len >= 8 && instruction.substring(0, 8).equals("deadline")) {
                     command.handleDeadline(instruction, taskList, ui);
                 } else if (len >= 5 && instruction.substring(0, 5).equals("event")) {
