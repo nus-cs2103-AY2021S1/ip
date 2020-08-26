@@ -29,7 +29,7 @@ public enum Command{
         return taskContent;
     }
 
-    static String getAction(){return action;}
+    static String getAction() { return action; }
 
     /**
      * Returns a Command object that enumerate original command

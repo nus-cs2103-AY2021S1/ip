@@ -1,13 +1,13 @@
-public class Deadline extends Task{
+public class DeadlineTask extends Task{
     private String time;
     private String taskType = "D";
 
-    Deadline(String taskName, String time){
-        super(taskName);
+    DeadlineTask(String taskContent, String time){
+        super(taskContent);
         this.time = time;
     }
 
-    private String getTime(){
+    public String getTime(){
         return this.time;
     }
 

@@ -10,17 +10,31 @@ public class ToDoList{
      * command is read.
      */
 
-    public static ToDoList start(){
+    public ToDoList(ArrayList<Task> list) {
+        todoList = list;
+        getUndoneCount(todoList);
+    }
+
+    public ToDoList run(){
         Scanner sc = new Scanner(System.in);
         Command command = Command.INIT;
-        ToDoList todo = new ToDoList();
         while (command != Command.BYE){      //when last command was bye
             System.out.print("> ");
             command = Command.getCommand(sc.nextLine());
-            todo.runCommand(command);
+            runCommand(command);
         }
         sc.close();
-        return todo;
+        return this;
+    }
+
+    private int getUndoneCount(ArrayList<Task> list) {
+        undoneCount = 0;
+        for (Task t:list){
+            if (!t.checkDone())
+                undoneCount++;
+        }
+
+        return undoneCount;
     }
 
     private void runCommand(Command command){
@@ -122,7 +136,7 @@ public class ToDoList{
     private void addTodo(String taskContent) throws EmptyDescriptionException{
         if (taskContent.length() < 1)
             throw new EmptyDescriptionException("");
-        Task task = new Todo(taskContent);
+        Task task = new TodoTask(taskContent);
         this.todoList.add(task);
         print("The following task has been added to your list:");
         print("  [T][ ] "+task.toString());
@@ -136,7 +150,7 @@ public class ToDoList{
             throw new EmptyDescriptionException("");
         try {
             String[] splitedContent = taskContent.split("/by");
-            Task task = new Deadline(splitedContent[0], splitedContent[1]);
+            Task task = new DeadlineTask(splitedContent[0], splitedContent[1]);
             this.todoList.add(task);
             print("The following task has been added to your list:");
             print("  [D][ ] "+task.toString());
@@ -153,7 +167,7 @@ public class ToDoList{
             throw new EmptyDescriptionException("");
         try {
             String[] splitedContent = taskContent.split("/at");
-            Task task = new Event(splitedContent[0],splitedContent[1]);
+            Task task = new EventTask(splitedContent[0],splitedContent[1]);
             this.todoList.add(task);
             print("The following task has been added to your list:");
             print("  [E][ ] "+task.toString());
@@ -203,6 +217,10 @@ public class ToDoList{
         } catch (IndexOutOfBoundsException e){
             throw new IndexOutOfBoundsException();
         }
+    }
+
+    public ArrayList<Task> getTodoList(){
+        return todoList;
     }
 
     private void print(String str){
