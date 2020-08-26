@@ -3,14 +3,17 @@ package storage;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
+
 import java.util.Scanner;
-import taskList.TaskList;
+
+import tasklist.TaskList;
+
 import duke.DukeException;
 
 public class Storage {
-    private String filePath;
-    private String outputFormat = "  %s\n";
-    private TaskList taskList;
+    private final String filePath;
+    private final String OUTPUT_FORMAT = "  %s\n";
+    private final TaskList taskList;
 
     public Storage(String filePath, TaskList taskList) {
         this.filePath = filePath;
@@ -32,29 +35,29 @@ public class Storage {
 
     public void formatStringToTask(String task) {
         String[] split = task.split(" ");
-        String body = task.substring(6, task.length());
+        String body = task.substring(6);
         try {
             switch (split[0]) {
-                case "[T][O]":
-                    taskList.addTodoItem(body, true);
-                    break;
-                case "[T][X]":
-                    taskList.addTodoItem(body, false);
-                    break;
-                case "[D][O]":
-                    taskList.addDeadline(body, true);
-                    break;
-                case "[D][X]":
-                    taskList.addDeadline(body, false);
-                    break;
-                case "[E][O]":
-                    taskList.addEvent(body, true);
-                    break;
-                default:
-                    taskList.addEvent(body, false);
+            case "[T][O]":
+                taskList.addTodoItem(body, true);
+                break;
+            case "[T][X]":
+                taskList.addTodoItem(body, false);
+                break;
+            case "[D][O]":
+                taskList.addDeadline(body, true);
+                break;
+            case "[D][X]":
+                taskList.addDeadline(body, false);
+                break;
+            case "[E][O]":
+                taskList.addEvent(body, true);
+                break;
+            default:
+                taskList.addEvent(body, false);
             }
         } catch (DukeException e) {
-            System.out.printf(outputFormat, e.getMessage());
+            System.out.printf(OUTPUT_FORMAT, e.getMessage());
         }
     }
 
@@ -64,7 +67,7 @@ public class Storage {
             fw.write(taskList.formatTodoListToString());
             fw.close();
         } catch (Exception e) {
-            System.out.println(e);
+            System.out.println(e.getMessage());
         }
     }
 }

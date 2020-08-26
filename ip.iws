@@ -5,6 +5,15 @@
       <change beforePath="$PROJECT_DIR$/ip.ipr" beforeDir="false" afterPath="$PROJECT_DIR$/ip.ipr" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ip.iws" beforeDir="false" afterPath="$PROJECT_DIR$/ip.iws" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/data/duke.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/duke.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/duke/Duke.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/duke/Duke.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/parser/Parser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/parser/Parser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/storage/Storage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/storage/Storage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/task/Deadline.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/task/Deadline.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/task/Event.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/task/Event.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/task/Task.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/task/Task.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/task/Todo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/task/Todo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/taskList/TaskList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/taskList/TaskList.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ui/Ui.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ui/Ui.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,12 +41,26 @@
     <property name="Repository.Attach.Annotations" value="false" />
     <property name="Repository.Attach.JavaDocs" value="false" />
     <property name="Repository.Attach.Sources" value="false" />
+    <property name="last_directory_selection" value="$PROJECT_DIR$/src/test/java" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="reference.settings.ide.settings.web.browsers" />
+    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.Java" />
   </component>
-  <component name="RunManager" selected="JUnit.TodoTest">
+  <component name="RunManager" selected="Application.Duke">
+    <configuration name="Duke" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="duke.Duke" />
+      <module name="ip" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="duke.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="DeadlineTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="test" />
       <extension name="coverage">
@@ -63,21 +86,6 @@
       </extension>
       <option name="PACKAGE_NAME" value="task" />
       <option name="MAIN_CLASS_NAME" value="task.EventTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ParserTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="test" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="parser.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="parser" />
-      <option name="MAIN_CLASS_NAME" value="parser.ParserTest" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -115,11 +123,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Duke" />
         <item itemvalue="JUnit.TodoTest" />
         <item itemvalue="JUnit.TaskTest" />
         <item itemvalue="JUnit.EventTest" />
         <item itemvalue="JUnit.DeadlineTest" />
-        <item itemvalue="JUnit.ParserTest" />
       </list>
     </recent_temporary>
   </component>
@@ -139,30 +147,34 @@
       <screen x="4" y="23" width="1436" height="877" />
     </state>
     <state x="73" y="103" width="1071" height="700" key="#com.intellij.execution.impl.EditConfigurationsDialog/4.23.1436.877@4.23.1436.877" timestamp="1598286718834" />
-    <state width="1379" height="209" key="GridCell.Tab.0.bottom" timestamp="1598366394359">
+    <state width="1379" height="209" key="GridCell.Tab.0.bottom" timestamp="1598438998340">
       <screen x="4" y="23" width="1436" height="877" />
     </state>
-    <state width="1379" height="209" key="GridCell.Tab.0.bottom/4.23.1436.877@4.23.1436.877" timestamp="1598366394359" />
-    <state width="1379" height="209" key="GridCell.Tab.0.center" timestamp="1598366394357">
+    <state width="1379" height="209" key="GridCell.Tab.0.bottom/4.23.1436.877@4.23.1436.877" timestamp="1598438998340" />
+    <state width="1379" height="209" key="GridCell.Tab.0.center" timestamp="1598438998339">
       <screen x="4" y="23" width="1436" height="877" />
     </state>
-    <state width="1379" height="209" key="GridCell.Tab.0.center/4.23.1436.877@4.23.1436.877" timestamp="1598366394357" />
-    <state width="1379" height="209" key="GridCell.Tab.0.left" timestamp="1598366394356">
+    <state width="1379" height="209" key="GridCell.Tab.0.center/4.23.1436.877@4.23.1436.877" timestamp="1598438998339" />
+    <state width="1379" height="209" key="GridCell.Tab.0.left" timestamp="1598438998331">
       <screen x="4" y="23" width="1436" height="877" />
     </state>
-    <state width="1379" height="209" key="GridCell.Tab.0.left/4.23.1436.877@4.23.1436.877" timestamp="1598366394356" />
-    <state width="1379" height="209" key="GridCell.Tab.0.right" timestamp="1598366394358">
+    <state width="1379" height="209" key="GridCell.Tab.0.left/4.23.1436.877@4.23.1436.877" timestamp="1598438998331" />
+    <state width="1379" height="209" key="GridCell.Tab.0.right" timestamp="1598438998340">
       <screen x="4" y="23" width="1436" height="877" />
     </state>
-    <state width="1379" height="209" key="GridCell.Tab.0.right/4.23.1436.877@4.23.1436.877" timestamp="1598366394358" />
+    <state width="1379" height="209" key="GridCell.Tab.0.right/4.23.1436.877@4.23.1436.877" timestamp="1598438998340" />
     <state x="356" y="245" key="NewModule_or_Project.wizard" timestamp="1598355742697">
       <screen x="4" y="23" width="1436" height="877" />
     </state>
     <state x="356" y="245" key="NewModule_or_Project.wizard/4.23.1436.877@4.23.1436.877" timestamp="1598355742697" />
-    <state x="76" y="23" key="SettingsEditor" timestamp="1598356219516">
+    <state x="45" y="30" key="SettingsEditor" timestamp="1598439749542">
       <screen x="4" y="23" width="1436" height="877" />
     </state>
-    <state x="76" y="23" key="SettingsEditor/4.23.1436.877@4.23.1436.877" timestamp="1598356219516" />
+    <state x="45" y="30" key="SettingsEditor/4.23.1436.877@4.23.1436.877" timestamp="1598439749542" />
+    <state x="569" y="226" key="chooseDestDirectoryDialog" timestamp="1598439094217">
+      <screen x="4" y="23" width="1436" height="877" />
+    </state>
+    <state x="569" y="226" key="chooseDestDirectoryDialog/4.23.1436.877@4.23.1436.877" timestamp="1598439094217" />
     <state x="325" y="341" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD" timestamp="1598355847613">
       <screen x="4" y="23" width="1436" height="877" />
     </state>

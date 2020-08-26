@@ -2,15 +2,19 @@ package parser;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import taskList.TaskList;
+
+import tasklist.TaskList;
 import storage.Storage;
+
 import duke.DukeException;
+
 import task.Deadline;
 import task.Event;
 
 public class Parser {
-    TaskList taskList;
-    Storage storage;
+    private final TaskList taskList;
+    private final Storage storage;
+
     public Parser(TaskList taskList, Storage storage) {
         this.taskList = taskList;
         this.storage = storage;
@@ -19,27 +23,27 @@ public class Parser {
         String[] instructions = input.split(" ");
         String command = instructions[0];
         switch (command) {
-            case "bye":
-                storage.overwriteTodoList();
-                return command;
-            case "list":
-                return taskList.showList();
-            case "done":
-                return taskList.completeItem(input);
-            case "delete":
-                return taskList.deleteItem(input);
-            case "todo":
-                String todo = input.substring(4, input.length());
-                return taskList.addItem(command, todo);
-            case "deadline":
-                String deadline = input.substring(8, input.length());
-                return taskList.addItem(command, deadline);
-            case "event": {
-                String event = input.substring(5, input.length());
-                return taskList.addItem(command, event);
-            }
-            default:
-                throw new DukeException("Oops! I'm sorry but I have no idea what that means >.<");
+        case "bye":
+            storage.overwriteTodoList();
+            return command;
+        case "list":
+            return taskList.showList();
+        case "done":
+            return taskList.completeItem(input);
+        case "delete":
+            return taskList.deleteItem(input);
+        case "todo":
+            String todo = input.substring(4);
+            return taskList.addItem(command, todo);
+        case "deadline":
+            String deadline = input.substring(8);
+            return taskList.addItem(command, deadline);
+        case "event": {
+            String event = input.substring(5);
+            return taskList.addItem(command, event);
+        }
+        default:
+            throw new DukeException("Oops! I'm sorry but I have no idea what that means >.<");
         }
     }
 
@@ -53,8 +57,7 @@ public class Parser {
             } else {
                 date += dayMonthYear[0];
             }
-            LocalDate dueDate = LocalDate.parse(date);
-            return dueDate;
+            return LocalDate.parse(date);
         } catch (Exception e) {
             throw new DukeException("Incorrect format of date. It should be: DD/MM/YYYY 2359");
         }
@@ -94,23 +97,23 @@ public class Parser {
         return convertedTime + "." + time.substring(2, 4) + amPM;
     }
 
-    public static Deadline parseDeadline(String item, boolean completed) throws DukeException {
+    public static Deadline parseDeadline(String item, boolean isCompleted) throws DukeException {
         String[] splitItem = item.split("/by ");
         if (splitItem.length == 1) {
             throw new DukeException("Incorrect format. Please add a deadline to finish task by.");
         }
         LocalDate dueDate = Parser.formatDate(splitItem[1]);
         String dateTime = Parser.formatDateString(dueDate, splitItem[1]);
-        return new Deadline(splitItem[0], dateTime, dueDate, splitItem[1], completed);
+        return new Deadline(splitItem[0], dateTime, dueDate, splitItem[1], isCompleted);
     }
 
-    public static Event parseEvent(String item, boolean completed) throws DukeException {
+    public static Event parseEvent(String item, boolean isCompleted) throws DukeException {
         String[] splitItem = item.split("/at ");
         if (splitItem.length == 1) {
             throw new DukeException("Incorrect format. Please add a time/date the event is held at.");
         }
         LocalDate dueDate = Parser.formatDate(splitItem[1]);
         String dateTime = Parser.formatDateString(dueDate, splitItem[1]);
-        return new Event(splitItem[0], dateTime, dueDate, splitItem[1], completed);
+        return new Event(splitItem[0], dateTime, dueDate, splitItem[1], isCompleted);
     }
 }

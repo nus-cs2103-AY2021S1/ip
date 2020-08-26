@@ -1,15 +1,18 @@
 package duke;
 
 import ui.Ui;
+
 import storage.Storage;
-import taskList.TaskList;
+
+import tasklist.TaskList;
+
 import parser.Parser;
 
 public class Duke {
-    private Ui ui;
-    private Storage storage;
-    private TaskList taskList;
-    private Parser parser;
+    private final Ui ui;
+    private final Storage storage;
+    private final TaskList taskList;
+    private final Parser parser;
 
     Duke(String filePath) {
         taskList = new TaskList();

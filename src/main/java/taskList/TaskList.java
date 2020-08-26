@@ -1,15 +1,18 @@
-package taskList;
+package tasklist;
 
 import java.util.ArrayList;
+
 import task.Task;
 import task.Deadline;
 import task.Todo;
 import task.Event;
+
 import duke.DukeException;
+
 import parser.Parser;
 
 public class TaskList {
-    private ArrayList<Task> todoList;
+    private final ArrayList<Task> todoList;
     private int numberOfTasks;
 
     public TaskList() {
@@ -21,7 +24,7 @@ public class TaskList {
         int count = 1;
         String output = "  The tasks in your Todo List: ";
         for (Task item : todoList) {
-            output += "\n    " + Integer.toString(count) + ". " + item.getItem();
+            output += "\n    " + count + ". " + item.getItem();
             count += 1;
         }
         return output;
@@ -31,8 +34,7 @@ public class TaskList {
         String indexString = input.split(" ")[1];
         try {
             String output = "";
-            int index = Integer.valueOf(indexString) - 1;
-            Task item = todoList.get(index);
+            Task item = todoList.get(Integer.valueOf(indexString) - 1);
             item.completeTask();
             output += "     \\\\(^o^)/ *.*.* \\\\(^o^)/"+ "\n  Yay! This task has been completed:" + "\n  " + item.getItem();
             return output;
@@ -50,7 +52,7 @@ public class TaskList {
             output += "  Noted. This task has now been removed from the list:" + "\n    " + item.getItem();
             todoList.remove(index);
             numberOfTasks -= 1;
-            output += "\n  There are now " + Integer.toString(numberOfTasks) + " todo items in the list";
+            output += "\n  There are now " + numberOfTasks + " todo items in the list";
             return output;
         } catch (Exception e) {
             throw new DukeException("Oops! Invalid task number. Please try again >.<");
@@ -70,27 +72,27 @@ public class TaskList {
             output += addEvent(item, false);
         }
         output += "\n  New todo item added to the list!";
-        output += "\n  There are now " + Integer.toString(numberOfTasks + 1) + " todo items in the list";
+        output += "\n  There are now " + (numberOfTasks + 1) + " todo items in the list";
         return output;
     }
 
-    public String addTodoItem(String item, boolean completed) {
-        Todo newTask = new Todo(item, completed);
+    public String addTodoItem(String item, boolean isCompleted) {
+        Todo newTask = new Todo(item, isCompleted);
         todoList.add(newTask);
         numberOfTasks += 1;
         return "  " + newTask.getItem();
     }
 
 
-    public String addDeadline(String item, boolean completed) throws DukeException {
-        Deadline newTask = Parser.parseDeadline(item, completed);
+    public String addDeadline(String item, boolean isCompleted) throws DukeException {
+        Deadline newTask = Parser.parseDeadline(item, isCompleted);
         todoList.add(newTask);
         numberOfTasks += 1;
         return "  " + newTask.getItem();
     }
 
-    public String addEvent(String item, boolean completed) throws DukeException {
-        Event newTask = Parser.parseEvent(item, completed);
+    public String addEvent(String item, boolean isCompleted) throws DukeException {
+        Event newTask = Parser.parseEvent(item, isCompleted);
         todoList.add(newTask);
         numberOfTasks += 1;
         return "  " + newTask.getItem();

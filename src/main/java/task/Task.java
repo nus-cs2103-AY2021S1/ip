@@ -1,20 +1,20 @@
 package task;
 
 public class Task {
-    private String item;
-    private boolean completed;
+    private final String item;
+    private boolean isCompleted;
 
-    Task(String item, boolean completed) {
+    Task(String item, boolean isCompleted) {
         this.item = item;
-        this.completed = completed;
+        this.isCompleted = isCompleted;
     }
 
     public void completeTask() {
-        this.completed = true;
+        this.isCompleted = true;
     }
 
     public String getItem() {
-        if (completed) {
+        if (isCompleted) {
             return "[O]" + this.item;
         } else {
             return "[X]" + this.item;

@@ -1,15 +1,14 @@
 package task;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 public class Event extends Task {
-    private String dateTime;
-    private LocalDate dueDate;
-    private String input;
+    private final String dateTime;
+    private final LocalDate dueDate;
+    private final String input;
 
-    public Event(String item, String dateTime, LocalDate dueDate, String input, boolean completed) {
-        super(item, completed);
+    public Event(String item, String dateTime, LocalDate dueDate, String input, boolean isCompleted) {
+        super(item, isCompleted);
         this.dateTime = dateTime;
         this.dueDate = dueDate;
         this.input = input;
