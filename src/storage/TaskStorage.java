@@ -1,4 +1,4 @@
-package data;
+package storage;
 
 import exception.UnknownTaskTypeException;
 import task.Deadline;
@@ -14,7 +14,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class TaskSave {
+public class TaskStorage {
 
     private Path folderPath;
     private File folderFile;
@@ -26,16 +26,16 @@ public class TaskSave {
     private Scanner taskReader;
     private Scanner isDoneReader;
 
-    private static TaskSave instance;
-    public static TaskSave getInstance() throws IOException {
+    private static TaskStorage instance;
+    public static TaskStorage getInstance() throws IOException {
         if (instance == null) {
-            instance = new TaskSave();
+            instance = new TaskStorage();
         }
 
         return instance;
     }
 
-    private TaskSave() throws IOException {
+    private TaskStorage() throws IOException {
         folderPath = Paths.get(".", "saves");
         folderFile = folderPath.toFile();
         taskFilePath = Paths.get(folderPath.toString(), "taskSave.txt");
