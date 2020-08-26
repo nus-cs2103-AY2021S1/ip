@@ -1,5 +1,6 @@
 package main.java;
 
+
 import main.java.command.Command;
 import main.java.exception.AnonymousException;
 import main.java.exception.DescriptionException;
@@ -7,11 +8,13 @@ import main.java.exception.DukeCreateFileException;
 import main.java.exception.DukeDateTimeParserException;
 import main.java.exception.DukeFileException;
 import main.java.exception.DukeFileNotFoundException;
+import main.java.exception.DukeKeywordException;
 import main.java.exception.NoIndexException;
 import main.java.parser.Parser;
 import main.java.storage.Storage;
 import main.java.task.TaskList;
 import main.java.ui.Ui;
+
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -72,6 +75,8 @@ public class Duke {
                 ui.getExceptionTemplate(new DukeDateTimeParserException());
             } catch (NoIndexException e) {
                 ui.getExceptionTemplate(new NoIndexException());
+            } catch (DukeKeywordException e) {
+                ui.getExceptionTemplate(new DukeKeywordException());
             }
         }
     }

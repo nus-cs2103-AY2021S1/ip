@@ -14,8 +14,10 @@ import main.java.command.ShowAfterCommand;
 import main.java.command.ShowBeforeCommand;
 import main.java.command.TodoCommand;
 import main.java.command.WrongCommand;
+import main.java.command.FindCommand;
 import main.java.exception.DescriptionException;
 import main.java.exception.DukeDateTimeParserException;
+import main.java.exception.DukeKeywordException;
 import main.java.exception.NoIndexException;
 import main.java.task.DeadlineTask;
 import main.java.task.EventTask;
@@ -135,7 +137,9 @@ public class Parser {
             return new ShowAfterCommand(command);
         } else if (command.toLowerCase().contains(Command.SHOW_BEFORE_COMMAND)) {
             return new ShowBeforeCommand(command);
-        }else {
+        } else if(command.toLowerCase().contains(Command.FIND_COMMAND)) {
+            return new FindCommand(command);
+        } else {
             return new WrongCommand(command);
         }
     }
@@ -213,6 +217,27 @@ public class Parser {
             return input.split("\\s", 2)[1];
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new DescriptionException();
+        }
+    }
+
+    /**
+     * Finds the keyword specified in user command
+     *
+     * @param input String user command.
+     * @return String keyword
+     * @throws DukeKeywordException Thrown when user failed to specify the keyword
+     * in the command.
+     */
+    public static String findKeywordParser(String input) throws DukeKeywordException {
+        try {
+            String keyword = input.split("\\s", 2)[1];
+            if(keyword.equals("") || keyword.equals("\\s")) {
+                throw new DukeKeywordException();
+            } else {
+                return keyword.trim();
+            }
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new DukeKeywordException();
         }
     }
 }
