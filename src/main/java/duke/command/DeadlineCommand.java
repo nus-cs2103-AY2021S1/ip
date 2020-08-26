@@ -16,6 +16,14 @@ public class DeadlineCommand extends Command {
         this.dateTime = dateTime;
     }
 
+    /**
+     * Adds a Deadline task with task and dateTime to the TaskList.
+     *
+     * @param tasks The TaskList.
+     * @param ui The Ui.
+     * @param storage The Storage.
+     * @throws DukeException If the dateTime has already passed.
+     */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (LocalDateTime.now().isBefore(dateTime)) {
             tasks.add(task, dateTime, TaskType.DEADLINE);

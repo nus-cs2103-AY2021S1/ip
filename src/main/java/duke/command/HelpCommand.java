@@ -7,6 +7,14 @@ import duke.Ui;
 
 public class HelpCommand extends Command {
 
+    /**
+     * Provides the user with a list of commands available for them.
+     *
+     * @param tasks The TaskList.
+     * @param ui The Ui.
+     * @param storage The Storage.
+     * @throws DukeException
+     */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         String help = "These are the available commands:\n" +
                 "bye - exits the program\n" +

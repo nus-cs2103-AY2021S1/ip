@@ -14,6 +14,14 @@ public class ToDoCommand extends Command {
         this.task = task;
     }
 
+    /**
+     * Adds a ToDo task with task to the TaskList.
+     *
+     * @param tasks The TaskList.
+     * @param ui The Ui.
+     * @param storage The Storage.
+     * @throws DukeException
+     */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         tasks.add(task, LocalDateTime.now(), TaskType.TODO);
         ui.say("Added ToDo '" + task + "' to your list!");

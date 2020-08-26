@@ -113,6 +113,14 @@ public class Parser {
         }
     }
 
+    /**
+     * Returns the LocalDateTime extracted from the input String.
+     *
+     * @param input User input.
+     * @param completePattern Regex pattern that follows the command format.
+     * @return LocalDateTime of specified dateTime.
+     * @throws DukeException If dateTime in input is invalid.
+     */
     public static LocalDateTime extractDateTime(String input, String completePattern) throws DukeException {
         try {
             String date = input.replaceAll(completePattern, "$4");
@@ -150,6 +158,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Returns a command to respond to the user input.
+     *
+     * @param input User input.
+     * @return Command responding to the input.
+     * @throws DukeException If user input is not recognized as a command.
+     */
     public static Command parse(String input) throws DukeException {
         if (input.trim().equals("help")) {
             return new HelpCommand();

@@ -12,6 +12,14 @@ public class DeleteCommand extends Command {
         this.index = index;
     }
 
+    /**
+     * Deletes the task with index from the TaskList.
+     *
+     * @param tasks The TaskList.
+     * @param ui The Ui.
+     * @param storage The Storage.
+     * @throws DukeException
+     */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         String task = tasks.delete(index);
         ui.say("Deleted this task:\n" + task);

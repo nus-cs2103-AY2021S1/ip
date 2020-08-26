@@ -48,6 +48,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Returns an arraylist which has been filled with tasks from the saved file.
+     *
+     * @return Arraylist of tasks.
+     * @throws DukeException If saved file does not exist.
+     */
     public ArrayList<Task> load() throws DukeException {
         File f = new File(filePath);
         try {
@@ -71,6 +77,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Saves the tasks in the TaskList to a text file that can be loaded by the Storage class.
+     *
+     * @param tasks The TaskList to be saved.
+     * @throws DukeException If save file path does not exist.
+     */
     public void save(TaskList tasks) throws DukeException {
         File saveFile = new File(filePath);
         File parent_directory = saveFile.getParentFile();

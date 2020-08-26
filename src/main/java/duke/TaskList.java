@@ -19,6 +19,12 @@ public class TaskList {
         this.list = list;
     }
 
+    /**
+     * Returns the contents of the ArrayList in a String.
+     *
+     * @return Contents of the ArrayList.
+     * @throws DukeException If ArrayList is empty.
+     */
     public String listContents() throws DukeException {
         if (list.size() > 0) {
             String text = "Here is your list:";
@@ -31,6 +37,13 @@ public class TaskList {
         }
     }
 
+    /**
+     * Adds the specified task to the list.
+     *
+     * @param task The task description.
+     * @param dateTime The date and time of the task.
+     * @param type The task type.
+     */
     public void add(String task, LocalDateTime dateTime, TaskType type) {
         switch (type) {
         case DEADLINE:
@@ -48,12 +61,30 @@ public class TaskList {
         }
     }
 
-    public String delete(int index) {
-        Task task = list.get(index);
-        list.remove(index);
-        return task.toString();
+    /**
+     * Deletes the specified task from the list.
+     *
+     * @param index The index of the task to be deleted.
+     * @return The description of the deleted task.
+     * @throws DukeException If there is no task with the given index.
+     */
+    public String delete(int index) throws DukeException {
+        try {
+            Task task = list.get(index);
+            list.remove(index);
+            return task.toString();
+        } catch (IndexOutOfBoundsException e) {
+            throw(DukeException.outOfBounds());
+        }
     }
 
+    /**
+     * Marks the specified task as done.
+     *
+     * @param index The index of the task to be marked.
+     * @return The description of the marked task.
+     * @throws DukeException If there is no task with the given index.
+     */
     public String done(int index) throws DukeException {
         try {
             list.get(index).setDone();
@@ -63,6 +94,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Returns the tasks in the list in a format readable by the Storage when it is loading the save file.
+     *
+     * @return Tasks in a Storage readable format.
+     */
     public String extractListData() {
         int len = list.size();
         if (len > 0) {
@@ -77,6 +113,12 @@ public class TaskList {
         }
     }
 
+    /**
+     * Returns a list of tasks due in the given number of hours from current time.
+     *
+     * @param hours Given number of hours.
+     * @return A list of tasks due.
+     */
     public String extractDueTasksHours(long hours) {
         int i = 0;
         String text = "These tasks are due in " + hours + " hour(s):";
@@ -90,6 +132,12 @@ public class TaskList {
         return text;
     }
 
+    /**
+     * Returns a list of tasks due in the given number of days from current time.
+     *
+     * @param days Given number of days.
+     * @return A list of tasks due.
+     */
     public String extractDueTasksDays(long days) {
         int i = 0;
         String text = "These tasks are due in " + days + " day(s):";

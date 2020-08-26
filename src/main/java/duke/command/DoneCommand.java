@@ -12,6 +12,14 @@ public class DoneCommand extends Command {
         this.index = index;
     }
 
+    /**
+     * Marks the task with index in the TaskList as done.
+     *
+     * @param tasks The TaskList.
+     * @param ui The Ui.
+     * @param storage The Storage.
+     * @throws DukeException
+     */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         String task = tasks.done(index);
         ui.say("Marked this task as done:\n" + task);

@@ -35,6 +35,7 @@ public class Event extends Task {
         return now.plusHours(hours).isAfter(dateTime);
     }
 
+    @Override
     public String toCommand() {
         String rawDateTime = dateTime.toString();
         String pattern = "(\\d\\d\\d\\d-\\d\\d-\\d\\d)T(\\d\\d):(\\d\\d)";

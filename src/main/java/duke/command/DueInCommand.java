@@ -14,6 +14,14 @@ public class DueInCommand extends Command {
         this.hours = hours;
     }
 
+    /**
+     * Provides the user with a list of tasks in the TaskList that are due in time hours.
+     *
+     * @param tasks The TaskList.
+     * @param ui The Ui.
+     * @param storage The Storage.
+     * @throws DukeException
+     */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (hours) {
             ui.say(tasks.extractDueTasksHours(time));

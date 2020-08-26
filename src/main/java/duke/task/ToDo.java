@@ -15,12 +15,14 @@ public class ToDo extends Task {
                 : "[T][✗] " + text;
     }
 
+    @Override
     public String toCommand() {
         return done
                 ? "done todo " + text
                 : "todo " + text;
     }
 
+    @Override
     public boolean compareTime(LocalDateTime now, long hours) {
         return false;
     }

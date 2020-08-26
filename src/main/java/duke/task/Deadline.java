@@ -31,10 +31,12 @@ public class Deadline extends Task {
                 : "[D][✗] " + text + " (by: " + dueDate + ")";
     }
 
-    public boolean compareTime(LocalDateTime now, long hours) {
-        return now.plusHours(hours).isAfter(dateTime);
+    @Override
+    public boolean compareTime(LocalDateTime givenDateTime, long hours) {
+        return givenDateTime.plusHours(hours).isAfter(dateTime);
     }
 
+    @Override
     public String toCommand() {
         String rawDateTime = dateTime.toString();
         String pattern = "(\\d\\d\\d\\d-\\d\\d-\\d\\d)T(\\d\\d):(\\d\\d)";
