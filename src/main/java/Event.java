@@ -5,19 +5,23 @@ import java.time.format.DateTimeFormatter;
 public class Event extends Task {
     private final LocalDateTime at;
 
+    public Event(String description, LocalDateTime at) {
+        this(description, at, false);
+    }
+
     public Event(String description, LocalDateTime at, boolean isDone) {
         super(description, isDone);
         this.at = at;
     }
 
     @Override
-    public String toSaveData() {
-        return "E | " + super.toSaveData() + " | " + at;
+    public boolean isDue(LocalDate date) {
+        return at.toLocalDate().equals(date);
     }
 
     @Override
-    public boolean isDue(LocalDate date) {
-        return at.toLocalDate().equals(date);
+    public String toSaveData() {
+        return "E | " + super.toSaveData() + " | " + at;
     }
 
     @Override

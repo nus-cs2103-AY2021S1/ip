@@ -1,6 +1,6 @@
 import java.time.LocalDate;
 
-public class Task {
+public abstract class Task {
     private final String description;
     private boolean isDone;
 
@@ -8,6 +8,8 @@ public class Task {
         this.description = description;
         this.isDone = isDone;
     }
+
+    public abstract boolean isDue(LocalDate date);
 
     public String getStatusIcon() {
         return isDone ? "\u2713" : "\u2718";
@@ -19,10 +21,6 @@ public class Task {
 
     public String toSaveData() {
         return (isDone ? 1 : 0) + " | " + description;
-    }
-
-    public boolean isDue(LocalDate date) {
-        return false;
     }
 
     @Override

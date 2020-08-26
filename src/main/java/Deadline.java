@@ -5,19 +5,23 @@ import java.time.format.DateTimeFormatter;
 public class Deadline extends Task {
     private final LocalDateTime by;
 
+    public Deadline(String description, LocalDateTime by) {
+        this(description, by, false);
+    }
+
     public Deadline(String description, LocalDateTime by, boolean isDone) {
         super(description, isDone);
         this.by = by;
     }
 
     @Override
-    public String toSaveData() {
-        return "D | " + super.toSaveData() + " | " + by;
+    public boolean isDue(LocalDate date) {
+        return by.toLocalDate().equals(date);
     }
 
     @Override
-    public boolean isDue(LocalDate date) {
-        return by.toLocalDate().equals(date);
+    public String toSaveData() {
+        return "D | " + super.toSaveData() + " | " + by;
     }
 
     @Override
