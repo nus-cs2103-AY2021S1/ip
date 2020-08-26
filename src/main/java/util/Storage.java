@@ -11,9 +11,20 @@ import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
 
+/**
+ * The storage class handles the logic of writing and reading files.
+ */
 public class Storage {
+    /** File object containing the text file data. */
     private final File file;
-    
+
+    /**
+     * Creates a new Storage instance.
+     * 
+     * @param filePath Name of file to be located or created.
+     * @param directory Directory of file to be located or created.  
+     * @throws IOException If errors are encountered in reading or writing to file.                  
+     */
     public Storage(String filePath, String directory) throws IOException {
         File dir = new File(directory);
         file = new File(filePath);
@@ -28,7 +39,14 @@ public class Storage {
             file.createNewFile();
         }
     }
-    
+
+
+    /**
+     * Returns a list of tasks in their String format after reading the text data file.
+     * 
+     * @return List of Strings representing tasks
+     * @throws FileNotFoundException If file to load data from is not found.              
+     */
     public List<String> loadData() throws FileNotFoundException {
         List<String> lst = new ArrayList<>();
         Scanner s = new Scanner(file);
@@ -38,20 +56,38 @@ public class Storage {
         }
         return lst;
     }
-    
+
+    /**
+     * Adds a line to the file.
+     * 
+     * @param line Line to be added to the file.
+     * @throws IOException If there is error writing to the file.
+     */
     public void addLine(String line) throws IOException {
         FileWriter fw = new FileWriter(file, true);
         fw.write(line + "\n");
         fw.close();
     }
-    
+
+    /**
+     * Deletes a line from the file.
+     *
+     * @param lineNum Line number to be deleted from the file.
+     * @throws IOException If there is error writing to the file.
+     */
     public void deleteLine(int lineNum) throws IOException {
         Path path = Path.of(file.getPath());
         List<String> fileContent = new ArrayList<>(Files.readAllLines(path, StandardCharsets.UTF_8));
         fileContent.remove(lineNum);
         Files.write(path, fileContent, StandardCharsets.UTF_8);
     }
-    
+
+    /**
+     * Modifies a line from the file.
+     *
+     * @param lineNum Line number to be modified from the file.
+     * @throws IOException If there is error writing to the file.
+     */
     public void modifyLine(int lineNum) throws IOException {
         Path path = Path.of(file.getPath());
         List<String> fileContent = new ArrayList<>(Files.readAllLines(path, StandardCharsets.UTF_8));
