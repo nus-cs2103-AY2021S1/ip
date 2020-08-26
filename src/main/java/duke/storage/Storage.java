@@ -19,7 +19,7 @@ public class Storage {
     private String filePath;
     private String directoryPath;
 
-    public Storage(String filePath, String directoryPath) {
+    public Storage(String filePath, String directoryPath) throws InvalidFilePathException {
         try {
             File directory = new File(directoryPath);
             if (!isValidFilePath(filePath)) {

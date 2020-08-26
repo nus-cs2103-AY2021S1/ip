@@ -2,6 +2,7 @@ package duke;
 
 import duke.command.Command;
 import duke.exception.InvalidInputException;
+import duke.exception.InvalidFilePathException;
 import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.task.TaskList;
@@ -16,7 +17,11 @@ public class Duke {
 
 
     public Duke() {
-        storage = new Storage("data/tasks.txt", "data");
+        try {
+            storage = new Storage("data/tasks.txt", "data");
+        } catch (InvalidFilePathException e) {
+            ui.displayError(e.getMessage());
+        }
         taskList = storage.read();
         ui = new Ui(taskList);
     }
