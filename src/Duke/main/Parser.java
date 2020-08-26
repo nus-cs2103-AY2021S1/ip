@@ -13,7 +13,7 @@ public class Parser {
         taskList = new TaskList<>();
     }
 
-    public void reloadTaskList() {
+    public static void reloadTaskList() {
         taskList = new TaskList<>();
         new ReadFile(Directory.FILEDIRECTORY.toString()).readFile();
     }
@@ -22,10 +22,9 @@ public class Parser {
         return inputFromClient.equals(Status.BYE.name().toLowerCase());
     }
 
-    public void run(String order) {
-
+    public static void run(String order) {
+        reloadTaskList();
         if (order.equals(Status.LIST.name().toLowerCase())) {
-            reloadTaskList();
             System.out.println(
                     new Formating<>(Status.LIST.toString() + taskList)
             );
@@ -44,7 +43,7 @@ public class Parser {
         }
     }
 
-    public void done(String order) {
+    public static void done(String order) {
         try {
             int num =
                     Integer.parseInt(new Formating<>(order.substring(4)).shorten().getContent());
@@ -65,7 +64,7 @@ public class Parser {
         }
     }
 
-    public void delete(String order) {
+    public static void delete(String order) {
         try {
             int num =
                     Integer.parseInt(new Formating<>(order.substring(6)).shorten().getContent());
@@ -73,7 +72,6 @@ public class Parser {
             if (num > taskList.getTaskList().size()) {
                 DukeException.numberExcessException();
             } else {
-
                 Task task = taskList.getTaskList().get(num - 1);
                 taskList.getTaskList().remove(num - 1);
                 EditFile editFile = new EditFile(Directory.FILEDIRECTORY.toString());
@@ -93,7 +91,7 @@ public class Parser {
         }
     }
 
-    public void identifier(String description) {
+    public static void identifier(String description) {
         int len = description.length();
         int pointer = 0;
 
