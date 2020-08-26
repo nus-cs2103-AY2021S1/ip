@@ -55,9 +55,9 @@ public class Event extends Task {
      */
     @Override
     public String txtFileFormat() {
-        return "E ~/~ " + super.txtFileFormat() + " ~/~ " + this.date.toString() +
-                (startTime != null ? " ~/~ " + startTime.toString() : "") +
-                (endTime != null ? " ~/~ " + endTime.toString() : "");
+        return "E ~/~ " + super.txtFileFormat() + " ~/~ " + this.date.toString()
+                + (startTime != null ? " ~/~ " + startTime.toString() : "")
+                + (endTime != null ? " ~/~ " + endTime.toString() : "");
     }
 
     /**
@@ -65,8 +65,8 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) +
-                (startTime != null ? " " + startTime.format(DateTimeFormatter.ofPattern("hh:mm a")) : "") +
-                (endTime != null ? "-" + endTime.format(DateTimeFormatter.ofPattern("hh:mm a")) : "") + ")";
+        return "[E]" + super.toString() + " (at: " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
+                + (startTime != null ? " " + startTime.format(DateTimeFormatter.ofPattern("hh:mm a")) : "")
+                + (endTime != null ? "-" + endTime.format(DateTimeFormatter.ofPattern("hh:mm a")) : "") + ")";
     }
 }

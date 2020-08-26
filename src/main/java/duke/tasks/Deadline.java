@@ -40,8 +40,8 @@ public class Deadline extends Task {
      */
     @Override
     public String txtFileFormat() {
-        return "D ~/~ " + super.txtFileFormat() + " ~/~ " + this.date.toString() +
-                (this.time != null ? " ~/~ " + this.time.toString() : "");
+        return "D ~/~ " + super.txtFileFormat() + " ~/~ " + this.date.toString()
+                + (this.time != null ? " ~/~ " + this.time.toString() : "");
     }
 
     /**
@@ -49,7 +49,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) +
-                (time != null ? " " + time.format(DateTimeFormatter.ofPattern("hh:mm a")) : "") + ")";
+        return "[D]" + super.toString() + " (by: " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
+                + (time != null ? " " + time.format(DateTimeFormatter.ofPattern("hh:mm a")) : "") + ")";
     }
 }
