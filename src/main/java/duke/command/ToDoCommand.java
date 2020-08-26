@@ -10,11 +10,16 @@ import duke.ui.Ui;
 
 import java.util.List;
 
-public class ToDoCommand extends UserCommand{
+public class ToDoCommand extends UserCommand {
     public ToDoCommand(String userInput) {
         super(userInput);
     }
 
+    /**
+     * @param taskList task list containing all the tasks.
+     * @param ui       ui that prints output.
+     * @throws DukeException
+     */
     @Override
     public void execute(TaskList taskList, Ui ui) throws DukeException {
         List<Task> ls = taskList.getTaskList();
@@ -27,7 +32,6 @@ public class ToDoCommand extends UserCommand{
             System.out.println("Got it. I've added this task:");
             System.out.println(todo.toString());
             System.out.format("Now you have %d tasks in the list\n", ls.size());
-//            ArrayListToTextConverter.convertArrayListToText(ls);
         }
     }
 }

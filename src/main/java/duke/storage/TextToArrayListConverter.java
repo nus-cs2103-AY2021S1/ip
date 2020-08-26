@@ -9,8 +9,15 @@ import java.io.ObjectInputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Converts txt file to an arraylist.
+ */
 public class TextToArrayListConverter {
 
+    /**
+     * @param filepath location of the file.
+     * @return list containing the previously saved tasks.
+     */
     public static List<Task> readFile(String filepath) {
         try {
             FileInputStream readData = new FileInputStream(filepath);
