@@ -96,7 +96,7 @@ public class Parser {
 
                 return new DeleteCommand(Integer.parseInt(args));
             case "todo":
-                return new AddTodoCommand(args);
+                return new AddCommand(TaskType.TODO, args);
             case "deadline": {
                 String[] deadlineArgs = args.split("\\s/by\\s");
                 String description = deadlineArgs[0];
@@ -104,7 +104,7 @@ public class Parser {
                         ? String.join(" ", Arrays.copyOfRange(deadlineArgs, 1, deadlineArgs.length))
                         : "";
 
-                return new AddDeadlineCommand(description, parseDateTime(by));
+                return new AddCommand(TaskType.DEADLINE, description, parseDateTime(by));
             }
             case "event": {
                 String[] eventArgs = args.split("\\s/at\\s");
@@ -113,7 +113,7 @@ public class Parser {
                         ? String.join(" ", Arrays.copyOfRange(eventArgs, 1, eventArgs.length))
                         : "";
 
-                return new AddEventCommand(description, parseDateTime(at));
+                return new AddCommand(TaskType.EVENT, description, parseDateTime(at));
             }
             default:
                 throw new DukeException("I'm sorry, but I don't know what that means :-(");

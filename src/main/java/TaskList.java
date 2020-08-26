@@ -15,8 +15,50 @@ public class TaskList {
         this.tasks = tasks;
     }
 
-    public void addTask(Task task) {
-        tasks.add(task);
+    public Task addTask(TaskType type, String description, LocalDateTime dateTime) throws DukeException {
+        switch (type) {
+            case TODO:
+                return addTodo(description);
+            case DEADLINE:
+                return addDeadline(description, dateTime);
+            case EVENT:
+                return addEvent(description, dateTime);
+            default:
+                return null;
+        }
+    }
+
+    public Todo addTodo(String description) throws DukeException {
+        if (description.isBlank()) {
+            throw new DukeException("The description of a todo cannot be empty.");
+        }
+
+        Todo todo = new Todo(description);
+        tasks.add(todo);
+
+        return todo;
+    }
+
+    public Deadline addDeadline(String description, LocalDateTime by) throws DukeException {
+        if (description.isBlank()) {
+            throw new DukeException("The description of a deadline cannot be empty.");
+        }
+
+        Deadline deadline = new Deadline(description, by);
+        tasks.add(deadline);
+
+        return deadline;
+    }
+
+    public Event addEvent(String description, LocalDateTime at) throws DukeException {
+        if (description.isBlank()) {
+            throw new DukeException("The description of an event cannot be empty.");
+        }
+
+        Event event = new Event(description, at);
+        tasks.add(event);
+
+        return event;
     }
 
     public Task getTask(int taskNo) throws DukeException {
