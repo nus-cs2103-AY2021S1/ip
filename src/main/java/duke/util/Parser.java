@@ -7,7 +7,19 @@ import duke.task.Event;
 import duke.task.ToDo;
 
 //TODO: change exceptions to throw from creation instead of checking.
+
+/**
+ * This class will translate the user's imput into command.
+ */
 public class Parser {
+
+    /**
+     * Returns the command type of the user's input.
+     *
+     * @param cmd User's input in String.
+     * @return Command object that is related to user's input.
+     * @throws DukeException if the input string does not contain a valid command.
+     */
     public static Command parse(String cmd) {
         int idx = cmd.indexOf(' ');
         CommandList commandList;
