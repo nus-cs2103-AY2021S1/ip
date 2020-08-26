@@ -12,10 +12,10 @@ import duke.task.Todo;
  */
 public class AddTodoCommand extends Command {
 
-    protected final String[] parsedCommand;
+    private final String[] parsedCommand;
 
     /**
-     * Creates and initialises a new AddTodoCommand object
+     * Creates and initialises a new AddTodoCommand object.
      *
      * @param parsedCommand String array that contains the todo task information.
      */
@@ -39,8 +39,9 @@ public class AddTodoCommand extends Command {
             Task toAdd = new Todo(todoInfo.trim());
             tasks.addTask(toAdd);
 
-            String successReply = "Success! This todo task has been added: \n\t" +
-                    toAdd.toString() + "\nYou have " + tasks.getListSize() + " tasks in your list now.";
+            String successReply = "Success! This todo task has been added: \n\t"
+                    + toAdd.toString() + "\nYou have " + tasks.getListSize()
+                    + " tasks in your list now.";
             ui.printReply(successReply);
 
             storage.saveFile(tasks);
@@ -59,8 +60,8 @@ public class AddTodoCommand extends Command {
     public String retrieveTodoInfo() throws DukeException {
         String todoInfo;
         if (this.parsedCommand.length == 0) {
-            String err = "Your todo task description is empty. The task cannot be created.\n" +
-                    "Type '/commands' to view the correct command for task creation! ";
+            String err = "Your todo task description is empty. The task cannot be created.\n"
+                    + "Type '/commands' to view the correct command for task creation! ";
             throw new InvalidTaskException(err);
         } else {
             todoInfo = this.parsedCommand[1];

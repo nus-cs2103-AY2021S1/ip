@@ -11,10 +11,10 @@ import duke.task.Task;
  */
 public class DeleteTaskCommand extends Command {
 
-    protected final String[] parsedCommand;
+    private final String[] parsedCommand;
 
     /**
-     * Creates and initialises a new DeleteTaskCommand object
+     * Creates and initialises a new DeleteTaskCommand object.
      *
      * @param parsedCommand String array that contains information of the task to be deleted.
      */
@@ -36,18 +36,19 @@ public class DeleteTaskCommand extends Command {
         try {
             int index = Integer.parseInt(this.parsedCommand[1]);
             if (index > tasks.getListSize()) {
-                String err = "Invalid Task! The task does not exist. " +
-                        "Input 'list' to view the correct task ID of your desired task.";
+                String err = "Invalid Task! The task does not exist. "
+                        + "Input 'list' to view the correct task ID of your desired task.";
                 throw new InvalidTaskException(err);
             } else if (index <= 0) {
-                String err = "The task ID you provided is not valid. " +
-                        "Input 'list' to view the correct task ID of your desired task.";
+                String err = "The task ID you provided is not valid. "
+                        + "Input 'list' to view the correct task ID of your desired task.";
                 throw new InvalidFunctionException(err);
             } else {
                 Task toRemove = tasks.getTask(index - 1);
                 tasks.removeTask(index - 1);
-                String successReply = "Found it! This task has been successfully deleted: \n\t" +
-                        toRemove.toString() + "\nYou have " + tasks.getListSize() + " tasks in your list now.";
+                String successReply = "Found it! This task has been successfully deleted: \n\t"
+                        + toRemove.toString() + "\nYou have " + tasks.getListSize()
+                        + " tasks in your list now.";
                 ui.printReply(successReply);
                 storage.saveFile(tasks);
             }
@@ -55,8 +56,9 @@ public class DeleteTaskCommand extends Command {
             String err = "No Task ID provided! Please input the ID of the task you wish to delete.";
             throw new InvalidFunctionException(err);
         } catch (NumberFormatException ex) {
-            String err = "Your input is not a recognised command. You have to provide the ID of " +
-                    "the task you wish to delete. \n" + "Input '/commands' to view a list of my commands. ";
+            String err = "Your input is not a recognised command. You have to provide the ID of "
+                    + "the task you wish to delete. \n"
+                    + "Input '/commands' to view a list of my commands. ";
             throw new InvalidFunctionException(err);
         }
     }

@@ -11,10 +11,10 @@ import duke.task.Task;
  */
 public class CompleteTaskCommand extends Command {
 
-    protected final String[] parsedCommand;
+    private final String[] parsedCommand;
 
     /**
-     * Creates and initialises a new CompleteTaskCommand object
+     * Creates and initialises a new CompleteTaskCommand object.
      *
      * @param parsedCommand String array that contains information of the task to be completed.
      */
@@ -36,12 +36,12 @@ public class CompleteTaskCommand extends Command {
         try {
             int index = Integer.parseInt(this.parsedCommand[1]);
             if (index > tasks.getListSize()) {
-                String err = "Invalid Task! The task does not exist. " +
-                        "Input 'list' to view the correct task ID of your desired task.";
+                String err = "Invalid Task! The task does not exist. "
+                        + "Input 'list' to view the correct task ID of your desired task.";
                 throw new InvalidTaskException(err);
             } else if (index <= 0) {
-                String err = "The task ID you provided is not valid. " +
-                        "Input 'list' to view the correct task ID of your desired task.";
+                String err = "The task ID you provided is not valid. "
+                        + "Input 'list' to view the correct task ID of your desired task.";
                 throw new InvalidFunctionException(err);
             } else {
                 Task task = tasks.getTask(index - 1);
@@ -61,8 +61,9 @@ public class CompleteTaskCommand extends Command {
             String err = "No Task ID provided! Please input the ID of the task you wish to mark as completed.";
             throw new InvalidFunctionException(err);
         } catch (NumberFormatException ex) {
-            String err = "Your input is not a recognised command. You have to provide the ID of " +
-                    "the task you wish to mark as done. \n" + "Input '/commands' to view a list of my commands. ";
+            String err = "Your input is not a recognised command. You have to provide the ID of "
+                    + "the task you wish to mark as done. \n"
+                    + "Input '/commands' to view a list of my commands. ";
             throw new InvalidFunctionException(err);
         }
     }

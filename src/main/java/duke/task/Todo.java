@@ -22,8 +22,9 @@ public class Todo extends Task {
      * @return String containing the relevant information of this todo object to be saved in a file.
      */
     @Override
-    public String taskFileString() {
-        return "T | " + (super.isDone ? "1 |" : "0 |") + super.description;
+    public String taskToFileString() {
+        return "T | " + (super.isDone ? "1 |" : "0 |")
+                + super.description;
     }
 
     /**

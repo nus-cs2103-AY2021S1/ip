@@ -30,7 +30,7 @@ public abstract class Task {
     }
 
     /**
-     * Marks the task as completed.
+     * Marks this task object as completed.
      */
     public void markAsDone() {
         this.isDone = true;
@@ -41,7 +41,7 @@ public abstract class Task {
      *
      * @return String containing the relevant information of this task object to be saved in a file.
      */
-    public abstract String taskFileString();
+    public abstract String taskToFileString();
 
     /**
      * Returns the date of this task.

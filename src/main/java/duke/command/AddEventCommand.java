@@ -17,10 +17,10 @@ import java.time.format.DateTimeParseException;
  */
 public class AddEventCommand extends Command {
 
-    protected final String[] parsedCommand;
+    private final String[] parsedCommand;
 
     /**
-     * Creates and initialises a new AddEventCommand object
+     * Creates and initialises a new AddEventCommand object.
      *
      * @param parsedCommand String array that contains the event task information.
      */
@@ -58,8 +58,8 @@ public class AddEventCommand extends Command {
 
             storage.saveFile(tasks);
         } catch (DateTimeParseException | ArrayIndexOutOfBoundsException ex) {
-            String err = "The task date format is incorrect. \n" +
-                    "Please input a valid date using the format: 'dd/mm/yyyy hh:mm'. For eg, 10/8/2020 18:00";
+            String err = "The task date format is incorrect. \n"
+                    + "Please input a valid date using the format: 'dd/mm/yyyy hh:mm'. For eg, 10/8/2020 18:00";
             throw new InvalidFunctionException(err);
         }
     }
@@ -75,28 +75,28 @@ public class AddEventCommand extends Command {
         String description = "";
         String time = "";
         if (this.parsedCommand.length == 0) {
-            String err = "Your event task has missing arguments and has an incorrect format. " +
-                    "The task cannot be created.\n" +
-                    "Type '/commands' to view the correct command for task creation!";
+            String err = "Your event task has missing arguments and has an incorrect format. "
+                    + "The task cannot be created.\n"
+                    + "Type '/commands' to view the correct command for task creation!";
             throw new InvalidTaskException(err);
         } else {
             String[] taskInputArray = this.parsedCommand[1].split(" /at ");
             if (!this.parsedCommand[1].contains(" /at ") && !this.parsedCommand[1].endsWith("/at")) {
-                String err = "Your event task has an incorrect format. The task cannot be created. \n" +
-                        "Type '/commands' to view the correct command for task creation!";
+                String err = "Your event task has an incorrect format. The task cannot be created. \n"
+                        + "Type '/commands' to view the correct command for task creation!";
                 throw new InvalidTaskException(err);
             } else if (this.parsedCommand[1].trim().equals("/at")) {
-                String err = "Your event task is missing a description and time stamp. " +
-                        "The task cannot be created. \n" +
-                        "Type '/commands' to view the correct command for task creation!";
+                String err = "Your event task is missing a description and time stamp. "
+                        + "The task cannot be created. \n"
+                        + "Type '/commands' to view the correct command for task creation!";
                 throw new InvalidTaskException(err);
             } else if (this.parsedCommand[1].trim().endsWith("/at")) {
-                String err = "Your event task is missing a time stamp. The task cannot be created. \n" +
-                        "Type '/commands' to view the correct command for task creation!";
+                String err = "Your event task is missing a time stamp. The task cannot be created. \n"
+                        + "Type '/commands' to view the correct command for task creation!";
                 throw new InvalidTaskException(err);
             } else if (taskInputArray.length == 1 || taskInputArray[0].isBlank()) {
-                String err = "Your event task is missing a description. The task cannot be created. \n" +
-                        "Type '/commands' to view the correct command for task creation!";
+                String err = "Your event task is missing a description. The task cannot be created. \n"
+                        + "Type '/commands' to view the correct command for task creation!";
                 throw new InvalidTaskException(err);
             } else {
                 description = taskInputArray[0].trim();

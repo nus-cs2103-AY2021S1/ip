@@ -11,7 +11,7 @@ public class TaskList {
     private final List<Task> taskList;
 
     /**
-     * Creates and initalises a new TaskList object.
+     * Creates and initialises a new TaskList object.
      *
      * @param taskList List of tasks that has been created by the user.
      */

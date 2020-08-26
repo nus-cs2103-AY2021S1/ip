@@ -9,8 +9,8 @@ import java.time.format.DateTimeFormatter;
  */
 public class Deadline extends Task {
 
-    protected LocalDate deadlineDate;
-    protected LocalTime deadlineTime;
+    private LocalDate deadlineDate;
+    private LocalTime deadlineTime;
 
     /**
      * Creates and initialises a new Deadline object.
@@ -41,9 +41,9 @@ public class Deadline extends Task {
      * @return String containing the relevant information of this deadline object to be saved in a file.
      */
     @Override
-    public String taskFileString() {
-        return "D | " + (super.isDone ? "1 |" : "0 |") + super.description + " | " +
-                this.deadlineDate.toString() + " "+ this.deadlineTime.toString();
+    public String taskToFileString() {
+        return "D | " + (super.isDone ? "1 |" : "0 |") + super.description + " | "
+                + this.deadlineDate.toString() + " "+ this.deadlineTime.toString();
     }
 
     /**
@@ -53,8 +53,8 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        String formattedEventTime = this.deadlineDate.format(DateTimeFormatter.ofPattern("EE, MMM dd yyyy")) + ", " +
-                this.deadlineTime.format(DateTimeFormatter.ofPattern("hh:mm a"));
+        String formattedEventTime = this.deadlineDate.format(DateTimeFormatter.ofPattern("EE, MMM dd yyyy"))
+                + ", " + this.deadlineTime.format(DateTimeFormatter.ofPattern("hh:mm a"));
         return "[D]" + super.toString() + " (by: " + formattedEventTime + ")";
     }
 }
