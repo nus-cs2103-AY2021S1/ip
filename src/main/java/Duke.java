@@ -71,9 +71,17 @@ public class Duke {
         	} else if (input.equals(new String("delete"))) {
         		int index = sc.nextInt();
         		Task currentTask = taskList.get(index - 1);
+                taskList.remove(index - 1);
         		ui.showLine("Noted. I've removed this task:\n" + currentTask.toString() + "\nNow you have " + taskList.size() + " tasks in the list.");
-        		taskList.remove(index - 1);
-        	} else {
+        	} else if (input.equals("find")) {
+                String condition = sc.nextLine();
+                ArrayList<Task> newTaskList = taskList.find(condition);
+                int num = 1;
+                for (Task task: newTaskList) {
+                    ui.showLine(num + "." + task.toString());
+                    num++;
+                }
+            } else {
         		System.out.println("added: " + input);
         		taskList.add(new Task(input));
         	}

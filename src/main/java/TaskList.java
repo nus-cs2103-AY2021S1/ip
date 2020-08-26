@@ -26,4 +26,14 @@ public class TaskList {
     ArrayList<Task> getList() {
         return taskList;
     }
+
+    ArrayList<Task> find(String condition) {
+        ArrayList<Task> newTaskList = new ArrayList<Task>();
+        for (Task task: taskList) {
+            if (task.getContent().contains(condition)) {
+                newTaskList.add(task);
+            }
+        }
+        return newTaskList;
+    }
 }
