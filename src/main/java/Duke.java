@@ -1,36 +1,47 @@
 package main.java;
 
 import java.time.format.DateTimeParseException;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.io.File;
 
 public class Duke {
+    private static final String PATH = "data";
+    private static final String FILENAME = "tasks.txt";
 
     public static void main(String[] args) {
-        boolean check = true;
+        boolean userInput = true;
         Scanner sc = new Scanner(System.in);
-        ArrayList<Task> storedItems = new ArrayList<>();
+        ArrayList<Task> storedItems = getTaskList();
         String border = "____________________________________________________________";
-
         String logo = " ____        ____\n"
                 + "|  _ \\  ___ |  _ \\\n"
                 + "| | | |/ _ \\| | | |\n"
                 + "| |_| || __/| |_| |\n"
                 + "|____/ \\___||____/\n";
+
+        //greets
         System.out.println("Hello I am\n" + logo + "\n" + "Feed me some stuff! :3\n");
 
-        while (check) {
+        while (userInput) {
             String input = sc.nextLine();
             String arr[] = input.split(" ", 2);
             String command = arr[0];
             System.out.println(command);
             try {
                 if (command.equals("list")) {
+
                     System.out.println(border);
                     for (int i = 0; i < storedItems.size(); i++) {
                         System.out.println(String.format("%d. %s", i + 1, storedItems.get(i)));
                     }
                     System.out.println(border);
+
                 } else if (command.equals("done")) {
                     if (arr.length < 2) {
                         throw new DukeException("The description of a done cannot be empty!");
@@ -41,10 +52,12 @@ public class Duke {
                         task.doTask();
                         System.out.println(border + "\n" + "Nice I've digested the following:\n"
                                 + task + "\n" + "Now I'm hungry again! FEED ME MORE :3\n" + border);
+
                     } else {
                         throw new DukeException("What are you done with? Gotta specify a valid task number!");
                     }
                 } else if (command.equals("delete")) {
+
                     if (arr.length < 2) {
                         throw new DukeException("The description of a delete cannot be empty!");
                     }
@@ -100,7 +113,74 @@ public class Duke {
                 System.out.println(border + "\n" + e + "\n" + border);
             } catch (DateTimeParseException e) {
                 System.out.println("☹ OOPSIE!! " + "Time format should be yyyy/mm/dd or yyyy-mm-dd.");
+            } catch (IOException e) {
+                e.printStackTrace();
             }
+        }
+    }
+
+    private static void saveTaskList(String taskToAdd) throws IOException{
+        File directory = new File(PATH);
+        if (!directory.exists()) {
+            directory.mkdirs();
+        }
+
+        File file = new File(PATH + "/" + FILENAME);
+        if (!file.exists()) {
+            file.createNewFile();
+        }
+        FileWriter fw = new FileWriter(PATH + "/" + FILENAME, true);
+        fw.write(taskToAdd + "\n");
+        fw.close();
+    }
+
+    private static void editTaskList(String newTask, int taskNum, boolean delete) throws IOException {
+        ArrayList<String> fileContent = new ArrayList<>(Files.readAllLines(Paths.get(PATH + "/" + FILENAME)));
+        if (delete) {
+            fileContent.remove(taskNum - 1);
+        } else {
+            fileContent.set(taskNum - 1, newTask);
+        }
+
+        Files.write(Paths.get(PATH + "/" + FILENAME), fileContent);
+    }
+
+    private static ArrayList<Task> getTaskList() {
+        File file = new File(PATH + "/" + FILENAME);
+        ArrayList<Task> list = new ArrayList<>();
+        try {
+            Scanner scanner = new Scanner(file);
+            while (scanner.hasNextLine()) {
+                String[] currLine = scanner.nextLine().split(" \\| ");
+                String typeOfTask = currLine[0];
+                switch (typeOfTask) {
+                case "T":
+                    Task todo = new Todo(currLine[2]);
+                    if (Integer.parseInt(currLine[1]) == 1) {
+                        todo.doTask();
+                    }
+                    list.add(todo);
+                    break;
+                case "D":
+                    Task deadline = new Deadline(currLine[2], currLine[3]);
+                    if (Integer.parseInt(currLine[1]) == 1) {
+                        deadline.doTask();
+                    }
+                    list.add(deadline);
+                    break;
+                case "E":
+                    Task event = new Event(currLine[2], currLine[3]);
+                    if (Integer.parseInt(currLine[1]) == 1) {
+                        event.doTask();
+                    }
+                    list.add(event);
+                    break;
+                default:
+                }
+            }
+            return list;
+        } catch (FileNotFoundException e) {
+            return list;
         }
     }
 }

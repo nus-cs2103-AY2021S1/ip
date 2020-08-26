@@ -18,4 +18,9 @@ public class Event extends Task{
         return String.format("[%c]%s %s%s", type, super.toString(), AT,
                 date.format(DateTimeFormatter.ofPattern("MMM dd yyyy")));
     }
+
+    @Override
+    public String saveToString() {
+        return String.format("%c | %s | %s", type, super.saveToString(), date);
+    }
 }
