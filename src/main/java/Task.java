@@ -26,6 +26,16 @@ public class Task {
         return this.description;
     }
 
+    public boolean hasKeyword(String keyword) {
+        String[] strings = this.description.split(" ");
+        for (String word : strings) {
+            if (keyword.equals(word)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {

@@ -56,6 +56,17 @@ public class Ui {
         taskListModify("Noted. I've removed this task: ", task, taskList);
     }
 
+    public void printMatchingList(TaskList taskList) {
+        String result = "Here are the matching tasks in your list:\n";
+        for (int i = 0; i < taskList.getSize(); i++) {
+            int taskNumber = i + 1;
+            String taskDescription = taskNumber + "." + taskList.getTask(i).toString()
+                    + (i == taskList.getSize() - 1 ? "" : "\n");
+            result = result + taskNumber + "." + indentMessage(taskDescription);
+        }
+        print(result);
+    }
+
     public void printFullList(TaskList taskList) {
         String result = "Here are the tasks in your list:\n";
         for (int i = 0; i < taskList.getSize(); i++) {

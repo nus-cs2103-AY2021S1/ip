@@ -3,7 +3,15 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class TaskList {
-    List<Task> taskList = new ArrayList<>();
+    List<Task> taskList;
+
+    public TaskList() {
+        this.taskList = new ArrayList<>();
+    }
+
+    private TaskList(List<Task> taskList) {
+        this.taskList = taskList;
+    }
 
     public void addTask(Task task) {
         taskList.add(task);
@@ -19,6 +27,16 @@ public class TaskList {
 
     public List<Task> getTaskList() {
         return this.taskList;
+    }
+
+    public TaskList findTaskWithKeyword(String keyword) {
+        List<Task> taskWithKeyword = new ArrayList<>();
+        for (Task task : taskList) {
+            if (task.hasKeyword(keyword)) {
+                taskWithKeyword.add(task);
+            }
+        }
+        return new TaskList(taskWithKeyword);
     }
 
     public void deleteTask(int index) {
