@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.util.List;
 
 public class Ui {
     static void readUserInput(Parser parser) throws IOException {
@@ -45,5 +46,10 @@ public class Ui {
 
     static void showMarkedAsDone(Task task) {
         System.out.println("I've marked this task as done:\n" + task);
+    }
+    
+    static void showSearchResults(List<Task> results) {
+        System.out.println("Here are the matching tasks in your list:");
+        results.forEach(System.out::println);
     }
 }
