@@ -1,5 +1,12 @@
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.io.File;
 
 public class Bot {
     private String name;
@@ -14,22 +21,75 @@ public class Bot {
      * Start the bot's interaction with user.
      */
     public void init() {
-        Scanner scanner = new Scanner(System.in);
         greet();
+        String filePath = "./assets/userData.txt";
+        try{
+            loadFileContents(filePath);
+        } catch (IOException e) {
+            System.out.println(responseWrapper("IO Exception"));
+        }
+        Scanner scanner = new Scanner(System.in);
         while (scanner.hasNextLine()) {
             String input = scanner.nextLine();
-            if (input.equals("bye")) {
-                scanner.close();
-                String farewell = responseWrapper("Have a good day, mate!");
-                System.out.println(farewell);
-                return;
-            }
             try {
+                if (input.equals("bye")) {
+                    scanner.close();
+                    saveUserData(filePath);
+                    String farewell = responseWrapper("Have a good day, mate!");
+                    System.out.println(farewell);
+                    return;
+                }
                 String response = parseUserInput(input);
                 System.out.println(response);
             } catch (InvalidCommandException | InvalidInputException e) {
                 System.out.println(responseWrapper(e.getMessage()));
+            } catch (IOException e) {
+                System.out.println(responseWrapper("Unable to save file"));
+                String farewell = responseWrapper("Have a good day, mate!");
+                System.out.println(farewell);
+                return;
             }
+        }
+    }
+
+    private void saveUserData(String filePath) throws IOException {
+        FileWriter fw = new FileWriter(filePath);
+        for (Task task : this.taskList) {
+            fw.write(task.toFileFormat());
+        }
+        fw.close();
+    }
+
+    private Task lineToObj(String line) {
+        String[] words = line.split(" \\| ");
+        char firstChar = line.charAt(0);
+        switch (firstChar) {
+            case 'D':
+                int len = words[3].length();
+                return new Deadline(words[2], words[3].toString().substring(0,len - 1), words[1].equals("1"));
+            case 'E':
+                int len2 = words[3].length();
+                return new Event(words[2], words[3].toString().substring(0, len2 - 1), words[1].equals("1"));
+            default:
+                return new Todo(words[2], words[1].equals("1"));
+        }
+    }
+
+    private void loadFileContents(String filePath) throws IOException {
+        File f = new File(filePath);
+        File dir = new File(f.toPath().getParent().toString());
+        if(!dir.exists()) {
+            dir.mkdir();
+        }
+        if (!f.exists()) {
+            String response = "Hey, you new user eh? I've got your profile created. No worries.";
+            System.out.println(responseWrapper(response));
+            f.createNewFile();
+        }
+        String content = Files.readString(Paths.get(filePath), StandardCharsets.US_ASCII);
+        String[] items = content.split("\n");
+        for (String item : items) {
+            this.taskList.add(lineToObj(item));
         }
     }
 
@@ -39,7 +99,7 @@ public class Bot {
     }
 
     private String responseWrapper(String str) {
-        final String TEXT_LINE = "__________________________________________________";
+        final String TEXT_LINE = "________________________________________________________________";
         return TEXT_LINE + "\n    " + str + "\n" + TEXT_LINE;
     }
 
