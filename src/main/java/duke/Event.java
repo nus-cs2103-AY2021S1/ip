@@ -7,11 +7,11 @@ import java.time.format.DateTimeFormatter;
  * A task with the occurring time specified.
  */
 public class Event extends Task {
-    protected LocalDate at;
+    private LocalDate at;
 
     /**
      * Event constructor.
-     * 
+     *
      * @param description the task description.
      * @param at          the occurring time.
      */
@@ -22,7 +22,7 @@ public class Event extends Task {
 
     /**
      * Event constructor.
-     * 
+     *
      * @param description the task description.
      * @param at          the occurring time.
      * @param isDone      specify whether the task is done or not.
@@ -33,7 +33,7 @@ public class Event extends Task {
     }
 
     private String dateFormat() {
-        return at.format(DateTimeFormatter.ofPattern("d MMMM yyyy"));
+        return this.at.format(DateTimeFormatter.ofPattern("d MMMM yyyy"));
     }
 
     @Override
@@ -41,12 +41,8 @@ public class Event extends Task {
         return "[E]" + super.toString() + " (at: " + this.dateFormat() + ")";
     }
 
-    /**
-     * Format task to be written to a file.
-     *
-     * @return formatted string of the task.
-     */
+    @Override
     public String writeToFile() {
-        return String.format("E | %b | %s | %s", this.isDone, this.description, this.at);
+        return String.format("E | %s | %s", super.writeToFile(), this.at);
     }
 }

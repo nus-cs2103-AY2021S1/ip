@@ -7,13 +7,13 @@ import java.time.format.DateTimeFormatter;
  * A task with a deadline specified.
  */
 public class Deadline extends Task {
-    protected LocalDate by;
+    private LocalDate by;
 
     /**
      * Deadline constructor.
      *
      * @param description description of the task.
-     * @param by the deadline of the task.
+     * @param by          the deadline of the task.
      */
     public Deadline(String description, LocalDate by) {
         super(description);
@@ -24,8 +24,8 @@ public class Deadline extends Task {
      * Deadline constructor.
      *
      * @param description description of the task.
-     * @param by the deadline of the task.
-     * @param isDone specify whether the task is done or not.
+     * @param by          the deadline of the task.
+     * @param isDone      specify whether the task is done or not.
      */
     public Deadline(String description, LocalDate by, boolean isDone) {
         super(description, isDone);
@@ -33,7 +33,7 @@ public class Deadline extends Task {
     }
 
     private String dateFormat() {
-        return by.format(DateTimeFormatter.ofPattern("d MMMM yyyy"));
+        return this.by.format(DateTimeFormatter.ofPattern("d MMMM yyyy"));
     }
 
     @Override
@@ -41,12 +41,8 @@ public class Deadline extends Task {
         return "[D]" + super.toString() + " (by: " + this.dateFormat() + ")";
     }
 
-    /**
-     * Format task to be written to a file.
-     *
-     * @return formatted string of the task.
-     */
+    @Override
     public String writeToFile() {
-        return String.format("D | %b | %s | %s", this.isDone, this.description, this.by);
+        return String.format("D | %s | %s", super.writeToFile(), this.by);
     }
 }
