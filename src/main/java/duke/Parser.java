@@ -42,6 +42,8 @@ public class Parser {
                 return new AddCommand(CommandEnum.EVENT, userInput);
             case DELETE:
                 return new DeleteCommand(userInput);
+            case FIND:
+                return new FindCommand(userInput);
             default:
                 System.out.println(Ui.getLine());
                 System.out.println(Ui.getBot());
