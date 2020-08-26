@@ -1,0 +1,4 @@
+T ~ 0 ~ buy bread
+T ~ 0 ~ homework
+T ~ 0 ~ read storybook
+T ~ 0 ~ read readings

@@ -46,4 +46,12 @@ public class TaskList {
             System.out.println(i + "." + tasksList.get(i - 1));
         }
     }
+
+    public void listFilteredTasks(String filter) {
+        for (int i = 1; i <= totalTasks; i++) {
+            if (tasksList.get(i - 1).description.contains(filter)) {
+                System.out.println(i + "." + tasksList.get(i - 1));
+            }
+        }
+    }
 }

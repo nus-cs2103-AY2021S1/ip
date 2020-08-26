@@ -23,6 +23,10 @@ public class Ui {
                 task);
     }
 
+    public void showFindMessage() {
+        System.out.println("Here are the matching tasks in your list:");
+    }
+
     public void showDeletedMessage(Task task, int totalTasks) {
         System.out.println("Noted. I've removed this task:\n" +
                 task +
