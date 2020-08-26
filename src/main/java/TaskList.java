@@ -1,4 +1,5 @@
 package main.java;
+
 import java.util.List;
 import java.util.ArrayList;
 
@@ -6,7 +7,15 @@ import java.util.ArrayList;
  * Represents the task list contains the user's tasks.
  */
 public class TaskList {
-    List<Task> taskList = new ArrayList<>();
+    List<Task> taskList;
+
+    public TaskList() {
+        this.taskList = new ArrayList<>();
+    }
+
+    private TaskList(List<Task> taskList) {
+        this.taskList = taskList;
+    }
 
     /**
      * Adds a task to the list.
@@ -39,6 +48,21 @@ public class TaskList {
      */
     public List<Task> getTaskList() {
         return this.taskList;
+    }
+
+    /**
+     * Forms a new task list object containing all the tasks with the given keyword.
+     * @param keyword The keyword from the user's input.
+     * @return A new task list object with all the tasks contaning that keyword.
+     */
+    public TaskList findTaskWithKeyword(String keyword) {
+        List<Task> taskWithKeyword = new ArrayList<>();
+        for (Task task : taskList) {
+            if (task.hasKeyword(keyword)) {
+                taskWithKeyword.add(task);
+            }
+        }
+        return new TaskList(taskWithKeyword);
     }
 
     /**

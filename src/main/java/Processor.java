@@ -50,7 +50,7 @@ public class Processor {
                     Task deadine = new DeadLine(taskDescription, deadlineTime, hasTime, false);
                     taskList.addTask(deadine);
                     ui.uiAddTask(deadine, taskList);
-                } else {
+                } else if (command.equals("event")) {
                     String taskDescription = Parser.findDescription(Parser.getArgs(userInput));
                     String eventTime = Parser.findTime(Parser.getArgs(userInput), "at");
                     // check whether the date time format is correct
@@ -60,6 +60,10 @@ public class Processor {
                     Task event = new DeadLine(taskDescription, eventTime, hasTime, false);
                     taskList.addTask(event);
                     ui.uiAddTask(event, taskList);
+                } else {
+                    String keyword = Parser.getArgs(userInput);
+                    TaskList correspondTaskList = taskList.findTaskWithKeyword(keyword);
+                    ui.printMatchingList(correspondTaskList);
                 }
                 storage.writeTasks(taskList);
             }

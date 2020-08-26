@@ -7,7 +7,8 @@ public enum Keyword {
     EVENT("event"),
     DELETE("delete"),
     BYE("bye"),
-    DONE("done");
+    DONE("done"),
+    FIND("find");
 
     private String keyword;
 

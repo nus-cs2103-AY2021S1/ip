@@ -95,6 +95,21 @@ public class Ui {
     }
 
     /**
+     * Prints out the task list containing all the tasks having a certain keyword.
+     * @param taskList Task list that contains all the tasks having a certain keyword,
+     */
+    public void printMatchingList(TaskList taskList) {
+        String result = "Here are the matching tasks in your list:\n";
+        for (int i = 0; i < taskList.getSize(); i++) {
+            int taskNumber = i + 1;
+            String taskDescription = taskNumber + "." + taskList.getTask(i).toString()
+                    + (i == taskList.getSize() - 1 ? "" : "\n");
+            result = result + taskNumber + "." + indentMessage(taskDescription);
+        }
+        print(result);
+    }
+
+    /**
      * Prints out the full task list to the user.
      * @param taskList The user's task list.
      */
