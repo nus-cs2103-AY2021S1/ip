@@ -28,7 +28,7 @@ public class Duke {
 
         Scanner sc = new Scanner(System.in);
         List<Task> taskArr = new ArrayList<>();
-        String[] cmdArr = {"help", "add", "list", "done", "delete", "bye"};
+        String[] cmdArr = {"help", "add", "list", "done", "delete", "date", "bye"};
 
         String input = sc.nextLine().toLowerCase();
 
@@ -103,12 +103,12 @@ public class Duke {
                 case "deadline":
                     taskType = TaskType.DEADLINE;
                     System.out.println("Please enter the task followed by the date and time of the deadline");
-                    System.out.println("e.g., submit report ,11/10/2019 5pm");
+                    System.out.println("e.g., submit report ,11/10/2019 1700");
                     break;
                 case "event":
                     taskType = TaskType.EVENT;
                     System.out.println("Please enter the event followed by the date and time of the event");
-                    System.out.println("e.g., team project meeting ,2/10/2019 2-4pm");
+                    System.out.println("e.g., team project meeting ,2/10/2019 1400-1600");
                     break;
                 default:
                     throw new InvalidTaskTypeException("Oops that wasn't a valid task type!");

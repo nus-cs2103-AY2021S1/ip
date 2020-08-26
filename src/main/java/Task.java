@@ -25,6 +25,10 @@ public class Task {
         return isDone;
     }
 
+    public TaskType getTaskType() {
+        return taskType;
+    }
+
     @Override
     public String toString() {
         return "["
