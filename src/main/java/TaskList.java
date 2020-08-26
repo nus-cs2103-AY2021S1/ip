@@ -32,4 +32,14 @@ public class TaskList {
     public int size() {return list.size(); }
 
     public boolean isEmpty() {return list.isEmpty();}
+
+    TaskList contains(String keyWord) throws BobIndexOutOfBoundsException {
+        TaskList keyWordTasks = new TaskList();
+        for(int i = 1; i < this.size(); i++) {
+            if (this.get(i).toString().contains(keyWord)) {
+                keyWordTasks.add(this.get(i));
+            }
+        }
+        return keyWordTasks;
+    }
 }

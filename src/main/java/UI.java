@@ -55,4 +55,16 @@ public class UI {
     public void printError(String error) {
         System.out.println(error);
     }
+
+    public void findKeyWord(TaskList tasks) throws BobIndexOutOfBoundsException {
+        if (!tasks.isEmpty()) {
+            System.out.println("Here are the tasks in your lists which match: ");
+            for(int i = 1; i < tasks.size()+1; i++) {
+                Task task = tasks.get(i);
+                System.out.println(i +"." + task.toString());
+            }
+        } else {
+            System.out.println("None of the tasks in your list match.");
+        }
+    }
 }

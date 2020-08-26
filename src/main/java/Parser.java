@@ -54,6 +54,12 @@ public class Parser {
             return new DeleteCommand(index);
         } else if (command.contains("bye")) {
             return new ExitCommand();
+        } else if (command.contains("find")) {
+            try {
+                return new FindCommand(command.substring(5));
+            } catch (StringIndexOutOfBoundsException e) {
+                throw new BobFindNoKeyWordsException();
+            }
         } else {
             throw new BobException();
         }

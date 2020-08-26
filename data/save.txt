@@ -1,2 +1,6 @@
-E | 0 | meet friends | 2020-05-18 2000 to 2020-05-18 2100
+T | 0 | eat dinner
+
+D | 0 | eat apple | 2020-05-19 0800
+
+E | 0 | meet friends | 2020-05-19 0900 to 2020-05-19 1000
 
