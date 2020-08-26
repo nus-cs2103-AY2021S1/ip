@@ -105,12 +105,12 @@ public class Duke {
                                 } catch (ArrayIndexOutOfBoundsException e) {
                                     throw new MissingDeadlineException();
                                 }
-                            }    
+                            }
                         } catch (ArrayIndexOutOfBoundsException e) {
                             MissingDescriptionException realError = new MissingDescriptionException("a deadline");
                             Response msg = new Response(new String[]{String.valueOf(realError)});
                             System.out.println(msg.getResponse());
-                        } catch (MissingDeadlineException e){
+                        } catch (MissingDeadlineException e) {
                             Response msg = new Response(new String[]{String.valueOf(e)});
                             System.out.println(msg.getResponse());
                         }
@@ -131,6 +131,23 @@ public class Duke {
                             System.out.println(msg.getResponse());
                         } catch (MissingNumberException e) {
                             Response msg = new Response(new String[]{"Please select the task that you want to delete!"});
+                            System.out.println(msg.getResponse());
+                        }
+                    } else if (test[0].equals("find")) {
+                        try {
+                            if (test.length == 1) {
+                                throw new DukeException();
+                            }
+                            ArrayList<Task> satisfiedTasks = new ArrayList<>();
+                            for (int i = 0; i < lists.size(); i++) {
+                                if (lists.get(i).task.contains(test[1])) {
+                                    satisfiedTasks.add(lists.get(i));
+                                }
+                            }
+                            Response msg = new Response(satisfiedTasks.toArray(new Task[0]), Response.Tag.FIND);
+                            System.out.println(msg.getResponse());
+                        } catch (DukeException e) {
+                            Response msg = new Response(new String[]{"Please include the keyword!"});
                             System.out.println(msg.getResponse());
                         }
                     } else {
