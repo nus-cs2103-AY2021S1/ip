@@ -1,14 +1,17 @@
-public class Deadline extends Task {
-    String taskBy;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
-    Deadline(String taskName, String taskBy) {
+public class Deadline extends Task {
+    LocalDate taskBy;
+
+    Deadline(String taskName, LocalDate taskBy) {
         super(taskName);
         this.taskBy = taskBy;
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + this.taskBy + ")";
+        return "[D]" + super.toString() + " (by: " + this.taskBy.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
     }
 
     @Override
@@ -18,7 +21,7 @@ public class Deadline extends Task {
 
     static Deadline fromFileFormat(String fileFormatString) {
         String[] tokens = fileFormatString.split("\\|");
-        Deadline loaded = new Deadline(tokens[2], tokens[3]);
+        Deadline loaded = new Deadline(tokens[2], LocalDate.parse(tokens[3]));
         if (tokens[1].equals("1")) {
             loaded.setDone();
         }
