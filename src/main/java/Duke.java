@@ -1,15 +1,10 @@
-<<<<<<< HEAD
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-=======
-import java.time.format.DateTimeParseException;
->>>>>>> branch-Level-8
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
-import java.time.LocalDate;
 
 public class Duke {
     public static void main(String[] args) {
@@ -21,7 +16,7 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         while (true) {
             try {
-                String command = sc.nextLine().strip();
+                String command = sc.nextLine();
                 String[] commandArr = command.split(" ", 2);
                 Task task;
                 String[] strings;
@@ -44,11 +39,7 @@ public class Duke {
                             throw new DukeException("\nUh-oh! The description of a deadline cannot be empty.\n");
                         }
                         strings = commandArr[1].split("/by");
-                        try {
-                            task = new Deadlines(strings[0].strip(), LocalDate.parse(strings[1].strip()));
-                        } catch (DateTimeParseException e) {
-                            throw new DukeException("Uh-oh! Please enter the correct date format.");
-                        }
+                        task = new Deadlines(strings[0].strip(), strings[1].strip());
                         tasks.add(task);
                         System.out.println("\nGot it. I've added this task:\n " + task + "\nNow you have " + tasks.size() + " tasks in the list.\n");
                         break;
@@ -57,11 +48,7 @@ public class Duke {
                             throw new DukeException("\nUh-oh! The description of an event cannot be empty.\n");
                         }
                         strings = commandArr[1].split("/at");
-                        try {
-                            task = new Events(strings[0].strip(), LocalDate.parse(strings[1].strip()));
-                        } catch (DateTimeParseException e) {
-                            throw new DukeException("Uh-oh! Please enter the correct date format.");
-                        }
+                        task = new Events(strings[0].strip(), strings[1].strip());
                         tasks.add(task);
                         System.out.println("\nGot it. I've added this task:\n " + task + "\nNow you have " + tasks.size() + " tasks in the list.\n");
                         break;
