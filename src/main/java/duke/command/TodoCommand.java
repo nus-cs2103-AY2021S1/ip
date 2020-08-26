@@ -6,13 +6,28 @@ import duke.task.TaskList;
 import duke.task.Todo;
 import duke.ui.Ui;
 
+/**
+ * Represents a command to add a Todo task to the list.
+ */
 public class TodoCommand extends Command {
+    /**
+     * A string array that represents the instructions of this command.
+     */
     private String[] nextCommandArr;
     
     public TodoCommand(String[] nextCommandArr) {
         this.nextCommandArr = nextCommandArr;
     }
 
+    /**
+     * Adds a Todo task to the taskList.
+     * @param taskList is the list of tasks stored by Duke.
+     * @param ui is the user interface to read inputs from the user and print messages.
+     * @param storage deals with saving tasks into the file and loading tasks
+     *                from the file.
+     *
+     * @throws DukeException if the instructions for this command is insufficient.
+     */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         try {
@@ -25,6 +40,10 @@ public class TodoCommand extends Command {
         
     }
 
+    /**
+     * Indicates Duke should keep running after this command is executed.
+     * @return true.
+     */
     @Override
     public boolean isRunning() {
         return true;

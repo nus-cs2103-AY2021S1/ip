@@ -5,6 +5,9 @@ import duke.exception.DukeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents a deadline that extends from the Task class, which consists of a description and a due date.
+ */
 public class Deadline extends Task {
     private String deadlineDate;
     private LocalDate deadlineLocalDate;
@@ -20,7 +23,11 @@ public class Deadline extends Task {
             throw new DukeException("Please use YYYY-MM-DD format for dates~");
         }
     }
-    
+
+    /**
+     * A function to get the due date of the Deadline.
+     * @return a string representing a due date in DD-MMM-YYYY format.
+     */
     public String getDeadlineDate() {
         return this.deadlineDate;
     }

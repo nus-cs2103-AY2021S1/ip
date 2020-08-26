@@ -3,11 +3,20 @@ package duke.parser;
 import duke.command.*;
 import duke.exception.DukeException;
 
+/**
+ * A class to analyse the user's input and determine what command it is.
+ */
 public class Parser {
     public Parser() {
         
     }
-    
+
+    /**
+     * A function to parse the input from the user and turn it into a command.
+     * @param nextCommand the string of instruction input by the user
+     * @return Command that represents what the user wants Duke to do.
+     * @throws DukeException if the user's input is not a valid Command type for Duke.
+     */
     public static Command parse(String nextCommand) throws DukeException {
         String[] nextCommandArr = nextCommand.split(" ", 2);
         Command next;
