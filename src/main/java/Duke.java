@@ -3,7 +3,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
-/** Duke is a chatbot that allows users to send input to perform tasks.
+/**
+ * Duke is a chatbot that allows users to send input to perform tasks.
  */
 public class Duke {
     public static void main(String[] args) {
@@ -37,7 +38,7 @@ public class Duke {
                 System.out.println("Sorry, that looks like an invalid command! " + e.getMessage());
             }
 
-            switch(userCommand) {
+            switch (userCommand) {
 
                 // Exit the program
                 case "bye":

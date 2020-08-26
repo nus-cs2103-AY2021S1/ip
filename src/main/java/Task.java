@@ -1,4 +1,5 @@
-/** Task represents a task to be done.
+/**
+ * Task represents a task to be done.
  */
 public class Task {
     String taskName;
