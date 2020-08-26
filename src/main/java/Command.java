@@ -1,5 +1,8 @@
 import java.io.IOException;
 
+/**
+ * Represents a command to be executed.
+ */
 public abstract class Command {
     String str;
     boolean isExit = false;

@@ -1,3 +1,6 @@
+/**
+ * Represents a deadline task in the list.
+ */
 public class Deadline extends Task {
     private String time;
 

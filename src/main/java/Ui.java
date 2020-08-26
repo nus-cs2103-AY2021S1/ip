@@ -1,7 +1,9 @@
 import java.util.List;
 import java.util.Scanner;
 
-// deals with interactions with the user
+/**
+ * Deals with interactions with the user.
+ */
 public class Ui {
     private Scanner sc;
     private String line = "_________________________________________________________________";

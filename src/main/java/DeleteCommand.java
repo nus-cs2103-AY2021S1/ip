@@ -1,9 +1,20 @@
+/**
+ * Represents a delete command from a user
+ * which will lead to the deletion of a task in the task list.
+ */
 public class DeleteCommand extends Command{
 
     DeleteCommand(String str) {
         super(str);
     }
 
+    /**
+     * Deletes a specific task from the task list.
+     *
+     * @param list A list of task.
+     * @param ui Ui that prints out the output.
+     * @param storage Storage that reads from and writes to hard disk.
+     */
     @Override
     public void execute(TaskList list, Ui ui, Storage storage) {
         try {
