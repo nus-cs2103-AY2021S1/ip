@@ -5,7 +5,7 @@ import java.time.format.DateTimeParseException;
 import java.time.format.FormatStyle;
 
 public class Deadline extends Task {
-    
+
     private String by;
     private LocalDate taskDate;
     private LocalTime taskTime;
@@ -28,7 +28,7 @@ public class Deadline extends Task {
             System.out.println("Date and time format is invalid.");
         }
     }
-    
+
     public Deadline(String uniqueId, boolean isDone, String description, String by) {
         super(uniqueId, isDone, description);
         this.by = by;
@@ -47,7 +47,7 @@ public class Deadline extends Task {
             System.out.println("Date and time format is invalid.");
         }
     }
-    
+
     public String getTime() {
         return by;
     }
@@ -62,6 +62,6 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: )" + formatTaskTime();
+        return "[D]" + super.toString() + " (by: " + formatTaskTime() + ")";
     }
 }

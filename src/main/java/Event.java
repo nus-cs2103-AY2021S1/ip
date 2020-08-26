@@ -5,7 +5,7 @@ import java.time.format.DateTimeParseException;
 import java.time.format.FormatStyle;
 
 public class Event extends Task {
-    
+
     private String at;
     private LocalDate taskDate;
     private LocalTime taskTime;
@@ -28,7 +28,7 @@ public class Event extends Task {
             System.out.println("Date and time format is invalid.");
         }
     }
-    
+
     public Event(String uniqueId, boolean isDone, String description, String at) {
         super (uniqueId, isDone, description);
         this.at = at;
@@ -47,7 +47,7 @@ public class Event extends Task {
             System.out.println("Date and time format is invalid.");
         }
     }
-    
+
     public String getTime() {
         return at;
     }
@@ -63,6 +63,6 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: )" + formatTaskTime();
+        return "[E]" + super.toString() + " (at: " + formatTaskTime() + ")";
     }
 }

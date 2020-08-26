@@ -3,25 +3,44 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.List;
 
 public class Storage {
 
-    String path;
+    File dataDirectory;
+    String dataDirectoryPath;
+    File dataFile;
+    String dataFilePath;
 
-    public Storage(Path filePath) {
-        this.path = filePath.toString();
+    public Storage() {
+        dataDirectoryPath = Paths.get("data").toString();
+        dataDirectory = new File(dataDirectoryPath);
+        dataFilePath = Paths.get("data", "duke.txt").toString();
+        dataFile = new File(dataFilePath);
     }
     
-    public void loadData(List<Task> todoList) throws IOException {
-        File dataFolder = new File(Paths.get("data").toString());
-        File data = new File(path);
-        dataFolder.mkdirs();
-        if (!data.createNewFile()) {
+    private void alertDirectoryNotFound() {
+        System.out.println("Cannot access data directory.");
+    }
+
+    private void alertCorruptedData() {
+        System.out.println("Data file is corrupted.");
+    }
+    
+    public void loadData(TaskList taskList) {
+        dataDirectory.mkdirs();
+        boolean toLoadFromDataFile;
+        
+        try {
+            toLoadFromDataFile = !dataFile.createNewFile();
+        } catch (IOException e) {
+            alertDirectoryNotFound();
+            toLoadFromDataFile = false;
+        }
+        
+        if (toLoadFromDataFile) {
             try {
-                BufferedReader br = new BufferedReader(new FileReader(path));
+                BufferedReader br = new BufferedReader(new FileReader(dataFilePath));
                 String line;
                 while ((line = br.readLine()) != null) {
 
@@ -40,34 +59,34 @@ public class Storage {
                             task = new Event(taskData[0], Boolean.parseBoolean(taskData[2]), taskData[3], taskData[4]);
                             break;
                     }
-                    todoList.add(task);
+                    taskList.addTask(task);
                 }
-            } catch (IOException e) {
-                System.out.println("duke.txt not found");
+            } catch (IOException | ArrayIndexOutOfBoundsException e) {
+                alertCorruptedData();
             }
         }
     }
 
     private void appendData(String data)  {
         try {
-            FileWriter writer = new FileWriter(path, true);
+            FileWriter writer = new FileWriter(dataFilePath, true);
             writer.write(data);
             writer.close();
         } catch (IOException e) {
-            System.out.println("duke.txt not found");
+            alertCorruptedData();
         }
     }
-    
+
     private void overwriteData(String data) {
         try {
-            FileWriter writer = new FileWriter(path);
+            FileWriter writer = new FileWriter(dataFilePath);
             writer.write(data);
             writer.close();
         } catch (IOException e) {
-            System.out.println("duke.txt not found");
+            alertCorruptedData();
         }
     }
-    
+
     public void saveTodo(ToDo task) {
         String line = task.getUniqueID() + "|" + task.getTaskType() + "|" + task.getDone() + "|"
                 + task.getDescription() + "\n";
@@ -88,10 +107,10 @@ public class Storage {
 
     public void doneTask(Task task) {
         try {
-            BufferedReader br = new BufferedReader(new FileReader(path));
+            BufferedReader br = new BufferedReader(new FileReader(dataFilePath));
             StringBuilder newData = new StringBuilder();
             String line;
-            
+
             while ((line = br.readLine()) != null) {
                 if (line.contains(task.uniqueId)) {
                     line = line.replaceFirst("false", "true");
@@ -101,14 +120,14 @@ public class Storage {
             br.close();
             overwriteData(newData.toString());
         } catch (Exception e) {
-            System.out.println("duke.txt not found");
+            alertCorruptedData();
         }
-        
+
     }
 
     public void deleteTask(Task task) {
         try {
-            BufferedReader br = new BufferedReader(new FileReader(path));
+            BufferedReader br = new BufferedReader(new FileReader(dataFilePath));
             StringBuilder newData = new StringBuilder();
             String line;
 
@@ -120,7 +139,7 @@ public class Storage {
             br.close();
             overwriteData(newData.toString());
         } catch (Exception e) {
-            System.out.println("duke.txt not found");
+            alertCorruptedData();
         }
     }
 }

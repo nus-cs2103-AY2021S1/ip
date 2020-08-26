@@ -3,7 +3,7 @@ public class ToDo extends Task {
         super(description);
         taskType = "T";
     }
-    
+
     public ToDo(String uniqueId, boolean isDone, String description) {
         super(uniqueId, isDone, description);
         taskType = "T";
