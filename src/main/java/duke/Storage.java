@@ -9,6 +9,11 @@ public class Storage {
     BufferedReader reader;
     boolean fileExist = false;
 
+    /**
+     * Construct a Storage object
+     * @param filePath the file path
+     * @throws FileNotFoundException
+     */
     public Storage(String filePath) throws FileNotFoundException {
         this.filePath = filePath;
         File outputFile = new File(filePath);
@@ -18,6 +23,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Writes the TaskList to a text file
+     * @param list the TaskList to be written to text file
+     * @param fileWriter the fileWriter to write the file
+     */
     public static void writeArrayList2file(TaskList list, FileWriter fileWriter){
         try{
             for(int i = 0; i < list.getSize(); i++){
@@ -43,14 +53,27 @@ public class Storage {
         }
     }
 
+    /**
+     * Returns the BufferedReader for ./data/duke.txt
+     * @return the BufferedReader for ./data/duke.txt
+     */
     public BufferedReader load(){
         return reader;
     }
 
+    /**
+     * Returns whether ./data/duke.txt exists
+     * @return whether ./data/duke.txt exists
+     */
     public boolean isFileExist(){
         return fileExist;
     }
 
+    /**
+     * Writes TaskList to text file
+     * @param list the TaskList to be written into text file
+     * @throws IOException
+     */
     public void writeFile(TaskList list) throws IOException {
         if(!fileExist){
             new File("./data").mkdir();
