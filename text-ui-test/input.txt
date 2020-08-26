@@ -5,5 +5,5 @@ done 1
 done 2
 todo eat dinner
 delete 3
-list
+event presentation /at 20th Sept 2pm
 bye

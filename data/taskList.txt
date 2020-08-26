@@ -1,0 +1,4 @@
+todo - 1 - make coffee
+event - 1 - go for tutorial - Thursday 2pm
+todo - 0 - eat dinner
+event - 0 - presentation - 20th Sept 2pm

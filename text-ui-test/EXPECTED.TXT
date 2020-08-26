@@ -1,0 +1,36 @@
+Found your data! Give me some time to read it...
+Hi, I'm your Professor, Martin.
+What can I do for you? You can ask me to do these:
+list: List the current tasks in your list.
+todo: Add a To-Do task.
+event: Add an Event task.
+deadline: Add a Deadline task.
+find: Find a task which matches your description.
+Enter input:
+Got it, I've added this task: [T][X] make coffee
+Now you have 1 tasks in the list.
+Enter input:
+Got it, I've added this task: [E][X] go for tutorial (at: Thursday 2pm)
+Now you have 2 tasks in the list.
+Enter input:
+Got it, I've added this task: [D][X] individual project stage 8 (by: Saturday 4pm)
+Now you have 3 tasks in the list.
+Enter input:
+Nice! I've marked this task as done:
+[T][✓] make coffee
+Enter input:
+Nice! I've marked this task as done:
+[E][✓] go for tutorial (at: Thursday 2pm)
+Enter input:
+Got it, I've added this task: [T][X] eat dinner
+Now you have 4 tasks in the list.
+Enter input:
+Noted. I have removed this task:
+[D][X] individual project stage 8 (by: Saturday 4pm)
+Now you have 3 tasks in the list.
+Enter input:
+Got it, I've added this task: [E][X] presentation (at: 20th Sept 2pm)
+Now you have 4 tasks in the list.
+Enter input:
+...Saved your list.
+Bye, see you soon. Exiting...

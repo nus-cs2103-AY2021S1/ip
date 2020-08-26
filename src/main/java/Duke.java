@@ -1,7 +1,6 @@
 
 import java.io.File;
 import java.io.FileWriter;
-
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -16,12 +15,10 @@ public class Duke {
     }
 
     public Duke() {
-        System.out.println(System.getProperty("user.dir"));
         this.filePath = System.getProperty("user.dir")
                 + (System.getProperty("user.dir").endsWith("text-ui-test")
                     ? "\\..\\data\\taskList.txt"
                     : "\\data\\taskList.txt");
-        System.out.println("Current file path is set to: " + filePath);
         this.taskList = new ArrayList<>();
         this.isRunning = true;
     }
