@@ -34,17 +34,17 @@ class Storage {
                 switch (arr[0]) {
                     case "T":
                         Todo t = new Todo(arr[2]);
-                        if (arr[1].equals("1")) t.markDone();
+                        if (arr[1].equals("1")) t.setCompleted();
                         tasks.add(t);
                         break;
                     case "D":
                         Deadline d = new Deadline(arr[2], arr[3]);
-                        if (arr[1].equals("1")) d.markDone();
+                        if (arr[1].equals("1")) d.setCompleted();
                         tasks.add(d);
                         break;
                     case "E":
                         Event e = new Event(arr[2], arr[3], arr[4]);
-                        if (arr[1].equals("1")) e.markDone();
+                        if (arr[1].equals("1")) e.setCompleted();
                         tasks.add(e);
                         break;
                 }

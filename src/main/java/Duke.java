@@ -118,7 +118,7 @@ public class Duke {
     //     System.out.println("Which task do you wish to mark complete? ");
     //     int taskNum = Integer.parseInt(sc.nextLine());
     //     try {
-    //         tm.markDone(taskNum);
+    //         tm.setCompleted(taskNum);
     //     } catch (IndexOutOfBoundsException e) {
     //         throw new DukeException("You did not provide a valid task number!");
     //     }

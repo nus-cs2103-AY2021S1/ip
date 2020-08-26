@@ -9,7 +9,7 @@ public class TodoStub extends Task {
     }
 
     @Override
-    public void markDone() {
+    public void setCompleted() {
         isCompleted = true;
     }
 

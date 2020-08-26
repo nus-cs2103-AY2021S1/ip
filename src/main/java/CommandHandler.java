@@ -11,21 +11,21 @@ public class CommandHandler {
     public static Command parseCommand(String cmd) {
         switch (cmd) {
             case "bye":
-            return new ExitCommand();
+                return new ExitCommand();
             case "list":
-            return new ListCommand();
+                return new ListCommand();
             case "todo":
-            return new TodoCommand();
+                return new TodoCommand();
             case "deadline":
-            return new DeadlineCommand();
+                return new DeadlineCommand();
             case "event":
-            return new EventCommand();
+                return new EventCommand();
             case "complete":
-            return new CompleteCommand();
+                return new CompleteCommand();
             case "delete":
-            return new DeleteCommand();
+                return new DeleteCommand();
             default:
-            return new ErrorCommand();
+                return new ErrorCommand();
         }
     }
 }

@@ -44,7 +44,7 @@ class Task {
      * Marks this task as done by setting the value of its field
      * <code>isCompleted</code> to <code>true</code>.
      */
-    public void markDone() {
+    public void setCompleted() {
         isCompleted = true;
     }
 
