@@ -3,21 +3,31 @@ package duke.task;
 import duke.exceptions.DukeStorageException;
 import duke.exceptions.DukeTaskCreationException;
 import duke.parser.DateParser;
-import duke.exceptions.DukeException;
 
 import java.time.LocalDateTime;
 
+/**
+ * The {@code Event} class represents an event with a scheduled time.
+ * Extends the {@link Task} class.
+ */
 public class Event extends Task {
 
     private static final String EVENT_DELIMITER = "/at";
 
     private LocalDateTime dateTime;
 
-    public Event(String description, LocalDateTime dateTime) {
+    private Event(String description, LocalDateTime dateTime) {
         super(description);
         this.dateTime = dateTime;
     }
 
+    /**
+     * Returns an {@code Event} object with the specified details.
+     *
+     * @param details the description and time of the event.
+     * @return an {@code Event} object with the specified details.
+     * @throws DukeTaskCreationException if format of the specified details is not recognised.
+     */
     public static Event createTask(String details) throws DukeTaskCreationException {
         if (details == null) {
             throw new DukeTaskCreationException("I need something to work with.");
@@ -33,10 +43,22 @@ public class Event extends Task {
         }
     }
 
+    /**
+     * Returns an encoded string representation of this {@code Event}.
+     *
+     * @return an encoded string representation of this {@code Event}.
+     */
     public String encode() {
         return String.format("E|%s|%s|%s", super.completed ? "Y" : "N", DateParser.parseLocalDateTime(this.dateTime), super.description);
     }
 
+    /**
+     * Decodes an encoded string into an {@code Event} object.
+     *
+     * @param code the encoded string.
+     * @return an {@code Event} reconstructed from the encoded string.
+     * @throws DukeStorageException if format of the code is incorrect.
+     */
     public static Event decode(String code) throws DukeStorageException {
         if (code.charAt(0) == 'E') {
             String[] content = code.split("\\|", 4);
@@ -55,9 +77,14 @@ public class Event extends Task {
         }
     }
 
+    /**
+     * Returns a string representation of this {@code Event} object.
+     *
+     * @return a string representation of this {@code Event} object.
+     */
     @Override
     public String toString() {
-        return "[E]" +  super.toString() + " (at: " + DateParser.parseLocalDateTime(this.dateTime) + ")";
+        return "[E]" + super.toString() + " (at: " + DateParser.parseLocalDateTime(this.dateTime) + ")";
     }
 
 }
