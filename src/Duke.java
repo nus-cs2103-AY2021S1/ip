@@ -9,8 +9,7 @@ public class Duke {
                 new Formating<>(
                         new Greet(Status.GREET.toString())));
 
-        Memory<Task> memory = new Memory<>();
-        Operation operation = new Operation(memory);
+        Operation operation = new Operation();
         String extract = input.nextLine();
         String nextLine = new Formating<>(extract).shorten().getContent();
         while (!nextLine.equals(Status.BYE.name().toLowerCase())) {

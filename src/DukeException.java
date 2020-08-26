@@ -22,4 +22,12 @@ public class DukeException {
     protected static void timeMissingException() {
         System.out.println(new Formating<>(Exceptions.NOTIMEEXCEPTION.toString()));
     }
+
+    protected static void FileException() {
+        System.out.println(new Formating<>(Exceptions.FILEEXCEPTION.toString()));
+    }
+
+    protected static void ReadLineException() {
+        System.out.println(new Formating<>(Exceptions.READLINEEXCEPTION.toString()));
+    }
 }

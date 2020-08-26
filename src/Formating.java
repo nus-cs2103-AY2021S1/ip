@@ -1,5 +1,3 @@
-import javax.swing.text.html.Option;
-
 public class Formating<T> {
     private final T content;
 
@@ -24,7 +22,45 @@ public class Formating<T> {
             while (backPos >= 0 && input.charAt(backPos) == ' ') {
                 backPos--;
             }
-            return new Formating<String>(input.substring(frontPos, backPos + 1));
+
+            if (frontPos > backPos) {
+                return new Formating<>("");
+            }
+            return new Formating<>(input.substring(frontPos, backPos + 1));
+        } catch (ClassCastException e) {
+            DukeException.classCastException();
+            return null;
+        }
+    }
+
+    public Task stringToTask() {
+        try {
+            String input = (String) content;
+            String[] inputArray = input.split(" ");
+            char typeOfTask = inputArray[0].charAt(1);
+            boolean isDone = false;
+            if (inputArray[0].substring(4, 5).equals("\u2713")) {
+                isDone = true;
+            }
+
+            Task task;
+            if (typeOfTask == 'T') {
+                task = new Todo(inputArray[1]);
+            } else {
+                int lenOfArray = inputArray.length;
+                int lenOfLastInArray = inputArray[lenOfArray - 1].length();
+                String time = inputArray[lenOfArray - 1]
+                        .substring(0, lenOfLastInArray - 1);
+                if (typeOfTask == 'D') {
+                    task = new Deadline(inputArray[1], time);
+                } else {
+                    task = new Event(inputArray[1], time);
+                }
+            }
+            if (isDone) {
+                task.setDone();
+            }
+            return task;
         } catch (ClassCastException e) {
             DukeException.classCastException();
             return null;
@@ -34,11 +70,11 @@ public class Formating<T> {
     @Override
     public String toString() {
         String underscore =
-                "  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" + "\n";
+                "  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
 
         if (this.content instanceof Task) {
 
-            return underscore +
+            return underscore + "\n" +
                     Status.TASKADDED.toString() +
                     content + "\n" +
                     String.format(Status.REPORT.toString(), Operation.memory.getMemory().size()) +
@@ -46,7 +82,7 @@ public class Formating<T> {
                     underscore;
         }
 
-        return underscore +
+        return underscore + "\n" +
                 content + "\n" +
                 underscore;
     }
