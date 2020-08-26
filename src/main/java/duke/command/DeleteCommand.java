@@ -10,8 +10,15 @@ import duke.ui.Ui;
  * Represents a command to delete element with certain index in the task list.
  */
 public class DeleteCommand implements Command {
+
+    /** Index of the target task to be deleted */
     private final int targetIndex;
 
+    /**
+     * Creates a delete command to delete specific task in the list.
+     *
+     * @param index Index of task that will be deleted.
+     */
     public DeleteCommand(int index) {
         this.targetIndex = index;
     }
@@ -27,4 +34,5 @@ public class DeleteCommand implements Command {
     public boolean isExit() {
         return false;
     }
+
 }

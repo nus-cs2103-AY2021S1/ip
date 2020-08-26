@@ -11,8 +11,13 @@ import duke.ui.Ui;
  */
 public class FindCommand implements Command{
 
+    /** Search keyword for the list */
     private final String keyword;
 
+    /**
+     * Creates a find command with search keyword.
+     * @param key Search keyword.
+     */
     public FindCommand(String key) {
         this.keyword = key;
     }
@@ -36,4 +41,5 @@ public class FindCommand implements Command{
     public boolean isExit() {
         return false;
     }
+
 }

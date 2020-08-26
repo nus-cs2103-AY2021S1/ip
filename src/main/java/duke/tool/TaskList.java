@@ -10,18 +10,31 @@ import java.util.ArrayList;
  * Represents the task list stored in Duke system.
  */
 public class TaskList {
+
+    /**
+     * List of tasks stored in system
+     */
     private ArrayList<Task> taskList;
 
-    public TaskList()  {
+    /**
+     * Creates a task list.
+     */
+    public TaskList() {
         taskList = new ArrayList<>();
     }
 
-    public TaskList(ArrayList<Task> tasks)  {
+    /**
+     * Creates a task list from given list.
+     *
+     * @param tasks Task list that have stored tasks.
+     */
+    public TaskList(ArrayList<Task> tasks) {
         taskList = tasks;
     }
 
     /**
      * Returns the list size of task list.
+     *
      * @return Size of current list.
      */
     public int getSize() {
@@ -30,6 +43,7 @@ public class TaskList {
 
     /**
      * Adds new task into the current list.
+     *
      * @param newTask New task to be added to the list.
      * @throws TaskExistException When task's description is the same as some task in list.
      */
@@ -43,6 +57,7 @@ public class TaskList {
 
     /**
      * Deletes the certain task with given index.
+     *
      * @param index Index of task to be deleted.
      * @return Task that has been deleted.
      */
@@ -52,6 +67,7 @@ public class TaskList {
 
     /**
      * Returns a task list.
+     *
      * @return Task list of current object.
      */
     public ArrayList<Task> getTasks() {
@@ -60,6 +76,7 @@ public class TaskList {
 
     /**
      * Marks the task with given element to done.
+     *
      * @param index Index of the element.
      * @return Task that has been marked as done.
      */
@@ -78,6 +95,7 @@ public class TaskList {
 
     /**
      * Returns whehter there is exact same task in the list.
+     *
      * @param targetTask Task that user want to add into list.
      * @return True if there is a task with exact description, false otherwise.
      */
@@ -90,4 +108,5 @@ public class TaskList {
 
         return false;
     }
+
 }

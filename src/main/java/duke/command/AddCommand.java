@@ -12,8 +12,15 @@ import duke.ui.Ui;
  * @version 0.1
  */
 public class AddCommand implements Command {
+
+    /** Target task that will be added to the list */
     private final Task targetTask;
 
+    /**
+     * Creates a command to add task.
+     *
+     * @param task Task that will be added to the list.
+     */
     public AddCommand(Task task) {
         this.targetTask = task;
     }
@@ -29,4 +36,5 @@ public class AddCommand implements Command {
     public boolean isExit() {
         return false;
     }
+
 }

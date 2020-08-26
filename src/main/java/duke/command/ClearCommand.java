@@ -20,4 +20,5 @@ public class ClearCommand implements Command{
     public boolean isExit() {
         return false;
     }
+
 }

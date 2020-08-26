@@ -10,10 +10,20 @@ import java.io.IOException;
 
 public class Duke {
 
+    /** Storage of the system */
     private final Storage storage;
+
+    /** Task list that stores tasks */
     private TaskList tasks;
+
+    /** User interface to interact with user */
     private final Ui ui;
 
+    /**
+     * Creates new Duke chat bot from given storage path.
+     *
+     * @param filePath Data file path.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -25,16 +35,22 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs the Duke system.
+     */
     public void run() {
+
+        //Start greet
         ui.showLogo();
         ui.showWelcomeMessage();
         boolean isExit = false;
 
-        while(!isExit) {
+        //Run until see the exit command
+        while (!isExit) {
             try {
                 String fullCommand = ui.readCommand();
                 Command c = Parser.parse(fullCommand);
-                c.excute(tasks,ui,storage);
+                c.excute(tasks, ui, storage);
                 isExit = c.isExit();
             } catch (DukeException e) {
                 ui.printLog(e.getMessage());
@@ -42,7 +58,8 @@ public class Duke {
         }
     }
 
-    public static void main(String[] args)  {
+    public static void main(String[] args) {
         new Duke("data/duke.txt").run();
     }
+
 }

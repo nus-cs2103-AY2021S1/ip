@@ -13,6 +13,7 @@ public interface Command {
 
     /**
      * Executes a certain command.
+     *
      * @param tasks List of the tasks.
      * @param ui UI manager for Duke.
      * @param storage Manager of the file I/O.
@@ -20,5 +21,11 @@ public interface Command {
      */
     void excute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
 
+    /**
+     * Checks whether the command is an exit command.
+     *
+     * @return True if the command is an instance of ExitCommand, false otherwise.
+     */
     boolean isExit();
+
 }

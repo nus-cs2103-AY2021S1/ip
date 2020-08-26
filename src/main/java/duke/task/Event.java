@@ -5,13 +5,27 @@ import java.time.format.DateTimeFormatter;
 
 public class Event extends Task {
 
+    /** Event time of a task */
     protected LocalDateTime at;
 
+    /**
+     * Creates an events with given time.
+     *
+     * @param description Description of the event.
+     * @param at Time for the event.
+     */
     public Event(String description, LocalDateTime at) {
         super(description);
         this.at = at;
     }
 
+    /**
+     * Creates an events with status, description and time.
+     *
+     * @param isDone Status of the event.
+     * @param description Description of the event.
+     * @param at Time for the event.
+     */
     public Event(boolean isDone,String description, LocalDateTime at) {
         super(description);
         this.at = at;
@@ -29,4 +43,5 @@ public class Event extends Task {
 
         return "[E]" + super.toString() + " (at: " + at.format(formatter) + ")";
     }
+
 }

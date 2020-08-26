@@ -28,6 +28,8 @@ import java.time.format.DateTimeFormatter;
  * Represents a parser to interpret the user's command.
  */
 public class Parser {
+
+    /** Formatter for input date */
     private static final DateTimeFormatter acceptedFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
     /**
@@ -115,4 +117,5 @@ public class Parser {
         }
 
     }
+
 }

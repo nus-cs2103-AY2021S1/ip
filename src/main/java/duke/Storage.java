@@ -21,14 +21,24 @@ import java.util.Scanner;
  * Represents a storage manager to handle file I/O.
  */
 public class Storage {
+
+    /**
+     * String representation of path that stores user data
+     */
     protected String dataPath;
 
+    /**
+     * Creates a storage to certain path.
+     *
+     * @param dataPath Data path (relative).
+     */
     public Storage(String dataPath) {
         this.dataPath = dataPath;
     }
 
     /**
      * Loads the task list from stored file.
+     *
      * @return An array list that represents the task list.
      * @throws IOException An exception when the system cannot create the file.
      */
@@ -39,6 +49,7 @@ public class Storage {
             File dataFile = new File(dataPath);
             Scanner sc = new Scanner(dataFile);
 
+            //Read the file
             while (sc.hasNextLine()) {
                 String nowTask = sc.nextLine();
 
@@ -50,12 +61,12 @@ public class Storage {
                     taskList.add(new Todo(taskComponents[1].equals("1"), taskComponents[2]));
                     break;
                 case "E":
-                    taskList.add(new Event(taskComponents[1].equals("1"),taskComponents[2]
-                            ,LocalDateTime.parse(taskComponents[3])));
+                    taskList.add(new Event(taskComponents[1].equals("1"), taskComponents[2]
+                            , LocalDateTime.parse(taskComponents[3])));
                     break;
                 case "D":
-                    taskList.add(new Deadline(taskComponents[1].equals("1"),taskComponents[2]
-                            ,LocalDateTime.parse(taskComponents[3])));
+                    taskList.add(new Deadline(taskComponents[1].equals("1"), taskComponents[2]
+                            , LocalDateTime.parse(taskComponents[3])));
                     break;
                 }
 
@@ -73,12 +84,14 @@ public class Storage {
 
     /**
      * Saves the changes to the storage path.
+     *
      * @param taskList Current task list in the system.
      */
     public void save(TaskList taskList) {
         try {
             FileWriter writer = new FileWriter("data/duke.txt", false);
 
+            //Write the list to the file
             for (Task task : taskList.getTasks()) {
                 writer.write(task.toFileStringFormat() + '\n');
             }
@@ -88,4 +101,5 @@ public class Storage {
             System.out.println(e.getMessage());
         }
     }
+
 }
