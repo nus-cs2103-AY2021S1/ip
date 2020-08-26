@@ -23,30 +23,32 @@ public class Duke {
     void handleInput(String[] input) {
         try {
             switch (input[0]) {
-                case "list":
-                    this.ui.list(this.tasks.formattedList());
-                    break;
-                case "bye":
-                    this.storage.saveFile(this.tasks);
-                    this.ui.exit();
-                    break;
-                case "done":
-                    this.ui.completeTask(this.tasks.completeTask(Integer.valueOf(input[1])));
-                    break;
-                case "delete":
-                    this.ui.deleteTask(this.tasks.deleteTask(Integer.valueOf(input[1])), this.tasks.getLength());
-                    break;
-                case "todo":
-                case "event":
-                case "deadline":
-                    if (input.length == 1) {
-                        throw new MissingDescriptionException(input[0]);
-                    } else {
-                        this.ui.addTask(this.tasks.addTask(input[0], input[1]), this.tasks.getLength());
-                    }
-                    break;
-                default:
-                    throw new UnknownCommandException();
+            case "list":
+                this.ui.list(this.tasks.formattedList());
+                break;
+            case "bye":
+                this.storage.saveFile(this.tasks);
+                this.ui.exit();
+                break;
+            case "done":
+                this.ui.completeTask(this.tasks.completeTask(Integer.valueOf(input[1])));
+                break;
+            case "delete":
+                this.ui.deleteTask(this.tasks.deleteTask(Integer.valueOf(input[1])), this.tasks.getLength());
+                break;
+            case "todo":
+                //Fallthrough
+            case "event":
+                //Fallthrough
+            case "deadline":
+                if (input.length == 1) {
+                    throw new MissingDescriptionException(input[0]);
+                } else {
+                    this.ui.addTask(this.tasks.addTask(input[0], input[1]), this.tasks.getLength());
+                }
+                break;
+            default:
+                throw new UnknownCommandException();
             }
         } catch (DukeException e) {
             this.ui.showDukeError(e);

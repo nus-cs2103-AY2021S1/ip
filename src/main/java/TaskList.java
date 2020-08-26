@@ -66,9 +66,11 @@ public class TaskList {
      */
     public String formattedList() {
         String list = "";
+
         for (int i = 0; i < this.tasks.size(); i++) {
             list += formatTask(i);
         }
+
         return list;
     }
 
