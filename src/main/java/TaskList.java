@@ -7,6 +7,10 @@ public class TaskList {
         this.arr = arr;
     }
 
+    TaskList() {
+        this.arr = new ArrayList<Task>();
+    }
+
     public ArrayList<Task> getArr() {
         return arr;
     }

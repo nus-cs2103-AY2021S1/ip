@@ -13,9 +13,7 @@ public class Duke {
         Ui ui = new Ui();
         try {
             ui.chat();
-        } catch (DukeException ex) {
-            System.out.println(ex);
-        } catch (IOException ex) {
+        } catch (DukeException | IOException ex) {
             System.out.println(ex);
         }
     }
