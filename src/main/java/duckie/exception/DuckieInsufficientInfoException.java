@@ -1,3 +1,5 @@
+package duckie.exception;
+
 public class DuckieInsufficientInfoException extends DuckieException {
     protected final static String INDENT = "\t";
 

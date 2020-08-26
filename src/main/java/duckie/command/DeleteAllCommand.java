@@ -1,4 +1,11 @@
+package duckie.command;
+
 import java.util.ArrayList;
+
+import duckie.task.*;
+import duckie.Ui;
+import duckie.Storage;
+import duckie.exception.*;
 
 public class DeleteAllCommand extends Command {
     @Override

@@ -1,5 +1,9 @@
+package duckie;
+
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import duckie.task.Task;
 
 public class Ui {
     private final static String INDENT = "\t";

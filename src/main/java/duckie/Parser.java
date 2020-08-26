@@ -1,7 +1,13 @@
+package duckie;
+
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+
+import duckie.command.*;
+import duckie.exception.*;
+import duckie.task.*;
 
 public class Parser {
     private static boolean is_word(String s) {

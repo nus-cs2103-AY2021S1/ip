@@ -1,3 +1,11 @@
+package duckie.command;
+
+import duckie.task.Task;
+import duckie.task.TaskList;
+import duckie.exception.DuckieException;
+import duckie.Ui;
+import duckie.Storage;
+
 public class AddCommand extends Command {
     private Task task;
 

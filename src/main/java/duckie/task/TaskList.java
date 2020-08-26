@@ -1,4 +1,9 @@
+package duckie.task;
+
 import java.util.ArrayList;
+
+import duckie.exception.*;
+import duckie.Ui;
 
 public class TaskList {
     private ArrayList<Task> lst;

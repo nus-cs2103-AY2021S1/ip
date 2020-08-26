@@ -1,3 +1,5 @@
+package duckie.exception;
+
 public class DuckieFileErrorException extends DuckieException {
     protected final static String INDENT = "\t";
 

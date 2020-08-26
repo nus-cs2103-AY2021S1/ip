@@ -1,4 +1,12 @@
+package duckie.command;
+
 import java.util.ArrayList;
+
+import duckie.task.*;
+import duckie.Ui;
+import duckie.Storage;
+import duckie.exception.*;
+import duckie.task.*;
 
 public class DeleteCommand extends Command {
     private int ind;

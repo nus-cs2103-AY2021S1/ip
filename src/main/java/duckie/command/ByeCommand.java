@@ -1,3 +1,9 @@
+package duckie.command;
+
+import duckie.task.TaskList;
+import duckie.Ui;
+import duckie.Storage;
+
 public class ByeCommand extends Command {
     @Override
     public boolean isExit() {

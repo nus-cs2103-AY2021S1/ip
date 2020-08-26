@@ -1,5 +1,12 @@
+package duckie.command;
+
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+
+import duckie.task.*;
+import duckie.exception.*;
+import duckie.Ui;
+import duckie.Storage;
 
 public class DoneCommand extends Command {
     private int ind;

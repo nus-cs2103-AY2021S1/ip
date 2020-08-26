@@ -1,8 +1,14 @@
+package duckie;
+
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Scanner;
+
+import duckie.command.Command;
+import duckie.exception.DuckieException;
+import duckie.task.TaskList;
 
 
 public class Duckie {
