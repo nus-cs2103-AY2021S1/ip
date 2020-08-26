@@ -1,8 +1,10 @@
-T | 1 | read book
-T | 0 | return book
-T | 0 | project meeting
-T | 1 | join sports club
-T | 0 | b
-T | 0 | b
-T | 0 | b
-T | 0 | b
+T | 1 |  read book
+T | 0 |  project meeting
+T | 0 |  b
+T | 0 |  b
+T | 0 |  b
+T | 0 |  b
+T | 0 |  a
+T | 0 |  b
+T | 0 |  lol |  9
+T | 0 |  a |  3

@@ -9,10 +9,11 @@ public class Bot {
     }
 
     Printer printer = new Printer();
-    ArrayList<Listing> list = new ArrayList<Listing>();
     Parser parser = new Parser();
     String LINE = "    ____________________________________________________________";
     String WHITE_SPACE_SEVEN = "       ";
+    Storage storage = new Storage("./data/duke.txt");
+    ArrayList<Listing> list = storage.load();
 
     public void serve() { //run
         Scanner sc = new Scanner(System.in);
@@ -59,6 +60,7 @@ public class Bot {
                         Integer number = Integer.valueOf(parsedInfo[1]) - 1;
                         deleteMessage(number);
                         list.remove((int) number);
+                        storage.save(list); // <----- change this
                         break;
                     default:
                         throw new UndefinedException();
@@ -93,6 +95,7 @@ public class Bot {
                 printer.printListing(event, size);
                 break;
         }
+        storage.save(list);// <----- change this
     }
 
 
@@ -112,6 +115,7 @@ public class Bot {
         String s = LINE + "\n" + "     Nice! I've marked this task as done: \n" + "     "
                 + item.toString() + "\n" + LINE;
         System.out.println(s);
+        storage.save(list); // <----- change this
     }
 
 
