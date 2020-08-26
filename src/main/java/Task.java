@@ -1,12 +1,12 @@
-import java.util.ArrayList;
-
+/**
+ * Task class is the subclass of Deadline, Event and Todo
+ * thus it holds common methods and constructors for these classes.
+ */
 public class Task {
 
     protected String description;
     protected boolean isDone;
-    //protected DateAndTime dateAndTime;
 
-    //public static ArrayList<Task> taskStorage = new ArrayList<>();
 
     public Task(String description){
         this.description = description;
@@ -18,11 +18,6 @@ public class Task {
         this.isDone = isDone;
     }
 
-//    public Task(String description, Boolean isDone, DateAndTime dateAndTime){
-//        this.description = description;
-//        this.isDone = isDone;
-//        this.dateAndTime = dateAndTime;
-//    }
 
     public String getStatusIcon(){
         return (this.isDone ? "\u2713" : "\u2718");
@@ -42,29 +37,6 @@ public class Task {
 
     }
 
-//    public static void write(String input, String type, DateAndTime byOrAt){
-//
-//        TaskList.modify(input, type, byOrAt, taskStorage);
-//
-//    }
-
-//    public static void read(){
-//        System.out.println("Here are the tasks in your list:");
-//        for(int i = 0; i < taskStorage.size(); i ++){
-//            System.out.println(String.valueOf(i + 1 ) +"."+ taskStorage.get(i));
-//        }
-//    }
-
-//    public static void delete(int ref){
-//        if(ref >= taskStorage.size()){
-//            System.out.println("I am afraid that it is not possible to delete an unknown task.");
-//        }else{
-//            Task temp = taskStorage.get(ref);
-//            taskStorage.remove(ref);
-//            System.out.println("Noted. I've removed this task:\n " +
-//                    temp + "\nNow you have " + taskStorage.size() + " tasks in the list.");
-//        }
-//    }
 
     @Override
     public String toString(){

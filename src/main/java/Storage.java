@@ -4,6 +4,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Storage class serves to save users' task lists to local machines' disk
+ * so that the previous run's list will be available to users for reference.
+ */
 public class Storage {
 
     //public static String home = System.getProperty("src/data/duke.txt");

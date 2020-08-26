@@ -1,6 +1,10 @@
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+/**
+ * Customised Data and Time class to store and print out appropriate
+ * dates and times for tasks.
+ */
 public class DateAndTime {
 
     private final LocalDate date;

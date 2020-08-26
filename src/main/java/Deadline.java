@@ -1,3 +1,7 @@
+/**
+ * Deadline class is a subclass of Task which holds information for this type of tasks with
+ * a date and time (which is the deadline :) ).
+ */
 public class Deadline extends Task{
 
     protected DateAndTime by;
