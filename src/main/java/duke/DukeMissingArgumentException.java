@@ -1,14 +1,16 @@
-public class DukeTaskOutOfBoundsException extends IndexOutOfBoundsException {
+package duke;
+
+public class DukeMissingArgumentException extends ArrayIndexOutOfBoundsException {
     private final String DESCRIPTION;
 
-    DukeTaskOutOfBoundsException(String description) {
+    DukeMissingArgumentException(String description) {
         this.DESCRIPTION = description;
     }
 
     @Override
     public String toString() {
         return "\t____________________________________________________________\n" +
-                "\t☹ OOPS!!! The task to mark as " + DESCRIPTION + " does not exist.\n" +
+                "\t☹ OOPS!!! The description of " + DESCRIPTION +" cannot be empty.\n" +
                 "\t____________________________________________________________";
     }
 }

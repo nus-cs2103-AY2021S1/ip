@@ -1,3 +1,5 @@
+package duke;
+
 // Group each action the user input as a task, with the description and status if the task is done
 public class Task {
     protected String description;

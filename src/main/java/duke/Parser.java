@@ -1,3 +1,5 @@
+package duke;
+
 public class Parser {
     public static String[] stringSplit(String toSplit, String split) {
         return toSplit.split(split);

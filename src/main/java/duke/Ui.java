@@ -1,3 +1,5 @@
+package duke;
+
 public class Ui {
     private static final String LINEDIVIDER = "\t____________________________________________________________\n";
     private static final String LOGO = " ____        _        \n"
