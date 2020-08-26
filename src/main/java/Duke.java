@@ -1,6 +1,15 @@
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.List;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.Files;
+import java.io.File;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+
 
 public class Duke {
 
@@ -104,7 +113,7 @@ public class Duke {
     private static void deletedMessage(Task task) {
         wrapMessage("Banana! Banana has been eaten. Burp!\n"
                 + "      " + task.toString() + "\n"
-                + "   Now you have " + getListSize() + " banana(s) in your list! Nom nom..");
+                + "   Now you have " + (getListSize() - 1) + " banana(s) in your list! Nom nom..");
     }
 
     private static void doneMessage(Task task) {
@@ -112,10 +121,83 @@ public class Duke {
                 + "      " + task.toString());
     }
 
+    private static void convertLineToTasks(String line) {
+
+        String[] stringArray = line.split(" \\| ");
+        String taskType = stringArray[0];
+        boolean isDone = stringArray[1].equals("1");
+        Task task = null;
+
+        switch (taskType) {
+        case "T":
+            task = new Todo(stringArray[2]);
+            break;
+        case "D":
+            task = new Deadline(stringArray[2], stringArray[3]);
+            break;
+        case "E":
+            task = new Event(stringArray[2], stringArray[3]);
+            break;
+        default:
+            break;
+        }
+
+        addList(task);
+        if (isDone) {
+            task.markAsDone();
+        }
+    }
+
+    private static void saveListToFile(File file) {
+
+        try {
+            FileWriter writer = new FileWriter(file, false);
+
+            for (Task t : list) {
+                writer.write(t.toFileString() + "\n");
+            }
+            writer.close();
+        } catch (IOException e) {
+            wrapMessage(new DukeException("Writing error").toString());
+        }
+    }
+
     public static void main(String[] args) {
 
         System.out.println("Bello from the Majestic\n" + logo);
         System.out.println("Banana! What can King Bob do for you?\n" + divider + "\n");
+
+        Path filePath = Paths.get( "data", "duke.txt");
+        File dataFile = new File(filePath.toString());
+        boolean fileExists = Files.exists(filePath);
+        Path directoryPath = Paths.get("data");
+        boolean directoryExists = Files.exists(directoryPath);
+
+        if (!directoryExists) {
+            File directory = new File(directoryPath.toString());
+            directory.mkdir();
+            try {
+                dataFile.createNewFile();
+            } catch (IOException e) {
+                wrapMessage(new DukeException("WHAT WHATS GOING ON").toString());
+            }
+        } else if (!fileExists) {
+            try {
+                dataFile.createNewFile();
+            } catch (IOException e) {
+                wrapMessage(new DukeException("WHAT WHATS GOING ON").toString());
+            }
+        } else {
+            try {
+                BufferedReader reader = new BufferedReader(new FileReader(filePath.toString()));
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    convertLineToTasks(line);
+                }
+            } catch (IOException e) {
+                wrapMessage(new DukeException("WHAT WHATS GOING ON AAAAH").toString());
+            }
+        }
 
         Scanner scanner = new Scanner(System.in);
 
@@ -132,39 +214,44 @@ public class Duke {
 
             try {
                 switch (inputCommand) {
-                    case BYE:
-                        byeMessage();
-                        return;
-                    case LIST:
-                        showList();
-                        break;
-                    case DONE:
-                        if (isValidIndex(input)) {
-                            Task task = list.get(getIndex(input));
-                            task.markAsDone();
-                            doneMessage(task);
-                        } else {
-                            throw new DukeException("You don't have such task in your list...");
-                        }
-                        break;
-                    case DELETE:
-                        deletedMessage(list.get(getIndex(input)));
-                        deleteTask(input);
-                        break;
-                    case TODO:
-                        addList(new Todo(getTodoDescription(input)));
-                        addedMessage(new Todo(getTodoDescription(input)));
-                        break;
-                    case DEADLINE:
-                        addList(new Deadline(getDeadlineStrings(input)[0], getDeadlineStrings(input)[1]));
-                        addedMessage(new Deadline(getDeadlineStrings(input)[0], getDeadlineStrings(input)[1]));
-                        break;
-                    case EVENT:
-                        addList(new Event(getEventTimeStrings(input)[0], getEventTimeStrings(input)[1]));
-                        addedMessage(new Event(getEventTimeStrings(input)[0], getEventTimeStrings(input)[1]));
-                        break;
-                    default:
-                        throw new DukeException("Give me a valid banana (input)!");
+                case BYE:
+                    byeMessage();
+                    return;
+                case LIST:
+                    showList();
+                    break;
+                case DONE:
+                    if (isValidIndex(input)) {
+                        Task task = list.get(getIndex(input));
+                        task.markAsDone();
+                        doneMessage(task);
+                        saveListToFile(dataFile);
+                    } else {
+                        throw new DukeException("You don't have such task in your list...");
+                    }
+                    break;
+                case DELETE:
+                    deletedMessage(list.get(getIndex(input)));
+                    deleteTask(input);
+                    saveListToFile(dataFile);
+                    break;
+                case TODO:
+                    addList(new Todo(getTodoDescription(input)));
+                    addedMessage(new Todo(getTodoDescription(input)));
+                    saveListToFile(dataFile);
+                    break;
+                case DEADLINE:
+                    addList(new Deadline(getDeadlineStrings(input)[0], getDeadlineStrings(input)[1]));
+                    addedMessage(new Deadline(getDeadlineStrings(input)[0], getDeadlineStrings(input)[1]));
+                    saveListToFile(dataFile);
+                    break;
+                case EVENT:
+                    addList(new Event(getEventTimeStrings(input)[0], getEventTimeStrings(input)[1]));
+                    addedMessage(new Event(getEventTimeStrings(input)[0], getEventTimeStrings(input)[1]));
+                    saveListToFile(dataFile);
+                    break;
+                default:
+                    throw new DukeException("Give me a valid banana (input)!");
                 }
             } catch (DukeException e){
                 wrapMessage(e.toString());

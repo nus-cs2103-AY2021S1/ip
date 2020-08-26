@@ -8,6 +8,12 @@ public class Event extends Task {
     }
 
     @Override
+    public String toFileString() {
+        String doneInteger = isDone ? "1" : "0";
+        return "E | " + doneInteger + " | " + this.description + " | " + this.at;
+    }
+
+    @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + at + ")";
     }
