@@ -25,7 +25,7 @@ public class Deadline extends Task {
         return "deadline " + getTask() + " /by " + getDate();
     }
 
-    private String getDeadlineDate() {
+    public String getDeadlineDate() {
         String[] dateList = this.by.split(" ",2);
         LocalDate deadlineDate = LocalDate.parse(dateList[0]);
         DateTimeFormatter FormatDate = DateTimeFormatter.ofPattern("dd MMM yyyy");
