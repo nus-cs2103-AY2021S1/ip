@@ -111,7 +111,7 @@ public class Duke {
             Deadline task = new Deadline(description, by);
             addToList(task);
             String save = "D>0>"+description+">"+by;
-            this.saveData.addTask(str);
+            this.saveData.addTask(save);
         } catch (DukeException | IOException e) {
             this.saySomthing(e.getMessage());
         }
