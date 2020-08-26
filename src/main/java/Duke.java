@@ -15,6 +15,10 @@ import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The Duke chat bot that can help you keep track of your upcoming schedules.
+ * Use the commands todo, event, deadline to differentiate your schedules.
+ */
 public class Duke {
     private TaskList tasks;
     private Storage storage;
@@ -26,7 +30,7 @@ public class Duke {
         this.ui = new UI();
     }
 
-    public static void run() {
+    private void run() {
         try {
             File file = Storage.getFile();
             TaskList.generateList(file);
@@ -38,6 +42,11 @@ public class Duke {
         }
     }
 
+    /**
+     * This is the main method that creates a Duke object and runs the bot.
+     * @param args Unused.
+     * @return Nothing.
+     */
     public static void main(String[] args) {
         Duke duke = new Duke();
         duke.run();

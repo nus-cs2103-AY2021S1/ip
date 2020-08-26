@@ -1,8 +1,10 @@
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
 
+/**
+ * Represents that represents an event of a start date and time.
+ */
 public class Events extends Task {
     private LocalDate startDate;
     private LocalTime startTime;
@@ -13,12 +15,16 @@ public class Events extends Task {
         this.startTime = startTime;
     }
 
-    public Events(String description, LocalDate startDate, LocalTime startTime, boolean bool) {
+    private Events(String description, LocalDate startDate, LocalTime startTime, boolean bool) {
         super(description, bool);
         this.startDate = startDate;
         this.startTime = startTime;
     }
 
+    /**
+     * Returns a new Event which is completed.
+     * @return Completed Event task.
+     */
     @Override
     public Events markDone() {
         return new Events(this.description, this.startDate, this.startTime, true);

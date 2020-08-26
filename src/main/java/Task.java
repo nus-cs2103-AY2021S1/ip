@@ -1,3 +1,6 @@
+/**
+ * Represents a task that the user wishes to save.
+ */
 public class Task {
     protected String description;
     protected boolean isComplete;
@@ -12,6 +15,10 @@ public class Task {
         isComplete = bool;
     }
 
+    /**
+     * Marks a task as completed or done.
+     * @return Completed task.
+     */
     public Task markDone() {
         return new Task(this.description, true);
     }

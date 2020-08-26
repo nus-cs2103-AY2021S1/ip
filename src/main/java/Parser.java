@@ -3,8 +3,18 @@ import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
 import java.util.List;
 
+/**
+ * Parses input by the user and identifies the commands.
+ */
 public class Parser {
 
+    /**
+     * Parses the input by the user in the user interface.
+     * @param currInput the current of the user.
+     * @return int A number that represents the status of the input.
+     * @throws InvalidCommandException If command is of invalid format.
+     * @throws InvalidInputException If input is not a valid command.
+     */
     public static int parse(String currInput) throws InvalidCommandException, InvalidInputException{
         if (isListCommand(currInput)) {
             return 1;
@@ -22,6 +32,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Translates a task command to a Task object.
+     * @param input
+     * @return Task The task to be put in the schdule.
+     * @throws InvalidInputException If input is not a valid command.
+     * @throws InvalidCommandException If command is of invalid format.
+     */
     public static Task getTask(String input) throws InvalidInputException, InvalidCommandException {
         String[] parts = input.split(" ", 2);
 
@@ -56,7 +73,7 @@ public class Parser {
         }
     }
 
-    public static void verifyTodo(String input) throws InvalidCommandException{
+    private static void verifyTodo(String input) throws InvalidCommandException{
         String[] parts = input.split(" ");
 
         if (parts.length <= 1) {
@@ -64,7 +81,7 @@ public class Parser {
         }
     }
 
-    public static void verifyDeadline(String input) throws InvalidCommandException {
+    private static void verifyDeadline(String input) throws InvalidCommandException {
         if (input.contains(" /by ")) {
             if (input.charAt(8) == ' ') {
                 String[] parts = input.split(" ", 2);
@@ -87,7 +104,7 @@ public class Parser {
         }
     }
 
-    public static void verifyEvent(String input) throws InvalidCommandException {
+    private static void verifyEvent(String input) throws InvalidCommandException {
         if (input.contains(" /at ")) {
             if (input.charAt(5) == ' ') {
                 String[] parts = input.split(" ", 2);
@@ -110,12 +127,12 @@ public class Parser {
         }
     }
 
-    public static boolean isDeleteCommand(String input) {
+    private static boolean isDeleteCommand(String input) {
         String[] parts = input.split(" ");
         return parts[0].equals("delete") && parts.length == 2;
     }
 
-    public static void verifyDeleteCommand(String input, int numOfTasks) throws InvalidCommandException {
+    private static void verifyDeleteCommand(String input, int numOfTasks) throws InvalidCommandException {
         try {
             String[] parts = input.split(" ");
             int index = Integer.parseInt(parts[1]) - 1;
@@ -128,12 +145,12 @@ public class Parser {
         }
     }
 
-    public static boolean isDoneCommand(String input) {
+    private static boolean isDoneCommand(String input) {
         String[] parts = input.split(" ");
         return parts[0].equals("done") && parts.length == 2;
     }
 
-    public static void verifyDoneCommand(String input, int numOfTasks) throws InvalidCommandException {
+    private static void verifyDoneCommand(String input, int numOfTasks) throws InvalidCommandException {
         try {
             String[] parts = input.split(" ");
             int index = Integer.parseInt(parts[1]) - 1;
@@ -148,15 +165,20 @@ public class Parser {
         }
     }
 
-    public static boolean isListCommand(String input) {
+    private static boolean isListCommand(String input) {
         return input.equals("list");
     }
 
+    /**
+     * Checks if input is "bye" which is the terminating command
+     * @param input
+     * @return boolean True if command is equals to "bye", returns false otherwise.
+     */
     public static boolean isTerminateCommand(String input) {
         return input.equals("bye");
     }
 
-    public static LocalDate getDate(String string) throws InvalidCommandException {
+    private static LocalDate getDate(String string) throws InvalidCommandException {
         //Currently only accepts date in yyyy-mm-dd format
         //Removing the whitespace before and after the string
         try {
@@ -170,7 +192,7 @@ public class Parser {
         }
     }
 
-    public static LocalTime getTime(String string) throws InvalidCommandException {
+    private static LocalTime getTime(String string) throws InvalidCommandException {
         //Currently only accepts time in x:x format
         //Removing the whitespace before and after the string
         try {

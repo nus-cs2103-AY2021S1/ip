@@ -5,8 +5,17 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Represents the storage of the tasks that a user wishes to save.
+ */
 public class Storage {
 
+    /**
+     * Retrieves the file containing the saved tasks in the user's computer.
+     * @return File The file with the saved tasks.
+     * @throws FileNotFoundException If the file is not found.
+     * @throws IOException If the parent directory does not exists.
+     */
     public static File getFile() throws FileNotFoundException, IOException{
         String home = System.getProperty("user.home");
         Path path = Paths.get(home, "ip", "src", "main", "java", "Data");
@@ -32,6 +41,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Saves the user's tasks in a file at the end of the program.
+     * @param list
+     * @throws IOException If the parent directory is not found.
+     * @throws FileNotFoundException If the file is lost or deleted.
+     */
     public static void save(List<Task> list) throws IOException, FileNotFoundException{
         String home = System.getProperty("user.home");
         Path path = Paths.get(home, "ip", "src", "main", "java", "Data");

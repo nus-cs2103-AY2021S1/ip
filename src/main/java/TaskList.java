@@ -7,10 +7,18 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Represents the list of saved tasks.
+ */
 public class TaskList {
 
     private static List<Task> taskList = new ArrayList<>();
 
+    /**
+     * Generates an Task list based on the retrieved file of the user's saved tasks.
+     * @param file
+     * @throws FileNotFoundException If the file does not exist.
+     */
     public static void generateList(File file) throws FileNotFoundException {
         Scanner scanner = new Scanner(file);
         while (scanner.hasNext()) {
@@ -20,18 +28,35 @@ public class TaskList {
         }
     }
 
+    /**
+     * Generates a list of tasks.
+     * @return A list of the tasks.
+     */
     public static List<Task> getList() {
         return taskList;
     }
 
+    /**
+     * Adds new tasks to the list of tasks.
+     * @param task
+     */
     public static void add(Task task) {
         taskList.add(task);
     }
 
+    /**
+     * Returns the number of tasks in the list.
+     * @return Size of the task list.
+     */
     public static int size() {
         return taskList.size();
     }
 
+    /**
+     * Returns the task at the specified index.
+     * @param index
+     * @return Task at the specified index of the TaskList.
+     */
     public static Task get(int index) {
         return taskList.get(index);
     }
