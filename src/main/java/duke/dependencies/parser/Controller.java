@@ -67,8 +67,8 @@ public class Controller {
         } catch (InvalidDateException e) {
             System.out.println(e.getMessage());
             return "I don't understand the date you are giving -_-\n" +
-                    "Please give in the following formats:\n" +
-                    "MM/dd/yyyy or yyyy-MM-dd";
+                    "Please give in either format:\n" +
+                    "1. MM/dd/yyyy\n2. yyyy-MM-dd";
 
         } catch (DukeException e) {
             return "HUH???" + e.getMessage();

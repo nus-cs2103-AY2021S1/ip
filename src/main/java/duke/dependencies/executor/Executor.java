@@ -65,14 +65,6 @@ public class Executor {
                 setState(FIND);
                 break;
 
-            case GETCOMPLETED:
-                setState(GETCOMPLETED);
-                break;
-
-            case GETINCOMPLETE:
-                setState(GETINCOMPLETE);
-                break;
-
             default:
                 setState(INVALID);  // Should never reached this stage.
                 break;
