@@ -28,8 +28,8 @@ public class DeleteCommand extends Command {
      * Executes this {@code CompleteCommand}.
      * Deletes the {@code Task} in the specified {@code list} at the stored {@code index}.
      *
-     * @param list
-     * @param storage
+     * @param list    the currently loaded {@link TaskList} object.
+     * @param storage the currently loaded {@link Storage} object.
      */
     @Override
     public void execute(TaskList list, Storage storage) {
@@ -42,6 +42,7 @@ public class DeleteCommand extends Command {
      * Prints a feedback confirming the execution of this {@code DeleteCommand}.
      *
      * @param ui the {@link Ui} instance to use for formatting.
+     * @throws IncompleteDukeCommandException if this {@code DeleteCommand} was not executed.
      */
     @Override
     public void printFeedback(Ui ui) throws IncompleteDukeCommandException {

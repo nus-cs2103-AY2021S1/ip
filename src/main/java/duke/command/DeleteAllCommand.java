@@ -27,7 +27,7 @@ public class DeleteAllCommand extends Command {
      * Prints a feedback confirming the execution of this {@code DeleteCommand}.
      *
      * @param ui the {@link Ui} instance to use for formatting.
-     * @throws IncompleteDukeCommandException
+     * @throws IncompleteDukeCommandException if this {@code DeleteAllCommand} was not executed.
      */
     @Override
     public void printFeedback(Ui ui) throws IncompleteDukeCommandException {

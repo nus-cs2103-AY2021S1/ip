@@ -74,7 +74,9 @@ public class Event extends Task {
      * @return an encoded string representation of this {@code Event}.
      */
     public String encode() {
-        return String.format("E|%s|%s|%s", super.completed ? "Y" : "N", DateParser.parseLocalDateTime(dateTime), super.description);
+        return String.format("E|%s|%s|%s", super.completed ? "Y" : "N",
+                DateParser.parseLocalDateTime(dateTime),
+                super.description);
     }
 
     /**

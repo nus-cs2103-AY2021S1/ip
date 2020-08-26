@@ -25,8 +25,9 @@ public class ExitCommand extends Command {
      * Prints a feedback confirming the execution of this {@code ExitCommand}.
      *
      * @param ui the {@link Ui} instance to use for formatting.
+     * @throws IncompleteDukeCommandException if this {@code ExitCommand} was not executed.
      */
-    public void printFeedback(Ui ui) {
+    public void printFeedback(Ui ui) throws IncompleteDukeCommandException {
         if (super.completed) {
             ui.exit();
         } else {

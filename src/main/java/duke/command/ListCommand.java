@@ -2,7 +2,6 @@ package duke.command;
 
 import duke.Storage;
 import duke.Ui;
-import duke.exceptions.DukeException;
 import duke.exceptions.IncompleteDukeCommandException;
 import duke.task.TaskList;
 
@@ -29,10 +28,10 @@ public class ListCommand extends Command {
      * Prints the result of executing this {@code ListCommand}.
      *
      * @param ui the {@link Ui} instance to use for formatting.
-     * @throws DukeException
+     * @throws IncompleteDukeCommandException if this {@code ListCommand} was not executed.
      */
     @Override
-    public void printFeedback(Ui ui) throws DukeException {
+    public void printFeedback(Ui ui) throws IncompleteDukeCommandException {
         if (super.completed) {
             ui.formattedPrint(ui.prependIndent(printout, 1));
         } else {

@@ -75,7 +75,9 @@ public class Deadline extends Task {
      */
     @Override
     public String encode() {
-        return String.format("D|%s|%s|%s", super.completed ? "Y" : "N", DateParser.parseLocalDateTime(dateTime), super.description);
+        return String.format("D|%s|%s|%s", super.completed ? "Y" : "N",
+                DateParser.parseLocalDateTime(dateTime),
+                super.description);
     }
 
     /**
