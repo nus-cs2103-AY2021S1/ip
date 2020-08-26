@@ -1,6 +1,13 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents a deadline task.
+ *
+ * @author Siqi
+ * @version 1.0
+ * @since 2020-08-25
+ */
 public class Deadline extends Task {
     protected LocalDate by;
     protected String time;
@@ -29,6 +36,10 @@ public class Deadline extends Task {
         this.time = time;
     }
 
+    /**
+     * This method formats the task for display to the user.
+     * @return This returns a string containing the task details.
+     */
     public String display() { //format time here
         if (time == null || time.isEmpty()) {
             return "[D]" + super.toString() + " (by: "
