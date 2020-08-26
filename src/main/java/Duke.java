@@ -1,16 +1,17 @@
 import java.io.IOException;
+
 import java.util.Scanner;
 
 public class Duke {
-    static Scanner sc = new Scanner(System.in);
-    static String s;
-
-    static Ui ui = new Ui(sc);
-    static TaskList tasklist;
-    static Parser parser = new Parser();
-
     static String HOME = System.getProperty("user.home");
     static java.nio.file.Path PATH = java.nio.file.Paths.get(HOME, "ip", "data.txt");
+
+    static Scanner sc = new Scanner(System.in);
+    static Ui ui = new Ui(sc);
+    static Parser parser = new Parser();
+
+    static String s;
+    static TaskList tasklist;
 
     static void initialize() throws IOException {
         Scanner myReader = new Scanner(PATH);
@@ -48,7 +49,7 @@ public class Duke {
         }
     }
 
-    public static void main(String[] args) throws DukeException, IOException {
+    public static void main(String[] args) throws IOException {
         initialize();
         talk();
     }
