@@ -85,4 +85,5 @@ public class Warnings extends Ui {
         String warningMsg2 = "\n################################################################";
         System.out.println(warningMsg2);
     }
+
 }

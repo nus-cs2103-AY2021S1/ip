@@ -130,4 +130,25 @@ public class Ui {
 
         System.out.println(outputMsg);
     }
+
+    public static void findMatchingTasks(String keyword, ArrayList<Task> matchedTasks) {
+        String outputMsg = "";
+        if (matchedTasks.isEmpty()) {
+            outputMsg = "___________________________________________________________"
+                    + "\n (⊙ ‿ ⊙)"
+                    + "\n There is no matching task with the keyword - '" + keyword+"'."
+                    + "\n___________________________________________________________\n";
+        } else {
+            outputMsg = "___________________________________________________________"
+                    + "\n (⊙ ‿ ⊙)"
+                    + "\n You have " + matchedTasks.size() + " tasks matched with keyword - '" + keyword+"'."
+                    + "\n Here they are:";
+            for (int i = 0; i < matchedTasks.size(); i++) {
+                outputMsg += "\n      " + (i + 1) + ". " + matchedTasks.get(i);
+            }
+            outputMsg += "\n___________________________________________________________\n";
+        }
+
+        System.out.println(outputMsg);
+    }
 }

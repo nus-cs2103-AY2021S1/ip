@@ -42,4 +42,14 @@ public class TaskList {
         tasks.get(index - 1).markAsDone();
         Ui.doneTaskMsg(index, tasks);
     }
+
+    public static void findTask(String keyword, ArrayList<Task> tasks) {
+        ArrayList<Task> matchedTasks = new ArrayList<>();
+        for (Task task: tasks) {
+            if (task.getTaskTitle().contains(keyword)) {
+                matchedTasks.add(task);
+            }
+        }
+        Ui.findMatchingTasks(keyword, matchedTasks);
+    }
 }
