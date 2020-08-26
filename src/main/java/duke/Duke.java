@@ -18,24 +18,24 @@ public class Duke {
     public static String home = System.getProperty("user.home");
     public static String filePath = home + "/Desktop/duke.txt";
     private Storage storeFile;
-    private TaskList list;
+    private TaskList tasks;
     private Ui ui;
 
     public Duke(String filePath) {
         this.ui = new Ui();
         this.storeFile = new Storage(filePath);
         try {
-            list = new TaskList(storeFile.loadFile());
+            tasks = new TaskList(storeFile.loadFile());
         } catch (DukeException e) {
             ui.showErrorMsg(e);
-            list = new TaskList();
+            tasks = new TaskList();
         }
         ui.startupMsg();
     }
 
     public void run() {
         String userInput;
-        String[] s;
+        String[] userInputArray;
         boolean validInput = true;
 
         while (true) {
@@ -45,19 +45,19 @@ public class Duke {
             }
             switch (userInput) {
             case "list":
-                if (list.isEmpty()) {
+                if (tasks.isEmpty()) {
                     ui.showListEmptyMsg();
                 } else {
                     ui.showListMsg();
-                    ui.showTaskList(list);
+                    ui.showTaskList(tasks);
                 }
                 break;
             case "done":
-                if (list.isEmpty()) {
+                if (tasks.isEmpty()) {
                     ui.showListEmptyMsg();
                 } else {
                     ui.showListMsg();
-                    ui.showTaskList(list);
+                    ui.showTaskList(tasks);
                     do {
                         ui.showListDoneAskMsg();
                         try {
@@ -66,12 +66,12 @@ public class Duke {
                             TaskList doneList = new TaskList();
                             for (int index : tasksArray) {
                                 try {
-                                    if (index > list.size() || index <= 0) {
+                                    if (index > tasks.size() || index <= 0) {
                                         throw new DukeException("This task #" + index + " does not exist.");
                                     }
-                                    Task t = list.getTask(index);
-                                    t.setDone();
-                                    doneList.addTask(t);
+                                    Task task = tasks.getTask(index);
+                                    task.setDone();
+                                    doneList.addTask(task);
                                 } catch (DukeException e) {
                                     ui.showErrorMsg(e);
                                 }
@@ -88,7 +88,7 @@ public class Duke {
                 }
 
                 try {
-                    storeFile.saveFile(list);
+                    storeFile.saveFile(tasks);
                 } catch (DukeException e) {
                     ui.showErrorMsg(e);
                 }
@@ -104,7 +104,7 @@ public class Duke {
                             throw new DukeException("Yo! Task details are missing.");
                         }
                         Task toDo = new Todo(userInput);
-                        list.addTask(toDo);
+                        tasks.addTask(toDo);
                         ui.showTaskAddedMsg(toDo);
                         validInput = true;
                     } catch (DukeException e) {
@@ -113,7 +113,7 @@ public class Duke {
                 } while (!validInput);
 
                 try {
-                    storeFile.saveFile(list);
+                    storeFile.saveFile(tasks);
                 } catch (DukeException e) {
                     ui.showErrorMsg(e);
                 }
@@ -124,9 +124,9 @@ public class Duke {
                     ui.showTaskAddAskMsg();
                     try {
                         userInput = ui.readInput();
-                        s = Parser.parseDetails(userInput);
-                        Task deadLine = new Deadline(s[0], s[1]);
-                        list.addTask(deadLine);
+                        userInputArray = Parser.parseDetails(userInput);
+                        Task deadLine = new Deadline(userInputArray[0], userInputArray[1]);
+                        tasks.addTask(deadLine);
                         ui.showTaskAddedMsg(deadLine);
                         validInput = true;
 
@@ -137,7 +137,7 @@ public class Duke {
                 } while (!validInput);
 
                 try {
-                    storeFile.saveFile(list);
+                    storeFile.saveFile(tasks);
                 } catch (DukeException e) {
                     ui.showErrorMsg(e);
                 }
@@ -148,9 +148,9 @@ public class Duke {
                     ui.showTaskAddAskMsg();
                     try {
                         userInput = ui.readInput();
-                        s = Parser.parseDetails(userInput);
-                        Task event = new Event(s[0], s[1]);
-                        list.addTask(event);
+                        userInputArray = Parser.parseDetails(userInput);
+                        Task event = new Event(userInputArray[0], userInputArray[1]);
+                        tasks.addTask(event);
                         ui.showTaskAddedMsg(event);
                         validInput = true;
 
@@ -161,18 +161,18 @@ public class Duke {
                 } while (!validInput);
 
                 try {
-                    storeFile.saveFile(list);
+                    storeFile.saveFile(tasks);
                 } catch (DukeException e) {
                     ui.showErrorMsg(e);
                 }
 
                 break;
             case "delete":
-                if (list.isEmpty()) {
+                if (tasks.isEmpty()) {
                     ui.showListEmptyMsg();
                 } else {
                     ui.showListMsg();
-                    ui.showTaskList(list);
+                    ui.showTaskList(tasks);
                     do {
                         ui.showTaskDeleteAskMsg();
                         try {
@@ -181,12 +181,12 @@ public class Duke {
                             int[] tasksArray = Parser.parse(userInput);
                             for (int index : tasksArray) {
                                 try {
-                                    if (index > list.size() || index <= 0) {
+                                    if (index > tasks.size() || index <= 0) {
                                         throw new DukeException("This task #" + index + " does not exist.");
                                     }
-                                    Task t = list.getTask(index);
-                                    list.removeTask(index);
-                                    deletedTasks.addTask(t);
+                                    Task task = tasks.getTask(index);
+                                    tasks.removeTask(index);
+                                    deletedTasks.addTask(task);
                                 } catch (DukeException e) {
                                     ui.showErrorMsg(e);
                                 }
@@ -204,7 +204,7 @@ public class Duke {
                 }
 
                 try {
-                    storeFile.saveFile(list);
+                    storeFile.saveFile(tasks);
                 } catch (DukeException e) {
                     ui.showErrorMsg(e);
                 }

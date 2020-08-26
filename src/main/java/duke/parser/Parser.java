@@ -7,36 +7,36 @@ import java.util.Collections;
 
 public class Parser {
 
-    public static String[] parseDetails(String str) throws DukeException {
-        String[] s;
-        if (str.contains("/by")) {
-            s = str.split(" /by ");
-            if (s.length <= 1) {
+    public static String[] parseDetails(String inputString) throws DukeException {
+        String[] splitStrings;
+        if (inputString.contains("/by")) {
+            splitStrings = inputString.split(" /by ");
+            if (splitStrings.length <= 1) {
                 throw new DukeException("Yo! Details/Time are missing.");
             }
-            return s;
-        } else if (str.contains("/at")) {
-            s = str.split(" /at ");
-            if (s.length <= 1) {
+            return splitStrings;
+        } else if (inputString.contains("/at")) {
+            splitStrings = inputString.split(" /at ");
+            if (splitStrings.length <= 1) {
                 throw new DukeException("Yo! Details/Time are missing.");
             }
-            return s;
+            return splitStrings;
         } else {
             throw new DukeException(
                     "Yo! Command Syntax Error. '<Details> /by or /at <dd/MM/yy [HH:MM]>'");
         }
     }
 
-    public static int[] parse(String str) throws DukeException {
-        int[] intArray;
-        if (str.isBlank()) {
+    public static int[] parse(String inputString) throws DukeException {
+        int[] taskNumbers;
+        if (inputString.isBlank()) {
             throw new DukeException("Yo! Enter the task numbers(s).");
         }
-        intArray =
-                Arrays.stream(str.split(" "))
+        taskNumbers =
+                Arrays.stream(inputString.split(" "))
                         .sorted(Collections.reverseOrder())
                         .mapToInt(Integer::parseInt)
                         .toArray();
-        return intArray;
+        return taskNumbers;
     }
 }

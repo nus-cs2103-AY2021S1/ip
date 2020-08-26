@@ -5,41 +5,41 @@ import duke.dukeException.DukeException;
 import java.util.ArrayList;
 
 public class TaskList {
-    private ArrayList<Task> list;
+    private ArrayList<Task> tasks;
 
     public TaskList(ArrayList<Task> list) {
-        this.list = list;
+        this.tasks = list;
     }
 
     public TaskList() {
-        list = new ArrayList<>();
+        tasks = new ArrayList<>();
     }
 
     public Task getTask(int id) throws DukeException {
         try {
-            return list.get(id - 1);
+            return tasks.get(id - 1);
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException(" This task #" + id + " does not exist.");
         }
     }
 
     public void addTask(Task t) {
-        list.add(t);
+        tasks.add(t);
     }
 
     public void removeTask(int id) {
-        list.remove(id - 1);
+        tasks.remove(id - 1);
     }
 
     public boolean isEmpty() {
-        return list.isEmpty();
+        return tasks.isEmpty();
     }
 
     public int size() {
-        return list.size();
+        return tasks.size();
     }
 
     public ArrayList<Task> getList() {
-        return this.list;
+        return this.tasks;
     }
 }

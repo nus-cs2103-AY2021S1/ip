@@ -14,10 +14,10 @@ public class Ui {
                     + "| | | | | | | |/ / _ \\\n"
                     + "| |_| | |_| |   <  __/\n"
                     + "|____/ \\__,_|_|\\_\\___|\n";
-    private Scanner sc;
+    private Scanner scanner;
 
     public Ui() {
-        sc = new Scanner(System.in);
+        scanner = new Scanner(System.in);
     }
 
     public void startupMsg() {
@@ -28,12 +28,12 @@ public class Ui {
 
     public String readInput() {
         System.out.print(cmd);
-        return sc.nextLine();
+        return scanner.nextLine();
     }
 
     public void showHelp() {
-        String s = "Here's what I can do:\n";
-        String msg =
+        String helpMessage = "Here's what I can do:\n";
+        String availableCommands =
                 "Available Commands: \n"
                         + "'todo' \n"
                         + "'deadline' \n"
@@ -41,13 +41,13 @@ public class Ui {
                         + "'list' \n"
                         + "'delete' \n"
                         + "'bye'";
-        System.out.println(s + msg);
+        System.out.println(helpMessage + availableCommands);
     }
 
-    public void showTaskList(TaskList list) {
-        int idx = 0;
-        for (Task t : list.getList()) {
-            System.out.println(++idx + ". " + t.toString());
+    public void showTaskList(TaskList tasks) {
+        int index = 0;
+        for (Task t : tasks.getList()) {
+            System.out.println(++index + ". " + t.toString());
         }
     }
 
@@ -75,8 +75,8 @@ public class Ui {
         System.out.println(duke + "Enter task details:");
     }
 
-    public void showTaskAddedMsg(Task t) {
-        System.out.println(duke + "I've added '" + t.getTaskName() + "' to your Task List");
+    public void showTaskAddedMsg(Task task) {
+        System.out.println(duke + "I've added '" + task.getTaskName() + "' to your Task List");
     }
 
     public void showTaskDeleteAskMsg() {

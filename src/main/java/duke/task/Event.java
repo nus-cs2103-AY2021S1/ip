@@ -18,13 +18,13 @@ public class Event extends Task {
         super(description);
         this.at = at;
         try {
-            String s[] = at.split(" ");
-            if (s.length <= 1) {
+            String dateTimeSplit[] = at.split(" ");
+            if (dateTimeSplit.length <= 1) {
                 time = null;
             } else {
-                time = LocalTime.parse(s[1], timeParser);
+                time = LocalTime.parse(dateTimeSplit[1], timeParser);
             }
-            date = LocalDate.parse(s[0], dateParser);
+            date = LocalDate.parse(dateTimeSplit[0], dateParser);
         } catch (DateTimeParseException e) {
             throw new DukeException("Yo! DateTime format is wrong. <dd/MM/yy [HH:MM]>");
         }
