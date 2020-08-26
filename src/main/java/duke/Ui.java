@@ -63,6 +63,23 @@ public class Ui {
     }
 
     /**
+     * Display the filtered list with the proper response message to the user.
+     * @param filteredTasks The filtered tasks.
+     */
+    public void filteredList(List<Task> filteredTasks) {
+        if (filteredTasks.size() == 0) {
+            reply("No tasks found");
+        } else {
+            reply("Here are the matching tasks in your list:");
+            for (int i = 0; i < filteredTasks.size(); i++) {
+                String number = (i + 1) + ".";
+                Task currentTask = filteredTasks.get(i);
+                reply(number + currentTask.toString());
+            }
+        }
+    }
+
+    /**
      * Displays the message when a task is added to the list.
      * @param currentTask The task to be added.
      * @param size The size of the list.

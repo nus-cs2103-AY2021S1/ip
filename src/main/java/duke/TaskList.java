@@ -2,6 +2,7 @@ package duke;
 
 import duke.task.Task;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -70,6 +71,18 @@ public class TaskList {
         return this.tasks.get(index);
     }
 
-
-
+    /**
+     * Filters the list of tasks with the keyword.
+     * @param keyword The keyword.
+     * @return A filtered list of tasks.
+     */
+    public List<Task> findTasks(String keyword) {
+        List<Task> filteredTasks = new ArrayList<>();
+        for (Task task : tasks) {
+            if (task.description.contains(keyword)) {
+                filteredTasks.add(task);
+            }
+        }
+        return filteredTasks;
+    }
 }

@@ -42,6 +42,8 @@ public class Parser {
                 return parseAddCommandWithDate(commandLine);
             } else if (isDone(commandLine) || isDelete(commandLine)) {
                 return parseDoneDeleteCommand(commandLine);
+            } else if (isFind(commandLine)) {
+                return parseFindCommand(commandLine);
             } else if (commandLine.equals("bye")) {
                 return new ExitCommand();
             } else {
@@ -54,6 +56,29 @@ public class Parser {
         } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
             throw new DukeEmptyActionException();
         }
+    }
+
+    /**
+     * Parses the keyword from the commandline and use it as an argument for
+     * creating the FindCommand.
+     * @param commandLine The user input.
+     * @return FindCommand.
+     * @throws DukeEmptyFindException Checks if the keyword is empty.
+     */
+    private static Command parseFindCommand(String commandLine) throws DukeEmptyFindException {
+        if (commandLine.equals("todo")) {
+            throw new DukeEmptyFindException();
+        }
+        return new FindCommand(commandLine.substring(5));
+    }
+
+    /**
+     * Check if the input starts with 'find'.
+     * @param commandLine
+     * @return
+     */
+    private static boolean isFind(String commandLine) {
+        return commandLine.startsWith("find");
     }
 
     /**
@@ -100,7 +125,7 @@ public class Parser {
 
     /**
      * Creates the ListCommand.
-     * @return ListCommand
+     * @return ListCommand.
      */
     private static Command parseListCommand() {
         return new ListCommand();
@@ -119,7 +144,7 @@ public class Parser {
      * Creates a TaskToDo object and use it as a parameter
      * to create an AddCommand
      * @param commandLine The user input.
-     * @return AddCommand
+     * @return AddCommand.
      * @throws DukeEmptyToDoException Checks if the input includes
      * a description.
      */
