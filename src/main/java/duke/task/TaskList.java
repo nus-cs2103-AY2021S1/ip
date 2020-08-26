@@ -55,7 +55,7 @@ public class TaskList {
         StringBuilder output = new StringBuilder();
         int i = 1;
         
-        for (Task task : taskList) {
+        for (Task task : tasks) {
             if (task.getDescription().contains(keyword)) {
                 output.append(i).append(". ").append(task).append("\n");
             }
