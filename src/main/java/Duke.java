@@ -1,3 +1,6 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -7,10 +10,10 @@ public class Duke {
     // Constants
     public static final String LOGO =
             " ____        _\n"
-            + " |  _ \\ _   _| | _____\n"
-            + " | | | | | | | |/ / _ \\\n"
-            + " | |_| | |_| |   <  __/\n"
-            + " |____/ \\__,_|_|\\_\\___|\n";
+                    + " |  _ \\ _   _| | _____\n"
+                    + " | | | | | | | |/ / _ \\\n"
+                    + " | |_| | |_| |   <  __/\n"
+                    + " |____/ \\__,_|_|\\_\\___|\n";
     public static final String TOP_LINE = " ____________________________________________________________\n ";
     public static final String BOTTOM_LINE = "\n ____________________________________________________________";
 
@@ -48,6 +51,17 @@ public class Duke {
             }
 
             System.out.println(formatMessage("Task(s) in your list:\n" + tasksList));
+        }
+    }
+
+    // Checks if user's input date is of the correct format (yyyy-mm-dd HH:MM)
+    public static boolean isValidFormat(String inputDate) {
+        try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+            LocalDateTime dateTime = LocalDateTime.parse(inputDate, formatter);
+            return true;
+        } catch (DateTimeParseException e) {
+            return false;
         }
     }
 
@@ -127,15 +141,24 @@ public class Duke {
                     } else if (inputData.split("/by ").length < 2 || inputDataWords[1].equals("/by")) {
                         throw new DukeException("The deadline of this task is not provided.\n" +
                                 "   Please re-enter the desired deadline task\n" +
-                                "   (e.g. deadline xxx /by zzz)");
+                                "   (e.g. deadline xxx /by yyyy-mm-dd HH:MM)");
                     } else {
-                        tasks.add(numTasks, new Deadline(inputData.split("deadline ")[1].split("/by ")[0],
-                                inputData.split("/by ")[1]));
+                        String byString = inputData.split("/by ")[1];
+                        if (isValidFormat(byString)) {
+                            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+                            LocalDateTime byLocalDate = LocalDateTime.parse(byString, formatter);
+                            tasks.add(numTasks, new Deadline(inputData.split("deadline ")[1].split("/by ")[0],
+                                    byLocalDate));
 
-                        System.out.println(formatMessage("Got it. I've added this task:\n    " +
-                                tasks.get(numTasks) +
-                                "\n Now you have " + (numTasks + 1) + " task(s) in the list."));
-                        numTasks++;
+                            System.out.println(formatMessage("Got it. I've added this task:\n    " +
+                                    tasks.get(numTasks) +
+                                    "\n Now you have " + (numTasks + 1) + " task(s) in the list."));
+                            numTasks++;
+                        } else {
+                            throw new DukeException("   Please enter a valid deadline task\n" +
+                                    "   (e.g. deadline xxx /by yyyy-mm-dd HH:mm)");
+                        }
+
                     }
 
                 } else if (firstWord.equals("event")) {
@@ -144,14 +167,22 @@ public class Duke {
                     } else if (inputData.split("/at ").length < 2) {
                         throw new DukeException("The duration of this task cannot be empty.\n" +
                                 "   Please re-enter the desired event task\n" +
-                                "   (e.g. event xxx /at zzz)");
+                                "   (e.g. event xxx /at yyyy-mm-dd HH:mm)");
                     } else {
-                        tasks.add(numTasks, new Event(inputData.split("event ")[1].split("/at ")[0],
-                                inputData.split("/at ")[1]));
-                        System.out.println(formatMessage("Got it. I've added this task:\n    " +
-                                        tasks.get(numTasks) +
-                                        "\n Now you have " + (numTasks + 1) + " task(s) in the list."));
-                        numTasks++;
+                        String atString = inputData.split("/at ")[1];
+                        if (isValidFormat(atString)) {
+                            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+                            LocalDateTime atLocalDate = LocalDateTime.parse(atString, formatter);
+                            tasks.add(numTasks, new Event(inputData.split("event ")[1].split("/at ")[0],
+                                    atLocalDate));
+                            System.out.println(formatMessage("Got it. I've added this task:\n    " +
+                                    tasks.get(numTasks) +
+                                    "\n Now you have " + (numTasks + 1) + " task(s) in the list."));
+                            numTasks++;
+                        } else {
+                            throw new DukeException("   Please enter a valid event task\n" +
+                                    "   (e.g. event xxx /at yyyy-mm-dd HH:mm)");
+                        }
                     }
 
                 } else if (inputData.equals("bye")) {
