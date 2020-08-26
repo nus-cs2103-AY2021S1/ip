@@ -1,41 +1,106 @@
+import java.io.IOException;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.Files;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 
 public class Duke {
     ArrayList<Task> tasks;
 
-    String addTaskLine;
-    String doneTaskLine;
-    String listTaskLine;
-    String byeLine;
-    String errorLine;
-    String indent;
+    static String ADD_TASK_LINE = ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>";
+    static String DONE_TASK_LINE = "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
+    static String LIST_TASK_LINE = "________________________________________________________";
+    static String BYE_LINE = "========================================================";
+    static String ERROR_LINE = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";
+    static String INDENT = "    ";
 
     Duke() {
         tasks = new ArrayList<>();
-        addTaskLine = ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>";
-        doneTaskLine = "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
-        listTaskLine = "________________________________________________________";
-        byeLine = "========================================================";
-        errorLine = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";
-        indent = "    ";
+        String basePath = System.getProperty("user.dir");
+        Path path = Paths.get(basePath, "data", "tasks.txt");
+        try {
+            if (Files.exists(path)) {
+                BufferedReader reader = new BufferedReader(new FileReader(path.toString()));
+                String line = reader.readLine();
+                while (line != null) {
+                    String[] taskData = line.split(" // ");
+                    if (taskData[0].equals("T")) {
+                        if (taskData.length == 3) {
+                            if (Integer.parseInt(taskData[1]) == 1) {
+                                tasks.add(new ToDo(taskData[2], true));
+                            } else {
+                                tasks.add(new ToDo(taskData[2], false));
+                            }
+                        }
+                    } else if (taskData[0].equals("E")) {
+                        if (taskData.length == 4) {
+                            if (Integer.parseInt(taskData[1]) == 1) {
+                                tasks.add(new Event(taskData[2], taskData[3], true));
+                            } else {
+                                tasks.add(new Event(taskData[2], taskData[3], false));
+                            }
+                        }
+                    } else if (taskData[0].equals("D")) {
+                        if (taskData.length == 4) {
+                            if (Integer.parseInt(taskData[1]) == 1) {
+                                tasks.add(new Deadline(taskData[2], taskData[3], true));
+                            } else {
+                                tasks.add(new Deadline(taskData[2], taskData[3], false));
+                            }
+                        }
+                    }
+                    line = reader.readLine();
+                }
+                reader.close();
+            } else {
+                Path newFilePath = Files.createFile(path);
+            }
+        } catch (UnsupportedOperationException | IOException | SecurityException e) {
+            System.out.println(e);
+            System.exit(1);
+        }
+    }
+    
+    void writeTasksToFile(String... data) {
+        try {
+            String basePath = new File("").getAbsolutePath();
+            Path path = Paths.get(basePath, "data", "tasks.txt");
+            if (Files.exists(path)) {
+                BufferedWriter writer = new BufferedWriter(
+                    new FileWriter(path.toString(), true));
+                for (int i = 0; i < data.length; i++) {
+                    writer.append(data[i]);
+                    writer.newLine();
+                }
+                writer.close();
+            }
+        } catch (IOException e) {
+            System.out.println(e);
+            System.exit(1);
+        }
     }
     
     void displayError(String errorMessage) {
         System.out.println(
-                indent + errorLine + "\n"
-                + indent + errorMessage + "\n"
-                + indent + errorLine
+                INDENT + ERROR_LINE + "\n"
+                + INDENT + errorMessage + "\n"
+                + INDENT + ERROR_LINE
         );
     }
     
     void displayAddTaskSuccess(Task task, int taskCount) {
         System.out.println(
-                indent + addTaskLine + "\n"
-                + indent + "Added task:" +"\n"
-                + indent + indent + task.toString() + "\n"
-                + indent + "You now have " + taskCount + " task(s) in the list.\n"
-                + indent + addTaskLine
+                INDENT + ADD_TASK_LINE + "\n"
+                + INDENT + "Added task:" +"\n"
+                + INDENT + INDENT + task.toString() + "\n"
+                + INDENT + "You now have " + taskCount + " task(s) in the list.\n"
+                + INDENT + ADD_TASK_LINE
         );
     }
 
@@ -45,15 +110,15 @@ public class Duke {
             exit();
             return true;
         } else if (DukeCommand.equalsCommand(input, DukeCommand.LIST)) {
-            System.out.println(indent + listTaskLine);
+            System.out.println(INDENT + LIST_TASK_LINE);
             for (Task task : tasks) {
-                System.out.println(indent + (tasks.indexOf(task) + 1) + "." + task.toString()
+                System.out.println(INDENT + (tasks.indexOf(task) + 1) + "." + task.toString()
                 );
             }
             if (tasks.size() == 0) {
-                System.out.println(indent + "None");
+                System.out.println(INDENT + "None");
             }
-            System.out.println(indent + listTaskLine);
+            System.out.println(INDENT + LIST_TASK_LINE);
             return false;
         } else if (DukeCommand.equalsCommand(processedInput[0], DukeCommand.DONE)) {
             if (processedInput.length == 1) {
@@ -70,10 +135,10 @@ public class Duke {
             Task task = tasks.get(index - 1);
             task.setDone();
             System.out.println(
-                    indent + doneTaskLine + "\n"
-                    + indent + "The following task has been marked as done:\n"
-                    + indent + task.toString()
-                    + "\n" + indent + doneTaskLine
+                    INDENT + DONE_TASK_LINE + "\n"
+                    + INDENT + "The following task has been marked as done:\n"
+                    + INDENT + task.toString()
+                    + "\n" + INDENT + DONE_TASK_LINE
             );
             return false;
         } else if (DukeCommand.equalsCommand(processedInput[0], DukeCommand.TODO)) {
@@ -108,11 +173,11 @@ public class Duke {
             Task task = new Event(taskDetails[0], taskDetails[1]);
             tasks.add(task);
             System.out.println(
-                    indent + addTaskLine + "\n"
-                    + indent + "Added task:" +"\n"
-                    + indent + indent + task.toString() + "\n"
-                    + indent + "You now have " + tasks.size() + " task(s) in the list.\n"
-                    + indent + addTaskLine
+                    INDENT + ADD_TASK_LINE + "\n"
+                    + INDENT + "Added task:" +"\n"
+                    + INDENT + INDENT + task.toString() + "\n"
+                    + INDENT + "You now have " + tasks.size() + " task(s) in the list.\n"
+                    + INDENT + ADD_TASK_LINE
             );
             return false;
         } else if (DukeCommand.equalsCommand(processedInput[0], DukeCommand.DELETE)) {
@@ -130,11 +195,11 @@ public class Duke {
             Task task = tasks.get(index - 1);
             tasks.remove(index - 1);
             System.out.println(
-                    indent + doneTaskLine + "\n"
-                            + indent + "The following task has been removed:\n"
-                            + indent + task.toString() + "\n"
-                            + indent + "You now have " + tasks.size() + " task(s) in the list.\n"
-                            + indent + doneTaskLine
+                    INDENT + DONE_TASK_LINE + "\n"
+                            + INDENT + "The following task has been removed:\n"
+                            + INDENT + task.toString() + "\n"
+                            + INDENT + "You now have " + tasks.size() + " task(s) in the list.\n"
+                            + INDENT + DONE_TASK_LINE
             );
             return false;
         } else {
@@ -145,11 +210,26 @@ public class Duke {
     }
 
     void exit() {
-        System.out.println(
-            indent + byeLine + "\n"
-            + indent + "Goodbye\n"
-            + indent + byeLine
-        );
+        try {
+            String basePath = System.getProperty("user.dir");
+            Path path = Paths.get(basePath, "data", "tasks.txt");
+            if (Files.deleteIfExists(path)) {
+                Path newFilePath = Files.createFile(path);
+                String[] data = new String[tasks.size()];
+                for (int i = 0; i < tasks.size(); i++) {
+                    data[i] = tasks.get(i).toDataString();
+                }
+                writeTasksToFile(data);
+            }
+            System.out.println(
+                    INDENT + BYE_LINE + "\n"
+                            + INDENT + "Goodbye\n"
+                            + INDENT + BYE_LINE
+            );
+        } catch (IOException e) {
+            System.out.println(e);
+            System.exit(1);
+        }
     }
 
     public static void main(String[] args) {
