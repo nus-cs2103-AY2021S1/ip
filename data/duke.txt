@@ -1,0 +1,4 @@
+D | 1 | read book | 2020-02-02
+E | 0 | read book | 2020-02-02
+T | 0 | sdfjk
+D | 0 | adkfjalsd | 0001-01-01

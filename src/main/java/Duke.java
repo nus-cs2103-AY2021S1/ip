@@ -9,7 +9,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-
+import java.time.LocalDate;
 
 public class Duke {
 
@@ -92,6 +92,16 @@ public class Duke {
         String[] stringArray = input.split(" /at ");
         stringArray[0] = stringArray[0].substring(6);
         return stringArray;
+    }
+
+    private static void findTask(LocalDate date) {
+        System.out.println(divider);
+        for (Task t : list) {
+            if (t.getDate().equals(date)) {
+                System.out.println("   " + t.toString());
+            }
+        }
+        System.out.println(divider + "\n");
     }
 
     private static void wrapMessage(String message) {
@@ -249,6 +259,9 @@ public class Duke {
                     addList(new Event(getEventTimeStrings(input)[0], getEventTimeStrings(input)[1]));
                     addedMessage(new Event(getEventTimeStrings(input)[0], getEventTimeStrings(input)[1]));
                     saveListToFile(dataFile);
+                    break;
+                case GET_TASK:
+                    findTask(LocalDate.parse(input.substring(9)));
                     break;
                 default:
                     throw new DukeException("Give me a valid banana (input)!");
