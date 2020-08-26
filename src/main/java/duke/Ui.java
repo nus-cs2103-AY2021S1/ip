@@ -41,4 +41,18 @@ public class Ui {
         System.out.println(INDENTATION + INDENTATION + newTask.getStatusIcon() + " " + newTask.description);
         printBorder();
     }
+
+    public void findMatching(TaskList taskList, String textToMatch) {
+        printBorder();
+        System.out.println(INDENTATION + "Here are the matching tasks in your list:");
+        int index = 1;
+        for (Task task : taskList.getTasks()) {
+            String description = task.getDescription();
+            if (description.contains(textToMatch)) {
+                System.out.println(INDENTATION + index + "." + task);
+                index++;
+            }
+        }
+        printBorder();
+    }
 }

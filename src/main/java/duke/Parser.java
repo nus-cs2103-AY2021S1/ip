@@ -28,16 +28,20 @@ public class Parser {
                 String[] arrOfStr = line.split(" ", 0);
                 String identifier = arrOfStr[0];
                 if (identifier.equals("done")) {
-//                    mark as done
+                    // mark as done
                     int index = Integer.parseInt(arrOfStr[1]) - 1;
                     ui.markDone(tasks, index);
                     Storage.updateFile(filePath, tasks);
                 } else if (identifier.equals("delete")) {
-//                    delete
+                    // delete
                     int index = Integer.parseInt(arrOfStr[1]) - 1;
                     tasks.delete(index);
+                } else if (identifier.equals("find")) {
+                    // find
+                    String textToMatch = arrOfStr[1];
+                    ui.findMatching(tasks, textToMatch);
                 } else {
-//                    add to list
+                    // add to list
                     if ((identifier.equals("todo") || identifier.equals("deadline")
                             || identifier.equals("event")) && arrOfStr.length < 2) {
                         throw new DukeException("☹ OOPS!!! The description of a " + identifier + " cannot be empty.");
