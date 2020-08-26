@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -25,6 +27,19 @@ public class Duke {
         System.out.println("\t-----------------------------------------");
     }
 
+    private LocalDate validateDateTime(String time) throws DukeException {
+        if (time.equals("")) {
+            throw new DukeException("Task date cannot be empty.");
+        }
+        LocalDate parsed;
+        try {
+            parsed = LocalDate.parse(time);
+            return parsed;
+        } catch (DateTimeParseException ex) {
+            throw new DukeException("Invalid date entered. Use format YYYY-MM-DD");
+        }
+    }
+
     private void addTask(String task) {
         addTask(new Todo(task));
     }
@@ -35,19 +50,17 @@ public class Duke {
         if (isEvent) {
             taskSplit = task.split("/at");
             if (taskSplit.length != 2) {
-                throw new DukeException("Invalid description for an event");
-            } else if (taskSplit[1].strip().equals("")) {
-                throw new DukeException("Event time cannot be empty");
+                throw new DukeException("Invalid description for an event. Use /at followed by date");
             }
-            newTask = new Event(taskSplit[0].strip(), taskSplit[1].strip());
+            LocalDate dateTime = validateDateTime(taskSplit[1].strip());
+            newTask = new Event(taskSplit[0].strip(), dateTime);
         } else {
             taskSplit = task.split("/by");
             if (taskSplit.length != 2) {
-                throw new DukeException("Invalid description for a deadline");
-            } else if (taskSplit[1].strip().equals("")) {
-                throw new DukeException("Deadline cannot be empty");
+                throw new DukeException("Invalid description for a deadline. Use /by followed by date");
             }
-            newTask = new Deadline(taskSplit[0].strip(), taskSplit[1].strip());
+            LocalDate dateTime = validateDateTime(taskSplit[1].strip());
+            newTask = new Deadline(taskSplit[0].strip(), dateTime);
         }
         addTask(newTask);
     }
