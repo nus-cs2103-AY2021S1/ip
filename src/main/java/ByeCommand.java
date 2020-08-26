@@ -7,6 +7,15 @@ public class ByeCommand extends Command{
         super(str);
     }
 
+    /**
+     * Says bye to the user.
+     * Writes current tasks into hard disk.
+     * Exits the program.
+     *
+     * @param list List of tasks to be saved.
+     * @param ui Ui that prints out the output.
+     * @param storage Storage that reads from and writes to hard disk.
+     */
     @Override
     public void execute(TaskList list, Ui ui, Storage storage) {
         try {

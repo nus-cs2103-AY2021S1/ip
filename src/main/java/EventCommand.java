@@ -2,6 +2,9 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Represents a event command from a user.
+ */
 public class EventCommand extends Command{
 
     EventCommand(String str) {
@@ -13,6 +16,13 @@ public class EventCommand extends Command{
         return d.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
     }
 
+    /**
+     * Adds a event task to task list.
+     *
+     * @param list A list of task.
+     * @param ui Ui that prints out the output.
+     * @param storage Storage that reads from and writes to hard disk.
+     */
     @Override
     public void execute(TaskList list, Ui ui, Storage storage) {
         try {
