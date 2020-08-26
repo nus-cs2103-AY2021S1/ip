@@ -1,19 +1,29 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Duke {
+    private static final String DATEREGEX = "^(19|20)\\d\\d-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$";
+
     //Selective print list
-    private static void printList(ArrayList<Task> lst, boolean printAll) {
-        for (int i = 1; i <= lst.size(); i++) {
-            Task task = lst.get(i - 1);
-            if (printAll || !task.getStatus()) {
-                System.out.println("\t" + i + ". " + task);
+    private static void printList(ArrayList<Task> lst, String option, LocalDate... date) {
+        int i = 1;
+        for (Task t : lst) {
+            if (option.equals("Undone") && t.getStatus()) {
+                continue;
+            } else if (option.equals("Date") && !t.getDate().equals(date[0])){
+                continue;
             }
+
+            System.out.println("\t" + i + ". " + t);
+            i++;
         }
     }
 
     public static String[] command(String text) throws DukeException {
-        String commandList = "bye|list|(done|delete)[\\s]+[\\d]+|todo.*|deadline.*|event.*";
+        String commandList = "bye|list|(done|delete)[\\s]+[\\d]+|todo.*|deadline.*|event.*|on.*";
         if (text.matches(commandList)) {
             String[] commandParaPair = text.split(" ", 2);
             return commandParaPair;
@@ -31,7 +41,11 @@ public class Duke {
                 break;
             case "list":
                 System.out.println("\tHere are the tasks in your list:");
-                printList(list, true);
+                printList(list, "All");
+                break;
+            case "on":
+                System.out.println("\tYou have these tasks on this date:");
+                printList(list, "Date", LocalDate.parse(commandParaPair[1]));
                 break;
             case "done":
             case "delete":
@@ -47,11 +61,11 @@ public class Duke {
                         activeTasks--;
                         System.out.println("\tYou have finished this task!\n\t" + task +
                                 "\n\tLet's move on to the next one!");
-                        printList(list, false);
+                        printList(list, "Undone");
                     } else {
                         System.out.println("\tYou have deleted this task!\n\t" + task +
                                 "\n\tHere are other tasks on your list:");
-                        printList(list, true);
+                        printList(list, "All");
                     }
                 }
                 break;
@@ -70,10 +84,15 @@ public class Duke {
                         if (contentTimePair.length < 2) {
                             throw new DukeException("\t☹ OOPS!!! The time of a deadline / event cannot be empty.");
                         } else {
-                            if (commandParaPair[0].equals("deadline")) {
-                                newTask = new Deadline(contentTimePair[0], contentTimePair[1]);
+                            if (contentTimePair[1].matches(DATEREGEX)) {
+                                LocalDate time = LocalDate.parse(contentTimePair[1]);
+                                if (commandParaPair[0].equals("deadline")) {
+                                    newTask = new Deadline(contentTimePair[0], time);
+                                } else {
+                                    newTask = new Event(contentTimePair[0], time);
+                                }
                             } else {
-                                newTask = new Event(contentTimePair[0], contentTimePair[1]);
+                                throw new DukeException("\t☹ OOPS!!! The time format cannot be identified!");
                             }
                         }
                     }
@@ -82,7 +101,7 @@ public class Duke {
                     activeTasks++;
                     System.out.println("\tadded: " + newTask);
                     System.out.println("\tYou have " + list.size() + " tasks, " + activeTasks + " undone!");
-                    printList(list, true);
+                    printList(list, "All");
                 }
                 break;
         }

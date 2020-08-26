@@ -1,10 +1,14 @@
+import java.time.LocalDate;
+
 public class Task {
     protected String description;
     protected boolean isDone;
+    protected LocalDate date;
 
-    public Task(String description) {
+    public Task(String description, LocalDate date) {
         this.description = description;
         this.isDone = false;
+        this.date = date;
     }
 
     public String getStatusIcon() {
@@ -13,6 +17,10 @@ public class Task {
 
     public boolean getStatus() {
         return isDone;
+    }
+
+    public LocalDate getDate() {
+        return date;
     }
 
     public void setDone() {
