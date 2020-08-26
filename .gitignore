@@ -18,6 +18,6 @@ bin/
 #user-added
 *.jar
 *.xml
-assets/
+/assets/userData.txt
 
 /text-ui-test/ACTUAL.txt
