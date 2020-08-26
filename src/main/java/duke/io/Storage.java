@@ -16,13 +16,31 @@ import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
+/**
+ * Storage class define rules for create, read and write to file.
+ *
+ * @author Galvin Leow Wen Yuan
+ * @author A0200204J
+ * @version v1.0
+ */
 public class Storage {
   protected String filePath;
 
+  /**
+   * Class constructor. Initialise Storage class with filepath.
+   *
+   * @param filePath use to create, read and write a file.
+   */
   public Storage(String filePath) {
     this.filePath = filePath;
   }
 
+  /**
+   * Read file and convert it into Arraylist<Task>.
+   *
+   * @return Arraylist<Task> contains all the task from the file.
+   * @throws DukeException exception for file cannot be found.
+   */
   public ArrayList<Task> load() throws DukeException {
     ArrayList<Task> taskArrayList = new ArrayList<>();
     File file = new File(filePath);
@@ -62,6 +80,11 @@ public class Storage {
     return taskArrayList;
   }
 
+  /**
+   * Convert from Tasklist Arraylist<Task> and write into file.
+   *
+   * @param taskList data to be written to file.
+   */
   public void write(TaskList taskList) {
     createFile();
     try {
@@ -88,6 +111,7 @@ public class Storage {
     }
   }
 
+  /** Check path exist. if exist do nothing, else create. */
   private void createFile() {
     Path path = Paths.get(filePath).getParent();
     if (Files.exists(path)) {

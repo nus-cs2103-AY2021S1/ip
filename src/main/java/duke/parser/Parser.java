@@ -10,7 +10,21 @@ import duke.command.EventCommand;
 import duke.command.ListCommand;
 import duke.command.ToDoCommand;
 
+/**
+ * Parser class. Define rule to determine which command is use.
+ *
+ * @author Galvin Leow Wen Yuan
+ * @author A0200204J
+ * @version v1.0
+ */
 public class Parser {
+  /**
+   * return command type that will be used.
+   *
+   * @param fullCommand full command that the user input.
+   * @return command type.
+   * @throws DukeException input command does not fit any of the application functionalities.
+   */
   public static Command parse(String fullCommand) throws DukeException {
     String command = fullCommand.split(" ")[0];
     switch (command) {
