@@ -1,9 +1,9 @@
-package duke;
+package duke.Duke;
 
-import duke.command.DukeException;
-import duke.command.Parser;
-import duke.storage.Storage;
-import duke.task.TaskList;
+import duke.Command.DukeException;
+import duke.Command.Parser;
+import duke.Storage.Storage;
+import duke.Task.TaskList;
 
 public class Duke {
 

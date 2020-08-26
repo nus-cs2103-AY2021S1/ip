@@ -1,12 +1,12 @@
-package duke.task;
+package duke.Task;
 import java.util.ArrayList;
 import java.util.List;
 
 public class TaskList {
 
-    List<Task> list;
-    int activeTasks;
-    int completedTasks;
+    private List<Task> list;
+    private int activeTasks;
+    private int completedTasks;
 
     public TaskList() {
         this.list = new ArrayList<>();
@@ -19,6 +19,9 @@ public class TaskList {
     }
 
     public String addItem(Task item) {
+        if (item == null) {
+            return "Task is null! Nothing was added.";
+        }
         this.list.add(item);
         if (item.done) {
             this.completedTasks += 1;

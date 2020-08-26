@@ -1,4 +1,4 @@
-package duke.command;
+package duke.Command;
 public class DukeException extends Exception {
     DukeException(String message) {
         super(message);
