@@ -122,7 +122,7 @@ public class ToDoList{
     private void addTodo(String taskContent) throws EmptyDescriptionException{
         if (taskContent.length() < 1)
             throw new EmptyDescriptionException("");
-        Task task = new Todo(taskContent);
+        Task task = new TodoTask(taskContent);
         this.todoList.add(task);
         print("The following task has been added to your list:");
         print("  [T][ ] "+task.toString());
@@ -136,7 +136,7 @@ public class ToDoList{
             throw new EmptyDescriptionException("");
         try {
             String[] splitedContent = taskContent.split("/by");
-            Task task = new Deadline(splitedContent[0], splitedContent[1]);
+            Task task = new DeadlineTask(splitedContent[0], splitedContent[1]);
             this.todoList.add(task);
             print("The following task has been added to your list:");
             print("  [D][ ] "+task.toString());
@@ -153,7 +153,7 @@ public class ToDoList{
             throw new EmptyDescriptionException("");
         try {
             String[] splitedContent = taskContent.split("/at");
-            Task task = new Event(splitedContent[0],splitedContent[1]);
+            Task task = new EventTask(splitedContent[0],splitedContent[1]);
             this.todoList.add(task);
             print("The following task has been added to your list:");
             print("  [E][ ] "+task.toString());

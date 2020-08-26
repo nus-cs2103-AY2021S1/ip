@@ -1,14 +1,14 @@
-public class Event extends Task{
+public class EventTask extends Task{
     private String time;
     private String taskType = "E";
 
 
-    Event(String taskName, String time){
-        super(taskName);
+    EventTask(String taskContent, String time){
+        super(taskContent);
         this.time = time;
     }
 
-    private String getTime(){
+    public String getTime(){
         return this.time;
     }
 
