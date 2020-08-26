@@ -13,9 +13,9 @@ public class Parser {
      * @param storage the Storage object currently in use.
      */
     public static void echo(Ui ui, TaskList taskList, Storage storage) {
+        Scanner sc = new Scanner(System.in);
         ui.printHi();
         storage.load(taskList, ui);
-        Scanner sc = new Scanner(System.in);
         while (true) {
             String input = sc.nextLine();
             try {
