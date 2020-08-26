@@ -1,3 +1,5 @@
+package duke.task;
+
 public class Duke {
 
     private Storage storage;
