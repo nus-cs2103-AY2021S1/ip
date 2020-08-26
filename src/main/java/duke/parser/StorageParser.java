@@ -17,6 +17,9 @@ public class StorageParser {
     private static final String IS_COMPLETED = "1";
     private static final String NOT_COMPLETED = "0";
     private static final String DELIMITER = ";";
+    private static final int TODO_COMMAND_LENGTH = 3;
+    private static final int DEADLINE_COMMAND_LENGTH = 4;
+    private static final int EVENT_COMMAND_LENGTH = 4;
 
     /**
      * Converts a Task to a String that will be saved onto the Storage text file.
@@ -34,7 +37,7 @@ public class StorageParser {
     }
 
     private Todo createTodo(String[] storageTask, String storageTaskString) throws DukeException {
-        if (storageTask.length < 3) {
+        if (storageTask.length < TODO_COMMAND_LENGTH) {
             String msg = String.format("It appears this todo: '%s' is corrupted.", storageTaskString);
             throw new DukeException(msg);
         }
@@ -43,7 +46,7 @@ public class StorageParser {
     }
 
     private Deadline createDeadline(String[] storageTask, String storageTaskString) throws DukeException {
-        if (storageTask.length < 4) {
+        if (storageTask.length < DEADLINE_COMMAND_LENGTH) {
             String msg = String.format("It appears this deadline: '%s' is corrupted.", storageTaskString);
             throw new DukeException(msg);
         }
@@ -53,7 +56,7 @@ public class StorageParser {
     }
 
     private Event createEvent(String[] storageTask, String storageTaskString) throws DukeException {
-        if (storageTask.length < 4) {
+        if (storageTask.length < EVENT_COMMAND_LENGTH) {
             String msg = String.format("It appears this event: '%s' is corrupted.", storageTaskString);
             throw new DukeException(msg);
         }
@@ -78,7 +81,7 @@ public class StorageParser {
         case Event.EVENT_SYMBOL:
             return createEvent(storageTask, storageTaskString);
         default:
-            String err = String.format("It appears this line '%s' is corrupted.", storageTaskString);
+            String err = String.format("It appears this line: '%s' is corrupted.", storageTaskString);
             throw new DukeException(err);
         }
     }
