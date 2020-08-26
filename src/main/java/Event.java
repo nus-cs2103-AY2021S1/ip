@@ -31,4 +31,15 @@ public class Event extends Task {
                 .append(")");
         return sb.toString();
     }
+
+    public String getEventTime() {
+        String eventTime;
+        try {
+            LocalDate localDate = LocalDate.parse(this.eventTime);
+            eventTime = localDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        } catch (DateTimeParseException e) {
+            eventTime = this.eventTime;
+        }
+        return eventTime;
+    }
 }
