@@ -1,19 +1,20 @@
-import java.security.spec.ECField;
+package duke;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
-public class Deadline extends Task {
+public class Event extends Task {
 
-    protected String by;
+    protected String at;
     protected LocalDate date;
     protected LocalTime time;
 
     public static String getDescription(String s){
-        String firstWord = "deadline", secondWord = "/by";
+        String firstWord = "event", secondWord = "/at";
         int start = 0, len = s.length();
-        while(!s.substring(start, start + 8).equals(firstWord)) start++;
-        start += 9;
+        while(!s.substring(start, start + 5).equals(firstWord)) start++;
+        start += 6;
         if(start >= len) return s.substring(len);
         int end = start + 1;
         while(end + 3 < len && !s.substring(end, end + 3).equals(secondWord)) end++;
@@ -22,14 +23,14 @@ public class Deadline extends Task {
     }
 
     public static String getTime(String s){
-        String word = "/by";
+        String word = "/at";
         int i = 0, len = s.length();
         while(i + 3 < len && !s.substring(i, i + 3).equals(word)) i++;
         return i + 3 == len ? "" : s.substring(i + 4);
     }
 
     public static String changeDateFormat(String[] command){
-        String word = "/by";
+        String word = "/at";
         for(int i = 0; i < command.length; i++){
             if(command[i].equals(word)){
                 if(i + 1 < command.length){
@@ -42,7 +43,7 @@ public class Deadline extends Task {
     }
 
     public static String getLocalTime(String[] command){
-        String word = "/by";
+        String word = "/at";
         for(int i = 0; i < command.length; i++) {
             if(command[i].equals(word)){
                 if(i + 2 < command.length){
@@ -56,64 +57,64 @@ public class Deadline extends Task {
         return null;
     }
 
-    public static Deadline of(String input){
+    public static Event of(String input){
         String by = getTime(input), description = getDescription(input);
         String[] command = input.split(" ");
         int ptr = 0;
         while(command[ptr].equals("")) ptr++;
-        if(description.equals("") || by.equals("") || command[command.length - 1].equals("/by") || ptr == command.length - 1){
+        if(description.equals("") || by.equals("") || command[command.length - 1].equals("/at") || ptr == command.length - 1){
             return null;
         }
-        Deadline deadline = new Deadline(description, by);
+        Event event = new Event(description, by);
         try{
             LocalDate date = LocalDate.parse(changeDateFormat(command));
-            deadline.setDate(date);
+            event.setDate(date);
         }
         catch(Exception e){
 
         }
         try{
             LocalTime time = LocalTime.parse(getLocalTime(command));
-            deadline.setTime(time);
+            event.setTime(time);
         }
         catch (Exception e){
 
         }
-        return deadline;
+        return event;
     }
 
-    public static Deadline of(String description, String by, boolean isDone){
-        Deadline ddl = new Deadline(description, by, isDone);
-        String[] dateAndTime = by.replace('/', '-').split(" ");
+    public static Event of(String description, String at, boolean isDone){
+        Event event = new Event(description, at, isDone);
+        String[] dateAndTime = at.replace('/', '-').split(" ");
         try{
             LocalDate d = LocalDate.parse(dateAndTime[0]);
-            ddl.setDate(d);
+            event.setDate(d);
         }
         catch (Exception e){
 
         }
         try{
             LocalTime t = LocalTime.parse(dateAndTime[1]);
-            ddl.setTime(t);
+            event.setTime(t);
         }
         catch (Exception e){
 
         }
-        return ddl;
+        return event;
     }
 
-    public Deadline(String description, String by) {
+    public Event(String description, String at) {
         super(description);
-        this.by = by;
+        this.at = at;
     }
 
-    public Deadline(String description, String by, boolean isDone) {
+    public Event(String description, String at, boolean isDone) {
         super(description, isDone);
-        this.by = by;
+        this.at = at;
     }
 
-    public String getBy(){
-        return by;
+    public String getAt(){
+        return at;
     }
 
     public void setDate(LocalDate date) {
@@ -136,8 +137,8 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " +
-                (date == null ? by : (date.toString() + " (" + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")")) +
-                (time != null ? " " + time.toString() : "") + ")";
+        return "[E]" + super.toString() + " (at: " +
+                (date == null ? at : (date.toString() + " (" + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")")) +
+                (time != null ? (" " + time.toString()) : "") + ")";
     }
 }

@@ -1,3 +1,5 @@
+package duke;
+
 public class Ui {
 
     public static int TODO = 0, DEADLINE = 1, EVENT = 2;
