@@ -74,4 +74,23 @@ public class Ui {
         }
         System.out.println(horizontal);
     }
+
+    public void find(String word, TaskList taskList) {
+        TaskList temp = new TaskList();
+        for(int i = 1; i <= taskList.size(); i++) {
+            Task task = taskList.getTask(i);
+            if(task.description.contains(word)) {
+                temp.addTask(task);
+            }
+        }
+        if(temp.size() > 0) {
+            System.out.println(horizontal + "Here are the matching tasks in your list:");
+            for (int i = 1; i <= temp.size(); i++) {
+                System.out.printf("%s. %s%n", i, temp.getTask(i).toString());
+            }
+        } else {
+            System.out.println("You have no matching tasks!");
+        }
+        System.out.println(horizontal);
+    }
 }

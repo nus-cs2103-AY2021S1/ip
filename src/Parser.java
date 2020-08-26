@@ -85,10 +85,12 @@ public class Parser {
                             }
                         }
                     }
+                } else if (input.startsWith("find")) {
+                    String word = input.split("find ")[1];
+                    ui.find(word, taskList);
                 } else {
                     throw new DukeException("I'm sorry, but I don't know what that means.");
                 }
-
             } catch (DukeException e) {
                 ui.printDukeError(e);
             }
