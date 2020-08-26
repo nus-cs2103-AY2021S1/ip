@@ -24,16 +24,24 @@ public class TaskList {
         myTaskList.add(newTask);
     }
     
-    public Task doneTask(int taskIndex) {
-        Task temp = myTaskList.get(taskIndex - 1);
-        temp.markAsDone();
-        return temp;
+    public Task doneTask(int taskIndex) throws DukeException {
+        try {
+            Task temp = myTaskList.get(taskIndex - 1);
+            temp.markAsDone();
+            return temp;
+        } catch (IndexOutOfBoundsException e) {
+            throw new InvalidTaskIndexException("done");
+        }
     }
     
-    public Task deleteTask(int taskIndex) {
-        Task temp = myTaskList.get(taskIndex - 1);
-        myTaskList.remove(temp);
-        return temp;
+    public Task deleteTask(int taskIndex) throws DukeException {
+        try {
+            Task temp = myTaskList.get(taskIndex - 1);
+            myTaskList.remove(temp);
+            return temp;
+        } catch (IndexOutOfBoundsException e) {
+            throw new InvalidTaskIndexException("delete");
+        }
     }
 
     @Override

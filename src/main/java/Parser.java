@@ -11,7 +11,7 @@ public class Parser {
         } else if (input.startsWith(command + " ") && input.length() > indexPosition) {
             try {
                 return Integer.parseInt(input.substring(indexPosition));
-            } catch (NumberFormatException | IndexOutOfBoundsException e) {
+            } catch (NumberFormatException e) {
                 throw new InvalidTaskIndexException(input);
             }
         } else {
