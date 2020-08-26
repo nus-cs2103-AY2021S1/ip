@@ -4,5 +4,6 @@ deadline 3rd task /by Saturday 4pm
 done 1
 done 2
 delete 3
+event 4th event /at 20-10-2021 1245
 list
 bye
