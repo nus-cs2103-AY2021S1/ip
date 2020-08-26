@@ -1,6 +1,6 @@
 public class InvalidTaskNumberException extends Exception {
 
-    public InvalidTaskNumberException(String s) {
+    public InvalidTaskNumberException() {
         super("☹ OOPS!!! The task number specified is incorrect.");
     }
 
