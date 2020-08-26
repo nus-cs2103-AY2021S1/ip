@@ -49,12 +49,17 @@ public class Chatbot {
                         desc = desc + " " + add;
                         add = cL.next();
                     }
-                    String time = cL.nextLine().substring(1);
-                    Deadline toAdd = new Deadline(desc, time);
-                    if (isDone.equals("1")) {
-                        toAdd.markAsDone();
+                    String dtString = (cL.nextLine()).substring(1);
+                    Scanner dT = new Scanner(dtString);
+                    LocalDate date = LocalDate.parse(dT.next());
+                    Deadline curr;
+                    if (dT.hasNext()) {
+                        String duration = dT.next();
+                        curr = new Deadline(desc, date, duration);
+                    } else {
+                        curr = new Deadline(desc, date);
                     }
-                    arr.add(toAdd);
+                    arr.add(curr);
                 } else if (type.equals("E")) {
                     String desc = cL.next();
                     String add = cL.next();
@@ -62,12 +67,17 @@ public class Chatbot {
                         desc = desc + " " + add;
                         add = cL.next();
                     }
-                    String time = cL.nextLine().substring(1);
-                    Event toAdd = new Event(desc, time);
-                    if (isDone.equals("1")) {
-                        toAdd.markAsDone();
+                    String dtString = (cL.nextLine()).substring(1);
+                    Scanner dT = new Scanner(dtString);
+                    LocalDate date = LocalDate.parse(dT.next());
+                    Event curr;
+                    if (dT.hasNext()) {
+                        String duration = dT.next();
+                        curr = new Event(desc, date, duration);
+                    } else {
+                        curr = new Event(desc, date);
                     }
-                    arr.add(toAdd);
+                    arr.add(curr);
                 }
             }
         }
@@ -180,11 +190,16 @@ public class Chatbot {
                 toWrite = "T" + state + curr.description;
             } else if (curr instanceof Deadline) {
                 String state = curr.isDone ? " | 1 | " : " | 0 | ";
-                toWrite = "D" + state + curr.description + " | " + curr.dateTime;
-                ;
+                toWrite = "D" + state + curr.description + " | " + curr.date;
+                if (curr.duration != null) {
+                    toWrite = toWrite + " " + curr.duration;
+                }
             } else if (curr instanceof Event) {
                 String state = curr.isDone ? " | 1 | " : " | 0 | ";
-                toWrite = "E" + state + curr.description + " | " + curr.dateTime;
+                toWrite = "E" + state + curr.description + " | " + curr.date;
+                if (curr.duration != null) {
+                    toWrite = toWrite + " " + curr.duration;
+                }
             }
             assert toWrite != null;
             fw.write(toWrite);
