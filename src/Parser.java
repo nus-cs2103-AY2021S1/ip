@@ -1,8 +1,18 @@
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
+/**
+ * Parser class that deals with loading tasks from the file and
+ * saving tasks in the file.
+ */
 public class Parser {
-
+    /**
+     * Evaluates the syntax of the input command and executes it,
+     * throwing a DukeException if the syntax is correct.
+     * @param taskList the TaskList object associated with the current Duke object
+     * @param ui the Ui object associated with the current Duke object
+     * @param storage the Storage object associated with the current Duke object
+     */
     public static void action(TaskList taskList, Ui ui, Storage storage) {
         ui.welcome();
         storage.load(taskList, ui);
@@ -88,7 +98,7 @@ public class Parser {
                 } else if (input.startsWith("find")) {
                     String word = input.split("find ")[1];
                     ui.find(word, taskList);
-                } else {
+                } else{
                     throw new DukeException("I'm sorry, but I don't know what that means.");
                 }
             } catch (DukeException e) {

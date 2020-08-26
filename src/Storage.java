@@ -1,15 +1,25 @@
 import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
 
+/**
+ * Storage class that handles the reading and writing process from a designated text file,
+ * referred to as a save file.
+ */
 public class Storage {
     public final String file;
 
-
+    /**
+     * Constructor that creates a Storage object.
+     * @param file the file task sessions will be saved in.
+     */
     public Storage(String file) {
         this.file = file;
     }
 
+    /**
+     * Writes the current TaskList to a save file.
+     * @param taskList TaskList containing Tasks to write.
+     * @param ui the Ui associated to the current Duke object.
+     */
     public void saveTasks(TaskList taskList, Ui ui) {
         File savedFile = new File(".//SAVED-TASKS.txt");
         boolean exists = savedFile.exists();
@@ -36,6 +46,12 @@ public class Storage {
 
     }
 
+    /**
+     * Reads the save file and returns the taskList in it. Throws a DukeException
+     * if the file is not found and proceeds to create one, or if a file cannot be created.
+     * @param taskList the taskList that is associated with the current Duke object.
+     * @param ui the ui that is associated to the current Duke object.
+     */
     public void load(TaskList taskList, Ui ui) {
 
         try {
@@ -52,6 +68,12 @@ public class Storage {
             ui.printIOError(e);
         }
     }
+
+    /**
+     * Creates a new Task depending on the type of Task read from the string.
+     * @param line String that is read.
+     * @return a new Task.
+     */
     public Task loadTasks(String line) {
         String[] tasks = line.split(" \\| ");
         String task = tasks[0];
