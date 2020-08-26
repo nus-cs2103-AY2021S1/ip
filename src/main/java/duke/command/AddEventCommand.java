@@ -12,18 +12,37 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Represents a command to add a new event task to the user's list of tasks.
+ */
 public class AddEventCommand extends Command {
 
+    protected final String[] parsedCommand;
+
+    /**
+     * Creates and initialises a new AddEventCommand object
+     *
+     * @param parsedCommand String array that contains the event task information.
+     */
     public AddEventCommand(String[] parsedCommand) {
-        super(parsedCommand);
+        this.parsedCommand = parsedCommand;
     }
 
+    /**
+     * Creates a new event task, adds it to the list of tasks
+     * and saves it into the designated file containing the user's list of tasks.
+     *
+     * @param tasks List of tasks which the new event task will be added into.
+     * @param ui Ui object created for the Duke object.
+     * @param storage Storage object used by the Duke object for file operations.
+     * @throws DukeException If the task cannot be created due to invalid inputs.
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("d/M/yyyy");
         DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("H:mm");
         try {
-            String[] eventInfo = retrieveEventInfo(this.parsedCommand);
+            String[] eventInfo = retrieveEventInfo();
             String[] timeStamp = eventInfo[1].split(" ");
 
             LocalDate eventDate = LocalDate.parse(timeStamp[0], dateFormatter);
@@ -45,27 +64,33 @@ public class AddEventCommand extends Command {
         }
     }
 
-    public String[] retrieveEventInfo(String[] parsedCommand) throws InvalidTaskException {
+    /**
+     * Retrieves the details of the event task and stores it in an array.
+     *
+     * @return String array containing the event description and event time stamp.
+     * @throws InvalidTaskException If the event information is invalid and is missing arguments.
+     */
+    public String[] retrieveEventInfo() throws InvalidTaskException {
         String[] eventInfo = new String[2];
         String description = "";
         String time = "";
-        if (parsedCommand.length == 0) {
+        if (this.parsedCommand.length == 0) {
             String err = "Your event task has missing arguments and has an incorrect format. " +
                     "The task cannot be created.\n" +
                     "Type '/commands' to view the correct command for task creation!";
             throw new InvalidTaskException(err);
         } else {
-            String[] taskInputArray = parsedCommand[1].split(" /at ");
-            if (!parsedCommand[1].contains(" /at ") && !parsedCommand[1].endsWith("/at")) {
+            String[] taskInputArray = this.parsedCommand[1].split(" /at ");
+            if (!this.parsedCommand[1].contains(" /at ") && !this.parsedCommand[1].endsWith("/at")) {
                 String err = "Your event task has an incorrect format. The task cannot be created. \n" +
                         "Type '/commands' to view the correct command for task creation!";
                 throw new InvalidTaskException(err);
-            } else if (parsedCommand[1].trim().equals("/at")) {
+            } else if (this.parsedCommand[1].trim().equals("/at")) {
                 String err = "Your event task is missing a description and time stamp. " +
                         "The task cannot be created. \n" +
                         "Type '/commands' to view the correct command for task creation!";
                 throw new InvalidTaskException(err);
-            } else if (parsedCommand[1].trim().endsWith("/at")) {
+            } else if (this.parsedCommand[1].trim().endsWith("/at")) {
                 String err = "Your event task is missing a time stamp. The task cannot be created. \n" +
                         "Type '/commands' to view the correct command for task creation!";
                 throw new InvalidTaskException(err);
@@ -83,6 +108,11 @@ public class AddEventCommand extends Command {
         return eventInfo;
     }
 
+    /**
+     * Indicates if the DukeBot session has ended.
+     *
+     * @return False since the DukeBot session has not been terminated.
+     */
     @Override
     public boolean isExit() {
         return false;

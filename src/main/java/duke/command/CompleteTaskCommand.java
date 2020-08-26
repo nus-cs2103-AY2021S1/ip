@@ -6,12 +6,31 @@ import duke.Ui;
 import duke.Storage;
 import duke.task.Task;
 
+/**
+ * Represents a command to mark a task as completed.
+ */
 public class CompleteTaskCommand extends Command {
 
+    protected final String[] parsedCommand;
+
+    /**
+     * Creates and initialises a new CompleteTaskCommand object
+     *
+     * @param parsedCommand String array that contains information of the task to be completed.
+     */
     public CompleteTaskCommand(String[] parsedCommand) {
-        super(parsedCommand);
+        this.parsedCommand = parsedCommand;
     }
 
+    /**
+     * Marks the task as completed and updates it accordingly in the list of tasks
+     * saved in the designated file.
+     *
+     * @param tasks List of tasks belonging to the user.
+     * @param ui Ui object created for the Duke object.
+     * @param storage Storage object used by the Duke object for file operations.
+     * @throws DukeException If the task cannot be completed due to invalid arguments.
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
@@ -48,6 +67,11 @@ public class CompleteTaskCommand extends Command {
         }
     }
 
+    /**
+     * Indicates if the DukeBot session has ended.
+     *
+     * @return False since the DukeBot session has not been terminated.
+     */
     @Override
     public boolean isExit() {
         return false;
