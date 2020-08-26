@@ -34,7 +34,7 @@ public class CompleteTaskCommand extends Command {
     @Override
     public void execute(TaskManager taskManager, Ui ui) {
 
-        Pattern r = Pattern.compile(InputPattern.completeTaskPattern);
+        Pattern r = Pattern.compile(InputPattern.COMPLETE_TASK);
         Matcher m = r.matcher(input);
         m.find();
         int taskNumber = Integer.parseInt(m.group("taskNumber"));

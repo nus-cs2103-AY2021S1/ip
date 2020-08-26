@@ -34,7 +34,7 @@ public class AddDeadlineCommand extends Command {
      */
     @Override
     public void execute(TaskManager taskManager, Ui ui) {
-        Pattern r = Pattern.compile(InputPattern.addDeadlinePattern);
+        Pattern r = Pattern.compile(InputPattern.ADD_DEADLINE);
         Matcher m = r.matcher(input);
         m.find();
         String content = m.group("content");

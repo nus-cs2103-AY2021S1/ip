@@ -5,11 +5,11 @@ package duke.patterns;
  */
 public class InputPattern {
 
-    public static String deleteTaskPattern = "^delete (?<taskNumber>[0-9]+)$";
-    public static String completeTaskPattern = "^done (?<taskNumber>[0-9]+)$";
-    public static String addEventPattern = "^event (?<content>.+) /at (?<datetime>.+)$";
-    public static String addDeadlinePattern = "^deadline (?<content>.+) /by (?<datetimeDue>.+)$";
-    public static String addTodoPattern = "^todo (?<content>.+)$";
-    public static String listPattern = "^list$";
-    public static String byePattern = "^bye$";
+    public static final String DELETE_TASK = "^delete (?<taskNumber>[0-9]+)$";
+    public static final String COMPLETE_TASK = "^done (?<taskNumber>[0-9]+)$";
+    public static final String ADD_EVENT = "^event (?<content>.+) /at (?<datetime>.+)$";
+    public static final String ADD_DEADLINE = "^deadline (?<content>.+) /by (?<datetimeDue>.+)$";
+    public static final String ADD_TODO = "^todo (?<content>.+)$";
+    public static final String LIST = "^list$";
+    public static final String BYE = "^bye$";
 }
