@@ -1,6 +1,12 @@
+../src/main/java/TaskList.java
+../src/main/java/Storage.java
+../src/main/java/Parser.java
+../src/main/java/DateException.java
 ../src/main/java/TaskType.java
+../src/main/java/Ui.java
 ../src/main/java/Event.java
 ../src/main/java/Task.java
+../src/main/java/DateFormat.java
 ../src/main/java/MissingInformationException.java
 ../src/main/java/Duke.java
 ../src/main/java/Deadline.java

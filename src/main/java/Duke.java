@@ -1,269 +1,83 @@
-import java.io.FileReader;
-import java.io.File;
 import java.io.IOException;
-import java.io.BufferedReader;
-import java.io.FileWriter;
 import java.util.Date;
+import java.util.List;
 import java.util.Scanner;
-import java.util.ArrayList;
+
 
 public class Duke {
-    public static ArrayList<Task> taskList = new ArrayList<>();
-    public static void main(String[] args) {
-        loadData();
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        System.out.println("What can I do for you?");
+    private Storage storage;
+    private TaskList tasks;
+    private Ui ui;
+
+    public Duke(String filePath) {
+        ui = new Ui();
+        storage = new Storage(filePath);
+        try {
+            tasks = new TaskList(storage.load());
+        } catch (IOException | DateException e) {
+            ui.printMessage(e.getMessage());
+            tasks = new TaskList();
+        }
+    }
+
+    public void run() {
+        ui.displayWelcome();
         Scanner sc = new Scanner(System.in);
         while (true) {
             String line = sc.nextLine();
-            String[] commandArr = line.split(" ", 2);
-            String command = commandArr[0];
+            Parser parser = new Parser(line);
+            String command = parser.getCommand();
             try {
                 if (command.equals("bye")) {
-                    printMessage("Bye. Hope to see you again soon!");
+                    ui.printMessage("Bye. Hope to see you again soon!");
                     break;
                 } else if (command.equals("list")) {
-                    listTasks();
-                } else if (command.equals("done") || command.equals("delete")) {
-                    handleCompleteStatus(command, commandArr);
-                    saveData();
+                    ui.listTasks(tasks.getTasks());
+                } else if (command.equals("done")) {
+                    int index = parser.getIndex();
+                    Task task = tasks.completeTask(index);
+                    ui.completeSuccess(task);
+                    storage.saveData(this.tasks.getTasks());
+                } else if (command.equals("delete")) {
+                    int index = parser.getIndex();
+                    Task task = tasks.deleteTask(index);
+                    ui.deleteSuccess(task, tasks.getCount());
+                    storage.saveData(this.tasks.getTasks());
                 } else if (command.equals("todo")) {
-                    handleTask(TaskType.TODO, commandArr);
-                    saveData();
+                    String name = parser.getDescription(command);
+                    Task todo = tasks.addTodo(name);
+                    ui.addSuccess(todo, tasks.getCount());
+                    storage.saveData(this.tasks.getTasks());
                 } else if (command.equals("deadline")) {
-                    handleTask(TaskType.DEADLINE, commandArr);
-                    saveData();
+                    String name = parser.getName(command);
+                    Date by = parser.getDeadlineBy();
+                    Task deadline = tasks.addDeadline(name, by);
+                    ui.addSuccess(deadline, tasks.getCount());
+                    storage.saveData(this.tasks.getTasks());
                 } else if (command.equals("event")) {
-                    handleTask(TaskType.EVENT, commandArr);
-                    saveData();
+                    String name = parser.getName(command);
+                    Date at = parser.getEventAt();
+                    Task event = tasks.addEvent(name, at);
+                    ui.addSuccess(event, tasks.getCount());
+                    storage.saveData(this.tasks.getTasks());
                 } else if (command.equals("get")) {
-                    getTaskByDate(commandArr);
+                    String dateString = parser.getDate();
+                    Date date = DateFormat.parseDate(dateString);
+                    List<Task> tasksWithDate = tasks.getTasksWithDate(date);
+                    ui.listTasksWithDate(tasksWithDate, dateString);
                 } else {
                     throw new DukeException("I am sorry, I don't know what that means :(");
                 }
-            } catch (DukeException e) {
-                printMessage(e.getMessage());
+            } catch (DukeException | MissingInformationException | DateException | IOException e) {
+                ui.printMessage(e.getMessage());
+            } catch (IndexOutOfBoundsException | NumberFormatException e) {
+                ui.printMessage("Invalid task number!");
             }
         }
     }
 
-    public static void loadData() {
-        try {
-            String FILE_PATH = "data/duke.txt";
-            File dataFile = new File(FILE_PATH);
-            if (!dataFile.exists()) {
-                return;
-            }
-            FileReader reader = new FileReader(FILE_PATH);
-            BufferedReader br = new BufferedReader(reader);
-            String line = br.readLine();
-            while (line != null) {
-                loadTask(line);
-                line = br.readLine();
-            }
-            reader.close();
-        } catch (IOException e) {
-            printMessage(e.getMessage());
-        }
-
+    public static void main(String[] args) {
+        new Duke("data/tasks.txt").run();
     }
 
-    public static void loadTask(String line) {
-        try {
-            String[] taskComponent = line.split("\\|");
-            boolean isComplete = !taskComponent[1].equals("0");
-            String name = taskComponent[2];
-            if (taskComponent[0].equals("T")) {
-                taskList.add(new Todo(name, isComplete));
-            } else if (taskComponent[0].equals("D")) {
-                String by = taskComponent[3];
-                taskList.add(new Deadline(name, isComplete, DateFormat.parseDate(by)));
-            } else {
-                String at = taskComponent[3];
-                taskList.add(new Event(name, isComplete, DateFormat.parseDate(at)));
-            }
-        } catch (DateException e) {
-            printMessage(e.getMessage());
-        }
-    }
-
-    public static void saveData() {
-        try {
-            String DIR_PATH = "data";
-            File directory = new File(DIR_PATH);
-            if (!directory.exists()) {
-                directory.mkdir();
-            }
-            String FILE_PATH = DIR_PATH + "/duke.txt";
-            File dataFile = new File(FILE_PATH);
-            dataFile.createNewFile();
-            FileWriter writer = new FileWriter(FILE_PATH);
-            String data = "";
-            for (Task task : taskList) {
-                data += String.format("%s\n", formatTask(task));
-            }
-            writer.write(data);
-            writer.close();
-        } catch (IOException e) {
-            printMessage(e.getMessage());
-        }
-    }
-
-    public static String formatTask(Task task) {
-        String name = task.getName();
-        int isComplete = task.getStatus() ? 1 : 0;
-        String type;
-        if (task.getType() == TaskType.DEADLINE) {
-            type = "D";
-        } else if (task.getType() == TaskType.TODO) {
-            type = "T";
-        } else {
-            type = "E";
-        }
-        if (type.equals("T")) {
-            return String.format("%s|%d|%s", type, isComplete, name);
-        } else {
-            return String.format("%s|%d|%s|%s", type, isComplete,
-                    name, DateFormat.formatDate(task.getDate()));
-        }
-
-    }
-
-    public static void handleTask(TaskType taskType, String[] commandArr) {
-        try {
-            if (commandArr.length < 2 || commandArr[1].isBlank()) {
-                throw new MissingInformationException(String.format("The description of a %s cannot be empty.", taskType.name().toLowerCase()));
-            }
-            if (taskType == TaskType.TODO) {
-                String name = commandArr[1];
-                addTodo(name);
-            } else if (taskType == TaskType.DEADLINE) {
-                String details = commandArr[1];
-                String[] detailArr = details.split(" /by ", 2);
-                if (detailArr.length < 2 || detailArr[1].isBlank()) {
-                    throw new MissingInformationException("Deadline is missing a date.");
-                }
-                addDeadline(detailArr[0], detailArr[1]);
-            } else {
-                String details = commandArr[1];
-                String[] detailArr = details.split(" /at ", 2);
-                if (detailArr.length < 2 || detailArr[1].isBlank()) {
-                    throw new MissingInformationException("Event is missing a date.");
-                }
-                addEvent(detailArr[0], detailArr[1]);
-            }
-        } catch (MissingInformationException | DateException e) {
-            printMessage(e.getMessage());
-        }
-    }
-
-    public static void handleCompleteStatus(String status, String[] commandArr) {
-        try {
-            if (commandArr.length < 2 || commandArr[1].isBlank()) {
-                throw new MissingInformationException("Task number is missing!");
-            }
-            int index = Integer.valueOf(commandArr[1]);
-            if (status.equals("done")) {
-                completeTask(index);
-            } else {
-                deleteTask(index);
-            }
-        } catch (MissingInformationException e) {
-            printMessage(e.getMessage());
-        } catch (NumberFormatException e) {
-            printMessage("Invalid task number!");
-        }
-    }
-
-    public static void printMessage(String message) {
-        System.out.println("    ______________________________________________________\n" +
-                "     " + message + "\n    ______________________________________________________");
-    }
-
-    public static void getTaskByDate(String[] commandArr) {
-        try {
-            if (commandArr.length < 2 || commandArr[1].isBlank()) {
-                throw new MissingInformationException("Date is missing!");
-            } else {
-                String dateString = commandArr[1];
-                Date date = DateFormat.parseDate(dateString);
-                String output = String.format("Here are the tasks with the date %s:\n", dateString);
-                int counter = 1;
-                for (Task task : taskList) {
-                    if (date.equals(task.getDate())) {
-                        output += String.format("     %d. %s\n", counter, task.getName());
-                        counter++;
-                    }
-                }
-                printMessage(output);
-            }
-        } catch (MissingInformationException | DateException e) {
-            printMessage(e.getMessage());
-        }
-    }
-
-    public static void addTodo(String name) {
-        Todo todo = new Todo(name, false);
-        addTask(todo);
-    }
-
-    public static void addDeadline(String name, String by) throws DateException {
-        Date date = DateFormat.parseDate(by);
-        Deadline deadline = new Deadline(name, false, date);
-        addTask(deadline);
-    }
-
-    public static void addEvent(String name, String at) throws DateException {
-        Date date = DateFormat.parseDate(at);
-        Event event = new Event(name, false, date);
-        addTask(event);
-    }
-
-    public static void addTask(Task task) {
-        taskList.add(task);
-        int taskLen = taskList.size();
-        String message = String.format("Got it. I have added this task:\n       %s\n     Now you have %d %s in the list.",
-                task, taskLen, taskLen > 1 ? "tasks" : "task");
-        printMessage(message);
-    }
-
-    public static void listTasks() {
-        String output = "Here are the tasks in your list:\n";
-        int taskLen = taskList.size();
-        for (int i = 0; i < taskLen; i++) {
-            output += String.format("     %d. %s", i + 1, taskList.get(i));
-            if (i != taskLen - 1) {
-                output += "\n";
-            }
-        }
-        printMessage(output);
-    }
-
-    public static void completeTask(int index) {
-        try {
-            taskList.get(index - 1).markAsDone();
-            String message = String.format("Nice! I've marked this task as done:\n       %s",
-                    taskList.get(index - 1));
-            printMessage(message);
-        } catch (IndexOutOfBoundsException e) {
-            printMessage(String.format("Task number %d is invalid!", index));
-        }
-    }
-
-    public static void deleteTask(int index) {
-        try {
-            Task deletedTask = taskList.remove(index - 1);
-            int taskLen = taskList.size();
-            String message = String.format("Noted. I've removed this task:\n       %s\n     Now you have %d %s in the list.",
-                    deletedTask, taskLen, taskLen > 1 ? "tasks" : "task");
-            printMessage(message);
-        } catch (IndexOutOfBoundsException e) {
-            printMessage(String.format("Task number %d is invalid!", index));
-        }
-    }
 }

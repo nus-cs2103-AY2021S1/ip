@@ -16,20 +16,23 @@ What can I do for you?
      Now you have 1 task in the list.
     ______________________________________________________
     ______________________________________________________
+     Invalid date format
+    ______________________________________________________
+    ______________________________________________________
      Got it. I have added this task:
-       [D] [✘] return book (by: Sunday)
+       [D] [✘] return book (by: 1/1/2020 1700)
      Now you have 2 tasks in the list.
     ______________________________________________________
     ______________________________________________________
      Got it. I have added this task:
-       [E] [✘] project meeting (at: Mon 2-4pm)
+       [E] [✘] project meeting (at: 1/1/2020 1700)
      Now you have 3 tasks in the list.
     ______________________________________________________
     ______________________________________________________
      Here are the tasks in your list:
      1. [T] [✘] borrow book
-     2. [D] [✘] return book (by: Sunday)
-     3. [E] [✘] project meeting (at: Mon 2-4pm)
+     2. [D] [✘] return book (by: 1/1/2020 1700)
+     3. [E] [✘] project meeting (at: 1/1/2020 1700)
     ______________________________________________________
     ______________________________________________________
      Task number is missing!
@@ -38,7 +41,7 @@ What can I do for you?
      Invalid task number!
     ______________________________________________________
     ______________________________________________________
-     Task number 4 is invalid!
+     Invalid task number!
     ______________________________________________________
     ______________________________________________________
      Nice! I've marked this task as done:
@@ -46,17 +49,17 @@ What can I do for you?
     ______________________________________________________
     ______________________________________________________
      Nice! I've marked this task as done:
-       [D] [✓] return book (by: Sunday)
+       [D] [✓] return book (by: 1/1/2020 1700)
     ______________________________________________________
     ______________________________________________________
      Nice! I've marked this task as done:
-       [E] [✓] project meeting (at: Mon 2-4pm)
+       [E] [✓] project meeting (at: 1/1/2020 1700)
     ______________________________________________________
     ______________________________________________________
      Here are the tasks in your list:
      1. [T] [✓] borrow book
-     2. [D] [✓] return book (by: Sunday)
-     3. [E] [✓] project meeting (at: Mon 2-4pm)
+     2. [D] [✓] return book (by: 1/1/2020 1700)
+     3. [E] [✓] project meeting (at: 1/1/2020 1700)
     ______________________________________________________
     ______________________________________________________
      Task number is missing!
@@ -65,17 +68,22 @@ What can I do for you?
      Invalid task number!
     ______________________________________________________
     ______________________________________________________
-     Task number 4 is invalid!
+     Invalid task number!
     ______________________________________________________
     ______________________________________________________
      Noted. I've removed this task:
-       [D] [✓] return book (by: Sunday)
+       [D] [✓] return book (by: 1/1/2020 1700)
      Now you have 2 tasks in the list.
     ______________________________________________________
     ______________________________________________________
      Here are the tasks in your list:
      1. [T] [✓] borrow book
-     2. [E] [✓] project meeting (at: Mon 2-4pm)
+     2. [E] [✓] project meeting (at: 1/1/2020 1700)
+    ______________________________________________________
+    ______________________________________________________
+     Here are the tasks with the date 1/1/2020 1700:
+     1. [E] [✓] project meeting (at: 1/1/2020 1700)
+
     ______________________________________________________
     ______________________________________________________
      The description of a todo cannot be empty.

@@ -1,7 +1,8 @@
 list
 todo borrow book
-deadline return book /by Sunday
-event project meeting /at Mon 2-4pm
+deadline return book /by sunday
+deadline return book /by 1/1/20 1700
+event project meeting /at 1/1/2020 5:00PM
 list
 done
 done haha
@@ -15,6 +16,7 @@ delete haha
 delete 4
 delete 2
 list
+get 1/1/2020 1700
 todo
 deadline
 deadline jog
