@@ -9,6 +9,11 @@ import commands.AddCommand;
 
 import exceptions.InvalidCommandException;
 
+
+/**
+ * Class that initiates the Parser object. Reads command in string given by the user and returns
+ * the appropriate Command object.
+ */
 public class Parser {
     private final static String BYE_COMMAND = "bye";
     private final static String LIST_COMMAND = "list";
@@ -18,6 +23,15 @@ public class Parser {
     private final static String EVENT_COMMAND = "event";
     private final static String DELETE_COMMAND = "delete";
 
+    /**
+     * Reads command in string given by the user
+     * Returns the appropriate Command object.
+     * Throws InvalidCommandException if the command is unknown.
+     *
+     * @param fullCommand String which contains the command from the user.
+     * @return Command object of the given command.
+     * @throws InvalidCommandException If command is not recognisable.
+     */
     public static Command parse(String fullCommand) throws InvalidCommandException {
         String[] tempArray = fullCommand.trim().split(" ");
         String command = tempArray[0];

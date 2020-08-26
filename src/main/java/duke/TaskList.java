@@ -1,11 +1,15 @@
 package duke;
 
-import exceptions.TaskCompletedException;
+import exceptions.*;
 
 import tasks.Task;
 
 import java.util.ArrayList;
 
+/**
+ * Class to initiate a TaskList object. This class contains various methods to interact with the
+ * user's task list.
+ */
 public class TaskList {
     private ArrayList<Task> taskList;
 
@@ -37,6 +41,11 @@ public class TaskList {
         return taskList.size();
     }
 
+    /**
+     * Prints out all items in the list and its corresponding status.
+     *
+     * @return String of the task.
+     */
     public String toString() {
         StringBuilder string = new StringBuilder();
         string.append("Here are the tasks in your list:\n");

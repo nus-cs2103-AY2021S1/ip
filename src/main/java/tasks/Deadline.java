@@ -4,6 +4,12 @@ import duke.Time;
 
 import java.time.LocalDateTime;
 
+/**
+ * @author Damith C. Rajapakse
+ * Reused from https://nus-cs2103-ay2021s1.github.io/website/schedule/week2/project.html with modifications
+ *
+ * Class to initiate a deadline task.
+ */
 public class Deadline extends Task {
     // @@author Damith C. Rajapakse
     // Reused from https://nus-cs2103-ay2021s1.github.io/website/schedule/week2/project.html with minor modifications

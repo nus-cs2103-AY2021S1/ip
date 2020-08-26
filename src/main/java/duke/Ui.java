@@ -2,6 +2,9 @@ package duke;
 
 import java.util.Scanner;
 
+/**
+ * Class to initiate the Ui object. Contains various methods to handle different commands.
+ */
 public class Ui {
 
     private final static String DIVIDER = "__________________________________________________________";

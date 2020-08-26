@@ -1,6 +1,6 @@
 package duke;
 
-import exceptions.InvalidTimeException;
+import exceptions.*;
 
 import tasks.Deadline;
 import tasks.Event;
@@ -15,6 +15,10 @@ import java.util.List;
 import java.io.FileWriter;
 import java.nio.file.Files;
 
+/**
+ * Class that initiates the Storage. Reads the task from the hardware of the user
+ * and saves the task into the hardware the the bye command is given by the user.
+ */
 public class Storage {
 
     private final Path PATH;
@@ -23,6 +27,12 @@ public class Storage {
     private final static String TODO_COMMAND = "T";
     private final static String DEADLINE_COMMAND = "D";
 
+    /**
+     * Constructor which creates the file if the file is not present.
+     * Throws IOException if the given path is invalid.
+     *
+     * @param path Path to store and read the file which contains the task list.
+     */
     Storage(Path path) {
         this.PATH= path;
 
@@ -41,6 +51,13 @@ public class Storage {
         }
     }
 
+    /**
+     * Reads the users hardware to retrieve the list of task.
+     * Returns the task list in a ArrayList.
+     *
+     * @return taskList Task of the user stored in a ArrayList.
+     * @throws InvalidTimeException If format of the time given stored in task list is wrong.
+     */
     public ArrayList<Task> getCurrentTasks() throws InvalidTimeException {
 
         ArrayList<Task> taskList = new ArrayList<>();
@@ -68,6 +85,10 @@ public class Storage {
         return taskList;
     }
 
+    /**
+     * Saves the task in a certain format in the users hardware.
+     * Returns the task list in a ArrayList.
+     */
     public void saveFile(ArrayList<Task> taskList) {
         try {
             FileWriter fw = new FileWriter(PATH.toString());
