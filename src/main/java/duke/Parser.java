@@ -26,6 +26,8 @@ public class Parser {
             return new UpdateCommand(description);
         case DELETE:
             return new DeleteCommand(description);
+        case FIND:
+            return new FindCommand(description);
         case TODO: case EVENT: case DEADLINE:
             return new AddCommand(convertToEnum(strings[0]), description);
         case BYE:
@@ -45,6 +47,8 @@ public class Parser {
             return CommandEnum.DONE;
         case "delete":
             return CommandEnum.DELETE;
+        case "find":
+            return CommandEnum.FIND;
         case "todo":
             return CommandEnum.TODO;
         case "deadline":

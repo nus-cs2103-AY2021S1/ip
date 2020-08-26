@@ -1,6 +1,7 @@
 package duke;
 
 import java.util.ArrayList;
+import java.util.stream.Stream;
 
 /**
  * Encapsulates a list of tasks.
@@ -68,5 +69,9 @@ public class TaskList {
      */
     public void add(Task task) {
         tasks.add(task);
+    }
+    
+    public Stream<Task> stream() {
+        return this.tasks.stream();
     }
 }
