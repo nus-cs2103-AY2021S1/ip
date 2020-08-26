@@ -8,8 +8,6 @@ public class Bot {
 
     Printer printer = new Printer();
     Parser parser = new Parser();
-    String LINE = "    ____________________________________________________________";
-    String WHITE_SPACE_SEVEN = "       ";
     Storage storage = new Storage("./data/duke.txt");
     ArrayList<Listing> list = storage.load();
 
@@ -96,28 +94,25 @@ public class Bot {
 
 
     protected void printReturns() {
-        System.out.println(LINE);
+        System.out.println("    ____________________________________________________________");
         System.out.println("     Here are the tasks in your list:");
         for (int i = 0; i < list.size(); i++) {
             String s = "     " + (i + 1) + "." + list.get(i).toString();
             System.out.println(s);
         }
-        System.out.println(LINE);
+        System.out.println("    ____________________________________________________________");
     }
 
     public void doneListings(Integer value) {
         Listing item = list.get(value - 1);
         item.complete(); //completes the list
-        String s = LINE + "\n" + "     Nice! I've marked this task as done: \n" + "     "
-                + item.toString() + "\n" + LINE;
-        System.out.println(s);
+        printer.doneMessage(item.toString());
         storage.save(list); // <----- change this
     }
 
     public void deleteListing(Integer num) {
-        list.remove(num);
-        System.out.println(LINE + "\n" + "     Noted. I've removed this task: \n" + WHITE_SPACE_SEVEN +
-                list.get(num) + "\n" + "     Now you have " + (list.size() - 1) + " tasks in the list.\n" + LINE);
+        printer.deleteMessage(list.size()-1, list.get(num).toString());
+        list.remove((int) num);
         storage.save(list); // <----- change this
     }
 

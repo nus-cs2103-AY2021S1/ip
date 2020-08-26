@@ -42,4 +42,14 @@ public class Printer {
                 + "\n" + LINE);
     }
 
+    protected void deleteMessage(int size, String listing) {
+        System.out.println(LINE + "\n" + "     Noted. I've removed this task: \n" + WHITE_SPACE_SEVEN +
+                listing + "\n" + "     Now you have " + size + " tasks in the list.\n" + LINE);
+    }
+
+    protected void doneMessage(String s) {
+        System.out.println(LINE + "\n" + "     Nice! I've marked this task as done: \n" + "     "
+                + s + "\n" + LINE);
+    }
+
 }
