@@ -22,6 +22,12 @@ public class Parser {
         case "list":
             return new ListCommand();
 
+        case "find" :
+            if (userWord.length == 1 || userWord[1].equals("")) {
+                throw new DukeException("   ☹ OOPS!!! The description of the command find cannot be empty.");
+            }
+            return new FindCommand(userWord[1]);
+
         case "todo":
             if (userWord.length == 1 || userWord[1].equals("")) {
                 throw new DukeException("   ☹ OOPS!!! The description of the command todo cannot be empty.");
@@ -76,15 +82,23 @@ public class Parser {
             if (userWord.length == 1 || userWord[1].equals("")) {
                 throw new DukeException("   ☹ OOPS!!! The description of the command done cannot be empty.");
             }
-            int index = Integer.parseInt(userWord[1]) - 1;
-            return new DoneCommand(index);
+            try {
+                int index = Integer.parseInt(userWord[1]) - 1;
+                return new DoneCommand(index);
+            } catch (NumberFormatException e) {
+                throw new DukeException("    Please provide a positive number when indicating task index.");
+            }
 
         case "delete":
             if (userWord.length == 1 || userWord[1].equals("")) {
                 throw new DukeException("   ☹ OOPS!!! The description of the command done cannot be empty.");
             }
-            int index2 = Integer.parseInt(userWord[1]) - 1;
-            return new DeleteCommand(index2);
+            try {
+                int index2 = Integer.parseInt(userWord[1]) - 1;
+                return new DeleteCommand(index2);
+            } catch (NumberFormatException e) {
+                throw new DukeException("    Please provide a positive number when indicating task index.");
+            }
 
         default:
             throw new DukeException("    Sorry! I'm not really sure what to do with this command yet ☹");

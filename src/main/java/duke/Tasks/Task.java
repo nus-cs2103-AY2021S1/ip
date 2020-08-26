@@ -1,5 +1,7 @@
 package duke.Tasks;
 
+import duke.Exceptions.DukeException;
+
 public class Task {
 
     private String name;
@@ -8,6 +10,14 @@ public class Task {
     public Task(String name){
         this.name = name;
         isDone = false;
+    }
+
+    public boolean isResult(String description) throws DukeException {
+        try {
+            return this.name.contains(description);
+        } catch (NullPointerException e) {
+            throw new DukeException("    Please avoid using null as a search keyword.");
+        }
     }
 
     public void completed(){
