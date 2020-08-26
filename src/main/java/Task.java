@@ -16,6 +16,18 @@ public class Task {
         this.completed = completed;
     }
 
+    public String getDate() {
+        return "";
+    }
+
+    public String getType() {
+        return "";
+    }
+
+    public String getTask() {
+        return task;
+    }
+
     @Override
     public String toString() {
         String completedMarker = this.completed ? "✓" : "✗";
