@@ -16,7 +16,7 @@ public class Duke {
             this.taskList = new TaskList();
         }
     }
-
+    
     public void run() {
         ui.welcome();
         Scanner scanner = new Scanner(System.in);

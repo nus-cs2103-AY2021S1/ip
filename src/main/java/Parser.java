@@ -7,7 +7,6 @@ public class Parser {
         try {
             if (userCommand.equals("bye")) {  // For exiting the program
                 Duke.running = false;
-                Duke.storage.save();
             } else if (userCommand.equals("list")) {  // For viewing items in to do list
                 Duke.ui.handleList();
             } else if (userCommand.equals("done")) {  // For marking items in the to do list as done
@@ -48,7 +47,10 @@ public class Parser {
                 } catch (ArrayIndexOutOfBoundsException e) {
                     throw new DukeException(LINE + "Invalid input! Please specify which date you want to filter! \n" + LINE);
                 }
+            } else {
+                throw new DukeException(LINE + "Invalid command! \n" + LINE);
             }
+            Duke.storage.save();
         } catch (DukeException e) {
             System.out.println(e.getMessage());
         }
