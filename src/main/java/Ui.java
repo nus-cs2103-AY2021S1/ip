@@ -1,7 +1,8 @@
 import java.util.ArrayList;
 
-public class Feedbacks {
-    public static void logoMsg() {
+public class Ui {
+
+    public void logoMsg() {
         String logo = " ___       __   _______   ___       ________  " +
                 "________  _____ ______   _______      \n" +
                 "|\\  \\     |\\  \\|\\  ___ \\ |\\  \\     " +
@@ -20,7 +21,7 @@ public class Feedbacks {
         System.out.println(logo);
     }
 
-    public static void greetingMsg() {
+    public void greetingMsg() {
         String greetingMsg = "\n___________________________________________________________"
                 + "\n |°‿°|"
                 + "\n Hello! I'm DukeBT."

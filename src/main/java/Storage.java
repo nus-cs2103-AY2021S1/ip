@@ -5,15 +5,16 @@ import java.io.IOException;
 import java.io.BufferedReader;
 import java.util.ArrayList;
 
-public class FileOperation {
+public class Storage {
     private final String filePath;
 
-    public FileOperation() {
-        this.filePath = "./data/taskList.txt";
+    public Storage(String filePath) {
+        this.filePath = filePath;
     }
 
-    public void readTasks(ArrayList<Task> tasks) {
+    public void load(TaskList tasklist) {
         try {
+            ArrayList<Task> tasks = tasklist.getTaskList();
             File file = new File(filePath);
             if (file.exists()) {
                 FileReader fileReader = new FileReader(file);
@@ -44,8 +45,9 @@ public class FileOperation {
         }
     }
 
-    public void writeTasks(ArrayList<Task> tasks) {
+    public void writeTasks(TaskList tasklist) {
         try {
+            ArrayList<Task> tasks = tasklist.getTaskList();
             File file = new File(filePath);
             file.getParentFile().mkdirs();
             FileWriter fileWriter;
