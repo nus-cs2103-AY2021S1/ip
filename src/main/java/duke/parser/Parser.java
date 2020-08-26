@@ -1,16 +1,12 @@
 package duke.parser;
 
-import duke.command.Command;
+import duke.command.*;
+
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import duke.command.AddCommand;
-import duke.command.ByeCommand;
-import duke.command.DeleteCommand;
-import duke.command.DoneCommand;
-import duke.command.ErrorCommand;
-import duke.command.ListCommand;
+
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -55,6 +51,12 @@ public class Parser {
                 return new AddCommand(parseDeadline(args));
             } else if (command.equals("event")) {
                 return new AddCommand(parseEvent(args));
+            } else if (command.equals("find")) {
+                if (args.isEmpty()) {
+                    return new ErrorCommand("I need to know what phrase you would like to search for!");
+                } else {
+                    return new FindCommand(args);
+                }
             } else if (input.isBlank()) {
                 return new ErrorCommand("You need to tell me what you want me to do!");
             } else {
