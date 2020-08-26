@@ -1,5 +1,10 @@
 package Duke.main;
 
+/**
+ * This enum class consist of
+ * all pattern strings printed out
+ * by Duke except the exceptions.
+ */
 public enum Status {
     GREET {
         @Override

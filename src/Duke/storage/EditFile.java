@@ -5,13 +5,33 @@ import Duke.main.Status;
 
 import java.io.*;
 
+/**
+ * This class is to edit the Duke.txt
+ * in ../data.
+ * It has two methods: deleteLine,
+ * and setTaskDone.
+ */
 public class EditFile {
     private String path;
 
+    /**
+     * Initialize a EditFile object.
+     *
+     * @param path A string which contains
+     *             the directory of the file
+     *             that is to be edited.
+     */
     public EditFile(String path) {
         this.path = path;
     }
 
+    /**
+     * This method is to delete the task recorded
+     * in Duke.txt with the corresponding line number.
+     *
+     * @param lineNum The index of task that the user want to
+     *                delete.
+     */
     public void deleteLine(int lineNum) {
         try {
             File fileToBeModified = new File(this.path);
@@ -37,6 +57,13 @@ public class EditFile {
         }
     }
 
+    /**
+     * This method is to set the corresponding
+     * task to be marked as done in Duke.txt.
+     *
+     * @param lineNum The index of task that the user want to
+     *                delete.
+     */
     public void setTaskDone(int lineNum) {
         try {
             File fileToBeModified = new File(this.path);

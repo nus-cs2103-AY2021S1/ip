@@ -6,17 +6,43 @@ import Duke.task.Event;
 import Duke.task.Task;
 import Duke.task.Todo;
 
+/**
+ * This class handles the final format
+ * that is printed out by Duke
+ *
+ * @param <T>: T is the data type of the input.
+ */
 public class Formating<T> {
     private final T content;
 
+    /**
+     * Initialize Formating object with content.
+     *
+     * @param content object of any type.
+     */
     public Formating(T content) {
         this.content = content;
     }
 
+    /**
+     * Returns the content in the format.
+     *
+     * @return content.
+     */
     public T getContent() {
         return this.content;
     }
 
+    /**
+     * This method only can be used when the content
+     * is of the type of String.
+     *
+     * Returns a Formating object whose content has been
+     * shortened by eliminating the extra spaces at the
+     * beginning of the content and at the end of the content.
+     *
+     * @return The above described Formating object.
+     */
     public Formating<String> shorten() {
         try {
             String input = (String) content;
@@ -41,6 +67,16 @@ public class Formating<T> {
         }
     }
 
+    /**
+     * This method only can be used when the content
+     * is of the type of String.
+     *
+     * Returns Task whose output of toString method
+     * is equal to the content.
+     *
+     * @return Task whose output of toString method
+     *         is equal to the content.
+     */
     public Task stringToTask() {
         try {
             String input = (String) content;
