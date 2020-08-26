@@ -1,3 +1,5 @@
+package Duke.main;
+
 public class Response {
     protected String response;
 

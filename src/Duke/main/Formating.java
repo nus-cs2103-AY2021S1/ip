@@ -1,3 +1,11 @@
+package Duke.main;
+
+import Duke.exception.DukeException;
+import Duke.task.Deadline;
+import Duke.task.Event;
+import Duke.task.Task;
+import Duke.task.Todo;
+
 public class Formating<T> {
     private final T content;
 

@@ -1,3 +1,5 @@
+package Duke.main;
+
 public enum Status {
     GREET {
         @Override

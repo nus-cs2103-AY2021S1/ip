@@ -1,2 +1,1 @@
-[D][✘] ip (by: Aug_26_2020)
-[E][✘] haircut (on: Aug_26_2020)
+[T][✓] pushup

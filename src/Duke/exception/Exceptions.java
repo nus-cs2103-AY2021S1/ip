@@ -1,3 +1,5 @@
+package Duke.exception;
+
 public enum Exceptions {
     NUMBEREXCESSEXCEPTION {
         @Override

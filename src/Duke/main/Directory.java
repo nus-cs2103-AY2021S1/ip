@@ -1,3 +1,5 @@
+package Duke.main;
+
 public enum Directory {
     FILEDIRECTORY {
         @Override

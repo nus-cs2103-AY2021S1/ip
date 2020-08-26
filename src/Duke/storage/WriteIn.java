@@ -1,3 +1,7 @@
+package Duke.storage;
+
+import Duke.exception.DukeException;
+
 import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.io.IOException;
@@ -22,7 +26,6 @@ public class WriteIn {
 
         } catch (IOException e) {
             DukeException.FileException();
-            return;
         }
     }
 }

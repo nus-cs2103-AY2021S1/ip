@@ -1,3 +1,8 @@
+package Duke.storage;
+
+import Duke.exception.DukeException;
+import Duke.main.Status;
+
 import java.io.*;
 
 public class EditFile {

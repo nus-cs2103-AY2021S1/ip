@@ -1,3 +1,11 @@
+package Duke.main;
+
+import Duke.exception.DukeException;
+import Duke.storage.EditFile;
+import Duke.storage.ReadFile;
+import Duke.storage.WriteIn;
+import Duke.task.*;
+
 public class Parser {
     public static TaskList<Task> taskList;
 
