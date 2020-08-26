@@ -109,6 +109,15 @@ public class Parser {
                 throw new DukeException("Whoops! Something went wrong and I can't process your "
                         + instructions[0] + " command. Sorry! D:");
             }
+        } else if (instructions[0].equals("find")) {
+            // Command: "find <keyword>"
+            if (hasCmdDetails(instructions)) {
+                return Command.FIND;
+            } else {
+                // Something wrong with command, throw exception
+                throw new DukeException("Whoops! Something went wrong and I can't process your "
+                        + instructions[0] + " command. Sorry! D:");
+            }
         }
         return Command.INVALID;
     }

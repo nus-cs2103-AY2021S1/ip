@@ -85,6 +85,10 @@ public class Duke {
                     ui.printOutputSymbol();
                     tasks.deleteTask(userInput);
                     break;
+                case FIND:
+                    ui.printOutputSymbol();
+                    tasks.searchForKeyword(userInput);
+                    break;
                 default:
                     throw new DukeException("Sorry I think I something went wrong...");
                 }
