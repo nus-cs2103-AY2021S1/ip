@@ -38,6 +38,8 @@ public class Parser {
             return CommandType.EVENT;
         case "help":
             return CommandType.HELP;
+        case "find":
+            return CommandType.FIND;
         default:
             throw new DukeException("OOPS! I'm sorry, but I don't know what that means :-(");
         }

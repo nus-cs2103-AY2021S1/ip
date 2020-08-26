@@ -71,6 +71,34 @@ public class TaskList {
     }
 
     /**
+     * Finds the tasks that matches the keyword. 
+     * @param keyword Keyword for finding matching tasks. 
+     * @return List of matching tasks. 
+     */
+    public List<Task> findTasks(String keyword) {
+        List<Task> matchingTasks = new ArrayList<>();
+        for (Task task : taskList) {
+            if (task.description.contains(keyword)) {
+                matchingTasks.add(task);
+            }
+        }
+        return matchingTasks;
+    }
+
+    public String printMatchingTasks(List<Task> tasks) {
+        String output = "Here are the matching tasks in your list:\n";
+        int count = tasks.size();
+        if (count <= 0) {
+            return "There is no matching task in your list. ";
+        } else {
+            for (int i = 0; i < count; i++) {
+                output += (i + 1) + ". " + tasks.get(i) + "\n";
+            }
+            return output.strip();
+        }
+    }
+
+    /**
      * Generates a list of tasks from strings read from file.
      * @param tasks List of tasks in strings.
      * @throws DukeException If there is error in the input.
