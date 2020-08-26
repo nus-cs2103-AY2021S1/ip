@@ -14,7 +14,7 @@ public class ListCommand extends Command {
     ArrayList<Task> taskArrayList = task.taskArrayList;
     System.out.println("Here are the tasks in your list: ");
     for (int i = 0; i < taskArrayList.size(); i++) {
-      System.out.printf("%d.%s\n", i + 1, taskArrayList.get(i));
+      ui.printString(String.format("%d.%s", i + 1, taskArrayList.get(i)));
     }
     ui.showLine();
   }

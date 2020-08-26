@@ -1,5 +1,6 @@
 package duke.parser;
 
+import duke.DukeException;
 import duke.command.ByeCommand;
 import duke.command.Command;
 import duke.command.DeadlineCommand;
@@ -10,13 +11,7 @@ import duke.command.ListCommand;
 import duke.command.ToDoCommand;
 
 public class Parser {
-  Command command;
-
-  private Parser(Command command) {
-    this.command = command;
-  }
-
-  public static Command parse(String fullCommand) throws NoSuchMethodException {
+  public static Command parse(String fullCommand) throws DukeException {
     String command = fullCommand.split(" ")[0];
     switch (command) {
       case "list":
@@ -34,7 +29,7 @@ public class Parser {
       case "bye":
         return new ByeCommand();
       default:
-        throw new NoSuchMethodException("☹ OOPS!!! I'm sorry, but I don't know what that means");
+        throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means");
     }
   }
 }

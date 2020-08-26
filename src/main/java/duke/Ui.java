@@ -45,4 +45,8 @@ public class Ui {
   public void showError(String error) {
     System.err.println("Error: " + error);
   }
+
+  public void printString(String statement) {
+    System.out.println(statement);
+  }
 }
