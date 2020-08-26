@@ -21,12 +21,17 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public boolean isExit() {
-        return super.isExit();
+    public boolean shouldExit() {
+        return super.shouldExit();
     }
 
+    /**
+     * Attempts to find all Tasks containing the keyword within the Storage's list,
+     * then uses Ui to print the list out.
+     * @param storage The Storage object to search for the keyword in.
+     */
     @Override
-    public void execute(Storage storage) throws DukeExecutionException {
+    public void execute(Storage storage) {
         TaskList list = storage.find(keyword);
         Ui.wrapText(list.toString());
 
