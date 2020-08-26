@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class Cartona {
     private static Scanner sc = new Scanner(System.in);
-    private static TaskList taskList = new TaskList();
+    private static TaskList taskList;
 
     private static String line = "    ____________________________________________________________\n";
 
@@ -110,6 +110,8 @@ public class Cartona {
 
         System.out.printf(welcome);
 
+        taskList = Storage.getFileList();
+
         String nextInput = "";
         while (true) {
             nextInput = sc.nextLine();
@@ -159,6 +161,8 @@ public class Cartona {
                         line, line);
             }
         }
+
+        Storage.saveListToFile(taskList);
 
         String goodbye = line + "     Bye. Hope to see you again soon!\n" + line;
         System.out.printf(goodbye);
