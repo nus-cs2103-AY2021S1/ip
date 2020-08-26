@@ -10,7 +10,6 @@ public class Duke {
     static DateTimeFormatter dateTimeFormat = DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm");
 
     public static void main(String[] args) {
-        Ui.printWithLines("The time now is: " + LocalDateTime.now().format(dateTimeFormat) + "\n");
         Ui.processInput(taskList);
     }
 

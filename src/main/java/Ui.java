@@ -1,3 +1,4 @@
+import java.time.LocalDateTime;
 import java.util.Scanner;
 
 public class Ui {
@@ -14,7 +15,8 @@ public class Ui {
     public static void processInput(TaskList taskList) {
 
         printWithLines("Hello! My name is Duketh Puketh III, but you can call me\n" + logo +
-                "\n How may I help you today? :)\n");
+                "\n How may I help you today? :)\n The date and time is now " +
+                LocalDateTime.now().format(Duke.dateTimeFormat) + "\n");
 
         String nextInput = input.nextLine();
         String[] inputParts = nextInput.split(" ", 2);
