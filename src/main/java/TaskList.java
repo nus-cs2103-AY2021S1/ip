@@ -23,7 +23,6 @@ public class TaskList {
         totalTasks = list.size();
     }
 
-
     public List<Task> getList() {
         return list;
     }

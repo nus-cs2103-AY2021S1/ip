@@ -65,6 +65,9 @@ public class Ui {
                 } else if (commandType.equals("delete")) {
                     delete(Integer.parseInt(taskDetails));
 
+                } else if (commandType.equals("find")) {
+                    find(taskDetails);
+
                 } else { }
 
                 storage.addData(list.getList());
@@ -179,6 +182,17 @@ public class Ui {
         System.out.println("I've added this task:\n");
         System.out.println(deadline.toString());
         System.out.println(list.toString());
+    }
+
+    public void find(String keyword) {
+        int counter = 1;
+        System.out.println("Here are the matching tasks in your list:\n");
+        for (Task t : list.getList()) {
+            if (t.task.contains(keyword)) {
+                System.out.println(counter + ". " + t.toString());
+                counter++;
+            }
+        }
     }
 
 }
