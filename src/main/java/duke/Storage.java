@@ -8,10 +8,12 @@ import duke.task.Event;
 
 import java.util.List;
 import java.util.ArrayList;
-import java.io.File;
 import java.util.Scanner;
+
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -35,10 +37,12 @@ public class Storage {
         List<Task> taskList = new ArrayList<>();
         try {
             File dataDirectory = new File(Storage.DIRECTORY);
-            dataDirectory.mkdir(); // make a data directory if the directory does not exist
+            // make a data directory if the directory does not exist
+            dataDirectory.mkdir();
 
             File dataFile = new File(Storage.FILE_LOCATION);
-            dataFile.createNewFile(); // create an empty file to store the tasks if the file does not exist
+            // create an empty file to store the tasks if the file does not exist
+            dataFile.createNewFile();
 
             Scanner sc = new Scanner(dataFile);
 
@@ -72,7 +76,8 @@ public class Storage {
             }
             sc.close();
         } catch (IOException ex) {
-            System.out.println("Oh no! An error was encountered, the file data could not be read.");
+            String err = "Oh no! An error was encountered, the file data could not be read.";
+            System.out.println(err);
         }
         return new TaskList(taskList);
     }
@@ -86,7 +91,7 @@ public class Storage {
         try {
             FileWriter fileWriter = new FileWriter(Storage.FILE_LOCATION);
             for (int i = 0; i < taskList.getListSize(); i++) {
-                fileWriter.write(taskList.getTask(i).taskFileString() + "\n");
+                fileWriter.write(taskList.getTask(i).taskToFileString() + "\n");
             }
             fileWriter.close();
         } catch (IOException ex) {

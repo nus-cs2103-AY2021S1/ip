@@ -15,10 +15,10 @@ import java.time.format.DateTimeParseException;
  */
 public class FindByDateCommand extends Command {
 
-    protected final String[] parsedCommand;
+    private final String[] parsedCommand;
 
     /**
-     * Creates and initialises a new FindByDateCommand object
+     * Creates and initialises a new FindByDateCommand object.
      *
      * @param parsedCommand String array that contains the search date input.
      */
@@ -56,11 +56,12 @@ public class FindByDateCommand extends Command {
                 ui.printReply("No tasks found! Please search using a different date!");
             }
         } catch (ArrayIndexOutOfBoundsException ex) {
-            String err = "No task date provided. Please input a valid date using the format: 'dd/mm/yyyy' \n" +
-                    "Type '/commands' to view the correct command for task search by date! ";
+            String err = "No task date provided. Please input a valid date using the format: 'dd/mm/yyyy' \n"
+                    + "Type '/commands' to view the correct command for task search by date! ";
             throw new InvalidFunctionException(err);
         } catch (DateTimeParseException ex) {
-            String err = "The task date format is incorrect. Please input a valid date using the format: 'dd/mm/yyyy'";
+            String err = "The task date format is incorrect."
+                    + "Please input a valid date using the format: 'dd/mm/yyyy'";
             throw new InvalidFunctionException(err);
         }
     }

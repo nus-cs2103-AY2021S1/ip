@@ -9,8 +9,8 @@ import java.time.format.DateTimeFormatter;
  */
 public class Event extends Task {
 
-    protected LocalDate eventDate;
-    protected LocalTime eventTime;
+    private LocalDate eventDate;
+    private LocalTime eventTime;
 
     /**
      * Creates and initialises a new Event object.
@@ -41,9 +41,9 @@ public class Event extends Task {
      * @return String containing the relevant information of this event object to be saved in a file.
      */
     @Override
-    public String taskFileString() {
-        return "E | " + (super.isDone ? "1 |" : "0 |") + super.description + " | " +
-                this.eventDate.toString() + " " + this.eventTime.toString();
+    public String taskToFileString() {
+        return "E | " + (super.isDone ? "1 |" : "0 |") + super.description + " | "
+                + this.eventDate.toString() + " " + this.eventTime.toString();
     }
 
     /**
@@ -53,8 +53,8 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        String formattedEventTime = this.eventDate.format(DateTimeFormatter.ofPattern("EE, MMM dd yyyy")) + ", " +
-                this.eventTime.format(DateTimeFormatter.ofPattern("hh:mm a"));
+        String formattedEventTime = this.eventDate.format(DateTimeFormatter.ofPattern("EE, MMM dd yyyy"))
+                + ", " + this.eventTime.format(DateTimeFormatter.ofPattern("hh:mm a"));
         return "[E]" + super.toString() + " (at: " + formattedEventTime + ")";
     }
 }

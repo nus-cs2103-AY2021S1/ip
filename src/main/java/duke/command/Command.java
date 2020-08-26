@@ -11,7 +11,7 @@ import duke.Storage;
 public abstract class Command {
 
     /**
-     * Executes the relavant command.
+     * Executes the relevant command.
      *
      * @param tasks List of tasks belonging to the user.
      * @param ui Ui object created for the Duke object.
