@@ -12,7 +12,11 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
-    // Duke's Constructor
+    /**
+     * Duke's Constructor
+     *
+     * @param filePath  File path for save file.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -25,6 +29,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs Duke within a program loop.
+     */
     public void run() {
         // Greet first
         ui.displayGreetings();
@@ -89,7 +96,7 @@ public class Duke {
         }
 
     }
-
+    
     public static void main(String[] args) {
         new Duke("data/tasks.txt").run();
     }
