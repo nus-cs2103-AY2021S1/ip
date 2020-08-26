@@ -15,6 +15,7 @@ public class Task {
     /**
      * Return "O" or "X" based on whether the task is
      * done or not done.
+     *
      * @return "O" or "X"
      */
     public String getStatusIcon() {
@@ -27,7 +28,8 @@ public class Task {
 
     /**
      * Print task's details with numbering.
-     * @param i
+     *
+     * @param i, numbering of the task.
      */
     public void printTask(int i) {
         String output = "     " + i + "." + this.toString();
@@ -49,9 +51,11 @@ public class Task {
     /**
      * Package the deadline to a format used to store in the task.txt.
      * A file in the local disk to store tasks.
-     * @return
+     *
+     * @return String of Task's details
+     * in custom disk format.
      */
-    public String diskFormat() {
+    public String convertToDiskFormat() {
         return this.getStatusIcon() + " | " + this.description;
     }
 

@@ -24,6 +24,7 @@ abstract public class Command {
 
     /**
      * Check is the command is an exit command
+     *
      * @return boolean indicating true or false
      */
     public boolean isExit() {

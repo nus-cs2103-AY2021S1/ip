@@ -43,7 +43,7 @@ public class Storage {
             fileWriter = new FileWriter(taskFilePath);
             StringBuilder append = new StringBuilder();
             for (Task task : storage) {
-                append.append(task.diskFormat()).append("\n");
+                append.append(task.convertToDiskFormat()).append("\n");
             }
 
             fileWriter.write(append.toString());

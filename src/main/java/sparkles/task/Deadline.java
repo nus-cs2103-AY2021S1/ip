@@ -39,6 +39,7 @@ public class Deadline extends Task {
 
     /**
      * Print the date and time of the deadline in "MMM dd yyy hh:mm a" format.
+     *
      * @return String of date and time of deadline
      */
     public String printDateNTime() {
@@ -48,11 +49,13 @@ public class Deadline extends Task {
     /**
      * Package the deadline to a format used to store in the task.txt.
      * A file in the local disk to store tasks.
-     * @return
+     *
+     * @return String of Deadline's details
+     * in custom disk format.
      */
     @Override
-    public String diskFormat() {
-        return "     D | " + super.diskFormat() + " | " + by;
+    public String convertToDiskFormat() {
+        return "     D | " + super.convertToDiskFormat() + " | " + by;
     }
 
     @Override

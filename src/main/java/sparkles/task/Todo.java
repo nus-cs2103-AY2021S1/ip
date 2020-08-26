@@ -12,11 +12,13 @@ public class Todo extends Task {
     /**
      * Package the deadline to a format used to store in the task.txt.
      * A file in the local disk to store tasks.
-     * @return
+     *
+     * @return String of Task's details
+     * in custom disk format.
      */
     @Override
-    public String diskFormat() {
-        return "     T | " + super.diskFormat();
+    public String convertToDiskFormat() {
+        return "     T | " + super.convertToDiskFormat();
     }
 
     @Override

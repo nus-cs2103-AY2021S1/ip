@@ -21,10 +21,14 @@ public class DoneCommand extends Command {
      * Updates the TaskList object and local disk file.
      * Printing out necessary information with regards to this
      * execution.
-     * @param taskList
-     * @param ui
-     * @param storage
-     * @throws SparklesException
+     *
+     * @param taskList, TaskList object containing list
+     *                  of tasks.
+     * @param ui,       Ui Object that interacts with user.
+     * @param storage,  storage object dealing with
+     *                  local disk file
+     * @throws SparklesException, custom exception that handles
+     * exception of Sparkles
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws SparklesException {

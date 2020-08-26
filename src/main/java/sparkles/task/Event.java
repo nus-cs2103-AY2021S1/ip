@@ -29,11 +29,13 @@ public class Event extends Task{
     /**
      * Package the deadline to a format used to store in the task.txt.
      * A file in the local disk to store tasks.
-     * @return
+     *
+     * @return String of Task's details
+     * in custom disk format.
      */
     @Override
-    public String diskFormat() {
-        return "     E | " + super.diskFormat() + " | " + at;
+    public String convertToDiskFormat() {
+        return "     E | " + super.convertToDiskFormat() + " | " + at;
     }
 
     @Override
