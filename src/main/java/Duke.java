@@ -1,5 +1,9 @@
+import java.text.ParseException;
 import java.util.Scanner;
 import java.util.List;
+import java.util.ArrayList;
+import java.util.Date;
+import java.text.SimpleDateFormat;
 
 public class Duke {
     protected List<Task> tasks;
@@ -31,18 +35,20 @@ public class Duke {
         case "deadline":
             String[] splitSlash = description.split(" /by ");
             if (splitSlash.length != 2) {
-                throw new DukeException("\tPaise! :') Please use the correct format: deadline <task> /by <time>");
+                throw new DukeException("\tPaise! :') Please use the format: deadline <task> /by <time>" +
+                        "\n\t\t*time format: <yyyy-mm-dd> or  <yyyy-mm-dd HH:mm>");
             }
-            task = new Deadline(splitSlash[0], false, splitSlash[1]);
+            task = new Deadline(splitSlash[0], false, parseDate(splitSlash[1]));
             this.tasks.add(task);
             printAddedConfirmation(task);
             break;
         case "event":
             splitSlash = description.split(" /at ");
             if (splitSlash.length != 2) {
-                throw new DukeException("\tPaise! :') Please use the correct format: event <task> /at <time>");
+                throw new DukeException("\tPaise! :') Please use the correct format: event <task> /at <time> +" +
+                        "\n\t\t*time format: <yyyy-mm-dd> or  <yyyy-mm-dd HH:mm>");
             }
-            task = new Event(splitSlash[0], false, splitSlash[1]);
+            task = new Event(splitSlash[0], false, parseDate(splitSlash[1]));
             this.tasks.add(task);
             printAddedConfirmation(task);
             break;
@@ -93,6 +99,17 @@ public class Duke {
             System.out.println(String.format("\t\t%d. %s", i + 1, this.tasks.get(i).toString()));
         }
     }
+
+    public Date parseDate(String strDate) throws DukeException{
+        String formatWithMin = "y-M-d HH:mm";
+        String formatWithoutMin = "y-M-d";
+        try {
+            return new SimpleDateFormat(strDate.length() > 11 ? formatWithMin : formatWithoutMin).parse(strDate);
+        } catch (ParseException e) {
+            throw new DukeException("Sorry! Wrong time format!");
+        }
+    }
+
 
     public void serveClient() {
         sayHello();
