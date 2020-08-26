@@ -10,8 +10,10 @@ import java.util.Scanner;
 public class Ui {
     static String HOME = System.getProperty("user.home");
     java.nio.file.Path PATH = java.nio.file.Paths.get(HOME, "ip", "data.txt");
-    Scanner sc;
+
     Parser p = new Parser();
+
+    Scanner sc;
 
     Ui(Scanner sc) {
         this.sc = sc;

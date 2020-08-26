@@ -1,4 +1,11 @@
-import java.io.*;
+import java.io.BufferedWriter;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.PrintWriter;
+
 import java.util.Scanner;
 
 /**
@@ -7,7 +14,9 @@ import java.util.Scanner;
 public class TaskList {
     String HOME = System.getProperty("user.home");
     java.nio.file.Path PATH = java.nio.file.Paths.get(HOME, "ip", "data.txt");
+
     Parser p = new Parser();
+
     /** Total number of tasks in the task list */
     int total;
 
