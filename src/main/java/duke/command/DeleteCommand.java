@@ -6,7 +6,7 @@ import duke.task.Task;
 /**
  * DeleteCommand is a Command to delete a Task from the related TaskList.
  */
-public class DeleteCommand extends Command{
+public class DeleteCommand extends Command {
 
     /** The index of the Task that wants to be deleted from the TaskList. */
     protected int taskNumber;

@@ -29,8 +29,8 @@ public class EventCommand extends Command {
     public void perform(TaskList tasks) {
         tasks.add(event);
         System.out.println(" Okay! I have added this task:" + "\n" + "   "
-            + event.toString() + "\n" + " Now you have " + tasks.size() + (tasks.size() > 1 ? " tasks."
-            : " task."));
+                + event.toString() + "\n" + " Now you have " + tasks.size() + (tasks.size() > 1 ? " tasks."
+                : " task."));
     }
 
     /**

@@ -11,6 +11,12 @@ public abstract class Command {
      *
      * @param tasks The related TaskList.
      */
-    abstract public void perform(TaskList tasks);
-    abstract public boolean isExit();
+    public abstract void perform(TaskList tasks);
+
+    /**
+     * Checks if this Command is a termination Command.
+     *
+     * @return True if this Command is a termination Command, otherwise false.
+     */
+    public abstract boolean isExit();
 }

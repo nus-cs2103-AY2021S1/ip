@@ -5,7 +5,7 @@ import duke.main.TaskList;
 /**
  * ByeCommand is a Command to shut down Duke.
  */
-public class ByeCommand extends Command{
+public class ByeCommand extends Command {
 
     /**
      * Says bye to the user.
