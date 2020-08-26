@@ -63,7 +63,7 @@ public class Storage {
     /**
      * Saves the tasks data to storage file.
      * @param tasks List of tasks to be saved.
-     * @throws DukeException If there is error saving tasks to file.
+     * @throws DukeStorageException If there is error saving tasks to file.
      */
     public void writeToFile(TaskList tasks) throws DukeException {
         FileWriter fw;
@@ -83,7 +83,7 @@ public class Storage {
     /**
      * Loads the local tasks data in storage file, then returns it.
      * @return Returns local tasks data in storage file as TaskList.
-     * @throws DukeException If storage file is not found.
+     * @throws DukeStorageException If storage file is not found.
      */
     List<Task> load() throws DukeException {
         File localTasks = new File(this.filePath);
