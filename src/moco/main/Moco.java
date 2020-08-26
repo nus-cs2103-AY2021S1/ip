@@ -1,3 +1,11 @@
+package moco.main;
+
+import moco.logic.MocoException;
+import moco.logic.Parser;
+import moco.logic.Storage;
+import moco.logic.TaskList;
+import moco.ui.Ui;
+
 public class Moco {
 
     private Storage storage;

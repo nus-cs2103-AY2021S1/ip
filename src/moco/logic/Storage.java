@@ -1,3 +1,10 @@
+package moco.logic;
+
+import moco.task.Deadline;
+import moco.task.Event;
+import moco.task.Task;
+import moco.task.Todo;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;

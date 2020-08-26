@@ -1,3 +1,7 @@
+package moco.logic;
+
+import moco.task.Task;
+
 import java.util.ArrayList;
 
 public class TaskList {
@@ -7,7 +11,7 @@ public class TaskList {
         this.tasks = new ArrayList<>();
     }
 
-    protected TaskList(ArrayList<Task> tasks) {
+    public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
         if (tasks.size() > 0) {
             System.out.println("\nYou have a saved list! Here: \n" + this.toString());

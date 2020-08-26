@@ -1,3 +1,8 @@
+package moco.logic;
+
+import moco.task.*;
+import moco.ui.Ui;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
@@ -31,6 +36,8 @@ public class Parser {
         if (input.equals(("bye"))) {
             storage.Save();
             return false;
+        } else if (input.equals("hi") || input.equals("hello")) {
+            ui.printGreeting();
         } else if (input.equals("list")) {
             ui.printTaskList(tasks);
         } else if (input.contains("done")) {
@@ -69,7 +76,7 @@ public class Parser {
         }
     }
 
-    private static void toDoCommand(String input, TaskList tasks, Storage storage, Ui ui) {
+    private static void toDoCommand(String input, TaskList tasks, Storage storage, Ui ui) throws MocoException {
         try {
             if (input.length() > 5) {
                 Todo t = new Todo(input.substring(5));
@@ -80,7 +87,7 @@ public class Parser {
                 throw new MocoException("☹ Insufficient details! The description of a todo cannot be empty.");
             }
         } catch (Exception e) {
-            ui.printError(e.getMessage());
+            throw new MocoException(e.getMessage());
         }
     }
 
@@ -140,7 +147,7 @@ public class Parser {
         } catch (IndexOutOfBoundsException e) {
             throw new MocoException("The index you specified is not valid. Please try again.");
         } catch (Exception e) {
-            ui.printError(e.getMessage());
+            throw new MocoException(e.getMessage());
         }
     }
 }
