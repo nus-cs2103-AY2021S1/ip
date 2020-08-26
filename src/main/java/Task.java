@@ -12,12 +12,9 @@ public abstract class Task {
         this.isDone = isDone;
     }
 
-    public boolean markAsDone() {
+    public void markAsDone() {
         if (!isDone) {
             isDone = true;
-            return true;
-        } else {
-            return false;
         }
     }
 

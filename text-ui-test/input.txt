@@ -1,7 +1,11 @@
 clear
+y
+clear
+n
+ls
 todo borrow book
-deadline return book /by 14-Dec 1200
-event project meeting /on 03/12/2019 0200
+deadline return book /by 14-Dec 0200
+event project meeting /on 03/12/2019
 deadline homework /by 02-Aug-2020 2359
 list
 done 3

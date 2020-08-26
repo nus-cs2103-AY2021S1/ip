@@ -1,22 +1,32 @@
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
-    private final LocalDateTime by;
     private static final DateTimeFormatter D_DATETIME_FORMAT = DateTimeFormatter.ofPattern("EEEE, MMM dd uuuu, ha");
+    private static final DateTimeFormatter D_DATE_FORMAT = DateTimeFormatter.ofPattern("EEEE, MMM dd uuuu");
+
+    private final LocalDateTime by;
+    private final boolean includesTime;
 
     public Deadline(String description, LocalDateTime by) {
         super(description);
         this.by = by;
+        this.includesTime = !by.toLocalTime().equals(LocalTime.MIDNIGHT);
     }
 
     public Deadline(boolean isDone, String description, LocalDateTime by) {
         super(isDone, description);
         this.by = by;
+        this.includesTime = !by.toLocalTime().equals(LocalTime.MIDNIGHT);
     }
 
     public String getDeadlineDateTime() {
-        return by.format(D_DATETIME_FORMAT);
+        if (includesTime) {
+            return by.format(D_DATETIME_FORMAT);
+        } else {
+            return by.format(D_DATE_FORMAT);
+        }
     }
 
     public static Deadline decode(String saved) throws AliceException {

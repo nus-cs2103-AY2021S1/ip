@@ -1,22 +1,32 @@
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 public class Event extends Task {
-    private final LocalDateTime on;
+    private static final DateTimeFormatter E_DATE_FORMAT = DateTimeFormatter.ofPattern("EEEE, MMM dd uuuu");
     private static final DateTimeFormatter E_DATETIME_FORMAT = DateTimeFormatter.ofPattern("EEEE, MMM dd uuuu, ha");
+
+    private final LocalDateTime on;
+    private final boolean includesTime;
 
     public Event(String description, LocalDateTime on) {
         super(description);
         this.on = on;
-    }
-
-    public String getEventDateTime() {
-        return on.format(E_DATETIME_FORMAT);
+        this.includesTime = !on.toLocalTime().equals(LocalTime.MIDNIGHT);
     }
 
     public Event(boolean isDone, String description, LocalDateTime on) {
         super(isDone, description);
         this.on = on;
+        this.includesTime = !on.toLocalTime().equals(LocalTime.MIDNIGHT);
+    }
+
+    public String getEventDateTime() {
+        if (includesTime) {
+            return on.format(E_DATETIME_FORMAT);
+        } else {
+            return on.format(E_DATE_FORMAT);
+        }
     }
 
     public static Event decode(String saved) throws AliceException {
@@ -25,7 +35,7 @@ public class Event extends Task {
         if (inputs.length == 3) {
             return new Event(isDone, inputs[1], LocalDateTime.parse(inputs[2]));
         } else {
-            throw new AliceException("Corrupted Event data");
+            throw new AliceException("Corrupted event data");
         }
     }
 
