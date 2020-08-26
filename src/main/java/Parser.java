@@ -20,8 +20,9 @@ public class Parser {
      * Returns a size 3 array containing command type, command detail and command date. Any array slots
      * that have no inputs are left as null. The original raw input is split and processed depending on
      * the command type. The command types available are todo, deadline, event, done and delete
+     *
      * @param string array of the raw user input
-     * @return  a size 3 array containing command type, command detail and date detail.
+     * @return a size 3 array containing command type, command detail and date detail.
      **/
     public String[] extractDetails(String[] details) {
         String type = details[0];
@@ -51,8 +52,12 @@ public class Parser {
                     }
                     s1 = s1 + " " + details[counter]; //build a string of task details
                 }
-                for (counter++; counter < details.length; counter++) {
-                    s2 = s2 + " " + details[counter]; //build a string of time detail
+                for (counter++; counter < details.length; counter++) {//build a string of time detail
+                    if (counter == details.length - 1) {
+                        s2 = s2 + details[counter];
+                    } else {
+                        s2 = s2 + details[counter] + " ";
+                    }
                 }
                 s[2] = s2; //enter time detail into extracted detail array
                 break;
@@ -62,10 +67,14 @@ public class Parser {
                         s[1] = s1; // enter detail into final array
                         break;
                     }
-                    s1 = s1 + " " + details[counter]; //build string of detail
+                    s1 = s1 + details[counter] + " "; //build string of detail
                 }
                 for (counter++; counter < details.length; counter++) {
-                    s2 = s2 + " " + details[counter]; // build string of time detail
+                    if (counter == details.length - 1) {
+                        s2 = s2 + details[counter];
+                    } else {
+                        s2 = s2 + details[counter] + " ";
+                    }
                 }
                 s[2] = s2; //enter time detail into final array
                 break;
