@@ -11,13 +11,30 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.TaskList;
 
+/**
+ * This class is responsible for loading a TaskList from an existing file and creating TaskLists which can
+ * be saved to a file.
+ */
 public class TaskListStorage {
     private String filepath;
 
+    /**
+     * Creates a new TaskListStorage which which read from and write to the specified file.
+     *
+     * @param filepath the path to the file where the TaskList should be loaded from and saved to
+    */
     public TaskListStorage(String filepath) {
         this.filepath = filepath;
     }
 
+    /**
+     * Try to load an existing TaskList from a file (specified in the constructor). A new TaskList is created
+     * if an existing file cannot be found or read, or if the file has an invalid format. The TaskList returned
+     * will attempt to save to the file every time it is modified.
+     *
+     * @param bot
+     * @return an existing or new TaskList which saves to the file every time it is modified
+    */
     public TaskList load(Bot bot) {
         final String createNewListMessage = "I'll create a new list of tasks.";
         TaskList list;

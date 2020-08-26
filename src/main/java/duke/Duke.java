@@ -10,6 +10,9 @@ import java.util.Scanner;
 // TODO: setup code style check
 // TODO: consider whether Commands should throw Exceptions, or stay as they are now
 
+/**
+ * This is the main class. Start Duke by running the main method.
+ */
 public class Duke implements Bot {
     private boolean isStopped;
     private Ui ui;
@@ -21,6 +24,9 @@ public class Duke implements Bot {
         message = new StringBuilder();
     }
 
+    /**
+     * Starts Duke.
+     */
     public static void main(String[] args) {
         new Duke().run();
     }

@@ -4,9 +4,17 @@ import duke.Bot;
 import duke.task.Task;
 import duke.task.TaskList;
 
+/**
+ * This Command will add a Task to the TaskList.
+ */
 public class AddCommand implements Command {
     private Task task;
 
+    /**
+     * Creates an AddCommand.
+     *
+     * @param task the task to add
+     */
     public AddCommand(Task task) {
         this.task = task;
     }
