@@ -1,11 +1,6 @@
 package duke.parser;
 
-import duke.commands.AddCommand;
-import duke.commands.Command;
-import duke.commands.DeleteCommand;
-import duke.commands.ExitCommand;
-import duke.commands.ListCommand;
-import duke.commands.UpdateCommand;
+import duke.commands.*;
 import duke.exceptions.DukeException;
 
 /**
@@ -34,6 +29,8 @@ public class Parser {
             return prepareUpdateTask(input);
         } else if (input.startsWith("delete")) {
             return prepareDeleteTask(input);
+        } else if (input.startsWith("find")) {
+            return prepareFindTask(input);
         } else if ("bye".equals(input)) {
             return new ExitCommand(input);
         } else {
@@ -64,6 +61,11 @@ public class Parser {
     private static Command prepareDeleteTask(String command) {
         String todoIndex = command.substring(6).trim();
         return new DeleteCommand(command, todoIndex);
+    }
+
+    private static Command prepareFindTask(String command) {
+        String keyword = command.substring(4).trim();
+        return new FindCommand(keyword);
     }
 }
 
