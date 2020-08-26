@@ -1,7 +1,17 @@
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Duke {
+
+
+    static String projectRoot = System.getProperty("user.dir");
+    static String filePath = projectRoot + File.separator + "data" + File.separator + "saveData.txt";
+    static String dirPath = projectRoot + File.separator + "data";
+
     public static void main(String[] args) {
 
         Scanner userInput = new Scanner(System.in);
@@ -15,6 +25,24 @@ public class Duke {
         System.out.println("Howdy pardner!! I'm\n" + logo);
 
         System.out.println("What can I get yer for?");
+
+        File saveData = new File(filePath);
+
+        boolean dirExists = new File(dirPath).exists();
+
+        if (!dirExists) new File(dirPath).mkdirs();
+
+        // checking if the save file is already there
+        try {
+            boolean fileCreated = saveData.createNewFile();
+            if (fileCreated) {
+                System.out.println("Haven't seen a new face around 'ere for awhile, have a seat!");
+            } else {
+                System.out.println("A regular! The usual, I presume?");
+            }
+        } catch (IOException exception) {
+            System.out.println(exception);
+        }
 
         while (true) {
             String input = userInput.nextLine();
@@ -63,7 +91,7 @@ public class Duke {
                             if (inputArray.length <= 1)
                                 throw new DukeException("Sorry, but I can't do anything if you don't give me the description of your todo!");
                             String desc = stringCombiner(inputArray, 1, inputArray.length - 1);
-                            task = new Todo(desc);
+                            task = new Todo(desc.trim());
                             break;
                         case "event":
                             String[] eventSplit = input.split("/at");
@@ -73,7 +101,7 @@ public class Duke {
                                 throw new DukeException("I'm gonna need a description for this here event!");
                             if (eventSplit.length == 1)
                                 throw new DukeException("I'm gonna need a date or time for this!");
-                            task = new Event(stringCombiner(inputArray, 1, index - 1), eventSplit[1]);
+                            task = new Event(stringCombiner(inputArray, 1, index - 1).trim(), eventSplit[1].trim());
                             break;
                         case "deadline":
                             String[] deadlineSplit = input.split("/by");
@@ -83,7 +111,7 @@ public class Duke {
                                 throw new DukeException("I'm gonna need a description for this here deadline!");
                             if (deadlineSplit.length == 1)
                                 throw new DukeException("I'm gonna need a date or time for this!");
-                            task = new Deadline(stringCombiner(inputArray, 1, index - 1), deadlineSplit[1]);
+                            task = new Deadline(stringCombiner(inputArray, 1, index - 1).trim(), deadlineSplit[1].trim());
                             break;
                         default:
                             throw new DukeException("Sorry, I didn't quite catch that!");
@@ -95,6 +123,30 @@ public class Duke {
                 System.out.println(e.toString());
             }
         }
+        BufferedWriter saveWriter = null;
+        try {
+            saveWriter = new BufferedWriter(new FileWriter(saveData));
+            StringBuffer saveContentBuffer = new StringBuffer();
+            for (int i = 0; i < taskList.size(); i++) {
+                Task task = taskList.get(i);
+                saveContentBuffer.append(task.createSaveDataLine() + "\n");
+            }
+
+            String saveContent = saveContentBuffer.toString();
+
+            saveWriter.write(saveContent);
+        } catch (IOException exception) {
+            System.out.println(exception);
+        } finally {
+            try {
+                if (saveWriter != null) {
+                    saveWriter.close();
+                }
+            } catch (IOException e) {
+                System.out.println(e);
+            }
+        }
+
     }
 
     private static String stringCombiner(String[] arr, int start, int end) {

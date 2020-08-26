@@ -5,6 +5,11 @@ public class Todo extends Task {
     }
 
     @Override
+    public String createSaveDataLine() {
+        return "T|" + getStatusLetter() + "|" + description;
+    }
+
+    @Override
     public String toString() {
         return "[T]" + super.toString();
     }

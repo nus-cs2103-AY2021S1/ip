@@ -1,4 +1,4 @@
-public class Task {
+public abstract class Task {
     protected String description;
     protected boolean isDone;
 
@@ -11,12 +11,18 @@ public class Task {
         return (isDone ? "✓" : "✘"); //return tick or X symbols
     }
 
+    public String getStatusLetter() {
+        return (isDone ? "y" : "n");
+    }
+
     public void markAsDone() {
         this.isDone = true;
     }
 
+    public abstract String createSaveDataLine();
+
     @Override
     public String toString() {
-        return "[" + getStatusIcon() + "] " + description;
+        return "[" + getStatusIcon() + "] " + description + " ";
     }
 }

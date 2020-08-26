@@ -8,8 +8,13 @@ public class Event extends Task {
     }
 
     @Override
+    public String createSaveDataLine() {
+        return "E|" + getStatusLetter() + "|" + description + "|" + time;
+    }
+
+    @Override
     public String toString() {
-        return "[E]" + super.toString() + "(at:" + time + ")";
+        return "[E]" + super.toString() + "(at: " + time + ")";
     }
 
 }
