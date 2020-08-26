@@ -287,6 +287,5 @@ public class Duke {
         ArrayList<Task> tasks = new ArrayList<>();
 
         userPrompt(tasks);
-
     }
 }
