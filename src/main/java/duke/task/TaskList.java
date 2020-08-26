@@ -59,6 +59,7 @@ public class TaskList {
             if (task.getDescription().contains(keyword)) {
                 output.append(i).append(". ").append(task).append("\n");
             }
+            i++;
         }
         
         output.deleteCharAt(output.length() - 1);
