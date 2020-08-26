@@ -15,9 +15,6 @@ public class Parser {
     public static Executable createExe(String fullCommand)
             throws UnknownCommandException, IncorrectArgumentException {
         String[] args = fullCommand.trim().split("\\s");
-        if (args.length <= 0) {
-            throw new IncorrectArgumentException(ERROR_INCORRECT_ARGUMENT);
-        }
 
         Action action = Action.getAction(args[0]);
 
