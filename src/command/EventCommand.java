@@ -14,25 +14,9 @@ public class EventCommand extends Command {
 
     @Override
     public void execute(String str) {
-        String[] splitStr = str.split(" /at ", 2);
-
-        checkException(splitStr);
-
-        String description = splitStr[0];
-        String time = splitStr[1];
-
-        Event newEvent = new Event(UIPrint.eventIcon, description, time);
+        Event newEvent = Event.createEvent(str);
         DukeData.tasks.add(newEvent);
-
         DukeFunction.reportNewTask(newEvent);
     }
 
-    private void checkException(String[] splitStr) throws IncorrectFormatException {
-        if (splitStr.length != 2) {
-            String line = UIPrint.getLine(UIPrint.star, 50);
-            String errMessage =
-                    line + "\nPlease follow the format of event <task description> /at <event time>\n" + line;
-            throw new IncorrectFormatException(errMessage);
-        }
-    }
 }
