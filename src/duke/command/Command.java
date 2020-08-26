@@ -5,7 +5,7 @@ import duke.storage.Storage;
 
 public abstract class Command {
 
-    public boolean isExit() {
+    public boolean shouldExit() {
         return false;
     }
 

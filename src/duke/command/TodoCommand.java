@@ -16,8 +16,8 @@ public class TodoCommand extends Command {
     }
 
     @Override
-    public boolean isExit() {
-        return super.isExit();
+    public boolean shouldExit() {
+        return super.shouldExit();
     }
 
     @Override
