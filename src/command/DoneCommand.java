@@ -1,10 +1,10 @@
 package command;
 
+import data.DukeTaskList;
 import exception.InvalidIndexException;
 import task.Task;
 import ui.UIPrint;
 import ui.Ui;
-import data.DukeData;
 
 public class DoneCommand extends Command {
 
@@ -19,7 +19,7 @@ public class DoneCommand extends Command {
 
         checkException(taskIndex, str);
 
-        Task task = DukeData.tasks.get(taskIndex);
+        Task task = DukeTaskList.tasks.get(taskIndex);
         task.markAsDone();
 
         Ui.reportDoneTask(task);
@@ -35,7 +35,7 @@ public class DoneCommand extends Command {
     }
 
     private void checkException(int taskIndex, String str) {
-        if (DukeData.tasks.size() <= taskIndex || taskIndex < 0) {
+        if (DukeTaskList.tasks.size() <= taskIndex || taskIndex < 0) {
             String line = UIPrint.getLine(UIPrint.star, 50);
             String errMessage =
                     line + "\nSorry " + str + " is not a valid index\n" + line;

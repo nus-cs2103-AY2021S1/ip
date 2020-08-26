@@ -1,6 +1,6 @@
 package command;
 
-import data.DukeData;
+import data.DukeState;
 import ui.Ui;
 
 public class ExitCommand extends Command {
@@ -13,6 +13,6 @@ public class ExitCommand extends Command {
     public void execute(String str) {
         Ui.reportExit();
 
-        DukeData.exitLoop = true;
+        DukeState.exitLoop = true;
     }
 }

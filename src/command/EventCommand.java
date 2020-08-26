@@ -1,7 +1,7 @@
 package command;
 
+import data.DukeTaskList;
 import task.Event;
-import data.DukeData;
 import ui.Ui;
 
 public class EventCommand extends Command {
@@ -13,7 +13,7 @@ public class EventCommand extends Command {
     @Override
     public void execute(String str) {
         Event newEvent = Event.createEvent(str);
-        DukeData.tasks.add(newEvent);
+        DukeTaskList.tasks.add(newEvent);
         Ui.reportNewTask(newEvent);
     }
 

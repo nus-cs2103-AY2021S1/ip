@@ -1,10 +1,10 @@
 package command;
 
+import data.DukeTaskList;
 import exception.InvalidIndexException;
 import task.Task;
 import ui.UIPrint;
 import ui.Ui;
-import data.DukeData;
 
 public class DeleteCommand extends Command {
 
@@ -19,7 +19,7 @@ public class DeleteCommand extends Command {
 
         checkException(taskIndex, str);
 
-        Task task = DukeData.tasks.remove(taskIndex);
+        Task task = DukeTaskList.tasks.remove(taskIndex);
 
         Ui.reportDeleteTask(task);
     }
@@ -34,7 +34,7 @@ public class DeleteCommand extends Command {
     }
 
     private void checkException(int taskIndex, String str) {
-        if (DukeData.tasks.size() <= taskIndex || taskIndex < 0) {
+        if (DukeTaskList.tasks.size() <= taskIndex || taskIndex < 0) {
             String line = UIPrint.getLine(UIPrint.star, 50);
             String errMessage =
                     line + "\nSorry " + str + " is not a valid index\n" + line;

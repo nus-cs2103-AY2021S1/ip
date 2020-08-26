@@ -1,8 +1,8 @@
 package function;
 
 import command.Command;
-import data.DukeData;
 import data.DukeCommandSet;
+import data.DukeTaskList;
 import storage.TaskStorage;
 
 import exception.IncorrectFormatException;
@@ -13,6 +13,7 @@ import exception.UnknownCommandException;
 import java.io.IOException;
 
 public class DukeFunction {
+
     public static void checkCommand(String str) {
         String[] inputParts = str.split(" ", 2);
         String possibleCommand = inputParts[0];
@@ -35,10 +36,10 @@ public class DukeFunction {
     }
 
     public static void loadSavedTasks() throws IOException {
-        DukeData.tasks = TaskStorage.getInstance().getSavedTasks();
+        DukeTaskList.tasks = TaskStorage.getInstance().getSavedTasks();
     }
 
     public static void saveCurrentTasks() throws IOException {
-        TaskStorage.getInstance().saveTasks(DukeData.tasks);
+        TaskStorage.getInstance().saveTasks(DukeTaskList.tasks);
     }
 }

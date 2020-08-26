@@ -1,9 +1,10 @@
 package ui;
 
-import data.DukeData;
+import data.DukeTaskList;
 import task.Task;
 
 public class Ui {
+
     public static void greet() {
         System.out.println(UIPrint.logo);
 
@@ -26,11 +27,11 @@ public class Ui {
 
         System.out.println("Current tasks:\n");
 
-        for (int i = 0; i < DukeData.tasks.size(); i++) {
-            System.out.println(i + 1 + ". " + DukeData.tasks.get(i));
+        for (int i = 0; i < DukeTaskList.tasks.size(); i++) {
+            System.out.println(i + 1 + ". " + DukeTaskList.tasks.get(i));
         }
 
-        if (DukeData.tasks.size() == 0) {
+        if (DukeTaskList.tasks.size() == 0) {
             System.out.println("None");
         }
 
@@ -42,7 +43,7 @@ public class Ui {
 
         System.out.println("Got it. I've added this task: ");
         System.out.println(task);
-        System.out.println("Now you have " + DukeData.tasks.size() + " tasks in the list.");
+        System.out.println("Now you have " + DukeTaskList.tasks.size() + " tasks in the list.");
 
         UIPrint.drawLine(UIPrint.star, 50);
     }
@@ -61,7 +62,7 @@ public class Ui {
 
         System.out.println("Noted. I've removed this task: ");
         System.out.println(task);
-        System.out.println("Now you have " + DukeData.tasks.size() + " tasks in the list");
+        System.out.println("Now you have " + DukeTaskList.tasks.size() + " tasks in the list");
 
         UIPrint.drawLine(UIPrint.star, 50);
     }

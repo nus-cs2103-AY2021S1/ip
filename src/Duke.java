@@ -1,6 +1,6 @@
 import input.UserInput;
 import function.DukeFunction;
-import data.DukeData;
+import data.DukeState;
 import ui.Ui;
 
 import java.io.IOException;
@@ -11,7 +11,7 @@ public class Duke {
         DukeFunction.loadSavedTasks();
         Ui.greet();
 
-        while (!DukeData.exitLoop) {
+        while (!DukeState.exitLoop) {
             String inputLine = UserInput.getOneLine();
             DukeFunction.checkCommand(inputLine);
         }

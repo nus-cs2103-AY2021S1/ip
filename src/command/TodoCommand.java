@@ -1,8 +1,8 @@
 package command;
 
+import data.DukeTaskList;
 import exception.NoDescriptionException;
 import task.ToDo;
-import data.DukeData;
 import ui.Ui;
 
 public class TodoCommand extends Command {
@@ -14,7 +14,7 @@ public class TodoCommand extends Command {
     @Override
     public void execute(String str) throws NoDescriptionException {
         ToDo newToDo = ToDo.createToDo(str);
-        DukeData.tasks.add(newToDo);
+        DukeTaskList.tasks.add(newToDo);
         Ui.reportNewTask(newToDo);
     }
 

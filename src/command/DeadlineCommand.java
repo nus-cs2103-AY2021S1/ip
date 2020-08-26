@@ -1,7 +1,7 @@
 package command;
 
+import data.DukeTaskList;
 import task.Deadline;
-import data.DukeData;
 import ui.Ui;
 
 public class DeadlineCommand extends Command {
@@ -13,7 +13,7 @@ public class DeadlineCommand extends Command {
     @Override
     public void execute(String str) {
         Deadline newDeadline = Deadline.createDeadline(str);
-        DukeData.tasks.add(newDeadline);
+        DukeTaskList.tasks.add(newDeadline);
         Ui.reportNewTask(newDeadline);
     }
 }
