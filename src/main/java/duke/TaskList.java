@@ -37,6 +37,19 @@ public class TaskList {
         }
     }
 
+    public String printMatchingTasks(List<Task> tasks) {
+        String output = "Here are the matching tasks in your list:\n";
+        int count = tasks.size();
+        if (count <= 0) {
+            return "There is no matching task in your list. ";
+        } else {
+            for (int i = 0; i < count; i++) {
+                output += (i + 1) + ". " + tasks.get(i) + "\n";
+            }
+            return output.strip();
+        }
+    }
+
     public Task deleteTask(int num) {
         Task deletedTask = taskList.get(num - 1);
         taskList.remove(num - 1);
@@ -45,6 +58,16 @@ public class TaskList {
 
     public Task markTaskAsDone(int idx) {
         return taskList.get(idx - 1).markAsDone();
+    }
+
+    public List<Task> findTasks(String keyword) {
+        List<Task> matchingTasks = new ArrayList<>();
+        for (Task task : taskList) {
+            if (task.description.contains(keyword)) {
+                matchingTasks.add(task);
+            }
+        }
+        return matchingTasks;
     }
 
     private void generateTaskList(List<String> tasks) throws DukeException {

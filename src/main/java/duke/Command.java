@@ -82,6 +82,12 @@ public class Command {
                 ui.showAddedTask(addedEvent, tasks);
                 storage.saveTaskListToFile(tasks);
                 break;
+            case FIND:
+                if (inputs.length <= 1) {
+                    throw new DukeException("OOPS! The keyword for search cannot be empty!");
+                }
+                ui.showMatchingTasks(tasks, inputs[1]);
+                break;
             default:
                 throw new DukeException("OOPS! I'm sorry, but I don't know what that means :-(");
         }

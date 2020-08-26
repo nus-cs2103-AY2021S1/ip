@@ -32,7 +32,7 @@ public class Ui {
     }
 
     public void printGreetings() {
-        String greeting = "Hello I'm duke.Duke, your favourite chatbot! \n\n"
+        String greeting = "Hello I'm Duke, your favourite chatbot! \n\n"
                 + "Type 'help' to see the list of command I support. ";
         formatPrint(greeting);
     }
@@ -64,6 +64,10 @@ public class Ui {
 
     public void showList(TaskList taskList) {
         formatPrint(taskList.printList());
+    }
+
+    public void showMatchingTasks(TaskList taskList, String keyword) {
+        formatPrint(taskList.printMatchingTasks(taskList.findTasks(keyword)));
     }
 
     public void showAddedTask(Task task, TaskList taskList) {
