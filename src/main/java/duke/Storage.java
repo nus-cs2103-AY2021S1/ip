@@ -28,7 +28,10 @@ public class Storage {
         try {
             TaskList tasks = new TaskList();
             File file = new File(dest);
+
+            new File(dest.split("/")[0]).mkdir();
             file.createNewFile();
+
             Scanner scanner = new Scanner(file);
             while (scanner.hasNext()) {
                 tasks.add(Parser.parseSavedTask(scanner.nextLine()));
@@ -37,7 +40,7 @@ public class Storage {
         } catch (FileNotFoundException e) {
             throw new FileNotFoundException("Could not find file after creating.");
         } catch (IOException e) {
-            throw new IOException("Error creating file.");
+            throw new IOException("Error creating file.\n" + e.getMessage());
         }
     }
 
