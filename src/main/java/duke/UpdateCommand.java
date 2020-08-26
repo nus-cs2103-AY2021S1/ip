@@ -2,7 +2,15 @@ package duke;
 
 import java.io.IOException;
 
+/**
+ * Represents an update command.
+ */
 public class UpdateCommand extends Command{
+    /**
+     * Constructs an update command with description.
+     * 
+     * @param description Description of command.
+     */
     UpdateCommand(String description) {
         this.description = description;
     }

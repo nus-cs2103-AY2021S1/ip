@@ -1,5 +1,8 @@
 package duke;
 
+/**
+ * Main class for running bot.
+ */
 public class Duke {
     private static final String FILE_PATH = (System.getProperty("user.dir").endsWith("text-ui-test") 
         ? System.getProperty("user.dir").substring(0, System.getProperty("user.dir").length() - 13) + "/data/duke.txt"
@@ -9,6 +12,11 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Constructs a Duke instance with the specified file name.
+     * 
+     * @param filePath String of file's path.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -20,6 +28,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs the main logic of the bot.
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;
@@ -37,7 +48,12 @@ public class Duke {
             }
         }
     }
-    
+
+    /**
+     * Main method of programme.
+     * 
+     * @param args Command line arguments. Not needed for this programme
+     */
     public static void main(String[] args) {
         new Duke(FILE_PATH).run();
     }

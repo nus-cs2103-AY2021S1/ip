@@ -4,8 +4,18 @@ import java.io.IOException;
 import java.time.DateTimeException;
 import java.time.LocalDate;
 
+/**
+ * Represents an add command.
+ */
 public class AddCommand extends Command{
     private final CommandEnum type;
+
+    /**
+     * Constructs AddCommand initialized with command type and description.
+     * 
+     * @param type Type of add command.
+     * @param description Description of the command.
+     */
     AddCommand(CommandEnum type, String description) {
         this.type = type;
         this.description = description;

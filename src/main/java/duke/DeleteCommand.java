@@ -2,8 +2,16 @@ package duke;
 
 import java.io.IOException;
 
+/**
+ * Represents a delete command.
+ */
 public class DeleteCommand extends Command{
 
+    /**
+     * Constructs a delete command.
+     * 
+     * @param description Description of command
+     */
     DeleteCommand(String description) {
         this.description = description;
     }
