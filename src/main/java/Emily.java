@@ -34,6 +34,7 @@ public class Emily {
                             break;
                         case 'D':
                             temp = line.split(",", 3);
+                            System.out.println("accessing " + temp[2]);
                             Task d = new Deadline(temp[1], temp[2]);
                             d.finished = isCompleted;
                             store.add(d);
@@ -99,6 +100,12 @@ public class Emily {
                     current = store.get(index);
                     current.finished = true;
 
+                    try{
+                        reWrite();
+                    }catch(IOException e){
+                        throw new DukeException("file is not found");
+                    }
+
                     String item = "Nice work! I have marked the task as done:\n" +
                             "     " + current;
 
@@ -133,6 +140,11 @@ public class Emily {
 
                             current = store.get(index);
                             store.remove(index);
+                            try{
+                                reWrite();
+                            } catch(IOException e){
+                                throw new DukeException("file is not found");
+                            }
 
                             System.out.println(divider +
                                     "\n    Got it! I have removed this task: " +
@@ -145,11 +157,15 @@ public class Emily {
 
                         Task item = new Task("");
                         String type = "";
+                        String line = "";
 
                         try {
+
                                 if (input.contains("todo")) {
                                     String describe = input.substring(5);
                                     item = new ToDos(describe);
+                                    line = "T0," + describe;
+                                    writeToFile(FILE_PATH, line+ System.lineSeparator());
 
                                 } else if (input.contains("deadline") && input.contains("/by")) {
                                     type = "deadline";
@@ -157,11 +173,18 @@ public class Emily {
                                     String[] temp = describe.split("/by ");
                                     System.out.println("date is " + temp[1]);
                                     item = new Deadline(temp[0], temp[1]);
+
+                                    line = "T0," + describe + ",temp[1]";
+                                    writeToFile(FILE_PATH, line+ System.lineSeparator());
+
                                 } else if (input.contains("event")) {
                                     type = "event";
                                     String describe = input.substring(6);
                                     String[] temp = describe.split("/at ");
                                     item = new Event(temp[0], temp[1]);
+
+                                    line = "T0," + describe + ",temp[1]";
+                                    writeToFile(FILE_PATH, line + System.lineSeparator());
                                 } else{
                                     throw new DukeException("invalid task");
                                 }
@@ -177,6 +200,8 @@ public class Emily {
                             throw new DukeException("missing or invalid timestamp for " + type + " task");
                         }catch(java.time.format.DateTimeParseException e){
                             throw new DukeException("invalid timestamp, please rewrite in this form yyyy-mm-dd");
+                        } catch (IOException e) {
+                            throw new DukeException("file is not found");
                         }
 
 
@@ -193,57 +218,40 @@ public class Emily {
     }
 
 
-    private static void writeToFile(String filePath, String textToAdd) throws IOException {
-        FileWriter fw = new FileWriter(filePath,true);
-        fw.write(textToAdd);
+    private static void writeToFile(String filePath, String updatedText) throws IOException {
+        FileWriter fw = new FileWriter(filePath, true);
+        fw.write(updatedText);
         fw.close();
     }
 
-    private static ArrayList<String> unravel(ArrayList<Task> s, int starter){
-        ArrayList<String> processed = new ArrayList<>();
-        for(int i = starter; i< s.size(); i++){
+    private static void reWrite() throws IOException{
+        FileWriter fw = new FileWriter(FILE_PATH);
+        String txt = "";
+
+        for(int i = 0; i<store.size(); i++){
+            String temp = "";
             Task current = store.get(i);
-            String line = "";
-            line = (current.finished? "T1" : "T0") + "," + current.description;
-
-            if(current instanceof Deadline){
-                line = line + "," + ((Deadline) current).getBy();
-
-            } else if (current instanceof Event){
-                line = line + "," + ((Event) current).getAt();
+            if(current instanceof ToDos){
+                temp = "T" + (current.finished? "1":"0") + "," + current.description;
+            } else if(current instanceof Deadline){
+                temp = "D" + (current.finished? "1":"0") + "," + current.description + "," + ((Deadline) current).getBy();
+            } else if(current instanceof Event){
+                temp = "E" + (current.finished? "1":"0") + "," + current.description + "," + ((Event) current).getAt();
             }
-            processed.add(line);
+            System.out.println("temp is " + temp);
 
-        }
-        System.out.println(processed.toString());
-
-
-        return processed;
-    }
-
-    private static void updateData(int starter) throws DukeException {
-
-        ArrayList<String> add = unravel(store, starter);
-
-        try {
-            for(int i = 0; i < add.size(); i++){
-                String l = add.get(i);
-                writeToFile(FILE_PATH, l + System.lineSeparator());
-            }
-
-
-        } catch (IOException e) {
-            throw new DukeException("file is not found");
+            txt = txt + temp + System.lineSeparator();
+            System.out.println("txt is "+  txt);
         }
 
-
+        fw.write(txt);
+        fw.close();
     }
 
 
     public static void main(String[] args) throws DukeException {
 
         readData();
-        int starter = store.size();
         String divider = "-------------------";
         boolean end = false;
 
@@ -262,11 +270,6 @@ public class Emily {
         }
 
         System.out.println("bye\n" + divider + "\nBye~, hope to see you again!");
-
-        updateData(starter);
-
-
-
         System.out.println(store.toString());
 
     }

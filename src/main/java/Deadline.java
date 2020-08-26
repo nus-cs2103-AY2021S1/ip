@@ -5,15 +5,17 @@ import java.time.format.DateTimeFormatter;
 public class Deadline extends Task {
 
     protected LocalDate by;
+    protected String str;
 
 
     public Deadline(String description, String str) {
         super(description);
+        this.str = str;
         this.by = LocalDate.parse(str);
     }
 
     public String getBy(){
-        return by;
+        return this.str;
         
     }
 
