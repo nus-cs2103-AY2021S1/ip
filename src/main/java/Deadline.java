@@ -17,6 +17,6 @@ public class Deadline extends Task {
 
     @Override
     public String toWrite() {
-        return "D | " + (this.isDone == true ? '1' : '0') + " | " + this.taskDescription + "|" + this.by;
+        return "D | " + (this.isDone ? '1' : '0') + " | " + this.taskDescription + "| " + this.by.toString().replace('T', ' ');
     }
 }

@@ -17,6 +17,6 @@ public class Event extends Task{
 
     @Override
     public String toWrite() {
-        return "E | " + (this.isDone == true ? '1' : '0')  + " | " + this.taskDescription + "|" + this.time;
+        return "E | " + (this.isDone ? '1' : '0')  + " | " + this.taskDescription + "| " + this.time.toString().replace('T', ' ');
     }
 }
