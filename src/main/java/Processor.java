@@ -1,7 +1,19 @@
 package main.java;
 
+/**
+ * Handles the logic flow of Duke.
+ */
 public class Processor {
 
+    /**
+     * Processes the run of the program.
+     * @param taskList The user's task list.
+     * @param storage The storage storing the user's saved task list.
+     * @param ui UI that handles interaction with user.
+     * @throws DukeException Exception can be thrown due to multiple reasons, such as
+     *                       invalid command, empty task description, empty date or
+     *                       wrong date format.
+     */
     public static void process(TaskList taskList, Storage storage, Ui ui) throws DukeException {
         ui.greetings();
         while(Parser.hasNextLine()) {
@@ -33,9 +45,9 @@ public class Processor {
                     String deadlineTime = Parser.findTime(Parser.getArgs(userInput), "by");
                     Parser.isValidDate(deadlineTime); // check whether the date time format is correct
                     boolean hasTime = Parser.hasTime(deadlineTime); // check whether time is included
-                    Task deadine = new DeadLine(taskDescription, deadlineTime, hasTime, false);
-                    taskList.addTask(deadine);
-                    ui.uiAddTask(deadine, taskList);
+                    Task deadLine = new DeadLine(taskDescription, deadlineTime, hasTime, false);
+                    taskList.addTask(deadLine);
+                    ui.uiAddTask(deadLine, taskList);
                 } else {
                     String taskDescription = Parser.findDescription(Parser.getArgs(userInput));
                     String eventTime = Parser.findTime(Parser.getArgs(userInput), "at");

@@ -6,15 +6,27 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Saves the tasks in the hard disk automatically whenever the task list changes and
+ * loads the data from the hard disk when Duke starts up.
+ */
 public class Storage {
     private static final String folderPath = "data/";
     private final String storagePath;
 
+    /**
+     * Creates a Storage object.
+     * @param fileName Name of the saved file.
+     */
     public Storage(String fileName) {
         this.storagePath = folderPath + fileName;
     }
 
-    public void writeToFile(String textToAdd) {
+    /**
+     * Writes text to the saved file.
+     * @param textToAdd Text to be added into the file.
+     */
+    private void writeToFile(String textToAdd) {
         try {
             FileWriter fileWriter = new FileWriter(storagePath);
             fileWriter.write(textToAdd);
@@ -31,7 +43,8 @@ public class Storage {
 //    }
 
     /**
-     * Method to take the list of tasks from the tasklist and then write it to the file
+     * Writes the entire task list to the saved file.
+     * @param taskList The task list such that its details are copied in the saved file.
      */
     public void writeTasks(TaskList taskList) {
         List<Task> tasks = taskList.getTaskList();
@@ -43,7 +56,9 @@ public class Storage {
     }
 
     /**
-     * Method to read a file
+     * Reads the file and forms a list of individual string representations of tasks in the file.
+     * @return A list of string representation of tasks in the saved file.
+     * @throw IOException IOException is thrown when the directory is not found.
      */
     public List<String> readStorageFile() throws IOException {
         File folder = new File(this.folderPath);
