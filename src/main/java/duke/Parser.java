@@ -9,6 +9,7 @@ import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.EventCommand;
 import duke.command.ExitCommand;
+import duke.command.FindCommand;
 import duke.command.InvalidCommand;
 import duke.command.ListCommand;
 import duke.command.TodoCommand;
@@ -57,6 +58,9 @@ public class Parser {
             } else if (action.equals("delete")) {
                 String taskNumber = splitCommand[1];
                 command = new DeleteCommand(taskNumber);
+            } else if (action.equals("find")) {
+                String keyword = splitCommand[1];
+                command = new FindCommand(keyword);
             } else {
                 command = new InvalidCommand();
             }
@@ -68,6 +72,8 @@ public class Parser {
                 } else if (action.equals("done") || action.equals("delete")) {
                     errorMessage = "Missing task number! "
                             + "Please ensure to key in the task number :)\n";
+                } else if (action.equals("find")) {
+                    errorMessage ="Please indicate the keyword which you want to find.\n";
                 }
             } else { // Deadline/Event missing their respective keywords
                 if (action.equals("deadline")) {

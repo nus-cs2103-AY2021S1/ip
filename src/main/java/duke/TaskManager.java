@@ -67,4 +67,14 @@ public class TaskManager {
     public void markTaskAsDone(Task task) {
         task.markAsDone();
     }
+    
+    public List<Task> findTasks(String keyword) {
+        List<Task> matchingTasks = new ArrayList<>();
+        for (Task task : tasks) {
+            if (task.getDescription().contains(keyword)) {
+                matchingTasks.add(task);
+            }
+        }
+        return matchingTasks;
+    }
 }
