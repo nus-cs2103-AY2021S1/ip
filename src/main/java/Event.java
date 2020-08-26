@@ -13,7 +13,11 @@ public class Event extends Task {
         this.duration = details;
     }
 
-    // Gets duration of the task
+    /**
+     * Returns duration of the Event.
+     *
+     * @return Duration of the Event.
+     */
     public String getEventDetails() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy");
         //return this.duration.format(formatter);

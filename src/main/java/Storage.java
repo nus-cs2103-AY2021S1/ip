@@ -9,12 +9,21 @@ import java.util.Scanner;
  * */
 public class Storage {
     private String filePath;
-    //Default Constructor
+
+    /**
+     * Constructor.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
-    /** Checks if there is data to draw from. **/
+    /**
+     * Loads save file contents (if any).
+     * https://nus-cs2103-ay2021s1.github.io/website/book/cppToJava/misc/fileAccess/
+     *
+     * @return Array list of Tasks deciphered from save file.
+     * @throws FileNotFoundException  If no save file detected.
+     */
     /** Retrieved from https://nus-cs2103-ay2021s1.github.io/website/book/cppToJava/misc/fileAccess/ */
     public ArrayList<Task> loadFileContents() throws FileNotFoundException {
         // Initialize list to be returned
@@ -69,7 +78,13 @@ public class Storage {
         return list;
     }
 
-    /** Saves Duke's current data **/
+    /**
+     * Saves Duke's current data into a file.
+     *
+     * @param list ArrayList of Tasks Duke currently has.
+     * @throws DukeException  If Duke is unable to save into file.
+     * @throws IOException If unable to create or write into specified file path.
+     */
     public void saveToFile(ArrayList<Task> list) throws DukeException {
         try {
             createFile();
@@ -88,18 +103,26 @@ public class Storage {
         }
     }
 
-    /** Writes Data to File **/
-    /** Retrieved from https://nus-cs2103-ay2021s1.github.io/website/book/cppToJava/misc/fileAccess/ */
+    /**
+     * Returns lateral location of the specified position.
+     * https://nus-cs2103-ay2021s1.github.io/website/book/cppToJava/misc/fileAccess/
+     *
+     * @param textToAdd String of text to append to save file.
+     * @throws IOException If unable to write to file.
+     */
     private void writeToFile(String textToAdd) throws IOException {
         FileWriter fw = new FileWriter(filePath, true); // create a FileWriter in append mode
         fw.write(textToAdd);
         fw.close();
     }
 
-    /** Clear the save file of content. */
-    /** Retrieved from
-     * https://stackoverflow.com/questions/29878237
-     *      /java-how-to-clear-a-text-file-without-deleting-it/42282671*/
+    /**
+     * Empties last save file of content.
+     * https://stackoverflow.com/questions/29878237/
+     *     java-how-to-clear-a-text-file-without-deleting-it/42282671
+     *
+     * @throws IOException  If cannot empty file.
+     */
     private void clearTheFile() throws IOException {
         FileWriter fwOb = new FileWriter(filePath, false);
         PrintWriter pwOb = new PrintWriter(fwOb, false);
@@ -108,7 +131,10 @@ public class Storage {
         fwOb.close();
     }
 
-    /** Creation of data to draw from. **/
+    /**
+     * Creates file directory (if not already existing).
+     * Creates new save file (if not already existing).
+     */
     private void createFile() {
         // Make directory if it doesn't already exists
         File dir = new File("data");

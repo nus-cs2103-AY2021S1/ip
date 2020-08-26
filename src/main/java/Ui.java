@@ -18,12 +18,17 @@ public class Ui {
     // Other variable
     private Scanner scanner;
 
-    //Default Constructor
+    /**
+     * Constructors.
+     */
     public Ui() {
         // Using Scanner for reading inputs
         this.scanner = new Scanner(System.in);
     }
 
+    /**
+     * Prints Duke's greetings to user.
+     */
     public void displayGreetings() {
         System.out.println("\nHello, I'm Duke!");
         System.out.println("What can I help you with today?");
@@ -31,37 +36,62 @@ public class Ui {
         System.out.println();
     }
 
+    /**
+     * Print's Duke's farewell to user.
+     */
     public void displayFarewells() {
         System.out.print(outputBreaker);
         System.out.println("Bye! Hoped I helped!");
         System.out.println("\n" + lineBreaker);
     }
 
+    /**
+     * Takes in input from user.
+     *
+     * @return User input as a String.
+     */
     public String readUserInput() {
         // Read user input
         return scanner.nextLine();
     }
 
+    /**
+     * Prints Duke's symbols before response.
+     */
     public void printOutputSymbol() {
         System.out.print(outputBreaker);
     }
 
+    /**
+     * Prints a line.
+     */
     public void printLineBreaker() {
         System.out.println(lineBreaker);
         System.out.println();
     }
 
+    /**
+     * Prints error message for when Duke fails to load save file.
+     */
     public void showLoadingError() {
         System.out.println("... Who? Never mind. Er-hmm.");
         System.out.println();
     }
 
+    /**
+     * Prints error messages from DukeException.
+     */
     public void printError(DukeException e) {
         System.out.println(e.getMessage());
         System.out.println();
     }
 
-    /** Prints all the contents of the list in order **/
+    /**
+     * Prints all tasks within a TaskList (if any).
+     * Else prints a list is empty message.
+     *
+     * @param list TaskList of Duke.
+     */
     public void printList(TaskList list) {
         System.out.print("Here is what I have! ^^\n");
         // Handles printing empty list
@@ -70,7 +100,6 @@ public class Ui {
         } else {
             list.printAllTasks();
         }
-
         System.out.println();
     }
 }

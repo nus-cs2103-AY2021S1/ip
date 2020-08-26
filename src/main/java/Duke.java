@@ -13,7 +13,9 @@ public class Duke {
     private Ui ui;
 
     /**
-     * Duke's Constructor
+     * Duke's Constructor.
+     * Initializes ui, storage and tasks.
+     * Loads in save file (if any).
      *
      * @param filePath  File path for save file.
      */
@@ -31,6 +33,13 @@ public class Duke {
 
     /**
      * Runs Duke within a program loop.
+     *
+     * 1. Displays Greetings
+     * 2. Takes in user input.
+     * 3. Parse user input.
+     * 4. Respond to command in user input.
+     * 5. Return to 2 and loop
+     * OR save and exit from program.
      */
     public void run() {
         // Greet first
@@ -96,7 +105,7 @@ public class Duke {
         }
 
     }
-    
+
     public static void main(String[] args) {
         new Duke("data/tasks.txt").run();
     }

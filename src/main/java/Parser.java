@@ -4,6 +4,14 @@ import java.time.LocalDate;
  * Deals with making sense of the user command
  * */
 public class Parser {
+
+    /**
+     * Parses the provided user input into something Duke understands.
+     *
+     * @param userInput String containing the user's input.
+     * @return The command interpreted.
+     * @throws DukeException  If input is invalid.
+     */
     public static Command parse(String userInput) throws DukeException {
         if(userInput.equals("bye")) {
             System.out.println();
@@ -101,6 +109,14 @@ public class Parser {
         return Command.INVALID;
     }
 
+    /**
+     * Returns lateral location of the specified position.
+     * If the position is unset, NaN is returned.
+     *
+     * @param cmd String array with the command sectioned out.
+     * @return True/False value of whether the command is complete.
+     * @throws DukeException  If command has missing data.
+     */
     public static boolean hasCmdDetails(String[] cmd) throws DukeException {
         try {
             if (cmd[1].equals("") || cmd[1].trim().length() == 0) {
@@ -120,7 +136,13 @@ public class Parser {
         }
     }
 
-    /** Checks if the date entered is valid **/
+    /**
+     * Returns lateral location of the specified position.
+     * If the position is unset, NaN is returned.
+     *
+     * @param dateString String that may be a LocalDate.
+     * @throws DukeException  If dateString is not a LocalDate.
+     */
     public static void checkDate(String dateString) throws DukeException {
         try {
             LocalDate df = LocalDate.parse(dateString);

@@ -9,21 +9,30 @@ public class TaskList {
     /** Note: limit storage to 100 items **/
     private ArrayList<Task> list;
 
-    // Default Constructor
+    /**
+     * Constructors.
+     */
     public TaskList() {
         list = new ArrayList<>(100);
     }
-
     public TaskList(ArrayList<Task> list) {
         this.list = list;
     }
 
-    // Returns list of tasks
+    /**
+     * Returns list of Tasks Duke knows.
+     *
+     * @return Task List.
+     */
     public ArrayList<Task> getList() {
         return this.list;
     }
 
-    // Create To do Task
+    /**
+     * Creates and adds a to-do task into TaskList.
+     *
+     * @param command The to-do command and its details.
+     */
     public void createTodo(String command) {
         String[] instructions = command.split(" ", 2);
         Task t = new Todo(instructions[1]);
@@ -32,7 +41,11 @@ public class TaskList {
         System.out.println("There is now " + list.size() + " tasks in the list!\n");
     }
 
-    // Create Deadline Task
+    /**
+     * Creates and adds a deadline task into TaskList.
+     *
+     * @param command The deadline command and its details.
+     */
     public void createDeadline(String command) {
         String[] instructions = command.split(" ", 2);
         String[] details = instructions[1].split(" /by ", 2);
@@ -42,7 +55,11 @@ public class TaskList {
         System.out.println("There is now " + list.size() + " tasks in the list!\n");
     }
 
-    // Create Event Task
+    /**
+     * Creates and adds a Event task into TaskList.
+     *
+     * @param command The event command and its details.
+     */
     public void createEvent(String command) {
         String[] instructions = command.split(" ", 2);
         String[] details = instructions[1].split(" /at ", 2);
@@ -52,7 +69,12 @@ public class TaskList {
         System.out.println("There is now " + list.size() + " tasks in the list!\n");
     }
 
-    // Marking Tasks as done
+    /**
+     * Identifies a specific task and mark it as done.
+     *
+     * @param command The done command and its details.
+     * @throws DukeException If index noted in command is invalid.
+     */
     public void markTaskDone(String command) throws DukeException {
         String[] instructions = command.split(" ", 2);
         int index = Integer.parseInt(instructions[1]) - 1;
@@ -66,7 +88,12 @@ public class TaskList {
         }
     }
 
-    // Deleting Tasks
+    /**
+     * Identifies a specific task and deletes it from TaskList.
+     *
+     * @param command The delete command and its details.
+     * @throws DukeException If index noted in command is invalid.
+     */
     public void deleteTask(String command) throws DukeException {
         String[] instructions = command.split(" ", 2);
         int index = Integer.parseInt(instructions[1]) - 1;
@@ -81,6 +108,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Returns whether the task list is empty.
+     *
+     * @return True if list is empty, False otherwise.
+     */
     public boolean isListEmpty() {
         if (list.isEmpty()) {
             return true;
@@ -88,6 +120,10 @@ public class TaskList {
             return false;
         }
     }
+
+    /**
+     * Prints out all of the tasks in the TaskList.
+     */
     public void printAllTasks() {
         // Prints all tasks in Duke's list
         for (int i = 0; i < list.size(); i++) {

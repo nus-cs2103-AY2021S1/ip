@@ -10,31 +10,52 @@ public class Task {
     protected String name;
     protected boolean isDone;
 
-    // Constructors
     public Task() {
 
     }
+    /**
+     * Constructor for Task.
+     *
+     * @param name  Name of Task.
+     */
     public Task(String name) {
         this.name = name;
         this.isDone = false;
     }
 
-    // Gets Status of task
+    /**
+     * Returns status of the Task.
+     *
+     * @return Task Status.
+     */
     public boolean getStatus() {
         return this.isDone;
     }
 
-    // Sets Status of task
+    /**
+     * Set Task status to specified value.
+     *
+     * @param status  Status to set Task to.
+     * @return Lateral location.
+     */
     public void markedDone(boolean status) {
         this.isDone = status;
     }
 
-    // Gets name of task
+    /**
+     * Returns name of the Task.
+     *
+     * @return Lateral location.
+     */
     public String getDescription() {
         return this.name;
     }
 
-    // Creates save file data
+    /**
+     * Returns details of the Task in a format loadable by Duke.
+     *
+     * @return String in proper format for Duke's save file.
+     */
     public String toSaveData() {
         if(isDone) {
             return "1 - " + this.name;
