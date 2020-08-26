@@ -53,6 +53,7 @@ Available Commands:
 'event'
 'list'
 'delete'
+'find'
 'bye'
 >> Duke> Enter task details:
 >> Duke> Yo! Command Syntax Error. '<Details> /by or /at <dd/MM/yy [HH:MM]>'
@@ -60,7 +61,9 @@ Duke> Enter task details:
 >> Duke> Yo! Details/Time are missing.
 Duke> Enter task details:
 >> Duke> I've added 'briefing' to your Task List
->> Duke> Unrecognised Command :(, type 'help' for available commands.
 >> Duke> Here's your Task List:
+1. [E][✘] briefing (at: 07/01/20 14:00)
+>> Duke> Enter a keyword:
+>> Duke> Here are the task(s) matching the keyword: briefing
 1. [E][✘] briefing (at: 07/01/20 14:00)
 >> Duke> See you soon!

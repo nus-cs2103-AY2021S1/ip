@@ -20,6 +20,7 @@ event
 briefing at 07/01/20 14:00
 briefing /at
 briefing /at 07/01/20 14:00
-ls
 list
+find
+briefing
 bye
