@@ -33,10 +33,10 @@ public class AddCommand extends Command {
                     break;
             }
         } catch (DateTimeException e) {
-            throw new DukeException("Please enter deadline in this format: dd/MM/yyyy timeIn24Hr" +
+            throw new DukeException("Please enter dates in this format: dd/MM/yyyy timeIn24Hr" +
                     "\nE.g. 01/12/2020 2359");
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeException("Invalid description of a deadline item!");
+            throw new DukeException("Invalid description!");
         }
     }
 
