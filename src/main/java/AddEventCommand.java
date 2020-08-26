@@ -10,7 +10,7 @@ public class AddEventCommand extends AddCommand {
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        if (description.isEmpty()) {
+        if (description.isBlank()) {
             throw new DukeException("The description of an event cannot be empty.");
         }
 

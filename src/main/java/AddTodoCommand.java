@@ -5,7 +5,7 @@ public class AddTodoCommand extends AddCommand {
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        if (description.isEmpty()) {
+        if (description.isBlank()) {
             throw new DukeException("The description of a todo cannot be empty.");
         }
 
