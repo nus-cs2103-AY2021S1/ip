@@ -14,7 +14,7 @@ import java.util.Scanner;
  */
 
 public class Storage {
-    File file;
+    private File file;
 
     Storage(String filePath)  {
         this.file = new File(filePath);

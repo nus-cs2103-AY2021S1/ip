@@ -1,4 +1,5 @@
 package duke;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -6,7 +7,7 @@ import java.util.Scanner;
  */
 
 public class Ui {
-    Scanner sc = new Scanner(System.in);
+    private Scanner sc = new Scanner(System.in);
 
     public Ui() {
         System.out.println("Hello! I'm meimei ^_^\nI could scream at you all day!");
@@ -26,6 +27,34 @@ public class Ui {
 
     public static void bye() {
         System.out.println("Bye! Meimei will miss u :(");
+    }
+
+    /**
+     * A method to respond to the user the list of tasks containing the keyword.
+     * @param isEmpty is true if there are no tasks found containing the keyword.
+     * @param tasks that contains the searched keyword.
+     */
+    public static void printFoundTask(Boolean isEmpty, List<Task> tasks) {
+        if (!isEmpty) {
+            System.out.println("Meimei found these matching tasks:");
+            for (int i = 0; i < tasks.size(); i++) {
+                System.out.println((i + 1) + "." + tasks.get(i).toString());
+            }
+        } else {
+            System.out.println("No matching tasks found :(");
+        }
+    }
+
+    /**
+     * A method that prints the task list.
+     * @param tasks to be printed.
+     */
+
+    public static void printTaskList(List<Task> tasks) {
+        System.out.println("Here are the tasks in your list: ");
+        for (int i = 0; i < tasks.size(); i++) {
+            System.out.println((i+1) + "." + tasks.get(i).toString());
+        }
     }
 
     /**

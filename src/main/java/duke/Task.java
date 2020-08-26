@@ -15,6 +15,12 @@ public class Task {
         this.isDone = false;
     }
 
+    /**
+     * A method to check if a task description contains the keyword specified.
+     * @param name of the keyword.
+     * @return true if the task description contains the keyword.
+     */
+
     public Task(String name, boolean isDone) {
          this.description = name;
          this.isDone = isDone;

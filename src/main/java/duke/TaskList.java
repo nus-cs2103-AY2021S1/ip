@@ -19,12 +19,12 @@ public class TaskList {
 
     /**
      * updating the taskList from the database if file is found
-     * @param s
+     * @param listOfTask to be created.
      */
-    TaskList(List<String> s) {
+    TaskList(List<String> listOfTask) {
         this.tasks = new ArrayList<>();
-        for (int i = 0; i < s.size(); i++) {
-            addTaskFromFile(s.get(i), tasks);
+        for (int i = 0; i < listOfTask.size(); i++) {
+            addTaskFromFile(listOfTask.get(i), tasks);
         }
     }
 
@@ -125,6 +125,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * A method to find any task that contains the keyword specified and asks the Ui to print.
+     * @param name of the keyword.
+     */
+
     public static void findTask(String name) {
         List<Task> result = new ArrayList<>();
         for (int i = 0; i < tasks.size(); i++) {
@@ -133,20 +138,14 @@ public class TaskList {
             }
         }
         if (result.isEmpty()) {
-            System.out.println("No matching tasks found :(");
+            Ui.printFoundTask(false, result);
         } else {
-            System.out.println("Meimei found these matching tasks:");
-            for (int i = 0; i < result.size(); i++) {
-                System.out.println((i + 1) + "." + result.get(i).toString());
-            }
+            Ui.printFoundTask(true, result);
         }
     }
 
     public static void printTaskList() {
-        System.out.println("Here are the tasks in your list: ");
-        for (int i = 0; i < tasks.size(); i++) {
-            System.out.println((i+1) + "." + tasks.get(i).toString());
-        }
+        Ui.printTaskList(tasks);
     }
 
     /**
