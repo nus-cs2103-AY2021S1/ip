@@ -15,14 +15,28 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/** Contains functions for saving into and loading from save file */
 public class SaveManager {
 
+    /** Represents save file directory */
     private Path saveFilePath;
 
+    /**
+     * Creates a new <code>SaveManager</code>.
+     *
+     * @param saveFilePath save file directory.
+     */
     public SaveManager(Path saveFilePath) {
         this.saveFilePath = saveFilePath;
     }
 
+    /**
+     * Loads save data from save file at <code>saveFilePath</code>.
+     * If unable to load, returns an empty <code>TaskManager</code> and attempts to create a new save data file.
+     *
+     * @return <code>TaskManager</code> containing tasks loaded from save file.
+     * @throws DukeSaveDataException Unable to load save data.
+     */
     public TaskManager load() throws DukeSaveDataException {
 
         try {
@@ -47,6 +61,12 @@ public class SaveManager {
         }
     }
 
+    /**
+     * Saves data from given <code>TaskManager</code> to save file in <code>saveFilePath</code>.
+     *
+     * @param taskManager Contains task data to save.
+     * @throws DukeSaveDataException If unable to save data.
+     */
     public void save(TaskManager taskManager) throws DukeSaveDataException{
         final String[] saveData = {""};
         taskManager.forEach(task -> saveData[0] += this.toSaveFormat(task.convertToHashMap()));
@@ -60,11 +80,11 @@ public class SaveManager {
         }
     }
 
-    public String keyValueToString(String key, String value) {
+    private String keyValueToString(String key, String value) {
         return "{\"" + key + "\":\"" + value + "\"}";
     }
 
-    public String toSaveFormat(HashMap<String, String> objectData) {
+    private String toSaveFormat(HashMap<String, String> objectData) {
         HashMap<String, String> copyData = new HashMap<>(objectData);
         ArrayList<String> saveStrings = new ArrayList<>();
         saveStrings.add(this.keyValueToString("type", copyData.get("type")));
@@ -77,7 +97,7 @@ public class SaveManager {
         return saveStrings.toString() + "\n";
     }
 
-    public HashMap<String, String> loadMapFromSave(String objectData) {
+    private HashMap<String, String> loadMapFromSave(String objectData) {
         String copyData = objectData.substring(2, objectData.length()-2);
         String[] paramsList = copyData.split("}, \\{");
 
@@ -92,7 +112,7 @@ public class SaveManager {
         return paramsMap;
     }
 
-    public Task loadTaskFromMap(HashMap<String, String> params) throws DukeSaveDataException{
+    private Task loadTaskFromMap(HashMap<String, String> params) throws DukeSaveDataException{
         String type = params.get("type");
         String name = params.get("name");
         boolean isDone = params.get("done").equals("true");
@@ -109,7 +129,7 @@ public class SaveManager {
         }
     }
 
-    public Task loadTaskFromSave(String objectData) throws DukeSaveDataException{
+    private Task loadTaskFromSave(String objectData) throws DukeSaveDataException{
         return this.loadTaskFromMap(this.loadMapFromSave(objectData));
     }
 

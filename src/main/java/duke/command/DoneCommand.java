@@ -6,12 +6,28 @@ import duke.Ui;
 import duke.exception.DukeInputException;
 import duke.task.Task;
 
+/**
+ * Represents user command to mark a <code>Task</code> as done.
+ */
 public class DoneCommand extends ComplexCommand {
 
+    /**
+     * Creates a <code>DoneCommand</code> with the given parameters.
+     *
+     * @param params Parameters.
+     */
     public DoneCommand(String params) {
         super(params);
     }
 
+    /**
+     * Finds and marks <code>Task</code> at given index in <code>taskManager</code> as done.
+     * Displays an error message without terminating software loop if parameters are invalid.
+     *
+     * @param ui Print-out and display manager.
+     * @param taskManager <code>Task</code> manipulation manager.
+     * @param saveManager Handles saving and loading.
+     */
     @Override
     public void execute(Ui ui, TaskManager taskManager, SaveManager saveManager) {
 
@@ -28,7 +44,7 @@ public class DoneCommand extends ComplexCommand {
 
     }
 
-    public int parseParams(int taskManagerSize) throws DukeInputException {
+    private int parseParams(int taskManagerSize) throws DukeInputException {
         if (this.params.equals("")) {
             throw new DukeInputException("'done' requires parameters.\n"
                     + "Use case: done <task number>");
@@ -47,8 +63,4 @@ public class DoneCommand extends ComplexCommand {
         return i;
     }
 
-    @Override
-    public boolean isByeCommand() {
-        return false;
-    }
 }
