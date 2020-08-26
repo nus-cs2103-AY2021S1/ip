@@ -197,21 +197,9 @@ public class Duke {
 
     }
 
-    public static void main(String[] args) {
         // welcome message printed when the user runs Duke
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
         // create a new file object needed for Duke to read from and write to
         File taskFile = new File("src/main/java/tasks.txt");
-        greeting();
-
-        // this field keeps track of the tasks given to Duke
-        ArrayList<Task> tasks = new ArrayList<>();
-
         initializeFile(taskFile, tasks);
 
         // this field is used to receive input given by the user
@@ -400,5 +388,21 @@ public class Duke {
             }
 
         }
+
+    }
+
+    public static void main(String[] args) {
+        String logo = " ____        _        \n"
+                + "|  _ \\ _   _| | _____ \n"
+                + "| | | | | | | |/ / _ \\\n"
+                + "| |_| | |_| |   <  __/\n"
+                + "|____/ \\__,_|_|\\_\\___|\n";
+        System.out.println("Hello from\n" + logo);
+        greeting();
+
+        // this field keeps track of the tasks given to Duke
+        ArrayList<Task> tasks = new ArrayList<>();
+
+        userPrompt(tasks);
     }
 }
