@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Save {
+public class Storage {
 
     //public static String home = System.getProperty("src/data/duke.txt");
     public static final String home = "data";
@@ -62,7 +62,7 @@ public class Save {
                 String[] formatter = task.toString().split(" ");
                 fw.write(formatter[0] + " " +
                         formatter[1] + " " +
-                        formatter[2] );
+                        (formatter.length > 2 ? formatter[2] : ""));
             }
 
             fw.close();
