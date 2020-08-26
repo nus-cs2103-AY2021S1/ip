@@ -1,17 +1,45 @@
 import java.util.Scanner;
+import java.io.IOException;
+
 import java.util.ArrayList;
-import java.util.List;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+
+
 
 public class Duke {
+
     public static void main(String[] args) {
 
-        /*String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        */
+        // read file
+        String filePath = "data/duke.txt";
+
+        try {
+            FileReading.printFileContents(filePath);
+        } catch (FileNotFoundException e) { // if the required file/path directory is not yet created
+            System.out.println("Creating the storage file...");
+
+            File f = new File(filePath);
+            if(!f.getParentFile().exists()){
+                f.getParentFile().mkdirs(); //create directory if not created
+            }
+
+            if(!f.exists()){
+                try {
+                    f.createNewFile(); // create file if not created
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+            }
+
+            // read the file again
+            try {
+                FileReading.printFileContents(filePath);
+            } catch (FileNotFoundException ex) {
+                ex.printStackTrace();
+            }
+        }
 
         String line = "____________________________________________________________\n";
         String greeting = "Hello! I'm Duke from the chat bot universe ~ \n" +
@@ -45,15 +73,7 @@ public class Duke {
                     System.out.println(line + "Here are the tasks in your list: \n");
                     for (int i = 1; i < count + 1; i++) {
                         Task cur = list.get(i - 1);
-                        String type = "";
-                        if (cur instanceof ToDo) {
-                            type = "[T]";
-                        } else if (cur instanceof Deadline) {
-                            type = "[D]";
-                        } else {
-                            type = "[E]";
-                        }
-                        System.out.println("" + i + "." + type + "[" + cur.getStatusIcon() + "] " + cur);
+                        System.out.println("" + i + "." + "[" + cur.getType() + "][" + cur.getStatusIcon() + "] " + cur);
                     }
                     System.out.println(line);
                 }
@@ -77,6 +97,9 @@ public class Duke {
                         System.out.println(line);
                     }
                 }
+
+                Duke.updateTasks(count, list, filePath);
+
             }  else if (pieces[0].equals("delete")){
             if (pieces.length == 1) {
                 ex = new InvalidInputException("Hey, you forgot to tell me which task to delete");
@@ -89,39 +112,32 @@ public class Duke {
                 } else {
                     Task removed = list.get(num-1);
                     count --;
-                    String type = "";
-                    if (removed instanceof ToDo) {
-                        type = "T";
-                    } else if (removed instanceof Deadline) {
-                        type = "D";
-                    } else {
-                        type = "E";
-                    }
-                    s = "[" + type + "]" + "[\u2718] " + removed;
+
+                    s = "[" + removed.getType() + "][\u2718] " + removed;
                     System.out.println(line);
                     System.out.println("Got it. I've removed this task: \n" + s);
                     System.out.println("Now you have " + count + " tasks in the list. ");
                     System.out.println(line);
                 }
             }
+            Duke.updateTasks(count, list, filePath);
         }else {
                 if (pieces.length == 1) {
                     switch (pieces[0]) {
-                        case "todo":
-                            ex = new InvalidInputException("Heyy, you forget the description for your todo!");
-                            break;
+                    case "todo":
+                        ex = new InvalidInputException("Heyy, you forget the description for your todo!");
+                        break;
+                    case "deadline":
+                        ex = new InvalidInputException("Heyy, you forget the description for your deadline!");
+                        break;
 
-                        case "deadline":
-                            ex = new InvalidInputException("Heyy, you forget the description for your deadline!");
-                            break;
+                    case "event":
+                        ex = new InvalidInputException("Heyy, you forget the description for your event!");
+                        break;
 
-                        case "event":
-                            ex = new InvalidInputException("Heyy, you forget the description for your event!");
-                            break;
-
-                        default:
-                            ex = new InvalidInputException("Ah oh! I didn't know what that means >n<, sorry! ");
-                            break;
+                    default:
+                        ex = new InvalidInputException("Ah oh! I didn't know what that means >n<, sorry! ");
+                        break;
                     }
                     System.err.println(line + ex.getMessage() + "\n" + line);
                 } else {
@@ -167,11 +183,30 @@ public class Duke {
                         System.out.println(line);
                     }
                 }
+                Duke.updateTasks(count, list, filePath);
             }
-                //echo
-                //System.out.println(line + temp + "\n" + line);
+
         }
 
     }
+
+    public static void updateTasks(int count, ArrayList<Task> list, String filePath) {
+        String output = "";
+        for (int i = 1; i < count + 1; i++) {
+            Task cur = list.get(i - 1);
+            String currentTask = "" + i + "." + "[" + cur.getType() + "][" + cur.getStatusIcon() + "] " + cur + "\n";
+            output = output + currentTask;
+
+        }
+
+        // System.out.println(output);
+
+        try {
+            FileWriting.writeToFile(filePath, output);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
 
