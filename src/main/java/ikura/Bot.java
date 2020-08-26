@@ -25,16 +25,33 @@ import ikura.util.Pair;
 import ikura.util.StreamUtils;
 import ikura.util.InvalidInputException;
 
+/**
+ * The main class containing the functionality of the application. Does not own the
+ * tasklist nor the frontend.
+ */
 public class Bot {
 
     private final TaskList tasks;
     private final Frontend ui;
 
+    /**
+     * Constructs a new Bot using the given Frontend interface and the given TaskList.
+     *
+     * @param ui    the frontend interface to use.
+     * @param tasks the TaskList to use.
+     */
     public Bot(Frontend ui, TaskList tasks) {
         this.tasks  = tasks;
         this.ui     = ui;
     }
 
+    /**
+     * Parses a line of user input, and executes the command as appropriate. The
+     * return value specifies whether or not the bot should print the exit message.
+     *
+     * @param str the line user input.
+     * @return true if the bot should continue, false if it should exit.
+     */
     public boolean processCommand(String str) {
 
         var sc = new Scanner(str);
