@@ -1,13 +1,7 @@
 package duke.parser;
 
+import duke.command.*;
 import duke.exception.DukeException;
-import duke.command.Command;
-import duke.command.AddCommand;
-import duke.command.DeleteCommand;
-import duke.command.DoneCommand;
-import duke.command.ExitCommand;
-import duke.command.ListCommand;
-import duke.command.UnknownCommand;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -31,6 +25,8 @@ public class Parser {
             command = new AddCommand(parseTask("deadline", fullCommand));
         } else if (fullCommand.startsWith("event")) {
             command = new AddCommand(parseTask("event", fullCommand));
+        } else if (fullCommand.startsWith("find")) {
+            command = new FindCommand(fullCommand.split(" ")[1]);
         } else {
             command = new UnknownCommand(fullCommand);
         }

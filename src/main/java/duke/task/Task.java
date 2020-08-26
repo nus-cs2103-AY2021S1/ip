@@ -25,4 +25,8 @@ public class Task {
     public String toData() {
         return "";
     }
+
+    public boolean hasKeyword(String keyword) {
+        return description.contains(keyword) ? true : false;
+    }
 }
