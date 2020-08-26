@@ -18,4 +18,16 @@ public class Todo extends Task {
     public String toSaveString() {
         return String.format(SAVE_STRING, super.isDone, super.taskName);
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (!(obj instanceof Todo)) {
+            return false;
+        }
+        if (this == obj) {
+            return true;
+        }
+        Todo todo = (Todo) obj;
+        return super.isDone == todo.isDone && super.taskName.equalsIgnoreCase(todo.taskName);
+    }
 }

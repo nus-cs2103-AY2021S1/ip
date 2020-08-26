@@ -28,4 +28,12 @@ public class Deadline extends Task {
     public String toSaveString() {
         return String.format(SAVE_STRING, super.isDone, super.taskName, this.deadline);
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Deadline d = (Deadline) o;
+        return super.equals(d) && this.deadline.equals(d.deadline);
+    }
 }

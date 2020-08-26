@@ -1,3 +1,5 @@
+import java.util.Objects;
+
 public abstract class Task {
     protected boolean isDone;
     protected String taskName;
@@ -24,4 +26,15 @@ public abstract class Task {
     }
 
     public abstract String toSaveString();
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Task task = (Task) o;
+
+        if (isDone != task.isDone) return false;
+        return Objects.equals(taskName, task.taskName);
+    }
 }

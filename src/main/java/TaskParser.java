@@ -1,4 +1,5 @@
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 
 // TODO: 26/8/20 Consider a visitor pattern
 // TODO: 26/8/20 Add try-catch clause
@@ -30,7 +31,8 @@ public class TaskParser {
         return new Event(isDone, taskName, timeRangeStr);
     }
 
-    public static Deadline parseDeadline(boolean isDone, String taskName, String deadlineStr) {
+    public static Deadline parseDeadline(boolean isDone, String taskName, String deadlineStr)
+            throws DateTimeParseException {
         // TODO: 26/8/20 Handle DateTimeParseException
         LocalDate deadline = LocalDate.parse(deadlineStr);
         return new Deadline(isDone, taskName, deadline);
