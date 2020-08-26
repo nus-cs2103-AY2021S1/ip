@@ -48,4 +48,9 @@ event tP /at 9999-99-99 2200-2000
 event tP /at 9999-99-99 2400-2500
 event tP /at 2020/08/25 2200-2359
 list
+find book
+find 25 Aug
+find
+find //
+find 2020-08-25
 bye
