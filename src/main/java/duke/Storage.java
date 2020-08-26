@@ -3,13 +3,27 @@ package duke;
 import java.io.*;
 import java.util.Scanner;
 
+/**
+ * Handles reading and writing from database.
+ */
 public class Storage {
     String dest;
 
+    /**
+     * Initialise the destination of database.
+     *
+     * @param dest
+     */
     public Storage(String dest) {
         this.dest = dest;
     }
 
+    /**
+     * Returns the taskList saved at destination. If file does not exist attempts to create one.
+     *
+     * @return a taskList
+     * @throws IOException error creating the file
+     */
     public TaskList loadFile() throws IOException {
         try {
             TaskList tasks = new TaskList();
@@ -29,6 +43,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Saves a taskList to file at destination.
+     *
+     * @param taskList the taskList to be saved
+     * @throws FileNotFoundException couldn't find the file at destination.
+     */
     public void writeFile(TaskList taskList) throws FileNotFoundException {
         try {
             BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(dest));

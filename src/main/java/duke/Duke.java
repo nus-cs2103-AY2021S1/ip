@@ -9,6 +9,11 @@ public class Duke {
     private Parser parser;
     String dest;
 
+    /**
+     * Constructor with specified directory of database.
+     *
+     * @param dest directory of database
+     */
     public Duke(String dest) {
         this.dest = dest;
         ui = new Ui();
