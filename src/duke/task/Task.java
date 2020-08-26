@@ -21,7 +21,7 @@ public class Task {
     }
 
     public String getTaskType() {
-        return "duke/task";
+        return "task";
     }
 
     public boolean isTaskDone() {
