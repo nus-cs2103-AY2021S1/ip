@@ -74,4 +74,31 @@ public class TaskList {
         this.storage.updateFile();
         return sb.toString();
     }
+
+    public String find(String item) {
+        StringBuilder sb = new StringBuilder();
+
+        ArrayList<Task> matching = new ArrayList<Task>();
+
+        for (Task task : tasks) {
+            if (task.toString().contains(item)) {
+                matching.add(task);
+            }
+        }
+
+        if (matching.size() == 0) {
+            sb.append("there are no tasks matching the given search");
+        } else {
+            sb.append("here are the matching tasks in your list:\n");
+
+            Iterator i = matching.iterator();
+            int counter = 1;
+            sb.append(counter + ". ").append(i.next());
+            while (i.hasNext()) {
+                counter++;
+                sb.append("\n").append(counter + ". ").append(i.next());
+            }
+        }
+        return sb.toString();
+    }
 }

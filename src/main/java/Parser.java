@@ -38,7 +38,10 @@ public class Parser {
                 } else if (firstWord.equals("event")) {
                     Task task = new Event(input);
                     sb.append(this.tasks.add(task));
-                } else {
+                } else if (firstWord.equals("find")) {
+                    sb.append(this.tasks.find(input.substring(5)));
+                }
+                else {
                     throw new DukeException("oops! im sorry, but i do not know what that means :-(");
                 }
             } catch (EmptyDescriptionException e) {
