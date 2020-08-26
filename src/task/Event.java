@@ -1,12 +1,14 @@
 package task;
 
+import time.Time;
+
 public class Event extends Task {
 
-    private String time;
+    private Time time;
 
     public Event(String icon, String description, String time) {
         super(icon, description);
-        this.time = time;
+        this.time = Time.stringToTime(time);
     }
 
     @Override

@@ -1,12 +1,14 @@
 package task;
 
+import time.Time;
+
 public class Deadline extends Task {
 
-    private String deadline;
+    private Time deadline;
 
     public Deadline(String icon, String description, String deadline) {
         super(icon, description);
-        this.deadline = deadline;
+        this.deadline = Time.stringToTime(deadline);
     }
 
     @Override
