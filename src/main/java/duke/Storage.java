@@ -241,7 +241,7 @@ public class Storage {
     public void findRelevantTask(String keyword) throws DukeException{
         try {
             String searchName = keyword.substring(keyword.indexOf("find") + 5).trim();
-            List<Task> results = taskList.searchTask(searchName.toLowerCase());
+            List<Task> results = taskList.searchTask(searchName.split("\\s+"));
 
             if (results.isEmpty()) {
                 ui.noRelevantTask();

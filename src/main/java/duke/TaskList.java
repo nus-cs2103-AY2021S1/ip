@@ -113,14 +113,16 @@ public class TaskList {
      * Iterates through the whole list of <code>Task</code> and returns a list containing all <code>Task</code> with
      * the specified keyword.
      *
-     * @param keyword to be searched
+     * @param keywords to be searched
      * @return a list containing all <code>Task</code> with the keyword.
      */
-    public List<Task> searchTask(String keyword) {
+    public List<Task> searchTask(String ... keywords) {
         List<Task> validTask = new ArrayList<>();
         for (Task t : listOfTask) {
-            if (t.toString().toLowerCase().contains(keyword)) {
-                validTask.add(t);
+            for (String keyword : keywords) {
+                if (t.toString().toLowerCase().contains(keyword.toLowerCase())) {
+                    validTask.add(t);
+                }
             }
         }
         return validTask;

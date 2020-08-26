@@ -34,4 +34,5 @@ todo buy boOks
 todo read books
 find    books
 find book
+find book   meeting
 bye
