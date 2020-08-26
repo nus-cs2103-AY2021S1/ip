@@ -71,7 +71,6 @@ public class Ui {
      * @param message the message of the bot to be formatted.
      */
     public void sendMessage(String message) {
-        String line = "    --------------------------------------------------------------";
         StringBuilder sb = new StringBuilder(message);
         int offset = 0;
         while (true) {
