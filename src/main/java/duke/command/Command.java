@@ -15,7 +15,7 @@ import duke.exception.DukeStorageException;
  */
 public abstract class Command {
 
-    public String inputCommand;
+    private String inputCommand;
 
 
     /**
@@ -47,4 +47,8 @@ public abstract class Command {
      * @return Whether the command is an exit command
      */
     public abstract boolean isExit();
+
+    public String getInputCommand() { return inputCommand; }
+
+    public void setInputCommand(String inputCommand) { this.inputCommand = inputCommand; }
 }

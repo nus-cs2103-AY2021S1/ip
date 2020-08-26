@@ -17,7 +17,7 @@ import java.util.List;
 public class Storage{
 
     private final String path;
-    private final String fileName = "saved.duke";
+    private final String FILENAME = "saved.duke";
 
     /**
      * Public constructor of storage
@@ -45,7 +45,7 @@ public class Storage{
         List<Task> list = new ArrayList<>();
 
         try{
-            File file = new File(this.path + this.fileName);
+            File file = new File(this.path + this.FILENAME);
             if(file.exists()) {
                 FileInputStream fis = new FileInputStream(file);
 
@@ -68,18 +68,18 @@ public class Storage{
      */
     public void save(TaskList tasks) throws DukeStorageException{
         try{
-            File f = new File(path);
-            if(!f.exists()){
-                f.mkdirs();
+            File tempFile = new File(path);
+            if(!tempFile.exists()){
+                tempFile.mkdirs();
             }
 
-            File file = new File(this.path + this.fileName);
+            File file = new File(this.path + this.FILENAME);
             file.delete();
             file.createNewFile();
 
             FileOutputStream fos = new FileOutputStream(file);
-            byte[] data = SerializeUtil.serialize(tasks.getList());
-            fos.write(data);
+            byte[] serializedData = SerializeUtil.serialize(tasks.getList());
+            fos.write(serializedData);
         } catch (IOException e) {
             throw new DukeStorageException("Failed to save changes.");
         }
