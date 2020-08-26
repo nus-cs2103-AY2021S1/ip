@@ -16,7 +16,7 @@ public class Duke {
     /**
      * Creates a new Duke object which will create and access the saved task list at the specified 
      * filepath.
-     * 
+     *
      * @param filePath Specifies the where to create and/or access the saved task list.
      */
     public Duke(String filePath) {
@@ -35,7 +35,7 @@ public class Duke {
     private void run() {
         ui.loadTaskList(tasks);
         ui.showGreetings();
-        
+
         while (!Ui.EXIT) {
             String userCommand = ui.readUserCommand();
             try {
@@ -45,7 +45,7 @@ public class Duke {
             }
         }
     }
-    
+
     public static void main(String[] args) {
         new Duke("data/tasks").run();
     }

@@ -6,7 +6,7 @@ package duke.task;
 public class Todo extends Task {
     /**
      * Creates a new task with the specified description of what to do.
-     * 
+     *
      * @param description Description of what to do.
      */
     public Todo(String description) {

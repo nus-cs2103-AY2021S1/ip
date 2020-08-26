@@ -13,7 +13,7 @@ public class Task {
 
     /**
      * Creates a new task with the specified description.
-     * 
+     *
      * @param description Description of task.
      */
     public Task(String description) {
@@ -23,7 +23,7 @@ public class Task {
 
     /**
      * Returns a tick if the task is done. Otherwise, returns a cross.
-     * 
+     *
      * @return A tick if the task is done and a cross if the task is not done.
      */
     public String getStatusIcon() {
@@ -39,7 +39,7 @@ public class Task {
 
     /**
      * Returns true if the task is done. Otherwise, returns false.
-     * 
+     *
      * @return true if the task is done and returns false if the task is not done.
      */
     public boolean hasDoneStatus() {
@@ -48,7 +48,7 @@ public class Task {
 
     /**
      * Returns a String representation of a task.
-     * 
+     *
      * @return String representation of a task.
      */
     @Override
