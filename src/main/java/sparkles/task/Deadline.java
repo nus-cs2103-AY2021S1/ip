@@ -34,7 +34,7 @@ public class Deadline extends Task {
         return time.format(timeFormatter);
     }
 
-    private String printDateNTime() {
+    public String printDateNTime() {
         return printDate() + " " + printTime();
     }
 

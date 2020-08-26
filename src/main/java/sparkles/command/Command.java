@@ -13,6 +13,10 @@ abstract public class Command {
         this.command = command;
     }
 
+    public String getCommand() {
+        return command;
+    }
+
     abstract public void execute(TaskList taskList, Ui ui, Storage storage) throws SparklesException;
 
     public boolean isExit() {
