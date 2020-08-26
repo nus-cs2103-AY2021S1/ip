@@ -9,13 +9,13 @@ import java.util.ArrayList;
  */
 public class TaskList {
     
-    private ArrayList<Task> taskList;
+    private ArrayList<Task> tasks;
 
     /**
      * Creates a brand new task list.
      */
     public TaskList() {
-        taskList = new ArrayList<>();
+        tasks = new ArrayList<>();
     }
 
     /**
@@ -27,11 +27,11 @@ public class TaskList {
     }
     
     public void addTask(Task task) {
-        taskList.add(task);
+        tasks.add(task);
     }
     
     public void deleteTask(Task task) {
-        taskList.remove(task);
+        tasks.remove(task);
     }
     
     public void markAsDone(Task task) {
@@ -39,11 +39,11 @@ public class TaskList {
     } 
     
     public Task getTask(int taskIdx) {
-        return taskList.get(taskIdx - 1);
+        return tasks.get(taskIdx - 1);
     }
     
     public int size() {
-        return taskList.size();
+        return tasks.size();
     }
     
     @Override
@@ -56,7 +56,7 @@ public class TaskList {
         StringBuilder output = new StringBuilder();
         
         for (int i = 0; i < size(); i++) {
-            output.append(i + 1).append(". ").append(taskList.get(i)).append("\n");
+            output.append(i + 1).append(". ").append(tasks.get(i)).append("\n");
         }
         
         output.deleteCharAt(output.length() - 1);

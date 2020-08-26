@@ -1,6 +1,5 @@
 package duke;
 
-
 import duke.command.Command;
 import duke.command.InvalidCommand;
 

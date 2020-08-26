@@ -14,7 +14,7 @@ public class InvalidCommand extends Command {
      * @param tasks List of tasks.
      * @param ui Ui object.
      * @param storage Storage object.
-     * @throws DukeException to signify an invalid command.
+     * @throws DukeException To signify an invalid command.
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {

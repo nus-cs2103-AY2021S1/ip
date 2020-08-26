@@ -14,7 +14,7 @@ public class DeleteCommand extends Command {
     /**
      * Creates a new DeleteCommand.
      * @param taskIdx Index of the task to be deleted.
-     * @throws DukeException if no task index is provided, or if the format provided is invalid.
+     * @throws DukeException If no task index is provided, or if the format provided is invalid.
      */
     public DeleteCommand(String taskIdx) throws DukeException {
         try {
@@ -29,7 +29,7 @@ public class DeleteCommand extends Command {
      * @param tasks List of tasks.
      * @param ui Ui object.
      * @param storage Storage object.
-     * @throws DukeException if the provided index is not associated with a task.
+     * @throws DukeException If the provided index is not associated with a task.
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {

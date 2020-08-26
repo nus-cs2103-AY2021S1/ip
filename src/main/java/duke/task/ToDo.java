@@ -6,7 +6,7 @@ package duke.task;
 public class ToDo extends Task {
     /**
      * Creates a brand new ToDo.
-     * @param description
+     * @param description Description of the todo.
      */
     public ToDo(String description) {
         super(description);

@@ -25,7 +25,7 @@ public class AddCommand extends Command{
      * @param tasks List of tasks.
      * @param ui Ui object.
      * @param storage Storage object.
-     * @throws DukeException if the tasks fails to create.
+     * @throws DukeException If the tasks fails to create.
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
