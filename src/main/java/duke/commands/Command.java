@@ -12,7 +12,7 @@ public abstract class Command {
     protected String command;
     protected Ui ui;
     protected Storage storage;
-    public boolean isExit = false;
+    protected boolean isExit = false;
 
     public Command(String command) {
         this.command = command;
@@ -24,12 +24,16 @@ public abstract class Command {
         this.taskList = taskList;
     }
 
+    public boolean getExitStatus() {
+        return this.isExit;
+    }
+
     /**
      * Executes the command given by the user depending on the type of command given.
      *
      * @param taskList the list of tasks to be operated on based on the command
-     * @param ui the type of output for the UI depending on the command
-     * @param storage the database to store the user's task list when he/she exits the program
+     * @param ui       the type of output for the UI depending on the command
+     * @param storage  the database to store the user's task list when he/she exits the program
      */
     public abstract void execute(TaskList taskList, Ui ui, Storage storage);
 

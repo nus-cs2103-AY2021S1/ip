@@ -57,8 +57,8 @@ public class Parser {
     }
 
     private static Command prepareUpdateTask(String command) {
-                String todoIndex = command.substring(4).trim();
-                return new UpdateCommand(command, todoIndex);
+        String todoIndex = command.substring(4).trim();
+        return new UpdateCommand(command, todoIndex);
     }
 
     private static Command prepareDeleteTask(String command) {

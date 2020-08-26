@@ -11,6 +11,7 @@ import duke.task.TaskList;
  */
 public class UpdateCommand extends Command {
     private int index;
+
     public UpdateCommand(String command, String index) {
         super(command);
         try {

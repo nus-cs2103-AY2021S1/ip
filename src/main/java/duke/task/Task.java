@@ -7,7 +7,7 @@ import duke.exceptions.DukeException;
  */
 public abstract class Task {
     protected String description;
-    public boolean isDone;
+    private boolean isDone;
 
     /**
      * @param s the description of the task
@@ -28,7 +28,9 @@ public abstract class Task {
      * @param s the description of the task stored in the database.
      */
     public Task(int doneStatus, String s) {
-        if (doneStatus == 1) this.isDone = true;
+        if (doneStatus == 1) {
+            this.isDone = true;
+        }
         this.description = s;
     }
 
@@ -39,17 +41,21 @@ public abstract class Task {
         this.isDone = !isDone;
     }
 
+    public boolean getDoneStatus() {
+        return this.isDone;
+    }
+
     /**
      * Returns a string that is formatted having the type, done status, description, and time
      * of the task to be stored in the database.
      *
-     * @return String that is to be used to convert into a task object.
+     * @return formatted string that is used for the creation of a task object.
      */
     public abstract String formatTaskForDatabase();
 
     @Override
     public String toString() {
-        String checked = (isDone ? "[\u2713]" : "[\u2718]");
-        return checked;
+        String isChecked = (isDone ? "[\u2713]" : "[\u2718]");
+        return isChecked;
     }
 }

@@ -6,14 +6,15 @@ import org.junit.jupiter.api.Test;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class TaskTest {
     @Test
     public void testSetDone() throws DukeException {
         Todo todo = new Todo("task");
         todo.setDone();
-        assertEquals(true, todo.isDone);
+        assertEquals(true, todo.getDoneStatus());
 
     }
 

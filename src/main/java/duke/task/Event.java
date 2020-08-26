@@ -28,10 +28,9 @@ public class Event extends Task {
         this.timing = timing;
     }
 
-
     @Override
     public String formatTaskForDatabase() {
-        int status = super.isDone ? 1 : 0;
+        int status = super.getDoneStatus() ? 1 : 0;
         return "E|" + status + "|" + super.description + "|" + timing;
     }
 
@@ -39,6 +38,7 @@ public class Event extends Task {
     @Override
     public String toString() {
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
-        return "[E]" + super.toString() + " " + super.description + " (at:" + timing.format(dateTimeFormatter) + ")";
+        return "[E]" + super.toString() + " " + super.description + " (at:"
+                + timing.format(dateTimeFormatter) + ")";
     }
 }

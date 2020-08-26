@@ -84,7 +84,7 @@ public class Ui {
      */
     public void printDeleteMessage(TaskList taskList, Task task) {
         System.out.println("Noted. I've removed this duke.task:\n " + task
-                        + "\nNow you have " + taskList.size() + " in the list.");
+                + "\nNow you have " + taskList.size() + " in the list.");
     }
 
     /**
@@ -93,7 +93,7 @@ public class Ui {
      * @param taskList the ArrayList that stores all tasks of the user.
      */
     public void printAllTasks(TaskList taskList) {
-            System.out.println("Here are the tasks in your list");
+        System.out.println("Here are the tasks in your list");
         listAllTasks(taskList);
     }
 

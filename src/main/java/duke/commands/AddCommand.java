@@ -68,7 +68,6 @@ public class AddCommand extends Command {
     }
 
     private void addEvent() {
-
         try {
             String detail = formatTimingInput("/at", super.command)[0];
             String timing = formatTimingInput("/at", super.command)[1].trim();
@@ -87,8 +86,15 @@ public class AddCommand extends Command {
         }
     }
 
-
-
+    /**
+     * Returns a string array where the first item is the description of the task
+     * and the next item is the timing of the task.
+     *
+     * @param format is to differentiate between a deadline and an event
+     * @param input is the entire string to be split
+     * @return a string array with first item description second item time
+     * @throws DukeException if the user does not include the timing in his/her input
+     */
     public String[] formatTimingInput(String format, String input) throws DukeException {
         if (!input.contains(format)) {
             String message = "Don't forget to add a timing in '"

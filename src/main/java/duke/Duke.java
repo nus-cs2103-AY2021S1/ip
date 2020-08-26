@@ -36,7 +36,7 @@ public class Duke {
                 ui.printDivider();
                 Command command = Parser.parse(fullCommand);
                 command.execute(taskList, ui, storage);
-                isExit = command.isExit;
+                isExit = command.getExitStatus();
             } catch (DukeException e) {
                 System.out.println(e.getMessage());
             }
