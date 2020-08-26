@@ -1,27 +1,34 @@
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+
 public class Deadline extends Task {
 
     private final String description;
+    private final LocalDate date;
+    //private final LocalTime time;
 
-    public Deadline(String description) {
+    public Deadline(String description, LocalDate date) {
         super(description);
         this.description = description;
+        this.date = date;
+        //this.time = time;
     }
 
     @Override
     public String getDescription() {
-        String[] desArray = this.description.split("/", 2);
-        return desArray[0];
+        return this.description;
     }
 
-    public String getTime() {
-        String[] desArray = this.description.split("/", 2);
-        return desArray[1];
+    public LocalDate getDate() {
+        return this.date;
     }
 
     @Override
     public String toString() {
-        String[] desArray = this.description.split("/", 2);
-        String[] timeArray = desArray[1].split(" ", 2);
-        return "[D]" + getStatusIcon() + desArray[0] + "(" + timeArray[0] + ": " + timeArray[1] + ")";
+
+        return "[D]" + getStatusIcon() + this.description + "(by: " +
+                this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 }
+

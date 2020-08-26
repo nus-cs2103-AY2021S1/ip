@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class TaskManager {
 
-    private final ArrayList<Task> taskList;
+    public final ArrayList<Task> taskList;
 
     public TaskManager() {
         taskList = new ArrayList<>();
@@ -22,6 +22,10 @@ public class TaskManager {
 
     public int getNumTasks() {
         return taskList.size();
+    }
+
+    public ArrayList<Task> getTaskList() {
+        return taskList;
     }
 
     public void removeTask(int taskNum) {

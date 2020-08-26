@@ -1,2 +1,2 @@
-T | 1 | smoke
-T | 0 | not smoke
+D ## 0 ## homework  ## 2020-11-22
+E ## 0 ## meeting  ## 2020-12-12 18:00

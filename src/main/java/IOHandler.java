@@ -1,4 +1,9 @@
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.List;
 import java.util.Scanner;
 
 public class IOHandler {
@@ -6,22 +11,34 @@ public class IOHandler {
     Scanner sc = new Scanner(System.in);
     String text = sc.nextLine();
 
-    public boolean hasText(String text) {
-        return text != null;
-    }
-
     TaskManager taskManager = new TaskManager();
 
     public void handleIO() {
 
         try {
+
+            String fileName = "data/duke.txt";
+            File file = new File(fileName);
+
+            if (!file.exists()) {
+                file.createNewFile();
+            }
+
+            String error = DukeExceptionHandler.handleException(text);
+            //FileHandler fileHandler = new FileHandler();
+
+            List<String> files = FileHandler.readSavedFile(fileName);
+            //System.out.println(files.get(0));
+            System.out.println("load");
+            for (int i = 0; i < files.size(); i++) {
+                Task task = TextAndTaskConverter.textConverter(files.get(i));
+                taskManager.getTaskList().add(task);
+            }
+
             while (!text.equals("bye")) {
 
-                String fileName = "data/duke.txt";
-                String error = DukeExceptionHandler.handleException(text);
-                System.out.println(text + "1");
                 if (error != null) {
-                    System.out.print(text + "2");
+                    System.out.print(text);
                     System.out.println(error);
 
                 } else {
@@ -37,7 +54,7 @@ public class IOHandler {
                                 + taskManager.getTask(taskNum - 1));
 
                         Task doneTask = taskManager.getTask(taskNum - 1);
-                        replaceDone(fileName, doneTask.getDescription());
+                        FileHandler.replaceDone(fileName, doneTask.getDescription());
 
                     } else if (text.contains("delete")) {
                         String[] textArray = text.split(" ", 2);
@@ -49,6 +66,9 @@ public class IOHandler {
                                 + deletedTask + "\nNow you have " + taskManager.getNumTasks()
                                 + " tasks in the list");
 
+                        //                        String lineToDelete = FileHandler.getInputLine(deletedTask);
+                        //                        FileHandler.delete(lineToDelete);
+
                     } else if (text.length() > 0) {
 
                         if (text.contains("todo")) {
@@ -59,88 +79,60 @@ public class IOHandler {
                                     + todo + "\nNow you have " + taskManager.getNumTasks()
                                     + " tasks in the list");
 
-                            writeToFile(fileName, new Todo(textArray[1]));
+                            // FileHandler.writeToFile(fileName, new Todo(textArray[1]));
 
                         } else if (text.contains("deadline")) {
                             String[] textArray = text.split(" ", 2);
-                            Deadline deadline = new Deadline(textArray[1]);
+                            String trimText = textArray[1].trim();
+                            String task = trimText.replace("/by", "/");
+
+                            System.out.println(task);
+                            String taskName = TextAndTaskConverter.getTaskName(task);
+                            LocalDate date = TextAndTaskConverter.getDate(task);
+                            //LocalTime time = TextAndTaskConverter.getTime((textArray[1]));
+                            System.out.println(date);
+                            System.out.println(taskName);
+
+                            Deadline deadline = new Deadline(taskName, date);
                             taskManager.addTask(deadline);
                             System.out.println("Got it. I've added this task:\n"
                                     + deadline + "\nNow you have " + taskManager.getNumTasks()
                                     + " tasks in the list");
 
-                            writeToFile(fileName, new Deadline(textArray[1]));
+                            //FileHandler.writeToFile(fileName, new Deadline(textArray[1]));
 
                         } else if (text.contains("event")) {
                             String[] textArray = text.split(" ", 2);
-                            Event event = new Event(textArray[1]);
+
+                            String trimText = textArray[1].trim();
+                            String task = trimText.replace("/at", "/");
+
+                            String taskName = TextAndTaskConverter.getTaskName(task);
+                            LocalDate date = TextAndTaskConverter.getDate(task);
+                            LocalTime time = TextAndTaskConverter.getTime(task);
+
+                            Event event = new Event(taskName, date, time);
                             taskManager.addTask(event);
                             System.out.println("Got it. I've added this task:\n"
                                     + event + "\nNow you have " + taskManager.getNumTasks()
                                     + " tasks in the list");
 
-                            writeToFile(fileName, new Event(textArray[1]));
+                            //FileHandler.writeToFile(fileName, new Event(textArray[1]));
                         }
                     }
+                    text = sc.nextLine();
                 }
-
-
-                text = sc.nextLine();
             }
+            FileHandler.writeToFile(fileName, taskManager);
         }
-        catch (FileNotFoundException e) {
+
+        catch(FileNotFoundException e){
             System.out.println("File not found!");
         }
-        catch (IOException e) {
+        catch(IOException e){
             System.out.println("OOPS something went wrong!");
         }
         sc.close();
-    }
-
-    public static void writeToFile(String file, Task task) throws IOException {
-
-        FileWriter writer = new FileWriter(file, true);
-
-        if (task instanceof Todo) {
-            writer.write("T | " +  (task.getDone() ? 1 : 0) + " | " + task.getDescription() + "\n");
-        }
-
-        if (task instanceof Deadline) {
-            writer.write("D | " + (task.getDone() ? 1 : 0) + " | " + ((Deadline) task).getDescription() + " | " + ((Deadline) task).getTime() + "\n");
-        }
-
-        if (task instanceof Event) {
-            writer.write("E | " + (task.getDone() ? 1 : 0) + " | " + ((Event) task).getDescription() + " | " + ((Event) task).getTime() + "\n");
-        }
-
-        writer.close();
-    }
-
-    public static void replaceDone(String filePath, String replaceWith) {
-        try {
-            // input the file content to the StringBuffer "input"
-            BufferedReader file = new BufferedReader(new FileReader(filePath));
-            StringBuffer inputBuffer = new StringBuffer();
-            String line;
-
-            while ((line = file.readLine()) != null) {
-                inputBuffer.append(line);
-                inputBuffer.append('\n');
-            }
-            file.close();
-            String inputStr = inputBuffer.toString();
-
-            inputStr = inputStr.replace("| 0 | " + replaceWith, "| 1 | " + replaceWith);
-
-
-            // write the new string with the replaced line OVER the same file
-            FileOutputStream fileOut = new FileOutputStream(filePath);
-            fileOut.write(inputStr.getBytes());
-            fileOut.close();
-
-        } catch (Exception e) {
-            System.out.println("Problem reading file.");
-        }
     }
 }
 
