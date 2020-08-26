@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import java.io.IOException;
+import java.time.format.DateTimeParseException;
 
 public class Storage {
     private final String FORMAT_TASK_FIELD_DELIMITER = "\\s\\|\\s";
@@ -104,7 +105,7 @@ public class Storage {
                     tasks.add(new Todo(description, isDone));
                     break;
                 }
-            } catch (IndexOutOfBoundsException e) {
+            } catch (IndexOutOfBoundsException | DateTimeParseException e) {
                 throw new StorageException(ERROR_INCORRECT_FILE_FORMAT);
             }
         }
