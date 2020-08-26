@@ -1,11 +1,17 @@
 package duke.ui;
 
-import duke.data.DukeTaskList;
+import duke.Duke;
 import duke.task.Task;
 
 public class Ui {
 
-    public static void greet() {
+    private Duke duke;
+
+    public Ui(Duke duke) {
+        this.duke = duke;
+    }
+
+    public void greet() {
         System.out.println(UIPrint.logo);
 
         UIPrint.drawLine(UIPrint.star, 50);
@@ -16,39 +22,39 @@ public class Ui {
         UIPrint.drawLine(UIPrint.star, 50);
     }
 
-    public static void echo(String str) {
+    public void echo(String str) {
         UIPrint.drawLine(UIPrint.star, 50);
         System.out.println(str);
         UIPrint.drawLine(UIPrint.star, 50);
     }
 
-    public static void reportCurrentTasks() {
+    public void reportCurrentTasks() {
         UIPrint.drawLine(UIPrint.star, 50);
 
         System.out.println("Current tasks:\n");
 
-        for (int i = 0; i < DukeTaskList.tasks.size(); i++) {
-            System.out.println(i + 1 + ". " + DukeTaskList.tasks.get(i));
+        for (int i = 0; i < duke.taskList.tasks.size(); i++) {
+            System.out.println(i + 1 + ". " + duke.taskList.tasks.get(i));
         }
 
-        if (DukeTaskList.tasks.size() == 0) {
+        if (duke.taskList.tasks.size() == 0) {
             System.out.println("None");
         }
 
         UIPrint.drawLine(UIPrint.star, 50);
     }
 
-    public static void reportNewTask(Task task) {
+    public void reportNewTask(Task task) {
         UIPrint.drawLine(UIPrint.star, 50);
 
         System.out.println("Got it. I've added this duke.task: ");
         System.out.println(task);
-        System.out.println("Now you have " + DukeTaskList.tasks.size() + " tasks in the list.");
+        System.out.println("Now you have " + duke.taskList.tasks.size() + " tasks in the list.");
 
         UIPrint.drawLine(UIPrint.star, 50);
     }
 
-    public static void reportDoneTask(Task task) {
+    public void reportDoneTask(Task task) {
         UIPrint.drawLine(UIPrint.star, 50);
 
         System.out.println("Nice, I've marked this duke.task as done:");
@@ -57,17 +63,17 @@ public class Ui {
         UIPrint.drawLine(UIPrint.star, 50);
     }
 
-    public static void reportDeleteTask(Task task) {
+    public void reportDeleteTask(Task task) {
         UIPrint.drawLine(UIPrint.star, 50);
 
         System.out.println("Noted. I've removed this duke.task: ");
         System.out.println(task);
-        System.out.println("Now you have " + DukeTaskList.tasks.size() + " tasks in the list");
+        System.out.println("Now you have " + duke.taskList.tasks.size() + " tasks in the list");
 
         UIPrint.drawLine(UIPrint.star, 50);
     }
 
-    public static void reportExit() {
+    public void reportExit() {
         UIPrint.drawLine(UIPrint.star, 50);
 
         String exitWords = "Bye, hope to see you again soon!";
