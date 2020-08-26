@@ -102,12 +102,24 @@ public class Parser {
         }
     }
 
+    /**
+     * Validate a task from the user and throws an exception if invalid.
+     *
+     * @param userCommand - String representation of user's command
+     * @param userTask    - String representation of user's task
+     */
     static void validateTask(String userCommand, String userTask) throws DukeException {
         if (userTask.isEmpty()) {
             throw new DukeException("Empty task: " + userCommand);
         }
     }
 
+    /**
+     * Validate a deadline from the user and throws an exception if invalid.
+     *
+     * @param userCommand - String representation of user's command
+     * @param userTask    - String representation of user's task
+     */
     static void validateDeadline(String userCommand, String userTask) throws DukeException {
         validateTask(userCommand, userTask);
         if (!userTask.contains("/by")) {
@@ -115,6 +127,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Validate a event from the user and throws an exception if invalid.
+     *
+     * @param userCommand - String representation of user's command
+     * @param userTask    - String representation of user's task
+     */
     static void validateEvent(String userCommand, String userTask) throws DukeException {
         validateTask(userCommand, userTask);
         if (!userTask.contains("/at")) {
@@ -122,7 +140,13 @@ public class Parser {
         }
     }
 
-    // Implement validation for identifier commands, e.g. 'done 1', 'delete 2'
+    // TODO: Implement validation for identifier commands, e.g. 'done 1', 'delete 2'
+    /**
+     * Validate an identifier from the user and throws an exception if invalid.
+     *
+     * @param userInput  - String representation of user's input
+     * @param userTokens - String array of user's input separated by spaces
+     */
     static void validateIdentifier(String userInput, String[] userTokens) throws DukeException {
         if (userTokens.length != 2) {
             throw new DukeException("Invalid identifier, requires 2 tokens: " + userInput);
