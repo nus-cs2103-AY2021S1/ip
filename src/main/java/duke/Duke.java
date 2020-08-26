@@ -10,7 +10,7 @@ import java.util.Scanner;
 public class Duke {
 
     /**
-     * Entry point of Duke.
+     * Entry point of Duke. Simulates and main application loop.
      * @param args
      */
     public static void main(String[] args) {

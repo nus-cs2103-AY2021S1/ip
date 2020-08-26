@@ -10,8 +10,10 @@ import duke.dependencies.task.Task;
  *
  */
 public class Command implements Executable {
+
     private CommandType command;
     private Task task;
+
     private Command(CommandType command, Task task) {
         this.command = command;
         this.task = task;
@@ -80,7 +82,38 @@ public class Command implements Executable {
         return new Command(CommandType.DELETE, task);
     }
 
+    /**
+     * Returns a Command of type FIND. This command encapsulates the instruction to find tasks in the list that has
+     * words matching the keyword specified by the user in the 'task'.
+     * @param task Task object, which holds the keyword that has to be found in the list (This task
+     *             object is a Misc. Task).
+     * @return Command of type FIND.
+     */
     public static Command createFindCommand(Task task) {
         return new Command(CommandType.FIND, task);
     }
+
+//    public static Command createEventCommand(Task task) {
+//        return new Command(CommandType.EVENT, task);
+//    }
+//
+//    public static Command createDeadlineCommand(Task task) {
+//        return new Command(CommandType.DEADLINE, task);
+//    }
+//
+//    public static Command createTodoCommand(Task task) {
+//        return new Command(CommandType.TODO, task);
+//    }
+//
+//    public static Command createGetCompletedCommand(Task task) {
+//        return new Command(CommandType.GETCOMPLETED, null);
+//    }
+//
+//    public static Command createGetIncompleteCommand(Task task) {
+//        return new Command(CommandType.GETINCOMPLETE, null);
+//    }
+//
+//    public static Command createGetListSizeCommand(Task task) {
+//        return new Command(CommandType.GETLISTSIZE, null);
+//    }
 }
