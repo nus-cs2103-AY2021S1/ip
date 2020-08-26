@@ -1,6 +1,10 @@
-import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Event inherits from Task.
+ *
+ * Event is a Task that has an added characteristic of a duration.
+ */
 public class Event extends Task {
     protected String duration;
 

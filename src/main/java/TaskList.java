@@ -1,9 +1,9 @@
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-/** Contains the task list
- * e.g., it has operations to add/delete tasks in the list
- *
+/**
+ * Contains the task list.
+ * e.g., it has operations to add/delete tasks in the list.
  * */
 public class TaskList {
     /** Note: limit storage to 100 items **/

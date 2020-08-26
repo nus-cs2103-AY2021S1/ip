@@ -1,6 +1,11 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Deadline inherits from Task.
+ *
+ * Deadline is a Task that has an added characteristic of a dueDate.
+ */
 public class Deadline extends Task {
     protected LocalDate dueDate;
 

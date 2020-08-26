@@ -1,9 +1,11 @@
 import java.io.*;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-/** Deals with loading tasks from the file and saving tasks in the file
+/**
+ * Deals with loading tasks from the file and saving tasks in the file
  * */
 public class Storage {
     private String filePath;

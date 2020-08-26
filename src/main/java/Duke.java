@@ -1,6 +1,11 @@
-import java.io.*;
-import java.util.ArrayList;
+import java.io.FileNotFoundException;
 
+/**
+ * Duke's main class.
+ *
+ * Consists of a Storage, TaskList and Ui.
+ * Contains the program loop in run() method.
+ */
 public class Duke {
 
     private Storage storage;

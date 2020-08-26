@@ -1,3 +1,8 @@
+/**
+ * To-do inherits from Task.
+ *
+ * To-do is similar to a Task.
+ */
 public class Todo extends Task {
     public Todo(String name) {
         super(name);

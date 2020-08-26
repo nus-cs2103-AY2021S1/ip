@@ -1,7 +1,7 @@
 import java.time.LocalDate;
-import java.util.ArrayList;
 
-/** Deals with making sense of the user command
+/**
+ * Deals with making sense of the user command
  * */
 public class Parser {
     public static Command parse(String userInput) throws DukeException {

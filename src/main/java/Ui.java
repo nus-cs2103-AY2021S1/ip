@@ -1,7 +1,7 @@
-import java.util.ArrayList;
 import java.util.Scanner;
 
-/** Deals with interactions with the user
+/**
+ * Deals with interactions with the user
  * */
 public class Ui {
     /** Constants **/
