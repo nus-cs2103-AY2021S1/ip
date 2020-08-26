@@ -3,13 +3,14 @@ import java.util.ArrayList;
 
 public class Duke {
     enum Instruction {
-        BYE, LIST, DONE, DELETE, DEADLINE, EVENT, TODO, OTHERS;
+        LIST, DONE, DELETE, DEADLINE, EVENT, TODO, OTHERS
     }
     
     public static void main(String[] args) {
         ArrayList<Task> list = new ArrayList<>();
         Scanner sc = new Scanner(System.in);
         Instruction thisInstruction;
+        Deadline thisDeadline;
         String thisTaskname;
         String thisTime;
         Task thisTask;
@@ -74,7 +75,9 @@ public class Duke {
                         System.out.println("     No problem! I've added this task to the list:");
                         thisTaskname = input.substring(9, input.indexOf('/') - 1);
                         thisTime = input.substring(input.indexOf('/') + 4);
-                        list.add(new Deadline(thisTaskname, thisTime));
+                        thisDeadline = new Deadline(thisTaskname, thisTime);
+                        thisDeadline.updateDateTime();
+                        list.add(thisDeadline);
                     } else if (thisInstruction == Instruction.EVENT) {
                         if (input.length() < 7) {
                             throw new EmptyTaskNameException("     The taskname of a event cannot be empty.");
