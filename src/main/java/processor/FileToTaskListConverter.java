@@ -17,7 +17,25 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.regex.PatternSyntaxException;
 
+/**
+ * Converts data from file to TaskList class.
+ *
+ * <p>The 'FileToTaskListConverter' supports operators, supported include: </p>
+ *
+ * <p> (i) converting file to TaskList object </p>
+ *
+ * <p> (ii) saving TaskList data into file provided </p>
+ */
 public abstract class FileToTaskListConverter {
+
+    /**
+     * Converts file to TaskList object.
+     *
+     * @param data the file loaded to be converted.
+     * @return a TaskList containing all tasks inscribed in file
+     * @throws FileCorruptedException If file is not formmatted in the correct order. ie
+     *  not in <type>//<done status>//<task description>//<date if applicable>//<time if applicable>
+     */
     public static TaskList convert(File data) throws FileCorruptedException {
         List<String> dataList = loadStringData(data);
         List<Task> list = new ArrayList<>();
@@ -29,6 +47,13 @@ public abstract class FileToTaskListConverter {
         return new TaskList(list);
     }
 
+    /**
+     * Saves TaskList to file provided.
+     * Data is stored in <type>//<done status>//<task description>//<date if applicable>//<time if applicable>
+     * @param list the TaskList to be saved.
+     * @param file the file to be saved in.
+     * @return save status of TaskList. True if successful, false otherwise.
+     */
     public static boolean saveToFile(TaskList list, File file) {
         try {
             FileWriter fw = new FileWriter(file);

@@ -8,6 +8,13 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Scanner;
 
+/**
+ * Interacts with users command.
+ *
+ * <p>The 'UI' supports operators, supported include: </p>
+ *
+ * <p> (i) interacting with user </p>
+ */
 public abstract class UI {
     private static final String GREETING = "    ____________________________________________________________\n"
             + "     Hello! I'm Duke\n"
@@ -18,6 +25,10 @@ public abstract class UI {
             + "     Bye. Hope to see you again soon!\n"
             + "    ____________________________________________________________\n";
 
+    /**
+     * Interacts with user input command.
+     * User's command entered through interface is stored and processed
+     */
     public static void interact() {
         try {
             System.out.println(UI.GREETING);

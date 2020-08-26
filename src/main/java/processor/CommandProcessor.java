@@ -9,6 +9,13 @@ import task.*;
 import java.util.HashMap;
 import java.util.function.Consumer;
 
+/**
+ * Processes command entered by user.
+ *
+ * <p>The 'CommandProcessor' supports operators, supported include: </p>
+ *
+ * <p> (i) processing the String command and run the operation </p>
+ */
 public class CommandProcessor {
     private TaskList taskList;
     private final HashMap<String, Consumer<String>> map = setUpCommandMap();
@@ -29,6 +36,11 @@ public class CommandProcessor {
         return map;
     }
 
+    /**
+     * Run command enter by user.
+     * Prints error message if command is invalid.
+     * @param command the command entered by user.
+     */
     public void runCommand(String command) {
         Consumer<String> action =  map.get(command.replaceAll(" .*", ""));
         try {
