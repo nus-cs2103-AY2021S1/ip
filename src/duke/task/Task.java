@@ -4,12 +4,12 @@ package duke.task;
  * Represents a task with a description.
  */
 public class Task {
+    // Indicators
+    public static final String STATUS_TICK = "[" + "\u2713" + "]";
+    public static final String STATUS_CROSS = "[" + "\u2718" + "]";
+
     private String description;
     private boolean isDone;
-
-    // Markers
-    public static final String TICK = "[" + "\u2713" + "]";
-    public static final String CROSS = "[" + "\u2718" + "]";
 
     /**
      * Creates a new task with the specified description.
@@ -27,7 +27,7 @@ public class Task {
      * @return A tick if the task is done and a cross if the task is not done.
      */
     public String getStatusIcon() {
-        return (isDone ? TICK : CROSS);
+        return (isDone ? STATUS_TICK : STATUS_CROSS);
     }
 
     /**

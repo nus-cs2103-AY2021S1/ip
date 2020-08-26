@@ -1,8 +1,9 @@
 package duke.ui;
 
+import java.util.Scanner;
+
 import duke.storage.TaskList;
 import duke.task.Task;
-import java.util.Scanner;
 
 /**
  * Displays the user interface and deals with interacting with the user by printing responding to 
@@ -13,9 +14,9 @@ public class Ui {
     private static final String SKIPLINE = "\n";
     private static final String USER = SKIPLINE + "You: ";
     private static final String DIVIDER = SKIPLINE + CHATBOT;
-
-    public static boolean EXIT = false;
-
+    
+    public static boolean exit = false;
+    
     private final Scanner scan;
 
     /**
@@ -48,7 +49,7 @@ public class Ui {
     public void showGoodbyeMessage() {
         System.out.println(DIVIDER + "Goodbye! Have a nice day :D");
         this.scan.close();
-        EXIT = true;
+        exit = true;
 
     }
 

@@ -1,14 +1,11 @@
 package duke.command;
 
-import duke.exception.InvalidTaskDateException;
 import java.time.DateTimeException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-/**
- * Processes dates and time found in user commands and converts it into something that the program 
- * can understand.
- */
+import duke.exception.InvalidTaskDateException;
+
 public class TaskDate {
     /**
      * Processes the date of and time indicated in user commands and converts it into another form.

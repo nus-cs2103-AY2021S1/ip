@@ -4,7 +4,7 @@ package duke.task;
  * Represents a task with a description and deadline.
  */
 public class Deadline extends Task {
-    protected String by;
+    private String by;
 
     /**
      * Creates a new task with the specified description and deadline.

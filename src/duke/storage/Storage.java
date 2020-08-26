@@ -1,6 +1,12 @@
 package duke.storage;
 
-import duke.command.Parser;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
+
 import duke.exception.InvalidPathException;
 import duke.exception.SaveToStorageErrorException;
 import duke.exception.StorageException;
@@ -11,20 +17,13 @@ import duke.task.Task;
 import duke.task.Todo;
 import duke.ui.Ui;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Represents the local storage of the program and stores the user's task list. 
  * Handles file processing of the saved task list.
  */
 public class Storage {
-    private static final String DEADLINE_TEXT_SEPARATOR = "by: ";
-    private static final String EVENT_TEXT_SEPARATOR = "at: ";
+    private static final String TEXT_DEADLINE_SEPARATOR = "by: ";
+    private static final String TEXT_EVENT_SEPARATOR = "at: ";
 
     private Path filePath;
 
@@ -113,7 +112,7 @@ public class Storage {
             String taskIndicator = taskDetails[0];
             String taskDescription = taskDetails[1];
 
-            if (taskIndicator.contains(TaskList.TODO_INDICATOR)) {
+            if (taskIndicator.contains(TaskList.TASK_TODO_INDICATOR)) {
                 Todo todo = new Todo(taskDescription);
 
                 // Checks if the task stored in the file is marked as done.
@@ -121,12 +120,12 @@ public class Storage {
 
                 savedTaskList.add(todo);
 
-            } else if (taskIndicator.contains(TaskList.DEADLINE_INDICATOR)) {
-                String[] deadlineDetails = parseTaskText(taskDescription, TaskList.DEADLINE_INDICATOR);
+            } else if (taskIndicator.contains(TaskList.TASK_DEADLINE_INDICATOR)) {
+                String[] deadlineDetails = parseTaskText(taskDescription, TaskList.TASK_DEADLINE_INDICATOR);
 
                 String deadlineDescription = deadlineDetails[0];
                 String deadlineDate = deadlineDetails[1];
-
+                
                 Deadline deadline = new Deadline(deadlineDescription, deadlineDate);
 
                 // Checks if the task stored in the file is marked as done.
@@ -134,8 +133,8 @@ public class Storage {
 
                 savedTaskList.add(deadline);
 
-            } else if (taskIndicator.contains(TaskList.EVENT_INDICATOR)) {
-                String[] eventDetails = parseTaskText(taskDescription, TaskList.EVENT_INDICATOR);
+            } else if (taskIndicator.contains(TaskList.TASK_EVENT_INDICATOR)) {
+                String[] eventDetails = parseTaskText(taskDescription, TaskList.TASK_EVENT_INDICATOR);
 
                 String eventDescription = eventDetails[0];
                 String eventDate = eventDetails[1];
@@ -171,14 +170,14 @@ public class Storage {
      */
     private static String[] parseTaskText(String taskText, String typeOfTask) {
         String[] taskDescriptionAndDate = taskText.split(" \\(", 2);
-
-        if (TaskList.DEADLINE_INDICATOR.equals(typeOfTask)) {
-            String[] date = taskDescriptionAndDate[1].split(DEADLINE_TEXT_SEPARATOR);
+        
+        if (TaskList.TASK_DEADLINE_INDICATOR.equals(typeOfTask)) {
+            String[] date = taskDescriptionAndDate[1].split(TEXT_DEADLINE_SEPARATOR);
             taskDescriptionAndDate[1] = date[1].substring(0, date[1].length() -1);
         }
 
-        if (TaskList.EVENT_INDICATOR.equals(typeOfTask)) {
-            String[] date = taskDescriptionAndDate[1].split(EVENT_TEXT_SEPARATOR);
+        if (TaskList.TASK_EVENT_INDICATOR.equals(typeOfTask)) {
+            String[] date = taskDescriptionAndDate[1].split(TEXT_EVENT_SEPARATOR);
             taskDescriptionAndDate[1] = date[1].substring(0, date[1].length() -1);
         }
 
@@ -193,7 +192,7 @@ public class Storage {
      * @param taskIndicator A tick if the task is done or a cross if the task is not done.
      */
     private static void parseIsDoneStatus(Task task, String taskIndicator) {
-        if (taskIndicator.contains(Task.TICK)) {
+        if (taskIndicator.contains(Task.STATUS_TICK)) {
             task.markAsDone();
         }
 

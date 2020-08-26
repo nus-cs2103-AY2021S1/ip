@@ -1,17 +1,19 @@
 package duke.storage;
 
-import duke.task.Task;
 import java.util.List;
+
+import duke.task.Task;
 
 /**
  * Represents a customisable list of tasks to be completed by the user.
  */
-public class TaskList {
-    protected List<Task> listOfTasks;
 
-    protected static String TODO_INDICATOR = "[T]";
-    protected static String DEADLINE_INDICATOR = "[D]";
-    protected static String EVENT_INDICATOR = "[E]";
+public class TaskList {
+    protected static String TASK_TODO_INDICATOR = "[T]";
+    protected static String TASK_DEADLINE_INDICATOR = "[D]";
+    protected static String TASK_EVENT_INDICATOR = "[E]";
+
+    private List<Task> listOfTasks;
 
     /**
      * Creates a new TaskList object to handle adding and deleting tasks.
@@ -41,7 +43,7 @@ public class TaskList {
         this.deleteTask(index - 1);
         this.listOfTasks.add(index, newTask);
     }
-
+    
     /**
      * Returns the total number of tasks currently in the task list.
      *

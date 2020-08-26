@@ -4,7 +4,7 @@ package duke.task;
  * Represents a task with a description and date of event.
  */
 public class Event extends Task {
-    protected String time;
+    private String time;
 
     /**
      * Creates a task with the specified description and date of event.
