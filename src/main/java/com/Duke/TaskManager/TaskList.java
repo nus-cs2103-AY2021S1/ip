@@ -1,17 +1,22 @@
-package com.DukeBot;
+package com.Duke.TaskManager;
 
-import java.util.ArrayList;
+import com.Duke.Tasks.Task;
+
 import java.util.List;
 
 public class TaskList {
     //This class manages the list of Tasks that the user has added
-    private List<Task> ls= new ArrayList<>();
+    public final List<Task> ls;
+
+    public TaskList(List<Task> ls) {
+        this.ls = ls;
+    }
 
     public int length(){
         return ls.size();
     }
 
-    public void setDone(int task) throws DukeException{
+    public void setDone(int task) throws DukeException {
         if(task>ls.size()){
             throw new DukeException("You don't have that many tasks");
         }else {
@@ -19,6 +24,10 @@ public class TaskList {
             System.out.println("     Nice! I've marked this task as done: ");
             System.out.println("       " + ls.get(task).toString());
         }
+    }
+
+    public List<Task> getListOfTasks(){
+        return this.ls;
     }
 
     public void delete(int task) throws DukeException{

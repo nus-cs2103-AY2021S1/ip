@@ -1,11 +1,13 @@
-package com.DukeBot;
+package com.Duke.Tasks;
+
+import com.Duke.TaskManager.DukeException;
 
 public class Task {
     //This class manages the information of each task within Dukes Task List
     protected final String task;
     protected final boolean isDone;
 
-    Task(String task, boolean isDone) throws DukeException{
+    public Task(String task, boolean isDone) throws DukeException {
         if(task.trim().isEmpty()) {
             throw new DukeException("The description of a task cannot be empty.");
         }else{
@@ -13,6 +15,12 @@ public class Task {
             this.isDone = isDone;
         }
 
+    }
+
+    public String toSaveFormat(){
+        return isDone
+                ? task + "*Y"
+                : task + "*N";
     }
 
     public boolean getIsDone(){

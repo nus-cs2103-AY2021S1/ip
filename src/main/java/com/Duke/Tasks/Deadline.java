@@ -1,8 +1,10 @@
-package com.DukeBot;
+package com.Duke.Tasks;
+
+import com.Duke.TaskManager.DukeException;
 
 public class Deadline extends Task{
     private final String deadline;
-    Deadline(String task, String deadline, boolean isDone)throws DukeException{
+    public Deadline(String task, String deadline, boolean isDone)throws DukeException {
         super(task,isDone);
         this.deadline = deadline;
     }
@@ -14,6 +16,12 @@ public class Deadline extends Task{
     @Override
     public Deadline done() throws DukeException{
         return new Deadline(this.task, this.deadline,true);
+    }
+    @Override
+    public String toSaveFormat(){
+        return isDone
+                ? "D*" + task + "*" + deadline + "*Y"
+                : "D*" + task + "*" + deadline + "*N";
     }
 
     @Override

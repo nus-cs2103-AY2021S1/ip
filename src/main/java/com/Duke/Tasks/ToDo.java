@@ -1,14 +1,22 @@
-package com.DukeBot;
+package com.Duke.Tasks;
+
+import com.Duke.TaskManager.DukeException;
 
 public final class ToDo extends Task{
 
-    ToDo(String task, boolean isDone) throws DukeException{
+    public ToDo(String task, boolean isDone) throws DukeException {
         super(task,isDone);
     }
 
     @Override
     public ToDo done() throws DukeException{
         return new ToDo(this.task, true);
+    }
+    @Override
+    public String toSaveFormat(){
+        return isDone
+                ? "T*" + task + "*Y"
+                : "T*" + task + "*N";
     }
 
     @Override

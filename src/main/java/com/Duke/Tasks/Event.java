@@ -1,13 +1,22 @@
-package com.DukeBot;
+package com.Duke.Tasks;
+
+import com.Duke.TaskManager.DukeException;
 
 public class Event extends Task{
     private final String start;
     private final String end;
 
-    Event(String task, String start, String end, boolean isDone)throws DukeException{
+    public Event(String task, String start, String end, boolean isDone)throws DukeException {
         super(task,isDone);
         this.start = start;
         this.end = end;
+    }
+
+    @Override
+    public String toSaveFormat(){
+        return isDone
+                ? "E*" + task + "*" + start + "*"+ end + "*Y"
+                : "E*" + task + "*" + start + "*"+ end + "*N";
     }
 
     public String getDeadline(){

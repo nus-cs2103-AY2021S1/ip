@@ -1,4 +1,4 @@
-import com.DukeBot.DukeBot;
+import com.Duke.DukeBot;
 
 public class Duke {
     public static void main(String[] args) {

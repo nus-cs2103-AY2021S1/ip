@@ -1,9 +1,9 @@
-package com.DukeBot;
+package com.Duke.TaskManager;
 
 public class DukeException extends Exception{
     private final String errorMsg;
 
-    DukeException(String errorMsg){
+    public DukeException(String errorMsg){
         this.errorMsg = errorMsg;
     }
 

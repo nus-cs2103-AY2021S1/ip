@@ -1,11 +1,16 @@
-package com.DukeBot;
+package com.Duke;
+
+import com.Duke.DataManager.Storage;
+import com.Duke.TaskManager.DukeException;
+import com.Duke.TaskManager.TaskList;
+import com.Duke.Tasks.*;
 
 import java.util.Scanner;
 
 public class DukeBot{
     //This class handles the simulation of the Duke chat bot
     public static void simulate(){
-        TaskList ls= new TaskList();
+        TaskList ls = new TaskList(Storage.read());
         boolean hasBye = false;
         String input;
         String[] splitList;
@@ -27,9 +32,16 @@ public class DukeBot{
             splitList = input.split(" ", 2);
             System.out.println(line);
             if(input.equals("bye")){
-                System.out.println("     Bye. Hope to see you again soon!");
-                System.out.println(line);
-                hasBye = true;
+                try {
+                    System.out.println("     Bye. Hope to see you again soon!");
+                    System.out.println(line);
+                    Storage.write(ls);
+                    hasBye = true;
+                }catch (DukeException e){
+                    System.out.println(e.toString());
+                    System.out.println(line);
+                    input = sc.nextLine();
+                }
             }else if(input.equals("list")){
                 try {
                     ls.printTask();
