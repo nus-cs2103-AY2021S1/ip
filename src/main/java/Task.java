@@ -16,15 +16,15 @@ public class Task {
 	}
 	@Override
 	public String toString() {
-		// if (isDone) {
-		// 	return "[" + "\u2713" + "] " + this.taskContent; 
-		// } else {
-		// 	return "[" + "\u2718" + "] " + this.taskContent;
-		// }
 		if (isDone) {
-			return "[true]" + this.taskContent;
+			return "[" + "\u2713" + "] " + this.taskContent; 
 		} else {
-			return "[false]" + this.taskContent;
+			return "[" + "\u2718" + "] " + this.taskContent;
 		}
+		// if (isDone) {
+		// 	return "[true]" + this.taskContent;
+		// } else {
+		// 	return "[false]" + this.taskContent;
+		// }
 	}
 }
