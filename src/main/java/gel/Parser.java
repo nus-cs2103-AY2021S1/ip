@@ -128,6 +128,12 @@ public class Parser {
                     taskList.addTodo(input);
                     break;
                 }
+                case "find": {
+                    String[] findInputArr = input.split(" ", 2);
+                    String findKeyword = findInputArr[1];
+                    taskList.findDescription(findKeyword);
+                    break;
+                }
                 default: {
                     throw new GelException();
                 }

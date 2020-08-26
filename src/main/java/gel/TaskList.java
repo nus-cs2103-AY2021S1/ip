@@ -26,6 +26,10 @@ public class TaskList {
         ui.showListOfTask(this.listOfTasks);
     }
 
+    public void findDescription(String keyword) {
+        ui.showSearchResults(this.listOfTask, keyword);
+    }
+
     public void doneTask(String input) throws GelException {
         int index = Integer.parseInt(input.substring(5)) - 1;
         if (index >= listOfTasks.size() || index < 0) {
