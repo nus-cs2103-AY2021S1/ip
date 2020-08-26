@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 public class Duke {
 
-    public static void main(String[] args) {
+    public static void main(String[] args){
         Scanner sc = new Scanner(System.in);
 
         // Greet
@@ -13,13 +13,13 @@ public class Duke {
         ArrayList<Task> list = new ArrayList<>();
 
         // Echo
-        while(sc.hasNextLine()) {
+        while (sc.hasNextLine()) {
             String input = sc.nextLine();
             String[] input_split = input.split(" ");
-            if (input.equals("bye")){
+            if (input.equals("bye")) {
                 // Stops taking inputs
                 break;
-            } else if( input.equals("list") ) {
+            } else if (input.equals("list")) {
                 // returns list of items
                 for (int i = 0; i < list.size(); i++) {
                     System.out.println((1 + i) + "." + list.get(i));
@@ -32,7 +32,7 @@ public class Duke {
                 Task task = list.get(index);
                 task.markDone();
                 System.out.println("Nice! I've marked this task as done:\n" + task);
-            }else if( input_split[0].equals("delete")){
+            } else if (input_split[0].equals("delete")) {
                 // Parse int
                 int index = Integer.parseInt(input_split[1]) - 1;
                 Task removed = list.remove(index);
@@ -42,32 +42,38 @@ public class Duke {
                 // Adds item to list
                 String type = input_split[0];
                 String name;
-                if (type.equals("todo")){
-                    if(input_split.length<2) {
-                        System.out.println( "\u2639 OOPS!!! The description of a todo cannot be empty." );
-                        continue;
+                try {
+                    if (type.equals("todo")) {
+
+                        if (input_split.length < 2) {
+                            // Throw new error message that todo has no desc
+                            throw (new DukeException("\u2639 OOPS!!! The description of a todo cannot be empty."));
+                        }else{
+                            name = input.split("todo ")[1];
+                            list.add(new ToDo(name));
+                        }
+
+                    } else if (type.equals("deadline")) {
+                        name = input.split(" /by ")[0].split("deadline ")[1];
+                        String by = input.split(" /by ")[1];
+                        list.add(new Deadline(name, by));
+
+                    } else if (type.equals("event")) {
+                        name = input.split(" /at ")[0].split("event ")[1];
+                        String at = input.split(" /at ")[1];
+                        list.add(new Event(name, at));
+                    } else {
+                        //Throw error message for invalid input
+                        throw (new DukeException("\u2639 OOPS!!! I'm sorry, but I don't know what that means :-("));
                     }
-                    name = input.split("todo ")[1];
-                    list.add(new ToDo(name));
 
-                }else if(type.equals("deadline")){
-                    name = input.split(" /by ")[0].split("deadline ")[1];
-                    String by = input.split(" /by ")[1];
-                    list.add(new Deadline(name, by));
-                }else if(type.equals("event")){
-                    name = input.split(" /at ")[0].split("event ")[1];
-                    String at = input.split(" /at ")[1];
-                    list.add(new Event(name, at));
-                }else{
-                    System.out.println("\u2639 OOPS!!! I'm sorry, but I don't know what that means :-(");
-                    continue;
+                    System.out.println("Go it. I've added this task:\n" + list.get(list.size() - 1).toString());
+                    System.out.println("Now you have " + list.size() + " tasks in the list.");
+                }catch (DukeException e) {
+                    System.out.println(e.getMessage());
                 }
-
-                System.out.println("Go it. I've added this task:\n" + list.get(list.size()-1).toString());
-                System.out.println("Now you have " + list.size() + " tasks in the list.");
             }
         }
-
         // Exit
         System.out.println("Bye. Hope to see you again soon!");
 
@@ -139,5 +145,11 @@ class Event extends Task {
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + at + ")";
+    }
+}
+
+class DukeException extends Exception{
+    public DukeException(String message){
+        super(message);
     }
 }
