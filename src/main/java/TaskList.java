@@ -2,10 +2,16 @@ import java.util.ArrayList;
 
 public class TaskList extends ArrayList<Task> {
 
+    /**
+     * Prints itself in a readable form.
+     */
     public void printList() {
         Ui.printWithLines(toString());
     }
 
+    /**
+     * Completes a specific task in itself.
+     */
     public void completeTask(int i) {
         String prefix = "Roger roger! I'm gonna mark this task as done:\n";
         Task task = super.get(i);
@@ -13,6 +19,9 @@ public class TaskList extends ArrayList<Task> {
         Ui.printWithLines(String.format("  %s%s\n", prefix, task));
     }
 
+    /**
+     * Adds a task to itself.
+     */
     public void addTask(Task newTask, boolean announce) {
         super.add(newTask);
         if (announce) {
@@ -23,6 +32,9 @@ public class TaskList extends ArrayList<Task> {
         }
     }
 
+    /**
+     * Deletes a specific task from itself.
+     */
     public void deleteTask(int index) {
         Task task = super.get(index);
         super.remove(index);
@@ -30,15 +42,28 @@ public class TaskList extends ArrayList<Task> {
         Ui.printWithLines(prefix + task + "\n");
     }
 
-    @Override
-    public String toString() {
+    /**
+     * Deletes a specific task from itself.
+     */
+    public void lookFor(String query) {
+        TaskList results = new TaskList();
+        this.stream().filter(task -> task.hasKeyword(query)).forEach(task -> results.addTask(task, false));
+        StringBuilder prefix = new StringBuilder("Here are the matches in your list:\n");
+        Ui.printWithLines(prefix.append(results.listOut()).toString());
+    }
+
+    private StringBuilder listOut() {
         StringBuilder list = new StringBuilder();
-        StringBuilder prefix = new StringBuilder("Here are the tasks in your list:\n");
-        int l = super.size();
+        int l = size();
         for (int i = 0; i < l; i++) {
             list.append(i + 1).append(".").append(super.get(i).toString()).append("\n");
         }
-        return prefix.append(list).toString();
+        return list;
+    }
+
+    @Override
+    public String toString() {
+        return "Here are the tasks in your list:\n" + listOut();
     }
 
     public String toData() {
@@ -48,4 +73,5 @@ public class TaskList extends ArrayList<Task> {
         }
         return list.toString();
     }
+
 }

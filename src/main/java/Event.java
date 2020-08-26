@@ -4,8 +4,8 @@ public class Event extends Task {
 
     protected LocalDateTime at;
 
-    public Event(String name, String at, boolean done) throws DukeException {
-        super(name, TaskType.EVENT, done);
+    public Event(String name, String at, boolean isDone) throws DukeException {
+        super(name, TaskType.EVENT, isDone);
         try {
             this.at = LocalDateTime.parse(at.substring(1), Duke.dateTimeFormat);
         } catch (Exception e) {
@@ -14,7 +14,10 @@ public class Event extends Task {
 
     }
 
-    public static void newEvent(String inputSuffix, TaskList taskList, boolean done, boolean announce)
+    /**
+     * Adds a new event to the task list.
+     */
+    public static void newEvent(String inputSuffix, TaskList taskList, boolean isDone, boolean shouldAnnounce)
             throws DukeException {
         String[] eventParts = inputSuffix.split("/at",2);
         String eventName = eventParts[0];
@@ -25,7 +28,7 @@ public class Event extends Task {
             if (Ui.isBlankString(at)) {
                 throw new DukeEmptyDescException(TaskType.EVENT);
             } else {
-                taskList.addTask(new Event(eventName, at, done), announce);
+                taskList.addTask(new Event(eventName, at, isDone), shouldAnnounce);
             }
         }
     }

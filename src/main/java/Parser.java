@@ -1,5 +1,8 @@
 public class Parser {
 
+    /**
+     * Considers the command input and performs actions accordingly.
+     */
     public static void handleInput(String inputPrefix, String inputSuffix, TaskList taskList) throws DukeException {
         switch (inputPrefix) {
             case "list":
@@ -19,6 +22,9 @@ public class Parser {
                 break;
             case "delete":
                 taskList.deleteTask(Integer.parseInt(inputSuffix) - 1);
+                break;
+            case "find":
+                taskList.lookFor(inputSuffix);
                 break;
             default:
                 throw new DukeNoSuchInputException();

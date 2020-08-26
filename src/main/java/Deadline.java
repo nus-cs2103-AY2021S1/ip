@@ -4,8 +4,8 @@ public class Deadline extends Task {
 
     protected LocalDateTime by;
 
-    public Deadline(String name, String by, boolean done) throws DukeException {
-        super(name, TaskType.DEADLINE, done);
+    public Deadline(String name, String by, boolean isDone) throws DukeException {
+        super(name, TaskType.DEADLINE, isDone);
         try {
             this.by = LocalDateTime.parse(by.substring(1), Duke.dateTimeFormat);
         } catch (Exception e) {
@@ -14,8 +14,11 @@ public class Deadline extends Task {
 
     }
 
-    public static void newDeadline(String inputSuffix, TaskList taskList, boolean done, boolean announce)
-            throws DukeException{
+    /**
+     * Adds a new deadline to the task list.
+     */
+    public static void newDeadline(String inputSuffix, TaskList taskList, boolean isDone, boolean shouldAnnounce)
+            throws DukeException {
         String[] deadlineParts = inputSuffix.split("/by",2);
         String deadlineName = deadlineParts[0];
         if (deadlineParts.length == 1) {
@@ -25,7 +28,7 @@ public class Deadline extends Task {
             if (Ui.isBlankString(by)) {
                 throw new DukeEmptyDescException(TaskType.EVENT);
             } else {
-                taskList.addTask(new Deadline(deadlineName, by, done), announce);
+                taskList.addTask(new Deadline(deadlineName, by, isDone), shouldAnnounce);
             }
         }
     }
