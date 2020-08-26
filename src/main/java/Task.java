@@ -31,6 +31,7 @@ public class Task {
         this.isDone = isDone;
     }
 
+
     /**
      * Returns the description
      *
@@ -39,6 +40,7 @@ public class Task {
     public String getDescription() {
         return this.description;
     }
+
 
     /**
      * Shows if a Task is done or not
