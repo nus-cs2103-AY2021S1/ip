@@ -28,8 +28,8 @@ public class DoneCommand extends Command {
      * @throws IOException When writing to file fails.
      */
     @Override
-    public void execute(TaskList taskList, Storage storage, Ui ui)
-            throws DukeException, IOException {
+    public void execute(TaskList taskList,
+                        Storage storage, Ui ui) throws DukeException, IOException {
         int len = userInput.length();
         int pos = Integer.parseInt(userInput.substring(5, len));
         if (pos <= taskList.size() && pos > 0) {

@@ -89,7 +89,7 @@ public class AddCommand extends Command {
         } else {
             System.out.println(Ui.getLine());
             System.out.println(Ui.getBot());
-            throw new DukeException("The description of a todo cannot be empty!");
+            throw new DukeException("The description of todo cannot be empty!");
         }
     }
 
@@ -107,7 +107,8 @@ public class AddCommand extends Command {
         String[] input = userInput.split(" ");
         if (!userInput.substring(8).isBlank()) {
             try {
-                String de = String.join(" ", Arrays.copyOfRange(input, 1, input.length));
+                String de = String.join(" ",
+                        Arrays.copyOfRange(input, 1, input.length));
                 String description = de.split(" /by ")[0];
                 String date = de.split(" /by ")[1];
                 Deadline deadline = new Deadline(description, date);
@@ -117,18 +118,21 @@ public class AddCommand extends Command {
             } catch (PatternSyntaxException | ArrayIndexOutOfBoundsException ex) {
                 System.out.println(Ui.getLine());
                 System.out.println(Ui.getBot());
-                throw new DukeException("You have keyed in an invalid command for 'deadline'!");
+                throw new DukeException(
+                        "You have keyed in an invalid input for 'deadline'!");
             } catch (DateTimeParseException ex) {
                 System.out.println(Ui.getLine());
                 System.out.println(Ui.getLine());
-                throw new DukeException("Please key in your deadline in the form:\n /by <dd/MM/yyyy hh:mm AM/PM>");
+                throw new DukeException(
+                        "Please key in your deadline in the form:\n" +
+                                " /by <dd/MM/yyyy hh:mm AM/PM>");
             } catch (IOException e) {
                 e.printStackTrace();
             }
         } else {
             System.out.println(Ui.getLine());
             System.out.println(Ui.getBot());
-            throw new DukeException("The description of a deadline cannot be empty!");
+            throw new DukeException("The description of deadline cannot be empty!");
         }
     }
 
@@ -157,7 +161,8 @@ public class AddCommand extends Command {
             } catch (PatternSyntaxException | ArrayIndexOutOfBoundsException ex ) {
                 System.out.println(Ui.getLine());
                 System.out.println(Ui.getBot());
-                throw new DukeException("You have keyed in an invalid input for 'event'!");
+                throw new DukeException("You have keyed in an " +
+                        "invalid input for 'event'!");
             } catch (DateTimeParseException ex) {
                 throw new DukeException("Please key in your event " +
                         "in the form:\n /at <dd/MM/yyyy hh:mm AM/PM>");

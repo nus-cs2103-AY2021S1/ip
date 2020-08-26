@@ -11,7 +11,8 @@ public class Ui {
     private static final String bot = "Dave says:";
 
     /** Line separator */
-    private static final String line = "_______________________________________________________________";
+    private static final String line = "______________________" +
+            "_________________________________________";
 
     /** Scanner object */
     Scanner scanner;
@@ -77,7 +78,6 @@ public class Ui {
             System.out.println(bot);
             System.out.println("Here are the tasks in your list:");
             for (int i = 0; i < tasks.size(); i++) {
-                //System.out.println(i + 1 + "." + " " + "[" + tasks.get(i).getStatusIcon() + "]" + " " + tasks.get(i).getTask());
                 System.out.println(i + 1 + "." + " " + tasks.get(i));
             }
         }
@@ -96,7 +96,6 @@ public class Ui {
             System.out.println(line);
             System.out.println(bot);
             System.out.println("Great work! I've marked this task as done:");
-            //System.out.println("[" + tasks.get(pos - 1).getStatusIcon() + "]" + " " + tasks.get(pos - 1).getTask());
             System.out.println(tasks.get(pos - 1));
             System.out.println("Keep the ticks going! ^_^");
         } else {

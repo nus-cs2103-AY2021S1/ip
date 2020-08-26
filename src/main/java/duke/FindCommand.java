@@ -25,11 +25,11 @@ public class FindCommand extends Command {
      * @param storage Storage for storing and retrieving all tasks.
      * @param ui Handles printing of user interaction.
      * @throws DukeException When invalid inputs are entered.
-     * @throws IOException When invalid inputs are entered.
      */
     @Override
     public void execute(
-            TaskList taskList, Storage storage, Ui ui) throws DukeException, IOException {
+            TaskList taskList, Storage storage,
+            Ui ui) throws DukeException {
         ui.printFindings(taskList.findTasks(userInput));
     }
 }
