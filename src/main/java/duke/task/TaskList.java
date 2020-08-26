@@ -45,6 +45,10 @@ public class TaskList {
         return newTaskList;
     }
 
+    public ArrayList<Task> getTaskList(){
+        return this.taskList;
+    }
+
     public void printTasks(){
         Ui.listMessage(this.taskList);
     }
