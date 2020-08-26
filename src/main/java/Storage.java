@@ -12,9 +12,9 @@ public class Storage {
         this.filePath = filePath;
     }
 
-    public void load(TaskList tasklist) {
+    public ArrayList<Task> load() {
+        ArrayList<Task> tasks = new ArrayList<>();
         try {
-            ArrayList<Task> tasks = tasklist.getTaskList();
             File file = new File(filePath);
             if (file.exists()) {
                 FileReader fileReader = new FileReader(file);
@@ -43,6 +43,7 @@ public class Storage {
         } catch (IOException e) {
             Warnings.invalidFileInput(e);
         }
+        return tasks;
     }
 
     public void writeTasks(TaskList tasklist) {

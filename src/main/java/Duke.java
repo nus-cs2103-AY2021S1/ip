@@ -5,11 +5,9 @@ public class Duke {
 
     public Duke(String filePath) {
         ui = new Ui();
-        tasks = new TaskList();
         storage = new Storage(filePath);
 //        try {
-            storage.load(tasks);
-//            tasks = new TaskList(storage.load(tasks));
+            tasks = new TaskList(storage.load());
 //        }
 //        catch (DukeException e) {
 //            ui.showLoadingError();
