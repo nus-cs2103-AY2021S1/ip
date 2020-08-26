@@ -19,7 +19,7 @@ public class timeParser {
      * Return the converted time form of the task.
      */
     public String timeConverter() {
-        LocalDateTime localDateTime = LocalDateTime.parse(inputTime,DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm"));
+        LocalDateTime localDateTime = LocalDateTime.parse(inputTime, DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm"));
         return localDateTime.format(DateTimeFormatter.ofPattern("MMM dd yyyy hh:mm a"));
     }
 }

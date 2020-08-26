@@ -1,6 +1,3 @@
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-
 public class Task {
     protected String new_task;
     protected boolean isDone;
