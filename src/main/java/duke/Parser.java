@@ -1,7 +1,18 @@
 package duke;
 
+/**
+ * Parser class to handle user inputs.
+ */
 public class Parser {
 
+    /**
+     * Categorise user input into different types of tasks to add.
+     *
+     * @param input User input.
+     * @return A task to be added by the TaskList.
+     * @throws InvalidDescriptionException In case the task description is empty.
+     * @throws InvalidTypeException        In case the task type is not one of Event, Deadline, Todo.
+     */
     public static Task handleInput(String input) throws InvalidDescriptionException, InvalidTypeException {
         String type = input.split(" ")[0];
         switch (type) {
@@ -28,6 +39,12 @@ public class Parser {
     }
 
 
+    /**
+     * Maps user input to actions the TaskList must carry out.
+     *
+     * @param input User input.
+     * @param tl    TaskList to be used.
+     */
     public static void allocate(String input, TaskList tl) {
         String[] arr = input.split(" ");
         int idx;

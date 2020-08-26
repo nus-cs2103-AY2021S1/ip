@@ -10,6 +10,9 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.Path;
 
+/**
+ * Storage class that interacts with the .txt file to store and retrieve data.
+ */
 public class Storage {
     private final String HOME = System.getProperty("user.home");
     private final Path DIR = Paths.get(HOME, "data");
@@ -17,8 +20,18 @@ public class Storage {
     private final String IOMESSAGE = "Sorry! There was an IOException! Initialising with an empty Tasklist!";
     private final String INVALIDMESSAGE = "Sorry! There was an error in reading your data! Initialising with a semi-complete Tasklist!";
 
-    public Storage() {}
+    /**
+     * Constructor for Storage class.
+     */
+    public Storage() {
+    }
 
+    /**
+     * Combines all tasks into 1 long string separated by newlines.
+     *
+     * @param items List of tasks.
+     * @return A string that can be stored in the .txt file.
+     */
     String allTasksCombined(ArrayList<Task> items) {
         String res = "";
         for (Task item : items) {
@@ -28,6 +41,13 @@ public class Storage {
         return res;
     }
 
+    /**
+     * Converts string to a task.
+     *
+     * @param str String to be converted.
+     * @throws InvalidTypeException In case task type is not one of Event, Deadline, Todo.
+     * @throws InvalidDataException In case string is not in the correct format.
+     */
     Task stringToTask(String str) throws InvalidTypeException, InvalidDataException {
         String[] info = str.split("\\|");
         if (info.length < 3) {
@@ -38,6 +58,7 @@ public class Storage {
             case "T":
                 return new Todo(info[2], isComplete);
             case "D":
+                return new Deadline(info[2], isComplete, info[3]);
             case "E":
                 return new Event(info[2], isComplete, info[3]);
             default:
@@ -59,7 +80,7 @@ public class Storage {
             pw.print(allTasksCombined(items));
 
             pw.close();
-        } catch (IOException e){
+        } catch (IOException e) {
             throw e;
         }
     }
