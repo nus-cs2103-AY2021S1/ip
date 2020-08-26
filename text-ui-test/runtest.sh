@@ -12,13 +12,19 @@ then
     rm ACTUAL.TXT
 fi
 
+# delete data from previous run
+if [ -e "./test_data/duke.txt" ]
+then
+    rm ./test_data/duke.txt
+fi
+
 set JAVA_TOOL_OPTIONS=-Dfile.encoding=UTF-8
 
 # compile the code into the bin folder, terminates if error occurred
 if
   ! (
     find ../src/main/java -name "*.java" >sources.txt
-    javac -cp ../src -Xlint:none -d ../bin @sources.txt
+    javac -cp ../src/main/java -Xlint:none -d ../bin @sources.txt
   )
 then
     echo "********** BUILD FAILURE **********"
@@ -26,7 +32,7 @@ then
 fi
 
 # run the program, feed commands from input.txt file and redirect the output to the ACTUAL.TXT
-java -classpath ../bin Duke < input.txt > ACTUAL.TXT
+java -classpath ../bin duke.Duke < input.txt > ACTUAL.TXT
 
 # convert to UNIX format
 cp EXPECTED.TXT EXPECTED-UNIX.TXT
