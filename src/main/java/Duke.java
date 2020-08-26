@@ -6,36 +6,29 @@ import java.util.Scanner;
 
 public class Duke {
 
-    public static void messagePrint(String msg) {
-//      Add indentation for new lines
-        msg = msg.replace("\n", "\n    ");
-        msg = ("    ____________________________________________________________\n"
-                + "    " + msg + "\n"
-                + "    ____________________________________________________________\n");
-        System.out.printf(msg);
-    }
-
     public static void main(String[] args) throws DukeException {
+        Parser parser = new Parser();
+        Ui printer = new Ui();
         String currentDirectory = System.getProperty("user.dir");
-        DukeFile file = new DukeFile(currentDirectory + "/data/duke.txt");
+        Storage file = new Storage(currentDirectory + "/data/duke.txt");
         Scanner scanner = new Scanner(System.in);
-        ArrayList<Task> taskList = new ArrayList<Task>();
+        TaskList taskList = new TaskList();
         if (file.getExisted()) {
-            taskList = file.getTaskList();
+            taskList = new TaskList(file.getTaskList());
         }
-        messagePrint(
+        printer.messagePrint(
                 "Hello! I'm Duke\n" +
                 "What can I do for you?");
 
         while (scanner.hasNext()) {
             try {
                 String msg = scanner.nextLine();
-                if (msg.equals("bye")) {
-                    messagePrint("Bye. Hope to see you again soon!");
+                if (parser.parse(msg) == Parser.Command.BYE) {
+                    printer.messagePrint("Bye. Hope to see you again soon!");
                     break;
 
                     //          PRINTING LIST
-                } else if (msg.equals("list")) {
+                } else if (parser.parse(msg) == Parser.Command.LIST) {
                     String listMessage = "";
                     for (int i = 0; i < taskList.size(); i++) {
                         listMessage += (i + 1) + ". " + taskList.get(i).toString();
@@ -44,10 +37,10 @@ public class Duke {
                             listMessage += "\n";
                         }
                     }
-                    messagePrint(listMessage);
+                    printer.messagePrint(listMessage);
 
                     //          UPDATING STATUS OF EVENTS
-                } else if (msg.matches("^done \\d+$")) {
+                } else if (parser.parse(msg) == Parser.Command.DONE) {
                     int updateTaskIndex = Integer.valueOf(msg.substring(5, msg.length())) - 1;
                     if (updateTaskIndex >= taskList.size() || updateTaskIndex <= 0) {
                         throw new DukeException(DukeExceptionType.TASK_NOT_FOUND);
@@ -56,10 +49,10 @@ public class Duke {
                     taskToUpdate.updateStatus(true);
                     taskList.set(updateTaskIndex, taskToUpdate);
                     String completedMessage = "Nice! I've marked this task as done:\n" + "  " + taskList.get(updateTaskIndex).toString();
-                    messagePrint(completedMessage);
-                    file.write(taskList);
+                    printer.messagePrint(completedMessage);
+                    file.write(taskList.getList());
 
-                } else if (msg.matches("^delete \\d+$")) {
+                } else if (parser.parse(msg) == Parser.Command.DELETE) {
                     int updateTaskIndex = Integer.valueOf(msg.substring(7, msg.length())) - 1;
                     if (updateTaskIndex >= taskList.size() || updateTaskIndex <= 0) {
                         throw new DukeException(DukeExceptionType.TASK_NOT_FOUND);
@@ -69,15 +62,15 @@ public class Duke {
                     String deletedMessage = "Noted. I've removed this task:\n" +
                            "  " + taskToUpdate.toString() + "\n" +
                                 "Now you have " + taskList.size() + " tasks in the list.";
-                    messagePrint(deletedMessage);
-                    file.write(taskList);
+                    printer.messagePrint(deletedMessage);
+                    file.write(taskList.getList());
 
                     //          CREATING NEW TASKS
                 } else {
 
                     //              DEADLINES
                     Task newTask;
-                    if (msg.matches("^deadline \\S.* /by \\S.*$")) {
+                    if (parser.parse(msg) == Parser.Command.DEADLINE) {
                         int byIndex = msg.indexOf("/by");
                         String task = msg.substring(9, byIndex); //Number 9 = starting index of deadline string.
                         String dateString = msg.substring(byIndex + 4, msg.length());
@@ -89,7 +82,7 @@ public class Duke {
                         }
 
                         //              EVENTS
-                    } else if (msg.matches("^event \\S.* /at \\S.*$")) {
+                    } else if (parser.parse(msg) == Parser.Command.EVENT) {
                         int atIndex = msg.indexOf("/at");
                         String task = msg.substring(6, atIndex); //Number 6 = starting index of event string.
                         String dateString = msg.substring(atIndex + 4, msg.length());
@@ -101,29 +94,20 @@ public class Duke {
                         }
 
                         //              TODOS
-                    } else if (msg.matches("^todo \\S.*$")) {
+                    } else if (parser.parse(msg) == Parser.Command.TODO) {
                         String task = msg.substring(5, msg.length()); //Number 5 = starting index of todo string.
                         newTask = new ToDo(task);
 
 //                        Checks for empty TODO
-                    } else if (msg.matches("^todo\\s*$")) {
+                    } else if (parser.parse(msg) == Parser.Command.EMPTY_TASK_TODO) {
                         throw new DukeException(DukeExceptionType.EMPTY_TASK_TODO);
 
 //                        Checks for empty TASK for event/deadline
-                    } else if (
-                            msg.matches("^event\\s/at.*$") ||
-                                    msg.matches("^deadline\\s/by.*$") ||
-                                    msg.matches("^event\\s*$") ||
-                                    msg.matches("^deadline\\s*$"))
-                    {
+                    } else if (parser.parse(msg) == Parser.Command.EMPTY_TASK_EVENT_DEADLINE) {
                         throw new DukeException(DukeExceptionType.EMPTY_TASK_EVENT_DEADLINE);
 
 //                        Checks for empty DATE for event/deadline
-                    } else if (msg.matches("^event .* /at\\s*$") ||
-                            msg.matches("^deadline .* /by\\s*") ||
-                            msg.matches("^event.*") ||
-                            msg.matches("^deadline.*"))
-                    {
+                    } else if (parser.parse(msg) == Parser.Command.EMPTY_DATE) {
                         throw new DukeException(DukeExceptionType.EMPTY_DATE);
                     }
 
@@ -132,16 +116,16 @@ public class Duke {
                         throw new DukeException(DukeExceptionType.INVALID_INPUT);
                     }
 
-                    taskList.add(newTask);
+                    taskList = taskList.add(newTask);
                     String newTaskMsg = String.format(
                             "Got it. I've added this task:\n" +
                                     "  %s\n" +
                                     "Now you have %d tasks in the list.", newTask.toString(), taskList.size());
-                    messagePrint(newTaskMsg);
-                    file.write(taskList);
+                    printer.messagePrint(newTaskMsg);
+                    file.write(taskList.getList());
                 }
             } catch (DukeException e) {
-                messagePrint(e.toString());
+                printer.messagePrint(e.toString());
                 continue;
             }
         }

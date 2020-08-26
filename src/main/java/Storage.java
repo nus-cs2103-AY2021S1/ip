@@ -6,12 +6,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class DukeFile {
+public class Storage {
     private String path;
     private File file;
     private boolean isExisted;
 
-    DukeFile(String path) {
+    Storage(String path) {
         File f = new File(path);
         if (f.exists()) {
             this.file = f;

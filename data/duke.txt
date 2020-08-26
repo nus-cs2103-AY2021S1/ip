@@ -1,3 +1,4 @@
 T | 0 | hello
-T | 1 | eeheee
-E | 0 | eat | tomorrow
+T | 0 | eat
+T | 1 | bye
+E | 0 | eat | tmr
