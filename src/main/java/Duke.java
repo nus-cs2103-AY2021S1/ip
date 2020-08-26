@@ -18,6 +18,7 @@ public class Duke {
 
     public void sayHello() {
         System.out.println("Hello! I'm Clara! :D How may I help you? :)");
+        this.displayTasks();
     }
 
     public void sayBye() {

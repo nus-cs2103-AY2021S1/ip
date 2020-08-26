@@ -13,14 +13,14 @@ public class Event extends Task{
         this.time = time;
     }
 
-    public Date getTime() {
-        return this.time;
+    public String getTimeStr() {
+        return new SimpleDateFormat("y-M-d").format(this.time);
     }
 
     @Override
     public String toString() {
         String box = this.isDone ? "\u2713" : "\u2718";
         return String.format("[E][%s] %s (at: %s)", box, this.description,
-                new SimpleDateFormat("y-M-d").format(this.time));
+                new SimpleDateFormat("MMM d yyyy").format(this.time));
     }
 }

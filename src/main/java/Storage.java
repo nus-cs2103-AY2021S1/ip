@@ -3,6 +3,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.Files;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
@@ -20,6 +22,7 @@ public class Storage {
      * @param serializedTask Serialized Task object (String representation of Task object)
      * @return Task object
      */
+
     public Task deserializeTask(String serializedTask) throws RuntimeException {
         String[] tokens = serializedTask.replaceAll("\\s","").split("\\|");
 
@@ -27,15 +30,19 @@ public class Storage {
         boolean isDone = tokens[1].equals("1");
         String description = tokens[2];
 
-        switch (taskIndex) {
+        try {
+            switch (taskIndex) {
             case ("T"):
                 return new ToDo(description, isDone);
             case ("D"):
-                return new Deadline(description, isDone, tokens[3]);
+                return new Deadline(description, isDone, new SimpleDateFormat("y-M-d").parse(tokens[3]));
             case ("E"):
-                return new Event(description, isDone, tokens[3]);
+                return new Event(description, isDone, new SimpleDateFormat("y-M-d").parse(tokens[3]));
             default:
                 throw new RuntimeException("Task is invalid. File might be corrupted.");
+            }
+        } catch (ParseException e) {
+            throw new RuntimeException("Date can't be parsed.");
         }
     }
 
@@ -52,9 +59,9 @@ public class Storage {
             if (task instanceof ToDo) {
                 return String.format("T | %c | %s\n", status, description);
             } else if (task instanceof Deadline) {
-                return String.format("D | %c | %s | %s\n", status, description, ((Deadline)task).getDoBy());
+                return String.format("D | %c | %s | %s\n", status, description, ((Deadline)task).getDoByStr());
             } else {
-                return String.format("E | %c | %s | %s\n", status, description, ((Event)task).getTime());
+                return String.format("E | %c | %s | %s\n", status, description, ((Event)task).getTimeStr());
             }
         } else {
             throw new RuntimeException("Task is invalid. File might be corrupted.");

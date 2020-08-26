@@ -13,8 +13,8 @@ public class Deadline extends Task{
         this.doBy = doBy;
     }
 
-    public String getDoBy() {
-        return new SimpleDateFormat("y-M-d").format(this.doBy)
+    public String getDoByStr() {
+        return new SimpleDateFormat("y-M-d").format(this.doBy);
     }
 
     @Override
