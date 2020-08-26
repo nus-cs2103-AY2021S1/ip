@@ -77,8 +77,9 @@ public class Willy {
                     String deadline = message.substring(separatorIndex + 4);
                     DeadlineTask newTask = new DeadlineTask(deadline, activity, TaskSymbol.DEADLINE);
                     list.addToList(newTask);
-                } catch (Exception e) {
-                    WillyException error = new WillyException("Hmmm the description/deadline of the task is missing... \n\tTry again with more details?");
+
+                } catch (Exception e){
+                    WillyException error = new WillyException("Hmmm are you missing description/deadline of the task? \n\tCheck and try again?");
                     System.out.println(error);
                 }
             }
@@ -93,15 +94,16 @@ public class Willy {
                     EventsTask newTask = new EventsTask(duration, activity, TaskSymbol.EVENT);
                     list.addToList(newTask);
                 } catch (Exception e) {
-                    WillyException error = new WillyException(e.getMessage());
-//                    WillyException error = new WillyException("Hmmm the description/timing of event is missing... \n\tTry again with more details?");
+                    WillyException error = new WillyException("Hmmm are you missing the description/timing of event? \n\tCheck and try again?");
                     System.out.println(error);
                 }
-            } else if (message.contains("find")) {
-                String keyword = message.substring(5);
-                System.out.println(keyword);
-                list.findTask(keyword);
+
             }
+            else if (message.contains("find")) {
+                    String keyword = message.substring(5);
+                    list.findTask(keyword);
+            }
+
             // else is nonsense which will produce error
             else {
                 WillyException error = new WillyException("Hmmm sorry I'm not sure what you are saying, try something else?:(");
