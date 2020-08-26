@@ -58,7 +58,7 @@ public class Storage {
     /**
      * Reads the file and forms a list of individual string representations of tasks in the file.
      * @return A list of string representation of tasks in the saved file.
-     * @throw IOException IOException is thrown when the directory is not found.
+     * @throws IOException when the directory to the saved file is not found.
      */
     public List<String> readStorageFile() throws IOException {
         File folder = new File(this.folderPath);
@@ -80,7 +80,9 @@ public class Storage {
     }
 
     /**
-     * Method to write from storage file to a task list
+     * Reads from the saved file and creates the task list.
+     * @return Task list that contains all the tasks in the saved file.
+     * @throws IOException when the directory to the saved file is not found.
      */
     public TaskList formTaskList() throws IOException {
         List<String> taskListInString = this.readStorageFile();

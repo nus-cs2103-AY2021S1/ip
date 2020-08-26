@@ -1,11 +1,21 @@
 package main.java;
 import java.io.IOException;
 
+/**
+ * Represents the Duke object to start the program.
+ */
 public class Duke {
     private Ui ui;
     private Storage storage;
     private TaskList tasklist;
 
+    /**
+     * Creates a Duke object with an Ui object, storage object to the saved task list file in the
+     * hard disk and a task list object being created after the saved task list file is saved.
+     * If the directory to the saved task list file is not found, an IOException error will be raised
+     * and caught.
+     * @param fileName Name of the saved task list file.
+     */
     public Duke(String fileName) {
         try {
             this.ui = new Ui();
@@ -16,9 +26,8 @@ public class Duke {
         }
     }
 
-
     /**
-     * Driver function
+     * Runs the Duke program.
      */
     public void run() {
         try {
