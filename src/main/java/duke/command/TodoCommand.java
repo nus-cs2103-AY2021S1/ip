@@ -1,18 +1,21 @@
-import java.time.LocalDateTime;
+package duke.command;
 
-public class EventCommand extends Command {
+import duke.DukeException;
+import duke.Storage;
+import duke.TaskList;
+import duke.task.Todo;
+
+public class TodoCommand extends Command {
     private String description;
-    private LocalDateTime at;
     
-    public EventCommand(String description, LocalDateTime at) {
+    public TodoCommand(String description) {
         super();
         this.description = description;
-        this.at = at;
     }
     
     @Override
     public void execute(Storage storage, TaskList taskList) throws DukeException {
-        taskList.addTask(new Event(description, at));
+        taskList.addTask(new Todo(description));
         storage.saveTasks(taskList.getTask());
     }
 }

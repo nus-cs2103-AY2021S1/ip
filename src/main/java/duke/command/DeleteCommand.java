@@ -1,16 +1,22 @@
-public class DoneCommand extends Command {
+package duke.command;
+
+import duke.DukeException;
+import duke.Storage;
+import duke.TaskList;
+
+public class DeleteCommand extends Command {
     private String taskNumber;
-    
-    public DoneCommand(String taskNumber) {
+
+    public DeleteCommand(String taskNumber) {
         super();
         this.taskNumber = taskNumber;
     }
-    
+
     @Override
     public void execute(Storage storage, TaskList taskList) throws DukeException {
         try {
             int index = Integer.parseInt(taskNumber) - 1;
-            taskList.doneTask(index);
+            taskList.deleteTask(index);
             storage.saveTasks(taskList.getTask());
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Error! The task number you entered does not exist.");
