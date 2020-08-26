@@ -81,9 +81,9 @@ public class Parser {
                 return new DueCommand(parseDate(args));
             case "done":
                 if (args.isBlank()) {
-                    throw new DukeException("Task number required for the delete command.");
+                    throw new DukeException("Task number required for the done command.");
                 } else if (!args.chars().allMatch(Character::isDigit)) {
-                    throw new DukeException("Only positive integers allowed for the delete command.");
+                    throw new DukeException("Only positive integers allowed for the done command.");
                 }
 
                 return new DoneCommand(Integer.parseInt(args));
