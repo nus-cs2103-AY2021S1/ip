@@ -23,6 +23,7 @@ public class Parser {
             default:
                 throw new DukeNoSuchInputException();
         }
+        Storage.createNewSave(taskList.toData());
     }
 
 }
