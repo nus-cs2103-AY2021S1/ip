@@ -9,9 +9,9 @@ public class Ui {
     private InputHandler inputHandler;
     private OutputHandler outputHandler;
 
-    public Ui(InputHandler in, OutputHandler out) {
-        this.inputHandler = in;
-        this.outputHandler = out;
+    public Ui(InputHandler inputHandler, OutputHandler outputHandler) {
+        this.inputHandler = inputHandler;
+        this.outputHandler = outputHandler;
     }
 
     public void displayGreet() {
@@ -20,6 +20,7 @@ public class Ui {
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
+
         this.display("Hello from\n" + logo);
     }
 

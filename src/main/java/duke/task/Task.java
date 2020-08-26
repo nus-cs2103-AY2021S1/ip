@@ -4,42 +4,46 @@ import java.util.HashMap;
 
 public class Task {
     private String name;
-    private boolean done;
+    private boolean isDone;
 
     public Task() {
         this.name = "";
-        this.done = false;
+        this.isDone = false;
     }
 
     public Task(String name) {
         this.name = name;
-        this.done = false;
+        this.isDone = false;
     }
 
-    public Task(String name, boolean done) {
+    public Task(String name, boolean isDone) {
         this.name = name;
-        this.done = done;
+        this.isDone = isDone;
     }
 
     public void doTask() {
-        this.done = true;
+        this.isDone = true;
     }
 
     public HashMap<String, String> convertToHashMap() {
         HashMap<String, String> dict = new HashMap<>();
         dict.put("type", "duke.task.Task");
         dict.put("name", this.name);
-        dict.put("done", this.done ? "true" : "false");
+        dict.put("done", this.isDone ? "true" : "false");
         return dict;
     }
 
     public String toString() {
-        String check;
-        if (this.done) {
-            check = "\u2713";
+
+        String checkMark;
+
+        // Print tick if done and cross if not done
+        if (this.isDone) {
+            checkMark = "\u2713";
         } else {
-            check = "\u2718";
+            checkMark = "\u2718";
         }
-        return "[" + check + "] " + this.name;
+
+        return "[" + checkMark + "] " + this.name;
     }
 }

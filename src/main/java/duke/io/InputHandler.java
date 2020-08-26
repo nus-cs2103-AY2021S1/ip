@@ -4,13 +4,13 @@ import java.util.Scanner;
 
 public class InputHandler {
 
-    Scanner sc;
+    Scanner scanner;
 
     public InputHandler() {
-        sc = new Scanner(System.in);
+        scanner = new Scanner(System.in);
     }
 
     public String input() {
-        return sc.nextLine();
+        return scanner.nextLine();
     }
 }

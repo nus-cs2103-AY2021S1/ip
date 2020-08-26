@@ -13,8 +13,8 @@ public class Event extends Task {
         this.when = TimePoint.of(when);
     }
 
-    public Event(String name, String when, boolean done) {
-        super(name, done);
+    public Event(String name, String when, boolean isDone) {
+        super(name, isDone);
         this.when = TimePoint.of(when);
     }
 
@@ -25,9 +25,12 @@ public class Event extends Task {
 
     @Override
     public HashMap<String, String> convertToHashMap() {
+
         HashMap<String, String> dict = super.convertToHashMap();
+
         dict.put("type", "duke.task.Event");
         dict.put("when", this.when.toSaveString());
+
         return dict;
     }
 }

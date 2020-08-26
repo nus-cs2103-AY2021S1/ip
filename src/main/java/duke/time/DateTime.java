@@ -24,20 +24,34 @@ public class DateTime extends TimePoint{
 
     @Override
     public String toString() {
-        String text = this.date.format(DateTimeFormatter.ofPattern("dd MMMM yyyy", new Locale("en")));
+
+        // String format for date
+        String text = this.date.format(DateTimeFormatter
+                .ofPattern("dd MMMM yyyy", new Locale("en")));
+
+        // If time data available, add to text string
         if (haveTime) {
-            text += " " + this.time.format(DateTimeFormatter.ofPattern("h:mma", new Locale("en")));
+            text += " " + this.time.format(DateTimeFormatter
+                    .ofPattern("h:mma", new Locale("en")));
         }
+
         return text;
     }
 
     @Override
     public String toSaveString() {
-        String text = this.date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy", new Locale("en")));
+
+        // Save String format for data
+        String saveString = this.date.format(DateTimeFormatter
+                .ofPattern("dd/MM/yyyy", new Locale("en")));
+
+        // If time data available, add to save string
         if (haveTime) {
-            text += " " + this.time.format(DateTimeFormatter.ofPattern("HH:mm", new Locale("en")));
+            saveString += " " + this.time.format(DateTimeFormatter
+                    .ofPattern("HH:mm", new Locale("en")));
         }
-        return text;
+
+        return saveString;
     }
 
 }

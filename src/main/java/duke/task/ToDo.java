@@ -8,8 +8,8 @@ public class ToDo extends Task{
         super(name);
     }
 
-    public ToDo(String name, boolean done) {
-        super(name, done);
+    public ToDo(String name, boolean isDone) {
+        super(name, isDone);
     }
 
     @Override
@@ -19,8 +19,11 @@ public class ToDo extends Task{
 
     @Override
     public HashMap<String, String> convertToHashMap() {
+
         HashMap<String, String> dict = super.convertToHashMap();
+
         dict.put("type", "duke.task.ToDo");
+
         return dict;
     }
 }

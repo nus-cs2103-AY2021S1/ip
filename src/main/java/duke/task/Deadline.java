@@ -13,8 +13,8 @@ public class Deadline extends Task {
         this.deadline = TimePoint.of(deadline);
     }
 
-    public Deadline(String name, String deadline, boolean done) {
-        super(name, done);
+    public Deadline(String name, String deadline, boolean isDone) {
+        super(name, isDone);
         this.deadline = TimePoint.of(deadline);
     }
 
@@ -25,9 +25,12 @@ public class Deadline extends Task {
 
     @Override
     public HashMap<String, String> convertToHashMap() {
+
         HashMap<String, String> dict = super.convertToHashMap();
+
         dict.put("type", "duke.task.Deadline");
         dict.put("deadline", this.deadline.toSaveString());
+
         return dict;
     }
 }

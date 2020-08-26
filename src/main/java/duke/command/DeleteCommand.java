@@ -16,12 +16,15 @@ public class DeleteCommand extends ComplexCommand {
     public void execute(Ui ui, TaskManager taskManager, SaveManager saveManager) {
 
         try {
+            // Attempt to parse parameters then remove task with given index
             int index = this.parseParams(taskManager.size());
             Task temp = taskManager.removeTask(index-1);
 
+            // Display status message to user
             ui.display("Alright. I've removed this task:");
             ui.display("\t" + temp.toString());
             ui.display("Now you have " + taskManager.size() + " tasks in the list.");
+
         } catch (DukeInputException e) {
             ui.displayException(e);
         }
@@ -29,22 +32,28 @@ public class DeleteCommand extends ComplexCommand {
     }
 
     public int parseParams(int taskManagerSize) throws DukeInputException {
+
+        // Check if parameters are empty
         if (this.params.equals("")) {
             throw new DukeInputException("'delete' requires parameters.\n"
                     + "Use case: delete <task number>");
         }
-        int i;
+
+        // Check if given parameter is numerical
+        int index;
         try {
-            i = Integer.parseInt(params);
+            index = Integer.parseInt(params);
         } catch (NumberFormatException e) {
             throw new DukeInputException("Please input number instead of <"
                     + this.params + "> after a 'delete' command!");
         }
 
-        if (i < 1 || i > taskManagerSize) {
+        // Check if given index is valid
+        if (index < 1 || index > taskManagerSize) {
             throw new DukeInputException("Index input out of range");
         }
-        return i;
+
+        return index;
     }
 
     @Override
