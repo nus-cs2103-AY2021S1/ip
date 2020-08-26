@@ -14,6 +14,10 @@ public class TaskManager {
             String[] temp = command.split(" ");
             int doneIndex = Integer.parseInt(temp[1]) - 1;
             markTaskDone(doneIndex);;
+        } else if (command.startsWith("delete ")) {
+            String[] temp = command.split(" ");
+            int delIndex = Integer.parseInt(temp[1]) - 1;
+            deleteTask(delIndex);;
         } else if (command.startsWith("deadline")) {
             if (command.length() <= 9){
                 throw new DukeException("Sorry, the description of a deadline cannot be empty!");
@@ -64,6 +68,12 @@ public class TaskManager {
         Task completedTask = taskList.get(index);
         completedTask.markAsDone();
         System.out.println("The following task has been marked as done: \n" + completedTask);
+    }
+
+    public void deleteTask(int index) {
+        Task toDeleteTask = taskList.get(index);
+        taskList.remove(toDeleteTask);
+        System.out.println("The following task has been removed: \n" + toDeleteTask);
     }
 
     public void printList() {
