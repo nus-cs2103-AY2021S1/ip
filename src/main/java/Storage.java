@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
+/**
+ * Storage ensures that the current tasks are always backed up in a separate file.
+ */
 public class Storage {
 
 	private final String filePath;
@@ -13,6 +16,13 @@ public class Storage {
 		this.filePath = filePath;
 	}
 
+	/**
+	 * Parses in a line from the storage file and returns a Task based on the details retrieved from that line.
+	 *
+	 * @param display A line from the storage file.
+	 * @return Task based on the details retrieved from display.
+	 * @throws DukeException
+	 */
 	private Task addTaskFromStorage(String display) throws DukeException {
 		String[] taskDetails = display.split(" \\| ");
 		String taskType = taskDetails[0];
@@ -29,6 +39,12 @@ public class Storage {
 		}
 	}
 
+	/**
+	 * When Duke is just started up, it reads from the storage file, goes through each line, each corresponding to a
+	 * task, and returns the tasks.
+	 *
+	 * @return ArrayList of Tasks according to the storage file.
+	 */
 	public ArrayList<Task> initializeTasks() {
 		try {
 			File file = new File(filePath);
@@ -47,6 +63,13 @@ public class Storage {
 		}
 	}
 
+	/**
+	 * Overwrites the current storage file with updated taskList, or creates a new storage file with updated taskList
+	 * if it currently does not exist.
+	 *
+	 * @param taskList Details of TaskList are gotten from.
+	 * @throws DukeException
+	 */
 	public void saveList(TaskList taskList) throws DukeException {
 		ArrayList<Task> tasks = taskList.getTasks();
 		String[] directories = filePath.split("/");

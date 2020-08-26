@@ -1,6 +1,9 @@
 import java.util.ArrayList;
 import java.util.Date;
 
+/**
+ * TaskList contains all the tasks.
+ */
 public class TaskList {
 	private final ArrayList<Task> tasks;
 

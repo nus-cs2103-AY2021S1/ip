@@ -3,6 +3,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
 
+/**
+ * Ui handles interactions with the user.
+ */
 public class Ui {
 	private static final String INDENT = "    ";
 	private static final String LINE = "____________________________________________________________";
@@ -28,6 +31,11 @@ public class Ui {
 		return sc.nextLine();
 	}
 
+	/**
+	 * Each feedback message from Duke is properly formatted, e.g. enclosed in two lines
+	 *
+	 * @param response ArrayList of feedback messages.
+	 */
 	public static void formatResponse(ArrayList<String> response) {
 		System.out.println(INDENT + LINE);
 		for (String resp: response) {
@@ -37,6 +45,12 @@ public class Ui {
 		System.out.println();
 	}
 
+	/**
+	 * Overloaded formtResponse, takes in a variable number of strings, puts them in a ArrayList and passes it to the
+	 * other formatResponse method.
+	 *
+	 * @param response Variable number of feedback messages.
+	 */
 	public static void formatResponse(String ...response) {
 		ArrayList<String> lst = new ArrayList<>();
 		for (String resp: response) {
@@ -49,6 +63,12 @@ public class Ui {
 		return "Now you have " + tasks.getCount() + " task" + (tasks.getCount() == 1 ? "" : "s") + " in the list.";
 	}
 
+	/**
+	 * Displays all the tasks, based on date if date is not null.
+	 *
+	 * @param tasks Tasks to display.
+	 * @param date Date to filter tasks by.
+	 */
 	public void formatList(TaskList tasks, Date date) {
 		ArrayList<String> lst = tasks.toString(date);
 		if (date == null) {

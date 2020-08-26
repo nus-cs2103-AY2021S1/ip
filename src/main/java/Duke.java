@@ -1,3 +1,6 @@
+/**
+ * Duke is the application that the user is aware of.
+ */
 public class Duke {
 
     private final Storage storage;
@@ -10,6 +13,10 @@ public class Duke {
         tasks = new TaskList(storage.initializeTasks());
     }
 
+    /**
+     * Starts an execution of Duke.
+     * There is a Welcome, a series of Commands and finally a Goodbye from Duke.
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;

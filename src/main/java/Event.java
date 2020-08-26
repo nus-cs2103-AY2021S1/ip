@@ -1,5 +1,8 @@
 import java.util.Date;
 
+/**
+ * Event is a type of Task but with a date when it is held.
+ */
 public class Event extends Task {
 
     private final Date at;

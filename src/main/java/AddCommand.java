@@ -1,5 +1,9 @@
 import java.util.Date;
 
+/**
+ * AddCommand is a request to add a Task.
+ */
+
 public class AddCommand extends Command {
 
 	private final TaskType taskType;
@@ -12,6 +16,14 @@ public class AddCommand extends Command {
 		this.date = date;
 	}
 
+	/**
+	 * Adds a task to the TaskList, alerts user that a task is added, updates storage with added task.
+	 *
+	 * @param tasks TaskList to be modified.
+	 * @param ui Ui to be used to display feedback messages.
+	 * @param storage Storage to be updated.
+	 * @throws DukeException
+	 */
 	@Override
 	public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
 		Task task = null;
