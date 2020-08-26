@@ -1,7 +1,10 @@
-public class Event extends Task {
-    protected String at;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
-    public Event(String task, String at) {
+public class Event extends Task {
+    protected LocalDateTime at;
+
+    public Event(String task, LocalDateTime at) {
         super(task);
         this.at = at;
     }
@@ -19,17 +22,8 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        String[] ats = at.split(" ");
-        String str = " (";
-        for (int i = 0; i < ats.length; i++) {
-            if (i == 0) {
-                str += ats[i] + ": ";
-            } else if (i == ats.length - 1) {
-                str += ats[i];
-            } else {
-                str += ats[i] + " ";
-            }
-        }
+        String str = " (at: ";
+        str += at.format(DateTimeFormatter.ofPattern("MMM d yyyy hh:mm a"));
         return "[E][" + (this.done ? "✓" : "✗") + "] " + this.task + str + ")";
     }
 }

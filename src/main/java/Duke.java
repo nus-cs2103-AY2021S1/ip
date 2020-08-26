@@ -2,6 +2,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.format.DateTimeParseException;
+import java.time.LocalDateTime;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -21,13 +23,13 @@ public class Duke {
                     }
                     lists.add(todo);
                 } else if (task[0].equals("D")) {
-                    Task deadline = new Deadline(task[2], task[3]);
+                    Task deadline = new Deadline(task[2], LocalDateTime.parse(task[3]));
                     if (task[1].equals("✓")) {
                         deadline.markDone();
                     }
                     lists.add(deadline);
                 } else if (task[0].equals("E")) {
-                    Task event = new Event(task[2], task[3]);
+                    Task event = new Event(task[2], LocalDateTime.parse(task[3]));
                     if (task[1].equals("✓")) {
                         event.markDone();
                     }
@@ -77,6 +79,33 @@ public class Duke {
                             System.out.println(msg.getResponse());
                         } catch (MissingNumberException e) {
                             Response msg = new Response(new String[]{"Please select the task that you want to mark done!"});
+                        }
+                    } else if (test[0].equals("deadline")) {
+                        try {
+                            String[] str = received.split("deadline ")[1].split(" /");
+                            if (str.length == 1) {
+                                throw new MissingDeadlineException();
+                            } else {
+                                try {
+                                    String description = str[0];
+                                    String by = str[1].split("by ")[1];
+                                    LocalDateTime byTime = LocalDateTime.parse(by);
+                                    Deadline deadline = new Deadline(description, byTime);
+                                    lists.add(deadline);
+                                    Response msg = new Response(new Task[]{deadline}, Response.Tag.ADD, lists.size());
+                                    System.out.println(msg.getResponse());
+                                } catch (DateTimeParseException e) {
+                                    Response msg = new Response(new String[]{"Format of date and time is incorrect! Please fill in the date and time following the format below.",
+                                            "YYYY-MM-DDTHH:MM:SS"});
+                                    System.out.println(msg.getResponse());
+                                }
+                            }    
+                        } catch (ArrayIndexOutOfBoundsException e) {
+                            MissingDescriptionException realError = new MissingDescriptionException("a deadline");
+                            Response msg = new Response(new String[]{String.valueOf(realError)});
+                            System.out.println(msg.getResponse());
+                        } catch (MissingDeadlineException e){
+                            Response msg = new Response(new String[]{String.valueOf(e)});
                             System.out.println(msg.getResponse());
                         }
                     } else if (test[0].equals("delete")) {
@@ -113,16 +142,22 @@ public class Duke {
                             }
                         } else if (test[0].equals("deadline")) {
                             try {
-                                String[] str = received.split("deadline ")[1].split(" /");
+                                String[] str = received.split("deadline ")[1].split(" /by ");
                                 if (str.length == 1) {
                                     throw new MissingDeadlineException();
                                 } else {
-                                    String description = str[0];
-                                    String by = str[1];
-                                    Deadline deadline = new Deadline(description, by);
-                                    lists.add(deadline);
-                                    Response msg = new Response(new Task[]{deadline}, Response.Tag.ADD, lists.size());
-                                    System.out.println(msg.getResponse());
+                                    try {
+                                        String description = str[0];
+                                        String by = str[1];
+                                        Deadline deadline = new Deadline(description, LocalDateTime.parse(by));
+                                        lists.add(deadline);
+                                        Response msg = new Response(new Task[]{deadline}, Response.Tag.ADD, lists.size());
+                                        System.out.println(msg.getResponse());
+                                    } catch (DateTimeParseException e) {
+                                        Response msg = new Response(new String[]{"Format of date and time is incorrect! Please fill in the date and time following the format below.",
+                                                "YYYY-MM-DDTHH:MM:SS"});
+                                        System.out.println(msg.getResponse());
+                                    }
                                 }
                             } catch (ArrayIndexOutOfBoundsException e) {
                                 MissingDescriptionException realError = new MissingDescriptionException("a deadline");
@@ -134,14 +169,23 @@ public class Duke {
                             }
                         } else if (test[0].equals("event")) {
                             try {
-                                String[] str = received.split("event ")[1].split(" /");
+                                String[] str = received.split("event ")[1].split(" /at ");
                                 if (str.length == 1) {
                                     throw new MissingTimeException();
+                                } else {
+                                    try {
+                                        String description = str[0];
+                                        String at = str[1];
+                                        Event event = new Event(description, LocalDateTime.parse(at));
+                                        lists.add(event);
+                                        Response msg = new Response(new Task[]{event}, Response.Tag.ADD, lists.size());
+                                        System.out.println(msg.getResponse());
+                                    } catch (DateTimeParseException e) {
+                                        Response msg = new Response(new String[]{"Format of date and time is incorrect! Please fill in the date and time following the format below.",
+                                                "YYYY-MM-DDTHH:MM:SS"});
+                                        System.out.println(msg.getResponse());
+                                    }
                                 }
-                                Event event = new Event(str[0], str[1]);
-                                lists.add(event);
-                                Response msg = new Response(new Task[]{event}, Response.Tag.ADD, lists.size());
-                                System.out.println(msg.getResponse());
                             } catch (ArrayIndexOutOfBoundsException e) {
                                 MissingDescriptionException realError = new MissingDescriptionException("an event");
                                 Response msg = new Response(new String[]{String.valueOf(realError)});
