@@ -1,4 +1,7 @@
 import java.util.ArrayList;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 
 public class AddList {
     private final String intro = "Hello I am Duke!\nWhat can I help you with?";
@@ -6,17 +9,28 @@ public class AddList {
     private final String line = "---------------------------------------------";
     private ArrayList<Task> items;
     private int total;
+    Storage storage;
 
     public AddList() {
-        this.items = new ArrayList<>();
-        this.total = 0;
         this.addLines(this.intro);
+        this.storage = new Storage();
+        this.items = storage.readData();
+        this.total = items.size();
     }
 
     public void addLines(String input) {
         System.out.println(this.line);
         System.out.println(input);
         System.out.println(this.line);
+    }
+
+    public void bye() {
+        try {
+            this.addLines(this.goodbye);
+            storage.writeData(this.items);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public Task handleInput(String input) throws InvalidDescriptionException, InvalidTypeException {
@@ -81,7 +95,7 @@ public class AddList {
         String[] arr = input.split(" ");
 
         if (arr[0].equals("bye")) {
-            this.addLines(this.goodbye);
+            this.bye();
         } else if (arr[0].equals("list")) {
             this.display();
         } else if (arr[0].equals("done")) {

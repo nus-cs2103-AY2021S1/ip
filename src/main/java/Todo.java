@@ -4,6 +4,10 @@ public class Todo extends Task {
         super(input);
     }
 
+    public Todo(String input, Boolean isComplete) {
+        super(input, isComplete);
+    }
+
     @Override
     public String toString() {
         String completeSymbol = this.complete ? "[/]" : "[X]";
