@@ -42,16 +42,17 @@ public class Storage {
     }
 
     // Method to convert task to hard disk
-    public static String convertToHarDisk(Task t) {
+    public String convertToHardDisk(Task t) {
         String[] info = t.getInfo();
         String taskType = info[0];
         String description = info[1];
+        String isDone = t.isDone() ? "1" : "0";
         if (taskType.equals("T")) {
-            return taskType + " / " + (t.isDone() ? "1" : "0") + " / " + description;
+            return taskType + " / " + isDone + " / " + description;
         } else if (taskType.equals("D")) {
-            return taskType + " / " + (t.isDone() ? "1" : "0") + " / " + description + " / " + info[2];
+            return taskType + " / " + isDone + " / " + description + " / " + info[2];
         } else {
-            return taskType + " / " + (t.isDone() ? "1" : "0") + " / " + description + " / " + info[2];
+            return taskType + " / " + isDone + " / " + description + " / " + info[2];
         }
     }
 
@@ -109,7 +110,7 @@ public class Storage {
             StringBuilder text = new StringBuilder();
             for (int i = 0; i < storage.size(); i++) {
                 Task t = storage.get(i);
-                text.append(convertToHarDisk(t)).append("\n");
+                text.append(convertToHardDisk(t)).append("\n");
             }
             fw.write(text.toString());
             fw.close();
