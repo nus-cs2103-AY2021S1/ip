@@ -4,6 +4,12 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.ArrayList;
 
+/**
+ * <h1>Storage class</h1>
+ * This class helps to save the data that have been inputted in
+ * a different session to ensure continuity the next time users
+ * run the program again.
+ */
 public class Storage {
     private final Path path;
     private String DESTINATION = "./duke.txt";
@@ -21,6 +27,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Reads the data saved in a specific file containing all the previous tasks.
+     * Then the method parses those data and add the old tasks to a new list.
+     * @return List containing all the Tasks that have been inputted previously.
+     * @throws IOException
+     */
     public List<Task> readData() throws IOException {
         Scanner sc = new Scanner(path.toFile());
         List<Task> list = new ArrayList<>();
@@ -47,6 +59,11 @@ public class Storage {
         return list;
     }
 
+    /**
+     * Saves the new list of tasks to a specific file.
+     * @param list List containing all the current tasks that have been inputted previously.
+     * @throws IOException
+     */
     public void addData(List<Task> list) throws IOException {
         FileWriter fw = new FileWriter(DESTINATION);
 
@@ -73,6 +90,10 @@ public class Storage {
         fw.close();
     }
 
+    /**
+     * Resets the file.
+     * @throws IOException
+     */
     public void clear() throws IOException {
         FileWriter fw = new FileWriter(DESTINATION);
         fw.close();

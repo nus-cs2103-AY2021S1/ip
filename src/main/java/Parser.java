@@ -1,3 +1,10 @@
+/**
+ * <h1>Parser class</h1>
+ * This class helps to parse the data that users input
+ * and separate the different key points in each line
+ * of input, making it easier for the program to decide
+ * which command action to call.
+ */
 public class Parser {
     private String line;
     private String commandType = "";
@@ -8,6 +15,11 @@ public class Parser {
         this.line = line;
     }
 
+    /**
+     * Parses the current line of input and checks which command it falls under.
+     * Helps separate out key details in the input such as the task details and date.
+     * @throws DukeException When user input is wrong or incomplete.
+     */
     public void parse() throws DukeException {
         if (line.contains("bye")) {
             commandType = "bye";
