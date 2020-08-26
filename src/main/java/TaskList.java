@@ -35,4 +35,14 @@ public class TaskList {
     public void addTask(Task t) {
         taskList.add(t);
     }
+    
+    public TaskList FindTask(String toFind) {
+        ArrayList<Task> matchingTasks = new ArrayList<>();
+        for(Task t : taskList) {
+            if (t.getDescription().contains(toFind)) {
+                matchingTasks.add(t);
+            }
+        }
+        return new TaskList(matchingTasks);
+    }
 }

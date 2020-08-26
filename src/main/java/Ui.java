@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 //deals with interactions with the user
@@ -75,6 +76,19 @@ public class Ui {
         System.out.println("Noted! I've added this task: ");
         System.out.println(task);
         System.out.println("Now you have " + tasks.size() + " tasks in this list.");
+    }
+    
+    public void printOnFind(TaskList tasks) {
+        System.out.println("Here are the matching tasks: ");
+        int i = 0;
+        for (Task t : tasks.getTaskList()) {
+            if (t != null) {
+                System.out.println((i + 1) + ". " + t.toString());
+                i++;
+            } else {
+                break;
+            }
+        }   
     }
     
 }
