@@ -4,7 +4,10 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import java.time.DateTimeException;
+
 import java.util.function.Function;
+
+import java.util.List;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -33,7 +36,7 @@ public class Storage {
         }
     }
 
-    public void write(String filePath, ArrayList<Task> textToAdd) throws IOException {
+    public void write(List<Task> textToAdd) throws IOException {
         File f = new File(filePath);
         File dataDir = new File(f.toPath().getParent().toString());
         if (!dataDir.exists()) {
@@ -68,7 +71,7 @@ public class Storage {
         return taskList;
     }
 
-    private String taskConverter(ArrayList<Task> taskList) {
+    private String taskConverter(List<Task> taskList) {
         StringBuilder str = new StringBuilder();
         for (Task t : taskList) {
             str.append(t.toSave()).append("\n");
