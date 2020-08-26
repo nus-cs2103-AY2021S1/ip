@@ -22,9 +22,9 @@ public class AddCommand extends Command {
      * Executes command by adding the new task to TaskList
      * and write data to storage.
      *
-     * @param tasks TaskList containing the tasks.
+     * @param tasks   TaskList containing the tasks.
      * @param storage To read and write to file.
-     * @param ui Interact with user.
+     * @param ui      Interact with user.
      * @throws DukeException If input does not meet requirements.
      */
     @Override

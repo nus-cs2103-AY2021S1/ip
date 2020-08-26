@@ -21,7 +21,7 @@ public class Task {
      * Instatiates a task with completion status.
      *
      * @param description Name of the task.
-     * @param isDone Completion status of the task.
+     * @param isDone      Completion status of the task.
      */
     public Task(String description, boolean isDone) {
         this.description = description;

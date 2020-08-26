@@ -17,7 +17,7 @@ public class Todo extends Task {
      * Instantiates Todo.
      *
      * @param description The description of todo.
-     * @param isDone Status completion of todo.
+     * @param isDone      Status completion of todo.
      */
     public Todo(String description, boolean isDone) {
         super(description, isDone);

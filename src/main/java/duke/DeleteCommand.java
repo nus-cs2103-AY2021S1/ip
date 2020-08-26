@@ -1,6 +1,5 @@
 package duke;
 
-
 /**
  * Supports deleting of tasks from the TaskList.
  */
@@ -21,9 +20,9 @@ public class DeleteCommand extends Command {
      * Executes command by deleting required task from TaskList
      * and rewrite data to storage.
      *
-     * @param tasks TaskList containing the tasks.
+     * @param tasks   TaskList containing the tasks.
      * @param storage To read and write to file.
-     * @param ui Interact with user.
+     * @param ui      Interact with user.
      * @throws DukeException If input does not meet requirements.
      */
     @Override

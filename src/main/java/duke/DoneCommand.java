@@ -16,9 +16,9 @@ public class DoneCommand extends Command {
      * Executes command by marking completion for task in
      * TaskList and save data to storage.
      *
-     * @param tasks TaskList containing the tasks.
+     * @param tasks   TaskList containing the tasks.
      * @param storage To read and write to file.
-     * @param ui Interact with user.
+     * @param ui      Interact with user.
      * @throws DukeException If input does not meet requirements.
      */
     @Override

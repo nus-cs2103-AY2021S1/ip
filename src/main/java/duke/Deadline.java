@@ -1,4 +1,5 @@
 package duke;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -12,7 +13,7 @@ public class Deadline extends Task {
     /**
      * Instantiates Deadline.
      *
-     * @param description The description of deadline.
+     * @param description   The description of deadline.
      * @param localDateTime The local date and time for said deadline.
      */
     public Deadline(String description, LocalDateTime localDateTime) {
@@ -23,8 +24,8 @@ public class Deadline extends Task {
     /**
      * Instantiates Deadline.
      *
-     * @param description The description of deadline.
-     * @param isDone Status of completion of deadline.
+     * @param description   The description of deadline.
+     * @param isDone        Status of completion of deadline.
      * @param localDateTime The local date and time for said deadline.
      */
     public Deadline(String description, boolean isDone, LocalDateTime localDateTime) {

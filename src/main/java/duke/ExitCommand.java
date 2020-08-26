@@ -8,9 +8,9 @@ public class ExitCommand extends Command {
     /**
      * Executes command by exiting the Duke Programme.
      *
-     * @param tasks TaskList containing the tasks.
+     * @param tasks   TaskList containing the tasks.
      * @param storage To read and write to file.
-     * @param ui Interact with user.
+     * @param ui      Interact with user.
      */
     @Override
     public void execute(TaskList tasks, Storage storage, Ui ui) {

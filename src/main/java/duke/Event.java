@@ -6,14 +6,14 @@ import java.time.format.DateTimeFormatter;
 /**
  * Encapsulates an Event Task.
  */
-public class Event extends Task{
+public class Event extends Task {
 
     protected LocalDateTime localDateTime;
 
     /**
      * Instantiates Event.
      *
-     * @param description The description of event.
+     * @param description   The description of event.
      * @param localDateTime The local date and time for said event.
      */
     public Event(String description, LocalDateTime localDateTime) {
@@ -24,8 +24,8 @@ public class Event extends Task{
     /**
      * Instantiates Event.
      *
-     * @param description The description of event.
-     * @param isDone Status of completion of event.
+     * @param description   The description of event.
+     * @param isDone        Status of completion of event.
      * @param localDateTime The local date and time for said event.
      */
     public Event(String description, boolean isDone, LocalDateTime localDateTime) {

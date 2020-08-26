@@ -14,6 +14,7 @@ public enum Instruction {
     EMPTY("");
 
     private final String i;
+
     Instruction(String i) {
         this.i = i;
     }

@@ -10,10 +10,12 @@ public class Ui {
     /**
      * Instantiates Ui.
      */
-    Ui(){}
+    Ui() {
+    }
 
     /**
      * Reads the user input.
+     *
      * @param sc Scanner object to read user input.
      * @return String of the user input.
      */
@@ -38,7 +40,7 @@ public class Ui {
     /**
      * Prints exit message.
      */
-    public void showExitMessage(){
+    public void showExitMessage() {
         System.out.println("Bye. Hope to see you again soon!");
     }
 

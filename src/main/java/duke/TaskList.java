@@ -17,6 +17,7 @@ public class TaskList {
 
     /**
      * Instantiates TaskList with existing tasks saved in hard disk.
+     *
      * @param tasksList Existing ArrayList.
      */
     public TaskList(ArrayList<Task> tasksList) {
@@ -25,6 +26,7 @@ public class TaskList {
 
     /**
      * Returns the ArrayList contained in the TaskList.
+     *
      * @return ArrayList of tasks.
      */
     public ArrayList<Task> getTasksList() {

@@ -85,7 +85,7 @@ public class Storage {
                     fileWriter.write("T" + " / " + (task.getIsDone() ? "1" : "0") + " / " + task.getDescription() + System.lineSeparator());
                 } else if (task instanceof Event) {
                     fileWriter.write("E" + " / " + (task.getIsDone() ? "1" : "0") + " / " + task.getDescription() + " / " + ((Event) task).formatDateTime() + System.lineSeparator());
-                } else if (task instanceof Deadline){
+                } else if (task instanceof Deadline) {
                     fileWriter.write("D" + " / " + (task.getIsDone() ? "1" : "0") + " / " + task.getDescription() + " / " + ((Deadline) task).formatDateTime() + System.lineSeparator());
                 } else {
                     throw new DukeException("Error saving task to file.");
