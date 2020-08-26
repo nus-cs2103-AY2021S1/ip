@@ -1,83 +1,101 @@
 package main.java.duke;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
 public class Ui {
 
-    protected String FILE_PATH;
-    protected String FILE_NAME;
-    protected Parser parser;
-    protected TaskList TASK_LIST;
+    /** Directory of local file to store tasks */
+    protected String filePath;
 
-    public Ui(String FILE_PATH, String FILE_NAME, List<Task> MEMO_TASK) {
-        this.FILE_PATH = FILE_PATH;
-        this.FILE_NAME = FILE_NAME;
+    /** Name of local file to store tasks */
+    protected String fileName;
+
+    /** Parser object to understand requests */
+    protected Parser parser;
+
+    /** TaskList object to store Task objects and modify the list */
+    protected TaskList taskList;
+
+
+    /**
+     * Constructor of Ui class.
+     * Initialize the filepath, filename, and list of tasks already stored in memory.
+     *
+     * @param filePath  Directory of local file to read and write.
+     * @param fileName  Name of local file to read and write.
+     * @param memoTask  List of Task objects stored in memory.
+     */
+    public Ui(String filePath, String fileName, List<Task> memoTask) {
+        this.filePath = filePath;
+        this.fileName = fileName;
         this.parser = new Parser();
-        TASK_LIST = new TaskList(MEMO_TASK, FILE_PATH, FILE_NAME);
+        taskList = new TaskList(memoTask, filePath, fileName);
     }
 
-    public void processRequests() {
-        String greeting = SpecialFormat.starting_line + "Hello! This is J.A.R.V.I.S.\n" +
-                SpecialFormat.indent + "How may I help you?" + SpecialFormat.ending_line;
-        System.out.println(greeting);
 
+    /**
+     * Interact with users and process inputs.
+     */
+    public void processRequests() {
+        String greeting = SpecialFormat.STARTING_LINE + "Hello! This is J.A.R.V.I.S.\n" +
+                SpecialFormat.INDENT + "How may I help you?" + SpecialFormat.ENDING_LINE;
+        System.out.println(greeting);
         Scanner sc = new Scanner(System.in);
         boolean exit_bye = false;
         while (!exit_bye) {
             String input = sc.nextLine();
-            String[] COMMAND_RESULT = parser.commandParser(input);
-            System.out.println(SpecialFormat.separation_line);
-            if (COMMAND_RESULT.length == 1) {
-                switch(COMMAND_RESULT[0]){
+            String[] commandTask = parser.commandParser(input);
+            System.out.println(SpecialFormat.SEPARATION_LINE);
+            if (commandTask.length == 1) {
+                switch(commandTask[0]){
                     case "bye":
-                        System.out.println(SpecialFormat.indent + "Bye. Hope to see you again soon!");
+                        System.out.println(SpecialFormat.INDENT + "Bye. Hope to see you again soon!");
                         exit_bye = true;
                         break;
                     case "list":
                         int temp = 1;
-                        System.out.println(SpecialFormat.indent + "Here are the tasks in your list:");
-                        Iterator task_iter = TASK_LIST.task_collections.iterator();
+                        System.out.println(SpecialFormat.INDENT + "Here are the tasks in your list:");
+                        Iterator task_iter = taskList.showList().iterator();
                         while (task_iter.hasNext()) {
-                            System.out.println(SpecialFormat.indent + temp + "." + task_iter.next());
+                            System.out.println(SpecialFormat.INDENT + temp + "." + task_iter.next());
                             temp++;
                         }
                         break;
                     case "todo":
-                        HandleException.handleException(DukeException.ExceptionType.todo_empty);
+                        HandleException.handleException(DukeException.ExceptionType.TODO_INCOMPLETE);
                         break;
                     case "event":
-                        HandleException.handleException(DukeException.ExceptionType.event_empty_incomplete);
+                        HandleException.handleException(DukeException.ExceptionType.EVENT_INCOMPLETE);
                         break;
                     case "deadline":
-                        HandleException.handleException(DukeException.ExceptionType.deadline_empty_incomplete);
+                        HandleException.handleException(DukeException.ExceptionType.DEADLINE_INCOMPLETE);
                         break;
                 }
-            } else if (COMMAND_RESULT.length == 2 && !COMMAND_RESULT[0].equals("todo")) {
-                if (COMMAND_RESULT[0].equals("exception")) {
-                    switch(COMMAND_RESULT[1]){
+            } else if (commandTask.length == 2 && !commandTask[0].equals("todo")) {
+                if (commandTask[0].equals("exception")) {
+                    switch(commandTask[1]){
                         case "todo":
-                            HandleException.handleException(DukeException.ExceptionType.todo_empty);
+                            HandleException.handleException(DukeException.ExceptionType.TODO_INCOMPLETE);
                             break;
                         case "event":
-                            HandleException.handleException(DukeException.ExceptionType.event_empty_incomplete);
+                            HandleException.handleException(DukeException.ExceptionType.EVENT_INCOMPLETE);
                             break;
                         case "deadline":
-                            HandleException.handleException(DukeException.ExceptionType.deadline_empty_incomplete);
+                            HandleException.handleException(DukeException.ExceptionType.DEADLINE_INCOMPLETE);
                             break;
                         case "empty_illegal":
-                            HandleException.handleException(DukeException.ExceptionType.empty_illegal);
+                            HandleException.handleException(DukeException.ExceptionType.EMPTY_ILLEGAL);
                             break;
                     }
                 } else {
-                    TASK_LIST.editTask(COMMAND_RESULT);
+                    taskList.editTask(commandTask);
                 }
             } else {
-                TASK_LIST.addTask(COMMAND_RESULT);
+                taskList.addTask(commandTask);
             }
-            System.out.println(SpecialFormat.separation_line + "\n");
+            System.out.println(SpecialFormat.SEPARATION_LINE + "\n");
         }
     }
 }
