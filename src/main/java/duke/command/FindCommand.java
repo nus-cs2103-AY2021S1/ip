@@ -26,13 +26,26 @@ public class FindCommand implements Command {
         this.searchTerm = searchTermBuilder.toString().trim();
     }
     
+    /**
+     * Returns an appropriate matcher for that exact search term
+     *
+     * @param searchTerm User input search term
+     *
+     * @return Matcher based on the regex with boundaries
+     */
     private Matcher getMatcher(String searchTerm) {
         Pattern p = Pattern.compile("\\b" + searchTerm.trim() + "\\b");
         return p.matcher("");
     }
     
+    /**
+     * Displays the tasks that match a specific word/phrase passed in
+     *
+     * @param tasks Current TaskList
+     * @param ui    Where the User shall receive messages about the command
+     */
     @Override
-    public void execute(TaskList tasks, Ui ui) throws DukeException {
+    public void execute(TaskList tasks, Ui ui) {
         Matcher m = getMatcher(this.searchTerm);
         ArrayList<Task> allTasks = tasks.getAllTasks();
         ArrayList<String> lines = new ArrayList<>();
@@ -48,6 +61,14 @@ public class FindCommand implements Command {
         }
     }
     
+    /**
+     * Tests if a word/phrases is exactly present in a text
+     *
+     * @param text Text to search within
+     * @param word The search term (word/phrase) to search for
+     *
+     * @return True if exact word is within the text
+     */
     public boolean containsExactWord(String text, String word) {
         String regex = "\\b" + word + "\\b";
         Pattern pattern = Pattern.compile(regex);
