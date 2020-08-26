@@ -20,10 +20,10 @@ public class Ui {
         String taskDetails = "";
         String date = "";
 
-        try {
-            while (sc.hasNext()) {
-                System.out.println(LINE);
+        while (sc.hasNext()) {
+            System.out.println(LINE);
 
+            try {
                 Parser parser = new Parser(sc.nextLine());
                 parser.parse();
                 commandType = parser.getCommandType();
@@ -51,14 +51,15 @@ public class Ui {
                 } else if (commandType.equals("delete")) {
                     delete(Integer.parseInt(taskDetails));
 
-                } else {
-                }
+                } else { }
 
                 storage.addData(list.getList());
                 System.out.println(LINE);
+
+            } catch (DukeException e) {
+                System.out.println(e.getMessage());
+                System.out.println(LINE);
             }
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
         }
 
         sc.close();
@@ -97,13 +98,13 @@ public class Ui {
     }
 
     public void done(int taskNumber) {
-        list.get(taskNumber - 1).completed();
+        list.getList().get(taskNumber - 1).completed();
         System.out.println("You've completed this task:");
-        System.out.println((list.get(taskNumber - 1)).toString());
+        System.out.println((list.getList().get(taskNumber - 1)).toString());
     }
 
     public void delete(int taskNumber) {
-        String deleted = (list.get(taskNumber - 1)).toString();
+        String deleted = (list.getList().get(taskNumber - 1)).toString();
         list.remove(taskNumber - 1);
         System.out.println("Ok, this task has been kicked off your to-do list:");
         System.out.println(deleted);
@@ -133,4 +134,5 @@ public class Ui {
         System.out.println(deadline.toString());
         System.out.println(list.toString());
     }
+
 }

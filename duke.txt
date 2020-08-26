@@ -1,4 +1,1 @@
-D:false:[D][✘] [D][✘] return book (by (by:  Oct 5 2019)): Oct 5 2019)
-T:false:read
-D:false:[D][✘] read (by: Sunday):Sunday
-E:false:[E][✘]  (at: ):
+D:false:submission:2019-10-15

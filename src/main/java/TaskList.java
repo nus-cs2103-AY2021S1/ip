@@ -7,11 +7,14 @@ public class TaskList {
 
     public TaskList() {
         list = new ArrayList<>();
+        totalTasks = 0;
     }
 
     public TaskList(List<Task> list) {
         this.list = list;
+        totalTasks = list.size();
     }
+
 
     public List<Task> getList() {
         return list;
@@ -31,10 +34,12 @@ public class TaskList {
 
     public void add(Task t) {
         list.add(t);
+        totalTasks++;
     }
 
     public void remove(int x) {
         list.remove(x);
+        totalTasks--;
     }
 
     @Override

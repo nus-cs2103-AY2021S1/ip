@@ -16,7 +16,7 @@ public class Storage {
             try {
                 file.createNewFile();
             } catch (IOException e) {
-                System.out.println(e.getMessage());
+                e.printStackTrace();
             }
         }
     }
@@ -31,7 +31,7 @@ public class Storage {
             String type = details[0];
             boolean isCompleted = details[1].equals("true");
             String taskString = details[2];
-            Task task = null;
+            Task task;
 
             if (type.equals("T")) {
                 task = new Todo(taskString, isCompleted);
@@ -43,11 +43,13 @@ public class Storage {
 
             list.add(task);
         }
+
         return list;
     }
 
     public void addData(List<Task> list) throws IOException {
         FileWriter fw = new FileWriter(DESTINATION);
+
         for (Task task : list) {
             String toAdd = "";
             String completed = String.valueOf(task.isCompleted);
@@ -56,17 +58,23 @@ public class Storage {
                 toAdd = "T:" + completed + ":" + task.task;
 
             } else if (task instanceof Deadline) {
-                toAdd = "D:" + completed + ":" + task + ":" + ((Deadline) task).date;
+                toAdd = "D:" + completed + ":" + task.task + ":" + ((Deadline) task).date;
 
             } else if (task instanceof Event) {
-                toAdd = "E:" + completed + ":" + task + ":" + ((Event) task).date;
+                toAdd = "E:" + completed + ":" + task.task + ":" + ((Event) task).date;
             } else {
-                // error
+                // nothing
             }
 
+            // System.out.println(toAdd);
             fw.write(toAdd + "\n");
         }
 
+        fw.close();
+    }
+
+    public void clear() throws IOException {
+        FileWriter fw = new FileWriter(DESTINATION);
         fw.close();
     }
 
