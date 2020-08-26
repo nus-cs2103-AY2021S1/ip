@@ -3,8 +3,12 @@ public abstract class Task {
     protected String taskName;
 
     public Task(String taskName) {
+        this(false, taskName);
+    }
+
+    public Task(boolean isDone, String taskName) {
+        this.isDone = isDone;
         this.taskName = taskName;
-        this.isDone = false;
     }
 
     /**
@@ -18,4 +22,6 @@ public abstract class Task {
     public String toString() {
         return String.format("[%s] %s", isDone ? "✓" : "✘", this.taskName);
     }
+
+    public abstract String toSaveString();
 }
