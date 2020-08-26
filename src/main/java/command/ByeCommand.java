@@ -4,5 +4,6 @@ public class ByeCommand extends Command {
     public ByeCommand(boolean exit){
         super(exit);
     }
-    
+
+    public void execute()
 }
