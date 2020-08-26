@@ -14,7 +14,7 @@ public class DoneCommand extends Command {
     /**
      * Creates a new DoneCommand.
      * @param taskIdx Index of the task to mark as done.
-     * @throws DukeException if no task index is provided, or if the format provided is invalid.
+     * @throws DukeException If no task index is provided, or if the format provided is invalid.
      */
     public DoneCommand(String taskIdx) throws DukeException {
         try {
@@ -29,7 +29,7 @@ public class DoneCommand extends Command {
      * @param tasks List of tasks.
      * @param ui Ui object.
      * @param storage Storage object.
-     * @throws DukeException if the provided index is not associated with a task.
+     * @throws DukeException If the provided index is not associated with a task.
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {

@@ -103,19 +103,19 @@ public class Storage {
     }
 
     public void saveTodo(ToDo task) {
-        String line = task.getUniqueId() + "|" + task.getTaskType() + "|" + task.getDone() + "|"
+        String line = task.getUniqueId() + "|" + task.getTaskType() + "|" + task.isDone() + "|"
                 + task.getDescription() + "\n";
         appendData(line);
     }
 
     public void saveDeadline(Deadline task)  {
-        String line = task.getUniqueId() + "|" + task.getTaskType() + "|" + task.getDone() + "|"
+        String line = task.getUniqueId() + "|" + task.getTaskType() + "|" + task.isDone() + "|"
                 + task.getDescription() + "|" + task.getTime() + "\n";
         appendData(line);
     }
 
     public void saveEvent(Event task) {
-        String line = task.getUniqueId() + "|" + task.getTaskType() + "|" + task.getDone() + "|"
+        String line = task.getUniqueId() + "|" + task.getTaskType() + "|" + task.isDone() + "|"
                 + task.getDescription() + "|" + task.getTime() + "\n";
         appendData(line);
     }
