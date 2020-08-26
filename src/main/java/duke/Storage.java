@@ -129,12 +129,12 @@ public class Storage {
      * Overwrites the file by adding in all the tasks from a list of tasks specified.
      *
      * @param filePath the path location of the load or save file
-     * @param tasks TaskList object that contains a list of tasks
+     * @param taskList TaskList object that contains a list of tasks
      * @throws IOException produced by failed or interrupted I/O operations
      */
-    public static void updateFile(String filePath, TaskList tasks) throws IOException {
+    public static void updateFile(String filePath, TaskList taskList) throws IOException {
         writeToFile(filePath, "");
-        for (Task tsk : tasks.getTasks()) {
+        for (Task tsk : taskList.getTasks()) {
             String textToAppend = tsk.getSymbol() + " @ " + tsk.getStatusIcon() + " @ "
                     + tsk.getDescription() + " @ " + tsk.getDate() + "\n";
             appendToFile(filePath, textToAppend);

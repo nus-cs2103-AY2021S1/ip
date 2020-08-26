@@ -25,12 +25,12 @@ public class Parser {
     /**
      * Decides on the relevant actions to execute based on the input of the user.
      *
-     * @param tasks TaskList object that contains a list of tasks
+     * @param taskList TaskList object that contains a list of tasks
      * @param filePath the path location of the load or save file
      * @throws DukeException thrown if the Duke program does not recognise user input
      * @throws IOException produced by failed or interrupted I/O operations
      */
-    public static void interact(TaskList tasks, String filePath) throws DukeException, IOException {
+    public static void interact(TaskList taskList, String filePath) throws DukeException, IOException {
         ui.greet();
         Scanner sc = new Scanner(System.in);
         while (sc.hasNextLine()) {
@@ -39,19 +39,19 @@ public class Parser {
                 ui.exit();
                 break;
             } else if (line.equals("list")) {
-                ui.list(tasks);
+                ui.list(taskList);
             } else {
                 String[] arrOfStr = line.split(" ", 0);
                 String identifier = arrOfStr[0];
                 if (identifier.equals("done")) {
 //                    mark as done
                     int index = Integer.parseInt(arrOfStr[1]) - 1;
-                    ui.markDone(tasks, index);
-                    Storage.updateFile(filePath, tasks);
+                    ui.markDone(taskList, index);
+                    Storage.updateFile(filePath, taskList);
                 } else if (identifier.equals("delete")) {
 //                    delete
                     int index = Integer.parseInt(arrOfStr[1]) - 1;
-                    tasks.delete(index);
+                    taskList.delete(index);
                 } else {
 //                    add to list
                     if ((identifier.equals("todo") || identifier.equals("deadline")
@@ -87,7 +87,7 @@ public class Parser {
                         } else {
                             throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                         }
-                        tasks.add(task);
+                        taskList.add(task);
                     }
                 }
             }
