@@ -38,7 +38,7 @@ public class ToDo extends Task {
         return String.format("%s|%d|%s",
                 SYMBOL,
                 (isCompleted() ? 1 : 0),
-                description);
+                getTaskDescription());
     }
 
     /**

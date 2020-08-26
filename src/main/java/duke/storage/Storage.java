@@ -18,7 +18,7 @@ import java.util.Scanner;
 public class Storage {
 
     /** Path to search for the saved file to load or update */
-    protected String filePath;
+    private String filePath;
 
     /** Private constructor to set the file path */
     private Storage(String filePath) {

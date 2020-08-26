@@ -12,11 +12,11 @@ public abstract class Task implements PrintSummary {
     /**
      * description of the task
      */
-    protected String description;
+    private String description;
     /**
      * boolean flag indicating completion of the task
      */
-    protected boolean isDone;
+    private boolean isDone;
 
     /**
      * Creates a new incomplete Task object.

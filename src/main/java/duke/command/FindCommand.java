@@ -17,7 +17,7 @@ public class FindCommand extends Command {
     protected static final String NONE_FOUND_MESSAGE = "It seems there were no matches!";
 
     /** Reference string to search for */
-    protected final String searchString;
+    private final String searchString;
 
     /** Private constructor unable to parse the direct user input. */
     private FindCommand(String searchString) {

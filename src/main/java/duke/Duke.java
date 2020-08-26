@@ -13,11 +13,11 @@ import duke.util.TaskList;
 public class Duke {
 
     /** list of tasks to keep track of */
-    protected TaskList taskList;
+    private TaskList taskList;
     /** storage object handling saving and editing of the save file in the hard drive */
-    protected Storage storage;
+    private Storage storage;
     /** ui object in charge of direct interaction with the user */
-    protected Ui ui;
+    private Ui ui;
 
     /**
      * Standard constructor initialising the Duke bot.

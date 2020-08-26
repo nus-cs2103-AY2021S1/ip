@@ -18,7 +18,7 @@ public class Deadline extends Task {
     public static final String SYMBOL = "D";
 
     /** Deadline of the task */
-    protected LocalDateTime deadline;
+    private LocalDateTime deadline;
 
     /**
      * Creates a new Deadline object from the full deadline description that includes the deadline.
@@ -73,7 +73,7 @@ public class Deadline extends Task {
         return String.format("%s|%d|%s|%s",
                 SYMBOL,
                 (isCompleted() ? 1 : 0),
-                description,
+                getTaskDescription(),
                 getTimingString());
     }
 

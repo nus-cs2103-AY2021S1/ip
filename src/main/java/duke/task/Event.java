@@ -18,9 +18,9 @@ public class Event extends Task {
     public static final String SPLITTER = " /at ";
 
     /** Timing of the start of event */
-    protected LocalDateTime startTiming;
+    private LocalDateTime startTiming;
     /** Timing of the end of event */
-    protected LocalDateTime endTiming;
+    private LocalDateTime endTiming;
 
     /**
      * Creates an Event object with the given event description and timing.
@@ -91,7 +91,7 @@ public class Event extends Task {
         return String.format("%s|%d|%s|%s",
                 SYMBOL,
                 (isCompleted() ? 1 : 0),
-                description,
+                getTaskDescription(),
                 getTimingString());
     }
 
