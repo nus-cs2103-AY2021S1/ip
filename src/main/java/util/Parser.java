@@ -6,6 +6,7 @@ import command.DeleteCommand;
 import command.DoneCommand;
 import command.ExitCommand;
 import command.ListCommand;
+import command.FindCommand;
 import duke.DukeException;
 
 /**
@@ -99,6 +100,9 @@ public class Parser {
         case BYE:
             resultantCommand = new ExitCommand();
             break;
+        case FIND:
+            resultantCommand = new FindCommand(value);
+            break;
         }
         
         return resultantCommand;
@@ -112,6 +116,7 @@ public class Parser {
         DEADLINE,
         EVENT,
         DONE,
-        DELETE
+        DELETE,
+        FIND
     }
 }
