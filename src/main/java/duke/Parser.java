@@ -66,7 +66,8 @@ public class Parser {
                 if (isTask(action)) {
                     errorMessage = "OOPS!!! Description of a task cannot be empty :(\n";
                 } else if (action.equals("done") || action.equals("delete")) {
-                    errorMessage = "Missing task number! " + "Please ensure to key in the task number :)\n";
+                    errorMessage = "Missing task number! "
+                            + "Please ensure to key in the task number :)\n";
                 }
             } else { // Deadline/Event missing their respective keywords
                 if (action.equals("deadline")) {
@@ -84,6 +85,7 @@ public class Parser {
     }
 
     private static boolean isTask(String action) {
-        return action.equals("todo") || action.equals("deadline") || action.equals("event");
+        return action.equals("todo")
+                || action.equals("deadline") || action.equals("event");
     }
 }
