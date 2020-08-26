@@ -1,24 +1,26 @@
+import java.time.LocalDate;
+
 public class Event extends Task {
 
-    private String date;
+    private LocalDate date;
 
     public Event(String description, String date) {
         super(description);
-        this.date = date;
+        this.date = LocalDate.parse(date, Task.INPUT_DATE_TIME_FORMAT);
     }
 
     public Event(String description, String date, boolean isDone) {
         super(description, isDone);
-        this.date = date;
+        this.date = LocalDate.parse(date, Task.INPUT_DATE_TIME_FORMAT);
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + this.date + ")";
+        return "[E]" + super.toString() + " (at: " + this.date.format(PRINT_DATE_TIME_FORMAT) + ")";
     }
 
     @Override
     public String fileText() {
-        return "E " + super.fileText() + " | " + this.date;
+        return "E " + super.fileText() + " | " + this.date.format(INPUT_DATE_TIME_FORMAT);
     }
 }
