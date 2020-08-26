@@ -11,7 +11,8 @@ public class StringUtil {
         return -1;
     }
 
-    public static String strArrJoin(String[] arr, int startIndex, int endIndex, String delimiter) {
+    public static String strArrJoin(String[] arr, int startIndex, int endIndex, String delimiter)
+            throws IndexOutOfBoundsException {
         StringBuilder builder = new StringBuilder();
 
         for (int i = startIndex; i < endIndex; ++i) {
