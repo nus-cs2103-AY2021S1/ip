@@ -17,16 +17,13 @@ public class Duke {
     private static final String SAVE_FILE_PATH =
             System.getProperty("user.home") + File.separator + ".duke" + File.separator + "tasks.txt";
 
-    private static final List<Task> TASKS = new ArrayList<>();
-
     public static void main(String[] args) {
-
         try (Scanner scanner = new Scanner(System.in)) {
             System.out.println("Hi, I'm\n" + LOGO);
             if (Duke.hasSavedTasks()) {
-                TASKS.addAll(Duke.loadSavedTasks());
+                TaskList.addAllTasks(Duke.loadSavedTasks());
                 Duke.displayMessages(
-                        "Don't forget you already have " + TASKS.size() + " things to do.",
+                        "Don't forget you already have " + TaskList.tasksCount() + " things to do.",
                         "But okay.");
             }
             Duke.displayMessages("What do you need this time 😫");
@@ -36,7 +33,7 @@ public class Duke {
                 String input = scanner.nextLine();
 
                 if (input.equalsIgnoreCase(BYE)) {
-                    Duke.saveTasks(TASKS);
+                    Duke.saveTasks(TaskList.getTasks());
                     break;
                 } else {
                     Duke.handleCommand(input);
@@ -102,7 +99,7 @@ public class Duke {
                     throw new InvalidInputException("Um, you need to tell me what it is you've done.");
                 }
                 int index = Integer.parseInt(tokens[1]) - 1;
-                Task task = TASKS.get(index);
+                Task task = TaskList.getTask(index);
                 task.markDone();
                 Duke.displayMessages(
                         "Okay. So you've done:",
@@ -111,8 +108,8 @@ public class Duke {
             break;
             case "delete":
                 int index = Integer.parseInt(tokens[1]) - 1;
-                Task task = TASKS.get(index);
-                TASKS.remove(index);
+                Task task = TaskList.getTask(index);
+                TaskList.deleteTask(index);
                 Duke.displayMessages(
                         "Right, you no longer want me to track:",
                         task.toString(),
@@ -169,7 +166,7 @@ public class Duke {
         default:
             throw new InvalidTaskException("Um, I don't get what you're saying.");
         }
-        TASKS.add(task);
+        TaskList.addTask(task);
         Duke.displayMessages(
                 "Okay, you want to:",
                 task.toString(),
@@ -179,19 +176,20 @@ public class Duke {
     private static String getTasksLeftMessage() {
         return String.format(
                 "Now you have %d thing%s you need me to remind you about.",
-                TASKS.size(),
-                TASKS.size() == 1 ? "" : "s");
+                TaskList.tasksCount(),
+                TaskList.tasksCount() == 1 ? "" : "s");
     }
 
     private static void displayTasks() {
-        if (TASKS.size() == 0) {
+        int noOfTasks = TaskList.tasksCount();
+        if (noOfTasks == 0) {
             Duke.displayMessages("You didn't tell me to remind you anything.");
         } else {
-            String[] messages = new String[TASKS.size() + 1];
+            String[] messages = new String[noOfTasks + 1];
             messages[0] = "Right, you said you wanted to:";
 
-            for (int i = 0; i < TASKS.size(); i++) {
-                messages[i + 1] = String.format("%3d: %s", i + 1, TASKS.get(i));
+            for (int i = 0; i < noOfTasks; i++) {
+                messages[i + 1] = String.format("%3d: %s", i + 1, TaskList.getTask(i));
             }
 
             Duke.displayMessages(messages);
