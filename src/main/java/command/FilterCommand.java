@@ -32,6 +32,8 @@ public class FilterCommand extends Command {
                     + filterDate.format(DateTimeFormatter.ofPattern("MMM d yyy")) + ": \n" + output + ui.LINE);
         } catch (DateTimeParseException e) {
             throw new DukeException(ui.LINE + "Invalid input! Please enter a valid date! \n" + ui.LINE);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new DukeException(ui.LINE + "Invalid input! Please specify which date you want to filter! \n" + ui.LINE);
         }
     }
 
