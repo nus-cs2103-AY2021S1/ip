@@ -35,7 +35,7 @@ public class Event extends Task {
     @Override
     public String toString() {
         return String.format("[%s][%s] %s (at: %s)", TYPE, getStateLabel(),
-                format(date)[0], format(date)[1]);
+                getDesc(), format(date)[0] + " " + format(date)[1]);
     }
     @Override
     public String databaseRep() {

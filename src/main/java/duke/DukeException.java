@@ -58,14 +58,5 @@ public class DukeException extends Exception {
         return new DukeException(UNSPECIFIC_COMMAND);
     }
 
-    // <================== Don't use ==================================>
-    public static DukeException emptyDescription(String taskType) {
-        return new DukeException(EMPTY_DESCRIPTION_FRONT
-                + taskType + EMPTY_DESCRIPTION_END);
-    }
-    public static DukeException invalidNumberInput() {
-        return new DukeException(INVALID_INPUT);
-    }
-
 }
 
