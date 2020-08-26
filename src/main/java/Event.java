@@ -1,23 +1,59 @@
-public class Event extends Task {
-    String description;
+import java.time.DateTimeException;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 
-    Event(String task, String description) {
+public class Event extends Task {
+    LocalDate date;
+    LocalTime time;
+
+    Event(String task, LocalDate date, LocalTime time) {
         super(task);
-        this.description = description;
+        this.date = date;
+        this.time = time;
+    }
+    
+    public static Event of(String task, String inputDate, String inputTime) {
+        try {
+            LocalDate date = LocalDate.parse(inputDate, DateTimeFormatter.ISO_LOCAL_DATE);
+            LocalTime time = LocalTime.parse(inputTime, DateTimeFormatter.ISO_LOCAL_TIME);
+            return new Event(task, date, time);
+        } catch (DateTimeException e) {
+            System.out.println("    ERROR: Duke doesn't recognise the date/time -> "
+                + inputDate + " " + inputTime);
+        }
+        return null;
     }
 
-    Event(String task, String description, boolean done) {
-        super(task, done);
-        this.description = description;
+    public static Event of(String task, String inputDate, String inputTime, boolean done) {
+        try {
+            LocalDate date = LocalDate.parse(inputDate, DateTimeFormatter.ISO_LOCAL_DATE);
+            LocalTime time = LocalTime.parse(inputTime, DateTimeFormatter.ISO_LOCAL_TIME);
+            Event event = new Event(task, date, time);
+            if (done) {
+                event.setDone();
+            }
+            return event;
+        } catch (DateTimeException e) {
+            System.out.println("    ERROR: Duke doesn't recognise the date/time -> "
+                    + inputDate + " " + inputTime);
+        }
+        return null;
     }
     
     @Override
     public String toDataString() {
-        return "E // " + (done ? "1": "0") + " // " + task + " // " + description;
+        return "E // " + (done ? "1": "0") + " // " + task + " // " 
+            + date.format(DateTimeFormatter.ISO_LOCAL_DATE) + " // "
+            + time.format(DateTimeFormatter.ISO_LOCAL_TIME);
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + this.description + ")";
+        return "[E]" + super.toString() + " (at: "
+            + this.date.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM))
+            + " " + this.time.format(DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT))
+            + ")";
     }
 }

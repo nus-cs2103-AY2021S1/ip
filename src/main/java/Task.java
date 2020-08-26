@@ -19,7 +19,7 @@ abstract class Task {
     }
 
     public String getStatusToString() {
-        return done ? "\u2713" : "\u2718";
+        return done ? "✓" : "✘";
     }
 
     @Override

@@ -12,12 +12,11 @@ import java.io.BufferedWriter;
 
 public class Duke {
     ArrayList<Task> tasks;
-
+    
     static String ADD_TASK_LINE = ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>";
     static String DONE_TASK_LINE = "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
     static String LIST_TASK_LINE = "________________________________________________________";
     static String BYE_LINE = "========================================================";
-    static String ERROR_LINE = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";
     static String INDENT = "    ";
 
     Duke() {
@@ -32,27 +31,18 @@ public class Duke {
                     String[] taskData = line.split(" // ");
                     if (taskData[0].equals("T")) {
                         if (taskData.length == 3) {
-                            if (Integer.parseInt(taskData[1]) == 1) {
-                                tasks.add(new ToDo(taskData[2], true));
-                            } else {
-                                tasks.add(new ToDo(taskData[2], false));
-                            }
+                            boolean done = Integer.parseInt(taskData[1]) == 1;
+                            tasks.add(new ToDo(taskData[2], done));
                         }
                     } else if (taskData[0].equals("E")) {
-                        if (taskData.length == 4) {
-                            if (Integer.parseInt(taskData[1]) == 1) {
-                                tasks.add(new Event(taskData[2], taskData[3], true));
-                            } else {
-                                tasks.add(new Event(taskData[2], taskData[3], false));
-                            }
+                        if (taskData.length == 5) {
+                            boolean done = Integer.parseInt(taskData[1]) == 1;
+                            tasks.add(Event.of(taskData[2], taskData[3], taskData[4], done));
                         }
                     } else if (taskData[0].equals("D")) {
-                        if (taskData.length == 4) {
-                            if (Integer.parseInt(taskData[1]) == 1) {
-                                tasks.add(new Deadline(taskData[2], taskData[3], true));
-                            } else {
-                                tasks.add(new Deadline(taskData[2], taskData[3], false));
-                            }
+                        if (taskData.length == 5) {
+                            boolean done = Integer.parseInt(taskData[1]) == 1;
+                            tasks.add(Deadline.of(taskData[2], taskData[3], taskData[4], done));
                         }
                     }
                     line = reader.readLine();
@@ -87,11 +77,7 @@ public class Duke {
     }
     
     void displayError(String errorMessage) {
-        System.out.println(
-                INDENT + ERROR_LINE + "\n"
-                + INDENT + errorMessage + "\n"
-                + INDENT + ERROR_LINE
-        );
+        System.out.println(INDENT + errorMessage);
     }
     
     void displayAddTaskSuccess(Task task, int taskCount) {
@@ -153,32 +139,32 @@ public class Duke {
             displayAddTaskSuccess(task, tasks.size());
             return false;
         } else if (DukeCommand.equalsCommand(processedInput[0], DukeCommand.DEADLINE)) {
-            if (processedInput.length == 1) {
+            if (processedInput.length < 5) {
                 DukeException e = new DukeNoDescriptionException(input);
                 displayError(e.toString());
                 return false;
             }
             String[] taskDetails = input.substring(9).split(" /by ");
-            Task task = new Deadline(taskDetails[0], taskDetails[1]);
-            tasks.add(task);
-            displayAddTaskSuccess(task, tasks.size());
+            String[] by = taskDetails[1].split(" ");
+            Task task = Deadline.of(taskDetails[0], by[0], by[1]);
+            if (task != null) {
+                tasks.add(task);
+                displayAddTaskSuccess(task, tasks.size());
+            } 
             return false;
         } else if (DukeCommand.equalsCommand(processedInput[0], DukeCommand.EVENT)) {
-            if (processedInput.length == 1) {
+            if (processedInput.length < 5) {
                 DukeException e = new DukeNoDescriptionException(input);
                 displayError(e.toString());
                 return false;
             }
             String[] taskDetails = input.substring(6).split(" /at ");
-            Task task = new Event(taskDetails[0], taskDetails[1]);
-            tasks.add(task);
-            System.out.println(
-                    INDENT + ADD_TASK_LINE + "\n"
-                    + INDENT + "Added task:" +"\n"
-                    + INDENT + INDENT + task.toString() + "\n"
-                    + INDENT + "You now have " + tasks.size() + " task(s) in the list.\n"
-                    + INDENT + ADD_TASK_LINE
-            );
+            String[] at = taskDetails[1].split(" ");
+            Task task = Event.of(taskDetails[0], at[0], at[1]);
+            if (task != null) {
+                tasks.add(task);
+                displayAddTaskSuccess(task, tasks.size());
+            }
             return false;
         } else if (DukeCommand.equalsCommand(processedInput[0], DukeCommand.DELETE)) {
             if (processedInput.length == 1) {
