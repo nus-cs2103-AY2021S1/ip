@@ -53,13 +53,14 @@ public class Ui {
 
     public void printDeleteMessage(TaskList taskList, Task task) {
         System.out.println("Noted. I've removed this duke.task:\n " + task
-                        + "\nNow you have " + taskList.size() + " in the list.");
+                + "\nNow you have " + taskList.size() + " in the list.");
     }
 
     public void printAllTasks(TaskList taskList) {
-            System.out.println("Here are the tasks in your list");
+        System.out.println("Here are the tasks in your list");
         listAllTasks(taskList);
     }
+
     public void printDatabaseTasks(TaskList taskList) {
         if (taskList.size() == 0) {
             System.out.println("You have no tasks currently");

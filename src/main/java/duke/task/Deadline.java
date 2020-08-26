@@ -21,14 +21,14 @@ public class Deadline extends Task {
 
     @Override
     public String formatTaskForDatabase() {
-        int status = super.isDone ? 1 : 0;
+        int status = super.getDoneStatus() ? 1 : 0;
         return "D|" + status + "|" + super.description + "|" + this.deadline;
     }
-
 
     @Override
     public String toString() {
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
-        return "[D]" + super.toString()+ " " + super.description + " (by:" + deadline.format(dateTimeFormatter) + ")";
+        return "[D]" + super.toString() + " " + super.description + " (by:"
+                + deadline.format(dateTimeFormatter) + ")";
     }
 }

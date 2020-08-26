@@ -1,6 +1,5 @@
 package duke.task;
 
-
 import duke.exceptions.DukeException;
 
 import java.util.ArrayList;
@@ -22,10 +21,12 @@ public class TaskList {
     }
 
     public Task deleteTask(int index) throws DukeException {
-        if (isIndexInRange(index))
+        if (isIndexInRange(index)) {
             return this.taskList.remove(index - 1);
+        }
 
         throw new DukeException("Oh no! Task number does not exist in task list.");
+
     }
 
     public int size() {
@@ -33,16 +34,12 @@ public class TaskList {
     }
 
     public Task getTask(int index) throws DukeException {
-        if (isIndexInRange(index))
+        if (isIndexInRange(index)) {
             return this.taskList.get(index - 1);
-
+        }
 
         throw new DukeException("Oh no! Task number does not exist in task list.");
-
-
-
     }
-
 
     public void forEach(Consumer<Task> consumer) {
         this.taskList.forEach(consumer);

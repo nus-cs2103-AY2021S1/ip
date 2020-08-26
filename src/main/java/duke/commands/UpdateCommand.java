@@ -1,5 +1,6 @@
 package duke.commands;
 
+import duke.storage.Storage;
 import duke.ui.Ui;
 import duke.exceptions.DukeException;
 import duke.task.Task;
@@ -8,6 +9,7 @@ import duke.task.TaskList;
 
 public class UpdateCommand extends Command {
     private int index;
+
     public UpdateCommand(String command, String index) {
         super(command);
         try {

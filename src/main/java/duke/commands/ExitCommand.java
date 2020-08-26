@@ -1,5 +1,6 @@
 package duke.commands;
 
+import duke.storage.Storage;
 import duke.ui.Ui;
 import duke.task.TaskList;
 
@@ -14,18 +15,18 @@ public class ExitCommand extends Command {
 
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
-            StringBuilder stringBuilder = new StringBuilder();
-            taskList.forEach(task -> {
-                stringBuilder.append(task.formatTaskForDatabase() + "\n");
-            });
+        StringBuilder stringBuilder = new StringBuilder();
+        taskList.forEach(task -> {
+            stringBuilder.append(task.formatTaskForDatabase() + "\n");
+        });
 
-            try {
-                FileWriter fileWriter = new FileWriter(storage.getDirectory());
-                fileWriter.write(stringBuilder.toString());
-                fileWriter.close();
-            } catch (IOException e) {
-                System.out.println("Error while updating database file");
-            }
+        try {
+            FileWriter fileWriter = new FileWriter(storage.getDirectory());
+            fileWriter.write(stringBuilder.toString());
+            fileWriter.close();
+        } catch (IOException e) {
+            System.out.println("Error while updating database file");
         }
-
     }
+
+}

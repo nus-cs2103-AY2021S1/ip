@@ -4,7 +4,7 @@ import duke.exceptions.DukeException;
 
 public abstract class Task {
     protected String description;
-    public boolean isDone;
+    private boolean isDone;
 
     public Task(String s) throws DukeException {
         if (s.isBlank()) {
@@ -15,7 +15,9 @@ public abstract class Task {
     }
 
     public Task(int doneStatus, String s) {
-        if (doneStatus == 1) this.isDone = true;
+        if (doneStatus == 1) {
+            this.isDone = true;
+        }
         this.description = s;
     }
 
@@ -23,11 +25,15 @@ public abstract class Task {
         this.isDone = !isDone;
     }
 
+    public boolean getDoneStatus() {
+        return this.isDone;
+    }
+
     public abstract String formatTaskForDatabase();
 
     @Override
     public String toString() {
-        String checked = (isDone ? "[\u2713]" : "[\u2718]");
-        return checked;
+        String isChecked = (isDone ? "[\u2713]" : "[\u2718]");
+        return isChecked;
     }
 }

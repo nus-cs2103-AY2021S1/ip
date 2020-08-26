@@ -1,5 +1,6 @@
 package duke.commands;
 
+import duke.storage.Storage;
 import duke.ui.Ui;
 import duke.exceptions.DukeException;
 import duke.task.Deadline;
@@ -64,7 +65,6 @@ public class AddCommand extends Command {
     }
 
     private void addEvent() {
-
         try {
             String detail = formatTimingInput("/at", super.command)[0];
             String timing = formatTimingInput("/at", super.command)[1].trim();
@@ -82,7 +82,6 @@ public class AddCommand extends Command {
             System.out.println("Please enter timing in '/at 02-30-2020 23:59' format");
         }
     }
-
 
 
     public String[] formatTimingInput(String format, String input) throws DukeException {

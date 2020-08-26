@@ -1,11 +1,11 @@
 package duke.commands;
 
-import duke.task.Task;
+import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class CommandsTest {
     @Test

@@ -1,5 +1,6 @@
 package duke.commands;
 
+import duke.storage.Storage;
 import duke.ui.Ui;
 import duke.task.TaskList;
 
@@ -8,7 +9,7 @@ public abstract class Command {
     protected String command;
     protected Ui ui;
     protected Storage storage;
-    public boolean isExit = false;
+    protected boolean isExit = false;
 
     public Command(String command) {
         this.command = command;
@@ -18,6 +19,10 @@ public abstract class Command {
         this.ui = ui;
         this.storage = storage;
         this.taskList = taskList;
+    }
+
+    public boolean getExitStatus() {
+        return this.isExit;
     }
 
     public abstract void execute(TaskList taskList, Ui ui, Storage storage);

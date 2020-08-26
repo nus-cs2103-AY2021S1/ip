@@ -2,7 +2,7 @@ package duke;
 
 import duke.commands.Command;
 import duke.parser.Parser;
-import duke.commands.Storage;
+import duke.storage.Storage;
 import duke.ui.Ui;
 import duke.exceptions.DukeException;
 import duke.task.TaskList;
@@ -29,7 +29,7 @@ public class Duke {
                 ui.printDivider();
                 Command command = Parser.parse(fullCommand);
                 command.execute(taskList, ui, storage);
-                isExit = command.isExit;
+                isExit = command.getExitStatus();
             } catch (DukeException e) {
                 System.out.println(e.getMessage());
             }

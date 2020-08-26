@@ -1,6 +1,11 @@
 package duke.parser;
 
-import duke.commands.*;
+import duke.commands.AddCommand;
+import duke.commands.Command;
+import duke.commands.DeleteCommand;
+import duke.commands.ExitCommand;
+import duke.commands.ListCommand;
+import duke.commands.UpdateCommand;
 import duke.exceptions.DukeException;
 
 public class Parser {
@@ -41,8 +46,8 @@ public class Parser {
     }
 
     private static Command prepareUpdateTask(String command) {
-                String todoIndex = command.substring(4).trim();
-                return new UpdateCommand(command, todoIndex);
+        String todoIndex = command.substring(4).trim();
+        return new UpdateCommand(command, todoIndex);
     }
 
     private static Command prepareDeleteTask(String command) {

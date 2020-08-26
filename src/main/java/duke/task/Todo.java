@@ -8,18 +8,15 @@ public class Todo extends Task {
         super(s);
     }
 
-    public Todo(int doneStatus, String s)  {
-        super(doneStatus ,s);
+    public Todo(int doneStatus, String s) {
+        super(doneStatus, s);
     }
-
-
 
     @Override
     public String formatTaskForDatabase() {
-        int status = super.isDone ? 1 : 0;
+        int status = super.getDoneStatus() ? 1 : 0;
         return "T|" + status + "|" + super.description;
     }
-
 
     @Override
     public String toString() {
