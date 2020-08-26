@@ -1,3 +1,7 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -150,6 +154,45 @@ public class Duke {
         return response;
     }
 
+    private static void save() throws IOException {
+        FileWriter fw = new FileWriter(".\\data\\duke.txt");
+        StringBuilder textToWrite = new StringBuilder();
+        for (Task t : tasks) {
+            String entry = t.getStringType() + " / " + t.isDoneToString() + " / " +
+                    t.getDescription() + t.getDate().map(result -> " / " + result).orElse("");
+            textToWrite.append(entry).append("\n");
+        }
+        fw.write(String.valueOf(textToWrite));
+        fw.close();
+    }
+
+    private static void read(File taskData) throws FileNotFoundException {
+        Scanner sc = new Scanner(taskData);
+        while (sc.hasNext()) {
+            String entry = sc.nextLine();
+            String[] entryData = entry.split(" / ", 4);
+            String type = entryData[0];
+            boolean isDone = entryData[1].equals("1");
+            String description = entryData[2];
+
+            Task t = null;
+            if (type.equals("T")) {
+                t = new Todo(description);
+                if (isDone) { t.markAsDone(); }
+            } else if (type.equals("D")) {
+                String by = entryData[3];
+                t = new Deadline(description, by);
+            } else if (type.equals("E")) {
+                String at = entryData[3];
+                t = new Event(description, at);
+            } else {
+                System.out.println("Invalid taskData entry");
+            }
+
+            if (t != null) { tasks.add(t); numberOfTasks++; }
+        }
+    }
+
     public static void main(String[] args) {
         boolean running = true;
 
@@ -180,8 +223,24 @@ public class Duke {
         System.out.println(
                 "#############################################################\n" +
                 "#     Henlo! I am WUF,\n" +
-                "#     here to help you track yowr tasks!\n" +
+                "#     here to track yowr tasks!\n" +
                 "#############################################################\n");
+
+        try {
+            String filePathString = ".\\data\\duke.txt";
+            File taskData = new File(filePathString);
+            if (taskData.exists()) {
+                read(taskData);
+            } else {
+                //System.out.println(new File(".").getCanonicalPath());
+                File dir = new File(".\\data");
+                dir.mkdir();
+                boolean created = taskData.createNewFile();
+                assert created;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         while (running) {
             String input = sc.nextLine();
@@ -206,11 +265,17 @@ public class Duke {
                 if (prefix.equals("bye")) {
                     running = false;
                 }
+
+                // Save current list of tasks
+                save();
+
             } catch (DukeException e) {
                 String reply = "#############################################################\n" +
                         "#    " + e.toString() + "\n" +
                         "#############################################################";
                 System.out.println(reply);
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         }
     }
