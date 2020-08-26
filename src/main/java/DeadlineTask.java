@@ -13,12 +13,15 @@ public class DeadlineTask extends Task {
     public DeadlineTask(String deadline, String task, TaskSymbol taskType) {
         super(task, taskType);
         this.stringDeadline = deadline;
-        this.deadline = LocalDateTime.parse(deadline, DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm"));
+        this.deadline = LocalDateTime.parse(deadline,
+                DateTimeFormatter.
+                        ofPattern("dd/MM/yyyy HHmm"));
     }
 
     @Override
     public String toString() {
         return super.toString() + " (by: " +
-                deadline.format(DateTimeFormatter.ofPattern("dd MMM yyyy hh:mm a")) + ")";
+                deadline.format(DateTimeFormatter.
+                        ofPattern("dd MMM yyyy hh:mm a")) + ")";
     }
 }

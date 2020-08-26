@@ -1,24 +1,22 @@
 package main.java;
 
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 /**
  * Stores the tasks recorded by the bot in a hard drive.
  */
 public class TaskStore {
-    private final Path filePath;
+    private Path filePath;
     private static final String FILE_PATH = "./storage/tasks.txt";
     private File taskStorage;
 
     public TaskStore() {
-        filePath = Paths.get(FILE_PATH);
+            this.filePath = Paths.get(FILE_PATH);
     }
 
     public void createFile() {
@@ -53,14 +51,16 @@ public class TaskStore {
                     String taskDeadline = deadlineTask.deadline.toString();
                     String taskStatus = deadlineTask.getStatusIcon();
                     String taskContent = deadlineTask.task;
-                    combinedTask = taskType + "|" + taskStatus + "|" + taskContent + "|" + taskDeadline;
+                    combinedTask = taskType + "|" + taskStatus + "|" +
+                            taskContent + "|" + taskDeadline;
 
                 } else if (taskType.equals("[E]")) {
                     EventsTask eventsTask = (EventsTask) listOfTasks.get(i);
                     String taskPeriod = eventsTask.period.toString();
                     String taskStatus = eventsTask.getStatusIcon();
                     String taskContent = eventsTask.task;
-                    combinedTask = taskType + "|" + taskStatus + "|" + taskContent + "|" + taskPeriod;
+                    combinedTask = taskType + "|" + taskStatus + "|" +
+                            taskContent + "|" + taskPeriod;
 
                 }
                 fw.write(combinedTask + "\n");

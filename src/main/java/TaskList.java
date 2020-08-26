@@ -1,7 +1,6 @@
 package main.java;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Handles the different actions that can be done by the bot.
@@ -26,7 +25,8 @@ public class TaskList {
         System.out.println(Willy.style +
                 "\tAy here is the task you just added:\n" +
                 "\t  " + task + "\n" +
-                "\tNow you have " + listOfTasks.size() + " task(s) ah dun forget\n" +
+                "\tNow you have " + listOfTasks.size() +
+                " task(s) ah dun forget\n" +
                 Willy.style);
     }
 
@@ -38,7 +38,8 @@ public class TaskList {
         System.out.println(Willy.style +
                 "\tOkai here is the task you just deleted:\n" +
                 "\t  " + task + "\n" +
-                "\tNow you have " + listOfTasks.size() + " task(s) left ~\n" +
+                "\tNow you have " + listOfTasks.size() +
+                " task(s) left ~\n" +
                 Willy.style);
     }
 

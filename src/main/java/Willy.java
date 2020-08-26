@@ -1,7 +1,6 @@
 package main.java;
 
-import java.io.IOException;
-import java.util.ArrayList;
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 /**
@@ -20,7 +19,7 @@ public class Willy {
             + "   \\____/    \\____/ ILLY ~(^-^)~\n";
 
 
-    public static void main(String[] args) throws WillyException {
+    public static void main(String[] args) throws WillyException, FileNotFoundException {
         System.out.println(logo + "    Your personal life secretary");
 
         Scanner input = new Scanner(System.in);
@@ -60,7 +59,7 @@ public class Willy {
             else if (message.contains("todo")) {
                 try {
                     String activity = message.substring(5);
-                    ToDo newTask = new ToDo(activity, TaskSymbol.TODO);
+                    ToDoTask newTask = new ToDoTask(activity, TaskSymbol.TODO);
                     list.addToList(newTask);
                 } catch (Exception e) {
                     WillyException error = new WillyException("Hmmm what would you like to do?");
