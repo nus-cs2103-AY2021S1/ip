@@ -19,7 +19,7 @@ class Task {
         return "Task," +  completeStatus + "," + name;
     }
 
-    public void markDone() {
+    public void setCompleted() {
         isCompleted = true;
     }
 
