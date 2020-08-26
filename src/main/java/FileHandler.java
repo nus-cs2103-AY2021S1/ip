@@ -8,7 +8,7 @@ public class FileHandler {
 
     public static void writeToFile(String file, TaskManager tm) throws IOException {
 
-        FileWriter writer = new FileWriter(file, true);
+        FileWriter writer = new FileWriter(file);
         ArrayList<Task> taskList = tm.getTaskList();
 
         for (int i = 0; i < taskList.size(); i++) {

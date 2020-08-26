@@ -82,9 +82,5 @@ public class TextAndTaskConverter {
             return t;
         }
     }
-
-    public static taskConverter() {
-
-    }
 }
 
