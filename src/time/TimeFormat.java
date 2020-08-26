@@ -3,6 +3,7 @@ package time;
 import java.time.format.DateTimeFormatter;
 
 public class TimeFormat {
+
     public static final DateTimeFormatter dateFormatter =
             DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
