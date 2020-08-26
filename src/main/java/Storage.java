@@ -19,7 +19,7 @@ public class Storage {
     private final File file;
 
     /**
-     * Initializes with the File object using the file path.
+     * Initialises with the File object using the txt file path.
      * If the path does not exist due to missing directories,
      * this constructor will attempt to create the necessary
      * directories.
