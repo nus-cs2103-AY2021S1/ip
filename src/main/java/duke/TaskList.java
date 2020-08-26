@@ -1,12 +1,9 @@
 package duke;
 
 import java.util.ArrayList;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
 
 public class TaskList {
-    private final String line = "---------------------------------------------";
     private ArrayList<Task> items;
     private int total;
     Storage storage;
@@ -16,7 +13,7 @@ public class TaskList {
         this.items = storage.readData();
         this.total = items.size();
     }
-    
+
     public void bye() {
         try {
             storage.writeData(this.items);

@@ -19,7 +19,7 @@ public class Storage {
 
     public Storage() {}
 
-    private String allTasksCombined(ArrayList<Task> items) {
+    String allTasksCombined(ArrayList<Task> items) {
         String res = "";
         for (Task item : items) {
             res += String.format("%s", item.saveString());
@@ -28,7 +28,7 @@ public class Storage {
         return res;
     }
 
-    private Task stringToTask(String str) throws InvalidTypeException, InvalidDataException {
+    Task stringToTask(String str) throws InvalidTypeException, InvalidDataException {
         String[] info = str.split("\\|");
         if (info.length < 3) {
             throw new InvalidDataException();

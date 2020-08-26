@@ -1,7 +1,5 @@
+package duke;
 import java.util.Scanner;
-import duke.TaskList;
-import duke.Parser;
-import duke.Ui;
 
 public class Duke {
     public static void main(String[] args) {
