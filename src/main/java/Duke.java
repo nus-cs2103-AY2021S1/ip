@@ -97,6 +97,9 @@ public class Duke {
                         System.out.println(line);
                     }
                 }
+
+                Duke.updateTasks(count, list, filePath);
+
             }  else if (pieces[0].equals("delete")){
             if (pieces.length == 1) {
                 ex = new InvalidInputException("Hey, you forgot to tell me which task to delete");
@@ -117,6 +120,7 @@ public class Duke {
                     System.out.println(line);
                 }
             }
+            Duke.updateTasks(count, list, filePath);
         }else {
                 if (pieces.length == 1) {
                     switch (pieces[0]) {
@@ -179,20 +183,30 @@ public class Duke {
                         System.out.println(line);
                     }
                 }
+                Duke.updateTasks(count, list, filePath);
             }
 
         }
+
+    }
+
+    public static void updateTasks(int count, ArrayList<Task> list, String filePath) {
         String output = "";
         for (int i = 1; i < count + 1; i++) {
             Task cur = list.get(i - 1);
             String currentTask = "" + i + "." + "[" + cur.getType() + "][" + cur.getStatusIcon() + "] " + cur + "\n";
             output = output + currentTask;
+
         }
+
+        // System.out.println(output);
+
         try {
             FileWriting.writeToFile(filePath, output);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
 }
 
