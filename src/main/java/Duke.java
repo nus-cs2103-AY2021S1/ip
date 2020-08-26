@@ -1,19 +1,83 @@
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
     private static ArrayList<Task> items;
+    private static File file;
 
     public static void main(String[] args) {
         greeting();
         getUserInput();
     }
 
+    private static ArrayList<Task> loadTasksFromFile() throws IOException {
+        file = new File("data/dude.txt");
+
+        if (file.exists()) {
+            ArrayList<Task> tasksList = new ArrayList<>();
+            Scanner sc = new Scanner(file);
+
+            while (sc.hasNextLine()) {
+                String[] data = sc.nextLine().split(" / ",4);
+
+                String taskType = data[0];
+                boolean isDone = data[1].equals("1");
+                String description = data[2];
+
+                if (taskType.equals("T")) {
+                    tasksList.add(new Todo(description, isDone));
+                } else if (taskType.equals("E")) {
+                    String at = data[3];
+                    tasksList.add(new Event(description, isDone, at));
+                } else if (taskType.equals("D")) {
+                    String by = data[3];
+                    tasksList.add(new Deadline(description, isDone, by));
+                } else {
+                    throw new IOException("Error loading tasks from file.");
+                }
+            }
+            return tasksList;
+        } else {
+            file.getParentFile().mkdirs();
+            file.createNewFile();
+            return new ArrayList<>();
+        }
+    }
+
+    private static void saveTasksToFile() throws DukeException {
+        FileWriter fileWriter;
+
+        try {
+            fileWriter = new FileWriter(file);
+            for (Task task : items) {
+                if (task instanceof Todo) {
+                    fileWriter.write("T" + " / " + (task.getIsDone() ? "1" : "0") + " / " + task.getDescription() + System.lineSeparator());
+                } else if (task instanceof Event) {
+                    fileWriter.write("E" + " / " + (task.getIsDone() ? "1" : "0") + " / " + task.getDescription() + " / " + ((Event) task).getAt() + System.lineSeparator());
+                } else if (task instanceof Deadline){
+                    fileWriter.write("D" + " / " + (task.getIsDone() ? "1" : "0") + " / " + task.getDescription() + " / " + ((Deadline) task).getBy() + System.lineSeparator());
+                } else {
+                    throw new DukeException("Error saving task to file.");
+                }
+            }
+            fileWriter.close();
+        } catch (IOException e) {
+            throw new DukeException("Error occurred while saving the tasks.");
+        }
+    }
+
     private static void getUserInput() {
         Scanner sc = new Scanner(System.in);
         boolean exit = false;
 
-        items = new ArrayList<>();
+        try {
+            items = loadTasksFromFile();
+        } catch (IOException e) {
+            System.out.println("Error occurred while loading the tasks.");
+        }
 
         String userInput;
 
@@ -37,6 +101,7 @@ public class Duke {
                     } else {
                         addItem(userInput);
                     }
+                    saveTasksToFile();
                 } catch (DukeException e) {
                     System.out.println(e.getMessage());
                 }
@@ -74,7 +139,8 @@ public class Duke {
             }
             newTask = new Todo(taskDescription);
         } else if (taskType.equals(Instruction.DEADLINE.getInstruction())) {
-            String[] deadlineArr = taskDescription.split("/by", 2);
+            String[] deadlineArr = taskDescription.split(" /by ", 2);
+
             if (deadlineArr.length != 2) {
                 throw new DukeException("Please key in a valid name and date for the Deadline");
             }
@@ -86,7 +152,7 @@ public class Duke {
             }
             newTask = new Deadline(deadlineName, deadlineDate);
         } else if (taskType.equals(Instruction.EVENT.getInstruction())) {
-            String[] eventArr = taskDescription.split("/at", 2);
+            String[] eventArr = taskDescription.split(" /at ", 2);
             if (eventArr.length != 2) {
                 throw new DukeException("Please key in a valid name and date for the Event");
             }
