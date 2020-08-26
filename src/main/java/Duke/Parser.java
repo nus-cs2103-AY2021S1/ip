@@ -1,3 +1,8 @@
+package duke;
+
+import duke.exception.*;
+import duke.task.*;
+
 public class Parser {
 
     public static boolean parseAndExecute(String input, TaskList tasks, Ui ui) throws MissingDoneArgumentException, DoneOutOfRangeException,
