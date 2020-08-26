@@ -7,7 +7,7 @@ public class Todo extends Task {
 
     /**
      * Todo constructor.
-     * 
+     *
      * @param description the description of the task.
      */
     public Todo(String description) {
@@ -16,7 +16,7 @@ public class Todo extends Task {
 
     /**
      * Todo constructor with specified isDone.
-     * 
+     *
      * @param description the description of the task.
      * @param isDone      specify whether the task is done or not.
      */
@@ -29,12 +29,8 @@ public class Todo extends Task {
         return "[T]" + super.toString();
     }
 
-    /**
-     * Format task to be written to a file.
-     *
-     * @return formatted string of the task.
-     */
+    @Override
     public String writeToFile() {
-        return String.format("T | %b | %s ", this.isDone, this.description);
+        return "T | " + super.writeToFile();
     }
 }

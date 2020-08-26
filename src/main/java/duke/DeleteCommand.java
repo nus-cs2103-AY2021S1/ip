@@ -16,13 +16,7 @@ public class DeleteCommand extends Command {
         this.idx = idx;
     }
 
-    /**
-     * Execute the command.
-     *
-     * @param taskList the tasklist used for the command.
-     * @param storage  the storage used for the command.
-     * @throws DukeException duke failed to complete the command.
-     */
+    @Override
     public void execute(TaskList taskList, Storage storage) throws DukeException {
         taskList.deleteTask(this.idx);
         storage.writeToFile(taskList);

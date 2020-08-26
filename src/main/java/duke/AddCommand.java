@@ -16,13 +16,7 @@ public class AddCommand extends Command {
         this.task = task;
     }
 
-    /**
-     * Execute the command.
-     *
-     * @param taskList the tasklist used for the command.
-     * @param storage  the storage used for the command.
-     * @throws DukeException duke failed to complete the command.
-     */
+    @Override
     public void execute(TaskList taskList, Storage storage) throws DukeException {
         taskList.addTask(task);
         Ui.showMessage(String.format("Okay! I have added the task:\n%s\n", task));

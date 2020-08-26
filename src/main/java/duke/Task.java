@@ -4,12 +4,12 @@ package duke;
  * The task base class. Has a description and indicator whether the task is done or not.
  */
 public class Task {
-    protected String description;
-    protected boolean isDone;
+    private String description;
+    private boolean isDone;
 
     /**
      * Task constructor.
-     * 
+     *
      * @param description the description of the task.
      */
     public Task(String description) {
@@ -19,7 +19,7 @@ public class Task {
 
     /**
      * Task constructor with specified isDone.
-     * 
+     *
      * @param description the description of the task.
      * @param isDone      specify whether the task is done or not.
      */
@@ -35,6 +35,15 @@ public class Task {
      */
     public String getStatusIcon() {
         return (this.isDone ? "\u2713" : "\u2718");
+    }
+
+    /**
+     * Get the description of the task.
+     *
+     * @return description of the task.
+     */
+    public String getDescription() {
+        return this.description;
     }
 
     /**

@@ -5,13 +5,7 @@ package duke;
  */
 public class ListCommand extends Command {
 
-    /**
-     * Execute the command.
-     *
-     * @param taskList the tasklist used for the command.
-     * @param storage  the storage used for the command.
-     * @throws DukeException duke failed to complete the command.
-     */
+    @Override
     public void execute(TaskList taskList, Storage storage) throws DukeException {
         taskList.showTaskList();
         storage.writeToFile(taskList);
