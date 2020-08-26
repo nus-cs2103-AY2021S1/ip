@@ -8,6 +8,9 @@ import duke.ui.Ui;
 
 import java.io.IOException;
 
+/**
+ * Represents the duke system.
+ */
 public class Duke {
 
     /** Storage of the system */

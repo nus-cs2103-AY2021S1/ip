@@ -1,5 +1,8 @@
 package duke.exception;
 
+/**
+ * Represents the exception that the task with the same description has been created.
+ */
 public class TaskExistException extends DukeException{
 
     public TaskExistException() {

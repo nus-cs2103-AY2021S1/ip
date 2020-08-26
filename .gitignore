@@ -19,3 +19,6 @@ bin/
 #UI test file
 /text-ui-test/ACTUAL.txt
 text-ui-test/EXPECTED-UNIX.TXT
+
+#javadoc
+docs/javadoc

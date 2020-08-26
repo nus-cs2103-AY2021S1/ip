@@ -6,7 +6,7 @@ package duke.exception;
 public class DeletionIndexEmptyException extends  DukeException{
 
     public DeletionIndexEmptyException() {
-        super("☹ OOPS!!! The deletion index cannot be empty.");
+        super("OOPS!!! The deletion index cannot be empty.");
     }
 
 }

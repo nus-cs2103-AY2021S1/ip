@@ -1,6 +1,5 @@
 package duke.tool;
 
-import duke.exception.DukeException;
 import duke.exception.TaskExistException;
 import duke.task.Task;
 
