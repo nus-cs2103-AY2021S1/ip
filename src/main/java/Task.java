@@ -1,35 +1,66 @@
+/**
+ * Represents a task of the user. A task object will have its description,
+ * completion status and task type stored.
+ */
 public class Task {
     protected String description;
     protected boolean isDone;
     protected String type;
 
+    /**
+     * Constructor for a task.
+     * @param description The detailed description of the task created.
+     */
     public Task(String description) {
         this.description = description;
         this.isDone = false;
         this.type = null;
     }
+
+    /**
+     * Constructor for a task.
+     * @param description The detailed description of the task created.
+     * @param isDone The completion status of the task.
+     * @param type The type of the task.
+     */
     public Task(String description, boolean isDone, String type) {
         this.description = description;
         this.isDone = isDone;
         this.type = type;
     }
+
     public String getType() {
         return this.type;
     }
+
+    /**
+     * A getter for icon that shows completion status of a task.
+     * @param args unused
+     * @return A tick for completed task, a cross for uncompleted task.
+     */
     public String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
 
+    /**
+     * This method is used to mark a task as done.
+     */
     public void markAsDone() {
         if (!isDone) {
             this.isDone = true;
         }
     }
 
+    /**
+     * This method is used to mark a task as deleted.
+     */
     public void markAsDeleted() {
         this.isDone = false;
     }
 
+    /**
+     * This method is used to set the type of a task.
+     */
     public void setType(String type) {
         this.type = type;
     }

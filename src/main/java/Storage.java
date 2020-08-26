@@ -6,6 +6,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Represents a class for storage that deals with loading tasks
+ * from the file and saving tasks in the file.
+ */
 public class Storage {
     public String filePath;
 

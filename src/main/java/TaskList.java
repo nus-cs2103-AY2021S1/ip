@@ -6,15 +6,28 @@ import java.util.List;
 import java.util.Date;
 import java.text.SimpleDateFormat;
 
+/**
+ * Represents a list of tasks that can execute operations like
+ * add and delete tasks inside.
+ */
 public class TaskList {
     public List<Task> list;
     public int noOfTasks;
 
+    /**
+     * Default constructor for a task list without any task.
+     * @param args unused
+     */
     public TaskList() {
         this.list = new ArrayList<>();
         this.noOfTasks = 0;
     }
 
+    /**
+     * Constructor for a task list with given String input.
+     * @param tasks Multiple lines of strings that are formatted
+     * in a specific way to represent task information of existing task(s).
+     */
     public TaskList(String tasks) {
         this.list = new ArrayList<>();
         this.noOfTasks = 0;
@@ -88,15 +101,30 @@ public class TaskList {
         }
     }
 
+    /**
+     * A getter of number of tasks in the task list.
+     * @param args unused
+     * return Number of tasks
+     */
     public int getNoOfTasks() {
         return this.noOfTasks;
     }
 
+    /**
+     * Add task to the task list.
+     * @param task Task to be added
+     * return nothing
+     */
     public void addTask(Task task) {
         this.list.add(task);
         noOfTasks ++;
     }
 
+    /**
+     * Delete task from the task list.
+     * @param task Task to be deleted
+     * return nothing
+     */
     public void deleteTask(Task task) {
         this.list.remove(task);
         noOfTasks --;
