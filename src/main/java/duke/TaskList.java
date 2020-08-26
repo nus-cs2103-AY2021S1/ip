@@ -41,11 +41,18 @@ public class TaskList {
         return taskList.size();
     }
 
-    public TaskList findTask(String description) {
+    /**
+     * Finds task in the current taskList that matches the input keyword.
+     * Return TaskList containing the matching tasks.
+     *
+     * @param keyword Input keyword from the user.
+     * @return TaskList of the matching tasks.
+     */
+    public TaskList findTask(String keyword) {
         ArrayList<Task> matchingTask = new ArrayList<>();
 
         for (Task task: taskList) {
-            if (task.getDescription().contains(description)) {
+            if (task.getDescription().contains(keyword)) {
                 matchingTask.add(task);
             }
         }

@@ -21,7 +21,7 @@ public class ListCommand extends Command{
 
     /**
      * Executes the list command, and prints out the list of items in the task list,
-     * if there are no errors in the code.
+     * if there are no errors in the input.
      *
      * @param taskList Task list which contains the current task.
      * @param ui Ui object to interact with the user.

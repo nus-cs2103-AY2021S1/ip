@@ -22,7 +22,7 @@ public class ByeCommand extends Command {
 
     /**
      * Executes the bye command, and sends a signal to exit the duke program,
-     * if there are no errors in the code.
+     * if there are no errors in the input.
      *
      * @param taskList Task list which contains the current task.
      * @param ui Ui object to interact with the user.

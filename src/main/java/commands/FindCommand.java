@@ -6,6 +6,9 @@ import duke.Ui;
 
 import exceptions.InvalidFindFormatException;
 
+/**
+ * Class to initiate the find command.
+ */
 public class FindCommand extends Command {
 
     public FindCommand(String fullCommand) {
@@ -17,6 +20,15 @@ public class FindCommand extends Command {
         return false;
     }
 
+    /**
+     * Executes the find command, and finds the items in the task list, then prints
+     * the matching task list, if there are no errors in input.
+     *
+     * @param taskList Task list which contains the current task.
+     * @param ui Ui object to interact with the user.
+     * @param storage Storage object to read or save the task list in the hardware.
+     * @throws InvalidFindFormatException If the format of find command is wrong.
+     */
     @Override
     public void executeCommand(TaskList taskList, Ui ui, Storage storage)
             throws InvalidFindFormatException {
