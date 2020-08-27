@@ -15,7 +15,7 @@ public class Task {
         isDone = true;
     }
     
-    public static Task taskify(String taskString) throws DukeException {
+    public static Task textToTask(String taskString) throws DukeException {
         return Parser.getTask(taskString);
     }
 

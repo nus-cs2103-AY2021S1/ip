@@ -45,7 +45,7 @@ public class Storage {
             ReadFile file = new ReadFile(filePath);
             String[] dataArr = file.openFile();
             for (int i = 0; i < dataArr.length; ++i) {
-                tasks.add(Task.taskify(dataArr[i]));
+                tasks.add(Task.textToTask(dataArr[i]));
             }
         } catch (Exception e) {
             System.out.println("Something went wrong in reading data...");
