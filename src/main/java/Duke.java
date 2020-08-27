@@ -249,6 +249,26 @@ public class Duke {
                             event.printTime + "\n Now you have " + count + " tasks in the list");
                     storage.writeToFile(inputs);
                 }
+                
+                void taskFind(String nextLine) throws DukeException {
+                    if (nextLine.equals("find") || nextLine.equals("find ")) {
+                        throw new DukeException("OOPS!!! The description of find cannot be empty");
+                    }
+                    String keyword = nextLine.substring(5);
+                    int len = inputs.size();
+                    for(int i = 0; i < len; i++) {
+                        Input input = inputs.get(i);
+                        if (input.content.contains(keyword)) {
+                            if (input.done) {
+                                System.out.println((i+1) + ". " + input.id + "[/] " + input.content +
+                                        input.printTime);
+                            } else {
+                                System.out.println((i+1) + ". " + input.id + "[x] " + input.content +
+                                        input.printTime);
+                            }
+                        }
+                    }
+                }
 
             }
             
@@ -299,6 +319,8 @@ public class Duke {
                             inputs.taskDeadline(nextLine);
                         } else if (nextLine.startsWith("event")) {
                             inputs.taskEvent(nextLine);
+                        } else if (nextLine.startsWith("find")) {
+                            inputs.taskFind(nextLine);
                         } else if (nextLine.equals("list")) {
                             if (inputs.inputs.size() == 0) {
                                 System.out.println("No tasks in list");
