@@ -42,12 +42,32 @@ public class Duke {
         }
     }
 
+    public static void saveDataToList(String content, ArrayList<Task> lst) {
+        Scanner s = new Scanner(content);
+        while (s.hasNext()) {
+            String line = s.nextLine();
+            String[] arr = line.split("\\|");
+            String type = arr[0].trim();
+            int status = Integer.parseInt(arr[1].trim());
+            String description = arr[2].trim();
+            if (type.equals("T")) {
+                lst.add(new ToDo(description, status == 1));
+            } else {
+                String additionalInfo = arr[3].trim();
+                if (type.equals("D")) {
+                    lst.add(new Deadline(description, additionalInfo, status == 1));
+                } else {
+                    lst.add(new Event(description, additionalInfo, status == 1));
+                }
+            }
+        }
+    }
     public static String readFileContents(String filePath) throws FileNotFoundException {
         File f = new File(filePath);
         String content = "";
         Scanner s = new Scanner(f);
         while (s.hasNext()) {
-            content += s.nextLine();
+            content += s.nextLine() + System.lineSeparator();
         }
         return content;
     }
@@ -151,12 +171,14 @@ public class Duke {
         String greetings = "Hello! I'm Duke, your personal assistant.\nWhat can I do for you?";
         printMessage(greetings);
 
+        ArrayList<Task> lst = new ArrayList<>();
+
         String filePath = "./data/data.txt";
         try {
             File f = new File(filePath);
             if (f.exists()) {
                 String content = readFileContents(filePath);
-                System.out.println("PRINTING:" + content);
+                saveDataToList(content, lst);
             } else {
                 f.createNewFile();
             }
@@ -166,8 +188,6 @@ public class Duke {
             System.out.println("Unable to create new file.");
             e.printStackTrace();
         }
-
-        ArrayList<Task> lst = new ArrayList<>();
 
         Scanner sc = new Scanner(System.in);
         mainLogic(sc, lst);
