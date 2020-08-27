@@ -117,12 +117,10 @@ public class Ui {
     }
 
     /**
-     * Display message when Duke is told to close.
+     * Prints out a list of all tasks that whose descriptions contain the given keyWords.
+     * @param tasks TaskList kept by Duke.
+     * @param keyWords Key words entered by user.
      */
-    public void exitMessage() {
-        System.out.println("Bye. Hope to see you again soon!");
-    }
-
     public void findTasksMessage(TaskList tasks, String keyWords) {
         System.out.println("Here are the matching tasks in your list:");
         for (int i = 1; i <= tasks.getNumOfTasks(); i++) {
@@ -131,5 +129,12 @@ public class Ui {
                 System.out.format("%d.%s\n", i, t.toString());
             }
         }
+    }
+
+    /**
+     * Display message when Duke is told to close.
+     */
+    public void exitMessage() {
+        System.out.println("Bye. Hope to see you again soon!");
     }
 }
