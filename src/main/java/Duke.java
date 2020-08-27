@@ -34,6 +34,7 @@ public class Duke {
         final String messageMarked = "Nice! I've marked this task as done:\n";
         final String messageAdded = "Got it. I've added this task:\n";
         final String messageDelete = "Noted. I've removed this task:\n";
+        final String messageMatching = "Here are the matching tasks in your list:\n";
         final String home = System.getProperty("user.home");
 
         java.nio.file.Path path = java.nio.file.Paths.get(home, "ip","start.txt");
@@ -122,6 +123,23 @@ public class Duke {
                         System.out.println(format(messageDelete + "        " + task.getTypeLetter()
                                 + task.getStatusIcon() + task.getPrintMessage() + messageNum));
 
+                    } else if (priorCommand.equals("find")) {
+                        List<Task> subList = new ArrayList<>();
+                        // check whether extraCommand is a subString of any task message
+                        for (Task task: list) {
+                            if (task.getMessage().contains(extraCommand)) {
+                                subList.add(task);
+                            }
+                        }
+                        System.out.print(SPACE + LINE);
+                        System.out.print(SPACE + messageMatching);
+                        int counter = 1;
+                        for (Task task : subList) {
+                            System.out.println(SPACE + " " + counter + "." + task.getTypeLetter()
+                                    + task.getStatusIcon() + task.getPrintMessage());
+                            counter++;
+                        }
+                        System.out.println(SPACE + LINE);
                     } else {
                         Task task;
                         switch (priorCommand) {
