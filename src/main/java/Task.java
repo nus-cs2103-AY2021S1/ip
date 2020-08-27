@@ -1,6 +1,6 @@
 public class Task {
     boolean done;
-    String description;
+    public String description;
 
     // TODO: 17/8/20 make a toString 
     public Task(String description) {
