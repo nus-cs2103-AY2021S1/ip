@@ -231,7 +231,7 @@ public class Duke {
         System.out.printf(MESSAGE_TEMPLATE, message);
     }
 
-    private void loadTasksFromDisk() throws FileNotFoundException, DukeException, DukeDataFolderException{
+    private void loadTasksFromDisk() throws FileNotFoundException, DukeException{
         File dukeDataFile = new File(DUKE_DATA_FILE_PATH.toUri());
         if (Files.notExists(DUKE_DATA_DIR_PATH)) {
             throw new DukeDataFolderException("Missing Deuk Data Folder!" + NEW_LINE + PADDING +
@@ -247,15 +247,15 @@ public class Duke {
             String taskName = sc.next();
             Task task;
             if (taskType.equals("T")) {
-                task = new Todo(taskName);
+                task = Todo.createTodo(taskName);
             }
             else if (taskType.equals("D")) {
                 String dueDate = fs.nextLine();
-                task = new Deadline(taskName, dueDate);
+                task = Deadline.createDeadline(taskName, dueDate);
             }
             else if (taskType.equals("E")) {
                 String timing = fs.nextLine();
-                task = new Event(taskName, timing);
+                task = Event.createEvent(taskName, timing);
             }
             else {
                 throw new DukeException("Save file corrupted!");
@@ -269,6 +269,7 @@ public class Duke {
     }
 
     private void saveTasksToDisk() throws IOException {
+        // TODO: check dirty flag before saving to disk
         FileWriter fw = new FileWriter(DUKE_DATA_FILE_PATH.toString());
         String tasksString = "";
         for (Task task : this.storageList) {

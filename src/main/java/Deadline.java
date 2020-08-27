@@ -5,9 +5,11 @@ import java.time.temporal.ChronoUnit;
 
 public class Deadline extends Task {
     private String dueDate;
-    private Deadline(String name, String dueDate) {
+    private String dueDateInSaveFormat;
+    private Deadline(String name, String dueDate, String dueDateInSaveFormat) {
         super(name);
         this.dueDate = dueDate;
+        this.dueDateInSaveFormat = dueDateInSaveFormat;
     }
 
     public static Deadline createDeadline(String name, String dueDate) throws DukeException{
@@ -18,7 +20,8 @@ public class Deadline extends Task {
         catch (DateTimeParseException ex) {
             throw new DukeException("Please specify the due date as follows: yyyy-mm-dd");
         }
-        return new Deadline(name, localDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
+        return new Deadline(name,
+                localDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")), dueDate);
     }
 
     @Override
@@ -30,7 +33,7 @@ public class Deadline extends Task {
     public String toSaveDataFormat() {
         String saveData = "";
         saveData += this.isDone ? 1 : 0;
-        saveData += " D " + this.name + "\n" + this.dueDate;
+        saveData += " D " + this.name + "\n" + this.dueDateInSaveFormat;
         return saveData;
     }
 
