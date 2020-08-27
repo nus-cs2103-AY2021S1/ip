@@ -5,6 +5,11 @@ public class Todo extends Task {
 
     public String type;
 
+    /**
+     * Constructor
+     * @param desc the description of the todo.
+     * @param isDone the status Icon of the todo.
+     */
     public Todo(String desc, boolean isDone) {
         super(desc, isDone, null);
         type = "T";

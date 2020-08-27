@@ -9,6 +9,9 @@ public class Ui {
 
     public Scanner sc;
 
+    /**
+     * Constructor.
+     */
     public Ui() {
         sc = new Scanner(System.in);
     }
