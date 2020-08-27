@@ -10,6 +10,7 @@
 ../src/Task.java
 ../src/InvalidRequestException.java
 ../src/Duke.java
+../src/InvalidKeyException.java
 ../src/Deadline.java
 ../src/Todo.java
 ../src/InvalidTodoException.java
