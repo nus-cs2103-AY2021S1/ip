@@ -2,6 +2,9 @@ package com.Duke.Tasks;
 
 import com.Duke.TaskManager.DukeException;
 
+/*
+ * Class that encapsulates the blah Input
+ */
 public class Blah {
 
     public static void blahCreated() throws DukeException {

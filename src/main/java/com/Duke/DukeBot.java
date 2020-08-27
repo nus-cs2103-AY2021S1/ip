@@ -8,8 +8,16 @@ import com.Duke.TaskManager.UI;
 
 import java.util.Scanner;
 
+/*
+* This Class handles the simulation of the Duke Chatbot
+* It creates the lists for storing data and facilitates the
+* parser and storage processes
+ */
 public class DukeBot {
-    //This class handles the simulation of the Duke chat bot
+
+    /*
+    * This method begins the simulation of Duke
+     */
     public static void simulate(){
         TaskList ls = new TaskList(Storage.read());
         boolean hasBye = false;

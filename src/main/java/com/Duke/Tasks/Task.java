@@ -2,11 +2,18 @@ package com.Duke.Tasks;
 
 import com.Duke.TaskManager.DukeException;
 
+/*
+ * This Class encapsulates a unnamed task
+ */
 public class Task {
-    //This class manages the information of each task within Dukes Task List
     protected final String task;
     protected final boolean isDone;
 
+    /*
+     * Constructor for the To Do class
+     * @param task Represents the description of the task
+     * @param isDone Represents whether the task is done
+     */
     public Task(String task, boolean isDone) throws DukeException {
         if(task.trim().isEmpty()) {
             throw new DukeException("The description of a task cannot be empty.");
@@ -17,6 +24,10 @@ public class Task {
 
     }
 
+
+    /*
+     * Method to Create the text format that is Saved
+     */
     public String toSaveFormat(){
         return isDone
                 ? task + "*Y"
@@ -27,6 +38,10 @@ public class Task {
         return this.isDone;
     }
 
+    /*
+     * Method to create the done version of this task
+     * @return Returns a task with the isDone state as true
+     */
     public Task done() throws DukeException{
         return new Task(this.task, true);
     }
