@@ -32,6 +32,7 @@ public class Storage {
         System.out.println("Creating File...");
         try {
             newFile.createNewFile();
+            System.out.println("Save file created at: " + this.fileDir);
             return newFile;
         } catch (IOException e) {
             e.printStackTrace();

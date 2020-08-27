@@ -38,6 +38,20 @@ public class Parser {
             this.isExit = true;
             return "Bye! Hope to see you again soon!";
         }
+        if (command.equals("help")) {
+            return "Accepted commands:\n" +
+                    "hello - hello!\n" +
+                    "list - show current list\n" +
+                    "bye - saves the current list and exits the program\n" +
+                    "\n" +
+                    "todo <description> - create a todo Task\n" +
+                    "event <description> /at <dd/MM/yyyy> - create an event Task (date is optional)\n" +
+                    "deadline <description> /by <dd/MM/yyyy> - create a deadline Task (date is optional)\n" +
+                    "\n" +
+                    "done <index> - mark the specified task as done\n" +
+                    "undo <index> - mark the specified task as not done\n" +
+                    "delete <index> - deletes the specified task from the list";
+        }
         if (matcher.find()) {
             String com = matcher.group(1);
             String task = matcher.group(2);
@@ -56,7 +70,7 @@ public class Parser {
                     return this.processTask(com, task, date);
             }
         }
-        throw new DukeException("Sorry, I did not understand: " + command);
+        throw new DukeException("Sorry, I did not understand: " + command + ".\nUse \"help\" to look at available commands.");
     }
 
     private String processTask(String com, String task, String date) throws DukeException {
