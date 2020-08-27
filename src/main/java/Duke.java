@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -7,6 +8,7 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         TaskList tasks = new TaskList();
         Parser parser = new Parser();
+        Storage storage = new Storage();
 
         // TODO: 20/8/20 Improve runtime: keep an internal counter of task (for done.*)
         Ui.initialMessage();
@@ -17,6 +19,7 @@ public class Duke {
                 // Command Handling
                 // Exit
                 if (echo.equals("bye")) {
+                    storage.save(tasks);
                     Ui.exitMessage();
                     break;
                 }
@@ -43,7 +46,7 @@ public class Duke {
                     Task task = parser.parseAdd(echo);
                     Ui.printAdd(tasks.add(task));
                 }
-            } catch (DukeException e) {
+            } catch (DukeException | IOException e) {
                 System.out.println(e.getMessage());
             }
         }
