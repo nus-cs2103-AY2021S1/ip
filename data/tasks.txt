@@ -7,3 +7,4 @@ T | false | join sports club
 D | false | finish ip | tonight
 D | false | finish ip | Aug 28 2020
 E | false | 2101 op1 meeting | Tomorrow 2pm
+T | false | today

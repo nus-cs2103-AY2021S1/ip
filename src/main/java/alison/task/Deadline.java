@@ -27,6 +27,7 @@ public class Deadline extends Task {
             throw AlisonException.deadlineParseException();
         }
     }
+
     @Override
     public String savedFormat() {
         return "D " + super.savedFormat() + String.format(" | %s", by);
