@@ -1,9 +1,13 @@
 package main.java.emily.task;
 
+/**
+ * Represents the basic structure of a sample task from the user input.
+ * A task will have a string of description detail.
+ */
 public class Task {
     protected String description;
     protected boolean finished;
-    protected String type;
+    protected char type;
 
     public Task(String description) {
         this.description = description;
@@ -25,6 +29,8 @@ public class Task {
     public String getStatusIcon() {
         return (finished ? "\u2713" : "\u2718");
     }
+
+    public char getType() { return this.type; }
 
     @Override
     public String toString() {

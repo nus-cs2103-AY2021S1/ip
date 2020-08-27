@@ -2,13 +2,23 @@ package main.java.emily.command;
 
 import main.java.emily.task.Task;
 
-//deals with interactions with the user
+/**
+ * Deals with interactions with the user
+ * Receives commands from the user
+ */
+
 public class Ui {
 
     Ui() {
 
     }
-    //receive commands from user and send to parser if valid input
+
+    /**
+     * Read a line of input from the user and modify the task list accordingly
+     * @param input command from the user
+     * @param ls to be modified
+     * @throws DukeException when there is invalid command
+     */
     public void reading(String input, TaskList ls) throws DukeException {
 
         Task current;
@@ -35,8 +45,8 @@ public class Ui {
 
                 throw new DukeException("The description of " + input + " cannot be empty");
             } else{
-                //call parser to convert to task
                 System.out.println(divider);
+                //call parser to convert to task
                 current = p.process(input);
                 ls.add(current);
                 System.out.println("    Now you have " + (ls.retrieve().size()) + " tasks in the list" +

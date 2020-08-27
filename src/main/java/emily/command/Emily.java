@@ -1,7 +1,11 @@
 package main.java.emily.command;
 
+import java.io.File;
 import java.util.Scanner;
 
+/**
+ * Main program
+ */
 public class Emily {
 
     private Storage storage;
@@ -15,9 +19,15 @@ public class Emily {
         try {
             tasks = new TaskList(storage.readData());
         } catch (DukeException e) {
+            File f = new File(FILE_PATH);
+            f.getParentFile().mkdirs();
         }
     }
 
+    /**
+     * Interact with the user
+     * Read the user commands, modifies the task list, prints out information
+     */
     public void run() {
 
         String divider = "-------------------";

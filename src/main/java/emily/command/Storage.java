@@ -12,6 +12,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Deals with loading tasks from the txt file and saving tasks in the file
+ */
 public class Storage {
     private static String filepath;
 
@@ -19,6 +22,12 @@ public class Storage {
         this.filepath = filepath;
     }
 
+    /**
+     * Returns a list of tasks
+     * Reads the information from the txt file and process into a list of task
+     * @return an Arraylist of Task
+     * @throws DukeException when the file is invalid
+     */
     public ArrayList<Task> readData() throws DukeException {
 
         ArrayList<Task> store = new ArrayList<>();
@@ -70,12 +79,11 @@ public class Storage {
 
     }
 
-    public void writeToFile(String filePath, String updatedText) throws IOException {
-        FileWriter fw = new FileWriter(filePath, true);
-        fw.write(updatedText);
-        fw.close();
-    }
-
+    /**
+     * Updates the txt file when there are modifications to the task list
+     * @param store contains the updated list of task
+     * @throws DukeException for invalid file
+     */
     public void reWrite(ArrayList<Task> store) throws DukeException{
         try {
             FileWriter fw = new FileWriter(this.filepath);
