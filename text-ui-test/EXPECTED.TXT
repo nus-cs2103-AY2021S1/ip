@@ -13,58 +13,41 @@
 
 	____________________________________________________________
 	 Got it. I've added this task:
-	 [T][✘] read book
+	 [D][✘] tP AB3 familiarization (by: Aug 26 2020 23:59)
 	 Now you have 1 tasks in the list.
 	____________________________________________________________
 
 	____________________________________________________________
-	 :-( OOPS!!! Can't delete a task that does not exist.
-	____________________________________________________________
-
-	____________________________________________________________
-	 Got it. I've added this task:
-	 [D][✘] return book (by: Friday 9pm)
-	 Now you have 2 tasks in the list.
-	____________________________________________________________
-
-	____________________________________________________________
 	 Here are the tasks in your list:
-	 1.[T][✘] read book
-	 2.[D][✘] return book (by: Friday 9pm)
+	 1.[D][✘] tP AB3 familiarization (by: Aug 26 2020 23:59)
 	____________________________________________________________
 
 	____________________________________________________________
-	 Nice! I've marked this task as done:
-	   [D][✓] return book (by: Friday 9pm)
+	 These are the common Nite commands used in various situations:
+	 add a task
+		 todo <description>
+		 deadline <description> /by <YYYY-MM-DD HH:mm>
+		 event <description> /at <YYYY-MM-DD HH:mm> to <YYYY-MM-DD HH:mm>
+	 delete a task
+		 delete <task number>
+	 mark task as done
+		 done <task number>
+	 list all tasks
+		 list
+	 find a task
+		 find <keyword>
+	 exit Nite
+		 bye
 	____________________________________________________________
 
 	____________________________________________________________
-	 :-( OOPS!!! I'm sorry, but I don't know what that means :-(
+	 Here are the tasks that match tP:
+	 1.[D][✘] tP AB3 familiarization (by: Aug 26 2020 23:59)
 	____________________________________________________________
 
 	____________________________________________________________
-	 Got it. I've added this task:
-	 [E][✘] book visiting (at: June 13th 3-4am)
-	 Now you have 3 tasks in the list.
-	____________________________________________________________
-
-	____________________________________________________________
-	 Got it. I've added this task:
-	 [T][✘] go to bed
-	 Now you have 4 tasks in the list.
-	____________________________________________________________
-
-	____________________________________________________________
-	 Nice! I've marked this task as done:
-	   [E][✓] book visiting (at: June 13th 3-4am)
-	____________________________________________________________
-
-	____________________________________________________________
-	 Here are the tasks in your list:
-	 1.[T][✘] read book
-	 2.[D][✓] return book (by: Friday 9pm)
-	 3.[E][✓] book visiting (at: June 13th 3-4am)
-	 4.[T][✘] go to bed
+	 :-( OOPS!!! I'm sorry, but I don't know what "by" means :-(
+	 type "help" for a list of commands!
 	____________________________________________________________
 
 	____________________________________________________________

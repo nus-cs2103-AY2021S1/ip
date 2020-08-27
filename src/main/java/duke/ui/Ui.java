@@ -23,10 +23,13 @@ public class Ui {
     private static final String GOODBYE =
             "\t Good nite! Hope you have a good night's sleep. See you soon!\n";
 
+    private Scanner scanner;
+
     /**
      * Creates a Ui for interacting with the user.
      */
     public Ui() {
+        scanner = new Scanner(System.in);
     }
 
     /**
@@ -75,7 +78,6 @@ public class Ui {
      * @return String of text that user has input.
      */
     public String readCommand() {
-        Scanner sc = new Scanner(System.in);
-        return sc.nextLine();
+        return scanner.hasNextLine() ? scanner.nextLine() : "";
     }
 }

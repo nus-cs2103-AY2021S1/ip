@@ -1,11 +1,6 @@
-todo read book
-delete 10
-deadline return book /by Friday 9pm
+deadline tP AB3 familiarization /by 2020-08-26 2359
 list
-done 2
-carrots
-event book visiting /at June 13th 3-4am
-todo go to bed
-done 3
-list
+help
+find tP
+by
 bye
