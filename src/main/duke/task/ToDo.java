@@ -1,5 +1,8 @@
 package duke.task;
 
+/**
+ * Task that marks a to-do.
+ */
 public class ToDo extends Task {
 
     /**

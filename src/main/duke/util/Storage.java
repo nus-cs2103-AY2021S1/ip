@@ -10,6 +10,9 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Data reading and storage manager.
+ */
 public class Storage {
 
     private String filePath;

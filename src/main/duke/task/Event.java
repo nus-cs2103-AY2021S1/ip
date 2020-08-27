@@ -4,6 +4,9 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Task that marks an event with a date and optional time.
+ */
 public class Event extends Task {
 
     private LocalDate date;

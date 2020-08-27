@@ -2,6 +2,9 @@ package duke.util;
 
 import java.util.Scanner;
 
+/**
+ * API to read user input and print standard messages.
+ */
 public class Ui {
 
     private String logo = " ____        _        \n"

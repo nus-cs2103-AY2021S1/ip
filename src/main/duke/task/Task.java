@@ -1,5 +1,8 @@
 package duke.task;
 
+/**
+ * Abstract implementation of a task.
+ */
 public abstract class Task {
 
     private boolean completed;
