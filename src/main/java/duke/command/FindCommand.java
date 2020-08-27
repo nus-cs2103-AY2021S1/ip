@@ -4,6 +4,9 @@ import duke.component.Storage;
 import duke.component.TaskList;
 import duke.component.Ui;
 
+/**
+ * Represents a command for finding tasks with a designated substring.
+ */
 public class FindCommand extends Command {
     /**
      * Creates a find command.
