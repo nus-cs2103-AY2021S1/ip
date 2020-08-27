@@ -1,3 +1,4 @@
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -7,7 +8,8 @@ public class Duke {
     private static final String GREET_MESSAGE = "Hello! I'm AiBot :)\n\tEnter the command you would like to do\n\tEnter 'bye' to exit";
     private static final String EXIT_MESSAGE = "Bye. See you again soon!";
     private static final String DIVIDER = "\n\t-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-\n";
-
+    private static final String FILE_DIR = System.getProperty("user.dir") + "/data/";
+    private static final String FILE_PATH = FILE_DIR + "duke.txt";
     private static final List<Task> taskList = new ArrayList<>();
 
     private static void printResponse(String message) {
@@ -26,7 +28,7 @@ public class Duke {
         return message.toString();
     }
 
-    private static void addTask(String command) {
+    private static void addTaskFromCommand(String command) {
         try {
             List<String> words = Arrays.asList(command.split(" "));
             String taskType = words.get(0);
@@ -70,6 +72,22 @@ public class Duke {
         } catch (IllegalArgumentException illegalArgumentException) {
             printResponse(illegalArgumentException.getLocalizedMessage());
         }
+    }
+
+    private static void addTaskFromLine(String line) {
+        List<String> words = Arrays.asList(line.split(" \\| "));
+        Task task;
+        if (words.get(0).equals("T")) {
+            task = new Todo(words.get(2));
+        } else if (words.get(0).equals("D")) {
+            task = new Deadline(words.get(2), words.get(3));
+        } else {
+            task = new Event(words.get(2), words.get(3));
+        }
+        if (words.get(1).equals("1")) {
+            task.markDone();
+        }
+        taskList.add(task);
     }
 
     private static void listTasks() {
@@ -145,17 +163,59 @@ public class Duke {
                 listTasks();
             } else if (command.startsWith("done")) {
                 doneTask(command);
+                writeFile();
             } else if (command.startsWith("delete")) {
                 deleteTask(command);
+                writeFile();
             } else {
-                addTask(command);
+                addTaskFromCommand(command);
+                writeFile();
             }
             command = scanner.nextLine();
         }
         scanner.close();
     }
 
+    private static void readFile() {
+        try {
+            File fileDir = new File(FILE_DIR);
+            // if directory not exists, create file
+            if (!fileDir.exists()) {
+                fileDir.mkdir();
+            }
+            File file = new File(FILE_PATH);
+            // if file not exists, create file
+            if (!file.exists()) {
+                file.createNewFile();
+            }
+            BufferedReader reader = new BufferedReader(new FileReader(FILE_PATH));
+            String currentLine;
+            while ((currentLine = reader.readLine()) != null) {
+                addTaskFromLine(currentLine);
+            }
+            reader.close();
+        } catch (IOException ioException) {
+            System.out.println(String.format("IOException: %s", ioException.getLocalizedMessage()));
+        }
+    }
+
+    private static void writeFile() {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (Task task : taskList) {
+            String taskInfo = task.toFileString() + "\n";
+            stringBuilder.append(taskInfo);
+        }
+        try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_PATH));
+            writer.write(stringBuilder.toString());
+            writer.close();
+        } catch (IOException ioException) {
+            System.out.println("IOException: " + ioException.getLocalizedMessage());
+        }
+    }
+
     public static void main(String[] args) {
+        readFile();
         printResponse(GREET_MESSAGE);
         listenCommand();
         printResponse(EXIT_MESSAGE);
