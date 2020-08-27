@@ -29,6 +29,11 @@ public class Parser {
                     }
                     Parser.processDelete(taskList, sc, ui);
                     Storage.saveTaskChanges(taskList);
+                } else if (input.equals("find")) {
+                    if (taskList.isEmpty()) {
+                        throw new EmptyListException("There are no tasks on your list");
+                    }
+                    Parser.processFind(taskList, sc, ui);
                 } else {
                     throw new UnknownCommandException("Sorry I didn't understand that :(");
                 }
@@ -127,6 +132,21 @@ public class Parser {
             ui.printDeleteAcknowledgement(taskList, task);
         } catch (IndexOutOfBoundsException e) {
             ui.showIndexOutOfBoundsException(e);
+        }
+    }
+
+    public static void processFind(TaskList taskList, Scanner sc, Ui ui) throws IndexOutOfBoundsException {
+        ui.printFindPrompt();
+        String keyword = sc.next();
+        sc.nextLine();
+        ui.printFoundTasksHeader();
+        for (int i = 0; i < taskList.getTaskListSize(); i++) {
+            Task task = taskList.getTask(i);
+            if (task.getDescription().contains(keyword)) {
+                ui.printTask(taskList, i);
+            } else {
+                continue;
+            }
         }
     }
 }

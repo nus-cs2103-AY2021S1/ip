@@ -228,4 +228,18 @@ public class Ui {
         System.out.println(task.toString());
         System.out.println("You now have " + taskList.getTaskListSize() + " tasks on your list");
     }
+
+    public void printFindPrompt() {
+        System.out.println("What are you trying to find? Search using a keyword.");
+    }
+
+    public void printFoundTasksHeader() {
+        System.out.println("These are the tasks that match the keyword:");
+    }
+
+    public void printTask(TaskList taskList, int taskNum) {
+        System.out.println((taskNum + 1)
+                + ". "
+                + taskList.getTask(taskNum).toString());
+    }
 }
