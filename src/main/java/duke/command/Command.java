@@ -2,6 +2,9 @@ package duke.command;
 
 import duke.component.*;
 
+/**
+ * Represents a command that is input by the user.
+ */
 public abstract class Command {
     protected final String input;
 
