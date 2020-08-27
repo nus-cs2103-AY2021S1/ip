@@ -1,3 +1,9 @@
+package alison.command;
+
+import alison.exception.AlisonException;
+import alison.task.*;
+import alison.tool.*;
+
 public class AddCommand extends Command {
 
     public Task task;

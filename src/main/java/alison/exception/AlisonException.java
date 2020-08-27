@@ -1,3 +1,5 @@
+package alison.exception;
+
 public class AlisonException extends Exception {
 
     public AlisonException(String msg) {

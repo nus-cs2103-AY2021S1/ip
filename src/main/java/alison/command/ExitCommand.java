@@ -1,3 +1,7 @@
+package alison.command;
+
+import alison.tool.*;
+
 public class ExitCommand extends Command {
 
     @Override

@@ -1,3 +1,8 @@
+package alison.command;
+
+import alison.exception.AlisonException;
+import alison.tool.*;
+
 public class UnknownCommand extends Command {
 
     @Override

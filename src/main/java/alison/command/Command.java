@@ -1,3 +1,8 @@
+package alison.command;
+
+import alison.exception.AlisonException;
+import alison.tool.*;
+
 public abstract class Command {
 
     public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws AlisonException;
