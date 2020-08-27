@@ -1,20 +1,26 @@
 package duke;
 
-import duke.exception.*;
-import duke.task.*;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 
 import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
+
+import duke.exception.DukeFileNotFoundException;
+import duke.exception.DukeLoadingErrorException;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.TaskType;
+import duke.task.ToDo;
 
 /**
  * Deals with loading tasks from the file and saving tasks in the file.
@@ -80,6 +86,7 @@ public class Storage {
                     toSave += String.format("%s\t%d\t%s\t%s",
                             type, isDone, description, task.getTime());
                     break;
+                default:
                 }
 
                 fw.write(String.format("%s\n", toSave));
@@ -131,6 +138,7 @@ public class Storage {
             case "D":
                 task = new Deadline(description, isDone, time);
                 break;
+            default:
             }
 
             tasks.add(task);

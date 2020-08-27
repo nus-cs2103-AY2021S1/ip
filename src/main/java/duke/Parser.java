@@ -1,6 +1,15 @@
 package duke;
 
-import duke.command.*;
+import duke.command.AddTaskCommand;
+import duke.command.ByeCommand;
+import duke.command.ClearCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.FindCommand;
+import duke.command.HelpCommand;
+import duke.command.ListCommand;
+import duke.command.UnknownCommand;
 
 /**
  * Deals with making sense of the user command.
