@@ -1,3 +1,7 @@
+package duke.component;
+
+import duke.task.Task;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -10,7 +14,7 @@ public class Ui {
     }
 
     public void showWelcome() {
-        System.out.println("Hello! I'm Duke\n" + "What can I do for you?");
+        System.out.println("Hello! I'm duke.Duke\n" + "What can I do for you?");
     }
 
     public void showBye() {
@@ -66,7 +70,7 @@ public class Ui {
     }
 
     public String getStatusIcon(Task task) {
-        return ("[" + (task.isDone ? "\u2713" : "\u2718") + "] ");
+        return ("[" + (task.getIsDone() ? "\u2713" : "\u2718") + "] ");
     }
 
     public String readCommand() {

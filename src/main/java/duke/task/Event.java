@@ -1,19 +1,24 @@
+package duke.task;
+
+import duke.component.DukeException;
+
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
-public class Deadline extends Task {
+public class Event extends Task {
 
-    protected String by;
+    protected String at;
     protected LocalDate date;
     protected LocalTime time;
 
-    public Deadline(String description, String by) throws DukeException {
+    public Event(String description, String at) throws DukeException {
+
         super(description);
-        this.by = by;
+        this.at = at;
         try {
-            String[] dateTimeUnformattedArr = by.substring(1).split(" ");
+            String[] dateTimeUnformattedArr = at.substring(1).split(" ");
             String dateUnformatted = dateTimeUnformattedArr[0];
             String timeUnformatted = dateTimeUnformattedArr[1];
             this.date = extractDate(dateUnformatted);
@@ -36,14 +41,15 @@ public class Deadline extends Task {
     public String toString() {
         DateTimeFormatter dtfDate = DateTimeFormatter.ofPattern("MMM dd yyyy");
         DateTimeFormatter dtfTime = DateTimeFormatter.ISO_LOCAL_TIME;
-        return "[D]" + super.toString() + "(by: " + this.date.format(dtfDate) + " " + this.time.format(dtfTime) + ")";
+        return "[E]" + super.toString() + "(at: " + this.date.format(dtfDate) + " " + this.time.format(dtfTime) + ")";
     }
+
     @Override
     public String stringToSave() {
         char status = this.isDone ? '1' : '0';
         DateTimeFormatter dtfDate = DateTimeFormatter.ofPattern("MMM dd yyyy");
         DateTimeFormatter dtfTime = DateTimeFormatter.ISO_LOCAL_TIME;
-        return "D " + "| " + status + " | " + this.description + "| " + this.date.format(dtfDate) + " " + this.time.format(dtfTime);
+        return "E " + "| " + status + " | " + this.description + "| " + this.date.format(dtfDate) + " " + this.time.format(dtfTime);
     }
 
 }

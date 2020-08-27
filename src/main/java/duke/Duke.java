@@ -1,3 +1,12 @@
+package duke;
+
+import duke.command.Command;
+import duke.component.DukeException;
+import duke.component.Parser;
+import duke.component.Storage;
+import duke.component.Ui;
+import duke.task.TaskList;
+
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
@@ -30,7 +39,7 @@ public class Duke {
         while (!isExit) {
             try {
                 String fullCommand = ui.readCommand();
-                ui.showLine(); // show the divider line ("_______")
+                ui.showLine();
                 Command c = Parser.parse(fullCommand);
                 c.execute(taskList, ui, storage);
                 isExit = c.isExit();

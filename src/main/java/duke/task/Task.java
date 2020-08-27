@@ -1,3 +1,7 @@
+package duke.task;
+
+import duke.component.DukeException;
+
 public abstract class Task {
     protected String description;
     protected boolean isDone;
@@ -28,6 +32,10 @@ public abstract class Task {
             default:
                 throw new DukeException("Item in list on HDD does not have a 'done' status");
         }
+    }
+
+    public boolean getIsDone() {
+        return this.isDone;
     }
 
     public abstract String stringToSave();

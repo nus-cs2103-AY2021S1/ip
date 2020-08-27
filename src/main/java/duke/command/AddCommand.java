@@ -1,3 +1,11 @@
+package duke.command;
+
+import duke.component.DukeException;
+import duke.component.EnumUserInstruction;
+import duke.component.Storage;
+import duke.component.Ui;
+import duke.task.*;
+
 public class AddCommand extends Command {
     String fullCommand;
     EnumUserInstruction.userInstruction instructionCommand;

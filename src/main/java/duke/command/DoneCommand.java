@@ -1,3 +1,11 @@
+package duke.command;
+
+import duke.component.DukeException;
+import duke.component.Storage;
+import duke.component.Ui;
+import duke.task.Task;
+import duke.task.TaskList;
+
 public class DoneCommand extends Command {
     private final String fullCommand;
 
