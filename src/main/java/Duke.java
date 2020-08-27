@@ -21,7 +21,7 @@ public class Duke {
                 save.createNewFile();
             } catch (IOException e) {
                 System.out.println("Error creating the save file!");
-                System.out.println(e);
+                System.out.println(m);
             }
         }
         TaskManager.load(save);
