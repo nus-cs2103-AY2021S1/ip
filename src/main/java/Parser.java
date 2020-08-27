@@ -1,37 +1,26 @@
 import java.util.Arrays;
 
-enum Command {
-    HELP,
-    QUIT,
-    LIST,
-    DONE,
-    DELETE,
-    TODO,
-    DEADLINE,
-    EVENT,
-}
-
 public class Parser {
 
     public static Command parse(String input) throws InvalidCommandException {
         String[] splitted = input.split("\\s+");
         String command = splitted[0];
         if (command.equals("help")) {
-            return Command.HELP;
+            return new HelpCommand();
         } else if (command.equals("bye")) {
-            return Command.QUIT;
+            return new QuitCommand();
         } else if (command.equals("list")) {
-            return Command.LIST;
+            return new ListCommand();
         } else if (command.equals("done")) {
-            return Command.DONE;
+            return new DoneCommand();
         } else if (command.equals("delete")) {
-            return Command.DELETE;
+            return new DeleteCommand();
         } else if (command.equals("todo")) {
-            return Command.TODO;
+            return new TodoCommand();
         } else if (command.equals("deadline")) {
-            return Command.DEADLINE;
+            return  new DeadlineCommand();
         } else if (command.equals("event")) {
-            return Command.EVENT;
+            return new EventCommand();
         } else {
             throw new InvalidCommandException();
         }
