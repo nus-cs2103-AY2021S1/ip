@@ -1,9 +1,14 @@
+package duke.ui;
+
+import duke.exception.DukeException;
+import duke.task.*;
+
 import java.util.Scanner;
 
 public class Ui {
     private Scanner sc;
 
-    Ui() {
+    public Ui() {
       this.sc = new Scanner(System.in);
     }
 

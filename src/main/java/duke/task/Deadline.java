@@ -1,3 +1,5 @@
+package duke.task;
+
 import java.util.Optional;
 
 public class Deadline extends Task {
@@ -9,12 +11,12 @@ public class Deadline extends Task {
     }
 
     @Override
-    String getStringType() {
+    public String getStringType() {
         return "D";
     }
 
     @Override
-    Optional<String> getDate() {
+    public Optional<String> getDate() {
         return Optional.of(this.by);
     }
 

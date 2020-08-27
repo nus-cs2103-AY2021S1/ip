@@ -1,3 +1,11 @@
+package duke.command;
+
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.exception.DukeException;
+import duke.ui.Ui;
+import duke.storage.Storage;
+
 public class DoneCommand extends Command {
     public static final String COMMAND_WORD = "done";
 
@@ -16,7 +24,7 @@ public class DoneCommand extends Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
             Task t = tasks.retrieve(taskNumber);
-            if (t.isDone) {
+            if (t.isDone()) {
                 throw new DukeException("Task is already marked as done.");
             }
             t.markAsDone();

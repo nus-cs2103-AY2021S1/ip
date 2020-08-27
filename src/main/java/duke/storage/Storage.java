@@ -1,3 +1,7 @@
+package duke.storage;
+
+import duke.task.*;
+import duke.exception.DukeException;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -8,7 +12,7 @@ import java.util.Scanner;
 public class Storage {
     private final String filePath;
 
-    Storage(String filePath) {
+    public Storage(String filePath) {
         this.filePath = filePath;
     }
 

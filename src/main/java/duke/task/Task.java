@@ -1,6 +1,8 @@
+package duke.task;
+
 import java.util.Optional;
 
-abstract class Task {
+public abstract class Task {
     protected String description;
     protected boolean isDone;
 
@@ -21,11 +23,13 @@ abstract class Task {
         return this.description;
     }
 
+    public boolean isDone() { return isDone; }
+
     public String isDoneToString() { return isDone ? "1" : "0"; }
 
-    abstract String getStringType();
+    public abstract String getStringType();
 
-    abstract Optional<String> getDate();
+    public abstract Optional<String> getDate();
 
     @Override
     public String toString() {

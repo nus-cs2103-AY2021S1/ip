@@ -1,3 +1,5 @@
+package duke.task;
+
 import java.util.Optional;
 
 public class Event extends Task {
@@ -9,12 +11,12 @@ public class Event extends Task {
     }
 
     @Override
-    String getStringType() {
+    public String getStringType() {
         return "E";
     }
 
     @Override
-    Optional<String> getDate() {
+    public Optional<String> getDate() {
         return Optional.of(this.at);
     }
 

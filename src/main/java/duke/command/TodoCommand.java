@@ -1,9 +1,17 @@
+package duke.command;
+
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.Todo;
+import duke.ui.Ui;
+import duke.storage.Storage;
+
 public class TodoCommand extends Command {
     public static final String COMMAND_WORD = "todo";
 
     private final String commandSuffix;
 
-    TodoCommand(String commandSuffix) {
+    public TodoCommand(String commandSuffix) {
         this.commandSuffix = commandSuffix;
     }
 

@@ -1,3 +1,5 @@
+package duke.task;
+
 import java.util.Optional;
 
 public class Todo extends Task {
@@ -6,12 +8,12 @@ public class Todo extends Task {
     }
 
     @Override
-    String getStringType() {
+    public String getStringType() {
         return "T";
     }
 
     @Override
-    Optional<String> getDate() {
+    public Optional<String> getDate() {
         return Optional.empty();
     }
 

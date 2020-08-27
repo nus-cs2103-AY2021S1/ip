@@ -1,11 +1,13 @@
-public class DukeException extends Exception {
-    String e;
+package duke.exception;
 
-    DukeException() {
+public class DukeException extends Exception {
+    private final String e;
+
+    public DukeException() {
         this.e = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
     }
 
-    DukeException(String e) {
+    public DukeException(String e) {
         this.e = "☹ OOPS!!! " + e;
     }
 
