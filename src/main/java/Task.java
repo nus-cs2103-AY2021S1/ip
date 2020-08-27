@@ -18,6 +18,17 @@ public class Task {
     }
 
     /**
+     * Constructor used to create tasks.
+     *
+     * @param description Task description.
+     * @param isDone Describes if task is completed.
+     */
+    public Task(String description, boolean isDone) {
+        this.description = description;
+        this.isDone = isDone;
+    }
+
+    /**
      * Gets status icon, depending on whether task is done.
      *
      * @return String representing status icon.
@@ -42,6 +53,16 @@ public class Task {
      */
     public void setDone(boolean done) {
         isDone = done;
+    }
+
+    /**
+     * Returns simple string format for file.
+     *
+     * @return Simple string description.
+     */
+    public String toStringSimple() {
+        int intDone = isDone ? 1 : 0;
+        return intDone + " | " + this.getDescription();
     }
 
     @Override

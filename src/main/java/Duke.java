@@ -1,5 +1,9 @@
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import java.io.File;
+import java.io.FileWriter;
 
 /**
  * Main class that takes in user input.
@@ -9,7 +13,8 @@ public class Duke {
     /**
      * List used to store all tasks.
      */
-    private static ArrayList<Task> taskList = new ArrayList<>();
+    private static final ArrayList<Task> taskList = new ArrayList<>();
+    private static final String FILEPATH = "data/duke.txt";
 
     private static void welcome() {
         printOutput("     Hello! I'm Duke\n"
@@ -121,6 +126,7 @@ public class Duke {
             printOutput("     Got it. I've added this task:\n       "
                     + task.toString() + "\n     Now you have " + len
                     + " tasks in the list.", true);
+            writeTasksToFile();
 
         } catch (ArrayIndexOutOfBoundsException e) {
             String error = "     OOPS!!! The description of a " + command.toString().toLowerCase() + " cannot be empty.";
@@ -147,6 +153,7 @@ public class Duke {
         printOutput("     Noted. I've removed this task:\n       "
                 + task.toString() + "\n     Now you have " + len
                 + " tasks in the list.", true);
+        writeTasksToFile();
     }
 
     private static Task handleTodo(String todoTask) {
@@ -183,6 +190,77 @@ public class Duke {
         String output = "     Nice! I've marked this task as done: \n"
                 + "       " + task.toString();
         printOutput(output, true);
+        writeTasksToFile();
+    }
+
+    private static void createFileOrReadFile() {
+        File f = new File(FILEPATH);
+        f.getParentFile().mkdirs();
+        try {
+            if (!f.exists()) {
+                f.createNewFile();
+                printOutput("     Creating new output file!", true);
+            } else {
+                readTasksFromFile();
+                printOutput("     Output file already exists!", true);
+            }
+        } catch (IOException e) {
+            printOutput("     A file error has occurred!", true);
+        }
+    }
+
+    private static void appendToFile(String textToAppend) {
+        try {
+            FileWriter fw = new FileWriter(FILEPATH); // create a FileWriter in append mode
+            fw.write(textToAppend);
+            fw.close();
+        } catch (IOException e) {
+            printOutput("     A file error has occurred!", true);
+        }
+    }
+
+    private static void writeTasksToFile() {
+        StringBuilder output = new StringBuilder();
+        for (Task task : taskList) {
+            output.append(task.toStringSimple()).append(System.lineSeparator());
+        }
+        appendToFile(output.toString());
+    }
+
+    private static void readTasksFromFile() {
+        // File structure
+        // D | isDoneInt | description | by
+        // E | isDoneInt | description | at
+        // T | isDoneInt | description
+
+        // TODO: Can store Deadline, Event, Todo string instead, and can use same Enums
+        File f = new File(FILEPATH); // create a File for the given file path
+        try {
+            Scanner s = new Scanner(f); // create a Scanner using the File as the source
+            Task task;
+            while (s.hasNext()) {
+                String line = s.nextLine();
+                String[] lineParts = line.split(" \\| ");
+                int isDoneInt = Integer.parseInt(lineParts[1]);
+                boolean isDone = isDoneInt > 0;
+                switch (lineParts[0]) {
+                case "D":
+                    task = new Deadline(lineParts[2], lineParts[3], isDone);
+                    taskList.add(task);
+                    break;
+                case "E":
+                    task = new Event(lineParts[2], lineParts[3], isDone);
+                    taskList.add(task);
+                    break;
+                case "T":
+                    task = new Todo(lineParts[2], isDone);
+                    taskList.add(task);
+                    break;
+                }
+            }
+        } catch (java.io.FileNotFoundException e) {
+            printOutput("     A file error has occurred!", true);
+        }
     }
 
     /**
@@ -190,6 +268,7 @@ public class Duke {
      */
     public static void main(String[] args) {
         welcome();
+        createFileOrReadFile();
 
         Scanner scanner = new Scanner(System.in);
 
@@ -202,7 +281,6 @@ public class Duke {
         }
     }
 }
-
 
 
 
