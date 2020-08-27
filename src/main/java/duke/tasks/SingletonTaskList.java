@@ -35,13 +35,12 @@ public class SingletonTaskList {
     }
 
     public void delete(int idx) throws TaskOutOfBoundException {
-        try {
-            System.out.println("Noted. I've removed this task:\n" + "   " +
-                    tasks.get(idx - 1) + "\n" + "Now you have " + (tasks.size() - 1) + " duke.tasks in the list.");
-            tasks.remove(idx - 1);
-        } catch (IndexOutOfBoundsException e) {
+        if(idx > tasks.size()  ){
             throw new TaskOutOfBoundException("task number out of bound", idx);
         }
+        System.out.println("Noted. I've removed this task:\n" + "   " +
+                tasks.get(idx-1) + "\n" + "Now you have " + (tasks.size() -1 ) + " duke.tasks in the list.");
+        tasks.remove(idx - 1);
     }
 
     public void listAll() {
@@ -54,16 +53,14 @@ public class SingletonTaskList {
         }
     }
 
-    public void doneTask(int idx, String[] taskDescription) throws TaskOutOfBoundException {
-        try {
-            Task task = this.tasks.get(idx);
-            task.setStatus(true);
-            System.out.println("Très bien!I have helped you marked task " + taskDescription + " as done\n"
-                    + task);
-        } catch (IndexOutOfBoundsException e) {
+    public void doneTask(int idx, String[] taskDescription) throws TaskOutOfBoundException{
+        if(idx >= this.tasks.size() ){
             throw new TaskOutOfBoundException("Target number of task out of bound", idx + 1);
         }
-
+        Task task = this.tasks.get(idx);
+        task.setStatus(true);
+        System.out.println("Très bien!I have helped you marked task " + taskDescription + " as done\n"
+                + task);
     }
 
 }
