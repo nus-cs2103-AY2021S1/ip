@@ -113,7 +113,6 @@ public class TaskList {
         sc.nextLine();
     }
 
-
     public void onEventCommand(Scanner sc) {
         String toParse = sc.nextLine();
 

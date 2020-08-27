@@ -4,7 +4,7 @@ public class ToDo extends Task {
     }
 
     ToDo(String description, boolean isDone) {
-      super(description, isDone);
+        super(description, isDone);
     }
 
     @Override

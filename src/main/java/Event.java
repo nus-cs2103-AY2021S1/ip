@@ -1,6 +1,8 @@
 import java.text.SimpleDateFormat;
+
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+
 import java.util.Date;
 
 public class Event extends Task {
@@ -9,7 +11,6 @@ public class Event extends Task {
 
     Event(String description, String date, String time) {
         super(description);
-
         try {
             Date d = new SimpleDateFormat("dd/MM/yyyy").parse(date);
             this.date = new SimpleDateFormat("MMM d yyyy").format(d);
@@ -24,7 +25,6 @@ public class Event extends Task {
     Event(String description, boolean isDone, String dateTime) {
         super(description, isDone);
         String[] split = dateTime.split(",");
-
         this.date = split[0].trim();
         this.time = split[1].trim();
     }
