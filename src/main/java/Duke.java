@@ -1,9 +1,10 @@
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
-    private static final String spacing = "         ";
-    private static final String divider = "_______________________________________________________";
+    private static final String SPACING = "         ";
+    private static final String DIVIDER = "_______________________________________________________";
     private static ArrayList<Task> tasks = new ArrayList<>();
 
     public static void main(String[] args) {
@@ -47,7 +48,7 @@ public class Duke {
                     String description = input.replace("deadline ", "").split("/by")[0].trim();
                     String dueDate = input.replace("deadline", "").split("/by")[1].trim();
 
-                    Task task = new Deadline(description, dueDate);
+                    Task task = new Deadline(description, LocalDate.parse(dueDate));
                     tasks.add(task);
                     printMessage("Added " + task + String.format("\nNow you have %d tasks in the list", tasks.size()));
                 } else {
@@ -58,8 +59,8 @@ public class Duke {
                 if (input.contains("/at")) {
                     String description = input.replace("event ", "").split("/at")[0].trim();
                     String time = input.replace("event ", "").split("/at")[1].trim();
-
-                    Task task = new Event(description, time);
+                    System.out.println(time);
+                    Task task = new Event(description, LocalDate.parse(time));
                     tasks.add(task);
                     printMessage("Added " + task + String.format("\nNow you have %d tasks in the list", tasks.size()));
                 } else {
@@ -81,16 +82,16 @@ public class Duke {
         String logo = "Dash";
         System.out.println("Hello from\n" + logo);
         System.out.println("How can I help you today?");
-        System.out.println(divider);
+        System.out.println(DIVIDER);
     }
 
     private static void printMessage(String message) {
-        System.out.println(spacing + divider);
+        System.out.println(SPACING + DIVIDER);
         String[] messages = message.split("\n");
         for (String str : messages) {
-            System.out.println(spacing + str);
+            System.out.println(SPACING + str);
         }
-        System.out.println(spacing + divider);
+        System.out.println(SPACING + DIVIDER);
 
     }
 }

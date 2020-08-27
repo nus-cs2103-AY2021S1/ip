@@ -1,12 +1,20 @@
-public class Deadline extends Task {
-    private String dueDate;
+import java.time.LocalDate;
+import java.time.format.TextStyle;
+import java.util.Locale;
 
-    public Deadline(String description, String dueDate) {
+public class Deadline extends Task {
+    private LocalDate dueDate;
+
+    public Deadline(String description, LocalDate dueDate) {
         super(description);
         this.dueDate = dueDate;
     }
 
     public String toString() {
-        return "[D]" + super.toString() + String.format(" (by: %s)", dueDate);
+        String month = dueDate.getMonth().getDisplayName(TextStyle.SHORT, Locale.forLanguageTag("en"));
+        int day = dueDate.getDayOfMonth();
+        int year = dueDate.getYear();
+        String timeDisplay = String.format("%d %s %d", day, month, year);
+        return "[D]" + super.toString() + String.format(" (by: %s)", timeDisplay);
     }
 }
