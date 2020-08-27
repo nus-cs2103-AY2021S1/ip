@@ -159,6 +159,27 @@ public class Duke {
             } // if starts with event, first split the string, then description should be the
             // first string, actual time should be the last string.
 
+            if(s.startsWith("find")) {
+                try {
+                    String info = s.substring(5);
+                    TaskList findResult = new TaskList();
+                    for(int i = 0; i < tasks.size(); i++) {
+                        if(tasks.get(i).getDescription().contains(info)) {
+                            findResult.addTask(tasks.get(i));
+                        }
+                    }
+
+                    System.out.println("Here are the matching tasks in your list:");
+                    for (int i = 1; i <= findResult.size(); i++) {
+                        System.out.println(i + "." + findResult.get(i - 1).toString());
+                    }
+                    continue;
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    System.out.println("Sorry, you should enter information agter find!");
+                    continue;
+                }
+            }
+
             if (s.equals("list")) {
                 System.out.println("Here are the tasks in your list: ");
                 for (int i = 1; i <= tasks.size(); i++) {
