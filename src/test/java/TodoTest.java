@@ -8,6 +8,17 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TodoTest {
     @Test
+    public void encode(){
+        try{
+            Task task = new Todo("Green eggs and ham");
+            String encoded = task.encode();
+            assertEquals("todo Green eggs and ham", encoded);
+        }
+        catch (EmptyStringException e){
+            fail();
+        }
+    }
+    @Test
     public void todo_normalInput_writtenCorrectly(){
         try {
             Task task = new Todo("Green eggs and ham");
@@ -25,7 +36,7 @@ public class TodoTest {
             fail();
         }
         catch (EmptyStringException e){
-            
+
         }
     }
 }
