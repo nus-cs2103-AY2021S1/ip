@@ -92,11 +92,21 @@ public class ParserTest {
     }
 
     @Test
+    public void parse_invalidDeleteCommand_exceptionThrown() {
+        assertThrows(DukeException.class, () -> Parser.parse("delete -1"));
+    }
+
+    @Test
     public void parse_validDoneCommand_doneCommandReturned() throws DukeException {
         DoneCommand expectedCommand = new DoneCommand(1);
         Command actualCommand = Parser.parse("done 1");
 
         assertEquals(expectedCommand, actualCommand);
+    }
+
+    @Test
+    public void parse_invalidDoneCommand_exceptionThrown() {
+        assertThrows(DukeException.class, () -> Parser.parse("done -1"));
     }
 
     @Test
@@ -108,11 +118,21 @@ public class ParserTest {
     }
 
     @Test
+    public void parse_invalidDueCommand_exceptionThrown() {
+        assertThrows(DukeException.class, () -> Parser.parse("due 20"));
+    }
+
+    @Test
     public void parse_validExitCommand_exitCommandReturned() throws DukeException {
         ExitCommand expectedCommand = new ExitCommand();
         Command actualCommand = Parser.parse("bye");
 
         assertEquals(expectedCommand, actualCommand);
+    }
+
+    @Test
+    public void parse_invalidExitCommand_exceptionThrown() {
+        assertThrows(DukeException.class, () -> Parser.parse("bye invalid"));
     }
 
     @Test
@@ -124,10 +144,25 @@ public class ParserTest {
     }
 
     @Test
+    public void parse_invalidFindCommand_exceptionThrown() {
+        assertThrows(DukeException.class, () -> Parser.parse("find"));
+    }
+
+    @Test
     public void parse_validListCommand_listCommandReturned() throws DukeException {
         ListCommand expectedCommand = new ListCommand();
         Command actualCommand = Parser.parse("list");
 
         assertEquals(expectedCommand, actualCommand);
+    }
+
+    @Test
+    public void parse_invalidListCommand_exceptionThrown() {
+        assertThrows(DukeException.class, () -> Parser.parse("list invalid"));
+    }
+
+    @Test
+    public void parse_invalidCommand_exceptionThrown() {
+        assertThrows(DukeException.class, () -> Parser.parse("invalid"));
     }
 }
