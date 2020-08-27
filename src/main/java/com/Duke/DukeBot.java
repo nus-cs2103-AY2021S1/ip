@@ -16,7 +16,7 @@ import java.util.Scanner;
 public class DukeBot {
 
     /*
-    * This method begins the simulation of Duke
+     * This method begins the simulation of Duke
      */
     public static void simulate(){
         TaskList ls = new TaskList(Storage.read());

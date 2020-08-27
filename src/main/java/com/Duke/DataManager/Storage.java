@@ -19,7 +19,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/*
+ * This Class manages read and write operations into the storage files
+ */
 public class Storage {
+
+    /*
+     * This method writes a given list of tasks into the storage file
+     * @param taskList This is the taskList that is stored
+     */
     public static void write(TaskList taskList) throws DukeException {
         String homeDir = System.getProperty("user.dir");
         Path dataFolderPath = Paths.get(homeDir, "data");
@@ -50,6 +58,10 @@ public class Storage {
         }
     }
 
+    /*
+     * This method reads a given list of tasks and returns a List of tasks
+     * @return Returns a list of Tasks that can be used to create a TaskList object
+     */
     public static List<Task> read(){
         List<Task> taskList = new ArrayList<Task>();
         try {
