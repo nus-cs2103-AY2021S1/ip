@@ -168,8 +168,8 @@ public class Duke {
         ui.welcomeMessage();
         // Initialise strings to separate messages from Duke
         // and commands from CLI
-        String servantSpeak = "Duke:\n";
-        String masterSpeak = "Your Command Sire:";
+//        String servantSpeak = "Duke:\n";
+//        String masterSpeak = "Your Command Sire:";
 
 //        // Introduction at the beginning of the chat
 //        System.out.println(servantSpeak
@@ -189,13 +189,13 @@ public class Duke {
         // Start chat
         while (true) {
             // Get input from user
-            System.out.println(masterSpeak);
+            System.out.println(ui.getMasterSpeak());
             input = myObj.nextLine().trim();
             System.out.println();
 
             // If user inputs "bye" in any case, end the chat
             if (input.equals("bye")) {
-                System.out.println(servantSpeak
+                System.out.println(ui.getServantSpeak()
                         + "    It was a pleasure to serve you my Liege.\n"
                         + "    Till next time.");
                 break;
@@ -212,7 +212,7 @@ public class Duke {
                         throw new DukeException("", ExceptionType.INDEX_OUT_OF_BOUNDS);
                     } else {
                         userTasks.get(index).setDone();
-                        System.out.println(servantSpeak
+                        System.out.println(ui.getServantSpeak()
                                 + "    As you wish Sire. I have marked this task as done:\n"
                                 + "       " + userTasks.get(index).toString());
                     }
@@ -221,7 +221,7 @@ public class Duke {
                     saveToFile(listToString(userTasks));
 
                 } catch (DukeException ex) {
-                    System.out.print(servantSpeak);
+                    System.out.print(ui.getServantSpeak());
                     System.out.println(ex);
                 }
                 System.out.println();
@@ -238,7 +238,7 @@ public class Duke {
                     if (index >= userTasks.size()) {
                         throw new DukeException("", ExceptionType.INDEX_OUT_OF_BOUNDS);
                     } else {
-                        System.out.println(servantSpeak
+                        System.out.println(ui.getServantSpeak()
                                 + "    As you wish Sire. I removed this task:\n"
                                 + "       " + userTasks.get(index).toString());
                         userTasks.remove(index);
@@ -248,7 +248,7 @@ public class Duke {
                     saveToFile(listToString(userTasks));
 
                 } catch (DukeException ex) {
-                    System.out.print(servantSpeak);
+                    System.out.print(ui.getServantSpeak());
                     System.out.println(ex);
                 }
                 System.out.println();
@@ -258,7 +258,7 @@ public class Duke {
             // If user requests for list, display list of tasks
             if (input.equals("list")) {
                 int count = 1;
-                System.out.println(servantSpeak
+                System.out.println(ui.getServantSpeak()
                         + "    Here are your tasks your Majesty:");
                 for (Task i : userTasks) {
                     System.out.println("    "
@@ -282,7 +282,7 @@ public class Duke {
                     throw new DukeException("", ExceptionType.EMPTY_DESCRIPTION);
                 }
             } catch (DukeException ex) {
-                System.out.print(servantSpeak);
+                System.out.print(ui.getServantSpeak());
                 System.out.println(ex);
                 continue;
             }
@@ -309,7 +309,7 @@ public class Duke {
                     userTasks.add(t);
                     break;
                 } catch (DukeException ex) {
-                    System.out.print(servantSpeak);
+                    System.out.print(ui.getServantSpeak());
                     System.out.println(ex);
                     continue;
                 }
@@ -326,14 +326,14 @@ public class Duke {
                     userTasks.add(t);
                     break;
                 } catch (DukeException ex) {
-                    System.out.print(servantSpeak);
+                    System.out.print(ui.getServantSpeak());
                     System.out.println(ex);
                     continue;
                 }
             }
 
             // Standard reply from Duke for adding a task
-            System.out.println(servantSpeak
+            System.out.println(ui.getServantSpeak()
                     + "    As you wish Sire. I have added the task:\n       "
                     + userTasks.get(userTasks.size() - 1).toString() + "\n"
                     + "    Now you have " + userTasks.size()
