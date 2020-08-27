@@ -1,10 +1,20 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.Files;
+
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
 
 public class Duke {
     private final String VERSION_NUMBER = "1.0.0";
-    private final Scanner sc = new Scanner(System.in);
+    private final Scanner SC = new Scanner(System.in);
+    private final Path DUKE_DATA_FILE_PATH = Paths.get("data", "duke.txt");
+    private final Path DUKE_DATA_DIR_PATH = Paths.get("data");
     private final String NEW_LINE = "\n";
     private final String HORIZONTAL_LINE =
             "    ____________________________________________________________";
@@ -34,10 +44,48 @@ public class Duke {
 
     public void init() {
         sayHello();
+        try {
+            loadTasksFromDisk();
+        }
+        catch (DukeDataFolderException ex) {
+            printError(ex.getMessage());
+            File dir = new File(DUKE_DATA_DIR_PATH.toUri());
+            Boolean isCreated = dir.mkdir();
+            if (isCreated) {
+                echoBack("Successfully created Deuk Data Folder");
+                try {
+                    FileWriter fw = new FileWriter(DUKE_DATA_FILE_PATH.toString());
+                    fw.close();
+                }
+                catch (IOException err) {
+                    printError(err.getMessage());
+                }
+            }
+            else {
+                printError("Failed to create Deuk Data Folder");
+            }
+        }
+        catch (DukeException ex) {
+            printError(ex.getMessage());
+        }
+        catch (FileNotFoundException ex) {
+            printError("Missing Deuk Data File!" + NEW_LINE + PADDING +
+                "Creating new Deuk Data File..."
+            );
+            try {
+                FileWriter fw = new FileWriter(DUKE_DATA_FILE_PATH.toString());
+                fw.close();
+            }
+            catch (IOException err) {
+                printError(err.getMessage());
+            }
+
+        }
+
 
         while(true) {
-            if (sc.hasNext()) {
-                String input = sc.nextLine().trim();
+            if (SC.hasNext()) {
+                String input = SC.nextLine().trim();
                 if (input.toUpperCase().equals(Commands.EXIT.getString())) { // to make command case-insensitive
                     sayGoodbye();
                     break;
@@ -183,11 +231,64 @@ public class Duke {
         System.out.printf(MESSAGE_TEMPLATE, message);
     }
 
+    private void loadTasksFromDisk() throws FileNotFoundException, DukeException, DukeDataFolderException{
+        File dukeDataFile = new File(DUKE_DATA_FILE_PATH.toUri());
+        if (Files.notExists(DUKE_DATA_DIR_PATH)) {
+            throw new DukeDataFolderException("Missing Deuk Data Folder!" + NEW_LINE + PADDING +
+                    "Creating new Deuk Data Folder..."
+            );
+        }
+        Scanner fs = new Scanner(dukeDataFile);
+        while (fs.hasNext()) {
+            String taskString = fs.nextLine();
+            Scanner sc = new Scanner(taskString);
+            Boolean isDone = sc.nextInt() == 1;
+            String taskType = sc.next();
+            String taskName = sc.next();
+            Task task;
+            if (taskType.equals("T")) {
+                task = new Todo(taskName);
+            }
+            else if (taskType.equals("D")) {
+                String dueDate = fs.nextLine();
+                task = new Deadline(taskName, dueDate);
+            }
+            else if (taskType.equals("E")) {
+                String timing = fs.nextLine();
+                task = new Event(taskName, timing);
+            }
+            else {
+                throw new DukeException("Save file corrupted!");
+            }
+            task.setDoneness(isDone);
+            this.storageList.add(task);
+        }
+//        System.out.println("full path: " + dukeDataFile.getAbsolutePath());
+//        System.out.println("file exists?: " + dukeDataFile.exists());
+//        System.out.println("is Directory?: " + dukeDataFile.isDirectory());
+    }
+
+    private void saveTasksToDisk() throws IOException {
+        FileWriter fw = new FileWriter(DUKE_DATA_FILE_PATH.toString());
+        String tasksString = "";
+        for (Task task : this.storageList) {
+            tasksString += task.toSaveDataFormat() + NEW_LINE;
+        }
+        fw.write(tasksString);
+        fw.close();
+    }
+
     private void printError(String error) {
         System.out.printf(MESSAGE_TEMPLATE_ERROR, error);
     }
 
     private void sayGoodbye() {
+        try {
+            saveTasksToDisk();
+        }
+        catch (IOException ex) {
+            printError(ex.getMessage());
+        }
         System.out.printf(MESSAGE_TEMPLATE_VERBAL, "Goodbye, hope to see you again!");
     }
 
