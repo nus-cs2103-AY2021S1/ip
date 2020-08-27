@@ -1,9 +1,9 @@
-package Command;
+package command;
 
-import Duke.Storage;
-import Duke.TaskList;
-import Duke.Ui;
-import Task.Task;
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
+import task.Task;
 
 public class AddCommand extends Command {
     public AddCommand(Task task) {

@@ -1,10 +1,10 @@
-package Duke;
+package duke;
 
-import Command.*;
+import command.*;
 
-import Task.Deadline;
-import Task.Event;
-import Task.Todo;
+import task.Deadline;
+import task.Event;
+import task.Todo;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -18,6 +18,7 @@ public class Parser {
     private final static String TASK_DEADLINE = "deadline";
     private final static String TASK_EVENT = "event";
     private final static String DELETE_EVENT = "delete";
+    private final static String COMMAND_FIND = "find";
     private final static String DEADLINE_DATE = "/by";
     private final static String EVENT_DATE = "/at";
     private final static DateTimeFormatter SAVE_READ_DATETIME_FORMAT = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
@@ -30,7 +31,8 @@ public class Parser {
         DEADLINE,
         TODO,
         EVENT,
-        DELETE
+        DELETE,
+        FIND
     }
 
     public static Command parse(String fullCommand) {
@@ -62,6 +64,8 @@ public class Parser {
                 return handle(restOfCommand, typeOfTask.EVENT);
             case DELETE_EVENT:
                 return handle(restOfCommand, typeOfTask.DELETE);
+            case COMMAND_FIND:
+                return handle(restOfCommand, typeOfTask.FIND);
             default:
                 return new IncorrectCommand("OOPS !!! Lo siento, pero no sé qué significa eso :-(");
         }
@@ -122,6 +126,8 @@ public class Parser {
                 Event newEvent = new Event(taskDescription);
                 newEvent.setTime(date);
                 return new AddCommand(newEvent);
+            case FIND:
+                return new FindCommand(restOfCommand);
         }
         return null;
     }

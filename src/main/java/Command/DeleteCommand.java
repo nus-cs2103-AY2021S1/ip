@@ -1,9 +1,9 @@
-package Command;
+package command;
 
-import Duke.DukeException;
-import Duke.Storage;
-import Duke.TaskList;
-import Duke.Ui;
+import duke.DukeException;
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
 
 public class DeleteCommand extends Command {
     int taskPosition;

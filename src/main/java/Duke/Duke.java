@@ -1,6 +1,6 @@
-package Duke;
+package duke;
 
-import Command.Command;
+import command.Command;
 
 public class Duke {
 

@@ -1,8 +1,8 @@
-package Command;
+package command;
 
-import Duke.Storage;
-import Duke.TaskList;
-import Duke.Ui;
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
 
 public class IncorrectCommand extends Command {
     private String errorMessage;
