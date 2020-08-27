@@ -8,6 +8,7 @@ public class Ui {
     Ui() {
 
     }
+
     //receive commands from user and send to parser if valid input
     public void reading(String input, TaskList ls) throws DukeException {
 
@@ -15,13 +16,13 @@ public class Ui {
         Parser p = new Parser();
         String divider = "    ---------------";
 
-        if (input.isEmpty()|| input.trim().isEmpty()) {
+        if (input.isEmpty() || input.trim().isEmpty()) {
             throw new DukeException("input is empty");
-        } else if(input.contains("list")){
+        } else if (input.contains("list")) {
             System.out.println(divider);
 
             int num = 1;
-            for(Task c: ls.retrieve()){
+            for (Task c : ls.retrieve()) {
                 String item = "    " + num + ". " + c;
                 num++;
                 System.out.println(item);
@@ -34,7 +35,7 @@ public class Ui {
                     || input.trim().equals("deadline/by") || input.trim().equals("event/at")) {
 
                 throw new DukeException("The description of " + input + " cannot be empty");
-            } else{
+            } else {
                 //call parser to convert to task
                 System.out.println(divider);
                 current = p.process(input);
@@ -44,20 +45,20 @@ public class Ui {
             }
 
         } else if (input.contains("done") || input.contains("delete")) {
-            if(input.contains("done")){
+            if (input.contains("done")) {
                 int index = Character.getNumericValue(input.charAt(5)) - 1;
                 current = ls.retrieve().get(index);
                 current.setFinished(true);
-                System.out.println(divider + "\nNice work, I have marked this task as done: " + current
-                + "\n" + divider);
+                System.out.println(divider + "\n    Nice work, I have marked this task as done: " + current
+                        + "\n" + divider);
 
-            } else{
-                if(input.trim().equals("delete")){
+            } else {
+                if (input.trim().equals("delete")) {
                     throw new DukeException("missing index");
                 }
 
                 int index = Character.getNumericValue(input.charAt(7)) - 1;
-                if((index+1) > ls.retrieve().size()){
+                if ((index + 1) > ls.retrieve().size()) {
                     throw new DukeException("Invalid index");
                 }
                 current = ls.retrieve().get(index);
@@ -68,7 +69,7 @@ public class Ui {
                         "\n" + divider);
             }
 
-        } else{
+        } else {
             throw new DukeException("Command is not recognised");
         }
     }

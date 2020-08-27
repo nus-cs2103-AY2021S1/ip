@@ -76,7 +76,7 @@ public class Storage {
         fw.close();
     }
 
-    public void reWrite(ArrayList<Task> store) throws DukeException{
+    public void reWrite(ArrayList<Task> store) throws DukeException {
         try {
             FileWriter fw = new FileWriter(this.filepath);
             String txt = "";
@@ -97,7 +97,7 @@ public class Storage {
 
             fw.write(txt);
             fw.close();
-        } catch(IOException e){
+        } catch (IOException e) {
             throw new DukeException("invalid file");
         }
     }

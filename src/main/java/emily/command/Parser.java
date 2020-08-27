@@ -8,7 +8,7 @@ import main.java.emily.task.ToDos;
 //deals with making sense of the user command
 public class Parser {
 
-    Parser(){
+    Parser() {
 
     }
 
@@ -43,10 +43,9 @@ public class Parser {
             }
 
 
-
-        } catch(ArrayIndexOutOfBoundsException e){
+        } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeException("Invalid input");
-        } catch(java.time.DateTimeException e){
+        } catch (java.time.DateTimeException e) {
             throw new DukeException("Invalid timestamp, should be in the form of yyy-mm--dd");
         }
     }

@@ -2,28 +2,28 @@ package main.java.emily.task;
 
 public class Task {
     protected String description;
-    protected boolean finished;
+    protected boolean isFinished;
     protected String type;
 
     public Task(String description) {
         this.description = description;
-        this.finished = false;
+        this.isFinished = false;
     }
 
-    public void setFinished(boolean b){
-        this.finished = b;
+    public void setFinished(boolean b) {
+        this.isFinished = b;
     }
 
-    public boolean isFinished(){
-        return this.finished;
+    public boolean isFinished() {
+        return this.isFinished;
     }
 
-    public String getDescription(){
+    public String getDescription() {
         return this.description;
     }
 
     public String getStatusIcon() {
-        return (finished ? "\u2713" : "\u2718");
+        return (isFinished ? "\u2713" : "\u2718");
     }
 
     @Override
