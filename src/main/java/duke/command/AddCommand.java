@@ -30,9 +30,9 @@ public class AddCommand extends Command {
     /**
      * Executes the command, adding a task to the provided TaskList.
      *
-     * @param taskList TaskList instance
-     * @param ui Ui instance
-     * @param storage Storage instance
+     * @param taskList A TaskList instance.
+     * @param ui A Ui instance.
+     * @param storage A Storage instance.
      * @throws DukeException if the task cannot be added.
      */
     @Override

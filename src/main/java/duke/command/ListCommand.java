@@ -15,10 +15,10 @@ public class ListCommand extends Command {
     /**
      * Executes the command, listing all tasks.
      *
-     * @param taskList TaskList instance
-     * @param ui Ui instance
-     * @param storage Storage instance
-     * @throws DukeException if there are no tasks in the TaskList.
+     * @param taskList A TaskList instance.
+     * @param ui A Ui instance.
+     * @param storage A Storage instance.
+     * @throws DukeException if there are no tasks.
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {

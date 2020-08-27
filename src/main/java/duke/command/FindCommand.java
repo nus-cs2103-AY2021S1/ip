@@ -8,6 +8,9 @@ import duke.task.Task;
 
 import java.util.List;
 
+/**
+ * Represents a find command.
+ */
 public class FindCommand extends Command {
     private final String keyword;
 
@@ -15,6 +18,14 @@ public class FindCommand extends Command {
         this.keyword = keyword;
     }
 
+    /**
+     * Executes the command, listing all tasks containing the given keyword.
+     *
+     * @param taskList A TaskList instance.
+     * @param ui A Ui instance.
+     * @param storage A Storage instance.
+     * @throws DukeException if there are no tasks containing the given keyword.
+     */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         List<Task> foundTasks = taskList.findTasks(this.keyword);

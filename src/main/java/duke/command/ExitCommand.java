@@ -12,9 +12,9 @@ public class ExitCommand extends Command {
     /**
      * Executes the command, exiting the program.
      *
-     * @param taskList TaskList instance
-     * @param ui Ui instance
-     * @param storage Storage instance
+     * @param taskList A TaskList instance.
+     * @param ui A Ui instance.
+     * @param storage A Storage instance.
      * @throws DukeException if the tasks cannot be saved.
      */
     @Override
@@ -24,7 +24,7 @@ public class ExitCommand extends Command {
     }
 
     /**
-     * Returns true to indicated that the program should exit
+     * Returns true to indicate that the program should exit.
      *
      * @return true
      */
