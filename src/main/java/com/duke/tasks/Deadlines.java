@@ -4,6 +4,10 @@ import com.duke.parser.Parser;
 
 import java.time.LocalDate;
 
+/**
+ * Represents a Deadline task item.
+ */
+
 public class Deadlines extends Task {
     protected LocalDate date;
     protected int time;

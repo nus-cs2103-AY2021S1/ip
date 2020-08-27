@@ -5,6 +5,11 @@ import com.duke.storage.Storage;
 import com.duke.tasklist.TaskList;
 import com.duke.ui.Ui;
 
+/**
+ * Entry point to application.
+ * Initializes all components needed to run program.
+ */
+
 public class Duke {
     private static String FILE_PATH = "src/main/data/input.txt";
     private Storage storage;

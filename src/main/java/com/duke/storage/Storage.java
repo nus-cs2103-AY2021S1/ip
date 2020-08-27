@@ -13,6 +13,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Represents a Storage.
+ * Pulls data from a persistent file upon initialisation of application.
+ * Saves data to persistent file upon termination of session.
+ */
+
 public class Storage {
     private static String FILE_PATH = "src/main/data/input.txt";
     private String filePath;

@@ -8,6 +8,10 @@ import com.duke.exceptions.DukeException;
 
 import java.time.LocalDate;
 
+/**
+ * Parser which is responsible in parsing all instruction from user.
+ */
+
 public class Parser {
 
     /**

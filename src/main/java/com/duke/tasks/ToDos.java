@@ -1,5 +1,9 @@
 package com.duke.tasks;
 
+/**
+ * Represents a todo task item.
+ */
+
 public class ToDos extends Task {
 
     public ToDos(String task) {

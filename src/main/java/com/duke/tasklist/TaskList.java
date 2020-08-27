@@ -5,6 +5,10 @@ import com.duke.tasks.Task;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Represents a Tasklist holding tasks.
+ */
+
 public class TaskList {
     private List<Task> list;
 

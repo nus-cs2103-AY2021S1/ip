@@ -1,6 +1,10 @@
 package com.duke.tasks;
 
-public class Task {
+/**
+ * Represents a task item.
+ */
+
+public abstract class Task {
     protected String task;
     protected boolean isDone;
 
@@ -66,8 +70,5 @@ public class Task {
      * @return String Returns a string representation of the Task object to be saved in persistent file.
      */
     // Task - 1 - read book
-    public String parseToSaveFormat() {
-        String isDoneStr = this.isDone ? "1" : "0";
-        return "Task - " + isDoneStr + " - " + this.task;
-    }
+    public abstract String parseToSaveFormat();
 }

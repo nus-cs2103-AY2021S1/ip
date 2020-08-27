@@ -16,6 +16,11 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Deals with responding to the user.
+ * Calls methods of other classes to save/pull entries into/from session-based storage.
+ */
+
 public class Ui {
     private TaskList taskList;
     private Scanner scanner = new Scanner(System.in);

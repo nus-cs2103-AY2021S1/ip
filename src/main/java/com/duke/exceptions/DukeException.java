@@ -1,5 +1,9 @@
 package com.duke.exceptions;
 
+/**
+ * Exception thrown when an unexpected event related to using the Duke application occurs.
+ */
+
 public class DukeException extends Exception {
 
     /**

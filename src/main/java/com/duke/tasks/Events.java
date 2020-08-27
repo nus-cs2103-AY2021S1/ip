@@ -4,6 +4,10 @@ import com.duke.parser.Parser;
 
 import java.time.LocalDate;
 
+/**
+ * Represents a Event task item.
+ */
+
 public class Events extends Task {
     protected LocalDate date;
     protected int time;
