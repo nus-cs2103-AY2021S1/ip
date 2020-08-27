@@ -1,7 +1,7 @@
 package duke;
 
 public class Ui {
-    private static final String LINEDIVIDER = "\t____________________________________________________________\n";
+    private static final String LINE_DIVIDER = "\t____________________________________________________________\n";
     private static final String LOGO = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"
@@ -26,7 +26,7 @@ public class Ui {
      * @param string String to print
      */
     public static void prettyPrint(String string) {
-        System.out.println(LINEDIVIDER + "\t" + string + "\n" + LINEDIVIDER);
+        System.out.println(LINE_DIVIDER + "\t" + string + "\n" + LINE_DIVIDER);
     }
 
     /**
@@ -35,10 +35,10 @@ public class Ui {
      * @param tasks Tasks to print
      */
     public static void prettyPrint(TaskList tasks) {
-        System.out.println(LINEDIVIDER + "\tHere are the tasks in your list:");
+        System.out.println(LINE_DIVIDER + "\tHere are the tasks in your list:");
         for (int i = 0; i < tasks.length(); i++) {
             System.out.println("\t" + (i + 1) + "." + tasks.getTask(i));
         }
-        System.out.println(LINEDIVIDER);
+        System.out.println(LINE_DIVIDER);
     }
 }

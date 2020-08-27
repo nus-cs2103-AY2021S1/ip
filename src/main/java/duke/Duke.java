@@ -6,7 +6,7 @@ import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 public class Duke {
-    private static final String SAVEPATH = "./src/data/SaveData.txt";
+    private static final String SAVE_PATH = "./src/data/SaveData.txt";
     private static enum AcceptedCommands {
         TODO,
         EVENT,
@@ -142,6 +142,6 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke(SAVEPATH).run("hello");
+        new Duke(SAVE_PATH).run("hello");
     }
 }
