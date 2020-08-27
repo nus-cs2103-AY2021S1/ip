@@ -4,5 +4,6 @@ public enum CommandType {
     EVENT,
     LIST,
     DONE,
-    DELETE
+    DELETE,
+    BYE
 }
