@@ -27,7 +27,9 @@ public class DukeParser {
             return new BlahCommand();
         }else if(splitList[0].equals("delete")){
             return new DeleteCommand(ls,Integer.parseInt(splitList[1]));
-        }else{
+        }else if(splitList[0].equals("find")) {
+            return new FindCommand(ls, splitList[1]);
+        }else {
             return new TaskCommand(ls,input);
         }
     }

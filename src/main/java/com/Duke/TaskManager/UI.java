@@ -98,4 +98,19 @@ public class UI {
         System.out.println("     added: " + task.getTask());
         System.out.println(line);
     }
+
+    public static void findCalled(TaskList ls, String hint) throws DukeException{
+        System.out.println(line);
+        TaskList containsHint = ls.findTask(hint);
+        if(containsHint.ls.isEmpty()){
+            throw new DukeException("Sorry you have no tasks that match that description");
+        }else {
+            System.out.println("     Here are the matching tasks in your list:");
+            for (int i = 0; i < containsHint.ls.size(); i++) {
+                int j = i + 1;
+                System.out.println("     " + j + "." + containsHint.ls.get(i).toString());
+            }
+        }
+        System.out.println(line);
+    }
 }

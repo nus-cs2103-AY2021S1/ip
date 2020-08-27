@@ -2,6 +2,7 @@ package com.Duke.TaskManager;
 
 import com.Duke.Tasks.Task;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class TaskList {
@@ -22,6 +23,16 @@ public class TaskList {
         }else {
             ls.set(task, ls.get(task).done());
         }
+    }
+
+    public TaskList findTask(String hint){
+        TaskList containsHint = new TaskList(new ArrayList<Task>());
+        for(Task task: this.ls){
+            if(task.getTask().contains(hint)){
+                containsHint.add(task);
+            }
+        }
+        return containsHint;
     }
 
     public List<Task> getListOfTasks(){
