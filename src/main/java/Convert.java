@@ -15,7 +15,7 @@ public class Convert {
         String second = s.split("/at ")[1];
         // date of format "yyyy-mm-dd"
         LocalDate date = LocalDate.parse(second);
-        return first + "(at: " + date + ")";
+        return first + "/at " + date;
     }
 
     static String by(String s) {
@@ -29,7 +29,7 @@ public class Convert {
         String first = s.split("/by ")[0];
         String second = s.split("/by ")[1];
         LocalDate date = LocalDate.parse(second);
-        return first + "(by: " + date + ")";
+        return first + "/by " + date;
     }
 
     static Task add(String s) throws IllegalTaskTypeException {
