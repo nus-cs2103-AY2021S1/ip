@@ -112,8 +112,7 @@ public class TaskList {
         if (position < 0 || position > taskList.size()) {
             throw new DukeException("Invalid task number provided");
         }
-        Task task = taskList.remove(position - 1);
-        return task;
+        return taskList.remove(position - 1);
     }
 
     private LocalDate validateDateTime(String time) throws DukeException {
@@ -127,5 +126,16 @@ public class TaskList {
         } catch (DateTimeParseException ex) {
             throw new DukeException("Invalid date entered. Use format YYYY-MM-DD");
         }
+    }
+
+    public List<String> findTasks(String key) {
+        List<String> found = new ArrayList<>();
+        found.add("Here are the matching tasks in your list:");
+        for (Task task : taskList) {
+            if (task.search(key)) {
+                found.add(task.toString());
+            }
+        }
+        return found;
     }
 }

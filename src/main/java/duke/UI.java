@@ -2,6 +2,7 @@ package duke;
 
 import duke.tasks.Task;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class UI {
@@ -31,6 +32,10 @@ public class UI {
     public void writeDelete(Task task, int size) {
         writeOutput("Noted. I've removed this task:", "\t" + task.toString(),
                 String.format("Now you have %d tasks in the list.", size));
+    }
+
+    public void writeSearch(List<String> found) {
+        writeOutput(found.toArray(new String[0]));
     }
 
     public void writeOutput(String... messages) {

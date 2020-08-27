@@ -23,4 +23,8 @@ public class Task {
     public String fileString() {
         return String.format("%s|%s", task, done ? "1" : "0");
     }
+
+    public boolean search(String key) {
+        return this.task.contains(key);
+    }
 }
