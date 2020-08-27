@@ -14,6 +14,8 @@ public class DataStorage {
         commandInit.add(new Event("init","on","startOfEpoch"));
         commandInit.add(new Help(new String[]{"help"}));
         commandInit.add(new Ls());
+        commandInit.add(new Load(new String[]{"",""}));
         commandInit.add(new ToDo("init"));
+        commandInit.add(new Save());
     }
 }

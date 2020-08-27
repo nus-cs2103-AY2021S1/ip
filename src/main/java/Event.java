@@ -15,7 +15,7 @@ public class Event extends Task{
 
     @Override
     public String toString() {
-        return "[E] " + super.toString() + "(" + preposition + ": " + dateTime + ")";
+        return "[E] " + super.toString() + " (" + preposition + ": " + dateTime + ")";
     }
 
 

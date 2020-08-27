@@ -1,4 +1,4 @@
-
+import java.util.ArrayList;
 
 public class DataStorageInterface {
 
@@ -68,6 +68,16 @@ public class DataStorageInterface {
         return newTask;
     }
 
+    public static void removeAllTasks(){
+        DataStorage.taskList.clear();
+    }
+
+    public static void loadNewTasks(ArrayList<Task> taskArrayList){
+        for(Task t: taskArrayList){
+            DataStorage.taskList.add(t);
+        }
+    }
+
     public static String listOfTasks(){
         StringBuilder acc = new StringBuilder();
         int i = 0;
@@ -88,4 +98,6 @@ public class DataStorageInterface {
         }
         throw new UnknownCommandException(query);
     }
+
+
 }

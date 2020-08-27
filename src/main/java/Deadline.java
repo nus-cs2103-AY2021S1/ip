@@ -15,6 +15,6 @@ public class Deadline extends Task{
 
     @Override
     public String toString() {
-        return "[D] " + super.toString() + "(" + preposition + ": " + deadline + ")";
+        return "[D] " + super.toString() + " (" + preposition + ": " + deadline + ")";
     }
 }

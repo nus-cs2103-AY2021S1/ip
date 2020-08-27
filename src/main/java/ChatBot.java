@@ -56,9 +56,16 @@ public class ChatBot {
             case "help":
                 Help help = new Help(splitQuery);
                 return help.response();
+            case "load":
+                Load load = new Load(splitQuery);
+                return load.load();
             case "list":
                 Ls ls = new Ls();
                 return ls.response();
+            case "save":
+                Save save = new Save();
+                save.writeToFile();
+                return save.response();
             case "todo":
                 String editedQ = concatenateStrArr(cRemoved);
                 Task toDo = DataStorageInterface.addToDo(editedQ);
