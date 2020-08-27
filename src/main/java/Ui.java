@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class Ui {
 
-    Scanner scanner = new Scanner(System.in);
+    private Scanner scanner = new Scanner(System.in);
 
     /**
      * Constructor used to create UI .

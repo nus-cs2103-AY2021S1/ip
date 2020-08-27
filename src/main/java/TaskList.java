@@ -65,7 +65,7 @@ public class TaskList {
                 + " tasks in the list.";
     }
 
-    public Task handleTodo(String todoTask) {
+    private Task handleTodo(String todoTask) {
         Task todo = new Todo(todoTask);
         taskList.add(todo);
         return todo;
