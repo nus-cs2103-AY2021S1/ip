@@ -17,6 +17,7 @@ public class Duke {
         DELETE,
         CLEAR,
         HELLO,
+        FIND,
     }
     public static Scanner scan = new Scanner(System.in);
     private Storage storage;
@@ -77,6 +78,9 @@ public class Duke {
                         break;
                     case "hello":
                         Ui.greet();
+                        break;
+                    case "find":
+                        Ui.prettyPrint(tasks.contains(details));
                         break;
                 }
                 // ToDo: handle localDate parse error

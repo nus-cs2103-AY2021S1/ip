@@ -36,4 +36,21 @@ public class TaskList {
     public int length() {
         return tasks.size();
     }
+
+    /**
+     * Returns TaskList containing Tasks that contains the given string
+     *
+     * @param string string to check if Tasks contain it
+     * @return TaskList with Task containing the string
+     */
+    public TaskList contains(String string) {
+        TaskList foundTasks = TaskList.createTaskList();
+        for (Task i : tasks) {
+            if (i.description.contains(string)) {
+                foundTasks.addTask(i);
+            }
+        }
+
+        return foundTasks;
+    }
 }
