@@ -32,7 +32,8 @@ public class AddCommand extends Command {
     @Override
     public void execute(TaskList tasks, Storage storage, Ui ui) {
         tasks.addTask(taskToAdd);
-        System.out.println("Alrighty, I'll put it on yer tab:\n" + taskToAdd.toString() + "\n" + "You've got a total of " + tasks.size() + " items right now.");
+        System.out.println("Alrighty, I'll put it on yer tab:\n" + taskToAdd.toString() + "\n"
+                + "You've got a total of " + tasks.size() + " items right now.");
     }
 
 }

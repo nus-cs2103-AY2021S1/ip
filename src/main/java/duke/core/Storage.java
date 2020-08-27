@@ -39,7 +39,8 @@ public class Storage {
             if (fileCreated) {
                 System.out.println("Haven't seen a new face around 'ere for awhile, have a seat!");
             } else {
-                System.out.println("A regular! The usual, I presume?\n" + "I've still got your order history, care to take a look?");
+                System.out.println("A regular! The usual, I presume?\n"
+                        + "I've still got your order history, care to take a look?");
                 Scanner saveReader = new Scanner(saveData);
                 while (saveReader.hasNextLine()) {
                     try {
