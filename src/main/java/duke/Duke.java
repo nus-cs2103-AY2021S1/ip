@@ -20,6 +20,7 @@ public class Duke {
         Deadline thisDeadline;
         String thisTaskname;
         String thisTime;
+        String keyword;
         Task thisTask;
         String input;
         int number;
@@ -46,6 +47,9 @@ public class Duke {
                     list.remove(number - 1);
                     ui.deletedTask(thisTask, list.getList());
                     storage.updateList(list.getList());
+                } else if (thisInstruction == Instruction.FIND) {
+                    keyword = input.substring(5);
+                    ui.printFoundTask(keyword, list.getList());
                 } else {
                     if (thisInstruction == Instruction.DEADLINE) {
                         if (input.length() < 10) {

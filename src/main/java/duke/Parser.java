@@ -8,6 +8,8 @@ public class Parser {
             return Instruction.DONE;
         } else if (input.startsWith("delete")) {
             return Instruction.DELETE;
+        } else if (input.startsWith("find")) {
+            return Instruction.FIND;
         } else if (input.startsWith("deadline")) {
             return Instruction.DEADLINE;
         } else if (input.startsWith("event")) {

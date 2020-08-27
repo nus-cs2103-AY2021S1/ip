@@ -1,5 +1,5 @@
 package duke;
 
 public enum Instruction {
-    LIST, DONE, DELETE, DEADLINE, EVENT, TODO, OTHERS
+    LIST, DONE, DELETE, FIND, DEADLINE, EVENT, TODO, OTHERS
 }
