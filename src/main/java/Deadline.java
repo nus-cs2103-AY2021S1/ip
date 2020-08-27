@@ -1,3 +1,8 @@
+import java.time.LocalDate;
+
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
+
 /**
  * Class used for deadline tasks.
  */
@@ -6,7 +11,7 @@ public class Deadline extends Task {
     /**
      *  String used to store deadline.
      */
-    protected String by;
+    protected LocalDate by;
 
     /**
      * Constructor for deadline class.
@@ -14,13 +19,14 @@ public class Deadline extends Task {
      * @param description Task description.
      * @param by Deadline.
      */
-    public Deadline(String description, String by) {
+    public Deadline(String description, LocalDate by) {
         super(description);
         this.by = by;
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by + ")";
+        String formattedDate = this.by.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM));
+        return "[D]" + super.toString() + " (by: " + formattedDate + ")";
     }
 }

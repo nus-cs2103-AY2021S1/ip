@@ -1,3 +1,8 @@
+import java.time.LocalDate;
+
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
+
 /**
  * Class representing events.
  */
@@ -6,7 +11,7 @@ public class Event extends Task {
     /**
      * Variable to store event time.
      */
-    protected String at;
+    protected LocalDate at;
 
     /**
      * Constructor used to create Event.
@@ -14,13 +19,14 @@ public class Event extends Task {
      * @param description Event description.
      * @param at Event time.
      */
-    public Event(String description, String at) {
+    public Event(String description, LocalDate at) {
         super(description);
         this.at = at;
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + at + ")";
+        String formattedDate = this.at.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM));
+        return "[E]" + super.toString() + " (at: " + formattedDate + ")";
     }
 }

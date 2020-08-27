@@ -1,6 +1,9 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import java.time.format.DateTimeParseException;
+import java.time.LocalDate;
+
 /**
  * Main class that takes in user input.
  */
@@ -155,16 +158,26 @@ public class Duke {
         return todo;
     }
 
-    private static Task handleDeadline(String deadlineTask, String deadlineBy) {
-        Task deadline = new Deadline(deadlineTask, deadlineBy);
-        taskList.add(deadline);
-        return deadline;
+    private static Task handleDeadline(String deadlineTask, String deadlineBy) throws DukeException {
+        try {
+            LocalDate deadlineByLocalDate = LocalDate.parse(deadlineBy);
+            Task deadline = new Deadline(deadlineTask, deadlineByLocalDate);
+            taskList.add(deadline);
+            return deadline;
+        } catch (DateTimeParseException e) {
+            throw new DukeException("     OOPS!!! Pass in a date in yyyy-mm-dd :-(");
+        }
     }
 
-    private static Task handleEvent(String eventTask, String eventAt) {
-        Task event = new Event(eventTask, eventAt);
-        taskList.add(event);
-        return event;
+    private static Task handleEvent(String eventTask, String eventAt) throws DukeException {
+        try {
+            LocalDate eventAtLocalDate = LocalDate.parse(eventAt);
+            Task event = new Event(eventTask, eventAtLocalDate);
+            taskList.add(event);
+            return event;
+        } catch (DateTimeParseException e) {
+            throw new DukeException("     OOPS!!! Pass in a date in yyyy-mm-dd :-(");
+        }
     }
 
     private static void listTasks() {
