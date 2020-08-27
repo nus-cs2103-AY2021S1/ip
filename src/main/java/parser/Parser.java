@@ -1,15 +1,7 @@
 package parser;
 
-import command.Command;
-import command.ByeCommand;
-import command.DeadlineCommand;
-import command.DeleteCommand;
-import command.DoneCommand;
-import command.EventCommand;
-import command.FilterCommand;
-import command.InvalidCommand;
-import command.ListCommand;
-import command.TodoCommand;
+import command.*;
+import command.FindCommand;
 
 import exception.DukeException;
 
@@ -68,6 +60,12 @@ public class Parser {
                 return new FilterCommand(inputSplit[1]);
             } catch (ArrayIndexOutOfBoundsException e) {
                 throw new DukeException(LINE + "Invalid input! Please specify which date you want to filter! \n" + LINE);
+            }
+        } else if (userCommand.equals("find")) {
+            try {
+                return new FindCommand(inputSplit[1]);
+            } catch (ArrayIndexOutOfBoundsException e) {
+                throw new DukeException(LINE + "Invalid input! Please specify the keyword to find!! \n" + LINE);
             }
         } else {
             return new InvalidCommand();

@@ -1,11 +1,16 @@
 import command.*;
+
 import exception.DukeException;
-import org.junit.Test;
+
 import parser.Parser;
+
 import storage.Storage;
-import task.Deadline;
+
 import tasklist.TaskList;
+
 import ui.Ui;
+
+import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;

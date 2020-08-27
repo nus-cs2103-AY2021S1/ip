@@ -15,18 +15,14 @@ public class FindCommand extends Command {
         this.keyword = keyword;
     }
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        try {
-            String output = "";
-            for (int i = 1; i <= taskList.size(); i++) {
-                if (taskList.get(i - 1).toString().contains(keyword)) {
-                    output = output + i + ". " + taskList.get(i - 1) + "\n";
-                }
+    public void execute(TaskList taskList, Ui ui, Storage storage){
+        String output = "";
+        for (int i = 1; i <= taskList.size(); i++) {
+            if (taskList.get(i - 1).toString().contains(keyword)) {
+                output = output + i + ". " + taskList.get(i - 1) + "\n";
             }
-            System.out.println(ui.LINE + "Here are your task that matches your search: \n" + output + ui.LINE);
-        } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeException(ui.LINE + "Invalid input! Please specify the keyword to find! \n" + ui.LINE);
         }
+        System.out.println(ui.LINE + "Here are your task that matches your search: \n" + output + ui.LINE);
     }
 
     @Override

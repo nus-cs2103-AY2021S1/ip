@@ -44,7 +44,7 @@ public class FilterCommand extends Command {
         } catch (DateTimeParseException e) {
             throw new DukeException(ui.LINE + "Invalid input! Please enter a valid date! \n" + ui.LINE);
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeException(ui.LINE + "Invalid input! Please specify which date you want to filter! \n" + ui.LINE);
+            throw new DukeException(ui.LINE + "Invalid input! Please enter a valid date! \n" + ui.LINE);
         }
     }
 
