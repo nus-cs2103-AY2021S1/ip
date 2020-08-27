@@ -9,6 +9,9 @@ import java.io.FileReader;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Duke main class
+ */
 public class Duke {
 
     private static TaskList tasks = new TaskList();
