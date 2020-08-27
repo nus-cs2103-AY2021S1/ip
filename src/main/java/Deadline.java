@@ -9,6 +9,11 @@ public class Deadline extends Task {
         this.taskDate = taskDate;
     }
 
+    @Override
+    public String getDate() {
+        return taskDate;
+    }
+
     public String toString() {
         return String.format("[D][%s] %s (by: %s)", getStatusIcon(), taskName, taskDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy")));
     }

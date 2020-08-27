@@ -9,6 +9,11 @@ public class Event extends Task {
         this.taskDate = taskDate;
     }
 
+    @Override
+    public String getDate() {
+        return taskDate;
+    }
+
     public String toString() {
         return String.format("[E][%s] %s (at: %s)", getStatusIcon(), taskName, taskDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy")));
     }
