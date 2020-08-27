@@ -4,10 +4,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * Tasks that start at a specific time and ends at a specific time.
+ * Represents a task that starts at a specific time.
  */
-
-public class Event extends Task{
+public class Event extends Task {
     private final Date time;
 
     public Event(String description, boolean isDone, Date time) {
@@ -15,6 +14,10 @@ public class Event extends Task{
         this.time = time;
     }
 
+    /**
+     * Returns the time of the event, in String.
+     * @return Time of the event, in String
+     */
     public String getTimeStr() {
         return new SimpleDateFormat("y-M-d").format(this.time);
     }

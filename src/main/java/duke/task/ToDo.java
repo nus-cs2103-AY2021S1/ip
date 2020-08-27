@@ -1,9 +1,8 @@
 package duke.task; 
 
 /**
- * Tasks without any date/time attached to it.
+ * Represents tasks without any date/time attached to it.
  */
-
 public class ToDo extends Task {
     public ToDo(String description, boolean isDone) {
         super(description, isDone);

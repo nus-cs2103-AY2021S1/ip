@@ -4,9 +4,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * Tasks that need to be done before a specific time
+ * Represents a task that needs to be done before a specific time.
  */
-
 public class Deadline extends Task{
     protected final Date doBy;
 
@@ -15,6 +14,10 @@ public class Deadline extends Task{
         this.doBy = doBy;
     }
 
+    /**
+     * Returns the due date of the deadline, in String.
+     * @return Due date of the deadline, in String
+     */
     public String getDoByStr() {
         return new SimpleDateFormat("y-M-d").format(this.doBy);
     }

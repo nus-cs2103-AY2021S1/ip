@@ -4,6 +4,9 @@ import java.util.List;
 import duke.DukeException;
 import duke.util.Parser;
 
+/**
+ * Represents a list of tasks.
+ */
 public class TaskList {
     private List<Task> tasks;
 
@@ -11,6 +14,10 @@ public class TaskList {
         this.tasks = tasks;
     }
 
+    /**
+     * Adds a task into the list, according to user's input.
+     * @param input User's input
+     */
     public void addTask(String input) throws DukeException {
         String[] split = input.split(" ", 2);
 
@@ -59,6 +66,10 @@ public class TaskList {
         System.out.println(String.format("\tNow you have %d %s in the list. Jiayous! :D", size, size > 1 ? "tasks" : "task"));
     }
 
+    /**
+     * Sets the task's isDone status to true.
+     * @param index Index of the task in the task list.
+     */
     public void markTaskAsDone(int index) throws DukeException {
         Task task = this.tasks.get(index);
         task.toggleIsDone();
@@ -72,6 +83,10 @@ public class TaskList {
         System.out.println("\tNice! I've marked this task as done:\n\t\t" + task);
     }
 
+    /**
+     * Removes the (index + 1)th task from the task list.
+     * @param index Index of the to-be-deleted task in the task list.
+     */
     public void deleteTask(int index) throws DukeException {
         try {
             Task task = this.tasks.get(index);
@@ -88,8 +103,10 @@ public class TaskList {
         }
     }
 
+    /**
+     * Returns the list of tasks.
+     */
     public List<Task> getTasks() {
         return this.tasks;
     }
-
 }

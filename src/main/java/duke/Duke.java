@@ -15,6 +15,9 @@ public class Duke {
         this.ui = new Ui();
     }
 
+    /**
+     * Runs and serves user.
+     */
     public void run() {
         ui.printHello();
         String command = ui.getCommand();
