@@ -39,6 +39,6 @@ public class UiTest {
         converter.convertAction(Commands.DONE, 2);
         converter.convertAction(Commands.DELETE, 1);
         converter.convertAction(Commands.LIST, 0);
-        assertEquals(2, converter.totalTasks());
+        assertEquals(2, converter.getTotalTasks());
     }
 }

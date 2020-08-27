@@ -2,8 +2,8 @@ package main.java.tasks;
 
 public abstract class Task {
 
-    protected String description;
-    protected boolean isDone;
+    private final String description;
+    private boolean isDone;
 
     public Task(String description) {
         this.description = description;

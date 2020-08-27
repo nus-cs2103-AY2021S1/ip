@@ -16,9 +16,11 @@ public class Deadline extends Task {
     public Deadline(String description, String endTime) throws InvalidDescriptionException, InvalidTimeException {
         super(description);
         if (description.isBlank()) {
-            throw new InvalidDescriptionException("Hey! Deadline description shouldn't be blank.");
+            throw new InvalidDescriptionException(
+                    "Hey! Deadline description shouldn't be blank.");
         } else if (endTime.isBlank()) {
-            throw new InvalidTimeException("Do try again by adding a time you need to get this done by.");
+            throw new InvalidTimeException(
+                    "Do try again by adding a time you need to get this done by.");
         } else {
             this.endTime = endTime;
             formatEndTime();
@@ -49,11 +51,12 @@ public class Deadline extends Task {
     public String toString() {
         return this.formattedDateTime == null
                 ? this.formattedDate == null
-                ? "[D]" + super.toString() + " (by: " + this.endTime + ")"
+                    ? "[D]" + super.toString() + " (by: " + this.endTime + ")"
+                    : "[D]" + super.toString() + " (by: " +
+                        this.formattedDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")"
                 : "[D]" + super.toString() + " (by: " +
-                this.formattedDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")"
-                : "[D]" + super.toString() + " (by: " +
-                this.formattedDateTime.format(DateTimeFormatter.ofPattern("MMM d yyyy, hh:mm a")) + ")";
+                    this.formattedDateTime.format(
+                            DateTimeFormatter.ofPattern("MMM d yyyy, hh:mm a")) + ")";
     }
 
     @Override
