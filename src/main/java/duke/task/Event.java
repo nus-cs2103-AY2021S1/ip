@@ -1,27 +1,27 @@
-package duke.Task;
+package duke.task;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 
-public class Deadline extends Task {
+public class Event extends Task {
 
     LocalDate date;
 
-    public Deadline(String task, LocalDate date) {
+    public Event(String task, LocalDate date) {
         super(task);
         this.date = date;
     }
 
-    public Deadline(String task, boolean done, LocalDate date) {
+    public Event(String task, boolean done, LocalDate date) {
         super(task, done);
         this.date = date;
     }
 
     @Override
     public String getSaveString() {
-        return "[D] " + super.getSaveString() + " /by " + this.date;
+        return "[D] " + super.getSaveString() + " /at " + this.date;
     }
-
     @Override
     public String toString() {
         String dateString = "No date set";
@@ -30,6 +30,6 @@ public class Deadline extends Task {
             dateString = this.date.format(formatters);
         }
 
-        return "[Deadline] " + super.toString() + " (by: " + dateString + ")";
+        return "[Event] " + super.toString() + " (at: " + dateString + ")";
     }
 }

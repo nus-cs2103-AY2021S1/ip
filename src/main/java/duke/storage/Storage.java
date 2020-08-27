@@ -1,18 +1,23 @@
-package duke.Storage;
-import duke.Task.*;
+package duke.storage;
+
+import duke.task.*;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+
 import java.nio.file.Path;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.time.LocalDate;
+
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import java.time.LocalDate;
+
 public class Storage {
+
     private String currentDir = System.getProperty("user.dir");
     private Path dataDir = Paths.get(currentDir, "src", "main", "data");
     private Path fileDir = Paths.get(currentDir, "src", "main", "data", "list.txt");
@@ -85,15 +90,15 @@ public class Storage {
                         localDate = LocalDate.parse(date);
                     }
                     switch (matcher.group(1)) {
-                        case ("T"):
-                            list.addItem(new Todo(task, done));
-                            break;
-                        case ("D"):
-                            list.addItem(new Deadline(task, done, localDate));
-                            break;
-                        case ("E"):
-                            list.addItem(new Event(task, done, localDate));
-                            break;
+                    case ("T"):
+                        list.addItem(new Todo(task, done));
+                        break;
+                    case ("D"):
+                        list.addItem(new Deadline(task, done, localDate));
+                        break;
+                    case ("E"):
+                        list.addItem(new Event(task, done, localDate));
+                        break;
                     }
                 }
             }
