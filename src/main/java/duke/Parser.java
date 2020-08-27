@@ -64,104 +64,104 @@ public class Parser {
         String[] words = this.getDukeType(userCommand);
         String DukeOutput = "";
         switch (this.currentType) {
-            case DEADLINE:
-                if (words.length == 1) {
-                    throw new EmptyInputException("deadline");
-                } else {
-                    String deadlineTask = "";
-                    String deadlineDate = "";
-                    int byPosition = 0;
-                    for (int i = 1; i < words.length; i++) {
-                        if (!words[i].equals("/by")) {
-                            deadlineTask = deadlineTask + words[i] + " ";
-                        } else {
-                            byPosition = i;
-                            break;
-                        }
+        case DEADLINE:
+            if (words.length == 1) {
+                throw new EmptyInputException("deadline");
+            } else {
+                String deadlineTask = "";
+                String deadlineDate = "";
+                int byPosition = 0;
+                for (int i = 1; i < words.length; i++) {
+                    if (!words[i].equals("/by")) {
+                        deadlineTask = deadlineTask + words[i] + " ";
+                    } else {
+                        byPosition = i;
+                        break;
                     }
-
-                    for (int k = byPosition + 1; k < words.length; k++) {
-                        if (k != words.length - 1) {
-                            deadlineDate = deadlineDate + words[k] + " ";
-                        } else {
-                            deadlineDate = deadlineDate + words[k];
-                        }
-                    }
-                    deadlineTask = deadlineTask.trim();
-                    Deadline newDeadline = new Deadline(deadlineTask, deadlineDate);
-                    this.tasks.add(newDeadline);
-                    DukeOutput = this.userInteract.showAdd(newDeadline);
                 }
-                break;
 
-            case TODO:
-                if (words.length == 1) {
-                    throw new EmptyInputException("todo");
-                } else {
-                    String todoTask = "";
-                    for (int i = 1; i < words.length; i++) {
-                        if (i != words.length - 1) {
-                            todoTask = todoTask + words[i] + " ";
-                        } else {
-                            todoTask = todoTask + words[i];
-                        }
+                for (int k = byPosition + 1; k < words.length; k++) {
+                    if (k != words.length - 1) {
+                        deadlineDate = deadlineDate + words[k] + " ";
+                    } else {
+                        deadlineDate = deadlineDate + words[k];
                     }
-                    ToDo newToDo = new ToDo(todoTask);
-                    this.tasks.add(newToDo);
-                    DukeOutput = this.userInteract.showAdd(newToDo);
                 }
-                break;
+                deadlineTask = deadlineTask.trim();
+                Deadline newDeadline = new Deadline(deadlineTask, deadlineDate);
+                this.tasks.add(newDeadline);
+                DukeOutput = this.userInteract.showAdd(newDeadline);
+            }
+            break;
 
-            case EVENT:
-                if (words.length == 1) {
-                    throw new EmptyInputException("event");
-                } else {
-                    String eventTask = "";
-                    String eventDate = "";
-                    int atPosition = 0;
-                    for (int i = 1; i < words.length; i++) {
-                        if (!words[i].equals("/at")) {
-                            eventTask = eventTask + words[i] + " ";
-                        } else {
-                            atPosition = i;
-                            break;
-                        }
+        case TODO:
+            if (words.length == 1) {
+                throw new EmptyInputException("todo");
+            } else {
+                String todoTask = "";
+                for (int i = 1; i < words.length; i++) {
+                    if (i != words.length - 1) {
+                        todoTask = todoTask + words[i] + " ";
+                    } else {
+                        todoTask = todoTask + words[i];
                     }
-
-                    for (int k = atPosition + 1; k < words.length; k++) {
-                        if (k != words.length - 1) {
-                            eventDate = eventDate + words[k] + " ";
-                        } else {
-                            eventDate = eventDate + words[k];
-                        }
-                    }
-                    Event newEvent = new Event(eventTask, eventDate);
-                    this.tasks.add(newEvent);
-                    DukeOutput = this.userInteract.showAdd(newEvent);
                 }
-                break;
+                ToDo newToDo = new ToDo(todoTask);
+                this.tasks.add(newToDo);
+                DukeOutput = this.userInteract.showAdd(newToDo);
+            }
+            break;
 
-            case DONE:
-                int number = Integer.parseInt(words[1]) - 1;
-                DukeOutput = this.userInteract.showDone(number);
-                break;
+        case EVENT:
+            if (words.length == 1) {
+                throw new EmptyInputException("event");
+            } else {
+                String eventTask = "";
+                String eventDate = "";
+                int atPosition = 0;
+                for (int i = 1; i < words.length; i++) {
+                    if (!words[i].equals("/at")) {
+                        eventTask = eventTask + words[i] + " ";
+                    } else {
+                        atPosition = i;
+                        break;
+                    }
+                }
 
-            case DELETE:
-                int index = Integer.parseInt(words[1]) - 1;
-                DukeOutput = this.userInteract.showDelete(index);
-                break;
+                for (int k = atPosition + 1; k < words.length; k++) {
+                    if (k != words.length - 1) {
+                        eventDate = eventDate + words[k] + " ";
+                    } else {
+                        eventDate = eventDate + words[k];
+                    }
+                }
+                Event newEvent = new Event(eventTask, eventDate);
+                this.tasks.add(newEvent);
+                DukeOutput = this.userInteract.showAdd(newEvent);
+            }
+            break;
 
-            case LIST:
-                DukeOutput = this.userInteract.showList();
-                break;
+        case DONE:
+            int number = Integer.parseInt(words[1]) - 1;
+            DukeOutput = this.userInteract.showDone(number);
+            break;
 
-            case BYE:
-                this.isEnd = true;
-                DukeOutput = this.userInteract.showBye();
-                break;
+        case DELETE:
+            int index = Integer.parseInt(words[1]) - 1;
+            DukeOutput = this.userInteract.showDelete(index);
+            break;
 
-            default:
-                throw new NoResponseException();
+        case LIST:
+            DukeOutput = this.userInteract.showList();
+            break;
+
+        case BYE:
+            this.isEnd = true;
+            DukeOutput = this.userInteract.showBye();
+            break;
+
+        default:
+            throw new NoResponseException();
         }
         return DukeOutput;
     }

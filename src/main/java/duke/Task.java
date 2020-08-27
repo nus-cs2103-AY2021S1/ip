@@ -1,8 +1,7 @@
 package duke;
 
-import java.io.IOException;
-
 public class Task {
+
     protected String description;
     protected boolean isDone;
     protected int sequence;

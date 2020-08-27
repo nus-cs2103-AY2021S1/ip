@@ -1,11 +1,10 @@
 package duke;
 
-import java.util.ArrayList;
 import java.util.Scanner;
-import java.io.File;
-import java.io.FileNotFoundException;
+
 
 public class Ui {
+
     protected TaskList tasks;
 
     public Ui(TaskList tasks){
@@ -54,6 +53,7 @@ public class Ui {
         return DukeOutput;
 
     }
+
     /**
      * Returns a string that inform the user about the task which is marked as done.
      *
