@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.ui.UiSideEffects;
 import duke.exception.NoDescriptionException;
 import duke.DukeStub;
 import duke.ui.UIPrint;
@@ -13,6 +14,8 @@ public class TodoCommandTest {
 
     private final DukeStub dukeStub = new DukeStub();
 
+    private UiSideEffects uiSideEffects = UiSideEffects.getInstance();
+
     @Test
     public void constructorTest() {
         try {
@@ -23,11 +26,17 @@ public class TodoCommandTest {
     }
 
     @Test
-    public void execute_normalInput_success() {
+    public void execute_normalInput_taskAdded() {
         String normalInput = "read book";
+        int currentTaskListSize = dukeStub.taskList.tasks.size();
 
         try {
             command.execute(normalInput, dukeStub);
+
+            assertEquals(currentTaskListSize + 1, dukeStub.taskList.tasks.size());
+            assertEquals(true, uiSideEffects.uiReportNewTask);
+
+            uiSideEffects.reset();
         } catch (Exception exception) {
             fail(exception.getMessage());
         }
