@@ -1,3 +1,6 @@
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -7,10 +10,16 @@ public class Duke {
     private static ArrayList<Task> tasks = new ArrayList<>();
 
     public static void main(String[] args) {
-        Greeting();
-
+        greeting();
+        loadFromFile();
         Scanner scanner = new Scanner(System.in);
-
+        File f = new File("data.txt");
+        try {
+            f.createNewFile();
+        } catch (IOException ioException) {
+            System.out.println("An error occured");
+            ioException.printStackTrace();
+        }
         while (true) {
 
             String input = scanner.nextLine();
@@ -40,6 +49,7 @@ public class Duke {
                 } else {
                     Task task = new ToDo(description);
                     tasks.add(task);
+                    saveToFile(task);
                     printMessage("Added: " + task + String.format("\nNow you have %d tasks in the list", tasks.size()));
                 }
             } else if (input.startsWith("deadline")) {
@@ -49,6 +59,7 @@ public class Duke {
 
                     Task task = new Deadline(description, dueDate);
                     tasks.add(task);
+                    saveToFile(task);
                     printMessage("Added " + task + String.format("\nNow you have %d tasks in the list", tasks.size()));
                 } else {
                     System.out.println(new DeadlineMissingDateException());
@@ -61,6 +72,7 @@ public class Duke {
 
                     Task task = new Event(description, time);
                     tasks.add(task);
+                    saveToFile(task);
                     printMessage("Added " + task + String.format("\nNow you have %d tasks in the list", tasks.size()));
                 } else {
                     System.out.println(new EventMissingDateException());
@@ -77,7 +89,58 @@ public class Duke {
         }
     }
 
-    private static void Greeting() {
+    private static void loadFromFile() {
+        File dataFile = new File("data.txt");
+        if (dataFile.exists()) {
+            try {
+                Scanner scanner = new Scanner(dataFile);
+                while (scanner.hasNextLine()) {
+                    String taskEntry = scanner.nextLine();
+                    String[] taskInformation = taskEntry.split("\\|");
+                    if (taskEntry.startsWith("[T]")) {
+                        String description = taskEntry.split("\\|")[1];
+                        Task task = new ToDo(description);
+                        if (taskInformation[0].contains("1")) {
+                            task.markAsDone();
+                        }
+                        tasks.add(task);
+                    } else if (taskEntry.startsWith("[D]")) {
+                        String description = taskEntry.split("\\|")[1];
+                        Task task = new Deadline(description, "duedate");
+                        if (taskInformation[0].contains("1")) {
+                            task.markAsDone();
+                        }
+                    } else if (taskEntry.startsWith("[E]")) {
+                        String description = taskEntry.split("\\|")[1];
+                        Task task = new Event(description, "time");
+                        if (taskInformation[0].contains("1")) {
+                            task.markAsDone();
+                        }
+                    }
+
+                }
+            } catch (IOException ioException) {
+                System.out.println("An error has occurred");
+                ioException.printStackTrace();
+            }
+        }
+    }
+
+    private static void saveToFile(Task task) {
+        try {
+            FileWriter fileWriter = new FileWriter("data.txt", true);
+            String[] strings = task.toString().split("\\|");
+            String isDone = task.getIsDone() ? "1" : "0";
+            String description = strings[2];
+            fileWriter.write(strings[0] + " | " + isDone + " | " + description + "\n");
+            fileWriter.close();
+        } catch (IOException ioException) {
+            System.out.println("An error has occurred");
+            ioException.printStackTrace();
+        }
+    }
+
+    private static void greeting() {
         String logo = "Dash";
         System.out.println("Hello from\n" + logo);
         System.out.println("How can I help you today?");
@@ -91,6 +154,5 @@ public class Duke {
             System.out.println(spacing + str);
         }
         System.out.println(spacing + divider);
-
     }
 }

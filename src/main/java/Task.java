@@ -11,11 +11,15 @@ public class Task {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
 
+    public boolean getIsDone() {
+        return isDone;
+    }
+
     public void markAsDone() {
         isDone = true;
     }
 
     public String toString() {
-        return String.format("[%s] %s", getStatusIcon(), description);
+        return String.format("|[%s] | %s", getStatusIcon(), description);
     }
 }
