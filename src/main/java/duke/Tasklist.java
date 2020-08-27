@@ -64,7 +64,7 @@ public class Tasklist {
      * displayed on the UI.
      */
     public String toDisplayString() {
-        if (taskList.size() == 0) {
+        if (taskList.isEmpty()) {
             return "You have no tasks!";
         } else {
             String taskListString = "";
@@ -76,6 +76,26 @@ public class Tasklist {
             }
             return taskListString.trim();
         }
+    }
+
+    /**
+     * Returns the String representation of the list of all Tasks
+     * that match the query String, to be displayed on the UI.
+     *
+     * @param query The search query String.
+     * @return String representation of the list of all Tasks
+     * that match the query String, to be displayed on the UI.
+     */
+    public String matchedTasksOnly(String query) {
+        int index = 1;
+        String matchedTasks = "";
+        for (Task task : taskList) {
+            if (task.getDescription().contains(query)) {
+                matchedTasks += index + "." + task.toDisplayString() + "\n";
+                index++;
+            }
+        }
+        return matchedTasks.trim();
     }
 
     /**
