@@ -1,6 +1,17 @@
 package parser;
+
+import command.Command;
+import command.ByeCommand;
+import command.DeadlineCommand;
+import command.DeleteCommand;
+import command.DoneCommand;
+import command.EventCommand;
+import command.FilterCommand;
+import command.InvalidCommand;
+import command.ListCommand;
+import command.TodoCommand;
+
 import exception.DukeException;
-import command.*;
 
 /**
  * Deals with understanding the input from user and determining Command to execute.

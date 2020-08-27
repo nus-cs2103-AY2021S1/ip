@@ -1,7 +1,10 @@
 package command;
-import tasklist.TaskList;
-import ui.Ui;
+
 import storage.Storage;
+
+import tasklist.TaskList;
+
+import ui.Ui;
 
 public class ByeCommand extends Command {
     public ByeCommand(){}
