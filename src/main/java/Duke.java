@@ -1,4 +1,3 @@
-
 /**
  * Main class that drives the application.
  */
