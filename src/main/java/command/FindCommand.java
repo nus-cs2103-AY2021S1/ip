@@ -14,6 +14,14 @@ public class FindCommand extends Command {
     public FindCommand(String keyword) {
         this.keyword = keyword;
     }
+
+    /**
+     * Prints tasks that match the search keyword.
+     *
+     * @param taskList
+     * @param ui
+     * @param storage
+     */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage){
         String output = "";
