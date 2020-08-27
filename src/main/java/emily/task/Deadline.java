@@ -1,4 +1,5 @@
 package main.java.emily.task;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -9,14 +10,15 @@ import java.time.format.DateTimeFormatter;
 public class Deadline extends Task {
 
     protected LocalDate by;
-    protected String str;
+    protected String timeStamp;
 
 
-    public Deadline(String description, String str) {
+    public Deadline(String description, String timeStamp) {
         super(description);
-        this.str = str;
-        this.by = LocalDate.parse(str);
+        this.timeStamp = timeStamp;
+        this.by = LocalDate.parse(timeStamp);
     }
+
 
     /**
      * Getter method to retrieve timestamp
@@ -24,11 +26,11 @@ public class Deadline extends Task {
      */
     public String getBy(){
         return this.str;
+
     }
 
     @Override
     public String toString() {
-
         return "[D]" + super.toString() + "(by: "
                 + this.by.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
 

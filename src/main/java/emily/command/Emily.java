@@ -34,27 +34,26 @@ public class Emily {
         boolean end = false;
 
         System.out.println("Hello, I am Emily\n" +
-                "What can i do for you?\n"+
+                "What can i do for you?\n" +
                 divider);
 
-        while(!end){
-            try{
+        while (!end) {
+            try {
                 Scanner sc = new Scanner(System.in);
 
                 String input = sc.nextLine();
-                while(!input.equals("bye")){
-                    ui.reading(input,tasks);
+                while (!input.equals("bye")) {
+                    ui.reading(input, tasks);
                     input = sc.nextLine();
                     storage.reWrite(tasks.retrieve());
                 }
                 end = true;
-            } catch(DukeException e){
+            } catch (DukeException e) {
                 System.out.println("    OOPS! " + e.getMessage() + "\n" + divider);
             }
         }
 
         System.out.println("bye\n" + divider + "\nBye~, hope to see you again!");
-
 
 
     }

@@ -79,6 +79,7 @@ public class Storage {
 
     }
 
+
     /**
      * Updates the txt file when there are modifications to the task list
      * @param store contains the updated list of task
@@ -105,7 +106,7 @@ public class Storage {
 
             fw.write(txt);
             fw.close();
-        } catch(IOException e){
+        } catch (IOException e) {
             throw new DukeException("invalid file");
         }
     }
