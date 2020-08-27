@@ -1,8 +1,5 @@
 public class DukeException extends Exception {
-    public String error; 
-    
     public DukeException(String errorType) {
-        error = errorType;
         String errorMessage = errorType.equals("invalidCommand") 
                 ? "☹ OOPS!!! I'm sorry, but I don't know what that means :-("
                 : errorType.equals("invalidMarkingDone") 
