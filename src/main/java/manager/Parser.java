@@ -76,6 +76,7 @@ public class Parser {
             if (sc.hasNextLine()) {
                 input = sc.nextLine();
                 this.converter.storeTasks();
+
             } else {
                 break;
             }
@@ -92,11 +93,11 @@ public class Parser {
 
         if (checkBackNumber) {
             int index = Integer.parseInt(words[1]) - 1;
-            boolean isValidNumber = index < this.converter.totalTasks();
+            boolean isValidNumber = index < this.converter.getTotalTasks();
 
             if (!isValidNumber) {
                 throw new InvalidNumberException("The number entered is invalid. " +
-                        "You have " + this.converter.totalTasks() + " tasks in your list.");
+                        "You have " + this.converter.getTotalTasks() + " tasks in your list.");
             }
             return true;
 

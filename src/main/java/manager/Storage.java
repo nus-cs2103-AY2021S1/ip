@@ -89,12 +89,12 @@ public class Storage {
         String description = words[2];
 
         switch (taskType) {
-            case "T":
-                return new Todo(description, isDone);
-            case "D":
-                return new Deadline(description, words[3], isDone);
-            case "E":
-                return new Event(description, words[3], isDone);
+        case "T":
+            return new Todo(description, isDone);
+        case "D":
+            return new Deadline(description, words[3], isDone);
+        case "E":
+            return new Event(description, words[3], isDone);
         }
         return null;
     }

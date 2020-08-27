@@ -6,7 +6,7 @@ package main.java.exceptions;
  */
 public class DukeException extends Exception {
 
-    private String message;
+    private final String message;
 
     public DukeException(String message) {
         this.message = message;

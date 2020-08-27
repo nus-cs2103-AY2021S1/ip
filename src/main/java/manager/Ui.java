@@ -27,17 +27,17 @@ public class Ui {
     public Task convertTask(Commands command, String input) {
         try {
             switch (command) {
-                case DEADLINE:
-                    String deadlineDesc = input.substring("deadline".length(), input.indexOf("/by")).trim();
-                    String endTime = input.substring(input.indexOf("/by") + "/by".length()).trim();
-                    return new Deadline(deadlineDesc, endTime);
-                case EVENT:
-                    String eventDesc = input.substring("event".length(), input.indexOf("/at")).trim();
-                    String time = input.substring(input.indexOf("/at") + "/at".length()).trim();
-                    return new Event(eventDesc, time);
-                case TODO:
-                    String todoDesc = input.substring("todo".length()).trim();
-                    return new Todo(todoDesc);
+            case DEADLINE:
+                String deadlineDesc = input.substring("deadline".length(), input.indexOf("/by")).trim();
+                String endTime = input.substring(input.indexOf("/by") + "/by".length()).trim();
+                return new Deadline(deadlineDesc, endTime);
+            case EVENT:
+                String eventDesc = input.substring("event".length(), input.indexOf("/at")).trim();
+                String time = input.substring(input.indexOf("/at") + "/at".length()).trim();
+                return new Event(eventDesc, time);
+            case TODO:
+                String todoDesc = input.substring("todo".length()).trim();
+                return new Todo(todoDesc);
             }
         } catch (InvalidDescriptionException | InvalidTimeException e) {
             System.out.println(e.getMessage());
@@ -50,18 +50,18 @@ public class Ui {
      */
     public void convertAction(Commands command, int index) {
         switch (command) {
-            case LIST:
-                this.taskList.listTasks();
-                break;
-            case DONE:
-                this.taskList.markTaskAsDone(index);
-                break;
-            case DELETE:
-                this.taskList.deleteTask(index);
-                break;
-            case DELETE_ALL:
-                this.taskList.deleteAllTasks();
-                break;
+        case LIST:
+            this.taskList.listTasks();
+            break;
+        case DONE:
+            this.taskList.markTaskAsDone(index);
+            break;
+        case DELETE:
+            this.taskList.deleteTask(index);
+            break;
+        case DELETE_ALL:
+            this.taskList.deleteAllTasks();
+            break;
         }
     }
 
@@ -77,7 +77,7 @@ public class Ui {
      *
      * @return the number of tasks in the task list
      */
-    public int totalTasks() {
+    public int getTotalTasks() {
         return this.taskList.getNumberOfTasks();
     }
 
