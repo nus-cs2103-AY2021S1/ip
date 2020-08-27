@@ -1,4 +1,14 @@
+/**
+ * Represents a parser that helps to make sense of the user commands.
+ */
 public class Parser {
+    /**
+     * Reads the user input and returns the corresponding command according to the command
+     * given by the user.
+     * @param input The user input into the program.
+     * @return The corresponding command for the user input.
+     * @throws DukeException
+     */
     public static Command parse(String input) throws DukeException {
         input = input.toLowerCase();
         String[] spaceParse = input.split(" ");

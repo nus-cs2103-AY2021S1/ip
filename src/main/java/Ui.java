@@ -1,5 +1,10 @@
 import java.util.Scanner;
 
+/**
+ * Represents the user interface that interacts with the user by replying
+ * the user accordingly. A Ui objects contains a Scanner object that helps
+ * to take in user input.
+ */
 public class Ui {
     private Scanner sc;
     private String LOGO = " ____        _\n"
@@ -9,24 +14,40 @@ public class Ui {
             + "|____/ \\__,_|_|\\_\\___|\n";
     private String LINE = "---------------------------------------------------------";
 
+    /**
+     * Instantiates a Ui object with a scanner object.
+     */
     public Ui() {
         sc = new Scanner(System.in);
     }
 
+    /**
+     * Reads the input of the user.
+     * @return User input.
+     */
     public String readCommand() {
         return sc.nextLine();
     }
 
+    /**
+     * Displays the welcome message.
+     */
     public void showWelcome() {
         System.out.println("hElLoOOoOOoO! Welcome to\n" + LOGO);
         System.out.println("How can I help you today? : D");
         System.out.println("Type \"help\" to view the list of commands you can use!");
     }
 
+    /**
+     * Displays the exit message.
+     */
     public void showExit() {
         System.out.println("BYEEE!! SEE YOU AGAIN!!! >O<");
     }
 
+    /**
+     * Displays the list of commands available.
+     */
     public void showHelp() {
         System.out.println("Here are the list of commands you can use! =D");
         System.out.println("help: displays the list of commands available\n");
@@ -48,15 +69,26 @@ public class Ui {
         System.out.println("bye: ends the session");
     }
 
+    /**
+     * Displays the user's list of tasks.
+     */
     public void showList() {
         System.out.println("Here are your tasks! JIAYOU! =D");
     }
 
+    /**
+     * Replies the user's command to mark a task as done.
+     * @param t Task that is marked as done.
+     */
     public void showDone(Task t) {
         System.out.println("Nicee!! You've completed this task!");
         System.out.println(t);
     }
 
+    /**
+     * Replies the user's command to delete a task.
+     * @param t Task that is deleted.
+     */
     public void showDelete(Task t) {
         System.out.println("Oki! I've removed this task!");
         System.out.println(t);
@@ -64,6 +96,10 @@ public class Ui {
                 + " tasks in your list!");
     }
 
+    /**
+     * Replies the user's command to add a task.
+     * @param t Task to be added.
+     */
     public void showAdd(Task t) {
         System.out.println("Oki! I have added this task:");
         System.out.println(t);
@@ -71,10 +107,17 @@ public class Ui {
                 + " tasks in your list!");
     }
 
+    /**
+     * Displays the error message.
+     * @param err Error message.
+     */
     public void showError(String err) {
         System.out.println(err);
     }
 
+    /**
+     * Displays the line that acts as a border.
+     */
     public void showLine() {
         System.out.println(LINE);
     }
