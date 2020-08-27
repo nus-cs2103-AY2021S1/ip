@@ -14,6 +14,8 @@ done <taskId> - mark the task as done
 delete <taskId> - delete the task
 bye - close Duke
 
+No tasks in the list wohoo!
+
 The ToDo should not be empty
 
 Added '[✗][T] deep work' to list of tasks
