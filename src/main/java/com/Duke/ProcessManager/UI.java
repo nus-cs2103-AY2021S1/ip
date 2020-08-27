@@ -1,4 +1,4 @@
-package com.Duke.TaskManager;
+package com.Duke.ProcessManager;
 
 import com.Duke.DataManager.Storage;
 import com.Duke.Tasks.*;
@@ -23,10 +23,10 @@ public class UI {
     }
 
     public static void byeCalled(TaskList ls) throws DukeException{
+        Storage.write(ls);
         System.out.println(line);
         System.out.println("     Bye. Hope to see you again soon!");
         System.out.println(line);
-        Storage.write(ls);
     }
 
     public static void listCalled(TaskList list) throws DukeException{
@@ -85,8 +85,9 @@ public class UI {
         System.out.println(line);
     }
 
-    public static void deleteCalled(TaskList ls){
+    public static void deleteCalled(TaskList ls, int task)throws DukeException{
         System.out.println(line);
+        ls.delete(task);
         System.out.println("     Now you have " + ls.length() + " tasks in the list.");
         System.out.println(line);
     }

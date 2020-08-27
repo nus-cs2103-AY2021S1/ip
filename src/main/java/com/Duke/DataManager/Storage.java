@@ -1,7 +1,7 @@
 package com.Duke.DataManager;
 
-import com.Duke.TaskManager.DukeException;
-import com.Duke.TaskManager.TaskList;
+import com.Duke.ProcessManager.DukeException;
+import com.Duke.ProcessManager.TaskList;
 import com.Duke.Tasks.Deadline;
 import com.Duke.Tasks.Event;
 import com.Duke.Tasks.Task;
@@ -60,35 +60,33 @@ public class Storage {
             while(sc.hasNextLine()){
                 String data = sc.nextLine();
                 String[] dataArr = data.split("\\*");
-                if(dataArr[0] == "T"){
-                    if(dataArr[2] == "Y"){
+                if(dataArr[0].equals("T")){
+                    if(dataArr[2].equals("Y")){
                         taskList.add(new ToDo(dataArr[1], true));
                     }else{
                         taskList.add(new ToDo(dataArr[1], false));
                     }
-                }else if (dataArr[0]=="E"){
-                    if(dataArr[4] == "Y"){
+                }else if (dataArr[0].equals("E")){
+                    if(dataArr[4].equals("Y")){
                         taskList.add(new Event(dataArr[1], LocalTime.parse(dataArr[2]), LocalTime.parse(dataArr[3]), true));
                     }else{
                         taskList.add(new Event(dataArr[1], LocalTime.parse(dataArr[2]), LocalTime.parse(dataArr[3]), false));
                     }
-                }else if(dataArr[0]=="D"){
-                    if(dataArr[4] == "Y"){
+                }else if(dataArr[0].equals("D")){
+                    if(dataArr[4].equals("Y")){
                         taskList.add(new Deadline(dataArr[1], LocalDate.parse(dataArr[2]), true));
                     }else{
                         taskList.add(new Deadline(dataArr[1], LocalDate.parse(dataArr[2]), false));
                     }
                 }else{
-                    if(dataArr[1] == "Y"){
+                    if(dataArr[1].equals("Y")){
                         taskList.add(new Task(dataArr[0], true));
                     }else{
                         taskList.add(new Task(dataArr[0], false));
                     }
                 }
             }
-        } catch (FileNotFoundException e) {
-            return taskList;
-        } catch (DukeException e){
+        } catch (FileNotFoundException | DukeException e) {
             return taskList;
         }
         return taskList;

@@ -1,4 +1,4 @@
-package com.Duke.TaskManager;
+package com.Duke.ProcessManager;
 
 import com.Duke.Tasks.Task;
 

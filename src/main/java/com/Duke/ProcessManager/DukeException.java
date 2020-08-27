@@ -1,4 +1,4 @@
-package com.Duke.TaskManager;
+package com.Duke.ProcessManager;
 
 public class DukeException extends Exception{
     private final String errorMsg;
