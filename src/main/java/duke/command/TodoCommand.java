@@ -6,11 +6,18 @@ import duke.task.Todo;
 import duke.ui.Ui;
 import duke.storage.Storage;
 
+/**
+ * Represents a call to create a new Todo Task.
+ */
 public class TodoCommand extends Command {
     public static final String COMMAND_WORD = "todo";
 
     private final String commandSuffix;
 
+    /**
+     * Creates a new TodoCommand.
+     * @param commandSuffix String of user input to be entered as the description of a new Todo Task.
+     */
     public TodoCommand(String commandSuffix) {
         this.commandSuffix = commandSuffix;
     }

@@ -10,11 +10,20 @@ import duke.ui.Ui;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * Duke is a text-based bot that tracks different types of tasks.
+ * Supports the creation of Todo, Deadline & Event Tasks
+ * as well as other commands such as search, marking as done etc.
+ */
 public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Constructs a Duke object and initialises Ui, Storage & TaskList classes.
+     * @param filePath Path of local save file for Duke's task list.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         try {
@@ -27,6 +36,14 @@ public class Duke {
         }
     }
 
+    /**
+     * Starts running process of Duke.
+     * While running, reads user input through Ui,
+     * Parser determines the associated Command given,
+     * The Command is executed and TaskList is saved to drive.
+     * This method also encapsulates each reply from Duke with a
+     * line separator above and below.
+     */
     public void run() {
         boolean running = true;
         while (running) {
@@ -45,6 +62,10 @@ public class Duke {
         }
     }
 
+    /**
+     * Main function of Duke
+     * Checks if the save folder for Duke exists before creating a new Duke Object.
+     */
     public static void main(String[] args) {
         try {
             String filePathString = ".\\data\\duke.txt";

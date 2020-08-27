@@ -4,6 +4,9 @@ import duke.task.TaskList;
 import duke.ui.Ui;
 import duke.storage.Storage;
 
+/**
+ * Represents a call to list all Tasks in TaskList.
+ */
 public class ListCommand extends Command {
     public static final String COMMAND_WORD = "list";
 
