@@ -3,8 +3,17 @@ import task.*;
 import java.io.*;
 import java.util.Scanner;
 
+/**
+ * Storage is a utility class that handles the saving and loading of tasks for the Duke program.
+ */
 public class Storage {
 
+    /**
+     * Saves the a TaskList into a specified file.
+     * @param path  Path of the file.
+     * @param taskList List of tasks to be saved.
+     * @throws IOException Throws IOException when it encounters an IO error.
+     */
     public static void saveTasks(String path, TaskList<Task> taskList) throws IOException {
         FileWriter fw = new FileWriter(path);
         BufferedWriter bw = new BufferedWriter(fw);
@@ -14,6 +23,13 @@ public class Storage {
         }
         bw.close();
     }
+
+    /**
+     * Returns a list of Tasks loaded from the specified path.
+     * If the file is not found, an empty list of Tasks is returned.
+     * @param path Path of where the file is.
+     * @return The list of tasks loaded from the path
+     */
     public static TaskList<Task> loadTasks(String path){
         File f = new File(path);
         TaskList<Task> taskList = new TaskList<Task>();
