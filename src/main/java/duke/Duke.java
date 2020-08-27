@@ -26,6 +26,11 @@ public class Duke {
         this.parser = new Parser(this.storage);
     }
 
+    public static void main(String[] args) {
+        Duke duke = new Duke();
+        duke.run();
+    }
+
     /**
      * Runs Duke.
      */
@@ -54,10 +59,5 @@ public class Duke {
             }
         }
         sc.close();
-    }
-
-    public static void main(String[] args) {
-        Duke duke = new Duke();
-        duke.run();
     }
 }

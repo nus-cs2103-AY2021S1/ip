@@ -1,7 +1,7 @@
 package duke.task;
 
-import duke.util.DateTimeHandler;
 import duke.DukeException;
+import duke.util.DateTimeHandler;
 
 /**
  * Represents an event as a task with a date and time.
