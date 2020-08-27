@@ -78,7 +78,14 @@ public class Parser {
         return input.split(" ")[0].compareTo("delete") == 0;
     }
 
+    public static boolean isFind(String input) {
+        return input.split(" ")[0].compareTo("find") == 0;
+    }
     public static int getIndex(String input) {
         return Integer.parseInt(input.split(" ")[1]) - 1;
+    }
+
+    public static String getKeyword(String input) {
+        return input.split(" ")[1];
     }
 }

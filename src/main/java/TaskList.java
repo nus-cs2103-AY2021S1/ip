@@ -47,4 +47,27 @@ public class TaskList {
         return String.format("Got it. I've added this task:\n  %s\nNow you have %d tasks in the list.\n", t.toString(), this.tasks.size());
     }
 
+
+
+    public String findTasksWith(String keyword) {
+        ArrayList<Task> matches = new ArrayList<>();
+        for (int i = 0; i < tasks.size(); i++) {
+            matchName(tasks.get(i), keyword, matches);
+        }
+        
+        // make String
+        String output_msg = "Here are the matching tasks in your list:\n";
+        for (int i = 0; i < matches.size(); i++) {
+            Task t = matches.get(i);
+            output_msg += String.format("%d.%s\n", i+1, t.toString());
+        }
+        return output_msg;
+    }
+
+    public static void matchName(Task t, String keyword, ArrayList<Task> matches) {
+        if (t.containsKeyword(keyword)) {
+            matches.add(t);
+        }
+    }
+
 }

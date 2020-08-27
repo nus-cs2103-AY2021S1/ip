@@ -21,6 +21,17 @@ public class Task {
         return type;
     }
 
+    public boolean containsKeyword(String keyword) {
+        String[] nameParts = name.split(" ");
+        for (int i = 0; i < nameParts.length; i++) {
+            if (nameParts[i].length() == keyword.length() && 
+                    nameParts[i].compareTo(keyword) == 0) {
+                        return true;
+            }
+        }
+        return false;
+    }
+
     public String getFileString() {
         String status = this.isDone() ? "T" : "F";
         return String.format("%s~%s", status, name);
