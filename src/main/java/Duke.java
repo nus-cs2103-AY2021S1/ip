@@ -277,7 +277,8 @@ public class Duke {
                         throw new MissingInfoException();
                     } else {
                         String[] split = input.split("/at");
-                        if (split.length != 2) {
+                        String[] timeSeparated = split[1].trim().split(" ");
+                        if (split.length != 2 || timeSeparated.length != 2) {
                             throw new MissingInfoException();
                         }
                         Event e = new Event(split[0], split[1], false);
@@ -286,7 +287,6 @@ public class Duke {
                         updateFile(tasks, taskFile);
                         continue;
                     }
-
                 } catch (MissingDescriptionException e) {
                     System.out.println(LINE);
                     System.out.println("     ☹ OOPS!!! The description of a event cannot be empty.");
@@ -318,7 +318,8 @@ public class Duke {
                         throw new MissingInfoException();
                     } else {
                         String[] split = input.split("/by");
-                        if (split.length != 2) {
+                        String[] timeSeparated = split[1].trim().split(" ");
+                        if (split.length != 2 || timeSeparated.length != 2) {
                             throw new MissingInfoException();
                         }
                         Deadline e = new Deadline(split[0], split[1], false);
@@ -334,7 +335,7 @@ public class Duke {
                     continue;
                 } catch (MissingInfoException | DateTimeException e) {
                     System.out.println(LINE);
-                    System.out.println("     ☹ OOPS!!! The deadline you keyed in needs to have a deadline!");
+                    System.out.println("     ☹ OOPS!!! The deadline you keyed in needs to have a valid deadline!");
                     System.out.println("     You can key in a timing by typing \"/by\", followed by the deadline's " +
                             "deadline!");
                     System.out.println("     The deadline should be typed in the format \"DD/MM/YYYY\" HHMM!");
