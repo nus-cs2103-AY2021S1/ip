@@ -5,6 +5,9 @@ import duke.task.Task;
 import java.util.ArrayList;
 import java.util.function.Predicate;
 
+/**
+ * Represents lists of tasks.
+ */
 public class TaskList extends ArrayList<Task> {
     /**
      * Creates a list of tasks.
