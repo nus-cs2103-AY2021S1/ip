@@ -1,5 +1,8 @@
 import java.util.*;
 
+/**
+ * Duke can take in command and manage tasks.
+ */
 public class Duke {
 
     public static void main(String[] args) {

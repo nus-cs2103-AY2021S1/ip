@@ -1,3 +1,7 @@
+/**
+ * Todo is a type of Task.
+ */
+
 public class Todo extends Task {
 
     public Todo(String name){

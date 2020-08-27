@@ -3,7 +3,12 @@ import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 
 public class TimeConverter {
-
+    /**
+     * Construct a time converter.
+     * @param time Time command.
+     * @return Time in the given format.
+     * @throws Exception Throws time excepiton is the command does not meet requirements.
+     */
     public String convertTime(String time) throws Exception {
         if(isValidTime(time)){
 
@@ -23,6 +28,11 @@ public class TimeConverter {
 
     }
 
+    /**
+     * Check whether the time is in the valid format or not.
+     * @param time
+     * @return
+     */
     public boolean isValidTime(String time){
         String[] timeArray = time.split("-", 3);
         if (timeArray.length == 3) {
