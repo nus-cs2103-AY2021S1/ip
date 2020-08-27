@@ -13,7 +13,9 @@ public class Storage {
     protected File data = new File("./data/duke.txt");
 
     public Storage() {
-        if (!dataFolder.exists()) dataFolder.mkdir();
+        if (!dataFolder.exists()) {
+            dataFolder.mkdir();
+        }
         try {
             boolean isNew = data.createNewFile();
             if (!isNew) read();

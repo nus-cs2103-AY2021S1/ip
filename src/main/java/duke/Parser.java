@@ -48,16 +48,22 @@ public class Parser {
 
     public static String[] parseDeadline(String input) throws EmptyDescriptionException, InvalidFormatException {
         String[] splitted = input.split("\\s+");
-        if (splitted.length == 1) throw new EmptyDescriptionException("Deadline");
+        if (splitted.length == 1) {
+            throw new EmptyDescriptionException("Deadline");
+        }
 
         int separator = getIndex(splitted, "/by");
 
-        if (separator == -1) throw new InvalidFormatException("/by parameter");
+        if (separator == -1) {
+            throw new InvalidFormatException("/by parameter");
+        }
 
         String[] titles = Arrays.copyOfRange(splitted, 1, separator);
         String[] deadlines = Arrays.copyOfRange(splitted, separator + 1, splitted.length);
 
-        if (deadlines.length == 0) throw new EmptyDescriptionException("/by parameter");
+        if (deadlines.length == 0) {
+            throw new EmptyDescriptionException("/by parameter");
+        }
 
         String title = String.join(" ", titles);
         String deadline = String.join(" ", deadlines);
@@ -75,16 +81,22 @@ public class Parser {
 
     public static String[] parseEvent(String input) throws EmptyDescriptionException, InvalidFormatException {
         String[] splitted = input.split("\\s+");
-        if (splitted.length == 1) throw new EmptyDescriptionException("Event");
+        if (splitted.length == 1) {
+            throw new EmptyDescriptionException("Event");
+        }
 
         int separator = getIndex(splitted, "/at");
 
-        if (separator == -1) throw new InvalidFormatException("/at parameter");
+        if (separator == -1) {
+            throw new InvalidFormatException("/at parameter");
+        }
 
         String[] titles = Arrays.copyOfRange(splitted, 1, separator);
         String[] deadlines = Arrays.copyOfRange(splitted, separator + 1, splitted.length);
 
-        if (deadlines.length == 0) throw new EmptyDescriptionException("/at parameter");
+        if (deadlines.length == 0) {
+            throw new EmptyDescriptionException("/at parameter");
+        }
 
         String title = String.join(" ", titles);
         String deadline = String.join(" ", deadlines);
