@@ -6,8 +6,6 @@ import duke.component.*;
 
 /**
  * Is the Main class of this program.
- * @author Li Jiayu
- * @version 0.1
  */
 public class Duke {
     private Storage storage;
