@@ -10,8 +10,8 @@ import java.util.List;
  */
 public class TaskList {
 
-    List<Task> tasks;
-    Storage storage = new Storage();
+    protected List<Task> tasks;
+    protected Storage storage = new Storage();
 
     public TaskList() {
         tasks = storage.getTasks();

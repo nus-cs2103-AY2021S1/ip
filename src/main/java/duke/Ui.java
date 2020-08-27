@@ -9,7 +9,7 @@ import java.util.List;
  */
 public class Ui {
 
-    TaskList taskList;
+    protected TaskList taskList;
 
     public Ui(TaskList taskList) {
         this.taskList = taskList;
