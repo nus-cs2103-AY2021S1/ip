@@ -37,7 +37,7 @@ public class Parser {
 
             try {
                 Integer.parseInt(input.split(" ")[1]);
-            } catch(NumberFormatException e) {
+            } catch (NumberFormatException e) {
                 throw new DuckieException("You have to input a number after 'done'!");
             }
 
@@ -56,9 +56,9 @@ public class Parser {
             } else {
                 try {
                     Integer.parseInt(input.split(" ")[1]);
-                } catch(NumberFormatException e) {
+                } catch (NumberFormatException e) {
                     throw new DuckieException("You have to input a number after 'delete'!\n"
-                                    + "\t" + "If you want to delete all, input 'delete all'");
+                            + "\t" + "If you want to delete all, input 'delete all'");
                 }
                 int ind = Integer.parseInt(description);
                 return new DeleteCommand(ind);
@@ -99,7 +99,7 @@ public class Parser {
                 String[] splitted = input.split("/");
                 if (is_Word(splitted[1])) {
                     throw new DuckieException("Please state a date in the format 'DD MMM YYYY HH:MM a' after '/at'.\n"
-                                    + "\t" + "For example, 'event Party /at 21 Aug 2000 07:20 PM'.");
+                            + "\t" + "For example, 'event Party /at 21 Aug 2000 07:20 PM'.");
                 }
                 String time = splitted[1].split(" ", 2)[1];
                 String description = splitted[0].split(" ", 2)[1];
@@ -110,6 +110,13 @@ public class Parser {
             } else {
                 throw new DuckieException("Please use '/at' to indicate the date input.");
             }
+        } else if (input.toLowerCase().indexOf("find") == 0) {
+            if (is_Word(input)) {
+                throw new DuckieInsufficientInfoException();
+            }
+
+            String keyword = input.split(" ", 2)[1];
+
         } else {
             throw new DuckieInvalidCommandException();
         }
