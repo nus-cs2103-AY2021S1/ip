@@ -56,6 +56,21 @@ public class TaskList {
     }
 
     /**
+     * Finds tasks with the given keyword.
+     * @param toFind keyword
+     */
+    public void findTasks(String toFind) {
+        int currentIndex = 1;
+        System.out.println("Here are the matching tasks in your list:");
+        for (Task task : this.taskList) {
+            if (task.getDescription().contains(toFind)) {
+                System.out.println(currentIndex + "." + task.toString());
+                currentIndex++;
+            }
+        }
+    }
+
+    /**
      * Deletes all existing tasks in the task list.
      */
     public void deleteAllTasks() {

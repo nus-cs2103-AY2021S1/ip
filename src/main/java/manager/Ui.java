@@ -48,7 +48,7 @@ public class Ui {
     /**
      * Converts a command and index into the corresponding action.
      */
-    public void convertAction(Commands command, int index) {
+    public void convertAction(Commands command, int index, String input) {
         switch (command) {
         case LIST:
             this.taskList.listTasks();
@@ -62,6 +62,8 @@ public class Ui {
         case DELETE_ALL:
             this.taskList.deleteAllTasks();
             break;
+        case FIND:
+            this.taskList.findTasks(input);
         }
     }
 

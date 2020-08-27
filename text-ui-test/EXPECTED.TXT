@@ -54,6 +54,8 @@ Do try again by adding a time where the event takes place.
 Noted. I've removed this task:
 [D][✘] prepare for presentation (by: today 7pm)
 Now you have 5 tasks in the list.
+Here are the matching tasks in your list:
+1.[D][✘] do homework (by: Monday 6pm)
 Here are the tasks in your list:
 1.[T][✓] go cycling
 2.[D][✓] learn how to swim (by: Oct 15 2020)
