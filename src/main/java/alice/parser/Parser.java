@@ -156,7 +156,7 @@ public class Parser {
         }
     }
 
-    private static LocalDateTime parseDateTime(String dateTimeString) throws InvalidCommandException {
+    public static LocalDateTime parseDateTime(String dateTimeString) throws InvalidCommandException {
         for (int i = 0; i < KNOWN_DT_FORMATS.size(); i++) {
             try {
                 return LocalDateTime.parse(dateTimeString, KNOWN_DT_FORMATS.get(i));

@@ -1,6 +1,6 @@
 package alice.task;
 
-public abstract class Task {
+public class Task {
     private final String description;
     private boolean isDone;
 
