@@ -1,4 +1,5 @@
 import java.io.*;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.ListIterator;
 import java.util.Scanner;
@@ -6,16 +7,44 @@ import java.util.Scanner;
 public class Duke {
     
     private Storage storage;
-    private TaskList taskList;
+    private TaskList tasks;
     private Ui ui;
-    private Parser parser;
-    
-    ArrayList<Task> taskList;
 
-    Duke() {
-        this.taskList = new ArrayList<>();
+    public Duke(String filePath) {
+        ui = new Ui();
+        storage = new Storage(filePath);
+        try {
+            tasks = new TaskList(storage.load());
+        } catch (DukeException e) {
+            ui.showError(e);
+            tasks = new TaskList();
+        }
     }
 
+    public static void main(String[] args) {
+        new Duke("./data/savefile.txt").run();
+    }
+
+    public void run() {
+        ui.showWelcome();
+        boolean isExit = false;
+        while (!isExit) {
+            try {
+                String fullCommand = ui.readCommand();
+                ui.showLineTop(); // show the divider line ("_______")
+                Command c = Parser.parse(fullCommand);
+                c.execute(tasks, ui, storage);
+                isExit = c.isExit();
+            } catch (DukeException e) {
+                ui.showError(e);
+            } catch (DateTimeParseException e) {
+                ui.showError("Incorrect date format. Retry with YYYY-MM-DD.");
+            } finally {
+                ui.showLineBottom();
+            }
+        }
+    }
+/*
     public static void main(String[] args) {
         Duke duke = new Duke();
         File saveFile = new File("./data/duke.txt");
@@ -39,7 +68,9 @@ public class Duke {
         }
         duke.run();
     }
+*/
     
+    /*
     private void readSaveFile(File saveFile) throws Exception {
         ArrayList<Task> savedTaskList = new ArrayList<>();
         Scanner fileReader = new Scanner(saveFile);
@@ -74,9 +105,9 @@ public class Duke {
         }
     }
     
-    private void run() {
+    private void init() {
         Scanner sc = new Scanner(System.in);
-        greet();
+        ui.greet();
         while (sc.hasNextLine()) {
             try {
                 String input = sc.nextLine();
@@ -101,21 +132,7 @@ public class Duke {
                         + "    ____________________________________________________________");
             }
         }
-        exit();
-    }
-
-
-
-    private void echo(String command) {
-        System.out.println("    ____________________________________________________________\n" +
-                "     " + command + "\n" +
-                "    ____________________________________________________________");
-    }
-
-    private void exit() {
-        System.out.println("    ____________________________________________________________\n" +
-                "     Bye. Hope to see you again soon!\n" +
-                "    ____________________________________________________________");
+        ui.showExit();
     }
     
     //todo
@@ -142,26 +159,26 @@ public class Duke {
                     input.substring(indexOfSeparator + 4));
         }
 
-        taskList.add(newTask);
+        tasks.add(newTask);
         System.out.println("    ____________________________________________________________\n" +
                 "     Got it. I've added this task: \n" +
                 "       " + newTask + "\n" +
-                "     Now you have " + taskList.size() +
-                (taskList.size() == 1 ? " task in the list.\n" : " tasks in the list.\n") +
+                "     Now you have " + tasks.size() +
+                (tasks.size() == 1 ? " task in the list.\n" : " tasks in the list.\n") +
                 "    ____________________________________________________________");
         
         writeSaveFile();
     }
 
     private void list() {
-        if (taskList.isEmpty()) {
+        if (tasks.isEmpty()) {
             System.out.println("    ____________________________________________________________\n" +
                     "     You have no tasks in your list.");
             System.out.println("    ____________________________________________________________");
         } else {
             System.out.println("    ____________________________________________________________\n" +
                     "     Here are the tasks in your list:");
-            ListIterator<Task> listIterator = taskList.listIterator();
+            ListIterator<Task> listIterator = tasks.listIterator();
             int i = 1;
             while (listIterator.hasNext()) {
                 Task t = listIterator.next();
@@ -174,7 +191,7 @@ public class Duke {
 
     //todo
     private void markAsDone(int indexOfDoneTask) {
-        Task doneTask = taskList.get(indexOfDoneTask - 1);
+        Task doneTask = tasks.get(indexOfDoneTask - 1);
         doneTask.markAsDone();
         System.out.println("    ____________________________________________________________\n" +
                 "     Nice! I've marked this task as done:\n" +
@@ -196,4 +213,6 @@ public class Duke {
         
         writeSaveFile();
     }
+    
+     */
 }

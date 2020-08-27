@@ -1,11 +1,12 @@
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.time.format.TextStyle;
 import java.util.Locale;
 
 public class Deadline extends Task {
     protected LocalDate by;
 
-    public Deadline(String desc, String byString) {
+    public Deadline(String desc, String byString) throws DateTimeParseException {
         super(desc);
         this.by = LocalDate.parse(byString);
         taskType = TaskType.DEADLINE;

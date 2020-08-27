@@ -1,5 +1,5 @@
 public class TaskGenerator {
-    public static Task generateTask(String taskData) throws Exception {
+    public static Task generateTask(String taskData) throws CorruptedFileException {
         String[] taskSubData = taskData.split("\\|");
         String taskTypeLetter = taskSubData[0];
         Boolean isDone = taskSubData[1].equals("1");
@@ -16,7 +16,7 @@ public class TaskGenerator {
         } else {
             // todo: generate exception
             System.out.println("corrupted save file");
-            throw new Exception();
+            throw new CorruptedFileException();
         }
         
         if (isDone) {

@@ -7,12 +7,28 @@ public class TaskList {
         innerList = new ArrayList<>();
     }
     
-    public void addTask(Task newTask) {
+    public TaskList(ArrayList<Task> tasks) {
+        innerList = tasks;
+    }
+    
+    public void add(Task newTask) {
         innerList.add(newTask);
     }
     
-    public void deleteTask(int indexOfTaskToDelete) {
+    public void delete(int indexOfTaskToDelete) {
         innerList.remove(indexOfTaskToDelete - 1);
+    }
+    
+    public int size() {
+        return innerList.size();
+    }
+    
+    public Task getTask(int i) {
+        return innerList.get(i - 1);
+    }
+    
+    public boolean isEmpty() {
+        return innerList.isEmpty();
     }
     
 }
