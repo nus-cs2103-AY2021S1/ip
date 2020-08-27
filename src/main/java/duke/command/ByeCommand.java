@@ -24,6 +24,6 @@ public class ByeCommand extends Command {
      */
     @Override
     public void execute(Storage storage, TaskList taskList, UI ui) {
-        ui.close();
+        ui.printToConsole("Goodbye!");
     }
 }

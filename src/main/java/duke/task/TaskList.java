@@ -64,7 +64,7 @@ public class TaskList {
      * @throws DukeException If the task ID supplied is invalid.
      * @throws IOException If there are issues with updating the changes to storage.
      */
-    public String markTaskAsDone(int taskID, Storage storage) throws DukeException, IOException {
+    public String markTaskAsDone(int taskID, Storage storage) throws DukeException {
         if (taskID < 1 || taskID > tasks.size()) {
             throw new DukeException("Task ID is invalid!");
         }
@@ -87,7 +87,7 @@ public class TaskList {
      * @throws DukeException If the task ID supplied is invalid.
      * @throws IOException If there are issues with updating the changes to storage.
      */
-    public String deleteTask(int taskID, Storage storage) throws DukeException, IOException {
+    public String deleteTask(int taskID, Storage storage) throws DukeException {
         if (taskID < 1 || taskID > tasks.size()) {
             throw new DukeException("Task ID is invalid!");
         }
@@ -96,7 +96,7 @@ public class TaskList {
         storage.deleteLineFromStorage(task.generateStorageString());
         tasks.remove(taskID - 1);
 
-        return String.format("Nice! I've marked this task as done.\n%s\nNow you have %d tasks in the list",
+        return String.format("Nice! I've deleted this task.\n%s\nNow you have %d tasks in the list",
                 task.toString(), tasks.size());
     }
 
