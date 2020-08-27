@@ -1,3 +1,5 @@
+package duke;
+
 import java.io.FileInputStream;
 import java.io.ObjectInputStream;
 import java.nio.file.Path;
@@ -26,7 +28,7 @@ public class Storage {
      * @return ArrayList with the previous saved Tasks
      * @throws IOException
      * @throws ClassNotFoundException
-     */
+     */@SuppressWarnings("all")
     public ArrayList<Task> load() throws IOException, ClassNotFoundException{
         ArrayList<Task> store = new ArrayList<Task>();
         try {
