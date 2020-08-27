@@ -1,5 +1,9 @@
 package duke.tasks;
 
+
+/**
+ * TaskType enum.
+ */
 public enum TaskType {
     TODO("todo"),
     EVENT("event"),
@@ -9,7 +13,7 @@ public enum TaskType {
     private final String taskKeywordStr;
 
 
-    private TaskType(String taskKeywordStr) {
+    TaskType(String taskKeywordStr) {
         this.taskKeywordStr = taskKeywordStr;
     }
 

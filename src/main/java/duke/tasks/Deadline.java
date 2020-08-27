@@ -3,6 +3,9 @@ package duke.tasks;
 import java.time.LocalDate;
 
 
+/**
+ * Deadline class.
+ */
 public class Deadline extends Task {
 
     private static final String DELIMITER = " /by ";

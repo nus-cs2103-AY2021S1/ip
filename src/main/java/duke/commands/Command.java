@@ -1,5 +1,8 @@
 package duke.commands;
 
+/**
+ * Command enum.
+ */
 public enum Command {
     LIST("list"),
     DONE("done"),
@@ -7,11 +10,11 @@ public enum Command {
     TERMINATE("terminate"),
     TASK("task"),
     INVALID("invalid");
-    
+
     private final String str;
 
 
-    private Command(String str) {
+    Command(String str) {
         this.str = str;
     }
 }

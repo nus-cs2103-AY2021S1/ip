@@ -2,21 +2,17 @@ package duke;
 
 import duke.tasks.Task;
 
-import java.io.File;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-
+import java.io.*;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.nio.file.Files;
-
 import java.util.ArrayList;
 
 
+/**
+ * Storage for Duke.
+ * Reads and stores list in a database file (.txt).
+ */
 public class Storage {
 
     private static final String DELIMITER = ",";

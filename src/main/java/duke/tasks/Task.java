@@ -8,6 +8,10 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 
+/**
+ * Abstract Task class.
+ * Child classes: Deadline, Event, Todo.
+ */
 public abstract class Task {
 
     static final char DONE = '\u2713';
@@ -74,14 +78,6 @@ public abstract class Task {
 
 
     /**
-     * Marks this item as done.
-     */
-    public void markAsDone() {
-        this.isDone = true;
-    }
-
-
-    /**
      * Formats date string.
      *
      * @param date date object
@@ -89,6 +85,14 @@ public abstract class Task {
      */
     static String formatDateString(LocalDate date) {
         return date.format(DateTimeFormatter.ofPattern("dd MMM yyyy"));
+    }
+
+
+    /**
+     * Marks this item as done.
+     */
+    public void markAsDone() {
+        this.isDone = true;
     }
 
 

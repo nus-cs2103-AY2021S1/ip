@@ -4,6 +4,10 @@ import java.io.InputStream;
 import java.util.Scanner;
 
 
+/**
+ * Ui for Duke.
+ * Reads user inputs and prints messages.
+ */
 public class Ui {
 
     private static final String LOGO = " ____        _        \n"
@@ -35,6 +39,27 @@ public class Ui {
 
 
     /**
+     * Prints start message.
+     */
+    public static void printStartMessage() {
+        Ui.printSeparator();
+        // System.out.println(Ui.LOGO);
+        System.out.println("Hello! I'm Duke.");
+        System.out.println("What can I do for you?");
+        Ui.printSeparator();
+    }
+
+
+    /**
+     * Prints separator.
+     */
+    private static void printSeparator() {
+        System.out.println("____________________________________________________________");
+
+    }
+
+
+    /**
      * Checks if scanner has next line.
      *
      * @return if scanner has next line.
@@ -51,18 +76,6 @@ public class Ui {
      */
     public String nextLine() {
         return sc.nextLine();
-    }
-
-
-    /**
-     * Prints start message.
-     */
-    public static void printStartMessage() {
-        Ui.printSeparator();
-        // System.out.println(Ui.LOGO);
-        System.out.println("Hello! I'm Duke.");
-        System.out.println("What can I do for you?");
-        Ui.printSeparator();
     }
 
 
@@ -90,15 +103,6 @@ public class Ui {
 
     public void printErrorMessage(String errMsg) {
         this.printMessage(errMsg);
-    }
-
-
-    /**
-     * Prints separator.
-     */
-    private static void printSeparator() {
-        System.out.println("____________________________________________________________");
-
     }
 
 }
