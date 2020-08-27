@@ -1,14 +1,16 @@
-package Duke;
+package duke;
 
-import Task.Event;
+import task.Event;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+
 /**
  * Tests if the Event Task is correctly implemented.
+ *
  * @author Joshua
  */
 public class EventTest {

@@ -1,10 +1,11 @@
-package Task;
+package task;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
  * Deadline is a type of Task that can be added to the TaskList.
+ *
  * @author Joshua
  */
 public class Deadline extends Task {
@@ -18,6 +19,7 @@ public class Deadline extends Task {
 
     /**
      * Creates the Deadline with the given task description.
+     *
      * @param taskDescription the description given by the user for this task
      */
     public Deadline(String taskDescription) {
@@ -26,6 +28,7 @@ public class Deadline extends Task {
 
     /**
      * Sets the deadline for the task.
+     *
      * @param givenDate the deadline the task should be completed by.
      */
     public void setTime(LocalDateTime givenDate) {
@@ -34,6 +37,7 @@ public class Deadline extends Task {
 
     /**
      * Formats the Deadline Task into the format it is stored as.
+     *
      * @return the formatted deadline task.
      */
     @Override
@@ -50,6 +54,7 @@ public class Deadline extends Task {
 
     /**
      * Returns the deadline to the ui to be displayed to the user.
+     *
      * @return a String that contains the deadline and date in the display format.
      */
     @Override

@@ -1,9 +1,9 @@
-package Duke;
+package duke;
 
-import Task.Deadline;
-import Task.Event;
-import Task.Task;
-import Task.Todo;
+import task.Deadline;
+import task.Event;
+import task.Task;
+import task.Todo;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
@@ -13,6 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * Tests if the TaskList is correctly implemented.
+ *
  * @author Joshua
  */
 public class TaskListTest {
@@ -28,6 +29,7 @@ public class TaskListTest {
         LocalDateTime dateTime = LocalDateTime.parse("2020-02-20T23:59");
         unfinishedDeadline.setTime(dateTime);
         unfinishedEvent.setTime(dateTime);
+
         ArrayList<Task> testTaskList = new ArrayList<Task>();
         testTaskList.add(unfinishedDeadline);
         testTaskList.add(unfinishedEvent);

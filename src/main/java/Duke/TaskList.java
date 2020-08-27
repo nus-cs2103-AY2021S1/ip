@@ -1,11 +1,12 @@
-package Duke;
+package duke;
 
-import Task.Task;
+import task.Task;
 
 import java.util.ArrayList;
 
 /**
  * TaskList contains the task list.
+ *
  * @author Joshua
  */
 public class TaskList {
@@ -16,6 +17,7 @@ public class TaskList {
 
     /**
      * Creates TaskList with the task list.
+     *
      * @param taskList the task list that is given.
      */
     public TaskList(ArrayList<Task> taskList) {
@@ -31,6 +33,7 @@ public class TaskList {
 
     /**
      * Adds a new task to the task list.
+     *
      * @param task the task to be added.
      */
     public void addTask(Task task) {
@@ -39,6 +42,7 @@ public class TaskList {
 
     /**
      * Returns the current task list.
+     *
      * @return the task list as an array list.
      */
     public ArrayList<Task> getTaskList() {

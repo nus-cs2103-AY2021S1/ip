@@ -1,9 +1,10 @@
-package Duke;
+package duke;
 
-import Command.Command;
+import command.Command;
 
 /**
  * Duke is the main class that runs the Spanish Duke program.
+ *
  * @author Joshua
  */
 public class Duke {
@@ -20,6 +21,7 @@ public class Duke {
     /**
      * Creates an instance of Duke from the saved data in the file path where it
      * was stored.
+     *
      * @param filePath the file path where data is stored.
      */
     public Duke(String filePath) {

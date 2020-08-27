@@ -1,12 +1,13 @@
-package Duke;
+package duke;
 
-import Task.Todo;
+import task.Todo;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * Tests if the Todo_task is correctly implemented.
+ *
  * @author Joshua
  */
 public class TodoTest {

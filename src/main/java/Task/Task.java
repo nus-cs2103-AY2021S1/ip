@@ -1,4 +1,4 @@
-package Task;
+package task;
 
 import java.time.LocalDateTime;
 
@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
  * Task is the main functionality of Duke. It is the unit that information given by the user
  * is stored as in Duke and is also how information from Duke is read to the user. It is an
  * abstract class and can only be represented as a Deadline, Event or Todo_task.
+ *
  * @author Joshua
  */
 public abstract class Task {
@@ -22,6 +23,7 @@ public abstract class Task {
 
     /**
      * Creates the task with the given taskDescription. Initializes the task as incomplete.
+     *
      * @param taskDescription the description for the task given by the user.
      */
     public Task(String taskDescription) {
@@ -31,6 +33,7 @@ public abstract class Task {
 
     /**
      * Formats the way that the task is to be saved.
+     *
      * @return the formatted task.
      */
     public abstract String saveFormat();
@@ -44,6 +47,7 @@ public abstract class Task {
 
     /**
      * Returns the task description.
+     *
      * @return task description.
      */
     public String getTaskDescription() {
