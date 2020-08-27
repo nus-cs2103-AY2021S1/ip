@@ -12,7 +12,7 @@ public class EventCommand extends Command {
     @Override
     public void execute(String str, Duke duke) {
         Event newEvent = Event.createEvent(str);
-        duke.taskList.tasks.add(newEvent);
+        duke.taskList.addTask(newEvent);
         duke.ui.reportNewTask(newEvent);
     }
 

@@ -18,7 +18,7 @@ public class DeleteCommand extends Command {
 
         checkException(taskIndex, str, duke);
 
-        Task task = duke.taskList.tasks.remove(taskIndex);
+        Task task = duke.taskList.deleteTask(taskIndex);
 
         duke.ui.reportDeleteTask(task);
     }
@@ -33,7 +33,7 @@ public class DeleteCommand extends Command {
     }
 
     private void checkException(int taskIndex, String str, Duke duke) {
-        if (duke.taskList.tasks.size() <= taskIndex || taskIndex < 0) {
+        if (duke.taskList.getSize() <= taskIndex || taskIndex < 0) {
             String line = UIPrint.getLine(UIPrint.star, 50);
             String errMessage =
                     line + "\nSorry " + str + " is not a valid index\n" + line;

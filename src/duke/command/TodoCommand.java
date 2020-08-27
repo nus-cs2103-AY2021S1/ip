@@ -13,7 +13,7 @@ public class TodoCommand extends Command {
     @Override
     public void execute(String str, Duke duke) throws NoDescriptionException {
         ToDo newToDo = ToDo.createToDo(str);
-        duke.taskList.tasks.add(newToDo);
+        duke.taskList.addTask(newToDo);
         duke.ui.reportNewTask(newToDo);
     }
 

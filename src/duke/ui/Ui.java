@@ -33,11 +33,11 @@ public class Ui {
 
         System.out.println("Current tasks:\n");
 
-        for (int i = 0; i < duke.taskList.tasks.size(); i++) {
-            System.out.println(i + 1 + ". " + duke.taskList.tasks.get(i));
+        for (int i = 0; i < duke.taskList.getSize(); i++) {
+            System.out.println(i + 1 + ". " + duke.taskList.getTask(i));
         }
 
-        if (duke.taskList.tasks.size() == 0) {
+        if (duke.taskList.getSize() == 0) {
             System.out.println("None");
         }
 
@@ -49,7 +49,7 @@ public class Ui {
 
         System.out.println("Got it. I've added this duke.task: ");
         System.out.println(task);
-        System.out.println("Now you have " + duke.taskList.tasks.size() + " tasks in the list.");
+        System.out.println("Now you have " + duke.taskList.getSize() + " tasks in the list.");
 
         UIPrint.drawLine(UIPrint.star, 50);
     }
@@ -68,7 +68,7 @@ public class Ui {
 
         System.out.println("Noted. I've removed this duke.task: ");
         System.out.println(task);
-        System.out.println("Now you have " + duke.taskList.tasks.size() + " tasks in the list");
+        System.out.println("Now you have " + duke.taskList.getSize() + " tasks in the list");
 
         UIPrint.drawLine(UIPrint.star, 50);
     }

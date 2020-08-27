@@ -13,10 +13,10 @@ public class DukeStorage {
     }
 
     public void loadSavedTasks() throws IOException {
-        duke.taskList.tasks = TaskStorage.getInstance().getSavedTasks();
+        duke.taskList.setTasks(TaskStorage.getInstance().getSavedTasks());
     }
 
     public void saveCurrentTasks() throws IOException {
-        TaskStorage.getInstance().saveTasks(duke.taskList.tasks);
+        TaskStorage.getInstance().saveTasks(duke.taskList.getTasks());
     }
 }

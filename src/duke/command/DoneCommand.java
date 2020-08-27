@@ -18,7 +18,7 @@ public class DoneCommand extends Command {
 
         checkException(taskIndex, str, duke);
 
-        Task task = duke.taskList.tasks.get(taskIndex);
+        Task task = duke.taskList.getTask(taskIndex);
         task.markAsDone();
 
         duke.ui.reportDoneTask(task);
@@ -34,7 +34,7 @@ public class DoneCommand extends Command {
     }
 
     private void checkException(int taskIndex, String str, Duke duke) {
-        if (duke.taskList.tasks.size() <= taskIndex || taskIndex < 0) {
+        if (duke.taskList.getSize() <= taskIndex || taskIndex < 0) {
             String line = UIPrint.getLine(UIPrint.star, 50);
             String errMessage =
                     line + "\nSorry " + str + " is not a valid index\n" + line;
