@@ -13,6 +13,12 @@ public class Deadline extends Task {
     protected LocalDate date;
     protected LocalTime time;
 
+    /**
+     * constructor of Deadline task
+     * @param description string of description of task
+     * @param by date and time that task is to be completed by
+     * @throws DukeException exception thrown when exception caught while running
+     */
     public Deadline(String description, String by) throws DukeException {
         super(description);
         this.by = by;
@@ -27,21 +33,40 @@ public class Deadline extends Task {
         }
     }
 
+    /**
+     * extracts date
+     * @param dateUnformatted string of unformatted date
+     * @return formatted Localdate from string of unformatted date
+     */
     private LocalDate extractDate(String dateUnformatted) {
         dateUnformatted = dateUnformatted.replaceAll("/", "-");
         return LocalDate.parse(dateUnformatted);
     }
 
+    /**
+     * extracts time
+     * @param timeUnformatted string of unformatted time
+     * @return formatted Localtime from string of unformatted time
+     */
     private LocalTime extractTime(String timeUnformatted) {
         return LocalTime.parse(timeUnformatted);
     }
 
+    /**
+     * returns string of task to be printed out and shown to user
+     * @return string of task
+     */
     @Override
     public String toString() {
         DateTimeFormatter dtfDate = DateTimeFormatter.ofPattern("MMM dd yyyy");
         DateTimeFormatter dtfTime = DateTimeFormatter.ISO_LOCAL_TIME;
         return "[D]" + super.toString() + "(by: " + this.date.format(dtfDate) + " " + this.time.format(dtfTime) + ")";
     }
+
+    /**
+     * returns string of task to be saved in storage
+     * @return string of task
+     */
     @Override
     public String stringToSave() {
         char status = this.isDone ? '1' : '0';

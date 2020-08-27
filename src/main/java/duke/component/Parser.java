@@ -3,6 +3,13 @@ package duke.component;
 import duke.command.*;
 
 public class Parser {
+
+    /**
+     * Reads user input and returns appropriate command
+     * @param fullCommand complete string of user input
+     * @return instance of Command
+     * @throws DukeException exception caught in method
+     */
     public static Command parse(String fullCommand) throws DukeException {
         String[] userInputArr = fullCommand.split(" ");
         String instructionCommand = userInputArr[0];

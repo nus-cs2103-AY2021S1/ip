@@ -10,11 +10,23 @@ public class AddCommand extends Command {
     String fullCommand;
     EnumUserInstruction.userInstruction instructionCommand;
 
+    /**
+     * constructor for command to add tasks
+     * @param fullCommand entire string of input from user
+     * @param instructionCommand enum of the command instruction from the user
+     */
     public AddCommand (String fullCommand, EnumUserInstruction.userInstruction instructionCommand) {
         this.fullCommand = fullCommand;
         this.instructionCommand = instructionCommand;
     }
 
+    /**
+     * Executes command, main logic for creating a new task
+     * @param taskList list of tasks
+     * @param ui instance of Ui to deal with user interface
+     * @param storage to read / write to storage
+     * @throws DukeException exception thrown when exception caught while running
+     */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         String[] userInputArr = this.fullCommand.split(" ");

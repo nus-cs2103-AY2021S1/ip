@@ -16,6 +16,10 @@ public class Duke {
     private TaskList taskList;
     private final Ui ui;
 
+    /**
+     * Creates an instance of Duke, instance of ui created too. TaskList initialised
+     * with empty list of tasks if file lookup is unsuccessful.
+     */
     public Duke() {
         ui = new Ui();
         storage = new Storage(filepath);
@@ -32,6 +36,9 @@ public class Duke {
         duke.run();
     }
 
+    /**
+     * method to execute the Duke logic
+     */
     public void run() {
         ui.showWelcome();
         ui.showLine();
