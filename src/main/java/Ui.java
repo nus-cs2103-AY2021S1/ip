@@ -9,10 +9,6 @@ public class Ui {
         this.s = new Scanner(System.in);
     }
 
-    public void showLoadingError() {
-        System.out.println("☹ OOPS!!! I couldn't load your saved data :(");
-    }
-
     public void hi() {
         System.out.println("hi");
     }
