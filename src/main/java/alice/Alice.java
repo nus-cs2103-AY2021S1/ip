@@ -30,15 +30,15 @@ public class Alice {
     public void run() {
         ui.displayWelcomeMsg();
         ui.displayLine();
-        boolean isGoodbye = false;
+        boolean shouldExit = false;
 
-        while (!isGoodbye) {
+        while (!shouldExit) {
             try {
                 String fullCommand = ui.readUserInput();
                 ui.displayLine();
-                Command c = Parser.parseCommand(fullCommand);
-                c.process(tasks, ui, storage);
-                isGoodbye = c.isExitCommand();
+                Command cmd = Parser.parseCommand(fullCommand);
+                cmd.process(tasks, ui, storage);
+                shouldExit = cmd.isExitCommand();
             } catch (InvalidCommandException ex) {
                 ui.displayWarning(ex.getMessage());
             } catch (AliceException ex) {

@@ -7,8 +7,10 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 public class Event extends Task {
-    private static final DateTimeFormatter E_DATE_FORMAT = DateTimeFormatter.ofPattern("EEEE, MMM dd uuuu");
-    private static final DateTimeFormatter E_DATETIME_FORMAT = DateTimeFormatter.ofPattern("EEEE, MMM dd uuuu, ha");
+    private static final DateTimeFormatter E_DATE_FORMAT = DateTimeFormatter
+            .ofPattern("EEEE, MMM dd uuuu");
+    private static final DateTimeFormatter E_DATETIME_FORMAT = DateTimeFormatter
+            .ofPattern("EEEE, MMM dd uuuu, ha");
 
     private final LocalDateTime on;
     private final boolean includesTime;

@@ -7,8 +7,10 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
-    private static final DateTimeFormatter D_DATETIME_FORMAT = DateTimeFormatter.ofPattern("EEEE, MMM dd uuuu, ha");
-    private static final DateTimeFormatter D_DATE_FORMAT = DateTimeFormatter.ofPattern("EEEE, MMM dd uuuu");
+    private static final DateTimeFormatter D_DATETIME_FORMAT = DateTimeFormatter
+            .ofPattern("EEEE, MMM dd uuuu, ha");
+    private static final DateTimeFormatter D_DATE_FORMAT = DateTimeFormatter
+            .ofPattern("EEEE, MMM dd uuuu");
 
     private final LocalDateTime by;
     private final boolean includesTime;
