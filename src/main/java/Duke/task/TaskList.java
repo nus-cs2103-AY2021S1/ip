@@ -32,11 +32,13 @@ public class TaskList {
 					Task tsk = new Event(instruction[1], instruction[2], instruction[3]);
 					lst.add(tsk);
 				} else {
-					throw new DukeException("error loading form file");
+					throw new DukeException("error loading from file");
 				}
 			}
 		} catch (ArrayIndexOutOfBoundsException e) {
 			throw new DukeException(e.getMessage());
+		} catch (Exception e) {
+			throw new DukeException("file could not be parsed");
 		}
 	}
 
@@ -95,11 +97,4 @@ public class TaskList {
 		return item;
 	}
 
-
-//	public static void main(String[] args) {
-//		TaskList tl = new TaskList();
-//		tl.addTask(new Task("lol"));
-//		System.out.println(tl.toString());
-//		System.out.println("--------------");
-//	}
 }

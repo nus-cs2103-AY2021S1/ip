@@ -13,11 +13,6 @@ public class Duke {
 	private TaskList tasks;
 	private Ui ui;
 
-	public Duke() {
-		ui = new Ui();
-		tasks = new TaskList();
-	}
-
 	public Duke(String filePath) {
 		//initialize User interface
 		ui = new Ui();
