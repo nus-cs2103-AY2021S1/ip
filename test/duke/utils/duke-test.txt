@@ -1,2 +1,0 @@
-todo|borrow book
-deadline|return book|Aug 23 2020

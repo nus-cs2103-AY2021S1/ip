@@ -72,7 +72,7 @@ class StorageTest {
     private void makeBackup() throws IOException {
         File f = new File("data/duke.txt");
         File dest = new File("data/duke.bak");
-        File test = new File("test/duke/utils/duke-test.txt");
+        File test = new File("src/test/java/duke/utils/duke-test.txt");
         dest.exists();
         if (f.exists()) {
             Files.copy(f.toPath(), dest.toPath());
