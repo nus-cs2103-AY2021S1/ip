@@ -9,14 +9,26 @@ import main.java.Ui;
 import java.time.DateTimeException;
 import java.time.LocalDate;
 
-public class AddCommand extends Command {
+/**
+ * Represents command to add all forms of tasks into list.
+ */
+public class AddCommand extends Command  {
 
-    public AddCommand(String text) {
+    /**
+     * Constructs the command with the type of task being added.
+     * @param text type of task being added.
+     */
+     public AddCommand(String text) {
         this.commandText = text;
     }
 
-    @Override
-    public void execute(String taskDetails, TaskList taskList) {
+    /**
+     * Adds the task.
+     * @param taskDetails details of task given by user.
+     * @param taskList current list of tasks.
+     */
+     @Override
+     public void execute(String taskDetails, TaskList taskList) {
         try {
             if (this.commandText.equals(TYPES.TODO.text)) {
                 Task toAdd = new Task(taskDetails);

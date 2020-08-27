@@ -8,9 +8,32 @@ import main.java.Command.ByeCommand;
 import main.java.Command.Command;
 
 import java.util.zip.DataFormatException;
-
+/**
+ * Understands inputs given by user and validates them.
+ */
 public class Parser {
 
+    enum COMMANDS {
+        TODO("todo"),
+        DEADLINE("deadline"),
+        EVENT("event"),
+        LIST("list"),
+        EXIT("bye"),
+        DONE("done"),
+        DELETE("delete");
+        public String text;
+
+        COMMANDS(String text) {
+            this.text = text;
+        }
+    }
+
+    /**
+     * Understands input from user
+     * @param userText input from user
+     * @param taskList list of tasks user has currently
+     * @return boolean value of whether conversation is to be continued
+     */
     public static boolean understandText(String userText, TaskList taskList) {
         try {
             String edittedAnswer = userText.strip().toLowerCase();
@@ -117,18 +140,4 @@ public class Parser {
         }
     }
 
-    enum COMMANDS {
-        TODO("todo"),
-        DEADLINE("deadline"),
-        EVENT("event"),
-        LIST("list"),
-        EXIT("bye"),
-        DONE("done"),
-        DELETE("delete");
-        public String text;
-
-        COMMANDS(String text) {
-            this.text = text;
-        }
-    }
 }

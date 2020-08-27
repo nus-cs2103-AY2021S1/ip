@@ -5,6 +5,9 @@ import main.java.Task.Task;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Handles actions by user with regards to all their tasks.
+ */
 public class TaskList {
     private Storage savedStorage;
     private List<Task> allItems;
@@ -14,6 +17,10 @@ public class TaskList {
         this.allItems = this.savedStorage.getSavedTasks();
     }
 
+    /**
+     * Adds task to the current list of tasks.
+     * @param toAdd Task to add
+     */
     public void addTask(Task toAdd) {
         this.allItems.add(toAdd);
         String printTask = "Alright, its in your list now!\n\t" + toAdd +
@@ -21,10 +28,17 @@ public class TaskList {
         Ui.printMessageToUser(printTask);
     }
 
+    /**
+     * Retrieves all the tasks currently stored.
+     * @return
+     */
     public List<Task> getAllTasks() {
         return this.allItems;
     }
 
+    /**
+     * Prints the output of all tasks in store currently.
+     */
     public void printStore() {
         String printList;
         if (this.allItems.size() == 0) {
@@ -41,16 +55,27 @@ public class TaskList {
         Ui.printMessageToUser(printList);
     }
 
+    /**
+     * Sets the selected task to be completed.
+     * @param index index of task to be set completed.
+     */
     public void completeTask(int index) {
         Task toComplete = this.allItems.get(index);
         toComplete.finishTask();
     }
 
+    /**
+     * Removes task from current list.
+     * @param index index of task to be removed.
+     */
     public void deleteTask(int index) {
         this.allItems.remove(index);
         Ui.printDeleteTaskMessage();
     }
 
+    /**
+     * Sends instruction to save the current tasks.
+     */
     public void saveIntoHarddisk() {
         this.savedStorage.saveIntoHarddisk();
     }
