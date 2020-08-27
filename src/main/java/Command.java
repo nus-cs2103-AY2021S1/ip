@@ -18,6 +18,13 @@ public class Command {
         this.ui = ui;
     }
 
+    /**
+     * Marks an item in the list as done and prints the necessary string message.
+     *
+     * @param toEcho command and description number.
+     * @throws DukeEmptyMessageException thrown when description is empty.
+     * @throws DukeInvalidMessageException thrown when description is not a valid number.
+     */
     public void handleDone(String toEcho) throws DukeEmptyMessageException, DukeInvalidMessageException {
         String[] command = Parser.splitCommandAndDescription(toEcho);
         if (toEcho.length() == 4) {
@@ -32,7 +39,7 @@ public class Command {
     }
 
     /**
-     * Add todo into the list and print the relevant todo message.
+     * Adds todo into the list and print the relevant todo message.
      *
      * @param description description of todo.
      */
@@ -47,7 +54,7 @@ public class Command {
     }
 
     /**
-     * Add deadline into the list and print the relevant deadline message.
+     * Adds deadline into the list and print the relevant deadline message.
      *
      * @param toEcho full description of deadline, including the command.
      * @throws DukeMissingTimeException thrown when user does not input the timing required.
@@ -72,7 +79,7 @@ public class Command {
     }
 
     /**
-     * Add event into the list and print the relevant event message.
+     * Adds event into the list and print the relevant event message.
      *
      * @param toEcho full description of event, including command.
      * @throws DukeMissingTimeException thrown when user does not input the timing required.
@@ -96,6 +103,13 @@ public class Command {
         }
     }
 
+    /**
+     * Deletes an item from the list.
+     *
+     * @param toEcho delete command and description of type number.
+     * @throws DukeEmptyMessageException thrown when description is empty.
+     * @throws DukeInvalidMessageException thrown when description is not a valid number.
+     */
     public void handleDelete(String toEcho) throws DukeEmptyMessageException, DukeInvalidMessageException {
         String[] command = Parser.splitCommandAndDescription(toEcho);
         if (toEcho.length() == 6) {
@@ -108,6 +122,13 @@ public class Command {
         ui.printDelete(indexToDelete);
     }
 
+    /**
+     * Finds the keyword passed in argument, and returns the items from list which
+     * matches the keyword.
+     *
+     * @param toEcho command and description.
+     * @throws DukeEmptyMessageException thrown when keyword is empty
+     */
     public void handleFind(String toEcho) throws DukeEmptyMessageException {
         String[] command = Parser.splitCommandAndDescription(toEcho);
         if (toEcho.length() == 4) {
