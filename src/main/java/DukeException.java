@@ -1,4 +1,9 @@
 public class DukeException extends Exception {
+    /**
+     * Prints out the correct error message based on error type.
+     * 
+     * @param errorType Description of error.
+     */
     public DukeException(String errorType) {
         String errorMessage = errorType.equals("invalidCommand") 
                 ? "☹ OOPS!!! I'm sorry, but I don't know what that means :-("

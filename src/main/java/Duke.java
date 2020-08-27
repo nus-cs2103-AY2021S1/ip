@@ -1,6 +1,11 @@
 public class Duke {
+    /** Object dealing with loading/saving tasks. */
     private final Storage storage;
+    
+    /** Objects containing the list of tasks. */
     private TaskList tasks;
+    
+    /** Object dealing with interactions with user. */
     private final Ui ui;
 
     /**

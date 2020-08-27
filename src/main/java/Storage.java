@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Storage {
+    /** Destination path of duke.txt file. */
     protected String filePath;
 
     /**
