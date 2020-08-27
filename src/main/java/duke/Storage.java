@@ -40,6 +40,7 @@ public class Storage {
         this.storageFile = new File(this.path.toString());
         this.pathExists = Files.exists(this.path);
         this.fileBuffer = new ArrayList<>();
+        System.out.println("File exists?" + this.getFileStatus());
     }
 
 
@@ -59,7 +60,7 @@ public class Storage {
      * @return if file exists.
      */
     public boolean fileExists() {
-        return this.pathExists;
+        return Files.exists(this.path);
     }
 
 
@@ -97,7 +98,7 @@ public class Storage {
             if (fileBuffer.size() > 0) {
                 if (!fileExists()) {
                     // creates the file if not found
-                    this.createFile();
+                    boolean isFileCreated = this.createFile();
                 }
 
                 FileWriter fWriter = new FileWriter(storageFile);
