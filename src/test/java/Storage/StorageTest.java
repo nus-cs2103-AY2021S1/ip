@@ -1,15 +1,15 @@
 package storage;
 
-import tasks.Task;
-
 import java.util.ArrayList;
+
+import tasks.Task;
 
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class StorageTest {
-    private Storage store = new Storage("test.txt");
+    private final Storage store = new Storage("test.txt");
 
     @Test
     public void load() {

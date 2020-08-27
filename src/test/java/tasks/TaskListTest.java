@@ -1,10 +1,10 @@
-package tasklist;
+package tasks;
 
 import command.Command;
 import storage.Storage;
 
 import org.junit.jupiter.api.Test;
-import tasks.TaskList;
+
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
