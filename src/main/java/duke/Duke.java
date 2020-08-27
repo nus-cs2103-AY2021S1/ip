@@ -7,14 +7,17 @@ import duke.command.Command;
 import duke.exception.DukeException;
 import duke.task.TaskList;
 
-
 public class Duke {
     private static final Path filePath = Paths.get(".", "data", "duke.txt");
+
     private final Storage storage;
     private final Ui ui;
     private TaskList tasks;
 
-    Duke() {
+    /**
+     * Initialises a new instance of Duke
+     */
+    public Duke() {
         this.ui = new Ui();
         this.storage = new Storage(Duke.filePath);
 
@@ -53,6 +56,13 @@ public class Duke {
                 ui.showError(e.getMessage());
             }
         }
+    }
 
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    public String getResponse(String input) {
+        return "Duke heard: " + input;
     }
 }
