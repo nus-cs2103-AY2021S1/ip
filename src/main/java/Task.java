@@ -15,7 +15,7 @@ public class Task {
         isDone = true;
     }
     
-    public static Task taskify(String taskString) { 
+    public static Task taskify(String taskString) throws DukeException { 
         char taskType = taskString.charAt(1);
         boolean isTaskDone = taskString.charAt(4) == '\u2713';
         Task result;
