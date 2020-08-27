@@ -11,6 +11,10 @@ public class Todo extends Task {
         return "[T]" + super.toString();
     }
 
+    /**
+     * generates string of task to save in storage file.
+     * @return string of task.
+     */
     @Override
     public String stringToSave() {
         char status = this.isDone ? '1' : '0';

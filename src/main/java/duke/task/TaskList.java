@@ -5,12 +5,18 @@ import java.util.ArrayList;
 public class TaskList {
     private ArrayList<Task> list;
 
-    public TaskList () {
+    /**
+     * constructor for tasklist if no list was retrieved from storage.
+     */
+    public TaskList() {
         this.list = new ArrayList<>();
     }
 
-    // overloaded constructor
-    public TaskList (ArrayList<Task> newList) {
+    /**
+     * overloaded constructor for tasklist if list was retrieved from storage.
+     * @param newList list generated from tasks in storage.
+     */
+    public TaskList(ArrayList<Task> newList) {
         this.list = newList;
     }
 
@@ -19,14 +25,12 @@ public class TaskList {
     }
 
     public void deleteItem(int itemIndex) {
-        Task t = list.get(itemIndex);
         list.remove(itemIndex);
     }
 
     public Task getItem(int index) {
         return list.get(index);
     }
-
 
     public int getTasksLeft() {
         return this.list.size();

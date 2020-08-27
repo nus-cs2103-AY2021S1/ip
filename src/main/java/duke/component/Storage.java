@@ -18,6 +18,10 @@ public class Storage {
     private final Path filePath;
     private List<String> listOfTaskStrings;
 
+    /**
+     * constructor for Storage instance.
+     * @param filePath specifies where to search for the txt file to take in tasks from storage.
+     */
     public Storage(Path filePath) {
         this.filePath = filePath;
         try {
@@ -39,6 +43,11 @@ public class Storage {
         }
     }
 
+    /**
+     * retrieves the tasks from storage and returns a list of it formatted as Tasks.
+     * @return list of tasks from storage.
+     * @throws DukeException exception thrown when exception caught while running.
+     */
     public ArrayList<Task> getListOfTasks() throws DukeException {
         ArrayList<Task> listOfTasks = new ArrayList<>();
 
@@ -84,8 +93,8 @@ public class Storage {
                     listOfTasks.add(tempTask);
                     break;
 
-                    default:
-                        throw new DukeException("duke.task.Task was not recognised: " + stringTask);
+                default:
+                    throw new DukeException("duke.task.Task was not recognised: " + stringTask);
 
                 }
             }
@@ -98,7 +107,12 @@ public class Storage {
         return listOfTasks;
     }
 
-    private String convertBackDateTime (String dateTime) {
+    /**
+     * converts datetime formatted string back to resemble input date and time.
+     * @param dateTime string of formatted datetime.
+     * @return string of date time resembling input.
+     */
+    private String convertBackDateTime(String dateTime) {
         String dateUnconverted = dateTime.substring(1, 12);
         String timeConverted = dateTime.substring(13, 18);
 
@@ -113,7 +127,9 @@ public class Storage {
         return " " + dateConverted + " " + timeConverted;
     }
 
-    // Overwrites file at that location with updated information
+    /**
+     * updates storage with updated information.
+     */
     public void saveFile() {
         if (!listOfTaskStrings.isEmpty()) {
             try {
@@ -129,20 +145,30 @@ public class Storage {
         }
     }
 
-    // saved task to list of tasks and overwrites file on HARD DRIVE
+    /**
+     * adds task to list and updates storage.
+     * @param task task to add.
+     */
     public void addTask(Task task) {
         String taskString = task.stringToSave();
         this.listOfTaskStrings.add(taskString);
         this.saveFile();
     }
 
-    // deletes task to list of tasks and overwrites file on HARD DRIVE
-    public void deleteTask(int index){
+    /**
+     * deletes task from list and updates storage.
+     * @param index index of task to delete.
+     */
+    public void deleteTask(int index) {
         this.listOfTaskStrings.remove(index);
         this.saveFile();
     }
 
-    // changes task in list of tasks and overwrites file on HARD DRIVE
+    /**
+     * modifies task and updates storage.
+     * @param task task to modify.
+     * @param index index of task to modify.
+     */
     public void modifyTask(Task task, int index) {
         String taskString = task.stringToSave();
         this.listOfTaskStrings.set(index, taskString);
