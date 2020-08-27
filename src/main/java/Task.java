@@ -2,7 +2,7 @@ public class Task {
     protected final String name;
     protected Boolean isDone;
 
-    Task(String name) {
+    protected Task(String name) {
         this.name = name;
         this.isDone = false;
     }

@@ -123,7 +123,7 @@ public class Duke {
                 else if (input.length() >= 5 && input.substring(0,5).toUpperCase().equals(Commands.TODO.getString())) {
                     try {
                         String name = input.substring(5).trim();
-                        addToStorageList(new Todo(name));
+                        addToStorageList(Todo.createTodo(name));
                     } catch (DukeException ex) {
                         printError(ex.getMessage());
                     }
@@ -137,9 +137,9 @@ public class Duke {
                             name = input.substring(6, limiterPosition).trim();
                             timing = input.substring(limiterPosition + 5).trim();
                         } else {
-                            throw new DukeException("Missing date/time for Event task");
+                            throw new DukeException("Missing date for Event task");
                         }
-                        addToStorageList(new Event(name, timing));
+                        addToStorageList(Event.createEvent(name, timing));
                     } catch (DukeException ex) {
                         printError(ex.getMessage());
                     }
@@ -156,7 +156,7 @@ public class Duke {
                         } else {
                             throw new DukeException("Missing deadline for Deadline task");
                         }
-                        addToStorageList(new Deadline(name, dueDate));
+                        addToStorageList(Deadline.createDeadline(name, dueDate));
                     } catch (DukeException ex) {
                         printError(ex.getMessage());
                     }
