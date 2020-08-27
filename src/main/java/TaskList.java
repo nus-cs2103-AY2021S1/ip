@@ -7,20 +7,41 @@ enum ListChange
 
 public class TaskList {
     protected List<Task> tasks;
-    
+
+    /**
+     * Constructs a new TaskList object.
+     *
+     * @param taskList List of Tasks.
+     */
     public TaskList(List<Task> taskList) {
         tasks = taskList;
     }
 
+    /**
+     * Gets the list of tasks.
+     * 
+     * @return List of Tasks.
+     */
     public List<Task> getTasks() {
         return this.tasks;
     }
-    
+
+    /**
+     * Finds the number of tasks in the task list.
+     * 
+     * @return Number of tasks.
+     */
     public String numTasks() {
         int numTasks = tasks.size();
         return numTasks == 1 ? "1 task" : numTasks + " tasks";
     }
 
+    /**
+     * Prints the correct message to signify adding/deleting a task.
+     * 
+     * @param task Task to be added or deleted.
+     * @param change Enum of ADD or DELETE depending on command.
+     */
     public void listChangePrint(Task task, ListChange change) {
         String keyword = "";
         switch (change) {
@@ -34,7 +55,10 @@ public class TaskList {
         System.out.println("Noted. I've " + keyword + " this task:\n" + task.toString());
         System.out.println("Now you have " + this.numTasks() + " in the list.");
     }
-    
+
+    /**
+     * Prints the tasks in the task list sequentially.
+     */
     public void printList() {
         for (int i = 0; i < tasks.size(); i++) {
             System.out.println(i + 1 + "." + tasks.get(i).toString());
@@ -100,7 +124,10 @@ public class TaskList {
             new DukeException("invalidDelete");
         }
     }
-    
+
+    /**
+     * Returns the default invalid command error.
+     */
     public void defaultError() {
         new DukeException("invalidCommand");
     }

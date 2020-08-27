@@ -5,11 +5,21 @@ import java.util.List;
 
 public class Storage {
     protected String filePath;
-    
+
+    /**
+     * Constructs new Storage object.
+     * 
+     * @param path
+     */
     public Storage(String path) {
         filePath = path;
     }
 
+    /**
+     * Creates the data folder and duke.txt file if absent.
+     *
+     * @return Destination path of duke.txt file.
+     */
     public static String getFilePath() {
         try {
             boolean doesDataExist = new File("./data").exists();
@@ -22,7 +32,12 @@ public class Storage {
         }
         return "./data/duke.txt";
     }
-    
+
+    /**
+     * Loads the contents from the (saved) duke.txt file.
+     *
+     * @return List of (saved) Tasks.
+     */
     public List<Task> load() {
         List<Task> tasks = new ArrayList<>();
 
@@ -38,7 +53,12 @@ public class Storage {
 
         return tasks;
     }
-    
+
+    /**
+     * Writes updated list of tasks into the duke.txt file.
+     *
+     * @param tasks List of Tasks to be saved.
+     */
     public void save(List<Task> tasks) {
         try {
             if (tasks.size() == 0) {
