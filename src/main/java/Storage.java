@@ -5,11 +5,18 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
 
+/**
+ * store data file -> load, save
+ */
 public class Storage {
 
     public Storage() {
 
     }
+
+    /**
+     * read data from file data/duke.txt
+     */
     public static ArrayList<Task> readData() {
         ArrayList<Task> tasks = new ArrayList<>();
         try {
@@ -43,6 +50,9 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * save to data file
+     */
     public static void updateDataFile(ArrayList<Task> tasks) {
         try {
             File myObj = new File("data");
@@ -56,6 +66,9 @@ public class Storage {
         }
     }
 
+    /**
+     * data format
+     */
     public static String listToDataString(ArrayList<Task> tasks) {
         String res = "";
         res += tasks.size() + "\n";

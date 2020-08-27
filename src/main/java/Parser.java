@@ -1,10 +1,17 @@
 //package duke;
+/**
+ * translate command -> name and time
+ */
 public class Parser {
 
     public Parser() {
 
     }
 
+    /**
+     * get name
+     * by command
+     */
     public String getNameBy(String cmd) {
         for (int i = 0; i < cmd.length(); ++i) {
             if (cmd.charAt(i) == '/' && cmd.charAt(i + 1) == 'b' && cmd.charAt(i + 2) == 'y') {
@@ -14,6 +21,10 @@ public class Parser {
         return "";
     }
 
+    /**
+     * get deadline
+     * by command
+     */
     public String getDeadlineBy(String cmd) {
         for (int i = 0; i < cmd.length(); ++i) {
             if (cmd.charAt(i) == '/' && cmd.charAt(i + 1) == 'b' && cmd.charAt(i + 2) == 'y') {
@@ -23,6 +34,10 @@ public class Parser {
         return "";
     }
 
+    /**
+     * getname
+     * at command
+     */
     public String getNameAt(String cmd) {
         for (int i = 0; i < cmd.length(); ++i) {
             if (cmd.charAt(i) == '/' && cmd.charAt(i + 1) == 'a' && cmd.charAt(i + 2) == 't') {
@@ -32,6 +47,10 @@ public class Parser {
         return "";
     }
 
+    /**
+     * get time
+     * at command
+     */
     public String getDeadlineAt(String cmd) {
         for (int i = 0; i < cmd.length(); ++i) {
             if (cmd.charAt(i) == '/' && cmd.charAt(i + 1) == 'a' && cmd.charAt(i + 2) == 't') {

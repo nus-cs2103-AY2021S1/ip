@@ -6,7 +6,9 @@ import java.io.FileWriter;
 import java.io.FileNotFoundException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-
+/**
+ * Duke the best chatbot hehe
+ */
 public class Duke {
 
     private Storage storage;
@@ -14,6 +16,9 @@ public class Duke {
     private Ui ui;
     private Parser parser;
 
+    /**
+     * Init Duke
+     */
     public Duke() {
         ui = new Ui();
         storage = new Storage();
@@ -21,10 +26,16 @@ public class Duke {
         parser = new Parser();
     }
 
+    /**
+     * Main
+     */
     public static void main(String[] args) {
         new Duke().run();
     }
 
+    /**
+     * Take in command
+     */
     public void run() {
         ui.sayHi();
         Scanner myScanner = new Scanner(System.in);
@@ -111,7 +122,9 @@ public class Duke {
         }
     }
 
-
+    /**
+     * check if date is yyyy-mm-dd, then format to MMM d yyyy
+     */
     public static String formatDate(String str) {
         LocalDate d;
         try {
@@ -122,6 +135,9 @@ public class Duke {
         return d.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
     }
 
+    /**
+     * check if the command is valid
+     */
     public static void checkCmd(String cmd, int len, String Ex) throws DukeException {
         if(cmd.length() == len) throw new DukeException(Ex);
     }
