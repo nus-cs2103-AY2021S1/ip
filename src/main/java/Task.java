@@ -11,6 +11,10 @@ public class Task {
         return isDone ?  "\u2713" : "\u2718";
     }
 
+    public String getDate() {
+        return "";
+    }
+
     public void markAsDone() {
         this.isDone = true;
     }

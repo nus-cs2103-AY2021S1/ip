@@ -2,6 +2,7 @@
 ../src/main/java/RangeIndexException.java
 ../src/main/java/NullTaskNameException.java
 ../src/main/java/NullDoneIndexException.java
+../src/main/java/TaskType.java
 ../src/main/java/Event.java
 ../src/main/java/EmptyTasksException.java
 ../src/main/java/Task.java
