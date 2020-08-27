@@ -1,5 +1,10 @@
 package duke;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import org.junit.jupiter.api.Test;
+
 import duke.command.AddCommand;
 import duke.command.ByeCommand;
 import duke.command.Command;
@@ -12,10 +17,7 @@ import duke.exception.InvalidTaskIdException;
 import duke.exception.MissingKeywordException;
 import duke.exception.MissingTaskDetailsException;
 import duke.exception.MissingTaskIdException;
-import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ParserTest {
     @Test
@@ -117,8 +119,8 @@ public class ParserTest {
         } catch (DukeException e) {
             assertTrue(e instanceof InvalidTaskIdException);
             assertEquals(
-                    "☹ OOPS!!! Failed to mark task as complete! Please key in only the integer " +
-                            "representing the task!", e.getMessage());
+                    "☹ OOPS!!! Failed to mark task as complete! Please key in only the integer "
+                            + "representing the task!", e.getMessage());
         }
     }
 
@@ -163,8 +165,8 @@ public class ParserTest {
             Parser.parse("delete task1");
         } catch (DukeException e) {
             assertTrue(e instanceof InvalidTaskIdException);
-            assertEquals("☹ OOPS!!! Failed to delete task! Please key in only the integer " +
-                    "representing the task!", e.getMessage());
+            assertEquals("☹ OOPS!!! Failed to delete task! Please key in only the integer "
+                    + "representing the task!", e.getMessage());
         }
     }
 

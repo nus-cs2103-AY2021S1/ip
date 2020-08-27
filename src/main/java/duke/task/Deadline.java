@@ -1,10 +1,10 @@
 package duke.task;
 
-import duke.exception.InvalidDateInputException;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+import duke.exception.InvalidDateInputException;
 
 /**
  * Encapsulates a task that needs to be done by a particular date.

@@ -1,11 +1,12 @@
 package duke;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 import duke.command.Command;
 import duke.exception.DukeException;
 import duke.task.TaskList;
 
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
 public class Duke {
     private static final Path filePath = Paths.get(".", "data", "duke.txt");

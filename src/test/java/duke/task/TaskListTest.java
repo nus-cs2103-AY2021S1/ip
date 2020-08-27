@@ -1,12 +1,14 @@
 package duke.task;
 
-import duke.exception.InvalidDateInputException;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
+
+import duke.exception.InvalidDateInputException;
+
 
 public class TaskListTest {
 
@@ -78,8 +80,8 @@ public class TaskListTest {
 
         TaskList tasks = new TaskList(testInputTasks);
         TaskList filteredTasks = tasks.search("blah");
-        assertEquals("1. [T][✘] todo blahblah\n2. [D][✘] deadline blah (by: Dec 30 2020)\n" +
-                "3. [E][✘] event blah blah (at: Dec 30 2020)", filteredTasks.toString());
+        assertEquals("1. [T][✘] todo blahblah\n2. [D][✘] deadline blah (by: Dec 30 2020)\n"
+                + "3. [E][✘] event blah blah (at: Dec 30 2020)", filteredTasks.toString());
     }
 
     @Test
@@ -93,8 +95,8 @@ public class TaskListTest {
 
         TaskList tasks = new TaskList(testInputTasks);
         TaskList filteredTasks = tasks.search("BLAh");
-        assertEquals("1. [T][✘] todo blaH\n2. [D][✘] deadline BLAH (by: Dec 30 2020)\n" +
-                "3. [E][✘] event blah blah (at: Dec 30 2020)", filteredTasks.toString());
+        assertEquals("1. [T][✘] todo blaH\n2. [D][✘] deadline BLAH (by: Dec 30 2020)\n"
+                + "3. [E][✘] event blah blah (at: Dec 30 2020)", filteredTasks.toString());
     }
 
     @Test
@@ -113,8 +115,8 @@ public class TaskListTest {
         testInputTasks.add(new Event("event desc1", "2020-12-30"));
 
         TaskList tasks = new TaskList(testInputTasks);
-        assertEquals("1. [T][✘] todo desc1\n" + "2. [T][✘] todo desc2\n" + "3. [D][✘] deadline " +
-                        "desc1 (by: Dec 30 2020)\n" + "4. [E][✘] event desc1 (at: Dec 30 2020)",
+        assertEquals("1. [T][✘] todo desc1\n" + "2. [T][✘] todo desc2\n" + "3. [D][✘] deadline "
+                        + "desc1 (by: Dec 30 2020)\n" + "4. [E][✘] event desc1 (at: Dec 30 2020)",
                 tasks.toString());
     }
 }

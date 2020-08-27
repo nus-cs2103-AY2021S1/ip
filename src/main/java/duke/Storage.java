@@ -1,12 +1,5 @@
 package duke;
 
-import duke.exception.CorruptedStorageException;
-import duke.exception.InvalidDateInputException;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.Todo;
-
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -14,6 +7,14 @@ import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
+
+import duke.exception.CorruptedStorageException;
+import duke.exception.InvalidDateInputException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
+
 
 /**
  * A class that represents the storage of the data

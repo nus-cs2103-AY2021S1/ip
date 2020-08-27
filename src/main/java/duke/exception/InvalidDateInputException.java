@@ -11,8 +11,7 @@ public class InvalidDateInputException extends DukeException {
      * @param date The invalid date the resulted in this exception.
      */
     public InvalidDateInputException(String date) {
-        super(String
-                .format("%s is not a recognised date format. Please key in dates in the format " +
-                        "yyyy-MM-dd. For example, 2007-12-03.", date));
+        super(String.format("%s is not a recognised date format. Please key in dates in the format "
+                + "yyyy-MM-dd. For example, 2007-12-03.", date));
     }
 }
