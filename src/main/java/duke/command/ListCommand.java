@@ -2,6 +2,9 @@ package duke.command;
 
 import duke.component.*;
 
+/**
+ * Represents a command for listing all existing tasks.
+ */
 public class ListCommand extends Command {
     /**
      * Creates a command for getting the current entire list.
