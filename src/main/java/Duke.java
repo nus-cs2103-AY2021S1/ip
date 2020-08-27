@@ -4,6 +4,12 @@ import java.util.ListIterator;
 import java.util.Scanner;
 
 public class Duke {
+    
+    private Storage storage;
+    private TaskList taskList;
+    private Ui ui;
+    private Parser parser;
+    
     ArrayList<Task> taskList;
 
     Duke() {
@@ -31,7 +37,7 @@ public class Duke {
                 return;
             }
         }
-        duke.initialise();
+        duke.run();
     }
     
     private void readSaveFile(File saveFile) throws Exception {
@@ -68,7 +74,7 @@ public class Duke {
         }
     }
     
-    private void initialise() {
+    private void run() {
         Scanner sc = new Scanner(System.in);
         greet();
         while (sc.hasNextLine()) {
@@ -98,11 +104,7 @@ public class Duke {
         exit();
     }
 
-    private void greet() {
-        System.out.println("    ____________________________________________________________\n" +
-                "     Hello! I'm Duke \n     What can I do for you?\n" +
-                "    ____________________________________________________________");
-    }
+
 
     private void echo(String command) {
         System.out.println("    ____________________________________________________________\n" +
