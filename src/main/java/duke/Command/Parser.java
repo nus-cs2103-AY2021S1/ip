@@ -5,12 +5,15 @@ import java.time.format.DateTimeParseException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import duke.Duke.Duke;
 import duke.Task.Deadline;
 import duke.Task.Event;
 import duke.Task.TaskList;
 import duke.Task.Todo;
 
+/**
+ * Parser class which is used to process commands passed down by the user and returns
+ * the result of each command as a String.
+ */
 public class Parser {
 
     private TaskList list;
@@ -21,10 +24,21 @@ public class Parser {
         this.isExit = false;
     }
 
+    /**
+     * Checks if the command to exit has been issued
+     * @return True if 'bye' command has been issued, False otherwise.
+     */
     public boolean isExit() {
         return isExit;
     }
 
+    /**
+     * The function that processes the incoming command and executes different
+     * functions depending on the command.
+     * @param command String command provided by the user.
+     * @return String result of the provided command.
+     * @throws DukeException A custom Exception that carries a message for the user if thrown.
+     */
     public String processCommand(String command) throws DukeException {
         Pattern pattern = Pattern.compile("^(.*?)\\s(.*?)(?:\\s/..\\s?(.*))?$");
         Matcher matcher = pattern.matcher(command);
@@ -73,6 +87,14 @@ public class Parser {
         throw new DukeException("Sorry, I did not understand: " + command + ".\nUse \"help\" to look at available commands.");
     }
 
+    /**
+     * Helper function to process Task related commands.
+     * @param com The type of Task.
+     * @param task The description of the Task.
+     * @param date The date of the Task to be done at or by (if applicable).
+     * @return String result of the function executed.
+     * @throws DukeException A custom Exception that carries a message for the user if thrown.
+     */
     private String processTask(String com, String task, String date) throws DukeException {
 
         switch(com) {
@@ -107,6 +129,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Helper function to process list related commands.
+     * @param com The command keyword that interacts with the list.
+     * @param index The index of which the command wishes to act on.
+     * @return String result of the function executed.
+     * @throws DukeException A custom Exception that carries a message for the user if thrown.
+     */
     private String processList(String com, String index) throws DukeException {
 
         switch(com) {
@@ -133,6 +162,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Helper function to convert a date String into a LocalDate object.
+     * @param date The date String to be converted.
+     * @return LocalDate object that follows the input date String.
+     * @throws DateTimeParseException thrown if the inputted date is invalid.
+     */
     private static LocalDate convertDate(String date) throws DateTimeParseException {
         if (date == null) {
             return null;

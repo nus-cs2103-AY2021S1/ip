@@ -3,6 +3,9 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 
+/**
+ * Deadline task that takes in a description and date.
+ */
 public class Deadline extends Task {
 
     LocalDate date;

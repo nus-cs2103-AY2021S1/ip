@@ -3,6 +3,9 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 
+/**
+ * Event task that takes in a description and a date.
+ */
 public class Event extends Task {
 
     LocalDate date;

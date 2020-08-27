@@ -5,6 +5,9 @@ import duke.Command.Parser;
 import duke.Storage.Storage;
 import duke.Task.TaskList;
 
+/**
+ * Duke class that runs the Duke chat bot program.
+ */
 public class Duke {
 
     private Storage storage;
@@ -19,6 +22,9 @@ public class Duke {
         this.parser = new Parser(this.list);
     }
 
+    /**
+     * Begin the Duke chat bot program.
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;
