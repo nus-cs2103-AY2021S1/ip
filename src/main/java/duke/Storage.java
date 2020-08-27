@@ -33,9 +33,9 @@ public class Storage {
      */
     public void save(List<Task> tasks) throws DukeException {
         try {
-            Files.createDirectories(filePath.getParent());
+            Files.createDirectories(this.filePath.getParent());
             List<String> data = tasks.stream().map(Task::toSaveData).collect(Collectors.toList());
-            Files.write(filePath, data);
+            Files.write(this.filePath, data);
         } catch (IOException e) {
             throw new DukeException("Unable to save file! Exiting without saving :-(");
         }
@@ -50,9 +50,9 @@ public class Storage {
     public List<Task> load() throws DukeException {
         List<Task> tasks = new ArrayList<>();
 
-        if (Files.exists(filePath)) {
+        if (Files.exists(this.filePath)) {
             try {
-                List<String> lines = Files.readAllLines(filePath);
+                List<String> lines = Files.readAllLines(this.filePath);
 
                 for (String line : lines) {
                     String[] params = line.split("\\s\\|\\s");

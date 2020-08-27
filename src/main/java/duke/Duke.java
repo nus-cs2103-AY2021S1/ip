@@ -7,39 +7,39 @@ import duke.command.Command;
  */
 public class Duke {
     private final Storage storage;
-    private final TaskList tasks;
+    private final TaskList taskList;
     private final Ui ui;
 
     public Duke(String filePath) {
         this.ui = new Ui();
         this.storage = new Storage(filePath);
-        TaskList tasks;
+        TaskList taskList;
 
         try {
-            tasks = new TaskList(storage.load());
+            taskList = new TaskList(this.storage.load());
         } catch (DukeException e) {
-            ui.showError(e.getMessage());
-            tasks = new TaskList();
+            this.ui.showError(e.getMessage());
+            taskList = new TaskList();
         }
 
-        this.tasks = tasks;
+        this.taskList = taskList;
     }
 
     /**
      * Runs the main program.
      */
     public void run() {
-        ui.showWelcome();
+        this.ui.showWelcome();
         boolean isExit = false;
 
         while (!isExit) {
             try {
-                String fullCommand = ui.readCommand();
+                String fullCommand = this.ui.readCommand();
                 Command command = Parser.parse(fullCommand);
-                command.execute(tasks, ui, storage);
+                command.execute(this.taskList, this.ui, this.storage);
                 isExit = command.isExit();
             } catch (DukeException e) {
-                ui.showError(e.getMessage());
+                this.ui.showError(e.getMessage());
             }
         }
     }

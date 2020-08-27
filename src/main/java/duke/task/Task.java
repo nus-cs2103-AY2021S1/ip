@@ -23,7 +23,7 @@ public abstract class Task {
     public abstract boolean isDue(LocalDate date);
 
     public boolean hasKeyword(String keyword) {
-        return description.contains(keyword);
+        return this.description.contains(keyword);
     }
     
     /**
@@ -32,14 +32,14 @@ public abstract class Task {
      * @return a tick if the task is done, and a cross otherwise.
      */
     public String getStatusIcon() {
-        return isDone ? "\u2713" : "\u2718";
+        return this.isDone ? "\u2713" : "\u2718";
     }
 
     /**
      * Mark the task as done.
      */
     public void markAsDone() {
-        isDone = true;
+        this.isDone = true;
     }
 
     /**
@@ -48,7 +48,7 @@ public abstract class Task {
      * @return a string representation of the task.
      */
     public String toSaveData() {
-        return (isDone ? 1 : 0) + " | " + description;
+        return (this.isDone ? 1 : 0) + " | " + this.description;
     }
 
     /**
@@ -58,6 +58,6 @@ public abstract class Task {
      */
     @Override
     public String toString() {
-        return "[" + getStatusIcon() + "] " + description;
+        return "[" + this.getStatusIcon() + "] " + this.description;
     }
 }

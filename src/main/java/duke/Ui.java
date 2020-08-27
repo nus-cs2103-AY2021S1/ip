@@ -16,7 +16,7 @@ public class Ui {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
 
-        showPrompt(LOGO
+        this.showPrompt(LOGO
                 + "Hello! I'm Duke\n"
                 + "What can I do for you?\n"
         );
@@ -46,11 +46,11 @@ public class Ui {
     }
 
     public void showPrompt(String promptText) {
-        showPrompt(promptText, false);
+        this.showPrompt(promptText, false);
     }
 
     public void showError(String errorText) {
-        showPrompt(errorText, true);
+        this.showPrompt(errorText, true);
     }
 
     /**

@@ -31,11 +31,11 @@ public class Parser {
      * @throws DukeException if the string cannot be parsed.
      */
     public static LocalDateTime parseDateTime(String dateTime) throws DukeException {
-        String[] dateTimes = dateTime.split("\\s");
+        String[] dateTimes = dateTime.split("\\s+");
         String date = dateTimes[0];
         String time = dateTimes.length > 1 ? String.join(" ", Arrays.copyOfRange(dateTimes, 1, dateTimes.length)) : "";
 
-        return LocalDateTime.of(parseDate(date), parseTime(time));
+        return LocalDateTime.of(Parser.parseDate(date), Parser.parseTime(time));
     }
 
     /**
@@ -118,7 +118,7 @@ public class Parser {
                 throw new DukeException("Date required for the due command.");
             }
 
-            return new DueCommand(parseDate(args));
+            return new DueCommand(Parser.parseDate(args));
         case "done":
             if (args.isBlank()) {
                 throw new DukeException("Task number required for the done command.");
@@ -136,6 +136,10 @@ public class Parser {
 
             return new DeleteCommand(Integer.parseInt(args));
         case "find":
+            if (args.isBlank()) {
+                throw new DukeException("Keyword cannot be blank.");
+            }
+
             return new FindCommand(args);
         case "todo":
             return new AddCommand(TaskType.TODO, args);
@@ -146,7 +150,7 @@ public class Parser {
                     ? String.join(" ", Arrays.copyOfRange(deadlineArgs, 1, deadlineArgs.length))
                     : "";
 
-            return new AddCommand(TaskType.DEADLINE, description, parseDateTime(by));
+            return new AddCommand(TaskType.DEADLINE, description, Parser.parseDateTime(by));
         }
         case "event": {
             String[] eventArgs = args.split("\\s/at\\s");
@@ -155,7 +159,7 @@ public class Parser {
                     ? String.join(" ", Arrays.copyOfRange(eventArgs, 1, eventArgs.length))
                     : "";
 
-            return new AddCommand(TaskType.EVENT, description, parseDateTime(at));
+            return new AddCommand(TaskType.EVENT, description, Parser.parseDateTime(at));
         }
         default:
             throw new DukeException("I'm sorry, but I don't know what that means :-(");

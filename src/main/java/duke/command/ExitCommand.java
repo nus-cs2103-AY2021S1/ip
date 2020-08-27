@@ -12,14 +12,14 @@ public class ExitCommand extends Command {
     /**
      * Executes the command, exiting the program.
      *
-     * @param tasks TaskList instance
+     * @param taskList TaskList instance
      * @param ui Ui instance
      * @param storage Storage instance
      * @throws DukeException if the tasks cannot be saved.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        storage.save(tasks.getTasks());
+    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+        storage.save(taskList.getTasks());
         ui.showPrompt("Bye. Hope to see you again soon!");
     }
 

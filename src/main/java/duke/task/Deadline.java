@@ -27,18 +27,18 @@ public class Deadline extends Task {
      */
     @Override
     public boolean isDue(LocalDate date) {
-        return by.toLocalDate().equals(date);
+        return this.by.toLocalDate().equals(date);
     }
 
     @Override
     public String toSaveData() {
-        return "D | " + super.toSaveData() + " | " + by;
+        return "D | " + super.toSaveData() + " | " + this.by;
     }
 
     @Override
     public String toString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d MMM yyyy, h:mm a");
 
-        return "[D]" + super.toString() + " (by: " + by.format(formatter) + ")";
+        return "[D]" + super.toString() + " (by: " + this.by.format(formatter) + ")";
     }
 }

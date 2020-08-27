@@ -30,16 +30,16 @@ public class AddCommand extends Command {
     /**
      * Executes the command, adding a task to the provided TaskList.
      *
-     * @param tasks TaskList instance
+     * @param taskList TaskList instance
      * @param ui Ui instance
      * @param storage Storage instance
      * @throws DukeException if the task cannot be added.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        Task task = tasks.addTask(type, description, dateTime);
+    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+        Task task = taskList.addTask(this.type, this.description, this.dateTime);
         ui.showPrompt("Got it. I've added this task:\n  "
-                + task + "\n" + "Now you have " + tasks.getTasks().size()
-                + (tasks.getTasks().size() == 1 ? " task" : " tasks") + " in the list.");
+                + task + "\n" + "Now you have " + taskList.getTasks().size()
+                + (taskList.getTasks().size() == 1 ? " task" : " tasks") + " in the list.");
     }
 }

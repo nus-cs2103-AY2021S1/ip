@@ -23,26 +23,26 @@ public class DueCommand extends Command {
     /**
      * Executes the command, listing all tasks due on the provided date.
      *
-     * @param tasks TaskList instance
+     * @param taskList TaskList instance
      * @param ui Ui instance
      * @param storage Storage instance
      * @throws DukeException if there are no tasks in the TaskList due on the provided date.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        List<Task> dueTasks = tasks.getDueTasks(date);
+    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+        List<Task> dueTasks = taskList.getDueTasks(this.date);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d MMM yyyy");
 
         if (dueTasks.size() == 0) {
             throw new DukeException("There are no tasks in your list occurring on "
-                    + date.format(formatter) + ".");
+                    + this.date.format(formatter) + ".");
         }
 
         StringBuilder output = new StringBuilder("Here are the tasks in your list occurring on "
-                + date.format(formatter) + ":\n");
+                + this.date.format(formatter) + ":\n");
 
         for (Task task : dueTasks) {
-            output.append(tasks.getTasks().indexOf(task) + 1).append(".").append(task).append('\n');
+            output.append(taskList.getTasks().indexOf(task) + 1).append(".").append(task).append('\n');
         }
 
         ui.showPrompt(output.toString());

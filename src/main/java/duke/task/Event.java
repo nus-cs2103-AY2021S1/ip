@@ -27,18 +27,18 @@ public class Event extends Task {
      */
     @Override
     public boolean isDue(LocalDate date) {
-        return at.toLocalDate().equals(date);
+        return this.at.toLocalDate().equals(date);
     }
 
     @Override
     public String toSaveData() {
-        return "E | " + super.toSaveData() + " | " + at;
+        return "E | " + super.toSaveData() + " | " + this.at;
     }
 
     @Override
     public String toString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d MMM yyyy, h:mm a");
 
-        return "[E]" + super.toString() + " (at: " + at.format(formatter) + ")";
+        return "[E]" + super.toString() + " (at: " + this.at.format(formatter) + ")";
     }
 }

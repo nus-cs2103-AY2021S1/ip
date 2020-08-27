@@ -12,12 +12,12 @@ public abstract class Command {
     /**
      * Executes the command.
      *
-     * @param tasks TaskList instance
+     * @param taskList TaskList instance
      * @param ui Ui instance
      * @param storage Storage instance
      * @throws DukeException If the command cannot be completed.
      */
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
+    public abstract void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException;
 
     /**
      * Returns boolean indicating program exit status.

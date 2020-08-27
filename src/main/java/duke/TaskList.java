@@ -32,7 +32,7 @@ public class TaskList {
         case EVENT:
             return addEvent(description, dateTime);
         default:
-            return null;
+            throw new DukeException("Task type not recognised!");
         }
     }
 
@@ -42,7 +42,7 @@ public class TaskList {
         }
 
         Todo todo = new Todo(description);
-        tasks.add(todo);
+        this.tasks.add(todo);
 
         return todo;
     }
@@ -53,7 +53,7 @@ public class TaskList {
         }
 
         Deadline deadline = new Deadline(description, by);
-        tasks.add(deadline);
+        this.tasks.add(deadline);
 
         return deadline;
     }
@@ -64,42 +64,42 @@ public class TaskList {
         }
 
         Event event = new Event(description, at);
-        tasks.add(event);
+        this.tasks.add(event);
 
         return event;
     }
 
     public Task getTask(int taskNo) throws DukeException {
-        if (taskNo <= 0 || taskNo > tasks.size()) {
+        if (taskNo <= 0 || taskNo > this.tasks.size()) {
             throw new DukeException("Task " + taskNo + " does not exist.");
         }
 
-        return tasks.get(taskNo - 1);
+        return this.tasks.get(taskNo - 1);
     }
 
     public Task doTask(int taskNo) throws DukeException {
-        Task task = getTask(taskNo);
+        Task task = this.getTask(taskNo);
 
         task.markAsDone();
         return task;
     }
 
     public Task deleteTask(int taskNo) throws DukeException {
-        Task task = getTask(taskNo);
+        Task task = this.getTask(taskNo);
 
-        tasks.remove(task);
+        this.tasks.remove(task);
         return task;
     }
 
     public List<Task> getDueTasks(LocalDate date) {
-        return tasks.stream().filter(task -> task.isDue(date)).collect(Collectors.toList());
+        return this.tasks.stream().filter(task -> task.isDue(date)).collect(Collectors.toList());
     }
 
     public List<Task> findTasks(String keyword) {
-        return tasks.stream().filter(task -> task.hasKeyword(keyword)).collect(Collectors.toList());
+        return this.tasks.stream().filter(task -> task.hasKeyword(keyword)).collect(Collectors.toList());
     }
 
     public List<Task> getTasks() {
-        return tasks;
+        return this.tasks;
     }
 }
