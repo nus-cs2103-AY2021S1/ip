@@ -64,22 +64,22 @@ public class Ui {
      * Display the addTask message
      *
      * @param t1 Task that is added
-     * @param lst ArrayList containing all the tasks
+     * @param tasks ArrayList containing all the tasks
      */
-    public static void addTaskReply(Task t1, ArrayList<Task> lst) {
+    public static void addTaskReply(Task t1, ArrayList<Task> tasks) {
         System.out.println(INDENT + "Quack! Added: " + t1);
-        System.out.println(INDENT + "Now you have " + lst.size() + " task(s) in the list.");
+        System.out.println(INDENT + "Now you have " + tasks.size() + " task(s) in the list.");
     }
 
     /**
      * Display the contents in the List
      *
-     * @param lst ArrayList containing the tasks that are to be displayed
+     * @param tasks ArrayList containing the tasks that are to be displayed
      */
-    public static void displayListReply(ArrayList<Task> lst) {
+    public static void displayListReply(ArrayList<Task> tasks) {
         int index = 1;
         System.out.println(INDENT + "Quack! You have these in your list currently: ");
-        for (Task task : lst) {
+        for (Task task : tasks) {
             System.out.println(INDENT + index + ". " + task);
             index++;
         }

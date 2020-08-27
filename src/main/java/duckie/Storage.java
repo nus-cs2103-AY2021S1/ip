@@ -4,11 +4,14 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+
 import java.nio.file.Path;
 import java.nio.file.Paths;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -68,7 +71,7 @@ public class Storage {
      */
     public ArrayList<Task> load() throws DuckieException {
         File duckieFile = openFile();
-        ArrayList<Task> lst = new ArrayList<>();
+        ArrayList<Task> tasks = new ArrayList<>();
         try {
             Scanner sc = new Scanner(duckieFile);
             while (sc.hasNextLine()) {
@@ -84,7 +87,7 @@ public class Storage {
                     if (isDone.equals("1")) {
                         taskToDo.markDone();
                     }
-                    lst.add(taskToDo);
+                    tasks.add(taskToDo);
                     break;
                 case "D":
                     String date = taskBreakdown[3].strip();
@@ -94,7 +97,7 @@ public class Storage {
                     if (isDone.equals("1")) {
                         taskD.markDone();
                     }
-                    lst.add(taskD);
+                    tasks.add(taskD);
                     break;
                 case "E":
                     String dateTime = taskBreakdown[3].strip();
@@ -104,7 +107,7 @@ public class Storage {
                     if (isDone.equals("1")) {
                         taskE.markDone();
                     }
-                    lst.add(taskE);
+                    tasks.add(taskE);
                     break;
                 }
             }
@@ -112,25 +115,25 @@ public class Storage {
             throw new DuckieException("Quack! Duckie cannot find your File!");
         }
 
-        if (lst.size() == 0) {
+        if (tasks.size() == 0) {
             Ui.displayNoListReply();
         } else {
-            Ui.displayListReply(lst);
+            Ui.displayListReply(tasks);
             Ui.showLine();
         }
-        return lst;
+        return tasks;
     }
 
     /**
      * Update the current tasks in the TaskList to the duckie file
-     * @param lst List containing all the current tasks
+     * @param tasks List containing all the current tasks
      * @throws DuckieException
      */
-    public void saveToFile(ArrayList<Task> lst) throws DuckieException {
+    public void saveToFile(ArrayList<Task> tasks) throws DuckieException {
         try {
             FileWriter fw = new FileWriter(filePath);
             String toWrite = "";
-            for (Task t1 : lst) {
+            for (Task t1 : tasks) {
                 toWrite += (t1.getType() + (t1.isCompleted() ? " | 1 | " : " | 0 | ")
                         + t1.getDescription())
                         + (t1.getDate() != null ? "| " + t1.getDate() : "")

@@ -9,21 +9,21 @@ import duckie.Ui;
  * Contains all the saved tasks in a List form
  */
 public class TaskList {
-    private ArrayList<Task> lst;
+    private ArrayList<Task> tasks;
 
     /**
      * Instantiate an empty list
      */
     public TaskList() {
-        this.lst = new ArrayList<>();
+        this.tasks = new ArrayList<>();
     }
 
     /**
      * Instantiate a TaskList with pre-saved tasks
-     * @param lst ArrayList containing pre-saved tasks
+     * @param tasks ArrayList containing pre-saved tasks
      */
-    public TaskList(ArrayList<Task> lst) {
-        this.lst = lst;
+    public TaskList(ArrayList<Task> tasks) {
+        this.tasks = tasks;
     }
 
     /**
@@ -31,7 +31,7 @@ public class TaskList {
      * @return ArrayList containing current tasks
      */
     public ArrayList<Task> getTaskList() {
-        return lst;
+        return tasks;
     }
 
     /**
@@ -40,7 +40,7 @@ public class TaskList {
      * @return Integer index value
      */
     public int getIndex(Task task) {
-        return lst.indexOf(task);
+        return tasks.indexOf(task);
     }
 
     /**
@@ -48,7 +48,7 @@ public class TaskList {
      * @param t1 Task to be added
      */
     public void addTask(Task t1) {
-        lst.add(t1);
+        tasks.add(t1);
     }
 
     /**
@@ -56,14 +56,14 @@ public class TaskList {
      * @param ind Index of the Task in ArrayList
      */
     public void deleteTask(int ind) {
-        lst.remove(ind);
+        tasks.remove(ind);
     }
 
     /**
      * Delete all Tasks in the TaskList
      */
     public void deleteAllTasks() {
-        lst.clear();
+        tasks.clear();
     }
 
     /**
@@ -71,7 +71,7 @@ public class TaskList {
      * @param ind Index of the Task in ArrayList
      */
     public void markTaskDone(int ind) {
-        Task t1 = lst.get(ind);
+        Task t1 = tasks.get(ind);
         t1.markDone();
     }
 
@@ -80,10 +80,10 @@ public class TaskList {
      * @throws DuckieException If list is empty
      */
     public void displayList() throws DuckieException {
-        if (lst.size() == 0) {
+        if (tasks.size() == 0) {
             throw new DuckieNoListException();
         }
 
-        Ui.displayListReply(lst);
+        Ui.displayListReply(tasks);
     }
 }
