@@ -11,10 +11,6 @@ public class ToDo extends Task {
     @Override
     public ToDo markAsDone() {
         ToDo doneToDo = new ToDo(this.description, true);
-        System.out.println(" ____________________________________________________________\n " +
-                "Nice! I've marked this task as done:\n    " +
-                doneToDo.toString() +
-                "\n ____________________________________________________________");
         return doneToDo;
     }
 

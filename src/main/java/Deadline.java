@@ -18,16 +18,12 @@ public class Deadline extends Task {
     @Override
     public Deadline markAsDone() {
         Deadline doneDeadline = new Deadline(this.description, this.by, true);
-        System.out.println(" ____________________________________________________________\n " +
-                "Nice! I've marked this task as done:\n    " +
-                doneDeadline.toString() +
-                "\n ____________________________________________________________");
         return doneDeadline;
     }
 
     @Override
     public String toTxtFileFormat() {
-        return "D" + super.toTxtFileFormat() + " | " + this.by;
+        return "D" + super.toTxtFileFormat() + " | " + this.by.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
     }
 
     @Override

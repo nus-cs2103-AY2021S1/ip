@@ -18,16 +18,12 @@ public class Event extends Task{
     @Override
     public Event markAsDone() {
         Event doneEvent = new Event(this.description, this.at, true);
-        System.out.println(" ____________________________________________________________\n " +
-                "Nice! I've marked this task as done:\n    " +
-                doneEvent.toString() +
-                "\n ____________________________________________________________");
         return doneEvent;
     }
 
     @Override
     public String toTxtFileFormat() {
-        return "E" + super.toTxtFileFormat() + " | " + this.at;
+        return "E" + super.toTxtFileFormat() + " | " + this.at.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
     }
 
     @Override
