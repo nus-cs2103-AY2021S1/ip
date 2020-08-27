@@ -29,7 +29,7 @@ public class Tasklist {
     }
 
     public String toDisplayString() {
-        if (taskList.size() == 0) {
+        if (taskList.isEmpty()) {
             return "You have no tasks!";
         } else {
             String taskListString = "";
@@ -41,6 +41,18 @@ public class Tasklist {
             }
             return taskListString.trim();
         }
+    }
+
+    public String matchedTasksOnly(String query) {
+        int index = 1;
+        String matchedTasks = "";
+        for (Task task : taskList) {
+            if (task.getDescription().contains(query)) {
+                matchedTasks += index + "." + task.toDisplayString() + "\n";
+                index++;
+            }
+        }
+        return matchedTasks.trim();
     }
 
     public String toSavedString() {

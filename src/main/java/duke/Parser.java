@@ -51,6 +51,9 @@ public class Parser {
             case "todo":
                 return new AddCommand(new Todo(splitCommand[1]));
 
+            case "find":
+                return new FindCommand(splitCommand[1]);
+
             case "deadline":
                 String[] splitDeadline = splitCommand[1].split("/by");
                 String deadlineDescription = splitDeadline[0].trim();
