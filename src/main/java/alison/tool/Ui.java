@@ -44,6 +44,20 @@ public class Ui {
         }
     }
 
+    public void showMatching(TaskList tasks, String keyword) {
+        System.out.println("Here are the matching tasks in your list:");
+        for (int i = 0; i < tasks.size(); i++) {
+            Task task = tasks.get(i);
+            String description = task.getDescription();
+            String[] words = description.split(" ");
+            for (int j = 0; j < words.length; j++) {
+                if (words[j].equals(keyword)) {
+                    System.out.println(String.format("%d.%s", i+1, task));
+                }
+            }
+        }
+    }
+
     public void markDoneMsg(Task task) {
         System.out.println("Nice! I've marked this task as done: \n" + task);
     }
