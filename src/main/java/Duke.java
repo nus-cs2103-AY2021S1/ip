@@ -1,3 +1,7 @@
+/**
+ * The main class with the chat bot dealing with the user's inputs.
+ */
+
 import java.nio.file.Path;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -22,6 +26,10 @@ public class Duke {
         }
     }
 
+    /**
+     * Simulates the bot.
+     * @throws DukeException with the error message.
+     */
     public void run() throws DukeException {
 
         ui.welcome();
@@ -93,6 +101,27 @@ public class Duke {
                     ui.showNumberOfTasks(tasks);
 
                     break;
+                }
+
+                case "find": {
+
+                    ArrayList<Task> findTasks = new ArrayList<>();
+                    for (Task task : tasks) {
+                        if (task.getDescription().contains(last)) {
+                            findTasks.add(task);
+                        }
+                    }
+                    ui.printMatchingTasks();
+                    int index = 1;
+                    for (Task tsk : findTasks) {
+                        String desc = tsk.getDescription();
+                        String taskType = tsk.getType();
+                        String statusIcon = tsk.getStatusIcon();
+                        System.out.println(index + "." + "[" + taskType + "][" + statusIcon + "] " + desc);
+                        index++;
+                    }
+                    break;
+
                 }
                 case "delete": {
                     int index = Integer.parseInt(last) - 1;

@@ -1,10 +1,19 @@
+/**
+ * A class that contians Deadline tasks with the type "D".
+ */
+
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
 
     public String type;
 
+    /**
+     * Constructor.
+     * @param desc the description of the task.
+     * @param isDone the status icon of the task.
+     * @param time the time of the task.
+     */
     public Deadline(String desc, boolean isDone, LocalDate time) {
         super(desc, isDone, time);
         type = "D";
@@ -17,7 +26,6 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-//        String formattedDate = this.time.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
         return super.toString();
     }
 }

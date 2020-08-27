@@ -1,3 +1,7 @@
+/**
+ * A class responsible for saving and loading tasks to and from the hard disk respectively.
+ */
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -13,6 +17,11 @@ public class Storage {
         this.path = path;
     }
 
+    /**
+     * Loads the tasks from the hard disk. Creates a new file if the file doesnt exist.
+     * @return the arrayList containing the tasks.
+     * @throws DukeException with the failure to load message.
+     */
     public ArrayList<Task> showTasks() throws DukeException {
         try {
 
@@ -21,9 +30,9 @@ public class Storage {
                 return new ArrayList<>();
             }
 
-            Stream<Task> taskStream = Files.lines(path).map(line -> {
+            Stream<Task> taskStream = Files.lines(path).map(item -> {
 
-                String[] lineData = line.split("\\|");
+                String[] lineData = item.split("\\|");
                 String type = lineData[0].trim();
                 boolean isDone = lineData[1].trim().equals("1");
                 String description = lineData[2].trim();
@@ -60,6 +69,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Saves the tasks to the hard disk.
+     * @param taskList containing the tasks.
+     * @throws DukeException with the failure to save message
+     */
     public void saveTasks(ArrayList<Task> taskList) throws DukeException {
 
         String dataStr = "";

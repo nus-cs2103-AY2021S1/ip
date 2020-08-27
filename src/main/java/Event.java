@@ -1,10 +1,19 @@
+/**
+ * A class that contains event tasks with the type "E".
+ */
+
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 public class Event extends Task {
 
     public String type;
 
+    /**
+     * Constructor
+     * @param desc description of the task.
+     * @param isDone status icon.
+     * @param time time of the task.
+     */
     public Event(String desc, boolean isDone, LocalDate time) {
         super(desc, isDone, time);
         type = "E";
@@ -17,7 +26,6 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-//        String formattedDate = this.time.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
         return super.toString();
     }
 

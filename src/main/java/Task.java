@@ -1,11 +1,15 @@
+/**
+ * A class representing the general tasks valid for the Duke class.
+ */
+
 import java.time.LocalDate;
 
 public class Task {
 
-    public String description;
-    public boolean isDone;
-    public String type;
-    public LocalDate time;
+    protected String description;
+    protected boolean isDone;
+    protected String type;
+    protected LocalDate time;
 
     public Task(String task, boolean isDone, LocalDate time) {
 
@@ -16,6 +20,9 @@ public class Task {
 
     }
 
+    /**
+     * Marks the task as done.
+     */
     public void markAsDone() {
         this.isDone = true;
     }
@@ -24,6 +31,10 @@ public class Task {
         System.out.println("added : " + task);
     }
 
+    /**
+     * Gets the task description.
+     * @return the description of the task.
+     */
     public String getDescription() {
         return this.description;
     }
