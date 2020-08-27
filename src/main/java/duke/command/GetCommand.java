@@ -1,3 +1,8 @@
+package duke.command;
+
+import duke.*;
+import duke.task.TaskList;
+
 public class GetCommand extends Command {
 
     private String input;

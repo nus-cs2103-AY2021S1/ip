@@ -1,8 +1,10 @@
+package duke;
+
 public class DukeException extends Exception {
 
     String message;
 
-    DukeException(String input) {
+    public DukeException(String input) {
         super(input);
         message = input;
     }

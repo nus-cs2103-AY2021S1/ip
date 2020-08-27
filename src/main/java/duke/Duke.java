@@ -1,7 +1,12 @@
+package duke;
+
+import duke.command.Command;
+import duke.task.TaskList;
+
 public class Duke {
 
     private final Storage storage;
-    private  TaskList tasks;
+    private TaskList tasks;
     private final Ui ui;
 
     public Duke(String filePath) {
