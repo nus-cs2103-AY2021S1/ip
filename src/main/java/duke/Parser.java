@@ -13,16 +13,15 @@ import duke.command.InvalidCommand;
 import duke.command.ListCommand;
 import duke.command.ToDoCommand;
 
+/**
+ * Encapsulates behavior for parsing commands.
+ */
 public class Parser {
-
-    /**
-     * Encapsulates behavior for parsing commands.
-     */
 
     /**
      * Returns a Command object based on the input keyed in to Duke by
      * the user.
-     * 
+     *
      * @param fullCommand the command keyed in to Duke by the user.
      * @return Command object of the required type.
      */

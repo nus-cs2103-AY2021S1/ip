@@ -1,26 +1,32 @@
 package duke.task;
 
-import duke.DukeException;
-
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.format.FormatStyle;
 
-public class Event extends Task {
+import duke.DukeException;
 
-    /**
-     * Encapsulates data and methods specific to Event tasks.
-     */
+/**
+ * Encapsulates data and methods specific to Event tasks.
+ */
+public class Event extends Task {
 
     private final LocalDate startDate;
     private final LocalTime startTime;
     private final String originalArguments;
 
+    private Event(String taskName, String originalArguments, LocalDate startDate, LocalTime startTime) {
+        super(taskName);
+        this.originalArguments = originalArguments;
+        this.startDate = startDate;
+        this.startTime = startTime;
+    }
+    
     /**
      * Creates a new instance of the Event class if the argument provided is valid.
-     * 
+     *
      * @param argument Argument entered by user to create Event class.
      * @return New instance of the Event class.
      * @throws DukeException If any part of the input argument is invalid.
@@ -71,13 +77,6 @@ public class Event extends Task {
         }
         
         return output;
-    }
-
-    private Event(String taskName, String originalArguments, LocalDate startDate, LocalTime startTime) {
-        super(taskName);
-        this.originalArguments = originalArguments;
-        this.startDate = startDate;
-        this.startTime = startTime;
     }
 
     /**

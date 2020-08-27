@@ -4,12 +4,14 @@ import duke.Storage;
 import duke.UI;
 import duke.task.TaskList;
 
+/**
+ * Encapsulates data and methods specific to the List command.
+ */
 public class ListCommand extends Command {
 
     /**
-     * Encapsulates data and methods specific to the List command.
+     * Creates a new instance of the List command class.
      */
-
     public ListCommand() {
     }
 
@@ -24,5 +26,4 @@ public class ListCommand extends Command {
     public void execute(Storage storage, TaskList taskList, UI ui) {
         ui.printToConsole(taskList.convertTaskListToString());
     }
-    
 }

@@ -5,12 +5,14 @@ import duke.Storage;
 import duke.UI;
 import duke.task.TaskList;
 
+/**
+ * Encapsulates data and methods specific to invalid commands.
+ */
 public class InvalidCommand extends Command {
 
     /**
-     * Encapsulates data and methods specific to invalid commands.
+     * Creates a new instance of the Invalid command class.
      */
-
     public InvalidCommand() {
     }
 

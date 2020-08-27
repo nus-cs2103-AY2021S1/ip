@@ -1,11 +1,12 @@
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+
 import duke.DukeException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.ToDo;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class DukeTest {
     

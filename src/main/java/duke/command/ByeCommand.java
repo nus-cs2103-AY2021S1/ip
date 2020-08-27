@@ -4,12 +4,14 @@ import duke.Storage;
 import duke.UI;
 import duke.task.TaskList;
 
+/**
+ * Encapsulates data and methods specific to the Bye command.
+ */
 public class ByeCommand extends Command {
 
     /**
-     * Encapsulates data and methods specific to the Bye command.
+     * Creates a new instance of the Bye command class.
      */
-    
     public ByeCommand() {
     }
 

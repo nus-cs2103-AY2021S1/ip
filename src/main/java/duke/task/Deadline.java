@@ -1,22 +1,35 @@
 package duke.task;
 
-import duke.DukeException;
-
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.format.FormatStyle;
 
+import duke.DukeException;
+
 public class Deadline extends Task {
 
     /**
      * Encapsulates data and methods specific to Deadline tasks.
      */
-    
     private final LocalDate deadlineDate;
     private final LocalTime deadlineTime;
     private final String originalArguments;
+
+    /**
+     * Creates a new Deadline task.
+     * @param taskName Name of the deadline task.
+     * @param originalArguments Original arguments passed in by the user.
+     * @param deadlineDate Date that the task is due.
+     * @param deadlineTime Time that the task is due.
+     */
+    private Deadline(String taskName, String originalArguments, LocalDate deadlineDate, LocalTime deadlineTime) {
+        super(taskName);
+        this.originalArguments = originalArguments;
+        this.deadlineDate = deadlineDate;
+        this.deadlineTime = deadlineTime;
+    }
     
     /**
      * Creates a new instance of the Deadline class if the argument provided is valid.
@@ -61,13 +74,6 @@ public class Deadline extends Task {
 
         return new Deadline(deadlineName, argument, deadlineDate, deadlineTime);
 
-    }
-
-    private Deadline(String taskName, String originalArguments, LocalDate deadlineDate, LocalTime deadlineTime) {
-        super(taskName);
-        this.originalArguments = originalArguments;
-        this.deadlineDate = deadlineDate;
-        this.deadlineTime = deadlineTime;
     }
 
     private String printDateTime() {
