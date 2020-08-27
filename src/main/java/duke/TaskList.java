@@ -36,7 +36,7 @@ public class TaskList {
         }
     }
 
-    public Todo addTodo(String description) throws DukeException {
+    private Todo addTodo(String description) throws DukeException {
         if (description.isBlank()) {
             throw new DukeException("The description of a todo cannot be empty.");
         }
@@ -47,7 +47,7 @@ public class TaskList {
         return todo;
     }
 
-    public Deadline addDeadline(String description, LocalDateTime by) throws DukeException {
+    private Deadline addDeadline(String description, LocalDateTime by) throws DukeException {
         if (description.isBlank()) {
             throw new DukeException("The description of a deadline cannot be empty.");
         }
@@ -58,7 +58,7 @@ public class TaskList {
         return deadline;
     }
 
-    public Event addEvent(String description, LocalDateTime at) throws DukeException {
+    private Event addEvent(String description, LocalDateTime at) throws DukeException {
         if (description.isBlank()) {
             throw new DukeException("The description of an event cannot be empty.");
         }

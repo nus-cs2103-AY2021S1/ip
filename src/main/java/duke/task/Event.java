@@ -41,4 +41,13 @@ public class Event extends Task {
 
         return "[E]" + super.toString() + " (at: " + this.at.format(formatter) + ")";
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Event) {
+            return super.equals(obj) && this.at.equals(((Event) obj).at);
+        }
+
+        return false;
+    }
 }
