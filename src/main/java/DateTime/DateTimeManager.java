@@ -15,7 +15,7 @@ import java.util.Scanner;
  */
 public class DateTimeManager {
     /**
-     * Returns a LocalDateTime from the input string.
+     * Returns a LocalDateTime from the input.
      *
      * @param s date time in String.
      * @return LocalDateTime date and time.
