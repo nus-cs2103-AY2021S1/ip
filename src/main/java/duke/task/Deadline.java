@@ -20,9 +20,9 @@ public class Deadline extends Task {
     }
 
     /**
-     * Checks if the deadline is due by the given date.
+     * Returns a boolean indicating if the deadline is due by the given date.
      *
-     * @param date A date
+     * @param date A date.
      * @return true if the deadline is due by the given date.
      */
     @Override

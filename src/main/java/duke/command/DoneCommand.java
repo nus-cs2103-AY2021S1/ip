@@ -17,7 +17,7 @@ public class DoneCommand extends Command {
     }
 
     /**
-     * Executes the command, marking a task as done in the provided TaskList.
+     * Executes the command, marking a task as done in the given TaskList.
      *
      * @param taskList A TaskList instance.
      * @param ui A Ui instance.

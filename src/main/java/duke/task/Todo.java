@@ -15,9 +15,9 @@ public class Todo extends Task {
     }
 
     /**
-     * Always returns false as a todo has no date.
-     * @param date A date
-     * @return false
+     * Returns false as a todo has no date.
+     * @param date A date.
+     * @return false.
      */
     @Override
     public boolean isDue(LocalDate date) {

@@ -14,14 +14,14 @@ public abstract class Task {
         this.isDone = isDone;
     }
 
-    /**
-     * Checks if the task is due on the given date.
-     *
-     * @param date A date
-     * @return true if the task is due on the given date.
-     */
     public abstract boolean isDue(LocalDate date);
 
+    /**
+     * Returns a boolean indicating if the task contains the given keyword.
+     *
+     * @param keyword A keyword.
+     * @return true if the task contains the given keyword.
+     */
     public boolean hasKeyword(String keyword) {
         return this.description.contains(keyword);
     }
@@ -36,7 +36,7 @@ public abstract class Task {
     }
 
     /**
-     * Mark the task as done.
+     * Marks the task as done.
      */
     public void markAsDone() {
         this.isDone = true;
@@ -54,7 +54,7 @@ public abstract class Task {
     /**
      * Returns a string representation of the task for displaying.
      *
-     * @return a string representation of the task
+     * @return a string representation of the task.
      */
     @Override
     public String toString() {

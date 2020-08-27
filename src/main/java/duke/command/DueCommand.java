@@ -21,12 +21,12 @@ public class DueCommand extends Command {
     }
 
     /**
-     * Executes the command, listing all tasks due on the provided date.
+     * Executes the command, listing all tasks due on the given date.
      *
      * @param taskList A TaskList instance.
      * @param ui A Ui instance.
      * @param storage A Storage instance.
-     * @throws DukeException if there are no tasks due on the provided date.
+     * @throws DukeException if there are no tasks due on the given date.
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {

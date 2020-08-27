@@ -20,9 +20,9 @@ public class Event extends Task {
     }
 
     /**
-     * Checks if the event is happening at the given date.
+     * Returns a boolean indicating if the event is happening at the given date.
      *
-     * @param date A date
+     * @param date A date.
      * @return true if the event is happening at the given date.
      */
     @Override
