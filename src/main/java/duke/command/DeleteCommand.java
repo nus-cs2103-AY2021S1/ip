@@ -3,6 +3,9 @@ package duke.command;
 import duke.task.Task;
 import duke.component.*;
 
+/**
+ * Represents a command for deleting a task.
+ */
 public class DeleteCommand extends Command {
     /**
      * Creates a command for deleting tasks.
