@@ -4,7 +4,7 @@ import duke.task.Task;
 import duke.task.TaskList;
 
 /**
- * The operation that changes a specified Task into completed.
+ * The operation that changes a specified <code>Task</code> into completed.
  */
 public class DoneOperation extends Operation {
     private final TaskList taskList;
@@ -12,8 +12,8 @@ public class DoneOperation extends Operation {
 
     /**
      * Constructor method.
-     * @param taskList the TaskList containing the Task that is to be changed.
-     * @param index the associated index of the Task.
+     * @param taskList the <code>TaskList</code> containing the <code>Task</code> that is to be changed.
+     * @param index the associated index of the <code>Task</code>.
      */
     public DoneOperation(TaskList taskList, int index) {
         this.taskList = taskList;
@@ -21,8 +21,8 @@ public class DoneOperation extends Operation {
     }
 
     /**
-     * Specifies that this is not an ExitOperation.
-     * @return false.
+     * Specifies that this is not an <code>ExitOperation</code>.
+     * @return <code>false</code>.
      */
     @Override
     public boolean isExit() {
@@ -30,8 +30,8 @@ public class DoneOperation extends Operation {
     }
 
     /**
-     * Executes the Done Operation by converting the specified Task into completed.
-     * @return a String indicating the Task has been completed.
+     * Executes the operation by converting the specified <code>Task</code> into completed.
+     * @return a <code>String</code> indicating the <code>Task</code> has been completed.
      */
     @Override
     public String execute() {

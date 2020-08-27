@@ -10,8 +10,9 @@ import duke.task.Todo;
 import duke.utils.Datetime;
 
 /**
- * Represents an object that parses lines in a saved storage text file into actual Task objects.
- * This object also parses Task objects into Strings that will be saved into the storage text file.
+ * Represents a class that parses lines in a saved storage text file into actual <code>Task</code>.
+ * This class also parses <code>Task</code> into <code>Strings</code>
+ * that will be saved into the storage text file.
  */
 public class StorageParser {
     private static final String IS_COMPLETED = "1";
@@ -22,9 +23,9 @@ public class StorageParser {
     private static final int EVENT_COMMAND_LENGTH = 4;
 
     /**
-     * Converts a Task to a String that will be saved onto the Storage text file.
-     * @param task the task that is to be converted.
-     * @return the String representing the Task.
+     * Converts a <code>Task</code> to a <code>String</code> that will be saved onto the storage text file.
+     * @param task the <code>Task</code> that is to be converted.
+     * @return the <code>String</code> representing the <code>Task</code>.
      */
     public String convertTaskToStorage(Task task) {
         String symbol = task.getTaskSymbol();
@@ -66,10 +67,10 @@ public class StorageParser {
     }
 
     /**
-     * Converts a String from the storage text file into its associated Task.
-     * @param storageTaskString the String that is to be converted.
-     * @return the associated Task from the given String.
-     * @throws DukeException if this does not recognise the format of the String being parsed.
+     * Converts a <code>String</code> from the storage text file into its associated <code>Task</code>.
+     * @param storageTaskString the <code>String</code> that is to be converted.
+     * @return the associated <code>Task</code> from the given <code>String</code>.
+     * @throws DukeException if this does not recognise the format of the <code>String</code> being parsed.
      */
     public Task convertStorageToTask(String storageTaskString) throws DukeException {
         String[] storageTask = storageTaskString.split(DELIMITER);

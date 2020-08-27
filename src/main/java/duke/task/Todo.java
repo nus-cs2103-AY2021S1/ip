@@ -4,32 +4,33 @@ import java.util.Optional;
 
 /**
  * Represents Todo objects.
- * Inherits from the abstract Task class.
+ * Inherits from the abstract <code>Task</code> class.
  */
 public class Todo extends Task {
     public static final String TODO_SYMBOL = "T";
 
     /**
      * Constructor method.
-     * @param description the description of the Todo.
-     * @param isCompleted the completion status of the Todo.
+     * @param description the description of the <code>Todo</code>.
+     * @param isCompleted the completion status of the <code>Todo</code>.
      */
     public Todo(String description, boolean isCompleted) {
         super(description, isCompleted);
     }
 
     /**
-     * Creates a Todo object that is not completed.
-     * @param description the description of the Todo.
-     * @return an uncompleted Todo object.
+     * Creates a <code>Todo</code> that is not completed.
+     * @param description the description of the <code>Todo</code>.
+     * @return an uncompleted <code>Todo</code>.
      */
     public static Todo createTodo(String description) {
         return new Todo(description, false);
     }
 
     /**
-     * Converts the Todo object to a String,
-     * @return a String representing the Todo object.
+     * Converts the <code>Todo</code> to a <code>String</code>,
+     * @return a <code>String</code> representing the <code>Todo</code>.
+     * @return a <code>String</code> representing the <code>Todo</code>.
      */
     @Override
     public String toString() {
@@ -37,9 +38,9 @@ public class Todo extends Task {
     }
 
     /**
-     * Checks if the other Object is equivalent to the Todo object.
+     * Checks if the other object is equivalent to a <code>Todo</code>.
      * @param other the object to be compared to.
-     * @return true if both objects are equal.
+     * @return <code>true</code> if both objects are equal.
      */
     @Override
     public boolean equals(Object other) {
@@ -53,8 +54,8 @@ public class Todo extends Task {
     }
 
     /**
-     * Retrieves the symbol of Todo.
-     * @return the String symbol of Todo.
+     * Retrieves the symbol of <code>Todo</code>.
+     * @return the <code>String</code> symbol of <code>Todo</code>.
      */
     @Override
     public String getTaskSymbol() {
@@ -62,9 +63,9 @@ public class Todo extends Task {
     }
 
     /**
-     * Gets the Datetime of Todo.
-     * Since Todo does not have a datetime attribute, it will be empty.
-     * @return an empty Optional object.
+     * Gets the datetime of <code>Todo</code>.
+     * Since <code>Todo</code> does not have a datetime attribute, it will be empty.
+     * @return an empty <code>Optional</code> object.
      */
     @Override
     public Optional<String> getTaskDatetime() {

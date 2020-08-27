@@ -10,7 +10,7 @@ import java.time.format.DateTimeParseException;
 
 /**
  * Represents a DateTime object.
- * This class also supports the formatting and construction of LocalDateTime objects.
+ * This class also supports the formatting and construction of <code>LocalDateTime</code> objects.
  */
 public class Datetime {
     private final LocalDateTime datetime;
@@ -19,9 +19,11 @@ public class Datetime {
 
     /**
      * Constructor method.
-     * @param datetime the actual LocalDateTime object.
-     * @param inputPattern the String format that the LocalDateTime object is originally read in as.
-     * @param outputPattern the String format the LocalDateTime object is to be printed out as.
+     * @param datetime the actual <code>LocalDateTime</code>.
+     * @param inputPattern the <code>String</code> format that <code>LocalDateTime</code>
+     *                     is originally read in as.
+     * @param outputPattern the <code>String</code> format <code>LocalDateTime</code>
+     *                      is to be printed out as.
      */
     public Datetime(LocalDateTime datetime, String inputPattern, String outputPattern) {
         this.datetime = datetime;
@@ -30,19 +32,20 @@ public class Datetime {
     }
 
     /**
-     * Converts the datetime attribute to the format specified by outputFormatter.
-     * @return the formatted date time String.
+     * Converts the datetime attribute to the format specified by <code>outputFormatter</code>.
+     * @return the formatted date time <code>String</code>.
      */
     public String getOutputDatetimeString() {
         return this.outputFormatter.format(this.datetime);
     }
 
     /**
-     * Parses the datetime String, with its pattern to a LocalDateTime object.
-     * @param datetime the String that is to be parsed.
-     * @param pattern the specified format of the datetime String.
-     * @return the parsed LocalDateTime object.
-     * @throws DukeException if the datetime String does not match the pattern String.
+     * Parses the datetime <code>String</code>, with its pattern to a <code>LocalDateTime</code>.
+     * @param datetime the <code>String</code> that is to be parsed.
+     * @param pattern the specified format of the datetime <code>String</code>.
+     * @return the parsed <code>LocalDateTime</code>.
+     * @throws DukeException if the datetime <code>String</code> does not match the
+     * pattern <code>String</code>.
      */
     public static LocalDateTime parseDateTimeString(String datetime, String pattern)
             throws DukeException {
@@ -56,13 +59,14 @@ public class Datetime {
     }
 
     /**
-     * Parses the time String into a LocalDateTime object.
-     * The time is converted into a LocalTime object first, and then converted into a LocalDateTime object
-     * with the date of today.
-     * @param time the String that is to be parsed.
-     * @param pattern the specified format of the time String.
-     * @return the parsed LocalDateTime object.
-     * @throws DukeException if the time String does not match the pattern String.
+     * Parses the time <code>String</code> into a <code>LocalDateTime</code>.
+     * The time is converted into a <code>LocalTime</code> first,
+     * and then converted into a <code>LocalDateTime</code> with the date of today.
+     * @param time the <code>String</code> that is to be parsed.
+     * @param pattern the specified format of the time <code>String</code>.
+     * @return the parsed <code>LocalDateTime</code>.
+     * @throws DukeException if the time <code>String</code> does not match
+     * the pattern <code>String</code>.
      */
     public static LocalDateTime parseTimeString(String time, String pattern) throws DukeException {
         try {

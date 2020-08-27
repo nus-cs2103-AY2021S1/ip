@@ -26,7 +26,7 @@ public class Duke {
 
     /**
      * Drives the execution of <code>Duke</code>.
-     * It handles any exceptions thrown by printing them onto the User Interface.
+     * It handles any exceptions thrown by printing them onto the <code>Ui</code>.
      */
     public void runDuke() {
         initialiseDuke();

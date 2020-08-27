@@ -4,7 +4,7 @@ import duke.task.Task;
 import duke.task.TaskList;
 
 /**
- * The operation that deletes a Task from the TaskList.
+ * The operation that deletes a <code>Task</code> from the <code>TaskList</code>.
  */
 public class DeleteOperation extends Operation {
     private final TaskList taskList;
@@ -12,8 +12,9 @@ public class DeleteOperation extends Operation {
 
     /**
      * Constructor method.
-     * @param taskList taskList the TaskList containing the Task that is to be removed.
-     * @param index the associated index of the Task.
+     * @param taskList taskList the <code>TaskList</code> containing the
+     *                 <code>Task</code> that is to be removed.
+     * @param index the associated index of the <code>Task</code>.
      */
     public DeleteOperation(TaskList taskList, int index) {
         this.taskList = taskList;
@@ -21,8 +22,8 @@ public class DeleteOperation extends Operation {
     }
 
     /**
-     * Specifies that this is not an ExitOperation.
-     * @return false.
+     * Specifies that this is not an <code>ExitOperation</code>.
+     * @return <code>false</code>.
      */
     @Override
     public boolean isExit() {
@@ -30,8 +31,8 @@ public class DeleteOperation extends Operation {
     }
 
     /**
-     * Removes the given Task from the TaskList.
-     * @return a String indicating the task that has been removed.
+     * Removes the given <code>Task</code> from the <code>TaskList</code>.
+     * @return a <code>String</code> indicating the task that has been removed.
      */
     @Override
     public String execute() {

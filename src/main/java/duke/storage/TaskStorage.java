@@ -12,7 +12,7 @@ import duke.task.TaskList;
 import duke.ui.Ui;
 
 /**
- * Class that loads and converts the TaskList in Duke with a text file.
+ * Class that loads and converts the <code>TaskList</code> in Duke with a text file.
  */
 public class TaskStorage {
     private final File file;
@@ -27,10 +27,10 @@ public class TaskStorage {
     }
 
     /**
-     * Creates a TaskStorage object.
+     * Creates a <code>TaskStorage</code>.
      * The path to the file used is pre determined by default.
      * If the path directory does not exist, the file will then be saved into the root of the directory.
-     * @return a preconfigured TaskStorage object.
+     * @return a preconfigured <code>TaskStorage</code>.
      */
     public static TaskStorage createTaskStorage() {
         File f = new File(DEFAULT_FILEPATH);
@@ -41,9 +41,9 @@ public class TaskStorage {
     }
 
     /**
-     * Loads the TaskList from the text file.
-     * @param ui the user interface object to print out any errors when reading in the text file.
-     * @return the initialised TaskList.
+     * Loads the <code>TaskList</code> from the text file.
+     * @param ui the <code>Ui</code> to print out any errors when reading in the text file.
+     * @return the initialised <code>TaskList</code>.
      */
     public TaskList loadTaskList(Ui ui) {
         TaskList taskList = new TaskList();
@@ -72,8 +72,8 @@ public class TaskStorage {
     }
 
     /**
-     * Saves the TaskList into the text file.
-     * @param taskList the TaskList that is to be saved.
+     * Saves the <code>TaskList</code> into the text file.
+     * @param taskList the <code>TaskList</code> that is to be saved.
      * @throws DukeException if the text file cannot be written onto.
      */
     public void saveToDisk(TaskList taskList) throws DukeException {

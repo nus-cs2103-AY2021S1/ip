@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 
 /**
  * Represents Deadline objects.
- * Inherits from the abstract Task class.
+ * Inherits from the abstract <code>Task</code> class.
  */
 public class Deadline extends Task {
     private final Datetime datetime;
@@ -19,9 +19,9 @@ public class Deadline extends Task {
 
     /**
      * Constructor method.
-     * @param description the description of the Deadline.
-     * @param isCompleted the completion status of the Deadline.
-     * @param datetime the LocalDateTime the Deadline task is to be completed by.
+     * @param description the description of the <code>Deadline</code>.
+     * @param isCompleted the completion status of the <code>Deadline</code>.
+     * @param datetime the <code>LocalDateTime</code> the <code>Deadline</code> task is to be completed by.
      */
     public Deadline(String description, boolean isCompleted, LocalDateTime datetime) {
         super(description, isCompleted);
@@ -29,18 +29,18 @@ public class Deadline extends Task {
     }
 
     /**
-     * Creates a Deadline object that is not completed.
-     * @param description the description of the Deadline.
-     * @param datetime the LocalDateTime the Deadline task is to be completed by.
-     * @return an uncompleted Deadline object.
+     * Creates a <code>Deadline</code> that is not completed.
+     * @param description the description of the <code>Deadline</code>.
+     * @param datetime the <code>LocalDateTime</code> the <code>Deadline</code> task is to be completed by.
+     * @return an uncompleted <code>Deadline</code>.
      */
     public static Deadline createDeadline(String description , LocalDateTime datetime) {
         return new Deadline(description, false, datetime);
     }
 
     /**
-     * Converts the Deadline object to a String,
-     * @return a String representing the Deadline object.
+     * Converts the <code>Deadline to a <code>String</code>.
+     * @return a <code>String</code> representing the <code>Deadline</code>.
      */
     @Override
     public String toString() {
@@ -50,9 +50,9 @@ public class Deadline extends Task {
     }
 
     /**
-     * Checks if the other Object is equivalent to the Deadline object.
+     * Checks if the other object is equivalent to <code>Deadline</code>.
      * @param other the object to be compared to.
-     * @return true if both objects are equal.
+     * @return <code>true</code> if both objects are equal.
      */
     @Override
     public boolean equals(Object other) {
@@ -67,8 +67,8 @@ public class Deadline extends Task {
     }
 
     /**
-     * Retrieves the symbol of Deadline.
-     * @return the String symbol of Deadline.
+     * Retrieves the symbol of <code>Deadline</code>.
+     * @return the <code>String</code> symbol of <code>Deadline</code>.
      */
     @Override
     public String getTaskSymbol() {
@@ -76,8 +76,8 @@ public class Deadline extends Task {
     }
 
     /**
-     * Gets the Datetime String of Deadline.
-     * @return an Optional object containing the formatted String.
+     * Gets the datetime <code>String</code> of <code>Deadline</code>.
+     * @return an <code>Optional</code> containing the formatted <code>String</code>.
      */
     @Override
     public Optional<String> getTaskDatetime() {

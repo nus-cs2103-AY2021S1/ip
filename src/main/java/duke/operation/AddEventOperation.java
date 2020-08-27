@@ -6,16 +6,16 @@ import duke.task.TaskList;
 import duke.task.Event;
 
 /**
- * Represents the operation that adds Event objects.
+ * Represents the operation that adds <code>Events</code>.
  */
 public class AddEventOperation extends AddOperation {
     private final LocalDateTime time;
 
     /**
      * Constructor method.
-     * @param description the description of the Event.
-     * @param time the time when the Event occurs.
-     * @param taskList the TaskList that Event is to be added into.
+     * @param description the description of the <code>Event</code>.
+     * @param time the time when the <code>Event</code> occurs.
+     * @param taskList the <code>TaskList</code> that <code>Event</code> is to be added into.
      */
     public AddEventOperation(String description, LocalDateTime time, TaskList taskList) {
         super(description, taskList);
@@ -23,8 +23,8 @@ public class AddEventOperation extends AddOperation {
     }
 
     /**
-     * Creates the associated Event.
-     * @return an uncompleted Event.
+     * Creates the associated <code>Event</code>.
+     * @return an uncompleted <code>Event</code>.
      */
     @Override
     public Event createTask() {

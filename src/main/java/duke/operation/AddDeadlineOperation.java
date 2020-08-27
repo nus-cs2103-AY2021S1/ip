@@ -6,16 +6,16 @@ import duke.task.TaskList;
 import duke.task.Deadline;
 
 /**
- * Represents the operation that adds Deadline objects.
+ * Represents the operation that adds <code>Deadlines</code>.
  */
 public class AddDeadlineOperation extends AddOperation {
     private final LocalDateTime dateTime;
 
     /**
      * Constructor method.
-     * @param description the description of the Deadline.
-     * @param dateTime the datetime when the Deadline occurs.
-     * @param taskList the TaskList that Deadline is to be added into.
+     * @param description the description of the <code>Deadline</code>.
+     * @param dateTime the datetime when the <code>Deadline</code> occurs.
+     * @param taskList the <code>TaskList</code> that <code>Deadline</code> is to be added into.
      */
     public AddDeadlineOperation(String description, LocalDateTime dateTime, TaskList taskList) {
         super(description, taskList);
@@ -23,8 +23,8 @@ public class AddDeadlineOperation extends AddOperation {
     }
 
     /**
-     * Creates the associated Deadline.
-     * @return an uncompleted Deadline.
+     * Creates the associated <code>Deadline</code>.
+     * @return an uncompleted <code>Deadline</code>.
      */
     @Override
     public Deadline createTask() {

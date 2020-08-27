@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 
 /**
  * Represents Event objects.
- * Inherits from the abstract Task class.
+ * Inherits from the abstract <code>Task</code> class.
  */
 public class Event extends Task{
     private final Datetime time;
@@ -19,9 +19,9 @@ public class Event extends Task{
 
     /**
      * Constructor method.
-     * @param description the description of the Event.
-     * @param isCompleted the completion status of the Event.
-     * @param time the LocalDateTime the Event task is to be completed by.
+     * @param description the description of the <code>Event</code>.
+     * @param isCompleted the completion status of the <code>Event</code>.
+     * @param time the <code>LocalDateTime</code> the <code>Event</code> task is to be completed by.
      */
     public Event(String description, boolean isCompleted, LocalDateTime time) {
         super(description, isCompleted);
@@ -29,18 +29,18 @@ public class Event extends Task{
     }
 
     /**
-     * Creates a Event object that is not completed.
-     * @param description the description of the Event.
-     * @param time the LocalDateTime the Event task is to be completed by.
-     * @return an uncompleted Event object.
+     * Creates an <code>Event</code> that is not completed.
+     * @param description the description of the <code>Event.
+     * @param time the <code>LocalDateTime</code> the <code>Event</code> task is to be completed by.
+     * @return an uncompleted <code>Event</code>.
      */
     public static Event createEvent(String description, LocalDateTime time) {
         return new Event(description, false, time);
     }
 
     /**
-     * Converts the Event object to a String,
-     * @return a String representing the Event object.
+     * Converts the <code>Event</code> to a <code>String</code>,
+     * @return a <code>String</code> representing the <code>Event</code>.
      */
     @Override
     public String toString() {
@@ -50,9 +50,9 @@ public class Event extends Task{
     }
 
     /**
-     * Checks if the other Object is equivalent to the Event object.
+     * Checks if the other object is equivalent to the <code>Event</code>.
      * @param other the object to be compared to.
-     * @return true if both objects are equal.
+     * @return <code>true</code> if both objects are equal.
      */
     @Override
     public boolean equals(Object other) {
@@ -67,8 +67,8 @@ public class Event extends Task{
     }
 
     /**
-     * Retrieves the symbol of Event.
-     * @return the String symbol of Event.
+     * Retrieves the symbol of <code>Event</code>.
+     * @return the <code>String</code> symbol of <code>Event</code>.
      */
     @Override
     public String getTaskSymbol() {
@@ -76,8 +76,8 @@ public class Event extends Task{
     }
 
     /**
-     * Gets the Datetime String of Event.
-     * @return an Optional object containing the formatted String.
+     * Gets the datetime <code>String</code> of <code>Event</code>.
+     * @return an <code>Optional</code> containing the formatted <code>String</code>.
      */
     @Override
     public Optional<String> getTaskDatetime() {

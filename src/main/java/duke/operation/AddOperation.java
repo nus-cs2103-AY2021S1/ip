@@ -4,7 +4,7 @@ import duke.task.Task;
 import duke.task.TaskList;
 
 /**
- * Abstract class representing the operations that add various types of Tasks.
+ * Abstract class representing the operations that add various types of <code>Tasks</code>.
  */
 public abstract class AddOperation extends Operation {
     protected String description;
@@ -12,8 +12,8 @@ public abstract class AddOperation extends Operation {
 
     /**
      * Constructor method.
-     * @param description the description of the Task.
-     * @param taskList the TaskList that Task is to be added into.
+     * @param description the description of the <code>Task</code>.
+     * @param taskList the <code>TaskList</code> that <code>Task</code> is to be added into.
      */
     AddOperation(String description, TaskList taskList) {
         this.description = description;
@@ -21,8 +21,8 @@ public abstract class AddOperation extends Operation {
     }
 
     /**
-     * Specifies that this is not an ExitOperation.
-     * @return false.
+     * Specifies that this is not an <code>ExitOperation</code>.
+     * @return <code>false</code>.
      */
     @Override
     public boolean isExit() {
@@ -30,14 +30,15 @@ public abstract class AddOperation extends Operation {
     }
 
     /**
-     * Creates the associated Task.
-     * @return an uncompleted Task.
+     * Creates the associated <code>Task</code>.
+     * @return an uncompleted <code>Task</code>.
      */
     public abstract Task createTask();
 
     /**
-     * Adds the Task into the TaskList.
-     * @return a String specifying the Task that been added and the total number of Tasks in TaskList.
+     * Adds the <code>Task</code> into the <code>TaskList</code>.
+     * @return a <code>String</code> specifying the <code>Task</code> that been added and
+     * the total number of <code>Tasks</code> in <code>TaskList</code>.
      */
     @Override
     public String execute() {

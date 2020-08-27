@@ -20,7 +20,7 @@ import duke.utils.Datetime;
 import duke.utils.Utils;
 
 /**
- * The class that converts commands passed into Duke into Operations.
+ * The class that converts commands passed into Duke into <code>Operations</code>.
  */
 public class CommandParser {
     private ExitOperation createExitOp(TaskStorage storage, TaskList list) {
@@ -105,12 +105,12 @@ public class CommandParser {
     }
 
     /**
-     * Parses the String given into an Operation object.
-     * @param commandString the String that has been input by the user into Duke.
-     * @param list the TaskList to be operated on.
-     * @param taskStorage the TaskStorage object to be operated on, if the operation requires
-     *                    a save of the TaskList.
-     * @return the parsed Operation object.
+     * Parses the String given into an <code>Operation</code>.
+     * @param commandString the <code>String</code> that has been input by the user into Duke.
+     * @param list the <code>TaskList</code> to be operated on.
+     * @param taskStorage the <code>TaskStorage</code> to be operated on,
+     *                    if the <code>Operation</code> requires a save of the <code>TaskList</code>.
+     * @return the parsed <code>Operation</code>.
      * @throws DukeException if the command cannot be recognised or is erroneous.
      */
     public Operation parse(String commandString, TaskList list, TaskStorage taskStorage)

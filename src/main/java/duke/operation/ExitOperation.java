@@ -13,8 +13,9 @@ public class ExitOperation extends Operation {
 
     /**
      * Constructor method.
-     * @param storage the TaskStorage object that allows the taskList to be saved into a text file.
-     * @param taskList the TaskList that is to be saved.
+     * @param storage the <code>TaskStorage</code> that allows the
+     *                <code>taskList</code> to be saved into a text file.
+     * @param taskList the <code>TaskList</code> that is to be saved.
      */
     public ExitOperation(TaskStorage storage, TaskList taskList) {
         this.storage = storage;
@@ -22,8 +23,8 @@ public class ExitOperation extends Operation {
     }
 
     /**
-     * Specifies that this is an Exit Operation.
-     * @return true.
+     * Specifies that this is an <code>ExitOperation</code>.
+     * @return <code>true</code>.
      */
     @Override
     public boolean isExit() {
@@ -31,8 +32,8 @@ public class ExitOperation extends Operation {
     }
 
     /**
-     * Saves the tasks in TaskList into a text file.
-     * @return a goodbye message and an indication if the tasks cannot be saved.
+     * Saves the <code>Tasks</code> in <code>TaskList</code> into a text file.
+     * @return a goodbye message and an indication if the <code>Tasks</code> cannot be saved.
      */
     @Override
     public String execute() {

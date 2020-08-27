@@ -15,8 +15,8 @@ public class Ui {
             + "|____/ \\__,_|_|\\_\\___|\n";
 
     /**
-     * Construtor method.
-     * Initialises a Scanner object that reads in input from the user.
+     * Constructor method.
+     * Initialises a <code>Scanner</code> that reads in input from the user.
      */
     public Ui() {
         this.scanner = new Scanner(System.in);
@@ -54,7 +54,7 @@ public class Ui {
 
     /**
      * Reads in the user input as a line.
-     * @return the String of the user input.
+     * @return the <code>String</code> of the user input.
      */
     public String readUserInput() {
         return this.scanner.nextLine();

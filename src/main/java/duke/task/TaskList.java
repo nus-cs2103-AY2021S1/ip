@@ -4,22 +4,22 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 /**
- * Represents the list of Tasks that Duke stores in.
+ * Represents the list of <code>Tasks</code> that Duke stores in.
  */
 public class TaskList implements Iterable<Task> {
     private final ArrayList<Task> taskList;
 
     /**
      * Constructor method.
-     * Initialise a new ArrayList of Task.
+     * Initialise a new <code>ArrayList</code> of <code>Task</code>.
      */
     public TaskList() {
         this.taskList = new ArrayList<>();
     }
 
     /**
-     * Implements the Iterable interface in order for TaskList to be iterable.
-     * @return the iterator form of TaskList.
+     * Implements the <code>Iterable</code> interface in order for <code>TaskList</code> to be iterable.
+     * @return the iterator form of <code>TaskList</code>.
      */
     @Override
     public Iterator<Task> iterator() {
@@ -27,26 +27,26 @@ public class TaskList implements Iterable<Task> {
     }
 
     /**
-     * Gets the number of Tasks that are being stored currently.
-     * @return the number of Tasks.
+     * Gets the number of <code>Tasks</code> that are being stored currently.
+     * @return the number of <code>Tasks</code>.
      */
     public int getCurrCapacity() {
         return this.taskList.size();
     }
 
     /**
-     * Checks if the given index is within the capacity of TaskList.
+     * Checks if the given <code>index</code> is within the capacity of <code>TaskList</code>.
      * @param index the value to be checked on.
-     * @return true if the index is within the capacity.
+     * @return <code>true</code> if <code>index</code> is within the capacity.
      */
     public boolean isValidIndex(int index) {
         return index <= this.taskList.size() && index > 0;
     }
 
     /**
-     * Adds the given task into TaskList.
-     * @param task the task that is to be added.
-     * @return the task that has been added.
+     * Adds the given <code>Task</code> into <code>TaskList</code>.
+     * @param task the <code>Task</code> that is to be added.
+     * @return the <code>Task</code> that has been added.
      */
     public Task addTask(Task task) {
         this.taskList.add(task);
@@ -54,9 +54,9 @@ public class TaskList implements Iterable<Task> {
     }
 
     /**
-     * Changes the specified Task in TaskList to completed.
-     * @param index the index of the Task that is to be changed.
-     * @return the Task that has been completed.
+     * Changes the specified <code>Task</code> in <code>TaskList</code> to completed.
+     * @param index the index of the <code>Task</code> that is to be changed.
+     * @return the <code>Task</code> that has been completed.
      */
     public Task completeTask(int index) {
         Task task = this.taskList.get(index - 1);
@@ -65,18 +65,18 @@ public class TaskList implements Iterable<Task> {
     }
 
     /**
-     * Removes a specified Task from TaskList.
-     * @param index the index of the Task that is to be deleted.
-     * @return the Task that has been removed.
+     * Removes a specified <code>Task</code> from <code>TaskList</code>.
+     * @param index the index of the <code>Task</code> that is to be deleted.
+     * @return the <code>Task</code> that has been removed.
      */
     public Task removeTask(int index) {
         return this.taskList.remove(index - 1);
     }
 
     /**
-     * Converts the TaskList to a representative String.
-     * This string contains all details of Tasks stored in TaskList.
-     * @return the string representing TaskList.
+     * Converts the <code>TaskList</code> to a representative <code>String</code>.
+     * This <code>String</code> contains all details of <code>Tasks</code> stored in <code>TaskList</code>.
+     * @return the <code>String</code> representing <code>TaskList</code>.
      */
     @Override
     public String toString() {
@@ -93,9 +93,9 @@ public class TaskList implements Iterable<Task> {
     }
 
     /**
-     * Finds all Tasks containing the specified search word.
-     * @param searchWord the String that is to be search with.
-     * @return a TaskList containing all Tasks that are found.
+     * Finds all <code>Tasks</code> containing the specified search word.
+     * @param searchWord the <code>String</code> that is to be search with.
+     * @return a <code>TaskList</code> containing all <code>Tasks</code> that are found.
      */
     public TaskList findString(String searchWord) {
         TaskList foundTasks = new TaskList();
