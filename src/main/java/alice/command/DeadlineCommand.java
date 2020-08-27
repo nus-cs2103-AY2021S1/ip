@@ -17,8 +17,10 @@ import java.util.List;
  */
 public class DeadlineCommand extends Command {
     protected static final List<String> NAMES = List.of("deadline");
-    protected static final String DESCRIPTION = "Create a task with a deadline. Example: deadline assignment /by 10-Aug 2359";
-    protected static final String USE_CASE = "[" + String.join(", ", NAMES) + "] <desc> /by <datetime>";
+    protected static final String DESCRIPTION = "Create a task with a deadline. "
+            + "Example: deadline assignment /by 10-Aug 2359";
+    protected static final String USE_CASE = "[" + String.join(", ", NAMES)
+            + "] <desc> /by <datetime>";
 
     /**
      * Checks if the command word triggers the <code>DeadlineCommand</code>.
@@ -53,8 +55,9 @@ public class DeadlineCommand extends Command {
     public void process(TaskList tasks, Ui ui, StorageFile storageFile) throws AliceStorageException {
         Task deadline = new Deadline(description, by);
         tasks.addTask(deadline);
-        ui.displayOutput("Roger. I've added the deadline to your list:\n    " + deadline
-                + "\nNow you have " + tasks.getNumberOfTasks() + " tasks in your list");
+        ui.displayOutput("Roger. I've added the deadline to your list:\n    "
+                + deadline + "\nNow you have " + tasks.getNumberOfTasks()
+                + " tasks in your list");
         storageFile.saveToLastLine(deadline.encode());
     }
 }

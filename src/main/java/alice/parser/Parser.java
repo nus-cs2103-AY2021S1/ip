@@ -68,11 +68,11 @@ public class Parser {
     public static Command parseCommand(String userInput) throws InvalidCommandException {
         String[] arr = userInput.trim().split(" ", 2);
         String cmd = arr[0];
-        String arguments;
+        String argument;
         if (arr.length == 2) {
-            arguments = arr[1];
+            argument = arr[1];
         } else {
-            arguments = "";
+            argument = "";
         }
 
         if (ListCommand.hasCommandWord(cmd)) {
@@ -86,37 +86,38 @@ public class Parser {
             return new HelpCommand();
         } else if (DoneCommand.hasCommandWord(cmd)) {
             // Command to mark task as done
-            return parseDoneInput(arguments);
+            return parseDoneInput(argument);
         } else if (DeleteCommand.hasCommandWord(cmd)) {
             // Command to mark task as done
-            return parseDeleteInput(arguments);
+            return parseDeleteInput(argument);
         } else if (TodoCommand.hasCommandWord(cmd)) {
             // Command to add to-do
-            return parseTodoInput(arguments);
+            return parseTodoInput(argument);
         } else if (DeadlineCommand.hasCommandWord(cmd)) {
             // Command to add deadline
-            return parseDeadlineInput(arguments);
+            return parseDeadlineInput(argument);
         } else if (EventCommand.hasCommandWord(cmd)) {
             // Command to add event
-            return parseEventInput(arguments);
+            return parseEventInput(argument);
         } else if (ByeCommand.hasCommandWord(cmd)) {
             return new ByeCommand();
         } else {
             // Invalid command
-            throw new InvalidCommandException("Sorry I cannot register that command!\nUse 'help' command to see the lists of available command");
+            throw new InvalidCommandException("Sorry I cannot register that command!\n"
+                    + "Use 'help' command to see the lists of available command");
         }
     }
 
     /**
      * Parses the task number given by the user for the done command.
      *
-     * @param s_index the task number input given by user.
+     * @param inputIndex the task number input given by user.
      * @return the <code>DoneCommand</code> with the verified task number.
      * @throws InvalidCommandException if the task number provided is invalid.
      */
-    private static DoneCommand parseDoneInput(String s_index) throws InvalidCommandException {
+    private static DoneCommand parseDoneInput(String inputIndex) throws InvalidCommandException {
         try {
-            int index = Integer.parseInt(s_index) - 1;
+            int index = Integer.parseInt(inputIndex) - 1;
             return new DoneCommand(index);
         } catch (NumberFormatException e) {
             throw new InvalidCommandException("Don't play around. Give me a proper number!");
@@ -126,13 +127,13 @@ public class Parser {
     /**
      * Parses the task number given by the user for the delete command.
      *
-     * @param s_index the task number input given by user.
+     * @param inputIndex the task number input given by user.
      * @return the <code>DeleteCommand</code> with the verified task number.
      * @throws InvalidCommandException if the task number provided is invalid.
      */
-    private static DeleteCommand parseDeleteInput(String s_index) throws InvalidCommandException {
+    private static DeleteCommand parseDeleteInput(String inputIndex) throws InvalidCommandException {
         try {
-            int index = Integer.parseInt(s_index) - 1;
+            int index = Integer.parseInt(inputIndex) - 1;
             return new DeleteCommand(index);
         } catch (NumberFormatException e) {
             throw new InvalidCommandException("Don't play around. Give me a proper number!");
@@ -157,53 +158,55 @@ public class Parser {
     /**
      * Parses the details given by the user for creating a new deadline.
      *
-     * @param arguments the deadline details input given by user.
+     * @param argument the deadline details input given by user.
      * @return the <code>DeadlineCommand</code> with the indicated details.
      * @throws InvalidCommandException if the user gives an invalid description and/or datetime.
      */
-    private static DeadlineCommand parseDeadlineInput(String arguments) throws InvalidCommandException {
-        String[] desc_date = arguments.split(" /by ", 2);
-        if (desc_date.length == 2 && !desc_date[1].isBlank()) {
-            String description = desc_date[0];
-            String dateTime = desc_date[1];
+    private static DeadlineCommand parseDeadlineInput(String argument) throws InvalidCommandException {
+        String[] arguments = argument.split(" /by ", 2);
+        if (arguments.length == 2 && !arguments[1].isBlank()) {
+            String description = arguments[0];
+            String dateTime = arguments[1];
             LocalDateTime deadlineDt = parseDateTime(dateTime);
             return new DeadlineCommand(description, deadlineDt);
-        } else if (arguments.isBlank()) {
+        } else if (argument.isBlank()) {
             // Empty description
             throw new InvalidCommandException("The deadline description cannot be left empty.");
-        } else if (arguments.endsWith("/by")) {
+        } else if (argument.endsWith("/by")) {
             // Empty date
             throw new InvalidCommandException("You cannot create an deadline without the date.");
         } else {
             // No /by marker
-            throw new InvalidCommandException("I can't find the deadline date. Did you forget to add '/by'?");
+            throw new InvalidCommandException("I can't find the deadline date. "
+                    + "Did you forget to add '/by'?");
         }
     }
 
     /**
      * Parses the details given by the user for creating a new event.
      *
-     * @param arguments the event details input given by user.
+     * @param argument the event details input given by user.
      * @return the <code>EventCommand</code> with the indicated details.
      * @throws InvalidCommandException if the user gives an invalid description and/or datetime.
      */
-    private static EventCommand parseEventInput(String arguments) throws InvalidCommandException {
-        String[] desc_date = arguments.split(" /on ", 2);
-        if (desc_date.length == 2 && !desc_date[1].isBlank()) {
-            String description = desc_date[0];
-            String dateTime = desc_date[1];
+    private static EventCommand parseEventInput(String argument) throws InvalidCommandException {
+        String[] arguments = argument.split(" /on ", 2);
+        if (arguments.length == 2 && !arguments[1].isBlank()) {
+            String description = arguments[0];
+            String dateTime = arguments[1];
 
             LocalDateTime eventDateTime = parseDateTime(dateTime);
             return new EventCommand(description, eventDateTime);
-        } else if (arguments.isBlank()) {
+        } else if (argument.isBlank()) {
             // Empty event description
             throw new InvalidCommandException("The event description cannot be left empty.");
-        } else if (arguments.endsWith("/on")) {
+        } else if (argument.endsWith("/on")) {
             // Empty start-end time
             throw new InvalidCommandException("You cannot create an event without a date/time.");
         } else {
             // No /on marker
-            throw new InvalidCommandException("I can't find the date/time of the event. Did you forget to add '/on'?");
+            throw new InvalidCommandException("I can't find the date/time of the event. "
+                    + "Did you forget to add '/on'?");
         }
     }
 
