@@ -1,6 +1,4 @@
-import java.lang.Throwable;
-
-public class UnknownCommandException extends Throwable {
+public class UnknownCommandException extends DukeException {
 
     protected String command;
 

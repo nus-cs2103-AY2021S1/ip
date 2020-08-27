@@ -1,5 +1,7 @@
-import java.lang.Throwable;
+public class MissingInfoException extends DukeException{
 
-public class MissingInfoException extends Throwable{
-
+    @Override
+    public String getMessage() {
+        return "     ☹ OOPS!!! Your command needs to be followed by a description. :-(";
+    }
 }

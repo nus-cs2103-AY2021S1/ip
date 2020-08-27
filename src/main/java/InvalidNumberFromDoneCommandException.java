@@ -1,5 +1,7 @@
-import java.lang.Throwable;
+public class InvalidNumberFromDoneCommandException extends DukeException{
 
-public class InvalidNumberFromDoneCommandException extends Throwable{
-
+    @Override
+    public String getMessage() {
+        return "     ☹ OOPS!!! The done command must be followed by a valid task number. :-(";
+    }
 }

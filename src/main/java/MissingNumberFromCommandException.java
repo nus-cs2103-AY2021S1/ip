@@ -1,4 +1,7 @@
-import java.lang.Throwable;
+public class MissingNumberFromCommandException extends DukeException {
 
-public class MissingNumberFromCommandException extends Throwable {
+    @Override
+    public String getMessage() {
+        return "     ☹ OOPS!!! Please type in the done command followed by a valid task number. :-(";
+    }
 }
