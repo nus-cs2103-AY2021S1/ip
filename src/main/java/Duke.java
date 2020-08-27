@@ -29,6 +29,8 @@ public class Duke {
             list = fileReader.getList();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
+        } catch (WrongDeadlineException e) {
+            e.printStackTrace();
         }
 
         Message start = new Message("start", list, taskFile);

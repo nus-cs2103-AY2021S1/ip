@@ -1,6 +1,9 @@
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.List;
 
 enum Command {
@@ -42,7 +45,7 @@ public class Message {
         this.taskFile = taskFile;
     }
 
-    public void reply() throws NoDescriptionException, NoCommandException, WrongItemIndexException {
+    public void reply() throws NoDescriptionException, NoCommandException, WrongItemIndexException, WrongDeadlineException {
         System.out.println("____________________________________________________________");
         if (this.cmd == Command.START) {
             System.out.println("Eh what's up! I'm Meimei" +
@@ -123,19 +126,21 @@ public class Message {
                 t = new Todo(taskString);
             } else if (this.cmd == Command.DEADLINE) {
                 String[] temp = taskString.split(" /by ");
-                if (temp.length == 2) {
-                    t = new Deadline(temp[0], temp[1]);
-                } else {
-                    System.out.println("Eh you type wrong lah!" +
-                            "\nTry \"deadline {description of task} /by {date/time}\"");
+                try {
+                    LocalDateTime dateTime = LocalDateTime.parse(temp[1],
+                            DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
+                    t = new Deadline(temp[0], dateTime);
+                } catch (Exception e) {
+                    throw new WrongDeadlineException("deadline", "/by");
                 }
             } else { // should be event
                 String[] temp = taskString.split(" /at ");
-                if (temp.length == 2) {
-                    t = new Event(temp[0], temp[1]);
-                } else {
-                    System.out.println("Eh you type wrong lah!" +
-                            "\nTry \"event {description of task} /at {date/time}\"");
+                try {
+                    LocalDateTime dateTime = LocalDateTime.parse(temp[1],
+                            DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
+                    t = new Event(temp[0], dateTime);
+                } catch (Exception e) {
+                    throw new WrongDeadlineException("event", "/at");
                 }
             }
 
