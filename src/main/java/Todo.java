@@ -8,10 +8,15 @@ public class Todo extends Task {
      *
      * @param description description of todo.
      */
-    Todo(String description) {
+    public Todo(String description) {
         super(description);
     }
 
+    /**
+     * Returns string representation of the object.
+     *
+     * @return string string representation of the object.
+     */
     @Override
     public String toString() {
         return "[T]" + super.toString();

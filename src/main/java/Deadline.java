@@ -13,11 +13,16 @@ public class Deadline extends Task {
      * @param description description of deadline.
      * @param time deadline time.
      */
-    Deadline(String description, String time) {
+    public Deadline(String description, String time) {
         super(description);
         this.time = Parser.stringToDate(time);
     }
 
+    /**
+     * Returns string representation of the object.
+     *
+     * @return string string representation of the object.
+     */
     @Override
     public String toString() {
         String timeStr = Parser.dateToString(this.time);

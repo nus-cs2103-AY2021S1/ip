@@ -7,7 +7,13 @@ public class Command {
     private TaskList taskList;
     private Ui ui;
 
-    Command(TaskList taskList, Ui ui) {
+    /**
+     * Constructor for Command.
+     *
+     * @param taskList taskList
+     * @param ui Ui
+     */
+    public Command(TaskList taskList, Ui ui) {
         this.taskList = taskList;
         this.ui = ui;
     }

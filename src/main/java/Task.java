@@ -53,6 +53,11 @@ public class Task {
         }
     }
 
+    /**
+     * Returns string representation of the object.
+     *
+     * @return string string representation of the object.
+     */
     @Override
     public String toString() {
         return "[" + getStatusIcon() + "]" + " " + this.description;

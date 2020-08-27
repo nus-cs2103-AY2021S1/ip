@@ -13,11 +13,16 @@ public class Event extends Task {
      * @param description description of event.
      * @param time day of the event time.
      */
-    Event(String description, String time) {
+    public Event(String description, String time) {
         super(description);
         this.time = Parser.stringToDate(time);
     }
 
+    /**
+     * Returns string representation of the object.
+     *
+     * @return string string representation of the object.
+     */
     @Override
     public String toString() {
         String timeStr = Parser.dateToString(this.time);
