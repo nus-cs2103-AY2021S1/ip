@@ -8,12 +8,12 @@ import java.util.Scanner;
 public class Storage {
     private String filePath;
 
-    public Storage(String filePath) {
+    public Storage(String filePath) throws DukeException {
         this.filePath = filePath;
         createFileIfAbsent(filePath);
     }
 
-    public static void createFileIfAbsent(String filePath) {
+    public static void createFileIfAbsent(String filePath) throws DukeException {
         File f = new File(filePath);
 
         if (!f.exists()) {
@@ -22,7 +22,8 @@ public class Storage {
                 dir.mkdir();
                 f.createNewFile();
             } catch (IOException e) {
-                System.out.println("File unable to be created");
+                throw new DukeException("File to store tasks could not be created!"
+                        + "/n" + "Your tasks won't be saved upon exit :(");
             }
         }
     }
@@ -60,7 +61,7 @@ public class Storage {
         return tasks;
     }
 
-    public void updateData(TaskList tasks) {
+    public void updateData(TaskList tasks) throws DukeException {
         try {
             String data = "";
 
@@ -76,7 +77,7 @@ public class Storage {
             fw.write(data);
             fw.close();
         } catch (IOException e) {
-            System.out.println("Unable to update data");
+            throw new DukeException("Saved list of tasks could not be updated");
         }
 
     }
