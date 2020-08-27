@@ -2,6 +2,9 @@ package Parser;
 
 import Errors.ErrorExceptions;
 
+/**
+ * Represents the base Parse object.
+ */
 public abstract class Parse {
     public static void execute(int i) throws ErrorExceptions {}
 

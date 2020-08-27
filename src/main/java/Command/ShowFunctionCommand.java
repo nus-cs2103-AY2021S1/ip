@@ -1,6 +1,13 @@
 package Command;
 
+/**
+ * Represents a command that displays all commands and the snytax.
+ */
 public class ShowFunctionCommand extends Command{
+
+    /**
+     * Prints all commands and their syntax.
+     */
     public static void execute(){
         System.out.println("list: to show all existing tasks.");
         System.out.println("bye: to exit the todo bot.");

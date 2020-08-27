@@ -7,7 +7,17 @@ import UI.UserInterface;
 
 import java.util.NoSuchElementException;
 
+/**
+ * Represents a command that deletes a task.
+ */
 public class DeleteCommand extends Command {
+
+    /**
+     * Deletes the selected task from the list.
+     *
+     * @param i task index.
+     * @throws ErrorExceptions failed to find task.
+     */
     public static void execute(int i) throws ErrorExceptions {
         task t;
         int index = i;

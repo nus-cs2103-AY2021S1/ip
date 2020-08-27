@@ -14,13 +14,31 @@ import java.util.ArrayList;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
+/**
+ * Represents a manager that handles all actions related to File.
+ */
 public class FileManager{
+    /**
+     * Adds a new task into the save file.
+     *
+     * @param location file directory of the local save.
+     * @param text text to add into file.
+     * @throws IOException missing file.
+     */
     public static void add(String location, String text) throws IOException {
         FileWriter f = new FileWriter(location,true);
         f.write(text);
         f.write(System.lineSeparator());
         f.close();
     }
+
+    /**
+     * Rewrites the current save file based on the list of tasks.
+     *
+     * @param location file directory.
+     * @param store ArrayList that holds all the task.
+     * @throws IOException error when editing the file.
+     */
     public static void edit(String location, ArrayList<task> store) throws IOException {
         FileWriter fw = new FileWriter(location);
         for(task i : store){
@@ -29,6 +47,14 @@ public class FileManager{
         }
         fw.close();
     }
+
+    /**
+     * Returns the name of the task in the file.
+     *
+     * @param s text line from file.
+     * @return String name.
+     * @throws ErrorExceptions error reading the text.
+     */
     private static String getName(String s) throws ErrorExceptions {
         Scanner sc = new Scanner(s);
         String name = "";
@@ -42,6 +68,14 @@ public class FileManager{
         } catch(NoSuchElementException e){}
         return name;
     }
+
+    /**
+     * Returns the date and time of the line in the file.
+     *
+     * @param s text.
+     * @return String date and time in String.
+     * @throws ErrorExceptions error reading the date and time.
+     */
     private static String getDate(String s) throws ErrorExceptions {
         Scanner sc = new Scanner(s);
         String date = "";
@@ -69,6 +103,14 @@ public class FileManager{
         LocalDateTime dt = LocalDateTime.parse(date,d);
         return dt.format(DateTimeFormatter.ofPattern("dd-MM-uuuu HHmm"));
     }
+
+    /**
+     * Returns the type of task in the file.
+     *
+     * @param s text line.
+     * @return int type of task.
+     * @throws ErrorExceptions error reading the type in the file.
+     */
     private static int getType(String s) throws ErrorExceptions {
         Scanner sc = new Scanner(s);
         try{
@@ -88,6 +130,14 @@ public class FileManager{
                     + e);
         }
     }
+
+    /**
+     * Returns whether the task is completed.
+     *
+     * @param s text line.
+     * @return boolean completed or not completed.
+     * @throws ErrorExceptions error when reading the file.
+     */
     private static boolean getDone(String s) throws ErrorExceptions {
         Scanner sc = new Scanner(s);
         try{
@@ -107,6 +157,13 @@ public class FileManager{
                     + e);
         }
     }
+
+    /**
+     * Reads the local save file and convert into task to add to list.
+     *
+     * @param f saved file.
+     * @param store ArrayList to store the tasks.
+     */
     public static void read(File f, ArrayList<task> store){
         try{
             Scanner sc = new Scanner(f);

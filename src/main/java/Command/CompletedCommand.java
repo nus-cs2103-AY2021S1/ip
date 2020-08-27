@@ -5,7 +5,16 @@ import Tasks.TaskManager;
 import Tasks.task;
 import UI.UserInterface;
 
+/**
+ * Represents a command that marks a task as completed.
+ */
 public class CompletedCommand extends Command{
+    /**
+     * Marks the selected task as completed.
+     *
+     * @param i task index.
+     * @throws ErrorExceptions failed to locate specified task.
+     */
     public static void execute(int i) throws ErrorExceptions {
         task t;
         int index = i;

@@ -8,9 +8,19 @@ import UI.UserInterface;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
+/**
+ * Represents a manager that handles all actions carried out by the parser.
+ * Decomposes all user input into key terms.
+ */
 public class InputManager {
     private static String fileDir;
 
+    /**
+     * Determines what bridge Parse to call based on the user input.
+     *
+     * @param input user input.
+     * @throws ErrorExceptions when selected task do not exists.
+     */
     public static void parse(String input) throws ErrorExceptions {
         Scanner sc = new Scanner(input);
         String current = sc.next();
@@ -54,6 +64,14 @@ public class InputManager {
         }
     }
 
+    /**
+     * Returns the name of the task from the user input.
+     *
+     * @param input user input.
+     * @param type type of task.
+     * @return String name of task.
+     * @throws ErrorExceptions when the add task command format is wrong
+     */
     public static String getName(String input, int type) throws ErrorExceptions {
         Scanner sc = new Scanner(input);
         sc.next(); // skip first commandtype
@@ -81,6 +99,15 @@ public class InputManager {
             throw new ErrorExceptions("Missing item name!");
         }
     }
+
+    /**
+     * Returns the LocalDateTime from the user input.
+     *
+     * @param input user input.
+     * @param type type of task.
+     * @return LocalDateTime date and time.
+     * @throws ErrorExceptions when the date and time format is wrong or missing.
+     */
     public static String getDate(String input, int type) throws ErrorExceptions {
         Scanner sc = new Scanner(input);
         String next = sc.next();
@@ -122,9 +149,20 @@ public class InputManager {
         }
         return date;
     }
+
+    /**
+     * Sets the file directory of the local save.
+     *
+     * @param d file directory.
+     */
     public static void fileDir(String d){
         fileDir = d;
     }
 
+    /**
+     * Returns the file directory of the local save.
+     *
+     * @return String file directory.
+     */
     public static String getFileDir(){ return fileDir; }
 }
