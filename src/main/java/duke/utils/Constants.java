@@ -23,5 +23,7 @@ public class Constants {
 
     public static final String DELETEPATTERN = ("^(d|D)(e|E)(l|L)(e|E)(t|T)(e|E)$");
 
+    public static final String DATEFORMAT = "yyyy-mm-dd";
+
 
 }

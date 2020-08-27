@@ -19,7 +19,8 @@ public class DukeCommandMatcher {
     private SingletonTaskList taskList = SingletonTaskList.getInstance();
 
     public String matchCommand(String command) throws CommandNotFoundException, NullCommandException,
-            LackOfTimeException, NullCommandContentException, TaskOutOfBoundException, TaskNotSpecifyException {
+            LackOfTimeException, NullCommandContentException, TaskOutOfBoundException, TaskNotSpecifyException,
+            DateFormatException {
         if(Objects.equals(command, "")){
             throw new NullCommandException(command);
         }
@@ -70,57 +71,79 @@ public class DukeCommandMatcher {
     }
 
     private String handleDone(String[] targetTask) throws TaskOutOfBoundException, TaskNotSpecifyException {
-        if(targetTask.length < 2){
+        try {
+            int targetTaskPos = Integer.parseInt(targetTask[1]) - 1;
+            taskList.doneTask(targetTaskPos, targetTask);
+        } catch(IndexOutOfBoundsException e) {
             throw new TaskNotSpecifyException("task to be done not specified", "DONE");
         }
-        int targetTaskPos = Integer.parseInt(targetTask[1]) - 1;
-        taskList.doneTask(targetTaskPos, targetTask);
         return "Duke.Task " + targetTask + " has been done";
     }
 
     private String handleTodo(String[] todoStr) throws NullCommandContentException{
-        if(todoStr.length < 2){
-            throw new NullCommandContentException("Description cannot be null", "Todo" );
+        ToDo todo = null;
+        try {
+            String todoContent = todoStr[1];
+            todo = new ToDo(todoContent);
+        } catch (NullPointerException e) {
+            throw new NullCommandContentException("Description cannot be null", "Todo");
         }
-        String todoContent = todoStr[1];
-        ToDo todo = new ToDo(todoContent);
         return handleAdd(todo);
     }
 
-    private String handleDeadline(String[] deadlineStr) throws NullCommandContentException, LackOfTimeException {
-        if(deadlineStr.length < 2){
-            throw new NullCommandContentException("Description cannot be null", "Duke.Deadline" );
+    private String handleDeadline(String[] deadlineStr) throws NullCommandContentException, LackOfTimeException,
+            DateFormatException {
+        Deadline deadline = null;
+        String[] splitDeadline;
+        try {
+            String deadlineContent = deadlineStr[1];
+            splitDeadline = deadlineContent.split("/", 2);
+        } catch(IndexOutOfBoundsException e) {
+            throw new NullCommandContentException("Description cannot be null", "Deadline" );
         }
-        String deadlineContent = deadlineStr[1];
-        String[] splitDeadLineStr = deadlineContent.split("/", 2);
-        if(splitDeadLineStr.length < 2){
+
+        try {
+            String standardDate = UtilFunction.formatDateToStandard(splitDeadline[1]);
+            deadline = new Deadline(splitDeadline[0], standardDate);
+
+        } catch (IndexOutOfBoundsException e) {
             throw new LackOfTimeException("The time cannot be empty", "Duke.Deadline" );
         }
-        Deadline deadline = new Deadline(splitDeadLineStr[0], splitDeadLineStr[1]);
+
         return handleAdd(deadline);
     }
 
-    private String handleEvent(String[] eventStr) throws NullCommandContentException, LackOfTimeException {
-        if(eventStr.length < 2){
-            throw new NullCommandContentException("Description cannot be null", "Duke.Event" );
+    private String handleEvent(String[] eventStr) throws NullCommandContentException, LackOfTimeException,
+            DateFormatException {
+        Event event = null;
+        String[] splitEventStr;
+        try {
+            String eventContent = eventStr[1];
+            splitEventStr = eventContent.split("/", 2);
+            if (eventContent.trim().isEmpty()) {
+                throw new IndexOutOfBoundsException();
+            }
+        } catch (IndexOutOfBoundsException e) {
+            throw new NullCommandContentException("Description cannot be null", "Event" );
         }
-        String eventContent = eventStr[1];
-        String[] splitEventStr = eventContent.split("/", 2);
-        if(splitEventStr.length < 2){
-            throw new LackOfTimeException("The time cannot be empty", "Duke.Event" );
+        try {
+            String standardDate = UtilFunction.formatDateToStandard(splitEventStr[1]);
+            event = new Event(splitEventStr[0], standardDate);
+        } catch(IndexOutOfBoundsException e) {
+            throw new LackOfTimeException("The time cannot be empty", "Event" );
         }
-        Event event = new Event(splitEventStr[0], splitEventStr[1]);
         return handleAdd(event);
     }
 
     private String handleDelete(String[] deleteStr) throws TaskNotSpecifyException, TaskOutOfBoundException {
-        if(deleteStr.length < 2){
+        int taskToDelete = -1;
+        try {
+            taskToDelete = Integer.parseInt(deleteStr[1]);
+            taskList.delete(taskToDelete);
+        } catch (IndexOutOfBoundsException | NumberFormatException e) {
             throw new TaskNotSpecifyException("task to deletion not specified", "DELETE");
         }
-        int taskToDelete = Integer.parseInt(deleteStr[1]);
-        taskList.delete(taskToDelete);
-        return "Duke.Task " + (taskToDelete -1) + " has been removed successfully";
-
+        return "Task " + (taskToDelete -1) + " has been removed successfully";
     }
 
 }
