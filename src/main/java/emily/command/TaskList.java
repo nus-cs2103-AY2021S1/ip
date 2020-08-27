@@ -1,4 +1,6 @@
-package main.java;
+package main.java.emily.command;
+
+import main.java.emily.task.Task;
 
 import java.util.ArrayList;
 

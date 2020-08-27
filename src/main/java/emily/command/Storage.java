@@ -1,4 +1,9 @@
-package main.java;
+package main.java.emily.command;
+
+import main.java.emily.task.Deadline;
+import main.java.emily.task.Event;
+import main.java.emily.task.Task;
+import main.java.emily.task.ToDos;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -34,19 +39,19 @@ public class Storage {
                         case 'T':
                             temp = line.split(",", 2);
                             Task t = new ToDos(temp[1]);
-                            t.finished = isCompleted;
+                            t.setFinished(isCompleted);
                             store.add(t);
                             break;
                         case 'D':
                             temp = line.split(",", 3);
                             Task d = new Deadline(temp[1], temp[2]);
-                            d.finished = isCompleted;
+                            d.setFinished(isCompleted);
                             store.add(d);
                             break;
                         case 'E':
                             temp = line.split(",", 3);
                             Task e = new Event(temp[1], temp[2]);
-                            e.finished = isCompleted;
+                            e.setFinished(isCompleted);
                             store.add(e);
                             break;
 
@@ -80,11 +85,11 @@ public class Storage {
                 String temp = "";
                 Task current = store.get(i);
                 if (current instanceof ToDos) {
-                    temp = "T" + (current.finished ? "1" : "0") + "," + current.description;
+                    temp = "T" + (current.isFinished() ? "1" : "0") + "," + current.getDescription();
                 } else if (current instanceof Deadline) {
-                    temp = "D" + (current.finished ? "1" : "0") + "," + current.description + "," + ((Deadline) current).getBy();
+                    temp = "D" + (current.isFinished() ? "1" : "0") + "," + current.getDescription() + "," + ((Deadline) current).getBy();
                 } else if (current instanceof Event) {
-                    temp = "E" + (current.finished ? "1" : "0") + "," + current.description + "," + ((Event) current).getAt();
+                    temp = "E" + (current.isFinished() ? "1" : "0") + "," + current.getDescription() + "," + ((Event) current).getAt();
                 }
 
                 txt = txt + temp + System.lineSeparator();

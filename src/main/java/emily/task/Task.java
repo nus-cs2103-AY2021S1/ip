@@ -1,4 +1,4 @@
-package main.java;
+package main.java.emily.task;
 
 public class Task {
     protected String description;
@@ -8,6 +8,18 @@ public class Task {
     public Task(String description) {
         this.description = description;
         this.finished = false;
+    }
+
+    public void setFinished(boolean b){
+        this.finished = b;
+    }
+
+    public boolean isFinished(){
+        return this.finished;
+    }
+
+    public String getDescription(){
+        return this.description;
     }
 
     public String getStatusIcon() {

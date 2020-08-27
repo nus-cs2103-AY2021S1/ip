@@ -1,6 +1,6 @@
-package main.java;
+package main.java.emily.command;
 
-import java.util.Scanner;
+import main.java.emily.task.Task;
 
 //deals with interactions with the user
 public class Ui {
@@ -47,7 +47,7 @@ public class Ui {
             if(input.contains("done")){
                 int index = Character.getNumericValue(input.charAt(5)) - 1;
                 current = ls.retrieve().get(index);
-                current.finished = true;
+                current.setFinished(true);
                 System.out.println(divider + "\nNice work, I have marked this task as done: " + current
                 + "\n" + divider);
 
