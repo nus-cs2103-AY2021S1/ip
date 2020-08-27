@@ -6,6 +6,12 @@ public class Duke {
         throw new DukeException("I'm sorry, but I don't know what that means :-(");
     }
 
+    public static void printMessage(String s) {
+        String output = String.format("____________________________________________________________\n%s\n" +
+                "____________________________________________________________\n",s);
+        System.out.println(output);
+    }
+
     public static Task createTask(String firstWord, String input) throws DukeException {
         Task newTask;
         if (firstWord.equals("todo")) {
@@ -53,15 +59,15 @@ public class Duke {
         while (true) {
             String input = sc.nextLine();
             String firstWord = input.split(" ")[0];
+            String output = "";
             if (input.equals("bye")) {
                 break;
             } else if (input.equals("list")) {
-                String listIntro = "Here are the tasks in your list:";
-                System.out.println(listIntro);
+                output += "Here are the tasks in your list:";
                 for (int i = 0; i < lst.size(); i ++) {
                     Task currentTask = lst.get(i);
                     String num = Integer.toString(i + 1);
-                    System.out.println(num + "." + currentTask);
+                    output += "\n" + num + "." + currentTask;
                 }
             } else if (firstWord.matches("done|delete")) {
                 String[] splitted = input.split("\\s+");
@@ -69,21 +75,23 @@ public class Duke {
                 Task selectedTask = lst.get(taskIndex);
                 if (firstWord.equals("done")) {
                     selectedTask.markAsDone();
-                    System.out.println("Nice! I've marked this task as done:\n  " + selectedTask);
+                    output += "Nice! I've marked this task as done:\n  " + selectedTask;
                 } else {
                     lst.remove(taskIndex);
-                    System.out.println("Noted. I've removed this task:\n  " + selectedTask);
+                    output += "Noted. I've removed this task:\n  " + selectedTask;
                 }
-                System.out.println("Now you have " + lst.size() + " tasks in the list.");
+                output += "\nNow you have " + lst.size() + " tasks in the list.";
             } else if (firstWord.matches("todo|deadline|event")) {
                 Task newTask;
                 try {
                     newTask = createTask(firstWord, input);
                     lst.add(newTask);
-                    System.out.println("Got it. I've added this task:\n  " + newTask);
-                    System.out.println("Now you have " + lst.size() + " tasks in the list.");
+                    output += "Got it. I've added this task:\n  " + newTask;
+                    output += "\nNow you have " + lst.size() + " tasks in the list.";
+                    printMessage(output);
                 } catch (DukeException e) {
-                    System.out.println("☹ OOPS!!! " + e.getMessage());
+                    output += "☹ OOPS!!! " + e.getMessage();
+                    printMessage(output);
                 } finally {
                     mainLogic(sc, lst);
                 }
@@ -91,19 +99,21 @@ public class Duke {
                 try {
                     invalidInput();
                 } catch (DukeException e) {
-                    System.out.println("☹ OOPS!!! " + e.getMessage());
+                    output += "☹ OOPS!!! " + e.getMessage();
+                    printMessage(output);
                 } finally {
                     mainLogic(sc, lst);
                 }
             }
+            printMessage(output);
         }
 
-        String goodbyeMessage = "Bye. Hope to see you again soon!";
-        System.out.println(goodbyeMessage);
+        String goodbyeMessage = "Bye. Take care!";
+        printMessage(goodbyeMessage);
     }
     public static void main(String[] args) {
-        String greetings = "Hello! I'm Duke\nWhat can I do for you?";
-        System.out.println(greetings);
+        String greetings = "Hello! I'm Duke, your personal assistant.\nWhat can I do for you?";
+        printMessage(greetings);
 
         ArrayList<Task> lst = new ArrayList<>();
 
