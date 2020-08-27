@@ -193,6 +193,7 @@ public class Duke {
             input = myObj.nextLine().trim();
             System.out.println();
 
+            // If user inputs "help", print list of available commands
             if (input.equals("help")) {
                 ui.availableCommands();
                 continue;
@@ -227,7 +228,7 @@ public class Duke {
 
                 } catch (DukeException ex) {
                     System.out.print(ui.getServantSpeak());
-                    System.out.println(ex);
+                    ui.printError(ex);
                 }
                 System.out.println();
                 continue;
@@ -254,7 +255,7 @@ public class Duke {
 
                 } catch (DukeException ex) {
                     System.out.print(ui.getServantSpeak());
-                    System.out.println(ex);
+                    ui.printError(ex);
                 }
                 System.out.println();
                 continue;
@@ -288,7 +289,7 @@ public class Duke {
                 }
             } catch (DukeException ex) {
                 System.out.print(ui.getServantSpeak());
-                System.out.println(ex);
+                ui.printError(ex);
                 continue;
             }
 
@@ -315,7 +316,7 @@ public class Duke {
                     break;
                 } catch (DukeException ex) {
                     System.out.print(ui.getServantSpeak());
-                    System.out.println(ex);
+                    ui.printError(ex);
                     continue;
                 }
             case "event":
@@ -332,7 +333,7 @@ public class Duke {
                     break;
                 } catch (DukeException ex) {
                     System.out.print(ui.getServantSpeak());
-                    System.out.println(ex);
+                    ui.printError(ex);
                     continue;
                 }
             }

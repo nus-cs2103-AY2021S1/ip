@@ -40,4 +40,8 @@ public class Ui {
                 + "    done <task number> - Mark task as done\n"
                 + "    delete <task number> - Delete task from list\n");
     }
+
+    public void printError(DukeException ex) {
+        System.out.println(ex);
+    }
 }
