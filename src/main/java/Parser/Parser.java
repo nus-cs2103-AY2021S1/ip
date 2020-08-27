@@ -1,10 +1,10 @@
 package parser;
 
-import command.Command;
-import mugexception.MugException;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+
+import command.Command;
+import mugexception.MugException;
 
 /**
  * Parses and validates the user command

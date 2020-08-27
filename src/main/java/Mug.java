@@ -1,8 +1,8 @@
+import java.util.Scanner;
+
 import storage.Storage;
 import tasks.TaskList;
 import ui.Ui;
-
-import java.util.Scanner;
 
 /**
  * A tool to save task.
@@ -12,6 +12,11 @@ public class Mug {
     private final Ui ui;
     private final TaskList tasks;
 
+    /**
+     * Constructs a Mug Object that create/read the file at the given filepath
+     * and translate pass the information from the file to TaskList.
+     * @param filePath Filepath
+     */
     public Mug(String filePath) {
         this.ui = new Ui();
         Storage storage = new Storage(filePath);

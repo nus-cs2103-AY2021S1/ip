@@ -1,9 +1,9 @@
 package parser;
 
+import java.time.LocalDate;
+
 import command.Command;
 import mugexception.MugException;
-
-import java.time.LocalDate;
 
 import org.junit.jupiter.api.Test;
 
