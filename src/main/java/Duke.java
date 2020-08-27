@@ -42,6 +42,10 @@ public class Duke {
                     taskList.get(index).setDone();
                     Ui.printDoneTask(taskList.get(index));
                 }
+                else if(command[0].contentEquals("find") ){
+                    TaskList foundList = taskList.find(command[1]);
+                    Ui.printFoundList(foundList);
+                }
                 else if(command[0].contentEquals("todo") ){
                     try {
                         Task newTask = new Todo(command[1]);

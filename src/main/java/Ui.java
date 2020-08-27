@@ -67,6 +67,13 @@ public class Ui {
         printLineSeparator();
     }
 
+    public static void printFoundList(TaskList foundList) {
+        for(int i = 0; i < foundList.size(); i++){
+            System.out.println("\t" + (i + 1) + ". " + foundList.get(i));
+        }
+        printLineSeparator();
+    }
+
     public String getInput(){
         return scanner.nextLine();
     }
