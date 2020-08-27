@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class Storage {
 
-    public static void saveTasks(String path, TaskList<Task> taskList) throws IOException {
+    public static void saveTasks(String path, TaskList taskList) throws IOException {
         FileWriter fw = new FileWriter(path);
         BufferedWriter bw = new BufferedWriter(fw);
         for(Task t : taskList){
@@ -14,9 +14,9 @@ public class Storage {
         }
         bw.close();
     }
-    public static TaskList<Task> loadTasks(String path){
+    public static TaskList loadTasks(String path){
         File f = new File(path);
-        TaskList<Task> taskList = new TaskList<Task>();
+        TaskList taskList = new TaskList();
         try {
             Scanner fileReader = new Scanner(f);
             while(fileReader.hasNextLine()){
