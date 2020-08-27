@@ -48,8 +48,17 @@ public class Task {
                 : "0");
     }
 
+
     /**
-     *  Returns a string of the task.
+     * Returns a string of the task title.
+     * @return A string of the task title.
+     */
+    public String getTaskTitle() {
+        return this.taskTitle;
+    }
+
+    /**
+     * Returns a string of the task.
      * @return A string of the task.
      */
     @Override

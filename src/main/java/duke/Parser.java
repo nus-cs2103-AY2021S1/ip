@@ -74,7 +74,9 @@ public class Parser {
                     // if the user doesn't key in a valid index after keyword "delete"
                     Warnings.invalidDelete(tasks.size());
                 }
-
+            } else if (inputMsg.startsWith("find")) {
+                String keyword = inputMsg.split("find ")[1];
+                TaskList.findTask(keyword, tasks);
             } else {
                 // if the user randomly enter any other commands which are not inside the command list
                 Warnings.invalidInput();

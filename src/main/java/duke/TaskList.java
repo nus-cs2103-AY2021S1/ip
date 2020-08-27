@@ -87,4 +87,20 @@ public class TaskList {
         tasks.get(index - 1).markAsDone();
         Ui.doneTaskMsg(index, tasks);
     }
+
+    /**
+     * Finds all tasks that match with the keyword in the task list.
+     *
+     * @param keyword A string of keyword to find the matching tasks.
+     * @param tasks An ArrayList<Task> of all the tasks that match with the keyword.
+     */
+    public static void findTask(String keyword, ArrayList<Task> tasks) {
+        ArrayList<Task> matchedTasks = new ArrayList<>();
+        for (Task task: tasks) {
+            if (task.getTaskTitle().contains(keyword)) {
+                matchedTasks.add(task);
+            }
+        }
+        Ui.findMatchingTasks(keyword, matchedTasks);
+    }
 }

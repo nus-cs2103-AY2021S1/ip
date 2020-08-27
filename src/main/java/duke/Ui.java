@@ -54,8 +54,9 @@ public class Ui {
                 + "\n     4.event <event name> /at <event timing> -- add an event with its timing"
                 + "\n     5.done <task index> -- mark this task as done"
                 + "\n     6.delete <task index> -- mark this task from task list"
-                + "\n     7.help -- show all commands"
-                + "\n     8.bye -- exit the chatbot"
+                + "\n     7.find <keyword> -- find all tasks in the task list which contains the keyword"
+                + "\n     8.help -- show all commands"
+                + "\n     9.bye -- exit the chatbot"
                 + "\n**************************************************************\n";
         System.out.println(commandList);
     }
@@ -171,6 +172,33 @@ public class Ui {
                     + "\n Here they are:";
             for (int i = 0; i < tasks.size(); i++) {
                 outputMsg += "\n      " + (i + 1) + ". " + tasks.get(i);
+            }
+            outputMsg += "\n___________________________________________________________\n";
+        }
+
+        System.out.println(outputMsg);
+    }
+
+    /**
+     * Prints out all tasks that match the keyword stored in the task list.
+     *
+     * @param keyword A string of keyword to find the matching tasks.
+     * @param matchedTasks An ArrayList<Task> of all the tasks that match with the keyword.
+     */
+    public static void findMatchingTasks(String keyword, ArrayList<Task> matchedTasks) {
+        String outputMsg = "";
+        if (matchedTasks.isEmpty()) {
+            outputMsg = "___________________________________________________________"
+                    + "\n (⊙ ‿ ⊙)"
+                    + "\n There is no matching task with the keyword - '" + keyword+"'."
+                    + "\n___________________________________________________________\n";
+        } else {
+            outputMsg = "___________________________________________________________"
+                    + "\n (⊙ ‿ ⊙)"
+                    + "\n You have " + matchedTasks.size() + " tasks matched with keyword - '" + keyword+"'."
+                    + "\n Here they are:";
+            for (int i = 0; i < matchedTasks.size(); i++) {
+                outputMsg += "\n      " + (i + 1) + ". " + matchedTasks.get(i);
             }
             outputMsg += "\n___________________________________________________________\n";
         }
