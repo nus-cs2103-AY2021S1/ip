@@ -28,8 +28,8 @@ public class DoneCommand extends Command {
         }
 
         if (this.taskNum == 0 || this.taskNum > Task.totalTasks) {
-            throw new DukeException("You don't have a task with that number! ><\n" +
-                    "Can you try a different number?");
+            throw new DukeException("You don't have a task with that number! ><\n"
+                    + "Can you try a different number?");
         }
 
         Task t = tasks.getTask(this.taskNum);

@@ -19,6 +19,7 @@ public class Deadline extends Task {
      */
     public Deadline(String taskName, String date) throws DukeException {
         super(taskName);
+
         try {
             this.by = LocalDateTime.parse(
                     date, DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
@@ -26,7 +27,7 @@ public class Deadline extends Task {
                     DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
             this.printedFormat = this.by.format(
                     DateTimeFormatter.ofPattern("EEE, d MMM yyyy, HH:mm"));
-        } catch (DateTimeParseException e) {
+        } catch (DateTimeParseException ex) {
             Task.totalTasks--;
             throw new DukeException("You need to use the proper format!\n"
                     + "eg deadline return book /by 2019-10-15 2359");

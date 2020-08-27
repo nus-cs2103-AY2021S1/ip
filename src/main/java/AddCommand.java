@@ -7,17 +7,18 @@ public class AddCommand extends Command {
     public static int TODO = 1;
     public static int DEADLINE = 2;
     public static int EVENT = 3;
+
     private int taskType;
-    private String[] taskDesc;
+    private String[] taskInfos;
 
     /**
      * Instantiates an AddCommand object.
      * @param taskType The type of task to be added.
-     * @param taskDesc The description of the task to be added.
+     * @param taskInfos The description of the task to be added.
      */
-    public AddCommand(int taskType, String[] taskDesc) {
+    public AddCommand(int taskType, String[] taskInfos) {
         this.taskType = taskType;
-        this.taskDesc = taskDesc;
+        this.taskInfos = taskInfos;
     }
 
     /**
@@ -30,16 +31,20 @@ public class AddCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        Task t;
         if (this.taskType == TODO) {
-            t = new Todo(this.taskDesc[0]);
+            Task t = new Todo(this.taskInfos[0]);
+            tasks.addTask(t);
+            ui.showAdd(t);
         } else if (this.taskType == DEADLINE) {
-            t = new Deadline(this.taskDesc[0], this.taskDesc[1]);
+            Task t = new Deadline(this.taskInfos[0], this.taskInfos[1]);
+            tasks.addTask(t);
+            ui.showAdd(t);
         } else {
-            t = new Event(this.taskDesc[0], this.taskDesc[1]);
+            Task t = new Event(this.taskInfos[0], this.taskInfos[1]);
+            tasks.addTask(t);
+            ui.showAdd(t);
         }
-        tasks.addTask(t);
-        ui.showAdd(t);
+
         storage.updateData(tasks);
     }
 

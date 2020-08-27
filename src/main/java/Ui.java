@@ -52,20 +52,20 @@ public class Ui {
         System.out.println("Here are the list of commands you can use! =D");
         System.out.println("help: displays the list of commands available\n");
         System.out.println("list: displays the list of tasks you have\n");
-        System.out.println("todo *task description*: adds a task without " +
-                "any\ndate/time attached to it\n" + "eg todo read book\n");
-        System.out.println("deadline *task description* /by *date+time*: " +
-                "adds a\ntask that needs to be done before a specific date and time\n" +
-                "(date and time to be written in yyyy-mm-dd HHMM format)\n" +
-                "eg deadline return book /by 2019-10-15 2359\n");
-        System.out.println("event *task description* /at *date+time*: " +
-                "adds a task that\nstarts at a specific time and ends at a specific time\n" +
-                "(date and time to be written in yyyy-mm-dd HHMM format)\n" +
-                "eg event meeting /at 2019-10-15 1200\n");
-        System.out.println("done *task number*: marks the task with that number as\n" +
-                "done eg done 1\n");
-        System.out.println("delete *task number*: deletes the task with that number\n" +
-                "from the list eg delete 1\n");
+        System.out.println("todo *task description*: adds a task without any\n"
+                + "date/time attached to it\n" + "eg todo read book\n");
+        System.out.println("deadline *task description* /by *date+time*: adds a\n"
+                + "task that needs to be done before a specific date and time\n"
+                + "(date and time to be written in yyyy-mm-dd HHMM format)\n"
+                + "eg deadline return book /by 2019-10-15 2359\n");
+        System.out.println("event *task description* /at *date+time*: adds a task that\n"
+                + "starts at a specific time and ends at a specific time\n"
+                + "(date and time to be written in yyyy-mm-dd HHMM format)\n"
+                + "eg event meeting /at 2019-10-15 1200\n");
+        System.out.println("done *task number*: marks the task with that number as\n"
+                + "done eg done 1\n");
+        System.out.println("delete *task number*: deletes the task with that number\n"
+                + "from the list eg delete 1\n");
         System.out.println("bye: ends the session");
     }
 
@@ -92,8 +92,7 @@ public class Ui {
     public void showDelete(Task t) {
         System.out.println("Oki! I've removed this task!");
         System.out.println(t);
-        System.out.println("Now you have " + Task.totalTasks
-                + " tasks in your list!");
+        System.out.println("Now you have " + Task.totalTasks + " tasks in your list!");
     }
 
     /**
@@ -103,8 +102,7 @@ public class Ui {
     public void showAdd(Task t) {
         System.out.println("Oki! I have added this task:");
         System.out.println(t);
-        System.out.println("Now you have " + Task.totalTasks
-                + " tasks in your list!");
+        System.out.println("Now you have " + Task.totalTasks + " tasks in your list!");
     }
 
     /**

@@ -19,6 +19,7 @@ public class Event extends Task {
      */
     public Event(String taskName, String date) throws DukeException {
         super(taskName);
+
         try {
             this.at = LocalDateTime.parse(
                     date, DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
@@ -26,7 +27,7 @@ public class Event extends Task {
                     DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
             this.printedFormat = this.at.format(
                     DateTimeFormatter.ofPattern("EEE, d MMM yyyy, HH:mm"));
-        } catch (DateTimeParseException e) {
+        } catch (DateTimeParseException ex) {
             Task.totalTasks--;
             throw new DukeException("You need to use the proper format!\n"
                     + "eg event project meeting /at 2019-10-15 1200");

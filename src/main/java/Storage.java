@@ -2,6 +2,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -35,9 +36,9 @@ public class Storage {
                 File dir = new File ("data");
                 dir.mkdir();
                 f.createNewFile();
-            } catch (IOException e) {
+            } catch (IOException ex) {
                 throw new DukeException("File to store tasks could not be created!"
-                        + "/n" + "Your tasks won't be saved upon exit :(");
+                        + "\n" + "Your tasks won't be saved upon exit :(");
             }
         }
     }
@@ -50,27 +51,27 @@ public class Storage {
     public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> tasks = new ArrayList<>();
         File f = new File(filePath);
-        Scanner s;
+        Scanner sc;
         try {
-            s = new Scanner(f);
-        } catch (FileNotFoundException e) {
+            sc = new Scanner(f);
+        } catch (FileNotFoundException ex) {
             throw new DukeException("Saved list of tasks could not be loaded");
         }
 
-        while (s.hasNext()) {
-            String line = s.nextLine();
-            String[] lineArr = line.split(" ; ");
+        while (sc.hasNext()) {
+            String line = sc.nextLine();
+            String[] taskInfos = line.split(" ; ");
             Task t;
 
-            if (lineArr[0].equals("T")) {
-                t = new Todo(lineArr[2]);
-            } else if (lineArr[0].equals("E")) {
-                t = new Event(lineArr[2], lineArr[3]);
+            if (taskInfos[0].equals("T")) {
+                t = new Todo(taskInfos[2]);
+            } else if (taskInfos[0].equals("E")) {
+                t = new Event(taskInfos[2], taskInfos[3]);
             } else {
-                t = new Deadline(lineArr[2], lineArr[3]);
+                t = new Deadline(taskInfos[2], taskInfos[3]);
             }
 
-            if (lineArr[1].equals("1")) {
+            if (taskInfos[1].equals("1")) {
                 t.markDone();
             }
 
@@ -100,7 +101,7 @@ public class Storage {
             FileWriter fw = new FileWriter(filePath);
             fw.write(data);
             fw.close();
-        } catch (IOException e) {
+        } catch (IOException ex) {
             throw new DukeException("Saved list of tasks could not be updated");
         }
 

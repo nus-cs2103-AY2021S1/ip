@@ -3,7 +3,6 @@
  * A Todo object only consists of the task name.
  */
 public class Todo extends Task {
-
     /**
      * Instantiates a Todo object.
      * @param taskName The description of the task.
