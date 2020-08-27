@@ -1,0 +1,6 @@
+5
+T|read book|false
+T|read book|true
+T|return book /by June 6|false
+D|return book|June 6|true
+E|dinner|6 30|false
