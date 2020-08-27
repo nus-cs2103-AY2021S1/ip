@@ -1,19 +1,43 @@
-package Task;
+package task;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Event is the type of Task where a scheduled event is to take place at a specific time.
+ *
+ * @author Joshua
+ */
 public class Event extends Task {
     private final static DateTimeFormatter SAVE_READ_DATETIME_FORMAT = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
     private final static DateTimeFormatter NEW_DATETIME_FORMAT = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mma");
+
+
+    /**
+     * Creates the Event with the given task description.
+     *
+     * @param taskDescription the description given by the user for this task
+     */
     public Event(String taskDescription) {
         super(taskDescription);
     }
 
+
+    /**
+     * Sets the time for the event.
+     *
+     * @param givenDate the time given by the user for this event.
+     */
     public void setTime(LocalDateTime givenDate) {
         date = givenDate;
     }
 
+
+    /**
+     * Formats the Event Task into the format it is stored as.
+     *
+     * @return the formatted Event task.
+     */
     @Override
     public String saveFormat() {
         String base = "[E] ";
@@ -26,6 +50,11 @@ public class Event extends Task {
         return base;
     }
 
+    /**
+     * Returns the event to the ui to be displayed to the user.
+     *
+     * @return a String that contains the event time and date in the display format.
+     */
     @Override
     public String toString() {
         String base = "[E] ";

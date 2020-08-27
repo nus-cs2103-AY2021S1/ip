@@ -1,12 +1,18 @@
-package Duke;
+package duke;
 
-import Task.Event;
+import task.Event;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+
+/**
+ * Tests if the Event Task is correctly implemented.
+ *
+ * @author Joshua
+ */
 public class EventTest {
 
     LocalDateTime dateTime = LocalDateTime.parse("2020-02-20T23:59");
