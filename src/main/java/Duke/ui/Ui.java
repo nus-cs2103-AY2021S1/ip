@@ -5,20 +5,33 @@ import Duke.task.TaskList;
 
 import java.util.Scanner;
 
+/**
+ * The Ui class handles all the interactions, including input and output, with the user.
+ */
 public class Ui {
 
 	private Scanner sc;
 	public Ui () {
 		this.sc = new Scanner(System.in);
 	}
+
+	/**
+	 * Print out exit program to user.
+	 */
 	public void printExit() {
 		System.out.println("Bye. Hope to see you again soon!");
 	}
 
+	/**
+	 * Print out section divider.
+	 */
 	public void printDivider() {
 		System.out.println("_______________________________________________________________");
 	}
 
+	/**
+	 * Print out greeting to user.
+	 */
 	public void printGreeting() {
 		String logo =
 				" ____        _                    \n"
@@ -33,31 +46,61 @@ public class Ui {
 		System.out.println();
 	}
 
+	/**
+	 * Prints the task list in the program.
+	 */
 	public void printList(TaskList lst) {
 		System.out.println(lst.toString());
 	}
 
+	/**
+	 * Takes in user input to be processed.
+	 *
+	 * @return String representation of user input.
+	 */
 	public String readCommand() {
 		//Take in Input
 		String query = sc.nextLine();
 		return query;
 	}
 
+	/**
+	 * Prints out any error messages.
+	 *
+	 * @param message error message
+	 */
 	public void showError(String message) {
 		System.out.println(message);
 	}
 
+	/**
+	 * Prints out to user that task is successfully added.
+	 *
+	 * @param lst TaskList in the program
+	 * @param task Task that was added
+	 */
 	public void printTaskAdded(TaskList lst, Task task) {
 		System.out.println("Got it. I've added this task:");
 		System.out.println(task.toString());
 		System.out.println("Now you have " + lst.getSize() + " tasks in the list.");
 	}
 
+	/**
+	 * Print out mark Task as done.
+	 *
+	 * @param task Task to be marked done.
+	 */
 	public void printTaskDone(Task task) {
 		System.out.println("Nice! I've marked this task as done:");
 		System.out.println(task.toString());
 	}
 
+	/**
+	 * Print out Task successfully deleted
+	 *
+	 * @param lst TaskList in the program
+	 * @param task Task to be deleted
+	 */
 	public void printTaskDeleted(TaskList lst, Task task) {
 		System.out.println("Noted. I've removed this task:");
 		System.out.println(task.toString());

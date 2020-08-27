@@ -5,13 +5,27 @@ import Duke.exception.DukeException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Stores and represents tasks in the application. All the tasks in the program,
+ * and its states, are stored in this list.
+ */
 public class TaskList {
 	private List<Task> lst;
 
+	/**
+	 * Creates a new TaskList Object.
+	 */
 	public TaskList() {
 		lst = new ArrayList<>();
 	}
 
+	/**
+	 * Creates a new TaskList Object from a String source. If the String is valid, a new
+	 * TaskList with pre-existing tasks would be constructed. Otherwise, a DukeException will be thrown.
+	 *
+	 * @param load String to be parsed and converted to list of tasks(TaskList).
+	 * @throws DukeException when String cannot be successfully parsed.
+	 */
 	public TaskList(String load) throws DukeException {
 		//initialize  list of tasks
 		lst = new ArrayList<>();
@@ -43,19 +57,40 @@ public class TaskList {
 	}
 
 
+	/**
+	 * Returns the list of tasks in the program.
+	 *
+	 * @return list of tasks.
+	 */
 	public List<Task> getList() {
 		return this.lst;
 	}
 
+	/**
+	 * Return the task at a specified index of the list.
+	 *
+	 * @param index index of task.
+	 * @return Task Object from the list.
+	 */
 	public Task get(int index) {
 		return this.lst.get(index);
 	}
 
+	/**
+	 * Adds a Task into the TaskList Object.
+	 *
+	 * @param tsk Task to be added.
+	 */
 	public void add(Task tsk) {
 		this.lst.add(tsk);
 	}
 
 
+	/**
+	 * String representation of the TaskList.
+	 *
+	 * @return String representation of the TaskList.
+	 */
 	public String toString() {
 		//initialize String
 		String taskList = "";
@@ -82,15 +117,31 @@ public class TaskList {
 		return taskList;
 	}
 
+	/**
+	 * Return size of the task list.
+	 *
+	 * @return number of lists.
+	 */
 	public int getSize() {
 		return this.getList().size();
 	}
 
+	/**
+	 * Mark an item in the task list as done.
+	 *
+	 * @param itemNumber task number in the list(not index number)
+	 */
 	public void markDone(int itemNumber) {
 		Task doneItem = this.lst.get(itemNumber - 1);
 		doneItem.markAsDone();
 	}
 
+	/**
+	 * Deletes a Task in the list at the specified task number.
+	 *
+	 * @param itemNumber task number in the list(not index number)
+	 * @return Task that was deleted from the list.
+	 */
 	public Task delete(int itemNumber) {
 		Task item = this.lst.get(itemNumber - 1);
 		this.lst.remove(item);

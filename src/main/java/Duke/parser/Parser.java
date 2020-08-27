@@ -3,8 +3,19 @@ package Duke.parser;
 import Duke.command.*;
 import Duke.exception.DukeException;
 
+/**
+ * Handles user inputs and make sense out of it.
+ */
 public class Parser {
 
+	/**
+	 * Takes in a line of user input as a String and returns a relevant Command. Otherwise,
+	 * throw a DukeException when a command is invalid.
+	 *
+	 * @param fullCommand user input
+	 * @return Command to be executed
+	 * @throws DukeException when inputs are invalid or incomplete
+	 */
 	public static Command parse(String fullCommand) throws DukeException {
 		//remove leading and trailing white spaces
 		String noWhiteSpace = fullCommand.strip();
