@@ -2,7 +2,15 @@ package duke;
 
 import java.io.IOException;
 
+/**
+ * Displays different kinds of warning messages when error occurs.
+ */
 public class Warnings extends Ui {
+    /**
+     * Display warning message when invalid done task index is given.
+     *
+     * @param tasksSize Size of the user's task list.
+     */
     public static void invalidDoneTaskIndex(int tasksSize) {
         String warningMsg = "################################################################"
                 + "\n [• ▂ •]What? "
@@ -14,6 +22,9 @@ public class Warnings extends Ui {
         System.out.println(warningMsg);
     }
 
+    /**
+     * Display warning message when invalid ToDoTask input entered.
+     */
     public static void invalidToDo() {
         String warningMsg = "################################################################"
                 + "\n [• ▂ •]What? "
@@ -24,6 +35,9 @@ public class Warnings extends Ui {
         System.out.println(warningMsg);
     }
 
+    /**
+     * Display warning message when invalid DeadlineTask input entered.
+     */
     public static void invalidDeadline() {
         String warningMsg = "################################################################"
                 + "\n [• ▂ •]What? "
@@ -34,6 +48,9 @@ public class Warnings extends Ui {
         System.out.println(warningMsg);
     }
 
+    /**
+     * Display warning message when invalid EventTask input entered.
+     */
     public static void invalidEvent() {
         String warningMsg = "################################################################"
                 + "\n [• ▂ •]What? "
@@ -44,6 +61,9 @@ public class Warnings extends Ui {
         System.out.println(warningMsg);
     }
 
+    /**
+     * Display warning message when Parser cannot recognize the input.
+     */
     public static void invalidInput() {
         String warningMsg = "################################################################"
                 + "\n [• ▂ •]What? "
@@ -53,6 +73,11 @@ public class Warnings extends Ui {
         System.out.println(warningMsg);
     }
 
+    /**
+     * Display warning message when invalid delete input entered.
+     *
+     * @param tasksSize Size of the user's task list.
+     */
     public static void invalidDelete(int tasksSize) {
         String warningMsg = "################################################################"
                 + "\n [• ▂ •]What? "
@@ -64,6 +89,11 @@ public class Warnings extends Ui {
         System.out.println(warningMsg);
     }
 
+    /**
+     * Display warning message when error occurs while loading data file.
+     *
+     * @param e Exception message.
+     */
     public static void invalidFileInput(IOException e) {
         String warningMsg1 = "################################################################"
                 + "\n [• ▂ •]What? "
@@ -75,6 +105,11 @@ public class Warnings extends Ui {
         System.out.println(warningMsg2);
     }
 
+    /**
+     * Display warning message when error occurs while saving into data file.
+     *
+     * @param e Exception message.
+     */
     public static void invalidFileOutput(IOException e) {
         String warningMsg1 = "################################################################"
                 + "\n [• ▂ •]What? "

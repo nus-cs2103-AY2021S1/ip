@@ -2,8 +2,13 @@ package duke;
 
 import java.util.ArrayList;
 
+/**
+ * Prints the relevant messages.
+ */
 public class Ui {
-
+    /**
+     * Prints logo "Welcome" greeting.
+     */
     public void logoMsg() {
         String logo = " ___       __   _______   ___       ________  " +
                 "________  _____ ______   _______      \n" +
@@ -23,6 +28,9 @@ public class Ui {
         System.out.println(logo);
     }
 
+    /**
+     * Prints greeting.
+     */
     public void greetingMsg() {
         String greetingMsg = "\n___________________________________________________________"
                 + "\n |°‿°|"
@@ -33,6 +41,9 @@ public class Ui {
         System.out.println(greetingMsg);
     }
 
+    /**
+     * Prints help message to show all possible commands available.
+     */
     public static void helpMsg() {
         String commandList = "**************************************************************"
                 + "\n ┗( ⊙.⊙ )┛ "
@@ -49,6 +60,9 @@ public class Ui {
         System.out.println(commandList);
     }
 
+    /**
+     * Prints bye message to see goodbye to the user.
+     */
     public static void byeMsg() {
         String byeMsg = "\n___________________________________________________________"
                 + "\n |^_^|┛"
@@ -60,6 +74,11 @@ public class Ui {
         System.out.println(byeMsg);
     }
 
+    /**
+     * Prints confirmation message to show user the deadline task has been added into the task list.
+     *
+     * @param tasks The overall user's task list.
+     */
     public static void addDeadlineTaskMsg(ArrayList<Task> tasks) {
         String outputMsg = "\n___________________________________________________________"
                 + "\n (^.^)"
@@ -70,6 +89,11 @@ public class Ui {
         System.out.println(outputMsg);
     }
 
+    /**
+     * Prints confirmation message to show user the event task has been added into the task list.
+     *
+     * @param tasks The overall user's task list.
+     */
     public static void addEventTaskMsg(ArrayList<Task> tasks) {
         String outputMsg = "\n___________________________________________________________"
                 + "\n (^.^)"
@@ -80,6 +104,11 @@ public class Ui {
         System.out.println(outputMsg);
     }
 
+    /**
+     * Prints confirmation message to show user the to-do task has been added into the task list.
+     *
+     * @param tasks The overall user's task list.
+     */
     public static void addTodoTaskMsg(ArrayList<Task> tasks) {
         String outputMsg = "\n___________________________________________________________"
                 + "\n (^.^)"
@@ -90,6 +119,12 @@ public class Ui {
         System.out.println(outputMsg);
     }
 
+    /**
+     * Prints confirmation message to show user the task task has been marked as done.
+     *
+     * @param index A series number of the task in the task list.
+     * @param tasks The overall user's task list.
+     */
     public static void doneTaskMsg(int index, ArrayList<Task> tasks) {
         String outputMsg = "___________________________________________________________"
                 + "\n (ﾉﾟ0ﾟ)ﾉ~"
@@ -100,6 +135,13 @@ public class Ui {
         System.out.println(outputMsg);
     }
 
+    /**
+     * Prints confirmation message to show user the corresponding task has been deleted from the task list.
+     *
+     * @param index A series number of the task in the task list.
+     * @param newSizeOfTasks Size of the task list.
+     * @param taskToDelete Task to be deleted.
+     */
     public static void deleteTaskMsg(int index, int newSizeOfTasks, Task taskToDelete) {
         String outputMsg = "___________________________________________________________"
                 + "\n (ಠ‿↼)"
@@ -110,6 +152,11 @@ public class Ui {
         System.out.println(outputMsg);
     }
 
+    /**
+     * Prints out all tasks stored in the task list.
+     *
+     * @param tasks The overall user's task list.
+     */
     public static void getAllTasksMsg(ArrayList<Task> tasks) {
         String outputMsg = "";
         if (tasks.isEmpty()) {
