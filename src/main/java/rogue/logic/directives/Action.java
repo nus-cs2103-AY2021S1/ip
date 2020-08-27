@@ -13,6 +13,7 @@ public enum Action {
     ADD_DEADLINE    ("deadline"),
     ADD_EVENT       ("event"),
     LIST            ("list"),
+    FIND            ("find"),
     DELETE          ("delete"),
     MARK_AS_DONE    ("done"),
     EXIT            ("bye"),

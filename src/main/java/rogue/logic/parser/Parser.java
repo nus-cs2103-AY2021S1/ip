@@ -25,6 +25,9 @@ public class Parser {
         case LIST:
             return new ListDirective();
 
+        case FIND:
+            return new FindDirectiveParser().parse(args);
+
         case MARK_AS_DONE:
             return new DoneDirectiveParser().parse(args);
 

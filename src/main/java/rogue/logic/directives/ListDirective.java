@@ -28,7 +28,7 @@ public class ListDirective implements Executable {
 
         builder.append("dO YoU ReAlLy nEeD Me tO NaMe tHeM OuT foR yOu?\n");
         for (Task task : tasks.getTaskList()) {
-            builder.append(String.format("%d. %s\n", ++i, task.toString()));
+            builder.append(String.format("%d. %s\n", ++i, task));
         }
 
         return new Report(builder.toString());
