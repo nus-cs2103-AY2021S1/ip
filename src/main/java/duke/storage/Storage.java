@@ -26,10 +26,10 @@ public class Storage {
 
     /**
      * Returns a Task object that has been deserialized from its string representation.
+     *
      * @param serializedTask Serialized Task object (String representation of Task object)
      * @return Task object
      */
-
     public Task deserializeTask(String serializedTask) throws RuntimeException {
         String[] tokens = serializedTask.split(" \\| ");
 
@@ -55,6 +55,7 @@ public class Storage {
 
     /**
      * Returns a string representation of Task object.
+     *
      * @param task Task object
      * @return Task string
      */
@@ -66,9 +67,9 @@ public class Storage {
             if (task instanceof ToDo) {
                 return String.format("T | %c | %s\n", status, description);
             } else if (task instanceof Deadline) {
-                return String.format("D | %c | %s | %s\n", status, description, ((Deadline)task).getDoByStr());
+                return String.format("D | %c | %s | %s\n", status, description, ((Deadline) task).getDoByStr());
             } else {
-                return String.format("E | %c | %s | %s\n", status, description, ((Event)task).getTimeStr());
+                return String.format("E | %c | %s | %s\n", status, description, ((Event) task).getTimeStr());
             }
         } else {
             throw new RuntimeException("Task is invalid. File might be corrupted.");
@@ -77,6 +78,7 @@ public class Storage {
 
     /**
      * Returns deserialized tasks in drive.
+     *
      * @return List of deserialized tasks
      */
     public List<Task> loadTasks() {
@@ -93,6 +95,7 @@ public class Storage {
 
     /**
      * Save serialized tasks in drive.
+     *
      * @param tasks List of tasks to serialize
      */
     public void saveTasks(List<Task> tasks) {

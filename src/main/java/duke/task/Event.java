@@ -1,4 +1,4 @@
-package duke.task; 
+package duke.task;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -6,8 +6,7 @@ import java.util.Date;
 /**
  * Tasks that start at a specific time and ends at a specific time.
  */
-
-public class Event extends Task{
+public class Event extends Task {
     private final Date time;
 
     public Event(String description, boolean isDone, Date time) {
