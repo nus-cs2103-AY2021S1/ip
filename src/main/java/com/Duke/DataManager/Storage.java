@@ -13,6 +13,8 @@ import java.io.FileWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -66,21 +68,21 @@ public class Storage {
                     }
                 }else if (dataArr[0]=="E"){
                     if(dataArr[4] == "Y"){
-                        taskList.add(new Event(dataArr[1], dataArr[2], dataArr[3], true));
+                        taskList.add(new Event(dataArr[1], LocalTime.parse(dataArr[2]), LocalTime.parse(dataArr[3]), true));
                     }else{
-                        taskList.add(new Event(dataArr[1], dataArr[2], dataArr[3], false));
+                        taskList.add(new Event(dataArr[1], LocalTime.parse(dataArr[2]), LocalTime.parse(dataArr[3]), false));
                     }
                 }else if(dataArr[0]=="D"){
                     if(dataArr[4] == "Y"){
-                        taskList.add(new Deadline(dataArr[1], dataArr[2], true));
+                        taskList.add(new Deadline(dataArr[1], LocalDate.parse(dataArr[2]), true));
                     }else{
-                        taskList.add(new Deadline(dataArr[1], dataArr[2], false));
+                        taskList.add(new Deadline(dataArr[1], LocalDate.parse(dataArr[2]), false));
                     }
                 }else{
-                    if(dataArr[2] == "Y"){
-                        taskList.add(new Task(dataArr[1], true));
+                    if(dataArr[1] == "Y"){
+                        taskList.add(new Task(dataArr[0], true));
                     }else{
-                        taskList.add(new Task(dataArr[1], false));
+                        taskList.add(new Task(dataArr[0], false));
                     }
                 }
             }

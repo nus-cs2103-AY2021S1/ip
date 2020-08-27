@@ -2,11 +2,14 @@ package com.Duke.Tasks;
 
 import com.Duke.TaskManager.DukeException;
 
-public class Event extends Task{
-    private final String start;
-    private final String end;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
-    public Event(String task, String start, String end, boolean isDone)throws DukeException {
+public class Event extends Task{
+    private final LocalTime start;
+    private final LocalTime end;
+
+    public Event(String task, LocalTime start, LocalTime end, boolean isDone)throws DukeException {
         super(task,isDone);
         this.start = start;
         this.end = end;
@@ -20,7 +23,7 @@ public class Event extends Task{
     }
 
     public String getDeadline(){
-        return "(at:" + this.start + "-" + this.end + ")";
+        return "(at: " + this.start.format(DateTimeFormatter.ofPattern("HH:mm")) + " - " + this.end.format(DateTimeFormatter.ofPattern("HH:mm")) + ")";
     }
 
     @Override

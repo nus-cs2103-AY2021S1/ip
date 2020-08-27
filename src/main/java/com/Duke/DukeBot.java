@@ -5,6 +5,9 @@ import com.Duke.TaskManager.DukeException;
 import com.Duke.TaskManager.TaskList;
 import com.Duke.Tasks.*;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 public class DukeBot{
@@ -77,28 +80,32 @@ public class DukeBot{
                 }
             }else if(splitList[0].equals("deadline")){
                 try {
-                    String[] splitList2 = splitList[1].split("/by", 2);
-                    Deadline deadline = new Deadline(splitList2[0], splitList2[1], false);
+                    String[] splitList2 = splitList[1].split("/by ", 2);
+                    Deadline deadline = new Deadline(splitList2[0], LocalDate.parse(splitList2[1]), false);
                     System.out.println("     Got it I've now added this Task:");
                     System.out.println("       " + deadline.toString());
                     ls.add(deadline);
                     System.out.println("     Now you have " + ls.length() + " tasks in the list.");
+                } catch (DateTimeParseException e){
+                    System.out.println("     \u2639 OOPS!!! The deadline is not of the proper format, make sure you enter it as YYYY-MM-dd");
                 } catch (Exception e){
-                    System.out.println("     \u2639 OOPS!!! The description or the time to complete by of a deadline cannot be empty.");
+                    System.out.println("     \u2639 OOPS!!! The description is empty or you have not entered a proper deadline.");
                 }finally {
                     System.out.println(line);
                     input = sc.nextLine();
                 }
             }else if(splitList[0].equals("event")){
                 try {
-                    String[] splitList2 = splitList[1].split("/at", 2);
+                    String[] splitList2 = splitList[1].split("/at ", 2);
                     String[] splitList3 = splitList2[1].split("-", 2);
-                    Event event = new Event(splitList2[0], splitList3[0], splitList3[1], false);
+                    Event event = new Event(splitList2[0], LocalTime.parse(splitList3[0]), LocalTime.parse(splitList3[1]), false);
                     System.out.println("     Got it I've now added this Task:");
                     System.out.println("       " + event.toString());
                     ls.add(event);
                     System.out.println("     Now you have " + ls.length() + " tasks in the list.");
-                }catch(Exception e){
+                }catch(DateTimeParseException e){
+                    System.out.println("     \u2639 OOPS!!! The format of your start or end time is not correct, format it as HH:mm");
+                } catch(Exception e){
                     System.out.println("     \u2639 OOPS!!! The description or the time duration of a event cannot be empty.");
                 }finally {
                     System.out.println(line);

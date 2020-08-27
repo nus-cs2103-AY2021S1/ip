@@ -2,15 +2,18 @@ package com.Duke.Tasks;
 
 import com.Duke.TaskManager.DukeException;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class Deadline extends Task{
-    private final String deadline;
-    public Deadline(String task, String deadline, boolean isDone)throws DukeException {
+    private final LocalDate deadline;
+    public Deadline(String task, LocalDate deadline, boolean isDone)throws DukeException {
         super(task,isDone);
         this.deadline = deadline;
     }
 
     public String getDeadline(){
-        return "(by:" + this.deadline + ")";
+        return "(by: " + this.deadline.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")" ;
     }
 
     @Override
