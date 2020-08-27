@@ -10,6 +10,10 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Parser is the class which makes sense of the user's commands.
+ * @author Joshua
+ */
 public class Parser {
     private final static String ACTION_LIST = "list";
     private final static String TERMINATION = "bye";
@@ -22,10 +26,16 @@ public class Parser {
     private final static String EVENT_DATE = "/at";
     private final static DateTimeFormatter SAVE_READ_DATETIME_FORMAT = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
 
+    /**
+     * Creates a Parser object.
+     */
     public Parser() {
     }
 
-    enum typeOfTask {
+    /**
+     * Types of task that could result from the parsed user command.
+     */
+    enum typeOfCommand {
         DONE,
         DEADLINE,
         TODO,
@@ -33,6 +43,12 @@ public class Parser {
         DELETE
     }
 
+    /**
+     * Parses the input from the user and returns a command with respect to the
+     * input from the user.
+     * @param fullCommand the given input from the user.
+     * @return the command that will be carried out by Duke.
+     */
     public static Command parse(String fullCommand) {
         String shortCommand;
         String restOfCommand;
@@ -53,25 +69,31 @@ public class Parser {
                     return new IncorrectCommand("OOPS !!! Lo siento, pero no sé qué significa eso :-(");
                 }
             case TASK_COMPLETED:
-                return handle(restOfCommand, typeOfTask.DONE);
+                return handle(restOfCommand, typeOfCommand.DONE);
             case TASK_DEADLINE:
-                return handle(restOfCommand, typeOfTask.DEADLINE);
+                return handle(restOfCommand, typeOfCommand.DEADLINE);
             case TASK_TODO:
-                return handle(restOfCommand, typeOfTask.TODO);
+                return handle(restOfCommand, typeOfCommand.TODO);
             case TASK_EVENT:
-                return handle(restOfCommand, typeOfTask.EVENT);
+                return handle(restOfCommand, typeOfCommand.EVENT);
             case DELETE_EVENT:
-                return handle(restOfCommand, typeOfTask.DELETE);
+                return handle(restOfCommand, typeOfCommand.DELETE);
             default:
                 return new IncorrectCommand("OOPS !!! Lo siento, pero no sé qué significa eso :-(");
         }
     }
 
-    private static Command handle(String restOfCommand, typeOfTask typeOfTask) {
+    /**
+     * Handles the creation of more complicated commands that require interaction with the TaskList.
+     * @param restOfCommand the content of the task to be added after initial command.
+     * @param typeOfCommand the type of command to be carried out.
+     * @return the command that will finally be carried out by Duke.
+     */
+    private static Command handle(String restOfCommand, typeOfCommand typeOfCommand) {
         if (restOfCommand.isEmpty()) {
             return new IncorrectCommand("☹ OOPS !!! La descripción de una tarea no puede estar vacía.");
         }
-        switch (typeOfTask) {
+        switch (typeOfCommand) {
             case DONE:
                 int positionDone;
                 try {
