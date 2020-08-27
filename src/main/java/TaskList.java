@@ -13,15 +13,15 @@ public class TaskList {
         return task.toString();
     }
 
-    public String deleteTask(int tasknumber) {
-        int i = tasknumber - 1;
+    public String deleteTask(int taskNumber) {
+        int i = taskNumber - 1;
         Task removed_task = this.tasklist.get(i);
         this.tasklist.remove(i);
         return removed_task.toString();
     }
 
-    public String updateTask(int tasknumber) {
-        int i = tasknumber - 1;
+    public String updateTask(int taskNumber) {
+        int i = taskNumber - 1;
         Task updated_task = this.tasklist.get(i);
         updated_task.setDone();
         return updated_task.toString();

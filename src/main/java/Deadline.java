@@ -21,7 +21,7 @@ public class Deadline extends Task {
         this.deadline = deadline;
     }
 
-    private LocalDate getDeadline() {
+    public LocalDate getDeadline() {
         return this.deadline;
     }
 

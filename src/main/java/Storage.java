@@ -23,8 +23,8 @@ public class Storage {
     }
 
 
-    public File retrieveFile(String filepath) throws IOException {
-        File file = new File(filepath);
+    public File retrieveFile(String filePath) throws IOException {
+        File file = new File(filePath);
         if (!file.exists()) {
             file.createNewFile();
         }

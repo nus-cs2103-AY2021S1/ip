@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.time.LocalDate;
 
 /**
@@ -75,7 +74,7 @@ public class Parser {
         String[] stringarr = cmd.split(" ", 2);
         if (stringarr[0].equals("todo")) {
             if (stringarr.length <= 1) {
-                String message = "OOPS!!! The description of a todo cannot be empty";
+                String message = "OOPS!!! The description of a Todo cannot be empty";
                 throw new DukeException(message);
             } else {
                 Todo todo = new Todo(stringarr[1]);
@@ -84,7 +83,7 @@ public class Parser {
             }
         } else if (stringarr[0].equals("deadline")) {
             if (stringarr.length <= 1) {
-                String message = "OOPS!!! The description of a deadline cannot be empty";
+                String message = "OOPS!!! The description of a Deadline cannot be empty";
                 throw new DukeException(message);
             } else {
                 String[] secondarr = stringarr[1].split("/by", 2);
@@ -95,7 +94,7 @@ public class Parser {
             }
         } else if (stringarr[0].equals("event")) {
             if (stringarr.length <= 1) {
-                String message = "OOPS!!! The description of an event cannot be empty";
+                String message = "OOPS!!! The description of an Event cannot be empty";
                 throw new DukeException(message);
             } else {
                 String[] secondarr = stringarr[1].split("/at", 2);

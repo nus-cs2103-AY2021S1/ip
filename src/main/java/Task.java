@@ -7,7 +7,7 @@
  *
  * @author Lee Penn Han.
  * @version 1.0.
- * @since 2020-01-25.
+ * @since 2020-08-25.
  */
 public class Task {
     String task;
