@@ -7,6 +7,7 @@ public class DeleteCommand extends Command {
 
     /**
      * Instantiates a DeleteCommand object.
+     *
      * @param taskNum The task number to be deleted.
      */
     public DeleteCommand(int taskNum) {
@@ -16,6 +17,7 @@ public class DeleteCommand extends Command {
     /**
      * Executes the command by deleting the specified task from the list, replying the user,
      * and updating the list of tasks stored in the computer.
+     *
      * @param tasks List of all the tasks of the user.
      * @param ui Replies the user.
      * @param storage Stores the new task in the computer.
@@ -41,6 +43,7 @@ public class DeleteCommand extends Command {
 
     /**
      * Returns false as the command is not an exit command.
+     *
      * @return False.
      */
     @Override

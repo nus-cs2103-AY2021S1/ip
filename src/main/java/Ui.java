@@ -23,6 +23,7 @@ public class Ui {
 
     /**
      * Reads the input of the user.
+     *
      * @return User input.
      */
     public String readCommand() {
@@ -107,6 +108,9 @@ public class Ui {
         System.out.println("Now you have " + Task.totalTasks + " tasks in your list!");
     }
 
+    /**
+     * Displays the matching tasks found using the keyword.
+     */
     public void showFind() {
         System.out.println("Oki! I have found the matching tasks in your list:");
     }

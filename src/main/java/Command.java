@@ -4,6 +4,7 @@
 public abstract class Command {
     /**
      * Executes the command by performing the steps required for that.
+     *
      * @param tasks List of all the tasks of the user.
      * @param ui Replies the user.
      * @param storage Stores the new task in the computer.
@@ -13,6 +14,7 @@ public abstract class Command {
 
     /**
      * Shows whether the command is an exit command or not.
+     *
      * @return True if the command is an exit command, false if it is not.
      */
     public abstract boolean isExit();

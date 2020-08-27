@@ -5,6 +5,7 @@
 public class Todo extends Task {
     /**
      * Instantiates a Todo object.
+     *
      * @param taskName The description of the task.
      */
     public Todo(String taskName) {
@@ -13,6 +14,7 @@ public class Todo extends Task {
 
     /**
      * Returns the string representation of the todo task in the format to be saved in the computer.
+     *
      * @return String representation of the task.
      */
     @Override
@@ -22,6 +24,7 @@ public class Todo extends Task {
 
     /**
      * Returns the string representation of the todo task.
+     *
      * @return String representation of the todo task.
      */
     @Override

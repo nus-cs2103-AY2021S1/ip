@@ -4,6 +4,7 @@
 public class ExitCommand extends Command {
     /**
      * Executes the command by showing the exit message to the user.
+     *
      * @param tasks List of all the tasks of the user.
      * @param ui Replies the user.
      * @param storage Stores the new task in the computer.
@@ -15,6 +16,7 @@ public class ExitCommand extends Command {
 
     /**
      * Returns true as the command is an exit command.
+     *
      * @return True.
      */
     @Override

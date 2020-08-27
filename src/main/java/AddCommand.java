@@ -13,6 +13,7 @@ public class AddCommand extends Command {
 
     /**
      * Instantiates an AddCommand object.
+     *
      * @param taskType The type of task to be added.
      * @param taskInfos The description of the task to be added.
      */
@@ -24,6 +25,7 @@ public class AddCommand extends Command {
     /**
      * Executes the command by adding the new task to the list, replying the user,
      * and updating the list of tasks stored in the computer.
+     *
      * @param tasks List of all the tasks of the user.
      * @param ui Replies the user.
      * @param storage Stores the new task in the computer.
@@ -50,6 +52,7 @@ public class AddCommand extends Command {
 
     /**
      * Returns false as the command is not an exit command.
+     *
      * @return False.
      */
     @Override

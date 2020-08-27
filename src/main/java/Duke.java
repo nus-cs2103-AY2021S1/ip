@@ -11,6 +11,7 @@ public class Duke {
 
     /**
      * Instantiates a Duke object and loads the tasks stored in the computer, if any.
+     *
      * @param filePath The filePath of the file which stores the data.
      */
     public Duke(String filePath) {
@@ -53,6 +54,7 @@ public class Duke {
 
     /**
      * Instantiates a Duke object and runs the program.
+     *
      * @param args An array of strings.
      */
     public static void main(String[] args) {

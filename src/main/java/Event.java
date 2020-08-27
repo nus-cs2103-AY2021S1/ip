@@ -13,6 +13,7 @@ public class Event extends Task {
 
     /**
      * Instantiates a Event object if the input was written in the correct format.
+     *
      * @param taskName The description of the task.
      * @param date The date and time of the event.
      * @throws DukeException If the event is not specified in the correct format.
@@ -36,6 +37,7 @@ public class Event extends Task {
 
     /**
      * Returns the string representation of the event task in the format to be saved in the computer.
+     *
      * @return String representation of the task.
      */
     @Override
@@ -45,6 +47,7 @@ public class Event extends Task {
 
     /**
      * Returns the string representation of the event task.
+     *
      * @return String representation of the event task.
      */
     @Override

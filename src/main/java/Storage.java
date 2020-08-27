@@ -15,6 +15,7 @@ public class Storage {
 
     /**
      * Instantiates a Storage object.
+     *
      * @param filePath The filePath of the file which stores the data.
      * @throws DukeException If the file to store the data is unable to be created.
      */
@@ -25,6 +26,7 @@ public class Storage {
 
     /**
      * Creates a file to store the data if it does not already exist on the user computer.
+     *
      * @param filePath The filePath of the file which stores the data.
      * @throws DukeException If the file to store the data is unable to be created.
      */
@@ -45,6 +47,7 @@ public class Storage {
 
     /**
      * Loads the list of tasks saved in the user's computer.
+     *
      * @return Arraylist of tasks.
      * @throws DukeException If saved list of tasks cannot be loaded.
      */
@@ -83,6 +86,7 @@ public class Storage {
 
     /**
      * Updates the list of tasks stored in the users data when a change is made.
+     *
      * @param tasks The up-to-date list of tasks.
      * @throws DukeException If saved list of tasks cannot be loaded.
      */

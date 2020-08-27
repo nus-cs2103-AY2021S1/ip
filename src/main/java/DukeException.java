@@ -4,6 +4,7 @@
 public class DukeException extends Exception {
     /**
      * Instantiates a DukeException object.
+     *
      * @param msg The specific error message.
      */
     public DukeException(String msg) {

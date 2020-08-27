@@ -7,6 +7,7 @@ public class DoneCommand extends Command {
 
     /**
      * Instantiates a done command.
+     *
      * @param taskNum The task number to be marked as done.
      */
     public DoneCommand(int taskNum) {
@@ -16,6 +17,7 @@ public class DoneCommand extends Command {
     /**
      * Executes the command by marking the specified task as done, replying the user,
      * and updating the list of tasks stored in the computer.
+     *
      * @param tasks List of all the tasks of the user.
      * @param ui Replies the user.
      * @param storage Stores the new task in the computer.
@@ -40,6 +42,7 @@ public class DoneCommand extends Command {
 
     /**
      * Returns false as the command is not an exit command.
+     *
      * @return False.
      */
     @Override

@@ -3,6 +3,7 @@
  */
 public class ListCommand extends Command {
     /**
+     * Executes the command by displaying the list of tasks.
      *
      * @param tasks List of all the tasks of the user.
      * @param ui Replies the user.
@@ -21,6 +22,7 @@ public class ListCommand extends Command {
 
     /**
      * Returns false as the command is not an exit command.
+     *
      * @return False.
      */
     @Override

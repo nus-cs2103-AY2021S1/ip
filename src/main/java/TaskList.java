@@ -8,6 +8,7 @@ public class TaskList {
 
     /**
      * Instantiates a TaskList object with a list of tasks.
+     *
      * @param tasks Arraylist of tasks.
      */
     public TaskList(ArrayList<Task> tasks) {
@@ -27,6 +28,7 @@ public class TaskList {
 
     /**
      * Returns the task with the specified task number.
+     *
      * @param taskNum The task number to be retrieved.
      * @return Task at that task number.
      */
@@ -36,6 +38,7 @@ public class TaskList {
 
     /**
      * Adds the specified task into the list of tasks.
+     *
      * @param t The task to be added.
      */
     public void addTask(Task t) {
@@ -44,6 +47,7 @@ public class TaskList {
 
     /**
      * Deletes the task with the specified task number.
+     *
      * @param taskNum The task number to be deleted.
      */
     public void deleteTask(int taskNum) {
@@ -60,6 +64,12 @@ public class TaskList {
         }
     }
 
+    /**
+     * Finds the matching tasks in the list according to the specified keyword.
+     *
+     * @param keyword The keyword to find tasks.
+     * @return TaskList containing tasks with the same keyword.
+     */
     public TaskList findTasks(String keyword) {
         ArrayList<Task> foundTasks = new ArrayList<>();
 
