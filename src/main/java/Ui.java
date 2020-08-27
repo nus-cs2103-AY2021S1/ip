@@ -10,6 +10,8 @@ public class Ui {
     private final static String MSG_LIST_TASK_HAVE_TASK = "Here are the tasks in your list:";
     private final static String MSG_MARK_DONE = "Nice! I've marked this task as done:\n";
     private final static String MSG_DELETED_TASK = "Noted. I've removed this task:\n";
+    private final static String MSG_FOUND_MATCHING_TASK = "Here are the matching tasks in your list:";
+    private final static String MSG_NO_MATCHING_TASK = "No matching tasks are found in your list.";
 
     private Scanner sc;
     
@@ -77,6 +79,14 @@ public class Ui {
                         : (numOfTasks == 1
                                 ? "Now you have 1 task in the list."
                                 : "Now you have " + numOfTasks + " tasks in the list.")));
+    }
+    
+    public void showNoMatch() {
+        System.out.println(MSG_NO_MATCHING_TASK);
+    }
+    
+    public void showMatchingTaskHeader() {
+        System.out.println(MSG_FOUND_MATCHING_TASK);
     }
     
 }
