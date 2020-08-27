@@ -1,3 +1,7 @@
+package duke.frontend;
+
+import duke.task.TaskList;
+
 import java.util.Scanner;
 
 public class Parser {

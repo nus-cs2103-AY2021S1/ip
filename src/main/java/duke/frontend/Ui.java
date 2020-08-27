@@ -1,3 +1,5 @@
+package duke.frontend;
+
 public class Ui {
     private static final String starline = "**************************************************************************";
     private static final String logo =

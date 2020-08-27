@@ -1,7 +1,13 @@
+import duke.backend.Storage;
+import duke.task.TaskList;
+import duke.frontend.Parser;
+import duke.frontend.Ui;
+
 import java.io.FileNotFoundException;
 
 public class Duke {
     private Storage storage;
+    
     private TaskList taskList;
     private Parser parser;
     
@@ -23,6 +29,6 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke("./Data/saved-tasks.txt").run();
+        new Duke("./data/saved-tasks.txt").run();
     }
 }
