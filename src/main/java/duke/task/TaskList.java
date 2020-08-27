@@ -30,6 +30,7 @@ public class TaskList {
      * Returns a {@link Task} stored in the list based on the given task ID.
      *
      * @param taskId The ID of the task to be retrieved.
+     * @return The task with the corresponding ID.
      */
     public Task getTask(int taskId) {
         return this.tasks.get(taskId - 1);
