@@ -1,5 +1,9 @@
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.io.File;
 
 public class Duke {
     public static void invalidInput() throws DukeException {
@@ -12,6 +16,41 @@ public class Duke {
         System.out.println(output);
     }
 
+    private static void writeToFile(String filePath, String textToAdd) throws IOException {
+        FileWriter fw = new FileWriter(filePath);
+        fw.write(textToAdd);
+        fw.close();
+    }
+
+    public static void saveToDisk(ArrayList<Task> lst) {
+        String filePath = "./data/data.txt";
+        String info = "";
+        for (int i = 0; i < lst.size(); i ++) {
+            Task currentTask = lst.get(i);
+            if (i == lst.size() - 1){
+                info += currentTask.toText();
+            }
+            else {
+                info += currentTask.toText() + System.lineSeparator();
+            }
+        }
+        try {
+            writeToFile(filePath, info);
+        } catch (IOException e) {
+            System.out.println("Error saving data to disk");
+            e.printStackTrace();
+        }
+    }
+
+    public static String readFileContents(String filePath) throws FileNotFoundException {
+        File f = new File(filePath);
+        String content = "";
+        Scanner s = new Scanner(f);
+        while (s.hasNext()) {
+            content += s.nextLine();
+        }
+        return content;
+    }
     public static Task createTask(String firstWord, String input) throws DukeException {
         Task newTask;
         if (firstWord.equals("todo")) {
@@ -36,7 +75,6 @@ public class Duke {
                     newTask = new Deadline(tsk, deadline);
                 }
             }
-
         } else {
             String[] arr = input.split("event ");
             if (arr.length == 1) {
@@ -61,7 +99,8 @@ public class Duke {
             String firstWord = input.split(" ")[0];
             String output = "";
             if (input.equals("bye")) {
-                break;
+                saveToDisk(lst);
+                output = "Bye. Take care!";
             } else if (input.equals("list")) {
                 output += "Here are the tasks in your list:";
                 for (int i = 0; i < lst.size(); i ++) {
@@ -107,13 +146,26 @@ public class Duke {
             }
             printMessage(output);
         }
-
-        String goodbyeMessage = "Bye. Take care!";
-        printMessage(goodbyeMessage);
     }
     public static void main(String[] args) {
         String greetings = "Hello! I'm Duke, your personal assistant.\nWhat can I do for you?";
         printMessage(greetings);
+
+        String filePath = "./data/data.txt";
+        try {
+            File f = new File(filePath);
+            if (f.exists()) {
+                String content = readFileContents(filePath);
+                System.out.println("PRINTING:" + content);
+            } else {
+                f.createNewFile();
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to read contents. File not found");
+        } catch (IOException e) {
+            System.out.println("Unable to create new file.");
+            e.printStackTrace();
+        }
 
         ArrayList<Task> lst = new ArrayList<>();
 
