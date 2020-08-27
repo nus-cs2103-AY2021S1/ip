@@ -7,6 +7,10 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Constructor for a Duke object
+     * @param filePath
+     */
     public Duke(String filePath){
         ui = new Ui();
         storage = new Storage(filePath);
@@ -18,6 +22,10 @@ public class Duke {
 
     }
 
+    /**
+     * runs the process until terminated
+     * @throws IOException
+     */
     public void run() throws IOException {
         ui.greet();
         boolean isBye = false;

@@ -5,14 +5,29 @@ public class Command {
     private final String[] inputLine;
     private boolean bye = false;
 
+    /**
+     * Constructor for Command object
+     * @param inputLine
+     */
     public Command(String[] inputLine){
         this.inputLine = inputLine;
     }
 
+    /**
+     * @return
+     */
     public boolean isBye(){
         return this.bye;
     }
 
+    /**
+     * method to execute the commands as inputted by user
+     * @param tasks TaskList object which contains the list of tasks
+     * @param ui Ui object for ui
+     * @param storage Storage object for reading and writing onto hard disk
+     * @throws DukeException for invalid commands
+     * @throws IOException for reading and writing
+     */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException {
         switch (inputLine[0]){
             case "bye" :

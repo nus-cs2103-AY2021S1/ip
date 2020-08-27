@@ -2,11 +2,19 @@ public class Task {
     private String name;
     private boolean isCompleted;
 
+    /**
+     * constructor for Task object
+     * @param name description of the task
+     * @param isCompleted boolean which tells if task is completed or not
+     */
     public Task(String name, boolean isCompleted){
         this.name = name;
         this.isCompleted = isCompleted;
     }
 
+    /**
+     * method to mark a task as done
+     */
     public void markDone(){
         this.isCompleted = true;
     }
