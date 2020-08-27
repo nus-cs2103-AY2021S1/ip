@@ -6,14 +6,14 @@ package main.java;
  * @author Lio
  */
 public class Duke {
-    private final Storage storage;
+    private Storage storage;
     private TaskList tasks;
     private final Ui ui;
 
     private Duke(String filePath) {
         ui = new Ui();
-        storage = new Storage(filePath);
         try {
+            storage = new Storage(filePath);
             tasks = new TaskList(storage.read());
         } catch (Exception e) {
             ui.showError(e.getMessage());
