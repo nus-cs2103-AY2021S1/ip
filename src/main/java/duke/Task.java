@@ -16,11 +16,15 @@ public class Task {
     }
 
     public String getStatus() {
-        return (isDone ? "✓" : "✗");
+        return (isDone
+                ? "✓"
+                : "✗");
     }
 
     public String getStatusNum() {
-        return (isDone ? "1" : "0");
+        return (isDone
+                ? "1"
+                : "0");
     }
 
     @Override

@@ -3,6 +3,10 @@ package duke;
 import java.io.IOException;
 
 public class Warnings extends Ui {
+    {
+        int a[] = new int[20];
+    }
+
     public static void invalidDoneTaskIndex(int tasksSize) {
         String warningMsg = "################################################################"
                 + "\n [• ▂ •]What? "
