@@ -1,9 +1,15 @@
-public class Deadline extends Task {
-    String timeBy;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Date;
 
-    public Deadline(String desc, String timeBy) {
+public class Deadline extends TaskDetail {
+    Date timeBy;
+
+    public Deadline(String desc, String timeBy) throws ParseException {
         super(desc);
-        this.timeBy = timeBy;
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        this.timeBy = format.parse(timeBy);
     }
 
     @Override
