@@ -40,7 +40,7 @@ public enum CommandType {
      * If such, it also means that the <code>command</code> is invalid.
      * @return <code>rue</code> if the given length is greater than or equal to the <code>commandLength</code>.
      */
-    public boolean isLengthSmaller(int length) {
+    public boolean isValidLength(int length) {
         return this.commandLength > length;
     }
 }

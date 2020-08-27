@@ -32,7 +32,7 @@ public class CommandParser {
     }
 
     private DoneOperation createDoneOp(String[] commands, TaskList list) throws DukeException {
-        if (CommandType.DONE.isLengthSmaller(commands.length)) {
+        if (CommandType.DONE.isValidLength(commands.length)) {
             throw new DukeException("Ensure a number is passed after a done command.");
         }
         if (!Utils.hasInteger(commands, 1)) {
@@ -46,7 +46,7 @@ public class CommandParser {
     }
 
     private AddTodoOperation createTodoOp(String[] commands, TaskList list) throws DukeException {
-        if (CommandType.TODO.isLengthSmaller(commands.length)) {
+        if (CommandType.TODO.isValidLength(commands.length)) {
             throw new DukeException("Ensure there is description for a todo item.");
         }
         String description = Utils.concatenate(commands, 1, commands.length);
@@ -55,7 +55,7 @@ public class CommandParser {
 
     private AddDeadlineOperation createDeadlineOp(
             String[] commands, TaskList list) throws DukeException {
-        if (CommandType.DEADLINE.isLengthSmaller(commands.length)) {
+        if (CommandType.DEADLINE.isValidLength(commands.length)) {
             throw new DukeException("Ensure there is a description and a datetime for a deadline command.");
         }
         int splitIndex = Utils.getIndexOf(commands, Deadline.DEADLINE_BREAK);
@@ -69,7 +69,7 @@ public class CommandParser {
     }
 
     private AddEventOperation createEventOp(String[] commands, TaskList list) throws DukeException {
-        if (CommandType.EVENT.isLengthSmaller(commands.length)) {
+        if (CommandType.EVENT.isValidLength(commands.length)) {
             throw new DukeException("Ensure there is a description and a time for an event command.");
         }
         int splitIndex = Utils.getIndexOf(commands, Event.EVENT_BREAK);
@@ -83,7 +83,7 @@ public class CommandParser {
     }
 
     private DeleteOperation createDeleteOp(String[] commands, TaskList list) throws DukeException {
-        if (CommandType.DELETE.isLengthSmaller(commands.length)) {
+        if (CommandType.DELETE.isValidLength(commands.length)) {
             throw new DukeException("Ensure a number is passed after a delete command.");
         }
         if (!Utils.hasInteger(commands, 1)) {
@@ -97,7 +97,7 @@ public class CommandParser {
     }
 
     private FindOperation createFindOp(String[] commands, TaskList list) throws DukeException {
-        if (CommandType.FIND.isLengthSmaller(commands.length)) {
+        if (CommandType.FIND.isValidLength(commands.length)) {
             throw new DukeException("Ensure a keyword is entered so that I can perform a search with it.");
         }
         String searchWord = Utils.concatenate(commands, 1, commands.length);

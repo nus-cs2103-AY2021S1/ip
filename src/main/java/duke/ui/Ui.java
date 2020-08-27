@@ -35,6 +35,7 @@ public class Ui {
     public void showStartMessage() {
         String message = "Greetings, what may I do for you?";
         System.out.println(LOGO + message);
+        this.showBlankLine();
     }
 
     /**
@@ -49,10 +50,10 @@ public class Ui {
      * @param msg the message to be printed.
      */
     public void showStatus(String msg) {
-        this.showBlankLine();
         this.showDivider();
         System.out.println(msg);
         this.showDivider();
+        this.showBlankLine();
     }
 
     /**
