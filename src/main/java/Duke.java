@@ -14,6 +14,7 @@ public class Duke {
     private final String VERSION_NUMBER = "1.0.0";
     private final Scanner SC = new Scanner(System.in);
     private final Path DUKE_DATA_FILE_PATH = Paths.get("data", "duke.txt");
+    private final Path DUKE_DATA_DIR_PATH = Paths.get("data");
     private final String NEW_LINE = "\n";
     private final String HORIZONTAL_LINE =
             "    ____________________________________________________________";
@@ -46,12 +47,23 @@ public class Duke {
         try {
             loadTasksFromDisk();
         }
-        catch (FileNotFoundException ex) {
-            printError(ex.getMessage());
-        }
         catch (DukeException ex) {
             printError(ex.getMessage());
         }
+        catch (FileNotFoundException ex) {
+            printError("Missing Duke Data File!" + NEW_LINE + PADDING +
+                "Creating new Duke Data File..."
+            );
+            try {
+                FileWriter fw = new FileWriter(DUKE_DATA_FILE_PATH.toString());
+                fw.close();
+            }
+            catch (IOException err) {
+                printError(err.getMessage());
+            }
+
+        }
+
 
         while(true) {
             if (SC.hasNext()) {
@@ -203,6 +215,9 @@ public class Duke {
 
     private void loadTasksFromDisk() throws FileNotFoundException, DukeException{
         File dukeDataFile = new File(DUKE_DATA_FILE_PATH.toUri());
+        if (Files.notExists(DUKE_DATA_DIR_PATH)) {
+            throw new DukeException("Missing Duke Data Folder");
+        }
         Scanner fs = new Scanner(dukeDataFile);
         while (fs.hasNext()) {
             String taskString = fs.nextLine();
