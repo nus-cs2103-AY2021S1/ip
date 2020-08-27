@@ -1,3 +1,6 @@
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.List;
 
 enum Command {
@@ -15,10 +18,11 @@ enum Command {
 public class Message {
     private final String message;
     private Command cmd;
-    private List<Task> list;
+    private final List<Task> list;
+    private final File taskFile;
 
     // public constructor
-    public Message(String message, List<Task> list) {
+    public Message(String message, List<Task> list, File taskFile) {
         this.message = message;
         String[] words = message.split(" ");
         String cmdString = words[0];
@@ -35,6 +39,7 @@ public class Message {
         }
 
         this.list = list;
+        this.taskFile = taskFile;
     }
 
     public void reply() throws NoDescriptionException, NoCommandException, WrongItemIndexException {
@@ -45,7 +50,7 @@ public class Message {
         } else if (this.cmd == Command.LIST) {
             System.out.println("Na, here is your list lah:");
             int counter = 0;
-            for (Task item : list) {
+            for (Task item : this.list) {
                 counter++;
                 System.out.println(counter +
                         "." +
@@ -55,13 +60,23 @@ public class Message {
             try {
                 String[] words = message.split(" ", 2);
                 int index = Integer.parseInt(words[1]);
-                Task item = list.get(index - 1);
+                Task item = this.list.get(index - 1);
                 item.markDone();
+                FileWriter fileWriter = new FileWriter(this.taskFile);
+                String fileContents = this.list.get(0).toString();
+
+                for (int i = 1; i < this.list.size(); i++) {
+                    fileContents += "\n" + this.list.get(i).toString();
+                }
+
+                fileWriter.write(fileContents);
+                fileWriter.close();
+
                 System.out.println("Can, I help you mark this as done liao:" +
                         "\n  " +
                         item.toString());
             } catch (Exception e) {
-                throw new WrongItemIndexException("done", list.size());
+                throw new WrongItemIndexException("done", this.list.size());
             }
         } else if (this.cmd == Command.DELETE) {
             try {
@@ -69,14 +84,25 @@ public class Message {
                 int index = Integer.parseInt(words[1]);
                 Task item = list.get(index - 1);
                 list.remove(index - 1);
+
                 System.out.println("Okay, I deleted this liao:" +
                         "\n  " +
                         item.toString() +
                         "\nNow left " +
                         list.size() +
                         " things in the list.");
+
+                FileWriter fileWriter = new FileWriter(this.taskFile);
+                String fileContents = this.list.get(0).toString();
+
+                for (int i = 1; i < this.list.size(); i++) {
+                    fileContents += "\n" + this.list.get(i).toString();
+                }
+
+                fileWriter.write(fileContents);
+                fileWriter.close();
             } catch (Exception e) {
-                throw new WrongItemIndexException("done", list.size());
+                throw new WrongItemIndexException("done", this.list.size());
             }
         } else if (this.cmd == Command.BYE) {
             System.out.println("Ok bye bye! C u again :P");
@@ -114,7 +140,14 @@ public class Message {
             }
 
             if (t != null) {
-                list.add(t);
+                this.list.add(t);
+                try {
+                    FileWriter fileWriter = new FileWriter(this.taskFile, true);
+                    fileWriter.write(t.toString());
+                    fileWriter.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
 
                 System.out.println("Orh. I added:" +
                         "\n  " +
