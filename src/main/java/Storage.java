@@ -2,7 +2,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Collections;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -50,13 +49,13 @@ public class Storage {
                         identifier = thisLine.charAt(8);
                         status = thisLine.charAt(11) == '\u2713';
                         if (identifier == 'D') {
-                            Deadline thisDeadline = new Deadline(thisLine.substring(14, thisLine.indexOf('/') - 1),
-                                    status, thisLine.substring(thisLine.indexOf('/') + 4));
+                            Deadline thisDeadline = new Deadline(thisLine.substring(14, thisLine.indexOf('(') - 2),
+                                    status, thisLine.substring((thisLine.indexOf(':') + 2), thisLine.indexOf(')')));
                             thisDeadline.updateDateTime();
                             list.add(thisDeadline);
                         } else if (identifier == 'E') {
-                            Event thisEvent = new Event(thisLine.substring(14, thisLine.indexOf('/') - 1),
-                                    status, thisLine.substring(thisLine.indexOf('/') + 4));
+                            Event thisEvent = new Event(thisLine.substring(14, thisLine.indexOf('(') - 2),
+                                    status, thisLine.substring((thisLine.indexOf(':') + 2), thisLine.indexOf(')')));
                             list.add(thisEvent);
                         } else {
                             Todo thisTodo = new Todo(thisLine.substring(14), status);
@@ -70,7 +69,6 @@ public class Storage {
         } catch (DukeException ex) {
             System.out.println(ex.getMessage());
         }
-        Collections.reverse(list);
         return list;
     }
 }
