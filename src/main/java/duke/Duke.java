@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -118,7 +120,11 @@ public class Duke {
                     StringBuilder replacementText = new StringBuilder();
                     createFile("data/duke.txt");
                     for (int i = 0; i < list.size(); i++) {
-                        replacementText.append(list.get(i).toString() + "\n");
+                        if (list.get(i) instanceof Todo) {
+                            replacementText.append(list.get(i).toString() + "\n");
+                        } else {
+                            replacementText.append(list.get(i).toString() + " on " + list.get(i).getDate() + "\n");
+                        }
                     }
                     appendToFile("data/duke.txt", replacementText.toString());
                 } catch(IOException e) {
@@ -130,7 +136,9 @@ public class Duke {
                 buildChatSeparator();
                 System.out.println(" Here are the tasks in your list:");
                 for (int i = 1; i <= list.size(); i++) {
-                    System.out.println(" " + i + ". " + list.get(i - 1));
+                    System.out.println(" " + i + ". "
+                            + list.get(i - 1).toString()
+                            + list.get(i - 1).getDateDescription());
                 }
                 buildChatSeparator();
             } else if (command.equals(Commands.DONE)){
@@ -215,7 +223,7 @@ public class Duke {
         if (isNew) {
             event = str.split("/at");
         } else {
-            event = str.split("at:");
+            event = str.split("on");
         }
         if (event.length > 2) {
             throw new InvalidEventException("☹ Event time must be written after `/at`.");
@@ -226,12 +234,17 @@ public class Duke {
         if (event[1].equals("")) {
             throw new InvalidEventException("☹ Event time must be specified.");
         }
-        String description = event[0].trim() + " at: " + event[1].trim();
-        Event curr = new Event(description, condition);
-        list.add(curr);
-        if (isNew) {
-            this.describeTask(curr);
+        String description = event[0].trim();
+        try {
+            Event curr = new Event(description, condition, LocalDate.parse(event[1].trim()));
+            list.add(curr);
+            if (isNew) {
+                this.describeTask(curr);
+            }
+        } catch (DateTimeParseException e) {
+            System.out.println("Invalid Date format! Must be (yyyy-mm-dd).");
         }
+
     }
 
     private void addTodo(String str, boolean isNew, boolean condition) throws InvalidTodoException {
@@ -251,7 +264,7 @@ public class Duke {
         if (isNew) {
             deadline = str.split("/by");
         } else {
-            deadline = str.split("by:");
+            deadline = str.split("on");
         }
         if (deadline.length > 2) {
             throw new InvalidDeadlineException("☹ Task deadline must be written after `/by`.");
@@ -262,18 +275,22 @@ public class Duke {
         if (deadline[1].equals("")) {
             throw new InvalidDeadlineException("☹ Task deadline must be specified.");
         }
-        String description = deadline[0].trim() + " by: " + deadline[1].trim();
-        Deadline curr = new Deadline(description, condition);
-        list.add(curr);
-        if (isNew) {
-            this.describeTask(curr);
+        String description = deadline[0].trim();
+        try {
+            Deadline curr = new Deadline(description, false, LocalDate.parse(deadline[1].trim()));
+            list.add(curr);
+            if (isNew) {
+                this.describeTask(curr);
+            }
+        } catch (DateTimeParseException e) {
+            System.out.println("Invalid Date format! Must be (yyyy-mm-dd).");
         }
     }
 
     public void describeTask(Task curr) {
         buildChatSeparator();
         System.out.println(" Got it. I've added this task: ");
-        System.out.println(" " + curr);
+        System.out.println(" " + curr.toString() + curr.getDateDescription());
         System.out.println(" Now you have " + (list.size() == 1
                 ? list.size() + " task"
                 : list.size() + " tasks")
