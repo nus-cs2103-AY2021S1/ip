@@ -107,6 +107,18 @@ public class Ui {
     }
 
     /**
+     * Method to print the list found.
+     * @param foundList The list found.
+     */
+    public static void printFoundList(TaskList foundList) {
+        for(int i = 0; i < foundList.size(); i++){
+            System.out.println("\t" + (i + 1) + ". " + foundList.get(i));
+        }
+        printLineSeparator();
+    }
+
+
+    /**
      * Method to get input from the user.
      * @return The next line of the user input.
      */
