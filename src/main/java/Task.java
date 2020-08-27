@@ -15,10 +15,6 @@ public abstract class Task {
     public void markAsDone() {
         isDone = true;
     }
-
-    public String getDesc() {
-        return desc;
-    }
     
     public TaskType getTaskType() {
         return taskType;

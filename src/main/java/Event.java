@@ -8,11 +8,6 @@ public class Event extends Task {
     }
 
     @Override
-    public String getDesc() {
-        return desc + " (at: " + at + ")";
-    }
-
-    @Override
     public String toString() {
         return "[" + taskType + "]" + super.toString() +  " (at: " + at + ")";
     }
