@@ -2,15 +2,15 @@ package duke.command;
 
 import duke.DukeException;
 import duke.Storage;
-import duke.task.Task;
 import duke.Ui;
+import duke.task.Task;
 
 /**
  * Implements the <code>Command</code> interface. <code>AddCommand</code> executes a command
  * to add a specific task as specified by the user.
  */
 public class AddCommand implements Command {
-    Task t;
+    private final Task t;
 
     public AddCommand(Task t) {
         this.t = t;
@@ -39,6 +39,8 @@ public class AddCommand implements Command {
     public boolean equals(Object o) {
         if (this == o) {
             return true;
-        } else return o instanceof AddCommand;
+        } else {
+            return o instanceof AddCommand;
+        }
     }
 }

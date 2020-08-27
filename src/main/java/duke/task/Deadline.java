@@ -1,20 +1,20 @@
 package duke.task;
 
-import duke.DukeException;
-
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.Month;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 
+import duke.DukeException;
+
 /**
  * <code>Deadline</code> class extends the <code>Task</code> class. Represents the a <code>Task</code> with a deadline
  * for completion.
  */
 public class Deadline extends Task {
-    LocalDate toDoBy;
-    LocalTime time;
+    private final LocalDate toDoBy;
+    private final LocalTime time;
 
     Deadline(String description, LocalDate toDoBy, LocalTime time) {
         super(description);
@@ -28,6 +28,13 @@ public class Deadline extends Task {
         this.time = null;
     }
 
+    /**
+     * Constructs a <code>Deadline</code> object with the following states.
+     *
+     * @param description the description of this task to be stored
+     * @param toDoBy the deadline of this task
+     * @param isDone the status of this task
+     */
     public Deadline(String description, String toDoBy, Boolean isDone) {
         super(description, isDone);
         String[] scheduledTime = toDoBy.split(" ");
@@ -42,7 +49,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Returns a <code>Deadline/code> object if input format is correct. Specifically, the input format of
+     * Returns a <code>Deadline</code> object if input format is correct. Specifically, the input format of
      * <code>Event</code> object must be in the form of "Deadline description /by YYYY/MM/DD" or
      * "Event description /by YYYY/MM/DD HH:MM".
      *
@@ -52,23 +59,23 @@ public class Deadline extends Task {
      */
     public static Deadline createTask(String message) throws DukeException {
         String errMessage1 = " Oops!! You missed out some vital information/keyword... *woof*\n";
-        String errMessage2 = " Oops!! You gonna forget what this is about if you\n" +
-                " dont give me a description... *woof*\n";
-        String errMessage3 = " Oops!! You did not state when you wanna finish this by...\n" +
-                " Are you planning to procrastinate? *woof*\n";
+        String errMessage2 = " Oops!! You gonna forget what this is about if you\n"
+                + " dont give me a description... *woof*\n";
+        String errMessage3 = " Oops!! You did not state when you wanna finish this by...\n"
+                + " Are you planning to procrastinate? *woof*\n";
         try {
             String messageLowerCase = message.toLowerCase();
             int indOfTime = messageLowerCase.indexOf("/by");
             String description = message.substring(9, indOfTime);
             String deadline = message.substring(indOfTime + 3).trim();
             if (description.isBlank() && deadline.isBlank()) {
-                String exMessage = Task.ui.printFormat(errMessage1);
+                String exMessage = Task.UI.printFormat(errMessage1);
                 throw new DukeException(exMessage);
-            }else if (deadline.isBlank()) {
-                String exMessage = Task.ui.printFormat(errMessage3);
+            } else if (deadline.isBlank()) {
+                String exMessage = Task.UI.printFormat(errMessage3);
                 throw new DukeException(exMessage);
             } else if (description.isBlank()) {
-                String exMessage = Task.ui.printFormat(errMessage2);
+                String exMessage = Task.UI.printFormat(errMessage2);
                 throw new DukeException(exMessage);
             } else {
                 String[] splitDeadline = deadline.split("\\s+");
@@ -85,7 +92,7 @@ public class Deadline extends Task {
                     }
                 } catch (Exception e) {
                     String errMessage =
-                            Task.ui.printFormat(" Please input deadline in following format:\n"
+                            Task.UI.printFormat(" Please input deadline in following format:\n"
                                     + "   YYYY/MM/DD HH:MM!\n" + " *Woof woof*\n");
                     throw new DukeException(errMessage);
                 }
@@ -93,7 +100,7 @@ public class Deadline extends Task {
         } catch (DukeException e) {
             throw e;
         } catch (Exception e) {
-            String exMessage = Task.ui.printFormat(errMessage1);
+            String exMessage = Task.UI.printFormat(errMessage1);
             throw new DukeException(exMessage);
         }
     }

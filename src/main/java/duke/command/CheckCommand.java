@@ -35,6 +35,8 @@ public class CheckCommand implements Command {
     public boolean equals(Object o) {
         if (this == o) {
             return true;
-        } else return o instanceof CheckCommand;
+        } else {
+            return o instanceof CheckCommand;
+        }
     }
 }

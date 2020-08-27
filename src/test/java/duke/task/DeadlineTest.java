@@ -1,28 +1,32 @@
 package duke.task;
 
-import duke.DukeException;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.time.LocalDate;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
+
+import duke.DukeException;
 
 public class DeadlineTest {
 
     @Test
-    public void createTask_withoutTime_Success() throws DukeException {
+    public void createTask_withoutTime_success() throws DukeException {
         Deadline d = Deadline.createTask("DeAdLine project /by 2019/02/20");
         assertEquals("[D][✘] project (FINISH by: 20 February 2019)", d.toString());
     }
 
     @Test
-    public void createTask_withTime_Success() throws DukeException {
+    public void createTask_withTime_success() throws DukeException {
         Deadline d = Deadline.createTask("DeAdLine tutorial /by 2019/02/20 12:00");
         assertEquals("[D][✘] tutorial (FINISH by: 20 February 2019 12:00)", d.toString());
     }
 
     @Test
-    public void createTask_missingDescription_Failure() {
+    public void createTask_missingDescription_failure() {
 
         try {
             Deadline.createTask("deadLine  /by 2019/02/20 12:00");
@@ -38,7 +42,7 @@ public class DeadlineTest {
     }
 
     @Test
-    public void createTask_missingDateTime_Failure() {
+    public void createTask_missingDateTime_failure() {
 
         try {
             Deadline.createTask("deadLine  project /by ");
@@ -54,7 +58,7 @@ public class DeadlineTest {
     }
 
     @Test
-    public void createTask_keyWord_Failure() {
+    public void createTask_keyWord_failure() {
 
         try {
             Deadline.createTask("deadLine  project by 2019/02/20 16:00");
@@ -69,7 +73,7 @@ public class DeadlineTest {
     }
 
     @Test
-    public void createTask_wrongDateTimeFormat_Failure() {
+    public void createTask_wrongDateTimeFormat_failure() {
 
         try {
             Deadline.createTask("DeAdLine project /by 20/02/2019 1800");

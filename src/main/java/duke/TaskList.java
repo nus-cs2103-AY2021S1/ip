@@ -1,13 +1,13 @@
 package duke;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
-
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Contains the list of <code>Task</code> object. <code>TaskList</code> saves all existing <code>Task</code> in a
@@ -25,11 +25,11 @@ public class TaskList {
     public void checkTask(String task) {
         Task t;
         String taskType = task.substring(0, 3);
-        String status = task.substring(3,6);
+        String status = task.substring(3, 6);
         boolean isDone = status.equals("[" + "\u2713" + "]");
         if (taskType.equals("[T]")) {
             t = new Todo(task.substring(7), isDone);
-        } else if (taskType.equals("[D]")){
+        } else if (taskType.equals("[D]")) {
             int indOfTime = task.lastIndexOf("(FINISH by: ");
             t = new Deadline(task.substring(7, indOfTime),
                     task.substring(indOfTime + 11, task.lastIndexOf(")")).trim(), isDone);

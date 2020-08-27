@@ -33,8 +33,8 @@ public class Ui {
      */
     public void fileCreationSuccess() {
         String message = " Woof! I am Yuki your assigned Task Manager!\n"
-                +" I have just created a new file to store all your tasks!\n"
-                +" So... What is my first assignment? *Woof woof*\n";
+                + " I have just created a new file to store all your tasks!\n"
+                + " So... What is my first assignment? *Woof woof*\n";
         print(message);
     }
 
@@ -49,7 +49,7 @@ public class Ui {
     /**
      * Prints a farewell message.
      */
-    public void goodBye(){
+    public void goodBye() {
         String message = " Bye. Hope to see you again soon! *Woof woof*\n";
         print(message);
     }
@@ -169,7 +169,7 @@ public class Ui {
      * @return a print format informing user to input date in the correct format
      */
     public String inputCorrectCheckDateFormat() {
-       return printFormat(" Please enter date in YYYY/MM/DD format! *Woof woof*\n");
+        return printFormat(" Please enter date in YYYY/MM/DD format! *Woof woof*\n");
     }
 
     /**

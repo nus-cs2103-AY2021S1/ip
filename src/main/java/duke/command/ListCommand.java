@@ -32,6 +32,8 @@ public class ListCommand implements Command {
     public boolean equals(Object o) {
         if (this == o) {
             return true;
-        } else return o instanceof ListCommand;
+        } else {
+            return o instanceof ListCommand;
+        }
     }
 }

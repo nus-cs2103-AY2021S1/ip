@@ -1,16 +1,16 @@
 package duke;
 
+import java.util.Scanner;
+
 import duke.command.Command;
 import duke.command.ExitCommand;
-
-import java.util.Scanner;
 
 /**
  * Represents a bot that helps to manage task.
  * Each <code>Duke</code> object has its own respective database.
  */
 public class Duke {
-    private final static Ui ui = new Ui();
+    private static final Ui ui = new Ui();
     private final Storage storage;
 
     Duke(Storage storage) {

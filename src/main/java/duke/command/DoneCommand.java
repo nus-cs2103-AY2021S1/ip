@@ -35,7 +35,9 @@ public class DoneCommand implements Command {
     public boolean equals(Object o) {
         if (this == o) {
             return true;
-        } else return o instanceof DoneCommand;
+        } else {
+            return o instanceof DoneCommand;
+        }
     }
 
 }

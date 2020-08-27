@@ -1,23 +1,26 @@
 package duke.task;
 
-import duke.DukeException;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.time.LocalDate;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
+import duke.DukeException;
 
 public class EventTest {
 
     @Test
-    public void createTask_Success() throws DukeException {
+    public void createTask_success() throws DukeException {
         Event e = Event.createTask("EVENT meeting /at      2019/02/20 16:00-18:00");
         assertEquals("[E][✘] meeting (APPEAR at: 20 February 2019 16:00-18:00)", e.toString());
     }
 
     @Test
-    public void createTask_missingDescription_Failure() {
+    public void createTask_missingDescription_failure() {
 
         try {
             Event.createTask("EVENT  /at      2019/02/20 16:00-18:00");
@@ -33,7 +36,7 @@ public class EventTest {
     }
 
     @Test
-    public void createTask_missingDateTime_Failure() {
+    public void createTask_missingDateTime_failure() {
 
         try {
             Event.createTask("EVENT meeting /at  ");
@@ -49,7 +52,7 @@ public class EventTest {
     }
 
     @Test
-    public void createTask_keyWord_Failure() {
+    public void createTask_keyWord_failure() {
 
         try {
             Event.createTask("EVENT meeting  ");
@@ -64,7 +67,7 @@ public class EventTest {
     }
 
     @Test
-    public void createTask_wrongDateTimeFormat_Failure() {
+    public void createTask_wrongDateTimeFormat_failure() {
 
         try {
             Event.createTask("EVENT meeting /at 2019-02-20 1600-1800 ");

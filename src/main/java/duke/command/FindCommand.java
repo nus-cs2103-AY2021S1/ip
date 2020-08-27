@@ -9,8 +9,8 @@ import duke.Ui;
  * a search in the list of <code>Task</code> for <code>Task</code> with specific
  * keywords specified by user.
  */
-public class FindCommand implements Command{
-    String taskSearch;
+public class FindCommand implements Command {
+    private final String taskSearch;
 
     public FindCommand(String taskSearch) {
         this.taskSearch = taskSearch.trim();
@@ -41,6 +41,8 @@ public class FindCommand implements Command{
     public boolean equals(Object o) {
         if (this == o) {
             return true;
-        } else return o instanceof FindCommand;
+        } else {
+            return o instanceof FindCommand;
+        }
     }
 }

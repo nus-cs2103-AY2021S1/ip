@@ -1,7 +1,5 @@
 package duke;
 
-import duke.task.Task;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -14,13 +12,15 @@ import java.time.format.DateTimeParseException;
 import java.util.List;
 import java.util.Scanner;
 
+import duke.task.Task;
+
 /**
  * Storage for Tasks. A <code>Storage</code> represents a system that manages the storage and retrieval of
  * <code>Task</code> from a file.
  */
 public class Storage {
+    private static final Ui ui = new Ui();
     private final TaskList taskList;
-    private final static Ui ui = new Ui();
     private final File file;
 
     Storage(TaskList taskList, File file) {
@@ -46,8 +46,7 @@ public class Storage {
 
         try {
             String home = System.getProperty("user.dir");
-            Path currDir = Paths.get(home).getParent();
-//            Path currDir = Paths.get(home);
+            Path currDir = Paths.get(home);
             Path targetPath = Paths.get(currDir.toString(), filePath);
             File directory = new File(Paths.get(currDir.toString(), dirName).toString());
             boolean isDirCreated;
@@ -86,7 +85,7 @@ public class Storage {
      *
      * @throws DukeException if <code>Task</code> cannot be retrieved due <code>FileNotFound</code> exception
      */
-    public void load() throws DukeException{
+    public void load() throws DukeException {
         try {
             Scanner s = new Scanner(file);
 
@@ -201,7 +200,7 @@ public class Storage {
      * @param date Date required
      * @throws DukeException if date input is of the wrong format
      */
-    public void checkDate(String date) throws DukeException{
+    public void checkDate(String date) throws DukeException {
         try {
             String[] inputDate = date.trim().split("/");
             String formatDate = inputDate[0] + "-" + inputDate[1] + "-" + inputDate[2];
@@ -238,7 +237,7 @@ public class Storage {
      * @param keyword keyword to be searched
      * @throws DukeException if command input contains no keywords
      */
-    public void findRelevantTask(String keyword) throws DukeException{
+    public void findRelevantTask(String keyword) throws DukeException {
         try {
             String searchName = keyword.substring(keyword.indexOf("find") + 5).trim();
             List<Task> results = taskList.searchTask(searchName.split("\\s+"));

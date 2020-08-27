@@ -6,7 +6,7 @@ import duke.DukeException;
  * <code>Todo</code> class extends the <code>Task</code> class. Represents the most basic form of a <code>Task</code>,
  * consisting of only a description.
  */
-public class Todo extends Task{
+public class Todo extends Task {
     Todo(String description) {
         super(description);
     }
@@ -23,12 +23,12 @@ public class Todo extends Task{
      * @return a <code>Todo</code> object
      * @throws DukeException if the input format is wrong or contains missing details
      */
-    public static Todo createTask(String message) throws DukeException{
+    public static Todo createTask(String message) throws DukeException {
         String errMessage = " Oops!! You forgot to tell me what this task is about... *woof*\n";
         try {
             String description = message.substring(5);
             if (description.isBlank()) {
-                String exMessage = Task.ui.printFormat(errMessage);
+                String exMessage = Task.UI.printFormat(errMessage);
                 throw new DukeException(exMessage);
             } else {
                 return new Todo(description);
@@ -36,7 +36,7 @@ public class Todo extends Task{
         } catch (DukeException e) {
             throw e;
         } catch (Exception e) {
-            String exMessage = Task.ui.printFormat(errMessage);
+            String exMessage = Task.UI.printFormat(errMessage);
             throw new DukeException(exMessage);
         }
     }

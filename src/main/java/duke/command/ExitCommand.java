@@ -31,6 +31,8 @@ public class ExitCommand implements Command {
     public boolean equals(Object o) {
         if (this == o) {
             return true;
-        } else return o instanceof ExitCommand;
+        } else {
+            return o instanceof ExitCommand;
+        }
     }
 }

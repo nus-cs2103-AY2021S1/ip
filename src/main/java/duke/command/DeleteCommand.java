@@ -33,6 +33,8 @@ public class DeleteCommand implements Command {
     public boolean equals(Object o) {
         if (this == o) {
             return true;
-        } else return o instanceof DeleteCommand;
+        } else {
+            return o instanceof DeleteCommand;
+        }
     }
 }

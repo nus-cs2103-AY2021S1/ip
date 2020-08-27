@@ -1,21 +1,21 @@
 package duke.task;
 
-import duke.DukeException;
-
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.Month;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 
+import duke.DukeException;
+
 /**
  * <code>Event</code> class extends the <code>Task</code> class. Represents a <code>Task</code> with a specified
  * duration.
  */
-public class Event extends Task{
-    LocalDate schedule;
-    LocalTime startTime;
-    LocalTime endTime;
+public class Event extends Task {
+    private final LocalDate schedule;
+    private final LocalTime startTime;
+    private final LocalTime endTime;
 
     Event(String description, LocalDate schedule, LocalTime startTime, LocalTime endTime) {
         super(description);
@@ -24,6 +24,13 @@ public class Event extends Task{
         this.endTime = endTime;
     }
 
+    /**
+     * Constructs a <code>Event</code> object with the following states.
+     *
+     * @param description the description of this event to be stored
+     * @param schedule the time at which this event occurs
+     * @param isDone the status of this event
+     */
     public Event(String description, String schedule, Boolean isDone) {
         super(description, isDone);
         String[] scheduledTime = schedule.split(" ");
@@ -43,25 +50,25 @@ public class Event extends Task{
      * @return an <code>Event</code> object
      * @throws DukeException if the input format is wrong or contains missing details
      */
-    public static Event createTask(String message) throws DukeException{
+    public static Event createTask(String message) throws DukeException {
         String errMessage1 = " Oops!! You missed out some vital information/keyword... *woof*\n";
-        String errMessage2 = " Oops!! Are you planning to ghost the event?\n" +
-                " You didnt state the time of this event... *woof*\n";
-        String errMessage3 = " Oops!! You gonna forget what this is about if you\n" +
-                " dont give me a description... *woof*\n";
+        String errMessage2 = " Oops!! Are you planning to ghost the event?\n"
+                + " You didnt state the time of this event... *woof*\n";
+        String errMessage3 = " Oops!! You gonna forget what this is about if you\n"
+                + " dont give me a description... *woof*\n";
         try {
             String messageLowerCase = message.toLowerCase();
             int indOfTime = messageLowerCase.indexOf("/at");
             String description = message.substring(6, indOfTime);
             String at = message.substring(indOfTime + 3).trim();
             if (description.isBlank() && at.isBlank()) {
-                String exMessage = Task.ui.printFormat(errMessage1);
+                String exMessage = Task.UI.printFormat(errMessage1);
                 throw new DukeException(exMessage);
             } else if (at.isBlank()) {
-                String exMessage = Task.ui.printFormat(errMessage2);
+                String exMessage = Task.UI.printFormat(errMessage2);
                 throw new DukeException(exMessage);
             } else if (description.isBlank()) {
-                String exMessage = Task.ui.printFormat(errMessage3);
+                String exMessage = Task.UI.printFormat(errMessage3);
                 throw new DukeException(exMessage);
             } else {
                 String[] splitEventTime = at.split("\\s+");
@@ -76,7 +83,7 @@ public class Event extends Task{
                     LocalTime endTime = LocalTime.parse(times[1]);
                     return new Event(description, date, startTime, endTime);
                 } catch (Exception e) {
-                    String errMessage = Task.ui.printFormat(" Please input event time in the following format:\n "
+                    String errMessage = Task.UI.printFormat(" Please input event time in the following format:\n "
                             + "   YYYY/MM/DD HH:MM-HH:MM!\n" + " *Woof woof*\n");
                     throw new DukeException(errMessage);
                 }
@@ -84,7 +91,7 @@ public class Event extends Task{
         } catch (DukeException e) {
             throw e;
         } catch (Exception e) {
-            String exMessage = Task.ui.printFormat(errMessage1);
+            String exMessage = Task.UI.printFormat(errMessage1);
             throw new DukeException(exMessage);
         }
     }

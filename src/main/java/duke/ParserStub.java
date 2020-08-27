@@ -1,13 +1,19 @@
 package duke;
 
-import duke.command.*;
-import duke.task.Task;
+import duke.command.AddCommand;
+import duke.command.CheckCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.ExitCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
 import duke.task.Todo;
 
 public class ParserStub {
-    private final static String ignoreCase = "(?i)";
-    private final static String wildcard = "(.*)";
-    private final static Ui ui = new Ui();
+    private static final String ignoreCase = "(?i)";
+    private static final String wildcard = "(.*)";
+    private static final Ui ui = new Ui();
 
     enum CommandState {
         TODO, DEADLINE, EVENT, DELETE
@@ -27,12 +33,12 @@ public class ParserStub {
         } else if (command.matches(ignoreCase + Parser.CommandState.FIND.name() + "(.*)")) {
             return new FindCommand(command);
         } else {
-            String t = checkAction(command);
+            checkAction(command);
             return new AddCommand(Todo.createTask("todo buy books"));
         }
     }
 
-    public static String checkAction(String command) throws DukeException{
+    public static String checkAction(String command) throws DukeException {
         String s;
         if (command.matches(ignoreCase + CommandState.DEADLINE.name() + wildcard)) {
             s = "Deadline";

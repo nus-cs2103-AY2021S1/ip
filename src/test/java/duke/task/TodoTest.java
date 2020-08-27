@@ -1,21 +1,22 @@
 package duke.task;
 
-import duke.DukeException;
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
+
+import org.junit.jupiter.api.Test;
+
+import duke.DukeException;
 
 public class TodoTest {
 
     @Test
-    public void createTask_Success() throws DukeException {
+    public void createTask_success() throws DukeException {
         Todo t = Todo.createTask("toDo Buy Books");
         assertEquals("Buy Books", t.description);
     }
 
     @Test
-    public void createTask_missingDescription_Failure() {
+    public void createTask_missingDescription_failure() {
         try {
             Todo.createTask("toDo  ");
             fail();

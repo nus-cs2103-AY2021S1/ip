@@ -1,6 +1,13 @@
 package duke;
 
-import duke.command.*;
+import duke.command.AddCommand;
+import duke.command.CheckCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.ExitCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -10,9 +17,9 @@ import duke.task.Todo;
  * The <code>Parser</code> reads a command from user and perform various checks to determine the next action.
  */
 public class Parser {
-    private final static String ignoreCase = "(?i)";
-    private final static String wildcard = "(.*)";
-    private final static Ui ui = new Ui();
+    private static final String ignoreCase = "(?i)";
+    private static final String wildcard = "(.*)";
+    private static final Ui ui = new Ui();
 
     /**
      * <code>CommandState</code> is an enum representing all possible command direction from user.
@@ -55,7 +62,7 @@ public class Parser {
      * @return the <code>Task</code> to be acted on
      * @throws DukeException if task command is unidentifiable
      */
-    public static Task checkAction(String command) throws DukeException{
+    public static Task checkAction(String command) throws DukeException {
         Task t;
         if (command.matches(ignoreCase + CommandState.DEADLINE.name() + wildcard)) {
             t = Deadline.createTask(command);
