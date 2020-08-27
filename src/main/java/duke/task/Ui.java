@@ -2,9 +2,15 @@ package duke.task;
 
 import java.util.Scanner;
 
+/**
+ * Encapsulates an Ui object that interacts with the user.
+ */
 public class Ui {
     Scanner sc;
 
+    /**
+     * Initialises an Ui object.
+     */
     protected Ui() {
         sc = new Scanner(System.in);
     }
@@ -26,6 +32,10 @@ public class Ui {
         System.out.println("Bye! Come back soon ( ^-^)/");
     }
 
+    /**
+     * Prints the list of tasks.
+     * @param tasks List of tasks.
+     */
     public void showTaskList(TaskList tasks) {
         System.out.println(tasks);
     }

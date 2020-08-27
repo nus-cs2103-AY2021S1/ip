@@ -4,16 +4,28 @@ import java.io.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+/**
+ * Encapsulates a storage object that stores a list of tasks in a fixed path.
+ */
 public class Storage {
 
     ArrayList<Task> al;
     String filePath;
 
+    /**
+     * Initialises a storage object containing a list of tasks.
+     * @param filePath File path to store list of tasks in.
+     */
     protected Storage(String filePath) {
         al = new ArrayList<>();
         this.filePath = filePath;
     }
 
+    /**
+     * Loads a previously stored list of tasks from the file.
+     * If no file is found, then a file is created.
+     * @return an ArrayList of tasks.
+     */
     protected ArrayList<Task> load() {
         try {
             String[] path = filePath.split("/", 2);
@@ -68,6 +80,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Uploads a list of tasks to the file.
+     * @param tasks List of tasks to be uploaded.
+     * @throws YooException If the file is not found in the path.
+     */
     protected void upload(TaskList tasks) throws YooException {
         File duke = new File(filePath);
 

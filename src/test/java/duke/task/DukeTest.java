@@ -1,9 +1,10 @@
+package duke.task;
+
 import org.junit.jupiter.api.Test;
 
 import java.io.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

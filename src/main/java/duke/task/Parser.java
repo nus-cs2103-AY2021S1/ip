@@ -3,8 +3,20 @@ package duke.task;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Encapsulates a parser that parses and executes commands.
+ */
 public class Parser {
 
+    /**
+     * Returns a boolean after parsing and executing the command.
+     * @param command User's command.
+     * @param tasks List of tasks.
+     * @param ui Ui object that interacts with user.
+     * @param storage Storage object to store the list of tasks.
+     * @return true if it is a bye command, false otherwise.
+     * @throws YooException if incorrect or wrongly formatted command.
+     */
     protected static boolean parse(String command, TaskList tasks, Ui ui, Storage storage) throws YooException {
 
         try {

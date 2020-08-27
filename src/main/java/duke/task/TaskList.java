@@ -2,14 +2,25 @@ package duke.task;
 
 import java.util.ArrayList;
 
+
+/**
+ * Encapsulates a list of tasks.
+ */
 public class TaskList {
 
     ArrayList<Task> al;
 
+    /**
+     * Initialises an empty task list.
+     */
     protected TaskList() {
         al = new ArrayList<>();
     }
 
+    /**
+     * Initialises a task list using an existing ArrayList of tasks.
+     * @param al ArrayList of tasks.
+     */
     protected TaskList(ArrayList<Task> al) {
         this.al = al;
         if(al.size() > 0) {
