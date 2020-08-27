@@ -1,6 +1,9 @@
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 
 class Task {
     private String message;
@@ -98,6 +101,14 @@ class InvalidDoneException extends Exception {
     }
 }
 
+class InvalidDateException extends Exception {
+    InvalidDateException() {}
+    @Override
+    public String toString() {
+        return "☹ OOPS!!! Date is invalid.";
+    }
+}
+
 class Todo extends Task {
     Todo(String message) {
         super(message);
@@ -136,15 +147,18 @@ class Deadline extends Task {
 
 class Convert {
     static String at(String s) {
-        String first = s.split("/at")[0];
-        String second = s.split("/at")[1];
-        return first + "(at:" + second + ")";
+        String first = s.split("/at ")[0];
+        String second = s.split("/at ")[1];
+        // date of format "yyyy-mm-dd"
+        LocalDate date = LocalDate.parse(second);
+        return first + "(at: " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 
     static String by(String s) {
-        String first = s.split("/by")[0];
-        String second = s.split("/by")[1];
-        return first + "(by:" + second + ")";
+        String first = s.split("/by ")[0];
+        String second = s.split("/by ")[1];
+        LocalDate date = LocalDate.parse(second);
+        return first + "(by: " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 }
 
@@ -267,6 +281,8 @@ public class Duke {
                             break;
                     }
                     System.out.println(format(ex.toString()));
+                } catch (java.time.format.DateTimeParseException e) {
+                    System.out.println(format(new InvalidDateException().toString()));
                 } catch (Exception e) {
                     System.out.println(format(e.toString()));
                 }
