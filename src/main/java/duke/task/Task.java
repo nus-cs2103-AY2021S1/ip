@@ -24,6 +24,10 @@ public class Task {
         return title;
     }
 
+    public String getTitle() {
+        return title;
+    }
+
     public static Task fromData(String st) {
         String[] segment = st.split(" \\| ");
         String type = segment[0];
