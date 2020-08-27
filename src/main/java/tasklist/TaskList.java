@@ -1,14 +1,14 @@
 package tasklist;
 
+import static java.lang.Integer.parseInt;
+
+import java.util.ArrayList;
+
 import storage.Storage;
 import tasks.Deadline;
 import tasks.Event;
 import tasks.Task;
 import tasks.Todo;
-
-import java.util.ArrayList;
-
-import static java.lang.Integer.parseInt;
 
 /**
  * Contains the list of tasks.
@@ -21,6 +21,10 @@ public class TaskList {
     /** Storage for storing user's data */
     protected Storage storage;
 
+    /**
+     * Constructs a new TaskList object.
+     * @param storage the storage to save and load data from
+     */
     public TaskList(Storage storage) {
         this.storage = storage;
         this.tasks = storage.load();

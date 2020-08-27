@@ -11,6 +11,10 @@ public class Task {
     /** Boolean for whether or not the task is done */
     protected boolean isDone;
 
+    /**
+     * Constructs a new Task object.
+     * @param taskName the description of the task
+     */
     public Task(String taskName) {
         this.taskName = taskName;
         this.isDone = false;

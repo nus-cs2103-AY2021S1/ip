@@ -1,15 +1,17 @@
 package parser;
 
-import DukeException.DukeException;
-import tasks.Deadline;
-import tasks.Event;
-import tasks.Todo;
-import storage.Storage;
-import tasklist.TaskList;
+import static java.lang.Integer.parseInt;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.time.format.DateTimeParseException;
-import static java.lang.Integer.parseInt;
+
+import DukeException.DukeException;
+import storage.Storage;
+import tasklist.TaskList;
+import tasks.Deadline;
+import tasks.Event;
+import tasks.Todo;
 
 /**
  *  Deals with making sense of the user command.
@@ -22,6 +24,10 @@ public class Parser {
     /** Tasklist for dealing with the user's data */
     protected TaskList tasks;
 
+    /**
+     * Constructs a new Parser object.
+     * @param tasks the list of tasks
+     */
     public Parser(TaskList tasks) {
         this.storage = tasks.getStorage();
         this.tasks = tasks;
@@ -103,7 +109,7 @@ public class Parser {
      * @param command the user's input
      * @throws DukeException if the user doesn't give a description for delete.
      */
-    protected void deleteTask(String command) throws DukeException{
+    protected void deleteTask(String command) throws DukeException {
         String[] deleteCommand = command.split("\\W+");
         if (deleteCommand.length == 1) {
             throw new DukeException("Oh no! You must DELETE this! (The description of delete can't be empty!)");
@@ -174,10 +180,11 @@ public class Parser {
      * @param command the user's input
      * @throws DukeException if the user doesn't give a description for event
      */
-    protected void handleEvent(String command) throws DukeException{
+    protected void handleEvent(String command) throws DukeException {
         String[] eventCommand = command.split("\\W+");
         if (eventCommand.length == 1) {
-            throw new DukeException("Oh no! EVENTually you'll get it right! (The description of event can't be empty!)");
+            throw new DukeException("Oh no! EVENTually you'll get it right! "
+                    + "(The description of event can't be empty!)");
         } else {
             try {
                 String taskName = command.substring(command.indexOf("event") + 6);

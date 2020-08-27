@@ -6,11 +6,16 @@ import java.time.format.DateTimeFormatter;
 /**
  *  Tasks that start at a specific time and ends at a specific time.
  */
-public class Event extends Task{
+public class Event extends Task {
 
     /** The time that the event is at */
     protected LocalDate at;
 
+    /**
+     * Constructs a new Event object.
+     * @param taskName the description of the event
+     * @param at the time of the event
+     */
     public Event(String taskName, String at) {
         super(taskName);
         this.at = LocalDate.parse(at);

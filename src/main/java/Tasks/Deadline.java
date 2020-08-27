@@ -6,11 +6,16 @@ import java.time.format.DateTimeFormatter;
 /**
  * Tasks that need to be done before a specific date/time.
  */
-public class Deadline extends Task{
+public class Deadline extends Task {
 
     /** The time that the deadline has to be done by */
     protected LocalDate by;
 
+    /**
+     * Constructs a new Deadline object.
+     * @param taskName the description for the task
+     * @param by the date of the deadline
+     */
     public Deadline(String taskName, String by) {
         super(taskName);
         this.by = LocalDate.parse(by);

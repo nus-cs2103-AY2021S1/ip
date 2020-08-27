@@ -1,9 +1,5 @@
 package storage;
 
-import tasks.Deadline;
-import tasks.Event;
-import tasks.Task;
-import tasks.Todo;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -15,8 +11,13 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.Scanner;
+
+import tasks.Deadline;
+import tasks.Event;
+import tasks.Task;
+import tasks.Todo;
 
 /**
  * Deals with loading tasks from the file and saving tasks in the file.
@@ -33,6 +34,11 @@ public class Storage {
         this.fileName = fileName;
     }
 
+    /**
+     * Constructs a new Storage object.
+     * @param fileName name of the data file
+     * @param appendToFile whether or not the file should be appended to
+     */
     public Storage(String fileName, boolean appendToFile) {
         this.fileName = fileName;
         this.canAppendToFile = appendToFile;
@@ -184,8 +190,9 @@ public class Storage {
             fileError();
         } finally {
             try {
-                if (reader != null)
+                if (reader != null) {
                     reader.close();
+                }
             } catch (IOException e) {
                 fileError();
             }
@@ -197,7 +204,7 @@ public class Storage {
      * @param text the data to be written to the data file
      * @throws IOException if there is a problem reading the file
      */
-    protected void writeToFile(String text) throws IOException{
+    protected void writeToFile(String text) throws IOException {
         FileWriter writer = new FileWriter(this.fileName, this.canAppendToFile);
         BufferedWriter bufferedWriter = new BufferedWriter(writer);
         bufferedWriter.write(text);
@@ -236,7 +243,7 @@ public class Storage {
      * @param lineNumber the line of task to delete
      * @throws IOException if there is a problem reading the file
      */
-    public void deleteFromFile(int lineNumber) throws IOException{
+    public void deleteFromFile(int lineNumber) throws IOException {
         File currFile = new File(this.fileName);
         File tempFile = new File("cait_data_temp.txt");
         BufferedReader reader = new BufferedReader(new FileReader(currFile));
@@ -246,7 +253,7 @@ public class Storage {
         String lineToRemove = Files.readAllLines(Paths.get(this.fileName)).get(lineNumber);
         String currLine;
 
-        while((currLine = reader.readLine()) != null) {
+        while ((currLine = reader.readLine()) != null) {
             String trimLine = currLine.trim();
             if (trimLine.equals(lineToRemove)) {
                 continue;
@@ -271,7 +278,7 @@ public class Storage {
      * @param lineNumber the line of task to update to done
      * @throws IOException if there is a problem reading the file
      */
-    public void setDoneLine(int lineNumber) throws IOException  {
+    public void setDoneLine(int lineNumber) throws IOException {
         File currFile = new File(this.fileName);
         File tempFile = new File("cait_data_temp.txt");
         BufferedReader reader = new BufferedReader(new FileReader(currFile));
@@ -284,7 +291,7 @@ public class Storage {
         String doneLine = String.join(" | ", taskInfo);
         String currLine;
 
-        while((currLine = reader.readLine()) != null) {
+        while ((currLine = reader.readLine()) != null) {
             String trimLine = currLine.trim();
             if (trimLine.equals(lineToUpdate)) {
                 writer.write(doneLine + '\n');

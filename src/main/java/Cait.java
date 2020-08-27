@@ -20,6 +20,10 @@ public class Cait {
     /** Parser for parsing user's inputs */
     private Parser parser;
 
+    /**
+     * Constructs a new Cait object.
+     * @param fileName the name of the data file
+     */
     public Cait(String fileName) {
         storage = new Storage(fileName);
         tasks = new TaskList(storage);

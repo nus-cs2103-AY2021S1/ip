@@ -5,6 +5,10 @@ package tasks;
  */
 public class Todo extends Task {
 
+    /**
+     * Constructs a new Todo object.
+     * @param taskName the description for the todo
+     */
     public Todo(String taskName) {
         super(taskName);
     }

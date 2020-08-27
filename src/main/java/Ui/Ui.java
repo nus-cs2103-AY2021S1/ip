@@ -1,19 +1,24 @@
 package ui;
 
-import parser.Parser;
 import java.util.Scanner;
+
+import parser.Parser;
 
 /**
  * Deals with interactions with the user.
  */
 public class Ui {
 
-    /** Boolean to determine if Cait should stop running */
-    private boolean isExit = false;
-
     /** Parser for parsing user's inputs */
     protected Parser parser;
 
+    /** Boolean to determine if Cait should stop running */
+    private boolean isExit = false;
+
+    /**
+     * Constructs a new Ui object.
+     * @param parser the parser that deals with user input
+     */
     public Ui(Parser parser) {
         this.parser = parser;
     }
