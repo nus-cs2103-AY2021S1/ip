@@ -1,6 +1,7 @@
 package duke;
 
 import duke.exceptions.*;
+import duke.storage.Storage;
 import duke.tasks.*;
 import duke.utils.Constants;
 import duke.utils.UtilFunction;
@@ -12,11 +13,17 @@ import java.util.Objects;
 
 
 public class DukeCommandMatcher {
+    private SingletonTaskList taskList;
+
     private static final List<String> commandList = new ArrayList<>(Arrays.asList(Constants.LISTPATTERN,
                                                                   Constants.EXITPATTERN, Constants.DONEPATTERN,
                                                                   Constants.TODOPATTERN, Constants.DEADLINEPATTERN,
                                                                   Constants.EVENTPATTERN, Constants.DELETEPATTERN));
-    private SingletonTaskList taskList = SingletonTaskList.getInstance();
+
+    public DukeCommandMatcher(Storage database) {
+        this.taskList = SingletonTaskList.getInstance(database);
+    }
+
 
     public String matchCommand(String command) throws CommandNotFoundException, NullCommandException,
             LackOfTimeException, NullCommandContentException, TaskOutOfBoundException, TaskNotSpecifyException,
@@ -73,11 +80,11 @@ public class DukeCommandMatcher {
     private String handleDone(String[] targetTask) throws TaskOutOfBoundException, TaskNotSpecifyException {
         try {
             int targetTaskPos = Integer.parseInt(targetTask[1]) - 1;
-            taskList.doneTask(targetTaskPos, targetTask);
+            taskList.setTaskDone(targetTaskPos);
         } catch(IndexOutOfBoundsException e) {
             throw new TaskNotSpecifyException("task to be done not specified", "DONE");
         }
-        return "Duke.Task " + targetTask + " has been done";
+        return "Task " + targetTask + " has been done";
     }
 
     private String handleTodo(String[] todoStr) throws NullCommandContentException{

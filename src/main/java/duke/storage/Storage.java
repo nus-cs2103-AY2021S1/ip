@@ -10,10 +10,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Storage {
+    private String databasePath;
+
+    public Storage(String databasePath) {
+        this.databasePath = databasePath;
+    }
     public List<Task> readAll() {
         List<Task> tasks = new ArrayList<>();
         try {
-            File databaseFile = new File( "data/tasksTable.csv");
+            File databaseFile = new File( databasePath);
             databaseFile.getParentFile().mkdirs();
             databaseFile.createNewFile();
             BufferedReader csvReader = new BufferedReader(new FileReader(databaseFile));
@@ -35,7 +40,6 @@ public class Storage {
                     break;
                 }
                 default: {
-                    //will need to throw exception
                     task = null;
                     break;
                 }
@@ -50,7 +54,7 @@ public class Storage {
 
     public void update(List<Task> tasks) {
         try {
-            File databaseFile = new File("data/tasksTable.csv");
+            File databaseFile = new File(databasePath);
             FileWriter csvWriter = new FileWriter(databaseFile);
             for(Task task: tasks) {
                 String[] formatTask = formatTask(task);

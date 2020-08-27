@@ -5,6 +5,7 @@ import duke.exceptions.DateFormatException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -31,5 +32,23 @@ public class UtilFunction {
             throw new DateFormatException("The date format is not valid.");
         }
         return standardDateFormat;
+    }
+
+    public static void printLimit(String output) {
+        int width = Constants.consoleWidth;
+        int count = 0;
+        String[] words = output.split("\\s+");
+        for(String word: words) {
+            count += word.length();
+            if(Objects.equals(word, '\n')) {
+                System.out.print('\n');
+            } else if (count < width) {
+                System.out.print(word + " ");
+            } else {
+                System.out.print('\n' + word);
+                count = word.length();
+            }
+        }
+        System.out.print('\n');
     }
 }

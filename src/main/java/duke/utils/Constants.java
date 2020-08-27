@@ -7,7 +7,7 @@ public class Constants {
     public static final String GREETING =
             "Hello/您好/こんにちは I'm Duke\n" +
             "What can I do for you?";
-    public static final String DIVIDER = "____________________________";
+    public static final String DIVIDER = "__________________________________________________";
 
     public static final String EXITPATTERN = ("^(b|B)(y|Y)(e|E)$");
 
@@ -24,6 +24,8 @@ public class Constants {
     public static final String DELETEPATTERN = ("^(d|D)(e|E)(l|L)(e|E)(t|T)(e|E)$");
 
     public static final String DATEFORMAT = "yyyy-mm-dd";
+
+    public static final int consoleWidth = 50;
 
 
 }
