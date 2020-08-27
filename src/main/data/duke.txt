@@ -1,1 +1,2 @@
-D | 0 |  return /book by 2/12/2019 1800 | k by 2/12/2019 1800D | 0 |  return book /by 2/12/2019 1800 | 2/12/2019 1800D | 0 |  return book /by 2019-10-15 | Oct 15 2019
+T | 0 |  read book
+T | 0 |  return book
