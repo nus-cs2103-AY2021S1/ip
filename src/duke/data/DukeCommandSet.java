@@ -27,6 +27,7 @@ public class DukeCommandSet {
         registerCommand(new DeadlineCommand());
         registerCommand(new EventCommand());
         registerCommand(new DeleteCommand());
+        registerCommand(new FindCommand());
     }
 
     private void registerCommand(Command command) {

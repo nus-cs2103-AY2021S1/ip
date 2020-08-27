@@ -78,4 +78,16 @@ public class DukeTaskList {
             throw new InvalidIndexException("Invalid Index!");
         }
     }
+
+    public ArrayList<Task> findTasks(String keyword) {
+        ArrayList<Task> tasksFound = new ArrayList<>();
+
+        for (Task task : tasks) {
+            if (task.containKeyWord(keyword)) {
+                tasksFound.add(task);
+            }
+        }
+
+        return tasksFound;
+    }
 }
