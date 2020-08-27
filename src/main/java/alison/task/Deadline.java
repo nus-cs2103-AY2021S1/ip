@@ -19,6 +19,10 @@ public class Deadline extends Task {
         this.by = by;
     }
 
+    /**
+     * This method parse a deadline in format "yyyy-mm-dd" to "MMM d yyyy".
+     * @throws AlisonException when the format is incorrect.
+     */
     public void parseTime() throws AlisonException {
         try {
             this.ddl = LocalDate.parse(by);

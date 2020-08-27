@@ -22,6 +22,10 @@ public class Task {
         this.isDone = true;
     }
 
+    /**
+     * This is a string conversion method.
+     * @return the formatted String to be wrote in the text file.
+     */
     public String savedFormat() {
         return String.format("| %s | %s", this.isDone, this.description);
     }

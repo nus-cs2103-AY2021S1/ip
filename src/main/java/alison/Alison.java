@@ -10,6 +10,10 @@ public class Alison {
     private Storage storage;
     private Ui ui;
 
+    /**
+     * Create a Alison bot with a file path you want to store all your data in.
+     * @param filePath a String on file path in format: "./data/*.txt".
+     */
     public Alison(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);

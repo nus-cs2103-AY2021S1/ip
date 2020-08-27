@@ -1,5 +1,8 @@
 package alison.exception;
 
+/**
+ * This class stores most of the possible errors in Alison.
+ */
 public class AlisonException extends Exception {
 
     public AlisonException(String msg) {

@@ -14,6 +14,9 @@ public class Ui {
         System.out.println("________________________________________________________________");
     }
 
+    /**
+     * Hello from Alison bot.
+     */
     public void greeting() {
         String logo =
                     "       d8888 888      8888888  .d8888b.   .d88888b.  888b    888 \n" +
@@ -60,6 +63,10 @@ public class Ui {
                 + String.format("Now you have %d tasks in the list.", tasks.size()));
     }
 
+    /**
+     * This method takes in user's input and returns a String.
+     * @return String entered by the user.
+     */
     public String readCommand() {
         Scanner sc = new Scanner(System.in);
         return sc.nextLine();
