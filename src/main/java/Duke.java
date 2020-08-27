@@ -47,12 +47,30 @@ public class Duke {
         try {
             loadTasksFromDisk();
         }
+        catch (DukeDataFolderException ex) {
+            printError(ex.getMessage());
+            File dir = new File(DUKE_DATA_DIR_PATH.toUri());
+            Boolean isCreated = dir.mkdir();
+            if (isCreated) {
+                echoBack("Successfully created Deuk Data Folder");
+                try {
+                    FileWriter fw = new FileWriter(DUKE_DATA_FILE_PATH.toString());
+                    fw.close();
+                }
+                catch (IOException err) {
+                    printError(err.getMessage());
+                }
+            }
+            else {
+                printError("Failed to create Deuk Data Folder");
+            }
+        }
         catch (DukeException ex) {
             printError(ex.getMessage());
         }
         catch (FileNotFoundException ex) {
-            printError("Missing Duke Data File!" + NEW_LINE + PADDING +
-                "Creating new Duke Data File..."
+            printError("Missing Deuk Data File!" + NEW_LINE + PADDING +
+                "Creating new Deuk Data File..."
             );
             try {
                 FileWriter fw = new FileWriter(DUKE_DATA_FILE_PATH.toString());
@@ -213,10 +231,12 @@ public class Duke {
         System.out.printf(MESSAGE_TEMPLATE, message);
     }
 
-    private void loadTasksFromDisk() throws FileNotFoundException, DukeException{
+    private void loadTasksFromDisk() throws FileNotFoundException, DukeException, DukeDataFolderException{
         File dukeDataFile = new File(DUKE_DATA_FILE_PATH.toUri());
         if (Files.notExists(DUKE_DATA_DIR_PATH)) {
-            throw new DukeException("Missing Duke Data Folder");
+            throw new DukeDataFolderException("Missing Deuk Data Folder!" + NEW_LINE + PADDING +
+                    "Creating new Deuk Data Folder..."
+            );
         }
         Scanner fs = new Scanner(dukeDataFile);
         while (fs.hasNext()) {
@@ -224,7 +244,6 @@ public class Duke {
             Scanner sc = new Scanner(taskString);
             Boolean isDone = sc.nextInt() == 1;
             String taskType = sc.next();
-//            System.out.println(taskType);
             String taskName = sc.next();
             Task task;
             if (taskType.equals("T")) {
@@ -239,7 +258,7 @@ public class Duke {
                 task = new Event(taskName, timing);
             }
             else {
-                throw new DukeException("Save file corrupted");
+                throw new DukeException("Save file corrupted!");
             }
             task.setDoneness(isDone);
             this.storageList.add(task);
