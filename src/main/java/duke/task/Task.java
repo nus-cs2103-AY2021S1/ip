@@ -1,4 +1,4 @@
-package duke.Task;
+package duke.task;
 
 /**
  * Abstract class Task that provides basic functionality to the other Task objects

@@ -1,15 +1,15 @@
-package duke.CommandTest;
+package duke.commandTest;
 
-import duke.Command.DukeException;
-import duke.Command.Parser;
-import duke.Duke.Duke;
-import duke.Task.TaskList;
+import duke.command.DukeException;
+import duke.command.Parser;
+
+import duke.task.TaskList;
+
 import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
-public class CommandTest {
+public class commandTest {
 
     @Test
     public void emptyCommand_errorThrown() {

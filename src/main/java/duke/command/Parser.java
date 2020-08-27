@@ -1,14 +1,16 @@
-package duke.Command;
+package duke.command;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import duke.Task.Deadline;
-import duke.Task.Event;
-import duke.Task.TaskList;
-import duke.Task.Todo;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.TaskList;
+import duke.task.Todo;
 
 /**
  * Parser class which is used to process commands passed down by the user and returns
@@ -84,7 +86,8 @@ public class Parser {
                     return this.processTask(com, task, date);
             }
         }
-        throw new DukeException("Sorry, I did not understand: " + command + ".\nUse \"help\" to look at available commands.");
+        throw new DukeException("Sorry, I did not understand: " + command
+                + ".\nUse \"help\" to look at available commands.");
     }
 
     /**

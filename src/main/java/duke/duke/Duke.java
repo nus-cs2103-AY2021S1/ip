@@ -1,9 +1,11 @@
-package duke.Duke;
+package duke.duke;
 
-import duke.Command.DukeException;
-import duke.Command.Parser;
-import duke.Storage.Storage;
-import duke.Task.TaskList;
+import duke.command.DukeException;
+import duke.command.Parser;
+
+import duke.storage.Storage;
+
+import duke.task.TaskList;
 
 /**
  * Duke class that runs the Duke chat bot program.
