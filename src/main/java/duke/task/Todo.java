@@ -12,8 +12,8 @@ public class Todo extends Task {
     }
 
     /**
-     * generates string of task to save in storage file
-     * @return string of task
+     * generates string of task to save in storage file.
+     * @return string of task.
      */
     @Override
     public String stringToSave() {

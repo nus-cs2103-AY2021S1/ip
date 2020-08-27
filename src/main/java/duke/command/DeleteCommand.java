@@ -10,19 +10,19 @@ public class DeleteCommand extends Command {
     private final String fullCommand;
 
     /**
-     * Constructor for DeleteCommand
-     * @param fullCommand full input string from user
+     * Constructor for DeleteCommand.
+     * @param fullCommand full input string from user.
      */
-    public DeleteCommand (String fullCommand) {
+    public DeleteCommand(String fullCommand) {
         this.fullCommand = fullCommand;
     }
 
     /**
-     * Executes command, main logic for creating a new task
-     * @param tasklist list of tasks
-     * @param ui instance of Ui to deal with user interface
-     * @param storage to read / write to storage
-     * @throws DukeException exception thrown when exception caught while running
+     * Executes command, main logic for creating a new task.
+     * @param tasklist list of tasks.
+     * @param ui instance of Ui to deal with user interface.
+     * @param storage to read / write to storage.
+     * @throws DukeException exception thrown when exception caught while running.
      */
     @Override
     public void execute(TaskList tasklist, Ui ui, Storage storage) throws DukeException {

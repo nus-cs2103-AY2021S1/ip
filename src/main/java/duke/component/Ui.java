@@ -9,7 +9,7 @@ public class Ui {
     private static final String INDENT = "  ";
     Scanner scan;
 
-    public Ui () {
+    public Ui() {
         this.scan = new Scanner(System.in);
     }
 
@@ -34,8 +34,8 @@ public class Ui {
     }
 
     /**
-     * prints out all the tasks
-     * @param list list of tasks
+     * prints out all the tasks.
+     * @param list list of tasks.
      */
     public void listAllTasks(ArrayList<Task> list) {
         int LENGTH_OF_LIST = list.size();
@@ -51,9 +51,9 @@ public class Ui {
     }
 
     /**
-     * message after adding a task to list
-     * @param task task to be added
-     * @param tasksLeft integer value of tasks remaining in the list of tasks
+     * message after adding a task to list.
+     * @param task task to be added.
+     * @param tasksLeft integer value of tasks remaining in the list of tasks.
      */
     public void addMessage(Task task, int tasksLeft) {
         System.out.println("Got it, the following task has been added:\n" + INDENT + INDENT + task +
@@ -61,18 +61,18 @@ public class Ui {
     }
 
     /**
-     * message after deleting a message
-     * @param task task to be deleted
-     * @param tasksLeft integer value of tasks remaining in the list of tasks
+     * message after deleting a message.
+     * @param task task to be deleted.
+     * @param tasksLeft integer value of tasks remaining in the list of tasks.
      */
     public void deleteMessage(Task task, int tasksLeft) {
         System.out.println("Noted. I have removed this task:\n" + INDENT + INDENT + task + "\n" + this.taskLeftMessage(tasksLeft));
     }
 
     /**
-     * message to show number of tasks left
-     * @param tasksLeft integer value of tasks remaining in the list of tasks
-     * @return string of message
+     * message to show number of tasks left.
+     * @param tasksLeft integer value of tasks remaining in the list of tasks.
+     * @return string of message.
      */
     public String taskLeftMessage(int tasksLeft) {
         String end = "No tasks found. Add a task now!";
@@ -83,15 +83,14 @@ public class Ui {
     }
 
 
-
     public void print(String s) {
         System.out.println(s);
     }
 
     /**
-     * shows icon based on whether task is done or not
-     * @param task task to be checked
-     * @return string of icon with brackets
+     * shows icon based on whether task is done or not.
+     * @param task task to be checked.
+     * @return string of icon with brackets.
      */
     public String getStatusIcon(Task task) {
         return ("[" + (task.getIsDone() ? "\u2713" : "\u2718") + "] ");

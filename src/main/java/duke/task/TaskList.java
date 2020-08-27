@@ -6,17 +6,17 @@ public class TaskList {
     private ArrayList<Task> list;
 
     /**
-     * constructor for tasklist if no list was retrieved from storage
+     * constructor for tasklist if no list was retrieved from storage.
      */
-    public TaskList () {
+    public TaskList() {
         this.list = new ArrayList<>();
     }
 
     /**
-     * overloaded constructor for tasklist if list was retrieved from storage
-     * @param newList list generated from tasks in storage
+     * overloaded constructor for tasklist if list was retrieved from storage.
+     * @param newList list generated from tasks in storage.
      */
-    public TaskList (ArrayList<Task> newList) {
+    public TaskList(ArrayList<Task> newList) {
         this.list = newList;
     }
 
@@ -25,7 +25,6 @@ public class TaskList {
     }
 
     public void deleteItem(int itemIndex) {
-        Task t = list.get(itemIndex);
         list.remove(itemIndex);
     }
 

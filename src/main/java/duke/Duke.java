@@ -17,7 +17,7 @@ public class Duke {
     private final Ui ui;
 
     /**
-     * Creates an instance of Duke, instance of ui created too. TaskList initialised
+     * Creates an instance of Duke, instance of ui created too. TaskList initialised.
      * with empty list of tasks if file lookup is unsuccessful.
      */
     public Duke() {
@@ -37,7 +37,7 @@ public class Duke {
     }
 
     /**
-     * method to execute the Duke logic
+     * method to execute the Duke logic.
      */
     public void run() {
         ui.showWelcome();

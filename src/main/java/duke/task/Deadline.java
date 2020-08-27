@@ -14,10 +14,10 @@ public class Deadline extends Task {
     protected LocalTime time;
 
     /**
-     * constructor of Deadline task
-     * @param description string of description of task
-     * @param by date and time that task is to be completed by
-     * @throws DukeException exception thrown when exception caught while running
+     * constructor of Deadline task.
+     * @param description string of description of task.
+     * @param by date and time that task is to be completed by.
+     * @throws DukeException exception thrown when exception caught while running.
      */
     public Deadline(String description, String by) throws DukeException {
         super(description);
@@ -34,9 +34,9 @@ public class Deadline extends Task {
     }
 
     /**
-     * extracts date
-     * @param dateUnformatted string of unformatted date
-     * @return formatted Localdate from string of unformatted date
+     * extracts date.
+     * @param dateUnformatted string of unformatted date.
+     * @return formatted Localdate from string of unformatted date.
      */
     private LocalDate extractDate(String dateUnformatted) {
         dateUnformatted = dateUnformatted.replaceAll("/", "-");
@@ -44,17 +44,17 @@ public class Deadline extends Task {
     }
 
     /**
-     * extracts time
-     * @param timeUnformatted string of unformatted time
-     * @return formatted Localtime from string of unformatted time
+     * extracts time.
+     * @param timeUnformatted string of unformatted time.
+     * @return formatted Localtime from string of unformatted time.
      */
     private LocalTime extractTime(String timeUnformatted) {
         return LocalTime.parse(timeUnformatted);
     }
 
     /**
-     * returns string of task to be printed out and shown to user
-     * @return string of task
+     * returns string of task to be printed out and shown to user.
+     * @return string of task.
      */
     @Override
     public String toString() {
@@ -64,8 +64,8 @@ public class Deadline extends Task {
     }
 
     /**
-     * returns string of task to be saved in storage
-     * @return string of task
+     * returns string of task to be saved in storage.
+     * @return string of task.
      */
     @Override
     public String stringToSave() {

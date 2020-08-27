@@ -19,8 +19,8 @@ public class Storage {
     private List<String> listOfTaskStrings;
 
     /**
-     * constructor for Storage instance
-     * @param filePath specifies where to search for the txt file to take in tasks from storage
+     * constructor for Storage instance.
+     * @param filePath specifies where to search for the txt file to take in tasks from storage.
      */
     public Storage(Path filePath) {
         this.filePath = filePath;
@@ -44,9 +44,9 @@ public class Storage {
     }
 
     /**
-     * retrieves the tasks from storage and returns a list of it formatted as Tasks
-     * @return list of tasks from storage
-     * @throws DukeException exception thrown when exception caught while running
+     * retrieves the tasks from storage and returns a list of it formatted as Tasks.
+     * @return list of tasks from storage.
+     * @throws DukeException exception thrown when exception caught while running.
      */
     public ArrayList<Task> getListOfTasks() throws DukeException {
         ArrayList<Task> listOfTasks = new ArrayList<>();
@@ -93,8 +93,8 @@ public class Storage {
                     listOfTasks.add(tempTask);
                     break;
 
-                    default:
-                        throw new DukeException("duke.task.Task was not recognised: " + stringTask);
+                default:
+                    throw new DukeException("duke.task.Task was not recognised: " + stringTask);
 
                 }
             }
@@ -108,11 +108,11 @@ public class Storage {
     }
 
     /**
-     * converts datetime formatted string back to resemble input date and time
-     * @param dateTime string of formatted datetime
-     * @return string of date time resembling input
+     * converts datetime formatted string back to resemble input date and time.
+     * @param dateTime string of formatted datetime.
+     * @return string of date time resembling input.
      */
-    private String convertBackDateTime (String dateTime) {
+    private String convertBackDateTime(String dateTime) {
         String dateUnconverted = dateTime.substring(1, 12);
         String timeConverted = dateTime.substring(13, 18);
 
@@ -128,7 +128,7 @@ public class Storage {
     }
 
     /**
-     * updates storage with updated information
+     * updates storage with updated information.
      */
     public void saveFile() {
         if (!listOfTaskStrings.isEmpty()) {
@@ -146,8 +146,8 @@ public class Storage {
     }
 
     /**
-     * adds task to list and updates storage
-     * @param task task to add
+     * adds task to list and updates storage.
+     * @param task task to add.
      */
     public void addTask(Task task) {
         String taskString = task.stringToSave();
@@ -156,18 +156,18 @@ public class Storage {
     }
 
     /**
-     * deletes task from list and updates storage
-     * @param index index of task to delete
+     * deletes task from list and updates storage.
+     * @param index index of task to delete.
      */
-    public void deleteTask(int index){
+    public void deleteTask(int index) {
         this.listOfTaskStrings.remove(index);
         this.saveFile();
     }
 
     /**
-     * modifies task and updates storage
-     * @param task task to modify
-     * @param index index of task to modify
+     * modifies task and updates storage.
+     * @param task task to modify.
+     * @param index index of task to modify.
      */
     public void modifyTask(Task task, int index) {
         String taskString = task.stringToSave();

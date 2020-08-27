@@ -10,8 +10,8 @@ public class DoneCommand extends Command {
     private final String fullCommand;
 
     /**
-     * constructor for fullCommand
-     * @param fullCommand full string from user input
+     * constructor for fullCommand.
+     * @param fullCommand full string from user input.
      */
     public DoneCommand(String fullCommand) {
         this.fullCommand = fullCommand;
@@ -19,11 +19,11 @@ public class DoneCommand extends Command {
 
 
     /**
-     * Executes command, main logic for creating a new task
-     * @param taskList list of tasks
-     * @param ui instance of Ui to deal with user interface
-     * @param storage to read / write to storage
-     * @throws DukeException exception thrown when exception caught while running
+     * Executes command, main logic for creating a new task.
+     * @param taskList list of tasks.
+     * @param ui instance of Ui to deal with user interface.
+     * @param storage to read / write to storage.
+     * @throws DukeException exception thrown when exception caught while running.
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
