@@ -1,20 +1,67 @@
+import java.io.File;
+import java.io.FileReader;
+import java.io.BufferedReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.FileNotFoundException;
+
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.io.File;
-
 
 public class Duke {
-    protected ArrayList<Task> taskList;
     protected boolean active = false;
+    protected ArrayList<Task> taskList;
+    protected File dataDirectory, dataFile;
+    protected final String DATA_DIRECTORY_PATH = "data";
+    protected final String DATA_FILE_PATH = "./data/dukeData.txt";
 
     public Duke() {
         taskList = new ArrayList<>();
     }
 
-    public void start() {
+    public void initialize() {
         active = true;
-        welcome();
         Scanner sc = new Scanner(System.in);
+
+        printLogo();
+
+        System.out.println("Initializing...");
+        try {
+            dataDirectory = new File(DATA_DIRECTORY_PATH);
+            dataFile = new File(DATA_FILE_PATH);
+            if (!dataDirectory.exists()) {
+                if (dataDirectory.mkdir()) {
+                    System.out.println("Data Directory is created...");
+                } else {
+                    System.out.println("Oops...the data directory cannot be created :(");
+                }
+            } else {
+                System.out.println("Data directory located...");
+            }
+            if (!dataFile.exists()) {
+
+                if (dataFile.createNewFile()) {
+                    System.out.println("Data file is created...");
+                } else {
+                    System.out.println("Oops...the data file cannot be created :(");
+                }
+            } else {
+                System.out.println("Data file located...");
+                loadExistingData();
+                System.out.println("Initialization complete!");
+            }
+            welcome();
+        } catch (IOException e) {
+            active = false;
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        } catch (DukeException e) {
+            active = false;
+            System.out.print("Initialization failed. ");
+            System.out.println(e.getMessage());
+        }
+
+
         while (active) {
             String input = sc.nextLine();
             handleInput(input);
@@ -22,12 +69,71 @@ public class Duke {
         sc.close();
     }
 
+    public void printLogo() {
+        String logo = " ____        _        \n"
+                + "|  _ \\ _   _| | _____ \n"
+                + "| | | | | | | |/ / _ \\\n"
+                + "| |_| | |_| |   <  __/\n"
+                + "|____/ \\__,_|_|\\_\\___|\n";
+        System.out.println(logo);
+    }
+
     public void welcome() {
         String welcomeMessage = "____________________________________________________\n" +
-                "Hello! I'm Duke\n" +
-                "What can I do for you?\n" +
+                "Hello, I'm Duke!\n\n";
+        if (taskList.size() < 1) {
+            welcomeMessage += "You currently have no tasks. ";
+        } else {
+            welcomeMessage +=  "Here are your existing tasks:\n";
+            for (int i = 0; i < taskList.size(); i++) {
+                Task task = taskList.get(i);
+                String taskString = String.valueOf(i + 1) + "." + task.toString() + "\n";
+                welcomeMessage += taskString;
+            }
+            welcomeMessage += "\n";
+        }
+        welcomeMessage += "What can I do for you?\n" +
                 "____________________________________________________\n";
         System.out.println(welcomeMessage);
+    }
+
+    public void loadExistingData() throws IOException, DukeException {
+        BufferedReader reader = new BufferedReader(new FileReader(dataFile));
+
+        String line;
+        while ((line = reader.readLine()) != null) {
+                String[] taskInfo = line.split(" \\| ");
+                if (taskInfo.length < 3) {
+                    throw new DukeException("Corrupted file: missing field.");
+                } else if (!(taskInfo[1].equals("0") || taskInfo[1].equals("1"))) {
+                    throw new DukeException("Corrupted file: invalid done field.");
+                } else {
+                    String type = taskInfo[0];
+                    boolean isDone = taskInfo[1].equals("1");
+                    String desc = taskInfo[2];
+
+                    Task task;
+                    switch (type) {
+                        case ("T"):
+                            task = new ToDo(desc);
+                            break;
+                        case ("D"):
+                            String by = taskInfo[3];
+                            task = new Deadline(desc, by);
+                            break;
+                        case ("E"):
+                            String at = taskInfo[3];
+                            task = new Event(desc, at);
+                            break;
+                        default:
+                            throw new DukeException("Corrupted file: invalid task type.");
+                    }
+                    if (isDone) {
+                        task.makeDone();
+                    }
+                    taskList.add(task);
+                }
+        }
     }
 
     public void exit() {
@@ -41,10 +147,10 @@ public class Duke {
     public void addTask(Task newTask) {
         taskList.add(newTask);
         String addTaskMessage = "____________________________________________________\n" +
-                         "Got it. I've added this task:\n" +
-                         newTask.toString() + "\n" +
-                         "Now you have " + taskList.size() + (taskList.size() > 1 ? " tasks " : " task ") + "in the list.\n" +
-                         "____________________________________________________\n";
+                "Got it. I've added this task:\n" +
+                newTask.toString() + "\n" +
+                "Now you have " + taskList.size() + (taskList.size() > 1 ? " tasks " : " task ") + "in the list.\n" +
+                "____________________________________________________\n";
         System.out.println(addTaskMessage);
     }
 
