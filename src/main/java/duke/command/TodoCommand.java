@@ -18,10 +18,10 @@ public class TodoCommand extends Command{
     public void execute(TaskList list, Storage storage, Ui ui) throws DukeCommandException, DukeStorageException {
         Pattern pattern = Pattern.compile("todo ([a-zA-z0-9_-]+)((?: [a-zA-z0-9_-]+)*)");
 
-        if(!pattern.matcher(inputCommand).matches()) {
+        if(!pattern.matcher(getInputCommand()).matches()) {
             throw new DukeCommandException("\u2639 OOPS!!! Wrong 'todo' command format!");
         } else {
-            Todo todo = new Todo(inputCommand.substring(5));
+            Todo todo = new Todo(getInputCommand().substring(5));
             list.getList().add(todo);
 
             ui.printMessage("Got it. I've added this task:");

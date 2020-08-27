@@ -5,6 +5,9 @@ import duke.task.Task;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * A tasklist to store a list of tasks
+ */
 public class TaskList {
 
     private List<Task> list = new ArrayList<Task>();

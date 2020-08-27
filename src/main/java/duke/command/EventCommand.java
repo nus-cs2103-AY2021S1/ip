@@ -20,10 +20,10 @@ public class EventCommand extends Command{
     @Override
     public void execute(TaskList list, Storage storage, Ui ui) throws DukeCommandException, DukeStorageException {
         Pattern pattern = Pattern.compile("event ([a-zA-z0-9_-]+)((?: [a-zA-z0-9_-]+)*) /at [0-9]{1,2}/[0-9]{1,2}/[0-9]{4,4} [0-9]{4,4}");
-        if(!pattern.matcher(inputCommand).matches()) {
+        if(!pattern.matcher(getInputCommand()).matches()) {
             throw new DukeCommandException("\u2639 OOPS!!! Wrong 'event' command format!");
         } else {
-            String[] s = inputCommand.substring(6).split(" /at ");
+            String[] s = getInputCommand().substring(6).split(" /at ");
 
             Event event;
             try {
