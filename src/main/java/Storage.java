@@ -31,18 +31,21 @@ public class Storage {
                     String currString = s.nextLine();
                     String[] currStringArray = currString.split(" \\| ");
                     boolean isDone = currStringArray[1].equals("1");
+
                     if (currStringArray[0].equals("T")) {
                         tasks.add(numTasks, new ToDo(currStringArray[2], isDone));
                         numTasks++;
                     } else if (currStringArray[0].equals("D")) {
                         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
                         LocalDateTime byLocalDate = LocalDateTime.parse(currStringArray[3], formatter);
+
                         tasks.add(numTasks, new Deadline(currStringArray[2],
                                 byLocalDate, isDone));
                         numTasks++;
                     } else {
                         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
                         LocalDateTime atLocalDate = LocalDateTime.parse(currStringArray[3], formatter);
+
                         tasks.add(numTasks, new Event(currStringArray[2],
                                 atLocalDate, isDone));
                         numTasks++;
@@ -52,6 +55,7 @@ public class Storage {
             } else {
                 File directory = new File("data");
                 directory.mkdir(); // creates the directory if it does not exist
+
                 File file = new File(filePath);
                 file.createNewFile();
             }
@@ -79,6 +83,7 @@ public class Storage {
         try {
             FileWriter fw = new FileWriter(filePath);
             String tasksList = "";
+
             for (int i = 0; i < tasks.size(); i++) {
                 if (i == 0) {
                     tasksList = tasks.get(i).toTxtFileFormat();
@@ -86,6 +91,7 @@ public class Storage {
                     tasksList = tasksList + "\n" + tasks.get(i).toTxtFileFormat();
                 }
             }
+
             fw.write(tasksList);
             fw.close();
         } catch (IOException e) {

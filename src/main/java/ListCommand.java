@@ -1,5 +1,4 @@
 public class ListCommand extends Command {
-
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         if (tasks.getNumTasks() == 0) {
             ui.showEmptyTaskList();
