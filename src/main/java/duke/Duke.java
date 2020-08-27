@@ -89,6 +89,10 @@ public class Duke {
                     Date date = DateFormat.parseDate(dateString);
                     List<Task> tasksWithDate = tasks.getTasksWithDate(date);
                     ui.listTasksWithDate(tasksWithDate, dateString);
+                } else if (command.equals("find")) {
+                    String keyword = parser.getKeyWord();
+                    List<Task> tasksWithWord = tasks.getTasksWithWord(keyword);
+                    ui.listTasksWithWord(tasksWithWord);
                 } else {
                     throw new DukeException("I am sorry, I don't know what that means :(");
                 }

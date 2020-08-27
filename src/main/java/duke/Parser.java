@@ -60,6 +60,7 @@ public class Parser {
         return commandArr[1];
     }
 
+
     /**
      * Extracts the name of the task from command.
      * @param taskType the type of task that we want extract name for
@@ -71,6 +72,14 @@ public class Parser {
         String splitBy = taskType.equals("deadline") ? " /by " : " /at ";
         String[] detailArr = description.split(splitBy, 2);
         return detailArr[0];
+    }
+
+    public String getKeyWord() throws MissingInformationException {
+        if (commandArr.length < 2 || commandArr[1].isBlank()) {
+            throw new MissingInformationException("Key word is missing!");
+        }
+
+        return commandArr[1];
     }
 
     /**
