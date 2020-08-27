@@ -59,6 +59,13 @@ public class Ui {
         System.out.println(("Task(s) in your list:\n" + tasksList));
     }
 
+    public void showEmptyMatchingList() {
+        System.out.println("There are no matching tasks found.");
+    }
+
+    public void showMatchingTaskList(String matchingTaskList) {
+        System.out.println("Here are the matching tasks in your list:\n" + matchingTaskList);
+    }
     public String readCommand() {
         return sc.nextLine();
     }
