@@ -19,7 +19,6 @@ public class TaskList {
     }
 
     public Task retrieve(int i) {
-        assert i > 0 && i <= this.getNumOfTasks();
         return tasks.get(i - 1);
     }
 
@@ -28,7 +27,6 @@ public class TaskList {
     }
 
     public void remove(int i) {
-        assert i > 0 && i <= this.getNumOfTasks();
         tasks.remove(i - 1);
     }
 }

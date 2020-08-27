@@ -72,7 +72,7 @@ public class Parser {
 
     private static Command prepareDelete(String suffix) throws DukeException {
         if (!suffix.matches("\\d+")) {
-            throw new DukeException("done should be followed by a single task number.");
+            throw new DukeException("delete should be followed by a single task number.");
         } else {
             return new DeleteCommand(Integer.parseInt(suffix));
         }
