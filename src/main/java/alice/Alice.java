@@ -6,20 +6,29 @@ import alice.command.InvalidCommandException;
 import alice.parser.Parser;
 import alice.ui.Ui;
 
-import alice.storage.Storage;
+import alice.storage.StorageFile;
 import alice.task.TaskList;
 
+/**
+ * Represents the ALICE task manager program.
+ */
 public class Alice {
     private TaskList tasks;
-    private final Storage storage;
+    private final StorageFile storageFile;
     private final Ui ui;
 
+    /**
+     * Creates an ALICE program that reads data from specified location.
+     * If the file does not exist, creates the appropriate directory and file
+     *
+     * @param filePath relative path to the data file.
+     */
     public Alice(String filePath) {
         ui = new Ui();
-        storage = new Storage(filePath);
+        storageFile = new StorageFile(filePath);
         try {
             // Read stored data
-            tasks = new TaskList(storage.load());
+            tasks = new TaskList(storageFile.load());
             ui.displayLoadSuccess();
         } catch (AliceException ex) {
             tasks = new TaskList();
@@ -27,6 +36,10 @@ public class Alice {
         }
     }
 
+    /**
+     * Starts the ALICE program.
+     * The method terminates when an exit command is given.
+     */
     public void run() {
         ui.displayWelcomeMsg();
         ui.displayLine();
@@ -37,7 +50,7 @@ public class Alice {
                 String fullCommand = ui.readUserInput();
                 ui.displayLine();
                 Command c = Parser.parseCommand(fullCommand);
-                c.process(tasks, ui, storage);
+                c.process(tasks, ui, storageFile);
                 isGoodbye = c.isExitCommand();
             } catch (InvalidCommandException ex) {
                 ui.displayWarning(ex.getMessage());
@@ -49,6 +62,9 @@ public class Alice {
         }
     }
 
+    /**
+     * Entry point of the program.
+     */
     public static void main(String[] args) {
         new Alice("data/tasks.txt").run();
     }

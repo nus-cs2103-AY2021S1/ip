@@ -7,13 +7,25 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Represent the list of tasks.
+ */
 public class TaskList {
     private final ArrayList<Task> tasks;
 
+    /**
+     * Creates a new TaskList.
+     */
     public TaskList() {
         this.tasks = new ArrayList<>();
     }
 
+    /**
+     * Creates a new TaskList from previously saved tasks.
+     *
+     * @param encodedTasks list of string of saved tasks from the previous session.
+     * @throws AliceException if the saved files are corrupted.
+     */
     public TaskList(List<String> encodedTasks) throws AliceException {
         this.tasks = new ArrayList<>();
         if (encodedTasks != null) {
@@ -42,6 +54,12 @@ public class TaskList {
         }
     }
 
+    /**
+     * Encodes the list of tasks into a list of strings for saving.
+     * The tasks are encoded in a form that ALICE can understand.
+     *
+     * @return the list of string representation of the encoded tasks.
+     */
     public List<String> encode() {
         String[] dataToSave = new String[tasks.size()];
         for (int i = 0; i < tasks.size(); i++) {
@@ -50,6 +68,11 @@ public class TaskList {
         return Arrays.asList(dataToSave);
     }
 
+    /**
+     * Gets the string representation of all the tasks.
+     *
+     * @return the string representation of all tasks, or null if there are no tasks.
+     */
     public String getAllTasks() {
         if (tasks.isEmpty()) {
             return null;
@@ -65,14 +88,31 @@ public class TaskList {
         return s.toString();
     }
 
+    /**
+     * Gets the number of tasks in TaskList.
+     *
+     * @return number of tasks.
+     */
     public int getNumberOfTasks() {
         return tasks.size();
     }
 
+    /**
+     * Adds the task to TaskList.
+     *
+     * @param t the task to be added.
+     */
     public void addTask(Task t) {
         tasks.add(t);
     }
 
+    /**
+     * Marks a task as done.
+     *
+     * @param index the index indicating the task to be marked as done.
+     * @return the completed task.
+     * @throws InvalidCommandException if the index does not point to a task.
+     */
     public Task markTaskAsDone(int index) throws InvalidCommandException {
         try {
             tasks.get(index).markAsDone();
@@ -82,6 +122,13 @@ public class TaskList {
         }
     }
 
+    /**
+     * Deletes a task.
+     *
+     * @param index the index indicating the task to be deleted.
+     * @return the deleted task.
+     * @throws InvalidCommandException if the index does not point to a task.
+     */
     public Task deleteTask(int index) throws InvalidCommandException {
         try {
             return tasks.remove(index);
@@ -90,6 +137,9 @@ public class TaskList {
         }
     }
 
+    /**
+     * Clears all tasks.
+     */
     public void clearAllTasks() {
         tasks.clear();
     }
