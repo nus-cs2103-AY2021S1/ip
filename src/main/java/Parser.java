@@ -1,10 +1,14 @@
-
+/**
+ * Class used for parsing input from user command.
+ */
 public class Parser {
 
     /**
-     * Handles input, and calls corresponding functions.
+     * Parses input, and calls corresponding functions.
      *
      * @param input String input from user.
+     * @return Corresponding Command with respect to input.
+     * @throws DukeException  When date is in wrong format, or task lacks description.
      */
     public static Command parse(String input) throws DukeException {
         String second;

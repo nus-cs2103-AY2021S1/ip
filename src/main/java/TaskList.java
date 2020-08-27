@@ -1,9 +1,14 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+
 import java.util.ArrayList;
 
+/**
+ * Contains task list, and has operations like list and delete.
+ */
 public class TaskList {
-
+    
+    /** List of tasks. */
     private ArrayList<Task> taskList = new ArrayList<>();
 
     /**
@@ -16,6 +21,7 @@ public class TaskList {
      * Constructor used to create list of tasks.
      *
      * @param taskStrings List of tasks in string format.
+     * @throws DukeException  When date is in wrong format.
      */
     public TaskList(ArrayList<ArrayList<String>> taskStrings) throws DukeException {
         //TODO: Create Enum for this, or just store as Deadline, Event, Todo
@@ -38,6 +44,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Getter to retrieve list of tasks.
+     *
+     * @return List of tasks.
+     */
     public ArrayList<Task> getTasks() {
         return taskList;
     }

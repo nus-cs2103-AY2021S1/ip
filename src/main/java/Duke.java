@@ -1,13 +1,21 @@
 
 /**
- * Main class that takes in user input.
+ * Main class that drives the application.
  */
 public class Duke {
 
+    /** Deals with input output of files. */
     private Storage storage;
+    /** Task list. */
     private TaskList tasks;
+    /** Deals with user input output. */
     private Ui ui;
 
+    /**
+     * Constructor for the main driver.
+     *
+     * @param filePath File path to load history, and to save history.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -35,7 +43,7 @@ public class Duke {
     }
 
     /**
-     * Reads user input, and does corresponding action.
+     * Creates new Duke object to start operations.
      */
     public static void main(String[] args) {
         new Duke("data/tasks.txt").run();
