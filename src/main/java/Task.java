@@ -15,6 +15,10 @@ public class Task {
         this.isDone = true;
     }
 
+    public String toTaskData() {
+        return (this.isDone ? "1" : "0") + " ; " + this.taskName;
+    }
+
     @Override
     public String toString() {
         return "[" + (isDone ? tick : cross) +

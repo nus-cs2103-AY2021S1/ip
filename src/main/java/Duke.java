@@ -2,9 +2,7 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Duke {
-    public static void handleInput() {
-
-        ArrayList<Task> list = new ArrayList<>();
+    public static void handleInput(TaskData data) {
         Scanner sc = new Scanner(System.in);
 
         while (sc.hasNextLine()) {
@@ -18,14 +16,16 @@ public class Duke {
                 } else if (input.toLowerCase().equals("help")) {
                     replyHelp();
                 } else if (input.toLowerCase().equals("list")) {
-                    replyList(list, Task.totalTasks);
+                    replyList(data.getTasks(), Task.totalTasks);
                 } else if (input.split(" ").length == 0) {
                     throw new DukeException("Sorry, I don't understand what you are saying! D=\n" +
                             "Type \"help\" to view the list of commands you can use!");
                 } else if (input.toLowerCase().split(" ")[0].equals("done")) {
-                    replyDone(input, list);
+                    replyDone(input, data.getTasks());
+                    data.updateData();
                 } else if (input.toLowerCase().split(" ")[0].equals("delete")) {
-                    replyDelete(input, list);
+                    replyDelete(input, data.getTasks());
+                    data.updateData();
                 } else {
                     String inputTask;
                     Task task;
@@ -37,8 +37,9 @@ public class Duke {
 
                         inputTask = input.substring(5);
                         task = new Todo(inputTask);
-                        list.add(task);
+                        data.getTasks().add(task);
                         replyTask(task);
+                        data.updateData();
                     } else if (input.toLowerCase().split(" ")[0].equals("event")) {
                         if (input.split(" ").length == 1) {
                             throw new DukeException("You need to specify your event!\n"
@@ -53,8 +54,9 @@ public class Duke {
                         }
 
                         task = new Event(arr[0], arr[1]);
-                        list.add(task);
+                        data.getTasks().add(task);
                         replyTask(task);
+                        data.updateData();
                     } else if (input.toLowerCase().split(" ")[0].equals("deadline")) {
                         if (input.split(" ").length == 1) {
                             throw new DukeException("You need to specify your deadline!\n"
@@ -69,8 +71,9 @@ public class Duke {
                         }
 
                         task = new Deadline(arr[0], arr[1]);
-                        list.add(task);
+                        data.getTasks().add(task);
                         replyTask(task);
+                        data.updateData();
                     } else {
                         throw new DukeException("Sorry, I don't understand what you are saying! D=\n" +
                                 "Type \"help\" to view the list of commands you can use!");
@@ -194,6 +197,7 @@ public class Duke {
         System.out.println("How can I help you today? : D");
         System.out.println("Type \"help\" to view the list of commands you can use!");
 
-        handleInput();
+        TaskData data = new TaskData();
+        handleInput(data);
     }
 }
