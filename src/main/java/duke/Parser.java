@@ -184,7 +184,7 @@ public class Parser {
                 break;
             default:
                 printLine();
-                System.out.println("sorry i don't get you");
+                System.out.println("Sorry I don't get you");
                 printLine();
         }
     }
