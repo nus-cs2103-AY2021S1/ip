@@ -92,6 +92,21 @@ public class Ui {
     }
 
     /**
+     * Show message to indicate there are no matching tasks to keyword provided.
+     */
+    public void showEmptyMatchingList() {
+        System.out.println("There are no matching tasks found.");
+    }
+
+    /**
+     * Show matching tasks to the keyword provided.
+     * @param matchingTaskList String of all matching tasks enumerated.
+     */
+    public void showMatchingTaskList(String matchingTaskList) {
+        System.out.println("Here are the matching tasks in your list:\n" + matchingTaskList);
+    }
+
+    /**
      * Reads input from user.
      * @return Input of the user.
      */

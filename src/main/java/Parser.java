@@ -120,6 +120,9 @@ public class Parser {
                             + "   (e.g. event xxx /at yyyy-mm-dd HH:mm)");
                 }
             }
+        } else if (firstWord.equals("find")) {
+            String keyword = fullCommand.split("find ")[1];
+            return new FindCommand(keyword);
         } else if (fullCommand.equals("bye")) {
             return new ExitCommand();
         } else {

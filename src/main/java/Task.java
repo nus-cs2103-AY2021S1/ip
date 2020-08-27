@@ -15,6 +15,10 @@ public class Task {
         this.isDone = isDone;
     }
 
+    public String getDescription() {
+        return this.description;
+    }
+
     /**
      * Retrieves information on whether task is done and represents with a symbol.
      * @return A String representing a tick (if task is done) or cross (if task is not done) symbol
