@@ -207,12 +207,11 @@ public class Duke {
                 } else {
                     System.out.println("  " + inputType.id + "[x] " + inputType.content + inputType.printedTime);
                 }
-<<<<<<< HEAD
+
                 inputs.remove(numTaskDone - 1);
                 System.out.println("Now you have " + inputs.size() + " tasks in the list.");
                 storage.writeToFile(inputs);
-=======
-                
+            }
                 void taskFind(String nextLine) throws DukeException {
                     if (nextLine.equals("find") || nextLine.equals("find ")) {
                         throw new DukeException("OOPS!!! The description of find cannot be empty");
@@ -222,19 +221,18 @@ public class Duke {
                     for(int i = 0; i < len; i++) {
                         Input input = inputs.get(i);
                         if (input.content.contains(keyword)) {
-                            if (input.done) {
+                            if (input.isDone) {
                                 System.out.println((i+1) + ". " + input.id + "[/] " + input.content +
-                                        input.printTime);
+                                        input.printedTime);
                             } else {
                                 System.out.println((i+1) + ". " + input.id + "[x] " + input.content +
-                                        input.printTime);
+                                        input.printedTime);
                             }
                         }
                     }
                 }
-
->>>>>>> branch-Level-9
-            }
+                
+            
             
             void taskTodo(String nextLine) throws DukeException {
                 if (nextLine.equals("todo") || nextLine.equals("todo ")) {
@@ -301,8 +299,7 @@ public class Duke {
         public static class Parser {
             String nextLine;
             TaskList inputs;
-
-<<<<<<< HEAD
+            
             Parser(String nextLine, TaskList inputs) {
                 this.nextLine = nextLine;
                 this.inputs = inputs;
@@ -334,7 +331,7 @@ public class Duke {
                                 } else {
                                     System.out.println(i + ". " + inputType.id + "[x] " + inputType.content +
                                             inputType.printedTime);
-=======
+                                    
                 void parse() throws DukeException {
                     try {
                         if (nextLine.startsWith("done")) {
@@ -357,18 +354,17 @@ public class Duke {
                                 int len = inputs.inputs.size();
                                 for (int i = 1; i <= len; i++) {
                                     Input inputType = inputs.inputs.get(i - 1);
-                                    if (inputType.done) {
+                                    if (inputType.isDone) {
                                         System.out.println(i + ". " + inputType.id + "[/] " + inputType.content +
-                                                inputType.printTime);
+                                                inputType.printedTime);
                                     } else {
                                         System.out.println(i + ". " + inputType.id + "[x] " + inputType.content +
-                                                inputType.printTime);
+                                                inputType.printedTime);
                                     }
->>>>>>> branch-Level-9
                                 }
                             }
                         }
-                    } else {
+                    else {
                         throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
                     }
                 } catch (DukeException e) {
