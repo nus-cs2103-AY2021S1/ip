@@ -1,15 +1,15 @@
 package duke.ui;
 
-import java.util.Scanner;
-
 import static duke.utils.Messages.MESSAGE_BYE;
 import static duke.utils.Messages.MESSAGE_GREETING;
 import static duke.utils.Messages.MESSAGE_WELCOME;
 
+import java.util.Scanner;
+
 /** Represents the Ui of the system that handles user interaction. */
 public class Ui {
 
-    private static String LINE = "\t" + "_".repeat(75);
+    private static String line = "\t" + "_".repeat(75);
     private Scanner sc;
 
     /** Constructs a Ui object. */
@@ -19,7 +19,7 @@ public class Ui {
 
     /** Displays a line to the user. */
     public void showLine() {
-        System.out.println(LINE);
+        System.out.println(line);
     }
 
     private void showWelcome() {

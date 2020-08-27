@@ -1,13 +1,13 @@
 package duke.commands;
 
-import duke.tasklist.TaskList;
-import duke.tasks.Task;
-import duke.ui.Ui;
+import static duke.utils.Messages.MESSAGE_FIND;
+import static duke.utils.Messages.MESSAGE_FIND_NO_MATCH;
 
 import java.util.ArrayList;
 
-import static duke.utils.Messages.MESSAGE_FIND;
-import static duke.utils.Messages.MESSAGE_FIND_NO_MATCH;
+import duke.tasklist.TaskList;
+import duke.tasks.Task;
+import duke.ui.Ui;
 
 /** Represents the command that displays all tasks that match the user's search word
  * when executed.

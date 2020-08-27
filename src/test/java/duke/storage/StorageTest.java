@@ -1,15 +1,8 @@
 package duke.storage;
 
-import duke.exceptions.InvalidFilePathException;
-import duke.exceptions.TaskListTranslatorException;
-import duke.parsers.DukeDateTimeParser;
-import duke.tasklist.TaskList;
-import duke.tasks.Deadline;
-import duke.tasks.Event;
-import duke.tasks.Task;
-import duke.tasks.Todo;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.io.TempDir;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertIterableEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -18,7 +11,17 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
+
+import duke.exceptions.InvalidFilePathException;
+import duke.exceptions.TaskListTranslatorException;
+import duke.parsers.DukeDateTimeParser;
+import duke.tasklist.TaskList;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.Todo;
 
 public class StorageTest {
 
@@ -46,9 +49,9 @@ public class StorageTest {
         Storage storage = new Storage(TEST_DATA_FOLDER + "/" + "validData.txt");
         TaskList taskList = storage.load();
         String[] expected = {
-                "[T][\u2718] todo",
-                "[D][\u2718] deadline (by: 23 Aug 2020 9:00 PM)",
-                "[E][\u2713] event (at: 23 Aug 2020)"
+            "[T][\u2718] todo",
+            "[D][\u2718] deadline (by: 23 Aug 2020 9:00 PM)",
+            "[E][\u2713] event (at: 23 Aug 2020)"
         };
         ArrayList<Task> tasks = taskList.getTasks();
         for (int i = 0; i < 3; i++) {

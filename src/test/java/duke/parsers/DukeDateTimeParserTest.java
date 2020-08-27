@@ -1,14 +1,15 @@
 package duke.parsers;
 
-import duke.exceptions.DukeDateTimeParseException;
-import duke.utils.DukeDateTime;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
+import org.junit.jupiter.api.Test;
+
+import duke.exceptions.DukeDateTimeParseException;
+import duke.utils.DukeDateTime;
 
 public class DukeDateTimeParserTest {
 

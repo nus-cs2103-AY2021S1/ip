@@ -1,9 +1,9 @@
 package duke.tasklist;
 
+import java.util.ArrayList;
+
 import duke.exceptions.NoSuchTaskException;
 import duke.tasks.Task;
-
-import java.util.ArrayList;
 
 /** Represents the list of tasks. */
 public class TaskList {

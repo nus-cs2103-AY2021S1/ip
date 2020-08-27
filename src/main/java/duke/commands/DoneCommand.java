@@ -1,11 +1,11 @@
 package duke.commands;
 
+import static duke.utils.Messages.MESSAGE_DONE_TASK;
+
 import duke.exceptions.NoSuchTaskException;
 import duke.tasklist.TaskList;
 import duke.tasks.Task;
 import duke.ui.Ui;
-
-import static duke.utils.Messages.MESSAGE_DONE_TASK;
 
 /** Represents the command that marks a task as done when executed. */
 public class DoneCommand extends Command {

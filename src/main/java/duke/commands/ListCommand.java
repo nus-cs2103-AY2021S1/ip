@@ -1,12 +1,12 @@
 package duke.commands;
 
-import duke.tasklist.TaskList;
-import duke.tasks.Task;
-import duke.ui.Ui;
+import static duke.utils.Messages.MESSAGE_LIST;
 
 import java.util.ArrayList;
 
-import static duke.utils.Messages.MESSAGE_LIST;
+import duke.tasklist.TaskList;
+import duke.tasks.Task;
+import duke.ui.Ui;
 
 /** Represents the command that lists out all tasks when executed. */
 public class ListCommand extends Command {

@@ -1,5 +1,8 @@
 package duke.storage;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import duke.exceptions.TaskListTranslatorException;
 import duke.parsers.DukeDateTimeParser;
 import duke.tasklist.TaskList;
@@ -7,9 +10,6 @@ import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.Task;
 import duke.tasks.Todo;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /** Represents the translator that handles the conversion of {@link TaskList} to a List of Strings. */
 public class TaskListTranslator {

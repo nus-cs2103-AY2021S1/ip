@@ -1,10 +1,10 @@
 package duke.commands;
 
+import static duke.utils.Messages.MESSAGE_ADD_TASK;
+
 import duke.tasklist.TaskList;
 import duke.tasks.Task;
 import duke.ui.Ui;
-
-import static duke.utils.Messages.MESSAGE_ADD_TASK;
 
 /** Represents the command that adds a task to the taskList when executed. */
 public class AddCommand extends Command {

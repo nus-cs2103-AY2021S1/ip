@@ -1,34 +1,35 @@
 package duke.commands;
 
-import duke.tasklist.TaskList;
-import duke.tasks.Deadline;
-import duke.ui.Ui;
-import duke.utils.DukeDateTime;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import duke.tasklist.TaskList;
+import duke.tasks.Deadline;
+import duke.ui.Ui;
+import duke.utils.DukeDateTime;
 
 public class TodayCommandTest {
 
-    private final ByteArrayOutputStream OUT_CONTENT = new ByteArrayOutputStream();
-    private final PrintStream ORIGINAL_OUT = System.out;
-    private final String LINE = "\t" + "_".repeat(75) + "\n";
+    private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+    private final PrintStream originalOut = System.out;
+    private final String line = "\t" + "_".repeat(75) + "\n";
 
     @BeforeEach
     public void setUpStreams() {
-        System.setOut(new PrintStream(OUT_CONTENT));
+        System.setOut(new PrintStream(outContent));
     }
 
     @AfterEach
     public void restoreStreams() {
-        System.setOut(ORIGINAL_OUT);
+        System.setOut(originalOut);
     }
 
     @Test
@@ -48,12 +49,12 @@ public class TodayCommandTest {
         taskList.addTask(deadline3);
         TodayCommand command = new TodayCommand();
         command.execute(taskList, new Ui());
-        String expected = LINE + "\t Here are your tasks today:\n"
+        String expected = line + "\t Here are your tasks today:\n"
                 + "\t 1." + deadline1.toString() + "\n"
                 + "\t 2." + deadline2.toString()
                 + "\n"
-                + LINE;
-        assertEquals(expected, OUT_CONTENT.toString());
+                + line;
+        assertEquals(expected, outContent.toString());
 
     }
 }

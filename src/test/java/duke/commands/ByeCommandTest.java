@@ -1,37 +1,38 @@
 package duke.commands;
 
-import duke.tasklist.TaskList;
-import duke.ui.Ui;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import duke.tasklist.TaskList;
+import duke.ui.Ui;
 
 public class ByeCommandTest {
 
-    private final ByteArrayOutputStream OUT_CONTENT = new ByteArrayOutputStream();
-    private final PrintStream ORIGINAL_OUT = System.out;
-    private final String LINE = "\t" + "_".repeat(75) + "\n";
+    private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+    private final PrintStream originalOut = System.out;
+    private final String line = "\t" + "_".repeat(75) + "\n";
 
     @BeforeEach
     public void setUpStreams() {
-        System.setOut(new PrintStream(OUT_CONTENT));
+        System.setOut(new PrintStream(outContent));
     }
 
     @AfterEach
     public void restoreStreams() {
-        System.setOut(ORIGINAL_OUT);
+        System.setOut(originalOut);
     }
 
     @Test
     public void testExecute() {
         ByeCommand command = new ByeCommand();
         command.execute(new TaskList(), new Ui());
-        String expected = LINE + "\t Bye. Hope to see you again soon!\n" + LINE;
-        assertEquals(expected, OUT_CONTENT.toString());
+        String expected = line + "\t Bye. Hope to see you again soon!\n" + line;
+        assertEquals(expected, outContent.toString());
     }
 }

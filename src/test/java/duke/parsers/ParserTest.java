@@ -1,10 +1,28 @@
 package duke.parsers;
 
-import duke.commands.*;
-import duke.exceptions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
+
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import duke.commands.AddCommand;
+import duke.commands.ByeCommand;
+import duke.commands.Command;
+import duke.commands.DeleteCommand;
+import duke.commands.DoneCommand;
+import duke.commands.FindCommand;
+import duke.commands.ListCommand;
+import duke.commands.TodayCommand;
+import duke.exceptions.DukeDateTimeParseException;
+import duke.exceptions.EmptyDueDateException;
+import duke.exceptions.EmptySearchWordException;
+import duke.exceptions.EmptyTaskDeletedException;
+import duke.exceptions.EmptyTaskDescriptionException;
+import duke.exceptions.EmptyTaskDoneException;
+import duke.exceptions.InvalidCommandException;
+import duke.exceptions.InvalidTaskException;
 
 public class ParserTest {
 
@@ -158,7 +176,6 @@ public class ParserTest {
 
     @Test
     public void parse_findWithEmptySearchWord_exceptionThrown() {
-        assertThrows(EmptySearchWordException.class,
-                () -> Parser.parse("find"));
+        assertThrows(EmptySearchWordException.class, () -> Parser.parse("find"));
     }
 }

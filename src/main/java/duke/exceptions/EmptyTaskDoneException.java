@@ -6,8 +6,8 @@ import static duke.utils.Messages.MESSAGE_EMPTY_TASK_DONE;
 public class EmptyTaskDoneException extends DukeException {
 
     /** Constructs the EmptyTaskDoneException with the relevant detail message. */
-   public EmptyTaskDoneException() {
-       super(MESSAGE_EMPTY_TASK_DONE);
-   }
+    public EmptyTaskDoneException() {
+        super(MESSAGE_EMPTY_TASK_DONE);
+    }
 
 }

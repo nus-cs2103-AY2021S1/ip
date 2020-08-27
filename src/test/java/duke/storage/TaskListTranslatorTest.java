@@ -1,18 +1,19 @@
 package duke.storage;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import org.junit.jupiter.api.Test;
+
 import duke.parsers.DukeDateTimeParser;
 import duke.tasklist.TaskList;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.Task;
 import duke.tasks.Todo;
-import org.junit.jupiter.api.Test;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TaskListTranslatorTest {
 
@@ -23,14 +24,14 @@ public class TaskListTranslatorTest {
     );
 
     @Test
-    public void decode_NonEmptyInput_success() {
+    public void decode_nonEmptyInput_success() {
 
         TaskList taskList = TaskListTranslator.decode(lines);
         ArrayList<Task> tasks = taskList.getTasks();
         String[] expected = {
-                "[T][\u2718] todo",
-                "[D][\u2718] deadline (by: 23 Aug 2020 9:00 PM)",
-                "[E][\u2713] event (at: 23 Aug 2020)"
+            "[T][\u2718] todo",
+            "[D][\u2718] deadline (by: 23 Aug 2020 9:00 PM)",
+            "[E][\u2713] event (at: 23 Aug 2020)"
         };
         for (int i = 0; i < 3; i++) {
             assertEquals(expected[i], tasks.get(i).toString());

@@ -20,6 +20,7 @@ public class Duke {
         this.taskList = storage.load();
     }
 
+    /** Main driver method. */
     public static void main(String[] args) {
         Duke duke = new Duke();
         duke.run();

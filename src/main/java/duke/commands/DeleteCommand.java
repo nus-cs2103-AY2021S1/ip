@@ -1,11 +1,11 @@
 package duke.commands;
 
+import static duke.utils.Messages.MESSAGE_DELETE_TASK;
+
 import duke.exceptions.NoSuchTaskException;
 import duke.tasklist.TaskList;
 import duke.tasks.Task;
 import duke.ui.Ui;
-
-import static duke.utils.Messages.MESSAGE_DELETE_TASK;
 
 /** Represents the command that deletes a task when executed. */
 public class DeleteCommand extends Command {

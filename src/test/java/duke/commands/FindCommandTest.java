@@ -1,39 +1,40 @@
 package duke.commands;
 
-import duke.tasklist.TaskList;
-import duke.tasks.Todo;
-import duke.ui.Ui;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-public class FindCommandtest {
+import duke.tasklist.TaskList;
+import duke.tasks.Todo;
+import duke.ui.Ui;
 
-    private final ByteArrayOutputStream OUT_CONTENT = new ByteArrayOutputStream();
-    private final PrintStream ORIGINAL_OUT = System.out;
-    private final String LINE = "\t" + "_".repeat(75) + "\n";
+public class FindCommandTest {
+
+    private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+    private final PrintStream originalOut = System.out;
+    private final String line = "\t" + "_".repeat(75) + "\n";
 
     @BeforeEach
     public void setUpStreams() {
-        System.setOut(new PrintStream(OUT_CONTENT));
+        System.setOut(new PrintStream(outContent));
     }
 
     @AfterEach
     public void restoreStreams() {
-        System.setOut(ORIGINAL_OUT);
+        System.setOut(originalOut);
     }
 
     @Test
     public void execute_noMatch_showNoMatchFound() {
         FindCommand command = new FindCommand("word");
         command.execute(new TaskList(), new Ui());
-        String expected = LINE + "\t There are no tasks that matches your search word.\n" + LINE;
-        assertEquals(expected, OUT_CONTENT.toString());
+        String expected = line + "\t There are no tasks that matches your search word.\n" + line;
+        assertEquals(expected, outContent.toString());
     }
 
     @Test
@@ -45,12 +46,12 @@ public class FindCommandtest {
         taskList.addTask(matched);
         taskList.addTask(unmatched);
         command.execute(taskList, new Ui());
-        String expected = LINE
+        String expected = line
                 + "\t Here are the matching tasks in your list:\n"
                 + "\t 1."
                 + matched.toString()
-                + "\n" + LINE;
-        assertEquals(expected, OUT_CONTENT.toString());
+                + "\n" + line;
+        assertEquals(expected, outContent.toString());
     }
 
 }

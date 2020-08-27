@@ -1,10 +1,5 @@
 package duke.storage;
 
-import duke.exceptions.InvalidFilePathException;
-import duke.exceptions.StorageException;
-import duke.exceptions.TaskListTranslatorException;
-import duke.tasklist.TaskList;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -13,11 +8,16 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
+import duke.exceptions.InvalidFilePathException;
+import duke.exceptions.StorageException;
+import duke.exceptions.TaskListTranslatorException;
+import duke.tasklist.TaskList;
+
 /** Represents the storage of the system that handles reading and writing to files. */
 public class Storage {
 
-    private final Path path;
     private static final String DEFAULT_FILEPATH = "./data/duke.txt";
+    private final Path path;
 
     /** Constructs a Storage object with the default file path. */
     public Storage() {

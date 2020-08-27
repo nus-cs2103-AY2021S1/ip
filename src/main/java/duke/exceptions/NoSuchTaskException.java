@@ -7,6 +7,6 @@ public class NoSuchTaskException extends DukeException {
 
     /** Constructs a NoSuchTaskException with the relevant detail message. */
     public NoSuchTaskException() {
-       super(MESSAGE_NO_SUCH_TASK);
+        super(MESSAGE_NO_SUCH_TASK);
     }
 }

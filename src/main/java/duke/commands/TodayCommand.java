@@ -1,17 +1,17 @@
 package duke.commands;
 
+import static duke.utils.Messages.MESSAGE_TODAY;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+
 import duke.tasklist.TaskList;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.Task;
 import duke.ui.Ui;
 import duke.utils.DukeDateTime;
-
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-
-import static duke.utils.Messages.MESSAGE_TODAY;
 
 /** Represents the command that displays all tasks happening today to the user when executed. */
 public class TodayCommand extends Command {
