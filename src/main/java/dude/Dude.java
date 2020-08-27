@@ -11,11 +11,11 @@ import dude.command.Command;
  */
 
 public class Dude {
-    private static final String BYE = "bye";
     private static final String FILEPATH = "./data/tasks.txt";
+    private final Storage storage;
+    private final Ui ui;
     private TaskList tasks;
-    private Storage storage;
-    private Ui ui;
+
 
     public Dude() {
         ui = new Ui();
