@@ -2,6 +2,9 @@ package duke.task;
 
 import java.util.Date;
 
+/**
+ * Represents a todo type of task with the date of event.
+ */
 public abstract class Task {
     protected String name;
     protected boolean isDone;
