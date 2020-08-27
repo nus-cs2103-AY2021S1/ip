@@ -13,14 +13,6 @@ public class Duke {
     private TaskList tasklist;
     private Ui ui;
 
-    /**
-     * File path of saved text file
-     */
-    // If testing using runtest.sh, use pathname "../data/duke.txt", else use "/data/duke.txt"
-    public static final String FILEPATH = System.getProperty("user.dir").endsWith("text-ui-test")
-            ? "../data/duke.txt"
-            : "data/duke.txt";
-
     public Duke(String path) throws IOException {
         this.ui = new Ui();
         this.storage = new Storage(path);
@@ -59,8 +51,13 @@ public class Duke {
      */
     public static void main(String[] args) {
 
+        String filePath = System.getProperty("user.dir").endsWith("text-ui-test")
+                ? "test.txt"
+                : System.getProperty("user.dir").endsWith("ip")
+                ? "data/duke.txt"
+                : System.getProperty("user.home") + "/duke.txt";
         try {
-            new Duke(FILEPATH).run();
+            new Duke(filePath).run();
         } catch (IOException e) {
             System.out.println("File not recognised\n");
         }
