@@ -44,15 +44,17 @@ public class Duke {
                     Ui.showError(e.getMessage());
                 }
             } else {
+                try {
+                    Ui.showSaving();
+                    this.storage.saveToFile();
+                } catch (IOException e) {
+                    Ui.showError(e.getMessage());
+                }
                 Ui.goodbyeMessage();
                 break;
             }
         }
-        try {
-            this.storage.saveToFile();
-        } catch (IOException e) {
-            Ui.showError(e.getMessage());
-        }
+
     }
 
     /**

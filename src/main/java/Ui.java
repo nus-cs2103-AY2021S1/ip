@@ -66,4 +66,8 @@ public class Ui {
                 + response
                 + "\n_________________________________________");
     }
+
+    public static void showSaving() {
+        System.out.println("Current saving tasks. Do not Exit!");
+    }
 }
