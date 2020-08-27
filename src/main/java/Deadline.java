@@ -11,6 +11,14 @@ public class Deadline extends Task {
     }
 
     @Override
+    public String toSaveDataFormat() {
+        String saveData = "";
+        saveData += this.isDone ? 1 : 0;
+        saveData += " D " + this.name + "\n" + this.dueDate;
+        return saveData;
+    }
+
+    @Override
     public String toString() {
         String marked = this.isDone ? "[✓] " : "[✗] ";
         String eventTime = this.dueDate.length() > 0 ? " (by: " + this.dueDate + ")" : "";

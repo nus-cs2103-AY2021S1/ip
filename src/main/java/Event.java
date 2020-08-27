@@ -11,6 +11,14 @@ public class Event extends Task {
     }
 
     @Override
+    public String toSaveDataFormat() {
+        String saveData = "";
+        saveData += this.isDone ? 1 : 0;
+        saveData += " E " + this.name + "\n" + this.timing;
+        return saveData;
+    }
+
+    @Override
     public String toString() {
         String marked = this.isDone ? "[✓] " : "[✗] ";
         String eventTime = this.timing.length() > 0 ? " (at: " + this.timing + ")" : "";

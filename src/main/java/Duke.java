@@ -49,6 +49,9 @@ public class Duke {
         catch (FileNotFoundException ex) {
             printError(ex.getMessage());
         }
+        catch (DukeException ex) {
+            printError(ex.getMessage());
+        }
 
         while(true) {
             if (SC.hasNext()) {
@@ -198,11 +201,33 @@ public class Duke {
         System.out.printf(MESSAGE_TEMPLATE, message);
     }
 
-    private void loadTasksFromDisk() throws FileNotFoundException{
+    private void loadTasksFromDisk() throws FileNotFoundException, DukeException{
         File dukeDataFile = new File(DUKE_DATA_FILE_PATH.toUri());
         Scanner fs = new Scanner(dukeDataFile);
         while (fs.hasNext()) {
-            System.out.println(fs.nextLine());
+            String taskString = fs.nextLine();
+            Scanner sc = new Scanner(taskString);
+            Boolean isDone = sc.nextInt() == 1;
+            String taskType = sc.next();
+//            System.out.println(taskType);
+            String taskName = sc.next();
+            Task task;
+            if (taskType.equals("T")) {
+                task = new Todo(taskName);
+            }
+            else if (taskType.equals("D")) {
+                String dueDate = fs.nextLine();
+                task = new Deadline(taskName, dueDate);
+            }
+            else if (taskType.equals("E")) {
+                String timing = fs.nextLine();
+                task = new Event(taskName, timing);
+            }
+            else {
+                throw new DukeException("Save file corrupted");
+            }
+            task.setDoneness(isDone);
+            this.storageList.add(task);
         }
 //        System.out.println("full path: " + dukeDataFile.getAbsolutePath());
 //        System.out.println("file exists?: " + dukeDataFile.exists());
@@ -213,7 +238,7 @@ public class Duke {
         FileWriter fw = new FileWriter(DUKE_DATA_FILE_PATH.toString());
         String tasksString = "";
         for (Task task : this.storageList) {
-            tasksString += task.getDoneness() + " " + task.getName() + NEW_LINE;
+            tasksString += task.toSaveDataFormat() + NEW_LINE;
         }
         fw.write(tasksString);
         fw.close();

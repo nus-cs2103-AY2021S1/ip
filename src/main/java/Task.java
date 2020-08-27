@@ -18,8 +18,11 @@ public class Task {
         return "The description of a task cannot be empty.";
     }
 
-    public Boolean getDoneness() {
-        return Boolean.valueOf(this.isDone);
+    public String toSaveDataFormat() {
+        String saveData = "";
+        saveData += this.isDone ? 1 : 0;
+        saveData += " A " + this.name;
+        return saveData;
     }
 
     public String toString() {
