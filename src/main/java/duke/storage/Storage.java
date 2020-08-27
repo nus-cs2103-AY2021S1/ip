@@ -17,6 +17,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+/**
+ * Saves and loads tasks by serializing and deserializing respectively.
+ */
 public class Storage {
     private final Path filePath;
 
@@ -29,7 +32,6 @@ public class Storage {
      * @param serializedTask Serialized Task object (String representation of Task object)
      * @return Task object
      */
-
     public Task deserializeTask(String serializedTask) throws RuntimeException {
         String[] tokens = serializedTask.split(" \\| ");
 
