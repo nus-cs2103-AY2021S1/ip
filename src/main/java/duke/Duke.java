@@ -26,11 +26,19 @@ public class Duke {
         }
     }
 
+    /**
+     * Entry point of the program.
+     *
+     * @param args This parameter is not used.
+     */
     public static void main(String[] args) {
         Duke duke = new Duke();
         duke.run();
     }
 
+    /**
+     * Runs the chat bot.
+     */
     public void run() {
         this.ui.print("Hello! I'm Duke\nWhat can I do for you?");
 

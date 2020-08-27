@@ -49,6 +49,17 @@ public class Storage {
     }
 
     /**
+     * Writes the list of tasks saved in the application to the hard disk.
+     *
+     * @throws IOException If there are issues reading/writing to the file.
+     */
+    private void writeToFile() throws IOException {
+        String fileData = String.join("\n", this.serialisedTasks);
+        Files.writeString(filePath, fileData, StandardCharsets.UTF_8, StandardOpenOption.WRITE,
+                StandardOpenOption.TRUNCATE_EXISTING);
+    }
+
+    /**
      * Retrieves the task from the hard disk and loads them into the application.
      *
      * @return A list of saved <code>Task</code>s.
@@ -101,21 +112,14 @@ public class Storage {
                 }
 
                 break;
+            default:
+                throw new CorruptedStorageException(
+                        "Some unknown task type was stored in the database!");
             }
+
         }
 
         return tasks;
-    }
-
-    /**
-     * Writes the list of tasks saved in the application to the hard disk.
-     *
-     * @throws IOException If there are issues reading/writing to the file.
-     */
-    private void writeToFile() throws IOException {
-        String fileData = String.join("\n", this.serialisedTasks);
-        Files.writeString(filePath, fileData, StandardCharsets.UTF_8, StandardOpenOption.WRITE,
-                StandardOpenOption.TRUNCATE_EXISTING);
     }
 
     /**
