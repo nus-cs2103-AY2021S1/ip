@@ -22,6 +22,14 @@ public class Task {
     @Override
     public String toString() {
         return "[" + this.getStatusIcon() + "] " + this.getDescription();
+    }
 
+    public String toText() {
+        return toText("T");
+    }
+
+    public String toText(String type) {
+        int doneInt = this.isDone ? 1 : 0;
+        return String.format("%s | %d | %s", type, doneInt, this.description);
     }
 }
