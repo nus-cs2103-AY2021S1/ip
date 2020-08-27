@@ -87,7 +87,6 @@ public class Storage {
                     .filter((task) -> !task.trim().equals(""))
                     .forEach((task) -> tasks.add(deserializeTask(task)));
         } catch (IOException e) {
-            System.out.println("Failed to load tasks from the hard disk.");
         }
         return tasks;
     }

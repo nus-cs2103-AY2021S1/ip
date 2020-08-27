@@ -20,7 +20,7 @@ public class Ui {
     }
 
     public void print(String message) {
-        System.out.println("\tmessage");
+        System.out.println("\t" + message);
     }
 
     public void printHello() {
