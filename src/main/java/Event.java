@@ -1,10 +1,15 @@
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class Event extends Task {
-    String timeAt;
+    Date timeAt;
 
     // TODO: 17/8/20 make a toString 
-    public Event(String desc, String timeAt) {
+    public Event(String desc, String timeAt) throws ParseException {
         super(desc);
-        this.timeAt = timeAt;
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        this.timeAt = format.parse(timeAt);
     }
 
     @Override

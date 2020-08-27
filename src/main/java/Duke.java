@@ -1,3 +1,4 @@
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -43,7 +44,7 @@ public class Duke {
                     Task task = parser.parseAdd(echo);
                     Ui.printAdd(tasks.add(task));
                 }
-            } catch (DukeException e) {
+            } catch (DukeException | ParseException e) {
                 System.out.println(e.getMessage());
             }
         }

@@ -1,9 +1,8 @@
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.Date;
 
-public class Deadline extends TaskDetail {
+public class Deadline extends Task {
     Date timeBy;
 
     public Deadline(String desc, String timeBy) throws ParseException {
