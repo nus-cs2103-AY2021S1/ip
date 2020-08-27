@@ -27,7 +27,7 @@ import java.util.List;
  * Represents a parser that makes sense of user input.
  */
 public class Parser {
-    /** List of known datetime formats that ALICE accepts **/
+    /** List of known datetime formats that ALICE accepts. **/
     private static final List<DateTimeFormatter> KNOWN_DT_FORMATS = createDateFormats();
 
     /**
