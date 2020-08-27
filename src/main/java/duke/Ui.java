@@ -4,11 +4,11 @@ import duke.tasks.Task;
 
 import java.util.Scanner;
 
-public class UI {
+public class Ui {
 
     Scanner scanner;
 
-    public UI() {
+    public Ui() {
         scanner = new Scanner(System.in);
     }
     public String readInput() {

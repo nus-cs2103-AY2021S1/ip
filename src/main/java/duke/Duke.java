@@ -9,13 +9,13 @@ public class Duke {
     static final String FILE_NAME = "duke_data.txt";
     final Path FILE_PATH;
 
-    private UI ui;
+    private Ui ui;
     private Storage storage;
     private Parser parser;
     private TaskList taskList;
 
     public Duke() {
-        ui = new UI();
+        ui = new Ui();
 
         String home = System.getProperty("user.dir");
         Path DIR_PATH = java.nio.file.Paths.get(home, "data");

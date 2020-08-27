@@ -6,9 +6,9 @@ public class Parser {
 
     TaskList taskList;
     Storage storage;
-    UI ui;
+    Ui ui;
 
-    public Parser(TaskList taskList, Storage storage, UI ui) {
+    public Parser(TaskList taskList, Storage storage, Ui ui) {
         this.taskList = taskList;
         this.storage = storage;
         this.ui = ui;
@@ -21,37 +21,37 @@ public class Parser {
         } else if (Commands.LIST.check(input)) {
             ui.writeOutput(taskList.listTasks());
         } else {
-            String[] inputSplit = input.split(" ", 2);
-            if (Commands.TODO.check(inputSplit[0])) {
-                if (inputSplit.length < 2) {
+            String[] inputSplits = input.split(" ", 2);
+            if (Commands.TODO.check(inputSplits[0])) {
+                if (inputSplits.length < 2) {
                     throw new DukeException("The description of a todo cannot be empty");
                 }
-                ui.writeAdd(taskList.addTask(inputSplit[1]), taskList.getSize());
-            } else if (Commands.DEADLINE.check(inputSplit[0])) {
-                if (inputSplit.length < 2) {
+                ui.writeAdd(taskList.addTask(inputSplits[1]), taskList.getSize());
+            } else if (Commands.DEADLINE.check(inputSplits[0])) {
+                if (inputSplits.length < 2) {
                     throw new DukeException("The description of a deadline cannot be empty");
                 }
-                ui.writeAdd(taskList.addTask(inputSplit[1], false), taskList.getSize());
-            } else if (Commands.EVENT.check(inputSplit[0])) {
-                if (inputSplit.length < 2) {
+                ui.writeAdd(taskList.addTask(inputSplits[1], false), taskList.getSize());
+            } else if (Commands.EVENT.check(inputSplits[0])) {
+                if (inputSplits.length < 2) {
                     throw new DukeException("The description of an event cannot be empty");
                 }
-                ui.writeAdd(taskList.addTask(inputSplit[1], true), taskList.getSize());
-            } else if (Commands.DONE.check(inputSplit[0])) {
-                if (inputSplit.length < 2) {
+                ui.writeAdd(taskList.addTask(inputSplits[1], true), taskList.getSize());
+            } else if (Commands.DONE.check(inputSplits[0])) {
+                if (inputSplits.length < 2) {
                     throw new DukeException("duke.tasks.Task number cannot be empty");
                 }
                 try {
-                    ui.writeDone(taskList.markDone(Integer.parseInt(inputSplit[1])));
+                    ui.writeDone(taskList.markDone(Integer.parseInt(inputSplits[1])));
                 } catch (NumberFormatException ex) {
                     throw new DukeException("duke.tasks.Task number must be a valid integer");
                 }
-            } else if (Commands.DELETE.check(inputSplit[0])) {
-                if (inputSplit.length < 2) {
+            } else if (Commands.DELETE.check(inputSplits[0])) {
+                if (inputSplits.length < 2) {
                     throw new DukeException("duke.tasks.Task number cannot be empty");
                 }
                 try {
-                    ui.writeDelete(taskList.deleteTask(Integer.parseInt(inputSplit[1])), taskList.getSize());
+                    ui.writeDelete(taskList.deleteTask(Integer.parseInt(inputSplits[1])), taskList.getSize());
                 } catch (NumberFormatException ex) {
                     throw new DukeException("duke.tasks.Task number must be a valid integer");
                 }
