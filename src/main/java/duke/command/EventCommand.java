@@ -9,14 +9,35 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
+/**
+ * Event command type. Create event task and add into task arraylist.
+ *
+ * @author Galvin Leow Wen Yuan
+ * @author A0200204J
+ * @version v1.0
+ */
 public class EventCommand extends Command {
 
   private final String fullCommand;
 
+  /**
+   * Class constructor. Extract task details from full command.
+   *
+   * @param fullCommand full command input by user.
+   */
   public EventCommand(String fullCommand) {
     this.fullCommand = fullCommand;
   }
 
+  /**
+   * Create event task and add to task arraylist. Convert details like data time to dateTime *
+   * format. Write to file.
+   *
+   * @param taskList arraylist of task.
+   * @param ui ui class for print.
+   * @param storage storage for read, write to file.
+   * @throws DukeException Exception for wrong date or time format.
+   */
   @Override
   public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
     ui.showLine();
@@ -85,6 +106,11 @@ public class EventCommand extends Command {
     return localTime;
   }
 
+  /**
+   * Indicator for application to end.
+   *
+   * @return false.
+   */
   @Override
   public boolean isExit() {
     return false;

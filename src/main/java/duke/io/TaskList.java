@@ -1,36 +1,68 @@
 package duke.io;
 
-import duke.DukeException;
 import duke.task.Task;
 import java.util.ArrayList;
 
+/**
+ * Tasklist class define rules the list of tasks.
+ *
+ * @author Galvin Leow Wen Yuan
+ * @author A0200204J
+ * @version v1.0
+ */
 public class TaskList {
     public ArrayList<Task> taskArrayList;
 
-    public TaskList() {
-        this.taskArrayList = new ArrayList<>();
-    }
+  /** Class constructor. Initialise taskArraylist will be empty. */
+  public TaskList() {
+    this.taskArrayList = new ArrayList<>();
+  }
 
-    public TaskList(ArrayList<Task> taskArrayList) throws DukeException {
-        this.taskArrayList = taskArrayList;
-    }
+  /**
+   * Overloaded method. Class constructor. Initialise taskArrayList with data from filepath.
+   *
+   * @param taskArrayList task array list from file.
+   */
+  public TaskList(ArrayList<Task> taskArrayList) {
+    this.taskArrayList = taskArrayList;
+  }
 
-    public void addTask(Task task) {
-        this.taskArrayList.add(task);
-    }
+  /**
+   * Add task into the taskArrayList.
+   *
+   * @param task task to be added.
+   */
+  public void addTask(Task task) {
+    this.taskArrayList.add(task);
+  }
 
-    public int sizeOfList() {
-        return this.taskArrayList.size();
-    }
+  /**
+   * Return number of task in list.
+   *
+   * @return size of arraylist.
+   */
+  public int sizeOfList() {
+    return this.taskArrayList.size();
+  }
 
-    public Task retrieveTask(int index) {
-        return this.taskArrayList.get(index);
-    }
+  /**
+   * Get task by index.
+   *
+   * @param index int number to retrieve task.
+   * @return task based on the index.
+   */
+  public Task retrieveTask(int index) {
+    return this.taskArrayList.get(index);
+  }
 
-    public void deleteTask(int index) {
-        this.taskArrayList.remove(index);
-    }
-
+  /**
+   * Delete task by index.
+   *
+   * @param index task index that is to be deleted.
+   */
+  public void deleteTask(int index) {
+    this.taskArrayList.remove(index);
+  }
     public ArrayList<Task> find(String toFind) {
         ArrayList<Task> searchResults = new ArrayList<>();
         for (Task task : taskArrayList) {
