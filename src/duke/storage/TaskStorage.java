@@ -26,16 +26,7 @@ public class TaskStorage {
     private Scanner taskReader;
     private Scanner isDoneReader;
 
-    private static TaskStorage instance;
-    public static TaskStorage getInstance() throws IOException {
-        if (instance == null) {
-            instance = new TaskStorage();
-        }
-
-        return instance;
-    }
-
-    private TaskStorage() throws IOException {
+    public TaskStorage() throws IOException {
         folderPath = Paths.get(".", "saves");
         folderFile = folderPath.toFile();
         taskFilePath = Paths.get(folderPath.toString(), "taskSave.txt");

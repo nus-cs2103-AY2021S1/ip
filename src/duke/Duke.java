@@ -6,6 +6,7 @@ import duke.input.UserInput;
 import duke.command.CommandParser;
 import duke.data.DukeState;
 import duke.storage.DukeStorage;
+import duke.storage.TaskStorage;
 import duke.ui.Ui;
 
 import java.io.IOException;
@@ -17,6 +18,7 @@ public class Duke {
     public Ui ui;
     public CommandParser commandParser;
     public DukeTaskList taskList;
+    public TaskStorage taskStorage;
     public DukeStorage storage;
 
     protected Duke() {
@@ -25,6 +27,11 @@ public class Duke {
         ui = new Ui(this);
         commandParser = new CommandParser();
         taskList = new DukeTaskList();
+        try {
+            taskStorage = new TaskStorage();
+        } catch (Exception exception) {
+            System.out.println(exception.getMessage());
+        }
         storage = new DukeStorage(this);
     }
 
