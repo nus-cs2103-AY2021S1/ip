@@ -1,3 +1,5 @@
+package duke;
+
 public class Parser {
     public Instruction load(String input) {
         if (input.equals("list")) {
