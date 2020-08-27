@@ -42,6 +42,7 @@ public class Duke {
 
                 if (dataFile.createNewFile()) {
                     System.out.println("Data file is created...");
+                    System.out.println("Initialization complete!");
                 } else {
                     System.out.println("Oops...the data file cannot be created :(");
                 }
@@ -104,9 +105,9 @@ public class Duke {
         while ((line = reader.readLine()) != null) {
             String[] taskInfo = line.split(" \\| ");
             if (taskInfo.length < 3) {
-                throw new DukeException("Corrupted file: missing field.");
+                throw new DukeException("Corrupted file: missing field.\n");
             } else if (!(taskInfo[1].equals("0") || taskInfo[1].equals("1"))) {
-                throw new DukeException("Corrupted file: invalid done field.");
+                throw new DukeException("Corrupted file: invalid done field.\n");
             } else {
                 String type = taskInfo[0];
                 boolean isDone = taskInfo[1].equals("1");
@@ -126,7 +127,7 @@ public class Duke {
                         task = new Event(desc, at);
                         break;
                     default:
-                        throw new DukeException("Corrupted file: invalid task type.");
+                        throw new DukeException("Corrupted file: invalid task type.\n");
                 }
                 if (isDone) {
                     task.makeDone();
@@ -175,7 +176,7 @@ public class Duke {
     public void handleDeadline(String info) throws DukeException {
         String[] descriptionAndBy = info.split(" /by ", 2);
         if (descriptionAndBy.length < 2) {
-            throw new DukeException("Error! To add a deadline, please enter 'deadline [description] /by [date/time]'.");
+            throw new DukeException("Error! To add a deadline, please enter 'deadline [description] /by [date in yyyy-mm-dd format]'.\n");
         } else {
             Task deadline = new Deadline(descriptionAndBy[0], descriptionAndBy[1]);
             addTask(deadline);
@@ -185,7 +186,7 @@ public class Duke {
     public void handleEvent(String info) throws DukeException{
         String[] descriptionAndAt = info.split(" /at ", 2);
         if (descriptionAndAt.length < 2) {
-            throw new DukeException("Error! To add an event, please enter 'event [description] /at [date/time]'.");
+            throw new DukeException("Error! To add an event, please enter 'event [description] /at [date in yyyy-mm-dd format]'.\n");
         } else {
             Task event = new Event(descriptionAndAt[0], descriptionAndAt[1]);
             addTask(event);
@@ -206,9 +207,9 @@ public class Duke {
             int deleteIndex = Integer.valueOf(info) - 1;
             deleteTask(deleteIndex);
         } catch (NumberFormatException e) {
-            throw new DukeException("Error! Please enter a valid task number.");
+            throw new DukeException("Error! Please enter a valid task number.\n");
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("Error! This task does not exist, please enter a valid task number.");
+            throw new DukeException("Error! This task does not exist, please enter a valid task number.\n");
         }
     }
 
@@ -243,9 +244,9 @@ public class Duke {
             int doneIndex = Integer.valueOf(info) - 1;
             markDone(doneIndex);
         } catch (NumberFormatException e) {
-            throw new DukeException("Error! Please enter a valid task number.");
+            throw new DukeException("Error! Please enter a valid task number.\n");
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("Error! This task does not exist, please enter a valid task number.");
+            throw new DukeException("Error! This task does not exist, please enter a valid task number.\n");
         }
     }
 
@@ -262,7 +263,7 @@ public class Duke {
                     break;
                 case ("done"):
                     if (inputInfo.length < 2) {
-                        throw new DukeException("Error! To mark a task as done, please enter 'done [task number]'.");
+                        throw new DukeException("Error! To mark a task as done, please enter 'done [task number]'.\n");
                     } else {
                         String info = inputInfo[1];
                         handleDone(info);
@@ -271,7 +272,7 @@ public class Duke {
                     break;
                 case ("delete"):
                     if (inputInfo.length < 2) {
-                        throw new DukeException("Error! To delete a task, please enter 'delete [task number]'.");
+                        throw new DukeException("Error! To delete a task, please enter 'delete [task number]'.\n");
                     } else {
                         String info = inputInfo[1];
                         handleDelete(info);
@@ -280,7 +281,7 @@ public class Duke {
                     break;
                 case ("todo"):
                     if (inputInfo.length < 2) {
-                        throw new DukeException("Error! To add a todo, please enter 'todo [description]'.");
+                        throw new DukeException("Error! To add a todo, please enter 'todo [description]'.\n");
                     } else {
                         String info = inputInfo[1];
                         handleToDo(info);
@@ -289,7 +290,7 @@ public class Duke {
                     break;
                 case ("deadline"):
                     if (inputInfo.length < 2) {
-                        throw new DukeException("Error! To add a deadline, please enter 'deadline [description] /by [date/time]'.");
+                        throw new DukeException("Error! To add a deadline, please enter 'deadline [description] /by [date in yyyy-mm-dd format]'.\n");
                     } else {
                         String info = inputInfo[1];
                         handleDeadline(info);
@@ -298,7 +299,7 @@ public class Duke {
                     break;
                 case ("event"):
                     if (inputInfo.length < 2) {
-                        throw new DukeException("Error! To add an event, please enter 'event [description] /at [date/time]'.");
+                        throw new DukeException("Error! To add an event, please enter 'event [description] /at [date in yyyy-mm-dd format]'.\n");
                     } else {
                         String info = inputInfo[1];
                         handleEvent(info);
@@ -306,7 +307,7 @@ public class Duke {
                     }
                     break;
                 default:
-                    throw new DukeException("I'm sorry, but I don't know what that means :-(");
+                    throw new DukeException("I'm sorry, but I don't know what that means :-(\n");
             }
         } catch (DukeException e) {
             System.out.println(e.getMessage());
