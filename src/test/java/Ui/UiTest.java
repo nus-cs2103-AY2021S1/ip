@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class UiTest {
     private Ui ui = new Ui();
-    private Storage store = new Storage("test.txt");
+    private Storage store = new Storage("mug-test.txt");
     private TaskList taskList = new TaskList(store);
 
     @Test
