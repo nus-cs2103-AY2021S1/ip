@@ -1,3 +1,6 @@
+package duke.test;
+
+
 import duke.tasks.Todo;
 import org.junit.jupiter.api.Test;
 
