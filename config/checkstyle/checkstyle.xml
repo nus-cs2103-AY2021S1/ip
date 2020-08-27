@@ -28,14 +28,14 @@
   <module name="SuppressionFilter">
     <property name="file" value="${config_loc}/suppressions.xml"/>
   </module>
-  
+
+  <module name="LineLength">
+    <!-- Checks if a line is too long. -->
+    <property name="max" value="120"/>
+  </module>
+
   <!-- All Java AST specific tests live under TreeWalker module. -->
   <module name="TreeWalker">
-    
-    <module name="LineLength">
-      <!-- Checks if a line is too long. -->
-      <property name="max" value="120"/>
-    </module>
 
     <!-- Required to allow exceptions in code style -->
     <module name="SuppressionCommentFilter">
@@ -188,10 +188,13 @@
     <module name="NeedBraces">
       <!--
       if (true) return 1; // Not allowed
+
       if (true) { return 1; } // Not allowed
+
       else if {
         return 1; // else if should always be multi line
       }
+
       if (true)
         return 1; // Not allowed
       -->
@@ -356,12 +359,14 @@
     -->
     <module name="SingleSpaceSeparator">
       <!-- Validate whitespace surrounding comments as well.
+
            a = 1; // Allowed (single space before start of comment)
            a = 1; /* Allowed (single space before start of comment) */
            /* Allowed (single space after end of comment) */ a = 1;
            a = 1;  // Not allowed (more than one space before start of comment)
            a = 1;  /* Not allowed (more than one space before start of comment) */
            /* Not allowed (more than one space after end of comment) */  a = 1;
+
            This doesn't validate whitespace within comments so a comment /* like  this */ is allowed.
       -->
       <property name="validateComments" value="true"/>
