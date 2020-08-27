@@ -10,129 +10,32 @@ import java.util.Scanner;
 
 public class Duke implements Serializable {
 
+    private Storage storage;
+    private TaskList tasks;
+    private Ui ui;
 
-
-
-    public static void main(String[] args) throws DukeException, IOException, ClassNotFoundException, FileNotFoundException {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        Scanner scan1 = new Scanner(System.in);
-        ArrayList<Task> storage = new ArrayList<>();
-        int count = 1;
-        
-       try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("tasks"));
-            ) {
-           storage = (ArrayList<Task>) ois.readObject();
-       }
-       catch (EOFException | FileNotFoundException e) {
-           System.out.println("");
-       }
-
-
-        System.out.println("Hello! I'm Duke");
-        System.out.println("What can I do for you?");
-
-        while (scan1.hasNext()) {
-            try (FileOutputStream tasks = new FileOutputStream("tasks");
-            ObjectOutputStream oos = new ObjectOutputStream(tasks)) {
-                String command = scan1.next();
-                if (command.equals("")) {
-                    throw new DukeException(command);
-                } else if (command.equals("list")) {
-                    if (storage.isEmpty()) {
-                        throw new DukeException(command);
-                    }
-                    for (Task item : storage) {
-                        int position = storage.indexOf(item) + 1;
-                        System.out.println(position + "." + item);
-
-                    }
-                } else if (command.equals("done")) {
-                    try {
-                        int number = scan1.nextInt();
-                        Task current = storage.get(number - 1);
-                        current.setDone();
-                        System.out.println("Nice! I've marked this task as done:");
-                        System.out.println(current.getStatusIcon() + " " + current.getDescription());
-                    } catch (IndexOutOfBoundsException e) {
-                        throw new DukeException("delete2");
-                    } catch (InputMismatchException e) {
-                        throw new DukeException(command);
-                    }
-                } else if (command.equals("todo")) {
-                    String desc = scan1.nextLine();
-                    if (desc.equals("")) {
-                        throw new DukeException(command);
-                    }
-                    Todo todo = new Todo(desc);
-                    storage.add(todo);
-                    int size = storage.size();
-                    System.out.println("Got it. I've added this task:");
-                    System.out.println("  " + todo);
-                    System.out.println("Now you have " + size + " tasks in the list.");
-                } else if (command.equals("deadline")) {
-                    String desc = scan1.nextLine();
-                    if (desc.equals("")) {
-                        throw new DukeException(command);
-                    }
-                    String[] string = desc.split("/by ");
-                    if (string.length < 2) {
-                        throw new DukeException(command);
-                    }
-                    Deadline deadline = new Deadline(string[0], string[1]);
-                    storage.add(deadline);
-                    int size = storage.size();
-                    System.out.println("Got it. I've added this task:");
-                    System.out.println("  " + deadline);
-                    System.out.println("Now you have " + size + " tasks in the list.");
-                } else if (command.equals("event")) {
-                    String desc = scan1.nextLine();
-                    if (desc.equals("")) {
-                        throw new DukeException(command);
-                    }
-                    String[] string = desc.split("/at ");
-                    if (string.length < 2) {
-                        throw new DukeException(command);
-                    }
-                    Events event = new Events(string[0], string[1]);
-                    storage.add(event);
-                    int size = storage.size();
-                    System.out.println("Got it. I've added this task:");
-                    System.out.println("  " + event);
-                    System.out.println("Now you have " + size + " tasks in the list.");
-                } else if (command.equals("bye")) {
-                    String bye = "Bye. Hope to see you again soon!";
-                    System.out.println(bye);
-                    scan1.close();
-                    break;
-                } else if (command.equals("delete")) {
-                    try {
-                        int number = scan1.nextInt();
-                        Task task = storage.get(number - 1);
-                        storage.remove(number - 1);
-                        int size = storage.size();
-                        System.out.println("Noted. I've removed this task:");
-                        System.out.println("  " + task);
-                        System.out.println("Now you have " + size + " tasks in the list.");
-                    } catch (IndexOutOfBoundsException e) {
-                        throw new DukeException("delete2");
-                    } catch (InputMismatchException e) {
-                        throw new DukeException(command);
-                    }
-                }
-                else {
-                    throw new DukeException(command);
-                }
-                oos.writeObject(storage);
-                
-            } catch (DukeException | FileNotFoundException e) {
-                System.out.println(e.getMessage());
-            } catch (IOException e) {
-                e.printStackTrace();
-            } 
+    public Duke(String filepath) {
+        ui = new Ui();
+        storage = new Storage(filepath);
+        try {
+            tasks = new TaskList(storage.load());
+        } catch (IOException e) {
+            ui.showLoadingError();
+            tasks = new TaskList();
         }
     }
+
+    public void run() throws FileNotFoundException, DukeException {
+        System.out.println("Hello I'm Greg!");
+        System.out.println("How may I be of service today?");
+        Parser parser = new Parser();
+        parser.commandParser(tasks, storage);
+    }
+
+    public static void main(String[] args) throws FileNotFoundException, DukeException {
+        new Duke("tasks").run();
+    }
 }
+
+
+   
