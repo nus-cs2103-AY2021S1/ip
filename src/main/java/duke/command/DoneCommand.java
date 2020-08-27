@@ -29,4 +29,13 @@ public class DoneCommand extends Command {
         Task task = taskList.doTask(this.taskNo);
         ui.showPrompt("Nice! I've marked this task as done:\n  " + task);
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof DoneCommand) {
+            return this.taskNo == ((DoneCommand) obj).taskNo;
+        }
+
+        return false;
+    }
 }

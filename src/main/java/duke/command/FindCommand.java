@@ -32,4 +32,13 @@ public class FindCommand extends Command {
 
         ui.showPrompt(output.toString());
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof FindCommand) {
+            return this.keyword.equals(((FindCommand) obj).keyword);
+        }
+
+        return false;
+    }
 }

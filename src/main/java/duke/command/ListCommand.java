@@ -36,4 +36,9 @@ public class ListCommand extends Command {
 
         ui.showPrompt(output.toString());
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        return obj instanceof ListCommand;
+    }
 }

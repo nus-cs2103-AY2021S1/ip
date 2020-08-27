@@ -47,4 +47,13 @@ public class DueCommand extends Command {
 
         ui.showPrompt(output.toString());
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof DueCommand) {
+            return this.date.equals(((DueCommand) obj).date);
+        }
+
+        return false;
+    }
 }

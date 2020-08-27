@@ -42,4 +42,15 @@ public class AddCommand extends Command {
                 + task + "\n" + "Now you have " + taskList.getTasks().size()
                 + (taskList.getTasks().size() == 1 ? " task" : " tasks") + " in the list.");
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof AddCommand) {
+            return this.type.equals(((AddCommand) obj).type)
+                    && this.description.equals(((AddCommand) obj).description)
+                    && (this.dateTime == null || this.dateTime.equals(((AddCommand) obj).dateTime));
+        }
+
+        return false;
+    }
 }

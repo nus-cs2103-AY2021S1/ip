@@ -31,4 +31,13 @@ public class DeleteCommand extends Command {
                 + task + "\n" + "Now you have " + taskList.getTasks().size()
                 + (taskList.getTasks().size() == 1 ? " task" : " tasks") + " in the list.");
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof DeleteCommand) {
+            return this.taskNo == ((DeleteCommand) obj).taskNo;
+        }
+
+        return false;
+    }
 }
