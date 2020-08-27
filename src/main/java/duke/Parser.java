@@ -33,6 +33,14 @@ public class Parser {
         return commandArr[1];
     }
 
+    public String getKeyWord() throws MissingInformationException {
+        if (commandArr.length < 2 || commandArr[1].isBlank()) {
+            throw new MissingInformationException("Key word is missing!");
+        }
+
+        return commandArr[1];
+    }
+
     public String getName(String taskType) throws MissingInformationException {
         String description = getDescription(taskType);
         String splitBy = taskType.equals("deadline") ? " /by " : " /at ";

@@ -62,4 +62,16 @@ public class Ui {
         }
         printMessage(output);
     }
+
+    public void listTasksWithWord(List<Task> taskList) {
+        String output = "Here are the matching tasks in your list:\n";
+        int taskSize = taskList.size();
+        for (int i = 0; i < taskSize; i++) {
+            output += String.format("%s%d. %s", textIndent, i+1, taskList.get(i));
+            if (i != taskSize - 1) {
+                output += "\n";
+            }
+        }
+        printMessage(output);
+    }
 }

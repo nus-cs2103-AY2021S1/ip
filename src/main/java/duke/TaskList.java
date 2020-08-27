@@ -68,4 +68,14 @@ public class TaskList {
         }
         return result;
     }
+
+    public List<Task> getTasksWithWord(String keyword) {
+        List<Task> result = new ArrayList<>();
+        for (Task task : taskList) {
+            if (task.getName().contains(keyword)) {
+                result.add(task);
+            }
+        }
+        return result;
+    }
 }
