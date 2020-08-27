@@ -21,7 +21,7 @@ public class Parser {
      * instantiate the Task objects to be recorded
      *
      * @param command This is the user input
-     * @param arrayLst This is the arraylist that stores the current lists of tasks
+     * @param taskList This is the taskList class that stores the current lists of tasks
      * @param storage This is the Storage object that records the tasks
      * @throws DukeException Exception for unidentified commands
      */
