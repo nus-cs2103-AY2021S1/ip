@@ -9,6 +9,10 @@ import dude.task.Task;
 
 import java.util.ArrayList;
 
+/**
+ * The command gets the items in the tasklist that contains the keyword.
+ */
+
 public class FindCommand extends Command {
     private String keyWord;
     public FindCommand(String action, String keyWord) {
