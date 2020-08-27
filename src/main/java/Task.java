@@ -1,8 +1,10 @@
 public class Task {
     private String taskName;
     private boolean isDone;
-    private static String tick = "\u2713";
+    
+    private static String TICK = "\u2713";
     private static String cross = "\u2718";
+    
     public static int totalTasks = 0;
 
     public Task(String taskName) {
@@ -21,7 +23,7 @@ public class Task {
 
     @Override
     public String toString() {
-        return "[" + (isDone ? tick : cross) +
+        return "[" + (isDone ? TICK : cross) +
                 "] " + taskName;
     }
 }

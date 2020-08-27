@@ -1,6 +1,3 @@
-import java.util.Scanner;
-import java.util.ArrayList;
-
 public class Duke {
     private Storage storage;
     private TaskList tasks;
@@ -8,6 +5,7 @@ public class Duke {
 
     public Duke(String filePath) {
         ui =  new Ui();
+
         try {
             storage = new Storage(filePath);
             tasks = new TaskList(storage.load());
@@ -15,12 +13,14 @@ public class Duke {
             ui.showLine();
             ui.showError(e.getMessage());
             ui.showLine();
+
             tasks = new TaskList();
         }
     }
 
     public void run() {
         ui.showWelcome();
+
         boolean isExit = false;
         while (!isExit) {
             try {
