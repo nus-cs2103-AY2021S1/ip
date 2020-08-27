@@ -1,7 +1,7 @@
 package duke.task;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * TaskList class is used to store different Task objects and
@@ -11,13 +11,22 @@ import java.util.List;
 public class TaskList {
 
     private List<Task> list;
-    private int activeTasks;
-    private int completedTasks;
+    private int activeTasks = 0;
+    private int completedTasks = 0;
 
     public TaskList() {
         this.list = new ArrayList<>();
-        this.activeTasks = 0;
-        this.completedTasks = 0;
+    }
+
+    private TaskList(List<Task> list) {
+        this.list = list;
+        for (Task t : this.list) {
+            if (t.done) {
+                this.completedTasks += 1;
+            } else {
+                this.activeTasks += 1;
+            }
+        }
     }
 
     public List<Task> getList() {
@@ -96,6 +105,14 @@ public class TaskList {
                     this.activeTasks + "\nCompleted Tasks: " + this.completedTasks;
         }
         return "The task is not yet done!";
+    }
+
+    public String findWord(String word) {
+        List<Task> filteredList = new ArrayList<>(this.list);
+        filteredList = filteredList.stream()
+                .filter(task -> task.task.contains(word))
+                .collect(Collectors.toList());
+        return "Using keyword: " + word + "\n" + new TaskList(filteredList).toString();
     }
 
     /**

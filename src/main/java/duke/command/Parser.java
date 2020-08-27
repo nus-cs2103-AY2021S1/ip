@@ -78,12 +78,13 @@ public class Parser {
             case ("undo"):
             case ("done"):
             case ("delete"):
-                    return this.processList(com, index);
+            case("find"):
+                return this.processList(com, index);
 
             case ("todo"):
             case ("deadline"):
             case ("event"):
-                    return this.processTask(com, task, date);
+                return this.processTask(com, task, date);
             }
         }
         throw new DukeException("Sorry, I did not understand: " + command
@@ -159,6 +160,12 @@ public class Parser {
                 return list.deleteItem(Integer.parseInt(index) - 1);
             } else {
                 throw new DukeException("Please choose a task to delete, with \"delete <task number>\"");
+            }
+        case("find"):
+            if (!index.equals("")) {
+                return list.findWord(index);
+            } else {
+                throw new DukeException("Please input a word to find tasks with, using \"find <word>\"");
             }
         default:
             return null;
