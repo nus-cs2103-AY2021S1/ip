@@ -189,9 +189,14 @@ public class Duke {
         // Start chat
         while (true) {
             // Get input from user
-            System.out.println(ui.getMasterSpeak());
+            System.out.println(ui.getUserPrompt());
             input = myObj.nextLine().trim();
             System.out.println();
+
+            if (input.equals("help")) {
+                ui.availableCommands();
+                continue;
+            }
 
             // If user inputs "bye" in any case, end the chat
             if (input.equals("bye")) {
