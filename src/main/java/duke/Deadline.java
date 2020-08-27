@@ -3,6 +3,7 @@ package duke;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/** Deadline form of Task */
 public class Deadline extends Task {
     private LocalDate by;
 
@@ -16,7 +17,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Return updated task of subtype: Deadline
+     * Returns updated task of subtype: Deadline
      *
      * @param isDone New status for the task
      * @return new Deadline with updated status

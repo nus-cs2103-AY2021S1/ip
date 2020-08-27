@@ -2,6 +2,7 @@ package duke;
 
 import java.time.LocalDate;
 
+/** Event form of Task */
 public class Event extends Task {
     private LocalDate at;
 
@@ -15,7 +16,7 @@ public class Event extends Task {
     }
 
     /**
-     * Return updated task of subtype: Event
+     * Returns updated task of subtype: Event
      *
      * @param isDone New status for the task
      * @return new Event with updated status

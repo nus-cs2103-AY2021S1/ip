@@ -1,5 +1,6 @@
 package duke;
 
+/** Utility methods for generating stylised CLI outputs */
 public class Ui {
     private static final String LINEDIVIDER = "\t____________________________________________________________\n";
     private static final String LOGO = " ____        _        \n"
@@ -8,12 +9,13 @@ public class Ui {
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
 
-    // Prints out the greeting
+    /** Prints out the greeting */
     public static void greet() {
         System.out.println("Hello from\n" + LOGO);
         Ui.prettyPrint("Hello! I'm Duke\n\tWhat can I do for you?");
     }
 
+    /** Prints out message to indicate Task is updated */
     public static void updateTaskText(String update, Task taskToUpdate, int size) {
         Ui.prettyPrint("Got it. I've " + update + " this task: \n" +
                 "\t" + taskToUpdate + "\n" +

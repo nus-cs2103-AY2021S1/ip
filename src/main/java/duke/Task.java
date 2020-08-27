@@ -1,6 +1,6 @@
 package duke;
 
-// Group each action the user input as a task, with the description and status if the task is done
+/** Groups each action the user input as a Task, with the description and status */
 public class Task {
     protected String description;
     protected boolean isDone;

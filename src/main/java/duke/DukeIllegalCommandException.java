@@ -1,5 +1,6 @@
 package duke;
 
+/** Exception for unrecognised commands */
 public class DukeIllegalCommandException extends IllegalArgumentException {
     @Override
     public String toString() {
