@@ -24,7 +24,6 @@ public class ToDo extends Task { //added
         super(description, Type.TODO, isDone);
     }
 
-
     /**
      * Returns string representation of ToDo task.
      *
