@@ -8,12 +8,12 @@ import java.util.Scanner;
 
 public class Duke {
 
-    private final DukeList list;
+    private final DukeList taskList;
     private final Ui ui;
 
 
     public Duke() {
-        this.list = new DukeList();
+        this.taskList = new DukeList();
         this.ui = new Ui(System.in);
     }
 
@@ -41,7 +41,7 @@ public class Duke {
     private String markAsDone(String[] inputTextArr) throws IndexOutOfBoundsException {
         try {
             int index = Integer.parseInt(inputTextArr[1]);
-            String statusMsg = this.list.markAsDone(index);
+            String statusMsg = this.taskList.markAsDone(index);
             return statusMsg;
         } catch (NullPointerException e) {
             // exception thrown from DukeList.markAsDone()
@@ -56,7 +56,7 @@ public class Duke {
 
 
     /**
-     * Deletes an item from the list.
+     * Deletes an item from the taskList.
      *
      * @param inputTextArr String array of the input text, split by " "
      * @return statusMsg to be printed.
@@ -65,7 +65,7 @@ public class Duke {
     private String delete(String[] inputTextArr) throws IndexOutOfBoundsException {
         try {
             int index = Integer.parseInt(inputTextArr[1]);
-            String statusMsg = this.list.delete(index);
+            String statusMsg = this.taskList.delete(index);
             return statusMsg;
         } catch (NullPointerException e) {
             // exception thrown from DukeList.delete()
@@ -101,8 +101,8 @@ public class Duke {
                 shouldQuit = true;
                 break;
             case LIST:
-                String listString = this.list.toString();
-                this.ui.printMessage(listString);
+                String taskListString = this.taskList.toString();
+                this.ui.printMessage(taskListString);
                 break;
             case DONE:
                 try {
@@ -128,7 +128,7 @@ public class Duke {
 
             case TASK:
                 try {
-                    String statusString = this.list.add(msgInput);
+                    String statusString = this.taskList.add(msgInput);
                     this.ui.printMessage(statusString);
                 } catch (DukeException e) {
                     this.ui.printMessage(e.getMessage());
@@ -159,14 +159,14 @@ public class Duke {
      */
     public void start() {
         Ui.printStartMessage();
-        this.list.loadFromFile();
+        this.taskList.loadFromFile();
 
         Scanner sc = new Scanner(System.in);
         this.dukeLogic();
 
         this.ui.printMessage("Bye. Hope to see you again soon!");
 
-        this.list.writeToFile();
+        this.taskList.writeToFile();
 
         sc.close();
     }
