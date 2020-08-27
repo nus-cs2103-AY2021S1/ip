@@ -3,14 +3,27 @@ package duke.ui;
 import duke.Duke;
 import duke.task.Task;
 
+/**
+ * Ui interacts with users by printing out messages in console.
+ * e.g. When the user enters a command, the command function would be
+ * executed, and methods in Ui is usually called in by the execute function
+ * to respond the user.
+ */
 public class Ui {
 
     private Duke duke;
 
+    /**
+     * Constructs a Ui.
+     * @param duke the Duke that will use this Ui
+     */
     public Ui(Duke duke) {
         this.duke = duke;
     }
 
+    /**
+     * Greets the user.
+     */
     public void greet() {
         System.out.println(UIPrint.logo);
 
@@ -22,12 +35,19 @@ public class Ui {
         UIPrint.drawLine(UIPrint.star, 50);
     }
 
+    /**
+     * Repeats the input string once.
+     * @param str string to be repeated
+     */
     public void echo(String str) {
         UIPrint.drawLine(UIPrint.star, 50);
         System.out.println(str);
         UIPrint.drawLine(UIPrint.star, 50);
     }
 
+    /**
+     * Prints out the current tasks saved in task list.
+     */
     public void reportCurrentTasks() {
         UIPrint.drawLine(UIPrint.star, 50);
 
@@ -44,6 +64,10 @@ public class Ui {
         UIPrint.drawLine(UIPrint.star, 50);
     }
 
+    /**
+     * Tells the user a new task is added to the task list.
+     * @param task the new task added
+     */
     public void reportNewTask(Task task) {
         UIPrint.drawLine(UIPrint.star, 50);
 
@@ -54,6 +78,10 @@ public class Ui {
         UIPrint.drawLine(UIPrint.star, 50);
     }
 
+    /**
+     * Tells the user a task has been marked as done.
+     * @param task the task marked as done
+     */
     public void reportDoneTask(Task task) {
         UIPrint.drawLine(UIPrint.star, 50);
 
@@ -63,6 +91,10 @@ public class Ui {
         UIPrint.drawLine(UIPrint.star, 50);
     }
 
+    /**
+     * Tells the user a task has been deleted.
+     * @param task the task deleted
+     */
     public void reportDeleteTask(Task task) {
         UIPrint.drawLine(UIPrint.star, 50);
 
@@ -73,6 +105,9 @@ public class Ui {
         UIPrint.drawLine(UIPrint.star, 50);
     }
 
+    /**
+     * Says good bye to the user.
+     */
     public void reportExit() {
         UIPrint.drawLine(UIPrint.star, 50);
 

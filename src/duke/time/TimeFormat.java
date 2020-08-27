@@ -2,6 +2,9 @@ package duke.time;
 
 import java.time.format.DateTimeFormatter;
 
+/**
+ * The accepted formats for parsing a string to some specific time.
+ */
 public class TimeFormat {
 
     public static final DateTimeFormatter dateFormatter =

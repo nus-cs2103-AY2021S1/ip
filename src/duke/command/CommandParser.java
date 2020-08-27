@@ -8,8 +8,19 @@ import duke.exception.InvalidIndexException;
 import duke.exception.NoDescriptionException;
 import duke.exception.UnknownCommandException;
 
+/**
+ * CommandParser split user's input string line into parts, then try to figure
+ * out the command to executed and try to execute it. If the input line
+ * cannot be understood by CommandParser, it would reports that to the user.
+ */
 public class CommandParser {
 
+    /**
+     * Tries to split the input string, then tries to figure out the command,
+     * and tries to execute if a command is figured out.
+     * @param str the input line
+     * @param duke the current Duke
+     */
     public void parse(String str, Duke duke) {
         String[] splitParts = splitInputLine(str);
         String commandName = splitParts[0];

@@ -3,6 +3,9 @@ package duke.task;
 import duke.exception.NoDescriptionException;
 import duke.ui.UIPrint;
 
+/**
+ * A ToDo is a task with no time info. Todo objects store only task description.
+ */
 public class ToDo extends Task {
 
     private ToDo(String icon, String description, String taskInfo) {
@@ -10,6 +13,11 @@ public class ToDo extends Task {
         super(icon, description, taskInfo);
     }
 
+    /**
+     * Creates a ToDo using a string of task info
+     * @param todoInfo the string of task info
+     * @return the ToDo object created
+     */
     public static ToDo createToDo(String todoInfo) {
         checkException(todoInfo);
         ToDo newToDo = new ToDo(UIPrint.todoIcon, todoInfo, todoInfo);

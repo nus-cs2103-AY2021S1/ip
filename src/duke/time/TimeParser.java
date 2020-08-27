@@ -5,8 +5,16 @@ import java.time.LocalTime;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 
+/**
+ * TimeParser tries to parse a string to a specific time.
+ */
 public class TimeParser {
 
+    /**
+     * Tries to parse a string to LocalDateTime.
+     * @param timeString the string to be parsed
+     * @return the result LocalDateTime, null when cannot parse.
+     */
     public static LocalDateTime parse(String timeString) {
         try {
             LocalDateTime dateTime = LocalDateTime.parse(timeString, TimeFormat.dateTimeFormatter);

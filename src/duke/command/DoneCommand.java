@@ -5,12 +5,24 @@ import duke.exception.InvalidIndexException;
 import duke.task.Task;
 import duke.ui.UIPrint;
 
+/**
+ * DoneCommand marks the task with the index as done, reports to the user.
+ */
 public class DoneCommand extends Command {
 
+    /**
+     * Constructs a DoneCommand.
+     */
     public DoneCommand() {
         names = new String[] { "done" };
     }
 
+    /**
+     * Marks the task with the index as done, reports to the user.
+     * @param str the index of the task
+     * @param duke the current Duke
+     * @throws InvalidIndexException thrown when the index is invalid
+     */
     @Override
     public void execute(String str, Duke duke) throws InvalidIndexException {
         boolean canParseInt = tryParseInt(str);

@@ -4,6 +4,10 @@ import duke.exception.IncorrectFormatException;
 import duke.ui.UIPrint;
 import duke.time.Time;
 
+/**
+ * A Event is a task with a time. Event objects store both task description
+ * and time.
+ */
 public class Event extends Task {
 
     private Time time;
@@ -18,6 +22,12 @@ public class Event extends Task {
         return "event";
     }
 
+    /**
+     * Creates a Event using a string with task info,
+     * throws exceptions when the string has wrong format.
+     * @param eventInfo the string of task info
+     * @return the Event object created
+     */
     public static Event createEvent(String eventInfo) {
         String[] splitStr = eventInfo.split(" /at ", 2);
 

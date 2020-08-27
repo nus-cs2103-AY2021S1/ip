@@ -2,6 +2,10 @@ package duke.time;
 
 import java.time.LocalDateTime;
 
+/**
+ * Time stores time information. The information can either be a specific
+ * time or some string description of the time.
+ */
 public class Time {
 
     public LocalDateTime time;
@@ -17,6 +21,11 @@ public class Time {
         this.timeDescription = timeDescription;
     }
 
+    /**
+     * Converts a string to Time.
+     * @param timeString the time string
+     * @return the Time object formed
+     */
     public static Time stringToTime(String timeString) {
         LocalDateTime time = TimeParser.parse(timeString);
 
@@ -27,6 +36,12 @@ public class Time {
         }
     }
 
+    /**
+     * Compares with another Time.
+     * Only comparable when both Time are specific time.
+     * @param time the time to compare to
+     * @return the result of comparison
+     */
     public TimeComparison compareTo(Time time) {
         if (time.time == null || this.time == null) {
             return TimeComparison.INCOMPARABLE;
