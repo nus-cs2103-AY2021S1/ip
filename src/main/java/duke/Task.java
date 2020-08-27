@@ -38,7 +38,11 @@ public class Task {
     public boolean isDone() {
         return this.isDone;
     }
-    
+
+    /**
+     * Returns contents of a task as a String.
+     * @return Contents of a task as a String.
+     */
     public String getDescription() {
         return this.description;
     }
