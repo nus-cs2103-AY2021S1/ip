@@ -40,11 +40,15 @@ public class Ui {
     public void listTasks(TaskList tasks) {
         System.out.println("Here are the tasks in your list:");
         System.out.println(tasks);
-        System.out.println("You have " + tasks.size() + " tasks in the list.");
     }
 
     public void taskDone(Task task) {
         System.out.println("Nice! I've marked this task as done:");
         System.out.println(task);
+    }
+
+    public void listFoundTasks(TaskList tasks) {
+        System.out.println("Here are the matching tasks in your list:");
+        System.out.println(tasks);
     }
 }

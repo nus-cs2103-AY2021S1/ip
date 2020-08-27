@@ -11,6 +11,8 @@ public class Parser {
                 return new ExitCommand();
             case "list":
                 return new ListCommand();
+            case "find":
+                return new FindCommand(splitCommand[1]);
             case "done":
                 return new DoneCommand(Integer.parseInt(splitCommand[1]));
             case "delete":

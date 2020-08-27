@@ -9,7 +9,7 @@ public class Duke {
         ui = new Ui();
         storage = new Storage(filePath);
         try {
-            tasks = new TaskList(storage.read());
+            tasks = TaskList.fromData(storage.read());
         } catch (Exception e) {
             ui.showError(e.getMessage());
             tasks = new TaskList();
