@@ -89,6 +89,32 @@ public class TaskList {
     }
 
     /**
+     * Searches for all tasks that matches any of the keywords.
+     *
+     * @param keywords the string of keywords to search against.
+     * @return the string representation of all tasks that matches.
+     */
+    public String find(String keywords) {
+        String[] words = keywords.trim().split(" ");
+
+        StringBuilder s = new StringBuilder();
+
+        int counter = 0;
+        for (int i = 0; i < tasks.size(); i++) {
+            if (tasks.get(i).containKeywords(words)) {
+                s.append(++counter).append(". ").append(tasks.get(i)).append("\n");
+            }
+        }
+
+        if (counter == 0) {
+            return null;
+        } else {
+            s.setLength(s.length() - 1);
+            return s.toString();
+        }
+    }
+
+    /**
      * Gets the number of tasks in TaskList.
      *
      * @return number of tasks.

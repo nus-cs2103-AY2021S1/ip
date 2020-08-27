@@ -30,6 +30,7 @@ public class HelpCommand extends Command {
 
         StringBuilder output = new StringBuilder("These are the commands in my dictionary:\n");
         output.append(String.format(commandFormat, ListCommand.USE_CASE, ListCommand.DESCRIPTION));
+        output.append(String.format(commandFormat, FindCommand.USE_CASE, FindCommand.DESCRIPTION));
         output.append(String.format(commandFormat, ClearCommand.USE_CASE, ClearCommand.DESCRIPTION));
         output.append(String.format(commandFormat, DoneCommand.USE_CASE, DoneCommand.DESCRIPTION));
         output.append(String.format(commandFormat, DeleteCommand.USE_CASE, DeleteCommand.DESCRIPTION));

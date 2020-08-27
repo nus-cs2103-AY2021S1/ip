@@ -7,6 +7,7 @@ import alice.command.DeadlineCommand;
 import alice.command.DeleteCommand;
 import alice.command.DoneCommand;
 import alice.command.EventCommand;
+import alice.command.FindCommand;
 import alice.command.HelpCommand;
 import alice.command.InvalidCommandException;
 import alice.command.ListCommand;
@@ -78,6 +79,9 @@ public class Parser {
         if (ListCommand.hasCommandWord(cmd)) {
             // Command to display task list
             return new ListCommand();
+        } else if (FindCommand.hasCommandWord(cmd)) {
+            // Command to find specific tasks
+            return parseFindKeywords(argument);
         } else if (ClearCommand.hasCommandWord(cmd)) {
             // Command to clear task list
             return new ClearCommand();
@@ -105,6 +109,21 @@ public class Parser {
             // Invalid command
             throw new InvalidCommandException("Sorry I cannot register that command!\n"
                     + "Use 'help' command to see the lists of available command");
+        }
+    }
+
+    /**
+     * Parses the keywords given by the user for use by the find command.
+     *
+     * @param keywords the string of keywords provided by user
+     * @return the <code>FindCommand</code> with the user's keywords
+     * @throws InvalidCommandException if the keywords provided is an empty string
+     */
+    private static FindCommand parseFindKeywords(String keywords) throws InvalidCommandException {
+        if (!keywords.isBlank()) {
+            return new FindCommand(keywords);
+        } else {
+            throw new InvalidCommandException("The keyword for find cannot be left empty.");
         }
     }
 
