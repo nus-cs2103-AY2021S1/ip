@@ -1,14 +1,13 @@
-import java.util.Scanner;
-import java.util.ArrayList;
-
 public class Duke {
 
     private Ui ui;
     private Storage storage;
+    private InputParser inputParser;
 
     public Duke() {
         this.ui = new Ui();
         this.storage = new Storage();
+        this.inputParser = new InputParser();
     }
 
     public static boolean isEmptyInput(String input) {
@@ -42,8 +41,6 @@ public class Duke {
         // Print Duke welcome message
         ui.welcomeMessage();
 
-        // Initialise the Scanner object to get input from user
-        Scanner myObj = new Scanner(System.in);
         String input;
 
         // Initialise TaskList object to store tasks from user
@@ -53,7 +50,7 @@ public class Duke {
         while (true) {
             // Get input from user
             System.out.println(ui.getUserPrompt());
-            input = myObj.nextLine().trim();
+            input = inputParser.getInput();
             System.out.println();
 
             // If user inputs "help", print list of available commands

@@ -1,4 +1,18 @@
+import java.util.Scanner;
+
 public class InputParser {
+
+    private Scanner myObj;
+
+    public InputParser() {
+        // Initialise the Scanner object to get input from user
+        this.myObj = new Scanner(System.in);
+    }
+
+    public String getInput() {
+        return myObj.nextLine().trim();
+    }
+
     public boolean isEmptyInput(String input) {
         return input.isEmpty();
     }
