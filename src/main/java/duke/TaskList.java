@@ -1,4 +1,4 @@
-package Duke;
+package duke;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -80,5 +80,14 @@ public class TaskList {
 
     public void deleteAll(){
         list = new ArrayList<>();
+    }
+
+
+    public static void main(String[] args) throws DukeException {
+        TaskList tasklist = new TaskList(new ArrayList<>());
+        tasklist.add("todo eat");
+        ToDo temp1 = new ToDo("eat");
+        ToDo temp2 = new ToDo("eat");
+        System.out.println(temp1.equals(temp2));
     }
 }

@@ -1,18 +1,21 @@
-package Duke;
+package duke;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
-public class Deadlines extends Task {
+public class Events extends Task{
     LocalDate date;
-    LocalTime time;
+    LocalTime startTime;
+    LocalTime endTime;
 
-    Deadlines(String name, String time) {
+    Events(String name, String time) {
         super(name,time);
-        String[] by = time.split(" ");
-        this.date = parseDate(by[1]);
-        this.time = parseTime(by[2]);
+        String[] at = time.split(" ");
+        this.date = parseDate(at[1]);
+        String[] timeArray = at[2].split("-");
+        this.startTime = parseTime(timeArray[0]);
+        this.endTime = parseTime(timeArray[1]);
     }
 
     public LocalDate parseDate(String dateString) {
@@ -28,17 +31,21 @@ public class Deadlines extends Task {
     public String printDateTime() {
         DateTimeFormatter formatDate = DateTimeFormatter.ofPattern("dd MMM yyyy");
         DateTimeFormatter formatTime = DateTimeFormatter.ofPattern("h:mma");
-        return String.format("%s, %s",
+        return String.format("%s, %s to %s",
                 formatDate.format(date),
-                formatTime.format(time));
+                formatTime.format(startTime),
+                formatTime.format(endTime));
+
     }
 
     @Override
-    public String toString() {
+    public String toString(){
         if (super.completed) {
-            return "[D]" + "[" + "✓" + "] " + name + "(by: " + printDateTime() + ")";
+            return "[E]" + "[" + "✓" + "] " + name + "(at: " + printDateTime()  +")";
         } else {
-            return "[D]" + "[" + "✗" + "] " + name + "(by: " + printDateTime() + ")";
+            return "[E]" + "[" + "✗" + "] " + name + "(at: " + printDateTime()  +")";
         }
+
     }
+
 }

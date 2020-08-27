@@ -1,4 +1,4 @@
-package Duke;
+package duke;
 
 public class Task {
     boolean completed = false;
@@ -14,6 +14,7 @@ public class Task {
         this.name = name;
         this.time = time;
     }
+
 
 
     public Task completedTask(){
