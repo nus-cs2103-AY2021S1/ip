@@ -7,9 +7,9 @@ import duckie.task.Task;
 
 public class Ui {
     private final static String INDENT = "\t";
-    private final static String horizL = INDENT +
+    private final static String HORIZ_LINE = INDENT +
             "____________________________________________________________";
-    private final static String logo = INDENT
+    private final static String LOGO = INDENT
             + "           ____                   _      _\n"
             + INDENT + "    __    |  _ \\   _   _    ___  | | _  (_)  ___     __\n"
             + INDENT + "___( o)>  | | | | | | | | /  __| | |/ / | | / _ \\  <(o )___ \n"
@@ -21,16 +21,16 @@ public class Ui {
         sc = new Scanner(System.in);
     }
 
-    public static String getHorizL() {
-        return horizL;
+    public static String getHORIZ_LINE() {
+        return HORIZ_LINE;
     }
 
     public static void showLine() {
-        System.out.println(horizL);
+        System.out.println(HORIZ_LINE);
     }
 
     public static void showIntro() {
-        System.out.println(horizL + "\n" + logo + "\n" +
+        System.out.println(HORIZ_LINE + "\n" + LOGO + "\n" +
                 INDENT + "Quack. Duckie is here to remember your tasks!" );
         showLoading();
     }
@@ -56,7 +56,7 @@ public class Ui {
 
     public static void displayNoListReply() {
         System.out.println(INDENT + "Quack. You have no tasks in the list currently");
-        System.out.println(horizL);
+        System.out.println(HORIZ_LINE);
     }
 
     public static void checkTaskReply(Task t1) {
@@ -86,6 +86,6 @@ public class Ui {
 
     public static void showLoading() {
         System.out.println(INDENT + "Loading tasks...");
-        System.out.println(horizL);
+        System.out.println(HORIZ_LINE);
     }
 }

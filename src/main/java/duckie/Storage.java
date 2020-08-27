@@ -30,15 +30,15 @@ public class Storage {
                 File dir = new File(duckieFile.getParent());
                 if (!dir.exists()) {
                     if (dir.mkdirs() && duckieFile.createNewFile()) {
-                        System.out.println("Memory File created successfully!");
+                        System.out.println("\t" + "Memory File created successfully!");
                     } else {
-                        System.out.println("Quack! Unable to create file!");
+                        throw new DuckieException("\t" + "Quack! Unable to create file!");
                     }
                 } else {
                     if (duckieFile.createNewFile()) {
-                        System.out.println("Memory File created successfully!");
+                        System.out.println("\t" + "Memory File created successfully!");
                     } else {
-                        System.out.println("Quack! Unable to create file!");
+                        throw new DuckieException("Quack! Unable to create file!");
                     }
                 }
             }
