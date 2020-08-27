@@ -28,11 +28,21 @@ public class Deadline extends Task {
         }
     }
 
+    /**
+     * Encode task into a String to be saved in text file.
+     *
+     * @return String of encoded task details.
+     */
     public String toEncoding() {
         int completedBinary = this.completed ? 1 : 0;
         return "D>" + completedBinary + ">" + this.description + ">" + this.by;
     }
 
+    /**
+     * Converts the deadline details into a format readable by Java LocalDateTime API.
+     *
+     * @return String of converted deadline details.
+     */
     private String reformatedDateTime() {
         String[] bySplit = this.by.split(" ", 2);
         String date = bySplit[0];

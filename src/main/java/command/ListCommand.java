@@ -9,6 +9,14 @@ import ui.Ui;
 public class ListCommand extends Command {
     public ListCommand() {}
 
+    /**
+     * Prints out the entire list of tasks.
+     *
+     * @param taskList
+     * @param ui
+     * @param storage
+     * @throws DukeException
+     */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         String output = "";

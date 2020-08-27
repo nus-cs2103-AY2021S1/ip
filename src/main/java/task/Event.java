@@ -28,11 +28,21 @@ public class Event extends Task {
         }
     }
 
+    /**
+     * Encode task into a String to be saved in text file.
+     *
+     * @return String of encoded task details.
+     */
     public String toEncoding() {
         int completedBinary = this.completed ? 1 : 0;
         return "E>" + completedBinary + ">" + this.description + ">" + this.at;
     }
 
+    /**
+     * Converts the event details into a format readable by Java LocalDateTime API.
+     *
+     * @return String of converted event details.
+     */
     private String reformatedDateTime() {
         String[] bySplit = this.at.split(" ", 2);
         String date = bySplit[0];

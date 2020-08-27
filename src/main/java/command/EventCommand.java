@@ -13,6 +13,14 @@ public class EventCommand extends Command {
         this.eventDetails = eventDetails;
     }
 
+    /**
+     * Creates new event with date and time, adds event to TaskList then updates the Storage.
+     *
+     * @param taskList the list of tasks.
+     * @param ui
+     * @param storage
+     * @throws DukeException
+     */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         try {

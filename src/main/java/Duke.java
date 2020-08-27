@@ -5,6 +5,9 @@ import storage.Storage;
 import tasklist.TaskList;
 import ui.Ui;
 
+/**
+ * Main class.
+ */
 public class Duke {
     public static Storage storage;
     public static TaskList taskList;
@@ -20,7 +23,10 @@ public class Duke {
             this.taskList = new TaskList();
         }
     }
-    
+
+    /**
+     * Runs until the user commands for program to stop.
+     */
     public void run() {
         ui.welcome();
         this.exit = false;

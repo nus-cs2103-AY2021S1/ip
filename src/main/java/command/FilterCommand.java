@@ -16,6 +16,14 @@ public class FilterCommand extends Command {
         this.date = date;
     }
 
+    /**
+     * Prints all tasks due on a specified date.
+     *
+     * @param taskList
+     * @param ui
+     * @param storage
+     * @throws DukeException
+     */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         try {

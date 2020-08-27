@@ -12,6 +12,14 @@ public class DeleteCommand extends Command {
         this.taskIdString = taskIdString;
     }
 
+    /**
+     * Deletes specified task from tasklist and updates Storage.
+     *
+     * @param taskList
+     * @param ui
+     * @param storage
+     * @throws DukeException
+     */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         try {

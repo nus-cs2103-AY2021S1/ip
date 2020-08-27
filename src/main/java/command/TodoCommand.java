@@ -12,6 +12,14 @@ public class TodoCommand extends Command {
         this.todoDetails = todoDetails;
     }
 
+    /**
+     * Creates new task, adds task to TaskList then updates the Storage.
+     *
+     * @param taskList the list of tasks
+     * @param ui
+     * @param storage
+     * @throws DukeException
+     */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         try {

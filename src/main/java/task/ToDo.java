@@ -13,6 +13,11 @@ public class ToDo extends Task {
         return "[T]" + icon + " " + this.description;
     }
 
+    /**
+     * Encode task into a String to be saved in text file.
+     *
+     * @return String of encoded task details.
+     */
     public String toEncoding() {
         int completedBinary = this.completed ? 1 : 0;
         return "T>" + completedBinary + ">" + this.description;

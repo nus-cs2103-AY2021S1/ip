@@ -10,6 +10,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Deals with the loading and saving of tasks in text file.
+ */
 public class Storage {
     public static File file;
 
@@ -17,6 +20,12 @@ public class Storage {
         file = new File(filePath);
     }
 
+    /**
+     * Reads the tasks saved in text file and collate them into a list.
+     *
+     * @return ArrayList of tasks from loaded file.
+     * @throws DukeException when error is encountered while reading text file.
+     */
     public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> taskList = new ArrayList<>();
         try {
@@ -49,6 +58,12 @@ public class Storage {
         return taskList;
     }
 
+    /**
+     * Saves the tasks in the TaskList into a text file.
+     *
+     * @param taskList the TaskList containing all the tasks to be saved.
+     * @throws DukeException when error is encountered while saving text file.
+     */
     public void save(TaskList taskList) throws DukeException {
         try {
             FileWriter writer = new FileWriter(file);

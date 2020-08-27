@@ -2,10 +2,19 @@ package parser;
 import exception.DukeException;
 import command.*;
 
-
+/**
+ * Deals with understanding the input from user and determining Command to execute.
+ */
 public class Parser {
     public static final String LINE = "_______________________________________\n";
 
+    /**
+     * Determines which Command should be called based on user input.
+     *
+     * @param userInput the input given by user.
+     * @return The Command to be executed.
+     * @throws DukeException if a Command is called without required details.
+     */
     public static Command parse(String userInput) throws DukeException {
         String[] inputSplit = userInput.split(" ", 2);
         String userCommand = inputSplit[0];
