@@ -3,6 +3,8 @@ package duke.ui;
 import duke.Duke;
 import duke.task.Task;
 
+import java.util.ArrayList;
+
 public class Ui {
 
     private Duke duke;
@@ -78,6 +80,22 @@ public class Ui {
 
         String exitWords = "Bye, hope to see you again soon!";
         System.out.println(exitWords);
+
+        UIPrint.drawLine(UIPrint.star, 50);
+    }
+
+    public void reportGiveTasks(ArrayList<Task> tasks) {
+        UIPrint.drawLine(UIPrint.star, 50);
+
+        System.out.println("Here are the matching tasks in your list:");
+
+        if (tasks.size() == 0) {
+            System.out.println("None");
+        } else {
+            for (int i = 0; i < tasks.size(); i++) {
+                System.out.println(i + 1 + ". " + tasks.get(i));
+            }
+        }
 
         UIPrint.drawLine(UIPrint.star, 50);
     }
