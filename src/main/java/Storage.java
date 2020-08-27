@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Storage {
-    // Loop through every task and transform it into a string
+    // Loop through every task and transform it into a string file format
     public String listToString(ArrayList<Task> taskList) {
         String taskListStr = "";
         for (Task t : taskList) {

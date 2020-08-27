@@ -43,10 +43,10 @@ public class Ui {
                 + "    delete <task number> - Delete task from list\n");
     }
 
-    public void printTaskAddedMessage(String task, int size) {
+    public void printTaskAddedMessage(Task task, int size) {
         System.out.println(SERVANT_SPEAK
                 + "    As you wish Sire. I have added the task:\n       "
-                + task + "\n"
+                + task.toString() + "\n"
                 + "    Now you have " + size
                 + " tasks in the list.\n");
     }
@@ -57,16 +57,16 @@ public class Ui {
         System.out.println(new TaskList(userTasks).toString());
     }
 
-    public void printMarkAsDoneMessage(String task) {
+    public void printMarkAsDoneMessage(Task task) {
         System.out.println(SERVANT_SPEAK
                 + "    As you wish Sire. I have marked this task as done:\n"
-                + "       " + task);
+                + "       " + task.toString());
     }
 
-    public void printTaskDeletedMessage(String task) {
+    public void printTaskDeletedMessage(Task task) {
         System.out.println(SERVANT_SPEAK
                 + "    As you wish Sire. I removed this task:\n"
-                + "       " + task);
+                + "       " + task.toString());
     }
 
     public void printByeMessage() {

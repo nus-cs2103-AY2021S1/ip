@@ -11,6 +11,10 @@ public class TaskList {
         return this.taskList;
     }
 
+    public Task getTask(int index) {
+        return taskList.get(index);
+    }
+
     public int getTaskListSize() {
         return taskList.size();
     }
@@ -19,12 +23,12 @@ public class TaskList {
         taskList.add(t);
     }
 
-    public void deleteTask(Task t) {
-        taskList.remove(t);
+    public void deleteTask(int index) {
+        taskList.remove(index);
     }
 
-    public void markTaskAsDone(Task t) {
-        taskList.add(t);
+    public void markTaskAsDone(int index) {
+        taskList.get(index).setDone();
     }
 
     @Override
