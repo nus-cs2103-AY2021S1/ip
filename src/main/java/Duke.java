@@ -17,16 +17,16 @@ import java.util.ArrayList;
  */
 public class Duke {
 
-    private DukeUi dukeUi;
-    private DukeFile dukeFile;
+    private Ui ui;
+    private Storage storage;
     private ArrayList<Task> arrayLst;
-    private Processor processor;
+    private Parser parser;
 
     public Duke(String filePath) {
-        this.dukeUi = new DukeUi();
+        this.ui = new Ui();
         this.arrayLst = new ArrayList<>();
-        this.dukeFile = DukeFile.createDukeFile(filePath);
-        this.processor = new Processor();
+        this.storage = Storage.createDukeFile(filePath);
+        this.parser = new Parser();
     }
 
     /**
@@ -35,36 +35,33 @@ public class Duke {
      * the commands to create the Chatbot Task list.
      *
      * @author Lee Penn Han.
-     * @return Nothing.
-     * @exception IOException on inout error.
      */
     public void run() {
-        this.dukeUi.welcomeMessage();
+        this.ui.welcomeMessage();
         Scanner sc = new Scanner(System.in);
         while (sc.hasNext()) {
             String cmd = sc.nextLine().trim().toLowerCase();
             if (!cmd.equals("bye")) {
                 try {
-                    this.processor.process(cmd, this.arrayLst, this.dukeFile);
+                    this.parser.process(cmd, this.arrayLst, this.storage);
                 } catch (DukeException e) {
-                    this.dukeUi.showError(e.getMessage());
+                    this.ui.showError(e.getMessage());
                 }
             } else {
-                this.dukeUi.goodbyeMessage();
+                this.ui.goodbyeMessage();
                 break;
             }
         }
         try {
-            this.dukeFile.saveToFile();
+            this.storage.saveToFile();
         } catch (IOException e) {
-            this.dukeUi.showError(e.getMessage());
+            this.ui.showError(e.getMessage());
         }
     }
 
     /**
      * This is the main method that makes use of the run method.
      * @param args Unused.
-     * @return Nothing.
      */
     public static void main(String[] args) {
         new Duke("Saved").run();

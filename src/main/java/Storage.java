@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 /**
- * <h1> DukeFile Class (Saving Tasks)</h1>
+ * <h1> Storage Class (Saving Tasks)</h1>
  * Dukefile class is the class that contains the methods
  * that manages the task within the single initialisation of the bot
  * and extracts the current tasks and stores it in a text file.
@@ -13,11 +13,11 @@ import java.util.ArrayList;
  * @version 1.0.
  * @since 2020-25-08.
  */
-public class DukeFile {
+public class Storage {
     private String fileName;
     private ArrayList<String> recordArrayLst;
 
-    private DukeFile(String fileName) {
+    private Storage(String fileName) {
         this.fileName = fileName;
         this.recordArrayLst = new ArrayList<>();
     }
@@ -38,8 +38,7 @@ public class DukeFile {
      * in the text file.
      *
      * @author Lee Penn Han.
-     * @return Nothing.
-     * @throws IOException
+     * @throws IOException on input error.
      */
     public void saveToFile() throws IOException {
         FileWriter fileWriter = new FileWriter(fileName);
@@ -56,7 +55,6 @@ public class DukeFile {
      * as a String.
      *
      * @author Lee Penn Han.
-     * @return Nothing.
      * @param record This is the Task to be saved.
      */
     public void saveRecord(String record) {
@@ -68,7 +66,6 @@ public class DukeFile {
      * index from User Input to identify the position.
      *
      * @author Lee Penn Han.
-     * @return Nothing.
      * @param record Latest Task Status.
      * @param index The index of the task in the list.
      */
@@ -82,7 +79,6 @@ public class DukeFile {
      * index from User Input to identify the position.
      *
      * @author Lee Penn Han.
-     * @return Nothing.
      * @param index The index of the targeted task in the list.
      */
     public void deleteRecord(int index) {
@@ -91,14 +87,14 @@ public class DukeFile {
     }
 
     /**
-     * Instantiates a DukeFile object.
+     * Instantiates a Storage object.
      *
      * @author Lee Penn Han.
      * @param fileName This is the filename that the tasks will be saved under.
-     * @return DukeFile object.
+     * @return Storage object.
      */
-    public static DukeFile createDukeFile(String fileName) {
-        return new DukeFile(fileName);
+    public static Storage createDukeFile(String fileName) {
+        return new Storage(fileName);
     }
 
     /**

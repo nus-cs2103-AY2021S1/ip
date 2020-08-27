@@ -1,6 +1,6 @@
 /**
- * <h1>DukeUi Class</h1>
- * The DukeUi class manages the interactions with
+ * <h1>Ui Class</h1>
+ * The Ui class manages the interactions with
  * the User.
  * It consist of mainly void
  * methods that display a formatted text that is readable
@@ -10,9 +10,9 @@
  * @version 1.0
  * @since 2020-08-25
  */
-public class DukeUi {
+public class Ui {
 
-    public DukeUi() { }
+    public Ui() { }
 
     /**
      * Prints out a line to mark an individual message

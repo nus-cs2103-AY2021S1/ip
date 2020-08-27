@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.time.LocalDate;
 
 /**
- * <h1> Duke Processor class </h1>
+ * <h1> Duke Parser class </h1>
  * This class is the class that processes the
  * commands to create readable Tasks that will be stored in
  * the arraylist of tasks and arraylist of records
@@ -11,9 +11,9 @@ import java.time.LocalDate;
  * @version 1.0
  * @since 2020-25-08
  */
-public class Processor {
+public class Parser {
 
-    public Processor() {}
+    public Parser() {}
 
     /**
      * Processes the command and filters
@@ -22,27 +22,27 @@ public class Processor {
      *
      * @param command This is the user input
      * @param arrayLst This is the arraylist that stores the current lists of tasks
-     * @param dukeFile This is the DukeFile object that records the tasks
+     * @param storage This is the Storage object that records the tasks
      * @throws DukeException Exception for unidentified commands
      */
-    public void process(String command, ArrayList<Task> arrayLst, DukeFile dukeFile) throws DukeException {
+    public void process(String command, ArrayList<Task> arrayLst, Storage storage) throws DukeException {
         String[] stringarr = command.split(" ");
         if (stringarr[0].equals("list")) {
             processorList(arrayLst);
         } else if (stringarr[0].equals("done")) {
             int index = Integer.parseInt(stringarr[1]);
             String record = processorDone(arrayLst, index);
-            dukeFile.updateRecord(record, index);
+            storage.updateRecord(record, index);
         } else if (stringarr[0].equals("delete")) {
             int index = Integer.parseInt(stringarr[1]);
             processorDelete(arrayLst, index);
-            dukeFile.deleteRecord(index);
+            storage.deleteRecord(index);
         } else if (stringarr[0].equals("find")) {
             String key = stringarr[1];
             processorFind(arrayLst, key);
         } else {
             String record = processorAdd(command, arrayLst);
-            dukeFile.saveRecord(record);
+            storage.saveRecord(record);
         }
     }
 

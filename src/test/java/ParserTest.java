@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
-public class ProcessorTest {
+public class ParserTest {
 
     @Test
     public void dummyTest() {
@@ -14,11 +14,11 @@ public class ProcessorTest {
 
     @Test
     public void processorAddTodoTest() {
-        Processor processor = new Processor();
+        Parser parser = new Parser();
         ArrayList<Task> arraylst = new ArrayList<>();
-        DukeFile dukeFile = DukeFile.createDukeFile("test");
+        Storage storage = Storage.createDukeFile("test");
         try {
-            processor.process("todo read book", arraylst, dukeFile);
+            parser.process("todo read book", arraylst, storage);
             assertEquals("[T][✘] read book", arraylst.get(0).toString());
         } catch (DukeException e) {
             fail(e.getMessage());
@@ -27,12 +27,12 @@ public class ProcessorTest {
 
     @Test
     public void processorDoneTest() {
-        Processor processor = new Processor();
+        Parser parser = new Parser();
         ArrayList<Task> arraylst = new ArrayList<>();
-        DukeFile dukeFile = DukeFile.createDukeFile("test");
+        Storage storage = Storage.createDukeFile("test");
         try {
-            processor.process("todo read book", arraylst, dukeFile);
-            processor.process("done 1", arraylst, dukeFile);
+            parser.process("todo read book", arraylst, storage);
+            parser.process("done 1", arraylst, storage);
             assertEquals("[T][✓] read book", arraylst.get(0).toString());
         } catch (DukeException e) {
             fail(e.getMessage());
@@ -41,13 +41,13 @@ public class ProcessorTest {
 
     @Test
     public void processorDeleteTest() {
-        Processor processor = new Processor();
+        Parser parser = new Parser();
         ArrayList<Task> arraylst = new ArrayList<>();
-        DukeFile dukeFile = DukeFile.createDukeFile("test");
+        Storage storage = Storage.createDukeFile("test");
         try {
-            processor.process("todo read book", arraylst, dukeFile);
-            processor.process("todo read 2nd book", arraylst, dukeFile);
-            processor.process("delete 1", arraylst, dukeFile);
+            parser.process("todo read book", arraylst, storage);
+            parser.process("todo read 2nd book", arraylst, storage);
+            parser.process("delete 1", arraylst, storage);
             assertEquals(1, arraylst.size());
             assertEquals("[T][✘] read 2nd book", arraylst.get(0).toString());
         } catch (DukeException e) {
