@@ -2,6 +2,9 @@ package Duke.Command;
 
 import Duke.*;
 
+/**
+ * ExitCommand deals with bye input.
+ */
 public class ExitCommand extends Command {
     @Override
     public boolean isExited() {

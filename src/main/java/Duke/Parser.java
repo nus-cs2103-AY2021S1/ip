@@ -5,7 +5,18 @@ import Duke.Exception.*;
 
 import java.io.IOException;
 
+/**
+ * Parser deals with making sense of the user command.
+ */
 public class Parser {
+
+    /**
+     * Handles user input and execute relevant command.
+     * @param input  User input
+     * @return       Command to execute
+     * @throws DukeException
+     * @throws IOException
+     */
     public static Command parse(String input) throws DukeException, IOException {
         if (input.equals("bye")) {
             return new ExitCommand();

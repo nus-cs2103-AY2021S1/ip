@@ -5,6 +5,9 @@ import Duke.Exception.*;
 
 import java.io.IOException;
 
+/**
+ * Command deals with all commands recognisable by Duke.
+ */
 public abstract class Command {
     public abstract boolean isExited();
 

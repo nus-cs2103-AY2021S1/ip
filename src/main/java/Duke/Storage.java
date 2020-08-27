@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- *  Storage class handles saving and loading tasks.
+ *  Storage deals with loading tasks from the file and saving tasks in the file.
  */
 public class Storage {
 
@@ -32,6 +32,12 @@ public class Storage {
         this.path = filePath;
     }
 
+    /**
+     * Convert file contents into a list of tasks.
+     * @return Arraylist containing tasks
+     * @throws FileNotFoundException
+     * @throws InvalidDateTimeException
+     */
     public ArrayList<Task> getList() throws FileNotFoundException, InvalidDateTimeException {
         Scanner sc = new Scanner(this.file);
         ArrayList<Task> list = new ArrayList<>();
@@ -71,6 +77,11 @@ public class Storage {
         return list;
     }
 
+    /**
+     * Update data in save file.
+     * @param list  Arraylist containing Tasks
+     * @throws IOException
+     */
     public void updateFile(ArrayList<Task> list) throws IOException {
         FileWriter fw = new FileWriter(this.path);
         String text = "";

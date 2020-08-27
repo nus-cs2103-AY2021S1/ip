@@ -1,5 +1,8 @@
 package Duke.Exception;
 
+/**
+ * Exception representing general invalid input.
+ */
 public class InvalidInputException extends DukeException {
 
     public InvalidInputException() {

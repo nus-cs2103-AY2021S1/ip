@@ -1,5 +1,8 @@
 package Duke.Exception;
 
+/**
+ * Exception representing empty deadline input.
+ */
 public class NullDeadlineInputException extends DukeException {
 
     public NullDeadlineInputException() {

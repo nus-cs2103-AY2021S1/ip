@@ -2,6 +2,9 @@ package Duke.Command;
 
 import Duke.*;
 
+/**
+ * ListCommand deals with list input.
+ */
 public class ListCommand extends Command {
     @Override
     public boolean isExited() {

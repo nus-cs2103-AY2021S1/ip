@@ -1,5 +1,8 @@
 package Duke.Exception;
 
+/**
+ * Exception representing invalid date and time input.
+ */
 public class InvalidDateTimeException extends DukeException {
 
     public InvalidDateTimeException() {
