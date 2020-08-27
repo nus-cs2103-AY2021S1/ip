@@ -1,6 +1,6 @@
 package duke;
 
-import duke.task.Task;
+import duke.tasks.Task;
 
 import java.io.File;
 import java.io.BufferedReader;
@@ -43,7 +43,7 @@ public class Storage {
      *
      * @return file status string.
      */
-    String getFileStatus() {
+    public String getFileStatus() {
         return this.pathExists ? "exists" : "not found";
     }
 
@@ -53,7 +53,7 @@ public class Storage {
      *
      * @return if file exists.
      */
-    boolean fileExists() {
+    public boolean fileExists() {
         return this.pathExists;
     }
 
@@ -61,13 +61,14 @@ public class Storage {
     /**
      * Creates file.
      *
+     * @return is file created successfully.
      * @throws IOException IOException.
      */
-    void createFile() throws IOException {
+    public boolean createFile() throws IOException {
         File storageFile = new File(path.toString());
-        boolean fileCreatedSuccessfully = storageFile.createNewFile();
-
-        this.pathExists = true;
+        boolean isFileCreated = storageFile.createNewFile();
+        this.pathExists = isFileCreated;
+        return isFileCreated;
     }
 
 
@@ -76,7 +77,7 @@ public class Storage {
      *
      * @param task task to be added to file buffer.
      */
-    void addToFileBuffer(Task task) {
+    public void addToFileBuffer(Task task) {
         String[] storageStrArr = task.toStorageStringArr();
         String joinedStorageStr = String.join(DELIMITER, storageStrArr);
         this.fileBuffer.add(joinedStorageStr);
@@ -86,7 +87,7 @@ public class Storage {
     /**
      * Writes file buffer to file.
      */
-    void writeToFile() {
+    public void writeToFile() {
         try {
             if (fileBuffer.size() > 0) {
                 if (!fileExists()) {
@@ -147,7 +148,7 @@ public class Storage {
      *
      * @return 2D array of saved tasks. Each task is given in an array of size 2.
      */
-    String[][] readFromFile() {
+    public String[][] readFromFile() {
         try {
             ArrayList<String[]> parsedLines = new ArrayList<>();
 

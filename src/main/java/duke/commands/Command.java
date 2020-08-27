@@ -1,11 +1,12 @@
-package duke.command;
+package duke.commands;
 
 public enum Command {
     LIST("list"),
     DONE("done"),
     DELETE("delete"),
     TERMINATE("terminate"),
-    TASK("task");
+    TASK("task"),
+    INVALID("invalid");
     
     private final String str;
 

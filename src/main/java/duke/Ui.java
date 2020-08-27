@@ -30,7 +30,7 @@ public class Ui {
      *
      * @return if scanner has next line.
      */
-    boolean hasNextLine() {
+    public boolean hasNextLine() {
         return sc.hasNextLine();
     }
 
@@ -40,7 +40,7 @@ public class Ui {
      *
      * @return next line of text.
      */
-    String nextLine() {
+    public String nextLine() {
         return sc.nextLine();
     }
 
@@ -48,7 +48,7 @@ public class Ui {
     /**
      * Prints start message.
      */
-    static void printStartMessage() {
+    public static void printStartMessage() {
         Ui.printSeparator();
         // System.out.println(Ui.LOGO);
         System.out.println("Hello! I'm Duke.");
@@ -62,10 +62,25 @@ public class Ui {
      *
      * @param msg message to be printed.
      */
-    void printMessage(String msg) {
+    public void printMessage(String msg) {
         Ui.printSeparator();
         System.out.println(msg);
         Ui.printSeparator();
+    }
+
+
+    public void printEmptyIndexErrorMsg(String commandStr) {
+        this.printErrorMessage(String.format("OOPS!!! The index of `%s` cannot be empty.", commandStr));
+    }
+
+
+    public void printInvalidIndexErrorMsg() {
+        this.printErrorMessage("OOPS!!! The index given is invalid.");
+    }
+
+
+    public void printErrorMessage(String errMsg) {
+        this.printMessage(errMsg);
     }
 
 

@@ -1,10 +1,10 @@
-package duke.task;
+package duke.tasks;
 
 public enum TaskType {
     TODO("todo"),
     EVENT("event"),
     DEADLINE("deadline"),
-    UNKNOWN("invalid");
+    INVALID("invalid");
 
     private final String taskKeywordStr;
 

@@ -1,6 +1,6 @@
 package duke;
 
-import duke.command.Command;
+import duke.commands.Command;
 import duke.exceptions.DukeException;
 
 import java.util.Scanner;
@@ -43,14 +43,15 @@ public class Duke {
             int index = Integer.parseInt(inputTextArr[1]);
             String statusMsg = this.taskList.markAsDone(index);
             return statusMsg;
-        } catch (NullPointerException e) {
-            // exception thrown from DukeList.markAsDone()
-            // index given in input text is invalid.
-            throw new IndexOutOfBoundsException("Invalid index given.");
+
         } catch (ArrayIndexOutOfBoundsException e) {
             // forwards ArrayIndexOutOfBoundsException from Integer.parseInt()
             // inputTextArr is invalid.
             throw new ArrayIndexOutOfBoundsException("Invalid inputTextArr.");
+        } catch (IndexOutOfBoundsException e) {
+            // exception thrown from DukeList.markAsDone()
+            // index given in input text is invalid.
+            throw new IndexOutOfBoundsException("Invalid index given.");
         }
     }
 
@@ -67,16 +68,15 @@ public class Duke {
             int index = Integer.parseInt(inputTextArr[1]);
             String statusMsg = this.taskList.delete(index);
             return statusMsg;
-        } catch (NullPointerException e) {
-            // exception thrown from DukeList.delete()
-            // index given in input text is invalid.
-            throw new IndexOutOfBoundsException("Invalid index given.");
         } catch (ArrayIndexOutOfBoundsException e) {
             // forwards ArrayIndexOutOfBoundsException from Integer.parseInt()
             // inputTextArr is invalid.
             throw new ArrayIndexOutOfBoundsException("Invalid inputTextArr.");
+        } catch (IndexOutOfBoundsException e) {
+            // exception thrown from DukeList.delete()
+            // index given in input text is invalid.
+            throw new IndexOutOfBoundsException("Invalid index given.");
         }
-
     }
 
 
@@ -85,7 +85,7 @@ public class Duke {
      */
     private void dukeLogic() {
         boolean shouldQuit = false;
-        String msgInput = "";
+        String msgInput;
 
         String[] msgArr;
         Command keyword;
@@ -100,6 +100,9 @@ public class Duke {
             case TERMINATE:
                 shouldQuit = true;
                 break;
+            case INVALID:
+                this.ui.printErrorMessage(String.format("OOPS!!! I'm sorry, but I don't know what `%s` means :-(", msgArr[0]));
+                break;
             case LIST:
                 String taskListString = this.taskList.toString();
                 this.ui.printMessage(taskListString);
@@ -109,9 +112,9 @@ public class Duke {
                     String statusMsg = this.markAsDone(msgArr);
                     this.ui.printMessage(statusMsg);
                 } catch (ArrayIndexOutOfBoundsException e) {
-                    this.printEmptyIndexErrorMsg(keyword.toString());
+                    this.ui.printEmptyIndexErrorMsg(keyword.toString());
                 } catch (IndexOutOfBoundsException e) {
-                    this.printInvalidIndexErrorMsg();
+                    this.ui.printInvalidIndexErrorMsg();
                 }
                 break;
 
@@ -120,9 +123,9 @@ public class Duke {
                     String statusMsg = this.delete(msgArr);
                     this.ui.printMessage(statusMsg);
                 } catch (ArrayIndexOutOfBoundsException e) {
-                    this.printEmptyIndexErrorMsg(keyword.toString());
+                    this.ui.printEmptyIndexErrorMsg(keyword.toString());
                 } catch (IndexOutOfBoundsException e) {
-                    this.printInvalidIndexErrorMsg();
+                    this.ui.printInvalidIndexErrorMsg();
                 }
                 break;
 
@@ -131,7 +134,7 @@ public class Duke {
                     String statusString = this.taskList.add(msgInput);
                     this.ui.printMessage(statusString);
                 } catch (DukeException e) {
-                    this.ui.printMessage(e.getMessage());
+                    this.ui.printErrorMessage(e.getMessage());
                 }
                 break;
             }
@@ -139,19 +142,7 @@ public class Duke {
     }
 
 
-    private void printEmptyIndexErrorMsg(String commandStr) {
-        this.printErrorMessage(String.format("OOPS!!! The index of `%s` cannot be empty.", commandStr));
-    }
-
-
-    private void printInvalidIndexErrorMsg() {
-        this.printErrorMessage("OOPS!!! The index given is invalid.");
-    }
-
-
-    private void printErrorMessage(String errMsg) {
-        this.ui.printMessage(errMsg);
-    }
+    
 
 
     /**

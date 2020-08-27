@@ -1,10 +1,10 @@
 package duke;
 
-import duke.task.Task;
-import duke.task.Todo;
-import duke.task.Event;
-import duke.task.Deadline;
-import duke.task.TaskType;
+import duke.tasks.Task;
+import duke.tasks.Todo;
+import duke.tasks.Event;
+import duke.tasks.Deadline;
+import duke.tasks.TaskType;
 
 import duke.exceptions.DukeException;
 import duke.exceptions.DukeInvalidCommandException;
@@ -67,7 +67,7 @@ public class DukeList {
                 formattedItemString = DukeList.getItemSubstring(strArr);
                 newTask = new Todo(formattedItemString);
                 break;
-            } catch (DukeInvalidDescriptionException e) {
+            } catch (DukeNoDescriptionException e) {
                 throw new DukeInvalidDescriptionException(String.format("OOPS!!! The description of a `%s` cannot be empty.", taskType));
             }
 
@@ -94,7 +94,8 @@ public class DukeList {
             }
 
         default:
-            throw new DukeInvalidCommandException(String.format("OOPS!!! I'm sorry, but I don't know what `%s` means :-(", taskType));
+            String invalidCommand = strArr[0];
+            throw new DukeInvalidCommandException(String.format("OOPS!!! I'm sorry, but I don't know what `%s` means :-(", invalidCommand));
         }
 
         this.list.add(newTask);
@@ -110,7 +111,7 @@ public class DukeList {
      * @return Status string to be printed.
      * @throws DukeException Duke exception.
      */
-    String add(String itemString) throws DukeException {
+    public String add(String itemString) throws DukeException {
         Task newTask = addHelper(itemString);
 
         return "Got it. I've added this task:\n" +
@@ -144,7 +145,7 @@ public class DukeList {
      * @return Status string to be printed.
      * @throws NullPointerException invalid index.
      */
-    String markAsDone(int index) throws NullPointerException {
+    public String markAsDone(int index) throws IndexOutOfBoundsException {
         Task targetTask = this.list.get(index - 1);
         targetTask.markAsDone();
 
@@ -158,9 +159,9 @@ public class DukeList {
      * @param index Index of ite to be deleted.
      *              ! This index is the printed index, not the actual index in the list.
      * @return Status string to be printed.
-     * @throws NullPointerException invalid index.
+     * @throws IndexOutOfBoundsException invalid index.
      */
-    String delete(int index) throws NullPointerException {
+    public String delete(int index) throws IndexOutOfBoundsException {
         Task removedTask = this.list.remove(index - 1);
         return "Noted. I've removed this task:\n" +
                 String.format("\t%s\n", removedTask.toString())
@@ -171,7 +172,7 @@ public class DukeList {
     /**
      * Writes tasks to file.
      */
-    void writeToFile() {
+    public void writeToFile() {
         for (Task t : this.list) {
             this.store.addToFileBuffer(t);
         }
@@ -182,7 +183,7 @@ public class DukeList {
     /**
      * Adds items that are read from file.
      */
-    void loadFromFile() {
+    public void loadFromFile() {
         String[][] parsedLines = this.store.readFromFile();
         for (String[] parsedLine : parsedLines) {
             String itemString = parsedLine[0];

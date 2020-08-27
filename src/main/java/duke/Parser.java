@@ -1,7 +1,7 @@
 package duke;
 
-import duke.command.Command;
-import duke.task.TaskType;
+import duke.commands.Command;
+import duke.tasks.TaskType;
 
 
 public class Parser {
@@ -35,8 +35,12 @@ public class Parser {
             return Command.DONE;
         case ("bye"):
             return Command.TERMINATE;
-        default:
+        case ("todo"):
+        case ("event"):
+        case ("deadline"):
             return Command.TASK;
+        default:
+            return Command.INVALID;
         }
     }
 
@@ -58,7 +62,7 @@ public class Parser {
         case ("deadline"):
             return TaskType.DEADLINE;
         default:
-            return TaskType.UNKNOWN;
+            return TaskType.INVALID;
         }
 
     }
