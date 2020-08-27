@@ -34,9 +34,10 @@ public class Duke {
                 System.out.println(e.getMessage());
             }
         }
+        ui.goodbye();
     }
 
     public static void main(String[] args) {
-        new Duke("data/duke.txt").run();
+        new Duke("src/main/java/data/duke.txt").run();
     }
 }

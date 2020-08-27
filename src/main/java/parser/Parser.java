@@ -24,9 +24,9 @@ public class Parser {
         } else if (userCommand.equals("delete")) { // Delete task
             return new DeleteCommand(inputSplit[1]);
         } else if (userCommand.equals("filter")) { // Filter taskList
-                return new FilterCommand(inputSplit[1]);
+            return new FilterCommand(inputSplit[1]);
         } else {
-            throw new DukeException(LINE + "Invalid command! \n" + LINE);
+            return new InvalidCommand();
         }
     }
 }

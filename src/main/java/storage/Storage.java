@@ -14,7 +14,7 @@ public class Storage {
     public static File file;
 
     public Storage(String filePath) {
-        file = new File("src/main/java/data/duke.txt");
+        file = new File(filePath);
     }
 
     public ArrayList<Task> load() throws DukeException {
