@@ -1,3 +1,6 @@
+/**
+ * Handles persisting task data to disk.
+ */
 package sg.christopher.duke.io;
 
 import sg.christopher.duke.entities.Task;
@@ -14,6 +17,13 @@ import java.util.List;
 public class DataManager {
     public static final File dataFile = new File("data", "data.txt");
 
+    /**
+     * Writes the task list to disk.
+     *
+     * Creates the file and it's parent folders if it doesn't exist.
+     *
+     * @param inList task list to write to disk
+     */
     public static void writeList(List<Task> inList) {
         try {
             dataFile.getParentFile().mkdirs();
@@ -29,6 +39,11 @@ public class DataManager {
         }
     }
 
+    /**
+     * Reads the task list from disk.
+     *
+     * @return task list, or null if file doesn't exist
+     */
     public static List<Task> readList() {
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(dataFile))) {
             return (List<Task>) ois.readObject();
