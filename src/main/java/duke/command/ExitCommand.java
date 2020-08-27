@@ -12,14 +12,14 @@ public class ExitCommand implements Command {
     }
     
     /**
-     * Prints out a farewell message
+     * Initiates the System shutdown for the VM
      *
      * @param tasks Current TaskList
      * @param ui    Where the User shall receive messages about the command
      */
     @Override
     public void execute(TaskList tasks, Ui ui) {
-        ui.bidFarewell();
+        System.exit(0);
     }
     
     @Override

@@ -9,6 +9,9 @@ import duke.task.ToDo;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+// todo: find a better way to assign numbers to the tasks. the current error is that after loading,
+//  Task class is restarting the counter from 0
+
 /**
  * Holds a Collection of Tasks and has methods to manipulate these Tasks, is serializable as well
  */

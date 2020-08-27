@@ -1,6 +1,7 @@
 package duke;
 
 import duke.command.Command;
+import duke.command.ExitCommand;
 import duke.exception.DukeException;
 import duke.ui.TextUi;
 import duke.ui.Ui;
@@ -13,7 +14,7 @@ import java.util.Scanner;
  * Drives the personal assistant using a UI, along with a parser to make sense of user inputs and executing commands on
  * a list of tasks that are read/written from local storage
  */
-public class Duke {
+public class Duke extends Thread {
     private TaskList tasks;
     private final Ui ui;
     private boolean canExit;
@@ -24,15 +25,25 @@ public class Duke {
      */
     public Duke() {
         // save location has been hardcoded into Storage class
+        Runtime currentRuntime = Runtime.getRuntime();
         this.ui = new TextUi();
         this.canExit = false;
         this.parser = new Parser();
         try {
             this.tasks = Storage.load();
         } catch (IOException e) {
-            ui.displayLoadError(); // todo add this error
+            this.ui.displayLoadError();
             this.tasks = new TaskList();
         }
+        
+        currentRuntime.addShutdownHook(new Thread(() -> {
+            try {
+                Storage.save(tasks);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            this.ui.bidFarewell();
+        }));
     }
     
     /**
@@ -40,7 +51,7 @@ public class Duke {
      *
      * @throws IOException If there are issues with reading/writing onto file
      */
-    public void run() throws IOException {
+    public void runDuke() throws IOException {
         Scanner sc = new Scanner(System.in);
         this.ui.greet();
         while (!canExit) {
@@ -60,7 +71,7 @@ public class Duke {
     }
     
     public static void main(String[] args) throws IOException {
-        new Duke().run();
+        new Duke().runDuke();
     }
 }
 

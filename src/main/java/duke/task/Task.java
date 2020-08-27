@@ -6,7 +6,7 @@ import java.io.Serializable;
  * Describes the Task stored by Duke; is serializable
  */
 public class Task implements Serializable {
-    private static int taskCount = 0;
+    private static int taskCount;
     private int taskID;
     private boolean completed;
     private final String description;
