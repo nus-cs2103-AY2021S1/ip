@@ -15,6 +15,16 @@ public class TaskList {
         }
     }
 
+    public void listSearch(String searchTerm) {
+        int count = 1;
+        for (int i = 0; i < tasks.size(); i++) {
+            Task task = tasks.get(i);
+            if (task.getDescription().toLowerCase().contains(searchTerm)) {
+                System.out.println(i + 1 + ". " + task.toString());
+            }
+        }
+    }
+
     public Task get(int i) {
         return tasks.get(i);
     }

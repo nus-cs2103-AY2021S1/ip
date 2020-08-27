@@ -13,7 +13,7 @@ public class Parser {
 
         String[] inputArray = textToParse.split(" ");
         String firstWord = inputArray[0];
-        Command command = null;
+        Command command = new EmptyCommand();
 
         try {
             if (firstWord.toLowerCase().equals("bye")) { // for termination
@@ -32,7 +32,12 @@ public class Parser {
                 } catch (NumberFormatException e) {
                     throw new DukeException("I need a number not a word in this case. Could ya pass that by me one more time?");
                 }
-            } else { // to add task to list
+            } else if (firstWord.toLowerCase().equals("find")) {
+                if (inputArray.length <= 1) throw new DukeException("Sorry, "
+                        + "didn't quite catch what you wanted to find!");
+                String searchTerm = stringCombiner(inputArray, 1, inputArray.length - 1).trim();
+                command = new FindCommand(searchTerm);
+            } else {
 
                 Task task;
                 int index;
@@ -74,18 +79,14 @@ public class Parser {
                         break;
                     default:
                         System.out.println("Sorry, I didn't quite catch that!");
-                        command = new EmptyCommand();
                 }
 
             }
         } catch (DukeException e) {
             System.out.println(e.toString());
         }
-        if (command != null) {
-            return command;
-        } else {
-            return new EmptyCommand();
-        }
+
+        return command;
     }
 
     private static String stringCombiner(String[] arr, int start, int end) {
