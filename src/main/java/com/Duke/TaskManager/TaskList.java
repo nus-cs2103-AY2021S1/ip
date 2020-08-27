@@ -21,8 +21,6 @@ public class TaskList {
             throw new DukeException("You don't have that many tasks");
         }else {
             ls.set(task, ls.get(task).done());
-            System.out.println("     Nice! I've marked this task as done: ");
-            System.out.println("       " + ls.get(task).toString());
         }
     }
 
@@ -44,16 +42,5 @@ public class TaskList {
         ls.add(task);
     }
 
-    public void printTask() throws DukeException{
-        if(ls.isEmpty()){
-            throw new DukeException("Sorry you have no tasks in your list.");
-        }else {
-            System.out.println("     Here are the tasks in your list:");
-            for (int i = 0; i < ls.size(); i++) {
-                int j = i + 1;
-                System.out.println("     " + j + "." + ls.get(i).toString());
-            }
-        }
-    }
 
 }
