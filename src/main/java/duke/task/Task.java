@@ -4,6 +4,9 @@ import duke.command.InvalidCommandException;
 
 import java.time.LocalDate;
 
+/**
+ * Represents a task that has a designated description and a state of whether it has been done.
+ */
 public abstract class Task {
     protected String description;
     protected boolean isDone;
