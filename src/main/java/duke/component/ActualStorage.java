@@ -9,13 +9,15 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * Represents the actual class for objects that executes reading data from and writing data into a storage file.
+ */
 public class ActualStorage implements Storage {
     private final String filePath;
     private final TaskList list;
 
     /**
-     * Creates a Storage object that can read data from and write data into a storage file, initialize the list of
-     * tasks with data in the file.
+     * Creates a Storage object, and initializes the list of tasks with data in the file.
      * @param filePath the file path holding the targeted data
      * @throws FileNotFoundException if the file is not in the given file path
      * @throws InvalidCommandException should never been thrown if the input file is well-written
