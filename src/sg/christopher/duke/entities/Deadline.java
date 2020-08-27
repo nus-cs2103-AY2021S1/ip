@@ -1,3 +1,6 @@
+/**
+ * Wrapper class for deadlines.
+ */
 package sg.christopher.duke.entities;
 
 import java.time.LocalDate;
@@ -5,6 +8,11 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 public class Deadline extends Task {
+    /**
+     * Creates a brand new Deadline task.
+     * @param description description of the task
+     * @param deadline deadline of the task
+     */
     public Deadline(String description, String deadline) {
         super(description);
         parseDeadline(deadline);
