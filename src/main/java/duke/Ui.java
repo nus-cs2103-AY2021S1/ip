@@ -19,7 +19,7 @@ public class Ui {
             + "                                  ";
 
     /**
-     * Show Duke's welcome.
+     * Shows Duke's welcome.
      */
     public static void showWelcome() {
         System.out.println("Hello I am\n" + logo + "How can I help you?");
@@ -27,8 +27,8 @@ public class Ui {
     }
 
     /**
-     * Show the given message.
-     * 
+     * Shows the given message.
+     *
      * @param message message to be shown.
      */
     public static void showMessage(String message) {
@@ -36,21 +36,21 @@ public class Ui {
     }
 
     /**
-     * Show the upper line.
+     * Shows the upper line.
      */
     public static void showUpperLine() {
         System.out.println(upperLine);
     }
 
     /**
-     * Show the lower line.
+     * Shows the lower line.
      */
     public static void showLowerLine() {
         System.out.println(lowerLine);
     }
 
     /**
-     * Show Duke's goodbye.
+     * Shows Duke's goodbye.
      */
     public static void showGoodbye() {
         System.out.println(upperLine + goodbye + "\n" + lowerLine);

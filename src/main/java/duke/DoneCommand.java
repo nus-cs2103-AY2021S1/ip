@@ -1,7 +1,7 @@
 package duke;
 
 /**
- * Mark the task of the given index to be done.
+ * Marks the task of the given index to be done.
  */
 public class DoneCommand extends Command {
     private int idx;
@@ -18,7 +18,7 @@ public class DoneCommand extends Command {
 
     @Override
     public void execute(TaskList taskList, Storage storage) throws DukeException {
-        taskList.markTaskAsDone(this.idx);
+        taskList.markTaskAsDone(idx);
         storage.writeToFile(taskList);
     }
 }

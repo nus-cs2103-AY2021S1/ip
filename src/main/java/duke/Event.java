@@ -33,16 +33,16 @@ public class Event extends Task {
     }
 
     private String dateFormat() {
-        return this.at.format(DateTimeFormatter.ofPattern("d MMMM yyyy"));
+        return at.format(DateTimeFormatter.ofPattern("d MMMM yyyy"));
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + this.dateFormat() + ")";
+        return "[E]" + super.toString() + " (at: " + dateFormat() + ")";
     }
 
     @Override
     public String writeToFile() {
-        return String.format("E | %s | %s", super.writeToFile(), this.at);
+        return String.format("E | %s | %s", super.writeToFile(), at);
     }
 }

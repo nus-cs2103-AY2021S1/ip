@@ -14,7 +14,7 @@ public class Task {
      */
     public Task(String description) {
         this.description = description;
-        this.isDone = false;
+        isDone = false;
     }
 
     /**
@@ -29,41 +29,41 @@ public class Task {
     }
 
     /**
-     * Get the status icon.
+     * Gets the status icon.
      *
      * @return return the icon according to the is done status.
      */
     public String getStatusIcon() {
-        return (this.isDone ? "\u2713" : "\u2718");
+        return (isDone ? "\u2713" : "\u2718");
     }
 
     /**
-     * Get the description of the task.
+     * Gets the description of the task.
      *
      * @return description of the task.
      */
     public String getDescription() {
-        return this.description;
+        return description;
     }
 
     /**
-     * Mark the task as done.
+     * Marks the task as done.
      */
     public void markAsDone() {
-        this.isDone = true;
+        isDone = true;
     }
 
     @Override
     public String toString() {
-        return String.format("[%s] %s", this.getStatusIcon(), this.description);
+        return String.format("[%s] %s", getStatusIcon(), description);
     }
 
     /**
-     * Format task to be written to a file.
+     * Formats task to be written to a file.
      *
      * @return formatted string of the task.
      */
     public String writeToFile() {
-        return String.format("%b | %s", this.isDone, this.description);
+        return String.format("%b | %s", isDone, description);
     }
 }

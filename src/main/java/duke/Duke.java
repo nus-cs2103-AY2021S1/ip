@@ -2,6 +2,9 @@ package duke;
 
 import java.util.Scanner;
 
+/**
+ * A task manager.
+ */
 public class Duke {
 
     private Storage storage;
@@ -9,20 +12,20 @@ public class Duke {
 
     /**
      * Duke constructor.
-     * 
+     *
      * @param filePath path of the storage file.
      */
     public Duke(String filePath) {
         try {
-            this.storage = new Storage(filePath);
-            this.taskList = new TaskList(this.storage.readFromFile());
+            storage = new Storage(filePath);
+            taskList = new TaskList(storage.readFromFile());
         } catch (DukeException e) {
             Ui.showMessage(e.getMessage());
         }
     }
 
     /**
-     * Run the Duke.
+     * Runs the Duke.
      */
     public void run() {
         Ui.showWelcome();
@@ -34,7 +37,7 @@ public class Duke {
             try {
                 Ui.showUpperLine();
                 Command next = Parser.parse(input);
-                next.execute(this.taskList, this.storage);
+                next.execute(taskList, storage);
             } catch (DukeException e) {
                 Ui.showMessage(e.getMessage());
             } finally {
@@ -43,12 +46,13 @@ public class Duke {
             }
         }
 
+        Ui.showGoodbye();
         scanner.close();
     }
 
     /**
      * Entry point of the Duke's program.
-     * 
+     *
      * @param args an array of command-line arguments for the application.
      */
     public static void main(String[] args) {

@@ -1,7 +1,7 @@
 package duke;
 
 /**
- * Show the tasklist command.
+ * Shows the task list.
  */
 public class ListCommand extends Command {
 

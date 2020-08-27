@@ -8,23 +8,27 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * Deal with the reading from and writing to a file.
+ * Deals with the reading from and writing to a file.
  */
 public class Storage {
     private File file;
 
     private enum TaskType {
         T {
+            @Override
             Todo create(String[] line) {
                 return new Todo(line[2], Boolean.parseBoolean(line[1]));
             }
 
+            @Override
             void check(String[] line) throws DukeException {
-                if (line.length != 3)
+                if (line.length != 3) {
                     throw new DukeException("The file format is wrong :((.");
+                }
             }
         },
         D {
+            @Override
             Deadline create(String[] line) {
                 try {
                     return new Deadline(line[2], LocalDate.parse(line[3]),
@@ -35,6 +39,7 @@ public class Storage {
             }
         },
         E {
+            @Override
             Event create(String[] line) {
                 try {
                     return new Event(line[2], LocalDate.parse(line[3]),
@@ -48,18 +53,21 @@ public class Storage {
         abstract Task create(String[] line);
 
         void check(String[] line) throws DukeException {
-            if (line.length != 4)
+            if (line.length != 4) {
                 throw new DukeException("The file format is wrong :((.");
+            }
         }
-    };
+    }
+
+    ;
 
     /**
      * Storage constructor.
-     * 
+     *
      * @param filePath path of the the storage file.
      */
     public Storage(String filePath) throws DukeException {
-        this.file = new File("./data/dukeFile.txt");
+        file = new File("./data/dukeFile.txt");
         file.getParentFile().mkdirs();
 
         try {
@@ -70,8 +78,8 @@ public class Storage {
     }
 
     /**
-     * Read data from the file and conver it to a list of tasks.
-     * 
+     * Reads data from the file and converts it to a list of tasks.
+     *
      * @return a list of tasks.
      * @throws DukeException can't read or convert the file to a list of tasks.
      */
@@ -107,8 +115,8 @@ public class Storage {
     }
 
     /**
-     * Write a list of tasks to the file.
-     * 
+     * Writes a list of tasks to the file.
+     *
      * @param tasks the list of tasks to be written to the file.
      * @throws DukeException failed to write the list to the file.
      */

@@ -5,7 +5,7 @@ package duke;
  */
 public abstract class Command {
     /**
-     * Execute the command.
+     * Executes the command.
      *
      * @param taskList the tasklist used for the command.
      * @param storage  the storage used for the command.

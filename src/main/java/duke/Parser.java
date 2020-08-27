@@ -7,7 +7,7 @@ import java.time.LocalDate;
  */
 public class Parser {
     private enum CommandType {
-        list, done, delete, todo, deadline, event
+        find, list, done, delete, todo, deadline, event
     }
 
     private static String parseDescription(String[] data, String timeDivider) throws DukeException {
@@ -77,6 +77,9 @@ public class Parser {
         }
 
         switch (commandEnum) {
+        case find:
+            command = new FindCommand(Parser.parseDescription(commandLine, ""));
+            break;
         case list:
             command = new ListCommand();
             break;

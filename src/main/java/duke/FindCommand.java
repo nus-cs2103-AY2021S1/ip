@@ -1,7 +1,7 @@
 package duke;
 
 /**
- * Find tasks with the given keyword.
+ * Finds tasks with the given keyword.
  */
 public class FindCommand extends Command {
     String keyword;
@@ -11,8 +11,8 @@ public class FindCommand extends Command {
      *
      * @param keyword keyword to be found.
      */
-    public FindCommand(String keyword){
-        this.keyword =keyword;
+    public FindCommand(String keyword) {
+        this.keyword = keyword;
     }
 
     @Override

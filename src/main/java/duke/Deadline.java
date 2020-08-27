@@ -33,16 +33,16 @@ public class Deadline extends Task {
     }
 
     private String dateFormat() {
-        return this.by.format(DateTimeFormatter.ofPattern("d MMMM yyyy"));
+        return by.format(DateTimeFormatter.ofPattern("d MMMM yyyy"));
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + this.dateFormat() + ")";
+        return "[D]" + super.toString() + " (by: " + dateFormat() + ")";
     }
 
     @Override
     public String writeToFile() {
-        return String.format("D | %s | %s", super.writeToFile(), this.by);
+        return String.format("D | %s | %s", super.writeToFile(), by);
     }
 }
