@@ -13,16 +13,18 @@ public class Messenger {
      * Error handling messages
       */
     public static final String INDEX_FORMAT_ERROR = "☹ OOPS!!! Seems you have provided an invalid index :-(";
-    public static final String COMMAND_UNRECOGNIZABLE_ERROR = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
+    public static final String COMMAND_UNRECOGNIZABLE_ERROR = "☹ OOPS!!! I'm sorry, "
+            + "but I don't know what that means :-(";
     public static final String EMPTY_COMMAND_ERROR = "☹ OOPS!!! The command cannot be empty!";
     public static final String SPELL_ERROR = "☹ OOPS!!! Check if you have spelled correctly!";
     public static final String EMPTY_CONTENT_ERROR = "☹ OOPS!!! Seems you forgot to supply the main content!";
-    public static final String EMPTY_TIME_ERROR = "☹ OOPS!!! Seems you forgot to supply the time!\n" +
-            "Simply add '/by <time>' for deadline OR '/at <time>' for event behind your command";
+    public static final String EMPTY_TIME_ERROR = "☹ OOPS!!! Seems you forgot to supply the time!\n"
+            + "Simply add '/by <time>' for deadline OR '/at <time>' for event behind your command";
     public static final String INDEX_OUT_OF_BOUND_ERROR = "☹ OOPS!!! Seems the index you provided is not in the list.";
     public static final String FILE_NOT_FOUND = "Couldn't find a save file. You may start adding things from start!";
     public static final String DIRECTORY_NOT_FOUND = "Couldn't find the data directory. Creating one for you...";
-    public static final String DATE_FORMAT_ERROR = "☹ OOPS!!! The format for your date is incorrect. Use yyyy-MM-dd instead";
+    public static final String DATE_FORMAT_ERROR = "☹ OOPS!!! The format for your date is incorrect. "
+            + "Use yyyy-MM-dd instead";
 
     public static String emptyDescriptionError(String command) {
         return String.format("☹ OOPS!!! The description of a %s cannot be empty.", command);
@@ -46,19 +48,33 @@ public class Messenger {
     }
 
     /**
-     * Operations messages
+     * Prints a message representing the task is done.
+     *
+     * @param task the task to be marked as done.
      */
     public static void markAsDoneMessage(Task task) {
         System.out.println("Nice! I've marked this task as done:");
         System.out.println("    " + task);
     }
 
+    /**
+     * Prints a message for adding a new task to the app.
+     *
+     * @param newTask the new task to be added in.
+     * @param size an integer representing the size of the new task.
+     */
     public static void addTaskMessage(Task newTask, int size) {
         System.out.println("Got it. I've added this task:");
         System.out.println("    " + newTask.toString());
         System.out.println(String.format("Now you have %s %s in the list.", size, (size > 1 ? "tasks" : "task")));
     }
 
+    /**
+     * Prints a message for deleting a task from the app.
+     *
+     * @param task the task that is deleted.
+     * @param size an integer representing the size of the task.
+     */
     public static void deleteTaskMessage(Task task, int size) {
         System.out.println("Noted. I've removed this task:");
         System.out.println(task);

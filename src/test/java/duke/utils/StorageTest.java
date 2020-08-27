@@ -1,14 +1,16 @@
 package duke.utils;
 
-import duke.tasks.TaskList;
-import org.junit.jupiter.api.Test;
-
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.nio.file.Files;
 import java.util.Scanner;
+
+import duke.tasks.TaskList;
+
+import org.junit.jupiter.api.Test;
+
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -29,19 +31,19 @@ class StorageTest {
         list.printList();
         recover();
 
-        String expected = "Hello from\n" +
-                " ____        _        \n" +
-                "|  _ \\ _   _| | _____ \n" +
-                "| | | | | | | |/ / _ \\\n" +
-                "| |_| | |_| |   <  __/\n" +
-                "|____/ \\__,_|_|\\_\\___|\n" +
-                "\n" +
-                "What can I do for you?\n" +
-                "Welcome back! Trying to retrieve where you were last time...\n" +
-                "Great! We have successfully loaded the data. Enjoy~\n" +
-                "Here are the tasks in your list:\n" +
-                "1.[T][✗] borrow book\n" +
-                "2.[D][✗] return book (by: Aug 23 2020)\n";
+        String expected = "Hello from\n"
+                + " ____        _        \n"
+                + "|  _ \\ _   _| | _____ \n"
+                + "| | | | | | | |/ / _ \\\n"
+                + "| |_| | |_| |   <  __/\n"
+                + "|____/ \\__,_|_|\\_\\___|\n"
+                + "\n"
+                + "What can I do for you?\n"
+                + "Welcome back! Trying to retrieve where you were last time...\n"
+                + "Great! We have successfully loaded the data. Enjoy~\n"
+                + "Here are the tasks in your list:\n"
+                + "1.[T][✗] borrow book\n"
+                + "2.[D][✗] return book (by: Aug 23 2020)\n";
 
         assertEquals(expected, outContent.toString());
 
@@ -62,9 +64,9 @@ class StorageTest {
             sb.append(sc.nextLine()).append("\n");
         }
         String actual = sb.toString();
-        String expected = "todo|borrow book\n" +
-                "deadline|return book|Aug 23 2020\n" +
-                "todo|test content\n";
+        String expected = "todo|borrow book\n"
+                + "deadline|return book|Aug 23 2020\n"
+                + "todo|test content\n";
         recover();
         assertEquals(actual, expected);
     }

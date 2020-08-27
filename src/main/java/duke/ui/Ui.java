@@ -1,10 +1,11 @@
 package duke.ui;
 
+import java.util.Scanner;
+
 import duke.exceptions.DukeException;
 import duke.tasks.TaskList;
 import duke.utils.Parser;
 
-import java.util.Scanner;
 
 public class Ui {
     private TaskList list;

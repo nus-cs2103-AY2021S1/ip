@@ -1,9 +1,10 @@
 package duke.tasks;
 
+import java.util.ArrayList;
+
 import duke.exceptions.DukeException;
 import duke.ui.Messenger;
 
-import java.util.ArrayList;
 
 /**
  * Encapsulate a class that represents a list of tasks that the user entered.

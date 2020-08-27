@@ -1,16 +1,18 @@
 package duke.utils;
 
-import duke.ui.Messenger;
-import duke.tasks.Task;
-import duke.tasks.TaskList;
-import duke.types.TaskType;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
+
+import duke.tasks.Task;
+import duke.tasks.TaskList;
+import duke.types.TaskType;
+import duke.ui.Messenger;
+
+
 
 /**
  * Encapsulates a storage class that takes charge of loading saved files and saving data to file.
@@ -77,8 +79,8 @@ public class Storage {
             FileWriter writer = new FileWriter(FILE_PATH);
 
             for (Task task : taskList.getTasks()) {
-                writer.write(task.getType() + "|" + task.getContent() +
-                        (TaskType.hasTime(task.getType()) ? "|" + task.getDate() : "") + System.lineSeparator());
+                writer.write(task.getType() + "|" + task.getContent()
+                        + (TaskType.hasTime(task.getType()) ? "|" + task.getDate() : "") + System.lineSeparator());
             }
             writer.close();
             Messenger.close();
