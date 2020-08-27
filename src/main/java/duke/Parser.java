@@ -43,8 +43,9 @@ public class Parser {
         return words;
     }
 
-    public void parse(String userCommand) throws EmptyInputException, NoResponseException {
+    public String parse(String userCommand) throws EmptyInputException, NoResponseException {
         String[] words = this.getDukeType(userCommand);
+        String DukeOutput = "";
         switch (this.currentType) {
             case DEADLINE:
                 if (words.length == 1) {
@@ -72,7 +73,7 @@ public class Parser {
                     deadlineTask = deadlineTask.trim();
                     Deadline newDeadline = new Deadline(deadlineTask, deadlineDate);
                     this.tasks.add(newDeadline);
-                    this.userInteract.showAdd(newDeadline);
+                    DukeOutput = this.userInteract.showAdd(newDeadline);
                 }
                 break;
 
@@ -90,7 +91,7 @@ public class Parser {
                     }
                     ToDo newToDo = new ToDo(todoTask);
                     this.tasks.add(newToDo);
-                    this.userInteract.showAdd(newToDo);
+                    DukeOutput = this.userInteract.showAdd(newToDo);
                 }
                 break;
 
@@ -119,29 +120,32 @@ public class Parser {
                     }
                     Event newEvent = new Event(eventTask, eventDate);
                     this.tasks.add(newEvent);
-                    this.userInteract.showAdd(newEvent);
+                    DukeOutput = this.userInteract.showAdd(newEvent);
                 }
+                break;
+
             case DONE:
                 int number = Integer.parseInt(words[1]) - 1;
-                this.userInteract.showDone(number);
+                DukeOutput = this.userInteract.showDone(number);
                 break;
 
             case DELETE:
                 int index = Integer.parseInt(words[1]) - 1;
-                this.userInteract.showDelete(index);
+                DukeOutput = this.userInteract.showDelete(index);
                 break;
 
             case LIST:
-                this.userInteract.showList();
+                DukeOutput = this.userInteract.showList();
                 break;
 
             case BYE:
                 this.isEnd = true;
-                this.userInteract.showBye();
+                DukeOutput = this.userInteract.showBye();
                 break;
 
             default:
                 throw new NoResponseException();
         }
+        return DukeOutput;
     }
 }

@@ -32,7 +32,7 @@ public class Ui {
                         "____________________________________________________________\n");
     }
 
-    public void showAdd(Task task) {
+    public String showAdd(Task task) {
 
         String DukeOutput = "____________________________________________________________\n" +
                 "     Got it. I've added this task:\n" +
@@ -40,15 +40,17 @@ public class Ui {
                 "     Now you have " + this.tasks.size() + " " + "task" + " in the list.\n" +
                 "____________________________________________________________\n";
         System.out.println(DukeOutput);
+        return DukeOutput;
 
     }
 
-    public void showDone(int index) {
+    public String showDone(int index) {
         String DukeOutput = this.tasks.get(index).markAsDone();
         System.out.println(DukeOutput);
+        return DukeOutput;
     }
 
-    public void showDelete(int index) {
+    public String showDelete(int index) {
         Task removed = this.tasks.get(index);
         this.tasks.delete(index);
         String DukeOutput = "____________________________________________________________\n" +
@@ -57,9 +59,10 @@ public class Ui {
                 "     Now you have "+ this.tasks.size() + " tasks in the list.\n" +
                 "____________________________________________________________";
         System.out.println(DukeOutput);
+        return DukeOutput;
     }
 
-    public void showList() {
+    public String showList() {
         String DukeOutput = "____________________________________________________________\n" +
                 "Here are the tasks in your list:\n";
 
@@ -70,13 +73,16 @@ public class Ui {
 
         DukeOutput = DukeOutput + "____________________________________________________________";
         System.out.println(DukeOutput);
+        return DukeOutput;
     }
 
-    public void showBye() {
+    public String showBye() {
         String DukeOutput = "____________________________________________________________\n" +
                 "       Bye. Hope to see you again soon!\n" +
                 "____________________________________________________________";
         System.out.println(DukeOutput);
+        return DukeOutput;
     }
+
 
 }
