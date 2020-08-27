@@ -29,6 +29,7 @@ public class Duke {
         FILE_PATH = java.nio.file.Paths.get(home, "data", FILE_NAME);
         try {
             java.nio.file.Files.createFile(FILE_PATH);
+            storage = new Storage(FILE_PATH);
             taskList = new TaskList();
         } catch (FileAlreadyExistsException ignored) {
             storage = new Storage(FILE_PATH);
