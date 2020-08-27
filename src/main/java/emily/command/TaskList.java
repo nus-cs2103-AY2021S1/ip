@@ -4,7 +4,10 @@ import main.java.emily.task.Task;
 
 import java.util.ArrayList;
 
-//add delete modify arraylist
+/**
+ * Modifies the arraylist of tasks and contains the most updated list
+ * of tasks
+ */
 public class TaskList {
     ArrayList<Task> store = new ArrayList<>();
 

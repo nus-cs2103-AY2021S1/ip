@@ -5,17 +5,24 @@ import main.java.emily.task.Event;
 import main.java.emily.task.Task;
 import main.java.emily.task.ToDos;
 
-//deals with making sense of the user command
+/**
+ * Deals with making sense of the user command
+ */
+
 public class Parser {
 
     Parser(){
 
     }
 
-    //convert string into proper tasks
+    /**
+     * Convert the user input string to a proper Task
+     * @param str of user input
+     * @return A new Task with the input details
+     * @throws DukeException when the user input is invalid or is not in the proper form
+     */
     public Task process(String str) throws DukeException {
         Task item = new Task("");
-
 
         try {
             if (str.contains("todo")) {
@@ -41,8 +48,6 @@ public class Parser {
                 return item;
 
             }
-
-
 
         } catch(ArrayIndexOutOfBoundsException e){
             throw new DukeException("Invalid input");
