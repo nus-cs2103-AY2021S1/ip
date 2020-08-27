@@ -19,6 +19,7 @@ public class Storage {
     /**
      * Updates the list of tasks in the storage.
      *
+     * @param list The list of tasks to be updated.
      * @throws DukeException If the file cannot be written.
      */
     public void updateList(ArrayList<Task> list) throws DukeException {

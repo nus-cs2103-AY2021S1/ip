@@ -48,6 +48,8 @@ public class Ui {
 
     /**
      * Prints out "updatedtask" messages to the user.
+     * 
+     * @param list The list of tasks.
      */
     public void updatedTask(ArrayList<Task> list) {
         System.out.println("       " + list.get(list.size() - 1));

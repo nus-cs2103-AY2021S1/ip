@@ -7,6 +7,7 @@ public class Parser {
     /**
      * Returns a type of Instrcution according to the user input.
      *
+     * @param input The input from the user.
      * @return The type of instruction.
      */
     public Instruction load(String input) {
