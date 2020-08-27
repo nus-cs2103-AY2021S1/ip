@@ -2,7 +2,6 @@
  * Represents a task with description and a boolean to signify if it is done.
  */
 public class Task {
-
     protected String description;
     protected boolean isDone;
 

@@ -24,6 +24,7 @@ public class DoneCommand extends Command {
         } else {
             tasks.doneTask(taskNumber);
             storage.overwriteFile(tasks.getTaskList());
+
             ui.showMarkedDone(tasks.getTask(taskNumber));
         }
     }

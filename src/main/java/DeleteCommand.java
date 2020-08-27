@@ -22,6 +22,7 @@ public class DeleteCommand extends Command {
             throw new DukeException("Please enter a valid task number.");
         } else {
             ui.showDeleted(tasks.getTask(taskNumber), (tasks.getNumTasks() - 1));
+
             tasks.deleteTask(taskNumber); // delete from tasklist
             storage.overwriteFile(tasks.getTaskList()); // delete from storage
         }

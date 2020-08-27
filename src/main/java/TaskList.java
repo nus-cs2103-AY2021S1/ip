@@ -5,7 +5,7 @@ import java.util.List;
  * Represents the task list of all tasks in Duke.
  */
 public class TaskList {
-    List<Task> tasks;
+    protected List<Task> tasks;
 
     public TaskList() {
         this.tasks = new ArrayList<>();

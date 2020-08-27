@@ -2,7 +2,6 @@
  * Represents a command that can be executed.
  */
 abstract class Command {
-
     /**
      * Execute the command that user calls.
      * @param tasks Task list of all tasks.
@@ -13,5 +12,4 @@ abstract class Command {
     abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
 
     abstract boolean isExit();
-
 }

@@ -2,7 +2,6 @@
  * Represents a command to list current items in tasks list.
  */
 public class ListCommand extends Command {
-
     /**
      * Executes command to print out all tasks in the tasks list, or notify an empty task list.
      * @param tasks Task list of all tasks.
@@ -14,6 +13,7 @@ public class ListCommand extends Command {
             ui.showEmptyTaskList();
         } else {
             String tasksList = "";
+
             for (int i = 0; i < tasks.getNumTasks(); i++) {
                 if (i == 0) {
                     tasksList = " 1. " + tasks.getTask(i + 1);
@@ -21,6 +21,7 @@ public class ListCommand extends Command {
                     tasksList = tasksList + "\n " + (i + 1) + ". " + tasks.getTask(i + 1);
                 }
             }
+
             ui.showTaskList(tasksList);
         }
     }

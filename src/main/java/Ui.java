@@ -45,9 +45,8 @@ public class Ui {
      * @param numTasks Updated number of tasks.
      */
     public void showAdded(Task task, int numTasks) {
-        System.out.println("Got it. I've added this task:\n    " +
-                task +
-                "\n Now you have " + numTasks + " task(s) in the list.");
+        System.out.println("Got it. I've added this task:\n    " + task
+                + "\n Now you have " + numTasks + " task(s) in the list.");
     }
 
     /**
@@ -56,9 +55,8 @@ public class Ui {
      * @param numTasks Updated number of tasks.
      */
     public void showDeleted(Task task, int numTasks) {
-        System.out.println("Noted. I've removed this task:\n    " +
-                task +
-                "\n Now you have " + numTasks + " task(s) in the list.");
+        System.out.println("Noted. I've removed this task:\n    " + task
+                + "\n Now you have " + numTasks + " task(s) in the list.");
     }
 
     /**
