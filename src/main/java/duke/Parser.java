@@ -56,7 +56,7 @@ public class Parser {
             } else {
                 date = ((MonthDay) result).atYear(Year.now().getValue());
             }
-        } catch(DateTimeParseException e) {
+        } catch (DateTimeParseException e) {
             throw new DukeException("Unable to parse date.\n \n"
                     + "Please input your date in one of the following formats:\n"
                     + "26/08\n" + "26/08/20\n" + "26/08/2020");
@@ -78,7 +78,7 @@ public class Parser {
         if (!timeStr.isBlank()) {
             try {
                 time = timeFormatter.parse(timeStr, LocalTime::from);
-            } catch(DateTimeParseException e) {
+            } catch (DateTimeParseException e) {
                 throw new DukeException("Unable to parse time.\n \n"
                         + "Please input your time in one of the following formats:\n"
                         + "1:19\n" + "1:19 AM");
