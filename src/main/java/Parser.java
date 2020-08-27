@@ -5,11 +5,13 @@ public class Parser {
     public Parser(){}
 
     // TODO: 20/8/20 CHANGE ALL MATCHES TO matcher.find 
-    public Task parseAdd(String echo) throws DukeException {
+    public Pair<TaskType, ArrayList<String>> parseAdd(String echo) throws DukeException {
         if (echo.matches("(?i)^todo.*")) {
             if (echo.matches("(?i)^todo\\s+\\S+.*")) {
                 String text = echo.replaceFirst("(?i)^todo\\s*", "");
-                return new ToDo(text);
+                ArrayList<String> boxed = new ArrayList<>();
+                boxed.add(text);
+                return new Pair<TaskType, ArrayList<String>>(TaskType.TODO, boxed);
             } else if (echo.matches("(?i)^todo\\s*")) {
                 throw new DukeException("Please put a description to your task.");
             } else {
@@ -17,8 +19,9 @@ public class Parser {
             }
         } else if (echo.matches("(?i)^deadline.*")) {
             if (echo.matches("(?i)^deadline\\s+\\S+.*\\s+\\/by\\s+\\S+.*")) {
-                String[] res = echo.replaceFirst("(?i)deadline\\s+", "").strip().split("(?i)/by", 2);
-                return new Deadline(res[0], res[1]);
+                String[] res = echo.replaceFirst("(?i)deadline\\s+", "").strip().split("(?i)/by\\s+", 2);
+                ArrayList<String> boxed = new ArrayList<String>(Arrays.asList(res));
+                return new Pair<TaskType, ArrayList<String>>(TaskType.DEADLINE, boxed);
             } else {
                 String[] badText = echo.split("\\s+", 2);
                 if (badText.length == 1) {
@@ -34,8 +37,9 @@ public class Parser {
             // TODO: 20/8/20 errors: no by, no space inbetween, no desc, no date
         } else if (echo.matches("(?i)^event.*")) {
             if (echo.matches("(?i)^event\\s+\\S+.*\\s+\\/at\\s+\\S+.*")) {
-                String[] res = echo.replaceFirst("(?i)event\\s+", "").strip().split("(?i)/at", 2);
-                return new Event(res[0], res[1]);
+                String[] res = echo.replaceFirst("(?i)event\\s+", "").strip().split("(?i)/at\\s+", 2);
+                ArrayList<String> boxed = new ArrayList<String>(Arrays.asList(res));
+                return new Pair<TaskType, ArrayList<String>>(TaskType.EVENT, boxed);
             } else {
                 String[] badText = echo.split("\\s+", 2);
                 if (badText.length == 1) {
