@@ -2,11 +2,11 @@ import java.util.ArrayList;
 
 public class TaskList {
 
-    protected final ArrayList<Task> tasks;
+    protected final ArrayList<Task> TASKS;
 
     // constructor
     public TaskList(ArrayList<Task> tasks) {
-        this.tasks = tasks;
+        this.TASKS = tasks;
     }
 
     /*
@@ -14,19 +14,19 @@ public class TaskList {
      helper function
     */
     public void addTask(Task t) {
-        this.tasks.add(t);
+        this.TASKS.add(t);
     }
 
     // this function deletes the task per requested by the user
     public void deleteTask(int taskNumber) {
-        Task t = this.tasks.get(taskNumber);
-        this.tasks.remove(taskNumber);
+        Task t = this.TASKS.get(taskNumber);
+        this.TASKS.remove(taskNumber);
         System.out.println("       " + t.toString());
     }
 
     // this function prints the task that is completed
     public void done(int taskNumber) {
-        Task t = this.tasks.get(taskNumber);
+        Task t = this.TASKS.get(taskNumber);
         t.markAsDone();
     }
 

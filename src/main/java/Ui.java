@@ -76,6 +76,7 @@ public class Ui {
 
     public void doneCommandSuccessMessage(int taskNumber, Task t) {
         System.out.println("     Nice! I've marked this task as done: ");
+
         if (t instanceof Event) {
             System.out.println("       " + taskNumber + ". "+ ((Event)t).toString());
         } else if (t instanceof Deadline) {
@@ -103,6 +104,7 @@ public class Ui {
 
     public void deleteCommandSuccessMessage(int taskNumber, Task t) {
         System.out.println("     Noted. I've removed this task: ");
+
         if (t instanceof Event) {
             System.out.println("       " + taskNumber + ". "+ ((Event)t).toString());
         } else if (t instanceof Deadline) {

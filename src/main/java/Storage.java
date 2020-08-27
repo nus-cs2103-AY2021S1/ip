@@ -10,21 +10,23 @@ import java.util.List;
 
 public class Storage {
 
-    protected final File taskFile;
+    protected final File TASKFILE;
     protected String createResult = "";
 
     // constructor
     public Storage(String filePath) {
-        this.taskFile = new File(filePath);
+
+        this.TASKFILE = new File(filePath);
+
         try {
-            if (taskFile.createNewFile()) {
+            if (TASKFILE.createNewFile()) {
                 // if a tasks.txt file does not exist, we create a file so that we can read from it in the future
                 this.createResult = "     Duke has noticed that you do not have a text file to store your tasks!\n" +
                 "     As such, Duke has created an empty file, ready to store your tasks!\n" +
-                "     This text file can be found at: " + taskFile.getAbsolutePath();
+                "     This text file can be found at: " + TASKFILE.getAbsolutePath();
             } else {
                 this.createResult = "     Duke has noticed that you have a text file to store your tasks!\n" +
-                "     Duke is currently reading the file from: " + taskFile.getAbsolutePath();
+                "     Duke is currently reading the file from: " + TASKFILE.getAbsolutePath();
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -33,9 +35,11 @@ public class Storage {
 
     // writes the list of tasks into the file
     public void write(ArrayList<Task> tasks) {
+
         try {
             // create a FileWriter object used by Duke to write to the taskFile
-            FileWriter writeTaskFile = new FileWriter(this.taskFile);
+            FileWriter writeTaskFile = new FileWriter(this.TASKFILE);
+
             for (Task task : tasks) {
                 if (task instanceof Event) {
 
@@ -45,9 +49,7 @@ public class Storage {
                             String.format("%02d", ((Event)task).time.getMinute());
                     writeTaskFile.write("event" + " " + task.description + " " + "/by" + " " + day + " " + time +
                             " " + task.isDone + System.lineSeparator());
-
                 } else if (task instanceof Deadline) {
-
                     String day = ((Deadline)task).date.getDayOfMonth() + "/" + ((Deadline)task).date.getMonthValue() +
                             "/" + ((Deadline)task).date.getYear();
                     String time = String.format("%02d", ((Deadline)task).time.getHour()) +
@@ -55,7 +57,6 @@ public class Storage {
 
                     writeTaskFile.write("deadline" + " " + task.description + " " + "/by" + " " + day + " " + time +
                             " " + task.isDone + System.lineSeparator());
-
                 } else if (task instanceof ToDo) {
                     writeTaskFile.write("todo" + " " + task.description + " " + task.isDone +
                             System.lineSeparator());
@@ -64,15 +65,14 @@ public class Storage {
             }
             writeTaskFile.close();
 
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
     // reads the file contents into the provided list of tasks
     public void read(ArrayList<Task> tasks) {
-        Path filePath = Paths.get(taskFile.getAbsolutePath());
+        Path filePath = Paths.get(TASKFILE.getAbsolutePath());
 
         try {
             List<String> taskList = Files.readAllLines(filePath);
