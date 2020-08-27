@@ -1,4 +1,8 @@
 package duke.Task;
+
+/**
+ * Todo task that takes in a description.
+ */
 public class Todo extends Task {
 
     public Todo(String task) {

@@ -1,4 +1,9 @@
 package duke.Task;
+
+/**
+ * Abstract class Task that provides basic functionality to the other Task objects
+ * that extends from it.
+ */
 public abstract class Task {
 
     boolean done;

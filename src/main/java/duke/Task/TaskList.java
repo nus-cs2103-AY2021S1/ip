@@ -2,6 +2,11 @@ package duke.Task;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * TaskList class is used to store different Task objects and
+ * allows the user to modify the list of tasks through
+ * this class.
+ */
 public class TaskList {
 
     private List<Task> list;
@@ -18,6 +23,12 @@ public class TaskList {
         return this.list;
     }
 
+    /**
+     * Adds a Task to the list.
+     * @param item Task object to be added on to the list.
+     * @return String result that describes the item added
+     * if successful.
+     */
     public String addItem(Task item) {
         if (item == null) {
             return "Task is null! Nothing was added.";
@@ -32,6 +43,12 @@ public class TaskList {
                 this.activeTasks + "\nCompleted Tasks: " + this.completedTasks;
     }
 
+    /**
+     * Deletes a Task from the list.
+     * @param index The index of the Task object to be deleted.
+     * @return String result that describes the deleted Task
+     * if successful.
+     */
     public String deleteItem(int index) {
         if (index >= this.list.size() || index < 0) {
             return "Please choose a valid task to delete";
@@ -43,6 +60,12 @@ public class TaskList {
                 this.activeTasks + "\nCompleted Tasks: " + this.completedTasks;
     }
 
+    /**
+     * Marks a Task as completed.
+     * @param index The index of the Task object to be marked as done.
+     * @return String result that describes the completed Task
+     * if successful.
+     */
     public String markDone(int index) {
         if (index >= this.list.size() || index < 0) {
             return "Please choose a valid task to mark as done";
@@ -56,6 +79,11 @@ public class TaskList {
         return "The task is already done!";
     }
 
+    /**
+     * Marks a Task as not completed.
+     * @param index The index of the Task object to be marked as not done.
+     * @return String result that describes the uncompleted Task if successful.
+     */
     public String revertDone(int index) {
         if (index >= this.list.size() || index < 0) {
             return "Please choose a valid task to mark as not done";
@@ -69,6 +97,12 @@ public class TaskList {
         return "The task is not yet done!";
     }
 
+    /**
+     * Custom toString representation of a TaskList which provides a view of the
+     * current Tasks in the list along with additional information such as
+     * number of active tasks and completed tasks.
+     * @return String representation of current Tasks in the list.
+     */
     @Override
     public String toString() {
         if (this.list.size() == 0) {

@@ -12,6 +12,9 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Storage class is used to interact with the File System and gather the save data from the last use session.
+ */
 public class Storage {
     private String currentDir = System.getProperty("user.dir");
     private Path dataDir = Paths.get(currentDir, "src", "main", "data");
@@ -19,14 +22,26 @@ public class Storage {
 
     private static final Pattern pattern = Pattern.compile("^\\[(.)]\\s\\[(.)]\\s(.*?)(?:\\s/..\\s(.*))?$");
 
+    /**
+     * Checks if the /data directory exists.
+     * @return True if it exists, False otherwise.
+     */
     private boolean dirExists() {
         return Files.exists(dataDir);
     }
 
+    /**
+     * Checks if the /data/list.txt file exists.
+     * @return True if it exists, False otherwise.
+     */
     private boolean fileExists() {
         return Files.exists(fileDir);
     }
 
+    /**
+     * Private method to create the list.txt file in the /data directory.
+     * @return list.txt File
+     */
     private File createFile() {
         File newFile = new File(dataDir.toString(), "list.txt");
         System.out.println("Creating File...");
@@ -39,6 +54,11 @@ public class Storage {
         return null;
     }
 
+    /**
+     * Private method that gets the list.txt file if present, else a new
+     * file is created.
+     * @return list.txt File
+     */
     private File getFile() {
         if (fileExists()) {
             return fileDir.toFile();
@@ -50,6 +70,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Updates the list.txt File with the current list. If list.txt file is not
+     * present, a new file is created.
+     * @param list The TaskList that is used to update the list.
+     * @return True if update is successful, False otherwise.
+     */
     public boolean updateFile(TaskList list) {
         try {
             System.out.println("Saving changes...");
@@ -64,10 +90,15 @@ public class Storage {
             return true;
         } catch (IOException e) {
             e.printStackTrace();
+            System.out.println("Something went wrong during saving!");
             return false;
         }
     }
 
+    /**
+     * Gets the TaskList that has been saved in list.txt File.
+     * @return TaskList.
+     */
     public TaskList getList() {
         try {
             TaskList list = new TaskList();
