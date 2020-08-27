@@ -106,6 +106,13 @@ public class Duke {
                 tasks.remove(c - 1);
                 System.out.println("Now you have " + tasks.getSize() + " tasks in the list.");
             }
+            else if(cmd.length() >= 4 && cmd.substring(0, 4).equals("find")) {
+                String tmp = cmd.substring(5);
+                System.out.println("Here are the matching tasks in your list:");
+                for(int i = 1; i <= tasks.getSize(); ++i) if(tasks.get(i - 1).description.contains(tmp)){
+                    System.out.println(i + "." + tasks.get(i - 1).getStatus());
+                }
+            }
             else System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             storage.updateDataFile(tasks.getArrayList());
         }
