@@ -1,4 +1,4 @@
-public class DukeException {
+public class DukeException extends Exception {
     protected String input;
     
     DukeException(String input) {
