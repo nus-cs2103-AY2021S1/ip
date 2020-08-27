@@ -18,7 +18,11 @@ public class Task implements Serializable {
     public String getDescription() {
         return description;
     }
-
+    
+    public boolean isDone() {
+        return isDone;
+    }
+    
     public void setDone() {
         this.isDone = true;
     }
