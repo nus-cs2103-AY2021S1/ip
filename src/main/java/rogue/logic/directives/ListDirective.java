@@ -8,7 +8,18 @@ import rogue.model.task.Task;
 
 import rogue.logic.Report;
 
+/**
+ * Lists all stored {@code Task} within the {@code TaskList}.
+ */
 public class ListDirective implements Executable {
+    /**
+     * Lists the {@code Task} in the {@code TaskList}.
+     *
+     * @param storage   An instance of {@code Storage}.
+     * @param tasks     The {@code TaskList} from which {@code Task} should be listed.
+     * @param ui        An instance of {@code Ui}.
+     * @return A {@code Report} with a list of {@code Task}
+     */
     @Override
     public Report execute(Storage storage, TaskList tasks, Ui ui) {
         StringBuilder builder = new StringBuilder();
