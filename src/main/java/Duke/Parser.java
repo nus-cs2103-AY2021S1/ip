@@ -1,3 +1,8 @@
+package Duke;
+
+import Duke.Command.*;
+import Duke.Exception.*;
+
 import java.io.IOException;
 
 public class Parser {

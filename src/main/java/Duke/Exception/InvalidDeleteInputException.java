@@ -1,3 +1,5 @@
+package Duke.Exception;
+
 public class InvalidDeleteInputException extends DukeException {
 
     public InvalidDeleteInputException() {

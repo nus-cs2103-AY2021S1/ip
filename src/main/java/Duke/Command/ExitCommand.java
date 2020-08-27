@@ -1,3 +1,7 @@
+package Duke.Command;
+
+import Duke.*;
+
 public class ExitCommand extends Command {
     @Override
     public boolean isExited() {

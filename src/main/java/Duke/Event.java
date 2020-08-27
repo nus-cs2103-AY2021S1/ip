@@ -1,3 +1,7 @@
+package Duke;
+
+import Duke.Exception.*;
+
 public class Event extends Task {
 
     private final DateAndTime datetime;

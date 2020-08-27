@@ -1,7 +1,9 @@
-import java.io.FileNotFoundException;
+package Duke;
+
+import Duke.Command.*;
+import Duke.Exception.*;
+
 import java.io.IOException;
-import java.util.Scanner;
-import java.util.ArrayList;
 
 /**
  * Duke class that contains the main logic for the chat bot DUKE.

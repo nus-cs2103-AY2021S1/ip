@@ -1,3 +1,7 @@
+package Duke;
+
+import Duke.Exception.*;
+
 import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.Scanner;

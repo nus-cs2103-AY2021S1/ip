@@ -1,3 +1,7 @@
+package Duke;
+
+import Duke.Exception.*;
+
 public class Deadline extends Task {
 
     private final DateAndTime datetime;

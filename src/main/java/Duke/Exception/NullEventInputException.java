@@ -1,3 +1,5 @@
+package Duke.Exception;
+
 public class NullEventInputException extends DukeException {
 
     public NullEventInputException() {

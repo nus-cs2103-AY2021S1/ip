@@ -1,3 +1,8 @@
+package Duke.Command;
+
+import Duke.*;
+import Duke.Exception.*;
+
 import java.io.IOException;
 
 public class DeadlineCommand extends Command {
