@@ -27,7 +27,7 @@ public class TodoCommand implements Command {
      * @throws EmptyDescriptionException
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, String input) throws InvalidTaskIdException, EmptyDescriptionException {
+    public void execute(TaskList taskList, Ui ui, String input) throws EmptyDescriptionException {
         String description = Parser.parseTodo(input);
         Task task = new Todo(description);
         taskList.add(task);

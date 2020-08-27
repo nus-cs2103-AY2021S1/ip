@@ -28,7 +28,7 @@ public class EventCommand implements Command {
      * @throws InvalidFormatException
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, String input) throws InvalidTaskIdException, EmptyDescriptionException, InvalidFormatException {
+    public void execute(TaskList taskList, Ui ui, String input) throws EmptyDescriptionException, InvalidFormatException {
         String[] details = Parser.parseEvent(input);
         String title = details[0];
         String at = details[1];

@@ -28,7 +28,7 @@ public class DeadlineCommand implements Command {
      * @throws InvalidFormatException
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, String input) throws InvalidTaskIdException, EmptyDescriptionException, InvalidFormatException {
+    public void execute(TaskList taskList, Ui ui, String input) throws EmptyDescriptionException, InvalidFormatException {
         String[] details = Parser.parseDeadline(input);
         String title = details[0];
         String by = details[1];
