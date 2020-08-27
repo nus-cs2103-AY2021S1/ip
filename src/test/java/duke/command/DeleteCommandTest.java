@@ -1,6 +1,7 @@
 package duke.command;
 
 import duke.DukeStub;
+import duke.data.DukeTaskListSideEffects;
 import duke.exception.InvalidIndexException;
 import duke.task.Task;
 import duke.ui.UIPrint;
@@ -14,6 +15,8 @@ public class DeleteCommandTest {
 
     private final DukeStub dukeStub = new DukeStub();
 
+    private DukeTaskListSideEffects taskListSideEffects = DukeTaskListSideEffects.getInstance();
+
     @Test
     public void constructorTest() {
         try {
@@ -26,13 +29,13 @@ public class DeleteCommandTest {
     @Test
     public void execute_normalInput_taskDeleted() {
         String normalInput = "1";
-        Task taskToBeDeleted = dukeStub.taskList.tasks.get(0);
 
         try {
             command.execute(normalInput, dukeStub);
-            if (dukeStub.taskList.tasks.contains(taskToBeDeleted)) {
-                fail("task not deleted");
-            }
+
+            assertEquals(true, taskListSideEffects.deleteTask);
+
+            taskListSideEffects.reset();
         } catch (Exception exception) {
             fail(exception.getMessage());
         }

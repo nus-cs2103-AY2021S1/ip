@@ -25,8 +25,8 @@ public class DoneCommandTest {
 
     @Test
     public void execute_normalInput_taskMarkedAsDone() {
-        String normalInput = "2";
-        Task taskToBeMarked = dukeStub.taskList.tasks.get(1);
+        String normalInput = "1";
+        Task taskToBeMarked = dukeStub.taskList.getTask(0);
 
         try {
             command.execute(normalInput, dukeStub);

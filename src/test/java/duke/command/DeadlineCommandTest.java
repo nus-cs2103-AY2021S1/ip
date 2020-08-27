@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.data.DukeTaskListSideEffects;
 import duke.ui.UiSideEffects;
 import duke.exception.IncorrectFormatException;
 import duke.DukeStub;
@@ -16,6 +17,8 @@ public class DeadlineCommandTest {
 
     private UiSideEffects uiSideEffects = UiSideEffects.getInstance();
 
+    private DukeTaskListSideEffects taskListSideEffects = DukeTaskListSideEffects.getInstance();
+
     @Test
     public void constructorTest() {
         try {
@@ -28,14 +31,14 @@ public class DeadlineCommandTest {
     @Test
     public void execute_normalInput_taskAdded() {
         String normalInput = "return book /by 12:33:01";
-        int currentTaskListSize = dukeStub.taskList.tasks.size();
 
         try {
             command.execute(normalInput, dukeStub);
 
-            assertEquals(currentTaskListSize + 1, dukeStub.taskList.tasks.size());
+            assertEquals(true, taskListSideEffects.addTask);
             assertEquals(true, uiSideEffects.uiReportNewTask);
 
+            taskListSideEffects.reset();
             uiSideEffects.reset();
         } catch (Exception exception) {
             fail(exception.getMessage());
