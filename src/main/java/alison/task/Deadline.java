@@ -1,12 +1,13 @@
 package alison.task;
 
 import alison.exception.AlisonException;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
 
-    protected String by;
+    private String by;
     private LocalDate ddl = null;
 
     public Deadline(String description, String by) {

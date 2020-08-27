@@ -2,11 +2,13 @@ package alison.command;
 
 import alison.exception.AlisonException;
 import alison.task.Task;
-import alison.tool.*;
+import alison.tool.Storage;
+import alison.tool.TaskList;
+import alison.tool.Ui;
 
 public class DeleteCommand extends Command {
 
-    public int index;
+    private int index;
 
     public DeleteCommand(int i) {
         index = i;
