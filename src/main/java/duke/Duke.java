@@ -25,7 +25,7 @@ public class Duke {
 
                 switch (split[0]) {
                 case "list":
-                    ui.printTasks(tasks);
+                    ui.printTasks(tasks, false);
                     break;
                 case "done":
                     tasks.markTaskAsDone(Integer.parseInt(split[1]) - 1);
@@ -37,6 +37,10 @@ public class Duke {
                     break;
                 case "delete":
                     tasks.deleteTask(Integer.parseInt(split[1]) - 1);
+                    break;
+                case "find":
+                    ui.printTasks(tasks.findTask(split[1]), true);
+
                     break;
                 default:
                     throw new DukeException("\tApologies! I do not understand what that means :')");

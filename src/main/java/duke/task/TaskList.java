@@ -1,6 +1,8 @@
-package duke.task; 
+package duke.task;
 
+import java.util.ArrayList;
 import java.util.List;
+
 import duke.DukeException;
 import duke.util.Parser;
 
@@ -88,8 +90,18 @@ public class TaskList {
         }
     }
 
+    public TaskList findTask(String taskKeyword) {
+        List<Task> matchedTasks = new ArrayList<>();
+
+        for (Task task : this.tasks) {
+            if (task.getDescription().contains(taskKeyword)) {
+                matchedTasks.add(task);
+            }
+        }
+        return new TaskList(matchedTasks);
+    }
+
     public List<Task> getTasks() {
         return this.tasks;
     }
-
 }
