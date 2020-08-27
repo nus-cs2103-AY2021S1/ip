@@ -1,6 +1,4 @@
-/**
- * Enumeration of all valid commands by user.
- */
-public enum Command {
-    LIST, DONE, TODO, DEADLINE, EVENT, DELETE, BYE;
+abstract class Command {
+    abstract public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
+    abstract public boolean isExit();
 }

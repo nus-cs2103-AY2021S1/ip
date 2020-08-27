@@ -1,0 +1,8 @@
+D | 1 | deadline | 2020-09-10
+E | 1 | event | 2019-10-22
+E | 1 | event | 2019-10-22
+T | 0 | todo sth
+T | 0 | todo sth
+E | 0 | haha | 2999-10-22
+T | 0 | aa
+D | 0 | lala | 2020-10-10
