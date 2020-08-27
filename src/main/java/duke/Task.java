@@ -5,11 +5,11 @@ package duke;
  */
 public class Task {
     protected String taskname;
-    protected boolean status;
+    protected boolean isDone;
 
-    public Task(String taskname, boolean status) {
+    public Task(String taskname, boolean isDone) {
         this.taskname = taskname;
-        this.status = status;
+        this.isDone = isDone;
     }
 
     /**
@@ -18,14 +18,14 @@ public class Task {
      * @return The status icon.
      */
     protected String getStatusIcon() {
-        return (status ? "\u2713" : "\u2718");
+        return (isDone ? "\u2713" : "\u2718");
     }
 
     /**
      * Marks a certain task as done
      */
     protected void markAsDone() {
-        this.status = true;
+        this.isDone = true;
     }
 
     /**
