@@ -52,16 +52,9 @@ public class Ui {
     }
 
     public void printListOfTasks(ArrayList<Task> userTasks) {
-        int count = 1;
         System.out.println(SERVANT_SPEAK
                 + "    Here are your tasks your Majesty:");
-        for (Task i : userTasks) {
-            System.out.println("    "
-                    + count + ". "
-                    + i.toString());
-            count++;
-        }
-        System.out.println();
+        System.out.println(new TaskList(userTasks).toString());
     }
 
     public void printMarkAsDoneMessage(String task) {
