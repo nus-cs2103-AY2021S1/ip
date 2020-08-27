@@ -119,7 +119,7 @@ public class Storage {
      */
     public void writeToSaveFile() {
         StringBuilder data = new StringBuilder();
-        for (Task task: this.taskList.getTaskList()) {
+        for (Task task : this.taskList.getTaskList()) {
             data.append(task.getData()).append("\n");
         }
 
