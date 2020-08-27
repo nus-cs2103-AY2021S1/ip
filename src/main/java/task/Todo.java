@@ -9,7 +9,7 @@ public class Todo extends Task{
     @Override
     public String encode() {
         String encoded = "todo " + item;
-        if(this.done){
+        if(this.isDone){
             encoded = encoded + "\n" + "done";
         }
         return encoded;

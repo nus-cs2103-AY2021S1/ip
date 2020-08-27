@@ -6,7 +6,7 @@ public class Ui {
     // Interactions with the user! :D
     // All the printing tasks
     private Scanner scanner;
-    private static final String logo = " ____        _        \n"
+    private static final String LOGO = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
@@ -16,7 +16,7 @@ public class Ui {
         scanner = new Scanner(System.in);
     }
     public static void printWelcome(){
-        System.out.println("Hello from\n" + logo);
+        System.out.println("Hello from\n" + LOGO);
         System.out.println("What can I do for you today?");
         printLineSeparator();
     }

@@ -4,9 +4,9 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class Event extends Task{
-    String time;
-    LocalDate dateTime;
-    boolean isParsedDate;
+    private String time;
+    private LocalDate dateTime;
+    private boolean isParsedDate;
 
     public Event(String line) throws EmptyStringException{
         super();
@@ -31,7 +31,7 @@ public class Event extends Task{
     @Override
     public String encode() {
         String encoded = "event " + item + " /at " + time;
-        if(this.done){
+        if(this.isDone){
             encoded = encoded + "\n" + "done";
         }
         return encoded;

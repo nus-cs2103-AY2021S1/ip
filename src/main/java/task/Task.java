@@ -2,11 +2,11 @@ package task;
 
 public abstract class Task {
     protected String item;
-    protected boolean done;
+    protected boolean isDone;
     protected String taskType;
     protected Task(){
         this.item = "";
-        this.done = false;
+        this.isDone = false;
         this.taskType = "-";
     }
 
@@ -19,7 +19,7 @@ public abstract class Task {
     }
 
     public void setDone() {
-        done = true;
+        isDone = true;
     }
     public abstract String encode();
 
@@ -27,7 +27,7 @@ public abstract class Task {
     public String toString() {
         String typeString = "[" + taskType + "]";
         String doneString = "";
-        if(done){
+        if(isDone){
             doneString = "[✓]";
         }
         else{
