@@ -101,7 +101,7 @@ public class Alison {
                     if (contentAndTime.length == 1) {
                         printWithBorder(" ☹ OOPS!!! You must provide a date " +
                                 "after '/by' for a deadline. \n" +
-                                "(i.e. deadline return book /by Sunday)");
+                                "(i.e. deadline return book /by 2020-01-01)");
                     } else {
                         Deadline ddl = new Deadline(contentAndTime[0], contentAndTime[1]);
                         taskList.add(ddl);
