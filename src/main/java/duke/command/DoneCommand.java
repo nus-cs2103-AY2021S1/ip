@@ -2,6 +2,9 @@ package duke.command;
 
 import duke.component.*;
 
+/**
+ * Represents a command for marking a task as done.
+ */
 public class DoneCommand extends Command {
     /**
      * Creates a command for marking tasks as done.
