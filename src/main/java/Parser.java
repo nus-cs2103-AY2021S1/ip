@@ -1,7 +1,18 @@
 package main.java;
 
+/**
+ * The parser deals with making sense of the user command
+ *
+ * @author Lio
+ */
 public class Parser {
-
+    /**
+     * Parses the user input into a command that the chatbot can understand
+     *
+     * @param fullCommand The user's command
+     * @return A Command Object
+     * @throws Exception If the command is invalid
+     */
     public static Command parse(String fullCommand) throws Exception {
         String[] splitCommand = fullCommand.split(" ", 2);
         String[] params;

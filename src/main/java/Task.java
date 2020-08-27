@@ -1,18 +1,34 @@
 package main.java;
 
-import java.util.Arrays;
-
+/**
+ * Tasks are items that need to be done
+ *
+ * @author Lio
+ */
 class Task {
     String name;
     boolean done = false;
 
+    /**
+     * Constructor
+     *
+     * @param name Name of the task
+     */
     public Task(String name) {
         this.name = name;
     }
 
+    /**
+     * Constructs a task from data form
+     *
+     * @param data Data form of the task
+     * @return Task
+     * @throws Exception If the data structure is invalid
+     */
     public static Task fromData(String data) throws Exception {
         String[] params = data.split(" \\| ");
         Task task;
+
         switch (params[0]) {
         case "T":
             task = new Todo(params[2]);
@@ -31,6 +47,9 @@ class Task {
         return task;
     }
 
+    /**
+     * Converts the task to data form
+     */
     public String toData() {
         return done + " | " + name;
     }
