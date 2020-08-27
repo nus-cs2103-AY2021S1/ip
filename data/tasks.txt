@@ -1,0 +1,2 @@
+[T][✗] borrow book
+[T][✗] save time

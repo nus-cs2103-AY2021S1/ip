@@ -1,13 +1,22 @@
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
+    private static String TASKS_PATHNAME = "data/tasks.txt";
+
     public static void main(String[] args) {
         greet();
-        run();
+        try {
+            run();
+        } catch(IOException e) {
+            System.err.println(e);
+        }
     }
 
-    public static void greet(){
+    public static void greet() {
         String logo = "____________________________________________________________\n"
                 /*+ " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -20,17 +29,47 @@ public class Duke {
         System.out.println(logo);
     }
 
-    public static void run(){
-        Scanner sc = new Scanner(System.in);
+    public static void run() throws IOException, SecurityException {
+        File tasks = new File(TASKS_PATHNAME);
+
+        if(tasks.getParentFile() != null){
+            tasks.getParentFile().mkdirs();
+        }
+        tasks.createNewFile();
+
+        Scanner sc = new Scanner(tasks);
+        ArrayList<Task> list = new ArrayList<>();
+        String task, taskString;
+        TaskType taskType;
+        boolean isDone;
+        while(sc.hasNext()) {
+                task = sc.nextLine();
+                if(task.charAt(1) == 'T') {
+                    taskType = TaskType.TODO;
+                }
+                else if(task.charAt(1) == 'D') {
+                    taskType = TaskType.DEADLINE;
+                }
+                else {
+                    taskType = TaskType.EVENT;
+                }
+
+                if(task.charAt(4) == '✓') {
+                    isDone = true;
+                }
+                else {
+                    isDone = false;
+                }
+                taskString = task.substring(6);
+                list.add(new Task(taskType, isDone, taskString));
+        }
+
+        sc = new Scanner(System.in);
         boolean isRunning = true;
         String input;
-        String[] strings;
-        ArrayList<Task> list = new ArrayList<>();
-        Task task;
-        int num, index;
-        while(isRunning){
+        while(isRunning) {
             input = sc.nextLine();
-
+            printLine();
             if(input.equals("list")){
                 list(list);
             }
@@ -53,9 +92,13 @@ public class Duke {
             else if(getWord(input).equals("delete")) {
                 delete(input, list);
             }
+            else if(getWord(input).equals("save")){
+                save(list);
+            }
             else{
                 error();
             }
+            printLine();
         }
     }
 
@@ -69,25 +112,20 @@ public class Duke {
     }
 
     public static void list(ArrayList<Task> list){
-        printLine();
         Task task;
         System.out.println("Here are the tasks in your list:");
         for(int i = 1; i <= list.size(); i++){
             task = list.get(i-1);
             System.out.println(i + "." + task.getTypeString() + task.getDoneString() + task.getString());
         }
-        printLine();
     }
 
     public static boolean bye(){
-        printLine();
         System.out.println("Bye. Hope to see you again soon!");
-        printLine();
         return false;
     }
 
     public static void todo(String input, ArrayList<Task> list){
-        printLine();
         input = input.substring(4);
         if(input.isEmpty()){
             System.out.println("☹ OOPS!!! The description of a todo cannot be empty.");
@@ -99,12 +137,10 @@ public class Duke {
             System.out.println(" " + task.getTypeString() + task.getDoneString() + input);
             System.out.println("Now you have " + list.size() + " tasks in the list.");
         }
-        printLine();
     }
 
     public static void deadline(String input, ArrayList<Task> list){
         input = input.substring(8);
-        printLine();
         if(input.isEmpty()){
             System.out.println("☹ OOPS!!! The description of a deadline cannot be empty.");
         }else {
@@ -122,12 +158,10 @@ public class Duke {
                 System.out.println("Now you have " + list.size() + " tasks in the list.");
             }
         }
-        printLine();
     }
 
     public static void event(String input, ArrayList<Task> list){
         input = input.substring(5);
-        printLine();
         if(input.isEmpty()){
             System.out.println("☹ OOPS!!! The description of a event cannot be empty.");
         }else {
@@ -145,12 +179,10 @@ public class Duke {
                 System.out.println("Now you have " + list.size() + " tasks in the list.");
             }
         }
-        printLine();
     }
 
     public static void done(String input, ArrayList<Task> list){
         input = input.substring(4);
-        printLine();
         if(input.isEmpty()){
             System.out.println("☹ OOPS!!! Please indicate which task is done.");
         }else{
@@ -179,12 +211,10 @@ public class Duke {
                 System.out.println("☹ OOPS!!! Incorrect entry for finished task.");
             }
         }
-        printLine();
     }
 
     public static void delete(String input, ArrayList<Task> list){
         input = input.substring(6);
-        printLine();
         if(input.isEmpty()){
             System.out.println("☹ OOPS!!! Please indicate which task is done.");
         }else{
@@ -212,7 +242,6 @@ public class Duke {
                 System.out.println("☹ OOPS!!! Incorrect entry for finished task.");
             }
         }
-        printLine();
     }
 
     public static void printLine(){
@@ -220,9 +249,20 @@ public class Duke {
     }
 
     public static void error(){
-        printLine();
         System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
-        printLine();
+    }
+
+    public static void save(ArrayList<Task> list) throws IOException {
+        FileWriter fileWriter = new FileWriter(TASKS_PATHNAME);
+        Task task;
+
+        for(int listIndex = 0; listIndex < list.size(); listIndex++){
+            task = list.get(listIndex);
+            fileWriter.write( task.getTypeString() + task.getDoneString() + task.getString() + System.lineSeparator());
+        }
+        fileWriter.close();
+
+        System.out.println("Tasks have been saved! ");
     }
 }
 class Task{
