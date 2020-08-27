@@ -111,4 +111,18 @@ public class Ui {
             System.out.println("       " + taskNumber + ". "+ ((ToDo)t).toString());
         }
     }
+
+    public void findResultMessage(ArrayList<Task> results, String query) {
+        if (results.size() == 0) {
+            System.out.println("     ☹ OOPS!!! I'm sorry, but I didn't find anything that matches \"" + query +
+                "\" :-(");
+        } else {
+            System.out.println("     Here's what i found: ");
+            int counter = 1;
+            for (Task t : results) {
+                System.out.println(counter + "." + t.toString());
+                counter++;
+            }
+        }
+    }
 }
