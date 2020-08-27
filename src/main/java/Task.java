@@ -21,6 +21,10 @@ public abstract class Task {
     }
     
     public abstract String generateSaveFileData();
+    
+    public String getDesc() {
+        return desc;
+    }
 
     @Override
     public String toString() {

@@ -11,6 +11,8 @@ public class Parser {
         } else if (input.startsWith("done")) {
             int indexOfDoneTask = Integer.parseInt(input.substring(5));
             return new DoneCommand(indexOfDoneTask);
+        } else if (input.startsWith("find")) {
+            return new FindCommand(input.substring(5));
         } else if (input.startsWith("todo")) {
             if (input.length() <= 5) {
                 throw new ToDoException();
