@@ -14,7 +14,7 @@ public class Ui {
     /**
      * UI line divider
      */
-    public static final String DIVIDER = "-----------------------------------------------\n";
+    public static final String DIVIDER = "------------------------------------------------\n";
 
     /**
      * Introduction message
