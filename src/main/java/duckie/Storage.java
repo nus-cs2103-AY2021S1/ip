@@ -16,13 +16,26 @@ import duckie.exception.*;
 import duckie.Ui;
 import duckie.task.*;
 
+/**
+ * Deals with the stored duckie file in the HardDrive
+ */
 public class Storage {
     private String filePath;
 
+    /**
+     * Instantiate a Storage object
+     * @param filePath Path of duckie.txt
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Opens the duckie file from the harddrive
+     * Creates the file and directory if cannot be found
+     * @return File containing the saved tasks
+     * @throws DuckieException
+     */
     public File openFile() throws DuckieException {
         try {
             File duckieFile = new File(this.filePath);
@@ -48,6 +61,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Load the duckie file and generate the ArrayList containing the tasks
+     * @return ArrayList containing all the saved tasks
+     * @throws DuckieException
+     */
     public ArrayList<Task> load() throws DuckieException {
         File duckieFile = openFile();
         ArrayList<Task> lst = new ArrayList<>();
@@ -103,6 +121,11 @@ public class Storage {
         return lst;
     }
 
+    /**
+     * Update the current tasks in the TaskList to the duckie file
+     * @param lst List containing all the current tasks
+     * @throws DuckieException
+     */
     public void saveToFile(ArrayList<Task> lst) throws DuckieException {
         try {
             FileWriter fw = new FileWriter(filePath);
