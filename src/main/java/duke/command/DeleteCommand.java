@@ -1,6 +1,7 @@
 package duke.command;
 
 import duke.DukeException;
+import duke.ExceptionTypeEnum;
 import duke.storage.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
@@ -23,11 +24,8 @@ public class DeleteCommand implements Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        if(index < 0) {
-            throw new DukeException("That is not a valid item number.");
-        }
-        if(index >= tasks.size()) {
-            throw new DukeException("There are only " + tasks.size() +  " item(s) in the list, try entering a valid item number");
+        if(index < 0 || index <= tasks.size()) {
+            throw new DukeException(ExceptionTypeEnum.INVALID_ITEM_NUMBER);
         }
 
         Task task = tasks.get(index);

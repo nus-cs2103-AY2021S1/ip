@@ -1,6 +1,7 @@
 package duke.command;
 
 import duke.DukeException;
+import duke.ExceptionTypeEnum;
 import duke.storage.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
@@ -23,15 +24,13 @@ public class DoneCommand implements Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        if(index < 0) {
-            throw new DukeException("That is not a valid item number.");
+        if(index < 0 || index >= tasks.size()) {
+            throw new DukeException(ExceptionTypeEnum.INVALID_ITEM_NUMBER);
         }
-        if(index >= tasks.size()) {
-            throw new DukeException("There are only " + tasks.size() +  " items in the list, try entering a valid item number.");
-        }
+
         Task task = tasks.get(index);
         if(task.isDone) {
-            throw new DukeException("The task \'" + task.getDescription() + "\' has already been marked as done.");
+            throw new DukeException(ExceptionTypeEnum.ITEM_ALREADY_DONE);
         }
         task.markAsDone();
         ui.print("Nice, I've marked this task as done:", "\t" + task.toString());

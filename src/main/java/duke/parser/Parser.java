@@ -3,6 +3,7 @@ package duke.parser;
 import java.time.LocalDate;
 
 import duke.DukeException;
+import duke.ExceptionTypeEnum;
 import duke.command.*;
 import duke.task.*;
 
@@ -29,25 +30,25 @@ public class Parser {
         switch (command) {
         case "list":
             if (remainingText != null) {
-                throw new DukeException("Did you mean to say \'list\'?");
+                throw new DukeException(ExceptionTypeEnum.INCORRECT_LIST);
             }
             return new ListCommand();
 
         case "todo":
             if (remainingText == null) {
-                throw new DukeException("The description for a task cannot be empty.");
+                throw new DukeException(ExceptionTypeEnum.MISSING_TODO_DESCRIPTION);
             }
             task = new TodoTask(remainingText);
             return new AddCommand(task);
 
         case "deadline":
             if (remainingText == null) {
-                throw new DukeException("The description for a task cannot be empty.");
+                throw new DukeException(ExceptionTypeEnum.MISSING_DEADLINE_DESCRIPTION);
             }
             taskItems = remainingText.split(" /by ");
             description = taskItems[0].trim();
             if (taskItems.length == 1) {
-                throw new DukeException("The date for a deadline cannot be empty.");
+                throw new DukeException(ExceptionTypeEnum.MISSING_DEADLINE_DATE);
             }
             LocalDate by = LocalDate.parse(taskItems[1].trim());
             task = new DeadlineTask(description, by);
@@ -55,12 +56,12 @@ public class Parser {
 
         case "event":
             if (remainingText == null) {
-                throw new DukeException("The description for a task cannot be empty.");
+                throw new DukeException(ExceptionTypeEnum.MISSING_EVENT_DESCRIPTION);
             }
             taskItems = remainingText.split(" /at ");
             description = taskItems[0].trim();
             if (taskItems.length == 1) {
-                throw new DukeException("The date for an event cannot be empty.");
+                throw new DukeException(ExceptionTypeEnum.MISSING_EVENT_DATE);
             }
             LocalDate at = LocalDate.parse(taskItems[1].trim());
             task = new EventTask(description, at);
@@ -68,26 +69,26 @@ public class Parser {
 
         case "done":
             if (remainingText == null) {
-                throw new DukeException("Please specify an item number.");
+                throw new DukeException(ExceptionTypeEnum.MISSING_DONE_ITEM);
             }
             index = Integer.parseInt(remainingText) - 1;
             return new DoneCommand(index);
 
         case "delete":
             if (remainingText == null) {
-                throw new DukeException("Please specify an item number.");
+                throw new DukeException(ExceptionTypeEnum.MISSING_DELETE_ITEM);
             }
             index = Integer.parseInt(remainingText) - 1;
             return new DeleteCommand(index);
 
         case "bye":
             if (remainingText != null) {
-                throw new DukeException("Did you mean to say \'bye\'?");
+                throw new DukeException(ExceptionTypeEnum.INCORRECT_BYE);
             }
             return new ByeCommand();
 
         default:
-            throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
+            throw new DukeException(ExceptionTypeEnum.UNKNOWN_COMMAND);
         }
     }
 }
