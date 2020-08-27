@@ -1,7 +1,7 @@
 package com.Duke.DataManager;
 
-import com.Duke.ProcessManager.DukeException;
-import com.Duke.ProcessManager.TaskList;
+import com.Duke.TaskManager.DukeException;
+import com.Duke.TaskManager.TaskList;
 import com.Duke.Tasks.Deadline;
 import com.Duke.Tasks.Event;
 import com.Duke.Tasks.Task;

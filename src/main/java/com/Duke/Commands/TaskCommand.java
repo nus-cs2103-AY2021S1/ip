@@ -1,8 +1,8 @@
 package com.Duke.Commands;
 
-import com.Duke.ProcessManager.DukeException;
-import com.Duke.ProcessManager.TaskList;
-import com.Duke.ProcessManager.UI;
+import com.Duke.TaskManager.DukeException;
+import com.Duke.TaskManager.TaskList;
+import com.Duke.TaskManager.UI;
 import com.Duke.Tasks.Task;
 
 public class TaskCommand extends Command{

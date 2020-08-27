@@ -1,7 +1,7 @@
 package com.Duke.Commands;
 
-import com.Duke.ProcessManager.TaskList;
-import com.Duke.ProcessManager.UI;
+import com.Duke.TaskManager.TaskList;
+import com.Duke.TaskManager.UI;
 import com.Duke.Tasks.ToDo;
 
 public class ToDoCommand extends Command{

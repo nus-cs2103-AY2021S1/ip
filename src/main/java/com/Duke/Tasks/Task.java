@@ -1,6 +1,6 @@
 package com.Duke.Tasks;
 
-import com.Duke.ProcessManager.DukeException;
+import com.Duke.TaskManager.DukeException;
 
 public class Task {
     //This class manages the information of each task within Dukes Task List

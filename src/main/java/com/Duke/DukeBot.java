@@ -2,9 +2,9 @@ package com.Duke;
 
 import com.Duke.Commands.*;
 import com.Duke.DataManager.Storage;
-import com.Duke.ProcessManager.DukeParser;
-import com.Duke.ProcessManager.TaskList;
-import com.Duke.ProcessManager.UI;
+import com.Duke.TaskManager.DukeParser;
+import com.Duke.TaskManager.TaskList;
+import com.Duke.TaskManager.UI;
 
 import java.util.Scanner;
 

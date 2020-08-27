@@ -1,6 +1,6 @@
 package com.Duke.Tasks;
 
-import com.Duke.ProcessManager.DukeException;
+import com.Duke.TaskManager.DukeException;
 
 public final class ToDo extends Task{
 
