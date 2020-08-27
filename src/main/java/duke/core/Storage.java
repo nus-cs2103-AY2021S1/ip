@@ -14,17 +14,33 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * An object used to load and save the user's task list during startup and termination of the Duke programme.
+ */
 public class Storage {
 
     File saveData;
     String filePath;
     String dirPath;
 
+    /**
+     * Public constructor to create a Storage object.
+     * @param filePath the path to the saveData.txt file that stores the user's past task list
+     * @param dirPath the path to the folder where the saveData.txt is found
+     */
     public Storage(String filePath, String dirPath) {
         this.filePath = filePath;
         this.dirPath = dirPath;
     }
 
+    /**
+     * Loads old task list data if it exists, and creates the necessary directories and file if it does not exist.
+     * The path and name of the save data file to find or create depends on the file path and directory path
+     * specified in the construction of this Storage object.
+     * If any line in the save data is in an incorrect format
+     * the data will not be loaded and an error message will be displayed.
+     * @return an ArrayList of Task objects that is used
+     */
     public ArrayList<Task> loadData() {
         ArrayList<Task> tasks = new ArrayList<>();
         saveData = new File(filePath);
@@ -75,6 +91,12 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Saves the current task list data onto a text file in the path specified during the construction
+     * of the Storage object.
+     * @param taskList an ArrayList of Task objects that become saved as text in a text file
+     * @see Task
+     */
     public void saveData(ArrayList<Task> taskList) {
         BufferedWriter saveWriter = null;
         try {

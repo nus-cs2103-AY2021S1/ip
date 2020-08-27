@@ -3,6 +3,13 @@ package duke.core;
 import duke.command.Command;
 import java.io.File;
 
+/**
+ * The Duke programme implements an application that works as task tracker productivity tool.
+ * It can track things to do, deadlines and events as well as their status - done or not yet done.
+ * Users input text commands, and the programme will parse it and generate an appropriate response.
+ * The programme terminates after the Ui object within is deactivated
+ * @see Ui
+ */
 public class Duke {
 
     private Ui ui;
@@ -29,7 +36,7 @@ public class Duke {
         storage.saveData(taskList.exportTaskList());
     }
 
-    public Duke(String filePath, String dirPath) {
+    private Duke(String filePath, String dirPath) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"

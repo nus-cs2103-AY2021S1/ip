@@ -4,10 +4,17 @@ import duke.task.Task;
 
 import java.util.ArrayList;
 
+/**
+ * Encapsulates an ArrayList of Task objects and handles the tracking of tasks during the usage of the
+ * Duke programme.
+ */
 public class TaskList {
 
     private ArrayList<Task> tasks = new ArrayList<>();
 
+    /**
+     * No-argument method that prints out the current tasks in this TaskList sequentially.
+     */
     public void list() {
         for (int i = 0; i < tasks.size(); i++) {
             Task task = tasks.get(i);
@@ -19,10 +26,22 @@ public class TaskList {
         return tasks.get(i);
     }
 
+    /**
+     * No-argument method that returns the ArrayList of Task objects in this TaskList.
+     * This is used by a Storage object to save the task list during the termination of the Duke programme.
+     * @return the ArrayList of Task objects in this TaskList
+     * @see Storage
+     */
     public ArrayList<Task> exportTaskList() {
         return tasks;
     }
 
+    /**
+     * This method is used to add tasks from an ArrayList of Task objects created by the Storage object
+     * when it reads from saveData.txt to this TaskList object.
+     * @param savedTasks an ArrayList of Task objects to be added to this TaskList object's ArrayList
+     * @see Storage
+     */
     public void loadTasks(ArrayList<Task> savedTasks) {
         if (!savedTasks.isEmpty()) tasks.addAll(savedTasks);
     }

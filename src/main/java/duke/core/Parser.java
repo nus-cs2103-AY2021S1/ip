@@ -7,8 +7,20 @@ import duke.task.Task;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
+/**
+ * An object used to parse user input given during the usage of the Duke programme.
+ */
 public class Parser {
 
+    /**
+     * Returns an appropriate Command object that corresponds to the textToParse.
+     * If the format of the textToParse is invalid, an appropriate error message will be printed and the user can
+     * try again.
+     * @param textToParse a String that represents the user input that is given by the Ui object
+     * @return an appropriate command based on the first word of the textToParse
+     * @see Ui
+     * @see Command
+     */
     public Command parse(String textToParse) {
 
         String[] inputArray = textToParse.split(" ");
