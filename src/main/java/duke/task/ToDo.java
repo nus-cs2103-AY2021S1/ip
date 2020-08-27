@@ -1,5 +1,8 @@
 package duke.task;
 
+/**
+ * Represents a todo task that contains a description.
+ */
 public class ToDo extends Task {
     /**
      * Creates a ToDo task.
