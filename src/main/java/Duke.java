@@ -45,19 +45,6 @@ public class Duke {
         System.out.println(LINE);
     }
 
-    /*
-     this function takes in the input from the user and adds it to the list of tasks Duke is tracking
-     helper function
-    */
-    public static void addTask(Task t, ArrayList<Task> tasks) {
-        tasks.add(t);
-        System.out.println(LINE);
-        System.out.println("     Got it. I've added this task: ");
-        System.out.println("     " + t.toString());
-        System.out.println("     Now you have " + tasks.size() + " tasks in the list.");
-        System.out.println(LINE);
-    }
-
     // this function lists the list of tasks Duke is tracking
     public static void list(ArrayList<Task> tasks) {
         int counter = 1;
@@ -206,6 +193,8 @@ public class Duke {
         File taskFile = new File("src/main/java/tasks.txt"); // relative path
         initializeFile(taskFile, tasks);
 
+        TaskList taskList = new TaskList(tasks);
+
         /*
          this field is used to keep track of whether the user has called the "bye" command
          if the user has called the "bye command", this field is set to true and Duke will terminate
@@ -252,7 +241,8 @@ public class Duke {
                     continue;
                 } catch (MissingNumberFromCommandException e) {
                     System.out.println(LINE);
-                    System.out.println("     ☹ OOPS!!! Please type in the \"done\" command followed by a valid task number.");
+                    System.out.println("     ☹ OOPS!!! Please type in the \"done\" command followed by a valid task " +
+                            "number.");
                     System.out.println(LINE);
                     continue;
                 } catch (NumberFormatException | InvalidNumberFromDoneCommandException e) {
@@ -282,7 +272,7 @@ public class Duke {
                             throw new MissingInfoException();
                         }
                         Event e = new Event(split[0], split[1], false);
-                        addTask(e, tasks);
+                        taskList.addTask(e);
                         sc.reset();
                         updateFile(tasks, taskFile);
                         continue;
@@ -322,8 +312,8 @@ public class Duke {
                         if (split.length != 2 || timeSeparated.length != 2) {
                             throw new MissingInfoException();
                         }
-                        Deadline e = new Deadline(split[0], split[1], false);
-                        addTask(e, tasks);
+                        Deadline d = new Deadline(split[0], split[1], false);
+                        taskList.addTask(d);
                         sc.reset();
                         updateFile(tasks, taskFile);
                         continue;
@@ -354,7 +344,7 @@ public class Duke {
                         throw new MissingDescriptionException();
                     }
                     ToDo t = new ToDo(task, false);
-                    addTask(t, tasks);
+                    taskList.addTask(t);
                     updateFile(tasks, taskFile);
                     continue;
                 } catch (MissingDescriptionException e) {
