@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -73,7 +75,11 @@ public class Duke {
                                 throw new DukeException("I'm gonna need a description for this here event!");
                             if (eventSplit.length == 1)
                                 throw new DukeException("I'm gonna need a date or time for this!");
-                            task = new Event(stringCombiner(inputArray, 1, index - 1), eventSplit[1]);
+                            try {
+                                task = new Event(stringCombiner(inputArray, 1, index - 1), LocalDate.parse(eventSplit[1].trim()));
+                            } catch (DateTimeParseException e) {
+                                throw new DukeException("Can't seem to make out this date over here");
+                            }
                             break;
                         case "deadline":
                             String[] deadlineSplit = input.split("/by");
@@ -83,7 +89,11 @@ public class Duke {
                                 throw new DukeException("I'm gonna need a description for this here deadline!");
                             if (deadlineSplit.length == 1)
                                 throw new DukeException("I'm gonna need a date or time for this!");
-                            task = new Deadline(stringCombiner(inputArray, 1, index - 1), deadlineSplit[1]);
+                            try {
+                                task = new Deadline(stringCombiner(inputArray, 1, index - 1), LocalDate.parse(deadlineSplit[1].trim()));
+                            } catch (DateTimeParseException e) {
+                                throw new DukeException("Can't seem to make out this date over here");
+                            }
                             break;
                         default:
                             throw new DukeException("Sorry, I didn't quite catch that!");
