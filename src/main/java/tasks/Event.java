@@ -7,6 +7,11 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Represents an event, consisting of a description and a time.
+ * Throws InvalidDescriptionException or InvalidTimeException if
+ * the description or time provided is blank.
+ */
 public class Event extends Task {
 
     private final String time;
@@ -45,6 +50,12 @@ public class Event extends Task {
         }
     }
 
+    /**
+     * Returns the string that represents the event.
+     *
+     * @return the string consisting of the tag,
+     * done status, description and time
+     */
     @Override
     public String toString() {
         return this.formattedDateTime == null
@@ -56,6 +67,12 @@ public class Event extends Task {
                     this.formattedDateTime.format(DateTimeFormatter.ofPattern("MMM d yyyy, hh:mm a")) + ")";
     }
 
+    /**
+     * Returns the string that represents the event in a database.
+     *
+     * @return the string consisting of the tag,
+     * done status, description and time
+     */
     @Override
     public String databaseString() {
         return "E | " + super.databaseString() + " | " + this.time;

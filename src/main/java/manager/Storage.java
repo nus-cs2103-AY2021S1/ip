@@ -13,11 +13,21 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Represents a platform enabling storage, which stores
+ * and retrieves the task list from the hard disk.
+ */
 public class Storage {
 
     private String pathname;
     private File dataFile;
 
+    /**
+     * Initializes the database. If database file does not exist,
+     * creates a new directory consisting of that file and
+     * returns the Storage object. Else, only returns the Storage object.
+     * @return database created through Storage object
+     */
     public static Storage initializeDatabase() {
         return new Storage().initialize();
     }
@@ -37,6 +47,10 @@ public class Storage {
         return this;
     }
 
+    /**
+     * Retrieves the task list from the database file.
+     * @return task list retrieved
+     */
     public List<Task> retrieveTaskList() {
         List<Task> taskList = new ArrayList<>();
         try {
@@ -52,6 +66,10 @@ public class Storage {
         return taskList;
     }
 
+    /**
+     * List out the saved tasks from the specified task list.
+     * @param taskList as specified
+     */
     public void listSavedTasks(List<Task> taskList) {
         System.out.println("Here are your saved tasks:");
         for (int i = 0; i < taskList.size(); i++) {
@@ -59,6 +77,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Creates the saved task from the string input of a database
+     * @param string input of task
+     * @return task created from input string
+     */
     public Task createSavedTask(String string) {
         String[] words = string.split(" \\| ");
         String taskType = words[0];
@@ -76,6 +99,10 @@ public class Storage {
         return null;
     }
 
+    /**
+     * Updates the database file to save task list for storage.
+     * @param taskList to be saved
+     */
     public void updateDatabase(List<Task> taskList) {
         StringBuilder sb = new StringBuilder();
         for (Task task : taskList) {
