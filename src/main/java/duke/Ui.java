@@ -2,6 +2,9 @@ package duke;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 import duke.task.Task;
 import duke.task.ToDo;
@@ -16,8 +19,8 @@ import duke.task.Deadline;
  */
 public class Ui {
 
-    public static final String LINE = "    ____________________________________________________________\n";
-    private static DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy/MM/dd HHmm");
+    private static final String LINE = "    ____________________________________________________________\n";
+    private static List<String> dateFormats = Arrays.asList("yyyy/MM/dd HHmm", "y/M/d HHmm", "y-M-d HHmm");
 
     private Scanner sc;
 
@@ -85,7 +88,6 @@ public class Ui {
         return new ToDo(detail);
     }
 
-
     /**
      * Return the event the user specified.
      * @return A event with the details and date given by user.
@@ -100,7 +102,10 @@ public class Ui {
             throw new DukeException("Oops! You need to include both detail and time.");
         }
         String detail = arr[0].trim();
-        LocalDateTime date = LocalDateTime.parse(arr[1].trim(), df);
+        LocalDateTime date = parseDate(arr[1].trim());
+        if (date == null) {
+            throw new DukeException("Oops! Format of date and time might be wrong.");
+        }
         return new Event(detail, date);
     }
 
@@ -118,7 +123,10 @@ public class Ui {
             throw new DukeException("Oops! You need to include both detail and time.");
         }
         String detail = arr[0].trim();
-        LocalDateTime date = LocalDateTime.parse(arr[1].trim(), df);
+        LocalDateTime date = parseDate(arr[1].trim());
+        if (date == null) {
+            throw new DukeException("Oops! Format of date and time might be wrong.");
+        }
         return new Deadline(detail, date);
     }
 
@@ -148,7 +156,30 @@ public class Ui {
                 + LINE);
     }
 
+    /**
+     * Get the keyword from user input.
+     * @return Keyword to search for.
+     */
     public String getKeyword() {
         return sc.nextLine().trim();
+    }
+
+    /**
+     * Prints the text given.
+     * @param text Text to be printed.
+     */
+    public void print(String text) {
+        System.out.println(LINE + text + LINE);
+    }
+
+    private LocalDateTime parseDate(String dateString) {
+        for (String format : dateFormats) {
+            try {
+                return LocalDateTime.parse(dateString, DateTimeFormatter.ofPattern(format));
+            } catch (DateTimeParseException e) {
+
+            }
+        }
+        return null;
     }
 }

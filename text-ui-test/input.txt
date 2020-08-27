@@ -2,12 +2,12 @@ todo borrow book
 list
 todo
 deadline return book /by 2020/08/30 2359
-event project meeting /at 2020/09/01 1400
+event project meeting /at 2020-9-1 1400
 list
 event group project
 done 2
 list
-find project
+find project meeting
 find book
 find homework
 delete 2

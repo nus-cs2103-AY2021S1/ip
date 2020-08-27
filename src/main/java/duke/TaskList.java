@@ -22,16 +22,16 @@ public class TaskList {
         this.list = list;
     }
 
-    /** Print out all the tasks in the task list. */
-    public void list() {
+    /** Return string representation all the tasks in the task list. */
+    public String list() {
         Iterator<Task> iterator = list.iterator();
         int count = 0;
-        System.out.println(Ui.LINE + "    Here are the tasks in your list:");
+        String result = "    Here are the tasks in your list:\n";
         while (iterator.hasNext()) {
             count++;
-            System.out.println("    " + count + ". " + iterator.next().toString());
+            result += "    " + count + ". " + iterator.next().toString() + "\n";
         }
-        System.out.println(Ui.LINE);
+        return result;
     }
 
     /**
@@ -70,20 +70,20 @@ public class TaskList {
     }
 
     /**
-     * Prints out all tasks with the specified keyword.
+     * Return string representation of tasks with the specified keyword.
      * @param keyword Keyword to be searched.
      */
-    public void find(String keyword) {
+    public String find(String keyword) {
         List<Task> filteredList = list.stream()
                 .filter(t -> t.getDetails().contains(keyword))
                 .collect(Collectors.toList());
         Iterator<Task> iterator = filteredList.iterator();
         int count = 0;
-        System.out.println(Ui.LINE + "    Here are the matching tasks in your list:");
+        String result = "    Here are the matching tasks in your list:\n";
         while (iterator.hasNext()) {
             count++;
-            System.out.println("    " + count + ". " + iterator.next().toString());
+            result += "    " + count + ". " + iterator.next().toString() + "\n";
         }
-        System.out.println(Ui.LINE);
+        return result;
     }
 }
