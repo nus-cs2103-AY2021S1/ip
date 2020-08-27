@@ -10,7 +10,20 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Storage class handles saving and leading tasks to and from
+ * files saved in the hard disk. A storage object is able to read
+ * file paths independent of OS.
+ * If directory or file is not found, a Storage object will handle
+ * it by creating a new directory or file when required.
+ */
 public class Storage {
+    /**
+     * Returns tasks stored as a String.
+     *
+     * @param taskList
+     * @return ArrayList<Task> list of tasks
+     */
     // Loop through every task and transform it into a string file format
     public String listToString(ArrayList<Task> taskList) {
         String taskListStr = "";
@@ -20,6 +33,11 @@ public class Storage {
         return taskListStr;
     }
 
+    /**
+     * Saves list of tasks as a text file on the hard drive.
+     *
+     * @param userTasks
+     */
     public void saveToFile(ArrayList<Task> userTasks) {
         // Check if data folder exists, if not create
         Path folderPath = Paths.get("..", "..", "..", "data");
@@ -41,6 +59,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Reads tasks from text file in hard drive
+     * and returns them as a list.
+     *
+     * @return ArrayList<Task> list of tasks read from file
+     */
     public ArrayList<Task> readFromFile() {
         // Check if data folder exists, if not create
         Path folderPath = Paths.get("..", "..", "..", "data");
