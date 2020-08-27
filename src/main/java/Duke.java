@@ -2,6 +2,8 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -41,25 +43,29 @@ public class Duke {
                 System.out.println("A regular! The usual, I presume?\n" + "I've still got your order history, care to take a look?");
                 Scanner saveReader = new Scanner(saveData);
                 while (saveReader.hasNextLine()) {
-                    String saveEntry = saveReader.nextLine();
-                    String[] keywords = saveEntry.split(":");
-                    Task savedTask = null;
-                    switch (keywords[0]) {
-                        case "T":
-                            savedTask = new Todo(keywords[2]);
-                            break;
-                        case "D":
-                            savedTask = new Deadline(keywords[2], keywords[3]);
-                            break;
-                        case "E":
-                            savedTask = new Event(keywords[2], keywords[3]);
-                            break;
-                        default:
-                            break;
-                    }
-                    if (savedTask != null) {
-                        if (keywords[1].equals("y")) savedTask.markAsDone();
-                        taskList.add(savedTask);
+                    try {
+                        String saveEntry = saveReader.nextLine();
+                        String[] keywords = saveEntry.split(":");
+                        Task savedTask = null;
+                        switch (keywords[0]) {
+                            case "T":
+                                savedTask = new Todo(keywords[2]);
+                                break;
+                            case "D":
+                                savedTask = new Deadline(keywords[2], LocalDate.parse(keywords[3]));
+                                break;
+                            case "E":
+                                savedTask = new Event(keywords[2], LocalDate.parse(keywords[3]));
+                                break;
+                            default:
+                                break;
+                        }
+                        if (savedTask != null) {
+                            if (keywords[1].equals("y")) savedTask.markAsDone();
+                            taskList.add(savedTask);
+                        }
+                    } catch (DateTimeParseException e) {
+                        System.out.println("Looks like some of your records got messed up! Sorry 'bout that!");
                     }
                 }
             }
@@ -124,7 +130,11 @@ public class Duke {
                                 throw new DukeException("I'm gonna need a description for this here event!");
                             if (eventSplit.length == 1)
                                 throw new DukeException("I'm gonna need a date or time for this!");
-                            task = new Event(stringCombiner(inputArray, 1, index - 1).trim(), eventSplit[1].trim());
+                            try {
+                                task = new Event(stringCombiner(inputArray, 1, index - 1).trim(), LocalDate.parse(eventSplit[1].trim()));
+                            } catch (DateTimeParseException e) {
+                                throw new DukeException("Can't seem to make out this date over here");
+                            }
                             break;
                         case "deadline":
                             String[] deadlineSplit = input.split("/by");
@@ -134,7 +144,11 @@ public class Duke {
                                 throw new DukeException("I'm gonna need a description for this here deadline!");
                             if (deadlineSplit.length == 1)
                                 throw new DukeException("I'm gonna need a date or time for this!");
-                            task = new Deadline(stringCombiner(inputArray, 1, index - 1).trim(), deadlineSplit[1].trim());
+                            try {
+                                task = new Deadline(stringCombiner(inputArray, 1, index - 1).trim(), LocalDate.parse(deadlineSplit[1].trim()));
+                            } catch (DateTimeParseException e) {
+                                throw new DukeException("Can't seem to make out this date over here");
+                            }
                             break;
                         default:
                             throw new DukeException("Sorry, I didn't quite catch that!");
