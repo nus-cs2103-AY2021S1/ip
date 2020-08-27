@@ -10,7 +10,7 @@ public class ParserTest {
 
     @Test
     public void testDateParser() {
-        assertEquals("Sep 09 2020 10:00AM", Parser.DateParser("09/09/2020 1000"));
+        assertEquals("Sep 09 2020 10:00AM", Parser.dateParser("09/09/2020 1000"));
     }
 
     @Test
