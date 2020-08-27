@@ -2,6 +2,7 @@ package main.java;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * The TaskList contains the list of tasks and has operations to add/delete/etc. tasks in the list
@@ -20,12 +21,20 @@ public class TaskList {
     /**
      * Constructor
      *
-     * @param data List of data from of tasks
+     * @param list List of tasks
      */
-    public TaskList(List<String> data) throws Exception {
+    public TaskList(List<Task> list) {
+        this.list = list;
+    }
+
+    public static TaskList fromData(List<String> data) throws Exception {
+        List<Task> list = new ArrayList<>();
+
         for (String line : data) {
             list.add(Task.fromData(line));
         }
+
+        return new TaskList(list);
     }
 
     /**
@@ -88,4 +97,15 @@ public class TaskList {
         return str;
     }
 
+    public Task setDone(int id) {
+        Task task = list.get(id - 1);
+        task.done = true;
+        return task;
+    }
+
+    public TaskList filterByKeyword(String keyword) throws Exception {
+        List<Task> filteredList = list.stream()
+                .filter(t -> t.name.contains(keyword)).collect(Collectors.toList());
+        return new TaskList(filteredList);
+    }
 }
