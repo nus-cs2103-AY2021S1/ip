@@ -54,13 +54,12 @@ public class Parser {
                 return new ShowCommand();
             case "done", "delete":
                 throw AlisonException.operationException();
-            case "todo", "deadline", "event":
+            case "todo", "deadline", "event", "find":
                 throw AlisonException.emptyDescriptionException();
             default:
                 throw AlisonException.defaultException();
             }
         }
-
         String description = cmd.split(" ", 2)[1];
         switch (command) {
         case "done":
@@ -76,16 +75,17 @@ public class Parser {
                 return new DeleteCommand(deleteIndex);
             } catch (Exception e) {
                 throw AlisonException.invalidIndexException();
+
             }
         case "todo":
             ToDo todo = new ToDo(description);
             return new AddCommand(todo);
         case "deadline":
-            String[] contentAnddate = description.split(" /by ");
-            if (contentAnddate.length == 1) {
+            String[] contentAndDate = description.split(" /by ");
+            if (contentAndDate.length == 1) {
                 throw AlisonException.deadlineException();
             } else {
-                Deadline ddl = new Deadline(contentAnddate[0], contentAnddate[1]);
+                Deadline ddl = new Deadline(contentAndDate[0], contentAndDate[1]);
                 return new AddCommand(ddl);
             }
         case "event":
@@ -95,6 +95,12 @@ public class Parser {
             } else {
                 Event e = new Event(contentAndTime[0], contentAndTime[1]);
                 return new AddCommand(e);
+            }
+        case "find":
+            if (description.split(" ").length > 1) {
+                throw AlisonException.findException();
+            } else {
+                return new FindCommand(description);
             }
         default:
             return new UnknownCommand();

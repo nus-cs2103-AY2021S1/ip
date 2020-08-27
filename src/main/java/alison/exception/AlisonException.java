@@ -10,30 +10,30 @@ public class AlisonException extends Exception {
     }
 
     public static AlisonException defaultException() {
-        return new AlisonException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+        return new AlisonException("OOPS!!! I'm sorry, but I don't know what that means :-(");
     }
 
     public static AlisonException operationException() {
-        return new AlisonException(" ☹ OOPS!!! You must provided the index of the task after this operation.\n" +
+        return new AlisonException("OOPS!!! You must provided the index of the task after this operation.\n" +
                 "(i.e. done/delete 3)");
     }
 
     public static AlisonException emptyDescriptionException() {
-        return new AlisonException(" ☹ OOPS!!! The description of a task cannot be empty.");
+        return new AlisonException("OOPS!!! The description of a task cannot be empty.");
     }
 
     public static AlisonException invalidIndexException() {
-        return new AlisonException("☹ OOPS!!! You entered an invalid index for this operation.");
+        return new AlisonException("OOPS!!! You entered an invalid index for this operation.");
     }
 
     public static AlisonException deadlineException() {
-        return new AlisonException(" ☹ OOPS!!! You must provide a date " +
+        return new AlisonException("OOPS!!! You must provide a date " +
                 "after '/by' for a deadline. \n" +
                 "(i.e. deadline return book /by 2020-01-01)");
     }
 
     public static AlisonException eventException() {
-        return new AlisonException(" ☹ OOPS!!! You must provide a time interval " +
+        return new AlisonException("OOPS!!! You must provide a time interval " +
                 "after '/at' for an event. \n" +
                 "(i.e. event project meeting /at Mon 2-4pm)");
     }
@@ -51,4 +51,7 @@ public class AlisonException extends Exception {
         return new AlisonException("Something went wrong during writing process. The saved file might not be correct.");
     }
 
+    public static AlisonException findException() {
+        return new AlisonException("Sorry. You can only input one keyword for searching.");
+    }
 }
