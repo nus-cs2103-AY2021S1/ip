@@ -10,14 +10,18 @@ import java.util.List;
 
 public class TaskManager {
     private final List<Task> taskList;
-    private final TaskIOParser parser;
+    private final TaskIOParser ioparser;
+    private final TextParser textParser;
+    
     public TaskManager(String path) throws DukeIOException{
-        this.parser = new TaskIOParser(path);
-        this.taskList = parser.loadTaskList();
+        this.ioparser = new TaskIOParser(path);
+        this.taskList = ioparser.loadTaskList();
+        this.textParser = new TextParser();
     }
     public TaskManager(String path, boolean isNew){
-        this.parser = new TaskIOParser(path);
-        this.taskList = parser.loadNewTaskList();
+        this.ioparser = new TaskIOParser(path);
+        this.taskList = ioparser.loadNewTaskList();
+        this.textParser = new TextParser();
     }
     
     /**
@@ -114,14 +118,13 @@ public class TaskManager {
             throw new DukeNoInputException(cmd);
         }
         ToDo task = new ToDo(cmd);
-        //TODO add a static factory method for making a Tasks.ToDo task
         return this.add(task);
     }
 
     /**
      * Takes in command to add an deadline task to task list
      * @param cmd
-     * @return
+     * @return Deadline Task is added and a print string is returned to the main loop
      * @throws DukeDateTimeException
      * @throws DukeNoInputException
      */
@@ -129,7 +132,7 @@ public class TaskManager {
         if (cmd.isBlank()){
             throw new DukeNoInputException(cmd);
         }
-        String[] timeSEP = extractTime(cmd);
+        String[] timeSEP = textParser.extractTime(cmd);
         Deadline d = new Deadline(timeSEP[0], timeSEP[1]);
         return add(d);
     }
@@ -146,33 +149,9 @@ public class TaskManager {
         if (cmd.isBlank()){
             throw new DukeNoInputException(cmd);
         }
-        String[] timeSEP = extractTime(cmd);
+        String[] timeSEP = textParser.extractTime(cmd);
         Event e = new Event(timeSEP[0], timeSEP[1]);
         return add(e);
-    }
-
-    /**
-     * Extracts the time from the command. 
-     * Slightly lenient on wording of datetime marker for Deadlines and Events
-     * @param cmd
-     * @return
-     * @throws DukeDateTimeException
-     */
-    private String[] extractTime(String cmd) throws DukeDateTimeException {
-        cmd = cmd.strip();
-        int i;
-        if (cmd.contains("/at")){
-            i = cmd.lastIndexOf("/at");
-        }else if (cmd.contains("/by")){
-            i = cmd.lastIndexOf("/by");
-        }else {
-            //else throw an error here
-            throw new DukeDateTimeException(cmd);
-        }
-        String[] c = new String[2];
-        c[0] = cmd.substring(0,i).strip();
-        c[1] = cmd.substring(i+3).strip();
-        return c;
     }
     
     /**
@@ -180,6 +159,6 @@ public class TaskManager {
      * @throws DukeIOException
      */
     public void saveTasks() throws DukeIOException{
-        parser.writeTask(taskList);
+        ioparser.writeTask(taskList);
     }
 }

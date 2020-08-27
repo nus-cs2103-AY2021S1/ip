@@ -1,6 +1,7 @@
 import exceptions.*;
 import tasks.Command;
 import tasks.TaskManager;
+import tasks.TextParser;
 
 import java.util.Scanner;
 
@@ -9,8 +10,8 @@ import java.util.Scanner;
  */
 class Duke {
     private final TaskManager list;
-    private boolean running;
     private final String linebreaker;
+    private final TextParser textParser;
     public Duke(String linebreaker, String path){
         TaskManager list1;
         try{
@@ -19,9 +20,8 @@ class Duke {
             print(e.toString());
             list1 = new TaskManager(path,true);
         }
-
+        this.textParser = new TextParser();
         this.list = list1;
-        this.running = true;
         this.linebreaker = linebreaker.repeat(50)+"\n";
     }
 
@@ -31,7 +31,7 @@ class Duke {
      * with the chatbot, by cleaning it
      * @param input
      */
-    public void takeInput(String input) {
+    public String takeInput(String input) throws DukeUnknownException {
         //To prevent an Security Concern or Code Injection Cleaning of text is first performed and authenticated
         // by adding an ending token
         //TODO eventually to convert the input -> Command with getter for task, deadline(if applicable)
@@ -42,34 +42,26 @@ class Duke {
         // Take out command from the words
         String text_input = cleaned.replaceFirst(words[0],"");
         //Sep token is added to prevent index errors
-        Command c = parseCommand(words[0]);
+        Command c = textParser.parseCommand(words[0]);
 
         try {
             switch (c) {
                 case bye:
-                    end();
-                    break;
+                    return Boolean.TRUE.toString();
                 case help:
-                    print(this.help());
-                    break;
+                    return this.help();
                 case done:
-                    print(list.doTask(words[1]));
-                    break;
+                    return list.doTask(words[1]);
                 case delete:
-                    print(list.deleteTask(words[1]));
-                    break;
+                    return list.deleteTask(words[1]);
                 case list:
-                    print(list.parseoutput());
-                    break;
+                    return list.parseoutput();
                 case todo:
-                    print(this.list.addToDo(text_input));
-                    break;
+                    return this.list.addToDo(text_input);
                 case deadline:
-                    print(this.list.addDeadline(text_input));
-                    break;
+                    return this.list.addDeadline(text_input);
                 case event:
-                    print(this.list.addEvent(text_input));
-                    break;
+                    return this.list.addEvent(text_input);
                 case blank:
                     throw new DukeBlankCommandException("''");
                 case error:
@@ -79,40 +71,17 @@ class Duke {
 
             }
         }catch (DukeUnknownException e){
-            print(e.toString());
+            throw e;
             //Shut down the application as this error appears to be program breaking
-            this.running = false;
         } catch (DukeException e){
             //an Expected exception that does not change the loop
             print(e.toString());
-        } 
-    }
-
-    private void end() throws DukeIOException{
-        this.running = false;
-        this.list.saveTasks();
-    }
-
-    /**
-     * Parse Command into the 
-     * @param cmd
-     * @return
-     */
-    
-    public Command parseCommand(String cmd){
-        String cleaned = cmd.toLowerCase();
-        Command given = null;
-        Command[] commandlst = Command.values();
-        for (Command c : Command.values()){
-            if (c.getCode().equals(cleaned)) {
-                given = c;
-                // if there is a match, there is no other command that would match
-                break;
-            }
         }
-        given = given==null ? Command.error:given;
-        return given;
+        return cleaned;
     }
+    
+
+    
 
     /**
      * inputs string, processes and cleans the text for the chatbot
@@ -140,39 +109,10 @@ class Duke {
     }
 
     /**
-     * Running state of the Duke Application
-     * @return State of Duke running
-     */
-    private boolean running() {
-        return this.running;
-    }
-
-    /**
-     * Internal Main Loop of Duke program
-     * @param sc
-     */
-    public void dukeLoop(Scanner sc){
-        print("Please Enter your name");
-        String name = sc.nextLine();
-        print(greeting(name));
-        String in = "";
-        while (this.running()){
-            in = sc.nextLine();
-            takeInput(in);
-        }
-        try {
-            this.list.saveTasks();
-        } catch (DukeIOException e) {
-            print(e.toString());
-        }
-        print(goodbye(name));
-    }
-
-    /**
      * Greeting from Duke Bot
-     * @return
+     * @return Sends a greeting from dukebot to the user
      */
-    private String greeting(String name){
+    String greeting(String name){
         StringBuilder logo = new StringBuilder("\tHello from\n")
                                         .append(" ____        _        \n")
                                         .append("|  _ \\ _   _| | _____ \n")
@@ -186,7 +126,7 @@ class Duke {
         return logo.toString();
     }
 
-    private String goodbye(String name){
+    String goodbye(String name){
         return "Bye " + name +"! Hope to see you again soon!";
     }
     /**
@@ -195,5 +135,9 @@ class Duke {
      */
     private void print(String s){
         System.out.printf("%s%s\n%s%n",linebreaker,s,linebreaker);
+    }
+    
+    void saveTasks() throws DukeIOException {
+        this.list.saveTasks();
     }
 }
