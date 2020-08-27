@@ -1,3 +1,10 @@
+package duke;
+
+import duke.command.*;
+import duke.exception.EmptyDescriptionException;
+import duke.exception.InvalidCommandException;
+import duke.exception.InvalidFormatException;
+
 import java.util.Arrays;
 
 public class Parser {
