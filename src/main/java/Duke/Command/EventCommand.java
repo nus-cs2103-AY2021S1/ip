@@ -5,9 +5,17 @@ import Duke.Exception.*;
 
 import java.io.IOException;
 
+/**
+ * EventCommand deals with event input.
+ */
 public class EventCommand extends Command {
     public String input;
 
+    /**
+     * Initiate EventCommand.
+     * @param input  User input
+     * @throws NullEventInputException
+     */
     public EventCommand(String input) throws NullEventInputException {
         if (input.length() == 0) {
             throw new NullEventInputException();
@@ -15,6 +23,12 @@ public class EventCommand extends Command {
         this.input = input;
     }
 
+    /**
+     * Re-format date to be readable.
+     * @param date  Input date
+     * @return String date
+     * @throws InvalidDateTimeException
+     */
     private String setDate(String date) throws InvalidDateTimeException {
         String[] split = date.split("/");
         if (date.length() != 10 || split.length != 3) {
@@ -24,6 +38,12 @@ public class EventCommand extends Command {
         return formatDate;
     }
 
+    /**
+     * Re-format time to be readable.
+     * @param time  Input time
+     * @return String time
+     * @throws InvalidDateTimeException
+     */
     private String setTime(String time) throws InvalidDateTimeException {
         if (time.length() != 4) {
             throw new InvalidDateTimeException();
@@ -31,6 +51,13 @@ public class EventCommand extends Command {
         return time.substring(0, 2) + ":" + time.substring(2);
     }
 
+    /**
+     * Create Event to be added.
+     * @param description  Event description
+     * @param datetime     Event date and time
+     * @return Event
+     * @throws InvalidDateTimeException
+     */
     private Event createEvent(String description, String datetime) throws InvalidDateTimeException {
         String[] datetimeArray = datetime.split(" ");
 
@@ -47,6 +74,15 @@ public class EventCommand extends Command {
         return false;
     }
 
+    /**
+     * Execute event command.
+     * @param tasks    TaskList for Event to be added
+     * @param ui       User interface used
+     * @param storage  Storage to update save file
+     * @throws InvalidEventInputException
+     * @throws InvalidDateTimeException
+     * @throws IOException
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws InvalidEventInputException, InvalidDateTimeException, IOException {
         String[] eventTaskArray = input.split(" /at ");

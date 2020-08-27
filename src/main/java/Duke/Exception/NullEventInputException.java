@@ -1,5 +1,8 @@
 package Duke.Exception;
 
+/**
+ * Exception representing event task input.
+ */
 public class NullEventInputException extends DukeException {
 
     public NullEventInputException() {

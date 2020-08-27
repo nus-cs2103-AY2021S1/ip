@@ -1,5 +1,8 @@
 package Duke.Exception;
 
+/**
+ * Exception representing invalid input after done command.
+ */
 public class InvalidDoneInputException extends DukeException {
 
     public InvalidDoneInputException() {

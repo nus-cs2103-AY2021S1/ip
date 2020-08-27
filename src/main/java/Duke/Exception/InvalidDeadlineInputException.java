@@ -1,5 +1,8 @@
 package Duke.Exception;
 
+/**
+ * Exception representing invalid input after deadline command.
+ */
 public class InvalidDeadlineInputException extends DukeException {
 
     public InvalidDeadlineInputException() {

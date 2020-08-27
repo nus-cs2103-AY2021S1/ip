@@ -5,9 +5,17 @@ import Duke.Exception.*;
 
 import java.io.IOException;
 
+/**
+ * TodoCommand deals with todo input.
+ */
 public class TodoCommand extends Command {
     public String input;
 
+    /**
+     * Initiate TodoCommand.
+     * @param input  User input
+     * @throws InvalidTodoInputException
+     */
     public TodoCommand(String input) throws InvalidTodoInputException {
         if (input.length() == 0) {
             throw new InvalidTodoInputException();
@@ -22,6 +30,13 @@ public class TodoCommand extends Command {
         return false;
     }
 
+    /**
+     * Execute todo command.
+     * @param tasklist  TaskList for ToDo to be added
+     * @param ui        User interface used
+     * @param storage   Storage to update save file
+     * @throws IOException
+     */
     @Override
     public void execute(TaskList tasklist, Ui ui, Storage storage) throws IOException {
         ToDo todo = new ToDo(this.input);

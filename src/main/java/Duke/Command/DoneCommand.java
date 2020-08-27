@@ -5,9 +5,16 @@ import Duke.Exception.*;
 
 import java.io.IOException;
 
+/**
+ * DoneCommand deals with done input.
+ */
 public class DoneCommand extends Command {
     public String input;
 
+    /**
+     * Initiate DoneCommand.
+     * @param input User input
+     */
     public DoneCommand(String input) {
         this.input = input;
     }
@@ -17,6 +24,15 @@ public class DoneCommand extends Command {
         return false;
     }
 
+    /**
+     * Execute done command.
+     * @param tasklist  TaskList for Done to be added
+     * @param ui        User interface used
+     * @param storage   Storage to update save file
+     * @throws InvalidDoneInputException
+     * @throws IOException
+     */
+    @Override
     public void execute(TaskList tasklist, Ui ui, Storage storage) throws InvalidDoneInputException, IOException {
         try {
             int num = Integer.parseInt(input.replaceAll("\\s+", ""));

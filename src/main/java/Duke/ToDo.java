@@ -1,7 +1,14 @@
 package Duke;
 
+/**
+ * Represents a ToDo task
+ */
 public class ToDo extends Task {
 
+    /**
+     * Initialise a ToDo object
+     * @param description  Description of ToDo
+     */
     public ToDo(String description) {
         super(description);
     }

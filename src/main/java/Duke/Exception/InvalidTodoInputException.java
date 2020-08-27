@@ -1,5 +1,8 @@
 package Duke.Exception;
 
+/**
+ * Exception representing empty todo input.
+ */
 public class InvalidTodoInputException extends DukeException {
 
     public InvalidTodoInputException() {

@@ -1,5 +1,8 @@
 package Duke.Exception;
 
+/**
+ * Exception representing invalid input after delete command.
+ */
 public class InvalidDeleteInputException extends DukeException {
 
     public InvalidDeleteInputException() {

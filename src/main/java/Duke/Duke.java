@@ -6,13 +6,18 @@ import Duke.Exception.*;
 import java.io.IOException;
 
 /**
- * Duke class that contains the main logic for the chat bot DUKE.
+ * Represents Duke
  */
 public class Duke {
     private Storage storage;
     private TaskList tasklist;
     private Ui ui;
 
+    /**
+     * Creates Duke
+     * @param path  File path of saved tasks file.
+     * @throws IOException
+     */
     public Duke(String path) throws IOException {
         this.ui = new Ui();
         this.storage = new Storage(path);
@@ -25,6 +30,9 @@ public class Duke {
         this.tasklist = tempList;
     }
 
+    /**
+     * Runs Duke
+     */
     public void run() {
         ui.showIntro();
         boolean isExit = false;
@@ -46,8 +54,8 @@ public class Duke {
     }
 
     /**
-     * Main logic for the chat bot
-     * @param args User input
+     * Main environment for the chat bot.
+     * @param args  User input
      */
     public static void main(String[] args) {
 
