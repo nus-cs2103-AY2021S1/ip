@@ -1,6 +1,7 @@
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.time.temporal.ChronoUnit;
 
 public class Events extends Task implements Serializable {
@@ -10,8 +11,12 @@ public class Events extends Task implements Serializable {
 
     public Events(String description, String by) {
         super(description);
-        this.date = LocalDate.parse(by);
-        this.by = date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        try {
+            this.date = LocalDate.parse(by);
+            this.by = date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        } catch (DateTimeParseException e) {
+            this.by = by;
+        }
     }
 
     @Override

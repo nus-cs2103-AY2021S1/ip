@@ -1,17 +1,7 @@
-Hello! I'm Duke
-What can I do for you?
+Hello I'm Greg!
+How may I be of service today?
 Sorry I do not understand that command.
 Got it. I've added this task:
-  [T][✘]  read book
-Now you have 1 tasks in the list.
-1.[T][✘]  read book
-Nice! I've marked this task as done:
-✓  read book
-Noted. I've removed this task:
-  [T][✓]  read book
-Now you have 0 tasks in the list.
-Please enter the description and timing of the deadline with the command.
-Got it. I've added this task:
-  [D][✘]  homework  (by: today)
-Now you have 1 tasks in the list.
+  [E][✘] event soccer match  (at:tomorrow)
+Now you have 5 tasks in the list.
 Bye. Hope to see you again soon!

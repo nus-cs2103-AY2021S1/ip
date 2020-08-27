@@ -6,6 +6,11 @@ public class DukeException extends Throwable {
         this.s = s;
     }
 
+    /**
+     * Handles various exceptions for the bot and returns messages accordingly
+     * @return Refer to various messages at the bottom
+     * 
+     */
     public String getMessage() {
         if (this.s.equals("")) {
             return "Please enter your command.";

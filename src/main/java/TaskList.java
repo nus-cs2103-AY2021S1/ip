@@ -15,7 +15,11 @@ public class TaskList {
     public boolean isEmpty() {
         return tasks.isEmpty();
     }
-    
+
+    /**
+     * Retrieves the ArrayList<Task> attribute
+     * @return returns the TaskList's ArrayList<Task>
+     */
     public ArrayList<Task> getTasks() {
         return tasks;
     }

@@ -9,12 +9,18 @@ public class TaskTest {
     public void dummyTest(){
         assertEquals(2, 2);
     }
-    
+
+    /**
+     * Tests the getDescription method from the Task Class
+     */
     @Test
     public void testGetDescription() {
         assertEquals("return book", task.getDescription());
     }
-    
+
+    /**
+     * Tests the testIsDone method from the Task Class
+     */
     @Test
     public void testIsDone() {
         assertEquals(false, task.isDone());

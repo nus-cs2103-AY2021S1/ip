@@ -9,7 +9,15 @@ public class Parser {
     Parser() {
         
     }
-    
+
+    /**
+     * Helps to parse commands from the scanner, that tells the bot what actions
+     * to take
+     * @param list
+     * @param store
+     * @throws DukeException
+     * @throws FileNotFoundException
+     */
     public void commandParser(TaskList list, Storage store ) throws DukeException, FileNotFoundException {
         ArrayList<Task> storage = list.getTasks();
 
@@ -87,6 +95,8 @@ public class Parser {
                 } else if (command.equals("bye")) {
                     String bye = "Bye. Hope to see you again soon!";
                     System.out.println(bye);
+                    scan1.close();
+                    break;
                 } else if (command.startsWith("delete")) {
                     try {
                         int number = Integer.parseInt(command.split(" ")[1]);
