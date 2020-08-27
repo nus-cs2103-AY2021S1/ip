@@ -47,7 +47,7 @@ public class Duke {
         String input;
 
         // Initialise TaskList object to store tasks from user
-        TaskList userTasks2 = new TaskList(storage.readFromFile());
+        TaskList userTasks = new TaskList(storage.readFromFile());
 
         // Start chat
         while (true) {
@@ -75,15 +75,15 @@ public class Duke {
 
                 // Mark item as done
                 try {
-                    if (index >= userTasks2.getTaskListSize()) {
+                    if (index >= userTasks.getTaskListSize()) {
                         throw new DukeException("", ExceptionType.INDEX_OUT_OF_BOUNDS);
                     } else {
-                        userTasks2.markTaskAsDone(index);
-                        ui.printMarkAsDoneMessage(userTasks2.getTask(index));
+                        userTasks.markTaskAsDone(index);
+                        ui.printMarkAsDoneMessage(userTasks.getTask(index));
                     }
 
                     // Update Tasklist.txt after marking task as done
-                    storage.saveToFile(userTasks2.getTaskList());
+                    storage.saveToFile(userTasks.getTaskList());
 
                 } catch (DukeException ex) {
                     System.out.print(ui.getServantSpeak());
@@ -100,15 +100,15 @@ public class Duke {
 
                 // Delete item
                 try {
-                    if (index >= userTasks2.getTaskListSize()) {
+                    if (index >= userTasks.getTaskListSize()) {
                         throw new DukeException("", ExceptionType.INDEX_OUT_OF_BOUNDS);
                     } else {
-                        ui.printTaskDeletedMessage(userTasks2.getTask(index));
-                        userTasks2.deleteTask(index);
+                        ui.printTaskDeletedMessage(userTasks.getTask(index));
+                        userTasks.deleteTask(index);
                     }
 
                     // Update Tasklist.txt after removing task
-                    storage.saveToFile(userTasks2.getTaskList());
+                    storage.saveToFile(userTasks.getTaskList());
 
                 } catch (DukeException ex) {
                     System.out.print(ui.getServantSpeak());
@@ -120,7 +120,7 @@ public class Duke {
 
             // If user requests for list, display list of tasks
             if (input.equals("list")) {
-                ui.printListOfTasks(userTasks2.getTaskList());
+                ui.printListOfTasks(userTasks.getTaskList());
                 continue;
             }
 
@@ -149,8 +149,8 @@ public class Duke {
             case "todo":
                 description = input.substring(4);
                 t = new ToDo(description);
-                userTasks2.addTask(t);
-                ui.printTaskAddedMessage(t, userTasks2.getTaskListSize());
+                userTasks.addTask(t);
+                ui.printTaskAddedMessage(t, userTasks.getTaskListSize());
                 break;
             case "deadline":
                 try {
@@ -161,8 +161,8 @@ public class Duke {
                     String by = inputSplit[1];
                     description = inputSplit[0].substring(8);
                     t = new Deadline(description, by);
-                    userTasks2.addTask(t);
-                    ui.printTaskAddedMessage(t, userTasks2.getTaskListSize());
+                    userTasks.addTask(t);
+                    ui.printTaskAddedMessage(t, userTasks.getTaskListSize());
                     break;
                 } catch (DukeException ex) {
                     System.out.print(ui.getServantSpeak());
@@ -179,8 +179,8 @@ public class Duke {
                     String timeRange = inputSplit[1].split(" ")[1];
                     description = inputSplit[0].substring(5);
                     t = new Event(description, at, timeRange);
-                    userTasks2.addTask(t);
-                    ui.printTaskAddedMessage(t, userTasks2.getTaskListSize());
+                    userTasks.addTask(t);
+                    ui.printTaskAddedMessage(t, userTasks.getTaskListSize());
                     break;
                 } catch (DukeException ex) {
                     System.out.print(ui.getServantSpeak());
@@ -190,7 +190,7 @@ public class Duke {
             }
 
             // Update Tasklist.txt after adding task
-            storage.saveToFile(userTasks2.getTaskList());
+            storage.saveToFile(userTasks.getTaskList());
         }
     }
 
