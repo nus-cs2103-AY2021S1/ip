@@ -16,6 +16,7 @@ public class ToDoTask extends Task {
 
     /**
      * Return a string representation of the to-do task.
+     * 
      * @return A string representation of the to-do task.
      */
     @Override
