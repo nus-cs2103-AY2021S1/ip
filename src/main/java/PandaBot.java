@@ -1,20 +1,24 @@
-import java.util.Scanner;
-
+/**
+ * Runs the main program.
+ */
 public class PandaBot {
     private Ui ui;
     private TaskList tasks;
-    private Storage storage = new Storage("PandaBot_Save.txt");
+    private Storage storage;
 
+    /**
+     * Creates a new PandaBot object.
+     * @param fileName the file name of the save file
+     */
     public PandaBot(String fileName) {
         ui = new Ui();
         storage = new Storage(fileName);
         tasks = new TaskList(storage.load());
     }
     
-    public static void main(String[] args) {
-        new PandaBot("PandaBot_Save.txt").run();
-    }
-    
+    /**
+     * Runs the PandaBot program.
+     */
     public void run() {
         ui.printWelcome();
         boolean isExit = false;
@@ -28,11 +32,20 @@ public class PandaBot {
                 c.execute(tasks, ui, storage);
                 isExit = c.isExit();
             } catch (PandaBotException e) {
-                ui.showError(e.getMessage());
+                ui.printError(e.getMessage());
             } finally {
                 ui.printLine();
             }
         }
     }
-        
+
+    /**
+     * Executes the PandaBot program.
+     * @param args command line arguments
+     */
+    public static void main(String[] args) {
+        new PandaBot("PandaBot_Save.txt").run();
+    }
+
+
 }

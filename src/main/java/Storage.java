@@ -6,10 +6,19 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 
-//deals with loading tasks from the file and saving tasks in the file
+/**
+ * Represents the storage class, which is responsible for
+ * loading and saving tasks into the save file.
+ */
 public class Storage {
     private Path saveFilePath;
-    
+
+    /**
+     * Creates a Storage object, which is used to load and save tasks
+     * into a save file.
+     * 
+     * @param fileName the name of the save file
+     */
     public Storage(String fileName) {
         String home = System.getProperty("user.home");
 
@@ -39,7 +48,12 @@ public class Storage {
         
         this.saveFilePath = saveFilePath;
     }
-    
+
+    /**
+     * Loads contents from the save file into an ArrayList of Task.
+     * 
+     * @return a list of tasks as an ArrayList
+     */
     public ArrayList<Task> load() {
         ArrayList<Task> tasks = new ArrayList<>();
         try {
@@ -47,7 +61,7 @@ public class Storage {
             loadTask(tasks, reader);
             reader.close();
         } catch (IOException e) {
-            System.out.println("Error in reading save file: " + e.getMessage() + "\n" 
+            System.out.println("OOPS! :c There was an error in reading save file: " + e.getMessage() + "\n" 
                                 + "I'll get you a new save file!");
             tasks = new ArrayList<>();
         }
@@ -92,7 +106,12 @@ public class Storage {
         
         return task;
     }
-    
+
+    /**
+     * Writes each task in the list of tasks into the save file.
+     * 
+     * @param tasks the ArrayList of tasks to be written and saved
+     */
     public void write(ArrayList<Task> tasks) {
         try {
             BufferedWriter writer = Files.newBufferedWriter(saveFilePath);
@@ -103,7 +122,8 @@ public class Storage {
              writer.flush();
              writer.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("OOPS! :c There is an error in trying to write to the save file." 
+                                    + "I can't save the entire list of tasks here.");
         }
     }
     
