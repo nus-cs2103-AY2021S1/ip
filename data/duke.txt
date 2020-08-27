@@ -2,3 +2,5 @@ E | 0 | adfs | 3030-03-03
 D | 0 | sdfhk | 3430-03-03
 T | 0 | read book
 T | 0 | read book
+E | 0 | graduation | 2020-02-20
+T | 0 | graduation

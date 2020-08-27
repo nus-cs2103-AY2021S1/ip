@@ -10,4 +10,5 @@ public enum InputCommand {
     INVALID,
     BYE,
     GET_TASK,
+    FIND,
 }

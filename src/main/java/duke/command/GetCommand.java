@@ -20,14 +20,14 @@ public class GetCommand extends Command {
 
     /**
      * Executes get command of user.
-     * @param taskList tasks of user.
+     * @param tasks tasks of user.
      * @param ui user interface object.
      * @param storage Storage object to retrieve and store data from file.
      * @throws DukeException If input is invalid.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        ui.findTask(Parser.parseDate(input.substring(9)), taskList.getList());
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        ui.findTaskByDate(Parser.parseDate(input.substring(9)), tasks.getList());
     }
 
 }

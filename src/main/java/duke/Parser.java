@@ -8,6 +8,7 @@ import duke.command.DeleteCommand;
 import duke.command.InputCommand;
 import duke.command.GetCommand;
 import duke.command.ListCommand;
+import duke.command.FindCommand;
 
 import java.time.LocalDate;
 
@@ -49,6 +50,9 @@ public class Parser {
             return new AddCommand(input, inputCommand);
         case GET_TASK:
             return new GetCommand(input);
+        case FIND:
+            System.out.println("sdfs");
+            return new FindCommand(input);
         default:
             throw new DukeException("Give me a valid banana (input)!");
         }

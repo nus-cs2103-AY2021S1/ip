@@ -109,10 +109,25 @@ public class Ui {
      * @param date date requested by user.
      * @param tasks tasks of user.
      */
-    public void findTask(LocalDate date, List<Task> tasks) {
+    public void findTaskByDate(LocalDate date, List<Task> tasks) {
         System.out.println(divider);
         for (Task t : tasks) {
             if (t.getDate().equals(date)) {
+                System.out.println("   " + t.toString());
+            }
+        }
+        System.out.println(divider + "\n");
+    }
+
+    /**
+     * Prints tasks containing this keyword.
+     * @param keyword Keyword input by user.
+     * @param tasks Tasks of user.
+     */
+    public void findTaskByKeyword(String keyword, List<Task> tasks) {
+        System.out.println(divider);
+        for (Task t : tasks) {
+            if (t.toString().contains(keyword)) {
                 System.out.println("   " + t.toString());
             }
         }
