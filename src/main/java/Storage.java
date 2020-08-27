@@ -28,8 +28,6 @@ public class Storage {
         this.path = filePath;
     }
 
-    // Format of task in file is "D/0/return book/June 6th"
-    // where "0" means undone while "1" means done
     public ArrayList<Task> getList() throws FileNotFoundException, InvalidDateTimeException {
         Scanner sc = new Scanner(this.file);
         ArrayList<Task> list = new ArrayList<>();
