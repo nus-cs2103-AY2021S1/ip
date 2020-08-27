@@ -86,4 +86,15 @@ public class TaskList {
 
         Ui.displayListReply(tasks);
     }
+
+    public ArrayList<Task> filterList(String keyword) {
+        ArrayList<Task> filteredList = new ArrayList<>();
+        for (Task t1 : tasks) {
+            String description = t1.getDescription();
+            if (description.toLowerCase().indexOf(keyword) != -1) {
+                filteredList.add(t1);
+            }
+        }
+        return filteredList;
+    }
 }

@@ -86,6 +86,20 @@ public class Ui {
     }
 
     /**
+     * Display the contents in the List
+     *
+     * @param tasks ArrayList containing the tasks that are to be displayed
+     */
+    public static void displayMatchingTasksReply(ArrayList<Task> tasks) {
+        int index = 1;
+        System.out.println(INDENT + "Quack! Duckie found these matching tasks: ");
+        for (Task task : tasks) {
+            System.out.println(INDENT + index + ". " + task);
+            index++;
+        }
+    }
+
+    /**
      * Display the message that there are no tasks in the list
      */
     public static void displayNoListReply() {

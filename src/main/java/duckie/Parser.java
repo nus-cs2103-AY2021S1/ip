@@ -116,7 +116,7 @@ public class Parser {
             }
 
             String keyword = input.split(" ", 2)[1];
-
+            return new FindCommand(keyword);
         } else {
             throw new DuckieInvalidCommandException();
         }
