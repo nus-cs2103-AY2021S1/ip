@@ -1,6 +1,9 @@
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents a task that is an event with a description and timing
+ */
 public class Event extends Task{
 
     protected LocalDateTime at;
@@ -15,6 +18,10 @@ public class Event extends Task{
         this.at = at;
     }
 
+    /**
+     * Marks the event task as done.
+     * @return Event task that is marked as done.
+     */
     @Override
     public Event markAsDone() {
         Event doneEvent = new Event(this.description, this.at, true);

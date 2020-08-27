@@ -2,9 +2,16 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Represents a parser to parse input string commands to the respective commands.
+ */
 public class Parser {
 
-    // Check if given string can be parsed into an integer
+    /**
+     * Returns whether the string provided is an integer.
+     * @param secondWord Word to be parsed into integer.
+     * @return Boolean to signify if given word is an integer
+     */
     public static boolean isInteger(String secondWord) {
         try {
             Integer.parseInt(secondWord);
@@ -14,7 +21,11 @@ public class Parser {
         }
     }
 
-    // Checks if user's input date is of the correct format (yyyy-mm-dd HH:MM)
+    /**
+     * Returns whether the input date provided is of the format (yyyy-MM-dd HH:mm)
+     * @param inputDate String of date to be checked.
+     * @return Boolean to signify if given input date is of correct format.
+     */
     public static boolean isValidFormat(String inputDate) {
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
@@ -25,6 +36,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Parse the command given in string into a Command that it represents.
+     * @param fullCommand The command that the user input into the chatbot.
+     * @return Type of command that the input represents.
+     * @throws DukeException If invalid commands are provided.
+     */
     public static Command parse(String fullCommand) throws DukeException {
         // return the respective command
         String[] inputDataWords = fullCommand.split(" ");

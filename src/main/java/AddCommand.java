@@ -1,5 +1,8 @@
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents a command to add a todo/event/deadline task.
+ */
 public class AddCommand extends Command {
 
     protected Task task;
@@ -8,6 +11,13 @@ public class AddCommand extends Command {
         this.task = task;
     }
 
+    /**
+     * Adds task to the task list and appends a line to represent the task to the filepath stored in storage.
+     * @param tasks Task list of all tasks.
+     * @param ui Ui to deal with interaction with user.
+     * @param storage Storage to load and save tasks.
+     * @throws DukeException if unable to append to file specified in storage's filepath
+     */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         tasks.addTask(task);
 

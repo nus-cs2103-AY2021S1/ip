@@ -1,3 +1,6 @@
+/**
+ * Represents a Duke chatbot that can store, delete, mark tasks as done and display them.
+ */
 public class Duke {
 
     private Ui ui;
@@ -16,7 +19,9 @@ public class Duke {
         }
     }
 
-    // Receives commands from user input and executes them accordingly
+    /**
+     * Displays a welcome message and runs the chatbot, continuously receiving user input and executing them accordingly.
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;
@@ -36,6 +41,10 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs a Duke object with a file at filePath of "data/duke.txt".
+     * @param args
+     */
     public static void main(String[] args) {
         Duke dukeObj = new Duke("data/duke.txt");
         dukeObj.run();
