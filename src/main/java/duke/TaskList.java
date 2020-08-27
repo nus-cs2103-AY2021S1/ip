@@ -9,7 +9,7 @@ public class TaskList {
      * TaskList constructor
      */
     public TaskList() {
-        this.list = new ArrayList<>();
+        this.list = new ArrayList<Task>();
     }
 
     /**
