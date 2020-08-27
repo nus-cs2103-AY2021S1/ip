@@ -50,7 +50,7 @@ public class Duke {
         int i = 1;
         for (Task task : list) {
             System.out.println(SPACE + " " + i + "." + task.getTypeLetter()
-                    + task.getStatusIcon() + task.getMessage());
+                    + task.getStatusIcon() + task.getPrintMessage());
             i++;
         }
         System.out.println(SPACE + LINE);
@@ -75,7 +75,7 @@ public class Duke {
                 for (i = 0; i < list.size(); i++) {
                     Task task = list.get(i);
                     content = task.getPureTypeLetter() + " ; " + task.getStatusNum()
-                            + " ; " + task.getMessage() + "\n";
+                            + " ; " + task.getPrintMessage() + "\n";
                     fileWriter.write(content);
                 }
                 fileWriter.close();
@@ -86,7 +86,7 @@ public class Duke {
                 int counter = 1;
                 for (Task task : list) {
                     System.out.println(SPACE + " " + counter + "." + task.getTypeLetter()
-                            + task.getStatusIcon() + task.getMessage());
+                            + task.getStatusIcon() + task.getPrintMessage());
                     counter++;
                 }
                 System.out.println(SPACE + LINE);
@@ -102,7 +102,7 @@ public class Duke {
                         Task task = list.get(index);
                         task.setDone();
                         System.out.println(format(messageMarked + SPACE + "   "
-                                + task.getTypeLetter() + task.getStatusIcon() + task.getMessage()));
+                                + task.getTypeLetter() + task.getStatusIcon() + task.getPrintMessage()));
                     } else if (priorCommand.equals("delete")) {
                         int index = Integer.parseInt(extraCommand) - 1;
                         if (index < 0 || index >= list.size()) {
@@ -112,16 +112,16 @@ public class Duke {
                         list.remove(index);
                         String messageNum = "\n      Now you have " + list.size() + " task(s) in the list.";
                         System.out.println(format(messageDelete + "        " + task.getTypeLetter()
-                                + task.getStatusIcon() + task.getMessage() + messageNum));
+                                + task.getStatusIcon() + task.getPrintMessage() + messageNum));
 
                     } else {
                         Task task;
                         switch (priorCommand) {
                             case "deadline":
-                                task = new Deadline(Convert.by(extraCommand));
+                                task = new Deadline(extraCommand);
                                 break;
                             case "event":
-                                task = new Event(Convert.at(extraCommand));
+                                task = new Event(extraCommand);
                                 break;
                             case "todo":
                                 task = new Todo(extraCommand);
@@ -133,7 +133,7 @@ public class Duke {
 
                         list.add(task);
                         System.out.println(format(messageAdded + SPACE + "   "
-                                + task.getTypeLetter() + task.getStatusIcon() + task.getMessage()
+                                + task.getTypeLetter() + task.getStatusIcon() + task.getPrintMessage()
                                 + "\n " + SPACE + "Now you have " + list.size() + " task(s) in the list."));
                     }
                 } catch (IndexOutOfBoundsException e) {

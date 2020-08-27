@@ -17,4 +17,9 @@ public class Todo extends Task {
         // dummy value
         return "[T]";
     }
+
+    @Override
+    public String getPrintMessage() {
+        return getMessage();
+    }
 }

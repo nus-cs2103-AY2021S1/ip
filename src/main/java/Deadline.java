@@ -17,4 +17,9 @@ public class Deadline extends Task {
         // dummy value
         return "[D]";
     }
+
+    @Override
+    public String getPrintMessage() {
+        return Convert.by(getMessage());
+    }
 }

@@ -16,4 +16,9 @@ public class Event extends Task {
         // dummy value
         return "[E]";
     }
+
+    @Override
+    public String getPrintMessage() {
+        return Convert.at(getMessage());
+    }
 }

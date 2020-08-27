@@ -37,4 +37,8 @@ public class Task {
         // dummy value
         return "";
     }
+
+    public String getPrintMessage() {
+        return "";
+    }
 }

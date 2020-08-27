@@ -21,13 +21,16 @@ public class Convert {
         String taskType = s.split(" ; ")[0];
         String isDone = s.split(" ; ")[1];
         String message = s.split(" ; ")[2];
+        System.out.println(taskType);
+        System.out.println(isDone);
+        System.out.println(message);
 
         if (taskType.equals("T")) {
             return new Todo(message, getStatus(Integer.parseInt(isDone)));
         } else if (taskType.equals("E")) {
-            return new Event(at(message), getStatus(Integer.parseInt(isDone)));
+            return new Event(message, getStatus(Integer.parseInt(isDone)));
         } else if (taskType.equals("D")) {
-            return new Deadline(by(message), getStatus(Integer.parseInt(isDone)));
+            return new Deadline(message, getStatus(Integer.parseInt(isDone)));
         } else {
             throw new IllegalTaskTypeException();
         }
