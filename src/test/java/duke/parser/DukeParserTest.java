@@ -41,6 +41,13 @@ public class DukeParserTest {
     }
 
     @Test
+    public void parseTest_testFind() throws DukeException {
+        String fullCommand = "find book";
+        Command command = Parser.parse(fullCommand);
+        assert command.getClass().getTypeName().equals("duke.command.FindCommand");
+    }
+
+    @Test
     public void parseTest_testDelete() throws DukeException {
         String fullCommand = "delete 1";
         Command command = Parser.parse(fullCommand);
