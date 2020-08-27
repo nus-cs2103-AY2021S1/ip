@@ -13,14 +13,10 @@ public class DukeTaskListSideEffects {
     public boolean getSize;
     public boolean setTasks;
     public boolean getTasks;
+    public boolean findTasks;
 
     private DukeTaskListSideEffects() {
-        getTask = false;
-        addTask = false;
-        deleteTask = false;
-        getSize = false;
-        setTasks = false;
-        getTasks = false;
+        reset();
     }
 
     private static DukeTaskListSideEffects instance;
@@ -39,5 +35,6 @@ public class DukeTaskListSideEffects {
         getSize = false;
         setTasks = false;
         getTasks = false;
+        findTasks = false;
     }
 }

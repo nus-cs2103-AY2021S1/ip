@@ -10,7 +10,7 @@ public class DukeTaskListStub extends DukeTaskList {
     public final Task taskAdded = ToDo.createToDo("read book");
     public final Task taskDeleted = ToDo.createToDo("read book");
     public final int size = 1;
-    public final ArrayList<Task> currentTasks = null;
+    public final ArrayList<Task> currentTasks = new ArrayList<>();
 
     private DukeTaskListSideEffects taskListSideEffects = DukeTaskListSideEffects.getInstance();
 
@@ -47,6 +47,12 @@ public class DukeTaskListStub extends DukeTaskList {
 
     @Override
     public ArrayList<Task> getTasks() {
+        return currentTasks;
+    }
+
+    @Override
+    public ArrayList<Task> findTasks(String keyword) {
+        taskListSideEffects.findTasks = true;
         return currentTasks;
     }
 }
