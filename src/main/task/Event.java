@@ -11,9 +11,9 @@ import java.time.format.DateTimeFormatter;
  * @since v0.1
  */
 public class Event extends Task {
+    private static final DateTimeFormatter FORMATTER =
+            DateTimeFormatter.ofPattern("EEEE, dd MMM yyyy, h:mma");
     private final LocalDateTime time;
-    private static final DateTimeFormatter FORMATTER
-            = DateTimeFormatter.ofPattern("EEEE, dd MMM yyyy, h:mma");
 
     /**
      * Constructs an Event instance with the name of

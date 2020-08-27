@@ -1,9 +1,9 @@
 package main.command;
 
+import main.exception.InvalidTaskException;
 import main.task.Task;
 import main.task.TaskList;
 import main.ui.Ui;
-import main.exception.InvalidTaskException;
 
 /**
  * Represents the done command.

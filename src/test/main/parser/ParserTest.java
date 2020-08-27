@@ -1,16 +1,29 @@
 package main.parser;
 
-import main.command.*;
-import main.exception.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import java.time.LocalDateTime;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
-import java.time.LocalDateTime;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import main.command.AddDeadlineCommand;
+import main.command.AddEventCommand;
+import main.command.AddTodoCommand;
+import main.command.Command;
+import main.command.DeleteCommand;
+import main.command.DoneCommand;
+import main.command.ExitCommand;
+import main.command.ListCommand;
+import main.exception.DukeException;
+import main.exception.EmptyMessageException;
+import main.exception.InvalidDateException;
+import main.exception.InvalidDeadlineFormatException;
+import main.exception.InvalidEventFormatException;
+import main.exception.InvalidTaskException;
+import main.exception.UnknownCommandException;
 
 public class ParserTest {
     @Nested
@@ -55,8 +68,9 @@ public class ParserTest {
         @Test
         @DisplayName("should throw exception if no second argument")
         public void parseDoneThree() {
-            InvalidTaskException exception = assertThrows(InvalidTaskException.class,
-                    () -> Parser.parse(new String[] { "done" }));
+            InvalidTaskException exception = assertThrows(
+                    InvalidTaskException.class, () ->
+                            Parser.parse(new String[] { "done" }));
             assertEquals("     ☹ OOPS!!! Your selected task does not exist!",
                     exception.getMessage());
         }
@@ -82,8 +96,9 @@ public class ParserTest {
         @Test
         @DisplayName("should throw exception if no second argument")
         public void parseDeleteThree() {
-            InvalidTaskException exception = assertThrows(InvalidTaskException.class,
-                    () -> Parser.parse(new String[] { "delete" }));
+            InvalidTaskException exception = assertThrows(
+                    InvalidTaskException.class, () ->
+                            Parser.parse(new String[] { "delete" }));
             assertEquals("     ☹ OOPS!!! Your selected task does not exist!",
                     exception.getMessage());
         }
@@ -109,8 +124,9 @@ public class ParserTest {
         @Test
         @DisplayName("should throw exception if no second argument")
         public void parseTodoThree() {
-            EmptyMessageException exception = assertThrows(EmptyMessageException.class,
-                    () -> Parser.parse(new String[] { "todo" }));
+            EmptyMessageException exception = assertThrows(
+                    EmptyMessageException.class, () ->
+                            Parser.parse(new String[] { "todo" }));
             assertEquals("     ☹ OOPS!!! The description of a todo cannot be empty.",
                     exception.getMessage());
         }
@@ -141,8 +157,8 @@ public class ParserTest {
         @DisplayName("should throw exception if no second argument")
         public void parseDeadlineThree() {
             EmptyMessageException exception = assertThrows(
-                    EmptyMessageException.class,
-                    () -> Parser.parse(new String[] { "deadline" }));
+                    EmptyMessageException.class, () ->
+                            Parser.parse(new String[] { "deadline" }));
             assertEquals("     ☹ OOPS!!! The description of a deadline cannot be empty.",
                     exception.getMessage());
         }
@@ -151,8 +167,8 @@ public class ParserTest {
         @DisplayName("should throw exception if deadline format is incorrect")
         public void parseDeadlineFour() {
             InvalidDeadlineFormatException exception = assertThrows(
-                    InvalidDeadlineFormatException.class,
-                    () -> Parser.parse(new String[] { "deadline", "name" }));
+                    InvalidDeadlineFormatException.class, () ->
+                            Parser.parse(new String[] { "deadline", "name" }));
             assertEquals("     ☹ OOPS!!! A deadline needs to have this format:\n"
                             + "       \"task name\" /by \"task deadline\"",
                     exception.getMessage());
@@ -162,9 +178,11 @@ public class ParserTest {
         @DisplayName("should throw exception if time format has no spacing")
         public void parseDeadlineFive() {
             InvalidDateException exception = assertThrows(
-                    InvalidDateException.class,
-                    () -> Parser.parse(
-                            new String[] { "deadline", "name /by 1931-3-30" }));
+                    InvalidDateException.class, () ->
+                            Parser.parse(new String[] {
+                                "deadline",
+                                "name /by 1931-3-30"
+                            }));
             assertEquals("     ☹ OOPS!!! Your date needs to"
                             + " have this format:\n     \"YYYY-MM-DD HHMM\"",
                     exception.getMessage());
@@ -174,9 +192,11 @@ public class ParserTest {
         @DisplayName("should throw exception if date format is not YYYY-MM-DD")
         public void parseDeadlineSix() {
             InvalidDateException exception = assertThrows(
-                    InvalidDateException.class,
-                    () -> Parser.parse(
-                            new String[] { "deadline", "name /by 1992-03 1923" }));
+                    InvalidDateException.class, () ->
+                            Parser.parse(new String[] {
+                                "deadline",
+                                "name /by 1992-03 1923"
+                            }));
             assertEquals("     ☹ OOPS!!! Your date needs to"
                             + " have this format:\n     \"YYYY-MM-DD\"",
                     exception.getMessage());
@@ -186,9 +206,11 @@ public class ParserTest {
         @DisplayName("should throw exception if time format is not HHMM")
         public void parseDeadlineSeven() {
             InvalidDateException exception = assertThrows(
-                    InvalidDateException.class,
-                    () -> Parser.parse(
-                            new String[] { "deadline", "name /by 1992-03-12 12394" }));
+                    InvalidDateException.class, () ->
+                            Parser.parse(new String[] {
+                                "deadline",
+                                "name /by 1992-03-12 12394"
+                            }));
             assertEquals("     ☹ OOPS!!! Your time needs to"
                             + " have this format:\n     \"HHMM\"",
                     exception.getMessage());
@@ -198,9 +220,11 @@ public class ParserTest {
         @DisplayName("should throw exception if time not in integers")
         public void parseDeadlineEight() {
             InvalidDateException exception = assertThrows(
-                    InvalidDateException.class,
-                    () -> Parser.parse(
-                            new String[] { "deadline", "name /by abc-12-1 1923" }));
+                    InvalidDateException.class, () ->
+                            Parser.parse(new String[] {
+                                "deadline",
+                                "name /by abc-12-1 1923"
+                            }));
             assertEquals("     ☹ OOPS!!! Please check that you've"
                             + " entered\n       the date and time correctly",
                     exception.getMessage());
@@ -210,9 +234,11 @@ public class ParserTest {
         @DisplayName("should throw exception if time is not possible")
         public void parseDeadlineNine() {
             InvalidDateException exception = assertThrows(
-                    InvalidDateException.class,
-                    () -> Parser.parse(
-                            new String[] { "deadline", "name /by 1998-12-45 1923" }));
+                    InvalidDateException.class, () ->
+                            Parser.parse(new String[] {
+                                "deadline",
+                                "name /by 1998-12-45 1923"
+                            }));
             assertEquals("     ☹ OOPS!!! Please check that you've"
                             + " entered\n       the date and time correctly",
                     exception.getMessage());
@@ -244,8 +270,8 @@ public class ParserTest {
         @DisplayName("should throw exception if no second argument")
         public void parseEventThree() {
             EmptyMessageException exception = assertThrows(
-                    EmptyMessageException.class,
-                    () -> Parser.parse(new String[] { "event" }));
+                    EmptyMessageException.class, () ->
+                            Parser.parse(new String[] { "event" }));
             assertEquals("     ☹ OOPS!!! The description of a event cannot be empty.",
                     exception.getMessage());
         }
@@ -254,8 +280,8 @@ public class ParserTest {
         @DisplayName("should throw exception if event format is incorrect")
         public void parseEventFour() {
             InvalidEventFormatException exception = assertThrows(
-                    InvalidEventFormatException.class,
-                    () -> Parser.parse(new String[] { "event", "name" }));
+                    InvalidEventFormatException.class, () ->
+                            Parser.parse(new String[] { "event", "name" }));
             assertEquals("     ☹ OOPS!!! An event needs to have this format:\n"
                             + "      \"task name\" /at \"event time\"",
                     exception.getMessage());
@@ -265,9 +291,11 @@ public class ParserTest {
         @DisplayName("should throw exception if time format has no spacing")
         public void parseEventFive() {
             InvalidDateException exception = assertThrows(
-                    InvalidDateException.class,
-                    () -> Parser.parse(
-                            new String[] { "event", "name /at 1931-3-30" }));
+                    InvalidDateException.class, () ->
+                            Parser.parse(new String[] {
+                                "event",
+                                "name /at 1931-3-30"
+                            }));
             assertEquals("     ☹ OOPS!!! Your date needs to"
                             + " have this format:\n     \"YYYY-MM-DD HHMM\"",
                     exception.getMessage());
@@ -277,9 +305,11 @@ public class ParserTest {
         @DisplayName("should throw exception if date format is not YYYY-MM-DD")
         public void parseEventSix() {
             InvalidDateException exception = assertThrows(
-                    InvalidDateException.class,
-                    () -> Parser.parse(
-                            new String[] { "event", "name /at 1992-03 1923" }));
+                    InvalidDateException.class, () ->
+                            Parser.parse(new String[] {
+                                "event",
+                                "name /at 1992-03 1923"
+                            }));
             assertEquals("     ☹ OOPS!!! Your date needs to"
                             + " have this format:\n     \"YYYY-MM-DD\"",
                     exception.getMessage());
@@ -289,9 +319,11 @@ public class ParserTest {
         @DisplayName("should throw exception if time format is not HHMM")
         public void parseEventSeven() {
             InvalidDateException exception = assertThrows(
-                    InvalidDateException.class,
-                    () -> Parser.parse(
-                            new String[] { "event", "name /at 1992-03-12 12394" }));
+                    InvalidDateException.class, () ->
+                            Parser.parse(new String[] {
+                                "event",
+                                "name /at 1992-03-12 12394"
+                            }));
             assertEquals("     ☹ OOPS!!! Your time needs to"
                             + " have this format:\n     \"HHMM\"",
                     exception.getMessage());
@@ -301,9 +333,11 @@ public class ParserTest {
         @DisplayName("should throw exception if time not in integers")
         public void parseEventEight() {
             InvalidDateException exception = assertThrows(
-                    InvalidDateException.class,
-                    () -> Parser.parse(
-                            new String[] { "event", "name /at abc-12-1 1923" }));
+                    InvalidDateException.class, () ->
+                            Parser.parse(new String[] {
+                                "event",
+                                "name /at abc-12-1 1923"
+                            }));
             assertEquals("     ☹ OOPS!!! Please check that you've"
                             + " entered\n       the date and time correctly",
                     exception.getMessage());
@@ -313,9 +347,11 @@ public class ParserTest {
         @DisplayName("should throw exception if time is not possible")
         public void parseEventNine() {
             InvalidDateException exception = assertThrows(
-                    InvalidDateException.class,
-                    () -> Parser.parse(
-                            new String[] { "event", "name /at 1998-12-45 1923" }));
+                    InvalidDateException.class, () ->
+                            Parser.parse(new String[] {
+                                "event",
+                                "name /at 1998-12-45 1923"
+                            }));
             assertEquals("     ☹ OOPS!!! Please check that you've"
                             + " entered\n       the date and time correctly",
                     exception.getMessage());
@@ -329,8 +365,8 @@ public class ParserTest {
         @DisplayName("should throw exception")
         public void parseUnknown() {
             UnknownCommandException exception = assertThrows(
-                    UnknownCommandException.class,
-                    () -> Parser.parse(new String[] { "yeet" }));
+                    UnknownCommandException.class, () ->
+                            Parser.parse(new String[] { "yeet" }));
             assertEquals("     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(",
                     exception.getMessage());
         }

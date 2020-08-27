@@ -1,8 +1,8 @@
 package main.command;
 
-import main.ui.Ui;
-import main.task.TaskList;
 import main.exception.InvalidTaskException;
+import main.task.TaskList;
+import main.ui.Ui;
 
 /**
  * Represents the commands that a user can give to the UI.

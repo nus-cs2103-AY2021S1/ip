@@ -11,8 +11,8 @@ import java.time.format.DateTimeFormatter;
  * @since v0.1
  */
 public class Deadline extends Task {
-    private static final DateTimeFormatter FORMATTER
-            = DateTimeFormatter.ofPattern("EEEE, dd MMM yyyy, h:mma");
+    private static final DateTimeFormatter FORMATTER =
+            DateTimeFormatter.ofPattern("EEEE, dd MMM yyyy, h:mma");
     private final LocalDateTime time;
 
     /**
