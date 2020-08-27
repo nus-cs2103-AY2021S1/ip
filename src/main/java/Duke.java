@@ -61,7 +61,7 @@ public class Duke {
 
             switch (command) {
             case HELP:
-                ui.availableCommands();
+                ui.printAvailableCommands();
                 continue;
             case TODO:
                 description = input.substring(4);
