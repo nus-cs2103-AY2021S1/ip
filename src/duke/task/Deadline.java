@@ -4,6 +4,10 @@ import duke.exception.IncorrectFormatException;
 import duke.ui.UIPrint;
 import duke.time.Time;
 
+/**
+ * A Deadline is a task with a deadline. Deadline objects store both task
+ * description and deadline time.
+ */
 public class Deadline extends Task {
 
     private Time deadline;
@@ -18,6 +22,12 @@ public class Deadline extends Task {
         return "deadline";
     }
 
+    /**
+     * Creates a Deadline using a string with task info,
+     * throws exceptions when the string has wrong format.
+     * @param deadlineInfo the string of task info
+     * @return the Deadline object created
+     */
     public static Deadline createDeadline(String deadlineInfo) {
         String[] splitStr = deadlineInfo.split(" /by ", 2);
 

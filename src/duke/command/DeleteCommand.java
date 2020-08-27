@@ -5,12 +5,24 @@ import duke.exception.InvalidIndexException;
 import duke.task.Task;
 import duke.ui.UIPrint;
 
+/**
+ * DeleteCommand asks DukeTaskList to remove the task with the input index.
+ */
 public class DeleteCommand extends Command {
 
+    /**
+     * Constructs a DeleteCommand.
+     */
     public DeleteCommand() {
         names = new String[] { "delete" };
     }
 
+    /**
+     * Asks DukeTaskList to remove the task with the input index.
+     * @param str the index of the task
+     * @param duke the current Duke
+     * @throws InvalidIndexException thrown when the index is invalid
+     */
     @Override
     public void execute(String str, Duke duke) throws InvalidIndexException {
         boolean canParseInt = tryParseInt(str);

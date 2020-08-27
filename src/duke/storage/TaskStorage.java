@@ -14,6 +14,9 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * TaskStorage saves and loads task data.
+ */
 public class TaskStorage {
 
     private Path folderPath;
@@ -26,6 +29,10 @@ public class TaskStorage {
     private Scanner taskReader;
     private Scanner isDoneReader;
 
+    /**
+     * Constructs a TaskStorage object.
+     * @throws IOException
+     */
     public TaskStorage() throws IOException {
         folderPath = Paths.get(".", "saves");
         folderFile = folderPath.toFile();
@@ -63,6 +70,10 @@ public class TaskStorage {
         return task.getTaskType() + " " + task.taskInfo;
     }
 
+    /**
+     * Gets all tasks saved in the task saving txt files.
+     * @return the ArrayList of all tasks saved
+     */
     public ArrayList<Task> getSavedTasks() {
         ArrayList<Task> tasks = new ArrayList<>();
 
@@ -81,6 +92,11 @@ public class TaskStorage {
         return tasks;
     }
 
+    /**
+     * Saves all tasks given to the task saving txt files.
+     * @param tasks tasks to be saved
+     * @throws IOException
+     */
     public void saveTasks(ArrayList<Task> tasks) throws IOException {
         FileWriter taskWriter = new FileWriter(taskFile);
         FileWriter isDoneWriter = new FileWriter(isDoneFile);

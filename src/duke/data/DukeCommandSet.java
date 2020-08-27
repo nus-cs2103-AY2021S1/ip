@@ -6,10 +6,17 @@ import duke.ui.UIPrint;
 
 import java.util.HashMap;
 
+/**
+ * DukeCommandSet contains all supported commands in Duke, and provides
+ * a method to get commands using command names.
+ */
 public class DukeCommandSet {
 
     private HashMap<String, Command> commandSet;
 
+    /**
+     * Constructs a DukeCommandSet, register all supported commands.
+     */
     public DukeCommandSet() {
         commandSet = new HashMap<>();
 
@@ -28,6 +35,12 @@ public class DukeCommandSet {
         }
     }
 
+    /**
+     * Gets the command using its name.
+     * @param commandName the name of the command
+     * @return the command
+     * @throws UnknownCommandException thrown when the name does not belong to any commands
+     */
     public Command getCommand(String commandName) throws UnknownCommandException {
         if (!commandSet.containsKey(commandName)) {
             String line = UIPrint.getLine(UIPrint.star, 50);

@@ -11,6 +11,9 @@ import duke.ui.Ui;
 
 import java.io.IOException;
 
+/**
+ * Duke is a console program that can save tasks and modify saved tasks.
+ */
 public class Duke {
 
     public DukeCommandSet commandSet;
@@ -47,6 +50,12 @@ public class Duke {
         storage.saveCurrentTasks();
     }
 
+    /**
+     * The main function of Duke
+     * @param args arguments
+     * @throws IOException likely to be thrown when there are problems
+     * loading or saving data
+     */
     public static void main(String[] args) throws IOException {
         new Duke().run();
     }
