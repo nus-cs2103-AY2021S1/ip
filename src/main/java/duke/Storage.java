@@ -17,8 +17,13 @@ public class Storage {
         this.fileName = fileName;
     }
 
-    public ArrayList<Task> load() {
-        ArrayList<Task> tasks = new ArrayList<>();
+    /**
+     * Returns a TaskList that stores tasks retrieved from the data/duke.txt if the file exits
+     *
+     * @return a TaskList with tasks stored in the txt file.
+     */
+    public TaskList load() {
+        TaskList tasks = new TaskList( new ArrayList<Task>() );
         try {
             File file = new File("data/duke.txt");
             Scanner sc = new Scanner(file);
@@ -51,6 +56,12 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Creates a duke.txt under data directory if the file does not exist at the first place.
+     * If the file exist, start loading. (Adding previous stored task in duke.txt into an ArrayList<tasks>)
+     *
+     * @throws IOException exception occurs when the file is not found
+     */
     public void createFie() throws IOException {
         File file = new File(this.pathName);
         File dukeSave = new File(this.pathName + this.fileName);
@@ -67,6 +78,12 @@ public class Storage {
 
     }
 
+    /**
+     * Stores newly added tasks and previous tasks from the TaskList in the duke.txt file
+     *
+     * @param tasks TaskList with newly added tasks and previous tasks
+     * @throws IOException exception occurs when the file is not found
+     */
     public void storeFile(TaskList tasks) throws IOException {
         FileWriter fw = new FileWriter("data/duke.txt");
         for (int k = 0; k < tasks.size(); k++) {

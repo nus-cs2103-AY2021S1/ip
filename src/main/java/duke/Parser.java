@@ -23,6 +23,14 @@ public class Parser {
         LIST,
     }
 
+    /**
+     * Returns a string array that splits the user's command by ' '.
+     * Assigns the user's type of command corresponding to the enum type.
+     *
+     * @param userCommand User's command in a line scanned by Ui.
+     * @return a string array that splits the user's command by ' '.
+     */
+
     public String[] getDukeType(String userCommand) {
         String[] words = userCommand.split(" ");
         if (words[0].equals("deadline")) {
@@ -42,6 +50,15 @@ public class Parser {
         }
         return words;
     }
+
+    /**
+     * Returns a string of response from duke.
+     * The type of response are fixed in Ui.
+     *
+     * @param userCommand User's command scanned by Ui.
+     * @return a string of response from duke.
+     * @throws EmptyInputException,NoResponseException exceptions occur when the user's command cannot be responded or lack of input.
+     */
 
     public String parse(String userCommand) throws EmptyInputException, NoResponseException {
         String[] words = this.getDukeType(userCommand);

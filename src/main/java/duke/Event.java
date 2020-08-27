@@ -11,6 +11,12 @@ public class Event extends Task {
         this.at = LocalDate.parse(at);
     }
 
+    /**
+     * Returns a string that represents the Event task with deadline in the format of MMM dd yyyy.
+     *
+     * @return String of Event task.
+     */
+
     @Override
     public String toString() {
         return "[E]" + super.toString() + "(at: " + at.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";

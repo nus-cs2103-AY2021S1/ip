@@ -10,7 +10,7 @@ public class Duke {
 
     public Duke(String path, String fileName) {
         this.storage = new Storage(path,fileName);
-        this.tasks = new TaskList(storage.load());
+        this.tasks = storage.load();
         this.ui = new Ui(this.tasks);
     }
 
