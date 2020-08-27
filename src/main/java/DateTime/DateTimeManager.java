@@ -10,33 +10,46 @@ import java.time.format.DateTimeParseException;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
+/**
+ * Represents a manager that handles all actions and requests that involves dates and time.
+ */
 public class DateTimeManager {
-    public static LocalDateTime setDateTime(CharSequence s){
+    /**
+     * Returns a LocalDateTime from the input string.
+     *
+     * @param s date time in String.
+     * @return LocalDateTime date and time.
+     */
+    public static LocalDateTime setDateTime(CharSequence s) {
         DateTimeFormatter format = DateTimeFormatter.ofPattern("d-MM-uuuu HHmm");
         LocalDateTime dt = LocalDateTime.parse(s,format);
         return dt;
     }
-    public static LocalDate setDate(CharSequence s){
-        LocalDate d = LocalDate.parse(s);
-        return d;
-    }
+
+    /**
+     * Adds a LocalDateTime to an existing task.
+     *
+     * @param task task.
+     * @param date date and time in String form.
+     * @throws ErrorExceptions wrong date and time format.
+     */
     public static void addDate(task task, String date) throws ErrorExceptions {
         Scanner sc = new Scanner(date);
-        try{
+        try {
             String d = sc.next();
-            try{
+            try {
                 String t = sc.next();
-                try{
+                try {
                     String DT = d + " " + t;
                     LocalDateTime dt = DateTimeManager.setDateTime(DT);
                     task.setDate(dt);
-                } catch(DateTimeParseException e){
+                } catch (DateTimeParseException e) {
                     throw new ErrorExceptions("Wrong date time format! dd-mm-yyyy HHmm");
                 }
-            } catch(NoSuchElementException e){
+            } catch (NoSuchElementException e) {
                 throw new ErrorExceptions("Missing time!");
             }
-        } catch(NoSuchElementException e){
+        } catch (NoSuchElementException e) {
             throw new ErrorExceptions("Missing Date!");
         }
     }

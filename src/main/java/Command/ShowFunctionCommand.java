@@ -1,7 +1,14 @@
 package Command;
 
-public class ShowFunctionCommand extends Command{
-    public static void execute(){
+/**
+ * Represents a command that displays all commands and the snytax.
+ */
+public class ShowFunctionCommand extends Command {
+
+    /**
+     * Prints all commands and their syntax.
+     */
+    public static void execute() {
         System.out.println("list: to show all existing tasks.");
         System.out.println("bye: to exit the todo bot.");
         System.out.println("delete [task index]: to delete the selected task from the todolist.");
@@ -12,5 +19,6 @@ public class ShowFunctionCommand extends Command{
                         "add a event task with the specific period.");
         System.out.println("done [task index]: to mark the specific task as completed.");
         System.out.println("filter [d-MM-uuuu]: to show all the tasks with this date.");
+        System.out.println("find [keyword]: to find all tasks with that has the keywords in its name.");
     }
 }

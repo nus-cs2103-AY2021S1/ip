@@ -7,7 +7,17 @@ import UI.UserInterface;
 
 import java.util.NoSuchElementException;
 
+/**
+ * Represents a command that deletes a task.
+ */
 public class DeleteCommand extends Command {
+
+    /**
+     * Deletes the selected task from the list.
+     *
+     * @param i task index.
+     * @throws ErrorExceptions failed to find task.
+     */
     public static void execute(int i) throws ErrorExceptions {
         task t;
         int index = i;
@@ -17,7 +27,7 @@ public class DeleteCommand extends Command {
             UserInterface.done();
             System.out.println("    " + TaskManager.read(t));
             System.out.println("The tracked Tasks.task has been deleted!");
-        } catch(NoSuchElementException e){
+        } catch (NoSuchElementException e) {
             throw new ErrorExceptions("There is no suck Tasks.task!");
         }
     }
