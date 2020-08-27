@@ -31,7 +31,7 @@ public class Storage {
      */
 
     public Task deserializeTask(String serializedTask) throws RuntimeException {
-        String[] tokens = serializedTask.replaceAll("\\s","").split("\\|");
+        String[] tokens = serializedTask.split(" \\| ");
 
         String taskIndex = tokens[0];
         boolean isDone = tokens[1].equals("1");
@@ -98,7 +98,8 @@ public class Storage {
      */
     public void saveTasks(List<Task> tasks) {
         try {
-            String serializedTasks = tasks.stream().map(this::serializeTask).collect(Collectors.joining());
+            String serializedTasks = tasks.stream().map(this::serializeTask)
+                    .collect(Collectors.joining());
             Files.writeString(this.filePath, serializedTasks, StandardCharsets.UTF_8);
         } catch (IOException e) {
             System.out.println("Failed to save tasks to hard disk.");
