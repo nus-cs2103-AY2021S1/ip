@@ -11,7 +11,7 @@ public class Event extends Task {
     private String time;
 
     public Event(String description, LocalDate date,String time) throws DukeException {
-        super(description.substring(5),"event");
+        super(description.substring(6),"event");
 //        this.dateTime = description.substring(description.indexOf("/")+4);
         this.date = date;
         this.time = time;

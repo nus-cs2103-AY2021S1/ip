@@ -10,7 +10,7 @@ public class Deadline extends Task {
     protected LocalDate by;
 
     public Deadline(String description, LocalDate date) throws DukeException {
-        super(description.substring(8),"deadline");
+        super(description.substring(9),"deadline");
         this.by = date;
 //        this.by = description.substring(description.indexOf("/")+4);
         this.setType("deadline");

@@ -36,7 +36,7 @@ public class Ui {
                 "_______________________________\n" +
                         "Got it. I've added this task:\n" +
                         currentTask.toString() + "\n" +
-                        "Now you have " + currentTaskList.size() + " tasks in the list.\n" +
+                        "Now you have " + currentTaskList.size() + " task(s) in the list.\n" +
                         "_______________________________");
 
     }
