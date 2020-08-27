@@ -61,6 +61,23 @@ public class Ui {
     }
 
     /**
+     * message after searching for term with Find
+     * @param listOfTasksFound list of taks found containing that term
+     */
+    public void findMessage(ArrayList<Task> listOfTasksFound) {
+        if (listOfTasksFound.isEmpty()) {
+            System.out.println("No tasks found with that term");
+        } else {
+
+            System.out.println("Here are the matching tasks in your list: \n");
+
+            for (int i = 1; i <= listOfTasksFound.size(); i++) {
+                System.out.println(i + "." + listOfTasksFound.get(i - 1));
+            }
+        }
+    }
+
+    /**
      * message after deleting a message.
      * @param task task to be deleted.
      * @param tasksLeft integer value of tasks remaining in the list of tasks.
@@ -81,7 +98,6 @@ public class Ui {
         }
         return end;
     }
-
 
     public void print(String s) {
         System.out.println(s);

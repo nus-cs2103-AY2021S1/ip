@@ -53,6 +53,10 @@ public abstract class Task {
         }
     }
 
+    public boolean isContain(String term) {
+        return (this.description.contains(term));
+    }
+
     public boolean getIsDone() {
         return this.isDone;
     }
