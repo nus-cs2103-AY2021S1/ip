@@ -47,21 +47,21 @@ public class Storage {
                 String task[] = currentLine.split("\\|");
                 if (task.length != 0 && !task[0].equals("")) {
                     switch(task[1]) {
-                        case "T":
-                            ToDo todo = new ToDo(task[3]);
-                            if (Integer.parseInt(task[2]) == 1) todo.markAsDone();
-                            storedTasks.add(todo);
-                            break;
-                        case "D":
-                            Deadline deadline = new Deadline(task[3]);
-                            if (Integer.parseInt(task[2]) == 1) deadline.markAsDone();
-                            storedTasks.add(deadline);
-                            break;
-                        case "E":
-                            Event event = new Event(task[3]);
-                            if (Integer.parseInt(task[2]) == 1) event.markAsDone();
-                            storedTasks.add(event);
-                            break;
+                    case "T":
+                        ToDo todo = new ToDo(task[3]);
+                        if (Integer.parseInt(task[2]) == 1) todo.markAsDone();
+                        storedTasks.add(todo);
+                        break;
+                    case "D":
+                        Deadline deadline = new Deadline(task[3]);
+                        if (Integer.parseInt(task[2]) == 1) deadline.markAsDone();
+                        storedTasks.add(deadline);
+                        break;
+                    case "E":
+                        Event event = new Event(task[3]);
+                        if (Integer.parseInt(task[2]) == 1) event.markAsDone();
+                        storedTasks.add(event);
+                        break;
                     }
                 }
             }
