@@ -1,5 +1,6 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
@@ -27,6 +28,15 @@ class Task {
 
     public String getStatusIcon() {
         return "[" + (isDone ? "\u2713" : "\u2718") + "] ";
+    }
+
+    public int getStatusNum() {
+        return isDone ? 1 : 0;
+    }
+
+    public String getPureTypeLetter() {
+        //dummy value
+        return "";
     }
 
     public void setDone() {
@@ -126,6 +136,11 @@ class Todo extends Task {
     }
 
     @Override
+    public String getPureTypeLetter() {
+        return "T";
+    }
+
+    @Override
     public String getTypeLetter() {
         // dummy value
         return "[T]";
@@ -139,6 +154,10 @@ class Event extends Task {
 
     Event(String message, boolean isDone) {
         super(message, isDone);
+    }
+    @Override
+    public String getPureTypeLetter() {
+        return "E";
     }
 
     @Override
@@ -155,6 +174,11 @@ class Deadline extends Task {
 
     Deadline(String message, boolean isDone) {
         super(message, isDone);
+    }
+
+    @Override
+    public String getPureTypeLetter() {
+        return "D";
     }
 
     @Override
@@ -196,11 +220,9 @@ class Convert {
         if (taskType.equals("T")) {
             return new Todo(message, getStatus(Integer.parseInt(isDone)));
         } else if (taskType.equals("E")) {
-            String time = s.split(" ; ")[3];
-            return new Event(at(message + time), getStatus(Integer.parseInt(isDone)));
+            return new Event(at(message), getStatus(Integer.parseInt(isDone)));
         } else if (taskType.equals("D")) {
-            String time = s.split(" ; ")[3];
-            return new Deadline(by(message + time), getStatus(Integer.parseInt(isDone)));
+            return new Deadline(by(message), getStatus(Integer.parseInt(isDone)));
         } else {
             throw new IllegalTaskTypeException();
         }
@@ -281,6 +303,15 @@ public class Duke {
             if (currentCommand.equals("bye")) {
                 System.out.println(format(messageBye));
                 scanner.close();
+                FileWriter fileWriter = new FileWriter("start.txt");
+                String content = "";
+                for (i = 0; i < list.size(); i++) {
+                    Task task = list.get(i);
+                    content = task.getPureTypeLetter() + " ; " + task.getStatusNum()
+                            + " ; " + task.getMessage() + "\n";
+                    fileWriter.write(content);
+                }
+                fileWriter.close();
                 break;
             } else if (currentCommand.equals("list")) {
                 System.out.print(SPACE + LINE);
@@ -292,6 +323,7 @@ public class Duke {
                     counter++;
                 }
                 System.out.println(SPACE + LINE);
+
             } else {
                 try {
                     String extraCommand = currentCommand.split(" ", 2)[1];
