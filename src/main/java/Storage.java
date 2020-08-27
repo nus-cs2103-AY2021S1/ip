@@ -10,17 +10,17 @@ import java.util.Scanner;
 
 public class Storage {
     Scanner data;
-    public Storage(String filePath){
+    public Storage(String filePath) throws Exception {
         File file= new File(filePath);
         try {
-            file.createNewFile();
+            Boolean fileCreated = file.createNewFile();
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new Exception("Cannot create storage file :(");
         }
         try {
             this.data = new Scanner(file);
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            throw new Exception("Cannot find storage file :(");
         }
     }
     public List<String> read() {
