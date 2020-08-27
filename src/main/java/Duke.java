@@ -1,7 +1,3 @@
-import java.awt.*;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
@@ -16,11 +12,6 @@ class Task {
     Task(String message) {
         this.message = message;
         this.isDone = false;
-    }
-
-    Task(String message, boolean isDone) {
-        this.message = message;
-        this.isDone = isDone;
     }
 
     public String getMessage() {
@@ -169,14 +160,6 @@ class Convert {
         LocalDate date = LocalDate.parse(second);
         return first + "(by: " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
-
-    static Task add(String s) {
-        return new Task("");
-    }
-}
-
-enum TaskType {
-    T, D, E
 }
 
 public class Duke {
@@ -190,7 +173,7 @@ public class Duke {
                SPACE + LINE;
     }
 
-    public static void main(String[] args) throws Exception{
+    public static void main(String[] args) {
         // greeting and exit messages strings
         // list and mark strings
         final String messageHello = "Hello! I'm Duke\n" + SPACE + " " + "What can I do for you?";
@@ -199,33 +182,15 @@ public class Duke {
         final String messageMarked = "Nice! I've marked this task as done:\n";
         final String messageAdded = "Got it. I've added this task:\n";
         final String messageDelete = "Noted. I've removed this task:\n";
-        final String home = System.getProperty("user.home");
-
-        java.nio.file.Path path = java.nio.file.Paths.get(home, "ip","start.txt");
-        boolean directoryExists = java.nio.file.Files.exists(path);
-        File file = new File(path.toString());
 
         // set up scanner
         Scanner scanner = new Scanner(System.in);
-        Scanner scannerInitial = new Scanner(file);
 
         // set up empty list of things to do
         List<Task> list = new ArrayList<>();
 
-        // add tasks to init list
-        while (scannerInitial.hasNextLine()) {
-            String task = scannerInitial.nextLine();
-            list.add(Convert.add(task));
-        }
-
         // start to serve
         System.out.println(format(messageHello));
-
-        if (!directoryExists) {
-            System.out.println(format("☹ OOPS!!! Cannot find start file"));
-            throw new FileNotFoundException();
-        }
-
 
         // continue if have more commands (that are not "bye")
         // echo the command or say bye
