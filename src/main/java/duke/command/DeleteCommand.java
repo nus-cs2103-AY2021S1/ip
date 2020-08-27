@@ -4,6 +4,9 @@ import duke.*;
 import duke.task.TaskList;
 import duke.DukeException;
 
+/**
+ * Represents command that is specific to the delete command.
+ */
 public class DeleteCommand extends Command {
 
     private String input;
@@ -13,13 +16,20 @@ public class DeleteCommand extends Command {
         this.input = input;
     }
 
+    /**
+     * Executes delete command based on user input.
+     * @param taskList tasks of user.
+     * @param ui user interface object.
+     * @param storage Storage object to retrieve and store data from file.
+     * @throws DukeException If invalid input.
+     */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        if (Parser.isValidIndex(input, tasks.getListSize())) {
+    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+        if (Parser.isValidIndex(input, taskList.getListSize())) {
             int index = Parser.getIndex(input);
-            ui.deletedMessage(tasks.getList().get(index), tasks.getListSize());
-            tasks.deleteTask(index);
-            storage.saveListToFile(tasks.getList());
+            ui.deletedMessage(taskList.getList().get(index), taskList.getListSize());
+            taskList.deleteTask(index);
+            storage.saveListToFile(taskList.getList());
         } else {
             throw new DukeException("You don't have such task in your list...");
         }

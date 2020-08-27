@@ -5,11 +5,26 @@ import duke.Storage;
 import duke.task.TaskList;
 import duke.Ui;
 
+/**
+ * Represents command object that is based on user command.
+ */
 public abstract class Command {
+
     protected boolean exit;
 
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
+    /**
+     * Executes command based on user input.
+     * @param taskList tasks of user.
+     * @param ui user interface object.
+     * @param storage Storage object to retrieve and store data from file.
+     * @throws DukeException If invalid input.
+     */
+    public abstract void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException;
 
+    /**
+     * Checks boolean value of exit variable.
+     * @return boolean value of exit variable.
+     */
     public boolean isExit() {
         return exit;
     }

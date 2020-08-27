@@ -16,9 +16,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Stores all storage related methods and variables.
+ */
 public class Storage {
 
-    List<Task> list = new ArrayList<>();
+    List<Task> tasks = new ArrayList<>();
     String filePath;
     File dataFile;
 
@@ -26,6 +29,11 @@ public class Storage {
         this.filePath = filePath;
     }
 
+    /**
+     * Loads data from file.
+     * @return List of tasks in file.
+     * @throws DukeException if file cannot be created or reader cannot read next line.
+     */
     public List<Task> load() throws DukeException{
 
         Path directoryPath = Paths.get("data");
@@ -54,16 +62,21 @@ public class Storage {
                 BufferedReader reader = new BufferedReader(new FileReader(filePath.toString()));
                 String line;
                 while ((line = reader.readLine()) != null) {
-                    convertLineToTasks(list, line);
+                    convertLineToTasks(tasks, line);
                 }
-                return list;
+                return tasks;
             } catch (IOException e) {
                 throw new DukeException("WHAT WHATS GOING ON");
             }
         }
     }
 
-    private void convertLineToTasks(List<Task> list, String line) {
+    /**
+     * Converts lines in text file to task objects and adds them to list.
+     * @param tasks list of objects to add the new task objects to.
+     * @param line Line to be converted to a task object.
+     */
+    private void convertLineToTasks(List<Task> tasks, String line) {
 
         String[] stringArray = line.split(" \\| ");
         String taskType = stringArray[0];
@@ -84,7 +97,7 @@ public class Storage {
             break;
         }
 
-        list.add(task);
+        tasks.add(task);
 
         if (isDone) {
             task.markAsDone();
@@ -92,12 +105,17 @@ public class Storage {
 
     }
 
-    public void saveListToFile(List<Task> list) throws DukeException {
+    /**
+     * Saves list of tasks of users to file.
+     * @param tasks List of tasks of user.
+     * @throws DukeException if unable to write to file.
+     */
+    public void saveListToFile(List<Task> tasks) throws DukeException {
 
         try {
             FileWriter writer = new FileWriter(dataFile, false);
 
-            for (Task t : list) {
+            for (Task t : tasks) {
                 writer.write(t.toFileString() + "\n");
             }
             writer.close();

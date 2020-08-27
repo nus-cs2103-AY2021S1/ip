@@ -3,10 +3,13 @@ package duke;
 import duke.command.Command;
 import duke.task.TaskList;
 
+/**
+ * Chat bot to keep track of tasks.
+ */
 public class Duke {
 
     private final Storage storage;
-    private TaskList tasks;
+    private TaskList taskList;
     private final Ui ui;
 
     public Duke(String filePath) {
@@ -15,14 +18,14 @@ public class Duke {
         storage = new Storage(filePath);
 
         try {
-            tasks = new TaskList(storage.load());
+            taskList = new TaskList(storage.load());
         } catch (DukeException e) {
             ui.loadingErrorMessage();
-            tasks = new TaskList();
+            taskList = new TaskList();
         }
     }
 
-    public void run() {
+    private void run() {
 
         ui.greet();
 
@@ -33,7 +36,7 @@ public class Duke {
             try {
                 String fullCommand = ui.readCommand();
                 Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
+                c.execute(taskList, ui, storage);
                 isExit = c.isExit();
             } catch (DukeException e) {
                 ui.wrapMessage(e.toString());

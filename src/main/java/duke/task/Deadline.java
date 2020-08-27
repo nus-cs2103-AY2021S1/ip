@@ -3,6 +3,9 @@ package duke.task;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents deadline task of user.
+ */
 public class Deadline extends Task {
 
     public Deadline(String description, String by) {
@@ -11,6 +14,10 @@ public class Deadline extends Task {
         this.dateString = by;
     }
 
+    /**
+     * Returns string representation of Deadline object to be stored in file.
+     * @return string representation of Deadline object for file storage.
+     */
     @Override
     public String toFileString() {
         String doneInteger = isDone ? "1" : "0";
