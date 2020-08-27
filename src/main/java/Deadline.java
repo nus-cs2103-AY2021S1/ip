@@ -12,4 +12,14 @@ public class Deadline extends Task {
     public String getStatus() {
         return "[D]" + super.getStatus() + " (by: " + deadline + ")";
     }
+
+    @Override
+    public String getType() {
+        return "D";
+    }
+
+    @Override
+    public String getDescription() {
+        return super.getDescription() + "|" + this.deadline;
+    }
 }

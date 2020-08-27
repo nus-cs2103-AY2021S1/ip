@@ -12,4 +12,14 @@ public class Event extends Task {
     public String getStatus() {
         return "[E]" + super.getStatus() + " (at: " + time + ")";
     }
+
+    @Override
+    public String getType() {
+        return "E";
+    }
+
+    @Override
+    public String getDescription() {
+        return super.getDescription() + "|" + this.time;
+    }
 }
