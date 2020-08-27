@@ -3,7 +3,7 @@ package main.java.duke;
 import java.util.Scanner;
 
 public class Ui {
-    private final String BORDER = "____________________________________________________________";
+    private static final String BORDER = "____________________________________________________________";
     private final String LOGO = " ____        ____\n"
             + "|  _ \\  ___ |  _ \\\n"
             + "| | | |/ _ \\| | | |\n"
@@ -16,6 +16,7 @@ public class Ui {
     }
 
     public void showWelcome() {
+
         System.out.println("Hello I am\n" + LOGO + "\n" + "Feed me some stuff! :3\n");
     }
 
@@ -26,12 +27,16 @@ public class Ui {
 
     }
 
-    public void showLoadingError() {
-        System.out.println("Error loading file!");
+    public void showError(String message) {
+        System.out.println(message);
     }
 
-    public void printInBorder(String message) {
-        System.out.println(String.format("%s\n%s\n%s", BORDER, message, BORDER));
+    public void showLine() {
+        System.out.println(BORDER);
+    }
+
+    public void printMessage(String message) {
+        System.out.println(String.format(message));
     }
 
 }

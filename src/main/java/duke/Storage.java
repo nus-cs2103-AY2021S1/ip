@@ -17,7 +17,7 @@ public class Storage {
     private String filePath;
     private File file;
 
-    public Storage(String filePath) {
+    public Storage(String filePath) throws DukeException {
         this.filePath = filePath;
         file = new File(this.filePath);
         if (!file.exists()) {
@@ -25,7 +25,7 @@ public class Storage {
             try {
                 file.createNewFile();
             } catch (IOException e) {
-                e.printStackTrace();
+                throw new DukeException("Unable to create file...");
             }
         }
 
@@ -69,17 +69,17 @@ public class Storage {
         }
     }
 
-    public void saveTaskList(String taskToAdd) {
+    public void saveTaskList(String taskToAdd) throws DukeException {
         try {
             FileWriter fw = new FileWriter(this.file, true);
             fw.write(taskToAdd + "\n");
             fw.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new DukeException("Error editing file!");
         }
     }
 
-    public void editTaskList(String newTask, int taskNum, boolean delete) {
+    public void editTaskList(String newTask, int taskNum, boolean delete) throws DukeException {
         try {
             ArrayList<String> fileContent = new ArrayList<>(Files.readAllLines(Paths.get(this.filePath)));
             if (delete) {
@@ -89,7 +89,7 @@ public class Storage {
             }
             Files.write(Paths.get(this.filePath), fileContent);
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new DukeException("Error editing file!");
         }
     }
 
