@@ -37,21 +37,21 @@ public class Parser {
 	public static Command parse(String display) throws DukeException, TaskException {
 		if (display.equals("list")) {
 			return new ListCommand();
-		} else if (display.length() >= 4 && display.substring(0, 4).equals("done")) {
+		} else if (display.length() >= 4 && display.startsWith("done")) {
 			try {
 				int idx = Integer.parseInt(String.valueOf(display.charAt(5))) - 1;
 				return new DoneCommand(idx);
 			} catch (NumberFormatException ex) {
 				throw new DukeException("task index is not a valid number");
 			}
-		} else if (display.length() >= 6 && display.substring(0, 6).equals("delete")) {
+		} else if (display.length() >= 6 && display.startsWith("delete")) {
 			try {
 				int idx = Integer.parseInt(String.valueOf(display.charAt(7))) - 1;
 				return new DeleteCommand(idx);
 			} catch (IndexOutOfBoundsException ex) {
 				throw new DukeException("task index is not a valid number");
 			}
-		} else if (display.length() >= 12 && display.substring(0, 12).equals("tasks due on")) {
+		} else if (display.length() >= 12 && display.startsWith("tasks due on")) {
 			if (parseDate(display.substring(13)) == null) {
 				throw new DukeException("time is of the wrong format");
 			} else {
@@ -60,13 +60,13 @@ public class Parser {
 		} else if (display.equals("bye")) {
 			return new ExitCommand();
 		} else {
-			if (display.length() >= 4 && display.substring(0, 4).equals("todo")) {
+			if (display.length() >= 4 && display.startsWith("todo")) {
 				if (display.length() == 4 || display.substring(4).isBlank()) {
 					throw new TaskException(TaskType.TODO, "description",  "cannot be empty.");
 				} else {
 					return new AddCommand(TaskType.TODO, display.substring(5), null);
 				}
-			} else if (display.length() >= 8 && display.substring(0, 8).equals("deadline")) {
+			} else if (display.length() >= 8 && display.startsWith("deadline")) {
 				int idx = display.indexOf(" /by ");
 				if (idx == -1 || display.length() == idx + 5 || display.substring(idx + 5).isBlank()) {
 					throw new TaskException(TaskType.DEADLINE, "time", "cannot be identified.");
@@ -80,7 +80,7 @@ public class Parser {
 								parseDate(display.substring(idx + 5)));
 					}
 				}
-			} else if (display.length() >= 5 && display.substring(0, 5).equals("event")) {
+			} else if (display.length() >= 5 && display.startsWith("event")) {
 				int idx = display.indexOf(" /at ");
 				if (idx == -1 || display.length() < idx + 5 || display.substring(idx + 5).isBlank()) {
 					throw new TaskException(TaskType.EVENT, "time", "cannot be identified.");

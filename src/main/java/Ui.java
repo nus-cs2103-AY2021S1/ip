@@ -20,11 +20,11 @@ public class Ui {
 	}
 
 	public void showWelcome() {
-		formatResponse("Hello! I'm Duke", "What can I do for you?");
+		showResponse("Hello! I'm Duke", "What can I do for you?");
 	}
 
 	public void showGoodbye(){
-		formatResponse("Bye. Hope to see you again soon!");
+		showResponse("Bye. Hope to see you again soon!");
 	}
 
 	public String readCommand() {
@@ -36,7 +36,7 @@ public class Ui {
 	 *
 	 * @param response ArrayList of feedback messages.
 	 */
-	public static void formatResponse(ArrayList<String> response) {
+	public static void showResponse(ArrayList<String> response) {
 		System.out.println(INDENT + LINE);
 		for (String resp: response) {
 			System.out.println(INDENT + " " + resp);
@@ -51,15 +51,15 @@ public class Ui {
 	 *
 	 * @param response Variable number of feedback messages.
 	 */
-	public static void formatResponse(String ...response) {
+	public static void showResponse(String ...response) {
 		ArrayList<String> lst = new ArrayList<>();
 		for (String resp: response) {
 			lst.add(resp);
 		}
-		formatResponse(lst);
+		showResponse(lst);
 	}
 
-	public String formatListCount(TaskList tasks) {
+	public String showListCount(TaskList tasks) {
 		return "Now you have " + tasks.getCount() + " task" + (tasks.getCount() == 1 ? "" : "s") + " in the list.";
 	}
 
@@ -69,7 +69,7 @@ public class Ui {
 	 * @param tasks Tasks to display.
 	 * @param date Date to filter tasks by.
 	 */
-	public void formatList(TaskList tasks, Date date) {
+	public void showTaskList(TaskList tasks, Date date) {
 		ArrayList<String> lst = tasks.toString(date);
 		if (date == null) {
 			lst.add(0, "Here are the tasks in your list:");
@@ -77,19 +77,18 @@ public class Ui {
 			lst.add(0,
 					"Here are the tasks in your list that occur on " + formatDate(date) + ":");
 		}
-		formatResponse(lst);
+		showResponse(lst);
 	}
 
-	public void formatDoneTask(Task task) {
-		formatResponse("Nice! I've marked this task as done:", INDENT + task.toString());
+	public void showDoneTask(Task task) {
+		showResponse("Nice! I've marked this task as done:", INDENT + task.toString());
 	}
 
-	public void formatDeletedTask(Task task, TaskList taskList) {
-		formatResponse("Noted. I've removed this task: ", INDENT + task.toString(), formatListCount(taskList));
+	public void showDeletedTask(Task task, TaskList taskList) {
+		showResponse("Noted. I've removed this task: ", INDENT + task.toString(), showListCount(taskList));
 	}
 
-	public void formatAddTask(Task task, TaskList taskList) {
-		formatResponse("Got it. I've added this task: ", INDENT + task.toString(), formatListCount(taskList));
+	public void showAddTask(Task task, TaskList taskList) {
+		showResponse("Got it. I've added this task: ", INDENT + task.toString(), showListCount(taskList));
 	}
-
 }

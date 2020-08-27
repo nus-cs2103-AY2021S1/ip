@@ -1,15 +1,15 @@
 import org.junit.jupiter.api.Test;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class TaskTest {
-	private final String description = "Todo description";
+	private final String description = "description";
 
 	@Test
-	public void markAsDoneTest() {
+	public void markAsDone_correctDoneStatusShown() {
 		ToDo todo = new ToDo(description, false);
 		assertEquals(todo.toString(), "[" + todo.taskType.getSymbol() + "]" + "[\u2718]" + " " + description);
 		todo.markAsDone();
@@ -17,10 +17,10 @@ public class TaskTest {
 	}
 
 	@Test
-	public void isOccuringOnTest() throws ParseException {
+	public void getIsOccuringOn_eventAgainstTwoDates() throws ParseException {
 		Event event = new Event(description, new SimpleDateFormat("yyyy-MM-dd").parse("2020-03-04"), false);
-		assertEquals(event.isOccuringOn(new SimpleDateFormat("yyyy-MM-dd").parse("2020-03-04")), true);
-		assertEquals(event.isOccuringOn(new SimpleDateFormat("yyyy-MM-dd").parse("2020-04-04")), false);
+		assertTrue(event.isOccuringOn(new SimpleDateFormat("yyyy-MM-dd").parse("2020-03-04")));
+		assertFalse(event.isOccuringOn(new SimpleDateFormat("yyyy-MM-dd").parse("2020-04-04")));
 	}
 
 }

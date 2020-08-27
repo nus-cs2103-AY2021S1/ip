@@ -27,7 +27,7 @@ public class Duke {
                 c.execute(tasks, ui, storage);
                 isExit = c.isExit();
             } catch (DukeException | TaskException e) {
-                ui.formatResponse(e.getMessage());
+                ui.showResponse(e.getMessage());
             }
         }
         ui.showGoodbye();
