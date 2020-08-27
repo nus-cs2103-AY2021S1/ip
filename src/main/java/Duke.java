@@ -1,10 +1,19 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.Files;
+
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
 
 public class Duke {
     private final String VERSION_NUMBER = "1.0.0";
-    private final Scanner sc = new Scanner(System.in);
+    private final Scanner SC = new Scanner(System.in);
+    private final Path DUKE_DATA_FILE_PATH = Paths.get("data", "duke.txt");
     private final String NEW_LINE = "\n";
     private final String HORIZONTAL_LINE =
             "    ____________________________________________________________";
@@ -34,10 +43,16 @@ public class Duke {
 
     public void init() {
         sayHello();
+        try {
+            loadTasksFromDisk();
+        }
+        catch (FileNotFoundException ex) {
+            printError(ex.getMessage());
+        }
 
         while(true) {
-            if (sc.hasNext()) {
-                String input = sc.nextLine().trim();
+            if (SC.hasNext()) {
+                String input = SC.nextLine().trim();
                 if (input.toUpperCase().equals(Commands.EXIT.getString())) { // to make command case-insensitive
                     sayGoodbye();
                     break;
@@ -183,11 +198,38 @@ public class Duke {
         System.out.printf(MESSAGE_TEMPLATE, message);
     }
 
+    private void loadTasksFromDisk() throws FileNotFoundException{
+        File dukeDataFile = new File(DUKE_DATA_FILE_PATH.toUri());
+        Scanner fs = new Scanner(dukeDataFile);
+        while (fs.hasNext()) {
+            System.out.println(fs.nextLine());
+        }
+//        System.out.println("full path: " + dukeDataFile.getAbsolutePath());
+//        System.out.println("file exists?: " + dukeDataFile.exists());
+//        System.out.println("is Directory?: " + dukeDataFile.isDirectory());
+    }
+
+    private void saveTasksToDisk() throws IOException {
+        FileWriter fw = new FileWriter(DUKE_DATA_FILE_PATH.toString());
+        String tasksString = "";
+        for (Task task : this.storageList) {
+            tasksString += task.getDoneness() + " " + task.getName() + NEW_LINE;
+        }
+        fw.write(tasksString);
+        fw.close();
+    }
+
     private void printError(String error) {
         System.out.printf(MESSAGE_TEMPLATE_ERROR, error);
     }
 
     private void sayGoodbye() {
+        try {
+            saveTasksToDisk();
+        }
+        catch (IOException ex) {
+            printError(ex.getMessage());
+        }
         System.out.printf(MESSAGE_TEMPLATE_VERBAL, "Goodbye, hope to see you again!");
     }
 

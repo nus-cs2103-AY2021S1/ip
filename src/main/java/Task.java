@@ -18,6 +18,10 @@ public class Task {
         return "The description of a task cannot be empty.";
     }
 
+    public Boolean getDoneness() {
+        return Boolean.valueOf(this.isDone);
+    }
+
     public String toString() {
         String marked = this.isDone ? "[✓] " : "[✗] ";
         return marked + this.name;
