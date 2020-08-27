@@ -84,9 +84,7 @@ public class Duke {
                         throw new DukeException("", ExceptionType.INDEX_OUT_OF_BOUNDS);
                     } else {
                         userTasks.get(index).setDone();
-                        System.out.println(ui.getServantSpeak()
-                                + "    As you wish Sire. I have marked this task as done:\n"
-                                + "       " + userTasks.get(index).toString());
+                        ui.printMarkAsDone(userTasks.get(index).toString());
                     }
 
                     // Update Tasklist.txt after marking task as done
@@ -129,16 +127,6 @@ public class Duke {
 
             // If user requests for list, display list of tasks
             if (input.equals("list")) {
-//                int count = 1;
-//                System.out.println(ui.getServantSpeak()
-//                        + "    Here are your tasks your Majesty:");
-//                for (Task i : userTasks) {
-//                    System.out.println("    "
-//                            + count + ". "
-//                            + i.toString());
-//                    count++;
-//                }
-//                System.out.println();
                 ui.printListOfTasks(userTasks);
                 continue;
             }

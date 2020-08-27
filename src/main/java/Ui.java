@@ -64,6 +64,12 @@ public class Ui {
         System.out.println();
     }
 
+    public void printMarkAsDone(String task) {
+        System.out.println(SERVANT_SPEAK
+                + "    As you wish Sire. I have marked this task as done:\n"
+                + "       " + task);
+    }
+
     public void printError(DukeException ex) {
         System.out.println(ex);
     }
