@@ -28,7 +28,7 @@ public class Duke {
         System.out.println("Now you have " + numTasks(taskList) + " in the list.");
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws DukeException {
         System.out.println("————————————————————————————————————————————————————————————");
         System.out.println("Hello! I'm Duke!\nWhat can I do for you?");
         System.out.println("————————————————————————————————————————————————————————————");
@@ -75,7 +75,7 @@ public class Duke {
                             tasks.add(newTask);
                             listChangePrint(newTask, tasks, ListChange.ADD);
                         } catch (Exception e) {
-                            new DukeException("invalidDeadline");
+                            new DukeException("invalidDeadlineTask");
                         }
                         break;
                     case "event":
