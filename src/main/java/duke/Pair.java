@@ -1,3 +1,5 @@
+package duke;
+
 public class Pair<T, U> {
     private T t;
     private U u;
