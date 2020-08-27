@@ -25,7 +25,7 @@ public class Task {
     public static Task fromData(String st) {
         String[] segment = st.split(" \\| ");
         String type = segment[0];
-        boolean isDone = segment[1] == "1";
+        boolean isDone = segment[1].equals("1");
         String title = segment[2];
         if (type.equals("T")) {
             return new Todo(title, isDone);
