@@ -9,8 +9,12 @@ import java.util.ArrayList;
  */
 public class TaskList {
 
+    /** Array list of tasks. */
     private final ArrayList<Task> tasks;
 
+    /**
+     * Creates a new and empty task list.
+     */
     public TaskList() {
         this.tasks = new ArrayList<>();
     }

@@ -11,10 +11,20 @@ import duke.util.DateTimeHandler;
  */
 public class Parser {
 
+    /** Storage for parser to write data to. */
     private final Storage storage;
+
+    /** UI for parser to display messages. */
     private final Ui ui;
+
+    /** Task list for parser to add/edit/delete tasks. */
     private final TaskList taskList;
 
+    /**
+     * Creates a new parser from a storage.
+     *
+     * @param storage Storage of Duke's data.
+     */
     public Parser(Storage storage) {
         this.storage = storage;
         this.ui = this.storage.getUi();

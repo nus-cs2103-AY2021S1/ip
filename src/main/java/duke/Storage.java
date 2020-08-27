@@ -19,11 +19,26 @@ import java.io.IOException;
  */
 public class Storage {
 
+    /** Directory file. */
     private final File directory;
+
+    /** Text file. */
     private final File textFile;
+
+    /** UI for storage to display messages. */
     private final Ui ui;
+
+    /** Task list for storage to access. */
     private final TaskList taskList;
 
+    /**
+     * Creates a storage for Duke's tasks data.
+     *
+     * @param directoryPath Path of the directory.
+     * @param textFilePath Path of the text file.
+     * @param ui UI.
+     * @param taskList List of tasks.
+     */
     public Storage(String directoryPath, String textFilePath, Ui ui, TaskList taskList) {
         this.directory = new File(directoryPath);
         this.textFile = new File(textFilePath);
@@ -31,10 +46,20 @@ public class Storage {
         this.taskList = taskList;
     }
 
+    /**
+     * Gets the UI.
+     *
+     * @return UI.
+     */
     public Ui getUi() {
         return ui;
     }
 
+    /**
+     * Gets the list of tasks.
+     *
+     * @return List of tasks.
+     */
     public TaskList getTaskList() {
         return taskList;
     }
