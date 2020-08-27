@@ -25,12 +25,12 @@ public class StorageTest {
     @TempDir
     public static Path testFolder;
 
-    private static final String TEST_DATA_FOLDER = "data/StorageTest";
+    private static final String TEST_DATA_FOLDER = "src/test/data/StorageTest";
     private static final String NON_EXISTENT_FILE_NAME = "ThisFileDoesNotExist.txt";
 
 
     @Test
-    public void constructor_noTxtExtension_exceptionThrown() throws Exception {
+    public void constructor_noTxtExtension_exceptionThrown() throws InvalidFilePathException {
         assertThrows(InvalidFilePathException.class, () ->
                 new Storage(TEST_DATA_FOLDER + "/" + "InvalidFileName"));
     }
