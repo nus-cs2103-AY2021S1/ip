@@ -13,8 +13,6 @@ import java.time.LocalDate;
  */
 public class Parser {
 
-    public Parser() {}
-
     /**
      * Processes the command and filters
      * it the correct private methods to

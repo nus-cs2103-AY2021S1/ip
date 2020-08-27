@@ -19,12 +19,10 @@ public class Duke {
 
     private Storage storage;
     private TaskList taskList;
-    private Parser parser;
 
     public Duke(String filePath) {
         this.taskList = TaskList.createTaskList();
         this.storage = Storage.createDukeFile(filePath);
-        this.parser = new Parser();
     }
 
     /**
@@ -39,9 +37,9 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         while (sc.hasNext()) {
             String cmd = sc.nextLine().trim().toLowerCase();
-            if (!cmd.equals("bye")) {
+            if (!cmd.equals("bye") && cmd.length() != 0) {
                 try {
-                    this.parser.process(cmd, this.taskList, this.storage);
+                    Parser.process(cmd, this.taskList, this.storage);
                 } catch (DukeException e) {
                     Ui.showError(e.getMessage());
                 }
