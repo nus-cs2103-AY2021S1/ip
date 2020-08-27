@@ -3,5 +3,6 @@ public enum Commands {
     DEADLINE,
     EVENT,
     DONE,
-    DELETE
+    DELETE,
+    FIND
 }

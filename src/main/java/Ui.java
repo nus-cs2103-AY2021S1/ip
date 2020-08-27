@@ -73,6 +73,21 @@ public class Ui {
         }
     }
 
+    public void uiForFind(TaskList tasks){
+        if(tasks.getSize() == 0){
+            System.out.println("   " + HORIZONTAL_LINE
+                    + "\n   " + "You have no tasks"
+                    + "\n   " + HORIZONTAL_LINE);
+        } else {
+            StringBuilder output = new StringBuilder("   " + HORIZONTAL_LINE + "\n Here are the matching tasks in your list:");
+            for (int i = 0; i < tasks.getSize(); i++) {
+                output.append("\n    ").append(i + 1).append(". ").append(tasks.getTask(i + 1));
+            }
+            output.append("\n   " + HORIZONTAL_LINE);
+            System.out.println(output);
+        }
+    }
+
     public String read(){
         return sc.nextLine();
     }
