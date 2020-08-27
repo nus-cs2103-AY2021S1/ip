@@ -5,10 +5,20 @@ import duke.exception.InvalidFormatException;
 import duke.exception.InvalidInstructionException;
 import duke.exception.MissingFieldException;
 
+/**
+ * Contains input validation methods used by <code>UserInputParser</code>
+ */
 public class InputValidator {
 
-    // VALIDATION FUNCTIONS
-    // ENSURE INSTRUCTION STRING IS SIZE 1
+    /**
+     * Validates the instruction <code>String</code> is of size 1.
+     *
+     * @param instrLen <code>String</code> containing length of user instruction.
+     * @param instrType <code>String</code> containing type of instruction.
+     * @param isLenOne <code>boolean</code> to note if the output should equate to 1.
+     * @return boolean denoting the validation results
+     * @throws InvalidInstructionException  If len==1 is not equal to isLenOne.
+     */
     public static boolean validateSizeOne (int instrLen, String instrType, boolean isLenOne)
             throws InvalidInstructionException {
         if ((instrLen == 1) == isLenOne) { // i want instrLen == 1 to be isOne
@@ -18,7 +28,15 @@ public class InputValidator {
         }
     }
 
-    // ENSURE STRING SIZE 2, AND SECOND STRING CAN PARSE TO INT
+    /**
+     * Validates the instruction <code>String Array</code> is of size 2
+     * and the second <code>String</code> can be parsed into <code>Integer</code>.
+     *
+     * @param instructionArray <code>String</code> containing length of user instruction.
+     * @param instrType <code>String</code> containing type of instruction.
+     * @return boolean denoting the validation results
+     * @throws InvalidInstructionException  If validation fails.
+     */
     public static boolean validateSizeTwoAndInt(String[] instructionArray, String instrType)
             throws InvalidInstructionException {
         if (instructionArray.length == 2 && (isNumeric(instructionArray[1]))) {
@@ -27,7 +45,22 @@ public class InputValidator {
         throw new InvalidInstructionException(instrType);
     }
 
-    // ENSURE THAT THE STRING IS NOT EMPTY BEFORE AND AFTER THE INDICATOR, EXCLUDING INSTRUCTION TYPE
+
+    /**
+     * Validates that the instructions are not empty <code>String</code>.
+     * Using the instructionArray, the <code>Strings</code> are merged for indices
+     * before and after the separator.
+     * Location of separator is given by <code>Integer</code> index.
+     * The <code>Strings</code> before and after the index at separator then have their lengths compared.
+     * If the separator does not exist, the index is denoted with -1
+     *
+     * @param instructionArray <code>String</code> containing length of user instruction.
+     * @param instrType <code>String</code> containing type of instruction.
+     * @param index <code>Integer</code> containing location of separator.
+     * @return boolean denoting the validation results
+     * @throws InvalidFormatException  If index does not exist.
+     * @throws MissingFieldException  If validation fails.
+     */
     public static boolean validateDescriptionAndDateTime(String[] instructionArray, String instrType, int index)
             throws InvalidFormatException, MissingFieldException {
 
@@ -46,7 +79,19 @@ public class InputValidator {
         return true;
     }
 
-    // ENSURE THAT THE DATE AND TIME ARE VALID FORMATS
+    /**
+     * Validates that the instructions have correct Date and Time formats.
+     * Date and Time exists as <code>Strings</code> in the array.
+     * They are extracted and split into their constituent <code>Integer</code> values and parsed.
+     * If the parse fails, an error is raised.
+     * Else, they are put through validation to ensure it is proper Date and Time values.
+     *
+     * @param instructionArray <code>String</code> containing length of user instruction.
+     * @param instrType <code>String</code> containing type of instruction.
+     * @param index <code>Integer</code> containing location of separator.
+     * @return boolean denoting the validation results
+     * @throws InvalidFormatException  If index does not exist.
+     */
     public static boolean validateDateAndTime(String[] instructionArray, String instrType, int index)
             throws InvalidFormatException {
 
@@ -114,9 +159,12 @@ public class InputValidator {
         return true;
     }
 
-
-    // HELPER FUNCTIONS
-    // checks if the input string can be parsed into an Integer or not
+    /**
+     * Validates if the input <code>String</code> can be parsed into an integer.
+     *
+     * @param instruction <code>String</code> containing the integer.
+     * @return boolean denoting the validation results
+     */
     private static boolean isNumeric (String instruction) {
         try {
             Integer.parseInt(instruction);

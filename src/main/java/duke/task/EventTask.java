@@ -5,6 +5,12 @@ import duke.CommonString;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents an Event related DukeTask.
+ * Apart from fields defined in <code>DukeTask</code>,
+ * <code>EventTask</code> contains an additional <code>LocalDateTime</code>
+ * to store information about the date and time of the Event.
+ */
 public class EventTask extends DukeTask {
     private final LocalDateTime datetime;
 
@@ -13,6 +19,12 @@ public class EventTask extends DukeTask {
         this.datetime = datetime;
     }
 
+    /**
+     * Returns a <code>String</code> representing the Date and Time of the task.
+     * The <code>String</code> is formatted by the <code>DateTimeFormatter</code> defined.
+     *
+     * @return String DateTime.
+     */
     public String getDatetime() {
         DateTimeFormatter df = DateTimeFormatter.ofPattern(CommonString.DUKE_DATETIME_FORMAT.toString());
         return datetime.format(df);
