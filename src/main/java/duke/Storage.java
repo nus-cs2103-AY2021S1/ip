@@ -6,6 +6,10 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The Storage handles reading and writing of data into Duke.txt file.
+ * It allows user to save and load their added tasks.
+ */
 public class Storage {
 
     List<Task> tasks = new ArrayList<>();
@@ -22,7 +26,11 @@ public class Storage {
         }
     }
 
-    // CREATE
+    /**
+     * Appends the new task data to Duke.txt file.
+     *
+     * @param task
+     */
     public void add(Task task) {
         try {
             FileWriter fw = new FileWriter(data, true);
@@ -33,7 +41,11 @@ public class Storage {
         }
     }
 
-    // READ
+    /**
+     * Reads Duke.txt and add all existing tasks to taskList.
+     *
+     * @throws IOException
+     */
     private void read() throws IOException {
         BufferedReader br = new BufferedReader(new FileReader(data));
         String st;
@@ -47,7 +59,9 @@ public class Storage {
         return tasks;
     };
 
-    // UDPATE
+    /**
+     * Overwrite Duke.txt with the current taskList in data format.
+     */
     public void update() {
         try {
             FileWriter fw = new FileWriter(data);
