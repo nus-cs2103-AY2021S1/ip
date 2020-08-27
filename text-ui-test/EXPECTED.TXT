@@ -60,6 +60,17 @@ Great work! I've marked this task as done:
     [T][O] borrow book
 ____________________________________________________________
  > ____________________________________________________________
+Here are the tasks that matches your search:
+1. [T][O] borrow book
+2. [D][X] return book (by: Monday, Dec 14 2020, 2am)
+____________________________________________________________
+ > ____________________________________________________________
+Here are the tasks that matches your search:
+1. [T][O] borrow book
+2. [D][X] return book (by: Monday, Dec 14 2020, 2am)
+3. [E][O] project meeting (on: Tuesday, Dec 03 2019)
+____________________________________________________________
+ > ____________________________________________________________
 !! Sorry I cannot register that command!
 Use 'help' command to see the lists of available command
 ____________________________________________________________
@@ -124,6 +135,7 @@ ____________________________________________________________
  > ____________________________________________________________
 These are the commands in my dictionary:
     [list, ls]                          | Lists all tasks
+    [find, search] <keyword(s)>         | Find tasks using keywords
     [clear, clr]                        | Clear all tasks
     [done] <task number>                | Mark a task as done
     [delete] <task number>              | Delete a task

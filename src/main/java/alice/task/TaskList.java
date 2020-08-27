@@ -65,6 +65,26 @@ public class TaskList {
         return s.toString();
     }
 
+    public String find(String keywords) {
+        String[] words = keywords.trim().split(" ");
+
+        StringBuilder s = new StringBuilder();
+
+        int counter = 0;
+        for (int i = 0; i < tasks.size(); i++) {
+            if (tasks.get(i).containKeywords(words)) {
+                s.append(++counter).append(". ").append(tasks.get(i)).append("\n");
+            }
+        }
+
+        if (counter == 0) {
+            return null;
+        } else {
+            s.setLength(s.length() - 1);
+            return s.toString();
+        }
+    }
+
     public int getNumberOfTasks() {
         return tasks.size();
     }

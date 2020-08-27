@@ -10,6 +10,8 @@ deadline homework /by 02-Aug-2020 2359
 list
 done 3
 done 1
+find book
+search book meeting
 blah
 
 done 4

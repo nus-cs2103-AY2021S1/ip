@@ -20,6 +20,15 @@ public class Task {
         }
     }
 
+    public boolean containKeywords(String[] keywords) {
+        for (int i = 0; i < keywords.length; i++) {
+            if (description.contains(keywords[i])) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public String getDescription() {
         return description;
     }
