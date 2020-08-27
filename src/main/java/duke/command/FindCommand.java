@@ -3,18 +3,18 @@ package duke.command;
 import duke.*;
 import duke.task.TaskList;
 
-public class GetCommand extends Command {
+public class FindCommand extends Command {
 
     private String input;
 
-    public GetCommand(String input) {
+    public FindCommand(String input) {
         this.exit = false;
         this.input = input;
     }
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        ui.findTaskByDate(Parser.parseDate(input.substring(9)), tasks.getList());
+        ui.findTaskByKeyword(input.substring(5), tasks.getList());
     }
 
 }

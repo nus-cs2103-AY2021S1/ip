@@ -33,6 +33,8 @@ public class Parser {
             return new AddCommand(input, inputCommand);
         case GET_TASK:
             return new GetCommand(input);
+        case FIND:
+            return new FindCommand(input);
         default:
             throw new DukeException("Give me a valid banana (input)!");
         }

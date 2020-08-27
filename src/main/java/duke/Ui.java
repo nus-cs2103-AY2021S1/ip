@@ -71,10 +71,25 @@ public class Ui {
         wrapMessage("Banana! There is a loading error...");
     }
 
-    public void findTask(LocalDate date, List<Task> list) {
+    public void findTaskByDate(LocalDate date, List<Task> list) {
         System.out.println(divider);
         for (Task t : list) {
             if (t.getDate().equals(date)) {
+                System.out.println("   " + t.toString());
+            }
+        }
+        System.out.println(divider + "\n");
+    }
+
+    /**
+     * rara
+     * @param keyword rara
+     * @param tasks rara
+     */
+    public void findTaskByKeyword(String keyword, List<Task> tasks) {
+        System.out.println(divider);
+        for (Task t : tasks) {
+            if (t.toString().contains(keyword)) {
                 System.out.println("   " + t.toString());
             }
         }
