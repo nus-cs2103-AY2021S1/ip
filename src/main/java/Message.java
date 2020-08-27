@@ -37,7 +37,7 @@ public class Message {
         this.list = list;
     }
 
-    public void reply() throws NoDescriptionException, NoCommandException, WrongItemIndexException {
+    public void reply() throws NoDescriptionException, NoCommandException, WrongItemIndexException, WrongDeadlineException {
         System.out.println("____________________________________________________________");
         if (this.cmd == Command.START) {
             System.out.println("Eh what's up! I'm Meimei" +
@@ -100,16 +100,14 @@ public class Message {
                 if (temp.length == 2) {
                     t = new Deadline(temp[0], temp[1]);
                 } else {
-                    System.out.println("Eh you type wrong lah!" +
-                            "\nTry \"deadline {description of task} /by {date/time}\"");
+                    throw new WrongDeadlineException("deadline", "/by");
                 }
             } else { // should be event
                 String[] temp = taskString.split(" /at ");
                 if (temp.length == 2) {
                     t = new Event(temp[0], temp[1]);
                 } else {
-                    System.out.println("Eh you type wrong lah!" +
-                            "\nTry \"event {description of task} /at {date/time}\"");
+                    throw new WrongDeadlineException("event", "/at");
                 }
             }
 
