@@ -16,6 +16,7 @@ public class Event extends Task{
         super(description);
         
         String d = duration.strip();
+        // check if the duration is not empty
         if (d.length() == 0) {
             throw new PandaBotInsufficientArgumentException();
         } else {

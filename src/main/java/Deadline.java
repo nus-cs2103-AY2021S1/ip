@@ -19,8 +19,13 @@ public class Deadline extends Task {
     public Deadline(String description, String dueBy) throws PandaBotException {
         super(description);
         
-        // check if a formatted date and time is given
         String input = dueBy.strip();
+        // check if input is not empty
+        if (input.length() == 0) {
+            throw new PandaBotInsufficientArgumentException();
+        }
+        
+        // check if a formatted date and time is given
         String[] dT = input.split(" ");
         if (dT.length > 1) {
             try {
