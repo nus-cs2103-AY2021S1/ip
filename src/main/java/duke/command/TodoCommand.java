@@ -23,7 +23,6 @@ public class TodoCommand implements Command {
      * @param taskList
      * @param ui
      * @param input
-     * @throws InvalidTaskIdException
      * @throws EmptyDescriptionException
      */
     @Override

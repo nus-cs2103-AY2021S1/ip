@@ -23,7 +23,6 @@ public class DeadlineCommand implements Command {
      * @param taskList
      * @param ui
      * @param input
-     * @throws InvalidTaskIdException
      * @throws EmptyDescriptionException
      * @throws InvalidFormatException
      */
