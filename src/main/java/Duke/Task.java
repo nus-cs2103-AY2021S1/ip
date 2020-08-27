@@ -1,6 +1,4 @@
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
+package Duke;
 
 public class Task {
     boolean completed = false;

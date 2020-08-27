@@ -1,3 +1,5 @@
+package Duke;
+
 import java.io.FileWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -26,14 +28,14 @@ private Path path;
         String contents = "";
         for (Task x : list) {
 
-            if (x.getClass().getSimpleName() == "ToDo") {
-                String temp = "ToDo\n" + x.completed + "\n" + x.name + "\n\n";
+            if (x.getClass().getSimpleName() == "Duke.ToDo") {
+                String temp = "Duke.ToDo\n" + x.completed + "\n" + x.name + "\n\n";
                 contents += temp;
-            } else if (x.getClass().getSimpleName() == "Deadlines") {
-                String temp = "Deadlines\n" + x.completed + "\n" + x.name + "\n" + x.time + "\n\n";
+            } else if (x.getClass().getSimpleName() == "Duke.Deadlines") {
+                String temp = "Duke.Deadlines\n" + x.completed + "\n" + x.name + "\n" + x.time + "\n\n";
                 contents += temp;
             } else {
-                String temp = "Events\n" + x.completed + "\n" +x.name + "\n" + x.time + "\n\n";
+                String temp = "Duke.Events\n" + x.completed + "\n" +x.name + "\n" + x.time + "\n\n";
                 contents += temp;
             }
         }
@@ -49,14 +51,14 @@ private Path path;
             String done = sc.nextLine();
             String name = sc.nextLine();
 
-            if (type.equals("ToDo")){
+            if (type.equals("Duke.ToDo")){
                 sc.nextLine();
                 Task temp = new ToDo(name);
                 if (done == "true"){
                     temp.completedTask();
                 }
                 list.add(temp);
-            } else if (type.equals("Deadlines")){
+            } else if (type.equals("Duke.Deadlines")){
                 String time = sc.nextLine();
                 sc.nextLine();
                 Task temp = new Deadlines(name,time);
