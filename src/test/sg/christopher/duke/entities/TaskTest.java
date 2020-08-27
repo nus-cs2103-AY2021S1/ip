@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TaskTest {
     @Test
-    public void task_shouldBeCreateable() {
+    public void task_shouldBeCreatable() {
         Task task = new Task("mock desc");
         return;
     }
