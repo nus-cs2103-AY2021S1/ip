@@ -44,8 +44,8 @@ public class Storage {
         FileWriter fileWriter = new FileWriter(fileName);
         for (String s : recordArrayLst) {
             fileWriter.write(s + "\n");
-            System.out.println("*****************************************\n" + "Text: " + s + " saved into " + fileName + "\n*****************************************");
         }
+        System.out.println("Total number of Tasks saved: " + recordArrayLst.size());
 
         fileWriter.close();
     }
