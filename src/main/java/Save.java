@@ -77,15 +77,6 @@ private Path path;
         return list;
     }
 
-        public static void main(String[] args) throws IOException{
-            String temp = "wowow  /by oh my";
-            String[] temp2 = temp.split(" ",2);
-            String[] temp3 = temp2[1].split("/by",2);
-            for (String x: temp3){
-                System.out.println(x);
-            }
-
-        }
 
     }
 

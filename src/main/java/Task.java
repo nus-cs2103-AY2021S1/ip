@@ -1,9 +1,20 @@
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+
 public class Task {
     boolean completed = false;
     String name;
+    String time;
+
 
     Task(String name){
         this.name = name;
+    }
+
+    Task(String name, String time){
+        this.name = name;
+        this.time = time;
     }
 
 
