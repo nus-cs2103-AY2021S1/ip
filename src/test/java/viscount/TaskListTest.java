@@ -1,20 +1,22 @@
 package viscount;
 
+import java.time.LocalDateTime;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
+
 import viscount.exception.ViscountIndexOutOfBoundsException;
+
 import viscount.task.Deadline;
 import viscount.task.Event;
 import viscount.task.Task;
 import viscount.task.Todo;
-
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
