@@ -1,4 +1,4 @@
-package duke.ui;
+package duke.inputoutput;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -11,7 +11,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class UiTest {
+public class InputOutputTest {
 
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
     private final PrintStream originalOut = System.out;
@@ -32,8 +32,8 @@ public class UiTest {
 
     @Test
     public void testShowLine() {
-        Ui ui = new Ui();
-        ui.showLine();
+        InputOutput inputOutput = new InputOutput();
+        inputOutput.showLine();
         assertEquals(line, outContent.toString());
     }
 
@@ -44,8 +44,8 @@ public class UiTest {
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        Ui ui = new Ui();
-        ui.showGreeting();
+        InputOutput inputOutput = new InputOutput();
+        inputOutput.showGreeting();
         String expected = "Hello from\n" + logo + "\n" + line
             + "\t Hello! I'm Duke\n\t What can I do for you?\n" + line;
         assertEquals(expected, outContent.toString());
@@ -54,16 +54,16 @@ public class UiTest {
     @Test
     public void testShowBye() {
         String expected = line + "\t Bye. Hope to see you again soon!\n" + line;
-        Ui ui = new Ui();
-        ui.showBye();
+        InputOutput inputOutput = new InputOutput();
+        inputOutput.showBye();
         assertEquals(expected, outContent.toString());
     }
 
     @Test
     public void testShow() {
         String message = "\t test message";
-        Ui ui = new Ui();
-        ui.show(message);
+        InputOutput inputOutput = new InputOutput();
+        inputOutput.show(message);
         String expected = line + message + "\n" + line;
         assertEquals(expected, outContent.toString());
     }
@@ -72,16 +72,16 @@ public class UiTest {
     public void readCommand_nonEmptyInput_returnInput() {
         String input = "test command";
         System.setIn(new ByteArrayInputStream(input.getBytes()));
-        Ui ui = new Ui();
-        assertEquals(input, ui.readCommand());
+        InputOutput inputOutput = new InputOutput();
+        assertEquals(input, inputOutput.readCommand());
     }
 
     @Test
     public void readCommand_emptyInput_returnBye() {
         String input = "";
         System.setIn(new ByteArrayInputStream(input.getBytes()));
-        Ui ui = new Ui();
-        assertEquals("bye", ui.readCommand());
+        InputOutput inputOutput = new InputOutput();
+        assertEquals("bye", inputOutput.readCommand());
     }
 
 }

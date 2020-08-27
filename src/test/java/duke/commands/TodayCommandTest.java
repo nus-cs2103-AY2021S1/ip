@@ -1,36 +1,18 @@
 package duke.commands;
 
+import static duke.utils.Messages.MESSAGE_TODAY;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import duke.tasklist.TaskList;
 import duke.tasks.Deadline;
-import duke.ui.Ui;
 import duke.utils.DukeDateTime;
 
 public class TodayCommandTest {
-
-    private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-    private final PrintStream originalOut = System.out;
-    private final String line = "\t" + "_".repeat(75) + "\n";
-
-    @BeforeEach
-    public void setUpStreams() {
-        System.setOut(new PrintStream(outContent));
-    }
-
-    @AfterEach
-    public void restoreStreams() {
-        System.setOut(originalOut);
-    }
 
     @Test
     public void testExecute() {
@@ -48,13 +30,11 @@ public class TodayCommandTest {
         taskList.addTask(deadline2);
         taskList.addTask(deadline3);
         TodayCommand command = new TodayCommand();
-        command.execute(taskList, new Ui());
-        String expected = line + "\t Here are your tasks today:\n"
-                + "\t 1." + deadline1.toString() + "\n"
-                + "\t 2." + deadline2.toString()
-                + "\n"
-                + line;
-        assertEquals(expected, outContent.toString());
+        CommandResult actual = command.execute(taskList);
+        String response = MESSAGE_TODAY + "\t 1." + deadline1.toString() + "\n" + "\t 2."
+            + deadline2.toString();
+        CommandResult expected = new CommandResult(response, false);
+        assertEquals(expected, actual);
 
     }
 }

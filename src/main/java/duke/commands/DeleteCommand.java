@@ -5,7 +5,6 @@ import static duke.utils.Messages.MESSAGE_DELETE_TASK;
 import duke.exceptions.NoSuchTaskException;
 import duke.tasklist.TaskList;
 import duke.tasks.Task;
-import duke.ui.Ui;
 
 /** Represents the command that deletes a task when executed. */
 public class DeleteCommand extends Command {
@@ -20,17 +19,17 @@ public class DeleteCommand extends Command {
         this.taskIndex = taskDeleted;
     }
 
-    /** Deletes the task as specified by the constructor and displays the task
-     * with a relevant message to the user.
+    /** Deletes the task as specified by the constructor and returns a relevant message to the user.
      *
      * @param taskList The taskList involved.
-     * @param ui The ui involved to show messages to the user.
+     * @return The result of the command.
      * @throws NoSuchTaskException If the taskDeleted is out of bounds.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui) throws NoSuchTaskException {
+    public CommandResult execute(TaskList taskList) throws NoSuchTaskException {
         Task taskDeleted = taskList.deleteTask(taskIndex);
-        ui.show(String.format("%s\t\t%s\n\t %s", MESSAGE_DELETE_TASK,
-                taskDeleted.toString(), taskList.tasksRemaining()));
+        String response = String.format("%s\t\t%s\n\t %s", MESSAGE_DELETE_TASK,
+                taskDeleted.toString(), taskList.tasksRemaining());
+        return new CommandResult(response, false);
     }
 }
