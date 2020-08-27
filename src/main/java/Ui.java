@@ -19,6 +19,10 @@ public class Ui {
         System.out.println("\n_________________________________________\n");
     }
 
+    public static void showCommandMessage(String message) {
+        System.out.println("_________________________________________\n" + message);
+    }
+
     /**
      * Prints out the Welcome Message when Duke is intialised
      * as an opening message
@@ -30,26 +34,36 @@ public class Ui {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Initializing\n" + logo);
-        System.out.println("Yo what's up man, it's ya boi DUKE \n" + "What can I do for you today, Sir?");
+        System.out.println("Yo what's up man, it's ya boi DUKE \n"
+                + "What can I do for you today, Sir?");
     }
 
     /**
      * Prints out the Goodbye Message when Duke is exited
      */
     public static void goodbyeMessage() {
-        System.out.println("_________________________________________\n" + "Bye. Hope to see you again soon!" + "\n" + "_________________________________________");
+        System.out.println("_________________________________________\n"
+                + "Bye. Hope to see you again soon!" + "\n"
+                + "_________________________________________");
     }
 
     /**
      * Print out the error message when an exception is catch
      * by wrapping it in separating lines to format the message.
+     *
      * @param error The error message
      */
     public static void showError(String error) {
         System.out.println("Sorry an unexpected error occured!! :( \n" +
-                            "\n_________________________________________\n"
-                            + error
-                            + "\n_________________________________________");
+                "_________________________________________\n"
+                + error
+                + "\n_________________________________________");
     }
 
+    public static void showResponse(String response, String command) {
+        System.out.println("Task: " + command + "\nExecution Success: \n" +
+                "_________________________________________\n"
+                + response
+                + "\n_________________________________________");
+    }
 }

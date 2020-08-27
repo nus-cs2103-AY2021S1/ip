@@ -31,42 +31,45 @@ public class Parser {
             processorList(taskList);
         } else if (stringarr[0].equals("done")) {
             int index = Integer.parseInt(stringarr[1]);
-            String record = taskList.updateTask(index);
-            storage.updateRecord(record, index);
+            String response = taskList.updateTask(index);
+            storage.updateRecord(response, index);
+            Ui.showResponse(response, command);
         } else if (stringarr[0].equals("delete")) {
             int index = Integer.parseInt(stringarr[1]);
-            taskList.deleteTask(index);
+            String response = taskList.deleteTask(index);
             storage.deleteRecord(index);
+            Ui.showResponse(response, command);
         } else if (stringarr[0].equals("find")) {
             String key = stringarr[1];
             processorFind(taskList, key);
         } else {
-            String record = processorAdd(command, taskList);
-            storage.saveRecord(record);
+            String response = processorAdd(command, taskList);
+            storage.saveRecord(response);
+            Ui.showResponse(response, command);
         }
     }
 
 
     public static void processorFind(TaskList taskList, String key) {
         int counter = 1;
-        System.out.println("_________________________________________\n" + "Here are the matching tasks in your list:");
+        Ui.showCommandMessage("Here are the matching tasks in your list:");
         for (int i = 0; i < taskList.getListSize(); i++) {
             if (taskList.getTask(i).getTask().contains(key)) {
                 System.out.println(counter + "." + taskList.getTask(i).toString());
                 counter++;
             }
         }
-        System.out.println("_________________________________________");
+        Ui.showLine();
     }
 
 
     public static void processorList(TaskList taskList) {
-        System.out.println("_________________________________________\n" + "Here are the tasks in your list:");
+        Ui.showCommandMessage("Here are the tasks in your list:");
         for (int i = 0; i < taskList.getListSize(); i++) {
             int index = i+1;
             System.out.println(index + "." + taskList.getTask(i).toString());
         }
-        System.out.println("_________________________________________");
+        Ui.showLine();
     }
 
 
@@ -75,7 +78,7 @@ public class Parser {
         if (stringarr[0].equals("todo")) {
             if (stringarr.length <= 1) {
                 String message = "OOPS!!! The description of a todo cannot be empty";
-                throw new DukeException("_________________________________________\n" + message + "\n_________________________________________");
+                throw new DukeException(message);
             } else {
                 Todo todo = new Todo(stringarr[1]);
                 taskList.addTask(todo);
@@ -84,7 +87,7 @@ public class Parser {
         } else if (stringarr[0].equals("deadline")) {
             if (stringarr.length <= 1) {
                 String message = "OOPS!!! The description of a deadline cannot be empty";
-                throw new DukeException("_________________________________________\n" + message + "\n_________________________________________");
+                throw new DukeException(message);
             } else {
                 String[] secondarr = stringarr[1].split("/by", 2);
                 LocalDate date = LocalDate.parse(secondarr[1].trim());
@@ -95,18 +98,16 @@ public class Parser {
         } else if (stringarr[0].equals("event")) {
             if (stringarr.length <= 1) {
                 String message = "OOPS!!! The description of an event cannot be empty";
-                throw new DukeException("_________________________________________\n" + message + "\n_________________________________________");
+                throw new DukeException(message);
             } else {
                 String[] secondarr = stringarr[1].split("/at", 2);
                 Event event = new Event(secondarr[0], secondarr[1]);
                 taskList.addTask(event);
                 return event.toString();
             }
-        } else if (cmd.length() == 0){
-                return null;
         } else {
             String message = "OOPS!!! I'm sorry, but I don't know what that means :-(";
-            throw new DukeException("_________________________________________\n" + message + "\n_________________________________________");
+            throw new DukeException(message);
         }
     }
 }
