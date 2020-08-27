@@ -1,33 +1,20 @@
-import java.util.Scanner;
-import java.io.FileWriter;
 import java.util.ArrayList;
-import java.io.IOException;
+import java.util.Scanner;
 
 public class Duke {
-    enum Instruction {
-        LIST, DONE, DELETE, DEADLINE, EVENT, TODO, OTHERS
-    }
+    private Storage storage;
+    private TaskList tasks;
+    private Parser parser;
+    private Ui ui;
 
-    public static void updateList(String filePath, ArrayList<Task> list) throws DukeException {
-        try {
-            FileWriter fw1 = new FileWriter(filePath);
-            FileWriter fw2 = new FileWriter(filePath, true);
-            for (int i = 1; i <= list.size(); i++) {
-                Task thisTask = list.get(i - 1);
-                if (i == 1) {
-                    fw1.write("     " + i + "." + thisTask.toString() + System.lineSeparator());
-                } else {
-                    fw2.write("     " + i + "." + thisTask.toString() + System.lineSeparator());
-                }
-            }
-            fw1.close();
-            fw2.close();
-        } catch (IOException ex) {
-            throw new DukeException(ex.getMessage());
-        }
+    public Duke(String filePath) {
+        ui = new Ui();
+        parser = new Parser();
+        storage = new Storage(filePath);
+        tasks = new TaskList(storage.load());
     }
     
-    public static void main(String[] args) {
+    public void run() {
         ArrayList<Task> list = new ArrayList<>();
         Scanner sc = new Scanner(System.in);
         Instruction thisInstruction;
@@ -38,49 +25,11 @@ public class Duke {
         String input;
         int number;
         
-        String logo = "     ____        _        \n"
-                + "    |  _ \\ _   _| | _____ \n"
-                + "    | | | | | | | |/ / _ \\\n"
-                + "    | |_| | |_| |   <  __/\n"
-                + "    |____/ \\__,_|_|\\_\\___|\n";
-        String home = System.getProperty("user.home");
-        String folderpath = home + "/deskTop/CS2103 iP/data";
-        String filepath = folderpath + "/Duke.txt";
-
-        try {
-            if (!(new java.io.File(folderpath).exists())) {
-                throw new DukeException("There is not such folder.");
-            } else if (!(new java.io.File(filepath).exists())) {
-                throw new DukeException("There is not such file.");
-            }
-        } catch (DukeException ex) {
-            System.out.println(ex.getMessage());
-        }
-        
-        System.out.println("    -x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-");
-        System.out.println("    Hello from\n" + logo);
-        System.out.println("    Hey there! This is Duke here~");
-        System.out.println("    How may I help you today?");
-        System.out.println("    -x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-");
-
         input = sc.nextLine();
+        ui.greet();
         while(!input.equals("bye")) {
             System.out.println("    -x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-");
-            if (input.equals("list")) {
-                thisInstruction = Instruction.LIST;
-            } else if (input.startsWith("done")) {
-                thisInstruction = Instruction.DONE;
-            } else if (input.startsWith("delete")) {
-                thisInstruction = Instruction.DELETE;
-            } else if (input.startsWith("deadline")) {
-                thisInstruction = Instruction.DEADLINE;
-            } else if (input.startsWith("event")) {
-                thisInstruction = Instruction.EVENT;
-            } else if (input.startsWith("todo")) {
-                thisInstruction = Instruction.TODO;
-            } else {
-                thisInstruction = Instruction.OTHERS;
-            }
+            thisInstruction = parser.load(input);
             try {
                 if (thisInstruction == Instruction.LIST) {
                     System.out.println("     Here are the tasks in your list:");
@@ -95,7 +44,7 @@ public class Duke {
                     thisTask.markAsDone();
                     list.set(number - 1, thisTask);
                     System.out.println("       " + thisTask.toString());
-                    updateList(filepath,list);
+                    storage.updateList(list);
                 } else if (thisInstruction == Instruction.DELETE) {
                     number = Character.getNumericValue(input.charAt(input.length() - 1));
                     System.out.println("     Sure! I've removed this task for you:");
@@ -103,7 +52,7 @@ public class Duke {
                     list.remove(number - 1);
                     System.out.println("       " + thisTask.toString());
                     System.out.println("     Now you have " + list.size() + " tasks in the list.");
-                    updateList(filepath,list);
+                    storage.updateList(list);
                 } else {
                     if (thisInstruction == Instruction.DEADLINE) {
                         if (input.length() < 10) {
@@ -112,7 +61,7 @@ public class Duke {
                         System.out.println("     No problem! I've added this task to the list:");
                         thisTaskname = input.substring(9, input.indexOf('/') - 1);
                         thisTime = input.substring(input.indexOf('/') + 4);
-                        thisDeadline = new Deadline(thisTaskname, thisTime);
+                        thisDeadline = new Deadline(thisTaskname, false, thisTime);
                         thisDeadline.updateDateTime();
                         list.add(thisDeadline);
                     } else if (thisInstruction == Instruction.EVENT) {
@@ -122,18 +71,18 @@ public class Duke {
                         System.out.println("     No problem! I've added this task to the list:");
                         thisTaskname = input.substring(6, input.indexOf('/') - 1);
                         thisTime = input.substring(input.indexOf('/') + 4);
-                        list.add(new Event(thisTaskname, thisTime));
+                        list.add(new Event(thisTaskname, false, thisTime));
                     } else if (thisInstruction == Instruction.TODO) {
                         if (input.length() < 6) {
                             throw new EmptyTaskNameException("     The taskname of a todo cannot be empty.");
                         }
                         System.out.println("     No problem! I've added this task to the list:");
                         thisTaskname = input.substring(5);
-                        list.add(new Todo(thisTaskname));
+                        list.add(new Todo(thisTaskname, false));
                     } else {
                         throw new UnknownInstructionException("     I'm sorry, but I don't know what that means :-(");
                     }
-                    updateList(filepath,list);
+                    storage.updateList(list);
                     System.out.println("       " + list.get(list.size() - 1));
                     System.out.println("     Now you have " + list.size() + " tasks in the list.");
                 }
@@ -143,9 +92,10 @@ public class Duke {
             System.out.println("    -x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-");
             input = sc.nextLine();
         }
-
-        System.out.println("    -x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-");
-        System.out.println("    Bye bye~ See ya!");
-        System.out.println("    -x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-");
+        ui.bye();
+    }
+    
+    public static void main(String[] args) {
+        new Duke("data/tasks.txt").run();
     }
 }

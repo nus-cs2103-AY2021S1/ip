@@ -5,8 +5,8 @@ public class Deadline extends Task{
     protected String deadline;
     protected LocalDateTime dateTime;
 
-    public Deadline(String taskname, String deadline) {
-        super(taskname);
+    public Deadline(String taskname, boolean status, String deadline) {
+        super(taskname, status);
         this.deadline = deadline;
         this.dateTime = null;
     }

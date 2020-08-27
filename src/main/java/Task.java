@@ -3,9 +3,9 @@ public class Task {
     protected String taskname;
     protected boolean status;
 
-    public Task(String taskname) {
+    public Task(String taskname, boolean status) {
         this.taskname = taskname;
-        this.status = false;
+        this.status = status;
     }
 
     protected String getStatusIcon() {
