@@ -1,3 +1,5 @@
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -8,6 +10,34 @@ enum ListChange
 }
 
 public class Duke {
+    public static String getFilePath() {
+        try {
+            boolean doesDataExist = new File("./data").exists();
+            if (!doesDataExist) {
+                new File("./data").mkdir();
+                new File("./data/duke.txt").createNewFile();
+            }
+        } catch (IOException e){
+            System.out.println("Something went wrong in creating files");
+        }
+        return "./data/duke.txt";
+    }
+    
+    public static List<Task> getTasks(String filePath) {
+        List<Task> tasks = new ArrayList<>();
+        
+        try {
+            ReadFile file = new ReadFile(filePath);
+            String[] dataArr = file.openFile();
+            for (int i = 0; i < dataArr.length; ++i) {
+                tasks.add(Task.taskify(dataArr[i]));
+            }
+        } catch (IOException e) {
+            System.out.println("Something went wrong in reading data...");
+        }
+        
+        return tasks;
+    }
 
     public static String numTasks(List<Task> lst) {
         int numTasks = lst.size();
@@ -29,12 +59,14 @@ public class Duke {
     }
 
     public static void main(String[] args) {
+        String filePath = getFilePath();
+        List<Task> tasks = getTasks(filePath);
+        
         System.out.println("————————————————————————————————————————————————————————————");
         System.out.println("Hello! I'm Duke!\nWhat can I do for you?");
         System.out.println("————————————————————————————————————————————————————————————");
 
         Scanner sc = new Scanner(System.in);
-        List<Task> tasks = new ArrayList<>();
         String command = sc.nextLine();
 
         while (!command.equals("bye")) {
@@ -100,6 +132,26 @@ public class Duke {
                         break;
                     default:
                         new DukeException("invalidCommand");
+                }
+                
+                // Save tasks in hard disk
+                try {
+                    if (tasks.size() == 0) {
+                        WriteFile emptyData = new WriteFile(filePath);
+                        emptyData.writeToFile("");
+                    } else {
+                        WriteFile firstData = new WriteFile(filePath);
+                        firstData.writeToFile(tasks.get(0).toString());
+
+                        if (tasks.size() > 1) {
+                            WriteFile appendData = new WriteFile(filePath, true);
+                            for (int i = 1; i < tasks.size(); ++i) {
+                                appendData.writeToFile(tasks.get(i).toString());
+                            }
+                        }
+                    }
+                } catch (IOException e) {
+                    System.out.println("Something went wrong in writing data...");
                 }
             }
             
