@@ -21,7 +21,7 @@ public class DeadlineTest {
         String date = "24 Aug 2020";
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d MMM yyyy");
         Task task = new Deadline("Homework Quiz", LocalDate.parse(date, formatter));
-        task.checked();
+        task.markDone();
         assertEquals("[D][✔] Homework Quiz (by: Mon, Aug 24 2020)", task.toString());
     }
 }

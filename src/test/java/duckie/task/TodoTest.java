@@ -14,7 +14,7 @@ public class TodoTest {
     @Test
     public void todoMarkDone_inputCommand_todoString() {
         Task task = new Todo("borrow books");
-        task.checked();
+        task.markDone();
         assertEquals("[T][✔] borrow books", task.toString());
     }
 }

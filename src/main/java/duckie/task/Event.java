@@ -7,7 +7,7 @@ import java.time.format.DateTimeFormatter;
  * A task type in charge of task containing Event date and time
  */
 public class Event extends Task{
-    protected final static DateTimeFormatter dtf = DateTimeFormatter.ofPattern("E, MMM dd yyyy hh:mm a");
+    protected final static DateTimeFormatter DT_FORMATTER = DateTimeFormatter.ofPattern("E, MMM dd yyyy hh:mm a");
     protected LocalDateTime dateTime;
 
     /**
@@ -35,7 +35,7 @@ public class Event extends Task{
      */
     @Override
     public String getDate() {
-        return dtf.format(this.dateTime);
+        return DT_FORMATTER.format(this.dateTime);
     }
 
 
@@ -45,6 +45,6 @@ public class Event extends Task{
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + dtf.format(this.dateTime) + ")";
+        return "[E]" + super.toString() + " (at: " + DT_FORMATTER.format(this.dateTime) + ")";
     }
 }

@@ -82,7 +82,7 @@ public class Storage {
                 case "T":
                     Todo taskToDo = new Todo(description);
                     if (isDone.equals("1")) {
-                        taskToDo.checked();
+                        taskToDo.markDone();
                     }
                     lst.add(taskToDo);
                     break;
@@ -92,7 +92,7 @@ public class Storage {
                     LocalDate d1 = LocalDate.parse(date, formatter);
                     Deadline taskD = new Deadline(description, d1);
                     if (isDone.equals("1")) {
-                        taskD.checked();
+                        taskD.markDone();
                     }
                     lst.add(taskD);
                     break;
@@ -102,7 +102,7 @@ public class Storage {
                     LocalDateTime d2 = LocalDateTime.parse(dateTime, formatter2);
                     Event taskE = new Event(description, d2);
                     if (isDone.equals("1")) {
-                        taskE.checked();
+                        taskE.markDone();
                     }
                     lst.add(taskE);
                     break;

@@ -72,7 +72,7 @@ public class TaskList {
      */
     public void markTaskDone(int ind) {
         Task t1 = lst.get(ind);
-        t1.checked();
+        t1.markDone();
     }
 
     /**

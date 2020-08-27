@@ -21,7 +21,7 @@ public class EventTest {
         String date = "20 Aug 2020 07:30 PM";
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d MMM yyyy hh:mm a");
         Task task = new Event("Dinner with friends", LocalDateTime.parse(date, formatter));
-        task.checked();
+        task.markDone();
         assertEquals("[E][✔] Dinner with friends (at: Thu, Aug 20 2020 07:30 PM)", task.toString());
     }
 }
