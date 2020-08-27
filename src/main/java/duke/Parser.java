@@ -7,8 +7,21 @@ import duke.exception.InvalidFormatException;
 
 import java.util.Arrays;
 
+/**
+ * The Parser is a utility class that is used to parse and process
+ * String input.
+ */
 public class Parser {
 
+    /**
+     * Returns an executable Command class based on the input.
+     * If the input does not match any of the default commands,
+     * it will throw InvalidCommandException.
+     *
+     * @param input command given by the user through console.
+     * @return executable Command class.
+     * @throws InvalidCommandException
+     */
     public static Command parse(String input) throws InvalidCommandException {
         String[] splitted = input.split("\\s+");
         String command = splitted[0];
@@ -33,12 +46,24 @@ public class Parser {
         }
     }
 
+    /**
+     * Captures and returns the index of a task specified by the user input.
+     *
+     * @param input command given by the user through console.
+     * @return taskId.
+     */
     public static int parseTaskId(String input) {
         String rawNum = input.replaceAll("[^0-9]", "");
         int taskId = Integer.parseInt(rawNum) - 1;
         return taskId;
     }
 
+    /**
+     * Captures and returns the description of todo task from the user input.
+     * @param input command given by the user through console.
+     * @return description of the todo task.
+     * @throws EmptyDescriptionException
+     */
     public static String parseTodo(String input) throws EmptyDescriptionException {
         String[] splitted = input.split("\\s+");
         String[] title = Arrays.copyOfRange(splitted, 1, splitted.length);
@@ -46,6 +71,15 @@ public class Parser {
         return String.join(" ", title);
     }
 
+    /**
+     * Captures and returns the description and deadline of
+     * deadline task from the user input.
+     *
+     * @param input command given by the user through console.
+     * @return description and deadline of the deadline task.
+     * @throws EmptyDescriptionException
+     * @throws InvalidFormatException
+     */
     public static String[] parseDeadline(String input) throws EmptyDescriptionException, InvalidFormatException {
         String[] splitted = input.split("\\s+");
         if (splitted.length == 1) {
@@ -72,6 +106,7 @@ public class Parser {
         return pair;
     }
 
+
     private static int getIndex(String[] words, String target) {
         for (int i = 0; i < words.length; i++) {
             if (words[i].equals(target)) return i;
@@ -79,6 +114,15 @@ public class Parser {
         return -1;
     }
 
+    /**
+     * Captures and returns the description and date/time of
+     * event task from the user input.
+     *
+     * @param input command given by the user through console.
+     * @return description and date/time of the event task.
+     * @throws EmptyDescriptionException
+     * @throws InvalidFormatException
+     */
     public static String[] parseEvent(String input) throws EmptyDescriptionException, InvalidFormatException {
         String[] splitted = input.split("\\s+");
         if (splitted.length == 1) {

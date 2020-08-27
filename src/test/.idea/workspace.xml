@@ -20,10 +20,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3728d8fc-fab4-4e82-b5fa-18ac0395c1c1" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../main/java/duke/Duke.java" beforeDir="false" afterPath="$PROJECT_DIR$/../main/java/duke/Duke.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../main/java/duke/Storage.java" beforeDir="false" afterPath="$PROJECT_DIR$/../main/java/duke/Storage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../main/java/duke/TaskList.java" beforeDir="false" afterPath="$PROJECT_DIR$/../main/java/duke/TaskList.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../main/java/duke/Ui.java" beforeDir="false" afterPath="$PROJECT_DIR$/../main/java/duke/Ui.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../main/java/duke/command/Command.java" beforeDir="false" afterPath="$PROJECT_DIR$/../main/java/duke/command/Command.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../main/java/duke/command/DeadlineCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/../main/java/duke/command/DeadlineCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../main/java/duke/command/DeleteCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/../main/java/duke/command/DeleteCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../main/java/duke/command/DoneCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/../main/java/duke/command/DoneCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../main/java/duke/command/EventCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/../main/java/duke/command/EventCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../main/java/duke/command/HelpCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/../main/java/duke/command/HelpCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../main/java/duke/command/ListCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/../main/java/duke/command/ListCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../main/java/duke/command/QuitCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/../main/java/duke/command/QuitCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../main/java/duke/command/TodoCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/../main/java/duke/command/TodoCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../main/java/duke/task/Deadline.java" beforeDir="false" afterPath="$PROJECT_DIR$/../main/java/duke/task/Deadline.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

@@ -4,6 +4,10 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.regex.Pattern;
 
+/**
+ * Represents a Deadline task that contains
+ * description and due details.
+ */
 public class Deadline extends Task {
     protected String by;
     protected LocalDate date;
