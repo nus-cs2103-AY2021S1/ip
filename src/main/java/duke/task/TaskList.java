@@ -154,55 +154,59 @@ public class TaskList {
      * Populates the task list based on a text file found in a given filepath.
      *
      * @param filePath Filepath that the text file with the data is found.
-     * @throws DukeException If the tasks in the text file are stored incorrectly.
-     * @throws IOException If there are issues with reading from the file.
+     * @throws DukeException If the tasks in the text file are stored incorrectly or
+     * if there are errors reading from the file.
      */
-    public void loadDataFromStorage(Path filePath) throws DukeException, IOException {
-        FileReader reader = new FileReader(filePath.toString());
-        BufferedReader bufferedReader = new BufferedReader(reader);
+    public void loadDataFromStorage(Path filePath) throws DukeException {
+        try {
+            FileReader reader = new FileReader(filePath.toString());
+            BufferedReader bufferedReader = new BufferedReader(reader);
 
-        String line;
+            String line;
 
-        while ((line = bufferedReader.readLine()) != null) {
+            while ((line = bufferedReader.readLine()) != null) {
 
-            String[] entry = line.split(" \\| ");
+                String[] entry = line.split(" \\| ");
 
-            if (entry.length == 3) {
-                String taskType = entry[0];
-                if (!entry[1].toUpperCase().equals("TRUE") && !entry[1].toUpperCase().equals("FALSE")) {
-                    throw new DukeException("One or more task statuses are not stored correctly");
+                if (entry.length == 3) {
+                    String taskType = entry[0];
+                    if (!entry[1].toUpperCase().equals("TRUE") && !entry[1].toUpperCase().equals("FALSE")) {
+                        throw new DukeException("One or more task statuses are not stored correctly");
+                    }
+                    boolean taskIsDone = Boolean.parseBoolean(entry[1]);
+                    String taskArgument = entry[2];
+
+                    Task newTask;
+
+                    switch (taskType) {
+                    case "TODO":
+                        newTask = ToDo.createNewToDo(taskArgument);
+                        break;
+                    case "EVENT":
+                        newTask = Event.createNewEvent(taskArgument);
+                        break;
+                    case "DEADLINE":
+                        newTask = Deadline.createNewDeadline(taskArgument);
+                        break;
+                    default:
+                        throw new DukeException("One or more task types are not stored correctly");
+                    }
+
+                    if (taskIsDone) {
+                        newTask.competeTask();
+                    }
+
+                    tasks.add(newTask);
+
+                } else {
+                    throw new DukeException("One or more entries in storage have an invalid number of arguments");
                 }
-                boolean taskIsDone = Boolean.parseBoolean(entry[1]);
-                String taskArgument = entry[2];
-
-                Task newTask;
-
-                switch (taskType) {
-                case "TODO":
-                    newTask = ToDo.createNewToDo(taskArgument);
-                    break;
-                case "EVENT":
-                    newTask = Event.createNewEvent(taskArgument);
-                    break;
-                case "DEADLINE":
-                    newTask = Deadline.createNewDeadline(taskArgument);
-                    break;
-                default:
-                    throw new DukeException("One or more task types are not stored correctly");
-                }
-
-                if (taskIsDone) {
-                    newTask.competeTask();
-                }
-
-                tasks.add(newTask);
-
-            } else {
-                throw new DukeException("One or more entries have an invalid number of arguments");
             }
-        }
 
-        reader.close();
+            reader.close();
+        } catch (IOException e) {
+            throw new DukeException("Could not read from storage");
+        }
 
     }
 }

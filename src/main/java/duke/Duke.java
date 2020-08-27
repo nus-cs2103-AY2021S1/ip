@@ -15,39 +15,32 @@ public class Duke {
     private final UI ui;
     private final TaskList taskList;
     private final Storage storage;
-
-    private Duke(UI ui, TaskList taskList, Storage storage) {
-        this.ui = ui;
-        this.taskList = taskList;
-        this.storage = storage;
-    }
+    private final Path filePath;
 
     /**
-     * Initializes a new instance of Duke if there are no issues with
-     * creating a new storage file or retrieving an existing file.
-     *
-     * @param filePath path where data is to be retrieved and saved.
+     * Creates a new instance of the Duke chat bot.
+     * @param filePath File path where Duke should read from and save to.
      */
-    public static void newDuke(Path filePath) {
-
-        UI ui = new UI();
-        TaskList taskList = new TaskList();
-        Storage storage;
-        
-        try {
-            storage = Storage.loadStorage(filePath);
-            taskList.loadDataFromStorage(filePath);
-            new Duke(ui, taskList, storage).run();
-        } catch (IOException e) {
-            ui.printToConsole("File System Error");
-        } catch (DukeException e) {
-            ui.printToConsole("Stored file format is invalid\n" + e.getMessage());
-        }
+    public Duke(Path filePath) {
+        this.filePath = filePath;
+        this.ui = new UI();
+        this.taskList = new TaskList();
+        this.storage = new Storage(filePath);
     }
     
     private void run() {
+
         ui.greet();
 
+        // Try to load from storage.
+        try {
+            storage.loadFromStorage();
+            taskList.loadDataFromStorage(filePath);
+        } catch (DukeException e) {
+            ui.printToConsole(e.getMessage());
+            return;
+        }
+        
         while (ui.hasNextCommand()) {
             String nextCommand = ui.readCommand();
             Command command = Parser.parse(nextCommand);
@@ -67,6 +60,6 @@ public class Duke {
      */
     public static void main(String[] args) {
         Path filePath = Paths.get("data", "duke.txt");
-        Duke.newDuke(filePath);
+        new Duke(filePath).run();
     }
 }
