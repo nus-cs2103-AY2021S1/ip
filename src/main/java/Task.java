@@ -27,7 +27,7 @@ public class Task {
         isDone = true;
     }
 
-    public boolean isDone(){
+    public boolean isDone() {
         return isDone;
     }
 

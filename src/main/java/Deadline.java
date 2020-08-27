@@ -1,8 +1,7 @@
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-
-public class    Deadline extends Task{
+public class Deadline extends Task {
     protected LocalDate date;
     protected LocalTime time;
 
@@ -28,7 +27,6 @@ public class    Deadline extends Task{
 
     @Override
     public String toString() {
-
         return "[Deadline]"
                 + super.toString()
                 + "(by: " + this.date + " " + this.time + ")";

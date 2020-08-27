@@ -1,5 +1,3 @@
-import java.util.Scanner;
-
 public class Ui {
     protected static final String[] CMD_ARR = {"help", "add", "list", "done", "delete", "date", "bye"};
     protected static final String DIVIDER = "____________________________________________________________";
@@ -21,7 +19,6 @@ public class Ui {
         System.out.println("Hello, I am BaronBot!");
         System.out.println("What can I do for you?");
         this.printDivider();
-
         Parser.parse(this, taskList);
     }
 
@@ -116,7 +113,7 @@ public class Ui {
         System.out.println(taskList.getTask(taskNum - 1).toString());
     }
 
-    public void showIndexOutOfBoundsExceptionForDone(IndexOutOfBoundsException e){
+    public void showIndexOutOfBoundsExceptionForDone(IndexOutOfBoundsException e) {
         System.out.println("Sorry that task doesn't exist :/");
         System.out.println("Try using 'list' to find out what tasks you have!");
     }

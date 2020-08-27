@@ -3,46 +3,46 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TaskList {
-    List<Task> taskArr;
+    List<Task> tasks;
 
     public TaskList() {
-        taskArr = new ArrayList<>();
+        tasks = new ArrayList<>();
     }
 
     public TaskList(List<Task> taskArr) {
-        this.taskArr = taskArr;
+        this.tasks = taskArr;
     }
 
     public static TaskList generateTaskList(Storage storage) {
         try {
             return new TaskList(storage.load());
-        } catch(IOException e) {
+        } catch (IOException e) {
             System.out.println("Could not load file. Generating blank Task List.");
             return new TaskList();
         }
     }
 
     public void addTask(Task task) {
-        taskArr.add(task);
+        tasks.add(task);
     }
 
     public void removeTask(int i) {
-        taskArr.remove(i);
+        tasks.remove(i);
     }
 
     public Task getTask(int i) {
-        return taskArr.get(i);
+        return tasks.get(i);
     }
 
     public Task getMostRecentTask() {
-        return taskArr.get(taskArr.size() - 1);
+        return tasks.get(tasks.size() - 1);
     }
 
     public int getTaskListSize() {
-        return taskArr.size();
+        return tasks.size();
     }
 
     public boolean isEmpty() {
-        return taskArr.isEmpty();
+        return tasks.isEmpty();
     }
 }

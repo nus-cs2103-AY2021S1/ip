@@ -1,11 +1,10 @@
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-
 public class Event extends Task {
-        protected LocalDate date;
-        protected LocalTime timeStart;
-        protected LocalTime timeEnd;
+    protected LocalDate date;
+    protected LocalTime timeStart;
+    protected LocalTime timeEnd;
 
     Event(String description, String dateAndTime, TaskType taskType) {
         super(description, taskType);
