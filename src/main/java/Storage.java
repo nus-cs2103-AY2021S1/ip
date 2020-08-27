@@ -5,44 +5,37 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class TaskData {
-    private ArrayList<Task>  tasks;
-    private static String filePath = "data/duke.txt";
+public class Storage {
+    private String filePath;
 
-    public TaskData() {
-        createFileIfAbsent();
-        try {
-            tasks = retrieveTasks();
-        } catch (FileNotFoundException e) {
-            System.out.println("File could not be found");
-        } catch (DukeException ex) {
-            System.out.println(ex);
-        }
-
+    public Storage(String filePath) {
+        this.filePath = filePath;
+        createFileIfAbsent(filePath);
     }
 
-    public ArrayList<Task> getTasks() {
-        return this.tasks;
-    }
-
-    public static void createFileIfAbsent() {
+    public static void createFileIfAbsent(String filePath) {
         File f = new File(filePath);
 
         if (!f.exists()) {
             try {
-            File dir = new File ("data");
-            dir.mkdir();
-            f.createNewFile();
+                File dir = new File ("data");
+                dir.mkdir();
+                f.createNewFile();
             } catch (IOException e) {
                 System.out.println("File unable to be created");
             }
         }
     }
 
-    public static ArrayList<Task> retrieveTasks() throws FileNotFoundException, DukeException {
+    public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> tasks = new ArrayList<>();
         File f = new File(filePath);
-        Scanner s = new Scanner(f);
+        Scanner s;
+        try {
+            s = new Scanner(f);
+        } catch (FileNotFoundException e) {
+            throw new DukeException("Saved list of tasks could not be loaded");
+        }
 
         while (s.hasNext()) {
             String line = s.nextLine();
@@ -67,15 +60,15 @@ public class TaskData {
         return tasks;
     }
 
-    public void updateData() {
+    public void updateData(TaskList tasks) {
         try {
             String data = "";
 
-            for (int i = 0; i < tasks.size(); i++) {
-                if (i == tasks.size() - 1) {
-                    data += tasks.get(i).toTaskData();
+            for (int i = 1; i <= Task.totalTasks; i++) {
+                if (i == Task.totalTasks) {
+                    data += tasks.getTask(i).toTaskData();
                 } else {
-                    data += tasks.get(i).toTaskData() + "\n";
+                    data += tasks.getTask(i).toTaskData() + "\n";
                 }
             }
 
