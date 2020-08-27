@@ -7,6 +7,7 @@ public abstract class Task {
         if (this.description.length() == 0) {
             throw new PandaBotEmptyTaskDescriptionException(this.getClass().getSimpleName());
         }
+        
         isDone = false;
     }
 

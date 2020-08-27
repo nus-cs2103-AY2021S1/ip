@@ -4,6 +4,7 @@ public class Event extends Task{
     
     public Event(String description, String duration) throws PandaBotEmptyTaskDescriptionException {
         super(description);
+        
         this.duration = duration.strip();
     }
 
