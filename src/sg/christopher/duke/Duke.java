@@ -13,16 +13,32 @@ import java.util.Scanner;
 public class Duke {
     private static List<Task> savedItems = loadSavedItems();
 
+    /**
+     * Hydrates the task data store with saved data from disk.
+     *
+     * @return list of tasks that are saved on disk
+     */
     public static List<Task> loadSavedItems() {
         List<Task> saved = DataManager.readList();
         return saved != null ? saved : new ArrayList<>();
     }
 
+    /**
+     * Saves a task to memory and writes it to disk.
+     *
+     * @param task the task to be saved
+     */
     public static void saveItem(Task task) {
         savedItems.add(task);
         DataManager.writeList(savedItems);
     }
-    
+
+    /**
+     * Loads saved tasks from disk, and get a specific task using its index.
+     *
+     * @param index index of the task to be retrieved
+     * @return the task at that index
+     */
     public static Task loadItem(int index) {
         savedItems = DataManager.readList();
         return savedItems.get(index);
