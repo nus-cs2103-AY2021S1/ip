@@ -1,10 +1,18 @@
 package duke;
 
-import duke.exceptions.*;
-import duke.tasks.*;
+
+import duke.exceptions.DukeException;
+import duke.exceptions.DukeInvalidCommandException;
+import duke.exceptions.DukeInvalidDescriptionException;
+import duke.exceptions.DukeNoDateException;
+import duke.exceptions.DukeNoDescriptionException;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.TaskType;
+import duke.tasks.Todo;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 
 /**
@@ -14,7 +22,7 @@ import java.util.Arrays;
 public class DukeList {
 
     private static final int CAPACITY = 100;
-    private final ArrayList<Task> list;
+    private final ArrayList<Task> taskList;
     private final Storage store = new Storage("data", "duke.txt");
 
 
@@ -22,46 +30,42 @@ public class DukeList {
      * Constructor for DukeList.
      */
     public DukeList() {
-        this.list = new ArrayList<>(CAPACITY);
+        this.taskList = new ArrayList<>(CAPACITY);
     }
 
 
     /**
-     * Removes the type keyword at the start of the string.
+     * Constructor for DukeList.
+     * Overrides default capacity
      *
-     * @param strArr Array of strings (originally split by spaces).
-     * @return Substring with the keyword removed.
-     * @throws DukeInvalidDescriptionException Invalid description text.
+     * @param capacity list capacity.
      */
-    private static String getItemSubstring(String[] strArr) throws DukeInvalidDescriptionException {
-        if (strArr.length <= 1) {
-            throw new DukeNoDescriptionException("String array of unexpected length: expected length > 1");
-        } else {
-            return String.join(" ", Arrays.copyOfRange(strArr, 1, strArr.length));
-        }
+    public DukeList(int capacity) {
+        this.taskList = new ArrayList<>(capacity);
     }
 
 
     /**
      * Helper function for adding item.
      *
-     * @param itemString String to be added.
+     * @param descriptionString String to be added.
      * @return Task added.
-     * @throws DukeException Duke exception.
+     * @throws DukeInvalidDescriptionException invalid description.
+     * @throws DukeInvalidCommandException     invalid command.
      */
-    private Task addHelper(String itemString) throws DukeException {
+    private Task addHelper(String descriptionString) throws DukeInvalidDescriptionException, DukeInvalidCommandException {
         Task newTask;
 
-        String[] strArr = Parser.parseLineToArray(itemString);
-        TaskType taskType = Parser.getTaskKeyword(itemString);
+        String[] strArr = Parser.parseLineToArray(descriptionString);
+        TaskType taskType = Parser.getTaskKeyword(descriptionString);
 
-        String formattedItemString;
+        String formattedDescriptionString;
 
         switch (taskType) {
         case TODO:
             try {
-                formattedItemString = DukeList.getItemSubstring(strArr);
-                newTask = new Todo(formattedItemString);
+                formattedDescriptionString = Parser.getItemSubstring(strArr);
+                newTask = new Todo(formattedDescriptionString);
                 break;
             } catch (DukeNoDescriptionException e) {
                 throw new DukeInvalidDescriptionException(String.format("OOPS!!! The description of a `%s` cannot be empty.", taskType));
@@ -69,8 +73,8 @@ public class DukeList {
 
         case DEADLINE:
             try {
-                formattedItemString = DukeList.getItemSubstring(strArr);
-                newTask = new Deadline(formattedItemString);
+                formattedDescriptionString = Parser.getItemSubstring(strArr);
+                newTask = new Deadline(formattedDescriptionString);
                 break;
             } catch (DukeNoDescriptionException e) {
                 throw new DukeInvalidDescriptionException(String.format("OOPS!!! The description of a `%s` cannot be empty.", taskType));
@@ -80,8 +84,8 @@ public class DukeList {
 
         case EVENT:
             try {
-                formattedItemString = DukeList.getItemSubstring(strArr);
-                newTask = new Event(formattedItemString);
+                formattedDescriptionString = Parser.getItemSubstring(strArr);
+                newTask = new Event(formattedDescriptionString);
                 break;
             } catch (DukeNoDescriptionException e) {
                 throw new DukeInvalidDescriptionException(String.format("OOPS!!! The description of a `%s` cannot be empty.", taskType));
@@ -94,7 +98,7 @@ public class DukeList {
             throw new DukeInvalidCommandException(String.format("OOPS!!! I'm sorry, but I don't know what `%s` means :-(", invalidCommand));
         }
 
-        this.list.add(newTask);
+        this.taskList.add(newTask);
 
         return newTask;
     }
@@ -103,12 +107,12 @@ public class DukeList {
     /**
      * Adds a new item to the list.
      *
-     * @param itemString String to be added.
+     * @param descriptionString String to be added.
      * @return Status string to be printed.
      * @throws DukeException Duke exception.
      */
-    public String add(String itemString) throws DukeException {
-        Task newTask = addHelper(itemString);
+    public String add(String descriptionString) throws DukeException {
+        Task newTask = addHelper(descriptionString);
 
         return "Got it. I've added this task:\n" +
                 String.format("\t%s\n", newTask.toString()) +
@@ -120,12 +124,13 @@ public class DukeList {
      * Adds a new item to the list.
      * This method is only accessed privately.
      *
-     * @param itemString String to be added.
-     * @param isDone     If task is done already.
-     * @throws DukeException Duke exception.
+     * @param descriptionString Description string of task to be added.
+     * @param isDone            If task is done already.
+     * @throws DukeInvalidDescriptionException invalid description text.
+     * @throws DukeInvalidCommandException     invalid command.
      */
-    private void add(String itemString, boolean isDone) throws DukeException {
-        Task newTask = addHelper(itemString);
+    private void add(String descriptionString, boolean isDone) throws DukeInvalidDescriptionException, DukeInvalidCommandException {
+        Task newTask = addHelper(descriptionString);
 
         if (isDone) {
             newTask.markAsDone();
@@ -142,7 +147,7 @@ public class DukeList {
      * @throws NullPointerException invalid index.
      */
     public String markAsDone(int index) throws IndexOutOfBoundsException {
-        Task targetTask = this.list.get(index - 1);
+        Task targetTask = this.taskList.get(index - 1);
         targetTask.markAsDone();
 
         return String.format("Nice! I've marked this task as done:\n\t%s", targetTask.toString());
@@ -158,7 +163,7 @@ public class DukeList {
      * @throws IndexOutOfBoundsException invalid index.
      */
     public String delete(int index) throws IndexOutOfBoundsException {
-        Task removedTask = this.list.remove(index - 1);
+        Task removedTask = this.taskList.remove(index - 1);
         return "Noted. I've removed this task:\n" +
                 String.format("\t%s\n", removedTask.toString())
                 + String.format("%s", this.getListStats());
@@ -169,7 +174,7 @@ public class DukeList {
      * Writes tasks to file.
      */
     public void writeToFile() {
-        for (Task t : this.list) {
+        for (Task t : this.taskList) {
             this.store.addToFileBuffer(t);
         }
         this.store.writeToFile();
@@ -182,10 +187,10 @@ public class DukeList {
     public void loadFromFile() {
         String[][] parsedLines = this.store.readFromFile();
         for (String[] parsedLine : parsedLines) {
-            String itemString = parsedLine[0];
+            String descriptionString = parsedLine[0];
             String isDoneString = parsedLine[1];
 
-            this.add(itemString, isDoneString.equals("1"));
+            this.add(descriptionString, isDoneString.equals("1"));
         }
     }
 
@@ -196,24 +201,24 @@ public class DukeList {
      * @return stats string.
      */
     private String getListStats() {
-        return String.format("Now you have %d tasks in the list.", this.list.size());
+        return String.format("Now you have %d tasks in the list.", this.taskList.size());
     }
 
 
     @Override
     public String toString() {
-        if (this.list.size() == 0) {
+        if (this.taskList.size() == 0) {
             return "List is currently empty!";
         } else {
             StringBuilder outputString = new StringBuilder();
             outputString.append("Here are the tasks in your list:\n");
 
-            for (int i = 0; i < this.list.size(); i++) {
-                String currTaskStr = String.format("%d: %s", i + 1, this.list.get(i).toString());
+            for (int i = 0; i < this.taskList.size(); i++) {
+                String currTaskStr = String.format("%d: %s", i + 1, this.taskList.get(i).toString());
                 outputString.append(currTaskStr);
 
                 // add new line and tab only if not at the end of the list
-                if (i < list.size() - 1) {
+                if (i < taskList.size() - 1) {
                     outputString.append("\n");
                 }
             }

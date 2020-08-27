@@ -1,5 +1,6 @@
 package duke.exceptions;
 
+
 /**
  * Duke No Date Exception class.
  * Thrown when description is missing a date.

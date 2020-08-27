@@ -1,5 +1,6 @@
 package duke.exceptions;
 
+
 /**
  * Duke No Description Exception class.
  * Thrown when no description is given.

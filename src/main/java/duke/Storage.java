@@ -1,8 +1,15 @@
 package duke;
 
+
 import duke.tasks.Task;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -29,10 +36,10 @@ public class Storage {
     /**
      * Constructor for Parser.
      *
-     * @param pathStr path to storage file.
+     * @param pathStrArr path to storage file.
      */
-    public Storage(String... pathStr) {
-        this.path = Paths.get(projectRoot, pathStr);
+    public Storage(String... pathStrArr) {
+        this.path = Paths.get(projectRoot, pathStrArr);
         this.storageFile = new File(this.path.toString());
         this.pathExists = Files.exists(this.path);
         this.fileBuffer = new ArrayList<>();
@@ -107,9 +114,9 @@ public class Storage {
                 writer.close();
             }
             // else don't need to write
-        } catch (IOException e) {
+        } catch (IOException exception) {
             System.out.println("Error writing to file!");
-            e.printStackTrace();
+            exception.printStackTrace();
         }
     }
 
@@ -117,11 +124,11 @@ public class Storage {
     /**
      * Parses line input to an array.
      *
-     * @param inStr input string.
+     * @param inputString input string.
      * @return parsed array, Array[0] => itemString, Array[1] => isDone.
      */
-    private static String[] parseLine(String inStr) {
-        String[] splitStr = inStr.split(DELIMITER);
+    private static String[] parseLine(String inputString) {
+        String[] splitStr = inputString.split(DELIMITER);
 
         String taskType = splitStr[0];
         String status = splitStr[1];
@@ -164,11 +171,11 @@ public class Storage {
 
             return parsedLines.toArray(new String[0][0]);
 
-        } catch (FileNotFoundException e) {
+        } catch (FileNotFoundException exception) {
             return new String[0][0];
-        } catch (IOException e) {
+        } catch (IOException exception) {
             System.out.println("Error reading file!");
-            e.printStackTrace();
+            exception.printStackTrace();
             return new String[0][0];
         }
     }
