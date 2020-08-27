@@ -13,8 +13,13 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * Represents a Duke Chatbot.
+ * It contains a <code>TaskList</code> to track the user's tasks,
+ * a <code>UIManager</code> to handle user interactions and
+ * a <code>StorageManager</code> to handle storing of data.
+ */
 public class Duke {
-
     private final UIManager uiManager;
     private final StorageManager storageManager;
     private TaskList taskList;
@@ -31,7 +36,12 @@ public class Duke {
         }
     }
 
-    // METHOD TO RUN DUKE PROCESSES
+    /**
+     * Executes Duke Program.
+     * User input is extracted by <code>UIManager</code> and parsed by <code>UserInputParser</code>,
+     * generating a command. Execution of commands are managed by individual <code>Command</code> instances.
+     * Storing/Loading of data is managed by <code>StorageManager</code>.
+     */
     public void run() {
         // INTRO
         uiManager.printDukeIntro();

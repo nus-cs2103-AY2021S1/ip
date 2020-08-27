@@ -15,6 +15,10 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Represents the Storage of Duke.
+ * Manages the storing/loading of data from data file.
+ */
 public class StorageManager {
 
     // FILE AND DATA STORAGE
@@ -29,7 +33,13 @@ public class StorageManager {
         this.filePath = CommonString.DUKE_FILE_PATH.toString();
     }
 
-
+    /**
+     * Loads user's <code>DukeTask</code> from the data file.
+     * Location of the <code>DukeTask</code> is extracted from the <code>filePath</code>.
+     *
+     * @return ArrayList denoting the list of <code>DukeTask</code>
+     * @throws FileNotFoundException  If the file to load from does not exist
+     */
     public ArrayList<DukeTask> loadData() throws FileNotFoundException {
         ArrayList<DukeTask> dataList = new ArrayList<>();
 
@@ -75,11 +85,15 @@ public class StorageManager {
         return dataList;
     }
 
-    // SAVING DATA FOR OUTPUT
-    // FORMAT IS GIVEN BY:
-    // [TYPE]|[DONE]|[DESCRIPTION]|[DATETIME (if applicable)]
-    // TYPE: T,E,D
-    // DONE: 1 or 0
+    /**
+     * Saves user's <code>DukeTask</code> into the data file.
+     * Location of the <code>DukeTask</code> is extracted from the <code>filePath</code>
+     * FORMAT OF DATA IS GIVEN BY:
+     * [TYPE]|[DONE]|[DESCRIPTION]|[DATETIME (if applicable)].
+     * TYPE: T,E,D. DONE: 1 or 0
+     *
+     * @throws IOException If saving of the data fails
+     */
     public void saveData(ArrayList<DukeTask> dataList) throws IOException {
         StringBuilder dataString = new StringBuilder();
         for (DukeTask task : dataList) {

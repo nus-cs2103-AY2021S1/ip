@@ -1,9 +1,4 @@
 package duke.logic;
-// INPUT PARSER JUST CHECKS IF THE FIELDS ARE MISSING OR NOT
-// OR ARE IN THEIR CORRECT FORMATS
-// DOES NOT CHECK IF THE VALUES ARE VALID OR NOT
-// IN THE SENSE IT ASKS: IS YOUR COMMAND SOMETHING DUKE CAN UNDERSTAND?
-// THIS DOES NOT MEAN DUKE CAN EXECUTE IT BECAUSE THE DETAILS MAY NOT BE RIGHT
 
 import duke.CommonMethod;
 import duke.command.*;
@@ -17,9 +12,11 @@ import duke.task.TodoTask;
 
 import java.time.LocalDateTime;
 
-// PARSER JUST CHECKS: HEY IS THIS FORMAT CORRECT FOR DUKE INSTRUCTIONS?
-// ARE THERE MISSING FIELDS, OR INCORRECT FORMAT FOR THE COMMANDS?
-// ARE THESE COMMANDS EXISTING?
+/**
+ * Represents a Parser of the user Commands.
+ * It takes in the user's instructions and generates the corresponding command
+ * if it exists.
+ */
 public class UserInputParser {
 
     // INSTRUCTIONS and related CONSTANTS
@@ -37,9 +34,20 @@ public class UserInputParser {
     private static final String UNKNOWN = "unknown";
     private static final String DELETE = "delete";
 
-    // TAKES IN USER COMMAND
-    // PERFORMS INPUT VERIFICATION
-    // AND RETURNS EITHER A COMMAND, OR THROWS A DUKE_EXCEPTION
+    /**
+     * Parses the user instruction into a <code>Command</code>.
+     * It breaks down the input <code>String</code> into an array and analyses the first word of it (tag).
+     * Referring to the tag, it performs an input validation to ensure the required <code>Strings</code>
+     * are present to generate the respective <code>Command</code>.
+     * NOTE THAT IT JUST CHECKS FOR THE PRESENCE OF THE STRING, AND NOT WHETHER THE STRING PRODUCES A VALID COMMAND.
+     * Finally, it returns a <code>Command</code> to the user.
+     *
+     * @param userInput <code>String</code> containing the user instruction.
+     * @return Command object denoting the corresponding command.
+     * @throws InvalidInstructionException  If instruction does not exist.
+     * @throws MissingFieldException If the instruction has missing Strings
+     * @throws InvalidFormatException If the instruction has correct format and fields, but incorrect format.
+     */
     public static Command parse(String userInput)
             throws InvalidInstructionException, MissingFieldException, InvalidFormatException {
 
@@ -98,7 +106,18 @@ public class UserInputParser {
         throw new InvalidInstructionException(UNKNOWN);
     }
 
-    // GENERATOR FUNCTIONS FOR TASKS (DEADLINE AND EVENT)
+    /**
+     * Generates <code>DukeTasks</code> that contain Date and Time.
+     * It extracts the relevant Date and Time fields from the instructionArray,
+     * parses them into a <code>LocalDateTime</code> object and
+     * returns the <code>DukeTask</code> containing the required fields.
+     *
+     * @param taskType <code>String</code> containing the type of <code>DukeTask</code> to generate.
+     * @param instructionArray <code>Array</code> containing the processed user instruction
+     * @param indicator <code>String</code> to verify the instruction type.
+     * @return DukeTask object denoting the corresponding DukeTask.
+     * @throws InvalidFormatException If the instruction has correct format and fields, but incorrect format.
+     */
     private static DukeTask generateTaskWithDate(String taskType, String[] instructionArray,
                                                  String indicator)
             throws InvalidFormatException {
@@ -117,6 +136,15 @@ public class UserInputParser {
         return taskType.equals(DEADLINE) ? new DeadlineTask(description, dateTime) : new EventTask(description, dateTime);
     }
 
+    /**
+     * Parses input variables into a <code>LocalDateTime</code> object.
+     *
+     * @param taskType <code>String</code> containing the type of <code>DukeTask</code> to generate.
+     * @param date <code>String</code> containing the Date of the Task.
+     * @param time <code>String</code> containing the Time of the Task.
+     * @return LocalDateTime object denoting the corresponding Date and Time.
+     * @throws InvalidFormatException If the instruction has correct format and fields, but incorrect format.
+     */
     private static LocalDateTime parseDateAndTime(String taskType, String date, String time)
             throws InvalidFormatException {
         // INPUT DATE FORMAT: DD/MM/YYYY
@@ -141,8 +169,13 @@ public class UserInputParser {
         return LocalDateTime.of(year, month, day, hour, minute, second);
     }
 
-
-    // HELPER FUNCTIONS
+    /**
+     * Finds the index of the given regex.
+     *
+     * @param array <code>Array</code> containing Strings of instructions.
+     * @param regex <code>String</code> to be found.
+     * @return Integer denoting the location of the regex.
+     */
     private static int findIndex(String[] array, String regex) {
         for (int i = 0; i < array.length; i++) {
             if (array[i].equals(regex)) {

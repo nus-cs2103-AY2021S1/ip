@@ -5,13 +5,20 @@ import duke.task.DukeTask;
 
 import java.util.Scanner;
 
-// Manages the UI interaction with the User for duke.Duke
+/**
+ * Represents the User interface.
+ * Manages the User Interaction Interface.
+ * It contains <code>Enums</code> for pre-defined texts to be printed for the program
+ * and methods to print feedback to the users for different commands.
+ */
 public class UIManager {
     Scanner scanner = new Scanner(System.in);
-    // PRIVATE ENUMS OF THE UI MANAGER -- TO SAVE CONSTANTS TO BE PRINTED
 
-    // Instruction Guides split up the various parts of the "help" function guide
-    // Splitting them up into parts makes it easier to edit according to the specific guide in the future
+    /**
+     * Represents text for HelpCommand.
+     * It contains different fields holding Strings that are to be printed for the user FAQ.
+     * Splitting them up into parts makes it easier to edit according to the specific guide in the future
+     */
     private enum InstructionGuide {
         // For formatting purposes, except for the last guide, the guides must end with a guideBreaker
         // It splits them into paragraphs
@@ -55,7 +62,11 @@ public class UIManager {
         }
     }
 
-    // User Interaction Text
+    /**
+     * Represents text for User Interaction during Duke's main execution.
+     * It contains different fields holding Strings that are to be printed for various parts of the program.
+     * Splitting them up into parts makes it easier to edit according to the specific guide in the future
+     */
     private enum UserInteractionText {
         LINE("____________________________________________________________"), // Single Line for divider{
 
@@ -87,55 +98,79 @@ public class UIManager {
         }
     }
 
-    // Reads in user command.
-    // Not very efficient because we keep creating and closing scanners
-    // later when the while loop is done we can do 1x setup and 1x cleaning up.
-    // for now this is safer cause less bugs
+    /**
+     * Reads user command using the <code>Scanner</code>.
+     *
+     * @return String denoting user command
+     */
     public String readCommand() {
-        String output = scanner.nextLine();
-        return output;
+        return scanner.nextLine();
     }
 
-    // MAIN DUKE FUNCTIONS
+    /**
+     * Prints introduction to Duke.
+     */
     public void printDukeIntro() {
         System.out.println(UserInteractionText.INTRODUCTION);
     }
 
+    /**
+     * Prints instructions when user invokes <code>HelpCommand</code>.
+     */
     public void printDukeInstructions() {
         System.out.println(UserInteractionText.INSTRUCTIONS);
     }
 
+    /**
+     * Prints outro to Duke.
+     */
     public void printDukeOutro() {
         System.out.println(UserInteractionText.OUTRO);
     }
 
-    // COMMAND BASED
+    /**
+     * Prints when users invoke <code>AddCommand</code>.
+     */
     public void printAddTask(DukeTask task, int size) {
         System.out.println("Task Added: " + task.toString());
         printTaskStatus(size);
     }
 
+    /**
+     * Prints when users invoke <code>DeleteCommand</code>.
+     */
     public void printDeleteTask(DukeTask task, int size) {
         System.out.println("Alright! I'll delete this task!\n" + "Take note that this is irreversible!");
         System.out.println(task.toString());
         printTaskStatus(size);
     }
 
+    /**
+     * Prints when users invoke <code>ListCommand</code>.
+     */
     public void printNumberedTask(DukeTask task, int num) {
         System.out.println((num + 1) + ". " + task);
     }
 
+    /**
+     * Prints when users invoke <code>DoneCommand</code>.
+     */
     public void printMarkAsDone(DukeTask task, int size) {
         System.out.println("Alright! I'll mark this task as done!");
         System.out.println(task.toString());
         printTaskStatus(size);
     }
 
-    // GENERAL USE
+    /**
+     * Prints a line separator.
+     */
     public void printLine() {
         System.out.println(UserInteractionText.LINE);
     }
 
+    /**
+     * Prints number of tasks users have in their list.
+     */
     public void printTaskStatus(int size) {
         String taskSize = size == 1 ? " task" : " tasks";
         System.out.println("You now have " + size + taskSize);

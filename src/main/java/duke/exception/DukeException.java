@@ -1,5 +1,10 @@
 package duke.exception;
 
+/**
+ * Represents a generic DukeException.
+ * It contains a <code>String</code> exceptionType describing the type of <code>DukeException</code>,
+ * a <code>String</code> additionalInfo to describe the <code>DukeException</code> in detail.
+ */
 public abstract class DukeException extends Exception {
     private final String exceptionType;
     private final String additionalInfo;
