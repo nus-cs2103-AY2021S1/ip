@@ -1,5 +1,6 @@
-import java.io.IOException;
-
+/**
+ * Represents a command to mark a task as done.
+ */
 public class DoneCommand extends Command {
     protected int taskNumber;
 
@@ -7,6 +8,13 @@ public class DoneCommand extends Command {
         this.taskNumber = taskNumber;
     }
 
+    /**
+     * Marks a task as done and updates it in both the task list and file in filepath specified in storage.
+     * @param tasks Task list of all tasks.
+     * @param ui Ui to deal with interaction with user.
+     * @param storage Storage to load and save tasks.
+     * @throws DukeException
+     */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         // check if the taskNumber provided is in range
         if (taskNumber > tasks.getNumTasks() || taskNumber <= 0) {

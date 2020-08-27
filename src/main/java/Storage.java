@@ -7,7 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-// Responsible for loading tasks from file and appending/overwriting tasks in file
+/**
+ * Represents a storage system to load tasks from file and append/overwrite tasks.
+ */
 public class Storage {
     protected String filePath;
 
@@ -17,6 +19,13 @@ public class Storage {
 
     // Scans through file and makes use of the information to initialise tasks arraylist.
     // If file does not exist, it creates a duke.txt file in the correct directory.
+
+    /**
+     * Scan through file at specified filePath and make use of the information to initialise tasks arraylist.
+     * If directory or file does not exist, it creates the necessary directories and file.
+     * @return A list of tasks found in the file at specified filePath.
+     * @throws DukeException if unable to load file.
+     */
     public List<Task> load() throws DukeException {
         try {
             List<Task> tasks = new ArrayList<>();
@@ -62,6 +71,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Add text to the file at specified filepath.
+     * @param textToAppend Text to be added to the file.
+     * @throws DukeException if unable to append a line to the file.
+     */
     public void appendToFile(String textToAppend) throws DukeException {
         try {
             FileWriter fw = new FileWriter(filePath, true); // create a FileWriter in append mode
@@ -73,8 +87,11 @@ public class Storage {
 
     }
 
-    // Rewrite actual duke.txt file based on provided tasks arraylist
-    // Loop through tasks array and format each task
+    /**
+     * Rewrite the entire file based on the tasks arraylist, looping through each task and formatting it.
+     * @param tasks
+     * @throws DukeException
+     */
     public void overwriteFile(List<Task> tasks) throws DukeException {
         try {
             FileWriter fw = new FileWriter(filePath);

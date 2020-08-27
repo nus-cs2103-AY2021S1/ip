@@ -1,6 +1,9 @@
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents a task with a deadline. A deadline task has a description and the deadline of the task.
+ */
 public class Deadline extends Task {
 
     protected LocalDateTime by;
@@ -15,6 +18,10 @@ public class Deadline extends Task {
         this.by = by;
     }
 
+    /**
+     * Marks a deadline task as done.
+     * @return A deadline task that is done.
+     */
     @Override
     public Deadline markAsDone() {
         Deadline doneDeadline = new Deadline(this.description, this.by, true);

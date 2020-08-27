@@ -1,3 +1,6 @@
+/**
+ * Represents a task to be done.
+ */
 public class ToDo extends Task {
 
     public ToDo(String description) {
@@ -8,6 +11,10 @@ public class ToDo extends Task {
         super(description, isDone);
     }
 
+    /**
+     * Mark the ToDo task as done.
+     * @return A ToDo task that is done.
+     */
     @Override
     public ToDo markAsDone() {
         ToDo doneToDo = new ToDo(this.description, true);
