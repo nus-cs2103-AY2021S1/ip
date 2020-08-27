@@ -184,7 +184,11 @@ public class TaskList {
     public ArrayList<Task> getStoredTasks() {
         return this.storedTasks;
     }
-    
+
+    /**
+     * Prints list of relevant tasks based on inputted key word.
+     * @param input String array of user input.
+     */
     public void returnSearchedTask(String[] input) {
         ArrayList<Task> relevantTasks = new ArrayList<>();
         String searchWord = input[1];

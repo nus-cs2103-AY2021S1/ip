@@ -132,6 +132,10 @@ public class Ui {
         System.out.println();
     }
 
+    /**
+     * Prints relevant tasks.
+     * @param storedTasks List of relevant tasks.
+     */
     public static void printRelevantTasksUi(ArrayList<Task> storedTasks) {
         if (storedTasks.size() == 0) {
             System.out.println("There doesn't seem to be any relevant writings, Your Majesty.");
