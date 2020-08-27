@@ -2,9 +2,9 @@ import java.util.ArrayList;
 
 public class AddCommand extends Command {
 
-    CommandName commandName;
-    String description;
-    String date;
+    private CommandName commandName;
+    private String description;
+    private String date;
 
     public AddCommand(CommandName commandName, String description) {
         this.commandName = commandName;

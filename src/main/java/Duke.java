@@ -1,4 +1,3 @@
-
 /**
  * Main class that takes in user input.
  */

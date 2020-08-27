@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-
 public class ExitCommand extends Command {
 
     @Override
