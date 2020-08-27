@@ -1,25 +1,35 @@
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 // partial solution copied from iP
 public class Event extends Task {
 
     protected LocalDate date;
-    protected Integer time;
+    protected LocalTime time;
 
     public Event(String description, String at, boolean isDone) {
         super(description.trim(), isDone);
-        String[] timing = at.trim().split("/");
-        String[] timingDay = timing[2].split(" ");
-        this.date = LocalDate.of(Integer.parseInt(timingDay[0]), Integer.parseInt(timing[1]),
-                Integer.parseInt(timing[0]));
-        if (timingDay.length == 2 && Integer.parseInt(timing[1]) >= 0 && Integer.parseInt(timingDay[1]) < 2359) {
-            this.time = Integer.parseInt(timingDay[1]);
+        String[] dateAndTime = at.trim().split(" ");
+        String[] date = dateAndTime[0].split("/");
+        String time = String.format("%04d", Integer.parseInt(dateAndTime[1]));
+        String day = date[0];
+        String month = date[1];
+        String year = date[2];
+        this.date = LocalDate.of(Integer.parseInt(year), Integer.parseInt(month), Integer.parseInt(day));
+        String hour = time.substring(0,2);
+        String minute = time.substring(2,4);
+        if (Integer.parseInt(hour) <= 23 && Integer.parseInt(minute) <= 59) {
+            this.time = LocalTime.of(Integer.parseInt(hour), Integer.parseInt(minute));
+        } else {
+            this.time = LocalTime.of(23, 59);
         }
     }
 
     @Override
     public String toString() {
-        return "  [E]" + super.toString() + " (at: " + date.getMonth().toString().toLowerCase() + " " +
-                date.getDayOfMonth() + " " + date.getYear() + (time == null ? ")" : " " + time + "hrs)");
+        String formattedTime = String.format("%02d", time.getHour()) + String.format("%02d", time.getMinute());
+        return "  [E]" + super.toString() + " (At: " + date.getDayOfMonth() + " " +
+                date.getMonth().toString().toLowerCase() + " " + date.getYear() + (time == null ? ")" : " " +
+                formattedTime + " hrs)");
     }
 }

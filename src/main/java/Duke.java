@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.DateTimeException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -15,8 +16,15 @@ public class Duke {
 
     // this function greets the user when Duke is started
     public static void greeting() {
+        String logo = " ____        _        \n"
+                + "|  _ \\ _   _| | _____ \n"
+                + "| | | | | | | |/ / _ \\\n"
+                + "| |_| | |_| |   <  __/\n"
+                + "|____/ \\__,_|_|\\_\\___|\n";
+        System.out.println("Hello from\n" + logo);
         System.out.println(LINE);
         System.out.println("     Hello! I'm Duke and I was designed by Xuan Ming!\n");
+
         System.out.println(LINE);
     }
 
@@ -27,8 +35,10 @@ public class Duke {
         System.out.println(LINE);
     }
 
-    // calling this function will cause Duke to echo what the user inputs to Duke
-    // this function is only used in level 1 of the iP
+    /*
+     calling this function will cause Duke to echo what the user inputs to Duke
+     this function is only used in level 1 of the iP
+    */
     public static void echo(String s) {
         System.out.println(LINE);
         System.out.println("     " + s);
@@ -91,11 +101,9 @@ public class Duke {
         try {
             if (taskFile.createNewFile()) {
                 // if a tasks.txt file does not exist, we create a file so that we can read from it in the future
-                System.out.println(LINE);
-                System.out.println("Duke has noticed that you do not have a text file to store your tasks!");
-                System.out.println("As such, Duke has created an empty file, ready to store your tasks!");
-                System.out.println("This text file can be found at: " + taskFile.getAbsolutePath());
-                System.out.println(LINE);
+                System.out.println("     Duke has noticed that you do not have a text file to store your tasks!");
+                System.out.println("     As such, Duke has created an empty file, ready to store your tasks!");
+                System.out.println("     This text file can be found at: " + taskFile.getAbsolutePath());
             } else {
                 // if a tasks.txt file exists, we simply read the information and add it into our tasks ArrayList
                 Path filePath = Paths.get(taskFile.getAbsolutePath());
@@ -103,8 +111,8 @@ public class Duke {
                 int numOfTasks = taskList.size();
 
                 System.out.println(LINE);
-                System.out.println("Duke has noticed that you have a text file to store your tasks!");
-                System.out.println("Duke is currently reading the file from: " + taskFile.getAbsolutePath());
+                System.out.println("     Duke has noticed that you have a text file to store your tasks!");
+                System.out.println("     Duke is currently reading the file from: " + taskFile.getAbsolutePath());
                 System.out.println(LINE);
 
                 if (taskList.size() != 0) {
@@ -114,10 +122,12 @@ public class Duke {
 
                         switch (params[0]) {
                         case ("event"):
-                            tasks.add(new Event(params[1], params[2], Boolean.parseBoolean(params[3])));
+                            tasks.add(new Event(params[1], params[3] + " " + params[4],
+                                    Boolean.parseBoolean(params[5])));
                             break;
                         case ("deadline"):
-                            tasks.add(new Deadline(params[1], params[2], Boolean.parseBoolean(params[3])));
+                            tasks.add(new Deadline(params[1], params[3] + " " + params[4],
+                                    Boolean.parseBoolean(params[5])));
                             break;
                         case ("todo"):
                             tasks.add(new ToDo(params[1], Boolean.parseBoolean(params[2])));
@@ -127,47 +137,17 @@ public class Duke {
                     list(tasks);
                 }
 
-
-
-//                    String taskToAdd = "";
-//
-//                    switch (task.charAt(4)) {
-//                    case ('✘'):
-//                        taskToAdd += "false ";
-//                    case ('✓'):
-//                        taskToAdd += "true ";
-//                    }
-//
-//                    switch (task.charAt(1)) {
-//                    case ('T'):
-//                        taskToAdd += "todo";
-//                    case ('E'):
-//                        taskToAdd += "event";
-//                    case ('D'):
-//                        taskToAdd += "deadline";
-//                    }
-
-//                    String input = task.substring(7);
-//                    switch (taskToAdd.get(0)) {
-//                    case ("todo"):
-//                        tasks.add(new ToDo(input, Boolean.parseBoolean(taskToAdd.get(1))));
-//                    case ("event"):
-//                        String[] inputValue = input.split("\\(at");
-//                        tasks.add(new Event(inputValue[0], inputValue[1], Boolean.parseBoolean(taskToAdd.get(1))));
-//                    case ("deadline"):
-//                        String[] inputs = input.split("\\(by");
-//                        tasks.add(new Deadline(inputs[0], inputs[1], Boolean.parseBoolean(taskToAdd.get(1))));
-//                    }
-
-                }
-            } catch (IOException ioException) {
+            }
+        } catch (IOException ioException) {
             ioException.printStackTrace();
         }
     }
 
-    // this function is called whenever the list of tasks is updated
-    // this function then updates the respective tasks.txt file to ensure that Duke will remember the list of tasks
-    // (in the event Duke stops running and is rerun)
+    /*
+     this function is called whenever the list of tasks is updated
+     this function then updates the respective tasks.txt file to ensure that Duke will remember the list of tasks
+     (in the event Duke stops running and is rerun)
+    */
     private static void updateFile(ArrayList<Task> tasks, File file) {
 
         try {
@@ -175,15 +155,27 @@ public class Duke {
             FileWriter writeTaskFile = new FileWriter(file);
             for (Task task : tasks) {
                 if (task instanceof Event) {
-                    writeTaskFile.write( "event" + " " + task.description + " " + ((Event) task).at + " " + task.isDone
-                            + System.lineSeparator());
-                }
-                else if (task instanceof Deadline) {
-                    writeTaskFile.write("deadline" + " " + task.description + " " + ((Deadline) task).by + " "
-                            + task.isDone + System.lineSeparator());
-                }
-                else if (task instanceof ToDo) {
-                    writeTaskFile.write("todo" + " " + task.description + " " + task.isDone + System.lineSeparator());
+
+                    String day = ((Event)task).date.getDayOfMonth() + "/" + ((Event)task).date.getMonthValue() + "/" +
+                            ((Event)task).date.getYear();
+                    String time = String.format("%02d", ((Event)task).time.getHour()) +
+                            String.format("%02d", ((Event)task).time.getMinute());
+                    writeTaskFile.write("event" + " " + task.description + " " + "/by" + " " + day + " " + time +
+                            " " + task.isDone + System.lineSeparator());
+
+                } else if (task instanceof Deadline) {
+
+                    String day = ((Deadline)task).date.getDayOfMonth() + "/" + ((Deadline)task).date.getMonthValue() +
+                            "/" + ((Deadline)task).date.getYear();
+                    String time = String.format("%02d", ((Deadline)task).time.getHour()) +
+                            String.format("%02d", ((Deadline)task).time.getMinute());
+
+                    writeTaskFile.write("deadline" + " " + task.description + " " + "/by" + " " + day + " " + time +
+                            " " + task.isDone + System.lineSeparator());
+
+                } else if (task instanceof ToDo) {
+                    writeTaskFile.write("todo" + " " + task.description + " " + task.isDone +
+                            System.lineSeparator());
                 }
 
             }
@@ -197,10 +189,28 @@ public class Duke {
 
     }
 
-        // welcome message printed when the user runs Duke
-        // create a new file object needed for Duke to read from and write to
-        File taskFile = new File("src/main/java/tasks.txt");
+    public static void main(String[] args) {
+
+        // greet the user when Duke is started
+        greeting();
+
+        // create an ArrayList (of generic type Task) to keep track of tasks given to Duke
+        ArrayList<Task> tasks = new ArrayList<>();
+
+        /*
+         check if there is a preexisting valid file of tasks Duke can read from
+         if such a file exists, Duke will tell the user it is currently reading from the file
+         otherwise, Duke will tell the user it is not reading any file
+         and will create a file it can read from (in the future)
+        */
+        File taskFile = new File("src/main/java/tasks.txt"); // relative path
         initializeFile(taskFile, tasks);
+
+        /*
+         this field is used to keep track of whether the user has called the "bye" command
+         if the user has called the "bye command", this field is set to true and Duke will terminate
+        */
+        boolean isTerminateCalled = false;
 
         // this field is used to receive input given by the user
         Scanner sc = new Scanner(System.in);
@@ -282,10 +292,12 @@ public class Duke {
                     System.out.println("     ☹ OOPS!!! The description of a event cannot be empty.");
                     System.out.println(LINE);
                     continue;
-                } catch (MissingInfoException e) {
+                } catch (MissingInfoException | DateTimeException e) {
                     System.out.println(LINE);
-                    System.out.println("     ☹ OOPS!!! The event you keyed in needs to have a timing!");
-                    System.out.println("     You can key in a timing by typing \"/at\", followed by the event timing!");
+                    System.out.println("     ☹ OOPS!!! The event you keyed in needs to have a valid timing!");
+                    System.out.println("     Key in the timing by typing \"/at\", followed by the event date " +
+                            "and timing!");
+                    System.out.println("     The event timing should be typed in the format \"DD/MM/YYYY\" HHMM!");
                     System.out.println(LINE);
                     continue;
                 }
@@ -320,11 +332,12 @@ public class Duke {
                     System.out.println("     ☹ OOPS!!! The description of a deadline cannot be empty.");
                     System.out.println(LINE);
                     continue;
-                } catch (MissingInfoException e) {
+                } catch (MissingInfoException | DateTimeException e) {
                     System.out.println(LINE);
                     System.out.println("     ☹ OOPS!!! The deadline you keyed in needs to have a deadline!");
                     System.out.println("     You can key in a timing by typing \"/by\", followed by the deadline's " +
                             "deadline!");
+                    System.out.println("     The deadline should be typed in the format \"DD/MM/YYYY\" HHMM!");
                     System.out.println(LINE);
                     continue;
                 }
@@ -386,23 +399,6 @@ public class Duke {
                     System.out.println(LINE);
                 }
             }
-
         }
-
-    }
-
-    public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        greeting();
-
-        // this field keeps track of the tasks given to Duke
-        ArrayList<Task> tasks = new ArrayList<>();
-
-        userPrompt(tasks);
     }
 }
