@@ -4,30 +4,65 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+/**
+ * Represents a list of tasks. The Tasklist supports operations to add or delete tasks
+ * and to mark tasks as done.
+ */
 public class Tasklist {
 
     private List<Task> taskList;
 
+    /**
+     * Creates an empty Tasklist.
+     */
     public Tasklist() {
         this.taskList = new ArrayList<>();
     }
 
+    /**
+     * Adds a Task to the Tasklist.
+     *
+     * @param task The task to be added to the Tasklist.
+     */
     public void add(Task task) {
         taskList.add(task);
     }
 
+    /**
+     * Returns the number of Tasks currently stored in the Tasklist.
+     *
+     * @return The number of Tasks currently stored in the Tasklist.
+     */
     public int size() {
         return taskList.size();
     }
 
+    /**
+     * Returns the Task with the specified index within the Tasklist.
+     *
+     * @param taskNumber The index of the Task.
+     * @return The Task with the specified index within the Tasklist.
+     */
     public Task get(int taskNumber) {
         return taskList.get(taskNumber - 1);
     }
 
+    /**
+     * Removes the Task with the specified index within the Tasklist.
+     *
+     * @param taskNumber The index of the Task to be removed.
+     */
     public void deleteTask(int taskNumber) {
         taskList.remove(taskNumber - 1);
     }
 
+    /**
+     * Returns the String representation of the list of all Tasks,
+     * to be displayed on the UI.
+     *
+     * @return String representation of the list of all Tasks to be
+     * displayed on the UI.
+     */
     public String toDisplayString() {
         if (taskList.size() == 0) {
             return "You have no tasks!";
@@ -43,6 +78,13 @@ public class Tasklist {
         }
     }
 
+    /**
+     * Returns the String representation of the list of all Tasks,
+     * to be saved in the storage of the Tasklist.
+     *
+     * @return String representation of the list of all Tasks to
+     * be saved in the storage of the Tasklist.
+     */
     public String toSavedString() {
         String taskListString = "";
         if (taskList.size() > 0) {
