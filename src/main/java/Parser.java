@@ -8,7 +8,9 @@ import main.java.Command.ByeCommand;
 import main.java.Command.Command;
 
 import java.util.zip.DataFormatException;
-
+/**
+ * Understands inputs given by user and validates them.
+ */
 public class Parser {
 
     enum COMMANDS {
@@ -26,6 +28,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Understands input from user
+     * @param userText input from user
+     * @param taskList list of tasks user has currently
+     * @return boolean value of whether conversation is to be continued
+     */
     public static boolean understandText(String userText, TaskList taskList) {
         try {
             String edittedAnswer = userText.strip().toLowerCase();
@@ -81,7 +89,7 @@ public class Parser {
             System.out.println("Hmm... I don't have a task numbered " + answer + "\n" + Ui.LINE);
         }
     }
-    
+
     private static void furtherUnderstandTask(String answer, TaskList taskList) {
         try {
             String[] answers = answer.split(" ", 2);
