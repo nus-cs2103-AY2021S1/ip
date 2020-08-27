@@ -45,9 +45,9 @@ public class Ui {
      */
     public void showList() {
         System.out.println(SHOW_TASK);
-        for (int i = 0; i < TaskList.taskList.size(); i++) {
+        for (int i = 0; i < TaskList.taskLists.size(); i++) {
             int number = i + 1;
-            System.out.println(number + "." + TaskList.taskList.get(i));
+            System.out.println(number + "." + TaskList.taskLists.get(i));
         }
         System.out.println(HORIZONTAL_LINE);
     }
@@ -65,13 +65,13 @@ public class Ui {
      */
     public void printFind(String description) {
         TaskList.searchKeyword(description);
-        if (TaskList.tempList.size() == 0) {
+        if (TaskList.tempLists.size() == 0) {
             System.out.println(FIND_NOTHING);
         } else {
             System.out.println(FIND_OPENING);
-            for (int i = 0; i < TaskList.tempList.size(); i++) {
+            for (int i = 0; i < TaskList.tempLists.size(); i++) {
                 int number = i + 1;
-                System.out.println(number + "." + TaskList.tempList.get(i));
+                System.out.println(number + "." + TaskList.tempLists.get(i));
             }
         }
         System.out.println(HORIZONTAL_LINE);
@@ -85,7 +85,7 @@ public class Ui {
     public void printTask(Task task) {
         System.out.println("Got it. I've added this task:");
         System.out.println(TAB + task);
-        System.out.println("Now you have " + TaskList.taskList.size() + " tasks in the list.");
+        System.out.println("Now you have " + TaskList.taskLists.size() + " tasks in the list.");
         System.out.println(HORIZONTAL_LINE);
     }
 
@@ -96,7 +96,7 @@ public class Ui {
      */
     public void printDone(int index) {
         System.out.println("Nice! I've marked this task as done:");
-        System.out.println(TAB + TaskList.taskList.get(index));
+        System.out.println(TAB + TaskList.taskLists.get(index));
         System.out.println(HORIZONTAL_LINE);
     }
 
@@ -107,9 +107,9 @@ public class Ui {
      */
     public void printDelete(int indexToDelete) {
         System.out.println("Noted. I've removed this task:");
-        System.out.println(TAB + TaskList.taskList.get(indexToDelete));
-        TaskList.taskList.remove(indexToDelete);
-        System.out.println("Now you have " + TaskList.taskList.size() + " tasks in the list.");
+        System.out.println(TAB + TaskList.taskLists.get(indexToDelete));
+        TaskList.taskLists.remove(indexToDelete);
+        System.out.println("Now you have " + TaskList.taskLists.size() + " tasks in the list.");
         System.out.println(HORIZONTAL_LINE);
     }
 

@@ -7,14 +7,14 @@ import java.util.List;
  */
 public class TaskList {
 
-    public static List<Task> taskList;
-    public static List<Task> tempList = new ArrayList<>();
+    public static List<Task> taskLists;
+    public static List<Task> tempLists = new ArrayList<>();
 
     /**
      * Constructor of tasklist.
      */
     public TaskList() {
-        taskList = new ArrayList<>();
+        taskLists = new ArrayList<>();
     }
 
     /**
@@ -23,14 +23,14 @@ public class TaskList {
      * @param index number of item in the list.
      */
     public void markDone(int index) {
-        taskList.get(index).markAsDone();
+        taskLists.get(index).markAsDone();
     }
 
     public static void searchKeyword(String description) {
-        tempList.clear();
-        for (Task task : taskList) {
+        tempLists.clear();
+        for (Task task : taskLists) {
             if (task.getDescription().contains(description)) {
-                tempList.add(task);
+                tempLists.add(task);
             }
         }
     }
@@ -41,7 +41,7 @@ public class TaskList {
      * @param task task to be added into list.
      */
     public void add(Task task) {
-        taskList.add(task);
+        taskLists.add(task);
     }
 
 }

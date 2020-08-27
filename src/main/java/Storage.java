@@ -30,7 +30,7 @@ public class Storage {
     public void saveTasks() throws IOException {
         BufferedWriter taskWriter = new BufferedWriter(new FileWriter(path));
         String tasks = "";
-        for (Task task : TaskList.taskList) {
+        for (Task task : TaskList.taskLists) {
             tasks += task.toSaveString() + "\n";
         }
         taskWriter.write(tasks);
@@ -76,7 +76,7 @@ public class Storage {
             if (keywords[0].equals("1")) {
                 cur.markAsDone();
             }
-            TaskList.taskList.add(cur);
+            TaskList.taskLists.add(cur);
         }
         sc.close();
     }
