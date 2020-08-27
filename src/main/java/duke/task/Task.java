@@ -5,19 +5,38 @@ package duke.task;
  */
 public class Task {
 
+    /** Description of the task. */
     private final String description;
+
+    /** Completion status of the task. */
     private boolean isDone;
 
+    /**
+     * Creates a new task from a description.
+     *
+     * @param description Description of the task.
+     */
     public Task(String description) {
         this.description = description;
         this.isDone = false;
     }
 
+    /**
+     * Creates a new task from a description and completion status.
+     *
+     * @param description Description of the task.
+     * @param isDone Completion status of the task.
+     */
     public Task(String description, boolean isDone) {
         this.description = description;
         this.isDone = isDone;
     }
 
+    /**
+     * Gets the description of the task.
+     *
+     * @return Description of the task.
+     */
     public String getDescription() {
         return this.description;
     }
@@ -40,7 +59,7 @@ public class Task {
     }
 
     /**
-     * Gets the data from the task to be saved in duke.txt.
+     * Gets data from the task to be saved in storage.
      *
      * @return String representing the data of the task.
      */

@@ -5,10 +5,21 @@ package duke.task;
  */
 public class Todo extends Task {
 
+    /**
+     * Creates a todo from a description.
+     *
+     * @param description Description of the todo.
+     */
     public Todo(String description) {
         super(description);
     }
 
+    /**
+     * Creates a todo from a description and completion status.
+     *
+     * @param description Description of the todo.
+     * @param isDone Completion status of the todo.
+     */
     public Todo(String description, boolean isDone) {
         super(description, isDone);
     }

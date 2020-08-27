@@ -7,10 +7,18 @@ import java.util.Scanner;
  */
 public class Duke {
 
+    /** UI for Duke to display messages. */
     private final Ui ui;
+
+    /** Storage for Duke to store tasks. */
     private final Storage storage;
+
+    /** Parser for Duke to parse inputs. */
     private final Parser parser;
 
+    /**
+     * Creates an instance of Duke.
+     */
     public Duke() {
         TaskList taskList = new TaskList();
         this.ui = new Ui();
