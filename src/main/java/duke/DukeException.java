@@ -1,5 +1,8 @@
 package duke;
 
+/**
+ * Represents Exception thrown within Duke.
+ */
 public class DukeException extends Exception {
 
     String message;

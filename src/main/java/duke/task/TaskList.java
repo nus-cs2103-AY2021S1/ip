@@ -5,34 +5,54 @@ import duke.DukeException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Represents tasks of user.
+ */
 public class TaskList {
 
-    private static List<Task> list;
+    private List<Task> tasks;
 
     public TaskList() {
-        this.list = new ArrayList<>();
+        this.tasks = new ArrayList<>();
     }
     public TaskList(List<Task> list) {
-        this.list = list;
+        this.tasks = list;
     }
 
+    /**
+     * Returns list of tasks of user.
+     * @return tasks of user.
+     */
     public List<Task> getList() {
-        return list;
+        return tasks;
     }
 
+    /**
+     * Adds task to the list of tasks of user.
+     * @param task task which the user wants to add to the list.
+     */
     public void addList(Task task) {
-        list.add(task);
+        tasks.add(task);
     }
 
-    public void deleteTask(int i) throws DukeException {
+    /**
+     * Deletes the task from list of tasks of user.
+     * @param index Index of the task the user wants to delete.
+     * @throws DukeException If index > number of tasks.
+     */
+    public void deleteTask(int index) throws DukeException {
         try {
-            list.remove(i);
+            tasks.remove(index);
         } catch (Exception e) {
             throw new DukeException("You don't have such task in your list...");
         }
     }
 
+    /**
+     * Gets number of tasks.
+     * @return number of tasks.
+     */
     public int getListSize() {
-        return list.size();
+        return tasks.size();
     }
 }
