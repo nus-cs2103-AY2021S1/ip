@@ -1,4 +1,6 @@
 import java.util.*;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Duke {
     public static void main(String[] args) {
@@ -58,6 +60,7 @@ public class Duke {
                             break;
                         }
                     }
+                    getDeadline = formatDate(getDeadline);
                     Deadline tmp = new Deadline(getName, getDeadline);
                     System.out.println("Got it. I've added this task: ");
                     System.out.println("  " + tmp.getStatus());
@@ -79,6 +82,7 @@ public class Duke {
                             break;
                         }
                     }
+                    getTime = formatDate(getTime);
                     Event tmp = new Event(getName, getTime);
                     System.out.println("Got it. I've added this task: ");
                     System.out.println("  " + tmp.getStatus());
@@ -102,6 +106,11 @@ public class Duke {
             }
             else System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
+    }
+
+    public static String formatDate(String str) {
+        LocalDate d = LocalDate.parse(str);
+        return d.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
     }
 
     public static void checkCmd(String cmd, int len, String Ex) throws DukeException {
