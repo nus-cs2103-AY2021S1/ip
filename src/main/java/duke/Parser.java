@@ -1,6 +1,14 @@
 package duke;
 
+/**
+ * Creates a parser which makes sense of the user input.
+ */
 public class Parser {
+    /**
+     * Returns a type of Instrcution according to the user input.
+     *
+     * @return The type of instruction.
+     */
     public Instruction load(String input) {
         if (input.equals("list")) {
             return Instruction.LIST;

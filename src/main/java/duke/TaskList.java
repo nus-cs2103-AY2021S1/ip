@@ -1,6 +1,10 @@
 package duke;
 import java.util.ArrayList;
 
+/**
+ * Creates a tasklist which contains a arraylist and a list of operations can
+ * be performed on it. The javadoc for methods in this class are omitted.
+ */
 public class TaskList {
     protected ArrayList<Task> list;
 

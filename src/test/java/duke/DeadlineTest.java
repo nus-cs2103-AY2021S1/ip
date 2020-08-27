@@ -3,6 +3,9 @@ package duke;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+/**
+ * Contains a task case to test the updateDateTime method in the Deadline class.
+ */
 public class DeadlineTest {
     @Test
     public void Test() {
