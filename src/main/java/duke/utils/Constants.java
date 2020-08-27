@@ -1,7 +1,5 @@
 package duke.utils;
 
-import java.util.Arrays;
-import java.util.List;
 
 public class Constants {
     public static final String GREETING =
@@ -26,6 +24,5 @@ public class Constants {
     public static final String DATEFORMAT = "yyyy-mm-dd";
 
     public static final int consoleWidth = 50;
-
 
 }

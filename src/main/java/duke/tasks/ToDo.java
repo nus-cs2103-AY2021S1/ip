@@ -1,8 +1,14 @@
 package duke.tasks;
 
+import java.util.Objects;
+
 public class ToDo extends Task{
     public ToDo(String task) {
         super(task);
+    }
+
+    public ToDo(String task, String status) {
+        super(task, Objects.equals(status, "1") ? true : false);
     }
 
     @Override

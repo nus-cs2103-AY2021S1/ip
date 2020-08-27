@@ -1,13 +1,17 @@
 package duke.tasks;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+import java.util.Objects;
 import java.util.Optional;
 
 public class Event extends Task {
     private String duration;
     public Event(String task, String duration){
         super(task);
+        this.duration = duration;
+    }
+
+    public Event(String task, String status, String duration) {
+        super(task, Objects.equals(status, "1") ? true : false);
         this.duration = duration;
     }
 

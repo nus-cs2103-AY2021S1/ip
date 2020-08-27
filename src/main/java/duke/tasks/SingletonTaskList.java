@@ -8,7 +8,7 @@ import java.util.List;
 
 public class SingletonTaskList {
     List<Task> tasks;
-    Storage storage = new Storage();
+    Storage storage;
 
     private static SingletonTaskList instance;
 
@@ -49,6 +49,7 @@ public class SingletonTaskList {
         Printer.printAllTask(tasks);
     }
 
+
     public void setTaskDone(int idx) throws TaskOutOfBoundException {
         try {
             Task task = this.tasks.get(idx);
@@ -57,7 +58,6 @@ public class SingletonTaskList {
         } catch (IndexOutOfBoundsException e) {
             throw new TaskOutOfBoundException("Target number of task out of bound", idx + 1);
         }
-
     }
 
 }

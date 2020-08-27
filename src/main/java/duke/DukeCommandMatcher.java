@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+import java.util.zip.DataFormatException;
 
 
 public class DukeCommandMatcher {
@@ -92,7 +93,7 @@ public class DukeCommandMatcher {
         try {
             String todoContent = todoStr[1];
             todo = new ToDo(todoContent);
-        } catch (NullPointerException e) {
+        } catch (NullPointerException | IndexOutOfBoundsException e) {
             throw new NullCommandContentException("Description cannot be null", "Todo");
         }
         return handleAdd(todo);
@@ -112,11 +113,9 @@ public class DukeCommandMatcher {
         try {
             String standardDate = UtilFunction.formatDateToStandard(splitDeadline[1]);
             deadline = new Deadline(splitDeadline[0], standardDate);
-
         } catch (IndexOutOfBoundsException e) {
             throw new LackOfTimeException("The time cannot be empty", "Duke.Deadline" );
         }
-
         return handleAdd(deadline);
     }
 

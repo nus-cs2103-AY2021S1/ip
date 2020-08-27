@@ -1,13 +1,17 @@
 package duke.tasks;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+import java.util.Objects;
 import java.util.Optional;
 
 public class Deadline extends Task{
     private String deadline;
     public Deadline(String task, String deadline) {
         super(task);
+        this.deadline = deadline;
+    }
+
+    public Deadline(String task, String status, String deadline) {
+        super(task, Objects.equals(status, "1") ? true : false);
         this.deadline = deadline;
     }
 

@@ -28,15 +28,15 @@ public class Storage {
                 String[] taskStr = line.split(",");
                 switch (taskStr[0]) {
                 case "T": {
-                    task = new ToDo(taskStr[1]);
+                    task = new ToDo(taskStr[2], taskStr[1]);
                     break;
                 }
                 case "E": {
-                    task = new Event(taskStr[1], taskStr[2]);
+                    task = new Event(taskStr[2], taskStr[3], taskStr[1]);
                     break;
                 }
                 case "D": {
-                    task = new Deadline(taskStr[1], taskStr[2]);
+                    task = new Deadline(taskStr[2], taskStr[3], taskStr[1]);
                     break;
                 }
                 default: {

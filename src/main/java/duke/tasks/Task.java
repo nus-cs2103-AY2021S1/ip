@@ -10,6 +10,11 @@ public class Task {
         this.status = false;
     }
 
+    Task(String task, boolean status) {
+        this.task = task;
+        this.status = status;
+    }
+
     public String getTaskType() {
         return "task";
     }

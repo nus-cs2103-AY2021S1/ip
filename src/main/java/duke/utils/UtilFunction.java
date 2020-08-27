@@ -6,6 +6,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Objects;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -35,14 +36,22 @@ public class UtilFunction {
     }
 
     public static void printLimit(String output) {
-        int width = Constants.consoleWidth;
+        String[] sentences = output.split("\n");
+        for(String sentence: sentences) {
+            if (sentence.length() < Constants.consoleWidth) {
+                System.out.println(sentence);
+            } else {
+                lineSentence(sentence);
+            }
+        }
+    }
+
+    private static void lineSentence(String sentence) {
+        String[] words = sentence.split("\\s+");
         int count = 0;
-        String[] words = output.split("\\s+");
         for(String word: words) {
             count += word.length();
-            if(Objects.equals(word, '\n')) {
-                System.out.print('\n');
-            } else if (count < width) {
+            if (count < Constants.consoleWidth) {
                 System.out.print(word + " ");
             } else {
                 System.out.print('\n' + word);
