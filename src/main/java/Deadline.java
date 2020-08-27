@@ -4,7 +4,7 @@ public class Deadline extends Task {
     public Deadline(String desc, String by) {
         super(desc);
         this.by = by;
-        typeOfTask = TypeOfTask.DEADLINE;
+        taskType = TaskType.DEADLINE;
     }
 
     @Override
@@ -14,6 +14,12 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[" + typeOfTask + "]" + super.toString() + " (by: " + by + ")";
+        return "[" + taskType + "]" + super.toString() + " (by: " + by + ")";
     }
+
+    @Override
+    public String generateSaveFileData() {
+        return "D|" + (isDone ? "1" : "0") + "|" + desc + "|" + by;
+    }
+
 }

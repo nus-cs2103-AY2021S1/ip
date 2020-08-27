@@ -4,7 +4,7 @@ public class Event extends Task {
     public Event(String desc, String at) {
         super(desc);
         this.at = at;
-        typeOfTask = TypeOfTask.EVENT;
+        taskType = TaskType.EVENT;
     }
 
     @Override
@@ -14,6 +14,11 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[" + typeOfTask + "]" + super.toString() +  " (at: " + at + ")";
+        return "[" + taskType + "]" + super.toString() +  " (at: " + at + ")";
+    }
+
+    @Override
+    public String generateSaveFileData() {
+        return "E|" + (isDone ? "1" : "0") + "|" + desc + "|" + at;
     }
 }

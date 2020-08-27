@@ -1,7 +1,7 @@
 public abstract class Task {
     protected String desc;
     protected boolean isDone;
-    protected TypeOfTask typeOfTask;
+    protected TaskType taskType;
 
     public Task(String desc) {
         this.desc = desc;
@@ -19,6 +19,12 @@ public abstract class Task {
     public String getDesc() {
         return desc;
     }
+    
+    public TaskType getTaskType() {
+        return taskType;
+    }
+    
+    public abstract String generateSaveFileData();
 
     @Override
     public String toString() {

@@ -1,11 +1,11 @@
-public enum TypeOfTask {
+public enum TaskType {
     TODO("T"),
     DEADLINE("D"),
     EVENT("E");
 
     public String letter;
 
-    TypeOfTask(String letter) {
+    TaskType(String letter) {
         this.letter = letter;
     }
 
