@@ -38,6 +38,8 @@ public class Parser {
             markTaskAsDone(input);
         } else if (input.contains("get")) {
             printTasksFromDate(input);
+        } else if (input.contains("find")) {
+            findTasks(input);
         } else if (input.contains("todo") || input.contains("event") || input.contains("deadline")) {
             createTask(input);
         } else {
@@ -110,7 +112,7 @@ public class Parser {
     /**
      * Prints the tasks with the date required by the user.
      *
-     * @param input Date of tasks required.
+     * @param input Input string describing the date of tasks required.
      * @throws DukeException If input is invalid.
      */
     private void printTasksFromDate(String input) throws DukeException {
@@ -137,6 +139,40 @@ public class Parser {
             }
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Enter the date you want to get tasks from.\n");
+        }
+    }
+
+    /**
+     * Finds the tasks with the given keyword.
+     *
+     * @param input Input string describing the keyword to search for.
+     * @throws DukeException If input is invalid.
+     */
+    private void findTasks(String input) throws DukeException {
+        try {
+            String searchTerm = input.substring(5);
+            boolean hasRelevantTasks = false;
+            StringBuilder relevantTasks = new StringBuilder();
+
+            int number = 0;
+            for (int i = 0; i < this.taskList.getNumOfTasks(); i++) {
+                Task task = this.taskList.getTask(i);
+                String taskDescription = task.getDescription();
+                if (taskDescription.contains(searchTerm)) {
+                    hasRelevantTasks = true;
+                    number++;
+                    relevantTasks.append(number).append(". ").append(task.toString()).append("\n");
+                }
+            }
+
+            if (hasRelevantTasks) {
+                String taskMessage = "Here are the matching task(s) in your list:\n" + relevantTasks;
+                this.ui.printMessage(taskMessage);
+            } else {
+                this.ui.printMessage("You have no matching tasks for the keyword: \"" + searchTerm + "\".\n");
+            }
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("Enter a search term.\n");
         }
     }
 
