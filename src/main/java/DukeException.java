@@ -3,11 +3,22 @@ public class DukeException extends Exception {
     protected DukeExceptionType exceptionType;
     protected Commands command;
 
+    /**
+     * constructor for a DukeException object
+     * @param e error name
+     * @param exceptionType type of error
+     */
     public DukeException(String e, DukeExceptionType exceptionType){
         super(e);
         this.exceptionType = exceptionType;
     }
 
+    /**
+     * constructor for a DukeException object
+     * @param e error name
+     * @param exceptionType type of error
+     * @param command the command which results in the error
+     */
     public DukeException(String e, DukeExceptionType exceptionType, Commands command){
         super(e);
         this.exceptionType = exceptionType;

@@ -3,6 +3,13 @@ import java.time.format.DateTimeFormatter;
 
 public class DeadlineTask extends Task{
     private LocalDate deadline;
+
+    /**
+     * Constructor for deadline task object
+     * @param name description of the task
+     * @param isCompleted is it completed or not
+     * @param deadline deadline for the task
+     */
     public DeadlineTask(String name, boolean isCompleted, String deadline) {
         super(name,isCompleted);
         this.deadline = LocalDate.parse(deadline);

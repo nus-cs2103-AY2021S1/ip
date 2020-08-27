@@ -6,11 +6,20 @@ public class Storage {
 
     private final String filePath;
 
+    /**
+     * constructor for Storage object
+     * @param filePath path of the data file
+     */
      public Storage(String filePath){
          this.filePath = filePath;
      }
 
-     public List<Task> load() throws DukeException, IOException {
+    /**
+     * method to read from hard disk
+     * @return reads the txt file amd converts it into a list of taskd
+     * @throws IOException if file/path does not exist
+     */
+     public List<Task> load() throws IOException {
          List<Task> taskList = new ArrayList<>();
          File file = new File(filePath);
          if(!file.exists()){
@@ -37,6 +46,11 @@ public class Storage {
          return taskList;
      }
 
+    /**
+     * method to save tasks to hard disk
+     * @param tasks writes the tasks onto the txt file
+     * @throws IOException if file/path does not exist
+     */
      public void save(TaskList tasks) throws IOException {
          String line = "";
          File file = new File(filePath);
