@@ -17,4 +17,4 @@ bin/
 text-ui-test/EXPECTED-UNIX.TXT
 
 # Local storage file
-/data/duke.txt
+data/duke.txt
