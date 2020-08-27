@@ -10,12 +10,12 @@ import java.time.format.DateTimeFormatter;
 
 public abstract class Task {
 
-    static final char DONE = '\u2713';
-    static final char NOT_DONE = '\u2717';
+    public static final char DONE = '\u2713';
+    public static final char NOT_DONE = '\u2717';
 
-    final String itemString;
-    String dateString;
-    boolean isDone;
+    public final String itemString;
+    public String dateString;
+    public boolean isDone;
 
 
     public Task(String itemString) {
@@ -37,7 +37,7 @@ public abstract class Task {
      * @param delimiter  Delimiter used.
      * @return Task portion of the string.
      */
-    static String getTaskString(String taskString, String delimiter) throws DukeInvalidDescriptionException {
+    public static String getTaskString(String taskString, String delimiter) throws DukeInvalidDescriptionException {
         try {
             return taskString.split(delimiter)[0];
         } catch (ArrayIndexOutOfBoundsException e) {
@@ -53,7 +53,7 @@ public abstract class Task {
      * @param delimiter  Delimiter used.
      * @return Date portion of the string.
      */
-    static String getDateString(String taskString, String delimiter) throws DukeInvalidDescriptionException {
+    public static String getDateString(String taskString, String delimiter) throws DukeInvalidDescriptionException {
         try {
             return taskString.split(delimiter)[1];
         } catch (ArrayIndexOutOfBoundsException e) {
@@ -76,7 +76,7 @@ public abstract class Task {
      * @param date date object
      * @return formatted date string.
      */
-    static String formatDateString(LocalDate date) {
+    public static String formatDateString(LocalDate date) {
         return date.format(DateTimeFormatter.ofPattern("dd MMM yyyy"));
     }
 
