@@ -1,13 +1,11 @@
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Scanner;
 
 public class Duke {
-//    public static final String pathToFile = ".\\data\\duke.txt";
     private static final Path filepath = Paths.get(".", "data", "duke.txt");
     private Storage storage;
     private TaskList taskList;
-    private Ui ui;
+    private final Ui ui;
 
     public Duke() {
         ui = new Ui();
@@ -27,6 +25,7 @@ public class Duke {
 
     public void run() {
         ui.showWelcome();
+        ui.showLine();
         boolean isExit = false;
         while (!isExit) {
             try {
