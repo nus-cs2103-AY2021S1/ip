@@ -1,3 +1,11 @@
+package duke.components;
+
+import duke.exceptions.DukeException;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.ToDo;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 

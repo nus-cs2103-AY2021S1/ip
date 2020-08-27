@@ -1,3 +1,5 @@
+package duke.components;
+
 import java.time.LocalDate;
 
 public class Parser {

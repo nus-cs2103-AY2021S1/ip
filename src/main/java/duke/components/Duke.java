@@ -1,7 +1,8 @@
+package duke.components;
+
+import duke.exceptions.DukeException;
+
 import java.io.*;
-import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Duke {
 
@@ -20,7 +21,7 @@ public class Duke {
 
     public void run() throws IOException {
 
-        System.out.println("Hi, this is Duke, what can I do for you?");
+        System.out.println("Hi, this is duke.components.Duke, what can I do for you?");
 
         parser.parse(ui.waitForNextInput());
         while(!parser.isBye) {

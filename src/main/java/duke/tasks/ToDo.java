@@ -1,6 +1,11 @@
-public class ToDo extends Task{
+package duke.tasks;
 
-    public ToDo(String description) throws DukeException{
+import duke.exceptions.DukeException;
+import duke.tasks.Task;
+
+public class ToDo extends Task {
+
+    public ToDo(String description) throws DukeException {
         super(description.substring(4),"todo");
         this.setType("todo");
     }

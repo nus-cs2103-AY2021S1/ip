@@ -1,9 +1,13 @@
+package duke.tasks;
+
+import duke.exceptions.DukeException;
+
 public class Task {
     protected String description;
     protected boolean isDone;
     private String type;
 
-    public Task(String description,String type) throws DukeException{
+    public Task(String description,String type) throws DukeException {
         this.type=type;
         if(!description.isEmpty()) {
             if(description.contains("/by")) {
