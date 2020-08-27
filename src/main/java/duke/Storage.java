@@ -6,13 +6,21 @@ import java.io.IOException;
 import java.util.Scanner;
 import java.util.ArrayList;
 
+/**
+ * Creates a storage container that handles the storage of the list of tasks.
+ */
 public class Storage {
     protected String filepath;
     
     Storage(String filepath) {
         this.filepath = filepath;
     }
-    
+
+    /**
+     * Updates the list of tasks in the storage.
+     *
+     * @throws DukeException If the file cannot be written.
+     */
     public void updateList(ArrayList<Task> list) throws DukeException {
         try {
             FileWriter fw1 = new FileWriter(filepath);
@@ -31,7 +39,12 @@ public class Storage {
             throw new DukeException(ex.getMessage());
         }
     }
-    
+
+    /**
+     * Returns the list of tasks contained in the storage in the form of arraylist.
+     *
+     * @return the arraylist of tasks
+     */
     public ArrayList<Task> load() {
         ArrayList<Task> list = new ArrayList<>();
         String thisLine;

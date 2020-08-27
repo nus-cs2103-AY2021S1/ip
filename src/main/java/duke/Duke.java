@@ -1,6 +1,9 @@
 package duke;
 import java.util.Scanner;
 
+/**
+ * Creates the Duke to run the program.
+ */
 public class Duke {
     private final Storage storage;
     private final TaskList list;
@@ -13,7 +16,10 @@ public class Duke {
         storage = new Storage(filePath);
         list = new TaskList(storage.load());
     }
-    
+
+    /**
+     * Runs the Duke.
+     */
     public void run() {
         Scanner sc = new Scanner(System.in);
         Instruction thisInstruction;
@@ -86,7 +92,10 @@ public class Duke {
         }
         ui.bye();
     }
-    
+
+    /**
+     * Starts the running of the Duke.
+     */
     public static void main(String[] args) {
         new Duke("data/Duke.txt").run();
     }
