@@ -11,6 +11,9 @@ import java.util.ArrayList;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+/**
+ * Tests the methods and exceptions for the TaskList class.
+ */
 public class TaskListTest {
     Task TODO = new ToDo("Todo Testing", false);
     Task DEADLINE = new Deadline("Deadline Testing", false,
