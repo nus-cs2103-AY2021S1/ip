@@ -4,6 +4,9 @@ import java.io.IOException;
 import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Path;
 
+/**
+ * Main class to initialise and run the chatbot.
+ */
 public class Duke {
 
     static final String FILE_NAME = "duke_data.txt";
@@ -14,6 +17,9 @@ public class Duke {
     private Parser parser;
     private TaskList taskList;
 
+    /**
+     * Creates a Duke. Loads existing task data, or creates a file if it doesn't exist.
+     */
     public Duke() {
         ui = new UI();
 
@@ -43,6 +49,14 @@ public class Duke {
         parser = new Parser(taskList, storage, ui);
     }
 
+    public static void main(String[] args) {
+        Duke duke = new Duke();
+        duke.run();
+    }
+
+    /**
+     * Main running loop
+     */
     public void run() {
         boolean keepGoing = true;
         String input;
@@ -54,10 +68,5 @@ public class Duke {
                 ui.writeOutput(de.getMessage());
             }
         }
-    }
-
-    public static void main(String[] args) {
-        Duke duke = new Duke();
-        duke.run();
     }
 }

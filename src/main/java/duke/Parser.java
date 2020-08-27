@@ -2,18 +2,33 @@ package duke;
 
 import duke.commands.Commands;
 
+/**
+ * Class to parse user input and process it.
+ */
 public class Parser {
 
     TaskList taskList;
     Storage storage;
     UI ui;
 
+    /**
+     * Creates a Parser with the given classes.
+     * @param taskList Class to store and manage tasks
+     * @param storage Class to write task data to disk
+     * @param ui Class to define interface with user
+     */
     public Parser(TaskList taskList, Storage storage, UI ui) {
         this.taskList = taskList;
         this.storage = storage;
         this.ui = ui;
     }
 
+    /**
+     * Parses and processes the input string.
+     * @param input String input from the user
+     * @return false if the user exits
+     * @throws DukeException Duke-related exception due to erroneous inputs
+     */
     public boolean processInput(String input) throws DukeException {
         if (Commands.BYE.check(input)) {
             exit();
