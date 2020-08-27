@@ -17,10 +17,10 @@ public class DeleteCommand extends Command{
     @Override
     public void execute(TaskList list, Storage storage, Ui ui) throws DukeCommandException, DukeStorageException {
         Pattern pattern = Pattern.compile("delete [1-9][0-9]{0,}");
-        if(!pattern.matcher(inputCommand).matches()) {
+        if(!pattern.matcher(getInputCommand()).matches()) {
             throw new DukeCommandException("\u2639 OOPS!!! Wrong 'delete' command format!");
         } else {
-            int index = Integer.parseInt(""+inputCommand.charAt(7)) - 1;
+            int index = Integer.parseInt(""+getInputCommand().charAt(7)) - 1;
             if(list.getList().size() > index && index >= 0) {
                 Task tas = list.getList().get(index);
                 list.getList().remove(index);
