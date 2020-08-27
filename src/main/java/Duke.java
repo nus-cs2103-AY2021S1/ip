@@ -169,8 +169,8 @@ public class Duke {
         }
 
         for (int i = 0; i < end; i++) {
-                int num = i + 1;
-                numberedList += "\n" + num + ". " + list.get(i);
+            int num = i + 1;
+            numberedList += "\n" + num + ". " + list.get(i);
         }
 
         printReply(numberedList);

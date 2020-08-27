@@ -15,6 +15,8 @@ public class TaskData {
             tasks = retrieveTasks();
         } catch (FileNotFoundException e) {
             System.out.println("File could not be found");
+        } catch (DukeException ex) {
+            System.out.println(ex);
         }
 
     }
@@ -37,7 +39,7 @@ public class TaskData {
         }
     }
 
-    public static ArrayList<Task> retrieveTasks() throws FileNotFoundException {
+    public static ArrayList<Task> retrieveTasks() throws FileNotFoundException, DukeException {
         ArrayList<Task> tasks = new ArrayList<>();
         File f = new File(filePath);
         Scanner s = new Scanner(f);

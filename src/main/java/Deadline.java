@@ -4,6 +4,7 @@ import java.time.format.DateTimeParseException;
 
 public class Deadline extends Task {
     protected LocalDateTime by;
+    private String originalFormat;
     private String printedFormat;
 
     public Deadline(String taskName, String date) throws DukeException {
@@ -11,6 +12,8 @@ public class Deadline extends Task {
         try {
             this.by = LocalDateTime.parse(
                     date, DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
+            this.originalFormat = this.by.format(
+                    DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
             this.printedFormat = this.by.format(
                     DateTimeFormatter.ofPattern("EEE, d MMM yyyy, HH:mm"));
         } catch (DateTimeParseException e) {
@@ -22,7 +25,7 @@ public class Deadline extends Task {
 
     @Override
     public String toTaskData() {
-        return "D" + " ; " + super.toTaskData() + " ; " + this.by;
+        return "D" + " ; " + super.toTaskData() + " ; " + originalFormat;
     }
 
     @Override
