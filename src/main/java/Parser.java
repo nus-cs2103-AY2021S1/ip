@@ -1,5 +1,5 @@
 public class Parser {
-    protected Instruction load(String input) {
+    public Instruction load(String input) {
         if (input.equals("list")) {
             return Instruction.LIST;
         } else if (input.startsWith("done")) {

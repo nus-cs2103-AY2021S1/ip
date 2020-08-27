@@ -1,5 +1,7 @@
+import java.util.ArrayList;
+
 public class Ui {
-    protected void greet() {
+    public void greet() {
         String logo = "     ____        _        \n"
                 + "    |  _ \\ _   _| | _____ \n"
                 + "    | | | | | | | |/ / _ \\\n"
@@ -13,7 +15,44 @@ public class Ui {
         System.out.println("    -x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-");
     }
     
-    protected void bye() {
+    public void noProblem() {
+        System.out.println("     No problem! I've added this task to the list:");
+    }
+    
+    public void markAsDone(Task thisTask) {
+        System.out.println("     Nice! I've marked this task as done:");
+        System.out.println("       " + thisTask.toString());
+    }
+    
+    public void deletedTask(Task thisTask, ArrayList<Task> list) {
+        System.out.println("     Sure! I've removed this task for you:");
+        System.out.println("       " + thisTask.toString());
+        System.out.println("     Now you have " + list.size() + " tasks in the list.");
+    }
+    
+    public void updatedTask(ArrayList<Task> list) {
+        System.out.println("       " + list.get(list.size() - 1));
+        System.out.println("     Now you have " + list.size() + " tasks in the list.");
+    }
+    
+    public void printList(ArrayList<Task> list) {
+        Task thisTask;
+        System.out.println("     Here are the tasks in your list:");
+        for (int i = 1; i <= list.size(); i++) {
+            thisTask = list.get(i - 1);
+            System.out.println("     " + i + "." + thisTask.toString());
+        }
+    }
+    
+    public void printLine() {
+        System.out.println("    -x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-");
+    }
+    
+    public void printError(DukeException ex) {
+        System.out.println(ex.getMessage());
+    }
+    
+    public void bye() {
         System.out.println("    -x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-");
         System.out.println("    Bye bye~ See ya!");
         System.out.println("    -x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-");
