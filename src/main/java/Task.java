@@ -1,45 +1,10 @@
-import java.util.ArrayList;
-
 public class Task {
-    ArrayList<TaskDetail> thingsToDo;
+    boolean done;
+    String description;
 
-    public Task() {
-        this.thingsToDo = new ArrayList<>();
-    }
-
-    // TODO: 17/8/20 print type, done
-    public Pair<String, Integer> add(TaskDetail detail) {
-        this.thingsToDo.add(detail);
-        return new Pair<>(detail.toString() + "\n", thingsToDo.size());
-    }
-
-    public String printTodoList() {
-        String message = "";
-        for (int i = 0; i < thingsToDo.size(); i++) {
-            String sign = thingsToDo.get(i).done ? "✓" : "✗";
-            message = message
-                    + "     "
-                    + (i + 1)
-                    + "."
-                    + thingsToDo.get(i).toString()
-                    + "\n";
-        }
-        return message;
-    }
-
-    public String markAsDone(int i) {
-        this.thingsToDo.get(i - 1).done = true;
-        String message = "       " + this.thingsToDo.get(i - 1).toString() + "\n";
-        return message;
-    }
-
-    public int length() {
-        return thingsToDo.size();
-    }
-
-    public Pair<String, Integer> delete(int i) {
-        String desc = this.thingsToDo.get(i - 1).toString();
-        this.thingsToDo.remove(i - 1);
-        return new Pair<>(desc + "\n", thingsToDo.size());
+    // TODO: 17/8/20 make a toString 
+    public Task(String description) {
+        this.done = false;
+        this.description = description;
     }
 }

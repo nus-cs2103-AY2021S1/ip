@@ -1,5 +1,5 @@
-public class Printer {
-    public Printer() { }
+public class Ui {
+    public Ui() { }
 
     public static void printMessage(String msg) {
         System.out.println("    ____________________________________________________________");

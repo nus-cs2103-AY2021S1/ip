@@ -5,57 +5,43 @@ public class Duke {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        Task tasks = new Task();
+        TaskList tasks = new TaskList();
         Parser parser = new Parser();
 
         // TODO: 20/8/20 Improve runtime: keep an internal counter of task (for done.*)
-        Printer.initialMessage();
-        while(true) {
+        Ui.initialMessage();
+        while (true) {
             try {
                 String echo = sc.nextLine();
 
                 // Command Handling
                 // Exit
                 if (echo.equals("bye")) {
-                    Printer.exitMessage();
+                    Ui.exitMessage();
                     break;
                 }
 
                 // Querying items
                 else if (echo.matches("(?i)list\\s*")) {
-                    Printer.printList(tasks.printTodoList());
+                    Ui.printList(tasks.printTodoList());
                 }
 
                 // Checks if it matches done and an integer
                 else if (echo.matches("(?i)done.*")) {
                     int index = parser.parseDone(echo, tasks.length());
-                    Printer.printDone(tasks.markAsDone(index));
+                    Ui.printDone(tasks.markAsDone(index));
                 }
 
                 // Checks if it matches done and an integer
                 else if (echo.matches("(?i)delete.*")) {
                     int index = parser.parseDelete(echo, tasks.length());
-                    Printer.printDelete(tasks.delete(index));
+                    Ui.printDelete(tasks.delete(index));
                 }
 
                 // Add items
                 else {
-                    Pair<TaskType, ArrayList<String>> res = parser.parseAdd(echo);
-                    ArrayList<String> description = res.getU();
-                    TaskType type = res.getT();
-                    switch (type) {
-                        case TODO:
-                            Printer.printAdd(tasks.add(new ToDo(description.get(0))));
-                            break;
-                        case DEADLINE:
-                            Printer.printAdd(tasks.add(new Deadline(description.get(0), description.get(1))));
-                            break;
-                        case EVENT:
-                            Printer.printAdd(tasks.add(new Event(description.get(0), description.get(1))));
-                            break;
-                        case NONE:
-                            break;
-                    }
+                    Task task = parser.parseAdd(echo);
+                    Ui.printAdd(tasks.add(task));
                 }
             } catch (DukeException e) {
                 System.out.println(e.getMessage());

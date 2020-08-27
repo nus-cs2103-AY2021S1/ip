@@ -1,4 +1,4 @@
-public class Event extends TaskDetail {
+public class Event extends Task {
     String timeAt;
 
     // TODO: 17/8/20 make a toString 

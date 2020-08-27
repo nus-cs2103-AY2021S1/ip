@@ -1,4 +1,4 @@
-public class Deadline extends TaskDetail {
+public class Deadline extends Task {
     String timeBy;
 
     public Deadline(String desc, String timeBy) {
