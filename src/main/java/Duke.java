@@ -30,9 +30,7 @@ public class Duke {
                 } else if (echo.matches("(?i)find\\s+\\S+")) {
                     TaskList res = new TaskList();
                     String toSearch = echo.replaceFirst("find\\s+", "");
-//                    System.out.println(toSearch);
                     for (Task task : tasks.thingsToDo) {
-//                        System.out.println(task.description);
                         if (task.description.matches(".*?" + toSearch + ".*")) {
                             res.add(task);
                         }
