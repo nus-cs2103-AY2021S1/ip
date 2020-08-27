@@ -28,6 +28,8 @@ public class Parser {
             return  new DeadlineCommand();
         } else if (command.equals("event")) {
             return new EventCommand();
+        } else if (command.equals("find")) {
+            return new FindCommand();
         } else {
             throw new InvalidCommandException();
         }
@@ -41,8 +43,8 @@ public class Parser {
 
     public static String parseTodo(String input) throws EmptyDescriptionException {
         String[] splitted = input.split("\\s+");
+        if (splitted.length == 1) throw new EmptyDescriptionException("ToDo");
         String[] title = Arrays.copyOfRange(splitted, 1, splitted.length);
-        if (title.length == 0) throw new EmptyDescriptionException("ToDo");
         return String.join(" ", title);
     }
 
@@ -91,5 +93,12 @@ public class Parser {
         String[] pair = {title, deadline};
 
         return pair;
+    }
+
+    public static String parseFind(String input) throws EmptyDescriptionException {
+        String[] splitted = input.split("\\s+");
+        if (splitted.length == 1) throw new EmptyDescriptionException("Find");
+        String[] find = Arrays.copyOfRange(splitted, 1, splitted.length);
+        return String.join(" ", find);
     }
 }
