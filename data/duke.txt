@@ -1,1 +1,3 @@
-D | false | work  | 2012-12-31
+D | true | work  | 2012-12-31
+T | false | work 
+T | false | more work 
