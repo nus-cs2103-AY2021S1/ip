@@ -14,6 +14,6 @@ public class Event extends TaskDDL {
 
     @Override
     public String fileString() {
-        return String.format("E|%s|%s", super.fileString(), ddl);
+        return String.format("E|%s|%s", super.fileString(), ddl.toString());
     }
 }

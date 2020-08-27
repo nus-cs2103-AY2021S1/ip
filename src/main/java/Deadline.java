@@ -14,6 +14,6 @@ public class Deadline extends TaskDDL {
 
     @Override
     public String fileString() {
-        return String.format("D|%s|%s", super.fileString(), ddl);
+        return String.format("D|%s|%s", super.fileString(), ddl.toString());
     }
 }
