@@ -3,15 +3,29 @@ package duke;
 import java.util.ArrayList;
 
 public class TaskList {
-    protected ArrayList<Task> list;
+    private ArrayList<Task> list;
+
+    /**
+     * TaskList constructor
+     */
     public TaskList() {
         this.list = new ArrayList<>();
     }
 
+    /**
+     * TaskList constructor
+     *
+     * @param list contents of the TaskList
+     */
     public TaskList(ArrayList<Task> list) {
         this.list = list;
     }
 
+    /**
+     * Returns TaskList's size.
+     *
+     * @return this TaskList's size.
+     */
     public int size() {
         return list.size();
     }
