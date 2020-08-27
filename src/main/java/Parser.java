@@ -21,6 +21,16 @@ public class Parser {
             return new ListCommand();
         }
 
+        if (command.equals("find")) {
+            if (spaceParse.length == 1) {
+                throw new DukeException("You need to specify what keyword to search! \n" +
+                        "eg find book");
+            }
+
+            String keyword = input.substring(4);
+            return new FindCommand(keyword);
+        }
+
         if (command.equals("done")) {
             if (spaceParse.length != 2) {
                 throw new DukeException("You need to specify which task to mark done! \n" +
