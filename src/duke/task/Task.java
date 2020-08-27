@@ -28,6 +28,10 @@ public class Task {
         return isDone;
     }
 
+    public boolean containKeyWord(String keyWord) {
+        return description.contains(keyWord);
+    }
+
     @Override
     public String toString() {
         String statusIcon = isDone ? UIPrint.tick : UIPrint.cross;
