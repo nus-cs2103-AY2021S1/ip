@@ -1,50 +1,48 @@
 package duke;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import java.time.LocalDateTime;
+import java.util.Arrays;
+import java.util.List;
+
+import org.junit.jupiter.api.Test;
+
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.TaskType;
 import duke.task.Todo;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.Arrays;
-import java.util.List;
-
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-
 public class TaskListTest {
+    private static final String DESCRIPTION = "description";
+    private static final LocalDateTime DATE_TIME = LocalDateTime.now();
+
     @Test
     public void addTodo_validTodo_todoReturned() throws DukeException {
-        String DESCRIPTION = "todo";
-        Task expectedTask = new Todo(DESCRIPTION);
+        Task expectedTask = new Todo(TaskListTest.DESCRIPTION);
         TaskList taskList = new TaskList();
 
-        taskList.addTask(TaskType.TODO, DESCRIPTION, null);
+        taskList.addTask(TaskType.TODO, TaskListTest.DESCRIPTION, null);
         assertEquals(expectedTask, taskList.getTask(1));
     }
 
     @Test
     public void addDeadline_validDeadline_deadlineReturned() throws DukeException {
-        String DESCRIPTION = "deadline";
-        LocalDateTime DATE_TIME = LocalDateTime.now();
-        Task expectedTask = new Deadline(DESCRIPTION, DATE_TIME);
+        Task expectedTask = new Deadline(TaskListTest.DESCRIPTION, TaskListTest.DATE_TIME);
         TaskList taskList = new TaskList();
 
-        taskList.addTask(TaskType.DEADLINE, DESCRIPTION, DATE_TIME);
+        taskList.addTask(TaskType.DEADLINE, TaskListTest.DESCRIPTION, TaskListTest.DATE_TIME);
         assertEquals(expectedTask, taskList.getTask(1));
     }
 
     @Test
     public void addEvent_validEvent_eventReturned() throws DukeException {
-        String DESCRIPTION = "event";
-        LocalDateTime DATE_TIME = LocalDateTime.now();
-        Task expectedTask = new Event(DESCRIPTION, DATE_TIME);
+        Task expectedTask = new Event(TaskListTest.DESCRIPTION, TaskListTest.DATE_TIME);
         TaskList taskList = new TaskList();
 
-        taskList.addTask(TaskType.EVENT, DESCRIPTION, DATE_TIME);
+        taskList.addTask(TaskType.EVENT, TaskListTest.DESCRIPTION, TaskListTest.DATE_TIME);
         assertEquals(expectedTask, taskList.getTask(1));
     }
 
@@ -53,8 +51,8 @@ public class TaskListTest {
         TaskList taskList = new TaskList();
 
         assertThrows(DukeException.class, () -> taskList.addTask(TaskType.TODO, "", null));
-        assertThrows(DukeException.class, () -> taskList.addTask(TaskType.DEADLINE, "", LocalDateTime.now()));
-        assertThrows(DukeException.class, () -> taskList.addTask(TaskType.EVENT, "", LocalDateTime.now()));
+        assertThrows(DukeException.class, () -> taskList.addTask(TaskType.DEADLINE, "", TaskListTest.DATE_TIME));
+        assertThrows(DukeException.class, () -> taskList.addTask(TaskType.EVENT, "", TaskListTest.DATE_TIME));
     }
 
     @Test
@@ -68,9 +66,9 @@ public class TaskListTest {
     @Test
     public void deleteTask_validTaskNo_taskDeleted() throws DukeException {
         List<Task> tasks = Arrays.asList(
-                new Todo("todo"),
-                new Deadline("deadline", LocalDateTime.now()),
-                new Event("event", LocalDateTime.now()));
+                new Todo(TaskListTest.DESCRIPTION),
+                new Deadline(TaskListTest.DESCRIPTION, TaskListTest.DATE_TIME),
+                new Event(TaskListTest.DESCRIPTION, TaskListTest.DATE_TIME));
         TaskList taskList = new TaskList(tasks);
         int initialSize = taskList.getTasks().size();
 

@@ -9,6 +9,12 @@ public abstract class Task {
     private final String description;
     private boolean isDone;
 
+    /**
+     * The task constructor.
+     *
+     * @param description The description of the task.
+     * @param isDone The boolean keeping track of whether the task is done.
+     */
     public Task(String description, boolean isDone) {
         this.description = description;
         this.isDone = isDone;
@@ -25,7 +31,7 @@ public abstract class Task {
     public boolean hasKeyword(String keyword) {
         return this.description.contains(keyword);
     }
-    
+
     /**
      * Returns a status icon corresponding to whether the task is done.
      *

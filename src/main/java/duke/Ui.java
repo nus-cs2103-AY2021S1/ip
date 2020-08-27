@@ -6,17 +6,21 @@ import java.util.Scanner;
  * The UI helper class.
  */
 public class Ui {
+    private static final String COLOR_START = "\033[0;31m";
+    private static final String COLOR_END = "\033[0m";
+    private static final String HORIZONTAL_LINE = "____________________________________________________________";
+    private static final String INDENTATION = "    ";
+    private static final String LOGO = " ____        _        \n"
+            + "|  _ \\ _   _| | _____ \n"
+            + "| | | | | | | |/ / _ \\\n"
+            + "| |_| | |_| |   <  __/\n"
+            + "|____/ \\__,_|_|\\_\\___|\n";
+
     /**
      * Shows the welcome message.
      */
     public void showWelcome() {
-        String LOGO = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-
-        this.showPrompt(LOGO
+        this.showPrompt(Ui.LOGO
                 + "Hello! I'm Duke\n"
                 + "What can I do for you?\n"
         );
@@ -29,18 +33,15 @@ public class Ui {
      * @param isError Boolean denoting if the prompt should be shown as an error.
      */
     public void showPrompt(String promptText, boolean isError) {
-        String COLOR_START = isError ? "\033[0;31m" : "";
-        String COLOR_END = isError ? "\033[0m" : "";
-        String HORIZONTAL_LINE = "____________________________________________________________";
-        String INDENTATION = "    ";
         String[] lines = promptText.split("[\\r\\n]+");
-        StringBuilder output = new StringBuilder(COLOR_START + INDENTATION + HORIZONTAL_LINE + '\n');
+        StringBuilder output = new StringBuilder(isError ? Ui.COLOR_START : "");
+        output.append(Ui.INDENTATION).append(Ui.HORIZONTAL_LINE).append('\n');
 
         for (String line : lines) {
-            output.append(INDENTATION).append(line).append('\n');
+            output.append(Ui.INDENTATION).append(line).append('\n');
         }
 
-        output.append(INDENTATION).append(HORIZONTAL_LINE).append(COLOR_END).append('\n');
+        output.append(Ui.INDENTATION).append(Ui.HORIZONTAL_LINE).append(isError ? Ui.COLOR_END : "").append('\n');
 
         System.out.println(output.toString());
     }

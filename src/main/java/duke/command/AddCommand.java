@@ -1,13 +1,13 @@
 package duke.command;
 
+import java.time.LocalDateTime;
+
 import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 import duke.task.Task;
 import duke.task.TaskType;
-
-import java.time.LocalDateTime;
 
 /**
  * Represents an add command.
@@ -21,6 +21,13 @@ public class AddCommand extends Command {
         this(type, description, null);
     }
 
+    /**
+     * The add command constructor.
+     *
+     * @param type The command type.
+     * @param description The description.
+     * @param dateTime The date/time if applicable.
+     */
     public AddCommand(TaskType type, String description, LocalDateTime dateTime) {
         this.type = type;
         this.description = description;

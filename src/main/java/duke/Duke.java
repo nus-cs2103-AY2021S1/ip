@@ -10,6 +10,11 @@ public class Duke {
     private final TaskList taskList;
     private final Ui ui;
 
+    /**
+     * The main program's constructor.
+     *
+     * @param filePath The path to the data file.
+     */
     public Duke(String filePath) {
         this.ui = new Ui();
         this.storage = new Storage(filePath);

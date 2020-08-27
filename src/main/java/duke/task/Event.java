@@ -14,6 +14,13 @@ public class Event extends Task {
         this(description, at, false);
     }
 
+    /**
+     * The event constructor.
+     *
+     * @param description The description of the event.
+     * @param at The date/time the event is due by.
+     * @param isDone The boolean keeping track of whether the event is done.
+     */
     public Event(String description, LocalDateTime at, boolean isDone) {
         super(description, isDone);
         this.at = at;

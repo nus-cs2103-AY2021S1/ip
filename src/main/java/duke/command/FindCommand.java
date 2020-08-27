@@ -1,12 +1,12 @@
 package duke.command;
 
+import java.util.List;
+
 import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 import duke.task.Task;
-
-import java.util.List;
 
 /**
  * Represents a find command.

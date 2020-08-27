@@ -1,15 +1,5 @@
 package duke;
 
-import duke.command.AddCommand;
-import duke.command.Command;
-import duke.command.DeleteCommand;
-import duke.command.DoneCommand;
-import duke.command.DueCommand;
-import duke.command.ExitCommand;
-import duke.command.FindCommand;
-import duke.command.ListCommand;
-import duke.task.TaskType;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -19,6 +9,16 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.temporal.TemporalAccessor;
 import java.util.Arrays;
+
+import duke.command.AddCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.DueCommand;
+import duke.command.ExitCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
+import duke.task.TaskType;
 
 /**
  * The command line parser.
