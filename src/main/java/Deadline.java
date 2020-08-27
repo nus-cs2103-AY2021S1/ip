@@ -37,12 +37,14 @@ class Deadline extends Task {
     @Override
     public String getFileString() {
         String status = this.isDone() ? "T" : "F";
-        return String.format("%s~deadline %s /by %s\n", status, name, deadline);
+        return String.format("%s~deadline %s /by %s %s\n", status, name, 
+                deadlineDay.toString(), deadlineTime.toString());
     }
 
     @Override
     public String toString() {
         String tick = this.isDone() ? "[✓]" : "[✗]";
-        return String.format("%s%s %s (by: %s %s)", SYMBOL, tick, name, deadlineDay.toString(), deadlineTime.toString());
+        return String.format("%s%s %s (by: %s %s)", SYMBOL, tick, name, 
+                deadlineDay.toString(), deadlineTime.toString());
     }
 }
