@@ -7,7 +7,7 @@ public class UI {
     /**
      * Divider.
      */
-    private static final String divider =
+    private final String divider =
             "\t------------------------------------------------------------------\n";
 
     /**
