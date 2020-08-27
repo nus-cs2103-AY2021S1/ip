@@ -45,6 +45,7 @@ public class Command {
             deleteCommand(tasks, splitInput, ui, storage);
         } else if (keyWord.equals("todo") || keyWord.equals("deadline")
                 || keyWord.equals("event")) {
+            addTaskCommand(splitInput, keyWord, tasks, storage);
         } else if (keyWord.equals("find")) {
             findCommand(tasks, splitInput);
         }  else {
@@ -275,6 +276,13 @@ public class Command {
         return new String[]{};
     }
 
+    /**
+     * Calls for the required methods to find a task.
+     *
+     * @param tasks The current list of tasks.
+     * @param splitInput A valid string array is of length 2, index 1 being the description
+     *     to find.
+     */
     public void findCommand(TaskList tasks, String[] splitInput) {
         String desToFind = "";
         for (int i = 1; i < splitInput.length; i++) {

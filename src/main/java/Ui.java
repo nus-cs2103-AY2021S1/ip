@@ -11,7 +11,9 @@ public class Ui {
     final String LINE_BREAK = "==========================================================" +
             "===============";
 
-    /** Prints the welcome logo and how to start. */
+    /**
+     * Prints the welcome logo and how to start.
+     */
     public void showWelcome() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -32,7 +34,9 @@ public class Ui {
         System.out.println("Duke says: Goodbye and have a nice day! :D");
     }
 
-    /** Prints the available input commands and their respective formatting requirements. */
+    /**
+     * Prints the available input commands and their respective formatting requirements.
+     */
     public void showHelp() {
         System.out.println("list: displays a sequential view of past inputs\n" +
                 "find <task description>: finds all the tasks matched\n" +
@@ -104,7 +108,8 @@ public class Ui {
             }
         }
         if (hasResults) {
-            System.out.println("If you wish to mark a task as completed, input: done <task number>");
+            System.out.println("If you wish to mark a task as completed, " +
+                    "input: done <task number>");
         } else {
             System.out.println("Sorry there are no matching results :(");
         }
