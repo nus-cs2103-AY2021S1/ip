@@ -19,5 +19,6 @@ public class ShowFunctionCommand extends Command {
                         "add a event task with the specific period.");
         System.out.println("done [task index]: to mark the specific task as completed.");
         System.out.println("filter [d-MM-uuuu]: to show all the tasks with this date.");
+        System.out.println("find [keyword]: to find all tasks with that has the keywords in its name.");
     }
 }
