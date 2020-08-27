@@ -7,7 +7,7 @@ public class Ui {
 
     protected TaskList tasks;
 
-    public Ui(TaskList tasks){
+    public Ui(TaskList tasks) {
         this.tasks = tasks;
     }
 
@@ -69,7 +69,7 @@ public class Ui {
     /**
      * Returns a string that inform the user about the newly deleted task depends on the type of task input
      *
-     * @param  index The position of the task which is going to be deleted in the TaskList
+     * @param index The position of the task which is going to be deleted in the TaskList
      * @return String of information about the deleted task
      */
     public String showDelete(int index) {
@@ -78,7 +78,7 @@ public class Ui {
         String DukeOutput = "____________________________________________________________\n" +
                 "     Noted. I've removed this task:\n" +
                 "       " + removed.toString() + "\n" +
-                "     Now you have "+ this.tasks.size() + " tasks in the list.\n" +
+                "     Now you have " + this.tasks.size() + " tasks in the list.\n" +
                 "____________________________________________________________";
         System.out.println(DukeOutput);
         return DukeOutput;
@@ -98,6 +98,22 @@ public class Ui {
             DukeOutput = DukeOutput + label + ". " + this.tasks.get(i).toString() + "\n";
         }
 
+        DukeOutput = DukeOutput + "____________________________________________________________";
+        System.out.println(DukeOutput);
+        return DukeOutput;
+    }
+
+    public String showFind(TaskList matchedTasks) {
+        String DukeOutput = "____________________________________________________________\n";
+        if (matchedTasks.size() == 0) {
+            DukeOutput = DukeOutput + "Sorry, Duke can not find a matching task.\n";
+        } else {
+            DukeOutput = DukeOutput + "Here are the matching tasks in your list:\n";
+            for (int i = 0; i < matchedTasks.size(); i++) {
+                int index = i + 1;
+                DukeOutput = DukeOutput + index + "." + matchedTasks.get(i).toString() + "\n";
+            }
+        }
         DukeOutput = DukeOutput + "____________________________________________________________";
         System.out.println(DukeOutput);
         return DukeOutput;

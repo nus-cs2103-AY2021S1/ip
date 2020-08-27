@@ -1,5 +1,8 @@
 package duke;
 
+import javax.management.Descriptor;
+import java.util.ArrayList;
+
 public class Parser {
     private User_Input currentType = null;
     private Ui userInteract;
@@ -21,6 +24,7 @@ public class Parser {
         DELETE,
         BYE,
         LIST,
+        FIND
     }
 
     /**
@@ -47,6 +51,8 @@ public class Parser {
             this.currentType = User_Input.BYE;
         } else if (words[0].equals("list")) {
             this.currentType = User_Input.LIST;
+        } else if (words[0].equals("find")) {
+            this.currentType = User_Input.FIND;
         }
         return words;
     }
@@ -139,6 +145,22 @@ public class Parser {
                 this.tasks.add(newEvent);
                 DukeOutput = this.userInteract.showAdd(newEvent);
             }
+            break;
+
+        case FIND:
+            String keyWord = words[1];
+            TaskList matchedTasks =  new TaskList(new ArrayList<Task>());
+            for (int k = 0; k < tasks.size(); k++) {
+                Task currentTask = tasks.get(k);
+                String description = currentTask.description;
+                String[] descriptionArr = description.split(" ");
+                for (int i = 0; i < descriptionArr.length; i++) {
+                    if (descriptionArr[i].equals(keyWord)) {
+                        matchedTasks.add(currentTask);
+                    }
+                }
+            }
+            DukeOutput =  this.userInteract.showFind(matchedTasks);
             break;
 
         case DONE:
