@@ -18,10 +18,6 @@ public class Duke {
         this.ui = new Ui();
     }
 
-    public void run() {
-        ui.welcomeMessage();
-    }
-
     // Loop through every task and transform it into a string
     public static String listToString(ArrayList<Task> taskList) {
         String taskListStr = "";
@@ -168,10 +164,8 @@ public class Duke {
                 .split("-").length == 2;
     }
 
-    public static void main(String[] args) throws DukeException {
-
-        new Duke().run();
-
+    public void run() {
+        ui.welcomeMessage();
         // Initialise strings to separate messages from Duke
         // and commands from CLI
         String servantSpeak = "Duke:\n";
@@ -348,5 +342,9 @@ public class Duke {
             // Update Tasklist.txt after adding task
             saveToFile(listToString(userTasks));
         }
+    }
+
+    public static void main(String[] args) throws DukeException {
+        new Duke().run();
     }
 }
