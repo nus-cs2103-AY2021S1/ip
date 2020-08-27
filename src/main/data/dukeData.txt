@@ -5,4 +5,4 @@ D | 0 | iP | 2021-01-02
 T | 0 | eat dinner
 D | 0 | readings | 2020-08-27
 E | 0 | graded team meeting | 2020-08-28
-E | 0 | eat | 2202-12-12
+T | 0 | eat
