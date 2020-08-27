@@ -102,37 +102,50 @@ public class Duke {
 
         String line;
         while ((line = reader.readLine()) != null) {
-                String[] taskInfo = line.split(" \\| ");
-                if (taskInfo.length < 3) {
-                    throw new DukeException("Corrupted file: missing field.");
-                } else if (!(taskInfo[1].equals("0") || taskInfo[1].equals("1"))) {
-                    throw new DukeException("Corrupted file: invalid done field.");
-                } else {
-                    String type = taskInfo[0];
-                    boolean isDone = taskInfo[1].equals("1");
-                    String desc = taskInfo[2];
+            String[] taskInfo = line.split(" \\| ");
+            if (taskInfo.length < 3) {
+                throw new DukeException("Corrupted file: missing field.");
+            } else if (!(taskInfo[1].equals("0") || taskInfo[1].equals("1"))) {
+                throw new DukeException("Corrupted file: invalid done field.");
+            } else {
+                String type = taskInfo[0];
+                boolean isDone = taskInfo[1].equals("1");
+                String desc = taskInfo[2];
 
-                    Task task;
-                    switch (type) {
-                        case ("T"):
-                            task = new ToDo(desc);
-                            break;
-                        case ("D"):
-                            String by = taskInfo[3];
-                            task = new Deadline(desc, by);
-                            break;
-                        case ("E"):
-                            String at = taskInfo[3];
-                            task = new Event(desc, at);
-                            break;
-                        default:
-                            throw new DukeException("Corrupted file: invalid task type.");
-                    }
-                    if (isDone) {
-                        task.makeDone();
-                    }
-                    taskList.add(task);
+                Task task;
+                switch (type) {
+                    case ("T"):
+                        task = new ToDo(desc);
+                        break;
+                    case ("D"):
+                        String by = taskInfo[3];
+                        task = new Deadline(desc, by);
+                        break;
+                    case ("E"):
+                        String at = taskInfo[3];
+                        task = new Event(desc, at);
+                        break;
+                    default:
+                        throw new DukeException("Corrupted file: invalid task type.");
                 }
+                if (isDone) {
+                    task.makeDone();
+                }
+                taskList.add(task);
+            }
+        }
+    }
+
+    public void updateHardDisk() {
+        try {
+            FileWriter writer = new FileWriter(DATA_FILE_PATH, false);
+            for (Task t : taskList) {
+                writer.write(t.toData() + "\n");
+            }
+            writer.close();
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
         }
     }
 
@@ -253,6 +266,7 @@ public class Duke {
                     } else {
                         String info = inputInfo[1];
                         handleDone(info);
+                        updateHardDisk();
                     }
                     break;
                 case ("delete"):
@@ -261,6 +275,7 @@ public class Duke {
                     } else {
                         String info = inputInfo[1];
                         handleDelete(info);
+                        updateHardDisk();
                     }
                     break;
                 case ("todo"):
@@ -269,6 +284,7 @@ public class Duke {
                     } else {
                         String info = inputInfo[1];
                         handleToDo(info);
+                        updateHardDisk();
                     }
                     break;
                 case ("deadline"):
@@ -277,6 +293,7 @@ public class Duke {
                     } else {
                         String info = inputInfo[1];
                         handleDeadline(info);
+                        updateHardDisk();
                     }
                     break;
                 case ("event"):
@@ -285,6 +302,7 @@ public class Duke {
                     } else {
                         String info = inputInfo[1];
                         handleEvent(info);
+                        updateHardDisk();
                     }
                     break;
                 default:

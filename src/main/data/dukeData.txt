@@ -1,4 +1,7 @@
 T | 1 | read book
-D | 0 | return book | June 6th
+D | 1 | return book | June 6th
 E | 0 | project meeting | Aug 6th 2-4pm
-T | 1 | join sports club
+D | 0 | iP | 2359
+T | 0 | eat dinner
+D | 0 | readings | 8am tmr
+E | 0 | graded team meeting | 8am tmr

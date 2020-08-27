@@ -4,6 +4,11 @@ public class ToDo extends Task {
     }
 
     @Override
+    public String toData() {
+        return "T | " + super.toData();
+    }
+
+    @Override
     public String toString() {
         return "[T]" + super.toString();
     }
