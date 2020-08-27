@@ -5,5 +5,6 @@ public enum DukeExceptionType {
     EMPTY_TIME,
     WRONG_TAG,
     TOO_FEW_ARGUMENTS,
-    WRONG_TIME
+    WRONG_TIME,
+    NO_MATCHING_TASKS
 }

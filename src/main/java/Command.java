@@ -1,5 +1,6 @@
 import java.io.IOException;
 import java.time.format.DateTimeParseException;
+import java.util.List;
 
 public class Command {
     private final String[] inputLine;
@@ -165,6 +166,18 @@ public class Command {
                     throw new DukeException("Please use dd-MM-yyyy HHmm format", DukeExceptionType.WRONG_TIME, Commands.EVENT);
                 }
                 break;
+            }
+            case "find" : {
+                if (inputLine.length < 2) {
+                    throw new DukeException("find needs keyword", DukeExceptionType.NO_DESCRIPTION, Commands.FIND);
+                } else {
+                    StringBuilder description = new StringBuilder();
+                    for (int i = 1; i < inputLine.length; i++) {
+                        description.append(inputLine[i]).append(" ");
+                    }
+                    List<Task> filteredList = tasks.search(description.toString());
+                    ui.uiForFind(new TaskList(filteredList));
+                }
             }
             default:
                 throw new DukeException("", DukeExceptionType.INVALID_TASK);

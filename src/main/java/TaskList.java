@@ -69,4 +69,16 @@ public class TaskList{
         return this.taskList.size();
     }
 
+    public List<Task> search(String keyword) throws DukeException {
+        List<Task> tasksWithKeyword = new ArrayList<>();
+        for(Task task: this.taskList){
+            if(task.getName().contains(keyword)){
+                tasksWithKeyword.add(task);
+            }
+        }
+        if(tasksWithKeyword.isEmpty()){
+            throw new DukeException("no such matching tasks", DukeExceptionType.NO_MATCHING_TASKS);
+        } else {return tasksWithKeyword;}
+    }
+
 }
