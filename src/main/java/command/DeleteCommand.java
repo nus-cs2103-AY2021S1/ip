@@ -17,7 +17,7 @@ public class DeleteCommand extends Command {
         try {
             int taskId = Integer.parseInt(taskIdString);
             if (taskId <= 0 || taskId > taskList.size()) {
-                System.out.println(ui.LINE + "Invalid input! That task does not exist! \n" + ui.LINE);
+                throw new DukeException(ui.LINE + "Invalid input! That task does not exist! \n" + ui.LINE);
             } else {
                 int new_size = taskList.size() - 1;
                 System.out.println(ui.LINE + "Noted! I've deleted this task: \n"
