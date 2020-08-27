@@ -44,6 +44,9 @@ public class Ui {
 
     /**
      * Prints the string representation of a task.
+     * 
+     * @param task Task to print
+     * @param taskNum Task number of task            
      */
     public void showTask(Task task, int taskNum) {
         System.out.println(taskNum + ". " + task);
@@ -51,6 +54,9 @@ public class Ui {
 
     /**
      * Prints the add task acknowledgement.
+     * 
+     * @param task Task to print
+     * @param taskNum Task number of task       
      */
     public void showAddTask(Task task, int taskNum) {
         System.out.println("The following task has been added: ");
@@ -60,6 +66,9 @@ public class Ui {
 
     /**
      * Prints the delete task acknowledgement.
+     *
+     * @param task Task to print
+     * @param taskNum Task number of task       
      */
     public void showDeleteTask(Task task, int taskNum) {
         System.out.println("The following task has been deleted: ");
@@ -69,11 +78,32 @@ public class Ui {
 
     /**
      * Prints the task mark as done acknowledgement.
+     *
+     * @param task Task to print
+     * @param taskNum Task number of task       
      */
     public void showDoneTask(Task task, int taskNum) {
         System.out.println("The following task has been marked as done: ");
         this.showTask(task, taskNum);
         this.showLine();
+    }
+
+    /**
+     * Prints the list command statement.
+     */
+    public void showListStatement() {
+        System.out.println("Here are your current tasks: ");
+    }
+
+    /**
+     * Prints the find command statement.
+     */
+    public void showFindStatement(boolean isEmpty) {
+        if (isEmpty) {
+            System.out.println("No tasks match your query, try searching for something else.");
+        } else {
+            System.out.println("Here are your search results: ");
+        }
     }
 
     /**
@@ -85,6 +115,8 @@ public class Ui {
 
     /**
      * Prints the error message.
+     * 
+     * @param err Error message.
      */
     public void showError(String err) {
         System.out.println(err);

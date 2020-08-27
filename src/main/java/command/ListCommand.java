@@ -16,6 +16,7 @@ public class ListCommand extends Command {
      * @param storage Storage allows execute to write and read files.    
      */
     public void execute(TaskList lst, Ui ui, Storage storage) {
+        ui.showListStatement();
         for (int i = 0; i < lst.size(); i++) {
             int num = i + 1;
             ui.showTask(lst.get(i), num);
