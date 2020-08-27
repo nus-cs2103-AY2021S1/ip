@@ -56,5 +56,24 @@ public class TaskList {
         this.savedStorage.saveIntoHarddisk();
     }
 
+    public void matchTasks(String toMatch) {
+        List<Task> matchingTasks = new ArrayList<>();
+        for (Task task: this.allItems) {
+            if (task.canMatch(toMatch)) {
+                matchingTasks.add(task);
+            }
+        }
 
+        String printMatchingTasks;
+        if (matchingTasks.size() == 0) {
+            printMatchingTasks = "There are no tasks that match " + toMatch + "\n" + Ui.LINE;
+        } else {
+            printMatchingTasks = "Matching tasks: \n";
+            for (Task task: matchingTasks) {
+                printMatchingTasks = printMatchingTasks.concat(task + "\n");
+            }
+            printMatchingTasks = printMatchingTasks + Ui.LINE;
+        }
+        System.out.println(printMatchingTasks);
+    }
 }
