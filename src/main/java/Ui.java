@@ -12,12 +12,10 @@
  */
 public class Ui {
 
-    public Ui() { }
-
     /**
      * Prints out a line to mark an individual message
      */
-    public void showLine() {
+    public static void showLine() {
         System.out.println("\n_________________________________________\n");
     }
 
@@ -25,7 +23,7 @@ public class Ui {
      * Prints out the Welcome Message when Duke is intialised
      * as an opening message
      */
-    public void welcomeMessage() {
+    public static void welcomeMessage() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -38,7 +36,7 @@ public class Ui {
     /**
      * Prints out the Goodbye Message when Duke is exited
      */
-    public void goodbyeMessage() {
+    public static void goodbyeMessage() {
         System.out.println("_________________________________________\n" + "Bye. Hope to see you again soon!" + "\n" + "_________________________________________");
     }
 
@@ -47,7 +45,7 @@ public class Ui {
      * by wrapping it in separating lines to format the message.
      * @param error The error message
      */
-    public void showError(String error) {
+    public static void showError(String error) {
         System.out.println("Sorry an unexpected error occured!! :( \n" +
                             "\n_________________________________________\n"
                             + error

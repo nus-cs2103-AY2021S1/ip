@@ -17,14 +17,12 @@ import java.util.ArrayList;
  */
 public class Duke {
 
-    private Ui ui;
     private Storage storage;
-    private ArrayList<Task> arrayLst;
+    private TaskList taskList;
     private Parser parser;
 
     public Duke(String filePath) {
-        this.ui = new Ui();
-        this.arrayLst = new ArrayList<>();
+        this.taskList = TaskList.createTaskList();
         this.storage = Storage.createDukeFile(filePath);
         this.parser = new Parser();
     }
@@ -37,25 +35,25 @@ public class Duke {
      * @author Lee Penn Han.
      */
     public void run() {
-        this.ui.welcomeMessage();
+        Ui.welcomeMessage();
         Scanner sc = new Scanner(System.in);
         while (sc.hasNext()) {
             String cmd = sc.nextLine().trim().toLowerCase();
             if (!cmd.equals("bye")) {
                 try {
-                    this.parser.process(cmd, this.arrayLst, this.storage);
+                    this.parser.process(cmd, this.taskList, this.storage);
                 } catch (DukeException e) {
-                    this.ui.showError(e.getMessage());
+                    Ui.showError(e.getMessage());
                 }
             } else {
-                this.ui.goodbyeMessage();
+                Ui.goodbyeMessage();
                 break;
             }
         }
         try {
             this.storage.saveToFile();
         } catch (IOException e) {
-            this.ui.showError(e.getMessage());
+            Ui.showError(e.getMessage());
         }
     }
 

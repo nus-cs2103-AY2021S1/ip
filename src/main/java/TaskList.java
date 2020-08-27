@@ -35,4 +35,8 @@ public class TaskList {
         return this.tasklist.get(index);
     }
 
+    public static TaskList createTaskList() {
+        return new TaskList();
+    }
+
 }
