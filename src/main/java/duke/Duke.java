@@ -1,6 +1,7 @@
 package duke;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -164,9 +165,13 @@ public class Duke {
             throw new InvalidDeadlineException("☹ Task deadline must be specified.");
         }
         String description = deadline[0].trim();
-        Deadline curr = new Deadline(description, false, LocalDate.parse(deadline[1].trim()));
-        list.add(curr);
-        this.describeTask(curr);
+        try {
+            Deadline curr = new Deadline(description, false, LocalDate.parse(deadline[1].trim()));
+            list.add(curr);
+            this.describeTask(curr);
+        } catch (DateTimeParseException e) {
+            System.out.println("Invalid Date format! Must be (yyyy-mm-dd).");
+        }
     }
 
     public void describeTask(Task curr) {
