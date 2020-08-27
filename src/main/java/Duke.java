@@ -107,7 +107,7 @@ public class Duke {
                             tasks.add(newTask);
                             listChangePrint(newTask, tasks, ListChange.ADD);
                         } catch (Exception e) {
-                            new DukeException("invalidDeadline");
+                            new DukeException("invalidDeadlineTask");
                         }
                         break;
                     case "event":
