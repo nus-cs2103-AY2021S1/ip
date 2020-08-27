@@ -1,15 +1,14 @@
 package duke;
 
+import duke.command.Command;
+import duke.command.InvalidCommandException;
+import duke.component.*;
+
 /**
  * Is the Main class of this program.
  * @author Li Jiayu
  * @version 0.1
  */
-
-import duke.command.Command;
-import duke.command.InvalidCommandException;
-import duke.component.*;
-
 public class Duke {
     private Storage storage;
     private TaskList list;
