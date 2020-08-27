@@ -22,16 +22,15 @@ public class DukeBot {
         TaskList ls = new TaskList(Storage.read());
         boolean hasBye = false;
         String input;
-        String[] splitList;
 
         UI.dukeInit();
         Scanner sc = new Scanner(System.in);
         input = sc.nextLine();
-        DukeParser parser = new DukeParser(ls);
+        DukeParser inputParser = new DukeParser(ls);
 
 
         while(!hasBye) {
-            Command command = parser.parse(input);
+            Command command = inputParser.parse(input);
             command.execute();
             hasBye = command.isDone();
             if(!hasBye){
