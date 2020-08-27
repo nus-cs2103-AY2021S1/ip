@@ -41,6 +41,14 @@ public class Ui {
                 + "    delete <task number> - Delete task from list\n");
     }
 
+    public void printTaskAddedMessage(String task, int size) {
+        System.out.println(SERVANT_SPEAK
+                + "    As you wish Sire. I have added the task:\n       "
+                + task + "\n"
+                + "    Now you have " + size
+                + " tasks in the list.\n");
+    }
+
     public void printError(DukeException ex) {
         System.out.println(ex);
     }

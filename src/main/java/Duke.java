@@ -168,6 +168,7 @@ public class Duke {
                 description = input.substring(4);
                 t = new ToDo(description);
                 userTasks.add(t);
+                ui.printTaskAddedMessage(t.toString(), userTasks.size());
                 break;
             case "deadline":
                 try {
@@ -179,6 +180,7 @@ public class Duke {
                     description = inputSplit[0].substring(8);
                     t = new Deadline(description, by);
                     userTasks.add(t);
+                    ui.printTaskAddedMessage(t.toString(), userTasks.size());
                     break;
                 } catch (DukeException ex) {
                     System.out.print(ui.getServantSpeak());
@@ -196,6 +198,7 @@ public class Duke {
                     description = inputSplit[0].substring(5);
                     t = new Event(description, at, timeRange);
                     userTasks.add(t);
+                    ui.printTaskAddedMessage(t.toString(), userTasks.size());
                     break;
                 } catch (DukeException ex) {
                     System.out.print(ui.getServantSpeak());
@@ -204,12 +207,12 @@ public class Duke {
                 }
             }
 
-            // Standard reply from Duke for adding a task
-            System.out.println(ui.getServantSpeak()
-                    + "    As you wish Sire. I have added the task:\n       "
-                    + userTasks.get(userTasks.size() - 1).toString() + "\n"
-                    + "    Now you have " + userTasks.size()
-                    + " tasks in the list.\n");
+//            // Standard reply from Duke for adding a task
+//            System.out.println(ui.getServantSpeak()
+//                    + "    As you wish Sire. I have added the task:\n       "
+//                    + userTasks.get(userTasks.size() - 1).toString() + "\n"
+//                    + "    Now you have " + userTasks.size()
+//                    + " tasks in the list.\n");
 
             // Update Tasklist.txt after adding task
             storage.saveToFile(userTasks);
