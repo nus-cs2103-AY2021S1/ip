@@ -78,6 +78,20 @@ public class UIManager {
     }
 
     /**
+     * Prints when FindCommand does not find Task
+     */
+    public void printFindCannotBeFound(String keyword) {
+        System.out.println("There are no tasks containing " + "\"" + keyword + "\"!");
+    }
+
+    /**
+     * Prints Tasks found by FindCommand
+     */
+    public void printFindFilteredList(String keyword, boolean isPlural) {
+        System.out.println((isPlural ? "Tasks" : "Task") + " with the keyword: " + "\"" + keyword + "\"");
+    }
+
+    /**
      * Prints a line separator.
      */
     public void printLine() {
@@ -100,12 +114,13 @@ public class UIManager {
     private enum InstructionGuide {
         // For formatting purposes, except for the last guide, the guides must end with a guideBreaker
         // It splits them into paragraphs
-        Level("* Level 8: Formatting Time", false),
+        Level("* Level 9: Finding Keywords", false),
 
         DeveloperUpdate("* DEVELOPER UPDATES:\n" +
                 "* I can now save data! Just terminate the program with \"bye\" " +
                 "and I'll save the data automatically!\n" +
-                "* Do take note of the DATE AND TIME notations when inserting DukeTasks!", false),
+                "* Do take note of the DATE AND TIME notations when inserting DukeTasks!\n" +
+                "* Want to find a specific task? I can do it too!", false),
 
         AvailableInstruction("AVAILABLE INSTRUCTIONS:\n" + // Available Instructions
                 " help - Display Available Instructions\n" +
@@ -115,6 +130,7 @@ public class UIManager {
                 "(Specify in numeric format!) Eg: \"done 3\"\n" +
                 " delete [Task Number] - Deletes the task number " +
                 "(Specify in numeric format!) Eg: \"delete 3\"\n" +
+                " find [keyword] - Finds related Tasks containing the keyword\n" +
                 "* SEE TASK INPUT INSTRUCTIONS FOR MORE ABOUT TASKS", false),
 
         TaskInputInstruction("TASK INPUT INSTRUCTIONS:\n" +
@@ -180,3 +196,4 @@ public class UIManager {
         }
     }
 }
+

@@ -30,6 +30,22 @@ public class InputValidator {
 
     /**
      * Validates the instruction <code>String Array</code> is of size 2
+     *
+     * @param instructionArray <code>String</code> containing length of user instruction.
+     * @param instrType        <code>String</code> containing type of instruction.
+     * @return boolean denoting the validation results
+     * @throws InvalidInstructionException If validation fails.
+     */
+    public static boolean validateSizeTwo(String[] instructionArray, String instrType)
+            throws InvalidInstructionException {
+        if (instructionArray.length == 2) {
+            return true;
+        } // if len != 2 or the input is not an integer
+        throw new InvalidInstructionException(instrType);
+    }
+
+    /**
+     * Validates the instruction <code>String Array</code> is of size 2
      * and the second <code>String</code> can be parsed into <code>Integer</code>.
      *
      * @param instructionArray <code>String</code> containing length of user instruction.
@@ -174,3 +190,4 @@ public class InputValidator {
         return true;
     }
 }
+

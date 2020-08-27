@@ -33,6 +33,7 @@ public class UserInputParser {
     private static final String AT_INDICATOR = "/at";
     private static final String UNKNOWN = "unknown";
     private static final String DELETE = "delete";
+    private static final String FIND = "find";
 
     /**
      * Parses the user instruction into a <code>Command</code>.
@@ -100,6 +101,11 @@ public class UserInputParser {
             if (InputValidator.validateDescriptionAndDateTime(instructionArray, EVENT, atIndex)
                     && (InputValidator.validateDateAndTime(instructionArray, EVENT, atIndex))) {
                 return new AddCommand(generateTaskWithDate(EVENT, instructionArray, AT_INDICATOR));
+            }
+            break;
+        case FIND:
+            if (InputValidator.validateSizeTwo(instructionArray, instructionTag)) {
+                return new FindCommand(instructionArray[1]);
             }
             break;
         }
@@ -187,3 +193,4 @@ public class UserInputParser {
         return -1;
     }
 }
+
