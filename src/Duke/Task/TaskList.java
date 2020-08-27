@@ -1,7 +1,4 @@
-package main.java.Task;
-
-import main.java.DukeException.DukeArrayException;
-import main.java.DukeException.DukeException;
+package Duke.Task;
 
 import java.util.ArrayList;
 

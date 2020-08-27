@@ -1,4 +1,4 @@
-package main.java.Task;
+package Duke.Task;
 
 public class toDo extends Task{
 

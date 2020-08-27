@@ -1,9 +1,9 @@
-package main.java;
+package Duke;
 
-import main.java.Commands.Command;
-import main.java.DukeException.DukeException;
-import main.java.Task.Task;
-import main.java.Task.TaskList;
+import Duke.Commands.Command;
+import Duke.DukeException.DukeException;
+import Duke.Task.Task;
+import Duke.Task.TaskList;
 
 import java.util.ArrayList;
 import java.io.IOException;

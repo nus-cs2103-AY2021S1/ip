@@ -1,7 +1,7 @@
-package main.java.Commands;
+package Duke.Commands;
 
-import main.java.Task.Task;
-import main.java.Task.TaskList;
+import Duke.Task.Task;
+import Duke.Task.TaskList;
 
 public class addCommand extends Command{
     Task task;

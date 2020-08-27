@@ -1,6 +1,4 @@
-package main.java.DukeException;
-
-import main.java.DukeException.DukeException;
+package Duke.DukeException;
 
 public class DukeArrayException extends DukeException {
     public DukeArrayException(){

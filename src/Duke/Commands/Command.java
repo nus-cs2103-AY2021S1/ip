@@ -1,7 +1,7 @@
-package main.java.Commands;
+package Duke.Commands;
 
 
-import main.java.Task.TaskList;
+import Duke.Task.TaskList;
 
 public class Command {
     public boolean isExit;

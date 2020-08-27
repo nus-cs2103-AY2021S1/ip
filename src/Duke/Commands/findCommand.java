@@ -1,6 +1,6 @@
-package main.java.Commands;
+package Duke.Commands;
 
-import main.java.Task.TaskList;
+import Duke.Task.TaskList;
 
 public class findCommand extends Command{
     String str;

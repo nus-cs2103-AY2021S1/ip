@@ -1,9 +1,9 @@
-package main.java;
+package Duke;
 
-import main.java.Commands.*;
-import main.java.DukeException.DukeArrayException;
-import main.java.DukeException.DukeException;
-import main.java.Task.*;
+import Duke.Commands.*;
+import Duke.DukeException.DukeArrayException;
+import Duke.DukeException.DukeException;
+import Duke.Task.*;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;

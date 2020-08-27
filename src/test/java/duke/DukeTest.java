@@ -1,9 +1,9 @@
 package duke;
 
-import main.java.Commands.Command;
-import main.java.Duke;
-import main.java.Parser;
-import main.java.Task.*;
+import Duke.Commands.Command;
+import Duke.Duke;
+import Duke.Parser;
+import Duke.Task.*;
 import org.junit.Test;
 
 import java.time.LocalDate;
