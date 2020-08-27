@@ -35,6 +35,9 @@ public class Parser {
             second = parts[1];
             index = Integer.parseInt(second);
             return new DeleteCommand(index);
+        case FIND:
+            second = parts[1];
+            return new FindCommand(second);
         case BYE:
             // Fallthrough
         default:

@@ -154,4 +154,16 @@ public class TaskList {
                 + task.toString() + "\n     Now you have " + len
                 + " tasks in the list.";
     }
+
+    public String findTasks(String search) {
+        StringBuilder output = new StringBuilder("     Here are the matching tasks in your list:\n");
+        int index = 1;
+        for (Task task : taskList) {
+            if (task.toString().contains(search)) {
+                output.append("     ").append(index).append(".").append(task.toString()).append("\n");
+                index++;
+            }
+        }
+        return output.toString();
+    }
 }
