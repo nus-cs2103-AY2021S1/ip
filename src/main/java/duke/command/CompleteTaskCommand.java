@@ -44,16 +44,15 @@ public class CompleteTaskCommand extends Command {
                         + "Input 'list' to view the correct task ID of your desired task.";
                 throw new InvalidFunctionException(err);
             } else {
-                Task task = tasks.getTask(index - 1);
-                if (task.isCompleted()) {
+                if (tasks.getTask(index - 1).isCompleted()) {
                     String message = "This task has already been completed:";
                     ui.printReply(message);
                 } else {
-                    task.markAsDone();
+                    tasks.completeTask(index - 1);
                     String message = "Nice! I've marked this task as done:";
                     ui.printReply(message);
                 }
-                String successReply = "\t" + task;
+                String successReply = "\t" + tasks.getTask(index - 1);
                 ui.printReply(successReply);
             }
             storage.saveFile(tasks);

@@ -75,4 +75,13 @@ public class TaskList {
         this.taskList.remove(index);
     }
 
+    /**
+     * Marks the task at the given index in the task list as completed.
+     *
+     * @param index Zero based index of the task to be completed.
+     */
+    public void completeTask(int index) {
+        this.taskList.get(index).markAsDone();
+    }
+
 }
