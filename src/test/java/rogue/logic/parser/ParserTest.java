@@ -2,8 +2,9 @@ package rogue.logic.parser;
 
 import org.junit.jupiter.api.Test;
 
-import rogue.commons.exceptions.IncorrectArgumentException;
 import rogue.logic.parser.exceptions.UnknownCommandException;
+
+import rogue.commons.exceptions.IncorrectArgumentException;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 

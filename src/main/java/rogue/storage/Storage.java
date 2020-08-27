@@ -1,25 +1,23 @@
 package rogue.storage;
 
-import rogue.model.task.Task;
-import rogue.model.task.Todo;
 import rogue.model.task.Deadline;
 import rogue.model.task.Event;
-
-import rogue.commons.util.DateTimeUtil;
+import rogue.model.task.Task;
+import rogue.model.task.Todo;
 
 import rogue.storage.exceptions.StorageException;
 
+import rogue.commons.util.DateTimeUtil;
+
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
-
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
-
-import java.io.IOException;
-import java.time.format.DateTimeParseException;
 
 /**
  * Deals with file I/O and persisting information across multiple executions.

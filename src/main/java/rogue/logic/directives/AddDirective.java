@@ -1,17 +1,17 @@
 package rogue.logic.directives;
 
-import rogue.storage.Storage;
-import rogue.model.task.TaskList;
-import rogue.ui.Ui;
-
-import rogue.model.task.Task;
-import rogue.model.task.Todo;
 import rogue.model.task.Deadline;
 import rogue.model.task.Event;
+import rogue.model.task.Task;
+import rogue.model.task.TaskList;
+import rogue.model.task.Todo;
 
 import rogue.logic.Report;
 
+import rogue.storage.Storage;
 import rogue.storage.exceptions.StorageException;
+
+import rogue.ui.Ui;
 
 import java.time.LocalDate;
 
