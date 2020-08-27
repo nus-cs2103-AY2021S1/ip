@@ -12,6 +12,7 @@ public class ToDo extends Task {
 
     /**
      * Mark the ToDo task as done.
+     *
      * @return A ToDo task that is done.
      */
     @Override

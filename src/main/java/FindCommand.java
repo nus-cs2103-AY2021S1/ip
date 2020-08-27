@@ -1,3 +1,6 @@
+/**
+ * Represents a command to find tasks based on keyword.
+ */
 public class FindCommand extends Command {
     String keyword;
 
@@ -5,6 +8,13 @@ public class FindCommand extends Command {
         this.keyword = keyword;
     }
 
+    /**
+     * Search for tasks with keyword and enumerates them.
+     *
+     * @param tasks Task list of all tasks.
+     * @param ui Ui to deal with interaction with user.
+     * @param storage Storage to load and save tasks.
+     */
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         String matchingTasks = "";
         int numMatching = 0;

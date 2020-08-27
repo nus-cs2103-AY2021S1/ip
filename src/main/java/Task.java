@@ -21,6 +21,7 @@ public class Task {
 
     /**
      * Retrieves information on whether task is done and represents with a symbol.
+     *
      * @return A String representing a tick (if task is done) or cross (if task is not done) symbol
      */
     public String getStatusIcon() {
@@ -29,6 +30,7 @@ public class Task {
 
     /**
      * Mark task as done.
+     *
      * @return A task that is marked as done.
      */
     public Task markAsDone() {
@@ -37,6 +39,7 @@ public class Task {
 
     /**
      * Returns the representation of the task in a text file.
+     *
      * @return String representation of task in a text file.
      */
     public String toTxtFileFormat() {

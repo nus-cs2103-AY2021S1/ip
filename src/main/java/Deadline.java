@@ -20,6 +20,7 @@ public class Deadline extends Task {
 
     /**
      * Marks a deadline task as done.
+     *
      * @return A deadline task that is done.
      */
     @Override

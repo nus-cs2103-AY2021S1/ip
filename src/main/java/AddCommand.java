@@ -13,6 +13,7 @@ public class AddCommand extends Command {
 
     /**
      * Adds task to the task list and appends a line to represent the task to the filepath stored in storage.
+     *
      * @param tasks Task list of all tasks.
      * @param ui Ui to deal with interaction with user.
      * @param storage Storage to load and save tasks.

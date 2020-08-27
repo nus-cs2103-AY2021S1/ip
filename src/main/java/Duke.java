@@ -43,6 +43,7 @@ public class Duke {
 
     /**
      * Runs a Duke object with a file at filePath of "data/duke.txt".
+     *
      * @param args
      */
     public static void main(String[] args) {

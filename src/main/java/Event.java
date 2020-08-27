@@ -19,6 +19,7 @@ public class Event extends Task{
 
     /**
      * Marks the event task as done.
+     *
      * @return Event task that is marked as done.
      */
     @Override

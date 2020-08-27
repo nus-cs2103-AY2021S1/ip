@@ -8,6 +8,7 @@ import java.time.format.DateTimeParseException;
 public class Parser {
     /**
      * Returns whether the string provided is an integer.
+     *
      * @param secondWord Word to be parsed into integer.
      * @return Boolean to signify if given word is an integer
      */
@@ -22,6 +23,7 @@ public class Parser {
 
     /**
      * Returns whether the input date provided is of the format (yyyy-MM-dd HH:mm)
+     *
      * @param inputDate String of date to be checked.
      * @return Boolean to signify if given input date is of correct format.
      */
@@ -37,6 +39,7 @@ public class Parser {
 
     /**
      * Parse the command given in string into a Command that it represents.
+     *
      * @param fullCommand The command that the user input into the chatbot.
      * @return Type of command that the input represents.
      * @throws DukeException If invalid commands are provided.

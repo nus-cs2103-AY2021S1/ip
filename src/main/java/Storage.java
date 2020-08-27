@@ -20,6 +20,7 @@ public class Storage {
     /**
      * Scan through file at specified filePath and make use of the information to initialise tasks arraylist.
      * If directory or file does not exist, it creates the necessary directories and file.
+     *
      * @return A list of tasks found in the file at specified filePath.
      * @throws DukeException if unable to load file.
      */
@@ -74,6 +75,7 @@ public class Storage {
 
     /**
      * Add text to the file at specified filepath.
+     *
      * @param textToAppend Text to be added to the file.
      * @throws DukeException if unable to append a line to the file.
      */
@@ -90,6 +92,7 @@ public class Storage {
 
     /**
      * Rewrite the entire file based on the tasks arraylist, looping through each task and formatting it.
+     *
      * @param tasks
      * @throws DukeException
      */

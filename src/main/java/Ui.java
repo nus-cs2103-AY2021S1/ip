@@ -41,6 +41,7 @@ public class Ui {
 
     /**
      * Show the task that is added and the updated number of tasks.
+     *
      * @param task Task to be added.
      * @param numTasks Updated number of tasks.
      */
@@ -51,6 +52,7 @@ public class Ui {
 
     /**
      * Show the task that is deleted and the updated number of tasks.
+     *
      * @param task Task to be deleted.
      * @param numTasks Updated number of tasks.
      */
@@ -61,6 +63,7 @@ public class Ui {
 
     /**
      * Show the task that is marked as done.
+     *
      * @param task Task that is marked as done.
      */
     public void showMarkedDone(Task task) {
@@ -69,7 +72,8 @@ public class Ui {
     }
 
     /**
-     * Show the error that has occured.
+     * Show the error that has occurred.
+     *
      * @param msg Error message.
      */
     public void showError(String msg) {
@@ -85,6 +89,7 @@ public class Ui {
 
     /**
      * Show all tasks in the task list.
+     *
      * @param tasksList Task list of all tasks.
      */
     public void showTaskList(String tasksList) {
@@ -100,6 +105,7 @@ public class Ui {
 
     /**
      * Show matching tasks to the keyword provided.
+     *
      * @param matchingTaskList String of all matching tasks enumerated.
      */
     public void showMatchingTaskList(String matchingTaskList) {
@@ -108,6 +114,7 @@ public class Ui {
 
     /**
      * Reads input from user.
+     *
      * @return Input of the user.
      */
     public String readCommand() {

@@ -29,6 +29,7 @@ public class TaskList {
 
     /**
      * Delete a task to task list.
+     *
      * @param taskNumber The task number representing task to be deleted.
      */
     public void deleteTask(int taskNumber) {
@@ -37,6 +38,7 @@ public class TaskList {
 
     /**
      * Add a task to task list.
+     *
      * @param task The task number representing task to be added.
      */
     public void addTask(Task task) {
@@ -45,6 +47,7 @@ public class TaskList {
 
     /**
      * Mark a task in task list as done.
+     *
      * @param taskNumber The task number representing task to be marked as done in task list.
      */
     public void doneTask(int taskNumber) {
