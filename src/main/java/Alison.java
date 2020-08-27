@@ -1,24 +1,19 @@
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class Alison {
-    private static List<Task> taskList = new ArrayList<>();
+    public static List<Task> taskList = new ArrayList<>();
 
-    private static String horizontal_line = "________________________________________________________________";
-    private static String fileName = "./data/alision.txt";
+    public static String horizontal_line = "________________________________________________________________";
 
-    private static void printWithBorder(String content) {
+    public static void printWithBorder(String content) {
         System.out.println(horizontal_line);
         System.out.println(content);
         System.out.println(horizontal_line);
     }
 
-    private static void greeting() {
+    public static void greeting() {
         String logo =
                 "       d8888 888      8888888  .d8888b.   .d88888b.  888b    888 \n" +
                 "      d88888 888        888   d88P  Y88b d88P\" \"Y88b 8888b   888 \n" +
@@ -34,7 +29,7 @@ public class Alison {
         System.out.println(greet);
     }
 
-    private static void showList() {
+    public static void showList() {
         System.out.println(horizontal_line);
         System.out.println("Here are the tasks in your list:");
         for (int i = 0; i < taskList.size(); i++) {
@@ -44,19 +39,19 @@ public class Alison {
         System.out.println(horizontal_line);
     }
 
-    private static void addTaskMsg(Task task) {
+    public static void addTaskMsg(Task task) {
         printWithBorder("Got it. I've added this task: \n "
                 + task + "\n"
                 + String.format("Now you have %d tasks in the list.", taskList.size()));
     }
 
-    private static void removeTaskMsg(Task task) {
+    public static void removeTaskMsg(Task task) {
         printWithBorder("Noted. I've removed this task: \n "
                 + task + "\n"
                 + String.format("Now you have %d tasks in the list.", taskList.size()));
     }
 
-    private static void response(String input) {
+    public static void response(String input) {
         String[] words = input.split(" ");
         String command = words[0];
         if (words.length == 1) {
@@ -130,19 +125,6 @@ public class Alison {
         }
     }
 
-    private static void saveTasks() {
-        try {
-            File file = new File(fileName);
-            BufferedWriter data = new BufferedWriter(new FileWriter(file));
-            for (Task task: taskList) {
-                data.write(task.savedFormat() + "\n");
-            }
-            data.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
     public static void main(String[] args) {
         greeting();
 
@@ -154,6 +136,5 @@ public class Alison {
             input = sc.nextLine();
         }
         response(input);
-        saveTasks();
     }
 }
