@@ -5,7 +5,16 @@ import java.util.Arrays;
 public class Parser {
     public Parser(){}
 
-    // TODO: 20/8/20 CHANGE ALL MATCHES TO matcher.find 
+    // TODO: 20/8/20 CHANGE ALL MATCHES TO matcher.find
+
+    /**
+     * Parses the adding commands
+     * Parse the adding commands (todo, deadline, and event) and builds the task specified.
+     * @param echo the command inputted by user
+     * @return a Task as parsed by the method
+     * @throws DukeException Wrong command inputted
+     * @throws ParseException Failed to parse date
+     */
     public Task parseAdd(String echo) throws DukeException, ParseException {
         if (echo.matches("(?i)^todo.*")) {
             if (echo.matches("(?i)^todo\\s+\\S+.*")) {
