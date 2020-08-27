@@ -16,25 +16,25 @@ public class Duke {
     public Duke(String path) throws IOException {
         this.ui = new Ui();
         this.storage = new Storage(path);
-        TaskList tempList;
+        TaskList tempTaskList;
         try {
-            tempList = new TaskList(storage);
+            tempTaskList = new TaskList(storage);
         } catch (DukeException | IOException e) {
-            tempList = new TaskList();
+            tempTaskList = new TaskList();
         }
-        this.tasklist = tempList;
+        this.tasklist = tempTaskList;
     }
 
     public void run() {
         ui.showIntro();
-        boolean isExit = false;
-        while (!isExit) {
+        boolean isExited = false;
+        while (!isExited) {
             try {
-                String fullCommand = ui.readLine();
+                String line = ui.readLine();
                 ui.lineDivider();
-                Command c = Parser.parse(fullCommand);
-                c.execute(tasklist, ui, storage);
-                isExit = c.isExited();
+                Command command = Parser.parse(line);
+                command.execute(tasklist, ui, storage);
+                isExited = command.isExited();
             } catch (IOException e){
                 ui.showFileError();
             } catch (DukeException e) {

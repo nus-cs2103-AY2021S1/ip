@@ -20,15 +20,16 @@ public class EventCommand extends Command {
         if (date.length() != 10 || split.length != 3) {
             throw new InvalidDateTimeException();
         }
-        String formatDate = split[0] + "-" + split[1] + "-" + split[2];
-        return formatDate;
+        String setDate = split[0] + "-" + split[1] + "-" + split[2];
+        return setDate;
     }
 
     private String setTime(String time) throws InvalidDateTimeException {
         if (time.length() != 4) {
             throw new InvalidDateTimeException();
         }
-        return time.substring(0, 2) + ":" + time.substring(2);
+        String setTime = time.substring(0, 2) + ":" + time.substring(2);
+        return setTime;
     }
 
     private Event createEvent(String description, String datetime) throws InvalidDateTimeException {

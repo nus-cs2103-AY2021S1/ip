@@ -11,14 +11,14 @@ public class Task {
     }
 
     public String getStatusIcon() {
-        return (isDone ? "Y" : "X"); //return tick or cross symbols
+        return (isDone ? "Y" : "X");
     }
 
     public void markAsDone() {
         this.isDone = true;
     }
 
-    public boolean checkDone() {
+    public boolean checkIsDone() {
         return isDone;
     }
 
@@ -27,7 +27,7 @@ public class Task {
     }
 
     public String toData () {
-        return checkDone()
+        return checkIsDone()
                 ? "T//1//" + getDescription()
                 : "T//0//" + getDescription();
     }

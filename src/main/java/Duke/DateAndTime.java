@@ -18,7 +18,6 @@ public class DateAndTime {
             this.date = LocalDate.parse(date);
             this.time = LocalTime.parse(time);
         } catch (DateTimeParseException e) {
-            System.out.print("lol");
             throw new InvalidDateTimeException();
         }
     }
@@ -34,8 +33,7 @@ public class DateAndTime {
     @Override
     public String toString() {
         return this.date.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL).withLocale(Locale.UK))
-                + " "
-                + this.time.format(DateTimeFormatter.ofPattern("hh:mma"));
+                + " " + this.time.format(DateTimeFormatter.ofPattern("hh:mma"));
     }
 
 }

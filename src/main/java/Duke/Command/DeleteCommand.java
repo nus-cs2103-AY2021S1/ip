@@ -16,7 +16,7 @@ public class DeleteCommand extends Command {
     public boolean isExited() {
         return false;
     }
-    public void execute(TaskList tasklist, Ui ui, Storage storage) throws InvalidDeleteInputException, IOException {
+    public void execute(TaskList tasklist, Ui ui, Storage storage) throws InvalidDeleteInputException {
         try {
             int num = Integer.parseInt(input.replaceAll("\\s+", ""));
             if (num > tasklist.getNumOfTask() || num <= 0) {

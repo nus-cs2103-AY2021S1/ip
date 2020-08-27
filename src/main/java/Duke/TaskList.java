@@ -9,12 +9,12 @@ import java.util.ArrayList;
 public class TaskList {
     private ArrayList<Task> list;
 
-    public TaskList(Storage storage) throws FileNotFoundException, InvalidDateTimeException {
-        this.list = storage.getList();
-    }
-
     public TaskList() {
         list = new ArrayList<>();
+    }
+
+    public TaskList(Storage storage) throws FileNotFoundException, InvalidDateTimeException {
+        this.list = storage.getList();
     }
 
     public void updateData(Storage storage) throws IOException {
@@ -45,7 +45,7 @@ public class TaskList {
     private int getNumOfDoneTask() {
         int num = 0;
         for (Task task : list) {
-            if (task.checkDone()) {
+            if (task.checkIsDone()) {
                 num++;
             }
         }
@@ -53,13 +53,13 @@ public class TaskList {
     }
 
     private String showList() {
-        StringBuffer lst = new StringBuffer();
-        lst.append("Here are the tasks in your list:\n");
+        StringBuffer list = new StringBuffer();
+        list.append("Here are the tasks in your list:\n");
         int listSize = getNumOfTask();
         for (int i = 0; i < listSize; i++) {
-            lst.append((i + 1) + ". " + this.list.get(i).toString() + "\n");
+            list.append((i + 1) + ". " + this.list.get(i).toString() + "\n");
         }
-        return lst.toString();
+        return list.toString();
     }
 
     @Override

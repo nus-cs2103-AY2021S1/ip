@@ -4,22 +4,22 @@ import Duke.Exception.*;
 
 public class Deadline extends Task {
 
-    private final DateAndTime datetime;
+    private final DateAndTime dateTime;
 
     public Deadline(String description, String date, String time) throws InvalidDateTimeException {
         super(description);
-        this.datetime = new DateAndTime(date, time);
+        this.dateTime = new DateAndTime(date, time);
     }
 
     @Override
     public String toData() {
-        return checkDone()
-                ? "D//1//" + getDescription() + "//" + this.datetime.getDate() + "//" + this.datetime.getTime()
-                : "D//0//" + getDescription() + "//" + this.datetime.getDate() + "//" + this.datetime.getTime();
+        return checkIsDone()
+                ? "D//1//" + getDescription() + "//" + this.dateTime.getDate() + "//" + this.dateTime.getTime()
+                : "D//0//" + getDescription() + "//" + this.dateTime.getDate() + "//" + this.dateTime.getTime();
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + this.datetime + ")";
+        return "[D]" + super.toString() + " (by: " + this.dateTime + ")";
     }
 }

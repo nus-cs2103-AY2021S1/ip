@@ -3,10 +3,8 @@ package Duke;
 import Duke.Command.*;
 import Duke.Exception.*;
 
-import java.io.IOException;
-
 public class Parser {
-    public static Command parse(String input) throws DukeException, IOException {
+    public static Command parse(String input) throws DukeException {
         if (input.equals("bye")) {
             return new ExitCommand();
         } else if (input.equals("list")) {
