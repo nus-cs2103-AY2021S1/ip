@@ -1,6 +1,7 @@
 package duke.command;
 
-import duke.exception.InvalidInstructionException;
+import duke.exception.InvalidTaskIndexException;
+import duke.exception.TaskDoneException;
 import duke.logic.StorageManager;
 import duke.logic.TaskList;
 import duke.logic.UIManager;
@@ -38,9 +39,10 @@ public abstract class Command {
      * @param taskList       <code>TaskList</code> object containing the user's <code>DukeTask</code>.
      * @param uiManager      <code>UIManager</code> object to handle printing feedback to user.
      * @param storageManager <code>StorageManager</code> object to saving/loading user data.
-     * @throws InvalidInstructionException If user input validation fails.
-     * @throws IOException                 If saving of data fails.
+     * @throws InvalidTaskIndexException If user input validation fails.
+     * @throws TaskDoneException         If user input validation fails.
+     * @throws IOException               If saving of data fails.
      */
     public abstract void execute(TaskList taskList, UIManager uiManager, StorageManager storageManager)
-            throws InvalidInstructionException, IOException;
+            throws IOException, InvalidTaskIndexException, TaskDoneException;
 }

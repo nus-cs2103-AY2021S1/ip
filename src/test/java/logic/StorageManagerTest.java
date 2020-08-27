@@ -4,11 +4,12 @@ import duke.logic.StorageManager;
 import duke.task.DukeTask;
 import duke.task.TodoTask;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class StorageManagerTest {
     @Test

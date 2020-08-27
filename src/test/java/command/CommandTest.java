@@ -1,7 +1,8 @@
 package command;
 
 import duke.command.Command;
-import duke.exception.InvalidInstructionException;
+import duke.exception.InvalidTaskIndexException;
+import duke.exception.TaskDoneException;
 import org.junit.jupiter.api.Test;
 import stub.CommandChildStub;
 
@@ -24,7 +25,7 @@ public class CommandTest {
 
     // This test tests if the inherited execute() in ChildStub can execute properly or not.
     @Test
-    public void testCommandExecute() throws InvalidInstructionException, IOException {
+    public void testCommandExecute() throws IOException, InvalidTaskIndexException, TaskDoneException {
         Command testCommand = new CommandChildStub(true);
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));

@@ -1,7 +1,6 @@
 package stub;
 
 import duke.logic.TaskList;
-import duke.task.DukeTask;
 
 import java.util.ArrayList;
 

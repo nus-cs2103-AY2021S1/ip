@@ -2,9 +2,10 @@ package duke.logic;
 
 import duke.CommonMethod;
 import duke.command.*;
-import duke.exception.InvalidFormatException;
-import duke.exception.InvalidInstructionException;
+import duke.exception.InvalidInstructionFormatException;
+import duke.exception.InvalidInstructionLengthException;
 import duke.exception.MissingFieldException;
+import duke.exception.UnknownInstructionException;
 import duke.task.DeadlineTask;
 import duke.task.DukeTask;
 import duke.task.EventTask;
@@ -45,12 +46,14 @@ public class UserInputParser {
      *
      * @param userInput <code>String</code> containing the user instruction.
      * @return Command object denoting the corresponding command.
-     * @throws InvalidInstructionException If instruction does not exist.
-     * @throws MissingFieldException       If the instruction has missing Strings
-     * @throws InvalidFormatException      If the instruction has correct format and fields, but incorrect format.
+     * @throws UnknownInstructionException       If instruction does not exist.
+     * @throws MissingFieldException             If the instruction has missing Strings.
+     * @throws InvalidInstructionLengthException If the instruction has correct format and fields, but incorrect input.
+     * @throws InvalidInstructionFormatException If the instruction has incorrect format.
      */
     public static Command parse(String userInput)
-            throws InvalidInstructionException, MissingFieldException, InvalidFormatException {
+            throws MissingFieldException, InvalidInstructionLengthException,
+            InvalidInstructionFormatException, UnknownInstructionException {
 
         // Instruction Setup - split by whitespace to check
         String instruction = userInput.trim();
@@ -60,56 +63,56 @@ public class UserInputParser {
 
         switch (instructionTag) {
         case BYE:
-            if (InputValidator.validateSizeOne(instrLen, instructionTag, true)) {
+            if (InputValidator.validateSizeOne(instrLen, true)) {
                 return new ExitCommand();
             }
             break;
         case HELP:
-            if (InputValidator.validateSizeOne(instrLen, instructionTag, true)) {
+            if (InputValidator.validateSizeOne(instrLen, true)) {
                 return new HelpCommand();
             }
             break;
         case LIST:
-            if (InputValidator.validateSizeOne(instrLen, instructionTag, true)) {
+            if (InputValidator.validateSizeOne(instrLen, true)) {
                 return new ListCommand();
             }
         case TODO:
-            if (InputValidator.validateSizeOne(instrLen, instructionTag, false)) {
+            if (InputValidator.validateSizeOne(instrLen, false)) {
                 TodoTask todotask = new TodoTask(CommonMethod.mergeArray(instructionArray, 1, instrLen));
                 return new AddCommand(todotask);
             }
             break;
         case DONE:
-            if (InputValidator.validateSizeTwoAndInt(instructionArray, instructionTag)) {
+            if (InputValidator.validateSizeTwoAndInt(instructionArray)) {
                 return new DoneCommand(Integer.parseInt(instruction.split(" ")[1]) - 1);
             }
             break;
         case DELETE:
-            if (InputValidator.validateSizeTwoAndInt(instructionArray, instructionTag)) {
+            if (InputValidator.validateSizeTwoAndInt(instructionArray)) {
                 return new DeleteCommand(Integer.parseInt(instruction.split(" ")[1]) - 1);
             }
             break;
         case DEADLINE:
             int byIndex = findIndex(instructionArray, BY_INDICATOR);
-            if (InputValidator.validateDescriptionAndDateTime(instructionArray, DEADLINE, byIndex)
-                    && (InputValidator.validateDateAndTime(instructionArray, DEADLINE, byIndex))) {
+            if (InputValidator.validateDescriptionAndDateTime(instructionArray, byIndex)
+                    && (InputValidator.validateDateAndTime(instructionArray, byIndex))) {
                 return new AddCommand(generateTaskWithDate(DEADLINE, instructionArray, BY_INDICATOR));
             }
             break;
         case EVENT:
             int atIndex = findIndex(instructionArray, AT_INDICATOR);
-            if (InputValidator.validateDescriptionAndDateTime(instructionArray, EVENT, atIndex)
-                    && (InputValidator.validateDateAndTime(instructionArray, EVENT, atIndex))) {
+            if (InputValidator.validateDescriptionAndDateTime(instructionArray, atIndex)
+                    && (InputValidator.validateDateAndTime(instructionArray, atIndex))) {
                 return new AddCommand(generateTaskWithDate(EVENT, instructionArray, AT_INDICATOR));
             }
             break;
         case FIND:
-            if (InputValidator.validateSizeTwo(instructionArray, instructionTag)) {
+            if (InputValidator.validateSizeTwo(instructionArray)) {
                 return new FindCommand(instructionArray[1]);
             }
             break;
         }
-        throw new InvalidInstructionException(UNKNOWN);
+        throw new UnknownInstructionException();
     }
 
     /**
@@ -122,11 +125,10 @@ public class UserInputParser {
      * @param instructionArray <code>Array</code> containing the processed user instruction
      * @param indicator        <code>String</code> to verify the instruction type.
      * @return DukeTask object denoting the corresponding DukeTask.
-     * @throws InvalidFormatException If the instruction has correct format and fields, but incorrect format.
+     * @throws InvalidInstructionFormatException If the instruction has correct format and fields, but incorrect format.
      */
-    private static DukeTask generateTaskWithDate(String taskType, String[] instructionArray,
-                                                 String indicator)
-            throws InvalidFormatException {
+    private static DukeTask generateTaskWithDate(String taskType, String[] instructionArray, String indicator)
+            throws InvalidInstructionFormatException {
 
         // find the index of the indicator
         int index = findIndex(instructionArray, indicator);
@@ -137,7 +139,7 @@ public class UserInputParser {
         String time = instructionArray[index + 2];
 
         // parse date and time into LocalDateTime object
-        LocalDateTime dateTime = parseDateAndTime(taskType, date, time);
+        LocalDateTime dateTime = parseDateAndTime(date, time);
 
         return taskType.equals(DEADLINE)
                 ? new DeadlineTask(description, dateTime)
@@ -147,14 +149,13 @@ public class UserInputParser {
     /**
      * Parses input variables into a <code>LocalDateTime</code> object.
      *
-     * @param taskType <code>String</code> containing the type of <code>DukeTask</code> to generate.
      * @param date     <code>String</code> containing the Date of the Task.
      * @param time     <code>String</code> containing the Time of the Task.
      * @return LocalDateTime object denoting the corresponding Date and Time.
-     * @throws InvalidFormatException If the instruction has correct format and fields, but incorrect format.
+     * @throws InvalidInstructionFormatException Date and time formats are incorrect
      */
-    private static LocalDateTime parseDateAndTime(String taskType, String date, String time)
-            throws InvalidFormatException {
+    private static LocalDateTime parseDateAndTime(String date, String time)
+            throws InvalidInstructionFormatException {
         // INPUT DATE FORMAT: DD/MM/YYYY
         // INPUT TIME FORMAT: hh/mm/ss
         int year, month, day, hour, minute, second;
@@ -171,7 +172,7 @@ public class UserInputParser {
             minute = Integer.parseInt(timeArray[1]);
             second = Integer.parseInt(timeArray[2]);
         } catch (NumberFormatException nfe) {
-            throw new InvalidFormatException(taskType + " DATE AND TIME");
+            throw new InvalidInstructionFormatException();
         }
 
         return LocalDateTime.of(year, month, day, hour, minute, second);
