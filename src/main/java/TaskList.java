@@ -30,19 +30,19 @@ public class TaskList{
 
     /**
      * method to get a Task from the list
-     * @param i index of the task to be fetched
+     * @param index index of the task to be fetched
      * @return returns the required task
      */
-    public Task getTask(int i){
-        return this.taskList.get(i - 1);
+    public Task getTask(int index){
+        return this.taskList.get(index - 1);
     }
 
     /**
      * method for marking a task as done
-     * @param i index of task to be marked done
+     * @param index index of task to be marked done
      */
-    public void markDone(int i){
-        this.taskList.get(i - 1).markDone();
+    public void markDone(int index){
+        this.taskList.get(index - 1).markDone();
     }
 
     /**
@@ -52,13 +52,13 @@ public class TaskList{
     public void addTask(Task task){
         this.taskList.add(task);
     }
-
+  
     /**
      * method to delete a task
-     * @param i index of the task to be deleted
+     * @param index index of the task to be deleted
      */
-    public void deleteTask(int i){
-        this.taskList.remove(i - 1);
+    public void deleteTask(int index){
+        this.taskList.remove(index - 1);
     }
 
     /**
