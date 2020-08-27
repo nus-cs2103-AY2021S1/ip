@@ -9,6 +9,7 @@ import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.Scanner;
 
+/** IO for save files */
 public class Storage {
     private final String savePath;
 
@@ -16,6 +17,12 @@ public class Storage {
         this.savePath = savePath;
     }
 
+    /**
+     * Saves TaskList to file
+     *
+     * @param data TaskList to save
+     * @throws IOException
+     */
     public void saveTask(TaskList data) throws IOException {
         // If no save file, create one
         if (!Files.exists(Paths.get(savePath))) {
@@ -29,7 +36,12 @@ public class Storage {
         }
         fs.close();
     }
-    
+
+    /**
+     * Returns TaskList loaded from file
+     *
+     * @return TaskList
+     */
     public TaskList loadTask() {
         TaskList tasks = TaskList.createTaskList();
         File f = new File(savePath);

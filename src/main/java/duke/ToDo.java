@@ -1,5 +1,6 @@
 package duke;
 
+/** ToDo form of Task */
 public class ToDo extends Task {
     ToDo(String description) {
         this(description, false);
@@ -10,7 +11,7 @@ public class ToDo extends Task {
     }
 
     /**
-     * Return updated task of subtype: ToDo
+     * Returns updated task of subtype: ToDo
      *
      * @param isDone New status for the task
      * @return new ToDo with updated status

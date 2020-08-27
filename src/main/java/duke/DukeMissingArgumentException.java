@@ -1,5 +1,6 @@
 package duke;
 
+/** Exception for missing arguments */
 public class DukeMissingArgumentException extends ArrayIndexOutOfBoundsException {
     private final String DESCRIPTION;
 

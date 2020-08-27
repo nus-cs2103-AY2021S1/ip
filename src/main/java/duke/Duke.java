@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
+/** Duke class to encapsulate the behaviour of a task manager */
 public class Duke {
     private static final String SAVEPATH = "./src/data/SaveData.txt";
     private static enum AcceptedCommands {
@@ -27,7 +28,7 @@ public class Duke {
         tasks = storage.loadTask();
     }
 
-    // Driver method to respond to user inputs
+    /** Driver method for Duke */
     private void run(String userInput) {
         while (!userInput.equals("bye")) {
             try {
@@ -79,8 +80,6 @@ public class Duke {
                         Ui.greet();
                         break;
                 }
-                // ToDo: handle localDate parse error
-                // ToDo: stretch goal level-8
             } catch (DukeIllegalCommandException | DukeMissingArgumentException | DukeTaskOutOfBoundsException e) {
                 System.out.println(e.toString());
             } catch (DateTimeParseException e) {
@@ -102,7 +101,12 @@ public class Duke {
         Ui.prettyPrint("Bye. Hope to see you again soon!");
     }
 
-    // Check if command user input is valid
+    /**
+     * Checks if command user input is valid
+     *
+     * @param command Command to check against valid commands
+     * @throws DukeIllegalCommandException
+     */
     private static void checkIllegalCommand(String command) throws DukeIllegalCommandException {
         for (AcceptedCommands i : AcceptedCommands.values()) {
             if (command.equalsIgnoreCase(i.name())) {
@@ -113,7 +117,13 @@ public class Duke {
         throw new DukeIllegalCommandException();
     }
 
-    // Check if command of user missing arguments
+    /**
+     * Checks if command of user is missing arguments
+     *
+     * @param command Command to check
+     * @param details Checks if argument is missing in details
+     * @throws DukeMissingArgumentException
+     */
     private static void checkMissingArgument(String command, String details) throws DukeMissingArgumentException {
         if (!(command.equalsIgnoreCase(AcceptedCommands.LIST.name())
                 || command.equalsIgnoreCase(AcceptedCommands.BYE.name())
@@ -124,7 +134,14 @@ public class Duke {
         }
     }
 
-    // Check if trying to access Tasks index out of the list
+    /**
+     * Checks for index out of bounds error
+     *
+     * @param command Command to check
+     * @param details Details of command
+     * @param max Maximum length of TaskList
+     * @throws DukeTaskOutOfBoundsException
+     */
     private static void checkExistingTask(String command, String details, int max) throws DukeTaskOutOfBoundsException {
         if ((command.equalsIgnoreCase(AcceptedCommands.DONE.name()))
                 || command.equalsIgnoreCase(AcceptedCommands.DELETE.name())) {
@@ -134,6 +151,13 @@ public class Duke {
         }
     }
 
+    /**
+     * Checks for illegal arguments
+     *
+     * @param command Command to check
+     * @param details Check if arument is valid
+     * @throws Exception
+     */
     private static void checkIllegalArgument(String command, String details) throws Exception {
         if (command.equalsIgnoreCase(AcceptedCommands.DONE.name())
                 || command.equalsIgnoreCase(AcceptedCommands.DELETE.name())) {

@@ -1,5 +1,6 @@
 package duke;
 
+/** Exception for accessing uninitialised Tasks */
 public class DukeTaskOutOfBoundsException extends IndexOutOfBoundsException {
     private final String DESCRIPTION;
 
