@@ -13,6 +13,14 @@ public class Storage {
     private static Path SAVED_FILE_PATH = Paths.get(HOME, "ip", "data", "wish.txt");
     private static Path DATABASE_DIRECTORY_PATH = Paths.get(HOME, "ip", "data");
 
+    /**
+     * Loads the list of tasks of the user from a .txt file in the directory.
+     * If the directory does not exist, a new folder to store the .txt file will be created.
+     *
+     * @return an ArrayList containing all the tasks of the user
+     * @throws WishException if the folder to store the .txt file cannot be created
+     * @throws FileNotFoundException if the .txt file cannot be found
+     */
     public ArrayList<Task> loadFromDatabase() throws WishException {
         boolean directoryExists = Files.exists(DATABASE_DIRECTORY_PATH);
         ArrayList<Task> database = new ArrayList<>(100);
@@ -61,6 +69,10 @@ public class Storage {
         return database;
     }
 
+    /**
+     * Saves all the tasks of the user to the .txt file.
+     * This method assumes that there is definitely a .txt file to store the data.
+     */
     public void saveToDatabase(ArrayList<Task> database) {
         try {
             FileWriter fw = new FileWriter(SAVED_FILE_PATH.toString());

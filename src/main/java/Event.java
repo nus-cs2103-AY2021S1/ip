@@ -29,6 +29,12 @@ public class Event extends Task {
         this.time = split[1].trim();
     }
 
+    /**
+     * Returns the date and time that the event is due to start at.
+     * Returned in the format: MMM d yyyy, h.mma.
+     *
+     * @return the start date and time of the event
+     */
     public String getStartDate() {
       return this.date + ", " + this.time;
     }

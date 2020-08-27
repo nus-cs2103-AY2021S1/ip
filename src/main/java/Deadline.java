@@ -29,6 +29,12 @@ public class Deadline extends Task {
         this.time = split[1].trim();
     }
 
+    /**
+     * Returns the deadline of the task.
+     * Deadline is returned in the format: MMM d yyyy, h.mma.
+     *
+     * @return deadline of the task
+     */
     public String getDeadline() {
         return date + ", " + time;
     }

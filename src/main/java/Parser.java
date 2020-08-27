@@ -8,6 +8,9 @@ public class Parser {
       this.tasks = new TaskList();
     }
 
+    /**
+     * Reads the user input and executes the specific command desired by the user.
+     */
     public void parseCommands(String command, Scanner sc) {
         switch (command) {
         case "bye":
@@ -44,7 +47,7 @@ public class Parser {
         }
     }
 
-    public void onByeCommand(ArrayList<Task> database) {
+    private void onByeCommand(ArrayList<Task> database) {
         this.tasks.saveStateToDatabase();
         System.out.println("Goodbye! All the best and see you again soon!");
         System.exit(0);
