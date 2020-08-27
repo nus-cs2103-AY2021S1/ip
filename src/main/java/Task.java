@@ -6,6 +6,8 @@ public class Task {
         this.name = name;
     }
 
+
+
     public Task completedTask(){
         completed = true;
         System.out.println("Nice! I've marked this task as done: ");
