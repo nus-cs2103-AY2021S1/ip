@@ -1,13 +1,11 @@
-import java.awt.*;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
+
 
 class Task {
     private String message;
@@ -123,6 +121,10 @@ class Todo extends Task {
         super(message);
     }
 
+    Todo(String message, boolean isDone) {
+        super(message, isDone);
+    }
+
     @Override
     public String getTypeLetter() {
         // dummy value
@@ -133,6 +135,10 @@ class Todo extends Task {
 class Event extends Task {
     Event(String message) {
         super(message);
+    }
+
+    Event(String message, boolean isDone) {
+        super(message, isDone);
     }
 
     @Override
@@ -147,10 +153,22 @@ class Deadline extends Task {
         super(message);
     }
 
+    Deadline(String message, boolean isDone) {
+        super(message, isDone);
+    }
+
     @Override
     public String getTypeLetter() {
         // dummy value
         return "[D]";
+    }
+}
+
+class IllegalTaskTypeException extends Exception {
+    IllegalTaskTypeException() {}
+    @Override
+    public String toString() {
+        return "☹ OOPS!!! Cannot detect task type";
     }
 }
 
@@ -170,14 +188,32 @@ class Convert {
         return first + "(by: " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 
-    // skeleton task add
-    static Task add(String s) {
-        return new Task("");
-    }
-}
+    static Task add(String s) throws IllegalTaskTypeException {
+        String taskType = s.split(" ; ")[0];
+        String isDone = s.split(" ; ")[1];
+        String message = s.split(" ; ")[2];
 
-enum TaskType {
-    T, D, E
+        if (taskType.equals("T")) {
+            return new Todo(message, getStatus(Integer.parseInt(isDone)));
+        } else if (taskType.equals("E")) {
+            String time = s.split(" ; ")[3];
+            return new Event(at(message + time), getStatus(Integer.parseInt(isDone)));
+        } else if (taskType.equals("D")) {
+            String time = s.split(" ; ")[3];
+            return new Deadline(by(message + time), getStatus(Integer.parseInt(isDone)));
+        } else {
+            throw new IllegalTaskTypeException();
+        }
+    }
+
+
+    static boolean getStatus(int i) {
+        if (i == 0) {
+            return false;
+        } else {
+            return true;
+        }
+    }
 }
 
 public class Duke {
@@ -219,8 +255,16 @@ public class Duke {
             list.add(Convert.add(task));
         }
 
-        // start to serve
+        System.out.print(SPACE + LINE);
         System.out.println(format(messageHello));
+        System.out.print(SPACE + messageList);
+        int i = 1;
+        for (Task task : list) {
+            System.out.println(SPACE + " " + i + "." + task.getTypeLetter()
+                    + task.getStatusIcon() + task.getMessage());
+            i++;
+        }
+        System.out.println(SPACE + LINE);
 
         if (!directoryExists) {
             System.out.println(format("☹ OOPS!!! Cannot find start file"));
