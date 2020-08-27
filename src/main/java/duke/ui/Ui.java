@@ -52,12 +52,15 @@ public class Ui {
     /**
      * Prints list of tasks.
      * @param taskList List of tasks to be printed.
+     * @param isForFind Is a keyword-matched task list
      */
-    public void printTasks(TaskList taskList) {
+
+    public void printTasks(TaskList taskList, boolean isForFind) {
         List<Task> tasks = taskList.getTasks();
 
         if (tasks.size() > 0) {
-            print("These are the tasks in your list. Jiayous! :)");
+            print(isForFind ? "These are the tasks that you are looking for.:)" :
+                    "These are the tasks in your list. Jiayous! :)");
         } else {
             print("You have no task in your list. :D");
         }

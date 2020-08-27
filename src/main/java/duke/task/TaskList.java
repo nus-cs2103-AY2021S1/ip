@@ -1,5 +1,6 @@
 package duke.task;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import duke.DukeException;
@@ -104,6 +105,20 @@ public class TaskList {
         } catch (NumberFormatException e) {
             throw new DukeException("\tPaise! :') Please use the correct format: delete <order of task in the list>");
         }
+    }
+
+    /**
+     * Returns the list of tasks.
+     */
+    public TaskList findTask(String taskKeyword) {
+        List<Task> matchedTasks = new ArrayList<>();
+
+        for (Task task : this.tasks) {
+            if (task.getDescription().contains(taskKeyword)) {
+                matchedTasks.add(task);
+            }
+        }
+        return new TaskList(matchedTasks);
     }
 
     /**
