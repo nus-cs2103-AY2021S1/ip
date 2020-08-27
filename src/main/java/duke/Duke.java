@@ -1,5 +1,7 @@
 package main.java.duke;
 
+import main.java.duke.command.Command;
+
 public class Duke {
     private Storage storage;
     private TaskList tasks;

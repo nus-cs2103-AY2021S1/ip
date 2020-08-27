@@ -1,5 +1,9 @@
-package main.java.duke;
+package main.java.duke.command;
 
+import main.java.duke.DukeException;
+import main.java.duke.Storage;
+import main.java.duke.TaskList;
+import main.java.duke.Ui;
 import main.java.duke.tasks.Task;
 
 public class DeleteCommand extends Command {
@@ -12,7 +16,7 @@ public class DeleteCommand extends Command {
     public static final String MESSAGE_DELETE_END = " thing(s) in my belly now...HUNGRY!";
     private int taskNum;
 
-    DeleteCommand(int taskNum) {
+    public DeleteCommand(int taskNum) {
         this.taskNum = taskNum;
     }
 
