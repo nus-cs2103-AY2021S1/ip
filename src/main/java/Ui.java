@@ -140,4 +140,18 @@ public class Ui {
         System.out.println("Sorry that task doesn't exist :/");
         System.out.println("Try using 'list' to find out what tasks you have!");
     }
+
+    public void printFindPrompt() {
+        System.out.println("What are you trying to find? Search using a keyword.");
+    }
+
+    public void printFoundTasksHeader() {
+        System.out.println("These are the tasks that match the keyword:");
+    }
+
+    public void printTask(TaskList taskList, int taskNum) {
+        System.out.println((taskNum + 1)
+                + ". "
+                + taskList.getTask(taskNum).toString());
+    }
 }
