@@ -46,114 +46,101 @@ public class Duke {
             String last = input.substring(first.length()).trim(); // get rid of the first word
 
             switch (first) {
-                case "":
-                    continue;
-                case "done":
-                    int id = Integer.parseInt(last) - 1;
+            case "":
+                continue;
+            case "done":
+                int id = Integer.parseInt(last) - 1;
 
-                    ui.doneTask();
-                    String changed = tasks.get(id).getDescription();
-                    String type = tasks.get(id).getType();
-                    System.out.println("[" + type + "][" + "\u2713" + "]" + changed);
+                ui.doneTask();
+                String changed = tasks.get(id).getDescription();
+                String type = tasks.get(id).getType();
+                System.out.println("[" + type + "][" + "\u2713" + "]" + changed);
 
-                    tasks.get(id).markAsDone();
-                    storage.saveTasks(tasks);
-
-                    break;
-                case "todo":
-
-                    try {
-                        Todo todo = Todo.makeToDo(last, false);
-                        tasks.add(todo);
-                        ui.addTask();
-                        ui.printMessage(todo.toString());
-                        ui.showNumberOfTasks(tasks);
-                        storage.saveTasks(tasks);
-                    } catch (DukeException e) {
-                        System.err.println(e.getMessage());
-                    }
-
-                    break;
-                case "deadline": {
-
-                    String job = last.split("/by")[0].trim();
-                    String time = last.split("/by")[1].trim();
-                    LocalDate date = LocalDate.parse(time);
-                    Deadline work = new Deadline(job + " (by: " + formatter.format(date) + ")", false, date);
-                    tasks.add(work);
-                    storage.saveTasks(tasks);
+                tasks.get(id).markAsDone();
+                storage.saveTasks(tasks);
+                break;
+            case "todo":
+                try {
+                    Todo todo = Todo.makeToDo(last, false);
+                    tasks.add(todo);
                     ui.addTask();
-                    ui.printMessage(work.toString());
+                    ui.printMessage(todo.toString());
                     ui.showNumberOfTasks(tasks);
-
-                    break;
-                }
-                case "event": {
-
-                    String job = last.split("/at")[0].trim();
-                    String time = last.split("/at")[1].trim();
-                    LocalDate date = LocalDate.parse(time);
-                    Event work = new Event(job + " (at: " + formatter.format(date) + ")", false, date);
-                    tasks.add(work);
                     storage.saveTasks(tasks);
-                    ui.addTask();
-                    ui.printMessage(work.toString());
-                    ui.showNumberOfTasks(tasks);
-
-                    break;
+                } catch (DukeException e) {
+                    System.err.println(e.getMessage());
                 }
-
-                case "find": {
-
-                    ArrayList<Task> findTasks = new ArrayList<>();
-                    for (Task task : tasks) {
-                        if (task.getDescription().contains(last)) {
-                            findTasks.add(task);
-                        }
+                break;
+            case "deadline": {
+                String job = last.split("/by")[0].trim();
+                String time = last.split("/by")[1].trim();
+                LocalDate date = LocalDate.parse(time);
+                Deadline work = new Deadline(job + " (by: " + formatter.format(date) + ")", false, date);
+                tasks.add(work);
+                storage.saveTasks(tasks);
+                ui.addTask();
+                ui.printMessage(work.toString());
+                ui.showNumberOfTasks(tasks);
+                break;
+            }
+            case "event": {
+                String job = last.split("/at")[0].trim();
+                String time = last.split("/at")[1].trim();
+                LocalDate date = LocalDate.parse(time);
+                Event work = new Event(job + " (at: " + formatter.format(date) + ")", false, date);
+                tasks.add(work);
+                storage.saveTasks(tasks);
+                ui.addTask();
+                ui.printMessage(work.toString());
+                ui.showNumberOfTasks(tasks);
+                break;
+            }
+            case "find": {
+                ArrayList<Task> findTasks = new ArrayList<>();
+                for (Task task : tasks) {
+                    if (task.getDescription().contains(last)) {
+                        findTasks.add(task);
                     }
-                    ui.printMatchingTasks();
-                    int index = 1;
-                    for (Task tsk : findTasks) {
-                        String desc = tsk.getDescription();
-                        String taskType = tsk.getType();
-                        String statusIcon = tsk.getStatusIcon();
-                        System.out.println(index + "." + "[" + taskType + "][" + statusIcon + "] " + desc);
-                        index++;
-                    }
-                    break;
-
                 }
-                case "delete": {
-                    int index = Integer.parseInt(last) - 1;
-                    ui.removeTask();
-                    String deleted = tasks.get(index).getDescription();
-                    String deletedType = tasks.get(index).getType();
-                    String status = tasks.get(index).getStatusIcon();
-                    System.out.println("[" + deletedType + "][" + status + "] " + deleted);
-                    tasks.remove(index);
-                    storage.saveTasks(tasks);
-                    ui.showNumberOfTasks(tasks);
-
-                    break;
-
+                ui.printMatchingTasks();
+                int index = 1;
+                for (Task tsk : findTasks) {
+                    String desc = tsk.getDescription();
+                    String taskType = tsk.getType();
+                    String statusIcon = tsk.getStatusIcon();
+                    System.out.println(index + "." + "[" + taskType + "][" + statusIcon + "] " + desc);
+                    index++;
                 }
-                case "list":
-                    Iterator<Task> iter = tasks.iterator();
-                    int index = 1;
-                    ui.showList();
-                    while (iter.hasNext()) {
-                        Task currentTask = iter.next();
-                        String next = currentTask.getDescription();
-                        System.out.println(index + "." + "[" + currentTask.getType() + "][" + currentTask.getStatusIcon() + "] " + next);
-                        index++;
-                    }
-
-                    break;
-                default:
-
-                    ui.invalidInput();
-
-                    break;
+                break;
+            }
+            case "delete": {
+                int index = Integer.parseInt(last) - 1;
+                ui.removeTask();
+                String deleted = tasks.get(index).getDescription();
+                String deletedType = tasks.get(index).getType();
+                String status = tasks.get(index).getStatusIcon();
+                System.out.println("[" + deletedType + "][" + status + "] " + deleted);
+                tasks.remove(index);
+                storage.saveTasks(tasks);
+                ui.showNumberOfTasks(tasks);
+                break;
+            }
+            case "list": {
+                Iterator<Task> iter = tasks.iterator();
+                int index = 1;
+                ui.showList();
+                while (iter.hasNext()) {
+                    Task currentTask = iter.next();
+                    String next = currentTask.getDescription();
+                    System.out.println(index + "." + "[" + currentTask.getType() + "]["
+                            + currentTask.getStatusIcon() + "] " + next);
+                    index++;
+                }
+                break;
+            }
+            default:
+                ui.invalidInput();
+                break;
             }
         }
 
