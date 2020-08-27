@@ -4,6 +4,10 @@ import duke.commands.Command;
 import duke.tasks.TaskType;
 
 
+/**
+ * Parser for Duke.
+ * Parses user inputs.
+ */
 public class Parser {
 
     /**

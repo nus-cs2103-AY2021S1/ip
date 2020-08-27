@@ -6,6 +6,9 @@ import duke.exceptions.DukeException;
 import java.util.Scanner;
 
 
+/**
+ * Main class for the Duke programme..
+ */
 public class Duke {
 
     private final DukeList taskList;
@@ -31,6 +34,13 @@ public class Duke {
         final String QUIT_STRING = "bye";
 
         return msgInput.equals(QUIT_STRING);
+    }
+
+
+    public static void main(String[] args) {
+
+        new Duke().start();
+
     }
 
 
@@ -145,9 +155,6 @@ public class Duke {
     }
 
 
-    
-
-
     /**
      * Method to start the Duke programme.
      */
@@ -163,13 +170,6 @@ public class Duke {
         this.taskList.writeToFile();
 
         sc.close();
-    }
-
-
-    public static void main(String[] args) {
-
-        new Duke().start();
-
     }
 
 }

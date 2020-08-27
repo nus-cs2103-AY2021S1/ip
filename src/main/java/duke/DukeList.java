@@ -1,27 +1,20 @@
 package duke;
 
-import duke.tasks.Task;
-import duke.tasks.Todo;
-import duke.tasks.Event;
-import duke.tasks.Deadline;
-import duke.tasks.TaskType;
-
-import duke.exceptions.DukeException;
-import duke.exceptions.DukeInvalidCommandException;
-import duke.exceptions.DukeInvalidDescriptionException;
-import duke.exceptions.DukeNoDateException;
-import duke.exceptions.DukeNoDescriptionException;
+import duke.exceptions.*;
+import duke.tasks.*;
 
 import java.util.ArrayList;
-import java.lang.StringBuilder;
 import java.util.Arrays;
 
 
+/**
+ * DukeList class for Duke.
+ * Stores tasks.
+ */
 public class DukeList {
 
-    private final ArrayList<Task> list;
     private static final int CAPACITY = 100;
-
+    private final ArrayList<Task> list;
     private final Storage store = new Storage("data", "duke.txt");
 
 

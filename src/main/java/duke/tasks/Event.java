@@ -3,6 +3,9 @@ package duke.tasks;
 import java.time.LocalDate;
 
 
+/**
+ * Event class.
+ */
 public class Event extends Task {
 
     private static final String DELIMITER = " /at ";
