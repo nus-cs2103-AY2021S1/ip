@@ -21,6 +21,9 @@ get 1/9/2020
 get 1-9-2020
 done 4
 todo join sports club
+find
+find z
+find book
 delete
 delete a
 delete 4

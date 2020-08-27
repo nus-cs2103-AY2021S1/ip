@@ -71,6 +71,14 @@ Got it. I've added this task:
 [T][✘] join sports club
 Now you have 5 tasks in the list.
 
+ERROR: Enter a search term.
+
+You have no matching tasks for the keyword: "z".
+
+Here are the matching task(s) in your list:
+1. [T][✓] borrow book
+2. [D][✘] return book (by: 01 Sep 2020, 06:00 PM)
+
 ERROR: Which task do you want to delete?
 
 ERROR: Enter the index of the task to be deleted.
