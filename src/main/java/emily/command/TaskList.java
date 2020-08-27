@@ -24,4 +24,15 @@ public class TaskList {
         store.remove(index);
 
     }
+
+    public ArrayList<Task> finder(String keyword){
+        ArrayList<Task> ls = new ArrayList<>();
+        for(Task t : this.store){
+            String d = t.getDescription();
+            if(d.contains(keyword)){
+                ls.add(t);
+            }
+        }
+        return ls;
+    }
 }
