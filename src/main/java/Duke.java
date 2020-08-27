@@ -1,11 +1,16 @@
 package main.java;
 
+/**
+ * Duke chatbot :)
+ *
+ * @author Lio
+ */
 public class Duke {
     private final Storage storage;
     private TaskList tasks;
     private final Ui ui;
 
-    public Duke(String filePath) {
+    private Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
         try {
@@ -16,7 +21,7 @@ public class Duke {
         }
     }
 
-    public void run() {
+    private void run() {
         ui.hi();
 
         boolean isExit = false;
@@ -39,6 +44,9 @@ public class Duke {
         ui.bye();
     }
 
+    /**
+     * Initialises and runs the Duke chatbot.
+     */
     public static void main(String[] args) {
         new Duke("data.txt").run();
     }

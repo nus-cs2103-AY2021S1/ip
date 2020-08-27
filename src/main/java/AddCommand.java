@@ -1,8 +1,18 @@
 package main.java;
 
+/**
+ * AddCommands add tasks to the TaskList
+ *
+ * @author Lio
+ */
 public class AddCommand extends Command {
     String data;
 
+    /**
+     * Constructor
+     *
+     * @param data data form of the task to be added
+     */
     public AddCommand(String data) {
         this.data = data;
     }

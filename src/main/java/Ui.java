@@ -2,6 +2,11 @@ package main.java;
 
 import java.util.Scanner;
 
+/**
+ * The UI deals with interactions with the user
+ *
+ * @author Lio
+ */
 public class Ui {
     Scanner s;
 
