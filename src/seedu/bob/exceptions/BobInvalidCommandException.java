@@ -8,11 +8,11 @@ import seedu.bob.common.Messages;
 public class BobInvalidCommandException extends BobException {
 
     public BobInvalidCommandException () {
-        super (Messages.INVALIDCOMMAND);
+        super (Messages.INVALID_COMMAND);
     }
 
     @Override
     public String toString() {
-        return Messages.INVALIDCOMMAND;
+        return Messages.INVALID_COMMAND;
     }
 }

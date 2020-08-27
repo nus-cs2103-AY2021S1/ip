@@ -100,7 +100,7 @@ public class Ui {
      */
     public void showAddMessage(Task task, Tasklist tasks) {
         // Starting line
-        String start = Messages.ADDMSG;
+        String start = Messages.ADD_MSG;
         // Task
         String taskMsg = task + "\n";
         // Ending line
@@ -115,7 +115,7 @@ public class Ui {
      */
     public void showDoneMessage(Task task) {
         String taskMsg = task + "\n";
-        showToUser(Messages.DONEMSG, taskMsg);
+        showToUser(Messages.DONE_MSG, taskMsg);
     }
 
     /**
@@ -125,21 +125,21 @@ public class Ui {
      */
     public void showDeleteMessage(Task task) {
         String taskMsg = "Deleted: " + task + "\n";
-        showToUser(Messages.DELETEMSG, taskMsg);
+        showToUser(Messages.DELETE_MSG, taskMsg);
     }
 
     /**
      * Shows loading error to user.
      */
     public void showLoadingError() {
-        showToUser(Messages.LOADINGERROR);
+        showToUser(Messages.LOADING_ERROR);
     }
 
     /**
      * Shows updating error to user.
      */
     public void showUpdatingError() {
-        showToUser(Messages.UPDATEERROR);
+        showToUser(Messages.UPDATE_ERROR);
     }
 
     public void showTasksFoundMessage(String input, String tasksFound) {

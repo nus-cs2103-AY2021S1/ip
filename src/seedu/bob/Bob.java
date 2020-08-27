@@ -31,7 +31,7 @@ public class Bob {
         try {
             tempTasks = new Tasklist(storage);
         } catch (BobException | IOException e) {
-            System.out.println(Messages.LOADINGERROR);
+            System.out.println(Messages.LOADING_ERROR);
             tempTasks = new Tasklist();
         }
         this.tasks = tempTasks;
@@ -76,7 +76,7 @@ public class Bob {
          try {
              new Bob(filePath).run();
          } catch (IOException e) {
-             System.out.println(Messages.INVALIDPATHNAME);
+             System.out.println(Messages.INVALID_PATHNAME);
          }
     }
 }

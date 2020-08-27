@@ -8,12 +8,12 @@ import seedu.bob.common.Messages;
 public class BobEmptyTaskException extends BobException {
 
     public BobEmptyTaskException () {
-        super (Messages.EMPTYTASK);
+        super (Messages.EMPTY_TASK);
     }
 
     @Override
     public String toString() {
-        return Messages.EMPTYTASK;
+        return Messages.EMPTY_TASK;
 
     }
 }

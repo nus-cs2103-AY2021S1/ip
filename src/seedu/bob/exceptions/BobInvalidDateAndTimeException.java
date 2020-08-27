@@ -8,11 +8,11 @@ import seedu.bob.common.Messages;
 public class BobInvalidDateAndTimeException extends BobException {
 
     public BobInvalidDateAndTimeException () {
-        super (Messages.INVALIDDATEANDTIME);
+        super (Messages.INVALID_DATE_AND_TIME);
     }
 
     @Override
     public String toString() {
-        return Messages.INVALIDDATEANDTIME;
+        return Messages.INVALID_DATE_AND_TIME;
     }
 }

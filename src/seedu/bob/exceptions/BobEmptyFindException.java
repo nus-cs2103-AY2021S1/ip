@@ -10,12 +10,12 @@ public class BobEmptyFindException extends BobException {
 
 
     public BobEmptyFindException () {
-        super(Messages.EMPTYFIND);
+        super(Messages.EMPTY_FIND);
     }
 
 
     @Override
     public String toString() {
-        return Messages.EMPTYFIND;
+        return Messages.EMPTY_FIND;
     }
 }

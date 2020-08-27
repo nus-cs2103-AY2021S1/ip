@@ -8,11 +8,11 @@ import seedu.bob.common.Messages;
 public class BobInvalidNumberException extends BobException {
 
     public BobInvalidNumberException () {
-        super (Messages.INVALIDNUMBER);
+        super (Messages.INVALID_NUMBER);
     }
 
     @Override
     public String toString() {
-        return Messages.INVALIDNUMBER;
+        return Messages.INVALID_NUMBER;
     }
 }
