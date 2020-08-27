@@ -1,9 +1,3 @@
-enum TaskType {
-    ToDo,
-    Deadline,
-    Event
-}
-
 public class Task {
     protected String name;
     private boolean done;
