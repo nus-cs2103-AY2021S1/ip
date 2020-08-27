@@ -10,13 +10,19 @@ import duckie.command.Command;
 import duckie.exception.DuckieException;
 import duckie.task.TaskList;
 
-
+/**
+ * Main file for the chatbot Duckie
+ */
 public class Duckie {
 
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Instantiate the Duckie object together with the filePath of duckie file
+     * @param filePath Duckie file location
+     */
     public Duckie(String filePath) {
         ui = new Ui();
         ui.showIntro();
@@ -29,6 +35,9 @@ public class Duckie {
         }
     }
 
+    /**
+     * Activates the chatbot to take in commands
+     */
     public void run() {
         boolean isExit = false;
         while (!isExit) {
@@ -46,6 +55,10 @@ public class Duckie {
         }
     }
 
+    /**
+     * Main method activating run() method
+     * @param args
+     */
     public static void main(String[] args) {
         String cwd = System.getProperty("user.dir");
         Path dirPath = Paths.get(cwd, "data");

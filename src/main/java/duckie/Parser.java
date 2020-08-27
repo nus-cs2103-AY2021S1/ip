@@ -9,11 +9,20 @@ import duckie.command.*;
 import duckie.exception.*;
 import duckie.task.*;
 
+/**
+ * Responsible for the parsing of input Commands
+ */
 public class Parser {
     private static boolean is_word(String s) {
         return (s.length() > 0 && s.split("\\s+").length == 1);
     }
 
+    /**
+     * Parse the input Command to direct Duckie on what actions to carry out
+     * @param fullCommand Input string command
+     * @return Specific Command
+     * @throws DuckieException
+     */
     public static Command parse(String fullCommand) throws DuckieException {
         String input = fullCommand.strip();
         if (input.equalsIgnoreCase("bye")) {
