@@ -21,11 +21,12 @@ import java.time.temporal.TemporalAccessor;
 import java.util.Arrays;
 
 /**
- * The program's command line parser.
+ * The command line parser.
  */
 public class Parser {
     /**
-     * Parses a string and gives a datetime for use in creating tasks
+     * Parses a string and gives a datetime for use in creating tasks.
+     *
      * @param dateTime A string representing a date and a time.
      * @return a LocalDateTime object represented by the string.
      * @throws DukeException if the string cannot be parsed.
@@ -39,7 +40,8 @@ public class Parser {
     }
 
     /**
-     * Parses a string and gives a date for use in creating tasks
+     * Parses a string and gives a date for use in creating tasks.
+     *
      * @param dateStr A string representing a date.
      * @return a LocalDate object represented by the string.
      * @throws DukeException if the string cannot be parsed.
@@ -66,7 +68,8 @@ public class Parser {
     }
 
     /**
-     * Parses a string and gives a time for use in creating tasks
+     * Parses a string and gives a time for use in creating tasks.
+     *
      * @param timeStr A string representing a time.
      * @return a LocalTime object represented by the string.
      * @throws DukeException if the string cannot be parsed.
@@ -91,7 +94,7 @@ public class Parser {
     /**
      * Parses the command given and returns a Command object for execution.
      *
-     * @param fullCommand a string containing the full command.
+     * @param fullCommand A string containing the full command.
      * @return a Command object representing the command.
      * @throws DukeException if the command cannot be parsed.
      */

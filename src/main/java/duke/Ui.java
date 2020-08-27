@@ -3,7 +3,7 @@ package duke;
 import java.util.Scanner;
 
 /**
- * The program's UI helper class.
+ * The UI helper class.
  */
 public class Ui {
     /**
@@ -26,7 +26,7 @@ public class Ui {
      * Shows a given prompt text enclosed in lines.
      *
      * @param promptText Text to be shown.
-     * @param isError if the prompt should be shown as an error.
+     * @param isError Boolean denoting if the prompt should be shown as an error.
      */
     public void showPrompt(String promptText, boolean isError) {
         String COLOR_START = isError ? "\033[0;31m" : "";
@@ -54,9 +54,9 @@ public class Ui {
     }
 
     /**
-     * Reads a command from the command line and returns a String of that command.
+     * Reads a command from the command line and returns a String containing the command.
      *
-     * @return a String of the entered command.
+     * @return a String containing the command.
      */
     public String readCommand() {
         Scanner scanner = new Scanner(System.in);

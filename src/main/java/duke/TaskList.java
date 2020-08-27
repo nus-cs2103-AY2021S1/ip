@@ -23,6 +23,15 @@ public class TaskList {
         this.tasks = new ArrayList<>(tasks);
     }
 
+    /**
+     * Adds a task to the TaskList and returns it.
+     *
+     * @param type The type of the task.
+     * @param description The description of the task.
+     * @param dateTime The date/time of the task if applicable.
+     * @return the added task.
+     * @throws DukeException if the task cannot be added.
+     */
     public Task addTask(TaskType type, String description, LocalDateTime dateTime) throws DukeException {
         switch (type) {
         case TODO:
@@ -69,6 +78,13 @@ public class TaskList {
         return event;
     }
 
+    /**
+     * Returns the task corresponding to the given task number.
+     *
+     * @param taskNo A number representing a task.
+     * @return a task corresponding to the given task number.
+     * @throws DukeException if the task number does not correspond to any task.
+     */
     public Task getTask(int taskNo) throws DukeException {
         if (taskNo <= 0 || taskNo > this.tasks.size()) {
             throw new DukeException("Task " + taskNo + " does not exist.");
@@ -77,6 +93,13 @@ public class TaskList {
         return this.tasks.get(taskNo - 1);
     }
 
+    /**
+     * Marks a task as done and returns it.
+     *
+     * @param taskNo A number representing a task.
+     * @return the task which has been mark as done.
+     * @throws DukeException if the task cannot be marked as done.
+     */
     public Task doTask(int taskNo) throws DukeException {
         Task task = this.getTask(taskNo);
 
@@ -84,6 +107,13 @@ public class TaskList {
         return task;
     }
 
+    /**
+     * Deletes a task as done and returns it.
+     *
+     * @param taskNo A number representing a task.
+     * @return the deleted task.
+     * @throws DukeException if the task cannot be deleted.
+     */
     public Task deleteTask(int taskNo) throws DukeException {
         Task task = this.getTask(taskNo);
 
@@ -91,14 +121,31 @@ public class TaskList {
         return task;
     }
 
+    /**
+     * Returns a list of tasks that are due on the given date.
+     *
+     * @param date A date.
+     * @return a list of tasks due on the given date.
+     */
     public List<Task> getDueTasks(LocalDate date) {
         return this.tasks.stream().filter(task -> task.isDue(date)).collect(Collectors.toList());
     }
 
+    /**
+     * Returns a list of tasks containing the given keyword.
+     *
+     * @param keyword A keyword.
+     * @return a list of tasks containing the given keyword.
+     */
     public List<Task> findTasks(String keyword) {
         return this.tasks.stream().filter(task -> task.hasKeyword(keyword)).collect(Collectors.toList());
     }
 
+    /**
+     * Returns all tasks.
+     *
+     * @return all tasks.
+     */
     public List<Task> getTasks() {
         return this.tasks;
     }

@@ -28,7 +28,7 @@ public class Storage {
     /**
      * Saves the given tasks into a file.
      *
-     * @param tasks a list of Tasks.
+     * @param tasks A list of tasks.
      * @throws DukeException if the file cannot be saved.
      */
     public void save(List<Task> tasks) throws DukeException {
@@ -44,8 +44,8 @@ public class Storage {
     /**
      * Loads tasks from a given file.
      *
-     * @return a list of Tasks.
-     * @throws DukeException if the file cannot be read or does not follow the proper format.
+     * @return A list of tasks.
+     * @throws DukeException if the file cannot be read or does not follow the required format.
      */
     public List<Task> load() throws DukeException {
         List<Task> tasks = new ArrayList<>();
