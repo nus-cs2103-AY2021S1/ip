@@ -17,7 +17,6 @@ public abstract class Command {
 
     private final String inputCommand;
 
-
     /**
      * A public constructor for a command.
      *
