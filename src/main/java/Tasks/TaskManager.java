@@ -59,7 +59,7 @@ public class TaskManager {
      * @param t task.
      */
     public static void completed(task t){
-        t.done();
+        t.setDone();
         try {
             FileManager.edit(fileDir, store);
         } catch(IOException e){
@@ -91,20 +91,20 @@ public class TaskManager {
     }
     public static String read(task t){
         String done = "";
-        if(t.taskCompleted()){
+        if(t.getTaskCompleted()){
             done = "[O]";
         }
         else{
             done = "[X]";
         }
-        if(t.taskType().equals("[T]")){
-            return t.taskType() + done + " " + t.taskName();
-        } else if(t.taskType().equals("[D]")){
-            return t.taskType() + done + " " + t.taskName() + "(by: " +
-                    t.taskDate().format(DateTimeFormatter.ofPattern("dd MMM uuuu HHmm")) + ")";
+        if(t.getTaskType().equals("[T]")){
+            return t.getTaskType() + done + " " + t.getTaskName();
+        } else if(t.getTaskType().equals("[D]")){
+            return t.getTaskType() + done + " " + t.getTaskName() + "(by: " +
+                    t.getTaskDate().format(DateTimeFormatter.ofPattern("dd MMM uuuu HHmm")) + ")";
         } else{
-            return t.taskType() + done + " " + t.taskName() + "(at: " +
-                    t.taskDate().format(DateTimeFormatter.ofPattern("dd MMM uuuu HHmm")) + ")";
+            return t.getTaskType() + done + " " + t.getTaskName() + "(at: " +
+                    t.getTaskDate().format(DateTimeFormatter.ofPattern("dd MMM uuuu HHmm")) + ")";
         }
     }
 

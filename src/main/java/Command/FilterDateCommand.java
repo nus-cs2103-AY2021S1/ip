@@ -24,8 +24,8 @@ public class FilterDateCommand extends Command {
         int count = 1;
         System.out.println("Here are your tasks on this date!");
         for(task i : clone){
-            if(i.taskDate()!=null){
-                if(i.taskDate().toLocalDate().equals(date)){
+            if(i.getTaskDate()!=null){
+                if(i.getTaskDate().toLocalDate().equals(date)){
                     System.out.println("    " + count + ". " + TaskManager.read(i));
                     count++;
                 }

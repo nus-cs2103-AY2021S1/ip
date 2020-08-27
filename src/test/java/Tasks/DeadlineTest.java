@@ -13,19 +13,19 @@ class DeadlineTest {
 
     @Test
     void taskName() {
-        assertEquals("Test 2",t2.taskName());
+        assertEquals("Test 2",t2.getTaskName());
     }
 
     @Test
     void taskCompleted() {
-        t2Done.done();
-        assertEquals(false,t2.taskCompleted());
-        assertEquals(true,t2Done.taskCompleted());
+        t2Done.setDone();
+        assertEquals(false,t2.getTaskCompleted());
+        assertEquals(true,t2Done.getTaskCompleted());
     }
 
     @Test
     void taskType() {
-        assertEquals("[D]",t2.taskType());
+        assertEquals("[D]",t2.getTaskType());
     }
 
     @Test
@@ -33,6 +33,6 @@ class DeadlineTest {
         DateTimeFormatter format = DateTimeFormatter.ofPattern("d-MM-uuuu HHmm");
         LocalDateTime dt1 = LocalDateTime.parse("5-12-2020 1200",format);
         t2.setDate(dt1);
-        assertEquals(dt1,t2.taskDate());
+        assertEquals(dt1,t2.getTaskDate());
     }
 }

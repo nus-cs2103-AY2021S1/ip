@@ -13,19 +13,19 @@ class EventTest {
 
     @Test
     void taskName() {
-        assertEquals("Test 3",t3.taskName());
+        assertEquals("Test 3",t3.getTaskName());
     }
 
     @Test
     void taskCompleted() {
-        t3Done.done();
-        assertEquals(false,t3.taskCompleted());
-        assertEquals(true,t3Done.taskCompleted());
+        t3Done.setDone();
+        assertEquals(false,t3.getTaskCompleted());
+        assertEquals(true,t3Done.getTaskCompleted());
     }
 
     @Test
     void taskType() {
-        assertEquals("[E]",t3.taskType());
+        assertEquals("[E]",t3.getTaskType());
     }
 
     @Test
@@ -33,6 +33,6 @@ class EventTest {
         DateTimeFormatter format = DateTimeFormatter.ofPattern("d-MM-uuuu HHmm");
         LocalDateTime dt2 = LocalDateTime.parse("6-12-2020 1200",format);
         t3.setDate(dt2);
-        assertEquals(dt2,t3.taskDate());
+        assertEquals(dt2,t3.getTaskDate());
     }
 }

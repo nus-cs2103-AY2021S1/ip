@@ -176,7 +176,7 @@ public class FileManager{
                     if(type == 1){
                         Todo t = new Todo(name,"[T]");
                         if(done) {
-                            t.done();
+                            t.setDone();
                         }
                         store.add(t);
                     } else if(type == 2){
@@ -184,7 +184,7 @@ public class FileManager{
                             String date = FileManager.getDate(current);
                             Deadline d = new Deadline(name,"[D]");
                             if(done) {
-                                d.done();
+                                d.setDone();
                             }
                             DateTimeManager.addDate(d,date);
                             store.add(d);
@@ -196,7 +196,7 @@ public class FileManager{
                             String date = FileManager.getDate(current);
                             Event e = new Event(name,"[E]");
                             if(done) {
-                                e.done();
+                                e.setDone();
                             }
                             DateTimeManager.addDate(e,date);
                             store.add(e);

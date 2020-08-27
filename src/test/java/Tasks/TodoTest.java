@@ -10,23 +10,23 @@ class TodoTest {
 
     @Test
     void taskName() {
-        assertEquals("Test 1",t1.taskName());
+        assertEquals("Test 1",t1.getTaskName());
     }
 
     @Test
     void taskCompleted() {
-        t1Done.done();
-        assertEquals(false,t1.taskCompleted());
-        assertEquals(true,t1Done.taskCompleted());
+        t1Done.setDone();
+        assertEquals(false,t1.getTaskCompleted());
+        assertEquals(true,t1Done.getTaskCompleted());
     }
 
     @Test
     void taskType() {
-        assertEquals("[T]",t1.taskType());
+        assertEquals("[T]",t1.getTaskType());
     }
 
     @Test
     void taskDate() {
-        assertEquals(null,t1.taskDate());
+        assertEquals(null,t1.getTaskDate());
     }
 }

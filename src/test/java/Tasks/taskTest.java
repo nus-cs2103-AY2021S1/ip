@@ -19,29 +19,29 @@ class taskTest {
 
     @Test
     void taskName() {
-        assertEquals("Test 1",t1.taskName());
-        assertEquals("Test 2",t2.taskName());
-        assertEquals("Test 3",t3.taskName());
+        assertEquals("Test 1",t1.getTaskName());
+        assertEquals("Test 2",t2.getTaskName());
+        assertEquals("Test 3",t3.getTaskName());
     }
 
     @Test
     void taskCompleted() {
-        t1Done.done();
-        t2Done.done();
-        t3Done.done();
-        assertEquals(false,t1.taskCompleted());
-        assertEquals(false,t2.taskCompleted());
-        assertEquals(false,t3.taskCompleted());
-        assertEquals(true,t1Done.taskCompleted());
-        assertEquals(true,t2Done.taskCompleted());
-        assertEquals(true,t3Done.taskCompleted());
+        t1Done.setDone();
+        t2Done.setDone();
+        t3Done.setDone();
+        assertEquals(false,t1.getTaskCompleted());
+        assertEquals(false,t2.getTaskCompleted());
+        assertEquals(false,t3.getTaskCompleted());
+        assertEquals(true,t1Done.getTaskCompleted());
+        assertEquals(true,t2Done.getTaskCompleted());
+        assertEquals(true,t3Done.getTaskCompleted());
     }
 
     @Test
     void taskType() {
-        assertEquals("[T]",t1.taskType());
-        assertEquals("[D]",t2.taskType());
-        assertEquals("[E]",t3.taskType());
+        assertEquals("[T]",t1.getTaskType());
+        assertEquals("[D]",t2.getTaskType());
+        assertEquals("[E]",t3.getTaskType());
     }
 
     @Test
@@ -52,8 +52,8 @@ class taskTest {
         t2.setDate(dt1);
         t3.setDate(dt2);
 
-        assertEquals(null,t1.taskDate());
-        assertEquals(dt1,t2.taskDate());
-        assertEquals(dt2,t3.taskDate());
+        assertEquals(null,t1.getTaskDate());
+        assertEquals(dt1,t2.getTaskDate());
+        assertEquals(dt2,t3.getTaskDate());
     }
 }
