@@ -4,13 +4,29 @@ import sg.christopher.duke.entities.Deadline;
 import sg.christopher.duke.entities.Event;
 import sg.christopher.duke.entities.Task;
 import sg.christopher.duke.entities.Todo;
+import sg.christopher.duke.io.DataManager;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
-    private static final List<Task> savedItems = new ArrayList<>();
+    private static List<Task> savedItems = loadSavedItems();
+
+    public static List<Task> loadSavedItems() {
+        List<Task> saved = DataManager.readList();
+        return saved != null ? saved : new ArrayList<>();
+    }
+
+    public static void saveItem(Task task) {
+        savedItems.add(task);
+        DataManager.writeList(savedItems);
+    }
+    
+    public static Task loadItem(int index) {
+        savedItems = DataManager.readList();
+        return savedItems.get(index);
+    }
 
     private static void doneHandler(String userInput) {
         int taskNo;
@@ -25,7 +41,7 @@ public class Duke {
         }
         Task task;
         try {
-            task = savedItems.get(taskNo - 1);
+            task = loadItem(taskNo - 1);
         } catch (IndexOutOfBoundsException ioobe) {
             System.out.println("ERROR: Task no. not found. Does that task exist?");
             return;
@@ -44,7 +60,7 @@ public class Duke {
         }
         String description = userInput.replaceFirst("todo ", "");
         Todo todo = new Todo(description);
-        savedItems.add(todo);
+        saveItem(todo);
         System.out.println("Got it. I've added this task:");
         System.out.println(todo);
         printRemainingCount();
@@ -67,7 +83,7 @@ public class Duke {
             return;
         }
         Deadline deadline = new Deadline(input[0], input[1]);
-        savedItems.add(deadline);
+        saveItem(deadline);
         System.out.println("Got it. I've added this task:");
         System.out.println(deadline);
         printRemainingCount();
@@ -91,7 +107,7 @@ public class Duke {
         }
 
         Event event = new Event(input[0], input[1]);
-        savedItems.add(event);
+        saveItem(event);
         System.out.println("Got it. I've added this task:");
         System.out.println(event);
         printRemainingCount();
@@ -104,7 +120,7 @@ public class Duke {
         }
         System.out.println("Here are the tasks in your list:");
         for (int i = 0; i < savedItems.size(); ++i) {
-            Task task = savedItems.get(i);
+            Task task = loadItem(i);
             System.out.println(i + 1 + ". " + task);
         }
         printRemainingCount();
