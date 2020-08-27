@@ -1,6 +1,8 @@
 package duke.command;
 
-import duke.*;
+import duke.Parser;
+import duke.Ui;
+import duke.Storage;
 import duke.task.TaskList;
 import duke.DukeException;
 
@@ -27,7 +29,7 @@ public class DeleteCommand extends Command {
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         if (Parser.isValidIndex(input, taskList.getListSize())) {
             int index = Parser.getIndex(input);
-            ui.deletedMessage(taskList.getList().get(index), taskList.getListSize());
+            ui.printDeletedMessage(taskList.getList().get(index), taskList.getListSize());
             taskList.deleteTask(index);
             storage.saveListToFile(taskList.getList());
         } else {

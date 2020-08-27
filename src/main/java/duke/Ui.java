@@ -62,7 +62,7 @@ public class Ui {
     /**
      * Prints bye message to user.
      */
-    public void byeMessage() {
+    public void printByeMessage() {
         wrapMessage("Banana! King Bob is sad to see you go. Farewell my friend!");
     }
 
@@ -71,7 +71,7 @@ public class Ui {
      * @param task Task that is added.
      * @param tasksNumber number of tasks.
      */
-    public void addedMessage(Task task, int tasksNumber) {
+    public void printAddedMessage(Task task, int tasksNumber) {
         wrapMessage("Banana! Banana has been added to your list!\n"
                 + "      " + task.toString() + "\n"
                 + "   Now you have " + tasksNumber + " banana(s) in your list! Nom nom..");
@@ -82,7 +82,7 @@ public class Ui {
      * @param task Task that is deleted.
      * @param tasksNumber Number of tasks.
      */
-    public void deletedMessage(Task task, int tasksNumber) {
+    public void printDeletedMessage(Task task, int tasksNumber) {
         wrapMessage("Banana! Banana has been eaten. Burp!\n"
                 + "      " + task.toString() + "\n"
                 + "   Now you have " + (tasksNumber - 1) + " banana(s) in your list! Nom nom..");
@@ -92,7 +92,7 @@ public class Ui {
      * Prints done message to user.
      * @param task Task that is done.
      */
-    public void doneMessage(Task task) {
+    public void printDoneMessage(Task task) {
         wrapMessage("Banana! I've marked this task as done:\n"
                 + "      " + task.toString());
     }
@@ -100,7 +100,7 @@ public class Ui {
     /**
      * Prints loading error message to user.
      */
-    public void loadingErrorMessage() {
+    public void printLoadingErrorMessage() {
         wrapMessage("Banana! There is a loading error...");
     }
 

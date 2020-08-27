@@ -15,8 +15,8 @@ public class TaskList {
     public TaskList() {
         this.tasks = new ArrayList<>();
     }
-    public TaskList(List<Task> list) {
-        this.tasks = list;
+    public TaskList(List<Task> tasks) {
+        this.tasks = tasks;
     }
 
     /**

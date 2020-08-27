@@ -1,7 +1,10 @@
 package duke.command;
 
-import duke.*;
+import duke.Storage;
 import duke.task.TaskList;
+import duke.DukeException;
+import duke.Parser;
+import duke.Ui;
 
 /**
  * Represents command that is specific to the get command.
