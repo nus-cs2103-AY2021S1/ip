@@ -1,4 +1,5 @@
 public enum CommandType {
+    HELP,
     TODO,
     DEADLINE,
     EVENT,
