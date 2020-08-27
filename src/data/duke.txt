@@ -7,3 +7,5 @@ T | 1 | get ryzen
 E | 0 | halo infinite | Sep 10 2021 15:21:00
 T | 1 | get light
 E | 0 | buy steak| Jan 21 2020 14:32:00
+D | 0 | get 6 abs | May 21 2040 13:43:00
+D | 0 | test | May 21 2040 13:43:00
