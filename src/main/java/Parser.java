@@ -5,7 +5,6 @@ import main.java.Command.ListCommand;
 import main.java.Command.DoneCommand;
 import main.java.Command.DeleteCommand;
 import main.java.Command.ByeCommand;
-import main.java.Command.FindCommand;
 import main.java.Command.Command;
 
 import java.util.zip.DataFormatException;
@@ -19,7 +18,6 @@ public class Parser {
         LIST("list"),
         EXIT("bye"),
         DONE("done"),
-        FIND("find"),
         DELETE("delete");
         public String text;
 
@@ -48,13 +46,9 @@ public class Parser {
             } else if (edittedAnswer.equals(COMMANDS.EXIT.text)) {
 
                 Command command = new ByeCommand();
-                command.execute(" ", taskList);
+                command.execute( " ", taskList );
                 return false;
 //                return this.exit();
-            } else if (answers[0].equals(COMMANDS.FIND.text)) {
-                Command command = new FindCommand();
-                command.execute(answers[1], taskList);
-
             } else if (answers[0].equals(COMMANDS.TODO.text) ||
                     answers[0].equals(COMMANDS.DEADLINE.text) ||
                     answers[0].equals(COMMANDS.EVENT.text)) {

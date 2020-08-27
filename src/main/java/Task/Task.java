@@ -39,8 +39,4 @@ public class Task {
         String doneStatus = this.isDone ? "D," : "N,";
         return "T," + doneStatus + this.description;
     }
-
-    public boolean canMatch(String toMatch) {
-         return description.contains(toMatch);
-    }
 }
