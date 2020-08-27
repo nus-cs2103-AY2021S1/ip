@@ -1,3 +1,8 @@
+package duke;
+
+import duke.exception.DateException;
+import duke.exception.MissingInformationException;
+import duke.format.DateFormat;
 import java.util.Date;
 
 public class Parser {
@@ -14,7 +19,7 @@ public class Parser {
     public int getIndex() throws MissingInformationException, NumberFormatException {
 
         if (this.commandArr.length < 2 || commandArr[1].isBlank()) {
-            throw new MissingInformationException("Task number is missing!");
+            throw new MissingInformationException("duke.Task number is missing!");
         }
         return Integer.parseInt(commandArr[1]);
     }
@@ -39,7 +44,7 @@ public class Parser {
         String details = commandArr[1];
         String[] detailArr = details.split(" /by ", 2);
         if (detailArr.length < 2 || detailArr[1].isBlank()) {
-            throw new MissingInformationException("Deadline is missing a date.");
+            throw new MissingInformationException("duke.task.Deadline is missing a date.");
         }
         return DateFormat.parseDate(detailArr[1]);
     }
@@ -48,7 +53,7 @@ public class Parser {
         String details = commandArr[1];
         String[] detailArr = details.split(" /at ", 2);
         if (detailArr.length < 2 || detailArr[1].isBlank()) {
-            throw new MissingInformationException("Event is missing a date.");
+            throw new MissingInformationException("duke.task.Event is missing a date.");
         }
         return DateFormat.parseDate(detailArr[1]);
     }

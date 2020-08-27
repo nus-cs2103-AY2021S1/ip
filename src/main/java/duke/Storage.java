@@ -1,3 +1,13 @@
+package duke;
+
+import duke.exception.DateException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.TaskType;
+import duke.task.Todo;
+import duke.task.Task;
+import duke.format.DateFormat;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -65,7 +75,7 @@ public class Storage {
         }
     }
 
-    private void loadTask(String line) throws DateException  {
+    private void loadTask(String line) throws DateException {
         String[] taskComponent = line.split("\\|");
         boolean isComplete = !taskComponent[1].equals("0");
         String name = taskComponent[2];

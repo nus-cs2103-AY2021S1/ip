@@ -1,3 +1,6 @@
+package duke;
+
+import duke.task.Task;
 import java.util.List;
 
 public class Ui {
@@ -5,9 +8,6 @@ public class Ui {
     public static String lineIndent = "    ";
     public static String listIndent = "       ";
     public static String textIndent = "     ";
-//    public void displayError(String message) {
-//        printMessage(message);
-//    }
 
     public void displayWelcome() {
         String logo = " ____        _        \n"

@@ -1,7 +1,15 @@
+package duke;
+
+import duke.exception.DateException;
+import duke.exception.DukeException;
+import duke.exception.MissingInformationException;
+import duke.task.Task;
+import duke.format.DateFormat;
+
 import java.io.IOException;
 import java.util.Date;
-import java.util.List;
 import java.util.Scanner;
+import java.util.List;
 
 
 public class Duke {
