@@ -9,27 +9,17 @@ import main.java.Ui;
 import java.time.DateTimeException;
 import java.time.LocalDate;
 
-public class AddCommand extends Command  {
+public class AddCommand extends Command {
 
-     public AddCommand(String text) {
+    public AddCommand(String text) {
         this.commandText = text;
-     }
-
-    enum TYPES {
-        TODO("todo"),
-        DEADLINE("deadline"),
-        EVENT("event");
-        private String text;
-
-        TYPES(String text) {
-            this.text = text;
-        }
     }
-     @Override
-     public void execute(String taskDetails, TaskList taskList) {
+
+    @Override
+    public void execute(String taskDetails, TaskList taskList) {
         try {
             if (this.commandText.equals(TYPES.TODO.text)) {
-            Task toAdd = new Task(taskDetails);
+                Task toAdd = new Task(taskDetails);
                 taskList.addTask(toAdd);
             } else {
                 String[] partsOfTask = taskDetails.split("/");
@@ -39,7 +29,7 @@ public class AddCommand extends Command  {
                 int day = Integer.parseInt(date.substring(0, 2));
                 int month = Integer.parseInt(date.substring(2, 4));
                 int year = Integer.parseInt(date.substring(4, 8));
-                LocalDate actualDate = LocalDate.of(year,month,day);
+                LocalDate actualDate = LocalDate.of(year, month, day);
 
                 if (this.commandText.equals(TYPES.DEADLINE.text)) {
                     Task toAdd = new Deadline(description.strip(), actualDate);
@@ -54,5 +44,16 @@ public class AddCommand extends Command  {
         } catch (DateTimeException e) {
             System.out.println("Please key in again with a valid date\n" + Ui.LINE);
         }
-     }
- }
+    }
+
+    enum TYPES {
+        TODO("todo"),
+        DEADLINE("deadline"),
+        EVENT("event");
+        private String text;
+
+        TYPES(String text) {
+            this.text = text;
+        }
+    }
+}

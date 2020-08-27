@@ -11,51 +11,34 @@ import java.util.zip.DataFormatException;
 
 public class Parser {
 
-    enum COMMANDS {
-        TODO("todo"),
-        DEADLINE("deadline"),
-        EVENT("event"),
-        LIST("list"),
-        EXIT("bye"),
-        DONE("done"),
-        DELETE("delete");
-        public String text;
-
-        COMMANDS(String text) {
-            this.text = text;
-        }
-    }
-
     public static boolean understandText(String userText, TaskList taskList) {
         try {
             String edittedAnswer = userText.strip().toLowerCase();
             String[] answers = userText.split(" ");
             if (answers.length == 2 && answers[0].equals(COMMANDS.DONE.text)) {
                 Parser.furtherUnderstandTaskNumber(answers[0], answers[1], taskList);
-//                return taskList.completeTask(answers[1]);
-            } else if (answers.length == 2 && answers[0].equals(COMMANDS.DELETE.text)) {
 
+            } else if (answers.length == 2 && answers[0].equals(COMMANDS.DELETE.text)) {
                 Command command = new DeleteCommand();
                 Parser.furtherUnderstandTaskNumber(answers[0], answers[1], taskList);
-//                return taskList.deleteTask(answers[1]);
+
             } else if (edittedAnswer.equals(COMMANDS.LIST.text)) {
-
                 Command command = new ListCommand();
-                command.execute( " ", taskList );
-//                return this.taskList.printStore();
-            } else if (edittedAnswer.equals(COMMANDS.EXIT.text)) {
+                command.execute(" ", taskList);
 
+            } else if (edittedAnswer.equals(COMMANDS.EXIT.text)) {
                 Command command = new ByeCommand();
-                command.execute( " ", taskList );
+                command.execute(" ", taskList);
                 return false;
-//                return this.exit();
+
             } else if (answers[0].equals(COMMANDS.TODO.text) ||
                     answers[0].equals(COMMANDS.DEADLINE.text) ||
                     answers[0].equals(COMMANDS.EVENT.text)) {
-
                 Parser.furtherUnderstandTask(userText, taskList);
+
             } else {
                 throw new DukeCannotUnderstandException();
+
             }
         } catch (DukeCannotUnderstandException e) {
             System.out.println(e.getMessage() + "\n" + Ui.LINE);
@@ -81,7 +64,7 @@ public class Parser {
             System.out.println("Hmm... I don't have a task numbered " + answer + "\n" + Ui.LINE);
         }
     }
-    
+
     private static void furtherUnderstandTask(String answer, TaskList taskList) {
         try {
             String[] answers = answer.split(" ", 2);
@@ -92,21 +75,24 @@ public class Parser {
 
                 // checking for event and deadline if the date is given or not
                 if (type.equals(COMMANDS.TODO.text) || partsOfTask.length == 2) {
-                    if (type.equals(COMMANDS.TODO.text) ) {
+                    if (type.equals(COMMANDS.TODO.text)) {
                         Command command = new AddCommand(type);
                         command.execute(task, taskList);
+
                     } else {
                         String description = partsOfTask[0].strip();
                         String date = partsOfTask[1].strip();
+
                         // check if the date is given in correct format
                         if (date.length() != 8) {
                             throw new DataFormatException();
                         }
+
                         Command command = new AddCommand(type);
                         command.execute(task, taskList);
+
                     }
                 } else {
-
                     String instruction = "<type of task> <description> / <deadline>";
                     if (type.equals(COMMANDS.EVENT.text)) {
                         instruction = "<type of task> <description> / <date of event>";
@@ -114,7 +100,7 @@ public class Parser {
                     throw new DukeGotNoArgumentsException(instruction);
                 }
             } else {
-                // no description
+                // handles the case when no description
                 String instruction = "<type of task> <description>";
                 if (answers[0].equals(COMMANDS.DEADLINE.text))
                     instruction = "<type of task> <description> / <due date>";
@@ -128,6 +114,21 @@ public class Parser {
             System.out.println("Please key in again with the date in the ddmmyyyy format." + "\n" + Ui.LINE);
         } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println(answer);
+        }
+    }
+
+    enum COMMANDS {
+        TODO("todo"),
+        DEADLINE("deadline"),
+        EVENT("event"),
+        LIST("list"),
+        EXIT("bye"),
+        DONE("done"),
+        DELETE("delete");
+        public String text;
+
+        COMMANDS(String text) {
+            this.text = text;
         }
     }
 }

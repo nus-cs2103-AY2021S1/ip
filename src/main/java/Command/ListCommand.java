@@ -1,6 +1,5 @@
 package main.java.Command;
 
-import main.java.Command.Command;
 import main.java.TaskList;
 
 public class ListCommand extends Command {
