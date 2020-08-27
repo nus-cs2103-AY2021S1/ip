@@ -1,3 +1,5 @@
+package duke.exception;
+
 public class InvalidFormatException extends DukeException{
     public InvalidFormatException(String missing) {
         super(missing + " is missing");

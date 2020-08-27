@@ -1,3 +1,11 @@
+package duke.command;
+
+import duke.Parser;
+import duke.TaskList;
+import duke.Ui;
+import duke.exception.InvalidTaskIdException;
+import duke.task.Task;
+
 public class DoneCommand implements Command {
     @Override
     public void execute(TaskList taskList, Ui ui, String input) throws InvalidTaskIdException {

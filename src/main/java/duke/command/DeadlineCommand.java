@@ -1,4 +1,13 @@
+package duke.command;
 
+import duke.Parser;
+import duke.TaskList;
+import duke.Ui;
+import duke.task.Deadline;
+import duke.task.Task;
+import duke.exception.EmptyDescriptionException;
+import duke.exception.InvalidFormatException;
+import duke.exception.InvalidTaskIdException;
 
 public class DeadlineCommand implements Command {
     @Override
