@@ -7,13 +7,11 @@ import java.util.Date;
 public class ListCommand extends Command {
 
 	private final Date on;
+	private final String keyWord;
 
-	public ListCommand() {
-		this.on = null;
-	}
-
-	public ListCommand(Date on) {
+	public ListCommand(Date on, String keyWord) {
 		this.on = on;
+		this.keyWord = keyWord;
 	}
 
 	/**
@@ -25,6 +23,6 @@ public class ListCommand extends Command {
 	 */
 	@Override
 	public void execute(TaskList tasks, Ui ui, Storage storage) {
-		ui.showTaskList(tasks, on);
+		ui.showTaskList(tasks, on, keyWord);
 	}
 }

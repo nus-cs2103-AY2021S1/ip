@@ -43,11 +43,11 @@ public class TaskList {
 		return tasks.size();
 	}
 
-	public ArrayList<String> toString(Date date) {
+	public ArrayList<String> toString(Date date, String keyWord) {
 		ArrayList<String> lst = new ArrayList<>();
 		int i = 1;
 		for (Task task: tasks) {
-			if (date == null || task.isOccuringOn(date)) {
+			if (task.fulfilCriteria(date, keyWord)) {
 				lst.add((i++) + ". " + task.toString());
 			}
 		}

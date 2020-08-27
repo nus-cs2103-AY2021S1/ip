@@ -37,6 +37,10 @@ public abstract class Task {
         return false;
     }
 
+    public boolean fulfilCriteria(Date date, String keyWord) {
+        return (date == null || isOccuringOn(date)) && (keyWord == null || description.toLowerCase().contains(keyWord.toLowerCase()));
+    }
+
     @Override
     public String toString() {
         return "[" + taskType.getSymbol() + "]" + getStatusIcon() + " " + description;

@@ -69,14 +69,11 @@ public class Ui {
 	 * @param tasks Tasks to display.
 	 * @param date Date to filter tasks by.
 	 */
-	public void showTaskList(TaskList tasks, Date date) {
-		ArrayList<String> lst = tasks.toString(date);
-		if (date == null) {
-			lst.add(0, "Here are the tasks in your list:");
-		} else {
-			lst.add(0,
-					"Here are the tasks in your list that occur on " + formatDate(date) + ":");
-		}
+	public void showTaskList(TaskList tasks, Date date, String keyWord) {
+		ArrayList<String> lst = tasks.toString(date, keyWord);
+		lst.add(0, "Here are the " + ((keyWord == null) ? "" : "matching ") + "tasks in your list" + ((date == null) ?
+				"" :
+				" that occur on " + formatDate(date)) + ":");
 		showResponse(lst);
 	}
 
