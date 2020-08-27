@@ -38,12 +38,13 @@ public class Duke {
     
     public static void main(String[] args) throws IOException {
         String path = "data/data.txt";
-        File directory = new File ("/data/");
-        File file = new File ("/data/data.txt");
         
-        if (!directory.exists()) {
-            directory.mkdir();
-            file.createNewFile();
+        try {
+            File f = new File(path);
+            f.getParentFile().mkdir();
+            f.createNewFile();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         
         new Duke(path).run(); 
