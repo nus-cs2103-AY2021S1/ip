@@ -1,7 +1,11 @@
-public class Event extends Task {
-    private String time;
+import java.time.LocalDate;
+import java.time.format.TextStyle;
+import java.util.Locale;
 
-    public Event(String description, String time) {
+public class Event extends Task {
+    private LocalDate time;
+
+    public Event(String description, LocalDate time) {
         super(description);
         this.time = time;
     }
@@ -12,6 +16,10 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + String.format(" (at: %s)", time);
+        String month = time.getMonth().getDisplayName(TextStyle.SHORT, Locale.forLanguageTag("en"));
+        int day = time.getDayOfMonth();
+        int year = time.getYear();
+        String timeDisplay = String.format("%d %s %d", day, month, year);
+        return "[E]" + super.toString() + String.format(" (at: %s)", timeDisplay);
     }
 }
