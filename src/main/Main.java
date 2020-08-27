@@ -1,8 +1,8 @@
 import java.util.Scanner;
 
-public class Duke {
+public class Main {
     public static void main(String[] args) {
-        TaskList duke = new TaskList();
+        Duke duke = new Duke();
         duke.start();
     }
 }
