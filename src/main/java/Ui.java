@@ -1,31 +1,31 @@
 public class Ui {
-    private String servantSpeak;
-    private String masterSpeak;
+    private final String SERVANT_SPEAK;
+    private final String USER_PROMPT;
 
     public Ui () {
         // Initialise strings to separate messages from Duke
         // and commands from CLI
-        this.servantSpeak = "Duke:\n";
-        this.masterSpeak = "Your Command Sire:";
+        this.SERVANT_SPEAK = "Duke:\n";
+        this.USER_PROMPT = "Your Command Sire:";
     }
 
     public String getServantSpeak() {
-        return this.servantSpeak;
+        return this.SERVANT_SPEAK;
     }
 
     public String getUserPrompt() {
-        return this.masterSpeak;
+        return this.USER_PROMPT;
     }
 
     public void welcomeMessage() {
         // Introduction at the beginning of the chat
-        System.out.println(servantSpeak
+        System.out.println(SERVANT_SPEAK
                 + "    Greetings my Liege.\n"
                 + "    Why have you summoned me?\n");
     }
 
     public void availableCommands() {
-        System.out.println(servantSpeak
+        System.out.println(SERVANT_SPEAK
                 + "    These are your available commands my Lord:\n\n"
                 + "    help - Show list of available commands\n"
                 + "    todo <Description of task>"
