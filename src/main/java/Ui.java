@@ -52,6 +52,8 @@ public class Ui {
         System.out.println("Here are the list of commands you can use! =D");
         System.out.println("help: displays the list of commands available\n");
         System.out.println("list: displays the list of tasks you have\n");
+        System.out.println("find *keyword*: displays the tasks with that keyword\n"
+                + "eg find book\n");
         System.out.println("todo *task description*: adds a task without any\n"
                 + "date/time attached to it\n" + "eg todo read book\n");
         System.out.println("deadline *task description* /by *date+time*: adds a\n"
@@ -103,6 +105,10 @@ public class Ui {
         System.out.println("Oki! I have added this task:");
         System.out.println(t);
         System.out.println("Now you have " + Task.totalTasks + " tasks in your list!");
+    }
+
+    public void showFind() {
+        System.out.println("Oki! I have found the matching tasks in your list:");
     }
 
     /**

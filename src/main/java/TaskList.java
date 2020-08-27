@@ -21,6 +21,10 @@ public class TaskList {
         this.tasks = new ArrayList<>();
     }
 
+    public int getSize() {
+        return this.tasks.size();
+    }
+
     /**
      * Returns the task with the specified task number.
      * @param taskNum The task number to be retrieved.
@@ -54,5 +58,18 @@ public class TaskList {
             int num = i + 1;
             System.out.println(num + ". " + tasks.get(i));
         }
+    }
+
+    public TaskList findTasks(String keyword) {
+        ArrayList<Task> foundTasks = new ArrayList<>();
+
+        for (int i = 0; i < tasks.size(); i++) {
+            Task t = this.tasks.get(i);
+            if (t.toString().contains(keyword)) {
+                foundTasks.add(t);
+            }
+        }
+
+        return new TaskList(foundTasks);
     }
 }
