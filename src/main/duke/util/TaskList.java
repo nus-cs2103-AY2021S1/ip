@@ -6,6 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 
+/**
+ * Data structure to store tasks.
+ */
 public class TaskList {
 
     private List<Task> tasks;

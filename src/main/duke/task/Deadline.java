@@ -5,6 +5,9 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Task that marks a deadline with a date and optional time.
+ */
 public class Deadline extends Task {
 
     private LocalDate date;

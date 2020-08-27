@@ -8,6 +8,9 @@ import duke.task.ToDo;
 import java.time.DateTimeException;
 import java.time.LocalDate;
 
+/**
+ * Processor and excecutor for user inputs.
+ */
 public class Parser {
 
     /**

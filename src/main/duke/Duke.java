@@ -25,6 +25,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Driver to run the Duke app.
+ */
 public class Duke {
 
     private Ui ui;
