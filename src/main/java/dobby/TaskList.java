@@ -4,7 +4,11 @@ import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import dobby.task.*;
+import dobby.task.Deadline;
+import dobby.task.Event;
+import dobby.task.Task;
+import dobby.task.Todo;
+import dobby.task.TimedTask;
 
 public class TaskList {
     private ArrayList<Task> tasks;
@@ -18,24 +22,29 @@ public class TaskList {
         Task task;
         if (str.charAt(1) == 'T') { // TODO
             String decription = str.substring(str.indexOf(' ') + 1);
+
             task = new Todo(decription);
             tasks.add(task);
         } else if (str.charAt(1) == 'D') { // DEADLINE
             String description = str.substring(str.indexOf(' ') + 1, str.indexOf("(by: ") - 1);
             String by = str.substring(str.indexOf("(by: ") + 5, str.length() - 1); //Aug 28 2020 4:00 pm
+
             int thirdIndex = by.indexOf(' ', 10);
             String dt = by.substring(0, thirdIndex);
             String tm = by.substring(thirdIndex + 1);
             LocalDate date = LocalDate.parse(dt, DateTimeFormatter.ofPattern("MMM d yyyy"));
+
             task = new Deadline(description, tm, date);
             tasks.add(task);
         } else { // EVENT
             String description = str.substring(str.indexOf(' ') + 1, str.indexOf("(at: ") - 1);
             String at = str.substring(str.indexOf("(at: ") + 5, str.length() - 1);
+
             int thirdIndex = at.indexOf(' ', 10);
             String dt = at.substring(0, thirdIndex);
             String tm = at.substring(thirdIndex + 1);
             LocalDate date = LocalDate.parse(dt, DateTimeFormatter.ofPattern("MMM d yyyy"));
+
             task = new Event(description, tm, date);
             tasks.add(task);
         }
@@ -60,9 +69,11 @@ public class TaskList {
             i++;
             all_tasks = all_tasks + i + ". " + task.getDescription() + "\n    ";
         }
+
         if (i == 0) {
             all_tasks = all_tasks + "The task list is currently empty.\n    ";
         }
+
         return all_tasks;
     }
 
@@ -77,6 +88,7 @@ public class TaskList {
                 }
             }
         }
+
         return counter == 0 ? message + "The task list is currently empty.\n    " : message;
     }
 

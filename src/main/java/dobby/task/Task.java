@@ -4,26 +4,28 @@ public class Task {
     private final String description;
     private boolean isDone;
 
-    Task(String description) {
+    Task (String description) {
         this.description = description;
         this.isDone = false;
     }
 
-    public String getDescription() {
+    public String getDescription () {
         String checkbox = "[";
-        if (this.isDone()) {
+
+        if (this.isDone()) { // tick or cross
             checkbox = checkbox + "\u2713] ";
         } else {
             checkbox = checkbox + "\u2718] ";
         }
+
         return checkbox + this.description;
     }
 
-    public boolean isDone() {
+    public boolean isDone () {
         return isDone;
     }
 
-    public void setDone() {
+    public void setDone () {
         this.isDone = true;
     }
 }

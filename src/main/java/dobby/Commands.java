@@ -12,11 +12,11 @@ public enum Commands {
 
     private String usage;
 
-    private Commands(String usage) {
+    private Commands (String usage) {
         this.usage = usage;
     }
 
-    public String getUsage() {
+    public String getUsage () {
         return this.usage;
     }
 }

@@ -1,6 +1,5 @@
 package dobby;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
 import java.io.File;
@@ -19,10 +18,12 @@ public class Dobby {
         ui = new Ui();
     }
 
-    public void run() {
+    public void run () {
         ui.greet();
+
         Scanner scanner = new Scanner(System.in);
         this.storage.readFile();
+
         while (true) {
             String text = ui.getInput();
             try {
@@ -39,6 +40,7 @@ public class Dobby {
 
     public static void main (String[] args) {
         File dobbyFile = new File("../dobbylist.txt");
+
         try {
             if (!dobbyFile.exists()){
                 dobbyFile.getParentFile().mkdirs(); // Will create parent directories if not exists
@@ -48,6 +50,7 @@ public class Dobby {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
         new Dobby(dobbyFile.getPath()).run();
     }
 }

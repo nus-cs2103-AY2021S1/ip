@@ -25,7 +25,7 @@
       done _task_number_
     _______________________________________________________________________________________
     _______________________________________________________________________________________
-    Incorrect usage of command. main.java.dobby.task.Task number must be within the correct range.
+    Incorrect usage of command. Task number must be within the correct range.
       done _task_number_
     _______________________________________________________________________________________
     _______________________________________________________________________________________
@@ -46,7 +46,7 @@
       delete _task_number_
     _______________________________________________________________________________________
     _______________________________________________________________________________________
-    Incorrect usage of command. main.java.dobby.task.Task number must be within the correct range.
+    Incorrect usage of command. Task number must be within the correct range.
       delete _task_number_
     _______________________________________________________________________________________
     _______________________________________________________________________________________

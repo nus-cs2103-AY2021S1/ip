@@ -6,7 +6,7 @@ public class Ui {
     // String for output format
     private static final String UNDERSCORE = "_________________________________________" +
             "______________________________________________";
-    static Scanner sc = new Scanner(System.in);
+    static Scanner SC = new Scanner(System.in);
 
     private static final String ALL_COMMANDS = "\n    You can use the following commands in this chat bot:"
             + (Commands.TODO).getUsage()
@@ -23,10 +23,11 @@ public class Ui {
     }
 
     public static String getInput() {
-         String text = sc.nextLine();
+         String text = SC.nextLine();
          if (text.equals("bye")) {
-             sc.close();
+             SC.close();
          }
+
          return text;
     }
 

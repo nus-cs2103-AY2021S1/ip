@@ -1,4 +1,4 @@
-package test.java.dobby;
+package dobby;
 
 import dobby.*;
 import org.junit.jupiter.api.Test;

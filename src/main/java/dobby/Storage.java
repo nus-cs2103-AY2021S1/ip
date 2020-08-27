@@ -21,6 +21,7 @@ public class Storage {
         try {
             File file = new File(this.filePath);
             Scanner scanner = new Scanner(file);
+
             while (scanner.hasNext()) {
                 String str = scanner.nextLine();
                 try {
@@ -35,14 +36,16 @@ public class Storage {
         }
     }
 
-    public void rewriteFile() {
+    public void rewriteFile () {
         try {
             FileWriter fw = new FileWriter(this.filePath);
             fw.flush();
+
             for (int i = 0; i < (this.tasks).getSize() - 1; i++) {
                 Task task = (this.tasks).getTask(i);
                 fw.write(task.getDescription() + System.lineSeparator());
             }
+
             if ((this.tasks).getSize() > 0) {
                 fw.write(tasks.getTask((this.tasks).getSize() - 1).getDescription());
             }
