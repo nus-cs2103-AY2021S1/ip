@@ -163,12 +163,12 @@ public class Duke {
         }
 
 
-            public static class TaskList {
-                List<Input> inputs;
+        public static class TaskList {
+            List<Input> inputs;
 
-                TaskList() {
-                    this.inputs = new ArrayList<Input>();
-                }
+            TaskList() {
+                this.inputs = new ArrayList<Input>();
+            }
 
                 TaskList(List<Input> inputs) throws DukeException {
                     try {
