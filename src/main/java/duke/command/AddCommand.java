@@ -3,6 +3,9 @@ package duke.command;
 import duke.task.Task;
 import duke.component.*;
 
+/**
+ * Represents a command for adding tasks.
+ */
 public class AddCommand extends Command {
     /**
      * Creates a command for adding tasks.
