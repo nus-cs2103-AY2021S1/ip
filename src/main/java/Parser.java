@@ -104,7 +104,7 @@ public class Parser {
         } catch (EmptyDescriptionException e1){
             ui.showEmptyDescriptionException(e1);
         } catch (ArrayIndexOutOfBoundsException e2) {
-            ui.showArrayIndexOutOfBoundsException(e2);
+            ui.showWrongFormat(e2);
         }
     }
 
@@ -120,7 +120,7 @@ public class Parser {
                 ui.printDoneAcknowledgement(taskList, taskNum);
             }
         } catch (IndexOutOfBoundsException e1) {
-            ui.showIndexOutOfBoundsExceptionForDone(e1);
+            ui.showIndexOutOfBoundsException(e1);
         } catch (InvalidDoneCommandException e2) {
             ui.showInvalidDoneCommandException(e2);
         }
@@ -135,7 +135,7 @@ public class Parser {
             taskList.removeTask(taskNum - 1);
             ui.printDeleteAcknowledgement(taskList, task);
         } catch (IndexOutOfBoundsException e) {
-            ui.showIndexOutOfBoundsExceptionForDelete(e);
+            ui.showIndexOutOfBoundsException(e);
         }
     }
 }
