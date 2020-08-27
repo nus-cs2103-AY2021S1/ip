@@ -34,8 +34,8 @@ public class TaskList {
         return taskArr.get(i);
     }
 
-    public String getMostRecentTask() {
-        return taskArr.get(taskArr.size() - 1).toString();
+    public Task getMostRecentTask() {
+        return taskArr.get(taskArr.size() - 1);
     }
 
     public int getTaskListSize() {

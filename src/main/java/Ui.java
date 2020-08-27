@@ -94,7 +94,7 @@ public class Ui {
 
     public void printAddAcknowledgement(TaskList taskList) {
         System.out.println("Alright, I've added this task:");
-        System.out.println(taskList.getMostRecentTask());
+        System.out.println(taskList.getMostRecentTask().toString());
         System.out.println("You now have " + taskList.getTaskListSize() + " tasks on your list");
     }
 
