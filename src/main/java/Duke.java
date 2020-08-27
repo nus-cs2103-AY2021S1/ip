@@ -45,10 +45,13 @@ public class Duke {
                     throw new IllegalArgumentException(":( Oops!!! The description of a Deadline task cannot be empty. :-(");
                 }
                 if (index == -1 || words.size() - index <= 1) {
-                    throw new IllegalArgumentException(":( Oops!!! Please type \"deadline [task description] /by [deadline] \" to add a Deadline task");
+                    throw new IllegalArgumentException(":( Oops!!! Please type \"deadline [task description] /by [yyyy-mm-dd]\" to add a Deadline task");
                 }
                 String taskDescription = combineWords(words.subList(1, index));
                 String by = combineWords(words.subList(index + 1, words.size()));
+                if (!by.matches("([12]\\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01]))")) {
+                    throw new IllegalArgumentException(":( Oops!!! Please type \"deadline [task description] /by [yyyy-mm-dd]\" to add a Deadline task");
+                }
                 task = new Deadline(taskDescription, by);
             } else if (taskType.equalsIgnoreCase("event")) {
                 int index = words.indexOf("/at");
@@ -62,7 +65,7 @@ public class Duke {
                 String at = combineWords(words.subList(index + 1, words.size()));
                 task = new Event(taskDescription, at);
             } else {
-                throw new IllegalArgumentException(":( Oops!!! I'm sorry, but I don't know what that means :-(");
+                throw new IllegalArgumentException(":( Oops!!! I'm sorry, but I don't know what that means :-(\n\tCommands: list | done | delete | todo | deadline | event");
             }
             taskList.add(task);
             String message = "Got it. I've added this task:";
