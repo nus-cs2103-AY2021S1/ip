@@ -112,7 +112,22 @@ public class Parser {
                     } catch (InputMismatchException e) {
                         throw new DukeException(command);
                     }
-                } else {
+                } else if (command.startsWith("find")) {
+                    String[] desc = command.split("find");
+                    if (desc.length < 2) {
+                        throw new DukeException(command);
+                    }
+                    String keyword = command.split(" ")[1];
+                    
+                    int count = 1;
+                    for (Task item : storage) {
+                        if (item.getDescription().contains(keyword)) {
+                            System.out.println(count + "." + item);
+                            count++;
+                        }
+                    }
+                }
+                else {
                     throw new DukeException(command);
                 }
             } catch (DukeException | FileNotFoundException e) {

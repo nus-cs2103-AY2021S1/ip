@@ -28,8 +28,9 @@ public class DukeException extends Throwable {
             return "That item has already been deleted or it does not exist.";
         } else if (this.s.equals("done")) {
             return "Please enter the number position of the item that you wish to mark done.";
-        }
-        else {
+        } else if (this.s.equals("find")) {
+            return "Please enter what you wish to find along with the find command.";
+        } else {
             return "Sorry I do not understand that command.";
         }
     }
