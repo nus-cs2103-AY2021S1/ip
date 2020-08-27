@@ -53,15 +53,12 @@ public class InputManager {
             } catch (NoSuchElementException e) {
                 throw new ErrorExceptions("Missing date!");
             }
-<<<<<<< HEAD
-=======
         } else if (current.equals("find")) {
             try {
                 ParseFind.execute(input);
             } catch (ErrorExceptions e) {
                 System.out.println(e);
             }
->>>>>>> master
         } else { // add tasks
             ParseAddTask.execute(current,input);
         }
