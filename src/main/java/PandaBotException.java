@@ -2,7 +2,7 @@
  *  Represents a general exception thrown by PandaBot.
  */
 public class PandaBotException extends Exception {
-
+    
     /**
      * Creates a PandaBotException object.
      * 

@@ -1,5 +1,5 @@
 /**
- * Runs the main program.
+ * Represents the main driver of the PandaBot program.
  */
 public class PandaBot {
     private Ui ui;
@@ -41,6 +41,7 @@ public class PandaBot {
 
     /**
      * Executes the PandaBot program.
+     * 
      * @param args command line arguments
      */
     public static void main(String[] args) {

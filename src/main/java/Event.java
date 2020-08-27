@@ -14,6 +14,7 @@ public class Event extends Task{
      */
     public Event(String description, String duration) throws PandaBotException {
         super(description);
+        
         String d = duration.strip();
         if (d.length() == 0) {
             throw new PandaBotInsufficientArgumentException();

@@ -18,6 +18,7 @@ public class Deadline extends Task {
      */
     public Deadline(String description, String dueBy) throws PandaBotException {
         super(description);
+        
         // check if a formatted date and time is given
         String input = dueBy.strip();
         String[] dT = input.split(" ");
