@@ -9,13 +9,25 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * The Storage class handles the reading and writing of data from the hard disk.
+ * Data is stored at the provided file path.
+ */
 public class Storage {
     private final String filePath;
 
+    /**
+     * Constructs a new Storage object.
+     * @param filePath Path of local save file for Duke's task list.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Saves Duke's TaskList in its current state to a file on the hard disk.
+     * @param tasks TaskList kept by this instance of Duke.
+     */
     public void store(TaskList tasks) {
         try {
             FileWriter writer = new FileWriter(".\\data\\duke.txt");
@@ -37,6 +49,9 @@ public class Storage {
         }
     }
 
+    /**
+     * Reads stored information from file and returns a List of tasks to be fed to Duke's TaskList.
+     */
     public List<Task> load() throws DukeException {
         try {
             File file = new File(filePath);

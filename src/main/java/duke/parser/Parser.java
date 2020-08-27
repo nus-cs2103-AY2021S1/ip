@@ -4,8 +4,15 @@ import duke.command.Command;
 import duke.exception.DukeException;
 import duke.command.*;
 
-
+/**
+ * Parser takes in and makes sense of the user input read by Ui.
+ */
 public class Parser {
+    /**
+     * Returns the relevant Command if user input is valid,
+     * otherwise throws a DukeException.
+     * @param fullCommand String of a line of user input.
+     */
     public static Command parse(String fullCommand) throws DukeException {
         String[] arr = fullCommand.split(" ", 2);
         String prefix = arr[0];
@@ -36,6 +43,10 @@ public class Parser {
         }
     }
 
+    /**
+     * Returns a TodoCommand if user input is valid.
+     * @param suffix String that follows after "todo" command .
+     */
     private static Command prepareTodo(String suffix) throws DukeException {
         if (suffix.length() == 0) {
             throw new DukeException("The description of a todo cannot be empty.");
@@ -44,6 +55,10 @@ public class Parser {
         }
     }
 
+    /**
+     * Returns a DeadlineCommand if user input is valid.
+     * @param suffix String that follows after "deadline" command.
+     */
     private static Command prepareDeadline(String suffix) throws DukeException {
         try {
             String[] suffixArray = suffix.split("/by ");
@@ -53,6 +68,10 @@ public class Parser {
         }
     }
 
+    /**
+     * Returns a EventCommand if user input is valid.
+     * @param suffix String that follows after "event" command.
+     */
     private static Command prepareEvent(String suffix) throws DukeException {
         try {
             String[] suffixArray = suffix.split("/at ");
@@ -62,6 +81,10 @@ public class Parser {
         }
     }
 
+    /**
+     * Returns a DoneCommand if user input is valid.
+     * @param suffix String that follows after "done" command.
+     */
     private static Command prepareDone(String suffix) throws DukeException {
         if (!suffix.matches("\\d+")) {
             throw new DukeException("done should be followed by a single task number.");
@@ -70,6 +93,10 @@ public class Parser {
         }
     }
 
+    /**
+     * Returns a DeleteCommand if user input is valid.
+     * @param suffix String that follows after "delete" command.
+     */
     private static Command prepareDelete(String suffix) throws DukeException {
         if (!suffix.matches("\\d+")) {
             throw new DukeException("delete should be followed by a single task number.");
@@ -78,6 +105,10 @@ public class Parser {
         }
     }
 
+    /**
+     * Returns a ListCommand if user input is valid.
+     * @param suffix String that follows after "list" command.
+     */
     private static Command prepareList(String suffix) throws DukeException {
         if (suffix.length() != 0) {
             throw new DukeException();

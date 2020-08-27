@@ -6,11 +6,18 @@ import duke.exception.DukeException;
 import duke.ui.Ui;
 import duke.storage.Storage;
 
+/**
+ * Represents a call to mark a Task as done.
+ */
 public class DoneCommand extends Command {
     public static final String COMMAND_WORD = "done";
 
     private final int taskNumber;
 
+    /**
+     * Constructor for DoneCommand.
+     * @param taskNumber Task number of Task in the TaskList.
+     */
     public DoneCommand(int taskNumber) {
         this.taskNumber = taskNumber;
     }
