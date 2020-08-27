@@ -1,6 +1,7 @@
 package duke.task;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Collectors;
 
 /**
@@ -107,6 +108,11 @@ public class TaskList {
         return "The task is not yet done!";
     }
 
+    /**
+     * Finds the tasks that have the word parameter in the task description.
+     * @param word The word to be searched for.
+     * @return TaskList of the results from the search.
+     */
     public String findWord(String word) {
         List<Task> filteredList = new ArrayList<>(this.list);
         filteredList = filteredList.stream()
