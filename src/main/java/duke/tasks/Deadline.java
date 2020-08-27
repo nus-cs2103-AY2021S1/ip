@@ -10,6 +10,11 @@ public class Deadline extends Task {
     private final LocalDate date;
 
 
+    /**
+     * Constructor for deadline.
+     *
+     * @param itemString description string.
+     */
     public Deadline(String itemString) {
         super(Task.getTaskString(itemString, Deadline.DELIMITER));
         this.dateString = Task.getDateString(itemString, Deadline.DELIMITER);
@@ -17,6 +22,12 @@ public class Deadline extends Task {
     }
 
 
+    /**
+     * Constructor for deadline.
+     *
+     * @param itemString description string.
+     * @param isDone     whether this task is done.
+     */
     public Deadline(String itemString, boolean isDone) {
         super(Task.getTaskString(itemString, Deadline.DELIMITER), isDone);
         this.dateString = Task.getDateString(itemString, Deadline.DELIMITER);

@@ -15,11 +15,20 @@ public class Ui {
     private final Scanner sc;
 
 
+    /**
+     * Constructor for Ui.
+     * Default to System.in as input stream.
+     */
     public Ui() {
         this.sc = new Scanner(System.in);
     }
 
 
+    /**
+     * Constructor for Ui.
+     *
+     * @param sys input stream.
+     */
     public Ui(InputStream sys) {
         this.sc = new Scanner(sys);
     }

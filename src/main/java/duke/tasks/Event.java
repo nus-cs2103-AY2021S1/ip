@@ -10,6 +10,11 @@ public class Event extends Task {
     private final LocalDate date;
 
 
+    /**
+     * Constructor for event.
+     *
+     * @param itemString description string.
+     */
     public Event(String itemString) {
         super(Task.getTaskString(itemString, Event.DELIMITER));
         this.dateString = Task.getDateString(itemString, Event.DELIMITER);
@@ -17,6 +22,12 @@ public class Event extends Task {
     }
 
 
+    /**
+     * Constructor for event.
+     *
+     * @param itemString description string.
+     * @param isDone     whether this task is done.
+     */
     public Event(String itemString, boolean isDone) {
         super(Task.getTaskString(itemString, Event.DELIMITER), isDone);
         this.dateString = Task.getDateString(itemString, Event.DELIMITER);

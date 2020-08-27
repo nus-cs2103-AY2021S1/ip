@@ -3,13 +3,21 @@ package duke.exceptions;
 
 public class DukeInvalidCommandException extends DukeException {
 
+    /**
+     * Constructor for DukeInvalidCommandException.
+     */
     public DukeInvalidCommandException() {
         super();
     }
 
 
-    public DukeInvalidCommandException(String errorMsg) {
-        super(errorMsg);
+    /**
+     * Constructor for DukeInvalidCommandException.
+     *
+     * @param errMsg error message.
+     */
+    public DukeInvalidCommandException(String errMsg) {
+        super(errMsg);
     }
 
 }
