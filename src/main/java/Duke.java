@@ -1,9 +1,4 @@
-
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 
@@ -11,69 +6,6 @@ import java.util.*;
 import java.util.regex.*;
 
 public class Duke {
-
-    public enum TaskType {
-        TODO("todo") {
-            @Override
-            public void addToTasks(List<Task> tasks, String taskName, String taskDate) throws DukeException {
-                if (taskName.isBlank()) {
-                    throw new NullTaskNameException("todo");
-                }
-                tasks.add(new ToDo(taskName));
-            }
-        },
-        DEADLINE("deadline") {
-            @Override
-            public void addToTasks(List<Task> tasks, String taskName, String taskDate) throws DukeException {
-                if (taskName.isBlank()) {
-                    throw new NullTaskNameException("deadline");
-                }
-                if (taskDate.isBlank()) {
-                    throw new NullTaskDateException("deadline");
-                }
-                tasks.add(new Deadline(taskName, LocalDate.parse(taskDate)));
-            }
-        },
-        EVENT("event") {
-            @Override
-            public void addToTasks(List<Task> tasks, String taskName, String taskDate) throws DukeException {
-                if (taskName.isBlank()) {
-                    throw new NullTaskNameException("event");
-                }
-                if (taskDate.isBlank()) {
-                    throw new NullTaskDateException("event");
-                }
-                tasks.add(new Event(taskName, LocalDate.parse(taskDate)));
-            }
-        };
-
-        private static final Map<String, TaskType> nameToValueMap = new HashMap<String, TaskType>();
-        private final String lowerCase;
-
-        TaskType(String lowerCase) {
-            this.lowerCase = lowerCase;
-        }
-
-        public String getLowerCase() {
-            return lowerCase;
-        }
-
-        static {
-            for (TaskType type : EnumSet.allOf(TaskType.class)) {
-                nameToValueMap.put(type.getLowerCase(), type);
-            }
-        }
-
-        public static boolean isMember(String name) {
-            return nameToValueMap.containsKey(name);
-        }
-
-        public static TaskType getTaskType(String lowerCase) {
-            return nameToValueMap.get(lowerCase);
-        }
-
-        public abstract void addToTasks(List<Task> tasks, String taskName, String taskDate) throws DukeException;
-    }
   
     public static void displayStarLine() {
         System.out.println("––––––––––––––––––––– *** –––––––––––––––––––––");

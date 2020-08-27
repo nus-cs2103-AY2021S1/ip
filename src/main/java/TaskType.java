@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.List;
@@ -13,7 +14,7 @@ public enum TaskType {
             if (taskDate.isBlank()) {
                 throw new NullTaskDateException("deadline");
             }
-            Task task = new Deadline(taskName, taskDate);
+            Task task = new Deadline(taskName, LocalDate.parse(taskDate));
             if (taskIsDone) {
                 task.markAsDone();
             }
@@ -34,7 +35,7 @@ public enum TaskType {
             if (taskDate.isBlank()) {
                 throw new NullTaskDateException("event");
             }
-            Task task = new Event(taskName, taskDate);
+            Task task = new Event(taskName, LocalDate.parse(taskDate));
             if (taskIsDone) {
                 task.markAsDone();
             }

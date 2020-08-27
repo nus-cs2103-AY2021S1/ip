@@ -11,7 +11,7 @@ public class Deadline extends Task {
 
     @Override
     public String getDate() {
-        return taskDate;
+        return taskDate.format(DateTimeFormatter.ISO_LOCAL_DATE);
     }
 
     public String toString() {
