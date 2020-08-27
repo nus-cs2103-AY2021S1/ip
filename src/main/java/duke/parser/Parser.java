@@ -46,7 +46,7 @@ public class Parser {
 
     private static Command prepareDeadline(String suffix) throws DukeException {
         try {
-            String[] suffixArray = suffix.split("/by");
+            String[] suffixArray = suffix.split("/by ");
             return new DeadlineCommand(suffixArray[0].strip(), suffixArray[1].strip());
         } catch (Exception e) {
             throw new DukeException("Ensure that deadlines have correct description.");
@@ -55,7 +55,7 @@ public class Parser {
 
     private static Command prepareEvent(String suffix) throws DukeException {
         try {
-            String[] suffixArray = suffix.split("/at");
+            String[] suffixArray = suffix.split("/at ");
             return new EventCommand(suffixArray[0].strip(), suffixArray[1].strip());
         } catch (Exception e) {
             throw new DukeException("Ensure that events have correct description.");
