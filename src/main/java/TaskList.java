@@ -65,6 +65,7 @@ public class TaskList {
                 matchingTasks.add(task);
             }
         }
+
         String printMatchingTasks;
         if (matchingTasks.size() == 0) {
             printMatchingTasks = "There are no tasks that match " + toMatch + "\n" + Ui.LINE;
