@@ -2,7 +2,6 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.File;
 
-
 public class Duke {
     protected ArrayList<Task> taskList;
     protected boolean active = false;
