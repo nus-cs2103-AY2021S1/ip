@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="3728d8fc-fab4-4e82-b5fa-18ac0395c1c1" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../main/java/META-INF/MANIFEST.MF" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="ProjectId" id="1ggd0WDEycFeA3o9eb4Sc8G2i0W" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="Downloaded.Files.Path.Enabled" value="false" />
+    <property name="Repository.Attach.Annotations" value="false" />
+    <property name="Repository.Attach.JavaDocs" value="false" />
+    <property name="Repository.Attach.Sources" value="false" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../main" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="3728d8fc-fab4-4e82-b5fa-18ac0395c1c1" name="Default Changelist" comment="" />
+      <created>1598539952169</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1598539952169</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="350" y="398" key="#com.intellij.openapi.roots.ui.configuration.libraryEditor.LibraryEditorDialog" timestamp="1598540088604">
+      <screen x="0" y="0" width="2048" height="1112" />
+    </state>
+    <state x="350" y="398" key="#com.intellij.openapi.roots.ui.configuration.libraryEditor.LibraryEditorDialog/266.1440.1536.824/0.0.2048.1112@0.0.2048.1112" timestamp="1598540088604" />
+    <state x="315" y="583" key="DetectedRootsChooserDialog" timestamp="1598540067918">
+      <screen x="0" y="0" width="2048" height="1112" />
+    </state>
+    <state x="315" y="583" key="DetectedRootsChooserDialog/266.1440.1536.824/0.0.2048.1112@0.0.2048.1112" timestamp="1598540067918" />
+    <state x="224" y="429" key="FileChooserDialogImpl" timestamp="1598540066168">
+      <screen x="0" y="0" width="2048" height="1112" />
+    </state>
+    <state x="224" y="429" key="FileChooserDialogImpl/266.1440.1536.824/0.0.2048.1112@0.0.2048.1112" timestamp="1598540066168" />
+    <state x="0" y="262" key="SettingsEditor" timestamp="1598540090706">
+      <screen x="0" y="0" width="2048" height="1112" />
+    </state>
+    <state x="0" y="262" key="SettingsEditor/266.1440.1536.824/0.0.2048.1112@0.0.2048.1112" timestamp="1598540090706" />
+    <state x="956" y="767" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD" timestamp="1598540016926">
+      <screen x="0" y="0" width="2048" height="1112" />
+    </state>
+    <state x="956" y="767" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD/266.1440.1536.824/0.0.2048.1112@0.0.2048.1112" timestamp="1598540016926" />
+    <state x="0" y="348" key="new project wizard" timestamp="1598540042478">
+      <screen x="0" y="0" width="2048" height="1112" />
+    </state>
+    <state x="0" y="348" key="new project wizard/266.1440.1536.824/0.0.2048.1112@0.0.2048.1112" timestamp="1598540042478" />
+  </component>
+</project>
