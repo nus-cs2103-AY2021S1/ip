@@ -1,11 +1,21 @@
 import java.util.Scanner;
 import java.util.ArrayList;
 
+/**
+ * Represents Duke program that executes the various commands given by the user.
+ * A Duke object consists of a Storage object, which stores the tasks in the computer,
+ * a TaskList object, which keeps track of the tasks, and a Ui object, which replies
+ * the user accordingly.
+ */
 public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Instantiates a Duke object and loads the tasks stored in the computer, if any.
+     * @param filePath The filePath of the file which stores the data.
+     */
     public Duke(String filePath) {
         ui =  new Ui();
         try {
@@ -19,6 +29,10 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs the Duke program by receiving the user commands and executing the corresponding
+     * steps accordingly.
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;
@@ -37,6 +51,10 @@ public class Duke {
         }
     }
 
+    /**
+     * Instantiates a Duke object and runs the program.
+     * @param args An array of strings.
+     */
     public static void main(String[] args) {
         new Duke("data/duke.txt").run();
     }

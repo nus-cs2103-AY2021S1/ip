@@ -2,11 +2,21 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Represents a deadline task that has a specific deadline.
+ * A Deadline object is made up of the task name, as well as a date and time of the deadline.
+ */
 public class Deadline extends Task {
     protected LocalDateTime by;
     private String originalFormat;
     private String printedFormat;
 
+    /**
+     * Instantiates a Deadline object if the input was written in the correct format.
+     * @param taskName The description of the task.
+     * @param date The date and time of the deadline.
+     * @throws DukeException If the deadline is not specified in the correct format.
+     */
     public Deadline(String taskName, String date) throws DukeException {
         super(taskName);
         try {
@@ -23,11 +33,19 @@ public class Deadline extends Task {
         }
     }
 
+    /**
+     * Returns the string representation of the deadline task in the format to be saved in the computer.
+     * @return String representation of the task.
+     */
     @Override
     public String toTaskData() {
         return "D" + " ; " + super.toTaskData() + " ; " + originalFormat;
     }
 
+    /**
+     * Returns the string representation of the deadline task.
+     * @return String representation of the deadline task.
+     */
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + printedFormat + ")";

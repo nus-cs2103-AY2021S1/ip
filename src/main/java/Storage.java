@@ -5,14 +5,28 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Represents the storing of the tasks in the user's computer. The Storage class
+ * deals with loading tasks from the file and saving tasks in the file.
+ */
 public class Storage {
     private String filePath;
 
+    /**
+     * Instantiates a Storage object.
+     * @param filePath The filePath of the file which stores the data.
+     * @throws DukeException If the file to store the data is unable to be created.
+     */
     public Storage(String filePath) throws DukeException {
         this.filePath = filePath;
         createFileIfAbsent(filePath);
     }
 
+    /**
+     * Creates a file to store the data if it does not already exist on the user computer.
+     * @param filePath The filePath of the file which stores the data.
+     * @throws DukeException If the file to store the data is unable to be created.
+     */
     public static void createFileIfAbsent(String filePath) throws DukeException {
         File f = new File(filePath);
 
@@ -28,6 +42,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads the list of tasks saved in the user's computer.
+     * @return Arraylist of tasks.
+     * @throws DukeException If saved list of tasks cannot be loaded.
+     */
     public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> tasks = new ArrayList<>();
         File f = new File(filePath);
@@ -61,6 +80,11 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Updates the list of tasks stored in the users data when a change is made.
+     * @param tasks The up-to-date list of tasks.
+     * @throws DukeException If saved list of tasks cannot be loaded.
+     */
     public void updateData(TaskList tasks) throws DukeException {
         try {
             String data = "";
