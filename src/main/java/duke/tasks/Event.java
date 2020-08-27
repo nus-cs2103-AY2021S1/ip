@@ -1,5 +1,6 @@
+package duke.tasks;
+
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 public class Event extends TaskDDL {
 

@@ -1,3 +1,11 @@
+package duke;
+
+import duke.commands.Commands;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.Todo;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
@@ -110,7 +118,7 @@ public class TaskList {
 
     private LocalDate validateDateTime(String time) throws DukeException {
         if (time.equals("")) {
-            throw new DukeException("Task date cannot be empty.");
+            throw new DukeException("duke.tasks.Task date cannot be empty.");
         }
         LocalDate parsed;
         try {

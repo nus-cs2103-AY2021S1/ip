@@ -1,3 +1,7 @@
+package duke;
+
+import duke.tasks.Task;
+
 import java.util.Scanner;
 
 public class UI {
@@ -12,7 +16,7 @@ public class UI {
     }
 
     public void welcome() {
-        writeOutput("Hello! I'm Duke", "What can I do for you?");
+        writeOutput("Hello! I'm duke.Duke", "What can I do for you?");
     }
 
     public void writeAdd(Task task, int size) {

@@ -1,3 +1,7 @@
+package duke;
+
+import duke.commands.Commands;
+
 public class Parser {
 
     TaskList taskList;
@@ -35,21 +39,21 @@ public class Parser {
                 ui.writeAdd(taskList.addTask(inputSplit[1], true), taskList.getSize());
             } else if (Commands.DONE.check(inputSplit[0])) {
                 if (inputSplit.length < 2) {
-                    throw new DukeException("Task number cannot be empty");
+                    throw new DukeException("duke.tasks.Task number cannot be empty");
                 }
                 try {
                     ui.writeDone(taskList.markDone(Integer.parseInt(inputSplit[1])));
                 } catch (NumberFormatException ex) {
-                    throw new DukeException("Task number must be a valid integer");
+                    throw new DukeException("duke.tasks.Task number must be a valid integer");
                 }
             } else if (Commands.DELETE.check(inputSplit[0])) {
                 if (inputSplit.length < 2) {
-                    throw new DukeException("Task number cannot be empty");
+                    throw new DukeException("duke.tasks.Task number cannot be empty");
                 }
                 try {
                     ui.writeDelete(taskList.deleteTask(Integer.parseInt(inputSplit[1])), taskList.getSize());
                 } catch (NumberFormatException ex) {
-                    throw new DukeException("Task number must be a valid integer");
+                    throw new DukeException("duke.tasks.Task number must be a valid integer");
                 }
             } else {
                 throw new DukeException("I'm sorry, but I don't know what that means :(");
