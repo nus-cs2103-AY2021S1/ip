@@ -6,6 +6,9 @@ import duke.task.Task;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents a command for finding tasks with the given time constraint.
+ */
 public class HappenCommand extends Command {
     /**
      * Creates a command for filtering tasks on when it happens.
