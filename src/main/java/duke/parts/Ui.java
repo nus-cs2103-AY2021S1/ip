@@ -39,7 +39,7 @@ public class Ui {
         ArrayList<Task> arrTask = storage.load();
         printNumTask(arrTask.size());
         System.out.println(INDENT + "Here are the tasks in your list:");
-        for(int i = 0; i < arrTask.size(); i++) {
+        for (int i = 0; i < arrTask.size(); i++) {
             System.out.println(String.format("%s%d. %s",INDENT,  i + 1, arrTask.get(i).getOutput()));
         }
     }
