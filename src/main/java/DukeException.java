@@ -17,7 +17,9 @@ public class DukeException extends Exception {
                 : errorType.equals("invalidEventDateTime")
                 ? "☹ OOPS!!! The event datetime should be in a valid 'YYYY-MM-DD HH:MM to YYYY-MM-DD HH:MM' format."
                 : errorType.equals("invalidDelete")
-                ? "☹ OOPS!!! Command to delete a task done is formatted wrongly."
+                ? "☹ OOPS!!! Command to delete a task is formatted wrongly."
+                : errorType.equals("invalidFind")
+                ? "☹ OOPS!!! Command to find a task is formatted wrongly."
                 : "Unknown error. Try something else.";
         System.out.println(errorMessage);
     }

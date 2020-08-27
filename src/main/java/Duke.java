@@ -36,6 +36,9 @@ public class Duke {
                 case "delete":
                     tasks.delete(command);
                     break;
+                case "find":
+                    tasks.find(command);
+                    break;
                 default:
                     tasks.defaultError();
                 }
