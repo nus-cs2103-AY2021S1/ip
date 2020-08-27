@@ -6,6 +6,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
+/**
+ * Deals with loading and saving tasks from file.
+ */
 public class Storage {
 
     /** Variable to store file path for I/O. */
@@ -20,6 +23,13 @@ public class Storage {
         this.filePath = filePath;
     }
 
+    /**
+     * Loads existing file.
+     *
+     * @return A list of list of strings, outer list for many lines in file;
+     * inner list is one line in file, split by delimiter
+     * @throws DukeException When IO error occurs.
+     */
     public ArrayList<ArrayList<String>> load() throws DukeException {
         File f = new File(this.filePath);
         f.getParentFile().mkdirs();
