@@ -40,8 +40,14 @@ public class Duke {
         while (inputSc.hasNextLine()) {
             input = inputSc.nextLine();
             String[] splitted = input.split(" ", 2);
-            Commands command = parser.processCommand(splitted, parser);
-            
+            Commands command;
+            try {
+                command = parser.processCommand(splitted);
+            } catch (DukeErrorException ex) {
+                System.out.println(ex);
+                continue;
+            }
+
             if (command.equals(Commands.BYE)) {
                 storage.writeFile(list);
                 break;
@@ -101,5 +107,5 @@ public class Duke {
         list.set(index, list.get(index).completeTask());
         ui.printDone(list, index);
     }
-    
+
 }

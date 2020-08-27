@@ -24,7 +24,7 @@ public class TaskList {
         if (deadline[0].equals("")) {
             throw new InvalidDeadlineException("☹ Task description must be specified.");
         }
-        if (deadline[1].equals("")) {
+        if (deadline.length == 1) {
             throw new InvalidDeadlineException("☹ Task deadline must be specified.");
         }
         String description = deadline[0].trim();
@@ -52,7 +52,7 @@ public class TaskList {
         if (event[0].equals("")) {
             throw new InvalidEventException("☹ Event description must be specified.");
         }
-        if (event[1].equals("")) {
+        if (event.length == 1) {
             throw new InvalidEventException("☹ Event time must be specified.");
         }
         String description = event[0].trim();

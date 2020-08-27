@@ -1,10 +1,12 @@
 package duke;
 
+import exception.DukeErrorException;
 import exception.UnknownCommandException;
 
 public class Parser {
 
-    public void processInput(Commands cmd) throws UnknownCommandException {
+    public static Commands processInput(String commandString) throws UnknownCommandException {
+        Commands cmd = Commands.valueOf(commandString);
         if (!cmd.equals(Commands.BYE) &&
                 !cmd.equals(Commands.EVENT) &&
                 !cmd.equals(Commands.DEADLINE) &&
@@ -14,17 +16,18 @@ public class Parser {
                 !cmd.equals(Commands.DELETE)) {
             throw new UnknownCommandException();
         }
+        return cmd;
     }
 
-    public Commands processCommand(String[] splitted, Parser parser) {
+    public static Commands processCommand(String[] splitted) throws DukeErrorException {
         try {
-            Commands command = Commands.valueOf(splitted[0].toUpperCase());
-            parser.processInput(command);
+            Commands command = processInput(splitted[0].toUpperCase());
 
             return command;
         } catch (IllegalArgumentException | UnknownCommandException ex) {
             System.out.println(ex);
         }
-        return null;
+
+        throw new DukeErrorException("Invalid Input Format!");
     }
 }

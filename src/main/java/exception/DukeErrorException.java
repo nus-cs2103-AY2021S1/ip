@@ -8,6 +8,6 @@ public class DukeErrorException extends Exception {
 
     @Override
     public String getMessage() {
-        return "  Invalid use of Duke Chatbot!\n" + super.getMessage();
+        return "Invalid use of Duke Chatbot: " + super.getMessage();
     }
 }
