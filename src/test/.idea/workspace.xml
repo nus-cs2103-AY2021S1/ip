@@ -20,7 +20,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3728d8fc-fab4-4e82-b5fa-18ac0395c1c1" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../main/java/META-INF/MANIFEST.MF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../main/java/duke/Duke.java" beforeDir="false" afterPath="$PROJECT_DIR$/../main/java/duke/Duke.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../main/java/duke/Storage.java" beforeDir="false" afterPath="$PROJECT_DIR$/../main/java/duke/Storage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../main/java/duke/TaskList.java" beforeDir="false" afterPath="$PROJECT_DIR$/../main/java/duke/TaskList.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../main/java/duke/Ui.java" beforeDir="false" afterPath="$PROJECT_DIR$/../main/java/duke/Ui.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

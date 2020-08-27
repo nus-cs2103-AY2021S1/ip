@@ -8,8 +8,8 @@ import java.util.Scanner;
 
 public class Duke {
 
-    TaskList taskList = new TaskList();
-    Ui ui = new Ui(taskList);
+    protected TaskList taskList = new TaskList();
+    protected Ui ui = new Ui(taskList);
 
     public void activate() {
         Scanner sc = new Scanner(System.in);

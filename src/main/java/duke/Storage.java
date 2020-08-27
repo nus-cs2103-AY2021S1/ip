@@ -8,9 +8,9 @@ import java.util.List;
 
 public class Storage {
 
-    List<Task> tasks = new ArrayList<>();
-    File dataFolder = new File("./data");
-    File data = new File("./data/duke.txt");
+    protected List<Task> tasks = new ArrayList<>();
+    protected File dataFolder = new File("./data");
+    protected File data = new File("./data/duke.txt");
 
     public Storage() {
         if (!dataFolder.exists()) dataFolder.mkdir();
