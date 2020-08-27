@@ -12,11 +12,11 @@ import java.time.format.DateTimeFormatter;
 public class Parser {
 
     /** Format for date and time used when user inputs a task */
-    private static final DateTimeFormatter inputDateTimeFormat
+    private static final DateTimeFormatter INPUT_DATE_TIME_FORMAT
             = DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm");
 
     /** Format for date and time used when Duke saves a task list */
-    private static final DateTimeFormatter savedDateTimeFormat
+    private static final DateTimeFormatter SAVED_DATE_TIME_FORMAT
             = DateTimeFormatter.ofPattern("MMM dd yyyy h:mm a");
 
     /**
@@ -37,15 +37,12 @@ public class Parser {
         switch (type) {
         case "T":
             return new Todo(description, isDone);
-
         case "D":
-            LocalDateTime by = LocalDateTime.parse(splitTask[3], savedDateTimeFormat);
+            LocalDateTime by = LocalDateTime.parse(splitTask[3], SAVED_DATE_TIME_FORMAT);
             return new Deadline(description, isDone, by.toLocalDate(), by.toLocalTime());
-
         case "E":
-            LocalDateTime at = LocalDateTime.parse(splitTask[3], savedDateTimeFormat);
+            LocalDateTime at = LocalDateTime.parse(splitTask[3], SAVED_DATE_TIME_FORMAT);
             return new Event(description, isDone, at.toLocalDate(), at.toLocalTime());
-
         default:
             throw new DukeException("Unable to read task.");
         }
@@ -67,31 +64,24 @@ public class Parser {
             switch (type) {
             case "list":
                 return new ListCommand();
-
             case "bye":
                 return new ExitCommand();
-
             case "todo":
                 return new AddCommand(new Todo(splitCommand[1]));
-
             case "deadline":
                 String[] splitDeadline = splitCommand[1].split("/by");
                 String deadlineDescription = splitDeadline[0].trim();
-                LocalDateTime by = LocalDateTime.parse(splitDeadline[1].trim(), inputDateTimeFormat);
+                LocalDateTime by = LocalDateTime.parse(splitDeadline[1].trim(), INPUT_DATE_TIME_FORMAT);
                 return new AddCommand(new Deadline(deadlineDescription, by.toLocalDate(), by.toLocalTime()));
-
             case "event":
                 String[] splitEvent = splitCommand[1].split("/at");
                 String eventDescription = splitEvent[0].trim();
-                LocalDateTime at = LocalDateTime.parse(splitEvent[1].trim(), inputDateTimeFormat);
+                LocalDateTime at = LocalDateTime.parse(splitEvent[1].trim(), INPUT_DATE_TIME_FORMAT);
                 return new AddCommand(new Event(eventDescription, at.toLocalDate(), at.toLocalTime()));
-
             case "done":
                 return new DoneCommand(Integer.parseInt(splitCommand[1]));
-
             case "delete":
                 return new DeleteCommand(Integer.parseInt(splitCommand[1]));
-
             default:
                 throw new DukeException("Unknown command type.");
             }
