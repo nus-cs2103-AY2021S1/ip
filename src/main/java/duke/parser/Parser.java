@@ -166,7 +166,7 @@ public class Parser {
     }
 
     /**
-     * Making sense of the user's input and outputting the relevant commands to the input.
+     * Making sense of the user's input and outputting the relevant commands to the input. 
      * 
      * @param s The inputted user's command.
      * @return A command object that executes the user's command.
