@@ -10,12 +10,19 @@ public class Duke {
     private Storage storage;
     private TaskList taskList;
 
+    /**
+     * Constructor for Duke class.
+     * @param filePath Path for the Duke save file.
+     */
     public Duke(String filePath) {
         //storage = new Storage(filePath);
         taskList = Storage.loadTasks(FILEPATH);
         ui = new Ui();
     }
 
+    /**
+     * Method to run the Duke program.
+     */
     public void run() {
         Ui.printWelcome();
         while(true){
@@ -90,6 +97,10 @@ public class Duke {
         }
     }
 
+    /**
+     * Main method.
+     * @param args List of arguments.
+     */
     public static void main(String[] args) {
         new Duke(FILEPATH).run();
     }
