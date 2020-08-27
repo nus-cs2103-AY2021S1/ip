@@ -11,12 +11,22 @@ import java.util.Date;
 import java.util.Scanner;
 import java.util.List;
 
-
+/**
+ * Represents a task managing system.
+ * It makes use of different components to display UI,
+ * keep track of tasks and manage the storage of data.
+ */
 public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Creates an instance of Duke.
+     * It initialises the UI, creates a storage based on the filepath
+     * and initialises the existing tasks.
+     * @param filePath The location where the task data is stored
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -28,6 +38,12 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs the task management program.
+     * It allows the user to input commands and executes
+     * the commands accordingly, until the user chooses to
+     * exit the program.
+     */
     public void run() {
         ui.displayWelcome();
         Scanner sc = new Scanner(System.in);
@@ -84,6 +100,10 @@ public class Duke {
         }
     }
 
+    /**
+     * Allows user to start running the program.
+     * @param args Command line arguments which are not used for this program
+     */
     public static void main(String[] args) {
         new Duke("data/tasks.txt").run();
     }

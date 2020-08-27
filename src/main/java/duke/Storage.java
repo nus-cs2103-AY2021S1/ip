@@ -12,14 +12,31 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Represents a storage system responsible for loading existing tasks
+ * when user starts up the program and saving all the tasks on hard drive
+ * when user exits the program.
+ */
 public class Storage {
     private final String filePath;
     private final ArrayList<Task> taskList = new ArrayList<>();
 
+    /**
+     * Creates an instance of storage with the file location of
+     * where the tasks are stored.
+     * @param filePath the file location where the tasks are stored on hard drive
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Loads up all the existing tasks on hard drive and returns them
+     * in the form of a list.
+     * @return a list of existing tasks on hard drive
+     * @throws IOException If there are errors reading the storage file.
+     * @throws DateException If the date of tasks in the file are of the wrong format.
+     */
     public List<Task> load() throws IOException, DateException {
 
         File dataFile = new File(this.filePath);
@@ -37,6 +54,12 @@ public class Storage {
         return this.taskList;
     }
 
+    /**
+     * Saves all the tasks into hard drive when user exists the program so
+     * that they can be loaded again when the user runs the program again.
+     * @param taskList the current list of tasks
+     * @throws IOException If there are errors writing tasks to the storage file.
+     */
     public void saveData(List<Task> taskList) throws IOException {
 
         File dataFile = new File(this.filePath);
@@ -56,6 +79,11 @@ public class Storage {
 
     }
 
+    /**
+     * Formats the task into an understandable string to be stored on hard drive.
+     * @param task the task that needs to be converted to string format
+     * @return the string format of input task
+     */
     private String formatTask(Task task) {
         String name = task.getName();
         int isComplete = task.getStatus() ? 1 : 0;
@@ -75,6 +103,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Takes the string stored in hard drive and converts it back to
+     * a task object, before adding it to the existing list of tasks.
+     * @param line the string format of task
+     * @throws DateException If the date of tasks stored in hard drive is of the wrong format.
+     */
     private void loadTask(String line) throws DateException {
         String[] taskComponent = line.split("\\|");
         boolean isComplete = !taskComponent[1].equals("0");
