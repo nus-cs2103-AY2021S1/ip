@@ -24,14 +24,9 @@ public class Duke {
                     storage.save(tasks);
                     Ui.exitMessage();
                     break;
-                }
-
-                // Querying items
-                else if (echo.matches("(?i)list\\s*")) {
+                } else if (echo.matches("(?i)list\\s*")) { // Querying items
                     Ui.printList(tasks.printTodoList());
-                }
-
-                else if (echo.matches("(?i)find\\s+\\S+")) {
+                } else if (echo.matches("(?i)find\\s+\\S+")) {
                     TaskList res = new TaskList();
                     String toSearch = echo.replaceFirst("find\\s+", "");
 //                    System.out.println(toSearch);
@@ -42,22 +37,13 @@ public class Duke {
                         }
                     }
                     System.out.println(res);
-                }
-
-                // Checks if it matches done and an integer
-                else if (echo.matches("(?i)done.*")) {
+                } else if (echo.matches("(?i)done.*")) {  // Checks if it matches done and an integer
                     int index = parser.parseDone(echo, tasks.length());
                     Ui.printDone(tasks.markAsDone(index));
-                }
-
-                // Checks if it matches done and an integer
-                else if (echo.matches("(?i)delete.*")) {
+                } else if (echo.matches("(?i)delete.*")) { // Checks if it matches delete and an integer
                     int index = parser.parseDelete(echo, tasks.length());
                     Ui.printDelete(tasks.delete(index));
-                }
-
-                // Add items
-                else {
+                } else { // Add items
                     Task task = parser.parseAdd(echo);
                     Ui.printAdd(tasks.add(task));
                 }
