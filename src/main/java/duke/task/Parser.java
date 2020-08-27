@@ -16,7 +16,7 @@ public class Parser {
             }
 
             if (command.equals("list")) {
-                if(tasks.length() > 0) {
+                if (tasks.length() > 0) {
                     ui.showTaskList(tasks);
                 } else {
                     throw new YooException("You have no tasks!");
@@ -42,7 +42,7 @@ public class Parser {
                     throw new YooException("Sorry, I didn't get that (\u3063*\u00B4\u25A1`)\u3063");
                 }
             }
-        } catch (IndexOutOfBoundsException e){
+        } catch (IndexOutOfBoundsException e) {
             throw new YooException("Please add a task description (>_<)");
         }
         return false;

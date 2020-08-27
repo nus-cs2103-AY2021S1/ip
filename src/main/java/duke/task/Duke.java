@@ -15,7 +15,7 @@ public class Duke {
     public void run() {
         ui.showWelcome();
         boolean isExit = false;
-        while(!isExit) {
+        while (!isExit) {
             try {
                 String command = ui.readCommand();
                 isExit = Parser.parse(command, tasks, ui, storage);

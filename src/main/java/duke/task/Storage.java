@@ -27,7 +27,6 @@ public class Storage {
                 if (duke.exists()) {
                     FileReader fr = new FileReader(duke);
                     BufferedReader br = new BufferedReader(fr);
-                    StringBuffer sb = new StringBuffer();
                     String line;
                     while ((line = br.readLine()) != null) {
                         String temp[] = line.split(" // ", 4);
@@ -51,20 +50,20 @@ public class Storage {
     private static void addTaskToArrayList(String[] temp, ArrayList<Task> al) {
         boolean isDone = Integer.parseInt(temp[1]) == 1;
         switch (temp[0]) {
-            case "T":
-                Todo td = new Todo(temp[2], isDone);
-                al.add(td);
-                break;
-            case "D":
-                LocalDate dldate = LocalDate.parse(temp[3]);
-                Deadline dl = new Deadline(temp[2], isDone, dldate);
-                al.add(dl);
-                break;
-            case "E":
-                LocalDate edate = LocalDate.parse(temp[3]);
-                Event e = new Event(temp[2], isDone, edate);
-                al.add(e);
-                break;
+        case "T":
+            Todo td = new Todo(temp[2], isDone);
+            al.add(td);
+            break;
+        case "D":
+            LocalDate dlDate = LocalDate.parse(temp[3]);
+            Deadline dl = new Deadline(temp[2], isDone, dlDate);
+            al.add(dl);
+            break;
+        case "E":
+            LocalDate eDate = LocalDate.parse(temp[3]);
+            Event e = new Event(temp[2], isDone, eDate);
+            al.add(e);
+            break;
         }
     }
 
@@ -78,21 +77,21 @@ public class Storage {
                 int isDone = t.isDone ? 1 : 0;
 
                 switch (t.getClass().getName()) {
-                    case "Todo":
-                        fw.write("T // " + isDone + " // " + t.description + " // \n");
-                        break;
-                    case "Deadline":
-                        Deadline dl = (Deadline) t;
-                        fw.write("D // " + isDone + " // " + dl.description + " // " + dl.by + "\n");
-                        break;
-                    case "Event":
-                        Event e = (Event) t;
-                        fw.write("E // " + isDone + " // " + e.description + " // " + e.at + "\n");
-                        break;
+                case "Todo":
+                    fw.write("T // " + isDone + " // " + t.description + " // \n");
+                    break;
+                case "Deadline":
+                    Deadline dl = (Deadline) t;
+                    fw.write("D // " + isDone + " // " + dl.description + " // " + dl.by + "\n");
+                    break;
+                case "Event":
+                    Event e = (Event) t;
+                    fw.write("E // " + isDone + " // " + e.description + " // " + e.at + "\n");
+                    break;
                 }
             }
             fw.close();
-        } catch (IOException e){
+        } catch (IOException e) {
             throw new YooException("File not found!");
         }
     }
