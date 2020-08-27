@@ -23,8 +23,11 @@ public class Ui {
         System.out.println(error);
     }
 
-    public void showList() {
+    public void showList(TaskList taskList) {
         System.out.println("Estas son las tareas de su lista:");
+        for (int i = 0; i < taskList.getTaskList().size(); i++) {
+            System.out.println((i + 1) + ". " + taskList.getTaskList().get(i).toString());
+        }
     }
 
     public void showAdded(Task task) {

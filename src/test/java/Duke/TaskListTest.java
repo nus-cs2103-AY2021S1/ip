@@ -11,8 +11,15 @@ import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+/**
+ * Tests if the TaskList is correctly implemented.
+ * @author Joshua
+ */
 public class TaskListTest {
 
+    /**
+     * Tests if the tasks can be saved into the TaskList and returned in the same format.
+     */
     @Test
     public void testTaskList() {
         Event unfinishedEvent = new Event("return book ");

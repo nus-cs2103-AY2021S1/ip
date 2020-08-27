@@ -7,12 +7,19 @@ import java.time.LocalDateTime;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+/**
+ * Tests if the Event Task is correctly implemented.
+ * @author Joshua
+ */
 public class EventTest {
 
     LocalDateTime dateTime = LocalDateTime.parse("2020-02-20T23:59");
     Event unfinishedEvent = new Event("return book ");
     Event doneEvent = new Event("return 2 books ");
 
+    /**
+     * Tests if the Event is saved and loaded in the correct format.
+     */
     @Test
     public void testSaveFormat() {
         unfinishedEvent.setTime(dateTime);
@@ -22,6 +29,9 @@ public class EventTest {
         assertEquals("[E] [✓]return 2 books at:20/02/2020 2359", doneEvent.saveFormat());
     }
 
+    /**
+     * Tests if the display format of the Event is correctly implemented.
+     */
     @Test
     public void testToString() {
         unfinishedEvent.setTime(dateTime);
