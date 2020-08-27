@@ -1,14 +1,14 @@
 /**
- * The Parser class deals with making sense of the user command
+ * Represents a parser that is able to make sense of the user input commands.
  */
 public class Parser {
 
     /**
      * Parses a String command into actual commands that PandaBot can perform.
      * 
-     * @param input
-     * @return
-     * @throws PandaBotException
+     * @param input the input command to be parsed
+     * @return a Command that the program understands
+     * @throws PandaBotException If the input cannot be understood or is invalid 
      */
     public static Command parse(String input) throws PandaBotException{
         String[] cmd = input.split(" ", 2); // obtain first word and the rest of the string

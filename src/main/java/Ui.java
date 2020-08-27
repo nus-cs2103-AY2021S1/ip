@@ -1,6 +1,7 @@
 import java.util.Scanner;
+
 /**
- *  The Ui class prints messages to interact with the user.
+ *  Represents the user interface which prints messages to interact with the user.
  */
 public class Ui {
     private Scanner scanner;
@@ -26,20 +27,29 @@ public class Ui {
 
         System.out.println(logo + "Hello! I'm PandaBot.\n" + "What can I do for you?\n");
     }
-    
+
+    /**
+     * Prints a horizontal line.
+     */
     public void printLine() {
         System.out.println(" ___________________________________________________");
     }
-    
+
+    /**
+     * Returns a String representation of the user input.
+     * 
+     * @return a String representation of the user input
+     */
     public String readCmd() {
         return scanner.nextLine();
     }
-    
-    public boolean hasNextCmd() {
-        return scanner.hasNextLine();
-    }
 
-    public void showError(String message) {
+    /**
+     * Prints an error message.
+     * 
+     * @param message the error message to be printed
+     */
+    public void printError(String message) {
         System.out.println(message);
     }
 
@@ -54,7 +64,8 @@ public class Ui {
 
     /**
      * Prints the entire list of tasks.
-     * @param tasks
+     * 
+     * @param tasks the TaskList to be printed
      */
     public void printOnList(TaskList tasks) {
         int len = tasks.size();
@@ -76,7 +87,8 @@ public class Ui {
 
     /**
      * Prints the done message.
-     * @param task
+     * 
+     * @param task the task that is done
      */
     public void printOnDone(Task task) {
         System.out.println("Great! I've marked this task as done:");
@@ -85,44 +97,26 @@ public class Ui {
 
     /**
      * Prints the delete message.
-     * @param task
-     * @param tasks
+     * 
+     * @param task the Task to be deleted
+     * @param numOfTasks the number of tasks in the list
      */
-    public void printOnDelete(Task task, TaskList tasks) {
+    public void printOnDelete(Task task, int numOfTasks) {
         System.out.println("Will do! I've removed this task:");
         System.out.println(task);
-        System.out.println("Now you have " + tasks.size() + " tasks in this list.");
+        System.out.println("Now you have " + numOfTasks + " task(s) in this list.");
     }
 
     /**
      * Prints the add task message.
-     * @param task
-     * @param tasks
+     * 
+     * @param task the Task to be printed
+     * @param numOfTasks the number of tasks in the list
      */
-    public void printOnAddTask(Task task, TaskList tasks) {
+    public void printOnAddTask(Task task, int numOfTasks) {
         System.out.println("Noted! I've added this task: ");
         System.out.println(task);
-        System.out.println("Now you have " + tasks.size() + " tasks in this list.");
+        System.out.println("Now you have " + numOfTasks + " task(s) in this list.");
     }
-<<<<<<< Updated upstream
-=======
-
-    /**
-     * Prints the find matching tasks message.
-     * @param tasks
-     */
-    public void printOnFind(TaskList tasks) {
-        System.out.println("Here are the matching tasks: ");
-        int i = 0;
-        for (Task t : tasks.getTaskList()) {
-            if (t != null) {
-                System.out.println((i + 1) + ". " + t.toString());
-                i++;
-            } else {
-                break;
-            }
-        }   
-    }
->>>>>>> Stashed changes
     
 }

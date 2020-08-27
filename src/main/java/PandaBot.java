@@ -1,5 +1,5 @@
 /**
- * The PandaBot class runs the main
+ * Runs the main program.
  */
 public class PandaBot {
     private Ui ui;
@@ -8,7 +8,7 @@ public class PandaBot {
 
     /**
      * Creates a new PandaBot object.
-     * @param fileName
+     * @param fileName the file name of the save file
      */
     public PandaBot(String fileName) {
         ui = new Ui();
@@ -16,10 +16,6 @@ public class PandaBot {
         tasks = new TaskList(storage.load());
     }
     
-    public static void main(String[] args) {
-        new PandaBot("PandaBot_Save.txt").run();
-    }
-
     /**
      * Runs the PandaBot program.
      */
@@ -36,11 +32,20 @@ public class PandaBot {
                 c.execute(tasks, ui, storage);
                 isExit = c.isExit();
             } catch (PandaBotException e) {
-                ui.showError(e.getMessage());
+                ui.printError(e.getMessage());
             } finally {
                 ui.printLine();
             }
         }
     }
-        
+
+    /**
+     * Executes the PandaBot program.
+     * @param args command line arguments
+     */
+    public static void main(String[] args) {
+        new PandaBot("PandaBot_Save.txt").run();
+    }
+
+
 }
