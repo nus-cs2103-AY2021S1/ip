@@ -19,4 +19,9 @@ public class Todo extends Task {
         return this.type;
     }
 
+    @Override
+    public String toString() {
+        return super.toString();
+    }
+
 }

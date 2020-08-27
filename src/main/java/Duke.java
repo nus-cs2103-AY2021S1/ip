@@ -7,40 +7,32 @@ import java.util.Scanner;
 
 public class Duke {
 
-    public static Storage storage;
+    public Storage storage;
+    public TaskList taskList;
+    public Ui ui;
+    public static final String BYE = "bye";
 
-    public static void main(String[] args) throws DukeException {
-
-        Path location = Path.of("duke.txt");
-        storage = new Storage(location);
+    public Duke(String filePath) {
+        ui = new Ui();
+        storage = new Storage(Path.of(filePath));
         try {
-            ArrayList<Task> tskList = storage.showTasks();
-
-            if (tskList.size() != 0) {
-                for (Task tsk : tskList) {
-                    String timestamp = tsk.getTime() == null ? "-" : tsk.getTime().toString();
-                    String entry = tsk.getType() + " | " +
-                            tsk.getStatus() + " | " +
-                            tsk.getDescription() + " | " +
-                            timestamp;
-                    System.out.println(entry);
-                }
-            }
+            taskList = new TaskList(storage.showTasks());
         } catch (DukeException e) {
-            System.out.println(e.getMessage());
+            ui.showLoadingError();
             System.exit(0);
         }
+    }
 
-        System.out.println("Wazzup! I am Duke the Nuke \uD83D\uDE08\n"
-                + "What do you want?");
+    public void run() throws DukeException {
 
-        Scanner sc = new Scanner(System.in);
-        String terminate = "bye";
-        String input;
+        ui.welcome();
+
         ArrayList<Task> tasks = new ArrayList<>();
+        String input;
 
-        while (!(input = sc.nextLine()).equals(terminate)) {
+        while (!(input = ui.readInput()).equals(BYE)) {
 
+            String parsedInput = Parser.parse(input);
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d MMM yyyy");
             String trimmed = input.trim();
             String first = trimmed.split(" ")[0].trim(); // checking the first word
@@ -52,7 +44,7 @@ public class Duke {
                 case "done":
                     int id = Integer.parseInt(last) - 1;
 
-                    System.out.println("Nice! I've marked this task as done:");
+                    ui.doneTask();
                     String changed = tasks.get(id).getDescription();
                     String type = tasks.get(id).getType();
                     System.out.println("[" + type + "][" + "\u2713" + "]" + changed);
@@ -62,12 +54,13 @@ public class Duke {
 
                     break;
                 case "todo":
+
                     try {
                         Todo todo = Todo.makeToDo(last, false);
                         tasks.add(todo);
-                        System.out.println("Got it. I've added this task:");
-                        System.out.println("[T][" + "\u2718" + "] " + last);
-                        System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+                        ui.addTask();
+                        ui.printMessage(todo.toString());
+                        ui.showNumberOfTasks(tasks);
                         storage.saveTasks(tasks);
                     } catch (DukeException e) {
                         System.err.println(e.getMessage());
@@ -82,9 +75,9 @@ public class Duke {
                     Deadline work = new Deadline(job + " (by: " + formatter.format(date) + ")", false, date);
                     tasks.add(work);
                     storage.saveTasks(tasks);
-                    System.out.println("Got it. I've added this task:");
-                    System.out.println("[D][" + "\u2718" + "] " + work.getDescription());
-                    System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+                    ui.addTask();
+                    ui.printMessage(work.toString());
+                    ui.showNumberOfTasks(tasks);
 
                     break;
                 }
@@ -96,22 +89,22 @@ public class Duke {
                     Event work = new Event(job + " (at: " + formatter.format(date) + ")", false, date);
                     tasks.add(work);
                     storage.saveTasks(tasks);
-                    System.out.println("Got it. I've added this task:");
-                    System.out.println("[E][" + "\u2718" + "] " + work.getDescription());
-                    System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+                    ui.addTask();
+                    ui.printMessage(work.toString());
+                    ui.showNumberOfTasks(tasks);
 
                     break;
                 }
                 case "delete": {
                     int index = Integer.parseInt(last) - 1;
-                    System.out.println("Noted. I've removed this task:");
+                    ui.removeTask();
                     String deleted = tasks.get(index).getDescription();
                     String deletedType = tasks.get(index).getType();
                     String status = tasks.get(index).getStatusIcon();
                     System.out.println("[" + deletedType + "][" + status + "] " + deleted);
                     tasks.remove(index);
                     storage.saveTasks(tasks);
-                    System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+                    ui.showNumberOfTasks(tasks);
 
                     break;
 
@@ -119,20 +112,27 @@ public class Duke {
                 case "list":
                     Iterator<Task> iter = tasks.iterator();
                     int index = 1;
-                    System.out.println("Here are the tasks in your list:");
+                    ui.showList();
                     while (iter.hasNext()) {
                         Task currentTask = iter.next();
                         String next = currentTask.getDescription();
                         System.out.println(index + "." + "[" + currentTask.getType() + "][" + currentTask.getStatusIcon() + "] " + next);
                         index++;
                     }
+
                     break;
                 default:
-                    System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+
+                    ui.invalidInput();
+
                     break;
             }
         }
 
-        System.out.println("Sayonara!");
+        ui.exit();
+    }
+
+    public static void main(String[] args) throws DukeException {
+        new Duke("duke.txt").run();
     }
 }
