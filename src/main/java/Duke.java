@@ -1,13 +1,10 @@
 import java.io.IOException;
 import java.util.*;
-<<<<<<< HEAD
 import java.io.File;
 import java.io.FileWriter;
 import java.io.FileNotFoundException;
-=======
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
->>>>>>> branch-Level-8
 
 public class Duke {
     public static void main(String[] args) {
