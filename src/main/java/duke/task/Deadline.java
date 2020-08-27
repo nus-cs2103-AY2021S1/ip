@@ -1,4 +1,4 @@
-package duke.task; 
+package duke.task;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -6,7 +6,7 @@ import java.util.Date;
 /**
  * Represents a task that needs to be done before a specific time.
  */
-public class Deadline extends Task{
+public class Deadline extends Task {
     protected final Date doBy;
 
     public Deadline(String description, boolean isDone, Date doBy) {

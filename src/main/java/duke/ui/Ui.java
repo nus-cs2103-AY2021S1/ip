@@ -2,6 +2,7 @@ package duke.ui;
 
 import java.util.List;
 import java.util.Scanner;
+
 import duke.task.TaskList;
 import duke.task.Task;
 
@@ -14,7 +15,7 @@ public class Ui {
     private final String byeMessage = "Bye! Have a great day and hope to see you soon! :D";
     private final String errorHeader = "Apologies!";
 
-    public Ui () {
+    public Ui() {
         this.sc = new Scanner(System.in);
     }
 
@@ -54,6 +55,7 @@ public class Ui {
      */
     public void printTasks(TaskList taskList) {
         List<Task> tasks = taskList.getTasks();
+
         if (tasks.size() > 0) {
             print("These are the tasks in your list. Jiayous! :)");
         } else {

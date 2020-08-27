@@ -1,6 +1,7 @@
-package duke.task; 
+package duke.task;
 
 import java.util.List;
+
 import duke.DukeException;
 import duke.util.Parser;
 
@@ -63,7 +64,8 @@ public class TaskList {
         int size = this.tasks.size();
         System.out.println("\tOkay! I've added this task:");
         System.out.println("\t\t" + task.toString());
-        System.out.println(String.format("\tNow you have %d %s in the list. Jiayous! :D", size, size > 1 ? "tasks" : "task"));
+        System.out.println(String.format("\tNow you have %d %s in the list. Jiayous! :D",
+                size, size > 1 ? "tasks" : "task"));
     }
 
     /**
@@ -94,7 +96,8 @@ public class TaskList {
             this.tasks.remove(index);
 
             System.out.println("\tOkay! I've removed this task:\n\t\t" + task.toString());
-            System.out.println(String.format("\tNow you have %d %s in the list. Jiayous! :D", size - 1, size - 1 > 1 ? "tasks" : "task"));
+            System.out.println(String.format("\tNow you have %d %s in the list. Jiayous! :D",
+                    size - 1, size - 1 > 1 ? "tasks" : "task"));
 
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Sorry! The index is out of bounds! :')");
