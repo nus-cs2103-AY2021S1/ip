@@ -1,9 +1,13 @@
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 import java.io.File;
 import java.io.FileWriter;
+
+import java.io.IOException;
+
+import java.time.format.DateTimeParseException;
+import java.time.LocalDate;
 
 /**
  * Main class that takes in user input.
@@ -162,16 +166,54 @@ public class Duke {
         return todo;
     }
 
-    private static Task handleDeadline(String deadlineTask, String deadlineBy) {
-        Task deadline = new Deadline(deadlineTask, deadlineBy);
-        taskList.add(deadline);
-        return deadline;
+    private static Task handleTodo(String todoTask, boolean isDone) {
+        Task todo = new Todo(todoTask, isDone);
+        taskList.add(todo);
+        return todo;
     }
 
-    private static Task handleEvent(String eventTask, String eventAt) {
-        Task event = new Event(eventTask, eventAt);
-        taskList.add(event);
-        return event;
+    private static Task handleDeadline(String deadlineTask, String deadlineBy) throws DukeException {
+        try {
+            LocalDate deadlineByLocalDate = LocalDate.parse(deadlineBy);
+            Task deadline = new Deadline(deadlineTask, deadlineByLocalDate);
+            taskList.add(deadline);
+            return deadline;
+        } catch (DateTimeParseException e) {
+            throw new DukeException("     OOPS!!! Pass in a date in yyyy-mm-dd :-(");
+        }
+    }
+
+    private static Task handleDeadline(String deadlineTask, String deadlineBy, boolean isDone) throws DukeException {
+        try {
+            LocalDate deadlineByLocalDate = LocalDate.parse(deadlineBy);
+            Task deadline = new Deadline(deadlineTask, deadlineByLocalDate, isDone);
+            taskList.add(deadline);
+            return deadline;
+        } catch (DateTimeParseException e) {
+            throw new DukeException("     OOPS!!! Pass in a date in yyyy-mm-dd :-(");
+        }
+    }
+
+    private static Task handleEvent(String eventTask, String eventAt) throws DukeException {
+        try {
+            LocalDate eventAtLocalDate = LocalDate.parse(eventAt);
+            Task event = new Event(eventTask, eventAtLocalDate);
+            taskList.add(event);
+            return event;
+        } catch (DateTimeParseException e) {
+            throw new DukeException("     OOPS!!! Pass in a date in yyyy-mm-dd :-(");
+        }
+    }
+
+    private static Task handleEvent(String eventTask, String eventAt, boolean isDone) throws DukeException {
+        try {
+            LocalDate eventAtLocalDate = LocalDate.parse(eventAt);
+            Task event = new Event(eventTask, eventAtLocalDate, isDone);
+            taskList.add(event);
+            return event;
+        } catch (DateTimeParseException e) {
+            throw new DukeException("     OOPS!!! Pass in a date in yyyy-mm-dd :-(");
+        }
     }
 
     private static void listTasks() {
@@ -237,26 +279,27 @@ public class Duke {
         File f = new File(FILEPATH); // create a File for the given file path
         try {
             Scanner s = new Scanner(f); // create a Scanner using the File as the source
-            Task task;
             while (s.hasNext()) {
-                String line = s.nextLine();
-                String[] lineParts = line.split(" \\| ");
-                int isDoneInt = Integer.parseInt(lineParts[1]);
-                boolean isDone = isDoneInt > 0;
-                switch (lineParts[0]) {
-                case "D":
-                    task = new Deadline(lineParts[2], lineParts[3], isDone);
-                    taskList.add(task);
-                    break;
-                case "E":
-                    task = new Event(lineParts[2], lineParts[3], isDone);
-                    taskList.add(task);
-                    break;
-                case "T":
-                    task = new Todo(lineParts[2], isDone);
-                    taskList.add(task);
-                    break;
+                try {
+                    String line = s.nextLine();
+                    String[] lineParts = line.split(" \\| ");
+                    int isDoneInt = Integer.parseInt(lineParts[1]);
+                    boolean isDone = isDoneInt > 0;
+                    switch (lineParts[0]) {
+                    case "D":
+                        handleDeadline(lineParts[2], lineParts[3], isDone);
+                        break;
+                    case "E":
+                        handleEvent(lineParts[2], lineParts[3], isDone);
+                        break;
+                    case "T":
+                        handleTodo(lineParts[2], isDone);
+                        break;
+                    }
+                } catch (DukeException e) {
+                    printOutput(e.getMessage(), true);
                 }
+
             }
         } catch (java.io.FileNotFoundException e) {
             printOutput("     A file error has occurred!", true);
