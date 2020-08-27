@@ -10,16 +10,79 @@ public class UIManager {
     Scanner scanner = new Scanner(System.in);
     // PRIVATE ENUMS OF THE UI MANAGER -- TO SAVE CONSTANTS TO BE PRINTED
 
+    // Reads in user command.
+    // Not very efficient because we keep creating and closing scanners
+    // later when the while loop is done we can do 1x setup and 1x cleaning up.
+    // for now this is safer cause less bugs
+    public String readCommand() {
+        String output = scanner.nextLine();
+        return output;
+    }
+
+    // MAIN DUKE FUNCTIONS
+    public void printDukeIntro() {
+        System.out.println(UserInteractionText.INTRODUCTION);
+    }
+
+    public void printDukeInstructions() {
+        System.out.println(UserInteractionText.INSTRUCTIONS);
+    }
+
+    public void printDukeOutro() {
+        System.out.println(UserInteractionText.OUTRO);
+    }
+
+    // COMMAND BASED
+    public void printAddTask(DukeTask task, int size) {
+        System.out.println("Task Added: " + task.toString());
+        printTaskStatus(size);
+    }
+
+    public void printDeleteTask(DukeTask task, int size) {
+        System.out.println("Alright! I'll delete this task!\n" + "Take note that this is irreversible!");
+        System.out.println(task.toString());
+        printTaskStatus(size);
+    }
+
+    public void printNumberedTask(DukeTask task, int num) {
+        System.out.println((num + 1) + ". " + task);
+    }
+
+    public void printMarkAsDone(DukeTask task, int size) {
+        System.out.println("Alright! I'll mark this task as done!");
+        System.out.println(task.toString());
+        printTaskStatus(size);
+    }
+
+    public void printFindCannotBeFound(String keyword) {
+        System.out.println("There are no tasks containing " + "\"" + keyword + "\"!");
+    }
+
+    public void printFindFilteredList(String keyword, boolean isPlural) {
+        System.out.println((isPlural ? "Tasks" : "Task") + " with the keyword: " + "\"" + keyword + "\"");
+    }
+
+    // GENERAL USE
+    public void printLine() {
+        System.out.println(UserInteractionText.LINE);
+    }
+
+    public void printTaskStatus(int size) {
+        String taskSize = size == 1 ? " task" : " tasks";
+        System.out.println("You now have " + size + taskSize);
+    }
+
     // Instruction Guides split up the various parts of the "help" function guide
     // Splitting them up into parts makes it easier to edit according to the specific guide in the future
     private enum InstructionGuide {
         // For formatting purposes, except for the last guide, the guides must end with a guideBreaker
         // It splits them into paragraphs
-        Level("* Level 8: Formatting Time", false),
+        Level("* Level 9: Finding Keywords", false),
 
         DeveloperUpdate("* DEVELOPER UPDATES:\n" +
                 "* I can now save data! Just terminate the program with \"bye\" and I'll save the data automatically!\n" +
-                "* Do take note of the DATE AND TIME notations when inserting DukeTasks!", false),
+                "* Do take note of the DATE AND TIME notations when inserting DukeTasks!\n" +
+                "* Want to find a specific task? I can do it too!", false),
 
         AvailableInstruction("AVAILABLE INSTRUCTIONS:\n" + // Available Instructions
                 " help - Display Available Instructions\n" +
@@ -27,6 +90,7 @@ public class UIManager {
                 " list - Display current DukeTasks\n" +
                 " done [Task Number] - Complete the specified task number (Specify in numeric format!) Eg: \"done 3\"\n" +
                 " delete [Task Number] - Deletes the task number (Specify in numeric format!) Eg: \"delete 3\"\n" +
+                " find [keyword] - Finds related Tasks containing the keyword\n" +
                 "* SEE TASK INPUT INSTRUCTIONS FOR MORE ABOUT TASKS", false),
 
         TaskInputInstruction("TASK INPUT INSTRUCTIONS:\n" +
@@ -87,58 +151,5 @@ public class UIManager {
         }
     }
 
-    // Reads in user command.
-    // Not very efficient because we keep creating and closing scanners
-    // later when the while loop is done we can do 1x setup and 1x cleaning up.
-    // for now this is safer cause less bugs
-    public String readCommand() {
-        String output = scanner.nextLine();
-        return output;
-    }
-
-    // MAIN DUKE FUNCTIONS
-    public void printDukeIntro() {
-        System.out.println(UserInteractionText.INTRODUCTION);
-    }
-
-    public void printDukeInstructions() {
-        System.out.println(UserInteractionText.INSTRUCTIONS);
-    }
-
-    public void printDukeOutro() {
-        System.out.println(UserInteractionText.OUTRO);
-    }
-
-    // COMMAND BASED
-    public void printAddTask(DukeTask task, int size) {
-        System.out.println("Task Added: " + task.toString());
-        printTaskStatus(size);
-    }
-
-    public void printDeleteTask(DukeTask task, int size) {
-        System.out.println("Alright! I'll delete this task!\n" + "Take note that this is irreversible!");
-        System.out.println(task.toString());
-        printTaskStatus(size);
-    }
-
-    public void printNumberedTask(DukeTask task, int num) {
-        System.out.println((num + 1) + ". " + task);
-    }
-
-    public void printMarkAsDone(DukeTask task, int size) {
-        System.out.println("Alright! I'll mark this task as done!");
-        System.out.println(task.toString());
-        printTaskStatus(size);
-    }
-
-    // GENERAL USE
-    public void printLine() {
-        System.out.println(UserInteractionText.LINE);
-    }
-
-    public void printTaskStatus(int size) {
-        String taskSize = size == 1 ? " task" : " tasks";
-        System.out.println("You now have " + size + taskSize);
-    }
-
 }
+

@@ -36,6 +36,7 @@ public class UserInputParser {
     private static final String AT_INDICATOR = "/at";
     private static final String UNKNOWN = "unknown";
     private static final String DELETE = "delete";
+    private static final String FIND = "find";
 
     // TAKES IN USER COMMAND
     // PERFORMS INPUT VERIFICATION
@@ -50,50 +51,55 @@ public class UserInputParser {
         String instructionTag = instruction.split(" ")[0]; // indicates if instruction or not
 
         switch (instructionTag) {
-            case BYE:
-                if (InputValidator.validateSizeOne(instrLen, instructionTag, true)) {
-                    return new ExitCommand();
-                }
-                break;
-            case HELP:
-                if (InputValidator.validateSizeOne(instrLen, instructionTag, true)) {
-                    return new HelpCommand();
-                }
-                break;
-            case LIST:
-                if (InputValidator.validateSizeOne(instrLen, instructionTag, true)) {
-                    return new ListCommand();
-                }
-            case TODO:
-                if (InputValidator.validateSizeOne(instrLen, instructionTag, false)) {
-                    TodoTask todotask = new TodoTask(CommonMethod.mergeArray(instructionArray, 1, instrLen));
-                    return new AddCommand(todotask);
-                }
-                break;
-            case DONE:
-                if (InputValidator.validateSizeTwoAndInt(instructionArray, instructionTag)) {
-                    return new DoneCommand(Integer.parseInt(instruction.split(" ")[1]) - 1);
-                }
-                break;
-            case DELETE:
-                if (InputValidator.validateSizeTwoAndInt(instructionArray, instructionTag)) {
-                    return new DeleteCommand(Integer.parseInt(instruction.split(" ")[1]) - 1);
-                }
-                break;
-            case DEADLINE:
-                int byIndex = findIndex(instructionArray, BY_INDICATOR);
-                if (InputValidator.validateDescriptionAndDateTime(instructionArray, DEADLINE, byIndex)
-                        && (InputValidator.validateDateAndTime(instructionArray, DEADLINE, byIndex))) {
-                    return new AddCommand(generateTaskWithDate(DEADLINE, instructionArray, BY_INDICATOR));
-                }
-                break;
-            case EVENT:
-                int atIndex = findIndex(instructionArray, AT_INDICATOR);
-                if (InputValidator.validateDescriptionAndDateTime(instructionArray, EVENT, atIndex)
-                        && (InputValidator.validateDateAndTime(instructionArray, EVENT, atIndex))) {
-                    return new AddCommand(generateTaskWithDate(EVENT, instructionArray, AT_INDICATOR));
-                }
-                break;
+        case BYE:
+            if (InputValidator.validateSizeOne(instrLen, instructionTag, true)) {
+                return new ExitCommand();
+            }
+            break;
+        case HELP:
+            if (InputValidator.validateSizeOne(instrLen, instructionTag, true)) {
+                return new HelpCommand();
+            }
+            break;
+        case LIST:
+            if (InputValidator.validateSizeOne(instrLen, instructionTag, true)) {
+                return new ListCommand();
+            }
+        case TODO:
+            if (InputValidator.validateSizeOne(instrLen, instructionTag, false)) {
+                TodoTask todotask = new TodoTask(CommonMethod.mergeArray(instructionArray, 1, instrLen));
+                return new AddCommand(todotask);
+            }
+            break;
+        case DONE:
+            if (InputValidator.validateSizeTwoAndInt(instructionArray, instructionTag)) {
+                return new DoneCommand(Integer.parseInt(instruction.split(" ")[1]) - 1);
+            }
+            break;
+        case DELETE:
+            if (InputValidator.validateSizeTwoAndInt(instructionArray, instructionTag)) {
+                return new DeleteCommand(Integer.parseInt(instruction.split(" ")[1]) - 1);
+            }
+            break;
+        case DEADLINE:
+            int byIndex = findIndex(instructionArray, BY_INDICATOR);
+            if (InputValidator.validateDescriptionAndDateTime(instructionArray, DEADLINE, byIndex)
+                    && (InputValidator.validateDateAndTime(instructionArray, DEADLINE, byIndex))) {
+                return new AddCommand(generateTaskWithDate(DEADLINE, instructionArray, BY_INDICATOR));
+            }
+            break;
+        case EVENT:
+            int atIndex = findIndex(instructionArray, AT_INDICATOR);
+            if (InputValidator.validateDescriptionAndDateTime(instructionArray, EVENT, atIndex)
+                    && (InputValidator.validateDateAndTime(instructionArray, EVENT, atIndex))) {
+                return new AddCommand(generateTaskWithDate(EVENT, instructionArray, AT_INDICATOR));
+            }
+            break;
+        case FIND:
+            if (InputValidator.validateSizeTwo(instructionArray, instructionTag)) {
+                return new FindCommand(instructionArray[1]);
+            }
+            break;
         }
         throw new InvalidInstructionException(UNKNOWN);
     }
@@ -152,3 +158,4 @@ public class UserInputParser {
         return -1;
     }
 }
+

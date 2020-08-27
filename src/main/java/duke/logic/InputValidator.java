@@ -9,13 +9,21 @@ public class InputValidator {
 
     // VALIDATION FUNCTIONS
     // ENSURE INSTRUCTION STRING IS SIZE 1
-    public static boolean validateSizeOne (int instrLen, String instrType, boolean isLenOne)
+    public static boolean validateSizeOne(int instrLen, String instrType, boolean isLenOne)
             throws InvalidInstructionException {
         if ((instrLen == 1) == isLenOne) { // i want instrLen == 1 to be isOne
             return true;
         } else {
             throw new InvalidInstructionException(instrType);
         }
+    }
+
+    public static boolean validateSizeTwo(String[] instructionArray, String instrType)
+            throws InvalidInstructionException {
+        if (instructionArray.length == 2) {
+            return true;
+        } // if len != 2 or the input is not an integer
+        throw new InvalidInstructionException(instrType);
     }
 
     // ENSURE STRING SIZE 2, AND SECOND STRING CAN PARSE TO INT
@@ -87,29 +95,29 @@ public class InputValidator {
         }
 
         switch (month) {
-            case 1:
-            case 3:
-            case 5:
-            case 7:
-            case 8:
-            case 10:
-            case 12:
-                if (day > 31) {
-                    throw new InvalidFormatException(instrType + " DATE FORMAT");
-                }
-                break;
-            case 4:
-            case 6:
-            case 9:
-            case 11:
-                if (day > 30) {
-                    throw new InvalidFormatException(instrType + " DATE FORMAT");
-                }
-                break;
-            default:
-                if ((CommonMethod.isLeapYear(year) && day > 29) || (!CommonMethod.isLeapYear(year) && day > 28)){
-                    throw new InvalidFormatException(instrType + " DATE FORMAT");
-                }
+        case 1:
+        case 3:
+        case 5:
+        case 7:
+        case 8:
+        case 10:
+        case 12:
+            if (day > 31) {
+                throw new InvalidFormatException(instrType + " DATE FORMAT");
+            }
+            break;
+        case 4:
+        case 6:
+        case 9:
+        case 11:
+            if (day > 30) {
+                throw new InvalidFormatException(instrType + " DATE FORMAT");
+            }
+            break;
+        default:
+            if ((CommonMethod.isLeapYear(year) && day > 29) || (!CommonMethod.isLeapYear(year) && day > 28)) {
+                throw new InvalidFormatException(instrType + " DATE FORMAT");
+            }
         }
         return true;
     }
@@ -117,7 +125,7 @@ public class InputValidator {
 
     // HELPER FUNCTIONS
     // checks if the input string can be parsed into an Integer or not
-    private static boolean isNumeric (String instruction) {
+    private static boolean isNumeric(String instruction) {
         try {
             Integer.parseInt(instruction);
         } catch (NumberFormatException nfe) {
@@ -126,3 +134,4 @@ public class InputValidator {
         return true;
     }
 }
+
