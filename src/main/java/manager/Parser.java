@@ -20,21 +20,25 @@ public class Parser {
             try {
 
                 if (input.equals("list")) {
-                    this.converter.convertAction(Commands.LIST, 0);
+                    this.converter.convertAction(Commands.LIST, 0, "");
 
                 } else if (input.equals("delete all")) {
-                    this.converter.convertAction(Commands.DELETE_ALL, 0);
+                    this.converter.convertAction(Commands.DELETE_ALL, 0, "");
+
+                } else if (input.startsWith("find")) {
+                    String toFind = input.substring("find".length()).trim();
+                    this.converter.convertAction(Commands.FIND, 0, toFind);
 
                 } else if (isNumberedCommand(input)) {
                     String[] words = input.split(" ");
 
                     if (words[0].equals("done")) {
                         int index = Integer.parseInt(words[1]) - 1;
-                        this.converter.convertAction(Commands.DONE, index);
+                        this.converter.convertAction(Commands.DONE, index, "");
 
                     } else if (words[0].equals("delete")) {
                         int index = Integer.parseInt(words[1]) - 1;
-                        this.converter.convertAction(Commands.DELETE, index);
+                        this.converter.convertAction(Commands.DELETE, index, "");
 
                     } else {
                         throw new InvalidCommandException("Command is invalid. Try again?");

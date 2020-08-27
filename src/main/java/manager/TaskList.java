@@ -30,6 +30,17 @@ public class TaskList {
         System.out.println(this.taskList.get(index).toString());
     }
 
+    public void findTasks(String toFind) {
+        int currentIndex = 1;
+        System.out.println("Here are the matching tasks in your list:");
+        for (Task task : this.taskList) {
+            if (task.getDescription().contains(toFind)) {
+                System.out.println(currentIndex + "." + task.toString());
+                currentIndex++;
+            }
+        }
+    }
+
     public void deleteTask(int index) {
         Task removedTask = this.taskList.remove(index);
         System.out.println("Noted. I've removed this task:");

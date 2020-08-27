@@ -35,10 +35,10 @@ public class UiTest {
         converter.passTask(todo);
         converter.passTask(deadline);
         converter.passTask(event);
-        converter.convertAction(Commands.LIST, 0);
-        converter.convertAction(Commands.DONE, 2);
-        converter.convertAction(Commands.DELETE, 1);
-        converter.convertAction(Commands.LIST, 0);
+        converter.convertAction(Commands.LIST, 0, "");
+        converter.convertAction(Commands.DONE, 2, "");
+        converter.convertAction(Commands.DELETE, 1, "");
+        converter.convertAction(Commands.LIST, 0, "");
         assertEquals(2, converter.totalTasks());
     }
 }
