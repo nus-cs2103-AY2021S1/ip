@@ -12,7 +12,7 @@ public class Bot { //basically duke.java at this point
     TaskList taskList = new TaskList(storage.load());
     Scanner sc = new Scanner(System.in);
 
-    public void serve() { //run yes
+    public void serve() { //run yes come on guys
 
         while (sc.hasNextLine()) {
             try {
