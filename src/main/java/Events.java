@@ -39,9 +39,9 @@ public class Events extends Task{
     @Override
     public String toString(){
         if (super.completed) {
-            return "[E]" + "[" + "✓" + "] " + name + " (at: " + printDateTime()  +")";
+            return "[E]" + "[" + "✓" + "] " + name + "(at: " + printDateTime()  +")";
         } else {
-            return "[E]" + "[" + "✗" + "] " + name + " (at: " + printDateTime()  +")";
+            return "[E]" + "[" + "✗" + "] " + name + "(at: " + printDateTime()  +")";
         }
 
     }

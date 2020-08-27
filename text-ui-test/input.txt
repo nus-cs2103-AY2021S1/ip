@@ -1,11 +1,13 @@
 todo CS2103
-event tutorial /at 12-1pm
-deadline ip /by thursday
+deadline ip /by 27/08/2020 2359
+event tutorial /at 28/08/2020 1600-1800
 list
 delete 2
 list
 done 2
 list
 done 1
+list
+delete all
 list
 bye

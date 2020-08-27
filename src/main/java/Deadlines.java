@@ -34,9 +34,9 @@ public class Deadlines extends Task {
     @Override
     public String toString() {
         if (super.completed) {
-            return "[D]" + "[" + "✓" + "] " + name + " (by: " + printDateTime() + ")";
+            return "[D]" + "[" + "✓" + "] " + name + "(by: " + printDateTime() + ")";
         } else {
-            return "[D]" + "[" + "✗" + "] " + name + " (by: " + printDateTime() + ")";
+            return "[D]" + "[" + "✗" + "] " + name + "(by: " + printDateTime() + ")";
         }
     }
 }
