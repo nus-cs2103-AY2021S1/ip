@@ -41,11 +41,11 @@ public class Duke {
         }
         
         public static class Input implements Serializable {
-            boolean done;
+            boolean isDone;
             String content;
             String id;
             LocalDate time;
-            String printTime;
+            String printedTime;
 
             Input(String content) {
                 this.content = content;
@@ -53,12 +53,12 @@ public class Duke {
             }
 
             Input(boolean done, String content) {
-                this.done = done;
+                this.isDone = done;
                 this.content = content;
             }
 
             public void taskDone() {
-                this.done = true;
+                this.isDone = true;
             }
         }
 
@@ -68,14 +68,14 @@ public class Duke {
                 super(content);
                 this.id = "[T]";
                 this.time = null;
-                this.printTime = "";
+                this.printedTime = "";
             }
 
             Todo(boolean done, String content) {
                 super(done, content);
                 this.id = "[T]";
                 this.time = null;
-                this.printTime = "";
+                this.printedTime = "";
             }
         }
 
@@ -85,14 +85,14 @@ public class Duke {
                 super(content);
                 this.time = LocalDate.parse(deadlineTime, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
                 this.id = "[D]";
-                this.printTime = "(" + time.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+                this.printedTime = "(" + time.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
             }
 
             Deadline(boolean done, String content, String deadlineTime) {
                 super(done, content);
                 this.time = LocalDate.parse(deadlineTime, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
                 this.id = "[D]";
-                this.printTime = "(" + time.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+                this.printedTime = "(" + time.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
             }
         }
 
@@ -102,14 +102,14 @@ public class Duke {
                 super(content);
                 this.time = LocalDate.parse(eventTime, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
                 this.id = "[E]";
-                this.printTime = "(" + time.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+                this.printedTime = "(" + time.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
             }
 
             Event(boolean done, String content, String eventTime) {
                 super(done, content);
                 this.time = LocalDate.parse(eventTime, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
                 this.id = "[E]";
-                this.printTime = "(" + time.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+                this.printedTime = "(" + time.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
             }
         }
 
@@ -165,170 +165,162 @@ public class Duke {
 
         public static class TaskList {
             List<Input> inputs;
-
+            
             TaskList() {
                 this.inputs = new ArrayList<Input>();
             }
-
-                TaskList(List<Input> inputs) throws DukeException {
-                    try {
-                        this.inputs = inputs;
-                    } catch (Exception e) {
-                        throw new DukeException("Error making task!");
-                    }
-                }
-
-                void taskDone(String nextLine) throws DukeException {
-                    if (nextLine.equals("done") || nextLine.equals("done ")) {
-                        throw new DukeException("OOPS!!! The description of done cannot be empty.");
-                    }
-                    int numTaskDone = Integer.valueOf(nextLine.substring(5));
-                    if (numTaskDone > inputs.size()) {
-                        throw new DukeException("OOPS!!! Task does not exist.");
-                    }
-                    System.out.println("Nice! I've marked this task as done:");
-                    Input inputType = inputs.get(numTaskDone - 1);
-                    inputType.taskDone();
-                    System.out.println("[/] " + inputType.content + " " + inputType.printTime);
-                }
-
-                void taskRemove(String nextLine) throws DukeException {
-                    if (nextLine.equals("remove") || nextLine.equals("remove ")) {
-                        throw new DukeException("OOPS!!! The description of remove cannot be empty");
-                    }
-                    int numTaskDone = Integer.valueOf(nextLine.substring(7));
-                    if (numTaskDone > inputs.size()) {
-                        throw new DukeException("OOPS!!! Task does not exist.");
-                    }
-                    System.out.println("Noted. I've removed this task:");
-                    Input inputType = inputs.get(numTaskDone - 1);
-                    if (inputType.done) {
-                        System.out.println("  " + inputType.id + "[/] " + inputType.content + inputType.printTime);
-                    } else {
-                        System.out.println("  " + inputType.id + "[x] " + inputType.content + inputType.printTime);
-                    }
-                    inputs.remove(numTaskDone - 1);
-                    System.out.println("Now you have " + inputs.size() + " tasks in the list.");
-                    storage.writeToFile(inputs);
-                }
-
-                void taskTodo(String nextLine) throws DukeException {
-                    if (nextLine.equals("todo") || nextLine.equals("todo ")) {
-                        throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
-                    }
-                    Todo todo = new Todo(nextLine.substring(5));
-                    inputs.add(todo);
-                    int count = inputs.size();
-                    System.out.println("Got it. I've added this task: \n" + "  [T][x] " + todo.content +
-                            "\n Now you have " + count + " tasks in the list");
-                    storage.writeToFile(inputs);
-                }
-
-                void taskDeadline(String nextLine) throws DukeException {
-                    if (nextLine.equals("deadline") || nextLine.equals("deadline ")) {
-                        throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
-                    }
-                    int charLoc = nextLine.indexOf("/by");
-                    Deadline deadline = new Deadline(nextLine.substring(9, charLoc), nextLine.substring(charLoc + 4));
-                    inputs.add(deadline);
-                    int count = inputs.size();
-                    System.out.println("Got it. I've added this task: \n" + "  [D][x] " + deadline.content +
-                            deadline.printTime + "\n Now you have " + count + " tasks in the list");
-                    storage.writeToFile(inputs);
-                }
-
-                void taskEvent(String nextLine) throws DukeException {
-                    if (nextLine.equals("event") || nextLine.equals("event ")) {
-                        throw new DukeException("OOPS!!! The description of an event cannot be empty.");
-                    }
-                    int charLoc = nextLine.indexOf("/at");
-                    Event event = new Event(nextLine.substring(6, charLoc), nextLine.substring(charLoc + 4));
-                    inputs.add(event);
-                    int count = inputs.size();
-                    System.out.println("Got it. I've added this task: \n" + "  [E][x] " + event.content +
-                            event.printTime + "\n Now you have " + count + " tasks in the list");
-                    storage.writeToFile(inputs);
-                }
-
-            }
             
-            public static class UI {
-                Scanner sc = new Scanner(System.in);
-
-                UI() {
-                    String logo = " ____        _        \n"
-                            + "|  _ \\ _   _| | _____ \n"
-                            + "| | | | | | | |/ / _ \\\n"
-                            + "| |_| | |_| |   <  __/\n"
-                            + "|____/ \\__,_|_|\\_\\___|\n";
-                    System.out.println("Hello from\n" + logo);
-
-                    System.out.println("Hello! I'm Duke \n"
-                            + "What can I do for you?");
-                }
-
-                String readInput() {
-                    return this.sc.nextLine();
-                }
-
-                void showLoadingError() {
-                    System.out.println("Loading Error!");
-                }
-
-
-            }
-            
-            public static class Parser {
-                String nextLine;
-                TaskList inputs;
-
-                Parser(String nextLine, TaskList inputs) {
-                    this.nextLine = nextLine;
+            TaskList(List<Input> inputs) throws DukeException {
+                try {
                     this.inputs = inputs;
+                } catch (Exception e) {
+                    throw new DukeException("Error making task!");
                 }
+            }
 
-                void parse() throws DukeException {
-                    try {
-                        if (nextLine.startsWith("done")) {
-                            inputs.taskDone(nextLine);
-                        } else if (nextLine.startsWith("remove")) {
-                            inputs.taskRemove(nextLine);
-                        } else if (nextLine.startsWith("todo")) {
-                            inputs.taskTodo(nextLine);
-                        } else if (nextLine.startsWith("deadline")) {
-                            inputs.taskDeadline(nextLine);
-                        } else if (nextLine.startsWith("event")) {
-                            inputs.taskEvent(nextLine);
-                        } else if (nextLine.equals("list")) {
-                            if (inputs.inputs.size() == 0) {
-                                System.out.println("No tasks in list");
-                            } else {
-                                System.out.println("Here are the tasks in your list:");
-                                int len = inputs.inputs.size();
-                                for (int i = 1; i <= len; i++) {
-                                    Input inputType = inputs.inputs.get(i - 1);
-                                    if (inputType.done) {
-                                        System.out.println(i + ". " + inputType.id + "[/] " + inputType.content +
-                                                inputType.printTime);
-                                    } else {
-                                        System.out.println(i + ". " + inputType.id + "[x] " + inputType.content +
-                                                inputType.printTime);
-                                    }
+            void taskDone(String nextLine) throws DukeException {
+                if (nextLine.equals("done") || nextLine.equals("done ")) {
+                    throw new DukeException("OOPS!!! The description of done cannot be empty.");
+                }
+                int numTaskDone = Integer.valueOf(nextLine.substring(5));
+                if (numTaskDone > inputs.size()) {
+                    throw new DukeException("OOPS!!! Task does not exist.");
+                }
+                System.out.println("Nice! I've marked this task as done:");
+                Input inputType = inputs.get(numTaskDone - 1);
+                inputType.taskDone();
+                System.out.println("[/] " + inputType.content + " " + inputType.printedTime);
+            }
+
+            void taskRemove(String nextLine) throws DukeException {
+                if (nextLine.equals("remove") || nextLine.equals("remove ")) {
+                    throw new DukeException("OOPS!!! The description of remove cannot be empty");
+                }
+                int numTaskDone = Integer.valueOf(nextLine.substring(7));
+                if (numTaskDone > inputs.size()) {
+                    throw new DukeException("OOPS!!! Task does not exist.");
+                }
+                System.out.println("Noted. I've removed this task:");
+                Input inputType = inputs.get(numTaskDone - 1);
+                if (inputType.isDone) {
+                    System.out.println("  " + inputType.id + "[/] " + inputType.content + inputType.printedTime);
+                } else {
+                    System.out.println("  " + inputType.id + "[x] " + inputType.content + inputType.printedTime);
+                }
+                inputs.remove(numTaskDone - 1);
+                System.out.println("Now you have " + inputs.size() + " tasks in the list.");
+                storage.writeToFile(inputs);
+            }
+            
+            void taskTodo(String nextLine) throws DukeException {
+                if (nextLine.equals("todo") || nextLine.equals("todo ")) {
+                    throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
+                }
+                Todo todo = new Todo(nextLine.substring(5));
+                inputs.add(todo);
+                int count = inputs.size();
+                System.out.println("Got it. I've added this task: \n" + "  [T][x] " + todo.content +
+                        "\n Now you have " + count + " tasks in the list");
+                storage.writeToFile(inputs);
+            }
+
+            void taskDeadline(String nextLine) throws DukeException {
+                if (nextLine.equals("deadline") || nextLine.equals("deadline ")) {
+                    throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
+                }
+                int charLoc = nextLine.indexOf("/by");
+                Deadline deadline = new Deadline(nextLine.substring(9, charLoc), nextLine.substring(charLoc + 4));
+                inputs.add(deadline);
+                int count = inputs.size();
+                System.out.println("Got it. I've added this task: \n" + "  [D][x] " + deadline.content +
+                        deadline.printedTime + "\n Now you have " + count + " tasks in the list");
+                storage.writeToFile(inputs);
+            }
+
+            void taskEvent(String nextLine) throws DukeException {
+                if (nextLine.equals("event") || nextLine.equals("event ")) {
+                    throw new DukeException("OOPS!!! The description of an event cannot be empty.");
+                }
+                int charLoc = nextLine.indexOf("/at");
+                Event event = new Event(nextLine.substring(6, charLoc), nextLine.substring(charLoc + 4));
+                inputs.add(event);
+                int count = inputs.size();
+                System.out.println("Got it. I've added this task: \n" + "  [E][x] " + event.content +
+                        event.printedTime + "\n Now you have " + count + " tasks in the list");
+                storage.writeToFile(inputs);
+            }
+        }
+            
+        public static class UI {
+            Scanner sc = new Scanner(System.in);
+
+            UI() {
+                String logo = " ____        _        \n"
+                        + "|  _ \\ _   _| | _____ \n"
+                        + "| | | | | | | |/ / _ \\\n"
+                        + "| |_| | |_| |   <  __/\n"
+                        + "|____/ \\__,_|_|\\_\\___|\n";
+                System.out.println("Hello from\n" + logo);
+                System.out.println("Hello! I'm Duke \n"
+                        + "What can I do for you?");
+            }
+
+            String readInput() {
+                return this.sc.nextLine();
+            }
+
+            void showLoadingError() {
+                System.out.println("Loading Error!");
+            }
+        }
+            
+        public static class Parser {
+            String nextLine;
+            TaskList inputs;
+
+            Parser(String nextLine, TaskList inputs) {
+                this.nextLine = nextLine;
+                this.inputs = inputs;
+            }
+            
+            void parse() throws DukeException {
+                try {
+                    if (nextLine.startsWith("done")) {
+                        inputs.taskDone(nextLine);
+                    } else if (nextLine.startsWith("remove")) {
+                        inputs.taskRemove(nextLine);
+                    } else if (nextLine.startsWith("todo")) {
+                        inputs.taskTodo(nextLine);
+                    } else if (nextLine.startsWith("deadline")) {
+                        inputs.taskDeadline(nextLine);
+                    } else if (nextLine.startsWith("event")) {
+                        inputs.taskEvent(nextLine);
+                    } else if (nextLine.equals("list")) {
+                        if (inputs.inputs.size() == 0) {
+                            System.out.println("No tasks in list");
+                        } else {
+                            System.out.println("Here are the tasks in your list:");
+                            int len = inputs.inputs.size();
+                            for (int i = 1; i <= len; i++) {
+                                Input inputType = inputs.inputs.get(i - 1);
+                                if (inputType.isDone) {
+                                    System.out.println(i + ". " + inputType.id + "[/] " + inputType.content +
+                                            inputType.printedTime); 
+                                } else {
+                                    System.out.println(i + ". " + inputType.id + "[x] " + inputType.content +
+                                            inputType.printedTime);
                                 }
                             }
-                        } else {
-                            throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
                         }
-                    } catch (DukeException e) {
-                        System.out.println(e.msg);
+                    } else {
+                        throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
                     }
+                } catch (DukeException e) {
+                    System.out.println(e.msg);
                 }
-
-
             }
-
-
-        }
+    }
+}
 
 
     
