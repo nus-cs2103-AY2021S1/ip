@@ -11,7 +11,7 @@ public class Duke {
     TaskList taskList = new TaskList();
     Ui ui = new Ui(taskList);
 
-    private void activate() {
+    public void activate() {
         Scanner sc = new Scanner(System.in);
         ui.greeting();
 
