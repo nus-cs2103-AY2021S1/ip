@@ -7,6 +7,7 @@ import command.DoneCommand;
 import command.ExitCommand;
 import command.IncorrectCommand;
 import command.ListCommand;
+import command.FindCommand;
 
 import task.Deadline;
 import task.Event;
@@ -29,8 +30,10 @@ public class Parser {
     private final static String COMMAND_ADD_DEADLINE = "deadline";
     private final static String COMMAND_ADD_EVENT = "event";
     private final static String COMMAND_DELETE_EVENT = "delete";
+    private final static String COMMAND_FIND = "find";
     private final static String DATE_DEADLINE = "/by";
     private final static String DATE_EVENT = "/at";
+
     private final static DateTimeFormatter SAVE_READ_DATETIME_FORMAT = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
 
     /**
@@ -47,7 +50,8 @@ public class Parser {
         DEADLINE,
         TODO,
         EVENT,
-        DELETE
+        DELETE,
+        FIND
     }
 
     /**
@@ -86,6 +90,8 @@ public class Parser {
             return handle(restOfCommand, TypeOfCommand.EVENT);
         case COMMAND_DELETE_EVENT:
             return handle(restOfCommand, TypeOfCommand.DELETE);
+        case COMMAND_FIND:
+            return handle(restOfCommand, TypeOfCommand.FIND);
         default:
             return new IncorrectCommand("OOPS !!! Lo siento, pero no sé qué significa eso :-(");
         }
@@ -153,6 +159,8 @@ public class Parser {
             Event newEvent = new Event(taskDescription);
             newEvent.setTime(date);
             return new AddCommand(newEvent);
+        case FIND:
+            return new FindCommand(restOfCommand);
         }
         return null;
     }

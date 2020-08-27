@@ -1,6 +1,8 @@
 package duke;
 
 import task.Task;
+
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -103,5 +105,17 @@ public class Ui {
      */
     public void showNumberInList(TaskList taskList) {
         System.out.println("Ahora tienes "  + taskList.getTaskList().size() +  " tareas en la lista.");
+    }
+
+    /**
+     * Prints the number of found tasks with the keyword.
+     *
+     * @param foundTaskList the list of tasks found.
+     */
+    public void showFoundList(ArrayList foundTaskList) {
+        System.out.println("Aquí están las tareas coincidentes en su lista:");
+        for (int i = 0; i < foundTaskList.size(); i++) {
+            System.out.println((i + 1) + ". " + foundTaskList.get(i).toString());
+        }
     }
 }
