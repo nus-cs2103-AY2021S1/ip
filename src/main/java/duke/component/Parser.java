@@ -3,6 +3,9 @@ package duke.component;
 import duke.command.*;
 import duke.task.*;
 
+/**
+ * Holds the methods for parsing commands.
+ */
 public class Parser {
     /**
      * Parses a DoneCommand to tell which task to mark as done.
