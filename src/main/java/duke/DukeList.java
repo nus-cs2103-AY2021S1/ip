@@ -14,7 +14,7 @@ import java.util.Arrays;
 public class DukeList {
 
     private static final int CAPACITY = 100;
-    final ArrayList<Task> list;
+    private final ArrayList<Task> list;
     private final Storage store = new Storage("data", "duke.txt");
 
 
