@@ -32,7 +32,9 @@ public class Parser {
             return new EventCommand(input.substring(5));
         } else if (input.length() >= 8 && input.startsWith("deadline")) {
             return new DeadlineCommand(input.substring(8));
-        } else {
+        } else if (input.length() >= 4 && input.startsWith("find")) {
+            return new FindCommand(input.substring((4)));
+        }else {
             throw new InvalidInputException();
         }
     }

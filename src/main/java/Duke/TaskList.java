@@ -92,6 +92,21 @@ public class TaskList {
     }
 
     /**
+     * Find Tasks containing user input.
+     * @param input User input
+     * @return String format of tasks found
+     */
+    public String findTasks(String input) {
+        StringBuilder tasksFound = new StringBuilder();
+        for (Task task: list) {
+            if (task.toString().contains(input)) {
+                tasksFound.append(task.toString()).append("\n");
+            }
+        }
+        return tasksFound.toString();
+    }
+
+    /**
      * Represent a more readable list of tasks for user.
      * @return String representing list of tasks
      */

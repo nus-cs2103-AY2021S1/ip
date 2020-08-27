@@ -133,4 +133,12 @@ public class Ui {
         show("Update file failed");
     }
 
+    public void showTaskFound(String input, String tasksFound) {
+        show("Here are the matching tasks in your list:\n", tasksFound + "\n");
+    }
+
+    public void showNoTaskFound(String input) {
+        show("Sorry. No tasks found containing " + input + ".\n");
+    }
+
 }
