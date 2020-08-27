@@ -1,6 +1,8 @@
 package duke.data;
 
 import java.util.ArrayList;
+
+import duke.exception.InvalidIndexException;
 import duke.task.Task;
 
 public class DukeTaskList {
@@ -12,6 +14,7 @@ public class DukeTaskList {
     }
 
     public Task getTask(int index) {
+        indexCheck(index);
         return tasks.get(index);
     }
 
@@ -20,7 +23,7 @@ public class DukeTaskList {
     }
 
     public Task deleteTask(int index) {
-        Task taskDelete = tasks.get(index);
+        Task taskDelete = getTask(index);
         tasks.remove(index);
 
         return taskDelete;
@@ -36,5 +39,11 @@ public class DukeTaskList {
 
     public ArrayList<Task> getTasks() {
         return tasks;
+    }
+
+    private void indexCheck(int index) {
+        if (index >= getSize() || index < 0) {
+            throw new InvalidIndexException("Invalid Index!");
+        }
     }
 }
