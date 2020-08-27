@@ -11,6 +11,11 @@ public class Storage {
 
     }
 
+    /**
+     * Saves task list onto a prescribed file
+     * @param tasks the tasklist to be saved
+     * @throws IOException if file not successfully made (e.g. permission error)
+     */
     public void save(TaskList tasks) throws IOException {
         // Save file
         Path dirPath = Paths.get("data");
