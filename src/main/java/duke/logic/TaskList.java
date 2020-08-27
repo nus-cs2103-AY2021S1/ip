@@ -1,7 +1,5 @@
 package duke.logic;
 
-import duke.CommonString;
-import duke.exception.InvalidInstructionException;
 import duke.task.DukeTask;
 
 import java.util.ArrayList;

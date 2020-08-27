@@ -36,6 +36,14 @@ public class Duke {
         }
     }
 
+
+    // MAIN FUNCTION
+    public static void main(String[] args) {
+        // Initialisation of duke.Duke
+        Duke duke = new Duke();
+        duke.run();
+    }
+
     /**
      * Executes Duke Program.
      * User input is extracted by <code>UIManager</code> and parsed by <code>UserInputParser</code>,
@@ -65,12 +73,5 @@ public class Duke {
 
         // OUTRO
         uiManager.printDukeOutro();
-    }
-
-    // MAIN FUNCTION
-    public static void main(String[] args) {
-        // Initialisation of duke.Duke
-        Duke duke = new Duke();
-        duke.run();
     }
 }

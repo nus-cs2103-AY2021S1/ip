@@ -26,16 +26,16 @@ public class DeleteCommand extends Command {
      * Location of the <code>DukeTask</code> is extracted from the given index,
      * and input validation is performed before the command is executed.
      *
-     * @param taskList <code>TaskList</code> object containing the user's <code>DukeTask</code>.
-     * @param uiManager <code>UIManager</code> object to handle printing feedback to user.
+     * @param taskList       <code>TaskList</code> object containing the user's <code>DukeTask</code>.
+     * @param uiManager      <code>UIManager</code> object to handle printing feedback to user.
      * @param storageManager <code>StorageManager</code> object to saving/loading user data.
-     * @throws InvalidInstructionException  If user input validation fails.
+     * @throws InvalidInstructionException If user input validation fails.
      */
     @Override
     public void execute(TaskList taskList, UIManager uiManager, StorageManager storageManager)
             throws InvalidInstructionException {
 
-        if (index < 0 || index >= taskList.getSize()) { // check if loc is an existing duke.task.DukeTask inside the array inputList
+        if (index < 0 || index >= taskList.getSize()) {
             throw new InvalidInstructionException(CommonString.DELETE + ": Invalid Task Number");
         } else {
             DukeTask task = taskList.deleteFromList(index);

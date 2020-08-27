@@ -1,6 +1,5 @@
 package duke.command;
 
-import duke.exception.InvalidInstructionException;
 import duke.logic.StorageManager;
 import duke.logic.TaskList;
 import duke.logic.UIManager;
@@ -19,12 +18,12 @@ public class ListCommand extends Command {
     /**
      * Prints all <code>DukeTask</code> for the user.
      *
-     * @param taskList <code>TaskList</code> object containing the user's <code>DukeTask</code>.
-     * @param uiManager <code>UIManager</code> object to handle printing feedback to user.
+     * @param taskList       <code>TaskList</code> object containing the user's <code>DukeTask</code>.
+     * @param uiManager      <code>UIManager</code> object to handle printing feedback to user.
      * @param storageManager <code>StorageManager</code> object to saving/loading user data.
      */
     @Override
-    public void execute(TaskList taskList, UIManager uiManager, StorageManager storageManager) throws InvalidInstructionException {
+    public void execute(TaskList taskList, UIManager uiManager, StorageManager storageManager) {
         for (int i = 0; i < taskList.getSize(); i++) {
             uiManager.printNumberedTask(taskList.getTaskList().get(i), i);
         }

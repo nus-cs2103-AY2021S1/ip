@@ -1,9 +1,9 @@
 package duke.command;
 
-import duke.task.DukeTask;
 import duke.logic.StorageManager;
 import duke.logic.TaskList;
 import duke.logic.UIManager;
+import duke.task.DukeTask;
 
 /**
  * Represents an Add Command by the user.
@@ -21,8 +21,8 @@ public class AddCommand extends Command {
     /**
      * Adds user's <code>DukeTask</code> to the <code>TaskList</code> and prints feedback.
      *
-     * @param taskList <code>TaskList</code> object containing the user's <code>DukeTask</code>.
-     * @param uiManager <code>UIManager</code> object to handle printing feedback to user.
+     * @param taskList       <code>TaskList</code> object containing the user's <code>DukeTask</code>.
+     * @param uiManager      <code>UIManager</code> object to handle printing feedback to user.
      * @param storageManager <code>StorageManager</code> object to saving/loading user data.
      */
     @Override

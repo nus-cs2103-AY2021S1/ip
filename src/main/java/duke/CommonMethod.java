@@ -10,9 +10,9 @@ public class CommonMethod {
      * The Strings to be merged are denoted by the Integer index <code>start</code>
      * until (and not including) Integer index <code>end</code>.
      *
-     * @param array  String array containing Strings to be merged.
+     * @param array String array containing Strings to be merged.
      * @param start The starting index to be merged.
-     * @param end The value after the last index to be merged.
+     * @param end   The value after the last index to be merged.
      * @return String output.
      */
     public static String mergeArray(String[] array, int start, int end) {
@@ -32,7 +32,7 @@ public class CommonMethod {
     public static boolean isLeapYear(int year) {
         boolean isLeap = false;
         if (year % 4 == 0) {
-            if(year % 100 == 0) {
+            if (year % 100 == 0) {
                 isLeap = year % 400 == 0;
             } else {
                 isLeap = true;

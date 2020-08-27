@@ -13,13 +13,13 @@ public class InputValidator {
     /**
      * Validates the instruction <code>String</code> is of size 1.
      *
-     * @param instrLen <code>String</code> containing length of user instruction.
+     * @param instrLen  <code>String</code> containing length of user instruction.
      * @param instrType <code>String</code> containing type of instruction.
-     * @param isLenOne <code>boolean</code> to note if the output should equate to 1.
+     * @param isLenOne  <code>boolean</code> to note if the output should equate to 1.
      * @return boolean denoting the validation results
-     * @throws InvalidInstructionException  If len==1 is not equal to isLenOne.
+     * @throws InvalidInstructionException If len==1 is not equal to isLenOne.
      */
-    public static boolean validateSizeOne (int instrLen, String instrType, boolean isLenOne)
+    public static boolean validateSizeOne(int instrLen, String instrType, boolean isLenOne)
             throws InvalidInstructionException {
         if ((instrLen == 1) == isLenOne) { // i want instrLen == 1 to be isOne
             return true;
@@ -33,9 +33,9 @@ public class InputValidator {
      * and the second <code>String</code> can be parsed into <code>Integer</code>.
      *
      * @param instructionArray <code>String</code> containing length of user instruction.
-     * @param instrType <code>String</code> containing type of instruction.
+     * @param instrType        <code>String</code> containing type of instruction.
      * @return boolean denoting the validation results
-     * @throws InvalidInstructionException  If validation fails.
+     * @throws InvalidInstructionException If validation fails.
      */
     public static boolean validateSizeTwoAndInt(String[] instructionArray, String instrType)
             throws InvalidInstructionException {
@@ -55,10 +55,10 @@ public class InputValidator {
      * If the separator does not exist, the index is denoted with -1
      *
      * @param instructionArray <code>String</code> containing length of user instruction.
-     * @param instrType <code>String</code> containing type of instruction.
-     * @param index <code>Integer</code> containing location of separator.
+     * @param instrType        <code>String</code> containing type of instruction.
+     * @param index            <code>Integer</code> containing location of separator.
      * @return boolean denoting the validation results
-     * @throws InvalidFormatException  If index does not exist.
+     * @throws InvalidFormatException If index does not exist.
      * @throws MissingFieldException  If validation fails.
      */
     public static boolean validateDescriptionAndDateTime(String[] instructionArray, String instrType, int index)
@@ -87,10 +87,10 @@ public class InputValidator {
      * Else, they are put through validation to ensure it is proper Date and Time values.
      *
      * @param instructionArray <code>String</code> containing length of user instruction.
-     * @param instrType <code>String</code> containing type of instruction.
-     * @param index <code>Integer</code> containing location of separator.
+     * @param instrType        <code>String</code> containing type of instruction.
+     * @param index            <code>Integer</code> containing location of separator.
      * @return boolean denoting the validation results
-     * @throws InvalidFormatException  If index does not exist.
+     * @throws InvalidFormatException If index does not exist.
      */
     public static boolean validateDateAndTime(String[] instructionArray, String instrType, int index)
             throws InvalidFormatException {
@@ -132,29 +132,29 @@ public class InputValidator {
         }
 
         switch (month) {
-            case 1:
-            case 3:
-            case 5:
-            case 7:
-            case 8:
-            case 10:
-            case 12:
-                if (day > 31) {
-                    throw new InvalidFormatException(instrType + " DATE FORMAT");
-                }
-                break;
-            case 4:
-            case 6:
-            case 9:
-            case 11:
-                if (day > 30) {
-                    throw new InvalidFormatException(instrType + " DATE FORMAT");
-                }
-                break;
-            default:
-                if ((CommonMethod.isLeapYear(year) && day > 29) || (!CommonMethod.isLeapYear(year) && day > 28)){
-                    throw new InvalidFormatException(instrType + " DATE FORMAT");
-                }
+        case 1:
+        case 3:
+        case 5:
+        case 7:
+        case 8:
+        case 10:
+        case 12:
+            if (day > 31) {
+                throw new InvalidFormatException(instrType + " DATE FORMAT");
+            }
+            break;
+        case 4:
+        case 6:
+        case 9:
+        case 11:
+            if (day > 30) {
+                throw new InvalidFormatException(instrType + " DATE FORMAT");
+            }
+            break;
+        default:
+            if ((CommonMethod.isLeapYear(year) && day > 29) || (!CommonMethod.isLeapYear(year) && day > 28)) {
+                throw new InvalidFormatException(instrType + " DATE FORMAT");
+            }
         }
         return true;
     }
@@ -165,7 +165,7 @@ public class InputValidator {
      * @param instruction <code>String</code> containing the integer.
      * @return boolean denoting the validation results
      */
-    private static boolean isNumeric (String instruction) {
+    private static boolean isNumeric(String instruction) {
         try {
             Integer.parseInt(instruction);
         } catch (NumberFormatException nfe) {

@@ -38,7 +38,6 @@ public abstract class DukeTask {
 
     /**
      * Marks the DukeTask as completed by setting <code>boolean</code> isDone to <code>true</code>.
-     *
      */
     public void markAsDone() {
         this.isDone = true;

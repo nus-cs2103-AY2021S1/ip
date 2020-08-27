@@ -1,11 +1,8 @@
 package duke.command;
 
-import duke.exception.InvalidInstructionException;
 import duke.logic.StorageManager;
 import duke.logic.TaskList;
 import duke.logic.UIManager;
-
-import java.io.IOException;
 
 /**
  * Represents a Help Command by the user.
@@ -20,8 +17,8 @@ public class HelpCommand extends Command {
     /**
      * Prints FAQ for the user.
      *
-     * @param taskList <code>TaskList</code> object containing the user's <code>DukeTask</code>.
-     * @param uiManager <code>UIManager</code> object to handle printing feedback to user.
+     * @param taskList       <code>TaskList</code> object containing the user's <code>DukeTask</code>.
+     * @param uiManager      <code>UIManager</code> object to handle printing feedback to user.
      * @param storageManager <code>StorageManager</code> object to saving/loading user data.
      */
     @Override

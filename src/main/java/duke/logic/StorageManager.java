@@ -38,7 +38,7 @@ public class StorageManager {
      * Location of the <code>DukeTask</code> is extracted from the <code>filePath</code>.
      *
      * @return ArrayList denoting the list of <code>DukeTask</code>
-     * @throws FileNotFoundException  If the file to load from does not exist
+     * @throws FileNotFoundException If the file to load from does not exist
      */
     public ArrayList<DukeTask> loadData() throws FileNotFoundException {
         ArrayList<DukeTask> dataList = new ArrayList<>();
@@ -63,16 +63,17 @@ public class StorageManager {
                 String savedTask = fileScanner.nextLine();
                 String[] taskData = savedTask.split("\\|");
                 DukeTask task;
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern(CommonString.DUKE_DATETIME_FORMAT.toString());
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern(
+                        CommonString.DUKE_DATETIME_FORMAT.toString());
                 switch (taskData[0]) {
-                    case "T":
-                        task = new TodoTask(taskData[2]);
-                        break;
-                    case "E":
-                        task = new EventTask(taskData[2], LocalDateTime.parse(taskData[3], formatter));
-                        break;
-                    default: // "D"
-                        task = new DeadlineTask(taskData[2], LocalDateTime.parse(taskData[3], formatter));
+                case "T":
+                    task = new TodoTask(taskData[2]);
+                    break;
+                case "E":
+                    task = new EventTask(taskData[2], LocalDateTime.parse(taskData[3], formatter));
+                    break;
+                default: // "D"
+                    task = new DeadlineTask(taskData[2], LocalDateTime.parse(taskData[3], formatter));
 
                 }
                 if (taskData[1].equals("1")) {

@@ -44,9 +44,9 @@ public class UserInputParser {
      *
      * @param userInput <code>String</code> containing the user instruction.
      * @return Command object denoting the corresponding command.
-     * @throws InvalidInstructionException  If instruction does not exist.
-     * @throws MissingFieldException If the instruction has missing Strings
-     * @throws InvalidFormatException If the instruction has correct format and fields, but incorrect format.
+     * @throws InvalidInstructionException If instruction does not exist.
+     * @throws MissingFieldException       If the instruction has missing Strings
+     * @throws InvalidFormatException      If the instruction has correct format and fields, but incorrect format.
      */
     public static Command parse(String userInput)
             throws InvalidInstructionException, MissingFieldException, InvalidFormatException {
@@ -58,50 +58,50 @@ public class UserInputParser {
         String instructionTag = instruction.split(" ")[0]; // indicates if instruction or not
 
         switch (instructionTag) {
-            case BYE:
-                if (InputValidator.validateSizeOne(instrLen, instructionTag, true)) {
-                    return new ExitCommand();
-                }
-                break;
-            case HELP:
-                if (InputValidator.validateSizeOne(instrLen, instructionTag, true)) {
-                    return new HelpCommand();
-                }
-                break;
-            case LIST:
-                if (InputValidator.validateSizeOne(instrLen, instructionTag, true)) {
-                    return new ListCommand();
-                }
-            case TODO:
-                if (InputValidator.validateSizeOne(instrLen, instructionTag, false)) {
-                    TodoTask todotask = new TodoTask(CommonMethod.mergeArray(instructionArray, 1, instrLen));
-                    return new AddCommand(todotask);
-                }
-                break;
-            case DONE:
-                if (InputValidator.validateSizeTwoAndInt(instructionArray, instructionTag)) {
-                    return new DoneCommand(Integer.parseInt(instruction.split(" ")[1]) - 1);
-                }
-                break;
-            case DELETE:
-                if (InputValidator.validateSizeTwoAndInt(instructionArray, instructionTag)) {
-                    return new DeleteCommand(Integer.parseInt(instruction.split(" ")[1]) - 1);
-                }
-                break;
-            case DEADLINE:
-                int byIndex = findIndex(instructionArray, BY_INDICATOR);
-                if (InputValidator.validateDescriptionAndDateTime(instructionArray, DEADLINE, byIndex)
-                        && (InputValidator.validateDateAndTime(instructionArray, DEADLINE, byIndex))) {
-                    return new AddCommand(generateTaskWithDate(DEADLINE, instructionArray, BY_INDICATOR));
-                }
-                break;
-            case EVENT:
-                int atIndex = findIndex(instructionArray, AT_INDICATOR);
-                if (InputValidator.validateDescriptionAndDateTime(instructionArray, EVENT, atIndex)
-                        && (InputValidator.validateDateAndTime(instructionArray, EVENT, atIndex))) {
-                    return new AddCommand(generateTaskWithDate(EVENT, instructionArray, AT_INDICATOR));
-                }
-                break;
+        case BYE:
+            if (InputValidator.validateSizeOne(instrLen, instructionTag, true)) {
+                return new ExitCommand();
+            }
+            break;
+        case HELP:
+            if (InputValidator.validateSizeOne(instrLen, instructionTag, true)) {
+                return new HelpCommand();
+            }
+            break;
+        case LIST:
+            if (InputValidator.validateSizeOne(instrLen, instructionTag, true)) {
+                return new ListCommand();
+            }
+        case TODO:
+            if (InputValidator.validateSizeOne(instrLen, instructionTag, false)) {
+                TodoTask todotask = new TodoTask(CommonMethod.mergeArray(instructionArray, 1, instrLen));
+                return new AddCommand(todotask);
+            }
+            break;
+        case DONE:
+            if (InputValidator.validateSizeTwoAndInt(instructionArray, instructionTag)) {
+                return new DoneCommand(Integer.parseInt(instruction.split(" ")[1]) - 1);
+            }
+            break;
+        case DELETE:
+            if (InputValidator.validateSizeTwoAndInt(instructionArray, instructionTag)) {
+                return new DeleteCommand(Integer.parseInt(instruction.split(" ")[1]) - 1);
+            }
+            break;
+        case DEADLINE:
+            int byIndex = findIndex(instructionArray, BY_INDICATOR);
+            if (InputValidator.validateDescriptionAndDateTime(instructionArray, DEADLINE, byIndex)
+                    && (InputValidator.validateDateAndTime(instructionArray, DEADLINE, byIndex))) {
+                return new AddCommand(generateTaskWithDate(DEADLINE, instructionArray, BY_INDICATOR));
+            }
+            break;
+        case EVENT:
+            int atIndex = findIndex(instructionArray, AT_INDICATOR);
+            if (InputValidator.validateDescriptionAndDateTime(instructionArray, EVENT, atIndex)
+                    && (InputValidator.validateDateAndTime(instructionArray, EVENT, atIndex))) {
+                return new AddCommand(generateTaskWithDate(EVENT, instructionArray, AT_INDICATOR));
+            }
+            break;
         }
         throw new InvalidInstructionException(UNKNOWN);
     }
@@ -112,9 +112,9 @@ public class UserInputParser {
      * parses them into a <code>LocalDateTime</code> object and
      * returns the <code>DukeTask</code> containing the required fields.
      *
-     * @param taskType <code>String</code> containing the type of <code>DukeTask</code> to generate.
+     * @param taskType         <code>String</code> containing the type of <code>DukeTask</code> to generate.
      * @param instructionArray <code>Array</code> containing the processed user instruction
-     * @param indicator <code>String</code> to verify the instruction type.
+     * @param indicator        <code>String</code> to verify the instruction type.
      * @return DukeTask object denoting the corresponding DukeTask.
      * @throws InvalidFormatException If the instruction has correct format and fields, but incorrect format.
      */
@@ -133,15 +133,17 @@ public class UserInputParser {
         // parse date and time into LocalDateTime object
         LocalDateTime dateTime = parseDateAndTime(taskType, date, time);
 
-        return taskType.equals(DEADLINE) ? new DeadlineTask(description, dateTime) : new EventTask(description, dateTime);
+        return taskType.equals(DEADLINE)
+                ? new DeadlineTask(description, dateTime)
+                : new EventTask(description, dateTime);
     }
 
     /**
      * Parses input variables into a <code>LocalDateTime</code> object.
      *
      * @param taskType <code>String</code> containing the type of <code>DukeTask</code> to generate.
-     * @param date <code>String</code> containing the Date of the Task.
-     * @param time <code>String</code> containing the Time of the Task.
+     * @param date     <code>String</code> containing the Date of the Task.
+     * @param time     <code>String</code> containing the Time of the Task.
      * @return LocalDateTime object denoting the corresponding Date and Time.
      * @throws InvalidFormatException If the instruction has correct format and fields, but incorrect format.
      */
