@@ -1,7 +1,6 @@
 package duke;
 
-import java.awt.color.CMMException;
-import java.sql.Array;
+import java.time.LocalDate;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -127,18 +126,18 @@ public class Duke {
     }
 
     private void addEvent(String str) throws InvalidEventException {
-        String[] deadline = str.split("/at");
-        if (deadline.length > 2) {
+        String[] event = str.split("/at");
+        if (event.length > 2) {
             throw new InvalidEventException("☹ Event time must be written after `/at`.");
         }
-        if (deadline[0].equals("")) {
+        if (event[0].equals("")) {
             throw new InvalidEventException("☹ Event description must be specified.");
         }
-        if (deadline[1].equals("")) {
+        if (event[1].equals("")) {
             throw new InvalidEventException("☹ Event time must be specified.");
         }
-        String description = deadline[0].trim() + " (at: " + deadline[1].trim() + ")";
-        Event curr = new Event(description, false);
+        String description = event[0].trim();
+        Event curr = new Event(description, false, LocalDate.parse(event[1].trim()));
         list.add(curr);
         this.describeTask(curr);
     }
@@ -164,8 +163,8 @@ public class Duke {
         if (deadline[1].equals("")) {
             throw new InvalidDeadlineException("☹ Task deadline must be specified.");
         }
-        String description = deadline[0].trim() + " (by: " + deadline[1].trim() + ")";
-        Deadline curr = new Deadline(description, false);
+        String description = deadline[0].trim();
+        Deadline curr = new Deadline(description, false, LocalDate.parse(deadline[1].trim()));
         list.add(curr);
         this.describeTask(curr);
     }
