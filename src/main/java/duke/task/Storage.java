@@ -49,7 +49,6 @@ public class Storage {
                     duke.createNewFile();
                 }
             } else {
-                //create data file
                 dataFile.mkdir();
                 duke.createNewFile();
             }
@@ -85,25 +84,27 @@ public class Storage {
      * @throws YooException If the file is not found in the path.
      */
     protected void upload(TaskList tasks) throws YooException {
-        File duke = new File(filePath);
+        String[] path = filePath.split("/", 2);
+        java.nio.file.Path dukePath = java.nio.file.Paths.get(path[0], path[1]);
+        File duke = new File(String.valueOf(dukePath));
 
         try {
             FileWriter fw = new FileWriter(duke, false);
 
-            for (Task t : tasks.al) {
-                int isDone = t.isDone ? 1 : 0;
-
+            for (int i = 0; i < tasks.length(); i++) {
+                Task t = tasks.get(i);
+                int isDone = t.getStatus() ? 1 : 0;
                 switch (t.getClass().getName()) {
-                case "Todo":
-                    fw.write("T // " + isDone + " // " + t.description + " // \n");
+                case "duke.task.Todo":
+                    fw.write("T // " + isDone + " // " + t.getDescription() + " // \n");
                     break;
-                case "Deadline":
+                case "duke.task.Deadline":
                     Deadline dl = (Deadline) t;
-                    fw.write("D // " + isDone + " // " + dl.description + " // " + dl.by + "\n");
+                    fw.write("D // " + isDone + " // " + dl.getDescription() + " // " + dl.by + "\n");
                     break;
-                case "Event":
+                case "duke.task.Event":
                     Event e = (Event) t;
-                    fw.write("E // " + isDone + " // " + e.description + " // " + e.at + "\n");
+                    fw.write("E // " + isDone + " // " + e.getDescription() + " // " + e.at + "\n");
                     break;
                 }
             }

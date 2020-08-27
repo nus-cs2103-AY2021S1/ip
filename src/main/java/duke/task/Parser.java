@@ -50,6 +50,9 @@ public class Parser {
                 case "event":
                     addEvent(tasks, cmd, ui);
                     break;
+                case "find":
+                    findKeyword(tasks, cmd, ui);
+                    break;
                 default:
                     throw new YooException("Sorry, I didn't get that (\u3063*\u00B4\u25A1`)\u3063");
                 }
@@ -58,6 +61,23 @@ public class Parser {
             throw new YooException("Please add a task description (>_<)");
         }
         return false;
+    }
+
+    private static void findKeyword(TaskList tasks, String[] cmd, Ui ui) {
+        TaskList tasksWithKeyword = new TaskList();
+        for (int i = 0; i < tasks.length(); i ++) {
+            Task t = tasks.get(i);
+            if (t.getDescription().contains(cmd[1])) {
+                tasksWithKeyword.add(t);
+            }
+        }
+        if (tasksWithKeyword.length() > 0) {
+            ui.showFoundKeyword();
+            ui.showTaskList(tasksWithKeyword);
+        } else {
+            ui.showCannotFindKeyword();
+        }
+
     }
 
     private static void markAsDone(TaskList tasks, String[] temp, Ui ui) throws YooException {
