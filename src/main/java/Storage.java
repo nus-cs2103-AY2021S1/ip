@@ -28,7 +28,6 @@ public class Storage {
                 f.createNewFile();
                 return new ArrayList<>();
             } else {
-                System.out.println("read file");
                 return readTasksFromFile();
             }
         } catch (IOException e) {
@@ -53,7 +52,6 @@ public class Storage {
                 ArrayList<String> linePartArray = new ArrayList<>(Arrays.asList(lineParts));
                 formattedOutput.add(linePartArray);
             }
-            System.out.println(formattedOutput);
             return formattedOutput;
         } catch (java.io.FileNotFoundException e) {
             throw new DukeException("     A file error has occurred!");
