@@ -1,15 +1,37 @@
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 class Deadline extends Task {
     static String SYMBOL = "[D]";
 
-    private String deadline;
+    private LocalDate deadlineDay;
+    private LocalTime deadlineTime;
 
-    public Deadline(String name, String deadline) {
+    public Deadline(String name, String datetime) {
         super(name, TaskType.Deadline);
-        this.deadline = deadline;
+        
+        String[] date_time_arr = datetime.split(" "); // Assuming must have date and time
+        String date = date_time_arr[0];
+        String time = date_time_arr[1];
+        
+        this.deadlineDay = createDeadlineDay(date);
+        this.deadlineTime = createDeadlineTime(time);
     }
 
-    public String getDeadline() {
-        return deadline;
+    public LocalDate getDeadlineDay() {
+        return deadlineDay;
+    }
+
+    public LocalTime getDeadlineTime() {
+        return deadlineTime;
+    }
+
+    public static LocalDate createDeadlineDay(String date) {
+        return LocalDate.parse(date);
+    }
+
+    public static LocalTime createDeadlineTime(String time) {
+        return LocalTime.parse(time);
     }
 
     @Override
@@ -21,6 +43,6 @@ class Deadline extends Task {
     @Override
     public String toString() {
         String tick = this.isDone() ? "[✓]" : "[✗]";
-        return String.format("%s%s %s (by: %s)", SYMBOL, tick, name, deadline);
+        return String.format("%s%s %s (by: %s %s)", SYMBOL, tick, name, deadlineDay.toString(), deadlineTime.toString());
     }
 }

@@ -117,6 +117,14 @@ public class Duke {
         }
         return task.trim();
     }
+
+    public static String extractDetails(String[] input_parts) {
+        String task = "";
+        for (int i = 0; i < input_parts.length; i++) {
+            task += input_parts[i] + " ";
+        }
+        return task.trim();
+    }
     
     public static Task getTask(String input) throws Exception { // catch duke exception from extractTask and categorize, throw to op()
         String[] parts = input.split(" ");
@@ -135,18 +143,18 @@ public class Duke {
             String name = extractTask(parts);
             return new ToDo(name);
         } else if (type == TaskType.Deadline) {
-            if (input.split("/").length <= 1) {
+            if (input.split("/by").length <= 1) {
                 throw new NoDescriptionException("☹ OOPS!!! The description of a deadline cannot be empty.\n");
             } // if not, chillax and continue
-            String name = extractTask(input.split("/")[0].split(" "));
-            String deadline = extractTask(input.split("/")[1].split(" "));
+            String name = extractTask(input.split("/by")[0].split(" "));
+            String deadline = extractDetails(input.split("/by")[1].split(" "));
             return new Deadline(name, deadline); 
         } else {
-            if (input.split("/").length <= 1) {
+            if (input.split("/at").length <= 1) {
                 throw new NoDescriptionException("☹ OOPS!!! The description of an event cannot be empty.\n");
             } // if not, chillax and continue
-            String name = extractTask(input.split("/")[0].split(" "));
-            String details = extractTask(input.split("/")[1].split(" "));
+            String name = extractTask(input.split("/at")[0].split(" "));
+            String details = extractDetails(input.split("/at")[1].split(" "));
             
             return new Event(name, details);
         }
