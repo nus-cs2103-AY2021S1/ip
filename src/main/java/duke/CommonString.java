@@ -2,9 +2,6 @@ package duke;
 
 // Enum class to denote commonly used, constant String values in duke.Duke
 public enum CommonString {
-    DELETE("DELETE"),
-    DONE("DONE"),
-
     LOGO(" ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"

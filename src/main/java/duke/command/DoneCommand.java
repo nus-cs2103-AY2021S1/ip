@@ -1,7 +1,7 @@
 package duke.command;
 
-import duke.CommonString;
-import duke.exception.InvalidInstructionException;
+import duke.exception.InvalidTaskIndexException;
+import duke.exception.TaskDoneException;
 import duke.logic.StorageManager;
 import duke.logic.TaskList;
 import duke.logic.UIManager;
@@ -28,15 +28,16 @@ public class DoneCommand extends Command {
      * @param taskList       <code>TaskList</code> object containing the user's <code>DukeTask</code>.
      * @param uiManager      <code>UIManager</code> object to handle printing feedback to user.
      * @param storageManager <code>StorageManager</code> object to saving/loading user data.
-     * @throws InvalidInstructionException If user input validation fails.
+     * @throws InvalidTaskIndexException If index of the task is invalid.
+     * @throws TaskDoneException         If Task is completed.
      */
     @Override
     public void execute(TaskList taskList, UIManager uiManager, StorageManager storageManager)
-            throws InvalidInstructionException {
+            throws InvalidTaskIndexException, TaskDoneException {
         if (index < 0 || index >= taskList.getSize()) {
-            throw new InvalidInstructionException(CommonString.DONE + ": Invalid Task Number");
+            throw new InvalidTaskIndexException();
         } else if (taskList.getTaskList().get(index).getDoneStatus()) {
-            throw new InvalidInstructionException(CommonString.DONE + ": Task is already done!");
+            throw new TaskDoneException();
         } else {
             taskList.markDone(index);
             uiManager.printMarkAsDone(taskList.getTaskList().get(index), taskList.getSize());

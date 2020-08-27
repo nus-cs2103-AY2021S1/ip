@@ -1,25 +1,22 @@
 package duke.exception;
 
 /**
- * Represents a generic DukeException.
- * It contains a <code>String</code> exceptionType describing the type of <code>DukeException</code>,
- * a <code>String</code> additionalInfo to describe the <code>DukeException</code> in detail.
+ * Represents a general DukeException in the program.
+ * Contains a <code>String</code> message for the exception and
+ * a <code>String</code> exceptionType to identify the exception.
  */
 public abstract class DukeException extends Exception {
     private final String exceptionType;
-    private final String additionalInfo;
 
-    public DukeException(String message, String exceptionType, String additionalInfo) {
-        super(message);
+    public DukeException(String exceptionMessage, String exceptionType) {
+        super(exceptionMessage);
         this.exceptionType = exceptionType;
-        this.additionalInfo = additionalInfo;
     }
 
     @Override
     public String toString() {
-        return "Exception: " + this.exceptionType +
-                "\n\t" + getMessage() +
-                "\n\t" + additionalInfo +
-                "\n\tSee \"help\" for more";
+        return "DukeException: " + this.exceptionType + "\n" +
+                getMessage() + "\n" +
+                "See \"help\" for more";
     }
 }

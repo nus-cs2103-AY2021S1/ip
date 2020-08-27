@@ -1,12 +1,13 @@
 package command;
 
 import duke.command.DoneCommand;
-import duke.exception.InvalidInstructionException;
+import duke.exception.InvalidTaskIndexException;
+import duke.exception.TaskDoneException;
 import duke.logic.UIManager;
 import duke.task.DukeTask;
-import stub.TaskListStub;
 import org.junit.jupiter.api.Test;
 import stub.DukeTaskStub;
+import stub.TaskListStub;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -16,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class DoneCommandTest {
     @Test
-    public void testDone() throws InvalidInstructionException {
+    public void testDone() throws InvalidTaskIndexException, TaskDoneException {
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
 
@@ -45,9 +46,9 @@ public class DoneCommandTest {
         DoneCommand lessThanZeroCommand = new DoneCommand(-1);
         DoneCommand moreThanIndexCommand = new DoneCommand(100);
 
-        assertThrows(InvalidInstructionException.class,
+        assertThrows(InvalidTaskIndexException.class,
                 () -> lessThanZeroCommand.execute(taskListStub, new UIManager(), null));
-        assertThrows(InvalidInstructionException.class,
+        assertThrows(InvalidTaskIndexException.class,
                 () -> moreThanIndexCommand.execute(taskListStub, new UIManager(), null));
 
     }

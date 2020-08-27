@@ -1,9 +1,7 @@
 package duke;
 
 import duke.command.Command;
-import duke.exception.InvalidFormatException;
-import duke.exception.InvalidInstructionException;
-import duke.exception.MissingFieldException;
+import duke.exception.*;
 import duke.logic.StorageManager;
 import duke.logic.TaskList;
 import duke.logic.UIManager;
@@ -62,12 +60,15 @@ public class Duke {
                 Command command = UserInputParser.parse(userInput);
                 command.execute(taskList, uiManager, storageManager);
                 isExit = command.getExitStatus();
-            } catch (InvalidInstructionException | MissingFieldException | InvalidFormatException e) {
+            } catch (UnknownInstructionException | InvalidInstructionFormatException |
+                    MissingFieldException | TaskDoneException |
+                    InvalidInstructionLengthException | InvalidTaskIndexException e) {
                 System.out.println(e);
             } catch (IOException e) {
                 System.out.println("IO Error: " + e.getMessage());
                 e.printStackTrace();
             }
+
             uiManager.printLine();
         }
 
