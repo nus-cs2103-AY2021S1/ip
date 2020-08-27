@@ -1,21 +1,24 @@
 package duke.command;
 
+import java.io.IOException;
+
 import duke.DukeException;
 import duke.Storage;
 import duke.UI;
 import duke.task.Event;
 import duke.task.TaskList;
 
-import java.io.IOException;
-
+/**
+ * Encapsulates data and methods specific to the Event command.
+ */
 public class EventCommand extends Command {
-    
-    /**
-     * Encapsulates data and methods specific to the Event command.
-     */
     
     private final String argument;
 
+    /**
+     * Creates a new instance of the Event command task.
+     * @param argument Argument passed in by the user.
+     */
     public EventCommand(String argument) {
         this.argument = argument;
     }
@@ -26,7 +29,7 @@ public class EventCommand extends Command {
      * @param storage Storage object pointing to the file path where the data is stored.
      * @param taskList Task list that the task needs to be added to.
      * @param ui UI object for the instance of Duke.
-     * @throws DukeException If the arguments for creating a new Event task are invalid. 
+     * @throws DukeException If the arguments for creating a new Event task are invalid.
      * @throws IOException If there are issues with writing to storage.
      */
     @Override

@@ -2,14 +2,13 @@ package duke.task;
 
 import java.time.LocalDate;
 
+/**
+ * Encapsulates information that are shared by all tasks.
+ */
 public abstract class Task {
 
-    /**
-     * Encapsulates information that are shared by all tasks.
-     */
-
-    final String taskData;
     protected boolean isDone = false;
+    final String taskData;
 
     Task(String taskData) {
         this.taskData = taskData;

@@ -1,8 +1,5 @@
 package duke.task;
 
-import duke.DukeException;
-import duke.Storage;
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -13,12 +10,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import duke.DukeException;
+import duke.Storage;
+
+/**
+ * Encapsulates behavior and data for the TaskList.
+ */
 public class TaskList {
-
-    /**
-     * Encapsulates behavior and data for the TaskList.
-     */
-
+    
     private final List<Task> tasks;
     
     public TaskList() {
@@ -30,8 +29,8 @@ public class TaskList {
     }
 
     /**
-     * Converts a task list to a numbered list. 
-     * 
+     * Converts a task list to a numbered list.
+     *
      * @param tasks Task list to be converted to string.
      * @return Numbered string representation of task list.
      */
@@ -58,7 +57,7 @@ public class TaskList {
 
     /**
      * Marks a task in the list as done.
-     * 
+     *
      * @param taskID ID of the task that needs to be marked as done.
      * @param storage Storage object that needs to be updated once the task is marked as done.
      * @return String to be displayed in user interface that confirms the action.
@@ -103,7 +102,7 @@ public class TaskList {
 
     /**
      * Adds a task to the task list.
-     * 
+     *
      * @param task Task to be added.
      * @return String to be displayed in the user interface that confirms the action.
      */
@@ -115,9 +114,9 @@ public class TaskList {
 
     /**
      * Converts a task list to a numbered list filtered by date.
-     * 
+     *
      * @param dateString String keyed in by the user as an argument.
-     * @return String with numbered list representation of the filtered task list. 
+     * @return String with numbered list representation of the filtered task list.
      * @throws DukeException if the DateTime format is invalid.
      */
     public String taskListToDateFilteredString(String dateString) throws DukeException {
@@ -159,7 +158,6 @@ public class TaskList {
      * @throws IOException If there are issues with reading from the file.
      */
     public void loadDataFromStorage(Path filePath) throws DukeException, IOException {
-        
         FileReader reader = new FileReader(filePath.toString());
         BufferedReader bufferedReader = new BufferedReader(reader);
 

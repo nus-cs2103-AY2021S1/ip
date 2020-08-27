@@ -1,20 +1,23 @@
 package duke.command;
 
+import java.io.IOException;
+
 import duke.DukeException;
 import duke.Storage;
 import duke.UI;
 import duke.task.TaskList;
 
-import java.io.IOException;
-
+/**
+ * Encapsulates data and methods specific to the Done command.
+ */
 public class DoneCommand extends Command {
-
-    /**
-     * Encapsulates data and methods specific to the Done command.
-     */
     
     private final int argument;
 
+    /**
+     * Creates a new instance of the Done command task.
+     * @param argument Task ID of the task that needs to be marked as done.
+     */
     public DoneCommand(int argument) {
         this.argument = argument;
     }

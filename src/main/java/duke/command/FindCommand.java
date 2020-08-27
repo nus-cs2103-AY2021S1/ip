@@ -4,14 +4,17 @@ import duke.Storage;
 import duke.UI;
 import duke.task.TaskList;
 
+/**
+ * Encapsulates data and methods specific to the Find command.
+ */
 public class FindCommand extends Command {
-
-    /**
-     * Encapsulates data and methods specific to the Find command.
-     */
 
     private final String argument;
 
+    /**
+     * Creates a new instance of the Find command class.
+     * @param argument Argument passed in by the user.
+     */
     public FindCommand(String argument) {
         this.argument = argument;
     }

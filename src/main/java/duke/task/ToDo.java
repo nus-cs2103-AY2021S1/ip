@@ -2,15 +2,18 @@ package duke.task;
 
 import duke.DukeException;
 
+/**
+ * Encapsulates data and methods specific to ToDo tasks.
+ */
 public class ToDo extends Task {
 
-    /**
-     * Encapsulates data and methods specific to ToDo tasks.
-     */
-
+    private ToDo(String taskName) {
+        super(taskName);
+    }
+    
     /**
      * Creates a new instance of the class if the input is valid.
-     * 
+     *
      * @param argument Argument keyed in by the user when creating the task.
      * @return New instance of the ToDo class.
      * @throws DukeException If task name is empty.
@@ -23,13 +26,9 @@ public class ToDo extends Task {
         return new ToDo(argument);
     }
 
-    private ToDo(String taskName) {
-        super(taskName);
-    }
-
     /**
      * Generates a single line string that will be saved in storage.
-     * 
+     *
      * @return String to be saved in storage.
      */
     @Override

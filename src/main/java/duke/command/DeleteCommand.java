@@ -1,20 +1,23 @@
 package duke.command;
 
+import java.io.IOException;
+
 import duke.DukeException;
 import duke.Storage;
 import duke.UI;
 import duke.task.TaskList;
 
-import java.io.IOException;
-
+/**
+ * Encapsulates data and methods specific to the Delete command.
+ */
 public class DeleteCommand extends Command {
 
-    /**
-     * Encapsulates data and methods specific to the Delete command.
-     */
-    
     private final int argument;
 
+    /**
+     * Creates a new instance of the Delete command task.
+     * @param argument Task ID of the task that needs to be deleted.
+     */
     public DeleteCommand(int argument) {
         this.argument = argument;
     }
@@ -25,7 +28,7 @@ public class DeleteCommand extends Command {
      * @param storage Storage object pointing to the file path where the data is stored.
      * @param taskList Task list with the task that needs to be deleted.
      * @param ui UI object for the instance of Duke.
-     * @throws DukeException If the argument for deleting a task is invalid. 
+     * @throws DukeException If the argument for deleting a task is invalid.
      * @throws IOException If there are issues with writing to storage.
      */
     @Override

@@ -2,14 +2,13 @@ package duke;
 
 import java.util.Scanner;
 
+/**
+ * Encapsulates behaviour for all UI related actions.
+ */
 public class UI {
 
-    /**
-     * Encapsulates behaviour for all UI related actions.
-     */
-
     private static final String DIVIDER = "___________________________________________________________________________";
-
+    
     private static final String LOGO = "             _        ______   _____    ______   _____  \n"
            + "     /\\     | |      |  ____| |  __ \\  |  ____| |  __ \\ \n"
            + "    /  \\    | |      | |__    | |__) | | |__    | |  | |\n"
@@ -19,7 +18,10 @@ public class UI {
     
     private final Scanner sc;
     private boolean hasClosed;
-    
+
+    /**
+     * Creates a new instance of the UI class.
+     */
     public UI() {
         hasClosed = false;
         sc = new Scanner(System.in);
@@ -28,7 +30,7 @@ public class UI {
     /**
      * Prints a given message to the console. The message will be enclosed with
      * two horizontal lines.
-     * 
+     *
      * @param message Message to be printed.
      */
     public void printToConsole(String message) {
@@ -36,12 +38,18 @@ public class UI {
         System.out.println(message);
         System.out.println(DIVIDER);
     }
-    
+
+    /**
+     * Greets the user.
+     */
     public void greet() {
         System.out.println(LOGO);
         printToConsole("Hi I'm Alfred! How can I help you today?");
     }
-    
+
+    /**
+     * Prints goodbye message and stops the program from reading further input.
+     */
     public void close() {
         printToConsole("Goodbye!");
         hasClosed = true;
@@ -55,5 +63,4 @@ public class UI {
     public boolean hasNextCommand() {
         return !hasClosed && sc.hasNextLine();
     }
-    
 }
