@@ -1,5 +1,6 @@
 package duke.exceptions;
 
+
 /**
  * Duke Invalid Description Exception class.
  * Thrown when description given is invalid.

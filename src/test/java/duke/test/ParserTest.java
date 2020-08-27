@@ -1,13 +1,13 @@
 package duke.test;
 
 
+import duke.Parser;
 import duke.commands.Command;
 import duke.tasks.TaskType;
-import duke.Parser;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 public class ParserTest {
@@ -46,7 +46,8 @@ public class ParserTest {
         Command expected = Command.TASK;
         assertEquals(expected, actual);
     }
-    
+
+
     @Test
     public void getCommand_invalidCommand_correctCommand() {
         String text = "XXX";
@@ -54,7 +55,8 @@ public class ParserTest {
         Command expected = Command.INVALID;
         assertEquals(expected, actual);
     }
-    
+
+
     @Test
     public void getTask_validTask_correctCommand() {
         String text = "todo stuff abc";
@@ -62,7 +64,8 @@ public class ParserTest {
         TaskType expected = TaskType.TODO;
         assertEquals(expected, actual);
     }
-    
+
+
     @Test
     public void getTask_invalidCommand_correctCommand() {
         String text = "XXX";

@@ -1,8 +1,10 @@
 package duke;
 
+
 import duke.commands.Command;
 import duke.exceptions.DukeException;
 
+import java.io.InputStream;
 import java.util.Scanner;
 
 
@@ -11,7 +13,7 @@ import java.util.Scanner;
  */
 public class Duke {
 
-    private final DukeList taskList;
+    private final DukeList taskList = new DukeList();
     private final Ui ui;
 
 
@@ -19,8 +21,17 @@ public class Duke {
      * Constructor for Duke.
      */
     public Duke() {
-        this.taskList = new DukeList();
-        this.ui = new Ui(System.in);
+        this.ui = new Ui();
+    }
+
+
+    /**
+     * Constructor for Duke.
+     *
+     * @param inputStream input stream to read user inputs from.
+     */
+    public Duke(InputStream inputStream) {
+        this.ui = new Ui(inputStream);
     }
 
 
@@ -34,13 +45,6 @@ public class Duke {
         final String QUIT_STRING = "bye";
 
         return msgInput.equals(QUIT_STRING);
-    }
-
-
-    public static void main(String[] args) {
-
-        new Duke().start();
-
     }
 
 
@@ -156,7 +160,7 @@ public class Duke {
 
 
     /**
-     * Method to start the Duke programme.
+     * Starts the Duke programme logic.
      */
     public void start() {
         Ui.printStartMessage();
@@ -170,6 +174,18 @@ public class Duke {
         this.taskList.writeToFile();
 
         sc.close();
+    }
+
+
+    /**
+     * Programme entry point.
+     *
+     * @param args default argument array.
+     */
+    public static void main(String[] args) {
+
+        new Duke().start();
+
     }
 
 }

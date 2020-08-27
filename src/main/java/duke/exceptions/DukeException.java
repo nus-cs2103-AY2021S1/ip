@@ -1,5 +1,6 @@
 package duke.exceptions;
 
+
 /**
  * Duke Exception class.
  */

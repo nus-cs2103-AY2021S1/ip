@@ -1,34 +1,39 @@
 package duke;
 
+
 import duke.commands.Command;
+import duke.exceptions.DukeInvalidDescriptionException;
+import duke.exceptions.DukeNoDescriptionException;
 import duke.tasks.TaskType;
+
+import java.util.Arrays;
 
 
 /**
  * Parser for Duke.
- * Parses user inputs.
+ * Parses user inputStrings.
  */
 public class Parser {
 
     /**
-     * Parse input line to array by delimiter.
+     * Parse inputString to array by delimiter.
      *
-     * @param input input line.
+     * @param inputString inputString line.
      * @return parsed string array.
      */
-    public static String[] parseLineToArray(String input) {
-        return input.split(" ");
+    public static String[] parseLineToArray(String inputString) {
+        return inputString.split(" ");
     }
 
 
     /**
      * Parses line and gets command.
      *
-     * @param input input line.
+     * @param inputString input line.
      * @return command.
      */
-    public static Command getCommand(String input) {
-        String keyword = parseLineToArray(input)[0];
+    public static Command getCommand(String inputString) {
+        String keyword = parseLineToArray(inputString)[0];
 
         switch (keyword) {
         case ("list"):
@@ -52,11 +57,11 @@ public class Parser {
     /**
      * Parses line and gets task type.
      *
-     * @param input input line.
+     * @param inputString input line.
      * @return task type.
      */
-    public static TaskType getTaskKeyword(String input) {
-        String keyword = parseLineToArray(input)[0];
+    public static TaskType getTaskKeyword(String inputString) {
+        String keyword = parseLineToArray(inputString)[0];
 
         switch (keyword) {
         case ("todo"):
@@ -69,6 +74,23 @@ public class Parser {
             return TaskType.INVALID;
         }
 
+    }
+
+
+    /**
+     * Removes the keyword at the start of the string array.
+     *
+     * @param strArr Array of strings (originally split by spaces).
+     * @return Substring with the keyword removed.
+     * @throws DukeInvalidDescriptionException invalid description text.
+     */
+    public static String getItemSubstring(String[] strArr) throws DukeInvalidDescriptionException {
+        if (strArr.length <= 1) {
+            // string array is of invalid length
+            throw new DukeNoDescriptionException("String array of unexpected length: expected length > 1");
+        } else {
+            return String.join(" ", Arrays.copyOfRange(strArr, 1, strArr.length));
+        }
     }
 
 }
