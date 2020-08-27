@@ -2,6 +2,11 @@
  *  Parses user input.
  */
 public class Parser {
+    /**
+     * Parse method to handle all types of commands.
+     * @param inputLine Description of the input command.
+     * @return Command object that has been specified by input file.
+     */
     public static Command parse(String inputLine) throws DukeException {
         Command newTaskObject;
         String[] userInputArray = inputLine.split(" ");

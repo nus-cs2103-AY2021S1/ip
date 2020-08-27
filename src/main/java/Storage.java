@@ -93,7 +93,7 @@ public class Storage {
                 } else {
                     isDone = 0;
                 }
-            
+
                 if ((task.getClass().equals(Todo.class))) {
                     outputLine = "T" + "|" + isDone + "|" + task.description;
                 } else if ((task.getClass().equals(Deadline.class))) {
