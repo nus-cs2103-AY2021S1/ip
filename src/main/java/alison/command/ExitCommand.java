@@ -11,8 +11,9 @@ public class ExitCommand extends Command {
         ui.byeMessage();
     }
 
-    @Override
-    public boolean isExit() {
-        return true;
+  @Override
+  public boolean isExit() {
+    return true;
     }
+
 }

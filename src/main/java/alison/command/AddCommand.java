@@ -28,4 +28,5 @@ public class AddCommand extends Command {
         ui.addTaskMsg(task, tasks);
         storage.update(tasks);
     }
+
 }

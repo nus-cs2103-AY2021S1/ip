@@ -9,7 +9,6 @@ import alison.task.ToDo;
 
 public class Parser {
 
-
     /**
      * This method parse a task string into its corresponding Task.
      * @param taskString Saved line from file path.
@@ -106,4 +105,5 @@ public class Parser {
             return new UnknownCommand();
         }
     }
+
 }

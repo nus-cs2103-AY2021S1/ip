@@ -50,4 +50,5 @@ public class Alison {
     public static void main(String[] args) {
         new Alison("./data/tasks.txt").run();
     }
+    
 }

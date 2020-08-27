@@ -54,4 +54,5 @@ public class AlisonException extends Exception {
     public static AlisonException findException() {
         return new AlisonException("Sorry. You can only input one keyword for searching.");
     }
+
 }
