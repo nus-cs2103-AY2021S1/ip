@@ -1,0 +1,3 @@
+D | 0 | deadline | day
+E | 1 | event | day
+T | 0 | todo sth
