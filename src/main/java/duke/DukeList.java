@@ -25,6 +25,9 @@ public class DukeList {
     private final Storage store = new Storage("data", "duke.txt");
 
 
+    /**
+     * Constructor for DukeList.
+     */
     public DukeList() {
         this.list = new ArrayList<>(CAPACITY);
     }

@@ -12,6 +12,9 @@ public class Duke {
     private final Ui ui;
 
 
+    /**
+     * Constructor for Duke.
+     */
     public Duke() {
         this.taskList = new DukeList();
         this.ui = new Ui(System.in);

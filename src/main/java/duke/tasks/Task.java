@@ -18,12 +18,23 @@ public abstract class Task {
     public boolean isDone;
 
 
+    /**
+     * Constructor for Task.
+     *
+     * @param itemString description string.
+     */
     public Task(String itemString) {
         this.itemString = itemString;
         this.isDone = false;
     }
 
 
+    /**
+     * Constructor for Task.
+     *
+     * @param itemString description string.
+     * @param isDone     whether this task is done.
+     */
     public Task(String itemString, boolean isDone) {
         this.itemString = itemString;
         this.isDone = isDone;

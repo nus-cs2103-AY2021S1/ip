@@ -3,11 +3,22 @@ package duke.tasks;
 
 public class Todo extends Task {
 
+    /**
+     * Constructor for todo.
+     *
+     * @param itemString description string.
+     */
     public Todo(String itemString) {
         super(itemString);
     }
 
 
+    /**
+     * Constructor for todo.
+     *
+     * @param itemString description string.
+     * @param isDone     whether this task is done.
+     */
     public Todo(String itemString, boolean isDone) {
         super(itemString, isDone);
     }

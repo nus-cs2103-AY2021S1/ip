@@ -30,6 +30,11 @@ public class Storage {
     private final ArrayList<String> fileBuffer;
 
 
+    /**
+     * Constructor for Parser.
+     *
+     * @param pathStr path to storage file.
+     */
     public Storage(String... pathStr) {
         this.path = Paths.get(projectRoot, pathStr);
         this.storageFile = new File(this.path.toString());
