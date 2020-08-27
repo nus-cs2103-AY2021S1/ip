@@ -25,34 +25,34 @@ public class Parser {
      * @param storage This is the Storage object that records the tasks
      * @throws DukeException Exception for unidentified commands
      */
-    public void process(String command, ArrayList<Task> arrayLst, Storage storage) throws DukeException {
+    public static void process(String command, TaskList taskList, Storage storage) throws DukeException {
         String[] stringarr = command.split(" ");
         if (stringarr[0].equals("list")) {
-            processorList(arrayLst);
+            processorList(taskList);
         } else if (stringarr[0].equals("done")) {
             int index = Integer.parseInt(stringarr[1]);
-            String record = processorDone(arrayLst, index);
+            String record = taskList.updateTask(index);
             storage.updateRecord(record, index);
         } else if (stringarr[0].equals("delete")) {
             int index = Integer.parseInt(stringarr[1]);
-            processorDelete(arrayLst, index);
+            taskList.deleteTask(index);
             storage.deleteRecord(index);
         } else if (stringarr[0].equals("find")) {
             String key = stringarr[1];
-            processorFind(arrayLst, key);
+            processorFind(taskList, key);
         } else {
-            String record = processorAdd(command, arrayLst);
+            String record = processorAdd(command, taskList);
             storage.saveRecord(record);
         }
     }
 
 
-    public void processorFind(ArrayList<Task> arrayLst, String key) {
+    public static void processorFind(TaskList taskList, String key) {
         int counter = 1;
         System.out.println("_________________________________________\n" + "Here are the matching tasks in your list:");
-        for (int i = 0; i < arrayLst.size(); i++) {
-            if (arrayLst.get(i).getTask().contains(key)) {
-                System.out.println(counter + "." + arrayLst.get(i).toString());
+        for (int i = 0; i < taskList.getListSize(); i++) {
+            if (taskList.getTask(i).getTask().contains(key)) {
+                System.out.println(counter + "." + taskList.getTask(i).toString());
                 counter++;
             }
         }
@@ -60,38 +60,17 @@ public class Parser {
     }
 
 
-    public void processorList(ArrayList<Task> arrayLst) {
+    public static void processorList(TaskList taskList) {
         System.out.println("_________________________________________\n" + "Here are the tasks in your list:");
-        for (int i = 0; i < arrayLst.size(); i++) {
+        for (int i = 0; i < taskList.getListSize(); i++) {
             int index = i+1;
-            System.out.println(index + "." + arrayLst.get(i).toString());
+            System.out.println(index + "." + taskList.getTask(i).toString());
         }
         System.out.println("_________________________________________");
     }
 
 
-    public String processorDone(ArrayList<Task> arrayLst, int index) {
-        int i = index - 1;
-        arrayLst.get(i).setDone();
-        System.out.println("_________________________________________");
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.println(index + "." + arrayLst.get(i).toString());
-        System.out.println("_________________________________________");
-        return arrayLst.get(i).toString();
-    }
-
-    public void processorDelete(ArrayList<Task> arrayLst, int index) {
-        int i = index - 1;
-        Task removed_task = arrayLst.get(i);
-        arrayLst.remove(i);
-        System.out.println("_________________________________________");
-        System.out.println("Noted, I've removed this task:");
-        System.out.println(removed_task.toString());
-        System.out.println("Now you have " + arrayLst.size() + " tasks in the list.");
-        System.out.println("_________________________________________");
-    }
-
-    public String processorAdd(String cmd, ArrayList<Task> arrayLst) throws DukeException {
+    public static String processorAdd(String cmd, TaskList taskList) throws DukeException {
         String[] stringarr = cmd.split(" ", 2);
         if (stringarr[0].equals("todo")) {
             if (stringarr.length <= 1) {
@@ -99,7 +78,8 @@ public class Parser {
                 throw new DukeException("_________________________________________\n" + message + "\n_________________________________________");
             } else {
                 Todo todo = new Todo(stringarr[1]);
-                arrayLst.add(todo);
+                taskList.addTask(todo);
+                return todo.toString();
             }
         } else if (stringarr[0].equals("deadline")) {
             if (stringarr.length <= 1) {
@@ -109,7 +89,8 @@ public class Parser {
                 String[] secondarr = stringarr[1].split("/by", 2);
                 LocalDate date = LocalDate.parse(secondarr[1].trim());
                 Deadline deadline = new Deadline(secondarr[0], date);
-                arrayLst.add(deadline);
+                taskList.addTask(deadline);
+                return deadline.toString();
             }
         } else if (stringarr[0].equals("event")) {
             if (stringarr.length <= 1) {
@@ -118,19 +99,14 @@ public class Parser {
             } else {
                 String[] secondarr = stringarr[1].split("/at", 2);
                 Event event = new Event(secondarr[0], secondarr[1]);
-                arrayLst.add(event);
+                taskList.addTask(event);
+                return event.toString();
             }
+        } else if (cmd.length() == 0){
+                return null;
         } else {
             String message = "OOPS!!! I'm sorry, but I don't know what that means :-(";
             throw new DukeException("_________________________________________\n" + message + "\n_________________________________________");
         }
-        int lastelem = arrayLst.size() - 1;
-        Task latesttask = arrayLst.get(lastelem);
-        System.out.println("_________________________________________");
-        System.out.println("Got it. I've added this task:");
-        System.out.println(latesttask.toString());
-        System.out.println("Now you have " + arrayLst.size() + " tasks in the list.");
-        System.out.println("_________________________________________");
-        return latesttask.toString();
     }
 }
