@@ -1,6 +1,7 @@
 import java.io.*;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.text.ParseException;
 import java.util.ArrayList;
 
 public class Storage {
@@ -26,7 +27,7 @@ public class Storage {
         wr.close();
     }
 
-    public TaskList load() throws FileNotFoundException, IOException, DukeException {
+    public TaskList load() throws FileNotFoundException, IOException, DukeException, ParseException {
         TaskList tasks = new TaskList();
         Parser parser = new Parser();
         Path filePath = Paths.get("data", "duke.txt");

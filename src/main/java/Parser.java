@@ -1,3 +1,4 @@
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -5,7 +6,7 @@ public class Parser {
     public Parser(){}
 
     // TODO: 20/8/20 CHANGE ALL MATCHES TO matcher.find 
-    public Task parseAdd(String echo) throws DukeException {
+    public Task parseAdd(String echo) throws DukeException, ParseException {
         if (echo.matches("(?i)^todo.*")) {
             if (echo.matches("(?i)^todo\\s+\\S+.*")) {
                 String text = echo.replaceFirst("(?i)^todo\\s*", "");

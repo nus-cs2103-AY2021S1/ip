@@ -46,7 +46,7 @@ public class Duke {
                     Task task = parser.parseAdd(echo);
                     Ui.printAdd(tasks.add(task));
                 }
-            } catch (DukeException | IOException e) {
+            } catch (DukeException | IOException e | ParseException e) {
                 System.out.println(e.getMessage());
             }
         }
