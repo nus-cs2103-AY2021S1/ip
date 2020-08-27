@@ -31,32 +31,15 @@ public class Duke {
                     tasks.displayTasks();
                     break;
                 case "done":
-                    try {
-                        int index = Integer.parseInt(split[1]) - 1;
-                        tasks.markTaskAsDone(index);
-                    } catch (NumberFormatException e) {
-                        throw new DukeException("\tPaise! :') Please use the correct format: done <order of task in the list>");
-                    } catch (IndexOutOfBoundsException e) {
-                        throw new DukeException("\tPaise! :') The index is out of bounds!");
-                    }
+                    tasks.markTaskAsDone(Integer.parseInt(split[1]) - 1);
                     break;
                 case "todo":
                 case "deadline":
                 case "event":
-                    if (split.length < 2) {
-                        throw new DukeException("\tSorry! The description of a todo cannot be empty :')");
-                    }
-                    tasks.addTask(split[0], split[1]);
+                    tasks.addTask(input);
                     break;
                 case "delete":
-                    try {
-                        int index = Integer.parseInt(split[1]) - 1;
-                        tasks.deleteTask(index);
-                    } catch (NumberFormatException e) {
-                        throw new DukeException("\tPaise! :') Please use the correct format: delete <order of task in the list>");
-                    } catch (IndexOutOfBoundsException e) {
-                        throw new DukeException("\tPaise! :') The index is out of bounds!");
-                    }
+                    tasks.deleteTask(Integer.parseInt(split[1]) - 1);
                     break;
                 default:
                     throw new DukeException("\tApologies! I do not understand what that means :')");
