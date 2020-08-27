@@ -84,7 +84,7 @@ public class TaskList {
     private int getNumOfDoneTask() {
         int num = 0;
         for (Task task : list) {
-            if (task.checkDone()) {
+            if (task.checkIsDone()) {
                 num++;
             }
         }
@@ -96,13 +96,13 @@ public class TaskList {
      * @return String representing list of tasks
      */
     private String showList() {
-        StringBuffer lst = new StringBuffer();
-        lst.append("Here are the tasks in your list:\n");
+        StringBuffer list = new StringBuffer();
+        list.append("Here are the tasks in your list:\n");
         int listSize = getNumOfTask();
         for (int i = 0; i < listSize; i++) {
-            lst.append((i + 1) + ". " + this.list.get(i).toString() + "\n");
+            list.append((i + 1) + ". " + this.list.get(i).toString() + "\n");
         }
-        return lst.toString();
+        return list.toString();
     }
 
     @Override

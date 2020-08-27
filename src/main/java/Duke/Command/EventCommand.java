@@ -34,8 +34,8 @@ public class EventCommand extends Command {
         if (date.length() != 10 || split.length != 3) {
             throw new InvalidDateTimeException();
         }
-        String formatDate = split[0] + "-" + split[1] + "-" + split[2];
-        return formatDate;
+        String setDate = split[0] + "-" + split[1] + "-" + split[2];
+        return setDate;
     }
 
     /**
@@ -48,7 +48,8 @@ public class EventCommand extends Command {
         if (time.length() != 4) {
             throw new InvalidDateTimeException();
         }
-        return time.substring(0, 2) + ":" + time.substring(2);
+        String setTime = time.substring(0, 2) + ":" + time.substring(2);
+        return setTime;
     }
 
     /**

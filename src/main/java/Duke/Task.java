@@ -22,7 +22,7 @@ public class Task {
      * @return  String showing either Y or X
      */
     public String getStatusIcon() {
-        return (isDone ? "Y" : "X"); //return tick or cross symbols
+        return (isDone ? "Y" : "X");
     }
 
     /**
@@ -36,7 +36,7 @@ public class Task {
      * Check Task isDone status.
      * @return  boolean value
      */
-    public boolean checkDone() {
+    public boolean checkIsDone() {
         return isDone;
     }
 
@@ -53,7 +53,7 @@ public class Task {
      * @return  String value to be stored in file
      */
     public String toData () {
-        return checkDone()
+        return checkIsDone()
                 ? "T//1//" + getDescription()
                 : "T//0//" + getDescription();
     }

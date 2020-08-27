@@ -33,7 +33,7 @@ public class DeleteCommand extends Command {
      * @throws IOException
      */
     @Override
-    public void execute(TaskList tasklist, Ui ui, Storage storage) throws InvalidDeleteInputException, IOException {
+    public void execute(TaskList tasklist, Ui ui, Storage storage) throws InvalidDeleteInputException {
         try {
             int num = Integer.parseInt(input.replaceAll("\\s+", ""));
             if (num > tasklist.getNumOfTask() || num <= 0) {
