@@ -42,14 +42,14 @@ public class Duke {
                     } else if (input.toLowerCase().split(" ")[0].equals("event")) {
                         if (input.split(" ").length == 1) {
                             throw new DukeException("You need to specify your event!\n"
-                                    + "eg event project meeting /at Mon 2-4pm");
+                                    + "eg event project meeting /at 2019-10-15 1200");
                         }
 
                         inputTask = input.substring(6);
                         String[] arr = inputTask.split(" /at ");
                         if (arr.length == 1) {
                             throw new DukeException("You need to use the proper format!\n"
-                                    + "eg event project meeting /at Mon 2-4pm");
+                                    + "eg event project meeting /at 2019-10-15 1200");
                         }
 
                         task = new Event(arr[0], arr[1]);
@@ -58,14 +58,14 @@ public class Duke {
                     } else if (input.toLowerCase().split(" ")[0].equals("deadline")) {
                         if (input.split(" ").length == 1) {
                             throw new DukeException("You need to specify your deadline!\n"
-                                    + "eg deadline return book /by Sunday");
+                                    + "eg deadline return book /by 2019-10-15 2359");
                         }
 
                         inputTask = input.substring(9);
                         String[] arr = inputTask.split(" /by ");
                         if (arr.length == 1) {
                             throw new DukeException("You need to use the proper format!\n"
-                                    + "eg deadline return book /by Sunday");
+                                    + "eg deadline return book /by 2019-10-15 2359");
                         }
 
                         task = new Deadline(arr[0], arr[1]);
@@ -142,12 +142,14 @@ public class Duke {
         System.out.println("list: displays the list of tasks you have\n");
         System.out.println("todo *task description*: adds a task without " +
                 "any\ndate/time attached to it\n" + "eg todo read book\n");
-        System.out.println("deadline *task description* /by *date/time*: " +
-                "adds a\ntask that needs to be done before a specific date/time\n" +
-                "eg deadline return book /by June 5 10pm\n");
-        System.out.println("event *task description* /at *time*: " +
+        System.out.println("deadline *task description* /by *date+time*: " +
+                "adds a\ntask that needs to be done before a specific date and time\n" +
+                "(date and time to be written in yyyy-mm-dd HHMM format)\n" +
+                "eg deadline return book /by 2019-10-15 2359\n");
+        System.out.println("event *task description* /at *date+time*: " +
                 "adds a task that\nstarts at a specific time and ends at a specific time\n" +
-                "eg event meeting /at 2-4pm\n");
+                "(date and time to be written in yyyy-mm-dd HHMM format)\n" +
+                "eg event meeting /at 2019-10-15 1200\n");
         System.out.println("done *task number*: marks the task with that number as\n" +
                 "done eg done 1\n");
         System.out.println("delete *task number*: deletes the task with that number\n" +
