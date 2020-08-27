@@ -79,7 +79,7 @@ public class Parser {
 
     public static String[] parseEvent(String input) throws EmptyDescriptionException, InvalidFormatException {
         String[] splitted = input.split("\\s+");
-        if (splitted.length == 1) throw new EmptyDescriptionException("Deadline");
+        if (splitted.length == 1) throw new EmptyDescriptionException("Event");
 
         int separator = getIndex(splitted, "/at");
 
@@ -88,7 +88,7 @@ public class Parser {
         String[] titles = Arrays.copyOfRange(splitted, 1, separator);
         String[] deadlines = Arrays.copyOfRange(splitted, separator + 1, splitted.length);
 
-        if (deadlines.length == 0) throw new EmptyDescriptionException("/by parameter");
+        if (deadlines.length == 0) throw new EmptyDescriptionException("/at parameter");
 
         String title = String.join(" ", titles);
         String deadline = String.join(" ", deadlines);
