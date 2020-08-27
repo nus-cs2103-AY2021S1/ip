@@ -1,7 +1,11 @@
+../src/TaskList.java
 ../src/TimeConverter.java
 ../src/InvalidDeadlineException.java
+../src/Parser.java
+../src/test/java/DukeTest.java
 ../src/InvalidEventException.java
 ../src/InputProcessor.java
+../src/Ui.java
 ../src/Event.java
 ../src/Task.java
 ../src/InvalidRequestException.java
