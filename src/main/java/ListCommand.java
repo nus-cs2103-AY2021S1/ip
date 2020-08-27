@@ -1,6 +1,6 @@
 public class ListCommand extends Command {
     @Override
-    void execute(TaskList tasks, Ui ui, Storage storage) {
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
         int numOfTasks = tasks.size();
         if (tasks.isEmpty()) {
             ui.showListNoTasks();
@@ -12,8 +12,8 @@ public class ListCommand extends Command {
         }
     }
 
-    @Override
-    boolean isExit() {
+    @Override 
+    public boolean isExit() {
         return false;
     }
 

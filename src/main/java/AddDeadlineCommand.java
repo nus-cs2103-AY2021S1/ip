@@ -4,13 +4,14 @@ import java.time.format.DateTimeParseException;
  * Represents command that adds deadline-typed tasks.
  */
 public class AddDeadlineCommand extends AddCommand {
-    String by;
+    protected String by;
 
     /**
      * Constructs command object that adds deadline-typed tasks
      * @param taskDescription literal description of the task
      * @param by date in YYYY-MM-DD format as a String
      */
+
     public AddDeadlineCommand(String taskDescription, String by) {
         super(taskDescription);
         this.by = by;

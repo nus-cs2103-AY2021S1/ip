@@ -11,9 +11,9 @@ public class Ui {
     private final static String MSG_MARK_DONE = "Nice! I've marked this task as done:\n";
     private final static String MSG_DELETED_TASK = "Noted. I've removed this task:\n";
 
-    Scanner sc;
+    private Scanner sc;
     
-    Ui() {
+    public Ui() {
         sc = new Scanner(System.in);
     }
 

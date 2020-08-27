@@ -2,13 +2,13 @@
  * Represents command that adds tasks.
  */
 public abstract class AddCommand extends Command {
-    String taskDescription;
+    protected String taskDescription;
 
     /**
      * Constructs command object that adds tasks
      * @param taskDescription literal description of the task
      */
-    AddCommand(String taskDescription) {
+    public AddCommand(String taskDescription) {
         this.taskDescription = taskDescription;
     }
 
