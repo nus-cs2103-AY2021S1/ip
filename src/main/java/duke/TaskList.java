@@ -11,27 +11,49 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class to store and manage Task objects.
+ */
 public class TaskList {
 
     List<Task> taskList;
 
+    /**
+     * Create an empty TaskList.
+     */
     public TaskList() {
         taskList = new ArrayList<>();
     }
 
+    /**
+     * Creates a TaskList from the given list of representations.
+     * @param stringList List of string representations
+     */
     public TaskList(List<String> stringList) {
         taskList = new ArrayList<>();
         stringList.forEach(this::parseLine);
     }
 
+    /**
+     * Returns the list of Tasks.
+     * @return List of Tasks
+     */
     public List<Task> getList() {
         return taskList;
     }
 
+    /**
+     * Returns the size of the list.
+     * @return size of list
+     */
     public int getSize() {
         return taskList.size();
     }
 
+    /**
+     * Creates a Task from the given representation and adds it to the list.
+     * @param line string repesentation of the Task
+     */
     private void parseLine(String line) {
         String[] lineSplit = line.split("\\|");
         boolean done = lineSplit[2].equals("1");
@@ -44,6 +66,13 @@ public class TaskList {
         }
     }
 
+    /**
+     * Adds a Task to the list.
+     * @param task Task name
+     * @param type Task type defined by COmm
+     * @param ddl Task deadline
+     * @param done whether task has been marked done
+     */
     private void addTask(String task, Commands type, String ddl, boolean done) {
         Task newTask;
         if (type == Commands.TODO) {
@@ -60,22 +89,34 @@ public class TaskList {
         taskList.add(newTask);
     }
 
+    /**
+     * Add a Todo with the given name.
+     * @param task Todo name
+     * @return Task object added
+     */
     public Task addTask(String task) {
         return addTask(new Todo(task));
     }
 
-    public Task addTask(String task, boolean isEvent) throws DukeException {
+    /**
+     * Add a Deadline or Event with given attributes.
+     * @param taskAttr Task attributes
+     * @param isEvent whether Task is an Event
+     * @return Task object added
+     * @throws DukeException Duke-related exception due to erroneous inputs
+     */
+    public Task addTask(String taskAttr, boolean isEvent) throws DukeException {
         Task newTask;
         String[] taskSplit;
         if (isEvent) {
-            taskSplit = task.split("/at");
+            taskSplit = taskAttr.split("/at");
             if (taskSplit.length != 2) {
                 throw new DukeException("Invalid description for an event. Use /at followed by date");
             }
             LocalDate dateTime = validateDateTime(taskSplit[1].strip());
             newTask = new Event(taskSplit[0].strip(), dateTime);
         } else {
-            taskSplit = task.split("/by");
+            taskSplit = taskAttr.split("/by");
             if (taskSplit.length != 2) {
                 throw new DukeException("Invalid description for a deadline. Use /by followed by date");
             }
@@ -90,6 +131,10 @@ public class TaskList {
         return task;
     }
 
+    /**
+     * Returns array of Task description strings.
+     * @return array of Task description strings
+     */
     public String[] listTasks() {
         String[] taskOutputs = new String[taskList.size() + 1];
         taskOutputs[0] = "Here are the tasks in your list:";
@@ -99,8 +144,14 @@ public class TaskList {
         return taskOutputs;
     }
 
+    /**
+     * Marks the given Task as done.
+     * @param position position of the Task in the list, as seen by the user.
+     * @return Task marked done
+     * @throws DukeException Duke-related exception due to erroneous inputs
+     */
     public Task markDone(int position) throws DukeException {
-        if (position < 0 || position > taskList.size()) {
+        if (position < 1 || position > taskList.size()) {
             throw new DukeException("Invalid task number provided");
         }
         Task task = taskList.get(position - 1);
@@ -108,16 +159,28 @@ public class TaskList {
         return task;
     }
 
+    /**
+     * Deleta the given Task.
+     * @param position position of the Task in the list, as seen by the user
+     * @return Task deleted
+     * @throws DukeException Duke-related exception due to erroneous inputs
+     */
     public Task deleteTask(int position) throws DukeException {
-        if (position < 0 || position > taskList.size()) {
+        if (position < 1 || position > taskList.size()) {
             throw new DukeException("Invalid task number provided");
         }
         return taskList.remove(position - 1);
     }
 
+    /**
+     * Validates the given string as a date and converts it to a LocalDate.
+     * @param time date string
+     * @return LocalDate for the given date
+     * @throws DukeException Duke-related exception due to erroneous inputs
+     */
     private LocalDate validateDateTime(String time) throws DukeException {
         if (time.equals("")) {
-            throw new DukeException("duke.tasks.Task date cannot be empty.");
+            throw new DukeException("Task date cannot be empty.");
         }
         LocalDate parsed;
         try {
