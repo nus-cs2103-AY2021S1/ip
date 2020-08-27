@@ -50,4 +50,13 @@ public class FindCommand implements Command {
     public boolean hasCommand() {
         return true;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof FindCommand) {
+            FindCommand o = (FindCommand) obj;
+            return this.searchTerm.equals(o.searchTerm);
+        }
+        return false;
+    }
 }

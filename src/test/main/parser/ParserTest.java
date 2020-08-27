@@ -16,6 +16,7 @@ import main.command.Command;
 import main.command.DeleteCommand;
 import main.command.DoneCommand;
 import main.command.ExitCommand;
+import main.command.FindCommand;
 import main.command.ListCommand;
 import main.exception.DukeException;
 import main.exception.EmptyMessageException;
@@ -31,7 +32,7 @@ public class ParserTest {
     class Bye {
         @Test
         @DisplayName("should generate exit command object")
-        public void parseBye() throws DukeException {
+        public void parse_byeCommand_objectExitCommand() throws DukeException {
             Command command = Parser.parse(new String[] { "bye" });
             assertEquals(command, new ExitCommand());
         }
@@ -42,7 +43,7 @@ public class ParserTest {
     class List {
         @Test
         @DisplayName("should generate list command object")
-        public void parseList() throws DukeException {
+        public void parse_listCommand_objectListCommand() throws DukeException {
             Command command = Parser.parse(new String[] { "list" });
             assertEquals(command, new ListCommand());
         }
@@ -53,21 +54,21 @@ public class ParserTest {
     class Done {
         @Test
         @DisplayName("should generate done command object")
-        public void parseDone() throws DukeException {
+        public void parse_doneCommand_objectDoneCommand() throws DukeException {
             Command command = Parser.parse(new String[] { "done", "1" });
             assertEquals(command, new DoneCommand(1));
         }
 
         @Test
         @DisplayName("should generate done command object with alt data")
-        public void parseDoneTwo() throws DukeException {
+        public void parse_doneCommand_altDataDoneCommand() throws DukeException {
             Command command = Parser.parse(new String[] { "done", "4123" });
             assertEquals(command, new DoneCommand(4123));
         }
 
         @Test
         @DisplayName("should throw exception if no second argument")
-        public void parseDoneThree() {
+        public void parse_doneCommandNoSecondArg_throwException() {
             InvalidTaskException exception = assertThrows(
                     InvalidTaskException.class, () ->
                             Parser.parse(new String[] { "done" }));
@@ -81,21 +82,21 @@ public class ParserTest {
     class Delete {
         @Test
         @DisplayName("should generate delete command object")
-        public void parseDelete() throws DukeException {
+        public void parse_deleteCommand_objectDeleteCommand() throws DukeException {
             Command command = Parser.parse(new String[] { "delete", "1" });
             assertEquals(command, new DeleteCommand(1));
         }
 
         @Test
         @DisplayName("should generate delete command object with alt data")
-        public void parseDeleteTwo() throws DukeException {
+        public void parse_deleteCommand_altDataDeleteCommand() throws DukeException {
             Command command = Parser.parse(new String[] { "delete", "12736" });
             assertEquals(command, new DeleteCommand(12736));
         }
 
         @Test
         @DisplayName("should throw exception if no second argument")
-        public void parseDeleteThree() {
+        public void parse_deleteCommandNoSecondArg_throwException() {
             InvalidTaskException exception = assertThrows(
                     InvalidTaskException.class, () ->
                             Parser.parse(new String[] { "delete" }));
@@ -109,21 +110,22 @@ public class ParserTest {
     class Todo {
         @Test
         @DisplayName("should generate add todo object")
-        public void parseTodo() throws DukeException {
+        public void parse_todoCommand_objectAddTodoCommand()
+                throws DukeException {
             Command command = Parser.parse(new String[] { "todo", "name" });
             assertEquals(command, new AddTodoCommand("name"));
         }
 
         @Test
         @DisplayName("should generate add todo object with alt data")
-        public void parseTodoTwo() throws DukeException {
+        public void parse_todoCommand_altDataAddTodoCommand() throws DukeException {
             Command command = Parser.parse(new String[] { "todo", "another" });
             assertEquals(command, new AddTodoCommand("another"));
         }
 
         @Test
         @DisplayName("should throw exception if no second argument")
-        public void parseTodoThree() {
+        public void parse_todoCommandNoSecondArg_throwException() {
             EmptyMessageException exception = assertThrows(
                     EmptyMessageException.class, () ->
                             Parser.parse(new String[] { "todo" }));
@@ -137,7 +139,8 @@ public class ParserTest {
     class Deadline {
         @Test
         @DisplayName("should generate add deadline object")
-        public void parseDeadline() throws DukeException {
+        public void parse_deadlineCommand_objectAddDeadlineCommand()
+                throws DukeException {
             Command command = Parser.parse(
                     new String[] { "deadline", "name /by 1400-1-31 1453" });
             assertEquals(command, new AddDeadlineCommand("name",
@@ -146,7 +149,8 @@ public class ParserTest {
 
         @Test
         @DisplayName("should generate add deadline object with alt data")
-        public void parseDeadlineTwo() throws DukeException {
+        public void parse_deadlineCommand_altDataAddDeadlineCommand()
+                throws DukeException {
             Command command = Parser.parse(
                     new String[] { "deadline", "test /by 1285-5-3 2144" });
             assertEquals(command, new AddDeadlineCommand("test",
@@ -155,7 +159,7 @@ public class ParserTest {
 
         @Test
         @DisplayName("should throw exception if no second argument")
-        public void parseDeadlineThree() {
+        public void parse_deadlineCommandNoSecondArg_throwException() {
             EmptyMessageException exception = assertThrows(
                     EmptyMessageException.class, () ->
                             Parser.parse(new String[] { "deadline" }));
@@ -165,7 +169,7 @@ public class ParserTest {
 
         @Test
         @DisplayName("should throw exception if deadline format is incorrect")
-        public void parseDeadlineFour() {
+        public void parse_deadlineCommandWrongFormat_throwException() {
             InvalidDeadlineFormatException exception = assertThrows(
                     InvalidDeadlineFormatException.class, () ->
                             Parser.parse(new String[] { "deadline", "name" }));
@@ -176,7 +180,7 @@ public class ParserTest {
 
         @Test
         @DisplayName("should throw exception if time format has no spacing")
-        public void parseDeadlineFive() {
+        public void parse_deadlineCommandNoSpacingTimeFormat_throwException() {
             InvalidDateException exception = assertThrows(
                     InvalidDateException.class, () ->
                             Parser.parse(new String[] {
@@ -190,7 +194,7 @@ public class ParserTest {
 
         @Test
         @DisplayName("should throw exception if date format is not YYYY-MM-DD")
-        public void parseDeadlineSix() {
+        public void parse_deadlineCommandWrongDateFormat_throwException() {
             InvalidDateException exception = assertThrows(
                     InvalidDateException.class, () ->
                             Parser.parse(new String[] {
@@ -204,7 +208,7 @@ public class ParserTest {
 
         @Test
         @DisplayName("should throw exception if time format is not HHMM")
-        public void parseDeadlineSeven() {
+        public void parse_deadlineCommandWrongTimeFormat_throwException() {
             InvalidDateException exception = assertThrows(
                     InvalidDateException.class, () ->
                             Parser.parse(new String[] {
@@ -218,7 +222,7 @@ public class ParserTest {
 
         @Test
         @DisplayName("should throw exception if time not in integers")
-        public void parseDeadlineEight() {
+        public void parse_deadlineCommandNonIntegerTime_throwException() {
             InvalidDateException exception = assertThrows(
                     InvalidDateException.class, () ->
                             Parser.parse(new String[] {
@@ -232,7 +236,7 @@ public class ParserTest {
 
         @Test
         @DisplayName("should throw exception if time is not possible")
-        public void parseDeadlineNine() {
+        public void parse_deadlineCommandImpossibleTime_throwException() {
             InvalidDateException exception = assertThrows(
                     InvalidDateException.class, () ->
                             Parser.parse(new String[] {
@@ -250,7 +254,8 @@ public class ParserTest {
     class Event {
         @Test
         @DisplayName("should generate add event object")
-        public void parseEvent() throws DukeException {
+        public void parse_eventCommand_objectAddEventCommand()
+                throws DukeException {
             Command command = Parser.parse(
                     new String[] { "event", "name /at 1400-1-31 1453" });
             assertEquals(command, new AddEventCommand("name",
@@ -259,7 +264,8 @@ public class ParserTest {
 
         @Test
         @DisplayName("should generate add event object with alt data")
-        public void parseEventTwo() throws DukeException {
+        public void parse_eventCommand_altDataAddEventCommand()
+                throws DukeException {
             Command command = Parser.parse(
                     new String[] { "event", "test /at 1285-5-3 2144" });
             assertEquals(command, new AddEventCommand("test",
@@ -268,7 +274,7 @@ public class ParserTest {
 
         @Test
         @DisplayName("should throw exception if no second argument")
-        public void parseEventThree() {
+        public void parse_eventCommandNoSecondArg_throwException() {
             EmptyMessageException exception = assertThrows(
                     EmptyMessageException.class, () ->
                             Parser.parse(new String[] { "event" }));
@@ -278,7 +284,7 @@ public class ParserTest {
 
         @Test
         @DisplayName("should throw exception if event format is incorrect")
-        public void parseEventFour() {
+        public void parse_eventCommandWrongFormat_throwException() {
             InvalidEventFormatException exception = assertThrows(
                     InvalidEventFormatException.class, () ->
                             Parser.parse(new String[] { "event", "name" }));
@@ -289,7 +295,7 @@ public class ParserTest {
 
         @Test
         @DisplayName("should throw exception if time format has no spacing")
-        public void parseEventFive() {
+        public void parse_eventCommandTimeNoSpacing_throwException() {
             InvalidDateException exception = assertThrows(
                     InvalidDateException.class, () ->
                             Parser.parse(new String[] {
@@ -303,7 +309,7 @@ public class ParserTest {
 
         @Test
         @DisplayName("should throw exception if date format is not YYYY-MM-DD")
-        public void parseEventSix() {
+        public void parse_eventCommandWrongDateFormat_throwException() {
             InvalidDateException exception = assertThrows(
                     InvalidDateException.class, () ->
                             Parser.parse(new String[] {
@@ -317,7 +323,7 @@ public class ParserTest {
 
         @Test
         @DisplayName("should throw exception if time format is not HHMM")
-        public void parseEventSeven() {
+        public void parse_eventCommandWrongTimeFormat_throwException() {
             InvalidDateException exception = assertThrows(
                     InvalidDateException.class, () ->
                             Parser.parse(new String[] {
@@ -331,7 +337,7 @@ public class ParserTest {
 
         @Test
         @DisplayName("should throw exception if time not in integers")
-        public void parseEventEight() {
+        public void parse_eventCommandNonIntegerTime_throwException() {
             InvalidDateException exception = assertThrows(
                     InvalidDateException.class, () ->
                             Parser.parse(new String[] {
@@ -345,7 +351,7 @@ public class ParserTest {
 
         @Test
         @DisplayName("should throw exception if time is not possible")
-        public void parseEventNine() {
+        public void parse_eventCommandImpossibleTime_throwException() {
             InvalidDateException exception = assertThrows(
                     InvalidDateException.class, () ->
                             Parser.parse(new String[] {
@@ -359,11 +365,37 @@ public class ParserTest {
     }
 
     @Nested
+    @DisplayName("find command")
+    class Find {
+        @Test
+        @DisplayName("should generate find command object")
+        public void parse_findCommand_objectFindCommand() throws DukeException {
+            assertEquals(new FindCommand("test"),
+                    Parser.parse(new String[] { "find", "test" }));
+        }
+
+        @Test
+        @DisplayName("should generate find command object")
+        public void parse_findCommand_altDataFindCommand() throws DukeException {
+            assertEquals(new FindCommand("test"),
+                    Parser.parse(new String[] { "find", "test" }));
+        }
+
+        @Test
+        @DisplayName("should generate find command object with empty search term")
+        public void parse_findCommand_emptySearchTermFindCommand()
+                throws DukeException {
+            assertEquals(new FindCommand(""),
+                    Parser.parse(new String[] { "find" }));
+        }
+    }
+
+    @Nested
     @DisplayName("unknown command")
     class Unknown {
         @Test
         @DisplayName("should throw exception")
-        public void parseUnknown() {
+        public void parse_unknownCommand_throwException() {
             UnknownCommandException exception = assertThrows(
                     UnknownCommandException.class, () ->
                             Parser.parse(new String[] { "yeet" }));
