@@ -84,7 +84,7 @@ public class Duke {
                         throw new DukeException("", ExceptionType.INDEX_OUT_OF_BOUNDS);
                     } else {
                         userTasks.get(index).setDone();
-                        ui.printMarkAsDone(userTasks.get(index).toString());
+                        ui.printMarkAsDoneMessage(userTasks.get(index).toString());
                     }
 
                     // Update Tasklist.txt after marking task as done
@@ -108,9 +108,7 @@ public class Duke {
                     if (index >= userTasks.size()) {
                         throw new DukeException("", ExceptionType.INDEX_OUT_OF_BOUNDS);
                     } else {
-                        System.out.println(ui.getServantSpeak()
-                                + "    As you wish Sire. I removed this task:\n"
-                                + "       " + userTasks.get(index).toString());
+                        ui.printTaskDeletedMessage(userTasks.get(index).toString());
                         userTasks.remove(index);
                     }
 
