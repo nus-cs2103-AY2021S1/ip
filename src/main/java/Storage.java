@@ -2,13 +2,13 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserData {
+public class Storage {
 
     List<Task> tasks = new ArrayList<>();
     File dataFolder = new File("./data");
     File data = new File("./data/duke.txt");
 
-    public UserData() {
+    public Storage() {
         if (!dataFolder.exists()) dataFolder.mkdir();
         try {
             boolean isNew = data.createNewFile();
@@ -19,12 +19,11 @@ public class UserData {
     }
 
     // CREATE
-    public void create(Task task) {
+    public void add(Task task) {
         try {
             FileWriter fw = new FileWriter(data, true);
             fw.write(task.toData() + "\n");
             fw.close();
-            tasks.add(task);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -42,21 +41,10 @@ public class UserData {
 
     public List<Task> getTasks() {
         return tasks;
-    }
+    };
 
-    public int taskSize() {
-        return tasks.size();
-    }
-
-    // UPDATE
-    public Task markAsDone(int taskId) {
-        Task task = tasks.get(taskId).markAsDone();
-        tasks.set(taskId, task);
-        update();
-        return task;
-    }
-
-    private void update() {
+    // UDPATE
+    public void update() {
         try {
             FileWriter fw = new FileWriter(data);
             for (Task task : tasks) {
@@ -67,13 +55,4 @@ public class UserData {
             e.printStackTrace();
         }
     }
-
-    // DELETE
-    public Task delete(int taskId) {
-        Task task = tasks.get(taskId);
-        tasks.remove(taskId);
-        update();
-        return task;
-    }
-
 }
