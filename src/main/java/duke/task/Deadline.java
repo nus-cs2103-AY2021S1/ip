@@ -1,13 +1,23 @@
 package duke.task;
 
+import duke.exception.DukeException;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 
 public class Deadline extends Task {
-    protected String by;
+    private String by;
+    private LocalDate byLocalDate;
 
-    public Deadline(String description, String by) {
+    public Deadline(String description, String by) throws DukeException {
         super(description);
         this.by = by;
+        try {
+            this.byLocalDate = LocalDate.parse(by);
+        } catch (Exception e) {
+            throw new DukeException("Date is not in YYYY-MM-DD format");
+        }
     }
 
     @Override
@@ -22,6 +32,7 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by + ")";
+        return "[D]" + super.toString() + " (by: " +
+                byLocalDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
     }
 }
