@@ -11,6 +11,7 @@ import java.util.ArrayList;
 
 public class FindCommand extends Command {
     private String keyWord;
+
     public FindCommand(String action, String keyWord) {
         super(action);
         this.keyWord = keyWord;
