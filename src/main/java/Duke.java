@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.regex.*;
 
@@ -22,7 +24,7 @@ public class Duke {
                 if (taskDate.isBlank()) {
                     throw new NullTaskDateException("deadline");
                 }
-                tasks.add(new Deadline(taskName, taskDate));
+                tasks.add(new Deadline(taskName, LocalDate.parse(taskDate)));
             }
         },
         EVENT("event") {
@@ -34,7 +36,7 @@ public class Duke {
                 if (taskDate.isBlank()) {
                     throw new NullTaskDateException("event");
                 }
-                tasks.add(new Event(taskName, taskDate));
+                tasks.add(new Event(taskName, LocalDate.parse(taskDate)));
             }
         };
 
