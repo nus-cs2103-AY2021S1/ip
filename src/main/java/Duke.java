@@ -1,5 +1,6 @@
 import java.io.IOException;
 import java.text.ParseException;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -60,7 +61,7 @@ public class Duke {
                     Task task = parser.parseAdd(echo);
                     Ui.printAdd(tasks.add(task));
                 }
-            } catch (DukeException | IOException | ParseException e) {
+            } catch (DukeException | IOException | ParseException | DateTimeParseException e) {
                 System.out.println(e.getMessage());
             }
         }

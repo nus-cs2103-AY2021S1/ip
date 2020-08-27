@@ -18,7 +18,7 @@ public class Parser {
             }
         } else if (echo.matches("(?i)^deadline.*")) {
             if (echo.matches("(?i)^deadline\\s+\\S+.*\\s+\\/by\\s+\\S+.*")) {
-                String[] res = echo.replaceFirst("(?i)deadline\\s+", "").strip().split("(?i)/by", 2);
+                String[] res = echo.replaceFirst("(?i)deadline\\s+", "").strip().split("(?i)/by\\s*", 2);
                 return new Deadline(res[0], res[1]);
             } else {
                 String[] badText = echo.split("\\s+", 2);
@@ -35,7 +35,7 @@ public class Parser {
             // TODO: 20/8/20 errors: no by, no space inbetween, no desc, no date
         } else if (echo.matches("(?i)^event.*")) {
             if (echo.matches("(?i)^event\\s+\\S+.*\\s+\\/at\\s+\\S+.*")) {
-                String[] res = echo.replaceFirst("(?i)event\\s+", "").strip().split("(?i)/at", 2);
+                String[] res = echo.replaceFirst("(?i)event\\s+", "").strip().split("(?i)/at\\s*", 2);
                 return new Event(res[0], res[1]);
             } else {
                 String[] badText = echo.split("\\s+", 2);

@@ -1,14 +1,15 @@
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 public class Deadline extends Task {
-    Date timeBy;
+    LocalDateTime timeBy;
 
-    public Deadline(String desc, String timeBy) throws ParseException {
+    public Deadline(String desc, String timeBy) throws DateTimeParseException {
         super(desc);
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        this.timeBy = format.parse(timeBy);
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm");
+        this.timeBy = LocalDateTime.parse(timeBy, format);
     }
 
     @Override

@@ -1,15 +1,17 @@
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 public class Event extends Task {
-    Date timeAt;
+    public LocalDateTime timeAt;
 
     // TODO: 17/8/20 make a toString 
     public Event(String desc, String timeAt) throws ParseException {
         super(desc);
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        this.timeAt = format.parse(timeAt);
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm");
+        this.timeAt = LocalDateTime.parse(timeAt, format);
     }
 
     @Override
