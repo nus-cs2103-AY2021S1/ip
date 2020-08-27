@@ -17,6 +17,8 @@ public class Parser {
             return new DeadlineCommand(userCommand);
         case ("todo") :
             return new ToDoCommand(userCommand);
+        case ("find") :
+            return new FindCommand(userCommand);
         default :
             return new UnknownCommand(userCommand);
         }
