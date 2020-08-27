@@ -1,21 +1,22 @@
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Event extends Task {
-    protected LocalDate time;
+    protected LocalDateTime time;
 
-    public Event(String name, LocalDate time, boolean status) {
+    public Event(String name, LocalDateTime time, boolean status) {
         super(name, status);
         this.time = time;
     }
 
     @Override
     public String getStatus() {
-        return "[E]" + super.getStatus() + " (at: " + this.time + ")";
+        return "[E]" + super.getStatus() + " (at: "
+                + this.time.format(DateTimeFormatter.ofPattern("d MMM yyyy kkmm")) + ")";
     }
 
     @Override
-    public LocalDate getTime() {
+    public LocalDateTime getTime() {
         return this.time;
     }
 

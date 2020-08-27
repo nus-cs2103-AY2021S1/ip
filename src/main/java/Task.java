@@ -1,4 +1,5 @@
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class Task {
     protected String name;
@@ -26,7 +27,7 @@ public class Task {
         return "";
     }
 
-    public LocalDate getTime() {
+    public LocalDateTime getTime() {
         return null;
     }
 

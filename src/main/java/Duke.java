@@ -1,12 +1,18 @@
 import java.io.IOException;
+import java.time.DateTimeException;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.FileNotFoundException;
+import java.util.Locale;
 import java.util.Scanner;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class Duke {
+
+    public static DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("d MMM yyyy kkmm", Locale.ENGLISH);
+
 
     public static String linePrinter() {
         return ("\n-------------------------------------------------------------------------\n");
@@ -40,7 +46,7 @@ public class Duke {
             if (task.equals("E")) { // case where the task is an event
                 boolean status = arr[1].equals("\u2713");
                 String todo = arr[2];
-                LocalDate deadline = LocalDate.parse(arr[3]);
+                LocalDateTime deadline = LocalDateTime.parse(arr[3], FORMATTER);
                 ls.add(new Event(todo, deadline, status));
             } else if (task.equals("T")) {
                 boolean status = arr[1].equals("\u2713");
@@ -49,7 +55,7 @@ public class Duke {
             } else {
                 boolean status = arr[1].equals("\u2713");
                 String todo = arr[2];
-                LocalDate deadline = LocalDate.parse(arr[3]);
+                LocalDateTime deadline = LocalDateTime.parse(arr[3], FORMATTER);
                 ls.add(new Deadline(todo, deadline, status));
             }
         }
@@ -136,7 +142,7 @@ public class Duke {
                                     throw new DukeNotSureException("What are deadlines? :s");
                                 } else {
                                     String[] stuff = words[1].split(" /by ");
-                                    LocalDate day = LocalDate.parse(stuff[1]);
+                                    LocalDateTime day = LocalDateTime.parse(stuff[1], FORMATTER);
                                     Deadline newDL = new Deadline(stuff[0], day, false);
                                     ls.add(newDL);
                                     String thing = "Alright then, add more things to your ever-growing list of tasks:\n"
@@ -149,7 +155,7 @@ public class Duke {
                                     throw new DukeNotSureException("What event are you making? :s");
                                 } else {
                                     String[] stuff = words[1].split(" /by ");
-                                    LocalDate day = LocalDate.parse(stuff[1]);
+                                    LocalDateTime day = LocalDateTime.parse(stuff[1], FORMATTER);
                                     Event newE = new Event(stuff[0], day, false);
                                     ls.add(newE);
                                     String thing = "Alright then, add more things to your ever-growing list of tasks:\n"
@@ -165,6 +171,8 @@ public class Duke {
 
                 } catch (DukeDoneException | DukeNotSureException e) {
                     System.out.println(e.getMessage());
+                } catch (DateTimeException e) {
+                    System.out.println("Can't read your date man. Put it like this ok? --> 25 Mar 2020 1930");
                 }
 
                 System.out.println(linePrinter());
@@ -180,8 +188,15 @@ public class Duke {
                 } else {
                     check = "\u2718";
                 }
-                String toAdd = t.getType() + "*" + check + "*" + t.toString() + "*" + t.getTime() + "\n";
-                tasks = tasks + toAdd;
+                String toAdd = t.getType() + "*" + check + "*" + t.toString();
+                String addition = "";
+                if (t.getTime() == null) {
+                    addition = "\n";
+                } else {
+                    addition = "*" + t.getTime().format(FORMATTER) + "\n";
+                }
+
+                tasks = tasks + toAdd + addition;
             }
 
             writeToFile("duke.txt", tasks);
