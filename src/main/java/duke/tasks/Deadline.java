@@ -9,6 +9,7 @@ public class Deadline extends TaskDDL {
 
     /**
      * Creates a Deadline with the given task name and deadline.
+     *
      * @param task Task name
      * @param ddl deadline
      */
@@ -23,6 +24,7 @@ public class Deadline extends TaskDDL {
 
     /**
      * Returns string representation of the Deadline to store in file.
+     *
      * @return string representation
      */
     @Override

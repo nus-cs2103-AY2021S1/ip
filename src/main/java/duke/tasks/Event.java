@@ -9,6 +9,7 @@ public class Event extends TaskDDL {
 
     /**
      * Creates an Event with the given task name and time
+     *
      * @param task Task name
      * @param ddl event time
      */
@@ -23,6 +24,7 @@ public class Event extends TaskDDL {
 
     /**
      * Returns string representation of the Event to store in file.
+     *
      * @return string representation
      */
     @Override

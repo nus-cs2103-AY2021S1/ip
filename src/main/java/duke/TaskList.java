@@ -27,6 +27,7 @@ public class TaskList {
 
     /**
      * Creates a TaskList from the given list of representations.
+     *
      * @param stringList List of string representations
      */
     public TaskList(List<String> stringList) {
@@ -36,6 +37,7 @@ public class TaskList {
 
     /**
      * Returns the list of Tasks.
+     *
      * @return List of Tasks
      */
     public List<Task> getList() {
@@ -44,6 +46,7 @@ public class TaskList {
 
     /**
      * Returns the size of the list.
+     *
      * @return size of list
      */
     public int getSize() {
@@ -52,6 +55,7 @@ public class TaskList {
 
     /**
      * Creates a Task from the given representation and adds it to the list.
+     *
      * @param line string repesentation of the Task
      */
     private void parseLine(String line) {
@@ -68,6 +72,7 @@ public class TaskList {
 
     /**
      * Adds a Task to the list.
+     *
      * @param task Task name
      * @param type Task type defined by COmm
      * @param ddl Task deadline
@@ -91,6 +96,7 @@ public class TaskList {
 
     /**
      * Add a Todo with the given name.
+     *
      * @param task Todo name
      * @return Task object added
      */
@@ -100,6 +106,7 @@ public class TaskList {
 
     /**
      * Add a Deadline or Event with given attributes.
+     *
      * @param taskAttr Task attributes
      * @param isEvent whether Task is an Event
      * @return Task object added
@@ -133,6 +140,7 @@ public class TaskList {
 
     /**
      * Returns array of Task description strings.
+     *
      * @return array of Task description strings
      */
     public String[] listTasks() {
@@ -146,6 +154,7 @@ public class TaskList {
 
     /**
      * Marks the given Task as done.
+     *
      * @param position position of the Task in the list, as seen by the user.
      * @return Task marked done
      * @throws DukeException Duke-related exception due to erroneous inputs
@@ -160,7 +169,8 @@ public class TaskList {
     }
 
     /**
-     * Deleta the given Task.
+     * Delets the given Task.
+     *
      * @param position position of the Task in the list, as seen by the user
      * @return Task deleted
      * @throws DukeException Duke-related exception due to erroneous inputs
@@ -174,6 +184,7 @@ public class TaskList {
 
     /**
      * Validates the given string as a date and converts it to a LocalDate.
+     *
      * @param time date string
      * @return LocalDate for the given date
      * @throws DukeException Duke-related exception due to erroneous inputs
@@ -191,6 +202,12 @@ public class TaskList {
         }
     }
 
+    /**
+     * Find tasks that contain the given key.
+     *
+     * @param key key to search for
+     * @return string representations of Tasks founc
+     */
     public List<String> findTasks(String key) {
         List<String> found = new ArrayList<>();
         found.add("Here are the matching tasks in your list:");

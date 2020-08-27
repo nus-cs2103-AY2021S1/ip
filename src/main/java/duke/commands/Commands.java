@@ -15,6 +15,7 @@ public enum Commands {
 
     /**
      * Check if the given input matches the Command's command.
+     *
      * @param input input to check
      * @return true if input matches the command
      */

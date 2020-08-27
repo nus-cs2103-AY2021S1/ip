@@ -12,6 +12,7 @@ public class TaskDDL extends Task {
 
     /**
      * Creates a TaskDDL with the given task name and deadline/timing.
+     *
      * @param task Task name
      * @param ddl deadline/timing
      */
@@ -22,6 +23,7 @@ public class TaskDDL extends Task {
 
     /**
      * Returns deadline/timing in string format
+     *
      * @return string format of deadline/timing
      */
     protected String getDateTime() {

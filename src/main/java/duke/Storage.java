@@ -18,6 +18,7 @@ public class Storage {
 
     /**
      * Creates a Storage object to handle a file at the given file path.
+     *
      * @param filePath Path object to the file
      */
     public Storage(Path filePath) {
@@ -26,6 +27,7 @@ public class Storage {
 
     /**
      * Saves the task list to the file.
+     *
      * @param taskList List of Task objects to write to file
      */
     public void storeList(List<Task> taskList) {
@@ -43,6 +45,7 @@ public class Storage {
 
     /**
      * Reads task list from the file.
+     *
      * @return List of strings representing the tasks
      */
     public List<String> loadList() {

@@ -7,6 +7,7 @@ public class Todo extends Task {
 
     /**
      * Creates a Todo with the given task name.
+     *
      * @param task Task name
      */
     public Todo(String task) {
@@ -20,6 +21,7 @@ public class Todo extends Task {
 
     /**
      * Returns string representation of the Todo to store in file.
+     *
      * @return string representation
      */
     @Override
