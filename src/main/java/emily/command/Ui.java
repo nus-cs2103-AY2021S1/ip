@@ -1,12 +1,13 @@
 package main.java.emily.command;
 
 import main.java.emily.task.Task;
+import java.util.ArrayList;
+
 
 /**
  * Deals with interactions with the user
  * Receives commands from the user
  */
-
 public class Ui {
 
     Ui() {
@@ -56,16 +57,18 @@ public class Ui {
                         "\n" + divider);
             }
 
-        } else if (input.contains("done") || input.contains("delete")) {
-            if (input.contains("done")) {
+        } else if (input.contains("done") || input.contains("delete") ||input.contains("find")) {
+            if(input.contains("done")){
+
                 int index = Character.getNumericValue(input.charAt(5)) - 1;
                 current = ls.retrieve().get(index);
                 current.setFinished(true);
                 System.out.println(divider + "\n    Nice work, I have marked this task as done: " + current
                         + "\n" + divider);
 
-            } else {
-                if (input.trim().equals("delete")) {
+            } else if(input.contains("delete")){
+
+                if(input.trim().equals("delete")){
                     throw new DukeException("missing index");
                 }
 
@@ -79,6 +82,22 @@ public class Ui {
                 System.out.println(divider + "\n    I have deleted this task for you: " + current);
                 System.out.println("    You have " + ls.retrieve().size() + " tasks in your list now" +
                         "\n" + divider);
+            } else{ //case of finding
+                if(input.trim().equals("find")){
+                    throw new DukeException("missing keyword");
+                }
+                String keyword = input.substring(5);
+
+                ArrayList<Task> arr = ls.finder(keyword);
+
+                System.out.println(divider + "\n    Here are the matching tasks in your list");
+                int index = 1;
+                for(Task t: arr){
+                    System.out.println(index + ". " + t);
+                    index++;
+                }
+                System.out.println(divider);
+
             }
 
         } else {
