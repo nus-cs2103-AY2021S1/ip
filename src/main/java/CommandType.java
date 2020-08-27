@@ -6,5 +6,10 @@ public enum CommandType {
     LIST,
     DONE,
     DELETE,
-    BYE
+    BYE,
+    INVALID_IS_EMPTY,
+    INVALID_COMMAND,
+    INVALID_EMPTY_DESCRIPTION,
+    INVALID_DEADLINE_NO_BY,
+    INVALID_EVENT_NO_START_END
 }

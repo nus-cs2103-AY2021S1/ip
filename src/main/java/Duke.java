@@ -37,7 +37,7 @@ public class Duke {
                 .split("-").length == 2;
     }
 
-    public void run() {
+    public void run() throws DukeException{
         // Print Duke welcome message
         ui.welcomeMessage();
 
@@ -45,28 +45,51 @@ public class Duke {
 
         // Initialise TaskList object to store tasks from user
         TaskList userTasks = new TaskList(storage.readFromFile());
-
+        CommandType command = CommandType.HELP;
         // Start chat
-        while (true) {
+        while (command != CommandType.BYE) {
+            Task t;
+            String[] inputSplit;
+            String description;
+
             // Get input from user
             System.out.println(ui.getUserPrompt());
             input = inputParser.getInput();
             System.out.println();
 
-            // If user inputs "help", print list of available commands
-            if (input.equals("help")) {
+            command = inputParser.parseInput(input);
+
+            switch (command) {
+            case HELP:
                 ui.availableCommands();
                 continue;
-            }
-
-            // If user inputs "bye" in any case, end the chat
-            if (input.equals("bye")) {
-                ui.printByeMessage();
-                break;
-            }
-
-            // If user marks "done" mark task as isDone = true
-            if (input.contains("done ")) {
+            case TODO:
+                description = input.substring(4);
+                t = new ToDo(description);
+                userTasks.addTask(t);
+                ui.printTaskAddedMessage(t, userTasks.getTaskListSize());
+                continue;
+            case DEADLINE:
+                inputSplit = input.split(" /by ");
+                String by = inputSplit[1];
+                description = inputSplit[0].substring(8);
+                t = new Deadline(description, by);
+                userTasks.addTask(t);
+                ui.printTaskAddedMessage(t, userTasks.getTaskListSize());
+                continue;
+            case EVENT:
+                inputSplit = input.split(" /at ");
+                String at = inputSplit[1].split(" ")[0];
+                String timeRange = inputSplit[1].split(" ")[1];
+                description = inputSplit[0].substring(5);
+                t = new Event(description, at, timeRange);
+                userTasks.addTask(t);
+                ui.printTaskAddedMessage(t, userTasks.getTaskListSize());
+                continue;
+            case LIST:
+                ui.printListOfTasks(userTasks.getTaskList());
+                continue;
+            case DONE:
                 // Get the index stated after "done" by parsing the string
                 int index = Integer.parseInt(input.substring(5)) - 1;
 
@@ -88,12 +111,9 @@ public class Duke {
                 }
                 System.out.println();
                 continue;
-            }
-
-            // If user requests delete, delete selected task
-            if (input.contains("delete ")) {
+            case DELETE:
                 // Get the index stated after "delete" by parsing the string
-                int index = Integer.parseInt(input.substring(7)) - 1;
+                index = Integer.parseInt(input.substring(7)) - 1;
 
                 // Delete item
                 try {
@@ -113,72 +133,44 @@ public class Duke {
                 }
                 System.out.println();
                 continue;
-            }
-
-            // If user requests for list, display list of tasks
-            if (input.equals("list")) {
-                ui.printListOfTasks(userTasks.getTaskList());
+            case BYE:
+                ui.printByeMessage();
                 continue;
-            }
-
-            // Check validity of input command
-            try {
-                if (isEmptyInput(input)) {
-                    throw new DukeException("", ExceptionType.EMPTY_INPUT);
-                }
-                if (!isValidCommand(input)) {
-                    throw new DukeException("", ExceptionType.INVALID_COMMAND);
-                }
-                if (isEmptyDescription(input)) {
-                    throw new DukeException("", ExceptionType.EMPTY_DESCRIPTION);
-                }
-            } catch (DukeException ex) {
-                System.out.print(ui.getServantSpeak());
-                ui.printError(ex);
-                continue;
-            }
-
-            // Determine what kind of task it is
-            Task t;
-            String[] inputSplit;
-            String description;
-            switch (input.toLowerCase().split(" ")[0]) {
-            case "todo":
-                description = input.substring(4);
-                t = new ToDo(description);
-                userTasks.addTask(t);
-                ui.printTaskAddedMessage(t, userTasks.getTaskListSize());
-                break;
-            case "deadline":
+            case INVALID_IS_EMPTY:
                 try {
-                    if (!hasDeadlineBy(input)) {
-                        throw new DukeException("", ExceptionType.DEADLINE_NO_BY);
-                    }
-                    inputSplit = input.split(" /by ");
-                    String by = inputSplit[1];
-                    description = inputSplit[0].substring(8);
-                    t = new Deadline(description, by);
-                    userTasks.addTask(t);
-                    ui.printTaskAddedMessage(t, userTasks.getTaskListSize());
-                    break;
+                    throw new DukeException("", ExceptionType.EMPTY_INPUT);
                 } catch (DukeException ex) {
                     System.out.print(ui.getServantSpeak());
                     ui.printError(ex);
                     continue;
                 }
-            case "event":
+            case INVALID_COMMAND:
                 try {
-                    if (!hasEventStartEndTime(input)) {
-                        throw new DukeException("", ExceptionType.EVENT_NO_START_END);
-                    }
-                    inputSplit = input.split(" /at ");
-                    String at = inputSplit[1].split(" ")[0];
-                    String timeRange = inputSplit[1].split(" ")[1];
-                    description = inputSplit[0].substring(5);
-                    t = new Event(description, at, timeRange);
-                    userTasks.addTask(t);
-                    ui.printTaskAddedMessage(t, userTasks.getTaskListSize());
-                    break;
+                    throw new DukeException("", ExceptionType.INVALID_COMMAND);
+                } catch (DukeException ex) {
+                    System.out.print(ui.getServantSpeak());
+                    ui.printError(ex);
+                    continue;
+                }
+            case INVALID_EMPTY_DESCRIPTION:
+                try {
+                    throw new DukeException("", ExceptionType.EMPTY_DESCRIPTION);
+                } catch (DukeException ex) {
+                    System.out.print(ui.getServantSpeak());
+                    ui.printError(ex);
+                    continue;
+                }
+            case INVALID_DEADLINE_NO_BY:
+                try {
+                    throw new DukeException("", ExceptionType.DEADLINE_NO_BY);
+                } catch (DukeException ex) {
+                    System.out.print(ui.getServantSpeak());
+                    ui.printError(ex);
+                    continue;
+                }
+            case INVALID_EVENT_NO_START_END:
+                try {
+                    throw new DukeException("", ExceptionType.EVENT_NO_START_END);
                 } catch (DukeException ex) {
                     System.out.print(ui.getServantSpeak());
                     ui.printError(ex);
