@@ -1,5 +1,5 @@
 public class DoneCommand extends Command {
-    int indexOfDoneTask;
+    protected int indexOfDoneTask;
     
     DoneCommand(int indexOfDoneTask) {
         this.indexOfDoneTask = indexOfDoneTask;

@@ -1,5 +1,5 @@
 public class DeleteCommand extends Command{
-    int indexOfTaskToDelete;
+    protected int indexOfTaskToDelete;
     
     DeleteCommand(int indexOfTaskToDelete) {
         this.indexOfTaskToDelete = indexOfTaskToDelete;

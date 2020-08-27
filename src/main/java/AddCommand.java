@@ -1,12 +1,12 @@
 public abstract class AddCommand extends Command {
-    String taskDescription;
+    protected String taskDescription;
     
-    AddCommand(String taskDescription) {
+    public AddCommand(String taskDescription) {
         this.taskDescription = taskDescription;
     }
     
     @Override
-    boolean isExit() {
+    public boolean isExit() {
         return false;
     }
 }
