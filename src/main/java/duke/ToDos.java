@@ -13,7 +13,7 @@ public class ToDos extends Task {
      * @param isDone Status of the To-Do task.
      */
     public ToDos(String taskTitle, Boolean isDone) {
-        super(taskTitle, isDone, TaskTypes.TODO);
+        super(taskTitle, isDone, TaskTypes.TASK_TYPE_TODO);
     }
 
     /**

@@ -33,7 +33,9 @@ public class Task {
      * @return The icon representing the status of the task.
      */
     public String getStatus() {
-        return (isDone ? "✓" : "✗");
+        return (isDone
+                ? "✓"
+                : "✗");
     }
 
     /**
@@ -41,7 +43,9 @@ public class Task {
      * @return The int representing the status of the task
      */
     public String getStatusNum() {
-        return (isDone ? "1" : "0");
+        return (isDone
+                ? "1"
+                : "0");
     }
 
     /**

@@ -37,18 +37,20 @@ public class Storage {
                 String lineData = bufferedReader.readLine();
                 while (lineData != null) {
                     String[] lineSegment = lineData.split(" \\| ");
-                    boolean isDone = lineSegment[1].equals("1") ? true : false;
+                    boolean isDone = lineSegment[1].equals("1")
+                            ? true
+                            : false;
 
                     switch (lineSegment[0]) {
-                        case "T":
-                            ToDos.loadTodoTask(lineSegment[2], isDone, tasks);
-                            break;
-                        case "D":
-                            Deadlines.loadDeadlineTask(lineSegment[2], lineSegment[3], isDone, tasks);
-                            break;
-                        case "E":
-                            Events.loadEventTask(lineSegment[2], lineSegment[3], isDone, tasks);
-                            break;
+                    case "T":
+                        ToDos.loadTodoTask(lineSegment[2], isDone, tasks);
+                        break;
+                    case "D":
+                        Deadlines.loadDeadlineTask(lineSegment[2], lineSegment[3], isDone, tasks);
+                        break;
+                    case "E":
+                        Events.loadEventTask(lineSegment[2], lineSegment[3], isDone, tasks);
+                        break;
                     }
                     lineData = bufferedReader.readLine();
                 }
