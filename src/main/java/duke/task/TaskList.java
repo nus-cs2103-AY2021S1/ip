@@ -7,32 +7,32 @@ import java.util.List;
 
 public class TaskList {
 
-    private static List<Task> list;
+    private List<Task> tasks;
 
     public TaskList() {
-        this.list = new ArrayList<>();
+        this.tasks = new ArrayList<>();
     }
-    public TaskList(List<Task> list) {
-        this.list = list;
+    public TaskList(List<Task> tasks) {
+        this.tasks = tasks;
     }
 
     public List<Task> getList() {
-        return list;
+        return tasks;
     }
 
     public void addList(Task task) {
-        list.add(task);
+        tasks.add(task);
     }
 
     public void deleteTask(int i) throws DukeException {
         try {
-            list.remove(i);
+            tasks.remove(i);
         } catch (Exception e) {
             throw new DukeException("You don't have such task in your list...");
         }
     }
 
     public int getListSize() {
-        return list.size();
+        return tasks.size();
     }
 }

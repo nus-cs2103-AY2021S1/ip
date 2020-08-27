@@ -24,12 +24,12 @@ public class Ui {
     private final Scanner scanner = new Scanner(System.in);
 
 
-    public void showList(List<Task> list) {
+    public void showList(List<Task> tasks) {
         System.out.println(divider);
         System.out.println("   Banana! So many tasks?");
         Task task;
-        for (int i = 0; i < list.size(); i++) {
-            task = list.get(i);
+        for (int i = 0; i < tasks.size(); i++) {
+            task = tasks.get(i);
             System.out.println("   " + (i + 1) + ". " + task.toString());
         }
         System.out.println(divider + "\n");
@@ -46,34 +46,34 @@ public class Ui {
         System.out.println(divider + "\n");
     }
 
-    public void byeMessage() {
+    public void printByeMessage() {
         wrapMessage("Banana! King Bob is sad to see you go. Farewell my friend!");
     }
 
-    public void addedMessage(Task task, int n) {
+    public void printAddedMessage(Task task, int n) {
         wrapMessage("Banana! Banana has been added to your list!\n"
                 + "      " + task.toString() + "\n"
                 + "   Now you have " + n + " banana(s) in your list! Nom nom..");
     }
 
-    public void deletedMessage(Task task, int n) {
+    public void printDeletedMessage(Task task, int n) {
         wrapMessage("Banana! Banana has been eaten. Burp!\n"
                 + "      " + task.toString() + "\n"
                 + "   Now you have " + (n - 1) + " banana(s) in your list! Nom nom..");
     }
 
-    public void doneMessage(Task task) {
+    public void printDoneMessage(Task task) {
         wrapMessage("Banana! I've marked this task as done:\n"
                 + "      " + task.toString());
     }
 
-    public void loadingErrorMessage() {
+    public void printLoadingErrorMessage() {
         wrapMessage("Banana! There is a loading error...");
     }
 
-    public void findTask(LocalDate date, List<Task> list) {
+    public void findTask(LocalDate date, List<Task> tasks) {
         System.out.println(divider);
-        for (Task t : list) {
+        for (Task t : tasks) {
             if (t.getDate().equals(date)) {
                 System.out.println("   " + t.toString());
             }

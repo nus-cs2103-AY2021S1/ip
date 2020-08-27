@@ -18,7 +18,7 @@ import java.util.List;
 
 public class Storage {
 
-    List<Task> list = new ArrayList<>();
+    List<Task> tasks = new ArrayList<>();
     String filePath;
     File dataFile;
 
@@ -54,16 +54,16 @@ public class Storage {
                 BufferedReader reader = new BufferedReader(new FileReader(filePath.toString()));
                 String line;
                 while ((line = reader.readLine()) != null) {
-                    convertLineToTasks(list, line);
+                    convertLineToTasks(tasks, line);
                 }
-                return list;
+                return tasks;
             } catch (IOException e) {
                 throw new DukeException("WHAT WHATS GOING ON");
             }
         }
     }
 
-    private void convertLineToTasks(List<Task> list, String line) {
+    private void convertLineToTasks(List<Task> tasks, String line) {
 
         String[] stringArray = line.split(" \\| ");
         String taskType = stringArray[0];
@@ -84,7 +84,7 @@ public class Storage {
             break;
         }
 
-        list.add(task);
+        tasks.add(task);
 
         if (isDone) {
             task.markAsDone();
@@ -92,12 +92,12 @@ public class Storage {
 
     }
 
-    public void saveListToFile(List<Task> list) throws DukeException {
+    public void saveListToFile(List<Task> tasks) throws DukeException {
 
         try {
             FileWriter writer = new FileWriter(dataFile, false);
 
-            for (Task t : list) {
+            for (Task t : tasks) {
                 writer.write(t.toFileString() + "\n");
             }
             writer.close();
