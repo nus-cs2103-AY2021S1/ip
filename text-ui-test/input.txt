@@ -7,6 +7,7 @@ hello
 todo finish ip
 deadline finish ip
 deadline finish ip /by tonight
+deadline finish ip /by 2020-08-28
 event 2101 op1 meeting
 event 2101 op1 meeting /at Tomorrow 2pm
 list
