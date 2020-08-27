@@ -32,12 +32,15 @@ public class Storage {
                     String taskName = taskData[2];
 
                     if (!taskType.equals("T")) {
-                        System.out.println(taskType);
                         String taskTime = taskData[3];
                         if (taskType.equals("D")) {
-                            taskList.addTask(new Deadline(taskName, taskTime));
+                            TaskDate dueTime = DateParser.parseDateFromStorage(taskTime);
+                            taskList.addTask(new Deadline(taskName, dueTime));
                         } else {
-                            taskList.addTask(new Event(taskName, taskTime));
+                            TaskDate startDate = DateParser.parseRangeFromStorage(taskTime, true);
+                            TaskDate endDate = DateParser.parseRangeFromStorage(taskTime, false);
+
+                            taskList.addTask(new Event(taskName, startDate, endDate));
                         }
                     } else {
                         taskList.addTask(new Todo(taskName));
