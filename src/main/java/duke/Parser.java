@@ -4,14 +4,29 @@ import java.time.DateTimeException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+
+/**
+ * Represents a Parser responsible for parsing Strings
+ * to generate tasks and commands for the Duke bot.
+ */
 public class Parser {
 
+    /** Format for date and time used when user inputs a task */
     private static final DateTimeFormatter inputDateTimeFormat
             = DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm");
 
+    /** Format for date and time used when Duke saves a task list */
     private static final DateTimeFormatter savedDateTimeFormat
             = DateTimeFormatter.ofPattern("MMM dd yyyy h:mm a");
 
+    /**
+     * Parses a line read from the task list from the storage space
+     * and generates a corresponding Task to be added to the live TaskList.
+     *
+     * @param fullTask The line from the .txt file to be parsed
+     * @return The corresponding Task.
+     * @throws DukeException If the line contains an incorrect format.
+     */
     public static Task parseTask(String fullTask) throws DukeException {
         String[] splitTask = fullTask.split(" \\| ");
 
@@ -36,6 +51,14 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses a line read from the user input and generates a
+     * corresponding Command to be executed by Duke.
+     *
+     * @param fullCommand The user input to be parsed.
+     * @return The corresponding Command
+     * @throws DukeException If the command type cannot be recognised or is in the wrong format
+     */
     public static Command parseCommand(String fullCommand) throws DukeException {
         String[] splitCommand = fullCommand.split(" ", 2);
         String type = splitCommand[0];

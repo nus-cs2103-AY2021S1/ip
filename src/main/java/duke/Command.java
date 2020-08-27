@@ -1,6 +1,8 @@
 package duke;
 
-
+/**
+ * Represents a Command that can be executed by Duke.
+ */
 public abstract class Command {
 
     public Command() {}
