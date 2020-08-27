@@ -29,7 +29,7 @@ public class TaskList {
         return this.taskArrayList.get(taskNum - 1);
     }
 
-    public String finishTask(int taskNum) {
+    public String completeTask(int taskNum) {
         Task toComplete = taskArrayList.get(taskNum - 1);
         toComplete.complete();
         String completion = "     Nice! I've marked this task as done:\n" +
@@ -37,14 +37,14 @@ public class TaskList {
         return horizontalLine + completion + horizontalLine;
     }
 
-    public String printList() {
+    @Override
+    public String toString() {
         int counter = 0;
-        String printedListString = horizontalLine + "     Here are the tasks in your list:\n";
+        String printedListString = "";
         for (Task task: taskArrayList) {
             counter++;
             printedListString += String.format("     %d.%s%n", counter, task);
         }
-        printedListString += horizontalLine;
         return printedListString;
     }
 

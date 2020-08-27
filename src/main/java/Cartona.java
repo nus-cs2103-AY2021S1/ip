@@ -1,15 +1,23 @@
-import java.util.Scanner;
-
 public class Cartona {
-    private static Scanner sc = new Scanner(System.in);
-    private static TaskList taskList;
+    private TaskList taskList;
+    private Parser parser;
+    private Ui ui;
+    private Storage storage;
 
     private static String line = "    ____________________________________________________________\n";
+
+    Cartona() {
+        this.taskList = new TaskList();
+        this.parser = new Parser();
+        this.ui = new Ui();
+        this.storage = new Storage("./saved/tasklist.txt");
+    }
 
     /**
      * Helper function that parses the "add ..." argument into the console to add a Task to the taskList
      * @param consoleArg the exact string entered into the console
      */
+    /**
     private static void parseAndAddTask(String consoleArg) throws EmptyTaskDescriptionException, InvalidTaskTimeException, UnknownCommandException {
         String[] parsedArr = consoleArg.substring(4).split(" ");
         String keyword = parsedArr[0];
@@ -94,33 +102,38 @@ public class Cartona {
             throw new UnknownCommandException("");
         }
     }
+    **/
 
     public static void main(String[] args) {
-        /**
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-         System.out.println("Hello from\n" + logo);
-         **/
+        Cartona cartona = new Cartona();
+        Ui ui = new Ui();
+        ui.printWelcomeMessage();
 
-        // Print welcome statement
-        String welcome = line + "     Hello! I'm Cartona.\n" +
-                         "     What can I do for you?\n" + line;
-
-        System.out.printf(welcome);
-
-        taskList = Storage.getFileList();
+        cartona.taskList = cartona.storage.getFileList();
 
         String nextInput = "";
         while (true) {
-            nextInput = sc.nextLine();
+            String nextLine = ui.getNextLineInput();
 
+
+            try {
+                Command nextCommand = cartona.parser.parseCommand(nextLine);
+                nextCommand.execute(cartona.taskList, cartona.ui, cartona.storage);
+
+                if (nextCommand.isExitCmd())  {
+                    break;
+                }
+            } catch (InvalidInputException e) {
+                ui.printErrorMessage(e.getMessage());
+            } catch (CartonaException e) {
+                ui.printErrorMessage(e.getMessage());
+            }
+        }
+            /**
             if (nextInput.equals("bye")) {
                 break;
             } else if (nextInput.equals("list")) {
-                System.out.printf(taskList.printList());
+                ui.printTaskList(taskList);
 
             } else if (nextInput.length() < 4) {
                 System.out.printf("%s     Error: Invalid keyword! Please try again%n%s",
@@ -129,7 +142,7 @@ public class Cartona {
                 try {
                     String[] doneArr = nextInput.split(" ");
                     int taskNum = Integer.parseInt(doneArr[1]);
-                    System.out.printf(taskList.finishTask(taskNum));
+                    System.out.printf(taskList.completeTask(taskNum));
                 } catch (IndexOutOfBoundsException e) {
                     System.out.printf("%s     Error: Invalid input! Did you mean: \"done TASK_NUM\"%n%s",
                                         line, line);
@@ -161,11 +174,13 @@ public class Cartona {
                 System.out.printf("%s     Error: Invalid keyword! Please try again%n%s",
                         line, line);
             }
+
         }
 
         Storage.saveListToFile(taskList);
 
         String goodbye = line + "     Bye. Hope to see you again soon!\n" + line;
         System.out.printf(goodbye);
+             **/
     }
 }

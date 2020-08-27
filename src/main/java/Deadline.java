@@ -3,11 +3,6 @@ import java.awt.*;
 public class Deadline extends Task {
     private TaskDate dueTime;
 
-    Deadline(String name, String dueTime) {
-        super(name, "D");
-        this.dueTime = DateParser.parseDate(dueTime);
-    }
-
     Deadline(String name, TaskDate dueTime) {
         super(name, "D");
         this.dueTime = dueTime;

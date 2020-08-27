@@ -2,12 +2,6 @@ public class Event extends Task {
     private TaskDate start;
     private TaskDate end;
 
-    Event(String name, String timeRange) {
-        super(name, "E");
-        this.start = DateParser.getRange(timeRange, true);
-        this.end = DateParser.getRange(timeRange, false);
-    }
-
     Event(String name, TaskDate start, TaskDate end) {
         super(name, "E");
         this.start = start;

@@ -8,8 +8,13 @@ import java.util.List;
 public class Storage {
     private static String horizontalLine = "    ____________________________________________________________\n";
 
-    public static TaskList getFileList() {
-        String pathString = "./saved/tasklist.txt";
+    private String pathString;
+
+    Storage(String pathString) {
+        this.pathString = pathString;
+    }
+
+    public TaskList getFileList() {
         Path path = Path.of(pathString);
         File savedListFile = new File(pathString);
         TaskList taskList = new TaskList();
@@ -18,8 +23,8 @@ public class Storage {
             if (!doesSavedListExist) {
                 List<String> contents = Files.readAllLines(path, StandardCharsets.UTF_8);
                 if (contents.size() > 0) {
-                    System.out.printf(horizontalLine + "     Found an existing list at ./saved/tasklist.txt%n" +
-                                        horizontalLine);
+                    System.out.printf(horizontalLine + "     Found an existing list at %s%n" + horizontalLine,
+                                            path);
                 } else {
                     System.out.printf(horizontalLine + "     Found an existing list, but it was empty!%n" +
                                         horizontalLine);
@@ -56,13 +61,13 @@ public class Storage {
             e.printStackTrace();
 
         } catch (IndexOutOfBoundsException e) {
-
+            // FOR TESTING, TO BE DISCARDED BEFORE RELEASE
             System.out.println("     Encoding error: creating new list");
             taskList = new TaskList();
-            Path listFilePath = Path.of("./saved/tasklist.txt");
+            Path listFilePath = Path.of(pathString);
 
             try {
-                new PrintWriter("./saved/tasklist.txt").close();
+                new PrintWriter(pathString).close();
             } catch (IOException exception) {
                 exception.printStackTrace();
             }
@@ -72,17 +77,17 @@ public class Storage {
         return taskList;
     }
 
-    public static void saveListToFile(TaskList taskList) {
+    public void saveListToFile(TaskList taskList) {
         String stringToWrite = "";
         for (int i = 1; i <= taskList.getSize(); i++) {
             Task task = taskList.getTask(i);
             stringToWrite += task.getAbbreviatedString() + "\n";
         }
 
-        Path listFilePath = Path.of("./saved/tasklist.txt");
+        Path listFilePath = Path.of(pathString);
 
         try {
-            new PrintWriter("./saved/tasklist.txt").close();
+            new PrintWriter(pathString).close();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -96,6 +101,6 @@ public class Storage {
             e.printStackTrace();
         }
 
-        System.out.printf(horizontalLine + "     List has been saved to file.%n"  + horizontalLine);
+        //System.out.printf(horizontalLine + "     List has been saved to file.%n"  + horizontalLine);
     }
 }

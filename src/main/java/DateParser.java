@@ -1,26 +1,22 @@
+import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 public class DateParser {
-    public static TaskDate parseDate(String dateString) {
-        LocalDateTime dateTime = LocalDateTime.parse(dateString,
-                                            DateTimeFormatter.ofPattern("yyyy/MM/dd HHmm"));
+    public static TaskDate parseDate(String dateString) throws InvalidInputException {
+        try {
+            LocalDateTime dateTime = LocalDateTime.parse(dateString,
+                    DateTimeFormatter.ofPattern("yyyy/MM/dd HHmm"));
 
-//        String[] dateAndTime = dateString.split(" ");
-//        String[] dates = dateAndTime[0].split("/");
-//
-//        int year = Integer.valueOf(dates[0]);
-//        int month = Integer.valueOf(dates[1]);
-//        int day = Integer.valueOf(dates[2]);
-
-        return new TaskDate(dateTime);
-
-//        return new TaskDate(LocalDate.of(year, month, day), dateAndTime[1]);
+            return new TaskDate(dateTime);
+        } catch (DateTimeException e) {
+            throw new InvalidInputException("Date/time formatting error: " + e.getMessage());
+        }
     }
 
-    public static TaskDate getRange(String dateString, boolean startOrEnd) {
+    public static TaskDate getRange(String dateString, boolean startOrEnd) throws InvalidInputException {
         String[] dateAndTimes = dateString.split(" ");
         String[] dates = dateAndTimes[0].split("/");
 
@@ -28,14 +24,18 @@ public class DateParser {
         int month = Integer.valueOf(dates[1]);
         int day = Integer.valueOf(dates[2]);
 
-        if (startOrEnd) {
-            return new TaskDate(LocalDate.of(year, month, day)
-                                .atTime(LocalTime.parse(dateAndTimes[1],
-                                                        DateTimeFormatter.ofPattern("HHmm"))));
-        } else {
-            return new TaskDate(LocalDate.of(year, month, day)
-                                .atTime(LocalTime.parse(dateAndTimes[2],
-                                        DateTimeFormatter.ofPattern("HHmm"))));
+        try {
+            if (startOrEnd) {
+                return new TaskDate(LocalDate.of(year, month, day)
+                                    .atTime(LocalTime.parse(dateAndTimes[1],
+                                                            DateTimeFormatter.ofPattern("HHmm"))));
+            } else {
+                return new TaskDate(LocalDate.of(year, month, day)
+                                    .atTime(LocalTime.parse(dateAndTimes[2],
+                                            DateTimeFormatter.ofPattern("HHmm"))));
+            }
+        } catch (DateTimeException e) {
+            throw new InvalidInputException("Date/time formatting error: " + e.getMessage());
         }
     }
 
@@ -44,13 +44,13 @@ public class DateParser {
 
         if (startOrEnd) {
             return new TaskDate(LocalDateTime.parse(dateAndTime[0],
-                                DateTimeFormatter.ofPattern("MMM dd yyyy HHmm")));
+                    DateTimeFormatter.ofPattern("MMM dd yyyy HHmm")));
         } else {
             return new TaskDate(LocalDate.parse(dateAndTime[0],
-                                                DateTimeFormatter.ofPattern("MMM dd yyyy HHmm"))
+                    DateTimeFormatter.ofPattern("MMM dd yyyy HHmm"))
 
-                                .atTime(LocalTime.parse(dateAndTime[1],
-                                                        DateTimeFormatter.ofPattern("HHmm"))));
+                    .atTime(LocalTime.parse(dateAndTime[1],
+                            DateTimeFormatter.ofPattern("HHmm"))));
         }
     }
 
