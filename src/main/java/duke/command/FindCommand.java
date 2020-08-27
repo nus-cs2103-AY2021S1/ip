@@ -20,7 +20,7 @@ public class FindCommand extends Command {
     }
 
     /**
-     * abstract method to be implemented by child classes.
+     * Main logic executed to perform search
      * @param tasks list of tasks.
      * @param ui instance of Ui to deal with user interface.
      * @param storage to read / write to storage.
