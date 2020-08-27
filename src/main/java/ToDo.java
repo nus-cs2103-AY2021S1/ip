@@ -1,5 +1,5 @@
 /**
- * Represents a ToDo task, which are tasks without any date or time attached to it
+ * Represents a ToDo task, which is a type of task without any date or time attached to it
  */
 public class ToDo extends Task {
 

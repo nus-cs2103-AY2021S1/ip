@@ -72,14 +72,23 @@ public class TaskList {
     public void addTask(Task task) {
         taskList.add(task);
     }
-    
-    public TaskList FindTask(String toFind) {
+
+    /**
+     * Finds the tasks among the list of tasks, where their descriptions
+     * contains the given input to match.
+     * 
+     * @param toMatch the word used in the search for tasks with matching descriptions 
+     * @return a TaskList containing the list of tasks with matching descriptions
+     */
+    public TaskList FindTask(String toMatch) {
         ArrayList<Task> matchingTasks = new ArrayList<>();
+        
         for(Task t : taskList) {
-            if (t.getDescription().contains(toFind)) {
+            if (t.getDescription().contains(toMatch)) {
                 matchingTasks.add(t);
             }
         }
+        
         return new TaskList(matchingTasks);
     }
 }

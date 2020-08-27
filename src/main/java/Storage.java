@@ -123,7 +123,7 @@ public class Storage {
              writer.close();
         } catch (IOException e) {
             System.out.println("OOPS! :c There is an error in trying to write to the save file." 
-                                    + "I can't save the entire list of tasks here.");
+                                + "I can't save the entire list of tasks here.");
         }
     }
     

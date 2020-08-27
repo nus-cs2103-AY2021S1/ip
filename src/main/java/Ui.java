@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -62,7 +61,6 @@ public class Ui {
         scanner.close();
     }
 
-
     /**
      * Prints the entire list of tasks.
      * 
@@ -119,7 +117,12 @@ public class Ui {
         System.out.println(task);
         System.out.println("Now you have " + numOfTasks + " task(s) in this list.");
     }
-    
+
+    /**
+     * Prints the tasks with matching description.
+     * 
+     * @param tasks the TaskList which contains the tasks with matching description.
+     */
     public void printOnFind(TaskList tasks) {
         System.out.println("Here are the matching tasks: ");
         int i = 0;
