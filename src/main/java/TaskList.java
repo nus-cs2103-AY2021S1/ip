@@ -17,20 +17,20 @@ public class TaskList{
         return this.taskList;
     }
 
-    public Task getTask(int i){
-        return this.taskList.get(i - 1);
+    public Task getTask(int index){
+        return this.taskList.get(index - 1);
     }
 
-    public void markDone(int i){
-        this.taskList.get(i - 1).markDone();
+    public void markDone(int index){
+        this.taskList.get(index - 1).markDone();
     }
 
     public void addTask(Task task){
         this.taskList.add(task);
     }
 
-    public void deleteTask(int i){
-        this.taskList.remove(i - 1);
+    public void deleteTask(int index){
+        this.taskList.remove(index - 1);
     }
 
     public int getSize(){

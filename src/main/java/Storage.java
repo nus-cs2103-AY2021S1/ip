@@ -49,10 +49,10 @@ public class Storage {
              switch (type){
                  case "E":
                  case "D":
-                     line = type+" | "+ task.isDone()+" | " + task.getName() + " | " + task.getTime();
+                     line = type + " | " + task.isDone() +" | " + task.getName() + " | " + task.getTime();
                      break;
                  case "T":
-                     line = type+" | "+ task.isDone()+" | " + task.getName();
+                     line = type + " | " + task.isDone() +" | " + task.getName();
                      break;
              }
              writer.write(line);
