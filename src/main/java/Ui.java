@@ -76,6 +76,12 @@ public class Ui {
                 + "       " + task);
     }
 
+    public void printByeMessage() {
+        System.out.println(SERVANT_SPEAK
+                + "    It was a pleasure to serve you my Liege.\n"
+                + "    Till next time.");
+    }
+
     public void printError(DukeException ex) {
         System.out.println(ex);
     }

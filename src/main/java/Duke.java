@@ -67,9 +67,7 @@ public class Duke {
 
             // If user inputs "bye" in any case, end the chat
             if (input.equals("bye")) {
-                System.out.println(ui.getServantSpeak()
-                        + "    It was a pleasure to serve you my Liege.\n"
-                        + "    Till next time.");
+                ui.printByeMessage();
                 break;
             }
 
