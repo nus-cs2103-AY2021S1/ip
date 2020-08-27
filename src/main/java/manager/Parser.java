@@ -5,10 +5,19 @@ import main.java.exceptions.InvalidNumberException;
 
 import java.util.Scanner;
 
+/**
+ * Represents a parser that parses the user's input and
+ * translate them into commands, to be passed to the converter.
+ * If a command is invalid, the InvalidCommandException is thrown and caught.
+ */
 public class Parser {
 
     private final Ui converter = new Ui();
 
+    /**
+     * Handles the user input by parsing them into commands
+     * and sending them to the converter.
+     */
     public void handleUserInput() {
 
         Scanner sc = new Scanner(System.in);

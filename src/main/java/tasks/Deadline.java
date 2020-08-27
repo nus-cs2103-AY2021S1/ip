@@ -7,6 +7,11 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Represents a deadline, consisting of a description and an end time.
+ * Throws InvalidDescriptionException or InvalidTimeException if
+ * the description or end time provided is blank.
+ */
 public class Deadline extends Task {
 
     private final String endTime;
@@ -45,6 +50,12 @@ public class Deadline extends Task {
         }
     }
 
+    /**
+     * Returns the string that represents the deadline.
+     *
+     * @return the string consisting of the tag,
+     * done status, description and end time
+     */
     @Override
     public String toString() {
         return this.formattedDateTime == null
@@ -56,6 +67,12 @@ public class Deadline extends Task {
                 this.formattedDateTime.format(DateTimeFormatter.ofPattern("MMM d yyyy, hh:mm a")) + ")";
     }
 
+    /**
+     * Returns the string that represents the deadline in a database.
+     *
+     * @return the string consisting of the tag,
+     * done status, description and end time
+     */
     @Override
     public String databaseString() {
         return "D | " + super.databaseString() + " | " + this.endTime;

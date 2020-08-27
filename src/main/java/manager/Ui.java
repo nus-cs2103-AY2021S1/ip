@@ -7,11 +7,23 @@ import main.java.tasks.Event;
 import main.java.tasks.Task;
 import main.java.tasks.Todo;
 
+/**
+ * Represents a platform that converts commands into tasks and actions.
+ * Interacts with the parser by receiving commands,
+ * passes converted tasks and actions to the task list,
+ * sends the task list to the database for storage,
+ * and retrieves the task list from the database if needed.
+ */
 public class Ui {
 
     private final TaskList taskList = new TaskList();
     private final Storage database = Storage.initializeDatabase();
 
+    /**
+     * Converts a command and input into the corresponding task.
+     *
+     * @return the task that is converted
+     */
     public Task convertTask(Commands command, String input) {
         try {
             switch (command) {
@@ -33,6 +45,9 @@ public class Ui {
         return null;
     }
 
+    /**
+     * Converts a command and index into the corresponding action.
+     */
     public void convertAction(Commands command, int index) {
         switch (command) {
             case LIST:
@@ -50,18 +65,32 @@ public class Ui {
         }
     }
 
+    /**
+     * Passes the task into the task list to be added.
+     */
     public void passTask(Task task) {
         this.taskList.addTask(task);
     }
 
+    /**
+     * Obtains the total number of tasks in the task list.
+     *
+     * @return the number of tasks in the task list
+     */
     public int totalTasks() {
         return this.taskList.getNumberOfTasks();
     }
 
+    /**
+     * Stores the task list into the database.
+     */
     public void storeTasks() {
         this.database.updateDatabase(this.taskList.getList());
     }
 
+    /**
+     * Retrieves the task list from the database.
+     */
     public void getSavedTasks() {
         this.taskList.setList(this.database.retrieveTaskList());
     }
