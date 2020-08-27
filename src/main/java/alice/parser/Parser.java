@@ -22,9 +22,18 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Represents a parser that makes sense of user input.
+ */
 public class Parser {
+    /** List of known datetime formats that ALICE accepts **/
     private static final List<DateTimeFormatter> KNOWN_DT_FORMATS = createDateFormats();
 
+    /**
+     * Creates the list of formatter that accepts a specified list of known datetime patterns.
+     *
+     * @return list of DateTimeFormatter with acceptable date time format.
+     */
     private static List<DateTimeFormatter> createDateFormats() {
         // List of acceptable date time format with optional time/year
         List<String> knownPatterns = Arrays.asList(
@@ -49,6 +58,13 @@ public class Parser {
         return knownFormats;
     }
 
+    /**
+     * Parses the user input into the appropriate commands.
+     *
+     * @param userInput the input from user.
+     * @return the appropriate command indicated by the user.
+     * @throws InvalidCommandException if the userInput does not match any commands and/or its command signature.
+     */
     public static Command parseCommand(String userInput) throws InvalidCommandException {
         String[] arr = userInput.trim().split(" ", 2);
         String cmd = arr[0];
@@ -91,7 +107,14 @@ public class Parser {
         }
     }
 
-    private static Command parseDoneInput(String s_index) throws InvalidCommandException {
+    /**
+     * Parses the task number given by the user for the done command.
+     *
+     * @param s_index the task number input given by user.
+     * @return the <code>DoneCommand</code> with the verified task number.
+     * @throws InvalidCommandException if the task number provided is invalid.
+     */
+    private static DoneCommand parseDoneInput(String s_index) throws InvalidCommandException {
         try {
             int index = Integer.parseInt(s_index) - 1;
             return new DoneCommand(index);
@@ -100,7 +123,14 @@ public class Parser {
         }
     }
 
-    private static Command parseDeleteInput(String s_index) throws InvalidCommandException {
+    /**
+     * Parses the task number given by the user for the delete command.
+     *
+     * @param s_index the task number input given by user.
+     * @return the <code>DeleteCommand</code> with the verified task number.
+     * @throws InvalidCommandException if the task number provided is invalid.
+     */
+    private static DeleteCommand parseDeleteInput(String s_index) throws InvalidCommandException {
         try {
             int index = Integer.parseInt(s_index) - 1;
             return new DeleteCommand(index);
@@ -109,15 +139,29 @@ public class Parser {
         }
     }
 
-    private static Command parseTodoInput(String arguments) throws InvalidCommandException {
-        if (!arguments.isBlank()) {
-            return new TodoCommand(arguments);
+    /**
+     * Parses the description given by the user for creating a new todo.
+     *
+     * @param argument the description input given by user.
+     * @return the <code>TodoCommand</code> with the verified description.
+     * @throws InvalidCommandException if the user gives an empty description.
+     */
+    private static TodoCommand parseTodoInput(String argument) throws InvalidCommandException {
+        if (!argument.isBlank()) {
+            return new TodoCommand(argument);
         } else {
             throw new InvalidCommandException("The todo description cannot be left empty.");
         }
     }
 
-    private static Command parseDeadlineInput(String arguments) throws InvalidCommandException {
+    /**
+     * Parses the details given by the user for creating a new deadline.
+     *
+     * @param arguments the deadline details input given by user.
+     * @return the <code>DeadlineCommand</code> with the indicated details.
+     * @throws InvalidCommandException if the user gives an invalid description and/or datetime.
+     */
+    private static DeadlineCommand parseDeadlineInput(String arguments) throws InvalidCommandException {
         String[] desc_date = arguments.split(" /by ", 2);
         if (desc_date.length == 2 && !desc_date[1].isBlank()) {
             String description = desc_date[0];
@@ -136,7 +180,14 @@ public class Parser {
         }
     }
 
-    private static Command parseEventInput(String arguments) throws InvalidCommandException {
+    /**
+     * Parses the details given by the user for creating a new event.
+     *
+     * @param arguments the event details input given by user.
+     * @return the <code>EventCommand</code> with the indicated details.
+     * @throws InvalidCommandException if the user gives an invalid description and/or datetime.
+     */
+    private static EventCommand parseEventInput(String arguments) throws InvalidCommandException {
         String[] desc_date = arguments.split(" /on ", 2);
         if (desc_date.length == 2 && !desc_date[1].isBlank()) {
             String description = desc_date[0];
@@ -156,6 +207,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses the datetime input given by the user into the implied <code>LocalDateTime</code>.
+     *
+     * @param dateTimeString the user input containing a date and time.
+     * @return the <code>LocalDateTime</code> indicated by the user input.
+     * @throws InvalidCommandException if the datetime input given by the user does not match any known patterns.
+     */
     public static LocalDateTime parseDateTime(String dateTimeString) throws InvalidCommandException {
         for (int i = 0; i < KNOWN_DT_FORMATS.size(); i++) {
             try {

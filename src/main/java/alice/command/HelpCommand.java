@@ -1,22 +1,31 @@
 package alice.command;
 
-import alice.storage.Storage;
+import alice.storage.StorageFile;
 import alice.task.TaskList;
 import alice.ui.Ui;
 
 import java.util.List;
 
+/**
+ * Represents the command to get the list of commands that ALICE understands.
+ */
 public class HelpCommand extends Command {
     protected static final List<String> NAMES = List.of("help");
     protected static final String DESCRIPTION = "Gets the list of commands";
     protected static final String USE_CASE = "[" + String.join(", ", NAMES) + "]";
 
+    /**
+     * Checks if the command word triggers the <code>HelpCommand</code>.
+     *
+     * @param name the command word to check.
+     * @return true if the command word belongs to <code>HelpCommand</code>; false otherwise.
+     */
     public static boolean hasCommandWord(String name) {
         return NAMES.contains(name);
     }
 
     @Override
-    public void process(TaskList tasks, Ui ui, Storage storage) {
+    public void process(TaskList tasks, Ui ui, StorageFile storageFile) {
         String commandFormat = "    %-35s | %s\n";
 
         StringBuilder output = new StringBuilder("These are the commands in my dictionary:\n");

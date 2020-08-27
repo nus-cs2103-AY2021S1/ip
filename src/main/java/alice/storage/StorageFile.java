@@ -8,13 +8,29 @@ import java.io.IOException;
 import java.nio.file.StandardOpenOption;
 import java.util.List;
 
-public class Storage {
+/**
+ * Represents the file used to store the list of tasks.
+ */
+public class StorageFile {
     private final Path filePath;
 
-    public Storage(String filePath) {
+    /**
+     * Creates a StorageFile from the indicated filePath.
+     *
+     * @param filePath relative path to the data file.
+     */
+    public StorageFile(String filePath) {
         this.filePath = Paths.get(filePath);
     }
 
+    /**
+     * Loads the data file located at the filePath.
+     * If file does not exists, create the file and directory to file.
+     *
+     * @return list of encoded tasks in the data file, or
+     *          null if the data file does not exist.
+     * @throws AliceStorageException if there were errors reading or creating the file.
+     */
     public List<String> load() throws AliceStorageException {
         boolean fileExists = Files.exists(filePath);
         if (fileExists) {
@@ -26,6 +42,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Reads the data file located at the filePath.
+     *
+     * @return list of encoded tasks in the data file
+     * @throws AliceStorageException if there were errors reading the file.
+     */
     private List<String> readFile() throws AliceStorageException {
         try {
             return Files.readAllLines(filePath);
@@ -34,6 +56,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Creates a new data file at the filePath.
+     * If the file is nested in another directory, creates the respective directories too.
+     *
+     * @throws AliceStorageException if there were errors creating the file at the path.
+     */
     private void createFile() throws AliceStorageException {
         try {
             Files.createDirectories(filePath.getParent());
@@ -43,6 +71,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Writes the encoded list of tasks onto the data file.
+     *
+     * @param tasks list of encoded tasks to save.
+     * @throws AliceStorageException if there were errors writing to the file.
+     */
     public void save(List<String> tasks) throws AliceStorageException {
         try {
             BufferedWriter writer = Files.newBufferedWriter(filePath);
@@ -57,6 +91,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Writes the encoded task onto the last line in the data file.
+     *
+     * @param taskToAdd encoded task to save.
+     * @throws AliceStorageException if there were errors writing to the file.
+     */
     public void saveToLastLine(String taskToAdd) throws AliceStorageException {
         try {
             Files.write(filePath,
