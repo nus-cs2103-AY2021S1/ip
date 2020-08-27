@@ -30,13 +30,9 @@ public class Duke {
      */
     public void runDuke() {
         initialiseDuke();
-
         boolean isExit = false;
         while (!isExit) {
-            this.ui.showBlankLine();
             String command = this.ui.readUserInput();
-
-            this.ui.showDivider();
             try {
                 Operation operation = this.commandParser.parse(command, this.taskList, this.taskStorage);
                 String status = operation.execute();
@@ -45,7 +41,6 @@ public class Duke {
             } catch (DukeException exception) {
                 this.ui.showStatus(exception.getMessage());
             }
-            this.ui.showDivider();
         }
     }
 

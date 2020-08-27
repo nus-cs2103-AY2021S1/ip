@@ -49,7 +49,10 @@ public class Ui {
      * @param msg the message to be printed.
      */
     public void showStatus(String msg) {
+        this.showBlankLine();
+        this.showDivider();
         System.out.println(msg);
+        this.showDivider();
     }
 
     /**
