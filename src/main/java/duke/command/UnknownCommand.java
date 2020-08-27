@@ -1,7 +1,10 @@
 package duke.command;
 
-import duke.*;
-import duke.exception.*;
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
+
+import duke.exception.DukeUnknownInputException;
 
 /**
  * Represents a command that cannot be understood by the chat bot.

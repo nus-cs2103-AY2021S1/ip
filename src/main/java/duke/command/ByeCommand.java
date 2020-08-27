@@ -1,6 +1,8 @@
 package duke.command;
 
-import duke.*;
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
 
 /**
  * Represents a command to exit the chat bot.

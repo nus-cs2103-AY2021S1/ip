@@ -1,22 +1,29 @@
 package duke;
 
-import duke.exception.*;
-import duke.task.*;
-
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
+
+import duke.exception.DukeInvalidKeywordException;
+import duke.exception.DukeInvalidListNumberInputException;
+import duke.exception.DukeInvalidTaskDescriptionException;
+import duke.exception.DukeInvalidTaskTimeException;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
 
 public class TaskListTest {
 
-    TaskList tasks = new TaskList();
+    private TaskList tasks = new TaskList();
 
-    Task toDo = new ToDo("test 1");
-    Task event = new Event("test 2", "23-02-2020 23:00");
-    Task deadline = new Deadline("test 3", "01-01-2020 00:00");
+    private Task toDo = new ToDo("test 1");
+    private Task event = new Event("test 2", "23-02-2020 23:00");
+    private Task deadline = new Deadline("test 3", "01-01-2020 00:00");
 
     private TaskList createTaskList() {
         List<Task> sample = new ArrayList<>();

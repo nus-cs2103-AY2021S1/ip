@@ -1,7 +1,8 @@
 package duke;
 
-import duke.command.*;
-import duke.exception.*;
+import duke.command.Command;
+
+import duke.exception.DukeException;
 
 /**
  * Represents the chat bot itself. Main class.

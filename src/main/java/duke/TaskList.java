@@ -1,12 +1,20 @@
 package duke;
 
-import duke.exception.*;
-import duke.task.*;
-
 import java.time.format.DateTimeParseException;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import duke.exception.DukeInvalidDeadlineTimeException;
+import duke.exception.DukeInvalidEventTimeException;
+import duke.exception.DukeInvalidKeywordException;
+import duke.exception.DukeInvalidListNumberInputException;
+import duke.exception.DukeInvalidTaskDescriptionException;
+import duke.exception.DukeInvalidTaskTimeException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
 
 /**
  * Contains the task list.
@@ -122,6 +130,7 @@ public class TaskList {
             case "deadline":
                 toAdd = addDeadline(input);
                 break;
+            default:
             }
         } catch (StringIndexOutOfBoundsException e) {
             throw new DukeInvalidTaskDescriptionException();
@@ -149,6 +158,7 @@ public class TaskList {
      *
      * @param input A string representing the user input.
      * @return The list of tasks which match the keyword in the user input.
+     * @throws DukeInvalidKeywordException If the keyword input is invalid or empty.
      */
     public List<Task> findTasks(String input) throws DukeInvalidKeywordException {
         String keyword;
