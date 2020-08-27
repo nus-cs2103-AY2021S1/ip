@@ -51,7 +51,8 @@ public class Ui {
     }
 
     /**
-     * Print prompt to user from command. Get command from user after prompt.
+     * Print prompt to user from command.
+     * Get command from user after prompt.
      *
      * @return command that user input.
      */

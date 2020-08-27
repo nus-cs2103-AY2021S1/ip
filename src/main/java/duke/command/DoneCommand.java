@@ -15,50 +15,52 @@ import duke.task.Task;
  */
 public class DoneCommand extends Command {
 
-  private final String fullCommand;
+    private final String fullCommand;
 
-  /**
-   * Class constructor. Extract task index details from full command.
-   *
-   * @param fullCommand full command input by user.
-   */
-  public DoneCommand(String fullCommand) {
-    this.fullCommand = fullCommand;
-  }
-
-  /**
-   * Retrieve task to be mark done and change isDone to true. Write to file.
-   *
-   * @param taskList arraylist of task.
-   * @param ui ui class for print.
-   * @param storage storage for read, write to file.
-   * @throws DukeException unable to find task item.
-   */
-  @Override
-  public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-    ui.showLine();
-    String[] input = fullCommand.split(" ");
-    Task task;
-    if (input.length == 2) {
-      task = taskList.retrieveTask(Integer.parseInt(input[1]) - 1);
-      task.markAsDone();
-    } else {
-      throw new DukeException("Cannot mark item done!");
+    /**
+     * Class constructor.
+     * Extract task index details from full command.
+     *
+     * @param fullCommand full command input by user.
+     */
+    public DoneCommand(String fullCommand) {
+        this.fullCommand = fullCommand;
     }
-    System.out.println("Nice! I've marked this task as done:");
-    System.out.printf("%s\n", task);
-    ui.showLine();
 
-    storage.write(taskList);
-  }
+    /**
+     * Retrieve task to be mark done and change isDone to true.
+     * Write to file.
+     *
+     * @param taskList arraylist of task.
+     * @param ui       ui class for print.
+     * @param storage  storage for read, write to file.
+     * @throws DukeException unable to find task item.
+     */
+    @Override
+    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+        ui.showLine();
+        String[] input = fullCommand.split(" ");
+        Task task;
+        if (input.length == 2) {
+            task = taskList.retrieveTask(Integer.parseInt(input[1]) - 1);
+            task.markAsDone();
+        } else {
+            throw new DukeException("Cannot mark item done!");
+        }
+        System.out.println("Nice! I've marked this task as done:");
+        System.out.printf("%s\n", task);
+        ui.showLine();
 
-  /**
-   * Indicator for application to end.
-   *
-   * @return false.
-   */
-  @Override
-  public boolean isExit() {
-    return false;
-  }
+        storage.write(taskList);
+    }
+
+    /**
+     * Indicator for application to end.
+     *
+     * @return false.
+     */
+    @Override
+    public boolean isExit() {
+        return false;
+    }
 }
