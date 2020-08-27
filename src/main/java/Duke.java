@@ -4,12 +4,19 @@ import java.util.ArrayList;
 import java.util.ListIterator;
 import java.util.Scanner;
 
+/**
+ * Represents a task-tracking chat bot with Command Line Interface.
+ */
 public class Duke {
     
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Constructs Duke object which represents a chat bot and loads saved tasks if save file exists.
+     * @param filePath relative path of save file for saved tasks
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -20,11 +27,14 @@ public class Duke {
             tasks = new TaskList();
         }
     }
-
+    
     public static void main(String[] args) {
         new Duke("./data/savefile.txt").run();
     }
 
+    /**
+     * Initialises chat session with Duke.
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;
