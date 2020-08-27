@@ -159,6 +159,7 @@ public class TaskManager {
      * @throws DukeDateTimeException
      */
     private String[] extractTime(String cmd) throws DukeDateTimeException {
+        cmd = cmd.strip();
         int i;
         if (cmd.contains("/at")){
             i = cmd.lastIndexOf("/at");
@@ -169,8 +170,8 @@ public class TaskManager {
             throw new DukeDateTimeException(cmd);
         }
         String[] c = new String[2];
-        c[0] = cmd.substring(0,i);
-        c[1] = cmd.substring(i+3);
+        c[0] = cmd.substring(0,i).strip();
+        c[1] = cmd.substring(i+3).strip();
         return c;
     }
     

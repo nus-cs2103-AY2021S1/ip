@@ -1,12 +1,11 @@
 package tasks;
 
+import exceptions.DukeDateTimeException;
 import exceptions.DukeIOException;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -37,20 +36,25 @@ public class TaskIOParser {
             String currentLine = "";
             String[] spl;
             while (sc.hasNext()) {
-                currentLine = sc.nextLine();
-                spl = currentLine.split(Task.SEP);
-                switch (spl[0]){
-                    case "T":
-                        tasks.add(new ToDo(spl[1]));
-                        break;
-                    case "D":
-                        tasks.add(new Deadline(spl[1],spl[2]));
-                        break;
-                    case "E":
-                        tasks.add(new Event(spl[1],spl[2]));
-                        break;
+                try {
+                    currentLine = sc.nextLine();
+                    spl = currentLine.split(Task.SEP);
+                    switch (spl[0]) {
+                        case "T":
+                            tasks.add(new ToDo(spl[2], Boolean.parseBoolean(spl[1])));
+                            break;
+                        case "D":
+                            tasks.add(new Deadline( spl[2],spl[3], Boolean.parseBoolean(spl[1])));
+                            break;
+                        case "E":
+                            tasks.add(new Event(spl[2], spl[3],Boolean.parseBoolean(spl[1])));
+                            break;
+                    }
+                }catch (DukeDateTimeException ignored){
+                    // ignored as if the error occurs, we just do not parse that command
                 }
             }
+            sc.close();
             return tasks;
         }catch (IOException fileException ){
             throw new DukeIOException("Oops we couldnt read any file," +
@@ -80,7 +84,6 @@ public class TaskIOParser {
             FileWriter fw = new FileWriter(Path.of(saveFile.getPath()).resolve(SAVEFILE).toFile());
             String linesep = System.lineSeparator(); 
             for (Task t : taskList){
-                System.out.println(t);
                 fw.write(t.saveTask());
                 fw.write(linesep);
             }
