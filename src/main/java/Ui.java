@@ -1,5 +1,3 @@
-import java.util.Scanner;
-
 /**
  * Supports interactions with user.
  */
@@ -28,7 +26,6 @@ public class Ui {
         System.out.println("Hello, I am BaronBot!");
         System.out.println("What can I do for you?");
         this.printDivider();
-
         Parser.parse(this, taskList);
     }
 

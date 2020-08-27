@@ -1,11 +1,3 @@
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.Scanner;
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Starts Duke which a user can give
  * text commands to.
@@ -21,9 +13,9 @@ public class Duke {
      * @param filePath  Location of file where data is stored.
      */
     public Duke(String filePath) {
-            ui = new Ui();
-            storage = new Storage(filePath);
-            taskList = TaskList.generateTaskList(storage);
+        ui = new Ui();
+        storage = new Storage(filePath);
+        taskList = TaskList.generateTaskList(storage);
     }
 
     /**
@@ -38,6 +30,4 @@ public class Duke {
     private void run() {
         ui.start(taskList);
     }
-
-
 }

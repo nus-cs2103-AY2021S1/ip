@@ -1,15 +1,9 @@
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.List;
 import java.util.Scanner;
 
 public class Parser {
-    public static void parse(Ui ui, TaskList taskList){
+    public static void parse(Ui ui, TaskList taskList) {
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine().toLowerCase();
-
         while (!input.equals("bye")) {
             ui.printDivider();
             try {
@@ -46,11 +40,8 @@ public class Parser {
             ui.printAdditionActionMessage();
             input = sc.nextLine().toLowerCase();
         }
-
         ui.printGoodbyeMessage();
-
     }
-
 
     public static void processAdd(TaskList taskList, Scanner sc, Ui ui) {
         ui.printTaskTypes();
@@ -101,7 +92,7 @@ public class Parser {
                 default:
             }
             ui.printAddAcknowledgement(taskList);
-        } catch (EmptyDescriptionException e1){
+        } catch (EmptyDescriptionException e1) {
             ui.showEmptyDescriptionException(e1);
         } catch (ArrayIndexOutOfBoundsException e2) {
             ui.showWrongFormat(e2);

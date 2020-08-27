@@ -6,13 +6,13 @@ import java.util.List;
  * Supports actions involving adding, removing and storing tasks in a list.
  */
 public class TaskList {
-    private List<Task> taskArr;
+    List<Task> tasks;
 
     /**
      * Creates an empty TaskList object.
      */
     public TaskList() {
-        taskArr = new ArrayList<>();
+        tasks = new ArrayList<>();
     }
 
     /**
@@ -20,7 +20,7 @@ public class TaskList {
      * @param taskArr List of tasks.
      */
     public TaskList(List<Task> taskArr) {
-        this.taskArr = taskArr;
+        this.tasks = taskArr;
     }
 
     /**
@@ -32,7 +32,7 @@ public class TaskList {
     public static TaskList generateTaskList(Storage storage) {
         try {
             return new TaskList(storage.load());
-        } catch(IOException e) {
+        } catch (IOException e) {
             System.out.println("Could not load file. Generating blank Task List.");
             return new TaskList();
         }
@@ -42,7 +42,7 @@ public class TaskList {
      * Adds a task to the task list.
      */
     public void addTask(Task task) {
-        taskArr.add(task);
+        tasks.add(task);
     }
 
     /**
@@ -50,7 +50,7 @@ public class TaskList {
      * @param i Index of task to be removed.
      */
     public void removeTask(int i) {
-        taskArr.remove(i);
+        tasks.remove(i);
     }
 
     /**
@@ -59,7 +59,7 @@ public class TaskList {
      * @return Task at specified index.
      */
     public Task getTask(int i) {
-        return taskArr.get(i);
+        return tasks.get(i);
     }
 
     /**
@@ -67,7 +67,7 @@ public class TaskList {
      * @return Task at the end of the task list.
      */
     public Task getMostRecentTask() {
-        return taskArr.get(taskArr.size() - 1);
+        return tasks.get(tasks.size() - 1);
     }
 
     /**
@@ -75,7 +75,7 @@ public class TaskList {
      * @return Size of task list.
      */
     public int getTaskListSize() {
-        return taskArr.size();
+        return tasks.size();
     }
 
     /**
@@ -83,6 +83,6 @@ public class TaskList {
      * @return Either true or false.
      */
     public boolean isEmpty() {
-        return taskArr.isEmpty();
+        return tasks.isEmpty();
     }
 }

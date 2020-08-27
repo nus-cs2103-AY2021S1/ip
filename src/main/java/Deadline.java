@@ -1,10 +1,14 @@
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+<<<<<<< HEAD
 /**
  * Supports the creation of Deadline objects.
  */
 public class Deadline extends Task{
+=======
+public class Deadline extends Task {
+>>>>>>> branch-A-CodingStandard
     protected LocalDate date;
     protected LocalTime time;
 
@@ -50,7 +54,6 @@ public class Deadline extends Task{
      */
     @Override
     public String toString() {
-
         return "[Deadline]"
                 + super.toString()
                 + "(by: " + this.date + " " + this.time + ")";

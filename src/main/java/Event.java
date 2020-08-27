@@ -5,9 +5,9 @@ import java.time.LocalTime;
  * Supports the creation of Event objects.
  */
 public class Event extends Task {
-        protected LocalDate date;
-        protected LocalTime timeStart;
-        protected LocalTime timeEnd;
+    protected LocalDate date;
+    protected LocalTime timeStart;
+    protected LocalTime timeEnd;
 
     /**
      * Creates an Event object
