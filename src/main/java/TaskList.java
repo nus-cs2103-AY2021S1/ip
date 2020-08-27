@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 
 enum ListChange
@@ -124,10 +125,31 @@ public class TaskList {
             new DukeException("invalidDelete");
         }
     }
+    
+    public void find(String command) {
+        if (command.equals("find")) {
+            new DukeException("invalidFind");
+        } else {
+            String keyword = Parser.getDetail(command);
+            if (keyword.isBlank()) {
+                new DukeException("invalidFind");
+            } else {
+                List<Task> tasksFound = new ArrayList<>();
+
+                for (int i = 0; i < tasks.size(); ++i) {
+                    if (tasks.get(i).toString().contains(keyword)) {
+                        tasksFound.add(tasks.get(i));
+                    }
+                }
+                TaskList tasksFoundList = new TaskList(tasksFound);
+                tasksFoundList.printList();
+            }
+        }
+    }
 
     /**
      * Returns the default invalid command error.
-     */
+     */            
     public void defaultError() {
         new DukeException("invalidCommand");
     }
