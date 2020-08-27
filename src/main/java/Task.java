@@ -15,11 +15,7 @@ public abstract class Task {
     public void markAsDone() {
         isDone = true;
     }
-
-    public String getDesc() {
-        return desc;
-    }
-
+    
     @Override
     public String toString() {
         return "[" + getStatusIcon() + "] " + desc;
