@@ -17,6 +17,9 @@ public class Storage {
         this.tasks = tasks;
     }
 
+    /**
+     * Read the storage file and add tasks to the TaskList
+     */
     public void readFile () {
         try {
             File file = new File(this.filePath);
@@ -35,6 +38,9 @@ public class Storage {
         }
     }
 
+    /**
+     * Update current tasks to the storage file
+     */
     public void rewriteFile() {
         try {
             FileWriter fw = new FileWriter(this.filePath);

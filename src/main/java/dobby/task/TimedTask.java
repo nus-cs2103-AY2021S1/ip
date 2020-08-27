@@ -38,6 +38,11 @@ public class TimedTask extends Task {
         return this.date;
     }
 
+    /**
+     * Takes in user date input and parses it to give a LocalDate object
+     * @param dt date in user input format
+     * @return parsedDate date parsed into java LocalDate class formatted
+     */
     private LocalDate parseDate (String dt) {
         LocalDate parsedDate;
         String day = dt.substring(0, dt.indexOf('/'));
@@ -47,6 +52,11 @@ public class TimedTask extends Task {
         return parsedDate;
     }
 
+    /**
+     * Takes in user time input and parses it to give a required format
+     * @param time time in user input format
+     * @return time time parsed into required format
+     */
     private String parseTime(String time) {
         int tm = Integer.parseInt(time);
         String hr = "";
@@ -79,6 +89,11 @@ public class TimedTask extends Task {
         return message;
     }
 
+    /**
+     * Returns a string to compare scheduling of Task object
+     * @param
+     * @return schedule string to indicate scheduling details
+     */
     public String getSchedule() {
         String timeTag = "";
         if (tag == "[D]") {

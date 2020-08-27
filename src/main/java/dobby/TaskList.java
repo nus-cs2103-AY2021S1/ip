@@ -13,6 +13,11 @@ public class TaskList {
         tasks = new ArrayList<Task>();
     }
 
+    /**
+     * Create task with details from the input string and add to the tasks list
+     * @param
+     * @return
+     */
     public void createFromStorage (String str) throws ParseException {
         boolean isDone = str.charAt(4) == '\u2713';
         Task task;
@@ -53,6 +58,10 @@ public class TaskList {
         (this.tasks).add(task);
     }
 
+    /**
+     * Returns a string format of all the tasks in the list
+     * @return String all tasks in the list in a particular format
+     */
     public String getListedTasks () {
         int i = 0;
         String all_tasks = "\n    ";
@@ -66,6 +75,13 @@ public class TaskList {
         return all_tasks;
     }
 
+    /**
+     * Returns a string format of all the tasks in the list ,
+     * scheduled on a particular date
+     * @param date scheduled at
+     * @return String all tasks in the list scheduled on given date,
+     * in a particular format
+     */
     public String getScheduledTasks (LocalDate date) {
         String message = "\n    ";
         int counter = 0;
