@@ -8,15 +8,31 @@ import duke.Storage;
 
 import duke.exception.DukeException;
 
-
+/**
+ * Represents a command to search for tasks using a keyword.
+ */
 public class FindByKeywordCommand extends Command {
 
     private final String[] parsedCommand;
 
+    /**
+     * Creates and initialises a new FindByKeywordCommand.
+     *
+     * @param parsedCommand String array that contains the search keyword input.
+     */
     public FindByKeywordCommand(String[] parsedCommand) {
         this.parsedCommand = parsedCommand;
     }
 
+    /**
+     * Performs the operation of searching for all the tasks in the user's list
+     * of tasks that contains the keyword provided for the search.
+     *
+     * @param tasks List of tasks belonging to the user.
+     * @param ui Ui object created for the Duke object.
+     * @param storage Storage object used by the Duke object for file operations.
+     * @throws DukeException If no tasks could be found due to invalid keyword provided.
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
             try {

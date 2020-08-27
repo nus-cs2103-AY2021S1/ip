@@ -59,8 +59,7 @@ public class Parser {
         } else if (function.equals(Parser.FIND_BY_KEYWORD_COMMAND)) {
             return new FindByKeywordCommand(parsedCommand);
         } else {
-            String err = "Invalid Function! Input '/commands' for a list of all my commands.";
-            throw new InvalidFunctionException(err);
+            return new InvalidCommand();
         }
     }
 }
