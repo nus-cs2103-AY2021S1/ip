@@ -116,20 +116,20 @@ public class Duke {
                     } else {
                         Task task;
                         switch (priorCommand) {
-                            case "deadline":
-                                task = new Deadline(extraCommand);
-                                break;
-                            case "event":
-                                task = new Event(extraCommand);
-                                break;
-                            case "todo":
-                                task = new Todo(extraCommand);
-                                break;
-                            default:
-                                // throw exception
-                                throw new IndexOutOfBoundsException();
+                        case "deadline":
+                            task = new Deadline(extraCommand);
+                            break;
+                        case "event":
+                            task = new Event(extraCommand);
+                            break;
+                        case "todo":
+                            task = new Todo(extraCommand);
+                            break;
+                        default:
+                            // throw exception
+                            throw new IndexOutOfBoundsException();
                         }
-
+                        
                         list.add(task);
                         System.out.println(format(messageAdded + SPACE + "   "
                                 + task.getTypeLetter() + task.getStatusIcon() + task.getPrintMessage()
@@ -139,24 +139,24 @@ public class Duke {
                     // handle exception
                     IndexOutOfBoundsException ex;
                     switch (priorCommand) {
-                        case "todo":
-                            ex = new TodoEmptyBodyException();
-                            break;
-                        case "event":
-                            ex = new EventEmptyBodyException();
-                            break;
-                        case "deadline":
-                            ex = new DeadlineEmptyBodyException();
-                            break;
-                        case "delete":
-                            ex = new DeleteEmptyBodyException();
-                            break;
-                        case "done":
-                            ex = new DoneEmptyBodyException();
-                            break;
-                        default:
-                            ex = new UnknownCommandException();
-                            break;
+                    case "todo":
+                        ex = new TodoEmptyBodyException();
+                        break;
+                    case "event":
+                        ex = new EventEmptyBodyException();
+                        break;
+                    case "deadline":
+                        ex = new DeadlineEmptyBodyException();
+                        break;
+                    case "delete":
+                        ex = new DeleteEmptyBodyException();
+                        break;
+                    case "done":
+                        ex = new DoneEmptyBodyException();
+                        break;
+                    default:
+                        ex = new UnknownCommandException();
+                        break;
                     }
                     System.out.println(format(ex.toString()));
                 } catch (java.time.format.DateTimeParseException e) {
