@@ -6,6 +6,9 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents an event task that consists of a description and a datetime as the happening time of the event.
+ */
 public class Event extends Task {
     private final LocalDateTime atTime;
 
