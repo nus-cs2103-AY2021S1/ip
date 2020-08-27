@@ -28,12 +28,12 @@ public class TaskManager {
      */
     public static void newTask(String name, String itype, String date, String fileDir) throws ErrorExceptions {
         task Task;
-        if(itype.equals("Todo")){
+        if (itype.equals("Todo")) {
             Task = new Todo(name,"[T]");
-        } else if(itype.equals("Deadline")){
+        } else if (itype.equals("Deadline")) {
             Task = new Deadline(name,"[D]");
             DateTimeManager.addDate(Task,date);
-        } else{
+        } else {
             Task = new Event(name,"[E]");
             DateTimeManager.addDate(Task,date);
         }
@@ -48,7 +48,7 @@ public class TaskManager {
      * @param index index of the task.
      * @return task selected task.
      */
-    public static task getTask(int index){
+    public static task getTask(int index) {
         task t = store.get(index-1);
         return t;
     }
@@ -58,11 +58,11 @@ public class TaskManager {
      *
      * @param t task.
      */
-    public static void completed(task t){
+    public static void completed(task t) {
         t.setDone();
         try {
             FileManager.edit(fileDir, store);
-        } catch(IOException e){
+        } catch (IOException e) {
             System.out.println(e);
         }
     }
@@ -72,11 +72,11 @@ public class TaskManager {
      *
      * @param index index of the task.
      */
-    public static void delete(int index){
+    public static void delete(int index) {
         store.remove(index-1);
         try {
             FileManager.edit(fileDir, store);
-        } catch(IOException e){
+        } catch (IOException e) {
             System.out.println(e);
         }
     }
@@ -89,20 +89,19 @@ public class TaskManager {
     public static int storeIndex(){
         return store.size();
     }
-    public static String read(task t){
+    public static String read(task t) {
         String done = "";
-        if(t.getTaskCompleted()){
+        if (t.getTaskCompleted()) {
             done = "[O]";
-        }
-        else{
+        }  else {
             done = "[X]";
         }
-        if(t.getTaskType().equals("[T]")){
+        if (t.getTaskType().equals("[T]")) {
             return t.getTaskType() + done + " " + t.getTaskName();
-        } else if(t.getTaskType().equals("[D]")){
+        } else if (t.getTaskType().equals("[D]")) {
             return t.getTaskType() + done + " " + t.getTaskName() + "(by: " +
                     t.getTaskDate().format(DateTimeFormatter.ofPattern("dd MMM uuuu HHmm")) + ")";
-        } else{
+        } else {
             return t.getTaskType() + done + " " + t.getTaskName() + "(at: " +
                     t.getTaskDate().format(DateTimeFormatter.ofPattern("dd MMM uuuu HHmm")) + ")";
         }
@@ -111,10 +110,10 @@ public class TaskManager {
     /**
      * Lists all the tasks that is currently in the list and all its relevant information.
      */
-    public static void listing(){
+    public static void listing() {
         System.out.println("These are your current tasks!");
         int count = 1;
-        for(task i : store){
+        for (task i : store) {
             System.out.println(count + ". " + read(i));
             count++;
         }
@@ -133,10 +132,10 @@ public class TaskManager {
      * @param fileDir file directory of the local save.
      * @param t task.
      */
-    public static void save(String fileDir,task t){
+    public static void save(String fileDir,task t) {
         try{
             FileManager.add(fileDir,TaskManager.read(t));
-        } catch(IOException e){
+        } catch (IOException e) {
             System.out.println(e);
         }
     }
@@ -155,9 +154,9 @@ public class TaskManager {
      *
      * @return ArrayList<task> task store.
      */
-    public static ArrayList<task> getStore(){
+    public static ArrayList<task> getStore() {
         ArrayList<task> clone = new ArrayList<>();
-        for(task i : store){
+        for (task i : store) {
             clone.add(i);
         }
         return clone;

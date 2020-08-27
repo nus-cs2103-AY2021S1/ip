@@ -7,7 +7,7 @@ import UI.UserInterface;
 /**
  * Represents the bridge that calls the appropriate exit command.
  */
-public class ParseExit extends Parse{
+public class ParseExit extends Parse {
 
     /**
      * Calls the exit command.

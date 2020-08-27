@@ -5,7 +5,7 @@ import UI.UserInterface;
 /**
  * Represents a command that exits the program.
  */
-public class ExitCommand extends Command{
+public class ExitCommand extends Command {
 
     /**
      * Calls the UserInterface to print the stop message.

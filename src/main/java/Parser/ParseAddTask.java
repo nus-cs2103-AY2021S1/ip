@@ -9,7 +9,7 @@ import Errors.ErrorExceptions;
 /**
  * Represents the bridge that calls the appropriate add task command.
  */
-public class ParseAddTask extends Parse{
+public class ParseAddTask extends Parse {
     /**
      * Decomposes the user input and pass to the specific add task commands depending on what
      * type of task is called.
@@ -18,15 +18,15 @@ public class ParseAddTask extends Parse{
      * @param input user input.
      * @throws ErrorExceptions when the task cannot be created.
      */
-    public static void execute(String s, String input) throws ErrorExceptions{
+    public static void execute(String s, String input) throws ErrorExceptions {
         String current = s;
-        if(current.equals("todo")) {
+        if (current.equals("todo")) {
             AddTodoCommand.execute(input);
-        } else if(current.equals("deadline")){
+        } else if (current.equals("deadline")){
             AddDeadlineCommand.execute(input);
-        } else if(current.equals("event")){
+        } else if (current.equals("event")) {
             AddEventCommand.execute(input);
-        } else{
+        } else {
             WrongCommand.execute();
         }
     }

@@ -27,7 +27,7 @@ public class DeleteCommand extends Command {
             UserInterface.done();
             System.out.println("    " + TaskManager.read(t));
             System.out.println("The tracked Tasks.task has been deleted!");
-        } catch(NoSuchElementException e){
+        } catch (NoSuchElementException e) {
             throw new ErrorExceptions("There is no suck Tasks.task!");
         }
     }

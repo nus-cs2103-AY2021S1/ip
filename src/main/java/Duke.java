@@ -15,11 +15,11 @@ public class Duke {
         String fileDir = "./DukeTodoSave.txt";
         InputManager.fileDir(fileDir);
         File save = new File(fileDir);
-        if(!save.exists()){ // create the text file
+        if (!save.exists()) { // create the text file
             System.out.println("Save file does not exist, creating it now!");
-            try{
+            try {
                 save.createNewFile();
-            } catch(IOException e){
+            } catch (IOException e) {
                 System.out.println("Error creating the save file!");
                 System.out.println(e);
             }
@@ -27,7 +27,7 @@ public class Duke {
         TaskManager.load(save);
         Scanner sc = new Scanner(System.in);
         UserInterface UI = new UserInterface();
-        while(UI.getStop() == false){
+        while (UI.getStop() == false) {
             UI.input(sc.nextLine());
             UI.parse();
         }

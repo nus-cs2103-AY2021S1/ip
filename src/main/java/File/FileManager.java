@@ -17,7 +17,7 @@ import java.util.Scanner;
 /**
  * Represents a manager that handles all actions related to File.
  */
-public class FileManager{
+public class FileManager {
     /**
      * Adds a new task into the save file.
      *
@@ -41,7 +41,7 @@ public class FileManager{
      */
     public static void edit(String location, ArrayList<task> store) throws IOException {
         FileWriter fw = new FileWriter(location);
-        for(task i : store){
+        for (task i : store) {
             fw.append(TaskManager.read(i));
             fw.write(System.lineSeparator());
         }
@@ -58,14 +58,14 @@ public class FileManager{
     private static String getName(String s) throws ErrorExceptions {
         Scanner sc = new Scanner(s);
         String name = "";
-        try{
+        try {
             sc.next(); // skip the symbols
             String current = sc.next();
-            while(current.charAt(0)!='('){
+            while (current.charAt(0)!='(') {
                 name = name + current + " ";
                 current = sc.next();
             }
-        } catch(NoSuchElementException e){}
+        } catch (NoSuchElementException e) {}
         return name;
     }
 
@@ -79,26 +79,25 @@ public class FileManager{
     private static String getDate(String s) throws ErrorExceptions {
         Scanner sc = new Scanner(s);
         String date = "";
-        try{
+        try {
             String current = sc.next();
-            while(current.charAt(0)!='('){
+            while (current.charAt(0)!='(') {
                 current = sc.next();
             }
             current = sc.next();
-            while(current.charAt(current.length()-1)!=')'){
+            while (current.charAt(current.length()-1)!=')') {
                 date = date + current + " ";
                 current = sc.next();
             }
             int l = current.length()-1;
             String last = "";
-            for(int i=0; i<l; i++){
+            for (int i=0; i<l; i++) {
                 last = last + current.charAt(i);
             }
             date = date + last;
-        } catch(NoSuchElementException e){
+        } catch (NoSuchElementException e) {
             System.out.println(e);
         }
-//        System.out.println(date);
         DateTimeFormatter d = DateTimeFormatter.ofPattern("dd MMM yyyy HHmm");
         LocalDateTime dt = LocalDateTime.parse(date,d);
         return dt.format(DateTimeFormatter.ofPattern("dd-MM-uuuu HHmm"));
@@ -113,19 +112,19 @@ public class FileManager{
      */
     private static int getType(String s) throws ErrorExceptions {
         Scanner sc = new Scanner(s);
-        try{
+        try {
             String current = sc.next();
             char type = current.charAt(1);
-            if(type == 'T'){
+            if (type == 'T') {
                 return 1;
-            } else if(type == 'D'){
+            } else if (type == 'D') {
                 return 2;
-            } else if(type == 'E'){
+            } else if (type == 'E') {
                 return 3;
-            } else{
+            } else {
                 throw new ErrorExceptions("Error: Wrong item type detected, file might be corrupted!");
             }
-        } catch(NoSuchElementException e){
+        } catch (NoSuchElementException e) {
             throw new ErrorExceptions("Failed to load saved file (Type)" + System.lineSeparator()
                     + e);
         }
@@ -140,19 +139,19 @@ public class FileManager{
      */
     private static boolean getDone(String s) throws ErrorExceptions {
         Scanner sc = new Scanner(s);
-        try{
+        try {
             String current = sc.next();
             char done = current.charAt(4);
             String d = "";
             d = d + done;
-            if(d.equals("O")){
+            if (d.equals("O")) {
                 return true;
-            } else if (d.equals("X")){
+            } else if (d.equals("X")) {
                 return false;
-            } else{
+            } else {
                 throw new ErrorExceptions("Error: Cannot determine if item is done, file might be corrupted!");
             }
-        } catch(NoSuchElementException e){
+        } catch (NoSuchElementException e) {
             throw new ErrorExceptions("Failed to load saved file (Completed?)" + System.lineSeparator()
                     + e);
         }
@@ -164,51 +163,51 @@ public class FileManager{
      * @param f saved file.
      * @param store ArrayList to store the tasks.
      */
-    public static void read(File f, ArrayList<task> store){
-        try{
+    public static void read(File f, ArrayList<task> store) {
+        try {
             Scanner sc = new Scanner(f);
-            while(sc.hasNext()){
+            while (sc.hasNext()) {
                 String current = sc.nextLine();
                 try {
                     int type = FileManager.getType(current);
                     String name = FileManager.getName(current);
                     boolean done = FileManager.getDone(current);
-                    if(type == 1){
+                    if (type == 1) {
                         Todo t = new Todo(name,"[T]");
                         if(done) {
                             t.setDone();
                         }
                         store.add(t);
-                    } else if(type == 2){
+                    } else if (type == 2) {
                         try {
                             String date = FileManager.getDate(current);
                             Deadline d = new Deadline(name,"[D]");
-                            if(done) {
+                            if (done) {
                                 d.setDone();
                             }
                             DateTimeManager.addDate(d,date);
                             store.add(d);
-                        } catch(ErrorExceptions e){
+                        } catch (ErrorExceptions e) {
                             System.out.println(e);
                         }
-                    } else{
+                    } else {
                         try {
                             String date = FileManager.getDate(current);
                             Event e = new Event(name,"[E]");
-                            if(done) {
+                            if (done) {
                                 e.setDone();
                             }
                             DateTimeManager.addDate(e,date);
                             store.add(e);
-                        } catch(ErrorExceptions e){
+                        } catch (ErrorExceptions e) {
                             System.out.println(e);
                         }
                     }
-                } catch (ErrorExceptions e){
+                } catch (ErrorExceptions e) {
                     System.out.println(e);
                 }
             }
-        } catch(FileNotFoundException e){
+        } catch (FileNotFoundException e) {
             System.out.println("File does not exist!");
         }
     }

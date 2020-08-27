@@ -25,41 +25,35 @@ public class InputManager {
         Scanner sc = new Scanner(input);
         String current = sc.next();
         TaskManager.fileDir(fileDir);
-        if(current.equals("bye")){
+        if (current.equals("bye")) {
             ParseExit.execute();
-        }
-        else if(current.equals("delete")){
+        } else if (current.equals("delete")) {
             try {
                 int index = sc.nextInt();
                 ParseDelete.execute(index);
-            } catch(NoSuchElementException e){
+            } catch (NoSuchElementException e) {
                 throw new ErrorExceptions("There is no such tasks!");
             }
-        }
-        else if(current.equals("done")){
+        } else if (current.equals("done")) {
             try {
                 task t;
                 int index = sc.nextInt();
                 ParseCompleted.execute(index);
-            } catch(NoSuchElementException e){
+            } catch (NoSuchElementException e) {
                 throw new ErrorExceptions("There is no such tasks!");
             }
-        }
-        else if(current.equals("list")){
+        } else if (current.equals("list")) {
             ParseList.execute();
-        }
-        else if(current.equals("show")){
+        } else if (current.equals("show")) {
             ParseShow.execute();
-        }
-        else if(current.equals("filter")){
+        } else if (current.equals("filter")) {
             try {
                 String date = sc.next();
                 ParseFilter.execute(date);
-            } catch(NoSuchElementException e){
+            } catch (NoSuchElementException e) {
                 throw new ErrorExceptions("Missing date!");
             }
-        }
-        else{ // add tasks
+        } else { // add tasks
             ParseAddTask.execute(current,input);
         }
     }
@@ -92,10 +86,10 @@ public class InputManager {
                         name = name + current + " ";
                         current = sc.next();
                     }
-                } catch(NoSuchElementException e){}
+                } catch (NoSuchElementException e) {}
             }
             return name;
-        } catch(NoSuchElementException e){
+        } catch (NoSuchElementException e) {
             throw new ErrorExceptions("Missing item name!");
         }
     }
@@ -113,38 +107,33 @@ public class InputManager {
         String next = sc.next();
         String N = "" + next.charAt(0);
         String date = "";
-        try{
-            while(!N.equals("/")){
+        try {
+            while (!N.equals("/")) {
                 next = sc.next();
                 N = "" + next.charAt(0);
             }
             String action = "";
-            try{
+            try {
                 String day = sc.next();
                 action = action + day;
-                try{
+                try {
                     String time = sc.next();
                     action = action + " " + time;
-                }
-                catch(NoSuchElementException e){
-                    if(type == 2){
-                    }
-                    else{
+                } catch (NoSuchElementException e) {
+                    if (type == 2) {
+                    } else {
                         throw new ErrorExceptions("Wrong event command format, missing timeslot");
                     }
                 }
                 date = action;
-            }
-            catch(NoSuchElementException e){
+            } catch (NoSuchElementException e) {
                 throw new ErrorExceptions("Wrong event command format, missing date");
             }
-        }
-        catch(NoSuchElementException e){
-            if(type == 1){
+        } catch (NoSuchElementException e) {
+            if (type == 1) {
                 return date;
-            }
-            else{
-                throw new ErrorExceptions("Wrong deadline or event command format, missing /action: Tasks.task");
+            } else{
+                throw new ErrorExceptions("Wrong deadline or event command format, missing /action: task");
             }
         }
         return date;
@@ -164,5 +153,5 @@ public class InputManager {
      *
      * @return String file directory.
      */
-    public static String getFileDir(){ return fileDir; }
+    public static String getFileDir() { return fileDir; }
 }

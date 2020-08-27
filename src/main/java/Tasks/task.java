@@ -19,7 +19,7 @@ public class task {
      * @param name the name of the task.
      * @param type the type of task to be created.
      */
-    public task(String name, String type){
+    public task(String name, String type) {
         this.count++;
         this.name = name;
         this.completed = false;

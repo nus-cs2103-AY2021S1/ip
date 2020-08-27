@@ -18,7 +18,7 @@ public class UserInterface {
      * Creates a UserInterface object that helps to handle all the user inputs and pass it along to
      * the parser to be broken down.
      */
-    public UserInterface(){
+    public UserInterface() {
         System.out.println("Welcome to MattBot v1.0!" + System.lineSeparator() +
                         "How may I assist you today?");
     }
@@ -51,10 +51,10 @@ public class UserInterface {
      * If the input is null, failed() is called.
      * If the input is not null, action() is called.
      */
-    public void parse(){
-        if(this.input.equals("")){
+    public void parse() {
+        if (this.input.equals("")) {
             failed();
-        } else{
+        } else {
             action();
         }
     }
@@ -62,7 +62,7 @@ public class UserInterface {
     /**
      * Prints the closing off statement when the user shuts down the Mattbot.
      */
-    public static void stop(){
+    public static void stop() {
         exit = true;
         System.out.println("Awww, leaving so soon? Hope to see you again!");
     }

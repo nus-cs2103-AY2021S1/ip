@@ -6,7 +6,7 @@ import Errors.ErrorExceptions;
 /**
  * Represents the bridge that calls the appropriate complete task command.
  */
-public class ParseCompleted extends Parse{
+public class ParseCompleted extends Parse {
 
     /**
      * Calls the completion command.
@@ -14,7 +14,7 @@ public class ParseCompleted extends Parse{
      * @param i index of the task.
      * @throws ErrorExceptions when the task cannot be found.
      */
-    public static void execute(int i) throws ErrorExceptions{
+    public static void execute(int i) throws ErrorExceptions {
         CompletedCommand.execute(i);
     }
 }

@@ -10,7 +10,7 @@ import java.time.format.DateTimeFormatter;
 /**
  * Represents the bridge that calls the appropriate filter by date command.
  */
-public class ParseFilter extends Parse{
+public class ParseFilter extends Parse {
 
     /**
      * Calls the filter command.
