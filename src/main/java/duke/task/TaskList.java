@@ -88,18 +88,6 @@ public class TaskList {
         }
     }
 
-    public void displayTasks() {
-        if (tasks.size() > 0) {
-            System.out.println("\tThese are the tasks in your list. Jiayous! :)");
-        } else {
-            System.out.println("\tYou have no task in your list. :D");
-        }
-
-        for (int i = 0; i < tasks.size(); i++) {
-            System.out.println(String.format("\t\t%d. %s", i + 1, this.tasks.get(i).toString()));
-        }
-    }
-
     public List<Task> getTasks() {
         return this.tasks;
     }
