@@ -1,4 +1,4 @@
-class Event extends Task {
+public class Event extends Task {
     Event(String message) {
         super(message);
     }

@@ -1,7 +1,7 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-class Convert {
+public class Convert {
     static String at(String s) {
         String first = s.split("/at ")[0];
         String second = s.split("/at ")[1];

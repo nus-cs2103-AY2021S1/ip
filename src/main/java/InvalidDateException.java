@@ -1,4 +1,4 @@
-class InvalidDateException extends Exception {
+public class InvalidDateException extends Exception {
     InvalidDateException() {}
     @Override
     public String toString() {

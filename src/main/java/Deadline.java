@@ -1,4 +1,4 @@
-class Deadline extends Task {
+public class Deadline extends Task {
     Deadline(String message) {
         super(message);
     }

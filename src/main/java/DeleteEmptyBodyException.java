@@ -1,4 +1,4 @@
-class DeleteEmptyBodyException extends EmptyBodyException {
+public class DeleteEmptyBodyException extends EmptyBodyException {
     DeleteEmptyBodyException() {}
     @Override
     public String toString() {
