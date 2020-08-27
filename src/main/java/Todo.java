@@ -22,4 +22,9 @@ public class Todo extends Task {
     public String getPrintMessage() {
         return getMessage();
     }
+
+    @Override
+    public String getStoreMessage() {
+        return getMessage();
+    }
 }

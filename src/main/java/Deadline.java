@@ -22,4 +22,9 @@ public class Deadline extends Task {
     public String getPrintMessage() {
         return Convert.by(getMessage());
     }
+
+    @Override
+    public String getStoreMessage() {
+        return Convert.byDigitalDate(getMessage());
+    }
 }

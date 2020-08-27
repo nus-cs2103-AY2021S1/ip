@@ -41,4 +41,8 @@ public class Task {
     public String getPrintMessage() {
         return "";
     }
+
+    public String getStoreMessage() {
+        return "";
+    }
 }

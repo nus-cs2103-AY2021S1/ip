@@ -21,4 +21,9 @@ public class Event extends Task {
     public String getPrintMessage() {
         return Convert.at(getMessage());
     }
+
+    @Override
+    public String getStoreMessage() {
+        return Convert.atDigitalDate(getMessage());
+    }
 }

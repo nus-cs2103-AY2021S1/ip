@@ -44,8 +44,8 @@ public class Duke {
             list.add(Convert.add(task));
         }
 
-        System.out.print(SPACE + LINE);
         System.out.println(format(messageHello));
+        System.out.print(SPACE + LINE);
         System.out.print(SPACE + messageList);
         int i = 1;
         for (Task task : list) {
@@ -62,7 +62,6 @@ public class Duke {
 
 
         // continue if have more commands (that are not "bye")
-        // echo the command or say bye
         while (scanner.hasNextLine()) {
             String currentCommand = scanner.nextLine();
             String priorCommand = currentCommand.split(" ")[0];
@@ -75,7 +74,7 @@ public class Duke {
                 for (i = 0; i < list.size(); i++) {
                     Task task = list.get(i);
                     content = task.getPureTypeLetter() + " ; " + task.getStatusNum()
-                            + " ; " + task.getPrintMessage() + "\n";
+                            + " ; " + task.getStoreMessage() + "\n";
                     fileWriter.write(content);
                 }
                 fileWriter.close();

@@ -1,6 +1,7 @@
 T ; 1 ; read book
-D ; 0 ; return book /by Oct 28 2020
-E ; 0 ; project meeting /at Dec 12 2020
+D ; 0 ; return book (by: 2020-01-01)
+E ; 0 ; project meeting (at: 2020-02-02)
 T ; 1 ; join sports club
 T ; 0 ; watch concert
-D ; 1 ; do laundry /at Jan 1 2020
+D ; 1 ; do laundry (by: 2020-09-27)
+T ; 1 ; watch webcasted videos
