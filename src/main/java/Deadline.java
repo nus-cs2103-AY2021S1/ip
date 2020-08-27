@@ -1,8 +1,24 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.time.temporal.ChronoUnit;
+
 public class Deadline extends Task {
     private String dueDate;
-    Deadline(String name, String dueDate) {
+    private Deadline(String name, String dueDate) {
         super(name);
         this.dueDate = dueDate;
+    }
+
+    public static Deadline createDeadline(String name, String dueDate) throws DukeException{
+        LocalDate localDate;
+        try {
+            localDate = LocalDate.parse(dueDate);
+        }
+        catch (DateTimeParseException ex) {
+            throw new DukeException("Please specify the due date as follows: yyyy-mm-dd");
+        }
+        return new Deadline(name, localDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
     }
 
     @Override

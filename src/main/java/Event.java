@@ -1,8 +1,24 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.time.temporal.ChronoUnit;
+
 public class Event extends Task {
     private String timing;
-    Event(String name, String timing) {
+    private Event(String name, String timing) {
         super(name);
         this.timing = timing;
+    }
+
+    public static Event createEvent(String name, String timing) throws DukeException {
+        LocalDate localDate;
+        try {
+            localDate = LocalDate.parse(timing);
+        }
+        catch (DateTimeParseException ex) {
+            throw new DukeException("Please specify the date as follows: yyyy-mm-dd");
+        }
+        return new Event(name, localDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
     }
 
     @Override
