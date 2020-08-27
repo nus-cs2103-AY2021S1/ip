@@ -31,6 +31,13 @@ public class Duke {
         }
     }
 
+    // MAIN FUNCTION
+    public static void main(String[] args) {
+        // Initialisation of duke.Duke
+        Duke duke = new Duke();
+        duke.run();
+    }
+
     // METHOD TO RUN DUKE PROCESSES
     public void run() {
         // INTRO
@@ -55,12 +62,5 @@ public class Duke {
 
         // OUTRO
         uiManager.printDukeOutro();
-    }
-
-    // MAIN FUNCTION
-    public static void main(String[] args) {
-        // Initialisation of duke.Duke
-        Duke duke = new Duke();
-        duke.run();
     }
 }

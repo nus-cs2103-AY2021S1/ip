@@ -1,9 +1,9 @@
 package duke.command;
 
-import duke.task.DukeTask;
 import duke.logic.StorageManager;
 import duke.logic.TaskList;
 import duke.logic.UIManager;
+import duke.task.DukeTask;
 
 public class AddCommand extends Command {
     private final DukeTask task;
