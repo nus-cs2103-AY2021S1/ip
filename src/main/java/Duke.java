@@ -1,99 +1,87 @@
-import java.util.ArrayList;
-import java.util.Scanner;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class Duke {
-    public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        System.out.println("What can I do for you?\n");
+    private TaskList tasks;
+    private Storage storage;
+    private UI ui;
 
-        ArrayList<Task> tasks = new ArrayList<Task>();
-        Scanner sc = new Scanner(System.in);
-        while (true) {
-            try {
-                String input = sc.nextLine();
+    public Duke() {
+        ui = new UI();
+        tasks = new TaskList();
+        String directory = System.getProperty("user.dir");
+        Path filePath = Paths.get(directory, "data", "data.txt");
+        storage = new Storage(filePath);
+        try {
+            tasks = new TaskList(storage.loadData());
+        } catch (Exception e) {
+            ui.displayError(e);
+        }
+    }
 
-                if (input.equals("bye")) {
-                    String bye = "Bye. Hope to see you again soon!";
-                    System.out.println(bye);
+    public void execute() throws Exception {
+        ui.greetings();
+        boolean isHalted = false;
+        while (!isHalted) {
+            String command = ui.readCommand();
+            Parser parser = new Parser(command);
+            String commandType = parser.getCommandType();
+            switch (commandType) {
+                case "bye": {
+                    isHalted = true;
                     break;
-                } else if (input.equals("list")) {
-                    System.out.println("Here are the tasks in your list:");
+                }
+                case "list": {
+                    ui.displayMessage("Here are the tasks in your list:");
                     for (int i = 0; i < tasks.size(); ++i) {
-                        System.out.printf("%d. %s\n", i + 1, tasks.get(i));
+                        ui.displayFormat("%d. %s\n", i + 1, tasks.get(i));
                     }
-                } else if (input.startsWith("done")) {
-                    if (input.length() < 7) {
-                        throw new DukeException("\u2639 OOPS!!! Task index not found.");
-                    }
-                    int index = Integer.parseInt(input.substring(5)) - 1;
+                    break;
+                }
+                case "done": {
+                    int index = parser.getIndex();
                     if (index >= tasks.size()) {
-                        throw new DukeException("\u2639 OOPS!!! Task index not found.");
+                        throw new DukeException(":( OOPS!!! Task index not found.");
                     }
                     tasks.get(index).markAsDone();
-                    System.out.println("Nice! I've marked this task as done:");
-                    System.out.println(tasks.get(index));
-                } else if (input.startsWith("delete")) {
-                    if (input.length() < 7) {
-                        throw new DukeException("\u2639 OOPS!!! Task index not found.");
-                    }
-                    int index = Integer.parseInt(input.substring(7)) - 1;
-                    if (index >= tasks.size()) {
-                        throw new DukeException("\u2639 OOPS!!! Task index not found.");
-                    }
-                    System.out.println("Noted. I've removed this task:");
-                    System.out.println(tasks.get(index));
-                    tasks.remove(index);
-                    System.out.printf("Now you have %d tasks in the list.\n", tasks.size());
-                } else {
-                    Task newTask = null;
-                    if (input.startsWith("todo")) {
-                        if (input.length() < 5) {
-                            throw new DukeException("\u2639 OOPS!!! The description of a todo cannot be empty.");
-                        }
-                        String description = input.substring(5);
-                        newTask = new Todo(input);
-                    } else if (input.startsWith("deadline")) {
-                        if (input.length() < 9) {
-                            throw new DukeException("\u2639 OOPS!!! The description of a deadline cannot be empty.");
-                        }
-                        String rest = input.substring(9);
-                        int by_position = rest.indexOf("/by ");
-                        if (by_position == -1) {
-                            throw new DukeException("\u2639 OOPS!!! Deadline time specification not found.");
-                        }
-                        String description = rest.substring(0, by_position - 1);
-                        String by = rest.substring(by_position + 4);
-                        newTask = new Deadline(description, by);
-                    } else if (input.startsWith("event")) {
-                        if (input.length() < 6) {
-                            throw new DukeException("\u2639 OOPS!!! The description of an event cannot be empty.");
-                        }
-                        String rest = input.substring(6);
-                        int at_position = rest.indexOf("/at ");
-                        if (at_position == -1) {
-                            throw new DukeException("\u2639 OOPS!!! Event time specification not found.");
-                        }
-                        String description = rest.substring(0, at_position - 1);
-                        String at = rest.substring(at_position + 4);
-                        newTask = new Event(description, at);
-                    }
-
-                    if (newTask == null) {
-                        throw new DukeException("\u2639 OOPS!!! I'm sorry, but I don't know what that means :-(");
-                    }
-                    tasks.add(newTask);
-                    System.out.println("Got it. I've added this task:");
-                    System.out.println(newTask);
-                    System.out.printf("Now you have %d tasks in the list\n", tasks.size());
+                    ui.displayMessage("Nice! I've marked this task as done:");
+                    ui.displayMessage(tasks.get(index).toString());
+                    break;
                 }
-            } catch(DukeException e) {
-                System.out.println(e.getMessage());
-            };
+                case "delete": {
+                    int index = parser.getIndex();
+                    if (index >= tasks.size()) {
+                        throw new DukeException(":( OOPS!!! Task index not found.");
+                    }
+                    ui.displayMessage("Noted. I've removed this task:");
+                    ui.displayMessage(tasks.get(index).toString());
+                    tasks.removeTask(index);
+                    ui.displayFormat("Now you have %d tasks in the list.\n", tasks.size());
+                    break;
+                }
+                case "add": {
+                    Task newTask = parser.getTask();
+                    tasks.addTask(newTask);
+                    ui.displayMessage("Got it. I've added this task:");
+                    ui.displayMessage(newTask.toString());
+                    ui.displayFormat("Now you have %d tasks in the list\n", tasks.size());
+                    break;
+                }
+                default: {
+                    throw new Exception("Unexpected error");
+                }
+            }
         }
+
+        try {
+            storage.saveData(tasks.getTasks());
+        } catch(Exception e) {
+            ui.displayError(e);
+        }
+        ui.bye();
+    }
+
+    public static void main(String[] args) throws Exception {
+        new Duke().execute();
     }
 }
