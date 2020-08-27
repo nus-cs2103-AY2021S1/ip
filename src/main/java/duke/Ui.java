@@ -69,7 +69,25 @@ public class Ui {
     }
 
     /**
-     * Prints out a line to the user.
+     * Search the tasks that contain the keyword in the list of tasks provided.
+     * 
+     * @param keyword The keyword for searching the tasks.
+     * @param list The list of tasks to be searched.
+     */
+    public void printFoundTask(String keyword, ArrayList<Task> list) {
+        Task thisTask;
+        System.out.println("     Here are the matching tasks in your list:");
+        for (int i = 1, j = 1; i <= list.size(); i++) {
+            thisTask = list.get(i - 1);
+            if (thisTask.taskname.contains(keyword)) {
+                System.out.println("     " + j + "." + thisTask.toString());
+                j++;
+            }
+        }
+    }
+
+    /**
+     * Prints out the a line to the user.
      */
     public void printLine() {
         System.out.println("    -x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-");
