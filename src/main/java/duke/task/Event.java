@@ -1,7 +1,6 @@
 package duke.task;
 
 import duke.format.DateFormat;
-
 import java.util.Date;
 
 /**
