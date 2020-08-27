@@ -1,17 +1,37 @@
+/**
+ * Class to run any other unspecified command.
+ * The type of a command is defined as the first word in the command string.
+ */
 public class UnknownCommand implements Command{
 
-    protected final String command;
+    protected final String COMMAND;
 
+    /**
+     * constructor
+     */
     public UnknownCommand(String command) {
-        this.command = command;
+        this.COMMAND = command;
     }
 
+    /**
+     * Executes the unknown command, causing Duke to echo whatever command the user inputs as it is not a valid command.
+     *
+     * @param taskList Used by Duke to keep track of tasks.
+     * @param ui Responsible for printing to console after execution.
+     * @param storage Stores tasks in a text format.
+     */
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         ui.showLine();
-        ui.unknownCommand(command);
+        ui.unknownCommand(COMMAND);
         ui.showLine();
     }
 
+    /**
+     * Returns true if a bye command is called.
+     * Returns False otherwise.
+     *
+     * @return boolean indicating whether Duke is to stop running.
+     */
     public boolean isExit() {
         return false;
     }

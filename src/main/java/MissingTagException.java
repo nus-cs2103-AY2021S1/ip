@@ -1,5 +1,12 @@
+/**
+ * Class to hold the MissingTagException message of a MissingTagException.
+ */
 public class MissingTagException extends DukeException {
 
+    /**
+     * Custom message of a MissingTagException, reminding the user to type in a valid tag with their event/deadline
+     * command.
+     */
     @Override
     public String getMessage() {
         return "     ☹ OOPS!!! Your command needs to be followed by a valid tag. :-(\n" +

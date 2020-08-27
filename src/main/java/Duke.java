@@ -1,29 +1,32 @@
 public class Duke {
 
-    private final Storage storage;
-    private final TaskList tasks;
-    private final Ui ui;
+    private final Storage STORAGE;
+    private final TaskList TASKS;
+    private final Ui UI;
 
     // constructor
     public Duke(String filePath) {
-        ui = new Ui();
-        storage = new Storage(filePath);
-        tasks = new TaskList(storage.loadTasks());
+        UI = new Ui();
+        STORAGE = new Storage(filePath);
+        TASKS = new TaskList(STORAGE.loadTasks());
     }
 
     public void run() {
-        ui.greet(storage.createResult);
+
+        UI.greet(STORAGE.createResult);
+
         boolean isExit = false;
+
         while (!isExit) {
             try {
-                String fullCommand = ui.readCommand();
+                String fullCommand = UI.readCommand();
                 Command c = Parser.interpret(fullCommand);
-                c.execute(tasks, ui, storage);
+                c.execute(TASKS, UI, STORAGE);
                 isExit = c.isExit();
             } catch (DukeException e) {
-                ui.showLine();
-                ui.showError(e.getMessage());
-                ui.showLine();
+                UI.showLine();
+                UI.showError(e.getMessage());
+                UI.showLine();
             }
         }
     }

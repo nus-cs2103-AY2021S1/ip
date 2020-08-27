@@ -1,7 +1,9 @@
 public class Parser {
 
     public static Command interpret(String userCommand) {
+
         String[] commandArgs = userCommand.split(" ");
+
         switch (commandArgs[0]) {
         case ("bye") :
             return new ByeCommand();
