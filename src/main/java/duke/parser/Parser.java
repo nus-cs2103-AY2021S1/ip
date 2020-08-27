@@ -25,6 +25,8 @@ public class Parser {
             return new ExitCommand();
         } else if (fullCommand.equals("list")) {
             command = new ListCommand();
+        } else if (fullCommand.equals("help")) {
+            command = new HelpCommand();
         } else if (fullCommand.startsWith("done")) {
             command = new DoneCommand(Integer.parseInt(fullCommand.split(" ")[1]));
         } else if (fullCommand.startsWith("delete")) {
