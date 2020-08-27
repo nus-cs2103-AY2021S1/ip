@@ -81,4 +81,14 @@ public class Ui {
     public void exitMessage() {
         System.out.println("Bye. Hope to see you again soon!");
     }
+
+    public void findTasksMessage(TaskList tasks, String keyWords) {
+        System.out.println("Here are the matching tasks in your list:");
+        for (int i = 1; i <= tasks.getNumOfTasks(); i++) {
+            Task t = tasks.retrieve(i);
+            if (t.contains(keyWords)) {
+                System.out.format("%d.%s\n", i, t.toString());
+            }
+        }
+    }
 }

@@ -29,6 +29,8 @@ public class Parser {
                 return prepareDelete(suffix);
             case ListCommand.COMMAND_WORD:
                 return prepareList(suffix);
+            case FindCommand.COMMAND_WORD:
+                return prepareFind(suffix);
             case ExitCommand.COMMAND_WORD:
                 return new ExitCommand();
             default:
@@ -83,6 +85,14 @@ public class Parser {
             throw new DukeException();
         } else {
             return new ListCommand();
+        }
+    }
+
+    private static Command prepareFind(String suffix) throws DukeException {
+        if (suffix.length() == 0) {
+            throw new DukeException("You cannot search for nothing.");
+        } else {
+            return new FindCommand(suffix);
         }
     }
 }
