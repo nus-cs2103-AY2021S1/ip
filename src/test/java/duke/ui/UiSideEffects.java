@@ -11,13 +11,7 @@ public class UiSideEffects {
     public boolean uiReportExit;
 
     private UiSideEffects() {
-        uiGreet = false;
-        uiEcho = false;
-        uiReportCurrentTasks = false;
-        uiReportNewTask = false;
-        uiReportDeleteTask = false;
-        uiReportDoneTask = false;
-        uiReportExit = false;
+        reset();
     }
 
     private static UiSideEffects instance;
