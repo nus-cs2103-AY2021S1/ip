@@ -1,4 +1,4 @@
-public class Task {
+class Task {
     private String message;
     private boolean isDone;
 
@@ -7,12 +7,26 @@ public class Task {
         this.isDone = false;
     }
 
+    Task(String message, boolean isDone) {
+        this.message = message;
+        this.isDone = isDone;
+    }
+
     public String getMessage() {
         return message;
     }
 
     public String getStatusIcon() {
         return "[" + (isDone ? "\u2713" : "\u2718") + "] ";
+    }
+
+    public int getStatusNum() {
+        return isDone ? 1 : 0;
+    }
+
+    public String getPureTypeLetter() {
+        //dummy value
+        return "";
     }
 
     public void setDone() {

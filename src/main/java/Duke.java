@@ -1,3 +1,6 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
@@ -13,7 +16,7 @@ public class Duke {
                SPACE + LINE;
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception{
         // greeting and exit messages strings
         // list and mark strings
         final String messageHello = "Hello! I'm Duke\n" + SPACE + " " + "What can I do for you?";
@@ -22,15 +25,41 @@ public class Duke {
         final String messageMarked = "Nice! I've marked this task as done:\n";
         final String messageAdded = "Got it. I've added this task:\n";
         final String messageDelete = "Noted. I've removed this task:\n";
+        final String home = System.getProperty("user.home");
+
+        java.nio.file.Path path = java.nio.file.Paths.get(home, "ip","start.txt");
+        boolean directoryExists = java.nio.file.Files.exists(path);
+        File file = new File(path.toString());
 
         // set up scanner
         Scanner scanner = new Scanner(System.in);
+        Scanner scannerInitial = new Scanner(file);
 
         // set up empty list of things to do
         List<Task> list = new ArrayList<>();
 
-        // start to serve
+        // add tasks to init list
+        while (scannerInitial.hasNextLine()) {
+            String task = scannerInitial.nextLine();
+            list.add(Convert.add(task));
+        }
+
+        System.out.print(SPACE + LINE);
         System.out.println(format(messageHello));
+        System.out.print(SPACE + messageList);
+        int i = 1;
+        for (Task task : list) {
+            System.out.println(SPACE + " " + i + "." + task.getTypeLetter()
+                    + task.getStatusIcon() + task.getMessage());
+            i++;
+        }
+        System.out.println(SPACE + LINE);
+
+        if (!directoryExists) {
+            System.out.println(format("☹ OOPS!!! Cannot find start file"));
+            throw new FileNotFoundException();
+        }
+
 
         // continue if have more commands (that are not "bye")
         // echo the command or say bye
@@ -41,6 +70,15 @@ public class Duke {
             if (currentCommand.equals("bye")) {
                 System.out.println(format(messageBye));
                 scanner.close();
+                FileWriter fileWriter = new FileWriter("start.txt");
+                String content;
+                for (i = 0; i < list.size(); i++) {
+                    Task task = list.get(i);
+                    content = task.getPureTypeLetter() + " ; " + task.getStatusNum()
+                            + " ; " + task.getMessage() + "\n";
+                    fileWriter.write(content);
+                }
+                fileWriter.close();
                 break;
             } else if (currentCommand.equals("list")) {
                 System.out.print(SPACE + LINE);
@@ -52,6 +90,7 @@ public class Duke {
                     counter++;
                 }
                 System.out.println(SPACE + LINE);
+
             } else {
                 try {
                     String extraCommand = currentCommand.split(" ", 2)[1];
@@ -121,6 +160,8 @@ public class Duke {
                             break;
                     }
                     System.out.println(format(ex.toString()));
+                } catch (java.time.format.DateTimeParseException e) {
+                    System.out.println(format(new InvalidDateException().toString()));
                 } catch (Exception e) {
                     System.out.println(format(e.toString()));
                 }

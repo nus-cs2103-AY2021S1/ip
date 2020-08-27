@@ -1,3 +1,3 @@
-public class EmptyBodyException extends IndexOutOfBoundsException {
+class EmptyBodyException extends IndexOutOfBoundsException {
     EmptyBodyException() {}
 }

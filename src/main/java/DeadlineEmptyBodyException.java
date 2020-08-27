@@ -1,4 +1,4 @@
-public class DeadlineEmptyBodyException extends EmptyBodyException {
+class DeadlineEmptyBodyException extends EmptyBodyException {
     DeadlineEmptyBodyException() {}
     @Override
     public String toString() {

@@ -1,4 +1,4 @@
-public class EventEmptyBodyException extends EmptyBodyException {
+class EventEmptyBodyException extends EmptyBodyException {
     EventEmptyBodyException() {}
     @Override
     public String toString() {
