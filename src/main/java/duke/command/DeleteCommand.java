@@ -6,14 +6,29 @@ import duke.core.Ui;
 import duke.exception.DukeException;
 import duke.task.Task;
 
+/**
+ * Represents a command where a task in the TaskList will be deleted during the usage of the Duke programme.
+ */
 public class DeleteCommand extends Command {
 
     private int index;
 
+    /**
+     * Public constructor
+     * @param index the index of the Task in the TaskList that needs to be deleted.
+     */
     public DeleteCommand(int index) {
         this.index = index;
     }
 
+    /**
+     * Deletes the Task with the index specified within this DeleteCommand.
+     * Prints out an error message if the index is out of bounds of the TaskList.
+     * After successful deletion, the deleted Task's information and total number of Tasks left is printed.
+     * @param tasks the TaskList to delete the Task from
+     * @param storage unused Storage object
+     * @param ui unused Ui object
+     */
     @Override
     public void execute(TaskList tasks, Storage storage, Ui ui) {
         try {
