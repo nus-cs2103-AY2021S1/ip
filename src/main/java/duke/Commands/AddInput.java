@@ -14,6 +14,7 @@ public class AddInput {
     public static void add_input(TaskList taskList, Storage storage) {
         Scanner scanner = new Scanner(System.in);
 
+
         while(scanner.hasNext()){
             try{
                 String input = scanner.nextLine();
@@ -51,6 +52,11 @@ public class AddInput {
                     throw new IncompleteCommandException();
 
                 }
+                //Checks for FIND_KEY, to find list of tasks containing the keyword
+                else if(Parser.isFind(inputList[0].trim().toLowerCase())){
+                    Find.find(inputList[1].trim(), taskList);
+                }
+
                 // case where the input is done
                 else if(Parser.isComplete(inputList[0].trim().toLowerCase()) && Parser.isNum(inputList[1])){
                     int currentIndex = Integer.parseInt(inputList[1]) - 1;

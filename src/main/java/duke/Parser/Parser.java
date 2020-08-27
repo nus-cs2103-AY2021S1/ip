@@ -3,47 +3,53 @@ package duke.Parser;
 public class Parser {
 
 
-    private static String bye_key = "bye";
-    private static String list_key = "list";
-    private static String done_key = "done";
-    private static String todo_key = "todo";
-    private static String deadline_key = "deadline";
-    private static String event_key = "event";
-    private static String delete_key = "delete";
+    private final static String BYE_KEY = "bye";
+    private final static String LIST_KEY = "list";
+    private final static String DONE_KEY = "done";
+    private final static String TODO_KEY = "todo";
+    private final static String DEADLINE_KEY = "deadline";
+    private final static String EVENT_KEY = "event";
+    private final static String DELETE_KEY = "delete";
+    private final static String FIND_KEY = "find";
 
     // check for bye command
     public static boolean isBye(String checker) {
-        return checker.equals(bye_key);
+        return checker.equals(BYE_KEY);
     }
 
     // check for list command
     public static boolean isList(String checker) {
-        return checker.equals(list_key);
+        return checker.equals(LIST_KEY);
     }
 
     // check for done command
     public static boolean isComplete(String checker) {
-        return checker.equals(done_key);
+        return checker.equals(DONE_KEY);
     }
 
     // check for todo command
     public static boolean isToDo(String checker) {
-        return checker.equals(todo_key);
+        return checker.equals(TODO_KEY);
     }
 
     // check for deadline command
     public static boolean isDeadline(String checker) {
-        return checker.equals(deadline_key);
+        return checker.equals(DEADLINE_KEY);
     }
 
     // check for event command
     public static boolean isEvent(String checker) {
-        return checker.equals(event_key);
+        return checker.equals(EVENT_KEY);
     }
 
     // check for delete command
     public static boolean isDelete(String checker) {
-        return checker.equals(delete_key);
+        return checker.equals(DELETE_KEY);
+    }
+
+    // check for find command
+    public static boolean isFind(String checker) {
+        return checker.equals(FIND_KEY);
     }
 
 

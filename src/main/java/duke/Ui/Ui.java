@@ -47,7 +47,7 @@ public class Ui {
     //method for formatting inputs into the taskList
     public static void newTaskItem (Task task){
         lineFormatter("Now you have a new task! :\n" + task.toString() +
-                "Type \'list\' to check your Tasklist");
+                "\nType \'list\' to check your Tasklist");
     }
 
 }
