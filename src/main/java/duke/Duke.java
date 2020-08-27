@@ -101,4 +101,5 @@ public class Duke {
         list.set(index, list.get(index).completeTask());
         ui.printDone(list, index);
     }
+    
 }
