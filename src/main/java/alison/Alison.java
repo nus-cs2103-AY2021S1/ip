@@ -2,7 +2,10 @@ package alison;
 
 import alison.command.Command;
 import alison.exception.AlisonException;
-import alison.tool.*;
+import alison.tool.Parser;
+import alison.tool.Storage;
+import alison.tool.TaskList;
+import alison.tool.Ui;
 
 public class Alison {
 

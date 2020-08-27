@@ -1,12 +1,15 @@
 package alison.command;
 
 import alison.exception.AlisonException;
-import alison.task.*;
-import alison.tool.*;
+import alison.task.Deadline;
+import alison.task.Task;
+import alison.tool.Storage;
+import alison.tool.TaskList;
+import alison.tool.Ui;
 
 public class AddCommand extends Command {
 
-    public Task task;
+    private Task task;
 
     public AddCommand(Task added) {
         this.task = added;

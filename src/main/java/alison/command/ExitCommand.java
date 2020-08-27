@@ -1,6 +1,8 @@
 package alison.command;
 
-import alison.tool.*;
+import alison.tool.Storage;
+import alison.tool.TaskList;
+import alison.tool.Ui;
 
 public class ExitCommand extends Command {
 

@@ -65,7 +65,6 @@ public class Ui {
         return sc.nextLine();
     }
 
-
     public void showError(String message) {
         System.out.println(message);
     }
