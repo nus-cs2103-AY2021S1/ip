@@ -45,14 +45,14 @@ class Storage {
                 Task toAdd;
                 if (simplerData.length == 3) {
                     String description = simplerData[2].strip();
-                    boolean isDone = simplerData[1].strip().equals("N") ? false : true;
+                    boolean isDone = !simplerData[1].strip().equals("N");
                     toAdd = new Task(description, isDone);
                     this.savedTasks.add(toAdd);
                 } else {
 //                    assert simplerData.length == 4;
                     if (simplerData[0].equals("D")) {
                         String description = simplerData[2].strip();
-                        boolean isDone = simplerData[1].strip().equals("N") ? false : true;
+                        boolean isDone = !simplerData[1].strip().equals("N");
                         String date = simplerData[3].strip();
                         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("ddMMyyyy");
                         LocalDate actualDate = LocalDate.parse(date, formatter);
@@ -61,7 +61,7 @@ class Storage {
 
                     } else if (simplerData[0].equals("E")){
                         String description = simplerData[2].strip();
-                        boolean isDone = simplerData[1].strip().equals("N") ? false : true;
+                        boolean isDone = !simplerData[1].strip().equals("N");
                         String date = simplerData[3].strip();
                         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("ddMMyyyy");
                         LocalDate actualDate = LocalDate.parse(date, formatter);

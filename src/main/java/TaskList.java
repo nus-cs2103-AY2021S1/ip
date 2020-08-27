@@ -1,7 +1,6 @@
 package main.java;
 
 import main.java.Task.Task;
-
 import java.util.List;
 
 public class TaskList {
@@ -24,7 +23,9 @@ public class TaskList {
         Ui.relayMessageToUser(printTask);
     }
 
-
+    public List<Task> getAllTasks() {
+        return this.allItems;
+    }
     public void printStore() {
         String printList;
         if (this.allItems.size() == 0) {

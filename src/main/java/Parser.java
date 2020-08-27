@@ -1,9 +1,11 @@
 package main.java;
 
-import main.java.Command.Command;
-import main.java.Command.DeleteCommand;
-import main.java.Command.DoneCommand;
+import main.java.Command.AddCommand;
 import main.java.Command.ListCommand;
+import main.java.Command.DoneCommand;
+import main.java.Command.DeleteCommand;
+import main.java.Command.ByeCommand;
+import main.java.Command.Command;
 
 import java.util.zip.DataFormatException;
 
@@ -29,16 +31,14 @@ public class Parser {
             String edittedAnswer = userText.strip().toLowerCase();
             String[] answers = userText.split(" ");
             if (answers.length == 2 && answers[0].equals(COMMANDS.DONE.text)) {
-                Command command = new DoneCommand();
-                Parser.furtherUnderstandTaskNumber(command, answers[1], taskList);
+                Parser.furtherUnderstandTaskNumber(answers[0], answers[1], taskList);
 //                return taskList.completeTask(answers[1]);
             } else if (answers.length == 2 && answers[0].equals(COMMANDS.DELETE.text)) {
 
                 Command command = new DeleteCommand();
-                Parser.furtherUnderstandTaskNumber(command, answers[1], taskList);
+                Parser.furtherUnderstandTaskNumber(answers[0], answers[1], taskList);
 //                return taskList.deleteTask(answers[1]);
             } else if (edittedAnswer.equals(COMMANDS.LIST.text)) {
-
 
                 Command command = new ListCommand();
                 command.execute( " ", taskList );
@@ -63,14 +63,20 @@ public class Parser {
         return true;
     }
 
-    private static void furtherUnderstandTaskNumber(Command command, String answer, TaskList taskList) {
+    private static void furtherUnderstandTaskNumber(String stringCommand, String answer, TaskList taskList) {
         try {
             int oneIndex = Integer.parseInt(answer);
             int realIndex = oneIndex - 1;
+            Command command;
+            if (stringCommand.equals(COMMANDS.DONE.text)) {
+                command = new DoneCommand();
+            } else {
+                command = new DeleteCommand();
+            }
             command.execute(String.valueOf(realIndex), taskList);
         } catch (NumberFormatException e) {
             System.out.println("I can't seem to understand what task you are referring to.\n" +
-                    "Please let me know in this format: " + command.commandText + " <number of task>\n" + Ui.LINE);
+                    "Please let me know in this format: " + stringCommand + " <number of task>\n" + Ui.LINE);
         } catch (IndexOutOfBoundsException e) {
             System.out.println("Hmm... I don't have a task numbered " + answer + "\n" + Ui.LINE);
         }
