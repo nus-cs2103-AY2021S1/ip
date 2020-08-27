@@ -170,7 +170,7 @@ public class Parser {
                 printLine();
                 String keyword = sc.nextLine();
                 int findCount = 0;
-                System.out.println("Here are your tasks with the keyword: " + keyword + "\n");
+                System.out.println("Here are your tasks with the keyword: " + "[ " +keyword + "]" + "\n");
                 for (Task find: todoList) {
                     if (find.description.contains(keyword)) {
                         System.out.println(findCount + 1 + ". " + find.toString());
