@@ -21,7 +21,7 @@ public class Duke {
 
     public Duke() {
         this.uiManager = new UIManager();
-        this.storageManager = new StorageManager();
+        this.storageManager = new StorageManager(CommonString.DUKE_FILE_PATH.toString());
         try {
             this.taskList = new TaskList(storageManager.loadData());
         } catch (FileNotFoundException e) {

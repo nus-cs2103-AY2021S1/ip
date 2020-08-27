@@ -17,10 +17,7 @@ public class TaskList {
         taskList.add(dukeTask);
     }
 
-    public DukeTask deleteFromList(int index) throws InvalidInstructionException {
-        if (index < 0 || index >= taskList.size()) { // check if loc is an existing duke.task.DukeTask inside the array inputList
-            throw new InvalidInstructionException(CommonString.DELETE + ": Invalid Task Number");
-        }
+    public DukeTask deleteFromList(int index) {
         return taskList.remove(index);
     }
 

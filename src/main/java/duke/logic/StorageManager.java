@@ -18,13 +18,22 @@ import java.util.Scanner;
 public class StorageManager {
 
     // FILE AND DATA STORAGE
-    private static final String PATH = "data/dukeData.txt"; // structure: ip/data/dukeData.txt
     private static final String FILE_DATA_SEPARATOR = "|";
+    private final String filePath;
+
+    public StorageManager(String filePath) {
+        this.filePath = filePath;
+    }
+
+    public StorageManager() {
+        this.filePath = CommonString.DUKE_FILE_PATH.toString();
+    }
+
 
     public ArrayList<DukeTask> loadData() throws FileNotFoundException {
         ArrayList<DukeTask> dataList = new ArrayList<>();
 
-        File dataFile = new File(PATH);
+        File dataFile = new File(filePath);
         // load parent files
         File directory = new File(dataFile.getParentFile().getAbsolutePath());
         directory.mkdirs();
@@ -95,7 +104,7 @@ public class StorageManager {
 
         String output = dataString.toString();
 
-        FileWriter writer = new FileWriter(PATH);
+        FileWriter writer = new FileWriter(filePath);
         writer.write(output);
         writer.close();
     }
