@@ -48,7 +48,8 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        String path = "/Users/lijiayu/Desktop/cs2103/ip/data/tasks.txt";
-        new Duke(path).run();
+        String home = System.getProperty("user.home");
+        java.nio.file.Path path = java.nio.file.Paths.get(home, "Desktop", "cs2103", "ip", "data", "tasks.txt");
+        new Duke(path.toString()).run();
     }
 }
