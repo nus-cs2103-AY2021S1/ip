@@ -23,6 +23,7 @@ public class Storage {
 
             for (int i = 1; i <= tasks.getNumOfTasks(); i++) {
                 Task t = tasks.retrieve(i);
+                // Insert / separators.
                 String nextEntry =
                         t.getStringType() + " / " +
                         t.isDoneToString() + " / " +
@@ -44,33 +45,46 @@ public class Storage {
             List<Task> tasks = new ArrayList<>(100);
 
             while (sc.hasNext()) {
+                // Get next line.
                 String nextEntryLine = sc.nextLine();
+
+                // Remove dividers and place into array.
                 String[] nextEntryArray = nextEntryLine.split(" / ", 4);
-                String type = nextEntryArray[0];
-                String description = nextEntryArray[2];
-                int length = nextEntryArray.length;
+
+                // Get type of Task.
+                String nextEntryTaskType = nextEntryArray[0];
+
+                // Get description of Task.
+                String nextEntryDescription = nextEntryArray[2];
+
+                // Get length of the stored entry.
+                int nextEntryLength = nextEntryArray.length;
+
+                // Check if Task has been marked as done.
                 boolean isDone = nextEntryArray[1].equals("1");
 
+                // Create Task to add to TaskList.
                 Task t;
-                if (type.equals("T") && length == 3) {
-                    t = new Todo(description);
+                if (nextEntryTaskType.equals("T") && nextEntryLength == 3) { // Todo Task.
+                    t = new Todo(nextEntryDescription);
                     if (isDone) { t.markAsDone(); }
                     tasks.add(t);
-
-                } else if (type.equals("D") && length == 4) {
+                } else if (nextEntryTaskType.equals("D") && nextEntryLength == 4) { // Deadline Task.
                     String by = nextEntryArray[3];
-                    t = new Deadline(description, by);
+                    t = new Deadline(nextEntryDescription, by);
                     tasks.add(t);
-
-                } else if (type.equals("E") && length == 4) {
+                } else if (nextEntryTaskType.equals("E") && nextEntryLength == 4) { // Event Task.
                     String at = nextEntryArray[3];
-                    t = new Event(description, at);
+                    t = new Event(nextEntryDescription, at);
                     tasks.add(t);
                 } else {
+                    // Unknown Task type.
                     throw new DukeException("Check duke.txt storage file integrity:");
                 }
             }
+            // Return updated List of Tasks.
             return tasks;
+
 
         } catch (Exception e) {
             e.printStackTrace();

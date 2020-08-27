@@ -9,10 +9,10 @@ import duke.storage.Storage;
 public class TodoCommand extends Command {
     public static final String COMMAND_WORD = "todo";
 
-    private final String commandSuffix;
+    private final String description;
 
-    public TodoCommand(String commandSuffix) {
-        this.commandSuffix = commandSuffix;
+    public TodoCommand(String description) {
+        this.description = description;
     }
 
     @Override
@@ -22,7 +22,7 @@ public class TodoCommand extends Command {
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        Task t = new Todo(commandSuffix);
+        Task t = new Todo(description);
         tasks.add(t);
         ui.addTaskMessage(t, tasks);
     }

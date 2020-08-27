@@ -23,9 +23,13 @@ public abstract class Task {
         return this.description;
     }
 
-    public boolean isDone() { return isDone; }
+    public boolean isDone() {
+        return isDone;
+    }
 
-    public String isDoneToString() { return isDone ? "1" : "0"; }
+    public String isDoneToString() {
+        return isDone ? "1" : "0";
+    }
 
     public abstract String getStringType();
 
