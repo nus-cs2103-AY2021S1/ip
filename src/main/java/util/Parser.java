@@ -101,6 +101,7 @@ public class Parser {
             resultantCommand = new ExitCommand();
             break;
         case FIND:
+            this.validateCommandDesc(value, Action.FIND);
             resultantCommand = new FindCommand(value);
             break;
         }

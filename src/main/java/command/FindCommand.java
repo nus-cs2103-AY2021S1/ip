@@ -16,6 +16,7 @@ public class FindCommand extends Command{
     
     public void execute(TaskList lst, Ui ui, Storage storage) {
         List<Task> filteredTasks = lst.filter(query);
+        ui.showFindStatement(filteredTasks.size() <= 0);
         for (int i = 0; i < filteredTasks.size(); i++) {
             int num = i + 1;
             ui.showTask(filteredTasks.get(i), num);
