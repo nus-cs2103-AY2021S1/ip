@@ -9,6 +9,7 @@ import sg.christopher.duke.io.DataManager;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class Duke {
     private static List<Task> savedItems = loadSavedItems();
@@ -113,6 +114,29 @@ public class Duke {
         printRemainingCount();
     }
 
+    private static void findHandler(String userInput) {
+        // Check for search term
+        if (userInput.split(" ").length < 2) {
+            System.out.println("ERROR: Search term not found. Did you type a search term?");
+            return;
+        }
+        String searchTerm = userInput.replaceFirst("find ", "").toLowerCase();
+
+        savedItems = loadSavedItems();
+
+        List<Task> foundTasks = savedItems.stream().filter(task -> task.getDescription().toLowerCase().contains(searchTerm)).collect(Collectors.toList());
+
+        if (foundTasks.size() == 0) {
+            System.out.println("No task matching your search term was found. Perhaps try another search term?");
+            return;
+        }
+        System.out.println("Here are the matching tasks in your list:");
+        for (int i = 0; i < foundTasks.size(); ++i) {
+            Task task = foundTasks.get(i);
+            System.out.println(i + 1 + ". " + task);
+        }
+    }
+
     private static void lsHandler() {
         if (savedItems.size() == 0) {
             System.out.println("No tasks found. Start adding your first few tasks!");
@@ -167,6 +191,8 @@ public class Duke {
             return CommandType.DEADLINE;
         case "event":
             return CommandType.EVENT;
+        case "find":
+            return CommandType.FIND;
         case "rm":
             // Fallthrough
         case "delete":
@@ -209,6 +235,9 @@ public class Duke {
                 break;
             case DELETE:
                 deleteHandler(userInput);
+                break;
+            case FIND:
+                findHandler(userInput);
                 break;
             case DONE:
                 doneHandler(userInput);
