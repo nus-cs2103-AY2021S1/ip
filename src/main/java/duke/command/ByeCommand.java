@@ -2,6 +2,9 @@ package duke.command;
 
 import duke.component.*;
 
+/**
+ * Represents a command for exiting the app.
+ */
 public class ByeCommand extends Command {
     /**
      * Creates a command for exiting.
