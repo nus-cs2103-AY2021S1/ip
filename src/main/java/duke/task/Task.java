@@ -43,6 +43,10 @@ public abstract class Task {
         return (isDone ? "y" : "n");
     }
 
+    public String getDescription() {
+        return description;
+    }
+
     public void markAsDone() {
         this.isDone = true;
     }
