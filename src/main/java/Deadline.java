@@ -9,19 +9,24 @@ public class Deadline extends Task {
     public Deadline(String description, String by) {
         super(description);
         this.by = by;
+    }
+
+    public Deadline(String description, boolean isDone, String by) {
+        super(description, isDone);
+        this.by = by;
+    }
+
+    public void parseTime() throws AlisonException {
         try {
             this.ddl = LocalDate.parse(by);
             this.by = ddl.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
         } catch (Exception exception) {
-            System.out.println("Sorry I can't understand the time format you just inputted. \n" +
-                    "Try it in this format: yyyy-mm-dd (e.g. 2020-01-01)," +
-                    " so that I can remind you at the time");
+            throw AlisonException.deadlineParseException();
         }
     }
-
     @Override
     public String savedFormat() {
-        return "D " + super.savedFormat() + String.format(" | %s", this.by);
+        return "D " + super.savedFormat() + String.format(" | %s", by);
     }
 
     @Override

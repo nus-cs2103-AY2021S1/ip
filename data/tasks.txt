@@ -1,0 +1,9 @@
+T | true | finish ip
+D | false | finish ip | tonight
+D | false | finish ip | Aug 28 2020
+E | true | es2600 presentation | Aug 27th 4-6pm
+T | false | finish ip
+T | false | join sports club
+D | false | finish ip | tonight
+D | false | finish ip | Aug 28 2020
+E | false | 2101 op1 meeting | Tomorrow 2pm

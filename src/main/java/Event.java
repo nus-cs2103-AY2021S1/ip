@@ -7,6 +7,11 @@ public class Event extends Task {
         this.at = at;
     }
 
+    public Event(String description, boolean isDone, String at) {
+        super(description, isDone);
+        this.at = at;
+    }
+
     @Override
     public String savedFormat() {
         return "E " + super.savedFormat() + String.format(" | %s", this.at);
