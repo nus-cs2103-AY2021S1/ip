@@ -10,6 +10,12 @@ public class Duke {
     public static String SPACE = "     ";
     public static String LINE = "____________________________________________________________\n";
     // add outer frame lines
+    /**
+     * Returns formatted string, adding SPACE and LINE
+     *
+     * @param input string to be formatted
+     * @return formatted string
+     */
     public static String format(String input) {
         return SPACE + LINE +
                SPACE + " " + input + "\n" +
