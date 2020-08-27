@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Ui {
     private final String SERVANT_SPEAK;
     private final String USER_PROMPT;
@@ -47,6 +49,19 @@ public class Ui {
                 + task + "\n"
                 + "    Now you have " + size
                 + " tasks in the list.\n");
+    }
+
+    public void printListOfTasks(ArrayList<Task> userTasks) {
+        int count = 1;
+        System.out.println(SERVANT_SPEAK
+                + "    Here are your tasks your Majesty:");
+        for (Task i : userTasks) {
+            System.out.println("    "
+                    + count + ". "
+                    + i.toString());
+            count++;
+        }
+        System.out.println();
     }
 
     public void printError(DukeException ex) {

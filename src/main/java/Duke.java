@@ -129,16 +129,17 @@ public class Duke {
 
             // If user requests for list, display list of tasks
             if (input.equals("list")) {
-                int count = 1;
-                System.out.println(ui.getServantSpeak()
-                        + "    Here are your tasks your Majesty:");
-                for (Task i : userTasks) {
-                    System.out.println("    "
-                            + count + ". "
-                            + i.toString());
-                    count++;
-                }
-                System.out.println();
+//                int count = 1;
+//                System.out.println(ui.getServantSpeak()
+//                        + "    Here are your tasks your Majesty:");
+//                for (Task i : userTasks) {
+//                    System.out.println("    "
+//                            + count + ". "
+//                            + i.toString());
+//                    count++;
+//                }
+//                System.out.println();
+                ui.printListOfTasks(userTasks);
                 continue;
             }
 
@@ -206,13 +207,6 @@ public class Duke {
                     continue;
                 }
             }
-
-//            // Standard reply from Duke for adding a task
-//            System.out.println(ui.getServantSpeak()
-//                    + "    As you wish Sire. I have added the task:\n       "
-//                    + userTasks.get(userTasks.size() - 1).toString() + "\n"
-//                    + "    Now you have " + userTasks.size()
-//                    + " tasks in the list.\n");
 
             // Update Tasklist.txt after adding task
             storage.saveToFile(userTasks);
