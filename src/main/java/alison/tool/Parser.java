@@ -6,6 +6,13 @@ import alison.task.*;
 
 public class Parser {
 
+
+    /**
+     * This method parse a task string into its corresponding Task.
+     * @param taskString Saved line from file path.
+     * @return Corresponding Task.
+     * @throws AlisonException
+     */
     public static Task parseTask(String taskString) throws AlisonException {
         String[] words = taskString.split(" \\| ");
         String type = words[0];
@@ -26,6 +33,12 @@ public class Parser {
         }
     }
 
+    /**
+     * This method deals with making sense of the user command.
+     * @param cmd Full string of command entered by the user.
+     * @return a Command object.
+     * @throws AlisonException
+     */
     public static Command parse(String cmd) throws AlisonException {
         String[] words = cmd.split(" ");
         String command = words[0];

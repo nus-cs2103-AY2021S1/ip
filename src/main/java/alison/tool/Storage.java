@@ -17,6 +17,11 @@ public class Storage {
         this.filePath = path;
     }
 
+    /**
+     * This method load the data from the hard disk when Alison starts up.
+     * @return TaskList converted from text file.
+     * @throws AlisonException
+     */
     public TaskList load() throws AlisonException {
         TaskList tasks = new TaskList();
         try {
@@ -36,6 +41,11 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * This methods update the tasks list in your file automatically whenever the task list changes.
+     * @param tasks tasklist store in the bot.
+     * @throws AlisonException
+     */
     public void update(TaskList tasks) throws AlisonException {
         try {
             FileWriter writer = new FileWriter("./data/tasks.txt", false);
