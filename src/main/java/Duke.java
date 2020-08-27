@@ -129,7 +129,7 @@ public class Duke {
                             // throw exception
                             throw new IndexOutOfBoundsException();
                         }
-                        
+
                         list.add(task);
                         System.out.println(format(messageAdded + SPACE + "   "
                                 + task.getTypeLetter() + task.getStatusIcon() + task.getPrintMessage()
