@@ -1,8 +1,8 @@
 package duke.task;
 
 import duke.format.DateFormat;
-
 import java.util.Date;
+
 public class Deadline extends Task {
     protected Date by;
 
