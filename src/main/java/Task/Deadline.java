@@ -1,7 +1,5 @@
 package main.java.Task;
 
-import main.java.Task.Task;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -12,10 +10,12 @@ public class Deadline extends Task {
         super(description);
         this.date = date;
     }
+
     public Deadline(String description, LocalDate date, boolean isDone) {
         super(description, isDone);
         this.date = date;
     }
+
     @Override
     public String getTypeOfTask() {
         return "deadline";

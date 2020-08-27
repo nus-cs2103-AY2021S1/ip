@@ -13,17 +13,19 @@ public class Ui {
                 "____________________________________________________________\n";
         System.out.println(INITIAL_PRINTING);
     }
-     public static void showByeMessage() {
-         System.out.println("Byeeeee see you later!\n" + LINE);
-     }
 
-    public static void relayMessageToUser(String message) {
+    public static void showByeMessage() {
+        System.out.println("Byeeeee see you later!\n" + LINE);
+    }
+
+    public static void printMessageToUser(String message) {
         System.out.println(message);
     }
 
     public static void printDeleteTaskMessage() {
         System.out.println("I have removed the task from your list.\n" + LINE);
     }
+
     public static void printDoneMessage(boolean isDone) {
         if (isDone) {
             System.out.println("Task is already done!\n" + LINE);
@@ -31,4 +33,4 @@ public class Ui {
             System.out.println("Congratulations! I have marked this task done.\n" + LINE);
         }
     }
- }
+}

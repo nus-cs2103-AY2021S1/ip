@@ -9,8 +9,10 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +20,7 @@ class Storage {
     private File savedCopy;
     private List<Task> savedTasks;
 
-    Storage () {
+    Storage() {
         try {
             this.savedTasks = new ArrayList<>();
             this.savedCopy = new File("./data/save.txt");
@@ -59,7 +61,7 @@ class Storage {
                         toAdd = new Deadline(description, actualDate, isDone);
                         this.savedTasks.add(toAdd);
 
-                    } else if (simplerData[0].equals("E")){
+                    } else if (simplerData[0].equals("E")) {
                         String description = simplerData[2].strip();
                         boolean isDone = !simplerData[1].strip().equals("N");
                         String date = simplerData[3].strip();
@@ -87,7 +89,7 @@ class Storage {
             writer.write("");
             writer.close();
             writer = new FileWriter("./data/save.txt", true);
-            for (Task task: this.savedTasks) {
+            for (Task task : this.savedTasks) {
                 writer.write(task.getStoreRepresentation() + "\n");
             }
             writer.close();
