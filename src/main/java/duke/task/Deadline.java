@@ -5,6 +5,9 @@ import duke.command.InvalidCommandException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents a deadline task that consists of a description and a date as the deadline for completing the task.
+ */
 public class Deadline extends Task {
     private final LocalDate byTime;
 
