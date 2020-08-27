@@ -5,63 +5,88 @@ ____________________________________________________________
 ____________________________________________________________
 My duck instincts tell me your input makes no sense...
 ____________________________________________________________
+No tasks stored...
 ____________________________________________________________
-Your todo description can't be empty...
-____________________________________________________________
-____________________________________________________________
-My duck instincts tell me your input makes no sense...
-____________________________________________________________
-____________________________________________________________
-Quack! I have added: [T]X borrow book
+Quack! I have added: [T][X] borrow book
 My duck senses tell me you have 1 task in the list.
 ____________________________________________________________
 ____________________________________________________________
 Quack! Here are the tasks in your list:
-1. [T]X borrow book
+1. [T][X] borrow book
 ____________________________________________________________
 ____________________________________________________________
-Quack! I have added: [D]X return book  (by: Sunday)
+Quack! I have added: [D][X] return book (by: Sunday)
 My duck senses tell me you have 2 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
-Quack! I have added: [E]X project  (at: Mon 2-4pm)
+Quack! I have added: [E][X] project (at: Mon 2-4pm)
 My duck senses tell me you have 3 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
-Quack! I have added: [D]X do hw  (by: no idea)
+Quack! I have added: [D][X] do hw (by: no idea)
 My duck senses tell me you have 4 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
 Quack! Here are the tasks in your list:
-1. [T]X borrow book
-2. [D]X return book  (by: Sunday)
-3. [E]X project  (at: Mon 2-4pm)
-4. [D]X do hw  (by: no idea)
+1. [T][X] borrow book
+2. [D][X] return book (by: Sunday)
+3. [E][X] project (at: Mon 2-4pm)
+4. [D][X] do hw (by: no idea)
 ____________________________________________________________
 ____________________________________________________________
 Quack! I have marked this task as done: 
-[E]✓ project  (at: Mon 2-4pm)
+[E][✓] project (at: Mon 2-4pm)
 ____________________________________________________________
 ____________________________________________________________
 Quack! Here are the tasks in your list:
-1. [T]X borrow book
-2. [D]X return book  (by: Sunday)
-3. [E]✓ project  (at: Mon 2-4pm)
-4. [D]X do hw  (by: no idea)
+1. [T][X] borrow book
+2. [D][X] return book (by: Sunday)
+3. [E][✓] project (at: Mon 2-4pm)
+4. [D][X] do hw (by: no idea)
 ____________________________________________________________
 ____________________________________________________________
-You need to input the task number!
+You need to include your task number to delete...
 ____________________________________________________________
 ____________________________________________________________
 Quack! I have deleted this task: 
-[D]X return book  (by: Sunday)
+[D][X] return book (by: Sunday)
 My duck senses tell me you have 3 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
 Quack! Here are the tasks in your list:
-1. [T]X borrow book
-2. [E]✓ project  (at: Mon 2-4pm)
-3. [D]X do hw  (by: no idea)
+1. [T][X] borrow book
+2. [E][✓] project (at: Mon 2-4pm)
+3. [D][X] do hw (by: no idea)
+____________________________________________________________
+____________________________________________________________
+Wrong task number!
+____________________________________________________________
+____________________________________________________________
+Quack! I have added: [D][X] go for book shopping (by: Aug 28 2020, 6:00 pm)
+My duck senses tell me you have 4 tasks in the list.
+____________________________________________________________
+____________________________________________________________
+Quack! Here are the tasks in your list:
+1. [T][X] borrow book
+2. [E][✓] project (at: Mon 2-4pm)
+3. [D][X] do hw (by: no idea)
+4. [D][X] go for book shopping (by: Aug 28 2020, 6:00 pm)
+____________________________________________________________
+____________________________________________________________
+Quack! I have marked this task as done: 
+[D][✓] do hw (by: no idea)
+____________________________________________________________
+____________________________________________________________
+Quack! Here are the tasks in your list that match:
+1. [T][X] borrow book
+2. [D][X] go for book shopping (by: Aug 28 2020, 6:00 pm)
+____________________________________________________________
+____________________________________________________________
+Quack! Here are the tasks in your list:
+1. [T][X] borrow book
+2. [E][✓] project (at: Mon 2-4pm)
+3. [D][✓] do hw (by: no idea)
+4. [D][X] go for book shopping (by: Aug 28 2020, 6:00 pm)
 ____________________________________________________________
 ____________________________________________________________
  Waddling off now. See you soon! 

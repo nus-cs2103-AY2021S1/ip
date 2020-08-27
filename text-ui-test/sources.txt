@@ -1,6 +1,13 @@
+C:\Users\Admin\Desktop\CS2103T\repos\ip\src\main\java\Command.java
+C:\Users\Admin\Desktop\CS2103T\repos\ip\src\main\java\CommandType.java
 C:\Users\Admin\Desktop\CS2103T\repos\ip\src\main\java\Deadline.java
 C:\Users\Admin\Desktop\CS2103T\repos\ip\src\main\java\Duke.java
 C:\Users\Admin\Desktop\CS2103T\repos\ip\src\main\java\DukeException.java
 C:\Users\Admin\Desktop\CS2103T\repos\ip\src\main\java\Event.java
+C:\Users\Admin\Desktop\CS2103T\repos\ip\src\main\java\Parser.java
+C:\Users\Admin\Desktop\CS2103T\repos\ip\src\main\java\Storage.java
 C:\Users\Admin\Desktop\CS2103T\repos\ip\src\main\java\Task.java
+C:\Users\Admin\Desktop\CS2103T\repos\ip\src\main\java\TaskList.java
+C:\Users\Admin\Desktop\CS2103T\repos\ip\src\main\java\TaskType.java
 C:\Users\Admin\Desktop\CS2103T\repos\ip\src\main\java\ToDo.java
+C:\Users\Admin\Desktop\CS2103T\repos\ip\src\main\java\Ui.java

@@ -1,6 +1,5 @@
-read
-todo
 blah
+list
 todo borrow book
 list
 deadline return book /by Sunday
@@ -11,5 +10,11 @@ done 3
 list
 delete two
 delete 2
+list
+done 10
+deadline go for book shopping /by 28/8/2020 1800
+list
+done 3
+find book
 list
 bye
