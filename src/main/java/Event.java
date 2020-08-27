@@ -26,9 +26,7 @@ public class Event extends Task {
         if (atDateTime == null) {
             this.atDate = tryParseDate(at);
         }
-        if (atDate == null) {
-            this.at = at;
-        }
+        this.at = at;
     }
 
     /**
@@ -41,6 +39,10 @@ public class Event extends Task {
      */
     public Event(String description, boolean isDone, String at) {
         super(description, isDone);
+        this.atDateTime = tryParseDateTime(at);
+        if (atDateTime == null) {
+            this.atDate = tryParseDate(at);
+        }
         this.at = at;
     }
 
