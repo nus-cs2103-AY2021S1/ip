@@ -3,8 +3,6 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 public class Event extends Task {
-//    protected String start;
-//    protected String end;
     protected LocalDate at;
     protected LocalTime start;
     protected LocalTime end;
