@@ -25,6 +25,7 @@ public class Ui {
                 "event <desc> /at <desc>",
                 "",
                 "list - show all added tasks",
+                "find <desc> - show all tasks that contains <desc>",
                 "done <taskId> - mark the task as done",
                 "delete <taskId> - delete the task",
                 "bye - close Duke");
@@ -41,6 +42,20 @@ public class Ui {
             System.out.println("No tasks in the list wohoo!");
         } else {
             System.out.println("Here are the tasks in your list:");
+            for (int i = 0; i < tasks.size(); i++) {
+                String task = tasks.get(i).toString();
+                String message = (i + 1) + ". " + task;
+                System.out.println(message);
+            }
+        }
+        System.out.print("\n");
+    }
+
+    public void filteredList(List<Task> tasks) {
+        if (tasks.size() == 0) {
+            System.out.println("No matching tasks in the list");
+        } else {
+            System.out.println("Here are the matching tasks in your list:");
             for (int i = 0; i < tasks.size(); i++) {
                 String task = tasks.get(i).toString();
                 String message = (i + 1) + ". " + task;
