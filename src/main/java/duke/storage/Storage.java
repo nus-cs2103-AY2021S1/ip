@@ -20,16 +20,18 @@ import java.util.ArrayList;
  */
 public class Storage {
 
-    private String dataDir = System.getProperty("user.dir") + "/data";
-    private String filePath = dataDir + "/tasklist.csv";
-    private Ui ui;
+    private final String dataDir;
+    private final String filePath;
+    private final Ui ui;
 
     /**
      * Initializes the storage object and create a new file.
      */
     public Storage() {
+        ui = new Ui();
+        dataDir = System.getProperty("user.dir") + "/data";
+        filePath = dataDir + "/tasklist.csv";
         createFile();
-        this.ui = new Ui();
     }
 
     private void createFile() {

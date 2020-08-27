@@ -19,8 +19,8 @@ import duke.ui.Ui;
  */
 public class SimpleCommand extends Command {
 
-    private String input;
-    private SimpleCommandType type;
+    private final String input;
+    private final SimpleCommandType type;
 
     public SimpleCommand(String input, SimpleCommandType type) {
         this.input = input;

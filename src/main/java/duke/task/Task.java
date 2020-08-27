@@ -6,9 +6,9 @@ package duke.task;
  */
 public abstract class Task {
 
-    private String description;
-    private TaskType taskType;
-    private String time;
+    private final String description;
+    private final TaskType taskType;
+    private final String time;
     private boolean isDone;
 
     /**
@@ -34,7 +34,7 @@ public abstract class Task {
      * Marks task as done.
      */
     public void markAsDone() {
-        this.isDone = true;
+        isDone = true;
     }
 
     /**

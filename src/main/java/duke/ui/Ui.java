@@ -11,7 +11,7 @@ import java.util.Scanner;
  */
 public class Ui {
 
-    private Scanner scanner;
+    private final Scanner scanner;
 
     /**
      * Initialises the Ui object and scanner.

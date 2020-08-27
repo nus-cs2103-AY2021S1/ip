@@ -13,7 +13,7 @@ import duke.ui.Ui;
  */
 public abstract class AddCommand extends Command {
 
-    private final String TASK_DETAILS;
+    private final String taskDetails;
 
     /**
      * Initializes the add command with the task details.
@@ -21,7 +21,7 @@ public abstract class AddCommand extends Command {
      * @param taskDetails Task details.
      */
     protected AddCommand(String taskDetails) {
-        this.TASK_DETAILS = taskDetails;
+        this.taskDetails = taskDetails;
     }
 
     /**
@@ -30,7 +30,7 @@ public abstract class AddCommand extends Command {
      * @return Task details.
      */
     protected String getTaskDetails() {
-        return TASK_DETAILS;
+        return taskDetails;
     }
 
     /**

@@ -26,7 +26,7 @@ import java.time.format.DateTimeParseException;
  */
 public class AddComplexTaskCommand extends AddCommand {
 
-    private TaskType taskType;
+    private final TaskType taskType;
 
     /**
      * Initialises the AddComplexTaskCommand object with the task details and task type.

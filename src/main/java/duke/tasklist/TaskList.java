@@ -8,7 +8,7 @@ import java.util.ArrayList;
  * Keeps and handles all operations regarding the user tasks.
  */
 public class TaskList {
-    private ArrayList<Task> tasks;
+    private final ArrayList<Task> tasks;
 
     /**
      * Initializes the task list.

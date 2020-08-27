@@ -5,8 +5,8 @@ package duke.task;
  */
 public class ComplexTask extends Task {
 
-    private String time;
-    private TaskType taskType;
+    private final String time;
+    private final TaskType taskType;
 
     /**
      * Initializes the complex task.

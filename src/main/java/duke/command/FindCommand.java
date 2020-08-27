@@ -10,7 +10,7 @@ import duke.ui.Ui;
 
 public class FindCommand extends Command {
 
-    private String input;
+    private final String input;
 
     public FindCommand(String input) {
         this.input = input;

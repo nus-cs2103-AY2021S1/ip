@@ -17,9 +17,9 @@ import duke.ui.Ui;
  */
 public class DukeController {
 
-    private Ui ui;
-    private Storage storage;
-    private TaskList tasks;
+    private final Ui ui;
+    private final Storage storage;
+    private final TaskList tasks;
 
     /**
      * Initialises duke controller.
