@@ -1,13 +1,12 @@
 package tasks;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+
 import command.Command;
 import mugexception.MugException;
 import parser.Parser;
 import storage.Storage;
-
-import java.time.LocalDate;
-
-import java.util.ArrayList;
 
 /**
  * Operation for the list of Task.
@@ -178,7 +177,7 @@ public class TaskList {
         for (int i = 0; i < this.taskListLen(); i++) {
             Task task = this.taskList.get(i);
             boolean hasKeyword = task.getDescription().contains(keyword);
-            if(hasKeyword) {
+            if (hasKeyword) {
                 taskId++;
                 results.append("\n");
                 results.append(taskId);
