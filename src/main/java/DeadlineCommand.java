@@ -8,9 +8,9 @@ public class DeadlineCommand implements Command {
 
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         String[] commandArgs = command.split(" ");
-        if (commandArgs.length == 1 || commandArgs[1].equals("/by") || !command.contains("/by")) {
+        if (commandArgs.length == 1 || commandArgs[1].equals("/by")) {
             throw new MissingDescriptionException();
-        } else if (!commandArgs[2].equals("/by")) {
+        } else if (commandArgs.length == 2 || !commandArgs[2].equals("/by")) {
             throw new MissingTagException();
         } else if (commandArgs.length != 5) {
             throw new MissingDateTimeException();

@@ -8,9 +8,9 @@ public class EventCommand implements Command{
 
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         String[] commandArgs = command.split(" ");
-        if (commandArgs.length == 1 || commandArgs[1].equals("/at") || !command.contains("/at")) {
+        if (commandArgs.length == 1 || commandArgs[1].equals("/at")) {
             throw new MissingDescriptionException();
-        } else if (!commandArgs[2].equals("/at")) {
+        } else if (commandArgs.length == 2 || !commandArgs[2].equals("/at")) {
             throw new MissingTagException();
         } else if (commandArgs.length != 5) {
             throw new MissingDateTimeException();
