@@ -15,6 +15,10 @@ public class Task {
         this.isDone = true;
     }
 
+    public String toFileString() {
+        return "To be overridden";
+    }
+
     @Override
     public String toString() {
         return String.format("[%s] %s", getStatusIcon(), description);
