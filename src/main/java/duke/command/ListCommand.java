@@ -13,7 +13,7 @@ public class ListCommand extends Command{
 
     @Override
     public void execute(TaskList list, Storage storage, Ui ui) throws DukeCommandException {
-        if(this.inputCommand.split(" ").length != 1) {
+        if(this.getInputCommand().split(" ").length != 1) {
             throw new DukeCommandException("\u2639 OOPS!!! Wrong 'list' command parameters!");
         }
 
