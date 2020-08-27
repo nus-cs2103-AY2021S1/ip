@@ -7,6 +7,7 @@ import duke.command.DeadlineCommand;
 import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.EventCommand;
+import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.ToDoCommand;
 
@@ -26,6 +27,8 @@ public class Parser {
         return new EventCommand(fullCommand);
       case "delete":
         return new DeleteCommand(fullCommand);
+      case "find":
+        return new FindCommand(fullCommand);
       case "bye":
         return new ByeCommand();
       default:
