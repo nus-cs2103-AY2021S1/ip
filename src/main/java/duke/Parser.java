@@ -1,3 +1,5 @@
+package duke;
+
 import exception.EmptyDescriptionException;
 import exception.EmptyTimeException;
 import exception.InvalidCommandException;

@@ -1,10 +1,7 @@
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.Scanner;
-import java.util.ArrayList;
+package duke;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import exception.*;
 
 public class Duke {
@@ -105,9 +102,5 @@ public class Duke {
                 ui.printDivider();
             }
         }
-    }
-
-    public static void main(String[] args) {
-        new Duke("data/duke.txt").run();
     }
 }
