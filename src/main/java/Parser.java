@@ -4,7 +4,16 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * Parser takes in a variety of strings, makes sense of the strings and creates relevant objects.
+ */
 public class Parser {
+	/**
+	 * Parses dates that are of the accepted date formats.
+	 *
+	 * @param str String to parse.
+	 * @return Date if successfully parsed, null if wrong date format.
+	 */
 	public static Date parseDate(String str) {
 		List<String> formatStrings = Arrays.asList("yyyy-M-dd", "dd/M/yyyy HHmm", "dd/M/yyyy", "MMM d yyyy");
 
@@ -17,6 +26,14 @@ public class Parser {
 		return null;
 	}
 
+	/**
+	 * Parses in user inputs and generates commands based on the inputs.
+	 *
+	 * @param display User input.
+	 * @return Command based on display.
+	 * @throws DukeException
+	 * @throws TaskException
+	 */
 	public static Command parse(String display) throws DukeException, TaskException {
 		if (display.equals("list")) {
 			return new ListCommand();

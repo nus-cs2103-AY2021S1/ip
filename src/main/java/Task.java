@@ -1,5 +1,9 @@
 import java.util.Date;
 
+/**
+ * Task is part of a TaskList.
+ */
+
 public abstract class Task {
 
     protected String description;
@@ -20,6 +24,11 @@ public abstract class Task {
         isDone = true;
     }
 
+    /**
+     * Used by Storage to record the details of a Task.
+     *
+     * @return String that contains the details of a Task and is saved in a specified file.
+     */
     public String getSavedString() {
         return taskType.getSymbol() + " | " + (isDone ? "1" : "0") + " | " + description;
     }

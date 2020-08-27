@@ -1,3 +1,6 @@
+/**
+ * TaskType that is allowed.
+ */
 public enum TaskType {
 	TODO{
 		@Override

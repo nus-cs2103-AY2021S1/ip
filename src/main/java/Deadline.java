@@ -1,5 +1,8 @@
 import java.util.Date;
 
+/**
+ * Deadline is a type of Task but with a time limit.
+ */
 public class Deadline extends Task {
 
     private final Date by;
