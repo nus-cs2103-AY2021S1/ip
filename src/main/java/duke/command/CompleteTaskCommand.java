@@ -1,10 +1,11 @@
 package duke.command;
 
 import duke.exception.*;
+
 import duke.task.TaskList;
+
 import duke.Ui;
 import duke.Storage;
-import duke.task.Task;
 
 /**
  * Represents a command to mark a task as completed.

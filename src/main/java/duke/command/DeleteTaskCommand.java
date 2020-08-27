@@ -1,10 +1,13 @@
 package duke.command;
 
 import duke.exception.*;
+
 import duke.task.TaskList;
+import duke.task.Task;
+
 import duke.Ui;
 import duke.Storage;
-import duke.task.Task;
+
 
 /**
  * Represents a command to delete a task from the user's list of tasks.

@@ -1,12 +1,13 @@
 package duke.command;
 
+import duke.exception.DukeException;
 import duke.exception.InvalidFunctionException;
-import duke.task.Task;
+
 import duke.task.TaskList;
+import duke.task.Task;
+
 import duke.Ui;
 import duke.Storage;
-
-import duke.exception.DukeException;
 
 /**
  * Represents a command to search for tasks using a keyword.
