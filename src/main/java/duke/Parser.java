@@ -1,8 +1,10 @@
+package duke;
+
 public class Parser {
     private User_Input currentType = null;
     private Ui userInteract;
     protected TaskList tasks;
-    protected boolean isEnd;
+    public boolean isEnd;
 
 
     public Parser(Ui userInteract, TaskList tasks) {
@@ -21,7 +23,7 @@ public class Parser {
         LIST,
     }
 
-    String[] getDukeType(String userCommand) {
+    public String[] getDukeType(String userCommand) {
         String[] words = userCommand.split(" ");
         if (words[0].equals("deadline")) {
             this.currentType = User_Input.DEADLINE;

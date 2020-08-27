@@ -1,3 +1,5 @@
+package duke;
+
 public class EmptyInputException extends Exception {
     private final String taskName;
     public EmptyInputException(String taskName) {
