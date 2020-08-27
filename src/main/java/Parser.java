@@ -35,6 +35,9 @@ public class Parser {
             verifyArguments(cmd,2);
             String[] eventDes = obtainDes(cmd[1], "/at ");
             return new AddCommand(new Event(eventDes[0], eventDes[1]));
+        case "find":
+            verifyArguments(cmd, 2);
+            return new FindCommand(cmd[1]);
         default:
             throw new PandaBotInvalidCommandException();
         }
