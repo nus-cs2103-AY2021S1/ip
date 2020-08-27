@@ -1,6 +1,10 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents methods to manipulate with formats, e.g. dates
+ */
+
 public class Convert {
     /**
      * Returns a formatted string transforming from "/at" to ":(at)"

@@ -1,3 +1,7 @@
+/**
+ * Represents a Unknown Command Exception. A <code>Unknown Command
+ * Exception</code> object is used when an unknown command is called
+ */
 public class UnknownCommandException extends IndexOutOfBoundsException {
     UnknownCommandException() {}
     @Override

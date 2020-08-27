@@ -1,3 +1,7 @@
+/**
+ * Represents an Invalid Deletion Exception . An <code>Invalid Deletion Exception
+ * </code> object is used when attempted deletion index is invalid
+ */
 public class InvalidDeletionException extends Exception {
     InvalidDeletionException() {}
     @Override

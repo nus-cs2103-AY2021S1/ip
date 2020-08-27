@@ -1,3 +1,7 @@
+/**
+ * Represents a deadline inherited from task. A <code>Deadline</code> object corresponds to
+ * a task associated a date as deadline
+ */
 public class Deadline extends Task {
     Deadline(String message) {
         super(message);

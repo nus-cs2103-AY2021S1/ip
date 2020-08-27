@@ -1,3 +1,7 @@
+/**
+ * Represents a todo inherited from task. A <code>Deadline</code> object corresponds to
+ * a simple task without any constraints on dates
+ */
 public class Todo extends Task {
     Todo(String message) {
         super(message);

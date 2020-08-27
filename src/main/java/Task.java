@@ -1,3 +1,8 @@
+/**
+ * Represents a task. A <code>Task</code> object corresponds to
+ * a message and a status (whether it is done)
+ */
+
 public class Task {
     private String message;
     private boolean isDone;

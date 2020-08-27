@@ -5,6 +5,9 @@ import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
 
+/**
+ * Represents an interactive bot to handle tasks
+ */
 public class Duke {
     // constant SPACE and LINE for format purposes
     public static String SPACE = "     ";
