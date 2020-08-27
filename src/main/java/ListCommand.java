@@ -16,4 +16,15 @@ public class ListCommand extends Command {
     boolean isExit() {
         return false;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        } else if (o instanceof ListCommand) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
