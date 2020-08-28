@@ -9,7 +9,11 @@ import duke.task.Event;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+/**
+ * Represents an add task command.
+ */
 public class AddCommand implements Command {
+    /** key decides the type of task to create */
     private String key;
     private String taskDescription;
     private LocalDate date;
@@ -28,7 +32,13 @@ public class AddCommand implements Command {
         this.date = date;
         this.time = time;
     }
-    
+
+    /**
+     * Creates a Task instance with the task details and adds it to the user's task list.
+     * 
+     * @param tasks List of user's tasks.
+     * @param ui UI of Duke.
+     */
     @Override 
     public void execute(TaskList tasks, Ui ui) {
         if (CommandKey.equalsCommandKey(key, CommandKey.TODO)) {
@@ -45,7 +55,12 @@ public class AddCommand implements Command {
             ui.displayAddTaskSuccess(task, tasks.size());
         }
     }
-    
+
+    /**
+     * Tells Duke to continue running.
+     * 
+     * @return false.
+     */
     @Override
     public boolean isExit() {
         return false;

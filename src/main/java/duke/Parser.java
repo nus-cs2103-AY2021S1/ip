@@ -18,6 +18,9 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents a parser for parsing user inputs.
+ */
 public class Parser {
     private LocalDate parseDate(String inputDate) throws DukeDateTimeException {
         try {
@@ -34,7 +37,14 @@ public class Parser {
             throw new DukeDateTimeException(inputTime);
         }
     }
-    
+
+    /**
+     * Parses and validates user input before returning a command to be executed.
+     * 
+     * @param input The user input.
+     * @return Command to be executed.
+     * @throws DukeException If the user input is invalid.
+     */
     public Command parse(String input) throws DukeException {
         String[] processedInput = input.split(" ");
         String key = processedInput[0];

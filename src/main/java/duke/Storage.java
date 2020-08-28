@@ -8,6 +8,9 @@ import java.io.*;
 import java.nio.file.Path;
 import java.nio.file.Files;
 
+/**
+ * Represents the storage for the user's tasks.
+ */
 public class Storage {
     private Path storagePath;
     
@@ -52,7 +55,13 @@ public class Storage {
             System.out.println(e);
         }
     }
-    
+
+    /**
+     * Reads the data from the storage file and returns a TaskList of the user's  
+     * stored tasks. Returns an empty list if there are no stored tasks.
+     * 
+     * @return List of cached tasks.
+     */
     public TaskList readData() {
         TaskList tasks = new TaskList();
         try {
@@ -88,13 +97,26 @@ public class Storage {
         }
         return tasks;
     }
-    
+
+    /**
+     * Sets up the storage and creates the storage file at the path if the storage 
+     * file does not exist.
+     * 
+     * @param storagePath Path for the storage file.
+     * @return A Storage instance.
+     */
     public static Storage setup(Path storagePath) {
         Storage storage = new Storage(storagePath);
         storage.createStorage();
         return storage;
     }
-    
+
+    /**
+     * Updates the storage file by deleting the existing file, recreating the storage
+     * file and writing the updated tasks into the new storage file.
+     * 
+     * @param tasks List of updated tasks.
+     */
     public void update(TaskList tasks) {
         deleteStorage();
         createStorage();
