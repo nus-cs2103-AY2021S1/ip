@@ -11,8 +11,10 @@ import main.java.duke.command.ExitCommand;
 import main.java.duke.command.ListCommand;
 import main.java.duke.command.ListDateCommand;
 import main.java.duke.command.CommandType;
-import main.java.duke.task.*;
-import main.java.duke.handle.*;
+import main.java.duke.task.ToDo;
+import main.java.duke.task.Deadline;
+import main.java.duke.task.Event;
+import main.java.duke.handle.CommandNotFoundException;
 
 /**
  * The Parser class parses the command entered by
