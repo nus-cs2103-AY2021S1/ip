@@ -9,6 +9,10 @@ import duke.exception.InvalidFormatByeException;
 import duke.exception.UnknownCommandException;
 import duke.exception.EmptyTextException;
 
+import duke.storage.Storage;
+import duke.tasklist.TaskList;
+import duke.ui.Ui;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -60,7 +64,10 @@ public class ParserTest {
         @Test
         @DisplayName("Testing the UnknownCommandException in the method Parse")
         public void testUnknownCommandException() {
-            assertThrows(UnknownCommandException.class, () -> p.parse("blah"));
+            TaskList tasks = new TaskList();
+            Storage storage = new Storage();
+            Ui ui = new Ui();
+            assertThrows(UnknownCommandException.class, () -> p.parse("blah").execute(tasks, ui, storage));
         }
 
         @Test

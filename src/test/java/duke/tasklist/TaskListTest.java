@@ -24,7 +24,7 @@ public class TaskListTest {
 
     @Test
     public void testGet() {
-        assertEquals(new Task("hello world 2"), task.get(2));
+        assertEquals("[" + "\u2718" + "] hello world 2", task.get(2).toString());
     }
 
     @Test

@@ -178,9 +178,8 @@ public class Parser {
      * incorrect.
      */
     
-    public static Command parse(String s) throws UnknownCommandException, InvalidFormatByeException, 
-            InvalidFormatListException, InvalidFormatDoneException, EmptyTextException, InvalidFormatDeleteException, 
-            InvalidFormatFindException {
+    public static Command parse(String s) throws InvalidFormatByeException, InvalidFormatListException, 
+            InvalidFormatDoneException, EmptyTextException, InvalidFormatDeleteException, InvalidFormatFindException {
         String[] inputArr = s.trim().split(" ", 2);
         inputArr[0] = inputArr[0].toLowerCase();
         if (isEnd(inputArr[0])) {
