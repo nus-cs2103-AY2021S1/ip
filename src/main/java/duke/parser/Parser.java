@@ -14,6 +14,11 @@ import duke.exception.DukeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Implements user input parser.
+ * 
+ * @author Audrey Felicio Anwar
+ */
 public class Parser {
     private enum Commands {
         BYE,

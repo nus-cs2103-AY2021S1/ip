@@ -4,6 +4,11 @@ import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
+/**
+ * Implements done command objects.
+ *
+ * @author Audrey Felicio Anwar
+ */
 public class DoneCommand extends Command {
     private int index;
     

@@ -6,6 +6,11 @@ import duke.task.TaskList;
 import duke.task.ToDo;
 import duke.ui.Ui;
 
+/**
+ * Implements to do command objects.
+ *
+ * @author Audrey Felicio Anwar
+ */
 public class ToDoCommand extends Command {
     private String description;
 

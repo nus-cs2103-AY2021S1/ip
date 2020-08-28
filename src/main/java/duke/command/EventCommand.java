@@ -8,6 +8,11 @@ import duke.ui.Ui;
 
 import java.time.LocalDate;
 
+/**
+ * Implements event command objects.
+ *
+ * @author Audrey Felicio Anwar
+ */
 public class EventCommand extends Command {
     private String description;
     private LocalDate time;

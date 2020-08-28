@@ -7,6 +7,11 @@ import duke.ui.Ui;
 
 import java.util.ArrayList;
 
+/**
+ * Implements find command objects.
+ *
+ * @author Audrey Felicio Anwar
+ */
 public class FindCommand extends Command {
     private String keyword;
     

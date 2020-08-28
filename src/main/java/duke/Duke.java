@@ -7,6 +7,11 @@ import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
+/**
+ * Implements the chatbot application
+ * 
+ * @author Audrey Felicio Anwar
+ */
 public class Duke {
     private Storage storage;
     private TaskList tasks;

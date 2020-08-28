@@ -1,5 +1,10 @@
 package duke.task;
 
+/**
+ * Implements task objects.
+ * 
+ * @author Audrey Felicio Anwar
+ */
 public class Task {
     protected String description;
     protected boolean done;
@@ -36,7 +41,12 @@ public class Task {
         int isDone = done ? 1 : 0;
         return " | " + isDone + " | " + description;
     }
-    
+
+    /**
+     * Returns description of task.
+     * 
+     * @return Description of task.
+     */
     public String getDescription() {
         return description;
     }

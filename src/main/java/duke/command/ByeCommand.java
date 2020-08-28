@@ -4,6 +4,11 @@ import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
+/**
+ * Implements bye command objects.
+ * 
+ * @author Audrey Felicio Anwar
+ */
 public class ByeCommand extends Command {
     /**
      * Executes the given command.

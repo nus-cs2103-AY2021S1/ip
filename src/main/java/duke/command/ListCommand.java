@@ -4,6 +4,11 @@ import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
+/**
+ * Implements list command objects.
+ *
+ * @author Audrey Felicio Anwar
+ */
 public class ListCommand extends Command {
     /**
      * Executes the given command.

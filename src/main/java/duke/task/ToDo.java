@@ -1,5 +1,10 @@
 package duke.task;
 
+/**
+ * Implements to do objects.
+ * 
+ * @author Audrey Felicio Anwar
+ */
 public class ToDo extends Task {
     public ToDo(String description, boolean done) {
         super(description, done);

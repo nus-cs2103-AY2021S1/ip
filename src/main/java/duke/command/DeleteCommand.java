@@ -4,6 +4,11 @@ import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
+/**
+ * Implements delete command objects.
+ *
+ * @author Audrey Felicio Anwar
+ */
 public class DeleteCommand extends Command {
     private int index;
 

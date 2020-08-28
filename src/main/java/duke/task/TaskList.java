@@ -4,6 +4,11 @@ import duke.ui.Ui;
 
 import java.util.ArrayList;
 
+/**
+ * Implements the list of tasks.
+ * 
+ * @author Audrey Felicio Anwar
+ */
 public class TaskList {
     private ArrayList<Task> tasks;
     private int taskCount;
@@ -92,7 +97,13 @@ public class TaskList {
                     "   " + tasks.get(index - 1));
         }
     }
-    
+
+    /**
+     * Finds all tasks that match the keyword.
+     * 
+     * @param keyword Keyword to be searched.
+     * @return Tasks that match the keyword.
+     */
     public ArrayList<Task> findTasks(String keyword) {
         int wordLength = keyword.length();
         ArrayList<Task> matchingTasks = new ArrayList<>();

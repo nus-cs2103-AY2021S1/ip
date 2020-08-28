@@ -2,6 +2,11 @@ package duke.ui;
 
 import java.util.Scanner;
 
+/**
+ * Implements the user interface functionalities.
+ * 
+ * @author Audrey Felicio Anwar
+ */
 public class Ui {
     private static final String LOGO = " _   _       _   _ _            \n" +
             "| | | |     | | | (_)           \n" +

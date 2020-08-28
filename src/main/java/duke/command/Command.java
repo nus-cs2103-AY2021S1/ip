@@ -4,6 +4,11 @@ import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
+/**
+ * Implements command objects.
+ * 
+ * @author Audrey Felicio Anwar
+ */
 public abstract class Command {
     /**
      * Executes the given command.

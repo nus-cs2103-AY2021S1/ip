@@ -17,6 +17,11 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Implements file storage.
+ * 
+ * @author Audrey Felicio Anwar
+ */
 public class Storage {
     private File data;
     

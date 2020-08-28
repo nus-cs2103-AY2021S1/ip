@@ -8,6 +8,11 @@ import duke.ui.Ui;
 
 import java.time.LocalDate;
 
+/**
+ * Implements deadline command objects.
+ *
+ * @author Audrey Felicio Anwar
+ */
 public class DeadlineCommand extends Command {
     private String description;
     private LocalDate time;
