@@ -32,7 +32,7 @@ public class Parser {
         // No input received
         if (!matcher.matches()) return new InvalidCommand("Empty input!");
 
-        // Find the matching duke.command
+        // Find and generate the matching duke.command
         String firstWord = matcher.group(1).toUpperCase();
         return Arrays.stream(CommandFactory.values()) // parser is an enum of all valid commands
                 .filter(commandFactory -> commandFactory.toString().equals(firstWord))

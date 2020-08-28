@@ -1,6 +1,7 @@
 package duke.task;
 
-import duke.DukeDateTime;
+import duke.util.DukeDateTime;
+import duke.storage.CsvToTask;
 
 import java.util.Objects;
 
@@ -9,55 +10,67 @@ import java.util.Objects;
  */
 public class Event extends Task {
 
-    private final DukeDateTime eventStart;
-    private final DukeDateTime eventEnd;
+    private DukeDateTime start;
+    private DukeDateTime end;
 
-    public Event(String description, DukeDateTime eventStart, DukeDateTime eventEnd) {
+    public Event(String description, DukeDateTime start, DukeDateTime end) {
         super(description);
-        this.eventStart = eventStart;
-        this.eventEnd = eventEnd;
+        this.start = start;
+        this.end = end;
     }
 
-    public Event(boolean isCompleted, String description, DukeDateTime eventStart, DukeDateTime eventEnd) {
+    public Event(boolean isCompleted, String description, DukeDateTime start, DukeDateTime end) {
         super(isCompleted, description);
-        this.eventStart = eventStart;
-        this.eventEnd = eventEnd;
+        this.start = start;
+        this.end = end;
     }
 
     public DukeDateTime getStart() {
-        return this.eventStart;
+        return this.start;
+    }
+
+    public void setStart(DukeDateTime eventStart) {
+        this.start = eventStart;
     }
 
     public DukeDateTime getEnd() {
-        return this.eventEnd;
+        return this.end;
+    }
+
+    public void setEnd(DukeDateTime eventEnd) {
+        this.end = eventEnd;
+    }
+
+    @Override
+    public String toCsv() {
+        return CsvToTask.EVENT + ","
+                + this.isCompleted() + ","
+                + this.getDescription() + ","
+                + this.getStart() + ","
+                + this.getEnd();
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (from: " + eventStart.pretty() + " till: " + eventEnd.pretty() + ")";
-    }
-
-    /**
-     * Get the csv representation of this task
-     * @return A csv String representative of this task
-     */
-    @Override
-    public String toCsv() {
-        return TaskFactory.EVENT + "," + super.toCsv() + "," + eventStart + "," + eventEnd;
+        return "[E]"
+                + "[" + this.isCompletedSymbol() + "]"
+                + " " + this.getDescription()
+                + " (from: " + start.pretty()
+                + " till: " + end.pretty() + ")";
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Event)) return false;
-        if (!super.equals(o)) return false;
-        Event event = (Event) o;
-        return eventStart.equals(event.eventStart) &&
-                eventEnd.equals(event.eventEnd);
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (!(obj instanceof Event)) return false;
+        if (!super.equals(obj)) return false;
+        Event event = (Event) obj;
+        return start.equals(event.start) &&
+                end.equals(event.end);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), eventStart, eventEnd);
+        return Objects.hash(super.hashCode(), start, end);
     }
 }

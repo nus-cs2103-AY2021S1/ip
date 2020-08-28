@@ -1,6 +1,7 @@
 package duke.task;
 
-import duke.DukeDateTime;
+import duke.util.DukeDateTime;
+import duke.storage.CsvToTask;
 
 import java.util.Objects;
 
@@ -9,7 +10,7 @@ import java.util.Objects;
  */
 public class Deadline extends Task {
 
-    private final DukeDateTime deadline;
+    private DukeDateTime deadline;
 
     public Deadline(String description, DukeDateTime deadline) {
         super(description);
@@ -20,23 +21,29 @@ public class Deadline extends Task {
         super(isCompleted, description);
         this.deadline = deadline;
     }
-    
+
     public DukeDateTime getDeadline() {
         return this.deadline;
     }
 
-    @Override
-    public String toString() {
-        return "[D]" + super.toString() + " (by: " + deadline.pretty() + ")";
+    public void setDeadline(DukeDateTime deadline) {
+        this.deadline = deadline;
     }
 
-    /**
-     * Get the csv representation of this task
-     * @return A csv String representative of this task
-     */
     @Override
     public String toCsv() {
-        return TaskFactory.DEADLINE + "," + super.toCsv() + "," + deadline.toString();
+        return CsvToTask.DEADLINE + ","
+                + this.isCompleted() + ","
+                + this.getDescription() + ","
+                + this.getDeadline();
+    }
+
+    @Override
+    public String toString() {
+        return "[D]"
+                + "[" + this.isCompletedSymbol() + "]"
+                + " " + this.getDescription()
+                + " (by: " + deadline.pretty() + ")";
     }
 
     @Override

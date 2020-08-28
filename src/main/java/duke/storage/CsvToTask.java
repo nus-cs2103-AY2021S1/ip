@@ -1,18 +1,21 @@
-package duke.task;
+package duke.storage;
 
-import duke.DukeDateTime;
+import duke.util.DukeDateTime;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
 
 import java.util.Scanner;
 
 /**
- * An enumeration of all tasks
- * Provides a method to recover the Task from a csv representation
+ * Recover the Task from a csv representation
  */
-public enum TaskFactory {
+public enum CsvToTask {
 
     TODO {
         @Override
-        public Task fromCsv(String csv) {
+        public Task parse(String csv) {
             // Parse input
             Scanner scanner = new Scanner(csv);
             scanner.useDelimiter(",");
@@ -28,7 +31,7 @@ public enum TaskFactory {
 
     DEADLINE {
         @Override
-        public Task fromCsv(String csv) {
+        public Task parse(String csv) {
             // Parse input
             Scanner scanner = new Scanner(csv);
             scanner.useDelimiter(",");
@@ -45,7 +48,7 @@ public enum TaskFactory {
 
     EVENT {
         @Override
-        public Task fromCsv(String csv) {
+        public Task parse(String csv) {
             // Parse input
             Scanner scanner = new Scanner(csv);
             scanner.useDelimiter(",");
@@ -67,6 +70,6 @@ public enum TaskFactory {
      * @return The task represented by the csv
      * @throws Exception If the csv cannot be parsed
      */
-    public abstract Task fromCsv(String csv) throws Exception;
+    public abstract Task parse(String csv) throws Exception;
 
 }

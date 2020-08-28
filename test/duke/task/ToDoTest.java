@@ -1,5 +1,6 @@
 package duke.task;
 
+import duke.storage.CsvToTask;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -28,7 +29,7 @@ class ToDoTest {
     void toCSV_fromCSV() {
         try {
             Task task1 = new ToDo("test");
-            Task task2 = TaskFactory.TODO.fromCsv(task1.toCsv());
+            Task task2 = CsvToTask.TODO.parse(task1.toCsv());
             assertEquals(task1.hashCode(), task2.hashCode());
         } catch (Exception e) {
             // Failed to convert csv to todo

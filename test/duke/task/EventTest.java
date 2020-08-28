@@ -1,6 +1,7 @@
 package duke.task;
 
-import duke.DukeDateTime;
+import duke.util.DukeDateTime;
+import duke.storage.CsvToTask;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
@@ -58,7 +59,7 @@ class EventTest {
     void toCSV_fromCSV() {
         try {
             Task task1 = new Event(string1, time1, time2);
-            Task task2 = TaskFactory.EVENT.fromCsv(task1.toCsv());
+            Task task2 = CsvToTask.EVENT.parse(task1.toCsv());
             assertEquals(task1.hashCode(), task2.hashCode());
         } catch (Exception e) {
             // Failed to convert csv to Event

@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.storage.Storage;
 import duke.task.Task;
 
 import java.io.FileWriter;
@@ -27,21 +28,7 @@ public class SaveCommand implements Command {
      */
     @Override
     public void execute() {
-        try {
-            // Open file for write/overwrite
-            FileWriter fileWriter = new FileWriter(filePath);
-            for (Task task : taskList) {
-                fileWriter.write(task.toCsv() + "\n");
-            }
-
-            // Close file
-            fileWriter.flush();
-            fileWriter.close();
-            System.out.println("Save: " + taskList.size() + " entries");
-
-        } catch (IOException e) {
-            System.out.println("Error: Could not save to file. Ensure directory exists and file is not in use");
-        }
+        Storage.save(taskList, filePath);
     }
 
     @Override

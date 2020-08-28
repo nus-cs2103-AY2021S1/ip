@@ -23,7 +23,7 @@ public abstract class Task {
         this.description = description;
     }
 
-    private String isCompletedSymbol() {
+    public String isCompletedSymbol() {
         return this.isCompleted ? SYMBOL_DONE : SYMBOL_UNDONE;
     }
 
@@ -43,18 +43,7 @@ public abstract class Task {
         this.description = description;
     }
 
-    @Override
-    public String toString() {
-        return "[" + isCompletedSymbol() + "] " + description;
-    }
-
-    /**
-     * Get the csv representation of this task
-     * @return A csv String representative of this task
-     */
-    public String toCsv() {
-        return "" + this.isCompleted() + ',' + this.description;
-    }
+    public abstract String toCsv();
 
     @Override
     public boolean equals(Object obj) {
@@ -69,5 +58,4 @@ public abstract class Task {
     public int hashCode() {
         return Objects.hash(isCompleted(), getDescription());
     }
-
 }

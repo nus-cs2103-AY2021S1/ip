@@ -1,7 +1,8 @@
 package duke.command;
 
+import duke.storage.CsvToTask;
+import duke.storage.Storage;
 import duke.task.Task;
-import duke.task.TaskFactory;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -32,36 +33,7 @@ public class LoadCommand implements Command {
      */
     @Override
     public void execute() {
-        // Empty current list
-        taskList.clear();
-
-        try {
-            File file = new File(filePath);
-            Scanner scanner = new Scanner(file);
-            Supplier<String> supplier = () -> scanner.hasNext() ? scanner.nextLine() : null;
-
-            // Process each line as stream
-            Stream.generate(supplier)
-                    .takeWhile(Objects::nonNull)
-                    .filter(Predicate.not(String::isBlank))
-                    .map(String::trim)
-                    .map(line -> {
-                         try {
-                             String taskType = line.substring(0, line.indexOf(','));
-                             return TaskFactory.valueOf(taskType).fromCsv(line);
-                         } catch(Exception e) {
-                             System.out.println("Corrupt entry: " + line);
-                             return null;
-                         }
-                    })
-                    .filter(Objects::nonNull)
-                    .forEach(taskList::add);
-
-        } catch (FileNotFoundException e) {
-            System.out.println("Error: File not found");
-        }
-
-        System.out.println("Load: " + taskList.size() + " entries");
+        Storage.load(taskList, filePath);
     }
 
     @Override

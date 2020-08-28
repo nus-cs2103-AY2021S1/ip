@@ -1,6 +1,7 @@
 package duke.task;
 
-import duke.DukeDateTime;
+import duke.util.DukeDateTime;
+import duke.storage.CsvToTask;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
@@ -43,7 +44,7 @@ class DeadlineTest {
     void toCSV_fromCSV() {
         try {
             Task task1 = new Deadline(string1, time1);
-            Task task2 = TaskFactory.DEADLINE.fromCsv(task1.toCsv());
+            Task task2 = CsvToTask.DEADLINE.parse(task1.toCsv());
             assertEquals(task1.hashCode(), task2.hashCode());
         } catch (Exception e) {
             // Failed to convert csv to Deadline
