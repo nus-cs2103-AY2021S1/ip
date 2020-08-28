@@ -1,3 +1,4 @@
+import duke.Duke;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -19,6 +20,11 @@ public class App extends Application {
     private Scene scene;
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private String buttonLabel = "Start";
+
+    String home = System.getProperty("user.home");
+    java.nio.file.Path path = java.nio.file.Paths.get(home, "Desktop", "cs2103", "ip", "data");
+    private Duke runningDuke = new Duke(path.toString());
 
     @Override
     public void start(Stage stage) {
@@ -30,7 +36,7 @@ public class App extends Application {
         scrollPane.setContent(dialogContainer);
 
         userInput = new TextField();
-        sendButton = new Button("Send");
+        sendButton = new Button(buttonLabel);
 
         AnchorPane mainLayout = new AnchorPane();
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
@@ -83,7 +89,6 @@ public class App extends Application {
     }
 
     /**
-     * Iteration 1:
      * Creates a label with the specified text and adds it to the dialog container.
      * @param text String containing text to add
      * @return a label with the specified text that has word wrap enabled.
@@ -96,18 +101,23 @@ public class App extends Application {
     }
 
     /**
-     * Iteration 2:
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
     private void handleUserInput() {
-        Label userText = new Label(userInput.getText());
-        Label dukeText = new Label(getResponse(userInput.getText()));
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(userText, new ImageView(user)),
-                DialogBox.getDukeDialog(dukeText, new ImageView(duke))
-        );
-        userInput.clear();
+        if (buttonLabel == "Start") {
+            Label greetingLabel = new Label(runningDuke.getUi().greeting());
+            dialogContainer.getChildren().add(DialogBox.getDukeDialog(greetingLabel, new ImageView(user)));
+        } else {
+            buttonLabel = "Send";
+            Label userText = new Label(userInput.getText());
+            Label dukeText = new Label(getResponse(userInput.getText()));
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getUserDialog(userText, new ImageView(user)),
+                    DialogBox.getDukeDialog(dukeText, new ImageView(duke))
+            );
+            userInput.clear();
+        }
     }
 
     /**
