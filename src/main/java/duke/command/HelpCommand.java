@@ -1,5 +1,7 @@
 package duke.command;
 
+import duke.parser.CommandFactory;
+
 import java.util.Arrays;
 
 /**

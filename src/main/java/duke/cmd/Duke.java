@@ -2,6 +2,7 @@ package duke.cmd;
 
 import duke.command.Command;
 import duke.command.ExitCommand;
+import duke.parser.Parser;
 import duke.task.Task;
 
 import java.util.ArrayList;

@@ -1,7 +1,6 @@
-package duke.cmd;
+package duke.parser;
 
 import duke.command.Command;
-import duke.command.CommandFactory;
 import duke.command.InvalidCommand;
 import duke.task.Task;
 

@@ -1,11 +1,11 @@
-package duke.command;
+package duke.parser;
 
-import duke.util.DukeDateTime;
 import duke.command.*;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
+import duke.util.DukeDateTime;
 
 import java.time.format.DateTimeParseException;
 import java.util.List;
@@ -13,7 +13,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Generates the command from secondary parameters
+ * Enumeration of available commands
+ * Contains generate() method to create command from parameters
  */
 public enum CommandFactory {
 
