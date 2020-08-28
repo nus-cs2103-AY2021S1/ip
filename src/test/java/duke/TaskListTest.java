@@ -1,14 +1,14 @@
 package duke;
 
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
- class TaskListTest {
+import org.junit.jupiter.api.Test;
+
+class TaskListTest {
 
     @Test
-     void handleDeadline_wrongDateFormat_exceptionThrown() {
+    void handleDeadline_wrongDateFormat_exceptionThrown() {
         try {
             TaskList tasks = new TaskList();
             CommandName deadline = CommandName.DEADLINE;

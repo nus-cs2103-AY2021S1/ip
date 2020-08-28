@@ -1,14 +1,14 @@
 package duke;
 
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
- class ParserTest {
+import org.junit.jupiter.api.Test;
+
+class ParserTest {
 
     @Test
-     void parse_noDescription_exceptionThrown() {
+    void parse_noDescription_exceptionThrown() {
         try {
             Parser.parse("event");
             fail();
@@ -18,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.fail;
     }
 
     @Test
-     void parse_wrongCommand_exceptionThrown() {
+    void parse_wrongCommand_exceptionThrown() {
         try {
             Parser.parse("random");
             fail();

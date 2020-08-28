@@ -42,6 +42,8 @@ class TaskList {
             case "T":
                 handleTodo(taskString.get(2), isDone);
                 break;
+            default:
+                throw new DukeException("     Invalid character in storage file :-(");
             }
         }
     }
