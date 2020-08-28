@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 public class AddCommandTest {
     @Test
-    public void isExit__alwaysFalse() {
+    public void isExit_alwaysFalse() {
         assertFalse(new AddCommand("anything").isExit());
         assertFalse(new AddCommand("todo anything").isExit());
         assertFalse(new AddCommand("event anything").isExit());
