@@ -1,11 +1,11 @@
 public class Listing {
 
+  String title;
+  Boolean isDone = false;
+
   public Listing(String s) {
     this.title = s;
   }
-
-  String title;
-  Boolean isDone = false;
 
   public void complete() {
     isDone = true;
