@@ -31,7 +31,7 @@ public class EventTest {
     }
 
     @Test
-    public void isHappeningToday__isHappeningToday() {
+    public void isHappeningToday_isHappeningToday() {
         try {
             LocalDateTime today = LocalDateTime.now();
             String td = today.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
@@ -60,7 +60,7 @@ public class EventTest {
     }
 
     @Test
-    public void hasHappenedBeforeToday__hasHappenedBeforeToday() {
+    public void hasHappenedBeforeToday_hasHappenedBeforeToday() {
         try {
             LocalDateTime today = LocalDateTime.now();
             String td = today.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
@@ -92,7 +92,7 @@ public class EventTest {
     }
 
     @Test
-    public void isHappeningAfterToday__isHappeningAfterToday() {
+    public void isHappeningAfterToday_isHappeningAfterToday() {
         try {
             LocalDateTime today = LocalDateTime.now();
             String td = today.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
@@ -138,7 +138,7 @@ public class EventTest {
     }
 
     @Test
-    public void output__toWriteStorage() {
+    public void output_toWriteStorage() {
         try {
             Event e = new Event("Project meeting", "2020-09-03 11:30");
             assertEquals("E | 0 | Project meeting | At: 2020-09-03 11:30\n", e.output());
@@ -151,7 +151,7 @@ public class EventTest {
     }
 
     @Test
-    public void toString__systemOutput() {
+    public void toString_systemOutput() {
         try {
             Event e = new Event("Project meeting", "2020-09-03 11:30");
             assertEquals("[E][\u2718] Project meeting (at: 11:30 AM   Sep 3 2020)", e.toString());
