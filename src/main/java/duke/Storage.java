@@ -87,11 +87,11 @@ public class Storage {
      *
      * @param taskList List of tasks to be saved in the file.
      */
-    public void saveFile(TaskList taskList) {
+    public void saveToFile(TaskList taskList) {
         try {
             FileWriter fileWriter = new FileWriter(Storage.FILE_LOCATION);
             for (int i = 0; i < taskList.getListSize(); i++) {
-                fileWriter.write(taskList.getTask(i).taskToFileString() + "\n");
+                fileWriter.write(taskList.getTask(i).convertTaskToFileString() + "\n");
             }
             fileWriter.close();
         } catch (IOException ex) {

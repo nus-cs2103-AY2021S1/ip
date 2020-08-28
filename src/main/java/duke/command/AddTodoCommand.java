@@ -37,7 +37,7 @@ public class AddTodoCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        try {
+
             String todoInfo = this.retrieveTodoInfo();
             Task toAdd = new Todo(todoInfo.trim());
             tasks.addTask(toAdd);
@@ -47,11 +47,7 @@ public class AddTodoCommand extends Command {
                     + " tasks in your list now.";
             ui.printReply(successReply);
 
-            storage.saveFile(tasks);
-        } catch (DukeException ex) {
-            throw ex;
-        }
-
+            storage.saveToFile(tasks);
     }
 
     /**

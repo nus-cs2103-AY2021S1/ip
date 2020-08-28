@@ -51,14 +51,13 @@ public class AddEventCommand extends Command {
             LocalTime eventTime = LocalTime.parse(timeStamp[1], timeFormatter);
 
             Task toAdd = new Event(eventInfo[0], eventDate, eventTime);
-
             tasks.addTask(toAdd);
 
-            String successReply = "Success! This event task has been added: \n\t" +
-                    toAdd.toString() + "\nYou have " + tasks.getListSize() + " tasks in your list now.";
+            String successReply = "Success! This event task has been added: \n\t"
+                    + toAdd.toString() + "\nYou have " + tasks.getListSize() + " tasks in your list now.";
             ui.printReply(successReply);
 
-            storage.saveFile(tasks);
+            storage.saveToFile(tasks);
         } catch (DateTimeParseException | ArrayIndexOutOfBoundsException ex) {
             String err = "The task date format is incorrect. \n"
                     + "Please input a valid date using the format: 'dd/mm/yyyy hh:mm'. For eg, 10/8/2020 18:00";
@@ -74,8 +73,8 @@ public class AddEventCommand extends Command {
      */
     public String[] retrieveEventInfo() throws InvalidTaskException {
         String[] eventInfo = new String[2];
-        String description = "";
-        String time = "";
+        String description;
+        String time;
         if (this.parsedCommand.length == 0) {
             String err = "Your event task has missing arguments and has an incorrect format. "
                     + "The task cannot be created.\n"
@@ -96,7 +95,7 @@ public class AddEventCommand extends Command {
                 String err = "Your event task is missing a time stamp. The task cannot be created. \n"
                         + "Type '/commands' to view the correct command for task creation!";
                 throw new InvalidTaskException(err);
-            } else if (taskInputArray.length == 1 || taskInputArray[0].isBlank()) {
+            } else if (taskInputArray[0].isBlank()) {
                 String err = "Your event task is missing a description. The task cannot be created. \n"
                         + "Type '/commands' to view the correct command for task creation!";
                 throw new InvalidTaskException(err);

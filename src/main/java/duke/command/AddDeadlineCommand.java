@@ -58,8 +58,8 @@ public class AddDeadlineCommand extends Command {
                     + toAdd.toString() + "\nYou have " + tasks.getListSize() + " tasks in your list now.";
             ui.printReply(successReply);
 
-            storage.saveFile(tasks);
-        } catch (DateTimeParseException ex) {
+            storage.saveToFile(tasks);
+        } catch (DateTimeParseException | ArrayIndexOutOfBoundsException ex) {
             String err = "The task date format is incorrect. \n"
                     + "Please input a valid date using the format: 'dd/mm/yyyy hh:mm'. For eg, 10/8/2020 18:00";
             throw new InvalidFunctionException(err);
@@ -96,7 +96,7 @@ public class AddDeadlineCommand extends Command {
                 String err = "Your deadline task is missing a time stamp. The task cannot be created. \n"
                         + "Type '/commands' to view the correct command for task creation!";
                 throw new InvalidTaskException(err);
-            } else if (taskInputArray.length == 1 || taskInputArray[0].isBlank()) {
+            } else if (taskInputArray[0].isBlank()) {
                 String err = "Your deadline task is missing a description. The task cannot be created. \n"
                         + "Type '/commands' to view the correct command for task creation!";
                 throw new InvalidTaskException(err);

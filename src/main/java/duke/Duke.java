@@ -49,8 +49,11 @@ public class Duke {
      * @param args Command-line arguments.
      */
     public static void main(String[] args) {
-        Duke session = new Duke(); // start a new session with JonasBot
-        session.run(); // execute the bot to perform intended functions
+        // start a new session with JonasBot
+        Duke session = new Duke();
+
+        // execute the bot to perform intended functions
+        session.run();
     }
 
 }

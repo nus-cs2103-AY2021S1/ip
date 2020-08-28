@@ -8,7 +8,7 @@ import java.util.List;
  */
 public class TaskList {
 
-    private final List<Task> taskList;
+    private final List<Task> tasks;
 
     /**
      * Creates and initialises a new TaskList object.
@@ -16,7 +16,7 @@ public class TaskList {
      * @param taskList List of tasks that has been created by the user.
      */
     public TaskList(List<Task> taskList) {
-        this.taskList =  taskList;
+        this.tasks =  taskList;
     }
 
     /**
@@ -25,7 +25,7 @@ public class TaskList {
      * @return Number of tasks in the list.
      */
     public int getListSize() {
-        return this.taskList.size();
+        return this.tasks.size();
     }
 
     /**
@@ -36,7 +36,7 @@ public class TaskList {
      * @return Task at the given index in the list.
      */
     public Task getTask(int index) {
-        return this.taskList.get(index);
+        return this.tasks.get(index);
     }
 
     /**
@@ -45,7 +45,7 @@ public class TaskList {
      * @return List of tasks.
      */
     public List<Task> getTaskList() {
-        return this.taskList;
+        return this.tasks;
     }
 
     /**
@@ -54,7 +54,7 @@ public class TaskList {
      * @return True if the list of tasks is empty, false otherwise.
      */
     public boolean isEmpty() {
-        return this.taskList.isEmpty();
+        return this.tasks.isEmpty();
     }
 
     /**
@@ -63,7 +63,7 @@ public class TaskList {
      * @param toAdd Task to be added.
      */
     public void addTask(Task toAdd) {
-        this.taskList.add(toAdd);
+        this.tasks.add(toAdd);
     }
 
     /**
@@ -72,7 +72,7 @@ public class TaskList {
      * @param index Zero based index of the task to be deleted.
      */
     public void removeTask(int index) {
-        this.taskList.remove(index);
+        this.tasks.remove(index);
     }
 
     /**
@@ -81,7 +81,7 @@ public class TaskList {
      * @param index Zero based index of the task to be completed.
      */
     public void completeTask(int index) {
-        this.taskList.get(index).markAsDone();
+        this.tasks.get(index).markAsDone();
     }
 
 }

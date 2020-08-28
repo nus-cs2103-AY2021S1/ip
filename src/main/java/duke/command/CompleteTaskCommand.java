@@ -45,7 +45,7 @@ public class CompleteTaskCommand extends Command {
                         + "Input 'list' to view the correct task ID of your desired task.";
                 throw new InvalidFunctionException(err);
             } else {
-                if (tasks.getTask(index - 1).getCompletionStatus()) {
+                if (tasks.getTask(index - 1).hasBeenCompleted()) {
                     String message = "This task has already been completed:";
                     ui.printReply(message);
                 } else {
@@ -56,7 +56,7 @@ public class CompleteTaskCommand extends Command {
                 String successReply = "\t" + tasks.getTask(index - 1);
                 ui.printReply(successReply);
             }
-            storage.saveFile(tasks);
+            storage.saveToFile(tasks);
         } catch (ArrayIndexOutOfBoundsException ex) {
             String err = "No Task ID provided! Please input the ID of the task you wish to mark as completed.";
             throw new InvalidFunctionException(err);

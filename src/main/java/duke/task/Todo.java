@@ -22,8 +22,8 @@ public class Todo extends Task {
      * @return String containing the relevant information of this todo object to be saved in a file.
      */
     @Override
-    public String taskToFileString() {
-        return "T | " + (getCompletionStatus() ? "1 |" : "0 |")
+    public String convertTaskToFileString() {
+        return "T | " + (hasBeenCompleted() ? "1 |" : "0 |")
                 + getDescription();
     }
 

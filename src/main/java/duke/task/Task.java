@@ -41,7 +41,7 @@ public abstract class Task {
      *
      * @return String containing the relevant information of this task object to be saved in a file.
      */
-    public abstract String taskToFileString();
+    public abstract String convertTaskToFileString();
 
     /**
      * Returns the date of this task.
@@ -55,7 +55,7 @@ public abstract class Task {
      *
      * @return True if the task is completed, false otherwise.
      */
-    public boolean getCompletionStatus() {
+    public boolean hasBeenCompleted() {
         return this.isDone;
     }
 

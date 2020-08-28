@@ -41,8 +41,8 @@ public class Event extends Task {
      * @return String containing the relevant information of this event object to be saved in a file.
      */
     @Override
-    public String taskToFileString() {
-        return "E | " + (getCompletionStatus() ? "1 |" : "0 |") + getDescription() + " | "
+    public String convertTaskToFileString() {
+        return "E | " + (hasBeenCompleted() ? "1 |" : "0 |") + getDescription() + " | "
                 + this.eventDate.toString() + " " + this.eventTime.toString();
     }
 

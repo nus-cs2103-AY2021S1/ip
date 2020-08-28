@@ -41,8 +41,8 @@ public class Deadline extends Task {
      * @return String containing the relevant information of this deadline object to be saved in a file.
      */
     @Override
-    public String taskToFileString() {
-        return "D | " + (getCompletionStatus() ? "1 |" : "0 |") + getDescription() + " | "
+    public String convertTaskToFileString() {
+        return "D | " + (hasBeenCompleted() ? "1 |" : "0 |") + getDescription() + " | "
                 + this.deadlineDate.toString() + " "+ this.deadlineTime.toString();
     }
 
