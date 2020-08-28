@@ -112,5 +112,21 @@ public class DataStorageInterface {
         throw new UnknownCommandException(query);
     }
 
+    public static String filteredTasks(String searchQuery) {
+        ArrayList<Task> newTaskList = new ArrayList<>();
+        for (Task t: DataStorage.taskList) {
+            if (t.getTitle().toLowerCase().contains(searchQuery.toLowerCase())) {
+                newTaskList.add(t);
+            }
+        }
+        StringBuilder acc = new StringBuilder();
+        int i = 0;
+        for (Task t: newTaskList){
+            i++;
+            acc.append(String.format("%d. %s\n", i, t));
+        }
+        return acc.toString().isEmpty() ? String.format(
+                "There are no Tasks with '%s' in the list", searchQuery) : acc.toString();
+    }
 
 }

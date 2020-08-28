@@ -57,6 +57,10 @@ public class ChatBot {
                 LocalTime timeEvent = Parser.getTime(cRemoved);
                 Task event = DataStorageInterface.addEvent(ttle,ppstn,dateEvent,timeEvent);
                 return DataStorageInterface.taskAdded(event);
+            case "find":
+                String remainingQuery = Parser.concatenateStrArr(cRemoved);
+                Find find = new Find(remainingQuery);
+                return find.response();
             case "help":
                 Help help = new Help(splitQuery);
                 return help.response();

@@ -14,6 +14,7 @@ public class DataStorage {
         commandInit.add(new Delete(new String[]{"",""}));
         commandInit.add(new Done(new String[]{"",""}));
         commandInit.add(new Event("init","on",LocalDate.MAX,LocalTime.MIDNIGHT));
+        commandInit.add(new Find("init"));
         commandInit.add(new Help(new String[]{"help"}));
         commandInit.add(new Ls());
         commandInit.add(new Load(new String[]{"",""}));
