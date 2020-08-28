@@ -1,13 +1,12 @@
-
-
 public class EmptyArgumentException {
-    String errorMessage;
-    EmptyArgumentException(String errorMessage) {
-        this.errorMessage = errorMessage;
-    }
+  String errorMessage;
 
-    @Override
-    public String toString() {
-        return errorMessage;
-    }
+  EmptyArgumentException(String errorMessage) {
+    this.errorMessage = errorMessage;
+  }
+
+  @Override
+  public String toString() {
+    return errorMessage;
+  }
 }
