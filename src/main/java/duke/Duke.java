@@ -70,7 +70,8 @@ public class Duke {
                 return tasks.filteredTaskList(deadline);
             } else {
                 throw new DukeException("Wrong format\n   "
-                        + " Your date and time(optional) should be in this format:\n      yyyy-mm-dd HHmm\n    e.g: 2019-10-15 1800 or 2019-10-15");
+                        + " Your date and time(optional) should be in this format:\n      "
+                        + "yyyy-mm-dd HHmm\n    e.g: 2019-10-15 1800 or 2019-10-15");
             }
 
         } else if (commandType == Commands.FIND) {
