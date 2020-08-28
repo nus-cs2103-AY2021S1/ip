@@ -88,6 +88,8 @@ public class Parser {
         break;
       case ("bye"):
         break;
+      case ("find"):
+        s[1] = details[1];
     }
     s[0] = type;
     return s;

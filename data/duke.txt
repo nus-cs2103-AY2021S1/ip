@@ -3,3 +3,7 @@ T | 0 |  a
 D | 0 |  a | 2019-02-02
 T | 0 |  a
 T | 0 |  b
+T | 0 |  book
+T | 0 |  event
+T | 0 |  event keeping
+T | 0 |  book keeping

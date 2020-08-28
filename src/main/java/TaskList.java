@@ -40,9 +40,9 @@ public class TaskList {
    * Deletes the listing object from the list . Print the correct message through printer and
    * updates storage through the storage input
    *
-   * @param num      used to find the listing
-   * @param Printer  to print the object message
-   * @param Sttorage to update Duke.txt
+   * @param num     used to find the listing
+   * @param printer to print the object message
+   * @param storage to update Duke.txt
    */
   public void deleteListing(Integer num, Printer printer, Storage storage) {
     printer.deleteMessage(list.size() - 1, list.get(num).toString());
@@ -54,9 +54,9 @@ public class TaskList {
    * Adds the listing object to the list . Print the correct message through printer and updates
    * storage through the storage input
    *
-   * @param details  used to provide the details to the listing
-   * @param Printer  to print the object message
-   * @param Sttorage to update Duke.txt
+   * @param details used to provide the details to the listing
+   * @param printer to print the object message
+   * @param storage to update Duke.txt
    */
   public void addListings(String[] details, Printer printer, Storage storage) {
     int size = list.size() + 1;
@@ -80,6 +80,24 @@ public class TaskList {
         break;
     }
     storage.save(list);// <----- change this
+  }
+
+  /**
+   * Takes in a string and loops the list for the message (inside listing.title) using
+   * String.get(message) then prints out the corresponding messages.
+   *
+   * @param message the message requested by the user.
+   */
+  public void find(String message) {
+    System.out.println("    ____________________________________________________________");
+    System.out.println("     Here are the matching tasks and their corresponding order!:");
+    for (int i = 0; i < list.size(); i++) {
+      Listing listing = list.get(i);
+      if (list.get(i).title.contains(message)) {
+        System.out.println("     " + (i + 1) + "." + listing.toString());
+      }
+    }
+    System.out.println("    ____________________________________________________________");
   }
 
 }

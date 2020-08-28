@@ -22,7 +22,8 @@ public class Bot {
    * the corresponding action depending on the type of message by interacting with the
    * taskListing object. The function will also pass the storage and printer object so that
    * taskList can save the data into duke.txt after completion and also print the corresponding
-   * message. Catches undefined and wrong messages exception
+   * message. Catches undefined and wrong messages exception.
+   * Type of commands supported are [bye, list, done, todo, event, deadline, delete, find]
    */
   public void serve() {
 
@@ -67,6 +68,9 @@ public class Bot {
           case ("delete"):
             Integer number = Integer.valueOf(parsedInfo[1]) - 1;
             taskList.deleteListing(number, printer, storage);
+            break;
+          case ("find"):
+            taskList.find(commandDetail);
             break;
           default:
             throw new UndefinedException();
