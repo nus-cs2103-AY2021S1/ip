@@ -3,8 +3,8 @@ package duke.Ui;
 import duke.Tasks.Task;
 
 public class Ui {
-    private final static String longLine = "________________________________________________________________________________";
-    private final static String logo = " ____        _\n"
+    private final static String LONG_LINE = "________________________________________________________________________________";
+    private final static String LOGO = " ____        _\n"
             + "|  _ \\ _   _| | _____\n"
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
@@ -16,19 +16,20 @@ public class Ui {
     }
 
     public static void startMessage(){
-        System.out.println("Hello from\n" + logo);
+        System.out.println("Hello from\n" + LOGO);
         lineFormatter("Hello!!!! I'm duke.Duke\nWhat can I do for you?!?!?!" );
     }
 
     //method to segment every String that is being fed into this method
     public static void lineFormatter (String printable){
-        System.out.println(longLine);
+        System.out.println(LONG_LINE);
         System.out.println(printable);
-        System.out.println(longLine);
+        System.out.println(LONG_LINE);
     }
 
     // standardised goodbye greeting
     public static void byeGreetings () {
+
         lineFormatter("Bye! Hope to see you soon again?!");
     }
 

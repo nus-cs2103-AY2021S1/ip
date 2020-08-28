@@ -4,55 +4,30 @@ import duke.Tasks.Task;
 
 import java.util.ArrayList;
 
-/**
- * A TaskList class creates a taskList object that
- * Adds a Task into the arrayList
- * Returns the size of the ArrayList
- * Returns a Task at a certain index
- * Removes a Task at a certain index
- */
-
 public class TaskList {
 
     private ArrayList<Task> taskList;
 
-    /**
-     * Creates a taskList object that has an ArrayList
-     */
     public TaskList(){
         this.taskList = new ArrayList<>();
     }
 
-    /**
-     * Adds a Task into the ArrayList
-     * @param task
-     */
+    // add tasks to taskList
     public void addTask(Task task){
         taskList.add(task);
     }
 
-    /**
-     * Returns the size of the ArrayList
-     * @return size of ArrayList
-     */
+    // return length of taskList
     public int getSize(){
         return taskList.size();
     }
 
-    /**
-     * Returns Task at the specific Index
-     * @param i
-     * @return Task
-     */
+    //return task from taskList
     public Task getTask(int i){
         return taskList.get(i);
     }
 
-    /**
-     * Removes and Returns Task at the specific Index
-     * @param i
-     * @return Task
-     */
+    //remove task from taskList and return the deleted Task
     public Task removeTask(int i){
         Task deletedTask = taskList.remove(i);
         return deletedTask;

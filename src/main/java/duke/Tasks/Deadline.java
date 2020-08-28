@@ -39,6 +39,7 @@ public class Deadline extends Task {
      * @return date
      */
     public String getDate(){
+
         return this.by;
     }
 

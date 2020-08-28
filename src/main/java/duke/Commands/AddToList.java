@@ -11,9 +11,6 @@ import duke.Tasks.ToDo;
 import duke.Parser.Parser;
 import duke.Ui.Ui;
 
-/**
- * The AddToList method adds to a given TaskList based on the command given
- */
 public class AddToList {
 
     /**
@@ -21,7 +18,7 @@ public class AddToList {
      * @param taskList
      * @param printable
      */
-    public static void added_to_List(TaskList taskList, String printable) throws DukeException {
+    public static void addedToList(TaskList taskList, String printable) throws DukeException {
         Task task = new Task("Do something");
         String[] nameList = printable.split(" ", 2);
         if(Parser.isDeadline(nameList[0].trim().toLowerCase())){

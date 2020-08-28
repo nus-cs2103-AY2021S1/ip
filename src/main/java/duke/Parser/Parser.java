@@ -22,6 +22,7 @@ public class Parser {
      * @return boolean
      */
     public static boolean isBye(String checker) {
+
         return checker.equals(BYE_KEY);
     }
 
@@ -31,6 +32,7 @@ public class Parser {
      * @return boolean
      */
     public static boolean isList(String checker) {
+
         return checker.equals(LIST_KEY);
     }
 
@@ -40,6 +42,7 @@ public class Parser {
      * @return boolean
      */
     public static boolean isComplete(String checker) {
+
         return checker.equals(DONE_KEY);
     }
 
@@ -49,6 +52,7 @@ public class Parser {
      * @return boolean
      */
     public static boolean isToDo(String checker) {
+
         return checker.equals(TODO_KEY);
     }
 
@@ -58,6 +62,7 @@ public class Parser {
      * @return boolean
      */
     public static boolean isDeadline(String checker) {
+
         return checker.equals(DEADLINE_KEY);
     }
 
@@ -85,6 +90,7 @@ public class Parser {
      * @return boolean
      */
     public static boolean isFind(String checker) {
+
         return checker.equals(FIND_KEY);
     }
 
