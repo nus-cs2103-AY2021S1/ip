@@ -73,7 +73,8 @@ public class Ui {
                 sc.close();
                 break;
             } else {
-                parser.manageTask(command);
+                String reply = parser.manageTask(command);
+                System.out.println(reply);
             }
             showLine();
         }

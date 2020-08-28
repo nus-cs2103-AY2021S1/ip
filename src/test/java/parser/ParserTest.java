@@ -1,7 +1,7 @@
 package parser;
 
-import DukeException.DukeException;
 import org.junit.jupiter.api.Test;
+import dukeexception.DukeException;
 import storage.Storage;
 import tasklist.TaskList;
 
@@ -16,7 +16,7 @@ public class ParserTest {
             Storage storage = new Storage("storage_test.txt");
             TaskList tasks = new TaskList(storage);
             Parser parser = new Parser(tasks);
-            parser.handleTodo("todo");
+            String testing = parser.handleTodo("todo");
         } catch (DukeException e) {
             exceptionThrown = true;
         }

@@ -6,7 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.time.format.DateTimeParseException;
 
-import DukeException.DukeException;
+import dukeexception.DukeException;
 import storage.Storage;
 import tasklist.TaskList;
 import tasks.Deadline;
@@ -36,43 +36,49 @@ public class Parser {
     /**
      * Warns the user if they give a number not on their list.
      */
-    protected static void indexOutOfBounds() {
-        System.out.println("Oh no! That number is not on the list! D:");
+    protected static String indexOutOfBounds() {
+        //System.out.println("Oh no! That number is not on the list! D:");
+        return "Oh no! That number is not on the list! D:";
     }
 
     /**
      * Warns the user if they give something other than a number as their description for delete and done.
      */
-    protected static void numberFormat() {
-        System.out.println("Oh no! Type only a number for the description!");
+    protected static String numberFormat() {
+        //System.out.println("Oh no! Type only a number for the description!");
+        return "Oh no! Type only a number for the description!";
     }
 
     /**
      * Reminds the user to write a time for deadline.
      */
-    protected static void deadlineByReminder() {
-        System.out.println("Oh no! Remember to write /by (time) after your task!");
+    protected static String deadlineByReminder() {
+        //System.out.println("Oh no! Remember to write /by (time) after your task!");
+        return "Oh no! Remember to write /by (time) after your task!";
     }
 
     /**
      * Reminds the user to write a time for event.
      */
-    protected static void eventAtReminder() {
-        System.out.println("Oh no! Remember to write /at (time) after your task!");
+    protected static String eventAtReminder() {
+        //System.out.println("Oh no! Remember to write /at (time) after your task!");
+        return "Oh no! Remember to write /at (time) after your task!";
     }
 
     /**
      * Tells the user if there has been an error with the data file.
      */
-    protected static void fileError() {
-        System.out.println("Oops! There's been an error with the data file, please try again!");
+    protected static String fileError() {
+        //System.out.println("Oops! There's been an error with the data file, please try again!");
+        return "Oops! There's been an error with the data file, please try again!";
     }
 
     /**
      * Warns the user if they have given the wrong time format.
      */
-    protected static void incorrectTimeFormat() {
-        System.out.println("Oh no! Please only type in the date in this format: yyyy-mm-dd (eg, 2019-10-15).");
+    protected static String incorrectTimeFormat() {
+        //System.out.println("Oh no! Please only type in the date in this format: yyyy-mm-dd (eg, 2019-10-15).");
+        return "Oh no! Please only type in the date in this format: yyyy-mm-dd (eg, 2019-10-15).";
     }
 
     /**
@@ -80,7 +86,8 @@ public class Parser {
      * @param command the user's input
      * @throws DukeException if the user doesn't give a description for done
      */
-    protected void setDoneTask(String command) throws DukeException {
+    protected String setDoneTask(String command) throws DukeException {
+        String reply = "";
         String[] doneCommand = command.split("\\W+");
         if (doneCommand.length == 1) {
             throw new DukeException("Oh no! This can't be DONE! (The description of done can't be empty!)");
@@ -90,16 +97,20 @@ public class Parser {
                 storage.setDoneLine(index);
                 String doneTask = storage.printLine(index);
                 doneTask = storage.processLine(doneTask);
-                System.out.println("Task marked as done! Good job!");
-                System.out.println(doneTask);
+                //System.out.println("Task marked as done! Good job!");
+                reply += "Task marked as done! Good job!\n";
+                //System.out.println(doneTask);
+                reply += doneTask;
             } catch (IndexOutOfBoundsException e) {
-                indexOutOfBounds();
+                reply = indexOutOfBounds();
             } catch (NumberFormatException e) {
-                numberFormat();
+                reply = numberFormat();
             } catch (FileNotFoundException e) {
-                fileError();
+                reply = fileError();
             } catch (IOException e) {
-                fileError();
+                reply = fileError();
+            } finally {
+                return reply;
             }
         }
     }
@@ -109,7 +120,8 @@ public class Parser {
      * @param command the user's input
      * @throws DukeException if the user doesn't give a description for delete.
      */
-    protected void deleteTask(String command) throws DukeException {
+    protected String deleteTask(String command) throws DukeException {
+        String reply = "";
         String[] deleteCommand = command.split("\\W+");
         if (deleteCommand.length == 1) {
             throw new DukeException("Oh no! You must DELETE this! (The description of delete can't be empty!)");
@@ -120,17 +132,23 @@ public class Parser {
                 deletedTask = storage.processLine(deletedTask);
                 storage.deleteFromFile(index);
 
-                System.out.println("This task has been deleted from the list:");
-                System.out.println(deletedTask);
-                System.out.println("You now have " + storage.getNumOfTasks() + " tasks.");
+                //System.out.println("This task has been deleted from the list:");
+                //System.out.println(deletedTask);
+                //System.out.println("You now have " + storage.getNumOfTasks() + " tasks.");
+
+                reply += "This task has been deleted from the list:\n";
+                reply += deletedTask + "\n";
+                reply += "You now have " + storage.getNumOfTasks() + " tasks.";
             } catch (IndexOutOfBoundsException e) {
-                indexOutOfBounds();
+                reply = indexOutOfBounds();
             } catch (NumberFormatException e) {
-                numberFormat();
+                reply = numberFormat();
             } catch (FileNotFoundException e) {
-                fileError();
+                reply = fileError();
             } catch (IOException e) {
-                fileError();
+                reply = fileError();
+            } finally {
+                return reply;
             }
         }
     }
@@ -140,15 +158,17 @@ public class Parser {
      * @param command the user's input
      * @throws DukeException if the user doesn't give a description for todo
      */
-    protected void handleTodo(String command) throws DukeException {
+    protected String handleTodo(String command) throws DukeException {
+        String reply = "";
         String[] todoCommand = command.split("\\W+");
         if (todoCommand.length == 1) {
             throw new DukeException("Oh no! What are you trying TODO? (The description of todo can't be empty!)");
         } else {
             String taskName = command.substring(command.indexOf("todo") + 5);
             Todo todo = new Todo(taskName);
-            tasks.addToFile(todo);
+            reply = tasks.addToFile(todo);
         }
+        return reply;
     }
 
     /**
@@ -156,7 +176,8 @@ public class Parser {
      * @param command the user's input
      * @throws DukeException if the user doesn't give a description for deadline
      */
-    protected void handleDeadline(String command) throws DukeException {
+    protected String handleDeadline(String command) throws DukeException {
+        String reply = "";
         String[] deadlineCommand = command.split("\\W+");
         if (deadlineCommand.length == 1) {
             throw new DukeException("Oh no! This LINE has made me DEAD! (The description of deadline can't be empty!)");
@@ -166,13 +187,14 @@ public class Parser {
                 taskName = taskName.substring(0, taskName.indexOf("/by") - 1);
                 String by = command.split("/by ")[1];
                 Deadline deadline = new Deadline(taskName, by);
-                tasks.addToFile(deadline);
+                reply = tasks.addToFile(deadline);
             } catch (StringIndexOutOfBoundsException | ArrayIndexOutOfBoundsException e) {
-                deadlineByReminder();
+                reply = deadlineByReminder();
             } catch (DateTimeParseException e) {
-                incorrectTimeFormat();
+                reply = incorrectTimeFormat();
             }
         }
+        return reply;
     }
 
     /**
@@ -180,7 +202,8 @@ public class Parser {
      * @param command the user's input
      * @throws DukeException if the user doesn't give a description for event
      */
-    protected void handleEvent(String command) throws DukeException {
+    protected String handleEvent(String command) throws DukeException {
+        String reply = "";
         String[] eventCommand = command.split("\\W+");
         if (eventCommand.length == 1) {
             throw new DukeException("Oh no! EVENTually you'll get it right! "
@@ -191,13 +214,14 @@ public class Parser {
                 taskName = taskName.substring(0, taskName.indexOf("/at") - 1);
                 String at = command.split("/at ")[1];
                 Event event = new Event(taskName, at);
-                tasks.addToFile(event);
+                reply = tasks.addToFile(event);
             } catch (StringIndexOutOfBoundsException | ArrayIndexOutOfBoundsException e) {
-                eventAtReminder();
+                reply = eventAtReminder();
             } catch (DateTimeParseException e) {
-                incorrectTimeFormat();
+                reply = incorrectTimeFormat();
             }
         }
+        return reply;
     }
 
     /**
@@ -205,59 +229,74 @@ public class Parser {
      * @param command the user's input
      * @throws DukeException if the user doesn't give a description for find
      */
-    public void handleFind(String command) throws DukeException {
+    public String handleFind(String command) throws DukeException {
+        String reply = "";
         String[] findCommand = command.split("\\W+");
         if (findCommand.length == 1) {
             throw new DukeException("Oh no! Did you FIND out your problem? (The description of fine can't be empty!)");
         } else {
             String taskName = command.substring(command.indexOf("find") + 5);
-            System.out.println("Here's what I've found for you:");
-            boolean hasTasks = tasks.findInList(taskName);
-            if (hasTasks) {
-                System.out.println("Hope you found it useful!");
+            //System.out.println("Here's what I've found for you:");
+            reply = "Here's what I've found for you:\n";
+            reply += tasks.findInList(taskName);
+
+            if (!reply.equals("Here's what I've found for you:\n")) {
+                //System.out.println("Hope you found it useful!");
+                reply += "Hope you found it useful!";
             } else {
-                System.out.println("Oh! Looks like there aren't any tasks that has this word!");
+                //System.out.println("Oh! Looks like there aren't any tasks that has this word!");
+                reply += "Oh! Looks like there aren't any tasks that has this word!";
             }
         }
+        return reply;
     }
 
     /**
      * Reads the user's input and manages it according to the input.
      * @param command the input given by the user
      */
-    public void manageTask(String command) {
+    public String manageTask(String command) {
+        String reply = "";
         try {
             String taskType = command.split(" ")[0];
             switch (taskType) {
+            case "bye":
+                reply = "Bye! Let's talk again soon!";
+                break;
             case "list":
-                tasks.readList();
+                reply = tasks.readList();
                 break;
             case "done":
-                setDoneTask(command);
+                reply = setDoneTask(command);
                 tasks.setDoneList(command);
                 break;
             case "delete":
-                deleteTask(command);
+                reply = deleteTask(command);
                 tasks.deleteList(command);
                 break;
             case "todo":
-                handleTodo(command);
+                reply = handleTodo(command);
                 break;
             case "deadline":
-                handleDeadline(command);
+                reply = handleDeadline(command);
                 break;
             case "event":
-                handleEvent(command);
+                reply = handleEvent(command);
                 break;
             case "find":
-                handleFind(command);
+                reply = handleFind(command);
                 break;
             default:
-                System.out.println("Sorry! I don't understand that command. Please try again!");
+                //System.out.println("Sorry! I don't understand that command. Please try again!");
+                reply = "Sorry! I don't understand that command. Please try again!";
                 break;
             }
         } catch (DukeException e) {
-            System.out.println(e.getMessage());
+            //System.out.println(e.getMessage());
+            reply = e.getMessage();
+        }
+        finally {
+            return reply;
         }
     }
 

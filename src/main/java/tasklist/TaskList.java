@@ -72,17 +72,20 @@ public class TaskList {
      * @param keyword the keyword to find in the tasks
      * @return true if there are any tasks that has the keyword
      */
-    public boolean findInList(String keyword) {
-        boolean isMatch = false;
+    public String findInList(String keyword) {
+        //boolean isMatch = false;
+        String reply = "";
         int i = 1;
         for (Task task : tasks) {
             if (containsWord(task.getTaskName(), keyword)) {
-                isMatch = true;
-                System.out.println(i + ". " + task);
+                //isMatch = true;
+                //System.out.println(i + ". " + task);
+                reply += i + ". " + task + "\n";
                 i++;
             }
         }
-        return isMatch;
+        return reply;
+        //return isMatch;
     }
 
     /**
@@ -140,14 +143,19 @@ public class TaskList {
      * Adds a task to the data file and to the task list.
      * @param task the task to be added
      */
-    public void addToFile(Task task) {
+    public String addToFile(Task task) {
+        String reply = "";
         String taskString = processTasks(task);
         storage.saveData(taskString);
         addToList(task);
 
-        System.out.println("New task added!");
-        System.out.println(task);
-        System.out.println("You now have " + getNumList() + " tasks.");
+        //System.out.println("New task added!");
+        //System.out.println(task);
+        //System.out.println("You now have " + getNumList() + " tasks.");
+        reply += "New task added!\n";
+        reply += task + "\n";
+        reply += "You now have " + getNumList() + " tasks.";
+        return reply;
     }
 
     /*public void readList() {
@@ -163,18 +171,24 @@ public class TaskList {
     /**
      * Prints out all the tasks in the task list.
      */
-    public void readList() {
+    public String readList() {
+        String reply = "";
         if (tasks.isEmpty()) {
-            System.out.println("Looks like you don't have any tasks! Go on and add some!");
+            //System.out.println("Looks like you don't have any tasks! Go on and add some!");
+            reply = "Looks like you don't have any tasks! Go on and add some!\n";
         } else {
-            System.out.println("Here's all your tasks to complete:");
+            //System.out.println("Here's all your tasks to complete:");
+            reply += "Here's all your tasks to complete:\n";
             int i = 1;
             for (Task task : tasks) {
-                System.out.println(i + ". " + task);
+                //System.out.println(i + ". " + task);
+                reply += i + ". " + task + "\n";
                 i++;
             }
-            System.out.println("Time to get to work! :D");
+            //System.out.println("Time to get to work! :D");
+            reply += "Time to get to work! :D";
         }
+        return reply;
     }
 
 }
