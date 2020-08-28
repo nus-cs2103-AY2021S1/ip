@@ -30,6 +30,14 @@ class Ui {
         System.out.println(CONVO_START);
     }
 
+    public boolean checkAuth() {
+        return CONTROLLER.checkIsUserPwCached();
+    }
+
+    public void setPw(String pw) {
+        CONTROLLER.savedUserPw(pw);
+    }
+
     /**
      * Stops the Duke application.
      */
@@ -51,9 +59,10 @@ class Ui {
         if (!s.isEmpty() && END.contains(s)) {
             return 0;
         }
+
         String reply = CONTROLLER.parseAndExec(s);
-        // Error encountered
-        if (reply.equals("Error")) {
+
+        if (reply.equals("Error")) {            // Error. However this should not occur
             System.out.println(DIVIDER + reply + "\n" + DIVIDER);
             return -1;
         } else {

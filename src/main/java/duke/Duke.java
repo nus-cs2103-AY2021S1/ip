@@ -20,6 +20,19 @@ public class Duke {
         Ui duke = new Ui();
         duke.start();
         Scanner sc = new Scanner(System.in);
+
+        /* Initial setting of password */
+        while (!duke.checkAuth()) {
+            System.out.println("Please set a user password for auth.");
+            String p1 = sc.nextLine();
+            System.out.println("Please confirm password");
+            String p2 = sc.nextLine();
+            if (p1.trim().equals(p2.trim())) {
+                duke.setPw(p1.trim());
+            }
+        }
+
+        /* Main App Loop */
         int x = 1;
         //Loop until exit command given
         while (x > 0) {
@@ -28,6 +41,9 @@ public class Duke {
             } else {
                 duke.end();
             }
+        }
+        if (x < 0) {
+            System.out.println("Fatal system error uncaught in main logic");
         }
     }
 

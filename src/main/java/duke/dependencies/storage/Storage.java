@@ -1,12 +1,7 @@
 package duke.dependencies.storage;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.IOException;
 
-
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -14,7 +9,7 @@ import java.nio.file.Paths;
 import duke.dependencies.dukeexceptions.MissingListException;
 
 /**
- * Class to handle the reading and writing to files.
+ * Utility lass to handle the reading and writing to files.
  * Data read and written are objects implementating Serializable interface.
  *
  *
@@ -23,21 +18,24 @@ import duke.dependencies.dukeexceptions.MissingListException;
  */
 public class Storage {
 
+    private final Path PW_FILE_PATH;
+    private final Path PW_DIR_PATH;
+
+    /** Paths for saved list. */
     private final Path DIR_PATH;
     private final Path FILE_PATH;
 
     private boolean isFilePresent;
 
     /**
-     * Constructor for the
-     * @param cwd Current working directory of Duke.
-     * @param dir Directory name of the save file.
-     * @param fileName Name of save file.
+     * Constructor for the storage class to read and write to files.
      */
-    public Storage(String cwd, String dir, String fileName) {
-        DIR_PATH = Paths.get(cwd, dir);
-        FILE_PATH = DIR_PATH.resolve(fileName);
+    public Storage() {
+        DIR_PATH = Paths.get(".", "data");
+        FILE_PATH = DIR_PATH.resolve("taskdata.txt");
         isFilePresent = Files.exists(FILE_PATH);
+        PW_DIR_PATH = Paths.get(".", "cache");
+        PW_FILE_PATH = PW_DIR_PATH.resolve("pw.dat");
     }
 
     /**
@@ -45,30 +43,25 @@ public class Storage {
      *
      * @return True if the file is present, else otherwise.
      */
-    public boolean isFilePresent() {
+    public boolean isSavedFilePresent() {
         return isFilePresent;
     }
 
+    /**
+     * Instantiates a .txt file in /data directory to save task list of user. Does nothing if the file is present.
+     */
     public void instantiateFile() {
         assert !isFilePresent;
         try {
             if (Files.exists(DIR_PATH)) {
-//                System.out.println("Dir exist");
                 if (Files.exists(FILE_PATH)) {
-//                    System.out.println("File exists");
                 } else {
                     Files.createFile(FILE_PATH);
-//                    System.out.println("File created");
                 }
                 System.out.println("Clean slate: Initialising cache...");
             } else {
-                // Directory and storage file not present
-//                System.out.println("Creating Dir");
                 Files.createDirectory(DIR_PATH);
-//                System.out.println("Dir created");
-//                System.out.println("Creating file");
                 Files.createFile(FILE_PATH);
-//                System.out.println("File created");
                 System.out.println("Clean slate: Initialising cache...");
 
             }
@@ -78,6 +71,7 @@ public class Storage {
             System.out.println("Unexpected error occurred while trying to create a file to save your data.");
         }
     }
+
 
     /**
      * Saves the given object. Overwrites the file.
@@ -91,7 +85,6 @@ public class Storage {
             ObjectOutputStream oos = new ObjectOutputStream(fos);
             oos.writeObject(t);
             oos.close();
-//            System.out.println("Successfully saved your data.");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -111,9 +104,67 @@ public class Storage {
             ObjectInputStream ois = new ObjectInputStream(fis);
             return (T) ois.readObject();
         } catch (Exception e) {
-//            e.getStackTrace();
             throw new MissingListException("Error: Unable to load your saved list");
         }
     }
+
+    public boolean checkUserAuth(String pw) {
+        return pw.equals(readUserPw());
+    }
+
+    public String readUserPw() {
+        try {
+            DataInputStream dis = new DataInputStream(new FileInputStream(PW_FILE_PATH.toString()));
+            String r = dis.readUTF();
+            dis.close();
+            return r;
+        } catch (IOException e) {
+            return "";
+        }
+    }
+
+    public void instantiatePwFile() {
+        try {
+            if (Files.exists(PW_DIR_PATH)) {
+                if (Files.exists(PW_FILE_PATH)) {
+                } else {
+                    Files.createFile(PW_FILE_PATH);;
+                }
+                System.out.println("Clean slate: Initialising cache...");
+            } else {
+                Files.createDirectory(PW_DIR_PATH);
+                Files.createFile(PW_FILE_PATH);
+                System.out.println("Clean slate: Initialising cache...");
+
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+//            System.out.println("Unexpected error occurred while trying to create a file to save your data.");
+        }
+    }
+
+    public void saveUserPw(String pw) {
+        if (!checkPwCache()) {
+            instantiatePwFile();
+        }
+        try {
+            DataOutputStream dos = new DataOutputStream(new FileOutputStream(PW_FILE_PATH.toString()));
+            dos.writeUTF(pw);
+            dos.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public boolean checkPwCache() {
+        try {
+            DataInputStream dis = new DataInputStream(new FileInputStream(PW_FILE_PATH.toString()));
+            dis.close();
+            return true;
+        } catch (IOException e) {
+            return false;
+        }
+    }
+
 
 }

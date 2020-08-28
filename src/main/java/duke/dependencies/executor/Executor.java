@@ -3,9 +3,12 @@ package duke.dependencies.executor;
 
 import duke.dependencies.executable.CommandType;
 import duke.dependencies.executable.Executable;
+import duke.dependencies.storage.Storage;
 import duke.dependencies.storage.TaskList;
 import duke.dependencies.task.Task;
 
+
+import java.util.function.BooleanSupplier;
 
 import static duke.dependencies.executable.CommandType.*;
 
@@ -16,7 +19,9 @@ import static duke.dependencies.executable.CommandType.*;
  */
 public class Executor {
 
-    private static final TaskList storage = TaskList.initStorage();
+    private static final TaskList TASK_LIST = TaskList.initStorage();
+
+    private static final Storage STORAGE = new Storage();
 
     /* Half-assed attempt at concurrency lock.
     There should be no need for concurrency
@@ -73,15 +78,15 @@ public class Executor {
     }
 
     public int getNumOfCompletedTasks() {
-        return storage.getNumOfCompleted();
+        return TASK_LIST.getNumOfCompleted();
     }
 
     public int getNumOfIncompleteTasks() {
-        return storage.getNumOfIncomplete();
+        return TASK_LIST.getNumOfIncomplete();
     }
 
     public int getListSize() {
-        return storage.getListSize();
+        return TASK_LIST.getListSize();
     }
 
 
@@ -94,7 +99,7 @@ public class Executor {
         // Block scoped the variable declaration in the cases.
         switch(commandState) {
             case LIST: {
-                return storage.getTodosInList();
+                return TASK_LIST.getTodosInList();
             }
             case DONE: {
                 // Done command would have a task of "1 2 3 4"
@@ -103,19 +108,19 @@ public class Executor {
                 for (int i = 0; i < nums.length; i++) {
                     arr[i] = Integer.valueOf(nums[i]);
                 }
-                return storage.done(arr);
+                return TASK_LIST.done(arr);
             }
             case DELETE: {
                 String nums = e.getTask().showTaskDescription();
-                return storage.deleteTask(Integer.valueOf(nums));
+                return TASK_LIST.deleteTask(Integer.valueOf(nums));
             }
             case FIND: {
                 String keyword = e.getTask().showTaskDescription();
-                return storage.findMatching(keyword);
+                return TASK_LIST.findMatching(keyword);
             }
             case ADD: {
                 Task t = e.getTask();
-                return storage.add(t);
+                return TASK_LIST.add(t);
             }
             default: {
                 return "Error";

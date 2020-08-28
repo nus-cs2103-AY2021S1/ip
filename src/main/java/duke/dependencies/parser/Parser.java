@@ -68,12 +68,12 @@ class Parser {
         Executable e;
 
         /* LIST COMMAND */
-        if (s.contains("list") || s.contains("List")) {
+        if (checkForWord(s, "list")) {
             e = Command.createListCommand(null);
         }
         /* DONE COMMAND */
         else if (checkForWord(s, "done")) {
-            String task = cutOutTheWord(s, "done");
+            String task = cutOutTheWord(s, "done ");
             if (task.isBlank() || task.isEmpty()) {
                 throw new EmptyTaskException("Error: Done task cannot be empty");
             }
@@ -83,7 +83,7 @@ class Parser {
         }
         /* TODO_COMMAND */
         else if (checkForWord(s, "todo")) {
-            String task = cutOutTheWord(s, "todo");
+            String task = cutOutTheWord(s, "todo ");
             Task t = Task.createTodo(task);
             if (task.isEmpty() || task.isBlank()) {
                 throw new EmptyTaskException("Error: Todo task cannot be empty");
@@ -93,7 +93,7 @@ class Parser {
         }
         /* EVENT COMMAND */
         else if (checkForWord(s, "event")) {
-            String task = cutOutTheWord(s, "event");
+            String task = cutOutTheWord(s, "event ");
             if (task.isBlank() || task.isEmpty()) {
                 throw new EmptyTaskException("Error: Event task cannot be empty");
             }
@@ -107,7 +107,7 @@ class Parser {
         }
         /* DEADLINE COMMAND */
         else  if (checkForWord(s, "deadline")) {
-            String task = cutOutTheWord(s, "deadline");
+            String task = cutOutTheWord(s, "deadline ");
             if (task.isEmpty() || task.isBlank()) {
                 throw new EmptyTaskException("Error: Deadline tasks cannot be empty");
             }
@@ -121,7 +121,7 @@ class Parser {
         }
         /* DELETE COMMAND */
         else if (checkForWord(s, "delete")) {
-            String task = cutOutTheWord(s, "delete");
+            String task = cutOutTheWord(s, "delete ");
             if (task.isEmpty() || task.isBlank()) {
                 throw new EmptyTaskException("Error: Task to be deleted cannot be empty");
             }
@@ -130,8 +130,8 @@ class Parser {
 
         }
         /* FIND COMMAND */
-        else if (s.contains("find")) {
-            String task = cutOutTheWord(s,"find");
+        else if (checkForWord(s, "find")) {
+            String task = cutOutTheWord(s,"find ");
             if (task.isEmpty() || task.isBlank()) {
                 throw new EmptyTaskException("Error: Empty field for find: keyword");
             }

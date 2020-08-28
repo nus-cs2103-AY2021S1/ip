@@ -3,6 +3,7 @@ package duke.dependencies.parser;
 import duke.dependencies.dukeexceptions.*;
 import duke.dependencies.executable.Executable;
 import duke.dependencies.executor.Executor;
+import duke.dependencies.storage.Storage;
 
 
 /**
@@ -14,12 +15,13 @@ public class Controller {
     /**
      * Object for executing the commands.
      */
-    private static final Executor executor = Executor.initExecutor();
+    private final Executor exe;
 
     /**
      * Private constructor for a Parser object.
      */
     private Controller() {
+        exe = Executor.initExecutor();
     }
 
     /**
@@ -30,6 +32,22 @@ public class Controller {
     public static Controller initController() {
         return new Controller();
     }
+
+    /**
+     * Returns a boolean to check if the user has a cached password.
+     *
+     * @return True if the user has already saved a password for Duke.
+     */
+    public boolean checkIsUserPwCached() {
+        Storage s = new Storage();
+        return s.checkPwCache();
+    }
+
+    public void savedUserPw(String pw) {
+        Storage s = new Storage();
+        s.saveUserPw(pw);
+    }
+
 
     /**
      * Parses given command and determines if it is a valid command,
@@ -66,7 +84,7 @@ public class Controller {
 
         String reply;
 
-        reply = executor.receiveAndExec(e);
+        reply = exe.receiveAndExec(e);
 
         switch (e.getType()) {
             case LIST:
@@ -77,13 +95,13 @@ public class Controller {
                                 "Keep up the good work and continue to stay motivated.\n" +
                                 "You've only got %d task left to be completed!",
                         reply,
-                        executor.getNumOfIncompleteTasks());
+                        exe.getNumOfIncompleteTasks());
 
             case DELETE:
                 return String.format("Noted. I've removed this task:\n%s\n" +
                                 "Now you have %d tasks left in the list.",
                         reply,
-                        executor.getListSize());
+                        exe.getListSize());
 
             case FIND:
                 return String.format("Here are the tasks matching: %s\n" +
@@ -93,7 +111,7 @@ public class Controller {
                 return String.format("Got it! I have added the task:\n%s\n"
                                 + "Now you have %s tasks in the list.",
                         reply,
-                        executor.getListSize());
+                        exe.getListSize());
 
             default:
                 return "Something is not right. This should not be printed. Error in Controller.java";

@@ -21,13 +21,13 @@ public class TaskList {
 
     /** Private constructor */
     private TaskList() {
-        l = new Storage(".", "data", "taskdata.txt");
+        l = new Storage();
 
         // Checks if there are any save files of todoList.
         // If there is, attempt to read the object as arraylist.
         // If there is none, instantiates the file.
         // And assigns the todolist to a new arraylist.
-        if (l.isFilePresent()) {
+        if (l.isSavedFilePresent()) {
             try {
                 todoList = l.openAndReadObject();
             } catch (MissingListException e) {
@@ -68,9 +68,9 @@ public class TaskList {
             if (i != todoList.size() - 1) {
                 sb.append("\n");
             }
-            if (i == todoList.size() - 1) {
-                sb.append("\nSo stop procrastinating!");
-            }
+//            if (i == todoList.size() - 1) {
+//                sb.append("\nSo stop procrastinating!");
+//            }
         }
         if (todoList.size() == 0) {
             sb.append("Oops!!! Theres's nothing here!\n")
