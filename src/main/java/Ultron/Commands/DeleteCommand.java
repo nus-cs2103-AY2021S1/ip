@@ -36,11 +36,11 @@ public final class DeleteCommand extends Command {
         int index = Parser.parseInteger(this.getArguments());
 
         //Check if the index is out of range
-        if (index <= 0 || index >= taskList.size()) {
+        if (index < 0 || index >= taskList.size()) {
 
             //Throw an Ultron exception if it is out of range
             throw new UltronException("delete",
-                    Integer.toString(index + 1),
+                    Integer.toString(index+1),
                     ExceptionType.INVALID_ARGUMENT);
         }
 
