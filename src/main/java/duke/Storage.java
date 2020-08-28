@@ -10,6 +10,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Represents a storage object to handle read and write.
+ * @author Tee Kok Siang
+ */
 public class Storage {
     private static final String FILE_DIR = System.getProperty("user.dir") + "/";
 

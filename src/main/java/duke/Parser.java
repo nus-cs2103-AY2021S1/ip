@@ -9,6 +9,10 @@ import duke.task.Todo;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Represents a parser for parsing the command.
+ * @author Tee Kok Siang
+ */
 public class Parser {
     private static String combineWords(List<String> words) {
         StringBuilder message = new StringBuilder();

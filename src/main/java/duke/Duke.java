@@ -3,6 +3,10 @@ package duke;
 import duke.*;
 import duke.command.Command;
 
+/**
+ * Represents a Duke executable program.
+ * @author Tee Kok Siang
+ */
 public class Duke {
     private Storage storage;
     private TaskList tasks;
@@ -27,7 +31,6 @@ public class Duke {
                 ui.showError(e.getMessage());
             }
         }
-        ui.showBye();
     }
 
     public static void main(String[] args) {

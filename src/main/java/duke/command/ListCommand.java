@@ -7,7 +7,19 @@ import duke.task.Task;
 
 import java.util.List;
 
+/**
+ * Represents a list task command.
+ * @author Tee Kok Siang
+ */
 public class ListCommand extends Command{
+    /**
+     * Executes a ListCommand to list all the tasks.
+     * Display the tasks.
+     *
+     * @param taskList List of tasks.
+     * @param ui UI to handle user interaction.
+     * @param storage Storage to save the task list in the hard disk.
+     */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         List<Task> tasks = taskList.getTasks();

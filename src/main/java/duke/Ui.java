@@ -2,6 +2,10 @@ package duke;
 
 import java.util.Scanner;
 
+/**
+ * Represents a UI to handle user interaction.
+ * @author Tee Kok Siang
+ */
 public class Ui {
     private static final String DIVIDER = "\n\t-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-\n";
     private final Scanner scanner = new Scanner(System.in);
