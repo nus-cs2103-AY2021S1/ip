@@ -20,6 +20,7 @@ public class TaskList {
 
     /**
      * Constructor for a TaskList object with an existing list.
+     *
      * @param list An arraylist which is used to store Tasks.
      */
     public TaskList(ArrayList<Task> list) {

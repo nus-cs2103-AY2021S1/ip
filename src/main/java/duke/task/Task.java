@@ -22,7 +22,7 @@ public abstract class Task {
      * Changes the completion status of the task to done.
      */
     public void done() {
-        this.isDone = true;
+        isDone = true;
     }
 
     /**
@@ -31,7 +31,7 @@ public abstract class Task {
      * @return A String which represents the name of the task.
      */
     public String getName() {
-        return this.name;
+        return name;
     }
 
     /**
@@ -40,7 +40,7 @@ public abstract class Task {
      * @return A boolean which is true if the task is done, false otherwise.
      */
     public boolean getIsDone() {
-        return this.isDone;
+        return isDone;
     }
 
     /**
@@ -51,10 +51,10 @@ public abstract class Task {
      */
     @Override
     public String toString() {
-        if (this.isDone) {
-            return "[\u2713] " + this.name;
+        if (isDone) {
+            return "[\u2713] " + name;
         } else {
-            return "[\u2718] " + this.name;
+            return "[\u2718] " + name;
         }
     }
 }

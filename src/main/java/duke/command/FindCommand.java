@@ -18,7 +18,7 @@ public class FindCommand extends Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         ArrayList<Task> list = new ArrayList<>();
         for (Task task : tasks.getList()) {
-            if (task.getName().contains(this.keyword)) {
+            if (task.getName().contains(keyword)) {
                 list.add(task);
             }
         }

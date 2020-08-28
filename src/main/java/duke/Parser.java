@@ -1,6 +1,14 @@
 package duke;
 
-import duke.command.*;
+import duke.command.Command;
+import duke.command.AddCommand;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.ExitCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
+import duke.command.NoCommand;
+
 import duke.task.TaskType;
 
 /**
@@ -46,7 +54,7 @@ public class Parser {
             String item = input.substring(7).trim();
             return new DeleteCommand(item);
         } else if (input.startsWith("find ") || input.equals("find")) {
-            if (input.length() < 6 || input.substring(5).trim().isEmpty()) {
+            if (isEmpty(input, 5)) {
                 throw new DukeException("Which task do you want to find?");
             }
             String keyword = input.substring(5).trim();
@@ -56,7 +64,7 @@ public class Parser {
                 throw new DukeException("The description of a todo cannot be empty.");
             }
             String name = input.substring(5).trim();
-            return new AddCommand(TaskType.TODO, name);
+            return new AddCommand(TaskType.TODO, name, "");
         } else if (input.startsWith("deadline ") || input.equals("deadline")) {
             if (isEmpty(input, 9)) {
                 throw new DukeException("The description of a deadline cannot be empty.");

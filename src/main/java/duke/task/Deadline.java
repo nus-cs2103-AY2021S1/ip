@@ -27,7 +27,7 @@ public class Deadline extends Task {
      * @return A LocalDate which represents the deadline of the task.
      */
     public LocalDate getBy() {
-        return this.by;
+        return by;
     }
 
     /**
