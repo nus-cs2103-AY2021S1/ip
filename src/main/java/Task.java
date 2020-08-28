@@ -2,12 +2,12 @@
  * Encapsulates a task for the user
  */
 public class Task {
-    private Boolean done;
+    private Boolean isDone;
     private String taskName;
     private TaskType type;
 
     public Task(String taskName, TaskType type) {
-        this.done = false;
+        this.isDone = false;
         this.taskName = taskName;
         this.type = type;
     }
@@ -16,7 +16,7 @@ public class Task {
      * Marks current task as done.
      */
     public void markAsDone() {
-        this.done = true;
+        this.isDone = true;
     }
 
     /**
@@ -24,7 +24,7 @@ public class Task {
      * @return a String symbol representing the completion of the task
      */
     public String getTaskStatusIcon() {
-        return (done ? "\u2713" : "\u2718");
+        return (isDone ? "\u2713" : "\u2718");
     }
 
     /**

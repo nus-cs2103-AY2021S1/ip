@@ -13,8 +13,8 @@ public class AddCommand extends Command{
     @Override
     public void execute(Ui ui, Storage storage) {
         TaskList.addToList(myTask);
-        storage.save(TaskList.toDoList);
+        storage.save(TaskList.TO_DO_LIST);
         ui.printFormat(myTask.toString());
-        ui.printNumberOfTasks(TaskList.toDoList.size());
+        ui.printNumberOfTasks(TaskList.TO_DO_LIST.size());
     }
 }

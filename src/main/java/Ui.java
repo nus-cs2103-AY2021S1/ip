@@ -110,7 +110,7 @@ public class Ui {
     }
 
     public void removePrint(int taskId) {
-        Task tr = TaskList.toDoList.get(taskId - 1);
+        Task tr = TaskList.TO_DO_LIST.get(taskId - 1);
         System.out.println("Task successfully removed!");
         System.out.println("-> " + tr.toString());
     }

@@ -9,6 +9,7 @@ import java.util.List;
  * Object to enable permanent storing of task list onto hard drive.
  */
 public class Storage {
+    
     private String filePath;
 
     public Storage(String filePath) {

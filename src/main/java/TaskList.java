@@ -5,7 +5,7 @@ import java.util.List;
  * Encapsulates a list of tasks
  */
 public class TaskList {
-    protected static List<Task> toDoList = new ArrayList<>();
+    protected static List<Task> TO_DO_LIST = new ArrayList<>();
     /*public TaskList() {
         this.toDoList = new ArrayList<>();
     }*/
@@ -15,7 +15,7 @@ public class TaskList {
      * @param task given task
      */
     public static void addToList(Task task) {
-        toDoList.add(task);
+        TO_DO_LIST.add(task);
     }
 
     /**
@@ -23,7 +23,7 @@ public class TaskList {
      * @param taskId given task ID
      */
     public static void removeFromList(int taskId) {
-        toDoList.remove(taskId - 1);
+        TO_DO_LIST.remove(taskId - 1);
     }
 
     /**
