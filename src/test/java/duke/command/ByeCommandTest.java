@@ -4,8 +4,7 @@ import duke.component.Storage;
 import duke.component.StorageStub;
 import duke.component.TaskList;
 import duke.component.Ui;
-
-import org.testng.annotations.Test;
+import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
