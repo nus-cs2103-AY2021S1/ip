@@ -1,3 +1,5 @@
+package duke;
+
 /**
  * Class representing tasks to be done
  */

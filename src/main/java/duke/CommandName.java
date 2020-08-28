@@ -1,3 +1,5 @@
+package duke;
+
 /**
  * Enumeration of all valid commands by user.
  */

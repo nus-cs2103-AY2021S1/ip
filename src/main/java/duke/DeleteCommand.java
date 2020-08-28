@@ -1,20 +1,21 @@
+package duke;
+
 import java.util.ArrayList;
 
 /**
- * Controls logic of completing tasks.
+ * Controls logic of deleting tasks.
  */
-public class DoneCommand extends Command {
+public class DeleteCommand extends Command {
 
-    /** Index of task to be done. */
+    /** Index to delete task. */
     private int index;
 
-    public DoneCommand(int index) {
+    public DeleteCommand(int index) {
         this.index = index;
     }
 
-
     /**
-     * Executes completing tasks.
+     * Executes deleting of tasks.
      *
      * @param tasks Stores task list.
      * @param ui Handles user interaction.
@@ -23,7 +24,7 @@ public class DoneCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        String output = tasks.doTask(index);
+        String output = tasks.deleteTask(index);
         ArrayList<Task> taskList = tasks.getTasks();
         ui.printOutput(output, true);
         storage.save(taskList);

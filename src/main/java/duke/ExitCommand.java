@@ -1,3 +1,5 @@
+package duke;
+
 /**
  * Controls logic of exiting program.
  */

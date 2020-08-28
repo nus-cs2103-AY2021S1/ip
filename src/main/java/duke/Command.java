@@ -1,3 +1,5 @@
+package duke;
+
 /**
  * Controls main logic of all user commands.
  */

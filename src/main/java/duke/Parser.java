@@ -1,3 +1,5 @@
+package duke;
+
 /**
  * Class used for parsing input from user command.
  */

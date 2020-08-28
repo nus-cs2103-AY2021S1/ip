@@ -1,3 +1,5 @@
+package duke;
+
 /**
  * Main class that drives the application.
  */
