@@ -26,6 +26,6 @@ public class Deadline extends Task{
     public String toString() {
         return "[D] " + super.toString() + " (" + preposition + ": " +
                 date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " " +
-        time.format(DateTimeFormatter.ofPattern("HH:mm")) + ")";
+                time.format(DateTimeFormatter.ofPattern("HH:mm")) + ")";
     }
 }
