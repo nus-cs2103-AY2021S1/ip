@@ -25,6 +25,10 @@ public class Storage {
      * @throws IOException
      */
     public List<Task> load() throws IOException {
+        String directory = this.filePath;
+        String[] splitDirectory = directory.split("/");
+        File file = new File(splitDirectory[0]);
+        file.mkdir(); // create the directory if it not existed
         File f = new File(this.filePath);
         LinkedList<Task> result = new LinkedList<>();
         if(f.exists()) {
@@ -75,7 +79,7 @@ public class Storage {
      * @throws IOException
      */
     public void saveFile(TaskList task) throws IOException {
-        FileWriter fw = new FileWriter("data/duke.txt");
+        FileWriter fw = new FileWriter(this.filePath);
         List<Task> currentList = task.getTaskList();
         int len = currentList.size();
         for (int i = 0; i < len;i++) {
