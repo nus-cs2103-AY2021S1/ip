@@ -5,6 +5,10 @@ import dd.storage.DataStorage;
 import dd.tasks.TaskList;
 import dd.ui.Ui;
 
+/**
+ * A delete command with a particular user input modifies the task list
+ * in the system by deleting the specified task.
+ */
 public class DeleteCommand extends Command {
 
     /**

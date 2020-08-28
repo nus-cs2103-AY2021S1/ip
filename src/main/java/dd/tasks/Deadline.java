@@ -1,5 +1,8 @@
 package dd.tasks;
 
+/**
+ * A deadline task with a specific due date or date and time.
+ */
 public class Deadline extends Task {
 
     protected String by;

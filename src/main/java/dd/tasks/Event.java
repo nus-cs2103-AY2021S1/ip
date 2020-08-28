@@ -1,5 +1,8 @@
 package dd.tasks;
 
+/**
+ * An event task occurring on a specific date or date and time.
+ */
 public class Event extends Task {
 
     protected String at;

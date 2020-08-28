@@ -4,6 +4,10 @@ import dd.tasks.Task;
 
 import java.util.Scanner;
 
+/**
+ * A Ui deals with interaction with the user and prints out
+ * appropriate statements.
+ */
 public class Ui {
 
     private final Scanner sc = new Scanner(System.in);

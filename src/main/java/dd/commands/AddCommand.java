@@ -9,6 +9,10 @@ import dd.tasks.TaskList;
 import dd.tasks.Todo;
 import dd.ui.Ui;
 
+/**
+ * An add command of a certain type and user input modifies
+ * the task list in the system by adding new tasks.
+ */
 public class AddCommand extends Command {
 
     private DateTimeHandler dth;

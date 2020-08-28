@@ -11,6 +11,10 @@ import java.time.format.DateTimeFormatterBuilder;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
+/**
+ * A date time handler checks if a date input given is valid and
+ * parses them according to the given format.
+ */
 public class DateTimeHandler {
 
     /**

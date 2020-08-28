@@ -9,6 +9,9 @@ import dd.ui.Ui;
 
 import java.io.IOException;
 
+/**
+ * The main Duke class to create and manage a task list.
+ */
 public class Duke {
 
     private DataStorage ds;
@@ -30,6 +33,10 @@ public class Duke {
         }
     }
 
+    /**
+     * Takes in user input, parses into a command and executes
+     * the next command till an exit command is given.
+     */
     private void run() {
         ui.greeting();
 

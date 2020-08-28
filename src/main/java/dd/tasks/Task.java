@@ -1,5 +1,8 @@
 package dd.tasks;
 
+/**
+ * A task stored in the task list.
+ */
 public class Task {
     protected String description;
     protected boolean isDone;

@@ -1,5 +1,8 @@
 package dd.tasks;
 
+/**
+ * A to-do task.
+ */
 public class Todo extends Task {
 
     /**

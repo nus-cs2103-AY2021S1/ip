@@ -5,6 +5,10 @@ import dd.storage.DataStorage;
 import dd.tasks.TaskList;
 import dd.ui.Ui;
 
+/**
+ * A command with a certain type and user input modifies
+ * the task list stored in the system.
+ */
 public abstract class Command {
     protected String command;
     protected String item;

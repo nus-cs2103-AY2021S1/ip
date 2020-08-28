@@ -9,6 +9,10 @@ import dd.ui.Ui;
 
 import java.util.ArrayList;
 
+/**
+ * A list command of a certain type and user input goes through the current
+ * task list in the system and displays the list of tasks requested.
+ */
 public class ListCommand extends Command {
 
     private DateTimeHandler dth;

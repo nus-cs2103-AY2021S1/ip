@@ -9,6 +9,11 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * A data storage loads the data from an existing file, if any,
+ * into the system when it starts and saves the data
+ * into the file when the system exits.
+ */
 public class DataStorage {
 
     private Ui ui = new Ui();

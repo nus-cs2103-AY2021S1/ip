@@ -1,5 +1,8 @@
 package dd.exception;
 
+/**
+ * A Duke exception thrown when an exception specifically to the Duke system occurs.
+ */
 public class DukeException extends Exception {
 
     private String message;

@@ -5,6 +5,10 @@ import dd.storage.DataStorage;
 import dd.tasks.TaskList;
 import dd.ui.Ui;
 
+/**
+ * An exit command prints out a exit greeting and
+ * saves the task list data into a file.
+ */
 public class ExitCommand extends Command {
 
     /**

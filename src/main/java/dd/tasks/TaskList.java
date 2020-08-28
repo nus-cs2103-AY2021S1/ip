@@ -5,6 +5,9 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * A task list contains tasks in an array list.
+ */
 public class TaskList {
     private final ArrayList<Task> taskList;
 

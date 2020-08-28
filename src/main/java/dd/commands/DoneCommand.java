@@ -5,6 +5,10 @@ import dd.storage.DataStorage;
 import dd.tasks.TaskList;
 import dd.ui.Ui;
 
+/**
+ * A done command with a particular user input modifies the task list
+ * in the system by marking the specified task as done.
+ */
 public class DoneCommand extends Command {
 
     /**

@@ -4,6 +4,10 @@ import dd.commands.*;
 import dd.exception.DukeException;
 import dd.ui.Ui;
 
+/**
+ * A parser makes sense of the user input and
+ * executes the next appropriate command.
+ */
 public class Parser {
 
     /**
