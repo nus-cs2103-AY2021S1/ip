@@ -101,6 +101,8 @@ public class Duke {
                 } catch (ArrayIndexOutOfBoundsException | InvalidEventException ex) {
                     System.out.println(ex + ". ☹ The description of an event cannot be empty.");
                 }
+            } else {
+                ui.printList(tl.findTask(tasks, splitted[1]));
             }
         }
     }

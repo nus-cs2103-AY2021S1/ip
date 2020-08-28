@@ -22,7 +22,8 @@ public class Parser {
                 !cmd.equals(Commands.DONE) &&
                 !cmd.equals(Commands.LIST) &&
                 !cmd.equals(Commands.TODO) &&
-                !cmd.equals(Commands.DELETE)) {
+                !cmd.equals(Commands.DELETE) &&
+                !cmd.equals((Commands.FIND))) {
             throw new UnknownCommandException();
         }
         return cmd;

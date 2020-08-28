@@ -100,4 +100,14 @@ public class TaskList {
         list.set(index, list.get(index).completeTask());
         Ui.printDone(list, index);
     }
+
+    public ArrayList<Task> findTask(ArrayList<Task> list, String query) {
+        ArrayList<Task> suitableTasks = new ArrayList<>();
+        list.forEach(x -> {
+            if (x.getDescription().contains(query)) {
+                suitableTasks.add(x);
+            }
+        });
+        return suitableTasks;
+    }
 }
