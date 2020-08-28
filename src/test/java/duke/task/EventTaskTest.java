@@ -74,7 +74,7 @@ public class EventTaskTest {
     @Test
     public void contains_correctKeyword_true() {
         try {
-            assertTrue(new EventTask("test", "2020-08-22").contains("test"));
+            assertTrue(new EventTask("test", "2020-08-22").contains(new String[]{"test"}));
         } catch (DukeException e) {
             fail();
         }
@@ -83,7 +83,7 @@ public class EventTaskTest {
     @Test
     public void contains_wrongKeyword_false() {
         try {
-            assertFalse(new EventTask("test", "2020-08-22").contains("wrong"));
+            assertFalse(new EventTask("test", "2020-08-22").contains(new String[]{"wrong"}));
         } catch (DukeException e) {
             fail();
         }

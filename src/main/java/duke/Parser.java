@@ -35,7 +35,7 @@ public class Parser {
     public static Command parseInput(String input) throws DukeException {
         validateNotEmpty(input);
 
-        String[] segments = input.split(" ");
+        String[] segments = input.split(" ", 2);
         String cmd = segments[0].trim();
 
         // CHECK FOR NON-TASKS-RELATED COMMANDS
@@ -52,7 +52,10 @@ public class Parser {
             case "delete":
                 return new DeleteCommand(Integer.parseInt(segments[1].trim()));
             case "find":
-                return new FindCommand(segments[1].trim());
+                if (segments[1].length() == 0) {
+                    throw new IndexOutOfBoundsException();
+                }
+                return new FindCommand(segments[1].trim().split(" "));
             case "todo":
             case "deadline":
             case "event":

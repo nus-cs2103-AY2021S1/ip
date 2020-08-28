@@ -11,15 +11,15 @@ import duke.Ui;
  */
 public class FindCommand implements Command {
 
-    private final String keyword;
+    private final String[] keywords;
 
     /**
      * Initializes a FindCommand.
      *
-     * @param keyword The search keyword.
+     * @param keywords The search keywords.
      */
-    public FindCommand(String keyword) {
-        this.keyword = keyword;
+    public FindCommand(String ...keywords) {
+        this.keywords = keywords;
     }
 
     /**
@@ -31,7 +31,7 @@ public class FindCommand implements Command {
      */
     @Override
     public void execute(Ui ui, Storage storage, TaskList tasks) {
-        ArrayList<String> findTasksRepr = tasks.find(keyword);
+        ArrayList<String> findTasksRepr = tasks.find(keywords);
         ui.printWithWrapper(findTasksRepr, true, false);
     }
 }

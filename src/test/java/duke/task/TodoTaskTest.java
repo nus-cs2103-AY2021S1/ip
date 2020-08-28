@@ -42,11 +42,11 @@ public class TodoTaskTest {
 
     @Test
     public void contains_correctKeyword_true() {
-        assertTrue(new TodoTask("test").contains("test"));
+        assertTrue(new TodoTask("test").contains(new String[]{"test"}));
     }
 
     @Test
     public void contains_wrongKeyword_false() {
-        assertFalse(new TodoTask("test").contains("wrong"));
+        assertFalse(new TodoTask("test").contains(new String[]{"wrong"}));
     }
 }

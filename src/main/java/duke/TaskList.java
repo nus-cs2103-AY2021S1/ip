@@ -72,11 +72,11 @@ public class TaskList {
     /**
      * Finds tasks that matches the search keyword.
      *
-     * @param keyword The search keyword.
+     * @param keywords The search keyword.
      * @return An ArrayList of string representations of tasks that match the keyword.
      */
-    public ArrayList<String> find(String keyword) {
-        return mapToRepr(filterTasks(taskStore, task -> task.contains(keyword)), Task::toString);
+    public ArrayList<String> find(String[] keywords) {
+        return mapToRepr(filterTasks(taskStore, task -> task.contains(keywords)), Task::toString);
     }
 
     /**
