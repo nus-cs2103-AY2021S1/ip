@@ -8,6 +8,8 @@ public enum Commands {
     DONE("\n      done _task_number_"),
     DELETE("\n      delete _task_number_"),
     BYE("\n      bye"),
+    FINDTYPE("\n      findtype _T/D/E_"),
+    FIND("\n      find _keyword_"),
     SCHEDULED("\n      scheduled dd/mm/yyyy");
 
     private String usage;

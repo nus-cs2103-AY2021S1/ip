@@ -9,7 +9,7 @@ public class TimedTask extends Task {
     private final String tag;
 
     public TimedTask (String description, String time, String tag) {
-        super(description);
+        super(description, tag);
         String dt = "";
         if (time.indexOf(' ') > 0) {
             dt = time.substring(0, time.indexOf(' '));
@@ -24,7 +24,7 @@ public class TimedTask extends Task {
     }
 
     public TimedTask (String description, String time, LocalDate date, String tag) {
-        super(description);
+        super(description, tag);
         this.time = time;
         this.date = date;
         this.tag = tag;
@@ -81,9 +81,9 @@ public class TimedTask extends Task {
 
     public String getSchedule() {
         String timeTag = "";
-        if (tag == "[D]") {
+        if (super.getTag() == "[D]") {
             timeTag = "(by: ";
-        } else {
+        } else if (super.getTag() == "[E]"){
             timeTag = "(at: ";
         }
         return timeTag + this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy "))

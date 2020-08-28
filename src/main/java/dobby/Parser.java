@@ -15,6 +15,8 @@ public class Parser {
             + (Commands.DONE).getUsage()
             + (Commands.DELETE).getUsage()
             + (Commands.SCHEDULED).getUsage()
+            + (Commands.FIND).getUsage()
+            + (Commands.FINDTYPE).getUsage()
             + (Commands.BYE).getUsage();
 
     public Parser (TaskList tasks) {
@@ -156,6 +158,48 @@ public class Parser {
             } catch (StringIndexOutOfBoundsException e) {
                 throw new DobbyException("\n    Incorrect usage of command. The format of the date in incorrect. Please try again."
                         + (Commands.SCHEDULED).getUsage() + "\n    ");
+            }
+        } else if (text.startsWith("findtype")) {
+            try {
+                String type = text.substring(text.indexOf(' ') + 1);
+
+                if (type.length() > 1) {
+                    throw new DobbyException("\n    Incorrect usage of command. "
+                            + "Please try again." + (Commands.FINDTYPE).getUsage() + "\n    ");
+                }
+                if (!(type.equalsIgnoreCase("T")
+                        || type.equalsIgnoreCase("D")
+                        || type.equalsIgnoreCase("E"))) {
+                    throw new DobbyException("\n    Incorrect usage of command. "
+                            + "Type can be T, D, or E only. Please try again."
+                            + (Commands.FINDTYPE).getUsage() + "\n    ");
+                }
+
+                message = (this.tasks).findOfType(type);
+            } catch (StringIndexOutOfBoundsException e) {
+                throw new DobbyException("\n    Incorrect usage of command. "
+                        + "Type required cannot be empty. Please try again."
+                        + (Commands.FINDTYPE).getUsage() + "\n    ");
+            }
+        } else if (text.startsWith("find")) {
+            try {
+                String keyword = (text.substring(text.indexOf(' '))).substring(1);
+
+                if (keyword.indexOf(' ') >= 0) {
+                    throw new DobbyException("\n    Incorrect usage of command. "
+                            + "You can only give a single word. Please try again."
+                            + (Commands.FINDTYPE).getUsage() + "\n    ");
+                } else if (keyword.length() == 0) {
+                    throw new DobbyException("\n    Incorrect usage of command. "
+                            + "Keyword required cannot be empty. Please try again."
+                            + (Commands.FIND).getUsage() + "\n    ");
+                }
+
+                message = (this.tasks).findWithKeyword(keyword);
+            } catch (StringIndexOutOfBoundsException e) {
+                throw new DobbyException("\n    Incorrect usage of command. "
+                        + "Keyword required cannot be empty. Please try again."
+                        + (Commands.FIND).getUsage() + "\n    ");
             }
         } else { // unexpected input
             message =  "\n    Sorry that command is not supported. Please try again." + ALL_COMMANDS + "\n    ";
