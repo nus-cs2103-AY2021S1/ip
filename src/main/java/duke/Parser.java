@@ -83,6 +83,8 @@ public class Parser {
         } else if (fullCommand.startsWith("delete")) {
             int taskNumber = extractTaskNumber(fullCommand);
             return new DeleteCommand(taskNumber);
+        } else if (fullCommand.equalsIgnoreCase("bye")){
+            return new ByeCommand();
         } else {
             Task newTask = parseAddCommand(fullCommand);
             return new AddCommand(newTask);
