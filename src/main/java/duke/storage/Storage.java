@@ -1,17 +1,15 @@
 package duke.storage;
 
-import duke.exception.DukeException;
-import duke.task.TaskList;
-
-import java.util.ArrayList;
-
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.FileReader;
-import java.io.BufferedReader;
+import java.util.ArrayList;
 
+import duke.exception.DukeException;
+import duke.task.TaskList;
 /**
  * Represents the Storage manager used to save and load tasks from hard disk.
  */

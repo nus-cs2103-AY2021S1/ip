@@ -1,13 +1,13 @@
 package duke.command;
 
 import duke.storage.Storage;
-import duke.ui.Ui;
 import duke.task.TaskList;
+import duke.ui.Ui;
 
 /**
  * Represents a ListCommand where user wants to list all the tasks.
  */
-public class ListCommand extends Command{
+public class ListCommand extends Command {
 
     /**
      * Creates a ListCommand.

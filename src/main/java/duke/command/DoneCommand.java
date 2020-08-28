@@ -2,9 +2,9 @@ package duke.command;
 
 import duke.exception.DukeException;
 import duke.storage.Storage;
-import duke.ui.Ui;
 import duke.task.Task;
 import duke.task.TaskList;
+import duke.ui.Ui;
 
 /**
  * Represents a DoneCommand where user wants to mark a task as done.
@@ -33,8 +33,7 @@ public class DoneCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
-            Task t = tasks.tasks.get(i - 1);
-            t.markAsDone();
+            Task t = tasks.markTask(i);
             ui.showAction(String.format("\t Nice! I've marked this task as done:\n"
                     + "\t   %s\n", t));
         } catch (IndexOutOfBoundsException ex) {
