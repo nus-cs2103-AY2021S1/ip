@@ -1,7 +1,6 @@
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Scanner;
-import java.util.regex.Pattern;
 
 public class ChatBot {
 
@@ -27,9 +26,9 @@ public class ChatBot {
     }
 
     private static String response(String query) throws Exception{
-        String[] splitQuery = query.split("\\s+");
-        String command = splitQuery[0].toLowerCase();
-        String[] cRemoved = removeCommandString(splitQuery);
+        String[] splitQuery = Parser.getSplit(query);
+        String command = Parser.getCommand(splitQuery);
+        String[] cRemoved = Parser.removeCommandString(splitQuery);
         switch (command){
             case "bye":
                 Bye bye = new Bye();
@@ -39,10 +38,10 @@ public class ChatBot {
                 Clear clear = new Clear();
                 return clear.response();
             case "deadline":
-                String title = getTitle(cRemoved);
-                String preposition = getPreposition(cRemoved);
-                LocalDate dateDeadline = getDate(cRemoved);
-                LocalTime timeDeadline = getTime(cRemoved);
+                String title = Parser.getTitle(cRemoved);
+                String preposition = Parser.getPreposition(cRemoved);
+                LocalDate dateDeadline = Parser.getDate(cRemoved);
+                LocalTime timeDeadline = Parser.getTime(cRemoved);
                 Task deadline = DataStorageInterface.addDeadline(title,preposition,dateDeadline,timeDeadline);
                 return DataStorageInterface.taskAdded(deadline);
             case "delete":
@@ -52,10 +51,10 @@ public class ChatBot {
                 Done done = new Done(cRemoved);
                 return done.markedAsDone(splitQuery[1]);
             case "event":
-                String ttle = getTitle(cRemoved);
-                String ppstn = getPreposition(cRemoved);
-                LocalDate dateEvent = getDate(cRemoved);
-                LocalTime timeEvent = getTime(cRemoved);
+                String ttle = Parser.getTitle(cRemoved);
+                String ppstn = Parser.getPreposition(cRemoved);
+                LocalDate dateEvent = Parser.getDate(cRemoved);
+                LocalTime timeEvent = Parser.getTime(cRemoved);
                 Task event = DataStorageInterface.addEvent(ttle,ppstn,dateEvent,timeEvent);
                 return DataStorageInterface.taskAdded(event);
             case "help":
@@ -72,79 +71,11 @@ public class ChatBot {
                 save.writeToFile();
                 return save.response();
             case "todo":
-                String editedQ = concatenateStrArr(cRemoved);
+                String editedQ = Parser.concatenateStrArr(cRemoved);
                 Task toDo = DataStorageInterface.addToDo(editedQ);
                 return DataStorageInterface.taskAdded(toDo);
             default:
                 throw new UnknownCommandException(command);
         }
-    }
-
-    /***
-     * All methods below are to do with string preprocessing before being passed
-     * to the relevant commands.
-     *
-     */
-
-    private static String[] removeCommandString(String[] splitQuery){
-        splitQuery[0] = "";
-        return splitQuery;
-    }
-
-    private static String concatenateStrArr(String[] strArr){
-        StringBuilder acc = new StringBuilder();
-        for (String s: strArr) {
-            if(!s.equals("")) {
-                acc.append(" ").append(s);
-            }
-        }
-        return acc.toString();
-    }
-
-    private static String getTitle(String[] splitQuery){
-        StringBuilder accTaskTitle = new StringBuilder();
-        int i = 1;
-        while(!splitQuery[i].startsWith("/")){
-            accTaskTitle.append(" ").append(splitQuery[i]);
-            i++;
-        }
-        return accTaskTitle.toString();
-    }
-
-    private static String getPreposition(String[] splitQuery){
-        for (String s:splitQuery) {
-            if(s.startsWith("/")){
-                return s.substring(1);
-            }
-        }
-        return "";
-    }
-
-
-    //TODO: Place WrongUsageException here instead to accommodate for no dateTime being passed in
-    private static LocalDate getDate(String[] splitQuery) throws CustomException{
-        int i = 0;
-        while(!splitQuery[i].startsWith("/")){
-            i++;
-        }
-        i++;
-        String[] splitDate = splitQuery[i].split(Pattern.quote("/"));
-        if(splitDate.length!=3){
-            throw new CustomException("Date is wrongly formatted!");
-        }
-        //Format required is DD/MM/YYYY
-        LocalDate date = LocalDate.parse(splitDate[2]+"-"+splitDate[1]+"-"+splitDate[0]);
-        return date;
-    }
-
-    private static LocalTime getTime(String[] splitQuery){
-        int i = 0;
-        while(!splitQuery[i].startsWith("/")){
-            i++;
-        }
-        i+=2;
-        //Format required is HH:MM
-        LocalTime time = LocalTime.parse(splitQuery[i]+":00");
-        return time;
     }
 }
