@@ -2,7 +2,7 @@ package duke.command;
 
 import duke.component.Storage;
 import duke.component.TaskList;
-import duke.component.Ui;
+import duke.component.CliUi;
 
 /**
  * Represents a command for exiting the app.
@@ -33,7 +33,7 @@ public class ByeCommand extends Command {
      * @return the string "bye"
      */
     @Override
-    public String execute(Ui ui, TaskList list, Storage storage) {
+    public String execute(CliUi ui, TaskList list, Storage storage) {
         ui.printList(list, t -> true, "");
         return "bye";
     }

@@ -10,7 +10,7 @@ import duke.component.Parser;
 import duke.component.Storage;
 import duke.component.StorageStub;
 import duke.component.TaskList;
-import duke.component.Ui;
+import duke.component.CliUi;
 import duke.task.Task;
 import duke.task.ToDo;
 
@@ -24,7 +24,7 @@ public class DoneCommandTest {
         assertFalse(new DoneCommand("done anything").isExit());
     }
 
-    public void executeExceptionHelper(String s, Ui ui, TaskList list, Storage storage) {
+    public void executeExceptionHelper(String s, CliUi ui, TaskList list, Storage storage) {
         DoneCommand a = new DoneCommand(s);
         try {
             a.execute(ui, list, storage);
@@ -41,7 +41,7 @@ public class DoneCommandTest {
 
     @Test
     public void execute_invalidCommand_throwException() {
-        Ui ui = new Ui();
+        CliUi ui = new CliUi();
         Storage storage = new StorageStub();
         TaskList list = storage.getList();
         Task task = new ToDo("hello");
@@ -57,7 +57,7 @@ public class DoneCommandTest {
 
     @Test
     public void execute_markDoneAsDone_throwException() {
-        Ui ui = new Ui();
+        CliUi ui = new CliUi();
         Storage storage = new StorageStub();
         TaskList list = storage.getList();
         Task task = new ToDo("hello");
@@ -78,7 +78,7 @@ public class DoneCommandTest {
 
     @Test
     public void execute_validCommand_doneTask() {
-        Ui ui = new Ui();
+        CliUi ui = new CliUi();
         Storage storage = new StorageStub();
         TaskList list = storage.getList();
         Task task1 = new ToDo("hello");

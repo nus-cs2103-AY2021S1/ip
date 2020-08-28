@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 import duke.component.Storage;
 import duke.component.StorageStub;
 import duke.component.TaskList;
-import duke.component.Ui;
+import duke.component.CliUi;
 
 public class ListCommandTest {
     @Test
@@ -18,7 +18,7 @@ public class ListCommandTest {
 
     @Test
     public void execute_nothingWrong() {
-        Ui ui = new Ui();
+        CliUi ui = new CliUi();
         Storage storage = new StorageStub();
         TaskList list = storage.getList();
         ListCommand b = new ListCommand("list");

@@ -8,7 +8,7 @@ import duke.task.Task;
 /**
  * Represents user-interface objects that deals with user inputs and outputs.
  */
-public class Ui {
+public class CliUi {
     private static final String HORIZONTAL_LINE = "\t=================================================="
             + "===============================";
     private final Scanner sc;
@@ -16,7 +16,7 @@ public class Ui {
     /**
      * Creates a user-interface Ui object.
      */
-    public Ui() {
+    public CliUi() {
         sc = new Scanner(System.in);
     }
 

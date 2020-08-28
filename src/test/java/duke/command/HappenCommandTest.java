@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test;
 import duke.component.Storage;
 import duke.component.StorageStub;
 import duke.component.TaskList;
-import duke.component.Ui;
+import duke.component.CliUi;
 import duke.task.Deadline;
 import duke.task.Event;
 
@@ -22,7 +22,7 @@ public class HappenCommandTest {
         assertFalse(new HappenCommand("happen on today").isExit());
     }
 
-    public void unrecognizedCommandHelper(String s, Ui ui, TaskList list, Storage storage) {
+    public void unrecognizedCommandHelper(String s, CliUi ui, TaskList list, Storage storage) {
         try {
             new HappenCommand(s).execute(ui, list, storage);
             fail();
@@ -33,7 +33,7 @@ public class HappenCommandTest {
 
     @Test
     public void execute_unrecognizedCommand_throwException() {
-        Ui ui = new Ui();
+        CliUi ui = new CliUi();
         Storage storage = new StorageStub();
         TaskList list = storage.getList();
 
@@ -47,7 +47,7 @@ public class HappenCommandTest {
         unrecognizedCommandHelper("happen between a", ui, list, storage);
     }
 
-    public void invalidDateFormatHelper(String s, Ui ui, TaskList list, Storage storage) {
+    public void invalidDateFormatHelper(String s, CliUi ui, TaskList list, Storage storage) {
         try {
             new HappenCommand(s).execute(ui, list, storage);
             fail();
@@ -58,7 +58,7 @@ public class HappenCommandTest {
 
     @Test
     public void execute_invalidDateFormat_throwException() {
-        Ui ui = new Ui();
+        CliUi ui = new CliUi();
         Storage storage = new StorageStub();
         TaskList list = storage.getList();
 
@@ -70,7 +70,7 @@ public class HappenCommandTest {
 
     @Test
     public void execute_nonPositiveInDays_throwException() {
-        Ui ui = new Ui();
+        CliUi ui = new CliUi();
         Storage storage = new StorageStub();
         TaskList list = storage.getList();
 
@@ -91,7 +91,7 @@ public class HappenCommandTest {
 
     @Test
     public void execute_invalidBetween_throwException() {
-        Ui ui = new Ui();
+        CliUi ui = new CliUi();
         Storage storage = new StorageStub();
         TaskList list = storage.getList();
 
@@ -105,7 +105,7 @@ public class HappenCommandTest {
 
     @Test
     public void execute_validCommand_showList() {
-        Ui ui = new Ui();
+        CliUi ui = new CliUi();
         Storage storage = new StorageStub();
         TaskList list = storage.getList();
         try {

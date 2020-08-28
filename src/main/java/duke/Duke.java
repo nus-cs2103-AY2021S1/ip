@@ -6,7 +6,7 @@ import duke.component.ActualStorage;
 import duke.component.Parser;
 import duke.component.Storage;
 import duke.component.TaskList;
-import duke.component.Ui;
+import duke.component.CliUi;
 
 /**
  * Is the Main class of this program.
@@ -14,7 +14,7 @@ import duke.component.Ui;
 public class Duke {
     private Storage storage;
     private TaskList list;
-    private Ui ui;
+    private CliUi ui;
 
     /**
      * Creates a running Duke, initialize the list with data in the input file, if input file is not found,
@@ -22,7 +22,7 @@ public class Duke {
      * @param filePath The file path of the data file holding all existing tasks.
      */
     public Duke(String filePath) {
-        ui = new Ui();
+        ui = new CliUi();
         try {
             storage = new ActualStorage(filePath);
             list = storage.getList();
@@ -55,7 +55,7 @@ public class Duke {
      * Gets the Ui of the running Duke.
      * @return the ui of this object
      */
-    public Ui getUi() {
+    public CliUi getUi() {
         return ui;
     }
 

@@ -6,7 +6,7 @@ import java.time.format.DateTimeFormatter;
 
 import duke.component.Storage;
 import duke.component.TaskList;
-import duke.component.Ui;
+import duke.component.CliUi;
 import duke.task.Task;
 
 /**
@@ -30,7 +30,7 @@ public class HappenCommand extends Command {
      * @throws InvalidCommandException if the input cannot be processed correctly or does not make sense
      */
     @Override
-    public String execute(Ui ui, TaskList list, Storage storage) throws InvalidCommandException {
+    public String execute(CliUi ui, TaskList list, Storage storage) throws InvalidCommandException {
         String description = input.substring(7);
         String[] detail = description.split(" ");
         DateTimeFormatter parse = DateTimeFormatter.ofPattern("yyyy-MM-dd");
