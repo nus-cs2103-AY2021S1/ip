@@ -85,8 +85,8 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         String overdue = isOverdue() ? " This is overdue! The deadline has passed!!!" : "";
-        return "[D]" + super.toString() + " (by: " +
-                byTime.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")" + overdue;
+        return "[D]" + super.toString() + " (by: "
+                + byTime.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")" + overdue;
     }
 
     /**
