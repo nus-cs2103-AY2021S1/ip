@@ -1,5 +1,14 @@
 package alice.parser;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
+import java.time.format.DateTimeParseException;
+import java.time.temporal.ChronoField;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import alice.command.ByeCommand;
 import alice.command.ClearCommand;
 import alice.command.Command;
@@ -13,21 +22,13 @@ import alice.command.InvalidCommandException;
 import alice.command.ListCommand;
 import alice.command.TodoCommand;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeFormatterBuilder;
-import java.time.format.DateTimeParseException;
-import java.time.temporal.ChronoField;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 /**
  * Represents a parser that makes sense of user input.
  */
 public class Parser {
-    /** List of known datetime formats that ALICE accepts. **/
+    /**
+     * List of known datetime formats that ALICE accepts.
+     **/
     private static final List<DateTimeFormatter> KNOWN_DT_FORMATS = createDateFormats();
 
     /**

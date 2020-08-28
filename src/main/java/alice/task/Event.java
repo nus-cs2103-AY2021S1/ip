@@ -1,10 +1,10 @@
 package alice.task;
 
-import alice.AliceException;
-
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+
+import alice.AliceException;
 
 /**
  * Represents an event.
@@ -22,7 +22,7 @@ public class Event extends Task {
      * Creates a undone event happening at the specified time.
      *
      * @param description describes the event.
-     * @param on the date and time of the event.
+     * @param on          the date and time of the event.
      */
     public Event(String description, LocalDateTime on) {
         super(description);
@@ -33,9 +33,9 @@ public class Event extends Task {
     /**
      * Creates an event happening at the specified time.
      *
-     * @param isDone the completion status of the event, true if completed; false otherwise.
+     * @param isDone      the completion status of the event, true if completed; false otherwise.
      * @param description describes the event.
-     * @param on the date and time of the event.
+     * @param on          the date and time of the event.
      */
     public Event(boolean isDone, String description, LocalDateTime on) {
         super(isDone, description);

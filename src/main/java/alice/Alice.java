@@ -2,12 +2,10 @@ package alice;
 
 import alice.command.Command;
 import alice.command.InvalidCommandException;
-
 import alice.parser.Parser;
-import alice.ui.Ui;
-
 import alice.storage.StorageFile;
 import alice.task.TaskList;
+import alice.ui.Ui;
 
 /**
  * Represents the ALICE task manager program.

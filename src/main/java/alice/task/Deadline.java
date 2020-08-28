@@ -1,10 +1,10 @@
 package alice.task;
 
-import alice.AliceException;
-
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+
+import alice.AliceException;
 
 /**
  * Represents a task with a deadline.
@@ -22,7 +22,7 @@ public class Deadline extends Task {
      * Creates an undone task with the specified deadline.
      *
      * @param description describes the task to be done before the deadline.
-     * @param by the latest datetime by which the task should be completed.
+     * @param by          the latest datetime by which the task should be completed.
      */
     public Deadline(String description, LocalDateTime by) {
         super(description);
@@ -33,9 +33,9 @@ public class Deadline extends Task {
     /**
      * Creates a task with the specified deadline and completion status.
      *
-     * @param isDone the completion status of the task, true if completed; false otherwise.
+     * @param isDone      the completion status of the task, true if completed; false otherwise.
      * @param description describes the task to be done before the deadline.
-     * @param by the latest datetime by which the task should be completed.
+     * @param by          the latest datetime by which the task should be completed.
      */
     public Deadline(boolean isDone, String description, LocalDateTime by) {
         super(isDone, description);

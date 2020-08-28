@@ -1,12 +1,11 @@
 package alice.command;
 
+import java.util.List;
+
 import alice.storage.AliceStorageException;
 import alice.storage.StorageFile;
-
 import alice.task.TaskList;
 import alice.ui.Ui;
-
-import java.util.List;
 
 /**
  * Represents the command to clear all the tasks in ALICE.

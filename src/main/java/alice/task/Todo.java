@@ -18,7 +18,7 @@ public class Todo extends Task {
     /**
      * Creates a todo task with the specified completion status and description.
      *
-     * @param isDone the completion status of the task, true if completed; false otherwise.
+     * @param isDone      the completion status of the task, true if completed; false otherwise.
      * @param description describes the task to be done.
      */
     private Todo(boolean isDone, String description) {

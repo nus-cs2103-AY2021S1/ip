@@ -50,16 +50,16 @@ public class Ui {
      * Prints a default welcome message.
      */
     public void displayWelcomeMsg() {
-        String logo = " _____  _     _____ _____  _____\n" +
-                "/  _  \\| |   |_   _/  __ \\|  ___|\n" +
-                "| |_| || |     | | | /  \\/| |__\n" +
-                "|  _  || |     | | | |    |  __|\n" +
-                "| | | || |_____| |_| \\__/\\| |___\n" +
-                "\\_| |_/\\_____/\\___/ \\____/\\____/\n";
+        String logo = " _____  _     _____ _____  _____\n"
+                + "/  _  \\| |   |_   _/  __ \\|  ___|\n"
+                + "| |_| || |     | | | /  \\/| |__\n"
+                + "|  _  || |     | | | |    |  __|\n"
+                + "| | | || |_____| |_| \\__/\\| |___\n"
+                + "\\_| |_/\\_____/\\___/ \\____/\\____/\n";
 
-        System.out.println(logo +
-                "\nHello! I'm Alice\n" +
-                "How can I help you today?");
+        System.out.println(logo
+                + "\nHello! I'm Alice\n"
+                + "How can I help you today?");
     }
 
     /**

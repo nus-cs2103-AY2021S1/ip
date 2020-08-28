@@ -1,15 +1,13 @@
 package alice.command;
 
-import alice.task.Task;
-import alice.task.TaskList;
-import alice.task.Todo;
+import java.util.List;
 
 import alice.storage.AliceStorageException;
 import alice.storage.StorageFile;
-
+import alice.task.Task;
+import alice.task.TaskList;
+import alice.task.Todo;
 import alice.ui.Ui;
-
-import java.util.List;
 
 /**
  * Represents the command to add a new todo task in ALICE.
@@ -18,16 +16,6 @@ public class TodoCommand extends Command {
     protected static final List<String> NAMES = List.of("todo");
     protected static final String DESCRIPTION = "Create a todo task. Example: todo homework1";
     protected static final String USE_CASE = "[" + String.join(", ", NAMES) + "] <desc>";
-
-    /**
-     * Checks if the command word triggers the <code>TodoCommand</code>.
-     *
-     * @param name the command word to check.
-     * @return true if the command word belongs to <code>TodoCommand</code>; false otherwise.
-     */
-    public static boolean hasCommandWord(String name) {
-        return NAMES.contains(name);
-    }
 
     private final String description;
 
@@ -38,6 +26,16 @@ public class TodoCommand extends Command {
      */
     public TodoCommand(String description) {
         this.description = description;
+    }
+
+    /**
+     * Checks if the command word triggers the <code>TodoCommand</code>.
+     *
+     * @param name the command word to check.
+     * @return true if the command word belongs to <code>TodoCommand</code>; false otherwise.
+     */
+    public static boolean hasCommandWord(String name) {
+        return NAMES.contains(name);
     }
 
     /**

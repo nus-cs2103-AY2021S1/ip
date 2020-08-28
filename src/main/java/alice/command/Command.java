@@ -12,9 +12,10 @@ public abstract class Command {
     /**
      * Executes the command.
      *
-     * @param tasks the list of tasks stored in ALICE.
-     * @param ui the ALICE user interface.
+     * @param tasks       the list of tasks stored in ALICE.
+     * @param ui          the ALICE user interface.
      * @param storageFile the file used to store ALICE data.
+     * @throws AliceException if there were error executing the command.
      */
     public abstract void process(TaskList tasks, Ui ui, StorageFile storageFile) throws AliceException;
 

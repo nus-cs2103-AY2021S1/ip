@@ -1,14 +1,12 @@
 package alice.command;
 
+import java.util.List;
+
 import alice.storage.AliceStorageException;
 import alice.storage.StorageFile;
-
 import alice.task.Task;
 import alice.task.TaskList;
-
 import alice.ui.Ui;
-
-import java.util.List;
 
 /**
  * Represents the command to mark a task as done in ALICE.
@@ -17,16 +15,6 @@ public class DoneCommand extends Command {
     protected static final List<String> NAMES = List.of("done");
     protected static final String DESCRIPTION = "Mark a task as done";
     protected static final String USE_CASE = "[" + String.join(", ", NAMES) + "] <task number>";
-
-    /**
-     * Checks if the command word triggers the <code>DoneCommand</code>.
-     *
-     * @param name the command word to check.
-     * @return true if the command word belongs to <code>DoneCommand</code>; false otherwise.
-     */
-    public static boolean hasCommandWord(String name) {
-        return NAMES.contains(name);
-    }
 
     private final int taskIndex;
 
@@ -37,6 +25,16 @@ public class DoneCommand extends Command {
      */
     public DoneCommand(int taskIndex) {
         this.taskIndex = taskIndex;
+    }
+
+    /**
+     * Checks if the command word triggers the <code>DoneCommand</code>.
+     *
+     * @param name the command word to check.
+     * @return true if the command word belongs to <code>DoneCommand</code>; false otherwise.
+     */
+    public static boolean hasCommandWord(String name) {
+        return NAMES.contains(name);
     }
 
     /**

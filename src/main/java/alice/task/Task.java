@@ -20,7 +20,7 @@ public class Task {
     /**
      * Creates a task with the indicated status and specified description.
      *
-     * @param isDone the completion status of the task, true if completed; false otherwise.
+     * @param isDone      the completion status of the task, true if completed; false otherwise.
      * @param description describes the task.
      */
     public Task(boolean isDone, String description) {

@@ -1,11 +1,11 @@
 package alice.task;
 
-import alice.AliceException;
-import alice.command.InvalidCommandException;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import alice.AliceException;
+import alice.command.InvalidCommandException;
 
 /**
  * Represent the list of tasks.

@@ -1,16 +1,14 @@
 package alice.command;
 
-import alice.task.Event;
-import alice.task.Task;
-import alice.task.TaskList;
+import java.time.LocalDateTime;
+import java.util.List;
 
 import alice.storage.AliceStorageException;
 import alice.storage.StorageFile;
-
+import alice.task.Event;
+import alice.task.Task;
+import alice.task.TaskList;
 import alice.ui.Ui;
-
-import java.time.LocalDateTime;
-import java.util.List;
 
 /**
  * Represents the command to add a new event in ALICE.
@@ -22,6 +20,20 @@ public class EventCommand extends Command {
     protected static final String USE_CASE = "[" + String.join(", ", NAMES)
             + "] <desc> /on <datetime>";
 
+    private final String description;
+    private final LocalDateTime on;
+
+    /**
+     * Creates a new command to create a new <code>Event</code> with the details provided.
+     *
+     * @param description the description of the event.
+     * @param on          the datetime of when the event is happening.
+     */
+    public EventCommand(String description, LocalDateTime on) {
+        this.description = description;
+        this.on = on;
+    }
+
     /**
      * Checks if the command word triggers the <Code>EventCommand</Code>.
      *
@@ -30,20 +42,6 @@ public class EventCommand extends Command {
      */
     public static boolean hasCommandWord(String name) {
         return NAMES.contains(name);
-    }
-
-    private final String description;
-    private final LocalDateTime on;
-
-    /**
-     * Creates a new command to create a new <code>Event</code> with the details provided.
-     *
-     * @param description the description of the event.
-     * @param on the datetime of when the event is happening.
-     */
-    public EventCommand(String description, LocalDateTime on) {
-        this.description = description;
-        this.on = on;
     }
 
     /**

@@ -1,10 +1,10 @@
 package alice.storage;
 
 import java.io.BufferedWriter;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.io.IOException;
 import java.nio.file.StandardOpenOption;
 import java.util.List;
 
@@ -28,7 +28,7 @@ public class StorageFile {
      * If file does not exists, create the file and directory to file.
      *
      * @return list of encoded tasks in the data file, or
-     *          null if the data file does not exist.
+     * null if the data file does not exist.
      * @throws AliceStorageException if there were errors reading or creating the file.
      */
     public List<String> load() throws AliceStorageException {
@@ -99,8 +99,7 @@ public class StorageFile {
      */
     public void saveToLastLine(String taskToAdd) throws AliceStorageException {
         try {
-            Files.write(filePath,
-                    (taskToAdd + "\n").getBytes(),
+            Files.write(filePath, (taskToAdd + "\n").getBytes(),
                     StandardOpenOption.APPEND);
         } catch (IOException ex) {
             throw new AliceStorageException("File save error!");
