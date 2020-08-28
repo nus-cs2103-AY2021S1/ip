@@ -16,7 +16,7 @@ public class ByeCommand extends Command {
     }
 
     /**
-     * Terminates the program and prints the action to console.
+     * Displays "Goodbye! The application will close shortly..." on the GUI.
      *
      * @param storage Storage object pointing to the file path where the data is stored.
      * @param taskList Task list that is used by the instance of Duke.
@@ -24,6 +24,6 @@ public class ByeCommand extends Command {
      */
     @Override
     public void execute(Storage storage, TaskList taskList, UI ui) {
-        ui.printToConsole("Goodbye!");
+        ui.printToConsole("Goodbye! The application will close shortly...");
     }
 }

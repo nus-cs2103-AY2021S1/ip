@@ -1,5 +1,8 @@
 package duke;
 
+import java.util.concurrent.CompletableFuture;
+
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -22,8 +25,11 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/a.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/b.png"));
+    // Image retrieved from https://www.pngfind.com/mpng/hwwTTi_free-png-download-lego-batman-movie-clipart-png/
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.png"));
+    
+    // Image retrieved from https://www.pngfind.com/mpng/TRwRibh_alfred-lego-batman-movie-lego-batman-alfred-png/
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/duke.png"));
 
     @FXML
     public void initialize() {
@@ -57,5 +63,15 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
+        if (response.equals("Goodbye! The application will close shortly...")) {
+            CompletableFuture<Void> cf = CompletableFuture.runAsync(() -> {
+                try {
+                    Thread.sleep(1500);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            });
+            cf.thenRun(Platform::exit).thenRun(() -> System.exit(0));
+        }
     }
 }

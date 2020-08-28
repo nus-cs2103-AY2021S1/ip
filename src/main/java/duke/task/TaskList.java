@@ -62,7 +62,6 @@ public class TaskList {
      * @param storage Storage object that needs to be updated once the task is marked as done.
      * @return String to be displayed in user interface that confirms the action.
      * @throws DukeException If the task ID supplied is invalid.
-     * @throws IOException If there are issues with updating the changes to storage.
      */
     public String markTaskAsDone(int taskID, Storage storage) throws DukeException {
         if (taskID < 1 || taskID > tasks.size()) {
@@ -85,7 +84,6 @@ public class TaskList {
      * @param storage Storage object that needs to be updated once the task is deleted.
      * @return String to be displayed in user interface that confirms the action.
      * @throws DukeException If the task ID supplied is invalid.
-     * @throws IOException If there are issues with updating the changes to storage.
      */
     public String deleteTask(int taskID, Storage storage) throws DukeException {
         if (taskID < 1 || taskID > tasks.size()) {
