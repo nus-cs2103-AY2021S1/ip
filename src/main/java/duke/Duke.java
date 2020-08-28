@@ -60,6 +60,22 @@ public class Duke {
     }
 
     /**
+     * Gets the list of tasks in the running Duke.
+     * @return the task list of this object
+     */
+    public TaskList getList() {
+        return list;
+    }
+
+    /**
+     * Gets the storage handling object of this running Duke.
+     * @return the storage handling object of this object
+     */
+    public Storage getStorage() {
+        return storage;
+    }
+
+    /**
      * The running main method of the application that uses data/tasks.txt as the file for storage."
      * @param args nothing input
      */
