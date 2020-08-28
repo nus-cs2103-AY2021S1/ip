@@ -24,6 +24,11 @@ public class Storage {
     private final Path filePath;
     private final Path folderPath;
 
+    /**
+     * Initializes an instance of Storage based the file path passed to it.
+     *
+     * @param filePath The path of file which stores data.
+     */
     public Storage(String filePath) {
         String currentRelativePath = Paths.get(".").toString();
         this.filePath = Paths.get(currentRelativePath, filePath);
