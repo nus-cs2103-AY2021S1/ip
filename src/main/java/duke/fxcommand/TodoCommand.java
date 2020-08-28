@@ -1,8 +1,5 @@
 package duke.fxcommand;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;

@@ -6,6 +6,7 @@ import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 import duke.exception.DukeIOException;
+import duke.utils.DukeStdMsg;
 
 /**
  * Represents the Command to exit Duke.
@@ -24,7 +25,7 @@ public class ByeCommand implements Command {
     public String execute(Ui ui, Storage storage, TaskList tasks) throws DukeIOException {
         ArrayList<String> data = tasks.getData();
         storage.save(data);
-        return "Saved successfully!\nBye bye! Hope to see you again soon!";
+        return DukeStdMsg.EXIT.getMsg();
     }
 
     @Override
