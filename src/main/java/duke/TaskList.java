@@ -4,12 +4,12 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
 import java.util.ArrayList;
- 
+
 /**
  * Contains task list, and has operations like list and delete.
  */
 public class TaskList {
-    
+
     /** List of tasks. */
     private ArrayList<Task> taskList = new ArrayList<>();
 
@@ -42,6 +42,8 @@ public class TaskList {
             case "T":
                 handleTodo(taskString.get(2), isDone);
                 break;
+            default:
+                throw new DukeException("     Invalid character in storage file :-(");
             }
         }
     }
