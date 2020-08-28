@@ -9,8 +9,8 @@ import java.time.LocalDate;
  */
 public class Event extends TaskWithDate {
 
-    public Event(String desc, LocalDate date) {
-        super(desc, date);
+    public Event(String description, LocalDate date) {
+        super(description, date);
     }
 
     @Override

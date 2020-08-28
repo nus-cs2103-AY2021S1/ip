@@ -9,8 +9,8 @@ import java.time.LocalDate;
  */
 public class Deadline extends TaskWithDate {
 
-    public Deadline(String desc, LocalDate date) {
-        super(desc, date);
+    public Deadline(String description, LocalDate date) {
+        super(description, date);
     }
 
     @Override

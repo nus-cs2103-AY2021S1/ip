@@ -42,6 +42,12 @@ public enum Option {
         mappings = map;
     }
 
+    /**
+     * Parses the string passed in to determine what type of option it is.
+     *
+     * @param option String representation of the option.
+     * @return Option enumerator type.
+     */
     public static Option from (String option) {
         if (mappings.containsKey(option.toLowerCase())) {
             return mappings.get(option.toLowerCase());

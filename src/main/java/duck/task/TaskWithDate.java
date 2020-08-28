@@ -12,11 +12,11 @@ abstract public class TaskWithDate extends Task {
     /**
      * Initializes with an additional date on top of the Task initialization.
      *
-     * @param desc Description of task.
+     * @param description Description of task.
      * @param date Due date of task.
      */
-    public TaskWithDate(String desc, LocalDate date) {
-        super(desc);
+    public TaskWithDate(String description, LocalDate date) {
+        super(description);
         this.date = date;
     }
 

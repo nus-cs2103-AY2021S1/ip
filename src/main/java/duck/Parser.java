@@ -10,7 +10,7 @@ import java.time.format.DateTimeParseException;
  * parsing the various components from the user input.
  */
 public class Parser {
-    private static final String[] dateSeparators = {"/at", "/by"};
+    private static final String[] DATE_SEPARATORS = {"/at", "/by"};
 
     /**
      * Returns the Option enumerator based on the first word separated
@@ -36,7 +36,7 @@ public class Parser {
      */
     public static String parseDescription(String input) throws DuckException {
         input = input.strip();
-        for (String separator : Parser.dateSeparators) {
+        for (String separator : Parser.DATE_SEPARATORS) {
             if (input.contains(separator)) {
                 input = input.substring(0, input.indexOf(separator)).strip();
             }
@@ -61,7 +61,7 @@ public class Parser {
      */
     public static LocalDate parseDate(String input) throws DuckException {
         String date = "";
-        for (String separator : Parser.dateSeparators) {
+        for (String separator : Parser.DATE_SEPARATORS) {
             if (input.contains(separator)) {
                 date = input.substring(input.indexOf(separator) + separator.length()).strip();
             }

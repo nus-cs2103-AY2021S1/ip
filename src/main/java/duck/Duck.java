@@ -51,7 +51,7 @@ public class Duck {
     }
 
     /**
-     * Default greeting when user first sees the bot.
+     * Greets user when user first sees the bot.
      */
     public void greet() {
         List<String> welcomeMessage = new ArrayList<>();
@@ -61,7 +61,7 @@ public class Duck {
     }
 
     /**
-     * To be run when the user exits the application or when the bot closes.
+     * Runs when the user exits the application or when the bot closes.
      * This will send a message as well as save the existing data via storage.
      */
     public void shutdown() {
@@ -171,8 +171,8 @@ public class Duck {
 
 
     /**
+     * Receives input continuously until "bye" command is given.
      * Main loop of the bot.
-     * Continuously waits for input until "bye" command is given.
      */
     public void run() {
         greet();

@@ -6,8 +6,8 @@ import duck.ui.Colour;
  * Todo class for representing the todo type.
  */
 public class Todo extends Task {
-    public Todo(String desc) {
-        super(desc);
+    public Todo(String description) {
+        super(description);
     }
 
     @Override

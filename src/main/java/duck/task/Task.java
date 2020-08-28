@@ -15,10 +15,10 @@ abstract public class Task implements Serializable {
     /**
      * Initializes the description and sets done to false.
      *
-     * @param desc Description of Task.
+     * @param description Description of Task.
      */
-    public Task(String desc) {
-        this.description = desc;
+    public Task(String description) {
+        this.description = description;
         this.isDone = false;
     }
 
