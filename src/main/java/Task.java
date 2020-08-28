@@ -2,14 +2,9 @@
  * represents a task
  */
 
-public class Task {
-    protected String description;
+public abstract class Task {
+    protected String task;
     protected boolean done;
-
-    public Task(String description) {
-        this.description = description;
-        this.done = false;
-    }
 
     public String getStatus() {
         return (done ? "\u2713" : "\u2718");
@@ -23,9 +18,15 @@ public class Task {
         return this.done;
     }
 
+    public int isDoneInt() {
+        return this.done? 1 : 0;
+    }
+
+    public abstract String encode();
+
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("[").append(this.getStatus()).append("] ").append(this.description);
+        sb.append("[").append(this.getStatus()).append("] ").append(this.task);
         return sb.toString();
     }
 }

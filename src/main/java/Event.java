@@ -9,12 +9,17 @@ import java.time.format.DateTimeParseException;
 public class Event extends Task {
     protected String eventTime;
 
-    public Event(String event) throws EmptyDescriptionException {
-        super(event.substring(6, event.indexOf("/")-1));
-        if (description.length() <= 6) {
+    public Event(String taskDescription) throws EmptyDescriptionException {
+        if (taskDescription.length() <= 6) {
             throw new EmptyDescriptionException("oops! the description of an event cannot be empty");
+        } else {
+            int space = taskDescription.indexOf(" ");
+            int slash = taskDescription.indexOf("/");
+
+            this.task = taskDescription.substring(space + 1, slash);
+            this.eventTime = taskDescription.substring(slash + 4);
+            this.done = false;
         }
-        this.eventTime = event.substring(event.indexOf("/")+4);
     }
 
     public String toString() {
@@ -30,7 +35,7 @@ public class Event extends Task {
 
         sb.append("[E]")
                 .append(super.toString())
-                .append(" (").append("at: ").append(eventTime).append(")");
+                .append("(at: ").append(eventTime).append(")");
         return sb.toString();
     }
 
@@ -43,5 +48,32 @@ public class Event extends Task {
             eventTime = this.eventTime;
         }
         return eventTime;
+    }
+
+    @Override
+    public String encode() {
+        StringBuilder encodedTask = new StringBuilder();
+
+        encodedTask.append("E | ")
+                .append(this.isDoneInt() + " | ")
+                .append(this.task + "| ")
+                .append(this.eventTime);
+
+        return encodedTask.toString();
+    }
+
+    public static Event decode(String string) throws EmptyDescriptionException {
+        String[] split = string.split(" \\| ");
+
+        String taskDescription = "event " + split[2] +
+                " /at " + split[3];
+
+        Event event = new Event(taskDescription);
+
+        if (split[1].contains("1")) {
+            event.markAsDone();
+        }
+
+        return event;
     }
 }

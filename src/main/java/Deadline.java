@@ -9,12 +9,19 @@ import java.time.format.DateTimeParseException;
 public class Deadline extends Task {
     protected String deadline;
 
-    public Deadline(String deadline) throws EmptyDescriptionException {
-        super(deadline.substring(9, deadline.indexOf("/")-1));
-        if (description.length() <= 9) {
+    public Deadline(String taskDescription) throws EmptyDescriptionException {
+        if (taskDescription.length() <= 9) {
             throw new EmptyDescriptionException("oops! the description of a deadline cannot be empty");
+        } else {
+            int space = taskDescription.indexOf(" ");
+            int slash = taskDescription.indexOf("/");
+
+            this.task = taskDescription.substring(space + 1, slash);
+            this.deadline = taskDescription.substring(slash + 4);
+            this.done = false;
+
+            System.out.println(this.deadline);
         }
-        this.deadline = deadline.substring(deadline.indexOf("/")+4);
     }
 
     public String toString() {
@@ -30,9 +37,34 @@ public class Deadline extends Task {
 
         sb.append("[D]")
                 .append(super.toString())
-                .append(" (").append("by: ")
-                .append(deadline)
-                .append(")");
+                .append("(by: ").append(deadline).append(")");
         return sb.toString();
+    }
+
+    @Override
+    public String encode() {
+        StringBuilder encodedTask = new StringBuilder();
+
+        encodedTask.append("D | ")
+                .append(this.isDoneInt() + " | ")
+                .append(this.task + "| ")
+                .append(this.deadline);
+
+        return encodedTask.toString();
+    }
+
+    public static Deadline decode(String string) throws EmptyDescriptionException {
+        String[] split = string.split(" \\| ");
+
+        String taskDescription = "deadline " + split[2] +
+                " /by " + split[3];
+
+        Deadline deadline = new Deadline(taskDescription);
+
+        if (split[1].contains("1")) {
+            deadline.markAsDone();
+        }
+
+        return deadline;
     }
 }
