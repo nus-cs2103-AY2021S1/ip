@@ -1,0 +1,4 @@
+TODO#borrow book#true
+EVENT#project meeting#true#Mon 2-4pm
+DEADLINE#do homework#false#no idea :-p
+TODO#swimming#false

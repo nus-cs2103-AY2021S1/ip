@@ -10,15 +10,8 @@ Hello from
           What can I do for you?
           ____________________________________________________________
           ____________________________________________________________
-          Invalid use of Duke: ☹ OOPS!!! I'm sorry, but I don't know what that means :-(
-          Available commands are: 
-          1. todo <todo_desc>
-          2. deadline <deadline_desc> /by <time>
-          3. event <event_desc> /at <time>
-          4. done <task_no>
-          5. delete <task_no>
-          6. list
-          7. bye
+          Noted. I've removed all tasks in the list.
+          Now you have no task in the list.
           ____________________________________________________________
           ____________________________________________________________
           Got it. I've added this task: 

@@ -1,4 +1,4 @@
-hello
+delete all
 todo borrow book
 todo
 list
