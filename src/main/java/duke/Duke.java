@@ -2,7 +2,11 @@ package duke;
 
 import duke.command.Command;
 import duke.command.InvalidCommandException;
-import duke.component.*;
+import duke.component.ActualStorage;
+import duke.component.Parser;
+import duke.component.Storage;
+import duke.component.TaskList;
+import duke.component.Ui;
 
 /**
  * Is the Main class of this program.
@@ -47,6 +51,10 @@ public class Duke {
         ui.close();
     }
 
+    /**
+     * The running main method of the application that uses data/tasks.txt as the file for storage."
+     * @param args nothing input
+     */
     public static void main(String[] args) {
         String home = System.getProperty("user.home");
         java.nio.file.Path path = java.nio.file.Paths.get(home, "Desktop", "cs2103", "ip", "data", "tasks.txt");

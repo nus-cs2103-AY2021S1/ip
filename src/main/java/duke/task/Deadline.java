@@ -1,9 +1,9 @@
 package duke.task;
 
-import duke.command.InvalidCommandException;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+
+import duke.command.InvalidCommandException;
 
 /**
  * Represents a deadline task that consists of a description and a date as the deadline for completing the task.
@@ -85,8 +85,8 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         String overdue = isOverdue() ? " This is overdue! The deadline has passed!!!" : "";
-        return "[D]" + super.toString() + " (by: " +
-                byTime.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")" + overdue;
+        return "[D]" + super.toString() + " (by: "
+                + byTime.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")" + overdue;
     }
 
     /**

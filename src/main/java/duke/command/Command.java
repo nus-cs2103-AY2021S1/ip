@@ -1,6 +1,8 @@
 package duke.command;
 
-import duke.component.*;
+import duke.component.Storage;
+import duke.component.TaskList;
+import duke.component.Ui;
 
 /**
  * Represents a command that is input by the user.
@@ -32,7 +34,7 @@ public abstract class Command {
      * @return the string for test cases
      * @throws InvalidCommandException if the input command doesn't make sense and states why
      */
-    abstract public String execute(Ui ui, TaskList list, Storage storage) throws InvalidCommandException;
+    public abstract String execute(Ui ui, TaskList list, Storage storage) throws InvalidCommandException;
 
     @Override
     public boolean equals(Object obj) {

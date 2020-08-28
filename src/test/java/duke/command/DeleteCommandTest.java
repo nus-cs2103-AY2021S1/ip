@@ -1,15 +1,22 @@
 package duke.command;
 
-import duke.component.*;
-import duke.task.Task;
-import duke.task.ToDo;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.fail;
+
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import duke.component.Parser;
+import duke.component.Storage;
+import duke.component.StorageStub;
+import duke.component.TaskList;
+import duke.component.Ui;
+import duke.task.Task;
+import duke.task.ToDo;
 
 public class DeleteCommandTest {
     @Test
-    public void isExit__alwaysFalse() {
+    public void isExit_alwaysFalse() {
         assertFalse(new DeleteCommand("delete ").isExit());
         assertFalse(new DeleteCommand("delete 3").isExit());
         assertFalse(new DeleteCommand("delete 0").isExit());
@@ -60,12 +67,12 @@ public class DeleteCommandTest {
         list.add(task3);
 
         try {
-            assertEquals("Noted. I've removed this task:\n\t    " + task1 +
-                    "\n\t  Now you have 2 tasks", new DeleteCommand("delete 1").execute(ui, list, storage));
-            assertEquals("Noted. I've removed this task:\n\t    " + task3 +
-                    "\n\t  Now you have 1 task", new DeleteCommand("delete 2").execute(ui, list, storage));
-            assertEquals("Noted. I've removed this task:\n\t    " + task2 +
-                    "\n\t  Now you have 0 task", new DeleteCommand("delete 1").execute(ui, list, storage));
+            assertEquals("Noted. I've removed this task:\n\t    " + task1
+                    + "\n\t  Now you have 2 tasks", new DeleteCommand("delete 1").execute(ui, list, storage));
+            assertEquals("Noted. I've removed this task:\n\t    " + task3
+                    + "\n\t  Now you have 1 task", new DeleteCommand("delete 2").execute(ui, list, storage));
+            assertEquals("Noted. I've removed this task:\n\t    " + task2
+                    + "\n\t  Now you have 0 task", new DeleteCommand("delete 1").execute(ui, list, storage));
         } catch (Exception e) {
             fail();
         }

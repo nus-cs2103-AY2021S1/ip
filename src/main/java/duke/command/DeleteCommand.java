@@ -1,7 +1,10 @@
 package duke.command;
 
+import duke.component.Parser;
+import duke.component.Storage;
+import duke.component.TaskList;
+import duke.component.Ui;
 import duke.task.Task;
-import duke.component.*;
 
 /**
  * Represents a command for deleting a task.
@@ -31,8 +34,8 @@ public class DeleteCommand extends Command {
         list.remove(toDelete);
         storage.reWrite(list);
         String temp = count <= 2 ? " task" : " tasks";
-        String str = "Noted. I've removed this task:\n\t    " + toDelete +
-                "\n\t  Now you have " + list.size() + temp;
+        String str = "Noted. I've removed this task:\n\t    " + toDelete
+                + "\n\t  Now you have " + list.size() + temp;
         ui.output(str);
         return str;
     }

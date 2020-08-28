@@ -1,8 +1,8 @@
 package duke.task;
 
-import duke.command.InvalidCommandException;
-
 import java.time.LocalDate;
+
+import duke.command.InvalidCommandException;
 
 /**
  * Represents a task that has a designated description and a state of whether it has been done.

@@ -1,15 +1,16 @@
 package duke.component;
 
-import duke.task.Task;
-
 import java.util.Scanner;
 import java.util.function.Predicate;
+
+import duke.task.Task;
 
 /**
  * Represents user-interface objects that deals with user inputs and outputs.
  */
 public class Ui {
-    private static final String HORIZONTAL_LINE = "\t=================================================================================";
+    private static final String HORIZONTAL_LINE = "\t=================================================="
+            + "===============================";
     private final Scanner sc;
 
     /**

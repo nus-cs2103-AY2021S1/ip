@@ -1,7 +1,18 @@
 package duke.component;
 
-import duke.command.*;
-import duke.task.*;
+import duke.command.AddCommand;
+import duke.command.ByeCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.FindCommand;
+import duke.command.HappenCommand;
+import duke.command.InvalidCommandException;
+import duke.command.ListCommand;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
 
 /**
  * Holds the methods for parsing commands.

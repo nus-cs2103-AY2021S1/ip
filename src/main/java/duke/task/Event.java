@@ -1,10 +1,10 @@
 package duke.task;
 
-import duke.command.InvalidCommandException;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+
+import duke.command.InvalidCommandException;
 
 /**
  * Represents an event task that consists of a description and a datetime as the happening time of the event.
@@ -71,14 +71,14 @@ public class Event extends Task {
 
     @Override
     public String output() {
-        return "E" + super.output() + " | At: " +
-                atTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")) + "\n";
+        return "E" + super.output() + " | At: "
+                + atTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")) + "\n";
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " +
-                atTime.format(DateTimeFormatter.ofPattern("hh:mm a   MMM d yyyy")) + ")";
+        return "[E]" + super.toString() + " (at: "
+                + atTime.format(DateTimeFormatter.ofPattern("hh:mm a   MMM d yyyy")) + ")";
     }
 
     /**

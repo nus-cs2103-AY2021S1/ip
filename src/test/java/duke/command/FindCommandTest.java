@@ -1,19 +1,20 @@
 package duke.command;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+
+import org.junit.jupiter.api.Test;
+
 import duke.component.Storage;
 import duke.component.StorageStub;
 import duke.component.TaskList;
 import duke.component.Ui;
 import duke.task.Task;
 import duke.task.ToDo;
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 
 public class FindCommandTest {
     @Test
-    public void isExit__alwaysFalse() {
+    public void isExit_alwaysFalse() {
         assertFalse(new FindCommand("find this").isExit());
         assertFalse(new FindCommand("find ").isExit());
     }

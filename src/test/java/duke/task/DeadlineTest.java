@@ -1,11 +1,14 @@
 package duke.task;
 
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
 public class DeadlineTest {
     @Test
@@ -30,7 +33,7 @@ public class DeadlineTest {
     }
 
     @Test
-    public void isHappeningToday__isHappeningToday() {
+    public void isHappeningToday_isHappeningToday() {
         try {
             LocalDate today = LocalDate.now();
             String td = today.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
@@ -60,7 +63,7 @@ public class DeadlineTest {
     }
 
     @Test
-    public void hasHappenedBeforeToday__hasHappenedBeforeToday() {
+    public void hasHappenedBeforeToday_hasHappenedBeforeToday() {
         try {
             LocalDate today = LocalDate.now();
             String td = today.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
@@ -90,7 +93,7 @@ public class DeadlineTest {
     }
 
     @Test
-    public void isHappeningAfterToday__isHappeningAfterToday() {
+    public void isHappeningAfterToday_isHappeningAfterToday() {
         try {
             LocalDate today = LocalDate.now();
             String td = today.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
@@ -135,7 +138,7 @@ public class DeadlineTest {
     }
 
     @Test
-    public void isOverdue__isOverdue() {
+    public void isOverdue_isOverdue() {
         try {
             Deadline d = new Deadline("Assignment 1", "2020-08-02");
             assertTrue(d.isOverdue());
@@ -148,7 +151,7 @@ public class DeadlineTest {
     }
 
     @Test
-    public void output__toWriteStorage() {
+    public void output_toWriteStorage() {
         try {
             Deadline d = new Deadline("Assignment 1", "2020-08-02");
             assertEquals("D | 0 | Assignment 1 | By: 2020-08-02\n", d.output());
@@ -161,10 +164,11 @@ public class DeadlineTest {
     }
 
     @Test
-    public void toString__systemOutput() {
+    public void toString_systemOutput() {
         try {
             Deadline d = new Deadline("Assignment 1", "2020-08-02");
-            assertEquals("[D][\u2718] Assignment 1 (by: Aug 2 2020) This is overdue! The deadline has passed!!!", d.toString());
+            assertEquals("[D][\u2718] Assignment 1 (by: Aug 2 2020) This is overdue! "
+                    + "The deadline has passed!!!", d.toString());
 
             d.markAsDone();
             assertEquals("[D][\u2713] Assignment 1 (by: Aug 2 2020)", d.toString());

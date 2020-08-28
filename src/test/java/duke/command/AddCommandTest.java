@@ -1,15 +1,22 @@
 package duke.command;
 
-import duke.component.*;
-import duke.task.Task;
-import duke.task.ToDo;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.fail;
+
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import duke.component.Parser;
+import duke.component.Storage;
+import duke.component.StorageStub;
+import duke.component.TaskList;
+import duke.component.Ui;
+import duke.task.Task;
+import duke.task.ToDo;
 
 public class AddCommandTest {
     @Test
-    public void isExit__alwaysFalse() {
+    public void isExit_alwaysFalse() {
         assertFalse(new AddCommand("anything").isExit());
         assertFalse(new AddCommand("todo anything").isExit());
         assertFalse(new AddCommand("event anything").isExit());
@@ -58,12 +65,12 @@ public class AddCommandTest {
 
         try {
             String res = new AddCommand("todo hello").execute(ui, list, storage);
-            assertEquals("Got it. I've added this task:\n\t    " + task +
-                    "\n\t  Now you have 1 task in the list.", res);
+            assertEquals("Got it. I've added this task:\n\t    " + task
+                    + "\n\t  Now you have 1 task in the list.", res);
 
             String res2 = new AddCommand("todo world").execute(ui, list, storage);
-            assertEquals("Got it. I've added this task:\n\t    " + task2 +
-                    "\n\t  Now you have 2 tasks in the list.", res2);
+            assertEquals("Got it. I've added this task:\n\t    " + task2
+                    + "\n\t  Now you have 2 tasks in the list.", res2);
         } catch (Exception e) {
             fail();
         }

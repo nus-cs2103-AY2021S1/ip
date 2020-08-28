@@ -1,10 +1,13 @@
 package duke.task;
 
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.time.LocalDate;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
 public class ToDoTest {
     @Test
@@ -17,7 +20,7 @@ public class ToDoTest {
     }
 
     @Test
-    public void output__toWriteStorage() {
+    public void output_toWriteStorage() {
         try {
             ToDo t = new ToDo("return books");
             assertEquals("T | 0 | return books\n", t.output());
@@ -30,7 +33,7 @@ public class ToDoTest {
     }
 
     @Test
-    public void toString__systemOutput() {
+    public void toString_systemOutput() {
         try {
             ToDo t = new ToDo("return books");
             assertEquals("[T][\u2718] return books", t.toString());

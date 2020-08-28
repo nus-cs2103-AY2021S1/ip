@@ -1,9 +1,9 @@
 package duke.component;
 
-import duke.task.Task;
-
 import java.util.ArrayList;
 import java.util.function.Predicate;
+
+import duke.task.Task;
 
 /**
  * Represents lists of tasks.
