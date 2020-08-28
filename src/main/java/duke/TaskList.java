@@ -79,4 +79,14 @@ public class TaskList {
             ui.describeTask(list, curr);
         }
     }
+
+    public ArrayList<Task> findTask(ArrayList<Task> list, String query) {
+        ArrayList<Task> suitableTasks = new ArrayList<>();
+        list.forEach(x -> {
+            if (x.getDescription().contains(query)) {
+                suitableTasks.add(x);
+            }
+        });
+        return suitableTasks;
+    }
 }

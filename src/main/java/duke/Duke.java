@@ -84,10 +84,7 @@ public class Duke {
                     System.out.println(ex + ". ☹ The description of an event cannot be empty.");
                 }
             } else {
-                ui.buildChatSeparator();
-                System.out.println("added: " + input);
-                ui.buildChatSeparator();
-                list.add(new Task(input, false));
+                ui.printList(tl.findTask(list, splitted[1]));
             }
         }
     }
