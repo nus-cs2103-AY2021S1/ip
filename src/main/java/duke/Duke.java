@@ -2,6 +2,7 @@ package duke;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Scanner;
 import exception.*;
 
 public class Duke {
@@ -20,10 +21,11 @@ public class Duke {
     }
 
     public void run() {
+        Scanner sc = new Scanner(System.in);
         ui.printWelcome();
-        boolean isExit = false;
-        while(!isExit) {
-            String fullCommand = ui.readCommand();
+
+        while(sc.hasNextLine()) {
+            String fullCommand = sc.nextLine();
             ui.printDivider();
             String[] inputs = fullCommand.split("\\s+", 2);
             try {
@@ -35,7 +37,6 @@ public class Duke {
                     } catch (IOException ex){
                         ui.printOutput(ex.getMessage());
                     }
-                    isExit = true;
                     break;
                 } else if (command.equals(Commands.LIST)) {
                     ui.printTaskList(taskList);
@@ -50,10 +51,15 @@ public class Duke {
                     }
                 } else if (command.equals(Commands.DELETE)) {
                     try {
-                        Parser.checkIndex(inputs, taskList.getSize());
-                        int index = Integer.parseInt(inputs[1]) - 1;
-                        ui.printDeleteTask(taskList.getTask(index), taskList.getSize() - 1);
-                        taskList.removeTask(index);
+                        if (inputs.length > 1 && inputs[1].trim().equals("all")) {
+                            taskList.removeAllTasks();
+                            ui.printDeleteAllTasks();
+                        } else {
+                            Parser.checkIndex(inputs, taskList.getSize());
+                            int index = Integer.parseInt(inputs[1]) - 1;
+                            ui.printDeleteTask(taskList.getTask(index), taskList.getSize() - 1);
+                            taskList.removeTask(index);
+                        }
                     } catch (InvalidIndexException ex) {
                         ui.printOutput(ex.getMessage());
                     }

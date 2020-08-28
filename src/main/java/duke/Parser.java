@@ -22,10 +22,15 @@ public class Parser {
 
 	public static void checkIndex (String[] inputs, int numberOfTask) throws InvalidIndexException {
 		String usage = (numberOfTask > 1 ? "\nInput a number between 1 - " + numberOfTask : "");
-		if(inputs.length < 2 ||
-			inputs[1].trim().equals("") ||
-			Integer.parseInt(inputs[1]) < 1 ||
-			Integer.parseInt(inputs[1]) > numberOfTask) {
+		if(inputs.length < 2 || inputs[1].trim().equals("")) {
+			throw new InvalidIndexException("Please input a valid index of task" + usage );
+		}
+		try {
+			int index = Integer.parseInt(inputs[1]);
+			if (index < 1 || index > numberOfTask) {
+				throw new InvalidIndexException("Please input a valid index of task" + usage );
+			}
+		} catch (NumberFormatException ex) {
 			throw new InvalidIndexException("Please input a valid index of task" + usage );
 		}
 	}

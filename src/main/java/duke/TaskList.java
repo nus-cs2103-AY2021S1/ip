@@ -33,6 +33,10 @@ public class TaskList {
 		tasks.remove(index);
 	}
 
+	public void removeAllTasks() {
+		tasks = new ArrayList<>();
+	}
+
 	public void addTask(Task task) {
 		tasks.add(task);
 	}

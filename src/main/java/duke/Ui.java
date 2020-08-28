@@ -1,18 +1,8 @@
 package duke;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Ui {
-	public String readCommand() {
-		Scanner sc = new Scanner(System.in);
-		if(sc.hasNextLine()) {
-			return sc.nextLine();
-		} else {
-			return "";
-		}
-	}
-
 	public void printDivider() {
 		System.out.println("          ____________________________________________________________");
 	}
@@ -63,5 +53,10 @@ public class Ui {
 		printOutput(task.toString());
 		printOutput("Now you have " + numberOfTask + " tasks in the list.");
 
+	}
+
+	public void printDeleteAllTasks() {
+		printOutput("Noted. I've removed all tasks in the list.");
+		printOutput("Now you have no task in the list.");
 	}
 }
