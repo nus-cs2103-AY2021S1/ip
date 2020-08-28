@@ -11,10 +11,9 @@ import java.time.format.DateTimeParseException;
 import java.time.temporal.ChronoField;
 
 abstract class TimedTask extends Task {
-    protected final LocalDateTime dateby;
     protected static final DateTimeFormatter FMAT;
-    
-    
+    protected static final LocalDate NOW = LocalDateTime.now().toLocalDate();
+
     static {
         DateTimeFormatterBuilder dateTimeFormatterBuilder = new DateTimeFormatterBuilder();
         dateTimeFormatterBuilder.appendPattern("dd-MM-yyyy");
@@ -27,38 +26,41 @@ abstract class TimedTask extends Task {
         FMAT = dateTimeFormatterBuilder
                 .toFormatter();
     }
-    protected static final LocalDate NOW = LocalDateTime.now().toLocalDate();
-    
+
+    protected final LocalDateTime dateby;
+
     protected TimedTask(String desc, String date, Boolean done) throws DukeDateTimeException {
         super(desc, done);
         try {
-            if (NOW.format(FMAT).length() > date.length()){
-                date = date+NOW.format(FMAT).substring(date.length());
+            if (NOW.format(FMAT).length() > date.length()) {
+                date = date + NOW.format(FMAT).substring(date.length());
             }
-            this.dateby = LocalDateTime.parse(date,FMAT);    
-        }catch (DateTimeParseException e){
+            this.dateby = LocalDateTime.parse(date, FMAT);
+        } catch (DateTimeParseException e) {
             throw new DukeDateTimeException("The String you entered does not meet the required format of 'yyyy-MM-dd' ");
         }
-        
+
     }
+
     protected TimedTask(String desc, String date) throws DukeDateTimeException {
         this(desc, date, false);
     }
-    
-    protected int timeLeft(){
-        return Period.between(NOW,LocalDate.from(dateby)).getDays();
+
+    protected int timeLeft() {
+        return Period.between(NOW, LocalDate.from(dateby)).getDays();
     }
 
     /**
      * Get the dateby for the set task
+     *
      * @return dateby for the registered task
      */
-    public String getDateby(){
+    public String getDateby() {
         return dateby.toLocalDate().format(FMAT);
     }
 
     @Override
     public String saveTask() {
-        return super.saveTask()+SEP+getDateby();
+        return super.saveTask() + SEPERATOR + getDateby();
     }
 }

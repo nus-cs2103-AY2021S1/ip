@@ -1,26 +1,23 @@
 package tasks;
 
-import exceptions.DukeDateTimeException;
 import org.junit.jupiter.api.Test;
-import tasks.Command;
-import tasks.TextParser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class TextParserTest {
     @Test
-    public void whenGivenUnknownCommand_thenAssertThrowsException(){
+    public void parseCommand_givenUnknownCommand_thenAssertThrowsException() {
         TextParser textParser = new TextParser();
-        assertEquals(Command.error,textParser.parseCommand("hello"));
+        assertEquals(Command.ERROR, textParser.parseCommand("hello"));
     }
+
     @Test
-    public void whenGivenSeperationToken_AssertTokenSeperatesString(){
+    public void parseCommand_givenSeperationToken_AssertTokenSeperatesString() {
         TextParser textParser = new TextParser();
         String test = "todo";
-        Command expectedResult = Command.todo;
+        Command expectedResult = Command.TODO;
         assertEquals(expectedResult, textParser.parseCommand(test));
-    } 
-    
-    
+    }
+
+
 }

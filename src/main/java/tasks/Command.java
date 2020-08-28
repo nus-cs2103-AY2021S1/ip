@@ -1,25 +1,32 @@
 package tasks;
 
 public enum Command {
-    error("asjdbaksjfbanfjknjkdfnskasd"),//random string as this is the default enum
-    bye("bye"),
-    help("help"),
-    list("list"),
-    done("done"),
-    delete("delete"),
-    todo("todo"),
-    deadline("deadline"),
-    event("event"),
-    blank("");
-    private final String code;
-    private Command(String code){
-        this.code = code;
+    ERROR("asjdbaksjfbanfjknjkdfnskasd"),//random string as this is the default enum
+    BYE("bye"),
+    HELP("help"),
+    LIST("list"),
+    DONE("done"),
+    DELETE("delete"),
+    TODO("todo"),
+    DEADLINE("deadline"),
+    EVENT("event"),
+    BLANK("");
+    private final String commandEncoding;
+
+    Command(String code) {
+        this.commandEncoding = code;
     }
 
-    public String  getCode() {
-        return code;
+    /**
+     * Getter for the code of the enumeration
+     *
+     * @return code attribute of Command
+     */
+    public String getCode() {
+        return commandEncoding;
     }
-    public String toString(){
-        return code;
+
+    public String toString() {
+        return commandEncoding;
     }
 }

@@ -17,73 +17,77 @@ import java.util.Scanner;
  * Class to perform reading and writing operations on the task list itself.
  */
 public class TaskIOParser {
-    private final File saveFile;
     private static final String SAVEFILE = "save.txt";
-    TaskIOParser(String path){
-        Path taskFile = Paths.get(path,"src","save");
+    private final File saveFile;
+
+    TaskIOParser(String path) {
+        Path taskFile = Paths.get(path, "src", "save");
         this.saveFile = new File(taskFile.toString());
     }
 
     /**
      * Load tasks from a text file into memory
+     *
      * @return A read text file of tasks to Tasklist
      * @throws DukeIOException
      */
     public List<Task> loadTaskList() throws DukeIOException {
         List<Task> tasks = new ArrayList<>();
-        try{
+        try {
             Scanner sc = new Scanner(this.saveFile.toPath().resolve(SAVEFILE));
             String currentLine = "";
             String[] spl;
             while (sc.hasNext()) {
                 try {
                     currentLine = sc.nextLine();
-                    spl = currentLine.split(Task.SEP);
+                    spl = currentLine.split(Task.SEPERATOR);
                     switch (spl[0]) {
                         case "T":
                             tasks.add(new ToDo(spl[2], Boolean.parseBoolean(spl[1])));
                             break;
                         case "D":
-                            tasks.add(new Deadline( spl[2],spl[3], Boolean.parseBoolean(spl[1])));
+                            tasks.add(new Deadline(spl[2], spl[3], Boolean.parseBoolean(spl[1])));
                             break;
                         case "E":
-                            tasks.add(new Event(spl[2], spl[3],Boolean.parseBoolean(spl[1])));
+                            tasks.add(new Event(spl[2], spl[3], Boolean.parseBoolean(spl[1])));
                             break;
                     }
-                }catch (DukeDateTimeException ignored){
+                } catch (DukeDateTimeException ignored) {
                     // ignored as if the error occurs, we just do not parse that command
                 }
             }
             sc.close();
             return tasks;
-        }catch (IOException fileException ){
+        } catch (IOException fileException) {
             throw new DukeIOException("Oops we couldnt read any file," +
                     " hence we will start from a new save file");
         }
-        
+
     }
 
     /**
      * For initialising new TaskList
+     *
      * @return returns a new List<Task>
      */
-    public List<Task> loadNewTaskList(){
+    public List<Task> loadNewTaskList() {
         return new ArrayList<>();
     }
-    public void writeTask(List<Task> taskList) throws DukeIOException{
-        if (!saveFile.exists()){
+
+    public void writeTask(List<Task> taskList) throws DukeIOException {
+        if (!saveFile.exists()) {
             try {
                 Files.createDirectory(Path.of(saveFile.getPath()));
                 Files.createFile(Path.of(saveFile.getPath()).resolve(SAVEFILE));
-            }catch (IOException e){
+            } catch (IOException e) {
                 throw new DukeIOException("Could not save the file due to directory not created");
             }
         }
-        
-        try{
+
+        try {
             FileWriter fw = new FileWriter(Path.of(saveFile.getPath()).resolve(SAVEFILE).toFile());
-            String linesep = System.lineSeparator(); 
-            for (Task t : taskList){
+            String linesep = System.lineSeparator();
+            for (Task t : taskList) {
                 fw.write(t.saveTask());
                 fw.write(linesep);
             }
