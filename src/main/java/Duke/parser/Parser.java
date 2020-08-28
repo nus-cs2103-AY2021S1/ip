@@ -75,6 +75,13 @@ public class Parser {
 			else if (instruction.length == 2) {
 				return new DeleteCommand(instruction[1]);
 			}
+		} else if (instruction[0].equals("find")) {
+			//find with no other arguments
+			if (instruction.length == 1) {
+				throw new DukeException("Please specify a description to search!");
+			} else {
+				return new FindCommand(instruction[1]);
+			}
 		} else {
 			throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
 		}
