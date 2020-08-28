@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 public class DataStorageInterface {
 
@@ -56,14 +58,15 @@ public class DataStorageInterface {
 
     public static Task addDeadline(String title,
                                    String preposition,
-                                   String dateTime) throws WrongUsageException{
-        Task newTask = new Deadline(title,preposition,dateTime);
+                                   LocalDate date, LocalTime time) throws WrongUsageException{
+        Task newTask = new Deadline(title,preposition,date, time);
         DataStorage.taskList.add(newTask);
         return newTask;
     }
 
-    public static Task addEvent(String title, String preposition, String dateTime) throws WrongUsageException{
-        Task newTask = new Event(title,preposition,dateTime);
+    public static Task addEvent(String title, String preposition, LocalDate date, LocalTime time)
+            throws WrongUsageException{
+        Task newTask = new Event(title,preposition,date, time);
         DataStorage.taskList.add(newTask);
         return newTask;
     }
@@ -86,6 +89,16 @@ public class DataStorageInterface {
             acc.append(String.format("%d. %s\n", i, t));
         }
         return acc.toString().isEmpty()?"There are no Tasks in the list":acc.toString();
+    }
+
+    public static String getSaveRepresentation(){
+        StringBuilder acc = new StringBuilder();
+        int i = 0;
+        for (Task t: DataStorage.taskList){
+            i++;
+            acc.append(String.format("%d. %s\n", i, t.saveStringRepresentation()));
+        }
+        return acc.toString().isEmpty()?"":acc.toString();
     }
 
     //TODO: Possibly requires a newline char

@@ -37,7 +37,7 @@ public class Save extends Command{
         if(file.exists()){
             new FileWriter(file,false).close();
             FileWriter fileWriter = new FileWriter(file, true);
-            String allTasks = DataStorageInterface.listOfTasks();
+            String allTasks = DataStorageInterface.getSaveRepresentation();
             System.out.println("The following tasks have been saved.\n" + allTasks);
             fileWriter.write(allTasks);
             fileWriter.close();

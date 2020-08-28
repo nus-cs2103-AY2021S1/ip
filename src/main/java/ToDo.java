@@ -8,8 +8,8 @@ public class ToDo extends Task{
         if(title.isEmpty()){
             throw new WrongUsageException(this.name, this.usage);
         }
+        this.saveRep = "[T] " + super.toString();
     }
-
 
     @Override
     public String toString() {
