@@ -1,7 +1,15 @@
 package duke.parser;
 
 import duke.exception.DukeException;
-import duke.operation.*;
+import duke.operation.Operation;
+import duke.operation.AddDeadlineOperation;
+import duke.operation.AddEventOperation;
+import duke.operation.AddTodoOperation;
+import duke.operation.ExitOperation;
+import duke.operation.FindOperation;
+import duke.operation.ListOperation;
+import duke.operation.DeleteOperation;
+import duke.operation.DoneOperation;
 import duke.storage.TaskStorage;
 import duke.task.TaskList;
 import duke.task.Todo;
@@ -13,6 +21,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
 
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class CommandParserTest {
@@ -95,7 +104,7 @@ public class CommandParserTest {
         try {
             commandParser.parse(command, taskList, storage);
         } catch (DukeException exception) {
-            assertTrue(exception.getMessage() != null);
+            assertNotNull(exception.getMessage());
         }
     }
 }
