@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 public class DataStorageInterface {
 
@@ -56,14 +58,15 @@ public class DataStorageInterface {
 
     public static Task addDeadline(String title,
                                    String preposition,
-                                   String dateTime) throws WrongUsageException{
-        Task newTask = new Deadline(title,preposition,dateTime);
+                                   LocalDate date, LocalTime time) throws WrongUsageException{
+        Task newTask = new Deadline(title,preposition,date, time);
         DataStorage.taskList.add(newTask);
         return newTask;
     }
 
-    public static Task addEvent(String title, String preposition, String dateTime) throws WrongUsageException{
-        Task newTask = new Event(title,preposition,dateTime);
+    public static Task addEvent(String title, String preposition, LocalDate date, LocalTime time)
+            throws WrongUsageException{
+        Task newTask = new Event(title,preposition,date, time);
         DataStorage.taskList.add(newTask);
         return newTask;
     }
