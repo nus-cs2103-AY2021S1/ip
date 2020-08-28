@@ -7,12 +7,24 @@ import Duke.storage.Storage;
 import Duke.task.TaskList;
 import Duke.ui.Ui;
 
+/**
+ * The Dukenizer program implements a Task Manager application. It performs task manipulations
+ * based on user commands. It consists of a TaskList object to store your tasks, a Ui object
+ * to handle user interactions and a Storage object to save and retrieve tasks in a list.
+ */
 public class Duke {
 
 	private Storage storage;
 	private TaskList tasks;
 	private Ui ui;
 
+
+	/** Constructs a Duke object from a specified filePath. If a valid .txt file containing
+	 * a TaskList is found, it will be loaded. Otherwise, a new TaskList object is created
+	 * to store the tasks.
+	 *
+	 * @param filePath Relative filepath from project source.
+	 * */
 	public Duke(String filePath) {
 		//initialize User interface
 		ui = new Ui();
@@ -30,6 +42,7 @@ public class Duke {
 
 	}
 
+	/** Main program loop until termination when "bye" is called by the user. */
 	public void run() {
 
 		//print greeting message
