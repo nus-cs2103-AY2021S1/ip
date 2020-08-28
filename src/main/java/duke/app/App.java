@@ -1,4 +1,4 @@
-package duke;
+package duke.app;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -81,6 +81,9 @@ public class App extends Application {
             dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
             userInput.clear();
         });
+
+        //Scroll down to the end every time dialogContainer's height changes.
+        dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
     }
 
     /**
