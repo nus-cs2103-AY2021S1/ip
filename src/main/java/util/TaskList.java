@@ -1,10 +1,10 @@
-package duke.util;
-
-import duke.task.Task;
+package util;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
+
+import task.Task;
 
 /**
  * Data structure to store tasks.
@@ -48,19 +48,6 @@ public class TaskList {
     }
 
     /**
-     * Prints task stored at index.
-     *
-     * @param index Index of task to be printed.
-     * @throws DukeException If index is invalid.
-     */
-    public void printTask(int index) throws DukeException {
-        if (index < 0 || index >= tasks.size()) {
-            throw new DukeException("Invalid index given");
-        }
-        System.out.println((index + 1) + ". " + tasks.get(index));
-    }
-
-    /**
      * Prints all tasks sequentially that satisfied filter.
      *
      * @param filter Filters which tasks will be printed.
@@ -71,6 +58,19 @@ public class TaskList {
                 System.out.println((i + 1) + ". " + tasks.get(i));
             }
         }
+    }
+
+    /**
+     * Prints task stored at index.
+     *
+     * @param index Index of task to be printed.
+     * @throws DukeException If index is invalid.
+     */
+    public void printTask(int index) throws DukeException {
+        if (index < 0 || index >= tasks.size()) {
+            throw new DukeException("Invalid index given");
+        }
+        System.out.println((index + 1) + ". " + tasks.get(index));
     }
 
     /**

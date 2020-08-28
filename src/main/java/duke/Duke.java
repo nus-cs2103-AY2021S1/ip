@@ -1,29 +1,10 @@
 package duke;
 
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.ToDo;
-
-import duke.util.DukeException;
-import duke.util.Parser;
-import duke.util.Storage;
-import duke.util.TaskList;
-import duke.util.Ui;
-
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-
-import java.time.DateTimeException;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import util.DukeException;
+import util.Parser;
+import util.Storage;
+import util.TaskList;
+import util.Ui;
 
 /**
  * Driver to run the Duke app.
@@ -55,12 +36,10 @@ public class Duke {
         while (!input.equals("bye")) {
             try {
                 Parser.parse(input, taskList, ui);
-            }
-            catch (DukeException e) {
+            } catch (DukeException e) {
                 System.out.println(e.getMessage());
                 ui.printLine();
-            }
-            finally {
+            } finally {
                 input = ui.readLine();
             }
         }

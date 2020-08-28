@@ -1,14 +1,19 @@
-package duke.util;
+package util;
 
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.ToDo;
-
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+
+import task.Deadline;
+import task.Event;
+import task.Task;
+import task.ToDo;
 
 /**
  * Data reading and storage manager.
@@ -44,7 +49,7 @@ public class Storage {
             BufferedReader br = new BufferedReader(new FileReader(file));
 
             String line;
-            while ((line = br.readLine()) != null){
+            while ((line = br.readLine()) != null) {
 
                 String[] lineArr = line.split("\\s(\\|)\\s");
 
@@ -58,6 +63,7 @@ public class Storage {
                 case "E":
                     output.add(new Event(lineArr[2], lineArr[3], lineArr[4]));
                     break;
+                default:
                 }
 
                 if (lineArr[1].equals("1")) {
@@ -89,24 +95,30 @@ public class Storage {
             BufferedWriter bw = new BufferedWriter(new FileWriter(file));
 
             int completed;
+            DateTimeFormatter format = DateTimeFormatter.ofPattern("YYYY-MM-dd");
 
             for (Task task : tasks) {
                 completed = task.isCompleted() ? 1 : 0;
 
                 if (task instanceof ToDo) {
+
                     bw.write(String.format("T | %d | %s\n", completed, task.getMsg()));
-                }
-                else if (task instanceof Deadline) {
-                    String time = (((Deadline) task).getTime() != null) ?
-                            ((Deadline) task).getTime().format(DateTimeFormatter.ofPattern("HH:mm")) : "NA";
-                    bw.write(String.format("D | %d | %s | %s | %s\n", completed, task.getMsg(),
-                            ((Deadline) task).getDate().format(DateTimeFormatter.ofPattern("YYYY-MM-dd")), time));
-                }
-                else if (task instanceof Event) {
-                    String time = (((Event) task).getTime() != null) ?
-                            ((Event) task).getTime().format(DateTimeFormatter.ofPattern("HH:mm")) : "NA";
-                    bw.write(String.format("E | %d | %s | %s | %s\n", completed, task.getMsg(),
-                            ((Event) task).getDate().format(DateTimeFormatter.ofPattern("YYYY-MM-dd")), time));
+
+                } else if (task instanceof Deadline) {
+
+                    String time = (((Deadline) task).getTime() != null)
+                            ? ((Deadline) task).getTime().format(DateTimeFormatter.ofPattern("HH:mm")) : "NA";
+                    bw.write(String.format("D | %d | %s | %s | %s\n", completed,
+                            task.getMsg(), ((Deadline) task).getDate().format(format),
+                            time));
+
+                } else if (task instanceof Event) {
+
+                    String time = (((Event) task).getTime() != null)
+                            ? ((Event) task).getTime().format(DateTimeFormatter.ofPattern("HH:mm")) : "NA";
+                    bw.write(String.format("E | %d | %s | %s | %s\n", completed,
+                            task.getMsg(), ((Event) task).getDate().format(format),
+                            time));
                 }
             }
 

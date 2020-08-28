@@ -1,4 +1,4 @@
-package duke.task;
+package task;
 
 /**
  * Task that marks a to-do.
@@ -10,7 +10,7 @@ public class ToDo extends Task {
      *
      * @param msg Stored message for to do.
      */
-    public ToDo(String msg){
+    public ToDo(String msg) {
         super(msg);
     }
 
@@ -20,7 +20,7 @@ public class ToDo extends Task {
      * @return Formatted string of the to do.
      */
     @Override
-    public String toString(){
+    public String toString() {
         return "[T]" + super.toString();
     }
 }

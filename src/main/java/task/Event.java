@@ -1,4 +1,4 @@
-package duke.task;
+package task;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -19,7 +19,7 @@ public class Event extends Task {
      * @param date Date of event.
      * @param time Time of event (empty string or "NA" for no time).
      */
-    public Event(String msg, String date, String time){
+    public Event(String msg, String date, String time) {
         super(msg);
         this.date = LocalDate.parse(date);
 
@@ -52,8 +52,8 @@ public class Event extends Task {
      * @return Formatted string of the event.
      */
     @Override
-    public String toString(){
-        return "[E]" + super.toString() + " (at: " +  date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) +
-                ((time != null) ? " " + time.format(DateTimeFormatter.ofPattern("HH:mm")) : "") + ")";
+    public String toString() {
+        return "[E]" + super.toString() + " (at: " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
+                + ((time != null) ? " " + time.format(DateTimeFormatter.ofPattern("HH:mm")) : "") + ")";
     }
 }

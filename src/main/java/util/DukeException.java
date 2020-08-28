@@ -1,4 +1,4 @@
-package duke.util;
+package util;
 
 /**
  * Exception storage used by Duke app during runtime to capture invalid inputs from users.

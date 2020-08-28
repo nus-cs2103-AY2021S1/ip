@@ -1,4 +1,4 @@
-package duke.task;
+package task;
 
 /**
  * Abstract implementation of a task.
@@ -43,7 +43,7 @@ public abstract class Task {
      *
      * @return Stored message of task.
      */
-    public String getMsg(){
+    public String getMsg() {
         return msg;
     }
 

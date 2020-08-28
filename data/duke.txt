@@ -5,3 +5,4 @@ D | 1 | test | 2020-10-28 | NA
 E | 0 | anniversary | 2020-09-09 | NA
 T | 0 | sleep
 T | 1 | eat
+E | 0 | exam | 2020-11-15 | NA
