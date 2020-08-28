@@ -6,7 +6,7 @@ public class ChatBot {
 
     static boolean ended = false;
 
-    public static void start(){
+    public static void start() {
         try {
             DataStorageInterface.initStorage();
             Scanner scanner = new Scanner(System.in);
@@ -20,16 +20,16 @@ public class ChatBot {
                     System.out.println(e.getMessage());
                 }
             }
-        } catch(DukeException e){
+        } catch (DukeException e) {
             System.out.println("ChatBot initialisation failed.");
         }
     }
 
-    private static String response(String query) throws Exception{
+    private static String response(String query) throws Exception {
         String[] splitQuery = Parser.getSplit(query);
         String command = Parser.getCommand(splitQuery);
-        String[] cRemoved = Parser.removeCommandString(splitQuery);
-        switch (command){
+        String[] commandRemoved = Parser.removeCommandString(splitQuery);
+        switch (command) {
             case "bye":
                 Bye bye = new Bye();
                 bye.endBot();
@@ -38,23 +38,24 @@ public class ChatBot {
                 Clear clear = new Clear();
                 return clear.response();
             case "deadline":
-                String title = Parser.getTitle(cRemoved);
-                String preposition = Parser.getPreposition(cRemoved);
-                LocalDate dateDeadline = Parser.getDate(cRemoved);
-                LocalTime timeDeadline = Parser.getTime(cRemoved);
-                Task deadline = DataStorageInterface.addDeadline(title,preposition,dateDeadline,timeDeadline);
+                String title = Parser.getTitle(commandRemoved);
+                String preposition = Parser.getPreposition(commandRemoved);
+                LocalDate dateDeadline = Parser.getDate(commandRemoved);
+                LocalTime timeDeadline = Parser.getTime(commandRemoved);
+                Task deadline = DataStorageInterface.addDeadline(
+                        title,preposition,dateDeadline,timeDeadline);
                 return DataStorageInterface.taskAdded(deadline);
             case "delete":
-                Delete delete = new Delete(cRemoved);
+                Delete delete = new Delete(commandRemoved);
                 return delete.deleteTask(splitQuery[1]);
             case "done":
-                Done done = new Done(cRemoved);
+                Done done = new Done(commandRemoved);
                 return done.markedAsDone(splitQuery[1]);
             case "event":
-                String ttle = Parser.getTitle(cRemoved);
-                String ppstn = Parser.getPreposition(cRemoved);
-                LocalDate dateEvent = Parser.getDate(cRemoved);
-                LocalTime timeEvent = Parser.getTime(cRemoved);
+                String ttle = Parser.getTitle(commandRemoved);
+                String ppstn = Parser.getPreposition(commandRemoved);
+                LocalDate dateEvent = Parser.getDate(commandRemoved);
+                LocalTime timeEvent = Parser.getTime(commandRemoved);
                 Task event = DataStorageInterface.addEvent(ttle,ppstn,dateEvent,timeEvent);
                 return DataStorageInterface.taskAdded(event);
             case "help":
@@ -71,7 +72,7 @@ public class ChatBot {
                 save.writeToFile();
                 return save.response();
             case "todo":
-                String editedQ = Parser.concatenateStrArr(cRemoved);
+                String editedQ = Parser.concatenateStrArr(commandRemoved);
                 Task toDo = DataStorageInterface.addToDo(editedQ);
                 return DataStorageInterface.taskAdded(toDo);
             default:

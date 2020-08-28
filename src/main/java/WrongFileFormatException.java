@@ -1,6 +1,6 @@
-public class WrongFileFormatException extends DukeException{
+public class WrongFileFormatException extends DukeException {
 
-    WrongFileFormatException(String filePath){
+    WrongFileFormatException(String filePath) {
         this.errorMessage = "The file '" + filePath + "' has the wrong file format.\n" +
                 "Make sure it follows the following format for the following tasks types:\n" +
                 "1: [T], [D], [E]\n" +

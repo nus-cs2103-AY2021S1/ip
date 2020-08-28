@@ -1,17 +1,18 @@
-public abstract class Task extends Command{
+public abstract class Task extends Command {
+
     private final String title;
     protected String saveRep;
     private boolean isDone = false;
 
-    Task(String title){
+    Task(String title) {
         this.title = title;
     }
 
-    private String doneToString(){
-        return isDone ? "[DONE]": "[X]";
+    private String doneToString() {
+        return isDone ? "[DONE]" : "[X]";
     }
 
-    public void markDone(){
+    public void markDone() {
         isDone = true;
     }
 
@@ -19,7 +20,7 @@ public abstract class Task extends Command{
         return isDone;
     }
 
-    public String saveStringRepresentation(){
+    public String saveStringRepresentation() {
         return saveRep;
     }
 

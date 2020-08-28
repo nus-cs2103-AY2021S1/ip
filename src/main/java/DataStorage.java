@@ -7,7 +7,7 @@ public class DataStorage {
     public static ArrayList<Task> taskList = new ArrayList<>();
     public static ArrayList<Command> commandInit = new ArrayList<>();
 
-    public static void init() throws DukeException{
+    public static void init() throws DukeException {
         commandInit.add(new Bye());
         commandInit.add(new Clear());
         commandInit.add(new Deadline("init","by",LocalDate.MAX,LocalTime.MIDNIGHT));

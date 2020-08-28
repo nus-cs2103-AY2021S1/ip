@@ -1,13 +1,13 @@
-public class Clear extends Command{
+public class Clear extends Command {
 
-    Clear(){
+    Clear() {
         this.name = "clear";
         this.usage = "clear";
         this.description = "Clears the screen with newline characters";
     }
 
     //Currently has 20 newline characters
-    public String response(){
+    public String response() {
         return "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
     }
 }

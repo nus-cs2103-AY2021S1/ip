@@ -3,29 +3,29 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class Save extends Command{
+public class Save extends Command {
 
     String DIR_PATH = "./data/";
     String FILE_NAME = "duke.txt";
 
-    Save(){
+    Save() {
         this.name = "save";
         this.usage = "save";
         this.description = "Saves current list into file called " +
                 "'ip/data/duke.txt'. Creates file and folder if they do not exist";
     }
 
-    private void createDirectory(){
+    private void createDirectory() {
         new File(DIR_PATH).mkdirs();
     }
 
-    private void createFile() throws IOException{
+    private void createFile() throws IOException {
         createDirectory();
         File dir = new File(DIR_PATH);
-        if(dir.exists()){
-            File saveDatafile = new File(DIR_PATH+FILE_NAME);
+        if (dir.exists()) {
+            File saveDatafile = new File(DIR_PATH + FILE_NAME);
             saveDatafile.createNewFile();
-        } else{
+        } else {
             throw new FileNotFoundException("The directory " + DIR_PATH +
                     " does not exist");
         }
@@ -34,20 +34,20 @@ public class Save extends Command{
     public void writeToFile() throws IOException {
         createFile();
         File file = new File(DIR_PATH + FILE_NAME);
-        if(file.exists()){
+        if (file.exists()) {
             new FileWriter(file,false).close();
             FileWriter fileWriter = new FileWriter(file, true);
             String allTasks = DataStorageInterface.getSaveRepresentation();
             System.out.println("The following tasks have been saved.\n" + allTasks);
             fileWriter.write(allTasks);
             fileWriter.close();
-        } else{
+        } else {
             throw new FileNotFoundException("The file " + DIR_PATH +
                     FILE_NAME + " does not exist");
         }
     }
 
-    public String response(){
+    public String response() {
         return "File saved successfully at " + DIR_PATH + FILE_NAME;
     }
 

@@ -1,11 +1,11 @@
-public class ToDo extends Task{
+public class ToDo extends Task {
 
-    ToDo(String title) throws WrongUsageException{
+    ToDo(String title) throws WrongUsageException {
         super(title);
         this.name = "todo";
         this.usage = "todo [TaskToBeDone]";
         this.description = "Stores a task in the list marked as a todo";
-        if(title.isEmpty()){
+        if (title.isEmpty()) {
             throw new WrongUsageException(this.name, this.usage);
         }
         this.saveRep = "[T] " + super.toString();

@@ -5,6 +5,7 @@ public abstract class Command {
     protected String description;
 
     Command(){}
+
     public String getName() {
         return name;
     }

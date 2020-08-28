@@ -5,24 +5,25 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Load extends Command{
+public class Load extends Command {
 
     String filePath;
-    Load(String[] query) throws WrongUsageException{
+
+    Load(String[] query) throws WrongUsageException {
         this.name = "load";
         this.usage = "load [FILE_PATH]";
         this.description = "Used to load files stored in the task format";
-        if(query.length != 2){
+        if (query.length != 2) {
             throw new WrongUsageException(this.name, this.usage);
         }
         this.filePath = query[1];
     }
 
-    public String load() throws FileNotFoundException,DukeException {
+    public String load() throws FileNotFoundException, DukeException {
         boolean success = readFile();
-        if(success) {
+        if (success) {
             return "Successfully loaded tasks:\n" + DataStorageInterface.listOfTasks();
-        } else{
+        } else {
             return "There was some error. Could not load tasks successfully.";
         }
     }
@@ -31,12 +32,12 @@ public class Load extends Command{
         File file = new File(filePath);
         ArrayList<Task> newTasks = new ArrayList<>();
         System.out.println("Loaded file and created the array successfully");
-        if(!file.exists()){
+        if (!file.exists()) {
             System.out.println("File does not exist");
             return false;
-        } else{
+        } else {
             Scanner reader = new Scanner(file);
-            while (reader.hasNextLine()){
+            while (reader.hasNextLine()) {
                 String data = reader.nextLine();
                 Task task = parseData(data);
                 newTasks.add(task);
@@ -47,7 +48,7 @@ public class Load extends Command{
         }
     }
 
-    private Task parseData(String data) throws DukeException{
+    private Task parseData(String data) throws DukeException {
         ///Following the following format
         ///1. [T] [X]  something
         //2. [D] [X]  eat cereal (by:  12/05/2020 14:30)
@@ -55,16 +56,16 @@ public class Load extends Command{
         String[] splitData = data.split("\\s+");
         String taskType = splitData[1];
         boolean isDone = splitData[2].equals("[DONE]");
-        if(taskType.equals("[T]")){
+        if (taskType.equals("[T]")) {
             String taskName = concatenateStrArr(splitData, 3, splitData.length);
             Task task = new ToDo(taskName);
-            if(isDone){
+            if (isDone) {
                 task.markDone();
             }
             return task;
-        } else{
+        } else {
             int index = 3;
-            while(!splitData[index].startsWith("(")){
+            while (!splitData[index].startsWith("(")) {
                 index++;
             }
             String taskName = concatenateStrArr(splitData,3,index);
@@ -75,26 +76,26 @@ public class Load extends Command{
             index++;
             String timeRep = splitData[index].replace(")","");
             LocalTime time = LocalTime.parse(timeRep);
-            if(taskType.equals("[D]")){
+            if (taskType.equals("[D]")) {
                 Task task = new Deadline(taskName,preposition,date, time);
-                if(isDone){
+                if (isDone) {
                     task.markDone();
                 }
                 return task;
-            } else if(taskType.equals("[E]")){
+            } else if (taskType.equals("[E]")) {
                 Task task = new Event(taskName, preposition,date, time);
-                if(isDone){
+                if (isDone) {
                     task.markDone();
                 }
                 return task;
-            } else{
+            } else {
                 throw new WrongFileFormatException(filePath);
             }
         }
     }
 
-    private String concatenateStrArr(String[] strArr, int startIndex, int endIndex){
-        if(startIndex == endIndex){
+    private String concatenateStrArr(String[] strArr, int startIndex, int endIndex) {
+        if (startIndex == endIndex) {
             return strArr[startIndex];
         } else {
             StringBuilder acc = new StringBuilder();
@@ -105,9 +106,7 @@ public class Load extends Command{
         }
     }
 
-    private String getPreposition(String dirtyPrep){
-        String cleanPrep = dirtyPrep.replace("(","").replace(":","");
-        return cleanPrep;
+    private String getPreposition(String dirtyPrep) {
+        return dirtyPrep.replace("(","").replace(":","");
     }
-
 }
