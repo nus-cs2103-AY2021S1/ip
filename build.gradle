@@ -29,18 +29,30 @@ test {
 }
 
 application {
-    mainClassName = "seedu.duke.Duke"
+    mainClassName = "alice.Alice"
 }
 
 shadowJar {
-    archiveBaseName = "duke"
+    archiveBaseName = "alice"
     archiveClassifier = null
 }
 
 checkstyle {
-    toolVersion = '8.23'
+    toolVersion = '8.32'
 }
 
-run{
+run {
     standardInput = System.in
+}
+
+task textUiTest(type: Exec) {
+    workingDir './text-ui-test'
+
+    if (System.properties['os.name'].toLowerCase().contains('windows')) {
+        // on windows
+        commandLine 'cmd', '/c', 'runtest.bat'
+    } else {
+        // on linux
+        commandLine './runtest.sh'
+    }
 }
