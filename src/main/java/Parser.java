@@ -1,6 +1,17 @@
 import java.time.LocalDate;
 
+/**
+ * Object to parse a line of input given by user
+ */
 public class Parser {
+
+    /**
+     * Returns a Command based on user input
+     * @param input user input
+     * @return command based on user input
+     * @throws DukeException exception that occurs when parser does not
+     * recognise user input
+     */
     public static Command manage(String input) throws DukeException {
         if (input.equals("list")) {
             return new PrintlistCommand();
@@ -97,7 +108,7 @@ public class Parser {
         }
     }
 
-    public static Boolean checkEmpty(String input, String keyWord) {
+    private static Boolean checkEmpty(String input, String keyWord) {
         int keywordLength = keyWord.length();
         String remainingDescription = input.substring(keywordLength, input.length());
         if (remainingDescription.length() == 0 ) {
@@ -115,7 +126,7 @@ public class Parser {
     }
 
     //returns true if there is a description
-    public static Boolean checkPlan(String input) {
+    private static Boolean checkPlan(String input) {
         if(input.contains("/")) {
             String remainingDescription = input.substring(input.indexOf("/") + 1, input.length());
             if(remainingDescription.length() != 0) {
@@ -125,7 +136,7 @@ public class Parser {
         return true;
     }
 
-    public static String formatDate(String date) throws Exception {
+    private static String formatDate(String date) throws Exception {
         LocalDate parseDate = LocalDate.parse(date);
         return parseDate.getDayOfWeek() + " " + parseDate.getDayOfMonth() + " "
                 + parseDate.getMonth() + " " + parseDate.getYear();

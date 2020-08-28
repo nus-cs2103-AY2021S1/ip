@@ -1,7 +1,13 @@
 import java.util.List;
 
+/**
+ * Encapsulates the user interface.
+ */
 public class Ui {
 
+    /**
+     * Prints the default welcome message.
+     */
     public void printWelcome() {
         System.out.println("--------------------------------------");
         System.out.println("Hello from doge");
@@ -60,17 +66,29 @@ public class Ui {
         System.out.println("--------------------------------------");
     }
 
+    /**
+     * Prints a given string but adds "Added : " in front of the message.
+     * @param msg given string
+     */
     public void taskPrint(String msg) {
         System.out.println("Added : " + msg);
     }
 
+
     /** Prints out a given ArrayList of tasks in a nice format, with the
      * given displayMessage on top.
-     * @param toDoList
-     * @param displayMessage
+     * @param toDoList given todolist
+     * @param displayMessage message to be displayed
      */
     public void displayList(List<Task> toDoList, String displayMessage) {
         System.out.println(displayMessage);
+    }
+    /**
+     * Formats and prints a given list of tasks.
+     * @param toDoList given list of tasks
+     */
+    public void displayList(List<Task> toDoList) {
+        System.out.println("Check out your missions!");
         int i = 1;
         for (Task s : toDoList) {
             System.out.println(i + ". " + " [" + s.getType() + "] "
@@ -78,6 +96,12 @@ public class Ui {
             i += 1;
         }
     }
+
+    /**
+     *
+     * @param task
+     * @param taskStatus
+     */
     public void checkList(String task, String taskStatus) {
         System.out.println("--------------------------------------");
         System.out.println("Such wow! I have completed the following task!");

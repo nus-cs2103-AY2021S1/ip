@@ -6,7 +6,7 @@ _____________$$________________________$$$$
 ____________$$_____________________________$$
 ___________$__________________________________$$
 ___________$$___________________________________$$
-__________$$__$$______________________$$__________$$
+__________ $$__$$______________________$$__________$$
 ________$$__$$___$$$$_________$$$$____$$__________$$$$
 ______$$___$$__$$$$__$$_____$$$$__$$_$$_____________$$$
 ______$$___$$____$$$$_________$$$$___$$_______________$$
@@ -55,25 +55,25 @@ _________$$$$$$$$$$__________________________$$_$_$$$$$$$$
 What can this good boi do for you?
 --------------------------------------
 --------------------------------------
-Added : todo feed doge
+Added to list : feed doge
 --------------------------------------
 You have a total of 1 tasks
 --------------------------------------
 --------------------------------------
-Added : east coast plan  ------> by monday
+Added to list : east coast plan by WEDNESDAY 2 SEPTEMBER 2020
 --------------------------------------
 You have a total of 2 tasks
 --------------------------------------
 --------------------------------------
-Added : covid19  ------> by september
+Added to list : covid19 on WEDNESDAY 2 DECEMBER 2020
 --------------------------------------
 You have a total of 3 tasks
 --------------------------------------
 DukeException: Much error! You have to describe your mission!
 Check out your missions!
 1.  [T] feed doge [✘]
-2.  [D] east coast plan  ------> by monday [✘]
-3.  [E] covid19  ------> by september [✘]
+2.  [D] east coast plan by WEDNESDAY 2 SEPTEMBER 2020 [✘]
+3.  [E] covid19 on WEDNESDAY 2 DECEMBER 2020 [✘]
 You have a total of 3 tasks
 --------------------------------------
 --------------------------------------
@@ -84,28 +84,28 @@ You have a total of 3 tasks
 --------------------------------------
 Check out your missions!
 1.  [T] feed doge [✓]
-2.  [D] east coast plan  ------> by monday [✘]
-3.  [E] covid19  ------> by september [✘]
+2.  [D] east coast plan by WEDNESDAY 2 SEPTEMBER 2020 [✘]
+3.  [E] covid19 on WEDNESDAY 2 DECEMBER 2020 [✘]
 You have a total of 3 tasks
 --------------------------------------
 Task successfully removed!
--> east coast plan  ------> by monday
+-> east coast plan by WEDNESDAY 2 SEPTEMBER 2020
 You have a total of 2 tasks
 --------------------------------------
 Check out your missions!
 1.  [T] feed doge [✓]
-2.  [E] covid19  ------> by september [✘]
+2.  [E] covid19 on WEDNESDAY 2 DECEMBER 2020 [✘]
 You have a total of 2 tasks
 --------------------------------------
 --------------------------------------
 Such wow! I have completed the following task!
-covid19  ------> by september [✓]
+covid19 on WEDNESDAY 2 DECEMBER 2020 [✓]
 --------------------------------------
 You have a total of 2 tasks
 --------------------------------------
 Check out your missions!
 1.  [T] feed doge [✓]
-2.  [E] covid19  ------> by september [✓]
+2.  [E] covid19 on WEDNESDAY 2 DECEMBER 2020 [✓]
 You have a total of 2 tasks
 --------------------------------------
 Bye! Woof!
