@@ -17,7 +17,7 @@ public class Duke {
 
     /**
      * Loads input file and starts parsing.
-     * @return void
+     * @throws DukeException if there is an issue.
      */
     public void execute() throws DukeException {
         try {
@@ -25,8 +25,8 @@ public class Duke {
             arrayOfTasks = inputArray;
         } catch (DukeException error) {
             arrayOfTasks = new TaskList();
-            throw new DukeException("Unable to load data from 'duke.txt'. Please ensure that you have" +
-                                    " a 'data' folder that contains 'duke.txt' in project directory.");
+            throw new DukeException("Unable to load data from 'duke.txt'. Please ensure that you have"
+                                    + " a 'data' folder that contains 'duke.txt' in project directory.");
         }
 
         ui.printWelcomeMessage();
@@ -59,9 +59,9 @@ public class Duke {
                 storage.saveToDisk(arrayOfTasks);
                 ui.printBorder();
                 System.out.println("Tasks have been successfully saved to duke.txt!");
-            } catch (DukeException error) { 
-                System.err.println("Tasks cannot be saved to specified file path('data/duke.txt'). Please ensure " +
-                                   "that there is a 'data' folder containing 'duke.txt' and try again.");
+            } catch (DukeException error) {
+                System.err.println("Tasks cannot be saved to specified file path('data/duke.txt'). Please ensure "
+                                   + "that there is a 'data' folder containing 'duke.txt' and try again.");
             }
         }
         ui.printByeMessage();
@@ -70,10 +70,10 @@ public class Duke {
     /**
      * Instantiates and run Duke program.
      * @param args CMD arguments
-     * @return void
+     * @throws DukeException if there is an issue.
      */
     public static void main(String[] args) throws DukeException {
         Duke runDuke = new Duke("data/duke.txt");
         runDuke.execute();
     }
- }
+}

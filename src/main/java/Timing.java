@@ -2,9 +2,10 @@
  * Formats timing for output.
  */
 public class Timing {
-    private final int MINUTE, HOUR;
-    private final boolean isPM;
     protected String timing;
+    private final int minute;
+    private final int hour;
+    private final boolean isPM;
 
     /**
      * Instantiates Timing object.
@@ -13,10 +14,10 @@ public class Timing {
     public Timing(String timing) {
         this.timing = timing;
         int timeInt = Integer.parseInt(timing);
-        this.MINUTE = timeInt % 100;
-        this.HOUR = timeInt / 100;
+        this.minute = timeInt % 100;
+        this.hour = timeInt / 100;
 
-        if (this.HOUR < 12) {
+        if (this.hour < 12) {
             isPM = false;
         } else {
             isPM = true;
@@ -30,23 +31,23 @@ public class Timing {
     @Override
     public String toString() {
         String formattedTiming;
-        String AMPM;
+        String AmPm;
 
-        if (HOUR == 0 || HOUR == 12) {
+        if (hour == 0 || hour == 12) {
             formattedTiming = "12";
         } else {
-            formattedTiming = HOUR % 12 + "";
+            formattedTiming = hour % 12 + "";
         }
 
-        if (MINUTE != 0) {
-            formattedTiming = formattedTiming + ":" + String.format("%02d", MINUTE);
+        if (minute != 0) {
+            formattedTiming = formattedTiming + ":" + String.format("%02d", minute);
         }
 
         if (isPM) {
-            AMPM = "pm";
+            AmPm = "pm";
         } else {
-            AMPM = "am";
+            AmPm = "am";
         }
-        return formattedTiming + AMPM;
+        return formattedTiming + AmPm;
     }
 }

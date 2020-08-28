@@ -1,9 +1,10 @@
-import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import org.junit.jupiter.api.Test;
+
 public class TaskListTest {
-    Task todo = new Todo("sleep");
-    Task event = new Event("project meeting", "17/11/2015","1532");
+    protected Task todo = new Todo("sleep");
+    protected Task event = new Event("project meeting", "17/11/2015", "1532");
 
     @Test
     void taskArraySize_validInput_success() {

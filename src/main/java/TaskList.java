@@ -25,7 +25,6 @@ public class TaskList {
     /**
      * Adds task to the ArrayList.
      * @param newTask New task to add.
-     * @return void
      */
     public void addTask(Task newTask) {
         arrayOfTasks.add(newTask);
@@ -34,11 +33,10 @@ public class TaskList {
     /**
      * Removes task from the ArrayList.
      * @param taskIndex Task to remove.
-     * @return void
      */
     public void deleteTask(int taskIndex) {
         arrayOfTasks.remove(taskIndex);
-        Task.TOTAL_TASKS--;
+        Task.totalTasks--;
     }
 
     /**

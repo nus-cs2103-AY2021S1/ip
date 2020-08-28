@@ -1,11 +1,12 @@
-import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
+import org.junit.jupiter.api.Test;
+
 public class ParserTest {
 
-    Task event = new Event("project meeting", "17/7/2015", "1842");
-    String testCommand = "testCommand";
+    protected Task event = new Event("project meeting", "17/7/2015", "1842");
+    protected String testCommand = "testCommand";
 
     @Test
     public void parseCommand_invalidCommand_exceptionThrown() {

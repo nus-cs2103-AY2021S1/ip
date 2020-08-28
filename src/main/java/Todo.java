@@ -8,7 +8,7 @@ public class Todo extends Task {
      */
     public Todo(String description) {
         super(description, TaskType.TODO);
-        Task.TOTAL_TASKS++;
+        Task.totalTasks++;
     }
 
     /**
@@ -18,7 +18,7 @@ public class Todo extends Task {
      */
     public Todo(String description, int done) {
         super(description, TaskType.TODO, done);
-        Task.TOTAL_TASKS++;
+        Task.totalTasks++;
     }
 
     /**

@@ -19,6 +19,7 @@ public abstract class Command {
      * @param taskList Array of tasks that we have parsed.
      * @param ui Ui object to aid in program execution.
      * @param storage Storage object to aid in program execution.
+     * @throws DukeException if there is an issue
      */
     public abstract void runCommand(TaskList taskList, Ui ui, Storage storage) throws DukeException;
 

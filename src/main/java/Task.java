@@ -2,9 +2,9 @@
  * Implements constructor methods for all types of tasks.
  */
 public class Task {
+    protected static int totalTasks = 0;
     protected boolean isDone;
     protected String description;
-    protected static int TOTAL_TASKS = 0;
     protected TaskType taskType;
 
     /**
@@ -35,7 +35,6 @@ public class Task {
 
     /**
      * Asserts that the task is completed.
-     * @return void
      */
     public void setDone() {
         isDone = true;

@@ -1,5 +1,3 @@
-D|0|return book|5/7/2018 1800
-E|1|project meeting|12/3/2019 1100
-T|1|rest
-T|0|read book
 T|0|sleep
+D|0|project|13/1/2013 1320
+E|1|concert|15/1/2014 1102
