@@ -1,7 +1,5 @@
 package duke.command;
 
-import java.util.Objects;
-
 /**
  * Prints a notice to System.out
  */

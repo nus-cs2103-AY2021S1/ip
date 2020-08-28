@@ -29,9 +29,7 @@ public class FindCommand implements Command {
         AtomicInteger index = new AtomicInteger(0);
         this.taskList.stream()
                 .filter(task -> task.getDescription().contains(searchString))
-                .forEach(task -> {
-                    System.out.println(index.incrementAndGet() + ". " + task.toString());
-                });
+                .forEach(task -> System.out.println(index.incrementAndGet() + ". " + task.toString()));
 
         System.out.println("Number of tasks found: " + index);
     }

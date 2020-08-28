@@ -3,10 +3,8 @@ package duke.command;
 import duke.storage.Storage;
 import duke.task.Task;
 
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * Save taskList to file

@@ -2,8 +2,6 @@ package duke.command;
 
 import duke.task.Task;
 
-import java.util.Objects;
-
 /**
  * Mark task as done
  */
