@@ -2,18 +2,33 @@ package duke;
 
 import java.util.ArrayList;
 
+/**
+ * Represents the text ui interface
+ */
 public class Ui {
 
+    /**
+     * Build chat line separator
+     */
     public static void buildChatSeparator() {
         System.out.println("____________________________________________________________");
     }
 
+    /**
+     * Show farewell message
+     */
     public static void bye() {
         buildChatSeparator();
         System.out.println(" Bye. Hope to see you again soon!");
         buildChatSeparator();
     }
 
+    /**
+     * Show added task and size of list
+     *
+     * @param list The task list
+     * @param curr The newly added task
+     */
     public void describeTask(ArrayList<Task> list, Task curr) {
         buildChatSeparator();
         System.out.println(" Got it. I've added this task: ");
@@ -25,6 +40,11 @@ public class Ui {
         buildChatSeparator();
     }
 
+    /**
+     * Print all task inside the list
+     *
+     * @param list The task list
+     */
     public void printList(ArrayList<Task> list) {
         buildChatSeparator();
         System.out.println(" Here are the tasks in your list:");
@@ -36,7 +56,13 @@ public class Ui {
         buildChatSeparator();
     }
 
-    public void printDeleted(Task deleted, ArrayList<Task> list) {
+    /**
+     * Show response when a task is deleted
+     *
+     * @param deleted The deleted task
+     * @param list The task list
+     */
+    public static void printDeleted(Task deleted, ArrayList<Task> list) {
         buildChatSeparator();
         System.out.println(" Noted. I've removed this task: ");
         System.out.println(" " + deleted);
@@ -47,13 +73,22 @@ public class Ui {
         buildChatSeparator();
     }
 
-    public void printDone(ArrayList<Task> list, int index) {
+    /**
+     * Show response when a task is done
+     *
+     * @param list The task list
+     * @param index The index of the element inside the list
+     */
+    public static void printDone(ArrayList<Task> list, int index) {
         buildChatSeparator();
         System.out.println(" Nice! I've marked this task as done:");
         System.out.println(" " + list.get(index));
         buildChatSeparator();
     }
 
+    /**
+     * Show introduction of the Duke chatbot
+     */
     public void introduce() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"

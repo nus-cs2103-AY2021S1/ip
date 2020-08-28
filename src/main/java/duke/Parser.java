@@ -3,8 +3,17 @@ package duke;
 import exception.DukeErrorException;
 import exception.UnknownCommandException;
 
+/**
+ * Represents parser class to parse user commands
+ */
 public class Parser {
 
+    /**
+     * Method to verify the command is valid or not
+     *
+     * @param commandString user input
+     * @return a {@code Command} object representing user actions
+     */
     public static Commands processInput(String commandString) throws UnknownCommandException {
         Commands cmd = Commands.valueOf(commandString);
         if (!cmd.equals(Commands.BYE) &&
@@ -19,6 +28,12 @@ public class Parser {
         return cmd;
     }
 
+    /**
+     * Main method to call to parse user commands
+     *
+     * @param splitted user input
+     * @return a {@code Command} object representing user actions
+     */
     public static Commands processCommand(String[] splitted) throws DukeErrorException {
         try {
             Commands command = processInput(splitted[0].toUpperCase());
