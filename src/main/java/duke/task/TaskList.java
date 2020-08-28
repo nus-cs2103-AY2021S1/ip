@@ -7,7 +7,7 @@ import java.util.ArrayList;
  */
 public class TaskList {
 
-    public ArrayList<Task> tasks;
+    private ArrayList<Task> tasks;
 
     /**
      * Creates an empty TaskList.
@@ -47,6 +47,8 @@ public class TaskList {
             break;
         case "E":
             task = new Event(taskLine[2], taskLine[3]);
+            break;
+        default:
             break;
         }
         if (taskLine[1].equals("1")) {
@@ -119,5 +121,29 @@ public class TaskList {
             }
         }
         return tasks;
+    }
+
+    /**
+     * Deletes and returns the task at a position in the list.
+     *
+     * @param idx Position of the Task in the list of tasks.
+     * @return Task which was deleted.
+     */
+    public Task deleteTask(int idx) {
+        Task t = tasks.get(idx - 1);
+        tasks.remove(idx - 1);
+        return t;
+    }
+
+    /**
+     * Marks a tast in the list as done.
+     *
+     * @param idx Position of Task in the list of tasks.
+     * @return Task which was marked as done.
+     */
+    public Task markTask(int idx) {
+        Task t = tasks.get(idx - 1);
+        t.markAsDone();
+        return t;
     }
 }

@@ -1,13 +1,13 @@
 package duke.command;
 
 import duke.storage.Storage;
-import duke.ui.Ui;
 import duke.task.TaskList;
+import duke.ui.Ui;
 
 /**
  * Represents a ExitCommand where user wants to exit from Duke.
  */
-public class ExitCommand extends Command{
+public class ExitCommand extends Command {
 
     /**
      * Creates an ExitCommand.

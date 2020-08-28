@@ -1,9 +1,9 @@
 package duke.command;
 
 import duke.storage.Storage;
-import duke.ui.Ui;
 import duke.task.Task;
 import duke.task.TaskList;
+import duke.ui.Ui;
 
 /**
  * Represents an AddCommand where user wants to add a task.
