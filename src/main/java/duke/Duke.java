@@ -3,6 +3,7 @@ package duke;
 import duke.command.Command;
 import duke.command.InvalidCommandException;
 import duke.component.ActualStorage;
+import duke.component.FxmlUi;
 import duke.component.Parser;
 import duke.component.Storage;
 import duke.component.TaskList;
@@ -15,7 +16,7 @@ import duke.component.Ui;
 public class Duke {
     private Storage storage;
     private TaskList list;
-    private CliUi ui;
+    private Ui ui;
 
     /**
      * Creates a running Duke, initialize the list with data in the input file, if input file is not found,
@@ -25,6 +26,8 @@ public class Duke {
     public Duke(String filePath, boolean isCliApp) {
         if (isCliApp) {
             ui = new CliUi();
+        } else {
+            ui = new FxmlUi();
         }
         try {
             storage = new ActualStorage(filePath);
