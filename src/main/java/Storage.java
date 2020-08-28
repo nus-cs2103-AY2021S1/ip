@@ -47,7 +47,6 @@ public class Storage { //deals with loading task and saving task in file
                         list.add(new Event(details[1], details[2], details[3]));
                         break;
                 }
-                //add to list
             }
         } catch (Exception e) {
             System.out.println(e);
@@ -69,16 +68,12 @@ public class Storage { //deals with loading task and saving task in file
                     s = s + " | ";
                 }
                 fileWriter.write(s + "\n");
-
             }
             fileWriter.close();
         } catch (Exception e) {
             System.out.println(e);
         }
 
-
-        //parse list
-        //write to duke.txt
         return;
     }
 

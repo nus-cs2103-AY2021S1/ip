@@ -2,10 +2,7 @@ import java.util.ArrayList;
 
 public class TaskList {
 
-    ArrayList<Listing> list;
-    public TaskList() {
-        this.list = new ArrayList<Listing>();
-    }
+    public ArrayList<Listing> list;
 
     public TaskList(ArrayList<Listing> l) {
         this.list = l;
@@ -23,15 +20,15 @@ public class TaskList {
 
     public void doneListings(Integer value, Printer printer, Storage storage) {
         Listing item = list.get(value - 1);
-        item.complete(); //completes the list
+        item.complete();
         printer.doneMessage(item.toString());
-        storage.save(list); // <----- change this
+        storage.save(list);
     }
 
     public void deleteListing(Integer num, Printer printer, Storage storage) {
         printer.deleteMessage(list.size()-1, list.get(num).toString());
         list.remove((int) num);
-        storage.save(list); // <----- change this
+        storage.save(list);
     }
 
     public void addListings(String[] details, Printer printer, Storage storage) {

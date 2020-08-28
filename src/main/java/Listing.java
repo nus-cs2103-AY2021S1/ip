@@ -3,14 +3,14 @@ public class Listing {
         this.title = s;
     }
     String title;
-    Boolean done = false;
+    Boolean isDone = false;
 
     public void complete() {
-        done = true;
+        isDone = true;
     }
 
     public String doneness() {
-        if (done) {
+        if (isDone) {
             return "[✓]";
         } else {
             return "[✗]";
@@ -19,9 +19,9 @@ public class Listing {
 
     public void checkDoneness(String s) {
         if (s.equals("1")) {
-            this.done = true;
+            this.isDone = true;
         } else {
-            this.done = false;
+            this.isDone = false;
         }
     }
 

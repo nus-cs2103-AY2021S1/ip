@@ -12,7 +12,7 @@ public class Bot { //basically duke.java at this point
     TaskList taskList = new TaskList(storage.load());
     Scanner sc = new Scanner(System.in);
 
-    public void serve() { //run yes come on guys
+    public void serve() {
 
         while (sc.hasNextLine()) {
             try {
@@ -66,6 +66,5 @@ public class Bot { //basically duke.java at this point
             }
         }
     }
-
 
 }

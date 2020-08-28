@@ -2,16 +2,15 @@ import java.util.ArrayList;
 
 public class Printer {
 
+    private String GREETING = "     Hello! I'm Duke\n" +
+            "     What can I do for you?";
+    private String GOODBYE = "     Bye. Hope to see you again soon!";
+    private String LINE = "    ____________________________________________________________";
+    private String GOT_IT = "     Got it. I've added this task: ";
+    private String WHITE_SPACE_SEVEN = "       ";
+
     public Printer() {
     }
-
-
-    String GREETING = "     Hello! I'm Duke\n" +
-            "     What can I do for you?";
-    String GOODBYE = "     Bye. Hope to see you again soon!";
-    String LINE = "    ____________________________________________________________";
-    String GOT_IT = "     Got it. I've added this task: ";
-    String WHITE_SPACE_SEVEN = "       ";
 
     protected void greeting() {
         String s = "";

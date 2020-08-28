@@ -4,12 +4,12 @@ import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Listing {
 
+    private LocalDate deadLine;
+
     public Deadline(String s, String deadLine) {
         super(s);
         this.deadLine = LocalDate.parse(deadLine);
     }
-    LocalDate deadLine;
-
 
     public Deadline(String doneness, String s, String time) {
         super(s);
@@ -20,7 +20,7 @@ public class Deadline extends Listing {
     public String[] toArray() {
         String[] details = new String[4];
         details[0] = "D";
-        if (this.done) {
+        if (this.isDone) {
             details[1] = "1";
         } else {
             details[1] = "0";
