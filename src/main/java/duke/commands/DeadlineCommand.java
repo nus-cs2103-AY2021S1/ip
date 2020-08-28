@@ -37,6 +37,7 @@ public class DeadlineCommand implements Command {
     public String execute(Storage storage, TaskList tasks) throws DukeException {
         Task deadlineTask = new DeadlineTask(description, deadline);
         tasks.add(deadlineTask);
-        return "Sure! I have added the following deadline task to your list:\n" + deadlineTask.toString() + "\n" + tasks.getListStatus();
+        return "Sure! I have added the following deadline task to your list:\n" + deadlineTask.toString()
+                + "\n" + tasks.getListStatus();
     }
 }

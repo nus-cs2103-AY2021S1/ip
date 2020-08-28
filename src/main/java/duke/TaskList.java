@@ -14,7 +14,7 @@ import duke.tasks.Task;
  */
 public class TaskList {
 
-    private ArrayList<Task> taskStore;
+    private final ArrayList<Task> taskStore;
 
     /**
      * Initializes the TaskList with an empty list when there is no saved data.

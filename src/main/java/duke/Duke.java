@@ -5,8 +5,8 @@ import duke.exception.DukeException;
 import duke.utils.DukeState;
 
 /**
- * The Duke object initializes the core classes Storage and TaskList, and contains the main logic
- * to respond correctly to user input.
+ * The Duke object initializes the core classes Storage and TaskList, and contains the main logic to respond
+ * correctly to user input.
  */
 public class Duke {
 
@@ -16,8 +16,8 @@ public class Duke {
     private final boolean isLoadedFromDisk;
 
     /**
-     * Initializes a Duke object. The taskList will be loaded from disk if there exists
-     * an existing data file. Else, Duke will start with an empty taskList.
+     * Initializes a Duke object. The taskList will be loaded from disk if there exists an existing data file.
+     * Else, Duke will start with an empty taskList.
      *
      * @param filePath the filePath where the storage will load from and save data to.
      */
@@ -41,6 +41,7 @@ public class Duke {
 
     /**
      * Gets the appropriate response for a given user input.
+     *
      * @param input The user input.
      * @return The appropriate response.
      */
@@ -58,6 +59,7 @@ public class Duke {
 
     /**
      * Gets the current state of the Duke application.
+     *
      * @return The current state of the Duke application.
      */
     public DukeState getDukeState() {
@@ -66,6 +68,7 @@ public class Duke {
 
     /**
      * Checks whether the taskList was loaded from a data file on app-start.
+     *
      * @return A boolean value indicating whether the taskList was loaded from a data file.
      */
     public boolean isLoadedFromDisk() {

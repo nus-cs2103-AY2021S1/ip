@@ -14,10 +14,11 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
-    private Duke duke = new Duke("data/duke.txt");
+    private final Duke duke = new Duke("data/duke.txt");
 
     /**
      * Loads the MainWindow AnchorPane and sets the scene.
+     *
      * @param stage The stage to set the scene.
      */
     @Override

@@ -17,12 +17,13 @@ public class FindCommand implements Command {
      *
      * @param keywords The search keywords.
      */
-    public FindCommand(String ...keywords) {
+    public FindCommand(String... keywords) {
         this.keywords = keywords;
     }
 
     /**
      * Finds the list of tasks that matches the keyword.
+     *
      * @param storage The storage object.
      * @param tasks   The taskList.
      * @return The string representation of the list of tasks that matches the keyword.

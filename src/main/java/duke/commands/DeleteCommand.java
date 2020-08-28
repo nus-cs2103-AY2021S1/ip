@@ -22,6 +22,7 @@ public class DeleteCommand implements Command {
 
     /**
      * Deletes the task at the specified taskNum in the taskList.
+     *
      * @param storage The storage object.
      * @param tasks   The taskList.
      * @return The response indicating task has been deleted from taskList.
@@ -29,6 +30,7 @@ public class DeleteCommand implements Command {
     @Override
     public String execute(Storage storage, TaskList tasks) {
         Task delTask = tasks.delete(taskNum);
-        return "OK! I have deleted the following task for your list:\n" + delTask.toString() + "\n" + tasks.getListStatus();
+        return "OK! I have deleted the following task for your list:\n" + delTask.toString() + "\n" + tasks
+                .getListStatus();
     }
 }

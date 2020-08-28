@@ -23,6 +23,7 @@ public class TodoCommand implements Command {
 
     /**
      * Adds a new TodoTask.
+     *
      * @param storage The storage object.
      * @param tasks   The taskList.
      * @return The user response indicating the new todotask has been added to the taskList.
@@ -31,6 +32,7 @@ public class TodoCommand implements Command {
     public String execute(Storage storage, TaskList tasks) {
         Task todoTask = new TodoTask(description);
         tasks.add(todoTask);
-        return "Sure! I have added the following todo task to your list:\n" + todoTask.toString() + '\n' + tasks.getListStatus();
+        return "Sure! I have added the following todo task to your list:\n" + todoTask.toString() + '\n'
+                + tasks.getListStatus();
     }
 }

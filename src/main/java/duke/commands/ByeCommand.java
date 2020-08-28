@@ -13,8 +13,8 @@ import duke.utils.DukeStdMsg;
 public class ByeCommand implements Command {
 
     /**
-     * Saves the current taskList into harddisk and
-     * returns the exit message.
+     * Saves the current taskList into harddisk and returns the exit message.
+     *
      * @param storage The storage object.
      * @param tasks   The taskList.
      * @return The exit message.

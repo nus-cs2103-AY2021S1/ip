@@ -19,6 +19,7 @@ import javafx.scene.layout.HBox;
  * containing text from the speaker.
  */
 public class DialogBox extends HBox {
+
     @FXML
     private Label dialog;
     @FXML
@@ -50,8 +51,9 @@ public class DialogBox extends HBox {
 
     /**
      * Factory method to generate a user dialog element.
+     *
      * @param text The text to be rendered.
-     * @param img The image to be rendered.
+     * @param img  The image to be rendered.
      * @return The user dialog element.
      */
     public static DialogBox getUserDialog(String text, Image img) {
@@ -60,8 +62,9 @@ public class DialogBox extends HBox {
 
     /**
      * Factory method to generate a Duke dialog element.
+     *
      * @param text The text to be rendered.
-     * @param img The image to be rendered.
+     * @param img  The image to be rendered.
      * @return The Duke dialog element.
      */
     public static DialogBox getDukeDialog(String text, Image img) {

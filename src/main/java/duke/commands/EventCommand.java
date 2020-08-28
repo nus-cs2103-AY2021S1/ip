@@ -37,6 +37,7 @@ public class EventCommand implements Command {
     public String execute(Storage storage, TaskList tasks) throws DukeException {
         Task eventTask = new EventTask(description, timePeriod);
         tasks.add(eventTask);
-        return "Sure! I have added the following event task to your list:\n" + eventTask.toString() + "\n" + tasks.getListStatus();
+        return "Sure! I have added the following event task to your list:\n" + eventTask.toString() + "\n"
+                + tasks.getListStatus();
     }
 }

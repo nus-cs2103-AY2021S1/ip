@@ -13,6 +13,7 @@ public class ListCommand implements Command {
 
     /**
      * Gets a string representation of the taskList.
+     *
      * @param storage The storage object.
      * @param tasks   The taskList.
      * @return The string representation of the taskList.
