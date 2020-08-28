@@ -30,8 +30,8 @@ public class AddCommand extends Command {
         storage.addToList(task);
         list.add(count, task);
         String temp = count < 1 ? " task" : " tasks";
-        String res = "Got it. I've added this task:\n\t    " + task +
-                "\n\t  Now you have " + (count + 1) + temp + " in the list.";
+        String res = "Got it. I've added this task:\n\t    " + task
+                + "\n\t  Now you have " + (count + 1) + temp + " in the list.";
         ui.output(res);
         return res;
     }
