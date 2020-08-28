@@ -8,6 +8,13 @@ import java.util.Locale;
 public class Event extends Task {
     private final LocalDate schedule;
 
+    /**
+     * Initializes an event task.
+     *
+     * @param name The name of the event task.
+     * @param isDone The boolean indicating if the task is done.
+     * @param schedule The time to do the event.
+     */
     public Event(String name, boolean isDone, LocalDate schedule) {
         super(name, isDone);
         this.schedule = schedule;

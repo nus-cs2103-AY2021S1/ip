@@ -8,6 +8,13 @@ import java.util.Locale;
 public class Deadline extends Task {
     private final LocalDate schedule;
 
+    /**
+     * Initializes an instance of deadline object.
+     *
+     * @param name The name of the deadline task.
+     * @param isDone The boolean indicating if the task is done.
+     * @param schedule The deadline of the task.
+     */
     public Deadline(String name, boolean isDone, LocalDate schedule) {
         super(name, isDone);
         this.schedule = schedule;
