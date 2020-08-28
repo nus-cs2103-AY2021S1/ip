@@ -164,7 +164,8 @@ public class DeadlineTest {
     public void toString_systemOutput() {
         try {
             Deadline d = new Deadline("Assignment 1", "2020-08-02");
-            assertEquals("[D][\u2718] Assignment 1 (by: Aug 2 2020) This is overdue! The deadline has passed!!!", d.toString());
+            assertEquals("[D][\u2718] Assignment 1 (by: Aug 2 2020) This is overdue! "
+                    + "The deadline has passed!!!", d.toString());
 
             d.markAsDone();
             assertEquals("[D][\u2713] Assignment 1 (by: Aug 2 2020)", d.toString());
