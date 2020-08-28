@@ -60,7 +60,7 @@ public class TimedTask extends Task {
      * @param time time in user input format
      * @return time time parsed into required format
      */
-    private String parseTime (String time) {}
+    private String parseTime (String time) {
         int tm = Integer.parseInt(time);
         String hr = "";
         String ampm = "";
