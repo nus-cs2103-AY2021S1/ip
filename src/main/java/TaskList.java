@@ -6,16 +6,10 @@ import java.util.ArrayList;
  */
 
 public class TaskList {
-    private Storage storage;
-    private ArrayList<Task> tasks;
+    private ArrayList<Task> tasks = new ArrayList<>();
 
-    public TaskList() {
-        this.tasks = new ArrayList<Task>();
-    }
-
-    public TaskList(Storage storage) {
-        this.storage = storage;
-        this.tasks = this.storage.getTaskList();
+    public TaskList(ArrayList<Task> tasks) {
+        this.tasks = tasks;
     }
 
     public String numberOfTasks() {
@@ -51,7 +45,6 @@ public class TaskList {
                 .append(task)
                 .append("\n" + this.numberOfTasks());
 
-        this.storage.updateFile();
         return sb.toString();
     }
 
@@ -63,7 +56,6 @@ public class TaskList {
                 .append(task).append("\n")
                 .append(this.numberOfTasks());
 
-        this.storage.updateFile();
         return sb.toString();
     }
 
@@ -75,7 +67,6 @@ public class TaskList {
                 .append(task)
                 .append("\n" + this.numberOfTasks());
 
-        this.storage.updateFile();
         return sb.toString();
     }
 
@@ -104,5 +95,9 @@ public class TaskList {
             }
         }
         return sb.toString();
+    }
+
+    public ArrayList<Task> getTaskList() {
+        return this.tasks;
     }
 }

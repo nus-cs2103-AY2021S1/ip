@@ -1,2 +1,3 @@
 E | 1 | project meeting | Thursday
-E | 0 | comm meeting | 2019-03-05
+T | 0 | read book
+D | 0 | return book | 2020-08-30

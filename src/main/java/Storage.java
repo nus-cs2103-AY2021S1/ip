@@ -11,34 +11,36 @@ import java.util.ArrayList;
 
 public class Storage {
     String filePath;
-    ArrayList<Task> tasks = new ArrayList<Task>();
+    ArrayList<String> encodedTasks = new ArrayList<>();
 
     Storage(String filePath) {
         this.filePath = filePath;
     }
 
-    public Storage load() throws EmptyDescriptionException {
-        createNewFile();
-        decodeTxtFile();
-        return this;
+    public ArrayList<Task> load() throws EmptyDescriptionException {
+        createFile();
+        return decodeTxtFile();
     }
 
-    public void updateFile() {
+    public void save(TaskList taskList) {
+
         try {
+            ArrayList<String> encodedTasks = new ArrayList<>();
             FileWriter fw = new FileWriter(this.filePath);
 
-            for (Task task : tasks) {
-                fw.write(task.encode() + System.lineSeparator());
+            for (Task task : taskList.getTaskList()) {
+                String encodedTask = task.encode();
+                encodedTasks.add(encodedTask);
+                fw.write(encodedTask + System.lineSeparator());
             }
 
             fw.close();
-
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public void createNewFile() {
+    public void createFile() {
         File dir = new File("data");
         if (!dir.exists()) {
             dir.mkdir();
@@ -54,8 +56,10 @@ public class Storage {
         }
     }
 
-    public void decodeTxtFile() throws EmptyDescriptionException {
+    public ArrayList<Task> decodeTxtFile() throws EmptyDescriptionException {
         File f = new File(this.filePath);
+        ArrayList<Task> decodedTasks = new ArrayList<>();
+
         try {
             Scanner s = new Scanner(f);
 
@@ -76,14 +80,11 @@ public class Storage {
                         task = ToDo.decode(string);
                         break;
                 }
-                this.tasks.add(task);
+                decodedTasks.add(task);
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-    }
-
-    public ArrayList<Task> getTaskList() {
-        return this.tasks;
+        return decodedTasks;
     }
 }
