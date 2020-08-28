@@ -19,4 +19,6 @@ public abstract class Task {
     public String toString() {
         return String.format("[%s] %s", getStatusIcon(), description);
     }
+    
+    public abstract String encode();
 }
