@@ -95,7 +95,7 @@ public class Storage {
         FileWriter fileWriter = new FileWriter(path);
         ArrayList<Task> tasks = taskList.getTasks();
         String string = "";
-        
+
         for(int i = 0; i < tasks.size(); i = i + 1) {
             string = string.concat(tasks.get(i).record() + System.lineSeparator());
         }
