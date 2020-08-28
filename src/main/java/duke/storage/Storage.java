@@ -1,9 +1,4 @@
-package duke.util;
-
-import duke.command.CommandExecutor;
-import duke.exception.DukeException;
-import duke.task.Task;
-import duke.task.TaskList;
+package duke.storage;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -13,14 +8,18 @@ import java.io.IOException;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Storage {
     private final Path FILE_PATH;
+    private ArrayList<String> SAVE_LINES;
 
     private boolean isActive = true;
 
     public Storage(Path filePath) throws IOException {
         this.FILE_PATH = filePath;
+        loadSaveFile();
         try {
             createIfNotExist();
         } catch (IOException e) {
@@ -37,49 +36,60 @@ public class Storage {
         }
     }
 
-    public void updateSaveFile(TaskList taskList) {
+    private void updateSaveFile() {
         if (!isActive) {
             return;
         }
 
         try {
             FileWriter myWriter = new FileWriter(FILE_PATH.toString());
-            taskList.forEach((Task task) -> {
+            for (String line: SAVE_LINES) {
                 try {
-                    myWriter.write(task.toSaveString() + "\n");
+                    myWriter.write(SAVE_LINES + "\n");
                 } catch (IOException e) {
                     System.out.println("An error has occurred when updating the save file.");
                 }
-            });
+            }
             myWriter.close();
         } catch (IOException e) {
             System.out.println("An error has occurred when updating the save file.");
         }
     }
 
-    public void loadSaveFile(TaskList taskList, CommandExecutor exe) {
+    public void addLine(String saveString) {
+        SAVE_LINES.add(saveString);
+        updateSaveFile();
+    }
+
+    public void updateLine(int index, String saveString) {
+        SAVE_LINES.set(index, saveString);
+        updateSaveFile();
+    }
+
+    public void removeLine(int index) {
+        SAVE_LINES.remove(index);
+        updateSaveFile();
+    }
+
+    public ArrayList<String> getSavedLines() {
+        return SAVE_LINES;
+    }
+
+    private String[] loadSaveFile() {
         // Prevent saving of duke.task.TaskList while loading it
         isActive = false;
-
+        String[] result = new String[0];
         try {
             BufferedReader in = new BufferedReader(new FileReader(FILE_PATH.toString()));
-            in.lines().forEach((String s) -> {
-                try {
-                    exe.execute(s.substring(1), taskList, this);
-                    if (s.charAt(0) == '1') {
-                        taskList.get(taskList.size() - 1).markAsDone();
-                    }
-                } catch (DukeException e) {
-                    String msg = "A line in your save file seems to be formatted incorrectly!";
-                    System.out.println(msg);
-                    e.printStackTrace();
-                }
-            });
+            result = in.lines().toArray(String[]::new);
             in.close();
         } catch(IOException e) {
             System.out.println("An error has occurred when reading the save file.");
+        } finally {
+            isActive = true;
+            this.SAVE_LINES = new ArrayList<>(Arrays.asList(result));
         }
 
-        isActive = true;
+        return result;
     }
 }

@@ -3,18 +3,16 @@ package duke.command;
 import duke.exception.DukeException;
 import duke.exception.InvalidCommandException;
 import duke.task.TaskList;
-import duke.util.Parser;
-import duke.util.Storage;
 
 public class DukeCommandExecutor implements CommandExecutor {
     private boolean hasExited = false;
 
-    public String execute(String in, TaskList taskList, Storage storage) throws DukeException {
+    public String execute(String in, TaskList taskList) throws DukeException {
         if (hasExited) {
             throw new InvalidCommandException("Program has already exited!");
         }
 
-        CommandType cmdType = Parser.parseCmdWord(in);
+        CommandType cmdType = CommandParser.parseCmdWord(in);
         switch (cmdType) {
         case Exit:
             hasExited = true;
@@ -24,11 +22,11 @@ public class DukeCommandExecutor implements CommandExecutor {
         case Done:
             return DoneCommand.execute(in, taskList);
         case Delete:
-            return DeleteCommand.execute(in, taskList, storage);
+            return DeleteCommand.execute(in, taskList);
         case Due:
             return DueCommand.execute(in, taskList);
         case Task:
-            return TaskCommand.execute(in, taskList, storage);
+            return TaskCommand.execute(in, taskList);
         default: // Invalid
            throw new InvalidCommandException("I'm sorry, but I don't know what that means :-(");
         }

@@ -7,24 +7,21 @@ import duke.task.Task;
 import duke.task.TaskFactory;
 import duke.task.TaskList;
 import duke.task.TaskType;
-import duke.util.Parser;
-import duke.util.Storage;
 
 public class TaskCommand {
-    public static String execute(String in, TaskList taskList, Storage storage) throws DukeException {
-        TaskType taskType = Parser.parseTaskType(in);
+    public static String execute(String in, TaskList taskList) throws DukeException {
+        TaskType taskType = CommandParser.parseTaskType(in);
         String taskDetails = in.replaceFirst(taskType.toString().toLowerCase(), "").trim();
         if (taskType == TaskType.Invalid) {
             throw new InvalidCommandException("Something went wrong during the execution of the command. :-(");
         }
-        return createTask(taskType, taskDetails, taskList, storage);
+        return createTask(taskType, taskDetails, taskList);
     }
 
-    private static String createTask(TaskType taskType, String details, TaskList taskList, Storage storage)
+    private static String createTask(TaskType taskType, String details, TaskList taskList)
             throws InvalidTaskException {
         Task task = TaskFactory.createTask(taskType, details);
         taskList.add(task);
-        storage.updateSaveFile(taskList);
         int len = taskList.size();
         return "Got it. I've added this task: \n"
                 + "  " + task.toString() + "\n"

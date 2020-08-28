@@ -1,7 +1,5 @@
 package duke.task;
 
-import java.util.function.Consumer;
-
 public interface TaskList {
     void add(Task t);
 
@@ -11,5 +9,5 @@ public interface TaskList {
 
     int size();
 
-    void forEach(Consumer<Task> action);
+    void update(int index);
 }

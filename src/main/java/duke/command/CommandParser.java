@@ -1,9 +1,9 @@
-package duke.util;
+package duke.command;
 
 import duke.command.CommandType;
 import duke.task.TaskType;
 
-public class Parser {
+public class CommandParser {
     private static final String CMD_EXIT = "bye";
     private static final String CMD_LIST = "list";
     private static final String CMD_DONE = "done";
