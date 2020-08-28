@@ -1,7 +1,15 @@
 package duke;
 
-import duke.task.*;
-import java.io.*;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.File;
+import java.io.FileWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -18,7 +26,7 @@ public class Storage {
      * @param tasks TaskList object to be updated by existing tasks.csv file.
      * @throws IOException If loading of file fails.
      */
-    public static void loadTasks(TaskList tasks)
+    public void loadTasks(TaskList tasks)
             throws IOException {
         String currDir = System.getProperty("user.dir");
         Path filePath = Paths.get(currDir,
@@ -63,7 +71,7 @@ public class Storage {
      *              tasks.csv file.
      * @throws IOException If saving of file fails.
      */
-    public static void saveTasks(TaskList tasks) throws IOException {
+    public void saveTasks(TaskList tasks) throws IOException {
         String currDir = System.getProperty("user.dir");
         Path folderPath = Paths.get(currDir, "data");
         if (!Files.exists(folderPath)) {

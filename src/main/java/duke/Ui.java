@@ -1,14 +1,14 @@
 package duke;
 
-import duke.task.*;
+import duke.task.Task;
 
 /**
  * In charge of interactions with the user.
  */
 public class Ui {
 
-    private static final String BORDER
-            = "==========================================";
+    private static final String BORDER =
+            "==========================================";
 
     /**
      * Prints out the greeting message to the user.

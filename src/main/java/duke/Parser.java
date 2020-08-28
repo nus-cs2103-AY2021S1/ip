@@ -1,7 +1,15 @@
 package duke;
 
-import duke.command.*;
-import duke.exception.*;
+import duke.command.AddCommand;
+import duke.command.ByeCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
+import duke.command.UnknownCommand;
+import duke.exception.DukeEmptyArgumentException;
+import duke.exception.DukeEmptyDescriptionException;
 
 /**
  * Parse user inputs and translate them into commands to be executed by the chat bot.

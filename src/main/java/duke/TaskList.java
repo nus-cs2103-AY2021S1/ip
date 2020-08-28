@@ -1,6 +1,6 @@
 package duke;
 
-import duke.task.*;
+import duke.task.Task;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,8 +12,8 @@ public class TaskList {
 
     private static final int TASK_LIMIT = 100;
 
-    private final List<Task> taskList
-            = new ArrayList<>(TASK_LIMIT);
+    private final List<Task> taskList =
+            new ArrayList<>(TASK_LIMIT);
 
     /**
      * Adds task into TaskList object.

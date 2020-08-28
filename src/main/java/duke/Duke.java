@@ -1,9 +1,9 @@
 package duke;
 
-import duke.command.*;
+import duke.command.Command;
 import duke.exception.DukeException;
 
-import java.io.*;
+import java.io.IOException;
 import java.util.Scanner;
 
 /**
@@ -48,7 +48,7 @@ public class Duke {
 
     /**
      * Driver method for chat bot.
-     * @param args
+     * @param args Starts up the chat bot.
      */
     public static void main(String[] args) {
         new Duke().start();

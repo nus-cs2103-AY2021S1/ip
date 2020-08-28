@@ -1,6 +1,8 @@
 package duke.command;
 
-import duke.*;
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
 
 /**
  * Represents a command to find mathcing keywords in list.
@@ -26,7 +28,7 @@ public class FindCommand extends Command {
                 counter++;
             }
         }
-        if (counter == 0 ) {
+        if (counter == 0) {
             ui.printNoMatch(extra);
         }
     }
