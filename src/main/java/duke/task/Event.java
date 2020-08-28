@@ -1,10 +1,10 @@
 package duke.task;
 
-import duke.command.InvalidCommandException;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+
+import duke.command.InvalidCommandException;
 
 /**
  * Represents an event task that consists of a description and a datetime as the happening time of the event.
