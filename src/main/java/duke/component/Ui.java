@@ -1,9 +1,9 @@
 package duke.component;
 
-import duke.task.Task;
-
 import java.util.Scanner;
 import java.util.function.Predicate;
+
+import duke.task.Task;
 
 /**
  * Represents user-interface objects that deals with user inputs and outputs.
