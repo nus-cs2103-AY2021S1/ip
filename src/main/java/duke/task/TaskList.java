@@ -95,15 +95,21 @@ public class TaskList implements Iterable<Task> {
     /**
      * Finds all <code>Tasks</code> containing the specified search word.
      * @param searchWord the <code>String</code> that is to be search with.
-     * @return a <code>TaskList</code> containing all <code>Tasks</code> that are found.
+     * @return a <code>String</code> containing all <code>Tasks</code> that are found.
      */
-    public TaskList findString(String searchWord) {
-        TaskList foundTasks = new TaskList();
-        for (Task task : this.taskList) {
+    public String findString(String searchWord) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < this.getCurrCapacity(); i++) {
+            Task task = this.taskList.get(i);
             if (task.getTaskDescription().contains(searchWord)) {
-                foundTasks.addTask(task);
+                String taskString = String.format("%d. %s", i + 1, task.toString());
+                sb.append(taskString);
+                sb.append("\n");
             }
         }
-        return foundTasks;
+        if (sb.length() > 0) {
+            sb.deleteCharAt(sb.length() - 1);
+        }
+        return sb.toString();
     }
 }

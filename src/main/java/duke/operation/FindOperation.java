@@ -35,8 +35,8 @@ public class FindOperation extends Operation {
      */
     @Override
     public String execute() {
-        TaskList foundTasks = this.taskList.findString(searchWord);
-        if (foundTasks.getCurrCapacity() == 0) {
+        String foundTasks = this.taskList.findString(searchWord);
+        if (foundTasks.equals("")) {
             return String.format("I have found no tasks that match: %s", this.searchWord);
         }
         return "Here are the tasks I have found:\n" + foundTasks.toString();
