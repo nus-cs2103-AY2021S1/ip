@@ -1,6 +1,5 @@
-package duke.parser;
+package duke.command;
 
-import duke.command.CommandType;
 import duke.task.TaskType;
 
 import org.junit.jupiter.api.Test;

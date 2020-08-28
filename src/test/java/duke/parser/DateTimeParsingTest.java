@@ -1,6 +1,5 @@
-package duke.util;
+package duke.parser;
 
-import duke.parser.DateTimeParsing;
 import org.junit.jupiter.api.Test;
 
 import java.time.format.DateTimeParseException;
