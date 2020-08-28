@@ -71,9 +71,9 @@ public class Bot {
           default:
             throw new UndefinedException();
         }
-      } catch (NoDescriptionException e) {
+      } catch (NoDescriptionException e) { //incomplete messages
         printer.noDescriptionMessage(e.s);
-      } catch (UndefinedException e) {
+      } catch (UndefinedException e) { //unknown commands
         printer.undefinedExceptionMessage();
       }
     }
