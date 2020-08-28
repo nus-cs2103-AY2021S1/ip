@@ -9,7 +9,7 @@ public class ViscountException extends Exception {
     public ViscountException() {
         super(ViscountException.ERROR_MESSAGE);
     }
-    
+
     public ViscountException(String errorMessage) {
         super(errorMessage);
     }

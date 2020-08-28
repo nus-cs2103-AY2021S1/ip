@@ -3,17 +3,17 @@ package viscount.command;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
-
 import java.util.Comparator;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-import viscount.*;
-
+import viscount.Parser;
+import viscount.Storage;
+import viscount.TaskList;
+import viscount.Ui;
 import viscount.exception.ViscountDateTimeParseException;
 import viscount.exception.ViscountException;
-
 import viscount.task.Task;
 import viscount.task.TaskType;
 
@@ -24,7 +24,14 @@ public class ListCommand extends Command {
     private String taskTypeModifier;
     private String dateString;
     private String findString;
-    
+
+    /**
+     * Instantiates a new list command.
+     *
+     * @param taskTypeModifier Task type modifier of the command.
+     * @param dateString Date string argument.
+     * @param findString Find string argument.
+     */
     public ListCommand(String taskTypeModifier, String dateString, String findString) {
         super();
         this.taskTypeModifier = taskTypeModifier;
@@ -44,9 +51,9 @@ public class ListCommand extends Command {
     public void execute(TaskList taskList, Ui ui, Storage storage) throws ViscountException {
         Predicate<Task> filterByModifier = task -> taskTypeModifier.isEmpty()
                 || task.getTaskType() == TaskType.valueOf(taskTypeModifier.toUpperCase());
-        
+
         Predicate<Task> filterByDescription = task -> task.getDescription().contains(findString);
-        
+
         List<Task> tasks = taskList.getTasks();
 
         if (dateString.isEmpty()) {
@@ -55,7 +62,7 @@ public class ListCommand extends Command {
                     .filter(filterByModifier)
                     .filter(filterByDescription)
                     .collect(Collectors.toList());
-            
+
             ui.showList(filteredTasks, taskTypeModifier, dateString);
         } else {
             try {
@@ -74,16 +81,16 @@ public class ListCommand extends Command {
 
                 ui.showList(
                         filteredTasks,
-                        taskTypeModifier, 
-                        dateString.equals("today") 
-                                ? dateString 
+                        taskTypeModifier,
+                        dateString.equals("today")
+                                ? dateString
                                 : queriedDateTime.format(Parser.OUTPUT_DATE_FORMATTER));
             } catch (DateTimeParseException e) {
                 throw new ViscountDateTimeParseException("date query");
             }
         }
     }
-    
+
     @Override
     public boolean isExit() {
         return false;

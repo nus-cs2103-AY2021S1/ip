@@ -7,19 +7,19 @@ import viscount.task.Task;
 
 /**
  * Represents Viscount's task list.
- * 
+ *
  * Stores the task list and handles operations modifying it.
  */
 public class TaskList {
     private List<Task> tasks;
-    
+
     public TaskList(List<Task> tasks) {
         this.tasks = tasks;
     }
 
     /**
      * Adds task to task list.
-     * 
+     *
      * @param task Task added.
      */
     public void add(Task task) {
@@ -28,7 +28,7 @@ public class TaskList {
 
     /**
      * Marks task as done by its index in the list.
-     * 
+     *
      * @param taskIndex Index of task marked.
      * @throws ViscountIndexOutOfBoundsException If taskIndex is < 0 or >= list size.
      */
@@ -43,7 +43,7 @@ public class TaskList {
 
     /**
      * Removes task from list by its index in the list.
-     * 
+     *
      * @param taskIndex Index of task removed.
      * @return Task removed.
      * @throws ViscountIndexOutOfBoundsException If taskIndex is < 0 or >= list size
@@ -58,7 +58,7 @@ public class TaskList {
 
     /**
      * Gets task list.
-     * 
+     *
      * @return Task list.
      */
     public List<Task> getTasks() {
@@ -67,7 +67,7 @@ public class TaskList {
 
     /**
      * Gets task by its index in the list.
-     * 
+     *
      * @param taskIndex Index of task.
      * @return Task with index taskIndex.
      * @throws ViscountIndexOutOfBoundsException If taskIndex is < 0 or >= list size
@@ -82,7 +82,7 @@ public class TaskList {
 
     /**
      * Gets size of task list.
-     * 
+     *
      * @return Size of task list.
      */
     public int getTasksSize() {

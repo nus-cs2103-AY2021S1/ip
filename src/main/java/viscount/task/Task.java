@@ -16,6 +16,13 @@ public abstract class Task {
     protected String description;
     protected boolean isDone;
 
+    /**
+     * Instantiates a new task.
+     *
+     * @param taskType Type of the task created.
+     * @param description Description of the task created.
+     * @param isDone Represents if the task is done.
+     */
     public Task(TaskType taskType, String description, boolean isDone) {
         this.taskType = taskType;
         this.description = description;
@@ -35,7 +42,7 @@ public abstract class Task {
         return (isDone ? "\u2713" : "\u2718");
         //return tick or X symbols
     }
-    
+
     public TaskType getTaskType() {
         return taskType;
     }
