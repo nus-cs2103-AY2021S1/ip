@@ -1,0 +1,26 @@
+plugins {
+    id 'java'
+}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+sourceSets {
+    main {
+        java {
+            srcDirs = ['src/java']
+        }
+    }
+}
+test {
+    useJUnitPlatform()
+}
+
+dependencies {
+    compile 'junit:junit:4.12'
+    testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.4.0'
+    testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.4.0'
+}
