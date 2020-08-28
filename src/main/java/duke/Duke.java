@@ -10,7 +10,6 @@ import duke.utils.DukeState;
  */
 public class Duke {
 
-    private final Ui ui;
     private final Storage storage;
     private final TaskList taskList;
     private DukeState dukeState;
@@ -22,7 +21,6 @@ public class Duke {
      * @param filePath the filePath where the storage will load from and save data to.
      */
     public Duke(String filePath) {
-        this.ui = new Ui();
         this.storage = new Storage(filePath);
 
         TaskList tmpTaskList;
@@ -50,7 +48,7 @@ public class Duke {
             if (cmd.isExit()) {
                 dukeState = DukeState.EXITED;
             }
-            return cmd.execute(ui, storage, taskList);
+            return cmd.execute(storage, taskList);
         } catch (DukeException e) {
             return e.getPrettyErrorMsg();
         }

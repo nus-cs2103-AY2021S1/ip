@@ -1,11 +1,7 @@
 package duke.fxcommand;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
 import duke.tasks.Task;
 
 /**
@@ -26,18 +22,18 @@ public class DeleteCommand implements Command {
 
     /**
      * Deletes the task at the specified taskNum in the taskList.
-     *
-     * @param ui      The ui of Duke.
-     * @param storage The storage object.
+     *  @param storage The storage object.
      * @param tasks   The taskList.
      */
     @Override
-    public String execute(Ui ui, Storage storage, TaskList tasks) {
+    public String execute(Storage storage, TaskList tasks) {
         Task delTask = tasks.delete(taskNum);
-        ui.printWithWrapper(new ArrayList<>(List.of(
+        /*
+        stringUtils(new ArrayList<>(List.of(
                 "OK! I have deleted the following task for your list:",
                 delTask.toString(),
                 tasks.getListStatus())), false, false);
+         */
         return "OK! I have deleted the following task for your list:\n" + delTask.toString() + "\n" + tasks.getListStatus();
     }
 }

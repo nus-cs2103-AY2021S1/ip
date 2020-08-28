@@ -2,7 +2,6 @@ package duke.fxcommand;
 
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
 import duke.exception.DukeException;
 import duke.tasks.DeadlineTask;
 import duke.tasks.Task;
@@ -29,13 +28,12 @@ public class DeadlineCommand implements Command {
     /**
      * Adds a new DeadlineTask to the taskList.
      *
-     * @param ui      The ui of Duke.
      * @param storage The storage object.
      * @param tasks   The taskList.
      * @throws DukeException If deadline format is wrong.
      */
     @Override
-    public String execute(Ui ui, Storage storage, TaskList tasks) throws DukeException {
+    public String execute(Storage storage, TaskList tasks) throws DukeException {
         Task deadlineTask = new DeadlineTask(description, deadline);
         tasks.add(deadlineTask);
         return "Sure! I have added the following deadline task to your list:\n" + deadlineTask.toString() + "\n" + tasks.getListStatus();

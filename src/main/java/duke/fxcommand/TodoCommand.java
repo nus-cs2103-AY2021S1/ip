@@ -2,7 +2,6 @@ package duke.fxcommand;
 
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
 import duke.tasks.Task;
 import duke.tasks.TodoTask;
 
@@ -24,13 +23,11 @@ public class TodoCommand implements Command {
 
     /**
      * Adds a new TodoTask.
-     *
-     * @param ui      The ui of Duke.
-     * @param storage The storage object.
+     *  @param storage The storage object.
      * @param tasks   The taskList.
      */
     @Override
-    public String execute(Ui ui, Storage storage, TaskList tasks) {
+    public String execute(Storage storage, TaskList tasks) {
         Task todoTask = new TodoTask(description);
         tasks.add(todoTask);
         return "Sure! I have added the following todo task to your list:\n" + todoTask.toString() + '\n' + tasks.getListStatus();

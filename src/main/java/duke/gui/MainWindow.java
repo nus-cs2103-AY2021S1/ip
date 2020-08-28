@@ -36,15 +36,16 @@ public class MainWindow extends AnchorPane {
     public void setDuke(Duke d) {
         duke = d;
 
-        String greeting = DukeStdMsg.WELCOME.getMsg();
+        StringBuilder sb = new StringBuilder();
         if (duke.isLoadedFromDisk()) {
-            greeting = DukeStdMsg.LOAD_FROM_DISK.getMsg() + '\n' + greeting;
+            sb.append(DukeStdMsg.LOAD_FROM_DISK.getMsg());
         } else {
-            greeting += DukeStdMsg.FRESH_START.getMsg()+ '\n' + greeting;
+            sb.append(DukeStdMsg.FRESH_START.getMsg());
         }
+        sb.append(DukeStdMsg.WELCOME.getMsg());
 
         dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog(greeting, dukeImage)
+                DialogBox.getDukeDialog(sb.toString(), dukeImage)
         );
     }
 

@@ -2,7 +2,6 @@ package duke.fxcommand;
 
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
 import duke.exception.DukeException;
 
 /**
@@ -13,12 +12,11 @@ public interface Command {
     /**
      * Contains the logic required to execute the command.
      *
-     * @param ui      The ui of Duke.
      * @param storage The storage object.
      * @param tasks   The taskList.
      * @throws DukeException
      */
-    String execute(Ui ui, Storage storage, TaskList tasks) throws DukeException;
+    String execute(Storage storage, TaskList tasks) throws DukeException;
 
     /**
      * Checks whether command indicates an intent to exit Duke.

@@ -2,7 +2,6 @@ package duke.fxcommand;
 
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
 import duke.tasks.Task;
 
 /**
@@ -23,13 +22,11 @@ public class DoneCommand implements Command {
 
     /**
      * Marks the Task at the specified taskNum as Done.
-     *
-     * @param ui      The ui of Duke.
-     * @param storage The storage object.
+     *  @param storage The storage object.
      * @param tasks   The taskList.
      */
     @Override
-    public String execute(Ui ui, Storage storage, TaskList tasks) {
+    public String execute(Storage storage, TaskList tasks) {
         Task doneTask = tasks.markTaskAsDone(taskNum);
         return "OK! I have marked the following task as done:\n" + doneTask.toString();
     }
