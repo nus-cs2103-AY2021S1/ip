@@ -1,9 +1,9 @@
 package duke.command;
 
-import duke.Storage;
-import duke.Ui;
 import duke.exceptions.IncompleteDukeCommandException;
+import duke.storage.Storage;
 import duke.task.TaskList;
+import duke.ui.Ui;
 
 /**
  * The {@code DeleteAllCommand} class represents a command to print all contents of a {@link TaskList}.

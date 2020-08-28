@@ -1,10 +1,10 @@
 package duke.command;
 
-import duke.Storage;
-import duke.Ui;
 import duke.exceptions.IncompleteDukeCommandException;
+import duke.storage.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
+import duke.ui.Ui;
 
 /**
  * The {@code CompleteCommand} class represents a command to mark a {@link Task} in a {@link TaskList} as complete.

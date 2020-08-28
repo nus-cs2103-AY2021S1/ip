@@ -1,15 +1,15 @@
 package duke.command;
 
-import duke.Storage;
-import duke.Ui;
 import duke.exceptions.DukeException;
 import duke.exceptions.IncompleteDukeCommandException;
+import duke.storage.Storage;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.task.TaskType;
 import duke.task.ToDo;
+import duke.ui.Ui;
 
 /**
  * The {@code CompleteCommand} class represents a command to create a new {@link Task}.

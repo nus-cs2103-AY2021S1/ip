@@ -1,10 +1,10 @@
-import duke.Storage;
-import duke.Ui;
 import duke.command.Command;
 import duke.exceptions.DukeException;
 import duke.exceptions.IncompleteDukeCommandException;
 import duke.parser.Parser;
+import duke.storage.Storage;
 import duke.task.TaskList;
+import duke.ui.Ui;
 
 public class Duke {
 

@@ -1,4 +1,4 @@
-package duke;
+package duke.storage;
 
 import duke.exceptions.DukeStorageException;
 import duke.task.Deadline;

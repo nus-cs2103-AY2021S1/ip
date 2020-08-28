@@ -1,9 +1,9 @@
 package duke.command;
 
-import duke.Storage;
-import duke.Ui;
 import duke.exceptions.DukeException;
+import duke.storage.Storage;
 import duke.task.TaskList;
+import duke.ui.Ui;
 
 /**
  * The {@code Command} class provides a skeletal implementation of an executable command.
