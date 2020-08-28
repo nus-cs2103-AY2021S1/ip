@@ -37,7 +37,8 @@ public class Duke {
         try {
             initialise();
         } catch (DukeException e) {
-            throw new InvalidSaveFileException("An error has occurred while loading the save file!.\n Exiting...");
+            e.printStackTrace();
+            throw new InvalidSaveFileException("An error has occurred while loading the save file!.");
         }
 
         String input, msgBody;
@@ -60,7 +61,7 @@ public class Duke {
         handleStart();
         List<String> loadedLines = STORAGE.getSavedLines();
         for (String line: loadedLines) {
-            EXE.execute(line, TASK_LIST);
+            EXE.loadSaveString(line, TASK_LIST);
         }
     }
 

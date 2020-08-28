@@ -6,5 +6,7 @@ import duke.task.TaskList;
 public interface CommandExecutor {
     public String execute(String in, TaskList taskList) throws DukeException;
 
+    public void loadSaveString(String in, TaskList taskList) throws DukeException;
+
     public boolean shouldExit();
 }

@@ -1,7 +1,7 @@
 package duke.task;
 
 public interface TaskList {
-    void add(Task t);
+    void add(Task t, boolean shouldUpdateStorage);
 
     Task get(int i);
 

@@ -44,7 +44,7 @@ public class Storage {
             FileWriter myWriter = new FileWriter(FILE_PATH.toString());
             for (String line: SAVE_LINES) {
                 try {
-                    myWriter.write(SAVE_LINES + "\n");
+                    myWriter.write(line + "\n");
                 } catch (IOException e) {
                     System.out.println("An error has occurred when updating the save file.");
                 }

@@ -12,9 +12,11 @@ public class TaskArrayList implements TaskList {
         this.STORE = store;
     }
 
-    public void add(Task t) {
+    public void add(Task t, boolean shouldUpdateStorage) {
         TASK_LIST.add(t);
-        STORE.addLine(t.toSaveString());
+        if (shouldUpdateStorage) {
+            STORE.addLine(t.toSaveString());
+        }
     }
 
     public Task get(int i) {

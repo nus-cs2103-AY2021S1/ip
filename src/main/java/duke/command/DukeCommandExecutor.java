@@ -35,4 +35,8 @@ public class DukeCommandExecutor implements CommandExecutor {
     public boolean shouldExit() {
         return hasExited;
     }
+
+    public void loadSaveString(String in, TaskList taskList) throws DukeException {
+        TaskCommand.loadSavedTasks(in, taskList);
+    }
 }

@@ -1,6 +1,5 @@
 package duke.command;
 
-import duke.command.CommandType;
 import duke.task.TaskType;
 
 public class CommandParser {
