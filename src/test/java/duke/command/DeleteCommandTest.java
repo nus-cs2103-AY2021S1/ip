@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class DeleteCommandTest {
     @Test
-    public void isExit__alwaysFalse() {
+    public void isExit_alwaysFalse() {
         assertFalse(new DeleteCommand("delete ").isExit());
         assertFalse(new DeleteCommand("delete 3").isExit());
         assertFalse(new DeleteCommand("delete 0").isExit());
