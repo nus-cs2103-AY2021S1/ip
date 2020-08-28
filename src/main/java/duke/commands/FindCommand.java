@@ -1,4 +1,4 @@
-package duke.fxcommand;
+package duke.commands;
 
 import java.util.ArrayList;
 

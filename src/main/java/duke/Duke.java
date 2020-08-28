@@ -1,6 +1,6 @@
 package duke;
 
-import duke.fxcommand.Command;
+import duke.commands.Command;
 import duke.exception.DukeException;
 import duke.utils.DukeState;
 
