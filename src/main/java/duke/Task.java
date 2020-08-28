@@ -3,7 +3,7 @@ package duke;
 /**
  * Class representing generic tasks.
  */
-public class Task {
+class Task {
     /** Variable to store task description. */
     protected String description;
     /** Variable to store if the task is completed. */
@@ -14,7 +14,7 @@ public class Task {
      *
      * @param description Task description.
      */
-    public Task(String description) {
+    Task(String description) {
         this.description = description;
         this.isDone = false;
     }
@@ -25,7 +25,7 @@ public class Task {
      * @param description Task description.
      * @param isDone Describes if task is completed.
      */
-    public Task(String description, boolean isDone) {
+    Task(String description, boolean isDone) {
         this.description = description;
         this.isDone = isDone;
     }
@@ -35,7 +35,7 @@ public class Task {
      *
      * @return String representing status icon.
      */
-    public String getStatusIcon() {
+    String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
 
@@ -44,7 +44,7 @@ public class Task {
      *
      * @return Task description.
      */
-    public String getDescription() {
+    String getDescription() {
         return this.description;
     }
 
@@ -53,7 +53,7 @@ public class Task {
      *
      * @param done Task done status.
      */
-    public void setDone(boolean done) {
+    void setDone(boolean done) {
         isDone = done;
     }
 
@@ -62,7 +62,7 @@ public class Task {
      *
      * @return Simple string description.
      */
-    public String toStringSimple() {
+    String toStringSimple() {
         int intDone = isDone ? 1 : 0;
         return intDone + " | " + this.getDescription();
     }

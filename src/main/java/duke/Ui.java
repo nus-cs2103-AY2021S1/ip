@@ -5,7 +5,7 @@ import java.util.Scanner;
 /**
  * Deals with user interaction.
  */
-public class Ui {
+class Ui {
 
     /** Takes in user input. */
     private Scanner scanner = new Scanner(System.in);
@@ -13,7 +13,7 @@ public class Ui {
     /**
      * Constructor used to create UI .
      */
-    public Ui() {
+    Ui() {
     }
 
     /**
@@ -21,7 +21,7 @@ public class Ui {
      *
      * @return Next line.
      */
-    public String readCommand() {
+    String readCommand() {
         return scanner.nextLine();
     }
 
@@ -30,7 +30,7 @@ public class Ui {
      *
      * @param e Duke Exception.
      */
-    public void showError(DukeException e) {
+    void showError(DukeException e) {
         printOutput(e.getMessage(), true);
     }
 
@@ -40,7 +40,7 @@ public class Ui {
      * @param input String input.
      * @param hasLastNewLine Option to choose if an extra line break is needed.
      */
-    public void printOutput(String input, boolean hasLastNewLine) {
+    void printOutput(String input, boolean hasLastNewLine) {
         if (hasLastNewLine) {
             System.out.println("    ____________________________________________________________\n"
                     + input + "\n"
@@ -52,12 +52,12 @@ public class Ui {
         }
     }
 
-    public void showWelcome() {
+    void showWelcome() {
         printOutput("     Hello! I'm Duke\n"
                 + "     What can I do for you?", true);
     }
 
-    public void showExit() {
+    void showExit() {
         printOutput("     Bye. Hope to see you again soon!", true);
     }
 }

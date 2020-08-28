@@ -8,7 +8,7 @@ import java.time.format.FormatStyle;
 /**
  * Class representing events.
  */
-public class Event extends Task {
+class Event extends Task {
 
     /**
      * Variable to store event time.
@@ -21,7 +21,7 @@ public class Event extends Task {
      * @param description Event description.
      * @param at Event time.
      */
-    public Event(String description, LocalDate at) {
+    Event(String description, LocalDate at) {
         super(description);
         this.at = at;
     }
@@ -33,7 +33,7 @@ public class Event extends Task {
      * @param at Event time.
      * @param isDone Describes if task is completed.
      */
-    public Event(String description, LocalDate at, boolean isDone) {
+    Event(String description, LocalDate at, boolean isDone) {
         super(description, isDone);
         this.at = at;
     }
@@ -44,7 +44,7 @@ public class Event extends Task {
      * @return Simple string description.
      */
     @Override
-    public String toStringSimple() {
+    String toStringSimple() {
         return "E | " + super.toStringSimple() + " | " + at;
     }
 

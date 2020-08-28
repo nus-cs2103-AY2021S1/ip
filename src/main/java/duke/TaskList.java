@@ -4,19 +4,19 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
 import java.util.ArrayList;
- 
+
 /**
  * Contains task list, and has operations like list and delete.
  */
-public class TaskList {
-    
+class TaskList {
+
     /** List of tasks. */
     private ArrayList<Task> taskList = new ArrayList<>();
 
     /**
      * Constructor used to create list of tasks.
      */
-    public TaskList() {
+    TaskList() {
     }
 
     /**
@@ -25,7 +25,7 @@ public class TaskList {
      * @param taskStrings List of tasks in string format.
      * @throws DukeException  When date is in wrong format.
      */
-    public TaskList(ArrayList<ArrayList<String>> taskStrings) throws DukeException {
+    TaskList(ArrayList<ArrayList<String>> taskStrings) throws DukeException {
         //TODO: Create Enum for this, or just store as Deadline, Event, Todo
 
         for (ArrayList<String> taskString : taskStrings) {
@@ -51,11 +51,11 @@ public class TaskList {
      *
      * @return List of tasks.
      */
-    public ArrayList<Task> getTasks() {
+    ArrayList<Task> getTasks() {
         return taskList;
     }
 
-    public String addTask(CommandName commandName, String description, String date) throws DukeException {
+    String addTask(CommandName commandName, String description, String date) throws DukeException {
         Task task;
 
         switch (commandName) {
@@ -131,7 +131,7 @@ public class TaskList {
         }
     }
 
-    public String listTasks() {
+    String listTasks() {
         StringBuilder output = new StringBuilder("     Here are the tasks in your list:\n");
         int index = 1;
         for (Task task : taskList) {
@@ -141,14 +141,14 @@ public class TaskList {
         return output.toString();
     }
 
-    public String doTask(int index) {
+    String doTask(int index) {
         Task task = taskList.get(index - 1);
         task.setDone(true);
         return "     Nice! I've marked this task as done: \n"
                 + "       " + task.toString();
     }
 
-    public String deleteTask(int index) {
+    String deleteTask(int index) {
         Task task = taskList.get(index - 1);
         taskList.remove(index - 1);
         int len = taskList.size();
@@ -157,7 +157,7 @@ public class TaskList {
                 + " tasks in the list.";
     }
 
-    public String findTasks(String search) {
+    String findTasks(String search) {
         StringBuilder output = new StringBuilder("     Here are the matching tasks in your list:\n");
         int index = 1;
         for (Task task : taskList) {

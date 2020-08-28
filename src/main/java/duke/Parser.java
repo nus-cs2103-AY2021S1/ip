@@ -3,7 +3,7 @@ package duke;
 /**
  * Class used for parsing input from user command.
  */
-public class Parser {
+class Parser {
 
     /**
      * Parses input, and calls corresponding functions.
@@ -12,7 +12,7 @@ public class Parser {
      * @return Corresponding Command with respect to input.
      * @throws DukeException  When date is in wrong format, or task lacks description.
      */
-    public static Command parse(String input) throws DukeException {
+    static Command parse(String input) throws DukeException {
         String second;
         int index;
 
@@ -80,7 +80,7 @@ public class Parser {
             }
         } catch (ArrayIndexOutOfBoundsException e) {
             String error = "     OOPS!!! The description of a " + commandName.toString().toLowerCase()
-                + " cannot be empty.";
+                    + " cannot be empty.";
             throw new DukeException(error);
         }
     }

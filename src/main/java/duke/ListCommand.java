@@ -3,7 +3,7 @@ package duke;
 /**
  * Controls logic of listing tasks.
  */
-public class ListCommand extends Command {
+class ListCommand extends Command {
 
     /**
      * Executes list tasks.
@@ -11,10 +11,9 @@ public class ListCommand extends Command {
      * @param tasks Stores task list.
      * @param ui Handles user interaction.
      * @param storage Handles input output to hard disk.
-     * @throws DukeException When date time in wrong format, or description not given,
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    void execute(TaskList tasks, Ui ui, Storage storage) {
         String output = tasks.listTasks();
         ui.printOutput(output, false);
     }
@@ -25,7 +24,7 @@ public class ListCommand extends Command {
      * @return Should not exit program.
      */
     @Override
-    public boolean isExit() {
+    boolean isExit() {
         return false;
     }
 }

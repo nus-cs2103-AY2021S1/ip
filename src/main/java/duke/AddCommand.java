@@ -5,7 +5,7 @@ import java.util.ArrayList;
 /**
  * Controls logic of adding tasks.
  */
-public class AddCommand extends Command {
+class AddCommand extends Command {
 
     /** Name of command e.g. Todo. */
     private CommandName commandName;
@@ -14,12 +14,12 @@ public class AddCommand extends Command {
     /** Date in string format. */
     private String date;
 
-    public AddCommand(CommandName commandName, String description) {
+    AddCommand(CommandName commandName, String description) {
         this.commandName = commandName;
         this.description = description;
     }
 
-    public AddCommand(CommandName commandName, String description, String date) {
+    AddCommand(CommandName commandName, String description, String date) {
         this.commandName = commandName;
         this.description = description;
         this.date = date;
@@ -34,7 +34,7 @@ public class AddCommand extends Command {
      * @throws DukeException When date time in wrong format, or description not given,
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         String output = tasks.addTask(commandName, description, date);
         ArrayList<Task> taskList = tasks.getTasks();
         ui.printOutput(output, true);
@@ -47,7 +47,7 @@ public class AddCommand extends Command {
      * @return Should not exit program.
      */
     @Override
-    public boolean isExit() {
+    boolean isExit() {
         return false;
     }
 }

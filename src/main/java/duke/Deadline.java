@@ -8,7 +8,7 @@ import java.time.format.FormatStyle;
 /**
  * Class used for deadline tasks.
  */
-public class Deadline extends Task {
+class Deadline extends Task {
 
     /**
      *  String used to store deadline.
@@ -21,7 +21,7 @@ public class Deadline extends Task {
      * @param description Task description.
      * @param by Deadline.
      */
-    public Deadline(String description, LocalDate by) {
+    Deadline(String description, LocalDate by) {
         super(description);
         this.by = by;
     }
@@ -33,7 +33,7 @@ public class Deadline extends Task {
      * @param by Deadline.
      * @param isDone Describes if task is completed.
      */
-    public Deadline(String description, LocalDate by, boolean isDone) {
+    Deadline(String description, LocalDate by, boolean isDone) {
         super(description, isDone);
         this.by = by;
     }
@@ -44,7 +44,7 @@ public class Deadline extends Task {
      * @return Simple string description.
      */
     @Override
-    public String toStringSimple() {
+    String toStringSimple() {
         return "D | " + super.toStringSimple() + " | " + by;
     }
 
