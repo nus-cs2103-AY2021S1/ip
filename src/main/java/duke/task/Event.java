@@ -14,13 +14,21 @@ import java.time.LocalDateTime;
  */
 public class Event extends Task {
 
-    private static final String EVENT_DELIMITER = "/at";
+    private static final String EVENT_DELIMITER = "/from";
 
-    private LocalDateTime dateTime;
+    private static final String DURATION_DELIMITER = "for";
 
-    private Event(String description, LocalDateTime dateTime) {
+    private static final String END_TIME_DELIMITER = "to";
+
+    private static final String ALL_DAY_KEYWORD = "all day";
+
+    private LocalDateTime startDateTime;
+    private LocalDateTime endDateTime;
+
+    private Event(String description, LocalDateTime start, LocalDateTime end) {
         super(description);
-        this.dateTime = dateTime;
+        startDateTime = start;
+        endDateTime = end;
     }
 
     /**
@@ -37,11 +45,37 @@ public class Event extends Task {
         String[] detailsArray = details.split(EVENT_DELIMITER, 2);
         try {
             String description = detailsArray[0].trim();
-            String dateTimeString = detailsArray[1].trim();
-            LocalDateTime dateTime = DateParser.parseString(dateTimeString);
-            return new Event(description, dateTime);
+            String dateTimeComponent = detailsArray[1].trim().toLowerCase();
+            if (dateTimeComponent.contains(ALL_DAY_KEYWORD)) {
+                String start = dateTimeComponent.split(ALL_DAY_KEYWORD)[0].split(DURATION_DELIMITER)[0].trim();
+                LocalDateTime startDateTime = DateParser.parseString(start);
+                LocalDateTime endDateTime = startDateTime.withHour(23).withMinute(59);
+                return new Event(description, startDateTime, endDateTime);
+            } else if (dateTimeComponent.contains(END_TIME_DELIMITER)) {
+                try {
+                    String start = dateTimeComponent.split(END_TIME_DELIMITER)[0].trim();
+                    String end = dateTimeComponent.split(END_TIME_DELIMITER)[1].trim();
+                    LocalDateTime startDateTime = DateParser.parseString(start);
+                    LocalDateTime endDateTime = DateParser.parseString(end);
+                    return new Event(description, startDateTime, endDateTime);
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    throw new DukeTaskCreationException("Does this thing ever end???");
+                }
+            } else if (dateTimeComponent.contains(DURATION_DELIMITER)) {
+                try {
+                    String start = dateTimeComponent.split(DURATION_DELIMITER)[0].trim();
+                    int duration = DateParser.parseDuration(dateTimeComponent.split(DURATION_DELIMITER)[1]);
+                    LocalDateTime startDateTime = DateParser.parseString(start);
+                    LocalDateTime endDateTime = startDateTime.plusMinutes(duration);
+                    return new Event(description, startDateTime, endDateTime);
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    throw new DukeTaskCreationException("Does this thing ever end???");
+                }
+            } else {
+                throw new DukeTaskCreationException("Wow that sure is one long event.");
+            }
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeTaskCreationException("Wow that sure is one long event...");
+            throw new DukeTaskCreationException("Something's missing, oh right I lost track of time.");
         }
     }
 
@@ -55,10 +89,12 @@ public class Event extends Task {
     public static Event decode(String code) throws DukeStorageException {
         if (code.charAt(0) == 'E') {
             String[] content = code.split("\\|", 4);
-            if (content.length != 4) {
+            if (content.length != 5) {
                 throw new DukeStorageException("There are some holes in my memory...");
             }
-            Event newEvent = new Event(content[3], DateParser.parseString(content[2]));
+            Event newEvent = new Event(content[3],
+                    DateParser.parseString(content[2]),
+                    DateParser.parseString(content[3]));
             if (content[1].equals("Y")) {
                 newEvent.setCompleted();
             } else if (!content[1].equals("N")) {
@@ -76,8 +112,9 @@ public class Event extends Task {
      * @return an encoded string representation of this {@code Event}.
      */
     public String encode() {
-        return String.format("E|%s|%s|%s", super.completed ? "Y" : "N",
-                DateParser.parseLocalDateTime(dateTime),
+        return String.format("E|%s|%s|%s|%s", super.completed ? "Y" : "N",
+                DateParser.parseLocalDateTime(startDateTime),
+                DateParser.parseLocalDateTime(endDateTime),
                 super.description);
     }
 
@@ -85,7 +122,9 @@ public class Event extends Task {
     public boolean match(String searchParameter) {
         try {
             LocalDate searchDate = DateParser.parseString(searchParameter).toLocalDate();
-            if (searchDate.isEqual(dateTime.toLocalDate())) {
+            if (searchDate.isEqual(startDateTime.toLocalDate()) || searchDate.isEqual(endDateTime.toLocalDate())
+                    || (searchDate.isBefore(endDateTime.toLocalDate())
+                    && searchDate.isAfter(startDateTime.toLocalDate()))) {
                 return true;
             }
         } catch (DukeException e) {
@@ -100,7 +139,13 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + DateParser.parseLocalDateTime(dateTime) + ")";
+        if (DateParser.isDateOnly(startDateTime) && startDateTime.toLocalDate().isEqual(endDateTime.toLocalDate())) {
+            return "[E]" + super.toString() + " (on " + DateParser.parseLocalDateTime(startDateTime)
+                    + " for all day)";
+        } else {
+            return "[E]" + super.toString() + " (from " + DateParser.parseLocalDateTime(startDateTime)
+                    + " to " + DateParser.parseLocalDateTime(endDateTime) + ")";
+        }
     }
 
 }

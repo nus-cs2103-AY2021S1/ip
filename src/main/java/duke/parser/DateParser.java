@@ -5,6 +5,7 @@ import duke.exceptions.DukeException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
 import java.time.format.DateTimeParseException;
 import java.util.Arrays;
 import java.util.List;
@@ -34,7 +35,9 @@ public class DateParser {
         if (input.contains(":")) {
             for (String format : ACCEPTED_FORMATS_WITH_TIME) {
                 try {
-                    return LocalDateTime.parse(input, DateTimeFormatter.ofPattern(format))
+                    DateTimeFormatterBuilder builder = new DateTimeFormatterBuilder();
+                    DateTimeFormatter formatter = builder.parseCaseInsensitive().appendPattern(format).toFormatter();
+                    return LocalDateTime.parse(input, formatter)
                             .withSecond(HAS_TIME_INDICATOR);
                 } catch (DateTimeParseException e) {
                 }
@@ -44,13 +47,43 @@ public class DateParser {
                 try {
                     // Since we do not support seconds for date and time based information, we use the second field to
                     // differentiate between a LocalDateTime with no defined time and one with time defined at midnight.
-                    return LocalDate.parse(input, DateTimeFormatter.ofPattern(format)).atStartOfDay()
+                    DateTimeFormatterBuilder builder = new DateTimeFormatterBuilder();
+                    DateTimeFormatter formatter = builder.parseCaseInsensitive().appendPattern(format).toFormatter();
+                    return LocalDate.parse(input, formatter).atStartOfDay()
                             .withSecond(NULL_TIME_INDICATOR);
                 } catch (DateTimeParseException e) {
                 }
             }
         }
-        throw new DukeException("I'm not quite sure if we know each other...");
+        throw new DukeException("I can't quite understand what you're saying...");
+    }
+
+    public static int parseDuration(String input) throws DukeException {
+        try {
+            int minutes = 0;
+            if (input.contains("d")) {
+                minutes += 1440 * Double.parseDouble(input.split("d")[0].trim());
+                if (input.split("d").length > 1) {
+                    input = input.split("d")[1].replaceAll("[^\\d]", "");
+                } else {
+                    input = null;
+                }
+            }
+            if (input != null && input.contains("h")) {
+                minutes += 60 * Double.parseDouble(input.split("h")[0].trim());
+                if (input.split("h").length > 1) {
+                    input = input.split("h")[1].replaceAll("[^\\d]", "");
+                } else {
+                    input = null;
+                }
+            }
+            if (input != null && input.contains("m")) {
+                minutes += Double.parseDouble(input.split("m")[0]);
+            }
+            return minutes;
+        } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
+            throw new DukeException("I can't understand what you're saying...");
+        }
     }
 
     /**
@@ -60,10 +93,14 @@ public class DateParser {
      * @return the string representation of the specified {@code LocalDateTime} object.
      */
     public static String parseLocalDateTime(LocalDateTime dateTime) {
-        if (dateTime.getSecond() == 30) {
+        if (dateTime.getSecond() == NULL_TIME_INDICATOR) {
             return dateTime.format(DateTimeFormatter.ofPattern(ACCEPTED_FORMATS_DATE_ONLY.get(0)));
         } else {
             return dateTime.format(DateTimeFormatter.ofPattern(ACCEPTED_FORMATS_WITH_TIME.get(0)));
         }
+    }
+
+    public static boolean isDateOnly(LocalDateTime dateTime) {
+        return dateTime.getSecond() == NULL_TIME_INDICATOR;
     }
 }
