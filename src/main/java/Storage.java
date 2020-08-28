@@ -15,7 +15,7 @@ public class Storage {
         this.taskFile = new File(filePath);
     }
 
-    public List<Task> load() {
+    public List<Task> load() throws DukeException {
         if (!this.taskFile.exists()) {
             File dir = this.taskFile.getParentFile();
             if (dir != null && !dir.exists()) {
@@ -39,24 +39,9 @@ public class Storage {
         if (sc != null) {
             List<Task> list = new ArrayList<>();
             while (sc.hasNext()) {
-                String listItem = sc.nextLine();
-                String[] words = listItem.split(" ", 2);
-
-                if (listItem.charAt(1) == 'T') {
-                    list.add(new Todo(words[1]));
-                } else if (listItem.charAt(1) == 'D') {
-                    String taskString = words[1];
-                    String[] temp = taskString.split(" by: ");
-                    LocalDateTime dateTime = LocalDateTime.parse(temp[1],
-                            DateTimeFormatter.ofPattern("d MMM yyyy, h.m a"));
-                    list.add(new Deadline(temp[0], dateTime));
-                } else if (listItem.charAt(1) == 'E') {
-                    String taskString = words[1];
-                    String[] temp = taskString.split(" at: ");
-                    LocalDateTime dateTime = LocalDateTime.parse(temp[1],
-                            DateTimeFormatter.ofPattern("d MMM yyyy, h.m a"));
-                    list.add(new Deadline(temp[0], dateTime));
-                }
+                String storedTask = sc.nextLine();
+                Task task = parseFromStorage(storedTask);
+                list.add(task);
             }
             return list;
         } else {
@@ -64,29 +49,94 @@ public class Storage {
         }
     }
 
-    public void update(Task task) {
+    public void update(Task task) throws DukeException {
         try {
             FileWriter fileWriter = new FileWriter(this.taskFile, true);
-            fileWriter.write(task.toString());
+            fileWriter.write("\n" + parseToStorage(task));
             fileWriter.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public void update(List<Task> list) {
+    public void update(List<Task> list) throws DukeException {
         try {
             FileWriter fileWriter = new FileWriter(this.taskFile);
-            String fileContents = list.get(0).toString();
+            String fileContents = parseToStorage(list.get(0));
 
             for (int i = 1; i < list.size(); i++) {
-                fileContents += "\n" + list.get(i).toString();
+                fileContents += "\n" + parseToStorage(list.get(i));
             }
 
             fileWriter.write(fileContents);
             fileWriter.close();
         } catch (IOException e) {
             e.printStackTrace(); // todo
+        }
+    }
+
+    public String parseToStorage(Task task) throws DukeException {
+        String taskType = "";
+        String status = task.isDone() ? "1" : "0";
+        String taskDescription = "";
+
+        if (task instanceof Todo) {
+            taskType = "T";
+            taskDescription = task.getTaskName();
+        } else if (task instanceof Deadline) {
+            taskType = "D"; // + date
+            taskDescription = task.getTaskName() +
+                " | " +
+                ((Deadline) task).getDateTime().format(
+                        DateTimeFormatter.ofPattern("d MMM yyyy, h.m a"));
+        } else if (task instanceof Event) {
+            taskType = "E";
+            taskDescription = task.getTaskName() +
+                    " | " +
+                    ((Event) task).getDateTime().format(
+                            DateTimeFormatter.ofPattern("d MMM yyyy, h.m a"));
+        } else {
+            throw new DukeException("Cannot recognise type");
+        }
+
+        return taskType +
+                " | " +
+                status +
+                " | " +
+                taskDescription;
+    }
+
+    public Task parseFromStorage(String storedTask) throws DukeException {
+        String[] taskElements = storedTask.split(" \\| ", 4);
+
+        try {
+            Task task = null;
+            if (storedTask.charAt(0) == 'T') {
+                task = new Todo(taskElements[2]);
+            } else if (storedTask.charAt(0) == 'D') {
+                String taskName = taskElements[2];
+                LocalDateTime dateTime = LocalDateTime.parse(taskElements[3],
+                        DateTimeFormatter.ofPattern("d MMM yyyy, h.m a"));
+                task = new Deadline(taskName, dateTime);
+            } else if (storedTask.charAt(0) == 'E') {
+                String taskName = taskElements[2];
+                LocalDateTime dateTime = LocalDateTime.parse(taskElements[3],
+                        DateTimeFormatter.ofPattern("d MMM yyyy, h.m a"));
+                task = new Event(taskName, dateTime);
+            }
+
+            if (taskElements[1].equals("1")) {
+                task.markDone();
+            }
+
+            if (task != null) {
+                return task;
+            } else {
+                throw new DukeException("Cannot read tasks from file.");
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+            throw new DukeException("Cannot read tasks from file.");
         }
     }
 }
