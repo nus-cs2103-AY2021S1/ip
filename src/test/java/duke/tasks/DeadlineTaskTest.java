@@ -74,7 +74,7 @@ public class DeadlineTaskTest {
     @Test
     public void contains_correctKeyword_true() {
         try {
-            assertTrue(new DeadlineTask("test", "2020-08-22").contains("test"));
+            assertTrue(new DeadlineTask("test", "2020-08-22").contains(new String[]{"test"}));
         } catch (DukeException e) {
             fail();
         }
@@ -83,7 +83,7 @@ public class DeadlineTaskTest {
     @Test
     public void contains_wrongKeyword_false() {
         try {
-            assertFalse(new DeadlineTask("test", "2020-08-22").contains("wrong"));
+            assertFalse(new DeadlineTask("test", "2020-08-22").contains(new String[]{"wrong"}));
         } catch (DukeException e) {
             fail();
         }

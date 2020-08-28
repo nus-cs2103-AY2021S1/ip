@@ -42,11 +42,15 @@ public abstract class Task {
     /**
      * Checks whether task description contains a certain keyword.
      *
-     * @param keyword The search keyword.
+     * @param keywords The search keyword.
      * @return Boolean value indicating whether task description contains a certain keyword.
      */
-    public boolean contains(String keyword) {
-        return description.contains(keyword);
+    public boolean contains(String[] keywords) {
+        boolean res = true;
+        for (String keyword : keywords) {
+            res = description.contains(keyword) && res;
+        }
+        return res;
     }
 
     @Override

@@ -51,7 +51,7 @@ public class TaskListTest {
         TaskList taskList = new TaskList();
         taskList.add(t);
         taskList.add(t1);
-        ArrayList<String> res = taskList.find("test");
+        ArrayList<String> res = taskList.find(new String[]{"test"});
         assertEquals(1, res.size());
         assertEquals("[T][\u2718] test", res.get(0));
     }
@@ -63,7 +63,7 @@ public class TaskListTest {
         TaskList taskList = new TaskList();
         taskList.add(t);
         taskList.add(t1);
-        ArrayList<String> res = taskList.find("123");
+        ArrayList<String> res = taskList.find(new String[]{"123"});
         assertEquals(0, res.size());
     }
 
