@@ -7,6 +7,11 @@ public class Task {
         this.description = description;
     }
 
+    public Task(boolean isDone, String description) {
+        this.isDone = isDone;
+        this.description = description;
+    }
+
     public void markAsDone() {
         isDone = true;
     }
@@ -17,5 +22,9 @@ public class Task {
 
     public String toString() {
         return "[" + getStatusIcon() + "] " + description;
+    }
+
+    public String toStoreFormat(){
+        return "";
     }
 }

@@ -1,15 +1,11 @@
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
-
-    private static List<Task> lists = new ArrayList<>();
+    private static TaskList taskList = new TaskList("data/", "duke.txt");
 
     public static void main(String[] args) {
 
         greeting();
-
         Scanner scanner = new Scanner(System.in);  // Create a Scanner object
         String input = scanner.nextLine();  // Read user input
         while(true) {
@@ -34,19 +30,19 @@ public class Duke {
 
     public static void executeCommand(String command) throws DukeException {
         if(command.equals("list")) {
-            displayList();
+            taskList.printList();
         } else if(command.length() >= 6 && command.substring(0, 5).equals("done ")) {
             System.out.println("Nice! I've marked this task as done:");
             int num = Integer.parseInt(command.split(" ")[1]);
-            lists.get(num - 1).markAsDone();
-            System.out.println(lists.get(num - 1));
+            taskList.markAsDone(num - 1);
+            System.out.println(taskList.get(num - 1));
 
         } else if(command.length() >= 8 && command.substring(0, 7).equals("delete ")) {
             int num = Integer.parseInt(command.split(" ")[1]);
             System.out.println(" Noted. I've removed this task:");
-            System.out.println(lists.get(num - 1));
-            lists.remove(num - 1);
-            System.out.println("Now you have " + lists.size() + " tasks in the list.");
+            System.out.println(taskList.get(num - 1));
+            taskList.remove(num - 1);
+            System.out.println("Now you have " + taskList.getNumberOfTask() + " tasks in the list.");
         } else {
             String[] parts = command.split(" ", 2);
             String taskType = parts[0];
@@ -59,13 +55,6 @@ public class Duke {
             } else {
                 throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
-        }
-    }
-
-    public static void displayList() {
-        System.out.println("Here are the tasks in your list:");
-        for(int i = 0; i < lists.size(); i++ ) {
-            System.out.println(i+1 + "." + lists.get(i).toString());
         }
     }
 
@@ -88,9 +77,9 @@ public class Duke {
             default:
                  throw new DukeException(" ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
-        lists.add(task);
+        taskList.addTask(task);
         System.out.println(task);
-        System.out.println("Now you have " + lists.size() + " tasks in the list.");
+        System.out.println("Now you have " + taskList.getNumberOfTask() + " tasks in the list.");
     }
 
     private static void greeting() {
@@ -103,5 +92,7 @@ public class Duke {
         System.out.println("Hello! I'm KK\n" +
                 " What can I do for you?");
     }
+
+
 
 }
