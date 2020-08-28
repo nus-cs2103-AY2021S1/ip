@@ -12,7 +12,7 @@ public abstract class Command {
     private final boolean isExit;
 
     /**
-     * String stroing arguments for the command.
+     * String string arguments for the command.
      */
     private final String arguments;
 
@@ -33,7 +33,7 @@ public abstract class Command {
      * @param taskList List of tasks
      * @param ui       UI for Ultron
      * @param storage  Storage for Ultron
-     * @throws UltronException
+     * @throws UltronException when there are errors when executing
      */
     public abstract void execute(TaskList taskList,
                                  UI ui,
