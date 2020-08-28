@@ -8,7 +8,7 @@ public class TimedTask extends Task {
     private final String time;
     private final String tag;
 
-    public TimedTask (String description, String time, String tag) {
+    public TimedTask(String description, String time, String tag) {
         super(description, tag);
         String dt = "";
 
@@ -25,18 +25,18 @@ public class TimedTask extends Task {
         this.tag = tag;
     }
 
-    public TimedTask (String description, String time, LocalDate date, String tag) {
+    public TimedTask(String description, String time, LocalDate date, String tag) {
         super(description, tag);
         this.time = time;
         this.date = date;
         this.tag = tag;
     }
 
-    public String getTime () {
+    public String getTime() {
         return this.time;
     }
 
-    public LocalDate getDate () {
+    public LocalDate getDate() {
         return this.date;
     }
 
@@ -45,7 +45,7 @@ public class TimedTask extends Task {
      * @param dt date in user input format
      * @return parsedDate date parsed into java LocalDate class formatted
      */
-    private LocalDate parseDate (String dt) {
+    private LocalDate parseDate(String dt) {
         LocalDate parsedDate;
         String day = dt.substring(0, dt.indexOf('/'));
         String month = dt.substring(dt.indexOf('/') + 1, dt.lastIndexOf('/'));
@@ -60,7 +60,7 @@ public class TimedTask extends Task {
      * @param time time in user input format
      * @return time time parsed into required format
      */
-    private String parseTime (String time) {
+    private String parseTime(String time) {
         int tm = Integer.parseInt(time);
         String hr = "";
         String ampm = "";
@@ -91,7 +91,7 @@ public class TimedTask extends Task {
     }
 
     @Override
-    public String getDescription () {
+    public String getDescription() {
         String message = this.tag + super.getDescription() + " " + this.getSchedule();
         return message;
     }
@@ -101,7 +101,7 @@ public class TimedTask extends Task {
      * @param
      * @return schedule string to indicate scheduling details
      */
-    public String getSchedule () {
+    public String getSchedule() {
         String timeTag = "";
         if (super.getTag() == "[D]") {
             timeTag = "(by: ";

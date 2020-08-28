@@ -13,7 +13,7 @@ import dobby.task.TimedTask;
 public class TaskList {
     private ArrayList<Task> tasks;
 
-    public TaskList () {
+    public TaskList() {
         tasks = new ArrayList<Task>();
     }
 
@@ -22,7 +22,7 @@ public class TaskList {
      * @param
      * @return
      */
-    public void createFromStorage (String str) throws ParseException {
+    public void createFromStorage(String str) throws ParseException {
         boolean isDone = str.charAt(4) == '\u2713';
         Task task;
         if (str.charAt(1) == 'T') { // TODO
@@ -63,7 +63,7 @@ public class TaskList {
         return this.tasks.size();
     }
 
-    public void addToList (Task task) {
+    public void addToList(Task task) {
         (this.tasks).add(task);
     }
 
@@ -71,7 +71,7 @@ public class TaskList {
      * Returns a string format of all the tasks in the list
      * @return String all tasks in the list in a particular format
      */
-    public String getListedTasks () {
+    public String getListedTasks() {
         int i = 0;
         String all_tasks = "\n    ";
         for (Task task : (this.tasks)) {
@@ -93,7 +93,7 @@ public class TaskList {
      * @return String all tasks in the list scheduled on given date,
      * in a particular format
      */
-    public String getScheduledTasks (LocalDate date) {
+    public String getScheduledTasks(LocalDate date) {
         String message = "\n    ";
         int counter = 0;
         for (Task task: tasks) {
@@ -113,7 +113,7 @@ public class TaskList {
      * @param type either D or T or E
      * @return message list of task descriptions of given type
      */
-    public String findOfType (String type) {
+    public String findOfType(String type) {
         String message = "\n    ";
 
         int counter = 0;
@@ -136,7 +136,7 @@ public class TaskList {
      * @param keyword keyword to search for
      * @return message list of task descriptions of containing given keyword
      */
-    public String findWithKeyword (String keyword) {
+    public String findWithKeyword(String keyword) {
         String message = "\n    ";
 
         int counter = 0;
@@ -154,11 +154,11 @@ public class TaskList {
         return message;
     }
 
-    public Task getTask (int index) {
+    public Task getTask(int index) {
         return this.tasks.get(index);
     }
 
-    public void removeTask (int index) {
+    public void removeTask(int index) {
         this.tasks.remove(index);
     }
  }

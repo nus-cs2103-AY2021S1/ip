@@ -22,7 +22,7 @@ public class Dobby {
      * Takes in user input as long as user gives and terminated when user
      * enter bye
      */
-    public void run () {
+    public void run() {
         ui.greet();
 
         Scanner scanner = new Scanner(System.in);
@@ -42,7 +42,7 @@ public class Dobby {
         }
     }
 
-    public static void main (String[] args) {
+    public static void main(String[] args) {
         File dobbyFile = new File("../dobbylist.txt");
 
         try {

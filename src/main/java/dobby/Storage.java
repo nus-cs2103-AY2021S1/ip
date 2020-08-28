@@ -12,15 +12,15 @@ public class Storage {
     private final String filePath;
     private TaskList tasks;
 
-    Storage (String filePath, TaskList tasks) {
+    Storage(String filePath, TaskList tasks) {
         this.filePath = filePath;
         this.tasks = tasks;
     }
 
     /**
-     * Read the storage file and add tasks to the TaskList
+     * Reads the storage file and add tasks to the TaskList
      */
-    public void readFile () {
+    public void readFile() {
         try {
             File file = new File(this.filePath);
             Scanner scanner = new Scanner(file);
@@ -40,9 +40,9 @@ public class Storage {
     }
 
     /**
-     * Update current tasks to the storage file
+     * Updates current tasks to the storage file
      */
-    public void rewriteFile () {
+    public void rewriteFile() {
         try {
             FileWriter fw = new FileWriter(this.filePath);
             fw.flush();

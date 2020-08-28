@@ -22,7 +22,7 @@ public class Parser {
             + (Commands.FINDTYPE).getUsage()
             + (Commands.BYE).getUsage();
 
-    public Parser (TaskList tasks) {
+    public Parser(TaskList tasks) {
         this.tasks = tasks;
     }
 
@@ -32,7 +32,7 @@ public class Parser {
      * @return message reply to user based on input
      * @throws DobbyException based on conditions with customised message
      */
-    public String getMessage (String text) throws DobbyException {
+    public String getMessage(String text) throws DobbyException {
         String message = "";
 
         if (text.equalsIgnoreCase("bye")) { // bye command

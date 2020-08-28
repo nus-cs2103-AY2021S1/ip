@@ -23,7 +23,7 @@ public class Ui {
     /**
      * Calls reply function with greeting string
      */
-    public static void greet () {
+    public static void greet() {
         reply("\n    Hello! I'm Dobby" + ALL_COMMANDS + "\n    How can I help you?\n    ");
     }
 
