@@ -2,6 +2,9 @@ package duke;
 
 import java.time.LocalDate;
 
+/**
+ * Represents an {@code Event} object. Inherits from {@code Task} object
+ */
 public class Event extends Task {
 
     public Event(String description, boolean isDone, LocalDate time) {

@@ -13,6 +13,10 @@ import java.util.Scanner;
 
 public class Storage {
 
+    /**
+     * Write the content of the list into a file
+     * @param list The task list
+     */
     public void writeFile(ArrayList<Task> list) {
         try {
             StringBuilder replacementText = new StringBuilder();
@@ -30,12 +34,21 @@ public class Storage {
         }
     }
 
+    /**
+     * Adds a string to a file
+     * @param filePath The file path (destination)
+     * @param textToAppend The content of the file
+     */
     public void appendToFile(String filePath, String textToAppend) throws IOException {
         FileWriter fw = new FileWriter(filePath); // create a FileWriter in append mode
         fw.write(textToAppend);
         fw.close();
     }
 
+    /**
+     * Create a new file to the filepath
+     * @param filePath The file path (destination)
+     */
     public void createFile(String filePath) throws IOException {
         File dataFolder = new File("data");
         if (!dataFolder.isDirectory()) {
@@ -48,6 +61,14 @@ public class Storage {
         }
     }
 
+    /**
+     * Read data from a file and put it inside the list
+     * @param readSc Scanner object to read the file content
+     * @param tl TaskList object to add the tasks inside the file to the list
+     * @param ui Ui object to print user display
+     * @param list The task list
+     * @param filePath The file path (destination)
+     */
     public void readFile(Scanner readSc, TaskList tl, Ui ui, ArrayList<Task> list, String filePath)
             throws FileNotFoundException, NullPointerException {
         File f = new File(filePath);

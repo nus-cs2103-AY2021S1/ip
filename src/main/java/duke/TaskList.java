@@ -1,5 +1,6 @@
 package duke;
 
+import exception.DukeErrorException;
 import exception.InvalidDeadlineException;
 import exception.InvalidEventException;
 import exception.InvalidTodoException;
@@ -8,6 +9,9 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
+/**
+ * Represents a {@code Tasklist} object to store tasks in memory
+ */
 public class TaskList {
 
     public void addDeadline(Ui ui, ArrayList<Task> list, String str, boolean isNew, boolean condition)
@@ -78,5 +82,21 @@ public class TaskList {
         if (isNew) {
             ui.describeTask(list, curr);
         }
+    }
+
+    public void deleteTask(ArrayList<Task> list, int index) throws DukeErrorException {
+        if (index >= list.size() || index < 0) {
+            throw new DukeErrorException("Operation: delete " + (index + 1) + " fails ☹.");
+        }
+        Task deleted = list.remove(index);
+        Ui.printDeleted(deleted, list);
+    }
+
+    public void makeDone(ArrayList<Task> list, int index) throws DukeErrorException {
+        if (index >= list.size() || index < 0) {
+            throw new DukeErrorException("Operation: done " + (index + 1) + " fails ☹.");
+        }
+        list.set(index, list.get(index).completeTask());
+        Ui.printDone(list, index);
     }
 }

@@ -6,15 +6,26 @@ import java.util.ArrayList;
 
 import exception.*;
 
+/**
+ * Main class for the Duke application
+ */
 public class Duke {
+    // Scanner to read input
     Scanner readSc, inputSc;
+    // List of tasks
     ArrayList<Task> list;
-    String input;
+    // Ui object to print out displays
     Ui ui;
+    // Storage object to handle saving to file
     Storage storage;
+    // TaskList object to handle insertion, deletion, etc of tasks
     TaskList tl;
+    // Parser object to process inputs and commands
     Parser parser;
 
+    /**
+     * A constructor to initialize Duke Chatbot
+     */
     public Duke() {
         inputSc = new Scanner(System.in);
         list = new ArrayList<>();
@@ -24,13 +35,20 @@ public class Duke {
         storage = new Storage();
     }
 
+    /**
+     * Main method to start the application
+     */
     public void start() {
         ui.introduce();
         interact();
         ui.bye();
     }
 
+    /**
+     * A method to handle the logic of Duke Chatbot and interact with users
+     */
     public void interact() {
+        String input;
         try {
             storage.readFile(readSc, tl, ui, list, "data/duke.txt");
         } catch (FileNotFoundException | NullPointerException e) {
@@ -55,13 +73,13 @@ public class Duke {
                 ui.printList(list);
             } else if (command.equals(Commands.DONE)){
                 try {
-                    this.makeDone(Integer.parseInt(splitted[1]) - 1);
+                    tl.makeDone(list,Integer.parseInt(splitted[1]) - 1);
                 } catch (ArrayIndexOutOfBoundsException | DukeErrorException ex) {
                     System.out.println(ex);
                 }
             } else if (command.equals(Commands.DELETE)){
                 try {
-                    this.deleteTask(Integer.parseInt(splitted[1]) - 1);
+                    tl.deleteTask(list,Integer.parseInt(splitted[1]) - 1);
                 } catch (ArrayIndexOutOfBoundsException | DukeErrorException ex) {
                     System.out.println(ex);
                 }
@@ -83,29 +101,8 @@ public class Duke {
                 } catch (ArrayIndexOutOfBoundsException | InvalidEventException ex) {
                     System.out.println(ex + ". ☹ The description of an event cannot be empty.");
                 }
-            } else {
-                ui.buildChatSeparator();
-                System.out.println("added: " + input);
-                ui.buildChatSeparator();
-                list.add(new Task(input, false));
             }
         }
-    }
-
-    private void deleteTask(int index) throws DukeErrorException {
-        if (index >= list.size() || index < 0) {
-            throw new DukeErrorException("Operation: delete " + (index + 1) + " fails ☹.");
-        }
-        Task deleted = list.remove(index);
-        ui.printDeleted(deleted, list);
-    }
-
-    public void makeDone(int index) throws DukeErrorException {
-        if (index >= list.size() || index < 0) {
-            throw new DukeErrorException("Operation: done " + (index + 1) + " fails ☹.");
-        }
-        list.set(index, list.get(index).completeTask());
-        ui.printDone(list, index);
     }
 
 }
