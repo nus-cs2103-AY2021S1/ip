@@ -1,5 +1,3 @@
-package duke.app;
-
 import java.io.IOException;
 
 import javafx.application.Application;
