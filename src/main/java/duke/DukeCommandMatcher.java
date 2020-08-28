@@ -17,9 +17,9 @@ public class DukeCommandMatcher {
     private SingletonTaskList taskList;
 
     private static final List<String> commandList = new ArrayList<>(Arrays.asList(Constants.LISTPATTERN,
-                                                                  Constants.EXITPATTERN, Constants.DONEPATTERN,
-                                                                  Constants.TODOPATTERN, Constants.DEADLINEPATTERN,
-                                                                  Constants.EVENTPATTERN, Constants.DELETEPATTERN));
+            Constants.EXITPATTERN, Constants.DONEPATTERN, Constants.TODOPATTERN, Constants.DEADLINEPATTERN,
+            Constants.EVENTPATTERN, Constants.DELETEPATTERN, Constants.FINDPATTERN
+            ));
 
     public DukeCommandMatcher(Storage database) {
         this.taskList = SingletonTaskList.getInstance(database);
@@ -54,6 +54,8 @@ public class DukeCommandMatcher {
                    return handleEvent(splitCommand);
                case Constants.DELETEPATTERN:
                    return handleDelete(splitCommand);
+               case Constants.FINDPATTERN:
+                   return handleFind(splitCommand);
                default:
                    break;
                }
@@ -150,6 +152,16 @@ public class DukeCommandMatcher {
             throw new TaskNotSpecifyException("task to deletion not specified", "DELETE");
         }
         return "Task " + (taskToDelete -1) + " has been removed successfully";
+    }
+
+    private String handleFind(String[] findStr) throws NullCommandContentException {
+        try {
+            String queryKey = findStr[1];
+            taskList.Query(queryKey);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new NullCommandContentException("no query body", "FIND");
+        }
+        return "query has been done";
     }
 
 }

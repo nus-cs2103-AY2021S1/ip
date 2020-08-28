@@ -34,24 +34,7 @@ public class Storage {
             while ((line = csvReader.readLine()) != null) {
                 Task task;
                 String[] taskStr = line.split(",");
-                switch (taskStr[0]) {
-                case "T": {
-                    task = new ToDo(taskStr[2], taskStr[1]);
-                    break;
-                }
-                case "E": {
-                    task = new Event(taskStr[2], taskStr[3], taskStr[1]);
-                    break;
-                }
-                case "D": {
-                    task = new Deadline(taskStr[2], taskStr[3], taskStr[1]);
-                    break;
-                }
-                default: {
-                    task = null;
-                    break;
-                }
-                }
+                task = storageLineParser(taskStr);
                 tasks.add(task);
             }
         } catch (IOException e) {
@@ -88,6 +71,49 @@ public class Storage {
                 task.getTime().isEmpty() ? "" : task.getTime().get()
         };
         return formatTask;
+    }
+
+    public List<Task> query(String queryKey) {
+        List<Task> tasks = new ArrayList<>();
+        try {
+            File databaseFile = new File( databasePath);
+            BufferedReader csvReader = new BufferedReader(new FileReader(databaseFile));
+            String line;
+            while ((line = csvReader.readLine()) != null) {
+                Task task;
+                if (line.contains(queryKey)) {
+                    String[] taskStr = line.split(",");
+                    task = storageLineParser(taskStr);
+                    tasks.add(task);
+                }
+            }
+        } catch (IOException e) {
+            System.err.println("Read failed. \nDatabase connection error.");
+        }
+        return tasks;
+    }
+
+    private Task storageLineParser(String[] taskStr) {
+        Task task;
+        switch (taskStr[0]) {
+        case "T": {
+            task = new ToDo(taskStr[2], taskStr[1]);
+            break;
+        }
+        case "E": {
+            task = new Event(taskStr[1], taskStr[2], taskStr[3]);
+            break;
+        }
+        case "D": {
+            task = new Deadline(taskStr[1], taskStr[2], taskStr[3]);
+            break;
+        }
+        default: {
+            task = null;
+            break;
+        }
+        }
+        return task;
     }
 
 }

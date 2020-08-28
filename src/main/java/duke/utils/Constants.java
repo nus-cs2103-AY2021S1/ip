@@ -54,6 +54,8 @@ public class Constants {
      */
     public static final String DATEFORMAT = "yyyy-mm-dd";
 
+    public static final String FINDPATTERN = ("^(f|F)(i|I)(n|N)(d|D)$");
+
     /**
      * Default console width.
      */

@@ -18,7 +18,7 @@ public class Printer {
     public static void printAdd(Task task, int numOfTask) {
         UtilFunction.printLimit("Got it. I've added this task:\n" +
                 "   " + task +  '\n' + "Now you have " + numOfTask +
-                (numOfTask > 1 ? "duke/tasks " : " task ") + "in the list.");
+                (numOfTask > 1 ? " tasks " : " task ") + "in the list.");
     }
 
     /**
@@ -52,9 +52,9 @@ public class Printer {
      * Print all the tasks.
      * @param tasks the tasks to print
      */
-    public static void printAllTask(List<Task> tasks) {
+    public static void printAllTask(List<Task> tasks, boolean withLabel) {
         for(int i =1; i< tasks.size()+1; i++){
-            UtilFunction.printLimit(i + ". " + tasks.get(i-1));
+            UtilFunction.printLimit(withLabel ? (i + ". ") : "   " + tasks.get(i-1));
         }
     }
 

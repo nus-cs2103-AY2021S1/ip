@@ -61,7 +61,7 @@ public class SingletonTaskList {
         if(tasks.size() == 0){
             Printer.printNoTaskReminder();
         }
-        Printer.printAllTask(tasks);
+        Printer.printAllTask(tasks, true);
     }
 
     /**
@@ -78,6 +78,11 @@ public class SingletonTaskList {
         } catch (IndexOutOfBoundsException e) {
             throw new TaskOutOfBoundException("Target number of task out of bound", idx + 1);
         }
+    }
+
+    public void Query(String queryKey) {
+        List<Task> matchedTasks = storage.query(queryKey);
+        Printer.printAllTask(matchedTasks, false);
     }
 
 }

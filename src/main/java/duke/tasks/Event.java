@@ -13,7 +13,7 @@ public class Event extends Task {
         this.duration = duration;
     }
 
-    public Event(String task, String status, String duration) {
+    public Event(String status, String task, String duration) {
         super(task, Objects.equals(status, "1") ? true : false);
         this.duration = duration;
     }

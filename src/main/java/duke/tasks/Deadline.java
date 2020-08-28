@@ -13,7 +13,7 @@ public class Deadline extends Task{
         this.deadline = deadline;
     }
 
-    public Deadline(String task, String status, String deadline) {
+    public Deadline(String status, String task, String deadline) {
         super(task, Objects.equals(status, "1") ? true : false);
         this.deadline = deadline;
     }
