@@ -69,5 +69,13 @@ public class Ui {
     public String waitForNextInput() {
         return scan.nextLine();
     }
+    public void printFindTask(ArrayList<Task> foundTaskList){
+        System.out.println(
+                "_______________________________\n" +
+                        "Here are the matching tasks in your list:\n");
+        printTaskList(foundTaskList);
+        System.out.println("_______________________________");
+    }
+
 
 }

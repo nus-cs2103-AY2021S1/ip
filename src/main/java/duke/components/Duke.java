@@ -37,6 +37,9 @@ public class Duke {
                                 parser.getDoneTaskNum()
                         )
                 );
+            } else if (parser.isFind) {
+
+                ui.printFindTask(tasks.findTasks(parser.getFindTask()));
 
             } else if (parser.isTask) {
 
