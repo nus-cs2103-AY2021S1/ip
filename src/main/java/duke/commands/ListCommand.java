@@ -3,13 +3,12 @@ package duke.commands;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
-
 import duke.exceptions.InvalidListCommandException;
 
 /**
  * Class to initiate the list command.
  */
-public class ListCommand extends Command{
+public class ListCommand extends Command {
     public ListCommand(String fullCommand) {
         super(fullCommand);
     }

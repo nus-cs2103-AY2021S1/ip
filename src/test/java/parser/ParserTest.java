@@ -1,19 +1,19 @@
 package parser;
 
-import duke.commands.ByeCommand;
-import duke.commands.DeleteCommand;
-import duke.commands.DoneCommand;
-import duke.commands.ListCommand;
-import duke.commands.AddCommand;
-
-import duke.Parser;
-
-import duke.exceptions.InvalidCommandException;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import duke.Parser;
+import duke.commands.AddCommand;
+import duke.commands.ByeCommand;
+import duke.commands.DeleteCommand;
+import duke.commands.DoneCommand;
+import duke.commands.ListCommand;
+import duke.exceptions.InvalidCommandException;
 
 public class ParserTest {
 
@@ -61,7 +61,7 @@ public class ParserTest {
     @Test
     @DisplayName("Testing if InvalidCommandException is thrown if a invalid command is inputted")
     public void parseInvalidCommand() {
-        assertThrows(InvalidCommandException.class,
-                () -> Parser.parse("blah"));
+        assertThrows(InvalidCommandException.class, (
+        ) -> Parser.parse("blah"));
     }
 }

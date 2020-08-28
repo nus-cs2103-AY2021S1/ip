@@ -1,13 +1,12 @@
 package duke;
 
+import duke.commands.AddCommand;
 import duke.commands.ByeCommand;
 import duke.commands.Command;
-import duke.commands.DoneCommand;
-import duke.commands.ListCommand;
 import duke.commands.DeleteCommand;
-import duke.commands.AddCommand;
+import duke.commands.DoneCommand;
 import duke.commands.FindCommand;
-
+import duke.commands.ListCommand;
 import duke.exceptions.InvalidCommandException;
 
 
@@ -16,14 +15,14 @@ import duke.exceptions.InvalidCommandException;
  * the appropriate Command object.
  */
 public class Parser {
-    private final static String BYE_COMMAND = "bye";
-    private final static String LIST_COMMAND = "list";
-    private final static String DONE_COMMAND = "done";
-    private final static String TODO_COMMAND = "todo";
-    private final static String DEADLINE_COMMAND = "deadline";
-    private final static String EVENT_COMMAND = "event";
-    private final static String DELETE_COMMAND = "delete";
-    private final static String FIND_COMMAND = "find";
+    private static final String BYE_COMMAND = "bye";
+    private static final String LIST_COMMAND = "list";
+    private static final String DONE_COMMAND = "done";
+    private static final String TODO_COMMAND = "todo";
+    private static final String DEADLINE_COMMAND = "deadline";
+    private static final String EVENT_COMMAND = "event";
+    private static final String DELETE_COMMAND = "delete";
+    private static final String FIND_COMMAND = "find";
 
     /**
      * Reads command in string given by the user

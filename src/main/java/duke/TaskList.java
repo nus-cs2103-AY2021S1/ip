@@ -1,10 +1,9 @@
 package duke;
 
-import duke.exceptions.TaskCompletedException;
-
-import duke.tasks.Task;
-
 import java.util.ArrayList;
+
+import duke.exceptions.TaskCompletedException;
+import duke.tasks.Task;
 
 /**
  * Class to initiate a TaskList object. This class contains various methods to interact with the
@@ -43,10 +42,10 @@ public class TaskList {
 
     /**
      * Finds task in the current taskList that matches the input keyword.
-     * Return TaskList containing the matching duke.tasks.
+     * Return TaskList containing the matching tasks.
      *
      * @param keyword Input keyword from the user.
-     * @return TaskList of the matching duke.tasks.
+     * @return TaskList of the matching tasks.
      */
     public TaskList findTask(String keyword) {
         ArrayList<Task> matchingTask = new ArrayList<>();
@@ -67,7 +66,7 @@ public class TaskList {
      */
     public String toString() {
         StringBuilder string = new StringBuilder();
-        for (int i =0; i < taskList.size(); i++){
+        for (int i = 0; i < taskList.size(); i++) {
             if (taskList.size() == i + 1) {
                 string.append(i + 1).append(". ").append(taskList.get(i).toString());
             } else {

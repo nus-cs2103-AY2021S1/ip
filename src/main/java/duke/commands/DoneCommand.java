@@ -3,9 +3,9 @@ package duke.commands;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
-
-import duke.exceptions.*;
-
+import duke.exceptions.IncorrectDoneInputException;
+import duke.exceptions.InvalidDoneFormatException;
+import duke.exceptions.TaskCompletedException;
 
 /**
  * Class to initiate the done command.
@@ -56,10 +56,10 @@ public class DoneCommand extends Command {
      * @throws IncorrectDoneInputException If the string after delete command is not a number or does
      * not fall within the valid range.
      */
-    public int convertToNumber(String number, int taskSize) throws IncorrectDoneInputException{
+    public int convertToNumber(String number, int taskSize) throws IncorrectDoneInputException {
         try {
             return Integer.parseInt(number);
-        } catch(NumberFormatException e) {
+        } catch (NumberFormatException e) {
             throw new IncorrectDoneInputException(taskSize);
         }
     }

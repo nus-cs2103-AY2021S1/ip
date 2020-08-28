@@ -13,11 +13,17 @@ public class Task {
     protected String description;
     protected boolean isDone;
 
+    /**
+     * Constructor for Task.
+     */
     public Task(String description) {
         this.description = description;
         this.isDone = false;
     }
 
+    /**
+     * Constructor for Task with additional parameter.
+     */
     public Task(String description, boolean isDone) {
         this.description = description;
         this.isDone = isDone;

@@ -1,10 +1,10 @@
 package duke;
 
-import duke.exceptions.InvalidTimeException;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+import duke.exceptions.InvalidTimeException;
 
 /**
  * Class that provides methods to convert time in a certain format.

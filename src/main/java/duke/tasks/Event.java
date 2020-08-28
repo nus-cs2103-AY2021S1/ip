@@ -1,8 +1,8 @@
 package duke.tasks;
 
-import duke.Time;
-
 import java.time.LocalDateTime;
+
+import duke.Time;
 
 /**
  * Class to initiate a Event task.
@@ -10,11 +10,17 @@ import java.time.LocalDateTime;
 public class Event extends Task {
     private LocalDateTime by;
 
+    /**
+     * Constructor for Event.
+     */
     public Event(String description, LocalDateTime by) {
         super(description);
         this.by = by;
     }
 
+    /**
+     * Constructor for Event with additional argument.
+     */
     public Event(String description, boolean isDone, LocalDateTime by) {
         super(description, isDone);
         this.by = by;

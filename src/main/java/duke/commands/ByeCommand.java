@@ -3,7 +3,6 @@ package duke.commands;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
-
 import duke.exceptions.InvalidByeCommandException;
 
 /**
@@ -12,7 +11,7 @@ import duke.exceptions.InvalidByeCommandException;
 public class ByeCommand extends Command {
 
     public ByeCommand(String fullCommand) {
-       super(fullCommand);
+        super(fullCommand);
     }
 
     @Override

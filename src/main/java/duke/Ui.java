@@ -7,8 +7,8 @@ import java.util.Scanner;
  */
 public class Ui {
 
-    private final static String DIVIDER = "__________________________________________________________";
-    private final Scanner SC = new Scanner(System.in);
+    private static final String DIVIDER = "__________________________________________________________";
+    private final Scanner sc = new Scanner(System.in);
 
     private void messageFormatter(String word) {
         System.out.println(DIVIDER);
@@ -17,11 +17,15 @@ public class Ui {
     }
 
     public String readCommand() {
-        return SC.nextLine();
+        return sc.nextLine();
     }
 
+    /**
+     * Prints the welcome message.
+     *
+     * @param taskList Prints out the current tasks in list.
+     */
     public void welcomeMessage(String taskList) {
-
         messageFormatter("Hello! I'm Duke! Welcome back!\n"
                 + "Here are the tasks in your list:\n" + taskList);
     }
@@ -38,20 +42,43 @@ public class Ui {
         messageFormatter(error);
     }
 
+    /**
+     * Prints the done message.
+     *
+     * @param message Prints out the current task that is completed.
+     */
     public void markAsDoneMessage(String message) {
         messageFormatter("Nice! I've marked this task as done:\n" + message);
     }
 
+    /**
+     * Prints the delete message.
+     *
+     * @param task Prints out the current deleted task.
+     * @param size Number of tasks in the list.
+     */
     public void deleteMessage(String task, int size) {
         messageFormatter("Noted. I've removed this task:\n" + task
-                + "\nNow you have " + size+ " tasks in the list.");
+                + "\nNow you have " + size + " tasks in the list.");
     }
 
+    /**
+     * Prints the the added task message.
+     *
+     * @param task Prints out the added task in list.
+     * @param size Number of tasks in the list.
+     */
     public void taskMessage(String task, int size) {
-        messageFormatter("Got it. I've added this task:\n" + task +
-                "\nNow you have " + size + " tasks in the list.");
+        messageFormatter("Got it. I've added this task:\n" + task
+                + "\nNow you have " + size + " tasks in the list.");
     }
 
+    /**
+     * Prints the task that suits the input keyword message.
+     *
+     * @param taskList Prints out the task that suits the input keyword.
+     * @param size Number of tasks in the list.
+     */
     public void findTaskMessage(String taskList, int size) {
         if (size == 0) {
             messageFormatter("There are not matching task in your list!");

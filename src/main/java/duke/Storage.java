@@ -1,19 +1,18 @@
 package duke;
 
-import duke.exceptions.InvalidTimeException;
-
-import duke.tasks.Deadline;
-import duke.tasks.Event;
-import duke.tasks.Task;
-import duke.tasks.ToDo;
-
+import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.io.FileWriter;
-import java.nio.file.Files;
+
+import duke.exceptions.InvalidTimeException;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.ToDo;
 
 /**
  * Class that initiates the Storage. Reads the task from the hardware of the user
@@ -21,11 +20,11 @@ import java.nio.file.Files;
  */
 public class Storage {
 
-    private final Path PATH;
+    private static final String EVENT_COMMAND = "E";
+    private static final String DEADLINE_COMMAND = "D";
+    private static final String TODO_COMMAND = "T";
+    private final Path path;
     private List<String> tasksInString = new ArrayList<>();
-    private final static String EVENT_COMMAND = "E";
-    private final static String TODO_COMMAND = "T";
-    private final static String DEADLINE_COMMAND = "D";
 
     /**
      * Constructor which creates the file if the file is not present.
@@ -34,7 +33,7 @@ public class Storage {
      * @param path Path to store and read the file which contains the task list.
      */
     Storage(Path path) {
-        this.PATH= path;
+        this.path = path;
 
         try {
             // create directory if directory does not exist
@@ -91,7 +90,7 @@ public class Storage {
      */
     public void saveFile(ArrayList<Task> taskList) {
         try {
-            FileWriter fw = new FileWriter(PATH.toString());
+            FileWriter fw = new FileWriter(path.toString());
             StringBuilder string = new StringBuilder();
 
             for (int i = 0; i < taskList.size(); i++) {

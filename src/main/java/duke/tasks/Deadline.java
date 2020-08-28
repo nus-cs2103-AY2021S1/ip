@@ -1,8 +1,8 @@
 package duke.tasks;
 
-import duke.Time;
-
 import java.time.LocalDateTime;
+
+import duke.Time;
 
 /**
  * @author Damith C. Rajapakse
@@ -13,11 +13,17 @@ import java.time.LocalDateTime;
 public class Deadline extends Task {
     private LocalDateTime by;
 
+    /**
+     * Constructor for Deadline.
+     */
     public Deadline(String description, LocalDateTime by) {
         super(description);
         this.by = by;
     }
 
+    /**
+     * Another Constructor for deadline with another parameter.
+     */
     public Deadline(String description, boolean isDone, LocalDateTime by) {
         super(description, isDone);
         this.by = by;

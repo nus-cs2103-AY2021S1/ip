@@ -1,17 +1,21 @@
 package tasks;
 
-import duke.tasks.Event;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+
+import duke.tasks.Event;
 
 public class EventTester {
 
+    /**
+     * Testing getByTiming in event class.
+     */
     @Test
     @DisplayName("Testing getBy method in Event class")
     public void testGetByTiming() {
@@ -20,6 +24,9 @@ public class EventTester {
         Assertions.assertEquals(new Event("test", testDate).getBy(), "2020-02-02 12:12");
     }
 
+    /**
+     * Testing toString in event class.
+     */
     @Test
     @DisplayName("Testing toString method in Event class")
     public void testToString() {

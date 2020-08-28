@@ -1,11 +1,10 @@
 package duke;
 
-import duke.commands.Command;
-
-import duke.exceptions.DukeException;
-
 import java.nio.file.Path;
 import java.nio.file.Paths;
+
+import duke.commands.Command;
+import duke.exceptions.DukeException;
 
 /**
  * Class that initiates the Duke object. Contains methods to run the duke bot.

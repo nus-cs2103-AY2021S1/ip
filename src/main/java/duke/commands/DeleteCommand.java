@@ -3,10 +3,8 @@ package duke.commands;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
-
 import duke.exceptions.IncorrectDeleteInputException;
 import duke.exceptions.InvalidDeleteFormatException;
-
 import duke.tasks.Task;
 
 /**
@@ -59,10 +57,10 @@ public class DeleteCommand extends Command {
      * @throws IncorrectDeleteInputException If the string after delete command is not a number or does
      * not fall within the valid range.
      */
-    public int convertToNumber(String number, int taskSize) throws IncorrectDeleteInputException{
+    public int convertToNumber(String number, int taskSize) throws IncorrectDeleteInputException {
         try {
             return Integer.parseInt(number);
-        } catch(NumberFormatException e) {
+        } catch (NumberFormatException e) {
             throw new IncorrectDeleteInputException(taskSize);
         }
     }

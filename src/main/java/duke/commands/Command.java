@@ -3,12 +3,11 @@ package duke.commands;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
+import duke.exceptions.DukeException;
 
 /**
  * Abstract class to give the standard behaviors of the duke.commands.
  */
-import duke.exceptions.DukeException;
-
 public abstract class Command {
     protected String fullCommand;
 
