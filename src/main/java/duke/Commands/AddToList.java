@@ -11,6 +11,9 @@ import duke.Tasks.ToDo;
 import duke.Parser.Parser;
 import duke.Ui.Ui;
 
+/**
+ * The AddToList method adds to a given TaskList based on the command given
+ */
 public class AddToList {
 
     /**

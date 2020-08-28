@@ -9,6 +9,10 @@ import duke.Ui.Ui;
 
 import java.util.Scanner;
 
+/**
+ * The AddInput method adds to a given TaskList based on the command given
+ * saves the list of Tasks in the TaskList into a txt file
+ */
 public class AddInput {
 
     /**
