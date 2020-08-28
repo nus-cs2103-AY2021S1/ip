@@ -1,11 +1,13 @@
 package duke.command;
 
-import duke.ui.Ui;
+import duke.task.Event;
+import duke.task.Deadline;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.task.ToDo;
-import duke.task.Deadline;
-import duke.task.Event;
+
+import duke.ui.Ui;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 

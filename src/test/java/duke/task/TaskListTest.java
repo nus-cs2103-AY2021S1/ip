@@ -1,11 +1,12 @@
 package duke.task;
 
 import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TaskListTest {
     @Test
-    public void addTest_success() {
+    public void add_success() {
         Task testTask = new ToDo("this");
         TaskList testUnit = new TaskList();
         testUnit.add(testTask);
@@ -13,7 +14,7 @@ public class TaskListTest {
     }
     
     @Test
-    public void deleteTest_success() {
+    public void delete_success() {
         Task testTask = new ToDo("this");
         TaskList testUnit = new TaskList();
         testUnit.add(testTask);
@@ -22,13 +23,13 @@ public class TaskListTest {
     }
     
     @Test 
-    public void sizeTest_success() {
+    public void size_success() {
         TaskList testUnit = new TaskList();
         assertEquals(testUnit.size(), 0);
     }
     
     @Test
-    public void getTest_success() {
+    public void get_success() {
         Task testTask = new ToDo("this");
         TaskList testUnit = new TaskList();
         testUnit.add(testTask);

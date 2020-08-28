@@ -1,9 +1,11 @@
 package duke.command;
 
-import duke.ui.Ui;
 import duke.exception.DukeOutOfBoundsException;
+
 import duke.task.Task;
 import duke.task.TaskList;
+
+import duke.ui.Ui;
 
 public class DoneCommand implements Command {
     private int index;
