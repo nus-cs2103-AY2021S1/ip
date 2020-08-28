@@ -1,12 +1,12 @@
 package duke.command;
 
+import java.util.Date;
+
 import duke.task.Event;
-import duke.util.Storage;
 import duke.task.Task;
+import duke.util.Storage;
 import duke.util.TaskList;
 import duke.util.Ui;
-
-import java.util.Date;
 
 /**
  * Responsible for executing an event command.
@@ -15,6 +15,12 @@ public class EventCommand extends Command {
     private String description;
     private Date at;
 
+    /**
+     * Constructs an EventCommand.
+     *
+     * @param description The description of the event.
+     * @param at The date of the event.
+     */
     public EventCommand(String description, Date at) {
         super(true);
         this.description = description;

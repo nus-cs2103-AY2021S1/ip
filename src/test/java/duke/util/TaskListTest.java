@@ -1,15 +1,16 @@
 package duke.util;
 
-import duke.task.Task;
-import duke.task.ToDo;
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
+import org.junit.jupiter.api.Test;
+
+import duke.task.Task;
+import duke.task.ToDo;
+
 public class TaskListTest {
     @Test
-    public void add_ToDo_tasksSizeIsOne() {
+    public void add_toDo_tasksSizeIsOne() {
         TaskList tasks = new TaskList();
         tasks.add(new ToDo("hello world"));
         assertEquals(1, tasks.size());

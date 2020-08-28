@@ -1,13 +1,13 @@
 package duke.util;
 
-import duke.exception.DukeException;
-
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+
+import duke.exception.DukeException;
 
 /**
  * Contains utility methods for converting between Dates and Strings.
@@ -22,7 +22,7 @@ public class DateFormatter {
 
     /**
      * Parses a String representation of a date and returns a Date object.
-     * 
+     *
      * @param strDate String representation of a date.
      * @return Date object corresponding to the String given.
      * @throws DukeException If the String representation does not match any defined date format.
@@ -44,7 +44,7 @@ public class DateFormatter {
 
     /**
      * Formats a date for displaying on the UI.
-     * 
+     *
      * @param date Date object to format.
      * @return String representation of the date in a display-friendly format.
      */

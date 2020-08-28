@@ -11,6 +11,11 @@ import duke.util.Ui;
 public abstract class Command {
     private boolean shouldLoop;
 
+    /**
+     * Constructs a Command.
+     *
+     * @param shouldLoop Boolean representing whether the command should continue looping or not.
+     */
     public Command(boolean shouldLoop) {
         this.shouldLoop = shouldLoop;
     }
@@ -23,7 +28,12 @@ public abstract class Command {
      * @param storage Reads and stores data into memory.
      */
     public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
-    
+
+    /**
+     * Checks whether the command should continue the loop or not.
+     *
+     * @return Boolean representing whether to continue looping or not.
+     */
     public boolean shouldLoop() {
         return this.shouldLoop;
     }

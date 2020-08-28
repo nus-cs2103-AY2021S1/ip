@@ -1,14 +1,19 @@
 package duke.command;
 
+import java.util.StringJoiner;
+
 import duke.util.Storage;
 import duke.util.TaskList;
 import duke.util.Ui;
 
-import java.util.StringJoiner;
-
 public class FindCommand extends Command {
-    String toFind;
-    
+    private String toFind;
+
+    /**
+     * Constructs a FindCommand.
+     *
+     * @param toFind The task to find.
+     */
     public FindCommand(String toFind) {
         super(true);
         this.toFind = toFind;

@@ -1,14 +1,15 @@
 package duke.util;
 
-import duke.exception.DukeException;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
+import org.junit.jupiter.api.Test;
+
+import duke.exception.DukeException;
 
 public class DateFormatterTest {
     @Test
@@ -34,7 +35,7 @@ public class DateFormatterTest {
             assertEquals(e.getMessage(), expectedError);
         }
     }
-    
+
     @Test
     public void formatDisplay_validDate_validFormat() {
         try {

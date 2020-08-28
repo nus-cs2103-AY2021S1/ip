@@ -13,7 +13,7 @@ public class DukeException extends Exception {
 
     /**
      * Overloaded constructor that accepts a custom error message.
-     * 
+     *
      * @param errorMessage Custom error message.
      */
     public DukeException(String errorMessage) {

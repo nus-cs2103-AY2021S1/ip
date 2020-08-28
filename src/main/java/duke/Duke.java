@@ -1,13 +1,13 @@
 package duke;
 
+import java.util.Scanner;
+
 import duke.command.Command;
 import duke.exception.DukeException;
 import duke.util.Parser;
 import duke.util.Storage;
 import duke.util.TaskList;
 import duke.util.Ui;
-
-import java.util.Scanner;
 
 /**
  * Represents the main class for the Duke application.
@@ -16,7 +16,12 @@ public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
-    
+
+    /**
+     * Constructs an instance of Duke.
+     *
+     * @param filePath The path to save the tasks to.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -27,7 +32,7 @@ public class Duke {
             tasks = new TaskList();
         }
     }
-    
+
     public static void main(String[] args) {
         new Duke("tasks.txt").run();
     }
@@ -38,7 +43,7 @@ public class Duke {
     public void run() {
         Scanner sc = new Scanner(System.in);
         ui.greet();
-        
+
         boolean shouldLoop = true;
         while (shouldLoop) {
             try {

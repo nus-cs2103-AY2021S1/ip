@@ -1,20 +1,26 @@
 package duke.command;
 
+import java.util.Date;
+
 import duke.task.Deadline;
-import duke.util.Storage;
 import duke.task.Task;
+import duke.util.Storage;
 import duke.util.TaskList;
 import duke.util.Ui;
-
-import java.util.Date;
 
 /**
  * Responsible for executing a deadline command.
  */
 public class DeadlineCommand extends Command {
-    String description;
-    Date by;
+    private String description;
+    private Date by;
 
+    /**
+     * Constructs a DeadlineCommand.
+     *
+     * @param description The description of the deadline.
+     * @param by The date of the deadline.
+     */
     public DeadlineCommand(String description, Date by) {
         super(true);
         this.description = description;
@@ -22,7 +28,7 @@ public class DeadlineCommand extends Command {
     }
 
     /**
-     * Executes a deadline command.
+     * Executes a DeadlineCommand.
      *
      * @param tasks Contains the current tasks.
      * @param ui Responsible for displaying information to the user.

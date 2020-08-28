@@ -1,17 +1,23 @@
 package duke.command;
 
-import duke.util.Storage;
+
 import duke.task.Task;
-import duke.util.TaskList;
 import duke.task.ToDo;
+import duke.util.Storage;
+import duke.util.TaskList;
 import duke.util.Ui;
 
 /**
  * Responsible for executing a todo command.
  */
 public class ToDoCommand extends Command {
-    String description;
+    private String description;
 
+    /**
+     * Constructs a ToDoCommand.
+     *
+     * @param description The description of the todo.
+     */
     public ToDoCommand(String description) {
         super(true);
         this.description = description;

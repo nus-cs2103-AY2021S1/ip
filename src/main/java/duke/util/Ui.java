@@ -23,7 +23,7 @@ public class Ui {
 
     /**
      * Prints out the error message of an error.
-     * 
+     *
      * @param e The error that occurred.
      */
     public void showError(Exception e) {
@@ -32,6 +32,7 @@ public class Ui {
 
     /**
      * Indents the given message by 1 tab and adds horizontal borders above and below it.
+     *
      * @param string The string to print in this format.
      */
     // Wrapper method for printing with horizontal line borders and 1 tab indent

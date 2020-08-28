@@ -1,5 +1,8 @@
 package duke.util;
 
+import java.util.Arrays;
+import java.util.Date;
+
 import duke.command.ByeCommand;
 import duke.command.Command;
 import duke.command.DeadlineCommand;
@@ -15,16 +18,13 @@ import duke.exception.InvalidDeadlineException;
 import duke.exception.InvalidEventException;
 import duke.exception.InvalidToDoException;
 
-import java.util.Arrays;
-import java.util.Date;
-
 /**
  * Parses an input into a command.
  */
 public class Parser {
     /**
      * Parses a String input into a command.
-     * 
+     *
      * @param input The input to parse.
      * @return Command associated with the input.
      * @throws DukeException If the input does not match any command.

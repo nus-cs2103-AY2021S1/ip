@@ -1,8 +1,9 @@
 package duke.command;
 
+
 import duke.exception.InvalidDoneIndexException;
-import duke.util.Storage;
 import duke.task.Task;
+import duke.util.Storage;
 import duke.util.TaskList;
 import duke.util.Ui;
 
@@ -12,6 +13,11 @@ import duke.util.Ui;
 public class DoneCommand extends Command {
     private int index;
 
+    /**
+     * Constructs a DoneCommand.
+     *
+     * @param index The index of the task to mark as done.
+     */
     public DoneCommand(int index) {
         super(true);
         this.index = index;
@@ -29,8 +35,8 @@ public class DoneCommand extends Command {
         if (index > tasks.size() || index < 1) {
             throw new InvalidDoneIndexException(tasks.size());
         }
-        
-        Task task = tasks.get(index-1);
+
+        Task task = tasks.get(index - 1);
         task.completeTask();
         storage.save(tasks);
         String response = "Nice! I've marked this task as done:\n  " + task.toString();
