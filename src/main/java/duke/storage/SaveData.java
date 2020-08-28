@@ -1,9 +1,9 @@
 package duke.storage;
 
-import duke.task.Task;
 import duke.task.Deadline;
-import duke.task.Todo;
 import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -17,14 +17,14 @@ public class SaveData {
      */
     private static String taskToCommand(ArrayList<Task> tasks) {
         String commands = "";
-        for(Task task : tasks) {
+        for (Task task : tasks) {
             String command = "";
             String status = task.getStatus() ? " 1" : " 0";
-            if(task instanceof Deadline) {
-                command = "deadline " + task.getContent() + " /by " + ((Deadline)task).getDeadlineStr();
-            } else if(task instanceof Event) {
-                command = "event " + task.getContent() + " /at " + ((Event)task).getDealineStr();
-            } else if(task instanceof Todo) {
+            if (task instanceof Deadline) {
+                command = "deadline " + task.getContent() + " /by " + ((Deadline) task).getDeadlineStr();
+            } else if (task instanceof Event) {
+                command = "event " + task.getContent() + " /at " + ((Event) task).getDealineStr();
+            } else if (task instanceof Todo) {
                 command = "todo " + task.getContent();
             }
             commands += command + status + "\n";
@@ -41,7 +41,7 @@ public class SaveData {
         //System.out.println("hello");
         try {
             File file = new File(path);
-            if(!file.exists()) {
+            if (!file.exists()) {
                 file.getParentFile().mkdirs();
                 file.createNewFile();
             }
