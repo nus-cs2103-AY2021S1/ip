@@ -3,7 +3,7 @@ package duke.command;
 import duke.component.Parser;
 import duke.component.Storage;
 import duke.component.TaskList;
-import duke.component.CliUi;
+import duke.component.Ui;
 import duke.task.Task;
 
 /**
@@ -27,7 +27,7 @@ public class AddCommand extends Command {
      * @throws InvalidCommandException if the input command doesn't make sense and states why
      */
     @Override
-    public String execute(CliUi ui, TaskList list, Storage storage) throws InvalidCommandException {
+    public String execute(Ui ui, TaskList list, Storage storage) throws InvalidCommandException {
         int count = list.size();
         Task task = Parser.generate(input);
         storage.addToList(task);

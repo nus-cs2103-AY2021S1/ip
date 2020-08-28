@@ -7,6 +7,7 @@ import duke.component.Parser;
 import duke.component.Storage;
 import duke.component.TaskList;
 import duke.component.CliUi;
+import duke.component.Ui;
 
 /**
  * Is the Main class of this program.
@@ -57,7 +58,7 @@ public class Duke {
      * Gets the Ui of the running Duke.
      * @return the ui of this object
      */
-    public CliUi getUi() {
+    public Ui getUi() {
         return ui;
     }
 

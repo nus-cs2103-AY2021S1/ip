@@ -3,7 +3,7 @@ package duke.command;
 import duke.component.Parser;
 import duke.component.Storage;
 import duke.component.TaskList;
-import duke.component.CliUi;
+import duke.component.Ui;
 
 /**
  * Represents a command for marking a task as done.
@@ -26,7 +26,7 @@ public class DoneCommand extends Command {
      * @throws InvalidCommandException if the input index for marking as done is invalid
      */
     @Override
-    public String execute(CliUi ui, TaskList list, Storage storage) throws InvalidCommandException {
+    public String execute(Ui ui, TaskList list, Storage storage) throws InvalidCommandException {
         int n = Parser.isValidDone(input, list.size()) - 1;
         list.get(n).markAsDone();
         storage.reWrite(list);

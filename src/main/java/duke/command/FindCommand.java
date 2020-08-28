@@ -2,7 +2,7 @@ package duke.command;
 
 import duke.component.Storage;
 import duke.component.TaskList;
-import duke.component.CliUi;
+import duke.component.Ui;
 
 /**
  * Represents a command for finding tasks with a designated substring.
@@ -24,7 +24,7 @@ public class FindCommand extends Command {
      * @return the string description of the filtered table and the number of elements in the table
      */
     @Override
-    public String execute(CliUi ui, TaskList list, Storage storage) {
+    public String execute(Ui ui, TaskList list, Storage storage) {
         String toFind = input.substring(5);
         return ui.printList(list, t -> t.finds(toFind), "containing '" + toFind + "' ");
     }
