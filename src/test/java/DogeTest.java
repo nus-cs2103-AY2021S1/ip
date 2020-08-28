@@ -28,7 +28,7 @@ public class DogeTest {
     public void taskListTest() {
         Task task = new Task("Cycling", TaskType.E);
         TaskList.addToList(task);
-        assertEquals(task, TaskList.toDoList.get(0));
+        assertEquals(task, TaskList.TO_DO_LIST.get(0));
     }
 
     @Test

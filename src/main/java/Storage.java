@@ -6,7 +6,7 @@ import java.nio.file.Paths;
 import java.util.List;
 
 public class Storage {
-    public String filePath;
+    private String filePath;
     public Storage(String filePath) {
         this.filePath = filePath;
     }

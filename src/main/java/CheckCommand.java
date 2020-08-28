@@ -5,9 +5,9 @@ public class CheckCommand extends Command{
     }
     @Override
     public void execute(Ui ui, Storage storage) {
-        Task task = TaskList.toDoList.get(checkInt - 1);
+        Task task = TaskList.TO_DO_LIST.get(checkInt - 1);
         task.markAsDone();
         ui.checkList(task.toString(), task.getTaskStatusIcon());
-        ui.printNumberOfTasks(TaskList.toDoList.size());
+        ui.printNumberOfTasks(TaskList.TO_DO_LIST.size());
     }
 }

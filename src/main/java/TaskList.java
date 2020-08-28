@@ -1,15 +1,15 @@
 import java.util.ArrayList;
 import java.util.List;
 public class TaskList {
-    protected static List<Task> toDoList = new ArrayList<>();
+    protected static List<Task> TO_DO_LIST = new ArrayList<>();
     /*public TaskList() {
         this.toDoList = new ArrayList<>();
     }*/
     public static void addToList(Task task) {
-        toDoList.add(task);
+        TO_DO_LIST.add(task);
     }
 
     public static void removeFromList(int taskId) {
-        toDoList.remove(taskId - 1);
+        TO_DO_LIST.remove(taskId - 1);
     }
 }
