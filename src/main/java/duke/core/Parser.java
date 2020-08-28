@@ -61,7 +61,7 @@ public class Parser {
     }
 
     /**
-     * Parses the add command.
+     * Parses the add command and returns a parsed command.
      *
      * @param string The time notation used to separate the description from the time.
      * @param command The command to be parsed.
@@ -109,7 +109,7 @@ public class Parser {
     }
 
     /**
-     * Parses the complete command or the delete command.
+     * Parses the complete command or the delete command and returns a parsed command.
      *
      * @param command The command to be parsed.
      * @param commandType The type of the command.
@@ -137,7 +137,7 @@ public class Parser {
     }
 
     /**
-     * Parses the list date command.
+     * Parses the list date command and returns a parsed list command.
      *
      * @param command The command to be parsed.
      * @return The parsed command.
@@ -157,7 +157,7 @@ public class Parser {
     }
 
     /**
-     * Parses the search command.
+     * Parses the search command and returns a parsed search command.
      *
      * @param command The command to be parsed.
      * @return The parsed command.
