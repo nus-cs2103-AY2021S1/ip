@@ -24,7 +24,7 @@ public class FindCommand extends Command {
     public void execute(Storage storage, TaskList taskList, Ui ui) {
         try {
             ui.showSuccess(taskList.findTask(this.input));
-        } catch(DukeException e) {
+        } catch (DukeException e) {
             ui.showError(e.getMessage());
         }
     }

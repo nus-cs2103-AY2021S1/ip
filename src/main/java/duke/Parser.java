@@ -39,7 +39,7 @@ public class Parser {
             // condition checks that user input is in format "find <key word>"
             return new FindCommand(userInput);
         } else if (inputWords[0].equals("todo") || inputWords[0].equals("deadline")
-                || inputWords[0].equals("event")){
+                || inputWords[0].equals("event")) {
             // Dino adds task to list
             return new AddCommand(userInput);
         } else {

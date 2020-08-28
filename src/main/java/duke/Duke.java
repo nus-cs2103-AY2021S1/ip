@@ -1,11 +1,13 @@
 package duke;
 
+import java.util.Scanner;
+
 import duke.command.Command;
 import duke.storage.Storage;
 import duke.tasks.TaskList;
 import duke.ui.Ui;
 
-import java.util.Scanner;
+
 
 public class Duke {
 
@@ -45,7 +47,7 @@ public class Duke {
             try {
                 Command c = Parser.parse(input);
                 c.execute(storage, tasks, ui);
-                isBye = c.isBye;
+                isBye = c.isBye();
             } catch (DukeException e) {
                 ui.showError(e.getMessage());
             } finally {
@@ -55,8 +57,11 @@ public class Duke {
         scanner.close();
     }
 
+    /**
+     * Initialises Duke with the file record of task history, and runs Duke.
+     * @param args an array of command-line arguments for the application
+     */
     public static void main(String[] args) {
         new Duke("./data/tasklist.txt").run();
-
     }
 }

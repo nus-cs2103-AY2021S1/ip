@@ -1,9 +1,11 @@
 package duke.tasks;
 
-import duke.DukeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+import duke.DukeException;
+
 
 public class Deadline extends Task {
 
@@ -95,5 +97,4 @@ public class Deadline extends Task {
         return "D" + "@" + super.storedTaskString()
                 + "@" + this.userInputDate + "@" + this.userInputTime;
     }
-
 }
