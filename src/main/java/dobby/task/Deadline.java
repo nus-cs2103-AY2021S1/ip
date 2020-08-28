@@ -2,6 +2,9 @@ package dobby.task;
 
 import java.time.LocalDate;
 
+/**
+ * Class for deadline tasks
+ */
 public class Deadline extends TimedTask {
     private static final String TAG = "[D]";
 

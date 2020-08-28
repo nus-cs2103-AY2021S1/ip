@@ -8,6 +8,9 @@ import java.text.ParseException;
 import java.util.Scanner;
 import dobby.task.Task;
 
+/**
+ * Reads the stored tasks at updates the storage file
+ */
 public class Storage {
     private final String filePath;
     private TaskList tasks;

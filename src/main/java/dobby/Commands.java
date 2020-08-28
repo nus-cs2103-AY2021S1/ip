@@ -1,5 +1,8 @@
 package dobby;
 
+/**
+ * Specifies all commands the chat bot can work with
+ */
 public enum Commands {
     TODO("\n      todo _description_"),
     DEADLINE("\n      deadline _description_ /by dd/mm/yyyy hhhh(optional)"),

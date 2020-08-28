@@ -10,6 +10,9 @@ import dobby.task.Task;
 import dobby.task.Todo;
 import dobby.task.TimedTask;
 
+/**
+ * Stores the tasks and performs operations or returns details depending on function called
+ */
 public class TaskList {
     private ArrayList<Task> tasks;
 

@@ -7,6 +7,9 @@ import dobby.task.Event;
 import dobby.task.Task;
 import dobby.task.Todo;
 
+/**
+ * Parses the input given by the user and interacts with TaskList accordingly
+ */
 public class Parser {
     private TaskList tasks;
 
@@ -54,6 +57,7 @@ public class Parser {
             String by = "";
             try {
                 text = text.substring(9).trim();
+
                 if (text.indexOf("/by") <= 1) { // empty description or /by missing
                     throw new DobbyException("\n    Incorrect usage of command. Description cannot be empty. "
                             + "Please try again." + (Commands.DEADLINE).getUsage() + "\n    ");

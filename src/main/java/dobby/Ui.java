@@ -2,6 +2,9 @@ package dobby;
 
 import java.util.Scanner;
 
+/**
+ * Interacts with the user
+ */
 public class Ui {
     // String for output format
     private static final String UNDERSCORE = "_________________________________________" +

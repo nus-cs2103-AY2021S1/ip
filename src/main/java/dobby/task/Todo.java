@@ -1,5 +1,8 @@
 package dobby.task;
 
+/**
+ * Class for todo tasks
+ */
 public class Todo extends Task {
     private final String TAG = "[T]";
 

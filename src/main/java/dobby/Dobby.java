@@ -5,6 +5,9 @@ import java.util.Scanner;
 import java.io.File;
 import java.io.FileOutputStream;
 
+/**
+ * Main class which begins the running of the chat bot
+ */
 public class Dobby {
     private TaskList tasks;
     private Storage storage;

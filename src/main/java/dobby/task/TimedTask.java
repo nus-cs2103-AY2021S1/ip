@@ -3,6 +3,9 @@ package dobby.task;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Parent class for deadline and event classes
+ */
 public class TimedTask extends Task {
     private final LocalDate date;
     private final String time;
