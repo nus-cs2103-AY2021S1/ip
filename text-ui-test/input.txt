@@ -25,4 +25,9 @@ todo
 todo push new levels to github
 list
 scheduled 28/08/2020
+find
+find nomatch
+find lecture
+findtype
+findtype D
 bye
