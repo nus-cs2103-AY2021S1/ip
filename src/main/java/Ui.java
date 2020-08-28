@@ -5,7 +5,7 @@ public class Ui {
     Scanner sc;
     TaskList taskList;
     Parser parser;
-    char line = '*';
+    static final char LINE = '*';
 
 
     Ui(TaskList taskList, Storage storage) {
@@ -43,7 +43,7 @@ public class Ui {
      * Prints the top line, e.g. *******************
      */
     void printTopLine() {
-        Stream.generate(() -> line).limit(50).forEach(System.out::print); // _ _ _ _ _
+        Stream.generate(() -> LINE).limit(50).forEach(System.out::print); // _ _ _ _ _
         System.out.println();
     }
 
@@ -52,7 +52,7 @@ public class Ui {
      */
     void printBottomLine() {
         System.out.println();
-        Stream.generate(() -> line).limit(50).forEach(System.out::print); // _ _ _ _ _
+        Stream.generate(() -> LINE).limit(50).forEach(System.out::print); // _ _ _ _ _
         System.out.println();
     }
 }
