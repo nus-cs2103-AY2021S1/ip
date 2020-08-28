@@ -12,7 +12,7 @@ then
     rm ACTUAL.TXT
 fi
 
-rm $HOME/duke/localData/data.duke
+mv $HOME/duke/localData/data.duke $HOME/duke/localData/data.duke.temp
 
 # compile the code into the bin folder, terminates if error occurred
 if ! javac -cp ../src -Xlint:none -d ../bin ../src/main/java/duke/*.java ../src/main/java/duke/*/*.java ../src/main/java/Duke.java
@@ -23,6 +23,8 @@ fi
 
 # run the program, feed commands from input.txt file and redirect the output to the ACTUAL.TXT
 java -classpath ../bin Duke < input.txt > ACTUAL.TXT
+
+mv $HOME/duke/localData/data.duke.temp $HOME/duke/localData/data.duke
 
 # convert to UNIX format
 cp EXPECTED.TXT EXPECTED-UNIX.TXT
