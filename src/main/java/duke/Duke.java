@@ -1,12 +1,12 @@
 package duke;
 
+import java.util.Scanner;
+
 import duke.exec.Executable;
 import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
-
-import java.util.Scanner;
 
 public class Duke {
 
@@ -14,6 +14,19 @@ public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
+
+    // constructor
+    /**
+     * Constructs a Duke object that represents
+     * a particular Duke session
+     * @param directory the directory where the database is located
+     * @param path path to the database file
+     */
+    public Duke(String directory, String path) {
+        storage = new Storage(directory, path);
+        tasks = new TaskList(storage.load());
+        ui = new Ui();
+    }
 
     // private execution helper method
     /**
@@ -35,13 +48,6 @@ public class Duke {
                 ui.display(e.getMessage());
             }
         }
-    }
-
-    // constructor
-    public Duke(String directory, String path) {
-        ui = new Ui();
-        storage = new Storage(directory, path);
-        tasks = new TaskList(storage.load());
     }
 
     public static void main(String[] args) {

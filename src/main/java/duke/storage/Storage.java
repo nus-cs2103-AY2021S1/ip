@@ -5,27 +5,24 @@
  */
 package duke.storage;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.IOException;
-
 import java.nio.file.Files;
 import java.nio.file.Paths;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 
-import duke.task.Todo;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.TaskList;
+import duke.task.Todo;
 
 public class Storage {
 
@@ -33,10 +30,15 @@ public class Storage {
     private static final DateTimeFormatter DATE_TIME_FORMAT = DateTimeFormatter.ofPattern("dd-MM-yyyy h:mma");
 
     // instance variables
-    String directory; // directory of data
-    File store; // the database
+    private String directory; // directory of data
+    private File store; // the database
 
     // constructor
+    /**
+     * Constructs a storage object
+     * @param directory the string representing the directory
+     * @param path the path to the file given as a string
+     */
     public Storage(String directory, String path) {
         this.directory = directory;
         this.store = new File(path);

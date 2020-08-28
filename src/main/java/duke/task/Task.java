@@ -7,8 +7,8 @@ package duke.task;
 public abstract class Task {
 
     // String constants for labelling state of task
-    protected final String CROSS = "✗";
-    protected final String CHECK = "✓";
+    protected static final String CROSS = "✗";
+    protected static final String CHECK = "✓";
 
     // instance fields
     protected String desc; // description of task

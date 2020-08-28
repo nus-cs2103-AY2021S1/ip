@@ -1,8 +1,8 @@
 package duke.exec;
 
 import duke.storage.Storage;
-import duke.task.TaskList;
 import duke.task.Task;
+import duke.task.TaskList;
 import duke.ui.Ui;
 
 public class Delete implements Executable {

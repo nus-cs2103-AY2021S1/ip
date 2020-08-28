@@ -9,7 +9,7 @@ import duke.ui.Ui;
 public class Find implements Executable {
 
     // constants
-    private final String FIND_MESSAGE = "Here are the tasks that match "
+    private static final String FIND_MESSAGE = "Here are the tasks that match "
             + "the keyword given";
 
     // instance variables

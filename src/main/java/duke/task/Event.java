@@ -11,17 +11,35 @@ public class Event extends Task {
 
     // constants
     private static final String TYPE = "E";
-    private static final DateTimeFormatter DATABASE_DATE_TIME_FORMAT
-            = DateTimeFormatter.ofPattern("dd-MM-yyyy h:mma");
+    private static final DateTimeFormatter DATABASE_DATE_TIME_FORMAT = DateTimeFormatter.ofPattern("dd-MM-yyyy h:mma");
 
     // instance variables
     private LocalDateTime date;
 
     // constructors
+    /**
+     * Constructs an event object that is not completed
+     * given details in the form of a description and a
+     * LocalDateTime object detailing the date of event
+     *
+     * @param desc description of the event
+     * @param date the date of event as a DateTime object
+     */
     public Event(String desc, LocalDateTime date) {
         super(desc);
         this.date = date;
     }
+
+    /**
+     * Constructs an event object given details in
+     * the form of a description, a LocalDateTime
+     * object detailing the date of event and the
+     * completion of the event
+     *
+     * @param desc description of the event
+     * @param date the date of event as a DateTime object
+     * @param isDone completion state of event
+     */
     public Event(String desc, LocalDateTime date, boolean isDone) {
         super(desc, isDone);
         this.date = date;

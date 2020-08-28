@@ -9,8 +9,8 @@ import duke.ui.Ui;
 public class Listing implements Executable {
 
     // constants
-    private static final String EMPTY_MESSAGE = "There are currently " +
-            "no items in the list.";
+    private static final String EMPTY_MESSAGE = "There are currently "
+            + "no items in the list.";
     private static final String LIST_MESSAGE = "Here are the tasks in your list:";
 
     /**

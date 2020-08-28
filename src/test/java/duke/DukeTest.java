@@ -1,13 +1,13 @@
 package duke;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
-import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+
+import org.junit.jupiter.api.Test;
 
 import duke.parser.Parser;
 import duke.task.Deadline;
@@ -22,8 +22,8 @@ public class DukeTest {
         String invalidCommand = "Do Nothing";
         DukeException thrownException = assertThrows(DukeException.class, () -> Parser.parse(invalidCommand),
                 "Expected DukeException to be thrown");
-        assertTrue(thrownException.getMessage().contains("☹ OOPS!!! I'm sorry, " +
-                "but I don't know what that means :-("));
+        assertTrue(thrownException.getMessage().contains("☹ OOPS!!! I'm sorry, "
+                + "but I don't know what that means :-("));
     }
 
     /**

@@ -11,17 +11,36 @@ public class Deadline extends Task {
 
     // constants
     private static final String TYPE = "D";
-    private static final DateTimeFormatter DATABASE_DATE_TIME_FORMAT
-            = DateTimeFormatter.ofPattern("dd-MM-yyyy h:mma");
+    private static final DateTimeFormatter DATABASE_DATE_TIME_FORMAT = DateTimeFormatter.ofPattern("dd-MM-yyyy h:mma");
 
     // instance variables
     private LocalDateTime date;
 
     // constructors
+
+    /**
+     * Constructs a deadline object that is not completed
+     * given its description and the deadline date given
+     * as a LocalDateTime date object
+     *
+     * @param desc the description of the deadline
+     * @param date the date of the deadline
+     */
     public Deadline(String desc, LocalDateTime date) {
         super(desc);
         this.date = date;
     }
+
+    /**
+     * Constructs a deadline object given details in
+     * the form of a description, a LocalDateTime
+     * object detailing the date of deadline and the
+     * completion of the deadline
+     *
+     * @param desc description of the deadline
+     * @param date the date of deadline as a DateTime object
+     * @param isDone completion state of deadline
+     */
     public Deadline(String desc, LocalDateTime date, boolean isDone) {
         super(desc, isDone);
         this.date = date;

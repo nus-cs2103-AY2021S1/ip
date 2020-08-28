@@ -12,8 +12,8 @@ public class Ui {
     // String constants
     private static final String INDENT = "\t";
     private static final String LINE_BREAK = "_".repeat(70);
-    private static final String WELCOME_MESSAGE = "Hello! I'm Tusk. " +
-            "What can I do for you?";
+    private static final String WELCOME_MESSAGE = "Hello! I'm Tusk. "
+            + "What can I do for you?";
 
     /**
      * Greet and prompt the user upon startup

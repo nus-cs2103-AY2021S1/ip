@@ -9,10 +9,10 @@ import duke.task.Task;
 public class DukeException extends Exception {
 
     // message constants
-    private static final String EMPTY_DESCRIPTION = "☹ OOPS!!! The description of " +
-            "a task cannot be empty";
-    private static final String EMPTY_TIME = "☹ OOPS!!! The description of " +
-            "a task with attached time cannot be empty";
+    private static final String EMPTY_DESCRIPTION = "☹ OOPS!!! The description of "
+            + "a task cannot be empty";
+    private static final String EMPTY_TIME = "☹ OOPS!!! The description of "
+            + "a task with attached time cannot be empty";
 
     private static final String ALREADY_DONE_FRONT = "The task \'";
     private static final String ALREADY_DONE_END = "\' has already been marked as done.";
@@ -22,8 +22,8 @@ public class DukeException extends Exception {
     private static final String UNSPECIFIC_COMMAND = "This is a single word command. Please try again";
     private static final String MISSING_PARAMETERS = "This command requires more parameters. Please try again";
 
-    private static final String UNKNOWN_OPERATION = "☹ OOPS!!! I'm sorry, " +
-            "but I don't know what that means :-(";
+    private static final String UNKNOWN_OPERATION = "☹ OOPS!!! I'm sorry, "
+            + "but I don't know what that means :-(";
 
     /**
      * Generic message DukeException constructor, maybe used
@@ -36,7 +36,7 @@ public class DukeException extends Exception {
 
     // factory methods for different exceptions related to Duke
     public static DukeException alreadyDone(Task t) {
-        return new DukeException(ALREADY_DONE_FRONT+ t.getDesc() + ALREADY_DONE_END);
+        return new DukeException(ALREADY_DONE_FRONT + t.getDesc() + ALREADY_DONE_END);
     }
 
     public static DukeException emptyDescription() {

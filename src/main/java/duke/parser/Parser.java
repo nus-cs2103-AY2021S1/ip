@@ -7,18 +7,17 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 import duke.DukeException;
-import duke.exec.Executable;
 import duke.exec.Add;
-import duke.exec.Exit;
 import duke.exec.Delete;
 import duke.exec.Done;
-import duke.exec.Listing;
+import duke.exec.Executable;
+import duke.exec.Exit;
 import duke.exec.Find;
-
+import duke.exec.Listing;
+import duke.task.Deadline;
+import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
-import duke.task.Event;
-import duke.task.Deadline;
 
 public class Parser {
 
@@ -33,8 +32,7 @@ public class Parser {
     private static final String FIND_COMMAND = "find";
 
     // DateTime format constant
-    private static final DateTimeFormatter DATE_TIME_PARSE_FORMAT
-            = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+    private static final DateTimeFormatter DATE_TIME_PARSE_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
 
     /**
      * Parses a line of user input, creates and returns an Executable object

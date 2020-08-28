@@ -5,7 +5,7 @@ import duke.task.Task;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
-public class Add implements Executable{
+public class Add implements Executable {
 
     // constants
     private static final String TASK_COUNT_FRONT = "Now you have ";
@@ -14,7 +14,7 @@ public class Add implements Executable{
     private static final String ADDED_MESSAGE = "Got it. I've added this task:";
 
     // instance variables
-    Task toAdd;
+    private Task toAdd;
 
     // constructor
     public Add(Task task) {
