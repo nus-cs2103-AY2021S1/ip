@@ -3,7 +3,7 @@ package duke;
 import java.util.ArrayList;
 import java.util.List;
 
-import duke.command.Command;
+import duke.fxcommand.Command;
 import duke.exception.DukeException;
 
 /**
@@ -59,8 +59,23 @@ public class Duke {
         }
     }
 
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    public String getResponse(String input) {
+        try {
+            Command cmd = Parser.parseInput(input);
+            return cmd.execute(ui, storage, taskList);
+        } catch (DukeException e) {
+            return e.getPrettyErrorMsg();
+        }
+    }
+
+    /*
     public static void main(String[] args) {
         Duke duke = new Duke("data/duke.txt");
         duke.run();
     }
+     */
 }
