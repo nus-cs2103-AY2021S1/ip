@@ -1,12 +1,5 @@
 package duke.storage;
 
-import duke.DukeAction;
-import duke.DukeException;
-import duke.tasks.Deadline;
-import duke.tasks.Event;
-import duke.tasks.Task;
-import duke.tasks.Todo;
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -17,10 +10,24 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import duke.DukeAction;
+import duke.DukeException;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.Todo;
+
 public class Storage {
     protected String filepath;
     protected String dirpath;
 
+    /**
+     * Initialises a storage object that stores any updates to the
+     * list of tasks in the hard disk and retrieves task information
+     * from the hard disk when Duke starts.
+     * @param filepath string file path of the file where Duke stores
+     *                 task information
+     */
     public Storage(String filepath) {
         this.filepath = filepath;
         this.dirpath = filepath.substring(0, 6);
@@ -39,17 +46,17 @@ public class Storage {
             File dir = new File(this.dirpath);
             File taskFile = new File(this.filepath);
             if (dir.mkdir()) {
-                System.out.println("Welcome. Dino has created a new directory " +
-                        "to store your data.");
+                System.out.println("Welcome. Dino has created a new directory "
+                        + "to store your data.");
                 if (taskFile.createNewFile()) {
-                    System.out.println("Dino has successfully " +
-                            "created a new file to store your task list.");
+                    System.out.println("Dino has successfully "
+                            + "created a new file to store your task list.");
                 } else {
                     System.out.println("Dino could not create a new file to store your task list.");
                 }
             } else if (taskFile.createNewFile()) {
-                System.out.println("Welcome. Dino has successfully created " +
-                        "a new file to store your task list.");
+                System.out.println("Welcome. Dino has successfully created "
+                        + "a new file to store your task list.");
             } else {
                 Scanner scan = new Scanner(taskFile);
                 while (scan.hasNextLine()) {
@@ -163,7 +170,7 @@ public class Storage {
                     if (!currentL.equals(lineToMarkDone)) {
                         bw.write(currentL);
                     } else {
-                        String taskType = currentL.substring(0,2);
+                        String taskType = currentL.substring(0, 2);
                         String taskDesc = currentL.substring(3);
                         bw.write(taskType + "1" + taskDesc);
                     }

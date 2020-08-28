@@ -1,11 +1,11 @@
 package duke.tasks;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import duke.DukeAction;
 import duke.DukeException;
 import duke.storage.Storage;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class TaskList {
     protected List<Task> taskList;
@@ -197,8 +197,8 @@ public class TaskList {
         }
 
         if (matchingTasks == 0) {
-            throw new DukeException("Rawr! Dino could not find " +
-                    "any matching tasks in your list.");
+            throw new DukeException("Rawr! "
+                    + "Dino could not find any matching tasks in your list.");
         } else {
             return result.toString();
         }
