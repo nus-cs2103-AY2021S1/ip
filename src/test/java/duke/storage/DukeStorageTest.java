@@ -5,7 +5,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -18,8 +17,9 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
-public class StorageTest {
+public class DukeStorageTest {
     private static final Path TEST_FILE_PATH = Paths.get("test", "data", "duke.txt");
 
     // recursive function to delete directory that stores the save file
@@ -67,9 +67,9 @@ public class StorageTest {
 
     @Test
     public void getSavedLines_saveFileNotExist_success() throws IOException {
-        Storage store = new Storage(TEST_FILE_PATH);
+        Storage store = new DukeStorage(TEST_FILE_PATH);
 
-        ArrayList<String> savedLines = store.getSavedLines();
+        List<String> savedLines = store.getSavedLines();
         int len = savedLines.size();
         assertEquals(0, len);
     }
@@ -82,9 +82,9 @@ public class StorageTest {
         initialLines[1] = "This is test line number 2!";
         initialLines[2] = "This is test line number 3?";
         writeLines(initialLines);
-        Storage store = new Storage(TEST_FILE_PATH);
+        Storage store = new DukeStorage(TEST_FILE_PATH);
 
-        ArrayList<String> savedLines = store.getSavedLines();
+        List<String> savedLines = store.getSavedLines();
         int len = savedLines.size();
         assertEquals(initialLines.length, len);
 
@@ -97,9 +97,9 @@ public class StorageTest {
     public void getSavedLines_saveFileExistEmpty_success() throws IOException {
         createSaveFile();
 
-        Storage store = new Storage(TEST_FILE_PATH);
+        Storage store = new DukeStorage(TEST_FILE_PATH);
 
-        ArrayList<String> savedLines = store.getSavedLines();
+        List<String> savedLines = store.getSavedLines();
         int len = savedLines.size();
         assertEquals(0, len);
     }
@@ -108,7 +108,7 @@ public class StorageTest {
     public void addLine_newLinesSaved() throws IOException {
         createSaveFile();
 
-        Storage store = new Storage(TEST_FILE_PATH);
+        Storage store = new DukeStorage(TEST_FILE_PATH);
 
         String[] addedLines = new String[3];
         addedLines[0] = "This is test line number 1.";
@@ -138,7 +138,7 @@ public class StorageTest {
         lines[1] = "This is test line number 2!";
         lines[2] = "This is test line number 3?";
         writeLines(lines);
-        Storage store = new Storage(TEST_FILE_PATH);
+        Storage store = new DukeStorage(TEST_FILE_PATH);
 
         lines[1] = "Line number 2 has been updated!";
         store.updateLine(1, lines[1]);
@@ -163,7 +163,7 @@ public class StorageTest {
         lines[1] = "This is test line number 2!";
         lines[2] = "This is test line number 3?";
         writeLines(lines);
-        Storage store = new Storage(TEST_FILE_PATH);
+        Storage store = new DukeStorage(TEST_FILE_PATH);
 
         store.removeLine(0);
         store.removeLine(0);

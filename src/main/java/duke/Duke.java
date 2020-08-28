@@ -5,6 +5,7 @@ import duke.command.DukeCommandExecutor;
 import duke.exception.DukeException;
 import duke.exception.InvalidSaveFileException;
 import duke.task.TaskArrayList;
+import duke.storage.DukeStorage;
 import duke.storage.Storage;
 import duke.ui.Ui;
 
@@ -26,7 +27,7 @@ public class Duke {
 
 
     public Duke(Path filePath) throws IOException {
-        this.STORAGE = new Storage(filePath);
+        this.STORAGE = new DukeStorage(filePath);
         this.TASK_LIST = new TaskArrayList(STORAGE);
     }
 

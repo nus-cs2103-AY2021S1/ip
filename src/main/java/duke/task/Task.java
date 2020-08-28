@@ -28,7 +28,7 @@ public abstract class Task {
     }
 
     public boolean containsKeyword(String keyword) {
-        return description.contains(keyword);
+        return description.toLowerCase().contains(keyword.toLowerCase());
     }
 
     @Override
