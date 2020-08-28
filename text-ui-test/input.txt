@@ -10,4 +10,9 @@ done 3
 list
 delete 2
 list
+todo CS2030 homework
+event home work /at 2020-02-20 09:00
+deadline do all CS homework and projects /by 2020-03-22 12:00
+list
+find homework
 bye

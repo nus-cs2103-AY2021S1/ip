@@ -72,4 +72,26 @@ public class ParserTest {
             assertEquals(e.toString(), "ERROR: Duke doesn't recognise the date/time -> " + invalidTime);
         }
     }
+    
+    @Test
+    public void parse_tooManyFindKeywords_exceptionThrown() {
+        String testInput = "find an event";
+        try {
+            Parser testUnit = new Parser();
+            testUnit.parse(testInput);
+        } catch (DukeException e) {
+            assertEquals(e.toString(), "ERROR: Duke can only handle so many keyword(s)! -> " + testInput);
+        }
+    }
+
+    @Test
+    public void parse_noFindKeywords_exceptionThrown() {
+        String testInput = "find";
+        try {
+            Parser testUnit = new Parser();
+            testUnit.parse(testInput);
+        } catch (DukeException e) {
+            assertEquals(e.toString(), "ERROR: Duke doesn't know what to find! -> " + testInput);
+        }
+    }
 }

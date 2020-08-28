@@ -13,6 +13,15 @@ public abstract class Task {
         this.task = task;
         this.done = done;
     }
+
+    /**
+     * Gets the task description.
+     * 
+     * @return String of task description.
+     */
+    public String getTaskDescription() {
+        return task;
+    }
     
     abstract public String toDataString();
 

@@ -38,6 +38,25 @@ public class Ui {
         }
         System.out.println(INDENT + LIST_TASK_LINE);
     }
+
+    /**
+     * Prints the list of matching tasks according to keyword.
+     * 
+     * @param tasks List of matching tasks. 
+     */
+    public void displayMatchingTaskList(TaskList tasks) {
+        ArrayList<Task> list = tasks.getList();
+        System.out.println(INDENT + LIST_TASK_LINE + "\n"
+            + INDENT + "Duke has found these tasks in your list:");
+        for (Task task : list) {
+            System.out.println(INDENT + (list.indexOf(task) + 1) + "." + task.toString()
+            );
+        }
+        if (list.size() == 0) {
+            System.out.println(INDENT + "None");
+        }
+        System.out.println(INDENT + LIST_TASK_LINE);
+    }
     
     public void displayDoneMessage(Task task) {
         System.out.println(
