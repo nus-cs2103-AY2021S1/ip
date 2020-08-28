@@ -16,10 +16,9 @@ dependencies {
 
 test {
     useJUnitPlatform()
-
+    systemProperty "file.encoding", "utf-8"
     testLogging {
         events "passed", "skipped", "failed"
-
         showExceptions true
         exceptionFormat "full"
         showCauses true
@@ -27,6 +26,10 @@ test {
         showStandardStreams = false
     }
 }
+
+compileJava.options.encoding = "UTF-8"
+compileTestJava.options.encoding = "UTF-8"
+javadoc.options.encoding = "UTF-8"
 
 application {
     mainClassName = "seedu.duke.Duke"
