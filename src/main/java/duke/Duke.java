@@ -1,5 +1,7 @@
 package duke;
 
+import duke.command.Command;
+
 /**
  * Represents Duke, a virtual task management system and personal assistant.
  */

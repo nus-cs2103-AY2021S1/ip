@@ -6,6 +6,15 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+import duke.command.Command;
+import duke.command.ByeCommand;
+import duke.command.ListCommand;
+import duke.command.FindCommand;
+import duke.command.DoneCommand;
+import duke.command.DeleteCommand;
+import duke.command.AddCommand;
+import duke.command.AddTimedCommand;
+
 /**
  * Represents a parser which parses user commands into Command objects.
  */
@@ -23,38 +32,38 @@ public class Parser {
         try {
             switch (command) {
             case "bye":
-                return new Command("bye");
+                return new ByeCommand();
             case "list":
-                return new Command("list");
+                return new ListCommand();
             case "find":
-                String key = input.substring(input.indexOf(' ') + 1);
-                return new Command("find" , key);
+                String keyword = input.substring(input.indexOf(' ') + 1);
+                return new FindCommand(keyword);
             case "done":
-                int idx = Integer.parseInt(input.split(" ")[1]) - 1;
-                return new Command("done" , idx);
+                int doneIdx = Integer.parseInt(input.split(" ")[1]) - 1;
+                return new DoneCommand(doneIdx);
             case "delete":
-                int idx2 = Integer.parseInt(input.split(" ")[1]) - 1;
-                return new Command("delete" , idx2);
+                int deleteIdx = Integer.parseInt(input.split(" ")[1]) - 1;
+                return new DeleteCommand(deleteIdx);
             case "todo":
                 taskFormatCheck(command, input);
                 String desc = input.substring(input.indexOf(' ') + 1);
-                return new Command("todo", desc);
+                return new AddCommand(desc);
             case "deadline":
             case "event":
                 taskFormatCheck(command, input);
-                String info2 = input.substring(input.indexOf(' ') + 1);
-                String desc2 = info2.substring(0, info2.indexOf('/') - 1);
-                String meta = info2.substring(info2.indexOf('/') + 4);
+                String tInfo = input.substring(input.indexOf(' ') + 1);
+                String tDesc = tInfo.substring(0, tInfo.indexOf('/') - 1);
+                String meta = tInfo.substring(tInfo.indexOf('/') + 4);
                 LocalDate date;
                 if (meta.contains(" ")) {
                     date = LocalDate.parse(meta.substring(0, meta.indexOf(' ')),
                             DateTimeFormatter.ofPattern("yyyy/MM/dd"));
                     LocalTime time = LocalTime.parse(meta.substring(meta.indexOf(' ') + 1),
                             DateTimeFormatter.ofPattern("HHmm"));
-                    return new Command(command, desc2, date, time);
+                    return new AddTimedCommand(command, tDesc, date, time);
                 } else {
                     date = LocalDate.parse(meta, DateTimeFormatter.ofPattern("yyyy/MM/dd"));
-                    return new Command(command, desc2, date);
+                    return new AddTimedCommand(command, tDesc, date);
                 }
             default:
                 throw new DukeException("Oh dear! I'm sorry, but I don't know what that means :(");
