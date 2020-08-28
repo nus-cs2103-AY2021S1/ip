@@ -28,17 +28,17 @@ public class Ui {
         printMessage(toPrint);
     }
 
-    public static void printAdd(Pair<String, Integer> msg) {
+    public static void printAdd(String description, int numberOfTasks) {
         String toPrint = "     Got it. I've added this task:\n"
-                + "       " + msg.getT()
-                + "     Now you have " + msg.getU() + " tasks in the list.\n";
+                + "       " + description
+                + "     Now you have " + numberOfTasks + " tasks in the list.\n";
         printMessage(toPrint);
     }
 
-    public static void printDelete(Pair<String, Integer> msg) {
+    public static void printDelete(String description, int numberOfTasks) {
         String toPrint = "     Noted. I've removed this task: \n"
-                + "       " + msg.getT()
-                + "     Now you have " + msg.getU() + " tasks in the list.\n";
+                + "       " + description
+                + "     Now you have " + numberOfTasks + " tasks in the list.\n";
         printMessage(toPrint);
     }
 }

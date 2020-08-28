@@ -18,7 +18,7 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        String sign = done ? "✓" : "✗";
+        String sign = isDone ? "✓" : "✗";
         return "[E][" + sign + "] " + description + " (at:" + timeAt + ")";
     }
 }

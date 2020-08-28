@@ -7,7 +7,7 @@ public class ToDo extends Task {
 
     @Override
     public String toString() {
-        String sign = done ? "✓" : "✗";
+        String sign = isDone ? "✓" : "✗";
         return "[T][" + sign + "] " + description;
     }
 }

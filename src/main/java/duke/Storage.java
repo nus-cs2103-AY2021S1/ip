@@ -7,16 +7,12 @@ import java.text.ParseException;
 import java.util.ArrayList;
 
 public class Storage {
-    public Storage() {
-
-    }
-
     /**
      * Saves task list onto a prescribed file
      * @param tasks the tasklist to be saved
      * @throws IOException if file not successfully made (e.g. permission error)
      */
-    public void save(TaskList tasks) throws IOException {
+    public static void save(TaskList tasks) throws IOException {
         // Save file
         Path dirPath = Paths.get("data");
         Path filePath = Paths.get("data", "duke.txt");
@@ -34,14 +30,14 @@ public class Storage {
         wr.close();
     }
 
-    public TaskList load() throws FileNotFoundException, IOException, DukeException, ParseException {
+    public static TaskList load() throws FileNotFoundException, IOException, DukeException, ParseException {
         TaskList tasks = new TaskList();
         Parser parser = new Parser();
         Path filePath = Paths.get("data", "duke.txt");
         BufferedReader reader = new BufferedReader(new FileReader(filePath.toString()));
         String nextLine = reader.readLine();
         while (nextLine != null) {
-            Task res = parser.parseAdd(nextLine);
+            // Task res = parser.parseAdd(nextLine);
             // TODO: 26/8/20 Not working yet; add tasks to the list
         }
 

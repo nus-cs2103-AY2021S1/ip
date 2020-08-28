@@ -16,7 +16,7 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        String sign = done ? "✓" : "✗";
+        String sign = isDone ? "✓" : "✗";
         return "[D][" + sign + "] " + description + " (by:" + timeBy + ")";
     }
 }
