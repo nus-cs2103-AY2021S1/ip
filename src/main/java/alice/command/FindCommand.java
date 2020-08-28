@@ -14,14 +14,14 @@ public class FindCommand extends Command {
     protected static final String DESCRIPTION = "Find tasks using keywords";
     protected static final String USE_CASE = "[" + String.join(", ", NAMES) + "] <keyword(s)>";
 
-    private final String keywords;
+    private final String[] keywords;
 
     /**
      * Creates a new command to search for tasks based on keywords.
      *
-     * @param keywords the string of keywords to search against.
+     * @param keywords the list of keywords to search against.
      */
-    public FindCommand(String keywords) {
+    public FindCommand(String... keywords) {
         this.keywords = keywords;
     }
 

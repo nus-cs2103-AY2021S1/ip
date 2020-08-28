@@ -60,9 +60,6 @@ public class Alice {
         }
     }
 
-    /**
-     * Entry point of the program.
-     */
     public static void main(String[] args) {
         new Alice("data/tasks.txt").run();
     }

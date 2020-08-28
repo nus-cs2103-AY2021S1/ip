@@ -43,7 +43,7 @@ public class Task {
      * @param keywords the list of keywords to check with.
      * @return true if any keywords matches the task description; false otherwise.
      */
-    public boolean containKeywords(String[] keywords) {
+    public boolean containKeywords(String... keywords) {
         for (int i = 0; i < keywords.length; i++) {
             if (description.contains(keywords[i])) {
                 return true;

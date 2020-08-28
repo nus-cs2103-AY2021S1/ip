@@ -91,17 +91,15 @@ public class TaskList {
     /**
      * Searches for all tasks that matches any of the keywords.
      *
-     * @param keywords the string of keywords to search against.
+     * @param keywords the list of keywords to search against.
      * @return the string representation of all tasks that matches.
      */
-    public String find(String keywords) {
-        String[] words = keywords.trim().split(" ");
-
+    public String find(String... keywords) {
         StringBuilder s = new StringBuilder();
 
         int counter = 0;
         for (int i = 0; i < tasks.size(); i++) {
-            if (tasks.get(i).containKeywords(words)) {
+            if (tasks.get(i).containKeywords(keywords)) {
                 s.append(++counter).append(". ").append(tasks.get(i)).append("\n");
             }
         }

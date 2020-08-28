@@ -122,7 +122,7 @@ public class Parser {
      */
     private static FindCommand parseFindKeywords(String keywords) throws InvalidCommandException {
         if (!keywords.isBlank()) {
-            return new FindCommand(keywords);
+            return new FindCommand(keywords.trim().split(" "));
         } else {
             throw new InvalidCommandException("The keyword for find cannot be left empty.");
         }
