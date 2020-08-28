@@ -1,10 +1,10 @@
 package duke.tasklist;
 
-import duke.dukeexception.DukeTaskNonExistException;
-import duke.task.Task;
-
 import java.util.ArrayList;
 import java.util.Iterator;
+
+import duke.dukeexception.DukeTaskNonExistException;
+import duke.task.Task;
 
 /**
  * The TaskList class is responsible for storing the different tasks in an ArrayList.
@@ -97,12 +97,18 @@ public class TaskList {
         this.shelf.remove(index);
     }
 
+    /**
+     * A method that finds a given task from the arraylist based on the respomse given.
+     * It will return all tasks that contains the keyword that was specified.
+     *
+     * @param response The string that will be identified from the tasks
+     */
     public void find(String response) {
         Iterator<Task> iter = shelf.iterator();
         ArrayList<Task> temp = new ArrayList<>();
         while (iter.hasNext()) {
             Task book = iter.next();
-            if(book.getName().contains(response)){
+            if (book.getName().contains(response)) {
                 temp.add(book);
             }
         }

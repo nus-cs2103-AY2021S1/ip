@@ -1,12 +1,15 @@
 package duke;
 
+import java.io.File;
+import java.util.Scanner;
+
 import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
 import duke.ui.UI;
 
-import java.util.Scanner;
-import java.io.File;
+
+
 
 /**
  * The Duke program implements a chatbot application that would take in the input from
@@ -17,7 +20,7 @@ public class Duke {
     /**
      * Empty line to be printed after each command
      */
-    private final static String LINE = "*********************************************************";
+    private static final String LINE = "*********************************************************";
     /**
      * Parser that makes sense of the user's inputs
      */
