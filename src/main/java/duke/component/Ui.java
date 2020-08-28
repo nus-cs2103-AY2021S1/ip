@@ -5,10 +5,10 @@ import java.util.function.Predicate;
 import duke.task.Task;
 
 public interface Ui {
-    public void print(String str);
-    public String printList(TaskList list, Predicate<Task> predicate, String note);
-    public void output(String message);
-    public String readInput();
-    public String greeting();
-    public void close();
+    void print(String str);
+    String printList(TaskList list, Predicate<Task> predicate, String note);
+    void output(String message);
+    String readInput();
+    String greeting();
+    void close();
 }
