@@ -2,7 +2,7 @@ package duke;
 
 import java.time.LocalDate;
 
-public class Event extends Task {
+class Event extends Task {
 
     public Event(String description, boolean isDone, LocalDate time) {
         super(description, isDone, time);

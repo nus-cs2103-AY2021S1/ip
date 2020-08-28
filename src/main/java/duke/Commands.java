@@ -1,6 +1,6 @@
 package duke;
 
-public enum Commands {
+enum Commands {
     BYE,
     DONE,
     LIST,

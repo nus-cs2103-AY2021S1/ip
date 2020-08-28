@@ -8,9 +8,9 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
-public class TaskList {
+class TaskList {
 
-    public void addDeadline(Ui ui, ArrayList<Task> list, String str, boolean isNew, boolean condition)
+    public void addDeadline(Ui ui, ArrayList<Task> list, String str, boolean isNew, boolean isDone)
             throws InvalidDeadlineException {
         String[] deadline;
         if (isNew) {
@@ -29,7 +29,7 @@ public class TaskList {
         }
         String description = deadline[0].trim();
         try {
-            Deadline curr = new Deadline(description, false, LocalDate.parse(deadline[1].trim()));
+            Deadline curr = new Deadline(description, isDone, LocalDate.parse(deadline[1].trim()));
             list.add(curr);
             if (isNew) {
                 ui.describeTask(list, curr);
@@ -39,7 +39,8 @@ public class TaskList {
         }
     }
 
-    public void addEvent(Ui ui, ArrayList<Task> list, String str, boolean isNew, boolean condition) throws InvalidEventException {
+    public void addEvent(Ui ui, ArrayList<Task> list, String str, boolean isNew, boolean isDone)
+            throws InvalidEventException {
         String[] event;
         if (isNew) {
             event = str.split("/at");
@@ -57,7 +58,7 @@ public class TaskList {
         }
         String description = event[0].trim();
         try {
-            Event curr = new Event(description, condition, LocalDate.parse(event[1].trim()));
+            Event curr = new Event(description, isDone, LocalDate.parse(event[1].trim()));
             list.add(curr);
             if (isNew) {
                 ui.describeTask(list, curr);
@@ -67,13 +68,13 @@ public class TaskList {
         }
     }
 
-    public void addTodo(Ui ui, ArrayList<Task> list, String str, boolean isNew, boolean condition)
+    public void addTodo(Ui ui, ArrayList<Task> list, String str, boolean isNew, boolean isDone)
             throws InvalidTodoException {
         String description = str.trim();
         if (description.equals("")) {
             throw new InvalidTodoException("☹ Todo description must be specified.");
         }
-        Todo curr = new Todo(description, condition);
+        Todo curr = new Todo(description, isDone);
         list.add(curr);
         if (isNew) {
             ui.describeTask(list, curr);

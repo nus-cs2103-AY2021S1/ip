@@ -1,2 +1,2 @@
-[T][✗] read book
-[E][✗] eat shit on 2019-12-01
+[T][V] read book
+[E][X] eat shit on 2019-12-01

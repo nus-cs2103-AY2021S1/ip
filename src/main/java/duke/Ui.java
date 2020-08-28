@@ -2,13 +2,13 @@ package duke;
 
 import java.util.ArrayList;
 
-public class Ui {
+class Ui {
 
     public static void buildChatSeparator() {
         System.out.println("____________________________________________________________");
     }
 
-    public static void bye() {
+    public static void sayFarewell() {
         buildChatSeparator();
         System.out.println(" Bye. Hope to see you again soon!");
         buildChatSeparator();
@@ -54,7 +54,7 @@ public class Ui {
         buildChatSeparator();
     }
 
-    public void introduce() {
+    public void introduceDuke() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"

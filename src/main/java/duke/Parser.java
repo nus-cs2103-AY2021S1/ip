@@ -3,7 +3,7 @@ package duke;
 import exception.DukeErrorException;
 import exception.UnknownCommandException;
 
-public class Parser {
+class Parser {
 
     public static Commands processInput(String commandString) throws UnknownCommandException {
         Commands cmd = Commands.valueOf(commandString);
