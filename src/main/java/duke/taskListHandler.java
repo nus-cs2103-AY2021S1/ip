@@ -45,7 +45,7 @@ public class taskListHandler {
         this.tasks = new ArrayList<>();
         Ui.drawTopBorder();
         Ui.indent(1);
-        System.out.println("The list of tasks has been cleared.");
+        System.out.println("The list of tasks has successfully been cleared.");
         Ui.drawBottomBorder();
         return tasks;
     }

@@ -65,7 +65,8 @@ public class Parser {
         String lowerCaseOperation = stringArr[0].toLowerCase();
         if (stringArr.length != 2 ) {
             // if multiple tasks are given as arguments
-            throw new DukeException("\u2639 Oops, too many task numbers after " + lowerCaseOperation + "!");
+            throw new DukeException("\u2639 Oops, too many task numbers entered after "
+                + lowerCaseOperation + "!");
         }
         try {
             // Finding the actual task
@@ -91,7 +92,7 @@ public class Parser {
         // Sorts the input into a task with or without time
         try {
             // if given empty arguments or space as task
-            String afterTask = input.split(" ")[1].trim();
+            String dummyTask = input.split(" ")[1].trim();
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeException("\u2639 Oops, the description of "
                 + tasktype.toString().toLowerCase() + " cannot be empty");
@@ -122,7 +123,7 @@ public class Parser {
     }
 
     /**
-     * Processes user input into an event or a deadline a task with time.
+     * Processes user input into an event or a deadline, which are both tasks with time.
      *
      * @param input User input.
      * @param tasktype Type of task.
