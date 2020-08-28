@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 
 public class DataStorage {
@@ -8,10 +10,10 @@ public class DataStorage {
     public static void init() throws DukeException{
         commandInit.add(new Bye());
         commandInit.add(new Clear());
-        commandInit.add(new Deadline("init","by","startOfEpoch"));
+        commandInit.add(new Deadline("init","by",LocalDate.MAX,LocalTime.MIDNIGHT));
         commandInit.add(new Delete(new String[]{"",""}));
         commandInit.add(new Done(new String[]{"",""}));
-        commandInit.add(new Event("init","on","startOfEpoch"));
+        commandInit.add(new Event("init","on",LocalDate.MAX,LocalTime.MIDNIGHT));
         commandInit.add(new Help(new String[]{"help"}));
         commandInit.add(new Ls());
         commandInit.add(new ToDo("init"));
