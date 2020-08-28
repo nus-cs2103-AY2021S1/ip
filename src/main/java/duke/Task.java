@@ -18,12 +18,6 @@ public class Task {
         this.isDone = isDone;
     }
 
-    public String getDescription() {
-        return (isDone ? "[✓]" : "[✗]")
-                + " "
-                + description;
-    }
-
     public String getDate() {
         return date.toString();
     }
@@ -51,7 +45,7 @@ public class Task {
 
     @Override
     public String toString() {
-        return (isDone ? "[✓]" : "[✗]")
+        return (isDone ? "[V]" : "[X]")
                 + " "
                 + description;
     }
