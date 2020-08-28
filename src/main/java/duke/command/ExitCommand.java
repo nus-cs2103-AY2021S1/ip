@@ -1,15 +1,16 @@
-package Duke.command;
+package duke.command;
 
-import Duke.storage.Storage;
-import Duke.task.TaskList;
-import Duke.ui.Ui;
+import duke.storage.Storage;
+import duke.task.TaskList;
+import duke.ui.Ui;
 
 /**
- * Represents a Command to list the tasks in the TaskList.
+ * Represents a Command to exit the program
  */
-public class ListCommand extends Command {
+public class ExitCommand extends Command {
+
 	/**
-	 * Lists the tasks in the TaskList object.
+	 * Exits the program for the user.
 	 *
 	 * @param tasks TaskList object containing the list of tasks.
 	 * @param ui Ui object to output messages to the user.
@@ -17,16 +18,16 @@ public class ListCommand extends Command {
 	 */
 	@Override
 	public void execute(TaskList tasks, Ui ui, Storage storage) {
-		ui.printList(tasks);
+		ui.printExit();
 	}
 
 	/**
-	 * Returns false to indicate that the Command does not exit the program.
+	 * Returns true to indicate that the Command exits the program.
 	 *
 	 * @return Exit program indicator
 	 */
 	@Override
 	public boolean isExit() {
-		return false;
+		return true;
 	}
 }

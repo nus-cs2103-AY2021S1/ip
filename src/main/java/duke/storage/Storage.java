@@ -1,8 +1,8 @@
-package Duke.storage;
+package duke.storage;
 
-import Duke.exception.DukeException;
-import Duke.task.Task;
-import Duke.task.TaskList;
+import duke.exception.DukeException;
+import duke.task.Task;
+import duke.task.TaskList;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -19,8 +19,7 @@ import java.util.Scanner;
  */
 public class Storage {
 
-
-	public final Path path;
+	private final Path path;
 
 	/**
 	 * Takes in a given filePath and saves it for reference
@@ -28,9 +27,7 @@ public class Storage {
 	 * @param filePath file path from user input
 	 */
 	public Storage(String filePath) {
-
 		path = Paths.get(filePath);
-
 	}
 
 	/**
@@ -43,7 +40,10 @@ public class Storage {
 	 */
 	public String load() throws DukeException {
 		if (Files.exists((path))) {
-			File f = new File(String.valueOf(this.path)); // create a File for the given file path
+
+			// create a File for the given file path
+			File f = new File(String.valueOf(this.path));
+
 			try {
 				Scanner s = new Scanner(f);
 				String list = "";
@@ -94,7 +94,8 @@ public class Storage {
 	 */
 	public void appendToFile(String filePath, String textToAppend) {
 		try {
-			FileWriter fw = new FileWriter(filePath, true); // create a FileWriter in append mode
+			// create a FileWriter in append mode
+			FileWriter fw = new FileWriter(filePath, true);
 			fw.write(textToAppend);
 			fw.close();
 		} catch (IOException e) {

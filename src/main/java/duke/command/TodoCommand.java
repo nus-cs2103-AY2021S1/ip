@@ -1,10 +1,10 @@
-package Duke.command;
+package duke.command;
 
-import Duke.storage.Storage;
-import Duke.task.Task;
-import Duke.task.TaskList;
-import Duke.task.Todo;
-import Duke.ui.Ui;
+import duke.storage.Storage;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.Todo;
+import duke.ui.Ui;
 
 /**
  * Represents a Command to add a new Todo object to the TaskList

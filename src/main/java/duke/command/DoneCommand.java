@@ -1,16 +1,14 @@
-package Duke.command;
+package duke.command;
 
-import Duke.exception.DukeException;
-import Duke.storage.Storage;
-import Duke.task.Task;
-import Duke.task.TaskList;
-import Duke.ui.Ui;
+import duke.exception.DukeException;
+import duke.storage.Storage;
+import duke.task.TaskList;
+import duke.ui.Ui;
 
 /**
- * Represents a Command to delete an existing object in the TaskList
+ * Represents a Command to mark an existing object in the TaskList as done
  */
-public class DeleteCommand extends Command {
-
+public class DoneCommand extends Command {
 
 	private final String markItem;
 
@@ -19,16 +17,16 @@ public class DeleteCommand extends Command {
 	 *
 	 * @param secondArg String argument to specify the Task to delete.
 	 */
-	public DeleteCommand(String secondArg) {
+	public DoneCommand(String secondArg) {
 		markItem = secondArg;
 	}
 
 	/**
 	 *  Processes the String attribute markItem to make sure that a valid Task number
-	 *  is given. The Task will be deleted from the TaskList if it is valid. Otherwise a
-	 *  DukeException will be thrown. The Storage is updated with this deletion and the
-	 *  Ui Object will print out a relevant message to notify the user on this deletion
-	 *  or exception.
+	 *  is given. The Task will be marked as done from the TaskList if it is valid.
+	 *  Otherwise a DukeException will be thrown. The Storage is updated with this deletion
+	 *  and the Ui Object will print out a relevant message to notify the user on this
+	 *  deletion or exception.
 	 *
 	 * @param tasks TaskList object containing the list of tasks.
 	 * @param ui Ui object to output messages to the user.
@@ -38,7 +36,7 @@ public class DeleteCommand extends Command {
 	@Override
 	public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
 
-		//check if second argument is integer & valid
+		//check if second argument is integer
 		try {
 			if ((Integer.parseInt(this.markItem) < 1) || (Integer.parseInt(this.markItem) > tasks.getSize())) {
 				throw new DukeException("Please enter a valid item number from the list!");
@@ -47,15 +45,13 @@ public class DeleteCommand extends Command {
 
 		//second argument wrong format
 		catch (NumberFormatException e) {
-			throw new DukeException("Please only input 'delete <item number>' with no other inputs!");
+			throw new DukeException("Please only input 'done <item number>' with no other inputs!");
 		}
-		int deleteIndex = Integer.parseInt(this.markItem);
+		int doneIndex = Integer.parseInt(this.markItem);
 
-		//delete task
-		Task deletedItem = tasks.delete(deleteIndex);
+		tasks.markDone(doneIndex);
 
-		//print output
-		ui.printTaskDeleted(tasks, deletedItem);
+		ui.printTaskDone(tasks.getList().get(doneIndex-1));
 
 		//update storage
 		storage.saveListToHardDisk(tasks);
@@ -71,5 +67,3 @@ public class DeleteCommand extends Command {
 		return false;
 	}
 }
-
-

@@ -1,11 +1,11 @@
-package Duke;
+package duke;
 
-import Duke.command.Command;
-import Duke.exception.DukeException;
-import Duke.parser.Parser;
-import Duke.storage.Storage;
-import Duke.task.TaskList;
-import Duke.ui.Ui;
+import duke.command.Command;
+import duke.exception.DukeException;
+import duke.parser.Parser;
+import duke.storage.Storage;
+import duke.task.TaskList;
+import duke.ui.Ui;
 
 /**
  * The Dukenizer program implements a Task Manager application. It performs task manipulations
@@ -26,16 +26,17 @@ public class Duke {
 	 * @param filePath Relative filepath from project source.
 	 * */
 	public Duke(String filePath) {
+
 		//initialize User interface
 		ui = new Ui();
 
+		//Initialize Storage location
 		storage = new Storage(filePath);
 
 		//Initialize TaskList
 		try {
 			tasks = new TaskList(storage.load());
 		} catch (DukeException e) {
-//			ui.showLoadingError();
 			tasks = new TaskList();
 			storage.writeToFile(storage.getPath().toString(), "");
 		}
@@ -69,7 +70,6 @@ public class Duke {
 
 
 	public static void main(String[] args) {
-
 		new Duke("DukenizerTaskList.txt").run();
 	}
 

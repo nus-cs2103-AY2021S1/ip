@@ -1,4 +1,4 @@
-package Duke.task;
+package duke.task;
 
 /**
  * Represents an Task. It has a description, a done indicator and a String representation
@@ -25,7 +25,8 @@ public class Task {
      * @return done status
      */
     public String getStatusIcon() {
-        return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
+        //return tick or X symbols
+        return (isDone ? "\u2713" : "\u2718");
     }
 
     /**

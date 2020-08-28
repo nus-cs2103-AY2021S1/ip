@@ -1,33 +1,32 @@
-package Duke.command;
+package duke.command;
 
-import Duke.storage.Storage;
-import Duke.task.Event;
-import Duke.task.Task;
-import Duke.task.TaskList;
-import Duke.ui.Ui;
+import duke.storage.Storage;
+import duke.task.Deadline;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.ui.Ui;
 
 /**
- * Represents a Command to add a new Event object to the TaskList
+ * Represents a Command to add a new Deadline object to the TaskList
  */
-public class EventCommand extends Command {
-
+public class DeadlineCommand extends Command {
 
 	private String description;
-	private String at;
+	private String by;
 
 	/**
 	 * Constructor takes in a String description and a String time.
 	 *
-	 * @param description String description of the Event Task Object.
-	 * @param at String time of the Event Task Object.
+	 * @param description String description of the Deadline Task Object.
+	 * @param by String due time of the Deadline Task Object.
 	 */
-	public EventCommand(String description, String at) {
+	public DeadlineCommand(String description, String by) {
 		this.description = description;
-		this.at = at;
+		this.by = by;
 	}
 
 	/**
-	 * Creates a new Event Task and adds it into the TaskList. The Storage
+	 * Creates a new Deadline Task and adds it into the TaskList. The Storage
 	 * is updated with the latest Task and the Ui Object will print out a
 	 * relevant message to notify the user on this addition.
 	 *
@@ -37,16 +36,16 @@ public class EventCommand extends Command {
 	 */
 	@Override
 	public void execute(TaskList tasks, Ui ui, Storage storage) {
-		Task event = new Event(this.description, this.at);
-		tasks.add(event);
+		Task deadline = new Deadline(this.description, this.by);
+		tasks.add(deadline);
 
 		//print output
-		ui.printTaskAdded(tasks, event);
+		ui.printTaskAdded(tasks, deadline);
 
 		//update storage
 		storage.saveListToHardDisk(tasks);
-
 	}
+
 
 	/**
 	 * Returns false to indicate that the Command does not exit the program.
