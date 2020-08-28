@@ -30,9 +30,9 @@ import java.util.ArrayList;
 public class Parser {
 
     /** The formatter for user inputs. */
-    final DateTimeFormatter FORMATTER_INPUT = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    private static final DateTimeFormatter FORMATTER_INPUT = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     /** The formatter for user inputs that are displayed in the list saved in the hard disk. */
-    final DateTimeFormatter FORMATTER_DISPLAY = DateTimeFormatter.ofPattern("MMM dd yyyy");
+    private static final DateTimeFormatter FORMATTER_DISPLAY = DateTimeFormatter.ofPattern("MMM dd yyyy");
 
     /** Parses the user inputs into a suitable format for Duke to process.
      *
