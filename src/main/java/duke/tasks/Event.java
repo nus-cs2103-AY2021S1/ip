@@ -3,6 +3,7 @@ package duke.tasks;
 import duke.DukeException;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
@@ -32,14 +33,19 @@ public class Event extends Task {
         return this.date;
     }
 
-    private String convertDate() {
+    private String convertDateAndTime() {
         String d1 = "";
         String[] descriptions = date.split(" ");
         for (int i = 0; i < descriptions.length; i++) {
             try {
                 d1 += " " + LocalDate.parse(descriptions[i]).format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
             } catch (DateTimeParseException e) {
-                d1 += " " + descriptions[i];
+                try {
+                    String decideAMorPm = LocalTime.parse(descriptions[i]).isAfter(LocalTime.NOON) ? "pm" : "am";
+                    d1 += " " + LocalTime.parse(descriptions[i]).format(DateTimeFormatter.ofPattern("hh:mm")) + decideAMorPm;
+                } catch (DateTimeParseException e2) {
+                    d1 += " " + descriptions[i];
+                }
             }
         }
         return d1;
@@ -67,7 +73,37 @@ public class Event extends Task {
             }
             return false;
         } catch (DateTimeParseException e) {
-            throw new DukeException("Invalid date.");
+            throw new DukeException("invalid date. Put in format 'YYYY MM DD'.");
+        }
+    }
+
+    /**
+     * Checks if the time provided exists in the list.
+     *
+     * @param time time that is being searched for in the list.
+     * @return true or false if time is in list or not.
+     * @throws DukeException if description provided does not match format of time.
+     */
+    public boolean hasTime(String time) throws DukeException {
+        try {
+            LocalTime d1 = LocalTime.parse(time);
+            LocalTime d2 = null;
+            String[] descriptions = date.split(" ");
+            for (int i = 0; i < descriptions.length; i++) {
+                try {
+                    d2 = LocalTime.parse(descriptions[i]);
+                    if (d2.equals(d1)) {
+                        return d2.equals(d1);
+                    } else {
+                        continue;
+                    }
+                } catch (DateTimeParseException e) {
+                    continue;
+                }
+            }
+            return false;
+        } catch (DateTimeParseException e) {
+            throw new DukeException("invalid Time. Put in format 'HH:mm'.");
         }
     }
 
@@ -77,6 +113,6 @@ public class Event extends Task {
      * @return task in the form of a string.
      */
     public String toString() {
-        return "[E][" + getStatusIcon() + "] " + description + "(at:" + convertDate() + ")";
+        return "[E][" + getStatusIcon() + "] " + description + "(at:" + convertDateAndTime() + ")";
     }
 }

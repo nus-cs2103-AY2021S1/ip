@@ -79,13 +79,22 @@ public class Parser {
             command = Commands.FIND;
             this.description = description.substring(5);
             return new FindCommand(this.description);
+        } else if (description.length() >= 4 && description.startsWith(("time"))) {
+            if (description.substring(3).split(" ").length == 1 || description.substring(3).split(" ").length > 2) {
+                throw new DukeException(("you need to input a legit time for e.g: 18:00, no more and no less."));
+            }
+            command = Commands.TIME;
+            this.description = description.substring(5);
+            return new TimeCommand(this.description);
         } else if (description.equals("bye")) {
             return new ByeCommand();
         } else if (entered) {
             throw new DukeException("you gotta put in a correct command.");
         } else {
             entered = true;
-            throw new DukeException("type in 'todo', 'deadline', 'event' to start!\nAlso, type 'date' and key in a date in YYYY-MM-DD format to search for events/deadlines happening on that date!");
+            throw new DukeException("type in 'todo', 'deadline', 'event' to start!\n" +
+                    "Also, type 'date' and key in a date in YYYY-MM-DD format to search for events/deadlines happening on that date!\n" +
+                    " Or type 'time' and key in time in HH:mm format to search for events/deadline happening on that time!");
         }
     }
 }
