@@ -1,11 +1,23 @@
 package duke;
 
 import java.time.format.DateTimeParseException;
-import java.util.Arrays;
 
-import duke.command.*;
-import duke.exception.*;
-import duke.task.*;
+import duke.command.AddCommand;
+import duke.command.ByeCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
+
+import duke.exception.DukeEmptyInputException;
+import duke.exception.DukeInvalidCommandException;
+import duke.exception.DukeInvalidDateTimeException;
+import duke.exception.DukeInvalidKeywordException;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Todo;
 
 /**
  * Responsible for parsing user inputs.
@@ -19,39 +31,40 @@ public class Parser {
      * @throws DukeInvalidDateTimeException If date and time input is invalid.
      * @throws DukeInvalidCommandException If command is invalid.
      */
-    static Command parse(String fullCommand) throws DukeEmptyInputException, DukeInvalidDateTimeException, DukeInvalidCommandException, DukeInvalidKeywordException {
+    static Command parse(String fullCommand) throws DukeEmptyInputException, DukeInvalidDateTimeException,
+            DukeInvalidCommandException, DukeInvalidKeywordException {
         String[] commandArr = fullCommand.trim().split(" ", 2);
         switch(commandArr[0]) {
-            case "bye":
-                return parseBye();
-            case "list":
-                return parseList();
-            case "done":
-                return parseDone(Integer.parseInt(commandArr[1]));
-            case "delete":
-                return parseDelete(Integer.parseInt(commandArr[1]));
-            case "find":
-                if(commandArr.length < 2) {
-                    throw new DukeInvalidKeywordException();
-                }
-                return parseFind(commandArr[1]);
-            case "todo":
-                if(commandArr.length < 2) {
-                    throw new DukeEmptyInputException("The description of a todo cannot be empty.");
-                }
-                return parseToDo(commandArr[1]);
-            case "deadline":
-                if(commandArr.length < 2) {
-                    throw new DukeEmptyInputException("The description of a todo cannot be empty.");
-                }
-                return parseDeadline(commandArr[1]);
-            case "event":
-                if(commandArr.length < 2) {
-                    throw new DukeEmptyInputException("The description of a todo cannot be empty.");
-                }
-                return parseEvent(commandArr[1]);
-            default:
-                throw new DukeInvalidCommandException("Unknown command.");
+        case "bye":
+            return parseBye();
+        case "list":
+            return parseList();
+        case "done":
+            return parseDone(Integer.parseInt(commandArr[1]));
+        case "delete":
+            return parseDelete(Integer.parseInt(commandArr[1]));
+        case "find":
+            if (commandArr.length < 2) {
+                throw new DukeInvalidKeywordException();
+            }
+            return parseFind(commandArr[1]);
+        case "todo":
+            if (commandArr.length < 2) {
+                throw new DukeEmptyInputException("The description of a todo cannot be empty.");
+            }
+            return parseToDo(commandArr[1]);
+        case "deadline":
+            if (commandArr.length < 2) {
+                throw new DukeEmptyInputException("The description of a todo cannot be empty.");
+            }
+            return parseDeadline(commandArr[1]);
+        case "event":
+            if (commandArr.length < 2) {
+                throw new DukeEmptyInputException("The description of a todo cannot be empty.");
+            }
+            return parseEvent(commandArr[1]);
+        default:
+            throw new DukeInvalidCommandException("Unknown command.");
         }
     }
 

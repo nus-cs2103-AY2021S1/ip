@@ -1,38 +1,44 @@
-import duke.*;
-import duke.task.*;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import duke.TaskList;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
+
 
 public class TaskListTest {
-    TaskList taskList;
+    private TaskList taskList;
 
     @BeforeEach
-    public void initTaskList(){
+    public void initTaskList() {
         // Initialize an empty task list before each test
         taskList = new TaskList();
     }
 
     @Test
-    void addTodo_normalInput_success(){
+    void addTodo_normalInput_success() {
         Todo todo = new Todo("borrow book");
         taskList.addTask(todo);
         assertEquals(taskList.get(0).toString(), "[T][✗] borrow book");
     }
 
     @Test
-    void addEvent_normalInput_success(){
+    void addEvent_normalInput_success() {
         Event event = new Event("project meeting", "06-06-2020 11:00");
         taskList.addTask(event);
         assertEquals(taskList.get(0).toString(), "[E][✗] project meeting (at: 6 Jun 2020, 11:00 am)");
     }
 
     @Test
-    void addDeadline_normalInput_success(){
+    void addDeadline_normalInput_success() {
         Deadline deadline = new Deadline("return book", "06-08-2020 12:00");
         taskList.addTask(deadline);
         assertEquals(taskList.get(0).toString(),
@@ -40,7 +46,7 @@ public class TaskListTest {
     }
 
     @Test
-    void size_normalInput_success(){
+    void size_normalInput_success() {
         Deadline deadline = new Deadline("return book", "06-08-2020 12:00");
         taskList.addTask(deadline);
         Event event = new Event("project meeting", "06-06-2020 11:00");
@@ -50,7 +56,7 @@ public class TaskListTest {
     }
 
     @Test
-    void completeTask_normalInput_success(){
+    void completeTask_normalInput_success() {
         Deadline deadline = new Deadline("return book", "06-08-2020 12:00");
         taskList.addTask(deadline);
         taskList.completeTask(1);
@@ -59,7 +65,7 @@ public class TaskListTest {
     }
 
     @Test
-    void deleteTask_normalInput_success(){
+    void deleteTask_normalInput_success() {
         Deadline deadline = new Deadline("return book", "06-08-2020 12:00");
         taskList.addTask(deadline);
         Event event = new Event("project meeting", "06-06-2020 11:00");

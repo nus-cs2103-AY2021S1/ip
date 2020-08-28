@@ -1,8 +1,12 @@
 package duke.command;
 
-import duke.*;
-import duke.task.*;
-import duke.exception.*;
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
+
+import duke.exception.DukeLoadingErrorException;
+
+import duke.task.Task;
 
 /**
  * Represents a command that marks a task as completed.

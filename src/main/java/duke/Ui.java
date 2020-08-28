@@ -2,7 +2,8 @@ package duke;
 
 import java.util.List;
 import java.util.Scanner;
-import duke.task.*;
+
+import duke.task.Task;
 
 /**
  * Responsible for interactions with the user.
@@ -12,7 +13,7 @@ public class Ui {
     /**
      * Scanner used for operations.
      */
-    Scanner s;
+    private Scanner s;
 
     /**
      * Creates a new instance of a Ui object.
@@ -62,7 +63,7 @@ public class Ui {
      * @param searchResult Search result for task list.
      */
     public void printSearchResult(List<Task> searchResult) {
-        if(searchResult.size() < 1) {
+        if (searchResult.size() < 1) {
             System.out.println("There are no matching results!");
         } else {
             System.out.println("Here are the matching tasks in your list:");

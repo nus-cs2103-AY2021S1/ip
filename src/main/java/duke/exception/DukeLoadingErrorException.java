@@ -3,7 +3,7 @@ package duke.exception;
 /**
  * Represents a DukeException in which a loading error has occurred.
  */
-public class DukeLoadingErrorException extends DukeException{
+public class DukeLoadingErrorException extends DukeException {
     /**
      * Constructor.
      */
