@@ -22,6 +22,7 @@ public class Duke {
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
+        
         try {
             tasks = new TaskList(storage.load());
         } catch (Exception e) {
@@ -43,6 +44,7 @@ public class Duke {
                 Command c = Parser.parse(fullCommand);
                 c.execute(tasks, ui, storage);
                 isExit = c.isExit();
+                storage.write(tasks); // temporary until having better implementation
             } catch (DukeException e) {
                 ui.showError(e.getMessage());
             }
