@@ -12,19 +12,19 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class DeadlineTest {
 
     @Test
-    public void createTask_dateOnly_Success() {
+    public void createTask_dateOnly_success() {
         Deadline deadline = Deadline.createTask("return book by 20-03-2019");
         assertEquals("[D][\u2718] return book (by: 20 Mar 2019)", deadline.toString());
     }
 
     @Test
-    public void createTask_dateTime_Success() {
+    public void createTask_dateTime_success() {
         Deadline deadline = Deadline.createTask("IP Project A-JUnit by 20-03-2019 23:59");
         assertEquals("[D][\u2718] IP Project A-JUnit (by: 20 Mar 2019 23:59)", deadline.toString());
     }
 
     @Test
-    public void createTask_unrecognisedDate_Failure() {
+    public void createTask_unrecognisedDate_throwsException() {
         DukeException thrown = assertThrows(DukeException.class, () -> {
             Deadline deadline = Deadline.createTask("Fix parsing by 20th January 2019");
         });
@@ -32,7 +32,7 @@ public class DeadlineTest {
     }
 
     @Test
-    public void createTask_unrecognisedTime_Failure() {
+    public void createTask_unrecognisedTime_throwsException() {
         DukeException thrown = assertThrows(DukeException.class, () -> {
             Deadline deadline = Deadline.createTask("Fix parsing by 20-03-2019 1200");
         });
@@ -40,7 +40,7 @@ public class DeadlineTest {
     }
 
     @Test
-    public void createTask_withoutDate_Failure() {
+    public void createTask_withoutDate_throwsException() {
         DukeException thrown = assertThrows(DukeTaskCreationException.class, () -> {
             Deadline deadline = Deadline.createTask("Submit homework");
         });
@@ -48,7 +48,7 @@ public class DeadlineTest {
     }
 
     @Test
-    public void createTask_withoutDescription_Failure() {
+    public void createTask_withoutDescription_throwsException() {
         DukeException thrown = assertThrows(DukeTaskCreationException.class, () -> {
             Deadline deadline = Deadline.createTask(null);
         });
@@ -68,7 +68,7 @@ public class DeadlineTest {
     }
 
     @Test
-    public void decode_missingCompletion_failure() {
+    public void decode_missingCompletion_throwsException() {
         DukeException thrown = assertThrows(DukeStorageException.class, () -> {
             Deadline deadline = Deadline.decode("D|1 Jan 2020 11:59|Description");
         });
@@ -76,7 +76,7 @@ public class DeadlineTest {
     }
 
     @Test
-    public void decode_missingDescription_failure() {
+    public void decode_missingDescription_throwsException() {
         DukeException thrown = assertThrows(DukeStorageException.class, () -> {
             Deadline deadline = Deadline.decode("D|N");
         });
@@ -84,7 +84,7 @@ public class DeadlineTest {
     }
 
     @Test
-    public void decode_incorrectCompletion_failure() {
+    public void decode_incorrectCompletion_throwsException() {
         DukeException thrown = assertThrows(DukeStorageException.class, () -> {
             Deadline deadline = Deadline.decode("D|X|Description");
         });
@@ -92,7 +92,7 @@ public class DeadlineTest {
     }
 
     @Test
-    public void decode_incorrectTaskType_failure() {
+    public void decode_incorrectTaskType_throwsException() {
         DukeException thrown = assertThrows(DukeStorageException.class, () -> {
             Deadline deadline = Deadline.decode("E|X|Description");
         });

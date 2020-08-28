@@ -18,7 +18,7 @@ public class ToDoTest {
     }
 
     @Test
-    public void createTask_withoutDescription_failure() {
+    public void createTask_withoutDescription_throwsException() {
         DukeException thrown = assertThrows(DukeTaskCreationException.class, () -> {
             ToDo todo = ToDo.createTask(null);
         });
@@ -38,7 +38,7 @@ public class ToDoTest {
     }
 
     @Test
-    public void decode_missingCompletion_failure() {
+    public void decode_missingCompletion_throwsException() {
         DukeException thrown = assertThrows(DukeStorageException.class, () -> {
             ToDo todo = ToDo.decode("T|Description");
         });
@@ -46,7 +46,7 @@ public class ToDoTest {
     }
 
     @Test
-    public void decode_missingDescription_failure() {
+    public void decode_missingDescription_throwsException() {
         DukeException thrown = assertThrows(DukeStorageException.class, () -> {
             ToDo todo = ToDo.decode("T|N");
         });
@@ -54,7 +54,7 @@ public class ToDoTest {
     }
 
     @Test
-    public void decode_incorrectCompletion_failure() {
+    public void decode_incorrectCompletion_throwsException() {
         DukeException thrown = assertThrows(DukeStorageException.class, () -> {
             ToDo todo = ToDo.decode("T|X|Description");
         });
@@ -62,7 +62,7 @@ public class ToDoTest {
     }
 
     @Test
-    public void decode_incorrectTaskType_failure() {
+    public void decode_incorrectTaskType_throwsException() {
         DukeException thrown = assertThrows(DukeStorageException.class, () -> {
             ToDo todo = ToDo.decode("E|X|Description");
         });
