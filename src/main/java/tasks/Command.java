@@ -10,6 +10,7 @@ public enum Command {
     todo("todo"),
     deadline("deadline"),
     event("event"),
+    search("find"),
     blank("");
     private final String code;
     private Command(String code){

@@ -56,6 +56,8 @@ class Duke {
                     return list.deleteTask(words[1]);
                 case list:
                     return list.parseoutput();
+                case search:
+                    return list.findTasks(words[1]);
                 case todo:
                     return this.list.addToDo(text_input);
                 case deadline:
@@ -100,9 +102,11 @@ class Duke {
         b.append("\t- 'bye' to close the application\n");
         b.append("\t- 'list' to list the current list of tasks and their statuses\n");
         b.append("\t- 'done' to set a task as done\n");
+        b.append("\t- 'find' to find a task using regex or a query text string\n");
         b.append("\t- 'todo' to list a untimed task\n");
-        b.append("\t- 'deadline' to list a timed deadline task, please structure with [deadline <task name> /by <time>]\n");
-        b.append("\t- 'event' to list a timed event task, please structure with [event <task name> /at <time>\n");
+        b.append("\t- 'deadline' to list a timed deadline task, please structure with " +
+                "[deadline <task name> /by dd-MM-YYYY]\n");
+        b.append("\t- 'event' to list a timed event task, please structure with [event <task name> /at dd-MM-YYYY]\n");
         b.append("\t- 'help' to list these commands again\n");
         //eventually to add command help <command>
         return b.toString();

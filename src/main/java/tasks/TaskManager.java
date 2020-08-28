@@ -7,6 +7,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 public class TaskManager {
     private final List<Task> taskList;
@@ -160,5 +161,26 @@ public class TaskManager {
      */
     public void saveTasks() throws DukeIOException{
         ioparser.writeTask(taskList);
+    }
+
+    public String findTasks(String pattern) {
+        StringBuilder sb = new StringBuilder("");
+        if (this.taskList.size()>0) {
+            Pattern stringPattern = Pattern.compile(pattern); 
+            for (int i=0; i<taskList.size(); i++){
+                if (stringPattern.matcher(taskList.get(i).getDescription()).find()){
+                    sb.append("\t").append(i + 1)
+                            .append(". ")
+                            .append(this.taskList.get(i).toString())
+                            .append("\n");
+                }
+            }
+            if (sb.toString().isEmpty()){
+                sb.append("\tCannot find a valid task in your list");
+            }
+        }else{
+            sb.append("\tThere are no tasks in your list!\n");
+        }
+        return sb.toString();
     }
 }
