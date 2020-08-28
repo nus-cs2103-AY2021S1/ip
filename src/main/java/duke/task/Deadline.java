@@ -28,10 +28,8 @@ public class Deadline extends Task {
      */
     @Override
     public String toFileString() {
-        LocalDate localDate = LocalDate.parse(by);
-        String formattedDate = localDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
         String done = super.isDone ? "1" : "0";
-        return "D | " + done + " | " + super.description + " | " +  formattedDate;
+        return "D | " + done + " | " + super.description + " | " +  by;
     }
 
     @Override

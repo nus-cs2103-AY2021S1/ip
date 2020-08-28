@@ -7,11 +7,11 @@ import java.util.Scanner;
  * @author Tee Kok Siang
  */
 public class Ui {
-    private static final String DIVIDER = "\n\t-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-\n";
     private final Scanner scanner = new Scanner(System.in);
 
     public void printResponse(String message) {
-        System.out.println(DIVIDER.concat("\t".concat(message.concat("\n"))).concat(DIVIDER));
+        String divider = "\n\t-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-\n";
+        System.out.println(divider.concat("\t".concat(message.concat("\n"))).concat(divider));
     }
 
     public void showWelcome() {

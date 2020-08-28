@@ -26,14 +26,17 @@ public class Parser {
         return message.toString();
     }
 
-    private static int extractTaskNumber(String command) {
+    private static int extractTaskNumber(String command) throws DukeException {
         List<String> words = Arrays.asList(command.split(" "));
         if (words.size() != 2) {
-            throw new IllegalArgumentException("Please type \"[action] [task number]\"");
+            throw new DukeException(":( Oops!!! Please type \"[action] [task number]\"");
         } else {
             // convert the task number into int
-            int taskNumber = Integer.parseInt(words.get(1));
-            return taskNumber;
+            try {
+                return Integer.parseInt(words.get(1));
+            } catch (NumberFormatException numberFormatException) {
+                throw new DukeException(":( Oops!!! The task number is invalid. :-(");
+            }
         }
     }
 

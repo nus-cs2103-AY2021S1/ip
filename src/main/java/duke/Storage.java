@@ -17,7 +17,7 @@ import java.util.List;
 public class Storage {
     private static final String FILE_DIR = System.getProperty("user.dir") + "/";
 
-    private List<String> dirs;
+    private final List<String> dirs;
     private String filePath;
 
     public Storage(String filePath) {
@@ -34,7 +34,7 @@ public class Storage {
                 }
                 filePath = filePath.concat(dirs.get(i)).concat("/");
                 File fileDir = new File(filePath);
-                // if directory not exists, create file
+                // if directory not exists, create directory
                 if (!fileDir.exists()) {
                     fileDir.mkdir();
                 }
