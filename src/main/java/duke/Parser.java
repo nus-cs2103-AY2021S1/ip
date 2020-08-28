@@ -42,6 +42,8 @@ public class Parser {
             return Command.DELETE;
         case ("done"):
             return Command.DONE;
+        case ("find"):
+            return Command.FIND;
         case ("bye"):
             return Command.TERMINATE;
         case ("todo"):
