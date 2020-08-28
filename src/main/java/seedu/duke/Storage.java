@@ -1,6 +1,6 @@
-package main.java.duke;
+package seedu.duke;
 
-import main.java.duke.task.Task;
+import seedu.duke.task.Task;
 
 import java.io.File;
 import java.io.FileWriter;

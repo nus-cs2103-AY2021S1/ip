@@ -1,6 +1,6 @@
-package main.java.duke;
+package seedu.duke;
 
-import main.java.duke.command.Command;
+import seedu.duke.command.Command;
 
 /**
  * Represents a chatbot that takes in and executes commands from the user.
@@ -21,7 +21,7 @@ public class Duke {
             this.taskList = this.storage.readTasks();
             this.ui = new Ui();
         } catch (DukeException e) {
-            System.out.println(e.getMessage());
+            // System.out.println(e.getMessage());
         }
     }
 

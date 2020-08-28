@@ -1,9 +1,9 @@
-package main.java.duke;
+package seedu.duke;
 
-import main.java.duke.task.Deadline;
-import main.java.duke.task.Event;
-import main.java.duke.task.Task;
-import main.java.duke.task.ToDo;
+import seedu.duke.task.Deadline;
+import seedu.duke.task.Event;
+import seedu.duke.task.Task;
+import seedu.duke.task.ToDo;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

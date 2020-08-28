@@ -1,10 +1,10 @@
-package main.java.duke.command;
+package seedu.duke.command;
 
-import main.java.duke.DukeException;
-import main.java.duke.Storage;
-import main.java.duke.TaskList;
-import main.java.duke.Ui;
-import main.java.duke.task.Deadline;
+import seedu.duke.DukeException;
+import seedu.duke.Storage;
+import seedu.duke.TaskList;
+import seedu.duke.Ui;
+import seedu.duke.task.Deadline;
 
 /**
  * Represents a <code>Command</code> telling Duke to create a new <code>Deadline</code>.

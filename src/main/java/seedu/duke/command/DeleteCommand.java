@@ -1,18 +1,18 @@
-package main.java.duke.command;
+package seedu.duke.command;
 
-import main.java.duke.DukeException;
-import main.java.duke.Storage;
-import main.java.duke.TaskList;
-import main.java.duke.Ui;
-import main.java.duke.task.Task;
+import seedu.duke.DukeException;
+import seedu.duke.Storage;
+import seedu.duke.TaskList;
+import seedu.duke.Ui;
+import seedu.duke.task.Task;
 
 /**
- * Represents a <code>Command</code> telling Duke to mark a certain <code>Task</code> as done.
+ * Represents a <code>Command</code> telling Duke to delete a certain <code>Task</code>.
  */
-public class DoneCommand implements Command {
+public class DeleteCommand implements Command {
     String[] command;
 
-    public DoneCommand(String[] command) {
+    public DeleteCommand(String[] command) {
         this.command = command;
     }
 
@@ -21,8 +21,8 @@ public class DoneCommand implements Command {
             throw new DukeException("Wrong format.");
         }
         try {
-            Task task = taskList.markAsDone(Integer.parseInt(command[1]));
-            ui.showTaskMarkedDone(task);
+            Task task = taskList.delete(Integer.parseInt(command[1]));
+            ui.showTaskDeleted(task);
             storage.writeToFile(taskList);
         } catch (NumberFormatException e) {
             throw new DukeException("Wrong format.");

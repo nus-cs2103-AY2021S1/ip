@@ -8,13 +8,13 @@
 
       ===================================
       ===================================
-      Error: I'm not sure what you're talking about.
+      I'm not sure what you're talking about.
       ===================================
       ===================================
       No tasks added.
       ===================================
       ===================================
-      Error: ToDo cannot be empty.
+      ToDo cannot be empty.
       ===================================
       ===================================
       Task added: [T][✗] buy textbook
@@ -23,16 +23,16 @@
       Task added: [D][✗] CS2103T project (by: 30 Aug 2020)
       ===================================
       ===================================
-      Error: Please provide date in yyyy-mm-dd format.
+      Please provide date in yyyy-mm-dd format.
       ===================================
       ===================================
       Task marked as done: [T][✓] buy textbook
       ===================================
       ===================================
-      Error: Wrong format.
+      Wrong format.
       ===================================
       ===================================
-      Error: Invalid task.
+      Invalid task.
       ===================================
       ===================================
       1. [T][✓] buy textbook

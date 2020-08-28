@@ -1,7 +1,7 @@
-package duke.task;
+package seedu.duke.task;
 
-import main.java.duke.task.Task;
-import main.java.duke.task.ToDo;
+import seedu.duke.task.Task;
+import seedu.duke.task.ToDo;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;

@@ -1,4 +1,4 @@
-package main.java.duke;
+package seedu.duke;
 
 /**
  * Represents an <code>Exception</code> that occurs when Duke is running.

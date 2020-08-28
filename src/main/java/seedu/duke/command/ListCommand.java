@@ -1,9 +1,9 @@
-package main.java.duke.command;
+package seedu.duke.command;
 
-import main.java.duke.DukeException;
-import main.java.duke.Storage;
-import main.java.duke.TaskList;
-import main.java.duke.Ui;
+import seedu.duke.DukeException;
+import seedu.duke.Storage;
+import seedu.duke.TaskList;
+import seedu.duke.Ui;
 
 import java.time.DateTimeException;
 import java.time.LocalDate;

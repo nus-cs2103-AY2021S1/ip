@@ -1,14 +1,14 @@
-package main.java.duke;
+package seedu.duke;
 
-import main.java.duke.command.ByeCommand;
-import main.java.duke.command.Command;
-import main.java.duke.command.DeadlineCommand;
-import main.java.duke.command.DeleteCommand;
-import main.java.duke.command.DoneCommand;
-import main.java.duke.command.EventCommand;
-import main.java.duke.command.FindCommand;
-import main.java.duke.command.ListCommand;
-import main.java.duke.command.ToDoCommand;
+import seedu.duke.command.ByeCommand;
+import seedu.duke.command.Command;
+import seedu.duke.command.DeadlineCommand;
+import seedu.duke.command.DeleteCommand;
+import seedu.duke.command.DoneCommand;
+import seedu.duke.command.EventCommand;
+import seedu.duke.command.FindCommand;
+import seedu.duke.command.ListCommand;
+import seedu.duke.command.ToDoCommand;
 
 /**
  * Responsible for the parsing of the user's inputs.

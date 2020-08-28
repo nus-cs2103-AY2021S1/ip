@@ -1,6 +1,6 @@
-package main.java.duke;
+package seedu.duke;
 
-import main.java.duke.task.Task;
+import seedu.duke.task.Task;
 
 import java.util.Scanner;
 
@@ -63,7 +63,7 @@ public class Ui {
      */
     public void showError(String message) {
         System.out.println(horizontalLine);
-        System.out.println(indentation + "Error: " + message);
+        System.out.println(indentation + message);
         System.out.println(horizontalLine);
     }
 

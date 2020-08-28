@@ -1,6 +1,6 @@
-package duke;
+package seedu.duke;
 
-import main.java.duke.Parser;
+import seedu.duke.Parser;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
