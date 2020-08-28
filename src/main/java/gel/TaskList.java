@@ -27,7 +27,7 @@ public class TaskList {
     }
 
     public void findDescription(String keyword) {
-        ui.showSearchResults(this.listOfTask, keyword);
+        ui.showSearchResults(this.listOfTasks, keyword);
     }
 
     public void doneTask(String input) throws GelException {
