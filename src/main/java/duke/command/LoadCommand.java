@@ -33,7 +33,12 @@ public class LoadCommand implements Command {
      */
     @Override
     public void execute() {
-        Storage.load(taskList, filePath);
+        try {
+            Storage.load(taskList, filePath);
+            System.out.println("Load: " + taskList.size() + " entries");
+        } catch (FileNotFoundException e) {
+            System.out.println("Error: File not found");
+        }
     }
 
 }
