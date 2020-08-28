@@ -7,8 +7,8 @@ import java.time.LocalDate;
  */
 public abstract class Task {
 
-    protected String description;
-    protected boolean isDone;
+    private String description;
+    private boolean isDone;
 
     /**
      * Creates and initialises a new task object.
@@ -55,7 +55,7 @@ public abstract class Task {
      *
      * @return True if the task is completed, false otherwise.
      */
-    public boolean isCompleted() {
+    public boolean getCompletionStatus() {
         return this.isDone;
     }
 

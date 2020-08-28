@@ -42,7 +42,7 @@ public class Event extends Task {
      */
     @Override
     public String taskToFileString() {
-        return "E | " + (super.isDone ? "1 |" : "0 |") + super.description + " | "
+        return "E | " + (getCompletionStatus() ? "1 |" : "0 |") + getDescription() + " | "
                 + this.eventDate.toString() + " " + this.eventTime.toString();
     }
 

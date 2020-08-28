@@ -45,7 +45,7 @@ public class CompleteTaskCommand extends Command {
                         + "Input 'list' to view the correct task ID of your desired task.";
                 throw new InvalidFunctionException(err);
             } else {
-                if (tasks.getTask(index - 1).isCompleted()) {
+                if (tasks.getTask(index - 1).getCompletionStatus()) {
                     String message = "This task has already been completed:";
                     ui.printReply(message);
                 } else {

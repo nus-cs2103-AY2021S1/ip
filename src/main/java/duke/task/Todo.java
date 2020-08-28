@@ -23,8 +23,8 @@ public class Todo extends Task {
      */
     @Override
     public String taskToFileString() {
-        return "T | " + (super.isDone ? "1 |" : "0 |")
-                + super.description;
+        return "T | " + (getCompletionStatus() ? "1 |" : "0 |")
+                + getDescription();
     }
 
     /**

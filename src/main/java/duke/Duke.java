@@ -14,7 +14,7 @@ public class Duke {
     private final TaskList taskList;
 
     /**
-     * Create and initialise a new Duke object that has a Ui, Storage and TaskList object.
+     * Creates and initialises a new Duke object that has a Ui, Storage and TaskList object.
      */
     public Duke() {
         this.ui = new Ui();
@@ -46,7 +46,7 @@ public class Duke {
     /**
      * Initialises a new DukeBot session.
      *
-     * @param args command-line arguments.
+     * @param args Command-line arguments.
      */
     public static void main(String[] args) {
         Duke session = new Duke(); // start a new session with JonasBot

@@ -42,7 +42,7 @@ public class Deadline extends Task {
      */
     @Override
     public String taskToFileString() {
-        return "D | " + (super.isDone ? "1 |" : "0 |") + super.description + " | "
+        return "D | " + (getCompletionStatus() ? "1 |" : "0 |") + getDescription() + " | "
                 + this.deadlineDate.toString() + " "+ this.deadlineTime.toString();
     }
 
