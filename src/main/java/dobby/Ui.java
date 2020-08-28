@@ -18,10 +18,17 @@ public class Ui {
             + (Commands.SCHEDULED).getUsage()
             + (Commands.BYE).getUsage();
 
+    /**
+     * Calls reply function with greeting string
+     */
     public static void greet () {
         reply("\n    Hello! I'm Dobby" + ALL_COMMANDS + "\n    How can I help you?\n    ");
     }
 
+    /**
+     * Returns string which is entered by user
+     * @return String user input
+     */
     public static String getInput() {
          String text = sc.nextLine();
          if (text.equals("bye")) {
@@ -30,6 +37,9 @@ public class Ui {
          return text;
     }
 
+    /**
+     * Prints reply message
+     */
     public static void reply(String message) {
         System.out.println("    " + UNDERSCORE + message + UNDERSCORE);
     }

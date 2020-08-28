@@ -9,6 +9,10 @@ public class Task {
         this.isDone = false;
     }
 
+    /**
+     * Returns the full description of the task object
+     * @return description full description of the Task object
+     */
     public String getDescription() {
         String checkbox = "[";
         if (this.isDone()) {

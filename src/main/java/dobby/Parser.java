@@ -20,7 +20,13 @@ public class Parser {
     public Parser (TaskList tasks) {
         this.tasks = tasks;
     }
-    // Returns the chat bot reply or the error message depending on the input
+
+    /**
+     * Returns the chat bot reply or the error message depending on the input
+     * @param text text inputted by user
+     * @return message reply to user based on input
+     * @throws DobbyException based on conditions with customised message
+     */
     public String getMessage(String text) throws DobbyException {
         String message = "";
 

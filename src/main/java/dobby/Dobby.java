@@ -19,6 +19,10 @@ public class Dobby {
         ui = new Ui();
     }
 
+    /**
+     * Takes in user input as long as user gives and terminated when user
+     * enter bye
+     */
     public void run() {
         ui.greet();
         Scanner scanner = new Scanner(System.in);
