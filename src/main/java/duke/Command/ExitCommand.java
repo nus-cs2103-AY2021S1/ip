@@ -1,19 +1,10 @@
 package duke.Command;
 
-import duke.Storage;
-
-import duke.Task.TaskList;
-
-import duke.Ui.Ui;
+import duke.Ui.Message;
 
 public class ExitCommand extends Command {
 
-    public ExitCommand() {
-        this.isExit = true;
-    }
-
-    @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
-        ui.showExit();
+    public String execute() {
+        return Message.MESSAGE_EXIT;
     }
 }
