@@ -52,6 +52,7 @@ public class AddCommand extends Command {
     public void execute(TaskList list, Storage storage) {
         list.add(createdTask);
         remainingTaskCount = list.taskCount();
+        storage.save(list);
         super.completed = true;
     }
 

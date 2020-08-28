@@ -35,6 +35,7 @@ public class DeleteCommand extends Command {
     public void execute(TaskList list, Storage storage) {
         deletedTask = list.deleteTask(index);
         remainingTaskCount = list.taskCount();
+        storage.save(list);
         super.completed = true;
     }
 

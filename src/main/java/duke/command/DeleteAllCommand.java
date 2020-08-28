@@ -20,6 +20,7 @@ public class DeleteAllCommand extends Command {
     @Override
     public void execute(TaskList list, Storage storage) {
         list.clearList();
+        storage.save(list);
         super.completed = true;
     }
 

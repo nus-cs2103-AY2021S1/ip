@@ -33,6 +33,7 @@ public class CompleteCommand extends Command {
     @Override
     public void execute(TaskList list, Storage storage) {
         completedTask = list.markAsComplete(index);
+        storage.save(list);
         super.completed = true;
     }
 
