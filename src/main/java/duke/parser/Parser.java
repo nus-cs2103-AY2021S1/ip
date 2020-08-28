@@ -1,5 +1,8 @@
 package duke.parser;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 import duke.command.AddCommand;
 import duke.command.Command;
 import duke.command.DeleteCommand;
@@ -13,9 +16,6 @@ import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
-
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 /**
  * Allows Focus to make sense of user's commands and parsing of
@@ -61,29 +61,25 @@ public class Parser {
     public static Task textToTask(String text) {
         String[] task = text.split("\\|");
         Task existingTask = null;
-        switch (task[0]) {
-        case "T":
+        if ("T".equals(task[0])) {
             existingTask = new ToDo(task[2]);
             if (task[1].equals("1")) {
                 existingTask.markAsDone();
             }
-            break;
-        case "D":
+        } else if ("D".equals(task[0])) {
             DateTimeFormatter deadlineFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
             LocalDateTime by = LocalDateTime.parse(task[3], deadlineFormatter);
             existingTask = new Deadline(task[2], by);
             if (task[1].equals("1")) {
                 existingTask.markAsDone();
             }
-            break;
-        case "E":
+        } else if ("E".equals(task[0])) {
             DateTimeFormatter eventFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
             LocalDateTime at = LocalDateTime.parse(task[3], eventFormatter);
             existingTask = new Event(task[2], at);
             if (task[1].equals("1")) {
                 existingTask.markAsDone();
             }
-            break;
         }
         return existingTask;
     }
