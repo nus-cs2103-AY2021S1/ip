@@ -107,6 +107,17 @@ public abstract class Task {
     }
 
 
+    /**
+     * Checks if task matches keyword.
+     *
+     * @param keyword keyword to be searched for.
+     * @return if task matches keyword. True if keyword is substring of itemString.
+     */
+    public boolean matches(String keyword) {
+        return this.itemString.contains(keyword);
+    }
+
+
     @Override
     public String toString() {
         char stateSymbol = this.isDone ? DONE : NOT_DONE;

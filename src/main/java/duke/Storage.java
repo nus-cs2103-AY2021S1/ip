@@ -43,7 +43,6 @@ public class Storage {
         this.storageFile = new File(this.path.toString());
         this.pathExists = Files.exists(this.path);
         this.fileBuffer = new ArrayList<>();
-        System.out.println("File exists?" + this.getFileStatus());
     }
 
 

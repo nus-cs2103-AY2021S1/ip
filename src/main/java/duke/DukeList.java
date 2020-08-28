@@ -13,6 +13,7 @@ import duke.tasks.TaskType;
 import duke.tasks.Todo;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -22,7 +23,7 @@ import java.util.ArrayList;
 public class DukeList {
 
     private static final int CAPACITY = 100;
-    private final ArrayList<Task> taskList;
+    private final List<Task> taskList;
     private final Storage store = new Storage("data", "duke.txt");
 
 
@@ -167,6 +168,33 @@ public class DukeList {
         return "Noted. I've removed this task:\n" +
                 String.format("\t%s\n", removedTask.toString())
                 + String.format("%s", this.getListStats());
+    }
+
+
+    /**
+     * Finds tasks based on keyword.
+     * Output index are the indexes in original dukeList.
+     *
+     * @param keyword keyword to be searched for.
+     * @return string of all matched tasks.
+     */
+    public String find(String keyword) {
+        List<String> matchedTasks = new ArrayList<>();
+        matchedTasks.add("Here are the matching tasks in your list:");
+
+        for (int i = 0; i < this.taskList.size(); i++) {
+            Task currTask = this.taskList.get(i);
+            if (currTask.matches(keyword)) {
+                matchedTasks.add(String.format("%d. %s", i + 1, currTask));
+            }
+        }
+
+        if (matchedTasks.size() > 1) {
+            return String.join("\n", matchedTasks);
+        } else {
+            return "No matching tasks found!";
+        }
+
     }
 
 

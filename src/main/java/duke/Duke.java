@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 
 /**
- * Main class for the Duke programme..
+ * Main class for the Duke programme.
  */
 public class Duke {
 
@@ -98,6 +98,19 @@ public class Duke {
 
 
     /**
+     * Finds tasks based on keyword.
+     * Output index are the indexes in original dukeList.
+     *
+     * @param inputTextArr String array of the input text, split by " ".
+     */
+    private String find(String[] inputTextArr) {
+        String keyword = Parser.getItemSubstring(inputTextArr);
+        String statusMsg = this.taskList.find(keyword);
+        return statusMsg;
+    }
+
+
+    /**
      * Logic framework of Duke.
      */
     private void dukeLogic() {
@@ -105,31 +118,34 @@ public class Duke {
         String msgInput;
 
         String[] msgArr;
-        Command keyword;
+        Command keywordCommand;
 
         while (!shouldQuit && this.ui.hasNextLine()) {
             msgInput = this.ui.nextLine();
 
             msgArr = Parser.parseLineToArray(msgInput);
-            keyword = Parser.getCommand(msgInput);
+            keywordCommand = Parser.getCommand(msgInput);
 
-            switch (keyword) {
+            switch (keywordCommand) {
             case TERMINATE:
                 shouldQuit = true;
                 break;
+
             case INVALID:
                 this.ui.printErrorMessage(String.format("OOPS!!! I'm sorry, but I don't know what `%s` means :-(", msgArr[0]));
                 break;
+
             case LIST:
                 String taskListString = this.taskList.toString();
                 this.ui.printMessage(taskListString);
                 break;
+
             case DONE:
                 try {
                     String statusMsg = this.markAsDone(msgArr);
                     this.ui.printMessage(statusMsg);
                 } catch (ArrayIndexOutOfBoundsException e) {
-                    this.ui.printEmptyIndexErrorMsg(keyword.toString());
+                    this.ui.printEmptyIndexErrorMsg(keywordCommand.toString());
                 } catch (IndexOutOfBoundsException e) {
                     this.ui.printInvalidIndexErrorMsg();
                 }
@@ -140,7 +156,18 @@ public class Duke {
                     String statusMsg = this.delete(msgArr);
                     this.ui.printMessage(statusMsg);
                 } catch (ArrayIndexOutOfBoundsException e) {
-                    this.ui.printEmptyIndexErrorMsg(keyword.toString());
+                    this.ui.printEmptyIndexErrorMsg(keywordCommand.toString());
+                } catch (IndexOutOfBoundsException e) {
+                    this.ui.printInvalidIndexErrorMsg();
+                }
+                break;
+
+            case FIND:
+                try {
+                    String statusMsg = this.find(msgArr);
+                    this.ui.printMessage(statusMsg);
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    this.ui.printEmptyIndexErrorMsg(keywordCommand.toString());
                 } catch (IndexOutOfBoundsException e) {
                     this.ui.printInvalidIndexErrorMsg();
                 }
