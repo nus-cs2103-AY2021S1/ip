@@ -1,7 +1,8 @@
-package main.java;
+package Duke;
 
 import Command.*;
 import org.junit.jupiter.api.Test;
+
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -9,7 +10,8 @@ public class ParserTest {
     @Test
     public void parserPrintListCommand(){
         String[] command = {"list"};
-        assertEquals(Parser.parse("list"), new PrintListCommand(command));
+        assertEquals(Parser.parse("list"),
+                new PrintListCommand(command));
     }
 
     @Test

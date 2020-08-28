@@ -1,4 +1,4 @@
-package main.java;
+package Duke;
 
 /**
  * Represents the task to be saved in the list.

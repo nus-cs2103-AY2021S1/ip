@@ -1,11 +1,8 @@
 package Command;
 
-import main.java.Storage;
-import main.java.TaskList;
-import main.java.Ui;
-import main.java.Event;
-import main.java.Task;
 
+
+import Duke.*;
 import Exception.DukeException;
 import Exception.EventException;
 import Exception.WrongFormatException;
@@ -18,7 +15,7 @@ import java.time.format.DateTimeParseException;
 import java.util.Arrays;
 
 /**
- * Represents a command to add event to TaskList.
+ * Represents a command to add event to Duke.TaskList.
  */
 public class AddEventCommand extends Command {
 
@@ -27,7 +24,7 @@ public class AddEventCommand extends Command {
     }
 
     /**
-     * Adds Event to the TaskList and save it to storage.
+     * Adds Duke.Duke.Event to the Duke.TaskList and save it to storage.
      * @param tasks the list of task saved.
      * @param ui deals with interaction with the user.
      * @param storage deals with loading tasks from the file and saving tasks in the file.

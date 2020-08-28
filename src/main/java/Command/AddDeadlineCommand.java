@@ -1,12 +1,8 @@
 package Command;
 
-import main.java.Storage;
-import main.java.TaskList;
-import main.java.Ui;
-import main.java.Deadline;
-import main.java.Task;
 
 
+import Duke.*;
 import Exception.DukeException;
 import Exception.DeadlineException;
 import Exception.WrongFormatException;
@@ -29,7 +25,7 @@ public class AddDeadlineCommand extends Command {
     }
 
     /**
-     * Adds Deadline to the TaskList and save it to storage.
+     * Adds Duke.Duke.Deadline to the Duke.TaskList and save it to storage.
      * @param tasks the list of task saved.
      * @param ui deals with interaction with the user.
      * @param storage deals with loading tasks from the file and saving tasks in the file.

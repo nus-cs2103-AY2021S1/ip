@@ -1,10 +1,10 @@
 package Command;
 
-import main.java.Storage;
-import main.java.TaskList;
-import main.java.Ui;
 
 
+import Duke.Storage;
+import Duke.TaskList;
+import Duke.Ui;
 import Exception.DukeException;
 import Exception.DoneOutOfBoundException;
 import Exception.DoneUnknownException;

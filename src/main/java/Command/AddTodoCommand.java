@@ -1,47 +1,44 @@
 package Command;
 
-import main.java.Storage;
-import main.java.TaskList;
-import main.java.Ui;
 
+
+import Duke.Storage;
+import Duke.Task;
+import Duke.TaskList;
+import Duke.Ui;
 import Exception.DukeException;
-import Exception.DeleteOutOfBoundException;
-import Exception.DeleteUnknownException;
+import Exception.TaskException;
+
 import java.io.IOException;
 import java.util.Arrays;
 
 /**
- * Represents a command to delete a task from the tasklist.
+ * Represents a command to add a todo to the tasklist.
  */
-public class DeleteCommand extends Command {
-    public DeleteCommand(String[] command) {
+public class AddTodoCommand extends Command {
+    public AddTodoCommand(String[] command) {
         super(command);
     }
 
     /**
-     * Delete a Task from the TaskList and save it to storage.
+     * Adds Todo to the Duke.TaskList and save it to storage.
      * @param tasks the list of task saved.
      * @param ui deals with interaction with the user.
      * @param storage deals with loading tasks from the file and saving tasks in the file.
-     * @throws DukeException if there are no value or it is not a number.
+     * @throws DukeException if there are no description.
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
-            Integer toBeDeleted= Integer.valueOf(command[1]);
-            tasks.delete(toBeDeleted);
+            Task temp = new Task(command[1]);
+            tasks.addTask(temp);
             try {
                 storage.saveFile(tasks);
             } catch (IOException e) {
             }
-        } catch (DeleteOutOfBoundException e) {
-            throw e;
-        } catch (NumberFormatException e) {
-            throw new DeleteUnknownException();
         } catch (IndexOutOfBoundsException e) {
-            throw new DeleteUnknownException();
+            throw new TaskException();
         }
-
     }
 
     /**
@@ -57,8 +54,8 @@ public class DeleteCommand extends Command {
     public boolean equals(Object o) {
         if (this == o) {
             return true;
-        } else if (o instanceof DeleteCommand) {
-            DeleteCommand cur = (DeleteCommand) o;
+        } else if (o instanceof AddTodoCommand) {
+            AddTodoCommand cur = (AddTodoCommand) o;
             if (Arrays.equals(this.command, cur.command)) {
                 return true;
             } else {

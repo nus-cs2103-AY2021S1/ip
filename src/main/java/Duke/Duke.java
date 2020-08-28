@@ -1,9 +1,10 @@
+package Duke;
 
 import java.io.IOException;
 
 import Command.Command;
-import main.java.*;
 import Exception.*;
+
 
 /**
  * A chat bot to save the todo, deadline and event task in a list.

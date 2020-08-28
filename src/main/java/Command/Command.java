@@ -1,10 +1,10 @@
 package Command;
 
+import Duke.Storage;
+import Duke.TaskList;
+import Duke.Ui;
 import Exception.DukeException;
 
-import main.java.Storage;
-import main.java.TaskList;
-import main.java.Ui;
 
 /**
  * Represents an abstract command which is inherited and is used in the Main class.

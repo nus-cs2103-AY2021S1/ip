@@ -1,48 +1,47 @@
 package Command;
 
-import Exception.DukeException;
 
-import main.java.Storage;
-import main.java.TaskList;
-import main.java.Ui;
+import Duke.Storage;
+import Duke.TaskList;
+import Duke.Ui;
 
 import java.util.Arrays;
 
 /**
- * Represents a command to exit the loop.
+ * Represents a command to print the list of all task.
  */
-public class ExitCommand extends Command {
-    public ExitCommand(String[] command) {
+public class PrintListCommand extends Command {
+
+    public PrintListCommand(String[] command) {
         super(command);
     }
 
     /**
-     * Exit the program.
+     * Print the list of the task.
      * @param tasks the list of task saved.
      * @param ui deals with interaction with the user.
      * @param storage deals with loading tasks from the file and saving tasks in the file.
-     * @throws DukeException
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        ui.goodbyeMessage();
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
+        tasks.printList();
     }
 
     /**
-     * Indicates to exit the loop.
-     * @return true.
+     * Indicates not to exit the loop.
+     * @return false.
      */
     @Override
     public boolean isExit() {
-        return true;
+        return false;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;
-        } else if (o instanceof ExitCommand) {
-            ExitCommand cur = (ExitCommand) o;
+        } else if (o instanceof PrintListCommand) {
+            PrintListCommand cur = (PrintListCommand) o;
             if (Arrays.equals(this.command, cur.command)) {
                 return true;
             } else {

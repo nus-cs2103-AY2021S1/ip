@@ -1,4 +1,4 @@
-package main.java;
+package Duke;
 
 import Command.AddDeadlineCommand;
 import Command.PrintListCommand;
