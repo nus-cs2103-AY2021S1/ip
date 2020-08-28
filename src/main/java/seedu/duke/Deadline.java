@@ -11,21 +11,21 @@ public class Deadline extends Task {
     private String due;
 
     /**
-     * Initialize an instance of Deadline.
+     * Initializes an instance of Deadline.
      *
      * @param description Name of the task.
      * @param due Date that the task will be due by.
      */
     public Deadline(String description, String due) {
         super(description);
-        LocalDate d = LocalDate.parse(due);
-        this.localDate = d;
-        String convertedDate = d.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        LocalDate formatDate = LocalDate.parse(due);
+        this.localDate = formatDate;
+        String convertedDate = formatDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
         this.due = convertedDate;
     }
 
     /**
-     * Initialise an instance of Deadline for local storage.
+     * Initializes an instance of Deadline for local storage.
      *
      * @param task Name of the task.
      * @param isDone Status of the task.
@@ -46,7 +46,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Provide a string describing the Deadline class.
+     * Provides a string describing the Deadline class.
      *
      * @return description of Deadline.
      */

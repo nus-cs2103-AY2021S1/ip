@@ -7,7 +7,7 @@ public class Parser {
     private TaskList taskLists;
 
     /**
-     * Initialize an instance of a Parser.
+     * Initializes an instance of a Parser.
      *
      * @param taskLists List of Tasks stored in a TaskList class.
      */
@@ -16,7 +16,7 @@ public class Parser {
     }
 
     /**
-     * Check for invalid inputs.
+     * Checks for invalid inputs.
      *
      * @param input String that is input by user.
      * @throws DukeException if input does not contain any of the keywords in the method.
@@ -44,7 +44,7 @@ public class Parser {
     }
 
     /**
-     * Process input by user and execute accordingly.
+     * Processes input by user and execute accordingly.
      *
      * @param input String input by user.
      */

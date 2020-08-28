@@ -18,7 +18,7 @@ public class Storage {
     private String filepath;
 
     /**
-     * Initialize an instance of Storage class.
+     * Initializes an instance of Storage class.
      * Creates new folder and file if directory did not exist.
      *
      * @param filePath Directory of file.
@@ -38,7 +38,7 @@ public class Storage {
     }
 
     /**
-     * Erase and wipe out all data in the txt file.
+     * Erases and wipe out all data in the txt file.
      *
      * @throws IOException If invalid path name given.
      */
@@ -64,15 +64,15 @@ public class Storage {
     }
 
     /**
-     * Load up existing data in a txt file stored in locally when Duke program starts.
+     * Loads up existing data in a txt file stored in locally when Duke program starts.
      *
-     * @param ls of tasks stored in ArrayList.
+     * @param listOfTasks of tasks stored in ArrayList.
      *
      * @return Arraylist storing Tasks.
      * @throws FileNotFoundException If no file is found on the local directory.
      * @throws IOException If invalid input given.
      */
-    public static ArrayList<Task> load(ArrayList<Task> ls) throws FileNotFoundException, IOException {
+    public static ArrayList<Task> load(ArrayList<Task> listOfTasks) throws FileNotFoundException, IOException {
         File data = new File(STORAGE_PATH);
         FileReader fr = new FileReader(data);
         BufferedReader br = new BufferedReader(fr);
@@ -87,38 +87,38 @@ public class Storage {
             String isDone = arrTasks[1];
             String nameOfTask = arrTasks[2];
             if (typeOfTask.equals("T")) {
+                Todo tempTodo;
                 if (isDone.equals("1")) {
-                    Todo temp = new Todo(nameOfTask, true);
-                    ls.add(temp);
+                    tempTodo = new Todo(nameOfTask, true);
                 } else {
-                    Todo temp = new Todo(nameOfTask, false);
-                    ls.add(temp);
+                    tempTodo = new Todo(nameOfTask, false);
                 }
+                listOfTasks.add(tempTodo);
             } else if (typeOfTask.equals("D")) {
                 String date = arrTasks[3];
+                Deadline tempDeadline;
                 if (isDone.equals("1")) {
-                    Deadline temp = new Deadline(nameOfTask, true, date);
-                    ls.add(temp);
+                    tempDeadline = new Deadline(nameOfTask, true, date);
                 } else {
-                    Deadline temp = new Deadline(nameOfTask, false, date);
-                    ls.add(temp);
+                    tempDeadline = new Deadline(nameOfTask, false, date);
                 }
+                listOfTasks.add(tempDeadline);
             } else if (typeOfTask.equals("E")) {
                 String date = arrTasks[3];
+                Event tempEvent;
                 if (isDone.equals("1")) {
-                    Event temp = new Event(nameOfTask, true, date);
-                    ls.add(temp);
+                    tempEvent = new Event(nameOfTask, true, date);
                 } else {
-                    Event temp = new Event(nameOfTask, false, date);
-                    ls.add(temp);
+                    tempEvent = new Event(nameOfTask, false, date);
                 }
+                listOfTasks.add(tempEvent);
             }
         }
-        return ls;
+        return listOfTasks;
     }
 
     /**
-     * Make task as complete in a local txt file.
+     * Makes task as complete in a local txt file.
      *
      * @param taskNo Index of the task.
      * @param size Size of tasklist.
@@ -132,8 +132,8 @@ public class Storage {
             for (int i = 0; i < size; i++) {
                 String task = br.readLine();
                 if (i == taskNo) {
-                    String temp = task.replaceFirst("0", "1");
-                    task = temp;
+                    String tempTask = task.replaceFirst("0", "1");
+                    task = tempTask;
                 }
                 tempArr.add(task);
             }
@@ -147,7 +147,7 @@ public class Storage {
     }
 
     /**
-     * Delete a task locally from the txt file.
+     * Deletes a task locally from the txt file.
      *
      * @param index Index of the task.
      * @param size Size of the tasklist.

@@ -11,10 +11,10 @@ public class Ui {
     private Scanner sc;
     private String userInput;
     private Parser parse;
-    private boolean cont = true;
+    private boolean isAlive = true;
 
     /**
-     * Initialize an instance of Ui.
+     * Initializes an instance of Ui.
      *
      * @param parse Parser to be part of Ui.
      */
@@ -24,7 +24,7 @@ public class Ui {
     }
 
     /**
-     * Print out introduction when Duke start up.
+     * Prints out introduction when Duke start up.
      */
     public void intro() {
         System.out.println(LINES + INTRO + LINES);
@@ -38,7 +38,7 @@ public class Ui {
     }
 
     /**
-     * Get userInput from user.
+     * Gets userInput from user.
      */
     public void getNewInput() {
         this.userInput = sc.nextLine();
@@ -49,23 +49,23 @@ public class Ui {
     }
 
     /**
-     * Get status of Ui.
+     * Gets status of Ui.
      *
      * @return false if "bye" command is input by user. Otherwise, true.
      */
-    public boolean getContinue() {
-        return this.cont;
+    public boolean checkDukeStatus() {
+        return this.isAlive;
     }
 
     /**
-     * Set cont to false.
+     * Sets boolean isAlive to false. s duke program.
      */
     public void disContinue() {
-        this.cont = false;
+        this.isAlive = false;
     }
 
     /**
-     * Print out output from Parser.
+     * Prints out output from Parser.
      *
      * @param input String that is processed by Parser.
      */

@@ -11,21 +11,21 @@ public class Event extends Task {
     private String date;
 
     /**
-     * Initialize an instance of Event.
+     * Initializes an instance of Event.
      *
      * @param event Name of the task.
      * @param date Date that the event will happen.
      */
     public Event(String event, String date) {
         super(event);
-        LocalDate d = LocalDate.parse(date);
-        this.localDate = d;
-        String convertedDate = d.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        LocalDate formatDate = LocalDate.parse(date);
+        this.localDate = formatDate;
+        String convertedDate = formatDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
         this.date = convertedDate;
     }
 
     /**
-     * Initialise an instance of Event for local storage.
+     * Initializes an instance of Event for local storage.
      *
      * @param task Name of the event.
      * @param isDone Status of the event.
@@ -46,7 +46,7 @@ public class Event extends Task {
     }
 
     /**
-     * Provide a string describing the Event class.
+     * Provides a string describing the Event class.
      *
      * @return description of Event.
      */

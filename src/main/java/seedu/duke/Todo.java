@@ -6,7 +6,7 @@ package seedu.duke;
 public class Todo extends Task {
 
     /**
-     * Initialize an instance of Todo.
+     * Initializes an instance of Todo.
      *
      * @param task Name of the Todo.
      */
@@ -15,7 +15,7 @@ public class Todo extends Task {
     }
 
     /**
-     * Initialize an instance of Todo.
+     * Initializes an instance of Todo.
      *
      * @param task Name of the Todo.
      * @param isDone Status of the Todo.

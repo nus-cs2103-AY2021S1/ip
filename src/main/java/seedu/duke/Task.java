@@ -8,7 +8,7 @@ public class Task {
     protected boolean isDone;
 
     /**
-     * Initialise a task class that is not completed.
+     * Initializes a task class that is not completed.
      *
      * @param task Name of the task.
      */
@@ -18,7 +18,7 @@ public class Task {
     }
 
     /**
-     * Initialise a task class that is not completed.
+     * Initializes a task class that is not completed.
      *
      * @param task Name of the task.
      * @param isDone Status of the task.
@@ -38,7 +38,7 @@ public class Task {
     }
 
     /**
-     * Mark task as done.
+     * Marks task as done.
      */
     public void markAsDone() {
         this.isDone = true;

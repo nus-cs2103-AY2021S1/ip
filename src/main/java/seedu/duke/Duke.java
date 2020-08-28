@@ -15,7 +15,7 @@ public class Duke {
     private Parser parser;
 
     /**
-     * Initialize the Duke class and creates an instance of Storage, Tasklist, Ui and Parser.
+     * Initializes the Duke class and creates an instance of Storage, Tasklist, Ui and Parser.
      *
      * @param filePath directory of txt file
      */
@@ -23,6 +23,7 @@ public class Duke {
         try {
             this.storage = new Storage(filePath);
         } catch (IOException e) {
+            System.out.println(e.getMessage());
         }
         try {
             taskLists = new TaskList(storage.load(new ArrayList<Task>()));
@@ -39,7 +40,7 @@ public class Duke {
      */
     public void run() {
         ui.intro();
-        while (ui.getContinue()) {
+        while (ui.checkDukeStatus()) {
             ui.getNewInput();
         }
         ui.bye();

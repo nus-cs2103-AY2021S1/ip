@@ -10,16 +10,16 @@ public class TaskList {
     private ArrayList<Task> taskLists;
 
     /**
-     * Initialize an instance of Tasklist.
+     * Initializes an instance of Tasklist.
      *
-     * @param ls Arraylist of Tasks to be completed.
+     * @param listOfTasks Arraylist of Tasks to be completed.
      */
-    public TaskList(ArrayList<Task> ls) {
-        this.taskLists = ls;
+    public TaskList(ArrayList<Task> listOfTasks) {
+        this.taskLists = listOfTasks;
     }
 
     /**
-     * Check if a input for a new task is valid.
+     * Checks if a input for a new task is valid.
      *
      * @param input Name of the task.
      * @param task Task type.
@@ -32,7 +32,7 @@ public class TaskList {
     }
 
     /**
-     * Mark the task as done in a list.
+     * Marks the task as done in a list.
      *
      * @param userInput Task to be completed.
      */
@@ -86,10 +86,10 @@ public class TaskList {
             this.checkForItem(userInput.substring(4), "todo");
             String task = userInput.substring(5);
             String info = ("Got it. I have added this task:\n");
-            Todo temp = new Todo(task);
-            Storage.addTask(temp.getStorageString("T"));
-            info += "  " + temp.toString() + "\n";
-            this.taskLists.add(temp);
+            Todo tempTodo = new Todo(task);
+            Storage.addTask(tempTodo.getStorageString("T"));
+            info += "  " + tempTodo.toString() + "\n";
+            this.taskLists.add(tempTodo);
             info += "Now you have " + taskLists.size() + " tasks in the list\n";
             Ui.print(info);
         } catch (DukeException err) {
@@ -111,11 +111,11 @@ public class TaskList {
             String task = userInput.substring(9, dateIndex);
             String time = userInput.substring(dateIndex + 1);
             String info = "Got it. I have added this task:\n";
-            Deadline temp = new Deadline(task, time);
-            String formatDate = temp.getFormattedDate();
-            info += "  " + temp.toString() + "\n";
-            taskLists.add(temp);
-            Storage.addTask(temp.getStorageString("D", formatDate));
+            Deadline tempDeadline = new Deadline(task, time);
+            String formatDate = tempDeadline.getFormattedDate();
+            info += "  " + tempDeadline.toString() + "\n";
+            taskLists.add(tempDeadline);
+            Storage.addTask(tempDeadline.getStorageString("D", formatDate));
             info += "Now you have " + taskLists.size() + " tasks in the list\n";
             Ui.print(info);
         } catch (DukeException err) {
@@ -137,11 +137,11 @@ public class TaskList {
             String task = userInput.substring(6, dateIndex);
             String time = userInput.substring(dateIndex + 1);
             String info = "Got it. I have added this task:\n";
-            Event temp = new Event(task, time);
-            String formatDate = temp.getFormattedDate();
-            info += "  " + temp.toString() + "\n";
-            Storage.addTask(temp.getStorageString("E", formatDate));
-            taskLists.add(temp);
+            Event tempEvent = new Event(task, time);
+            String formatDate = tempEvent.getFormattedDate();
+            info += "  " + tempEvent.toString() + "\n";
+            Storage.addTask(tempEvent.getStorageString("E", formatDate));
+            taskLists.add(tempEvent);
             info += "Now you have " + taskLists.size() + " tasks in the list\n";
             Ui.print(info);
         } catch (DukeException err) {
