@@ -79,6 +79,12 @@ public class TaskList {
         }
         return res;
     }
+
+    /**
+     * Filters tasks based on keywords
+     * @param tokens
+     * @return matched tasks
+     */
     public String findTasks(String[] tokens) {
         String keyword = "";
         int numMatch = 0;
