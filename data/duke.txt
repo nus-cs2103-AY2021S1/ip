@@ -1,0 +1,4 @@
+1. [T] [X]  something
+2. [T] [DONE]  somethingelse else
+3. [D] [DONE]  eat cereal (by:  2 aug 2021)
+4. [E] [DONE]  lunch (at:  1.30pm)
