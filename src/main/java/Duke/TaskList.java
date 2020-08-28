@@ -3,7 +3,6 @@ package Duke;
 import java.util.LinkedList;
 import java.util.List;
 
-import Duke.Task;
 import Exception.DoneOutOfBoundException;
 import Exception.DeleteOutOfBoundException;
 
