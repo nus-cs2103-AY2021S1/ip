@@ -1,9 +1,9 @@
 package duke.command;
 
-import duke.TaskList;
-import duke.Storage;
-import duke.Ui;
 import duke.DukeException;
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
 import duke.task.Task;
 
 /**
@@ -15,7 +15,7 @@ import duke.task.Task;
 public class DoneCommand extends Command {
 
     @Override
-    public void execute(TaskList taskList, Storage storage, Ui ui){
+    public void execute(TaskList taskList, Storage storage, Ui ui) {
         try {
             int taskNumber = ui.readTaskNumber();
             if (taskList.size() >= taskNumber && taskNumber > 0) {

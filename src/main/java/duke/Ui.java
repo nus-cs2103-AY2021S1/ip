@@ -6,10 +6,11 @@ import java.time.format.DateTimeParseException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
+
+import duke.task.Deadline;
+import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
-import duke.task.Event;
-import duke.task.Deadline;
 
 /**
  * The Ui class deals with interactions with the user.
@@ -177,7 +178,7 @@ public class Ui {
             try {
                 return LocalDateTime.parse(dateString, DateTimeFormatter.ofPattern(format));
             } catch (DateTimeParseException e) {
-
+                e.getMessage();
             }
         }
         return null;
