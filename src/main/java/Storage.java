@@ -1,10 +1,15 @@
-import java.io.*;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 
 /**
  * handles the storing and loading of information (task list)
  */
 public class Storage {
-    private final static long serialVersionUID = 7526472295622776147L;
+    private final long serialVersionUID = 1234L;
 
     /**
      * loads the tasklist that user keyed in before terminating the bot

@@ -16,24 +16,24 @@ public class Parser {
         String category = getCategory(input);
         String description = getDescription(input);
         switch (category) {
-            case "todo":
-                return parseTodoCommand(description);
-            case "deadline":
-                return parseDeadlineCommand(description);
-            case "event":
-                return parseEventCommand(description);
-            case "done":
-                return parseDoneCommand(description);
-            case "delete":
-                return parseDeleteCommand(description);
-            case "list":
-                return parseListCommand(description);
-            case "bye":
-                return parseByeCommand(description);
-            case "find":
-                return parseFindCommand(description);
-            default:
-                throw new IllegalArgumentException("Invalid input.");
+        case "todo":
+            return parseTodoCommand(description);
+        case "deadline":
+            return parseDeadlineCommand(description);
+        case "event":
+            return parseEventCommand(description);
+        case "done":
+            return parseDoneCommand(description);
+        case "delete":
+            return parseDeleteCommand(description);
+        case "list":
+            return parseListCommand(description);
+        case "bye":
+            return parseByeCommand(description);
+        case "find":
+            return parseFindCommand(description);
+        default:
+            throw new IllegalArgumentException("Invalid input.");
         }
     }
 

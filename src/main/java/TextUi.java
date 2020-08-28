@@ -4,7 +4,7 @@
  */
 public class TextUi {
 
-    public static final String divider = "===================================================\n";
+    public static final String DIVIDER = "===================================================\n";
 
     /**
      * prints hello message with DUKE logo
@@ -17,7 +17,7 @@ public class TextUi {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
 
-        System.out.println(divider + "Hello! I'm Duke\n" + "What can I do for you?\n" + divider);
+        System.out.println(DIVIDER + "Hello! I'm Duke\n" + "What can I do for you?\n" + DIVIDER);
     }
 
     /**
@@ -26,7 +26,7 @@ public class TextUi {
      * @param description
      */
     public static void printNewTasks(String description) {
-        System.out.println(divider + "Got it. I've added this task: \n" + description);
+        System.out.println(DIVIDER + "Got it. I've added this task: \n" + description);
     }
 
     /**
@@ -35,7 +35,7 @@ public class TextUi {
      * @param taskLength
      */
     public static void printTaskSummary(int taskLength) {
-        System.out.println(String.format("Now you have %d tasks in the list. \n", taskLength) + divider);
+        System.out.println(String.format("Now you have %d tasks in the list. \n", taskLength) + DIVIDER);
     }
 
     /**
@@ -43,7 +43,7 @@ public class TextUi {
      * @param exception
      */
     public static void printError(Exception exception) {
-        System.out.println(divider + "☹ OOPS!!!" + exception.getMessage() + "Try again!\n" + divider);
+        System.out.println(DIVIDER + "☹ OOPS!!!" + exception.getMessage() + "Try again!\n" + DIVIDER);
     }
 
     /**
@@ -51,8 +51,7 @@ public class TextUi {
      * @param description
      */
     public static void printMessage(String description) {
-        System.out.println(divider + description + "\n" + divider);
+        System.out.println(DIVIDER + description + "\n" + DIVIDER);
 
     }
-
 }

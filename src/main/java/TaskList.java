@@ -1,13 +1,14 @@
-import java.io.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * stores the tasks in a list
  */
 public class TaskList implements Serializable {
-    ArrayList<Task> taskList = new ArrayList<>();
+    private ArrayList<Task> taskList = new ArrayList<>();
 
-    private final static long serialVersionUID = 1234L;
+    @SuppressWarnings("checkstyle:AbbreviationAsWordInName")
+    private final long serialVersionUID = 1089785654636785606L;
 
     /**
      * prints the tasks in the taskList
@@ -69,10 +70,11 @@ public class TaskList implements Serializable {
      */
     public TaskList getTasksWithKeyWords(String keyword) {
         TaskList newTaskList = new TaskList();
-        for (Task task : taskList)
+        for (Task task : taskList) {
             if (task.getDescription().contains(keyword)) {
                 newTaskList.addTask(task);
             }
+        }
         return newTaskList;
     }
 }
