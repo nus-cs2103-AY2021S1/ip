@@ -11,6 +11,7 @@ public class TimedTask extends Task {
     public TimedTask (String description, String time, String tag) {
         super(description, tag);
         String dt = "";
+
         if (time.indexOf(' ') > 0) {
             dt = time.substring(0, time.indexOf(' '));
             String tm = time.substring(time.indexOf(' ') + 1);
@@ -19,6 +20,7 @@ public class TimedTask extends Task {
             dt = time;
             this.time = "";
         }
+
         date = parseDate(dt);
         this.tag = tag;
     }
@@ -30,11 +32,11 @@ public class TimedTask extends Task {
         this.tag = tag;
     }
 
-    public String getTime() {
+    public String getTime () {
         return this.time;
     }
 
-    public LocalDate getDate() {
+    public LocalDate getDate () {
         return this.date;
     }
 
@@ -49,6 +51,7 @@ public class TimedTask extends Task {
         String month = dt.substring(dt.indexOf('/') + 1, dt.lastIndexOf('/'));
         String year = dt.substring(dt.lastIndexOf('/') + 1);
         parsedDate = LocalDate.parse(year + "-" + month + "-" + day);
+
         return parsedDate;
     }
 
@@ -57,11 +60,12 @@ public class TimedTask extends Task {
      * @param time time in user input format
      * @return time time parsed into required format
      */
-    private String parseTime(String time) {
+    private String parseTime (String time) {}
         int tm = Integer.parseInt(time);
         String hr = "";
         String ampm = "";
         String min = "";
+
         if (tm / 100 > 12) {
             hr = String.format("%d:", (tm / 100) % 12);
             ampm = " pm";
@@ -69,6 +73,7 @@ public class TimedTask extends Task {
             hr = String.format("%d:", (tm / 100));
             ampm = " am";
         }
+
         if (tm % 100 == 0) {
             min = "00";
         } else {
@@ -77,14 +82,16 @@ public class TimedTask extends Task {
                 min = "0" + min;
             }
         }
+
         if (time.equals("1200")) {
             return "12:00 pm";
         }
+
         return hr + min + ampm;
     }
 
     @Override
-    public String getDescription() {
+    public String getDescription () {
         String message = this.tag + super.getDescription() + " " + this.getSchedule();
         return message;
     }
@@ -94,13 +101,14 @@ public class TimedTask extends Task {
      * @param
      * @return schedule string to indicate scheduling details
      */
-    public String getSchedule() {
+    public String getSchedule () {
         String timeTag = "";
         if (super.getTag() == "[D]") {
             timeTag = "(by: ";
         } else if (super.getTag() == "[E]"){
             timeTag = "(at: ";
         }
+
         return timeTag + this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy "))
                 + time + ")";
     }

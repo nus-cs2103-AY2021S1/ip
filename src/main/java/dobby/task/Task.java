@@ -5,7 +5,8 @@ public class Task {
     private boolean isDone;
     private String tag;
 
-    Task(String description, String tag) {
+
+    Task (String description, String tag) {
         this.description = description;
         this.isDone = false;
         this.tag = tag;
@@ -15,21 +16,23 @@ public class Task {
      * Returns the full description of the task object
      * @return description full description of the Task object
      */
-    public String getDescription() {
+    public String getDescription () {
         String checkbox = "[";
-        if (this.isDone()) {
+
+        if (this.isDone()) { // tick or cross
             checkbox = checkbox + "\u2713] ";
         } else {
             checkbox = checkbox + "\u2718] ";
         }
+
         return checkbox + this.description;
     }
 
-    public boolean isDone() {
+    public boolean isDone () {
         return isDone;
     }
 
-    public void setDone() {
+    public void setDone () {
         this.isDone = true;
     }
 
