@@ -12,4 +12,20 @@ public class TaskList {
     public static void removeFromList(int taskId) {
         toDoList.remove(taskId - 1);
     }
+
+    /**
+     * Returns an ArrayList of tasks that match the User keyword given
+     * @param keyword
+     * @return
+     */
+    public static ArrayList<Task> searchList(String keyword) {
+        ArrayList<Task> returnList = new ArrayList<>();
+        for (Task t : toDoList
+             ) {
+            if(t.toString().contains(keyword)) {
+                returnList.add(t);
+            }
+        }
+        return returnList;
+    }
 }

@@ -63,8 +63,14 @@ public class Ui {
     public void taskPrint(String msg) {
         System.out.println("Added : " + msg);
     }
-    public void displayList(List<Task> toDoList) {
-        System.out.println("Check out your missions!");
+
+    /** Prints out a given ArrayList of tasks in a nice format, with the
+     * given displayMessage on top.
+     * @param toDoList
+     * @param displayMessage
+     */
+    public void displayList(List<Task> toDoList, String displayMessage) {
+        System.out.println(displayMessage);
         int i = 1;
         for (Task s : toDoList) {
             System.out.println(i + ". " + " [" + s.getType() + "] "
