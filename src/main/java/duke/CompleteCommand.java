@@ -1,3 +1,5 @@
+package duke;
+
 public class CompleteCommand extends Command {
     private int number;
     

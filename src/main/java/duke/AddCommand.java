@@ -1,4 +1,5 @@
-import java.io.IOException;
+package duke;
+
 import java.time.DateTimeException;
 import java.time.LocalDate;
 
@@ -20,7 +21,7 @@ public class AddCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage store) throws DukeException, IOException {
+    public void execute(TaskList taskList, Ui ui, Storage store) throws DukeException {
         Task newTask = null;
         try {
             switch (type) {

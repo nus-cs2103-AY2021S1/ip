@@ -1,3 +1,5 @@
+package duke;
+
 public class ToDo extends Task {
 
     public ToDo(String description) {
@@ -6,7 +8,7 @@ public class ToDo extends Task {
     
     @Override
     public String encode() {
-        return String.format("T | %d | %s", getStatusIcon(), description);
+        return String.format("T | %s | %s", getStatusIcon(), description);
     }
 
     @Override

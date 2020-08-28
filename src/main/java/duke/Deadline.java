@@ -1,6 +1,7 @@
+package duke;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-
 
 public class Deadline extends Task {
     protected LocalDate by;
@@ -13,7 +14,7 @@ public class Deadline extends Task {
     @Override
     public String encode() {
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("MMM dd yyyy");
-        return String.format("D | %d | %s | %s", getStatusIcon(), description , dateFormatter.format(by));
+        return String.format("D | %s | %s | %s", getStatusIcon(), description , dateFormatter.format(by));
     }
 
     @Override
