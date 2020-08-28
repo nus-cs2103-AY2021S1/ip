@@ -26,7 +26,7 @@ public class Ui {
     }
 
     /**
-     * Print welcome message.
+     * Printswelcome message.
      */
     public void showWelcome() {
         String logo = "  ____        _        \n"
@@ -39,7 +39,7 @@ public class Ui {
     }
 
     /**
-     * Print the string with dashes.
+     * Printsthe string with dashes.
      *
      * @param str the str.
      */
@@ -50,7 +50,7 @@ public class Ui {
     }
 
     /**
-     * Print dashes.
+     * Printsdashes.
      */
     private void printDashes() {
         int length = 60;
@@ -58,7 +58,7 @@ public class Ui {
     }
 
     /**
-     * Print exit message.
+     * Printsexit message.
      */
     public void printExitMessage() {
         String bye = "Bye. Hope to see you again soon!";
@@ -66,7 +66,7 @@ public class Ui {
     }
 
     /**
-     * Print add task.
+     * Printsadd task.
      *
      * @param task   the task.
      * @param length the length of the tasks.
@@ -79,7 +79,7 @@ public class Ui {
     }
 
     /**
-     * Print list.
+     * Printslist.
      *
      * @param tasks the tasks.
      */
@@ -103,7 +103,7 @@ public class Ui {
     }
 
     /**
-     * Print tasks found with the date.
+     * Printstasks found with the date.
      *
      * @param localDate the date.
      * @param list      the list.
@@ -122,7 +122,7 @@ public class Ui {
     }
 
     /**
-     * Print tasks found with the description.
+     * Printstasks found with the description.
      *
      * @param description the description.
      * @param list        the list.
@@ -139,7 +139,7 @@ public class Ui {
     }
 
     /**
-     * Print mark task as done.
+     * Printsmark task as done.
      *
      * @param task the task.
      */
@@ -148,7 +148,7 @@ public class Ui {
     }
 
     /**
-     * Print delete task.
+     * Printsdelete task.
      *
      * @param task   the task.
      * @param length the length of the tasks.
@@ -160,7 +160,7 @@ public class Ui {
     }
 
     /**
-     * Print duke exception.
+     * Printsduke exception.
      *
      * @param ex the exception.
      */
