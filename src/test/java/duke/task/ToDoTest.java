@@ -14,7 +14,7 @@ public class ToDoTest {
     @Test
     public void createTask_dateOnly_success() {
         ToDo todo = ToDo.createTask("return book");
-        assertEquals("[T][✘] return book", todo.toString());
+        assertEquals("[T][\u2718] return book", todo.toString());
     }
 
     @Test
@@ -34,7 +34,7 @@ public class ToDoTest {
     @Test
     public void decode_success() {
         ToDo todo = ToDo.decode("T|N|Description");
-        assertEquals("[T][✘] Description", todo.toString());
+        assertEquals("[T][\u2718] Description", todo.toString());
     }
 
     @Test
