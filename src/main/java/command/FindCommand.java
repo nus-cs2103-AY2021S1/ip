@@ -10,12 +10,14 @@ import java.util.List;
 /**
  * Represents the find command. The find command searches for tasks based on the query and lists them.
  */
-public class FindCommand extends Command{
-    /** Query of the find command. */
+public class FindCommand extends Command {
+    /**
+     * Query of the find command.
+     */
     private final String query;
 
     /**
-     * Creates a new Find command. 
+     * Creates a new Find command.
      *
      * @param query Query for the find command to search for.
      */
@@ -27,8 +29,8 @@ public class FindCommand extends Command{
      * Executes the find command. The execution involves finding tasks based on the query and listing out the search
      * results.
      *
-     * @param lst List containing the current tasks.
-     * @param ui Ui allows execute to carry out ui methods to print to the console.
+     * @param lst     List containing the current tasks.
+     * @param ui      Ui allows execute to carry out ui methods to print to the console.
      * @param storage Storage allows execute to write and read files.
      */
     public void execute(TaskList lst, Ui ui, Storage storage) {

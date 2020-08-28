@@ -14,18 +14,24 @@ import java.io.IOException;
  * Represents the add command. The add command adds either a to-do, deadline or event task to the task list.
  */
 public class AddCommand extends Command {
-    /** The type of the task to be added. */
+    /**
+     * The type of the task to be added.
+     */
     private final TaskType taskType;
 
-    /** The description of the task to be added. */
+    /**
+     * The description of the task to be added.
+     */
     private final String taskDesc;
 
-    /** The date of the task to be added. */
-    private final String taskDate;
-    
     /**
-     * Creates a new Add command. 
-     * 
+     * The date of the task to be added.
+     */
+    private final String taskDate;
+
+    /**
+     * Creates a new Add command.
+     *
      * @param type Type of the task to be added.
      * @param desc Description of the task to be added.
      */
@@ -50,10 +56,10 @@ public class AddCommand extends Command {
 
     /**
      * Executes the add command. The execution involves adding the task to the task list, writing to the storage as well as printing the relevant UI.
-     * 
-     * @param lst List containing the current tasks.
-     * @param ui Ui allows execute to carry out ui methods to print to the console.
-     * @param storage Storage allows execute to write and read files.    
+     *
+     * @param lst     List containing the current tasks.
+     * @param ui      Ui allows execute to carry out ui methods to print to the console.
+     * @param storage Storage allows execute to write and read files.
      */
     public void execute(TaskList lst, Ui ui, Storage storage) {
         try {
@@ -84,7 +90,9 @@ public class AddCommand extends Command {
         }
     }
 
-    /** Constants representing the different tasks. */
+    /**
+     * Constants representing the different tasks.
+     */
     private enum TaskType {
         TODO,
         DEADLINE,

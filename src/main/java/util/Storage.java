@@ -15,25 +15,27 @@ import java.util.Scanner;
  * The storage class handles the logic of writing and reading files.
  */
 public class Storage {
-    /** File object containing the text file data. */
+    /**
+     * File object containing the text file data.
+     */
     private final File file;
 
     /**
      * Creates a new Storage instance.
-     * 
-     * @param filePath Name of file to be located or created.
-     * @param directory Directory of file to be located or created.  
-     * @throws IOException If errors are encountered in reading or writing to file.                  
+     *
+     * @param filePath  Name of file to be located or created.
+     * @param directory Directory of file to be located or created.
+     * @throws IOException If errors are encountered in reading or writing to file.
      */
     public Storage(String filePath, String directory) throws IOException {
         File dir = new File(directory);
         file = new File(filePath);
-        
+
         // make the directory if doesn't exist
         if (!dir.isDirectory()) {
             dir.mkdir();
         }
-        
+
         // create the file if it doesn't exist
         if (!file.exists()) {
             file.createNewFile();
@@ -42,9 +44,9 @@ public class Storage {
 
     /**
      * Returns a list of tasks in their String format after reading the text data file.
-     * 
+     *
      * @return List of Strings representing tasks
-     * @throws FileNotFoundException If file to load data from is not found.              
+     * @throws FileNotFoundException If file to load data from is not found.
      */
     public List<String> loadData() throws FileNotFoundException {
         List<String> lst = new ArrayList<>();
@@ -58,7 +60,7 @@ public class Storage {
 
     /**
      * Adds a line to the file.
-     * 
+     *
      * @param line Line to be added to the file.
      * @throws IOException If there is error writing to the file.
      */

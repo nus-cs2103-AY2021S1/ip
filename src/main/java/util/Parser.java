@@ -1,19 +1,15 @@
 package util;
 
-import command.AddCommand;
-import command.Command;
-import command.DeleteCommand;
-import command.DoneCommand;
-import command.ExitCommand;
-import command.ListCommand;
-import command.FindCommand;
+import command.*;
 import duke.DukeException;
 
 /**
  * The Parser class handles the validation of user input and creation of commands.
  */
 public class Parser {
-    /** List of tasks */
+    /**
+     * List of tasks
+     */
     private final TaskList lst;
 
     /**
@@ -28,7 +24,7 @@ public class Parser {
     /**
      * Validates the user input command description.
      *
-     * @throws DukeException If user did not give a command description, or gave it in an invalid format.    
+     * @throws DukeException If user did not give a command description, or gave it in an invalid format.
      */
     private void validateCommandDesc(String desc, Action type) throws DukeException {
         String result = desc.trim();
@@ -59,7 +55,7 @@ public class Parser {
     }
 
     /**
-     * Returns the correct command after parsing the user input. 
+     * Returns the correct command after parsing the user input.
      *
      * @param command String representing the user input command.
      * @throws DukeException If user gave an invalid input command.
@@ -69,7 +65,7 @@ public class Parser {
         String[] splitCommand = command.split(" ", 2);
         Action action = Action.valueOf(splitCommand[0].toUpperCase());
         String value = splitCommand.length > 1 ? splitCommand[1] : "";
-        
+
         switch (action) {
         case LIST:
             resultantCommand = new ListCommand();
@@ -105,11 +101,13 @@ public class Parser {
             resultantCommand = new FindCommand(value);
             break;
         }
-        
+
         return resultantCommand;
     }
 
-    /** Constants representing the different actions. */
+    /**
+     * Constants representing the different actions.
+     */
     private enum Action {
         BYE,
         LIST,

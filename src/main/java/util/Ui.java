@@ -8,7 +8,9 @@ import java.util.Scanner;
  * The UI class deals with interactions with the user and prints responses accordingly.
  */
 public class Ui {
-    /** Scanner to read in user input input. */
+    /**
+     * Scanner to read in user input input.
+     */
     private final Scanner sc;
 
     /**
@@ -20,7 +22,7 @@ public class Ui {
 
     /**
      * Returns a string describing a command.
-     * 
+     *
      * @return A string describing a command.
      */
     public String readCommand() {
@@ -44,9 +46,9 @@ public class Ui {
 
     /**
      * Prints the string representation of a task.
-     * 
-     * @param task Task to print
-     * @param taskNum Task number of task            
+     *
+     * @param task    Task to print
+     * @param taskNum Task number of task
      */
     public void showTask(Task task, int taskNum) {
         System.out.println(taskNum + ". " + task);
@@ -54,9 +56,9 @@ public class Ui {
 
     /**
      * Prints the add task acknowledgement.
-     * 
-     * @param task Task to print
-     * @param taskNum Task number of task       
+     *
+     * @param task    Task to print
+     * @param taskNum Task number of task
      */
     public void showAddTask(Task task, int taskNum) {
         System.out.println("The following task has been added: ");
@@ -67,8 +69,8 @@ public class Ui {
     /**
      * Prints the delete task acknowledgement.
      *
-     * @param task Task to print
-     * @param taskNum Task number of task       
+     * @param task    Task to print
+     * @param taskNum Task number of task
      */
     public void showDeleteTask(Task task, int taskNum) {
         System.out.println("The following task has been deleted: ");
@@ -79,8 +81,8 @@ public class Ui {
     /**
      * Prints the task mark as done acknowledgement.
      *
-     * @param task Task to print
-     * @param taskNum Task number of task       
+     * @param task    Task to print
+     * @param taskNum Task number of task
      */
     public void showDoneTask(Task task, int taskNum) {
         System.out.println("The following task has been marked as done: ");
@@ -115,7 +117,7 @@ public class Ui {
 
     /**
      * Prints the error message.
-     * 
+     *
      * @param err Error message.
      */
     public void showError(String err) {

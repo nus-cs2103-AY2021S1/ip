@@ -1,20 +1,24 @@
 package task;
 
 /**
- * Represents a Task, providing implementation of a general task. 
+ * Represents a Task, providing implementation of a general task.
  */
 public class Task {
-    /** Description of the task. */
+    /**
+     * Description of the task.
+     */
     protected String description;
 
-    /** State of whether the task is done. */
+    /**
+     * State of whether the task is done.
+     */
     protected boolean isDone;
 
     /**
      * Creates a task.
      *
      * @param description Description of the task.
-     * @param isDone State of whether the task is done.
+     * @param isDone      State of whether the task is done.
      */
     public Task(String description, boolean isDone) {
         this.description = description;
@@ -29,7 +33,7 @@ public class Task {
     public String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
-    
+
     /**
      * Mark task as done.
      */
@@ -39,16 +43,16 @@ public class Task {
 
     /**
      * Return task description.
-     * 
+     *
      * @return task description.
      */
     public String getDescription() {
         return this.description;
     }
-    
+
     /**
      * Return a string representation of the task.
-     * 
+     *
      * @return A string representation of the task.
      */
     @Override

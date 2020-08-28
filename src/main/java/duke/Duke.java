@@ -14,19 +14,25 @@ import java.io.IOException;
  * Represents the Duke class. The Duke class serves as the main entry point into the chatbot application.
  */
 public class Duke {
-    /** File directory where the text file is stored */
+    /**
+     * File directory where the text file is stored
+     */
     private static final String DIR = "data";
-
-    /** Storage where writing and reading of files is handled */
-    private Storage storage;
-
-    /** List of tasks */
-    private TaskList tasks;
-
-    /** Ui to print responses to user */
+    /**
+     * Ui to print responses to user
+     */
     private final Ui ui;
-
-    /** Parser to parse and verify user input */
+    /**
+     * Storage where writing and reading of files is handled
+     */
+    private Storage storage;
+    /**
+     * List of tasks
+     */
+    private TaskList tasks;
+    /**
+     * Parser to parse and verify user input
+     */
     private Parser parser;
 
     /**
@@ -50,6 +56,15 @@ public class Duke {
     }
 
     /**
+     * The main method for the chat bot application. Reads in a file path to create a Duke instance and run the application.
+     *
+     * @param args 1 argument, filePath which is the path and name of the file to be created and loaded from.
+     */
+    public static void main(String[] args) {
+        new Duke("data/serina.txt").run();
+    }
+
+    /**
      * The main chat bot application logic. Repeatedly reads in user commands and executes the commands until the user exits the application.
      */
     public void run() {
@@ -69,14 +84,5 @@ public class Duke {
                 ui.showError(ex.getMessage());
             }
         }
-    }
-    
-    /**
-     * The main method for the chat bot application. Reads in a file path to create a Duke instance and run the application.
-     *
-     * @param args 1 argument, filePath which is the path and name of the file to be created and loaded from.
-     */
-    public static void main(String[] args) {
-        new Duke("data/serina.txt").run();
     }
 }

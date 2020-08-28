@@ -5,16 +5,18 @@ import task.EventTask;
 import task.Task;
 import task.ToDoTask;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.ArrayList;
 import java.util.stream.Collectors;
 
 /**
  * The TaskList class represents the list containing tasks.
  */
 public class TaskList {
-    /** List containing the different tasks. */
+    /**
+     * List containing the different tasks.
+     */
     private final List<Task> lst;
 
     /**
@@ -26,7 +28,7 @@ public class TaskList {
 
     /**
      * Creates a new TaskList of tasks based on an input list of strings. The constructor parses these strings to create tasks before adding them to the TaskList.
-     * 
+     *
      * @param inputLst List containing tasks represented as strings.
      */
     public TaskList(List<String> inputLst) {
@@ -66,8 +68,8 @@ public class TaskList {
 
     /**
      * Returns number of tasks in the list.
-     * 
-     * @return  Number of tasks in the list.
+     *
+     * @return Number of tasks in the list.
      */
     public int size() {
         return lst.size();
@@ -75,7 +77,7 @@ public class TaskList {
 
     /**
      * Returns a task based on its index in the list.
-     * 
+     *
      * @return Task based on its index in the list.
      */
     public Task get(int index) {
@@ -96,7 +98,9 @@ public class TaskList {
         }).collect(Collectors.toList());
     }
 
-    /** Constants representing the different tasks. */
+    /**
+     * Constants representing the different tasks.
+     */
     private enum TaskType {
         TODO,
         DEADLINE,
