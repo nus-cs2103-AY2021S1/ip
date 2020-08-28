@@ -21,10 +21,10 @@ public class Duke {
 
     public void run() throws IOException {
 
-        System.out.println("Hi, this is duke.components.Duke, what can I do for you?");
+        System.out.println("Hi, this is Duke, what can I do for you?");
 
         parser.parse(ui.waitForNextInput());
-        while(!parser.isBye) {
+        while (!parser.isBye) {
 
             if (parser.isList) {
 
@@ -37,6 +37,9 @@ public class Duke {
                                 parser.getDoneTaskNum()
                         )
                 );
+            } else if (parser.isFind) {
+
+                ui.printFindTask(tasks.findTasks(parser.getFindTask()));
 
             } else if (parser.isTask) {
 
