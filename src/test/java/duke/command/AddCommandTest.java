@@ -65,12 +65,12 @@ public class AddCommandTest {
 
         try {
             String res = new AddCommand("todo hello").execute(ui, list, storage);
-            assertEquals("Got it. I've added this task:\n\t    " + task +
-                    "\n\t  Now you have 1 task in the list.", res);
+            assertEquals("Got it. I've added this task:\n\t    " + task
+                    + "\n\t  Now you have 1 task in the list.", res);
 
             String res2 = new AddCommand("todo world").execute(ui, list, storage);
-            assertEquals("Got it. I've added this task:\n\t    " + task2 +
-                    "\n\t  Now you have 2 tasks in the list.", res2);
+            assertEquals("Got it. I've added this task:\n\t    " + task2
+                    + "\n\t  Now you have 2 tasks in the list.", res2);
         } catch (Exception e) {
             fail();
         }
