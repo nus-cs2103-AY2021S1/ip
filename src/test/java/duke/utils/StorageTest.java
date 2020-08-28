@@ -39,7 +39,7 @@ class StorageTest {
                 + "|____/ \\__,_|_|\\_\\___|\n"
                 + "\n"
                 + "What can I do for you?\n"
-                + "Welcome back! Trying to retrieve where you were last time...\n"
+                + "Starter back! Trying to retrieve where you were last time...\n"
                 + "Great! We have successfully loaded the data. Enjoy~\n"
                 + "Here are the tasks in your list:\n"
                 + "1.[T][✗] borrow book\n"

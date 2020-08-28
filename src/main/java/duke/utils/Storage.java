@@ -7,11 +7,12 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
+import duke.components.AlertBox;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
 import duke.types.TaskType;
-import duke.ui.Messenger;
-
+import duke.views.Messenger;
+import javafx.scene.control.Label;
 
 
 /**
@@ -33,22 +34,30 @@ public class Storage {
     }
 
     /**
+     * Gets the task list of the storage object.
+     *
+     * @return a TaskList object representing the task list in the storage.
+     */
+    public TaskList getTaskList() {
+        return taskList;
+    }
+
+    /**
      * Reads the saved file and populate the data into the task list.
      */
-    public void readSavedFile() {
+    public void readSavedFile(Label label) {
         try {
-            Messenger.greet();
             System.out.println(Messenger.FILE_LOADING);
             File directory = new File(DIRECTORY_PATH);
 
             if (!directory.exists()) {
-                System.out.println(Messenger.DIRECTORY_NOT_FOUND);
+                label.setText(Messenger.DIRECTORY_NOT_FOUND);
                 directory.mkdir();
             }
 
             File f = new File(FILE_PATH);
             if (f.createNewFile()) {
-                System.out.println(Messenger.FILE_NOT_FOUND);
+                label.setText(Messenger.FILE_NOT_FOUND);
             } else {
                 Scanner sc = new Scanner(f);
                 while (sc.hasNextLine()) {
@@ -64,17 +73,17 @@ public class Storage {
                         taskList.getTasks().add(new Task(parsed[1], command));
                     }
                 }
-                System.out.println(Messenger.FILE_LOADED);
+                label.setText(Messenger.FILE_LOADED);
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            AlertBox.display("IO Error", e.getMessage());
         }
     }
 
     /**
      * Saves the data in the task list into a saved file.
      */
-    public void saveDataToFile() {
+    public void saveDataToFile(Label label) {
         try {
             FileWriter writer = new FileWriter(FILE_PATH);
 
@@ -83,9 +92,10 @@ public class Storage {
                         + (TaskType.hasTime(task.getType()) ? "|" + task.getDate() : "") + System.lineSeparator());
             }
             writer.close();
-            Messenger.close();
+            taskList.clearTasks();
+            label.setText(Messenger.CLOSE_MESSAGE);
         } catch (IOException e) {
-            e.printStackTrace();
+            AlertBox.display("IO Error!", e.getMessage());
         }
     }
 }
