@@ -1,6 +1,6 @@
 todo feed doge
-deadline east coast plan /by monday
-event covid19 /by september
+deadline east coast plan /by 2020-09-02
+event covid19 /on 2020-12-02
 todo
 list
 check 1

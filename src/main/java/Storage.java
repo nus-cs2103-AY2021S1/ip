@@ -5,11 +5,20 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
 
+/**
+ * Object to enable permanent storing of task list onto hard drive.
+ */
 public class Storage {
-    public String filePath;
+    private String filePath;
+
     public Storage(String filePath) {
         this.filePath = filePath;
     }
+
+    /**
+     * Stores task list provided onto a specified text file.
+     * @param toDoList given task list
+     */
     public void save(List<Task> toDoList) {
         String path = System.getProperty("user.dir") + filePath;
         if(!Files.exists(Paths.get(path))) {
