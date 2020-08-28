@@ -30,7 +30,7 @@ public class TaskTest {
     @Test
     void completeTask_normalInput_success(){
         Deadline deadline = new Deadline("return book", "06-08-2020 12:00");
-        deadline.done();
+        deadline.markAsDone();
         assertEquals(deadline.toString(),
                 "[D][✓] return book (by: 6 Aug 2020, 12:00 pm)");
     }

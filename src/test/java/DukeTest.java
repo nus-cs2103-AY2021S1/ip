@@ -6,6 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class DukeTest {
     @Test
     public void dummyTest(){
-        Duke duke = new Duke("hello");
+        Duke duke = new Duke("data/tasks.txt");
     }
 }
