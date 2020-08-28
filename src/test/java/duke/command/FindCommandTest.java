@@ -1,15 +1,16 @@
 package duke.command;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+
 import duke.component.Storage;
 import duke.component.StorageStub;
 import duke.component.TaskList;
 import duke.component.Ui;
 import duke.task.Task;
 import duke.task.ToDo;
-import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import org.junit.jupiter.api.Test;
 
 public class FindCommandTest {
     @Test
