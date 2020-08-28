@@ -15,7 +15,8 @@ import java.util.regex.Pattern;
 public class Parser {
 
     /**
-     * Translates user input to its corresponding Command
+     * Parse user input into an executable command.
+     * The resulting command, when executed, may perform modifications to taskList
      * @param taskList The taskList which the Duke Command will execute on
      * @param input The raw user input
      * @return The corresponding Command, or InvalidCommand if input cannot be parsed

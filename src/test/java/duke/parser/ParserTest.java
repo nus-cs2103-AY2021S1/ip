@@ -1,23 +1,29 @@
 package duke.parser;
 
-import duke.command.*;
-import duke.parser.Parser;
+import duke.command.AddCommand;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.ExitCommand;
+import duke.command.FindCommand;
+import duke.command.HelpCommand;
+import duke.command.InvalidCommand;
+import duke.command.ListCommand;
+import duke.command.LoadCommand;
+import duke.command.SaveCommand;
 import duke.task.Task;
 import duke.task.ToDo;
-import duke.util.DukeDateTime;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class ParserTest {
 
-    List<Task> taskList = new ArrayList<>(5);
-    Task dummy = new ToDo("Dummy Task");
+    private List<Task> taskList = new ArrayList<>(5);
+    private Task dummy = new ToDo("Dummy Task");
 
     @BeforeEach
     void init() {
@@ -25,7 +31,7 @@ class ParserTest {
     }
 
     @Test
-    void parseAddCommand_success(){
+    void parseAddCommand_success() {
         String input;
 
         input = "todo light";

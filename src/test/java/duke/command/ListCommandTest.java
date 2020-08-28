@@ -9,9 +9,9 @@ import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
-class FindCommandTest {
+class ListCommandTest {
 
     private final List<Task> taskList = new ArrayList<>(1);
 
@@ -21,14 +21,12 @@ class FindCommandTest {
         PrintStream originalOut = System.out;
         System.setOut(new PrintStream(outContent));
 
-        // Attempt to match
+        // Ensure something (anything) is printed
         taskList.add(new ToDo("Eat some chips"));
-        new FindCommand(taskList, "t some c").execute();
-        assertEquals("Here are the matching tasks in your list:\r\n" +
-                "1. [T][✗] Eat some chips\r\n" +
-                "Number of tasks found: 1\r\n",
-                outContent.toString());
+        new ListCommand(taskList).execute();
+        assertNotEquals("", outContent.toString());
 
         System.setOut(originalOut);
     }
+
 }

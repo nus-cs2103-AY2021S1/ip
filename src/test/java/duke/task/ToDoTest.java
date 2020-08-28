@@ -3,7 +3,9 @@ package duke.task;
 import duke.storage.CsvToTask;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 class ToDoTest {
 
@@ -16,17 +18,17 @@ class ToDoTest {
 
     @Test
     void hashCode_notEquals() {
-        Task case1 = new ToDo(true,"test");
+        Task case1 = new ToDo(true, "test");
         Task case2 = new ToDo(false, "test");
         assertNotEquals(case1.hashCode(), case2.hashCode());
 
-        case1 = new ToDo(true,"test case1");
+        case1 = new ToDo(true, "test case1");
         case2 = new ToDo(true, "test case2");
         assertNotEquals(case1.hashCode(), case2.hashCode());
     }
 
     @Test
-    void toCSV_fromCSV() {
+    void toCsv_fromCsv() {
         try {
             Task task1 = new ToDo("test");
             Task task2 = CsvToTask.TODO.parse(task1.toCsv());

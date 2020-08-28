@@ -29,7 +29,7 @@ public class ListCommand implements Command {
 
         AtomicInteger index = new AtomicInteger(0);
         taskList.stream()
-                .map((task) -> index.incrementAndGet() + ". " + task.toString() )
+                .map((task) -> index.incrementAndGet() + ". " + task.toString())
                 .forEach(System.out::println);
 
     }

@@ -5,9 +5,9 @@ import org.junit.jupiter.api.Test;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class HelpCommandTest {
+class InvalidCommandTest {
 
     @Test
     void testExecute() {
@@ -16,9 +16,10 @@ class HelpCommandTest {
         System.setOut(new PrintStream(outContent));
 
         // Ensure something (anything) is printed
-        new HelpCommand().execute();
-        assertNotEquals("", outContent.toString());
+        new InvalidCommand("testing 123,./").execute();
+        assertEquals("testing 123,./\r\n", outContent.toString());
 
         System.setOut(originalOut);
     }
+
 }

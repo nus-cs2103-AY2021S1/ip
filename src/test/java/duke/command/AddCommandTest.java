@@ -1,10 +1,10 @@
 package duke.command;
 
-import duke.util.DukeDateTime;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
+import duke.util.DukeDateTime;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -22,7 +22,7 @@ class AddCommandTest {
         Task task1 = new ToDo("Todo 1");
         Task task2 = new Deadline("Deadline 1", dateTime);
         Task task3 = new Event("Event 1", dateTime, dateTime);
-        
+
         ReversibleCommand c1 = new AddCommand(taskList, task1);
         ReversibleCommand c2 = new AddCommand(taskList, task2);
         ReversibleCommand c3 = new AddCommand(taskList, task3);

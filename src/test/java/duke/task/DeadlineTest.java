@@ -1,20 +1,22 @@
 package duke.task;
 
-import duke.util.DukeDateTime;
 import duke.storage.CsvToTask;
+import duke.util.DukeDateTime;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 class DeadlineTest {
 
-    String string1 = "Test case 1";
-    DukeDateTime time1 = new DukeDateTime(LocalDateTime.now().minusHours(1).format(DukeDateTime.DEFAULT));
+    private String string1 = "Test case 1";
+    private DukeDateTime time1 = new DukeDateTime(LocalDateTime.now().minusHours(1).format(DukeDateTime.DEFAULT));
 
-    String string2 = "Test case 2";
-    DukeDateTime time2 = new DukeDateTime();
+    private String string2 = "Test case 2";
+    private DukeDateTime time2 = new DukeDateTime();
 
     @Test
     void getDeadline() {
@@ -41,7 +43,7 @@ class DeadlineTest {
     }
 
     @Test
-    void toCSV_fromCSV() {
+    void toCsv_fromCsv() {
         try {
             Task task1 = new Deadline(string1, time1);
             Task task2 = CsvToTask.DEADLINE.parse(task1.toCsv());

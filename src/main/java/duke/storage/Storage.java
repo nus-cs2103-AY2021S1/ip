@@ -59,7 +59,7 @@ public class Storage {
                     try {
                         String taskType = line.substring(0, line.indexOf(','));
                         return CsvToTask.valueOf(taskType).parse(line);
-                    } catch(Exception e) {
+                    } catch (Exception e) {
                         System.err.println("Corrupt entry: " + line); // Todo: logger
                         return null;
                     }
