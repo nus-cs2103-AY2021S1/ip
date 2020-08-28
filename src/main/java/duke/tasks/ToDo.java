@@ -2,6 +2,9 @@ package duke.tasks;
 
 import java.util.Objects;
 
+/**
+ * The class for todoo object.
+ */
 public class ToDo extends Task{
     public ToDo(String task) {
         super(task);

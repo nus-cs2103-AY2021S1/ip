@@ -3,6 +3,9 @@ package duke.tasks;
 import java.util.Objects;
 import java.util.Optional;
 
+/**
+ * The class for event object.
+ */
 public class Event extends Task {
     private String duration;
     public Event(String task, String duration){

@@ -9,12 +9,20 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class for the representation of the storage/database.
+ */
 public class Storage {
     private String databasePath;
 
     public Storage(String databasePath) {
         this.databasePath = databasePath;
     }
+
+    /**
+     * Real all the tasks from the database.
+     * @return the list of all the tasks from the database
+     */
     public List<Task> readAll() {
         List<Task> tasks = new ArrayList<>();
         try {
@@ -52,6 +60,10 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Update the {@code tasks} to the database.
+     * @param tasks tasks to update the database
+     */
     public void update(List<Task> tasks) {
         try {
             File databaseFile = new File(databasePath);

@@ -3,6 +3,9 @@ package duke.tasks;
 import java.util.Objects;
 import java.util.Optional;
 
+/**
+ * The class for deadline object.
+ */
 public class Deadline extends Task{
     private String deadline;
     public Deadline(String task, String deadline) {

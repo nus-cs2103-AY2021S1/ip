@@ -2,15 +2,19 @@ package duke.tasks;
 
 import java.util.Optional;
 
+/**
+ * The class for an abstract idea of task.
+ */
 public class Task {
     private String task;
     private Boolean status;
-    Task(String task){
+
+    protected Task(String task){ //not meant to be instantiated by classes outside of this package
         this.task = task;
         this.status = false;
     }
 
-    Task(String task, boolean status) {
+    protected Task(String task, boolean status) {
         this.task = task;
         this.status = status;
     }

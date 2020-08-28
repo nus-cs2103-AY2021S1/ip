@@ -6,11 +6,14 @@ import duke.ui.Printer;
 
 import java.util.List;
 
+/**
+ * Class for task list.
+ */
 public class SingletonTaskList {
     List<Task> tasks;
     Storage storage;
 
-    private static SingletonTaskList instance;
+    private static SingletonTaskList instance; //this class should only be instantiate once
 
     public static synchronized SingletonTaskList getInstance(Storage database) {
         if (instance == null) {
@@ -25,7 +28,10 @@ public class SingletonTaskList {
         tasks = storage.readAll();
     }
 
-
+    /**
+     * Add task to the task list and the database.
+     * @param task task to add
+     */
     public void add(Task task) {
         tasks.add(task);
         int numOfTask = tasks.size();
@@ -33,6 +39,12 @@ public class SingletonTaskList {
         storage.update(tasks);
     }
 
+    /**
+     * Delete task from the task list ant the database.
+     * @param idx the idx of task to delete
+     * @throws TaskOutOfBoundException when the idx is not valid
+     * @see duke.exceptions.TaskOutOfBoundException
+     */
     public void delete(int idx) throws TaskOutOfBoundException {
         try {
             Printer.printDelete(tasks.get(idx - 1), tasks.size() - 1);
@@ -42,6 +54,9 @@ public class SingletonTaskList {
         }
     }
 
+    /**
+     * List all the tasks in the task list.
+     */
     public void listAll() {
         if(tasks.size() == 0){
             Printer.printNoTaskReminder();
@@ -49,7 +64,12 @@ public class SingletonTaskList {
         Printer.printAllTask(tasks);
     }
 
-
+    /**
+     * Set {@code idx} of task done.
+     * @param idx idx of the task
+     * @throws TaskOutOfBoundException when the {@code idx} is not valid
+     * @see duke.exceptions.TaskOutOfBoundException
+     */
     public void setTaskDone(int idx) throws TaskOutOfBoundException {
         try {
             Task task = this.tasks.get(idx);
