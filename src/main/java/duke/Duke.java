@@ -1,7 +1,7 @@
 package duke;
 
-import duke.command.*;
-import duke.exception.*;
+import duke.command.Command;
+import duke.exception.DukeException;
 
 /**
  * Represents a Duke bot.
@@ -47,7 +47,7 @@ public class Duke {
         Ui ui = new Ui();
         ui.greet();
         boolean isRunning = true;
-        while(isRunning) {
+        while (isRunning) {
             try {
                 String fullCommand = ui.readCommand();
                 Command c = Parser.parse(fullCommand);

@@ -1,9 +1,9 @@
 package duke;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import duke.task.*;
+
+import duke.task.Task;
 
 /**
  * Contains a list of tasks.
@@ -94,8 +94,8 @@ public class TaskList {
      */
     public List<Task> findTasks(String keyword) {
         List<Task> relatedTasks = new ArrayList<>();
-        for(Task task : this.tasks) {
-            if(task.description.contains(keyword)) {
+        for (Task task : this.tasks) {
+            if (task.getDescription().contains(keyword)) {
                 relatedTasks.add(task);
             }
         }

@@ -7,12 +7,12 @@ public class Task {
     /**
      * The description of the task.
      */
-    public String description;
+    private String description;
 
     /**
      * The completion status of the task.
      */
-    public boolean isDone;
+    private boolean isDone;
 
     /**
      * Creates a new instance of a Task object with attributes defined

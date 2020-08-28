@@ -10,8 +10,13 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import duke.task.*;
-import duke.exception.*;
+
+import duke.exception.DukeFileNotFoundException;
+import duke.exception.DukeLoadingErrorException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
 
 /**
  * Responsible for local disk file-related operations.
@@ -47,7 +52,7 @@ public class Storage {
 
     /**
      * Loads the task list in the file.
-     * @return Returns a List<Task> that corresponds to the file data.
+     * @return Returns a {@code List<Task>}that corresponds to the file data.
      * @throws DukeFileNotFoundException If file is not found.
      */
     List<Task> load() throws DukeFileNotFoundException {
@@ -69,7 +74,10 @@ public class Storage {
                 case "D":
                     taskList.add(new Deadline(task[2], task[3], task[1].equals("1")));
                     break;
+                default:
+                    break;
                 }
+
             }
             s.close();
             return taskList;
@@ -86,9 +94,11 @@ public class Storage {
         if (task instanceof Todo) {
             return "T | " + (task.getStatus() ? "1" : "0") + " | " + task.getDescription();
         } else if (task instanceof Event) {
-            return "E | " + (task.getStatus() ? "1" : "0") + " | " + task.getDescription() + " | " + ((Event) task).getDate();
+            return "E | " + (task.getStatus() ? "1" : "0") + " | " + task.getDescription() + " | "
+                    + ((Event) task).getDate();
         } else {
-            return "D | " + (task.getStatus() ? "1" : "0") + " | " + task.getDescription() + " | " + ((Deadline) task).getDate();
+            return "D | " + (task.getStatus() ? "1" : "0") + " | " + task.getDescription() + " | "
+                    + ((Deadline) task).getDate();
         }
     }
 
@@ -101,7 +111,7 @@ public class Storage {
         try {
             FileWriter fw = new FileWriter(String.valueOf(path));
             String content = "";
-            for(Task task : taskList.getList()) {
+            for (Task task : taskList.getList()) {
                 content += parseTaskAsText(task) + "\n";
             }
             fw.write(content);
