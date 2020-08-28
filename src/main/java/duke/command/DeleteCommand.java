@@ -1,7 +1,10 @@
 package duke.command;
 
+import duke.component.Parser;
+import duke.component.Storage;
+import duke.component.TaskList;
+import duke.component.Ui;
 import duke.task.Task;
-import duke.component.*;
 
 /**
  * Represents a command for deleting a task.
