@@ -1,66 +1,74 @@
 package duke;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import duke.command.Command;
+import duke.commands.Command;
 import duke.exception.DukeException;
+import duke.utils.DukeState;
 
 /**
- * The Duke object initializes the core classes: Ui, Storage, Parser and TaskList, and contains the main logic
- * that integrates them together to run the Duke application.
+ * The Duke object initializes the core classes Storage and TaskList, and contains the main logic
+ * to respond correctly to user input.
  */
 public class Duke {
 
-    private final Ui ui;
     private final Storage storage;
     private final TaskList taskList;
+    private DukeState dukeState;
+    private final boolean isLoadedFromDisk;
 
     /**
-     * Initializes a Duke object.
+     * Initializes a Duke object. The taskList will be loaded from disk if there exists
+     * an existing data file. Else, Duke will start with an empty taskList.
      *
      * @param filePath the filePath where the storage will load from and save data to.
      */
     public Duke(String filePath) {
-        this.ui = new Ui();
         this.storage = new Storage(filePath);
 
         TaskList tmpTaskList;
+        boolean tmpIsLoadedFromDisk;
         try {
             tmpTaskList = new TaskList(storage.load());
-            ui.printWithWrapper(new ArrayList<>(List.of("Duke has loaded from a previously saved file!")),
-                    false, false);
+            tmpIsLoadedFromDisk = true;
         } catch (DukeException e) {
             tmpTaskList = new TaskList();
-            ui.printWithWrapper(new ArrayList<>(List.of(
-                    e.getPrettyErrorMsg(),
-                    "Duke will start from a clean taskList!")), false, true);
+            tmpIsLoadedFromDisk = false;
         }
 
         this.taskList = tmpTaskList;
+        this.dukeState = DukeState.RUNNING;
+        this.isLoadedFromDisk = tmpIsLoadedFromDisk;
     }
 
     /**
-     * The main processing method of Duke. It waits for user input, parses, then executes the desired
-     * command.
+     * Gets the appropriate response for a given user input.
+     * @param input The user input.
+     * @return The appropriate response.
      */
-    private void run() {
-        ui.printGreeting();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String input = ui.getUserInput();
-                Command cmd = Parser.parseInput(input);
-                cmd.execute(ui, storage, taskList);
-                isExit = cmd.isExit();
-            } catch (DukeException e) {
-                ui.printWithWrapper(new ArrayList<>(List.of(e.getPrettyErrorMsg())), false, true);
+    public String getResponse(String input) {
+        try {
+            Command cmd = Parser.parseInput(input);
+            if (cmd.isExit()) {
+                dukeState = DukeState.EXITED;
             }
+            return cmd.execute(storage, taskList);
+        } catch (DukeException e) {
+            return e.getPrettyErrorMsg();
         }
     }
 
-    public static void main(String[] args) {
-        Duke duke = new Duke("data/duke.txt");
-        duke.run();
+    /**
+     * Gets the current state of the Duke application.
+     * @return The current state of the Duke application.
+     */
+    public DukeState getDukeState() {
+        return dukeState;
+    }
+
+    /**
+     * Checks whether the taskList was loaded from a data file on app-start.
+     * @return A boolean value indicating whether the taskList was loaded from a data file.
+     */
+    public boolean isLoadedFromDisk() {
+        return isLoadedFromDisk;
     }
 }

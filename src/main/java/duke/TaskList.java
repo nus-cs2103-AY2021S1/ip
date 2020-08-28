@@ -6,7 +6,7 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import duke.exception.DukeException;
-import duke.task.Task;
+import duke.tasks.Task;
 
 /**
  * The class that is responsible for storing the current state of the list of tasks while Duke is still

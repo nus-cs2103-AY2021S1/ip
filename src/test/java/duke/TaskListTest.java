@@ -8,10 +8,10 @@ import java.util.ArrayList;
 import org.junit.jupiter.api.Test;
 
 import duke.exception.DukeException;
-import duke.task.DeadlineTask;
-import duke.task.EventTask;
-import duke.task.Task;
-import duke.task.TodoTask;
+import duke.tasks.DeadlineTask;
+import duke.tasks.EventTask;
+import duke.tasks.Task;
+import duke.tasks.TodoTask;
 
 public class TaskListTest {
 
