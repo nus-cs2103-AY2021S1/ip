@@ -8,15 +8,16 @@ import java.util.List;
  */
 public class TaskList {
 
+    /** List of tasks belonging to the user. */
     private final List<Task> tasks;
 
     /**
      * Creates and initialises a new TaskList object.
      *
-     * @param taskList List of tasks that has been created by the user.
+     * @param tasks List of tasks that has been created by the user.
      */
-    public TaskList(List<Task> taskList) {
-        this.tasks =  taskList;
+    public TaskList(List<Task> tasks) {
+        this.tasks =  tasks;
     }
 
     /**
@@ -32,7 +33,6 @@ public class TaskList {
      * Retrieves the correct task in the list of tasks at the given index.
      *
      * @param index Zero based index of the desired task in the list.
-     *
      * @return Task at the given index in the list.
      */
     public Task getTask(int index) {

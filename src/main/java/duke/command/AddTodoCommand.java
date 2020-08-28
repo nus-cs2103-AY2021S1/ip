@@ -1,6 +1,7 @@
 package duke.command;
 
-import duke.exception.*;
+import duke.exception.DukeException;
+import duke.exception.InvalidTaskException;
 
 import duke.task.TaskList;
 import duke.task.Task;
@@ -15,6 +16,7 @@ import duke.Storage;
  */
 public class AddTodoCommand extends Command {
 
+    /** Parsed commands containing details of the todo task. */
     private final String[] parsedCommand;
 
     /**
@@ -27,13 +29,13 @@ public class AddTodoCommand extends Command {
     }
 
     /**
-     * Creates a new todo task, adds it to the list of tasks
-     * and saves it into the designated file containing the user's list of tasks.
+     * Creates a new todo task, adds it to the user's list of tasks
+     * and saves it into the designated file that stores the user's tasks.
      *
      * @param tasks List of tasks which the new todo task will be added into.
      * @param ui Ui object created for the Duke object.
      * @param storage Storage object used by the Duke object for file operations.
-     * @throws DukeException If the task cannot be created due to invalid inputs.
+     * @throws DukeException If the todo task cannot be created due to invalid inputs.
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
@@ -51,10 +53,10 @@ public class AddTodoCommand extends Command {
     }
 
     /**
-     * Retrieves the details of the todo task.
+     * Retrieves the description of the todo task.
      *
      * @return String containing the todo description.
-     * @throws InvalidTaskException If the deadline information is invalid and is missing arguments.
+     * @throws InvalidTaskException If the todo description is missing.
      */
     public String retrieveTodoInfo() throws DukeException {
         String todoInfo;

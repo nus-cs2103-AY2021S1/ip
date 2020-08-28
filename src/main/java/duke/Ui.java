@@ -8,6 +8,7 @@ import java.util.Scanner;
 public class Ui {
 
     private static final String DIVIDER = "----------------------------------------";
+    /** Scanner object to read user inputs. */
     private final Scanner scanner;
 
     /**

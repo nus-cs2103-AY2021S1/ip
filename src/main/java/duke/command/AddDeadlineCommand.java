@@ -1,6 +1,8 @@
 package duke.command;
 
-import duke.exception.*;
+import duke.exception.DukeException;
+import duke.exception.InvalidFunctionException;
+import duke.exception.InvalidTaskException;
 
 import duke.task.TaskList;
 import duke.task.Task;
@@ -19,6 +21,7 @@ import java.time.format.DateTimeParseException;
  */
 public class AddDeadlineCommand extends Command {
 
+    /** Parsed commands containing details of the deadline task. */
     private final String[] parsedCommand;
 
     /**
@@ -31,13 +34,13 @@ public class AddDeadlineCommand extends Command {
     }
 
     /**
-     * Creates a new deadline task, adds it to the list of tasks
-     * and saves it into the designated file containing the user's list of tasks.
+     * Creates a new deadline task, adds it to the user's list of tasks
+     * and saves it into the designated file that stores the user's tasks.
      *
      * @param tasks List of tasks which the new deadline task will be added into.
      * @param ui Ui object created for the Duke object.
      * @param storage Storage object used by the Duke object for file operations.
-     * @throws DukeException If the task cannot be created due to invalid inputs.
+     * @throws DukeException If the deadline task cannot be created due to invalid inputs.
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
@@ -70,7 +73,7 @@ public class AddDeadlineCommand extends Command {
      * Retrieves the details of the deadline task and stores it in an array.
      *
      * @return String array containing the deadline description and deadline time stamp.
-     * @throws InvalidTaskException If the deadline information is invalid and is missing arguments.
+     * @throws InvalidTaskException If the deadline information is invalid or is missing arguments.
      */
     public String[] retrieveDeadlineInfo() throws InvalidTaskException {
         String[] deadlineInfo = new String[2];

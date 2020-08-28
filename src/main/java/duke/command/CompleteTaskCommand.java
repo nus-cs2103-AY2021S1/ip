@@ -1,6 +1,8 @@
 package duke.command;
 
-import duke.exception.*;
+import duke.exception.DukeException;
+import duke.exception.InvalidFunctionException;
+import duke.exception.InvalidTaskException;
 
 import duke.task.TaskList;
 
@@ -12,6 +14,7 @@ import duke.Storage;
  */
 public class CompleteTaskCommand extends Command {
 
+    /** Parsed commands containing details of the task to be completed. */
     private final String[] parsedCommand;
 
     /**
@@ -24,13 +27,13 @@ public class CompleteTaskCommand extends Command {
     }
 
     /**
-     * Marks the task as completed and updates it accordingly in the list of tasks
-     * saved in the designated file.
+     * Marks the task as completed and updates it accordingly in the user's list of tasks
+     * stored in the designated file.
      *
      * @param tasks List of tasks belonging to the user.
      * @param ui Ui object created for the Duke object.
      * @param storage Storage object used by the Duke object for file operations.
-     * @throws DukeException If the task cannot be completed due to invalid arguments.
+     * @throws DukeException If the task cannot be mark completed due to invalid arguments.
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {

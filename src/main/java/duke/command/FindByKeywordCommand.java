@@ -14,6 +14,7 @@ import duke.Storage;
  */
 public class FindByKeywordCommand extends Command {
 
+    /** Parsed commands containing the search keyword. */
     private final String[] parsedCommand;
 
     /**

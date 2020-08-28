@@ -1,6 +1,8 @@
 package duke.command;
 
-import duke.exception.*;
+import duke.exception.DukeException;
+import duke.exception.InvalidFunctionException;
+import duke.exception.InvalidTaskException;
 
 import duke.task.TaskList;
 import duke.task.Task;
@@ -14,6 +16,7 @@ import duke.Storage;
  */
 public class DeleteTaskCommand extends Command {
 
+    /** Parsed commands containing details of the task to be deleted. */
     private final String[] parsedCommand;
 
     /**
@@ -26,7 +29,7 @@ public class DeleteTaskCommand extends Command {
     }
 
     /**
-     * Deletes the task from the user's list of tasks and updates the list of tasks
+     * Deletes the task from the user's list of tasks and updates the task list
      * stored in the designated file.
      *
      * @param tasks List of tasks belonging to the user.

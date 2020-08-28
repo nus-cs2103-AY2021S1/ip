@@ -30,7 +30,7 @@ public class Storage {
      * Retrieves the list of tasks stored in the designated file
      * and stores them in a TaskList object.
      *
-     * @return TaskList containing tasks retrieved from the file.
+     * @return TaskList containing the tasks retrieved from the file.
      */
     public TaskList readFile() {
 
@@ -83,9 +83,9 @@ public class Storage {
     }
 
     /**
-     * Stores the list of tasks in the TaskList object in the designated file.
+     * Stores the list of tasks, in the TaskList object, into the designated file.
      *
-     * @param taskList List of tasks to be saved in the file.
+     * @param taskList TaskList object containing a list of tasks to be saved in the designated file.
      */
     public void saveToFile(TaskList taskList) {
         try {

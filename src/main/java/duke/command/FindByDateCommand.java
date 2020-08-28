@@ -1,6 +1,7 @@
 package duke.command;
 
-import duke.exception.*;
+import duke.exception.DukeException;
+import duke.exception.InvalidFunctionException;
 
 import duke.task.TaskList;
 import duke.task.Task;
@@ -17,6 +18,7 @@ import java.time.format.DateTimeParseException;
  */
 public class FindByDateCommand extends Command {
 
+    /** Parsed commands containing the search date. */
     private final String[] parsedCommand;
 
     /**

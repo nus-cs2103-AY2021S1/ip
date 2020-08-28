@@ -1,6 +1,8 @@
 package duke.command;
 
-import duke.exception.*;
+import duke.exception.DukeException;
+import duke.exception.InvalidFunctionException;
+import duke.exception.InvalidTaskException;
 
 import duke.task.TaskList;
 import duke.task.Task;
@@ -19,6 +21,7 @@ import java.time.format.DateTimeParseException;
  */
 public class AddEventCommand extends Command {
 
+    /** Parsed commands containing details of the event task. */
     private final String[] parsedCommand;
 
     /**
@@ -31,13 +34,13 @@ public class AddEventCommand extends Command {
     }
 
     /**
-     * Creates a new event task, adds it to the list of tasks
-     * and saves it into the designated file containing the user's list of tasks.
+     * Creates a new event task, adds it to the user's list of tasks
+     * and saves it into the designated file that stores the user's tasks.
      *
      * @param tasks List of tasks which the new event task will be added into.
      * @param ui Ui object created for the Duke object.
      * @param storage Storage object used by the Duke object for file operations.
-     * @throws DukeException If the task cannot be created due to invalid inputs.
+     * @throws DukeException If the event task cannot be created due to invalid inputs.
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
@@ -69,7 +72,7 @@ public class AddEventCommand extends Command {
      * Retrieves the details of the event task and stores it in an array.
      *
      * @return String array containing the event description and event time stamp.
-     * @throws InvalidTaskException If the event information is invalid and is missing arguments.
+     * @throws InvalidTaskException If the event information is invalid or is missing arguments.
      */
     public String[] retrieveEventInfo() throws InvalidTaskException {
         String[] eventInfo = new String[2];

@@ -9,7 +9,9 @@ import java.time.format.DateTimeFormatter;
  */
 public class Deadline extends Task {
 
+    /** Due date of the deadline task. */
     private LocalDate deadlineDate;
+    /** Time in which the deadline task is due. */
     private LocalTime deadlineTime;
 
     /**
