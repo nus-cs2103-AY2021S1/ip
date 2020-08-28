@@ -22,14 +22,12 @@ class TaskListTest {
         TaskList list = new TaskList();
         list.addTask("test content1", "todo");
         list.addTask("test content2", "deadline", "2020-08-23");
-        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outContent));
-        list.printList();
+        String actual = list.printList();
         String expectedOut =
                 "Here are the tasks in your list:\n" +
                 "1.[T][✗] test content1\n" +
                 "2.[D][✗] test content2 (by: Aug 23 2020)\n";
-        assertEquals(expectedOut, outContent.toString());
+        assertEquals(expectedOut, actual);
     }
 
     @Test
@@ -43,17 +41,16 @@ class TaskListTest {
     @Test
     void addTask() {
         TaskList list = new TaskList();
-        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outContent));
-        list.addTask("test content1", "todo");
-        list.addTask("test content2", "deadline", "2020-08-23");
+        String actual = "";
+        actual += list.addTask("test content1", "todo");
+        actual += list.addTask("test content2", "deadline", "2020-08-23");
         String expectedOut = "Got it. I've added this task:\n" +
                 "    [T][✗] test content1\n" +
                 "Now you have 1 task in the list.\n" +
                 "Got it. I've added this task:\n" +
                 "    [D][✗] test content2 (by: Aug 23 2020)\n" +
                 "Now you have 2 tasks in the list.\n";
-        assertEquals(expectedOut, outContent.toString());
+        assertEquals(expectedOut, actual);
         assertEquals(list.getTasks().size(), 2);
     }
 
@@ -62,14 +59,12 @@ class TaskListTest {
         TaskList list = new TaskList();
         list.addTask("test content1", "todo");
         list.addTask("test content2", "deadline", "2020-08-23");
-        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outContent));
         try {
-            list.deleteTask(1);
+            String actual = list.deleteTask(1);
             String expected = "Noted. I've removed this task:\n" +
                     "[T][✗] test content1\n" +
                     "Now you have 1 task in the list.\n";
-            assertEquals(expected, outContent.toString());
+            assertEquals(expected, actual);
         } catch (DukeException e) {
             fail();
         }
@@ -97,7 +92,7 @@ class TaskListTest {
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
 
-        list.findTask("content2");
+        String actual = list.findTask("content2");
 
         String expected = "Here are the matching tasks in your list:\n" +
                 "1.[D][✗] test content2 (by: Aug 23 2020)\n" +

@@ -111,17 +111,19 @@ public class TaskList {
      * Finds the tasks that have the keyword.
      *
      * @param keyword the keyword to be searched for.
+     * @return a string representing the message for the found task.
      */
-    public void findTask(String keyword) {
+    public String findTask(String keyword) {
         int index = 1;
-        System.out.println("Here are the matching tasks in your list:");
+        StringBuilder output = new StringBuilder("Here are the matching tasks in your list:\n");
         for (Task task : tasks) {
             String content = task.getContent();
             if (content.contains(keyword)) {
-                System.out.println(index + "." + task.toString());
+                output.append(index).append(".").append(task.toString()).append("\n");
                 index++;
             }
         }
+        return output.toString();
     }
 
     /**

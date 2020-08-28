@@ -65,7 +65,7 @@ public class Evaluator {
                 label.setText(list.deleteTask(Integer.parseInt(body)));
                 break;
             case "find":
-                list.findTask(body);
+                label.setText(list.findTask(body));
                 break;
             default:
                 String[] timeExtracted = parser.extractDate(body);
