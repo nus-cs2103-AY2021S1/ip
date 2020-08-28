@@ -71,14 +71,14 @@ public class Event extends Task {
 
     @Override
     public String output() {
-        return "E" + super.output() + " | At: " +
-                atTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")) + "\n";
+        return "E" + super.output() + " | At: "
+                + atTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")) + "\n";
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " +
-                atTime.format(DateTimeFormatter.ofPattern("hh:mm a   MMM d yyyy")) + ")";
+        return "[E]" + super.toString() + " (at: "
+                + atTime.format(DateTimeFormatter.ofPattern("hh:mm a   MMM d yyyy")) + ")";
     }
 
     /**
