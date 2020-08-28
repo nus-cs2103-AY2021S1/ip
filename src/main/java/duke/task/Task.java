@@ -33,7 +33,7 @@ public class Task {
      * @param line input from the text file
      */
     protected Task(String line) {
-        this.isDone = line.charAt(4) == '\u2713';
+        this.isDone = line.charAt(4) == 'D';
         this.name = line.substring(7, line.indexOf("[created on"));
         this.createdDateTime = LocalDateTime.parse(line.substring(line.indexOf("[created on ") + 12,
                 line.lastIndexOf("]")),
