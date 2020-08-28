@@ -1,5 +1,7 @@
+/**
+ * Marks task as Done in the task list.
+ */
 public class Done extends Command{
-
     Done(String[] splitQuery) throws DukeException{
         this.name = "done";
         this.usage = "done [TaskListNumber]";
@@ -10,6 +12,13 @@ public class Done extends Command{
     }
 
 
+    /**
+     * Returns String response after task has been marked as done.
+     *
+     * @param listIndex Index of task to be marked as done.
+     * @return String response after task has been marked as done.
+     * @throws CustomException If listIndex is not parse-able or listIndex is out of range.
+     */
     public String markedAsDone(String listIndex) throws CustomException{
         int idx;
         try {

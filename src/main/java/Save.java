@@ -3,6 +3,9 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 
+/**
+ * Saves Task Data in a Persistent File.
+ */
 public class Save extends Command{
 
     String DIR_PATH = "./data/";

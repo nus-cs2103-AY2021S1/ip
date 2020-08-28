@@ -2,10 +2,14 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Deadline Command to add in an Deadline type Task.
+ */
 public class Deadline extends Task{
     LocalDate date;
     LocalTime time;
     String preposition;
+
     Deadline(String title, String preposition, LocalDate date, LocalTime time) throws WrongUsageException{
         super(title);
         this.name = "deadline";
