@@ -14,7 +14,6 @@ import java.util.Arrays;
 public class Storage {
     private final Path FILE_PATH;
     private ArrayList<String> SAVE_LINES;
-
     private boolean isActive = true;
 
     public Storage(Path filePath) throws IOException {
@@ -76,7 +75,7 @@ public class Storage {
     }
 
     private String[] loadSaveFile() {
-        // Prevent saving of duke.task.TaskList while loading it
+        // Prevent saving while loading
         isActive = false;
         String[] result = new String[0];
         try {
