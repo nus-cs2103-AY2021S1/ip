@@ -60,12 +60,12 @@ public class DeleteCommandTest {
         list.add(task3);
 
         try {
-            assertEquals("Noted. I've removed this task:\n\t    " + task1 +
-                    "\n\t  Now you have 2 tasks", new DeleteCommand("delete 1").execute(ui, list, storage));
-            assertEquals("Noted. I've removed this task:\n\t    " + task3 +
-                    "\n\t  Now you have 1 task", new DeleteCommand("delete 2").execute(ui, list, storage));
-            assertEquals("Noted. I've removed this task:\n\t    " + task2 +
-                    "\n\t  Now you have 0 task", new DeleteCommand("delete 1").execute(ui, list, storage));
+            assertEquals("Noted. I've removed this task:\n\t    " + task1
+                    + "\n\t  Now you have 2 tasks", new DeleteCommand("delete 1").execute(ui, list, storage));
+            assertEquals("Noted. I've removed this task:\n\t    " + task3
+                    + "\n\t  Now you have 1 task", new DeleteCommand("delete 2").execute(ui, list, storage));
+            assertEquals("Noted. I've removed this task:\n\t    " + task2
+                    + "\n\t  Now you have 0 task", new DeleteCommand("delete 1").execute(ui, list, storage));
         } catch (Exception e) {
             fail();
         }
