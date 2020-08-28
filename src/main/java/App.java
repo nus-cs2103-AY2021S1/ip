@@ -124,6 +124,9 @@ public class App extends Application {
      */
     public String getResponse(String input) {
         Command c = Parser.parse(input);
+        if (c.isExit()) {
+            System.exit(0);
+        }
         try {
             return c.execute(runningDuke.getUi(), runningDuke.getList(), runningDuke.getStorage());
         } catch (InvalidCommandException e) {
