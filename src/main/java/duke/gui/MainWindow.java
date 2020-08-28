@@ -1,3 +1,5 @@
+package duke.gui;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,7 +12,7 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 /**
- * Controller for MainWindow. Provides the layout for the other controls.
+ * Controller for duke.gui.MainWindow. Provides the layout for the other controls.
  */
 public class MainWindow extends AnchorPane {
     @FXML
