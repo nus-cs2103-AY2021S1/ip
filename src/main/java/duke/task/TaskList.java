@@ -8,8 +8,9 @@ public interface TaskList {
      * Adds the provided task to the task list.
      *
      * @param t Task task to add
+     * @param shouldUpdateStorage whether the new task should be saved
      */
-    void add(Task t);
+    void add(Task t, boolean shouldUpdateStorage);
 
     /**
      * Returns the task at the specified index.
@@ -35,9 +36,9 @@ public interface TaskList {
     int size();
 
     /**
-     * Iterate and apply the action provided on each task in the list.
+     * Triggers the Storage object to update a specific line.
      *
-     * @param action Consumer<Task> action to perform on each task
+     * @param index int index of the task to update
      */
-    void forEach(Consumer<Task> action);
+    void update(int index);
 }

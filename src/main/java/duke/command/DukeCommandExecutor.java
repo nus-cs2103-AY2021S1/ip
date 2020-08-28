@@ -3,8 +3,6 @@ package duke.command;
 import duke.exception.DukeException;
 import duke.exception.InvalidCommandException;
 import duke.task.TaskList;
-import duke.util.Parser;
-import duke.util.Storage;
 
 public class DukeCommandExecutor implements CommandExecutor {
     private boolean hasExited = false;
@@ -15,19 +13,18 @@ public class DukeCommandExecutor implements CommandExecutor {
      *
      * @param in String command issued by user
      * @param taskList TaskList list that contains tasks added by the user
-     * @param storage Storage object to help with updating the save file
      * @return String response message to user
      * @throws DukeException If the command is not formatted properly
      */
-    public String execute(String in, TaskList taskList, Storage storage) throws DukeException {
+    public String execute(String in, TaskList taskList) throws DukeException {
         if (hasExited) {
             throw new InvalidCommandException("Program has already exited!");
         }
 
-        CommandType cmdType = Parser.parseCmdWord(in);
+        CommandType cmdType = CommandParser.parseCmdWord(in);
         switch (cmdType) {
         case Delete:
-            return DeleteCommand.execute(in, taskList, storage);
+            return DeleteCommand.execute(in, taskList);
         case Done:
             return DoneCommand.execute(in, taskList);
         case Due:
@@ -40,7 +37,7 @@ public class DukeCommandExecutor implements CommandExecutor {
         case List:
             return ListCommand.execute(taskList);
         case Task:
-            return TaskCommand.execute(in, taskList, storage);
+            return TaskCommand.execute(in, taskList);
         default: // Invalid
            throw new InvalidCommandException("I'm sorry, but I don't know what that means :-(");
         }
@@ -53,5 +50,9 @@ public class DukeCommandExecutor implements CommandExecutor {
      */
     public boolean shouldExit() {
         return hasExited;
+    }
+
+    public void loadSaveString(String in, TaskList taskList) throws DukeException {
+        TaskCommand.loadSavedTasks(in, taskList);
     }
 }

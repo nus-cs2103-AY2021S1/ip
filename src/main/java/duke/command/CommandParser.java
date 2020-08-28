@@ -1,10 +1,8 @@
-package duke.util;
+package duke.command;
 
-import duke.command.CommandType;
 import duke.task.TaskType;
-
 // Parses and categorises the user's command.
-public class Parser {
+public class CommandParser {
     private static final String CMD_DEADLINE = "deadline";
     private static final String CMD_DELETE = "delete";
     private static final String CMD_DONE = "done";

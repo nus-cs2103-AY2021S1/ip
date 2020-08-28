@@ -1,4 +1,4 @@
-package duke.util;
+package duke.ui;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;

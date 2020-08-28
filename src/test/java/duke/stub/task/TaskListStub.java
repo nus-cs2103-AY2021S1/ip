@@ -3,11 +3,8 @@ package duke.stub.task;
 import duke.task.Task;
 import duke.task.TaskList;
 
-import java.util.Arrays;
-import java.util.function.Consumer;
-
 public class TaskListStub implements TaskList {
-    public void add(Task t) {
+    public void add(Task t, boolean shouldUpdateStorage) {
         // nothing
     }
 
@@ -23,9 +20,8 @@ public class TaskListStub implements TaskList {
         return 0;
     }
 
-    public void forEach(Consumer<Task> action) {
-        Task[] fillerTasks = fillerTasks();
-        Arrays.stream(fillerTasks).forEach(action);
+    public void update(int i) {
+
     }
 
     public static Task[] fillerTasks() {

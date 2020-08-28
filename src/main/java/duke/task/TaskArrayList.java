@@ -1,14 +1,23 @@
 package duke.task;
 
+import duke.storage.Storage;
+
 import java.util.ArrayList;
-import java.util.function.Consumer;
 
 // An implementation of the TaskList interface using an ArrayList
 public class TaskArrayList implements TaskList {
     private final ArrayList<Task> TASK_LIST = new ArrayList<>();
+    private final Storage STORE;
 
-    public void add(Task t) {
+    public TaskArrayList(Storage store) {
+        this.STORE = store;
+    }
+
+    public void add(Task t, boolean shouldUpdateStorage) {
         TASK_LIST.add(t);
+        if (shouldUpdateStorage) {
+            STORE.addLine(t.toSaveString());
+        }
     }
 
     public Task get(int i) {
@@ -16,14 +25,15 @@ public class TaskArrayList implements TaskList {
     }
 
     public Task remove(int i) {
+        STORE.removeLine(i);
         return TASK_LIST.remove(i);
+    }
+
+    public void update(int i) {
+        STORE.updateLine(i, TASK_LIST.get(i).toSaveString());
     }
 
     public int size() {
         return TASK_LIST.size();
-    }
-
-    public void forEach(Consumer<Task> action) {
-        TASK_LIST.forEach(action);
     }
 }

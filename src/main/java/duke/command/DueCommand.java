@@ -3,7 +3,7 @@ package duke.command;
 import duke.exception.InvalidCommandException;
 import duke.task.Task;
 import duke.task.TaskList;
-import duke.util.DateTimeParsing;
+import duke.parser.DateTimeParsing;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;

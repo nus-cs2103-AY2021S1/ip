@@ -1,4 +1,4 @@
-package duke.util;
+package duke.ui;
 
 // Class that handle the printing and formatting of the program's response message.
 public class Ui {

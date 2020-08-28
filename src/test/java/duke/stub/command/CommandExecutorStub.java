@@ -1,17 +1,12 @@
 package duke.stub.command;
 
 import duke.command.CommandExecutor;
+import duke.exception.DukeException;
 import duke.task.TaskList;
-import duke.util.Storage;
-
-import java.util.ArrayList;
 
 public class CommandExecutorStub implements CommandExecutor {
-    private final ArrayList<String> HISTORY = new ArrayList<>();
-
     @Override
-    public String execute(String in, TaskList taskList, Storage storage) {
-        HISTORY.add(in);
+    public String execute(String in, TaskList taskList) {
         return "";
     }
 
@@ -20,7 +15,8 @@ public class CommandExecutorStub implements CommandExecutor {
         return false;
     }
 
-    public String getHistory() {
-        return String.join("", HISTORY);
+    @Override
+    public void loadSaveString(String in, TaskList taskList) throws DukeException {
+
     }
 }
