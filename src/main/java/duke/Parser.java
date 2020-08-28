@@ -1,3 +1,5 @@
+package duke;
+
 public class Parser {
     public static TaskType categorize(String[] input_parts) throws Exception {
         if (input_parts[0].compareTo("todo") == 0) {

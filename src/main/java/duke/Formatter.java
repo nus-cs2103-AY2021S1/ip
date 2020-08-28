@@ -1,3 +1,5 @@
+package duke;
+
 public class Formatter {
     public static String format_response(String output_msg) {
         return 

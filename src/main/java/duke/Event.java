@@ -1,3 +1,5 @@
+package duke;
+
 class Event extends Task {
     static String SYMBOL = "[E]";
 
