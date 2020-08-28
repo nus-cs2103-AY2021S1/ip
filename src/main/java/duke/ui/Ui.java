@@ -20,11 +20,13 @@ public class Ui {
 
     /**
      * Returns a string containing the specified content where each line is
-     * indented by the specified indent.
+     * indented by the specified indent. The returned string always contains a newline character at the end.
+     * <p>
+     * If provided a negative indent, an indent of 0 is applied.
      *
-     * @param content the content to indent
-     * @param indent  the amount of spaces to indent by
-     * @return a string containing
+     * @param content the content to indent.
+     * @param indent  the amount of spaces to indent by.
+     * @return a string containing the specified content where each line is indented by the specified indent.
      */
     public String prependIndent(String content, int indent) {
         String spaces = "";
