@@ -96,6 +96,52 @@ public class TaskList {
         return counter == 0 ? message + "The task list is currently empty.\n    " : message;
     }
 
+    /**
+     * Checks for tasks of the type of user requirement and returns a message of those tasks listed
+     * @param type either D or T or E
+     * @return message list of task descriptions of given type
+     */
+    public String findOfType (String type) {
+        String message = "\n    ";
+
+        int counter = 0;
+        for (Task task: this.tasks) {
+            if ((task.getTag()).equals("[" + type + "]")) {
+                message = message +
+                        String.format("%d. %s\n    ", ++counter, task.getDescription());
+            }
+        }
+
+        if (counter == 0) {
+            message =  message + "There are no tasks of type " + type + "\n    ";
+        }
+
+        return message;
+    }
+
+    /**
+     * Returns a message list of tasks whose descriptions contain the given keyword
+     * @param keyword keyword to search for
+     * @return message list of task descriptions of containing given keyword
+     */
+    public String findWithKeyword (String keyword) {
+        String message = "\n    ";
+
+        int counter = 0;
+        for (Task task: this.tasks) {
+            if ((task.getDescription()).indexOf(keyword) >= 0) {
+                message = message +
+                        String.format("%d. %s\n    ", ++counter, task.getDescription());
+            }
+        }
+
+        if (counter == 0) {
+            message = "\n    There are no tasks of containing the word - " + keyword + "\n    ";
+        }
+
+        return message;
+    }
+
     public Task getTask (int index) {
         return this.tasks.get(index);
     }

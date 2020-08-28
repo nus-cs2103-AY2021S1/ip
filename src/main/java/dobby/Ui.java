@@ -16,6 +16,8 @@ public class Ui {
             + (Commands.DONE).getUsage()
             + (Commands.DELETE).getUsage()
             + (Commands.SCHEDULED).getUsage()
+            + (Commands.FIND).getUsage()
+            + (Commands.FINDTYPE).getUsage()
             + (Commands.BYE).getUsage();
 
     /**

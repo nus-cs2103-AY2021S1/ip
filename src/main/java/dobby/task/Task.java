@@ -3,10 +3,12 @@ package dobby.task;
 public class Task {
     private final String description;
     private boolean isDone;
+    private String tag;
 
-    Task(String description) {
+    Task(String description, String tag) {
         this.description = description;
         this.isDone = false;
+        this.tag = tag;
     }
 
     /**
@@ -29,5 +31,9 @@ public class Task {
 
     public void setDone() {
         this.isDone = true;
+    }
+
+    public String getTag() {
+        return this.tag;
     }
 }

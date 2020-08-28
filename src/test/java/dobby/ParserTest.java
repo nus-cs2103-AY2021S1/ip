@@ -171,4 +171,57 @@ public class ParserTest {
         assertEquals("\n    1. [D][✘] push A-JUnit to github (by: Aug 24 2020 11:59 pm)\n    ", scheduled);
     }
 
+    @Test
+    public void findTypeTest () {
+        TaskList tasks = new TaskList();
+        Parser parser = new Parser(tasks);
+
+        String message = "";
+        String noType = "";
+        try {
+            String todo = parser.getMessage("todo test findtype command");
+            message = parser.getMessage("findtype T");
+        } catch (DobbyException e) {
+            System.out.println(e.getMessage());
+        }
+
+        try {
+            noType = parser.getMessage("findtype");
+        } catch (DobbyException e) {
+            noType = e.getMessage();
+        }
+
+        assertEquals("\n    1. [T][✘] test findtype command\n    ", message);
+        assertEquals("\n    Incorrect usage of command. Please try again." +
+                "\n      findtype _T/D/E_\n    ", noType);
+    }
+
+    @Test
+    public void findKeywordTest () {
+        TaskList tasks = new TaskList();
+        Parser parser = new Parser(tasks);
+
+        String message = "";
+        String noKeyword = "";
+        String noTaskContainingKeyword = "";
+        try {
+            String todo = parser.getMessage("todo test findtype command");
+            message = parser.getMessage("find command");
+            noKeyword = parser.getMessage("find");
+        } catch (DobbyException e) {
+            noKeyword = e.getMessage();
+        }
+
+        try {
+            noTaskContainingKeyword = parser.getMessage("find none");
+        } catch (DobbyException e) {
+            noTaskContainingKeyword = e.getMessage();
+        }
+
+        assertEquals("\n    1. [T][✘] test findtype command\n    ", message);
+        assertEquals("\n    Incorrect usage of command. Keyword required cannot be empty. " +
+                "Please try again.\n      find _keyword_\n    ", noKeyword);
+        assertEquals("\n    There are no tasks of containing the word - none\n    ",
+                noTaskContainingKeyword);
+    }
 }
