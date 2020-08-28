@@ -54,97 +54,111 @@ public class Parser {
             break;
 
         case "event":
-            if (numOfInput == 1) {
-                throw new DukeException("☹ Oh no! The description of an event task cannot be empty.");
-            }
+            try {
+                if (numOfInput == 1) {
+                    throw new DukeException("☹ Oh no! The description of an event task cannot be empty.");
+                }
 
-            if (numOfInput < 4) {
-                throw new DukeException("☹ Oh no! The correct way to log an event is: (event) "
-                                        + "(description) (/at) (date)");
-            }
+                if (numOfInput < 4) {
+                    throw new DukeException("☹ Oh no! The correct way to log an event is: (event) "
+                            + "(description) (/at) (date)");
+                }
 
-            boolean checkForEvent = false;
-            StringBuilder eventString = new StringBuilder();
-            StringBuilder eventDateField = new StringBuilder();
-            StringBuilder eventTimingField = new StringBuilder();
-            String trimmedEvent = inputLine.split("/at")[1].trim();
-            String[] splitElements = trimmedEvent.split(" ");
-            int numOfElements = splitElements.length;
+                boolean checkForEvent = false;
+                StringBuilder eventString = new StringBuilder();
+                StringBuilder eventDateField = new StringBuilder();
+                StringBuilder eventTimingField = new StringBuilder();
+                String trimmedEvent = inputLine.split("/at")[1].trim();
+                String[] splitElements = trimmedEvent.split(" ");
+                int numOfElements = splitElements.length;
 
-            if (numOfElements != 2) {
-                throw new DukeException("Date and Timing fields has not been specified correctly. Please try again!");
-            }
+                if (numOfElements != 2) {
+                    throw new DukeException("Date and Timing fields has not been specified correctly. "
+                                            + "Please try again!");
+                }
 
-            int z = 1;
-            while (z < numOfInput) {
-                if (userInputArray[z].equals("/at")) {
-                    checkForEvent = true;
-                } else {
-                    if (!checkForEvent) {
-                        eventString.append(userInputArray[z]);
-                        eventString.append(" ");
+                int z = 1;
+                while (z < numOfInput) {
+                    if (userInputArray[z].equals("/at")) {
+                        checkForEvent = true;
                     } else {
-                        if (z == numOfInput - 1) {
-                            eventTimingField.append(userInputArray[z]);
+                        if (!checkForEvent) {
+                            eventString.append(userInputArray[z]);
+                            eventString.append(" ");
                         } else {
-                            eventDateField.append(userInputArray[z]);
+                            if (z == numOfInput - 1) {
+                                eventTimingField.append(userInputArray[z]);
+                            } else {
+                                eventDateField.append(userInputArray[z]);
+                            }
                         }
                     }
+                    z++;
                 }
-                z++;
+                String outputEventDesc = eventString.toString().trim();
+                String outputEventDate = eventDateField.toString().trim();
+                String outputEventTime = eventTimingField.toString().trim();
+                newTaskObject = new EventCommand(outputEventDesc, outputEventDate, outputEventTime);
+            } catch (ArrayIndexOutOfBoundsException error) {
+                throw new DukeException("Error encountered while parsing event command. Please ensure "
+                                        + "that your event command is in the following format: "
+                                        + "(event) (description) (/at) (date).");
             }
-            String outputEventDesc = eventString.toString().trim();
-            String outputEventDate = eventDateField.toString().trim();
-            String outputEventTime = eventTimingField.toString().trim();
-            newTaskObject = new EventCommand(outputEventDesc, outputEventDate, outputEventTime);
+
             break;
 
         case "deadline":
-            if (numOfInput == 1) {
-                throw new DukeException("☹ Oh no! The description of a deadline task "
-                                        + "cannot be empty.");
-            }
+            try {
+                if (numOfInput == 1) {
+                    throw new DukeException("☹ Oh no! The description of a deadline task "
+                            + "cannot be empty.");
+                }
 
-            if (numOfInput < 4) {
-                throw new DukeException("☹ Oh no! The correct way to log a deadline is: (deadline) "
-                                        + "(description) (/by) (date)");
-            }
+                if (numOfInput < 4) {
+                    throw new DukeException("☹ Oh no! The correct way to log a deadline is: (deadline) "
+                            + "(description) (/by) (date)");
+                }
 
-            boolean checkForDate = false;
-            StringBuilder deadlineString = new StringBuilder();
-            StringBuilder dateField = new StringBuilder();
-            StringBuilder timingField = new StringBuilder();
-            String trimmedDeadline = inputLine.split("/by")[1].trim();
-            String[] splitElements1 = trimmedDeadline.split(" ");
-            int noOfElements = splitElements1.length;
+                boolean checkForDate = false;
+                StringBuilder deadlineString = new StringBuilder();
+                StringBuilder dateField = new StringBuilder();
+                StringBuilder timingField = new StringBuilder();
+                String trimmedDeadline = inputLine.split("/by")[1].trim();
+                String[] splitElements1 = trimmedDeadline.split(" ");
+                int noOfElements = splitElements1.length;
 
-            if (noOfElements != 2) {
-                throw new DukeException("Date and Timing fields has not been specified correctly. "
-                                        + "Please try again!");
-            }
+                if (noOfElements != 2) {
+                    throw new DukeException("Date and Timing fields has not been specified correctly. "
+                            + "Please try again!");
+                }
 
-            int m = 1;
-            while (m < numOfInput) {
-                if (userInputArray[m].equals("/by")) {
-                    checkForDate = true;
-                } else {
-                    if (!checkForDate) {
-                        deadlineString.append(userInputArray[m]);
-                        deadlineString.append(" ");
+                int m = 1;
+                while (m < numOfInput) {
+                    if (userInputArray[m].equals("/by")) {
+                        checkForDate = true;
                     } else {
-                        if (m == numOfInput - 1) {
-                            timingField.append(userInputArray[m]);
+                        if (!checkForDate) {
+                            deadlineString.append(userInputArray[m]);
+                            deadlineString.append(" ");
                         } else {
-                            dateField.append(userInputArray[m]);
+                            if (m == numOfInput - 1) {
+                                timingField.append(userInputArray[m]);
+                            } else {
+                                dateField.append(userInputArray[m]);
+                            }
                         }
                     }
+                    m++;
                 }
-                m++;
+                String outputDeadlineDesc = deadlineString.toString().trim();
+                String outputDeadlineDate = dateField.toString().trim();
+                String outputDeadlineTime = timingField.toString().trim();
+                newTaskObject = new DeadlineCommand(outputDeadlineDesc, outputDeadlineDate, outputDeadlineTime);
+            } catch (ArrayIndexOutOfBoundsException error) {
+                throw new DukeException("Error encountered while parsing deadline command. Please ensure "
+                                        + "that your deadline command is in the following format: "
+                                        + "(deadline) (description) (/by) (date).");
             }
-            String outputDeadlineDesc = deadlineString.toString().trim();
-            String outputDeadlineDate = dateField.toString().trim();
-            String outputDeadlineTime = timingField.toString().trim();
-            newTaskObject = new DeadlineCommand(outputDeadlineDesc, outputDeadlineDate, outputDeadlineTime);
             break;
 
         case "delete":

@@ -31,7 +31,7 @@ public class Timing {
     @Override
     public String toString() {
         String formattedTiming;
-        String AmPm;
+        String meridiem;
 
         if (hour == 0 || hour == 12) {
             formattedTiming = "12";
@@ -44,10 +44,10 @@ public class Timing {
         }
 
         if (isPM) {
-            AmPm = "pm";
+            meridiem = "pm";
         } else {
-            AmPm = "am";
+            meridiem = "am";
         }
-        return formattedTiming + AmPm;
+        return formattedTiming + meridiem;
     }
 }
