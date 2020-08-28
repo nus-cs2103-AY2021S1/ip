@@ -1,3 +1,5 @@
+package duke.exception;
+
 public class NullTaskNameException extends DukeException {
 
     public NullTaskNameException(String command) {

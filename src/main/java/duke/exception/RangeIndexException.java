@@ -1,3 +1,5 @@
+package duke.exception;
+
 public class RangeIndexException extends DukeException {
 
     public RangeIndexException(String command) {

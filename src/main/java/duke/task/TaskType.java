@@ -1,3 +1,11 @@
+package duke.task;
+
+import duke.Task;
+import duke.exception.DukeException;
+import duke.exception.InvalidTaskDateException;
+import duke.exception.NullTaskDateException;
+import duke.exception.NullTaskNameException;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.EnumSet;

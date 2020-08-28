@@ -1,3 +1,5 @@
+package duke.exception;
+
 public class NullIndexException extends DukeException {
 
     public NullIndexException(String command) {

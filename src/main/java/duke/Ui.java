@@ -1,3 +1,5 @@
+package duke;
+
 import java.util.List;
 
 public class Ui {
@@ -13,7 +15,7 @@ public class Ui {
     }
 
     public static void displayLoadingError() {
-        displayMessage("Loading failed: Duke continues with empty TaskList.");
+        displayMessage("Loading failed: Duke continues with empty duke.TaskList.");
     }
 
     public static void displayWelcome() {

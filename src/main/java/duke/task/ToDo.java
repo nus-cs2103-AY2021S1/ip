@@ -1,3 +1,7 @@
+package duke.task;
+
+import duke.Task;
+
 public class ToDo extends Task {
 
     public ToDo(String taskName) {

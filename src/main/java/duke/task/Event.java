@@ -1,10 +1,14 @@
+package duke.task;
+
+import duke.Task;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class Deadline extends Task {
+public class Event extends Task {
     protected LocalDate taskDate;
 
-    public Deadline(String taskName, LocalDate taskDate) {
+    public Event(String taskName, LocalDate taskDate) {
         super(taskName);
         this.taskDate = taskDate;
     }
@@ -15,6 +19,6 @@ public class Deadline extends Task {
     }
 
     public String toString() {
-        return String.format("[D][%s] %s (by: %s)", getStatusIcon(), taskName, taskDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy")));
+        return String.format("[E][%s] %s (at: %s)", getStatusIcon(), taskName, taskDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy")));
     }
 }

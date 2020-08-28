@@ -1,3 +1,5 @@
+package duke.exception;
+
 public class AlreadyDoneIndexException extends DukeException {
 
     public AlreadyDoneIndexException(String command) {

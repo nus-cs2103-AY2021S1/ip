@@ -1,3 +1,5 @@
+package duke.exception;
+
 public class InvalidTaskDateException extends DukeException {
 
     public InvalidTaskDateException(String command) {

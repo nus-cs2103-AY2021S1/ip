@@ -1,3 +1,8 @@
+package duke;
+
+import duke.exception.*;
+import duke.task.TaskType;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -44,7 +49,7 @@ public class TaskList {
 
     public int getTaskID(Parser parser) throws DukeException {
         if (tasks.isEmpty()) {
-            throw new EmptyTasksException("Task is empty");
+            throw new EmptyTasksException("duke.Task is empty");
         }
         if (Objects.isNull(parser.getTaskNumber())) {
             throw new NullIndexException("Target is null");
@@ -63,7 +68,7 @@ public class TaskList {
         try {
             Task targetTask = tasks.get(getTaskID(parser));
             if (targetTask.isDone) {
-                throw new AlreadyDoneIndexException("Task already done");
+                throw new AlreadyDoneIndexException("duke.Task already done");
             }
 
             targetTask.markAsDone();
