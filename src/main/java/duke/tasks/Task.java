@@ -6,10 +6,12 @@ import java.util.Optional;
  * The class for an abstract idea of task.
  */
 public class Task {
+
     private String task;
+
     private Boolean status;
 
-    protected Task(String task){ //not meant to be instantiated by classes outside of this package
+    protected Task(String task) { //not meant to be instantiated by classes outside of this package
         this.task = task;
         this.status = false;
     }
@@ -43,11 +45,11 @@ public class Task {
         this.status = status;
     }
 
-    @Override public String toString(){
+    @Override public String toString() {
         return "[" + statusToIcon() + "] " + this.task;
     }
 
-    private String statusToIcon(){
+    private String statusToIcon() {
         if(this.status){
             return "✅";
         }else{

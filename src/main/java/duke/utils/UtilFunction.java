@@ -54,7 +54,7 @@ public class UtilFunction {
      */
     public static void printLimit(String output) {
         String[] sentences = output.split("\n");
-        for(String sentence: sentences) {
+        for (String sentence: sentences) {
             if (sentence.length() < Constants.CONSOLEWIDTH) {
                 System.out.println(sentence);
             } else {
@@ -66,7 +66,7 @@ public class UtilFunction {
     private static void lineSentence(String sentence) {
         String[] words = sentence.split("\\s+");
         int count = 0;
-        for(String word: words) {
+        for (String word: words) {
             count += word.length();
             if (count < Constants.CONSOLEWIDTH) {
                 System.out.print(word + " ");

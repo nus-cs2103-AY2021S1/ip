@@ -7,7 +7,9 @@ import java.util.Optional;
  * The class for deadline object.
  */
 public class Deadline extends Task{
+
     private String deadline;
+
     public Deadline(String task, String deadline) {
         super(task);
         this.deadline = deadline;
@@ -24,7 +26,7 @@ public class Deadline extends Task{
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return "[D]" + super.toString() + " (" + deadline + ")";
     }
 

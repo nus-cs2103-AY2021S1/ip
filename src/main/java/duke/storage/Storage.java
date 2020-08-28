@@ -13,6 +13,7 @@ import java.util.List;
  * Class for the representation of the storage/database.
  */
 public class Storage {
+
     private String databasePath;
 
     public Storage(String databasePath) {
@@ -26,7 +27,7 @@ public class Storage {
     public List<Task> readAll() {
         List<Task> tasks = new ArrayList<>();
         try {
-            File databaseFile = new File( databasePath);
+            File databaseFile = new File(databasePath);
             databaseFile.getParentFile().mkdirs();
             databaseFile.createNewFile();
             BufferedReader csvReader = new BufferedReader(new FileReader(databaseFile));
@@ -51,14 +52,14 @@ public class Storage {
         try {
             File databaseFile = new File(databasePath);
             FileWriter csvWriter = new FileWriter(databaseFile);
-            for(Task task: tasks) {
+            for (Task task: tasks) {
                 String[] formatTask = formatTask(task);
                 csvWriter.append(String.join(",", formatTask));
                 csvWriter.append('\n');
             }
             csvWriter.flush();
             csvWriter.close();
-        } catch(IOException e) {
+        } catch (IOException e) {
             System.err.println("Creation failed. \nDatabase connection error.");
         }
     }

@@ -10,10 +10,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
-import java.util.zip.DataFormatException;
 
 
 public class DukeCommandMatcher {
+
     private SingletonTaskList taskList;
 
     private static final List<String> commandList = new ArrayList<>(Arrays.asList(Constants.LISTPATTERN,
@@ -29,17 +29,17 @@ public class DukeCommandMatcher {
     public String matchCommand(String command) throws CommandNotFoundException, NullCommandException,
             LackOfTimeException, NullCommandContentException, TaskOutOfBoundException, TaskNotSpecifyException,
             DateFormatException {
-        if(Objects.equals(command, "")){
+        if (Objects.equals(command, "")) {
             throw new NullCommandException(command);
         }
 
         //get the first command
         String[] splitCommand = command.split("\\s+", 2);
         //check if the command is in the list
-        for(String commandPattern: commandList){
+        for (String commandPattern: commandList) {
             //the command is in the list
-            if(UtilFunction.matchPattern(commandPattern, splitCommand[0])){
-               switch(commandPattern){
+            if (UtilFunction.matchPattern(commandPattern, splitCommand[0])) {
+               switch (commandPattern) {
                case Constants.EXITPATTERN:
                    return handleExit();
                case Constants.LISTPATTERN:
@@ -65,17 +65,17 @@ public class DukeCommandMatcher {
     }
 
     
-    private String handleExit(){
+    private String handleExit() {
         System.out.println("Farewell/再見/さようなら～～");
         return "EXIT";
     }
 
-    private String handleAdd(Task task){
+    private String handleAdd(Task task) {
         taskList.add(task);
         return "Duke.Task added";
     }
 
-    private String handleList(){
+    private String handleList() {
         taskList.listAll();
         return "List implemented";
     }
@@ -90,7 +90,7 @@ public class DukeCommandMatcher {
         return "Task " + targetTask + " has been done";
     }
 
-    private String handleTodo(String[] todoStr) throws NullCommandContentException{
+    private String handleTodo(String[] todoStr) throws NullCommandContentException {
         ToDo todo = null;
         try {
             String todoContent = todoStr[1];

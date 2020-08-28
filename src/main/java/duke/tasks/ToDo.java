@@ -6,6 +6,7 @@ import java.util.Objects;
  * The class for todoo object.
  */
 public class ToDo extends Task{
+
     public ToDo(String task) {
         super(task);
     }
@@ -20,7 +21,7 @@ public class ToDo extends Task{
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return "[T]" + super.toString();
     }
 }

@@ -2,9 +2,7 @@ package duke.exceptions;
 
 import duke.utils.Constants;
 
-import java.time.format.DateTimeFormatter;
-
-public class DateFormatException extends Exception{
+public class DateFormatException extends Exception {
     public DateFormatException(String errorMessage) {
         super(errorMessage);
     }

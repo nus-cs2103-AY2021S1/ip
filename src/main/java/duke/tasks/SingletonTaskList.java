@@ -10,7 +10,9 @@ import java.util.List;
  * Class for task list.
  */
 public class SingletonTaskList {
+
     List<Task> tasks;
+
     Storage storage;
 
     private static SingletonTaskList instance; //this class should only be instantiate once
@@ -58,7 +60,7 @@ public class SingletonTaskList {
      * List all the tasks in the task list.
      */
     public void listAll() {
-        if(tasks.size() == 0){
+        if (tasks.size() == 0) {
             Printer.printNoTaskReminder();
         }
         Printer.printAllTask(tasks, true);

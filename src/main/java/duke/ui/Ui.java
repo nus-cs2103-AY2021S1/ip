@@ -18,7 +18,7 @@ public class Ui {
      * @throws IllegalStateException
      * @see IllegalStateException
      */
-    public static void loop(Storage database) throws IllegalStateException{
+    public static void loop(Storage database) throws IllegalStateException {
         Printer.printGreeting();
         Scanner dukeScanner = new Scanner(System.in);
         DukeCommandMatcher dukeCommandMatcher = new DukeCommandMatcher(database);
@@ -31,7 +31,7 @@ public class Ui {
                     break;
                 }
                 System.out.println(Constants.DIVIDER);
-            }catch(Exception err){
+            } catch (Exception err) {
                 UtilFunction.printLimit(err.toString());
                 System.out.println(Constants.DIVIDER);
             }
