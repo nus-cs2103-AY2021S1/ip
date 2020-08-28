@@ -47,17 +47,17 @@ public class Storage {
      */
     public void readSavedFile(Label label) {
         try {
-            label.setText(Messenger.FILE_LOADING);
+            label.setText(Messenger.FILE_LOADING + "\n");
             File directory = new File(DIRECTORY_PATH);
 
             if (!directory.exists()) {
-                label.setText(label.getText() + Messenger.DIRECTORY_NOT_FOUND);
+                label.setText(label.getText() + Messenger.DIRECTORY_NOT_FOUND + "\n");
                 directory.mkdir();
             }
 
             File f = new File(FILE_PATH);
             if (f.createNewFile()) {
-                label.setText(label.getText() + Messenger.FILE_NOT_FOUND);
+                label.setText(label.getText() + Messenger.FILE_NOT_FOUND + "\n");
             } else {
                 Scanner sc = new Scanner(f);
                 while (sc.hasNextLine()) {
@@ -73,7 +73,7 @@ public class Storage {
                         taskList.getTasks().add(new Task(parsed[1], command));
                     }
                 }
-                label.setText(label.getText() + Messenger.FILE_LOADED);
+                label.setText(label.getText() + Messenger.FILE_LOADED + "\n");
             }
         } catch (IOException e) {
             AlertBox.display("IO Error", e.getMessage());

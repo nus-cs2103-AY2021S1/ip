@@ -14,6 +14,10 @@ dependencies {
     testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.5.0'
     testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.5.0'
 
+    testCompile group: 'org.testfx', name: 'testfx-core', version: '4.0.15-alpha'
+    testCompile group: 'org.testfx', name: 'testfx-junit5', version: '4.0.15-alpha'
+    testCompile group: 'org.testfx', name: 'openjfx-monocle', version: '8u76-b04'
+
     // JavaFX
     String javaFxVersion = '11'
 

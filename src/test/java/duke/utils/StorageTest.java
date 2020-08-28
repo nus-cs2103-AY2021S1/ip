@@ -7,6 +7,7 @@ import java.io.PrintStream;
 import java.nio.file.Files;
 import java.util.Scanner;
 
+import TextFxJava.TestFXJUnitAppRunner;
 import duke.tasks.TaskList;
 
 import javafx.scene.control.Label;
@@ -17,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 
 
-class StorageTest {
+class StorageTest extends TestFXJUnitAppRunner {
 
     @Test
     void readSavedFile() throws IOException {
