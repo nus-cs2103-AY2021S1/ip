@@ -15,7 +15,7 @@ public class TimeCommand extends Command {
     /**
      * Constructor to create TimeCommand object.
      *
-     * @param description date being searched
+     * @param description time being searched
      */
     public TimeCommand(String description) {
         this.description = description;
@@ -27,7 +27,7 @@ public class TimeCommand extends Command {
      * @param tasklist list of all the tasks stored in Duke so far.
      * @param ui prints out messages notifying user of what is being done.
      * @param storage stores all the tasks being added so far into user's local storage.
-     * @throws DukeException if tasks with date is not in tasklist.
+     * @throws DukeException if tasks with time is not in tasklist.
      */
     public void execute(TaskList tasklist, Ui ui, Storage storage) throws DukeException {
         boolean timeExists = false;
@@ -45,7 +45,7 @@ public class TimeCommand extends Command {
             }
         }
         if (!timeExists) {
-            throw new DukeException("No events/deadlines with this date!");
+            throw new DukeException("No events/deadlines with this time!");
         }
     }
 }
