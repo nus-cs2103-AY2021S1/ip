@@ -1,5 +1,3 @@
-package main.java;
-
 /**
  * handles the "find" commands
  */

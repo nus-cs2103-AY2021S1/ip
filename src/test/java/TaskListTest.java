@@ -1,8 +1,3 @@
-package test.java;
-
-import main.java.Task;
-import main.java.TaskList;
-import main.java.Todo;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;

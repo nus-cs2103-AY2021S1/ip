@@ -1,5 +1,3 @@
-package main.java;
-
 /**
  * deals with the interaction with the user
  * prints necessary messages/ outputs

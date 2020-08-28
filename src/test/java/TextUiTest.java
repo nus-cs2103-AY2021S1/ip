@@ -1,12 +1,4 @@
-package test.java;
-
-import main.java.Deadline;
-import main.java.Event;
-import main.java.TextUi;
 import org.junit.jupiter.api.Test;
-import org.w3c.dom.Text;
-
-import java.util.NoSuchElementException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
