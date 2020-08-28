@@ -1,7 +1,6 @@
 package duke.fxcommand;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import duke.Storage;
 import duke.TaskList;
@@ -23,7 +22,6 @@ public class ByeCommand implements Command {
      */
     @Override
     public String execute(Ui ui, Storage storage, TaskList tasks) throws DukeIOException {
-        // COPIED FROM SAVECOMMAND
         ArrayList<String> data = tasks.getData();
         storage.save(data);
         return "Saved successfully!\nBye bye! Hope to see you again soon!";

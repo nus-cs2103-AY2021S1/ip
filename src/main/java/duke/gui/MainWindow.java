@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import duke.Duke;
+import duke.utils.DukeState;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -67,5 +68,10 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
+
+        if (duke.getDukeState() == DukeState.EXITED) {
+            userInput.setDisable(true);
+            sendButton.setDisable(true);
+        }
     }
 }

@@ -5,6 +5,7 @@ import java.util.List;
 
 import duke.fxcommand.Command;
 import duke.exception.DukeException;
+import duke.utils.DukeState;
 
 /**
  * The Duke object initializes the core classes: Ui, Storage, Parser and TaskList, and contains the main logic
@@ -15,6 +16,7 @@ public class Duke {
     private final Ui ui;
     private final Storage storage;
     private final TaskList taskList;
+    private DukeState dukeState;
 
     /**
      * Initializes a Duke object.
@@ -38,6 +40,7 @@ public class Duke {
         }
 
         this.taskList = tmpTaskList;
+        this.dukeState = DukeState.RUNNING;
     }
 
     /**
@@ -66,10 +69,17 @@ public class Duke {
     public String getResponse(String input) {
         try {
             Command cmd = Parser.parseInput(input);
+            if (cmd.isExit()) {
+                dukeState = DukeState.EXITED;
+            }
             return cmd.execute(ui, storage, taskList);
         } catch (DukeException e) {
             return e.getPrettyErrorMsg();
         }
+    }
+
+    public DukeState getDukeState() {
+        return dukeState;
     }
 
     /*
