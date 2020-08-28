@@ -1,8 +1,12 @@
+../src/main/java/TaskList.java
 ../src/main/java/AlreadyDoneIndexException.java
+../src/main/java/Storage.java
+../src/main/java/Parser.java
 ../src/main/java/RangeIndexException.java
 ../src/main/java/NullTaskNameException.java
-../src/main/java/NullDoneIndexException.java
+../src/main/java/NullIndexException.java
 ../src/main/java/TaskType.java
+../src/main/java/Ui.java
 ../src/main/java/Event.java
 ../src/main/java/EmptyTasksException.java
 ../src/main/java/Task.java

@@ -6,6 +6,19 @@ public class NullTaskDateException extends DukeException {
 
     @Override
     public String toString() {
-        return "Please provide time to the " + command + " item!";
+        String timeCommand;
+
+        switch (command) {
+            case "deadline":
+                timeCommand = " using '/by [parsable date]'";
+                break;
+            case "event":
+                timeCommand = " using '/at [parsable date]'";
+                break;
+            default:
+                timeCommand = "";
+        }
+
+        return "Please provide time to the " + command + " item" + timeCommand + "!";
     }
 }

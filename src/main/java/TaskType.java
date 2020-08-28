@@ -1,4 +1,5 @@
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.List;
@@ -14,11 +15,16 @@ public enum TaskType {
             if (taskDate.isBlank()) {
                 throw new NullTaskDateException("deadline");
             }
-            Task task = new Deadline(taskName, LocalDate.parse(taskDate));
-            if (taskIsDone) {
-                task.markAsDone();
+            try {
+                Task task = new Deadline(taskName, LocalDate.parse(taskDate));
+                if (taskIsDone) {
+                    task.markAsDone();
+                }
+                tasks.add(task);
+            } catch (DateTimeParseException e) {
+                throw new InvalidTaskDateException("deadline");
             }
-            tasks.add(task);
+
         }
 
         @Override
@@ -35,11 +41,16 @@ public enum TaskType {
             if (taskDate.isBlank()) {
                 throw new NullTaskDateException("event");
             }
-            Task task = new Event(taskName, LocalDate.parse(taskDate));
-            if (taskIsDone) {
-                task.markAsDone();
+
+            try {
+                Task task = new Event(taskName, LocalDate.parse(taskDate));
+                if (taskIsDone) {
+                    task.markAsDone();
+                }
+                tasks.add(task);
+            } catch (DateTimeParseException e) {
+                throw new InvalidTaskDateException("event");
             }
-            tasks.add(task);
         }
 
         @Override
@@ -57,7 +68,6 @@ public enum TaskType {
             if (taskIsDone) {
                 task.markAsDone();
             }
-            System.out.println(task.isDone);
             tasks.add(task);
         }
 
@@ -84,11 +94,18 @@ public enum TaskType {
         }
     }
 
-    public static boolean isMember(String name) {
-        return nameToValueMap.containsKey(name);
+    public static boolean isMember(String name) throws DukeException {
+        if (!nameToValueMap.containsKey(name)) {
+            throw new DukeException(name);
+        } else {
+            return true;
+        }
     }
 
-    public static TaskType getTaskType(String lowerCase) {
+    public static TaskType getTaskType(String lowerCase) throws DukeException {
+        if (!isMember(lowerCase)) {
+            throw new DukeException(lowerCase);
+        }
         return nameToValueMap.get(lowerCase);
     }
 
