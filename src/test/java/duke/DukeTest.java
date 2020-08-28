@@ -66,7 +66,7 @@ public class DukeTest {
     }
 
     @Test
-    public void print() throws IOException, InvalidSaveFileException {
+    public void testInputs() throws IOException, InvalidSaveFileException {
         Duke duke = new Duke(TEST_FILE_PATH);
         duke.run();
 
@@ -78,7 +78,7 @@ public class DukeTest {
         String expectedOutput = new String(data, "UTF-8");
 
         String actualOutput = OUT_CONTENT.toString();
-        
+
         FileWriter myWriter = new FileWriter("ACTUAL.txt");
         myWriter.write(actualOutput);
         myWriter.close();

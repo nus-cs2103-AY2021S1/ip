@@ -18,4 +18,9 @@ public class TodoStub extends Task {
     public boolean isDueOn(LocalDate date) {
         return false;
     }
+
+    @Override
+    public String toString() {
+        return "This todo stub was " + (isDone ? "" : "not") + " marked as done";
+    }
 }

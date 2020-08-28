@@ -6,7 +6,7 @@ import java.time.format.DateTimeParseException;
 import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class DateTimeParsingTest {
     @Test
@@ -22,13 +22,10 @@ public class DateTimeParsingTest {
 
     @Test
     public void parseDate_invalidFormat_exceptionThrown() {
-        try {
+        assertThrows(DateTimeParseException.class, () -> {
             String date1 = "2012/12/21";
             LocalDate.parse(date1);
-            fail();
-        } catch (Exception e) {
-            assertEquals(DateTimeParseException.class, e.getClass());
-        }
+        });
     }
 
     @Test
@@ -53,13 +50,10 @@ public class DateTimeParsingTest {
 
     @Test
     public void to12HTimeFormat_invalidFormat_exceptionThrown() {
-        try {
+        assertThrows(DateTimeParseException.class, () -> {
             String time1 = "2359";
             DateTimeParsing.to12HTimeFormat(time1);
-            fail();
-        } catch (Exception e) {
-            assertEquals(DateTimeParseException.class, e.getClass());
-        }
+        });
     }
 
     @Test
@@ -73,12 +67,9 @@ public class DateTimeParsingTest {
 
     @Test
     public void to24HTimeFormat_invalidFormat_exceptionThrown() {
-        try {
+        assertThrows(DateTimeParseException.class, () -> {
             String time1 = "01:00";
             DateTimeParsing.to24HTimeFormat(time1);
-            fail();
-        } catch (Exception e) {
-            assertEquals(DateTimeParseException.class, e.getClass());
-        }
+        });
     }
 }

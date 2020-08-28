@@ -7,7 +7,7 @@ import java.time.LocalDate;
 
 public class EventStub extends Task {
     public EventStub() {
-        super("");
+        super("event this is an event stub");
     }
 
     @Override

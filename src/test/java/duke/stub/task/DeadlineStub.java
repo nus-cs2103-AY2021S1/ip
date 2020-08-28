@@ -20,4 +20,9 @@ public class DeadlineStub extends Task {
         LocalDate stubDate = DateTimeParsing.parseDate("2000-01-01");
         return date.equals(stubDate);
     }
+
+    @Override
+    public String toString() {
+        return "This deadline stub was " + (isDone ? "" : "not") + " marked as done";
+    }
 }

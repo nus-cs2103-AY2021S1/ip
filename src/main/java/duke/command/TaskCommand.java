@@ -8,7 +8,7 @@ import duke.task.TaskFactory;
 import duke.task.TaskList;
 import duke.task.TaskType;
 
-// Handles all the logic behind any "task" command from the userz
+// Handles all the logic behind any "task" command from the user
 public class TaskCommand {
     /**
      * Executes any "task" command issued by the user.
