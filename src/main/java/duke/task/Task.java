@@ -1,9 +1,8 @@
 package duke.task;
 
 /**
- * Task is an abstract class that encapsulates a task to be completed by the user.
- * A task is represented by a string description.
- * The completion of a task is represented by a boolean.
+ * Encapsulates a task to be completed by the user.
+ * Contains a string description and a boolean representation of whether the task has been completed.
  */
 public abstract class Task {
     protected String description;

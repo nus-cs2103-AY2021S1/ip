@@ -5,8 +5,8 @@ import duke.Storage;
 import duke.TaskList;
 
 /**
- * DoneCommand is an extension of a command.
- * It marks a task based on the taskNumber in the TaskList as done and updates the changes in the Storage.
+ * Encapsulates a done command to be executed by Duke.
+ * Marks a task based on the taskNumber in the TaskList as done and updates the changes in the Storage.
  */
 public class DoneCommand extends Command {
     private String taskNumber;

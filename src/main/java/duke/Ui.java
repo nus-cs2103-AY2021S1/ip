@@ -3,6 +3,9 @@ package duke;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Encapsulates a messenger that displays messages on the user interface.
+ */
 public class Ui {
     private static List<String> messages = new ArrayList<>();
     

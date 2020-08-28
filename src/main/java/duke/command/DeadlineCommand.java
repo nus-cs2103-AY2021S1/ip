@@ -8,8 +8,8 @@ import duke.TaskList;
 import java.time.LocalDateTime;
 
 /**
- * DeadlineCommand is an extension of a command.
- * It creates a deadline task to be added to both the TaskList and Storage.
+ * Encapsulates a deadline command to be executed by Duke.
+ * Creates a deadline task to be added to both the TaskList and Storage.
  */
 public class DeadlineCommand extends Command {
     private String description;

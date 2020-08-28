@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * TaskList manages all the tasks in a list of tasks.
+ * Encapsulates a list of tasks.
  * It generates messages to inform users of its operations.
  */
 public class TaskList {

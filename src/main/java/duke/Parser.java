@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Parser breaks down user inputs to generate commands to be executed by Dude.
+ * Encapsulates a parser that breaks down user inputs to generate commands to be executed by Dude.
  */
 public class Parser {
     /**

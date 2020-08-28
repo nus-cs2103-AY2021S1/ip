@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Storage manages the database that is used by Duke.
+ * Encapsulates a storage that manages the database used by Duke.
  * It is initialised using a path that leads to a .txt file.
  * A task is saved as a string with various data separated by the '|' character.
  * It supports the uploading and retrieval of tasks to and from the database.

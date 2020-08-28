@@ -5,8 +5,8 @@ import duke.TaskList;
 import duke.Ui;
 
 /**
- * DoneCommand is an extension of a command.
- * It exits the application.
+ * Encapsulates a exit command to be executed by Duke.
+ * Exits the application.
  */
 public class ExitCommand extends Command {
     public ExitCommand() {

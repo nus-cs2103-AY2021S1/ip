@@ -5,7 +5,7 @@ import duke.Storage;
 import duke.TaskList;
 
 /**
- * Command is an abstract class that encapsulates a command to be executed by Duke.
+ * Encapsulates a command to be executed by Duke.
  */
 public abstract class Command {
     /**

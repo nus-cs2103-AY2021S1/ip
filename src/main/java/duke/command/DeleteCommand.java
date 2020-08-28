@@ -5,8 +5,8 @@ import duke.Storage;
 import duke.TaskList;
 
 /**
- * DeleteCommand is an extension of a command.
- * It deletes a task based on the taskNumber in the TaskList and updates the changes in the Storage.
+ * Encapsulates a delete command to be executed by Duke.
+ * Deletes a task based on the taskNumber in the TaskList and updates the changes in the Storage.
  */
 public class DeleteCommand extends Command {
     private String taskNumber;

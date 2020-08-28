@@ -1,7 +1,7 @@
 package duke.task;
 
 /**
- * Todo is an extension of a task.
+ * Encapsulates a todo task.
  */
 public class Todo extends Task {
     public Todo(String description) {
