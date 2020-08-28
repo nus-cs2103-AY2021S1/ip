@@ -17,4 +17,5 @@
 ../src/main/java/duke/command/ExitCommand.java
 ../src/main/java/duke/command/DoneCommand.java
 ../src/main/java/duke/Duke.java
+../src/main/java/duke/Launcher.java
 ../src/main/java/duke/DukeException.java
