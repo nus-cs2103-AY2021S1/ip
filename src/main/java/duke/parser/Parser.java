@@ -44,7 +44,7 @@ public class Parser {
          */
         public static Keyword findKeyword(String keyword) throws ParseDukeCommandException {
             for (Keyword k : values()) {
-                if (keyword.equals(k.input)) {
+                if (keyword.toLowerCase().equals(k.input)) {
                     return k;
                 }
             }
