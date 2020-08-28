@@ -1,9 +1,9 @@
-package Duke.command;
+package duke.command;
 
-import Duke.exception.DukeException;
-import Duke.storage.Storage;
-import Duke.task.TaskList;
-import Duke.ui.Ui;
+import duke.exception.DukeException;
+import duke.storage.Storage;
+import duke.task.TaskList;
+import duke.ui.Ui;
 
 public class DoneCommand extends Command {
 
@@ -11,7 +11,6 @@ public class DoneCommand extends Command {
 
 	public DoneCommand(String secondArg) {
 		markItem = secondArg;
-
 	}
 
 

@@ -1,13 +1,12 @@
-package Duke.command;
+package duke.command;
 
-import Duke.storage.Storage;
-import Duke.task.Event;
-import Duke.task.Task;
-import Duke.task.TaskList;
-import Duke.ui.Ui;
+import duke.storage.Storage;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.ui.Ui;
 
 public class EventCommand extends Command {
-
 
 	private String description;
 	private String at;
