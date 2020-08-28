@@ -22,8 +22,9 @@ public class DoneCommand implements Command {
 
     /**
      * Marks the Task at the specified taskNum as Done.
-     *  @param storage The storage object.
+     * @param storage The storage object.
      * @param tasks   The taskList.
+     * @return The response to the user indicating the task has been marked as done.
      */
     @Override
     public String execute(Storage storage, TaskList tasks) {

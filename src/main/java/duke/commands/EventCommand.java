@@ -30,6 +30,7 @@ public class EventCommand implements Command {
      *
      * @param storage The storage object.
      * @param tasks   The taskList.
+     * @return The response to the user indicating the event task has been added to the taskList.
      * @throws DukeException If timePeriod format is wrong.
      */
     @Override

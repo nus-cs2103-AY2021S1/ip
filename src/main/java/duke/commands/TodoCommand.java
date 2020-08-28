@@ -23,8 +23,9 @@ public class TodoCommand implements Command {
 
     /**
      * Adds a new TodoTask.
-     *  @param storage The storage object.
+     * @param storage The storage object.
      * @param tasks   The taskList.
+     * @return The user response indicating the new todotask has been added to the taskList.
      */
     @Override
     public String execute(Storage storage, TaskList tasks) {

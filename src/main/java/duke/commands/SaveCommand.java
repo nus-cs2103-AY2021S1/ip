@@ -16,6 +16,7 @@ public class SaveCommand implements Command {
      *
      * @param storage The storage object.
      * @param tasks   The taskList.
+     * @return A response indicating data was saved successfully.
      * @throws DukeIOException If there was an IOException when saving the data.
      */
     @Override

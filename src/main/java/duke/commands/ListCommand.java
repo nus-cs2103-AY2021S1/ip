@@ -10,10 +10,12 @@ import duke.TaskList;
  */
 public class ListCommand implements Command {
 
+
     /**
-     * Prints a representation of the taskList.
-     *  @param storage The storage object.
+     * Gets a string representation of the taskList.
+     * @param storage The storage object.
      * @param tasks   The taskList.
+     * @return The string representation of the taskList.
      */
     @Override
     public String execute(Storage storage, TaskList tasks) {

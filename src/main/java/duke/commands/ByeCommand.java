@@ -14,9 +14,11 @@ public class ByeCommand implements Command {
 
     /**
      * Saves the current taskList into harddisk and
-     * prints the exit message before exiting Duke.
-     *  @param storage The storage object.
+     * returns the exit message.
+     * @param storage The storage object.
      * @param tasks   The taskList.
+     * @return The exit message.
+     * @throws DukeIOException IOException when writing data to the data-file.
      */
     @Override
     public String execute(Storage storage, TaskList tasks) throws DukeIOException {

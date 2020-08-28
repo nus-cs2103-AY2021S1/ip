@@ -30,6 +30,7 @@ public class DeadlineCommand implements Command {
      *
      * @param storage The storage object.
      * @param tasks   The taskList.
+     * @return The response back to the user indicating that the deadline task has been added to the list.
      * @throws DukeException If deadline format is wrong.
      */
     @Override
