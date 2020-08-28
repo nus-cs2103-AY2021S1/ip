@@ -29,4 +29,3 @@ public class AddTodoCommand extends Command {
         storage.save(tasks);
     }
 }
-

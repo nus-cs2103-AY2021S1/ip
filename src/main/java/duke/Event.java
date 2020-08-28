@@ -33,7 +33,7 @@ public class Event extends DatedTask {
      */
     @Override
     public String format() {
-        return "E" + SAVE_DELIMITER + super.format();
+        return "E" + getDelimiter() + super.format();
     }
 
     /**

@@ -74,7 +74,7 @@ public class Storage {
                 Scanner fr = new Scanner(file);
                 while (fr.hasNextLine()) {
                     String ln = fr.nextLine();
-                    String[] taskInfo = ln.split(Task.ESCAPED_SAVE_DELIMITER);
+                    String[] taskInfo = ln.split(Task.getEscapedSaveDelimiter());
                     TaskSymbols type = TaskSymbols.valueOf("SYMBOL_" + taskInfo[0]);
                     switch(type) {
                     case SYMBOL_T:
@@ -87,6 +87,8 @@ public class Storage {
                     case SYMBOL_D:
                         tasks.add(new Deadline(taskInfo[1], Boolean.parseBoolean(taskInfo[2]),
                                 LocalDate.parse(taskInfo[3])));
+                        break;
+                    default:
                         break;
                     }
                 }
