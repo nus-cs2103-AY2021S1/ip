@@ -15,18 +15,6 @@ public class Event extends Task {
         this.date = date;
         this.time = time;
     }
-    
-    public static Event of(String task, String inputDate, String inputTime) {
-        try {
-            LocalDate date = LocalDate.parse(inputDate, DateTimeFormatter.ISO_LOCAL_DATE);
-            LocalTime time = LocalTime.parse(inputTime, DateTimeFormatter.ISO_LOCAL_TIME);
-            return new Event(task, date, time);
-        } catch (DateTimeException e) {
-            System.out.println("    ERROR: Duke doesn't recognise the date/time -> "
-                + inputDate + " " + inputTime);
-        }
-        return null;
-    }
 
     public static Event of(String task, String inputDate, String inputTime, boolean done) {
         try {
@@ -38,8 +26,7 @@ public class Event extends Task {
             }
             return event;
         } catch (DateTimeException e) {
-            System.out.println("    ERROR: Duke doesn't recognise the date/time -> "
-                    + inputDate + " " + inputTime);
+            System.out.println(e);
         }
         return null;
     }

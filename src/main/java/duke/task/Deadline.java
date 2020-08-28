@@ -16,18 +16,6 @@ public class Deadline extends Task {
         this.time = time;
     }
 
-    public static Deadline of(String task, String inputDate, String inputTime) {
-        try {
-            LocalDate date = LocalDate.parse(inputDate, DateTimeFormatter.ISO_LOCAL_DATE);
-            LocalTime time = LocalTime.parse(inputTime, DateTimeFormatter.ISO_LOCAL_TIME);
-            return new Deadline(task, date, time);
-        } catch (DateTimeException e) {
-            System.out.println("    ERROR: Duke doesn't recognise the date/time -> " 
-                + inputDate + " " + inputTime);
-        }
-        return null;
-    }
-
     public static Deadline of(String task, String inputDate, String inputTime, boolean done) {
         try {
             LocalDate date = LocalDate.parse(inputDate, DateTimeFormatter.ISO_LOCAL_DATE);
@@ -38,8 +26,7 @@ public class Deadline extends Task {
             }
             return deadline;
         } catch (DateTimeException e) {
-            System.out.println("    ERROR: Duke doesn't recognise the date/time -> "
-                    + inputDate + " " + inputTime);
+            System.out.println(e);
         }
         return null;
     }
