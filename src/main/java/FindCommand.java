@@ -2,8 +2,8 @@
  * Implements methods for FindCommand.
  */
 public class FindCommand extends Command {
+    protected boolean isExit;
     private String keyword;
-    boolean isExit;
 
     /**
      * Instantiates FindCommand object.
@@ -19,7 +19,6 @@ public class FindCommand extends Command {
      * @param arrayOfTasks Array of tasks that we have parsed.
      * @param ui Ui object to aid in program execution.
      * @param storage Storage object to aid in program execution.
-     * @return void
      */
     public void runCommand(TaskList arrayOfTasks, Ui ui, Storage storage) {
         TaskList matchedTasksList = new TaskList();

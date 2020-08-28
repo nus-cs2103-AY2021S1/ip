@@ -19,13 +19,13 @@ public class DoneCommand extends Command {
      * @param arrayOfTasks Array of tasks that we have parsed.
      * @param ui Ui object to aid in program execution.
      * @param storage Storage object to aid in program execution.
-     * @return void
+     * @throws DukeException if there is an issue.
      */
     public void runCommand(TaskList arrayOfTasks, Ui ui, Storage storage) throws DukeException {
         int arraySize = arrayOfTasks.taskArraySize();
         if (taskIndex < 0 || taskIndex >= arraySize) {
-            throw new DukeException("The task number" + " (" + (taskIndex + 1) + ") " +
-                    "that you have input can not be found in your list.");
+            throw new DukeException("The task number" + " (" + (taskIndex + 1) + ") "
+                                    + "that you have input can not be found in your list.");
         }
         arrayOfTasks.get(taskIndex).setDone();
         Task doneTask = arrayOfTasks.get(taskIndex);

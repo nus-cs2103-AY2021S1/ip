@@ -20,7 +20,8 @@ public class Storage {
 
     /**
      * Parses strings from input text file.
-     * @return ArrayList<Task> that contains the parsed strings from input text file.
+     * @return ArrayList that contains the parsed strings from input text file.
+     * @throws DukeException if there is an issue.
      */
     public ArrayList<Task> load() throws DukeException {
         try {
@@ -75,7 +76,7 @@ public class Storage {
     /**
      * Saves parsed strings to output text file.
      * @param arrayOfTasks Array of tasks that contains all tasks read from input text file.
-     * @return void
+     * @throws DukeException if there is an issue.
      */
     public void saveToDisk(TaskList arrayOfTasks) throws DukeException {
         try {
@@ -87,7 +88,7 @@ public class Storage {
 
             while (index < sizeOfArray) {
                 Task task = arrayOfTasks.get(index);
-    
+
                 if (task.isDone) {
                     isDone = 1;
                 } else {
@@ -119,7 +120,6 @@ public class Storage {
 
     /**
      * Asserts that there have been changes made to the file.
-     * @return void
      */
     public void changeFile() {
         isFileChanged = true;
