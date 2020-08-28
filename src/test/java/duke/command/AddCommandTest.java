@@ -1,5 +1,9 @@
 package duke.command;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.fail;
+
 import org.junit.jupiter.api.Test;
 
 import duke.component.Parser;
@@ -9,10 +13,6 @@ import duke.component.TaskList;
 import duke.component.Ui;
 import duke.task.Task;
 import duke.task.ToDo;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.fail;
 
 public class AddCommandTest {
     @Test
