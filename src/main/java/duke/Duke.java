@@ -2,6 +2,7 @@ package duke;
 
 import duke.exception.DukeException;
 import duke.operation.Operation;
+import duke.operation.StartOperation;
 import duke.parser.CommandParser;
 import duke.task.TaskList;
 import duke.storage.TaskStorage;
@@ -11,17 +12,22 @@ import duke.ui.Ui;
  * Represents the main driver class of Duke.
  */
 public class Duke {
-    private TaskStorage taskStorage;
-    private TaskList taskList;
-    private Ui ui;
-    private CommandParser commandParser;
+    private final TaskStorage taskStorage;
+    private final TaskList taskList;
+    private final Ui ui;
+    private final CommandParser commandParser;
+
+    Duke() {
+        this.ui = new Ui();
+        this.taskStorage = TaskStorage.createTaskStorage();
+        this.taskList = new TaskList();
+        this.commandParser = new CommandParser();
+    }
 
     private void initialiseDuke() {
-        this.ui = new Ui();
         this.ui.showStartMessage();
-        this.taskStorage = TaskStorage.createTaskStorage();
-        this.taskList = this.taskStorage.loadTaskList(this.ui);
-        this.commandParser = new CommandParser();
+        String status = new StartOperation(this.taskList, this.taskStorage).execute();
+        this.ui.showLoadStatus(status);
     }
 
     /**

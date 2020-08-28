@@ -46,6 +46,15 @@ public class Ui {
     }
 
     /**
+     * Prints out the loading status of Duke.
+     * @param loadStatus the status <code>String</code> to be printed.
+     */
+    public void showLoadStatus(String loadStatus) {
+        System.out.println(loadStatus);
+        this.showBlankLine();
+    }
+
+    /**
      * Prints out the message from Duke, after a user has input a command.
      * @param msg the message to be printed.
      */

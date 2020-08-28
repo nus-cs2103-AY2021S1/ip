@@ -33,6 +33,7 @@ diff ACTUAL.TXT EXPECTED-UNIX.TXT
 if [ $? -eq 0 ]
 then
     echo "Test result: PASSED"
+    rm "taskstorage.txt"
     exit 0
 else
     echo "Test result: FAILED"

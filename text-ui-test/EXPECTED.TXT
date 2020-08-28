@@ -5,6 +5,8 @@
 |____/ \__,_|_|\_\___|
 Greetings, what may I do for you?
 
+I detect no storage files. I shall create a fresh list.
+
 ---------------------------------------------------------
 I have added the task:
 [E][✗] project meeting (at: 01:00 pm)

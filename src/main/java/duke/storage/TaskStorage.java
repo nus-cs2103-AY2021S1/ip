@@ -9,7 +9,6 @@ import duke.exception.DukeException;
 import duke.parser.StorageParser;
 import duke.task.Task;
 import duke.task.TaskList;
-import duke.ui.Ui;
 
 /**
  * Class that loads and converts the <code>TaskList</code> in Duke with a text file.
@@ -42,27 +41,34 @@ public class TaskStorage {
 
     /**
      * Loads the <code>TaskList</code> from the text file.
-     * @param ui the <code>Ui</code> to print out any errors when reading in the text file.
-     * @return the initialised <code>TaskList</code>.
+     * @param taskList the <code>TaskList</code> to be loaded onto.
+     * @return a <code>String</code> indicating the status of the loading.
      */
-    public TaskList loadTaskList(Ui ui) {
-        TaskList taskList = new TaskList();
+    public String loadTaskList(TaskList taskList) {
         Scanner s;
         try {
             s = new Scanner(this.file);
         } catch (IOException ignore) {
-            return taskList;
+            return "I detect no storage files. I shall create a fresh list.";
         }
 
+        StringBuilder sb = new StringBuilder();
         while (s.hasNext()) {
             try {
                 Task task = this.storageParser.convertStorageToTask(s.nextLine());
                 taskList.addTask(task);
             } catch (DukeException exception) {
-                ui.showStatus(exception.getMessage());
+                sb.append(exception.getMessage());
+                sb.append("\n");
             }
         }
-        return taskList;
+
+        if (sb.length() == 0) {
+            return "All tasks have been loaded.";
+        } else {
+            sb.deleteCharAt(sb.length() - 1);
+            return "The following tasks could not be loaded:\n" + sb.toString();
+        }
     }
 
     private void writeToFile(String text) throws IOException {

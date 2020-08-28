@@ -52,8 +52,14 @@ public class StorageParser {
             throw new DukeException(msg);
         }
         boolean isCompleted = storageTask[1].equals(IS_COMPLETED);
-        LocalDateTime dateTime = Datetime.parseDateTimeString(storageTask[3], Deadline.DATE_FORMAT_OUTPUT);
-        return new Deadline(storageTask[2], isCompleted, dateTime);
+        try {
+            LocalDateTime dateTime = Datetime.parseDateTimeString(storageTask[3], Deadline.DATE_FORMAT_OUTPUT);
+            return new Deadline(storageTask[2], isCompleted, dateTime);
+        } catch (DukeException exception) {
+            String msg = String.format("It appears the datetime of this deadline: '%s' is corrupted.",
+                    storageTaskString);
+            throw new DukeException(msg);
+        }
     }
 
     private Event createEvent(String[] storageTask, String storageTaskString) throws DukeException {
@@ -62,8 +68,14 @@ public class StorageParser {
             throw new DukeException(msg);
         }
         boolean isCompleted = storageTask[1].equals(IS_COMPLETED);
-        LocalDateTime time = Datetime.parseTimeString(storageTask[3], Event.TIME_FORMAT_OUTPUT);
-        return new Event(storageTask[2], isCompleted, time);
+        try {
+            LocalDateTime time = Datetime.parseTimeString(storageTask[3], Event.TIME_FORMAT_OUTPUT);
+            return new Event(storageTask[2], isCompleted, time);
+        } catch (DukeException exception) {
+            String msg = String.format("It appears the time of this event: '%s' is corrupted.",
+                    storageTaskString);
+            throw new DukeException(msg);
+        }
     }
 
     /**
