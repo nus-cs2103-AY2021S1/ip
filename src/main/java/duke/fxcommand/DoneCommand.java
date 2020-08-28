@@ -3,7 +3,7 @@ package duke.fxcommand;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
-import duke.task.Task;
+import duke.tasks.Task;
 
 /**
  * Represents the Command to mark a specific Task as done.

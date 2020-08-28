@@ -6,8 +6,8 @@ import java.util.List;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
-import duke.task.Task;
-import duke.task.TodoTask;
+import duke.tasks.Task;
+import duke.tasks.TodoTask;
 
 /**
  * Represents the Command to add a new TodoTask.

@@ -14,10 +14,10 @@ import duke.fxcommand.ListCommand;
 import duke.fxcommand.SaveCommand;
 import duke.fxcommand.TodoCommand;
 import duke.exception.DukeException;
-import duke.task.DeadlineTask;
-import duke.task.EventTask;
-import duke.task.Task;
-import duke.task.TodoTask;
+import duke.tasks.DeadlineTask;
+import duke.tasks.EventTask;
+import duke.tasks.Task;
+import duke.tasks.TodoTask;
 
 /**
  * Class that is responsible for parsing raw inputs and translating them to the correct Command or Task.

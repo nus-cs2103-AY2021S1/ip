@@ -4,8 +4,8 @@ import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 import duke.exception.DukeException;
-import duke.task.EventTask;
-import duke.task.Task;
+import duke.tasks.EventTask;
+import duke.tasks.Task;
 
 /**
  * Represents the Command to add a new EventTask.

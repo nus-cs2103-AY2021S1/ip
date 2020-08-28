@@ -1,4 +1,4 @@
-package duke.task;
+package duke.tasks;
 
 /**
  * Represents a TodoTask that is not constrained by datetime.

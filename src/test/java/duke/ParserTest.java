@@ -17,7 +17,7 @@ import duke.command.ListCommand;
 import duke.command.SaveCommand;
 import duke.command.TodoCommand;
 import duke.exception.DukeException;
-import duke.task.Task;
+import duke.tasks.Task;
 
 public class ParserTest {
 
