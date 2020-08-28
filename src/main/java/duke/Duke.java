@@ -1,12 +1,11 @@
 package duke;
 
-import duke.*;
 import duke.command.Command;
 
 public class Duke {
-    private Storage storage;
-    private TaskList tasks;
-    private Ui ui;
+    private final Storage storage;
+    private final TaskList tasks;
+    private final Ui ui;
 
     public Duke(String filePath) {
         ui = new Ui();
@@ -27,7 +26,6 @@ public class Duke {
                 ui.showError(e.getMessage());
             }
         }
-        ui.showBye();
     }
 
     public static void main(String[] args) {
