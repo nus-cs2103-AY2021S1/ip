@@ -38,6 +38,21 @@ public class CommandAgent {
     }
 
     /**
+     * Overloads command handler for final product.
+     * Execute the command, store the updated task list and
+     * send a response string to the dialog box.
+     *
+     * @param c The command parsed from user input.
+     * @param storage The data storage handler.
+     * @return The response string to be displayed in dialog box.
+     */
+    public String handleCommand(Command c, Storage storage) {
+        String response = executeCommand(c);
+        storage.save(taskList);
+        return response;
+    }
+
+    /**
      * Takes in the command and execute it based on the request from the command.
      *
      * @param command The command parsed from user input.

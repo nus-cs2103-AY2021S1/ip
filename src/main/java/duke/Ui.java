@@ -11,10 +11,19 @@ public class Ui {
     }
 
     /**
+     * Returns a welcome message in the chat bot.
+     * @return The greeting String.
+     */
+    public static String greet() {
+        return "Hello! I'm Jarvis\n"
+                + "What can I do for you?";
+    }
+
+    /**
      * Prints welcome message in the chat bot.
      */
     public void showWelcome() {
-        System.out.println("Hello! I'm Jarvis\n"
+        System.out.println("Hello! I'm Jarvis.\n"
                 + "What can I do for you?");
     }
 

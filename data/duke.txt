@@ -1,3 +1,4 @@
-T | 0 | homework
-D | 0 | return book | Apr 12 2020
-E | 0 | project meeting | Jan 01 2020
+T | 1 | homework
+D | 1 | return book | Apr 12 2020
+E | 0 | project meeting | Jan 1 2020
+T | 1 | CS2103 Test

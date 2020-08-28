@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE module PUBLIC
-    "-//Checkstyle//DTD Checkstyle Configuration 1.3//EN"
-    "https://checkstyle.org/dtds/configuration_1_3.dtd">
+        "-//Checkstyle//DTD Checkstyle Configuration 1.3//EN"
+        "https://checkstyle.org/dtds/configuration_1_3.dtd">
 
 <!--
     This configuration file enforces rules for a modified version of the module's code standard at
@@ -29,12 +29,13 @@
     <property name="file" value="${config_loc}/suppressions.xml"/>
   </module>
 
+  <module name="LineLength">
+    <!-- Checks if a line is too long. -->
+    <property name="max" value="120"/>
+  </module>
 
   <!-- All Java AST specific tests live under TreeWalker module. -->
   <module name="TreeWalker">
-
-    <!-- Required for SuppressionCommentFilter to work -->
-    <module name="FileContentsHolder"/>
 
     <!-- Required to allow exceptions in code style -->
     <module name="SuppressionCommentFilter">
@@ -55,11 +56,11 @@
       4. THIRD_PARTY_PACKAGE: defined as com imports
     -->
     <module name="CustomImportOrder">
-        <property name="customImportOrderRules"
-            value="STATIC###STANDARD_JAVA_PACKAGE###SPECIAL_IMPORTS###THIRD_PARTY_PACKAGE"/>
-        <property name="specialImportsRegExp" value="^org\."/>
-        <property name="thirdPartyPackageRegExp" value="^com\."/>
-        <property name="sortImportsInGroupAlphabetically" value="true"/>
+      <property name="customImportOrderRules"
+                value="STATIC###STANDARD_JAVA_PACKAGE###SPECIAL_IMPORTS###THIRD_PARTY_PACKAGE"/>
+      <property name="specialImportsRegExp" value="^org\."/>
+      <property name="thirdPartyPackageRegExp" value="^com\."/>
+      <property name="sortImportsInGroupAlphabetically" value="true"/>
     </module>
 
     <!-- Checks for redundant import statements.
@@ -158,11 +159,6 @@
     <!-- Checks if a catch block is empty and does not contain any comments. -->
     <module name="EmptyCatchBlock"/>
 
-    <module name="LineLength">
-      <!-- Checks if a line is too long. -->
-      <property name="max" value="120"/>
-    </module>
-
     <module name="LeftCurly">
       <!-- Checks for placement of the left curly brace ('{'). -->
       <property name="severity" value="warning"/>
@@ -220,7 +216,7 @@
       some other variants which we don't publicized to promote consistency).
       -->
       <property name="reliefPattern"
-       value="fall through|Fall through|fallthru|Fallthru|falls through|Falls through|fallthrough|Fallthrough|No break|NO break|no break|continue on"/>
+                value="fall through|Fall through|fallthru|Fallthru|falls through|Falls through|fallthrough|Fallthrough|No break|NO break|no break|continue on"/>
     </module>
 
     <module name="MissingSwitchDefault"/>
@@ -387,37 +383,20 @@
 
     <!-- Checks that every public method (excluding getters, setters and constructors) has a header comment. -->
     <module name="JavadocMethod">
-      <!-- Checks public methods that have more than 1 line of code.
-        Single line of code methods are often due to refactor for readability.
-      -->
-      <property name="minLineCount" value="1"/>
       <property name="allowedAnnotations" value="Override, Test, BeforeAll, BeforeEach, AfterAll, AfterEach, Subscribe"/>
       <property name="scope" value="public"/>
-      <property name="allowUndeclaredRTE" value="true"/>
-      <property name="allowThrowsTagsForSubclasses" value="true"/>
+      <property name="validateThrows" value="false"/>
       <property name="allowMissingParamTags" value="true"/>
-      <property name="allowMissingThrowsTags" value="true"/>
       <property name="allowMissingReturnTag" value="true"/>
-      <property name="allowMissingPropertyJavadoc" value="true"/>
-      <property name="ignoreMethodNamesRegex" value="(set.*|get.*)"/>
       <property name="tokens" value="METHOD_DEF, ANNOTATION_FIELD_DEF"/>
     </module>
-    <!-- Checks that every non-trivial private method (excluding getters, setters and constructors) has a header comment. -->
-    <module name="JavadocMethod">
-      <!-- Checks private methods that have more than 3 lines of code.
-        We define methods that have more than 3 lines of code as non-trivial.
-      -->
-      <property name="minLineCount" value="3"/>
-      <property name="allowedAnnotations" value="Override, Test, BeforeAll, BeforeEach, AfterAll, AfterEach, Subscribe"/>
-      <property name="scope" value="private"/>
-      <property name="allowUndeclaredRTE" value="true"/>
-      <property name="allowThrowsTagsForSubclasses" value="true"/>
-      <property name="allowMissingParamTags" value="true"/>
-      <property name="allowMissingThrowsTags" value="true"/>
-      <property name="allowMissingReturnTag" value="true"/>
+
+    <module name="InvalidJavadocPosition"/>
+
+    <module name="MissingJavadocMethodCheck">
+      <property name="minLineCount" value="1"/>
       <property name="allowMissingPropertyJavadoc" value="true"/>
       <property name="ignoreMethodNamesRegex" value="(set.*|get.*)"/>
-      <property name="tokens" value="METHOD_DEF, ANNOTATION_FIELD_DEF"/>
     </module>
 
   </module>
