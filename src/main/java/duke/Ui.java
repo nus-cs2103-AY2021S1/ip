@@ -17,7 +17,7 @@ public class Ui {
     /**
      * Show farewell message
      */
-    public static void bye() {
+    public static void sayFarewell() {
         buildChatSeparator();
         System.out.println(" Bye. Hope to see you again soon!");
         buildChatSeparator();
@@ -89,7 +89,7 @@ public class Ui {
     /**
      * Show introduction of the Duke chatbot
      */
-    public void introduce() {
+    public void introduceDuke() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"

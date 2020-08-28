@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Storage {
+class Storage {
 
     /**
      * Write the content of the list into a file
@@ -77,41 +77,41 @@ public class Storage {
         while (readSc.hasNextLine()) {
             String curr = readSc.nextLine();
             switch (curr.charAt(1)) {
-                case 'T':
-                    try {
-                        if (curr.charAt(4) == '✗') {
-                            tl.addTodo(ui, list, curr.split(" ", 2)[1], false, false);
-                        } else {
-                            tl.addTodo(ui, list, curr.split(" ", 2)[1], false, true);
-                        }
-                    } catch (InvalidTodoException e) {
-                        System.out.println(e);
+            case 'T':
+                try {
+                    if (curr.charAt(4) == '✗') {
+                        tl.addTodo(ui, list, curr.split(" ", 2)[1], false, false);
+                    } else {
+                        tl.addTodo(ui, list, curr.split(" ", 2)[1], false, true);
                     }
-                    break;
-                case 'D':
-                    try {
-                        if (curr.charAt(4) == '✗') {
-                            tl.addDeadline(ui, list, curr.split(" ", 2)[1], false, false);
-                        } else {
-                            tl.addDeadline(ui, list, curr.split(" ", 2)[1], false, true);
-                        }
-                    } catch (InvalidDeadlineException e) {
-                        System.out.println(e);
+                } catch (InvalidTodoException e) {
+                    System.out.println(e);
+                }
+                break;
+            case 'D':
+                try {
+                    if (curr.charAt(4) == '✗') {
+                        tl.addDeadline(ui, list, curr.split(" ", 2)[1], false, false);
+                    } else {
+                        tl.addDeadline(ui, list, curr.split(" ", 2)[1], false, true);
                     }
-                    break;
-                case 'E':
-                    try {
-                        if (curr.charAt(4) == '✗') {
-                            tl.addEvent(ui, list, curr.split(" ", 2)[1], false, false);
-                        } else {
-                            tl.addEvent(ui, list, curr.split(" ", 2)[1], false, true);
-                        }
-                    } catch (InvalidEventException e) {
-                        System.out.println( e);
+                } catch (InvalidDeadlineException e) {
+                    System.out.println(e);
+                }
+                break;
+            case 'E':
+                try {
+                    if (curr.charAt(4) == '✗') {
+                        tl.addEvent(ui, list, curr.split(" ", 2)[1], false, false);
+                    } else {
+                        tl.addEvent(ui, list, curr.split(" ", 2)[1], false, true);
                     }
-                    break;
-                default:
-                    System.out.println("Unknown task");
+                } catch (InvalidEventException e) {
+                    System.out.println( e);
+                }
+                break;
+            default:
+                System.out.println("Unknown task");
             }
         }
     }

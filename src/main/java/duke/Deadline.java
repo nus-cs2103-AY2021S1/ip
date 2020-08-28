@@ -5,7 +5,7 @@ import java.time.LocalDate;
 /**
  * Represents an {@code Deadline} object. Inherits from {@code Task} object
  */
-public class Deadline extends Task {
+class Deadline extends Task {
 
     public Deadline(String description, boolean isDone, LocalDate deadline) {
         super(description, isDone, deadline);
