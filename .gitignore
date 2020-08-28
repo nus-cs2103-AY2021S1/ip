@@ -2,6 +2,7 @@
 /.idea/
 /out/
 /*.iml
+/data/
 
 # Gradle build files
 /.gradle/
@@ -15,3 +16,6 @@ bin/
 
 /text-ui-test/ACTUAL.txt
 text-ui-test/EXPECTED-UNIX.TXT
+junit-test/ACTUAL_STORAGE_CHANGE_TO_DONE.txt
+junit-test/ACTUAL_STORAGE_SAVE.txt
+junit-test/ACTUAL_STORAGE_DELETE.txt
