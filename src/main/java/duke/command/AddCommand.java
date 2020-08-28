@@ -1,3 +1,11 @@
+package duke.command;
+
+import duke.ui.Ui;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.ToDo;
+import duke.task.Deadline;
+import duke.task.Event;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -6,15 +14,15 @@ public class AddCommand implements Command {
     private String taskDescription;
     private LocalDate date;
     private LocalTime time;
-    
-    AddCommand(String key, String taskDescription) {
+
+    public AddCommand(String key, String taskDescription) {
         this.key = key;
         this.taskDescription = taskDescription;
         this.date = null;
         this.time = null;
     }
-    
-    AddCommand(String key, String taskDescription, LocalDate date, LocalTime time) {
+
+    public AddCommand(String key, String taskDescription, LocalDate date, LocalTime time) {
         this.key = key;
         this.taskDescription = taskDescription;
         this.date = date;

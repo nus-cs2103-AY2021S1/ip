@@ -1,5 +1,7 @@
+package duke.exception;
+
 public class DukeNoDescriptionException extends DukeException {
-    DukeNoDescriptionException(String input) {
+    public DukeNoDescriptionException(String input) {
         super(input);
     }
     

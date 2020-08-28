@@ -1,5 +1,7 @@
+package duke.exception;
+
 public class DukeOutOfBoundsException extends DukeException {
-    DukeOutOfBoundsException(String input) {
+    public DukeOutOfBoundsException(String input) {
         super(input);
     }
 

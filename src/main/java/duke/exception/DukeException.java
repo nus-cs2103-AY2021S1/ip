@@ -1,7 +1,9 @@
+package duke.exception;
+
 public class DukeException extends Exception {
     protected String input;
-    
-    DukeException(String input) {
+
+    public DukeException(String input) {
         this.input = input;
     }
     

@@ -1,5 +1,7 @@
+package duke.exception;
+
 public class DukeUnknownCommandException extends DukeException {
-    DukeUnknownCommandException(String input) {
+    public DukeUnknownCommandException(String input) {
         super(input);
     }
 

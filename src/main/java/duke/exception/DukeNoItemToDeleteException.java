@@ -1,5 +1,7 @@
+package duke.exception;
+
 public class DukeNoItemToDeleteException extends DukeException {
-    DukeNoItemToDeleteException(String input) {
+    public DukeNoItemToDeleteException(String input) {
         super(input);
     }
 

@@ -1,3 +1,5 @@
+package duke.command;
+
 public enum CommandKey {
     DONE("done"),
     LIST("list"),
@@ -17,7 +19,7 @@ public enum CommandKey {
         return key;
     }
     
-    static boolean equalsCommandKey(String userCommand, CommandKey key) {
+    public static boolean equalsCommandKey(String userCommand, CommandKey key) {
         return key.getKey().equals(userCommand);
     }
 }

@@ -1,3 +1,5 @@
+package duke.task;
+
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -8,7 +10,7 @@ public class Deadline extends Task {
     LocalDate date;
     LocalTime time;
 
-    Deadline(String task, LocalDate date, LocalTime time) {
+    public Deadline(String task, LocalDate date, LocalTime time) {
         super(task);
         this.date = date;
         this.time = time;

@@ -1,3 +1,7 @@
+package duke.ui;
+
+import duke.task.Task;
+import duke.task.TaskList;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -9,7 +13,7 @@ public class Ui {
     static String BYE_LINE = "========================================================";
     static String INDENT = "    ";
     
-    Ui() {
+    public Ui() {
         scanner = new Scanner(System.in);
     }
     

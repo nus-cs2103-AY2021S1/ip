@@ -1,5 +1,7 @@
+package duke.exception;
+
 public class DukeDateTimeException extends DukeException {
-    DukeDateTimeException(String input) {
+    public DukeDateTimeException(String input) {
         super(input);
     }
     
