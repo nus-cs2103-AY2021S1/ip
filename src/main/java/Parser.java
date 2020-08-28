@@ -19,9 +19,13 @@ public class Parser {
 
     public static String concatenateStrArr(String[] strArr){
         StringBuilder acc = new StringBuilder();
-        for (String s: strArr) {
-            if(!s.equals("")) {
-                acc.append(" ").append(s);
+        for (int i = 0;i< strArr.length;i++) {
+            if(!strArr[i].equals("")) {
+                if (i == 1) {
+                    acc.append(strArr[i]);
+                } else {
+                    acc.append(" ").append(strArr[i]);
+                }
             }
         }
         return acc.toString();
