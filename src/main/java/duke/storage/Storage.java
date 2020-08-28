@@ -1,5 +1,16 @@
 package duke.storage;
 
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 import duke.commands.Command;
 import duke.parser.Parser;
 import duke.task.Deadline;
@@ -7,21 +18,10 @@ import duke.task.Event;
 import duke.task.ToDo;
 import duke.tasklist.TaskList;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.FileWriter;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-
 /**
  * Class the simulates the storing and retrieving of information into the hard-disk
  */
 public class Storage {
-    
     // might use it at the end
     private static final String CREATE_FILEPATH = "Creating file path ... ... ... ... ... ... ... ... ... ...";
     private static final String CREATE_CSV = "Creating file todoList.csv ... ... ... ... ... ... ... ...";
@@ -56,7 +56,7 @@ public class Storage {
      * @param file The CSV file to be created.
      * @throws IOException
      */
-    private void createCSV(File file) throws IOException {
+    private void createCsv(File file) throws IOException {
         //System.out.println(CREATE_CSV);
         file.createNewFile();
     }
@@ -97,7 +97,7 @@ public class Storage {
             File file = filePath.toFile();
             // checking if file exist
             if (!file.exists()) {
-                createCSV(file);
+                createCsv(file);
             }
             // saving file
             savingFileInfo(file, tasks);
@@ -123,7 +123,7 @@ public class Storage {
                     // todo format type description done
                     // event format type at description done
                     // deadline format type by description done
-                    if (Parser.isTODO(info[0])) {
+                    if (Parser.isToDo(info[0])) {
                         tasks.add(new ToDo(info[1], isTaskDone(info[2])));
                     } else if (Parser.isEvent(info[0])) {
                         tasks.add(new Event(info[2], info[1], isTaskDone(info[3])));

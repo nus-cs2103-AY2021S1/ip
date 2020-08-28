@@ -33,12 +33,12 @@ application {
 }
 
 shadowJar {
-    archiveBaseName = "duke"
+    archiveBaseName = "duke" 
     archiveClassifier = null
 }
 
 checkstyle {
-    toolVersion = '8.23'
+    toolVersion = '8.32'
 }
 
 run{

@@ -1,21 +1,20 @@
 package duke.commands;
 
+import static java.lang.Integer.parseInt;
+
 import duke.storage.Storage;
 import duke.task.Task;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
 
-import static java.lang.Integer.parseInt;
+
 
 /**
  * Class that simulates the done command.
  */
 
 public class DoneCommand extends Command {
-    
     private static final String INVALID_INPUT = "Invalid input for done";
-    
-    
     /**
      * Creates a DoneCommand object.
      * 

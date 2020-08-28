@@ -1,18 +1,19 @@
 package duke.commands;
 
+import static java.lang.Integer.parseInt;
+
 import duke.storage.Storage;
 import duke.task.Task;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
 
-import static java.lang.Integer.parseInt;
+
 
 /**
  * Class the simulates the delete command.
  */
 
 public class DeleteCommand extends Command {
-    
     private static final String INVALID_INPUT = "Invalid input for delete";
     private static final String DELETE_NOTIFICATION = "Noted. I've removed this duke.task:";
     /**
@@ -25,10 +26,9 @@ public class DeleteCommand extends Command {
     public DeleteCommand(String[] inputArr) {
         super(inputArr);
     }
-    
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        deleteTask(parseInt(inputArr[1]),ui,tasks);
+        deleteTask(parseInt(inputArr[1]), ui, tasks);
     }
 
     /**
@@ -52,6 +52,4 @@ public class DeleteCommand extends Command {
             });
         }
     }
-    
-
 }

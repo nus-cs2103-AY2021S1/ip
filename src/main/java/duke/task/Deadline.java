@@ -8,9 +8,8 @@ import java.time.format.DateTimeFormatter;
  */
 
 public class Deadline extends Task {
-    private final LocalDateTime by;
     private static final DateTimeFormatter FormatDateTime = DateTimeFormatter.ofPattern("EEEE, dd MMM yyyy, h:mma");
-
+    private final LocalDateTime by;
     /**
      * Creates a deadline object the containing details of the task.
      * 

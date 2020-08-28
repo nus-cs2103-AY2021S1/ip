@@ -1,22 +1,21 @@
 package duke.tasklist;
 
-import duke.task.Task;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import duke.task.Task;
+
 public class TaskListTest {
-    
-    TaskList task;
-    
+    private TaskList task;
     @BeforeEach
     void init() {
         task = new TaskList();
-        for (int i = 0; i < 3; i ++) {
-            task.add(new Task("hello world "+ i));
+        for (int i = 0; i < 3; i++) {
+            task.add(new Task("hello world " + i));
         }
     }
-    
     @Test
     public void testSize() {
         assertEquals(3, task.size());
@@ -37,7 +36,6 @@ public class TaskListTest {
     @Test
     public void testRemove() {
         task.remove(2);
-        assertEquals(2,2);
+        assertEquals(2, 2);
     }
-    
 }

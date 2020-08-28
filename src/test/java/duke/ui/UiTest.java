@@ -1,16 +1,15 @@
 package duke.ui;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
-import java.io.PrintStream;
-import java.io.ByteArrayOutputStream;
-
 
 public class UiTest {
-    
     private static final String LINE = "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
     private static final String SPACER = "               ";
     private static final String LOGO = SPACER + " ____        _        \n"
@@ -22,8 +21,7 @@ public class UiTest {
     // Reused from https://www.baeldung.com/java-testing-system-out-println
     private final PrintStream standardOut = System.out;
     private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
-    
-    Ui ui;
+    private Ui ui;
     @BeforeEach
     void init() {
         ui = new Ui();
@@ -37,13 +35,12 @@ public class UiTest {
         String str = LINE + "\n" + "hello world\n" + LINE;
         assertEquals(str, outputStreamCaptor.toString().trim());
     }
-    
     @Test
     @DisplayName("user's login greetings")
     public void testGreetings() {
         ui.greetings();
-        String str = LINE + "\n" + " *** Opening and loading relevant documents into duke.Duke ***\n" + LOGO + "\n" 
-                + LINE+ "\n"+ "\n" + LINE + "\n" + "Hello! I'm duke.Duke ^.^\n" + "What can I do for you?\n" + LINE;
+        String str = LINE + "\n" + " *** Opening and loading relevant documents into duke.Duke ***\n" + LOGO + "\n"
+                + LINE + "\n" + "\n" + LINE + "\n" + "Hello! I'm duke.Duke ^.^\n" + "What can I do for you?\n" + LINE;
         assertEquals(str, outputStreamCaptor.toString().trim());
     }
     @Test
@@ -53,7 +50,6 @@ public class UiTest {
         String str = LINE + "\n" + "Bye ^.^, Hope to see you again soon!!!\n" + LINE;
         assertEquals(str, outputStreamCaptor.toString().trim());
     }
-    
     @Test
     @DisplayName("error message")
     public void testPrintException() {
