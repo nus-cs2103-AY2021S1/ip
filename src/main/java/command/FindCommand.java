@@ -1,13 +1,13 @@
 package command;
 
+import java.util.Arrays;
+
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 import exception.DukeException;
 import exception.EmptyFindException;
 import task.Task;
-
-import java.util.Arrays;
 
 /**
  * Represents a <code>Command</code> whose task is finding the tasks containing the keyword

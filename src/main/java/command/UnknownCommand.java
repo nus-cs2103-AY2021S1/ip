@@ -1,13 +1,12 @@
 package command;
 
-import exception.DukeException;
-import exception.UnknownCommandException;
+import java.util.Arrays;
 
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
-
-import java.util.Arrays;
+import exception.DukeException;
+import exception.UnknownCommandException;
 
 /**
  * Represents a <code>Command</code> whose task is throwing an exception stating that the command is not defined.

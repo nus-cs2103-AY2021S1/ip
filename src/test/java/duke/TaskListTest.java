@@ -1,26 +1,24 @@
 package duke;
 
-import exception.NoSuchTaskException;
-
-import task.Deadline;
-import task.Event;
-import task.Task;
-import task.ToDo;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-
 import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
+import exception.NoSuchTaskException;
+import task.Deadline;
+import task.Event;
+import task.Task;
+import task.ToDo;
 
 public class TaskListTest {
     @Test
-    public void get_success(){
+    public void get_success() {
         List<Task> list = new ArrayList<>();
         ToDo toDo = new ToDo("watch TV");
         list.add(toDo);
@@ -54,7 +52,7 @@ public class TaskListTest {
     }
 
     @Test
-    public void size(){
+    public void size() {
         List<Task> list = new ArrayList<>();
         ToDo toDo = new ToDo("watch TV");
         list.add(toDo);
@@ -67,7 +65,7 @@ public class TaskListTest {
     }
 
     @Test
-    public void all(){
+    public void all() {
         List<Task> list = new ArrayList<>();
         ToDo toDo = new ToDo("watch TV");
         list.add(toDo);
@@ -80,7 +78,7 @@ public class TaskListTest {
     }
 
     @Test
-    public void remove_success(){
+    public void remove_success() {
         List<Task> list = new ArrayList<>();
         ToDo toDo = new ToDo("watch TV");
         list.add(toDo);
@@ -98,7 +96,7 @@ public class TaskListTest {
     }
 
     @Test
-    public void remove_exceptionThrown(){
+    public void remove_exceptionThrown() {
         List<Task> list = new ArrayList<>();
         ToDo toDo = new ToDo("watch TV");
         list.add(toDo);

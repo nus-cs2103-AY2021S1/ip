@@ -1,11 +1,9 @@
 package duke;
 
-import exception.DukeException;
-import exception.NoSuchTaskException;
-
-import task.Task;
-
 import java.util.Scanner;
+
+import exception.NoSuchTaskException;
+import task.Task;
 
 /**
  * Represents a <code>Ui</code> that deals with interactions with the user.
@@ -68,9 +66,13 @@ public class Ui {
      * Displays a message indicating the <code>Task</code> has been marked as done.
      */
     public void sayMarkedTask(Task task) {
-        say( "Nice! I've marked this task as done:\n" + task);
+        say("Nice! I've marked this task as done:\n" + task);
     }
 
+    /**
+     * Reads and returns the command input.
+     * @return The command input.
+     */
     public String readCommand() {
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();

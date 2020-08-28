@@ -1,20 +1,18 @@
 package command;
 
-import duke.Storage;
-import duke.TaskList;
-import duke.Ui;
-
-import exception.DukeException;
-import exception.EmptyDeadlineException;
-
-import task.Deadline;
-import task.Task;
-
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Arrays;
+
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
+import exception.DukeException;
+import exception.EmptyDeadlineException;
+import task.Deadline;
+import task.Task;
 
 /**
  * Represents a <code>Command</code> whose task is adding a <code>Deadline</code> to the <code>TaskList</code>.

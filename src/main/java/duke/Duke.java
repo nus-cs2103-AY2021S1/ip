@@ -3,26 +3,22 @@ package duke;
 import java.io.IOException;
 
 import command.Command;
-
 import exception.DukeException;
-import exception.NoSuchTaskException;
 
 /**
  * Represents a <code>Duke</code> object which is a ChatBot that can keep track of several kinds of tasks.
  */
 public class Duke {
-    private final String DATA_DIRECTORY = "data";
-    private final String SAVED_FILE_PATH = "data/duke.txt";
+    private static final String DATA_DIRECTORY = "data";
+    private static final String SAVED_FILE_PATH = "data/duke.txt";
 
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
-    public static void main(String[] args) {
-        Duke duke = new Duke();
-        duke.run();
-    }
-
+    /**
+     * Constructs a <code>Duke</code> object.
+     */
     public Duke() {
         ui = new Ui();
         storage = new Storage(DATA_DIRECTORY, SAVED_FILE_PATH);
@@ -31,6 +27,15 @@ public class Duke {
         } catch (IOException e) {
             ui.sayException(e);
         }
+    }
+
+    /**
+     * Runs the Duke.
+     * @param args
+     */
+    public static void main(String[] args) {
+        Duke duke = new Duke();
+        duke.run();
     }
 
     /**

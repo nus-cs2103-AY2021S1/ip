@@ -1,5 +1,11 @@
 package command;
 
+import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.Arrays;
+
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
@@ -7,12 +13,6 @@ import exception.DukeException;
 import exception.EmptyEventException;
 import task.Event;
 import task.Task;
-
-import java.io.IOException;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-import java.util.Arrays;
 
 /**
  * Represents a <code>Command</code> whose task is adding an <code>Event</code> to the <code>TaskList</code>.

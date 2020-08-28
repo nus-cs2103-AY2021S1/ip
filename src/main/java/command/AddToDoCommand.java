@@ -1,17 +1,15 @@
 package command;
 
+import java.io.IOException;
+import java.util.Arrays;
+
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
-
 import exception.DukeException;
 import exception.EmptyTodoException;
-
 import task.Task;
 import task.ToDo;
-
-import java.io.IOException;
-import java.util.Arrays;
 
 /**
  * Represents a <code>Command</code> whose task is adding a <code>ToDo</code> to the <code>TaskList</code>.

@@ -1,11 +1,10 @@
 package command;
 
+import java.util.Arrays;
+
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
-import exception.DukeException;
-
-import java.util.Arrays;
 
 /**
  * Represents a <code>Command</code> whose task is displaying all of the <code>Task</code>.

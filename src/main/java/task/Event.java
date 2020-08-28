@@ -1,19 +1,27 @@
 package task;
 
-import task.Task;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Event extends Task {
-    LocalDateTime time;
+    private LocalDateTime time;
 
+    /**
+     * Constructs an <code>Event</code> object.
+     * @param description The description of the event
+     * @param time The time of the event
+     */
     public Event(String description, LocalDateTime time) {
         super(description);
         this.time = time;
     }
 
-
+    /**
+     * Constructs an <code>Event</code> object knowing whether the event is already done or not.
+     * @param description The description of the event
+     * @param time The time of the event
+     * @param isDone Whether the event is already done or not
+     */
     public Event(String description, LocalDateTime time, boolean isDone) {
         super(description, isDone);
         this.time = time;

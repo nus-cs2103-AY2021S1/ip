@@ -1,11 +1,5 @@
 package duke;
 
-import exception.DukeException;
-import task.Deadline;
-import task.Event;
-import task.Task;
-import task.ToDo;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -15,6 +9,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import exception.DukeException;
+import task.Deadline;
+import task.Event;
+import task.Task;
+import task.ToDo;
+
 /**
  * Represents a <code>Storage</code> object that deals with loading tasks from the file and saving tasks in the file.
  */
@@ -22,6 +22,11 @@ public class Storage {
     private String dataDirectoryPath;
     private String savedFilePath;
 
+    /**
+     * Constructs a <code>Storage</code> object.
+     * @param dataDirectoryPath The directory of the folder <code>data</code> which will contain the saved file
+     * @param savedFilePath The path (including file name) of the saved file
+     */
     public Storage(String dataDirectoryPath, String savedFilePath) {
         this.dataDirectoryPath = dataDirectoryPath;
         this.savedFilePath = savedFilePath;

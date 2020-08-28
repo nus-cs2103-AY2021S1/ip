@@ -1,16 +1,15 @@
 package duke;
 
-import exception.NoSuchTaskException;
-
-import task.Task;
-
 import java.util.List;
+
+import exception.NoSuchTaskException;
+import task.Task;
 
 /**
  * Represents a <code>TaskList</code> object that contains the task list.
  */
 public class TaskList {
-    List<Task> tasks;
+    private List<Task> tasks;
 
     public TaskList(List<Task> tasks) {
         this.tasks = tasks;

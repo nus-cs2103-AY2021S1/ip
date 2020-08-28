@@ -1,17 +1,15 @@
 package command;
 
+import java.io.IOException;
+import java.util.Arrays;
+
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
-
 import exception.DukeException;
 import exception.EmptyDoneException;
 import exception.NoSuchTaskException;
-
 import task.Task;
-
-import java.io.IOException;
-import java.util.Arrays;
 
 /**
  * Represents a <code>Command</code> whose task is marking a <code>Task</code> as done.

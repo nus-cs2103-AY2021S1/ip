@@ -1,17 +1,15 @@
 package command;
 
+import java.io.IOException;
+import java.util.Arrays;
+
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
-
 import exception.DukeException;
 import exception.EmptyDeleteException;
 import exception.NoSuchTaskException;
-
 import task.Task;
-
-import java.io.IOException;
-import java.util.Arrays;
 
 /**
  * Represents a <code>Command</code> whose task is deleting a <code>Task</code> from the <code>TaskList</code>.
