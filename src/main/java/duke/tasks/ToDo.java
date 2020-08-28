@@ -6,7 +6,7 @@ import duke.tasks.Task;
 public class ToDo extends Task {
 
     public ToDo(String description) throws DukeException {
-        super(description.substring(5),"todo");
+        super(description.substring(5), "todo");
         this.setType("todo");
     }
 
@@ -14,6 +14,7 @@ public class ToDo extends Task {
     public String toString() {
         return "[T]" + super.toString();
     }
+
     public String toSave() {
         return "[T]" + super.toString();
     }

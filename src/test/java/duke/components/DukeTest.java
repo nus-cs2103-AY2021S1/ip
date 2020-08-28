@@ -16,10 +16,11 @@ public class DukeTest {
     @Test
     public void eventTest() throws DukeException {
 
-        Event lunchEvent = new Event("event lunch with family", LocalDate.parse("2020-09-10"),"1300");
+        Event lunchEvent = new Event("event lunch with family", LocalDate.parse("2020-09-10"), "1300");
         assertEquals("[E][\u2718] lunch with family (at: Sep 10 2020 1300)", lunchEvent.toString());
 
     }
+
     @Test
     public void deadlineTest() throws DukeException {
 
@@ -27,6 +28,7 @@ public class DukeTest {
         assertEquals("[D][\u2718] CS2103T homework (by: Sep 10 2020)", homeworkDeadline.toString());
 
     }
+
     @Test
     public void todoTest() throws DukeException {
 

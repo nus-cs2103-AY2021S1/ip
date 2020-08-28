@@ -13,7 +13,7 @@ public class TaskList {
 
     private ArrayList<Task> myList;
 
-    public TaskList(ArrayList<Task> list){
+    public TaskList(ArrayList<Task> list) {
 
         this.myList = list;
 
@@ -23,7 +23,7 @@ public class TaskList {
         return myList;
     }
 
-    public Task finishTaskNum(int taskNum){
+    public Task finishTaskNum(int taskNum) {
 
         Task currentTask = myList.get(taskNum);
         currentTask.finishTask();
@@ -31,39 +31,39 @@ public class TaskList {
 
     }
 
-    public Task addTask(String description, LocalDate date, String time){
+    public Task addTask(String description, LocalDate date, String time) {
         Task currentTask = null;
-        if(date==null){
+        if (date == null) {
             try {
                 currentTask = new ToDo(description);
                 myList.add(currentTask);
 
-            }catch(DukeException e){
+            } catch (DukeException e) {
                 System.out.println(e);
             }
 
-        }else if(time==null){
+        } else if (time == null) {
             try {
-                currentTask = new Deadline(description,date);
+                currentTask = new Deadline(description, date);
                 myList.add(currentTask);
 
-            }catch(DukeException e){
+            } catch (DukeException e) {
                 System.out.println(e);
             }
 
-        }else{
+        } else {
             try {
-                currentTask = new Event(description,date,time);
+                currentTask = new Event(description, date, time);
                 myList.add(currentTask);
 
-            }catch(DukeException e){
+            } catch (DukeException e) {
                 System.out.println(e);
             }
         }
         return currentTask;
     }
 
-    public Task deleteTask(int taskNum){
+    public Task deleteTask(int taskNum) {
         Task currentTask = myList.get(taskNum);
         myList.remove(taskNum);
         return currentTask;

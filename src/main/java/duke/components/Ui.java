@@ -9,11 +9,11 @@ public class Ui {
 
     Scanner scan;
 
-    public Ui(){
+    public Ui() {
         scan = new Scanner(System.in);
     }
 
-    public void printTaskList(ArrayList<Task> taskList){
+    public void printTaskList(ArrayList<Task> taskList) {
         for (int i = 0; i < taskList.size(); i++) {
 
             Task currentTask = taskList.get(i);
@@ -22,16 +22,16 @@ public class Ui {
         }
     }
 
-    public void printDoneTask(Task currentTask){
+    public void printDoneTask(Task currentTask) {
         System.out.println(
                 "_______________________________\n" +
-                        "Nice! I've marked this task as done:\n"+
-                        currentTask.toString()+"\n"+
+                        "Nice! I've marked this task as done:\n" +
+                        currentTask.toString() + "\n" +
                         "_______________________________");
 
     }
 
-    public void printAddTask(Task currentTask, ArrayList<Task> currentTaskList){
+    public void printAddTask(Task currentTask, ArrayList<Task> currentTaskList) {
         System.out.println(
                 "_______________________________\n" +
                         "Got it. I've added this task:\n" +
@@ -41,13 +41,13 @@ public class Ui {
 
     }
 
-    public void printBye(){
+    public void printBye() {
 
-        System.out.println("_______________________________\n"+
+        System.out.println("_______________________________\n" +
                 "Bye. Hope to see you again soon!");
     }
 
-    public void printNotValid(){
+    public void printNotValid() {
 
         System.out.println(
                 "_______________________________\n" +
@@ -56,17 +56,17 @@ public class Ui {
 
     }
 
-    public void printDeleteTask(Task currentTask, ArrayList<Task> currentTaskList){
+    public void printDeleteTask(Task currentTask, ArrayList<Task> currentTaskList) {
         System.out.println(
                 "_______________________________\n" +
                         "Noted. I've removed this task:\n" +
-                        currentTask.toString()+"\n"+
-                        "Now you have "+currentTaskList.size()+" tasks in the list.\n"+
+                        currentTask.toString() + "\n" +
+                        "Now you have " + currentTaskList.size() + " tasks in the list.\n" +
                         "_______________________________");
 
     }
 
-    public String waitForNextInput(){
+    public String waitForNextInput() {
         return scan.nextLine();
     }
 
