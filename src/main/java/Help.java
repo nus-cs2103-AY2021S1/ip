@@ -1,7 +1,11 @@
+/**
+ * Help Command Class to list Commands, their usage and their description.
+ */
 public class Help extends Command{
 
+    /** Query of User stored for reference */
     String[] query;
-    //Receives full query to avoid index out of bounds error from chatbot
+
     Help(String[] query) throws WrongUsageException{
         this.name = "help";
         this.usage = "help [CommandName](optional)";
@@ -13,6 +17,12 @@ public class Help extends Command{
         this.query = query;
     }
 
+    /**
+     * Returns String Response to User.
+     *
+     * @return String Response to User.
+     * @throws UnknownCommandException If User types in an Unknown Command.
+     */
     public String response() throws UnknownCommandException{
         if(query.length==1){
             return listCommands();
@@ -20,6 +30,8 @@ public class Help extends Command{
             return singleCommandHelp(query[1]);
         }
     }
+
+
     private String listCommands(){
         return "COMMAND: USAGE\n" + DataStorageInterface.listCommands();
     }

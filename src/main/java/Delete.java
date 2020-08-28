@@ -1,3 +1,6 @@
+/**
+ * Deletes a task from the task list.
+ */
 public class Delete extends Command{
 
     Delete(String[] splitQuery) throws WrongUsageException{
@@ -9,6 +12,13 @@ public class Delete extends Command{
         }
     }
 
+    /**
+     * Parses the String provided into a number and deletes the task in the task list.
+     *
+     * @param listIndex Index of task to be deleted.
+     * @return String response for delete.
+     * @throws CustomException If listIndex is not parse-able or listIndex is out of range.
+     */
     public String deleteTask(String listIndex) throws CustomException{
         int idx;
         try {

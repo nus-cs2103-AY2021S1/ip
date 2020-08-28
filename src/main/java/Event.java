@@ -2,6 +2,9 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Event Command to add in an Event type Task.
+ */
 public class Event extends Task{
     String preposition;
     LocalDate date;

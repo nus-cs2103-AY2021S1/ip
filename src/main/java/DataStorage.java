@@ -2,11 +2,24 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 
+/**
+ * All Non-Persistent Data is stored in this class.
+ * This includes all Commands at initialisation.
+ * Allows for further addition of Command Classes during Runtime for future development.
+ */
 public class DataStorage {
 
+    /** Stores all the non-persistent tasks in the taskList */
     public static ArrayList<Task> taskList = new ArrayList<>();
+
+    /** Stores all the Commands at initialisation of ChatBot */
     public static ArrayList<Command> commandInit = new ArrayList<>();
 
+    /**
+     * Initialises the CommandInit Array with all the possible Commands that User can query.
+     *
+     * @throws DukeException For the different Commands Initialising here, will never be thrown.
+     */
     public static void init() throws DukeException{
         commandInit.add(new Bye());
         commandInit.add(new Clear());

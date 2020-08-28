@@ -2,16 +2,23 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Scanner;
 
+/**
+ * Contains the ChatBot called by Main class.
+ */
 public class ChatBot {
 
-    static boolean ended = false;
+    /** Indicates if ChatBot has been ended by User */
+    static boolean hasEnded = false;
 
+    /**
+     * Main static method for ChatBot to be started in Main class.
+     */
     public static void start(){
         try {
             DataStorageInterface.initStorage();
             Scanner scanner = new Scanner(System.in);
             System.out.println("Hello I'm Duke!\nWhat can I do for you?");
-            while (!ChatBot.ended) {
+            while (!ChatBot.hasEnded) {
                 try {
                     String query = scanner.nextLine();
                     String resp = ChatBot.response(query);
@@ -25,6 +32,13 @@ public class ChatBot {
         }
     }
 
+    /**
+     * Returns appropriate response to be printed on the screen for the User to read.
+     *
+     * @param query The String passed in by the User.
+     * @return Response to User's command.
+     * @throws Exception Encompasses DukeException, FileNotFoundException, IOException
+     */
     private static String response(String query) throws Exception{
         String[] splitQuery = Parser.getSplit(query);
         String command = Parser.getCommand(splitQuery);
