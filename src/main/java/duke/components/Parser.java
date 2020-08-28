@@ -2,6 +2,13 @@ package duke.components;
 
 import java.time.LocalDate;
 
+/**
+ * Parser class handles the creation of an instance of a parser.
+ * the 'Parser' class supports operators.
+ * Supported operators includes (i) checking whether the input is valid
+ * (ii) checking the type of input
+ * and (iii) extracting the information from the input
+ */
 public class Parser {
 
     boolean isList,isTask,isDelete,isBye,isDone,isValid;
@@ -41,6 +48,12 @@ public class Parser {
         return deleteTaskNum;
     }
 
+    /**
+     * checks the input on whether it is valid, and what kind of input
+     * it is
+     *
+     * @param input input by user
+     */
     public void parse(String input){
         if (input.equals("list")) {
 

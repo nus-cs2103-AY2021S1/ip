@@ -4,6 +4,13 @@ import duke.tasks.Task;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+/**
+ * Ui class handles the creation of an instance of a Ui that interacts with the user.
+ * the 'Ui' class supports operators.
+ * Supported operators includes
+ * (i) printing the appropriate message for the user on what has been done.
+ * and (ii) taking in inputs from the user
+ */
 
 public class Ui {
 
@@ -13,6 +20,11 @@ public class Ui {
         scan = new Scanner(System.in);
     }
 
+    /**
+     * prints a task list.
+     *
+     * @param taskList task list to be printed
+     */
     public void printTaskList(ArrayList<Task> taskList){
         for (int i = 0; i < taskList.size(); i++) {
 
@@ -21,6 +33,12 @@ public class Ui {
             System.out.println((i + 1) + ". " + currentTask.toString());
         }
     }
+
+    /**
+     * prints a message when the task is marked as done.
+     *
+     * @param currentTask task to be marked as done.
+     */
 
     public void printDoneTask(Task currentTask){
         System.out.println(
@@ -68,6 +86,13 @@ public class Ui {
 
     public String waitForNextInput(){
         return scan.nextLine();
+    }
+    public void printFindTask(ArrayList<Task> foundTaskList){
+        System.out.println(
+                "_______________________________\n" +
+                        "Here are the matching tasks in your list:\n");
+        printTaskList(foundTaskList);
+        System.out.println("_______________________________");
     }
 
 }

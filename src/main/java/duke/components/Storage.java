@@ -10,6 +10,12 @@ import java.io.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
+/**
+ * Storage class handles the creation of an instance of a Storage object that stores and loads data.
+ * the 'Storage' class supports operators.
+ * Supported operators includes (i) returning the arraylist taken from the file loaded
+ * and (ii) overwriting the file with a new list of tasks
+ */
 
 public class Storage {
 
@@ -29,14 +35,14 @@ public class Storage {
                 String task = List.nextLine();
                 Task currentTask = null;
                 if(task.charAt(1) == 'T') {
-                    currentTask = new ToDo("todo "+task.substring(8));
+                    currentTask = new ToDo("todo "+task.substring(7));
                     taskList.add(currentTask);
 
                 }else if(task.charAt(1) == 'D'){
 
                     currentTask = new Deadline(
                             "deadline "+task.substring(
-                                    8,
+                                    7,
                                     task.indexOf('(')-1
                             ),
                             LocalDate.parse(task.substring(
@@ -50,7 +56,7 @@ public class Storage {
 
                     currentTask = new Event(
                             "event "+task.substring(
-                                    8,
+                                    7,
                                     task.indexOf('(')-1
                             ),
                             LocalDate.parse(task.substring(
@@ -75,10 +81,21 @@ public class Storage {
 
     }
 
+    /**
+     * accesses the task list from the file loaded.
+     *
+     * @return task list as an arraylist.
+     */
+
     public ArrayList<Task> load() {
         return taskList;
     }
 
+    /**
+     * overwrites the current file with a new task list.
+     *
+     * @param newTaskList new task list to be used to overwrite.
+     */
     public void overwriteWith(ArrayList<Task> newTaskList) throws IOException {
         this.taskList = newTaskList;
         PrintWriter file = new PrintWriter("duke.txt", "UTF-8");
