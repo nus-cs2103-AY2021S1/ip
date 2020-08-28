@@ -1,10 +1,5 @@
 package duke;
 
-import exceptions.InvalidFileException;
-import tasks.Deadline;
-import tasks.Event;
-import tasks.TaskList;
-import tasks.Todo;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -13,13 +8,24 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
+import exceptions.InvalidFileException;
+import tasks.Deadline;
+import tasks.Event;
+import tasks.TaskList;
+import tasks.Todo;
+
 /**
  * Handles the reading and writing of the data.txt file on the user's hard-disk
  */
 public class Storage {
-    TaskList tasks;
-    File file;
+    private TaskList tasks;
+    private File file;
 
+    /**
+     * Creates a new Storage object from a pre-existing file.
+     * @param file The file to be read from.
+     * @param tasks The TaskList object to be built.
+     */
     public Storage(File file, TaskList tasks) {
         this.file = file;
         this.tasks = tasks;

@@ -8,6 +8,11 @@ public class Task {
     private String name;
     private boolean done;
 
+    /**
+     * Creates a new Task object.
+     * @param name Name of the task.
+     * @param done Whether the task is done or not.
+     */
     public Task(String name, boolean done) {
         this.name = name;
         this.done = done;

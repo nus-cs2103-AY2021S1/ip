@@ -2,7 +2,6 @@ package commands;
 
 import duke.Storage;
 import duke.Ui;
-import exceptions.InvalidFileException;
 import exceptions.InvalidTaskNumberException;
 import exceptions.TaskNotFoundException;
 import tasks.TaskList;
@@ -12,7 +11,7 @@ import tasks.TaskList;
  */
 
 public class DoneCommand extends Command {
-    int index;
+    private int index;
 
     public DoneCommand(int index) {
         this.index = index;

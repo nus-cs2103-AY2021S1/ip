@@ -1,9 +1,10 @@
 package commands;
 
+import duke.Storage;
+import duke.Ui;
 import exceptions.DukeException;
 import tasks.TaskList;
-import duke.Ui;
-import duke.Storage;
+
 
 /**
  * Represents a generic command entered by the user

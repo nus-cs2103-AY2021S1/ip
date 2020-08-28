@@ -1,25 +1,27 @@
 package commands;
 
-import duke.Storage;
-import duke.Ui;
-import exceptions.InvalidTaskException;
-import exceptions.UnknownCmdException;
-import exceptions.InvalidTimeException;
-import exceptions.InvalidFileException;
-import exceptions.BadDtFormatException;
-import tasks.TaskList;
-import tasks.Todo;
-import tasks.Deadline;
-import tasks.Event;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+import duke.Storage;
+import duke.Ui;
+import exceptions.BadDtFormatException;
+import exceptions.InvalidTaskException;
+import exceptions.InvalidTimeException;
+import exceptions.UnknownCmdException;
+import tasks.Deadline;
+import tasks.Event;
+import tasks.TaskList;
+import tasks.Todo;
+
+
 
 /**
  * Represents an instruction from a user to add a new task to the list
  */
 public class AddCommand extends Command {
-    String text;
+    private String text;
 
     public AddCommand(String text) {
         this.text = text;
@@ -63,11 +65,11 @@ public class AddCommand extends Command {
      * @throws InvalidTimeException If an invalid time is entered for a Deadline or Event task
      */
 
-    public String[] extractInfo(String str) throws InvalidTaskException, UnknownCmdException,InvalidTimeException {
+    public String[] extractInfo(String str) throws InvalidTaskException, UnknownCmdException, InvalidTimeException {
         String[] store = new String[3];
         // Handling the classification of event type
         if (str.startsWith("todo")) {
-            if (str.equals("todo") || str.strip().equals("todo"))  {
+            if (str.equals("todo") || str.strip().equals("todo")) {
                 throw new InvalidTaskException("Your task cannot be empty!");
             } else if (!str.startsWith("todo ")) {
                 throw new UnknownCmdException("Unknown command entered!");
@@ -106,8 +108,8 @@ public class AddCommand extends Command {
         } else {
             int splitTime = store[0].equals("deadline") ? content.indexOf("/by") : content.indexOf("/at");
             if (splitTime < 0) {
-                throw new InvalidTimeException("Please use /by (deadlines) or /at (events)! to " +
-                        "indicate the date or time!");
+                throw new InvalidTimeException("Please use /by (deadlines) or /at (events)! to "
+                        + "indicate the date or time!");
             }
             String name = content.substring(0, splitTime).strip();
             String time = content.substring(splitTime + 3).strip();

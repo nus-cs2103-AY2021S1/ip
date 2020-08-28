@@ -1,10 +1,11 @@
 package duke;
 
+import java.io.FileNotFoundException;
+import java.nio.file.Paths;
+
 import commands.Command;
 import exceptions.DukeException;
 import tasks.TaskList;
-import java.io.FileNotFoundException;
-import java.nio.file.Paths;
 
 /**
  * Over-arching class containing the main information of the Duke bot.
@@ -28,7 +29,7 @@ class Duke {
         try {
             this.storage = new Storage(Paths.get("data.txt").toFile(), tasks);
             storage.readData();
-        } catch (FileNotFoundException e){
+        } catch (FileNotFoundException e) {
             System.out.println("No data found, creating new .txt file");
             this.storage = new Storage();
         }

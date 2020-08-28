@@ -10,6 +10,12 @@ import java.time.format.DateTimeFormatter;
 public class Deadline extends Task {
     protected LocalDateTime datetime;
 
+    /**
+     * Creates a new Deadline task.
+     * @param name Name of the task.
+     * @param datetime Date and time of occurrence of the task.
+     * @param done Whether the task is done or not.
+     */
     public Deadline(String name, LocalDateTime datetime, boolean done) {
         super(name, done);
         this.datetime = datetime;
@@ -17,7 +23,8 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + datetime.format(DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm")) + ")";
+        return "[D]" + super.toString() + " (by: " + datetime.format(DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm"))
+                + ")";
     }
 
     @Override

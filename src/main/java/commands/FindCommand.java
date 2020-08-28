@@ -6,7 +6,7 @@ import tasks.Task;
 import tasks.TaskList;
 
 public class FindCommand extends Command {
-    String text;
+    private String text;
 
     public FindCommand(String text) {
         this.text = text;

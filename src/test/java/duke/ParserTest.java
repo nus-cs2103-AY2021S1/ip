@@ -1,8 +1,16 @@
 package duke;
 
-import commands.*;
-import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
+
+import commands.AddCommand;
+import commands.DeleteCommand;
+import commands.DoneCommand;
+import commands.ExitCommand;
+import commands.FindCommand;
+import commands.HelpCommand;
+import commands.ListCommand;
 
 public class ParserTest {
 
@@ -26,6 +34,10 @@ public class ParserTest {
     public void parse_deleteString_prints() {
         assertEquals(new Parser().parse("delete 2").getClass(), DeleteCommand.class);
     }
+
+    /**
+     * Tests for each type of AddCommand that can be entered.
+     */
     @Test
     public void parse_addString_prints() {
         assertEquals(new Parser().parse("todo buy new pants").getClass(), AddCommand.class);
@@ -33,7 +45,7 @@ public class ParserTest {
         assertEquals(new Parser().parse("event IPPT /at 31/10/2020 10:30").getClass(), AddCommand.class);
     }
     @Test
-    public void parse_FindString_prints() {
+    public void parse_findString_prints() {
         assertEquals(new Parser().parse("find book").getClass(), FindCommand.class);
     }
 }

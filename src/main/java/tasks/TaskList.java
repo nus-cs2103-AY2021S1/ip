@@ -30,6 +30,10 @@ public class TaskList {
         return list;
     }
 
+    /**
+     * Enables the TaskList object to be printed in a easily readable format for the user.
+     * @return A representation of the TaskList in a form easily readable by a user.
+     */
     public String toString() {
         StringBuilder ls = new StringBuilder();
         int counter = 1;
@@ -40,6 +44,10 @@ public class TaskList {
         return ls.toString();
     }
 
+    /**
+     * Writes the TaskList object in a format easily readable by a Storage object.
+     * @return A representation of the TaskList in a form easily readable by a Storage object.
+     */
     public String writeString() {
         StringBuilder ls = new StringBuilder();
         int counter = 1;
