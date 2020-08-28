@@ -51,6 +51,9 @@ public class Ui {
 	 */
 	public void printList(TaskList lst) {
 		System.out.println(lst.toString());
+		if (lst.getSize() == 0) {
+			System.out.println("Your task list is empty!");
+		}
 	}
 
 	/**
@@ -109,6 +112,13 @@ public class Ui {
 
 	public void showLoadingError() {
 		System.out.println("We created a new Task List for you since we couldn't find any items in your previous list! :)");
+	}
+
+	/**
+	 * Prints out matching tasks line.
+	 */
+	public void printMatchingTasks() {
+		System.out.println("Here are the matching tasks in your list:");
 	}
 
 }

@@ -7,6 +7,9 @@ event wrong4 /at 2019-12-01 00:70
 deadline return book /by 2019-12-01 00:11
 event project meeting /at 2020-08-22 23:32
 done 2
+find
+find book
+find non-existent
 list
 delete 4
 delete 1

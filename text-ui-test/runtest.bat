@@ -11,7 +11,7 @@ del ACTUAL.TXT
 set JAVA_TOOL_OPTIONS=-Dfile.encoding=UTF-8
 
 REM compile the code into the bin folder
-javac  -cp C:\Data\repos\CS2103\src\main\java -Xlint:none -d C:\Data\repos\CS2103\bin C:\Data\repos\CS2103\src\main\java\Duke\Duke.java
+javac  -cp C:\Data\repos\CS2103\src\main\java\ -Xlint:none -d C:\Data\repos\CS2103\bin C:\Data\repos\CS2103\src\main\java\Duke\*.java
 
 IF ERRORLEVEL 1 (
     echo ********** BUILD FAILURE **********
@@ -20,7 +20,7 @@ IF ERRORLEVEL 1 (
 REM no error here, errorlevel == 0
 
 REM run the program, feed commands from input.txt file and redirect the output to the ACTUAL.TXT
-java -classpath C:\Data\repos\CS2103\bin Duke < input.txt > ACTUAL.TXT
+java -classpath C:\Data\repos\CS2103\bin duke.Duke < input.txt > ACTUAL.TXT
 
 
 REM compare the output to the expected output
