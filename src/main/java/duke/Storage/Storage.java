@@ -24,6 +24,7 @@ public class Storage {
     public static String directory;
 
     public Storage(String directory){
+
         this.directory = directory;
     }
 

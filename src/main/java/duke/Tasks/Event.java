@@ -18,11 +18,13 @@ public class Event extends Task {
     }
 
     public String getTime(){
+
         return this.at;
     }
 
     @Override
     public String getOriginal() {
+
         return "event " + getTask() + " /at " + getTime();
     }
 

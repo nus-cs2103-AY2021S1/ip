@@ -12,14 +12,14 @@ import duke.Ui.Ui;
  */
 public class Duke {
 
-    private final static String directory =  System.getProperty("user.dir");
+    private final static String DIRECTORY =  System.getProperty("user.dir");
     private Storage storage;
     private static TaskList tasks;
     private Ui ui;
 
 
     public Duke(){
-        storage = new Storage(this.directory);
+        storage = new Storage(this.DIRECTORY);
         ui = new Ui();
         this.tasks = new TaskList();
 
@@ -30,6 +30,6 @@ public class Duke {
     public void run(){
         this.ui.startMessage();
         storage.loadTasks(this.tasks);
-        AddInput.add_input(this.tasks, this.storage);
+        AddInput.addInput(this.tasks, this.storage);
     }
 }

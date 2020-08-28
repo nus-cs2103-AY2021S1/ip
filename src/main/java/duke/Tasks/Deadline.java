@@ -17,6 +17,7 @@ public class Deadline extends Task {
     }
 
     public String getDate(){
+
         return this.by;
     }
 

@@ -14,26 +14,31 @@ public class Parser {
 
     // check for bye command
     public static boolean isBye(String checker) {
+
         return checker.equals(BYE_KEY);
     }
 
     // check for list command
     public static boolean isList(String checker) {
+
         return checker.equals(LIST_KEY);
     }
 
     // check for done command
     public static boolean isComplete(String checker) {
+
         return checker.equals(DONE_KEY);
     }
 
     // check for todo command
     public static boolean isToDo(String checker) {
+
         return checker.equals(TODO_KEY);
     }
 
     // check for deadline command
     public static boolean isDeadline(String checker) {
+
         return checker.equals(DEADLINE_KEY);
     }
 
@@ -49,6 +54,7 @@ public class Parser {
 
     // check for find command
     public static boolean isFind(String checker) {
+
         return checker.equals(FIND_KEY);
     }
 

@@ -14,7 +14,7 @@ import duke.Ui.Ui;
 public class AddToList {
 
     // method that adds tasks into the list of tasks
-    public static void added_to_List(TaskList taskList, String printable) throws DukeException {
+    public static void addedToList(TaskList taskList, String printable) throws DukeException {
         Task task = new Task("Do something");
         String[] nameList = printable.split(" ", 2);
         if(Parser.isDeadline(nameList[0].trim().toLowerCase())){

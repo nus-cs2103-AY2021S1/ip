@@ -11,7 +11,7 @@ import java.util.Scanner;
 
 public class AddInput {
 
-    public static void add_input(TaskList taskList, Storage storage) {
+    public static void addInput(TaskList taskList, Storage storage) {
         Scanner scanner = new Scanner(System.in);
 
 
@@ -84,7 +84,7 @@ public class AddInput {
                         Ui.taskDeleted(deletedTask);
                     }
                 } else {
-                    AddToList.added_to_List(taskList, input);
+                    AddToList.addedToList(taskList, input);
 
 
                 }

@@ -16,25 +16,31 @@ public class Task {
     }
 
     public String getStatusIcon() {
+
         return (isDone ? "\u2713" : "\u2718");
     }
 
     public void markAsDone(){
+
         this.isDone = true;
     }
 
     public String getTask() {
+
         return this.description;
     }
 
     public boolean getStatus(){
+
         return isDone;
     }
     public String getOriginal(){
+
         return "task " + getTask();
     }
 
     public String toString(){
+
         return "[" + getStatusIcon() + "] " + getTask();
     }
 }
