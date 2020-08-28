@@ -11,8 +11,16 @@ import duke.Ui.Ui;
 public abstract class Command {
     protected boolean isExit = false;
 
-    public abstract void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException;
+    /**
+     * Executes the command.
+     */
+    public abstract String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException;
 
+    /**
+     * Returns true if the command triggers termination of the program.
+     *
+     * @return True if the command triggers termination of the program.
+     */
     public boolean isExit() {
         return isExit;
     }

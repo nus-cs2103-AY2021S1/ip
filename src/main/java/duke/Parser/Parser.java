@@ -8,6 +8,9 @@ import duke.Command.DeleteCommand;
 import duke.Command.AddCommand;
 import duke.Command.FindCommand;
 
+/**
+ * Handles making sense of the user command.
+ */
 public class Parser {
 
     /**

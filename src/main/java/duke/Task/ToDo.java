@@ -1,5 +1,8 @@
 package duke.Task;
 
+/**
+ * Represents a task with description only.
+ */
 public class ToDo extends Task {
 
     /**

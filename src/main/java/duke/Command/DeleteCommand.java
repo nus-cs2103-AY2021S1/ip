@@ -7,9 +7,12 @@ import duke.Exception.DukeException;
 import duke.Task.Task;
 import duke.Task.TaskList;
 
+import duke.Ui.Message;
 import duke.Ui.Ui;
 
-
+/**
+ * Deletes a task from the task list.
+ */
 public class DeleteCommand extends Command {
 
     private final int index;
@@ -18,10 +21,12 @@ public class DeleteCommand extends Command {
         this.index = index;
     }
 
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    @Override
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         Task task = taskList.get(index);
         taskList.remove(index);
         storage.saveTasks(taskList);
-        ui.showTaskDeletionMessage(task, taskList);
+        return Message.MESSAGE_DELETE + task.toString() + Ui.LINE_SEPARATOR
+                + Message.getTotalTaskMessage(taskList);
     }
 }

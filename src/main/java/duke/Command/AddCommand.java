@@ -10,16 +10,25 @@ import duke.Task.Deadline;
 import duke.Task.Event;
 import duke.Task.ToDo;
 
+import duke.Ui.Message;
 import duke.Ui.Ui;
 
 import java.util.Arrays;
 
+/**
+ * Adds a task to the task list.
+ */
 public class AddCommand extends Command {
 
     private final String desc;
 
-    public AddCommand(String description) {
-        this.desc = description;
+    /**
+     * Constructs an <code>AddCommand</code> Object given description.
+     *
+     * @param taskDescription The task description from user input, excluding the command word
+     */
+    public AddCommand(String taskDescription) {
+        this.desc = taskDescription;
     }
 
     public static String getStringWithoutKeyword(String[] strArr) {
@@ -53,11 +62,12 @@ public class AddCommand extends Command {
         return str.split(delimiter)[0];
     }
 
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    @Override
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         Task newTask;
 
         String[] words = this.desc.split("\\s+");
-        String keyword = words[0];
+        String keyword = words[0]; // todo, deadline, event
 
         String stringWithoutKeyword;
         stringWithoutKeyword = getStringWithoutKeyword(words);
@@ -95,8 +105,11 @@ public class AddCommand extends Command {
         default:
             throw new DukeException("I'm sorry, but I don't know what that means :-(");
         }
+
         taskList.add(newTask);
         storage.saveTasks(taskList);
-        ui.showTaskAdditionMessage(newTask, taskList);
+
+        return Message.MESSAGE_ADDED + newTask.toString() + Ui.LINE_SEPARATOR
+                + Message.getTotalTaskMessage(taskList);
     }
 }

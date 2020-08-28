@@ -19,9 +19,14 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 
+/**
+ * Handles loading tasks from the given file and saving tasks to the same file.
+ */
 public class Storage {
     
     private String filePath;
+
+    public static final String STORAGE_FILEPATH = "./data/duke.txt";
 
     /**
      * Constructs a <code>Storage</code> Object using filePath.
@@ -60,7 +65,7 @@ public class Storage {
                     task = new Event(data[2], data[3]);
                     break;
                 default:
-                    throw new DukeException(Message.BORDERS + "\n" + "Failed to load tasks.\n" + Message.BORDERS);
+                    throw new DukeException("Failed to load tasks.");
                 }
 
                 if (data[1].equals("1")) {

@@ -6,14 +6,13 @@ import duke.Command.ListCommand;
 import duke.Command.CompleteCommand;
 import duke.Command.DeleteCommand;
 
-import duke.Exception.DukeException;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ParserTest {
     @Test
-    public void parserAdd() throws DukeException {
+    public void parserAdd() {
         assertTrue(Parser.parse("todo Test") instanceof AddCommand);
         assertTrue(Parser.parse("deadline Test /by deadlineBy") instanceof AddCommand);
         assertTrue(Parser.parse("deadline Test /by 25/07/2015 1500") instanceof AddCommand);
@@ -22,23 +21,23 @@ public class ParserTest {
     }
 
     @Test
-    public void parserExit() throws DukeException {
+    public void parserExit() {
         assertTrue(Parser.parse("bye") instanceof ExitCommand);
     }
 
     @Test
-    public void parserList() throws DukeException {
+    public void parserList() {
         assertTrue(Parser.parse("list") instanceof ListCommand);
     }
 
     @Test
-    public void parserComplete() throws DukeException {
+    public void parserComplete() {
         assertTrue(Parser.parse("done 2") instanceof CompleteCommand);
     }
 
 
     @Test
-    public void parserDelete() throws DukeException {
+    public void parserDelete() {
         assertTrue(Parser.parse("delete 2") instanceof DeleteCommand);
     }
 }

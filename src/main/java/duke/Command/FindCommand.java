@@ -1,13 +1,15 @@
 package duke.Command;
 
-import duke.Exception.DukeException;
-
 import duke.Storage;
 
 import duke.Task.TaskList;
 
+import duke.Ui.Message;
 import duke.Ui.Ui;
 
+/**
+ * Finds and lists all tasks in the task list whose description contains the specified keyword.
+ */
 public class FindCommand extends Command {
 
     private String keyword;
@@ -17,8 +19,12 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
         TaskList resultWithKeyword = taskList.filter(keyword);
-        ui.showFindMessage(resultWithKeyword);
+        if (resultWithKeyword.isEmpty()) {
+            return Message.MESSAGE_NO_TASK;
+        } else {
+            return Message.MESSAGE_FIND + Ui.LINE_SEPARATOR + resultWithKeyword.toString();
+        }
     }
 }

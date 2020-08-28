@@ -5,28 +5,29 @@ import duke.Command.Command;
 import duke.Exception.DukeException;
 
 import duke.Parser.Parser;
-import duke.Task.Task;
+
 import duke.Task.TaskList;
 
+import duke.Ui.Message;
 import duke.Ui.Ui;
 
-import java.util.ArrayList;
-
 public class Duke {
-
-    public static ArrayList<Task> taskList = new ArrayList<>();
 
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
-    public Duke(String filePath) {
+    public Duke() {
+        this(Storage.STORAGE_FILEPATH);
+    }
+
+    private Duke(String filePath) {
         this.ui = new Ui();
         this.storage = new Storage(filePath);
         try {
             this.tasks = new TaskList(storage.load());
         } catch (DukeException e) {
-            ui.showLoadingError();
+            ui.printResponse(Message.MESSAGE_LOADING_ERROR);
             this.tasks = new TaskList();
         }
     }
@@ -42,24 +43,35 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
         new Duke("./data/duke.txt").run();
-
     }
 
     private void run() {
-        ui.showWelcome();
+        ui.printResponse(Message.MESSAGE_WELCOME);
+        ui.showLine();
         boolean isExit = false;
         while (!isExit) {
             try {
                 String fullCommand = ui.readCommand();
-                ui.showLine(); // show the divider line ("_______")
                 Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
+                ui.printResponse(c.execute(tasks, ui, storage));
                 isExit = c.isExit();
             } catch (DukeException e) {
-                ui.showError(e.getMessage());
+                ui.printResponse(Message.showError(e.getMessage()));
             } finally {
                 ui.showLine();
             }
+        }
+    }
+
+    /**
+     * Generate a response to user input.
+     */
+    public String getResponse(String input) {
+        try {
+            Command c = Parser.parse(input);
+            return c.execute(tasks, ui, storage);
+        } catch (DukeException e) {
+            return Message.showError(e.getMessage());
         }
     }
 }
