@@ -10,6 +10,9 @@ import duke.exceptions.DukeTaskCreationException;
  */
 public abstract class Task implements Encodable<Task>, Searchable {
 
+    private static final String COMPLETED_ICON = "\u2713";
+    private static final String INCOMPLETE_ICON = "\u2718";
+
     protected String description;
     protected boolean completed;
 
@@ -35,7 +38,7 @@ public abstract class Task implements Encodable<Task>, Searchable {
     }
 
     private String getStatusIcon() {
-        return completed ? "\u2713" : "\u2718";
+        return completed ? COMPLETED_ICON : INCOMPLETE_ICON;
     }
 
     /**

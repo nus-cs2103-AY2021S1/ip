@@ -21,7 +21,6 @@ public class TaskTest {
         DukeException thrown = assertThrows(DukeTaskCreationException.class, () -> {
             ConcreteTaskStub task = new ConcreteTaskStub("");
         });
-        System.out.println(thrown.getMessage());
         assertTrue(thrown.getMessage().contains("That's really descriptive..."));
     }
 
