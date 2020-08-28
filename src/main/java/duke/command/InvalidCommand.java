@@ -25,16 +25,4 @@ public class InvalidCommand implements Command {
         System.out.println(this.message);
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof InvalidCommand)) return false;
-        InvalidCommand that = (InvalidCommand) o;
-        return message.equals(that.message);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(message);
-    }
 }

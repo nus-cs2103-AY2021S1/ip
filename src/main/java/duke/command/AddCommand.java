@@ -36,17 +36,4 @@ public class AddCommand implements ReversibleCommand {
         System.out.println("\t- Undo Add: " + task.toString());
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof AddCommand)) return false;
-        AddCommand that = (AddCommand) o;
-        return taskList.equals(that.taskList) &&
-                task.equals(that.task);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(taskList, task);
-    }
 }

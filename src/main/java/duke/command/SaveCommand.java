@@ -31,17 +31,4 @@ public class SaveCommand implements Command {
         Storage.save(taskList, filePath);
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof SaveCommand)) return false;
-        SaveCommand that = (SaveCommand) o;
-        return taskList.equals(that.taskList) &&
-                filePath.equals(that.filePath);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(taskList, filePath);
-    }
 }

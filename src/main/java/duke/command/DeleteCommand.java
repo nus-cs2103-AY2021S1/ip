@@ -11,7 +11,7 @@ import java.util.Objects;
 public class DeleteCommand implements ReversibleCommand {
 
     private final List<Task> taskList;
-    private Task task;
+    private final Task task;
 
     public DeleteCommand(List<Task> taskList, Task task) {
         this.taskList = taskList;
@@ -36,17 +36,4 @@ public class DeleteCommand implements ReversibleCommand {
         System.out.println("\t+ Undo Delete: " + task.toString());
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof DeleteCommand)) return false;
-        DeleteCommand that = (DeleteCommand) o;
-        return taskList.equals(that.taskList) &&
-                task.equals(that.task);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(taskList, task);
-    }
 }

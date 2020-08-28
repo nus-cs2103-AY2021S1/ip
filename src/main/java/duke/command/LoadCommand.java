@@ -36,17 +36,4 @@ public class LoadCommand implements Command {
         Storage.load(taskList, filePath);
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof LoadCommand)) return false;
-        LoadCommand that = (LoadCommand) o;
-        return taskList.equals(that.taskList) &&
-                filePath.equals(that.filePath);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(taskList, filePath);
-    }
 }
