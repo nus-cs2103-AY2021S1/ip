@@ -10,10 +10,11 @@ import java.util.Scanner;
  * Represents all user interaction with Duke.
  */
 public class Ui {
-    protected final taskListHandler handler;
-    protected final Storage storage;
     /** Class-wide variable to know whether to continue running user interface. */
     protected static boolean isRunning = true;
+    protected final taskListHandler handler;
+    protected final Storage storage;
+
 
     public Ui(taskListHandler handler, Storage storage) {
         this.handler = handler;

@@ -16,12 +16,12 @@ import java.util.Scanner;
  * Represents all loading and saving operations to the save file.
  */
 public class Storage {
+    /** Checks whether the user chooses to terminate when corrupted save file encountered. */
     protected static boolean hasLoadingError = false;
+    protected static final String FILE_NAME = "/save.txt";
     protected final String location;
-    protected final static String filename = "/save.txt";
     protected final File savefile;
     protected FileWriter writer;
-    /** Checks whether the user chooses to terminate when corrupted save file encountered. */
     protected boolean isEmptySave;
     protected ArrayList<Task> listFromFile;
 
@@ -30,7 +30,7 @@ public class Storage {
      */
     public Storage(String specifiedLocation) {
         this.location = specifiedLocation;
-        this.savefile = new File(specifiedLocation + filename);
+        this.savefile = new File(specifiedLocation + FILE_NAME);
         run();
     }
 
@@ -126,7 +126,7 @@ public class Storage {
             return list;
 
         } catch (IOException e1) {
-            throw new DukeException("\u2639 Oops, error reading from " + location + filename);
+            throw new DukeException("\u2639 Oops, error reading from " + location + FILE_NAME);
         } catch (IndexOutOfBoundsException |NoSuchElementException | NumberFormatException e) {
             throw new DukeException("\u2639 Oops, save file is corrupted, error encountered: "
                 + e.getLocalizedMessage().toLowerCase());
@@ -172,7 +172,7 @@ public class Storage {
      */
     public void saveToFile(ArrayList<Task> list) throws DukeException {
         try {
-            this.writer = new FileWriter(location+filename);
+            this.writer = new FileWriter(location+ FILE_NAME);
             String doneIndexes;
 
             // System.out.println("Wrote: " + list.size());
