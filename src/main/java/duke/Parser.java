@@ -92,6 +92,12 @@ public class Parser {
             return new DeleteCommand(taskNumber);
         } else if (fullCommand.equalsIgnoreCase("bye")){
             return new ByeCommand();
+        } else if (fullCommand.startsWith("find")) {
+            if (fullCommand.length() <= 5) {
+                throw new DukeException(":( Oops!!! Please type \"find [keyword]\" to find a task");
+            }
+            String query = fullCommand.substring(5);
+            return new FindCommand(query);
         } else {
             Task newTask = parseAddCommand(fullCommand);
             return new AddCommand(newTask);
