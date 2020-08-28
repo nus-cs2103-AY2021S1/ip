@@ -8,8 +8,8 @@
 public class Ui {
 
     /** Divides each command call. */
-    final String LINE_BREAK = "==========================================================" +
-            "===============";
+    static final String LINE_BREAK = "=========================================================="
+            + "===============";
 
     /**
      * Prints the welcome logo and how to start.
@@ -21,9 +21,9 @@ public class Ui {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
-        System.out.println("Hello! I'm Duke\n" +
-                "What can I do for you today? (type: \"help\" to view list of commands)\n" +
-                LINE_BREAK);
+        System.out.println("Hello! I'm Duke\n"
+                + "What can I do for you today? (type: \"help\" to view list of commands)\n"
+                + LINE_BREAK);
     }
 
     public void showLineBreak() {
@@ -38,16 +38,16 @@ public class Ui {
      * Prints the available input commands and their respective formatting requirements.
      */
     public void showHelp() {
-        System.out.println("list: displays a sequential view of past inputs\n" +
-                "find <task description>: finds all the tasks matched\n" +
-                "done <task number>: denotes a task as done by checking it\n" +
-                "delete <task number>: deletes an existing task\n" +
-                "deadline <description> /by <YYYY-MM-DD> <HH:MM>: adds a deadline with " +
-                "desired date/time\n" +
-                "event <description> /at <YYYY-MM-DD> <HH:MM>: adds an event with " +
-                "desired date/time\n" +
-                "todo <description>: adds a todo task\n" +
-                "bye: terminates program");
+        System.out.println("list: displays a sequential view of past inputs\n"
+                + "find <task description>: finds all the tasks matched\n"
+                + "done <task number>: denotes a task as done by checking it\n"
+                + "delete <task number>: deletes an existing task\n"
+                + "deadline <description> /by <YYYY-MM-DD> <HH:MM>: adds a deadline with "
+                + "desired date/time\n"
+                + "event <description> /at <YYYY-MM-DD> <HH:MM>: adds an event with "
+                + "desired date/time\n"
+                + "todo <description>: adds a todo task\n"
+                + "bye: terminates program");
     }
 
     public void showNoPastTasks() {
@@ -67,15 +67,29 @@ public class Ui {
         System.out.println("If you wish to mark a task as completed, input: done <task number>");
     }
 
+    /**
+     * Prints the message denoting a task is done.
+     *
+     * @param task The done task.
+     */
     public void showTaskIsDone(Task task) {
         System.out.println("Duke says: Good Job! I've marked this task as done:");
         System.out.println(task);
     }
 
+    /**
+     * Prints the message denoting an invalid task number error.
+     */
     public void showInvalidTaskNumber() {
         System.out.println("Duke says: Please try again with a valid task number");
     }
 
+    /**
+     * Prints the message denoting a successful deletion of task.
+     *
+     * @param removedTask The deleted task.
+     * @param remaining The number of remaining tasks.
+     */
     public void showSuccessfulDelete(Task removedTask, int remaining) {
         System.out.println("Successfully deleted the task!\n" + removedTask);
         showRemainingTasks(remaining);
@@ -85,6 +99,12 @@ public class Ui {
         System.out.println("You now have " + remaining + " task(s) in your list");
     }
 
+    /**
+     * Prints the message denoting a task being added.
+     *
+     * @param task The added task.
+     * @param remaining The number of remaining tasks.
+     */
     public void showTasksAdded(Task task, int remaining) {
         System.out.println("Duke added into your task list:\n" + task);
         showRemainingTasks(remaining);
@@ -94,6 +114,12 @@ public class Ui {
         System.out.println(message);
     }
 
+    /**
+     * Prints the list of found tasks in sequential order.
+     *
+     * @param taskList The list of tasks in the hard drive.
+     * @param desToFind The string used to search for the relevant tasks.
+     */
     public void showFoundTasks(TaskList taskList, String desToFind) {
         int number = 1;
         boolean hasResults = false;
@@ -108,8 +134,8 @@ public class Ui {
             }
         }
         if (hasResults) {
-            System.out.println("If you wish to mark a task as completed, " +
-                    "input: done <task number>");
+            System.out.println("If you wish to mark a task as completed, "
+                    + "input: done <task number>");
         } else {
             System.out.println("Sorry there are no matching results :(");
         }

@@ -1,10 +1,9 @@
-import java.io.IOException;
-import java.io.File;
 import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
-
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,8 +16,8 @@ import java.util.List;
  */
 public class Storage {
 
-    String dirPath;
-    String filePath;
+    private String dirPath;
+    private String filePath;
 
     Storage(String dirPath, String filePath) {
         this.dirPath = dirPath;
@@ -101,8 +100,8 @@ public class Storage {
                     } else if (curr instanceof Deadline) {
                         Deadline deadline = (Deadline) curr;
                         toAppend = "D!@%" + (deadline.isDone ? "1!@%" : "0!@%")
-                                + deadline.description + "!@%" +
-                                (deadline.localDate != null ? deadline.localDate : "") + "!@%"
+                                + deadline.description + "!@%"
+                                + (deadline.localDate != null ? deadline.localDate : "") + "!@%"
                                 + (deadline.localTime != null ? deadline.localTime : "");
                     } else {
                         Event event = (Event) curr;
