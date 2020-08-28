@@ -20,10 +20,6 @@ public class App extends Application {
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
-    public static void main(String[] args) {
-        System.out.println("anything");
-    }
-
     @Override
     public void start(Stage stage) {
         //Step 1. Setting up required components
