@@ -1,7 +1,7 @@
 package duke;
 
 import java.nio.file.Path;
-import duke.command.*;
+import duke.command.Command;
 
 /**
  * The Duke program chat bot which can help users keep track of tasks.
