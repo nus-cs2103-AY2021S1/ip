@@ -59,4 +59,19 @@ public class Duke {
     public static void main(String[] args) {
         new Duke("data/duke.txt").run();
     }
+
+    /**
+     * Get the response from the chat bot given the user input as a command.
+     *
+     * @param input The command input user types in.
+     * @return The response from duke command agent.
+     */
+    public String getResponse(String input) {
+        try {
+            Command c = Parser.parse(input);
+            return agent.handleCommand(c, storage);
+        } catch (DukeException e) {
+            return e.getMessage();
+        }
+    }
 }
