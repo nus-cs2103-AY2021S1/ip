@@ -13,30 +13,30 @@ public class DeadlineTest {
 
     @Test
     public void createTask_dateOnly_Success() {
-        Deadline deadline = Deadline.createTask("return book /by 20-03-2019");
+        Deadline deadline = Deadline.createTask("return book by 20-03-2019");
         assertEquals("[D][✘] return book (by: 20 Mar 2019)", deadline.toString());
     }
 
     @Test
     public void createTask_dateTime_Success() {
-        Deadline deadline = Deadline.createTask("IP Project A-JUnit /by 20-03-2019 23:59");
+        Deadline deadline = Deadline.createTask("IP Project A-JUnit by 20-03-2019 23:59");
         assertEquals("[D][✘] IP Project A-JUnit (by: 20 Mar 2019 23:59)", deadline.toString());
     }
 
     @Test
     public void createTask_unrecognisedDate_Failure() {
         DukeException thrown = assertThrows(DukeException.class, () -> {
-            Deadline deadline = Deadline.createTask("Fix parsing /by 20th January 2019");
+            Deadline deadline = Deadline.createTask("Fix parsing by 20th January 2019");
         });
-        assertTrue(thrown.getMessage().contains("I'm not quite sure if we know each other..."));
+        assertTrue(thrown.getMessage().contains("I can't quite understand what you're saying..."));
     }
 
     @Test
     public void createTask_unrecognisedTime_Failure() {
         DukeException thrown = assertThrows(DukeException.class, () -> {
-            Deadline deadline = Deadline.createTask("Fix parsing /by 20th January 2019");
+            Deadline deadline = Deadline.createTask("Fix parsing by 20-03-2019 1200");
         });
-        assertTrue(thrown.getMessage().contains("I'm not quite sure if we know each other..."));
+        assertTrue(thrown.getMessage().contains("I can't quite understand what you're saying..."));
     }
 
     @Test
@@ -57,7 +57,7 @@ public class DeadlineTest {
 
     @Test
     public void encode_success() {
-        Deadline deadline = Deadline.createTask("Description /by 1 Jan 2020 11:59");
+        Deadline deadline = Deadline.createTask("Description by 1 Jan 2020 11:59");
         assertEquals("D|N|1 Jan 2020 11:59|Description", deadline.encode());
     }
 

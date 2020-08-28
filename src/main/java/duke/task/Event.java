@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
  */
 public class Event extends Task {
 
-    private static final String EVENT_DELIMITER = "/from";
+    private static final String EVENT_DELIMITER = "from";
 
     private static final String DURATION_DELIMITER = "for";
 
@@ -42,10 +42,9 @@ public class Event extends Task {
         if (details == null) {
             throw new DukeTaskCreationException("I need something to work with.");
         }
-        String[] detailsArray = details.split(EVENT_DELIMITER, 2);
         try {
-            String description = detailsArray[0].trim();
-            String dateTimeComponent = detailsArray[1].trim().toLowerCase();
+            String description = details.substring(0, details.lastIndexOf(EVENT_DELIMITER)).trim();
+            String dateTimeComponent = details.substring(details.lastIndexOf(EVENT_DELIMITER) + 4).trim().toLowerCase();
             if (dateTimeComponent.contains(ALL_DAY_KEYWORD)) {
                 String start = dateTimeComponent.split(ALL_DAY_KEYWORD)[0].split(DURATION_DELIMITER)[0].trim();
                 LocalDateTime startDateTime = DateParser.parseString(start);
@@ -74,7 +73,7 @@ public class Event extends Task {
             } else {
                 throw new DukeTaskCreationException("Wow that sure is one long event.");
             }
-        } catch (ArrayIndexOutOfBoundsException e) {
+        } catch (StringIndexOutOfBoundsException e) {
             throw new DukeTaskCreationException("Something's missing, oh right I lost track of time.");
         }
     }

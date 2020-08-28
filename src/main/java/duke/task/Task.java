@@ -2,6 +2,7 @@ package duke.task;
 
 import duke.Encodable;
 import duke.Searchable;
+import duke.exceptions.DukeTaskCreationException;
 
 /**
  * The {@code Task} class provides a skeletal implementation of an object representing a task.
@@ -16,8 +17,12 @@ public abstract class Task implements Encodable<Task>, Searchable {
      * Constructs an instance of a task.
      *
      * @param description the description of the task.
+     * @throws DukeTaskCreationException if the {@code description} is empty.
      */
-    protected Task(String description) {
+    protected Task(String description) throws DukeTaskCreationException {
+        if (description.trim().length() == 0) {
+            throw new DukeTaskCreationException("That's really descriptive...");
+        }
         this.description = description;
         completed = false;
     }

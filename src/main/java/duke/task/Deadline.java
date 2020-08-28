@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
 
 public class Deadline extends Task {
 
-    private static final String DEADLINE_DELIMITER = "/by";
+    private static final String DEADLINE_DELIMITER = "by";
 
     private LocalDateTime dateTime;
 
@@ -36,13 +36,12 @@ public class Deadline extends Task {
         if (details == null) {
             throw new DukeTaskCreationException("I need something to work with.");
         }
-        String[] detailsArray = details.split(DEADLINE_DELIMITER, 2);
         try {
-            String description = detailsArray[0].trim();
-            String dateTimeString = detailsArray[1].trim();
+            String description = details.substring(0, details.lastIndexOf(DEADLINE_DELIMITER)).trim();
+            String dateTimeString = details.substring(details.lastIndexOf(DEADLINE_DELIMITER) + 2).trim().toLowerCase();
             LocalDateTime dateTime = DateParser.parseString(dateTimeString);
             return new Deadline(description, dateTime);
-        } catch (ArrayIndexOutOfBoundsException e) {
+        } catch (StringIndexOutOfBoundsException e) {
             throw new DukeTaskCreationException("So you never did plan on doing it huh...");
         }
     }
