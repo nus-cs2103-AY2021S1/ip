@@ -4,6 +4,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -107,13 +108,8 @@ public final class Deadline extends Task {
      */
     //Getter for the date of the
     public String getDate() {
-        if (at != null) {
-            //Return the date
-            return this.at;
-        } else {
-            return new SimpleDateFormat("dd-MM-yyyy HHmm").format(date);
-        }
-
+        //Return the date
+        return Objects.requireNonNullElseGet(at, () -> new SimpleDateFormat("dd-MM-yyyy HHmm").format(date));
     }
 
     @Override
