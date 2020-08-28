@@ -154,7 +154,11 @@ class Parser {
      * @return
      */
     private static boolean checkForWord(String line, String word) {
-        return Pattern.compile(Pattern.quote(word), Pattern.CASE_INSENSITIVE).matcher(line).find();
+        return Pattern.compile(
+                String.format(".*?\\b%s\\b.*?", word),
+                Pattern.CASE_INSENSITIVE)
+                .matcher(line)
+                .find();
     }
 
     /**
@@ -171,11 +175,6 @@ class Parser {
 
     }
 
-    private boolean isTodo(String s) {return false;}
-
-    public boolean isValidCommand(String s) {
-        return false;
-    }
 
     /* ---------------------------------------- Additional Feature Section ------------------------------------------ */
 
