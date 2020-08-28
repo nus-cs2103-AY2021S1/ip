@@ -16,6 +16,10 @@ public class Task {
         return isDone ? "\u2713" : "\u2718"; //return tick or cross symbols
     }
 
+    public boolean isDone() {
+        return this.isDone;
+    }
+
     public void markDone() {
         this.isDone = true;
     }

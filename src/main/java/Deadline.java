@@ -6,9 +6,14 @@ import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
     protected LocalDateTime dateTime;
+
     public Deadline(String taskName, LocalDateTime dateTime)  {
         super(taskName);
         this.dateTime = dateTime;
+    }
+
+    public LocalDateTime getDateTime() {
+        return dateTime;
     }
 
     @Override

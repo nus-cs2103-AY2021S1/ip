@@ -9,6 +9,10 @@ public class Event extends Task {
         this.dateTime = dateTime;
     }
 
+    public LocalDateTime getDateTime() {
+        return dateTime;
+    }
+
     @Override
     public String toString() {
         return "[E]" + super.toString() + " at: " +
