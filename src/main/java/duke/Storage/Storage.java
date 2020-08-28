@@ -19,16 +19,28 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+/**
+ * A Storage class creates a storage object that
+ * Saves the TaskList of Tasks into a txt file
+ * Loads the list of Tasks from a txt file into a TaskList Object
+ */
 public class Storage {
 
     public static String directory;
 
+    /**
+     * Creates a storage object
+     * @param directory
+     */
     public Storage(String directory){
         this.directory = directory;
     }
 
 
-    // method to update and save the txt file with the taskList
+    /**
+     * Saves the list of Tasks in the TaskList object into a txt file
+     * @param taskList
+     */
     public void saveTasks(TaskList taskList){
         Path path =  Paths.get(this.directory, "Data");
         try{
@@ -64,7 +76,11 @@ public class Storage {
             System.out.println(e.getMessage());
         }
     }
-    // method to load the existing file and update the taskList
+
+    /**
+     * Loads the list of Tasks in the txt file into the TaskList object
+     * @param taskList
+     */
     public void loadTasks(TaskList taskList) {
         Path filePath = Paths.get(this.directory, "Data", "taskList.txt");
 

@@ -17,6 +17,9 @@ public class Duke {
     private static TaskList tasks;
     private Ui ui;
 
+    /**
+     * Creates a Duke object
+     */
 
     public Duke(){
         storage = new Storage(this.directory);
@@ -25,7 +28,7 @@ public class Duke {
 
     }
     /**
-     * Run the programme, using a Duke Object
+     * Runs the programme, using a Duke Object
      */
     public void run(){
         this.ui.startMessage();

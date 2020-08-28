@@ -5,11 +5,17 @@ import duke.Tasks.Task;
 import duke.Ui.Ui;
 
 /**
- * Method that allows users to find tasks using a keyword
+ * A method that finds and prints a list of Tasks with the
+ * given keyword
  */
 public class Find {
     private static TaskList temporaryList;
 
+    /**
+     * Prints the list of Task that contains the given keyword
+     * @param toFind
+     * @param taskList
+     */
     public static void find(String toFind, TaskList taskList) {
         temporaryList = new TaskList();
         for (int i = 0; i < taskList.getSize(); i++) {
@@ -25,6 +31,10 @@ public class Find {
             showResults();
         }
     }
+
+    /**
+     * Prints the Tasks that are stored in the temporaryList
+     */
     public static void showResults(){
         StringBuffer stringBuffer = new StringBuffer();
         stringBuffer.append("There were " + temporaryList.getSize() + " tasks found\n");
