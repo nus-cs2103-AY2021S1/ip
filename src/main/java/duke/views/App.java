@@ -52,7 +52,7 @@ public class App implements Page {
         GridPane.setConstraints(commands, 0, 1);
 
         // define the Submit button
-        Button submit = new Button("Submit");
+        Button submit = new Button("Enter");
         Evaluator evaluator = new Evaluator(storage, textDisplay, window);
         submit.setOnAction(e -> {
             evaluator.handle(commands.getText());
