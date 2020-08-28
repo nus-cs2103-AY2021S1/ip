@@ -170,7 +170,7 @@ public class UiTest {
                     "1. [D][O] Sample task (by: May 05 2020 00:00)\n" +
                     "2. [E][X] Sample task (at: Oct 10 2020 00:00)";
 
-            Assertions.assertEquals(expectedOutput, ui.eachTaskAfter(dateTest, taskList.getTasks()));
+            Assertions.assertEquals(expectedOutput, ui.eachTaskAfter(dateTest, taskList));
     }
 
     @Test
@@ -205,7 +205,7 @@ public class UiTest {
                 "1. [D][X] Sample task (by: May 05 2019 00:00)\n" +
                 "2. [E][O] Sample task (at: Oct 10 2019 00:00)";
 
-        Assertions.assertEquals(expectedOutput, ui.eachTaskBefore(dateTest, taskList.getTasks()));
+        Assertions.assertEquals(expectedOutput, ui.eachTaskBefore(dateTest, taskList));
     }
 
     @Test
