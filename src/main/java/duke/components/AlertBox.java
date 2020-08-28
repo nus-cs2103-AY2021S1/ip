@@ -11,7 +11,7 @@ import javafx.stage.Stage;
 /**
  * Encapsulates an AlertBox class that deals with displaying an alert UI.
  */
-public class AlertBox {
+public class AlertBox implements DialogBox {
     /**
      * Displays an alert box with the given title and the alert message.
      *
@@ -35,7 +35,7 @@ public class AlertBox {
         layout.getChildren().addAll(label, closeButton);
         layout.setAlignment(Pos.CENTER);
 
-        Scene scene = new Scene(layout, 300, 200);
+        Scene scene = new Scene(layout, DEFAULT_SCENE_WIDTH, DEFAULT_SCENE_HEIGHT);
         window.setScene(scene);
         window.showAndWait();
     }

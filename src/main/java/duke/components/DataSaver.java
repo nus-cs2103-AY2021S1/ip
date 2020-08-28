@@ -12,7 +12,7 @@ import javafx.stage.Stage;
 /**
  * Encapsulates a DataSaver class that saves data to a load file.
  */
-public class DataSaver {
+public class DataSaver implements DialogBox {
     private static boolean isQuitting = false;
     /**
      * Saves the data to a load file.
@@ -55,7 +55,7 @@ public class DataSaver {
         layout.getChildren().addAll(label, saveAndQuit, notSaveAndQuit, cancel);
         layout.setAlignment(Pos.CENTER);
 
-        Scene scene = new Scene(layout, 300, 200);
+        Scene scene = new Scene(layout, DEFAULT_SCENE_WIDTH, DEFAULT_SCENE_HEIGHT);
         window.setScene(scene);
         window.showAndWait();
     }
