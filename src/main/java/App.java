@@ -1,4 +1,7 @@
 import duke.Duke;
+import duke.command.Command;
+import duke.command.InvalidCommandException;
+import duke.component.Parser;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -36,7 +39,7 @@ public class App extends Application {
         scrollPane.setContent(dialogContainer);
 
         userInput = new TextField();
-        sendButton = new Button(buttonLabel);
+        sendButton = new Button("Send");
 
         AnchorPane mainLayout = new AnchorPane();
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
@@ -76,6 +79,7 @@ public class App extends Application {
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
         //Step 3. Add functionality to handle user input.
+
         sendButton.setOnMouseClicked((event) -> {
             handleUserInput();
         });
@@ -105,19 +109,13 @@ public class App extends Application {
      * the dialog container. Clears the user input after processing.
      */
     private void handleUserInput() {
-        if (buttonLabel == "Start") {
-            Label greetingLabel = new Label(runningDuke.getUi().greeting());
-            dialogContainer.getChildren().add(DialogBox.getDukeDialog(greetingLabel, new ImageView(user)));
-        } else {
-            buttonLabel = "Send";
-            Label userText = new Label(userInput.getText());
-            Label dukeText = new Label(getResponse(userInput.getText()));
-            dialogContainer.getChildren().addAll(
-                    DialogBox.getUserDialog(userText, new ImageView(user)),
-                    DialogBox.getDukeDialog(dukeText, new ImageView(duke))
-            );
-            userInput.clear();
-        }
+        Label userText = new Label(userInput.getText());
+        Label dukeText = new Label(getResponse(userInput.getText()));
+        dialogContainer.getChildren().addAll(
+                DialogBox.getUserDialog(userText, new ImageView(user)),
+                DialogBox.getDukeDialog(dukeText, new ImageView(duke))
+        );
+        userInput.clear();
     }
 
     /**
@@ -125,6 +123,11 @@ public class App extends Application {
      * Replace this stub with your completed method.
      */
     public String getResponse(String input) {
-        return "Duke heard: " + input;
+        Command c = Parser.parse(input);
+        try {
+            return c.execute(runningDuke.getUi(), runningDuke.getList(), runningDuke.getStorage());
+        } catch (InvalidCommandException e) {
+            return e.getMessage();
+        }
     }
 }
