@@ -52,6 +52,14 @@ public class Duke {
     }
 
     /**
+     * Gets the Ui of the running Duke.
+     * @return the ui of this object
+     */
+    public Ui getUi() {
+        return ui;
+    }
+
+    /**
      * The running main method of the application that uses data/tasks.txt as the file for storage."
      * @param args nothing input
      */
