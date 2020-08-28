@@ -72,7 +72,7 @@ public class Task {
      * @return tick or cross icon
      */
     protected String getStatusIcon() {
-        return (isDone ? "[\u2713]" : "[\u2718]");
+        return (isDone ? "[D]" : "[-]");
     }
 
     @Override

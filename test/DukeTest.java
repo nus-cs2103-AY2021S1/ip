@@ -60,7 +60,7 @@ public class DukeTest {
         try {
             ui.addDeadline("finish homework!", "2020-10-02 11:44");
             String currentTime = LocalDateTime.now().format(formatter);
-            assertEquals("Got it. I've added this task: \r\n  [D][✘] finish homework! [created on " +
+            assertEquals("Got it. I've added this task: \r\n  [D][-] finish homework! [created on " +
                             currentTime +
                             "] (by: Oct 2 2020 11:44)\r\nNow you have 1 tasks in the list.\r\n",
                     outContent.toString());
@@ -86,4 +86,5 @@ public class DukeTest {
             fail();
         }
     }
+
 }

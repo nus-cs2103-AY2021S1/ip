@@ -37,6 +37,7 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         handler(sc);
         sc.close();
+
     }
 
     /**
