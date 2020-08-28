@@ -33,6 +33,9 @@ public class Task {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
 
+    /**
+     * Marking the current task as done.
+     */
     public void markAsDone() throws TaskCompletedException {
         if (isDone) {
             throw new TaskCompletedException();
