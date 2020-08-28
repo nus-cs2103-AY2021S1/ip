@@ -7,13 +7,14 @@ import java.util.ArrayList;
 public final class TaskList {
 
     /**
-     * Store the internal list of tasks
+     * Store the internal list of tasks.
      */
     private final ArrayList<Task> list;
 
     /**
      * Task list.
      * It stores all of the tasks present.
+     *
      * @param taskArrayList Arraylist containing all the tasks
      */
     public TaskList(final ArrayList<Task> taskArrayList) {
@@ -24,14 +25,16 @@ public final class TaskList {
 
     /**
      * Returns the arraylist of tasks.
+     *
      * @return ArrayList containing all of the tasks
      */
     public ArrayList<Task> getList() {
-        return list;
+        return new ArrayList<>(list);
     }
 
     /**
      * Gets the size of the tasklist.
+     *
      * @return int size
      */
     public int size() {
@@ -42,6 +45,7 @@ public final class TaskList {
 
     /**
      * Mark a particular task as done.
+     *
      * @param index The index of the task to be marked
      * @return boolean depending on if the operation was successful
      */
@@ -66,8 +70,9 @@ public final class TaskList {
 
     /**
      * Remove a task from the tasklist.
+     *
      * @param index Index of the task to be removed
-     * @return  Boolean depending on if the operation was successful
+     * @return Boolean depending on if the operation was successful
      */
     public boolean remove(final int index) {
         //Check if the index is valid
@@ -88,8 +93,9 @@ public final class TaskList {
 
     /**
      * Get the task at index.
+     *
      * @param index Index of the task
-     * @return  Task at the index provided
+     * @return Task at the index provided
      */
     public Task get(final int index) {
 
@@ -99,6 +105,7 @@ public final class TaskList {
 
     /**
      * Add the task to the tasklist.
+     *
      * @param task Task to be added
      */
     public void add(final Task task) {

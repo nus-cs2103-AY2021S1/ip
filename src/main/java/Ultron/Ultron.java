@@ -23,7 +23,8 @@ public final class Ultron {
 
     /**
      * The Ultron class.
-     * @param path  path to the datafile which stores the tasks
+     *
+     * @param path path to the datafile which stores the tasks
      */
     public Ultron(final String path) {
 
@@ -43,6 +44,21 @@ public final class Ultron {
         }
         //Create new instance of UI
         ui = new UI();
+
+    }
+
+    /**
+     * Entry point of the code.
+     *
+     * @param args Command line arguments provided
+     */
+    public static void main(final String[] args) {
+
+        //Create a new duke
+        Ultron ultron = new Ultron("data/data.txt");
+
+        //Run the main loop
+        ultron.mainLoop();
 
     }
 
@@ -69,19 +85,5 @@ public final class Ultron {
                 ui.showLine();
             }
         }
-    }
-
-    /**
-     * Entry point of the code.
-     * @param args Command line arguments provided
-     */
-    public static void main(final String[] args) {
-
-        //Create a new duke
-        Ultron ultron = new Ultron("data/data.txt");
-
-        //Run the main loop
-        ultron.mainLoop();
-
     }
 }

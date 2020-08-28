@@ -1,5 +1,10 @@
 package ultron;
 
+import ultron.commands.TaskCommand;
+import ultron.exceptions.ExceptionType;
+import ultron.exceptions.UltronException;
+import ultron.tasks.Task;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -8,11 +13,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Scanner;
-
-import ultron.tasks.Task;
-import ultron.exceptions.UltronException;
-import ultron.exceptions.ExceptionType;
-import ultron.commands.TaskCommand;
 
 /**
  * The main Storage class for Ultron.
@@ -38,6 +38,7 @@ public final class Storage {
 
     /**
      * Encodes a Task to a string.
+     *
      * @param task A Task to be encoded
      * @return String The encoded String of the task
      */
@@ -46,11 +47,13 @@ public final class Storage {
           @param task Task to be encoded to string
          * @return String containing the command
          */
-        return String.format("%s~%d~%s", task.getType(), task.isDone() ? 1 : 0, task.getCommand());
+        return String.format("%s~%d~%s", task.getType(),
+                task.isDone() ? 1 : 0, task.getCommand());
     }
 
     /**
      * Decodes a string to a Task.
+     *
      * @param string String to be decoded to a Task
      * @return task A task based on the string
      * @throws UltronException If the command or line is invalid
@@ -79,6 +82,7 @@ public final class Storage {
 
     /**
      * Fetches all of the data in the storage file to an arraylist of task.
+     *
      * @return taskArrayList An Arraylist containing the tasks stored
      * @throws UltronException If there is an error decoding the file
      */
@@ -102,8 +106,9 @@ public final class Storage {
 
     /**
      * Writes all the task in the tasklist to a folder.
-     * @param taskArrayList     Tasklist containing all the tasks
-     * @throws UltronException  If there are any IO errors
+     *
+     * @param taskArrayList Tasklist containing all the tasks
+     * @throws UltronException If there are any IO errors
      */
     public void writeAll(final ArrayList<Task> taskArrayList)
             throws UltronException {

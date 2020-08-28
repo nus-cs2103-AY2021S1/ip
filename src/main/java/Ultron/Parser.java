@@ -1,15 +1,15 @@
 package ultron;
 
-import ultron.commands.Command;
-import ultron.commands.FindCommand;
-import ultron.commands.TaskAllocator;
 import ultron.commands.ByeCommand;
-import ultron.commands.ListCommand;
-import ultron.commands.HelpCommand;
-import ultron.commands.DeleteCommand;
+import ultron.commands.FindCommand;
 import ultron.commands.DoneCommand;
-import ultron.exceptions.UltronException;
+import ultron.commands.DeleteCommand;
+import ultron.commands.HelpCommand;
+import ultron.commands.ListCommand;
+import ultron.commands.TaskAllocator;
+import ultron.commands.Command;
 import ultron.exceptions.ExceptionType;
+import ultron.exceptions.UltronException;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -24,8 +24,10 @@ public final class Parser {
 
     private Parser() {
     }
+
     /**
      * Check the input string and arguments.
+     *
      * @param command   Input command of the user
      * @param arguments Arguments provided by the user
      * @return Command corresponding to the input given by user
@@ -37,39 +39,40 @@ public final class Parser {
 
         //Switch case to process the commands
         switch (command) {
-        //If the user keys in bye
-        case "bye":
-            return new ByeCommand(arguments);
-            
-        case "find":
-            return new FindCommand(arguments);
+            //If the user keys in bye
+            case "bye":
+                return new ByeCommand(arguments);
 
-        //If the user keys in list
-        case "list":
-            return new ListCommand(arguments);
+            case "find":
+                return new FindCommand(arguments);
 
-        //Check if the user is asking for help
-        case "help":
-            return new HelpCommand(arguments);
+            //If the user keys in list
+            case "list":
+                return new ListCommand(arguments);
 
-        //Check if the user is deleting some of the items
-        case "delete":
-            return new DeleteCommand(arguments);
+            //Check if the user is asking for help
+            case "help":
+                return new HelpCommand(arguments);
 
-        //Check if the user is done with any task
-        case "done":
-            return new DoneCommand(arguments);
+            //Check if the user is deleting some of the items
+            case "delete":
+                return new DeleteCommand(arguments);
 
-        //Otherwise it will be a task to be added
-        default:
-            return new TaskAllocator(command, arguments);
+            //Check if the user is done with any task
+            case "done":
+                return new DoneCommand(arguments);
+
+            //Otherwise it will be a task to be added
+            default:
+                return new TaskAllocator(command, arguments);
         }
 
     }
 
     /**
-     * Parse the integer provided by the user.
-     * @param args
+     * Parse the integer provided by the user to an index in list.
+     *
+     * @param args User arguments to be converted to index
      * @return int parsedInteger
      * @throws UltronException if there is an error parsing the integer
      */
@@ -89,6 +92,7 @@ public final class Parser {
 
     /**
      * Parsing commands.
+     *
      * @param input raw input of the user
      * @return Command corresponding to the raw input
      * @throws UltronException

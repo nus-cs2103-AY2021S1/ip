@@ -20,6 +20,7 @@ public final class UI {
 
     /**
      * Show the error as output to System out.
+     *
      * @param message message to be shown
      */
     public void showError(final String message) {
@@ -32,6 +33,7 @@ public final class UI {
 
     /**
      * Get a line of input from system in.
+     *
      * @return String input received
      */
     public String getInput() {
@@ -48,7 +50,8 @@ public final class UI {
 
     /**
      * Prints a message.
-     * @param argument  message to be printed
+     *
+     * @param argument message to be printed
      */
     public void print(final String argument) {
         System.out.print(argument);

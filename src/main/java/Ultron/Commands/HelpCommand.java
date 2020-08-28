@@ -1,15 +1,16 @@
 package ultron.commands;
 
-import ultron.exceptions.ExceptionType;
-import ultron.exceptions.UltronException;
 import ultron.Storage;
 import ultron.TaskList;
 import ultron.UI;
+import ultron.exceptions.ExceptionType;
+import ultron.exceptions.UltronException;
 
 public final class HelpCommand extends Command {
 
     /**
      * Constructor for the Help Command.
+     *
      * @param arguments Argument for the help command
      */
     public HelpCommand(final String arguments) {
@@ -18,9 +19,10 @@ public final class HelpCommand extends Command {
 
     /**
      * Execute the help command.
-     * @param taskList  List of tasks
-     * @param ui        UI for Ultron
-     * @param storage   Storage for Ultron
+     *
+     * @param taskList List of tasks
+     * @param ui       UI for Ultron
+     * @param storage  Storage for Ultron
      * @throws UltronException if the number of arguments > 0
      */
     @Override

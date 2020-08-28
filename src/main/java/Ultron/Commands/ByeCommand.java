@@ -9,6 +9,7 @@ import ultron.exceptions.UltronException;
 public final class ByeCommand extends Command {
     /**
      * Creates the bye command with arguments.
+     *
      * @param arguments Arguments for bye command
      */
     public ByeCommand(final String arguments) {
@@ -17,6 +18,7 @@ public final class ByeCommand extends Command {
 
     /**
      * Execute the instructions for bye command.
+     *
      * @param taskList Task list which holds the task
      * @param ui       UI for Ultron
      * @param storage  Storage for the task

@@ -11,6 +11,7 @@ public final class DoneCommand extends Command {
 
     /**
      * Contructor for Done Command.
+     *
      * @param arguments
      */
     public DoneCommand(final String arguments) {
@@ -19,9 +20,10 @@ public final class DoneCommand extends Command {
 
     /**
      * Execute the done command.
-     * @param taskList  List of tasks
-     * @param ui        UI for Ultron
-     * @param storage   Storage for Ultron
+     *
+     * @param taskList List of tasks
+     * @param ui       UI for Ultron
+     * @param storage  Storage for Ultron
      * @throws UltronException if there are too much or too little arguments
      */
     @Override
@@ -32,11 +34,13 @@ public final class DoneCommand extends Command {
         int index = Parser.parseInteger(this.getArguments());
 
         if (this.getArguments().trim().length() < 1) {
-            throw new UltronException("done", ExceptionType.NO_ARGUMENTS_SUPPLIED);
+            throw new UltronException("done",
+                    ExceptionType.NO_ARGUMENTS_SUPPLIED);
         }
-        
+
         if (this.getArguments().trim().length() > 1) {
-            throw new UltronException("done", ExceptionType.TOO_MUCH_ARGUMENTS);
+            throw new UltronException("done",
+                    ExceptionType.TOO_MUCH_ARGUMENTS);
         }
 
         //Mark the task as done

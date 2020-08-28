@@ -1,17 +1,18 @@
 package ultron.commands;
 
-import ultron.exceptions.ExceptionType;
 import ultron.Parser;
-import ultron.TaskList;
-import ultron.tasks.Task;
-import ultron.UI;
 import ultron.Storage;
+import ultron.TaskList;
+import ultron.UI;
+import ultron.exceptions.ExceptionType;
 import ultron.exceptions.UltronException;
+import ultron.tasks.Task;
 
 public final class DeleteCommand extends Command {
 
     /**
      * Constructor for DeleteCommand.
+     *
      * @param arguments Arguments for delete command
      */
     public DeleteCommand(final String arguments) {
@@ -20,9 +21,10 @@ public final class DeleteCommand extends Command {
 
     /**
      * Executes the Delete Command.
-     * @param taskList  List of tasks
-     * @param ui        UI for Ultron
-     * @param storage   Storage for Ultron
+     *
+     * @param taskList List of tasks
+     * @param ui       UI for Ultron
+     * @param storage  Storage for Ultron
      * @throws UltronException if the arguments are invalid
      */
     @Override

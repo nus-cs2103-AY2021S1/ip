@@ -8,7 +8,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public final class Event extends Task {
-    
     /**
      * Store the regex for parsing the command for event.
      */
@@ -19,7 +18,14 @@ public final class Event extends Task {
      */
     private static final DateFormat DATE_FORMAT =
             new SimpleDateFormat("dd-MM-yyyy HHmm");
-    //Store the variables
+    /**
+     * Index of the group to get the name of the task.
+     */
+    private static final int NAME_INDEX = 1;
+    /**
+     * Index of the data of the name of task.
+     */
+    private static final int DATE_INDEX = 3;
     /**
      * Store the String form for time of event.
      */
@@ -32,8 +38,9 @@ public final class Event extends Task {
 
     /**
      * Task event.
-     * @param description   Description of the Event
-     * @param at            Date of the event as a string
+     *
+     * @param description Description of the Event
+     * @param at          Date of the event as a string
      */
     public Event(final String description, final String at) {
 
@@ -46,8 +53,9 @@ public final class Event extends Task {
 
     /**
      * Task Event.
-     * @param description   Description of the Event
-     * @param at            Date of the event as a Date object
+     *
+     * @param description Description of the Event
+     * @param at          Date of the event as a Date object
      */
     //Constructor for the event class
     public Event(final String description, final Date at) {
@@ -60,41 +68,10 @@ public final class Event extends Task {
     }
 
     /**
-     * Gets the date of the event.
-     * @return date Date of the event
-     */
-    public String getDate() {
-        if (at != null){
-            //Return the date
-            return at;
-        } else {
-            return new SimpleDateFormat("dd-MM-yyyy HHmm").format(date);
-        }
-
-    }
-
-    /**
-     * Gets the type of the event.
-     * @return String type
-     */
-    @Override
-    public String getType() {
-        return "EVENT";
-    }
-
-    /**
-     * Gets the command representation of the event.
-     * @return String command
-     */
-    @Override
-    public String getCommand() {
-        return String.format("%s /at %s", getMessage(), getDate());
-    }
-
-    /**
      * Parse the commands to Event class.
-     * @param args  Arguments for the Event task
-     * @return  Event with the arguments parsed
+     *
+     * @param args Arguments for the Event task
+     * @return Event with the arguments parsed
      */
     public static Event parseCommand(final String args) {
 
@@ -105,8 +82,8 @@ public final class Event extends Task {
         matcher.find();
 
         //Get the date and the name
-        String name = matcher.group(1);
-        String date = matcher.group(3);
+        String name = matcher.group(NAME_INDEX);
+        String date = matcher.group(DATE_INDEX);
 
         //Extract the date
         try {
@@ -123,6 +100,41 @@ public final class Event extends Task {
         }
 
 
+    }
+
+    /**
+     * Gets the date of the event.
+     *
+     * @return date Date of the event
+     */
+    public String getDate() {
+        if (at != null) {
+            //Return the date
+            return at;
+        } else {
+            return new SimpleDateFormat("dd-MM-yyyy HHmm").format(date);
+        }
+
+    }
+
+    /**
+     * Gets the type of the event.
+     *
+     * @return String type
+     */
+    @Override
+    public String getType() {
+        return "EVENT";
+    }
+
+    /**
+     * Gets the command representation of the event.
+     *
+     * @return String command
+     */
+    @Override
+    public String getCommand() {
+        return String.format("%s /at %s", getMessage(), getDate());
     }
 
     @Override

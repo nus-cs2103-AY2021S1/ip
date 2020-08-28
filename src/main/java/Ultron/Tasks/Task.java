@@ -14,7 +14,8 @@ public abstract class Task {
 
     /**
      * Abstract task class for all Tasks.
-     * @param description   Description of the Task
+     *
+     * @param description Description of the Task
      */
     //Constructor for Task
     public Task(final String description) {
@@ -28,6 +29,7 @@ public abstract class Task {
 
     /**
      * Get the description of the task.
+     *
      * @return Message for the task
      */
     public String getMessage() {
@@ -38,6 +40,7 @@ public abstract class Task {
 
     /**
      * Check is the task is done.
+     *
      * @return boolean denoting if the task is completed
      */
     public boolean isDone() {
@@ -48,12 +51,14 @@ public abstract class Task {
 
     /**
      * Get the type of task.
+     *
      * @return String for type of task
      */
     public abstract String getType();
 
     /**
      * Get the command for the class as a string.
+     *
      * @return String for command
      */
     public abstract String getCommand();
@@ -80,6 +85,7 @@ public abstract class Task {
 
     /**
      * Get the status icon denoting if the task is completed.
+     *
      * @return Status icon as a String
      */
     public String getStatusIcon() {
@@ -90,6 +96,7 @@ public abstract class Task {
 
     /**
      * Convert the task to string format.
+     *
      * @return String format of the task
      */
     @Override

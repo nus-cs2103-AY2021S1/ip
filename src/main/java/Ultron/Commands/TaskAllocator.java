@@ -1,11 +1,11 @@
 package ultron.commands;
 
-import ultron.exceptions.ExceptionType;
-import ultron.exceptions.UltronException;
 import ultron.Storage;
 import ultron.TaskList;
-import ultron.tasks.Task;
 import ultron.UI;
+import ultron.exceptions.ExceptionType;
+import ultron.exceptions.UltronException;
+import ultron.tasks.Task;
 
 public final class TaskAllocator extends Command {
 
@@ -16,6 +16,7 @@ public final class TaskAllocator extends Command {
 
     /**
      * Allocates the correct task.
+     *
      * @param command   Command given
      * @param arguments Arguments given
      * @throws UltronException if the command is invalid
@@ -40,9 +41,10 @@ public final class TaskAllocator extends Command {
 
     /**
      * Add the correct Task to the tasklist.
-     * @param taskList  List of tasks
-     * @param ui        UI for Ultron
-     * @param storage   Storage for Ultron
+     *
+     * @param taskList List of tasks
+     * @param ui       UI for Ultron
+     * @param storage  Storage for Ultron
      * @throws UltronException if there are no arguments or
      *                         if there was an error creating the task
      */

@@ -4,7 +4,8 @@ public final class Todo extends Task {
 
     /**
      * Todo Task.
-     * @param description   Description of the todo
+     *
+     * @param description Description of the todo
      */
     //Call the constructor
     public Todo(final String description) {
@@ -16,8 +17,9 @@ public final class Todo extends Task {
 
     /**
      * Parse the arguments required for todo class.
-     * @param args  Arguments for the class
-     * @return  Todo task
+     *
+     * @param args Arguments for the class
+     * @return Todo task
      */
     public static Todo parseCommand(final String args) {
         return new Todo(args);
@@ -25,6 +27,7 @@ public final class Todo extends Task {
 
     /**
      * Get the type of command.
+     *
      * @return String TODO
      */
     @Override
@@ -34,6 +37,7 @@ public final class Todo extends Task {
 
     /**
      * Get the Todo in the form of a command.
+     *
      * @return
      */
     @Override
@@ -43,7 +47,8 @@ public final class Todo extends Task {
 
     /**
      * Get the string representation of the todo.
-     * @return  String command
+     *
+     * @return String command
      */
     @Override
     public String toString() {

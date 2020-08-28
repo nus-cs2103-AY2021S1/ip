@@ -1,14 +1,8 @@
 package ultron;
 
-import ultron.commands.ByeCommand;
-import ultron.commands.DeleteCommand;
-import ultron.commands.DoneCommand;
-import ultron.commands.HelpCommand;
-import ultron.commands.ListCommand;
-import ultron.commands.TaskAllocator;
-import ultron.exceptions.UltronException;
-
 import org.junit.jupiter.api.Test;
+import ultron.commands.*;
+import ultron.exceptions.UltronException;
 
 public class ParserTest {
 

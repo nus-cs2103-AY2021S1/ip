@@ -32,23 +32,27 @@ public enum TaskCommand {
 
     /**
      * Constructor for TaskCommand.
-     * @param commandParser A function containing the parseCommand method for the classes
+     *
+     * @param commandParser The parseCommand method for the classes
      */
     TaskCommand(final Function<String, Task> commandParser) {
         this.commandParser = commandParser;
     }
 
-    //Get the task given description
 
     /**
      * Create a task based on the description.
+     *
      * @param description
      * @return Task with the description
      */
     public Task createTask(final String description) {
         return commandParser.apply(description);
     }
-
+    /**
+     * Get the parser to create the task.
+     * @return Function command Parser
+     */
     public Function<String, Task> getCommandParser() {
         return commandParser;
     }

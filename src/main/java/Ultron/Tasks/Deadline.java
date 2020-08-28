@@ -14,8 +14,19 @@ public final class Deadline extends Task {
      */
     private static final Pattern DATE_MATCH =
             Pattern.compile("^(.*) (/by) (.*)$");
+    /**
+     * Pattern string for the regex for the date.
+     */
     private static final DateFormat DATE_FORMAT =
             new SimpleDateFormat("dd-MM-yyyy HHmm");
+    /**
+     * Index of the group to get the name of the task.
+     */
+    private static final int NAME_INDEX = 1;
+    /**
+     * Index of the data of the name of task.
+     */
+    private static final int DATE_INDEX = 3;
     /**
      * String to store the string time.
      */
@@ -28,8 +39,9 @@ public final class Deadline extends Task {
 
     /**
      * A Deadline Task.
-     * @param description   Description for the task
-     * @param by            The deadline for the task in string format
+     *
+     * @param description Description for the task
+     * @param by          The deadline for the task in string format
      */
     //Constructor for the event class
     public Deadline(final String description, final String by) {
@@ -43,8 +55,9 @@ public final class Deadline extends Task {
 
     /**
      * A Deadline Task.
-     * @param description   Description for the task
-     * @param by            The deadline for the task in Date format
+     *
+     * @param description Description for the task
+     * @param by          The deadline for the task in Date format
      */
     //Constructor for the event class
     public Deadline(final String description, final Date by) {
@@ -56,7 +69,11 @@ public final class Deadline extends Task {
         date = by;
     }
 
-    public static Task parseCommand(final String args) {
+    /**
+     * @param args Arguments to Deadline task
+     * @return Deadline task
+     */
+    public static Deadline parseCommand(final String args) {
         //Create the matcher
         Matcher matcher = DATE_MATCH.matcher(args);
 
@@ -64,8 +81,8 @@ public final class Deadline extends Task {
         matcher.find();
 
         //Get the date and the name
-        String name = matcher.group(1);
-        String date = matcher.group(3);
+        String name = matcher.group(NAME_INDEX);
+        String date = matcher.group(DATE_INDEX);
 
         //Extract the date
         try {
@@ -85,6 +102,7 @@ public final class Deadline extends Task {
 
     /**
      * String representation of deadline.
+     *
      * @return String representation of Deadline
      */
     //Getter for the date of the
