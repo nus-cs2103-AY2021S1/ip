@@ -2,7 +2,11 @@ package duke;
 
 import duke.command.Command;
 import duke.command.InvalidCommandException;
-import duke.component.*;
+import duke.component.ActualStorage;
+import duke.component.Parser;
+import duke.component.Storage;
+import duke.component.TaskList;
+import duke.component.Ui;
 
 /**
  * Is the Main class of this program.
