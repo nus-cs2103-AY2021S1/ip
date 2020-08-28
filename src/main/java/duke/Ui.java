@@ -35,6 +35,7 @@ class Ui {
      */
     public void end() {
         System.out.println(CIAO);
+        System.exit(0);
     }
 
     /**
@@ -45,10 +46,9 @@ class Ui {
      * @param s command given by user
      * @return -1 indicating failure, 0 indicating end of program, 1 indicating program is running
      */
-    public int takeInput(String s) {
+    public int takeInputAndReturn(String s) {
         // End command
         if (!s.isEmpty() && END.contains(s)) {
-            end();
             return 0;
         }
         String reply = CONTROLLER.parseAndExec(s);

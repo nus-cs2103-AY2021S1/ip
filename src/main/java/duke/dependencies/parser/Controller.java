@@ -1,18 +1,8 @@
 package duke.dependencies.parser;
 
-import duke.dependencies.dukeexceptions.DukeException;
-import duke.dependencies.dukeexceptions.EmptyTaskException;
-import duke.dependencies.dukeexceptions.InvalidDateException;
-import duke.dependencies.dukeexceptions.UnknownCommandException;
-import duke.dependencies.dukeexceptions.UnspecifiedDateException;
-
+import duke.dependencies.dukeexceptions.*;
 import duke.dependencies.executable.Executable;
 import duke.dependencies.executor.Executor;
-
-import duke.dependencies.executable.Command;
-
-import static duke.dependencies.executable.CommandType.*;
-
 
 
 /**
@@ -53,19 +43,15 @@ public class Controller {
         try {
             parser = Parser.parseAndCheck(command);
         } catch (EmptyTaskException e) {
-            System.out.println(e.getMessage());
-            return "You have to tell me what you want from me before I can do anything!!! O.o";
+            return "You have to tell me what you want from me\nbefore I can do anything!!! O.o";
 
         } catch (UnspecifiedDateException e) {
-            System.out.println(e.getMessage());
             return "You need to give me the date!!!";
 
         } catch (UnknownCommandException e) {
-            System.out.println(e.getMessage());
             return "C'mon, you know I don't understand this!";
 
         } catch (InvalidDateException e) {
-            System.out.println(e.getMessage());
             return "I don't understand the date you are giving -_-\n" +
                     "Please give in either format:\n" +
                     "1. MM/dd/yyyy\n2. yyyy-MM-dd";

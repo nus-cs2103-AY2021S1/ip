@@ -1,5 +1,8 @@
 package duke;
 
+import javafx.application.Application;
+import javafx.stage.Stage;
+
 import java.util.Scanner;
 
 /**
@@ -14,7 +17,6 @@ public class Duke {
      * @param args
      */
     public static void main(String[] args) {
-
         Ui duke = new Ui();
         duke.start();
         Scanner sc = new Scanner(System.in);
@@ -22,9 +24,9 @@ public class Duke {
         //Loop until exit command given
         while (x > 0) {
             if (sc.hasNext()) {
-                x = duke.takeInput(sc.nextLine());
+                x = duke.takeInputAndReturn(sc.nextLine());
             } else {
-
+                duke.end();
             }
         }
     }

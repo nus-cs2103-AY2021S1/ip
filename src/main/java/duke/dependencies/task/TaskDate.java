@@ -13,9 +13,9 @@ import java.time.format.DateTimeParseException;
  */
 public class TaskDate implements Serializable, Comparable<TaskDate> {
     /** Some common format for dates */
-    private static final DateTimeFormatter US_DATE_FORMAT = DateTimeFormatter.ofPattern("MM/dd/uuuu");
-    private static final DateTimeFormatter UK_DATE_FORMAT = DateTimeFormatter.ofPattern("dd/MM/uuuu");
+    private static final DateTimeFormatter UK_DATE_FORMAT = DateTimeFormatter.ofPattern("d/M/y");
 
+    /** LocalDate object to be used to parse. */
     private final LocalDate date;
 
     /**

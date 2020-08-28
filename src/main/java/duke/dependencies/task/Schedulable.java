@@ -10,18 +10,18 @@ public interface Schedulable {
      * Initiates a completion of the task.
      * State of completion will be changed to completed.
      */
-    public void completed();
+    void completed();
 
     /**
      * Checks whether the task is completed is completed.
      * @return True if the task is completed.
      */
-    public boolean isCompleted();
+    boolean isCompleted();
 
     /**
      * Gets a description of the task.
      * @return String describing the task.
      */
-    public String showTaskDescription();
+    String showTaskDescription();
 
 }
