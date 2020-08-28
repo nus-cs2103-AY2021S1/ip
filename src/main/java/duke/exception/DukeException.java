@@ -1,7 +1,7 @@
 package duke.exception;
 
 /**
- * Represents DukeExceptions used in Duke.
+ * Represents DukeExceptions used in duke.Duke.
  */
 public class DukeException extends Exception {
 

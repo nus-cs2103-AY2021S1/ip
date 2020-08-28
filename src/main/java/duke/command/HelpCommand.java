@@ -16,7 +16,7 @@ public class HelpCommand extends Command {
     }
 
     /**
-     * Executes the command to list the possible Duke commands.
+     * Executes the command to list the possible duke.Duke commands.
      *
      * @param tasks Tasklist containing current tasks.
      * @param ui Ui for displaying output.

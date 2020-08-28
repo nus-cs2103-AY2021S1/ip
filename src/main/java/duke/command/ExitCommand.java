@@ -5,7 +5,7 @@ import duke.ui.Ui;
 import duke.task.TaskList;
 
 /**
- * Represents a ExitCommand where user wants to exit from Duke.
+ * Represents a ExitCommand where user wants to exit from duke.Duke.
  */
 public class ExitCommand extends Command{
 
@@ -16,7 +16,7 @@ public class ExitCommand extends Command{
     }
 
     /**
-     * Executes the command to exit from Duke program.
+     * Executes the command to exit from duke.Duke program.
      *
      * @param tasks Tasklist containing current tasks.
      * @param ui Ui for displaying output.

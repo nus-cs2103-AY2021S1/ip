@@ -33,7 +33,7 @@ public class Ui {
     }
 
     /**
-     * Displays the welcome message when user starts up Duke.
+     * Displays the welcome message when user starts up duke.Duke.
      */
     public void showWelcome() {
         System.out.println(LOGO);
@@ -41,7 +41,7 @@ public class Ui {
     }
 
     /**
-     * Displays the farewell message when user exits Duke.
+     * Displays the farewell message when user exits duke.Duke.
      */
     public void showFarewell() {
         System.out.print(DIVIDER + GOODBYE + DIVIDER);

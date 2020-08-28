@@ -15,7 +15,7 @@ public class Parser {
      * Parses user input into executable Commands.
      *
      * @param fullCommand Entire user input.
-     * @return Duke Command corresponding to input.
+     * @return duke.Duke Command corresponding to input.
      * @throws DukeException If task is not successfully parsed.
      */
     public static Command parse(String fullCommand) throws DukeException {
