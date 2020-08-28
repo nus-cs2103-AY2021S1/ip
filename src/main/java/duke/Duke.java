@@ -3,7 +3,7 @@ package duke;
 /**
  * Main class that drives the application.
  */
-public class Duke {
+class Duke {
 
     /** Deals with input output of files. */
     private Storage storage;
@@ -17,7 +17,7 @@ public class Duke {
      *
      * @param filePath File path to load history, and to save history.
      */
-    public Duke(String filePath) {
+    Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
         try {
@@ -28,7 +28,7 @@ public class Duke {
         }
     }
 
-    public void run() {
+    void run() {
         ui.showWelcome();
         boolean isExit = false;
         while (!isExit) {
@@ -46,7 +46,7 @@ public class Duke {
     /**
      * Creates new Duke object to start operations.
      */
-    public static void main(String[] args) {
+    static void main(String[] args) {
         new Duke("data/tasks.txt").run();
     }
 }

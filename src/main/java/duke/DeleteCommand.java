@@ -5,12 +5,12 @@ import java.util.ArrayList;
 /**
  * Controls logic of deleting tasks.
  */
-public class DeleteCommand extends Command {
+class DeleteCommand extends Command {
 
     /** Index to delete task. */
     private int index;
 
-    public DeleteCommand(int index) {
+    DeleteCommand(int index) {
         this.index = index;
     }
 
@@ -23,7 +23,7 @@ public class DeleteCommand extends Command {
      * @throws DukeException When I/O error occurs.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         String output = tasks.deleteTask(index);
         ArrayList<Task> taskList = tasks.getTasks();
         ui.printOutput(output, true);
@@ -36,7 +36,7 @@ public class DeleteCommand extends Command {
      * @return Should not exit program.
      */
     @Override
-    public boolean isExit() {
+    boolean isExit() {
         return false;
     }
 }

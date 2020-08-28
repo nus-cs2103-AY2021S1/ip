@@ -3,7 +3,7 @@ package duke;
 /**
  * Controls logic of exiting program.
  */
-public class ExitCommand extends Command {
+class ExitCommand extends Command {
 
 
     /**
@@ -14,7 +14,7 @@ public class ExitCommand extends Command {
      * @param storage Handles input output to hard disk.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    void execute(TaskList tasks, Ui ui, Storage storage) {
         ui.showExit();
     }
 
@@ -24,7 +24,7 @@ public class ExitCommand extends Command {
      * @return Should exit program.
      */
     @Override
-    public boolean isExit() {
+    boolean isExit() {
         return true;
     }
 }

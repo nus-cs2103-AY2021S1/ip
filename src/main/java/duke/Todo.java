@@ -3,14 +3,14 @@ package duke;
 /**
  * Class representing tasks to be done
  */
-public class Todo extends Task {
+class Todo extends Task {
 
     /**
      * Constructor of Todo class.
      *
      * @param description Todo description.
      */
-    public Todo(String description) {
+    Todo(String description) {
         super(description);
     }
 
@@ -20,7 +20,7 @@ public class Todo extends Task {
      * @param description Todo description.
      * @param isDone Describes if task is completed.
      */
-    public Todo(String description, boolean isDone) {
+    Todo(String description, boolean isDone) {
         super(description, isDone);
     }
 
@@ -30,7 +30,7 @@ public class Todo extends Task {
      * @return Simple string description.
      */
     @Override
-    public String toStringSimple() {
+    String toStringSimple() {
         return "T | " + super.toStringSimple();
     }
 

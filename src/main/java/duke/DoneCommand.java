@@ -5,12 +5,12 @@ import java.util.ArrayList;
 /**
  * Controls logic of completing tasks.
  */
-public class DoneCommand extends Command {
+class DoneCommand extends Command {
 
     /** Index of task to be done. */
     private int index;
 
-    public DoneCommand(int index) {
+    DoneCommand(int index) {
         this.index = index;
     }
 
@@ -24,7 +24,7 @@ public class DoneCommand extends Command {
      * @throws DukeException When I/O error occurs.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         String output = tasks.doTask(index);
         ArrayList<Task> taskList = tasks.getTasks();
         ui.printOutput(output, true);
@@ -37,7 +37,7 @@ public class DoneCommand extends Command {
      * @return Should not exit program.
      */
     @Override
-    public boolean isExit() {
+    boolean isExit() {
         return false;
     }
 }

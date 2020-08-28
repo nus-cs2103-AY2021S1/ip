@@ -11,7 +11,7 @@ import java.util.Scanner;
 /**
  * Deals with loading and saving tasks from file.
  */
-public class Storage {
+class Storage {
 
     /** Variable to store file path for I/O. */
     private String filePath;
@@ -21,7 +21,7 @@ public class Storage {
      *
      * @param filePath Filepath of input and output file.
      */
-    public Storage(String filePath) {
+    Storage(String filePath) {
         this.filePath = filePath;
     }
 
@@ -32,7 +32,7 @@ public class Storage {
      * inner list is one line in file, split by delimiter
      * @throws DukeException When IO error occurs.
      */
-    public ArrayList<ArrayList<String>> load() throws DukeException {
+    ArrayList<ArrayList<String>> load() throws DukeException {
         File f = new File(this.filePath);
         f.getParentFile().mkdirs();
         try {
@@ -70,7 +70,7 @@ public class Storage {
         }
     }
 
-    public void save(ArrayList<Task> tasks) throws DukeException {
+    void save(ArrayList<Task> tasks) throws DukeException {
         StringBuilder output = new StringBuilder();
         for (Task task : tasks) {
             output.append(task.toStringSimple()).append(System.lineSeparator());
