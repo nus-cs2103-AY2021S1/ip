@@ -4,10 +4,16 @@ public class TaskList {
 
   public ArrayList<Listing> list;
 
+  /**
+   * Takes in a new Arraylist<Listing> and initialises list
+   */
   public TaskList(ArrayList<Listing> l) {
     this.list = l;
   }
 
+  /**
+   * Prints the toString() value of each listing in the list
+   */
   protected void printReturns() {
     System.out.println("    ____________________________________________________________");
     System.out.println("     Here are the tasks in your list:");
@@ -18,6 +24,11 @@ public class TaskList {
     System.out.println("    ____________________________________________________________");
   }
 
+  /**
+   * Modifies the done boolean in the listing objects inside the list. Print the correct message
+   * through printer * and updates storage through the storage input * @param num used to find the
+   * listing * @param Printer  to print the object message * @param  Sttorage to update Duke.txt
+   */
   public void doneListings(Integer value, Printer printer, Storage storage) {
     Listing item = list.get(value - 1);
     item.complete();
@@ -25,12 +36,28 @@ public class TaskList {
     storage.save(list);
   }
 
+  /**
+   * Deletes the listing object from the list . Print the correct message through printer and
+   * updates storage through the storage input
+   *
+   * @param num      used to find the listing
+   * @param Printer  to print the object message
+   * @param Sttorage to update Duke.txt
+   */
   public void deleteListing(Integer num, Printer printer, Storage storage) {
     printer.deleteMessage(list.size() - 1, list.get(num).toString());
     list.remove((int) num);
     storage.save(list);
   }
 
+  /**
+   * Adds the listing object to the list . Print the correct message through printer and updates
+   * storage through the storage input
+   *
+   * @param details  used to provide the details to the listing
+   * @param Printer  to print the object message
+   * @param Sttorage to update Duke.txt
+   */
   public void addListings(String[] details, Printer printer, Storage storage) {
     int size = list.size() + 1;
     String taskInfo = details[1];

@@ -9,6 +9,13 @@ public class Storage { //deals with loading task and saving task in file
   private String filePath;
   private File file;
 
+  /**
+   * Creates a new Storage object. Storage is initialised with filepath passed from Bot.java.
+   * Filepath is assigned to this.filePath. Storage checks if there is a file named duke.txt (from
+   * the file path) that exists. If it does, the file is assigned to this.file
+   *
+   * @param filePath file path of duke.txt (or other file name as determined by creator)
+   */
   public Storage(String filePath) {
     this.filePath = filePath;
 
@@ -30,6 +37,13 @@ public class Storage { //deals with loading task and saving task in file
     }
   }
 
+  /**
+   * Creates a new ArrayList<Listing>. If this.file contains a non-empty file, the lines are parsed
+   * and split using a Scanners to return a string array of size 3 containing the code, isDone,
+   * details and timedetail if applicable (or left null if none is available). The corresponding
+   * Listing is then created and added to the Arraylist which is then returned. If file is empty
+   * then an empty ArrayList is returned.
+   */
   public ArrayList<Listing> load() {
     ArrayList<Listing> list = new ArrayList<>();
     try {
@@ -54,6 +68,12 @@ public class Storage { //deals with loading task and saving task in file
     return list;
   }
 
+  /**
+   * Takes in an ArrayList<Listing> and loops through the list, writing the details of each listing
+   * separated by a " | " into this.file.
+   *
+   * @param ArrayList<Listing> list
+   */
   public void save(ArrayList<Listing> list) {
     try {
       FileWriter fileWriter = new FileWriter(filePath);
@@ -76,6 +96,5 @@ public class Storage { //deals with loading task and saving task in file
 
     return;
   }
-
 
 }

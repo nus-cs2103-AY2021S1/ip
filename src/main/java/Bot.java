@@ -1,7 +1,10 @@
 import java.util.Scanner;
 
-public class Bot { //basically duke.java at this point
+public class Bot {
 
+  /**
+   *Prints the greeting when created
+   */
   public Bot() {
     printer.greeting();
   }
@@ -12,6 +15,15 @@ public class Bot { //basically duke.java at this point
   TaskList taskList = new TaskList(storage.load());
   Scanner sc = new Scanner(System.in);
 
+  /**
+   * Checks for the next line as inputted by the user. Parses the message through parser.getDetails(
+   * message) which returns an array of size 3 containing the type of message, detail and the date.
+   * Date will be null if the message is not of Deadline or Event. The function will then carry out
+   * the corresponding action depending on the type of message by interacting with the
+   * taskListing object. The function will also pass the storage and printer object so that
+   * taskList can save the data into duke.txt after completion and also print the corresponding
+   * message. Catches undefined and wrong messages exception
+   */
   public void serve() {
 
     while (sc.hasNextLine()) {
