@@ -1,8 +1,8 @@
 package seedu.duke.task;
 
-import seedu.duke.DukeException;
-
 import java.time.LocalDate;
+
+import seedu.duke.DukeException;
 
 /**
  * Represents a task added by the user, which may be done or not done.

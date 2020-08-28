@@ -10,7 +10,7 @@ import seedu.duke.task.Task;
  * Represents a <code>Command</code> telling Duke to mark a certain <code>Task</code> as done.
  */
 public class DoneCommand implements Command {
-    String[] command;
+    private String[] command;
 
     public DoneCommand(String[] command) {
         this.command = command;

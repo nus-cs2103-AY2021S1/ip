@@ -10,7 +10,7 @@ import seedu.duke.task.Deadline;
  * Represents a <code>Command</code> telling Duke to create a new <code>Deadline</code>.
  */
 public class DeadlineCommand implements Command {
-    String command;
+    private String command;
 
     public DeadlineCommand(String command) {
         this.command = command;

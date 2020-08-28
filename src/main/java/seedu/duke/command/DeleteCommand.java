@@ -10,7 +10,7 @@ import seedu.duke.task.Task;
  * Represents a <code>Command</code> telling Duke to delete a certain <code>Task</code>.
  */
 public class DeleteCommand implements Command {
-    String[] command;
+    private String[] command;
 
     public DeleteCommand(String[] command) {
         this.command = command;

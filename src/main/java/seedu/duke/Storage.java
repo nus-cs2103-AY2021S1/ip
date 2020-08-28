@@ -1,19 +1,19 @@
 package seedu.duke;
 
-import seedu.duke.task.Task;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.DateTimeException;
 import java.util.Scanner;
 
+import seedu.duke.task.Task;
+
 /**
  * Represents a file on which the user's tasks are stored.
  */
 public class Storage {
-    String filepath;
-    File file;
+    private String filepath;
+    private File file;
 
     /**
      * Class constructor.

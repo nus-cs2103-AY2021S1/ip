@@ -1,10 +1,10 @@
 package seedu.duke.task;
 
-import seedu.duke.DukeException;
-
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+
+import seedu.duke.DukeException;
 
 /**
  * Represents a <code>Task</code> that has to be done by certain date.

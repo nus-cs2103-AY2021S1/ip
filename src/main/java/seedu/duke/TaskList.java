@@ -1,14 +1,14 @@
 package seedu.duke;
 
-import seedu.duke.task.Deadline;
-import seedu.duke.task.Event;
-import seedu.duke.task.Task;
-import seedu.duke.task.ToDo;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
+
+import seedu.duke.task.Deadline;
+import seedu.duke.task.Event;
+import seedu.duke.task.Task;
+import seedu.duke.task.ToDo;
 
 /**
  * Represents a list of <code>Task</code>s in a fixed order.
@@ -54,6 +54,7 @@ public class TaskList {
             Deadline deadline = new Deadline(input[2], isDone, LocalDate.parse(input[3]));
             this.tasks.add(deadline);
             break;
+        default:
         }
     }
 

@@ -1,18 +1,18 @@
 package seedu.duke.command;
 
+import java.time.DateTimeException;
+import java.time.LocalDate;
+
 import seedu.duke.DukeException;
 import seedu.duke.Storage;
 import seedu.duke.TaskList;
 import seedu.duke.Ui;
 
-import java.time.DateTimeException;
-import java.time.LocalDate;
-
 /**
  * Represents a <code>Command</code> telling Duke to list <code>Task</code>s.
  */
 public class ListCommand implements Command {
-    String[] command;
+    private String[] command;
 
     public ListCommand(String[] command) {
         this.command = command;

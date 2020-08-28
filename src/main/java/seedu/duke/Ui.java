@@ -1,8 +1,8 @@
 package seedu.duke;
 
-import seedu.duke.task.Task;
-
 import java.util.Scanner;
+
+import seedu.duke.task.Task;
 
 /**
  * Represents a group of methods that deal with interactions with the user.

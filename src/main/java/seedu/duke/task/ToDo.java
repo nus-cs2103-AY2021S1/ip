@@ -1,8 +1,8 @@
 package seedu.duke.task;
 
-import seedu.duke.DukeException;
-
 import java.time.LocalDate;
+
+import seedu.duke.DukeException;
 
 /**
  * Represents a <code>Task</code> with no additional details.

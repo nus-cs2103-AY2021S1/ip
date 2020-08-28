@@ -6,7 +6,7 @@ import seedu.duke.TaskList;
 import seedu.duke.Ui;
 
 public class FindCommand implements Command {
-    String command;
+    private String command;
 
     public FindCommand(String command) {
         this.command = command;
