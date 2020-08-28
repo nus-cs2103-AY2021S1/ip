@@ -6,7 +6,6 @@ public class DukeException extends Exception {
 
     @Override
     public String getMessage() {
-        return "Aiyo! " + super.getMessage() +
-                "\n____________________________________________________________";
+        return "Aiyo! " + super.getMessage();
     }
 }
