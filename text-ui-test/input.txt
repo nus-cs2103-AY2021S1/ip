@@ -1,4 +1,3 @@
-delete all
 todo borrow book
 todo read book
 deadline return book /by 14 Aug 2019

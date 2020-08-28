@@ -6,6 +6,8 @@ if not exist ..\bin mkdir ..\bin
 REM delete output from previous run
 del ACTUAL.TXT
 
+del %systemdrive%%homepath%\duke\localData\duke.data
+
 REM compile the code into the bin folder
 javac  -cp ..\src -Xlint:none -d ..\bin ..\src\main\java\*.java
 IF ERRORLEVEL 1 (
