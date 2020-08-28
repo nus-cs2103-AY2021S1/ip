@@ -1,19 +1,34 @@
 package duke.Command;
 
-import duke.Deadline;
-import duke.DukeException;
-import duke.Event;
-import duke.ToDo;
+import duke.Storage;
+
+import duke.Exception.DukeException;
+
+import duke.Task.Task;
+import duke.Task.TaskList;
+import duke.Task.Deadline;
+import duke.Task.Event;
+import duke.Task.ToDo;
+
 import duke.Ui.Message;
+import duke.Ui.Ui;
 
 import java.util.Arrays;
 
+/**
+ * Adds a task to the task list.
+ */
 public class AddCommand extends Command {
 
     private final String desc;
 
-    AddCommand(String description) {
-        this.desc = description;
+    /**
+     * Constructs an <code>AddCommand</code> Object given description.
+     *
+     * @param taskDescription The task description from user input, excluding the command word
+     */
+    public AddCommand(String taskDescription) {
+        this.desc = taskDescription;
     }
 
     public static String getStringWithoutKeyword(String[] strArr) {
@@ -46,10 +61,12 @@ public class AddCommand extends Command {
         return str.split(delimiter)[0];
     }
 
-    public String execute() throws DukeException {
+    @Override
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+        Task newTask;
 
         String[] words = this.desc.split("\\s+");
-        String keyword = words[0];
+        String keyword = words[0]; // todo, deadline, event
 
         String stringWithoutKeyword;
         stringWithoutKeyword = getStringWithoutKeyword(words);
@@ -63,7 +80,7 @@ public class AddCommand extends Command {
                     throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
                 }
 
-                listArray.add(new ToDo(stringWithoutKeyword));
+                newTask = new ToDo(stringWithoutKeyword);
                 break;
             case "deadline":
                 if (words.length == 1 || (words[1].equals("/by") && words.length == 2)) {
@@ -73,7 +90,7 @@ public class AddCommand extends Command {
                 date = getDate(stringWithoutKeyword, Deadline.delimiterBy);
                 stringWithoutDelimiter = getWithoutDelimiter(stringWithoutKeyword, Deadline.delimiterBy);
 
-                listArray.add(new Deadline(stringWithoutDelimiter, date));
+                newTask = new Deadline(stringWithoutDelimiter, date);
                 break;
             case "event":
                 if (words.length == 1 || (words[1].equals("/at") && words.length == 2)) {
@@ -82,17 +99,18 @@ public class AddCommand extends Command {
                 date = getDate(stringWithoutKeyword, Event.delimiterAt);
                 stringWithoutDelimiter = getWithoutDelimiter(stringWithoutKeyword, Event.delimiterAt);
 
-                listArray.add(new Event(stringWithoutDelimiter, date));
-
+                newTask = new Event(stringWithoutDelimiter, date);
                 break;
             default:
                 throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
 
-        // return the last added, which is the latest
-        return Message.ADDED + listArray.get((listArray.size()) - 1) + "\n" +
-                "Now you have " + listArray.size() +
-                (listArray.size() == 1 ? " task " : " tasks ")
-                + "in the list";
+        taskList.add(newTask);
+        storage.saveTasks(taskList);
+
+        return Message.MESSAGE_ADDED 
+                + newTask.toString() 
+                + Ui.LINE_SEPARATOR
+                + Message.getTotalTaskMessage(taskList);
     }
 }

@@ -1,11 +1,12 @@
-package duke;
+package duke.Task;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
-import duke.Task;
-
+/**
+ * Represents a task that is an event with both start and end time/date.
+ */
 public class Event extends Task {
 
     protected String at;
@@ -65,7 +66,13 @@ public class Event extends Task {
     }
 
     @Override
+    public String serialize() {
+        return String.format("E | %d | %s | %s", getStatusCode(), description , at);
+    }
+
+    @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + atFormat() + ")";
+
     }
 }

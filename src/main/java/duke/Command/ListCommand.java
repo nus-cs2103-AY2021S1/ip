@@ -1,23 +1,21 @@
 package duke.Command;
 
+import duke.Storage;
+import duke.Task.TaskList;
+import duke.Ui.Message;
+import duke.Ui.Ui;
+
+/**
+ * Lists all the tasks in the task list.
+ */
 public class ListCommand extends Command {
 
-    public String execute() {
-
-        StringBuilder list = new StringBuilder();
-
-        if (listArray.isEmpty()) {
-            return "list is empty";
+    @Override
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
+        if (taskList.isEmpty()) {
+            return Message.MESSAGE_NO_TASK;
         } else {
-            for (int i = 1; i <= listArray.size(); i++) {
-                if (i == listArray.size()) {
-                    list.append(i).append(".").append(listArray.get(i - 1).toString());
-                } else {
-                    list.append(i).append(".").append(listArray.get(i - 1).toString())
-                            .append("\n");
-                }
-            }
-            return "Here are the tasks in your list:\n" + list.toString();
+            return Message.MESSAGE_LIST + Ui.LINE_SEPARATOR + taskList.toString();
         }
     }
 }

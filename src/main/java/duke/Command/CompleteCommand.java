@@ -1,8 +1,19 @@
 package duke.Command;
 
-import duke.Task;
-import duke.Ui.Message;
 
+import duke.Storage;
+
+import duke.Exception.DukeException;
+
+import duke.Task.Task;
+import duke.Task.TaskList;
+
+import duke.Ui.Message;
+import duke.Ui.Ui;
+
+/**
+ * Marks a task as done.
+ */
 public class CompleteCommand extends Command {
 
     private final int index;
@@ -11,9 +22,11 @@ public class CompleteCommand extends Command {
         this.index = index;
     }
 
-    public String execute() {
-        Task task = listArray.get(index - 1);
+    @Override
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+        Task task = taskList.get(index);
         task.markAsDone();
-        return Message.DONE + task.toString();
+        storage.saveTasks(taskList);
+        return Message.MESSAGE_DONE + task.toString();
     }
 }

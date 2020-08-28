@@ -1,8 +1,18 @@
 package duke.Command;
 
-import duke.Task;
-import duke.Ui.Message;
+import duke.Storage;
 
+import duke.Exception.DukeException;
+
+import duke.Task.Task;
+import duke.Task.TaskList;
+
+import duke.Ui.Message;
+import duke.Ui.Ui;
+
+/**
+ * Deletes a task from the task list.
+ */
 public class DeleteCommand extends Command {
 
     private final int index;
@@ -12,12 +22,11 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public String execute() {
-        Task task = listArray.get(index - 1);
-        listArray.remove(index - 1);
-        return Message.DELETE + task.toString() + "\n" +
-                "Now you have " + listArray.size() +
-                (listArray.size() == 1 ? " task " : " tasks ")
-                + "in the list";
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+        Task task = taskList.get(index);
+        taskList.remove(index);
+        storage.saveTasks(taskList);
+        return Message.MESSAGE_DELETE + task.toString() + Ui.LINE_SEPARATOR
+                + Message.getTotalTaskMessage(taskList);
     }
 }

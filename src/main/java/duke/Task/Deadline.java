@@ -1,11 +1,12 @@
-package duke;
+package duke.Task;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
-import duke.Task;
-
+/**
+ * Represents a task with a deadline.
+ */
 public class Deadline extends Task {
 
     protected String by;
@@ -38,6 +39,11 @@ public class Deadline extends Task {
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("EEE, d MMMM yyyy");
         DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("h:mma");
         return String.format("%s, %s", dateFormatter.format(date), timeFormatter.format(time));
+    }
+
+    @Override
+    public String serialize() {
+        return String.format("D | %d | %s | %s", getStatusCode(), description , by);
     }
 
     @Override
