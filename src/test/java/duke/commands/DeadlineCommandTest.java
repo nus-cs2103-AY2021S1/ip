@@ -1,4 +1,4 @@
-package duke.command;
+package duke.commands;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 

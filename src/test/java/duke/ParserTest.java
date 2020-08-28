@@ -6,16 +6,16 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 import org.junit.jupiter.api.Test;
 
-import duke.command.ByeCommand;
-import duke.command.Command;
-import duke.command.DeadlineCommand;
-import duke.command.DeleteCommand;
-import duke.command.DoneCommand;
-import duke.command.EventCommand;
-import duke.command.FindCommand;
-import duke.command.ListCommand;
-import duke.command.SaveCommand;
-import duke.command.TodoCommand;
+import duke.commands.ByeCommand;
+import duke.commands.Command;
+import duke.commands.DeadlineCommand;
+import duke.commands.DeleteCommand;
+import duke.commands.DoneCommand;
+import duke.commands.EventCommand;
+import duke.commands.FindCommand;
+import duke.commands.ListCommand;
+import duke.commands.SaveCommand;
+import duke.commands.TodoCommand;
 import duke.exception.DukeException;
 import duke.tasks.Task;
 
