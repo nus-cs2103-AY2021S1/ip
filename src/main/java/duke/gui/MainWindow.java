@@ -1,10 +1,8 @@
 package duke.gui;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import duke.Duke;
 import duke.utils.DukeState;
+import duke.utils.DukeStdMsg;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -37,21 +35,16 @@ public class MainWindow extends AnchorPane {
 
     public void setDuke(Duke d) {
         duke = d;
-        ArrayList<String> welcomeTextBlock = new ArrayList<>(List.of(
-                "Hello, my name is ",
-                " ____        _        ",
-                "|  _ \\ _   _| | _____ ",
-                "| | | | | | | |/ / _ \\",
-                "| |_| | |_| |   <  __/",
-                "|____/ \\__,_|_|\\_\\___|",
-                "How may I help you?"
-        ));
-        StringBuilder sb = new StringBuilder();
-        for (String s : welcomeTextBlock) {
-            sb.append(s).append('\n');
+
+        String greeting = DukeStdMsg.WELCOME.getMsg();
+        if (duke.isLoadedFromDisk()) {
+            greeting = DukeStdMsg.LOAD_FROM_DISK.getMsg() + '\n' + greeting;
+        } else {
+            greeting += DukeStdMsg.FRESH_START.getMsg()+ '\n' + greeting;
         }
+
         dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog(sb.toString(), dukeImage)
+                DialogBox.getDukeDialog(greeting, dukeImage)
         );
     }
 
