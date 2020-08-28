@@ -1,3 +1,8 @@
+package test.java;
+
+import main.java.Deadline;
+import main.java.Event;
+import main.java.TextUi;
 import org.junit.jupiter.api.Test;
 import org.w3c.dom.Text;
 
@@ -10,7 +15,7 @@ public class TextUiTest {
     public void testPrintEventWithNoEventTime() throws IllegalArgumentException {
         try {
             Event eventA = new Event("a", null);
-            TextUi.printEvent("a");
+            TextUi.printNewTasks("a");
 
         } catch (IllegalArgumentException exception) {
             String errorMessage = "Invalid input, no event time stated";
@@ -21,7 +26,7 @@ public class TextUiTest {
     public void testPrintDeadlineWithNoName() throws IllegalArgumentException {
         try {
             Deadline deadlineA = new Deadline(null, null);
-            TextUi.printDeadline("deadline");
+            TextUi.printNewTasks("deadline");
 
         } catch (IllegalArgumentException exception) {
             String errorMessage = "Invalid input, no deadline stated";
