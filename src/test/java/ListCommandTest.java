@@ -1,7 +1,6 @@
 import duke.*;
 import duke.command.ListCommand;
 import duke.exception.DukeListException;
-import duke.exception.DukeTaskException;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
