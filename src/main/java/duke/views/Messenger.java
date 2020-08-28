@@ -16,7 +16,7 @@ public class Messenger {
     /**
      * Messages for loading and saving files.
      */
-    public static final String FILE_LOADING = "Starter back! Trying to retrieve where you were last time...";
+    public static final String FILE_LOADING = "Hold a while, trying to retrieve where you were last time...";
     public static final String FILE_LOADED = "Great! We have successfully loaded the data. Enjoy~";
     public static final String CLOSE_MESSAGE = "Content Saved! Hope to see you again soon!";
 

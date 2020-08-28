@@ -66,8 +66,8 @@ public class TaskList {
         Task newTask = new Task(content, type, date);
         tasks.add(newTask);
         int size = tasks.size();
-        String output = "Got it. I've added this task:    " + newTask.toString() + "\n";
-        output += String.format("Now you have %s %s in the list.", size, (size > 1 ? "tasks" : "task"));
+        String output = "Got it. I've added this task:\n    " + newTask.toString() + "\n";
+        output += String.format("Now you have %s %s in the list.\n", size, (size > 1 ? "tasks" : "task"));
         return output;
     }
 
@@ -82,8 +82,8 @@ public class TaskList {
         Task newTask = new Task(content, type);
         tasks.add(newTask);
         int size = tasks.size();
-        String output = "Got it. I've added this task:    " + newTask.toString() + "\n";
-        output += String.format("Now you have %s %s in the list.", size, (size > 1 ? "tasks" : "task"));
+        String output = "Got it. I've added this task:\n    " + newTask.toString() + "\n";
+        output += String.format("Now you have %s %s in the list.\n", size, (size > 1 ? "tasks" : "task"));
         return output;
     }
 
@@ -96,14 +96,15 @@ public class TaskList {
      */
     public String deleteTask(int index) throws DukeException {
         int size = tasks.size();
-        Task task = tasks.get(index - 1);
         if (index > size) {
             throw new DukeException(Messenger.INDEX_OUT_OF_BOUND_ERROR);
         }
+        Task task = tasks.get(index - 1);
         String output = "Noted. I've removed this task:\n";
         output += task + "\n";
-        output += String.format("Now you have %s %s in the list.", size, (size > 1 ? "tasks" : "task"));
         tasks.remove(index - 1);
+        size -= 1;
+        output += String.format("Now you have %s %s in the list.\n", size, (size > 1 ? "tasks" : "task"));
         return output;
     }
 

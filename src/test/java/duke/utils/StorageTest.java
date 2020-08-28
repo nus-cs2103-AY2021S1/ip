@@ -9,6 +9,7 @@ import java.util.Scanner;
 
 import duke.tasks.TaskList;
 
+import javafx.scene.control.Label;
 import org.junit.jupiter.api.Test;
 
 
@@ -20,6 +21,7 @@ class StorageTest {
 
     @Test
     void readSavedFile() throws IOException {
+        Label label = new Label();
         TaskList list = new TaskList();
         Storage storage = new Storage(list);
 
@@ -27,36 +29,29 @@ class StorageTest {
         System.setOut(new PrintStream(outContent));
 
         makeBackup();
-        storage.readSavedFile();
-        list.printList();
+        storage.readSavedFile(label);
+        String actual = label.getText() + list.printList();
         recover();
 
-        String expected = "Hello from\n"
-                + " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n"
-                + "\n"
-                + "What can I do for you?\n"
-                + "Starter back! Trying to retrieve where you were last time...\n"
+        String expected = "Hold a while, trying to retrieve where you were last time...\n"
                 + "Great! We have successfully loaded the data. Enjoy~\n"
                 + "Here are the tasks in your list:\n"
                 + "1.[T][✗] borrow book\n"
                 + "2.[D][✗] return book (by: Aug 23 2020)\n";
 
-        assertEquals(expected, outContent.toString());
+        assertEquals(expected, actual);
 
     }
 
     @Test
     void saveDataToFile() throws IOException {
+        Label label = new Label();
         TaskList list = new TaskList();
         Storage storage = new Storage(list);
         makeBackup();
-        storage.readSavedFile();
+        storage.readSavedFile(label);
         list.addTask("test content", "todo");
-        storage.saveDataToFile();
+        storage.saveDataToFile(label);
         StringBuilder sb = new StringBuilder();
         File f = new File("data/duke.txt");
         Scanner sc = new Scanner(f);
