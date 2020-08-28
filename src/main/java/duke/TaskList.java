@@ -23,7 +23,6 @@ public class TaskList {
     public String printTodoList() {
         String message = "";
         for (int i = 0; i < thingsToDo.size(); i++) {
-            String sign = thingsToDo.get(i).isDone() ? "✓" : "✗";
             message = message
                     + "     "
                     + (i + 1)
@@ -52,9 +51,7 @@ public class TaskList {
 
     @Override
     public String toString() {
-        return "Task{" +
-                "thingsToDo=" + thingsToDo +
-                '}';
+        return "Task{" + "thingsToDo=" + thingsToDo + '}';
     }
 
 }

@@ -1,14 +1,19 @@
 package duke;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.ParseException;
-import java.util.ArrayList;
 
 public class Storage {
     /**
-     * Saves task list onto a prescribed file
+     * Saves task list onto a prescribed file.
      * @param tasks the tasklist to be saved
      * @throws IOException if file not successfully made (e.g. permission error)
      */

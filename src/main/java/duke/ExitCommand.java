@@ -1,6 +1,6 @@
 package duke;
 
-public class ExitCommand implements Command{
+public class ExitCommand implements Command {
     TaskList tasks;
 
     public ExitCommand() {

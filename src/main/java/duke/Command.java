@@ -1,8 +1,9 @@
 package duke;
 
 public interface Command {
-    public void execute(TaskList tasks);
-    public default boolean setIsFinished() {
+    void execute(TaskList tasks);
+
+    default boolean setIsFinished() {
         return false;
-    };
+    }
 }

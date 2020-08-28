@@ -1,7 +1,8 @@
 package duke;
 
-public class DeleteCommand implements Command{
+public class DeleteCommand implements Command {
     int indexToBeDeleted;
+
     public DeleteCommand(int indexToBeDeleted) {
         this.indexToBeDeleted = indexToBeDeleted;
     }

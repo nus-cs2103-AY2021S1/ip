@@ -1,9 +1,7 @@
 package duke;
 
 public class Ui {
-    public Ui() { }
-
-    public static void printMessage(String msg) {
+    private static void printMessage(String msg) {
         System.out.println("    ____________________________________________________________");
         System.out.print(msg);
         System.out.println("    ____________________________________________________________");

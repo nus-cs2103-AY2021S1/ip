@@ -1,19 +1,19 @@
 package duke;
 
 public class Pair<T, U> {
-    private T t;
-    private U u;
+    private final T firstType;
+    private final U secondType;
 
-    public Pair(T t, U u) {
-        this.t = t;
-        this.u = u;
+    public Pair(T firstType, U secondType) {
+        this.firstType = firstType;
+        this.secondType = secondType;
     }
 
     public T getT() {
-        return t;
+        return firstType;
     }
 
     public U getU() {
-        return u;
+        return secondType;
     }
 }
