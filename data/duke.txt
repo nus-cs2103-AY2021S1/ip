@@ -1,4 +1,2 @@
-1. [T] [X]  something
-2. [T] [DONE]  somethingelse else
-3. [D] [DONE]  eat cereal (by:  2 aug 2021)
-4. [E] [DONE]  lunch (at:  1.30pm)
+1. [D] [X]  a (by: 2020-05-12 14:30)
+2. [E] [X]  b (at: 2019-03-12 13:30)

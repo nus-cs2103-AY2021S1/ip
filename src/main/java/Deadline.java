@@ -1,10 +1,7 @@
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
-//TODO: write in the time for the toString
 public class Deadline extends Task{
     LocalDate date;
     LocalTime time;
@@ -20,11 +17,14 @@ public class Deadline extends Task{
         this.preposition = preposition;
         this.date = date;
         this.time = time;
+        this.saveRep = "[D] " + super.toString() + " (" + preposition + ": " +
+                date + " " +
+                time + ")";
     }
 
     @Override
     public String toString() {
-        return "[D] " + super.toString() + "(" + preposition + ": " +
+        return "[D] " + super.toString() + " (" + preposition + ": " +
                 date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " " +
                 time.format(DateTimeFormatter.ofPattern("HH:mm")) + ")";
     }

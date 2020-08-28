@@ -1,5 +1,7 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -48,8 +50,8 @@ public class Load extends Command{
     private Task parseData(String data) throws DukeException{
         ///Following the following format
         ///1. [T] [X]  something
-        //2. [D] [X]  eat cereal (by:  2 aug 2021)
-        //3. [E] [X]  lunch (at:  1.30pm)
+        //2. [D] [X]  eat cereal (by:  12/05/2020 14:30)
+        //3. [E] [X]  lunch (at:  13/05/2020 13:30)
         String[] splitData = data.split("\\s+");
         String taskType = splitData[1];
         boolean isDone = splitData[2].equals("[DONE]");
@@ -68,18 +70,19 @@ public class Load extends Command{
             String taskName = concatenateStrArr(splitData,3,index);
             String preposition = getPreposition(splitData[index]);
             index++;
-            String dirtyTime = concatenateStrArr(splitData,index, splitData.length);
-            String dateTime = dirtyTime.replace(")","");
+            String dateRep = splitData[index];
+            LocalDate date = LocalDate.parse(dateRep);
+            index++;
+            String timeRep = splitData[index].replace(")","");
+            LocalTime time = LocalTime.parse(timeRep);
             if(taskType.equals("[D]")){
-               //TODO: Parse the data from the load file and put it inside the datastorage array for the run
-               //TODO: parse out the preposition and the date time;
-                Task task = new Deadline(taskName,preposition,dateTime);
+                Task task = new Deadline(taskName,preposition,date, time);
                 if(isDone){
                     task.markDone();
                 }
                 return task;
             } else if(taskType.equals("[E]")){
-                Task task = new Event(taskName, preposition,dateTime);
+                Task task = new Event(taskName, preposition,date, time);
                 if(isDone){
                     task.markDone();
                 }

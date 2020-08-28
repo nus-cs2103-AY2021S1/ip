@@ -2,7 +2,6 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
-//TODO: write in the time for the toString
 public class Event extends Task{
     String preposition;
     LocalDate date;
@@ -18,11 +17,14 @@ public class Event extends Task{
         this.preposition = preposition;
         this.date = date;
         this.time = time;
+        this.saveRep = "[E] " + super.toString() + " (" + preposition + ": " +
+                date + " " +
+                time + ")";
     }
 
     @Override
     public String toString() {
-        return "[E] " + super.toString() + "(" + preposition + ": " +
+        return "[E] " + super.toString() + " (" + preposition + ": " +
                 date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " " +
                 time.format(DateTimeFormatter.ofPattern("HH:mm")) + ")";
     }

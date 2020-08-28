@@ -91,6 +91,16 @@ public class DataStorageInterface {
         return acc.toString().isEmpty()?"There are no Tasks in the list":acc.toString();
     }
 
+    public static String getSaveRepresentation(){
+        StringBuilder acc = new StringBuilder();
+        int i = 0;
+        for (Task t: DataStorage.taskList){
+            i++;
+            acc.append(String.format("%d. %s\n", i, t.saveStringRepresentation()));
+        }
+        return acc.toString().isEmpty()?"":acc.toString();
+    }
+
     //TODO: Possibly requires a newline char
     public static String getUsage(String query) throws UnknownCommandException{
         for(Command c: DataStorage.commandInit){

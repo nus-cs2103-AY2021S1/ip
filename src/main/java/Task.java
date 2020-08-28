@@ -1,5 +1,6 @@
 public abstract class Task extends Command{
     private final String title;
+    protected String saveRep;
     private boolean isDone = false;
 
     Task(String title){
@@ -16,6 +17,10 @@ public abstract class Task extends Command{
 
     public boolean isDone() {
         return isDone;
+    }
+
+    public String saveStringRepresentation(){
+        return saveRep;
     }
 
     @Override
