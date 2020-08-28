@@ -18,7 +18,7 @@ public class TaskList {
     /**
      * Displays the task list.
      */
-    public  void displayList() {
+    public void displayList() {
         if (storage.isEmpty()) {
             System.out.println(ui.getBorder() + "Your list is empty!\n" + ui.getBorder());
         } else {

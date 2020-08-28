@@ -40,7 +40,7 @@ public class Deadline extends Task {
      */
     @Override
     public Deadline setDone(boolean b) {
-        return new Deadline(this.getName(),true, this.by);
+        return new Deadline(this.getName(), true, this.by);
     }
 
     /**

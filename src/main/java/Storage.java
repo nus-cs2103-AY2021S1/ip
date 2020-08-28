@@ -84,7 +84,7 @@ public class Storage {
     /**
      * Loads state from save file.
      */
-    public  void loadFile() {
+    public void loadFile() {
         try {
             Scanner scan = new Scanner(file);
             while (scan.hasNext()) {
@@ -117,7 +117,7 @@ public class Storage {
     /**
      * Updates save file.
      */
-    public  void updateFile() {
+    public void updateFile() {
         file.delete();
         saveFile();
         loadFile();
