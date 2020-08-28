@@ -21,8 +21,10 @@ public class Duke {
      * initialize the list with an empty list.
      * @param filePath The file path of the data file holding all existing tasks.
      */
-    public Duke(String filePath) {
-        ui = new CliUi();
+    public Duke(String filePath, boolean isCliApp) {
+        if (isCliApp) {
+            ui = new CliUi();
+        }
         try {
             storage = new ActualStorage(filePath);
             list = storage.getList();
@@ -82,6 +84,6 @@ public class Duke {
     public static void main(String[] args) {
         String home = System.getProperty("user.home");
         java.nio.file.Path path = java.nio.file.Paths.get(home, "Desktop", "cs2103", "ip", "data");
-        new Duke(path.toString()).run();
+        new Duke(path.toString(), true).run();
     }
 }

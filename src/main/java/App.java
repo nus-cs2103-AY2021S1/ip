@@ -27,7 +27,7 @@ public class App extends Application {
 
     String home = System.getProperty("user.home");
     java.nio.file.Path path = java.nio.file.Paths.get(home, "Desktop", "cs2103", "ip", "data");
-    private Duke runningDuke = new Duke(path.toString());
+    private Duke runningDuke = new Duke(path.toString(), false);
 
     @Override
     public void start(Stage stage) {
