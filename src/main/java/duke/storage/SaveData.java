@@ -38,7 +38,6 @@ public class SaveData {
      * @param data
      */
     public static void saveData(String path, ArrayList<Task> data) {
-        //System.out.println("hello");
         try {
             File file = new File(path);
             if (!file.exists()) {
