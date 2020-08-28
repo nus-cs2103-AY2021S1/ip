@@ -6,9 +6,9 @@ import duke.exception.InvalidFormatEventException;
 import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.task.Deadline;
+import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
-import duke.task.Event;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
 
@@ -18,10 +18,7 @@ import duke.ui.Ui;
  */
 
 public class AddCommand extends Command {
-    
     private static final String ADDED_NOTIFICATION = "Got it. I've added this duke.task:";
-
-    
     /**
      * Creates an AddCommand object.
      * 
@@ -32,15 +29,14 @@ public class AddCommand extends Command {
     public AddCommand(String[] inputArr) {
         super(inputArr);
     }
-    
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) 
-            throws InvalidFormatDeadlineException, InvalidFormatEventException, InvalidFormatDateException {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws InvalidFormatDeadlineException,
+            InvalidFormatEventException, InvalidFormatDateException {
         addTask(inputArr[0], inputArr[1], ui, tasks);
     }
 
     /**
-     * Adds the given task into the task list. Expected format for the date in message is YYYY-MM-DD HHMM or 
+     * Adds the given task into the task list. Expected format for the date in message is YYYY-MM-DD HHMM or
      * YYYY-MM-DD HHMM. If type is of todo, date can be omitted.
      * 
      * @param type Type of task that is being entered (todo, event, deadline).
@@ -55,7 +51,7 @@ public class AddCommand extends Command {
             throws InvalidFormatDeadlineException, InvalidFormatEventException, InvalidFormatDateException {
         Task task;
         String[] dateTime;
-        if (Parser.isTODO(type)) {
+        if (Parser.isToDo(type)) {
             task = new ToDo(message);
         } else if (Parser.isDeadline(type)) {
             dateTime = message.split(" /by ", 2);
@@ -64,7 +60,7 @@ public class AddCommand extends Command {
                 throw new InvalidFormatDeadlineException();
             }
             task = new Deadline(dateTime[0], Parser.formatDateTime(dateTime[1]));
-        } else if (Parser.isEvent(type)){
+        } else if (Parser.isEvent(type)) {
             dateTime = message.split(" /at ", 2);
             // checking if the input is valid
             if (dateTime.length == 1) {

@@ -8,9 +8,8 @@ import java.time.format.DateTimeFormatter;
  */
 
 public class Event extends Task {
-    private final LocalDateTime at;
     private static final DateTimeFormatter FormatDateTime = DateTimeFormatter.ofPattern("EEEE, dd MMM yyyy, h:mma");
-
+    private final LocalDateTime at;
     /**
      * Creates a event object the containing details of the task.
      * 

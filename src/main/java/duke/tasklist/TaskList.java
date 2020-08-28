@@ -1,8 +1,10 @@
 package duke.tasklist;
 
+import java.util.ArrayList;
+
 import duke.task.Task;
 
-import java.util.ArrayList;
+
 
 /**
  * Class that simulates containing all the task.
@@ -10,7 +12,6 @@ import java.util.ArrayList;
 
 public class TaskList {
     private ArrayList<Task> listTasks;
-    
     public TaskList() {
         listTasks = new ArrayList<>();
     }

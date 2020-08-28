@@ -9,7 +9,7 @@ import duke.ui.Ui;
  * Class the simulates an unknown command.
  */
 
-public class UnknownCommand extends Command{
+public class UnknownCommand extends Command {
     public UnknownCommand(String[] inputArr) {
         super(inputArr);
     }
@@ -22,7 +22,7 @@ public class UnknownCommand extends Command{
      * @param storage Object that deals with loading tasks from the file and saving tasks in the file
      * @throws UnknownCommandException Throws an unknown command exception when user's input is not recognized.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws UnknownCommandException{
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws UnknownCommandException {
         throw new UnknownCommandException();
     }
 }

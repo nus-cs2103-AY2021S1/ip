@@ -9,7 +9,6 @@ import duke.ui.Ui;
  * Class that simulates the find command of the user.
  */
 public class FindCommand extends Command {
-    
     private static final String FIND_SUCCESS = "Here are the matching tasks in your list:";
 
     /**
@@ -22,7 +21,6 @@ public class FindCommand extends Command {
     public FindCommand(String[] inputArr) {
         super(inputArr);
     }
-    
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         findTasks(tasks, inputArr[1], ui);

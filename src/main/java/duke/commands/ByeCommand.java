@@ -20,7 +20,6 @@ public class ByeCommand extends Command {
     public ByeCommand(String[] inputArr) {
         super(inputArr);
     }
-    
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         ui.goodBye();

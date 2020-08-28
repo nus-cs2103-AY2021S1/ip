@@ -72,5 +72,4 @@ public class Ui {
     public String readCommand() {
         return sc.nextLine();
     }
-    
 }

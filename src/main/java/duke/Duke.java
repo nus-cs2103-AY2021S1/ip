@@ -1,21 +1,13 @@
 package duke;
 
+
+import duke.commands.Command;
 import duke.exception.DukeException;
-import duke.exception.EmptyTextException;
-import duke.exception.InvalidFormatByeException;
-import duke.exception.InvalidFormatDateException;
-import duke.exception.InvalidFormatDeadlineException;
-import duke.exception.InvalidFormatDeleteException;
-import duke.exception.InvalidFormatDoneException;
-import duke.exception.InvalidFormatEventException;
-import duke.exception.InvalidFormatFindException;
-import duke.exception.InvalidFormatListException;
-import duke.exception.UnknownCommandException;
 import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
-import duke.commands.Command;
+
 
 /**
  * Duke is the name of this program. It acts as a CLI app that reads and save
@@ -24,12 +16,14 @@ import duke.commands.Command;
  */
 
 public class Duke {
-    
     private Storage storage;
     private Ui ui;
     private TaskList tasks;
     private boolean isExit;
-    
+
+    /**
+     * Initialize the Duke object
+     */
     public Duke() {
         storage = new Storage();
         tasks = new TaskList();

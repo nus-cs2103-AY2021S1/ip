@@ -9,11 +9,8 @@ import duke.ui.Ui;
  */
 
 public class ListCommand extends Command {
-    
     private static final String EMPTY_MSG = "Your list is empty!!!";
     private static final String SHOW_TASK = "Here are the tasks in your list:";
-
-
     /**
      * Creates an ListCommand object.
      * 
@@ -41,7 +38,7 @@ public class ListCommand extends Command {
         } else {
             ui.messageFormatter(() -> {
                 System.out.println(SHOW_TASK);
-                for(int i = 1; i <= tasks.size(); i++) {
+                for (int i = 1; i <= tasks.size(); i++) {
                     System.out.println(i + ". " + tasks.get(i - 1));
                 }
             });
