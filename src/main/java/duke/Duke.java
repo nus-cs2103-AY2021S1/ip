@@ -1,12 +1,12 @@
 package duke;
 
 import duke.exception.DukeException;
+import duke.operation.ExitOperation;
 import duke.operation.Operation;
 import duke.operation.StartOperation;
 import duke.parser.CommandParser;
 import duke.storage.TaskStorage;
 import duke.task.TaskList;
-import duke.ui.Ui;
 
 /**
  * Represents the main driver class of Duke.
@@ -14,48 +14,44 @@ import duke.ui.Ui;
 public class Duke {
     private final TaskStorage taskStorage;
     private final TaskList taskList;
-    private final Ui ui;
     private final CommandParser commandParser;
 
-    Duke() {
-        this.ui = new Ui();
+    /**
+     * Constructor method for Duke.
+     */
+    public Duke() {
         this.taskStorage = TaskStorage.createTaskStorage();
         this.taskList = new TaskList();
         this.commandParser = new CommandParser();
     }
 
-    private void initialiseDuke() {
-        this.ui.showStartMessage();
-        String status = new StartOperation(this.taskList, this.taskStorage).execute();
-        this.ui.showLoadStatus(status);
+    /**
+     * Initialises Duke by running a <code>StartOperation</code>.
+     * @return status of the <code>StartOperation</code>.
+     */
+    public String initialize() {
+        return new StartOperation(this.taskList, this.taskStorage).execute();
     }
 
     /**
-     * Drives the execution of <code>Duke</code>.
-     * It handles any exceptions thrown by printing them onto the <code>Ui</code>.
+     * Stops Duke by running a <code>ExitOperation</code>.
+     * @return status of the <code>ExitOperation</code>.
      */
-    public void runDuke() {
-        initialiseDuke();
-        boolean isExit = false;
-        while (!isExit) {
-            String command = this.ui.readUserInput();
-            try {
-                Operation operation = this.commandParser.parse(command, this.taskList, this.taskStorage);
-                String status = operation.execute();
-                this.ui.showStatus(status);
-                isExit = operation.isExit();
-            } catch (DukeException exception) {
-                this.ui.showStatus(exception.getMessage());
-            }
+    public String stopDuke() {
+        return new ExitOperation(this.taskStorage, this.taskList).execute();
+    }
+
+    /**
+     * Runs an associated <code>Operation</code> based on <code>input</code>.
+     * @param input the <code>String</code> the user inputs.
+     * @return a <code>String</code> of the status of the executed <code>Operation</code>.
+     */
+    public String getResponse(String input) {
+        try {
+            Operation operation = this.commandParser.parse(input, this.taskList, this.taskStorage);
+            return operation.execute();
+        } catch (DukeException exception) {
+            return exception.getMessage();
         }
-    }
-
-    /**
-     * Driver method for the running of Duke.
-     * @param args
-     */
-    public static void main(String[] args) {
-        Duke duke = new Duke();
-        duke.runDuke();
     }
 }
