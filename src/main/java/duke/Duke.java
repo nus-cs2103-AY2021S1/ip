@@ -1,21 +1,23 @@
 package duke;
 
 import duke.commands.Command;
+import duke.commands.CommandResult;
+import duke.exceptions.DukeException;
+import duke.inputoutput.InputOutput;
 import duke.parsers.Parser;
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
-import duke.ui.Ui;
 
 /** Main class where the program is run. */
 public class Duke {
 
-    private Ui ui;
+    private InputOutput inputOutput;
     private TaskList taskList;
     private Storage storage;
 
     /** Constructs a Duke object. */
     public Duke() {
-        this.ui = new Ui();
+        this.inputOutput = new InputOutput();
         this.storage = new Storage();
         this.taskList = storage.load();
     }
@@ -28,19 +30,34 @@ public class Duke {
 
     /** Runs the program until termination. */
     public void run() {
-        ui.showGreeting();
+        inputOutput.showGreeting();
         boolean isExit = false;
         while (!isExit) {
-            String input = ui.readCommand();
+            String input = inputOutput.readCommand();
             try {
-                Command command = Parser.parse(input);
-                command.execute(taskList, ui);
+                CommandResult result = getResult(input);
+                inputOutput.show(result.getFeedbackToUser());
                 storage.save(taskList);
-                isExit = command.isExit();
+                isExit = result.isExit();
             } catch (Exception ex) {
-                ui.show("\t " + ex.getMessage());
+                inputOutput.show("\t " + ex.getMessage());
             }
         }
         System.exit(0);
+    }
+
+    /** Gets the CommandResult from user input.
+     *
+     * @param input The user input.
+     * @return The CommandResult.
+     */
+    public CommandResult getResult(String input) {
+        try {
+            Command command = Parser.parse(input);
+            storage.save(taskList);
+            return command.execute(taskList);
+        } catch (DukeException e) {
+            return new CommandResult(e.getMessage(), false);
+        }
     }
 }

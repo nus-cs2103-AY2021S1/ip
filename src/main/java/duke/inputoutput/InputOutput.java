@@ -1,4 +1,4 @@
-package duke.ui;
+package duke.inputoutput;
 
 import static duke.utils.Messages.MESSAGE_BYE;
 import static duke.utils.Messages.MESSAGE_GREETING;
@@ -7,13 +7,13 @@ import static duke.utils.Messages.MESSAGE_WELCOME;
 import java.util.Scanner;
 
 /** Represents the Ui of the system that handles user interaction. */
-public class Ui {
+public class InputOutput {
 
     private static String line = "\t" + "_".repeat(75);
     private Scanner sc;
 
     /** Constructs a Ui object. */
-    public Ui() {
+    public InputOutput() {
         this.sc = new Scanner(System.in);
     }
 

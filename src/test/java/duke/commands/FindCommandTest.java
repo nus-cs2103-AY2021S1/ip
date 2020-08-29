@@ -1,40 +1,23 @@
 package duke.commands;
 
+import static duke.utils.Messages.MESSAGE_FIND;
+import static duke.utils.Messages.MESSAGE_FIND_NO_MATCH;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
-
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import duke.tasklist.TaskList;
 import duke.tasks.Todo;
-import duke.ui.Ui;
 
 public class FindCommandTest {
-
-    private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-    private final PrintStream originalOut = System.out;
-    private final String line = "\t" + "_".repeat(75) + "\n";
-
-    @BeforeEach
-    public void setUpStreams() {
-        System.setOut(new PrintStream(outContent));
-    }
-
-    @AfterEach
-    public void restoreStreams() {
-        System.setOut(originalOut);
-    }
 
     @Test
     public void execute_noMatch_showNoMatchFound() {
         FindCommand command = new FindCommand("word");
-        command.execute(new TaskList(), new Ui());
-        String expected = line + "\t There are no tasks that matches your search word.\n" + line;
-        assertEquals(expected, outContent.toString());
+        CommandResult actual = command.execute(new TaskList());
+        String response = MESSAGE_FIND_NO_MATCH;
+        CommandResult expected = new CommandResult(response, false);
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -45,13 +28,10 @@ public class FindCommandTest {
         Todo unmatched = new Todo("no");
         taskList.addTask(matched);
         taskList.addTask(unmatched);
-        command.execute(taskList, new Ui());
-        String expected = line
-                + "\t Here are the matching tasks in your list:\n"
-                + "\t 1."
-                + matched.toString()
-                + "\n" + line;
-        assertEquals(expected, outContent.toString());
+        CommandResult actual = command.execute(taskList);
+        String response = MESSAGE_FIND + "\t 1." + matched.toString();
+        CommandResult expected = new CommandResult(response, false);
+        assertEquals(expected, actual);
     }
 
 }

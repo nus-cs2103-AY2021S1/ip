@@ -6,20 +6,19 @@ import java.util.ArrayList;
 
 import duke.tasklist.TaskList;
 import duke.tasks.Task;
-import duke.ui.Ui;
 
 /** Represents the command that lists out all tasks when executed. */
 public class ListCommand extends Command {
 
-    /** Displays all tasks to the user.
+    /** Returns a CommandResult containing all tasks to the user.
      *
      * @param taskList The taskList involved.
-     * @param ui The ui involved to show messages to the user.
+     * @return The result of the command.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui) {
-        String response = MESSAGE_LIST;
-        ui.show(tasksToString(taskList.getTasks(), response));
+    public CommandResult execute(TaskList taskList) {
+        String response = tasksToString(taskList.getTasks(), MESSAGE_LIST);
+        return new CommandResult(response, false);
     }
 
     /** Converts an ArrayList of tasks to a string which starts with the initialString

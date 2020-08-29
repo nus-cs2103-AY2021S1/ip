@@ -10,19 +10,18 @@ import duke.tasklist.TaskList;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.Task;
-import duke.ui.Ui;
 import duke.utils.DukeDateTime;
 
 /** Represents the command that displays all tasks happening today to the user when executed. */
 public class TodayCommand extends Command {
 
-    /** Displays all tasks happening today to the user.
+    /** Returns a CommandResult containing all tasks happening today to the user.
      *
      * @param taskList The taskList involved.
-     * @param ui The ui involved to show messages to the user.
+     * @return The result of the command.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui) {
+    public CommandResult execute(TaskList taskList) {
         LocalDateTime now = LocalDate.now().atStartOfDay();
         ArrayList<Task> tasksToday = new ArrayList<>();
         taskList.getTasks().forEach(task -> {
@@ -39,7 +38,8 @@ public class TodayCommand extends Command {
             }
         });
         // todo: sort tasks
-        ui.show(tasksTodayString(tasksToday));
+        String response = tasksTodayString(tasksToday);
+        return new CommandResult(response, false);
     }
 
     private String tasksTodayString(ArrayList<Task> tasks) {

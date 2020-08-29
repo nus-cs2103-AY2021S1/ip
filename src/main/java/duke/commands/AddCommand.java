@@ -4,7 +4,6 @@ import static duke.utils.Messages.MESSAGE_ADD_TASK;
 
 import duke.tasklist.TaskList;
 import duke.tasks.Task;
-import duke.ui.Ui;
 
 /** Represents the command that adds a task to the taskList when executed. */
 public class AddCommand extends Command {
@@ -20,16 +19,17 @@ public class AddCommand extends Command {
         this.toAdd = toAdd;
     }
 
-    /** Adds the task specified in the constructor to the taskList and displays
-     * the added task with a relevant message to the user.
+    /** Adds the task specified in the constructor to the taskList and returns a relevant message.
      *
      * @param taskList The taskList that the task is being added to.
-     * @param ui The ui that displays the message to the user.
+     * @return The result of the command.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui) {
+    public CommandResult execute(TaskList taskList) {
         taskList.addTask(toAdd);
-        ui.show(String.format("%s\t\t%s\n\t %s", MESSAGE_ADD_TASK, toAdd.toString(), taskList.tasksRemaining()));
+        String response = String.format("%s\t\t%s\n\t %s", MESSAGE_ADD_TASK, toAdd.toString(),
+            taskList.tasksRemaining());
+        return new CommandResult(response, false);
     }
 
 }

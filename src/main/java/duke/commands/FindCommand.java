@@ -7,7 +7,6 @@ import java.util.ArrayList;
 
 import duke.tasklist.TaskList;
 import duke.tasks.Task;
-import duke.ui.Ui;
 
 /** Represents the command that displays all tasks that match the user's search word
  * when executed.
@@ -24,13 +23,13 @@ public class FindCommand extends Command {
         this.searchWord = searchWord;
     }
 
-    /** Displays all tasks whose description contains the user's search word.
+    /** Return CommandResult containing all tasks whose description contains the user's search word.
      *
      * @param taskList The taskList involved.
-     * @param ui The ui involved to show messages to the user.
+     * @return The result of the command.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui) {
+    public CommandResult execute(TaskList taskList) {
         ArrayList<Task> matchedTasks = new ArrayList<>();
         ArrayList<Task> allTasks = taskList.getTasks();
         for (Task task : allTasks) {
@@ -38,11 +37,12 @@ public class FindCommand extends Command {
                 matchedTasks.add(task);
             }
         }
+        String response;
         if (matchedTasks.size() == 0) {
-            ui.show(MESSAGE_FIND_NO_MATCH);
+            response = MESSAGE_FIND_NO_MATCH;
         } else {
-            String message = MESSAGE_FIND;
-            ui.show(ListCommand.tasksToString(matchedTasks, message));
+            response = ListCommand.tasksToString(matchedTasks, MESSAGE_FIND);
         }
+        return new CommandResult(response, false);
     }
 }

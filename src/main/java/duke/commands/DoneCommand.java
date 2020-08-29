@@ -5,7 +5,6 @@ import static duke.utils.Messages.MESSAGE_DONE_TASK;
 import duke.exceptions.NoSuchTaskException;
 import duke.tasklist.TaskList;
 import duke.tasks.Task;
-import duke.ui.Ui;
 
 /** Represents the command that marks a task as done when executed. */
 public class DoneCommand extends Command {
@@ -21,15 +20,16 @@ public class DoneCommand extends Command {
     }
 
     /** Marks the task, as specified by the taskIndex in the constructor, as done and
-     * displays the task with a relevant message to the user.
+     * returns a relevant message to the user.
      *
      * @param taskList The taskList involved.
-     * @param ui The ui involved to show messages to the user.
+     * @return The result of the command.
      * @throws NoSuchTaskException If the taskIndex is out of bounds.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui) throws NoSuchTaskException {
+    public CommandResult execute(TaskList taskList) throws NoSuchTaskException {
         Task taskDone = taskList.markTaskAsDone(taskIndex);
-        ui.show(String.format("%s\t\t%s", MESSAGE_DONE_TASK, taskDone.toString()));
+        String response = String.format("%s\t\t%s", MESSAGE_DONE_TASK, taskDone.toString());
+        return new CommandResult(response, false);
     }
 }
