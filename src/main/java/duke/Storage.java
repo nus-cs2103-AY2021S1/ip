@@ -43,8 +43,8 @@ public class Storage {
             }
             this.serialisedTasks = Files.readAllLines(filePath);
         } catch (IOException e) {
-            // TODO: add better error handling
             System.out.println("Something went wrong when loading tasks from the storage!");
+            e.printStackTrace();
         }
     }
 
