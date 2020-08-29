@@ -3,6 +3,7 @@ package main.java;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -10,7 +11,8 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 public class JUnitTesting {
     TaskStore store = new TaskStore();
-    TaskList list = new TaskList(store);
+    ArrayList<Task> listOfTask = store.retrieveStorage();
+    TaskList list = new TaskList(listOfTask, store);
 
     @Test
     public void addTaskToList_success() {
