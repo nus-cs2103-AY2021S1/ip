@@ -43,7 +43,7 @@ public class Parser {
             EmptyTaskDoneException, EmptyTaskDeletedException,
             EmptyDueDateException, EmptyEventDateException, EmptySearchWordException {
 
-        String[] arr = userInput.strip().split(" ", 2);
+        String[] arr = userInput.strip().split("\\s+", 2);
         switch (arr[0].strip().toLowerCase()) {
         case "bye":
             return parseBye();
@@ -140,8 +140,8 @@ public class Parser {
         }
     }
 
-    private static FindCommand parseFind(String searchWord) {
-        return new FindCommand(searchWord);
+    private static FindCommand parseFind(String searchWords) {
+        return new FindCommand(searchWords.split("\\s+"));
     }
 
     private static ListCommand parseList() {

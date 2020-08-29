@@ -8,22 +8,22 @@ import java.util.ArrayList;
 import duke.tasklist.TaskList;
 import duke.tasks.Task;
 
-/** Represents the command that displays all tasks that match the user's search word
+/** Represents the command that displays all tasks that match the user's search words
  * when executed.
  */
 public class FindCommand extends Command {
 
-    private String searchWord;
+    private String[] searchWords;
 
-    /** Constructs a FindCommand with the specified search word.
+    /** Constructs a FindCommand with the specified search words.
      *
-     * @param searchWord The search word that the user input.
+     * @param searchWords The search words that the user input.
      */
-    public FindCommand(String searchWord) {
-        this.searchWord = searchWord;
+    public FindCommand(String ... searchWords) {
+        this.searchWords = searchWords;
     }
 
-    /** Return CommandResult containing all tasks whose description contains the user's search word.
+    /** Return CommandResult containing all tasks whose description contains the user's search words.
      *
      * @param taskList The taskList involved.
      * @return The result of the command.
@@ -33,7 +33,7 @@ public class FindCommand extends Command {
         ArrayList<Task> matchedTasks = new ArrayList<>();
         ArrayList<Task> allTasks = taskList.getTasks();
         for (Task task : allTasks) {
-            if (task.getDescription().contains(searchWord)) {
+            if (matchesAllWords(task)) {
                 matchedTasks.add(task);
             }
         }
@@ -44,5 +44,14 @@ public class FindCommand extends Command {
             response = ListCommand.tasksToString(matchedTasks, MESSAGE_FIND);
         }
         return new CommandResult(response, false);
+    }
+
+    private boolean matchesAllWords(Task task) {
+        for (String word : searchWords) {
+            if (!(task.getDescription().contains(word))) {
+                return false;
+            }
+        }
+        return true;
     }
 }

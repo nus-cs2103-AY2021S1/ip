@@ -22,12 +22,14 @@ public class FindCommandTest {
 
     @Test
     public void execute_hasMatch_showMatchedTasks() {
-        FindCommand command = new FindCommand("word");
+        FindCommand command = new FindCommand("some", "words");
         TaskList taskList = new TaskList();
-        Todo matched = new Todo("has word");
+        Todo matched = new Todo("some task that has these words");
+        Todo halfMatched = new Todo("has words");
         Todo unmatched = new Todo("no");
         taskList.addTask(matched);
         taskList.addTask(unmatched);
+        taskList.addTask(halfMatched);
         CommandResult actual = command.execute(taskList);
         String response = MESSAGE_FIND + "\t 1." + matched.toString();
         CommandResult expected = new CommandResult(response, false);
