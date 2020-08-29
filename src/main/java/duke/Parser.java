@@ -1,3 +1,8 @@
+package duke;
+
+import duke.command.*;
+import duke.task.*;
+
 import java.time.format.DateTimeParseException;
 
 public class Parser { // deals with making sense of the user command

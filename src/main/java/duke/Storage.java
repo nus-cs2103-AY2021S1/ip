@@ -1,3 +1,7 @@
+package duke;
+
+import duke.task.*;
+
 import java.util.Scanner;
 import java.io.File;
 import java.io.FileWriter;
@@ -49,7 +53,7 @@ public class Storage {
         try {
             FileWriter fw = new FileWriter(file);
             for (Task task : tasks) {
-                int isFinished = task.isDone ? 1 : 0;
+                int isFinished = task.getIsDone() ? 1 : 0;
                 fw.write(task.save(isFinished) + "\n"); // write the task onto txt file with the | format
             }
             fw.close();

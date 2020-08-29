@@ -1,3 +1,7 @@
+package duke.command;
+
+import duke.*;
+
 public class ExitCommand extends Command {
 
     public ExitCommand() {
