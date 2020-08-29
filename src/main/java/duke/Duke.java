@@ -1,6 +1,8 @@
 package duke;
 
 import java.io.IOException;
+import duke.task.TaskList;
+import duke.task.TaskType;
 
 /**
  * Encapsulates the main entry point of the duke program.

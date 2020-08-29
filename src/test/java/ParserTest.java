@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import duke.Command;
 import duke.Parser;
-import duke.TaskType;
+import duke.task.TaskType;
 
 /**
  * A test class wrapping around the test methods for the class Parser.

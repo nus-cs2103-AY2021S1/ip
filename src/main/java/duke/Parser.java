@@ -1,6 +1,7 @@
 package duke;
 
 import java.time.LocalDate;
+import duke.task.TaskType;
 
 /**
  * Encapsulates the parsing method of the Duke program.

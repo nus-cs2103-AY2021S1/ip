@@ -1,4 +1,4 @@
-package duke;
+package duke.task;
 
 /**
  * Represents a Todo, a type of Task, in the Duke program.

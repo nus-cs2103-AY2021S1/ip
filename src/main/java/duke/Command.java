@@ -2,6 +2,12 @@ package duke;
 
 import java.time.LocalDate;
 import java.util.Objects;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.TaskType;
+import duke.task.Todo;
 
 /**
  * Encapsulates a single command for the Duke program.

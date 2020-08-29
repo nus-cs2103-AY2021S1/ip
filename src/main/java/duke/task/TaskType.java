@@ -1,4 +1,4 @@
-package duke;
+package duke.task;
 
 /**
  * Represents a specific task type of the Duke program.
