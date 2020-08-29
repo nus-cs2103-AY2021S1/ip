@@ -1,16 +1,29 @@
-import java.time.LocalDate;
+package duke;
+
+import duke.Task;
+import duke.TaskType;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.format.FormatStyle;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Optional;
 import java.util.Scanner;
 
 public class Duke {
+    private static String TASKS_PATHNAME = "data/tasks.txt";
+
     public static void main(String[] args) {
         greet();
-        run();
+        try {
+            run();
+        } catch(IOException e) {
+            System.err.println(e);
+        }
     }
 
     public static void greet() {
@@ -26,50 +39,76 @@ public class Duke {
         System.out.println(logo);
     }
 
-    public static void run() {
-        Scanner sc = new Scanner(System.in);
+    public static void run() throws IOException, SecurityException {
+        File tasks = new File(TASKS_PATHNAME);
+        if(tasks.getParentFile() != null){
+            tasks.getParentFile().mkdirs();
+        }
+        tasks.createNewFile();
+
+        Scanner sc = new Scanner(tasks);
+        ArrayList<Task> list = new ArrayList<>();
+        String task, taskString;
+        TaskType taskType;
+        boolean isDone;
+        LocalDateTime dateTime;
+        while(sc.hasNext()) {
+                task = sc.nextLine();
+                if(task.charAt(1) == 'T') {
+                    taskType = TaskType.TODO;
+                }
+                else if(task.charAt(1) == 'D') {
+                    taskType = TaskType.DEADLINE;
+                }
+                else {
+                    taskType = TaskType.EVENT;
+                }
+
+                if(task.charAt(4) == '✓') {
+                    isDone = true;
+                }
+                else {
+                    isDone = false;
+                }
+                taskString = task.substring(6);
+                if(taskType == TaskType.DEADLINE){
+                    int index = task.indexOf("(by:");
+                    dateTime = LocalDateTime.parse(task.substring(index + 4, task.length()-1), DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM, FormatStyle.SHORT));
+                    list.add(new Task(taskType, isDone, taskString, Optional.of(dateTime)));
+                }
+                else {
+                    list.add(new Task(taskType, isDone, taskString));
+                }
+        }
+
+        sc = new Scanner(System.in);
         boolean isRunning = true;
         String input;
-        String[] strings;
-        ArrayList<Task> list = new ArrayList<>();
-        Task task;
-        int num, index;
-        while (isRunning) {
+        while(isRunning) {
             input = sc.nextLine();
-
-            if (input.equals("list")) {
-                printLine()
+            printLine();
+            if(input.equals("list")){
                 list(list);
-                printLine()
             } else if (input.equals("bye")) {
-                printLine()
                 isRunning = bye();
-                printLine()
             } else if (getWord(input).equals("done")) {
-                printLine()
                 done(input, list);
-                printLine()
             } else if (getWord(input).equals("todo")) {
-                printLine()
                 todo(input, list);
-                printLine()
             } else if (getWord(input).equals("deadline")) {
-                printLine();
                 deadline(input, list);
-                printLine();
             } else if (getWord(input).equals("event")) {
-                printLine()
                 event(input, list);
-                printLine()
             } else if (getWord(input).equals("delete")) {
-                printLine()
                 delete(input, list);
-                printLine()
-            } else {
-                printLine()
-                error();
-                printLine()
             }
+            else if(getWord(input).equals("save")){
+                save(list);
+            }
+            else{
+                error();
+            }
+            printLine();
         }
     }
 
@@ -143,7 +182,6 @@ public class Duke {
             stringBuilder.append(input.substring(0, index))
                     .append("(by: ")
                     .append(localDateTime.format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM, FormatStyle.SHORT)))
-                    .append(input.substring(index + 18))
                     .append(")");
             input = stringBuilder.toString();
             Task task = new Task(TaskType.DEADLINE, false, input, Optional.of(localDateTime));
@@ -153,7 +191,6 @@ public class Duke {
             System.out.println("Now you have " + list.size() + " tasks in the list.");
         } catch(DateTimeParseException e) {
             System.out.println("☹ OOPS!!! The description of a deadline must have a valid date and time. (Format: /by dd/mm/yyyy tttt e.g 2/12/2019 1800");
-
         }
     }
     public static void event(String input, ArrayList<Task> list){
@@ -248,65 +285,16 @@ public class Duke {
         System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
     }
 
-}
-class Task{
-    TaskType taskType;
-    boolean isDone;
-    String string;
-    Optional<LocalDateTime> dateTime;
+    public static void save(ArrayList<Task> list) throws IOException {
+        FileWriter fileWriter = new FileWriter(TASKS_PATHNAME);
+        Task task;
 
-    public Task(TaskType taskType, boolean isDone, String string, Optional<LocalDateTime> date){
-        this.taskType = taskType;
-        this.isDone = isDone;
-        this.string = string;
-        this.dateTime = dateTime;
-    }
-    public Task(TaskType taskType, boolean isDone, String string){
-        this.taskType = taskType;
-        this.isDone = isDone;
-        this.string = string;
-        this.dateTime = Optional.empty();
-    }
-
-    public String getString() {
-        return string;
-    }
-    public String getDoneString(){
-        String string;
-        if(isDone){
-            string = "[✓]";
+        for (int listIndex = 0; listIndex < list.size(); listIndex++) {
+            task = list.get(listIndex);
+            fileWriter.write(task.getTypeString() + task.getDoneString() + task.getString() + System.lineSeparator());
         }
-        else{
-            string = "[✗]";
-        }
-        return string;
-    }
+        fileWriter.close();
 
-    public Task done(){
-        return new Task(taskType, true, string);
+        System.out.println("Tasks have been saved! ");
     }
-
-    public String getTypeString(){
-        String string;
-        if(taskType.equals(TaskType.TODO)){
-            string = "[T]";
-        }
-        else if(taskType.equals(TaskType.DEADLINE)){
-            string = "[D]";
-        }
-        else{
-            string = "[E]";
-        }
-        return string;
-    }
-
-    public String toString(){
-        return string;
-    }
-}
-
-enum TaskType{
-    TODO,
-    DEADLINE,
-    EVENT;
 }
