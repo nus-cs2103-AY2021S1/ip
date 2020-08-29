@@ -8,8 +8,8 @@ public class Parser {
         } else if (command.equals("list")) {
             return new ListCommand();
         } else if (command.matches("^done\\s+\\d+$")) {
-            int taskId = Integer.parseInt(command.split("\\s+")[1]);
-            return new CompleteCommand(taskId);
+            int number = Integer.parseInt(command.split("\\s+")[1]);
+            return new CompleteCommand(number);
         } else if (command.equals("todo") || command.startsWith("todo ")) {
             if (command.length() <= 5 || command.substring(5).trim().isEmpty()) {
                 throw new DukeException("Please enter the description of your todo");
