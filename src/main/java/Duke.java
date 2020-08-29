@@ -13,7 +13,6 @@ public class Duke {
 
     public interface Printable{
         String print();
-
     }
 
     public static void main(String[] args) throws IOException {
