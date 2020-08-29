@@ -1,15 +1,15 @@
 package seedu.duke;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.time.LocalDate;
 import java.util.stream.Collectors;
 
 /**
  * Represents a list of tasks, and provide methods for user to modify this list of tasks.
  */
 public class TaskList {
-    List<Task> listOfTasks;
+    private List<Task> listOfTasks;
 
     /**
      * Initializes an empty list of tasks.

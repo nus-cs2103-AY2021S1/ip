@@ -1,11 +1,12 @@
 package seedu.duke;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
 import java.io.File;
 import java.io.IOException;
 import java.io.FileWriter;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
 
 /**
  * Handles the loading of task list data from the disk and the saving of task list data to the disk.
@@ -78,10 +79,12 @@ public class Storage {
                             Storage.TODO_FORMAT, convertIsDoneToFormat(task.getIsDone()), task.getDescription()));
                 } else if (task instanceof Event) {
                     fileWriter.write(String.join(Storage.SEPARATOR,
-                            Storage.EVENT_FORMAT, convertIsDoneToFormat(task.getIsDone()), task.getDescription(), ((Event) task).getAt()));
+                            Storage.EVENT_FORMAT, convertIsDoneToFormat(task.getIsDone()), task.getDescription(),
+                            ((Event) task).getAt()));
                 } else if (task instanceof Deadline) {
                     fileWriter.write(String.join(Storage.SEPARATOR,
-                            Storage.DEADLINE_FORMAT, convertIsDoneToFormat(task.getIsDone()), task.getDescription(), ((Deadline) task).getBy()));
+                            Storage.DEADLINE_FORMAT, convertIsDoneToFormat(task.getIsDone()), task.getDescription(),
+                            ((Deadline) task).getBy()));
                 } else {
                     throw new DukeException("Sorry, there is an error saving the task list here.");
                 }
