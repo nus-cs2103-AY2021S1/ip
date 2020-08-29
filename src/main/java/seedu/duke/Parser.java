@@ -71,10 +71,39 @@ public class Parser {
         }
     }
 
+    public String readInput(String input) {
+        try {
+            this.checkForInvalidInput(input);
+            if (input.equals("list")) {
+                return this.showTaskListToString();
+            } else if (input.contains("done")) {
+                return taskLists.completeTaskToString(input);
+            } else if (input.contains("delete")) {
+                return taskLists.deleteTaskToString(input);
+            } else if (input.contains("todo")) {
+                return taskLists.addToDoToString(input);
+            } else if (input.contains("deadline")) {
+                return taskLists.addDeadlineToString(input);
+            } else if (input.contains("event")) {
+                return taskLists.addEventToString(input);
+            } else if (input.contains("find")){
+                return taskLists.findToString(input);
+            } else {
+                return "Not valid input!";
+            }
+        } catch (DukeException e) {
+            return e.getMessage();
+        }
+    }
+
     /**
      * Print out list of Tasks.
      */
     public void showTaskList() {
         Ui.print(taskLists.toString());
+    }
+
+    public String showTaskListToString() {
+        return taskLists.toString();
     }
 }

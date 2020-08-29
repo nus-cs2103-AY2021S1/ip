@@ -50,6 +50,15 @@ public class Ui {
         }
     }
 
+    public String getUserInput(String input) {
+        if (input.equals("bye")) {
+            return Ui.endDuke();
+        } else {
+            String output = parse.readInput(input);
+            return output;
+        }
+    }
+
     /**
      * Gets status of Ui.
      *
@@ -84,5 +93,11 @@ public class Ui {
         Ui.printLines();
         System.out.println("    Bye! Hope to see you again soon." + "\n");
         Ui.printLines();
+    }
+
+    public static String endDuke() {
+        String goodBye = "Bye! Hope to see you again soon." + "\n";
+        String exit = goodBye;
+        return exit;
     }
 }

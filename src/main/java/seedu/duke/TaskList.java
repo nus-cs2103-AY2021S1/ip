@@ -58,6 +58,28 @@ public class TaskList {
         }
     }
 
+    public String completeTaskToString(String userInput) {
+        try {
+            String[] splitUserInput = userInput.split(" ");
+            int index = Integer.parseInt(splitUserInput[1]);
+            if (index < 1 || index > taskLists.size()) {
+                return ("Index out of range! Try Again.\n");
+            } else {
+                if (taskLists.get(index - 1).getIsDone()) {
+                    return ("This task has already been completed!");
+                } else {
+                    taskLists.get(index - 1).markAsDone();
+                    Storage.completeTask(index - 1, taskLists.size());
+                    String info = "  Nice! I have marked this task as done:\n";
+                    info += taskLists.get(index - 1).toString() + "\n";
+                    return info;
+                }
+            }
+        } catch (StringIndexOutOfBoundsException e) {
+            return("Index out of range! Try again.\n");
+        }
+    }
+
     /**
      * Task to be deleted from tasklist.
      *
@@ -75,6 +97,21 @@ public class TaskList {
             Storage.deleteTask(index - 1, taskLists.size());
             info += "Now you have " + taskLists.size() + " tasks in the list" + "\n";
             Ui.print(info);
+        }
+    }
+
+    public String deleteTaskToString(String userInput) {
+        String[] splitUserInput = userInput.split(" ");
+        int index = Integer.parseInt(splitUserInput[1]);
+        if (index < 1 || index > taskLists.size()) {
+            return ("Index out of range! Try Again.\n");
+        } else {
+            String info = "Noted. I have removed this task:\n";
+            info += "  " + taskLists.get(index - 1).toString() + "\n";
+            taskLists.remove(index - 1);
+            Storage.deleteTask(index - 1, taskLists.size());
+            info += "Now you have " + taskLists.size() + " tasks in the list" + "\n";
+            return info;
         }
     }
 
@@ -101,6 +138,24 @@ public class TaskList {
         }
     }
 
+    public String addToDoToString(String userInput) {
+        try {
+            this.checkForItem(userInput.substring(4), "todo");
+            String task = userInput.substring(5);
+            String info = ("Got it. I have added this task:\n");
+            Todo tempTodo = new Todo(task);
+            Storage.addTask(tempTodo.getStorageString("T"));
+            info += "  " + tempTodo.toString() + "\n";
+            this.taskLists.add(tempTodo);
+            info += "Now you have " + taskLists.size() + " tasks in the list\n";
+            return info;
+        } catch (DukeException err) {
+            return err.getMessage();
+        } catch (IOException e) {
+            return e.getMessage();
+        }
+    }
+
     /**
      * Deadline to be added to tasklist.
      *
@@ -124,6 +179,27 @@ public class TaskList {
             System.out.println(err.getMessage());
         } catch (IOException e) {
             System.out.println(e.getMessage());
+        }
+    }
+
+    public String addDeadlineToString(String userInput) {
+        try {
+            checkForItem(userInput.substring(8), "deadline");
+            int dateIndex = userInput.indexOf("/");
+            String task = userInput.substring(9, dateIndex);
+            String time = userInput.substring(dateIndex + 1);
+            String info = "Got it. I have added this task:\n";
+            Deadline tempDeadline = new Deadline(task, time);
+            String formatDate = tempDeadline.getFormattedDate();
+            info += "  " + tempDeadline.toString() + "\n";
+            taskLists.add(tempDeadline);
+            Storage.addTask(tempDeadline.getStorageString("D", formatDate));
+            info += "Now you have " + taskLists.size() + " tasks in the list\n";
+            return info;
+        } catch (DukeException err) {
+           return err.getMessage();
+        } catch (IOException e) {
+            return e.getMessage();
         }
     }
 
@@ -156,8 +232,29 @@ public class TaskList {
     /**
      * Finds tasks that contain the keyword in the string input.
      *
-     * @param input Keyword that is used to find related tasks.
+     * @param userInput Keyword that is used to find related tasks.
      */
+    public String addEventToString(String userInput) {
+        try {
+            checkForItem(userInput.substring(5), "event");
+            int dateIndex = userInput.indexOf("/");
+            String task = userInput.substring(6, dateIndex);
+            String time = userInput.substring(dateIndex + 1);
+            String info = "Got it. I have added this task:\n";
+            Event tempEvent = new Event(task, time);
+            String formatDate = tempEvent.getFormattedDate();
+            info += "  " + tempEvent.toString() + "\n";
+            Storage.addTask(tempEvent.getStorageString("E", formatDate));
+            taskLists.add(tempEvent);
+            info += "Now you have " + taskLists.size() + " tasks in the list\n";
+            return info;
+        } catch (DukeException err) {
+            return err.getMessage();
+        } catch (IOException e) {
+            return e.getMessage();
+        }
+    }
+
     public void find(String input) {
         try {
             checkForItem(input.substring(5), "find");
@@ -182,6 +279,32 @@ public class TaskList {
             System.out.println(err.getMessage());
         }
     }
+
+    public String findToString(String input) {
+        try {
+            checkForItem(input.substring(5), "find");
+            String keyword = input.substring(5);
+            ArrayList<Task> keywordInTasks = new ArrayList<>();
+            for (int i = 0; i < this.taskLists.size(); i++) {
+                Task current = this.taskLists.get(i);
+                if (current.toString().contains(keyword)) {
+                    keywordInTasks.add(current);
+                }
+            }
+            if (keywordInTasks.size() == 0) {
+                return "There are no tasks related to this keyword!";
+            } else {
+                String info = "Here are the matching tasks in your list: \n";
+                for (int i = 0; i < keywordInTasks.size(); i++) {
+                    info += keywordInTasks.get(i).toString() + "\n";
+                }
+                return info;
+            }
+        } catch (DukeException err) {
+          return err.getMessage();
+        }
+    }
+
 
     /**
      * Iterates through the arraylist of tasks and print it out.

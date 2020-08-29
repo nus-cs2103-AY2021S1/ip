@@ -12,23 +12,20 @@ import java.util.ArrayList;
  * Class that store, read and write data to local txt file.
  */
 public class Storage {
-    private static final String DIRECTORY_PATH = "data";
-    private static final String STORAGE_PATH = "data/duke.txt";
-    private String filepath;
+    private final static String DIRECTORY_PATH = "data";
+    private final static String STORAGE_PATH = "data/duke.txt";
 
     /**
      * Initializes an instance of Storage class.
      * Creates new folder and file if directory did not exist.
      *
-     * @param filePath Directory of file.
      * @throws IOException If invalid path name given.
      */
-    public Storage(String filePath) throws IOException {
+    public Storage() throws IOException {
         File folderDirectory = new File(DIRECTORY_PATH);
         if (!folderDirectory.exists()) {
             folderDirectory.mkdir();
         }
-        this.filepath = filePath;
         File txt = new File(STORAGE_PATH);
         if (!txt.exists()) {
             txt.createNewFile();
