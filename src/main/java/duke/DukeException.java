@@ -1,7 +1,8 @@
 package duke;
 
 /**
- * Represents the custom duke exception. This exception is thrown when specific errors relating to the application occurs.
+ * Represents the custom duke exception. This exception is thrown when specific errors relating to the application
+ * occurs.
  */
 public class DukeException extends Exception {
     /**

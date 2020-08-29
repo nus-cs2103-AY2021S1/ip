@@ -10,7 +10,7 @@ public class ToDoTask extends Task {
      * @param description Description of the task.
      * @param isDone      State of whether the task is done.
      */
-    public ToDoTask(String description, boolean isDone) { 
+    public ToDoTask(String description, boolean isDone) {
         super(description, isDone);
     }
 
@@ -20,7 +20,7 @@ public class ToDoTask extends Task {
      * @return A string representation of the to-do task.
      */
     @Override
-    public String toString() { 
+    public String toString() {
         return "[T]" + super.toString();
     }
 }

@@ -1,5 +1,7 @@
 package command;
 
+import java.io.IOException;
+
 import task.DeadlineTask;
 import task.EventTask;
 import task.Task;
@@ -8,7 +10,7 @@ import util.Storage;
 import util.TaskList;
 import util.Ui;
 
-import java.io.IOException;
+
 
 /**
  * Represents the add command. The add command adds either a to-do, deadline or event task to the task list.
@@ -55,7 +57,8 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Executes the add command. The execution involves adding the task to the task list, writing to the storage as well as printing the relevant UI.
+     * Executes the add command. The execution involves adding the task to the task list,
+     * writing to the storage as well as printing the relevant UI.
      *
      * @param lst     List containing the current tasks.
      * @param ui      Ui allows execute to carry out ui methods to print to the console.
@@ -83,6 +86,8 @@ public class AddCommand extends Command {
                 lst.add(task);
                 storage.addLine("DEADLINE | 0 | " + taskDesc + "| " + taskDate);
                 ui.showAddTask(task, taskNum);
+                break;
+            default:
                 break;
             }
         } catch (IOException e) {

@@ -1,11 +1,12 @@
 package command;
 
+import java.util.List;
+
 import task.Task;
 import util.Storage;
 import util.TaskList;
 import util.Ui;
 
-import java.util.List;
 
 /**
  * Represents the find command. The find command searches for tasks based on the query and lists them.

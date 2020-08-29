@@ -1,5 +1,8 @@
 package duke;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 import command.Command;
 import command.ExitCommand;
 import util.Parser;
@@ -7,8 +10,7 @@ import util.Storage;
 import util.TaskList;
 import util.Ui;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
+
 
 /**
  * Represents the Duke class. The Duke class serves as the main entry point into the chatbot application.
@@ -49,14 +51,16 @@ public class Duke {
         } catch (FileNotFoundException e) {
             tasks = new TaskList();
             parser = new Parser(tasks);
-            System.out.println("----- You have no tasks saved as of yet. Feel free to add tasks and I will track them for you");
+            System.out.println("----- You have no tasks saved as of yet. Feel free to add tasks and I will track"
+                    + " them for you");
         } catch (IOException e) {
             System.out.println("----- Something went wrong, please try again later");
         }
     }
 
     /**
-     * The main method for the chat bot application. Reads in a file path to create a Duke instance and run the application.
+     * The main method for the chat bot application. Reads in a file path to create a Duke instance and run
+     * the application.
      *
      * @param args 1 argument, filePath which is the path and name of the file to be created and loaded from.
      */
@@ -65,7 +69,8 @@ public class Duke {
     }
 
     /**
-     * The main chat bot application logic. Repeatedly reads in user commands and executes the commands until the user exits the application.
+     * The main chat bot application logic. Repeatedly reads in user commands and executes the commands until the
+     * user exits the application.
      */
     public void run() {
         ui.showWelcome();
