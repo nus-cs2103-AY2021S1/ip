@@ -43,11 +43,7 @@
 <!--    </module>-->
 
     <!-- Required to allow exceptions in code style -->
-    <module name="SuppressionCommentFilter">
-      <property name="offCommentFormat" value="CHECKSTYLE.OFF\: ([\w\|]+)"/>
-      <property name="onCommentFormat" value="CHECKSTYLE.ON\: ([\w\|]+)"/>
-      <property name="checkFormat" value="$1"/>
-    </module>
+    <module name="SuppressionCommentFilter"/>
 
     <!--
     IMPORT CHECKS
