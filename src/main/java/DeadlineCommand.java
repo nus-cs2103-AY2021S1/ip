@@ -25,8 +25,8 @@ public class DeadlineCommand extends Command {
 
         // teach the user the format for the deadline
         if (splittedDeadline.length == 1) {
-            ui.throwDukeException(new DukeException("Format of deadline recording: deadline keyword" +
-                ", deadline instructions, forward slash, by keyword with a colon, specific date/time)"
+            ui.throwDukeException(new DukeException("Format of deadline recording: deadline keyword"
+                + ", deadline instructions, forward slash, by keyword with a colon, specific date/time)"
                     + "\n e.g. deadline return book /by Sunday"));
         } else {
             String details = splittedDeadline[0].trim();

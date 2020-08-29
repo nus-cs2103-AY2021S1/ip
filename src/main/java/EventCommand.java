@@ -25,8 +25,8 @@ public class EventCommand extends Command {
 
         // teach the user the format for the deadline
         if (splittedEvent.length == 1) {
-            ui.throwDukeException(new DukeException("Format of event recording: event keyword" +
-                ", event instructions, forward slash, at keyword with a colon, start/end time)"
+            ui.throwDukeException(new DukeException("Format of event recording: event keyword"
+                + ", event instructions, forward slash, at keyword with a colon, start/end time)"
                     + "\n e.g. project meeting /at Mon 2-4pm"));
         } else {
             String details = splittedEvent[0].trim();

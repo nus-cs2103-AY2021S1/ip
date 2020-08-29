@@ -33,8 +33,8 @@ public class Ui {
      * Greets the user with an opening message.
      */
     public void greet() {
-        format("Hello! I'm\n" + logo + "\n" +
-                "What can I do for you?");
+        format("Hello! I'm\n" + logo + "\n"
+                + "What can I do for you?");
     }
 
     /**
@@ -51,7 +51,7 @@ public class Ui {
      * @param size current number of tasks in tasklist.
      */
     public void addTask(Task task, int size) {
-        format("Got it. I've added this task:\n" + task +  "\n"
+        format("Got it. I've added this task:\n" + task + "\n"
             + "Now you have " + size + " tasks in the list.");
     }
 

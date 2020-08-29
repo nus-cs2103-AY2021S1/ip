@@ -46,7 +46,9 @@ public class Parser {
         case UNIDENTIFIED:
             // if a bad command is thrown at Duke
             throw new DukeException("Please enter a command I understand!");
+        default:
+            // should not exist
+            throw new DukeException("Invalid!");
         }
-        return null;
     }
 }

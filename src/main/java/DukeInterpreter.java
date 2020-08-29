@@ -28,8 +28,8 @@ public class DukeInterpreter {
     }
 
     private static String encodeHelper(char type, char symbol, String details, String extra) {
-        return type + " | " + symbol + " | " + details +
-                (extra.equals("") ? "" : " | " + extra);
+        return type + " | " + symbol + " | " + details
+                + (extra.equals("") ? "" : " | " + extra);
     }
 
     /**
@@ -58,8 +58,9 @@ public class DukeInterpreter {
             return decodeDeadline(details, isCompleted, extra);
         case 'E':
             return decodeEvent(details, isCompleted, extra);
+        default:
+            return null;
         }
-        return null;
     }
 
     private static ToDo decodeToDo(String details, boolean isCompleted) {

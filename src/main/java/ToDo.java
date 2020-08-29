@@ -1,7 +1,7 @@
 /**
  * Represents a todo task to be completed.
  */
-public class ToDo extends Task{
+public class ToDo extends Task {
     /**
      * Constructor for the todo task.
      * @param details todo details.
