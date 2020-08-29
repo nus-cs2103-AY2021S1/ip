@@ -15,9 +15,6 @@ public class ListCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList, Storage storage) {
-        String responseString = "";
-        responseString.concat("Here are the tasks in your list:\n");
-        responseString.concat(taskList.showAllItems());
-        return responseString;
+        return taskList.toString();
     }
 }

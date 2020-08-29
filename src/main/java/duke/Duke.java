@@ -49,4 +49,8 @@ public class Duke {
             return (e.getMessage());
         }
     }
+
+    public String greet() {
+        return "Hello! I am Duke, your personal assistant, how can I help you today?";
+    }
 }

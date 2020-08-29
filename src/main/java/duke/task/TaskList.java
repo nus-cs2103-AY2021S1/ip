@@ -45,20 +45,6 @@ public class TaskList {
     }
 
     /**
-     * Enumerates all the Tasks currently in the TaskList and prints it out to the user.
-     *
-     * @return string representation of all the items in the TaskList
-     */
-    public String showAllItems() {
-        ArrayList<Task> currList = this.taskList;
-        String allItemsString = "";
-        currList.forEach(item ->
-                allItemsString.concat((currList.indexOf(item) + 1) + "." + item + "\n"));
-
-        return allItemsString;
-    }
-
-    /**
      * The number of Tasks in the TaskList.
      *
      * @return an <code>Integer</code> representing the number of Tasks in the TaskList.
@@ -93,6 +79,22 @@ public class TaskList {
             }
         });
 
-        return filteredTasks.showAllItems();
+        return filteredTasks.toString();
+    }
+
+    /**
+     * Returns a string representation of the Tasks in the list.
+     *
+     * @return a string of all the tasks in the list.
+     */
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder("Here are all the items in your list:\n");
+
+        for (int i = 0; i < this.taskList.size(); i++) {
+            builder.append(String.format("%d. %s\n", i + 1, taskList.get(i)));
+        }
+
+        return builder.toString().trim();
     }
 }
