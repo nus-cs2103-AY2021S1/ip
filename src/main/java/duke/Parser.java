@@ -1,37 +1,36 @@
 package duke;
 
-import duke.command.Command;
-import duke.command.CommandInstruction;
-import duke.command.AddCommand;
-import duke.command.DeleteCommand;
-import duke.command.DoneCommand;
-import duke.command.ExitCommand;
-import duke.command.ListCommand;
-import duke.command.ViewCommand;
-import duke.command.FindCommand;
-
-
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Todo;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-
 import java.util.Arrays;
 import java.util.List;
+
+import duke.command.AddCommand;
+import duke.command.Command;
+import duke.command.CommandInstruction;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.ExitCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
+import duke.command.ViewCommand;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Todo;
 
 /**
  * Deals with making sense of the user command.
  */
 public class Parser {
-    
-    /** List of all the valid date inputs. */
+    /**
+     * List of all the valid date inputs.
+     */
     private static final List<String> formatStrings = Arrays.asList("d/M/y", "y-M-d");
 
     /**
      * Parses the input command from the user into a command that the Chatbot can understand.
+     *
      * @param fullCommand The command from the user.
      * @return The command that can be interpreted from the user.
      * @throws DukeException If there was some problems with understanding the user's commands.
@@ -81,6 +80,7 @@ public class Parser {
 
     /**
      * Parses input dates in the correct format into the local date format.
+     *
      * @param string The date to be parsed.
      * @return Local date format of the input date.
      * @throws DateTimeParseException If the input date is not of an acceptable format.

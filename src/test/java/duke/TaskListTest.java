@@ -1,17 +1,19 @@
 package duke;
 
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Todo;
-import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.time.LocalDate;
 
+import org.junit.jupiter.api.Test;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Todo;
+
 public class TaskListTest {
-    Todo todo = new Todo("Get bread");
-    Deadline deadline = new Deadline("Finish project", LocalDate.parse("2012-01-23"));
-    Event event = new Event("Birthday", LocalDate.parse("2020-05-30"));
+    private Todo todo = new Todo("Get bread");
+    private Deadline deadline = new Deadline("Finish project", LocalDate.parse("2012-01-23"));
+    private Event event = new Event("Birthday", LocalDate.parse("2020-05-30"));
 
     @Test
     public void addTask_addSomeTasks_taskListWithAllTasks() {
@@ -19,9 +21,9 @@ public class TaskListTest {
         taskList.addTask(todo);
         taskList.addTask(deadline);
         taskList.addTask(event);
-        assertEquals("\n\t1.[T]✘ Get bread\n" +
-                "\t2.[D]✘ Finish project (by: Jan 23 2012)\n" +
-                "\t3.[E]✘ Birthday (at: May 30 2020)", taskList.toString());
+        assertEquals("\n\t1.[T]✘ Get bread\n"
+                + "\t2.[D]✘ Finish project (by: Jan 23 2012)\n"
+                + "\t3.[E]✘ Birthday (at: May 30 2020)", taskList.toString());
     }
 
     @Test
@@ -31,8 +33,8 @@ public class TaskListTest {
         taskList.addTask(deadline);
         taskList.addTask(event);
         taskList.deleteTask(2);
-        assertEquals("\n\t1.[T]✘ Get bread\n" +
-                "\t2.[E]✘ Birthday (at: May 30 2020)", taskList.toString());
+        assertEquals("\n\t1.[T]✘ Get bread\n"
+                + "\t2.[E]✘ Birthday (at: May 30 2020)", taskList.toString());
     }
 
     @Test
@@ -42,9 +44,9 @@ public class TaskListTest {
         taskList.addTask(deadline);
         taskList.addTask(event);
         taskList.markTaskAsDone(3);
-        assertEquals("\n\t1.[T]✘ Get bread\n" +
-                "\t2.[D]✘ Finish project (by: Jan 23 2012)\n" +
-                "\t3.[E]✓ Birthday (at: May 30 2020)", taskList.toString());
+        assertEquals("\n\t1.[T]✘ Get bread\n"
+                + "\t2.[D]✘ Finish project (by: Jan 23 2012)\n"
+                + "\t3.[E]✓ Birthday (at: May 30 2020)", taskList.toString());
     }
 
     @Test
