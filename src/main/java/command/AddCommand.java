@@ -1,11 +1,10 @@
 package command;
 
-import exception.DukeException;
-import task.Task;
-
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
+import exception.DukeException;
+import task.Task;
 
 
 /**
@@ -36,9 +35,9 @@ public class AddCommand extends Command {
         storage.append(newTask);
         tasks.add(newTask);
 
-        String output = "\t Got it. I've added this task:\n" +
-                "\t   " + newTask + "\n" +
-                "\t Now you have " + tasks.size() + " tasks in the list.\n" ;
+        String output = "\t Got it. I've added this task:\n"
+                + "\t   " + newTask + "\n"
+                + "\t Now you have " + tasks.size() + " tasks in the list.\n";
 
         ui.showMessage(output);
     }

@@ -1,8 +1,8 @@
 package duke;
 
-import task.Task;
-
 import java.util.ArrayList;
+
+import task.Task;
 
 /**
  * Represents a TaskList which is a list that stores tasks.

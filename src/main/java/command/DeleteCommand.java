@@ -1,17 +1,16 @@
 package command;
 
-import exception.DukeException;
-import task.Task;
-
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
+import exception.DukeException;
+import task.Task;
 
 
 /**
  * Represents a DeleteCommand for deleting existing tasks.
  */
-public class DeleteCommand extends Command{
+public class DeleteCommand extends Command {
     private int taskIndex;
 
     /**
@@ -39,9 +38,9 @@ public class DeleteCommand extends Command{
         Task toDelete = tasks.get(this.taskIndex);
         tasks.remove(this.taskIndex);
         storage.overwrite(tasks);
-        String output = "\t Noted. I've removed this task:\n" +
-                "\t   " + toDelete + "\n" +
-                "\t Now you have " + tasks.size() + " tasks in the list.\n";
+        String output = "\t Noted. I've removed this task:\n"
+                + "\t   " + toDelete + "\n"
+                + "\t Now you have " + tasks.size() + " tasks in the list.\n";
         ui.showMessage(output);
     }
 

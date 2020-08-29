@@ -1,11 +1,10 @@
 package command;
 
-import exception.DukeException;
-
-import task.Task;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
+import exception.DukeException;
+import task.Task;
 
 /**
  * Represents a FindCommand for finding tasks with specific keywords.

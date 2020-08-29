@@ -1,11 +1,18 @@
-import command.*;
-import exception.DukeException;
-import duke.Parser;
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
+
+import org.junit.jupiter.api.Test;
+
+import command.AddCommand;
+import command.ByeCommand;
+import command.DeleteCommand;
+import command.DoNothingCommand;
+import command.DoneCommand;
+import command.ListCommand;
+import command.TasksOnCommand;
+import duke.Parser;
+import exception.DukeException;
 
 public class ParserTest {
 
@@ -19,7 +26,7 @@ public class ParserTest {
     }
 
     @Test
-    public void markTestAsDone_done1_DoneCommand() {
+    public void markTestAsDone_done1_doneCommand() {
         try {
             assertTrue(Parser.parse("done 1") instanceof DoneCommand);
         } catch (DukeException e) {
@@ -46,7 +53,7 @@ public class ParserTest {
     }
 
     @Test
-    public void deleteTask_delete1_DeleteCommand() {
+    public void deleteTask_delete1_deleteCommand() {
         try {
             assertTrue(Parser.parse("delete 1") instanceof DeleteCommand);
         } catch (DukeException e) {
@@ -73,16 +80,16 @@ public class ParserTest {
     }
 
     @Test
-    public void listTasks_list_ListCommand() {
+    public void listTasks_list_listCommand() {
         try {
             assertTrue(Parser.parse("list") instanceof ListCommand);
-        } catch(DukeException e) {
+        } catch (DukeException e) {
             fail();
         }
     }
 
     @Test
-    public void listTasksOnDate_tasksOn30082001_TasksOnCommand() {
+    public void listTasksOnDate_tasksOn30082001_tasksOnCommand() {
         try {
             assertTrue(Parser.parse("tasks on 30/08/2001") instanceof TasksOnCommand);
         } catch (DukeException e) {
@@ -109,7 +116,7 @@ public class ParserTest {
     }
 
     @Test
-    public void addTodo_todoWashCar_AddCommand() {
+    public void addTodo_todoWashCar_addCommand() {
         try {
             assertTrue(Parser.parse("todo wash car") instanceof AddCommand);
         } catch (DukeException e) {
@@ -127,7 +134,7 @@ public class ParserTest {
     }
 
     @Test
-    public void addDeadline_deadlineReturnBookTiming_AddCommand() {
+    public void addDeadline_deadlineReturnBookTiming_addCommand() {
         try {
             assertTrue(Parser.parse("deadline return book /by 22/08/2020 18:00") instanceof AddCommand);
         } catch (DukeException e) {
@@ -163,7 +170,7 @@ public class ParserTest {
     }
 
     @Test
-    public void addEvent_eventReturnBookTiming_AddCommand() {
+    public void addEvent_eventReturnBookTiming_addCommand() {
         try {
             assertTrue(Parser.parse("event return book /at 22/08/2020 18:00") instanceof AddCommand);
         } catch (DukeException e) {
@@ -199,7 +206,7 @@ public class ParserTest {
     }
 
     @Test
-    public void randomCommand_Hello_throwException() {
+    public void randomCommand_hello_throwException() {
         try {
             Parser.parse("Hello");
         } catch (DukeException e) {
@@ -208,7 +215,7 @@ public class ParserTest {
     }
 
     @Test
-    public void pressEnter_enter_DoNothingCommand() {
+    public void pressEnter_enter_doNothingCommand() {
         try {
             assertTrue(Parser.parse("\n") instanceof DoNothingCommand);
         } catch (DukeException e) {

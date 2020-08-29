@@ -1,9 +1,10 @@
-import task.Task;
-import task.Todo;
-import duke.TaskList;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import duke.TaskList;
+import task.Task;
+import task.Todo;
 
 public class TaskListTest {
 

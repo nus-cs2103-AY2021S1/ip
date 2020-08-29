@@ -1,15 +1,14 @@
 package command;
 
-import task.Task;
-
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
+import task.Task;
 
 /**
  * Represents a ListCommand for adding listing all existing tasks.
  */
-public class ListCommand extends Command{
+public class ListCommand extends Command {
 
     /**
      * Lists the tasks in the TaskList.

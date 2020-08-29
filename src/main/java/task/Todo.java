@@ -5,7 +5,7 @@ import java.time.LocalDate;
 /**
  * Represents a Todo which is a Task which needs to be done.
  */
-public class Todo extends Task{
+public class Todo extends Task {
 
     /**
      * Creates a Todo instance containing a description
@@ -13,7 +13,7 @@ public class Todo extends Task{
      * @param description Description of Todo to be done.
      */
     public Todo(String description) {
-        this(description,false);
+        this(description, false);
     }
 
     /**

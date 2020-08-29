@@ -1,18 +1,17 @@
 package command;
 
-import task.Task;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
-
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+import task.Task;
 
 /**
  * Represents a TasksOnCommand for listing Tasks on a specific Date.
  */
-public class TasksOnCommand extends Command{
+public class TasksOnCommand extends Command {
     private LocalDate date;
 
     /**

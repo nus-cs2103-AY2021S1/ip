@@ -1,11 +1,10 @@
 package command;
 
-import exception.DukeException;
-import task.Task;
-
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
+import exception.DukeException;
+import task.Task;
 
 
 /**
@@ -39,8 +38,8 @@ public class DoneCommand extends Command {
         Task toChange = tasks.get(this.taskIndex);
         toChange.markAsDone();
         storage.overwrite(tasks);
-        String output = "\t Nice! I've marked this task as done:\n" +
-                "\t  " + toChange + "\n";
+        String output = "\t Nice! I've marked this task as done:\n"
+                + "\t  " + toChange + "\n";
         ui.showMessage(output);
     }
 

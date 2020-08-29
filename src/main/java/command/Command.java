@@ -1,12 +1,11 @@
 package command;
 
-import exception.DukeException;
-
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
+import exception.DukeException;
 
-abstract public class Command {
+public abstract class Command {
 
     /**
      * Executes the Command.

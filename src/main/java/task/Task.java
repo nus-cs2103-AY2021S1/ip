@@ -6,16 +6,16 @@ import java.time.format.DateTimeFormatter;
 /**
  * Represents a Task which needs to be done.
  */
-abstract public class Task {
+public abstract class Task {
+
+    /** Date format of which the Date of any Tasks will be displayed to the user. */
+    protected static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
     /** Description of the Task to be done. */
     protected String description;
 
     /** True if the Task is already done otherwise False. */
     protected boolean isDone;
-
-    /** Date format of which the Date of any Tasks will be displayed to the user. */
-    protected final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
     /**
      * Creates a Task instance containing a description.
@@ -78,7 +78,7 @@ abstract public class Task {
      * @param theDate Date to check whether the Task has occurred on.
      * @return True if the Task occurred on the specified date otherwise false.
      */
-    abstract public boolean hasSameDate(LocalDate theDate);
+    public abstract boolean hasSameDate(LocalDate theDate);
 
     /**
      * Returns the String representation of the Task to be displayed to the user.

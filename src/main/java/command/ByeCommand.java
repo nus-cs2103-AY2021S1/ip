@@ -7,7 +7,7 @@ import duke.Ui;
 /**
  * Represents a ByeCommand for exiting the program.
  */
-public class ByeCommand extends Command{
+public class ByeCommand extends Command {
 
     /**
      * Exits the program
