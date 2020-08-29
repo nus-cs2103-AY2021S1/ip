@@ -1,0 +1,36 @@
+plugins {
+    id 'java'
+    id 'application'
+    id 'checkstyle'
+    id 'com.github.johnrengelman.shadow' version '5.1.0'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+application {
+    mainClassName = "seedu.duke.Duke"
+}
+
+shadowJar {
+    archiveBaseName = "duke"
+    archiveClassifier = null
+}
+
+checkstyle {
+    toolVersion = '8.23'
+}
+
+run{
+    standardInput = System.in
+}
