@@ -1,7 +1,6 @@
 package duke.command;
 
 import duke.Storage;
-import duke.Ui;
 import duke.task.TaskList;
 
 /**
@@ -12,12 +11,11 @@ public class ByeCommand extends Command {
      * Prints out goodbye message to console before shutting down Duke.
      *
      * @param taskList the List containing all the tasks that Duke has stored.
-     * @param ui a Ui object for interaction with users.
      * @param storage the database for Duke to save all tasks to the user's local storage.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
-        ui.print("Bye. Hope to see you again soon!");
+    public String execute(TaskList taskList, Storage storage) {
+        return ("Bye. Hope to see you again soon!");
     }
 
     /**

@@ -2,7 +2,6 @@ package duke.command;
 
 import duke.DukeException;
 import duke.Storage;
-import duke.Ui;
 import duke.task.TaskList;
 
 /**
@@ -25,17 +24,16 @@ public class FindCommand extends Command {
      * Searches for Tasks that has the keyword inputted by the user.
      *
      * @param taskList the List of all the Tasks that Duke has.
-     * @param ui the object responsible for user interactions.
      * @param storage the database of Tasks that is saved to the user's local storage.
      * @throws DukeException
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, Storage storage) throws DukeException {
         if (userInput.length() <= 4) {
             throw new DukeException("Please enter a keyword to find your task");
         }
 
         String keyword = this.userInput.substring(5);
-        taskList.showSpecifiedItems(keyword);
+        return taskList.showSpecifiedItems(keyword);
     }
 }

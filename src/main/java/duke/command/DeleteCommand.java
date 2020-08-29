@@ -2,7 +2,6 @@ package duke.command;
 
 import duke.DukeException;
 import duke.Storage;
-import duke.Ui;
 import duke.task.Task;
 import duke.task.TaskList;
 
@@ -24,12 +23,11 @@ public class DeleteCommand extends Command {
      * Delete a task from Duke's TaskList and update Duke's storage.
      *
      * @param taskList the List containing all the tasks that Duke has stored.
-     * @param ui a Ui object for interaction with users.
      * @param storage the database for Duke to save all tasks to the user's local storage.
      * @throws DukeException when the task to be deleted does not exist in Duke's TaskList.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, Storage storage) throws DukeException {
         try {
             String taskIndex = userInput.substring(7);
             int index = Integer.valueOf(taskIndex) - 1; // taskIndex started from 1
@@ -38,7 +36,7 @@ public class DeleteCommand extends Command {
 
             storage.deleteTask(index);
 
-            ui.print("Noted. I've removed this task:\n"
+            return ("Noted. I've removed this task:\n"
                     + deletedTask.toString() + "\nNow you have " + (listSize)
                     + (listSize > 1 ? " tasks" : " task")
                     + " in the list.");

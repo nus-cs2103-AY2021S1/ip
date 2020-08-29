@@ -1,7 +1,6 @@
 package duke.command;
 
 import duke.Storage;
-import duke.Ui;
 import duke.task.TaskList;
 
 /**
@@ -12,12 +11,13 @@ public class ListCommand extends Command {
      * Shows all the tasks currently in Duke's TaskList by printing it out to the console.
      *
      * @param taskList the List containing all the tasks that Duke has stored.
-     * @param ui a Ui object for interaction with users.
      * @param storage the database for Duke to save all tasks to the user's local storage.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
-        ui.print("Here are the tasks in your list:\n");
-        taskList.showAllItems();
+    public String execute(TaskList taskList, Storage storage) {
+        String responseString = "";
+        responseString.concat("Here are the tasks in your list:\n");
+        responseString.concat(taskList.showAllItems());
+        return responseString;
     }
 }

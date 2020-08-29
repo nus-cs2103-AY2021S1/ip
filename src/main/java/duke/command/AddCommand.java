@@ -2,7 +2,6 @@ package duke.command;
 
 import duke.DukeException;
 import duke.Storage;
-import duke.Ui;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -35,22 +34,19 @@ public class AddCommand extends Command {
      * The database depending on the command type given.
      *
      * @param taskList the List containing all the tasks that Duke has stored.
-     * @param ui a Ui object for interaction with users.
      * @param storage the database for Duke to save all tasks to the user's local storage.
+     * @return string representation of Duke's response to the command.
      * @throws DukeException when the type of task being added is unknown.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, Storage storage) throws DukeException {
         switch (c) {
         case TODO:
-            addToDoTask(this.userInput, taskList, ui, storage);
-            break;
+            return addToDoTask(this.userInput, taskList, storage);
         case EVENT:
-            addEventTask(this.userInput, taskList, ui, storage);
-            break;
+            return addEventTask(this.userInput, taskList, storage);
         case DEADLINE:
-            addDeadlineTask(this.userInput, taskList, ui, storage);
-            break;
+            return addDeadlineTask(this.userInput, taskList, storage);
         default:
             throw new DukeException("I don't recognize the type of task you are trying to add");
         }
@@ -61,28 +57,28 @@ public class AddCommand extends Command {
         return userInput.length() <= 4;
     }
 
-    private void addToDoTask(String userInput, TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    private String addToDoTask(String userInput, TaskList taskList, Storage storage) throws DukeException {
         if (checkForEmptyDescription(userInput)) {
             throw new DukeException("The description of a todo cannot be empty.");
         }
 
         String taskDescription = userInput.substring(5);
         ToDo newToDoItem = new ToDo(taskDescription);
-        addItem(newToDoItem, taskList, ui, storage); // Add to taskList
+        return addItem(newToDoItem, taskList, storage); // Add to taskList
     }
 
-    private void addEventTask(String userInput, TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    private String addEventTask(String userInput, TaskList taskList, Storage storage) throws DukeException {
         String taskDescription = userInput.substring(6, userInput.indexOf("/at") - 1);
         String eventDateTime = userInput.substring(userInput.indexOf("/at") + 4);
         Event newEventItem = new Event(taskDescription, eventDateTime);
-        addItem(newEventItem, taskList, ui, storage);
+        return addItem(newEventItem, taskList, storage);
     }
 
-    private void addDeadlineTask(String userInput, TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    private String addDeadlineTask(String userInput, TaskList taskList, Storage storage) throws DukeException {
         String taskDescription = userInput.substring(9, userInput.indexOf("/by") - 1);
         String deadlineBy = userInput.substring(userInput.indexOf("/by") + 4);
         Deadline newDeadlineItem = new Deadline(taskDescription, deadlineBy);
-        addItem(newDeadlineItem, taskList, ui, storage);
+        return addItem(newDeadlineItem, taskList, storage);
     }
 
     /**
@@ -91,14 +87,13 @@ public class AddCommand extends Command {
      *
      * @param newTask the new task that will be added.
      * @param taskList the List containing all the tasks that Duke has stored.
-     * @param ui a Ui object for interaction with users.
      * @param storage the database for Duke to save all tasks to the user's local storage.
      */
-    public void addItem(Task newTask, TaskList taskList, Ui ui, Storage storage) {
+    public String addItem(Task newTask, TaskList taskList, Storage storage) {
         taskList.add(newTask);
         storage.createTask(newTask); // Add to storage database
         int listSize = taskList.size();
-        ui.print("Got it. I've added this task:\n   "
+        return ("Got it. I've added this task:\n   "
                 + newTask.toString() + "\nNow you have " + (listSize)
                 + (listSize > 1 ? " tasks" : " task")
                 + " in the list.");

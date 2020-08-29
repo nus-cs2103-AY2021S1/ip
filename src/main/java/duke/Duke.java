@@ -5,7 +5,7 @@ import java.nio.file.Paths;
 
 import duke.command.Command;
 import duke.task.TaskList;
-
+import javafx.application.Platform;
 
 /**
  * Personal Assistant that keeps track of a user's list of tasks.
@@ -14,50 +14,39 @@ public class Duke {
     private static final Path storageFilePath = Paths.get(".", "data", "test.txt");
     private Storage storage;
     private TaskList taskList;
-    private Ui ui;
 
     /**
      * Constructor to create a Duke object.
      * <p>
-     * Duke consists of a <code>Ui</code>, <code>TaskList</code>, and <code>Storage</code> which
+     * Duke consists of a <code>TaskList</code>, and <code>Storage</code> which
      * is responsible for user interactions, keeping track of user's tasks, and writing tasks
      * to the user's local storage respectively.
      */
-    Duke() {
-        this.ui = new Ui();
+    public Duke() {
         this.storage = new Storage(Duke.storageFilePath);
         try {
             this.taskList = new TaskList(this.storage.getAllTasks());
         } catch (DukeException e) {
-            ui.showLoadingError(e.getMessage());
-            taskList = new TaskList();
+            this.taskList = new TaskList();
         }
     }
 
     /**
-     * Begins running Duke, and waits for user input to interact with Duke.
+     * Gets Duke's response to the user input.
      *
-     * @param args user input from the command line.
+     * @param input the input by the user via the GUI.
+     * @return the response given by Duke to the user input.
      */
-    public static void main(String[] args) {
-        new Duke().run();
-    }
-
-    private void run() {
-        this.ui.showWelcome();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String userInput = this.ui.readCommand();
-                ui.showLine();
-                Command c = Parser.parse(userInput);
-                c.execute(this.taskList, this.ui, this.storage);
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                ui.showError(e.getMessage());
-            } finally {
-                ui.showLine();
+    public String getResponse(String input) {
+        try {
+            Command c = Parser.parse(input);
+            if (c.isExit()) {
+                Platform.exit();
             }
+
+            return c.execute(this.taskList, this.storage);
+        } catch (DukeException e) {
+            return (e.getMessage());
         }
     }
 }

@@ -2,7 +2,6 @@ package duke.command;
 
 import duke.DukeException;
 import duke.Storage;
-import duke.Ui;
 import duke.task.Task;
 import duke.task.TaskList;
 
@@ -26,19 +25,18 @@ public class DoneCommand extends Command {
      * Mark a task as completed, updates Duke's TaskList as well as Storage.
      *
      * @param taskList the List containing all the tasks that Duke has stored.
-     * @param ui a Ui object for interaction with users.
      * @param storage the database for Duke to save all tasks to the user's local storage.
      * @throws DukeException
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, Storage storage) throws DukeException {
         try {
             String taskIndex = userInput.substring(5);
             int index = Integer.valueOf(taskIndex) - 1; // taskIndex started from 1
             Task completedTask = taskList.get(index);
             completedTask.markAsDone();
             storage.updateTask(completedTask, index);
-            ui.print("Nice! I've marked this task as done:\n"
+            return ("Nice! I've marked this task as done:\n"
                     + completedTask.toString());
 
 

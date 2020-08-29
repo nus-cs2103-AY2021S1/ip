@@ -46,11 +46,16 @@ public class TaskList {
 
     /**
      * Enumerates all the Tasks currently in the TaskList and prints it out to the user.
+     *
+     * @return string representation of all the items in the TaskList
      */
-    public void showAllItems() {
+    public String showAllItems() {
         ArrayList<Task> currList = this.taskList;
+        String allItemsString = "";
         currList.forEach(item ->
-                System.out.println((currList.indexOf(item) + 1) + "." + item));
+                allItemsString.concat((currList.indexOf(item) + 1) + "." + item + "\n"));
+
+        return allItemsString;
     }
 
     /**
@@ -76,8 +81,9 @@ public class TaskList {
      * Prints out all the Tasks in the TaskList that contains the keyword specified by the user.
      *
      * @param keyword the key to filter the Tasks in the TaskList by.
+     * @return String representing all the filtered items in the TaskList.
      */
-    public void showSpecifiedItems(String keyword) {
+    public String showSpecifiedItems(String keyword) {
         TaskList filteredTasks = new TaskList();
 
         ArrayList<Task> currList = this.taskList;
@@ -87,6 +93,6 @@ public class TaskList {
             }
         });
 
-        filteredTasks.showAllItems();
+        return filteredTasks.showAllItems();
     }
 }
