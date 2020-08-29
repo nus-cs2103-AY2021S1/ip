@@ -6,6 +6,8 @@ public class Parser {
             return new ByeCommand();
         } else if (input.equals("list")) { //list command
             return new ListCommand();
+        } else if (firstWord.equals("find")) { //find command
+            return new FindCommand(words);
         } else if (firstWord.equals("done")) { //done command
             return new DoneCommand(words);
         } else if (firstWord.equals("delete")) { //done command

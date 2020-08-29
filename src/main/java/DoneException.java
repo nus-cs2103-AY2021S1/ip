@@ -1,6 +1,6 @@
 /**
  * A subclass of Exception.
- * Shows error for done tasks.
+ * Shows error for done command.
  */
 public class DoneException extends Exception {
 

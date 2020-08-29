@@ -16,7 +16,11 @@ public class TodoCommand extends Command {
         if (input.length == 1) {
             throw new TodoException(" ☹ OOPS!!! The description of a todo cannot be empty.");
         }
-        Todo newTask = new Todo(input[2]);
+        String description = "";
+        for(int i = 1; i < input.length; i++) {
+            description = description + input[i] + " ";
+        }
+        Todo newTask = new Todo(description.trim());
 
         store.add(newTask);
         storage.save(new TaskList(store));

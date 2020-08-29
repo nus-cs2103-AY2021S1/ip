@@ -13,8 +13,8 @@ public class Duke {
      */
     public Duke(String filePath) {
         ui = new Ui();
-        storage = new Storage(filePath);
         try {
+            storage = new Storage(filePath);
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
             ui.showLoadingError();
@@ -35,7 +35,7 @@ public class Duke {
                 Command c = Parser.parse(fullCommand);
                 c.execute(tasks, ui, storage);
                 isExit = c.isExit();
-            } catch (DukeException | DoneException | DeleteException | TodoException | EventException | DeadlineException e) {
+            } catch (DukeException | DoneException | DeleteException | TodoException | EventException | DeadlineException | FindException e) {
                 ui.showError(e.getMessage());
             } finally {
                 ui.showLine();
@@ -44,7 +44,7 @@ public class Duke {
     }
     
     public static void main(String[] args) {
-        new Duke("data/tasks.txt").run();
+        new Duke("./data/duke.txt").run();
     }
 
 }
