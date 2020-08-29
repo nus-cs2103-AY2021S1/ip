@@ -5,8 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import java.security.InvalidParameterException;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class TaskTest {
     Event event = new Event("e", "time");
@@ -14,14 +13,24 @@ public class TaskTest {
     Todo todo = new Todo("t");
 
     @Test
-    public void toString_undoneEvent_success() {
+    public void toString_undoneTask_success() {
         assertEquals("[E][✗] e (at: time)", event.toString());
         assertEquals("[D][✗] d (by: time)", ddl.toString());
         assertEquals("[T][✗] t", todo.toString());
     }
 
     @Test
-    public void toString_doneEvent_success() {
+    public void setDone_undoneTask_success() {
+        event.setDone();
+        ddl.setDone();
+        todo.setDone();
+        assertTrue(event.getDone());
+        assertTrue(ddl.getDone());
+        assertTrue(todo.getDone());
+    }
+
+    @Test
+    public void toString_doneTask_success() {
         event.setDone();
         ddl.setDone();
         todo.setDone();

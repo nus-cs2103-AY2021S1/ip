@@ -24,6 +24,15 @@ public abstract class Task {
         this.done = true;
     }
 
+    /**
+     * Gets whether the task is done
+     *
+     * @return whether done or not
+     */
+    public boolean getDone() {
+        return this.done;
+    }
+
     @Override
     public String toString() {
         return this.getName();

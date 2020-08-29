@@ -1,35 +1,16 @@
 package duke;
 
-import java.util.Scanner;
-
 public class Duke {
+
     /**
-     * Runs the Duke chat bot.
-     * Responses constantly until exit until command is received.
+     * Responds to the input command.
+     *
+     * @param input input command line
+     * @return response from duke
      */
-    private static void response() {
-        Ui.greet();
-        Scanner scanner = new Scanner(System.in);
-        String line = scanner.nextLine();
-        boolean exit = false;
-
-        while (!exit) {
-            if (line.isEmpty()) {
-                line = scanner.nextLine();
-                continue;
-            }
-            Command command = new Command(line);
-            if (command.isExit()) {
-                Ui.exit();
-                exit = true;
-            } else {
-                command.execute();
-                line = scanner.nextLine();
-            }
-        }
+    public String getResponse(String input) {
+        Command command = new Command(input);
+        return command.execute();
     }
 
-    public static void main(String[] args) {
-        response();
-    }
 }

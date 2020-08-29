@@ -19,9 +19,10 @@ public class TaskList {
      *
      * @param type     task type
      * @param taskName task name
+     * @return messages of the added task or errors occurred
      * @throws IOException if error occurs in file accessing
      */
-    public static void add(TaskType type, String taskName) throws IOException {
+    public static String add(TaskType type, String taskName) throws IOException {
         try {
             if (taskList.size() == 0) {
                 reloadList();
@@ -29,8 +30,9 @@ public class TaskList {
             Todo todo = new Todo(taskName);
             taskList.add(todo);
             Storage.addToList(TaskType.TODO, 0, taskName, "");
-            Ui.userMessage("Got it. I've added the task:\n" + todo.toString());
-            Ui.userMessage("Now you have " + taskList.size() + " tasks in the list.");
+            String result = "Got it. I've added the task:\n" + todo.toString() + "\n";
+            result += "Now you have " + taskList.size() + " tasks in the list.";
+            return Ui.userMessage(result);
         } catch (IOException e) {
             throw new IOException("File access failed");
         }
@@ -42,40 +44,47 @@ public class TaskList {
      * @param type     task type
      * @param taskName task name
      * @param time     time of the task
+     * @return messages of the added task or errors occurred
      * @throws IOException if error occurs in file accessing
      */
-    public static void add(TaskType type, String taskName, String time) throws IOException {
+    public static String add(TaskType type, String taskName, String time) throws IOException {
         try {
             if (taskList.size() == 0) {
                 reloadList();
             }
+            String result = "Got it. I've added the task:\n";
             if (type == TaskType.DEADLINE) {
                 Deadline deadline = new Deadline(taskName, time);
                 taskList.add(deadline);
                 Storage.addToList(TaskType.DEADLINE, 0, taskName, time);
-                Ui.userMessage("Got it. I've added the task:\n" + deadline.toString());
+                result += deadline.toString();
             } else {
                 Event event = new Event(taskName, time);
                 taskList.add(event);
                 Storage.addToList(TaskType.EVENT, 0, taskName, time);
-                Ui.userMessage("Got it. I've added the task:\n" + event.toString());
+                result += event.toString();
             }
-            Ui.userMessage("Now you have " + taskList.size() + " tasks in the list.");
+            result += "\nNow you have " + taskList.size() + " tasks in the list.";
+            return Ui.userMessage(result);
         } catch (IOException e) {
             throw new IOException("File access failed");
         }
 
     }
 
-    public static List<Task> getList() {
-        return taskList;
-    }
-
-    public static void reloadList() throws IOException {
+    private static void reloadList() throws IOException {
         taskList = Storage.readList();
     }
 
-    public static void findTask(String word) throws IOException, InvalidParameterException {
+    /**
+     * Finds tasks that contain a given keyword
+     *
+     * @param word keyword of the task
+     * @return a string representation of the tasks found
+     * @throws IOException               if error occurs in file accessing
+     * @throws InvalidParameterException if word is blank
+     */
+    public static String findTask(String word) throws IOException, InvalidParameterException {
         if (word.isBlank()) {
             throw new InvalidParameterException("Invalid input");
         }
@@ -84,8 +93,7 @@ public class TaskList {
             reloadList();
             n = taskList.size();
             if (n == 0) {
-                Ui.userMessage("There is no task in the list :)");
-                return;
+                return Ui.listError();
             }
         }
         StringBuilder sb = new StringBuilder();
@@ -101,9 +109,9 @@ public class TaskList {
             }
         }
         if (!found) {
-            Ui.userMessage("There is no match in the list :(");
+            return Ui.userMessage("There is no match in the list :(");
         } else {
-            Ui.userMessage(sb.toString());
+            return Ui.userMessage(sb.toString());
         }
     }
 
@@ -111,11 +119,12 @@ public class TaskList {
      * Updates the task of a given index to "done"
      *
      * @param index index of task to be updated
+     * @return messages of the done task or errors occurred
      * @throws InvalidParameterException if index is out of bound for task list
      * @throws IOException               if error occurs in file accessing
      */
 
-    public static void setDone(int index) throws InvalidParameterException, IOException {
+    public static String setDone(int index) throws InvalidParameterException, IOException {
         if (taskList.size() == 0) {
             reloadList();
         }
@@ -124,18 +133,19 @@ public class TaskList {
         }
         Storage.setDone(index - 1);
         taskList.get(index - 1).setDone();
-        Ui.userMessage("Well done! I've marked this as done:");
-        Ui.userMessage(taskList.get(index - 1).toString());
+        return Ui.userMessage("Well done! I've marked this as done:\n"
+                + taskList.get(index - 1).toString());
     }
 
     /**
      * Deletes the task of a given index
      *
      * @param index index of task to be updated
+     * @return messages of the deleted task or errors occurred
      * @throws InvalidParameterException if index is out of bound for task list
      * @throws IOException               if error occurs in file accessing
      */
-    public static void delete(int index) throws InvalidParameterException, IOException {
+    public static String delete(int index) throws InvalidParameterException, IOException {
         if (taskList.size() == 0) {
             reloadList();
         }
@@ -143,26 +153,27 @@ public class TaskList {
             throw new InvalidParameterException("Out of bound");
         }
         Storage.delete(index - 1);
-        Ui.userMessage("Noted! I've removed this task:");
-        Ui.userMessage(taskList.get(index - 1).toString());
+        String result = "Noted! I've removed this task:\n";
+        result += taskList.get(index - 1).toString();
         taskList.remove(index - 1);
-        Ui.userMessage("Now you have " + taskList.size() + " tasks in the list.");
+        result += "\nNow you have " + taskList.size() + " tasks in the list.";
+        return Ui.userMessage(result);
     }
 
     /**
      * Prints out the task list
      *
+     * @return a string representation of all tasks listed
      * @throws IOException if error occurs in file accessing
      */
-    public static void printList() throws IOException {
+    public static String printList() throws IOException {
         try {
             int n = taskList.size();
             if (n == 0) { // empty or uninitialized
                 reloadList();
                 n = taskList.size();
                 if (n == 0) {
-                    Ui.userMessage("There is no task in the list :)");
-                    return;
+                    return Ui.listError();
                 }
             }
             StringBuilder sb = new StringBuilder();
@@ -172,9 +183,9 @@ public class TaskList {
                     sb.append("\n");
                 }
             }
-            Ui.userMessage(sb.toString());
+            return Ui.userMessage(sb.toString());
         } catch (IOException e) {
-            Ui.fileError();
+            return Ui.fileError();
         }
     }
 
