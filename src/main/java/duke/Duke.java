@@ -1,10 +1,11 @@
 package duke;
 
-import ui.Ui;
 import command.Command;
+import command.CommandResult;
 import exception.InvalidUsageException;
 import exception.StorageException;
 import exception.UnknownCommandException;
+import ui.Ui;
 
 /**
  * Main class for the Duke application
@@ -24,7 +25,7 @@ public class Duke {
         ui = new Ui();
         storage = new Storage();
     }
-    
+
     /**
      * Main method to start the application
      */
@@ -53,16 +54,18 @@ public class Duke {
             ex.printStackTrace();
         }
     }
-    
+
     public String getResponse(String input) {
+        CommandResult response;
         try {
             Command command = Parser.parseCommand(input);
-            command.execute(taskList, ui, storage);
+            response = command.execute(taskList, ui, storage);
         } catch (InvalidUsageException | UnknownCommandException ex) {
             ui.print(ex.getMessage());
+            response = new CommandResult(ex.getMessage());
         } finally {
             ui.buildChatFence();
         }
-        return "Duke heard: " + input;
+        return response.getResult();
     }
 }

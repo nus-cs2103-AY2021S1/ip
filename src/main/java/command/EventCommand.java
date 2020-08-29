@@ -2,14 +2,14 @@ package command;
 
 import duke.Storage;
 import duke.TaskList;
-import ui.Ui;
 import task.Event;
+import ui.Ui;
 
 /**
  * Add a new event into the task list
  */
 public class EventCommand extends Command {
-    Event event;
+    private Event event;
 
     public EventCommand(Event event) {
         this.event = event;
@@ -18,16 +18,16 @@ public class EventCommand extends Command {
     /**
      * Insert an event into the task list and save it in the storage file
      *
-     * @param taskList current task list
-     * @param ui       text ui interface
-     * @param storage  storage file
+     * @param tasks   current task list
+     * @param ui      text ui interface
+     * @param storage storage file
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public CommandResult execute(TaskList tasks, Ui ui, Storage storage) {
         tasks.add(event);
         storage.save(tasks);
 
         int size = tasks.size();
-        ui.printAddConfirmation(tasks.show(size - 1), size);
+        return new CommandResult(ui.printAddConfirmation(tasks.show(size - 1), size));
     }
 }
