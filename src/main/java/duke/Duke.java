@@ -19,6 +19,7 @@ public class Duke extends Application{
     private TaskList tasks;
     private Ui ui;
 
+    public Duke() {}
     /**
      * A constructor to create Duke object.
      * @param filePath the saved location of the database.
