@@ -24,12 +24,9 @@ public class DoneCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-<<<<<<< HEAD
-        tasks.doneTasks(taskNo);
-=======
+
         tasks.doneTask(taskNo);
         // ui.showDoneMessage();
->>>>>>> branch-A-CodingStandard
     }
 
     @Override
