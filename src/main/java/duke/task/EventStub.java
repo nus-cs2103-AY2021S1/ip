@@ -5,7 +5,7 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 
-public class EventStub extends Task{
+public class EventStub extends Task {
     private final LocalDate schedule;
     private final LocalTime startTime;
     private final LocalTime endTime;

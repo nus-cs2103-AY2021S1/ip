@@ -1,10 +1,8 @@
 ../src/main/java/DialogBox.java
-../src/main/java/Main.java
 ../src/main/java/duke/TaskList.java
 ../src/main/java/duke/Storage.java
 ../src/main/java/duke/Parser.java
 ../src/main/java/duke/Ui.java
-../src/main/java/duke/ParserStub.java
 ../src/main/java/duke/task/Event.java
 ../src/main/java/duke/task/Task.java
 ../src/main/java/duke/task/Deadline.java
@@ -20,3 +18,4 @@
 ../src/main/java/duke/DukeException.java
 ../src/main/java/Duke.java
 ../src/main/java/Launcher.java
+../src/main/java/Yuki.java

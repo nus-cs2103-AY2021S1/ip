@@ -1,9 +1,6 @@
 package duke.task;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
-
-public class TodoStub extends Task{
+public class TodoStub extends Task {
 
     TodoStub(String description) {
         super(description);

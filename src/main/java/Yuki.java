@@ -1,4 +1,3 @@
-import java.util.List;
 import java.util.Scanner;
 
 import duke.DukeException;
@@ -8,41 +7,27 @@ import duke.TaskList;
 import duke.Ui;
 import duke.command.Command;
 import duke.command.ExitCommand;
-import duke.task.Task;
 
 /**
- * Represents a bot that helps to manage task.
- * Each <code>Duke</code> object has its own respective database.
+ * <code>Main</code> starts the entire application by creating a <code>Duke</code> object and checking for existing
+ * tasks.
  */
-public class Duke {
+public class Yuki {
     protected static final Ui UI = new Ui();
-    protected final Storage storage;
-    protected final TaskList taskList;
+    protected Storage storage;
+    protected TaskList taskList;
 
-    Duke(Storage storage, List<Task> taskList) {
-        this.storage = storage;
-        this.taskList = new TaskList(taskList);
-    }
-
-    /**
-     * Returns a <code>Duke</code> object with the corresponding user database.
-     * If database fails to create or load, null is returned.
-     *
-     * @param filePath FilePath of database
-     * @return <code>Duke</code> object
-     */
-    public static Duke createDuke(String filePath) throws DukeException {
+    Yuki() {
         try {
-            Storage storage = Storage.createStorage(filePath);
+            this.storage = Storage.createStorage("data/duke.txt");
             if (storage.isNew()) {
                 UI.print(UI.fileCreationSuccess());
             } else {
                 UI.print(UI.welcome());
             }
-            List<Task> taskList = storage.load();
-            return new Duke(storage, taskList);
+            this.taskList = new TaskList(storage.load());
         } catch (DukeException e) {
-            throw new DukeException(e.getMessage());
+            e.printStackTrace();
         }
     }
 
@@ -75,13 +60,8 @@ public class Duke {
      * @param args array for command-line arguments
      */
     public static void main(String[] args) {
-        try {
-            Duke duke = createDuke("data/duke.txt");
-            duke.run();
-        } catch (DukeException e) {
-            UI.print(e.getMessage());
-        }
-
+        Yuki yuki = new Yuki();
+        yuki.run();
     }
 
 }

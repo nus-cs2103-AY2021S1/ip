@@ -22,19 +22,16 @@ import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-/**
- * <code>Main</code> starts the entire application by creating a <code>Duke</code> object and checking for existing
- * tasks.
- */
-public class Main extends Application {
+public class YukiBot extends Application {
+
+    private final Yuki yuki = new Yuki();
+
     private ScrollPane scrollPane;
     private VBox dialogContainer;
     private TextField userInput;
     private Stage stage;
     private final Image userImg = new Image(this.getClass().getResourceAsStream("./images/user.png"));
     private final Image dukeImg = new Image(this.getClass().getResourceAsStream("./images/bot.png"));
-
-    private Duke duke;
 
     /**
      * Creates a label with the specified text and adds it to the dialog container.
@@ -49,6 +46,12 @@ public class Main extends Application {
         return textToAdd;
     }
 
+    /**
+     * Returns a string containing the text in a specific format.
+     *
+     * @param text to be included
+     * @return a string containing the text in a specific format
+     */
     private String printFormat(String text) {
         String headerLine = "~~~~~~~~~~~~~~~~~~~~~~~~~\n";
         return headerLine + text + "\n" + headerLine;
@@ -78,7 +81,7 @@ public class Main extends Application {
         try {
             input = input.trim();
             Command c = Parser.parse(input);
-            String s = c.execute(input, duke.storage, Duke.UI, duke.taskList);
+            String s = c.execute(input, yuki.storage, Yuki.UI, yuki.taskList);
 
             if (c instanceof ExitCommand) {
 
@@ -155,21 +158,13 @@ public class Main extends Application {
         AnchorPane.setLeftAnchor(userInput, 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
-        try {
-            duke = Duke.createDuke("data/duke.txt");
-            if (duke.storage.isNew()) {
-                dialogContainer.getChildren()
-                        .add(DialogBox.getDukeDialog(getDialogLabel(printFormat(Duke.UI.fileCreationSuccess())),
-                                new ImageView(dukeImg)));
-            } else {
-                dialogContainer.getChildren().add(DialogBox.getDukeDialog(getDialogLabel(printFormat(Duke.UI.welcome())),
-                        new ImageView(dukeImg)));
-            }
-        } catch (DukeException ex) {
-            dialogContainer.getChildren().addAll(
-                    DialogBox.getDukeDialog(getDialogLabel(printFormat("ERROR: " + ex.getMessage())),
-                            new ImageView(dukeImg))
-            );
+        if (yuki.storage.isNew()) {
+            dialogContainer.getChildren()
+                    .add(DialogBox.getDukeDialog(getDialogLabel(printFormat(Yuki.UI.fileCreationSuccess())),
+                            new ImageView(dukeImg)));
+        } else {
+            dialogContainer.getChildren().add(DialogBox.getDukeDialog(getDialogLabel(printFormat(Yuki.UI.welcome())),
+                    new ImageView(dukeImg)));
         }
 
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
@@ -178,4 +173,5 @@ public class Main extends Application {
 
         userInput.setOnAction((event) -> handleUserInput());
     }
+
 }
