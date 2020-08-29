@@ -1,5 +1,7 @@
-import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
+
 import duke.Command;
 import duke.TaskList;
 import duke.TaskType;
@@ -10,7 +12,7 @@ import duke.Todo;
  */
 public class CommandTest {
     @Test
-    public void addToList_simpleTodo_Success() {
+    public void addToList_simpleTodo_success() {
         TaskList taskListExpected = new TaskList();
         taskListExpected.add(new Todo("read book"));
 
