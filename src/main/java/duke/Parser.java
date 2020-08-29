@@ -1,7 +1,16 @@
 package duke;
 
+/**
+ * The Parser class deals with making sense of the user command.
+ */
 public class Parser {
 
+    /**
+     * Reads the user input and determines which command to execute.
+     * @param command User input.
+     * @return Command The type of command to execute.
+     * @throws DukeException
+     */
     public static Command parse(String command) throws DukeException {
         if (command.equals("bye")) {
             return new ExitCommand();
