@@ -17,17 +17,18 @@ public class TaskList {
      * Creates a new TaskList.
      */
     public TaskList() {
-        this.tasks = new ArrayList<>();
+        tasks = new ArrayList<>();
     }
 
     /**
      * Creates a new TaskList from previously saved tasks.
      *
-     * @param encodedTasks list of string of saved tasks from the previous session.
+     * @param encodedTasks list of string of saved tasks from the previous session,
+     *                     or null if saved data does not exist.
      * @throws AliceException if the saved files are corrupted.
      */
     public TaskList(List<String> encodedTasks) throws AliceException {
-        this.tasks = new ArrayList<>();
+        tasks = new ArrayList<>();
         if (encodedTasks != null) {
             for (int i = 0; i < encodedTasks.size(); i++) {
                 String currTask = encodedTasks.get(i);
@@ -52,6 +53,7 @@ public class TaskList {
                 }
             }
         }
+        // Create empty TaskList if encodedTask === null
     }
 
     /**
@@ -97,14 +99,15 @@ public class TaskList {
     public String find(String... keywords) {
         StringBuilder s = new StringBuilder();
 
-        int counter = 0;
+        boolean hasZeroResults = true;
         for (int i = 0; i < tasks.size(); i++) {
             if (tasks.get(i).containKeywords(keywords)) {
-                s.append(++counter).append(". ").append(tasks.get(i)).append("\n");
+                s.append(i + 1).append(". ").append(tasks.get(i)).append("\n");
+                hasZeroResults = false;
             }
         }
 
-        if (counter == 0) {
+        if (hasZeroResults) {
             return null;
         } else {
             s.setLength(s.length() - 1);

@@ -12,7 +12,19 @@ import java.util.List;
  * Represents the file used to store the list of tasks.
  */
 public class StorageFile {
+    /**
+     * Default file path to store ALICE data file
+     */
+    private static final String DEFAULT_FILE_PATH = "data/tasks.txt";
+
     private final Path filePath;
+
+    /**
+     * Creates a StorageFile from the default filePath.
+     */
+    public StorageFile() {
+        filePath = Paths.get(DEFAULT_FILE_PATH);
+    }
 
     /**
      * Creates a StorageFile from the indicated filePath.
@@ -52,7 +64,7 @@ public class StorageFile {
         try {
             return Files.readAllLines(filePath);
         } catch (IOException ex) {
-            throw new AliceStorageException("Save file is corrupted!");
+            throw new AliceStorageException("Unable to read data file!");
         }
     }
 

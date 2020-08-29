@@ -6,14 +6,38 @@ import alice.parser.Parser;
 import alice.storage.StorageFile;
 import alice.task.TaskList;
 import alice.ui.Ui;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
 
 /**
- * Represents the ALICE task manager program.
+ * Runs the ALICE application.
  */
-public class Alice {
-    private TaskList tasks;
+public class Alice extends Application {
+    private final TaskList tasks;
     private final StorageFile storageFile;
     private final Ui ui;
+
+    /**
+     * Creates an ALICE program.
+     * Uses default file path to save ALICE data file.
+     * If the file does not exist, creates the appropriate directory and file
+     */
+    public Alice() {
+        ui = new Ui();
+        storageFile = new StorageFile();
+        try {
+            // Read stored data
+            tasks = new TaskList(storageFile.load());
+            ui.displayInitSuccessMessage();
+        } catch (AliceException ex) {
+            ui.displayInitFailedMessage();
+            // Unable to recover from this exception.
+            // Terminate the program.
+            throw new RuntimeException(ex);
+        }
+    }
 
     /**
      * Creates an ALICE program that reads data from specified location.
@@ -27,10 +51,12 @@ public class Alice {
         try {
             // Read stored data
             tasks = new TaskList(storageFile.load());
-            ui.displayLoadSuccess();
+            ui.displayInitSuccessMessage();
         } catch (AliceException ex) {
-            tasks = new TaskList();
-            ui.displayLoadError(filePath);
+            ui.displayInitFailedMessage();
+            // Unable to recover from this exception.
+            // Terminate the program.
+            throw new RuntimeException(ex);
         }
     }
 
@@ -58,6 +84,19 @@ public class Alice {
                 ui.displayLine();
             }
         }
+    }
+
+    @Override
+    public void start(Stage primaryStage) {
+        // Create new Label control
+        Label helloWorld = new Label("Hello World!");
+        // Setting the scene to be our Label
+        Scene primaryScene = new Scene(helloWorld);
+
+        // Setting the stage to show our screen
+        primaryStage.setScene(primaryScene);
+        // Render the stage
+        primaryStage.show();
     }
 
     public static void main(String[] args) {

@@ -63,19 +63,17 @@ public class Ui {
     }
 
     /**
-     * Prints a success message for successful file load.
+     * Prints a success message for successful initialisation of ALICE.
      */
-    public void displayLoadSuccess() {
+    public void displayInitSuccessMessage() {
         displayOutput("File successfully loaded!");
     }
 
     /**
-     * Prints an error message for file load failure.
-     *
-     * @param filePath relative path to the data file.
+     * Prints an error message for failure to initialise ALICE.
      */
-    public void displayLoadError(String filePath) {
-        displayError("Cannot load/create file at " + filePath);
+    public void displayInitFailedMessage() {
+        displayError("Error starting ALICE program!");
     }
 
     /**
