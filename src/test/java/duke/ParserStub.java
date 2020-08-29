@@ -16,7 +16,7 @@ public class ParserStub {
     private static final Ui ui = new Ui();
 
     enum CommandState {
-        TODO, DEADLINE, EVENT, DELETE
+        TODO, DEADLINE, EVENT
     }
 
     public static Command parse(String command) throws DukeException {
@@ -46,8 +46,6 @@ public class ParserStub {
             s = "Event";
         } else if (command.matches(ignoreCase + CommandState.TODO.name() + wildcard)) {
             s = "Todo";
-        } else if (command.matches(ignoreCase + CommandState.DELETE.name() + wildcard)) {
-            s = "Delete";
         } else {
             String errMessage = ui.printFormat(" I'm sorry but i do not know what you want to do. *woof*\n");
             throw new DukeException(errMessage);

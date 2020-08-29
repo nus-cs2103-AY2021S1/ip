@@ -58,8 +58,9 @@ public class Event extends Task {
                 + " dont give me a description... *woof*\n";
         try {
             String messageLowerCase = message.toLowerCase();
+            int indOfDescription = messageLowerCase.indexOf("event");
             int indOfTime = messageLowerCase.indexOf("/at");
-            String description = message.substring(6, indOfTime);
+            String description = message.substring(indOfDescription + 5, indOfTime).trim();
             String at = message.substring(indOfTime + 3).trim();
             if (description.isBlank() && at.isBlank()) {
                 throw new DukeException(errMessage1);

@@ -56,7 +56,7 @@ public class Duke {
         while (!isExit && input.hasNextLine()) {
             try {
                 String commandMessage = input.nextLine();
-                Command c = Parser.parse(commandMessage);
+                Command c = Parser.parse(commandMessage.trim());
                 String s = c.execute(commandMessage, storage, UI, taskList);
                 UI.print(s);
                 if (c instanceof ExitCommand) {

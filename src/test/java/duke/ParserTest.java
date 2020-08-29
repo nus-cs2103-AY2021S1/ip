@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 import java.util.ArrayList;
 import java.util.List;
 
+import duke.task.Todo;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -19,7 +20,6 @@ import duke.command.DoneCommand;
 import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
-import duke.task.Todo;
 
 public class ParserTest {
 
@@ -76,5 +76,11 @@ public class ParserTest {
     @ValueSource(strings = {"Delete"})
     public void parseTest_actionDeleteCommands_success(String s) throws DukeException {
         assertEquals(new DeleteCommand(), ParserStub.parse(s));
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"todobuy books", "   todo    buy books", "   todo buy books    "})
+    public void executeTest_success(String s) throws DukeException {
+        assertEquals(new AddCommand(Todo.createTask("todo buy books")), ParserStub.parse(s));
     }
 }

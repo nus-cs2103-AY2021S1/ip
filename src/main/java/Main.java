@@ -32,7 +32,7 @@ public class Main extends Application {
     private TextField userInput;
     private Stage stage;
     private final Image userImg = new Image(this.getClass().getResourceAsStream("./images/user.png"));
-    private final Image dukeImg = new Image(this.getClass().getResourceAsStream("./images/bot1.jpg"));
+    private final Image dukeImg = new Image(this.getClass().getResourceAsStream("./images/bot.png"));
 
     private Duke duke;
 
@@ -49,13 +49,18 @@ public class Main extends Application {
         return textToAdd;
     }
 
+    private String printFormat(String text) {
+        String headerLine = "~~~~~~~~~~~~~~~~~~~~~~~~~\n";
+        return headerLine + text + "\n" + headerLine;
+    }
+
     /**
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
     private void handleUserInput() {
-        Label userText = new Label(userInput.getText() + "\n");
-        Label dukeText = new Label(getResponse(userInput.getText() + "\n"));
+        Label userText = new Label(printFormat(userInput.getText()));
+        Label dukeText = new Label(printFormat(getResponse(userInput.getText() + "\n")));
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(userText, new ImageView(userImg)),
                 DialogBox.getDukeDialog(dukeText, new ImageView(dukeImg))
@@ -154,15 +159,16 @@ public class Main extends Application {
             duke = Duke.createDuke("data/duke.txt");
             if (duke.storage.isNew()) {
                 dialogContainer.getChildren()
-                        .add(DialogBox.getDukeDialog(getDialogLabel(Duke.UI.fileCreationSuccess()),
+                        .add(DialogBox.getDukeDialog(getDialogLabel(printFormat(Duke.UI.fileCreationSuccess())),
                                 new ImageView(dukeImg)));
             } else {
-                dialogContainer.getChildren().add(DialogBox.getDukeDialog(getDialogLabel(Duke.UI.welcome()),
+                dialogContainer.getChildren().add(DialogBox.getDukeDialog(getDialogLabel(printFormat(Duke.UI.welcome())),
                         new ImageView(dukeImg)));
             }
         } catch (DukeException ex) {
             dialogContainer.getChildren().addAll(
-                    DialogBox.getDukeDialog(getDialogLabel("ERROR: " + ex.getMessage()), new ImageView(dukeImg))
+                    DialogBox.getDukeDialog(getDialogLabel(printFormat("ERROR: " + ex.getMessage())),
+                            new ImageView(dukeImg))
             );
         }
 

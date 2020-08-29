@@ -26,7 +26,8 @@ public class Todo extends Task {
     public static Todo createTask(String message) throws DukeException {
         String errMessage = " Oops!! You forgot to tell me what this task is about... *woof*\n";
         try {
-            String description = message.substring(5);
+            int indOfDescription = message.toLowerCase().indexOf("todo");
+            String description = message.substring(indOfDescription + 4);
             if (description.isBlank()) {
                 throw new DukeException(errMessage);
             } else {

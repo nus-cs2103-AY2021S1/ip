@@ -43,4 +43,5 @@ public class TodoTest {
         Todo t = new Todo("buy bread", true);
         assertEquals("[T][✓] buy bread", t.toString());
     }
+
 }

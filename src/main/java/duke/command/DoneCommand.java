@@ -23,7 +23,8 @@ public class DoneCommand implements Command {
      */
     public String execute(String command, Storage storage, Ui ui, TaskList taskList) throws DukeException {
         try {
-            int taskInd = Integer.parseInt(command.substring(5));
+            int indOfDescription = command.indexOf("done");
+            int taskInd = Integer.parseInt(command.substring(indOfDescription + 4).trim());
             String s = taskList.markDone(taskInd - 1);
             storage.save(taskList);
             return s;

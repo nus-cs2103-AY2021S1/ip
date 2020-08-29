@@ -65,8 +65,9 @@ public class Deadline extends Task {
                 + " Are you planning to procrastinate? *woof*\n";
         try {
             String messageLowerCase = message.toLowerCase();
+            int indOfDescription = messageLowerCase.indexOf("deadline");
             int indOfTime = messageLowerCase.indexOf("/by");
-            String description = message.substring(9, indOfTime);
+            String description = message.substring(indOfDescription + 8, indOfTime).trim();
             String deadline = message.substring(indOfTime + 3).trim();
             if (description.isBlank() && deadline.isBlank()) {
                 throw new DukeException(errMessage1);
