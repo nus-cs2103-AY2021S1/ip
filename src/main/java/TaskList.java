@@ -1,10 +1,15 @@
+import java.util.Collection;
 import java.util.LinkedList;
 
-public class NumberedList<T> extends LinkedList<T> {
-    NumberedList() {
-        super();
+public class TaskList extends LinkedList<Task> {
+    TaskList(Collection<Task> tasks) {
+        super(tasks);
     }
 
+    void delete(int id) {
+        remove(id);
+    }
+    
     @Override
     public String toString() {
         String result = "";
