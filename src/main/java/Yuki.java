@@ -7,6 +7,9 @@ import duke.TaskList;
 import duke.Ui;
 import duke.command.Command;
 import duke.command.ExitCommand;
+import javafx.animation.PauseTransition;
+import javafx.stage.Stage;
+import javafx.util.Duration;
 
 /**
  * <code>Main</code> starts the entire application by creating a <code>Duke</code> object and checking for existing
@@ -16,6 +19,8 @@ public class Yuki {
     protected static final Ui UI = new Ui();
     protected Storage storage;
     protected TaskList taskList;
+    protected boolean isExit;
+    private Stage stage;
 
     Yuki() {
         try {
@@ -62,6 +67,43 @@ public class Yuki {
     public static void main(String[] args) {
         Yuki yuki = new Yuki();
         yuki.run();
+    }
+
+    /**
+     * Returns a string containing the text in a specific format.
+     *
+     * @param text to be included
+     * @return a string containing the text in a specific format
+     */
+    String printFormat(String text) {
+        String headerLine = "~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
+        return headerLine + text + "\n" + headerLine;
+    }
+
+    /**
+     * Generates a response from <code>Duke</code> from user's input.
+     *
+     * @param input command from user
+     * @return string representation of response from <code>Duke</code>
+     */
+    String getResponse(String input) {
+        try {
+            input = input.trim();
+            Command c = Parser.parse(input);
+            String s = c.execute(input, storage, Yuki.UI, taskList);
+
+            if (c instanceof ExitCommand) {
+
+                PauseTransition delay = new PauseTransition(Duration.seconds(3));
+                delay.setOnFinished(event -> stage.close());
+                delay.play();
+
+            }
+
+            return s;
+        } catch (DukeException ex) {
+            return "ERROR: " + ex.getMessage();
+        }
     }
 
 }
