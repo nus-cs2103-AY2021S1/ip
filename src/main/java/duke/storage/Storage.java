@@ -1,5 +1,12 @@
 package duke.storage;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.InvalidPathException;
+import java.nio.file.Path;
+import java.util.Scanner;
+
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -8,13 +15,6 @@ import duke.task.TaskList;
 import duke.task.TaskType;
 import duke.task.TaskTypeDecodeException;
 import duke.task.Todo;
-
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.nio.file.InvalidPathException;
-import java.nio.file.Path;
-import java.util.Scanner;
 
 /**
  * Encapsulates the logic for storing tasks.
@@ -95,6 +95,8 @@ public class Storage {
                     break;
                 case TODO:
                     taskList.addTask(Todo.parseStorageString(taskStorageLine));
+                    break;
+                default:
                     break;
                 }
             }

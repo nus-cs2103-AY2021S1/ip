@@ -11,15 +11,15 @@ import java.time.format.DateTimeFormatter;
  * the reading format of the datetime as dd/MM/yyyy HH:mm (e.g. 21/09/2020 19:00).
  */
 public abstract class Task {
+    protected static final String DELIMITER_STORAGE = " :: ";
+    protected static final DateTimeFormatter DISPLAY_FORMAT = DateTimeFormatter.ofPattern("dd MMM YY HH:mm");
+    protected static final DateTimeFormatter READER_FORMAT = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+
     private static final String COMPLETE = "\u2713";
     private static final String NOT_COMPLETE = "\u2718";
 
     private static final String STORE_COMPLETED = COMPLETE;
     private static final String STORE_INCOMPLETE = NOT_COMPLETE;
-
-    protected static final String DELIMITER_STORAGE = " :: ";
-    protected static final DateTimeFormatter DISPLAY_FORMAT = DateTimeFormatter.ofPattern("dd MMM YY HH:mm");
-    protected static final DateTimeFormatter READER_FORMAT = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
 
     protected String description;
     protected boolean isComplete = false;
