@@ -43,10 +43,12 @@ public class Storage {
                         task = new ToDo(command[2]);
                         break;
                     case "D":
-                        task = new Deadline(command[2], LocalDate.parse(command[3], DateTimeFormatter.ofPattern("MMM dd yyyy")));
+                        task = new Deadline(command[2], LocalDate.parse(command[3], 
+                                DateTimeFormatter.ofPattern("MMM dd yyyy")));
                         break;
                     case "E":
-                        task = new Event(command[2], LocalDate.parse(command[3], DateTimeFormatter.ofPattern("MMM dd yyyy")));
+                        task = new Event(command[2], LocalDate.parse(command[3], 
+                                DateTimeFormatter.ofPattern("MMM dd yyyy")));
                         break;
                     default:
                         throw new DukeException("Failed to load tasks");

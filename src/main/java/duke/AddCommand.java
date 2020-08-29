@@ -4,9 +4,9 @@ import java.time.DateTimeException;
 import java.time.LocalDate;
 
 public class AddCommand extends Command {
-    public TaskType type;
-    public String description;
-    public String time;
+    private TaskType type;
+    private String description;
+    private String time;
 
     public AddCommand(TaskType type, String description) {
         this.type = type;

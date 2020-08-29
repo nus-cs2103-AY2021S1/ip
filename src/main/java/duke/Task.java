@@ -30,6 +30,10 @@ public abstract class Task {
     public void completeTask() {
         this.isDone = true;
     }
+    
+    public String getName() {
+        return this.description;
+    }
 
     /**
      * Returns a string representation of the Task.

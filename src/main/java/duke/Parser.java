@@ -47,6 +47,12 @@ public class Parser {
             String item = command.substring(7).trim();
             int number = Integer.parseInt(item) - 1;
             return new DeleteCommand(number);
+        } else if (command.equals("find") || command.startsWith("find ")) {
+            if (command.length() < 6 || command.substring(5).trim().isEmpty()) {
+                throw new DukeException("Which task do you want to find?");
+            }
+            String keyword = command.substring(5).trim();
+            return new FindCommand(keyword);
         } else {
             throw new DukeException("I'm sorry, but I don't know what that means :-(");
         }
