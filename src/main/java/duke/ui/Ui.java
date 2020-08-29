@@ -2,6 +2,7 @@ package duke.ui;
 
 import duke.task.Task;
 import duke.task.TaskList;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -42,8 +43,7 @@ public class Ui {
         ArrayList<Task> list = tasks.getList();
         System.out.println(INDENT + LIST_TASK_LINE);
         for (Task task : list) {
-            System.out.println(INDENT + (list.indexOf(task) + 1) + "." + task.toString()
-            );
+            System.out.println(INDENT + (list.indexOf(task) + 1) + "." + task.toString());
         }
         if (list.size() == 0) {
             System.out.println(INDENT + "None");
@@ -73,11 +73,11 @@ public class Ui {
      */
     public void displayDeletedTaskMessage(Task task, int taskCount) {
         System.out.println(
-                INDENT + DONE_TASK_LINE + "\n"
-                + INDENT + "The following task has been removed:\n"
-                + INDENT + INDENT + task.toString() + "\n"
-                + INDENT + "You now have " + taskCount + " task(s) in the list.\n"
-                + INDENT + DONE_TASK_LINE
+            INDENT + DONE_TASK_LINE + "\n"
+            + INDENT + "The following task has been removed:\n"
+            + INDENT + INDENT + task.toString() + "\n"
+            + INDENT + "You now have " + taskCount + " task(s) in the list.\n"
+            + INDENT + DONE_TASK_LINE
         );
     }
 
