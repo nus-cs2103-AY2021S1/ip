@@ -1,17 +1,19 @@
 package duke;
 
 import javafx.fxml.FXML;
+
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+
 import java.util.Scanner;
 
 /**
@@ -37,6 +39,10 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
+    /**
+     * Sets up the Duke logic in the GUI and preload tasks from data.
+     * @param d Duke object
+     */
     public void setDuke(Duke d) {
         duke = d;
 
@@ -59,13 +65,16 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         duke.getParser().setScanner(new Scanner(userInput.getText()));
         String reply = duke.getParser().executeCommand(duke.getTaskList());
+
         if (reply.equals("bye")) {
             reply = duke.getUi().bye();
         }
+
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(userInput.getText(), userImage),
                 DialogBox.getDukeDialog(reply, dukeImage)
         );
+
         userInput.clear();
 
         try {
@@ -75,6 +84,11 @@ public class MainWindow extends AnchorPane {
         }
     }
 
+    /**
+     * Prints a message in the chat box as Duke.
+     *
+     * @param text The message to send.
+     */
     private void sendMessage(String text) {
         dialogContainer.getChildren().add(
                 DialogBox.getDukeDialog(text, dukeImage)

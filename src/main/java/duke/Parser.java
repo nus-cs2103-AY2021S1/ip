@@ -23,6 +23,11 @@ public class Parser {
         this.input = input;
     }
 
+    /**
+     * Sets the scanner input stored in this object.
+     *
+     * @param scanner The scanner to store.
+     */
     public void setScanner(Scanner scanner) {
         this.input = scanner;
     }
