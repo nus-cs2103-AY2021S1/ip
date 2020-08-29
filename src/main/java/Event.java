@@ -7,16 +7,16 @@ import java.time.format.DateTimeParseException;
  * Stores the date/time of the event as well.
  */
 public class Event extends Task {
-    
+
     private String timing;
 
     /**
      * Initialises an Event task and separates the {@code desc}
      * into the Event's description and date/time.
-     * 
+     *
      * @param desc Full description of Event inclusive of time/date.
      */
-    public Event (String desc) {
+    public Event(String desc) {
         super(desc.split("event ")[1].split(" /at ")[0], "E");
         this.timing = desc.split("event ")[1].split(" /at ")[1];
         try {
@@ -31,8 +31,8 @@ public class Event extends Task {
 
     /**
      * Initialises an Event task.
-     * 
-     * @param desc Description of Event task.
+     *
+     * @param desc   Description of Event task.
      * @param timing Date/time of Event.
      */
     public Event(String desc, String timing) {
@@ -41,13 +41,13 @@ public class Event extends Task {
     }
 
     @Override
-    public String toString () {
+    public String toString() {
         return super.toString() + " (at: " + timing + ")";
     }
 
     /**
      * Returns date/time of Event task.
-     * 
+     *
      * @return Date/time of Event.
      */
     @Override

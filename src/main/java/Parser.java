@@ -11,7 +11,7 @@ public class Parser {
 
     /**
      * Processes user input and returns an appropriate reply.
-     * 
+     *
      * @param lst The {@code TaskList} that keeps track of all pending tasks.
      * @param msg User input.
      * @return Response to user input.
@@ -25,11 +25,11 @@ public class Parser {
 
         if (!isLong) {
             switch (msg) {
-            
+
             case "list":
                 reply = lst.toString();
                 break;
-            
+
             case "bye":
                 reply = "Bye. Hope to see you again soon!";
                 break;
@@ -41,15 +41,13 @@ public class Parser {
                 throw new JimmyException(ErrorMessage.EMPTY_DESCRIPTION);
 
             case "done":
-            case "delete":   
+            case "delete":
                 throw new JimmyException(ErrorMessage.EXCESS_DESCRIPTION);
 
             default:
                 throw new JimmyException(ErrorMessage.UNKNOWN_FUNCTION);
             }
-        }
-
-        else {
+        } else {
             switch (arr[0]) {
 
             case "done":
@@ -59,7 +57,7 @@ public class Parser {
                 }
                 int index = Integer.parseInt(arr[1]);
 
-                if (index > lst.getNumTasks()+1 || index < 1) {
+                if (index > lst.getNumTasks() + 1 || index < 1) {
                     throw new JimmyException(ErrorMessage.TASK_EXCEED_RANGE);
                 }
                 if (arr[0].equals("done")) {
@@ -69,11 +67,11 @@ public class Parser {
                 } else {
                     Task t = lst.getTask(index);
                     lst.del(index);
-                    reply = "Noted. I've removed this task:" + "\n\t  " + t + 
+                    reply = "Noted. I've removed this task:" + "\n\t  " + t +
                         "\n\tNow you have " + lst.getNumTasks() + " tasks in the list.";
                 }
                 break;
-            
+
             case "todo":
             case "event":
             case "deadline":
@@ -87,10 +85,10 @@ public class Parser {
                 }
                 lst.addTask(t);
                 reply = "Got it. I've added this task:\n\t  " +
-                    t + "\n\tNow you have " + lst.getNumTasks() 
+                    t + "\n\tNow you have " + lst.getNumTasks()
                     + " tasks in the list.";
                 break;
-            
+
             case "find":
                 String desc = msg.split("find ")[1];
                 String tasks = lst.findTasksWith(desc);

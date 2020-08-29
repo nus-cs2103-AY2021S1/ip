@@ -41,17 +41,17 @@ public class Storage {
         if (t.getType().equals("T")) {
             timing = "NaN";
         }
-        return t.getType() + div +
-            t.getStatusIcon() + div
-            + t.getDescription() +
-            div + timing; 
+        return t.getType() + div
+            + t.getStatusIcon() + div
+            + t.getDescription()
+            + div + timing;
     }
 
     private Task reformat(String s) {
         String[] arr = s.split("-----");
         Task t = null;
         switch (arr[0]) {
-        
+
         case "T":
             t = new Todo("todo " + arr[2]);
             break;
@@ -72,27 +72,25 @@ public class Storage {
 
     /**
      * Overrides (if existing file exists) and saves a {@code TaskList} to the file in the filepath.
-     * 
+     *
      * @param p {@code TaskList} to be saved into file.
      */
     public void updateList(TaskList p) {
 
         try {
             FileWriter fw = new FileWriter(this.file.getPath());
-            for (Task t: p.getList()) {
+            for (Task t : p.getList()) {
                 fw.write(this.format(t) + "\n");
             }
             fw.close();
-        }
-
-        catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
     /**
      * Retrieves tasks (if present) from file in filepath and loads it into the {@code TaskList}.
-     * 
+     *
      * @param p {@code TaskList} that will be loaded with tasks from previous iterations if present.
      */
     public void loadList(TaskList p) {

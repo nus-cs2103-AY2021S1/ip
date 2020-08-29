@@ -7,7 +7,7 @@ public class TaskList {
 
     private final ArrayList<Task> lst;
 
-    public TaskList () {
+    public TaskList() {
         this.lst = new ArrayList<>();
     }
 
@@ -16,24 +16,24 @@ public class TaskList {
     }
 
     // This method is responsible for inserting text into list, and updating current index
-    public void addTask (Task t) {
+    public void addTask(Task t) {
         this.lst.add(t);
     }
 
-    public void completeTask (int i) {
-        this.lst.get(i-1).markAsDone();
+    public void completeTask(int i) {
+        this.lst.get(i - 1).markAsDone();
     }
 
-    public Task getTask (int i) {
-        return this.lst.get(i-1);
+    public Task getTask(int i) {
+        return this.lst.get(i - 1);
     }
 
-    public int getNumTasks () {
+    public int getNumTasks() {
         return this.lst.size();
     }
 
-    public void del (int i) {
-        this.lst.remove(i-1);
+    public void del(int i) {
+        this.lst.remove(i - 1);
     }
 
     // Overrides toString() method of Object Class to display contents of list neatly
@@ -43,7 +43,7 @@ public class TaskList {
         if (!this.lst.isEmpty()) {
             int i = 1;
             msg = ((i) + ". " + this.getTask(i) + "\n");
-            for (Task t: this.lst) {
+            for (Task t : this.lst) {
                 if (i == 1) {
                     i++;
                     continue;
@@ -57,7 +57,7 @@ public class TaskList {
     public String findTasksWith(String s) {
         String msg = "";
         int i = 1;
-        for (Task t: this.lst) {
+        for (Task t : this.lst) {
             if (t.getDescription().contains(s)) {
                 if (i == 1) {
                     msg = ((i) + ". " + this.getTask(i++) + "\n");

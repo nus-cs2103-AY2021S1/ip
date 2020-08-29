@@ -1,3 +1,4 @@
+
 /**
  * The {@code Task} class represents a task that
  * contains a description, isDone state and type.
@@ -9,9 +10,9 @@ public class Task {
 
     /**
      * Initialises a {@code Task} object with its description and type.
-     * 
-     * @param description Description of the task. 
-     * @param type Type of task i.e. {@code Event}, {@code Deadline}, {@code Todo}
+     *
+     * @param description Description of the task.
+     * @param type        Type of task i.e. {@code Event}, {@code Deadline}, {@code Todo}
      */
     public Task(String description, String type) {
         this.description = description;
@@ -21,17 +22,17 @@ public class Task {
 
     /**
      * Returns the status of the task.
-     * 
+     *
      * @return Status of the task.
      */
     public String getStatusIcon() {
         //return tick or X symbols
-        return (isDone ? "\u2713" : "\u2718"); 
+        return (isDone ? "\u2713" : "\u2718");
     }
 
     /**
      * Returns the task description.
-     * 
+     *
      * @return Description of the task.
      */
     public String getDescription() {
@@ -39,7 +40,7 @@ public class Task {
     }
 
     /**
-     * Marks the task as completed. 
+     * Marks the task as completed.
      */
     public void markAsDone() {
         this.isDone = true;
@@ -52,7 +53,7 @@ public class Task {
 
     /**
      * Returns task type.
-     * 
+     *
      * @return Type of task.
      */
     public String getType() {

@@ -30,7 +30,7 @@ public class Jimmy {
         storage.updateList(planner);
     }
 
-    public static void main (String[] args) {
+    public static void main(String[] args) {
         new Jimmy().run();
     }
 }
