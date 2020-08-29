@@ -30,7 +30,7 @@ public class Event extends Task {
     }
 
     @Override
-    Event completeTask() {
+    public Event completeTask() {
         return new Event(this.name, true, this.time);
     }
 

@@ -30,7 +30,7 @@ public class Deadline extends Task {
     }
 
     @Override
-    Deadline completeTask() {
+    public Deadline completeTask() {
         return new Deadline(this.name, true, this.deadline);
     }
 
