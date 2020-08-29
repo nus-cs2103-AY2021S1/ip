@@ -24,14 +24,6 @@ public class Storage {
         return printWriter;
     }
 
-    public ArrayList<Task> getList() {
-        return list;
-    }
-
-    public String getFilepath() {
-        return filepath;
-    }
-
     public void setBr(BufferedReader br) {
         this.br = br;
     }

@@ -13,7 +13,7 @@ public class Duke {
     private duke.TaskList tasks;
     private Ui ui;
 
-    public Duke(String filepath) throws IOException, duke.DukeException {
+    public Duke(String filepath) throws IOException {
         ui = new Ui();
         storage = new duke.Storage(filepath);
         try {

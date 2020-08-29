@@ -17,10 +17,6 @@ public class Task {
         return name;
     }
 
-    public Boolean isDone() {
-        return isDone;
-    }
-
     public void setDone() {
         isDone = true;
     }
