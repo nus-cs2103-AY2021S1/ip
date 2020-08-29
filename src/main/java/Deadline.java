@@ -12,6 +12,9 @@ public class Deadline extends Task{
         return "[D]";
     }
 
+    public String storeFormat() {
+        return String.format("%s %s %s %s",this.getTaskSymbol(),this.isDone(),this.description,this.deadline);
+    }
     public String toString () {
         return String.format("%s (by: %s)",this.description,this.deadline);
     }

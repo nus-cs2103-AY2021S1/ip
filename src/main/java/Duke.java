@@ -1,5 +1,6 @@
 
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -16,13 +17,13 @@ public class Duke {
 
     }
 
-    public static void main(String[] args) {
-        List<Task> tasks = new ArrayList<>();
+    public static void main(String[] args) throws IOException {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
+        List<Task> tasks = FileSaver.loadFile();
         System.out.println("Hello from\n" + logo);
         Printable greeting = () -> "Hello! I'm Duke \nWhat can I do for you?";
         Printable goodbye = () -> "Bye. Hope to see you again soon!";
@@ -35,6 +36,7 @@ public class Duke {
                 input = getUserInput(sc);
                 String command = input.print();
                 if (command.toLowerCase().equals("bye")) {
+                    FileSaver.writeToFile(tasks);
                     speak(goodbye);
                     break;
                 } else if (command.toLowerCase().equals("list")) {
@@ -63,7 +65,7 @@ public class Duke {
                 } else {
                     storeInput(command, tasks);
                 }
-            } catch (IllegalArgumentException e) {
+            } catch (IllegalArgumentException | IOException e) {
                 System.out.println(e);
                 continue;
             }

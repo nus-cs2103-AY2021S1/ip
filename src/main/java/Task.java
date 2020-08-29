@@ -35,6 +35,8 @@ public abstract class Task {
     }
 
     public abstract String getTaskSymbol();
+    
+    public abstract String storeFormat();
 
     public static void decrementTask() {
         Task.total --;
