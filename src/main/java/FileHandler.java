@@ -18,20 +18,25 @@ public class FileHandler {
     public static void writeToFile(String file, TaskManager tm) throws IOException {
 
         FileWriter writer = new FileWriter(file);
-        ArrayList<Task> taskList = tm.getTaskList();
+        ArrayList<Task> tasksList = tm.getTasksList();
 
-        for (int i = 0; i < taskList.size(); i++) {
+        for (int i = 0; i < tasksList.size(); i++) {
 
-            if (taskList.get(i) instanceof Todo) {
-                writer.write("T ## " + (taskList.get(i).getDone() ? 1 : 0) + " ## " + taskList.get(i).getDescription() + "\n");
+            if (tasksList.get(i) instanceof Todo) {
+                writer.write("T ## " + (tasksList.get(i).getDone() ? 1 : 0) + " ## "
+                        + tasksList.get(i).getDescription() + "\n");
             }
 
-            if (taskList.get(i) instanceof Deadline) {
-                writer.write("D ## " + (taskList.get(i).getDone() ? 1 : 0) + " ## " + ((Deadline) taskList.get(i)).getDescription() + " ## " + ((Deadline) taskList.get(i)).getDate() + "\n");
+            if (tasksList.get(i) instanceof Deadline) {
+                writer.write("D ## " + (tasksList.get(i).getDone() ? 1 : 0) + " ## "
+                        + ((Deadline) tasksList.get(i)).getDescription() + " ## "
+                        + ((Deadline) tasksList.get(i)).getDate() + "\n");
             }
 
-            if (taskList.get(i) instanceof Event) {
-                writer.write("E ## " + (taskList.get(i).getDone() ? 1 : 0) + " ## " + ((Event) taskList.get(i)).getDescription() + " ## " + ((Event) taskList.get(i)).getDate() + " " + ((Event) taskList.get(i)).getTime() + "\n");
+            if (tasksList.get(i) instanceof Event) {
+                writer.write("E ## " + (tasksList.get(i).getDone() ? 1 : 0) + " ## "
+                        + ((Event) tasksList.get(i)).getDescription() + " ## "
+                        + ((Event) tasksList.get(i)).getDate() + " " + ((Event) tasksList.get(i)).getTime() + "\n");
             }
         }
         writer.close();

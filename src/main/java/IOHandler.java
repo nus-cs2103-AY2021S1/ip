@@ -34,7 +34,7 @@ public class IOHandler {
 
             for (int i = 0; i < files.size(); i++) {
                 Task task = TextAndTaskConverter.textConverter(files.get(i));
-                taskManager.getTaskList().add(task);
+                taskManager.getTasksList().add(task);
             }
 
             while (!text.equals("bye")) {
