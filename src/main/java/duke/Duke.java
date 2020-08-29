@@ -38,22 +38,20 @@ public class Duke {
                     break;
                 } else if (input.equals("list")) {
                     ui.printList(taskList.getList());
-                    ui.drawLine();
                 } else if (input.split(" ")[0].equals("done")) {
                     ui.doneTask(taskList.done(Integer.parseInt(input.split(" ")[1])));
                     ui.listCount(taskList.countList());
-                    ui.drawLine();
                     storage.saveFile(taskList.getList());
                 } else if (first.equals("todo")|| first.equals("deadline") || first.equals("event")) {
                     ui.addTask(taskList.add(input));
                     ui.listCount(taskList.countList());
-                    ui.drawLine();
                     storage.saveFile(taskList.getList());
-                } else if (first.equals("delete")){
+                } else if (first.equals("delete")) {
                     ui.deleteTask(taskList.delete(input));
                     ui.listCount(taskList.countList());
-                    ui.drawLine();
                     storage.saveFile(taskList.getList());
+                } else if (first.equals("find")) {
+                    ui.foundWord(taskList.findWord(input));
                 } else {
                     throw new DukeException("Sorry I don't know what you mean");
                 }

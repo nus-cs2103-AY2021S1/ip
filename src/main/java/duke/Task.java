@@ -15,6 +15,9 @@ public class Task {
         this.time = time;
     }
 
+    public String getName(){
+        return name;
+    }
 
 
     public Task completedTask(){
