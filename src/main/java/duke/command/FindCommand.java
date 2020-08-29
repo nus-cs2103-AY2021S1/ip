@@ -29,14 +29,15 @@ public class FindCommand extends Command {
      * @param tasks   The list of tasks known by the chat bot.
      * @param ui      The UI that is used by the chat bot.
      * @param storage The storage that is used by the chat bot.
+     * @return A string detailing the outcome of the execution.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         TaskList filteredTasks = tasks.search(this.keyword);
         if (filteredTasks.size() == 0) {
-            ui.print("No matching tasks found.");
+            return "No matching tasks found.";
         } else {
-            ui.print(String.format("Here are the matching tasks in your list:\n%s", filteredTasks));
+            return String.format("Here are the matching tasks in your list:\n%s", filteredTasks);
         }
     }
 }

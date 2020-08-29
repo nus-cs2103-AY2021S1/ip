@@ -6,6 +6,7 @@ import java.nio.file.Paths;
 import duke.command.Command;
 import duke.exception.DukeException;
 import duke.task.TaskList;
+import duke.ui.Ui;
 
 public class Duke {
     private static final Path filePath = Paths.get(".", "data", "duke.txt");
@@ -59,10 +60,25 @@ public class Duke {
     }
 
     /**
+     * Returns the message that Duke will use to greet the user when first launching the
+     * application.
+     *
+     * @return The greeting message.
+     */
+    public String greetUser() {
+        return "Hello! I'm Duke\nWhat can I do for you?";
+    }
+
+    /**
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
     public String getResponse(String input) {
-        return "Duke heard: " + input;
+        try {
+            Command c = Parser.parse(input);
+            return c.execute(tasks, ui, storage);
+        } catch (DukeException e) {
+            return (e.getMessage());
+        }
     }
 }

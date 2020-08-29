@@ -14,10 +14,11 @@ public class ByeCommand extends Command {
      * @param tasks   The list of tasks known by the chat bot.
      * @param ui      The UI that is used by the chat bot.
      * @param storage The storage that is used by the chat bot.
+     * @return A string detailing the outcome of the execution.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.print("Bye. Hope to see you again soon!");
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        return "Bye. Hope to see you again soon!";
     }
 
     /**

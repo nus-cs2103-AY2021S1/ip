@@ -14,13 +14,14 @@ public class ListCommand extends Command {
      * @param tasks   The list of tasks known by the chat bot.
      * @param ui      The UI that is used by the chat bot.
      * @param storage The storage that is used by the chat bot.
+     * @return A string detailing the outcome of the execution.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         if (tasks.size() == 0) {
-            ui.print("No tasks found.");
+            return "No tasks found.";
         } else {
-            ui.print(String.format("Here are the tasks in your list:\n%s", tasks));
+            return String.format("Here are the tasks in your list:\n%s", tasks);
         }
     }
 }
