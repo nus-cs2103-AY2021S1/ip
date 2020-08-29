@@ -21,6 +21,9 @@ import javafx.scene.layout.HBox;
  * containing text from the speaker.
  */
 public class DialogBox extends HBox {
+    private static final String DUKE_DIALOG_COLOUR = "#d9d9d9";
+    private static final String USER_DIALOG_COLOUR = "#a9d18e";
+
     @FXML
     private Label dialog;
     @FXML
@@ -41,6 +44,11 @@ public class DialogBox extends HBox {
         displayPicture.setImage(img);
     }
 
+    private void setDialogColour(String colour) {
+        String existingStyle = this.dialog.styleProperty().getValue();
+        this.dialog.setStyle(String.format("%s -fx-background-color: %s;", existingStyle, colour));
+    }
+
     /**
      * Flips the dialog box such that the ImageView is on the left and text on the right.
      */
@@ -52,12 +60,15 @@ public class DialogBox extends HBox {
     }
 
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+        var db = new DialogBox(text, img);
+        db.setDialogColour(USER_DIALOG_COLOUR);
+        return db;
     }
 
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();
+        db.setDialogColour(DUKE_DIALOG_COLOUR);
         return db;
     }
 }
