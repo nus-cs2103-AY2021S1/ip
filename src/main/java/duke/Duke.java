@@ -5,14 +5,28 @@ import duke.exceptions.DukeException;
 import duke.parser.Parser;
 import duke.task.TaskList;
 
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
+
 import java.io.IOException;
 
-public class Duke {
+public class Duke extends Application {
 
     private Storage store = new Storage();
     private TaskList taskList;
     private Ui ui;
     private Parser parser = new Parser();
+
+    @Override
+    public void start(Stage stage) {
+        Label helloWorld = new Label("Hello World!");
+        Scene scene = new Scene(helloWorld);
+
+        stage.setScene(scene);
+        stage.show();
+    }
 
     public void start() {
         ui = new Ui();
