@@ -1,13 +1,14 @@
 package duke;
 
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
 public class ParserTest {
 
     @Test
-    public void parse_DeadlineInvalidDate_exceptionThrown() {
+    public void parse_deadlineInvalidDate_exceptionThrown() {
         Exception exception = assertThrows(DukeException.class, () -> {
             Parser.parse("deadline project /by 12");
         });
@@ -18,7 +19,7 @@ public class ParserTest {
     }
 
     @Test
-    public void parse_EventEmptyDate_exceptionThrown() {
+    public void parse_eventEmptyDate_exceptionThrown() {
         Exception exception = assertThrows(DukeException.class, () -> {
             Parser.parse("event project /at");
         });

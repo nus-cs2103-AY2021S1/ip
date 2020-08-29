@@ -1,14 +1,15 @@
 package duke;
 
-import duke.task.Task;
-
 import java.time.LocalDate;
 import java.util.Scanner;
+
+import duke.task.Task;
 
 /**
  * Deals with interactions with the user.
  */
 public class Ui {
+    /** Scanner to take in user input. */
     private Scanner sc;
 
     /**
