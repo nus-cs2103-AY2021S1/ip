@@ -1,49 +1,40 @@
 public class Parser {
-    String command;
-    String[] inputArr;
+    public static Command getCommand(String command) throws DukeException {
+        String[] commandArr = command.split(" ");
+        String commandType = commandArr[0];
 
-    Parser(String command) {
-        this.command = command;
-        this.inputArr = command.split(" ");
-    }
-
-    /**
-     * Returns the type of the command keyed in by the user.
-     * @return The type of command. Eg: done, delete, list, etc.
-     */
-
-    public String getCommandType() {
-        return inputArr[0];
-    }
-
-    /**
-     * Returns an integer of the task item the user wishes to delete or mark as done.
-     * @return The number of the task item to be modified.
-     */
-
-    public int getTaskToModify() {
-        return Integer.parseInt(inputArr[1]);
-    }
-
-    public String getWord() {
-        return inputArr[1];
+        switch (commandType) {
+        case ("bye"):
+            return new ByeCommand();
+        case ("find"):
+            return new FindCommand(commandArr[1]);
+        case ("list"):
+            return new ListCommand();
+        case ("delete"):
+            return new DeleteCommand(Integer.parseInt(commandArr[1]));
+        case ("done"):
+            return new DoneCommand(Integer.parseInt(commandArr[1]));
+        default:
+            return new AddCommand(Parser.getNewTask(commandType, command, commandArr));
+        }
     }
 
     /**
      * Returns an array of strings that make up the details of one task. Eg: ["T", "Read Book"].
+     * @param addType The type of todo that is to be added.
+     * @param inputArr A string array of input commands.
      * @return Details of a single task.
      * @throws DukeException If the "todo" command keyed by user does not contain a todo task string.
      */
 
-    public String[] getNewTask() throws DukeException {
+    private static String[] getNewTask(String addType, String command, String[] inputArr) throws DukeException {
         String[] newTaskDetails;
-        String commandType = getCommandType();
 
-        switch (commandType) {
+        switch (addType) {
         case ("todo"):
             // Only has the word todo
             if (inputArr.length == 1) throw new EmptyTodoException();
-            newTaskDetails = new String[]{"T", inputArr[1].trim()};
+            newTaskDetails = new String[]{"T", command.substring(5).trim()};
             break;
         case ("deadline"):
             String deadlineContent = command.substring(9);

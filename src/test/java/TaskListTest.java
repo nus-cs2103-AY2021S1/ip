@@ -26,7 +26,7 @@ public class TaskListTest {
 
         ArrayList<String> expectedResult = new ArrayList<>();
         expectedResult.add("[T][✓] Read Book");
-        expectedResult.add("[D][ઝ] Complete assignment (by: Feb 10 2019)");
+        expectedResult.add("[D][X] Complete assignment (by: Feb 10 2019)");
 
         assertEquals(expectedResult, tasks.getTasksDescription());
     }

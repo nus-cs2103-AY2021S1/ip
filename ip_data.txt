@@ -1,2 +1,6 @@
-E|0|help people|2020-04-12
-T|0|read
+E|1|help people|2020-04-12
+T|0|Exercise
+T|0|Run
+T|0|Walk
+D|0|Do Assignment|2019-12-12
+D|0|Sleep|2020-12-13
