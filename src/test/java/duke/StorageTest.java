@@ -1,10 +1,10 @@
 import duke.Duke;
 import duke.DukeException;
 import duke.Storage;
+import duke.stubs.ToDoStub;
 import duke.task.Task;
 import org.junit.jupiter.api.Test;
 
-import stubs.ToDoStub;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -41,17 +41,6 @@ public class StorageTest {
         }
     }
 
-    @Test
-    public void testLoadFileFromMemory_pathDoesNotExist_taskListReturned() throws IOException, DukeException {
-        // if file path exist during test, delete it
-        try {
-            Files.delete(Paths.get(Duke.FILE_PATH));
-        } catch (NoSuchFileException exception) {
-        } finally {
-            Storage store = new Storage(Duke.FILE_PATH);
-            List<Task> expected = new ArrayList<>();
-            assertEquals(expected, store.loadTasksFromMemory());
-        }
-    }
+   
 
 }

@@ -2,7 +2,7 @@ plugins {
     id 'java'
     id 'application'
     id 'checkstyle'
-    id 'com.github.johnrengelman.shadow' version '5.1.0'
+    id "com.github.johnrengelman.shadow" version "6.0.0"
 }
 
 repositories {
@@ -10,8 +10,8 @@ repositories {
 }
 
 dependencies {
-    testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.5.0'
-    testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.5.0'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
 }
 
 test {
@@ -29,7 +29,7 @@ test {
 }
 
 application {
-    mainClassName = "seedu.duke.Duke"
+    mainClassName = "duke.Duke"
 }
 
 shadowJar {
@@ -37,10 +37,16 @@ shadowJar {
     archiveClassifier = null
 }
 
+task(runMain, dependsOn: 'classes', type: JavaExec) {
+    main = 'duke.Duke'
+    classpath = sourceSets.main.runtimeClasspath
+}
+
 checkstyle {
-    toolVersion = '8.23'
+    toolVersion = '8.29'
 }
 
 run{
+    enableAssertions = true
     standardInput = System.in
 }

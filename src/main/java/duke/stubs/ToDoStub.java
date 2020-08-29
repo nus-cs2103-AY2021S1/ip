@@ -1,4 +1,4 @@
-package stubs;
+package duke.stubs;
 
 import duke.task.ToDo;
 

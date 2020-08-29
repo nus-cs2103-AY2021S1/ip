@@ -4,10 +4,10 @@ import duke.command.Command;
 public class Duke {
 
     /** File path for storage object to write to. */
-    private static final String FILE_PATH = "data/duke.txt";
     private Storage storage;
     private TaskList taskItems;
     private Ui ui;
+    public static final String FILE_PATH = "data/duke.txt";
 
     /**
      * Instantiates Duke Object which initializes variables needed throughout program. 
