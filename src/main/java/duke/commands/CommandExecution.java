@@ -1,14 +1,19 @@
 package duke.commands;
 
-import duke.exception.DukeException;
-import duke.tasks.*;
-import duke.ui.Ui;
+import static duke.parser.Parser.dateParser;
+import static duke.parser.Parser.dateTimeParser;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-import static duke.parser.Parser.dateParser;
-import static duke.parser.Parser.dateTimeParser;
+import duke.exception.DukeException;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.TaskList;
+import duke.tasks.ToDo;
+import duke.ui.Ui;
+
 
 /**
  * A class representing command execution.
