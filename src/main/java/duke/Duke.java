@@ -54,4 +54,8 @@ public class Duke {
             Ui.sendMessages();
         }
     }
+
+    public String getResponse(String input) {
+        return "Duke heard: " + input;
+    }
 }
