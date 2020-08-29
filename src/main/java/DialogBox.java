@@ -46,12 +46,14 @@ public class DialogBox extends HBox {
         dialog.setText(l.getText());
         displayPicture.setImage(iv.getImage());
         dialog.setFont(Font.font("Ayuthaya", 13));
+        dialog.setMaxWidth(350);
+        dialog.setAlignment(Pos.CENTER);
         dialog = l;
         displayPicture = iv;
 
         dialog.setWrapText(true);
-        displayPicture.setFitWidth(30.0);
-        displayPicture.setFitHeight(30.0);
+        displayPicture.setFitWidth(100.0);
+        displayPicture.setFitHeight(100.0);
 
         this.setAlignment(Pos.TOP_RIGHT);
         this.setBorder(new Border(new BorderStroke(Color.TRANSPARENT,
