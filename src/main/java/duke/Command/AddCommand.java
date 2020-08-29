@@ -109,7 +109,7 @@ public class AddCommand extends Command {
         taskList.add(newTask);
         storage.saveTasks(taskList);
 
-        return Message.MESSAGE_ADDED + newTask.toString() + Ui.LINE_SEPARATOR
-                + Message.getTotalTaskMessage(taskList);
+        return Message.concatLines(Message.MESSAGE_ADDED, newTask.toString(),
+                Ui.LINE_SEPARATOR, Message.getTotalTaskMessage(taskList));
     }
 }

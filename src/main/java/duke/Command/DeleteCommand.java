@@ -26,7 +26,7 @@ public class DeleteCommand extends Command {
         Task task = taskList.get(index);
         taskList.remove(index);
         storage.saveTasks(taskList);
-        return Message.MESSAGE_DELETE + task.toString() + Ui.LINE_SEPARATOR
-                + Message.getTotalTaskMessage(taskList);
+        return Message.concatLines(Message.MESSAGE_DELETE, task.toString(),
+                Ui.LINE_SEPARATOR, Message.getTotalTaskMessage(taskList));
     }
 }

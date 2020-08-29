@@ -26,6 +26,6 @@ public class CompleteCommand extends Command {
         Task task = taskList.get(index);
         task.markAsDone();
         storage.saveTasks(taskList);
-        return Message.MESSAGE_DONE + task.toString();
+        return Message.concatLines(Message.MESSAGE_DONE, task.toString());
     }
 }

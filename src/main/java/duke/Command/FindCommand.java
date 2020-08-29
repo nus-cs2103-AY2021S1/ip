@@ -24,7 +24,8 @@ public class FindCommand extends Command {
         if (resultWithKeyword.isEmpty()) {
             return Message.MESSAGE_NO_TASK;
         } else {
-            return Message.MESSAGE_FIND + Ui.LINE_SEPARATOR + resultWithKeyword.toString();
+            return Message.concatLines(Message.MESSAGE_FIND,
+                    Ui.LINE_SEPARATOR, resultWithKeyword.toString());
         }
     }
 }

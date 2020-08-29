@@ -15,7 +15,8 @@ public class ListCommand extends Command {
         if (taskList.isEmpty()) {
             return Message.MESSAGE_NO_TASK;
         } else {
-            return Message.MESSAGE_LIST + Ui.LINE_SEPARATOR + taskList.toString();
+            return Message.concatLines(Message.MESSAGE_LIST,
+                    Ui.LINE_SEPARATOR, taskList.toString());
         }
     }
 }
