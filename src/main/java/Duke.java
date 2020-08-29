@@ -1,6 +1,4 @@
-<<<<<<< HEAD
 
-=======
 import java.io.File;
 import java.util.Scanner;
 import java.util.ArrayList;
@@ -8,19 +6,16 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
->>>>>>> branch-Level-10
+
 
 /**
  * Main class which cretaes the application Duke that creates a checklist for tasks to do
  */
 public class Duke extends Application{
 
-<<<<<<< HEAD
-    /**
-     * main program to execute
-     * @param args
-     */
-=======
+
+
+
 
     @Override
     public void start(Stage stage) {
@@ -32,7 +27,10 @@ public class Duke extends Application{
         runDuke();
     }
 
->>>>>>> branch-Level-10
+    /**
+     * main program to execute
+     * @param args
+     */
     public static void main(String[] args) {
 
 
