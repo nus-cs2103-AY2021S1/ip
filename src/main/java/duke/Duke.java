@@ -1,9 +1,9 @@
 package duke;
 
+import java.io.IOException;
+
 import duke.commands.Command;
 import duke.exceptions.DukeException;
-
-import java.io.IOException;
 
 /**
  * Represents a Duke.
@@ -27,6 +27,7 @@ public class Duke {
     /**
      * Returns the response after executing the command
      * associated with the user input.
+     *
      * @param input user input
      * @return response from execution of the command
      */

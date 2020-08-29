@@ -1,5 +1,8 @@
 package duke.ui;
 
+import java.io.IOException;
+import java.util.Collections;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -10,9 +13,6 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
-
-import java.io.IOException;
-import java.util.Collections;
 
 /**
  * An example of a custom control using FXML.
@@ -41,6 +41,7 @@ public class DialogBox extends HBox {
 
     /**
      * Formats text and image into a user dialog.
+     *
      * @param text Text to include in dialog.
      * @param img Image to include in dialog.
      * @return User dialog box containing Text and Image.
@@ -51,6 +52,7 @@ public class DialogBox extends HBox {
 
     /**
      * Formats text and image into a seller dialog.
+     *
      * @param text Text to include in dialog.
      * @param img Image to include in dialog.
      * @return Seller dialog box containing Text and Image.
@@ -70,4 +72,5 @@ public class DialogBox extends HBox {
         getChildren().setAll(tmp);
         setAlignment(Pos.TOP_LEFT);
     }
+
 }

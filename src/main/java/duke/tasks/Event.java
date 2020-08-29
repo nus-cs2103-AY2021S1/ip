@@ -1,24 +1,24 @@
 package duke.tasks;
 
-import duke.exceptions.DukeException;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+import duke.exceptions.DukeException;
 
 /**
  * Represents an Event.
  */
 public class Event extends Task {
-    static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-    LocalDateTime datetime;
+    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+    private final LocalDateTime datetime;
 
     /**
      * Class constructor specifying whether the event is complete.
      *
-     * @param content        Contents of the event.
+     * @param content Contents of the event.
      * @param datetimeString Datetime of the event.
-     * @param isComplete     Completion status of the event.
+     * @param isComplete Completion status of the event.
      * @throws DukeException If an exception related to Duke occurred.
      */
     public Event(String content, String datetimeString, Boolean isComplete) throws DukeException {
@@ -36,7 +36,7 @@ public class Event extends Task {
     /**
      * Class constructor.
      *
-     * @param content        Contents of the event.
+     * @param content Contents of the event.
      * @param datetimeString Datetime of the event.
      * @throws DukeException If an exception related to Duke occurred.
      */

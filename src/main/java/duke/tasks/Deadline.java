@@ -1,24 +1,24 @@
 package duke.tasks;
 
-import duke.exceptions.DukeException;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+import duke.exceptions.DukeException;
 
 /**
  * Represents a Deadline.
  */
 public class Deadline extends Task {
-    static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-    LocalDateTime datetimeDue;
+    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+    private final LocalDateTime datetimeDue;
 
     /**
      * Class constructor specifying whether the deadline is complete.
      *
-     * @param content           Contents of the deadline.
+     * @param content Contents of the deadline.
      * @param datetimeDueString Due datetime of the deadline.
-     * @param isComplete        Completion status of the deadline.
+     * @param isComplete Completion status of the deadline.
      * @throws DukeException If an exception related to Duke occurred.
      */
     public Deadline(String content, String datetimeDueString, boolean isComplete) throws DukeException {
@@ -37,7 +37,7 @@ public class Deadline extends Task {
     /**
      * Class constructor.
      *
-     * @param content           Contents of the deadline.
+     * @param content Contents of the deadline.
      * @param datetimeDueString Due datetime of the deadline.
      * @throws DukeException If an exception related to Duke occurred.
      */

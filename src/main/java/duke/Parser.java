@@ -1,6 +1,15 @@
 package duke;
 
-import duke.commands.*;
+import duke.commands.AddDeadlineCommand;
+import duke.commands.AddEventCommand;
+import duke.commands.AddTodoCommand;
+import duke.commands.Command;
+import duke.commands.CompleteTaskCommand;
+import duke.commands.DeleteTaskCommand;
+import duke.commands.ExitCommand;
+import duke.commands.FindAllContainingCommand;
+import duke.commands.InvalidCommand;
+import duke.commands.ListCommand;
 import duke.patterns.InputPattern;
 
 /**
