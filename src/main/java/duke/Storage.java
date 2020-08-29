@@ -13,7 +13,7 @@ import java.util.ArrayList;
  */
 
 public class Storage {
-    private final String filepath;
+    private String filepath;
 
     public Storage() {
         this.filepath = "";

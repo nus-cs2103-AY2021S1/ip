@@ -15,6 +15,7 @@ public class TimedTask extends Task {
     protected LocalDate date;
     protected Date time;
     protected String time2;
+
     protected boolean hasDate;
     protected boolean hasTime;
 

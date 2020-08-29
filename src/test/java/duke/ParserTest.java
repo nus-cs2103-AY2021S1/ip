@@ -2,7 +2,6 @@ package duke;
 
 import duke.exceptions.DukeException;
 import duke.exceptions.InvalidCommandException;
-import duke.task.Task;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -11,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class ParserTest {
     Parser parser = new Parser();
-    TaskList taskList = new TaskList(new ArrayList<Task>());
+    TaskList taskList = new TaskList(new ArrayList<>());
     StorageStub storage = new StorageStub();
 
     @Test

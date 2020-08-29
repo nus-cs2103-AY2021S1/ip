@@ -106,7 +106,7 @@ public class TaskList {
      * @throws EmptyFindException If there is no keyword given.
      * @throws InvalidCommandException If command is not valid.
      */
-    public void find (String str) throws EmptyFindException, InvalidCommandException {
+    public void find(String str) throws EmptyFindException, InvalidCommandException {
         String s = str.trim();
         if (s.equals("find")) {
             throw new EmptyFindException();
@@ -114,6 +114,7 @@ public class TaskList {
             String keyword = s.substring(5);
             int i = 1;
             boolean flag = false;
+            //search if there are any matching tasks
             for (Task t: tasks) {
                 if (t.getDescription().contains(keyword)) {
                     flag = true;

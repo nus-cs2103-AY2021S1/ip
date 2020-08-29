@@ -9,8 +9,8 @@ import java.util.Scanner;
  */
 
 public class Duke {
+    private TaskList tasks;
     private Storage storage;
-    protected TaskList tasks;
     private Ui ui;
     private Parser parser;
 

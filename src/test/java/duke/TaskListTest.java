@@ -39,7 +39,7 @@ public class TaskListTest {
             tasks.completeTask("done 2");
             fail();
         } catch (DukeException e) {
-            assertEquals("Please select a task from 1 to 1.", e.getMessage());
+            assertEquals("Please select a task from 1 to 1 for completion.", e.getMessage());
         }
 
     }
@@ -61,7 +61,17 @@ public class TaskListTest {
             tasks.addTask("todo project");
             tasks.deleteTask("delete 2");
         } catch (DukeException e) {
-            assertEquals("Please select a task from 1 to 1.", e.getMessage());
+            assertEquals("Please select a task from 1 to 1 for deletion.", e.getMessage());
+        }
+    }
+
+    @Test
+    public void findTask_exceptionThrown() {
+        try {
+            tasks.addTask("todo project");
+            tasks.find("find");
+        } catch (DukeException e) {
+            assertEquals("Please key in a keyword to find", e.getMessage());
         }
     }
 
