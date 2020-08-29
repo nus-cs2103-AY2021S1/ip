@@ -8,12 +8,10 @@ public class Duke {
 
     /** Deals with interaction with the user. */
     private final Ui ui;
-
-    /** Contains the task list and add/delete operations for the task list */
-    private TaskList tasks;
-
     /** Deals with saving and loading the tasks from the file. */
     private final Storage storage;
+    /** Contains the task list and add/delete operations for the task list. */
+    private TaskList tasks;
 
     /**
      * Constructs a Duke bot.
@@ -52,6 +50,7 @@ public class Duke {
         }
     }
 
+    /** Runs the program. */
     public static void main(String[] args) {
         Duke bot = new Duke("data");
         bot.run();

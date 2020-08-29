@@ -1,26 +1,26 @@
 package duke.command;
 
-import duke.exception.DukeException;
 import duke.TaskList;
+import duke.exception.DukeException;
 
-/** A command to add a @ToDo to the task list. */
+/** A command to add a ToDo to the task list. */
 public class ToDoCommand extends AddTaskCommand {
 
     /**
-     * Constructs a @ToDoCommand.
+     * Constructs a ToDoCommand.
      *
-     * @param input The description of the @ToDo.
+     * @param input The description of the ToDo.
      */
     public ToDoCommand(String input) {
         this.input = input;
     }
 
     /**
-     * Adds a @ToDo to the task list.
+     * Adds a ToDo to the task list.
      *
      * @param taskList The task list containing all saved tasks.
-     * @param input The description of the command.
-     * @throws DukeException If the @input is not in a valid format.
+     * @param input    The description of the command.
+     * @throws DukeException If the input is not in a valid format.
      */
     @Override
     public void addTask(TaskList taskList, String input) throws DukeException {
@@ -31,7 +31,7 @@ public class ToDoCommand extends AddTaskCommand {
      * Compares an object.
      *
      * @param o The object compared.
-     * @return True if the object is of type @ToDoCommand and has the same @input.
+     * @return True if the object is of type ToDoCommand and has the same input.
      */
     @Override
     public boolean equals(Object o) {

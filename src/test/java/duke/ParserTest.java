@@ -1,5 +1,10 @@
 package duke;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import org.junit.jupiter.api.Test;
+
 import duke.command.DeadlineCommand;
 import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
@@ -10,10 +15,6 @@ import duke.exception.EmptyTaskException;
 import duke.exception.InvalidDateException;
 import duke.exception.NoIndexException;
 import duke.exception.UnrecognizedTaskException;
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 public class ParserTest {
@@ -61,7 +62,7 @@ public class ParserTest {
 
     @Test
     public void getDateTime_invalidDateFormat_exceptionThrown() {
-            assertThrows(InvalidDateException.class, () -> {
+        assertThrows(InvalidDateException.class, () -> {
             Parser.getDateTime("08102020");
         });
     }
@@ -77,7 +78,7 @@ public class ParserTest {
     public void parse_inputToDo_returnToDoCommand() {
         try {
             assertEquals(Parser.parse("todo sleep"), new ToDoCommand("sleep"));
-        }  catch (DukeException e) {
+        } catch (DukeException e) {
             System.out.println(e.getMessage());
         }
     }
@@ -86,7 +87,7 @@ public class ParserTest {
     public void parse_inputEvent_returnEventCommand() {
         try {
             assertEquals(Parser.parse("event bfast /at 10:00"),
-                    new EventCommand("bfast /at 10:00"));
+                new EventCommand("bfast /at 10:00"));
         } catch (DukeException e) {
             System.out.println(e.getMessage());
         }
@@ -96,7 +97,7 @@ public class ParserTest {
     public void parse_inputDeadline_returnDeadlineCommand() {
         try {
             assertEquals(Parser.parse("deadline project /by 2020-08-27"),
-                    new DeadlineCommand("project /by 2020-08-27"));
+                new DeadlineCommand("project /by 2020-08-27"));
         } catch (DukeException e) {
             System.out.println(e.getMessage());
         }

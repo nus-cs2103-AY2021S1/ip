@@ -14,7 +14,7 @@ public abstract class Task {
     /**
      * Constructs a Task.
      *
-     * @param task The task description.
+     * @param task   The task description.
      * @param isDone The task's completion status.
      */
     protected Task(String task, boolean isDone) {
@@ -27,7 +27,7 @@ public abstract class Task {
      *
      * @param task The task description.
      */
-    public Task(String task){
+    public Task(String task) {
         this.task = task;
         this.isDone = false;
     }
@@ -61,6 +61,7 @@ public abstract class Task {
 
     /**
      * The format used to display on a list.
+     *
      * @return The String format of a task.
      */
     @Override
@@ -71,6 +72,7 @@ public abstract class Task {
 
     /**
      * The format used for saving.
+     *
      * @return The String format used for saving.
      */
     public String saveFormat() {

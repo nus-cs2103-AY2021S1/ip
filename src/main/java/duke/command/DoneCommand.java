@@ -1,9 +1,9 @@
 package duke.command;
 
-import duke.exception.DukeException;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
+import duke.exception.DukeException;
 
 /** A command to mark a task as done. */
 public class DoneCommand extends Command {
@@ -25,8 +25,8 @@ public class DoneCommand extends Command {
      * Executes the command by marking the task with the given taskNo as done.
      *
      * @param taskList The task list that stores and modifies the list of saved tasks.
-     * @param ui The UI of the bot.
-     * @param storage The storage system of the bot.
+     * @param ui       The UI of the bot.
+     * @param storage  The storage system of the bot.
      * @throws DukeException If the taskNo is invalid.
      */
     @Override

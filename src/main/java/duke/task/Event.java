@@ -14,25 +14,25 @@ public class Event extends Task {
     private final LocalDateTime endDate;
 
     /**
-     * Constructs an @Event.
+     * Constructs an Event.
      *
-     * @param task The description of the event.
+     * @param task      The description of the event.
      * @param startDate The starting date of the event.
-     * @param endDate The end date of the event.
-     * @param isDone The completion status of the event.
+     * @param endDate   The end date of the event.
+     * @param isDone    The completion status of the event.
      */
-    private Event (String task, LocalDateTime startDate, LocalDateTime endDate, boolean isDone) {
+    private Event(String task, LocalDateTime startDate, LocalDateTime endDate, boolean isDone) {
         super(task, isDone);
         this.startDate = startDate;
         this.endDate = endDate;
     }
 
     /**
-     * Constructs an uncompleted @Event.
+     * Constructs an uncompleted Event.
      *
-     * @param task The description of the event.
+     * @param task      The description of the event.
      * @param startDate The starting date of the event.
-     * @param endDate The end date of the event.
+     * @param endDate   The end date of the event.
      */
     public Event(String task, LocalDateTime startDate, LocalDateTime endDate) {
         super(task);
@@ -41,7 +41,7 @@ public class Event extends Task {
     }
 
     /**
-     * Constructs an uncompleted @Event.
+     * Constructs an uncompleted Event.
      *
      * @param task The description of the event.
      * @param date The date of the event.
@@ -52,30 +52,32 @@ public class Event extends Task {
         this.endDate = null;
     }
 
-    /** The String format of the date. */
+    /**
+     * The String format of the date.
+     */
     private String dateFormat() {
         if (endDate != null) {
             return String.format(" (at: %s to %s)",
-                    startDate.format(DateTimeFormatter.ofPattern("dd MMM y, h:mm a")),
-                    startDate.toLocalDate().equals(endDate.toLocalDate())
-                            ? endDate.format(DateTimeFormatter.ofPattern("h:mm a"))
-                            : endDate.format(DateTimeFormatter.ofPattern("dd MMM y, h:mm a")));
+                startDate.format(DateTimeFormatter.ofPattern("dd MMM y, h:mm a")),
+                startDate.toLocalDate().equals(endDate.toLocalDate())
+                    ? endDate.format(DateTimeFormatter.ofPattern("h:mm a"))
+                    : endDate.format(DateTimeFormatter.ofPattern("dd MMM y, h:mm a")));
         } else {
             return String.format(" (at: %s)",
-                    startDate.format(DateTimeFormatter.ofPattern("dd MMM y, h:mm a")));
+                startDate.format(DateTimeFormatter.ofPattern("dd MMM y, h:mm a")));
         }
     }
 
     /** The String format of the date used for saving. */
     private String dateSaveFormat() {
         String startDateString = String.format("%sT%s",
-                startDate.format(DateTimeFormatter.ofPattern("y-MM-dd")),
-                startDate.format(DateTimeFormatter.ofPattern("HH:mm:ss")));
+            startDate.format(DateTimeFormatter.ofPattern("y-MM-dd")),
+            startDate.format(DateTimeFormatter.ofPattern("HH:mm:ss")));
 
         String endDateString = endDate != null
-                ? String.format("%sT%s", endDate.format(DateTimeFormatter.ofPattern("y-MM-dd")),
-                    endDate.format(DateTimeFormatter.ofPattern("HH:mm:ss")))
-                : "XXXXXXXXXXXXXXXXXXX";
+            ? String.format("%sT%s", endDate.format(DateTimeFormatter.ofPattern("y-MM-dd")),
+            endDate.format(DateTimeFormatter.ofPattern("HH:mm:ss")))
+            : "XXXXXXXXXXXXXXXXXXX";
 
         return startDateString + " to " + endDateString;
     }
@@ -99,7 +101,7 @@ public class Event extends Task {
      * Compares with another object.
      *
      * @param o The object compared.
-     * @return True if the object compared is a @Event with the same task, start and end dates.
+     * @return True if the object compared is a Event with the same task, start and end dates.
      */
     @Override
     public boolean equals(Object o) {
@@ -112,7 +114,7 @@ public class Event extends Task {
                 return e.task.equals(this.task) && e.startDate.equals(startDate);
             } else if (e.endDate != null && endDate != null) {
                 return e.task.equals(this.task) && e.startDate.equals(startDate)
-                        && e.endDate.equals(endDate);
+                    && e.endDate.equals(endDate);
             } else {
                 return false;
             }
@@ -124,6 +126,7 @@ public class Event extends Task {
 
     /**
      * The format used for saving.
+     *
      * @return The String format used for saving.
      */
     @Override
@@ -134,6 +137,7 @@ public class Event extends Task {
 
     /**
      * The format used to display on a list.
+     *
      * @return The String format of a deadline.
      */
     @Override

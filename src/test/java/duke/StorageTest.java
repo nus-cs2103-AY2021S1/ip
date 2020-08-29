@@ -1,11 +1,7 @@
 package duke;
 
-import duke.exception.DukeException;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.ToDo;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -15,8 +11,13 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.jupiter.api.Test;
+
+import duke.exception.DukeException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
 
 public class StorageTest {
     @Test
@@ -37,9 +38,9 @@ public class StorageTest {
 
         tasks.add(new ToDo("sleep"));
         tasks.add(new Event("bfast", LocalDateTime.of(LocalDate.now(),
-                LocalTime.parse("10:00"))));
+            LocalTime.parse("10:00"))));
         tasks.add(new Deadline("project",
-                LocalDateTime.of(LocalDate.parse("2020-08-27"), LocalTime.parse("23:59"))));
+            LocalDateTime.of(LocalDate.parse("2020-08-27"), LocalTime.parse("23:59"))));
 
         Storage storage = new Storage("storageTest");
         storage.saveTasks(tasks);

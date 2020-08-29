@@ -1,9 +1,9 @@
 package duke.command;
 
-import duke.exception.DukeException;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
+import duke.exception.DukeException;
 
 /** A command to delete a task. */
 public class DeleteCommand extends Command {
@@ -25,8 +25,8 @@ public class DeleteCommand extends Command {
      * Executes the command by deleting a task with the given taskNo.
      *
      * @param taskList The task list that stores and modifies the list of saved tasks.
-     * @param ui The UI of the bot.
-     * @param storage The storage system of the bot.
+     * @param ui       The UI of the bot.
+     * @param storage  The storage system of the bot.
      * @throws DukeException If there is something wrong with the deleting process.
      */
     @Override

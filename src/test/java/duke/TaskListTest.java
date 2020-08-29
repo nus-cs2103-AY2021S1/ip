@@ -1,5 +1,16 @@
 package duke;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.util.ArrayList;
+
+import org.junit.jupiter.api.Test;
+
 import duke.exception.DukeException;
 import duke.exception.DuplicateTaskException;
 import duke.exception.InvalidIndexException;
@@ -7,16 +18,6 @@ import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
-import org.junit.jupiter.api.Test;
-
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.util.ArrayList;
-
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class TaskListTest {
 
@@ -47,7 +48,7 @@ public class TaskListTest {
 
             ArrayList<Task> list = new ArrayList<>();
             list.add(new Event("bfast", LocalDateTime.of(LocalDate.now(),
-                    LocalTime.parse("10:00"))));
+                LocalTime.parse("10:00"))));
 
             TaskList taskListTemplate = new TaskList(list);
 
@@ -67,7 +68,7 @@ public class TaskListTest {
 
             ArrayList<Task> list = new ArrayList<>();
             list.add(new Deadline("project",
-                    LocalDateTime.of(LocalDate.parse("2020-08-27"), LocalTime.parse("23:59"))));
+                LocalDateTime.of(LocalDate.parse("2020-08-27"), LocalTime.parse("23:59"))));
 
             TaskList taskListTemplate = new TaskList(list);
 
@@ -122,9 +123,9 @@ public class TaskListTest {
 
         list.add(new ToDo("sleep"));
         list.add(new Event("bfast", LocalDateTime.of(LocalDate.now(),
-                LocalTime.parse("10:00"))));
+            LocalTime.parse("10:00"))));
         list.add(new Deadline("project",
-                LocalDateTime.of(LocalDate.parse("2020-08-27"), LocalTime.MAX)));
+            LocalDateTime.of(LocalDate.parse("2020-08-27"), LocalTime.MAX)));
 
         TaskList taskList = new TaskList(list);
 
@@ -139,9 +140,9 @@ public class TaskListTest {
 
         list.add(new ToDo("sleep"));
         list.add(new Event("bfast", LocalDateTime.of(LocalDate.now(),
-                LocalTime.parse("10:00"))));
+            LocalTime.parse("10:00"))));
         list.add(new Deadline("project",
-                LocalDateTime.of(LocalDate.parse("2020-08-27"), LocalTime.MAX)));
+            LocalDateTime.of(LocalDate.parse("2020-08-27"), LocalTime.MAX)));
 
         TaskList taskList = new TaskList(list);
 
