@@ -1,3 +1,7 @@
+package duke.command;
+
+import duke.exception.DukeException;
+
 public class ErrorCommand extends Command {
     String errMsg;
     

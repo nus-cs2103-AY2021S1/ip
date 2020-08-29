@@ -1,3 +1,10 @@
+package duke.command;
+
+import duke.exception.DukeException;
+import duke.storage.Storage;
+import duke.task.TaskList;
+import duke.task.ToDo;
+
 public class ToDoCommand extends Command {
     TaskList tasks;
     Storage storage;

@@ -1,3 +1,10 @@
+package duke.parser;
+
+import duke.command.*;
+import duke.exception.DukeException;
+import duke.storage.Storage;
+import duke.task.TaskList;
+
 /**
  * Represent a parser to parse user input.
  */

@@ -1,3 +1,10 @@
+package duke.command;
+
+import duke.exception.DukeException;
+import duke.storage.Storage;
+import duke.task.Deadline;
+import duke.task.TaskList;
+
 public class DeadlineCommand extends Command {
     TaskList tasks;
     Storage storage;

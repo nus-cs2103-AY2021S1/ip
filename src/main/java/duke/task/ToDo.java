@@ -1,3 +1,5 @@
+package duke.task;
+
 /**
  * Represent a to-do task for the duke program and extends task class without any additional field.
  */

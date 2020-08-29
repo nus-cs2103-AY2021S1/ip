@@ -1,3 +1,5 @@
+package duke.task;
+
 /**
  * Represent the task for the Duke program.
  */

@@ -1,3 +1,8 @@
+package duke.command;
+
+import duke.exception.DukeException;
+import duke.task.TaskList;
+
 public class FindCommand extends Command {
     TaskList tasks;
     

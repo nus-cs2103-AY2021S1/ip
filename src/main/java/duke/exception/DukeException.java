@@ -1,3 +1,5 @@
+package duke.exception;
+
 /**
  * Represent custom Exception of Duke program and extends Exception.
  */
