@@ -1,5 +1,3 @@
-//import duke.Duke;
-//import duke.Ui;
 import duke.DukeException;
 import duke.Parser;
 import duke.command.Command;
