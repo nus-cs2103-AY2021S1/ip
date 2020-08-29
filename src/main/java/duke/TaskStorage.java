@@ -34,7 +34,7 @@ public class TaskStorage {
      * Initializes the taskStorage from local storage.
      * If no storage file is found in the path, creates a new storage file.
      *
-     * @return initialized taskStorage
+     * @return Initialized taskStorage.
      * @throws IOException   If an input or output exception occurred.
      * @throws DukeException If an exception related to Duke occurred.
      */
@@ -116,7 +116,7 @@ public class TaskStorage {
     /**
      * Returns the total number of tasks in memory.
      *
-     * @return total number of tasks in memory
+     * @return Total number of tasks in memory.
      */
     public int getTaskCount() {
         return taskList.size();
@@ -125,8 +125,8 @@ public class TaskStorage {
     /**
      * Returns the specified task from memory.
      *
-     * @param index the index of the task
-     * @return task specified by index
+     * @param index Index of the task.
+     * @return Task specified by index.
      */
     public Task getTask(int index) {
         return taskList.get(index);
@@ -146,8 +146,9 @@ public class TaskStorage {
     /**
      * Removes and returns the specified task from memory.
      *
-     * @param index the index of the task to remove
-     * @return task @throws IOException If an input or output exception occurred.
+     * @param index Index of the task to remove.
+     * @return Removed task.
+     * @throws IOException If an input or output exception occurred.
      */
     public Task removeTask(int index) throws IOException {
         Task task = taskList.remove(index);
@@ -157,8 +158,8 @@ public class TaskStorage {
 
     /**
      * Returns a list of tasks that contains the content
-     * @param content the search term used
-     * @return the list of tasks that contains the content specified
+     * @param content Search term used.
+     * @return The list of tasks that contains the content specified.
      */
     public List<Task> findAllContaining(String content) {
         return taskList.stream()

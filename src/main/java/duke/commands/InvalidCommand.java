@@ -1,7 +1,6 @@
 package duke.commands;
 
 import duke.TaskManager;
-import duke.Ui;
 
 /**
  * Represents an invalid command.
@@ -10,7 +9,7 @@ public class InvalidCommand extends Command {
     /**
      * Class constructor.
      *
-     * @param input the user input
+     * @param input User input.
      */
     public InvalidCommand(String input) {
         this.input = input;
@@ -19,12 +18,13 @@ public class InvalidCommand extends Command {
 
     /**
      * Execution instructions for the command.
+     * Returns an invalid command message.
      *
-     * @param taskManager the taskManager
-     * @param ui          the ui to return output to
+     * @param taskManager TaskManager.
+     * @return String response of command.
      */
     @Override
-    public void execute(TaskManager taskManager, Ui ui) {
-        ui.sendMessage("I don't know what you just sent...");
+    public String execute(TaskManager taskManager) {
+        return "I don't know what you just sent...";
     }
 }

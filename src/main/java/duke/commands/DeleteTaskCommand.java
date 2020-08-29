@@ -2,7 +2,6 @@ package duke.commands;
 
 import duke.MessageManager;
 import duke.TaskManager;
-import duke.Ui;
 import duke.exceptions.DukeException;
 import duke.patterns.InputPattern;
 import duke.tasks.Task;
@@ -18,7 +17,7 @@ public class DeleteTaskCommand extends Command {
     /**
      * Class constructor.
      *
-     * @param input the user input
+     * @param input User input.
      */
     public DeleteTaskCommand(String input) {
         this.input = input;
@@ -27,21 +26,22 @@ public class DeleteTaskCommand extends Command {
 
     /**
      * Execution instructions for the command.
+     * Deletes a task from storage and returns the message for Duke to show.
      *
-     * @param taskManager the taskManager
-     * @param ui          the ui to return output to
+     * @param taskManager TaskManager.
+     * @return String response of command.
      */
     @Override
-    public void execute(TaskManager taskManager, Ui ui) {
+    public String execute(TaskManager taskManager) {
         Pattern r = Pattern.compile(InputPattern.DELETE_TASK);
         Matcher m = r.matcher(input);
         m.find();
         int taskNumber = Integer.parseInt(m.group("taskNumber"));
         try {
             Task task = taskManager.deleteTask(taskNumber);
-            ui.sendMessage(MessageManager.getDeleteSuccessMessage(task, taskManager));
+            return MessageManager.getDeleteSuccessMessage(task, taskManager);
         } catch (DukeException | IOException exception) {
-            ui.sendMessage(exception.getMessage());
+            return exception.getMessage();
         }
     }
 }

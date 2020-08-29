@@ -2,7 +2,6 @@ package duke.commands;
 
 import duke.MessageManager;
 import duke.TaskManager;
-import duke.Ui;
 
 /**
  * Represents a command to exit Duke.
@@ -11,7 +10,7 @@ public class ExitCommand extends Command {
     /**
      * Class constructor.
      *
-     * @param input the user input
+     * @param input User input.
      */
     public ExitCommand(String input) {
         this.input = input;
@@ -20,12 +19,13 @@ public class ExitCommand extends Command {
 
     /**
      * Execution instructions for the command.
+     * Terminates Duke and returns the message for Duke to show.
      *
-     * @param taskManager the taskManager
-     * @param ui          the ui to return output to
+     * @param taskManager TaskManager.
+     * @return String response of command.
      */
     @Override
-    public void execute(TaskManager taskManager, Ui ui) {
-        ui.sendMessage(MessageManager.getByeMessage());
+    public String execute(TaskManager taskManager) {
+        return MessageManager.getByeMessage();
     }
 }

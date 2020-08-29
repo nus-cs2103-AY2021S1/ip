@@ -2,7 +2,6 @@ package duke.commands;
 
 import duke.MessageManager;
 import duke.TaskManager;
-import duke.Ui;
 
 /**
  * Represents a command list all tasks.
@@ -11,7 +10,7 @@ public class ListCommand extends Command {
     /**
      * Class constructor.
      *
-     * @param input the user input
+     * @param input User input.
      */
     public ListCommand(String input) {
         this.input = input;
@@ -20,13 +19,14 @@ public class ListCommand extends Command {
 
     /**
      * Execution instructions for the command.
+     * List all tasks and returns the message for Duke to show.
      *
-     * @param taskManager the taskManager
-     * @param ui          the ui to return output to
+     * @param taskManager TaskManager.
+     * @return String response of command.
      */
     @Override
-    public void execute(TaskManager taskManager, Ui ui) {
+    public String execute(TaskManager taskManager) {
         String message = MessageManager.getListMessage(taskManager);
-        ui.sendMessage(message);
+        return message;
     }
 }

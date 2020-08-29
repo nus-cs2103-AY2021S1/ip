@@ -2,7 +2,6 @@ package duke.commands;
 
 import duke.MessageManager;
 import duke.TaskManager;
-import duke.Ui;
 import duke.patterns.InputPattern;
 import duke.tasks.Task;
 
@@ -17,7 +16,7 @@ public class FindAllContainingCommand extends Command {
 
     /**
      * Class constructor.
-     * @param input the user input
+     * @param input User input.
      */
     public FindAllContainingCommand(String input) {
         this.input = input;
@@ -26,17 +25,19 @@ public class FindAllContainingCommand extends Command {
 
     /**
      * Execution instructions for the command.
-     * @param taskManager the taskManager
-     * @param ui the ui to return output to
+     * Finds commands containing keyword and returns a message.
+     *
+     * @param taskManager TaskManager.
+     * @return String response of command.
      */
     @Override
-    public void execute(TaskManager taskManager, Ui ui) {
+    public String execute(TaskManager taskManager) {
         Pattern r = Pattern.compile(InputPattern.FIND_ALL_CONTAINING);
         Matcher m = r.matcher(input);
         m.find();
         String query = m.group("content");
         List<Task> matchedTasks = taskManager.findAllContaining(query);
         String message = MessageManager.getFindAllContainingMessage(matchedTasks);
-        ui.sendMessage(message);
+        return message;
     }
 }

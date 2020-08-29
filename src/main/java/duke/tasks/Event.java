@@ -16,9 +16,9 @@ public class Event extends Task {
     /**
      * Class constructor specifying whether the event is complete.
      *
-     * @param content        the contents of the event
-     * @param datetimeString the datetime of the event
-     * @param isComplete     the completion status of the event
+     * @param content        Contents of the event.
+     * @param datetimeString Datetime of the event.
+     * @param isComplete     Completion status of the event.
      * @throws DukeException If an exception related to Duke occurred.
      */
     public Event(String content, String datetimeString, Boolean isComplete) throws DukeException {
@@ -36,8 +36,8 @@ public class Event extends Task {
     /**
      * Class constructor.
      *
-     * @param content        the contents of the event
-     * @param datetimeString the datetime of the event
+     * @param content        Contents of the event.
+     * @param datetimeString Datetime of the event.
      * @throws DukeException If an exception related to Duke occurred.
      */
     public Event(String content, String datetimeString) throws DukeException {
@@ -55,7 +55,7 @@ public class Event extends Task {
     /**
      * Returns a user-readable event string.
      *
-     * @return user-readable event string
+     * @return User-readable event string.
      */
     @Override
     public String toString() {
@@ -66,7 +66,7 @@ public class Event extends Task {
     /**
      * Returns an event string readable by storage.
      *
-     * @return storage-safe event string
+     * @return Storage-safe event string.
      */
     @Override
     public String toSaveString() {

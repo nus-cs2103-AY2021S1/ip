@@ -2,7 +2,6 @@ package duke.commands;
 
 import duke.MessageManager;
 import duke.TaskManager;
-import duke.Ui;
 import duke.exceptions.DukeException;
 import duke.patterns.InputPattern;
 import duke.tasks.Task;
@@ -18,7 +17,7 @@ public class CompleteTaskCommand extends Command {
     /**
      * Class constructor.
      *
-     * @param input the user input
+     * @param input User input.
      */
     public CompleteTaskCommand(String input) {
         this.input = input;
@@ -27,12 +26,13 @@ public class CompleteTaskCommand extends Command {
 
     /**
      * Execution instructions for the command.
+     * Completes specified task and returns the message for Duke to show.
      *
-     * @param taskManager the taskManager
-     * @param ui          the ui to return output to
+     * @param taskManager TaskManager.
+     * @return String response of command.
      */
     @Override
-    public void execute(TaskManager taskManager, Ui ui) {
+    public String execute(TaskManager taskManager) {
 
         Pattern r = Pattern.compile(InputPattern.COMPLETE_TASK);
         Matcher m = r.matcher(input);
@@ -40,9 +40,9 @@ public class CompleteTaskCommand extends Command {
         int taskNumber = Integer.parseInt(m.group("taskNumber"));
         try {
             Task task = taskManager.completeTask(taskNumber);
-            ui.sendMessage(MessageManager.getCompleteSuccessMessage(task));
+            return MessageManager.getCompleteSuccessMessage(task);
         } catch (DukeException | IOException exception) {
-            ui.sendMessage(exception.getMessage());
+            return exception.getMessage();
         }
     }
 }

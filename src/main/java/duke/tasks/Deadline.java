@@ -16,9 +16,9 @@ public class Deadline extends Task {
     /**
      * Class constructor specifying whether the deadline is complete.
      *
-     * @param content           the contents of the deadline
-     * @param datetimeDueString the due datetime of the deadline
-     * @param isComplete        the completion status of the deadline
+     * @param content           Contents of the deadline.
+     * @param datetimeDueString Due datetime of the deadline.
+     * @param isComplete        Completion status of the deadline.
      * @throws DukeException If an exception related to Duke occurred.
      */
     public Deadline(String content, String datetimeDueString, boolean isComplete) throws DukeException {
@@ -37,8 +37,8 @@ public class Deadline extends Task {
     /**
      * Class constructor.
      *
-     * @param content           the contents of the deadline
-     * @param datetimeDueString the due datetime of the deadline
+     * @param content           Contents of the deadline.
+     * @param datetimeDueString Due datetime of the deadline.
      * @throws DukeException If an exception related to Duke occurred.
      */
     public Deadline(String content, String datetimeDueString) throws DukeException {
@@ -56,7 +56,7 @@ public class Deadline extends Task {
     /**
      * Returns a user-readable deadline string.
      *
-     * @return user-readable deadline string
+     * @return User-readable deadline string.
      */
     @Override
     public String toString() {
@@ -66,7 +66,7 @@ public class Deadline extends Task {
     /**
      * Returns a deadline string readable by storage.
      *
-     * @return storage-safe deadline string
+     * @return Storage-safe deadline string.
      */
     @Override
     public String toSaveString() {

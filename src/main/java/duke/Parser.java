@@ -12,8 +12,8 @@ public class Parser {
     /**
      * Returns the corresponding command for a users text input.
      *
-     * @param input the user text input
-     * @return the command corresponding to the users input
+     * @param input User text input.
+     * @return Command corresponding to the users input.
      */
     public static Command parse(String input) {
         if (input.matches(InputPattern.BYE)) {

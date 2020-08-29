@@ -14,9 +14,9 @@ version '1.0-SNAPSHOT'
 
 jar {
     manifest {
-        attributes 'Main-Class': 'Main'
+        attributes 'Main-Class': 'duke.Launcher'
     }
-    mainClassName = 'Main'
+    mainClassName = 'duke.Launcher'
     archiveBaseName = 'Duke'
     archiveVersion = '0.1'
 }

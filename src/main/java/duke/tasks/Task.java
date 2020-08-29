@@ -12,7 +12,7 @@ public class Task {
 
     /**
      * Class constructor.
-     * @param content the contents of the task
+     * @param content Contents of the task.
      * @throws DukeException If an exception related to Duke occurred.
      */
     public Task(String content) throws DukeException {
@@ -25,7 +25,7 @@ public class Task {
 
     /**
      * Class constructor specifying whether the task is complete.
-     * @param content the contents of the task
+     * @param content Contents of the task.
      * @throws DukeException If an exception related to Duke occurred.
      */
     public Task(String content, boolean isComplete) {
@@ -35,7 +35,7 @@ public class Task {
 
     /**
      * Sets the completion status of the task.
-     * @param isComplete the completion status of the task
+     * @param isComplete Completion status of the task.
      */
     public void setComplete(boolean isComplete) {
         this.isComplete = isComplete;
@@ -43,7 +43,7 @@ public class Task {
 
     /**
      * Returns a user-readable task string.
-     * @return user-readable task string
+     * @return User-readable task string.
      */
     @Override
     public String toString() {
@@ -60,7 +60,7 @@ public class Task {
 
     /**
      * Returns a task string readable by storage.
-     * @return storage-safe task string
+     * @return Storage-safe task string.
      */
     public String toSaveString() {
         return String.format("%s/%s", booleanToInt(isComplete), content);

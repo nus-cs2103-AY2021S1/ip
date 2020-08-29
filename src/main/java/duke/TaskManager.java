@@ -31,8 +31,8 @@ public class TaskManager {
     /**
      * Creates and adds a Todo to the taskStorage.
      *
-     * @param content string description of todo
-     * @return created todo
+     * @param content String description of todo.
+     * @return Created todo.
      * @throws IOException   If an input or output exception occurred.
      * @throws DukeException If an exception related to Duke occurred.
      */
@@ -45,9 +45,9 @@ public class TaskManager {
     /**
      * Creates and adds a Deadline to the taskStorage.
      *
-     * @param content     string description of deadline
-     * @param datetimeDue datetime of when the deadline is
-     * @return created deadline
+     * @param content     String description of deadline.
+     * @param datetimeDue Datetime of when the deadline is.
+     * @return Created deadline.
      * @throws IOException   If an input or output exception occurred.
      * @throws DukeException If an exception related to Duke occurred.
      */
@@ -60,9 +60,9 @@ public class TaskManager {
     /**
      * Creates and adds an Event to the taskStorage.
      *
-     * @param content  string description of event
-     * @param datetime datetime of when the event is
-     * @return created todo
+     * @param content  String description of event.
+     * @param datetime Datetime of when the event is.
+     * @return Created todo.
      * @throws IOException   If an input or output exception occurred.
      * @throws DukeException If an exception related to Duke occurred.
      */
@@ -76,7 +76,7 @@ public class TaskManager {
      * Deletes a specified Task in the taskStorage.
      *
      * @param taskNumber Task number of task to be deleted.
-     * @return deleted task
+     * @return Deleted task.
      * @throws IOException   If an input or output exception occurred.
      * @throws DukeException If an exception related to Duke occurred.
      */
@@ -89,7 +89,7 @@ public class TaskManager {
      * Completes a specified Task in the taskStorage.
      *
      * @param taskNumber Task number of task to complete.
-     * @return completed task
+     * @return Completed task.
      * @throws IOException   If an input or output exception occurred.
      * @throws DukeException If an exception related to Duke occurred.
      */
@@ -114,7 +114,7 @@ public class TaskManager {
     /**
      * Returns a human readable string of all tasks in the taskStorage.
      *
-     * @return string concatenation of all tasks
+     * @return String concatenation of all tasks.
      */
     @Override
     public String toString() {
@@ -130,8 +130,8 @@ public class TaskManager {
 
     /**
      * Returns a list of tasks from the taskManager that contains the content
-     * @param content the search term used
-     * @return the list of tasks that contains the content specified
+     * @param content The search term used.
+     * @return The list of tasks that contains the content specified
      */
     public List<Task> findAllContaining(String content) {
         return taskStorage.findAllContaining(content);
