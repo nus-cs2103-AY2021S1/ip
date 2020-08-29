@@ -19,6 +19,7 @@ public class Storage {
 
     /**
      * Returns a Storage instantiation with a specific file path.
+     *
      * @param filePath The path of the file to store the save file at
      */
     public Storage(String filePath) {
@@ -38,10 +39,11 @@ public class Storage {
 
     /**
      * Attempts to load the save file.
+     *
      * @return a TaskList from the saved file, if one exists. If not, a new TaskList is returned.
      */
-    public TaskList loadFile() {
-        TaskList list = null;
+    public TaskList loadFile() throws IOException {
+        TaskList list;
         try {
             File file = path.toFile();
             //@@author ktaekwon000-reused
@@ -55,19 +57,14 @@ public class Storage {
             try {
                 list = makeDataFile();
             } catch (FileNotFoundException e2) {
-                try {
-                    Files.createDirectories(path.getParent());
-                    list = makeDataFile();
-                } catch (IOException e) {
-                    Ui.print(e.getMessage());
-                }
-            } catch (IOException e) {
-                Ui.print("There was an error initialising your save file.\n" + e);
+                Files.createDirectories(path.getParent());
+                list = makeDataFile();
             }
         }
 
         if (list == null) {
-            Ui.print("Running program without initializing a save.\nThis may cause errors when closing the program.");
+            System.out.println(
+                "Running program without initializing a save.\nThis may cause errors when closing the program.");
             return new TaskList();
         } else {
             return list;
@@ -76,6 +73,7 @@ public class Storage {
 
     /**
      * Attempts to save the TaskList to the respective path.
+     *
      * @param list the TaskList to be saved
      */
     public void saveFile(TaskList list) {
@@ -89,7 +87,7 @@ public class Storage {
             oos.close();
             //@@author
         } catch (IOException e) {
-            Ui.print("There was an error saving your data.\n" + e.getMessage());
+            System.out.println("There was an error saving your data.\n" + e.getMessage());
         }
     }
 }
