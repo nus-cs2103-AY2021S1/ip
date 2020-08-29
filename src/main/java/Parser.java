@@ -96,8 +96,8 @@ public class Parser {
         int date = Integer.parseInt(inputData[0]);
         int month = Integer.parseInt(inputData[1]);
         int year = Integer.parseInt(inputData[2].substring(0, 4));
-        int hour = Integer.parseInt(inputData[2]. substring(5, 7));
-        int min = Integer.parseInt(inputData[2]. substring(7));
+        int hour = Integer.parseInt(inputData[2].substring(5, 7));
+        int min = Integer.parseInt(inputData[2].substring(7));
         return LocalDateTime.of(year, month, date, hour, min);
     }
 

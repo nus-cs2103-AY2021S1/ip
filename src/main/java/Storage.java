@@ -103,7 +103,7 @@ public class Storage {
      * Obtain a list of tasks from .txt file.
      *
      * @param br BufferedReader object used to read the file.
-     * @return List of tasks stored in an ArrayList<Task>.
+     * @return List of tasks stored in an ArrayList.
      * @throws IOException If an I/O exception of some sort has occurred.
      * @throws ParseException If an error has been reached while parsing.
      * @throws DukeException If the task type is not recognized.

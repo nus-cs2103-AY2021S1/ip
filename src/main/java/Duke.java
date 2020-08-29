@@ -29,6 +29,11 @@ public class Duke {
         }
     }
 
+    /**
+     * Starts the Duke chatbot.
+     *
+     * @throws IOException If directory or file to write output to does not exist.
+     */
     public void run() throws IOException {
         welcomeMsg();
         ui.start(tasks);
