@@ -102,6 +102,7 @@ public class Parser {
             break;
         case HELP:
             resultantCommand = new HelpCommand();
+            break;
         }
 
         return resultantCommand;
