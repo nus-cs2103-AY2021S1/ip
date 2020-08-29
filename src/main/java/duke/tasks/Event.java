@@ -7,7 +7,7 @@ import java.time.format.DateTimeFormatter;
 /**
  * A class that represents the a task that has a start date time.
  */
-public class Events extends Task {
+public class Event extends Task {
     private LocalDateTime startTime;
 
     /**
@@ -16,7 +16,7 @@ public class Events extends Task {
      * @param description the string of description of the events task.
      * @param startTime the LocalDateTime object that represents the events of the task.
      */
-    public Events(String description, LocalDateTime startTime) {
+    public Event(String description, LocalDateTime startTime) {
         super(description);
         this.startTime = startTime;
     }

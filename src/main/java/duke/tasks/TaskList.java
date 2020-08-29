@@ -7,7 +7,7 @@ import java.util.List;
  * A class that represents a list to store the tasks.
  */
 public class TaskList {
-    List<Task> result;
+    List<Task> tasks;
 
     /**
      * Constructs a TaskList object by passing in a list of tasks.
@@ -15,14 +15,14 @@ public class TaskList {
      * @param list a list of tasks that needs to be stored.
      */
     public TaskList(List<Task> list) {
-        this.result = list;
+        this.tasks = list;
     }
 
     /**
      * Constructs a TaskList object by passing in no parameters.
      */
     public TaskList() {
-        this.result = new ArrayList<>();
+        this.tasks = new ArrayList<>();
     }
 
     /**
@@ -31,7 +31,7 @@ public class TaskList {
      * @param task the task object that needs to be added to the list.
      */
     public void add(Task task) {
-        result.add(task);
+        tasks.add(task);
     }
 
     /**
@@ -41,7 +41,7 @@ public class TaskList {
      * @param task the task object that needs to be set at the spot.
      */
     public void set(Integer index, Task task) {
-        result.set(index, task);
+        tasks.set(index, task);
     }
 
     /**
@@ -51,7 +51,7 @@ public class TaskList {
      * @return a task object at the index in the list.
      */
     public Task get(Integer index) {
-        return result.get(index);
+        return tasks.get(index);
     }
 
     /**
@@ -60,7 +60,7 @@ public class TaskList {
      * @return an int value representing the size of the TaskList.
      */
     public int getSize() {
-        return result.size();
+        return tasks.size();
     }
 
     /**
@@ -69,6 +69,6 @@ public class TaskList {
      * @param index the index in the list that needs to be deleted.
      */
     public void remove(int index) {
-        result.remove(index);
+        tasks.remove(index);
     }
 }

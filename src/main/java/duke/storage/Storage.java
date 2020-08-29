@@ -40,7 +40,7 @@ public class Storage {
             Scanner sc = new Scanner(file);
 
             while (sc.hasNext()) {
-                Task temp;
+                Task taskToRead;
                 String line = sc.nextLine();
                 String[] instructions = line.split(" \\| ");
                 int num = instructions.length;
@@ -49,31 +49,31 @@ public class Storage {
                     if (num != 3) {
                         throw new DukeException("The data format of the file is incorrect\n");
                     }
-                    temp = new ToDo(instructions[2].strip());
+                    taskToRead = new ToDo(instructions[2].strip());
                     if (instructions[1].strip().equals("1")) {
-                        temp.markAsDone();
+                        taskToRead.markAsDone();
                     }
-                    tasks.add(temp);
+                    tasks.add(taskToRead);
                 } else if (type.equals("D")) {
                     if (num != 4) {
                         throw new DukeException("The data format of the file is incorrect\n");
                     }
-                    LocalDateTime dtDeadline = LocalDateTime.parse(instructions[3].strip());
-                    temp = new Deadlines(instructions[2].strip(), dtDeadline);
+                    LocalDateTime deadlineDateTime = LocalDateTime.parse(instructions[3].strip());
+                    taskToRead = new Deadline(instructions[2].strip(), deadlineDateTime);
                     if (instructions[1].strip().equals("1")) {
-                        temp.markAsDone();
+                        taskToRead.markAsDone();
                     }
-                    tasks.add(temp);
+                    tasks.add(taskToRead);
                 } else if (type.equals("E")) {
                     if (num != 4) {
                         throw new DukeException("The data format of the file is incorrect\n");
                     }
-                    LocalDateTime dtEvent = LocalDateTime.parse(instructions[3].strip());
-                    temp = new Events(instructions[2].strip(), dtEvent);
+                    LocalDateTime eventDateTime = LocalDateTime.parse(instructions[3].strip());
+                    taskToRead = new Event(instructions[2].strip(), eventDateTime);
                     if (instructions[1].strip().equals("1")) {
-                        temp.markAsDone();
+                        taskToRead.markAsDone();
                     }
-                    tasks.add(temp);
+                    tasks.add(taskToRead);
                 }
             }
         } catch (Exception e) {
@@ -95,22 +95,22 @@ public class Storage {
             String breaker = " | ";
             FileWriter fileWriter = new FileWriter(filePath);
             for (int i = 0; i < tasks.getSize(); i++) {
-                Task temp = tasks.get(i);
+                Task taskToStore = tasks.get(i);
                 String state = "0";
-                if (temp instanceof ToDo) {
-                    if (temp.isDone()) {
+                if (taskToStore instanceof ToDo) {
+                    if (taskToStore.isDone()) {
                         state = "1";
                     }
-                    fileWriter.write("T" + breaker + state + breaker + temp.getDescription() + "\n");
-                } else if (temp instanceof Deadlines) {
-                    Deadlines deadline = (Deadlines) temp;
+                    fileWriter.write("T" + breaker + state + breaker + taskToStore.getDescription() + "\n");
+                } else if (taskToStore instanceof Deadline) {
+                    Deadline deadline = (Deadline) taskToStore;
                     if (deadline.isDone()) {
                         state = "1";
                     }
                     fileWriter.write("D" + breaker + state + breaker + deadline.getDescription()
                             + breaker + deadline.getBy() + "\n");
-                } else if (temp instanceof Events) {
-                    Events event = (Events) temp;
+                } else if (taskToStore instanceof Event) {
+                    Event event = (Event) taskToStore;
                     if (event.isDone()) {
                         state = "1";
                     }

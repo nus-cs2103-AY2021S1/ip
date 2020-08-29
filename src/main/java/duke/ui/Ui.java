@@ -128,7 +128,7 @@ public class Ui {
     /**
      * Prints out the error message when encountering exceptions.
      *
-     * @param e the exception message to be printed.
+     * @param e the exception occurred.
      */
     public void showError(Exception e) {
         System.out.println(e.toString());

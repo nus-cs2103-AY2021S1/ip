@@ -7,23 +7,23 @@ import duke.ui.Ui;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-import static duke.parser.Parser.dateProcessor;
-import static duke.parser.Parser.dateTimeProcessor;
+import static duke.parser.Parser.dateParser;
+import static duke.parser.Parser.dateTimeParser;
 
 /**
  * A class representing command execution.
  */
-public class Command {
+public class CommandExecution {
 
     /**
      * Executes the commands from the input.
      *
      * @param enumCommand the enumeration type of the input command.
      * @param instruction the string of input command.
-     * @param result the TaskList storing the list of tasks.
+     * @param tasks the TaskList storing the list of tasks.
      * @throws DukeException if the description or the datetime format of the task is illegal.
      */
-    public static void executeCommand(EnumCommand enumCommand, String instruction, TaskList result) throws DukeException {
+    public static void executeCommand(EnumCommand enumCommand, String instruction, TaskList tasks) throws DukeException {
         Ui ui = new Ui();
 
         switch (enumCommand) {
@@ -31,8 +31,8 @@ public class Command {
             if (instruction.substring(4).strip().equals("")) {
                 throw new DukeException("The description of a todo cannot be empty.");
             }
-            result.add(new ToDo(instruction.substring(4).strip()));
-            ui.addTaskAlert(result);
+            tasks.add(new ToDo(instruction.substring(4).strip()));
+            ui.addTaskAlert(tasks);
             break;
         case DEADLINE:
             if (instruction.substring(8).strip().equals("")) {
@@ -45,12 +45,13 @@ public class Command {
                 throw new DukeException("The date and time of the deadline cannot be empty.");
             }
 
-            String descDeadline = tempDeadline[0].strip();
-            String dateDeadline = tempDeadline[1].strip();
-            LocalDateTime dtDeadLine = dateTimeProcessor(dateDeadline);
-            result.add(new Deadlines(descDeadline, dtDeadLine));
-            ui.addTaskAlert(result);
+            String deadlineDescription = tempDeadline[0].strip();
+            String deadlineDateTime = tempDeadline[1].strip();
+            LocalDateTime deadlineDate = dateTimeParser(deadlineDateTime);
+            tasks.add(new Deadline(deadlineDescription, deadlineDate));
+            ui.addTaskAlert(tasks);
             break;
+
         case EVENT:
             if (instruction.substring(5).strip().equals("")) {
                 throw new DukeException("The description of an event cannot be empty.");
@@ -62,11 +63,11 @@ public class Command {
                 throw new DukeException("The date and time of the event cannot be empty.");
             }
 
-            String descEvent = tempEvent[0].strip(); // clear the white spaces at the front and at the back
-            String dateEvent = tempEvent[1].strip(); // clear the white spaces at the front and at the back
-            LocalDateTime dtEvent = dateTimeProcessor(dateEvent);
-            result.add(new Events(descEvent, dtEvent));
-            ui.addTaskAlert(result);
+            String eventDescription = tempEvent[0].strip(); // clear the white spaces at the front and at the back
+            String eventDateTime = tempEvent[1].strip(); // clear the white spaces at the front and at the back
+            LocalDateTime eventDate = dateTimeParser(eventDateTime);
+            tasks.add(new Event(eventDescription, eventDate));
+            ui.addTaskAlert(tasks);
             break;
         case BYE:
             ui.farewell();
@@ -79,13 +80,13 @@ public class Command {
 
             Integer indexDone = Integer.valueOf(instruction.substring(5).strip()) - 1;
 
-            if (indexDone + 1 > result.getSize()) {
+            if (indexDone + 1 > tasks.getSize()) {
                 throw new DukeException("The index of the task to be done is out of range.");
             }
 
-            Task tempDone = result.get(indexDone);
+            Task tempDone = tasks.get(indexDone);
             tempDone.markAsDone();
-            result.set(indexDone, tempDone);
+            tasks.set(indexDone, tempDone);
             ui.doneAlert(tempDone);
             break;
         case DELETE:
@@ -95,25 +96,25 @@ public class Command {
 
             Integer indexDelete = Integer.valueOf(instruction.substring(7).strip()) - 1;
 
-            if (indexDelete + 1 > result.getSize()) {
+            if (indexDelete + 1 > tasks.getSize()) {
                 throw new DukeException("The index of the task to be deleted is out of range.");
             }
 
-            Task tempDelete = result.get(indexDelete);
-            result.remove((int) indexDelete);
-            ui.deleteTaskAlert(tempDelete, result);
+            Task tempDelete = tasks.get(indexDelete);
+            tasks.remove((int) indexDelete);
+            ui.deleteTaskAlert(tempDelete, tasks);
             break;
         case LIST:
-            ui.showList(result);
+            ui.showList(tasks);
             break;
         case CHECK:
             if (instruction.substring(5).strip().equals("")) {
                 throw new DukeException("The \"check\" command is not entered correctly");
             }
 
-            String dateTimeTmp = instruction.substring(5).strip();
-            LocalDate dtCheck = dateProcessor(dateTimeTmp);
-            TaskList occurings = searchTasksByTime(dtCheck, result);
+            String dateTimeToCheck = instruction.substring(5).strip();
+            LocalDate dateToCheck = dateParser(dateTimeToCheck);
+            TaskList occurings = searchTasksByTime(dateToCheck, tasks);
             ui.showList(occurings);
             break;
         case FIND:
@@ -122,8 +123,8 @@ public class Command {
             }
 
             String keyword = instruction.substring(4).strip();
-            TaskList matchingList = findTaskByKeyword(keyword, result);
-            ui.findTaskAlert(matchingList);
+            TaskList matches = findTaskByKeyword(keyword, tasks);
+            ui.findTaskAlert(matches);
             break;
         }
 
@@ -142,15 +143,15 @@ public class Command {
         for (int i = 0; i < tasks.getSize(); i++) {
             boolean isMatch = false;
             Task temp = tasks.get(i);
-            if (temp instanceof Deadlines) {
-                Deadlines deadlines = (Deadlines) temp;
-                if (deadlines.getDate().equals(localDate)) {
+            if (temp instanceof Deadline) {
+                Deadline deadline = (Deadline) temp;
+                if (deadline.getDate().equals(localDate)) {
                     isMatch = true;
                 }
             }
-            if (temp instanceof Events) {
-                Events deadlines = (Events) temp;
-                if (deadlines.getDate().equals(localDate)) {
+            if (temp instanceof Event) {
+                Event deadline = (Event) temp;
+                if (deadline.getDate().equals(localDate)) {
                     isMatch = true;
                 }
             }
@@ -164,7 +165,7 @@ public class Command {
 
 
     public static TaskList findTaskByKeyword(String keyword, TaskList tasks) {
-        TaskList matchingList = new TaskList();
+        TaskList matches = new TaskList();
 
         for (int i = 0; i < tasks.getSize(); i++) {
             boolean isMatch = false;
@@ -173,10 +174,10 @@ public class Command {
                 isMatch = true;
             }
             if (isMatch) {
-                matchingList.add(temp);
+                matches.add(temp);
             }
         }
 
-        return matchingList;
+        return matches;
     }
 }

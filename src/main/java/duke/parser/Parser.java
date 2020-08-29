@@ -71,7 +71,7 @@ public class Parser {
      * @throws DukeException if the user input format is illegal.
      * @throws DateTimeException if the date is an illegal date.
      */
-    public static LocalDate dateProcessor(String date) throws DukeException, DateTimeException {
+    public static LocalDate dateParser(String date) throws DukeException, DateTimeException {
 
         String[] dateSplit = date.split("-");
         if (dateSplit.length != 3 || dateSplit[0].strip().length() != 4
@@ -91,7 +91,7 @@ public class Parser {
      * @throws DukeException if the user input format is illegal.
      * @throws DateTimeException if the date is an illegal date.
      */
-    public static LocalDateTime dateTimeProcessor(String dateTime) throws DukeException, DateTimeException {
+    public static LocalDateTime dateTimeParser(String dateTime) throws DukeException, DateTimeException {
         String[] dateTimeSplit = dateTime.strip().split(" ");
         if (dateTimeSplit.length != 2) {
             throw new DukeException("The format of the input date and time is incorrect");

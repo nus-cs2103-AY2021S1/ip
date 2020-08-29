@@ -1,7 +1,7 @@
 package duke;
 
 import duke.commands.EnumCommand;
-import duke.commands.Command;
+import duke.commands.CommandExecution;
 import duke.exception.DukeException;
 import duke.parser.Parser;
 import duke.storage.Storage;
@@ -55,7 +55,7 @@ public class Duke {
             String instruction = sc.nextLine();
             try {
                 EnumCommand enumCommand = Parser.parseCommand(instruction);
-                Command.executeCommand(enumCommand, instruction, result);
+                CommandExecution.executeCommand(enumCommand, instruction, result);
                 storage.storeToFile(result);
             } catch (Exception e) {
                 ui.showError(e);
