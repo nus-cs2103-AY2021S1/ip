@@ -14,7 +14,7 @@ public class ListCommand extends Command{
 
     public void execute(){
         try {
-            UI.listCalled(this.ls);
+            UI.listCalled(ls);
         }catch(DukeException e){
             UI.printError(e.toString());
         }

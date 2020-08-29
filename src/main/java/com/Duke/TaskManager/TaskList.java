@@ -27,7 +27,7 @@ public class TaskList {
 
     public TaskList findTask(String hint){
         TaskList containsHint = new TaskList(new ArrayList<Task>());
-        for(Task task: this.ls){
+        for(Task task: ls){
             if(task.getTask().contains(hint)){
                 containsHint.add(task);
             }

@@ -17,8 +17,8 @@ public class TaskCommand extends Command{
     @Override
     public void execute() {
         try {
-            Task task = new Task(this.task, false);
-            UI.taskCalled(ls,task);
+            Task newTask = new Task(task, false);
+            UI.taskCalled(ls,newTask);
         }catch(DukeException e){
             UI.printError(e.toString());
         }

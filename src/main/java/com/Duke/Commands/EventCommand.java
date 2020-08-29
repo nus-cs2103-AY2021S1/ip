@@ -9,11 +9,11 @@ import java.time.format.DateTimeParseException;
 
 public class EventCommand extends Command{
 
-    private final String[] splitlist;
+    private final String[] splitList;
     private final TaskList ls;
 
     public EventCommand(String[] splitlist, TaskList ls) {
-        this.splitlist = splitlist;
+        this.splitList = splitlist;
         this.ls = ls;
     }
 
@@ -21,7 +21,7 @@ public class EventCommand extends Command{
     @Override
     public void execute() {
         try {
-            String[] splitList2 = this.splitlist[1].split("/at ", 2);
+            String[] splitList2 = this.splitList[1].split("/at ", 2);
             String[] splitList3 = splitList2[1].split("-", 2);
             Event event = new Event(splitList2[0], LocalTime.parse(splitList3[0]), LocalTime.parse(splitList3[1]), false);
             UI.eventCalled(ls,event);

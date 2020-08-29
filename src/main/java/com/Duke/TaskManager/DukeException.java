@@ -9,6 +9,6 @@ public class DukeException extends Exception{
 
     @Override
     public String toString(){
-        return "     \u2639 OOPS!!!" + this.errorMsg;
+        return "     \u2639 OOPS!!!" + errorMsg;
     }
 }

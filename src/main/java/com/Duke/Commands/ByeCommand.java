@@ -19,7 +19,7 @@ public class ByeCommand extends Command{
 
     public void execute(){
         try {
-            UI.byeCalled(this.ls);
+            UI.byeCalled(ls);
         }catch (DukeException e){
             UI.printError(e.toString());
         }

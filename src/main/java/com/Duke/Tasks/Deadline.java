@@ -23,7 +23,7 @@ public class Deadline extends Task{
     }
 
     public String getDeadline(){
-        return "(by: " + this.deadline.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")" ;
+        return "(by: " + deadline.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")" ;
     }
 
     /*
@@ -32,7 +32,7 @@ public class Deadline extends Task{
      */
     @Override
     public Deadline done() throws DukeException{
-        return new Deadline(this.task, this.deadline,true);
+        return new Deadline(task, deadline,true);
     }
 
     /*
@@ -48,8 +48,8 @@ public class Deadline extends Task{
     @Override
     public String toString(){
         return this.isDone ?
-                ("[D][\u2713] " + this.getTask() + this.getDeadline())
+                ("[D][\u2713] " + getTask() + getDeadline())
                 :
-                ("[D][\u2718] " + this.getTask() + this.getDeadline());
+                ("[D][\u2718] " + getTask() + getDeadline());
     }
 }

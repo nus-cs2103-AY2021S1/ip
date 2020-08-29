@@ -36,7 +36,7 @@ public class Event extends Task{
     }
 
     public String getDeadline(){
-        return "(at: " + this.start.format(DateTimeFormatter.ofPattern("HH:mm")) + " - " + this.end.format(DateTimeFormatter.ofPattern("HH:mm")) + ")";
+        return "(at: " + start.format(DateTimeFormatter.ofPattern("HH:mm")) + " - " + end.format(DateTimeFormatter.ofPattern("HH:mm")) + ")";
     }
 
     /*
@@ -45,14 +45,14 @@ public class Event extends Task{
      */
     @Override
     public Event done() throws DukeException{
-        return new Event(this.task, this.start, this.end, true);
+        return new Event(task, start, end, true);
     }
 
     @Override
     public String toString(){
         return this.isDone ?
-                ("[E][\u2713] " + this.getTask() + this.getDeadline())
+                ("[E][\u2713] " + getTask() + getDeadline())
                 :
-                ("[E][\u2718] " + this.getTask() + this.getDeadline());
+                ("[E][\u2718] " + getTask() + getDeadline());
     }
 }
