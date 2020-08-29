@@ -27,9 +27,22 @@ test {
         showStandardStreams = false
     }
 }
+sourceSets {
+    main {
+        java {
+            srcDirs = ["src/main"]
+        }
+    }
+
+    test {
+        java {
+            srcDirs = ["src/test"]
+        }
+    }
+}
 
 application {
-    mainClassName = "seedu.duke.Duke"
+    mainClassName = "duke.Duke"
 }
 
 shadowJar {
