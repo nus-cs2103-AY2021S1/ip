@@ -18,27 +18,42 @@ public class Duke {
         list = storage.loadFile();
     }
 
-    private void run() {
-        Ui.printGreeting();
-
-        String input = ui.getInput();
-        Command command = Parser.parse(input);
-        while (command.getTaskType() != TaskType.BYE) {
-            command.execute(list);
-
-            input = ui.getInput();
-            command = Parser.parse(input);
-        }
-
-        storage.saveFile(list);
-        Ui.printGoodbye();
-    }
-
     /**
-     * Entry point for the Duke program
-     * @param args command line arguments
+     * Instantiates a Duke object, with default filePath ".//data//duke.data".
      */
-    public static void main(String[] args) {
-        new Duke(".//data//duke.data").run();
+    public Duke() {
+        ui = new Ui();
+        storage = new Storage(".//data//duke.data");
+        list = storage.loadFile();
     }
+
+    // private void run() {
+    //     Ui.printGreeting();
+    //
+    //     String input = ui.getInput();
+    //     Command command = Parser.parse(input);
+    //     while (command.getTaskType() != TaskType.BYE) {
+    //         String result = command.execute(list);
+    //         Ui.print(result);
+    //
+    //         input = ui.getInput();
+    //         command = Parser.parse(input);
+    //     }
+    //
+    //     storage.saveFile(list);
+    //     Ui.printGoodbye();
+    // }
+
+    public String getResponse(String input) {
+        Command command = Parser.parse(input);
+        return command.execute(list);
+    }
+
+    // /**
+    //  * Entry point for the Duke program
+    //  * @param args command line arguments
+    //  */
+    // public static void main(String[] args) {
+    //     new Duke(".//data//duke.data").run();
+    // }
 }

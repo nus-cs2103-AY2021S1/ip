@@ -132,9 +132,9 @@ public class Command {
      * Executes the Command.
      * @param list the TaskList this command is to be applied to
      */
-    public void execute(TaskList list) {
+    public String execute(TaskList list) {
         if (!isValid()) {
-            return;
+            return null;
         }
 
         String print = "";
@@ -187,9 +187,8 @@ public class Command {
             }
         } catch (IndexOutOfBoundsException e) {
             print = "The index you provided was out of bounds.\nRun list to see your list of tasks.";
-        } finally {
-            Ui.print(print);
         }
+        return print;
     }
 
     @Override
