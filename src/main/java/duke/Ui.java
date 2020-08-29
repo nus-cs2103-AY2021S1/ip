@@ -11,8 +11,7 @@ public class Ui {
      * @param text The String to be formatted
      */
     public String printReply(String text) {
-        String line = "\t____________________________________________________________________________________";
-        return "\n\t\t" + text.replaceAll("\\n", "\n\t\t") + "\n"; //+ line;
+        return "\n\t\t" + text.replaceAll("\\n", "\n\t\t") + "\n";
     }
 
     /**

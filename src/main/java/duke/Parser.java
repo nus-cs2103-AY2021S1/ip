@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 
 import java.util.InputMismatchException;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 import task.Task;
@@ -46,8 +47,10 @@ public class Parser {
                 return "This task has been marked as done:\n" + task.toString();
             } catch (IndexOutOfBoundsException e) {
                 return "OOPS!!! Task number is invalid.";
-            } catch (InputMismatchException e) {
-                this.input.nextLine();
+            } catch (NoSuchElementException e) {
+                if (this.input.hasNextLine()) {
+                    this.input.nextLine();
+                }
                 return "OOPS!!! Task number must be a number.";
             }
         } else if (command.equals("delete")) {
@@ -59,15 +62,17 @@ public class Parser {
                         + "\nNow you have " + taskList.getTasks().size() + " in the list.";
             } catch (IndexOutOfBoundsException e) {
                 return "OOPS!!! Task number is invalid.";
-            } catch (InputMismatchException e) {
-                this.input.nextLine();
+            } catch (NoSuchElementException e) {
+                if (this.input.hasNextLine()) {
+                    this.input.nextLine();
+                }
                 return "OOPS!!! Task number must be a number.";
             }
         } else if (command.equals("find")) {
             String keyword;
             try {
                 keyword = input.nextLine().substring(1);
-            } catch (StringIndexOutOfBoundsException e) {
+            } catch (StringIndexOutOfBoundsException | NoSuchElementException e) {
                 return "OOPS!!! Keyword cannot be empty.";
             }
             TaskList foundTasks = new TaskList(taskList.findTasks(keyword));
@@ -87,7 +92,9 @@ public class Parser {
                     typeOfTask = TaskType.TypeOfTask.EVENT;
                     break;
                 default:
-                    this.input.nextLine();
+                    if (this.input.hasNextLine()) {
+                        this.input.nextLine();
+                    }
                     throw new InvalidCommandException("OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
 
@@ -107,7 +114,12 @@ public class Parser {
 
     private Task getTask(String command, TaskType.TypeOfTask typeOfTask, TaskList taskList)
             throws MissingInfoException {
-        String[] commandArray = this.input.nextLine().split(" ");
+        String[] commandArray;
+        try {
+            commandArray = this.input.nextLine().split(" ");
+        } catch (NoSuchElementException e) {
+            throw new MissingInfoException("OOPS!!! The description of a " + command + " cannot be empty.");
+        }
         String description = "";
         LocalDateTime timing = null;
 
