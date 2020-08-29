@@ -43,7 +43,7 @@ public class FileSaver {
         String [] arr = taskString.split("\\s+");
         boolean isCompleted = booleanToString(arr[1]);
         if (arr[0].equals("[D]")) {
-            task = new Deadline(arr[2],isCompleted,arr[3]);
+            task = new Deadline(arr[2],isCompleted,arr[3] + " " + arr[4]);
         } else if (arr[0].equals("[E]")) {
             task = new Event(arr[2],isCompleted,arr[3]);
         } else if (arr[0].equals("[T]")) {

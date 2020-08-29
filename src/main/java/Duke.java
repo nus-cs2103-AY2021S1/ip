@@ -11,7 +11,6 @@ import java.util.Scanner;
 
 public class Duke {
 
-
     public interface Printable{
         String print();
 
@@ -88,7 +87,11 @@ public class Duke {
         Task task =null;
         if (cmd1.equals("deadline")) {
             cmd2 =  command.substring(cmd1.length()+1);
-            task = parseDeadline(cmd2);
+            try {
+                task = parseDeadline(cmd2);
+            }catch (Exception e) {
+               System.out.println( "Please specify time in format YYYY-MM-DD hh:hh \n for instance : 2019-10-15 18:00");
+            }
         } else if (cmd1.equals("todo")) {
             if (command.split("\\s+").length == 1) {
                 throw new IllegalUserInputException("☹ OOPS!!! The description of a todo cannot be empty.");
