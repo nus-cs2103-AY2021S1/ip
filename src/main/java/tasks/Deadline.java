@@ -14,8 +14,8 @@ public class Deadline extends Task {
 
     public String description(){
         return super.isDone()
-                ? "[D][✓]"
-                : "[D][✗]";
+                ? "[D][0]"
+                : "[D][1]";
     }
 
     public String toString() {

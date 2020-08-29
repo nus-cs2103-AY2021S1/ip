@@ -18,7 +18,7 @@ public class Event extends Task {
 
     public String description(){
         return super.isDone()
-                ? "[E][✓]"
-                : "[E][✗]";
+                ? "[E][0]"
+                : "[E][1]";
     }
 }

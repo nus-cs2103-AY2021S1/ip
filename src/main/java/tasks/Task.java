@@ -37,8 +37,8 @@ public class Task {
 
     public String description(){
         return done
-                ? "[T][✓]"
-                : "[T][✗]";
+                ? "[T][0]"
+                : "[T][1]";
     }
     public void updateStatus(){
         done = true;

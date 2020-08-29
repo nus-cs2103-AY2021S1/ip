@@ -47,12 +47,12 @@ public class TaskList {
     public String save(){
         StringBuilder line = new StringBuilder();
         for (Task task : tasks){
+            String append = "";
             if (!task.istodo()){
-                String append = task.description() + task.getWork() + "|" + task.getDate() + "\n";
-                line.append(append);
-                continue;
+                append = task.description() + task.getWork() + "|" + task.getDate() + "\n";
+            } else {
+                append = task.description() + task.getWork() + "\n";
             }
-            String append = task.toString() + "\n";
             line.append(append);
         }
         return line.toString();

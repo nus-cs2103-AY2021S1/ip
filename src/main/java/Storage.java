@@ -66,7 +66,7 @@ public class Storage {
             LocalDateTime date = LocalDateTime.parse(line.substring(index + 1).trim(), formatter);
             task = new Event(line.substring(6, index), date);
         }
-        if (line.charAt(4) == '✓'){
+        if (line.charAt(4) == '0'){
             task.updateStatus();
         }
         return task;
