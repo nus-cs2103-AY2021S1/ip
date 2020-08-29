@@ -1,5 +1,7 @@
 package duke;
 
+import javafx.application.Application;
+import javafx.stage.Stage;
 import duke.command.Command;
 import duke.exceptions.DukeException;
 import duke.exceptions.InvalidFileException;
@@ -10,11 +12,14 @@ import duke.tasks.TaskList;
  * all of the bot logic sequences.
  */
 
-public class Duke {
+public class Duke extends Application {
 
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
+
+    public Duke() {
+    }
 
     /**
      * Duke constructor to take initialize Storage, TaskList and Ui.
@@ -50,6 +55,14 @@ public class Duke {
                 ui.showLine();
             }
         }
+    }
+
+    @Override
+    public void start(Stage stage) {
+    }
+
+    public String getResponse(String input) {
+        return "Duke heard: " + input;
     }
 
     public static void main(String[] args) {
