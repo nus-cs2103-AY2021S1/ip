@@ -1,12 +1,12 @@
 package duke.task;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 import duke.exceptions.DukeException;
 import duke.exceptions.DukeStorageException;
 import duke.exceptions.DukeTaskCreationException;
 import duke.parser.DateParser;
-
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 /**
  * The {@code Event} class represents an event with a scheduled time.

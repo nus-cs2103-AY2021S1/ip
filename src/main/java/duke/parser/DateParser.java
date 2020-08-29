@@ -1,7 +1,5 @@
 package duke.parser;
 
-import duke.exceptions.DukeException;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -9,6 +7,8 @@ import java.time.format.DateTimeFormatterBuilder;
 import java.time.format.DateTimeParseException;
 import java.util.Arrays;
 import java.util.List;
+
+import duke.exceptions.DukeException;
 
 /**
  * The {@code DateParser} class provides methods for converting between {@code LocalDateTime} objects and strings.

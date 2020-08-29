@@ -1,10 +1,10 @@
 package duke.task;
 
-import duke.exceptions.DukeException;
-
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+
+import duke.exceptions.DukeException;
 
 /**
  * The {@code TaskList} class is an ordered collection of {@link Task}.

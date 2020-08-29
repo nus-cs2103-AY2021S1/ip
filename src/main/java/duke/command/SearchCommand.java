@@ -1,14 +1,14 @@
 package duke.command;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import duke.exceptions.DukeException;
 import duke.exceptions.IncompleteDukeCommandException;
 import duke.storage.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.ui.Ui;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class SearchCommand extends Command {
 
