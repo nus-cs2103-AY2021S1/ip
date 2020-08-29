@@ -65,9 +65,13 @@ public class Ui {
      * @param tasks the tasks in the search results.
      */
     public void printSearchResult(ArrayList<Task> tasks) {
-        printOutput("Here are the matching tasks in your list:");
-        for(int index = 0; index < tasks.size(); index++) {
-            printOutput((index + 1) + ": " + tasks.get(index));
+        if (tasks.size() == 0 ) {
+            printOutput("No tasks found");
+        } else {
+            printOutput("Here are the matching tasks in your list:");
+            for (int index = 0; index < tasks.size(); index++) {
+                printOutput((index + 1) + ": " + tasks.get(index));
+            }
         }
     }
 }
