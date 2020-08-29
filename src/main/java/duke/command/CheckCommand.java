@@ -1,13 +1,12 @@
 package duke.command;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+
 import duke.storage.Storage;
 import duke.storage.TaskList;
 import duke.task.Task;
 import duke.ui.Ui;
-
-import java.time.LocalDate;
-
-import java.util.ArrayList;
 
 /**
  * Encapsulates the Command which checks and loads tasks which occur

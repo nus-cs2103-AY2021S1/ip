@@ -1,9 +1,9 @@
 package duke.task;
 
-import duke.exception.DukeException;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+
+import duke.exception.DukeException;
 
 /**
  * Encapsulates a deadline task which contains a valid LocalDate.

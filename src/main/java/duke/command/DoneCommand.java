@@ -1,12 +1,12 @@
 package duke.command;
 
-import duke.storage.TaskList;
-import duke.storage.Storage;
-import duke.ui.Ui;
-import duke.task.Task;
-import duke.exception.DukeException;
-
 import java.util.ArrayList;
+
+import duke.exception.DukeException;
+import duke.storage.Storage;
+import duke.storage.TaskList;
+import duke.task.Task;
+import duke.ui.Ui;
 
 /**
  * Encapsulates a Command which marks a task in the list as complete.

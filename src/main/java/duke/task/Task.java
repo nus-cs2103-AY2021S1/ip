@@ -25,18 +25,26 @@ public class Task {
                 : "✘";
     }
 
-    public String getDescription() { return this.description; }
+    public String getDescription() {
+        return this.description;
+    }
 
     public LocalDate getDate() {
         return this.date;
     }
 
+    /**
+     * Prints the date in a different format
+     * @return The new format of the date.
+     */
     public String printDate() {
-        return this.date.getDayOfWeek() + ", " + this.date.getMonth() + " " +
-                this.date.getDayOfMonth() + " " + this.date.getYear();
+        return this.date.getDayOfWeek() + ", " + this.date.getMonth() + " "
+                + this.date.getDayOfMonth() + " " + this.date.getYear();
     }
 
-    public void finishTask() { isDone = true; }
+    public void finishTask() {
+        isDone = true;
+    }
 
     public String saveData() {
         return getStatusIcon() + " > " + this.description;

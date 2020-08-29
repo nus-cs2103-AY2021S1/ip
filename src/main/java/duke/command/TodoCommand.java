@@ -1,12 +1,12 @@
 package duke.command;
 
-import duke.task.ToDo;
-import duke.task.Task;
-import duke.storage.TaskList;
-import duke.storage.Storage;
-import duke.ui.Ui;
-
 import java.util.ArrayList;
+
+import duke.storage.Storage;
+import duke.storage.TaskList;
+import duke.task.Task;
+import duke.task.ToDo;
+import duke.ui.Ui;
 
 /**
  * Encapsulates a Command which creates a new ToDo task to add to the task

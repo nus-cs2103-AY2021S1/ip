@@ -1,20 +1,20 @@
 package duke.parser;
 
-import duke.exception.DukeException;
-import duke.ui.Ui;
-import duke.command.Command;
-import duke.command.TodoCommand;
-import duke.command.EventCommand;
-import duke.command.DeadlineCommand;
-import duke.command.DeleteCommand;
-import duke.command.ExitCommand;
-import duke.command.ListCommand;
-import duke.command.CheckCommand;
-import duke.command.DoneCommand;
-import duke.command.FindCommand;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+
+import duke.command.CheckCommand;
+import duke.command.Command;
+import duke.command.DeadlineCommand;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.EventCommand;
+import duke.command.ExitCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
+import duke.command.TodoCommand;
+import duke.exception.DukeException;
+import duke.ui.Ui;
 
 /**
  * Parses the string commands passed into the program by the user through
@@ -27,6 +27,11 @@ public class Parser {
         this.ui = ui;
     }
 
+    /**
+     * Checks if a given String is a number
+     * @param test The String to test
+     * @return A boolean confirming if the String is a number
+     */
     public boolean isNumeric(String test) {
         try {
             Integer.parseInt(test);
@@ -36,13 +41,19 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses the input given by the user into the program.
+     * @param command The command entered by the user.
+     * @return A new Command object.
+     * @throws DukeException If command is invalid or missing details.
+     */
     public Command parse(String command) throws DukeException {
         String[] modEcho = command.split(" ", 2);
 
         if (modEcho.length == 1) {
-            return CheckOneWord(command);
+            return checkOneWord(command);
         } else {
-            return CheckTwoWords(modEcho);
+            return checkTwoWords(modEcho);
         }
     }
 
@@ -52,27 +63,27 @@ public class Parser {
      * @return A command
      * @throws DukeException If command is invalid or is missing some details.
      */
-    public Command CheckOneWord(String echo) throws DukeException {
+    public Command checkOneWord(String echo) throws DukeException {
         if (echo.equals("bye")) {
             return new ExitCommand();
         } else if (echo.equals("list")) {
             return new ListCommand();
         } else if (echo.equals("todo") || echo.equals("deadline") || echo.equals("event")) {
-            throw new DukeException("Please enter a valid" +
-                    " description for your task!");
+            throw new DukeException("Please enter a valid"
+                    + " description for your task!");
         } else if (echo.equals("done")) {
-            throw new DukeException("Please enter the ID " +
-                    "of the task you would like to complete.");
+            throw new DukeException("Please enter the ID "
+                    + "of the task you would like to complete.");
         } else if (echo.equals("delete")) {
-            throw new DukeException("Please retry and enter " +
-                    "the ID of the task to be deleted.");
+            throw new DukeException("Please retry and enter "
+                    + "the ID of the task to be deleted.");
         } else if (echo.equals("check")) {
             throw new DukeException("Please enter a date to check!");
         } else if (echo.equals("find")) {
             throw new DukeException("Please enter a keyword to search for.");
         } else {
-            throw new DukeException("Please enter a valid " +
-                    "command into the console.");
+            throw new DukeException("Please enter a valid "
+                    + "command into the console.");
         }
     }
 
@@ -82,7 +93,7 @@ public class Parser {
      * @return A command.
      * @throws DukeException If the command entered is invalid.
      */
-    public Command CheckTwoWords(String[] modEcho) throws DukeException {
+    public Command checkTwoWords(String[] modEcho) throws DukeException {
         String task = modEcho[0];
 
         if (task.equals("done")) {
@@ -115,7 +126,7 @@ public class Parser {
             if (task.equals("todo")) {
                 return new TodoCommand(modEcho[1]);
             } else if (task.equals("deadline") || task.equals("event")) {
-                return CheckValidTime(modEcho);
+                return checkValidTime(modEcho);
             } else {
                 throw new DukeException("Please enter a valid task name to add into the list!");
             }
@@ -129,7 +140,7 @@ public class Parser {
      * @return A command.
      * @throws DukeException If the date entered is in the wrong format.
      */
-    public Command CheckValidTime(String[] modEcho) throws DukeException {
+    public Command checkValidTime(String[] modEcho) throws DukeException {
         String task = modEcho[0];
         String[] processTime = modEcho[1].split("/");
 

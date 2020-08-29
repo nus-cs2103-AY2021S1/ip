@@ -1,18 +1,17 @@
 package duke.storage;
 
-import duke.task.Task;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.ToDo;
-import duke.exception.DukeException;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import duke.exception.DukeException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
 
 /**
  * Encapsulates a save-and-load system that allows task information to be saved to the hard drive
@@ -81,12 +80,24 @@ public class Storage {
         return lib;
     }
 
+    /**
+     * Writes the task list to a text file.
+     * @param filePath The path that the text file resides.
+     * @param textToAdd The text to add to the file.
+     * @throws IOException If FileWriter has issues with the given path.
+     */
     public void writeToFile(String filePath, String textToAdd) throws IOException {
         FileWriter writer = new FileWriter(filePath);
         writer.write(textToAdd);
         writer.close();
     }
 
+    /**
+     * Appends the text provided to a text file.
+     * @param filePath The path where the text file is.
+     * @param textToAppend The text to append to the file.
+     * @throws IOException If FileWriter has issues with the given path.
+     */
     public void appendToFile(String filePath, String textToAppend) throws IOException {
         FileWriter writer = new FileWriter(filePath, true);
         writer.write(textToAppend);

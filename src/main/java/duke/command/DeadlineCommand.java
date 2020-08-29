@@ -1,13 +1,13 @@
 package duke.command;
 
-import duke.storage.TaskList;
-import duke.storage.Storage;
-import duke.ui.Ui;
-import duke.task.Task;
-import duke.task.Deadline;
-import duke.exception.DukeException;
-
 import java.util.ArrayList;
+
+import duke.exception.DukeException;
+import duke.storage.Storage;
+import duke.storage.TaskList;
+import duke.task.Deadline;
+import duke.task.Task;
+import duke.ui.Ui;
 
 /**
  * Encapsulates a Command which creates a new Deadline task to add to the task
@@ -18,6 +18,11 @@ public class DeadlineCommand extends Command {
     private String description;
     private String time;
 
+    /**
+     * Creates a deadline command.
+     * @param description The task details.
+     * @param time The date of the deadline.
+     */
     public DeadlineCommand(String description, String time) {
         this.description = description;
         this.time = time;

@@ -1,10 +1,10 @@
 package duke.command;
 
-import duke.storage.TaskList;
-import duke.storage.Storage;
-import duke.ui.Ui;
-
 import java.io.IOException;
+
+import duke.storage.Storage;
+import duke.storage.TaskList;
+import duke.ui.Ui;
 
 /**
  * Encapsulates a command which facilitates leaving the Duke program.

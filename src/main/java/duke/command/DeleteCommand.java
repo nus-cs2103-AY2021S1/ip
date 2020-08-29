@@ -1,12 +1,12 @@
 package duke.command;
 
-import duke.task.Task;
-import duke.storage.TaskList;
-import duke.storage.Storage;
-import duke.ui.Ui;
-import duke.exception.DukeException;
-
 import java.util.ArrayList;
+
+import duke.exception.DukeException;
+import duke.storage.Storage;
+import duke.storage.TaskList;
+import duke.task.Task;
+import duke.ui.Ui;
 
 /**
  * Encapsulates a Command which deletes a task from the task list.

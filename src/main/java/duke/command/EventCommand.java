@@ -1,13 +1,13 @@
 package duke.command;
 
-import duke.storage.TaskList;
-import duke.storage.Storage;
-import duke.task.Task;
-import duke.task.Event;
-import duke.ui.Ui;
-import duke.exception.DukeException;
-
 import java.util.ArrayList;
+
+import duke.exception.DukeException;
+import duke.storage.Storage;
+import duke.storage.TaskList;
+import duke.task.Event;
+import duke.task.Task;
+import duke.ui.Ui;
 
 /**
  * Encapsulates a Command which creates a new Event task to add to the task
@@ -18,6 +18,11 @@ public class EventCommand extends Command {
     private String description;
     private String time;
 
+    /**
+     * Creates an event command
+     * @param description The task details.
+     * @param time The event date.
+     */
     public EventCommand(String description, String time) {
         this.description = description;
         this.time = time;

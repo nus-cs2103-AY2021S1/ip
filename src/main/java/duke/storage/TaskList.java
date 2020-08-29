@@ -1,11 +1,11 @@
 package duke.storage;
 
-import duke.task.Task;
+import java.util.ArrayList;
+
 import duke.task.Deadline;
 import duke.task.Event;
+import duke.task.Task;
 import duke.task.ToDo;
-
-import java.util.ArrayList;
 
 /**
  * Encapsulates the list of tasks that the user currently stores. Allows

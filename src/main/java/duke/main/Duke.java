@@ -1,14 +1,13 @@
 package duke.main;
 
+import java.io.FileNotFoundException;
+
 import duke.command.Command;
+import duke.exception.DukeException;
+import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.storage.TaskList;
 import duke.ui.Ui;
-import duke.exception.DukeException;
-import duke.parser.Parser;
-
-
-import java.io.FileNotFoundException;
 
 /**
  * Encapsulates the core class which coordinates with all other key classes to

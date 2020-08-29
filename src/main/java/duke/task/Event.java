@@ -1,14 +1,14 @@
 package duke.task;
 
-import duke.exception.DukeException;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+
+import duke.exception.DukeException;
 
 /**
  * Encapsulates an event task which contains a valid LocalDate.
  */
-public class Event extends Task{
+public class Event extends Task {
 
     /**
      * Creates an event task with description and attendance date.

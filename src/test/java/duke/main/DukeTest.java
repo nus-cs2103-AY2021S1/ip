@@ -1,17 +1,17 @@
 package duke.main;
 
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.ToDo;
-import duke.storage.TaskList;
-import duke.exception.DukeException;
-import duke.ui.Ui;
-import duke.command.ListCommand;
-import duke.parser.Parser;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import duke.command.ListCommand;
+import duke.exception.DukeException;
+import duke.parser.Parser;
+import duke.storage.TaskList;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.ToDo;
+import duke.ui.Ui;
 
 /**
  * Encapsulates the main test system that the developer uses to test the
