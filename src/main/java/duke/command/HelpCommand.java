@@ -22,7 +22,7 @@ public class HelpCommand extends Command {
      * @param input User's input.
      * @param taskList Task list created for user.
      * @param storage Storage created for user.
-     * @return List of commands.
+     * @return String representation of list of commands.
      * @throws DukeException If input does not meet criteria.
      */
     public String execute(String input, TaskList taskList, Storage storage) throws DukeException {

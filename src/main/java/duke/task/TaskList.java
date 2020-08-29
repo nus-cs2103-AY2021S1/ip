@@ -46,6 +46,7 @@ public class TaskList {
      * Adds To-Do tasks into task list.
      * @param description Description of To-Do.
      * @param storage Storage created for user.
+     * @return String representation of added To-Do.
      */
     public String addToDo(String description, Storage storage) {
         Task toDo = new ToDo(description);
@@ -62,6 +63,7 @@ public class TaskList {
      * @param description Description of Deadline.
      * @param date Deadline of Deadline task.
      * @param storage Storage created for user.
+     * @return String representation of added Deadline.
      */
     public String addDeadline(String description, LocalDateTime date, Storage storage) {
         Task deadline = new Deadline(description, date);
@@ -78,6 +80,7 @@ public class TaskList {
      * @param description Description of Event.
      * @param date Date and time of Event.
      * @param storage Storage created for user.
+     * @return String representation of added Event.
      */
     public String addEvent(String description, LocalDateTime date, Storage storage) {
         Task event = new Event(description, date);
@@ -93,6 +96,7 @@ public class TaskList {
      * Deletes tasks from task list.
      * @param index Index of task user wants to remove.
      * @param storage Storage created for user.
+     * @return String representation of deleted task.
      */
     public String deleteTask(int index, Storage storage) {
         Task taskToBeDeleted = taskList.get(index - 1);
@@ -109,6 +113,7 @@ public class TaskList {
      * Marks tasks done on task list.
      * @param index Index of task user wants to mark as done.
      * @param storage Storage created for user.
+     * @return String representation of done task.
      */
     public String markTaskDone(int index, Storage storage) {
         Task finishedTask = taskList.get(index - 1);
@@ -121,6 +126,7 @@ public class TaskList {
 
     /**
      * Lists all the tasks on task list.
+     * @return String representation of list of tasks.
      */
     public String listTasks() {
         String printing = "";
@@ -135,6 +141,7 @@ public class TaskList {
     /**
      * Finds the tasks according to the keyword user input.
      * @param keyword Keyword provided by user.
+     * @return String representation of found tasks.
      */
     public String findTasks(String keyword) {
         boolean canFind = false;

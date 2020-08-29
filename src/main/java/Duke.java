@@ -1,5 +1,3 @@
-import java.util.Scanner;
-
 import duke.command.Command;
 import duke.exception.DukeException;
 import duke.parser.Parser;
@@ -22,7 +20,7 @@ public class Duke {
     /**
      * UI created to interact with user.
      */
-    public static UI ui;
+    private final UI ui;
 
     /**
      * Creates Focus to set up the things needed.
@@ -36,36 +34,6 @@ public class Duke {
         } else {
             taskList = new TaskList();
         }
-    }
-
-    /**
-     * Runs Focus.
-     */
-    public void run() {
-        Scanner sc = new Scanner(System.in);
-        ui.greetUser();
-        String name = sc.nextLine();
-        ui.addressUser(name);
-
-        boolean exit = false;
-        String input;
-        while (!exit) {
-            input = sc.nextLine();
-            Command command = Parser.parse(input);
-            exit = command.isExit();
-            ui.printDivider();
-            try {
-                command.execute(input, taskList, storage);
-            } catch (DukeException e) {
-                System.out.println(e.getMessage());
-            } finally {
-                if (!exit) {
-                    ui.printDividerWithSpacing();
-                }
-            }
-        }
-        ui.exitFocus();
-        sc.close();
     }
 
     /**
@@ -85,13 +53,5 @@ public class Duke {
         } catch (DukeException e) {
             return e.getMessage();
         }
-    }
-
-    /**
-     * Entry point for Focus to start.
-     * @param args Args.
-     */
-    public static void main(String[] args) {
-        new Duke().run();
     }
 }

@@ -24,8 +24,8 @@ public class ListCommandTest {
         try {
             listCommand.execute("blah", taskList, storage);
         } catch (DukeException e) {
-            assertEquals("\tThere are currently no tasks on your list!\n"
-                    + "\tStart adding one now!", e.getMessage());
+            assertEquals("There are currently no tasks on your list!\n"
+                    + "Start adding one now!", e.getMessage());
         }
     }
 }

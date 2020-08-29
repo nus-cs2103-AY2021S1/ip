@@ -24,7 +24,7 @@ public class HelpCommandTest {
         try {
             helpCommand.execute("help me", taskList, storage);
         } catch (DukeException e) {
-            assertEquals("\tDid you meant the command 'help'?", e.getMessage());
+            assertEquals("Did you meant the command 'help'?", e.getMessage());
         }
     }
 }

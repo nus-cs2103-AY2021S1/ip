@@ -24,8 +24,8 @@ public class InvalidCommandTest {
         try {
             invalidCommand.execute("blah", taskList, storage);
         } catch (DukeException e) {
-            assertEquals("\tOops! I'm not sure what you meant!\n"
-                    + "\tPlease try again!", e.getMessage());
+            assertEquals("Oops! I'm not sure what you meant!\n"
+                    + "Please try again!", e.getMessage());
         }
     }
 }

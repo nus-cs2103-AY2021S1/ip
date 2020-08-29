@@ -21,8 +21,8 @@ public class InvalidCommand extends Command {
      * @param input User's input.
      * @param taskList Task list created for user.
      * @param storage Storage created for user.
+     * @return String representation of invalid command.
      * @throws DukeException Always since input is invalid.
-     * @return
      */
     public String execute(String input, TaskList taskList, Storage storage) throws DukeException {
         throw new DukeException("Oops! I'm not sure what you meant!\n"

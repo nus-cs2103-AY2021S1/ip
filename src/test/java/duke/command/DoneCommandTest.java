@@ -24,20 +24,20 @@ public class DoneCommandTest {
         try {
             doneCommand.execute("done", taskList, storage);
         } catch (DukeException e) {
-            assertEquals("\tPlease enter a task number you wish to mark done!\n"
-                    + "\tYou have " + taskList.getSize() + " tasks on your list now.", e.getMessage());
+            assertEquals("Please enter a task number you wish to mark done!\n"
+                    + "You have " + taskList.getSize() + " tasks on your list now.", e.getMessage());
         }
         try {
             doneCommand.execute("done 0", taskList, storage);
         } catch (DukeException e) {
-            assertEquals("\tThere is no such task number.\n"
-                    + "\tPlease enter a valid one!", e.getMessage());
+            assertEquals("There is no such task number.\n"
+                    + "Please enter a valid one!", e.getMessage());
         }
         try {
             doneCommand.execute("done 5", taskList, storage);
         } catch (DukeException e) {
-            assertEquals("\tThere is no such task number.\n"
-                    + "\tPlease enter a valid one!", e.getMessage());
+            assertEquals("There is no such task number.\n"
+                    + "Please enter a valid one!", e.getMessage());
         }
     }
 }

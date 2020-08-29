@@ -24,20 +24,20 @@ public class DeleteCommandTest {
         try {
             deleteCommand.execute("delete ", taskList, storage);
         } catch (DukeException e) {
-            assertEquals("\tPlease enter a task number you wish to delete!\n"
-                    + "\tYou have " + taskList.getSize() + " tasks on your list now.", e.getMessage());
+            assertEquals("Please enter a task number you wish to delete!\n"
+                    + "You have " + taskList.getSize() + " tasks on your list now.", e.getMessage());
         }
         try {
             deleteCommand.execute("delete 0", taskList, storage);
         } catch (DukeException e) {
-            assertEquals("\tThere is no such task number.\n"
-                    + "\tPlease enter a valid one!", e.getMessage());
+            assertEquals("There is no such task number.\n"
+                    + "Please enter a valid one!", e.getMessage());
         }
         try {
             deleteCommand.execute("delete 5", taskList, storage);
         } catch (DukeException e) {
-            assertEquals("\tThere is no such task number.\n"
-                    + "\tPlease enter a valid one!", e.getMessage());
+            assertEquals("There is no such task number.\n"
+                    + "Please enter a valid one!", e.getMessage());
         }
     }
 }

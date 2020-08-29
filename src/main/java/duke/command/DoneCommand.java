@@ -21,8 +21,8 @@ public class DoneCommand extends Command {
      * @param input User's input.
      * @param taskList Task list created for user.
      * @param storage Storage created for user.
+     * @return String representation of done task.
      * @throws DukeException If input does not meet criteria.
-     * @return
      */
     public String execute(String input, TaskList taskList, Storage storage) throws DukeException {
         String indexString;

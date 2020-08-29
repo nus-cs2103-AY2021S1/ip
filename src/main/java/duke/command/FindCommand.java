@@ -21,6 +21,7 @@ public class FindCommand extends Command {
      * @param input User's input.
      * @param taskList Task list created for user.
      * @param storage Storage created for user.
+     * @return String representation of found tasks.
      * @throws DukeException If input does not meet criteria.
      */
     public String execute(String input, TaskList taskList, Storage storage) throws DukeException {

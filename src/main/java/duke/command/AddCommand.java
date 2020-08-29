@@ -1,11 +1,11 @@
 package duke.command;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
+
 import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.task.TaskList;
-
-import java.time.LocalDateTime;
-import java.time.format.DateTimeParseException;
 
 /**
  * Represents the AddCommand to add tasks into task list.
@@ -37,7 +37,7 @@ public class AddCommand extends Command {
      * @param input User's input.
      * @param taskList Task list created for user.
      * @param storage Storage created for user.
-     * @return Printing of addition of tasks.
+     * @return String representation of added task.
      * @throws DukeException If input does not meet criteria.
      */
     public String execute(String input, TaskList taskList, Storage storage) throws DukeException {
@@ -56,6 +56,7 @@ public class AddCommand extends Command {
      * @param input User's input.
      * @param taskList Task list created for user.
      * @param storage Storage created for user.
+     * @return String representation of added To-Do.
      * @throws DukeException If input does not meet criteria.
      */
     private String addToDo(String input, TaskList taskList, Storage storage) throws DukeException {
@@ -81,6 +82,7 @@ public class AddCommand extends Command {
      * @param input User's input.
      * @param taskList Task list created for user.
      * @param storage Storage created for user.
+     * @return String representation of added Deadline.
      * @throws DukeException If input does not meet criteria.
      */
     private String addDeadline(String input, TaskList taskList, Storage storage) throws DukeException {
@@ -137,6 +139,7 @@ public class AddCommand extends Command {
      * @param input User's input.
      * @param taskList Task list created for user.
      * @param storage Storage created for user.
+     * @return String representation of added Event.
      * @throws DukeException If input does not meet criteria.
      */
     private String addEvent(String input, TaskList taskList, Storage storage) throws DukeException {

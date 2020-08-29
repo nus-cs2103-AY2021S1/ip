@@ -5,27 +5,8 @@ package duke.ui;
  */
 public class UI {
     /**
-     * Divider.
-     */
-    private final String divider =
-            "------------------------------------------------------------------\n";
-
-    /**
-     * Prints the divider.
-     */
-    public void printDivider() {
-        System.out.print(divider);
-    }
-
-    /**
-     * Prints divider with next line.
-     */
-    public void printDividerWithSpacing() {
-        System.out.println(divider);
-    }
-
-    /**
      * Greets the user upon entering the Focus.
+     * @return Greetings.
      */
     public static String greetUser() {
         String logo = " __\n"
@@ -41,6 +22,7 @@ public class UI {
     /**
      * Addresses the user with the name provided.
      * @param name Name of user.
+     * @return Addressing of user.
      */
     public static String addressUser(String name) {
         String address = "Hello there, " + name + "! How can I help you today?\n"
@@ -50,7 +32,8 @@ public class UI {
     }
 
     /**
-     * List out the commands that the user can use.
+     * Lists out the commands that the user can use.
+     * @return List of commands.
      */
     public static String listCommands() {
         String commands = "Here are the commands you can use:"
@@ -73,6 +56,7 @@ public class UI {
 
     /**
      * Exits Focus.
+     * @return Exit output.
      */
     public String exitFocus() {
         String exit = "Hopefully I have helped you today. Byeee! (*^O^*)/\"\n";
