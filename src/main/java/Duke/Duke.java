@@ -32,6 +32,28 @@ public class Duke {
     }
 
     /**
+     * Creates an instance of Duke.
+     */
+    public Duke() {
+        ui = new Ui();
+        try {
+            storage = new Storage("data/tasks.txt");
+            tasks = new TaskList(storage.load());
+        } catch (DukeException e) {
+            ui.showLoadingError();
+            tasks = new TaskList();
+        }
+    }
+
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    public String getResponse(String input) {
+        return "Duke heard: " + input;
+    }
+
+    /**
      * Initiates Duke on the command line.
      */
     public void run() {
