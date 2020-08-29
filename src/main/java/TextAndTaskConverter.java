@@ -1,6 +1,9 @@
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+/**
+ * Handles the conversion of texts and tasks.
+ */
 public class TextAndTaskConverter {
 
     private final String text;
@@ -9,6 +12,11 @@ public class TextAndTaskConverter {
         this.text = text;
     }
 
+    /**
+     * Converts texts into tasks.
+     * @param text line of text read from the saved file.
+     * @return respective task that corresponds to the text.
+     */
     public static Task textConverter(String text) {
         String[] split = text.split(" ## ");
         String description = split[2];
@@ -50,11 +58,21 @@ public class TextAndTaskConverter {
         }
     }
 
+    /**
+     * Gets the name of the task.
+     * @param text line of text read from the saved file.
+     * @return name of the task.
+     */
     public static String getTaskName(String text) {
         String[] split1 = text.split("/", 2);
         return split1[0];
     }
 
+    /**
+     * Gets the date the task needs to be done by.
+     * @param text line of text read from the saved file.
+     * @return date of completion.
+     */
     public static LocalDate getDate(String text) {
         String[] split1 = text.split("/", 2);
         String trimText = split1[1].trim();
@@ -68,6 +86,11 @@ public class TextAndTaskConverter {
         }
     }
 
+    /**
+     * Gets the time the task needs to be done by.
+     * @param text line of text read from the saved file.
+     * @return time of completion.
+     */
     public static LocalTime getTime(String text) {
         String[] split1 = text.split("/", 2);
         String trimText = split1[1].trim();
@@ -78,8 +101,7 @@ public class TextAndTaskConverter {
 
         } else {
             String[] split2 = trimText.split(" ", 2);
-            LocalTime t = LocalTime.parse(split2[1]);
-            return t;
+            return LocalTime.parse(split2[1]);
         }
     }
 }

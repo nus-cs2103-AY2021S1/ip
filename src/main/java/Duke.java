@@ -1,7 +1,6 @@
 /**
- *
+ * The Duke program keeps track of the list of tasks to be done.
  */
-
 public class Duke {
     public static void main(String[] args) {
         String logo = " ____        _        \n"

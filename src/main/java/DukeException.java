@@ -1,3 +1,6 @@
+/**
+ * Represents exceptions thrown in Duke.
+ */
 public class DukeException {
 
     private final String message;

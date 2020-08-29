@@ -1,3 +1,6 @@
+/**
+ * Represents a task.
+ */
 public class Task {
 
     private final String description;
