@@ -30,7 +30,7 @@ public class UiManagerTest {
         try {
             String output = Files.readString(Paths.get("ExpectedOutputs", "PrintInWindow.txt"));
             UiManager manager = new UiManager();
-            manager.printInWindow("test");
+            manager.sendDukeMessage("test");
             assertEquals(output, testManager.getOutput());
         } catch (IOException e) {
             System.out.println(e.getMessage());
