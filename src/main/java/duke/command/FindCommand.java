@@ -35,20 +35,15 @@ public class FindCommand extends Command {
      * @throws DukeException exception to be thrown if there is no matching results
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        String list = "";
-        int index = 1;
-        for (Task task : taskList.getList()) {
-            if (task.toString().contains(description)) {
-                list += "\n" + index + ". " + task.toString();
-                index++;
-            }
-        }
-        if (list.equals("")) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+        String content = "";
+        content += ui.printFind();
+        if (taskList.printMatching(description).equals("")) {
             throw new FindException("There is no matching results. Please re-enter:");
         } else {
-           ui.print("Here are the matching tasks in your list:" + list);
+           content += ui.printFind();
+           content += taskList.printMatching(description);
         }
-
+        return content;
     }
 }

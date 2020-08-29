@@ -31,11 +31,11 @@ public class DeleteCommand extends Command {
      * @param storage The Storage Object that handles reading and writing from the datafile
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException{
         Task task = taskList.getTask(index);
         taskList.removeTask(task);
-        ui.print("Noted. I've deleted this task:\n" + task);
-        ui.print("Now you have " + (taskList.getList().size()) + " tasks in the list." );
         storage.delete(task);
+        storage.update();
+        return ui.printDeleteTask(taskList, task);
     }
 }

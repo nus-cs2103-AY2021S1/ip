@@ -1,6 +1,7 @@
 package duke.command;
 
 import duke.*;
+import duke.exception.DukeException;
 import duke.task.Deadline;
 import duke.task.Task;
 
@@ -34,11 +35,11 @@ public class DeadlineCommand extends Command {
      * @param storage The Storage Object that handles reading and writing from the datafile
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         Task task = new Deadline(description, date);
         taskList.addTask(task);
-        ui.print("Got it. I've added this task:\n" + taskList.getTask(taskList.getList().size() - 1));
-        ui.print("Now you have " + taskList.getList().size() + " tasks in the list." );
         storage.save(task);
+        storage.update();
+        return ui.printAddTask(taskList);
     }
 }

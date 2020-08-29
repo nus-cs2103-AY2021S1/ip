@@ -21,9 +21,7 @@ public class ByeCommand extends Command {
      * @throws DukeException Exception when there is an error updating the file
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        this.isExit = true;
-        ui.exit();
-        storage.update();
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
+        return ui.exit();
     }
 }

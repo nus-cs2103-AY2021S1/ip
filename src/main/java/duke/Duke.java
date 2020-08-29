@@ -15,12 +15,10 @@ public class Duke {
     /**
      * Constructor for the Duke class.
      * Loads and reads the data from the text file
-     *
-     * @param filePath the path of the text file
      */
-    public Duke(String filePath) {
+    public Duke() {
         ui = new Ui();
-        storage = new Storage(filePath);
+        storage = new Storage("data/duke.txt");
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
@@ -31,28 +29,18 @@ public class Duke {
 
     /**
      * Processes the user input and execute the commands
+     * @return
      */
-    public void run() {
-        ui.start();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                ui.showError(e.getMessage());
-            }
+    public String run(String input) {
+        try {
+            Command c = Parser.parse(input);
+            return c.execute(tasks, ui, storage);
+        } catch (DukeException e) {
+            return e.getMessage();
         }
     }
 
-    /**
-     * main method that runs the run method
-     *
-     * @param args Unused
-     */
-    public static void main(String[] args) {
-        new Duke("data/duke.txt").run();
+    public String getResponse(String input) {
+        return new Duke().run(input);
     }
 }

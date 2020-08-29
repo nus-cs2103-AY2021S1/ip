@@ -19,14 +19,7 @@ public class ListCommand extends Command {
      * @param storage The Storage Object that handles reading and writing from the datafile
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
-        int i = 1;
-        if (taskList.getList().isEmpty()) {
-            System.out.println("List is Empty");
-        }
-        for(Task t : taskList.getList()) {
-            System.out.println(i + "." + t);
-            i++;
-        };
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
+        return taskList.printList();
     }
 }

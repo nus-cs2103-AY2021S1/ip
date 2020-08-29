@@ -37,5 +37,5 @@ public abstract class Command {
      * @param storage The Storage Object that handles reading and writing from the datafile
      * @throws DukeException Exception that happens when there is an invalid input
      */
-    abstract public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException;
+    abstract public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException;
 }

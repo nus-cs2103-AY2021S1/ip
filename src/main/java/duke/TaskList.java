@@ -59,11 +59,49 @@ public class TaskList {
     }
 
     /**
+     * Returns the size of the taskList
+     *
+     * @return size
+     */
+    public int getSize() {
+        return taskList.size();
+    }
+    /**
      * Get the current list of tasks
+     *
      * @return list of tasks
      */
-    public List<Task> getList() {
-        return this.taskList;
+    public String printList() {
+        String content  = "";
+        int i = 1;
+
+        if (taskList.isEmpty()) {
+            content += "List is Empty";
+        } else {
+            for (Task t : taskList) {
+                content += i + "." + t.toString() + "\n";
+                i++;
+            }
+            content = content.substring(0, content.length() - 1);
+        }
+        return content;
+    }
+
+    /**
+     * Gets the list of matching description
+     *
+     * @param description
+     */
+    public String printMatching(String description) {
+        String content = "";
+        int index = 1;
+        for (Task task : taskList) {
+            if (task.toString().contains(description)) {
+                content += "\n" + index + ". " + task.toString();
+                index++;
+            }
+        }
+        return content;
     }
     
 }
