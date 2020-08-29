@@ -2,6 +2,7 @@ package duke;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
 import exception.*;
 
@@ -40,6 +41,9 @@ public class Duke {
                     break;
                 } else if (command.equals(Commands.LIST)) {
                     ui.printTaskList(taskList);
+                } else if (command.equals(Commands.FIND)) {
+                    ArrayList<Task> results = inputs.length > 1 ? taskList.find(inputs[1]) : taskList.getTasks();
+                    ui.printSearchResult(results);
                 } else if (command.equals(Commands.DONE)) {
                     try {
                         Parser.checkIndex(inputs, taskList.getSize());
