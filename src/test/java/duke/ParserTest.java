@@ -54,9 +54,7 @@ public class ParserTest {
             Parser.parse("deaLine");
             fail();
         } catch (DukeException e) {
-            String err = ".~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.\n"
-                    + " I'm sorry but i do not know what you want to do. *woof*\n"
-                    + ".~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.\n";
+            String err = " I'm sorry but i do not know what you want to do. *woof*\n";
             assertEquals(err, e.getMessage());
         }
 

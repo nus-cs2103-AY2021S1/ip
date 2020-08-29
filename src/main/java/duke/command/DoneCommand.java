@@ -2,6 +2,7 @@ package duke.command;
 
 import duke.DukeException;
 import duke.Storage;
+import duke.TaskList;
 import duke.Ui;
 
 /**
@@ -18,9 +19,15 @@ public class DoneCommand implements Command {
      * @param ui Ui containing all prints for user interactions
      * @throws DukeException if system fails to mark the specified task as completed
      */
-    public void execute(String command, Storage storage, Ui ui) throws DukeException {
-        int taskInd = Integer.parseInt(command.substring(5));
-        storage.markDone(taskInd - 1);
+    public String execute(String command, Storage storage, Ui ui, TaskList taskList) throws DukeException {
+        try {
+            int taskInd = Integer.parseInt(command.substring(5));
+            String s = taskList.markDone(taskInd - 1);
+            storage.save(taskList);
+            return s;
+        } catch (IndexOutOfBoundsException | NumberFormatException e) {
+            throw new DukeException(ui.noSuchTask());
+        }
     }
 
     /**

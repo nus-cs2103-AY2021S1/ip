@@ -62,14 +62,11 @@ public class Event extends Task {
             String description = message.substring(6, indOfTime);
             String at = message.substring(indOfTime + 3).trim();
             if (description.isBlank() && at.isBlank()) {
-                String exMessage = Task.UI.printFormat(errMessage1);
-                throw new DukeException(exMessage);
+                throw new DukeException(errMessage1);
             } else if (at.isBlank()) {
-                String exMessage = Task.UI.printFormat(errMessage2);
-                throw new DukeException(exMessage);
+                throw new DukeException(errMessage2);
             } else if (description.isBlank()) {
-                String exMessage = Task.UI.printFormat(errMessage3);
-                throw new DukeException(exMessage);
+                throw new DukeException(errMessage3);
             } else {
                 String[] splitEventTime = at.split("\\s+");
 
@@ -83,16 +80,15 @@ public class Event extends Task {
                     LocalTime endTime = LocalTime.parse(times[1]);
                     return new Event(description, date, startTime, endTime);
                 } catch (Exception e) {
-                    String errMessage = Task.UI.printFormat(" Please input event time in the following format:\n "
-                            + "   YYYY/MM/DD HH:MM-HH:MM!\n" + " *Woof woof*\n");
+                    String errMessage = " Please input event time in the following format:\n "
+                            + "   YYYY/MM/DD HH:MM-HH:MM!\n" + " *Woof woof*\n";
                     throw new DukeException(errMessage);
                 }
             }
         } catch (DukeException e) {
             throw e;
         } catch (Exception e) {
-            String exMessage = Task.UI.printFormat(errMessage1);
-            throw new DukeException(exMessage);
+            throw new DukeException(errMessage1);
         }
     }
 

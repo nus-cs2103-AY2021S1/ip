@@ -2,6 +2,7 @@ package duke.command;
 
 import duke.DukeException;
 import duke.Storage;
+import duke.TaskList;
 import duke.Ui;
 
 /**
@@ -18,6 +19,6 @@ public interface Command {
      * @param ui Ui containing all prints for user interactions
      * @throws DukeException if command fails to execute
      */
-    void execute(String command, Storage storage, Ui ui) throws DukeException;
+    String execute(String command, Storage storage, Ui ui, TaskList taskList) throws DukeException;
 
 }

@@ -69,14 +69,11 @@ public class Deadline extends Task {
             String description = message.substring(9, indOfTime);
             String deadline = message.substring(indOfTime + 3).trim();
             if (description.isBlank() && deadline.isBlank()) {
-                String exMessage = Task.UI.printFormat(errMessage1);
-                throw new DukeException(exMessage);
+                throw new DukeException(errMessage1);
             } else if (deadline.isBlank()) {
-                String exMessage = Task.UI.printFormat(errMessage3);
-                throw new DukeException(exMessage);
+                throw new DukeException(errMessage3);
             } else if (description.isBlank()) {
-                String exMessage = Task.UI.printFormat(errMessage2);
-                throw new DukeException(exMessage);
+                throw new DukeException(errMessage2);
             } else {
                 String[] splitDeadline = deadline.split("\\s+");
                 try {
@@ -91,17 +88,15 @@ public class Deadline extends Task {
                         return new Deadline(description, date);
                     }
                 } catch (Exception e) {
-                    String errMessage =
-                            Task.UI.printFormat(" Please input deadline in following format:\n"
-                                    + "   YYYY/MM/DD HH:MM!\n" + " *Woof woof*\n");
+                    String errMessage = " Please input deadline in following format:\n"
+                                    + "   YYYY/MM/DD HH:MM!\n" + " *Woof woof*\n";
                     throw new DukeException(errMessage);
                 }
             }
         } catch (DukeException e) {
             throw e;
         } catch (Exception e) {
-            String exMessage = Task.UI.printFormat(errMessage1);
-            throw new DukeException(exMessage);
+            throw new DukeException(errMessage1);
         }
     }
 

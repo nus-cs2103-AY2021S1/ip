@@ -1,6 +1,7 @@
 package duke.command;
 
 import duke.Storage;
+import duke.TaskList;
 import duke.Ui;
 
 /**
@@ -16,8 +17,8 @@ public class ExitCommand implements Command {
      * @param storage Storage of this <code>Duke</code>
      * @param ui Ui containing all prints for user interactions
      */
-    public void execute(String command, Storage storage, Ui ui) {
-        ui.goodBye();
+    public String execute(String command, Storage storage, Ui ui, TaskList taskList) {
+        return " Bye. Hope to see you again soon! *Woof woof*\n";
     }
 
     /**

@@ -21,9 +21,7 @@ public class TodoTest {
             Todo.createTask("toDo  ");
             fail();
         } catch (DukeException e) {
-            String err = ".~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.\n"
-                    + " Oops!! You forgot to tell me what this task is about... *woof*\n"
-                    + ".~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.\n";
+            String err = " Oops!! You forgot to tell me what this task is about... *woof*\n";
             assertEquals(err, e.getMessage());
         }
     }

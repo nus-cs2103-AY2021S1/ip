@@ -26,10 +26,8 @@ public class EventTest {
             Event.createTask("EVENT  /at      2019/02/20 16:00-18:00");
             fail();
         } catch (DukeException e) {
-            String err = ".~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.\n"
-                    + " Oops!! You gonna forget what this is about if you\n"
-                    + " dont give me a description... *woof*\n"
-                    + ".~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.\n";
+            String err = " Oops!! You gonna forget what this is about if you\n"
+                    + " dont give me a description... *woof*\n";
             assertEquals(err, e.getMessage());
         }
 
@@ -42,10 +40,8 @@ public class EventTest {
             Event.createTask("EVENT meeting /at  ");
             fail();
         } catch (DukeException e) {
-            String err = ".~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.\n"
-                    + " Oops!! Are you planning to ghost the event?\n"
-                    + " You didnt state the time of this event... *woof*\n"
-                    + ".~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.\n";
+            String err = " Oops!! Are you planning to ghost the event?\n"
+                    + " You didnt state the time of this event... *woof*\n";
             assertEquals(err, e.getMessage());
         }
 
@@ -58,9 +54,7 @@ public class EventTest {
             Event.createTask("EVENT meeting  ");
             fail();
         } catch (DukeException e) {
-            String err = ".~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.\n"
-                    + " Oops!! You missed out some vital information/keyword... *woof*\n"
-                    + ".~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.\n";
+            String err = " Oops!! You missed out some vital information/keyword... *woof*\n";
             assertEquals(err, e.getMessage());
         }
 
@@ -73,10 +67,8 @@ public class EventTest {
             Event.createTask("EVENT meeting /at 2019-02-20 1600-1800 ");
             fail();
         } catch (DukeException e) {
-            String err = ".~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.\n"
-                    + " Please input event time in the following format:\n"
-                    + "    YYYY/MM/DD HH:MM-HH:MM!\n" + " *Woof woof*\n"
-                    + ".~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.\n";
+            String err = " Please input event time in the following format:\n"
+                    + "    YYYY/MM/DD HH:MM-HH:MM!\n" + " *Woof woof*\n";
             assertEquals(err, e.getMessage());
         }
 

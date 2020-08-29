@@ -19,7 +19,6 @@ import duke.task.Todo;
 public class Parser {
     private static final String ignoreCase = "(?i)";
     private static final String wildcard = "(.*)";
-    private static final Ui ui = new Ui();
 
     /**
      * <code>CommandState</code> is an enum representing all possible command direction from user.
@@ -64,6 +63,7 @@ public class Parser {
      */
     public static Task checkAction(String command) throws DukeException {
         Task t;
+
         if (command.matches(ignoreCase + CommandState.DEADLINE.name() + wildcard)) {
             t = Deadline.createTask(command);
         } else if (command.matches(ignoreCase + CommandState.EVENT.name() + wildcard)) {
@@ -71,7 +71,7 @@ public class Parser {
         } else if (command.matches(ignoreCase + CommandState.TODO.name() + wildcard)) {
             t = Todo.createTask(command);
         } else {
-            String errMessage = ui.printFormat(" I'm sorry but i do not know what you want to do. *woof*\n");
+            String errMessage = " I'm sorry but i do not know what you want to do. *woof*\n";
             throw new DukeException(errMessage);
         }
         return t;

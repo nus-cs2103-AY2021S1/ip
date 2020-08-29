@@ -1,7 +1,11 @@
 package duke.command;
 
 import duke.Storage;
+import duke.TaskList;
 import duke.Ui;
+import duke.task.Task;
+
+import java.util.List;
 
 /**
  * Implements the <code>Command</code> interface. <code>ListCommand</code> executes
@@ -16,8 +20,18 @@ public class ListCommand implements Command {
      * @param storage Storage of this <code>Duke</code>
      * @param ui Ui containing all prints for user interactions
      */
-    public void execute(String command, Storage storage, Ui ui) {
-        storage.printAll();
+    public String execute(String command, Storage storage, Ui ui, TaskList taskList) {
+        List<Task> listOfTask = taskList.getList();
+        if (listOfTask.isEmpty()) {
+            return " You have no task to complete! *WOOF*\n";
+        } else {
+            StringBuilder s = new StringBuilder(" Here are the tasks in your list *Woof*:\n");
+            for (Task task : listOfTask) {
+                s.append("   ").append(listOfTask.indexOf(task) + 1).append(".")
+                        .append(task.toString()).append("\n");
+            }
+            return s.toString();
+        }
     }
 
     /**

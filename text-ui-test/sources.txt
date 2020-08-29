@@ -1,3 +1,4 @@
+../src/main/java/DialogBox.java
 ../src/main/java/Main.java
 ../src/main/java/duke/TaskList.java
 ../src/main/java/duke/Storage.java
@@ -16,5 +17,6 @@
 ../src/main/java/duke/command/FindCommand.java
 ../src/main/java/duke/command/ExitCommand.java
 ../src/main/java/duke/command/DoneCommand.java
-../src/main/java/duke/Duke.java
 ../src/main/java/duke/DukeException.java
+../src/main/java/Duke.java
+../src/main/java/Launcher.java

@@ -7,25 +7,26 @@ import java.io.IOException;
 import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import duke.task.Deadline;
+import duke.task.Event;
 import duke.task.Task;
+import duke.task.Todo;
 
 /**
  * Storage for Tasks. A <code>Storage</code> represents a system that manages the storage and retrieval of
  * <code>Task</code> from a file.
  */
 public class Storage {
-    private static final Ui ui = new Ui();
-    private final TaskList taskList;
     private final File file;
+    protected final boolean isNew;
 
-    Storage(TaskList taskList, File file) {
-        this.taskList = taskList;
+    Storage(File file, boolean isNew) {
         this.file = file;
+        this.isNew = isNew;
     }
 
     /**
@@ -66,14 +67,12 @@ public class Storage {
                 }
 
                 if (isDirCreated && isFileCreated) {
-                    ui.fileCreationSuccess();
-                    return new Storage(new TaskList(), new File(targetPath.toString()));
+                    return new Storage(new File(targetPath.toString()), true);
                 } else {
                     throw new DukeException(errMessage);
                 }
             } else {
-                ui.welcome();
-                return new Storage(new TaskList(), new File(targetPath.toString()));
+                return new Storage(new File(targetPath.toString()), false);
             }
         } catch (InvalidPathException | DukeException | IOException e) {
             throw new DukeException(e.getMessage());
@@ -85,13 +84,35 @@ public class Storage {
      *
      * @throws DukeException if <code>Task</code> cannot be retrieved due <code>FileNotFound</code> exception
      */
-    public void load() throws DukeException {
+    public List<Task> load() throws DukeException {
         try {
             Scanner s = new Scanner(file);
+            List<Task> temporaryList = new ArrayList<>();
 
             while (s.hasNextLine()) {
-                taskList.checkTask(s.nextLine());
+                String task = s.nextLine();
+//                taskList.checkTask(s.nextLine());
+                Task t;
+                String taskType = task.substring(0, 3);
+                String status = task.substring(3, 6);
+                boolean isDone = status.equals("[" + "\u2713" + "]");
+
+                if (taskType.equals("[T]")) {
+                    t = new Todo(task.substring(7), isDone);
+                } else if (taskType.equals("[D]")) {
+                    int indOfTime = task.lastIndexOf("(FINISH by: ");
+                    t = new Deadline(task.substring(7, indOfTime),
+                            task.substring(indOfTime + 11, task.lastIndexOf(")")).trim(), isDone);
+                } else {
+                    int indOfTime = task.lastIndexOf("(APPEAR at: ");
+                    t = new Event(task.substring(7, indOfTime),
+                            task.substring(indOfTime + 11, task.lastIndexOf(")")).trim(), isDone);
+                }
+
+                temporaryList.add(t);
             }
+
+            return temporaryList;
 
         } catch (FileNotFoundException e) {
             throw new DukeException(e.getMessage());
@@ -101,65 +122,10 @@ public class Storage {
     /**
      * Saves the given <code>Task</code> to file.
      *
-     * @param task Task to be added to file
+     * @param taskList Task to be added to file
      * @throws DukeException if <code>Task</code> fails to save
      */
-    public void save(Task task) throws DukeException {
-        try {
-            taskList.addTask(task);
-            int total = total();
-            FileWriter fileWriter = new FileWriter(file, true);
-            fileWriter.write(task.toString());
-            fileWriter.write(System.getProperty("line.separator"));
-            fileWriter.close();
-            ui.addSuccess(task.toString(), total);
-        } catch (IOException e) {
-            throw new DukeException(ui.accessFileFailure());
-        }
-    }
-
-    /**
-     * Deletes the given <code>Task</code> from file.
-     *
-     * @param command Command containing index of <code>Task</code> to be deleted from file
-     * @throws DukeException if <code>Task</code> fails to delete due to invalid index or
-     * <code>FileNotFound</code> exception
-     */
-    public void delete(String command) throws DukeException {
-        try {
-            int ind = Integer.parseInt(command.substring(6).trim()) - 1;
-            Task t = taskList.deleteTask(ind);
-            updateFile();
-            ui.deleteSuccess(t.toString(), total());
-        } catch (IndexOutOfBoundsException e) {
-            throw new DukeException(ui.noSuchTask());
-        } catch (NumberFormatException e) {
-            throw new DukeException(ui.wrongDeleteInput());
-        }
-    }
-
-    /**
-     * Marks a given <code>Task</code> as done and update this <code>Task</code> in the file.
-     *
-     * @param ind Index of <code>Task</code> to be updated
-     * @throws DukeException if <Task>Task</Task> fails to update due to invalid index or
-     * <code>FileNotFound</code> exception
-     */
-    public void markDone(int ind) throws DukeException {
-        try {
-            taskList.markDone(ind);
-            updateFile();
-        } catch (IndexOutOfBoundsException e) {
-            throw new DukeException(ui.noSuchTask());
-        }
-    }
-
-    /**
-     * Updates all <code>Task</code> in the file.
-     *
-     * @throws DukeException if system fails to access file
-     */
-    public void updateFile() throws DukeException {
+    public void save(TaskList taskList) throws DukeException {
         try {
             List<Task> listOfTask = taskList.getList();
             FileWriter fileWriter = new FileWriter(file);
@@ -172,87 +138,12 @@ public class Storage {
             fileWriter.close();
 
         } catch (IOException e) {
-            throw new DukeException(ui.accessFileFailure());
+            String s = " Unable to access file... *woof*\n";
+            throw new DukeException(s);
         }
     }
 
-    /**
-     * Prints all the <code>Task</code> in a given File.
-     */
-    public void printAll() {
-        if (total() == 0) {
-            ui.noTask();
-        } else {
-            ui.listHeader();
-            List<Task> list = taskList.getList();
-            list.forEach((task) -> {
-                int ind = list.indexOf(task) + 1;
-                ui.listBody(ind, task.toString());
-            });
-            ui.line();
-        }
-    }
-
-    /**
-     * Iterates through all <code>Task</code> in the file and prints all <code>Task</code>
-     * on the specified date. Date input must be in the form of YYYY/MM/DD.
-     *
-     * @param date Date required
-     * @throws DukeException if date input is of the wrong format
-     */
-    public void checkDate(String date) throws DukeException {
-        try {
-            String[] inputDate = date.trim().split("/");
-            String formatDate = inputDate[0] + "-" + inputDate[1] + "-" + inputDate[2];
-            LocalDate dateFormat = LocalDate.parse(formatDate);
-            List<Task> sameDates = taskList.checkDate(dateFormat);
-
-            if (sameDates.isEmpty()) {
-                ui.noSameDate();
-            } else {
-                ui.sameDateHeader(dateFormat);
-                for (Task t : sameDates) {
-                    ui.listBody(sameDates.indexOf(t) + 1, t.toString());
-                }
-                ui.line();
-            }
-        } catch (DateTimeParseException | ArrayIndexOutOfBoundsException e) {
-            throw new DukeException(ui.inputCorrectCheckDateFormat());
-        }
-    }
-
-    /**
-     * Returns the total number of <code>Task</code> in a file.
-     *
-     * @return total number of <code>Task</code> in a file
-     */
-    public int total() {
-        return taskList.total();
-    }
-
-    /**
-     * Iterates through all <code>Task</code> in the file and prints all <code>Task</code>
-     * containing the specified string.
-     *
-     * @param keyword keyword to be searched
-     * @throws DukeException if command input contains no keywords
-     */
-    public void findRelevantTask(String keyword) throws DukeException {
-        try {
-            String searchName = keyword.substring(keyword.indexOf("find") + 5).trim();
-            List<Task> results = taskList.searchTask(searchName.split("\\s+"));
-
-            if (results.isEmpty()) {
-                ui.noRelevantTask();
-            } else {
-                ui.relevantTaskHeader();
-                for (Task t : results) {
-                    ui.listBody(results.indexOf(t) + 1, t.toString());
-                }
-                ui.line();
-            }
-        } catch (IndexOutOfBoundsException e) {
-            throw new DukeException(ui.searchFail());
-        }
+    public boolean isNew() {
+        return isNew;
     }
 }

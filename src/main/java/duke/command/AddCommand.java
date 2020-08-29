@@ -2,6 +2,7 @@ package duke.command;
 
 import duke.DukeException;
 import duke.Storage;
+import duke.TaskList;
 import duke.Ui;
 import duke.task.Task;
 
@@ -24,8 +25,10 @@ public class AddCommand implements Command {
      * @param ui Ui containing all prints for user interactions
      * @throws DukeException if system fails to add the specified task
      */
-    public void execute(String command, Storage storage, Ui ui) throws DukeException {
-        storage.save(t);
+    public String execute(String command, Storage storage, Ui ui, TaskList taskList) throws DukeException {
+        int totalTask = taskList.addTask(t);
+        storage.save(taskList);
+        return " *WOOF* I have added:\n   " + t + "\n" + ui.displayTotal(totalTask);
     }
 
     /**

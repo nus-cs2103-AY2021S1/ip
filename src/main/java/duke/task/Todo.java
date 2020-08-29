@@ -28,16 +28,14 @@ public class Todo extends Task {
         try {
             String description = message.substring(5);
             if (description.isBlank()) {
-                String exMessage = Task.UI.printFormat(errMessage);
-                throw new DukeException(exMessage);
+                throw new DukeException(errMessage);
             } else {
                 return new Todo(description);
             }
         } catch (DukeException e) {
             throw e;
         } catch (Exception e) {
-            String exMessage = Task.UI.printFormat(errMessage);
-            throw new DukeException(exMessage);
+            throw new DukeException(errMessage);
         }
     }
 

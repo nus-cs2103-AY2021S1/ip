@@ -1,20 +1,23 @@
-package duke;
-
+import java.util.List;
 import java.util.Scanner;
 
+import duke.*;
 import duke.command.Command;
 import duke.command.ExitCommand;
+import duke.task.Task;
 
 /**
  * Represents a bot that helps to manage task.
  * Each <code>Duke</code> object has its own respective database.
  */
 public class Duke {
-    private static final Ui ui = new Ui();
-    private final Storage storage;
+    protected static final Ui ui = new Ui();
+    protected final Storage storage;
+    protected final TaskList taskList;
 
-    Duke(Storage storage) {
+    Duke(Storage storage, List<Task> taskList) {
         this.storage = storage;
+        this.taskList = new TaskList(taskList);
     }
 
     /**
@@ -24,14 +27,18 @@ public class Duke {
      * @param filePath FilePath of database
      * @return <code>Duke</code> object
      */
-    public static Duke createDuke(String filePath) {
+    public static Duke createDuke(String filePath) throws DukeException {
         try {
             Storage storage = Storage.createStorage(filePath);
-            storage.load();
-            return new Duke(storage);
+            if (storage.isNew()) {
+                ui.print(ui.fileCreationSuccess());
+            } else {
+                ui.print(ui.welcome());
+            }
+            List<Task> taskList = storage.load();
+            return new Duke(storage, taskList);
         } catch (DukeException e) {
-            ui.fileCreationError(e.getMessage());
-            return null;
+            throw new DukeException(e.getMessage());
         }
     }
 
@@ -46,14 +53,31 @@ public class Duke {
             try {
                 String commandMessage = input.nextLine();
                 Command c = Parser.parse(commandMessage);
-                c.execute(commandMessage, storage, ui);
+                String s = c.execute(commandMessage, storage, ui, taskList);
+                ui.print(s);
                 if (c instanceof ExitCommand) {
                     isExit = true;
                     input.close();
                 }
-            } catch (DukeException ex) {
-                System.out.println(ex.getMessage());
+            } catch (DukeException e) {
+                ui.print(e.getMessage());
             }
         }
     }
+
+    /**
+     * Creates a <code>Duke</code> object.
+     *
+     * @param args array for command-line arguments
+     */
+    public static void main(String[] args) {
+        try {
+            Duke duke = createDuke("data/duke.txt");
+            duke.run();
+        } catch (DukeException e) {
+            ui.print(e.getMessage());
+        }
+
+    }
+
 }
