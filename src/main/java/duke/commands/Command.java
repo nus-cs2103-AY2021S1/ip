@@ -1,7 +1,6 @@
 package duke.commands;
 
 import duke.TaskManager;
-import duke.Ui;
 
 /**
  * Represents an abstract command.
@@ -12,10 +11,10 @@ public abstract class Command {
     String input;
 
     /**
-     * Instructions to be executed for the command.
+     * Execution instructions for the command.
      *
-     * @param taskManager the taskManager
-     * @param ui          the ui to return output to
+     * @param taskManager TaskManager.
+     * @return String response of command.
      */
-    public abstract void execute(TaskManager taskManager, Ui ui);
+    public abstract String execute(TaskManager taskManager);
 }

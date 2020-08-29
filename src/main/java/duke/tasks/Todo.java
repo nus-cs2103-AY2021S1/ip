@@ -10,8 +10,8 @@ public class Todo extends Task {
     /**
      * Class constructor specifying whether the todo is complete.
      *
-     * @param content    the contents of the todo
-     * @param isComplete the completion status of the todo
+     * @param content    Contents of the todo.
+     * @param isComplete Completion status of the todo.
      * @throws DukeException If an exception related to Duke occurred.
      */
     public Todo(String content, Boolean isComplete) throws DukeException {
@@ -21,7 +21,7 @@ public class Todo extends Task {
     /**
      * Class constructor.
      *
-     * @param content the contents of the todo
+     * @param content Contents of the todo.
      * @throws DukeException If an exception related to Duke occurred.
      */
     public Todo(String content) throws DukeException {
@@ -31,7 +31,7 @@ public class Todo extends Task {
     /**
      * Returns a user-readable todo string.
      *
-     * @return user-readable todo string
+     * @return User-readable todo string.
      */
     @Override
     public String toString() {
@@ -41,7 +41,7 @@ public class Todo extends Task {
     /**
      * Returns a todo string readable by storage.
      *
-     * @return storage-safe todo string
+     * @return Storage-safe todo string.
      */
     @Override
     public String toSaveString() {
