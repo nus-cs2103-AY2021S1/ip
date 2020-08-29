@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.LinkedList;
 
 import org.junit.jupiter.api.Test;
 
@@ -11,7 +12,7 @@ public class TaskListTest {
 
     @Test
     public void testSize() {
-        TaskList forTest = new TaskList();
+        TaskList forTest = new TaskList(new LinkedList<>());
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
         LocalDateTime date = LocalDateTime.parse("29/08/2020 1800", dateFormatter);
         forTest.addTask(new Task("Test Junit"));
@@ -23,7 +24,7 @@ public class TaskListTest {
 
     @Test
     public void testAdd() {
-        TaskList forTest = new TaskList();
+        TaskList forTest = new TaskList(new LinkedList<>());
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
         LocalDateTime date = LocalDateTime.parse("29/08/2020 1800", dateFormatter);
         forTest.addTask(new Task("Test Junit"));
@@ -35,7 +36,7 @@ public class TaskListTest {
 
     @Test
     public void testRemove() {
-        TaskList forTest = new TaskList();
+        TaskList forTest = new TaskList(new LinkedList<>());
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
         LocalDateTime date = LocalDateTime.parse("29/08/2020 1800", dateFormatter);
         forTest.addTask(new Task("Test Junit"));
@@ -51,7 +52,7 @@ public class TaskListTest {
 
     @Test
     public void testRemoveOutOfBound() {
-        TaskList forTest = new TaskList();
+        TaskList forTest = new TaskList(new LinkedList<>());
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
         LocalDateTime date = LocalDateTime.parse("29/08/2020 1800", dateFormatter);
         forTest.addTask(new Task("Test Junit"));

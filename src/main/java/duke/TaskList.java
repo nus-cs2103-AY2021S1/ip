@@ -1,6 +1,5 @@
 package duke;
 
-import java.util.LinkedList;
 import java.util.List;
 
 import exception.DeleteOutOfBoundException;

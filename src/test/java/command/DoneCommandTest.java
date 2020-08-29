@@ -2,6 +2,8 @@ package command;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.util.LinkedList;
+
 import org.junit.jupiter.api.Test;
 
 import duke.Storage;
@@ -16,7 +18,7 @@ public class DoneCommandTest {
         String[] command = {"done", "100"};
         DoneCommand test = new DoneCommand(command);
         try {
-            TaskList list = new TaskList();
+            TaskList list = new TaskList(new LinkedList<>());
             Ui ui = new Ui();
             Storage storage = new Storage("data/duke.txt");
             test.execute(list, ui, storage);
@@ -30,7 +32,7 @@ public class DoneCommandTest {
         String[] command = {"done", "asdf"};
         DoneCommand test = new DoneCommand(command);
         try {
-            TaskList list = new TaskList();
+            TaskList list = new TaskList(new LinkedList<>());
             Ui ui = new Ui();
             Storage storage = new Storage("data/duke.txt");
             test.execute(list, ui, storage);

@@ -1,30 +1,27 @@
 package duke;
 
+import java.io.IOException;
+import java.util.LinkedList;
+
+import command.Command;
+import exception.DukeException;
+import gui.DialogBox;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-
-import java.io.IOException;
-import java.util.LinkedList;
-
-import command.Command;
-import exception.DukeException;
-
-import gui.DialogBox;
 
 /**
  * A chat bot to save the todo, deadline and event task in a list.
  */
-public class Duke extends Application{
+public class Duke extends Application {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
@@ -38,6 +35,9 @@ public class Duke extends Application{
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
+    /**
+     * Consturctor with empty parameter.
+     */
     public Duke() {
         ui = new Ui();
         storage = new Storage("data/duke.txt");

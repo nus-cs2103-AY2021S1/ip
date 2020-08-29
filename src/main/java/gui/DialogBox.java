@@ -3,7 +3,6 @@ package gui;
 import java.io.IOException;
 import java.util.Collections;
 
-import gui.MainWindow;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;

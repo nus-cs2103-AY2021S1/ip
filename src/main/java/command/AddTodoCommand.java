@@ -35,7 +35,7 @@ public class AddTodoCommand extends Command {
             String s = "Added new task " + temp;
             storage.saveFile(tasks);
             return s;
-        } catch(IOException e) {
+        } catch (IOException e) {
             return e.toString();
         } catch (IndexOutOfBoundsException e) {
             throw new TaskException();
