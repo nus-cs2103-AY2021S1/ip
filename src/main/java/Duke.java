@@ -41,7 +41,7 @@ public class Duke {
         while (sc.hasNext()) {
             try {
                 String input = sc.nextLine();
-                String[] words = parser.interpretInput(input);
+                String[] words = parser.splitIntoComponents(input);
                 String command = words[0];
                 switch (command) {
                 //Common functions
@@ -74,7 +74,7 @@ public class Duke {
                     break;
                 case "todo":
                     try {
-                        Task addedToDo = taskList.addToDo(words[1]);
+                        Task addedToDo = taskList.addTodo(words[1]);
                         ui.showTaskAdded(addedToDo.toString(), taskList.getTotalTask());
                     } catch (IndexOutOfBoundsException err) {
                         ui.showError("Error: Please key in as: \n " +

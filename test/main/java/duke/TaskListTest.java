@@ -11,7 +11,7 @@ class TaskListTest {
             TaskList tk = new TaskList();
             tk.addDeadLine("Assignment 1", "2020-09-08 06:00");
             tk.addEvent("Assignment 1", "2020-09-08 06:00 08:00");
-            tk.addToDo("Assignment 1");
+            tk.addTodo("Assignment 1");
             String expectedAnswer = "1.[D][ ] Assignment 1 (by: Sep 08 2020 06:00)\n" +
                     "2.[E][ ] Assignment 1 (at: Sep 08 2020 06:00 - 08:00)\n" +
                     "3.[T][ ] Assignment 1";
@@ -38,7 +38,7 @@ class TaskListTest {
             TaskList tk = new TaskList();
             tk.addDeadLine("Assignment 1", "2020-09-08 06:00");
             tk.addEvent("Assignment 1", "2020-09-08 06:00 08:00");
-            tk.addToDo("Assignment 1");
+            tk.addTodo("Assignment 1");
             tk.doTask(1);
             tk.doTask(3);
             String expectedAnswer = "1.[D][X] Assignment 1 (by: Sep 08 2020 06:00)\n" +
@@ -68,7 +68,7 @@ class TaskListTest {
             TaskList tk = new TaskList();
             tk.addDeadLine("return book", "2020-06-06 23:59");
             tk.addEvent("project meeting", "2020-08-06 14:00 16:00");
-            tk.addToDo("read book");
+            tk.addTodo("read book");
             tk.doTask(1);
             tk.doTask(3);
             String expectedAnswer = "D | 1 | return book | 2020-06-06 23:59\n" +
@@ -86,7 +86,7 @@ class TaskListTest {
             TaskList tk = new TaskList();
             tk.addDeadLine("Assignment 1", "2020-09-08 06:00");
             tk.addEvent("Assignment 2", "2020-09-08 06:00 08:00");
-            tk.addToDo("Assignment 1");
+            tk.addTodo("Assignment 1");
             tk.doTask(1);
             tk.doTask(3);
             tk.deleteTask(3);

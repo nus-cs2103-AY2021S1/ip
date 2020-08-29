@@ -12,7 +12,8 @@ class StorageTest {
     void saveFile_fileNotFound_fail() {
         try {
             Storage storage = new Storage("test/main/java/duke/badFormatFile.txt");
-            storage.saveFile("Hello World");
+            String[] data = {"Hello World"};
+            storage.saveFile(data);
         } catch (DukeException err) {
             assertEquals(err.getMessage(), "File Path is a directory -OR- Can't create file at location");
         }

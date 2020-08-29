@@ -33,7 +33,7 @@ public class TaskList {
      * @param name Name of the ToDo to create.
      * @return The new task added.
      */
-    public Task addToDo(String name) {
+    public Task addTodo(String name) {
         Task newTask = new ToDo(name);
         tasks.add(newTask);
         return newTask;
@@ -102,12 +102,12 @@ public class TaskList {
 
     /**
      * Convert all tasks at hands to a format friendly for saving.
-     * @return String of tasks in saved format.
+     * @return Array of String that describes tasks at hands in saved format.
      */
-    public String toSaveFormat() {
-        String result = "";
-        for(Task t: tasks) {
-            result += t.toSaveFormat() + "\n";
+    public String[] toSaveFormat() {
+        String[] result = new String[this.tasks.size()];
+        for(int i = 0; i < tasks.size(); i++) {
+            result[i] = tasks.get(i).toSaveFormat();
         }
         return result;
     }
@@ -150,4 +150,5 @@ public class TaskList {
         }
         return output;
     }
+
 }
