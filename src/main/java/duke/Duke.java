@@ -66,10 +66,20 @@ public class Duke {
         this.ui.bye();
     }
 
+    /**
+     * Sets the Stage object in duke for the GUI.
+     *
+     * @param stage The stage object
+     */
     public void setStage(Stage stage) {
         this.stage = stage;
     }
 
+    /**
+     * Returns the Stage object stored in Duke.
+     *
+     * @return The Stage object.
+     */
     public Stage getStage() {
         return this.stage;
     }
