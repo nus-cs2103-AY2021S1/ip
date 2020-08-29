@@ -30,8 +30,8 @@ public abstract class Task {
      * @return An icon
      */
     public String getStatusIcon() {
-        return "[" + (isDone ? "\u2713" : "\u2718") + "]"; //return tick or X symbols
-        //return "[" + (isDone ? "Done" : "Not done") + "]";
+        //return "[" + (isDone ? "\u2713" : "\u2718") + "]"; //return tick or X symbols
+        return "[" + (isDone ? "Done" : "Not done") + "]";
     }
 
     /**
