@@ -12,15 +12,16 @@ public class Deadline extends Task {
         this.time = time;
     }
 
-    public Deadline(String description, String by, boolean isDone) {
+    public Deadline(String description, boolean isDone, LocalDate date, String time) {
         super(description, isDone);
-        this.by = by;
+        this.date = date;
+        this.time = time;
     }
 
     @Override
     public String toText() {
         String str = super.toText("D");
-        str += "| " + this.by;
+        str += "| " + this.date.format(Duke.BASIC_FORMATTER) + " | " + this.time;
         return str;
     }
 

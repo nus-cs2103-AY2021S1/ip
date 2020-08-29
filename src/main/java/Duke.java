@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.io.File;
 
 public class Duke {
+    public static DateTimeFormatter BASIC_FORMATTER = DateTimeFormatter.ofPattern("d/M/yyyy");
+
     public static void invalidInput() throws DukeException {
         throw new DukeException("I'm sorry, but I don't know what that means :-(");
     }
@@ -44,7 +46,7 @@ public class Duke {
         }
     }
 
-    public static void saveDataToList(String content, ArrayList<Task> lst) {
+    public static void transferDataToList(String content, ArrayList<Task> lst) {
         Scanner s = new Scanner(content);
         while (s.hasNext()) {
             String line = s.nextLine();
@@ -57,7 +59,9 @@ public class Duke {
             } else {
                 String additionalInfo = arr[3].trim();
                 if (type.equals("D")) {
-                    lst.add(new Deadline(description, additionalInfo, status == 1));
+                    String dateInString = additionalInfo;
+                    String time = arr[4].trim();
+                    lst.add(new Deadline(description, status == 1, LocalDate.parse(dateInString, BASIC_FORMATTER), time));
                 } else {
                     lst.add(new Event(description, additionalInfo, status == 1));
                 }
@@ -94,10 +98,9 @@ public class Duke {
                 } else {
                     String tsk = split[0].split("deadline")[1].trim();
                     String deadline = split[1].trim();
-                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy");
                     String dateString = deadline.split(" ")[0];
                     String time = deadline.split(" ")[1];
-                    LocalDate date = LocalDate.parse(dateString, formatter);
+                    LocalDate date = LocalDate.parse(dateString, BASIC_FORMATTER);
                     newTask = new Deadline(tsk, date, time);
                 }
             }
@@ -119,14 +122,15 @@ public class Duke {
         return newTask;
     }
     public static void mainLogic(Scanner sc, ArrayList<Task> lst) {
-
         while (true) {
             String input = sc.nextLine();
             String firstWord = input.split(" ")[0];
             String output = "";
+            boolean exit = false;
             if (input.equals("bye")) {
                 saveToDisk(lst);
                 output = "Bye. Take care!";
+                exit = true;
             } else if (input.equals("list")) {
                 output += "Here are the tasks in your list:";
                 for (int i = 0; i < lst.size(); i ++) {
@@ -171,6 +175,9 @@ public class Duke {
                 }
             }
             printMessage(output);
+            if (exit) {
+                System.exit(0);
+            }
         }
     }
     public static void main(String[] args) {
@@ -184,7 +191,7 @@ public class Duke {
             File f = new File(filePath);
             if (f.exists()) {
                 String content = readFileContents(filePath);
-                saveDataToList(content, lst);
+                transferDataToList(content, lst);
             } else {
                 f.createNewFile();
             }
@@ -194,7 +201,6 @@ public class Duke {
             System.out.println("Unable to create new file.");
             e.printStackTrace();
         }
-
         Scanner sc = new Scanner(System.in);
         mainLogic(sc, lst);
     }
