@@ -14,11 +14,18 @@ public class Duke {
     private Storage storage;
     private TaskList taskList;
     private Ui ui;
+    private Parser parser;
 
+    /**
+     * Initializes a Duke object with saved tasks from the given data file.
+     *
+     * @param pathname The path of the data file.
+     */
     public Duke(String pathname) {
         this.ui = new Ui();
         this.storage = new Storage(pathname);
         this.taskList = new TaskList(new ArrayList<>());
+        this.parser = new Parser(new Scanner(""));
     }
 
     /**
@@ -54,6 +61,50 @@ public class Duke {
         }
 
         this.ui.bye();
+    }
+
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    private String getResponse(String input) {
+        return "Duke heard: " + input;
+    }
+
+    /**
+     * Returns the Storage object stored in Duke.
+     *
+     * @return The Storage object.
+     */
+    public Storage getStorage() {
+        return this.storage;
+    }
+
+    /**
+     * Returns the Ui object stored in Duke.
+     *
+     * @return The Ui object.
+     */
+    public Ui getUi() {
+        return this.ui;
+    }
+
+    /**
+     * Returns the Parser object stored in Duke.
+     *
+     * @return The Parser object.
+     */
+    public Parser getParser() {
+        return this.parser;
+    }
+
+    /**
+     * Returns the TaskList object stored in Duke.
+     *
+     * @return The TaskList object.
+     */
+    public TaskList getTaskList() {
+        return this.taskList;
     }
 
     public static void main(String[] args) {
