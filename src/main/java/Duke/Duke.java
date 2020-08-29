@@ -1,7 +1,7 @@
-package main.java;
+package Duke;
 
-import duke.command.Command;
-import duke.exception.DukeException;
+import command.Command;
+import exception.DukeException;
 
 /**
  * Represents a CLI Program known as Duke.

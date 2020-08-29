@@ -1,6 +1,6 @@
-import duke.task.Task;
-import duke.task.Todo;
-import main.java.TaskList;
+import task.Task;
+import task.Todo;
+import Duke.TaskList;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

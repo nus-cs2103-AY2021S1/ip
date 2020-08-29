@@ -1,6 +1,6 @@
-import duke.command.*;
-import duke.exception.DukeException;
-import main.java.Parser;
+import command.*;
+import exception.DukeException;
+import Duke.Parser;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

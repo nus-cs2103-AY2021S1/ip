@@ -1,21 +1,21 @@
-package main.java;
+package Duke;
 
-import duke.command.AddCommand;
-import duke.command.ByeCommand;
-import duke.command.Command;
-import duke.command.DoNothingCommand;
-import duke.command.ListCommand;
-import duke.command.DeleteCommand;
-import duke.command.TasksOnCommand;
-import duke.command.DoneCommand;
-import duke.command.FindCommand;
+import command.AddCommand;
+import command.ByeCommand;
+import command.Command;
+import command.DoNothingCommand;
+import command.ListCommand;
+import command.DeleteCommand;
+import command.TasksOnCommand;
+import command.DoneCommand;
+import command.FindCommand;
 
-import duke.exception.DukeException;
+import exception.DukeException;
 
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.Todo;
+import task.Deadline;
+import task.Event;
+import task.Task;
+import task.Todo;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;

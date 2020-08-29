@@ -1,10 +1,10 @@
-package duke.command;
+package command;
 
-import duke.task.Task;
+import task.Task;
 
-import main.java.Storage;
-import main.java.TaskList;
-import main.java.Ui;
+import Duke.Storage;
+import Duke.TaskList;
+import Duke.Ui;
 
 /**
  * Represents a ListCommand for adding listing all existing tasks.
