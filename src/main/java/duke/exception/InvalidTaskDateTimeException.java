@@ -3,7 +3,7 @@ package duke.exception;
 /**
  * Represents an exception when user input a wrong LocalDateTime format.
  */
-public class InvalidTaskDateTimeException extends DukeException{
+public class InvalidTaskDateTimeException extends DukeException {
 
     /**
      * Constructs an InvalidTaskDateTimeException.

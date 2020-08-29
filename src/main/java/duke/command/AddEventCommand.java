@@ -1,5 +1,7 @@
 package duke.command;
 
+import java.time.format.DateTimeParseException;
+
 import duke.exception.DukeException;
 import duke.exception.InvalidTaskDateTimeException;
 import duke.storage.Storage;
@@ -7,8 +9,6 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
-
-import java.time.format.DateTimeParseException;
 
 /**
  * Represents an action to add new Event.
@@ -39,7 +39,6 @@ public class AddEventCommand extends Command {
      * @param tasks TaskList to store Task.
      * @param ui Ui to interact with users.
      * @param storage Storage use by Duke to save and load files.
-     * @return Nothing.
      * @throws InvalidTaskDateTimeException If date and time format is invalid.
      */
     @Override

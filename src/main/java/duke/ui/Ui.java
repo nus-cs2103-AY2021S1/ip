@@ -24,7 +24,6 @@ public class Ui {
     /**
      * Sends a greeting to users.
      *
-     * @return Nothing.
      */
     public void sendGreeting() {
         String logo = " ____        _        \n\t "
@@ -38,7 +37,6 @@ public class Ui {
     /**
      * Displays a LINE.
      *
-     * @return Nothing.
      */
     public void showLine() {
         System.out.println(LINE);
@@ -56,20 +54,18 @@ public class Ui {
     /**
      * Displays error message of an Exception.
      *
-     * @return Nothing.
      */
     public void showError(Exception e) {
         System.out.println("\t " + e.getMessage());
-   }
+    }
 
     /**
      * Displays messages.
      *
      * @param message Message to be printed.
-     * @return Nothing.
      */
-   public void printMessage(String message) {
+    public void printMessage(String message) {
         System.out.println("\t " + message);
-   }
+    }
 
 }

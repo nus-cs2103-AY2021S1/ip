@@ -4,7 +4,7 @@ package duke.task;
  * Represents a task that needs to be done in the future. A
  * <code>Todo</code> object is represented as a Task.
  */
-public class Todo extends Task{
+public class Todo extends Task {
 
     /**
      * Constructs a <code>Todo</code> object with a description.

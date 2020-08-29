@@ -34,7 +34,7 @@ public class Duke {
     public Duke() {
         ui = new Ui();
         storage = new Storage();
-        tasks =  new TaskList(storage.load());
+        tasks = new TaskList(storage.load());
     }
 
     /**
@@ -66,7 +66,6 @@ public class Duke {
      * serves as the entry point of the Duke application.
      *
      * @param args Unused.
-     * @return Nothing.
      */
     public static void main(String[] args) {
         Duke duke = new Duke();
