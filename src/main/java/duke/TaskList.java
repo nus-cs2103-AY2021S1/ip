@@ -1,11 +1,12 @@
 package duke;
 
-import duke.exception.WriteToStorageException;
-import duke.task.*;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import duke.exception.WriteToStorageException;
+import duke.task.Task;
+
 
 /**
  * Represents a list of Task objects. Contains functions to manipulate tasklist.
@@ -15,6 +16,11 @@ public class TaskList {
     private List<Task> tasks;
 
 
+    /**
+     * To instantiate a TaskList, pass in Storage object.
+     *
+     * @param store  Storage Object to store Task data.
+     */
     public TaskList(Storage store) {
         this.store = store;
         this.tasks = new ArrayList<>();
@@ -30,6 +36,13 @@ public class TaskList {
     public Storage getStore() {
         return store;
     }
+
+    /**
+     * Add task to TaskList
+     *
+     * @param task  Task to be added.
+     * @throws WriteToStorageException  If error encountered when writing to db.
+     */
     public void addTask(Task task) throws WriteToStorageException {
         tasks.add(task);
         try {

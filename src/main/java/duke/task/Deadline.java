@@ -6,20 +6,33 @@ import java.util.Objects;
 
 public class Deadline extends Task {
     private LocalDateTime deadline;
+
+    /**
+     * To instantiate a new Deadline Task Object.
+     * @param description  Description of deadline.
+     * @param deadline  Deadline of task.
+     */
     public Deadline(String description, LocalDateTime deadline) {
         super(description);
         this.deadline = deadline;
     }
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + deadline.format(DateTimeFormatter.ofPattern("MMM d yyyy @ h:mma")) + ")";
+        return "[D]" + super.toString() + " (by: " + deadline.format(DateTimeFormatter.ofPattern("MMM d yyyy @ h:mma"))
+                + ")";
     }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        if (!super.equals(o)) {
+            return false;
+        }
         Deadline deadline1 = (Deadline) o;
         return Objects.equals(deadline, deadline1.deadline);
     }

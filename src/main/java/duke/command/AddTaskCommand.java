@@ -1,12 +1,13 @@
 package duke.command;
 
+import java.util.Objects;
+
 import duke.Storage;
 import duke.TaskList;
+import duke.Ui;
 import duke.exception.DukeException;
 import duke.task.Task;
-import duke.Ui;
 
-import java.util.Objects;
 
 public class AddTaskCommand implements Command {
     private Task task;
@@ -24,8 +25,12 @@ public class AddTaskCommand implements Command {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         AddTaskCommand that = (AddTaskCommand) o;
         return Objects.equals(task, that.task);
     }

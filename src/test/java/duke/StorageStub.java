@@ -1,9 +1,10 @@
 package duke;
 
-import duke.task.Task;
-
 import java.io.IOException;
 import java.util.List;
+
+import duke.task.Task;
+
 
 public class StorageStub extends Storage {
     public StorageStub() {

@@ -1,6 +1,6 @@
 package duke.exception;
 
-public class InvalidArgumentException extends DukeException{
+public class InvalidArgumentException extends DukeException {
     private String arg;
 
     public InvalidArgumentException() {
@@ -12,6 +12,6 @@ public class InvalidArgumentException extends DukeException{
 
     @Override
     public String toString () {
-        return String.format("Invalid %s bro", arg) ;
+        return String.format("Invalid %s bro", arg);
     }
 }

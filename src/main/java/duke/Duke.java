@@ -13,6 +13,11 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * To instantiate a Dook instance with a given memory file path.
+     *
+     * @param filePath  File path of memory file.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);

@@ -1,12 +1,13 @@
 package duke.command;
 
+import java.util.List;
+
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 import duke.exception.DukeException;
 import duke.task.Task;
 
-import java.util.List;
 
 public class FindCommand implements Command {
     private String query;

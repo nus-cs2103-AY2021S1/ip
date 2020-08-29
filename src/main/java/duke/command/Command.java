@@ -2,8 +2,8 @@ package duke.command;
 
 import duke.Storage;
 import duke.TaskList;
-import duke.exception.DukeException;
 import duke.Ui;
+import duke.exception.DukeException;
 
 public interface Command {
     /**

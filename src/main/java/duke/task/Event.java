@@ -6,20 +6,33 @@ import java.util.Objects;
 
 public class Event extends Task {
     private LocalDateTime time;
+
+    /**
+     * Instantiate Event Object.
+     * @param description  Description of Event.
+     * @param time  Time of event.
+     */
     public Event(String description, LocalDateTime time) {
         super(description);
         this.time = time;
     }
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + time.format(DateTimeFormatter.ofPattern("MMM d yyyy @ h:mma")) + ")";
+        return "[E]" + super.toString() + " (at: " + time.format(DateTimeFormatter.ofPattern("MMM d yyyy @ h:mma"))
+                + ")";
     }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        if (!super.equals(o)) {
+            return false;
+        }
         Event event = (Event) o;
         return Objects.equals(time, event.time);
     }

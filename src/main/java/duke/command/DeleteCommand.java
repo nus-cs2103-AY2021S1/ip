@@ -2,10 +2,10 @@ package duke.command;
 
 import duke.Storage;
 import duke.TaskList;
+import duke.Ui;
 import duke.exception.DukeException;
 import duke.exception.InvalidArgumentException;
 import duke.task.Task;
-import duke.Ui;
 
 public class DeleteCommand implements Command {
     private final int index;
@@ -20,7 +20,8 @@ public class DeleteCommand implements Command {
             throw new InvalidArgumentException("index");
         }
         Task deleted = tasks.remove(index);
-        ui.print("Noted. I've removed this task:\n  " + deleted.toString() + "\nNow you have " + tasks.size() + " tasks in the list.");
+        ui.print("Noted. I've removed this task:\n  " + deleted.toString() + "\nNow you have " + tasks.size()
+                + " tasks in the list.");
     }
 
     @Override

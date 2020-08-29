@@ -7,6 +7,6 @@ public class CorruptedDataFileException extends DukeException {
 
     @Override
     public String toString () {
-        return String.format("data/duke.txt is corrupted.") ;
+        return String.format("data/duke.txt is corrupted.");
     }
 }
