@@ -35,14 +35,14 @@ public class Duke {
                 Command c = Parser.parse(fullCommand);
                 c.execute(tasks, ui, storage);
                 isExit = c.isExit();
-            } catch (DukeException | DoneException | DeleteException | TodoException | EventException | DeadlineException | FindException e) {
+            } catch (DukeException | DoneException | DeleteException
+                    | TodoException | EventException | DeadlineException | FindException e) {
                 ui.showError(e.getMessage());
             } finally {
                 ui.showLine();
             }
         }
     }
-    
     public static void main(String[] args) {
         new Duke("./data/duke.txt").run();
     }

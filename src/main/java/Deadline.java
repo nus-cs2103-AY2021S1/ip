@@ -1,16 +1,13 @@
 /**
  * A subclass of Task.
- * Contains a task description and a time. 
+ * Contains a task description and a time.
  */
-public class Deadline extends Task{
+public class Deadline extends Task {
     protected String by;
-
-    //Constructors
-
     /**
      * Constructor of Deadline object.
-     * @param description
-     * @param by
+     * @param description description of the task.
+     * @param by the deadline of the task.
      */
     public Deadline(String description, String by) {
         super(description);
@@ -19,9 +16,9 @@ public class Deadline extends Task{
 
     /**
      * Overloaded constructor of Deadline object.
-     * @param description
-     * @param isDone
-     * @param by
+     * @param description description of the task.
+     * @param isDone the status of the task.
+     * @param by the deadline of the task.
      */
     public Deadline(String description, boolean isDone, String by) {
         super(description, isDone);
@@ -38,7 +35,7 @@ public class Deadline extends Task{
     }
 
     /**
-     * Turns task object into a string to be saved in data file. 
+     * Turns task object into a string to be saved in data file.
      * @return string in the format of data in data file.
      */
     @Override

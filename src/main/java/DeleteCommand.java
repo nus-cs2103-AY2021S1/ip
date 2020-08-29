@@ -1,16 +1,30 @@
 import java.util.ArrayList;
 
+/**
+ * A subclass of Command.
+ * Handles "delete" command.
+ */
 public class DeleteCommand extends Command {
-    private final String TAB = "  ";
-    private final String DELETE_TITLE = TAB + " Noted. I've removed this task:";
-
+    private static final String TAB = "  ";
+    private static final String DELETE_TITLE = TAB + " Noted. I've removed this task:";
     private String[] input;
-    
+
+    /**
+     * A subclass of command.
+     * @param input user input.
+     */
     public DeleteCommand(String[] input) {
         super();
         this.input = input;
     }
 
+    /**
+     * Execute the command.
+     * @param tasks list of existing tasks.
+     * @param ui Ui.
+     * @param storage storage of data.
+     * @throws DeleteException exception for invalid input.
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DeleteException {
         ArrayList<Task> store = tasks.getTaskList();
@@ -33,8 +47,13 @@ public class DeleteCommand extends Command {
         System.out.println(TAB + " Now you have " + store.size() + " tasks in the list.");
     }
 
+    /**
+     * Returns isDone to stop user from entering command.
+     * @return false to continue to accept user input.
+     */
     @Override
     public boolean isExit() {
         return false;
     }
 }
+
