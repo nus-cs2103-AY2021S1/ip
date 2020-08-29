@@ -17,4 +17,4 @@ bin/
 text-ui-test/EXPECTED-UNIX.TXT
 
 # Data file
-tasks/serina.txt
+serina.txt
