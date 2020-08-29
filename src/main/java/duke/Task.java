@@ -6,9 +6,9 @@ package duke;
 
 public class Task {
     /** Separator for task details */
-    public static String SAVE_DELIMITER = "|";
+    private static final String SAVE_DELIMITER = "|";
     /** Escaped version of separator */
-    public static String ESCAPED_SAVE_DELIMITER = "\\|";
+    private static final String ESCAPED_SAVE_DELIMITER = "\\|";
 
     /** Name of task */
     protected String name;
@@ -33,6 +33,22 @@ public class Task {
     public Task(String name, boolean completed) {
         this.name = name;
         this.isCompleted = completed;
+    }
+
+    /**
+     * Accessor for SAVE_DELIMITER.
+     * @return SAVE_DELIMITER.
+     */
+    public static String getDelimiter() {
+        return SAVE_DELIMITER;
+    }
+
+    /**
+     * Accessor for ESCAPED_SAVE_DELIMITER.
+     * @return ESCAPED_SAVE_DELIMITER.
+     */
+    public static String getEscapedSaveDelimiter() {
+        return ESCAPED_SAVE_DELIMITER;
     }
 
     /**

@@ -33,7 +33,7 @@ public class Deadline extends DatedTask {
      */
     @Override
     public String format() {
-        return "D" + SAVE_DELIMITER + super.format();
+        return "D" + getDelimiter() + super.format();
     }
 
     /**
