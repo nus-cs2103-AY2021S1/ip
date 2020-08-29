@@ -54,34 +54,12 @@ public class Duke extends Application {
     public Duke() throws DukeException {
         this("data/duke.txt");
     }
-//
-//    /**
-//     * Runs the Duke system.
-//     */
-//    public void run() {
-//
-//        //Start greet
-//        ui.showLogo();
-//        ui.showWelcomeMessage();
-//        boolean isExit = false;
-//
-//        //Run until see the exit command
-//        while (!isExit) {
-//            try {
-//                String fullCommand = ui.readCommand();
-//                Command c = Parser.parse(fullCommand);
-//                c.excute(tasks, ui, storage);
-//                isExit = c.isExit();
-//            } catch (DukeException e) {
-//                ui.printLog(e.getMessage());
-//            }
-//        }
-//    }
-//
-//
-//    public static void main(String[] args) {
-//        new Duke("data/duke.txt").run();
-//    }
+
+
+
+    public static void main(String[] args) {
+        Application.launch(Duke.class,args);
+    }
 
 
 
