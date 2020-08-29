@@ -153,6 +153,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Finds tasks that contain the keyword in the string input.
+     *
+     * @param input Keyword that is used to find related tasks.
+     */
     public void find(String input) {
         try {
             checkForItem(input.substring(5), "find");
