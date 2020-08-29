@@ -14,6 +14,7 @@ public class Ui {
 
     /**
      * Wraps the message inside a box.
+     *
      * @param printMessage an action that print something to the user interface
      */
     public static void wrap(Runnable printMessage) {
@@ -35,6 +36,7 @@ public class Ui {
 
     /**
      * Get the next line of user input.
+     *
      * @return next line of user input
      */
     public static String feed() {
@@ -51,6 +53,7 @@ public class Ui {
 
     /**
      * Prints the response of the LIST command
+     *
      * @param tasks list of tasks to be printed
      */
     public static void list(List<String> tasks) {
@@ -75,6 +78,7 @@ public class Ui {
 
     /**
      * Prints the response of the DONE command.
+     *
      * @param task the task that is marked as finished
      */
     public static void done(String task) {
@@ -86,7 +90,8 @@ public class Ui {
 
     /**
      * Prints the response of the DELETE command.
-     * @param task the task deleted
+     *
+     * @param task  the task deleted
      * @param count the number of tasks left in the list.
      */
     public static void delete(String task, int count) {
@@ -108,7 +113,8 @@ public class Ui {
 
     /**
      * Prints the response of the commands that create a task.
-     * @param task the task created
+     *
+     * @param task  the task created
      * @param count the current number of tasks in the list
      */
     public static void task(String task, int count) {

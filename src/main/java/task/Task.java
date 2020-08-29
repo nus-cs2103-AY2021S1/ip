@@ -10,8 +10,9 @@ public class Task {
 
     /**
      * Create a task with a title and its optional datetime
+     *
      * @param description the title of the task
-     * @param time the time of the task
+     * @param time        the time of the task
      */
     public Task(String description, LocalDateTime time) {
         type = "Task";
@@ -28,13 +29,14 @@ public class Task {
 
     /**
      * Serializes the task to be store in the disk.
+     *
      * @return the serial of the task
      */
     public String serialize() {
-        String datetimeString = time.getDayOfMonth() + "/" +
-                time.getMonthValue() + "/" +
-                time.getYear() + " " +
-                (time.getHour() * 100 + time.getMinute());
+        String datetimeString = time.getDayOfMonth() + "/"
+                + time.getMonthValue() + "/"
+                + time.getYear() + " "
+                + (time.getHour() * 100 + time.getMinute());
         if (time.equals(LocalDateTime.MIN)) {
             datetimeString = "null";
         }

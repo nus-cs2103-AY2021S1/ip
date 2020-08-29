@@ -1,15 +1,17 @@
 package main.java.misc;
 
-import main.java.exception.InvalidArgumentException;
-
 import java.time.DateTimeException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import main.java.exception.InvalidArgumentException;
+
+
 public class Parser {
     /**
      * Parses the user's input into a list of tokens.
+     *
      * @param command user's input
      * @return the list of tokens
      */
@@ -36,6 +38,7 @@ public class Parser {
 
     /**
      * Parses a string of datetime into a LocalDateTime object, or throw an exception if the datetime is invalid.
+     *
      * @param datetimeString the string of datetime
      * @return the corresponding LocalDateTime object
      * @throws InvalidArgumentException

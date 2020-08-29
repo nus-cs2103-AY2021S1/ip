@@ -1,12 +1,12 @@
 package main.java.task;
 
-import main.java.exception.InvalidArgumentException;
-import main.java.misc.Parser;
-import main.java.misc.Storage;
-
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+
+import main.java.exception.InvalidArgumentException;
+import main.java.misc.Parser;
+import main.java.misc.Storage;
 
 public class TaskList {
     private List<Task> database = new ArrayList<>();
@@ -14,6 +14,7 @@ public class TaskList {
     /**
      * Create a new task corresponding to the tokens then add it into the list of task, or throw an exception
      * if the input tokens is invalid.
+     *
      * @param tokens the description for the task (e.g. type, time)
      * @return the task created
      * @throws InvalidArgumentException
@@ -26,19 +27,23 @@ public class TaskList {
                 : Parser.stringToTime(datetimeString);
 
         switch (tokens.get(0)) {
-            case "todo":
-                task = new Todo(tokens.get(1).trim());
-                break;
-            case "deadline":
-                if (datetimeString.equals("null")) throw new InvalidArgumentException("Deadline's time cannot be empty");
-                task = new Deadline(tokens.get(1).trim(), datetime);
-                break;
-            case "event":
-                if (datetimeString.equals("null")) throw new InvalidArgumentException("Event's time cannot be empty");
-                task = new Event(tokens.get(1).trim(), datetime);
-                break;
-            default:
-                throw new Error("An unexpected error has occurred");
+        case "todo":
+            task = new Todo(tokens.get(1).trim());
+            break;
+        case "deadline":
+            if (datetimeString.equals("null")) {
+                throw new InvalidArgumentException("Deadline's time cannot be empty");
+            }
+            task = new Deadline(tokens.get(1).trim(), datetime);
+            break;
+        case "event":
+            if (datetimeString.equals("null")) {
+                throw new InvalidArgumentException("Event's time cannot be empty");
+            }
+            task = new Event(tokens.get(1).trim(), datetime);
+            break;
+        default:
+            throw new Error("An unexpected error has occurred");
         }
         if (tokens.get(3).equals("1")) {
             task.markAsDone();
@@ -49,6 +54,7 @@ public class TaskList {
 
     /**
      * Gets the task from the list with the given index, or throw an exception if the index is invalid.
+     *
      * @param index the query index
      * @return the corresponding task
      * @throws InvalidArgumentException
@@ -62,6 +68,7 @@ public class TaskList {
 
     /**
      * Marks the task from the list with the given index as done, or throw an exception if the index is invalid.
+     *
      * @param index the query index
      * @throws InvalidArgumentException
      */
@@ -74,6 +81,7 @@ public class TaskList {
 
     /**
      * Removes the task from the list with the given index, or throw an exception if the index is invalid.
+     *
      * @param index the query index
      * @return the task that has just been deleted
      * @throws InvalidArgumentException
@@ -87,6 +95,7 @@ public class TaskList {
 
     /**
      * Initializes the list of task with the information from the disk.
+     *
      * @throws InvalidArgumentException
      */
     public void initialize() throws InvalidArgumentException {
@@ -105,6 +114,7 @@ public class TaskList {
 
     /**
      * Counts the number of current tasks in the list.
+     *
      * @return the number of current tasks.
      */
     public int count() {
@@ -120,6 +130,7 @@ public class TaskList {
 
     /**
      * Return all task in the list in the form of strings.
+     *
      * @return the list of corresponding string represent the tasks
      */
     public List<String> printTasks() {

@@ -1,12 +1,13 @@
 package main.java.command;
 
+import java.util.List;
+
 import main.java.exception.InvalidArgumentException;
 import main.java.exception.UserException;
 import main.java.misc.Ui;
 import main.java.task.Task;
 import main.java.task.TaskList;
 
-import java.util.List;
 
 public class TaskCommand extends Command {
     public TaskCommand(List<String> input) {

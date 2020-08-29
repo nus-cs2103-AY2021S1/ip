@@ -1,9 +1,10 @@
 package main.java.command;
 
+import java.util.List;
+
 import main.java.misc.Ui;
 import main.java.task.TaskList;
 
-import java.util.List;
 
 public class ListCommand extends Command {
     public ListCommand(List<String> input) {

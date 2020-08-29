@@ -10,8 +10,8 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return String.format("[D][%s] %s (by: %s)",
-                (super.isDone ? "\u2713" : "\u2718"),
+        return String.format("[D][%s] %s (by: %s)", (
+                super.isDone ? "\u2713" : "\u2718"),
                 super.description,
                 super.time);
     }

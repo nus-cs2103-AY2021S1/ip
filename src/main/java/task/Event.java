@@ -10,8 +10,8 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return String.format("[E][%s] %s (at: %s)",
-                (super.isDone ? "\u2713" : "\u2718"),
+        return String.format("[E][%s] %s (at: %s)", (
+                super.isDone ? "\u2713" : "\u2718"),
                 super.description,
                 super.time);
     }

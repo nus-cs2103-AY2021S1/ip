@@ -21,7 +21,7 @@ public class ParserTest {
 
     @Test
     public void testStringToTimeNormalCase() throws InvalidArgumentException {
-        LocalDateTime expected = LocalDateTime.of(2012,12,21,19,00);
+        LocalDateTime expected = LocalDateTime.of(2012, 12, 21, 19, 00);
         LocalDateTime actual = Parser.stringToTime("21/12/2012 1900");
         assertEquals(expected, actual);
     }

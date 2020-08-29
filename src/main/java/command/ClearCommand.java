@@ -1,9 +1,10 @@
 package main.java.command;
 
+import java.util.List;
+
 import main.java.misc.Ui;
 import main.java.task.TaskList;
 
-import java.util.List;
 
 public class ClearCommand extends Command {
     public ClearCommand(List<String> input) {

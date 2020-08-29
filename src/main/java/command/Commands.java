@@ -1,14 +1,15 @@
 package main.java.command;
 
-import main.java.exception.InvalidArgumentException;
-
 import java.util.List;
+
+import main.java.exception.InvalidArgumentException;
 
 public class Commands {
     /**
      * Creates a new command from the user's input.
      * This method decide which type of command to be created based on the first token of the input, or throw
      * an exception if the type of the command is invalid.
+     *
      * @param input
      * @return a command with the correct type
      * @throws InvalidArgumentException

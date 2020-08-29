@@ -1,7 +1,5 @@
 package main.java.misc;
 
-import main.java.task.Task;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -10,9 +8,12 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
+import main.java.task.Task;
+
 public class Storage {
     /**
      * Reads the storage.txt created in ./tmp/data, or create a new one if the file cannot be found.
+     *
      * @return List of task in the file. Each task is represented with a list of tokens.
      */
     public static List<List<String>> readFile() {
@@ -37,6 +38,7 @@ public class Storage {
 
     /**
      * Overwrites the file ./tmp/data/storage.txt with information from the current list of tasks.
+     *
      * @param database the current list of tasks
      */
     public static void writeFile(List<Task> database) {

@@ -1,11 +1,12 @@
 package main.java.command;
 
+import java.util.List;
+
 import main.java.exception.InvalidArgumentException;
 import main.java.misc.Ui;
 import main.java.task.Task;
 import main.java.task.TaskList;
 
-import java.util.List;
 
 public class DeleteCommand extends Command {
     public DeleteCommand(List<String> input) {

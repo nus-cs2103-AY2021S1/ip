@@ -29,7 +29,8 @@ test {
 }
 
 application {
-    mainClassName = "main.java.Duke"
+    mainClassName = "main.java" +
+            ".Duke"
 }
 
 shadowJar {
@@ -38,7 +39,7 @@ shadowJar {
 }
 
 checkstyle {
-    toolVersion = '8.23'
+    toolVersion = '8.29'
 }
 
 run{
