@@ -42,6 +42,28 @@ public class DeleteCommand extends Command {
         ui.printResponse(response);
     }
 
+    /**
+     * Returns a response after executing the delete command.
+     *
+     * @param tasks Contains the current tasks.
+     * @param ui Responsible for displaying information to the user.
+     * @param storage Reads and stores data into memory.
+     * @throws InvalidDeleteIndexException If index is out of bounds.
+     * @return Message when the command is completed.
+     */
+    @Override
+    public String executeWithResponse(TaskList tasks, Ui ui, Storage storage)
+            throws InvalidDeleteIndexException {
+        if (index > tasks.size() || index < 1) {
+            throw new InvalidDeleteIndexException(tasks.size());
+        }
+
+        Task task = tasks.remove(index - 1);
+        storage.save(tasks);
+        return String.format("Noted. I've removed this task:\n"
+                + "%s\n" + "Now you have %d tasks in the list.", task, tasks.size());
+    }
+
     @Override
     public String toString() {
         return "delete <task index>";

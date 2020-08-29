@@ -1,6 +1,5 @@
 package duke.command;
 
-
 import duke.exception.InvalidDoneIndexException;
 import duke.task.Task;
 import duke.util.Storage;
@@ -41,6 +40,28 @@ public class DoneCommand extends Command {
         storage.save(tasks);
         String response = "Nice! I've marked this task as done:\n  " + task.toString();
         ui.printResponse(response);
+    }
+
+    /**
+     * Returns a response after executing the done command.
+     *
+     * @param tasks Contains the current tasks.
+     * @param ui Responsible for displaying information to the user.
+     * @param storage Reads and stores data into memory.
+     * @throws InvalidDoneIndexException If index is out of bounds.
+     * @return Message when the command is completed.
+     */
+    @Override
+    public String executeWithResponse(TaskList tasks, Ui ui, Storage storage)
+            throws InvalidDoneIndexException {
+        if (index > tasks.size() || index < 1) {
+            throw new InvalidDoneIndexException(tasks.size());
+        }
+
+        Task task = tasks.get(index - 1);
+        task.completeTask();
+        storage.save(tasks);
+        return "Nice! I've marked this task as done:\n  " + task.toString();
     }
 
     @Override

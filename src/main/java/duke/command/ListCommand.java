@@ -30,7 +30,28 @@ public class ListCommand extends Command {
         for (int i = 0; i < tasks.size(); i++) {
             response.add(String.format("%d.%s", i + 1, tasks.get(i)));
         }
-        ui.printResponse(response.toString());
+        ui.printResponse(response.toString().isEmpty()
+                ? "You have no tasks at the moment :)"
+                : response.toString());
+    }
+
+    /**
+     * Returns a response after executing the list command.
+     *
+     * @param tasks Contains the current tasks.
+     * @param ui Responsible for displaying information to the user.
+     * @param storage Reads and stores data into memory.
+     * @return Message when the command is completed.
+     */
+    @Override
+    public String executeWithResponse(TaskList tasks, Ui ui, Storage storage) {
+        StringJoiner response = new StringJoiner("\n");
+        for (int i = 0; i < tasks.size(); i++) {
+            response.add(String.format("%d.%s", i + 1, tasks.get(i)));
+        }
+        return response.toString().isEmpty()
+                ? "You have no tasks at the moment :)"
+                : response.toString();
     }
 
     @Override
