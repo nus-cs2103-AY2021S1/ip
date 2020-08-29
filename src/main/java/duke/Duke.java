@@ -1,7 +1,7 @@
 package duke;
 
-import duke.exception.DukeException;
 import duke.command.Command;
+import duke.exception.DukeException;
 
 /** The duke bot that stores your tasks. */
 public class Duke {
