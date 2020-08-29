@@ -3,7 +3,7 @@ package duke.command;
 import duke.exception.InvalidTaskIndexException;
 import duke.logic.StorageManager;
 import duke.logic.TaskList;
-import duke.logic.UIManager;
+import duke.logic.UiManager;
 import duke.task.DukeTask;
 
 /**
@@ -31,7 +31,7 @@ public class DeleteCommand extends Command {
      * @throws InvalidTaskIndexException If user input validation fails.
      */
     @Override
-    public void execute(TaskList taskList, UIManager uiManager, StorageManager storageManager)
+    public void execute(TaskList taskList, UiManager uiManager, StorageManager storageManager)
             throws InvalidTaskIndexException {
 
         if (index < 0 || index >= taskList.getSize()) {

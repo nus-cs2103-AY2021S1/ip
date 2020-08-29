@@ -1,9 +1,12 @@
 package stub;
+import java.util.ArrayList;
 
 import duke.logic.TaskList;
 
-import java.util.ArrayList;
 
+/**
+ * Represents a TaskList during testing
+ */
 public class TaskListStub extends TaskList {
     public TaskListStub() {
         super(new ArrayList<>());

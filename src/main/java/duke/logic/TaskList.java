@@ -1,8 +1,8 @@
 package duke.logic;
 
-import duke.task.DukeTask;
-
 import java.util.ArrayList;
+
+import duke.task.DukeTask;
 
 /**
  * Represents the list containing all of user's <code>DukeTask</code>.

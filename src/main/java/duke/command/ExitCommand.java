@@ -1,10 +1,11 @@
 package duke.command;
 
+import java.io.IOException;
+
 import duke.logic.StorageManager;
 import duke.logic.TaskList;
-import duke.logic.UIManager;
+import duke.logic.UiManager;
 
-import java.io.IOException;
 
 /**
  * Represents an Exit Command by the user.
@@ -26,7 +27,7 @@ public class ExitCommand extends Command {
      * @throws IOException If saving data fails.
      */
     @Override
-    public void execute(TaskList taskList, UIManager uiManager, StorageManager storageManager)
+    public void execute(TaskList taskList, UiManager uiManager, StorageManager storageManager)
             throws IOException {
         storageManager.saveData(taskList.getTaskList());
     }

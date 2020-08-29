@@ -2,7 +2,7 @@ package duke.command;
 
 import duke.logic.StorageManager;
 import duke.logic.TaskList;
-import duke.logic.UIManager;
+import duke.logic.UiManager;
 
 /**
  * Represents a Help Command by the user.
@@ -22,7 +22,7 @@ public class HelpCommand extends Command {
      * @param storageManager <code>StorageManager</code> object to saving/loading user data.
      */
     @Override
-    public void execute(TaskList taskList, UIManager uiManager, StorageManager storageManager) {
+    public void execute(TaskList taskList, UiManager uiManager, StorageManager storageManager) {
         uiManager.printDukeInstructions();
     }
 }

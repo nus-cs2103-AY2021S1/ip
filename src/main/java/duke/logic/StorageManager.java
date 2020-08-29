@@ -1,11 +1,5 @@
 package duke.logic;
 
-import duke.CommonString;
-import duke.task.DeadlineTask;
-import duke.task.DukeTask;
-import duke.task.EventTask;
-import duke.task.TodoTask;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -14,6 +8,12 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import duke.CommonString;
+import duke.task.DeadlineTask;
+import duke.task.DukeTask;
+import duke.task.EventTask;
+import duke.task.TodoTask;
 
 /**
  * Represents the Storage of Duke.

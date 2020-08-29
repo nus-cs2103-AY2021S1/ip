@@ -1,12 +1,13 @@
 package duke.command;
 
+import java.io.IOException;
+
 import duke.exception.InvalidTaskIndexException;
 import duke.exception.TaskDoneException;
 import duke.logic.StorageManager;
 import duke.logic.TaskList;
-import duke.logic.UIManager;
+import duke.logic.UiManager;
 
-import java.io.IOException;
 
 /**
  * Represents a Command by the user.
@@ -43,6 +44,6 @@ public abstract class Command {
      * @throws TaskDoneException         If user input validation fails.
      * @throws IOException               If saving of data fails.
      */
-    public abstract void execute(TaskList taskList, UIManager uiManager, StorageManager storageManager)
+    public abstract void execute(TaskList taskList, UiManager uiManager, StorageManager storageManager)
             throws IOException, InvalidTaskIndexException, TaskDoneException;
 }

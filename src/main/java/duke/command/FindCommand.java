@@ -1,11 +1,12 @@
 package duke.command;
 
+import java.util.ArrayList;
+
 import duke.logic.StorageManager;
 import duke.logic.TaskList;
-import duke.logic.UIManager;
+import duke.logic.UiManager;
 import duke.task.DukeTask;
 
-import java.util.ArrayList;
 
 /**
  * Represents a Find Command by the user.
@@ -29,7 +30,7 @@ public class FindCommand extends Command {
      * @param storageManager <code>StorageManager</code> object to saving/loading user data.
      */
     @Override
-    public void execute(TaskList taskList, UIManager uiManager, StorageManager storageManager) {
+    public void execute(TaskList taskList, UiManager uiManager, StorageManager storageManager) {
 
         ArrayList<DukeTask> filteredList = new ArrayList<>();
         for (DukeTask task : taskList.getTaskList()) {

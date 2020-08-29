@@ -1,29 +1,34 @@
 package duke;
 
-import duke.command.Command;
-import duke.exception.*;
-import duke.logic.StorageManager;
-import duke.logic.TaskList;
-import duke.logic.UIManager;
-import duke.logic.UserInputParser;
-
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import duke.command.Command;
+import duke.exception.InvalidInstructionFormatException;
+import duke.exception.InvalidInstructionLengthException;
+import duke.exception.InvalidTaskIndexException;
+import duke.exception.MissingFieldException;
+import duke.exception.TaskDoneException;
+import duke.exception.UnknownInstructionException;
+import duke.logic.StorageManager;
+import duke.logic.TaskList;
+import duke.logic.UiManager;
+import duke.logic.UserInputParser;
+
 /**
- * Represents a Duke Chatbot.
+ * Represents a Duke Chat bot.
  * It contains a <code>TaskList</code> to track the user's tasks,
  * a <code>UIManager</code> to handle user interactions and
  * a <code>StorageManager</code> to handle storing of data.
  */
 public class Duke {
-    private final UIManager uiManager;
+    private final UiManager uiManager;
     private final StorageManager storageManager;
     private TaskList taskList;
 
     public Duke() {
-        this.uiManager = new UIManager();
+        this.uiManager = new UiManager();
         this.storageManager = new StorageManager(CommonString.DUKE_FILE_PATH.toString());
         try {
             this.taskList = new TaskList(storageManager.loadData());
@@ -35,7 +40,10 @@ public class Duke {
     }
 
 
-    // MAIN FUNCTION
+    /**
+     * Executes Main method for Duke
+     * Initialises <code>Duke</code> object and runs.
+     */
     public static void main(String[] args) {
         // Initialisation of duke.Duke
         Duke duke = new Duke();
@@ -60,9 +68,9 @@ public class Duke {
                 Command command = UserInputParser.parse(userInput);
                 command.execute(taskList, uiManager, storageManager);
                 isExit = command.getExitStatus();
-            } catch (UnknownInstructionException | InvalidInstructionFormatException |
-                    MissingFieldException | TaskDoneException |
-                    InvalidInstructionLengthException | InvalidTaskIndexException e) {
+            } catch (UnknownInstructionException | InvalidInstructionFormatException
+                    | MissingFieldException | TaskDoneException
+                    | InvalidInstructionLengthException | InvalidTaskIndexException e) {
                 System.out.println(e);
             } catch (IOException e) {
                 System.out.println("IO Error: " + e.getMessage());

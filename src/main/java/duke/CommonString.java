@@ -1,6 +1,8 @@
 package duke;
 
-// Enum class to denote commonly used, constant String values in duke.Duke
+/**
+ * Denotes Common Strings used in <code>Duke</code>
+ */
 public enum CommonString {
     LOGO(" ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"

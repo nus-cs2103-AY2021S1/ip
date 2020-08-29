@@ -107,7 +107,7 @@ public class InputValidator {
      * @param instructionArray <code>String</code> containing length of user instruction.
      * @param index            <code>Integer</code> containing location of separator.
      * @return boolean denoting the validation results
-     * @throws InvalidInstructionFormatException() If validation fails
+     * @throws InvalidInstructionFormatException If validation fails
      */
     public static boolean validateDateAndTime(String[] instructionArray, int index)
             throws InvalidInstructionFormatException {
@@ -117,7 +117,12 @@ public class InputValidator {
 
         // INPUT DATE FORMAT: DD/MM/YYYY
         // INPUT TIME FORMAT: hh/mm/ss
-        int year, month, day, hour, minute, second;
+        int year;
+        int month;
+        int day;
+        int hour;
+        int minute;
+        int second;
 
         String[] dateArray = date.split("/");
         String[] timeArray = time.split("/");
