@@ -37,7 +37,7 @@ public class DeleteCommandTest {
         Storage storage = new Storage();
         DeleteCommand deleteCommand = new DeleteCommand(0);
         deleteCommand.execute(tasks, ui, storage);
-        String expectedPrintStatement = "\t Noted. I've removed this duke.task:\n"
+        String expectedPrintStatement = "\t Noted. I've removed this task:\n"
                 + "\t   [T][✘] eat\n"
                 + "\t Now you have 0 task in the list.\n";
         assertEquals(0, tasks.getNumberOfTask());

@@ -15,6 +15,7 @@ dependencies {
 }
 
 test {
+    systemProperty "file.encoding", "utf-8"
     useJUnitPlatform()
 
     testLogging {
@@ -29,7 +30,7 @@ test {
 }
 
 application {
-    mainClassName = "seedu.duke.Duke"
+    mainClassName = "duke.Duke"
 }
 
 shadowJar {
@@ -38,9 +39,17 @@ shadowJar {
 }
 
 checkstyle {
-    toolVersion = '8.23'
+    toolVersion = '8.29'
 }
 
-run{
+run {
     standardInput = System.in
+    enableAssertions = true
+}
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+tasks.withType(Test) {
+    scanForTestClasses = false
+    include "**/*Test.class"
 }
