@@ -1,8 +1,8 @@
 package duke;
 
-import duke.exception.DukeException;
-
 import java.util.Arrays;
+
+import duke.exception.DukeException;
 
 /**
  * A class deals with making sense of the user command.
@@ -18,7 +18,9 @@ public class Parser {
      */
     public static String[] parse(String command) throws DukeException {
         String[] commands = command.split(" ", 2);
-        if (commands.length > 1 && commands[1] != null) commands[1] = commands[1].trim();
+        if (commands.length > 1 && commands[1] != null) {
+            commands[1] = commands[1].trim();
+        }
         String[] temp;
         commands = Arrays.copyOf(commands, 3);
         String key;
@@ -69,7 +71,7 @@ public class Parser {
             commands[1] = temp[0];
             commands[2] = temp[1];
             return commands;
-        default:  //meaningless command
+        default: //meaningless command
             throw new DukeException(" ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
     }

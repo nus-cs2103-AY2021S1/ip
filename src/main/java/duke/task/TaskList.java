@@ -1,18 +1,18 @@
 package duke.task;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import duke.Storage;
 import duke.Ui;
 import duke.exception.DukeException;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * A class contains the task list and deal with the command run on the task list.
  */
 public class TaskList {
 
-    List<Task> taskList;
+    private List<Task> taskList;
 
     /**
      * Constructs a new TaskList containing a empty task list.
@@ -63,6 +63,8 @@ public class TaskList {
         case "event":
             addTask(ui, commands[0], commands[1], commands[2]);
             storage.store(taskList);
+            break;
+        default:
         }
     }
 

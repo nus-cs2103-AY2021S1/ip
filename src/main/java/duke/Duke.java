@@ -22,7 +22,7 @@ public class Duke {
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
-            ui.showError(e.msg);
+            ui.showError(e.getMsg());
             tasks = new TaskList();
         }
     }
@@ -37,10 +37,12 @@ public class Duke {
         while (true) {
             try {
                 String[] commands = Parser.parse(fullCommand);
-                if (commands[0].equals("bye")) break;
+                if (commands[0].equals("bye")) {
+                    break;
+                }
                 tasks.runCommand(commands, ui, storage);
             } catch (DukeException e) {
-                ui.showError(e.msg);
+                ui.showError(e.getMsg());
             }
             fullCommand = ui.readCommand();
         }

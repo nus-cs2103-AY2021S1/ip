@@ -1,9 +1,9 @@
 package duke;
 
-import duke.task.Task;
-
 import java.util.List;
 import java.util.Scanner;
+
+import duke.task.Task;
 
 /**
  * A class to deal with the interactions with users.
