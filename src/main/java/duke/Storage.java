@@ -1,7 +1,7 @@
-package main.java.duke;
+package duke;
 
-import main.java.duke.exceptions.InvalidFileException;
-import main.java.duke.tasks.*;
+import duke.exceptions.InvalidFileException;
+import duke.tasks.*;
 
 import java.io.*;
 import java.time.LocalDateTime;

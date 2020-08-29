@@ -1,16 +1,20 @@
-package main.java.duke;
+package duke;
 
-import main.java.duke.command.Command;
-import main.java.duke.exceptions.DukeException;
-import main.java.duke.exceptions.InvalidFileException;
-import main.java.duke.tasks.TaskList;
+import javafx.application.Application;
+import duke.command.Command;
+import duke.exceptions.DukeException;
+import duke.exceptions.InvalidFileException;
+import duke.tasks.TaskList;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+import javafx.scene.control.Label;
 
 /**
  * Duke class which initialize a Duke object that handles
  * all of the bot logic sequences.
  */
 
-public class Duke {
+public class Duke extends Application {
 
     private Storage storage;
     private TaskList tasks;
@@ -48,7 +52,17 @@ public class Duke {
         }
     }
 
-    public static void main(String[] args) {
-        new Duke("data/tasks.txt").run();
+    @Override
+    public void start(Stage stage) {
+        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
+        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
+
+        stage.setScene(scene); // Setting the stage to show our screen
+        stage.show(); // Render the stage.
     }
+
+
+//    public static void main(String[] args) {
+//        new Duke("data/tasks.txt").run();
+//    }
 }

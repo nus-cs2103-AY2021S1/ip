@@ -1,4 +1,4 @@
-package main.java.duke.exceptions;
+package duke.exceptions;
 
 /**
  * InvalidFileException is thrown when the file fails to save or load.
