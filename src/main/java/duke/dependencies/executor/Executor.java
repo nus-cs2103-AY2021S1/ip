@@ -69,6 +69,10 @@ public class Executor {
                 setState(FIND);
                 break;
 
+            case CLEAR:
+                setState(CLEAR);
+                break;
+
             default:
                 setState(INVALID);  // Should never reached this stage.
                 break;
@@ -77,14 +81,26 @@ public class Executor {
         return execAndReturn(executable);
     }
 
+    /**
+     * Returns number of completed tasks in the list.
+     * @return Integer.
+     */
     public int getNumOfCompletedTasks() {
         return TASK_LIST.getNumOfCompleted();
     }
 
+    /**
+     * Returns number of incomplete tasks in the list.
+     * @return Integer.
+     */
     public int getNumOfIncompleteTasks() {
         return TASK_LIST.getNumOfIncomplete();
     }
 
+    /**
+     * Returns number of items in the list.
+     * @return Integer.
+     */
     public int getListSize() {
         return TASK_LIST.getListSize();
     }
@@ -122,8 +138,11 @@ public class Executor {
                 Task t = e.getTask();
                 return TASK_LIST.add(t);
             }
+            case CLEAR: {
+                return TASK_LIST.clearList();
+            }
             default: {
-                return "Error";
+                return "Error";   // This should not happen.
             }
         }
     }

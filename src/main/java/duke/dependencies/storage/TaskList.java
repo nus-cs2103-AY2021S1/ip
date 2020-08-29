@@ -81,6 +81,16 @@ public class TaskList {
     }
 
     /**
+     * Deletes the entire list.
+     * @return A string reply indicating list data is wiped.
+     */
+    public String clearList() {
+        todoList = new ArrayList<>();
+        l.overwriteAndSave(todoList);
+        return "List cleared.";
+    }
+
+    /**
      * Adds the specified task to the todoList. Returns a string representation
      * of the task that was added as a reply.
      *

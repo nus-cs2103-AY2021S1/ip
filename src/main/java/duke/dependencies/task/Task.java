@@ -111,7 +111,7 @@ public abstract class Task implements Serializable, Schedulable {
         return new Deadlines(task, date);
     }
 
-    /* ----------------------------------------- Subclasses--------------------------------------------- */
+    /* ----------------------------------------------- Subclasses---------------------------------------------------- */
 
     private static class EmptyTask extends Task{
 
@@ -183,7 +183,7 @@ public abstract class Task implements Serializable, Schedulable {
         public String toString() {
             return String.format(
                     "[Event][%s] %s (at: %s)", super.state == UNFINISHED ? "X"
-                            : Character.toString((char)0x2713),
+                            : "✓",
                     super.task,
                     date);
         }
@@ -203,7 +203,7 @@ public abstract class Task implements Serializable, Schedulable {
         public String toString() {
             return String.format(
                     "[ToDo][%s] %s", super.state == UNFINISHED ? "X"
-                            : Character.toString((char)0x2713),
+                            : "✓",
                     super.task);
         }
     }
@@ -232,7 +232,7 @@ public abstract class Task implements Serializable, Schedulable {
         public String toString() {
             return String.format(
                     "[Deadline][%s] %s (by: %s)", super.state == UNFINISHED ? "X"
-                            : Character.toString((char)0x2713),
+                            : "✓",
                     super.task,
                     deadline);
         }

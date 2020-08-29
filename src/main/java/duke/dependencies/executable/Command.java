@@ -98,6 +98,10 @@ public class Command implements Executable {
         return new Command(CommandType.CLEAR, null);
     }
 
+    public static Command createCheckAuthCommand(Task task) {
+        return new Command(CommandType.AUTHCHECK, null);
+    }
+
 //    public static Command createEventCommand(Task task) {
 //        return new Command(CommandType.EVENT, task);
 //    }

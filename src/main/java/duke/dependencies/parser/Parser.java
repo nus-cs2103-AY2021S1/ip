@@ -3,9 +3,11 @@ package duke.dependencies.parser;
 import duke.dependencies.dukeexceptions.DukeException;
 import duke.dependencies.dukeexceptions.EmptyTaskException;
 import duke.dependencies.dukeexceptions.InvalidDateException;
+import duke.dependencies.dukeexceptions.InvalidPassException;
 import duke.dependencies.dukeexceptions.UnknownCommandException;
 import duke.dependencies.executable.Command;
 import duke.dependencies.executable.Executable;
+import duke.dependencies.storage.Storage;
 import duke.dependencies.task.Task;
 import duke.dependencies.task.TaskDate;
 
@@ -47,6 +49,19 @@ class Parser {
             return parseExplicitCommand(s);
         } catch (DukeException e) {
             throw e;
+        }
+    }
+
+    public static Parser authenthicateUser(String pw) throws DukeException {
+        Storage s = new Storage();
+        if (s.checkUserAuth(pw)) {
+            try {
+                return parseExplicitCommand("authentication::success");
+            } catch (DukeException e) {
+                throw e;
+            }
+        } else {
+            throw new InvalidPassException("Wrong password");
         }
     }
 
@@ -138,6 +153,12 @@ class Parser {
             Task t = Task.createMiscTask(task);
             e = Command.createFindCommand(t);
         }
+        else if (checkForWord(s, "clear data")) {
+            e = Command.createCheckAuthCommand(null);
+        }
+        else if (checkForWord(s, "authentication::success")) {
+            e = Command.createClearCacheCommand(null);
+        }
         /* MYSTERIOUS ERROR/COMMAND */
         else {
             throw new UnknownCommandException("Error: Unknown command");
@@ -145,7 +166,6 @@ class Parser {
 
         return new Parser(e);
     }
-
 
     /**
      * Case insensitive check for a word.
