@@ -1,3 +1,4 @@
 D ## 1 ## homework  ## 2020-11-22
 E ## 1 ## meeting  ## 2020-12-12 18:00
 T ## 1 ## eat
+T ## 0 ## eat rice

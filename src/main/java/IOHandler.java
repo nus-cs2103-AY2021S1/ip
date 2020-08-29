@@ -34,7 +34,7 @@ public class IOHandler {
 
             for (String value : files) {
                 Task task = TextAndTaskConverter.textConverter(value);
-                taskManager.getTaskList().add(task);
+                taskManager.getTasksList().add(task);
             }
 
             while (!text.equals("bye")) {
@@ -68,8 +68,8 @@ public class IOHandler {
                     } else if (text.contains("find")) {
                         String[] textArray = text.split(" ", 2);
                         ArrayList<String> tasksFound = new ArrayList<>();
-                        for (int i = 0; i < taskManager.getTaskList().size(); i++) {
-                            String found = taskManager.getTaskList().get(i).toString();
+                        for (int i = 0; i < taskManager.getTasksList().size(); i++) {
+                            String found = taskManager.getTasksList().get(i).toString();
                             if (found.contains(textArray[1])) {
                                 tasksFound.add(found);
                             }
@@ -77,9 +77,11 @@ public class IOHandler {
 
                         if (tasksFound.size() > 0) {
                             System.out.println("Here are the matching tasks in your list:");
-                            for (String s : tasksFound) {
-                                System.out.println(s);
+                            for (int j = 0; j < tasksFound.size(); j++) {
+                                System.out.println((j + 1) + ". " + tasksFound.get(j));
                             }
+                        } else {
+                            System.out.println("Nothing matches :(");
                         }
 
                     } else if (text.length() > 0) {
