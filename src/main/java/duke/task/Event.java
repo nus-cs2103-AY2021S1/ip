@@ -13,7 +13,6 @@ public class Event extends Task {
     /**
      * Constructs deadline object with
      * description and date that is not done.
-     *
      * @param description Description of the task.
      * @param date        Event date of the task.
      */
@@ -27,7 +26,6 @@ public class Event extends Task {
     /**
      * Constructs event object with
      * description, date, and start time that is not done.
-     *
      * @param description Description of the task.
      * @param date        Event date of the task.
      * @param startTime   Start time of this event.
@@ -42,7 +40,6 @@ public class Event extends Task {
     /**
      * Constructs event object with description, date,
      * start time, and end time that is not done.
-     *
      * @param description Description of the task.
      * @param date        Event date of the task.
      * @param startTime   Start time of this event.
@@ -59,7 +56,6 @@ public class Event extends Task {
      * Constructs event object with description and date.
      * Constructs a done object if isDone is true
      * and not done object otherwise.
-     *
      * @param description Description of the task.
      * @param isDone      Indicates whether this task is done or not.
      * @param date        Event date of the task.
@@ -75,7 +71,6 @@ public class Event extends Task {
      * Constructs event object with description and date.
      * Constructs a done object if isDone is true
      * and not done object otherwise.
-     *
      * @param description Description of the task.
      * @param isDone      Indicates whether this task is done or not.
      * @param date        Event date of the task.
@@ -92,7 +87,6 @@ public class Event extends Task {
      * Constructs event object with description and date.
      * Constructs a done object if isDone is true
      * and not done object otherwise.
-     *
      * @param description Description of the task.
      * @param isDone      Indicates whether this task is done or not.
      * @param date        Event date of the task.
@@ -110,7 +104,6 @@ public class Event extends Task {
 
     /**
      * Returns E to mark this as an event object.
-     *
      * @return E in string.
      */
     public String getType() {
@@ -119,7 +112,6 @@ public class Event extends Task {
 
     /**
      * Returns the date of this event.
-     *
      * @return Event date in LocalDate.
      */
     public LocalDate getDate() {
@@ -128,7 +120,6 @@ public class Event extends Task {
 
     /**
      * Returns the start time of this event if it exists.
-     *
      * @return Event start time in LocalTime.
      */
     public LocalTime getStartTime() {
@@ -137,7 +128,6 @@ public class Event extends Task {
 
     /**
      * Returns the end time of this event if it exists.
-     *
      * @return Deadline time in LocalTime.
      */
     public LocalTime getEndTime() {
@@ -146,34 +136,32 @@ public class Event extends Task {
 
     /**
      * Returns the string representation of this event object.
-     *
      * @return String object of this event.
      */
     @Override
     public String toString() {
         if (this.startTime != null && this.endTime != null) {
             return "[" + this.getType() + "]" + this.getStatusIcon() + " "
-                    + this.description + " (at:" + this.date.format(
-                    DateTimeFormatter.ofPattern("MMM d yyyy"))
-                    + " " + this.startTime.format(DateTimeFormatter.ISO_LOCAL_TIME)
-                    + " - " + this.endTime.format(DateTimeFormatter.ISO_LOCAL_TIME) + ")";
+                + this.description + " (at:" + this.date.format(
+                DateTimeFormatter.ofPattern("MMM d yyyy"))
+                + " " + this.startTime.format(DateTimeFormatter.ISO_LOCAL_TIME)
+                + " - " + this.endTime.format(DateTimeFormatter.ISO_LOCAL_TIME) + ")";
 
         } else if (this.startTime != null) {
             return "[" + this.getType() + "]" + this.getStatusIcon() + " "
-                    + this.description + " (at:" + this.date.format(
-                    DateTimeFormatter.ofPattern("MMM d yyyy"))
-                    + " " + this.startTime.format(DateTimeFormatter.ISO_LOCAL_TIME) + ")";
+                + this.description + " (at:" + this.date.format(
+                DateTimeFormatter.ofPattern("MMM d yyyy"))
+                + " " + this.startTime.format(DateTimeFormatter.ISO_LOCAL_TIME) + ")";
 
         } else {
             return "[" + this.getType() + "]" + this.getStatusIcon() + " "
-                    + this.description + " (at:" + this.date.format(
-                    DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+                + this.description + " (at:" + this.date.format(
+                DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
         }
     }
 
     /**
      * Mark this event as done.
-     *
      * @return Done version of this event task.
      */
     @Override
@@ -181,7 +169,7 @@ public class Event extends Task {
         //int index = taskNum - 1;
         if (!this.isDone) {
             Event newTask = new Event(this.getDescription(),
-                    true, this.date, this.startTime, this.endTime);
+                true, this.date, this.startTime, this.endTime);
             return newTask;
         }
         return this;

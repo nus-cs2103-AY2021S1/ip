@@ -11,7 +11,6 @@ public class Deadline extends Task {
     /**
      * Constructs deadline object with
      * description and date that is not done.
-     *
      * @param description Description of the task.
      * @param deadline    Deadline date of the task.
      */
@@ -24,7 +23,6 @@ public class Deadline extends Task {
     /**
      * Constructs deadline object with
      * description, date, and time that is not done.
-     *
      * @param description Description of the task.
      * @param deadline    Deadline date of the task.
      * @param time        Deadline time of the task.
@@ -39,7 +37,6 @@ public class Deadline extends Task {
      * Constructs deadline object with description and date.
      * Constructs a done object if isDone is true
      * and not done object otherwise.
-     *
      * @param description Description of the task.
      * @param isDone      Indicates whether a task is done or not.
      * @param deadline    Deadline date of the task.
@@ -54,7 +51,6 @@ public class Deadline extends Task {
      * Constructs deadline object with description, date, and time.
      * Constructs a done object if isDone is true
      * and not done object otherwise.
-     *
      * @param description Description of the task.
      * @param isDone      Indicates whether a task is done or not.
      * @param deadline    Deadline date of the task.
@@ -68,7 +64,6 @@ public class Deadline extends Task {
 
     /**
      * Returns D to mark this as a deadline object.
-     *
      * @return D in string.
      */
     public String getType() {
@@ -77,7 +72,6 @@ public class Deadline extends Task {
 
     /**
      * Returns the date of this deadline.
-     *
      * @return Deadline date in LocalDate.
      */
     public LocalDate getDeadline() {
@@ -86,7 +80,6 @@ public class Deadline extends Task {
 
     /**
      * Returns the time of this deadline if it exists.
-     *
      * @return Deadline time in LocalTime.
      */
     public LocalTime getTime() {
@@ -95,25 +88,23 @@ public class Deadline extends Task {
 
     /**
      * Returns the string representation of this deadline object.
-     *
      * @return String object of this deadline.
      */
     @Override
     public String toString() {
 
         return this.time != null
-                ? "[" + this.getType() + "]" + this.getStatusIcon() + " "
-                + this.description + " (by:" + this.deadline.format(
-                DateTimeFormatter.ofPattern("MMM d yyyy"))
-                + " " + this.time.format(DateTimeFormatter.ISO_LOCAL_TIME) + ")"
-                : "[" + this.getType() + "]" + this.getStatusIcon() + " "
-                + this.description + " (by:" + this.deadline.format(
-                DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+            ? "[" + this.getType() + "]" + this.getStatusIcon() + " "
+            + this.description + " (by:" + this.deadline.format(
+            DateTimeFormatter.ofPattern("MMM d yyyy"))
+            + " " + this.time.format(DateTimeFormatter.ISO_LOCAL_TIME) + ")"
+            : "[" + this.getType() + "]" + this.getStatusIcon() + " "
+            + this.description + " (by:" + this.deadline.format(
+            DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 
     /**
      * Mark this deadline as done.
-     *
      * @return Done version of this deadline task.
      */
     @Override

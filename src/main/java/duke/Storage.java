@@ -1,13 +1,5 @@
 package duke;
 
-import duke.exception.CalendarException;
-import duke.exception.DukeException;
-import duke.exception.StorageException;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.Todo;
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -18,6 +10,14 @@ import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
+
+import duke.exception.CalendarException;
+import duke.exception.DukeException;
+import duke.exception.StorageException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
 
 public class Storage {
 
@@ -30,7 +30,6 @@ public class Storage {
 
     /**
      * Reads the file from hard disk.
-     *
      * @return List containing the parsed data from file.
      * @throws IOException   If file cannot be read or found.
      * @throws DukeException If there is incorrect format in the file.
@@ -67,7 +66,6 @@ public class Storage {
 
     /**
      * Formats the data to more readable format.
-     *
      * @param line String to be parsed.
      * @return parsed Task.
      * @throws DukeException If there is incorrect data format.
@@ -122,10 +120,10 @@ public class Storage {
                             LocalTime localEndTime = LocalTime.parse(endTime);
                             if (doneIndicator.equals("1")) {
                                 task = new Event(taskName,
-                                        true, localDate, localStartTime, localEndTime);
+                                    true, localDate, localStartTime, localEndTime);
                             } else {
                                 task = new Event(taskName,
-                                        false, localDate, localStartTime, localEndTime);
+                                    false, localDate, localStartTime, localEndTime);
                             }
                         }
                     }
@@ -162,14 +160,13 @@ public class Storage {
 
         } catch (DateTimeParseException e) {
             throw new CalendarException("Please input the correct date and time format. "
-                    + "YYYY-MM-DD for date and HH:MM for time.");
+                + "YYYY-MM-DD for date and HH:MM for time.");
         }
 
     }
 
     /**
      * Updates the data in the file.
-     *
      * @param tasks List containing all the updated tasks.
      */
     public static void updateData(List<Task> tasks) {
@@ -192,13 +189,13 @@ public class Storage {
 
                     if (startTime == null && endTime == null) {
                         stored = String.format(
-                                "%s | %d | %s | %s", type, status ? 1 : 0, taskName, date);
+                            "%s | %d | %s | %s", type, status ? 1 : 0, taskName, date);
                     } else if (endTime == null) {
                         stored = String.format("%s | %d | %s | %s | %s",
-                                type, status ? 1 : 0, taskName, date, startTime);
+                            type, status ? 1 : 0, taskName, date, startTime);
                     } else {
                         stored = String.format("%s | %d | %s | %s | %s-%s",
-                                type, status ? 1 : 0, taskName, date, startTime, endTime);
+                            type, status ? 1 : 0, taskName, date, startTime, endTime);
                     }
 
                 } else if (type.equals("D")) {
@@ -208,10 +205,10 @@ public class Storage {
 
                     if (time == null) {
                         stored = String.format("%s | %d | %s | %s",
-                                type, status ? 1 : 0, taskName, date);
+                            type, status ? 1 : 0, taskName, date);
                     } else {
                         stored = String.format("%s | %d | %s | %s | %s",
-                                type, status ? 1 : 0, taskName, date, time);
+                            type, status ? 1 : 0, taskName, date, time);
 
                     }
 

@@ -1,17 +1,17 @@
 package duke;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
+import java.util.List;
+
 import duke.exception.CalendarException;
 import duke.exception.DeleteException;
 import duke.exception.DoneException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
-
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class TaskList {
     private List<Task> tasks;
@@ -44,7 +44,6 @@ public class TaskList {
 
     /**
      * Deletes a task based on the corresponding number.
-     *
      * @param index Index of the list containing the task
      * @throws DeleteException If the index < 0 or more than the size.
      */
@@ -56,15 +55,14 @@ public class TaskList {
             this.tasks.remove(task);
             Storage.updateData(this.tasks);
             System.out.println("Noted. I've removed this task for you: \n"
-                    + task.toString() + "\n"
-                    + "Now you have " + this.tasks.size() + " task(s) in the list.");
+                + task.toString() + "\n"
+                + "Now you have " + this.tasks.size() + " task(s) in the list.");
         }
 
     }
 
     /**
      * Saves the task to the list.
-     *
      * @param task Task to save to the list.
      */
     public void saveToList(Task task) {
@@ -75,7 +73,6 @@ public class TaskList {
 
     /**
      * Returns the task corresponding to the task number.
-     *
      * @param taskNum Task number of the task.
      * @return The task corresponding to the task number.
      */
@@ -85,7 +82,6 @@ public class TaskList {
 
     /**
      * Marks the task corresponding to the task number as done.
-     *
      * @param taskNum Task number of the task.
      * @throws DoneException If the index < 0 or more than the size.
      */
@@ -100,13 +96,12 @@ public class TaskList {
             this.tasks.add(index, newTask);
             Storage.updateData(this.tasks);
             System.out.println("YAYY! I've marked this task as done : \n"
-                    + newTask.toString());
+                + newTask.toString());
         }
     }
 
     /**
      * Shows the all task(s) on the input day.
-     *
      * @param date Date to show.
      * @throws CalendarException If the date input is in invalid format.
      */
@@ -115,7 +110,7 @@ public class TaskList {
             LocalDate localDate = LocalDate.parse(date);
             Boolean hasSomething = false;
             System.out.println("Task(s) on : " + localDate.getDayOfWeek() + ", "
-                    + localDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
+                + localDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
 
             for (Task task : this.tasks) {
                 String type = task.getType();
@@ -150,7 +145,6 @@ public class TaskList {
 
     /**
      * Returns all the tasks in the list.
-     *
      * @return List containing all of the tasks.
      */
     public List<Task> getTasks() {

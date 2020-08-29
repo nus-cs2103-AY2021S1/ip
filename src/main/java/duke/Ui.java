@@ -4,20 +4,20 @@ import java.util.Scanner;
 
 public class Ui {
 
-    Scanner sc = new Scanner(System.in);
+    private Scanner sc = new Scanner(System.in);
 
     /**
      * Shows greetings when user starts the bot.
      */
     public void greet() {
         String donLogo = "   ___     ___    _  _     ___     ___ \n"
-                + "  |   \\   / _ \\  | \\| |   / __|   / _ \\  \n"
-                + "  | |) | | (_) | | .` |  | (_ |  | (_) | \n"
-                + "  |___/   \\___/  |_|\\_|   \\___|   \\___/  \n"
-                + "_|\"\"\"\"\"|_|\"\"\"\"\"|_|\"\"\"\"\"|_|\"\"\"\"\"|_|\"\"\"\"\"| \n"
-                + "\"`-0-0-'\"`-0-0-'\"`-0-0-'\"`-0-0-'\"`-0-0-' \n";
-        String msg = "Hola! I'm Dongo :) \n" +
-                "How can I help you?";
+            + "  |   \\   / _ \\  | \\| |   / __|   / _ \\  \n"
+            + "  | |) | | (_) | | .` |  | (_ |  | (_) | \n"
+            + "  |___/   \\___/  |_|\\_|   \\___|   \\___/  \n"
+            + "_|\"\"\"\"\"|_|\"\"\"\"\"|_|\"\"\"\"\"|_|\"\"\"\"\"|_|\"\"\"\"\"| \n"
+            + "\"`-0-0-'\"`-0-0-'\"`-0-0-'\"`-0-0-'\"`-0-0-' \n";
+        String msg = "Hola! I'm Dongo :) \n"
+            + "How can I help you?";
         System.out.println(donLogo + "\n" + msg);
     }
 
@@ -31,7 +31,6 @@ public class Ui {
 
     /**
      * Reads user's command from Scanner.
-     *
      * @return user's command.
      */
     public String readCommand() {
@@ -44,8 +43,8 @@ public class Ui {
      */
     public void bye() {
         sc.close();
-        System.out.println("Time to say goodbye :( \n" +
-                "Have a great day!");
+        System.out.println("Time to say goodbye :( \n"
+            + "Have a great day!");
         System.exit(0);
         return;
     }
@@ -54,13 +53,15 @@ public class Ui {
      * Shows pretty line before and after every output.
      */
     public void showLine() {
-        //System.out.println("\n__̴ı̴̴̡̡̡ ̡͌l̡̡̡ ̡͌l̡*̡̡ ̴̡ı̴̴̡ ̡̡͡|̲̲̲͡͡͡ ̲▫̲͡ ̲̲̲͡͡π̲̲͡͡ ̲̲͡▫̲̲͡͡ ̲|̡̡̡ ̡ ̴̡ı̴̡̡ ̡͌l̡̡̡̡._____̴ı̴̴̡̡̡ ̡͌l̡̡̡ ̡͌l̡*̡̡ ̴̡ı̴̴̡ ̡̡͡|̲̲̲͡͡͡ ̲▫̲͡ ̲̲̲͡͡π̲̲͡͡ ̲̲͡▫̲̲͡͡ ̲|̡̡̡ ̡ ̴̡ı̴̡̡ ̡͌l̡̡̡̡._____̴ı̴̴̡̡̡ ̡͌l̡̡̡ ̡͌l̡*̡̡ ̴̡ı̴̴̡ ̡̡͡|̲̲̲͡͡͡ ̲▫̲͡ ̲̲̲͡͡π̲̲͡͡ ̲̲͡▫̲̲͡͡ ̲|̡̡̡ ̡ ̴̡ı̴̡̡ ̡͌l̡̡̡̡._____̴ı̴̴̡̡̡ ̡͌l̡̡̡ ̡͌l̡*̡̡ ̴̡ı̴̴̡ ̡̡͡|̲̲̲͡͡͡ ̲▫̲͡ ̲̲̲͡͡π̲̲͡͡ ̲̲͡▫̲̲͡͡ ̲|̡̡̡ ̡ ̴̡ı̴̡̡ ̡͌l̡̡̡̡.___\n");
-        System.out.println("\n▬▬ι═══════ﺤ -═══════ι▬▬ ▬▬ι═══════ﺤ -═══════ι▬▬\n");
+        System.out.println(
+            "\n__̴ı̴̴̡̡̡ ̡͌l̡̡̡ ̡͌l̡*̡̡ ̴̡ı̴̴̡ ̡̡͡|̲̲̲͡͡͡ ̲▫̲͡ "
+                + "̲̲̲͡͡π̲̲͡͡ ̲̲͡▫̲̲͡͡ ̲|̡̡̡ ̡ ̴̡ı̴̡̡ ̡͌l̡̡̡̡.___"
+            + "__̴ı̴̴̡̡̡ ̡͌l̡̡̡ ̡͌l̡*̡̡ ̴̡ı̴̴̡ ̡̡͡|̲̲̲͡͡͡ ̲▫̲͡ "
+                + "̲̲̲͡͡π̲̲͡͡ ̲̲͡▫̲̲͡͡ ̲|̡̡̡ ̡ ̴̡ı̴̡̡ ̡͌l̡̡̡̡.__\n");
     }
 
     /**
      * Shows error message.
-     *
      * @param msg Error message.
      */
     public void showError(String msg) {

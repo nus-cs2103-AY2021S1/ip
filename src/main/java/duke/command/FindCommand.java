@@ -1,13 +1,13 @@
 package duke.command;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 import duke.exception.FindException;
 import duke.task.Task;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class FindCommand extends Command {
 
@@ -56,7 +56,7 @@ public class FindCommand extends Command {
 
         if (tasksFound.size() == 0) {
             System.out.println("Nothing match this keyword. \n"
-                    + "Please try again with another keyword.");
+                + "Please try again with another keyword.");
         }
 
         return tasksFound;

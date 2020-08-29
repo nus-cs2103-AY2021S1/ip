@@ -13,7 +13,6 @@ public class ShowCommand extends Command {
 
     /**
      * Processes the show command to show all the task(s) on that day.
-     *
      * @param taskList List of tasks.
      * @param ui       UI of the bot.
      * @param storage  Storage managing the file in hard disk.
@@ -29,7 +28,6 @@ public class ShowCommand extends Command {
 
     /**
      * Calls the TaskList to show all the task(s) on that day.
-     *
      * @param date     Queried date.
      * @param taskList TaskList containing the tasks list.
      * @param ui       UI of the bot.
@@ -38,14 +36,13 @@ public class ShowCommand extends Command {
      */
 
     public void processShow(
-            String date, TaskList taskList, Ui ui, Storage storage) throws CalendarException {
+        String date, TaskList taskList, Ui ui, Storage storage) throws CalendarException {
         taskList.showDate(date);
     }
 
     /**
      * Evaluates whether this and other object if this and
      * other object is the same or of the same type and task details.
-     *
      * @param other Other object to compare.
      * @return True if this object
      */
