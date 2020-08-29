@@ -10,7 +10,7 @@ import duke.component.Parser;
 import duke.component.Storage;
 import duke.component.StorageStub;
 import duke.component.TaskList;
-import duke.component.Ui;
+import duke.component.CliUi;
 import duke.task.Task;
 import duke.task.ToDo;
 
@@ -23,7 +23,7 @@ public class AddCommandTest {
         assertFalse(new AddCommand("deadline anything").isExit());
     }
 
-    public void executeExceptionHelper(String s, Ui ui, TaskList list, Storage storage) {
+    public void executeExceptionHelper(String s, CliUi ui, TaskList list, Storage storage) {
         AddCommand a = new AddCommand(s);
         try {
             a.execute(ui, list, storage);
@@ -40,7 +40,7 @@ public class AddCommandTest {
 
     @Test
     public void execute_invalidCommand_throwException() {
-        Ui ui = new Ui();
+        CliUi ui = new CliUi();
         Storage storage = new StorageStub();
         TaskList list = storage.getList();
         list.add(new ToDo("hello"));
@@ -57,7 +57,7 @@ public class AddCommandTest {
 
     @Test
     public void execute_validCommand_addTask() {
-        Ui ui = new Ui();
+        CliUi ui = new CliUi();
         Storage storage = new StorageStub();
         TaskList list = storage.getList();
         Task task = new ToDo("hello");

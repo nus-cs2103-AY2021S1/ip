@@ -9,6 +9,6 @@ public class InvalidCommandException extends Exception {
     }
 
     public InvalidCommandException(String msg) {
-        super(msg);
+        super("\u2639" + msg);
     }
 }

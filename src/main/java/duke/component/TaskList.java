@@ -17,7 +17,7 @@ public class TaskList extends ArrayList<Task> {
     }
 
     /**
-     * Prints a filtered list based on this list with the given predicate.
+     * Prints a filtered list based on this list with the given predicate on CLI App.
      * @param predicate the condition for a task to be printed
      * @return the number of tasks printed
      */
@@ -32,5 +32,20 @@ public class TaskList extends ArrayList<Task> {
             }
         }
         return count;
+    }
+
+    /**
+     * Prints a filtered list based on this list with the given predicate on FXML App.
+     */
+    public String print(String initialStatement, Predicate<Task> predicate) {
+        String res = initialStatement;
+        int n = size();
+        for (int i = 0; i < n; i++) {
+            Task task = get(i);
+            if (predicate.test(task)) {
+                res = res.concat((i + 1) + "." + task + "\n");
+            }
+        }
+        return res;
     }
 }

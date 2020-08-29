@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 import duke.component.Storage;
 import duke.component.StorageStub;
 import duke.component.TaskList;
-import duke.component.Ui;
+import duke.component.CliUi;
 import duke.task.Task;
 import duke.task.ToDo;
 
@@ -21,7 +21,7 @@ public class FindCommandTest {
 
     @Test
     public void execute_emptyString_findsAll() {
-        Ui ui = new Ui();
+        CliUi ui = new CliUi();
         Storage storage = new StorageStub();
         TaskList list = storage.getList();
         Task task = new ToDo("hello");
@@ -33,7 +33,7 @@ public class FindCommandTest {
 
     @Test
     public void execute_anyString_findsMatches() {
-        Ui ui = new Ui();
+        CliUi ui = new CliUi();
         Storage storage = new StorageStub();
         TaskList list = storage.getList();
         Task task = new ToDo("hello");
