@@ -29,9 +29,9 @@ class Duke {
     /**
      * Manages all internal dataflow from Main or textual interaction
      * with the chatbot, by cleaning it
-     * @param input
+     * @param input User Input from the UI
      * @return String form of command to output to UI
-     * @throws DukeUnknownException
+     * @throws DukeException when there is an exception thrown
      */
     public String takeInput(String input) throws DukeException {
         //To prevent an Security Concern or Code Injection Cleaning of text is first performed and authenticated
@@ -57,6 +57,8 @@ class Duke {
                 return taskManager.deleteTask(words[1]);
             case LIST:
                 return taskManager.parseoutput();
+            case SEARCH:
+                return taskManager.findTasks(words[1]);
             case TODO:
                 return this.taskManager.addToDo(text_input);
             case DEADLINE:
@@ -77,14 +79,17 @@ class Duke {
     /**
      * inputs string, processes and cleans the text for the chatbot
      * via adding a ending token seperator
-     *
-     * @param userInput
-     * @return
+     * @param userInput Direct user input of the string
+     * @return Cleaned user input
      */
     private String cleanInput(String userInput) {
         return userInput + " [sep]";
     }
 
+    /**
+     * Returns a help message about all commands supported by Duke
+     * @return help message
+     */
     public String help() {
         //eventually to add command help <command>
         return "\t Need some help huh?\n" +
@@ -92,9 +97,11 @@ class Duke {
                 "\t- 'bye' to close the application\n" +
                 "\t- 'list' to list the current list of tasks and their statuses\n" +
                 "\t- 'done' to set a task as done\n" +
+                "\t- 'find' to find a task using regex or a query text string\n" +
                 "\t- 'todo' to list a untimed task\n" +
-                "\t- 'deadline' to list a timed deadline task, please structure with [deadline <task name> /by <time>]\n" +
-                "\t- 'event' to list a timed event task, please structure with [event <task name> /at <time>\n" +
+                "\t- 'deadline' to list a timed deadline task, please structure with " +
+                "[deadline <task name> /by dd-MM-YYYY]\n" +
+                "\t- 'event' to list a timed event task, please structure with [event <task name> /at dd-MM-YYYY]\n" +
                 "\t- 'help' to list these commands again\n";
     }
 
@@ -125,19 +132,11 @@ class Duke {
     String goodbye(String name){
         return "Bye " + name +"! Hope to see you again soon!";
     }
-    /**
-     * Wraps all text output and prints to the console
-     * @param s
-     */
-    private void print(String s){
-        System.out.printf("%s%s\n%s%n",linebreaker,s,linebreaker);
-    }
 
     /**
      * Message passing from mainloop to save tasks.
-     * @throws DukeIOException
+     * @throws DukeIOException if something goes wrong with the IO Savefiles
      */
-
     void saveTasks() throws DukeIOException {
         this.taskManager.saveTasks();
     }

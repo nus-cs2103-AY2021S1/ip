@@ -13,6 +13,7 @@ public enum Command {
     TODO("todo"),
     DEADLINE("deadline"),
     EVENT("event"),
+    SEARCH("find"),
     BLANK("");
     private final String commandEncoding;
 

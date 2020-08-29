@@ -18,7 +18,7 @@ public class ChatbotApplication {
      * @param pth the path to read a file from.
      */
     ChatbotApplication(String linebreaker, String pth){
-        dukeProgram = new Duke(linebreaker,pth);
+        dukeProgram = new Duke(pth);
         isChatbotRunning = true;
         this.linebreaker = linebreaker.repeat(50) + "\n";
     }
