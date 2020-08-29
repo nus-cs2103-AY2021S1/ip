@@ -7,6 +7,12 @@ public class Event extends Task {
 
     protected LocalDateTime at;
 
+    /**
+     * Creates an Event.
+     *
+     * @param description description of the Event
+     * @param at date and time of the Event
+     */
     public Event(String description, LocalDateTime at) {
         super(description);
         this.at = at;
@@ -24,7 +30,7 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + this.getStatusIcon() + " " + super.toString() + " (at: " +
-                at.format(DateTimeFormatter.ofPattern("dd MMM yyyy, HHmm")) + ")";
+        return "[E]" + this.getStatusIcon() + " " + super.toString() + " (at: "
+                + at.format(DateTimeFormatter.ofPattern("dd MMM yyyy, HHmm")) + ")";
     }
 }

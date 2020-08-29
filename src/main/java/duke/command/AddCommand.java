@@ -1,12 +1,12 @@
 package duke.command;
 
+import java.io.IOException;
+import java.time.DateTimeException;
+
 import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
-
-import java.io.IOException;
-import java.time.DateTimeException;
 
 /**
  * Represents the AddCommand when users add items to TaskList.
@@ -47,10 +47,12 @@ public class AddCommand extends Command {
             case "event":
                 taskList.addEvent(taskName, storage);
                 break;
+            default:
+                break;
             }
         } catch (DateTimeException e) {
-            throw new DukeException("Please enter dates in this format: dd/MM/yyyy timeIn24Hr" +
-                    "\nE.g. 01/12/2020 2359");
+            throw new DukeException("Please enter dates in this format: dd/MM/yyyy timeIn24Hr"
+                    + "\nE.g. 01/12/2020 2359");
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeException("Invalid description!");
         }

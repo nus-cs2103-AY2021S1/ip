@@ -1,12 +1,12 @@
+import java.io.IOException;
+import java.util.ArrayList;
+
 import duke.command.Command;
 import duke.exception.DukeException;
 import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
-
-import java.io.IOException;
-import java.util.ArrayList;
 
 /**
  * Represents a chat-bot named Duke.
@@ -37,7 +37,7 @@ public class Duke {
      * @param args Args
      */
     public static void main(String[] args) {
-        new Duke("data","data/duke.txt").run();
+        new Duke("data", "data/duke.txt").run();
     }
     /**
      * Runs the main logic of the Chat-bot.
