@@ -26,7 +26,6 @@ public class IOHandler {
 
             List<String> files = FileHandler.readSavedFile(fileName);
 
-            System.out.println("load");
             for (int i = 0; i < files.size(); i++) {
                 Task task = TextAndTaskConverter.textConverter(files.get(i));
                 taskManager.getTaskList().add(task);
