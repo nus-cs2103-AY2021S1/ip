@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class TaskList {
+public class TaskList implements Cloneable {
     private List<Task> tasks;
     private int numOfPendingTasks;
     private static final Ui UI = new Ui();
@@ -68,7 +68,7 @@ public class TaskList {
         try {
             Task targetTask = tasks.get(getTaskID(parser));
             if (targetTask.isDone) {
-                throw new AlreadyDoneIndexException("duke.Task already done");
+                throw new AlreadyDoneIndexException("Task already done");
             }
 
             targetTask.markAsDone();
@@ -121,6 +121,11 @@ public class TaskList {
         } catch (DukeException e) {
             UI.displayMessage(e.toString());
         }
+    }
+
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+        return super.clone();
     }
 }
 
