@@ -64,15 +64,15 @@ public class Storage {
                     Task task = null;
 
                     switch (taskType) {
-                        case "T":
-                            task = new ToDo(taskData[0], Boolean.parseBoolean(taskData[2]), taskData[3]);
-                            break;
-                        case "D":
-                            task = new Deadline(taskData[0], Boolean.parseBoolean(taskData[2]), taskData[3], taskData[4]);
-                            break;
-                        case "E":
-                            task = new Event(taskData[0], Boolean.parseBoolean(taskData[2]), taskData[3], taskData[4]);
-                            break;
+                    case "T":
+                        task = new ToDo(taskData[0], Boolean.parseBoolean(taskData[2]), taskData[3]);
+                        break;
+                    case "D":
+                        task = new Deadline(taskData[0], Boolean.parseBoolean(taskData[2]), taskData[3], taskData[4]);
+                        break;
+                    case "E":
+                        task = new Event(taskData[0], Boolean.parseBoolean(taskData[2]), taskData[3], taskData[4]);
+                        break;
                     }
                     taskList.addTask(task);
                 }
@@ -82,7 +82,7 @@ public class Storage {
         }
     }
 
-    private void appendData(String data)  {
+    private void appendData(String data)  { 
         try {
             FileWriter writer = new FileWriter(dataFilePath, true);
             writer.write(data);
