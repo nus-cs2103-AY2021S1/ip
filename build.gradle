@@ -28,12 +28,16 @@ test {
     }
 }
 
+task cleanBuildTest(type: GradleBuild) {
+    tasks = ["clean", "build", "test"]
+}
+
 application {
-    mainClassName = "seedu.duke.Duke"
+    mainClassName = "taskbot.main.Main"
 }
 
 shadowJar {
-    archiveBaseName = "duke"
+    archiveBaseName = "TaskBot"
     archiveClassifier = null
 }
 
@@ -41,6 +45,7 @@ checkstyle {
     toolVersion = '8.23'
 }
 
-run{
+run {
     standardInput = System.in
+    enableAssertions = true
 }
