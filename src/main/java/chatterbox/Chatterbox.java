@@ -1,10 +1,10 @@
 package chatterbox;
 
-import chatterbox.task.Task;
-import chatterbox.task.TaskList;
-
 import java.io.IOException;
 import java.util.Scanner;
+
+import chatterbox.task.Task;
+import chatterbox.task.TaskList;
 
 /**
  * Handles the main loop and the high level logic flow of the program.
@@ -40,6 +40,13 @@ public class Chatterbox {
         Ui.showFarewellMessage();
     }
 
+    /**
+     * Processes user input and executes actions based on them.
+     *
+     * @param input Raw user input.
+     * @throws ChatterboxException  If input string is empty or invalid command is given.
+     * @throws IOException  If data cannot be read/written from the save file.
+     */
     private void processInput(String input) throws ChatterboxException, IOException {
         // Check if input is just whitespace
         if (input.strip().equals("")) {

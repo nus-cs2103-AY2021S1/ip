@@ -1,22 +1,22 @@
 package chatterbox;
 
-import chatterbox.task.Deadline;
-import chatterbox.task.Event;
-import chatterbox.task.Task;
-import chatterbox.task.ToDo;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
 
+import chatterbox.task.Deadline;
+import chatterbox.task.Event;
+import chatterbox.task.Task;
+import chatterbox.task.ToDo;
+
 /**
  * Utility class for parsing date and time, as well as task inputs.
  */
 public class Parser {
     private static final String[] dateFormats = new String[] {
-            "d/M/y HHmm", "d-M-y HHmm", "d/M/y", "d-M-y"
+        "d/M/y HHmm", "d-M-y HHmm", "d/M/y", "d-M-y"
     };
 
     /**
@@ -30,7 +30,9 @@ public class Parser {
             try {
                 Date d = new SimpleDateFormat(format).parse(dateTime);
                 return d.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
-            } catch (ParseException ignored) {}
+            } catch (ParseException e) {
+                continue;
+            }
         }
         return null;
     }

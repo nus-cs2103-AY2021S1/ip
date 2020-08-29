@@ -1,19 +1,19 @@
 package chatterbox.task;
 
-import chatterbox.ChatterboxException;
-import chatterbox.Storage;
-import chatterbox.Ui;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import chatterbox.ChatterboxException;
+import chatterbox.Storage;
+import chatterbox.Ui;
 
 /**
  * Handles the modification of and other operations relating to the task list.
  */
 public class TaskList {
-    private final Storage store;
     private static List<Task> tasks = new ArrayList<>();
+    private final Storage store;
 
     public TaskList(Storage store) {
         this.store = store;
