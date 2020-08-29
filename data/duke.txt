@@ -1,3 +1,0 @@
-b5297ff5-5137-4a30-8671-73e6572c5d7c|T|false|wash clothes
-aa905931-8343-4f90-b280-67374a65f096|D|false|wash car|2011-12-11
-b6b14887-2a6a-4df4-9e92-d00f8d90f95d|T|false|nothing
