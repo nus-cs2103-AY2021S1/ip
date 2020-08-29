@@ -96,6 +96,52 @@ public class Ui {
         sc.close();
     }
 
+    public String readCommand(String input) {
+
+        if (input.equals("bye")) {
+            return "Have a nice day";
+        } else if (input.equals("list")) {
+            return taskList.listOut();
+        } else if (input.contains("find")) {
+            return taskList.find(input);
+        } else if (input.contains("done")) {
+            try {
+                String output = taskList.done(input);
+                storage.save();
+                return output;
+            } catch (DukeException e) {
+                return e.getMessage();
+            }
+        } else if (input.contains("delete")) {
+            try {
+                String output = taskList.delete(input);
+                storage.save();
+                return output;
+            } catch (DukeException e) {
+                return e.getMessage();
+            }
+        } else {
+            try {
+                Task task;
+                if (input.contains("todo")) {
+                    task = parser.handleToDo(input);
+                } else if (input.contains("deadline")) {
+                    task = parser.handleDeadline(input);
+                } else if (input.contains("event")) {
+                    task = parser.handleEvent(input);
+                } else {
+                    throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                }
+
+                String output = taskList.add(task);
+                storage.save();
+                return output;
+            } catch (DukeException e) {
+                return e.getMessage();
+            }
+        }
+    }
+
     /**
      * Greeting used by Duke.
      */
