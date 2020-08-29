@@ -41,6 +41,14 @@ checkstyle {
     toolVersion = '8.23'
 }
 
+compileJava {
+    options.encoding = "UTF-8"
+}
+
 run{
     standardInput = System.in
+}
+
+run {
+    enableAssertions = true
 }
