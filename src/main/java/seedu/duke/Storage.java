@@ -43,7 +43,7 @@ public class Storage {
                     System.out.println(taskStr);
                     // load the task
                     Task savedTask = Parser.parseTaskFromStorage(taskStr);
-                    taskList.tasks.add(savedTask);
+                    taskList.getTasks().add(savedTask);
                 }
             }
             System.out.println("What do you want to do today?");
@@ -57,12 +57,12 @@ public class Storage {
      * @param taskList The task list that is to be saved.
      */
     public void saveTasks(TaskList taskList) {
-        if (taskList.tasks.size() == 0) {
+        if (taskList.getTasks().size() == 0) {
             return;
         } else {
-            writeToFile(FILE_PATH, taskList.tasks.get(0).getData());
-            for (int i = 1; i < taskList.tasks.size(); i++) {
-                String taskData = taskList.tasks.get(i).getData();
+            writeToFile(FILE_PATH, taskList.getTasks().get(0).getData());
+            for (int i = 1; i < taskList.getTasks().size(); i++) {
+                String taskData = taskList.getTasks().get(i).getData();
                 appendToFile(FILE_PATH, taskData);
             }
         }

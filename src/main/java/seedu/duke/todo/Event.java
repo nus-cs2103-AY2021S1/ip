@@ -9,11 +9,22 @@ import java.time.format.DateTimeFormatter;
 public class Event extends Task {
     protected LocalDate at;
 
+    /**
+     * Constructor for Event.
+     * @param description The task description.
+     * @param at The date of the event.
+     */
     public Event(String description, LocalDate at) {
         super(description);
         this.at = at;
     }
 
+    /**
+     * Alternative constructor for Event.
+     * @param description The task description.
+     * @param isDone The marker whether the task is done.
+     * @param at The date of the event.
+     */
     public Event(String description, boolean isDone, LocalDate at) {
         super(description, isDone);
         this.at = at;

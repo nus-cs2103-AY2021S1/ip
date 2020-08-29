@@ -1,13 +1,17 @@
 package main.java.seedu.duke.commands;
 
+import main.java.seedu.duke.Storage;
 import main.java.seedu.duke.TaskList;
 import main.java.seedu.duke.Ui;
-import main.java.seedu.duke.Storage;
 
 /**
  * Represents the command to exit the program.
  */
 public class ExitCommand extends Command {
+
+    /**
+     * Constructor of ExitCommand.
+     */
     public ExitCommand() {
         super("exit");
     }

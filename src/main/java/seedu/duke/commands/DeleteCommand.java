@@ -1,9 +1,9 @@
 package main.java.seedu.duke.commands;
 
 import main.java.seedu.duke.DukeException;
+import main.java.seedu.duke.Storage;
 import main.java.seedu.duke.TaskList;
 import main.java.seedu.duke.Ui;
-import main.java.seedu.duke.Storage;
 
 /**
  * Represents the command to delete task.
@@ -11,6 +11,10 @@ import main.java.seedu.duke.Storage;
 public class DeleteCommand extends Command {
     private int taskNo;
 
+    /**
+     * Constructor for DeleteCommand.
+     * @param taskNo The task number of the task to be deleted.
+     */
     public DeleteCommand(int taskNo) {
         super("delete");
         this.taskNo = taskNo;
