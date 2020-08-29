@@ -33,7 +33,7 @@ public class TaskList {
      */
     public static ArrayList<Task> searchList(String keyword) {
         ArrayList<Task> returnList = new ArrayList<>();
-        for (Task t : toDoList
+        for (Task t : TO_DO_LIST
              ) {
             if(t.toString().contains(keyword)) {
                 returnList.add(t);
