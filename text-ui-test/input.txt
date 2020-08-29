@@ -1,10 +1,18 @@
-todo buy keyboard
-deadline buy birthday gift for friend /by 2020-08-30 1800
-event family dinner with uncle /at 2020-12-12 1900
+help
+todo plan modules for exchange
+deadline buy birthday gift for mom /by 2020-09-25 1800
+event internship guidance webinar /at 2020-09-20 1830
 list
 done 2
 list
-todo
-blah
-delete 2
+todo find internship
+find internship
+find blah
+delete 1
 list
+todo
+delete 10
+done -1
+deadline adwaedw
+event awedawedwae
+bye

@@ -1,32 +1,62 @@
-Serina here, how can I assist you?
-------------------------------------------------------
+Serina here, how can I assist you? Enter 'help' to learn what I can do for you.
+--------------------------------------------------------------------------------------------------------------------------
+I am Serina, your personal toDo Manager. These are the commands you can issue me: 
+1. list => lists all your current tasks 
+3. todo {task description} => creates a new to do task with given description 
+4. deadline {task description} /by {YYYY-MM-DD HHMM} => creates a new task with given description and deadline
+5. event {task description} /at {YYYY-MM-DD HHMM} => creates a new task with given description and event time
+6. done {task number} => marks the given task as done
+7. delete {task number} => deletes the given task
+8. find {query} => lists out tasks based on your query
+9. bye => makes me go to sleep
+--------------------------------------------------------------------------------------------------------------------------
 The following task has been added: 
-0. [T][✘] buy keyboard
-------------------------------------------------------
+0. [T][✘] plan modules for exchange
+--------------------------------------------------------------------------------------------------------------------------
 The following task has been added: 
-1. [D][✘] buy birthday gift for friend  (by: 30 Aug 2020 6:00PM)
-------------------------------------------------------
+1. [D][✘] buy birthday gift for mom  (by: 25 Sep 2020 6:00PM)
+--------------------------------------------------------------------------------------------------------------------------
 The following task has been added: 
-2. [E][✘] family dinner with uncle  (at: 12 Dec 2020 7:00PM)
-------------------------------------------------------
-1. [T][✘] buy keyboard
-2. [D][✘] buy birthday gift for friend  (by: 30 Aug 2020 6:00PM)
-3. [E][✘] family dinner with uncle  (at: 12 Dec 2020 7:00PM)
-------------------------------------------------------
+2. [E][✘] internship guidance webinar  (at: 20 Sep 2020 6:30PM)
+--------------------------------------------------------------------------------------------------------------------------
+Here are your current tasks: 
+1. [T][✘] plan modules for exchange
+2. [D][✘] buy birthday gift for mom  (by: 25 Sep 2020 6:00PM)
+3. [E][✘] internship guidance webinar  (at: 20 Sep 2020 6:30PM)
+--------------------------------------------------------------------------------------------------------------------------
 The following task has been marked as done: 
-2. [D][✓] buy birthday gift for friend  (by: 30 Aug 2020 6:00PM)
-------------------------------------------------------
-1. [T][✘] buy keyboard
-2. [D][✓] buy birthday gift for friend  (by: 30 Aug 2020 6:00PM)
-3. [E][✘] family dinner with uncle  (at: 12 Dec 2020 7:00PM)
-------------------------------------------------------
-command.Command description cannot be empty
-------------------------------------------------------
-I can't help you with that request, try something else.
-------------------------------------------------------
+2. [D][✓] buy birthday gift for mom  (by: 25 Sep 2020 6:00PM)
+--------------------------------------------------------------------------------------------------------------------------
+Here are your current tasks: 
+1. [T][✘] plan modules for exchange
+2. [D][✓] buy birthday gift for mom  (by: 25 Sep 2020 6:00PM)
+3. [E][✘] internship guidance webinar  (at: 20 Sep 2020 6:30PM)
+--------------------------------------------------------------------------------------------------------------------------
+The following task has been added: 
+3. [T][✘] find internship
+--------------------------------------------------------------------------------------------------------------------------
+Here are your search results: 
+1. [E][✘] internship guidance webinar  (at: 20 Sep 2020 6:30PM)
+2. [T][✘] find internship
+--------------------------------------------------------------------------------------------------------------------------
+No tasks match your query, try searching for something else.
+--------------------------------------------------------------------------------------------------------------------------
 The following task has been deleted: 
-2. [D][✓] buy birthday gift for friend  (by: 30 Aug 2020 6:00PM)
-------------------------------------------------------
-1. [T][✘] buy keyboard
-2. [E][✘] family dinner with uncle  (at: 12 Dec 2020 7:00PM)
-------------------------------------------------------
+1. [T][✘] plan modules for exchange
+--------------------------------------------------------------------------------------------------------------------------
+Here are your current tasks: 
+1. [D][✓] buy birthday gift for mom  (by: 25 Sep 2020 6:00PM)
+2. [E][✘] internship guidance webinar  (at: 20 Sep 2020 6:30PM)
+3. [T][✘] find internship
+--------------------------------------------------------------------------------------------------------------------------
+Command description cannot be empty
+--------------------------------------------------------------------------------------------------------------------------
+You have no such task. Please check your task number.
+--------------------------------------------------------------------------------------------------------------------------
+You have no such task. Please check your task number.
+--------------------------------------------------------------------------------------------------------------------------
+Be sure to include a task description and date in the correct format.
+--------------------------------------------------------------------------------------------------------------------------
+Be sure to include a task description and date in the correct format.
+--------------------------------------------------------------------------------------------------------------------------
+Alright, call me again if you need me.
