@@ -39,7 +39,9 @@ public class Storage {
      */
     public TaskList loadData(UI ui) {
         Path path = FileSystems.getDefault().getPath(filepath);
-        if (!Files.exists(path)) return new TaskList();
+        if (!Files.exists(path)) {
+            return new TaskList();
+        }
 
         try {
             TaskList taskList = new TaskList();
