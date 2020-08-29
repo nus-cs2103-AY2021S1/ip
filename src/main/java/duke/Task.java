@@ -3,7 +3,7 @@ package duke;
 import java.io.Serializable;
 
 /**
- * Task class is a parent
+ * Task class is a parent.
  */
 public class Task implements Serializable {
     protected boolean isComplete;
@@ -17,7 +17,7 @@ public class Task implements Serializable {
     }
 
     /**
-     * To change the status of a Task to done
+     * To change the status of a Task to done.
      * @return A completed Task object
      */
     // mark a task as complete

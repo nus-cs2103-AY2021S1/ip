@@ -4,7 +4,7 @@ import duke.Storage;
 import duke.TaskList;
 
 /**
- * ByeCommand class handles instructions when user wants to exit the script
+ * ByeCommand class handles instructions when user wants to exit the script.
  */
 
 public class ByeCommand extends Command {
@@ -13,7 +13,7 @@ public class ByeCommand extends Command {
     }
 
     /**
-     * Runs the "bye" command
+     * Runs the "bye" command.
      * @param command User input
      * @param list TaskList object containing all tasks
      * @param storage Storage object that reads and writes to duke.ser

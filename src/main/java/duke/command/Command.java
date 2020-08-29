@@ -4,7 +4,7 @@ import duke.Storage;
 import duke.TaskList;
 
 /**
- * Parent Command class
+ * Parent Command class.
  */
 
 public class Command {
@@ -17,6 +17,7 @@ public class Command {
         this.list = list;
         this.storage = storage;
     }
+
     // empty command
     public Command() {
         this.command = null;
@@ -25,7 +26,7 @@ public class Command {
     }
 
     /**
-     * To be overriden by subclasses
+     * To be overriden by subclasses.
      * @param command User input
      * @param list TaskList object containing all tasks
      * @param storage Storage object that reads and writes to duke.ser

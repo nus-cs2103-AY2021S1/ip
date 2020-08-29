@@ -5,7 +5,7 @@ import duke.Storage;
 import duke.TaskList;
 
 /**
- * DeadlineCommand class handles instructions when user wants to create Deadline
+ * DeadlineCommand class handles instructions when user wants to create Deadline.
  */
 
 public class DeadlineCommand extends Command {
@@ -14,7 +14,7 @@ public class DeadlineCommand extends Command {
     }
 
     /**
-     * Adds a Deadline object to TaskList object
+     * Adds a Deadline object to TaskList object.
      * @param command User input
      * @param list TaskList object containing all tasks
      * @param storage Storage object that reads and writes to duke.ser

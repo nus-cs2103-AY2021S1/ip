@@ -6,11 +6,11 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
- * Ui class is an Event Handler that reads user input and dictates the outcome
+ * Ui class is an Event Handler that reads user input and dictates the outcome.
  */
 public class Ui {
     /**
-     * Shows initial start up ASCII art of Duke
+     * Shows initial start up ASCII art of Duke.
      */
     public void showWelcome() {
         String horizontalLine = "____________________________________\n";
@@ -29,21 +29,19 @@ public class Ui {
     }
 
     /**
-     * Shows when there is an error accessing and loading duke.ser
+     * Shows when there is an error accessing and loading duke.ser.
      */
     public void showLoadingError() {
         System.out.println("☹ AIYO!!! I cannot load the file sia...");
     }
 
     /**
-     * Runs and starts the Duke bot
+     * Runs and starts the Duke bot.
      * @param list Loaded list of Tasks
      * @param storage Storage object that has access to duke.ser
      * @throws Exception File not found
      */
     public void initialise(TaskList list, Storage storage) throws Exception {
-        String horizontalLine = "____________________________________\n";
-        List<Task> todo_list = list.getList();
         showWelcome();
         boolean isExit = false;
         Scanner sc = new Scanner(System.in);

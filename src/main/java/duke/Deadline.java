@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Deadline class represents a task with a specified deadline
+ * Deadline class represents a task with a specified deadline.
  */
 public class Deadline extends Task {
     private LocalDate date;
@@ -24,7 +24,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Converts time in String format to LocalDate format
+     * Converts time in String format to LocalDate format.
      * @param time A String represented as "yyyy-MM-d"
      * @return A LocalDate object
      */

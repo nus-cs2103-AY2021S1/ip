@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Event class represents a task with a specific time
+ * Event class represents a task with a specific time.
  */
 public class Event extends Task {
     private LocalDate time;
@@ -20,7 +20,7 @@ public class Event extends Task {
     }
 
     /**
-     * Returns time of Event
+     * Returns time of Event.
      * @return Time as LocalDate object
      */
     public LocalDate getTime() {
@@ -28,7 +28,7 @@ public class Event extends Task {
     }
 
     /**
-     * Converts time in String format to LocalDate format
+     * Converts time in String format to LocalDate format.
      * @param time A String represented as "yyyy-MM-d"
      * @return A LocalDate object
      */

@@ -1,13 +1,21 @@
 package duke;
 
-import duke.command.*;
+import duke.command.Command;
+import duke.command.ByeCommand;
+import duke.command.DeadlineCommand;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.EventCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
+import duke.command.TodoCommand;
 
 /**
- * Parser class handles any incoming user input and generates the appropriate command
+ * Parser class handles any incoming user input and generates the appropriate command.
  */
 public class Parser {
     /**
-     * Genereating a Command object based on user input
+     * Generating a Command object based on user input.
      * @param command User input as String
      * @param list Current list of tasks
      * @param storage Access to duke.ser
@@ -16,7 +24,7 @@ public class Parser {
     public static Command parse(String command, TaskList list, Storage storage) {
         String horizontalLine = "____________________________________\n";
         Command c = new Command();
-        try{
+        try {
             if (command.equals("bye")) {
                 c = new ByeCommand(command, list, storage);
             } else if (command.equals("list")) {

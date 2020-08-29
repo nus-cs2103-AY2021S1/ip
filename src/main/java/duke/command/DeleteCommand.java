@@ -4,7 +4,7 @@ import duke.Storage;
 import duke.TaskList;
 
 /**
- * DeleteCommand class handles instructions when user wants to delete task
+ * DeleteCommand class handles instructions when user wants to delete task.
  */
 
 public class DeleteCommand extends Command {
@@ -13,7 +13,7 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Deletes specified task
+     * Deletes specified task.
      * @param command User input
      * @param list TaskList object containing all tasks
      * @param storage Storage object that reads and writes to duke.ser

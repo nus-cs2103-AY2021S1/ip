@@ -1,7 +1,7 @@
 package duke;
 
 /**
- * Main class to run Ui object and listen for user input
+ * Main class to run Ui object and listen for user input.
  */
 public class Duke {
 
