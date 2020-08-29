@@ -1,7 +1,6 @@
-import tasks.Task;
-
 import java.util.ArrayList;
 
+import tasks.Task;
 /**
  * An object which contains the list of tasks a user needs to do
  */
@@ -12,31 +11,31 @@ public class TaskList {
      * Initialized the arraylist with a list of tasks
      * @param tasks The list of tasks provided
      */
-    public TaskList(ArrayList<Task> tasks){
+    public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
     }
 
-    public ArrayList<Task> getTasks(){
+    public ArrayList<Task> getTasks() {
         return this.tasks;
     }
 
-    public void update(Task task){
+    public void update(Task task) {
         tasks.add(task);
     }
 
-    public Task get(int i){
+    public Task get(int i) {
         return tasks.get(i - 1);
     }
 
-    public void delete(int i){
+    public void delete(int i) {
         tasks.remove(i - 1);
     }
 
-    public void updateStatus(int i){
+    public void updateStatus(int i) {
         tasks.get(i - 1).updateStatus();
     }
 
-    public int getSize(){
+    public int getSize() {
         return tasks.size();
     }
 
@@ -44,11 +43,11 @@ public class TaskList {
      * The tasklist has to be converted into a String format that is easily parsable when the file is reopened
      * @return String in a format that easily parsable upon reopening the file
      */
-    public String save(){
+    public String save() {
         StringBuilder line = new StringBuilder();
-        for (Task task : tasks){
+        for (Task task : tasks) {
             String append = "";
-            if (!task.istodo()){
+            if (!task.istodo()) {
                 append = task.description() + task.getWork() + "|" + task.getDate() + "\n";
             } else {
                 append = task.description() + task.getWork() + "\n";
@@ -58,7 +57,11 @@ public class TaskList {
         return line.toString();
     }
 
-    public String toString(){
+    /**
+     * Overriding the default toString method
+     * @return String which prints out the taskList
+     */
+    public String toString() {
         StringBuilder line = new StringBuilder();
         for (Task task : tasks) {
             line.append(task.toString());

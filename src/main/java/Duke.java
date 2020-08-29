@@ -11,7 +11,7 @@ public class Duke {
      * Uses the filepath to intiialize the storage and hence, the UI object
      * @param filePath
      */
-    public Duke(String filePath){
+    public Duke(String filePath) {
         Storage storage = new Storage(filePath);
         this.ui = new UI(storage);
     }
@@ -19,7 +19,7 @@ public class Duke {
     /**
      * Looks for user input using the UI object
      */
-    public void run(){
+    public void run() {
         ui.welcome();
         ui.run();
         ui.escape();

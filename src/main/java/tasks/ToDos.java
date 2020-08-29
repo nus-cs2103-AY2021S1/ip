@@ -6,11 +6,11 @@ public class ToDos extends Task {
         super(work);
     }
 
-    public String toString(){
+    public String toString() {
         return "[T]" + super.toString();
     }
 
-    public boolean istodo(){
+    public boolean istodo() {
         return true;
     }
 }

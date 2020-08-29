@@ -1,16 +1,16 @@
+import java.util.Scanner;
+
 import exceptions.InvalidDeadlineException;
 import exceptions.InvalidEventException;
 import exceptions.InvalidNumberException;
 import exceptions.UnknownCommandException;
 
-import java.util.Scanner;
-
 /**
  * The User Interface Object with a scanner and storage object that takes in and stores user input
  */
 public class UI {
-    Scanner sc;
-    Storage storage;
+    private Scanner sc;
+    private Storage storage;
 
     /**
      * Initializes a UI object with the ability to scan for user input and store it
@@ -26,8 +26,8 @@ public class UI {
      */
     public void welcome() {
         System.out.println("_____________________________");
-        System.out.println("Hello! I'm Duke\n" +
-                "What can I do for you?");
+        System.out.println("Hello! I'm Duke\n"
+                + "What can I do for you?");
         System.out.println("_____________________________");
     }
 
@@ -57,30 +57,30 @@ public class UI {
                     try {
                         Parser.getDeadline(input, list);
                     } catch (InvalidDeadlineException ex) {
-                        System.out.println("Oops, somewhere your deadline was wrong. " +
-                                "Please check whether you used a /by tag");
+                        System.out.println("Oops, somewhere your deadline was wrong. "
+                                + "Please check whether you used a /by tag");
                         System.out.println("_____________________________");
                     }
                 } else if (request[0].equals("event")) {
                     try {
                         Parser.getEvent(input, list);
                     } catch (InvalidEventException ex) {
-                        System.out.println("Oops seems like your event is invalid. " +
-                                "Please check your /at tag");
+                        System.out.println("Oops seems like your event is invalid. "
+                                + "Please check your /at tag");
                         System.out.println("_____________________________");
                     }
-                } else if (request[0].equals("find")){
+                } else if (request[0].equals("find")) {
                     try {
                         Parser.find(input, list);
-                    } catch (InvalidNumberException ex){
+                    } catch (InvalidNumberException ex) {
                         System.out.println("More than one keyword was entered");
                     }
                 } else {
                     Parser.delete(request[1], list);
                 }
             } catch (UnknownCommandException ex) {
-                System.out.println("OOPS!!! I'm sorry, but I don't know what that means :-(\n" +
-                        "_____________________________");
+                System.out.println("OOPS!!! I'm sorry, but I don't know what that means :-(\n"
+                        + "_____________________________");
             }
             input = sc.nextLine();
         }
@@ -89,10 +89,10 @@ public class UI {
     /**
      * Stores the resultant tasklist in a file and prints a simple goodbye message for the user
      */
-    public void escape(){
+    public void escape() {
         storage.save();
         System.out.println("_____________________________");
-        System.out.println("Bye. Hope to see you again soon!\n" +
-                "_____________________________");
+        System.out.println("Bye. Hope to see you again soon!\n"
+                + "_____________________________");
     }
 }
