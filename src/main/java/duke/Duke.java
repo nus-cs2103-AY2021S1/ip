@@ -10,6 +10,8 @@ import duke.component.TaskList;
 import duke.component.CliUi;
 import duke.component.Ui;
 
+import java.io.InputStream;
+
 /**
  * Is the Main class of this program.
  */

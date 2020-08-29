@@ -26,7 +26,7 @@ public class App extends Application {
     private String buttonLabel = "Start";
 
     String home = System.getProperty("user.home");
-    java.nio.file.Path path = java.nio.file.Paths.get(home, "Desktop", "cs2103", "ip", "data");
+    java.nio.file.Path path = java.nio.file.Paths.get(home, "Desktop", "cs2103", "ip", "data", "tasks.txt");
     private Duke runningDuke = new Duke(path.toString(), false);
 
     @Override

@@ -32,10 +32,10 @@ public class ActualStorage implements Storage {
         Scanner sc = new Scanner(file);
         while (sc.hasNext()) {
             String taskType = sc.next();
-            String description = sc.next();
+            sc.next();
             int done = sc.nextInt();
-            description = sc.next();
-            description = sc.nextLine();
+            sc.next();
+            String description = sc.nextLine();
             int i = 0;
             while (description.charAt(i) == ' ') {
                 i++;
