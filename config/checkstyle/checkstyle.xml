@@ -29,13 +29,13 @@
     <property name="file" value="${config_loc}/suppressions.xml"/>
   </module>
 
-  <!-- All Java AST specific tests live under TreeWalker module. -->
-  <module name="TreeWalker">
-  
-    <module name="LineLength">
+  <module name="LineLength">
     <!-- Checks if a line is too long. -->
     <property name="max" value="120"/>
-	</module>
+  </module>
+
+  <!-- All Java AST specific tests live under TreeWalker module. -->
+  <module name="TreeWalker">
 
     <!-- Required to allow exceptions in code style -->
     <module name="SuppressionCommentFilter">
