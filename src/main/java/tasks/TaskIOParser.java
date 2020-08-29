@@ -27,9 +27,8 @@ public class TaskIOParser {
 
     /**
      * Load tasks from a text file into memory
-     *
      * @return A read text file of tasks to Tasklist
-     * @throws DukeIOException
+     * @throws DukeIOException if there is an error in reading a file from disk
      */
     public List<Task> loadTaskList() throws DukeIOException {
         List<Task> tasks = new ArrayList<>();
@@ -67,15 +66,19 @@ public class TaskIOParser {
 
     /**
      * For initialising new TaskList
-     *
      * @return returns a new List<Task>
      */
     public List<Task> loadNewTaskList() {
         return new ArrayList<>();
     }
 
-    public void writeTask(List<Task> taskList) throws DukeIOException {
-        if (!saveFile.exists()) {
+    /**
+     * Writes the task list into a textfile
+     * @param taskList the given list of tasks.
+     * @throws DukeIOException If there is a IO error in creating or writing to the file.
+     */
+    public void writeTask(List<Task> taskList) throws DukeIOException{
+        if ( ! saveFile.exists()) {
             try {
                 Files.createDirectory(Path.of(saveFile.getPath()));
                 Files.createFile(Path.of(saveFile.getPath()).resolve(SAVEFILE));

@@ -4,6 +4,9 @@ import exceptions.*;
 
 import java.util.List;
 
+/**
+ * TaskManager is a class to handle where 
+ */
 public class TaskManager {
     private final List<Task> taskList;
     private final TaskIOParser ioparser;

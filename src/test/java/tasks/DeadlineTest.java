@@ -8,7 +8,9 @@ import java.time.LocalDate;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-
+/**
+ * Class to test Deadline and TimedTask class 
+ */
 public class DeadlineTest {
     @Test
     public void testDeadlineClassConstructor_invalidString_throwsDukeDateTimeException() {

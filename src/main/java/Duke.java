@@ -10,6 +10,11 @@ class Duke {
     private final TaskManager taskManager;
     private final TextParser textParser;
 
+    /**
+     * Constructor for the Duke Chatbot, if is old initialisation, will read from txt file
+     * Eles it will initialise a new TaskManager class
+     * @param path The path of the home initialisation.
+     */
     public Duke(String path) {
         TaskManager list1;
         try {
@@ -22,8 +27,8 @@ class Duke {
     }
 
     /**
-     * Re
-     *
+     * Manages all internal dataflow from Main or textual interaction
+     * with the chatbot, by cleaning it
      * @param input
      * @return String form of command to output to UI
      * @throws DukeUnknownException
@@ -95,6 +100,7 @@ class Duke {
 
     /**
      * Greeting from Duke Bot
+     * @param name Name of the user
      * @return Sends a greeting from dukebot to the user
      */
     String greeting(String name) {
@@ -111,9 +117,26 @@ class Duke {
         return logo;
     }
 
-    String goodbye(String name) {
-        return "Bye " + name + "! Hope to see you again soon!";
+    /**
+     * Goodbye from DukeBot
+     * @param name Name of the user
+     * @return Sends a goodbye message from dukebot to the user
+     */
+    String goodbye(String name){
+        return "Bye " + name +"! Hope to see you again soon!";
     }
+    /**
+     * Wraps all text output and prints to the console
+     * @param s
+     */
+    private void print(String s){
+        System.out.printf("%s%s\n%s%n",linebreaker,s,linebreaker);
+    }
+
+    /**
+     * Message passing from mainloop to save tasks.
+     * @throws DukeIOException
+     */
 
     void saveTasks() throws DukeIOException {
         this.taskManager.saveTasks();
