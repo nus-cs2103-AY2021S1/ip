@@ -1,3 +1,5 @@
+package seedu.duke;
+
 /**
  * Represents exceptions for the Duke program
  */

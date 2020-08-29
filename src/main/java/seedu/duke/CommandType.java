@@ -1,3 +1,5 @@
+package seedu.duke;
+
 /**
  * Represents the different types of command that the user can input
  */

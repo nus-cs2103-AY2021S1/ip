@@ -1,3 +1,5 @@
+package seedu.duke;
+
 /**
  * Represents a command to exit from the program.
  */

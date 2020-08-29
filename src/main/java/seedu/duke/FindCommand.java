@@ -1,3 +1,5 @@
+package seedu.duke;
+
 /**
  * Represents a command to find all the tasks with a particular keyword.
  */

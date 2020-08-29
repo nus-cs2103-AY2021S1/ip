@@ -1,3 +1,5 @@
+package seedu.duke;
+
 /**
  * Represents the chat bot program
  */

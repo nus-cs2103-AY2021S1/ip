@@ -1,3 +1,5 @@
+package seedu.duke;
+
 /**
  * Represents a Todo that the user has.
  */

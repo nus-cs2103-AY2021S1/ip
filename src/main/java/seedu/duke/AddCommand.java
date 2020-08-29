@@ -1,3 +1,5 @@
+package seedu.duke;
+
 /**
  * Represents a command to add a task to the task list.
  */

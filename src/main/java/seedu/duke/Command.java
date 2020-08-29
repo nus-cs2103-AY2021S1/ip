@@ -1,3 +1,5 @@
+package seedu.duke;
+
 /**
  * Represents an executable command that can be given by the user.
  */

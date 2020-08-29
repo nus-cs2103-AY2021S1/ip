@@ -1,3 +1,5 @@
+package seedu.duke;
+
 /**
  * Represents a command to mark a task as done.
  */

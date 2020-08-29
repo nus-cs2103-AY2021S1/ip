@@ -1,3 +1,5 @@
+package seedu.duke;
+
 /**
  * Represents a command to delete a task from the task list.
  */

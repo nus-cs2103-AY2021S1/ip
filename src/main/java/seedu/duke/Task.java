@@ -1,3 +1,5 @@
+package seedu.duke;
+
 /**
  * Represents a task that the user has to do.
  */
