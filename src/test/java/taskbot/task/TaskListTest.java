@@ -196,9 +196,37 @@ public class TaskListTest {
 
             taskList = new TaskList(tasks);
 
-            taskList.findTasks("run");
+            String[] keywords = new String[]{"run"};
+            taskList.findTasks(keywords);
             String expected = "Here are the matching tasks in your list:\n"
                     + "1. [✗] Run\n"
+                    + "2. [✗] run\n"
+                    + "3. [✗] run away\n";
+            assertEquals(expected, outContent.toString());
+
+            //Reset the TaskList
+            taskList = new TaskList(tasks);
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void testFindTasksMultipleKeywords() {
+        try {
+            ArrayList<Task> tasks = new ArrayList<>();
+
+            tasks.add(new TaskStub("walk"));
+            tasks.add(new TaskStub("run"));
+            tasks.add(new TaskStub("run away"));
+            tasks.add(new TaskStub("not printed"));
+
+            taskList = new TaskList(tasks);
+
+            String[] keywords = new String[]{"run", "walk"};
+            taskList.findTasks(keywords);
+            String expected = "Here are the matching tasks in your list:\n"
+                    + "1. [✗] walk\n"
                     + "2. [✗] run\n"
                     + "3. [✗] run away\n";
             assertEquals(expected, outContent.toString());

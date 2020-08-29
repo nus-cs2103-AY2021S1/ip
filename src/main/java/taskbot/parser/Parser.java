@@ -65,7 +65,9 @@ public class Parser {
             if (commandArgs.length == 1 || commandArgs[1].strip().length() == 0) {
                 throw new EmptyArgumentException("Please enter a keyword to search for.");
             }
-            return new FindCommand(commandArgs[1]);
+            //Splits the input into multiple keywords if possible
+            String[] keywords = commandArgs[1].split(" ");
+            return new FindCommand(keywords);
         case "done":
             if (commandArgs.length == 1 || commandArgs[1].strip().length() == 0) {
                 throw new EmptyArgumentException("Please enter the index of the task you wish to complete.");
