@@ -5,15 +5,15 @@ import java.util.Scanner;
 /**
  * UI class.
  * Handles input from user.
- * Contains task list, storage and parser
+ * Contains task list, storage and parser.
  *
  * @author YanCheng
  */
 public class Ui {
 
-    public TaskList taskList;
-    public Storage storage;
-    public Parser parser;
+    private TaskList taskList;
+    private Storage storage;
+    private Parser parser;
 
     /**
      * Constructor for Ui class.
@@ -29,6 +29,7 @@ public class Ui {
 
     /**
      * Prompts user for input and delegates input to Parser.
+     * For use with CLI.
      */
     public void echo() {
 
@@ -96,6 +97,12 @@ public class Ui {
         sc.close();
     }
 
+    /**
+     * Reads input from the user through the GUI and parses the input.
+     * For use with Duke GUI.
+     * @param input User input
+     * @return Output to be displayed to user
+     */
     public String readCommand(String input) {
 
         if (input.equals("bye")) {

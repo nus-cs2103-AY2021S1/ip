@@ -36,12 +36,11 @@ public class Duke extends Application {
             "event <task name> /at YYYY-MM-DD TT:TT-TT:TT : adds an Event task\n" +
             "Do note that Date and Time must have the specified format\n";
     private Stage window;
-    private Scene helpScene;
     // output
     private TextArea outputTextArea = new TextArea("Hello! I'm Duke. \nWhat can I do for you?");
 
     /**
-     * Method to start JavaFX
+     * Starts Duke GUI
      * @param stage Window that is to be launched
      * @throws Exception If any exception occurs during the process
      */
@@ -49,7 +48,7 @@ public class Duke extends Application {
     public void start(Stage stage) throws Exception {
         // stage is window
         window = stage;
-        window.setTitle("Duke Chat-bot");
+        window.setTitle("Duke Chat-Bot");
 
         GridPane grid = new GridPane();
         grid.setPadding(new Insets(10, 10, 10, 10));

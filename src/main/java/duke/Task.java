@@ -8,8 +8,8 @@ package duke;
  */
 
 public abstract class Task {
-    public String taskName;
-    public boolean isDone;
+    protected String taskName;
+    protected boolean isDone;
 
     /**
      * Constructor for Task.

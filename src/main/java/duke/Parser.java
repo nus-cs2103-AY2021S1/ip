@@ -2,7 +2,7 @@ package duke;
 
 /**
  * Parser class.
- * Used to parse commands input by user.
+ * Parses commands input by user.
  * Contains task list and storage.
  *
  * @author YanCheng

@@ -14,7 +14,7 @@ import java.time.format.DateTimeParseException;
  */
 public class Deadline extends Task {
 
-    LocalDate date;
+    private LocalDate date;
 
     /**
      * Constructor for Deadline
@@ -33,7 +33,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Return deadline information to be stored locally.
+     * Returns deadline information to be stored locally.
      * @return deadline information
      */
     @Override

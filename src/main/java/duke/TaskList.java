@@ -5,12 +5,12 @@ import java.util.ArrayList;
 /**
  * TaskList class.
  * Stores Task objects in an ArrayList.
- * Contains array list
+ * Contains an array list.
  *
  * @author YanCheng
  */
 public class TaskList {
-    public ArrayList<Task> list;
+    private ArrayList<Task> list;
 
     /**
      * Constructor for TaskList.

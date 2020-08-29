@@ -15,9 +15,9 @@ import java.time.format.DateTimeParseException;
  */
 public class Event extends Task {
 
-    LocalDate date;
-    LocalTime startTime;
-    LocalTime endTime;
+    private LocalDate date;
+    private LocalTime startTime;
+    private LocalTime endTime;
 
     /**
      * Constructor for Event

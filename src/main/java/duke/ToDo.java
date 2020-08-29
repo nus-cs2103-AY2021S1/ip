@@ -20,7 +20,7 @@ public class ToDo extends Task {
     }
 
     /**
-     * Return to do information to be stored locally.
+     * Returns to do information to be stored locally.
      * @return to do information
      */
     @Override
