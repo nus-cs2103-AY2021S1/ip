@@ -1,4 +1,4 @@
-package main.java.duke.exception;
+package duke.exception;
 
 /**
  * Represents an exception in program operations when file is not found.

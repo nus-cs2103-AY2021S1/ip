@@ -1,7 +1,7 @@
-package main.java.duke;
+package duke;
 
-import main.java.duke.command.Command;
-import main.java.duke.exception.DukeException;
+import duke.command.Command;
+import duke.exception.DukeException;
 
 /**
  * Represents a Duke chat bot.

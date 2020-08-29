@@ -1,9 +1,9 @@
-package main.java.duke.command;
+package duke.command;
 
-import main.java.duke.Storage;
-import main.java.duke.TaskList;
-import main.java.duke.Ui;
-import main.java.duke.task.Event;
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
+import duke.task.Event;
 
 /**
  * Represents a command which creates a task with an event.
@@ -31,7 +31,6 @@ public class EventCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         String at = commandDetails[1].split(" ", 2)[1];
-        System.out.println(" Got it. I've added this task: ");
         Event event = new Event(commandDetails[0], at);
         tasks.getTasks().add(event);
         ui.showTask(event, tasks.getTasks().size());

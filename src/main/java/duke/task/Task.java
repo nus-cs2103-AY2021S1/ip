@@ -1,4 +1,4 @@
-package main.java.duke.task;
+package duke.task;
 
 /**
  * Represents a task.
@@ -23,7 +23,7 @@ public class Task {
      * @return Tick or X symbols
      */
     public String getStatusIcon() {
-        return (isDone ? "\u2713" : "\u2718");
+        return (isDone ? "✓" : "X");
     }
 
     /**

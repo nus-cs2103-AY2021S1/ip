@@ -1,9 +1,9 @@
-import main.java.duke.Parser;
-import main.java.duke.Storage;
-import main.java.duke.TaskList;
-import main.java.duke.Ui;
-import main.java.duke.exception.DukeException;
-import main.java.duke.task.ToDo;
+import duke.Parser;
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
+import duke.exception.DukeException;
+import duke.task.ToDo;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -62,7 +62,7 @@ public class CommandTest {
         TaskList taskList = new TaskList();
         Parser.parse("todo read book").execute(taskList, new Ui(), new Storage("invalidPath/task.txt"));
 
-        assertEquals("Got it. I've added this task: " + System.lineSeparator() + "   [T][✘] read book "
+        assertEquals("Got it. I've added this task: " + System.lineSeparator() + "   [T][X] read book "
                 + "\n Now you have 1 tasks in the list.", outputStreamCaptor.toString().trim());
     }
 
@@ -72,7 +72,7 @@ public class CommandTest {
         Parser.parse("deadline return book /by 2/12/2019 1800").execute(taskList, new Ui(), new Storage("invalidPath/task.txt"));
 
         assertEquals("Got it. I've added this task: " + System.lineSeparator()
-                + "   [D][✘] return book  (by: Dec 2 2019 1800 PM) "
+                + "   [D][X] return book  (by: Dec 2 2019 6:00 PM) "
                 + "\n Now you have 1 tasks in the list.", outputStreamCaptor.toString().trim());
     }
 
@@ -82,7 +82,7 @@ public class CommandTest {
         Parser.parse("event return book /at 2/12/2019 4-6pm").execute(taskList, new Ui(), new Storage("invalidPath/task.txt"));
 
         assertEquals("Got it. I've added this task: " + System.lineSeparator()
-                + "   [E][✘] return book  (at: 2/12/2019 4-6pm) "
+                + "   [E][X] return book  (at: 2/12/2019 4-6pm) "
                 + "\n Now you have 1 tasks in the list.", outputStreamCaptor.toString().trim());
     }
 

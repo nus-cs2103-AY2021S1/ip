@@ -1,9 +1,9 @@
-package main.java.duke.command;
+package duke.command;
 
-import main.java.duke.Storage;
-import main.java.duke.TaskList;
-import main.java.duke.Ui;
-import main.java.duke.task.ToDo;
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
+import duke.task.ToDo;
 
 /**
  * Represents a command which creates a task with a todo.

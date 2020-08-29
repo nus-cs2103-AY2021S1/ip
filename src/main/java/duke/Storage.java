@@ -1,10 +1,10 @@
-package main.java.duke;
+package duke;
 
-import main.java.duke.exception.DukeFileNotFoundException;
-import main.java.duke.task.Deadline;
-import main.java.duke.task.Event;
-import main.java.duke.task.Task;
-import main.java.duke.task.ToDo;
+import duke.exception.DukeFileNotFoundException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
 
 import java.io.File;
 import java.io.FileNotFoundException;

@@ -1,10 +1,10 @@
-package main.java.duke.command;
+package duke.command;
 
-import main.java.duke.Storage;
-import main.java.duke.TaskList;
-import main.java.duke.Ui;
-import main.java.duke.exception.DukeTaskNotFoundException;
-import main.java.duke.task.Task;
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
+import duke.exception.DukeTaskNotFoundException;
+import duke.task.Task;
 
 /**
  * Represents a command which deletes a task.

@@ -1,6 +1,6 @@
-import main.java.duke.Duke;
-import main.java.duke.exception.DukeException;
-import main.java.duke.Parser;
+import duke.Duke;
+import duke.exception.DukeException;
+import duke.Parser;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -29,7 +29,7 @@ public class DukeTest {
         } catch (DukeException e) {
             System.out.println(e.getMessage());
         }
-        assertEquals("ERROR... INPUT NOT RECOGNIZED. \n PLEASE TRY AGAIN",
+        assertEquals("ERROR... INPUT NOT RECOGNIZED. \n PLEASE TRY AGAIN.",
                 outputStreamCaptor.toString().trim());
     }
 
@@ -37,7 +37,7 @@ public class DukeTest {
     public void duke_invalidPath_success() {
         new Duke("invalidPath/task.txt");
 
-        assertEquals("ERROR DETECTED! UNABLE TO LOAD PROGRAM. \n SYSTEM SHUTTING DOWN",
+        assertEquals("ERROR DETECTED! UNABLE TO LOAD TASKLIST. \n CREATING NEW TASKLIST",
                 outputStreamCaptor.toString().trim());
     }
 

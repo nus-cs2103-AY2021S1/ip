@@ -1,17 +1,17 @@
-package main.java.duke;
+package duke;
 
-import main.java.duke.command.ByeCommand;
-import main.java.duke.command.Command;
-import main.java.duke.command.DeadlineCommand;
-import main.java.duke.command.ListCommand;
-import main.java.duke.command.DeleteCommand;
-import main.java.duke.command.UndoCommand;
-import main.java.duke.command.EventCommand;
-import main.java.duke.command.DoneCommand;
-import main.java.duke.command.ToDoCommand;
-import main.java.duke.command.FindCommand;
-import main.java.duke.exception.DukeInputNotRecognizedException;
-import main.java.duke.exception.DukeTaskNotFoundException;
+import duke.command.ByeCommand;
+import duke.command.Command;
+import duke.command.DeadlineCommand;
+import duke.command.ListCommand;
+import duke.command.DeleteCommand;
+import duke.command.UndoCommand;
+import duke.command.EventCommand;
+import duke.command.DoneCommand;
+import duke.command.ToDoCommand;
+import duke.command.FindCommand;
+import duke.exception.DukeInputNotRecognizedException;
+import duke.exception.DukeTaskNotFoundException;
 
 /**
  * Parses the input by the user.
