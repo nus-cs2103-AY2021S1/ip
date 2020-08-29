@@ -22,7 +22,7 @@ public class Duke {
     /**
      * UI created to interact with user.
      */
-    private final UI ui;
+    public static UI ui;
 
     /**
      * Creates Focus to set up the things needed.
@@ -71,9 +71,20 @@ public class Duke {
     /**
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
+     * @return
      */
     public String getResponse(String input) {
-        return "Duke heard: " + input;
+        boolean exit;
+        Command command = Parser.parse(input);
+        exit = command.isExit();
+        if (exit) {
+            return ui.exitFocus();
+        }
+        try {
+            return command.execute(input, taskList, storage);
+        } catch (DukeException e) {
+            return e.getMessage();
+        }
     }
 
     /**

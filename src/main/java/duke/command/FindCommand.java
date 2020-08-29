@@ -9,16 +9,16 @@ public class FindCommand extends Command {
         return false;
     }
 
-    public void execute(String input, TaskList taskList, Storage storage) throws DukeException {
+    public String execute(String input, TaskList taskList, Storage storage) throws DukeException {
         String keyword;
         try {
             keyword = input.split("find")[1];
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeException("\tPlease enter a keyword you wish to find!");
+            throw new DukeException("Please enter a keyword you wish to find!");
         }
         if (keyword.isBlank()) {
-            throw new DukeException("\tPlease enter a keyword you wish to find!");
+            throw new DukeException("Please enter a keyword you wish to find!");
         }
-        taskList.findTasks(keyword.trim());
+        return taskList.findTasks(keyword.trim());
     }
 }
