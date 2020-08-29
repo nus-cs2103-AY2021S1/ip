@@ -1,4 +1,4 @@
 D | 1 | return book | 2020-01-11
 D | 1 | finish homework | 2020-08-31 7pm
-D | 0 | read book | 2020-08-31 6pm
+D | 1 | read book | 2020-08-31 6pm
 E | 0 | training | 2020-08-31 6pm
