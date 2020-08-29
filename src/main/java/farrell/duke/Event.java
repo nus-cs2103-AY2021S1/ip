@@ -9,7 +9,7 @@ import java.time.format.FormatStyle;
  */
 public class Event extends Task {
     /** The time when the event is occurring */
-    LocalDate time;
+    private LocalDate time;
 
     Event(String description, LocalDate time) {
         this(description, false, time);
@@ -19,6 +19,10 @@ public class Event extends Task {
         super(description, isDone);
         taskType = TaskType.EVENT;
         this.time = time;
+    }
+
+    public LocalDate getTime() {
+        return time;
     }
 
     @Override

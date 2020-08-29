@@ -35,23 +35,25 @@ public class DataManager {
                 case TODO:
                     ToDo todo = (ToDo) task;
                     stringToWrite = todo.taskType.name() + "|"
-                            + (todo.isDone ? "true" : "false") + "|"
-                            + todo.description;
+                            + (todo.isDone() ? "true" : "false") + "|"
+                            + todo.getDescription();
                     break;
                 case EVENT:
                     Event event = (Event) task;
                     stringToWrite = event.taskType.name() + "|"
-                            + (event.isDone ? "true" : "false") + "|"
-                            + event.description + "|"
-                            + event.time.format(DateTimeFormatter.ISO_LOCAL_DATE);
+                            + (event.isDone() ? "true" : "false") + "|"
+                            + event.getDescription() + "|"
+                            + event.getTime().format(DateTimeFormatter.ISO_LOCAL_DATE);
                     break;
                 case DEADLINE:
                     Deadline deadline = (Deadline) task;
                     stringToWrite = deadline.taskType.name() + "|"
-                            + (deadline.isDone ? "true" : "false") + "|"
-                            + deadline.description + "|"
-                            + deadline.time.format(DateTimeFormatter.ISO_LOCAL_DATE);
+                            + (deadline.isDone() ? "true" : "false") + "|"
+                            + deadline.getDescription() + "|"
+                            + deadline.getTime().format(DateTimeFormatter.ISO_LOCAL_DATE);
                     break;
+                default:
+                    throw new DukeException("Invalid Task Type Encountered.");
                 }
                 fw.write(stringToWrite + "\n");
             }
@@ -70,7 +72,7 @@ public class DataManager {
     public TaskList load() throws DukeException {
         File dataFile = new File(filePath);
 
-        if(!dataFile.exists()) {
+        if (!dataFile.exists()) {
             return new TaskList();
         }
 

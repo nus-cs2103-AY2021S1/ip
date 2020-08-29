@@ -66,10 +66,16 @@ public class TaskList {
         task.markAsDone(true);
     }
 
+    /**
+     * Returns a formatted string representing a list of tasks filtered by a string.
+     *
+     * @param matchString The string to filter by.
+     * @return The list of tasks as a formatted string
+     */
     public String filteredToString(String matchString) {
         StringBuilder sb = new StringBuilder();
-        for(int i = 0; i < taskList.size(); i++) {
-            if(taskList.get(i).description.contains(matchString)) {
+        for (int i = 0; i < taskList.size(); i++) {
+            if (taskList.get(i).getDescription().contains(matchString)) {
                 sb.append(i + 1)
                         .append(". ")
                         .append(taskList.get(i).toString());
@@ -84,11 +90,11 @@ public class TaskList {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        for(int i = 0; i < taskList.size(); i++) {
+        for (int i = 0; i < taskList.size(); i++) {
             sb.append(i + 1)
                     .append(". ")
                     .append(taskList.get(i).toString());
-            if(i < taskList.size() - 1) {
+            if (i < taskList.size() - 1) {
                 sb.append("\n");
             }
         }

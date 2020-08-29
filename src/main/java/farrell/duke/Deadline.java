@@ -9,7 +9,7 @@ import java.time.format.FormatStyle;
  */
 public class Deadline extends Task {
     /** The deadline for the task */
-    LocalDate time;
+    private LocalDate time;
 
     Deadline(String description, LocalDate time) {
         this(description, false, time);
@@ -19,6 +19,10 @@ public class Deadline extends Task {
         super(description, isDone);
         taskType = TaskType.DEADLINE;
         this.time = time;
+    }
+
+    public LocalDate getTime() {
+        return time;
     }
 
     @Override

@@ -6,13 +6,13 @@ package main.java.farrell.duke;
  */
 public class Task {
     /** The type of task involved */
-    TaskType taskType;
+    protected TaskType taskType;
 
     /** The task's details */
-    String description;
+    private String description;
 
     /** The completion status of the task */
-    boolean isDone;
+    private boolean isDone;
 
     Task(String description) {
         this(description, false);
@@ -21,6 +21,18 @@ public class Task {
     Task(String description, boolean isDone) {
         this.description = description;
         this.isDone = isDone;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public TaskType getTaskType() {
+        return taskType;
+    }
+
+    public boolean isDone() {
+        return isDone;
     }
 
     /**

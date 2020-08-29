@@ -1,19 +1,19 @@
 package farrell.duke;
 
-import main.java.farrell.duke.UiManager;
-
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import static org.junit.Assert.assertEquals;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-import static org.junit.Assert.assertEquals;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+
+import main.java.farrell.duke.UiManager;
 
 public class UiManagerTest {
-    TestManager testManager = new TestManager();
+    private TestManager testManager = new TestManager();
 
     @Before
     public void setUp() {

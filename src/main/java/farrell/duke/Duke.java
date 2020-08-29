@@ -55,7 +55,7 @@ public class Duke {
      * @return 1 if the program should continue. 0 if the program should exit.
      * @throws DukeException If an invalid command is given.
      */
-    public static int processCommand(CommandType command, String parameters) throws DukeException{
+    public static int processCommand(CommandType command, String parameters) throws DukeException {
         switch(command) {
         case TODO:
             ToDo todo = new ToDo(parameters);
