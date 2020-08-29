@@ -10,6 +10,11 @@ import java.time.format.DateTimeFormatter;
 public class Deadline extends Task {
     private LocalDateTime by;
 
+    /**
+     * Creates a deadline task object with the given description and deadline.
+     * @param description Description of the task.
+     * @param by Deadline of the task.
+     */
     public Deadline(String description, LocalDateTime by) {
         super(description);
         this.by = by;

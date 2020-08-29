@@ -8,6 +8,10 @@ public abstract class Task {
     protected String description;
     protected boolean isDone;
 
+    /**
+     * Creates a task with the given description.
+     * @param description Description of the task.
+     */
     public Task(String description) {
         this.description = description;
         isDone = false;
@@ -23,7 +27,7 @@ public abstract class Task {
     public void markAsDone() {
         isDone = true;
     }
-    
+
     public boolean contains(String keyword) {
         return description.contains(keyword);
     }
@@ -37,7 +41,7 @@ public abstract class Task {
         int binary = isDone ? 1 : 0;
         return binary + " | " + description;
     }
-    
+
     @Override
     public String toString() {
         String statusIcon = getStatusIcon();

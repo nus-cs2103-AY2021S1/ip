@@ -1,9 +1,9 @@
 package duke;
 
-import duke.task.Task;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import duke.task.Task;
 
 /**
  * Encapsulates a list of tasks.
@@ -11,7 +11,7 @@ import java.util.List;
  */
 public class TaskList {
     private List<Task> taskList;
-    
+
     public TaskList(List<Task> taskList) {
         this.taskList = taskList;
     }
@@ -55,7 +55,6 @@ public class TaskList {
     public void deleteTask(int index) {
         Task task = taskList.get(index);
         taskList.remove(index);
-        
         Ui.addMessage("Got it. I've removed this task:");
         Ui.addMessage("  " + task);
         Ui.sendMessages();
@@ -73,7 +72,11 @@ public class TaskList {
         Ui.addMessage("  " + task);
         Ui.sendMessages();
     }
-    
+
+    /**
+     * Finds and displays tasks whose description contains the given keywords.
+     * @param keyword Keyword to be used as for searching.
+     */
     public void findTasks(String keyword) {
         List<Task> tasks = new ArrayList<>();
         for (Task task : taskList) {
@@ -81,7 +84,7 @@ public class TaskList {
                 tasks.add(task);
             }
         }
-        
+
         int size = tasks.size();
         if (size == 0) {
             Ui.addMessage("Sorry, I couldn't find any matching tasks.");
@@ -95,7 +98,7 @@ public class TaskList {
         }
         Ui.sendMessages();
     }
-    
+
     /**
      * Retrieves the list of tasks.
      * @return List of task.

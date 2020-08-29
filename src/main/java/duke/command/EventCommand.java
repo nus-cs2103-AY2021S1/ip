@@ -1,26 +1,30 @@
 package duke.command;
 
+import java.time.LocalDateTime;
+
 import duke.DukeException;
-import duke.task.Event;
 import duke.Storage;
 import duke.TaskList;
-
-import java.time.LocalDateTime;
+import duke.task.Event;
 
 /**
  * Encapsulates an event command to be executed by Duke.
- * Creates a event task to be added to both the TaskList and Storage.
  */
 public class EventCommand extends Command {
     private String description;
     private LocalDateTime at;
-    
+
+    /**
+     * Creates a event task to be added to both the TaskList and Storage.
+     * @param description Description of the event.
+     * @param at Date of the event.
+     */
     public EventCommand(String description, LocalDateTime at) {
         super();
         this.description = description;
         this.at = at;
     }
-    
+
     @Override
     public void execute(Storage storage, TaskList taskList) throws DukeException {
         taskList.addTask(new Event(description, at));

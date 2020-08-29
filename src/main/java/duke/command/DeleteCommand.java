@@ -6,11 +6,14 @@ import duke.TaskList;
 
 /**
  * Encapsulates a delete command to be executed by Duke.
- * Deletes a task based on the taskNumber in the TaskList and updates the changes in the Storage.
  */
 public class DeleteCommand extends Command {
     private String taskNumber;
 
+    /**
+     * Deletes the task with the given task number in the TaskList and updates the changes in the Storage.
+     * @param taskNumber
+     */
     public DeleteCommand(String taskNumber) {
         super();
         this.taskNumber = taskNumber;

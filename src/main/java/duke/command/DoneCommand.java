@@ -6,16 +6,19 @@ import duke.TaskList;
 
 /**
  * Encapsulates a done command to be executed by Duke.
- * Marks a task based on the taskNumber in the TaskList as done and updates the changes in the Storage.
  */
 public class DoneCommand extends Command {
     private String taskNumber;
-    
+
+    /**
+     * Marks the task with the given task number in the TaskList as done and updates the changes in the Storage.
+     * @param taskNumber Task number of the task.
+     */
     public DoneCommand(String taskNumber) {
         super();
         this.taskNumber = taskNumber;
     }
-    
+
     @Override
     public void execute(Storage storage, TaskList taskList) throws DukeException {
         try {

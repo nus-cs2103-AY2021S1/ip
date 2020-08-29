@@ -10,6 +10,11 @@ import java.time.format.DateTimeFormatter;
 public class Event extends Task {
     private LocalDateTime at;
 
+    /**
+     * Creates a event task object with the given description and date.
+     * @param description Description of the event.
+     * @param at Date of the event.
+     */
     public Event(String description, LocalDateTime at) {
         super(description);
         this.at = at;

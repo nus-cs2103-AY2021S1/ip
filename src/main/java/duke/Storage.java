@@ -1,20 +1,18 @@
 package duke;
 
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.Todo;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-
 import java.time.LocalDateTime;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
 
 /**
  * Encapsulates a storage that manages the database used by Duke.
@@ -24,7 +22,13 @@ import java.util.List;
  */
 public class Storage {
     private File file;
-    
+
+    /**
+     * Locates the .txt file at the given path.
+     * Creates the file if it does not exists.
+     * @param path Path to locate or create the .txt file.
+     * @throws DukeException
+     */
     public Storage(String path) throws DukeException {
         this.file = new File(path);
         try {
@@ -67,45 +71,42 @@ public class Storage {
             String input = bufferedReader.readLine();
             while (input != null) {
                 String[] entryBreakdown = input.split(" \\| ");
-                
                 if (entryBreakdown.length < 3) {
                     throw new DukeException("File corrupted");
                 }
                 if (!(entryBreakdown[1].equals("0") || entryBreakdown[1].equals("1"))) {
                     throw new DukeException("File corrupted");
                 }
-                
+
                 String type = entryBreakdown[0];
                 boolean isDone = entryBreakdown[1].equals("1");
                 String description = entryBreakdown[2];
-
                 Task task;
                 switch (type) {
-                    case ("T"):
-                        task = new Todo(description);
-                        break;
-                    case ("D"):
-                        if (entryBreakdown.length != 4) {
-                            throw new DukeException("File corrupted");
-                        }
-                        String by = entryBreakdown[3];
-                        task = new Deadline(description, LocalDateTime.parse(by));
-                        break;
-                    case ("E"):
-                        if (entryBreakdown.length != 4) {
-                            throw new DukeException("File corrupted");
-                        }
-                        String at = entryBreakdown[3];
-                        task = new Event(description, LocalDateTime.parse(at));
-                        break;
-                    default:
-                        throw new DukeException("File corrupted.");
+                case ("T"):
+                    task = new Todo(description);
+                    break;
+                case ("D"):
+                    if (entryBreakdown.length != 4) {
+                        throw new DukeException("File corrupted");
+                    }
+                    String by = entryBreakdown[3];
+                    task = new Deadline(description, LocalDateTime.parse(by));
+                    break;
+                case ("E"):
+                    if (entryBreakdown.length != 4) {
+                        throw new DukeException("File corrupted");
+                    }
+                    String at = entryBreakdown[3];
+                    task = new Event(description, LocalDateTime.parse(at));
+                    break;
+                default:
+                    throw new DukeException("File corrupted.");
                 }
                 if (isDone) {
                     task.markAsDone();
                 }
                 tasks.add(task);
-                
                 input = bufferedReader.readLine();
             }
             return tasks;

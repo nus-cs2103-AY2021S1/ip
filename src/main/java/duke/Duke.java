@@ -1,15 +1,15 @@
 package duke;
 
-import duke.command.Command;
-
 import java.util.Scanner;
+
+import duke.command.Command;
 
 /**
  * Encapsulates a friendly personal assistant that helps keep track of tasks to be done.
  * Duke has been renamed to Dude.
  */
 public class Duke {
-    private final String PATH = "./data/duke.txt";
+    private final String path = "./data/duke.txt";
     private Storage storage;
     private TaskList taskList;
     private Parser parser;
@@ -22,14 +22,14 @@ public class Duke {
         try {
             Ui.printLogo();
             System.out.println("\tInitializing...");
-            
-            storage = new Storage(PATH);
+
+            storage = new Storage(path);
             taskList = new TaskList(storage.getTasks());
             parser = new Parser();
             scanner = new Scanner(System.in);
-            
+
             greet();
-            
+
             while (true) {
                 listen();
             }
@@ -43,7 +43,7 @@ public class Duke {
         Ui.addMessage("What can I do for you?");
         Ui.sendMessages();
     }
-    
+
     private void listen() {
         String input = scanner.nextLine();
         try {
