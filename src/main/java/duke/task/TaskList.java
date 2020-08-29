@@ -60,4 +60,20 @@ public class TaskList {
     public Task get(int index) {
         return tasks.get(index - 1);
     }
+
+    /**
+     * Finds matching tasks by keyword and adds them to another TaskList.
+     * 
+     * @param keyword Keyword used to search tasks. 
+     * @return TaskList of matching tasks.
+     */
+    public TaskList find(String keyword) {
+        TaskList matchingTasks = new TaskList();
+        for (Task task : tasks) {
+            if (task.getTaskDescription().contains(keyword)) {
+                matchingTasks.add(task);
+            }
+        }
+        return matchingTasks;
+    }
 }

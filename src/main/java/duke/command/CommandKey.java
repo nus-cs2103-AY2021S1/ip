@@ -10,7 +10,8 @@ public enum CommandKey {
     TODO("todo"),
     EVENT("event"),
     DEADLINE("deadline"),
-    EXIT("bye");
+    EXIT("bye"),
+    FIND("find");
     
     private String key;
     

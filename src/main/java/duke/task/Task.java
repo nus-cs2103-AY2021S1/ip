@@ -18,9 +18,18 @@ public abstract class Task {
     }
 
     /**
+     * Gets the task description.
+     * 
+     * @return String of task description.
+     */
+    public String getTaskDescription() {
+        return task;
+    }
+
+    /**
      * Returns a String representation of the task to be stored in the 
      * storage file.
-     * 
+     *
      * @return Formatted String representing the task.
      */
     abstract public String toDataString();

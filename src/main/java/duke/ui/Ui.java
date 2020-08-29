@@ -52,8 +52,28 @@ public class Ui {
     }
 
     /**
-     * Prints out a message to confirm that the user has marked a task as done.
+     * Prints the list of matching tasks according to find keyword.
      * 
+     * @param tasks List of matching tasks. 
+     */
+    public void displayMatchingTaskList(TaskList tasks) {
+        ArrayList<Task> list = tasks.getList();
+        System.out.println(INDENT + LIST_TASK_LINE + "\n"
+            + INDENT + "Duke has found these tasks in your list:");
+        for (Task task : list) {
+            System.out.println(INDENT + (list.indexOf(task) + 1) + "." + task.toString()
+            );
+        }
+        if (list.size() == 0) {
+            System.out.println(INDENT + "None");
+        }
+        System.out.println(INDENT + LIST_TASK_LINE);
+    }
+
+
+    /**
+     * Prints out a message to confirm that the user has marked a task as done.
+     *
      * @param task Task marked as done by user.
      */
     public void displayDoneMessage(Task task) {

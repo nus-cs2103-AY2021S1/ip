@@ -6,6 +6,7 @@ import duke.command.CommandKey;
 import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.ExitCommand;
+import duke.command.FindCommand;
 import duke.command.ListCommand;
 
 import duke.exception.DukeDateTimeException;
@@ -13,6 +14,8 @@ import duke.exception.DukeException;
 import duke.exception.DukeNoDescriptionException;
 import duke.exception.DukeNoItemToDeleteException;
 import duke.exception.DukeNoItemToMarkDoneException;
+import duke.exception.DukeNoKeywordException;
+import duke.exception.DukeTooManyKeywordsException;
 import duke.exception.DukeUnknownCommandException;
 
 import java.time.DateTimeException;
@@ -64,11 +67,19 @@ public class Parser {
                 throw new DukeNoItemToMarkDoneException(input);
             }
             return new DoneCommand(Integer.parseInt(processedInput[1])); 
+        } else if (CommandKey.equalsCommandKey(processedInput[0], CommandKey.FIND)) {
+            if (processedInput.length == 1) {
+                throw new DukeNoKeywordException(input);
+            }
+            if (processedInput.length > 2) {
+                throw new DukeTooManyKeywordsException(input);
+            }
+            return new FindCommand(processedInput[1]);
         } else if (CommandKey.equalsCommandKey(key, CommandKey.TODO)) {
             if (processedInput.length == 1) {
                 throw new DukeNoDescriptionException(input);
             }
-            String taskDescription = processedInput[1];
+            String taskDescription = input.substring(5);
             return new AddCommand(key, taskDescription);
         } else if (CommandKey.equalsCommandKey(key, CommandKey.DEADLINE)) {
             if (processedInput.length == 1) {
