@@ -1,4 +1,4 @@
-package test.java.duke.tasks;
+package duke.tasks;
 
 import duke.tasks.Todo;
 import org.junit.jupiter.api.Test;
