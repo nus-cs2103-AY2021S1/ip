@@ -1,4 +1,4 @@
-package Duke;
+package com.siawsam.duke;
 
 import java.io.IOException;
 import java.util.List;

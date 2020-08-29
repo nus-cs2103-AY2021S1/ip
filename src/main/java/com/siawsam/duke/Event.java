@@ -1,4 +1,4 @@
-package Duke;
+package com.siawsam.duke;
 
 /**
  * Represents an event.

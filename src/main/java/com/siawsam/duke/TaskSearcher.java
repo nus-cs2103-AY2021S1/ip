@@ -1,6 +1,4 @@
-package Duke;
-
-import Duke.TaskList;
+package com.siawsam.duke;
 
 import java.util.List;
 

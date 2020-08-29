@@ -1,13 +1,13 @@
-import Duke.Deadline;
-import Duke.DukeException;
-import Duke.Event;
-import Duke.Parser;
-import Duke.Storage;
-import Duke.Task;
-import Duke.TaskList;
-import Duke.TaskSearcher;
-import Duke.Todo;
-import Duke.Ui;
+import com.siawsam.duke.Deadline;
+import com.siawsam.duke.DukeException;
+import com.siawsam.duke.Event;
+import com.siawsam.duke.Parser;
+import com.siawsam.duke.Storage;
+import com.siawsam.duke.Task;
+import com.siawsam.duke.TaskList;
+import com.siawsam.duke.TaskSearcher;
+import com.siawsam.duke.Todo;
+import com.siawsam.duke.Ui;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;

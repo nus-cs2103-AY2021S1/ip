@@ -1,4 +1,4 @@
-package Duke;
+package com.siawsam.duke;
 
 import java.util.Arrays;
 import java.util.List;
