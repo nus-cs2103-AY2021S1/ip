@@ -1,6 +1,7 @@
 import java.io.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -23,11 +24,10 @@ public class IOHandler {
             }
 
             String error = DukeExceptionHandler.handleException(text);
-
             List<String> files = FileHandler.readSavedFile(fileName);
 
-            for (int i = 0; i < files.size(); i++) {
-                Task task = TextAndTaskConverter.textConverter(files.get(i));
+            for (String value : files) {
+                Task task = TextAndTaskConverter.textConverter(value);
                 taskManager.getTaskList().add(task);
             }
 
@@ -61,6 +61,23 @@ public class IOHandler {
                         System.out.println("Noted. I've removed this task:\n"
                                 + deletedTask + "\nNow you have " + taskManager.getNumTasks()
                                 + " tasks in the list");
+
+                    } else if (text.contains("find")) {
+                        String[] textArray = text.split(" ", 2);
+                        ArrayList<String> tasksFound = new ArrayList<>();
+                        for (int i = 0; i < taskManager.getTaskList().size(); i++) {
+                            String found = taskManager.getTaskList().get(i).toString();
+                            if (found.contains(textArray[1])) {
+                                tasksFound.add(found);
+                            }
+                        }
+
+                        if (tasksFound.size() > 0) {
+                            System.out.println("Here are the matching tasks in your list:");
+                            for (String s : tasksFound) {
+                                System.out.println(s);
+                            }
+                        }
 
                     } else if (text.length() > 0) {
 
