@@ -1,7 +1,7 @@
 package duke.command;
 
-import duke.exception.DukeException;
 import duke.TaskList;
+import duke.exception.DukeException;
 
 /** A command to add a Deadline. */
 public class DeadlineCommand extends AddTaskCommand {
@@ -19,7 +19,7 @@ public class DeadlineCommand extends AddTaskCommand {
      * Adds a deadline into the task list.
      *
      * @param taskList The task list that stores and modifies the list of saved tasks.
-     * @param input The description of the deadline.
+     * @param input    The description of the deadline.
      * @throws DukeException If there is something wrong with the deadline input.
      */
     @Override

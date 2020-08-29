@@ -1,21 +1,20 @@
 package duke;
 
-import duke.exception.DeadlineInvalidDate;
-import duke.exception.DuplicateTaskException;
-import duke.exception.EventInvalidDate;
-import duke.exception.InvalidDateException;
-import duke.exception.InvalidIndexException;
-
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.ToDo;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+
+import duke.exception.DeadlineInvalidDate;
+import duke.exception.DuplicateTaskException;
+import duke.exception.EventInvalidDate;
+import duke.exception.InvalidDateException;
+import duke.exception.InvalidIndexException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
 
 /** Contains the task list. */
 public class TaskList {
@@ -24,7 +23,7 @@ public class TaskList {
     private ArrayList<Task> tasks;
 
     /**
-     * Constructs a @TaskList.
+     * Constructs a TaskList.
      *
      * @param taskList The task list containing saved tasks.
      */
@@ -32,7 +31,7 @@ public class TaskList {
         this.tasks = taskList;
     }
 
-    /** Constructs a @TaskList. */
+    /** Constructs a TaskList. */
     public TaskList() {
         this.tasks = new ArrayList<>();
     }
@@ -41,8 +40,8 @@ public class TaskList {
      * Compares two objects.
      *
      * @param o The object to compare.
-     * @return True if the objects the same, in other words if the object is a @TaskList
-     *         with a list containing the same tasks.
+     * @return True if the objects the same, in other words if the object is a TaskList
+     * with a list containing the same tasks.
      */
     @Override
     public boolean equals(Object o) {
@@ -57,11 +56,11 @@ public class TaskList {
     }
 
     /**
-     * Processes the @list command.
+     * Processes the list command.
      *
      * @param fullCommand The full command given by the user.
-     * @throws InvalidDateException If the command is of the format @list @[description]
-     *         but the @[description] is in not in a valid date format.
+     * @throws InvalidDateException If the command is of the format list [description]
+     *                              but the [description] is in not in a valid date format.
      */
     public void processList(String fullCommand) throws InvalidDateException {
         if (fullCommand.trim().equalsIgnoreCase("list")) {
@@ -69,7 +68,7 @@ public class TaskList {
         } else {
 
             LocalDate date = Parser.getDateTime(fullCommand.substring(
-                    "list".length()).trim()).toLocalDate();
+                "list".length()).trim()).toLocalDate();
 
             printList(date);
 
@@ -92,8 +91,8 @@ public class TaskList {
     }
 
     /**
-     * An overload of the @list command.
-     * Prints the tasks occurring on the same @date in the list.
+     * An overload of the list command.
+     * Prints the tasks occurring on the same date in the list.
      *
      * @param date The date given by the user.
      */
@@ -103,8 +102,8 @@ public class TaskList {
         for (Task task : tasks) {
             if (task.getDate().equals(date)) {
                 if (i == 0) {
-                    System.out.println("Here's your list on " +
-                            date.format(DateTimeFormatter.ofPattern("dd MMM y:")));
+                    System.out.println("Here's your list on "
+                        + date.format(DateTimeFormatter.ofPattern("dd MMM y:")));
                 }
 
                 System.out.println((i + 1) + ". " + task);
@@ -113,16 +112,16 @@ public class TaskList {
         }
 
         if (i == 0 || tasks.size() == 0) {
-            System.out.println("You have nothing to do on " +
-                    date.format(DateTimeFormatter.ofPattern("dd MMM y.")));
+            System.out.println("You have nothing to do on "
+                + date.format(DateTimeFormatter.ofPattern("dd MMM y.")));
         }
     }
 
     /**
-     * Adds a @ToDo task to the task list.
+     * Adds a ToDo task to the task list.
      *
-     * @param task The description of the @ToDo task.
-     * @throws DuplicateTaskException If an existing @ToDo task is already on the list.
+     * @param task The description of the ToDo task.
+     * @throws DuplicateTaskException If an existing ToDo task is already on the list.
      */
     public void addToDo(String task) throws DuplicateTaskException {
         Task toDo = new ToDo(task.trim());
@@ -134,20 +133,20 @@ public class TaskList {
     }
 
     /**
-     * Adds an @Event to the task list.
+     * Adds an Event to the task list.
      *
-     * @param input The description of the @Event.
-     * @throws DuplicateTaskException If an existing @Event with the same description
-     *         and date is already on the list.
-     * @throws EventInvalidDate If the date of the event given is not in a valid date time format.
+     * @param input The description of the Event.
+     * @throws DuplicateTaskException If an existing Event with the same description
+     *                                and date is already on the list.
+     * @throws EventInvalidDate       If the date of the event given is not in a valid date time format.
      */
     public void addEvent(String input) throws DuplicateTaskException, EventInvalidDate {
 
         try {
             String task = input.substring(0, input.indexOf('/')).trim();
             LocalDateTime date = input.contains("to ")
-                    ? Parser.getDateTime(input.substring(input.indexOf("/at") + 4, input.indexOf("to ")))
-                    : Parser.getDateTime(input.substring(input.indexOf("/at") + 4));
+                ? Parser.getDateTime(input.substring(input.indexOf("/at") + 4, input.indexOf("to ")))
+                : Parser.getDateTime(input.substring(input.indexOf("/at") + 4));
 
             LocalDateTime endDate = null;
             if (input.contains("to ")) {
@@ -162,8 +161,8 @@ public class TaskList {
             }
 
             Event event = endDate != null
-                    ? new Event(task, date, endDate)
-                    : new Event(task, date);
+                ? new Event(task, date, endDate)
+                : new Event(task, date);
 
             if (tasks.contains(event)) {
                 throw new DuplicateTaskException();
@@ -178,12 +177,12 @@ public class TaskList {
     }
 
     /**
-     * Adds a @Deadline to the task list.
+     * Adds a Deadline to the task list.
      *
      * @param input The description of the deadline.
-     * @throws DuplicateTaskException If an exsiting @Deadline with the same description
-     *         and date is already on the list.
-     * @throws DeadlineInvalidDate If the date of the deadline given is not in a valid date time format.
+     * @throws DuplicateTaskException If an exsiting Deadline with the same description
+     *                                and date is already on the list.
+     * @throws DeadlineInvalidDate    If the date of the deadline given is not in a valid date time format.
      */
     public void addDeadline(String input) throws DuplicateTaskException, DeadlineInvalidDate {
 
@@ -210,7 +209,7 @@ public class TaskList {
      * Marks the task with the given index as done.
      *
      * @param taskIndex The index of the task to be marked.
-     * @throws InvalidIndexException If the @taskIndex < 0 or larger than the size of the @taskList.
+     * @throws InvalidIndexException If the taskIndex < 0 or larger than the size of the taskList.
      */
     public void markDone(int taskIndex) throws InvalidIndexException {
         try {
@@ -227,7 +226,7 @@ public class TaskList {
      * Deletes the task with the given index.
      *
      * @param taskIndex The index of the task to be deleted.
-     * @throws InvalidIndexException If the @taskIndex < 0 or larger than the size of the @taskList.
+     * @throws InvalidIndexException If the taskIndex < 0 or larger than the size of the taskList.
      */
     public void deleteTask(int taskIndex) throws InvalidIndexException {
         try {
@@ -240,7 +239,8 @@ public class TaskList {
         }
     }
 
-    /** Finds tasks with the given @keyword.
+    /**
+     * Finds tasks with the given keyword.
      *
      * @param keyword The keyword to search for in tasks.
      */
@@ -249,7 +249,7 @@ public class TaskList {
         keyword = keyword.trim().toLowerCase();
 
         int i = 0;
-        for (Task task: tasks) {
+        for (Task task : tasks) {
             if (task.getTask().contains(keyword)) {
                 if (i == 0) {
                     System.out.println("Here are the matching tasks on your list.");
@@ -266,7 +266,7 @@ public class TaskList {
         }
     }
 
-    /** Prints the size of the @taskList. */
+    /** Prints the size of the taskList. */
     public void printListSize() {
         String taskText = tasks.size() == 1 ? " task " : " tasks ";
         System.out.println("You have " + tasks.size() + taskText + "on your list.");

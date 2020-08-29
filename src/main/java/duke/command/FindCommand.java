@@ -3,7 +3,6 @@ package duke.command;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
-import duke.exception.DukeException;
 import duke.exception.NoKeywordException;
 
 /** A command to find tasks with a given keyword. */
@@ -13,10 +12,10 @@ public class FindCommand extends Command {
     private String keyword;
 
     /**
-     * Constructs a @FindCommand.
+     * Constructs a FindCommand.
      *
      * @param fullCommand The input given by the user.
-     * @throws NoKeywordException If the @fullCommand has no keyword following @find command.
+     * @throws NoKeywordException If the fullCommand has no keyword following find command.
      */
     public FindCommand(String fullCommand) throws NoKeywordException {
         try {
@@ -27,11 +26,11 @@ public class FindCommand extends Command {
     }
 
     /**
-     * Executes the command by finding tasks with the given @keyword.
+     * Executes the command by finding tasks with the given keyword.
      *
      * @param taskList The task list that adds or deletes task in the task list.
-     * @param ui The UI for the bot.
-     * @param storage The storage for saving tasks.
+     * @param ui       The UI for the bot.
+     * @param storage  The storage for saving tasks.
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {

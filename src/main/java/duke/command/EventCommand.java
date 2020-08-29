@@ -1,15 +1,15 @@
 package duke.command;
 
-import duke.exception.DukeException;
 import duke.TaskList;
+import duke.exception.DukeException;
 
 /** A command to add an @Event. */
 public class EventCommand extends AddTaskCommand {
 
     /**
-     * Constructs an @EventCommand.
+     * Constructs an EventCommand.
      *
-     * @param input The description of the @Event.
+     * @param input The description of the Event.
      */
     public EventCommand(String input) {
         this.input = input;
@@ -19,8 +19,8 @@ public class EventCommand extends AddTaskCommand {
      * Adds an @Event to the task list.
      *
      * @param taskList The task list containing all saved tasks.
-     * @param input The description of the command.
-     * @throws DukeException If there is an error when adding the @Event into the list.
+     * @param input    The description of the command.
+     * @throws DukeException If there is an error when adding the Event into the list.
      */
     @Override
     public void addTask(TaskList taskList, String input) throws DukeException {
@@ -31,7 +31,7 @@ public class EventCommand extends AddTaskCommand {
      * Compares an object.
      *
      * @param o The object compared.
-     * @return True if the object is of type @EventCommand and has the same @input.
+     * @return True if the object is of type EventCommand and has the same @input.
      */
     @Override
     public boolean equals(Object o) {
