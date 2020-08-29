@@ -1,8 +1,8 @@
 package ultron.tasks;
 
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
 
 public class DeadlineTest {
 
@@ -31,6 +31,9 @@ public class DeadlineTest {
         assertEquals("hello /by 02-02-2002 1800", new Deadline("hello", "02-02-2002 1800").getCommand());
     }
 
+    /**
+     * Test Parsing functionality of deadline class.
+     */
     @Test
     public void parseCommandTest() {
         Task deadline = Deadline.parseCommand("hello /by 02-02-2002 1800");
