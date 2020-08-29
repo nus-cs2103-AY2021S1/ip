@@ -1,6 +1,6 @@
 public class DukeException extends Throwable {
 
-    String s;
+    private String s;
 
     DukeException(String s) {
         this.s = s;
@@ -9,7 +9,6 @@ public class DukeException extends Throwable {
     /**
      * Handles various exceptions for the bot and returns messages accordingly
      * @return Refer to various messages at the bottom
-     * 
      */
     public String getMessage() {
         if (this.s.equals("")) {

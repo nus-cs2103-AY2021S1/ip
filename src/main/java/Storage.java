@@ -1,36 +1,37 @@
-import java.io.*;
+import java.io.EOFException;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 public class Storage {
-    
-    String filepath;
-    
+    private String filepath;
     Storage(String filepath) {
         this.filepath = filepath;
     }
 
     /**
-     * Loads up an ArrayList<Task> from an existing filepath
-     * Returns an empty ArrayList<Task> if the file does not exist
-     * @return the specified ArrayList or an empty one
+     * Loads up an ArrayList of Tasks from an existing filepath
+     * Returns an empty ArrayList if the file does not exist
+     * @return the specified ArrayList of Tasks or an empty one
      * @throws IOException
      */
     public ArrayList<Task> load() throws IOException {
-        
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(filepath));
-        ) {
-             return (ArrayList<Task>) ois.readObject();
-        }
-        catch (EOFException | FileNotFoundException | ClassNotFoundException e) {
+            ) {
+            return (ArrayList<Task>) ois.readObject();
+        } catch (EOFException | FileNotFoundException | ClassNotFoundException e) {
             System.out.println("An error has occurred");
             return new ArrayList<>();
         }
-        
     }
 
     /**
-     * Takes a task and an ArrayList<Task> as arguments and stores the task into
-     * that particular ArrayList.
+     * Takes a task and an ArrayList of Tasks as arguments
+     * and stores the task into that particular ArrayList.
      * @param list
      * @param task
      * @throws FileNotFoundException
@@ -45,7 +46,12 @@ public class Storage {
             e.printStackTrace();
         }
     }
-    
+
+    /**
+     * Takes an ArrayList of Tasks and saves it into the hard disk
+     * @param list
+     * @throws FileNotFoundException
+     */
     public void save(ArrayList<Task> list) throws FileNotFoundException {
         try (FileOutputStream tasks = new FileOutputStream(filepath);
              ObjectOutputStream oos = new ObjectOutputStream(tasks)) {

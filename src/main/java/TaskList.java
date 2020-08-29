@@ -1,24 +1,17 @@
 import java.util.ArrayList;
 
 public class TaskList {
-    
-    ArrayList<Task> tasks;
-    
-    TaskList() {
-        
-    }
-    
+    private ArrayList<Task> tasks;
     TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
     }
-    
     public boolean isEmpty() {
         return tasks.isEmpty();
     }
 
     /**
-     * Retrieves the ArrayList<Task> attribute
-     * @return returns the TaskList's ArrayList<Task>
+     * Retrieves the ArrayList of Tasks attribute
+     * @return returns the TaskList's ArrayList of Tasks
      */
     public ArrayList<Task> getTasks() {
         return tasks;

@@ -1,22 +1,17 @@
-import jdk.swing.interop.SwingInterOpUtils;
-
-
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.Serializable;
-import java.nio.file.NoSuchFileException;
-import java.sql.SQLOutput;
-import java.util.ArrayList;
-import java.util.InputMismatchException;
-import java.util.Scanner;
-
 
 public class Duke implements Serializable {
 
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
-    
+
+    /**
+     * Constructor for Duke
+     * @param filepath
+     */
     public Duke(String filepath) {
         ui = new Ui();
         storage = new Storage(filepath);
@@ -27,10 +22,9 @@ public class Duke implements Serializable {
             tasks = new TaskList();
         }
     }
-    
 
     /**
-     * Starts up the bot by calling the Parser class and its methods
+     *  * Starts up the bot by calling the Parser class and its methods
      * @throws FileNotFoundException
      * @throws DukeException
      */
@@ -51,6 +45,3 @@ public class Duke implements Serializable {
         new Duke("tasks").run();
     }
 }
-
-
-   

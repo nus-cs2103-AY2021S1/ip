@@ -1,15 +1,9 @@
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Parser {
-    
-    Parser() {
-        
-    }
-
     /**
      * Helps to parse commands from the scanner, that tells the bot what actions
      * to take
@@ -18,11 +12,10 @@ public class Parser {
      * @throws DukeException
      * @throws FileNotFoundException
      */
-    public void commandParser(TaskList list, Storage store ) throws DukeException, FileNotFoundException {
+    public void commandParser(TaskList list, Storage store) throws DukeException, FileNotFoundException {
         ArrayList<Task> storage = list.getTasks();
 
         Scanner scan1 = new Scanner(System.in);
-        
         while (scan1.hasNext()) {
             String command = scan1.nextLine();
             try {
@@ -32,7 +25,7 @@ public class Parser {
                     if (list.isEmpty()) {
                         throw new DukeException(command);
                     }
-                    for (Task item : storage ) {
+                    for (Task item : storage) {
                         int position = storage.indexOf(item) + 1;
                         System.out.println(position + "." + item);
 
@@ -118,7 +111,6 @@ public class Parser {
                         throw new DukeException(command);
                     }
                     String keyword = command.split(" ")[1];
-                    
                     int count = 1;
                     for (Task item : storage) {
                         if (item.getDescription().contains(keyword)) {
@@ -126,14 +118,12 @@ public class Parser {
                             count++;
                         }
                     }
-                }
-                else {
+                } else {
                     throw new DukeException(command);
                 }
             } catch (DukeException | FileNotFoundException e) {
                 System.out.println(e.getMessage());
             }
         }
-        
     }
 }
