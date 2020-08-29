@@ -1,7 +1,7 @@
 package exceptions;
 
 public class InvalidDateException extends DukeException {
-    public InvalidDateException(){
+    public InvalidDateException() {
         super("Wrong date Provided");
     }
 }

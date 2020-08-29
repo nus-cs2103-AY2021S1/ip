@@ -1,7 +1,7 @@
 package exceptions;
 
 public class EmptyTodoException extends DukeException {
-    public EmptyTodoException(){
+    public EmptyTodoException() {
         super("A todo cannot be empty");
     }
 }
