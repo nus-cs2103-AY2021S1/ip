@@ -1,13 +1,15 @@
-package duke;
+package duke.ui;
 
 import java.util.Scanner;
+
+import duke.exception.DukeException;
 
 /**
  * Utility class that handles interactions with the user.
  */
 public class Ui {
-    
-    Scanner sc;
+    private Scanner sc;
+    String nextMessage;
 
     /**
      * Initialises a new Ui object
@@ -19,14 +21,13 @@ public class Ui {
     /**
      * Show a greeting message to the user.
      */
-    public void sayHi() {
+    public static String getGreetingMessage() {
         String logo = ",--.                           ,--. \n"
                 + "|  |-.  ,---. ,--.--. ,---.  ,-|  | \n"
                 + "| .-. '| .-. ||  .--'| .-. :' .-. | \n"
                 + "| `-' |' '-' '|  |   \\   --.\\ `-' | \n"
                 + " `---'  `---' `--'    `----' `---'  \n\n";
-        StringBuilder message = new StringBuilder("Hi I'm\n").append(logo).append("Please give me something to do.");
-        botOutput(message);
+        return "Hi I'm\n" + logo + "Please give me something to do.";
     }
 
     /**
@@ -43,20 +44,17 @@ public class Ui {
     public void showError(DukeException e) {
         botOutput(e.getMessage());
     }
-
-    /**
-     * Outputs a message to the user.
-     * @param message Message to be shown to the user.
-     */
+    
     public void botOutput(String message) {
-        String divider = "____________________________________________________________";
-        System.out.println(divider);
-        System.out.println(message);
-        System.out.println(divider);
+        this.nextMessage = message;
     }
 
     public void botOutput(StringBuilder message) {
         botOutput(message.toString());
+    }
+    
+    public String getNextMessage() {
+        return this.nextMessage;
     }
 
     /**
@@ -64,6 +62,6 @@ public class Ui {
      * @return Command read from the user.
      */
     public String readNextCommand() {
-       return sc.nextLine();
+        return sc.nextLine();
     }
 }

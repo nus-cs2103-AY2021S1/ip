@@ -1,9 +1,9 @@
 package duke.command;
 
-import duke.DukeException;
-import duke.Storage;
+import duke.exception.DukeException;
+import duke.util.Storage;
 import duke.task.TaskList;
-import duke.Ui;
+import duke.ui.Ui;
 
 /**
  * Wrapper class for all types of Command.

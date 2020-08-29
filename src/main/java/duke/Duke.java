@@ -1,7 +1,11 @@
 package duke;
 
 import duke.command.Command;
+import duke.exception.DukeException;
 import duke.task.TaskList;
+import duke.ui.Ui;
+import duke.util.Parser;
+import duke.util.Storage;
 
 /**
  * Main class of the Duke bot.
@@ -23,27 +27,16 @@ public class Duke {
     }
 
     /**
-     * Runs the bot until an exit command is issued.
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
      */
-    public void run() {
-        ui.sayHi();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                Command c = Parser.parse(ui.readNextCommand());
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                ui.showError(e);
-            }
+    public String getResponse(String input) {
+        try {
+            Command c = Parser.parse(input);
+            c.execute(tasks, ui, storage);
+            return ui.getNextMessage();
+        } catch (DukeException e) {
+            return e.getMessage();
         }
-    }
-
-    /**
-     * Initialises and runs the bot.
-     */
-    public static void main(String[] args) {
-        Duke duke = new Duke();
-        duke.run();
     }
 }

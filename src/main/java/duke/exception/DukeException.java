@@ -1,4 +1,4 @@
-package duke;
+package duke.exception;
 
 /**
  * Exception that is thrown by the bot when encountered with invalid actions from the user
@@ -12,5 +12,4 @@ public class DukeException extends Exception {
     public DukeException(String message) {
         super(message);
     }
-    
 }

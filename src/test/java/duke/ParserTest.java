@@ -3,6 +3,8 @@ package duke;
 import duke.command.Command;
 import duke.command.InvalidCommand;
 
+import duke.exception.DukeException;
+import duke.util.Parser;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
