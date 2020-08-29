@@ -8,7 +8,7 @@ import taskbot.ui.Ui;
  */
 public class UpcomingCommand extends Command {
     // The number of days ahead to look
-    public int days;
+    private int days;
 
     /**
      * Creates an upcoming command.

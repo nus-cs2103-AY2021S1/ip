@@ -1,13 +1,20 @@
 package taskbot.storage;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
-import java.nio.file.Path;
-import java.nio.file.Paths;
-
-import taskbot.task.*;
+import taskbot.task.Deadline;
+import taskbot.task.Event;
+import taskbot.task.Task;
+import taskbot.task.Todo;
 
 /**
  * The database to store user tasks.
@@ -81,8 +88,8 @@ public class Storage {
                 e.printStackTrace();
             }
         } else {
-            return "Database for tasks list found. Tasks will be loaded from that file.\n" +
-                    "------------------------------------------------------------------";
+            return "Database for tasks list found. Tasks will be loaded from that file.\n"
+                    + "------------------------------------------------------------------";
         }
 
         //Code is not supposed to reach this point.
@@ -133,7 +140,8 @@ public class Storage {
                     tasks.add(deadline);
                     break;
                 default:
-                    System.out.println("Error has occured. This is a placeholder to be replaced by an InvalidFileException");
+                    System.out.println(
+                            "Error has occured. This is a placeholder to be replaced by an InvalidFileException");
                 }
             }
 

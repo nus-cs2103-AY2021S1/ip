@@ -13,7 +13,7 @@ public class TimedTaskStub extends TimedTask {
 
     @Override
     public String toString() {
-        return "[" + super.getStatusIcon() + "] " + "Timed Task(test): " + super.getTask() +
-                "(Time: " + getTime().format(DateTimeFormatter.ofPattern("dd MMM yyyy hh:mm a")) + ")";
+        return "[" + super.getStatusIcon() + "] " + "Timed Task(test): " + super.getTask()
+                + "(Time: " + getTime().format(DateTimeFormatter.ofPattern("dd MMM yyyy hh:mm a")) + ")";
     }
 }

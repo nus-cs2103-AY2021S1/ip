@@ -1,25 +1,31 @@
 package taskbot.parser;
 
-import org.junit.jupiter.api.Test;
-
-import taskbot.command.TodoCommand;
-import taskbot.command.DeadlineCommand;
-import taskbot.command.EventCommand;
-import taskbot.command.ListCommand;
-import taskbot.command.UpcomingCommand;
-import taskbot.command.FindCommand;
-import taskbot.command.DeleteCommand;
-import taskbot.command.DoneCommand;
-import taskbot.command.ExitCommand;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
+
+import org.junit.jupiter.api.Test;
+
+import taskbot.command.DeadlineCommand;
+import taskbot.command.DeleteCommand;
+import taskbot.command.DoneCommand;
+import taskbot.command.EventCommand;
+import taskbot.command.ExitCommand;
+import taskbot.command.FindCommand;
+import taskbot.command.ListCommand;
+import taskbot.command.TodoCommand;
+import taskbot.command.UpcomingCommand;
+
+
 
 /**
  * Tests the various commands that Parser handles.
  */
 public class ParserTest {
     private String testCommand;
+
+    /**
+     * Tests if Parser returns a TodoCommand.
+     */
     @Test
     public void testParseTodo() {
         try {
@@ -30,6 +36,9 @@ public class ParserTest {
         }
     }
 
+    /**
+     * Tests if Parser returns a DeadlineCommand.
+     */
     @Test
     public void testParseDeadline() {
         try {
@@ -41,6 +50,9 @@ public class ParserTest {
         }
     }
 
+    /**
+     * Tests if Parser returns an EventCommand.
+     */
     @Test
     public void testParseEvent() {
         try {
@@ -52,6 +64,9 @@ public class ParserTest {
         }
     }
 
+    /**
+     * Tests if Parser returns a ListCommand.
+     */
     @Test
     public void testParseList() {
         try {
@@ -62,6 +77,9 @@ public class ParserTest {
         }
     }
 
+    /**
+     * Tests if Parser returns an UpcomingCommand.
+     */
     @Test
     public void testParseUpcoming() {
         try {
@@ -72,6 +90,9 @@ public class ParserTest {
         }
     }
 
+    /**
+     * Tests if Parser returns a FindCommand.
+     */
     @Test
     public void testParseFind() {
         try {
@@ -83,6 +104,9 @@ public class ParserTest {
         }
     }
 
+    /**
+     * Tests if Parser returns a DoneCommand.
+     */
     @Test
     public void testParseDone() {
         try {
@@ -94,6 +118,9 @@ public class ParserTest {
         }
     }
 
+    /**
+     * Tests if Parser returns a DeleteCommand.
+     */
     @Test
     public void testParseDelete() {
         try {
@@ -105,6 +132,9 @@ public class ParserTest {
         }
     }
 
+    /**
+     * Tests if Parser returns an ExitCommand.
+     */
     @Test
     public void testParseExit() {
         try {

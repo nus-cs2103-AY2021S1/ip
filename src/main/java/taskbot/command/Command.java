@@ -1,7 +1,6 @@
 package taskbot.command;
 
 import taskbot.exceptions.TaskbotException;
-
 import taskbot.task.TaskList;
 import taskbot.ui.Ui;
 
@@ -24,7 +23,7 @@ public abstract class Command {
 
     /**
      * Executes the relevant operation tied to the Command type.
-     * 
+     *
      * @param taskList The task list to be operated on.
      * @param ui The UI that can be operated on.
      * @throws TaskbotException Any exception thrown by the Commands.
