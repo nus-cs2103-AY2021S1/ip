@@ -37,6 +37,8 @@ public class AddCommand extends Command {
         case TODO:
             newTask = taskList.addTodo(args);
             break;
+        default:
+            break;
         }
         storage.save(taskList);
         return "Alright! Adding one more item:\n" + newTask.toString();

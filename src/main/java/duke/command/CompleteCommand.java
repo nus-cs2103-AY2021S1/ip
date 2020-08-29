@@ -16,7 +16,7 @@ public class CompleteCommand extends Command {
      *
      * @param args Arguments for the command.
      */
-    public CompleteCommand(String args){
+    public CompleteCommand(String args) {
         super(args);
     }
 

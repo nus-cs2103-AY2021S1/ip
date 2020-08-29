@@ -58,18 +58,18 @@ public class UI {
      * Reads the next line in user's input.
      *
      * @return The full user's input.
-     * @throws UIException If user's input is empty or the scanner has no next line.
+     * @throws UiException If user's input is empty or the scanner has no next line.
      */
-    public String readCommand() throws UIException {
+    public String readCommand() throws UiException {
         if (scanner.hasNextLine()) {
             String line = scanner.nextLine();
             if (!line.equals("")) {
                 return line;
             } else {
-                throw new UIException("Input cannot be empty.");
+                throw new UiException("Input cannot be empty.");
             }
         } else {
-            throw new UIException("Invalid call to readCommand");
+            throw new UiException("Invalid call to readCommand");
         }
     }
 

@@ -6,7 +6,7 @@ import duke.storage.StorageException;
 import duke.task.TaskException;
 import duke.task.TaskList;
 import duke.ui.UI;
-import duke.ui.UIException;
+import duke.ui.UiException;
 
 /**
  * Consolidates the various elements.
@@ -49,7 +49,7 @@ public class Duke {
                 ui.printResult(result);
                 ui.showLine();
                 isExit = command.isExit();
-            } catch (UIException e) {
+            } catch (UiException e) {
                 ui.showLine();
                 ui.showErrorMessage(e.getMessage());
                 ui.showLine();

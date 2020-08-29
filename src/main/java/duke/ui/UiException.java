@@ -3,8 +3,8 @@ package duke.ui;
 /**
  * Represents an exception that happened in the UI logic.
  */
-public class UIException extends Exception {
-    public UIException (String message) {
+public class UiException extends Exception {
+    public UiException (String message) {
         super(message);
     }
 }
