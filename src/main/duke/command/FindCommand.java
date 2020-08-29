@@ -32,9 +32,9 @@ public class FindCommand extends Command {
      * @param storage The Storage object to search for the keyword in.
      */
     @Override
-    public void execute(Storage storage) {
+    public String execute(Storage storage) {
         TaskList list = storage.find(keyword);
-        Ui.wrapText(list.toString());
+        return list.toString();
 
     }
 }

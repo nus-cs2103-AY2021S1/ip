@@ -14,8 +14,8 @@ public class ListCommand extends Command {
      * @param storage The duke.storage.Storage object from which to print the list
      */
     @Override
-    public void execute(Storage storage) {
-        Ui.wrapText(storage.toString());
+    public String execute(Storage storage) {
+        return storage.toString();
     }
 
 }

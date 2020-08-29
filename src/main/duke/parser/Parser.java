@@ -85,25 +85,29 @@ public final class Parser {
      */
     public static Command parseCommand(String text) throws DukeArgumentException {
         String[] parsedInput = text.split(" ", 2);
-        switch (parsedInput[0].toLowerCase()) {
-        case BYE:
-            return new ExitCommand();
-        case LIST:
-            return new ListCommand();
-        case FIND:
-            return new FindCommand(parsedInput[1]);
-        case DONE:
-            return new DoneCommand(parsedInput[1]);
-        case DELETE:
-            return new DeleteCommand(parsedInput[1]);
-        case TODO:
-            return new TodoCommand(parsedInput[1]);
-        case EVENT:
-            return new EventCommand(parsedInput[1]);
-        case DEADLINE:
-            return new DeadlineCommand(parsedInput[1]);
-        default:
-            throw new DukeArgumentException("Command did not match any known commands");
+        try {
+            switch (parsedInput[0].toLowerCase()) {
+            case BYE:
+                return new ExitCommand();
+            case LIST:
+                return new ListCommand();
+            case FIND:
+                return new FindCommand(parsedInput[1]);
+            case DONE:
+                return new DoneCommand(parsedInput[1]);
+            case DELETE:
+                return new DeleteCommand(parsedInput[1]);
+            case TODO:
+                return new TodoCommand(parsedInput[1]);
+            case EVENT:
+                return new EventCommand(parsedInput[1]);
+            case DEADLINE:
+                return new DeadlineCommand(parsedInput[1]);
+            default:
+                throw new DukeArgumentException("Command did not match any known commands.");
+            }
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new DukeArgumentException("Insufficient arguments for the command.");
         }
     }
 

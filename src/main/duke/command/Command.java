@@ -24,6 +24,6 @@ public abstract class Command {
      * @param storage The Storage object to perform the operations on.
      * @throws DukeExecutionException if the program was unable to execute the action.
      */
-    public abstract void execute(Storage storage) throws DukeExecutionException;
+    public abstract String execute(Storage storage) throws DukeExecutionException;
 
 }

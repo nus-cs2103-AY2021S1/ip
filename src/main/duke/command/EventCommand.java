@@ -48,10 +48,10 @@ public class EventCommand extends Command {
      * @throws DukeExecutionException if an IOException occurs
      */
     @Override
-    public void execute(Storage storage) throws DukeExecutionException {
+    public String execute(Storage storage) throws DukeExecutionException {
         try {
             storage.add(event);
-            Ui.showTaskAddition(event);
+            return event.toString();
         } catch (IOException e) {
             throw new DukeExecutionException("Could not execute command due to IO exception.");
         }

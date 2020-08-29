@@ -47,10 +47,10 @@ public class DeadlineCommand extends Command {
      * @throws DukeExecutionException if an IOException occurs
      */
     @Override
-    public void execute(Storage storage) throws DukeExecutionException {
+    public String execute(Storage storage) throws DukeExecutionException {
         try {
             storage.add(deadline);
-            Ui.showTaskAddition(deadline);
+            return deadline.toString();
         } catch (IOException e) {
             throw new DukeExecutionException("Could not execute command due to IO exception.");
         }

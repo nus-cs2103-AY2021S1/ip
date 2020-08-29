@@ -11,8 +11,9 @@ public class ExitCommand extends Command {
      * @param storage The Storage object to perform the operations on.
      */
     @Override
-    public void execute(Storage storage) {
+    public String execute(Storage storage) {
         // Do nothing.
+        return "Goodbye";
     }
 
     /**

@@ -22,7 +22,7 @@ public class DeleteCommand extends Command {
     public DeleteCommand(String args) throws DukeArgumentException {
         try {
             int index = Integer.parseInt(args);
-            this.index = index;
+            this.index = index - 1;
         } catch (NumberFormatException ne) {
             throw new DukeArgumentException("Invalid index");
         }
@@ -40,9 +40,9 @@ public class DeleteCommand extends Command {
      * @throws DukeExecutionException if the index is out of range, or the program runs into an IOException
      */
     @Override
-    public void execute(Storage storage) throws DukeExecutionException {
+    public String execute(Storage storage) throws DukeExecutionException {
         try {
-            Ui.showTaskDeletion(storage.delete(index));
+            return storage.delete(index).toString();
         } catch (IndexOutOfBoundsException e) {
             throw new DukeExecutionException(String.format("Could not execute command due to the index %d being out "
                     + "of range", index));

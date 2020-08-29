@@ -8,7 +8,9 @@ import duke.exception.DukeExecutionException;
 import duke.exception.DukeIoException;
 import duke.parser.Parser;
 import duke.storage.Storage;
+import duke.ui.Gui;
 import duke.ui.Ui;
+import javafx.application.Application;
 
 
 public class Duke {
@@ -16,7 +18,7 @@ public class Duke {
     private static final String PATH = "data.txt";
 
     public static void main(String[] args) {
-        run();
+        Application.launch(Gui.class, args);
     }
 
     private static void run() {
