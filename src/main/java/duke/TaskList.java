@@ -29,9 +29,9 @@ public class TaskList {
         list.add(task);
         StringBuilder output = new StringBuilder();
         // output.append("    ____________________________________________________________\n");
-        output.append("     Got it. I've added this task:\n");
-        output.append(String.format("       %s\n", task));
-        output.append(String.format("     Now you have %d tasks in the list.\n", list.size()));
+        output.append("Got it. I've added this task:\n");
+        output.append(String.format("%s\n", task));
+        output.append(String.format("Now you have %d tasks in the list.\n", list.size()));
         // output.append("    ____________________________________________________________\n");
 
         return output.toString();
@@ -54,11 +54,11 @@ public class TaskList {
     public String listOut() {
         StringBuilder output = new StringBuilder();
         // output.append("    ____________________________________________________________\n");
-        output.append("     Here are the tasks in your list:\n");
+        output.append("Here are the tasks in your list:\n");
 
 
         for (int i = 0; i < list.size(); i++) {
-            output.append(String.format("     %d. %s \n", i + 1, list.get(i)));
+            output.append(String.format("%d. %s \n", i + 1, list.get(i)));
 
         }
 
@@ -74,7 +74,7 @@ public class TaskList {
      */
     public String delete(String input) throws DukeException {
         if (!input.contains(" ")) {
-            throw new DukeException(" ☹ OOPS!!! Please enter delete with a number.");
+            throw new DukeException("OOPS!!! Please enter delete with a number.");
         } else {
             String[] arr = input.split(" ");
             int index;
@@ -82,11 +82,11 @@ public class TaskList {
             try {
                 index = Integer.parseInt(arr[1]);
             } catch (NumberFormatException e) {
-                throw new DukeException(" ☹ OOPS!!! Invalid number.");
+                throw new DukeException("OOPS!!! Invalid number.");
             }
 
             if (index > list.size()) {
-                throw new DukeException(" ☹ OOPS!!! Invalid number.");
+                throw new DukeException("OOPS!!! Invalid number.");
             }
 
             Task task = list.get(index - 1);
@@ -94,9 +94,9 @@ public class TaskList {
 
             StringBuilder output = new StringBuilder();
             // output.append("    ____________________________________________________________\n");
-            output.append("     Noted. I've removed this task:\n");
-            output.append(String.format("       %s\n", task));
-            output.append(String.format("     Now you have %d tasks in the list.\n", list.size()));
+            output.append("Noted. I've removed this task:\n");
+            output.append(String.format("%s\n", task));
+            output.append(String.format("Now you have %d tasks in the list.\n", list.size()));
             // output.append("    ____________________________________________________________\n");
             return output.toString();
         }
@@ -110,7 +110,7 @@ public class TaskList {
      */
     public String done(String input) throws DukeException {
         if (!input.contains(" ")) {
-            throw new DukeException(" ☹ OOPS!!! Please enter done with a number.");
+            throw new DukeException("OOPS!!! Please enter done with a number.");
         } else {
             String[] arr = input.split(" ");
             int index;
@@ -119,19 +119,19 @@ public class TaskList {
                 // if string after done cannot be parsed to integer
                 index = Integer.parseInt(arr[1]);
             } catch (NumberFormatException e) {
-                throw new DukeException(" ☹ OOPS!!! Invalid number.");
+                throw new DukeException("OOPS!!! Invalid number.");
             }
 
             if (index > list.size()) {
-                throw new DukeException(" ☹ OOPS!!! Invalid number.");
+                throw new DukeException("OOPS!!! Invalid number.");
             }
 
             Task task = list.get(index - 1);
             task.completed();
             StringBuilder output = new StringBuilder();
             // output.append("    ____________________________________________________________\n");
-            output.append("     Nice! I've marked this task as done:\n");
-            output.append(String.format("       %s\n", task));
+            output.append("Nice! I've marked this task as done:\n");
+            output.append(String.format("%s\n", task));
             // output.append("    ____________________________________________________________\n");
             return output.toString();
         }
@@ -156,9 +156,9 @@ public class TaskList {
 
         StringBuilder output = new StringBuilder();
         // output.append("    ____________________________________________________________\n");
-        output.append("     Here are the matching tasks in your list:\n");
+        output.append("Here are the matching tasks in your list:\n");
         for (int i = 0; i < hits.size(); i++) {
-            output.append(String.format("     %d. %s \n", i + 1, hits.get(i)));
+            output.append(String.format("%d. %s \n", i + 1, hits.get(i)));
         }
         // output.append("    ____________________________________________________________\n");
         return output.toString();

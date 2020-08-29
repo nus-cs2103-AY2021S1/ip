@@ -7,6 +7,7 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 /**
@@ -24,15 +25,6 @@ public class Duke extends Application {
     public static Parser parser = new Parser();
     public static Ui ui = new Ui(taskList, storage, parser);
 
-    private final String HELP_TEXT = "Duke Bot Commands:\n" +
-            "list : list out all current tasks\n" +
-            "find <keyword> : find all task that corresponds to the keyword\n" +
-            "done <task number> : marks the specified task as done\n" +
-            "delete <task number> : deletes the specified task\n" +
-            "todo <task name> : adds a ToDo task\n" +
-            "deadline <task name> /by YYYY-MM-DD : adds a Deadline task\n" +
-            "event <task name> /at YYYY-MM-DD TT:TT-TT:TT : adds an Event task\n" +
-            "Do note that Date and Time must have the specified format\n";
     private Stage window;
     // output
     private TextArea outputTextArea = new TextArea("Hello! I'm Duke. \nWhat can I do for you?");
@@ -57,14 +49,6 @@ public class Duke extends Application {
         window = stage;
         window.setTitle("Duke Chat-Bot");
 
-        GridPane grid = new GridPane();
-        grid.setPadding(new Insets(10, 10, 10, 10));
-        grid.setVgap(8);
-        grid.setHgap(10);
-
-        outputTextArea.setEditable(false); // make output text area not editable
-        GridPane.setConstraints(outputTextArea, 0, 0, 10, 10);
-
         // read duke.txt file and initialise taskList
         try {
             storage.init();
@@ -74,15 +58,17 @@ public class Duke extends Application {
 
         //The container for the content of the chat to scroll.
         scrollPane = new ScrollPane();
-        dialogContainer = new VBox();
+        dialogContainer = new VBox(20.0); // add padding of 20 pixels between dialog box
         scrollPane.setContent(dialogContainer);
 
         userInput = new TextField();
         sendButton = new Button("Send");
 
+        // main layout
         AnchorPane mainLayout = new AnchorPane();
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
 
+        // create new scene
         scene = new Scene(mainLayout);
 
         stage.setScene(scene);
@@ -128,30 +114,10 @@ public class Duke extends Application {
         //Scroll down to the end every time dialogContainer's height changes.
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
 
-//        // command label
-//        Label commandLabel = new Label("Command: ");
-//        GridPane.setConstraints(commandLabel, 0, 10);
-//
-//        // command input
-//        TextField commandInput = new TextField();
-//        commandInput.setPromptText("Enter command");
-//        GridPane.setConstraints(commandInput, 1, 10);
-//
-//        // enter button
-//        Button enterButton = new Button("Enter");
-//        GridPane.setConstraints(enterButton, 3, 10);
-//        enterButton.setOnAction(e -> outputTextArea.setText(ui.readCommand(commandInput.getText())));
-//
-//        // help button
-//        Button helpButton = new Button("Help");
-//        GridPane.setConstraints(helpButton, 1, 11);
-//        helpButton.setOnAction(e -> PopUpBox.display("Help menu", HELP_TEXT));
-//
-//        grid.getChildren().addAll(outputTextArea, commandLabel, commandInput, helpButton, enterButton);
-//
-//        Scene defaultScene = new Scene(grid, 600, 400);
-//        window.setScene(defaultScene);
-//        window.show();
+        // Start up message
+        dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(
+                new Label("Hello! I'm Duke. \nWhat can I do for you?\n" +
+                        "Enter 'help' to see the list of commands"), new ImageView(duke)));
     }
 
     /**
@@ -182,8 +148,9 @@ public class Duke extends Application {
     }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Gets response from user
+     * @param input Response from user
+     * @return Output from chat bot
      */
     private String getResponse(String input) {
         return ui.readCommand(input);

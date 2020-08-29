@@ -23,9 +23,9 @@ public class Parser {
         // just need to ensure that stripped input > 5 letters
         // input needs to be stripped to prevent trailing whitespaces eg. "deadline    "
         if (input.strip().length() <= 5) {
-            throw new DukeException(" ☹ OOPS!!! The description of a Event cannot be empty.");
+            throw new DukeException("OOPS!!! The description of a Event cannot be empty.");
         } else if (!input.contains("/")) {
-            throw new DukeException(" ☹ OOPS!!! Event requires a date.");
+            throw new DukeException("OOPS!!! Event requires a date.");
         } else {
             //String taskType = input.substring(0, input.indexOf(" "));
             String taskName = input.substring(input.indexOf(" ") + 1);
@@ -47,9 +47,9 @@ public class Parser {
         // just need to ensure that stripped input > 8 letters
         // input needs to be stripped to prevent trailing whitespaces eg. "deadline    "
         if (input.strip().length() <= 8) {
-            throw new DukeException(" ☹ OOPS!!! The description of a deadline cannot be empty.");
+            throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
         } else if (!input.contains("/")) {
-            throw new DukeException(" ☹ OOPS!!! Deadline requires a date.");
+            throw new DukeException("OOPS!!! Deadline requires a date.");
         } else {
             //String taskType = input.substring(0, input.indexOf(" "));
             String taskName = input.substring(input.indexOf(" ") + 1);
@@ -71,7 +71,7 @@ public class Parser {
         // just need to ensure that stripped input > 4 letters
         // input needs to be stripped to prevent trailing whitespaces eg. "deadline    "
         if (input.strip().length() <= 4) {
-            throw new DukeException(" ☹ OOPS!!! The description of a todo cannot be empty.");
+            throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
         } else {
             //String taskType = input.substring(0, input.indexOf(" "));
             String taskName = input.substring(input.indexOf(" ") + 1);

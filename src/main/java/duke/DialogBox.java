@@ -6,8 +6,14 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
 
+/**
+ * Class to represent Text Box in the Anchor pane GUI
+ */
 public class DialogBox extends HBox {
 
     private Label text;
@@ -23,6 +29,7 @@ public class DialogBox extends HBox {
 
         this.setAlignment(Pos.TOP_RIGHT);
         this.getChildren().addAll(text, displayPicture);
+        this.setSpacing(10.0); // add padding between profile pic and text
     }
 
     /**
@@ -35,13 +42,28 @@ public class DialogBox extends HBox {
         this.getChildren().setAll(tmp);
     }
 
+    /**
+     * Returns a user Dialog Box
+     * @param l Input from the user
+     * @param iv Picture of the user
+     * @return Dialog box of user's input
+     */
     public static DialogBox getUserDialog(Label l, ImageView iv) {
-        return new DialogBox(l, iv);
+        var db = new DialogBox(l, iv);
+        db.setBackground(new Background(new BackgroundFill(Color.CYAN,null,null)));
+        return db;
     }
 
+    /**
+     * Returns a Duke Dialog Box
+     * @param l Input from Duke
+     * @param iv Picture of Duke
+     * @return Dialog Box of duke's response
+     */
     public static DialogBox getDukeDialog(Label l, ImageView iv) {
         var db = new DialogBox(l, iv);
         db.flip();
+        db.setBackground(new Background(new BackgroundFill(Color.DARKORANGE,null,null)));
         return db;
     }
 }
