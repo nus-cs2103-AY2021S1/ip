@@ -62,6 +62,6 @@ public class Task { //TODO: convert to abstract class
      */
     @Override
     public String toString(){
-        return String.format("[%c] %s", (this.isDone) ? '✓' : '✗', this.desc);
+        return String.format("[%c] %s", (this.isDone) ? '\u2713' : '\u2718', this.desc);
     }
 }

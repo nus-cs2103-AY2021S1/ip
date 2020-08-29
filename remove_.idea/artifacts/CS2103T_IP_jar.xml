@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="CS2103T IP:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/CS2103T_IP_jar</output-path>
+    <root id="archive" name="CS2103T IP.jar">
+      <element id="module-output" name="CS2103T IP" />
+    </root>
+  </artifact>
+</component>

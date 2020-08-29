@@ -11,7 +11,7 @@ public class EventTest {
     @Test
     public void eventCreation_normalInput_success() {
         Event event = new Event("read book", LocalDateTime.of(2020,02,14,15,50));
-        Assertions.assertEquals("[E][✗] read book (at: Feb 14 2020 1550)", event.toString());
+        Assertions.assertEquals("[E][\u2718] read book (at: Feb 14 2020 1550)", event.toString());
     }
 
     @Test
@@ -42,7 +42,7 @@ public class EventTest {
     public void eventDone_setDone_success() {
         Event event = new Event("read book", LocalDateTime.parse("2019-09-11T13:40"));
         event.setDone();
-        Assertions.assertEquals("[E][✓] read book (at: Sep 11 2019 1340)", event.toString());
+        Assertions.assertEquals("[E][\u2713] read book (at: Sep 11 2019 1340)", event.toString());
     }
 
     @Test

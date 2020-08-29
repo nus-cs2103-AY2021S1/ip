@@ -8,7 +8,7 @@ public class ToDoTest {
     @Test
     public void todoCreation_normalInput_success() {
         ToDo todo = new ToDo("read book");
-        Assertions.assertEquals("[T][✗] read book", todo.toString());
+        Assertions.assertEquals("[T][\u2718] read book", todo.toString());
     }
 
     @Test
@@ -25,7 +25,7 @@ public class ToDoTest {
     public void todoDone_setDone_success() {
         ToDo todo = new ToDo("read book");
         todo.setDone();
-        Assertions.assertEquals("[T][✓] read book", todo.toString());
+        Assertions.assertEquals("[T][\u2713] read book", todo.toString());
     }
 
     @Test
