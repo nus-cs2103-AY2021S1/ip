@@ -104,7 +104,7 @@ public class TaskList {
                     // this shouldn't happen
                     type = null;
                 }
-                completionStatus = typeCompletion.charAt(4) == '✓';
+                completionStatus = String.valueOf(typeCompletion.charAt(4)).equals("✓");
             } else {
                 throw Ui.DukeException.fileError();
             }
