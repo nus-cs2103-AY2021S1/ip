@@ -109,7 +109,7 @@ public class TaskList {
      * @param nums An array of numbers in string form.
      * @return String representing the newly completed task.
      */
-    public String done(Integer... nums) {
+    public String done(Integer... nums) { // VARARGS
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < nums.length; i++) {
             Schedulable t = todoList.get(nums[i] - 1);

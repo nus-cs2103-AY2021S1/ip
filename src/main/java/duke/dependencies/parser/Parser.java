@@ -37,12 +37,13 @@ class Parser {
         return this.command;
     }
 
+
     /**
-     * Static factory method for constructing the checker object.
-     * The Checker should have an Executable containing the task.
      *
-     * @param s command
-     * @return Checker object
+     * @param s String to be parsed.
+     * @return A parser object wrapped around an Executable.
+     * @throws DukeException Thrown if the given string input from
+     * the user does not match any form of valid commands.
      */
     public static Parser parseAndCheck(String s) throws DukeException {
         try {
@@ -52,6 +53,13 @@ class Parser {
         }
     }
 
+    /**
+     *
+     * @param pw Password/name to be checked with.
+     * @return
+     * @throws DukeException Thrown if the given string is incorrect.
+     * AKA no authorisation.
+     */
     public static Parser authenthicateUser(String pw) throws DukeException {
         Storage s = new Storage();
         if (s.checkUserAuth(pw)) {
