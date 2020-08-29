@@ -65,7 +65,7 @@ public class Task {
      * @return Formatted string to be used in data file.
      */
     public String toFileStringFormat() {
-        return String.format("%d / %s",isDone ? 1 : 0,this.desciption);
+        return String.format("%d / %s", isDone ? 1 : 0, this.desciption);
     }
 
     /**
@@ -75,12 +75,12 @@ public class Task {
      * @return True if the description is the same, false otherwise.
      */
     public boolean isExactDescription(Task task) {
-        return  this.desciption.equals(task.desciption);
+        return this.desciption.equals(task.desciption);
     }
 
     @Override
     public String toString() {
-        return String.format("[%s] %s", this.getStatusIcon(),this.desciption);
+        return String.format("[%s] %s", this.getStatusIcon(), this.desciption);
     }
 
 }

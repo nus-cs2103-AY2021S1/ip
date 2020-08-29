@@ -39,9 +39,9 @@ public class AddCommand implements Command {
 
     @Override
     public String getResponse() {
-        return "Got it. I've added this task: " + "\n\t\t" +
-                targetTask.toString() + "\n\t" +
-                String.format("Now you have %d tasks in the list.\n", currentListSize);
+        return "Got it. I've added this task: " + "\n\t\t"
+                + targetTask.toString() + "\n\t"
+                + String.format("Now you have %d tasks in the list.\n", currentListSize);
     }
 
 }

@@ -1,7 +1,6 @@
-import duke.task.Task;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import duke.task.Task;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -20,5 +19,4 @@ public class TaskTest {
         Task newTask = new Task("read book");
         assertFalse(newTask.containsKeyWord(keyword));
     }
-    
 }

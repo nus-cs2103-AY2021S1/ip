@@ -1,9 +1,11 @@
 package duke.tool;
 
+import java.util.ArrayList;
+
 import duke.exception.TaskExistException;
 import duke.task.Task;
 
-import java.util.ArrayList;
+
 
 /**
  * Represents the task list stored in Duke system.

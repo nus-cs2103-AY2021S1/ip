@@ -1,5 +1,7 @@
 package duke.ui;
 
+import java.util.ArrayList;
+
 import duke.Storage;
 import duke.command.Command;
 import duke.exception.DukeException;
@@ -18,28 +20,29 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-import java.util.ArrayList;
-
 /**
  * Represents the UI manager for the system.
  */
 public class Ui {
-
+    /**Welcome message*/
+    private static final String WELCOME_MESSAGE = "Hello, I am Duke! \n\t What can I do for you?";
+    /**
+     * Horizontal Line
+     */
+    private static final String LINE = "-------------------------------------";
     private final Image user = new Image(this.getClass().getResourceAsStream("/images/me.png"));
     private final Image duke = new Image(this.getClass().getResourceAsStream("/images/ben.png"));
 
     /**
      * Logo of Duke.
      */
-    private String logo =  " ____        _        \n"
+    private String logo = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
 
-    /**
-     * Storage of the system
-     */
+    /**Storage of the system.*/
     private final Storage storage;
 
     /**
@@ -54,25 +57,22 @@ public class Ui {
 
     private Stage stage;
 
-
-
     /**
-     * Welcome message
+     * Creates a Ui manager.
+     *
+     * @param storage Storage of Duke system.
+     * @param tasks Task list in the system.
      */
-    private static final String WELCOME_MESSAGE = "Hello, I am Duke! \n\t What can I do for you?";
-
-
-
-    /**
-     * Horizontal Line
-     */
-    private static final String LINE = "-------------------------------------";
-
     public Ui(Storage storage, TaskList tasks) {
         this.storage = storage;
         this.tasks = tasks;
     }
 
+    /**
+     * Processes the application.
+     *
+     * @param stage javaFX stage.
+     */
     public void process(Stage stage) {
         this.stage = stage;
         scrollPane = new ScrollPane();
@@ -121,7 +121,7 @@ public class Ui {
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
         Label welcome = new Label(Ui.WELCOME_MESSAGE);
-        dialogContainer.getChildren().add(DialogBox.getDukeDialog(welcome,new ImageView(duke)));
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(welcome, new ImageView(duke)));
 
         sendButton.setOnMouseClicked((event -> handleUserInput()));
 
@@ -158,7 +158,7 @@ public class Ui {
         } catch (DukeException e) {
             printLog(e.getMessage());
             Label errorMsg = new Label(e.getMessage());
-            dialogContainer.getChildren().add(DialogBox.getDukeDialog(errorMsg,new ImageView(duke)));
+            dialogContainer.getChildren().add(DialogBox.getDukeDialog(errorMsg, new ImageView(duke)));
         }
     }
 

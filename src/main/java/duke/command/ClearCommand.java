@@ -7,7 +7,7 @@ import duke.tool.TaskList;
 /**
  * Represent the command that to clear all data.
  */
-public class ClearCommand implements Command{
+public class ClearCommand implements Command {
     /**
      * Message after clear command is executed
      */

@@ -26,7 +26,7 @@ public class Event extends Task {
      * @param description Description of the event.
      * @param at Time for the event.
      */
-    public Event(boolean isDone,String description, LocalDateTime at) {
+    public Event(boolean isDone, String description, LocalDateTime at) {
         super(description);
         this.at = at;
         this.isDone = isDone;
@@ -34,7 +34,7 @@ public class Event extends Task {
 
     @Override
     public String toFileStringFormat() {
-        return String.format("E / %d / %s / %s",isDone ? 1 : 0, this.desciption,this.at);
+        return String.format("E / %d / %s / %s", isDone ? 1 : 0, this.desciption, this.at);
     }
 
     @Override

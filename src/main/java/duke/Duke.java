@@ -1,5 +1,7 @@
 package duke;
 
+import java.io.IOException;
+
 import duke.exception.DukeException;
 import duke.tool.TaskList;
 import duke.ui.Ui;
@@ -10,8 +12,6 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-
-import java.io.IOException;
 
 
 /**
@@ -45,7 +45,7 @@ public class Duke extends Application {
 
         try {
             tasks = new TaskList(storage.load());
-            ui = new Ui(storage,tasks);
+            ui = new Ui(storage, tasks);
         } catch (IOException e) {
             throw new DukeException("Cannot open data file");
         }
@@ -58,7 +58,7 @@ public class Duke extends Application {
 
 
     public static void main(String[] args) {
-        Application.launch(Duke.class,args);
+        Application.launch(Duke.class, args);
     }
 
 

@@ -9,11 +9,11 @@ import duke.ui.Ui;
 /**
  * Represents a command to find certain task with keyword.
  */
-public class FindCommand implements Command{
+public class FindCommand implements Command {
 
     /** Search keyword for the list */
     private final String keyword;
-    TaskList resultTaskList = new TaskList();
+    private final TaskList resultTaskList = new TaskList();
 
     /**
      * Creates a find command with search keyword.
@@ -25,10 +25,10 @@ public class FindCommand implements Command{
 
 
     @Override
-    public void execute(TaskList tasks,  Storage storage) throws DukeException {
+    public void execute(TaskList tasks, Storage storage) throws DukeException {
 
         //Add the tasks whose description contains keyword
-        for(Task task: tasks.getTasks()) {
+        for (Task task: tasks.getTasks()) {
             if (task.containsKeyWord(keyword)) {
                 resultTaskList.add(task);
             }

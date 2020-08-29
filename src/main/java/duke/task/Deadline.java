@@ -25,7 +25,7 @@ public class Deadline extends Task {
      * @param description Description of the task.
      * @param by Deadline of the task.
      */
-    public Deadline(boolean isDone,String description,LocalDateTime by) {
+    public Deadline(boolean isDone, String description, LocalDateTime by) {
         super(description);
         this.by = by;
         this.isDone = isDone;
@@ -33,7 +33,7 @@ public class Deadline extends Task {
 
     @Override
     public String toFileStringFormat() {
-        return String.format("D / %d / %s / %s",isDone ? 1 : 0, this.desciption,this.by);
+        return String.format("D / %d / %s / %s", isDone ? 1 : 0, this.desciption, this.by);
     }
 
     @Override

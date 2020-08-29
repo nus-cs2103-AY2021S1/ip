@@ -1,10 +1,9 @@
 package duke;
 
-import duke.exception.AmbiguousInputException;
-
-
 import java.util.HashMap;
 import java.util.Map;
+
+import duke.exception.AmbiguousInputException;
 
 /**
  * ValidCommand enum represents the possible command type.
@@ -22,14 +21,15 @@ public enum ValidCommand {
     LIST("list", "LIST", "ls", "LS");
 
     /**
+     * Map that match alias with valid command
+     */
+    private static final Map<String, ValidCommand> aliasMap = new HashMap<>();
+
+    /**
      * Valid alias for the commands
      */
     private final String[] aliases;
 
-    /**
-     * Map that match alias with valid command
-     */
-    private static final Map<String, ValidCommand> aliasMap = new HashMap<>();
 
     static {
         for (ValidCommand command : ValidCommand.values()) {

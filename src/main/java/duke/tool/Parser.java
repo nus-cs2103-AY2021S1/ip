@@ -1,35 +1,36 @@
 package duke.tool;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 import duke.ValidCommand;
+import duke.command.AddCommand;
 import duke.command.ClearCommand;
 import duke.command.Command;
-import duke.command.AddCommand;
 import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
-
 import duke.exception.AmbiguousInputException;
 import duke.exception.DeletionIndexEmptyException;
 import duke.exception.DescriptionEmptyException;
 import duke.exception.DoneIndexEmptyException;
 import duke.exception.DukeException;
 import duke.exception.TimeEmptyException;
-
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Todo;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 /**
  * Represents a parser to interpret the user's command.
  */
 public class Parser {
 
-    /** Formatter for input date */
+    /**
+     * Formatter for input date
+     */
     private static final DateTimeFormatter acceptedFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
     /**
@@ -87,8 +88,7 @@ public class Parser {
                 throw new TimeEmptyException("deadline");
             }
 
-            return new AddCommand(new Deadline(set[0]
-                    , LocalDateTime.parse(set[1], acceptedFormatter)));
+            return new AddCommand(new Deadline(set[0], LocalDateTime.parse(set[1], acceptedFormatter)));
         }
         case EVENT: {
             if (s.length == 1) {

@@ -12,11 +12,17 @@ import javafx.scene.shape.Circle;
 
 
 public class DialogBox extends HBox {
-    private final static Insets BOX_PADDING = new Insets(10,2,10,2);
-    private final static Insets TEXT_PIC_PADDING = new Insets(0,0,0,10);
+    private static final Insets BOX_PADDING = new Insets(10, 2 , 10 , 2);
+    private static final Insets TEXT_PIC_PADDING = new Insets(0, 0, 0 , 10);
 
+    /**
+     * Creates a dialog box in GUI.
+     *
+     * @param l Label to be displayed.
+     * @param iv Imageview to be displayed
+     */
     public DialogBox(Label l, ImageView iv) {
-        Circle clipCircle = new Circle(50,50,50);
+        Circle clipCircle = new Circle(50, 50, 50);
 
         l.setWrapText(true);
         l.setPadding(DialogBox.TEXT_PIC_PADDING);
@@ -37,11 +43,11 @@ public class DialogBox extends HBox {
     }
 
     public static DialogBox getUserDialog(Label l, ImageView iv) {
-        return new DialogBox(l,iv);
+        return new DialogBox(l, iv);
     }
 
     public static DialogBox getDukeDialog(Label l, ImageView iv) {
-        DialogBox db = new DialogBox(l,iv);
+        DialogBox db = new DialogBox(l, iv);
         db.flip();
         return db;
     }

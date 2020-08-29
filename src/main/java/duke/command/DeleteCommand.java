@@ -1,6 +1,5 @@
 package duke.command;
 
-
 import duke.Storage;
 import duke.task.Task;
 import duke.tool.TaskList;
@@ -39,8 +38,8 @@ public class DeleteCommand implements Command {
 
     @Override
     public String getResponse() {
-        return "Noted. I've removed this task: " + "\n\t\t" +
-                deletedTask.toString()
+        return "Noted. I've removed this task: " + "\n\t\t"
+                + deletedTask.toString()
                 + String.format("\nNow you have %d tasks in the list.\n", currentListSize);
     }
 

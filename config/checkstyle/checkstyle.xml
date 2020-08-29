@@ -29,10 +29,10 @@
     <property name="file" value="${config_loc}/suppressions.xml"/>
   </module>
 
-  <module name="LineLength">
-    <!-- Checks if a line is too long. -->
-    <property name="max" value="120"/>
-  </module>
+<!--  <module name="LineLength">-->
+<!--    &lt;!&ndash; Checks if a line is too long. &ndash;&gt;-->
+<!--    <property name="max" value="120"/>-->
+<!--  </module>-->
 
   <!-- All Java AST specific tests live under TreeWalker module. -->
   <module name="TreeWalker">
