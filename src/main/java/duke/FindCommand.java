@@ -23,19 +23,21 @@ public class FindCommand extends Command {
      * @param ui For user interaction.
      * @param storage Unused.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        System.out.println(">> Your matching tasks:");
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        StringBuilder response = new StringBuilder();
+        response.append(">> Your matching tasks:");
         boolean hasResult = false;
         int i = 1;
         for (Task task : tasks.getTasks()) {
             if (task.name.contains(instructions[1])) {
-                System.out.println(">> " + i++ + ". " + task);
+                response.append("\n>> " + i++ + ". " + task);
                 hasResult = true;
             }
         }
         if (!hasResult) {
-            System.out.println(">> No results!");
+            return ">> No results!";
         }
+        return response.toString();
     }
 }
 

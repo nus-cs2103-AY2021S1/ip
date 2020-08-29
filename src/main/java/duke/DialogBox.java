@@ -13,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
 
 /**
  * An example of a custom control using FXML.
@@ -36,6 +37,12 @@ public class DialogBox extends HBox {
         }
 
         dialog.setText(text);
+        String[] textPortions = text.split("\n");
+        int units = textPortions.length;
+        for (String s : textPortions) {
+            units += Math.max(0, s.length() / 20 - 1);
+        }
+        dialog.setMinHeight(units * 15 + 85);
         displayPicture.setImage(img);
     }
 

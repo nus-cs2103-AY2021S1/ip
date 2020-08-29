@@ -23,9 +23,8 @@ public class AddTodoCommand extends Command {
      * @param ui For user interaction.
      * @param storage To store the added task.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         Task todo = new Todo(instructions[1]);
-        tasks.addTask(todo);
-        storage.save(tasks);
+        return tasks.addTask(todo) + "\n" + storage.save(tasks);
     }
 }

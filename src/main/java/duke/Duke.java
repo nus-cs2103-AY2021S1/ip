@@ -5,8 +5,6 @@ package duke;
  */
 
 public class Duke {
-    /** Default file path */
-    private static final String FILE_PATH = "data/duke.txt";
     /** Local task store */
     private final Storage storage;
     /** List of tasks */
@@ -31,7 +29,7 @@ public class Duke {
             ui.showLoadingError();
             tasks = new TaskList();
         }
-        ui.greet();
+        System.out.println(ui.greet());
     }
 
     /**
@@ -41,7 +39,7 @@ public class Duke {
         String response = "";
         try {
             Command cmd = parser.parse(input);
-            cmd.execute(tasks, ui, storage);
+            response = cmd.execute(tasks, ui, storage);
         } catch (DukeException e) {
             response = e.getMessage();
         }
