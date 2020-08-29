@@ -24,21 +24,21 @@ public class Ui {
      * Greets the user.
      */
     public String startMessage() {
-        return messageFormatter(new String[]{OPENING_MSG});
+        return messageFormatter(OPENING_MSG);
     }
 
     /**
      * Greets the user.
      */
     public String greetings() {
-        return messageFormatter(new String[]{HELLO_DUKE, QUESTION});   
+        return messageFormatter(HELLO_DUKE, QUESTION);   
     }
 
     /**
      * Saying goodbye to user.
      */
     public String goodBye() {
-        return messageFormatter(new String[]{GOODBYE_MSG});
+        return messageFormatter(GOODBYE_MSG);
     }
 
     /**
@@ -46,14 +46,14 @@ public class Ui {
      * @param msg Error message to be printed.
      */
     public String printException(String msg) {
-        return messageFormatter(new String[]{msg});
+        return messageFormatter(msg);
     }
 
     /**
      * Formatter to format any message. Easily customizable
      * @param messageList messages to be wrapped around the formatter.
      */
-    public String messageFormatter(String[] messageList) {
+    public String messageFormatter(String ...messageList) {
         StringBuffer s = new StringBuffer("");
         for (int i = 0; i < messageList.length; i++) {
             s.append(messageList[i]).append("\n"); 

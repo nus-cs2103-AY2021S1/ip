@@ -71,6 +71,6 @@ public class AddCommand extends Command {
             return "";
         }
         tasks.add(task);
-        return ui.messageFormatter(new String[]{ADDED_NOTIFICATION, task.toString(), printNumTask(tasks)});
+        return ui.messageFormatter(ADDED_NOTIFICATION, task.toString(), printNumTask(tasks));
     }
 }

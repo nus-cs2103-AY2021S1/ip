@@ -34,7 +34,7 @@ public class ListCommand extends Command {
      */
     private String showListTasks(TaskList tasks, Ui ui) {
         if (tasks.size() == 0) {
-            return ui.messageFormatter(new String[]{EMPTY_MSG});
+            return ui.messageFormatter(EMPTY_MSG);
         } else {
             String[] listMessage = new String[tasks.size() + 1];
             listMessage[0] = SHOW_TASK;

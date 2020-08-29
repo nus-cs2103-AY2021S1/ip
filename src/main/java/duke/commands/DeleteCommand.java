@@ -41,12 +41,11 @@ public class DeleteCommand extends Command {
      */
     private String deleteTask(int pos, Ui ui, TaskList tasks) {
         if (pos <= 0 || pos > tasks.size()) {
-            return ui.messageFormatter(new String[]{INVALID_INPUT});
+            return ui.messageFormatter(INVALID_INPUT);
         } else {
             Task task = tasks.get(pos - 1);
             tasks.remove(pos - 1);
-            String[] messageList = {DELETE_NOTIFICATION, task.toString(),printNumTask(tasks)};
-            return ui.messageFormatter(messageList);
+            return ui.messageFormatter(DELETE_NOTIFICATION, task.toString(),printNumTask(tasks));
         }
     }
 }

@@ -48,10 +48,12 @@ public class Duke  {
         try {
             Command c = Parser.parse(input);
             String reply = c.execute(tasks, ui, storage);
-            setTimeout(()-> {
-                Platform.exit();
-                System.exit(0);
-            }, 1000);
+            if (reply.equals(ui.goodBye())) {
+                setTimeout(()-> {
+                    Platform.exit();
+                    System.exit(0);
+                }, 1000);
+            }
             return reply;
         } catch (DukeException e) {
             return e.getMessage();
