@@ -18,7 +18,7 @@ public class Duke {
         storage = new Storage(filePath);
         try {
             tasks = new TaskList(storage.load());
-        }  catch (IOException e) {
+        } catch (IOException e) {
             ui.showLoadingError();
             tasks = new TaskList();
         }
@@ -74,6 +74,9 @@ public class Duke {
                     break;
                 case "find":
                     ui.showRequiredTasks(tasks.getTasksWithKeyWord(processedCommand[1]));
+                    break;
+                default:
+                    break;
                 }
                 ui.showTotalTasks(tasks.getNumTasks());
                 storage.updateFile(tasks.toString()); //reload the file

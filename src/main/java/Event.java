@@ -29,10 +29,10 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "E|" + super.toString() + "|" +
-                eventDate.format(DateTimeFormatter.ofPattern("dd MMM yyyy")) + "|" +
-                startTime.format(DateTimeFormatter.ofPattern("hh.mma")) + " to " +
-                endTime.format(DateTimeFormatter.ofPattern("hh.mma"));
+        return "E|" + super.toString() + "|"
+                + eventDate.format(DateTimeFormatter.ofPattern("dd MMM yyyy")) + "|"
+                + startTime.format(DateTimeFormatter.ofPattern("hh.mma")) + " to "
+                + endTime.format(DateTimeFormatter.ofPattern("hh.mma"));
     }
 }
 

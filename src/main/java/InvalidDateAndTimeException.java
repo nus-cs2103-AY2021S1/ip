@@ -3,8 +3,8 @@
  */
 public class InvalidDateAndTimeException extends DukeException {
     public InvalidDateAndTimeException() {
-        super("Please input date in this format YYYY-MM-DD.\n" +
-                "For events, input the time in this format HHMM-HHMM.");
+        super("Please input date in this format YYYY-MM-DD.\n"
+                + "For events, input the time in this format HHMM-HHMM.");
 
     }
 }
