@@ -1,3 +1,20 @@
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.PrintStream;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
 import com.siawsam.duke.Deadline;
 import com.siawsam.duke.DukeException;
 import com.siawsam.duke.Event;
@@ -9,29 +26,9 @@ import com.siawsam.duke.TaskSearcher;
 import com.siawsam.duke.Todo;
 import com.siawsam.duke.Ui;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.PrintStream;
-
-import java.util.Arrays;
-import java.util.List;
-import java.util.ArrayList;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-
-
 public class DukeTest {
     private final PrintStream standardOut = System.out;
-    private static final ByteArrayOutputStream outputCaptor = new ByteArrayOutputStream();
+    private final ByteArrayOutputStream outputCaptor = new ByteArrayOutputStream();
 
     @BeforeEach
     public void setUp() {
@@ -49,8 +46,8 @@ public class DukeTest {
     public void testWelcomeMessage() {
         Ui.showWelcomeMessage();
         assertEquals(
-               "Hi I'm Duke, your personal task-tracker bot!\n" +
-                       "You can add todos, deadlines, or events to my list.\n",
+               "Hi I'm Duke, your personal task-tracker bot!\n"
+                       + "You can add todos, deadlines, or events to my list.\n",
                outputCaptor.toString()
         );
     }
