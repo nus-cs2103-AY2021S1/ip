@@ -39,7 +39,7 @@ public abstract class Task {
      * @return True if this task is done, False otherwise
      */
     public boolean isDone() {
-        return this.isDone;    
+        return this.isDone;
     }
 
     /**
