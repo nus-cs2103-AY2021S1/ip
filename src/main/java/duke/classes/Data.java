@@ -1,12 +1,5 @@
 package duke.classes;
 
-import duke.exceptions.DukeInvalidTimeException;
-import duke.tasks.Deadline;
-import duke.tasks.Event;
-import duke.tasks.Task;
-import duke.tasks.TaskType;
-import duke.tasks.Todo;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -17,6 +10,14 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
+import duke.exceptions.DukeInvalidTimeException;
+
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.TaskType;
+import duke.tasks.Todo;
 
 /**
  * Data class that handles the storage and loading of the tasks stored

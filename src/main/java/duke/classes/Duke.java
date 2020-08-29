@@ -1,11 +1,12 @@
 package duke.classes;
 
+import java.io.IOException;
+
 import duke.exceptions.BlahException;
 import duke.exceptions.DukeInvalidTimeException;
 import duke.exceptions.EmptyDukeException;
 import duke.tasks.Task;
 
-import java.io.IOException;
 
 /**
  * The Duke class implements the DukeChatBot that is wired to store, display, update and delete

@@ -1,10 +1,11 @@
 package duke.tasks;
 
-import duke.exceptions.DukeInvalidTimeException;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+import duke.exceptions.DukeInvalidTimeException;
+
 /**
  * Event class which carries tasks of type Event and extends of the base Task class.
  */

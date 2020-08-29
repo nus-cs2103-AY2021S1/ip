@@ -1,7 +1,9 @@
 package duke.duke.tasks;
 
-import duke.tasks.Todo;
 import org.junit.jupiter.api.Test;
+
+import duke.tasks.Todo;
+
 
 public class TodoTest {
     @Test

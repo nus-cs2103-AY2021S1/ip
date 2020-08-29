@@ -1,8 +1,8 @@
 package duke.classes;
 
-import duke.tasks.Task;
-
 import java.util.List;
+
+import duke.tasks.Task;
 
 /**
  * Class that handles the interactions between chatbot and users.

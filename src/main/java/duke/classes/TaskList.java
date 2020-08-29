@@ -1,5 +1,8 @@
 package duke.classes;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import duke.exceptions.BlahException;
 import duke.exceptions.DukeInvalidTimeException;
 import duke.exceptions.EmptyDukeException;
@@ -8,9 +11,6 @@ import duke.tasks.Event;
 import duke.tasks.Task;
 import duke.tasks.TaskType;
 import duke.tasks.Todo;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Class that carries the data structure for storing tasks and supports operations for the tasklist.
