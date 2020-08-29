@@ -26,6 +26,27 @@ public class TaskList {
         System.out.println("Now you have " + this.database.size() + " tasks in your list");
     }
 
+    /**
+     * Uses the given keyword to search for relevant tasks.
+     * Relevant tasks will then be printed out.
+     */
+    public void find(Scanner sc) {
+        String keyword = sc.next();
+        int tasksFound = 0;
+
+        for (int i = 0; i < this.database.size(); i++) {
+            String currentTask = database.get(i).toString();
+            if (currentTask.contains(keyword)) {
+                tasksFound += 1;
+                System.out.println(database.get(i));
+            }
+        }
+
+        if (tasksFound == 0) {
+            System.out.println("No such tasks matches the keyword");
+        }
+    }
+
     public ArrayList<Task> getDatabase() {
       return this.database;
     }

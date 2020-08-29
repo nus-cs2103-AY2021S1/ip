@@ -38,6 +38,10 @@ public class Parser {
             this.tasks.onEventCommand(sc);
             break;
 
+        case "find":
+            this.tasks.find(sc);
+            break;
+
         default:
             this.tasks.noSuchCommand();
             break;
