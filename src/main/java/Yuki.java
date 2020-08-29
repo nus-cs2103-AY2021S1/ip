@@ -8,18 +8,18 @@ import duke.Ui;
 import duke.command.Command;
 import duke.command.ExitCommand;
 import javafx.animation.PauseTransition;
+import javafx.application.Platform;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
 /**
- * <code>Main</code> starts the entire application by creating a <code>Duke</code> object and checking for existing
- * tasks.
+ * <code>Yuki</code> class starts the bot by creating a <code>Yuki</code> object and checking for
+ * existing tasks.
  */
 public class Yuki {
     protected static final Ui UI = new Ui();
     protected Storage storage;
     protected TaskList taskList;
-    protected boolean isExit;
     private Stage stage;
 
     Yuki() {
@@ -60,7 +60,7 @@ public class Yuki {
     }
 
     /**
-     * Creates a <code>Duke</code> object.
+     * Creates a <code>Yuki</code> object.
      *
      * @param args array for command-line arguments
      */
@@ -81,10 +81,10 @@ public class Yuki {
     }
 
     /**
-     * Generates a response from <code>Duke</code> from user's input.
+     * Generates a response from <code>Yuki</code> from user's input.
      *
      * @param input command from user
-     * @return string representation of response from <code>Duke</code>
+     * @return string representation of response from <code>Yuki</code>
      */
     String getResponse(String input) {
         try {
@@ -93,11 +93,9 @@ public class Yuki {
             String s = c.execute(input, storage, Yuki.UI, taskList);
 
             if (c instanceof ExitCommand) {
-
                 PauseTransition delay = new PauseTransition(Duration.seconds(3));
-                delay.setOnFinished(event -> stage.close());
+                delay.setOnFinished(event -> Platform.exit());
                 delay.play();
-
             }
 
             return s;
