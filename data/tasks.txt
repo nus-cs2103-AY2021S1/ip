@@ -1,3 +1,5 @@
 E | 1 | project meeting | Thursday
-T | 0 | read book
 D | 0 | return book | 2020-08-30
+T | 0 | read book
+D | 0 | do homework | Sunday
+E | 0 | project meeting | Monday

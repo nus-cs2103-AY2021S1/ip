@@ -11,7 +11,6 @@ import java.util.ArrayList;
 
 public class Storage {
     String filePath;
-    ArrayList<String> encodedTasks = new ArrayList<>();
 
     Storage(String filePath) {
         this.filePath = filePath;

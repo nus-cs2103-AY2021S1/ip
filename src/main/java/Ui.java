@@ -18,7 +18,7 @@ public class Ui {
         System.out.println("There was an error loading the file");
     }
 
-    public String getNextLine() {
+    public String readCommand() {
         String input;
         Scanner scan = new Scanner(System.in);
 
@@ -27,11 +27,15 @@ public class Ui {
         return input;
     }
 
-    public String respondToUser(String input, TaskList tasks) {
-        return new Parser().getResponse(input, tasks);
+    public void showError(String errorMessage) {
+        System.out.println(errorMessage);
     }
 
     public String exit() {
         return "byebye! hope to see you again soon :-)";
+    }
+
+    public void showLine() {
+        System.out.println("--------------------------------------------------------------");
     }
 }

@@ -3,32 +3,28 @@
  */
 
 public class Parser {
-    public String getResponse(String input, TaskList tasks) {
-        String firstWord = input.split(" ")[0];
+    public static Command parse(String fullCommand) {
+        String firstWord = fullCommand.split(" ")[0];
 
-        try {
-            switch(firstWord) {
-                case "list":
-                    return tasks.returnList();
-                case "done":
-                    int i = Integer.parseInt(input.substring(5));
-                    return (tasks.done(i));
-                case "delete":
-                    int j = Integer.parseInt(input.substring(7));
-                    return tasks.delete(j);
-                case "todo":
-                    return tasks.add(new ToDo(input));
-                case "deadline":
-                    return tasks.add(new Deadline(input));
-                case "event":
-                    return tasks.add(new Event(input));
-                case "find":
-                    return tasks.find(input.substring(5));
-                default:
-                    throw new DukeException("oops! im sorry, but i do not know what that means :-(");
-            }
-        } catch (DukeException e) {
-            return e.getMessage();
+        switch (firstWord) {
+            case "list":
+                return new ListCommand(fullCommand);
+            case "done":
+                return new DoneCommand(fullCommand);
+            case "delete":
+                return new DeleteCommand(fullCommand);
+            case "todo":
+                return new ToDoCommand(fullCommand);
+            case "deadline":
+                return new DeadlineCommand(fullCommand);
+            case "event":
+                return new EventCommand(fullCommand);
+            case "find":
+                return new FindCommand(fullCommand);
+            case "bye":
+                return new ExitCommand(fullCommand);
+            default:
+                return new InvalidCommand(fullCommand);
         }
     }
 }

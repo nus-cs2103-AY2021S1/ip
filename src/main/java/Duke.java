@@ -20,26 +20,20 @@ public class Duke {
 
     public void run() {
         ui.showWelcome();
-
-        String input = ui.getNextLine();
-        String firstWord = input.split(" ")[0];
-
-        StringBuilder sb = new StringBuilder();
-
-        while (!firstWord.equals("bye")) {
-            sb.append("--------------------------------------------------------------\n")
-                    .append(ui.respondToUser(input, tasks))
-                    .append("\n--------------------------------------------------------------");
-            storage.save(tasks);
-            System.out.println(sb.toString());
-            sb = new StringBuilder();
-            input = ui.getNextLine();
-            firstWord = input.split(" ")[0];
+        boolean isExit = false;
+        while (!isExit) {
+            try {
+                String fullCommand = ui.readCommand();
+                ui.showLine();
+                Command c = Parser.parse(fullCommand);
+                c.execute(tasks, ui, storage);
+                isExit = c.isExit();
+            } catch (DukeException e) {
+                ui.showError(e.getMessage());
+            } finally {
+                ui.showLine();
+            }
         }
-        sb.append("--------------------------------------------------------------\n")
-                .append(ui.exit())
-                .append("\n--------------------------------------------------------------");
-        System.out.println(sb.toString());
     }
 
     public static void main(String[] args) {
