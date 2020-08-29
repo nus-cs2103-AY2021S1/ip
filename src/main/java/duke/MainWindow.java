@@ -1,5 +1,8 @@
 package duke;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+
 import javafx.fxml.FXML;
 
 import javafx.scene.control.Button;
@@ -10,6 +13,8 @@ import javafx.scene.image.Image;
 
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+
+import javafx.util.Duration;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -68,19 +73,31 @@ public class MainWindow extends AnchorPane {
 
         if (reply.equals("bye")) {
             reply = duke.getUi().bye();
-        }
 
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(userInput.getText(), userImage),
-                DialogBox.getDukeDialog(reply, dukeImage)
-        );
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getUserDialog(userInput.getText(), userImage),
+                    DialogBox.getDukeDialog(reply, dukeImage)
+            );
 
-        userInput.clear();
+            userInput.clear();
 
-        try {
-            duke.getStorage().save(duke.getTaskList());
-        } catch (IOException e) {
-            sendMessage("OOPS!!! Something went wrong... Tasks not saved.");
+            Timeline timeline = new Timeline(new KeyFrame(Duration.millis(3000), e -> {
+               duke.getStage().close();
+            }));
+            timeline.play();
+        } else {
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getUserDialog(userInput.getText(), userImage),
+                    DialogBox.getDukeDialog(reply, dukeImage)
+            );
+
+            userInput.clear();
+
+            try {
+                duke.getStorage().save(duke.getTaskList());
+            } catch (IOException e) {
+                sendMessage("OOPS!!! Something went wrong... Tasks not saved.");
+            }
         }
     }
 

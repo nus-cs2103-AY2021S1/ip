@@ -6,6 +6,8 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.util.ArrayList;
 
+import javafx.stage.Stage;
+
 /**
  * Main class for the Duke program
  */
@@ -15,6 +17,7 @@ public class Duke {
     private TaskList taskList;
     private Ui ui;
     private Parser parser;
+    private Stage stage;
 
     /**
      * Initializes a Duke object with saved tasks from the given data file.
@@ -63,12 +66,12 @@ public class Duke {
         this.ui.bye();
     }
 
-    /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
-     */
-    private String getResponse(String input) {
-        return "Duke heard: " + input;
+    public void setStage(Stage stage) {
+        this.stage = stage;
+    }
+
+    public Stage getStage() {
+        return this.stage;
     }
 
     /**
