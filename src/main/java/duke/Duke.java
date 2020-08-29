@@ -2,26 +2,17 @@ package duke;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.HashMap;
 
 import duke.command.Command;
-import duke.control.DialogueBox;
-import duke.core.*;
+import duke.core.Parser;
+import duke.core.Result;
+import duke.core.Ui;
+import duke.core.Storage;
+import duke.core.TaskList;
 import duke.handle.CommandNotFoundException;
 import duke.handle.TaskNotFoundException;
 import duke.handle.LoadingException;
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 
 /**
  * The Duke class represents a duke bot that can interact with
@@ -39,11 +30,32 @@ public class Duke {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
-    public TextField userInput;
-    public VBox dialogContainer;
-    public ScrollPane scrollPane;
-    public AnchorPane mainlayout;
-    public Button sendButton;
+    /**
+     * Takes in the path of the local record, and creates a duke bot to interact with
+     * the user.
+     */
+    public Duke() throws FileNotFoundException, LoadingException {
+        ui = new Ui();
+        storage = new Storage(FILE_PATH);
+        try {
+            taskList = new TaskList(storage.readRecord());
+        } catch (FileNotFoundException fileNotFoundException) {
+            taskList = new TaskList();
+            try {
+                storage.writeRecord(taskList);
+            } catch (IOException ioException) {
+            }
+            throw fileNotFoundException;
+        } catch (LoadingException loadingException) {
+            //ui.handle(loadingException);
+            taskList = new TaskList();
+            try {
+                storage.writeRecord(taskList);
+            } catch (IOException ioException) {
+            }
+            throw loadingException;
+        }
+    }
 
     /*
     public void run() {
@@ -167,5 +179,9 @@ public class Duke {
         //return parsedCommand.excecute(taskList, ui, storage);
 
         //return "Smith heard: " + string;
+    }
+
+    public Ui getUi() {
+        return ui;
     }
 }

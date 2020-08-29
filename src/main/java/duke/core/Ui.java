@@ -13,10 +13,11 @@ import duke.task.Task;
  */
 public class Ui {
     public static final String INDENTATION = "    ";
-    public static final String DIVIDER = "____________________________________________________________";
+    public static final String DIVIDER = "_______________________________";
     public static final String GREETING = "Hello! I am Smith\n" + "What can I do for you?";
     public static final String EXITMESSAGE = "Bye. Hope to see you again soon!";
-    public static final String logo = " ____        _        \n"
+    public static final String LOADMESSAGE = "Load the local record.";
+    public static final String LOGO = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
@@ -70,7 +71,7 @@ public class Ui {
     public String showGreeting() {
         //System.out.println("Hello from\n" + logo);
         //out.println(makeBlock(logo + "\n" + GREETING));
-        return makeBlock(logo + "\n" + GREETING);
+        return makeBlock(LOGO + "\n" + GREETING);
     }
 
     /**
@@ -135,6 +136,10 @@ public class Ui {
                 String.valueOf(count) +
                 "." + task.toString() +
                 "\nNow you have " + size + " tasks in the list.");
+    }
+
+    public String showLoad() {
+        return makeBlock(LOADMESSAGE);
     }
 
     /**

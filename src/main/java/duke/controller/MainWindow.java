@@ -1,12 +1,10 @@
 package duke.controller;
 
 import duke.Duke;
-import duke.command.Command;
 import duke.control.DialogueBox;
-import duke.core.Parser;
 import duke.core.Result;
-import duke.handle.CommandNotFoundException;
-import duke.handle.TaskNotFoundException;
+import duke.handle.LoadingException;
+import javafx.animation.PauseTransition;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -15,9 +13,9 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
-import java.io.IOException;
-import java.util.HashMap;
+import java.io.FileNotFoundException;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -32,6 +30,8 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Button sendButton;
 
+    private Stage stage;
+
     private Duke duke;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
@@ -42,8 +42,26 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
-    public void setDuke(Duke d) {
-        duke = d;
+    public void start(Stage stage) {
+        try {
+            duke = new Duke();
+            dialogContainer.getChildren().addAll(
+                    DialogueBox.getDukeDialogueBox(duke.getUi().showLoad(), dukeImage)
+            );
+            this.stage = stage;
+        } catch (FileNotFoundException fileNotFoundException) {
+            dialogContainer.getChildren().addAll(
+                    DialogueBox.getDukeDialogueBox(fileNotFoundException.getMessage(), dukeImage)
+            );
+        } catch (LoadingException loadingException) {
+            dialogContainer.getChildren().addAll(
+                    DialogueBox.getDukeDialogueBox(loadingException.getMessage(), dukeImage)
+            );
+        } finally {
+            dialogContainer.getChildren().addAll(
+                    DialogueBox.getDukeDialogueBox(duke.getUi().showGreeting(), dukeImage)
+            );
+        }
     }
 
     /**
@@ -52,8 +70,6 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     private void handleUserInput() {
-
-
         String input = userInput.getText();
         Result response = duke.getResponse(input);
         dialogContainer.getChildren().addAll(
@@ -62,8 +78,13 @@ public class MainWindow extends AnchorPane {
         );
         userInput.clear();
         if(!(response.isContinuing())) {
-            Stage stage = (Stage) this.getScene().getWindow();
-            stage.close();
+
+            //Stage stage = (Stage) this.getScene().getWindow();
+            PauseTransition pauseTransition = new PauseTransition(Duration.seconds(1));
+            pauseTransition.setOnFinished((event) -> {
+                stage.close();
+            });
+            pauseTransition.play();
         }
     }
 }
