@@ -16,6 +16,10 @@ public abstract class Task {
     public void completeTask() {
         this.isDone = true;
     }
+    
+    public String getName() {
+        return this.description;
+    }
 
     @Override
     public String toString() {

@@ -3,6 +3,7 @@ package duke;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.io.FileWriter;
@@ -30,10 +31,12 @@ public class Storage {
                         task = new ToDo(command[2]);
                         break;
                     case "D":
-                        task = new Deadline(command[2], LocalDate.parse(command[3]));
+                        task = new Deadline(command[2], LocalDate.parse(command[3], 
+                                DateTimeFormatter.ofPattern("MMM dd yyyy")));
                         break;
                     case "E":
-                        task = new Event(command[2], LocalDate.parse(command[3]));
+                        task = new Event(command[2], LocalDate.parse(command[3], 
+                                DateTimeFormatter.ofPattern("MMM dd yyyy")));
                         break;
                     default:
                         throw new DukeException("Failed to load tasks");
