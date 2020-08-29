@@ -8,7 +8,7 @@ import java.io.Serializable;
 public class Task implements Serializable {
     private final String taskDescription;
     private boolean isDone = false;
-
+    
     /**
      * Constructs a new Task instance containing a task description.
      *
@@ -17,19 +17,19 @@ public class Task implements Serializable {
     public Task(String description) {
         taskDescription = description;
     }
-
+    
     /**
      * Marks the task as "done".
      */
     void markAsDone() {
-       this.isDone = true;
-       Ui.showMarkedAsDone(this);
+        this.isDone = true;
+        Ui.showMarkedAsDone(this);
     }
     
     public boolean includesKeyword(String keyword) {
         return taskDescription.contains(keyword);
     }
-
+    
     /**
      * Returns a string representation of the task.
      *
