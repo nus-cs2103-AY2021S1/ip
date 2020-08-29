@@ -138,7 +138,7 @@ public class Parser {
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new MocoException("Date not/wrongly entered! (Please provide in this format: deadline description /by dd-mm-yyyy");
         } catch (DateTimeParseException e) {
-            throw new MocoException(" ☹ Date wrongly entered, please remember to format date in dd-MM-yyyy!");
+            throw new MocoException(" ☹ Date wrongly entered, please remember to format date in dd-MM-yyyy");
         }
     }
 
