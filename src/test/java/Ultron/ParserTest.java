@@ -1,11 +1,20 @@
 package ultron;
 
 import org.junit.jupiter.api.Test;
-import ultron.commands.*;
+
+import ultron.commands.ByeCommand;
+import ultron.commands.DeleteCommand;
+import ultron.commands.DoneCommand;
+import ultron.commands.HelpCommand;
+import ultron.commands.ListCommand;
+import ultron.commands.TaskAllocator;
 import ultron.exceptions.UltronException;
 
 public class ParserTest {
 
+    /**
+     * Check the result for the input bye.
+     */
     @Test
     public void checkByeInputTest() {
         try {
@@ -15,6 +24,9 @@ public class ParserTest {
         }
     }
 
+    /**
+     * Check the result for the input list.
+     */
     @Test
     public void checkListInputTest() {
         try {
@@ -24,6 +36,9 @@ public class ParserTest {
         }
     }
 
+    /**
+     * Check the result of the input for help.
+     */
     @Test
     public void checkHelpInputTest() {
         try {
@@ -33,6 +48,9 @@ public class ParserTest {
         }
     }
 
+    /**
+     * Check the result of the input delete.
+     */
     @Test
     public void checkDeleteInputTest() {
         try {
@@ -42,6 +60,9 @@ public class ParserTest {
         }
     }
 
+    /**
+     * Check the result of the input done.
+     */
     @Test
     public void checkDoneInputTest() {
         try {
@@ -51,6 +72,9 @@ public class ParserTest {
         }
     }
 
+    /**
+     * Check the result of the input todo.
+     */
     @Test
     public void checkTodoInputTest() {
         try {
@@ -60,6 +84,9 @@ public class ParserTest {
         }
     }
 
+    /**
+     * Check the result of the input deadline.
+     */
     @Test
     public void checkDeadlineInputTest() {
         try {
@@ -69,6 +96,9 @@ public class ParserTest {
         }
     }
 
+    /**
+     * Check the result for the input event.
+     */
     @Test
     public void checkEventInputTest() {
         try {
