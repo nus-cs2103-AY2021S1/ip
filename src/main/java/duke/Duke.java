@@ -88,15 +88,6 @@ public class Duke extends Application {
 
     @Override
     public void start(Stage stage) {
-        try {
-            this.storage.load(taskList);
-        } catch (FileNotFoundException e) {
-            printReply("OOPS!!! Can't access task data.");
-        } catch (IOException e) {
-            printReply("OOPS!!! Something went wrong... Tasks not saved.");
-        }
-
-
         Label helloWorld = new Label("Hello World!"); // Creating a new Label control
         Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
 
@@ -118,12 +109,12 @@ public class Duke extends Application {
 
         stage.setTitle("Duke");
         stage.setResizable(false);
-        stage.setMinHeight(600.0);
-        stage.setMinWidth(400.0);
+        stage.setMinHeight(700.0);
+        stage.setMinWidth(500.0);
 
-        mainLayout.setPrefSize(400.0, 600.0);
+        mainLayout.setPrefSize(500.0, 700.0);
 
-        scrollPane.setPrefSize(385, 535);
+        scrollPane.setPrefSize(485, 635);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
 
@@ -133,9 +124,9 @@ public class Duke extends Application {
         // You will need to import `javafx.scene.layout.Region` for this.
         dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
 
-        userInput.setPrefWidth(325.0);
+        userInput.setPrefWidth(405.0);
 
-        sendButton.setPrefWidth(55.0);
+        sendButton.setPrefWidth(75.0);
 
         AnchorPane.setTopAnchor(scrollPane, 1.0);
 
@@ -144,6 +135,16 @@ public class Duke extends Application {
 
         AnchorPane.setLeftAnchor(userInput , 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
+
+        sendMessage(this.ui.greet());
+
+        try {
+            this.storage.load(taskList);
+        } catch (FileNotFoundException e) {
+            sendMessage(this.ui.printReply("OOPS!!! Can't access task data."));
+        } catch (IOException e) {
+            sendMessage(this.ui.printReply("OOPS!!! Something went wrong... Tasks not saved."));
+        }
 
         sendButton.setOnMouseClicked((event) -> {
             handleUserInput();
@@ -164,7 +165,7 @@ public class Duke extends Application {
         this.parser.setScanner(new Scanner(userInput.getText()));
         String reply = this.parser.executeCommand(this.taskList);
         Label userText = new Label(userInput.getText());
-        Label dukeText = new Label(reply);
+        Label dukeText = new Label(this.ui.printReply(reply));
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(userText, new ImageView(user)),
                 DialogBox.getDukeDialog(dukeText, new ImageView(duke))
@@ -174,11 +175,11 @@ public class Duke extends Application {
         try {
             this.storage.save(this.taskList);
         } catch (IOException e) {
-            printReply("OOPS!!! Something went wrong... Tasks not saved.");
+            sendMessage(this.ui.printReply("OOPS!!! Something went wrong... Tasks not saved."));
         }
     }
 
-    private void printReply(String text) {
+    private void sendMessage(String text) {
         Label dukeText = new Label(text);
         dialogContainer.getChildren().add(
                 DialogBox.getDukeDialog(dukeText, new ImageView(duke))
