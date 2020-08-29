@@ -6,6 +6,7 @@ import java.nio.file.Paths;
 import duke.command.Command;
 import duke.exception.DukeException;
 import duke.task.TaskList;
+import javafx.application.Platform;
 
 public class Duke {
     private static final Path filePath = Paths.get(".", "data", "duke.txt");
@@ -36,14 +37,19 @@ public class Duke {
         return "Hello! I'm Duke\nWhat can I do for you?";
     }
 
+
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
-     * TODO: add exit logic
+     * Generates the Duke's response to the given input
+     *
+     * @param input The input by the user.
+     * @return The response given by Duke.
      */
     public String getResponse(String input) {
         try {
             Command c = Parser.parse(input);
+            if (c.isExit()) {
+                Platform.exit();
+            }
             return c.execute(tasks, storage);
         } catch (DukeException e) {
             return (e.getMessage());
