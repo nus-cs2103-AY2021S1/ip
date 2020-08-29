@@ -9,6 +9,11 @@ public class TaskSearcher {
         this.taskList = taskList;
     }
     
+    /**
+     * Searches a TaskList for Tasks matching a search string and prints them out.
+     *
+     * @param searchString The search string.
+     */
     public void searchAndDisplay(String searchString) {
         List<Task> results = taskList.searchByKeyword(searchString);
         if (results.size() > 0) {

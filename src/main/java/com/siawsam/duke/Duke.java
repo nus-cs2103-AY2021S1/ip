@@ -11,7 +11,9 @@ public class Duke {
      */
     static final String FILE_PATH = "savedTasks.txt";
 
+    //CHECKSTYLE:OFF
     public static void main(String[] args) {
+        //CHECKSTYLE:ON
         Ui.showWelcomeMessage();
 
         Storage storage = new Storage(FILE_PATH);

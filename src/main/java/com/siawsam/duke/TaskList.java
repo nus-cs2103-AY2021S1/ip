@@ -7,7 +7,14 @@ import java.io.Serializable;
 
 public class TaskList implements Serializable {
     private final List<Task> itemList = new ArrayList<>();
-
+    
+    /**
+     * Adds an item to the TaskList by parsing the item's string literal.
+     *
+     * @param item The string literal of the item.
+     * @return The Task object constructed and added to the TaskList.
+     * @throws DukeException if an invalid string literal is passed.
+     */
     public Task addItem(String item) throws DukeException {
         String type = getItemType(item);
         Task taskToAdd = null;
@@ -87,6 +94,12 @@ public class TaskList implements Serializable {
         Ui.showSuccessfulRemoval(removed);
     }
     
+    /**
+     * Returns a list of Task objects that match a search string.
+     *
+     * @param keyword The search string.
+     * @return A List of Tasks.
+     */
     public List<Task> searchByKeyword(String keyword) {
         List<Task> results = new ArrayList<>();
         
