@@ -16,7 +16,7 @@ import java.util.Scanner;
 public class StorageTest {
     @Test
     public void StorageSaveTest() {
-        Path path = Paths.get("../../junit-test/ACTUAL_STORAGE_SAVE.txt");
+        Path path = Paths.get("junit-test/ACTUAL_STORAGE_SAVE.txt");
         Storage storage = new Storage(path.toString());
 
         File actualStorageSave = new File(path.toString());
@@ -59,7 +59,7 @@ public class StorageTest {
         });
 
         Assertions.assertDoesNotThrow(() -> {
-            File expectedStorageSave = new File("../../junit-test/EXPECTED_STORAGE_SAVE.txt");
+            File expectedStorageSave = new File("junit-test/EXPECTED_STORAGE_SAVE.txt");
             Scanner scForActual = new Scanner(actualStorageSave);
             Scanner scForExpected = new Scanner(expectedStorageSave);
 
@@ -80,7 +80,7 @@ public class StorageTest {
 
     @Test
     public void StorageChangeToDoneTest() {
-        Path path = Paths.get("../../junit-test/ACTUAL_STORAGE_CHANGE_TO_DONE.txt");
+        Path path = Paths.get("junit-test/ACTUAL_STORAGE_CHANGE_TO_DONE.txt");
         Storage storage = new Storage(path.toString());
 
         File actualStorageChangeToDone = new File(path.toString());
@@ -125,8 +125,7 @@ public class StorageTest {
         });
 
         Assertions.assertDoesNotThrow(() -> {
-            File expectedStorageChangeToDone =
-                    new File("../../junit-test/EXPECTED_STORAGE_CHANGE_TO_DONE.txt");
+            File expectedStorageChangeToDone = new File("junit-test/EXPECTED_STORAGE_CHANGE_TO_DONE.txt");
             Scanner scForActual = new Scanner(actualStorageChangeToDone);
             Scanner scForExpected = new Scanner(expectedStorageChangeToDone);
 
@@ -147,7 +146,7 @@ public class StorageTest {
 
     @Test
     public void StorageDeleteTest() {
-        Path path = Paths.get("../../junit-test/ACTUAL_STORAGE_DELETE.txt");
+        Path path = Paths.get("junit-test/ACTUAL_STORAGE_DELETE.txt");
         Storage storage = new Storage(path.toString());
 
         File actualStorageDelete = new File(path.toString());
@@ -192,8 +191,7 @@ public class StorageTest {
         });
 
         Assertions.assertDoesNotThrow(() -> {
-            File expectedStorageDelete =
-                    new File("../../junit-test/EXPECTED_STORAGE_DELETE.txt");
+            File expectedStorageDelete = new File("junit-test/EXPECTED_STORAGE_DELETE.txt");
             Scanner scForActual = new Scanner(actualStorageDelete);
             Scanner scForExpected = new Scanner(expectedStorageDelete);
 
