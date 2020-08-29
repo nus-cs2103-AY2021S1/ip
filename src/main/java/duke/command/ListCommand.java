@@ -1,11 +1,11 @@
-package main.java.duke.command;
+package duke.command;
 
-import main.java.duke.Duke;
-import main.java.duke.exceptions.DukeException;
-import main.java.duke.exceptions.InvalidInputException;
-import main.java.duke.Storage;
-import main.java.duke.tasks.TaskList;
-import main.java.duke.Ui;
+import duke.Duke;
+import duke.exceptions.DukeException;
+import duke.exceptions.InvalidInputException;
+import duke.Storage;
+import duke.tasks.TaskList;
+import duke.Ui;
 
 /**
  * ListCommand class to execute command that list out all tasks
