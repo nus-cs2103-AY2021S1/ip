@@ -19,6 +19,7 @@ public class Storage {
      * @return List of stored Tasks
      * @throws Exception FIle not found
      */
+    @SuppressWarnings("unchecked")
     public List<Task> loadData() throws Exception {
         List<Task> list = new ArrayList<>();
         try{

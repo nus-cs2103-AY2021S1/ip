@@ -7,9 +7,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TaskTest {
     @Test
-        public void testTodo() {
-            Task test = new Todo(false, 1, "Wash Clothes");
-            assertEquals("[T][✗] Wash Clothes", test.toString());
+    public void testTodo() {
+        Task test = new Todo(false, 1, "Wash Clothes");
+        assertEquals("[T][✗] Wash Clothes", test.toString());
     }
 
     @Test
