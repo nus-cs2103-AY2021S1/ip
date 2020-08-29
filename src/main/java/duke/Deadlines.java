@@ -5,8 +5,8 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 public class Deadlines extends Task {
-    LocalDate date;
-    LocalTime time;
+    private LocalDate date;
+    private LocalTime time;
 
     Deadlines(String name, String time) {
         super(name,time);
@@ -35,10 +35,10 @@ public class Deadlines extends Task {
 
     @Override
     public String toString() {
-        if (super.completed) {
-            return "[D]" + "[" + "✓" + "] " + name + "(by: " + printDateTime() + ")";
+        if (super.isDone) {
+            return "[D]" + "[" + "✓" + "] " + super.getName() + "(by: " + printDateTime() + ")";
         } else {
-            return "[D]" + "[" + "✗" + "] " + name + "(by: " + printDateTime() + ")";
+            return "[D]" + "[" + "✗" + "] " + super.getName() + "(by: " + printDateTime() + ")";
         }
     }
 }

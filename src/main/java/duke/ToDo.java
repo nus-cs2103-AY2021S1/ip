@@ -8,10 +8,10 @@ public class ToDo extends Task{
 
     @Override
     public String toString(){
-        if (super.completed){
-            return "[T]" + "[" + "✓" + "] " + name;
+        if (super.isDone){
+            return "[T]" + "[" + "✓" + "] " + super.getName();
         } else {
-            return "[T]" + "[" + "✗" + "] " + name;
+            return "[T]" + "[" + "✗" + "] " + super.getName();
         }
     }
 }

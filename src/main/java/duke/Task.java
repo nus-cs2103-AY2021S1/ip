@@ -1,9 +1,9 @@
 package duke;
 
 public class Task {
-    boolean completed = false;
-    String name;
-    String time;
+    boolean isDone = false;
+    private String name;
+    private String time;
 
 
     Task(String name){
@@ -15,10 +15,16 @@ public class Task {
         this.time = time;
     }
 
+    public String getName(){
+        return name;
+    }
 
+    public String getTime(){
+        return time;
+    }
 
-    public Task completedTask(){
-        completed = true;
+    public Task completeTask(){
+        isDone = true;
         return this;
     }
 

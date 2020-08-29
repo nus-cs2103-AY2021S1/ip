@@ -5,9 +5,9 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 public class Events extends Task{
-    LocalDate date;
-    LocalTime startTime;
-    LocalTime endTime;
+    private LocalDate date;
+    private LocalTime startTime;
+    private LocalTime endTime;
 
     Events(String name, String time) {
         super(name,time);
@@ -40,10 +40,10 @@ public class Events extends Task{
 
     @Override
     public String toString(){
-        if (super.completed) {
-            return "[E]" + "[" + "✓" + "] " + name + "(at: " + printDateTime()  +")";
+        if (super.isDone) {
+            return "[E]" + "[" + "✓" + "] " + super.getName() + "(at: " + printDateTime()  +")";
         } else {
-            return "[E]" + "[" + "✗" + "] " + name + "(at: " + printDateTime()  +")";
+            return "[E]" + "[" + "✗" + "] " + super.getName() + "(at: " + printDateTime()  +")";
         }
 
     }

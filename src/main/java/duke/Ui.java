@@ -3,14 +3,14 @@ package duke;
 import java.util.List;
 
 public class Ui {
-    String line = "--------------------------------------------------"; //50 dashes
+    final String OUTPUT_LINE = "--------------------------------------------------";
 
     Ui(){
 
     }
 
     public void drawLine(){
-        System.out.println(line);
+        System.out.println(OUTPUT_LINE);
     }
 
     public void addTask(Task task){

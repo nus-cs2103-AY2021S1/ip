@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Storage {
-private Path path;
+    private Path path;
 
     public Storage() throws IOException {
         String home = System.getProperty("user.home");
@@ -28,14 +28,14 @@ private Path path;
         String contents = "";
         for (Task x : list) {
 
-            if (x.getClass().getSimpleName() == "Duke.ToDo") {
-                String temp = "Duke.ToDo\n" + x.completed + "\n" + x.name + "\n\n";
+            if (x.getClass().getSimpleName().equals("ToDo")) {
+                String temp = "ToDo\n" + x.isDone + "\n" + x.getName() + "\n\n";
                 contents += temp;
-            } else if (x.getClass().getSimpleName() == "Duke.Deadlines") {
-                String temp = "Duke.Deadlines\n" + x.completed + "\n" + x.name + "\n" + x.time + "\n\n";
+            } else if (x.getClass().getSimpleName().equals("Deadlines")) {
+                String temp = "Deadlines\n" + x.isDone + "\n" + x.getName() + "\n" + x.getTime() + "\n\n";
                 contents += temp;
             } else {
-                String temp = "Duke.Events\n" + x.completed + "\n" +x.name + "\n" + x.time + "\n\n";
+                String temp = "Events\n" + x.isDone + "\n" +x.getName() + "\n" + x.getTime() + "\n\n";
                 contents += temp;
             }
         }
@@ -51,27 +51,27 @@ private Path path;
             String done = sc.nextLine();
             String name = sc.nextLine();
 
-            if (type.equals("Duke.ToDo")){
+            if (type.equals("ToDo")){
                 sc.nextLine();
                 Task temp = new ToDo(name);
-                if (done == "true"){
-                    temp.completedTask();
+                if (done.equals("true")){
+                    temp.completeTask();
                 }
                 list.add(temp);
-            } else if (type.equals("Duke.Deadlines")){
+            } else if (type.equals("Deadlines")){
                 String time = sc.nextLine();
                 sc.nextLine();
                 Task temp = new Deadlines(name,time);
-                if (done == "true"){
-                    temp.completedTask();
+                if (done.equals("true")){
+                    temp.completeTask();
                 }
                 list.add(temp);
             } else {
                 String time = sc.nextLine();
                 sc.nextLine();
                 Task temp = new Events(name,time);
-                if (done == "true"){
-                    temp.completedTask();
+                if (done.equals("true")){
+                    temp.completeTask();
                 }
                 list.add(temp);
             }
