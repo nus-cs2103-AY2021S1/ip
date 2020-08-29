@@ -10,11 +10,13 @@ import java.time.format.DateTimeFormatterBuilder;
 import java.time.format.DateTimeParseException;
 import java.time.temporal.ChronoField;
 
+/**
+ * TimedTask is a abstract class that inherits from the base Task
+ * class, to add a new field of datetime into this child class which implements such functionalities
+ */
 abstract class TimedTask extends Task {
     protected final LocalDateTime dateby;
     protected static final DateTimeFormatter FMAT;
-    
-    
     static {
         DateTimeFormatterBuilder dateTimeFormatterBuilder = new DateTimeFormatterBuilder();
         dateTimeFormatterBuilder.appendPattern("dd-MM-yyyy");
@@ -28,7 +30,15 @@ abstract class TimedTask extends Task {
                 .toFormatter();
     }
     protected static final LocalDate NOW = LocalDateTime.now().toLocalDate();
-    
+
+    /**
+     * Constructor for a TimedTask for use by implementing subclasses, in particular to populate 
+     * Tasks that have been read from a text save file.
+     * @param desc Description of a task
+     * @param date String that is extracted from user input to be parsed into the constructor for a TimedTask object
+     * @param done Done Status of a task
+     * @throws DukeDateTimeException if the fields for the date are not matching autocorrection cases
+     */
     protected TimedTask(String desc, String date, Boolean done) throws DukeDateTimeException {
         super(desc, done);
         try {
@@ -37,14 +47,29 @@ abstract class TimedTask extends Task {
             }
             this.dateby = LocalDateTime.parse(date,FMAT);    
         }catch (DateTimeParseException e){
-            throw new DukeDateTimeException("The String you entered does not meet the required format of 'yyyy-MM-dd' ");
+            throw new DukeDateTimeException("The String you entered does not meet the " +
+                    "required format of 'yyyy-MM-dd' ");
         }
         
     }
+
+    /**
+     * Constructor for a TimedTask for use by implementing subclasses, in particular to create 
+     * a new TimedTask class 
+     * @param desc Description of a task
+     * @param date String that is extracted from user input to be parsed into the constructor for
+     *            a TimedTask object
+     * @throws DukeDateTimeException if the fields for the date are not matching autocorrection cases
+     */
     protected TimedTask(String desc, String date) throws DukeDateTimeException {
         this(desc, date, false);
     }
-    
+
+    /**
+     * Performs a DateTime Arithmetric calculation with the current time of execution of the program
+     * in order to display a countdown of days in the Task
+     * @return integer representing the number of days left or past since the task was due.
+     */
     protected int timeLeft(){
         return Period.between(NOW,LocalDate.from(dateby)).getDays();
     }
@@ -58,6 +83,10 @@ abstract class TimedTask extends Task {
     }
 
     @Override
+    /**
+     * Returns a String Representation of the Event object class to write to text file.
+     * @return the saved task to write to a text file
+     */
     public String saveTask() {
         return super.saveTask()+SEP+getDateby();
     }

@@ -3,8 +3,6 @@ import tasks.Command;
 import tasks.TaskManager;
 import tasks.TextParser;
 
-import java.util.Scanner;
-
 /**
  * Backend Object Class for the Duke Chatbot Interface
  */
@@ -12,6 +10,12 @@ class Duke {
     private final TaskManager list;
     private final String linebreaker;
     private final TextParser textParser;
+
+    /**
+     * Constructor for the Duke Chatbot, if is old initialisation, will read from txt file
+     * Eles it will initialise a new TaskManager class
+     * @param path The path of the home initialisation.
+     */
     public Duke(String linebreaker, String path){
         TaskManager list1;
         try{
@@ -93,6 +97,10 @@ class Duke {
         return s+" [sep]";
     }
 
+    /**
+     * Displays the help command for the chatbot
+     * @return String command for output reading
+     */
     public String help(){
         StringBuilder b = new StringBuilder();
         b.append("\t Need some help huh?\n");
@@ -110,8 +118,9 @@ class Duke {
 
     /**
      * Greeting from Duke Bot
+     * @param name Name of the user
      * @return Sends a greeting from dukebot to the user
-     */
+     */ 
     String greeting(String name){
         StringBuilder logo = new StringBuilder("\tHello from\n")
                                         .append(" ____        _        \n")
@@ -125,7 +134,11 @@ class Duke {
                 
         return logo.toString();
     }
-
+    /**
+     * Goodbye from DukeBot
+     * @param name Name of the user
+     * @return Sends a goodbye message from dukebot to the user
+     */
     String goodbye(String name){
         return "Bye " + name +"! Hope to see you again soon!";
     }
@@ -136,7 +149,11 @@ class Duke {
     private void print(String s){
         System.out.printf("%s%s\n%s%n",linebreaker,s,linebreaker);
     }
-    
+
+    /**
+     * Message passing from mainloop to save tasks.
+     * @throws DukeIOException
+     */
     void saveTasks() throws DukeIOException {
         this.list.saveTasks();
     }

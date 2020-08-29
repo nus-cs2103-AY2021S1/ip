@@ -8,6 +8,9 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * TaskManager is a class to handle where 
+ */
 public class TaskManager {
     private final List<Task> taskList;
     private final TaskIOParser ioparser;

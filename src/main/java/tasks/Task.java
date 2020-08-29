@@ -1,10 +1,21 @@
 package tasks;
 
+/**
+ * The Task Class is a Abstract Base class for any extending class that acts as 
+ * a Task object for the Duke Chatbot
+ */
 abstract class Task {
+    // SEPERATION Attribute is used to encode the different attributes of the Task Class
+    public static final String SEP = "#sep#";
     protected String description;
     protected boolean done;
-    public static final String SEP = "#sep#";
+    
 
+    /**
+     * Constructor for a Task
+     * @param description String description of the task
+     * @param done Done Status of the task
+     */
     protected Task(String description, boolean done) {
         this.description = description;
         this.done = done;
@@ -13,14 +24,14 @@ abstract class Task {
 
     /**
      * Returns the check for if the task is already done.
-     * @return
+     * @return Boolean representing whether the task is done
      */
     public boolean done(){
         return this.done;
     }
 
     /**
-     * Mark Tasks.Task object as done
+     * Mark a generic Task object as done
      */
     public void doTask(){
         this.done = true;
@@ -35,7 +46,7 @@ abstract class Task {
     }
 
     /**
-     * Checklist icon
+     * Checklist icon for displaying in the toString Representation.
       * @return either done or not done
      */
     public String statusIcon(){
@@ -48,7 +59,7 @@ abstract class Task {
     }
 
     /**
-     * Takes done status and attributes to encode the sep
+     * Takes done status and attributes to encode the String
      * @return a encoded string version of task for writing to text file.
      */
     public String saveTask(){

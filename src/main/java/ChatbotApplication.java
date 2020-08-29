@@ -1,20 +1,22 @@
 import exceptions.DukeIOException;
 import exceptions.DukeUnknownException;
 
-import java.io.File;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.Objects;
 import java.util.Scanner;
 
 /**
- * Front End Facing Script for the UI.
+ * Front End Facing Script for the UI of ChatbotApplication
  */
 public class ChatbotApplication {
     Duke dukeProgram;
     boolean isChatbotRunning;
     private final String linebreaker;
     Scanner sc;
+
+    /**
+     * Constructor class of the ChatbotApplication
+     * @param linebreaker the display aesthetic of the output from Duke
+     * @param pth the path to read a file from.
+     */
     ChatbotApplication(String linebreaker, String pth){
         dukeProgram = new Duke(linebreaker,pth);
         isChatbotRunning = true;
@@ -22,8 +24,8 @@ public class ChatbotApplication {
     }
 
     /**
-     * Takes a scanner object as input
-     * @param sc
+     * Takes a scanner object as user input and initialises the dukeLoop
+     * @param sc UserInput for the Application.
      */
     public void dukeLoop(Scanner sc){
         print("Please Enter your name");
@@ -62,17 +64,22 @@ public class ChatbotApplication {
     }
     /**
      * Wraps all text output and prints to the console
-     * @param s
+     * @param s String output
      */
     private void print(String s){
         System.out.printf("%s%s\n%s%n",linebreaker,s,linebreaker);
     }
+
+    /**
+     * Setter for the status of the Chatbot Object
+     * @param b toggle on or off for chatbot
+     */
     private void setChatbotRunning(boolean b){
         this.isChatbotRunning = b;
     }
     /**
      * Execution Class to contain main loop
-     * @param args
+     * @param args args
      */
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);

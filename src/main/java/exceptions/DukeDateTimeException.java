@@ -1,6 +1,14 @@
 package exceptions;
 
+/**
+ * Error Type of a DateTimeError in Duke Application.
+ * This error is thrown if the DateTime does not match or is incompatible with the DateTimeFormatter
+ */
 public class DukeDateTimeException extends DukeException {
+    /**
+     * Constructor class for DukeDateTimeException
+     * @param cmd the invalid command
+     */
     public DukeDateTimeException(String cmd){
         super(cmd,3);
     }
