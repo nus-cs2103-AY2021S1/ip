@@ -1,4 +1,4 @@
-package main.java.moco.logic;
+package main.java.moco;
 
 public class MocoException extends Exception {
     public MocoException(String errorMessage) {

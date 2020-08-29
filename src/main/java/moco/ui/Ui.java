@@ -1,6 +1,6 @@
 package main.java.moco.ui;
 
-import main.java.moco.logic.MocoException;
+import main.java.moco.MocoException;
 import main.java.moco.logic.TaskList;
 import main.java.moco.task.Task;
 
@@ -60,6 +60,11 @@ public class Ui {
         printBorder();
     }
 
+    public void findTasks(TaskList taskList) {
+        System.out.println("Here are the tasks in your list with your requested keyword: \n");
+        System.out.println(taskList);
+        printBorder();
+    }
 
     public void deleteTask(Task task, TaskList tasks) {
         System.out.println("Noted. I've removed this task:\n" + task);

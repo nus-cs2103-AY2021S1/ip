@@ -1,6 +1,5 @@
 package main.java.moco;
 
-import main.java.moco.logic.MocoException;
 import main.java.moco.logic.Parser;
 import main.java.moco.logic.Storage;
 import main.java.moco.logic.TaskList;

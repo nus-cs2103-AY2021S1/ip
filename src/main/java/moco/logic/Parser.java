@@ -1,5 +1,6 @@
 package main.java.moco.logic;
 
+import main.java.moco.MocoException;
 import main.java.moco.task.Deadline;
 import main.java.moco.task.Event;
 import main.java.moco.task.Task;
@@ -34,6 +35,12 @@ public class Parser {
                 return "delete";
             }
         },
+        Find {
+            @Override
+            public String toString() {
+                return "find";
+            }
+        }
     }
 
     /**
@@ -68,11 +75,31 @@ public class Parser {
                 eventCommand(input, tasks, storage, ui);
             } else if (input.contains(type.Delete.toString())) {
                 deleteCommand(input, tasks, storage, ui);
+            } else if (input.contains(type.Find.toString())) {
+                findCommand(input, tasks, storage, ui);
             } else {
                 throw new MocoException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
         }
         return true;
+    }
+
+    private static void findCommand(String input, TaskList tasks, Storage storage, Ui ui) throws MocoException {
+        try {
+            if (input.length() > 5) {
+                String keyword = input.substring(5);
+                TaskList tl = tasks.findTasks(keyword);
+                if (tl.size() > 0) {
+                    ui.findTasks(tl);
+                } else {
+                    throw new MocoException(" ☹ OOPS!!! You have no task that contains the keyword " + keyword + "! :(");
+                }
+            } else {
+                throw new MocoException(" ☹ OOPS!!! What task are you looking for? Please specific a keyword.");
+            }
+        } catch (MocoException e) {
+            throw new MocoException(e.getMessage());
+        }
     }
 
     private static void doneCommand(String input, TaskList tasks, Storage storage, Ui ui) throws MocoException {
@@ -87,8 +114,8 @@ public class Parser {
             }
         } catch (IndexOutOfBoundsException e) {
             throw new MocoException(" ☹ OOPS!!! You went out of the valid values, please specific a valid task index.");
-        } catch (Exception e) {
-            ui.printError(e.getMessage());
+        } catch (MocoException e) {
+            throw new MocoException(e.getMessage());
         }
     }
 
@@ -124,7 +151,7 @@ public class Parser {
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new MocoException("Date not/wrongly entered! (Please provide in this format: deadline description /by dd-mm-yyyy");
         } catch (DateTimeParseException e) {
-            throw new MocoException(" ☹ Date wrongly entered, please remember to format date in dd-MM-yyyy!");
+            throw new MocoException(" ☹ Date wrongly entered, please remember to format date in dd-MM-yyyy");
         }
     }
 
