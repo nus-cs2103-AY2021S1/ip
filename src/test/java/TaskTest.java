@@ -1,5 +1,3 @@
-package duke;
-
 import duke.task.Task;
 import org.junit.jupiter.api.Test;
 
