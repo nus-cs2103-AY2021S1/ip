@@ -2,7 +2,9 @@ package duke;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+
 import java.util.Scanner;
+
 import exception.*;
 
 public class Duke {
@@ -24,7 +26,7 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         ui.printWelcome();
 
-        while(sc.hasNextLine()) {
+        while (sc.hasNextLine()) {
             String fullCommand = sc.nextLine();
             ui.printDivider();
             String[] inputs = fullCommand.split("\\s+", 2);
@@ -75,11 +77,11 @@ public class Duke {
                     try {
                         Parser.checkDescription(inputs, command);
                         String temp = " " + inputs[1];
-                        String[] desc = temp.split("/by", 2);
-                        inputs[1] = desc[0];
+                        String[] taskInfos = temp.split("/by", 2);
+                        inputs[1] = taskInfos[0];
                         Parser.checkDescription(inputs, command);
-                        Parser.checkTime(desc, command);
-                        taskList.addTask(new Deadline(desc[0].trim(), desc[1].trim()));
+                        Parser.checkTime(taskInfos, command);
+                        taskList.addTask(new Deadline(taskInfos[0].trim(), taskInfos[1].trim()));
                         ui.printAddedTask(taskList.getTask(taskList.getSize() - 1), taskList.getSize());
                     } catch (EmptyDescriptionException ex) {
                         ui.printOutput(ex.getMessage());
@@ -90,11 +92,11 @@ public class Duke {
                     try {
                         Parser.checkDescription(inputs, command);
                         String temp = " " + inputs[1];
-                        String[] desc = temp.split("/at", 2);
-                        inputs[1] = desc[0];
+                        String[] taskInfos = temp.split("/at", 2);
+                        inputs[1] = taskInfos[0];
                         Parser.checkDescription(inputs, command);
-                        Parser.checkTime(desc, command);
-                        taskList.addTask(new Event(desc[0].trim(), desc[1].trim()));
+                        Parser.checkTime(taskInfos, command);
+                        taskList.addTask(new Event(taskInfos[0].trim(), taskInfos[1].trim()));
                         ui.printAddedTask(taskList.getTask(taskList.getSize() - 1), taskList.getSize());
                     } catch (EmptyDescriptionException ex) {
                         ui.printOutput(ex.getMessage());
