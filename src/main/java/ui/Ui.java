@@ -1,7 +1,8 @@
-package duke;
+package ui;
 
 import java.util.Scanner;
 
+import duke.TaskList;
 import exception.NoSuchTaskException;
 import task.Task;
 
@@ -92,6 +93,6 @@ public class Ui {
                 return sayException(e);
             }
         }
-        return say(text);
+        return tasks.size() == 0 ? say("You do not have any task!") : say(text);
     }
 }

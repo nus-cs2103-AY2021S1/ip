@@ -8,7 +8,7 @@ import java.util.Arrays;
 
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
+import ui.Ui;
 import exception.DukeException;
 import exception.EmptyEventException;
 import task.Event;

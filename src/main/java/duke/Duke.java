@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import command.Command;
 import exception.DukeException;
+import ui.Ui;
 
 /**
  * Represents a <code>Duke</code> object which is a ChatBot that can keep track of several kinds of tasks.
@@ -29,27 +30,19 @@ public class Duke {
         }
     }
 
-//    /**
-//     * You should have your own function to generate a response to user input.
-//     * Replace this stub with your completed method.
-//     */
-//    public String getResponse(String input) {
-//        return "Duke heard: " + input;
-//    }
-
     /**
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
     public String getResponse(String input) {
         Command c = Parser.parse(input);
-        String toPrint = "";
+        String response = "";
         try {
-            toPrint += c.execute(tasks, ui, storage);
+            response += c.execute(tasks, ui, storage);
         } catch (DukeException e) {
-            toPrint += ui.sayException(e);
+            response += ui.sayException(e);
         }
-        return toPrint;
+        return response;
     }
 
     /**

@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
+import ui.Ui;
 
 /**
  * Represents a <code>Command</code> whose task is exiting the <code>Duke</code> object.

@@ -5,7 +5,7 @@ import java.util.Arrays;
 
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
+import ui.Ui;
 import exception.DukeException;
 import exception.EmptyDoneException;
 import exception.NoSuchTaskException;
