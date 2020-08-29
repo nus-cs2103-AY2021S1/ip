@@ -99,7 +99,7 @@ public class TaskList {
      * @return returns the completed task
      */
     public Task done(int num){
-        return list.set(num-1, list.get(num-1).completedTask());
+        return list.set(num-1, list.get(num-1).completeTask());
     }
 
     /**

@@ -12,8 +12,8 @@ import java.time.format.DateTimeFormatter;
  * @since   27/8/2020
  */
 public class Deadlines extends Task {
-    LocalDate date;
-    LocalTime time;
+    private LocalDate date;
+    private LocalTime time;
 
     /**
      * Deadline constructor to initialize a deadline object with the name and time
@@ -65,10 +65,10 @@ public class Deadlines extends Task {
      */
     @Override
     public String toString() {
-        if (super.completed) {
-            return "[D]" + "[" + "✓" + "] " + name + "(by: " + printDateTime() + ")";
+        if (super.isDone) {
+            return "[D]" + "[" + "✓" + "] " + super.getName() + "(by: " + printDateTime() + ")";
         } else {
-            return "[D]" + "[" + "✗" + "] " + name + "(by: " + printDateTime() + ")";
+            return "[D]" + "[" + "✗" + "] " + super.getName() + "(by: " + printDateTime() + ")";
         }
     }
 }

@@ -12,9 +12,9 @@ import java.time.format.DateTimeFormatter;
  * @since   27/8/2020
  */
 public class Events extends Task{
-    LocalDate date;
-    LocalTime startTime;
-    LocalTime endTime;
+    private LocalDate date;
+    private LocalTime startTime;
+    private LocalTime endTime;
 
     /**
      * Event constructor to initialize a event object with the name and time
@@ -70,10 +70,10 @@ public class Events extends Task{
      */
     @Override
     public String toString(){
-        if (super.completed) {
-            return "[E]" + "[" + "✓" + "] " + name + "(at: " + printDateTime()  +")";
+        if (super.isDone) {
+            return "[E]" + "[" + "✓" + "] " + super.getName() + "(at: " + printDateTime()  +")";
         } else {
-            return "[E]" + "[" + "✗" + "] " + name + "(at: " + printDateTime()  +")";
+            return "[E]" + "[" + "✗" + "] " + super.getName() + "(at: " + printDateTime()  +")";
         }
 
     }

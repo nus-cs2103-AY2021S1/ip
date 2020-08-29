@@ -18,6 +18,7 @@ import java.util.Scanner;
  * @since   27/8/2020
  */
 public class Storage {
+
     // file path to direct the program where to save the file
     private Path path;
 
@@ -52,23 +53,23 @@ public class Storage {
             FileWriter fw = new FileWriter(String.valueOf(path));
             String contents = "";
             for (Task x : list) {
-
                 if (x.getClass().getSimpleName().equals("ToDo")) {
-                    String temp = "ToDo\n" + x.completed + "\n" + x.name + "\n\n";
+                    String temp = "ToDo\n" + x.isDone + "\n" + x.getName() + "\n\n";
                     contents += temp;
                 } else if (x.getClass().getSimpleName().equals("Deadlines")) {
-                    String temp = "Deadlines\n" + x.completed + "\n" + x.name + "\n" + x.time + "\n\n";
+                    String temp = "Deadlines\n" + x.isDone + "\n" + x.getName() + "\n" + x.getTime() + "\n\n";
                     contents += temp;
                 } else {
-                    String temp = "Events\n" + x.completed + "\n" + x.name + "\n" + x.time + "\n\n";
+                    String temp = "Events\n" + x.isDone + "\n" + x.getName() + "\n" + x.getTime() + "\n\n";
                     contents += temp;
                 }
+                fw.write(contents);
+                fw.close();
             }
-            fw.write(contents);
-            fw.close();
-        } catch (IOException e) {
-            throw new DukeException("File path not found");
-        }
+            } catch(IOException e){
+                throw new DukeException("File path not found");
+            }
+
     }
 
     /**
@@ -90,7 +91,7 @@ public class Storage {
                     sc.nextLine();
                     Task temp = new ToDo(name);
                     if (done.equals("true")) {
-                        temp.completedTask();
+                        temp.completeTask();
                     }
                     list.add(temp);
                 } else if (type.equals("Deadlines")) {
@@ -98,7 +99,7 @@ public class Storage {
                     sc.nextLine();
                     Task temp = new Deadlines(name, time);
                     if (done.equals("true")) {
-                        temp.completedTask();
+                        temp.completeTask();
                     }
                     list.add(temp);
                 } else {
@@ -106,12 +107,13 @@ public class Storage {
                     sc.nextLine();
                     Task temp = new Events(name, time);
                     if (done.equals("true")) {
-                        temp.completedTask();
+                        temp.completeTask();
                     }
                     list.add(temp);
                 }
             }
-            return list;
+                return list;
+
         } catch (IOException e) {
             throw new DukeException("Unable to find load file");
         }

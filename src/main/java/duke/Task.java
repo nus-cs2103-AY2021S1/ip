@@ -8,9 +8,9 @@ package duke;
  * @since   27/8/2020
  */
 public class Task {
-    boolean completed = false;
-    String name;
-    String time;
+    boolean isDone = false;
+    private String name;
+    private String time;
 
     /**
      * Task constructor to initialize a task object with the name
@@ -30,12 +30,20 @@ public class Task {
         this.time = time;
     }
 
+    public String getName(){
+        return name;
+    }
+
+    public String getTime(){
+        return time;
+    }
+
     /**
      * completedTask method which marks the task as completed
      * @return the completed task
      */
-    public Task completedTask(){
-        completed = true;
+    public Task completeTask(){
+        isDone = true;
         return this;
     }
 

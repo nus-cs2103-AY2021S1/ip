@@ -10,7 +10,7 @@ import java.util.List;
  * @since   27/8/2020
  */
 public class Ui {
-    String line = "--------------------------------------------------"; //50 dashes
+    final String OUTPUT_LINE = "--------------------------------------------------";
 
     /**
      * Ui constructor
@@ -23,7 +23,7 @@ public class Ui {
      * drawLine method which outputs a line
      */
     public void drawLine(){
-        System.out.println(line);
+        System.out.println(OUTPUT_LINE);
     }
 
     /**
