@@ -7,7 +7,6 @@ import duke.task.TaskList;
  * Main class of the Duke bot.
  */
 public class Duke {
-    
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
@@ -38,9 +37,11 @@ public class Duke {
                 ui.showError(e);
             }
         }
-        
     }
-    
+
+    /**
+     * Initialises and runs the bot.
+     */
     public static void main(String[] args) {
         Duke duke = new Duke();
         duke.run();
