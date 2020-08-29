@@ -1,7 +1,7 @@
-package main.java.duke;
+package duke;
 
-import main.java.duke.command.*;
-import main.java.duke.exceptions.DukeException;
+import duke.command.*;
+import duke.exceptions.DukeException;
 
 /**
  * Parser class to parse user input into respective command lines.

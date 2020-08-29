@@ -1,12 +1,12 @@
-package main.java.duke.command;
+package duke.command;
 
-import main.java.duke.Storage;
-import main.java.duke.Ui;
-import main.java.duke.exceptions.InvalidFileException;
-import main.java.duke.exceptions.InvalidInputException;
-import main.java.duke.tasks.Deadline;
-import main.java.duke.tasks.Task;
-import main.java.duke.tasks.TaskList;
+import duke.Storage;
+import duke.Ui;
+import duke.exceptions.InvalidFileException;
+import duke.exceptions.InvalidInputException;
+import duke.tasks.Deadline;
+import duke.tasks.Task;
+import duke.tasks.TaskList;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;

@@ -1,8 +1,8 @@
 package test.java.duke;
 
-import main.java.duke.Parser;
-import main.java.duke.command.Command;
-import main.java.duke.exceptions.DukeException;
+import duke.Parser;
+import duke.command.Command;
+import duke.exceptions.DukeException;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
