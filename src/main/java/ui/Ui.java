@@ -1,4 +1,4 @@
-package duke;
+package ui;
 
 import java.util.Scanner;
 
@@ -6,7 +6,7 @@ import java.util.Scanner;
  * Represents the text ui interface
  */
 public class Ui {
-    Scanner sc;
+    private Scanner sc;
 
     public Ui() {
         sc = new Scanner(System.in);

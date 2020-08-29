@@ -1,8 +1,8 @@
-package duke.command;
+package command;
 
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
+import ui.Ui;
 
 public class FindCommand extends Command {
     String keyword;

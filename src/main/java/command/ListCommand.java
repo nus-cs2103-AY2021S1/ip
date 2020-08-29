@@ -1,8 +1,8 @@
-package duke.command;
+package command;
 
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
+import ui.Ui;
 
 /**
  * List all tasks in the current task list
@@ -11,7 +11,7 @@ public class ListCommand extends Command {
     /**
      * List all tasks saved in the current task list
      *
-     * @param taskList current task list
+     * @param tasks current task list
      * @param ui       text ui interface
      * @param storage  storage file
      */

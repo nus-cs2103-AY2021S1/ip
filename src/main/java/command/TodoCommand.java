@@ -1,9 +1,9 @@
-package duke.command;
+package command;
 
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
-import duke.task.Todo;
+import ui.Ui;
+import task.Todo;
 
 /**
  * Insert a new todo into current task list

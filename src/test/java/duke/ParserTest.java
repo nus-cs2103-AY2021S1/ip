@@ -1,14 +1,14 @@
 package duke;
 
-import duke.command.ByeCommand;
-import duke.command.Command;
-import duke.command.DeadlineCommand;
-import duke.command.DeleteCommand;
-import duke.command.DoneCommand;
-import duke.command.EventCommand;
-import duke.command.ListCommand;
-import duke.command.TodoCommand;
-import duke.command.ViewallCommand;
+import command.ByeCommand;
+import command.Command;
+import command.DeadlineCommand;
+import command.DeleteCommand;
+import command.DoneCommand;
+import command.EventCommand;
+import command.ListCommand;
+import command.TodoCommand;
+import command.ViewallCommand;
 import exception.DeadlineInvalidUsageException;
 import exception.EventInvalidUsageException;
 import exception.InvalidUsageException;

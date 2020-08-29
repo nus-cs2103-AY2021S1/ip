@@ -1,4 +1,4 @@
-package duke.task;
+package task;
 
 import exception.DeadlineInvalidUsageException;
 

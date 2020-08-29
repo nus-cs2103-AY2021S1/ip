@@ -1,7 +1,7 @@
 package duke;
 
-import duke.task.Task;
-import duke.task.Todo;
+import task.Task;
+import task.Todo;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

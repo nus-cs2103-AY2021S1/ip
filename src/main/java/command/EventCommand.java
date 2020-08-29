@@ -1,22 +1,22 @@
-package duke.command;
+package command;
 
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
-import duke.task.Deadline;
+import ui.Ui;
+import task.Event;
 
 /**
- * Add a new deadline into the task list
+ * Add a new event into the task list
  */
-public class DeadlineCommand extends Command {
-    Deadline deadline;
+public class EventCommand extends Command {
+    Event event;
 
-    public DeadlineCommand(Deadline deadline) {
-        this.deadline = deadline;
+    public EventCommand(Event event) {
+        this.event = event;
     }
 
     /**
-     * Insert a new deadline into tasklist, and save it to storage file
+     * Insert an event into the task list and save it in the storage file
      *
      * @param taskList current task list
      * @param ui       text ui interface
@@ -24,7 +24,7 @@ public class DeadlineCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        tasks.add(deadline);
+        tasks.add(event);
         storage.save(tasks);
 
         int size = tasks.size();

@@ -1,8 +1,8 @@
-package duke.command;
+package command;
 
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
+import ui.Ui;
 
 /**
  * Parent class of all supported commands

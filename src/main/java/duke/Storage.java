@@ -1,9 +1,9 @@
 package duke;
 
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.Todo;
+import task.Deadline;
+import task.Event;
+import task.Task;
+import task.Todo;
 import exception.DeadlineInvalidUsageException;
 import exception.EventInvalidUsageException;
 import exception.StorageException;
