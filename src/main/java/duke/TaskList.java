@@ -57,7 +57,8 @@ public class TaskList {
     public void deleteTask(int idx) {
         Task task = tasks.get(idx);
         tasks.remove(idx);
-        System.out.println(">> I've eradicated the task:\n>> " + task + "\n>> You now have " + tasks.size() + " tasks to do!");
+        System.out.println(">> I've eradicated the task:\n>> " + task + "\n>> You now have "
+                + tasks.size() + " tasks to do!");
     }
 
 

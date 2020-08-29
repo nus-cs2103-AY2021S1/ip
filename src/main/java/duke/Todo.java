@@ -28,7 +28,7 @@ public class Todo extends Task {
      */
     @Override
     public String format() {
-        return "T" + SAVE_DELIMITER + super.format();
+        return "T" + getDelimiter() + super.format();
     }
 
     /**

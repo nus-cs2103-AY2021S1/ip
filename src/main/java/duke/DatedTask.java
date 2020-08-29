@@ -38,6 +38,6 @@ public class DatedTask extends Task {
      */
     @Override
     public String format() {
-        return super.format() + SAVE_DELIMITER + this.date.format(DateTimeFormatter.ofPattern("YYYY-MM-dd"));
+        return super.format() + getDelimiter() + this.date.format(DateTimeFormatter.ofPattern("YYYY-MM-dd"));
     }
 }
