@@ -1,5 +1,7 @@
+package botbot.exceptions;
+
 public class NoSuchCommandException extends BotbotException {
-    NoSuchCommandException() {
+    public NoSuchCommandException() {
         super("sorry, I don't know what that means!");
     }
 }

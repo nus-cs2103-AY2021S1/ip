@@ -1,12 +1,19 @@
+package botbot.commands;
+
+import botbot.Storage;
+import botbot.tasks.Task;
+import botbot.TaskList;
+import botbot.Ui;
+
 public class AddCommand extends Command {
     private Task task;
 
-    AddCommand(Task task) {
+    public AddCommand(Task task) {
         this.task = task;
     }
 
     @Override
-    void execute(Storage storage, TaskList tasks, Ui ui) {
+    public void execute(Storage storage, TaskList tasks, Ui ui) {
         tasks.add(task);
         storage.save(tasks);
         int numOfTasks = tasks.size();

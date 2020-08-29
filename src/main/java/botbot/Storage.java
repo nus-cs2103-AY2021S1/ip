@@ -1,3 +1,10 @@
+package botbot;
+
+import botbot.tasks.Deadline;
+import botbot.tasks.Event;
+import botbot.tasks.Task;
+import botbot.tasks.Todo;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -59,7 +66,7 @@ public class Storage {
         }
     }
 
-    void save(TaskList tasks) {
+    public void save(TaskList tasks) {
         try {
             FileWriter fw = new FileWriter(filePath);
             for (Task task : tasks) {

@@ -1,3 +1,9 @@
+package botbot;
+
+import botbot.commands.Command;
+import botbot.commands.ExitCommand;
+import botbot.exceptions.BotbotException;
+
 public class Botbot {
     private Storage storage;
     private TaskList tasks;

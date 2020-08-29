@@ -1,3 +1,5 @@
+package botbot;
+
 import java.util.Scanner;
 
 public class Ui {
@@ -20,7 +22,7 @@ public class Ui {
         System.out.println("helluu! I'm\n" + logo + "\nwhat would you like me to do?\n");
     }
     
-    void exit() {
+    public void exit() {
         System.out.println("    bye! see you soon!");
     }
     
@@ -28,7 +30,7 @@ public class Ui {
         return sc.nextLine();
     }
     
-    void printStatus(String status) {
+    public void printStatus(String status) {
         System.out.println(status);
     }
 }

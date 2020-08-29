@@ -1,3 +1,7 @@
+package botbot;
+
+import botbot.tasks.Task;
+
 import java.util.Collection;
 import java.util.LinkedList;
 
@@ -6,7 +10,7 @@ public class TaskList extends LinkedList<Task> {
         super(tasks);
     }
 
-    void delete(int id) {
+    public void delete(int id) {
         remove(id);
     }
     

@@ -1,28 +1,30 @@
+package botbot.tasks;
+
 public abstract class Task {
     protected final char type;
     protected final String description;
     private boolean isDone;
 
-    Task(char type, String description) {
+    public Task(char type, String description) {
         this.type = type;
         this.description = description;
         isDone = false;
     }
-    Task(char type, String description, boolean isDone) {
+    public Task(char type, String description, boolean isDone) {
         this.type = type;
         this.description = description;
         this.isDone = isDone;
     }
     
-    char getType() {
+    public char getType() {
         return type;
     }
     
-    String getDescription() {
+    public String getDescription() {
         return description;
     }
     
-    String getStatus() {
+    public String getStatus() {
         return isDone ? "1" : "0";
     }
 
@@ -30,11 +32,11 @@ public abstract class Task {
         return isDone ? "\u2713" : "\u2718";
     }
 
-    void markAsDone() {
+    public void markAsDone() {
         isDone = true;
     }
     
-    abstract String getAt();
+    public abstract String getAt();
     
-    abstract String getBy();
+    public abstract String getBy();
 }

@@ -1,11 +1,13 @@
+package botbot.tasks;
+
 public class Todo extends Task {
-    protected static final char TYPE_CODE = 'T';
+    public static final char TYPE_CODE = 'T';
     
-    Todo(String command) {
+    public Todo(String command) {
         super(TYPE_CODE, extractNameFromCommand(command));
     }
     
-    Todo(String description, boolean isDone) {
+    public Todo(String description, boolean isDone) {
         super(TYPE_CODE, description, isDone);
     }
 
@@ -14,12 +16,12 @@ public class Todo extends Task {
     }
 
     @Override
-    String getAt() {
+    public String getAt() {
         return null;
     }
 
     @Override
-    String getBy() {
+    public String getBy() {
         return null;
     }
 

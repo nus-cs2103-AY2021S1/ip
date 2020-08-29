@@ -1,15 +1,19 @@
+package botbot.tasks;
+
+import botbot.exceptions.InvalidFormatException;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 public class Event extends Task {
     private LocalDateTime at;
-    protected static final char TYPE_CODE = 'E';
-    protected static final String FORMAT = "event <description> /at <D-M-YYYY HHmm> (eg. 17-3-2020 0945 "
+    public static final char TYPE_CODE = 'E';
+    public static final String FORMAT = "event <description> /at <D-M-YYYY HHmm> (eg. 17-3-2020 0945 "
             + "or 3-4-2020 with no time specified)";
     private static final String NO_TIME_FLAG = String.format(" 0%.0f", Math.PI * Math.pow(10, 10));
 
-    Event(String command) throws InvalidFormatException {
+    public Event(String command) throws InvalidFormatException {
         super(TYPE_CODE, extractNameFromCommand(command));
         int index = command.indexOf("/at ") + 4;
         String dateStr = command.substring(index).strip();
@@ -23,7 +27,7 @@ public class Event extends Task {
         }
     }
 
-    Event(String description, boolean isDone, String at) {
+    public Event(String description, boolean isDone, String at) {
         super(TYPE_CODE, description, isDone);
         this.at = LocalDateTime.parse(at);
     }
@@ -34,12 +38,12 @@ public class Event extends Task {
     }
     
     @Override
-    String getAt() {
+    public String getAt() {
         return at.toString();
     }
     
     @Override
-    String getBy() {
+    public String getBy() {
         return null;
     }
     

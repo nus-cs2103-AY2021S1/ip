@@ -1,6 +1,12 @@
+package botbot.commands;
+
+import botbot.Storage;
+import botbot.TaskList;
+import botbot.Ui;
+
 public class ExitCommand extends Command {
     @Override
-    void execute(Storage storage, TaskList tasks, Ui ui) {
+    public void execute(Storage storage, TaskList tasks, Ui ui) {
         ui.exit();
     }
     

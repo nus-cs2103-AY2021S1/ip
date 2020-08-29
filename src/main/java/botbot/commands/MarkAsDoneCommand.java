@@ -1,12 +1,19 @@
+package botbot.commands;
+
+import botbot.Storage;
+import botbot.tasks.Task;
+import botbot.TaskList;
+import botbot.Ui;
+
 public class MarkAsDoneCommand extends Command {
     private int id;
     
-    MarkAsDoneCommand(int id) {
+    public MarkAsDoneCommand(int id) {
         this.id = id;
     }
 
     @Override
-    void execute(Storage storage, TaskList tasks, Ui ui) {
+    public void execute(Storage storage, TaskList tasks, Ui ui) {
         try {
             Task task = tasks.get(id);
             tasks.delete(id);
