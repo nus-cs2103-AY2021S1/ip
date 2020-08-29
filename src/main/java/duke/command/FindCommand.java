@@ -7,16 +7,16 @@ import duke.util.TaskList;
 import duke.util.Ui;
 
 public class FindCommand extends Command {
-    private String toFind;
+    private String[] stringsToFind;
 
     /**
      * Constructs a FindCommand.
      *
-     * @param toFind The task to find.
+     * @param stringsToFind The strings used to search for tasks.
      */
-    public FindCommand(String toFind) {
+    public FindCommand(String ... stringsToFind) {
         super(true);
-        this.toFind = toFind;
+        this.stringsToFind = stringsToFind;
     }
 
     /**
@@ -30,8 +30,16 @@ public class FindCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         StringJoiner response = new StringJoiner("\n");
-        response.add(String.format("Here are the tasks in your list that contain \"%s\":", toFind));
-        response.add(tasks.find(toFind));
+        StringJoiner userStrings = new StringJoiner("\n");
+        for (String string : stringsToFind) {
+            userStrings.add(String.format("\"%s\"", string));
+        }
+        response.add(String.format("Here are the tasks in your list that contain \n%s\n",
+                userStrings.toString()));
+        for (String toFind : stringsToFind) {
+            response.add(tasks.find(toFind));
+        }
+
         ui.printResponse(response.toString());
     }
 
@@ -46,8 +54,21 @@ public class FindCommand extends Command {
     @Override
     public String executeWithResponse(TaskList tasks, Ui ui, Storage storage) {
         StringJoiner response = new StringJoiner("\n");
-        response.add(String.format("Here are the tasks in your list that contain \"%s\":", toFind));
-        response.add(tasks.find(toFind));
+        StringJoiner userStrings = new StringJoiner("\n");
+        for (String string : stringsToFind) {
+            userStrings.add(String.format("\"%s\"", string));
+        }
+        response.add(String.format("Here are the tasks in your list that contain \n%s\n",
+                userStrings.toString()));
+        for (String toFind : stringsToFind) {
+            response.add(tasks.find(toFind));
+        }
+
         return response.toString();
+    }
+
+    @Override
+    public String toString() {
+        return "find <keywords separated by ~>";
     }
 }

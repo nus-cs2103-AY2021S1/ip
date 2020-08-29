@@ -22,6 +22,7 @@ public class HelpCommand extends Command {
             new DeleteCommand(0),
             new DoneCommand(0),
             new EventCommand("dummy value", new Date()),
+            new FindCommand("dummy value"),
             new ListCommand(),
             new ToDoCommand("dummy value")
     );

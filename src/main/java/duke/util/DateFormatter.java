@@ -33,7 +33,7 @@ public class DateFormatter {
             try {
                 return sdf.parse(strDate);
             } catch (ParseException e) {
-                //intentionally empty
+                // intentionally empty to check the other date formats
             }
         }
 

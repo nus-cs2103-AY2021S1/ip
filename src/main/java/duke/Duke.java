@@ -8,6 +8,7 @@ import duke.util.Parser;
 import duke.util.Storage;
 import duke.util.TaskList;
 import duke.util.Ui;
+
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.scene.Scene;
@@ -73,7 +74,7 @@ public class Duke extends Application {
     }
 
     /**
-     * Runs the application.
+     * Runs the command-line version of the application.
      */
     public void run() {
         Scanner sc = new Scanner(System.in);

@@ -70,8 +70,10 @@ public class Parser {
             return new ToDoCommand(description);
         } else if (input.startsWith("find")) {
             String[] split = input.split("find ");
-            String toFind = split[1];
-            return new FindCommand(toFind);
+            String restOfInput = split[1];
+            String[] keywords = restOfInput.split("\\s*~\\s*"); // splits and trims
+
+            return new FindCommand(keywords);
         } else {
             throw new DukeException();
         }
