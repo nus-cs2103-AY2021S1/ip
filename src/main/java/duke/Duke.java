@@ -1,9 +1,9 @@
 package duke;
 
+import java.io.IOException;
+
 import duke.command.Command;
 import duke.exception.DukeException;
-
-import java.io.IOException;
 
 public class Duke {
 
@@ -11,6 +11,10 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Constructs Duke bot.
+     * @param filePath File path containing data.
+     */
     public Duke(String filePath) {
         this.ui = new Ui();
         this.storage = new Storage(filePath);
@@ -26,12 +30,15 @@ public class Duke {
     }
 
     /**
-     * Runs the Duke bot.
+     * Runs the program.
      */
     public static void main(String[] args) {
         new Duke("tasks.txt").run();
     }
 
+    /**
+     * Runs the Duke bot.
+     */
     public void run() {
         ui.greet();
         //storage.showData();

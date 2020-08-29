@@ -1,6 +1,15 @@
 package duke;
 
-import duke.command.*;
+import duke.command.Command;
+import duke.command.DeadlineCommand;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.EventCommand;
+import duke.command.ExitCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
+import duke.command.ShowCommand;
+import duke.command.TodoCommand;
 import duke.exception.DukeException;
 import duke.exception.WrongInputException;
 
@@ -8,7 +17,6 @@ public class Parser {
 
     /**
      * Returns the command based on user's input.
-     *
      * @param command User's input.
      * @return Corresponding command.
      * @throws DukeException If user's input is not compatible to any command.
@@ -69,7 +77,6 @@ public class Parser {
 
     /**
      * Returns the task details by removing the command.
-     *
      * @param command User's input.
      * @return task details containing the description, date, and time.
      * @throws DukeException if the command consists of only one word.

@@ -1,15 +1,15 @@
 package duke.command;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeParseException;
+
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 import duke.exception.DukeException;
 import duke.exception.EventException;
 import duke.task.Event;
-
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.format.DateTimeParseException;
 
 public class EventCommand extends Command {
 
@@ -19,7 +19,6 @@ public class EventCommand extends Command {
 
     /**
      * Processes all the done command to determine the correct output.
-     *
      * @param taskList List of tasks.
      * @param ui       UI of the bot.
      * @param storage  Storage managing the file in hard disk.
@@ -35,7 +34,6 @@ public class EventCommand extends Command {
 
     /**
      * Processes all the event command to determine the correct output.
-     *
      * @param theRest  Parsed string containing task details.
      * @param taskList List containing all the task(s).
      * @param ui       UI of the bot
@@ -44,7 +42,7 @@ public class EventCommand extends Command {
      */
 
     public void processEvent(
-            String theRest, TaskList taskList, Ui ui, Storage storage) throws EventException {
+        String theRest, TaskList taskList, Ui ui, Storage storage) throws EventException {
         try {
             String[] eventAndDateAndTime = theRest.split(" /at ", 2);
             Event event;
@@ -76,7 +74,7 @@ public class EventCommand extends Command {
                             LocalTime localStartTime = LocalTime.parse(startTime);
                             LocalTime localEndTime = LocalTime.parse(endTime);
                             event = new Event(eventDesc, false,
-                                    localDate, localStartTime, localEndTime);
+                                localDate, localStartTime, localEndTime);
                         }
                     }
 
@@ -85,7 +83,7 @@ public class EventCommand extends Command {
 
                 } catch (DateTimeParseException e) {
                     System.out.println(
-                            "Please enter the date in YYYY/MM/DD format and time in HH:MM format.");
+                        "Please enter the date in YYYY/MM/DD format and time in HH:MM format.");
                 }
 
             } catch (IndexOutOfBoundsException e) {
@@ -100,7 +98,6 @@ public class EventCommand extends Command {
     /**
      * Evaluates whether this and other object if this and
      * other object is the same or of the same type and task details.
-     *
      * @param other Other object to compare.
      * @return True if this object
      */
