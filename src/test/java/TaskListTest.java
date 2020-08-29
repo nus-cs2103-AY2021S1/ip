@@ -1,11 +1,14 @@
+import duke.exception.TaskExistException;
 import duke.task.Task;
 import duke.tool.TaskList;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 public class TaskListTest {
 
     @Test
-    public void markAsDoneTest1() {
+    public void markAsDoneTest1() throws TaskExistException {
         Task sample = new Task("sample");
         sample.markAsDone();
         Task sampleInList = new Task("sample1");
@@ -15,8 +18,9 @@ public class TaskListTest {
         assertEquals(sample.getStatus(), list.getTasks().get(0).getStatus());
     }
 
+
     @Test
-    public void markAsDoneTest2() {
+    public void markAsDoneTest2() throws TaskExistException {
         Task sample = new Task("sample");
         sample.markAsDone();
         Task sampleInList1 = new Task("sample1");
