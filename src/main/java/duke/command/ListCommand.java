@@ -7,7 +7,7 @@ import duke.task.Task;
 
 import java.util.ArrayList;
 
-public class ListCommand extends Command {
+public class ListCommand implements Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         ArrayList<Task> list = tasks.getList();

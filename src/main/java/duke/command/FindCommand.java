@@ -7,7 +7,7 @@ import duke.task.Task;
 
 import java.util.ArrayList;
 
-public class FindCommand extends Command {
+public class FindCommand implements Command {
     private final String keyword;
 
     public FindCommand(String keyword) {

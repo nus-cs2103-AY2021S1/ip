@@ -6,7 +6,7 @@ import duke.Storage;
 
 import java.io.IOException;
 
-public class DoneCommand extends Command {
+public class DoneCommand implements Command {
     private final String item;
 
     public DoneCommand(String item) {

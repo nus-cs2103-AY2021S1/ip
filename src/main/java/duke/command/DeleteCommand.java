@@ -6,7 +6,7 @@ import duke.Storage;
 
 import java.io.IOException;
 
-public class DeleteCommand extends Command {
+public class DeleteCommand implements Command {
     private final String item;
 
     public DeleteCommand(String item) {

@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.time.DateTimeException;
 import java.time.LocalDate;
 
-public class AddCommand extends Command {
+public class AddCommand implements Command {
     private final TaskType type;
     private final String name;
     private final String time;
