@@ -39,7 +39,7 @@ public class Event extends TimedTask {
 
     @Override
     public String toString() {
-        return "[" + super.getStatusIcon() + "] " + "Event: " + super.getTask() +
-                "(at: " + getTime().format(DateTimeFormatter.ofPattern("dd MMM yyyy hh:mm a")) + ")" + "\n";
+        return "[" + super.getStatusIcon() + "] " + "Event: " + super.getTask()
+                + "(at: " + getTime().format(DateTimeFormatter.ofPattern("dd MMM yyyy hh:mm a")) + ")" + "\n";
     }
 }

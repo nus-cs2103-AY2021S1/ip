@@ -40,7 +40,7 @@ public class Deadline extends TimedTask {
 
     @Override
     public String toString() {
-        return "[" + super.getStatusIcon() + "] " + "Deadline: " + super.getTask() +
-                "(by: " + getTime().format(DateTimeFormatter.ofPattern("dd MMM yyyy hh:mm a")) + ")" + "\n";
+        return "[" + super.getStatusIcon() + "] " + "Deadline: " + super.getTask()
+                + "(by: " + getTime().format(DateTimeFormatter.ofPattern("dd MMM yyyy hh:mm a")) + ")" + "\n";
     }
 }

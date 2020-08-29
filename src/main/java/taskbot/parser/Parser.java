@@ -1,7 +1,15 @@
 package taskbot.parser;
 
-import taskbot.command.*;
-
+import taskbot.command.Command;
+import taskbot.command.DeadlineCommand;
+import taskbot.command.DeleteCommand;
+import taskbot.command.DoneCommand;
+import taskbot.command.EventCommand;
+import taskbot.command.ExitCommand;
+import taskbot.command.FindCommand;
+import taskbot.command.ListCommand;
+import taskbot.command.TodoCommand;
+import taskbot.command.UpcomingCommand;
 import taskbot.exceptions.EmptyArgumentException;
 import taskbot.exceptions.InvalidCommandException;
 
@@ -14,6 +22,8 @@ public class Parser {
      *
      * @param command The string to be parsed.
      * @return The command corresponding to the string parsed.
+     * @throws InvalidCommandException if the command given does not match any known commands.
+     * @throws EmptyArgumentException if a command requires arguments but received none.
      */
     public static Command parse(String command) throws InvalidCommandException, EmptyArgumentException {
         /*Separates the command into the command keyword
@@ -23,17 +33,20 @@ public class Parser {
         switch (commandArgs[0]) {
         case "todo":
             if (commandArgs.length == 1 || commandArgs[1].strip().length() == 0) {
-                throw new EmptyArgumentException("The description of a todo cannot be empty. Please input a valid description.");
+                throw new EmptyArgumentException(
+                        "The description of a todo cannot be empty. Please input a valid description.");
             }
             return new TodoCommand(commandArgs[1]);
         case "deadline":
             if (commandArgs.length == 1 || commandArgs[1].strip().length() == 0) {
-                throw new EmptyArgumentException("The description of a deadline cannot be empty. Please input a valid description.");
+                throw new EmptyArgumentException(
+                        "The description of a deadline cannot be empty. Please input a valid description.");
             }
             return new DeadlineCommand(commandArgs[1]);
         case "event":
             if (commandArgs.length == 1 || commandArgs[1].strip().length() == 0) {
-                throw new EmptyArgumentException("The description of an event cannot be empty. Please input a valid description.");
+                throw new EmptyArgumentException(
+                        "The description of an event cannot be empty. Please input a valid description.");
             }
             return new EventCommand(commandArgs[1]);
         case "list":

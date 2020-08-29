@@ -1,17 +1,20 @@
 package taskbot.main;
 
 import taskbot.command.Command;
-import taskbot.parser.Parser;
 import taskbot.exceptions.TaskbotException;
+import taskbot.parser.Parser;
 import taskbot.storage.Storage;
-import taskbot.ui.Ui;
-
 import taskbot.task.TaskList;
+import taskbot.ui.Ui;
 
 /**
  * This is the main driver class.
  */
 public class Main {
+    /**
+     * Initialises the TaskBot UI and takes in commands from the user.
+     * @param args Unused args.
+     */
     public static void main(String[] args) {
         // Initialise Taskbot & required classes
         Ui ui = new Ui();

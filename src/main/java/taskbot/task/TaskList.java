@@ -1,19 +1,18 @@
 package taskbot.task;
 
-import java.util.ArrayList;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-
-import taskbot.storage.Storage;
+import java.util.ArrayList;
 
 import taskbot.exceptions.InvalidDateTimeException;
 import taskbot.exceptions.InvalidIndexException;
 import taskbot.exceptions.TaskAlreadyCompleteException;
 import taskbot.exceptions.WrongFormatException;
+import taskbot.storage.Storage;
+
 
 /**
  * Encapsulates the task list.
@@ -68,6 +67,8 @@ public class TaskList {
 
     /**
      * Informs the user of the number of tasks in the current list.
+     *
+     * @return A string describing how many tasks there are in the list.
      */
     public String listTaskSize() {
         return "You now have " + tasks.size() + " task(s) in the list.";
@@ -87,21 +88,24 @@ public class TaskList {
             storage.setTasksList(tasks);
         }
         // Informs the user that the task has been added
-        System.out.println("I have added a Todo:\n" + newTask +
-                "\n" + listTaskSize());
+        System.out.println("I have added a Todo:\n" + newTask
+                + "\n" + listTaskSize());
     }
 
     /**
      * Adds an event Task to the list.
      *
      * @param input The task to be added followed by time.
+     * @throws InvalidDateTimeException if the given date time argument has a wrong format.
+     * @throws WrongFormatException if the given input does not match the required format for an event.
      */
     public void addEventTask(String input) throws InvalidDateTimeException, WrongFormatException {
         // Splits the input according to whitespace
         String[] parsedString = input.split("/at");
 
         if (parsedString.length != 2) {
-            throw new WrongFormatException("Wrong format for event. Please ensure that you provide a description and time, delimited by /at");
+            throw new WrongFormatException(
+                    "Wrong format for event. Please ensure that you provide a description and time, delimited by /at");
         }
         LocalDateTime dateTime = parseDateTime(parsedString[1].stripLeading());
         // Makes a new Event task
@@ -116,20 +120,24 @@ public class TaskList {
         }
 
         // Informs the user that the task has been added
-        System.out.println("I have added an Event:\n" + newTask +
-                "\n" + listTaskSize());
+        System.out.println("I have added an Event:\n" + newTask
+                + "\n" + listTaskSize());
     }
 
     /**
      * Adds a deadline Task to the list.
      *
      * @param input The task to be added followed by time.
+     * @throws InvalidDateTimeException if the given date time argument has a wrong format.
+     * @throws WrongFormatException if the given input does not match the required format for a deadline.
      */
     public void addDeadlineTask(String input) throws InvalidDateTimeException, WrongFormatException {
         // Splits the input according to whitespace
         String[] parsedString = input.split("/by");
         if (parsedString.length != 2) {
-            throw new WrongFormatException("Wrong format for deadline. Please ensure that you provide a description and time, delimited by /by");
+            throw new WrongFormatException(
+                    "Wrong format for deadline. "
+                    + "Please ensure that you provide a description and time, delimited by /by");
         }
 
         LocalDateTime dateTime = parseDateTime(parsedString[1].stripLeading());
@@ -145,8 +153,8 @@ public class TaskList {
         }
 
         // Informs the user that the task has been added
-        System.out.println("I have added a Deadline:\n" + newTask +
-                "\n" + listTaskSize());
+        System.out.println("I have added a Deadline:\n" + newTask
+                + "\n" + listTaskSize());
     }
 
     /**
@@ -159,8 +167,8 @@ public class TaskList {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
             return LocalDateTime.parse(str, formatter);
         } catch (DateTimeParseException e) {
-            throw new InvalidDateTimeException("Invalid format of date and time.\n" +
-                    "Please follow the format: YYYY-mm-dd hhmm");
+            throw new InvalidDateTimeException("Invalid format of date and time.\n"
+                    + "Please follow the format: YYYY-mm-dd hhmm");
         }
     }
 
@@ -168,6 +176,8 @@ public class TaskList {
      * Completes a task in the given index.
      *
      * @param taskIndex Index of the task in the list.
+     * @throws InvalidIndexException when the given index is not within the size of the list.
+     * @throws TaskAlreadyCompleteException when the task to complete is already completed.
      */
     public void completeTask(int taskIndex) throws InvalidIndexException, TaskAlreadyCompleteException {
         try {
@@ -183,7 +193,8 @@ public class TaskList {
             message += "    " + tasks.get(taskIndex);
             System.out.println(message);
         } catch (IndexOutOfBoundsException e) {
-            throw new InvalidIndexException("You have specified an index not within the ranges of the list. Please try again.");
+            throw new InvalidIndexException(
+                    "You have specified an index not within the ranges of the list. Please try again.");
         }
     }
 
@@ -191,6 +202,7 @@ public class TaskList {
      * Deletes the task at the specified index.
      *
      * @param taskIndex Index of the task in the list.
+     * @throws InvalidIndexException when the given index is not within the size of the list.
      */
     public void deleteTask(int taskIndex) throws InvalidIndexException {
         try {
@@ -208,7 +220,8 @@ public class TaskList {
             message += listTaskSize();
             System.out.println(message);
         } catch (IndexOutOfBoundsException e) {
-            throw new InvalidIndexException("You have specified an index not within the ranges of the list. Please try again.");
+            throw new InvalidIndexException(
+                    "You have specified an index not within the ranges of the list. Please try again.");
         }
     }
 
@@ -240,7 +253,7 @@ public class TaskList {
             }
             sb.append(i + 1).append(". ").append(task).append("\n");
         }
-        // Prints the list of tasks that fall within the timeframe
+        // Prints the list of tasks that fall within the time frame
         System.out.print(sb.toString());
     }
 

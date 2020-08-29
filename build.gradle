@@ -28,8 +28,11 @@ test {
     }
 }
 
-task cleanBuildTest(type: GradleBuild) {
-    tasks = ["clean", "build", "test"]
+task runCheckstyleJavaDocs(type: GradleBuild) {
+    tasks = ["javadoc", "checkstyleMain", "checkstyleTest"]
+}
+task cleanTest(type: GradleBuild) {
+    tasks = ["clean", "test"]
 }
 
 application {
@@ -42,7 +45,7 @@ shadowJar {
 }
 
 checkstyle {
-    toolVersion = '8.23'
+    toolVersion = '8.32'
 }
 
 run {
