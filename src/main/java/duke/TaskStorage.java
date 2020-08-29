@@ -101,7 +101,7 @@ public class TaskStorage {
     /**
      * Returns and saves the current taskStorage in memory locally.
      *
-     * @return updated taskStorage
+     * @return Updated taskStorage.
      * @throws IOException If an input or output exception occurred.
      */
     public TaskStorage save() throws IOException {
