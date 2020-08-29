@@ -12,15 +12,6 @@ public class Duke {
     private Parser parser;
 
     /**
-     * Starts Duke.
-     *
-     * @param args Command line arguments.
-     */
-    public static void main(String[] args) {
-        new Duke("data/duke.txt").run();
-    }
-
-    /**
      * Constructor for the Duke object.
      *
      * @param savePath Directory path to the save file.
@@ -30,6 +21,15 @@ public class Duke {
         taskList = new TaskList();
         ui = new UI();
         parser = new Parser(ui, taskList, saver);
+    }
+
+    /**
+     * Starts Duke.
+     *
+     * @param args Command line arguments.
+     */
+    public static void main(String[] args) {
+        new Duke("data/duke.txt").run();
     }
 
     /**
