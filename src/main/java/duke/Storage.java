@@ -17,6 +17,7 @@ import java.util.Scanner;
  */
 public class Storage {
     private final File file;
+    private final String filePath;
 
     /**
      * Points to the file which filePath is input by User.
@@ -24,17 +25,21 @@ public class Storage {
      */
     public Storage(String filePath) {
         this.file = new File(filePath);
+        this.filePath = filePath;
     }
 
     /**
      * Write the argument into the file
-     * @param data Data to be written to the designated file.
+     * @param data An array of String to be written to the designated file.
      * @throws DukeException If no permission to create at filePath or filePath is a directory.
      */
-    public void saveFile(String data) throws DukeException {
+    public void saveFile(String[] data) throws DukeException {
         try {
             FileWriter fw = new FileWriter(file);
-            fw.write(data);
+            fw.write("");
+            for (String s: data) {
+                fw.append(s);
+            }
             fw.close();
         } catch (IOException err) {
             throw new DukeException("File Path is a directory -OR- Can't create file at location");
@@ -43,7 +48,7 @@ public class Storage {
 
     /**
      * Read and interpret the saved file.
-     * @return ArrayList of Task that is saved inside the designated file.
+     * @return ArrayList of Task that is saved inside the designated file. If file / directory does not exist, create.
      * @throws DukeException If file is not found.
      */
     public ArrayList<Task> loadFile() throws DukeException {
@@ -58,6 +63,13 @@ public class Storage {
             }
             return loadedTask;
         } catch (FileNotFoundException err) {
+            String[] fileDirectory = this.filePath.split("/");
+            String parentDirectory = "";
+            for (int i = 0; i < fileDirectory.length -1 ; i++) {
+                parentDirectory += fileDirectory[i] + "/";
+            }
+            File f = new File(parentDirectory);
+            f.mkdirs();
             throw new DukeException("Can't Find Save File. Starting New");
         }
     }
