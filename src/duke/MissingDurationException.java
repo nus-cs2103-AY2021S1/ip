@@ -1,3 +1,5 @@
+package duke;
+
 public class MissingDurationException extends Exception{
 
     public MissingDurationException(String s) {

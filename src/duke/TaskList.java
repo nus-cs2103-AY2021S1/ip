@@ -1,18 +1,18 @@
-import java.io.*;
-import java.util.ArrayList;
-import java.util.Arrays;
+package duke;
 
-public class List {
+import java.util.ArrayList;
+
+public class TaskList {
     int count;
     ArrayList<Task> list;
 
-    private List() {
+    private TaskList() {
         count = 0;
         list = new ArrayList<>();
     }
 
-    public static List startList() {
-        return new List();
+    public static TaskList startList() {
+        return new TaskList();
     }
 
     public String addToList(Task t) {
@@ -65,38 +65,7 @@ public class List {
         return str;
     }
 
-    public void populateList(File f) throws IOException, IndexOutOfBoundsException {
-        FileReader fr = new FileReader(f);
-        BufferedReader br = new BufferedReader(fr);
-        String line;
-        while ((line = br.readLine()) != null) {
-            String[] arr = line.split("@", 4);
-            if (arr[0].equals("T")) {
-                String desc = arr[2];
-                if (arr[1].equals("1")) {
-                    this.addToList(new Todo(desc).taskDone());
-                } else {
-                    this.addToList(new Todo(desc));
-                }
-            } else if (arr[0].equals("D")) {
-                String desc = arr[2];
-                String by = arr[3];
-                if (arr[1].equals("1")) {
-                    this.addToList(new Deadline(desc, by).taskDone());
-                } else {
-                    this.addToList(new Deadline(desc, by));
-                }
-            } else if (arr[0].equals("E")) {
-                String desc = arr[2];
-                String at = arr[3];
-                if (arr[1].equals("1")) {
-                    this.addToList(new Event(desc, at).taskDone());
-                } else {
-                    this.addToList(new Event(desc, at));
-                }
-            }
-        }
-    }
+
 
     @Override
     public String toString() {

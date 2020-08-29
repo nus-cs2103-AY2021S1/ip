@@ -1,3 +1,5 @@
+package duke;
+
 public class MissingDescriptionException extends Exception {
 
     public MissingDescriptionException(String s) {
