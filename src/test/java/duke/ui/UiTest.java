@@ -2,59 +2,47 @@ package duke.ui;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class UiTest {
     private static final String LINE = "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
-    private static final String SPACER = "               ";
-    private static final String LOGO = SPACER + " ____        _        \n"
-            + SPACER + "|  _ \\ _   _| | _____ \n"
-            + SPACER + "| | | | | | | |/ / _ \\\n"
-            + SPACER + "| |_| | |_| |   <  __/\n"
-            + SPACER + "|____/ \\__,_|_|\\_\\___|\n";
-    //@@author Jonathan Cook
-    // Reused from https://www.baeldung.com/java-testing-system-out-println
-    private final PrintStream standardOut = System.out;
-    private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
+    private static final String HELLO_DUKE = "      " + "Hello! I'm Duke ^.^";
+    private static final String QUESTION = "What can I do for you?";
+    private static final String GOODBYE_MSG = "Bye ^.^, Hope to see you again soon!!!";
     private Ui ui;
     @BeforeEach
     void init() {
         ui = new Ui();
-        System.setOut(new PrintStream(outputStreamCaptor));
     }
 
     @Test
     @DisplayName("formatter for input message")
     public void testMessageFormatter() {
-        ui.messageFormatter(() -> System.out.println("hello world"));
-        String str = LINE + "\n" + "hello world\n" + LINE;
-        assertEquals(str, outputStreamCaptor.toString().trim());
+        String messageFormatterMessage = ui.messageFormatter(new String[]{"hello world"});
+        String str = "hello world\n";
+        assertEquals(str, messageFormatterMessage);
     }
     @Test
     @DisplayName("user's login greetings")
     public void testGreetings() {
-        ui.greetings();
-        String str = LINE + "\n" + " *** Opening and loading relevant documents into duke.Duke ***\n" + LOGO + "\n"
-                + LINE + "\n" + "\n" + LINE + "\n" + "Hello! I'm duke.Duke ^.^\n" + "What can I do for you?\n" + LINE;
-        assertEquals(str, outputStreamCaptor.toString().trim());
+        String greetingMessage = ui.greetings();
+        String str = HELLO_DUKE + "\n" + QUESTION + "\n";
+        assertEquals(str, greetingMessage);
     }
     @Test
     @DisplayName("user's logout message")
     public void testGoodBye() {
-        ui.goodBye();
-        String str = LINE + "\n" + "Bye ^.^, Hope to see you again soon!!!\n" + LINE;
-        assertEquals(str, outputStreamCaptor.toString().trim());
+        String goodbyeMessage = ui.goodBye();
+        String str = GOODBYE_MSG + "\n";
+        assertEquals(str, goodbyeMessage);
     }
     @Test
     @DisplayName("error message")
     public void testPrintException() {
-        ui.printException("ERROR");
-        String str = LINE + "\n" + "ERROR\n" + LINE;
-        assertEquals(str, outputStreamCaptor.toString().trim());
+        String errorMessage = ui.printException("ERROR");
+        String str = "ERROR\n";
+        assertEquals(str, errorMessage);
     }
 }

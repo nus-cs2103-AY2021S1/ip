@@ -30,9 +30,9 @@ public class AddCommand extends Command {
         super(inputArr);
     }
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws InvalidFormatDeadlineException,
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws InvalidFormatDeadlineException,
             InvalidFormatEventException, InvalidFormatDateException {
-        addTask(inputArr[0], inputArr[1], ui, tasks);
+        return addTask(inputArr[0], inputArr[1], ui, tasks);
     }
 
     /**
@@ -47,7 +47,7 @@ public class AddCommand extends Command {
      * @throws InvalidFormatEventException Throws an exception when the format of 'message' is wrong.
      * @throws InvalidFormatDateException Throws an exception when the format of 'message' is wrong.
      */
-    private void addTask(String type, String message, Ui ui, TaskList tasks)
+    private String addTask(String type, String message, Ui ui, TaskList tasks)
             throws InvalidFormatDeadlineException, InvalidFormatEventException, InvalidFormatDateException {
         Task task;
         String[] dateTime;
@@ -68,13 +68,9 @@ public class AddCommand extends Command {
             }
             task = new Event(dateTime[0], Parser.formatDateTime(dateTime[1]));
         } else {
-            return;
+            return "";
         }
         tasks.add(task);
-        ui.messageFormatter(() -> {
-            System.out.println(ADDED_NOTIFICATION);
-            System.out.println(task);
-            printNumTask(tasks);
-        });
+        return ui.messageFormatter(new String[]{ADDED_NOTIFICATION, task.toString(), printNumTask(tasks)});
     }
 }

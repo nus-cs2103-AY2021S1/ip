@@ -1,13 +1,12 @@
 package duke;
 
-
 import duke.commands.Command;
 import duke.exception.DukeException;
 import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
-
+import javafx.application.Platform;
 
 /**
  * Duke is the name of this program. It acts as a CLI app that reads and save
@@ -15,7 +14,7 @@ import duke.ui.Ui;
  * of it.
  */
 
-public class Duke {
+public class Duke  {
     private Storage storage;
     private Ui ui;
     private TaskList tasks;
@@ -29,6 +28,34 @@ public class Duke {
         tasks = new TaskList();
         storage.retrieve(tasks);
         this.ui = new Ui();
+    }
+    
+    //@@ Oleg Mikhailov
+    //Reused https://stackoverflow.com/questions/26311470/what-is-the-equivalent-of-javascript-settimeout-in-java
+    public static void setTimeout(Runnable runnable, int delay){
+        new Thread(() -> {
+            try {
+                Thread.sleep(delay);
+                runnable.run();
+            }
+            catch (Exception e){
+                System.err.println(e);
+            }
+        }).start();
+    }
+
+    public String getResponse(String input) {
+        try {
+            Command c = Parser.parse(input);
+            String reply = c.execute(tasks, ui, storage);
+            setTimeout(()-> {
+                Platform.exit();
+                System.exit(0);
+            }, 1000);
+            return reply;
+        } catch (DukeException e) {
+            return e.getMessage();
+        }
     }
 
     /**
@@ -48,5 +75,4 @@ public class Duke {
             }
         }
     }
-
 }

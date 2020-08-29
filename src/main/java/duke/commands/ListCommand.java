@@ -22,8 +22,8 @@ public class ListCommand extends Command {
         super(inputArr);
     }
 
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        showListTasks(tasks, ui);
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        return showListTasks(tasks, ui);
     }
 
     /**
@@ -32,16 +32,16 @@ public class ListCommand extends Command {
      * @param tasks Object contains the task list.
      * @param ui Object that deals with interactions with the user.
      */
-    private void showListTasks(TaskList tasks, Ui ui) {
+    private String showListTasks(TaskList tasks, Ui ui) {
         if (tasks.size() == 0) {
-            ui.messageFormatter(() -> System.out.println(EMPTY_MSG));
+            return ui.messageFormatter(new String[]{EMPTY_MSG});
         } else {
-            ui.messageFormatter(() -> {
-                System.out.println(SHOW_TASK);
-                for (int i = 1; i <= tasks.size(); i++) {
-                    System.out.println(i + ". " + tasks.get(i - 1));
-                }
-            });
+            String[] listMessage = new String[tasks.size() + 1];
+            listMessage[0] = SHOW_TASK;
+            for (int i = 1; i <= tasks.size(); i++) {
+                listMessage[i] = i + ". " + tasks.get(i - 1).toString();
+            }
+            return ui.messageFormatter(listMessage);
         }
     }
 }

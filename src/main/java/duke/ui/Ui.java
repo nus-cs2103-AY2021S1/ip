@@ -8,15 +8,10 @@ import java.util.Scanner;
 
 public class Ui {
     private static final String SPACER = "               ";
-    private static final String LOGO = SPACER + " ____        _        \n"
-            + SPACER + "|  _ \\ _   _| | _____ \n"
-            + SPACER + "| | | | | | | |/ / _ \\\n"
-            + SPACER + "| |_| | |_| |   <  __/\n"
-            + SPACER + "|____/ \\__,_|_|\\_\\___|\n";
     private static final String LINE = "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
-    private static final String OPENING_MSG = " *** Opening and loading relevant documents into duke.Duke ***";
+    private static final String OPENING_MSG = " *** Opening and loading relevant documents into Duke ***";
     private static final String GOODBYE_MSG = "Bye ^.^, Hope to see you again soon!!!";
-    private static final String HELLO_DUKE = "Hello! I'm duke.Duke ^.^";
+    private static final String HELLO_DUKE = "      " + "Hello! I'm Duke ^.^";
     private static final String QUESTION = "What can I do for you?";
 
     private final Scanner sc;
@@ -28,41 +23,42 @@ public class Ui {
     /**
      * Greets the user.
      */
-    public void greetings() {
-        messageFormatter(() -> {
-            System.out.println(OPENING_MSG);
-            System.out.println(LOGO);
-        });
-        messageFormatter(() -> {
-            System.out.println(HELLO_DUKE);
-            System.out.println(QUESTION);
-        });
+    public String startMessage() {
+        return messageFormatter(new String[]{OPENING_MSG});
+    }
+
+    /**
+     * Greets the user.
+     */
+    public String greetings() {
+        return messageFormatter(new String[]{HELLO_DUKE, QUESTION});   
     }
 
     /**
      * Saying goodbye to user.
      */
-    public void goodBye() {
-        messageFormatter(() -> System.out.println(GOODBYE_MSG));
+    public String goodBye() {
+        return messageFormatter(new String[]{GOODBYE_MSG});
     }
 
     /**
      * Prints the error 'msg'.
      * @param msg Error message to be printed.
      */
-    public void printException(String msg) {
-        messageFormatter(() -> System.out.println(msg));
+    public String printException(String msg) {
+        return messageFormatter(new String[]{msg});
     }
 
     /**
      * Formatter to format any message. Easily customizable
-     * @param func message to be wrapped around the formatter.
+     * @param messageList messages to be wrapped around the formatter.
      */
-    public void messageFormatter(Runnable func) {
-        System.out.println(LINE);
-        func.run();
-        System.out.println(LINE);
-        System.out.println();
+    public String messageFormatter(String[] messageList) {
+        StringBuffer s = new StringBuffer("");
+        for (int i = 0; i < messageList.length; i++) {
+            s.append(messageList[i]).append("\n"); 
+        }
+        return s.toString();
     }
 
     /**
