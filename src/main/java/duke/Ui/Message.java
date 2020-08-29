@@ -29,5 +29,4 @@ public class Message {
     public static String showError(String message) {
         return String.format("☹ OOPS!!! %s\n", message);
     }
-
 }

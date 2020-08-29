@@ -7,6 +7,9 @@ import duke.Ui.Ui;
 
 import duke.Storage;
 
+/**
+ * Represents an executable command.
+ */
 public abstract class Command {
 
     protected boolean isExit = false;

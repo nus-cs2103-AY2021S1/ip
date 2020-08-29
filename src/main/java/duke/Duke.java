@@ -1,7 +1,6 @@
 package duke;
 
 import duke.Command.Command;
-import duke.Ui.Message;
 
 import duke.Exception.DukeException;
 
@@ -9,6 +8,7 @@ import duke.Parser.Parser;
 
 import duke.Task.TaskList;
 
+import duke.Ui.Message;
 import duke.Ui.Ui;
 
 public class Duke {
