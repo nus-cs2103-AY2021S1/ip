@@ -8,17 +8,18 @@ public class UI {
     /**
      * Duke's logo.
      */
-    private final String LOGO = " ____        _        \n"
-                              + "|  _ \\ _   _| | _____ \n"
-                              + "| | | | | | | |/ / _ \\\n"
-                              + "| |_| | |_| |   <  __/\n"
-                              + "|____/ \\__,_|_|\\_\\___|\n";
+    private static final String LOGO = " ____        _        \n"
+                                     + "|  _ \\ _   _| | _____ \n"
+                                     + "| | | | | | | |/ / _ \\\n"
+                                     + "| |_| | |_| |   <  __/\n"
+                                     + "|____/ \\__,_|_|\\_\\___|\n";
+
+    private static final String DIVIDER = "______________________________________________";
 
     /**
      * Input system using Java's scanner.
      */
-    private Scanner in = new Scanner(System.in);
-    private final String DIVIDER = "______________________________________________";
+    private static final Scanner in = new Scanner(System.in);
 
     /**
      * Gives the user a prompt to input commands.

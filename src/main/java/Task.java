@@ -61,8 +61,9 @@ public class Task {
             return Event.parse(split);
         case 'D':
             return Deadline.parse(split);
+        default:
+            return null;
         }
-        return null;
     }
 
     /**

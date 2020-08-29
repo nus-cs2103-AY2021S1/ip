@@ -44,6 +44,7 @@ public class Parser {
         case BYE:
             saver.saveData(taskList);
             ui.exit();
+            break;
         case LIST:
             handleList();
             break;
@@ -67,6 +68,8 @@ public class Parser {
             break;
         case INVALID:
             throw new DukeException("Unrecognized command!");
+        default:
+            throw new DukeException("Passed through invalid command switch case. Should not have happened.");
         }
     }
 
