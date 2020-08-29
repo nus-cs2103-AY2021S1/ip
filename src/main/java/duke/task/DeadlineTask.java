@@ -1,10 +1,10 @@
 package duke.task;
 
-import duke.exception.DukeException;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+import duke.exception.DukeException;
 
 /**
  * Represents a deadline task.
@@ -13,7 +13,7 @@ public class DeadlineTask extends Task {
     /**
      * Deadline of task.
      */
-    public LocalDateTime deadline;
+    private LocalDateTime deadline;
 
     /**
      * Constructs a new instance of an DeadlineTask.
@@ -29,14 +29,18 @@ public class DeadlineTask extends Task {
         } catch (DateTimeParseException exception) {
             System.out.println(deadline);
             throw new DukeException("Error! Invalid date format, Please enter the date in the format dd-MM-yyyy HH:mm");
+        }
+
     }
 
+    public LocalDateTime getDeadline() {
+        return this.deadline;
     }
 
     @Override
     public String toString() {
-        return "[D][" + getStatusIcon() + "] " + description + " (by: " +
-                deadline.format(DateTimeFormatter.ofPattern("d MMM yyyy, hh:mm a")) + ")";
+        return "[D][" + getStatusIcon() + "] " + description + " (by: "
+                + deadline.format(DateTimeFormatter.ofPattern("d MMM yyyy, hh:mm a")) + ")";
     }
 
 }

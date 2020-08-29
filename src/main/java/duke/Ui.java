@@ -1,20 +1,21 @@
 package duke;
 
-import duke.task.Task;
-
 import java.util.List;
 import java.util.Scanner;
+
+import duke.exception.InvalidIndexException;
+import duke.task.Task;
 
 /** Represents Ui of application that is responsible for interactions with user. */
 public class Ui {
 
-    Scanner sc;
+    private Scanner scanner;
 
     /**
      * Constructs a new instance of a Ui object.
      */
     Ui() {
-        sc = new Scanner(System.in);
+        scanner = new Scanner(System.in);
     }
 
     /**
@@ -37,11 +38,19 @@ public class Ui {
      */
     public void listTasks(TaskList tasks) {
         System.out.println("Here are the tasks in your list:");
-        for (int i = 1; i <= tasks.size(); i ++) {
-            System.out.println(i + ". " + tasks.get(i - 1));
+        for (int i = 1; i <= tasks.size(); i++) {
+            try {
+                System.out.println(i + ". " + tasks.get(i - 1));
+            } catch (InvalidIndexException e) {
+                System.out.println(e.getMessage());
+            }
         }
     }
 
+    /**
+     * Prints tasks matching find keyword after Find command is executed.
+     * @param tasks Tasks that matches the Find command keyword.
+     */
     public void printSearchResults(List<Task> tasks) {
         if (tasks.size() <= 0) {
             System.out.println("Sorry, there are no matching tasks with that keyword");
@@ -66,7 +75,7 @@ public class Ui {
      * @return Returns user's input as String value.
      */
     String readCommand() {
-       return sc.nextLine();
+        return scanner.nextLine();
     };
 
     public void showError(String errorMessage) {
@@ -75,5 +84,9 @@ public class Ui {
 
     public void showLoadingError() {
         System.out.println("Error loading data");
+    }
+
+    public Scanner getScanner() {
+        return this.scanner;
     }
 }

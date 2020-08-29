@@ -1,6 +1,12 @@
 package duke;
 
-import duke.command.*;
+import duke.command.AddCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.ExitCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
 import duke.exception.InvalidCommandException;
 import duke.exception.InvalidInputException;
 import duke.exception.InvalidTaskTypeException;
@@ -17,7 +23,8 @@ public class Parser {
      * @throws InvalidCommandException If command is not defined.
      * @throws InvalidTaskTypeException if task is invalid.
      */
-    static Command parse (String fullCommand) throws InvalidInputException, InvalidCommandException, InvalidTaskTypeException {
+    static Command parse (String fullCommand)
+        throws InvalidInputException, InvalidCommandException, InvalidTaskTypeException {
         String[] commandArr = fullCommand.trim().split(" ", 2);
         switch(commandArr[0]) {
         case "bye":
@@ -47,37 +54,38 @@ public class Parser {
      * @throws InvalidInputException If taskDetails is empty or lacking date or timing for Deadline and Event Task.
      * @throws InvalidTaskTypeException If command is not deadline, todo, event.
      */
-    static Command prepareAdd(String command, String taskDetails) throws InvalidInputException, InvalidTaskTypeException {
+    static Command prepareAdd(String command, String taskDetails)
+        throws InvalidInputException, InvalidTaskTypeException {
         switch (command) {
-            case "todo": {
-                String task = taskDetails.trim();
-                if (task.isEmpty()) {
-                    throw new InvalidInputException("☹ OOPS!!! The description of a todo cannot be empty.");
-                }
-                return new AddCommand(task, null, TaskType.TODO);
+        case "todo": {
+            String task = taskDetails.trim();
+            if (task.isEmpty()) {
+                throw new InvalidInputException("☹ OOPS!!! The description of a todo cannot be empty.");
             }
-            case "deadline": {
-                String[] task = taskDetails.trim().split(" /by ");
-                if (task[0].isEmpty()) {
-                    throw new InvalidInputException("☹ OOPS!!! The description of a deadline task cannot be empty.");
-                }
-                if (task.length < 2) {
-                    throw new InvalidInputException("☹ OOPS!!! The deadline of a deadline task cannot be empty.");
-                }
-                return new AddCommand(task[0], task[1], TaskType.DEADLINE);
+            return new AddCommand(task, null, TaskType.TODO);
+        }
+        case "deadline": {
+            String[] task = taskDetails.trim().split(" /by ");
+            if (task[0].isEmpty()) {
+                throw new InvalidInputException("☹ OOPS!!! The description of a deadline task cannot be empty.");
             }
-            case "event": {
-                String[] task = taskDetails.trim().split(" /at ");
-                if (task[0].isEmpty()) {
-                    throw new InvalidInputException("☹ OOPS!!! The description of an event task cannot be empty.");
-                }
-                if (task.length < 2) {
-                    throw new InvalidInputException("☹ OOPS!!! The timing of an event task cannot be empty.");
-                }
-                return new AddCommand(task[0], task[1], TaskType.EVENT);
+            if (task.length < 2) {
+                throw new InvalidInputException("☹ OOPS!!! The deadline of a deadline task cannot be empty.");
             }
-            default:
-                throw new InvalidTaskTypeException("Invalid task type:" + command);
+            return new AddCommand(task[0], task[1], TaskType.DEADLINE);
+        }
+        case "event": {
+            String[] task = taskDetails.trim().split(" /at ");
+            if (task[0].isEmpty()) {
+                throw new InvalidInputException("☹ OOPS!!! The description of an event task cannot be empty.");
+            }
+            if (task.length < 2) {
+                throw new InvalidInputException("☹ OOPS!!! The timing of an event task cannot be empty.");
+            }
+            return new AddCommand(task[0], task[1], TaskType.EVENT);
+        }
+        default:
+            throw new InvalidTaskTypeException("Invalid task type:" + command);
         }
     }
 

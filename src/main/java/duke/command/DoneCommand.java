@@ -10,12 +10,13 @@ import duke.task.Task;
  * Marks a task as done.
  */
 public class DoneCommand extends Command {
-    int index;
 
     /**
      * Message to be printed when DoneCommand is executed successfully.
      */
     public static final String MESSAGE_SUCCESS = "Nice! I've marked this task as done:\n%s";
+
+    private int index;
 
     /**
      * Constructs a new instance of a DoneCommand.
@@ -45,5 +46,9 @@ public class DoneCommand extends Command {
      */
     public boolean isExit() {
         return false;
+    }
+
+    public int getIndex() {
+        return this.index;
     }
 }

@@ -6,9 +6,9 @@ package duke.task;
 public class Task {
 
     /** Description of task. */
-    public String description;
+    protected String description;
     /** Status of task. */
-    public boolean isDone;
+    protected boolean isDone;
 
     /**
      * Constructs a new instance of a Task with attributes defined in parameters.
@@ -17,6 +17,14 @@ public class Task {
     public Task(String description) {
         this.description = description;
         this.isDone = false;
+    }
+
+    public boolean getIsDone() {
+        return this.isDone;
+    }
+
+    public String getDescription() {
+        return this.description;
     }
 
     /**

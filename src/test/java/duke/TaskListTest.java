@@ -1,9 +1,10 @@
 package duke;
 
-import duke.exception.InvalidIndexException;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import duke.exception.InvalidIndexException;
 
 public class TaskListTest {
     @Test
@@ -14,7 +15,7 @@ public class TaskListTest {
     }
 
     @Test
-    public void deleteTask_invalidIndex_ExceptionThrown() {
+    public void deleteTask_invalidIndex_exception() {
         TaskList taskList = new TaskList();
         try {
             taskList.deleteTask(0);
