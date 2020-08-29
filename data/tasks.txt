@@ -1,4 +1,0 @@
-T | 0 | read book
-D | 0 | return book | Oct 20 2020 8:20 PM
-T | 0 | unrelated stuff
-T | 0 | clear trash
