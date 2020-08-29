@@ -67,11 +67,11 @@ public class Duke {
                 task = new ToDo(rest);
                 break;
             case "deadline":
-                String[] deadlineParts = rest.split("/by");
+                String[] deadlineParts = rest.split(" /by ");
                 task = new Deadline(deadlineParts[0], deadlineParts[1]);
                 break;
             case "event":
-                String[] eventParts = rest.split("/at");
+                String[] eventParts = rest.split(" /at ");
                 task = new Event(eventParts[0], eventParts[1]);
                 break;
             default:
