@@ -64,7 +64,7 @@ public class FindByDateCommand extends Command {
                     + "Type '/commands' to view the correct command for task search by date! ";
             throw new InvalidFunctionException(err);
         } catch (DateTimeParseException ex) {
-            String err = "The task date format is incorrect."
+            String err = "The task date format is incorrect. "
                     + "Please input a valid date using the format: 'dd/mm/yyyy'";
             throw new InvalidFunctionException(err);
         }
