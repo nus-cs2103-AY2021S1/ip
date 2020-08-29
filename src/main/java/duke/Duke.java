@@ -6,9 +6,12 @@ import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
+import javafx.scene.control.Label;
 
-import java.io.File;
-import java.io.IOException;
+
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+
 
 /**
  * Duke is a text-based bot that tracks different types of tasks.
@@ -19,12 +22,13 @@ public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
+    private static final String DEFAULT_SAVE_FILE = ".\\data\\duke.txt";
 
     /**
      * Constructs a Duke object and initialises Ui, Storage & TaskList classes.
      * @param filePath Path of local save file for Duke's task list.
      */
-    public Duke(String filePath) {
+    private Duke(String filePath) {
         ui = new Ui();
         try {
             storage = new Storage(filePath);
@@ -34,6 +38,13 @@ public class Duke {
             ui.showLoadingError();
             tasks = new TaskList();
         }
+    }
+
+    /**
+     * Public, no-args constructor for JavaFX use only.
+     */
+    public Duke() {
+        this (DEFAULT_SAVE_FILE);
     }
 
     /**
@@ -53,7 +64,9 @@ public class Duke {
                 Command c = Parser.parse(fullCommand);
                 c.execute(tasks, ui, storage);
                 storage.store(tasks);
-                if(c.isExit()) { running = false; }
+                if (c.isExit()) {
+                    running = false;
+                }
             } catch (DukeException e) {
                 ui.showError(e);
             } finally {
@@ -67,20 +80,37 @@ public class Duke {
      * Checks if the save folder for Duke exists before creating a new Duke Object.
      */
     public static void main(String[] args) {
-        try {
-            String filePathString = ".\\data\\duke.txt";
-            File taskData = new File(filePathString);
-            if (taskData.exists()) {
-                //nothing.
-            } else {
-                File dir = new File(".\\data");
-                System.out.println(dir.mkdir());
-                boolean created = taskData.createNewFile();
-                assert created;
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
         new Duke("./data/duke.txt").run();
+    }
+
+    private Label getDialogLabel(String text) {
+        Label textToAdd = new Label(text);
+        textToAdd.setWrapText(true);
+
+        return textToAdd;
+    }
+
+    /**
+     * Function to get String response from Duke.
+     * @param input String input from user.
+     */
+    public String getResponse(String input) {
+        try {
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            PrintStream ps = new PrintStream(baos);
+            PrintStream old = System.out;
+            System.setOut(ps);
+            Command c = Parser.parse(input);
+            c.execute(tasks, ui, storage);
+            storage.store(tasks);
+
+            // Put things back
+            System.out.flush();
+            System.setOut(old);
+
+            return c.isExit() ? "Close the window to stop me." : baos.toString();
+        } catch (DukeException e) {
+            return e.toString();
+        }
     }
 }

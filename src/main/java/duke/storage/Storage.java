@@ -56,6 +56,13 @@ public class Storage {
     public List<Task> load() throws DukeException {
         try {
             File file = new File(filePath);
+            if (!file.exists()) {
+                File dir = new File(".\\data");
+                System.out.println(dir.mkdir());
+                boolean created = file.createNewFile();
+                assert created;
+            }
+
             Scanner sc = new Scanner(file);
             List<Task> tasks = new ArrayList<>(100);
 
