@@ -57,8 +57,8 @@ public class Command {
      * 
      * @param tasks the task object containing the list of task.
      */
-    public void printNumTask(TaskList tasks) {
-        System.out.print(String.format("Now you have %d tasks in the list.\n", tasks.size()));
+    public String printNumTask(TaskList tasks) {
+        return String.format("Now you have %d tasks in the list.\n", tasks.size());
     }
 
     /**
@@ -68,8 +68,8 @@ public class Command {
      * @param ui Object that deals with interactions with the user.
      * @param storage Object that deals with loading tasks from the file and saving tasks in the file
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws InvalidFormatDeadlineException,
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws InvalidFormatDeadlineException,
             InvalidFormatEventException, InvalidFormatDateException, UnknownCommandException {
-        return;
+        return "";
     }
 }

@@ -46,13 +46,12 @@ public class Task {
     /**
      * Marks the task as completed.
      */
-    public void markAsDone() {
+    public String markAsDone() {
         if (this.isDone) {
-            System.out.println(TASK_MARKED_BEFORE);
+            return TASK_MARKED_BEFORE;
         } else {
             this.isDone = true;
-            System.out.println(TASK_MARKED);
-            System.out.println(this);
+            return TASK_MARKED + "\n" + this.toString();
         }
     }
 

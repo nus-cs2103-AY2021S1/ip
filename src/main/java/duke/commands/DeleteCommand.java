@@ -27,8 +27,8 @@ public class DeleteCommand extends Command {
         super(inputArr);
     }
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        deleteTask(parseInt(inputArr[1]), ui, tasks);
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        return deleteTask(parseInt(inputArr[1]), ui, tasks);
     }
 
     /**
@@ -39,17 +39,14 @@ public class DeleteCommand extends Command {
      * @param ui Object that deals with interactions with the user.
      * @param tasks Object contains the task list.
      */
-    private void deleteTask(int pos, Ui ui, TaskList tasks) {
+    private String deleteTask(int pos, Ui ui, TaskList tasks) {
         if (pos <= 0 || pos > tasks.size()) {
-            ui.messageFormatter(() -> System.out.println(INVALID_INPUT));
+            return ui.messageFormatter(new String[]{INVALID_INPUT});
         } else {
             Task task = tasks.get(pos - 1);
             tasks.remove(pos - 1);
-            ui.messageFormatter(() -> {
-                System.out.println(DELETE_NOTIFICATION);
-                System.out.println(task);
-                printNumTask(tasks);
-            });
+            String[] messageList = {DELETE_NOTIFICATION, task.toString(),printNumTask(tasks)};
+            return ui.messageFormatter(messageList);
         }
     }
 }

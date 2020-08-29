@@ -26,8 +26,8 @@ public class DoneCommand extends Command {
         super(inputArr);
     }
 
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        marking(parseInt(inputArr[1]), ui, tasks);
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        return marking(parseInt(inputArr[1]), ui, tasks);
     }
 
     /**
@@ -38,12 +38,12 @@ public class DoneCommand extends Command {
      * @param ui Object that deals with interactions with the user.
      * @param tasks Object contains the task list.
      */
-    private void marking(int pos, Ui ui, TaskList tasks) {
+    private String marking(int pos, Ui ui, TaskList tasks) {
         if (pos <= 0 || tasks.size() < pos) {
-            ui.messageFormatter(() -> System.out.println(INVALID_INPUT));
+            return ui.messageFormatter(new String[]{INVALID_INPUT});
         } else {
             Task task = tasks.get(pos - 1);
-            ui.messageFormatter(() -> task.markAsDone());
+            return ui.messageFormatter(new String[]{task.markAsDone()});
         }
     }
 }

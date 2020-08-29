@@ -21,9 +21,10 @@ public class ByeCommand extends Command {
         super(inputArr);
     }
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.goodBye();
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        String bye = ui.goodBye();
         storage.record(tasks);
         setExitStatus(true);
+        return bye;
     }
 }
