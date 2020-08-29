@@ -19,6 +19,7 @@ public class Main extends Application {
     public void start(Stage stage) {
         MainWindow mainWindow = new MainWindow();
         Scene scene = new Scene(mainWindow);
+        scene.getStylesheets().add("/styles/styles.css");
         stage.setScene(scene);
         mainWindow.setDuke(duke);
         stage.show();

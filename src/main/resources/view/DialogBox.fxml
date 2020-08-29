@@ -15,7 +15,7 @@
         xmlns:fx="http://javafx.com/fxml/1"
 >
     <children>
-        <Label fx:id="dialog" text="Label" wrapText="true" />
+        <Label styleClass="chat-box" fx:id="dialog" text="Label" wrapText="true" />
         <ImageView fx:id="displayPicture" fitHeight="99.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true" />
     </children>
     <padding>

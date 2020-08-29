@@ -1,0 +1,10 @@
+.root {
+    -fx-font-size: 14pt;
+    -fx-font-family: "sans-sarif";
+    -fx-background: "#fffff4"
+}
+
+.chat-box {
+    -fx-background-color: "#C0C0C0";
+    -fx-padding: 5px;
+}
