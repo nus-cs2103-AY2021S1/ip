@@ -5,16 +5,15 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * <p>The IOHandler class makes sense of user input and acts on it.</p>
+ * <p>The IoHandler class makes sense of user input and acts on it.</p>
  */
-public class IOHandler {
-    String[] replyArr;
-
-    Scanner sc = new Scanner(System.in);
-    String reply = sc.nextLine();
-    TaskManager taskManager = new TaskManager(new ArrayList<>());
-    TaskSaveAndLoadManager taskSaveAndLoadManager = new TaskSaveAndLoadManager();
-    UI ui = new UI();
+public class IoHandler {
+    private String[] replyArr;
+    private Scanner sc = new Scanner(System.in);
+    private String reply = sc.nextLine();
+    private TaskManager taskManager = new TaskManager(new ArrayList<>());
+    private TaskSaveAndLoadManager taskSaveAndLoadManager = new TaskSaveAndLoadManager();
+    private UI ui = new UI();
 
     private DateAndTime handleTime(String timeFormat) {
         if (!timeFormat.contains(" ")) {
@@ -33,7 +32,7 @@ public class IOHandler {
         if (reply.length() >= 4) {
             if (reply.substring(0, 4).equals("done")) {
                 replyArr = reply.split(" ");
-            } else if (reply.contains("/")){
+            } else if (reply.contains("/")) {
                 replyArr = reply.split("/");
             } else {
                 replyArr = reply.split(" ");
@@ -45,8 +44,7 @@ public class IOHandler {
         return replyArr;
     }
 
-    private void handleUserInput()
-    {
+    private void handleUserInput() {
         String fullReply;
         ArrayList<String> botReplyHeading = ui.botReplyHeading(reply);
         if (reply.equals("list")) {
@@ -76,21 +74,18 @@ public class IOHandler {
             }
             String resultList = ui.formatBotReplyBody(taskManager.convertTaskListToString(foundTasks));
             fullReply = botReply + resultList;
-        }
         // adding task to the list
-        else {
+        } else {
             Task newTask = null;
             if (reply.contains("todo")) {
                 reply = reply.replace("todo ", "");
                 newTask = new ToDoTask(reply, false);
-            }
-            else if (reply.contains("deadline")) {
+            } else if (reply.contains("deadline")) {
                 reply = reply.replace("deadline ", "");
                 reply = reply.replace("/by", "/");
                 String[] tempArr = splitReply();
                 newTask = new DeadlineTask(tempArr[0], false, handleTime(tempArr[1].trim()));
-            }
-            else if (reply.contains("event")) {
+            } else if (reply.contains("event")) {
                 reply = reply.replace("event ", "");
                 reply = reply.replace("/at", "/");
                 String[] tempArr = splitReply();
@@ -100,20 +95,19 @@ public class IOHandler {
             String botReply = botReplyHeading.get(0);
             assert newTask != null;
             String addedTask = ui.formatBotReplyBody(newTask.toString() + "\n");
-            String totalTask = ui.formatBotReplyBody("Now you have a grand total of " + taskManager.getTotalNoOfTasks() + " tasks!");
+            String totalTask = ui.formatBotReplyBody("Now you have a grand total of " +
+                                taskManager.getTotalNoOfTasks() + " tasks!");
             fullReply = botReply + addedTask + totalTask;
         }
         ui.printMessage(fullReply);
     }
 
     public void handleInput() throws IOException {
-
         taskSaveAndLoadManager.saveTaskManager(taskManager);
         if (taskSaveAndLoadManager.loadTaskManager() != null) {
             taskManager = taskSaveAndLoadManager.loadTaskManager();
         }
-        while (!reply.equals("bye"))
-        {
+        while (!reply.equals("bye")) {
             replyArr = splitReply();
 
             DukeException exception = DukeExceptionHandler.checkForException(reply);

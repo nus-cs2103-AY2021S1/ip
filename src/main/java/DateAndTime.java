@@ -33,8 +33,8 @@ public class DateAndTime {
     @Override
     public String toString() {
         if (time != null) {
-            return time.toString() + ", " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) ;
-        } else  {
+            return time.toString() + ", " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        } else {
             return date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
         }
     }

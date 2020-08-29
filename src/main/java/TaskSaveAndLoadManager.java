@@ -66,7 +66,8 @@ public class TaskSaveAndLoadManager {
                 } else if (tempArr.length == 4) {
                     taskData = new TaskData(tempArr[0], tempArr[1], Integer.parseInt(tempArr[2]), tempArr[3]);
                 } else {
-                    taskData = new TaskData(tempArr[0], tempArr[1], Integer.parseInt(tempArr[2]), tempArr[3], tempArr[4]);
+                    taskData = new TaskData(tempArr[0], tempArr[1],
+                            Integer.parseInt(tempArr[2]), tempArr[3], tempArr[4]);
                 }
                 Task task = loadTask(taskData);
                 taskList.add(task);

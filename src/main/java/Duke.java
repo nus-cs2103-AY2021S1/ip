@@ -15,7 +15,7 @@ public class Duke {
         System.out.print(indentation + "Let's see how long it takes. \n");
         System.out.print(indentation + "So, tell me, what do you want, sweetie? \n" + separationLine);
 
-        IOHandler handler = new IOHandler();
+        IoHandler handler = new IoHandler();
 
         handler.handleInput();
     }

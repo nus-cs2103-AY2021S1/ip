@@ -1,4 +1,4 @@
-public enum  InputType {
+public enum InputType {
     TODO,
     DEADLINE,
     EVENT,
