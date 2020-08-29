@@ -26,7 +26,17 @@ public class Duke extends Application {
     public static Parser parser = new Parser();
     public static Ui ui = new Ui(taskList, storage, parser);
 
+    private final String HELP_TEXT = "Duke Bot Commands:\n" +
+            "list : list out all current tasks\n" +
+            "find <keyword> : find all task that corresponds to the keyword\n" +
+            "done <task number> : marks the specified task as done\n" +
+            "delete <task number> : deletes the specified task\n" +
+            "todo <task name> : adds a ToDo task\n" +
+            "deadline <task name> /by YYYY-MM-DD : adds a Deadline task\n" +
+            "event <task name> /at YYYY-MM-DD TT:TT-TT:TT : adds an Event task\n" +
+            "Do note that Date and Time must have the specified format\n";
     private Stage window;
+    private Scene helpScene;
     // output
     private TextArea outputTextArea = new TextArea("Hello! I'm Duke. \nWhat can I do for you?");
 
@@ -67,13 +77,18 @@ public class Duke extends Application {
 
         // enter button
         Button enterButton = new Button("Enter");
-        GridPane.setConstraints(enterButton, 1, 11);
+        GridPane.setConstraints(enterButton, 3, 10);
         enterButton.setOnAction(e -> outputTextArea.setText(ui.readCommand(commandInput.getText())));
 
-        grid.getChildren().addAll(outputTextArea, commandLabel, commandInput, enterButton);
+        // help button
+        Button helpButton = new Button("Help");
+        GridPane.setConstraints(helpButton, 1, 11);
+        helpButton.setOnAction(e -> PopUpBox.display("Help menu", HELP_TEXT));
 
-        Scene scene = new Scene(grid, 600, 400);
-        window.setScene(scene);
+        grid.getChildren().addAll(outputTextArea, commandLabel, commandInput, helpButton, enterButton);
+
+        Scene defaultScene = new Scene(grid, 600, 400);
+        window.setScene(defaultScene);
         window.show();
     }
 }
