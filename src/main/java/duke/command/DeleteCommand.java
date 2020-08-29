@@ -1,11 +1,11 @@
-package main.java.duke.command;
+package duke.command;
 
 import java.io.IOException;
-import main.java.duke.core.Ui;
-import main.java.duke.core.TaskList;
-import main.java.duke.core.Storage;
-import main.java.duke.task.Task;
-import main.java.duke.handle.TaskNotFoundException;
+import duke.core.Ui;
+import duke.core.TaskList;
+import duke.core.Storage;
+import duke.task.Task;
+import duke.handle.TaskNotFoundException;
 
 /**
  * The DeleteCommand class represents a command that deletes a task from the task list.

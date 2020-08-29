@@ -29,7 +29,7 @@ test {
 }
 
 application {
-    mainClassName = "seedu.duke.Duke"
+    mainClassName = "duke.Duke"
 }
 
 shadowJar {
@@ -39,6 +39,16 @@ shadowJar {
 
 checkstyle {
     toolVersion = '8.23'
+}
+
+jar {
+    manifest {
+        attributes "Main-Class": "duke.Duke"
+    }
+
+    from {
+        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+    }
 }
 
 run{

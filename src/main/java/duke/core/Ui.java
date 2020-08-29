@@ -1,8 +1,10 @@
-package main.java.duke.core;
+package duke.core;
 
+import java.io.PrintStream;
+import java.io.UnsupportedEncodingException;
 import java.util.Scanner;
 
-import main.java.duke.task.Task;
+import duke.task.Task;
 
 /**
  * The Ui class interacts with the user by accpeting
@@ -22,11 +24,19 @@ public class Ui {
 
     public final Scanner scanner;
 
+    PrintStream out;
+
     /**
      * Creates a user interface component.
      */
     public Ui() {
         this.scanner = new Scanner(System.in);
+
+        try {
+            out = new PrintStream(System.out, true, "UTF-8");
+        } catch (UnsupportedEncodingException exception) {
+            System.out.println(makeBlock(exception.getMessage()));
+        }
     }
 
     /**
@@ -59,7 +69,7 @@ public class Ui {
      */
     public void showGreeting() {
         //System.out.println("Hello from\n" + logo);
-        System.out.println(makeBlock(logo + "\n" + GREETING));
+        out.println(makeBlock(logo + "\n" + GREETING));
     }
 
     /**
@@ -68,7 +78,7 @@ public class Ui {
      * @param exception The exception corresponding to the problem.
      */
     public void handle(Exception exception) {
-        System.out.println(makeBlock(exception.getMessage()));
+        out.println(makeBlock(exception.getMessage()));
     }
 
     /**
@@ -79,7 +89,8 @@ public class Ui {
      */
     public void showAdd(Task task, int size) {
         String result = "Got it. I have added this task:\n  " + task.toString() + "\nNow you have " + size + " tasks in the list.";
-        System.out.println(makeBlock(result));
+        //System.out.println(makeBlock(result));
+        out.println(makeBlock(result));
     }
 
     /**
@@ -88,7 +99,7 @@ public class Ui {
      * @param taskList The task list.
      */
     public void showList(TaskList taskList) {
-        System.out.println(makeBlock(taskList.toString()));
+        out.println(makeBlock(taskList.toString()));
     }
 
     /**
@@ -98,7 +109,7 @@ public class Ui {
      * @param count The count of the task to be completed.
      */
     public void showDone(Task task, int count) {
-        System.out.println(makeBlock("Nice! I have marked this task as done:\n" + String.valueOf(count) + "." + task.toString()));
+        out.println(makeBlock("Nice! I have marked this task as done:\n" + String.valueOf(count) + "." + task.toString()));
     }
 
     /**
@@ -109,7 +120,7 @@ public class Ui {
      * @param size The number of tasks in the task list.
      */
     public void showDelete(Task task, int count, int size) {
-        System.out.println(makeBlock("Noted. I have removed this task:\n" +
+        out.println(makeBlock("Noted. I have removed this task:\n" +
                 String.valueOf(count) +
                 "." + task.toString() +
                 "\nNow you have " + size + " tasks in the list."));
@@ -119,6 +130,6 @@ public class Ui {
      * Shows the result of the executing the exit command.
      */
     public void showExit() {
-        System.out.println(makeBlock(EXITMESSAGE));
+        out.println(makeBlock(EXITMESSAGE));
     }
 }

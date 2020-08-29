@@ -1,8 +1,8 @@
-package main.java.duke.command;
+package duke.command;
 
-import main.java.duke.core.Ui;
-import main.java.duke.core.TaskList;
-import main.java.duke.core.Storage;
+import duke.core.Ui;
+import duke.core.TaskList;
+import duke.core.Storage;
 
 /**
  * The ListCommand class represents a command that lists the tasks in the task list.

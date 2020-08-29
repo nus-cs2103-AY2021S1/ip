@@ -1,4 +1,4 @@
-package main.java.duke.core;
+package duke.core;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -7,11 +7,11 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
-import main.java.duke.task.Task;
-import main.java.duke.task.Event;
-import main.java.duke.task.ToDo;
-import main.java.duke.task.Deadline;
-import main.java.duke.handle.LoadingException;
+import duke.task.Task;
+import duke.task.Event;
+import duke.task.ToDo;
+import duke.task.Deadline;
+import duke.handle.LoadingException;
 
 /**
  * The Storage class reads the local task record and the task list, and updates

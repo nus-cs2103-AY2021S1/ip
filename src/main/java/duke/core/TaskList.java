@@ -1,8 +1,8 @@
-package main.java.duke.core;
+package duke.core;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import main.java.duke.task.Task;
+import duke.task.Task;
 
 /**
  * The TaskList class stores the tasks and manages the tasks using corresponding methods.

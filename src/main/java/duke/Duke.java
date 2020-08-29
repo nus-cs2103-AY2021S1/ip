@@ -1,16 +1,15 @@
-package main.java.duke;
+package duke;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import main.java.duke.command.Command;
-import main.java.duke.handle.CommandNotFoundException;
-import main.java.duke.handle.TaskNotFoundException;
-import main.java.duke.handle.LoadingException;
-import main.java.duke.core.Storage;
-import main.java.duke.core.TaskList;
-import main.java.duke.core.Ui;
-import main.java.duke.core.Parser;
-import m
+import duke.command.Command;
+import duke.handle.CommandNotFoundException;
+import duke.handle.TaskNotFoundException;
+import duke.handle.LoadingException;
+import duke.core.Storage;
+import duke.core.TaskList;
+import duke.core.Ui;
+import duke.core.Parser;
 
 /**
  * The Duke class represents a duke bot that can interact with
@@ -58,6 +57,7 @@ public class Duke {
      * Starts the interaction between the bot and the user.
      */
     public void run() {
+        //System.out.println("\u2718");
         this.ui.showGreeting();
         boolean isContinuing = true;
         while (isContinuing) {

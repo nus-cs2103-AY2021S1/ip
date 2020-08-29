@@ -1,9 +1,9 @@
-package main.java.duke.command;
+package duke.command;
 
-import main.java.duke.core.Storage;
-import main.java.duke.core.TaskList;
-import main.java.duke.core.Ui;
-import main.java.duke.handle.TaskNotFoundException;
+import duke.core.Storage;
+import duke.core.TaskList;
+import duke.core.Ui;
+import duke.handle.TaskNotFoundException;
 
 import java.io.IOException;
 

@@ -1,4 +1,4 @@
-package main.java.duke.command;
+package duke.command;
 
 /**
  * The CommandType class is an enumerator class and it describes

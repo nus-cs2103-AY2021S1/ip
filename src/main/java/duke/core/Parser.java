@@ -1,20 +1,20 @@
-package main.java.duke.core;
+package duke.core;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
-import main.java.duke.command.Command;
-import main.java.duke.command.SearchCommand;
-import main.java.duke.command.AddCommand;
-import main.java.duke.command.DeleteCommand;
-import main.java.duke.command.DoneCommand;
-import main.java.duke.command.ExitCommand;
-import main.java.duke.command.ListCommand;
-import main.java.duke.command.ListDateCommand;
-import main.java.duke.command.CommandType;
-import main.java.duke.task.ToDo;
-import main.java.duke.task.Deadline;
-import main.java.duke.task.Event;
-import main.java.duke.handle.CommandNotFoundException;
+import duke.command.Command;
+import duke.command.SearchCommand;
+import duke.command.AddCommand;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.ExitCommand;
+import duke.command.ListCommand;
+import duke.command.ListDateCommand;
+import duke.command.CommandType;
+import duke.task.ToDo;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.handle.CommandNotFoundException;
 
 /**
  * The Parser class parses the command entered by
