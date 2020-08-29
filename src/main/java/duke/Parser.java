@@ -32,10 +32,19 @@ public class Parser {
         case "todo":
         case "deadline":
         case "event":
+            if (commandArr.length <= 1) {
+                throw new InvalidInputException("☹ OOPS!!! The description of a task cannot be empty.");
+            }
             return prepareAdd(commandArr[0], commandArr[1]);
         case "delete":
+            if (commandArr.length <= 1) {
+                throw new InvalidInputException("☹ OOPS!!! An index for a task needs to be provided");
+            }
             return prepareDelete(commandArr[1]);
         case "done":
+            if (commandArr.length <= 1) {
+                throw new InvalidInputException("☹ OOPS!!! An index for a task needs to be provided");
+            }
             return prepareDone(commandArr[1]);
         case "list":
             return new ListCommand();
