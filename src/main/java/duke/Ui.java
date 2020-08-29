@@ -1,4 +1,4 @@
-package main.java.duke;
+package duke;
 
 import java.util.Scanner;
 
@@ -8,13 +8,13 @@ import java.util.Scanner;
  */
 public class Ui {
 
-    static String logo = " ____        _        \n"
+    private static String logo = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
 
-    public Scanner sc;
+    private Scanner sc;
 
     public Ui() {
         sc = new Scanner(System.in);
@@ -28,6 +28,9 @@ public class Ui {
         System.out.println("________________________ \n");
     }
 
+    /**
+     * Display welcome message with duke logo to user.
+     */
     public void showWelcomeMessage() {
         System.out.println("Hello from\n" + logo);
         System.out.println("Hello! I'm Duke \nWhat can I do for you?");

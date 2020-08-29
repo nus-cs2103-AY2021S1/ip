@@ -1,4 +1,4 @@
-package main.java.duke;
+package duke;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -10,12 +10,12 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
-import main.java.duke.exceptions.InvalidFileException;
-import main.java.duke.tasks.Deadline;
-import main.java.duke.tasks.Event;
-import main.java.duke.tasks.Task;
-import main.java.duke.tasks.TaskList;
-import main.java.duke.tasks.Todo;
+import duke.exceptions.InvalidFileException;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.TaskList;
+import duke.tasks.Todo;
 
 /**
  * Storage class that contains save and load methods to keep task list

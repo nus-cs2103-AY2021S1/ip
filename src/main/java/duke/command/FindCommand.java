@@ -1,13 +1,15 @@
-package main.java.duke.command;
+package duke.command;
 
-import main.java.duke.Storage;
-import main.java.duke.Ui;
-import main.java.duke.exceptions.InvalidFileException;
-import main.java.duke.exceptions.InvalidInputException;
-import main.java.duke.tasks.Task;
-import main.java.duke.tasks.TaskList;
+import java.util.ArrayList;
+import java.util.List;
 
-import java.util.*;
+import duke.Storage;
+import duke.Ui;
+import duke.exceptions.InvalidFileException;
+import duke.exceptions.InvalidInputException;
+import duke.tasks.Task;
+import duke.tasks.TaskList;
+
 
 /**
  * FindCommand class to execute command that search for tasks in the
@@ -15,8 +17,8 @@ import java.util.*;
  */
 public class FindCommand extends Command {
 
-    public static String TASK_FOUND_MESSAGE = "Here are the matching tasks in your list:";
-    public static String NO_TASK_FOUND = "There are no matching task!";
+    private static final String TASK_FOUND_MESSAGE = "Here are the matching tasks in your list:";
+    private static final String NO_TASK_FOUND = "There are no matching task!";
 
 
     public FindCommand(String input) {

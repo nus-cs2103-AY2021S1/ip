@@ -1,10 +1,10 @@
-package main.java.duke.command;
+package duke.command;
 
-import main.java.duke.Storage;
-import main.java.duke.Ui;
-import main.java.duke.exceptions.InvalidFileException;
-import main.java.duke.exceptions.InvalidInputException;
-import main.java.duke.tasks.TaskList;
+import duke.Storage;
+import duke.Ui;
+import duke.exceptions.InvalidFileException;
+import duke.exceptions.InvalidInputException;
+import duke.tasks.TaskList;
 
 /**
  * ExitCommand class to execute command to quit and exit Duke.

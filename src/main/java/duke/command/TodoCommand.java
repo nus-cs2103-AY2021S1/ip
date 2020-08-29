@@ -1,12 +1,12 @@
-package main.java.duke.command;
+package duke.command;
 
-import main.java.duke.Storage;
-import main.java.duke.Ui;
-import main.java.duke.exceptions.InvalidFileException;
-import main.java.duke.exceptions.InvalidInputException;
-import main.java.duke.tasks.Task;
-import main.java.duke.tasks.TaskList;
-import main.java.duke.tasks.Todo;
+import duke.Storage;
+import duke.Ui;
+import duke.exceptions.InvalidFileException;
+import duke.exceptions.InvalidInputException;
+import duke.tasks.Task;
+import duke.tasks.TaskList;
+import duke.tasks.Todo;
 
 /**
  * TodoCommand class to execute command that adds a todo to
@@ -32,13 +32,12 @@ public class TodoCommand extends Command {
     public void execute(TaskList tasks, Ui ui, Storage storage)
             throws InvalidInputException, InvalidFileException {
         if (super.input.length() <= 5) {
-            throw new InvalidInputException
-                    ("☹ OOPS!!! The description of a todo cannot be empty.\n");
+            throw new InvalidInputException("☹ OOPS!!! The description of a todo cannot be empty.\n");
         }
         Task todoTask = new Todo(super.input.substring(5));
         tasks.addTask(todoTask);
-        ui.printMessage(MESSAGE_SUCCESS + todoTask.toString() +
-                "\nNow you have " + tasks.taskListSize() + " tasks in the list.");
+        ui.printMessage(MESSAGE_SUCCESS + todoTask.toString()
+                + "\nNow you have " + tasks.taskListSize() + " tasks in the list.");
         storage.save(tasks);
     }
 
