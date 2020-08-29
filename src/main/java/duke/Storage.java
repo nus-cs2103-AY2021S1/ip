@@ -6,6 +6,9 @@ import exception.DukeIOException;
 import exception.InvalidInputException;
 import java.io.*;
 import java.io.File;
+import java.nio.file.FileSystems;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -37,24 +40,12 @@ public class Storage {
    */
   public File readFile() throws DukeException {
     try {
-      String FOLDERPATH = "data";
-      File directory = new File(FOLDERPATH);
-      if (!directory.isDirectory()) {
-        // create Directory data
-        File folder = new File(FOLDERPATH);
-        if (!folder.mkdir()) {
-          throw new DukeFileException();
-        }
-      }
+      File data = new File(this.filePath);
+      data.getParentFile().mkdirs();
+      data.createNewFile();
 
-      File file = new File(this.filePath);
-      if (file.exists() || file.createNewFile()) {
-        return file;
-      } else {
-        throw new DukeFileException();
-      }
-
-    } catch (IOException e1) {
+      return data;
+    } catch (IOException e) {
       throw new DukeIOException();
     }
   }

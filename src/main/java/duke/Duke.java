@@ -30,7 +30,13 @@ public class Duke {
     }
   }
 
-  /** This method runs the chatbot, accepting user input and adding it to a task list. */
+  public Duke() {
+
+  }
+
+  /**
+   * This method runs the chatbot, accepting user input and adding it to a task list.
+   */
   public void run() {
     ui.showWelcome();
     boolean isExit = false;
@@ -46,6 +52,20 @@ public class Duke {
       } finally {
         ui.showLine();
       }
+    }
+  }
+
+  /**
+   * You should have your own function to generate a response to user input.
+   * Replace this stub with your completed method.
+   */
+  public String getResponse(String input) {
+    try {
+      Command c = Parser.parse(input.trim());
+      c.execute(taskList, ui, storage);
+      return "Duke heard: " + input;
+    } catch (DukeException e) {
+      return e.getMessage();
     }
   }
 }

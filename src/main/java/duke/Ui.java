@@ -21,6 +21,9 @@ public class Ui {
     System.out.println(line);
   }
 
+  public String getGoodbyeMessage() {
+    return this.goodbyeMessage;
+  }
   public void showGoodbye() {
     System.out.println(this.goodbyeMessage);
   }
