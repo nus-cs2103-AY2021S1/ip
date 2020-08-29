@@ -3,9 +3,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 
 import duke.Command;
-import duke.TaskList;
-import duke.TaskType;
-import duke.Todo;
+import duke.task.TaskList;
+import duke.task.TaskType;
+import duke.task.Todo;
 
 /**
  * A test class wrapping around the test methods for the class Command.
