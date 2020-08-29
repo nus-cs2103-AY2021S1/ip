@@ -4,9 +4,13 @@ import exceptions.DukeException;
 import task.TaskList;
 
 public abstract class Command {
-    TaskList tasks;
-    public boolean isExit;
+    protected TaskList tasks;
+    protected boolean isExit;
 
+    /**
+     * Creates Command object to be executed.
+     * @param tasks TaskLists with Tasks to process through.
+     */
     public Command(TaskList tasks) {
         this.tasks = tasks;
         this.isExit = false;

@@ -4,11 +4,20 @@ public class Task {
     protected String description;
     protected boolean isDone;
 
+    /**
+     * Creates Task object.
+     * @param description String description to describe Task.
+     */
     public Task(String description) {
         this.description = description;
         this.isDone = false;
     }
 
+    /**
+     * Creates Task object using overloaded contructor to indicate whether Task is completed..
+     * @param description String description to describe Task.
+     * @param isDone Boolean to indicate completion status of Task.
+     */
     public Task(String description, boolean isDone) {
         this.description = description;
         this.isDone = isDone;

@@ -7,12 +7,21 @@ public class Duke {
     protected TaskList taskList;
     protected Ui ui;
 
+    /**
+     * Creates Duke object by loading tasks stored locally in filePath.
+     * @param filePath File path to .txt file to load tasks stored locally.
+     */
     public Duke(String filePath) {
         this.storage = new Storage(filePath);
         this.ui = new Ui();
         this.taskList = new TaskList(storage.tasks);
     }
 
+    /**
+     * Runs Duke program.
+     * @param args
+     * @throws DukeException
+     */
     public static void main(String[] args) throws DukeException {
         Duke duke = new Duke("duke.txt");
 

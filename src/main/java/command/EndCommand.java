@@ -1,11 +1,10 @@
 package command;
 
-import exceptions.DukeException;
 import task.TaskList;
 
-public class endCommand extends Command {
+public class EndCommand extends Command {
 
-    public endCommand(TaskList tasks) {
+    public EndCommand(TaskList tasks) {
         super(tasks);
     }
 

@@ -1,11 +1,10 @@
 package command;
 
-import exceptions.DukeException;
 import task.TaskList;
 
-public class listCommand extends Command {
+public class ListCommand extends Command {
 
-    public listCommand(TaskList tasks) {
+    public ListCommand(TaskList tasks) {
         super(tasks);
     }
 
@@ -14,6 +13,7 @@ public class listCommand extends Command {
      */
     @Override
     public void execute() {
-       this.tasks.list();
+        this.tasks.list();
     }
 }
+

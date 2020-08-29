@@ -1,11 +1,16 @@
 package task;
 
-import exceptions.DukeException;
 import java.util.ArrayList;
 
-public class TaskList {
-    public ArrayList<Task> tasks;
+import exceptions.DukeException;
 
+public class TaskList {
+    protected ArrayList<Task> tasks;
+
+    /**
+     * Creates TaskList object that stores tasks.
+     * @param tasks ArrayList<Task></Task> to be loaded when Duke is run.
+     */
     public TaskList(ArrayList<Task> tasks) {
         if (tasks == null) {
             this.tasks = new ArrayList<>();
@@ -91,11 +96,11 @@ public class TaskList {
             throw new DukeException("Please indicate the keyword you wish to use to find tasks with.");
         } else {
             System.out.println("Here are the matching tasks in your list:");
-            for (int i = 0; i < tasks.size(); i++){
+            for (int i = 0; i < tasks.size(); i++) {
                 Task task = tasks.get(i);
                 boolean isFound = task.description.contains(keyword);
 
-                if (isFound){
+                if (isFound) {
                     System.out.println((i + 1) + "." + task.toString());
                 }
             }

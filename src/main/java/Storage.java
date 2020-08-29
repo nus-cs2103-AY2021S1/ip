@@ -1,22 +1,26 @@
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+
 import task.Deadline;
 import task.Event;
 import task.Task;
 import task.Todo;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.io.IOException;
-import java.io.FileNotFoundException;
-
 public class Storage {
     protected String filePath;
     protected ArrayList<Task> tasks;
 
+    /**
+     * Creates Storage object by loading tasks stored locally in filePath.
+     * @param filePath File path to .txt file to load tasks stored locally.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
         this.tasks = new ArrayList<>();
@@ -67,23 +71,25 @@ public class Storage {
                     String taskDescription = currentLine.substring(currentLine.indexOf(" ") + 1);
 
                     switch (taskType) {
-                        case "T":
-                            tasks.add(new Todo(taskDescription, isDone));
-                            break;
-                        case "D":
-                            String deadlineDescription = taskDescription.substring(0, taskDescription.indexOf("(") - 1);
-                            String deadlineBy = taskDescription.substring(taskDescription.indexOf("by:") + 4,
-                                    taskDescription.indexOf(")"));
-                            LocalDate deadline = LocalDate.parse(deadlineBy,
-                                    DateTimeFormatter.ofPattern("MMM dd yyyy"));
-                            tasks.add(new Deadline(deadlineDescription, deadline, isDone));
-                            break;
-                        case "E":
-                            String eventDescription = taskDescription.substring(0, taskDescription.indexOf("(") - 1);
-                            String eventAt = taskDescription.substring(taskDescription.indexOf("at:") + 4,
-                                    taskDescription.indexOf(")"));
-                            tasks.add(new Event(eventDescription, eventAt, isDone));
-                            break;
+                    case "T":
+                        tasks.add(new Todo(taskDescription, isDone));
+                        break;
+                    case "D":
+                        String deadlineDescription = taskDescription.substring(0, taskDescription.indexOf("(") - 1);
+                        String deadlineBy = taskDescription.substring(taskDescription.indexOf("by:") + 4,
+                                taskDescription.indexOf(")"));
+                        LocalDate deadline = LocalDate.parse(deadlineBy,
+                                DateTimeFormatter.ofPattern("MMM dd yyyy"));
+                        tasks.add(new Deadline(deadlineDescription, deadline, isDone));
+                        break;
+                    case "E":
+                        String eventDescription = taskDescription.substring(0, taskDescription.indexOf("(") - 1);
+                        String eventAt = taskDescription.substring(taskDescription.indexOf("at:") + 4,
+                                taskDescription.indexOf(")"));
+                        tasks.add(new Event(eventDescription, eventAt, isDone));
+                        break;
+                    default:
+                        break;
                     }
                 }
             }

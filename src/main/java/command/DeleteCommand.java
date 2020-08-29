@@ -3,10 +3,10 @@ package command;
 import exceptions.DukeException;
 import task.TaskList;
 
-public class deleteCommand extends Command {
-    int taskNo;
+public class DeleteCommand extends Command {
+    protected int taskNo;
 
-    public deleteCommand(TaskList tasks, int taskNo) {
+    public DeleteCommand(TaskList tasks, int taskNo) {
         super(tasks);
         this.taskNo = taskNo;
     }

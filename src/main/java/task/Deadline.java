@@ -6,11 +6,22 @@ import java.time.format.DateTimeFormatter;
 public class Deadline extends Task {
     protected LocalDate by;
 
+    /**
+     * Creates Deadline object.
+     * @param description String description to describe Deadline.
+     * @param by LocalDate to describe when Deadline occurs.
+     */
     public Deadline(String description, LocalDate by) {
         super(description);
         this.by = by;
     }
 
+    /**
+     * Creates Event object.
+     * @param description String description to describe Deadline.
+     * @param by LocalDate to describe when Deadline occurs.
+     * @param isDone Boolean to indicate completion status of Deadline.
+     */
     public Deadline(String description, LocalDate by, boolean isDone) {
         super(description, isDone);
         this.by = by;
