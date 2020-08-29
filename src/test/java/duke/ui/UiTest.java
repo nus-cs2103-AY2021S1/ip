@@ -20,7 +20,7 @@ public class UiTest {
     @Test
     @DisplayName("formatter for input message")
     public void testMessageFormatter() {
-        String messageFormatterMessage = ui.messageFormatter(new String[]{"hello world"});
+        String messageFormatterMessage = ui.messageFormatter("hello world");
         String str = "hello world\n";
         assertEquals(str, messageFormatterMessage);
     }

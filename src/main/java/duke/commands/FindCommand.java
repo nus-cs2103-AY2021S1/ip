@@ -44,9 +44,9 @@ public class FindCommand extends Command {
         // this means no available search
         if (s.toString().equals("")) {
             String noTask = String.format("No available task matches %s\n", keyword);
-            return ui.messageFormatter(new String[]{noTask});
+            return ui.messageFormatter(noTask);
         } else {
-            return ui.messageFormatter(new String[]{FIND_SUCCESS, s.toString()});
+            return ui.messageFormatter(FIND_SUCCESS, s.toString());
         }
     }
 }
