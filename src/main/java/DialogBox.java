@@ -50,12 +50,19 @@ public class DialogBox extends HBox {
         displayPicture = iv;
 
         dialog.setWrapText(true);
-        displayPicture.setFitWidth(100.0);
-        displayPicture.setFitHeight(100.0);
+        displayPicture.setFitWidth(30.0);
+        displayPicture.setFitHeight(30.0);
 
         this.setAlignment(Pos.TOP_RIGHT);
         this.setBorder(new Border(new BorderStroke(Color.TRANSPARENT,
                 BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+        int count = l.getText().endsWith("\n") ? 1 : 0;
+        String[] ss = l.getText().split("\n");
+        count += ss.length + 1;
+        for (String s : ss) {
+            count += s.length() / 40;
+        }
+        this.setMinHeight(count * 15 + 30);
 
     }
 
