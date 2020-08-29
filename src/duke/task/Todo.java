@@ -1,3 +1,7 @@
+package duke.task;
+
+import duke.task.Task;
+
 /**
  * Todo is a type of Task.
  */

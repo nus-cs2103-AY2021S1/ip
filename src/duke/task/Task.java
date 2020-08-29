@@ -1,3 +1,4 @@
+package duke.task;
 
 public class Task {
     protected String name;

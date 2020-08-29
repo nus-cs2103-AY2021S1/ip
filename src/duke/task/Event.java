@@ -1,3 +1,5 @@
+package duke.task;
+
 /**
  * Event is a type of Task
  */

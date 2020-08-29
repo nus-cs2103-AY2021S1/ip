@@ -1,3 +1,5 @@
+package duke.task;
+
 /**
  * An exception which indicates that the event is invalid.
  */

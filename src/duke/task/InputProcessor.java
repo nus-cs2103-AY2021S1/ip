@@ -1,3 +1,8 @@
+package duke.task;
+
+import duke.task.Deadline;
+import duke.task.Event;
+
 import java.util.Scanner;
 
 public class InputProcessor {
