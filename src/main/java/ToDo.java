@@ -3,18 +3,18 @@ public class ToDo extends Task {
         super(description);
     }
 
-    public static ToDo load(String str) {
-        String[] arr = str.split("\\|", 3);
-        ToDo task = new ToDo(arr[2]);
-        if (arr[1].equals("true")) {
-            task.markAsDone();
+    public static ToDo load(String loadTask) {
+        String[] splitTask = loadTask.split(" \\| ", 3);
+        ToDo todo = new ToDo(splitTask[2]);
+        if (splitTask[1].equals("1")) {
+            todo.markAsDone();
         }
-        return task;
+        return todo;
     }
 
     @Override
-    public String store() {
-        return "T|" + super.store();
+    public String save(int isFinished) {
+        return "T | " + super.save(isFinished);
     }
 
     @Override

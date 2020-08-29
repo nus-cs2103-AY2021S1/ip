@@ -4,27 +4,27 @@ import java.time.format.DateTimeFormatter;
 public class Event extends Task {
     protected LocalDate at;
 
-    public Event(String description, LocalDate at) {
+    public Event(String description, String at) {
         super(description);
-        this.at = at;
+        this.at = LocalDate.parse(at);
     }
 
-    public static Event load(String str) {
-        String[] arr = str.split("\\|", 4);
-        Event task = new Event(arr[2], LocalDate.parse(arr[3]));
-        if (arr[1].equals("true")) {
-            task.markAsDone();
+    public static Event load(String loadTask) {
+        String[] splitTask = loadTask.split(" \\| ", 4);
+        Event event = new Event(splitTask[2], splitTask[3]);
+        if (splitTask[1].equals("1")) {
+            event.markAsDone();
         }
-        return task;
+        return event;
     }
 
     @Override
-    public String store() {
-        return "E|" + super.store() + "|" + this.at;
+    public String save(int isFinished) {
+        return "E | " + super.save(isFinished) + " | " + this.at;
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + at.format(DateTimeFormatter.ofPattern("d MMM uuuu")) + ")";
+        return "[E]" + super.toString() + " (at: " + at.format(DateTimeFormatter.ofPattern("d MMM yyyy")) + ")";
     }
 }

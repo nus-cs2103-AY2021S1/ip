@@ -15,8 +15,8 @@ public class Task {
         isDone = true;
     }
 
-    public String store() {
-        return this.isDone + "|" + this.description;
+    public String save(int isFinished) {
+        return isFinished + " | " + this.description;
     }
 
     @Override
