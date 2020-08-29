@@ -87,8 +87,10 @@ public class Storage {
                 case "D":
                     task = new Deadline(description, isDone, time);
                     break;
-                default:
+                case "E":
                     task = new Event(description, isDone, time);
+                    break;
+                default:
                     break;
                 }
                 list.add(task);
