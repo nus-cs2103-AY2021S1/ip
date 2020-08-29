@@ -98,14 +98,14 @@ public class Storage {
             String details[] = currentLine.split("\\|");
             switch(details[0].trim()) {
                 // Trims away whitespaces at the start and end of string
-                case "T":
-                    taskList.addTodo(details[1].trim(), details[2].trim());
-                    break;
-                case "D" :
-                    taskList.addDeadline(details[1].trim(), details[2].trim(), details[3].trim());
-                    break;
-                case "E":
-                    taskList.addEvent(details[1].trim(), details[2].trim(), details[3].trim());
+            case "T":
+                taskList.addTodo(details[1].trim(), details[2].trim());
+                break;
+            case "D" :
+                taskList.addDeadline(details[1].trim(), details[2].trim(), details[3].trim());
+                break;
+            case "E":
+                taskList.addEvent(details[1].trim(), details[2].trim(), details[3].trim());
             }
         }
         s.close();
