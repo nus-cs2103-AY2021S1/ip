@@ -38,7 +38,8 @@ public class TaskList {
      */
     public void completeTask(String userInput) {
         try {
-            int index = userInput.charAt(5) - '0';
+            String[] splitUserInput = userInput.split(" ");
+            int index = Integer.parseInt(splitUserInput[1]);
             if (index < 1 || index > taskLists.size()) {
                 Ui.print("Index out of range! Try Again.\n");
             } else {
@@ -63,7 +64,8 @@ public class TaskList {
      * @param userInput String of the task to be deleted.
      */
     public void deleteTask(String userInput) {
-        int index = userInput.charAt(7) - '0';
+        String[] splitUserInput = userInput.split(" ");
+        int index = Integer.parseInt(splitUserInput[1]);
         if (index < 1 || index > taskLists.size()) {
             Ui.print("Index out of range! Try Again.\n");
         } else {
