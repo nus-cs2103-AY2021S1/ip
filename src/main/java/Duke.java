@@ -1,23 +1,33 @@
-import Command.Command;
-import Exceptions.DukeException;
-import ParserStorageUi.Parser;
-import ParserStorageUi.Storage;
-import ParserStorageUi.Ui;
-import Task.TaskList;
+import command.Command;
+
+import exceptions.DukeException;
+
+import parserstorageui.Parser;
+import parserstorageui.Storage;
+import parserstorageui.Ui;
+
+import task.TaskList;
 
 public class Duke {
 
-    /** The storage assigned to Duke **/
+    /**
+     * The storage assigned to Duke
+     **/
     private Storage storage;
 
-    /** The TaskList assigned to Duke **/
+    /**
+     * The TaskList assigned to Duke
+     **/
     private TaskList tasks;
 
-    /** The Ui interaction handler **/
+    /**
+     * The Ui interaction handler
+     **/
     private Ui ui;
 
     /**
      * Initializes Duke
+     *
      * @param filePath
      */
     public Duke(String filePath) {
@@ -31,7 +41,16 @@ public class Duke {
         }
     }
 
-    /** Run the whole program **/
+    /**
+     * The main program of all file
+     **/
+    public static void main(String[] args) {
+        new Duke("data").run();
+    }
+
+    /**
+     * Run the whole program
+     **/
     public void run() {
         ui.showWelcome();
         boolean isExit = false;
@@ -48,10 +67,5 @@ public class Duke {
                 ui.showLine();
             }
         }
-    }
-
-    /** The main program of all file **/
-    public static void main(String[] args) {
-        new Duke("data").run();
     }
 }

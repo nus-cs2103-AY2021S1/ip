@@ -1,14 +1,13 @@
-package Exceptions;
-
-import Exceptions.DukeException;
+package exceptions;
 
 public class WrongIndexError extends DukeException {
 
     /**
      * Initializes WrongIndexError
+     *
      * @param message
      */
-    public WrongIndexError (String message){
+    public WrongIndexError(String message) {
         super(message);
     }
 }

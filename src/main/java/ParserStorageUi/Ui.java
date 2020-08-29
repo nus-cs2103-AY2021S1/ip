@@ -1,57 +1,79 @@
-package ParserStorageUi;
-
-import Task.*;
+package parserstorageui;
 
 import java.util.Scanner;
+import task.Task;
+import task.TaskList;
+
 public class Ui {
 
-    /** Initializes Ui class **/
-    public Ui() {}
+    /**
+     * Initializes Ui class
+     **/
+    public Ui() {
+    }
 
-    /** Show welcome message to the user **/
+    /**
+     * Show welcome message to the user
+     **/
     public void showWelcome() {
-        String logo = "Hello I'm Verzachtend \n" +
-                "What can I do for you?\n" +
-                "BE YOURSELF, NEVER SURRENDER AND KEEP A SMILE ON YOUR FACE";
+        String logo = "Hello I'm Verzachtend \n"
+            + "What can I do for you?\n"
+            + "BE YOURSELF, NEVER SURRENDER AND KEEP A SMILE ON YOUR FACE";
         System.out.println(logo);
     }
 
-    /** Receive input from user **/
+    /**
+     * Receive input from user
+     **/
     public String readCommand() {
         return new Scanner(System.in).nextLine();
     }
 
-    /** Show loading error to the user **/
-    public void showLoadingError(){
+    /**
+     * Show loading error to the user
+     **/
+    public void showLoadingError() {
         System.out.println("No task found, please blablbalba");
     }
 
-    /** Show error message to the user **/
-    public void showError(String message){
+    /**
+     * Show error message to the user
+     **/
+    public void showError(String message) {
         System.out.println(message);
     }
 
-    /** Show line to the user **/
+    /**
+     * Show line to the user
+     **/
     public void showLine() {
         System.out.println("________________________________________________");
     }
 
-    /** Show added task to the user **/
-    public void showAddedTask(int taskSize, Task added){
+    /**
+     * Show added task to the user
+     **/
+    public void showAddedTask(int taskSize, Task added) {
         System.out.println("Got it. I've added this task: \n"
-                + " " + added + "\n"
-                + "Now you have " + taskSize + " tasks in the list.");
+            + " " + added + "\n"
+            + "Now you have " + taskSize + " tasks in the list.");
     }
 
-    /** Show deleted task to the user **/
-    public void showDeletedTask(int taskSize, Task deleted){
-        System.out.println("Noted. I've removed this task: \n" +
-                "  " + deleted + "\n" +
-                "Now you have " + taskSize + " tasks in the list.");
+    /**
+     * Show deleted task to the user
+     **/
+    public void showDeletedTask(int taskSize, Task deleted) {
+        System.out.println("Noted. I've removed this task: \n"
+            + "  "
+            + deleted
+            + "\n"
+            + "Now you have " + taskSize + " tasks in the list.");
     }
 
-    /** Show the current tasks to the user **/
-    public void showTasks(TaskList tasks){
+    /**
+     * Show the current tasks to the user
+     **/
+    public void showTasks(TaskList tasks) {
         int i = 1;
         System.out.println("Here are the tasks in your list:");
         for (Task item : tasks.getTaskList()) {
@@ -60,14 +82,18 @@ public class Ui {
         }
     }
 
-    /** Show done tasks to the user **/
-    public void showDoneTask(Task done){
+    /**
+     * Show done tasks to the user
+     **/
+    public void showDoneTask(Task done) {
         System.out.println("Nice! I've marked this task as done: \n"
-                + done);
+            + done);
     }
 
-    /** Show the tasks that match the keyword **/
-    public void showFoundTasks(TaskList tasks, String keyword){
+    /**
+     * Show the tasks that match the keyword
+     **/
+    public void showFoundTasks(TaskList tasks, String keyword) {
         int i = 1;
         System.out.println("Here are the matching tasks in your list:");
         for (Task item : tasks.getTaskList()) {
@@ -78,8 +104,10 @@ public class Ui {
         }
     }
 
-    /** Show goodbye message to the customer **/
-    public void showGoodBye(){
+    /**
+     * Show goodbye message to the customer
+     **/
+    public void showGoodBye() {
         System.out.println("Bye. Hope to see you again soon!");
     }
 

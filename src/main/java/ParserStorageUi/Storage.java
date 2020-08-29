@@ -1,46 +1,61 @@
-package ParserStorageUi;
-import Exceptions.DukeException;
-import Task.*;
-import java.io.*;
+package parserstorageui;
+
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import exceptions.DukeException;
+import task.Deadline;
+import task.Event;
+import task.Task;
+import task.Todo;
 
 public class Storage {
 
-    /** The file path of the folder of duke.txt **/
+    /**
+     * The file path of the folder of duke.txt
+     **/
     private final String filePath;
 
-    /** The object file path for duke.txt **/
+    /**
+     * The object file path for duke.txt
+     **/
     private Path file;
 
     /**
      * Initializes Storage with filePath as the parameter
+     *
      * @param filePath
      */
-    public Storage(String filePath){
+    public Storage(String filePath) {
         this.filePath = filePath;
         initiateFile();
     }
 
-    /** Initiate the file **/
-    private void initiateFile(){
-        try{
-            if (Files.notExists(Paths.get(filePath))){
+    /**
+     * Initiate the file
+     **/
+    private void initiateFile() {
+        try {
+            if (Files.notExists(Paths.get(filePath))) {
                 Files.createDirectory(Paths.get(filePath));
             }
             if (Files.notExists(Paths.get(filePath + "/duke.txt"))) {
                 file = Files.createFile(Paths.get(filePath + "/duke.txt"));
             } else {
-                file = Paths.get(filePath + "/duke.txt") ;
+                file = Paths.get(filePath + "/duke.txt");
             }
-        } catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    /** Load all the tasks from the save file to ArrayList<Task> **/
+    /**
+     * Load all the tasks from the save file to ArrayList<Task>
+     **/
     public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> temp = new ArrayList<>();
         try {
@@ -50,17 +65,18 @@ public class Storage {
                 int isDone = Integer.parseInt(task.substring(4, 5));
                 boolean isTaskDone = isDone == 1;
                 switch (type) {
-                    case "T":
-                        temp.add(new Todo(name, isTaskDone));
-                        break;
-                    case "D":
-                        int indexOfLine = name.indexOf("|");
-                        temp.add(new Deadline(name.substring(0, indexOfLine - 1), isTaskDone, name.substring(indexOfLine + 2)));
-                        break;
-                    case "E":
-                        int iOL = name.indexOf("|");
-                        temp.add(new Event(name.substring(0, iOL  - 1), isTaskDone, name.substring(iOL + 2)));
-                        break;
+                case "T":
+                    temp.add(new Todo(name, isTaskDone));
+                    break;
+                case "D":
+                    int indexOfLine = name.indexOf("|");
+                    temp.add(
+                        new Deadline(name.substring(0, indexOfLine - 1), isTaskDone, name.substring(indexOfLine + 2)));
+                    break;
+                case "E":
+                    int iOL = name.indexOf("|");
+                    temp.add(new Event(name.substring(0, iOL - 1), isTaskDone, name.substring(iOL + 2)));
+                    break;
                 }
             }
         } catch (IOException e) {
@@ -69,7 +85,9 @@ public class Storage {
         return temp;
     }
 
-    /** Put back all tasks from ArrayList to the save file (duke.txt) **/
+    /**
+     * Put back all tasks from ArrayList to the save file (duke.txt)
+     **/
     public void putToDatabase(ArrayList<Task> tasks) throws DukeException {
         try {
             FileWriter fw = new FileWriter(this.filePath + "/duke.txt");

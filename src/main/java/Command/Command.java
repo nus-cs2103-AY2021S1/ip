@@ -1,24 +1,27 @@
-package Command;
+package command;
 
-import Task.TaskList;
+import exceptions.DukeException;
+import parserstorageui.Storage;
+import parserstorageui.Ui;
+import task.TaskList;
 
-import ParserStorageUi.Ui;
-import ParserStorageUi.Storage;
-
-import Exceptions.*;
 
 abstract public class Command {
 
     protected final String command;
 
-    public Command(String command){
+    public Command(String command) {
         this.command = command;
     }
 
-    /** Executes the command **/
+    /**
+     * Executes the command
+     **/
     public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
 
-    /** Check if the current command is an exit command **/
+    /**
+     * Check if the current command is an exit command
+     **/
     public abstract boolean isExit();
 
 }

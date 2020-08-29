@@ -1,14 +1,13 @@
-package Exceptions;
-
-import Exceptions.DukeException;
+package exceptions;
 
 public class NoTaskException extends DukeException {
 
     /**
      * Initializes NoTaskException
+     *
      * @param message
      */
-    public NoTaskException(String message){
+    public NoTaskException(String message) {
         super(message);
     }
 

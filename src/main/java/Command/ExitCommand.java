@@ -1,47 +1,52 @@
-package Command;
+package command;
 
-import Command.Command;
+import exceptions.DukeException;
+import parserstorageui.Storage;
+import parserstorageui.Ui;
+import task.TaskList;
 
-import Exceptions.DukeException;
-
-import Task.TaskList;
-
-import ParserStorageUi.*;
 public class ExitCommand extends Command {
 
     /**
      * Initializes ExitCommand
+     *
      * @param command
      */
-    public ExitCommand(String command){
+    public ExitCommand(String command) {
         super(command);
     }
 
-    /** Executes the command **/
+    /**
+     * Executes the command
+     **/
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
             storage.putToDatabase(tasks.getTaskList());
             ui.showGoodBye();
-        } catch (DukeException e){
+        } catch (DukeException e) {
             throw new DukeException(e.getMessage());
         }
     }
 
-    /** Check if the current command is an exit command **/
+    /**
+     * Check if the current command is an exit command
+     **/
     @Override
-    public boolean isExit(){
+    public boolean isExit() {
         return true;
     }
 
-    /** Override the equals method from Object to handle ExitCommand **/
+    /**
+     * Override the equals method from Object to handle ExitCommand
+     **/
     @Override
-    public boolean equals(Object o){
+    public boolean equals(Object o) {
         if (o == this) {
             return true;
-        } else if (o instanceof ExitCommand){
+        } else if (o instanceof ExitCommand) {
             ExitCommand temp = (ExitCommand) o;
-            if (temp.command.equals(this.command)){
+            if (temp.command.equals(this.command)) {
                 return true;
             } else {
                 return false;

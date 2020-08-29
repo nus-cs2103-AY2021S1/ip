@@ -1,12 +1,13 @@
-package Exceptions;
+package exceptions;
 
-public class WrongDateTimeFormatException extends DukeException  {
+public class WrongDateTimeFormatException extends DukeException {
 
     /**
      * Initializes WrongDateTimeFormatException
+     *
      * @param message
      */
-    public WrongDateTimeFormatException(String message){
+    public WrongDateTimeFormatException(String message) {
         super(message);
     }
 }
