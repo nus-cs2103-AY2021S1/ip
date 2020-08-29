@@ -17,7 +17,7 @@ public class TaskList {
      * @param tasks List of tasks that has been created by the user.
      */
     public TaskList(List<Task> tasks) {
-        this.tasks =  tasks;
+        this.tasks = tasks;
     }
 
     /**

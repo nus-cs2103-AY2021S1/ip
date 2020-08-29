@@ -1,15 +1,12 @@
 package duke.command;
 
+import duke.Storage;
+import duke.Ui;
 import duke.exception.DukeException;
 import duke.exception.InvalidTaskException;
-
-import duke.task.TaskList;
 import duke.task.Task;
+import duke.task.TaskList;
 import duke.task.Todo;
-
-import duke.Ui;
-import duke.Storage;
-
 
 /**
  * Represents a command to add a new todo task to the user's list of tasks.
@@ -40,16 +37,14 @@ public class AddTodoCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
 
-            String todoInfo = this.retrieveTodoInfo();
-            Task toAdd = new Todo(todoInfo.trim());
-            tasks.addTask(toAdd);
-
-            String successReply = "Success! This todo task has been added: \n\t"
-                    + toAdd.toString() + "\nYou have " + tasks.getListSize()
-                    + " tasks in your list now.";
-            ui.printReply(successReply);
-
-            storage.saveToFile(tasks);
+        String todoInfo = this.retrieveTodoInfo();
+        Task toAdd = new Todo(todoInfo.trim());
+        tasks.addTask(toAdd);
+        String successReply = "Success! This todo task has been added: \n\t"
+                + toAdd.toString() + "\nYou have " + tasks.getListSize()
+                + " tasks in your list now.";
+        ui.printReply(successReply);
+        storage.saveToFile(tasks);
     }
 
     /**

@@ -1,15 +1,13 @@
 package duke.command;
 
+import duke.Storage;
+import duke.Ui;
 import duke.exception.DukeException;
 import duke.exception.InvalidFunctionException;
 import duke.exception.InvalidTaskException;
-
-import duke.task.TaskList;
-import duke.task.Task;
 import duke.task.Event;
-
-import duke.Ui;
-import duke.Storage;
+import duke.task.Task;
+import duke.task.TaskList;
 
 import java.time.LocalDate;
 import java.time.LocalTime;

@@ -1,12 +1,11 @@
 package duke.command;
 
+import duke.Storage;
+import duke.Ui;
 import duke.exception.DukeException;
 import duke.exception.InvalidFunctionException;
 
 import duke.task.TaskList;
-
-import duke.Ui;
-import duke.Storage;
 
 /**
  * Represents a command to handle invalid inputs by the user.

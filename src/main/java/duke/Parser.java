@@ -12,7 +12,6 @@ import duke.command.FindByKeywordCommand;
 import duke.command.InvalidCommand;
 import duke.command.ListCommand;
 import duke.command.ViewFunctionsCommand;
-
 import duke.exception.InvalidFunctionException;
 
 /**

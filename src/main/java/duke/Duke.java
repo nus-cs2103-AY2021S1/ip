@@ -1,8 +1,8 @@
 package duke;
 
-import duke.task.TaskList;
 import duke.command.Command;
 import duke.exception.DukeException;
+import duke.task.TaskList;
 
 /**
  * Represents a chat bot that functions as a task manager.

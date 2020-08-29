@@ -1,9 +1,8 @@
 package duke.command;
 
-import duke.task.TaskList;
-
-import duke.Ui;
 import duke.Storage;
+import duke.Ui;
+import duke.task.TaskList;
 
 /**
  * Represents a command to display all the tasks in the user's list of tasks.
