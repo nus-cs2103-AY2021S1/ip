@@ -9,7 +9,7 @@ public class TaskList {
         this.tasks = new ArrayList<>();
         for (String[] taskArr : taskDetails) {
             String taskType = taskArr[0];
-            boolean done = taskArr[1] == "1";
+            boolean done = taskArr[1].equals("1");
 
             switch (taskType) {
             case ("T"):

@@ -10,7 +10,6 @@ public class Ui {
             + "|____/ \\__,_|_|\\_\\___|\n";
 
     static String prompt = "What can I do for you?";
-    static String farewellMsg = "Bye. Hope to see you again soon!";
     static String demarcation = Ui.indentation + "-------------------------------------------------------------------";
 
     TaskList tasks;
@@ -21,7 +20,7 @@ public class Ui {
         this.storage = storage;
     }
 
-    private String indentWord(String word) {
+    private static String indentWord(String word) {
         return Ui.indentation + word;
     }
 
@@ -30,7 +29,11 @@ public class Ui {
         System.out.println(Ui.prompt);
     }
 
-    private void printTask(Task task, Action action) {
+    public static void simplePrint(String message) {
+        System.out.println(indentWord(message));
+    }
+
+    public static void printTask(Task task, Action action, int size) {
         String message = "";
         switch (action) {
         case ADD:
@@ -47,10 +50,10 @@ public class Ui {
         }
         System.out.println(indentWord(message));
         System.out.println(indentWord(task.toString()));
-        System.out.println(indentWord(String.format("Now you have %s tasks in the list.", tasks.getSize())));
+        System.out.println(indentWord(String.format("Now you have %s tasks in the list.", size)));
     }
 
-    private void printTasks(ArrayList<String> tasksDescription, Action action) {
+    public static void printTasks(ArrayList<String> tasksDescription, Action action) {
         String prompt;
         switch (action) {
         case FIND:
@@ -76,45 +79,25 @@ public class Ui {
      * Runs a scanner to parse user input and print response.
      */
 
-    public void getInput() {
+    public void getInput() throws DukeException {
         greetings();
         Scanner scanner = new Scanner(System.in);
 
         while (scanner.hasNext()) {
-            String command = scanner.nextLine();
-            Parser parser = new Parser(command);
-
-            String commandType = parser.getCommandType();
+            String input = scanner.nextLine();
+            Command command = Parser.getCommand(input);
 
             System.out.println(Ui.demarcation);
             // Dispatch respective handlers depending on command
-            switch (commandType) {
-            case ("bye"):
-                System.out.println(indentWord(farewellMsg));
-                return;
-            case ("find"):
-                printTasks(tasks.find(parser.getWord()), Action.FIND);
-                break;
-            case ("list"):
-                printTasks(tasks.getTasksDescription(), Action.LIST);
-                break;
-            case ("delete"):
-                // Print response from Duke after deleting task
-                printTask(tasks.deleteTask(parser.getTaskToModify()), Action.DELETE);
-                break;
-            case ("done"):
-                printTask(tasks.markDone(parser.getTaskToModify()), Action.DONE);
-                break;
-            default:
-                try {
-                    printTask(tasks.addTask(parser.getNewTask()), Action.ADD);
-                } catch (DukeException e) {
-                    System.out.println(indentWord(e.getMessage()));
-                }
-                break;
-            }
+            boolean exit = command.execute(tasks);
+
             System.out.println(Ui.demarcation);
-            storage.saveToFile(tasks.getTasksInfo());
+
+            if (exit) {
+                return;
+            } else {
+                storage.saveToFile(tasks.getTasksInfo());
+            }
         }
     }
 }

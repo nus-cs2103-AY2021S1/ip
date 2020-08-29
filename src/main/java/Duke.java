@@ -9,12 +9,15 @@ public class Duke {
     /**
      * Runs the Duke bot to process input from user and output the response.
      */
-
-    public void run() {
+    public void run() throws DukeException {
         ui.getInput();
     }
 
-    public static void main(String[] args) {
+    public String getResponse(String input) {
+        return "Test";
+    }
+
+    public static void main(String[] args) throws DukeException {
         new Duke("ip_data.txt").run();
     }
 }
