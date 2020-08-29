@@ -22,23 +22,23 @@ public class HelpCommand extends Command {
      * @param input User's input.
      * @param taskList Task list created for user.
      * @param storage Storage created for user.
+     * @return List of commands.
      * @throws DukeException If input does not meet criteria.
      */
-    public void execute(String input, TaskList taskList, Storage storage) throws DukeException {
+    public String execute(String input, TaskList taskList, Storage storage) throws DukeException {
         String checker;
         if (input.length() == 4) { // user's input is "help"
-            UI.listCommands();
-            return;
+            return UI.listCommands();
         }
         try {
             checker = input.split("help")[1];
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeException("\tDid you meant the command 'help'?");
+            throw new DukeException("Did you meant the command 'help'?");
         }
         if (!checker.isBlank()) { // user's input is "help me" for example
-            throw new DukeException("\tDid you meant the command 'help'?");
+            throw new DukeException("Did you meant the command 'help'?");
         } else { // user's input is "help " with spacings
-            UI.listCommands();
+            return UI.listCommands();
         }
     }
 }

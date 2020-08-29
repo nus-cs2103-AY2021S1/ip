@@ -22,9 +22,10 @@ public class InvalidCommand extends Command {
      * @param taskList Task list created for user.
      * @param storage Storage created for user.
      * @throws DukeException Always since input is invalid.
+     * @return
      */
-    public void execute(String input, TaskList taskList, Storage storage) throws DukeException {
-        throw new DukeException("\tOops! I'm not sure what you meant!\n"
-                + "\tPlease try again!");
+    public String execute(String input, TaskList taskList, Storage storage) throws DukeException {
+        throw new DukeException("Oops! I'm not sure what you meant!\n"
+                + "Please try again!");
     }
 }

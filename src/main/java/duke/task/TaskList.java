@@ -47,14 +47,14 @@ public class TaskList {
      * @param description Description of To-Do.
      * @param storage Storage created for user.
      */
-    public void addToDo(String description, Storage storage) {
+    public String addToDo(String description, Storage storage) {
         Task toDo = new ToDo(description);
         taskList.add(toDo);
         storage.addData(toDo);
-        String printing = "\tGotcha! I've added this task:\n\t\t"
-                + toDo + "\n\t" + "You have "
+        String printing = "Gotcha! I've added this task:\n"
+                + toDo + "\n" + "You have "
                 + taskList.size() + " tasks on your list now.\n";
-        System.out.print(printing);
+        return printing;
     }
 
     /**
@@ -63,14 +63,14 @@ public class TaskList {
      * @param date Deadline of Deadline task.
      * @param storage Storage created for user.
      */
-    public void addDeadline(String description, LocalDateTime date, Storage storage) {
+    public String addDeadline(String description, LocalDateTime date, Storage storage) {
         Task deadline = new Deadline(description, date);
         taskList.add(deadline);
         storage.addData(deadline);
-        String printing = "\tGotcha! I've added this task:\n\t\t"
-                + deadline + "\n\t" + "You have "
+        String printing = "Gotcha! I've added this task:\n"
+                + deadline + "\n" + "You have "
                 + taskList.size() + " tasks on your list now.\n";
-        System.out.print(printing);
+        return printing;
     }
 
     /**
@@ -79,14 +79,14 @@ public class TaskList {
      * @param date Date and time of Event.
      * @param storage Storage created for user.
      */
-    public void addEvent(String description, LocalDateTime date, Storage storage) {
+    public String addEvent(String description, LocalDateTime date, Storage storage) {
         Task event = new Event(description, date);
         taskList.add(event);
         storage.addData(event);
-        String printing = "\tGotcha! I've added this task:\n\t\t"
-                + event + "\n\t" + "You have "
+        String printing = "Gotcha! I've added this task:\n"
+                + event + "\n" + "You have "
                 + taskList.size() + " tasks on your list now.\n";
-        System.out.print(printing);
+        return printing;
     }
 
     /**
@@ -94,15 +94,15 @@ public class TaskList {
      * @param index Index of task user wants to remove.
      * @param storage Storage created for user.
      */
-    public void deleteTask(int index, Storage storage) {
+    public String deleteTask(int index, Storage storage) {
         Task taskToBeDeleted = taskList.get(index - 1);
         taskList.remove(index - 1);
         storage.updateData(taskList);
-        String deletedTask = "\tRoger that! I've removed this task:\n\t\t"
+        String deletedTask = "Roger that! I've removed this task:\n"
                 + taskToBeDeleted
-                + "\n\tYou have " + taskList.size()
+                + "\nYou have " + taskList.size()
                 + " tasks on your list now.\n";
-        System.out.print(deletedTask);
+        return deletedTask;
     }
 
     /**
@@ -110,32 +110,35 @@ public class TaskList {
      * @param index Index of task user wants to mark as done.
      * @param storage Storage created for user.
      */
-    public void markTaskDone(int index, Storage storage) {
+    public String markTaskDone(int index, Storage storage) {
         Task finishedTask = taskList.get(index - 1);
         finishedTask.markAsDone();
         storage.updateData(taskList);
-        String doneTask = "\t\\(^O^)/ Good job! I've marked this task as done:\n\t\t"
-                + finishedTask + "\n\tKeep going!\n";
-        System.out.print(doneTask);
+        String doneTask = "\\(^O^)/ Good job! I've marked this task as done:\n"
+                + finishedTask + "\nKeep going!\n";
+        return doneTask;
     }
 
     /**
      * Lists all the tasks on task list.
      */
-    public void listTasks() {
-        System.out.print("\tHere are the tasks on your list:\n");
+    public String listTasks() {
+        String printing = "";
+        printing += "Here are the tasks on your list:\n";
         for (int i = 0; i < taskList.size(); i++) {
             int number = i + 1;
-            System.out.print("\t" + number + ". " + taskList.get(i) + "\n");
+            printing += "" + number + ". " + taskList.get(i) + "\n";
         }
+        return printing;
     }
 
     /**
-     * Find the tasks according to the keyword user input.
+     * Finds the tasks according to the keyword user input.
      * @param keyword Keyword provided by user.
      */
-    public void findTasks(String keyword) {
+    public String findTasks(String keyword) {
         boolean canFind = false;
+        String printing = "";
         for (Task task : taskList) {
             if (task.getTaskName().contains(keyword)) {
                 canFind = true;
@@ -144,15 +147,16 @@ public class TaskList {
         }
         if (canFind) {
             int index = 1;
-            System.out.print("\tHere are the matching tasks on your list:\n");
+            printing += "Here are the matching tasks on your list:\n";
             for (Task task : taskList) {
                 if (task.getTaskName().contains(keyword)) {
-                    System.out.print("\t" + index + ". " + task + "\n");
+                    printing += "" + index + ". " + task + "\n";
                     index++;
                 }
             }
         } else {
-            System.out.print("\tSorry, there are no tasks that match your keyword!\n");
+            return "Sorry, there are no tasks that match your keyword!\n";
         }
+        return printing;
     }
 }

@@ -20,8 +20,9 @@ public class ExitCommand extends Command {
      * @param input User's input (not used here).
      * @param taskList Task list created for user (not used here).
      * @param storage Storage created for user (not used here).
+     * @return
      */
-    public void execute(String input, TaskList taskList, Storage storage) {
-        return;
+    public String execute(String input, TaskList taskList, Storage storage) {
+        return input;
     }
 }

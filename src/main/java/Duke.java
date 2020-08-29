@@ -22,7 +22,7 @@ public class Duke {
     /**
      * UI created to interact with user.
      */
-    private final UI ui;
+    public static UI ui;
 
     /**
      * Creates Focus to set up the things needed.
@@ -66,6 +66,25 @@ public class Duke {
         }
         ui.exitFocus();
         sc.close();
+    }
+
+    /**
+     * Gets response from Focus based on user's input.
+     * @param input User's input.
+     * @return Focus' response.
+     */
+    public String getResponse(String input) {
+        boolean exit;
+        Command command = Parser.parse(input);
+        exit = command.isExit();
+        if (exit) {
+            return ui.exitFocus();
+        }
+        try {
+            return command.execute(input, taskList, storage);
+        } catch (DukeException e) {
+            return e.getMessage();
+        }
     }
 
     /**

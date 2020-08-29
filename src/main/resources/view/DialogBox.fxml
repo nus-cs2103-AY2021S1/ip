@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.paint.RadialGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+
+<fx:root alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="648.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+      <Label fx:id="dialog" text="LABEL" wrapText="true">
+         <font>
+            <Font name="Trebuchet MS" size="14.0" />
+         </font>
+      </Label>
+      <Circle fx:id="circle" fill="WHITE" radius="52.0" strokeType="INSIDE" strokeWidth="2.0">
+         <HBox.margin>
+            <Insets bottom="10.0" left="10.0" right="10.0" />
+         </HBox.margin>
+         <stroke>
+            <RadialGradient centerX="0.5866666581895617" centerY="0.5648855253030325" focusAngle="57.58" focusDistance="0.22429902976918448" radius="0.6401869158878505">
+               <stops>
+                  <Stop color="BLACK" />
+                  <Stop color="#87c7ff" offset="0.9961832061068702" />
+                  <Stop color="#87c7ff" offset="1.0" />
+               </stops>
+            </RadialGradient>
+         </stroke>
+      </Circle>
+    </children>
+   <padding>
+      <Insets bottom="15.0" left="5.0" right="5.0" top="20.0" />
+   </padding>
+</fx:root>

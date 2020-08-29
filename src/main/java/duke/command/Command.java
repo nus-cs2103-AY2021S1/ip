@@ -20,7 +20,8 @@ public abstract class Command {
      * @param taskList Task list created for user.
      * @param storage Storage created for user.
      * @throws DukeException If input does not meet criteria.
+     * @return
      */
-    public abstract void execute(String input, TaskList taskList, Storage storage)
+    public abstract String execute(String input, TaskList taskList, Storage storage)
             throws DukeException;
 }
