@@ -1,7 +1,8 @@
 package duke.tasks;
 
-import duke.utils.ResourceHandler;
 import java.text.MessageFormat;
+
+import duke.utils.ResourceHandler;
 
 /**
  * Represents a task within <i>Duke</i>.

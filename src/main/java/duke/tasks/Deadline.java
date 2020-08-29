@@ -1,11 +1,11 @@
 package duke.tasks;
 
+import java.text.MessageFormat;
+import java.time.LocalDateTime;
+
 import duke.utils.DateTimeStringFormatter;
 import duke.utils.ResourceHandler;
 import duke.utils.Schedulable;
-
-import java.text.MessageFormat;
-import java.time.LocalDateTime;
 
 /**
  * A specialised {@code Task} that needs to be done before a specific date/time.

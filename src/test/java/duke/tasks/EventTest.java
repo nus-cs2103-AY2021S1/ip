@@ -1,11 +1,11 @@
 package duke.tasks;
 
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalDateTime;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.jupiter.api.Test;
 
 public class EventTest {
     @Test
@@ -13,7 +13,7 @@ public class EventTest {
         LocalDateTime currentTime = LocalDateTime.now();
         Event upcomingEvent = new Event("CS2103T Lecture", currentTime.plusSeconds(10));
         assertFalse(upcomingEvent.hasDateTimeElapsed());
-        Event overdueEvent = new Event("CS2103T Lecture", currentTime);
+        Event overdueEvent = new Event("CS2103T Lecture", currentTime.minusSeconds(10));
         assertTrue(overdueEvent.hasDateTimeElapsed());
     }
 

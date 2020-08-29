@@ -1,11 +1,5 @@
 package duke.utils;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.TypeAdapterFactory;
-import com.google.gson.reflect.TypeToken;
-import duke.tasks.Task;
-
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.time.LocalDateTime;
@@ -15,6 +9,13 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.TypeAdapterFactory;
+import com.google.gson.reflect.TypeToken;
+
+import duke.tasks.Task;
 
 /**
  * An {@code ArrayList} wrapper that syncs the state of the list to a file whenever it's updated.
@@ -218,6 +219,31 @@ public class PersistentList<E> implements List<E> {
     }
 
     /**
+     * Inserts the specified element at the specified position in this list
+     * (optional operation).  Shifts the element currently at that position
+     * (if any) and any subsequent elements to the right (adds one to their
+     * indices).
+     *
+     * @param index   index at which the specified element is to be inserted
+     * @param element element to be inserted
+     * @throws UnsupportedOperationException if the {@code add} operation
+     *                                       is not supported by this list
+     * @throws ClassCastException            if the class of the specified element
+     *                                       prevents it from being added to this list
+     * @throws NullPointerException          if the specified element is null and
+     *                                       this list does not permit null elements
+     * @throws IllegalArgumentException      if some property of the specified
+     *                                       element prevents it from being added to this list
+     * @throws IndexOutOfBoundsException     if the index is out of range
+     *                                       ({@code index < 0 || index > size()})
+     */
+    @Override
+    public void add(int index, E element) {
+        list.add(index, element);
+        syncStateToFile();
+    }
+
+    /**
      * Removes the first occurrence of the specified element from this list,
      * if it is present (optional operation).  If this list does not contain
      * the element, it is unchanged.  More formally, removes the element with
@@ -243,6 +269,26 @@ public class PersistentList<E> implements List<E> {
         boolean elementRemoved = list.remove(o);
         syncStateToFile();
         return elementRemoved;
+    }
+
+    /**
+     * Removes the element at the specified position in this list (optional
+     * operation).  Shifts any subsequent elements to the left (subtracts one
+     * from their indices).  Returns the element that was removed from the
+     * list.
+     *
+     * @param index the index of the element to be removed
+     * @return the element previously at the specified position
+     * @throws UnsupportedOperationException if the {@code remove} operation
+     *                                       is not supported by this list
+     * @throws IndexOutOfBoundsException     if the index is out of range
+     *                                       ({@code index < 0 || index >= size()})
+     */
+    @Override
+    public E remove(int index) {
+        E previousElement = list.remove(index);
+        syncStateToFile();
+        return previousElement;
     }
 
     /**
@@ -434,51 +480,6 @@ public class PersistentList<E> implements List<E> {
     }
 
     /**
-     * Inserts the specified element at the specified position in this list
-     * (optional operation).  Shifts the element currently at that position
-     * (if any) and any subsequent elements to the right (adds one to their
-     * indices).
-     *
-     * @param index   index at which the specified element is to be inserted
-     * @param element element to be inserted
-     * @throws UnsupportedOperationException if the {@code add} operation
-     *                                       is not supported by this list
-     * @throws ClassCastException            if the class of the specified element
-     *                                       prevents it from being added to this list
-     * @throws NullPointerException          if the specified element is null and
-     *                                       this list does not permit null elements
-     * @throws IllegalArgumentException      if some property of the specified
-     *                                       element prevents it from being added to this list
-     * @throws IndexOutOfBoundsException     if the index is out of range
-     *                                       ({@code index < 0 || index > size()})
-     */
-    @Override
-    public void add(int index, E element) {
-        list.add(index, element);
-        syncStateToFile();
-    }
-
-    /**
-     * Removes the element at the specified position in this list (optional
-     * operation).  Shifts any subsequent elements to the left (subtracts one
-     * from their indices).  Returns the element that was removed from the
-     * list.
-     *
-     * @param index the index of the element to be removed
-     * @return the element previously at the specified position
-     * @throws UnsupportedOperationException if the {@code remove} operation
-     *                                       is not supported by this list
-     * @throws IndexOutOfBoundsException     if the index is out of range
-     *                                       ({@code index < 0 || index >= size()})
-     */
-    @Override
-    public E remove(int index) {
-        E previousElement = list.remove(index);
-        syncStateToFile();
-        return previousElement;
-    }
-
-    /**
      * Returns the index of the first occurrence of the specified element
      * in this list, or -1 if this list does not contain the element.
      * More formally, returns the lowest index {@code i} such that
@@ -519,7 +520,7 @@ public class PersistentList<E> implements List<E> {
      */
     @Override
     public int lastIndexOf(Object o) {
-       return list.lastIndexOf(o);
+        return list.lastIndexOf(o);
     }
 
     /**

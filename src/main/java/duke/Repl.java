@@ -1,5 +1,8 @@
 package duke;
 
+import java.time.LocalDateTime;
+import java.util.Scanner;
+
 import duke.enums.Command;
 import duke.exceptions.DukeException;
 import duke.tasks.Deadline;
@@ -9,9 +12,6 @@ import duke.tasks.ToDo;
 import duke.utils.DateTimeParser;
 import duke.utils.PrettyPrinter;
 import duke.utils.ResourceHandler;
-
-import java.time.LocalDateTime;
-import java.util.Scanner;
 
 /**
  * A read-eval-print loop (REPL) that reads in a command from the user, executes it, and prints out the result.
@@ -111,7 +111,9 @@ public class Repl {
                 case UPCOMING: {
                     prettyPrinter.print(taskManager.getUpcomingTasks());
                     break;
-                } // I'm aware that this bracket looks very weird; you can thank the CS2103T style guide for this.
+                }
+                default:
+                    // This should never be reached.
                 }
             } catch (DukeException e) {
                 prettyPrinter.print(e.getMessage());
