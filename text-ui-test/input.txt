@@ -1,0 +1,25 @@
+list
+todo
+todo test 1
+list
+deadline
+deadline test 2
+deadline test 2 /by
+deadline test 2 /by monday
+deadline test 2 /by 12-12-2020
+deadline test 2 /by 12-12-2020 1200
+list
+event
+event test 3
+event test 3 /at
+event test 3 /at 11-11-2020
+event test 3 /at 11-11-2020 1100
+list
+done 2
+list
+delete 1
+list
+show
+filter
+filter 12-12-2020
+bye
