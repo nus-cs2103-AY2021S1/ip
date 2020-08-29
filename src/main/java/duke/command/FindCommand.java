@@ -15,7 +15,7 @@ public class FindCommand implements Command {
     }
 
     @Override
-    public void execute(TaskList taskList, UI ui, Storage storage) {
+    public String execute(TaskList taskList, UI ui, Storage storage) {
         ArrayList<Task> list = taskList.getTaskList();
         ArrayList<Task> foundList = new ArrayList<>();
         for (Task task : list) {
@@ -23,7 +23,7 @@ public class FindCommand implements Command {
                 foundList.add(task);
             }
         }
-        ui.displayMatchingList(foundList);
+        return ui.displayMatchingList(foundList);
     }
 
     @Override

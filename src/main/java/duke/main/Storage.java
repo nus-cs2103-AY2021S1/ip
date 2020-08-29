@@ -95,7 +95,7 @@ public class Storage {
      * @param ui       Needed to display the outcome to the user
      * @param taskList The TaskList being saved into the filepath
      */
-    public void saveData(UI ui, TaskList taskList) {
+    public String saveData(UI ui, TaskList taskList) {
         try {
             File data = new File(filepath);
             data.getParentFile().mkdirs();
@@ -103,7 +103,7 @@ public class Storage {
             FileWriter fileWriter = new FileWriter(data);
             PrintWriter writer = new PrintWriter(fileWriter);
 
-            ui.startSaving();
+            String save = ui.startSaving();
             for (Task task : taskList.getTaskList()) {
                 String s = String.format("%s|%b|%s", task.getTaskType(),
                         task.getIsDone(), task.getDescription());
@@ -114,10 +114,11 @@ public class Storage {
                 writer.println(s);
             }
             writer.close();
-            ui.saveSuccess();
+            return save + "\n" + ui.saveSuccess();
         } catch (IOException e) {
             System.out.println("Uh oh! An error has occurred. T_T");
             System.out.println(e.getMessage());
         }
+        return "Uh oh! An error has occurred. T_T";
     }
 }

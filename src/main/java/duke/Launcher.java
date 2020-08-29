@@ -1,11 +1,10 @@
 package duke;
 
+import duke.fxml.Main;
 import javafx.application.Application;
-
-import duke.main.Duke;
 
 public class Launcher {
     public static void main(String[] args) {
-        Application.launch(Duke.class, args);
+        Application.launch(Main.class, args);
     }
 }

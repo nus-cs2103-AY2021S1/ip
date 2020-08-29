@@ -7,9 +7,9 @@ import duke.main.UI;
 public class ByeCommand implements Command {
 
     @Override
-    public void execute(TaskList taskList, UI ui, Storage storage) {
+    public String execute(TaskList taskList, UI ui, Storage storage) {
         storage.saveData(ui, taskList);
-        ui.showGoodbye();
+        return ui.showGoodbye();
     }
 
     @Override

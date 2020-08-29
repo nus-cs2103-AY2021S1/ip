@@ -19,7 +19,7 @@ public interface Command {
      * @param storage  The class that deals with saving and loading data of the user
      * @throws DukeError DukeErrors may be thrown in the process if user input is faulty
      */
-    void execute(TaskList taskList, UI ui, Storage storage) throws DukeError;
+    String execute(TaskList taskList, UI ui, Storage storage) throws DukeError;
 
     /**
      * Checks whether the command that ran exited the Duke program.

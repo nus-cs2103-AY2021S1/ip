@@ -16,7 +16,7 @@ public class DoneTaskCommand implements Command {
     }
 
     @Override
-    public void execute(TaskList taskList, UI ui, Storage storage) throws DukeError {
+    public String execute(TaskList taskList, UI ui, Storage storage) throws DukeError {
         if (n < 1 || n > taskList.numberOfTasks()) {
             throw new InvalidRangeError();
         }
@@ -24,8 +24,9 @@ public class DoneTaskCommand implements Command {
         if (task.getIsDone()) {
             throw new TaskAlreadyCompletedError(task);
         }
-        ui.doneTask(task.getDescription());
         task.markAsDone();
+        return ui.doneTask(task.getDescription());
+
     }
 
     @Override

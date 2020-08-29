@@ -7,8 +7,8 @@ import duke.main.UI;
 public class DisplayListCommand implements Command {
 
     @Override
-    public void execute(TaskList taskList, UI ui, Storage storage) {
-        ui.displayList(taskList.getTaskList());
+    public String execute(TaskList taskList, UI ui, Storage storage) {
+        return ui.displayList(taskList.getTaskList());
     }
 
     @Override

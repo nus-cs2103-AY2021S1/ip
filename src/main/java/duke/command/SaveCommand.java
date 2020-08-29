@@ -6,8 +6,8 @@ import duke.main.UI;
 
 public class SaveCommand implements Command {
     @Override
-    public void execute(TaskList taskList, UI ui, Storage storage) {
-        storage.saveData(ui, taskList);
+    public String execute(TaskList taskList, UI ui, Storage storage) {
+        return storage.saveData(ui, taskList);
     }
 
     @Override

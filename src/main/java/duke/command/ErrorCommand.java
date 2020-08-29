@@ -12,8 +12,8 @@ public class ErrorCommand implements Command {
     }
 
     @Override
-    public void execute(TaskList taskList, UI ui, Storage storage) {
-        ui.showError(error.getMessage());
+    public String execute(TaskList taskList, UI ui, Storage storage) {
+        return ui.showError(error.getMessage());
     }
 
     @Override

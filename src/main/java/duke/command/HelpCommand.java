@@ -7,8 +7,8 @@ import duke.main.UI;
 public class HelpCommand implements Command {
 
     @Override
-    public void execute(TaskList taskList, UI ui, Storage storage) {
-        ui.showHelp();
+    public String execute(TaskList taskList, UI ui, Storage storage) {
+        return ui.showHelp();
     }
 
     @Override

@@ -15,12 +15,12 @@ public class AddTaskCommand implements Command {
     }
 
     @Override
-    public void execute(TaskList taskList, UI ui, Storage storage) throws DukeError {
+    public String execute(TaskList taskList, UI ui, Storage storage) throws DukeError {
         if (task.getDescription().contains("|") || task.getDate().contains("|")) {
             throw new IllegalCharacterError();
         }
         taskList.addTask(task);
-        ui.addTask(task.toString(), taskList.numberOfTasks());
+        return ui.addTask(task.toString(), taskList.numberOfTasks());
     }
 
     @Override

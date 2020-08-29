@@ -15,13 +15,13 @@ public class DeleteTaskCommand implements Command {
     }
 
     @Override
-    public void execute(TaskList taskList, UI ui, Storage storage) throws DukeError {
+    public String execute(TaskList taskList, UI ui, Storage storage) throws DukeError {
         if (n < 1 || n > taskList.numberOfTasks()) {
             throw new InvalidRangeError();
         }
         Task task = taskList.getTaskList().get(n - 1);
         taskList.deleteTask(task);
-        ui.deleteTask(task.toString(), taskList.numberOfTasks());
+        return ui.deleteTask(task.toString(), taskList.numberOfTasks());
     }
 
     @Override

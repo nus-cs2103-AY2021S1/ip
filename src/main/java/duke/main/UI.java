@@ -18,10 +18,6 @@ public class UI {
         sc = new Scanner(System.in);
     }
 
-    private void showLine() {
-        System.out.println("____________________________________________________________");
-    }
-
     /**
      * Reads in the user's input.
      *
@@ -31,24 +27,18 @@ public class UI {
         return sc.nextLine().trim();
     }
 
-    private void showCmd(String s) {
-        showLine();
-        System.out.println(s);
-        showLine();
-    }
-
     /**
      * Displays the welcome message to the user.
      */
-    public void showWelcome() {
-        showCmd(" Hello! I'm Duke!");
+    public static String showWelcome() {
+        return " Hello! I'm Duke!";
     }
 
     /**
      * Displays the goodbye message to the user.
      */
-    public void showGoodbye() {
-        showCmd(" Bye. Hope to see you again soon!");
+    public String showGoodbye() {
+        return (" Bye. Hope to see you again soon!\nYou can now safely close the app!");
     }
 
     /**
@@ -56,8 +46,8 @@ public class UI {
      *
      * @param error The error that was thrown
      */
-    public void showError(String error) {
-        showCmd(error);
+    public String showError(String error) {
+        return error;
     }
 
     /**
@@ -66,9 +56,9 @@ public class UI {
      * @param task The task that was added
      * @param n    The size of the TaskList after the task was added
      */
-    public void addTask(String task, int n) {
+    public String addTask(String task, int n) {
         String s = " Got it. I've added this task:\n   " + task + "\n";
-        showCmd(s.concat(displayListSize(n)));
+        return s.concat(displayListSize(n));
     }
 
     /**
@@ -76,9 +66,9 @@ public class UI {
      *
      * @param taskList The TaskList of the user
      */
-    public void displayList(ArrayList<Task> taskList) {
+    public String displayList(ArrayList<Task> taskList) {
         if (taskList.isEmpty()) {
-            showCmd("You have no tasks left! Good job my child!");
+            return "You have no tasks left! Good job my child!";
         } else {
             String s = "";
             if (taskList.size() == 1) {
@@ -90,7 +80,7 @@ public class UI {
                 s = s.concat(" " + (i + 1) + "." + taskList.get(i) + "\n");
             }
             s = s.substring(0, s.length() - 1);
-            showCmd(s);
+            return s;
         }
     }
 
@@ -99,9 +89,9 @@ public class UI {
      *
      * @param taskList The TaskList containing tasks with the matching keyword
      */
-    public void displayMatchingList(ArrayList<Task> taskList) {
+    public String displayMatchingList(ArrayList<Task> taskList) {
         if (taskList.isEmpty()) {
-            showCmd(" I've found no matching tasks with the keyword! T_T\n Try again!");
+            return "I've found no matching tasks with the keyword! T_T\nTry again!";
         } else {
             String s = "";
             if (taskList.size() == 1) {
@@ -113,7 +103,7 @@ public class UI {
                 s = s.concat(" " + (i + 1) + "." + taskList.get(i) + "\n");
             }
             s = s.substring(0, s.length() - 1);
-            showCmd(s);
+            return s;
         }
     }
 
@@ -125,26 +115,26 @@ public class UI {
      */
     public String displayListSize(int n) {
         if (n == 0) {
-            return (" Great job son! You're left with no more tasks!");
+            return ("Great job! You're left with no more tasks!");
         } else if (n == 1) {
-            return String.format(" Now you have %d task in the list.", n);
+            return String.format("Now you have %d task in the list.", n);
         } else {
-            return String.format(" Now you have %d tasks in the list.", n);
+            return String.format("Now you have %d tasks in the list.", n);
         }
     }
 
     /**
      * Displays the start saving message to the user.
      */
-    public void startSaving() {
-        System.out.println("Saving...");
+    public String startSaving() {
+        return "Saving...";
     }
 
     /**
      * Displays the save was successful message to the user.
      */
-    public void saveSuccess() {
-        System.out.println("Saved successfully!");
+    public String saveSuccess() {
+        return "Saved successfully!";
     }
 
     /**
@@ -166,8 +156,8 @@ public class UI {
      *
      * @param task The task that was successfully completed
      */
-    public void doneTask(String task) {
-        showCmd(String.format("Great job! I'll mark '%s' as done for you. ^^", task));
+    public String doneTask(String task) {
+        return String.format("Great job! I'll mark '%s' as done for you. ^^", task);
     }
 
     /**
@@ -176,17 +166,17 @@ public class UI {
      * @param task The task that was successfully deleted
      * @param n    The number of remaining tasks
      */
-    public void deleteTask(String task, int n) {
-        String s = " Noted. I've removed this task:\n  " + task + "\n";
-        showCmd(s.concat(displayListSize(n)));
+    public String deleteTask(String task, int n) {
+        String s = "Noted. I've removed this task:\n  " + task + "\n";
+        return s.concat(displayListSize(n));
     }
 
     /**
      * Displays the help message to the user.
      */
-    public void showHelp() {
-        showCmd("Here are the list of commands you can use:\n"
-                + "help\nlist\nsave\nbye\ntodo 'TASK'\ndeadline 'TASK' /by 'dd/MM/yyyy HH:mm'\n"
-                + "event 'TASK' /at 'dd/MM/yyyy HH:mm'\ndone 'n'\ndelete 'n'");
+    public String showHelp() {
+        return ("Here are the list of commands you can use:\n"
+                + "help, list, save, bye, todo 'TASK', deadline 'TASK' /by 'dd/MM/yyyy HH:mm', "
+                + "event 'TASK' /at 'dd/MM/yyyy HH:mm', done 'n', delete 'n'");
     }
 }
