@@ -41,6 +41,6 @@ checkstyle {
     toolVersion = '8.23'
 }
 
-run{
+run {
     standardInput = System.in
 }

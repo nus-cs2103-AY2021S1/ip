@@ -19,7 +19,8 @@ public class Storage {
      * @return List of stored Tasks
      * @throws Exception FIle not found
      */
-    public List<Task> loadData() throws Exception {
+    @SuppressWarnings("unchecked")
+    public List<Task> loadData() throws Exception  {
         List<Task> list = new ArrayList<>();
         try{
             FileInputStream readData = new FileInputStream(filePath);
