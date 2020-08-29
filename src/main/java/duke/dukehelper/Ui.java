@@ -1,8 +1,13 @@
 package duke.dukehelper;
 
-import java.util.ArrayList;
 import duke.task.Task;
+
+import java.util.ArrayList;
 public class Ui {
+    /**
+     * Prints formatted dialog
+     * @param content
+     */
     public static void printDialog(String content) {
         System.out.println("    ----------------------------------------");
         System.out.println("    " + content + "\n");
