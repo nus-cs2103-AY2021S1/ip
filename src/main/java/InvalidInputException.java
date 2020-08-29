@@ -1,3 +1,6 @@
+/**
+ * Represents an exception where there is an invalid input.
+ */
 public class InvalidInputException extends DukeException {
 
     public InvalidInputException(String message) {

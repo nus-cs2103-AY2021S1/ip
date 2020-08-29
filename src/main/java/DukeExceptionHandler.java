@@ -1,5 +1,13 @@
+/**
+ * Handles exceptions in Duke.
+ */
 public class DukeExceptionHandler {
 
+    /**
+     * Handles exceptions in Duke.
+     * @param text user input.
+     * @return error message.
+     */
     public static String handleException(String text) {
 
         if (text.equals("todo") || text.equals("deadline") || text.equals("event")) {

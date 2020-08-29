@@ -1,3 +1,6 @@
+/**
+ * Represents an exception where the input has no description.
+ */
 public class NoDescriptionException extends DukeException {
 
     public NoDescriptionException(String message) {

@@ -4,8 +4,17 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Handles txt files created.
+ */
 public class FileHandler {
 
+    /**
+     * Writes tasks to the .txt file to store the data.
+     * @param file .txt file.
+     * @param tm task manager that contains the list of tasks.
+     * @throws IOException
+     */
     public static void writeToFile(String file, TaskManager tm) throws IOException {
 
         FileWriter writer = new FileWriter(file);
@@ -28,42 +37,12 @@ public class FileHandler {
         writer.close();
     }
 
-    public static String getInputLine(Task task) {
-        if (task instanceof Todo) {
-            return "T ## " + (task.getDone() ? 1 : 0) + " ## " + task.getDescription() + "\n";
-        } else if (task instanceof Deadline) {
-            return "D ## " + (task.getDone() ? 1 : 0) + " ## " + ((Deadline) task).getDescription() + " ## " + "\n";
-        } else {
-            return "E ## " + (task.getDone() ? 1 : 0) + " ## " + ((Event) task).getDescription() + " ## " + ((Event) task).getTime() + "\n";
-        }
-    }
-
-    public static void replaceDone(String filePath, String replaceWith) {
-        try {
-            // input the file content to the StringBuffer "input"
-            BufferedReader file = new BufferedReader(new FileReader(filePath));
-            StringBuffer inputBuffer = new StringBuffer();
-            String line;
-
-            while ((line = file.readLine()) != null) {
-                inputBuffer.append(line);
-                inputBuffer.append('\n');
-            }
-            file.close();
-            String inputStr = inputBuffer.toString();
-
-            inputStr = inputStr.replace("## 0 ## " + replaceWith, "## 1 ## " + replaceWith);
-
-            // write the new string with the replaced line OVER the same file
-            FileOutputStream fileOut = new FileOutputStream(filePath);
-            fileOut.write(inputStr.getBytes());
-            fileOut.close();
-
-        } catch (Exception e) {
-            System.out.println("Problem reading file.");
-        }
-    }
-
+    /**
+     * Reads data stored in the file.
+     * @param fileName file to be read.
+     * @return list of lines read in the file.
+     * @throws IOException
+     */
     public static List<String> readSavedFile(String fileName) throws IOException {
         File file = new File(fileName);
         if (file.exists()) {

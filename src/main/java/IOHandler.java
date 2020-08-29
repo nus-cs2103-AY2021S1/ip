@@ -4,6 +4,9 @@ import java.time.LocalTime;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Handles the input by the user and generates the respective output.
+ */
 public class IOHandler {
 
     Scanner sc = new Scanner(System.in);
@@ -11,6 +14,9 @@ public class IOHandler {
 
     TaskManager taskManager = new TaskManager();
 
+    /**
+     * Handles the input by the user and prints the respective output.
+     */
     public void handleIO() {
 
         try {
@@ -48,9 +54,6 @@ public class IOHandler {
 
                         System.out.println("Nice! I've marked this task as done:\n"
                                 + taskManager.getTask(taskNum - 1));
-
-                        Task doneTask = taskManager.getTask(taskNum - 1);
-                        FileHandler.replaceDone(fileName, doneTask.getDescription());
 
                     } else if (text.contains("delete")) {
                         String[] textArray = text.split(" ", 2);

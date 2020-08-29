@@ -1,5 +1,8 @@
 import java.util.ArrayList;
 
+/**
+ * Manages a list of tasks for the user.
+ */
 public class TaskManager {
 
     public final ArrayList<Task> taskList;
@@ -12,6 +15,10 @@ public class TaskManager {
         return taskList.get(taskNum);
     }
 
+    /**
+     * Adds a task to the list.
+     * @param task task to be added.
+     */
     public void addTask(Task task) {
         taskList.add(task);
     }
@@ -28,6 +35,10 @@ public class TaskManager {
         return taskList;
     }
 
+    /**
+     * Removes a task from the list.
+     * @param taskNum number of tasks in the list.
+     */
     public void removeTask(int taskNum) {
         taskList.remove(taskNum - 1);
     }
