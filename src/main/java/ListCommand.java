@@ -3,8 +3,8 @@
  * Handles "list" command.
  */
 public class ListCommand extends Command {
-    private final String TAB = "  ";
-    private final String LIST_TITLE = TAB + " Here are the tasks in your list:";
+    private static final String TAB = "  ";
+    private static final String LIST_TITLE = TAB + " Here are the tasks in your list:";
 
     /**
      * Executes the command.
