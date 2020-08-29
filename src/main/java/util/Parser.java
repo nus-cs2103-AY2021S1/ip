@@ -100,6 +100,8 @@ public class Parser {
             this.validateCommandDesc(value, Action.FIND);
             resultantCommand = new FindCommand(value);
             break;
+        case HELP:
+            resultantCommand = new HelpCommand();
         }
 
         return resultantCommand;
@@ -116,6 +118,7 @@ public class Parser {
         EVENT,
         DONE,
         DELETE,
-        FIND
+        FIND,
+        HELP
     }
 }
