@@ -13,8 +13,8 @@ public class Ui {
      */
     public static void showWelcomeMessage() {
         System.out.println("Hi I'm Duke, your personal task-tracker bot!");
-        System.out.println("You can add todos, deadlines, or events to my " +
-                                   "list.");
+        System.out.println("You can add todos, deadlines, or events to my "
+                                   + "list.");
     }
 
     static void showGoodbyeMessage() {

@@ -1,8 +1,8 @@
 package com.siawsam.duke;
 
 import java.io.FileOutputStream;
-import java.io.ObjectOutputStream;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 
 /**
  * Represents a class to handle write-to-disk operations.

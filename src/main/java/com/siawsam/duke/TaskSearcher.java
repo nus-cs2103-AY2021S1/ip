@@ -3,7 +3,7 @@ package com.siawsam.duke;
 import java.util.List;
 
 public class TaskSearcher {
-    TaskList taskList;
+    private final TaskList taskList;
     
     public TaskSearcher(TaskList taskList) {
         this.taskList = taskList;
