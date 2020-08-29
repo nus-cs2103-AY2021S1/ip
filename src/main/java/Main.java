@@ -32,7 +32,7 @@ public class Main extends Application {
     private TextField userInput;
     private Stage stage;
     private final Image userImg = new Image(this.getClass().getResourceAsStream("./images/user.png"));
-    private final Image dukeImg = new Image(this.getClass().getResourceAsStream("./images/bot.png"));
+    private final Image dukeImg = new Image(this.getClass().getResourceAsStream("./images/bot1.jpg"));
 
     private Duke duke;
 
