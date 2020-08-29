@@ -1,13 +1,13 @@
-T ~ 1 ~ bathe
 D ~ 1 ~ water  ~ 2020-08-23
-T ~ 0 ~ drink water
+T ~ 1 ~ drink water
 E ~ 0 ~ asdas  ~ Oct 10 2020
 E ~ 1 ~ ssss  ~ Aug 8 2020
 D ~ 0 ~ sssaasd  ~ Oct 10 2020
 E ~ 0 ~ ip4  ~ Sep 1 2020
-T ~ 1 ~ bathe
 D ~ 1 ~ water  ~ 2020-08-23
 E ~ 1 ~ asdas  ~ Oct 10 2020
 E ~ 1 ~ ssss  ~ Aug 8 2020
-D ~ 0 ~ sssaasd  ~ Oct 10 2020
+D ~ 1 ~ sssaasd  ~ Oct 10 2020
 E ~ 0 ~ ip4  ~ Sep 1 2020
+E ~ 0 ~ asdasd  ~ Oct 10 2020
+E ~ 0 ~ cox  ~ Aug 30 2020
