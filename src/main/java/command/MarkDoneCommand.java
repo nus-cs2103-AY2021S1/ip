@@ -5,11 +5,11 @@ import java.util.Arrays;
 
 import duke.Storage;
 import duke.TaskList;
-import ui.Ui;
 import exception.DukeException;
 import exception.EmptyDoneException;
 import exception.NoSuchTaskException;
 import task.Task;
+import ui.Ui;
 
 /**
  * Represents a <code>Command</code> whose task is marking a <code>Task</code> as done.

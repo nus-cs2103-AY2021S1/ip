@@ -8,11 +8,11 @@ import java.util.Arrays;
 
 import duke.Storage;
 import duke.TaskList;
-import ui.Ui;
 import exception.DukeException;
 import exception.EmptyDeadlineException;
 import task.Deadline;
 import task.Task;
+import ui.Ui;
 
 /**
  * Represents a <code>Command</code> whose task is adding a <code>Deadline</code> to the <code>TaskList</code>.

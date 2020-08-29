@@ -5,11 +5,11 @@ import java.util.Arrays;
 
 import duke.Storage;
 import duke.TaskList;
-import ui.Ui;
 import exception.DukeException;
 import exception.EmptyDeleteException;
 import exception.NoSuchTaskException;
 import task.Task;
+import ui.Ui;
 
 /**
  * Represents a <code>Command</code> whose task is deleting a <code>Task</code> from the <code>TaskList</code>.

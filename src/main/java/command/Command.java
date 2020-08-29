@@ -2,8 +2,8 @@ package command;
 
 import duke.Storage;
 import duke.TaskList;
-import ui.Ui;
 import exception.DukeException;
+import ui.Ui;
 
 /**
  * Represents a Command. A <code>Command</code> object contains an array of <code>String</code> which is an array

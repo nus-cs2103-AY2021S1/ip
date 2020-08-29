@@ -4,9 +4,9 @@ import java.util.Arrays;
 
 import duke.Storage;
 import duke.TaskList;
-import ui.Ui;
 import exception.DukeException;
 import exception.UnknownCommandException;
+import ui.Ui;
 
 /**
  * Represents a <code>Command</code> whose task is throwing an exception stating that the command is not defined.

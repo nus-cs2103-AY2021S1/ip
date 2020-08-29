@@ -47,7 +47,7 @@ public class TaskListTest {
             assertEquals(tasks.get(10), null);
             fail();
         } catch (NoSuchTaskException e) {
-            assertEquals("☹ OOPS!!! The index provided is not within the task list", e.toString());
+            assertEquals("Oh no! The index provided is not within the task list", e.toString());
         }
     }
 
@@ -91,7 +91,7 @@ public class TaskListTest {
             assertEquals(tasks.remove(0), toDo);
             assertEquals(tasks.size(), 2);
         } catch (NoSuchTaskException e) {
-            assertEquals("☹ OOPS!!! The index provided is not within the task list", e.toString());
+            assertEquals("Oh no! The index provided is not within the task list", e.toString());
         }
     }
 
@@ -110,7 +110,7 @@ public class TaskListTest {
             assertEquals(tasks.size(), 2);
             fail();
         } catch (NoSuchTaskException e) {
-            assertEquals("☹ OOPS!!! The index provided is not within the task list", e.toString());
+            assertEquals("Oh no! The index provided is not within the task list", e.toString());
         }
     }
 }

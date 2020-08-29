@@ -4,10 +4,10 @@ import java.util.Arrays;
 
 import duke.Storage;
 import duke.TaskList;
-import ui.Ui;
 import exception.DukeException;
 import exception.EmptyFindException;
 import task.Task;
+import ui.Ui;
 
 /**
  * Represents a <code>Command</code> whose task is finding the tasks containing the keyword
@@ -37,7 +37,7 @@ public class FindCommand extends Command {
             String toPrint = "";
             for (Task task : tasks.all()) {
                 if (task.toString().contains(keyword)) {
-                    toPrint += ui.say(index + ". " + task.toString());
+                    toPrint += ui.say(index + ". " + task.toString() + "\n");
                     index++;
                 }
             }

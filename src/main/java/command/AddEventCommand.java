@@ -8,11 +8,11 @@ import java.util.Arrays;
 
 import duke.Storage;
 import duke.TaskList;
-import ui.Ui;
 import exception.DukeException;
 import exception.EmptyEventException;
 import task.Event;
 import task.Task;
+import ui.Ui;
 
 /**
  * Represents a <code>Command</code> whose task is adding an <code>Event</code> to the <code>TaskList</code>.
