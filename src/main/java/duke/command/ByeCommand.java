@@ -7,7 +7,7 @@ import duke.task.TaskList;
 /**
  * Command when user exits Duke program.
  */
-public class ByeCommand extends Command{
+public class ByeCommand extends Command {
     /**
      * Prints out goodbye message to console before shutting down Duke.
      *
@@ -17,7 +17,7 @@ public class ByeCommand extends Command{
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
-       ui.print("Bye. Hope to see you again soon!");
+        ui.print("Bye. Hope to see you again soon!");
     }
 
     /**

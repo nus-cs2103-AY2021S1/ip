@@ -1,10 +1,11 @@
 package duke;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 import duke.command.Command;
 import duke.task.TaskList;
 
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
 /**
  * Personal Assistant that keeps track of a user's list of tasks.
@@ -38,7 +39,7 @@ public class Duke {
      *
      * @param args user input from the command line.
      */
-    public static void main(String[] args){
+    public static void main(String[] args) {
         new Duke().run();
     }
 

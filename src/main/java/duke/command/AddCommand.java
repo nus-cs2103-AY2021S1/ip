@@ -3,12 +3,11 @@ package duke.command;
 import duke.DukeException;
 import duke.Storage;
 import duke.Ui;
-
+import duke.task.Deadline;
+import duke.task.Event;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.task.ToDo;
-import duke.task.Event;
-import duke.task.Deadline;
 
 /**
  * Command when user adds a new task, which can be a <code>ToDo</code>, <code>Event</code>, or <code>Deadline</code>.
@@ -62,7 +61,7 @@ public class AddCommand extends Command {
         return userInput.length() <= 4;
     }
 
-    private void addToDoTask(String userInput ,TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    private void addToDoTask(String userInput, TaskList taskList, Ui ui, Storage storage) throws DukeException {
         if (checkForEmptyDescription(userInput)) {
             throw new DukeException("The description of a todo cannot be empty.");
         }
@@ -72,14 +71,14 @@ public class AddCommand extends Command {
         addItem(newToDoItem, taskList, ui, storage); // Add to taskList
     }
 
-    private void addEventTask(String userInput ,TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    private void addEventTask(String userInput, TaskList taskList, Ui ui, Storage storage) throws DukeException {
         String taskDescription = userInput.substring(6, userInput.indexOf("/at") - 1);
         String eventDateTime = userInput.substring(userInput.indexOf("/at") + 4);
-        Event newEventItem  = new Event(taskDescription, eventDateTime);
+        Event newEventItem = new Event(taskDescription, eventDateTime);
         addItem(newEventItem, taskList, ui, storage);
     }
 
-    private void addDeadlineTask(String userInput ,TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    private void addDeadlineTask(String userInput, TaskList taskList, Ui ui, Storage storage) throws DukeException {
         String taskDescription = userInput.substring(9, userInput.indexOf("/by") - 1);
         String deadlineBy = userInput.substring(userInput.indexOf("/by") + 4);
         Deadline newDeadlineItem = new Deadline(taskDescription, deadlineBy);

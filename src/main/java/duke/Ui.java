@@ -29,8 +29,8 @@ public class Ui {
      * Prints a welcome message that is shown to the user.
      */
     public void showWelcome() {
-        System.out.println("Hello from duke.Duke\nHow may I be of service " +
-                "to you this fine day sire?");
+        System.out.println("Hello from duke.Duke\nHow may I be of service "
+                + "to you this fine day sire?");
     }
 
     /**

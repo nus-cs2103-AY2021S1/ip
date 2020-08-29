@@ -37,9 +37,9 @@ public class DoneCommand extends Command {
             int index = Integer.valueOf(taskIndex) - 1; // taskIndex started from 1
             Task completedTask = taskList.get(index);
             completedTask.markAsDone();
-            storage.updateTask(completedTask,index);
-            ui.print("Nice! I've marked this task as done:\n" +
-                    completedTask.toString());
+            storage.updateTask(completedTask, index);
+            ui.print("Nice! I've marked this task as done:\n"
+                    + completedTask.toString());
 
 
         } catch (IndexOutOfBoundsException | NumberFormatException e) {

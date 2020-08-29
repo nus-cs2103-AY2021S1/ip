@@ -1,11 +1,11 @@
 package duke.task;
 
-import duke.DukeException;
-
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+import duke.DukeException;
 
 /**
  * Type of Task which involves a starting date and time.
@@ -73,7 +73,7 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "E | " + super.toString() + " | " + this.atDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")) +
-                ", " + this.atTime.format(DateTimeFormatter.ISO_LOCAL_TIME);
+        return "E | " + super.toString() + " | " + this.atDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
+                + ", " + this.atTime.format(DateTimeFormatter.ISO_LOCAL_TIME);
     }
 }

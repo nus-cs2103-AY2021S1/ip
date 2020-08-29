@@ -3,13 +3,12 @@ package duke.command;
 import duke.DukeException;
 import duke.Storage;
 import duke.Ui;
-
 import duke.task.TaskList;
 
 /**
  * Command given to Duke to search for Tasks within Duke's TaskList.
  */
-public class FindCommand extends Command{
+public class FindCommand extends Command {
     private final String userInput;
 
     /**

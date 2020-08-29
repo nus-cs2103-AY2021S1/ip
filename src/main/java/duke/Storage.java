@@ -1,21 +1,20 @@
 package duke;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
+
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
 
-import java.io.IOException;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.List;
-import java.util.ArrayList;
-
-import java.io.File;
-import java.nio.file.Files;
-import java.io.FileWriter;
-
-import java.nio.file.Path;
 
 
 /**
@@ -41,7 +40,7 @@ public class Storage {
                 Files.createFile(pathToStorage);
             }
             // Get stored info if any
-            this.allTasks= Files.readAllLines(pathToStorage);
+            this.allTasks = Files.readAllLines(pathToStorage);
         } catch (IOException e) {
             System.out.println("Can't read file " + e.getMessage());
         }
@@ -86,9 +85,9 @@ public class Storage {
     }
 
     private String formatTaskDateTime(String dateTime) {
-        String[] date_times = dateTime.split(",");
-        String date = date_times[0]; // MMM DD YYYY
-        String time = date_times[1]; // HH:MM:SS
+        String[] dateTimes = dateTime.split(",");
+        String date = dateTimes[0]; // MMM DD YYYY
+        String time = dateTimes[1]; // HH:MM:SS
 
         DateTimeFormatter format = DateTimeFormatter.ofPattern("MMM d yyyy");
         LocalDate newDate = LocalDate.parse(date, format);

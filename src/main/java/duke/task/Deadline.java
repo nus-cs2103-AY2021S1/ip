@@ -1,11 +1,11 @@
 package duke.task;
 
-import duke.DukeException;
-
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+import duke.DukeException;
 
 /**
  * Type of Task which includes a end date and end time.
@@ -71,8 +71,8 @@ public class Deadline extends Task {
      * @return <code>String</code> representing the formatted Deadline Task details.
      */
     @Override
-    public String toString(){
-        return "D | " + super.toString() + " | " + this.byDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")) +
-                ", " + this.byTime.format(DateTimeFormatter.ISO_LOCAL_TIME);
+    public String toString() {
+        return "D | " + super.toString() + " | " + this.byDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
+                + ", " + this.byTime.format(DateTimeFormatter.ISO_LOCAL_TIME);
     }
 }
