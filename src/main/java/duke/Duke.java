@@ -11,14 +11,17 @@ public class Duke {
     private TaskList tasks;
     /** duke.Ui to interact with user */
     private final Ui ui;
+    /** Parser to understand user commands. */
+    private final Parser parser;
 
     /**
-     * Constructor for duke.DeleteCommand.
+     * Constructor for Duke.
      * @param filepath Contains filepath of local data storage.
      */
     public Duke(String filepath) {
         ui = new Ui();
         storage = new Storage(filepath);
+        parser = new Parser();
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
@@ -26,30 +29,20 @@ public class Duke {
             ui.showLoadingError();
             tasks = new TaskList();
         }
-        ui.greet();
+        System.out.println(ui.greet());
     }
 
     /**
-     * Initialises the program.
-     * @param args Unused.
+     * Listens for user input and responds.
      */
-    public static void main(String[] args) {
-        new Duke("data/duke.txt").run();
-    }
-
-    /**
-     * Runs event loop to listen for user input, until the user invokes a duke.ByeCommand.
-     */
-    private void run() {
-        while (true) {
-            Parser parser = new Parser();
-            String input = ui.readCommand();
-            try {
-                Command cmd = parser.parse(input);
-                cmd.execute(tasks, ui, storage);
-            } catch (DukeException e) {
-                System.out.println(e.getMessage());
-            }
+    public String getResponse(String input) {
+        String response = "";
+        try {
+            Command cmd = parser.parse(input);
+            response = cmd.execute(tasks, ui, storage);
+        } catch (DukeException e) {
+            response = e.getMessage();
         }
+        return response;
     }
 }

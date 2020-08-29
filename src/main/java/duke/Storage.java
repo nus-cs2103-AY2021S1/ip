@@ -37,15 +37,16 @@ public class Storage {
      * Saves the input list of tasks into a local store.
      * @param tasks List of tasks to be saved.
      */
-    public void save(TaskList tasks) {
+    public String save(TaskList tasks) {
         try {
             FileWriter fw = new FileWriter(filepath);
             for (Task t : tasks.getTasks()) {
                 fw.write(t.format() + "\n");
             }
             fw.close();
+            return ">> Tasks saved!";
         } catch (IOException e) {
-            System.out.println(">> Oh no! Your tasks could not be saved!");
+            return ">> Oh no! Your tasks could not be saved!";
         }
     }
 

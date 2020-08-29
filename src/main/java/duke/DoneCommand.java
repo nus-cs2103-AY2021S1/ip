@@ -23,13 +23,12 @@ public class DoneCommand extends Command {
      * @param ui For user interaction.
      * @param storage To update the completed task.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         if (instructions.length < 2) {
-            ui.incompleteInstructionError();
+            return ui.incompleteInstructionError();
         }
         int index = Integer.parseInt(instructions[1]) - 1;
-        tasks.completeTask(index);
-        storage.save(tasks);
+        return tasks.completeTask(index) + "\n" + storage.save(tasks);
     }
 }
 

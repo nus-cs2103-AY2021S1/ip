@@ -23,16 +23,15 @@ public class DeleteCommand extends Command {
      * @param ui For user interaction.
      * @param storage To remove the deleted task.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         if (instructions.length < 2) {
-            ui.incompleteInstructionError();
+            return ui.incompleteInstructionError();
         }
         int index = Integer.parseInt(instructions[1]) - 1;
         if (index >= tasks.getSize()) {
-            ui.deleteError();
+            return ui.deleteError();
         } else {
-            tasks.deleteTask(index);
-            storage.save(tasks);
+            return tasks.deleteTask(index) + "\n" + storage.save(tasks);
         }
     }
 }

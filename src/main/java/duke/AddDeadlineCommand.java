@@ -25,18 +25,16 @@ public class AddDeadlineCommand extends Command {
      * @param ui For user interaction.
      * @param storage To store the added task.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         String[] deadlineInfo = instructions[1].split(" /by ", 2); // [name, deadline]
         if (deadlineInfo.length < 2) {
-            ui.conditionError(Constants.TaskTypes.DEADLINE);
-            return;
+            return ui.conditionError(Constants.TaskTypes.DEADLINE);
         }
         try {
             Task deadline = new Deadline(deadlineInfo[0], LocalDate.parse(deadlineInfo[1]));
-            tasks.addTask(deadline);
-            storage.save(tasks);
+            return tasks.addTask(deadline) + "\n" + storage.save(tasks);
         } catch (DateTimeParseException e) {
-            ui.invalidDateError();
+            return ui.invalidDateError();
         }
     }
 }

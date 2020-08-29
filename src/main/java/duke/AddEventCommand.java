@@ -25,18 +25,16 @@ public class AddEventCommand extends Command {
      * @param ui For user interaction.
      * @param storage To store the added task.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         String[] eventInfo = instructions[1].split(" /at ", 2); // [name, date]
         if (eventInfo.length < 2) {
-            ui.conditionError(Constants.TaskTypes.EVENT);
-            return;
+            return ui.conditionError(Constants.TaskTypes.EVENT);
         }
         try {
             Task event = new Event(eventInfo[0], LocalDate.parse(eventInfo[1]));
-            tasks.addTask(event);
-            storage.save(tasks);
+            return tasks.addTask(event) + "\n" + storage.save(tasks);
         } catch (DateTimeParseException e) {
-            ui.invalidDateError();
+            return ui.invalidDateError();
         }
     }
 }

@@ -45,20 +45,20 @@ public class TaskList {
      * Adds an input task to the list of tasks.
      * @param task duke.Task to be added.
      */
-    public void addTask(Task task) {
+    public String addTask(Task task) {
         tasks.add(task);
-        System.out.println(">> Added the task:\n>> " + task + "\n>> You now have " + tasks.size() + " tasks to do!");
+        return ">> Added the task:\n>> " + task + "\n>> You now have " + tasks.size() + " tasks to do!";
     }
 
     /**
      * Deletes a task to the list of tasks.
      * @param idx Index of task to be deleted.
      */
-    public void deleteTask(int idx) {
+    public String deleteTask(int idx) {
         Task task = tasks.get(idx);
         tasks.remove(idx);
-        System.out.println(">> I've eradicated the task:\n>> " + task + "\n>> You now have "
-                + tasks.size() + " tasks to do!");
+        return ">> I've eradicated the task:\n>> " + task + "\n>> You now have "
+                + tasks.size() + " tasks to do!";
     }
 
 
@@ -66,8 +66,8 @@ public class TaskList {
      * Marks a task in the list of tasks as completed.
      * @param idx Index of task to be completed.
      */
-    public void completeTask(int idx) {
+    public String completeTask(int idx) {
         tasks.get(idx).complete();
-        System.out.println(">> Yay! The following task is marked as done:\n>> " + tasks.get(idx));
+        return ">> Yay! The following task is marked as done:\n>> " + tasks.get(idx);
     }
 }

@@ -18,8 +18,8 @@ public class ByeCommand extends Command {
      * @param ui For user interaction.
      * @param storage To store the added task.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.bye();
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         System.exit(0);
+        return ui.bye();
     }
 }

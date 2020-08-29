@@ -18,11 +18,14 @@ public class ListCommand extends Command {
      * @param ui For user interaction.
      * @param storage Unused.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        StringBuilder response = new StringBuilder();
+        response.append(">> Your tasks:");
         int i = 1;
         for (Task task : tasks.getTasks()) {
-            System.out.println(">> " + i++ + ". " + task);
+            response.append("\n>> " + i++ + ". " + task);
         }
+        return response.toString();
     }
 }
 
