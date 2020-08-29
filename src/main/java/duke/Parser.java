@@ -22,6 +22,10 @@ public class Parser {
         this.input = input;
     }
 
+    public void setScanner(Scanner scanner) {
+        this.input = scanner;
+    }
+
     /**
      * Takes in the command entered by the user and execute it accordingly.
      *
