@@ -7,14 +7,22 @@ import java.util.List;
  */
 public class TaskList {
 
-    public static List<Task> taskLists;
-    public static List<Task> tempLists = new ArrayList<>();
+    private static List<Task> taskLists;
+    private static List<Task> tempLists = new ArrayList<>();
 
     /**
      * Constructor of tasklist.
      */
     public TaskList() {
         taskLists = new ArrayList<>();
+    }
+
+    public static List<Task> getTaskLists() {
+        return taskLists;
+    }
+
+    public static List<Task> getTempLists() {
+        return tempLists;
     }
 
     /**
@@ -26,6 +34,11 @@ public class TaskList {
         taskLists.get(index).markAsDone();
     }
 
+    /**
+     * Searches the keyword in tempLists and returns each item in tempLists if exist.
+     *
+     * @param description keyword.
+     */
     public static void searchKeyword(String description) {
         tempLists.clear();
         for (Task task : taskLists) {

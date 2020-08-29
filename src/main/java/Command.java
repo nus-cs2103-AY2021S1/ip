@@ -29,7 +29,7 @@ public class Command {
         String[] command = Parser.splitCommandAndDescription(toEcho);
         if (toEcho.length() == 4) {
             throw new DukeEmptyMessageException("Done");
-        } else if (Integer.parseInt(command[1]) > TaskList.taskLists.size()) {
+        } else if (Integer.parseInt(command[1]) > TaskList.getTaskLists().size()) {
             throw new DukeInvalidMessageException();
         } else {
             int index = Integer.parseInt(command[1]) - 1;
@@ -49,7 +49,7 @@ public class Command {
             throw new DukeEmptyMessageException("Todo");
         }
         Todo todo = new Todo(command[1]);
-        TaskList.taskLists.add(todo);
+        TaskList.getTaskLists().add(todo);
         ui.printTask(todo);
     }
 
@@ -114,8 +114,8 @@ public class Command {
         String[] command = Parser.splitCommandAndDescription(toEcho);
         if (toEcho.length() == 6) {
             throw new DukeEmptyMessageException("Delete");
-        } else if (Integer.parseInt(command[1]) > TaskList.taskLists.size() ||
-                Integer.parseInt(command[1]) < 0) {
+        } else if (Integer.parseInt(command[1]) > TaskList.getTaskLists().size()
+                || Integer.parseInt(command[1]) < 0) {
             throw new DukeInvalidMessageException();
         }
         int indexToDelete = Integer.parseInt(command[1]) - 1;

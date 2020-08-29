@@ -1,9 +1,8 @@
+import java.io.IOException;
+import java.time.format.DateTimeParseException;
+
 import exceptions.DukeException;
 import exceptions.DukeUnknownCommandException;
-
-import java.io.IOException;
-
-import java.time.format.DateTimeParseException;
 
 /**
  * Duke Class is the main class that will run based on different commands
