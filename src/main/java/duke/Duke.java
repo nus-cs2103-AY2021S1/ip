@@ -5,11 +5,23 @@ import java.io.IOException;
 import java.util.Scanner;
 import exception.*;
 
+/**
+ * Represents Duke, a chat bot that allows tasks management (add, delete, mark as done).
+ * @author Lucia Tirta Gunawan
+ * @author A0200718N
+ */
 public class Duke {
+    /** Storage to load and save tasks. */
     private Storage storage;
+    /** List of tasks saved in Duke. */
     private TaskList taskList;
+    /** User interface to display output from Duke. */
     private Ui ui;
 
+    /**
+     * Constructor for Duke.
+     * @param filePath the file path of the saved tasks.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -20,6 +32,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs Duke.
+     */
     public void run() {
         Scanner sc = new Scanner(System.in);
         ui.printWelcome();

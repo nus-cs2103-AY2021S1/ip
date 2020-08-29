@@ -5,6 +5,9 @@ import exception.EmptyTimeException;
 import exception.InvalidCommandException;
 import exception.InvalidIndexException;
 
+/**
+ * A parser for user's input command.
+ */
 public class Parser {
 	private static void checkCommands (String input) throws InvalidCommandException {
 		try {
@@ -14,12 +17,24 @@ public class Parser {
 		}
 	}
 
+	/**
+	 * Parses the user input to the available command in Duke.
+	 * @param fullCommand the command from the user input.
+	 * @return the Commands enum correspond to the user input.
+	 * @throws InvalidCommandException if the command user input not available in Duke's command.
+	 */
 	public static Commands parse(String fullCommand) throws InvalidCommandException {
 		String[] inputs = fullCommand.split("\\s+", 2);
 		checkCommands(inputs[0]);
 		return Commands.valueOf(inputs[0].trim().toUpperCase());
 	}
 
+	/**
+	 * Checks whether the index from user input is within the range of current tasks.
+	 * @param inputs the user input.
+	 * @param numberOfTask number of current tasks.
+	 * @throws InvalidIndexException if the user inputs an invalid index (out of bound) or wrong data type.
+	 */
 	public static void checkIndex (String[] inputs, int numberOfTask) throws InvalidIndexException {
 		String usage = (numberOfTask > 1 ? "\nInput a number between 1 - " + numberOfTask : "");
 		if(inputs.length < 2 || inputs[1].trim().equals("")) {
@@ -35,6 +50,12 @@ public class Parser {
 		}
 	}
 
+	/**
+	 * Checks whether the user input contains task description.
+	 * @param task the user task input.
+	 * @param type the type of the task.
+	 * @throws EmptyDescriptionException if the user input does not contain task description.
+	 */
 	public static void checkDescription (String[] task, Commands type) throws EmptyDescriptionException {
 		String usage = "Please input using the format: " +
 			(type.equals(Commands.TODO) ? "todo <todo_desc>" :
@@ -45,6 +66,12 @@ public class Parser {
 		}
 	}
 
+	/**
+	 * Checks whether the user input contains the time for the task.
+	 * @param desc the user input description.
+	 * @param type the type of the task.
+	 * @throws EmptyTimeException if the user input does not contain the time for the task.
+	 */
 	public static void checkTime (String[] desc, Commands type) throws EmptyTimeException {
 		String usage = "Please input using the format: " +
 			(type.equals(Commands.TODO) ? "todo <todo_desc>" :
