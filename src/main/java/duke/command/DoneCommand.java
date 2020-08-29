@@ -1,17 +1,18 @@
 package duke.command;
 
-import duke.task.Task;
 import duke.Storage;
+import duke.task.Task;
 import duke.tool.TaskList;
-import duke.ui.Ui;
 
 /**
  * Represents a command to mark element with certain index as done.
  */
 public class DoneCommand implements Command {
+    private static final String DONE_MESSAGE = "Nice! I've marked this task as done: \n";
 
     /** Index of task that will be marked as done */
     private final int targetIndex;
+    private Task doneTask;
 
     /**
      * Creates a command to mark certain task as done.
@@ -23,15 +24,19 @@ public class DoneCommand implements Command {
     }
 
     @Override
-    public void excute(TaskList tasks, Ui ui, Storage storage) {
-        Task markedTask = tasks.markDone(targetIndex);
-        ui.showDoneGreet(markedTask);
+    public void execute(TaskList tasks, Storage storage) {
+        doneTask = tasks.markDone(targetIndex);
         storage.save(tasks);
     }
 
     @Override
     public boolean isExit() {
         return false;
+    }
+
+    @Override
+    public String getResponse() {
+        return DoneCommand.DONE_MESSAGE + "\n\t" + doneTask.toString();
     }
 
 }

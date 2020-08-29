@@ -1,10 +1,9 @@
 package duke.command;
 
+import duke.Storage;
 import duke.exception.DukeException;
 import duke.task.Task;
-import duke.Storage;
 import duke.tool.TaskList;
-import duke.ui.Ui;
 
 /**
  * Represents an command that add task to list.
@@ -15,6 +14,7 @@ public class AddCommand implements Command {
 
     /** Target task that will be added to the list */
     private final Task targetTask;
+    private int currentListSize;
 
     /**
      * Creates a command to add task.
@@ -26,15 +26,22 @@ public class AddCommand implements Command {
     }
 
     @Override
-    public void excute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public void execute(TaskList tasks, Storage storage) throws DukeException {
         tasks.add(targetTask);
-        ui.showAddedNotification(targetTask,tasks);
         storage.save(tasks);
+        currentListSize = tasks.getSize();
     }
 
     @Override
     public boolean isExit() {
         return false;
+    }
+
+    @Override
+    public String getResponse() {
+        return "Got it. I've added this task: " + "\n\t\t" +
+                targetTask.toString() + "\n\t" +
+                String.format("Now you have %d tasks in the list.\n", currentListSize);
     }
 
 }

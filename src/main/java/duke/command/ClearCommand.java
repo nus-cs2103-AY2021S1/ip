@@ -1,24 +1,32 @@
 package duke.command;
 
 import duke.Storage;
+import duke.exception.DukeException;
 import duke.tool.TaskList;
-import duke.ui.Ui;
 
 /**
  * Represent the command that to clear all data.
  */
 public class ClearCommand implements Command{
+    /**
+     * Message after clear command is executed
+     */
+    private static final String CLEAR_MESSAGE = "I have cleared all tasks!";
 
     @Override
-    public void excute(TaskList tasks, Ui ui, Storage storage) {
+    public void execute(TaskList tasks, Storage storage) throws DukeException {
         tasks.clear();
-        ui.showClearMessage();
         storage.save(tasks);
     }
 
     @Override
     public boolean isExit() {
         return false;
+    }
+
+    @Override
+    public String getResponse() {
+        return ClearCommand.CLEAR_MESSAGE + "\n\t";
     }
 
 }
