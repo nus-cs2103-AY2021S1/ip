@@ -1,4 +1,3 @@
-
 import parser.Parser;
 import storage.Storage;
 import tasklist.TaskList;
@@ -7,7 +6,8 @@ import ui.Ui;
 import java.io.IOException;
 
 public class Duke {
-    public final static String FILEPATH = System.getProperty("user.dir") + "/duke.txt";
+    private final String FILEPATH = System.getProperty("user.dir")
+                                        + "/duke.txt";
     private final Storage storage;
     private final TaskList tasks;
     private final Parser parser;
