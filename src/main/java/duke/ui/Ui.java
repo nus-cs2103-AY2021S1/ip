@@ -1,4 +1,4 @@
-package duke;
+package duke.ui;
 
 import duke.task.NumberedTask;
 
@@ -14,14 +14,13 @@ public class Ui {
         this.scanner = new Scanner(System.in);
     }
 
-    public String printMessage(String msg) {
-        System.out.println(LINE_SEPARATOR);
-        System.out.println(msg);
-        System.out.println(LINE_SEPARATOR);
+    public String formatMessage(String msg) {
+        String result = String.format("%s \n %s \n &s", LINE_SEPARATOR, msg, LINE_SEPARATOR);
+        return result;
     }
 
-    public void greet() {
-        printMessage("Hi! I'm Duke :-) What can I do for you?");
+    public String greet() {
+        return formatMessage("Hi! I'm Duke :-) What can I do for you?");
     }
 
     public String readCommand() {

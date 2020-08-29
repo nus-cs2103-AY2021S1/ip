@@ -1,6 +1,7 @@
 package duke.command;
 
-import duke.Ui;
+import duke.ui.Response;
+import duke.ui.Ui;
 import duke.Storage;
 import duke.exceptions.DukeException;
 import duke.exceptions.WrongDateFormatException;
@@ -33,12 +34,14 @@ public class DeadlineCommand extends Command {
      * @throws DukeException if invalid date String provided
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws WrongDateFormatException {
+    public Response execute(TaskList tasks, Ui ui, Storage storage) throws WrongDateFormatException {
         LocalDateTime deadlineDateTime = DateParser.parseString(dateStr);
         Deadline deadline = new Deadline(description, deadlineDateTime);
         tasks.addTask(deadline);
-        ui.printMessage(String.format("Okay, I've added the following deadline: \n %s", deadline.toString()));
+        String message = ui.formatMessage(String.format("Okay, I've added the following deadline: \n %s",
+                deadline.toString()));
         storage.updateTasks(tasks.getListOfTasks());
+        return new Response(false, message);
     }
 
     @Override

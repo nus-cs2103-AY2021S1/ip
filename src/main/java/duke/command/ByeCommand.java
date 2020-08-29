@@ -2,7 +2,8 @@ package duke.command;
 
 import duke.Storage;
 import duke.task.TaskList;
-import duke.Ui;
+import duke.ui.Ui;
+import duke.ui.Response;
 
 /**
  * Command for users to exit the app. Created by using "bye".
@@ -17,8 +18,8 @@ public class ByeCommand extends Command {
      * @param storage storage to retrieve and store tasks entered by user
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.printMessage("Bye! See you again soon! :-)");
+    public Response execute(TaskList tasks, Ui ui, Storage storage) {
+        return new Response(true, ui.formatMessage("Bye! See you again soon! :-)"));
     }
 
     /**

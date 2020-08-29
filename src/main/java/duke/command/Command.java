@@ -2,7 +2,8 @@ package duke.command;
 
 import duke.Storage;
 import duke.task.TaskList;
-import duke.Ui;
+import duke.ui.Ui;
+import duke.ui.Response;
 import duke.exceptions.DukeException;
 
 /**
@@ -18,7 +19,7 @@ public abstract class Command {
      * @param storage storage to retrieve and store tasks entered by user
      * @throws DukeException if there is a problem when executing the action due to invalid user input
      */
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
+    public abstract Response execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
 
     /**
      * Whether the Command causes the app to exit.

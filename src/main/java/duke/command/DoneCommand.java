@@ -3,7 +3,8 @@ package duke.command;
 import duke.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
-import duke.Ui;
+import duke.ui.Response;
+import duke.ui.Ui;
 import duke.exceptions.NoSuchTaskException;
 
 /**
@@ -26,10 +27,12 @@ public class DoneCommand extends Command {
      * @throws NoSuchTaskException if invalid taskNumber was provided
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws NoSuchTaskException {
+    public Response execute(TaskList tasks, Ui ui, Storage storage) throws NoSuchTaskException {
         Task completedTask = tasks.completeTask(taskNumber);
-        ui.printMessage(String.format("Great! I've marked the following task as done: \n %s", completedTask));
+        String message = ui.formatMessage(String.format("Great! I've marked the following task as done: \n %s",
+                completedTask));
         storage.updateTasks(tasks.getListOfTasks());
+        return new Response(false, message);
     }
 
     @Override

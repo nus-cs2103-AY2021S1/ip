@@ -4,6 +4,8 @@ import duke.command.Command;
 import duke.exceptions.DukeException;
 import duke.parser.Parser;
 import duke.task.TaskList;
+import duke.ui.Response;
+import duke.ui.Ui;
 
 import java.io.IOException;
 
@@ -35,37 +37,16 @@ public class Duke {
         return new Duke(store, taskList, ui, parser);
     }
 
-    public void start() {
-        ui = new Ui();
-        ui.greet();
-        boolean isRunning = true;
-        while (isRunning) {
-            try {
-                store.initializeStorage();
-                taskList = new TaskList(store.getTasks());
-                Command c = parser.parse(ui.readCommand());
-                c.execute(taskList, ui, store);
-                isRunning = !c.isExit();
-            } catch (IOException e) {
-                System.out.println("Error connecting to storage, actions made will not be saved");
-            } catch (DukeException e) {
-                ui.printMessage(e.getFriendlyMessage());
-            }
-        }
-        ui.stopReading();
-    }
-
-    public String getResponse(String input) {
+    public Response getResponse(String input) {
         try {
-            Command c = parser.parse(ui.readCommand());
-            c.execute(taskList, ui, store);
+            Command c = parser.parse(input);
+            Response r = c.execute(taskList, ui, store);
+            return r;
         } catch (DukeException e) {
-            return e.getFriendlyMessage();
+            return new Response(false, e.getFriendlyMessage());
         }
     }
 
     public static void main(String[] args) {
-        Duke duke = new Duke();
-        duke.start();
     }
 }

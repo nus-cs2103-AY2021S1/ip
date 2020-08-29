@@ -2,7 +2,8 @@ package duke.command;
 
 import duke.Storage;
 import duke.task.TaskList;
-import duke.Ui;
+import duke.ui.Response;
+import duke.ui.Ui;
 
 /**
  * Command for user to view all Tasks created. Created by using "list"
@@ -17,9 +18,10 @@ public class ListCommand extends Command {
      * @param storage storage to retrieve and store tasks entered by user
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public Response execute(TaskList tasks, Ui ui, Storage storage) {
         String tasksToString = tasks.tasksToString();
-        ui.printMessage(tasksToString);
+        System.out.println(tasksToString);
+        return new Response(false, ui.formatMessage(tasksToString));
     }
 
     @Override

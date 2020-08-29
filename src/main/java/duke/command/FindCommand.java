@@ -2,7 +2,8 @@ package duke.command;
 
 import duke.task.NumberedTask;
 import duke.task.TaskList;
-import duke.Ui;
+import duke.ui.Response;
+import duke.ui.Ui;
 import duke.Storage;
 
 import java.util.List;
@@ -19,10 +20,10 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public Response execute(TaskList tasks, Ui ui, Storage storage) {
         List<NumberedTask> foundTasks = tasks.getMatchingTasks(searchString);
         String message = ui.foundTasksToString(foundTasks);
-        ui.printMessage(message);
+        return new Response(false, ui.formatMessage(message));
     }
 
 }

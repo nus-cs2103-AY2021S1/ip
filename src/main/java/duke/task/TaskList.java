@@ -79,6 +79,7 @@ public class TaskList {
      * @return a String that displays all Tasks in the TaskList
      */
     public String tasksToString() {
+        System.out.println(taskList.size());
         StringBuilder tasks = new StringBuilder("Here are the tasks in your list: \n");
         for (int i = 0; i < taskList.size(); i++) {
             tasks.append(String.format("%d. %s", i + 1, taskList.get(i)));

@@ -1,10 +1,10 @@
 package duke.command;
 
 import duke.Storage;
-import duke.exceptions.DukeException;
 import duke.task.TaskList;
 import duke.task.Todo;
-import duke.Ui;
+import duke.ui.Response;
+import duke.ui.Ui;
 
 /**
  * Command to create a Todo Task. Created by using "todo description"
@@ -26,11 +26,13 @@ public class TodoCommand extends Command {
      * @param storage storage to retrieve and store tasks entered by user
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public Response execute(TaskList tasks, Ui ui, Storage storage) {
         Todo todo = new Todo(description);
         tasks.addTask(todo);
-        ui.printMessage(String.format("Okay! I've added the following task: \n %s", todo.toString()));
+        String message = ui.formatMessage(String.format("Okay! I've added the following task: \n %s",
+                todo.toString()));
         storage.updateTasks(tasks.getListOfTasks());
+        return new Response(false, message);
     }
 
     @Override
