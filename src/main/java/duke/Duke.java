@@ -24,9 +24,9 @@ public class Duke {
         }
     }
 
-    Ui ui;
-    TaskList tasks;
-    Storage storage;
+    private Ui ui;
+    private TaskList tasks;
+    private Storage storage;
 
     /**
      * Initializes a Duke object.
