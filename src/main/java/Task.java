@@ -31,7 +31,7 @@ public class Task {
 
     @Override
     public String toString() {
-        String symbol = Character.toString(done ? 10003 : 2717);
+        String symbol = Character.toString(done ? 10003 : 88);
 
         return String.format("[%s] %s", symbol, label);
     }

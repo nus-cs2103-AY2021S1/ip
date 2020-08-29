@@ -34,7 +34,7 @@ public class Parser {
         case ("todo"):
             // Only has the word todo
             if (inputArr.length == 1) throw new EmptyTodoException();
-            newTaskDetails = new String[]{"T", inputArr[1].trim()};
+            newTaskDetails = new String[]{"T", command.substring(5).trim()};
             break;
         case ("deadline"):
             String deadlineContent = command.substring(9);

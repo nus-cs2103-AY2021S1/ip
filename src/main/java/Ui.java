@@ -67,7 +67,7 @@ public class Ui {
             break;
         }
         int counter = 1;
-        System.out.println(prompt);
+        System.out.println(indentWord(prompt));
         for (String description : tasksDescription) {
             System.out.print(indentWord(counter + ". "));
             System.out.println(description);

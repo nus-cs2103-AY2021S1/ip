@@ -1,9 +1,15 @@
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+
 public class Duke {
     private Ui ui;
+    private TaskList tasks;
+    private Storage storage;
 
     Duke(String filepath) {
-        Storage storage = new Storage(filepath);
-        this.ui = new Ui(new TaskList(storage.load()), storage);
+        this.storage = new Storage(filepath);
+        this.tasks = new TaskList(storage.load());
+        this.ui = new Ui(tasks, storage);
     }
 
     /**
@@ -14,7 +20,23 @@ public class Duke {
     }
 
     public String getResponse(String input) {
-        return "Test";
+        ByteArrayOutputStream formattedOutput = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(formattedOutput));
+
+        try {
+            Command command = Parser.getCommand(input);
+            command.execute(tasks);
+            storage.saveToFile(tasks.getTasksInfo());
+        } catch (DukeException exception) {
+            System.out.println(exception.getMessage());
+        }
+        String reply = formattedOutput.toString();
+//        while (reply.contains(Ui.demarcation)) {
+//            reply = reply.replace(Ui.demarcation, "");
+//        }
+        reply = reply.trim();
+        System.setOut(System.out);
+        return reply;
     }
 
     public static void main(String[] args) throws DukeException {
