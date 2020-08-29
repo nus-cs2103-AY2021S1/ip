@@ -65,8 +65,7 @@ public class Event extends Task {
     public static Event decode(String string) throws EmptyDescriptionException {
         String[] split = string.split(" \\| ");
 
-        String taskDescription = "event " + split[2] +
-                " /at " + split[3];
+        String taskDescription = "event " + split[2] + " /at " + split[3];
 
         Event event = new Event(taskDescription);
 

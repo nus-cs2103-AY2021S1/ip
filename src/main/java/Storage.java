@@ -16,13 +16,12 @@ public class Storage {
         this.filePath = filePath;
     }
 
-    public ArrayList<Task> load() throws EmptyDescriptionException {
+    public ArrayList<Task> load() throws DukeException {
         createFile();
         return decodeTxtFile();
     }
 
     public void save(TaskList taskList) {
-
         try {
             ArrayList<String> encodedTasks = new ArrayList<>();
             FileWriter fw = new FileWriter(this.filePath);
@@ -55,7 +54,7 @@ public class Storage {
         }
     }
 
-    public ArrayList<Task> decodeTxtFile() throws EmptyDescriptionException {
+    public ArrayList<Task> decodeTxtFile() throws DukeException {
         File f = new File(this.filePath);
         ArrayList<Task> decodedTasks = new ArrayList<>();
 
@@ -82,7 +81,7 @@ public class Storage {
                 decodedTasks.add(task);
             }
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            throw new DukeException();
         }
         return decodedTasks;
     }

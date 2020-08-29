@@ -19,8 +19,6 @@ public class Deadline extends Task {
             this.task = taskDescription.substring(space + 1, slash);
             this.deadline = taskDescription.substring(slash + 4);
             this.done = false;
-
-            System.out.println(this.deadline);
         }
     }
 
@@ -56,8 +54,7 @@ public class Deadline extends Task {
     public static Deadline decode(String string) throws EmptyDescriptionException {
         String[] split = string.split(" \\| ");
 
-        String taskDescription = "deadline " + split[2] +
-                " /by " + split[3];
+        String taskDescription = "deadline " + split[2] + " /by " + split[3];
 
         Deadline deadline = new Deadline(taskDescription);
 

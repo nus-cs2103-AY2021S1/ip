@@ -1,12 +1,13 @@
-public class DeadlineCommand extends Command {
+public class DeadlineCommand extends TaskCommand {
     DeadlineCommand(String fullCommand) {
         super(fullCommand);
-        this.isExit = false;
     }
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws EmptyDescriptionException {
-        System.out.println(tasks.add(new Deadline(fullCommand)));
+        Deadline deadline = new Deadline(fullCommand);
+        tasks.add(deadline);
         storage.save(tasks);
+        System.out.println(addedTaskMessage(deadline, tasks));
     }
 }

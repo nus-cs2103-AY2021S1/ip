@@ -1,4 +1,3 @@
-import java.util.Iterator;
 import java.util.ArrayList;
 
 /**
@@ -6,7 +5,11 @@ import java.util.ArrayList;
  */
 
 public class TaskList {
-    private ArrayList<Task> tasks = new ArrayList<>();
+    private ArrayList<Task> tasks;
+
+    public TaskList() {
+        this.tasks = new ArrayList<>();
+    }
 
     public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
@@ -19,85 +22,48 @@ public class TaskList {
         return sb.toString();
     }
 
-    public String returnList() {
-        if (this.tasks.size() == 0) {
-            return "there are no tasks in the list";
-        } else {
-            StringBuilder sb = new StringBuilder();
-            sb.append("here are the tasks in your list:\n");
-            Iterator i = this.tasks.iterator();
-
-            int counter = 1;
-            sb.append(counter + ". ").append(i.next());
-            while (i.hasNext()) {
-                counter++;
-                sb.append("\n").append(counter + ". ").append(i.next());
-            }
-            return sb.toString();
-        }
-    }
-
-    public String done(int taskNumber) {
-        Task task = this.tasks.get(taskNumber - 1);
+    public Task done(int taskNumber) throws InvalidIndexException {
+        Task task = getTaskNumber(taskNumber - 1);
         task.markAsDone();
-        StringBuilder sb = new StringBuilder();
-        sb.append("yay! i have marked this task as done: \n    ")
-                .append(task)
-                .append("\n" + this.numberOfTasks());
-
-        return sb.toString();
+        return task;
     }
 
-    public String delete(int taskNumber) {
-        Task task = this.tasks.remove(taskNumber - 1);
-
-        StringBuilder sb = new StringBuilder();
-        sb.append("sure thing. i have removed this task: \n    ")
-                .append(task).append("\n")
-                .append(this.numberOfTasks());
-
-        return sb.toString();
+    public Task delete(int taskNumber) throws InvalidIndexException {
+        Task task = getTaskNumber(taskNumber - 1);
+        tasks.remove(taskNumber - 1);
+        return task;
     }
 
-    public String add(Task task) {
+    public void add(Task task) {
         this.tasks.add(task);
-
-        StringBuilder sb = new StringBuilder();
-        sb.append("got it! i have added the following task to your list:\n    ")
-                .append(task)
-                .append("\n" + this.numberOfTasks());
-
-        return sb.toString();
     }
 
-    public String find(String item) {
-        StringBuilder sb = new StringBuilder();
-
-        ArrayList<Task> matching = new ArrayList<Task>();
+    public ArrayList<Task> getMatchingTasks(String item) {
+        ArrayList<Task> matchingTasks = new ArrayList<Task>();
 
         for (Task task : tasks) {
             if (task.toString().contains(item)) {
-                matching.add(task);
+                matchingTasks.add(task);
             }
         }
 
-        if (matching.size() == 0) {
-            sb.append("there are no tasks matching the given search");
-        } else {
-            sb.append("here are the matching tasks in your list:\n");
-
-            Iterator i = matching.iterator();
-            int counter = 1;
-            sb.append(counter + ". ").append(i.next());
-            while (i.hasNext()) {
-                counter++;
-                sb.append("\n").append(counter + ". ").append(i.next());
-            }
-        }
-        return sb.toString();
+        return matchingTasks;
     }
 
     public ArrayList<Task> getTaskList() {
         return this.tasks;
+    }
+
+    private Task getTaskNumber(int taskNumber) throws InvalidIndexException {
+        try {
+            return this.tasks.get(taskNumber);
+        } catch (IndexOutOfBoundsException e) {
+            StringBuilder sb = new StringBuilder();
+            sb.append("sorry! the task number: ")
+                    .append(taskNumber + 1)
+                    .append(" does not exist in your list");
+
+            throw new InvalidIndexException(sb.toString());
+        }
     }
 }

@@ -19,12 +19,8 @@ public class Ui {
     }
 
     public String readCommand() {
-        String input;
-        Scanner scan = new Scanner(System.in);
-
-        input = scan.nextLine();
-
-        return input;
+        Scanner scanner = new Scanner(System.in);
+        return scanner.nextLine();
     }
 
     public void showError(String errorMessage) {
