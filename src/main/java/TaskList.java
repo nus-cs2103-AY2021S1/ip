@@ -10,7 +10,7 @@ public class TaskList implements Iterable<Task> {
 
     public ArrayList<Task> listOfItems;
 
-    public ArrayList<Task> ListOfItems;
+
     public ArrayList<Task> ListOfKeyWordItems = new ArrayList<>();
 
     public String line = "____________________________________________________________";
@@ -76,7 +76,7 @@ public class TaskList implements Iterable<Task> {
 
     public void findTask(String Keyword){
         ListOfKeyWordItems.clear();
-       for (Task item : ListOfItems) {
+       for (Task item : listOfItems) {
 if (item.toString().indexOf(Keyword) != -1) {
     ListOfKeyWordItems.add(item);
 } else {
