@@ -4,7 +4,7 @@ import duke.exception.InvalidTaskIndexException;
 import duke.exception.TaskDoneException;
 import duke.logic.StorageManager;
 import duke.logic.TaskList;
-import duke.logic.UIManager;
+import duke.logic.UiManager;
 
 /**
  * Represents a Done Command by the user.
@@ -32,7 +32,7 @@ public class DoneCommand extends Command {
      * @throws TaskDoneException         If Task is completed.
      */
     @Override
-    public void execute(TaskList taskList, UIManager uiManager, StorageManager storageManager)
+    public void execute(TaskList taskList, UiManager uiManager, StorageManager storageManager)
             throws InvalidTaskIndexException, TaskDoneException {
         if (index < 0 || index >= taskList.getSize()) {
             throw new InvalidTaskIndexException();

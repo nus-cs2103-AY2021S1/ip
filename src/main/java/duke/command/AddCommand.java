@@ -2,7 +2,7 @@ package duke.command;
 
 import duke.logic.StorageManager;
 import duke.logic.TaskList;
-import duke.logic.UIManager;
+import duke.logic.UiManager;
 import duke.task.DukeTask;
 
 /**
@@ -26,7 +26,7 @@ public class AddCommand extends Command {
      * @param storageManager <code>StorageManager</code> object to saving/loading user data.
      */
     @Override
-    public void execute(TaskList taskList, UIManager uiManager, StorageManager storageManager) {
+    public void execute(TaskList taskList, UiManager uiManager, StorageManager storageManager) {
         taskList.addToList(task);
         uiManager.printAddTask(task, taskList.getSize());
     }

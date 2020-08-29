@@ -1,7 +1,16 @@
 package duke.logic;
 
+import java.time.LocalDateTime;
+
 import duke.CommonMethod;
-import duke.command.*;
+import duke.command.AddCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.ExitCommand;
+import duke.command.FindCommand;
+import duke.command.HelpCommand;
+import duke.command.ListCommand;
 import duke.exception.InvalidInstructionFormatException;
 import duke.exception.InvalidInstructionLengthException;
 import duke.exception.MissingFieldException;
@@ -11,7 +20,6 @@ import duke.task.DukeTask;
 import duke.task.EventTask;
 import duke.task.TodoTask;
 
-import java.time.LocalDateTime;
 
 /**
  * Represents a Parser of the user Commands.
@@ -32,7 +40,6 @@ public class UserInputParser {
     private static final String BY_INDICATOR = "/by";
     private static final String EVENT = "event";
     private static final String AT_INDICATOR = "/at";
-    private static final String UNKNOWN = "unknown";
     private static final String DELETE = "delete";
     private static final String FIND = "find";
 
@@ -76,6 +83,7 @@ public class UserInputParser {
             if (InputValidator.validateSizeOne(instrLen, true)) {
                 return new ListCommand();
             }
+            break;
         case TODO:
             if (InputValidator.validateSizeOne(instrLen, false)) {
                 TodoTask todotask = new TodoTask(CommonMethod.mergeArray(instructionArray, 1, instrLen));
@@ -111,6 +119,8 @@ public class UserInputParser {
                 return new FindCommand(instructionArray[1]);
             }
             break;
+        default:
+            throw new UnknownInstructionException();
         }
         throw new UnknownInstructionException();
     }
@@ -158,7 +168,12 @@ public class UserInputParser {
             throws InvalidInstructionFormatException {
         // INPUT DATE FORMAT: DD/MM/YYYY
         // INPUT TIME FORMAT: hh/mm/ss
-        int year, month, day, hour, minute, second;
+        int year;
+        int month;
+        int day;
+        int hour;
+        int minute;
+        int second;
 
         String[] dateArray = date.split("/");
         String[] timeArray = time.split("/");

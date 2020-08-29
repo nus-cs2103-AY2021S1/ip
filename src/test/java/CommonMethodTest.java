@@ -1,7 +1,10 @@
-import duke.CommonMethod;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import duke.CommonMethod;
 
 public class CommonMethodTest {
 
@@ -14,7 +17,7 @@ public class CommonMethodTest {
     @Test
     public void testIsLeapYear() {
         assertFalse(CommonMethod.isLeapYear(1981)); // not a multiple of 4
-        assertTrue(CommonMethod.isLeapYear(2012));// multiple of 4, not divisible by 100, leap
+        assertTrue(CommonMethod.isLeapYear(2012)); // multiple of 4, not divisible by 100, leap
         assertFalse(CommonMethod.isLeapYear(1700)); // multiple of 100, not divisible by 400, not leap
         assertTrue(CommonMethod.isLeapYear(1600)); // multiple of 100, divisible by 400, leap
     }

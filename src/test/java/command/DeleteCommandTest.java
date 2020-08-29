@@ -1,18 +1,19 @@
 package command;
-
-import duke.command.DeleteCommand;
-import duke.exception.InvalidTaskIndexException;
-import duke.logic.UIManager;
-import duke.task.DukeTask;
-import org.junit.jupiter.api.Test;
-import stub.DukeTaskStub;
-import stub.TaskListStub;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import org.junit.jupiter.api.Test;
+
+import duke.command.DeleteCommand;
+import duke.exception.InvalidTaskIndexException;
+import duke.logic.UiManager;
+import duke.task.DukeTask;
+import stub.DukeTaskStub;
+import stub.TaskListStub;
+
 
 public class DeleteCommandTest {
     @Test
@@ -26,12 +27,12 @@ public class DeleteCommandTest {
         TaskListStub taskListStub = new TaskListStub();
         taskListStub.addToList(stub);
 
-        deleteCommand.execute(taskListStub, new UIManager(), null);
+        deleteCommand.execute(taskListStub, new UiManager(), null);
 
-        String expected = "Alright! I'll delete this task!\n" +
-                "Take note that this is irreversible!\n" +
-                "[✘] Testing DukeTaskStub\n" +
-                "You now have 0 tasks\n";
+        String expected = "Alright! I'll delete this task!\n"
+                + "Take note that this is irreversible!\n"
+                + "[✘] Testing DukeTaskStub\n"
+                + "You now have 0 tasks\n";
 
         assertEquals(expected, outContent.toString());
     }
@@ -44,11 +45,11 @@ public class DeleteCommandTest {
         TaskListStub taskListStub = new TaskListStub();
         taskListStub.addToList(stub);
 
-        assertThrows(InvalidTaskIndexException.class,
-                () -> deleteCommandLessThanZero.execute(taskListStub, new UIManager(), null));
+        assertThrows(InvalidTaskIndexException.class, (
+        ) -> deleteCommandLessThanZero.execute(taskListStub, new UiManager(), null));
 
         DeleteCommand deleteCommandLargerThanIndex = new DeleteCommand(100);
-        assertThrows(InvalidTaskIndexException.class,
-                () -> deleteCommandLargerThanIndex.execute(taskListStub, new UIManager(), null));
+        assertThrows(InvalidTaskIndexException.class, (
+        ) -> deleteCommandLargerThanIndex.execute(taskListStub, new UiManager(), null));
     }
 }

@@ -1,43 +1,42 @@
 package logic;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import org.junit.jupiter.api.Test;
 
 import duke.exception.InvalidInstructionFormatException;
 import duke.exception.InvalidInstructionLengthException;
 import duke.exception.MissingFieldException;
 import duke.logic.InputValidator;
-import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+
 
 public class InputValidatorTest {
     @Test
     public void testSizeOne() throws InvalidInstructionLengthException {
-        String instrType = "TEST";
 
         assertTrue(InputValidator.validateSizeOne(1, true));
         assertTrue(InputValidator.validateSizeOne(2, false));
-        assertThrows(InvalidInstructionLengthException.class,
-                () -> InputValidator.validateSizeOne(2, true));
-        assertThrows(InvalidInstructionLengthException.class,
-                () -> InputValidator.validateSizeOne(1, false));
+        assertThrows(InvalidInstructionLengthException.class, (
+        ) -> InputValidator.validateSizeOne(2, true));
+        assertThrows(InvalidInstructionLengthException.class, (
+        ) -> InputValidator.validateSizeOne(1, false));
     }
 
     @Test
     public void testSizeTwoAndString() throws InvalidInstructionLengthException, InvalidInstructionFormatException {
-        String instrType = "TEST";
 
         assertTrue(InputValidator.validateSizeTwoAndInt(new String[]{"Hello", "1"}));
-        assertThrows(InvalidInstructionFormatException.class,
-                () -> InputValidator.validateSizeTwoAndInt(new String[]{"Hello", "hello"}));
-        assertThrows(InvalidInstructionLengthException.class,
-                () -> InputValidator.validateSizeTwoAndInt(new String[]{"Hello", "1", "hello"}));
-        assertThrows(InvalidInstructionLengthException.class,
-                () -> InputValidator.validateSizeTwoAndInt(new String[]{"Hello"}));
+        assertThrows(InvalidInstructionFormatException.class, (
+        ) -> InputValidator.validateSizeTwoAndInt(new String[]{"Hello", "hello"}));
+        assertThrows(InvalidInstructionLengthException.class, (
+        ) -> InputValidator.validateSizeTwoAndInt(new String[]{"Hello", "1", "hello"}));
+        assertThrows(InvalidInstructionLengthException.class, (
+        ) -> InputValidator.validateSizeTwoAndInt(new String[]{"Hello"}));
     }
 
     @Test
     public void testDescriptionAndDateTime() throws MissingFieldException, InvalidInstructionFormatException {
-        String instrType = "TEST";
 
         assertTrue(InputValidator
                 .validateDescriptionAndDateTime(new String[]{"type", "desc", "index", "date", "time"}, 2));
@@ -51,7 +50,6 @@ public class InputValidatorTest {
 
     @Test
     public void testDateAndTime() throws InvalidInstructionFormatException {
-        String instrType = "TEST";
 
         assertTrue(InputValidator
                 .validateDateAndTime(new String[]{"type", "desc", "index", "06/06/2020", "12/30/00"}, 2));

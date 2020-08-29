@@ -1,19 +1,21 @@
 package command;
 
-import duke.command.DoneCommand;
-import duke.exception.InvalidTaskIndexException;
-import duke.exception.TaskDoneException;
-import duke.logic.UIManager;
-import duke.task.DukeTask;
-import org.junit.jupiter.api.Test;
-import stub.DukeTaskStub;
-import stub.TaskListStub;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import org.junit.jupiter.api.Test;
+
+import duke.command.DoneCommand;
+import duke.exception.InvalidTaskIndexException;
+import duke.exception.TaskDoneException;
+import duke.logic.UiManager;
+import duke.task.DukeTask;
+import stub.DukeTaskStub;
+import stub.TaskListStub;
+
 
 public class DoneCommandTest {
     @Test
@@ -27,11 +29,11 @@ public class DoneCommandTest {
         TaskListStub taskListStub = new TaskListStub();
         taskListStub.addToList(stub);
 
-        command.execute(taskListStub, new UIManager(), null);
+        command.execute(taskListStub, new UiManager(), null);
 
-        String expected = "Alright! I'll mark this task as done!\n" +
-                "[✓] Testing DukeTaskStub\n" +
-                "You now have 1 task\n";
+        String expected = "Alright! I'll mark this task as done!\n"
+                + "[✓] Testing DukeTaskStub\n"
+                + "You now have 1 task\n";
 
         assertEquals(expected, outContent.toString());
     }
@@ -46,10 +48,10 @@ public class DoneCommandTest {
         DoneCommand lessThanZeroCommand = new DoneCommand(-1);
         DoneCommand moreThanIndexCommand = new DoneCommand(100);
 
-        assertThrows(InvalidTaskIndexException.class,
-                () -> lessThanZeroCommand.execute(taskListStub, new UIManager(), null));
-        assertThrows(InvalidTaskIndexException.class,
-                () -> moreThanIndexCommand.execute(taskListStub, new UIManager(), null));
+        assertThrows(InvalidTaskIndexException.class, (
+        ) -> lessThanZeroCommand.execute(taskListStub, new UiManager(), null));
+        assertThrows(InvalidTaskIndexException.class, (
+        ) -> moreThanIndexCommand.execute(taskListStub, new UiManager(), null));
 
     }
 }

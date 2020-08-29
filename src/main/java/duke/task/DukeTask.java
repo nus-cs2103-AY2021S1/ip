@@ -59,11 +59,15 @@ public abstract class DukeTask {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         DukeTask dukeTask = (DukeTask) o;
-        return isDone == dukeTask.isDone &&
-                description.equals(dukeTask.description);
+        return isDone == dukeTask.isDone
+                && description.equals(dukeTask.description);
     }
 
     @Override

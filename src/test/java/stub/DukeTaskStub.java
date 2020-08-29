@@ -2,6 +2,9 @@ package stub;
 
 import duke.task.DukeTask;
 
+/**
+ * Represents a DukeTask during testing
+ */
 public class DukeTaskStub extends DukeTask {
     public DukeTaskStub() {
         super("Testing DukeTaskStub");
