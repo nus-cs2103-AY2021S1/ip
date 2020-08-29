@@ -1,12 +1,12 @@
 package duke.command;
 
+import java.util.List;
+
 import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 import duke.task.Task;
-
-import java.util.List;
 
 /**
  * Implements the <code>Command</code> interface. <code>FindCommand</code> runs
@@ -27,6 +27,8 @@ public class FindCommand implements Command {
      * @param command String representation of the command to be executed
      * @param storage Storage of this <code>Duke</code>
      * @param ui Ui containing all prints for user interactions
+     * @param taskList List of task for this <code>Duke</code>
+     * @return a string representation of the message informing user if the command has been successfully executed
      * @throws DukeException if system fails to execute search
      */
     public String execute(String command, Storage storage, Ui ui, TaskList taskList) throws DukeException {
@@ -45,7 +47,9 @@ public class FindCommand implements Command {
                 return s.toString();
             }
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException(ui.searchFail());
+            String message = " Please enter a keyword that you wish to search for...\n"
+                    + " Or you can just enter *list* to see all your task! *Woof woof!*\n";
+            throw new DukeException(message);
         }
     }
 

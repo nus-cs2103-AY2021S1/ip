@@ -4,7 +4,6 @@ import duke.command.Command;
 import duke.command.ExitCommand;
 import javafx.animation.PauseTransition;
 import javafx.application.Application;
-
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -13,14 +12,19 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.*;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
 /**
- * The <code>Main</code> class is the application's entry point. It starts the entire application by creating a
- * <code>Duke</code> object and checking for existing tasks.
+ * <code>Main</code> starts the entire application by creating a <code>Duke</code> object and checking for existing
+ * tasks.
  */
 public class Main extends Application {
     private ScrollPane scrollPane;
@@ -33,7 +37,6 @@ public class Main extends Application {
     private Duke duke;
 
     /**
-     * Iteration 1:
      * Creates a label with the specified text and adds it to the dialog container.
      *
      * @param text String containing text to add
@@ -47,7 +50,6 @@ public class Main extends Application {
     }
 
     /**
-     * Iteration 2:
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
@@ -62,19 +64,21 @@ public class Main extends Application {
     }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Generates a response from <code>Duke</code> from user's input.
+     *
+     * @param input command from user
+     * @return string representation of response from <code>Duke</code>
      */
     private String getResponse(String input) {
         try {
             input = input.trim();
             Command c = Parser.parse(input);
-            String s = c.execute(input, duke.storage, Duke.ui, duke.taskList);
+            String s = c.execute(input, duke.storage, Duke.UI, duke.taskList);
 
             if (c instanceof ExitCommand) {
 
                 PauseTransition delay = new PauseTransition(Duration.seconds(3));
-                delay.setOnFinished( event -> stage.close() );
+                delay.setOnFinished(event -> stage.close());
                 delay.play();
 
             }
@@ -85,6 +89,15 @@ public class Main extends Application {
         }
     }
 
+    /**
+     * The main entry point for all JavaFX applications. The start method is called after the init method has
+     * returned, and after the system is ready for the application to begin running.
+     *
+     * @param stage the primary stage for this application, onto which the application scene can be set.
+     *              The primary stage will be embedded in the browser if the application was launched as an applet.
+     *              Applications may create other stages, if needed, but they will not be primary stages and will
+     *              not be embedded in the browser.
+     */
     @Override
     public void start(Stage stage) {
         this.stage = stage;
@@ -141,10 +154,10 @@ public class Main extends Application {
             duke = Duke.createDuke("data/duke.txt");
             if (duke.storage.isNew()) {
                 dialogContainer.getChildren()
-                        .add(DialogBox.getDukeDialog(getDialogLabel(Duke.ui.fileCreationSuccess()),
+                        .add(DialogBox.getDukeDialog(getDialogLabel(Duke.UI.fileCreationSuccess()),
                                 new ImageView(dukeImg)));
             } else {
-                dialogContainer.getChildren().add(DialogBox.getDukeDialog(getDialogLabel(Duke.ui.welcome()),
+                dialogContainer.getChildren().add(DialogBox.getDukeDialog(getDialogLabel(Duke.UI.welcome()),
                         new ImageView(dukeImg)));
             }
         } catch (DukeException ex) {
@@ -160,6 +173,3 @@ public class Main extends Application {
         userInput.setOnAction((event) -> handleUserInput());
     }
 }
-
-
-

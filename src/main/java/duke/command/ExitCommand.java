@@ -15,7 +15,9 @@ public class ExitCommand implements Command {
      *
      * @param command String representation of the command to be executed
      * @param storage Storage of this <code>Duke</code>
+     * @param taskList List of task for this <code>Duke</code>
      * @param ui Ui containing all prints for user interactions
+     * @return a string representation of the message informing user if the command has been successfully executed
      */
     public String execute(String command, Storage storage, Ui ui, TaskList taskList) {
         return " Bye. Hope to see you again soon! *Woof woof*\n";

@@ -1,7 +1,11 @@
 import java.util.List;
 import java.util.Scanner;
 
-import duke.*;
+import duke.DukeException;
+import duke.Parser;
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
 import duke.command.Command;
 import duke.command.ExitCommand;
 import duke.task.Task;
@@ -11,7 +15,7 @@ import duke.task.Task;
  * Each <code>Duke</code> object has its own respective database.
  */
 public class Duke {
-    protected static final Ui ui = new Ui();
+    protected static final Ui UI = new Ui();
     protected final Storage storage;
     protected final TaskList taskList;
 
@@ -31,9 +35,9 @@ public class Duke {
         try {
             Storage storage = Storage.createStorage(filePath);
             if (storage.isNew()) {
-                ui.print(ui.fileCreationSuccess());
+                UI.print(UI.fileCreationSuccess());
             } else {
-                ui.print(ui.welcome());
+                UI.print(UI.welcome());
             }
             List<Task> taskList = storage.load();
             return new Duke(storage, taskList);
@@ -53,14 +57,14 @@ public class Duke {
             try {
                 String commandMessage = input.nextLine();
                 Command c = Parser.parse(commandMessage);
-                String s = c.execute(commandMessage, storage, ui, taskList);
-                ui.print(s);
+                String s = c.execute(commandMessage, storage, UI, taskList);
+                UI.print(s);
                 if (c instanceof ExitCommand) {
                     isExit = true;
                     input.close();
                 }
             } catch (DukeException e) {
-                ui.print(e.getMessage());
+                UI.print(e.getMessage());
             }
         }
     }
@@ -75,7 +79,7 @@ public class Duke {
             Duke duke = createDuke("data/duke.txt");
             duke.run();
         } catch (DukeException e) {
-            ui.print(e.getMessage());
+            UI.print(e.getMessage());
         }
 
     }

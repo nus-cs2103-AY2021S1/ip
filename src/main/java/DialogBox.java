@@ -11,10 +11,16 @@ import javafx.scene.text.Font;
 
 public class DialogBox extends HBox {
 
+    /**
+     * Creates a dialog box showing interaction between user and <code>Duke</code>.
+     *
+     * @param l the text to be displayed
+     * @param iv the image to be displayed
+     */
     public DialogBox(Label l, ImageView iv) {
         l.setFont(Font.font ("Verdana", 11));
         l.setTextFill(Color.web("#596186"));
-        Circle clip = new Circle(50,50,45);
+        Circle clip = new Circle(50, 50, 45);
         iv.setClip(clip);
 
         l.setWrapText(true);
@@ -26,6 +32,9 @@ public class DialogBox extends HBox {
         this.getChildren().addAll(l, iv);
     }
 
+    /**
+     * Flips the content in this <code>DialogBox</code>.
+     */
     private void flip() {
         this.setAlignment(Pos.TOP_LEFT);
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
@@ -33,10 +42,24 @@ public class DialogBox extends HBox {
         this.getChildren().setAll(tmp);
     }
 
+    /**
+     * Returns a <code>DialogBox</code> to be staged.
+     *
+     * @param l the text to be displayed
+     * @param iv the image to be displayed
+     * @return a <code>DialogBox</code> to be staged
+     */
     public static DialogBox getUserDialog(Label l, ImageView iv) {
         return new DialogBox(l, iv);
     }
 
+    /**
+     * Returns a <code>DialogBox</code> to be staged.
+     *
+     * @param l the text to be displayed
+     * @param iv the image to be displayed
+     * @return a <code>DialogBox</code> to be staged
+     */
     public static DialogBox getDukeDialog(Label l, ImageView iv) {
         var db = new DialogBox(l, iv);
         db.flip();

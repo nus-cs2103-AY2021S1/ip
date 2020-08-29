@@ -18,6 +18,8 @@ public class DeleteCommand implements Command {
      * @param command String representation of the command to be executed
      * @param storage Storage of this <code>Duke</code>
      * @param ui Ui containing all prints for user interactions
+     * @param taskList List of task for this <code>Duke</code>
+     * @return a string representation of the message informing user if the command has been successfully executed
      * @throws DukeException if system fails to delete the specified task
      */
     public String execute(String command, Storage storage, Ui ui, TaskList taskList) throws DukeException {
@@ -27,9 +29,11 @@ public class DeleteCommand implements Command {
             storage.save(taskList);
             return " *WOOF* I have removed:\n   " + t + "\n" + ui.displayTotal(taskList.total());
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException(ui.noSuchTask());
+            String message = " *Woof!* This task does not exist!\n";
+            throw new DukeException(message);
         } catch (NumberFormatException e) {
-            throw new DukeException(ui.wrongDeleteInput());
+            String message = " *Woof!* Please enter an integer value! I can't really read...\n";
+            throw new DukeException(message);
         }
     }
 

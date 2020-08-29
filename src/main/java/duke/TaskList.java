@@ -22,6 +22,7 @@ public class TaskList {
      * Adds the specified <code>Task</code> into the list.
      *
      * @param task Task to be added
+     * @return the total number of existing <code>Task</code> objects in the list at this point in time
      */
     public int addTask(Task task) {
         listOfTask.add(task);
@@ -64,6 +65,7 @@ public class TaskList {
      * Marks the specified <code>Task</code> as done.
      *
      * @param index Index of <code>Task</code> in list to be marked as completed
+     * @return a string representation of the message informing user if the command has been successfully executed
      * @throws IndexOutOfBoundsException if invalid index is given
      */
     public String markDone(int index) throws IndexOutOfBoundsException {

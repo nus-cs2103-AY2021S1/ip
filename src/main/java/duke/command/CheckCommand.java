@@ -1,16 +1,16 @@
 package duke.command;
 
-import duke.DukeException;
-import duke.Storage;
-import duke.TaskList;
-import duke.Ui;
-import duke.task.Task;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.format.FormatStyle;
 import java.util.List;
+
+import duke.DukeException;
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
+import duke.task.Task;
 
 /**
  * Implements the <code>Command</code> interface. <code>CheckCommand</code> runs
@@ -26,6 +26,8 @@ public class CheckCommand implements Command {
      * @param command String representation of the command to be executed
      * @param storage Storage of this <code>Duke</code>
      * @param ui Ui containing all prints for user interactions
+     * @param taskList List of task for this <code>Duke</code>
+     * @return a string representation of the message informing user if the command has been successfully executed
      * @throws DukeException if system fails to execute search
      */
     public String execute(String command, Storage storage, Ui ui, TaskList taskList) throws DukeException {
@@ -48,7 +50,8 @@ public class CheckCommand implements Command {
                 return print.toString();
             }
         } catch (DateTimeParseException | ArrayIndexOutOfBoundsException e) {
-            throw new DukeException(ui.inputCorrectCheckDateFormat());
+            String message = " Please enter date in YYYY/MM/DD format! *Woof woof*\n";
+            throw new DukeException(message);
         }
     }
 

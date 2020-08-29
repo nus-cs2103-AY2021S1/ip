@@ -31,6 +31,8 @@ public class Task {
 
     /**
      * Marks this <code>Task</code> as completed.
+     *
+     * @return a string representation of the message informing user if the command has been successfully executed
      */
     public String markAsDone() {
         if (!isDone) {

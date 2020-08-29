@@ -21,8 +21,8 @@ import duke.task.Todo;
  * <code>Task</code> from a file.
  */
 public class Storage {
-    private final File file;
     protected final boolean isNew;
+    private final File file;
 
     Storage(File file, boolean isNew) {
         this.file = file;
@@ -82,6 +82,7 @@ public class Storage {
     /**
      * Loads all <code>Task</code> saved in file into the <code>TaskList</code>, if applicable.
      *
+     * @return returns a list of <code>Task</code> from previous inputs, if applicable
      * @throws DukeException if <code>Task</code> cannot be retrieved due <code>FileNotFound</code> exception
      */
     public List<Task> load() throws DukeException {
@@ -91,7 +92,6 @@ public class Storage {
 
             while (s.hasNextLine()) {
                 String task = s.nextLine();
-//                taskList.checkTask(s.nextLine());
                 Task t;
                 String taskType = task.substring(0, 3);
                 String status = task.substring(3, 6);
@@ -143,6 +143,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Returns true is the file os new, else otherwise.
+     *
+     * @return Returns true is the file os new, else otherwise
+     */
     public boolean isNew() {
         return isNew;
     }

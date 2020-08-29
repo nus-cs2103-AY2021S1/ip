@@ -1,11 +1,11 @@
 package duke.command;
 
+import java.util.List;
+
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 import duke.task.Task;
-
-import java.util.List;
 
 /**
  * Implements the <code>Command</code> interface. <code>ListCommand</code> executes
@@ -19,6 +19,8 @@ public class ListCommand implements Command {
      * @param command String representation of the command to be executed
      * @param storage Storage of this <code>Duke</code>
      * @param ui Ui containing all prints for user interactions
+     * @param taskList List of task for this <code>Duke</code>
+     * @return a string representation of the message informing user if the command has been successfully executed
      */
     public String execute(String command, Storage storage, Ui ui, TaskList taskList) {
         List<Task> listOfTask = taskList.getList();

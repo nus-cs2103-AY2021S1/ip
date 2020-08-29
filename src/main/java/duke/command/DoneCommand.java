@@ -17,6 +17,8 @@ public class DoneCommand implements Command {
      * @param command String representation of the command to be executed
      * @param storage Storage of this <code>Duke</code>
      * @param ui Ui containing all prints for user interactions
+     * @param taskList List of task for this <code>Duke</code>
+     * @return a string representation of the message informing user if the command has been successfully executed
      * @throws DukeException if system fails to mark the specified task as completed
      */
     public String execute(String command, Storage storage, Ui ui, TaskList taskList) throws DukeException {
@@ -26,7 +28,8 @@ public class DoneCommand implements Command {
             storage.save(taskList);
             return s;
         } catch (IndexOutOfBoundsException | NumberFormatException e) {
-            throw new DukeException(ui.noSuchTask());
+            String message = " *Woof!* This task does not exist!\n";
+            throw new DukeException(message);
         }
     }
 
