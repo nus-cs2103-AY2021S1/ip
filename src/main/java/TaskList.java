@@ -5,6 +5,7 @@ public class TaskList {
     TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
     }
+    TaskList(){}
     public boolean isEmpty() {
         return tasks.isEmpty();
     }
