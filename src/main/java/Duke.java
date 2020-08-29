@@ -27,6 +27,7 @@ public class Duke implements Serializable {
             tasks = new TaskList();
         }
     }
+    
 
     /**
      * Starts up the bot by calling the Parser class and its methods
