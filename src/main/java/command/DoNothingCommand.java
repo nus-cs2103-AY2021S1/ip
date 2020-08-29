@@ -1,8 +1,8 @@
 package command;
 
-import Duke.Storage;
-import Duke.TaskList;
-import Duke.Ui;
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
 
 /**
  * Represents a DoNothingCommand.

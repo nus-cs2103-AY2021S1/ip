@@ -1,6 +1,6 @@
 import command.*;
 import exception.DukeException;
-import Duke.Parser;
+import duke.Parser;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

@@ -2,9 +2,9 @@ package command;
 
 import exception.DukeException;
 
-import Duke.Storage;
-import Duke.TaskList;
-import Duke.Ui;
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
 
 abstract public class Command {
 

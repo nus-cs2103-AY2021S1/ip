@@ -1,6 +1,6 @@
 import task.Task;
 import task.Todo;
-import Duke.TaskList;
+import duke.TaskList;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

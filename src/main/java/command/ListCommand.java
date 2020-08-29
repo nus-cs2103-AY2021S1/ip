@@ -2,9 +2,9 @@ package command;
 
 import task.Task;
 
-import Duke.Storage;
-import Duke.TaskList;
-import Duke.Ui;
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
 
 /**
  * Represents a ListCommand for adding listing all existing tasks.
