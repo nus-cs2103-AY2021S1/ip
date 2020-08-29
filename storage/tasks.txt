@@ -1,1 +1,4 @@
 [T]|✘|read book
+[D]|✘|go library|20/06/2020 1800
+[E]|✘|meeting|19/09/2020 18:00
+[T]|✘|read book

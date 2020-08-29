@@ -50,7 +50,7 @@ public class TaskStore {
 
                 } else if (taskType.equals("[D]")) {
                     DeadlineTask deadlineTask = (DeadlineTask) listOfTasks.get(i);
-                    String taskDeadline = deadlineTask.deadline.toString();
+                    String taskDeadline = deadlineTask.stringDeadline;
                     String taskStatus = deadlineTask.getStatusIcon();
                     String taskContent = deadlineTask.task;
                     combinedTask = taskType + "|" + taskStatus + "|" +
@@ -58,7 +58,7 @@ public class TaskStore {
 
                 } else if (taskType.equals("[E]")) {
                     EventsTask eventsTask = (EventsTask) listOfTasks.get(i);
-                    String taskPeriod = eventsTask.period.toString();
+                    String taskPeriod = eventsTask.stringPeriod;
                     String taskStatus = eventsTask.getStatusIcon();
                     String taskContent = eventsTask.task;
                     combinedTask = taskType + "|" + taskStatus + "|" +
