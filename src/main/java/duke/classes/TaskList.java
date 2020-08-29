@@ -3,12 +3,14 @@ package duke.classes;
 import duke.exceptions.BlahException;
 import duke.exceptions.DukeInvalidTimeException;
 import duke.exceptions.EmptyDukeException;
-import duke.tasks.*;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.TaskType;
+import duke.tasks.Todo;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Class that carries the data structure for storing tasks and supports operations for the tasklist.
@@ -36,7 +38,7 @@ public class TaskList {
     }
 
     /**
-     * Method to store a regular task.
+     * Stores a regular task.
      *
      * @param item           Task
      * @throws BlahException Thrown for 'blah' commands
@@ -54,7 +56,7 @@ public class TaskList {
     }
 
     /**
-     * Method that creates, stores and returns a Todo task.
+     * Creates, stores and returns a Todo task.
      *
      * @param                     todo Task
      * @return                    Todo Task object
@@ -76,7 +78,7 @@ public class TaskList {
     }
 
     /**
-     * Method that creates, stores and returns a deadline task.
+     * Creates, stores and returns a deadline task.
      *
      * @param deadline                  Deadline task
      * @return                          Deadline task
@@ -99,7 +101,7 @@ public class TaskList {
     }
 
     /**
-     * Method that creates, stores and returns an event task.
+     * Creates, stores and returns an event task.
      *
      * @param event                     Event task
      * @return                          Event task
@@ -122,7 +124,7 @@ public class TaskList {
     }
 
     /**
-     * Method that marks a task as done and returns the task.
+     * Marks a task as done and returns the task.
      *
      * @param command   Carries the 'done (integer)' command
      * @return          completed Task
@@ -136,7 +138,7 @@ public class TaskList {
     }
 
     /**
-     * Method that takes in the current list and command, before proceeding to
+     * Takes in the current list and command, before proceeding to
      * remove a task in the list based on number in the command.
      *
      * @param command   Carries the 'delete (integer)' command
@@ -151,6 +153,14 @@ public class TaskList {
         }
         return task;
     }
+    /**
+     * Finds the tasks that contain words that match the given word
+     * and then returns it in a list format.
+     *
+     * @param query Key phrase to be found in task
+     * @return List of matching tasks
+     * @throws DukeInvalidTimeException Error thrown for deadline/event tasks with invalid dates.
+     */
 
     public List<Task> find(String query) throws DukeInvalidTimeException {
 

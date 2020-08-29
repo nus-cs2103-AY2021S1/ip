@@ -21,13 +21,13 @@ public class Ui {
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        String welcome = line + "\nHello! I'm Duke!\n" +
-                "What can I do for you?\n";
+        String welcome = line + "\nHello! I'm Duke!\n"
+                + "What can I do for you?\n";
         System.out.println(welcome);
     }
 
     /**
-     * Method to iterate the todolist and print out its objects.
+     * Iterates the todolist and prints out its objects.
      * @param list Todo List
      */
 
@@ -43,7 +43,7 @@ public class Ui {
     }
 
     /**
-     * Method to print out the text after addition of the main types of tasks.
+     * Prints out the text after addition of the main types of tasks.
      * @param task Task added
      * @param list Todo List used for storage
      */
@@ -52,11 +52,11 @@ public class Ui {
         System.out.println(task == null
                 ? "Failed!"
                 : line + "\nGot it. I've added this task:\n   " + task.toString()
-                    + "\nNow you have " + list.size() + " tasks in the list." );
+                    + "\nNow you have " + list.size() + " tasks in the list.");
     }
 
     /**
-     * Method to print out the text after addition of a normal task.
+     * Prints out the text after addition of a normal task.
      * @param task Task added
      */
 
@@ -65,7 +65,7 @@ public class Ui {
     }
 
     /**
-     * Method to print out the status of a task once it is checked as complete.
+     * Prints out the status of a task once it is checked as complete.
      * @param task Task completed
      */
 
@@ -75,7 +75,7 @@ public class Ui {
     }
 
     /**
-     * Method to delete a task from the current todolist.
+     * Deletes a task from the current todolist.
      * @param task Task to be removed
      * @param list Todo List to remove tasks from
      */
@@ -86,19 +86,15 @@ public class Ui {
     }
 
     /**
-     * Method to print out the complete message after ending program successfully.
+     * Prints out the complete message after ending program successfully.
      */
 
     public void endDuke() {
         System.out.println(line + "\nBye. Hope to see you again soon!\n" + line);
     }
 
-    public void errorLoading() {
-        System.out.println("FAILURE: Unable to load data from local drive.");
-    }
-
     /**
-     * Method to print out all error messages from exceptions.
+     * Prints out all error messages from exceptions.
      * @param error Error message derived from exceptions
      */
     public void printError(String error) {

@@ -6,7 +6,7 @@ package duke.classes;
 public enum Commands {
     FIND {
         @Override
-        public String toString(){
+        public String toString() {
             return "find";
         }
     },

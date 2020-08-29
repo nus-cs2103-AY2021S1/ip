@@ -1,7 +1,11 @@
 package duke.classes;
 
 import duke.exceptions.DukeInvalidTimeException;
-import duke.tasks.*;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.TaskType;
+import duke.tasks.Todo;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -55,7 +59,8 @@ public class Data {
      * @throws DukeInvalidTimeException For invalid times saved for event/deadline events
      * @throws ArrayIndexOutOfBoundsException For incorrectly typed descriptions for deadline/event tasks
      */
-    public List<Task> loadData() throws FileNotFoundException, DukeInvalidTimeException, ArrayIndexOutOfBoundsException {
+    public List<Task> loadData() throws FileNotFoundException, DukeInvalidTimeException,
+            ArrayIndexOutOfBoundsException {
         List<Task> todoList = new ArrayList<>();
         Scanner scanner = new Scanner(path.toFile());
 
@@ -78,6 +83,8 @@ public class Data {
             case "E":
                 description = activity + " " + curr[3];
                 currTask = new Event(description, i, isDone);
+                break;
+            default:
                 break;
             }
             todoList.add(currTask);
@@ -110,6 +117,8 @@ public class Data {
                 String timing = description.substring(idx);
                 line = String.format("%s---%d---%s---%s",
                         task.getType() == TaskType.DEADLINE ? "D" : "E", done, activity, timing);
+                break;
+            default:
                 break;
             }
             writer.write(line + "\n");

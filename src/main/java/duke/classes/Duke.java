@@ -141,7 +141,7 @@ public class Duke {
     public void decideTaskType(Commands commands, String task) {
         Task todo = null;
         try {
-            switch (commands){
+            switch (commands) {
             case TODO:
                 todo = taskList.storeTodo(task);
                 break;

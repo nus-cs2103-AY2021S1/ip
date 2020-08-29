@@ -19,7 +19,7 @@ public class Todo extends Task {
     }
 
     /**
-     * Method that returns the text version of task with index.
+     * Returns the text version of task with index.
      * @return String representation for todo objects with indexing.
      */
 

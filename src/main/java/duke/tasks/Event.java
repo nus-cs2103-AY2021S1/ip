@@ -27,13 +27,13 @@ public class Event extends Task {
         try {
             this.time = LocalDateTime.parse(this.description.substring(idx + 4, idx + 20),
                     DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
-        } catch (DateTimeParseException | StringIndexOutOfBoundsException e){
+        } catch (DateTimeParseException | StringIndexOutOfBoundsException e) {
             throw new DukeInvalidTimeException();
         }
     }
 
     /**
-     * Method that returns the text version of task with index & date formatted to MMM d yyyy h:mm a.
+     * Returns the text version of task with index & date formatted to MMM d yyyy h:mm a.
      *
      * @return String representation for event objects with indexing and date conversion.
      */
@@ -56,7 +56,7 @@ public class Event extends Task {
     public String toString() {
         int idx = this.description.indexOf('/');
         String task = this.description.substring(0, idx);
-        String end = new StringBuilder(this.description.substring(idx + 1)).insert(2,':').toString();
+        String end = new StringBuilder(this.description.substring(idx + 1)).insert(2, ':').toString();
         return String.format("%s%s%s(%s)", super.type, isDone ? super.done : super.start, task, end);
     }
 }

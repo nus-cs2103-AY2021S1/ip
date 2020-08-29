@@ -10,6 +10,7 @@ import java.time.format.DateTimeParseException;
  * Deadline class which carries tasks of type Deadline and extends of the base Task class.
  */
 public class Deadline extends Task {
+    protected LocalDateTime time;
 
     /**
      * Constructor for tasks of deadline type.
@@ -19,8 +20,6 @@ public class Deadline extends Task {
      * @param isDone                    Task completion status
      * @throws DukeInvalidTimeException Wrong definition for the task timing
      */
-
-    protected LocalDateTime time;
     public Deadline(String description, int index, boolean isDone) throws DukeInvalidTimeException {
         super(description, index, isDone);
         super.type = TaskType.DEADLINE;
@@ -28,13 +27,13 @@ public class Deadline extends Task {
         try {
             this.time = LocalDateTime.parse(this.description.substring(idx + 4, idx + 20),
                     DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
-        } catch (DateTimeParseException | StringIndexOutOfBoundsException e){
+        } catch (DateTimeParseException | StringIndexOutOfBoundsException e) {
             throw new DukeInvalidTimeException();
         }
     }
 
     /**
-     * Method that returns the text version of task with index & date formatted to MMM d yyyy h:mm a.
+     * Returns the text version of task with index & date formatted to MMM d yyyy h:mm a.
      *
      * @return String representation for event objects with indexing and date conversion.
      */
@@ -57,7 +56,7 @@ public class Deadline extends Task {
     public String toString() {
         int idx = this.description.indexOf('/');
         String task = this.description.substring(0, idx);
-        String end = new StringBuilder(this.description.substring(idx + 1)).insert(2,':').toString();
+        String end = new StringBuilder(this.description.substring(idx + 1)).insert(2, ':').toString();
         return String.format("%s%s%s(%s)", super.type, isDone ? super.done : super.start, task, end);
     }
 }

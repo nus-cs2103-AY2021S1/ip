@@ -68,7 +68,7 @@ public class Task {
 
 
     /**
-     * Method that returns the text version of task with index.
+     * Returns the text version of task with index.
      *
      * @return String representation of tasks with indexing.
      */
