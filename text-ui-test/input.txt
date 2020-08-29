@@ -40,4 +40,9 @@ retrieve blah
 retrieve 24 Aug
 retrieve 24/08/2020
 retrieve 12/08/2020
+find
+find
+find sleep
+find basketball
+find meeting
 bye
