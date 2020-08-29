@@ -6,6 +6,8 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 import taskbot.exceptions.InvalidDateTimeException;
 import taskbot.exceptions.InvalidIndexException;
@@ -261,9 +263,9 @@ public class TaskList {
      * Finds tasks containing the given keyword.
      * This method ignores casing.
      *
-     * @param keyword A word within a task's description
+     * @param keywords Keywords within a task's description
      */
-    public void findTasks(String keyword) {
+    public void findTasks(String[] keywords) {
         //If tasks is empty
         if (tasks.size() == 0) {
             System.out.println("You currently have no tasks pending.");
@@ -271,18 +273,20 @@ public class TaskList {
         }
 
         StringBuilder sb = new StringBuilder("Here are the matching tasks in your list:\n");
-        //size of the tasks
-        int size = tasks.size();
+        //Set to contain tasks
+        Set<String> uniqueTasks = new HashSet<String>();
         //Flag for when a match is found
         boolean found = false;
         //Builds the list of tasks
-        for (int i = 0; i < size; i++) {
+        for (int i = 0; i < tasks.size(); i++) {
             Task task = tasks.get(i);
-            if (task.getTask().toLowerCase().contains(keyword)) {
-                if (!found) {
-                    found = true;
+            for (String keyword : keywords) {
+                if (task.getTask().toLowerCase().contains(keyword)) {
+                    if (!found) {
+                        found = true;
+                    }
+                    uniqueTasks.add(task.toString());
                 }
-                sb.append(i + 1).append(". ").append(task).append("\n");
             }
         }
 
@@ -290,6 +294,11 @@ public class TaskList {
             //Printed if no matches found
             System.out.println("Sorry, that keyword did not return any results. Please try another.");
         } else {
+            int counter = 1;
+            for (String task : uniqueTasks) {
+                sb.append(counter).append(". ").append(task).append("\n");
+                counter++;
+            }
             //Prints the lists of tasks found matching the keyword
             System.out.print(sb.toString());
         }
