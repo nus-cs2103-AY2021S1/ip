@@ -20,7 +20,7 @@ public class AddCommand extends Command {
     /**
      * Class constructor.
      * @param command String parsed by Parser object.
-     * @param extra String description of task to be added.
+     * @param extra String description of the task to be added.
      */
     public AddCommand(String command, String extra) {
         super(command, extra);
