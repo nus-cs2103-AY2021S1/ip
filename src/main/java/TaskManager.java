@@ -2,41 +2,41 @@ import java.util.ArrayList;
 
 public class TaskManager {
 
-    public final ArrayList<Task> taskList;
+    public final ArrayList<Task> tasksList;
 
     public TaskManager() {
-        taskList = new ArrayList<>();
+        tasksList = new ArrayList<>();
     }
 
     public Task getTask(int taskNum) {
-        return taskList.get(taskNum);
+        return tasksList.get(taskNum);
     }
 
     public void addTask(Task task) {
-        taskList.add(task);
+        tasksList.add(task);
     }
 
     public void setTaskDone(int taskNum) {
-        taskList.get(taskNum - 1).setDone();
+        tasksList.get(taskNum - 1).setDone();
     }
 
     public int getNumTasks() {
-        return taskList.size();
+        return tasksList.size();
     }
 
-    public ArrayList<Task> getTaskList() {
-        return taskList;
+    public ArrayList<Task> getTasksList() {
+        return tasksList;
     }
 
     public void removeTask(int taskNum) {
-        taskList.remove(taskNum - 1);
+        tasksList.remove(taskNum - 1);
     }
 
     @Override
     public String toString() {
         String result = "Here are the tasks in your list:\n";
-        for (int i = 0; i < taskList.size(); i++) {
-            result = result + (i+1) + ". " + taskList.get(i) + "\n";
+        for (int i = 0; i < tasksList.size(); i++) {
+            result = result + (i+1) + ". " + tasksList.get(i) + "\n";
         }
         return result;
     }

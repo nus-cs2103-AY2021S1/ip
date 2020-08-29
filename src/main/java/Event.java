@@ -30,7 +30,8 @@ public class Event extends Task {
     @Override
     public String toString() {
 
-        return "[E]" + getStatusIcon() + this.description + "(at: " +
-                this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ", " + this.time + ")";
+        return "[E]" + getStatusIcon() + this.description + "(at: "
+                + this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ", "
+                + this.time + ")";
     }
 }
