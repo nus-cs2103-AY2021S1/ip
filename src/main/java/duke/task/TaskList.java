@@ -86,18 +86,6 @@ public class TaskList implements Iterable<Task> {
         return true;
     }
 
-    public String listItems() {
-        if (store.size() == 0) {
-            return "Congratulations! You don't have any tasks left to do.";
-        } else {
-            String list = "Here are the tasks in your list:\n";
-            for (int i = 0; i < store.size(); i++) {
-                list += String.format("%d.%s\n", i + 1, store.get(i).toString());
-            }
-            return list;
-        }
-    }
-
     /**
      * Returns the number of {@code Task} in this {@code TaskList}.
      *
