@@ -1,7 +1,19 @@
 package duke;
 
-import duke.command.*;
-import duke.exception.*;
+import duke.command.AddDeadlineCommand;
+import duke.command.AddEventCommand;
+import duke.command.AddTodoCommand;
+import duke.command.Command;
+import duke.command.CompleteTaskCommand;
+import duke.command.DeleteTaskCommand;
+import duke.command.ExitCommand;
+import duke.command.FindByDateCommand;
+import duke.command.FindByKeywordCommand;
+import duke.command.InvalidCommand;
+import duke.command.ListCommand;
+import duke.command.ViewFunctionsCommand;
+
+import duke.exception.InvalidFunctionException;
 
 /**
  * Represents a parser to make sense of the user inputs so that
@@ -30,7 +42,7 @@ public class Parser {
      */
     public static Command parse(String userInput) throws InvalidFunctionException {
         String message = userInput.trim();
-        String[] parsedCommand = message.split(" ",2);
+        String[] parsedCommand = message.split(" ", 2);
         String function = parsedCommand[0];
         if (message.equals(Parser.END_COMMAND)) {
             return new ExitCommand();
@@ -43,7 +55,7 @@ public class Parser {
             return new ListCommand();
         } else if (function.equals(Parser.DONE_COMMAND)) {
             return new CompleteTaskCommand(parsedCommand);
-        } else if (function.equals(Parser.ADD_TODO_COMMAND)){
+        } else if (function.equals(Parser.ADD_TODO_COMMAND)) {
             parsedCommand = message.split("todo");
             return new AddTodoCommand(parsedCommand);
         } else if (function.equals(Parser.ADD_DEADLINE_COMMAND)) {
