@@ -104,6 +104,8 @@ public class Duke extends Application {
         DialogBox dukeGreeting = DialogBox
                 .getDukeDialog(new Label(ui.printGreeting()), dukeImageView);
 
+        dukeGreeting.setSpacing(10);
+
         dialogContainer.getChildren().addAll(dukeGreeting);
 
         try {
@@ -115,6 +117,9 @@ public class Duke extends Application {
 
             DialogBox dukeError = DialogBox
                     .getDukeDialog(new Label(ui.printError()), dukeImageView);
+
+            dukeError.setSpacing(10);
+
             dialogContainer.getChildren().addAll(dukeError);
         }
 
