@@ -3,7 +3,7 @@
 | | | | | | | |/ / _ \
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
-Greetings, what may I do for you
+Greetings, what may I do for you?
 
 I detect no storage files. I shall create a fresh list.
 
