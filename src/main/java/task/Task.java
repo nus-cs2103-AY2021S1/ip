@@ -49,6 +49,6 @@ public abstract class Task {
 
     @Override
     public String toString() {
-        return "[" + (completed ? "✓" : "✗") + "] " + msg;
+        return "[" + (completed ? "\u2713" : "\u2717") + "] " + msg;
     }
 }

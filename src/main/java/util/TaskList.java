@@ -41,10 +41,18 @@ public class TaskList {
     /**
      * Prints all tasks sequentially.
      */
-    public void printList() {
+    public String printList() {
+
+        String output = "";
+
         for (int i = 0; i < tasks.size(); i++) {
-            System.out.println((i + 1) + ". " + tasks.get(i));
+            output += (i + 1) + ". " + tasks.get(i) + "\n";
         }
+        if (output.length() == 0) {
+            output += "\n";
+        }
+
+        return output;
     }
 
     /**
@@ -52,12 +60,20 @@ public class TaskList {
      *
      * @param filter Filters which tasks will be printed.
      */
-    public void printList(Predicate<Task> filter) {
+    public String printList(Predicate<Task> filter) {
+
+        String output = "";
         for (int i = 0; i < tasks.size(); i++) {
             if (filter.test(tasks.get(i))) {
-                System.out.println((i + 1) + ". " + tasks.get(i));
+                output += (i + 1) + ". " + tasks.get(i) + "\n";
             }
         }
+
+        if (output.length() == 0) {
+            output += "\n";
+        }
+
+        return output;
     }
 
     /**
@@ -66,11 +82,11 @@ public class TaskList {
      * @param index Index of task to be printed.
      * @throws DukeException If index is invalid.
      */
-    public void printTask(int index) throws DukeException {
+    public String printTask(int index) throws DukeException {
         if (index < 0 || index >= tasks.size()) {
             throw new DukeException("Invalid index given");
         }
-        System.out.println((index + 1) + ". " + tasks.get(index));
+       return (index + 1) + ". " + tasks.get(index) + "\n";
     }
 
     /**

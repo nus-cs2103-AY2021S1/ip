@@ -22,28 +22,30 @@ public class Parser {
      * @param ui UI printer containing standard print methods.
      * @throws DukeException If input is invalid.
      */
-    public static void parse(String input, TaskList taskList, Ui ui) throws DukeException {
+    public static String parse(String input, TaskList taskList, Ui ui) throws DukeException {
+
+        String output = "";
 
         if (input.equals("list")) {
 
-            taskList.printList();
+            output += taskList.printList();
 
         } else if (input.indexOf("done ") == 0) {
 
             String[] arr = input.split(" ");
             int index = Integer.parseInt(arr[1]) - 1;
             Task task = taskList.completeTask(index);
-            System.out.println("Nice! I've marked this task as done:");
-            System.out.println(task);
+            output += "Nice! I've marked this task as done:\n";
+            output += task + "\n";
 
         } else if (input.indexOf("delete ") == 0) {
 
             String[] arr = input.split(" ");
             int index = Integer.parseInt(arr[1]) - 1;
             Task task = taskList.removeTask(index);
-            System.out.println("Noted. I've removed this task:");
-            System.out.println(task);
-            System.out.println("Now you have " + taskList.getSize() + " tasks in the list.");
+            output += "Noted. I've removed this task:\n";
+            output += task + "\n";
+            output += "Now you have " + taskList.getSize() + " tasks in the list.\n";
 
         } else if (input.indexOf("find ") == 0) {
 
@@ -56,7 +58,7 @@ public class Parser {
                 try {
                     LocalDate date = LocalDate.parse(dateString);
 
-                    taskList.printList((task) -> {
+                    output += taskList.printList((task) -> {
 
                         if (task instanceof Event && ((Event) task).getDate().equals(date)) {
                             return true;
@@ -77,7 +79,7 @@ public class Parser {
             } else if (input.length() > 5) {
 
                 String query = input.substring(5);
-                taskList.printList((task) -> task.contains(query));
+                output += taskList.printList((task) -> task.contains(query));
 
             } else {
                 throw new DukeException("Enter a valid find command");
@@ -148,14 +150,16 @@ public class Parser {
                 }
 
             } else {
-                throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
 
-            System.out.println("Got it. I've added this task:");
-            taskList.printTask(taskList.getSize() - 1);
-            System.out.println("Now you have " + taskList.getSize() + " tasks in the list.");
+            output += "Got it. I've added this task:\n";
+            output += taskList.printTask(taskList.getSize() - 1);
+            output += "Now you have " + taskList.getSize() + " tasks in the list.\n";
         }
 
-        ui.printLine();
+        output += ui.getLine();
+
+        return output;
     }
 }

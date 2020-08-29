@@ -12,7 +12,7 @@ public class Ui {
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
-    private String line = "________________________________";
+    private String line = "________________________";
 
     private Scanner sc;
 
@@ -27,10 +27,11 @@ public class Ui {
      * Prints welcome statement.
      */
     public void printWelcome() {
-        System.out.println("Hello from");
-        System.out.println(logo);
-        System.out.println("What can I do for you?");
-        System.out.println(line);
+        System.out.print(getWelcome());
+    }
+
+    public String getWelcome() {
+        return "Hello from Duke\nWhat can I do for you?\n" + line + "\n";
     }
 
     /**
@@ -38,6 +39,10 @@ public class Ui {
      */
     public void printLine() {
         System.out.println(line);
+    }
+
+    public String getLine() {
+        return line + "\n";
     }
 
     /**
