@@ -14,7 +14,7 @@ public class Ui {
         this.scanner = new Scanner(System.in);
     }
 
-    public void printMessage(String msg) {
+    public String printMessage(String msg) {
         System.out.println(LINE_SEPARATOR);
         System.out.println(msg);
         System.out.println(LINE_SEPARATOR);

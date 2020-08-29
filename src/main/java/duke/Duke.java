@@ -5,63 +5,34 @@ import duke.exceptions.DukeException;
 import duke.parser.Parser;
 import duke.task.TaskList;
 
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
-
-import duke.ui.DialogContainer;
-import duke.ui.SendButton;
-import duke.ui.UserInputArea;
-import duke.ui.ScrollContainer;
-
 import java.io.IOException;
 
-public class Duke extends Application {
+public class Duke {
 
-    private Storage store = new Storage();
+    private Storage store;
     private TaskList taskList;
     private Ui ui;
-    private Parser parser = new Parser();
+    private Parser parser;
 
-    private ScrollContainer scrollPane;
-    private DialogContainer dialogContainer;
-    private UserInputArea userInput;
-    private SendButton sendButton;
-    private Scene scene;
+    private Duke(Storage store, TaskList taskList, Ui ui, Parser parser) {
+        this.store = store;
+        this.taskList = taskList;
+        this.ui = ui;
+        this.parser = parser;
+    }
 
-
-    @Override
-    public void start(Stage stage) {
-        scrollPane = new ScrollContainer();
-        dialogContainer = new DialogContainer();
-        scrollPane.setContent(dialogContainer);
-        userInput = new UserInputArea();
-        sendButton = new SendButton("Send");
-
-        AnchorPane mainLayout = new AnchorPane();
-        mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
-
-
-        mainLayout.setPrefSize(400.0, 600.0);
-
-        AnchorPane.setTopAnchor(scrollPane, 1.0);
-
-        AnchorPane.setBottomAnchor(sendButton, 1.0);
-        AnchorPane.setRightAnchor(sendButton, 1.0);
-
-        AnchorPane.setLeftAnchor(userInput , 1.0);
-        AnchorPane.setBottomAnchor(userInput, 1.0);
-
-        stage.setTitle("Duke");
-        stage.setResizable(false);
-        stage.setMinHeight(600.0);
-        stage.setMinWidth(400.0);
-
-        scene = new Scene(mainLayout);
-        stage.setScene(scene);
-        stage.show();
+    public static Duke startDuke() {
+        Storage store = new Storage();
+        TaskList taskList = new TaskList();
+        Ui ui =  new Ui();
+        Parser parser = new Parser();
+        try {
+            store.initializeStorage();
+            taskList = new TaskList(store.getTasks());
+        } catch (IOException e) {
+            System.out.println("Error connecting to storage, actions made will not be saved");
+        }
+        return new Duke(store, taskList, ui, parser);
     }
 
     public void start() {
@@ -82,6 +53,15 @@ public class Duke extends Application {
             }
         }
         ui.stopReading();
+    }
+
+    public String getResponse(String input) {
+        try {
+            Command c = parser.parse(ui.readCommand());
+            c.execute(taskList, ui, store);
+        } catch (DukeException e) {
+            return e.getFriendlyMessage();
+        }
     }
 
     public static void main(String[] args) {
