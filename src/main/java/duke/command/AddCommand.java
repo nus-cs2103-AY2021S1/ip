@@ -11,14 +11,14 @@ import duke.exception.DukeException;
  */
 public class AddCommand extends Command {
 
-    String description;
-    String date;
-    TaskType type;
-
     /**
      * Message to be printed when AddCommand is executed successfully.
      */
     public static final String MESSAGE_SUCCESS = "Got it. I've added this task:\n%s\n%s";
+
+    private String description;
+    private String date;
+    private TaskType type;
 
     /**
      * Constructs a new instance of an AddCommand.
@@ -51,5 +51,17 @@ public class AddCommand extends Command {
      */
     public boolean isExit() {
         return false;
+    }
+
+    public String getDescription() {
+        return this.description;
+    }
+
+    public String date() {
+        return this.date;
+    }
+
+    public TaskType getType() {
+        return this.type;
     }
 }

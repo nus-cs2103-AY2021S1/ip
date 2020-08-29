@@ -1,12 +1,5 @@
 package duke;
 
-import duke.exception.DukeException;
-import duke.exception.DukeStorageException;
-import duke.task.DeadlineTask;
-import duke.task.EventTask;
-import duke.task.Task;
-import duke.task.TodoTask;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -18,6 +11,13 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
+import duke.exception.DukeException;
+import duke.exception.DukeStorageException;
+import duke.task.DeadlineTask;
+import duke.task.EventTask;
+import duke.task.Task;
+import duke.task.TodoTask;
 
 /**
  * Represents the file used to store task data.
@@ -50,13 +50,13 @@ public class Storage {
 
     String convertTaskToText (Task task) {
         if (task instanceof TodoTask) {
-            return "T" + " | " + (task.isDone ? "1" : "0") + " | " + task.description;
+            return "T" + " | " + (task.getIsDone() ? "1" : "0") + " | " + task.getDescription();
         } else if (task instanceof DeadlineTask) {
-            return "D" + " | " + (task.isDone ? "1" : "0") + " | " + task.description + " | " +
-                    ((DeadlineTask) task).deadline.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"));
+            return "D" + " | " + (task.getIsDone() ? "1" : "0") + " | " + task.getDescription() + " | "
+                    + ((DeadlineTask) task).getDeadline().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"));
         } else {
-            return "E" + " | " + (task.isDone ? "1" : "0") + " | " + task.description + " | " +
-                    ((EventTask) task).timing.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"));
+            return "E" + " | " + (task.getIsDone() ? "1" : "0") + " | " + task.getDescription() + " | "
+                    + ((EventTask) task).getTiming().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"));
         }
     }
 
@@ -73,10 +73,10 @@ public class Storage {
             for (Task task : tasks.getTasks()) {
                 fileContent.add(convertTaskToText(task));
             }
-            Files.write(Paths.get(filePath),fileContent);
+            Files.write(Paths.get(filePath), fileContent);
             fw.close();
         } catch (IOException exception) {
-           throw new DukeStorageException("Error saving task to file");
+            throw new DukeStorageException("Error saving task to file");
         }
     }
 
@@ -116,6 +116,8 @@ public class Storage {
                     }
                     tasks.add(eventTask);
                     break;
+                default:
+                    throw new DukeException("Invalid Task Type");
                 }
             }
             sc.close();

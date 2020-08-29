@@ -1,13 +1,14 @@
-package duke.dukeTest;
-
-import duke.Duke;
-import org.junit.jupiter.api.Test;
+package duke.duketest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import org.junit.jupiter.api.Test;
+
+import duke.Duke;
+
 public class DukeTest {
     @Test
-    public void initialiseDuke(){
+    public void initialiseDuke() {
         Duke duke = new Duke();
         assertEquals("Initialised", "Initialised");
     }

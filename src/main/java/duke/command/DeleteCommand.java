@@ -11,12 +11,12 @@ import duke.task.Task;
  */
 public class DeleteCommand extends Command {
 
-    int index;
-
     /**
      * Message to be printed when DeleteCommand is executed successfully.
      */
     public static final String MESSAGE_SUCCESS = "Noted. I've removed this task:\n%s";
+
+    private int index;
 
     /**
      * Constructs a new instance of a DeleteCommand.
@@ -34,10 +34,10 @@ public class DeleteCommand extends Command {
      * @throws DukeException If there is error during execution of command.
      */
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        Task deletedTask = taskList.get(index -1 );
+        Task deletedTask = taskList.get(index - 1);
         taskList.deleteTask(index);
         storage.writeToFile(taskList);
-        ui.printReply(String.format(MESSAGE_SUCCESS, deletedTask ));
+        ui.printReply(String.format(MESSAGE_SUCCESS, deletedTask));
     }
 
     /**
@@ -46,5 +46,9 @@ public class DeleteCommand extends Command {
      */
     public boolean isExit() {
         return false;
+    }
+
+    public int getIndex() {
+        return this.index;
     }
 }

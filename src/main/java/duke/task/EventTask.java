@@ -1,10 +1,10 @@
 package duke.task;
 
-import duke.exception.DukeException;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+import duke.exception.DukeException;
 
 /**
  * Represents an event task.
@@ -14,7 +14,7 @@ public class EventTask extends Task {
     /**
      * Date of event.
      */
-    public LocalDateTime timing;
+    private LocalDateTime timing;
 
     /**
      * Constructs a new instance of an EventTask.
@@ -32,10 +32,14 @@ public class EventTask extends Task {
         }
     }
 
+    public LocalDateTime getTiming() {
+        return this.timing;
+    }
+
     @Override
     public String toString() {
-        return "[E][" + getStatusIcon() + "] " + description + " (by: " +
-                timing.format(DateTimeFormatter.ofPattern("d MMM yyyy, hh:mm a")) + ")";
+        return "[E][" + getStatusIcon() + "] " + description + " (by: "
+                + timing.format(DateTimeFormatter.ofPattern("d MMM yyyy, hh:mm a")) + ")";
     }
 
 }

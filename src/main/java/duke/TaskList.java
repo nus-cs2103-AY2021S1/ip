@@ -1,5 +1,8 @@
 package duke;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import duke.exception.DukeException;
 import duke.exception.InvalidIndexException;
 import duke.exception.InvalidTaskTypeException;
@@ -8,14 +11,12 @@ import duke.task.EventTask;
 import duke.task.Task;
 import duke.task.TodoTask;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Represents the list of tasks.
  */
 public class TaskList {
-    List<Task> tasks;
+
+    private List<Task> tasks;
 
     /**
      * Constructs a new instance of TaskList with attributes defined in parameters.
@@ -36,11 +37,16 @@ public class TaskList {
         return this.tasks;
     }
 
+    /**
+     * Find tasks matching keyword.
+     * @param keyword Keyword of task.
+     * @return Returns a list of tasks that matches keyword.
+     */
     public List<Task> findTasks(String keyword) {
         List<Task> searchResults = new ArrayList<>();
 
         for (Task task : tasks) {
-            if (task.description.contains(keyword)) {
+            if (task.getDescription().contains(keyword)) {
                 searchResults.add(task);
             }
         }
@@ -110,7 +116,10 @@ public class TaskList {
      * @param index Index of task to be retrieved.
      * @return Task
      */
-    public Task get(int index) {
+    public Task get(int index) throws InvalidIndexException {
+        if (index >= tasks.size() || index < 0) {
+            throw new InvalidIndexException("☹ OOPS!!! There is no such task.");
+        }
         return tasks.get(index);
     }
 
