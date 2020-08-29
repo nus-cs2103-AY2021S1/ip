@@ -10,5 +10,6 @@ public enum Commands {
     DONE,
     DELETE,
     LIST,
+    FIND,
     BYE
 }

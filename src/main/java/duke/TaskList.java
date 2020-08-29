@@ -28,7 +28,7 @@ public class TaskList {
      * Gets all the task in the list.
      * @return the tasks in TaskList.
      */
-    public ArrayList<Task> getTask() {
+    public ArrayList<Task> getTasks() {
         return tasks;
     }
 
@@ -78,5 +78,20 @@ public class TaskList {
      */
     public void addTask(Task task) {
         tasks.add(task);
+    }
+
+    /**
+     * Searches tasks containing the search term.
+     * @param searchTerm the term used to search task.
+     * @return list of tasks containing the search term.
+     */
+    public ArrayList<Task> find(String searchTerm) {
+        ArrayList<Task> results = new ArrayList<>();
+        for (Task task : tasks) {
+            if (task.getDescription().contains(searchTerm)) {
+                results.add(task);
+            }
+        }
+        return results;
     }
 }

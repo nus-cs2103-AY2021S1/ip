@@ -11,6 +11,8 @@ list
 done 1
 done 3
 delete 5
+find meeting
+find swimming
 delete 2
 done 10
 todo swimming

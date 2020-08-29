@@ -53,14 +53,14 @@ public class Storage {
      * @throws IOException if there is an error in writing the tasks into file in hard disk.
      */
     public void writeData(TaskList taskList) throws IOException {
-        File file = new File(filePath);
-        if (!file.exists()) {
-            file.getParentFile().mkdirs();
-            file.createNewFile();
+        File f = new File(filePath);
+        if (!f.exists()) {
+            f.getParentFile().mkdirs();
+            f.createNewFile();
         }
         FileWriter fw = new FileWriter(filePath);
         StringBuilder textToAdd = new StringBuilder();
-        for (Task task : taskList.getTask()) {
+        for (Task task : taskList.getTasks()) {
             textToAdd.append(task.getData()).append("\n");
         }
         fw.write(textToAdd.toString());

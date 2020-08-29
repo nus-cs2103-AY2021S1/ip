@@ -60,10 +60,11 @@ public class Ui {
      * Prints the current list of tasks.
      * @param taskList the lists of task.
      */
+
     public void printTaskList(TaskList taskList) {
-        ArrayList<Task> tasks = taskList.getTask();
+        ArrayList<Task> tasks = taskList.getTasks();
         printOutput("Here are the tasks in your list:");
-        for (int index = 0; index < tasks.size(); index++) {
+        for(int index = 0; index < tasks.size(); index++) {
             printOutput((index + 1) + ": " + tasks.get(index));
         }
     }
@@ -95,5 +96,20 @@ public class Ui {
     public void printDeleteAllTasks() {
         printOutput("Noted. I've removed all tasks in the list.");
         printOutput("Now you have no task in the list.");
+    }
+
+    /**
+     * Prints the tasks in the search results.
+     * @param tasks the tasks in the search results.
+     */
+    public void printSearchResult(ArrayList<Task> tasks) {
+        if (tasks.size() == 0 ) {
+            printOutput("No tasks found");
+        } else {
+            printOutput("Here are the matching tasks in your list:");
+            for (int index = 0; index < tasks.size(); index++) {
+                printOutput((index + 1) + ": " + tasks.get(index));
+            }
+        }
     }
 }
