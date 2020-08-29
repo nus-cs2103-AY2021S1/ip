@@ -1,4 +1,3 @@
-import duke.Duke;
 import duke.Parser;
 import duke.exception.DukeException;
 
