@@ -7,7 +7,7 @@ import duke.ui.Ui;
 /**
  * Represents an action to delete a Task from TaskList.
  */
-public class DeleteCommand extends Command{
+public class DeleteCommand extends Command {
 
     /** Index of Task to be deleted */
     private final int taskNumber;
@@ -28,7 +28,6 @@ public class DeleteCommand extends Command{
      * @param tasks TaskList to store Task.
      * @param ui Ui to interact with users.
      * @param storage Storage use by Duke to save and load files.
-     * @return Nothing.
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {

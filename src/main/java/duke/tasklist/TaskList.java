@@ -1,12 +1,12 @@
 package duke.tasklist;
 
-import duke.task.Task;
-
 import java.util.ArrayList;
+
+import duke.task.Task;
 
 /**
  * Represents a list to store and manipulate tasks.
- * A <code>TaskList</code> object is represented by an ArrayList<Task>.
+ * A <code>TaskList</code> object is represented by an ArrayList.
  */
 public class TaskList {
 
@@ -34,7 +34,6 @@ public class TaskList {
      * Adds task to the list.
      *
      * @param task Task to be added.
-     * @return Nothing.
      */
     public void addTask(Task task) {
         list.add(task);
@@ -44,7 +43,6 @@ public class TaskList {
      * Marks task as complete based on its index in the list.
      *
      * @param index Index of task to be mark as complete.
-     * @return Nothing.
      */
     public void doTask(int index) {
         list.get(index).completeTask();
@@ -54,7 +52,6 @@ public class TaskList {
      * Removes <code>Task</code> from the list based on in its index in the list.
      *
      * @param index Index of task to be removed.
-     * @return Nothing.
      */
     public void removeTask(int index) {
         list.remove(index);

@@ -7,7 +7,7 @@ import duke.ui.Ui;
 /**
  * Represents an action to list out the Task from TaskList.
  */
-public class ListCommand extends Command{
+public class ListCommand extends Command {
 
     /**
      * Constructs a <code>ListCommand</code> object.
@@ -22,7 +22,6 @@ public class ListCommand extends Command{
      * @param tasks TaskList to store Task.
      * @param ui Ui to interact with users.
      * @param storage Storage use by Duke to save and load files.
-     * @return Nothing.
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {

@@ -1,12 +1,31 @@
 package duke.parser;
 
-import duke.command.*;
-import duke.exception.*;
-import duke.tasklist.TaskList;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+import duke.command.AddDeadlineCommand;
+import duke.command.AddEventCommand;
+import duke.command.AddTodoCommand;
+import duke.command.ByeCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
+import duke.command.RetrieveCommand;
+import duke.exception.DukeException;
+import duke.exception.InvalidCommandException;
+import duke.exception.InvalidDeleteException;
+import duke.exception.InvalidDoneException;
+import duke.exception.InvalidTaskDateException;
+import duke.exception.InvalidTaskNumberException;
+import duke.exception.NoFindContentException;
+import duke.exception.NoTaskContentException;
+import duke.exception.NoTaskDateTimeException;
+import duke.exception.NoTaskDurationException;
+import duke.exception.NoTaskException;
+import duke.tasklist.TaskList;
 
 /**
  * The <code>Parser</code> class make sense of the
@@ -87,50 +106,50 @@ public class Parser {
      * @throws DukeException If user input is not valid.
      */
     public static Command parseAddTask(String input) throws DukeException {
-            String[] splitInput = input.split(" ", 2);
-            String taskWord = splitInput[0];
-            if (taskWord.equals("todo")) {
-                if (splitInput.length != 2) {
-                    throw new NoTaskContentException("OOPS!!! The description of a todo cannot be empty.");
-                } else {
-                    String description = splitInput[1];
-                    return new AddTodoCommand(description);
-                }
-            } else if (taskWord.equals("deadline")) {
-                if (splitInput.length != 2) {
-                    throw new NoTaskContentException(
-                            "OOPS!!! The description and date/time of a deadline cannot be empty.");
-                } else {
-                    String content = splitInput[1];
-                    String[] splitContent = content.split(" /by ", 2);
-                    if (splitContent.length != 2) {
-                        throw new NoTaskDateTimeException(
-                                "OOPS!!! The date/time of a deadline cannot be empty.");
-                    } else {
-                        String description = splitContent[0];
-                        String by = splitContent[1];
-                        return new AddDeadlineCommand(description, by);
-                    }
-                }
-            } else if (taskWord.equals("event")) {
-                if (splitInput.length != 2) {
-                    throw new NoTaskContentException(
-                            "OOPS!!! The description and duration of an event cannot be empty.");
-                } else {
-                    String content = splitInput[1];
-                    String[] splitContent = content.split(" /at ", 2);
-                    if (splitContent.length != 2) {
-                        throw new NoTaskDurationException(
-                                "OOPS!!! The duration of an event cannot be empty.");
-                    } else {
-                        String description = splitContent[0];
-                        String at = splitContent[1];
-                        return new AddEventCommand(description, at);
-                    }
-                }
+        String[] splitInput = input.split(" ", 2);
+        String taskWord = splitInput[0];
+        if (taskWord.equals("todo")) {
+            if (splitInput.length != 2) {
+                throw new NoTaskContentException("OOPS!!! The description of a todo cannot be empty.");
             } else {
-                throw new InvalidCommandException();
+                String description = splitInput[1];
+                return new AddTodoCommand(description);
             }
+        } else if (taskWord.equals("deadline")) {
+            if (splitInput.length != 2) {
+                throw new NoTaskContentException(
+                        "OOPS!!! The description and date/time of a deadline cannot be empty.");
+            } else {
+                String content = splitInput[1];
+                String[] splitContent = content.split(" /by ", 2);
+                if (splitContent.length != 2) {
+                    throw new NoTaskDateTimeException(
+                            "OOPS!!! The date/time of a deadline cannot be empty.");
+                } else {
+                    String description = splitContent[0];
+                    String by = splitContent[1];
+                    return new AddDeadlineCommand(description, by);
+                }
+            }
+        } else if (taskWord.equals("event")) {
+            if (splitInput.length != 2) {
+                throw new NoTaskContentException(
+                        "OOPS!!! The description and duration of an event cannot be empty.");
+            } else {
+                String content = splitInput[1];
+                String[] splitContent = content.split(" /at ", 2);
+                if (splitContent.length != 2) {
+                    throw new NoTaskDurationException(
+                            "OOPS!!! The duration of an event cannot be empty.");
+                } else {
+                    String description = splitContent[0];
+                    String at = splitContent[1];
+                    return new AddEventCommand(description, at);
+                }
+            }
+        } else {
+            throw new InvalidCommandException();
+        }
     }
 
     /**
@@ -186,7 +205,7 @@ public class Parser {
     private static Command parseFind(String input, TaskList tasks) throws DukeException {
         String[] splitInput = input.split(" ", 2);
         if (splitInput.length != 2 || splitInput[1].trim().equals("")) {
-                throw new NoFindContentException();
+            throw new NoFindContentException();
         } else {
             String content = splitInput[1];
             return new FindCommand(content);

@@ -1,17 +1,17 @@
 package duke.storage;
 
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.Todo;
-import duke.tasklist.TaskList;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
+import duke.tasklist.TaskList;
 
 /**
  * Represents a <code>Storage</code> class that saves and loads
@@ -34,7 +34,6 @@ public class Storage {
     /**
      * Saves the tasks into a text file.
      *
-     * @return Nothing.
      */
     public void save(TaskList list) {
         try {
@@ -43,7 +42,7 @@ public class Storage {
             for (Task t : list.getList()) {
                 String taskString = t.toFileString();
                 fw.write(taskString);
-                counter --;
+                counter--;
                 if (counter > 0) {
                     fw.write(System.lineSeparator());
                 }
@@ -64,7 +63,7 @@ public class Storage {
             ArrayList<Task> list = new ArrayList<>();
             File file = new File(FILE_PATH);
             Scanner sc = new Scanner(file);
-            while(sc.hasNextLine()) {
+            while (sc.hasNextLine()) {
                 Task task = null;
                 String[] taskStringSplit = sc.nextLine().split(" \\| ", 3);
                 String type = taskStringSplit[0];
@@ -88,7 +87,7 @@ public class Storage {
                 case "D":
                     task = new Deadline(description, isDone, time);
                     break;
-                case "E":
+                default:
                     task = new Event(description, isDone, time);
                     break;
                 }

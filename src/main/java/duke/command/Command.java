@@ -11,7 +11,7 @@ import duke.ui.Ui;
 public abstract class Command {
 
     /** Boolean value to indicate if the Command should exit the programme */
-    boolean isExit;
+    private boolean isExit;
 
     /**
      * Constructs a <code>Command</code> object.
@@ -28,7 +28,6 @@ public abstract class Command {
      * @param tasks TaskList to store Task.
      * @param ui Ui to interact with users.
      * @param storage Storage use by Duke to save and load files.
-     * @return Nothing.
      * @throws DukeException If error specific to Duke occurs.
      */
     public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;

@@ -1,28 +1,28 @@
 package duke.ui;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.PrintStream;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class UiTest {
-    private final ByteArrayOutputStream OUT_CONTENT = new ByteArrayOutputStream();
-    private final PrintStream ORIGINAL_OUT = System.out;
     private static final String LINE = "\t____________________________________________________________";
+    private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+    private final PrintStream originalOut = System.out;
 
     @BeforeEach
     public void setUpStreams() {
-        System.setOut(new PrintStream(OUT_CONTENT));
+        System.setOut(new PrintStream(outContent));
     }
 
     @AfterEach
     public void restoreStreams() {
-        System.setOut(ORIGINAL_OUT);
+        System.setOut(originalOut);
     }
 
     @Test
@@ -36,7 +36,7 @@ public class UiTest {
                 + "\n\t Hello! I'm Duke\n\t What can I do for you?\n" + LINE + "\n";
         Ui ui = new Ui();
         ui.sendGreeting();
-        assertEquals(expected, OUT_CONTENT.toString());
+        assertEquals(expected, outContent.toString());
     }
 
     @Test
@@ -44,7 +44,7 @@ public class UiTest {
         String expected = LINE + "\n";
         Ui ui = new Ui();
         ui.showLine();
-        assertEquals(expected, OUT_CONTENT.toString());
+        assertEquals(expected, outContent.toString());
     }
 
     @Test
@@ -53,18 +53,15 @@ public class UiTest {
         String expected = "\t " + e.getMessage() + "\n";
         Ui ui = new Ui();
         ui.showError(e);
-        assertEquals(expected, OUT_CONTENT.toString());
+        assertEquals(expected, outContent.toString());
     }
 
     @Test
     public void testPrintMessage() {
-        String expected =  "\t HELLO\n";
+        String expected = "\t HELLO\n";
         Ui ui = new Ui();
         String message = "HELLO";
         ui.printMessage(message);
-        assertEquals(expected, OUT_CONTENT.toString());
+        assertEquals(expected, outContent.toString());
     }
-
-
-
 }

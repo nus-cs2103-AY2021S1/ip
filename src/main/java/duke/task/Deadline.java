@@ -7,7 +7,7 @@ import java.time.format.DateTimeFormatter;
  * Represents a task that needs to be done by a certain date and time. A
  * <code>Deadline</code> object is represented as a Task with a LocalDateTime value.
  */
-public class Deadline extends Task{
+public class Deadline extends Task {
 
     /** Indicates when the Deadline needs to be completed by */
     protected LocalDateTime by;

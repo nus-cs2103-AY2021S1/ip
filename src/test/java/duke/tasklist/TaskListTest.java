@@ -1,12 +1,12 @@
 package duke.tasklist;
 
-import duke.task.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.Collection;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import duke.task.Deadline;
+import duke.task.Task;
+import duke.task.Todo;
 
 public class TaskListTest {
 
@@ -22,7 +22,7 @@ public class TaskListTest {
     }
 
     @Test
-    public void testGetNumberOfTask_() {
+    public void testGetNumberOfTask() {
         TaskList tasks1 = new TaskList();
         TaskList tasks2 = new TaskList();
         Task todo = new Todo("duke.task 1");

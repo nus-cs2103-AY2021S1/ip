@@ -1,6 +1,9 @@
 package duke.command;
 
-import duke.exception.DukeException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 import duke.exception.InvalidTaskDateException;
 import duke.storage.Storage;
 import duke.task.Deadline;
@@ -8,10 +11,6 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
-
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 
 /**
  * Represents an action to retrieve Deadline and Event occurring on
@@ -39,7 +38,6 @@ public class RetrieveCommand extends Command {
      * @param ui Ui to interact with users.
      * @param storage Storage use by Duke to save and load files.
      * @throws InvalidTaskDateException If date and time format is invalid.
-     * @return Nothing.
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws InvalidTaskDateException {
@@ -70,9 +68,9 @@ public class RetrieveCommand extends Command {
             if (hasTasks) {
                 ui.printMessage(sb.delete(sb.length() - 3, sb.length() - 1).toString());
             } else {
-                    ui.printMessage(String.format(
-                            "You do not have any deadlines or events happening on %s! :)",
-                                    date.format(DateTimeFormatter.ofPattern("dd MMMM yyyy"))));
+                ui.printMessage(String.format(
+                        "You do not have any deadlines or events happening on %s! :)",
+                        date.format(DateTimeFormatter.ofPattern("dd MMMM yyyy"))));
             }
         } catch (DateTimeParseException e) {
             throw new InvalidTaskDateException();
