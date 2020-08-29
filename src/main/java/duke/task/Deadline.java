@@ -1,3 +1,7 @@
+package duke.task;
+
+import duke.util.DukeException;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -14,7 +18,6 @@ import java.util.Optional;
  * The time is optional, as depicted by the use of Optional class, as some
  * tasks do not have exact stipulated time.
  */
-
 public class Deadline extends Task {
 
     /** The date of the task. */

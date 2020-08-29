@@ -1,10 +1,11 @@
+package duke.task;
+
 /**
  * The Task class encapsulates tasks which are pieces of work
- * to be done. This is used by the Duke chatbot for creating
+ * to be done. This is used by the Duke chat bot for creating
  * of tasks which can be marked as completed.
  */
-
-public class Task {
+public abstract class Task {
 
     /** The description of the task */
     protected String description;
@@ -65,7 +66,6 @@ public class Task {
      * Marks a task as completed by setting completion flag to true.
      */
     public void markAsDone() {
-
         isDone = true;
     }
 

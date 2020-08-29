@@ -1,3 +1,10 @@
+package duke.util;
+
+import duke.task.Task;
+import duke.task.Todo;
+import duke.task.Event;
+import duke.task.Deadline;
+
 import java.util.List;
 import java.util.ArrayList;
 
@@ -5,7 +12,6 @@ import java.util.ArrayList;
  * The TaskList encapsulates the list of tasks and is in charge of
  * creating tasks, adding or removing tasks from the list, marking
  * tasks as completed, and generating a print message of the list.
- *
  */
 public class TaskList {
 
@@ -28,10 +34,18 @@ public class TaskList {
         this.list = new ArrayList<>();
     }
 
+    /**
+     * Returns the size of the list.
+     * @return the size of the list.
+     */
     public int size() {
         return list.size();
     }
 
+    /**
+     * Returns the task list object.
+     * @return the task list object.
+     */
     public List<Task> getList() {
         return list;
     }
@@ -39,7 +53,7 @@ public class TaskList {
     /**
      * The static factory method to create the subtypes of Tasks:
      *
-     *     - Todo: A simple task with a description
+     *     - Todo: A simple task with a description only
      *     - Event: A task requiring attendance at a date and time
      *     - Deadline: A task requiring completion by a date and time
      *
@@ -52,7 +66,7 @@ public class TaskList {
      * @throws DukeException when creation fails usually due to improper format description.
      */
     public static Task createTask(String type, String description) throws DukeException {
-        Task task = new Task("", "");
+        Task task = new Todo("");
         String[] split;
         String desc;
         description = description.trim();
@@ -173,9 +187,11 @@ public class TaskList {
     }
 
     /**
-     *
-     * @param indices
-     * @return
+     * Generates a print message containing the list of tasks with the
+     * input indices. This method is used to filter out tasks to be displayed
+     * to the user.
+     * @param indices the list of task numbers.
+     * @return the formatted print message of the filtered list.
      */
     public String getQueryResultMessage(List<Integer> indices) {
         if (indices.isEmpty()) {

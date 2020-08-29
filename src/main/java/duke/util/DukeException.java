@@ -1,3 +1,5 @@
+package duke.util;
+
 /**
  * Since Duke has specific keywords or command formats required from
  * the user input to function as intended, and user inputs can deviate
@@ -5,7 +7,6 @@
  * wrong command error, non-existing command error, command format error,
  * the DukeException helps to standardize all Duke related errors.
  */
-
 public class DukeException extends Exception {
 
     /**

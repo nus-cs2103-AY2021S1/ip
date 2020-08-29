@@ -1,3 +1,10 @@
+package duke.util;
+
+import duke.task.Task;
+import duke.task.Todo;
+import duke.task.Event;
+import duke.task.Deadline;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -11,8 +18,7 @@ import java.util.ArrayList;
  * the program and the txt file which stores all the tasks in a
  * comma-separated value (csv) format. Each time the task list in
  * the program is being updated, the Storage object will rewrite
- * the txt file. Seems inefficient but oh well good enough for now.
- *
+ * the txt file.
  */
 public class Storage {
 

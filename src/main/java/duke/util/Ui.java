@@ -1,3 +1,7 @@
+package duke.util;
+
+import duke.task.Task;
+
 import java.util.Scanner;
 
 /**
@@ -15,7 +19,6 @@ import java.util.Scanner;
  *     Have a good day! Tebby logging off...
  *     --------------------------------------------------------------
  */
-
 public class Ui {
 
     /** The Scanner object for user inputs */

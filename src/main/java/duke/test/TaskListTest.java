@@ -1,4 +1,11 @@
+package duke.test;
+
 import static org.junit.jupiter.api.Assertions.*;
+
+import duke.util.TaskList;
+import duke.task.Todo;
+import duke.task.Event;
+import duke.util.DukeException;
 
 class TaskListTest {
 

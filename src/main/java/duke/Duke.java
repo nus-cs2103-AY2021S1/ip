@@ -1,17 +1,22 @@
+package duke;
+
+import duke.util.TaskList;
+import duke.util.DukeException;
+import duke.util.Parser;
+import duke.util.Storage;
+import duke.util.Ui;
+import duke.command.Command;
+
 /**
  * Duke is a personal chat bot with the following functionalities:
  *     (i) Adding and removing of Tasks to a list
  *     (ii) Checking Tasks as completed
  *     (iii) Viewing current task list
+ *     (iv) Searching for tasks using query string
  *
- * The bot has the following components:
- *     - TaskList - to add, remove, mark tasks
- *     - Ui - to provide basic displays for user to interact with
- *     - Storage - to read and write tasks into a .txt file
- *
+ * This class serves as the main driver for the entire chat bot.
  * @author Andy Wu
  */
-
 public class Duke {
 
     /** List which stores the Tasks. */

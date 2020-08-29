@@ -1,3 +1,5 @@
+package duke.task;
+
 /**
  * Todo is a simple subtype of Task which has a description.
  * Example:
@@ -7,7 +9,6 @@
  * The task description has no further parsing and will be taken
  * literally as a string.
  */
-
 public class Todo extends Task {
 
     /**

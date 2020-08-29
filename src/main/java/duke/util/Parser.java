@@ -1,3 +1,14 @@
+package duke.util;
+
+import duke.command.Command;
+import duke.command.AddCommand;
+import duke.command.DoneCommand;
+import duke.command.RemoveCommand;
+import duke.command.ListCommand;
+import duke.command.FindCommand;
+import duke.command.ExitCommand;
+import duke.command.InvalidCommand;
+
 import java.util.Arrays;
 
 /**
@@ -8,7 +19,6 @@ import java.util.Arrays;
  *
  * All methods of this class are static as this class is meant to be used functionally.
  */
-
 public class Parser {
 
     /**
