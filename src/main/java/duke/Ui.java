@@ -32,48 +32,57 @@ public class Ui {
     /**
      * Prints an exit message.
      */
-    public void exit() {
-        System.out.println("Bye. Hope to see you soon!");
+    public String exit() {
+        String exitMessage = "Bye. Hope to see you soon!";
+        System.out.println(exitMessage);
+        return exitMessage;
     }
 
     /**
      * Prints a string.
      * @param s Message to be printed.
      */
-    public void print(String s) {
+    public String print(String s) {
         System.out.println(s);
+        return s;
     }
 
     /**
      * Parses and prints the task list.
      * @param taskList TaskList to be printed.
      */
-    public void list(TaskList taskList) {
-        System.out.println("Here are the tasks in your list:");
+    public String list(TaskList taskList) {
+        String s = "Here are the tasks in your list:\n";
         for (int i = 1; i <= taskList.size(); i++) {
             Task task = taskList.get(i - 1);
             String message = i + ".";
             message += task;
-            System.out.println(message);
+            s += message + "\n";
         }
+        System.out.println(s);
+        return s;
     }
 
     /**
      * Parses the list of tasks and prints the search result.
      * @param searchResult Search result for task list.
      */
-    public void printSearchResult(List<Task> searchResult) {
+    public String printSearchResult(List<Task> searchResult) {
+        String s = "";
         if (searchResult.size() < 1) {
-            System.out.println("There are no matching results!");
+            s += "There are no matching results!\n";
         } else {
-            System.out.println("Here are the matching tasks in your list:");
+            s += "Here are the matching tasks in your list:\n";
             for (int i = 1; i <= searchResult.size(); i++) {
                 Task task = searchResult.get(i - 1);
                 String message = i + ".";
                 message += task;
                 System.out.println(message);
+                s += message + "\n";
             }
         }
+        System.out.println(s);
+        return s;
     }
 
     /**

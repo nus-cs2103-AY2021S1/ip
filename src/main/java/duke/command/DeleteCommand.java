@@ -34,13 +34,13 @@ public class DeleteCommand extends Command {
      * @param storage Storage where the changes are written to.
      * @throws DukeLoadingErrorException If I/O operation fails during Storage#save.
      */
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeLoadingErrorException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeLoadingErrorException {
         Task deletedTask = taskList.deleteTask(taskNo);
         storage.save(taskList);
         String uiMessage = String.format(
                 "Noted. I've removed this task:\n%s\n%s",
                 deletedTask.toString(),
                 taskList.getTaskSizeMessage());
-        ui.print(uiMessage);
+        return ui.print(uiMessage);
     }
 }

@@ -21,8 +21,8 @@ public class FindCommand extends Command {
      * @param ui Ui responsible for the operation.
      * @param storage Storage associated with the operation.
      */
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
         List<Task> relatedTasks = taskList.findTasks(keyword);
-        ui.printSearchResult(relatedTasks);
+        return ui.printSearchResult(relatedTasks);
     }
 }

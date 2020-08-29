@@ -35,14 +35,13 @@ public class AddCommand extends Command {
      * @param storage Storage where the changes are written to.
      * @throws DukeLoadingErrorException If I/O operation fails during Storage#save.
      */
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeLoadingErrorException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeLoadingErrorException {
         taskList.addTask(task);
         storage.save(taskList);
         String uiMessage = String.format(
                 "Got it. I've added this task:\n%s\n%s",
                 task.toString(),
                 taskList.getTaskSizeMessage());
-        ui.print(uiMessage);
-
+        return ui.print(uiMessage);
     }
 }

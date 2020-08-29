@@ -16,9 +16,10 @@ public abstract class Command {
      * @param taskList TaskList associated with the operation.
      * @param ui Ui responsible for the operation.
      * @param storage Storage associated with the operation.
+     * @returns Response to user.
      * @throws DukeLoadingErrorException If I/O operation fails during Storage#save.
      */
-    public abstract void execute(TaskList taskList, Ui ui, Storage storage) throws DukeLoadingErrorException;
+    public abstract String execute(TaskList taskList, Ui ui, Storage storage) throws DukeLoadingErrorException;
 
     /**
      * Indicates whether operation should continue running.

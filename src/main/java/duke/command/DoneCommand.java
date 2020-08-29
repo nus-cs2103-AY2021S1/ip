@@ -34,10 +34,10 @@ public class DoneCommand extends Command {
      * @param storage Storage where the changes are written to.
      * @throws DukeLoadingErrorException If I/O operation fails during Storage#save.
      */
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeLoadingErrorException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeLoadingErrorException {
         Task completedTask = taskList.completeTask(taskNo);
         storage.save(taskList);
         String uiMessage = String.format("Nice! I've marked this task as done:\n%s", completedTask.toString());
-        ui.print(uiMessage);
+        return ui.print(uiMessage);
     }
 }
