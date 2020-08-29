@@ -8,7 +8,7 @@ public class DeadlineTest {
     Deadline dl = new Deadline("test", "2019-02-11 14:00");
     @Test
     public void testStringConversion() {
-        assertEquals("[D][✘] test (by: Feb 11 2019 2:00 PM)", dl.toString());
+        assertEquals("[D][\u2718] test (by: Feb 11 2019 2:00 PM)", dl.toString());
     }
 
 }

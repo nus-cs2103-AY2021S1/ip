@@ -18,7 +18,7 @@ public class TaskListTest {
         } catch (DukeException e) {
             System.out.println(e.getMessage());
         }
-        assertEquals( "[T][✘] project", tasks.getTasks().get(0).toString());
+        assertEquals( "[T][\u2718] project", tasks.getTasks().get(0).toString());
     }
 
     @Test
@@ -29,7 +29,7 @@ public class TaskListTest {
         } catch (DukeException e) {
             System.out.println(e.getMessage());
         }
-        assertEquals("✓", tasks.getTasks().get(0).getStatusIcon());
+        assertEquals("\u2713", tasks.getTasks().get(0).getStatusIcon());
     }
 
     @Test

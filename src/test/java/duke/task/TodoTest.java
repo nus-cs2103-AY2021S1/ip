@@ -8,7 +8,7 @@ public class TodoTest {
     ToDo td = new ToDo("test");
     @Test
     public void testStringConversion() {
-        assertEquals("[T][✘] test", td.toString());
+        assertEquals("[T][\u2718] test", td.toString());
     }
 
 }
