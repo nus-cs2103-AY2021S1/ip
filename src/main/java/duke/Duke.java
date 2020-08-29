@@ -8,24 +8,32 @@ import duke.dukehelper.Ui;
 import duke.exception.DukeException;
 import duke.helper.DateTimeHelper;
 import duke.task.Task;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Duke {
+public class Duke extends Application {
     private Ui ui;
     private Storage storage;
     private TaskList tasks;
     private Parser parser;
+    private Pane root = new Pane();
+    private Scene scene;
+
 
     /**
      * Constructor
-     * @param filePath
      */
-    public Duke(String filePath) {
+    public Duke() {
         this.ui = new Ui();
-        this.storage = new Storage(filePath);
+        this.storage = new Storage("data/save_file.txt");
         this.tasks = new TaskList();
         this.parser = new Parser();
     }
@@ -151,8 +159,20 @@ public class Duke {
         }
     }
 
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        ui.initChatBox();
+        Label label1 = new Label("Command:");
+        TextField textField = new TextField();
+        root.getStylesheets().add(getClass().getResource("../style/chatbox.css").toExternalForm());
+        root.getChildren().addAll(ui.getContainer(),ui.getAdd(), label1, textField);
+        scene = new Scene(root,300,450);
+        primaryStage.setScene(scene);
+        primaryStage.show();
+    }
+
     public static void main(String[] args) {
-        Duke dk = new Duke("data/save_file.txt");
+        Duke dk = new Duke();
         dk.run();
     }
 }
