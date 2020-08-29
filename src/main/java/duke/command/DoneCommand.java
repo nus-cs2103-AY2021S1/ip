@@ -27,7 +27,7 @@ public class DoneCommand extends Command {
      * @param storage storage that handles data storage
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage)  {
+    public void execute(TaskList taskList, Ui ui, Storage storage) {
         taskList.setDoneTask(index, storage);
     }
 

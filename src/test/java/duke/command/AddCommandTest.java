@@ -1,19 +1,20 @@
 package duke.command;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+
+import java.io.IOException;
+
+import org.junit.jupiter.api.Test;
+
 import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
-import org.junit.jupiter.api.Test;
-
-import java.io.IOException;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 
 public class AddCommandTest {
 
-    private final Storage storage = new Storage("data" ,"data/dukeTest.txt");
+    private final Storage storage = new Storage("data", "data/dukeTest.txt");
     private TaskList taskList;
     private final Ui ui = new Ui();
 
@@ -26,7 +27,7 @@ public class AddCommandTest {
     }
 
     @Test
-    public void executeTest(){
+    public void executeTest() {
         AddCommand addCommand = new AddCommand("todo", " ");
         try {
             addCommand.execute(taskList, ui, storage);
@@ -49,8 +50,8 @@ public class AddCommandTest {
         try {
             addCommand.execute(taskList, ui, storage);
         } catch (DukeException e) {
-            assertEquals("Please enter dates in this format: dd/MM/yyyy timeIn24Hr" +
-                    "\nE.g. 01/12/2020 2359", e.getMessage());
+            assertEquals("Please enter dates in this format: dd/MM/yyyy timeIn24Hr"
+                    + "\nE.g. 01/12/2020 2359", e.getMessage());
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -77,8 +78,8 @@ public class AddCommandTest {
         try {
             addCommand.execute(taskList, ui, storage);
         } catch (DukeException e) {
-            assertEquals("Please enter dates in this format: dd/MM/yyyy timeIn24Hr" +
-                    "\nE.g. 01/12/2020 2359", e.getMessage());
+            assertEquals("Please enter dates in this format: dd/MM/yyyy timeIn24Hr"
+                    + "\nE.g. 01/12/2020 2359", e.getMessage());
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -96,10 +97,10 @@ public class AddCommandTest {
     @Test
     public void isExitTest() {
         assertFalse(new AddCommand("todo", "sample").isExit());
-        assertFalse(new AddCommand("deadline", "sample " +
-                "/by 20/10/2020 1900").isExit());
-        assertFalse(new AddCommand("event", "sample " +
-                "/at 20/10/2020 1900").isExit());
+        assertFalse(new AddCommand("deadline", "sample "
+                + "/by 20/10/2020 1900").isExit());
+        assertFalse(new AddCommand("event", "sample "
+                + "/at 20/10/2020 1900").isExit());
     }
 
 }
