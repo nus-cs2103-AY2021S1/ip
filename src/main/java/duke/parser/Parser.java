@@ -1,12 +1,13 @@
 package duke.parser;
 
-import duke.commands.EnumCommand;
-import duke.exception.DukeException;
-
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+
+import duke.commands.EnumCommand;
+import duke.exception.DukeException;
+
 
 /**
  * A class that represents a parser which parses commands and dateTime

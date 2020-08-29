@@ -30,7 +30,6 @@ public class CommandExecution {
      */
     public static void executeCommand(EnumCommand enumCommand, String instruction, TaskList tasks) throws DukeException {
         Ui ui = new Ui();
-
         switch (enumCommand) {
         case TODO:
             if (instruction.substring(4).strip().equals("")) {
@@ -77,6 +76,7 @@ public class CommandExecution {
         case BYE:
             ui.farewell();
             System.exit(0);
+            break;
         case DONE:
 
             if (instruction.substring(4).strip().equals("")) {
@@ -136,11 +136,11 @@ public class CommandExecution {
     }
 
     /**
-     * Returns a TaskList of tasks that meet the input date requirement
+     * Returns a TaskList of tasks that meet the input date requirement.
      *
      * @param localDate the date from input that of tasks.
-     * @param tasks the TaskList of all tasks
-     * @return the TaskList of tasks that meet the input date requirement
+     * @param tasks the TaskList of all tasks.
+     * @return the TaskList of tasks that meet the input date requirement.
      */
     public static TaskList searchTasksByTime(LocalDate localDate, TaskList tasks) {
         TaskList occurings = new TaskList();
@@ -169,6 +169,13 @@ public class CommandExecution {
     }
 
 
+    /**
+     * Finds the list of tasks that match the keyword.
+     *
+     * @param keyword the string of keyword that the user wants to search for.
+     * @param tasks the current list of tasks.
+     * @return the tasklist of tasks that matches the keyword in the input.
+     */
     public static TaskList findTaskByKeyword(String keyword, TaskList tasks) {
         TaskList matches = new TaskList();
 

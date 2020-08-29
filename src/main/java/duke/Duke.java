@@ -1,5 +1,7 @@
 package duke;
 
+import java.util.Scanner;
+
 import duke.commands.EnumCommand;
 import duke.commands.CommandExecution;
 import duke.exception.DukeException;
@@ -8,26 +10,15 @@ import duke.storage.Storage;
 import duke.tasks.TaskList;
 import duke.ui.Ui;
 
-import java.util.Scanner;
-
 
 /**
  * A class that represents the Duke application which contains the main method in the class.
  */
 public class Duke {
-    static final String filePath = "duke.txt";
+    private static final String filePath = "duke.txt";
     private Storage storage;
     private TaskList result;
     private Ui ui;
-
-    /**
-     * The main method of the application
-     *
-     * @param args the arguments of the main method.
-     */
-    public static void main(String[] args) {
-        new Duke(filePath).run();
-    }
 
     /**
      * Sets up the user interface and load list from file storage.
@@ -44,6 +35,17 @@ public class Duke {
             result = new TaskList();
         }
     }
+
+
+    /**
+     * The main method of the application.
+     *
+     * @param args the arguments of the main method.
+     */
+    public static void main(String[] args) {
+        new Duke(filePath).run();
+    }
+
 
     /**
      * Scans the user input and responds to command inputs.

@@ -7,13 +7,13 @@ import duke.tasks.TaskList;
  * A class that handles user interface interactions.
  */
 public class Ui {
-    public static String greetings = "Hello! I'm Mr. Duke, your personal assistant\n     What can I do for you? : )";
-    public static String farewell = "Bye. Hope to see you again soon!";
-    public static String doneAlert = "Nice! I've marked this task as done:";
-    public static String addTaskFrontAlert = "Got it. I've added this task for you:";
-    public static String addTaskTailAlert = "Now you have %d tasks in the list.";
-    public static String deleteTaskFrondAlert = "Noted. I've removed this task:";
-    public static String findTaskFrontAlert = "Here are the matching tasks in your list:";
+    private static String greetings = "Hello! I'm Mr. Duke, your personal assistant\n     What can I do for you? : )";
+    private static String farewell = "Bye. Hope to see you again soon!";
+    private static String doneAlert = "Nice! I've marked this task as done:";
+    private static String addTaskFrontAlert = "Got it. I've added this task for you:";
+    private static String addTaskTailAlert = "Now you have %d tasks in the list.";
+    private static String deleteTaskFrondAlert = "Noted. I've removed this task:";
+    private static String findTaskFrontAlert = "Here are the matching tasks in your list:";
 
     /**
      * Prints out greetings at the beginning.

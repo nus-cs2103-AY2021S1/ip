@@ -1,8 +1,5 @@
 package duke.storage;
 
-import duke.exception.DukeException;
-import duke.tasks.*;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.time.LocalDateTime;
@@ -10,11 +7,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import duke.exception.DukeException;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.TaskList;
+import duke.tasks.ToDo;
+
 /**
  * A class that represents the file storage of list of task.
  */
 public class Storage {
-    String filePath;
+    private String filePath;
 
     /**
      * Constructs the file Storage.

@@ -7,7 +7,7 @@ import java.util.List;
  * A class that represents a list to store the tasks.
  */
 public class TaskList {
-    List<Task> tasks;
+    private List<Task> tasks;
 
     /**
      * Constructs a TaskList object by passing in a list of tasks.
