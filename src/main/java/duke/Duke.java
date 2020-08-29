@@ -14,7 +14,7 @@ public class Duke {
     /**
      * Constructs the Duke initialized with the path of the target file to store and read.
      *
-     * @param filePath
+     * @param filePath the path of the target file.
      */
     public Duke(String filePath) {
         ui = new Ui();
