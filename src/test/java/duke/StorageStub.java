@@ -11,6 +11,10 @@ public class StorageStub extends Storage {
     }
 
     @Override
+    public void initialiseTasks(List<Task> tasks) {
+    }
+
+    @Override
     public void writeData(Task task) throws IOException {
     }
 
