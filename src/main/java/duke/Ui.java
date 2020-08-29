@@ -11,20 +11,21 @@ public class Ui {
      * @param text The String to be formatted
      */
     public String printReply(String text) {
-        return "\n\t\t" + text.replaceAll("\\n", "\n\t\t") + "\n";
+        String line = "\t____________________________________________________________________________________";
+        return line + "\n\t\t" + text.replaceAll("\\n", "\n\t\t") + "\n" + line;
     }
 
     /**
      * Prints out the standard greeting message when the bot is first started.
      */
     public String greet() {
-        return printReply("Hello! I'm Duke\nWhat can I do for you?");
+        return "Hello! I'm Duke\nWhat can I do for you?";
     }
 
     /**
      * Prints out the standard message when the bot is being ended.
      */
     public String bye() {
-        return printReply("Bye. Hope to see you again soon!");
+        return "Bye. Hope to see you again soon!";
     }
 }

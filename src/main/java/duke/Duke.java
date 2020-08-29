@@ -141,9 +141,9 @@ public class Duke extends Application {
         try {
             this.storage.load(taskList);
         } catch (FileNotFoundException e) {
-            sendMessage(this.ui.printReply("OOPS!!! Can't access task data."));
+            sendMessage("OOPS!!! Can't access task data.");
         } catch (IOException e) {
-            sendMessage(this.ui.printReply("OOPS!!! Something went wrong... Tasks not saved."));
+            sendMessage("OOPS!!! Something went wrong... Tasks not saved.");
         }
 
         sendButton.setOnMouseClicked((event) -> {
@@ -164,8 +164,11 @@ public class Duke extends Application {
     private void handleUserInput() {
         this.parser.setScanner(new Scanner(userInput.getText()));
         String reply = this.parser.executeCommand(this.taskList);
+        if (reply.equals("bye")) {
+            reply = this.ui.bye();
+        }
         Label userText = new Label(userInput.getText());
-        Label dukeText = new Label(this.ui.printReply(reply));
+        Label dukeText = new Label(reply);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(userText, new ImageView(user)),
                 DialogBox.getDukeDialog(dukeText, new ImageView(duke))
@@ -175,7 +178,7 @@ public class Duke extends Application {
         try {
             this.storage.save(this.taskList);
         } catch (IOException e) {
-            sendMessage(this.ui.printReply("OOPS!!! Something went wrong... Tasks not saved."));
+            sendMessage("OOPS!!! Something went wrong... Tasks not saved.");
         }
     }
 
