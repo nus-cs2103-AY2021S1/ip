@@ -46,8 +46,6 @@ public class DialogBox extends HBox {
         dialog.setText(l.getText());
         displayPicture.setImage(iv.getImage());
         dialog.setFont(Font.font("Ayuthaya", 13));
-        dialog.setMaxWidth(350);
-        dialog.setAlignment(Pos.CENTER);
         dialog = l;
         displayPicture = iv;
 
@@ -62,7 +60,7 @@ public class DialogBox extends HBox {
         String[] ss = l.getText().split("\n");
         count += ss.length + 1;
         for (String s : ss) {
-            count += s.length() / 40;
+            count += s.length() / 32;
         }
         this.setMinHeight(count * 15 + 30);
 
