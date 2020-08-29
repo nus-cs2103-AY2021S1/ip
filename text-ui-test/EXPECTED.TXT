@@ -16,12 +16,12 @@ Now you have 1 task in the list.
 ____________________________________________________________
 ____________________________________________________________
 Got it. I've added this task: 
-	[D]✘ return book (by: June 6th)
+	[D]✘ return book (by: Jun 6 2000)
 Now you have 2 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
 Got it. I've added this task: 
-	[E]✘ project meeting (at: Aug 6th 2-4pm)
+	[E]✘ project meeting (at: Aug 6 2010)
 Now you have 3 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
@@ -39,45 +39,83 @@ Nice! I've marked this task as done:
 ____________________________________________________________
 ____________________________________________________________
 Got it. I've added this task: 
-	[T]✘ borrow book
+	[T]✘ buy book
 Now you have 5 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
 Here are the tasks in your list:
 	1.[T]✓ read book
-	2.[D]✘ return book (by: June 6th)
-	3.[E]✘ project meeting (at: Aug 6th 2-4pm)
+	2.[D]✘ return book (by: Jun 6 2000)
+	3.[E]✘ project meeting (at: Aug 6 2010)
 	4.[T]✓ join sports club
-	5.[T]✘ borrow book
+	5.[T]✘ buy book
 ____________________________________________________________
 ____________________________________________________________
 Got it. I've added this task: 
-	[D]✘ return book (by: Sunday)
+	[D]✘ borrow book (by: Apr 22 2020)
 Now you have 6 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
 Got it. I've added this task: 
-	[E]✘ project meeting (at: Mon 2-4pm)
+	[E]✘ birthday (at: Aug 6 2010)
 Now you have 7 tasks in the list.
 ____________________________________________________________
-☹ OOPS!!! The description of a todo cannot be empty.
-☹ OOPS!!! The description or date of a deadline cannot be empty.
-☹ OOPS!!! The description or date of an event cannot be empty.
-☹ OOPS!!! The description or date of a deadline cannot be empty.
-☹ OOPS!!! The description or date of a deadline cannot be empty.
-☹ OOPS!!! The description or date of an event cannot be empty.
-☹ OOPS!!! The description or date of an event cannot be empty.
+____________________________________________________________
+Here are the tasks on this date:
+	1.[E]✘ project meeting (at: Aug 6 2010)
+	2.[E]✘ birthday (at: Aug 6 2010)
+____________________________________________________________
+____________________________________________________________
+Here are the matching tasks in your list:
+	1.[T]✓ read book
+	2.[D]✘ return book (by: Jun 6 2000)
+	3.[T]✘ buy book
+	4.[D]✘ borrow book (by: Apr 22 2020)
+____________________________________________________________
+____________________________________________________________
+☹ OOPS!!! The description or date cannot be empty.
+____________________________________________________________
+____________________________________________________________
+☹ OOPS!!! The description or date cannot be empty.
+____________________________________________________________
+____________________________________________________________
+☹ OOPS!!! The description or date cannot be empty.
+____________________________________________________________
+____________________________________________________________
+☹ OOPS!!! The description or date cannot be empty.
+____________________________________________________________
+____________________________________________________________
+☹ OOPS!!! The description or date cannot be empty.
+____________________________________________________________
+____________________________________________________________
+☹ OOPS!!! The description or date cannot be empty.
+____________________________________________________________
+____________________________________________________________
+☹ OOPS!!! The description or date cannot be empty.
+____________________________________________________________
+____________________________________________________________
+☹ OOPS!!! The description or date cannot be empty.
+____________________________________________________________
+____________________________________________________________
 ☹ OOPS!!! The task number is not valid.
+____________________________________________________________
+____________________________________________________________
 ☹ OOPS!!! The task number is not valid.
-☹ OOPS!!! The task number is not valid.
+____________________________________________________________
 ____________________________________________________________
 Noted. I've removed this task: 
-	[E]✘ project meeting (at: Aug 6th 2-4pm)
+	[E]✘ project meeting (at: Aug 6 2010)
 Now you have 6 tasks in the list.
 ____________________________________________________________
+____________________________________________________________
+☹ OOPS!!! The description or date cannot be empty.
+____________________________________________________________
+____________________________________________________________
 ☹ OOPS!!! The task number is not valid.
-☹ OOPS!!! The task number is not valid.
+____________________________________________________________
+____________________________________________________________
 ☹ OOPS!!! I'm sorry, but I don't know what that means :-(
+____________________________________________________________
 ____________________________________________________________
 Bye. Hope to see you again soon!
 ____________________________________________________________
