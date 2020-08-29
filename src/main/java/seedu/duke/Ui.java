@@ -6,8 +6,8 @@ import java.util.Scanner;
  * Main class that interacts with user inputs.
  */
 public class Ui {
-    private final static String LINES = "------------------------------------------------\n";
-    private final static String INTRO = "Hello! I'm Duke!\n" + "What can I do for you?\n";
+    private static final String LINES = "------------------------------------------------\n";
+    private static final String INTRO = "Hello! I'm Duke!\n" + "What can I do for you?\n";
     private Scanner sc;
     private String userInput;
     private Parser parse;
@@ -22,6 +22,8 @@ public class Ui {
         this.sc = new Scanner(System.in);
         this.parse = parse;
     }
+
+    public Ui() throws NullPointerException {}
 
     /**
      * Prints out introduction when Duke start up.

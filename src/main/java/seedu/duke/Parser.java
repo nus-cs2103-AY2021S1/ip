@@ -63,7 +63,7 @@ public class Parser {
                 taskLists.addDeadline(input);
             } else if (input.contains("event")) {
                 taskLists.addEvent(input);
-            } else if (input.contains("find")){
+            } else if (input.contains("find")) {
                 taskLists.find(input);
             }
         } catch (DukeException e) {

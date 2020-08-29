@@ -1,20 +1,19 @@
 package seedu.duke;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileWriter;
 import java.io.FileReader;
-import java.io.BufferedReader;
+import java.io.FileWriter;
 import java.io.IOException;
-
 import java.util.ArrayList;
 
 /**
  * Class that store, read and write data to local txt file.
  */
 public class Storage {
-    private final static String DIRECTORY_PATH = "data";
-    private final static String STORAGE_PATH = "data/duke.txt";
+    private static final String DIRECTORY_PATH = "data";
+    private static final String STORAGE_PATH = "data/duke.txt";
     private String filepath;
 
     /**

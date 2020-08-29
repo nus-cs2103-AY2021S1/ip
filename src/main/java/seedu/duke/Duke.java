@@ -46,6 +46,11 @@ public class Duke {
         ui.bye();
     }
 
+    /**
+     * Standard main method for Java to execute program.
+     *
+     * @param args Standard Java convection.
+     */
     public static void main(String[] args) {
         Duke duke = new Duke("data/duke.txt");
         duke.run();
