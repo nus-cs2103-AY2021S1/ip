@@ -21,12 +21,24 @@ public class Ui {
         System.out.println(formatMessage(msg));
     }
 
+    /**
+     * Shows the add task message.
+     *
+     * @param t The task that has been added.
+     * @param totalTasks    The total number of tasks in the list currently.
+     */
     public static void showAddTaskMessage(Task t, int totalTasks) {
         showMessage("Got it. I've added this task: \n"
             + t + "\n"
             + "Now you have " + totalTasks + " tasks in the list");
     }
 
+    /**
+     * Shows the delete task message.
+     *
+     * @param t The task that has been deleted.
+     * @param totalTasks    The total number of tasks in the list currently.
+     */
     public static void showDeleteTaskMessage(Task t, int totalTasks) {
         showMessage("Noted! I've removed this task from your list: \n"
             + t + "\n"

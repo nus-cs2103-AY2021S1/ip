@@ -1,13 +1,13 @@
 package chatterbox;
 
-import chatterbox.task.Task;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
+import chatterbox.task.Task;
 
 /**
  * Handles the loading and saving of tasks.
@@ -18,6 +18,11 @@ public class Storage {
     private final File saveFolder = new File(SAVE_FOLDER_PATH);
     private final File saveFile = new File(SAVE_FILE_PATH);
 
+    /**
+     * Creates the save folder and save file if they do not exist.
+     *
+     * @throws IOException  If folder or file cannot be created.
+     */
     private void ensureExistence() throws IOException {
         if (!saveFolder.exists()) {
             saveFolder.mkdir();
