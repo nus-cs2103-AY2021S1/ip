@@ -43,7 +43,9 @@ public class Storage {
             }
             this.serialisedTasks = Files.readAllLines(filePath);
         } catch (IOException e) {
-            System.out.println("Something went wrong when loading tasks from the storage!");
+            System.out.println(
+                    "Something went wrong when loading previously saved tasks! Starting with an "
+                            + "empty tasks list instead...");
             e.printStackTrace();
         }
     }

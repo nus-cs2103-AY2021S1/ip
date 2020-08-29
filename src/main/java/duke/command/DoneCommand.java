@@ -4,7 +4,6 @@ import duke.Storage;
 import duke.exception.DukeException;
 import duke.task.Task;
 import duke.task.TaskList;
-import duke.ui.Ui;
 
 /**
  * Encapsulates a command that will mark a task as complete.
@@ -29,13 +28,12 @@ public class DoneCommand extends Command {
      * storage, and then printing a message to indicate that the task was marked as done.
      *
      * @param tasks   The list of tasks known by the chat bot.
-     * @param ui      The UI that is used by the chat bot.
      * @param storage The storage that is used by the chat bot.
      * @return A string detailing the outcome of the execution.
      * @throws DukeException If the execution fails at any step.
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Storage storage) throws DukeException {
         Task task = tasks.getTask(taskId);
         task.markAsDone();
 
