@@ -28,7 +28,6 @@ public class Storage {
         try {
             Scanner sc = new Scanner(new File(filePath));
             ArrayList<Task> store = new ArrayList<>(100);
-            
             while (sc.hasNextLine()) {
                 String[] str = sc.nextLine().split("\\|");
                 String title = str[0].trim();
@@ -42,7 +41,6 @@ public class Storage {
                 }
             }
             return store;
-            
         } catch (FileNotFoundException e) {
             throw new DukeException("File not found");
         }
