@@ -40,6 +40,7 @@ public class DateParser {
                     return LocalDateTime.parse(input, formatter)
                             .withSecond(HAS_TIME_INDICATOR);
                 } catch (DateTimeParseException e) {
+                    // We continue to try other formats until all fails before we throw an exception.
                 }
             }
         } else {
@@ -52,6 +53,7 @@ public class DateParser {
                     return LocalDate.parse(input, formatter).atStartOfDay()
                             .withSecond(NULL_TIME_INDICATOR);
                 } catch (DateTimeParseException e) {
+                    // We continue to try other formats until all fails before we throw an exception.
                 }
             }
         }

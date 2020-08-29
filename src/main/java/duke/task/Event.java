@@ -127,6 +127,8 @@ public class Event extends Task {
                 return true;
             }
         } catch (DukeException e) {
+            // We attempt to parse the string as a LocalDate and compare it to the event date,
+            // but upon failure, we perform a comparison with the event description.
         }
         return searchParameter.contains(description) || description.contains(searchParameter);
     }
