@@ -54,6 +54,7 @@ public class Duke {
     public CommandResult getResult(String input) {
         try {
             Command command = Parser.parse(input);
+            storage.save(taskList);
             return command.execute(taskList);
         } catch (DukeException e) {
             return new CommandResult(e.getMessage(), false);
