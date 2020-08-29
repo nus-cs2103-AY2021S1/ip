@@ -86,7 +86,6 @@ public class Storage {
                 String type = sc.nextLine();
                 String done = sc.nextLine();
                 String name = sc.nextLine();
-
                 if (type.equals("ToDo")) {
                     sc.nextLine();
                     Task temp = new ToDo(name);

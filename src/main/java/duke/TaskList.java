@@ -1,6 +1,7 @@
 package duke;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -12,6 +13,7 @@ import java.util.List;
  */
 public class TaskList {
     private List<Task> list;
+    private HashMap<String,Task> findHash;
 
     /**
      * TaskList constructor to initialize a TaskList object
@@ -124,4 +126,28 @@ public class TaskList {
     public void deleteAll(){
         list = new ArrayList<>();
     }
+
+    /**
+     * findWord method that goes through all the tasks in the list and returns a new list of tasks that contain the
+     * word specified by the user
+     * @param input input of user
+     * @return returns a new list of tasks that contain specifed word
+     */
+    public List<Task> findWord(String input){
+        String[] inputArray = input.split(" ",2);
+        String word = inputArray[1];
+        List<Task> findArray = new ArrayList<>();
+        for(Task x: list){
+            String[] nameArray = x.getName().split(" ");
+            inner:
+            for (String y: nameArray){
+                if (word.equals(y)){
+                    findArray.add(x);
+                    break inner;
+                }
+            }
+        }
+        return findArray;
+    }
+
 }

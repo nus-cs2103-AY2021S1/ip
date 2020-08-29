@@ -76,6 +76,9 @@ public class Duke {
                 ui.listCount(taskList.countList());
                 ui.drawLine();
                 storage.saveFile(taskList.getList());
+            // user searches for a keyword
+            } else if (first.equals("find")) {
+                ui.foundWord(taskList.findWord(input));
             // user types something the bot does not understand
             } else {
                 throw new DukeException("Sorry I don't know what you mean");

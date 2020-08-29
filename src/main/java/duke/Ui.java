@@ -58,6 +58,7 @@ public class Ui {
      */
     public void listCount(int count){
         System.out.println("Now you have "+count+" tasks in the list.");
+        drawLine();
     }
 
     /**
@@ -65,6 +66,7 @@ public class Ui {
      */
     public void bye(){
         System.out.println("Bye. Hope to see you again soon!");
+        drawLine();
     }
 
     /**
@@ -84,5 +86,11 @@ public class Ui {
             System.out.println(tempIndex + "." + x.toString());
             tempIndex += 1;
         }
+        drawLine();
+    }
+
+    public void foundWord(List<Task> list){
+        System.out.println("Here are the matching tasks in your list:");
+        printList(list);
     }
 }
