@@ -1,16 +1,27 @@
 package duke;
 
 import java.util.Scanner;
-import java.io.IOException;
 
+/**
+ * The Duke program can record down todos, deadlines and events and save it on your computer.
+ *
+ * @author  Hope Leong
+ * @version 0.1
+ * @since   27/8/2020
+ */
 public class Duke {
     private Storage storage;
     private TaskList taskList;
     private Ui ui;
 
-    public Duke() throws IOException{
+    /**
+     * Duke constructor to initialize a Duke object, initializes a Ui, Storage and TaskList object.
+     * @exception DukeException On input error and file path error.
+     */
+    public Duke() throws DukeException{
         ui = new Ui();
-        String logo = " ____        _        \n"
+        String logo =
+                  " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
@@ -22,49 +33,53 @@ public class Duke {
 
     }
 
-
-    public static void main(String[] args) throws  IOException{
+    /**
+     * Main method which runs the bot
+     */
+    public static void main(String[] args) throws  DukeException{
         new Duke().bot();
     }
 
-    public void bot() throws IOException {
+    /**
+     * Bot method which handles the inputs and responds to the user while calling the appropriate classes
+     * @exception DukeException On input error and file path error.
+     */
+    public void bot() throws DukeException {
         Scanner sc = new Scanner(System.in);
-        try {
-            while (sc.hasNext()) {
-                String input = sc.nextLine();
-                String first = input.split(" ")[0];
-                if (input.equals("bye")) {
-                    ui.bye();
-                    break;
-                } else if (input.equals("list")) {
-                    ui.printList(taskList.getList());
-                    ui.drawLine();
-                } else if (input.split(" ")[0].equals("done")) {
-                    ui.doneTask(taskList.done(Integer.parseInt(input.split(" ")[1])));
-                    ui.listCount(taskList.countList());
-                    ui.drawLine();
-                    storage.saveFile(taskList.getList());
-                } else if (first.equals("todo")|| first.equals("deadline") || first.equals("event")) {
-                    ui.addTask(taskList.add(input));
-                    ui.listCount(taskList.countList());
-                    ui.drawLine();
-                    storage.saveFile(taskList.getList());
-                } else if (first.equals("delete")){
-                    ui.deleteTask(taskList.delete(input));
-                    ui.listCount(taskList.countList());
-                    ui.drawLine();
-                    storage.saveFile(taskList.getList());
-                } else {
-                    throw new DukeException("Sorry I don't know what you mean");
-                }
+        while (sc.hasNext()) {
+            String input = sc.nextLine();
+            // splits the input into the different words in order to understand what the user wants
+            String first = input.split(" ")[0];
+            // user exits the program
+            if (input.equals("bye")) {
+                ui.bye();
+                break;
+            // user sees the list of tasks
+            } else if (input.equals("list")) {
+                ui.printList(taskList.getList());
+                ui.drawLine();
+            // user sets a specific task as completed
+            } else if (input.split(" ")[0].equals("done")) {
+                ui.doneTask(taskList.done(Integer.parseInt(input.split(" ")[1])));
+                ui.listCount(taskList.countList());
+                ui.drawLine();
+                storage.saveFile(taskList.getList());
+            // user creates a new task
+            } else if (first.equals("todo")|| first.equals("deadline") || first.equals("event")) {
+                ui.addTask(taskList.add(input));
+                ui.listCount(taskList.countList());
+                ui.drawLine();
+                storage.saveFile(taskList.getList());
+            // user deletes a task
+            } else if (first.equals("delete")){
+                ui.deleteTask(taskList.delete(input));
+                ui.listCount(taskList.countList());
+                ui.drawLine();
+                storage.saveFile(taskList.getList());
+            // user types something the bot does not understand
+            } else {
+                throw new DukeException("Sorry I don't know what you mean");
             }
         }
-        catch (DukeException ex){
-            System.out.println(ex.getMessage());
-        }
     }
-
-
-
 }
-
