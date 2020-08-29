@@ -32,10 +32,8 @@ public class DeadlineTest {
             Deadline.createTask("deadLine  /by 2019/02/20 12:00");
             fail();
         } catch (DukeException e) {
-            String err = ".~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.\n"
-                    + " Oops!! You gonna forget what this is about if you\n"
-                    + " dont give me a description... *woof*\n"
-                    + ".~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.\n";
+            String err = " Oops!! You gonna forget what this is about if you\n"
+                    + " dont give me a description... *woof*\n";
             assertEquals(err, e.getMessage());
         }
 
@@ -48,10 +46,8 @@ public class DeadlineTest {
             Deadline.createTask("deadLine  project /by ");
             fail();
         } catch (DukeException e) {
-            String err = ".~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.\n"
-                    + " Oops!! You did not state when you wanna finish this by...\n"
-                    + " Are you planning to procrastinate? *woof*\n"
-                    + ".~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.\n";
+            String err = " Oops!! You did not state when you wanna finish this by...\n"
+                    + " Are you planning to procrastinate? *woof*\n";
             assertEquals(err, e.getMessage());
         }
 
@@ -64,9 +60,7 @@ public class DeadlineTest {
             Deadline.createTask("deadLine  project by 2019/02/20 16:00");
             fail();
         } catch (DukeException e) {
-            String err = ".~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.\n"
-                    + " Oops!! You missed out some vital information/keyword... *woof*\n"
-                    + ".~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.\n";
+            String err = " Oops!! You missed out some vital information/keyword... *woof*\n";
             assertEquals(err, e.getMessage());
         }
 
@@ -79,10 +73,8 @@ public class DeadlineTest {
             Deadline.createTask("DeAdLine project /by 20/02/2019 1800");
             fail();
         } catch (DukeException e) {
-            String err = ".~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.\n"
-                    + " Please input deadline in following format:\n"
-                    + "   YYYY/MM/DD HH:MM!\n" + " *Woof woof*\n"
-                    + ".~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.\n";
+            String err = " Please input deadline in following format:\n"
+                    + "   YYYY/MM/DD HH:MM!\n" + " *Woof woof*\n";
             assertEquals(err, e.getMessage());
         }
 

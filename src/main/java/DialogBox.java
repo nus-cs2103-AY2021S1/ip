@@ -5,22 +5,25 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
+import javafx.scene.text.Font;
 
 public class DialogBox extends HBox {
 
-    private Label text;
-    private ImageView displayPicture;
-
     public DialogBox(Label l, ImageView iv) {
-        text = l;
-        displayPicture = iv;
+        l.setFont(Font.font ("Verdana", 11));
+        l.setTextFill(Color.web("#596186"));
+        Circle clip = new Circle(50,50,45);
+        iv.setClip(clip);
 
-        text.setWrapText(true);
-        displayPicture.setFitWidth(100.0);
-        displayPicture.setFitHeight(100.0);
+        l.setWrapText(true);
+        iv.setFitWidth(100.0);
+        iv.setFitHeight(100.0);
 
+        l.setAlignment(Pos.CENTER);
         this.setAlignment(Pos.TOP_RIGHT);
-        this.getChildren().addAll(text, displayPicture);
+        this.getChildren().addAll(l, iv);
     }
 
     private void flip() {

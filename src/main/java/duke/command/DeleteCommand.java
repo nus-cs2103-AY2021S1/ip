@@ -2,7 +2,9 @@ package duke.command;
 
 import duke.DukeException;
 import duke.Storage;
+import duke.TaskList;
 import duke.Ui;
+import duke.task.Task;
 
 /**
  * Implements the <code>Command</code> interface. <code>DeleteCommand</code> executes
@@ -18,8 +20,17 @@ public class DeleteCommand implements Command {
      * @param ui Ui containing all prints for user interactions
      * @throws DukeException if system fails to delete the specified task
      */
-    public void execute(String command, Storage storage, Ui ui) throws DukeException {
-        storage.delete(command);
+    public String execute(String command, Storage storage, Ui ui, TaskList taskList) throws DukeException {
+        try {
+            int ind = Integer.parseInt(command.substring(6).trim()) - 1;
+            Task t = taskList.deleteTask(ind);
+            storage.save(taskList);
+            return " *WOOF* I have removed:\n   " + t + "\n" + ui.displayTotal(taskList.total());
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException(ui.noSuchTask());
+        } catch (NumberFormatException e) {
+            throw new DukeException(ui.wrongDeleteInput());
+        }
     }
 
     /**

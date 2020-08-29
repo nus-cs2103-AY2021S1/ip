@@ -2,7 +2,11 @@ package duke.command;
 
 import duke.DukeException;
 import duke.Storage;
+import duke.TaskList;
 import duke.Ui;
+import duke.task.Task;
+
+import java.util.List;
 
 /**
  * Implements the <code>Command</code> interface. <code>FindCommand</code> runs
@@ -25,8 +29,24 @@ public class FindCommand implements Command {
      * @param ui Ui containing all prints for user interactions
      * @throws DukeException if system fails to execute search
      */
-    public void execute(String command, Storage storage, Ui ui) throws DukeException {
-        storage.findRelevantTask(taskSearch);
+    public String execute(String command, Storage storage, Ui ui, TaskList taskList) throws DukeException {
+        try {
+            String searchName = taskSearch.substring(taskSearch.indexOf("find") + 5).trim();
+            List<Task> results = taskList.searchTask(searchName.split("\\s+"));
+
+            if (results.isEmpty()) {
+                return " I can't seem to find any task with this keyword! *woof*\n";
+            } else {
+                StringBuilder s = new StringBuilder(" Here is the list of matching tasks in your storage:\n");
+                for (Task t : results) {
+                    s.append("   ").append(results.indexOf(t) + 1).append(".")
+                            .append(t.toString()).append("\n");
+                }
+                return s.toString();
+            }
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException(ui.searchFail());
+        }
     }
 
     /**

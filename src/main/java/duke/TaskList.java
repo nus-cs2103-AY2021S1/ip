@@ -4,10 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import duke.task.Deadline;
-import duke.task.Event;
 import duke.task.Task;
-import duke.task.Todo;
 
 /**
  * Contains the list of <code>Task</code> object. <code>TaskList</code> saves all existing <code>Task</code> in a
@@ -15,30 +12,10 @@ import duke.task.Todo;
  * list.
  */
 public class TaskList {
-    private final List<Task> listOfTask = new ArrayList<>();
+    private final List<Task> listOfTask;
 
-    /**
-     * Converts the given string to <code>Task</code> object and adds it to the list.
-     *
-     * @param task Task in string format to be converted and added
-     */
-    public void checkTask(String task) {
-        Task t;
-        String taskType = task.substring(0, 3);
-        String status = task.substring(3, 6);
-        boolean isDone = status.equals("[" + "\u2713" + "]");
-        if (taskType.equals("[T]")) {
-            t = new Todo(task.substring(7), isDone);
-        } else if (taskType.equals("[D]")) {
-            int indOfTime = task.lastIndexOf("(FINISH by: ");
-            t = new Deadline(task.substring(7, indOfTime),
-                    task.substring(indOfTime + 11, task.lastIndexOf(")")).trim(), isDone);
-        } else {
-            int indOfTime = task.lastIndexOf("(APPEAR at: ");
-            t = new Event(task.substring(7, indOfTime),
-                    task.substring(indOfTime + 11, task.lastIndexOf(")")).trim(), isDone);
-        }
-        listOfTask.add(t);
+    public TaskList(List<Task> taskList) {
+        this.listOfTask = taskList;
     }
 
     /**
@@ -46,8 +23,10 @@ public class TaskList {
      *
      * @param task Task to be added
      */
-    public void addTask(Task task) {
+    public int addTask(Task task) {
         listOfTask.add(task);
+
+        return listOfTask.size();
     }
 
     /**
@@ -87,8 +66,8 @@ public class TaskList {
      * @param index Index of <code>Task</code> in list to be marked as completed
      * @throws IndexOutOfBoundsException if invalid index is given
      */
-    public void markDone(int index) throws IndexOutOfBoundsException {
-        listOfTask.get(index).markAsDone();
+    public String markDone(int index) throws IndexOutOfBoundsException {
+        return listOfTask.get(index).markAsDone();
     }
 
     /**
@@ -99,6 +78,7 @@ public class TaskList {
      * @return a list containing all <code>Task</code> on that day.
      */
     public List<Task> checkDate(LocalDate date) {
+
         List<Task> sameDates = new ArrayList<>();
         for (Task t : listOfTask) {
             if (t.compareDate(date)) {

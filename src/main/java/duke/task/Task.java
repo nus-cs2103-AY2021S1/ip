@@ -2,14 +2,11 @@ package duke.task;
 
 import java.time.LocalDate;
 
-import duke.Ui;
-
 /**
  * <code>Task</code> object represents a task containing a description. It contains a boolean <code>isDone</code> to
  * state whether a particular task has been completed.
  */
 public class Task {
-    protected static final Ui UI = new Ui();
     protected final String description;
     protected boolean isDone;
 
@@ -35,12 +32,13 @@ public class Task {
     /**
      * Marks this <code>Task</code> as completed.
      */
-    public void markAsDone() {
+    public String markAsDone() {
         if (!isDone) {
             this.isDone = true;
-            UI.markDoneSuccess("   [" + this.getStatusIcon() + "] " + this.description + "\n");
+            return " Good Job!!! You cleared this task:\n" + "   ["
+                    + this.getStatusIcon() + "] " + this.description + "\n";
         } else {
-            UI.markDoneRepeat();
+            return " You have already completed this task! *Woof woof*\n";
         }
     }
 
