@@ -1,6 +1,7 @@
 package duke.command;
 
 import duke.Storage;
+import duke.exception.DukeException;
 import duke.tool.TaskList;
 import duke.ui.Ui;
 
@@ -9,14 +10,21 @@ import duke.ui.Ui;
  */
 public class ListCommand implements Command {
 
+    private TaskList tasks;
+
     @Override
-    public void excute(TaskList tasks, Ui ui, Storage storage) {
-        ui.showTaskList(tasks);
+    public void execute(TaskList tasks, Storage storage) throws DukeException {
+        this.tasks = tasks;
     }
 
     @Override
     public boolean isExit() {
         return false;
+    }
+
+    @Override
+    public String getResponse() {
+        return Ui.getTaskListString(tasks);
     }
 
 }

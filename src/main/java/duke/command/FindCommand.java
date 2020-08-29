@@ -13,6 +13,7 @@ public class FindCommand implements Command{
 
     /** Search keyword for the list */
     private final String keyword;
+    TaskList resultTaskList = new TaskList();
 
     /**
      * Creates a find command with search keyword.
@@ -22,9 +23,9 @@ public class FindCommand implements Command{
         this.keyword = key;
     }
 
+
     @Override
-    public void excute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        TaskList resultTaskList = new TaskList();
+    public void execute(TaskList tasks,  Storage storage) throws DukeException {
 
         //Add the tasks whose description contains keyword
         for(Task task: tasks.getTasks()) {
@@ -32,14 +33,16 @@ public class FindCommand implements Command{
                 resultTaskList.add(task);
             }
         }
-
-        //Produce out put from result task list
-        ui.showTaskList(resultTaskList);
     }
 
     @Override
     public boolean isExit() {
         return false;
+    }
+
+    @Override
+    public String getResponse() {
+        return Ui.getTaskListString(resultTaskList);
     }
 
 }
