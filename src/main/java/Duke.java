@@ -1,6 +1,11 @@
+import java.util.List;
 import java.util.Scanner;
+import java.util.ArrayList;
+
 
 public class Duke {
+    private static List<String> commands = new ArrayList<>();
+
     public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -14,10 +19,12 @@ public class Duke {
         greet();
         while (scanner.hasNextLine()) {
             String command = scanner.nextLine();
-            if (!command.equals("bye")) {
-                echo(command);
-            } else {
+            if (command.equals("bye")) {
                 exit();
+            } else if (command.equals("list")){
+                printList();
+            } else {
+                add(command);
             }
         }
     }
@@ -32,5 +39,18 @@ public class Duke {
 
     private static void echo(String command) {
         System.out.println("" + command);
+    }
+
+    private static void add(String command) {
+        commands.add(command);
+        System.out.println("added: " + command);
+    }
+
+    private static void printList() {
+        for (int i = 0; i < commands.size(); i++) {
+            if (commands.get(i) != null) {
+                System.out.println((i + 1) + ". " + commands.get(i));
+            }
+        }
     }
 }
