@@ -8,6 +8,11 @@ public class Event extends Task {
 
     private LocalDateTime date;
 
+    /**
+     * constructor to mkae Event
+     * @param description
+     * @param date
+     */
     public Event(String description, LocalDateTime date) {
         super(description);
         this.date = date;

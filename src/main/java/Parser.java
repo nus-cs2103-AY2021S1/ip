@@ -7,9 +7,10 @@ public class Parser {
 
     /**
      * Takes all the necessary arguments to create the list of tasks
+     *
      * @param taskList main list where all tasks are kept on
-     * @param ui scanner that takes user inputs
-     * @param flag boolean value that exits the program once true
+     * @param ui       scanner that takes user inputs
+     * @param flag     boolean value that exits the program once true
      */
     public static void parseCode(TaskList taskList, UI ui, boolean flag) {
         while (!flag) {
