@@ -1,6 +1,8 @@
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.io.File;
@@ -78,21 +80,25 @@ public class Duke {
             if (arr.length == 1) {
                 throw new DukeException("The description of a todo cannot be empty.");
             } else {
-                String tsk = arr[1];
+                String tsk = arr[1].trim();
                 newTask = new ToDo(tsk);
             }
         } else if (firstWord.equals("deadline")) {
             String[] arr = input.split("deadline ");
-            if (arr.length == 1) {
+            if (arr.length <= 1) {
                 throw new DukeException("The description of a deadline cannot be empty.");
             } else {
                 String[] split = input.split("/by ");
                 if (split.length == 1) {
                     throw new DukeException("By when??? You didn't include your deadline.");
                 } else {
-                    String deadline = split[1];
-                    String tsk = split[0].split("deadline ")[1];
-                    newTask = new Deadline(tsk, deadline);
+                    String tsk = split[0].split("deadline")[1].trim();
+                    String deadline = split[1].trim();
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy");
+                    String dateString = deadline.split(" ")[0];
+                    String time = deadline.split(" ")[1];
+                    LocalDate date = LocalDate.parse(dateString, formatter);
+                    newTask = new Deadline(tsk, date, time);
                 }
             }
         } else {
@@ -104,8 +110,8 @@ public class Duke {
                 if (split.length == 1) {
                     throw new DukeException("At??? You didn't include the time of the event.");
                 } else {
-                    String at = split[1];
-                    String tsk = split[0].split("event ")[1];
+                    String at = split[1].trim();
+                    String tsk = split[0].split("event ")[1].trim();
                     newTask = new Event(tsk, at);
                 }
             }
