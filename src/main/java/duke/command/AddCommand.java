@@ -1,6 +1,9 @@
 package duke.command;
 
 import java.io.IOException;
+import java.util.HashMap;
+
+import duke.core.Result;
 import duke.core.Ui;
 import duke.core.TaskList;
 import duke.core.Storage;
@@ -31,9 +34,10 @@ public class AddCommand extends Command {
      * @throws IOException If the storage process needs to be handled
      */
     @Override
-    public void excecute(TaskList taskList, Ui ui, Storage storage) throws IOException {
+    public Result excecute(TaskList taskList, Ui ui, Storage storage) throws IOException {
         taskList.add(task);
-        ui.showAdd(task, taskList.getSize());
         storage.writeRecord(taskList);
+
+        return new Result(ui.showAdd(task, taskList.getSize()), this.isContinuing());
     }
 }

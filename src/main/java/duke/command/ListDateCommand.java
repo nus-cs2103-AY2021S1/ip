@@ -2,6 +2,8 @@ package duke.command;
 
 import java.io.IOException;
 import java.time.LocalDate;
+
+import duke.core.Result;
 import duke.core.Ui;
 import duke.core.TaskList;
 import duke.core.Storage;
@@ -33,7 +35,7 @@ public class ListDateCommand extends Command{
      * @throws IOException If the storage process needs to be handled
      */
     @Override
-    public void excecute(TaskList taskList, Ui ui, Storage storage) throws TaskNotFoundException, IOException {
-        ui.showList(taskList.findTaskAt(localDate));
+    public Result excecute(TaskList taskList, Ui ui, Storage storage) throws TaskNotFoundException, IOException {
+        return new Result(ui.showList(taskList.findTaskAt(localDate)), isContinuing());
     }
 }

@@ -1,6 +1,9 @@
 package duke.command;
 
 import java.io.IOException;
+import java.util.HashMap;
+
+import duke.core.Result;
 import duke.core.Ui;
 import duke.core.TaskList;
 import duke.core.Storage;
@@ -25,7 +28,7 @@ public abstract class Command {
      * @throws TaskNotFoundException If there is no task corresponding to the count of the task.
      * @throws IOException If the stroage process needs to be handled
      */
-    abstract public void excecute(TaskList taskList, Ui ui, Storage storage)
+    abstract public Result excecute(TaskList taskList, Ui ui, Storage storage)
             throws TaskNotFoundException, IOException;
 
     /**

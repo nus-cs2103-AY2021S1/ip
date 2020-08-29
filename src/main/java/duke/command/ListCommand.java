@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.core.Result;
 import duke.core.Ui;
 import duke.core.TaskList;
 import duke.core.Storage;
@@ -18,7 +19,7 @@ public class ListCommand extends Command {
      * @param storage The storage component.
      */
     @Override
-    public void excecute(TaskList taskList, Ui ui, Storage storage) {
-        ui.showList(taskList);
+    public Result excecute(TaskList taskList, Ui ui, Storage storage) {
+        return new Result(ui.showList(taskList), isContinuing());
     }
 }
