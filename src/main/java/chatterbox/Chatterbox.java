@@ -5,11 +5,15 @@ import java.util.Scanner;
 
 import chatterbox.task.Task;
 import chatterbox.task.TaskList;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
 
 /**
  * Handles the main loop and the high level logic flow of the program.
  */
-public class Chatterbox {
+public class Chatterbox extends Application {
     private final TaskList tasks;
     private final Scanner scanner;
 
@@ -21,6 +25,25 @@ public class Chatterbox {
         tasks = new TaskList(store);
         tasks.loadTasks();
         scanner = new Scanner(System.in);
+    }
+
+    /**
+     * The main entry point for all JavaFX applications.
+     * The start method is called after the init method has returned,
+     * and after the system is ready for the application to begin running.
+     *
+     * @param stage The primary stage for this application, onto which
+     *              the application scene can be set.
+     *              Applications may create other stages, if needed, but they will not be
+     *              primary stages.
+     */
+    @Override
+    public void start(Stage stage) {
+        Label helloWorld = new Label("Hello World!");
+        Scene scene = new Scene(helloWorld);
+
+        stage.setScene(scene);
+        stage.show();
     }
 
     /**
@@ -44,8 +67,8 @@ public class Chatterbox {
      * Processes user input and executes actions based on them.
      *
      * @param input Raw user input.
-     * @throws ChatterboxException  If input string is empty or invalid command is given.
-     * @throws IOException  If data cannot be read/written from the save file.
+     * @throws ChatterboxException If input string is empty or invalid command is given.
+     * @throws IOException         If data cannot be read/written from the save file.
      */
     private void processInput(String input) throws ChatterboxException, IOException {
         // Check if input is just whitespace
@@ -82,13 +105,6 @@ public class Chatterbox {
         } else {
             throw new ChatterboxException("That's not a valid command.");
         }
-    }
-
-    /**
-     * Initializes and runs the Chatterbox program.
-     */
-    public static void main(String[] args) {
-        new Chatterbox().run();
     }
 }
 
