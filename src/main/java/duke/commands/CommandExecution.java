@@ -71,7 +71,7 @@ public class CommandExecution {
             break;
         case BYE:
             ui.farewell();
-            System.exit(1);
+            System.exit(0);
         case DONE:
 
             if (instruction.substring(4).strip().equals("")) {
