@@ -78,6 +78,8 @@ public class Storage {
                     eventTask.markAsDone();
                 }
                 break;
+            default:
+                break;
             }
         }
         return taskList;

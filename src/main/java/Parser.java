@@ -62,7 +62,7 @@ public class Parser {
                     String[] splitBySlash = command.split("/");
                     return new String[]{cmd[0], splitBySlash[0].replaceFirst(cmd[0] + " ", ""),
                             cmd[cmd.length - 2], cmd[cmd.length - 1]};
-                } catch (DateTimeParseException e){
+                } catch (DateTimeParseException e) {
                     throw new InvalidDateAndTimeException();
                 }
             }

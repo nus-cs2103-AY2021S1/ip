@@ -29,8 +29,8 @@ public class Ui {
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        String intro = "Eh yo, I am Duke! Some kids call me 'Lao Duke' (which means old Duke).\n" +
-                "I like to speak Singlish but I also can remember your tasks one. Come try la! ";
+        String intro = "Eh yo, I am Duke! Some kids call me 'Lao Duke' (which means old Duke).\n"
+                + "I like to speak Singlish but I also can remember your tasks one. Come try la! ";
         System.out.println(logo);
         System.out.println(intro);
     }
@@ -39,8 +39,8 @@ public class Ui {
      * Prints the goodbye message.
      */
     public void byeMessage() {
-        String bye = "Alamak, you sure you finished all your tasks? Ok lah I also need to sleep anyway Zzzz.\n" +
-                "Goodbye!";
+        String bye = "Alamak, you sure you finished all your tasks? Ok lah I also need to sleep anyway Zzzz.\n"
+                + "Goodbye!";
         System.out.println(bye);
     }
 
@@ -52,7 +52,7 @@ public class Ui {
         System.out.println("Lao Duke not so blur like you. Tsk. I got remember your tasks one hor.");
         for (int i = 0; i < taskList.size(); i++) {
             Task tsk = taskList.get(i);
-            System.out.println("Task " + (i + 1) + ": "  + tsk);
+            System.out.println("Task " + (i + 1) + ": " + tsk);
         }
     }
 
