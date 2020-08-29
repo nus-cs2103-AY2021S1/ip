@@ -9,6 +9,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
@@ -28,10 +30,19 @@ import main.ui.Ui;
  * @since v0.1
  */
 public class Duke extends Application {
+    private final Image userImage = new Image(
+            this.getClass().getResourceAsStream("/images/DaUser.png"));
+    private final Image dukeImage = new Image(
+            this.getClass().getResourceAsStream("/images/DaDuke.png"));
     private final Ui ui;
     private final Scanner sc;
     private final TaskList tasks;
     private boolean hasCommand;
+    private ScrollPane scrollPane;
+    private VBox dialogContainer;
+    private TextField userInput;
+    private Button sendButton;
+    private Scene scene;
 
     /**
      * Constructs the duke application.
@@ -45,17 +56,17 @@ public class Duke extends Application {
 
     @Override
     public void start(Stage stage) {
-        ScrollPane scrollPane = new ScrollPane();
-        VBox dialogContainer = new VBox();
+        scrollPane = new ScrollPane();
+        dialogContainer = new VBox();
         scrollPane.setContent(dialogContainer);
 
-        TextField userInput = new TextField();
-        Button sendButton = new Button("Send");
+        userInput = new TextField();
+        sendButton = new Button("Send");
 
         AnchorPane mainLayout = new AnchorPane();
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
 
-        Scene scene = new Scene(mainLayout);
+        scene = new Scene(mainLayout);
 
         stage.setScene(scene);
         stage.show();
@@ -88,27 +99,26 @@ public class Duke extends Application {
         AnchorPane.setLeftAnchor(userInput, 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
-        sendButton.setOnMouseClicked(event -> {
-            dialogContainer.getChildren()
-                    .add(getDialogLabel(userInput.getText()));
-            userInput.clear();
-        });
+        sendButton.setOnMouseClicked(event -> handleUserInput());
 
-        userInput.setOnAction(event -> {
-            dialogContainer.getChildren()
-                    .add(getDialogLabel(userInput.getText()));
-            userInput.clear();
-        });
+        userInput.setOnAction(event -> handleUserInput());
 
         dialogContainer.heightProperty()
                 .addListener(observable -> scrollPane.setVvalue(1.0));
     }
 
-    private Label getDialogLabel(String text) {
-        Label textToAdd = new Label(text);
-        textToAdd.setWrapText(true);
+    private void handleUserInput() {
+        Label userText = new Label(userInput.getText());
+        Label dukeText = new Label(getResponse(userInput.getText()));
+        dialogContainer.getChildren().addAll(
+                DialogBox.getUserDialog(userText, new ImageView(userImage)),
+                DialogBox.getDukeDialog(dukeText, new ImageView(dukeImage))
+        );
+        userInput.clear();
+    }
 
-        return textToAdd;
+    private String getResponse(String input) {
+        return String.format("Duke heard: %s", input);
     }
 
     /**
