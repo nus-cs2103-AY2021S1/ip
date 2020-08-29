@@ -1,6 +1,7 @@
 package main.java;
 
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -28,7 +29,8 @@ public class Willy {
         System.out.println(startDuke);
         storage = new TaskStore();
         storage.createFile();
-        TaskList list = new TaskList(storage);
+        ArrayList<Task> listOfTask  = storage.retrieveStorage();
+        TaskList list = new TaskList(listOfTask, storage);
 
 
         while (input.hasNext()) {

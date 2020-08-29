@@ -11,8 +11,8 @@ public class TaskList {
     private ArrayList<Task> listOfTasks;
     private TaskStore storage;
 
-    TaskList(TaskStore storage) {
-        listOfTasks = new ArrayList<>();
+    TaskList(ArrayList<Task> listOfTasks, TaskStore storage) {
+        this.listOfTasks = listOfTasks;
         this.storage = storage;
     }
 

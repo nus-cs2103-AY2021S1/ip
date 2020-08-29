@@ -1,11 +1,13 @@
 package main.java;
 
+import java.io.FileNotFoundException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  * Stores the tasks recorded by the bot in a hard drive.
@@ -33,7 +35,7 @@ public class TaskStore {
         }
     }
 
-    public static void updateStorage(ArrayList<Task> listOfTasks) {
+    public void updateStorage(ArrayList<Task> listOfTasks) {
         try {
             FileWriter fw = new FileWriter(FILE_PATH);
             for (int i = 0; i < listOfTasks.size(); i++) {
@@ -68,6 +70,45 @@ public class TaskStore {
             fw.close();
         } catch (IOException e) {
             System.out.println(e.getMessage());
+        }
+    }
+
+    // Format of File Content: [T]|✘|go home
+    public ArrayList<Task> retrieveStorage() {
+        try {
+            File f = new File(FILE_PATH);
+            Scanner s = new Scanner(f);
+            ArrayList<Task> listOfTasks = new ArrayList<>();
+            while (s.hasNextLine()) {
+                String[] taskComponents = s.nextLine().split("\\|");
+                String taskType = taskComponents[0];
+                String taskStatus = taskComponents[1];
+                String activity = taskComponents[2];
+                if (taskType.contains("T")) {
+                    ToDoTask newTask = new ToDoTask(activity, TaskSymbol.TODO);
+                    if (taskStatus.contains("\u2713")) { //done
+                        newTask.setTaskDone(true);
+                    }
+                    listOfTasks.add(newTask);
+                } else if (taskType.contains("D")) {
+                    String deadline = taskComponents[3];
+                    DeadlineTask newTask = new DeadlineTask(deadline, activity, TaskSymbol.DEADLINE);
+                    if (taskStatus.contains("\u2713")) { //done
+                        newTask.setTaskDone(true);
+                    }
+                    listOfTasks.add(newTask);
+                } else if (taskType.contains("E")) {
+                    String duration = taskComponents[3];
+                    EventsTask newTask = new EventsTask(duration, activity, TaskSymbol.EVENT);
+                    if (taskStatus.contains("\u2713")) { //done
+                        newTask.setTaskDone(true);
+                    }
+                    listOfTasks.add(newTask);
+                }
+            }
+            return listOfTasks;
+        } catch (FileNotFoundException e) {
+            return new ArrayList<>();
         }
     }
 
