@@ -170,6 +170,7 @@ public class Duke extends Application {
                 DialogBox.getDukeDialog(dukeText, new ImageView(duke))
         );
         userInput.clear();
+
         try {
             this.storage.save(this.taskList);
         } catch (IOException e) {
