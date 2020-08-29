@@ -5,12 +5,12 @@ package duke.exception;
  */
 public class DukeException extends Exception {
     /**
-     * Initialises a new instance with a <code>☹ OOPS!!! </code> to represent the personality of
+     * Initialises a new instance with a <code>OOPS!!! </code> to represent the personality of
      * the chat bot, followed by the specified detail message.
      *
      * @param message The detail message.
      */
     public DukeException(String message) {
-        super("☹ OOPS!!! " + message);
+        super("OOPS!!! " + message);
     }
 }
