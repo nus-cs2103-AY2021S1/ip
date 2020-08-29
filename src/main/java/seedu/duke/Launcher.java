@@ -15,6 +15,6 @@ public class Launcher {
     }
 
     public static void runGUI(String[] args) {
-        Application.launch(Duke.class, args);
+        Application.launch(Main.class, args);
     }
 }
