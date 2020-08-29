@@ -1,10 +1,10 @@
 package duke.task;
 
-import duke.parser.Parser;
-import duke.storage.Storage;
-
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+
+import duke.parser.Parser;
+import duke.storage.Storage;
 
 /**
  * Represents the task list of user.
@@ -130,6 +130,10 @@ public class TaskList {
         }
     }
 
+    /**
+     * Find the tasks according to the keyword user input.
+     * @param keyword Keyword provided by user.
+     */
     public void findTasks(String keyword) {
         boolean canFind = false;
         for (Task task : taskList) {

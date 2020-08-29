@@ -1,11 +1,11 @@
 package duke.command;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
+
 import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.task.TaskList;
-
-import java.time.LocalDateTime;
-import java.time.format.DateTimeParseException;
 
 /**
  * Represents the AddCommand to add tasks into task list.
@@ -40,19 +40,12 @@ public class AddCommand extends Command {
      * @throws DukeException If input does not meet criteria.
      */
     public void execute(String input, TaskList taskList, Storage storage) throws DukeException {
-        switch (taskType) {
-        case "todo": {
+        if ("todo".equals(taskType)) {
             addToDo(input, taskList, storage);
-            break;
-        }
-        case "deadline": {
+        } else if ("deadline".equals(taskType)) {
             addDeadline(input, taskList, storage);
-            break;
-        }
-        case "event": {
+        } else if ("event".equals(taskType)) {
             addEvent(input, taskList, storage);
-            break;
-        }
         }
     }
 

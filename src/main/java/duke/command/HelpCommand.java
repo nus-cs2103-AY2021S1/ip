@@ -32,8 +32,7 @@ public class HelpCommand extends Command {
         }
         try {
             checker = input.split("help")[1];
-        }
-        catch (ArrayIndexOutOfBoundsException e) {
+        } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeException("\tDid you meant the command 'help'?");
         }
         if (!checker.isBlank()) { // user's input is "help me" for example

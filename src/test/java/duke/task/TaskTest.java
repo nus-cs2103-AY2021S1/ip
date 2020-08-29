@@ -1,13 +1,13 @@
 package duke.task;
 
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import org.junit.jupiter.api.Test;
+
 public class TaskTest {
-    Task incompleteTask = new Task("incomplete task");
-    Task completedTask = new Task("completed task");
+    private final Task incompleteTask = new Task("incomplete task");
+    private final Task completedTask = new Task("completed task");
 
     @Test
     public void testGetTaskName() {
