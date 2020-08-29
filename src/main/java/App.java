@@ -23,7 +23,6 @@ public class App extends Application {
     private Scene scene;
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
-    private String buttonLabel = "Start";
 
     String home = System.getProperty("user.home");
     java.nio.file.Path path = java.nio.file.Paths.get(home, "Desktop", "cs2103", "ip", "data", "tasks.txt");
