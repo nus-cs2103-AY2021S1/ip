@@ -1,7 +1,5 @@
 package tasks;
 
-import tasks.Task;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,10 +35,17 @@ public class TaskList {
         this.taskList.remove(index);
     }
 
+    /**
+     * Returns a List that contains the task that matches
+     * the keyword that the user is finding.
+     *
+     * @param keyword Keyword that the user is finding.
+     * @return List of tasks that matches the keyword.
+     */
     public List<Task> findTasks(String keyword) {
         List<Task> newList = new ArrayList<>();
-        for( int m = 0; m < taskList.size(); m++) {
-            if(taskList.get(m).taskDesc.contains(keyword)) {
+        for (int m = 0; m < taskList.size(); m++) {
+            if (taskList.get(m).taskDesc.contains(keyword)) {
                 newList.add(taskList.get(m));
             }
         }

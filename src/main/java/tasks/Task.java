@@ -25,10 +25,10 @@ public class Task {
      * @return a tick or cross, depending on taskStatus
      */
     public String getIcon() {
-        return ( taskStatus ? "\u2713" : "\u2718" );
+        return (taskStatus ? "\u2713" : "\u2718");
     }
     @Override
     public String toString() {
-        return "["+this.getIcon()+"] " + this.taskDesc;
+        return "[" + this.getIcon() + "] " + this.taskDesc;
     }
 }

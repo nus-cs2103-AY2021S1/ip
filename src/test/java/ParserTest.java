@@ -1,9 +1,12 @@
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
+
+import org.junit.jupiter.api.Test;
+
 import command.Command;
 import exception.InvalidInputException;
 import logic.Parser;
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 public class ParserTest {
 
@@ -22,7 +25,7 @@ public class ParserTest {
             Parser.parse("kiwis /at 2020-08-40 18:00");
             fail();
         } catch (InvalidInputException e) {
-            assertEquals("☹ OOPS!!! I'm sorry, but I don't know what that means :-(",e.getMessage());
+            assertEquals("OOPS!!! I'm sorry, but I don't know what that means :-(", e.getMessage());
         }
     }
 }

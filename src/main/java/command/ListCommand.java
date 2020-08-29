@@ -8,7 +8,7 @@ import tasks.TaskList;
 /**
  * List all tasks that logic.Duke currently has.
  */
-public class ListCommand extends Command{
+public class ListCommand extends Command {
     
     public ListCommand(String input) {
         super(input);

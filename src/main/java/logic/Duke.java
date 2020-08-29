@@ -17,6 +17,10 @@ public class Duke {
     private Storage storage;
     private TaskList taskList;
 
+    /**
+     * Constructor to create a Duke object.
+     * @param fileLocation the location to store save files.
+     */
     public Duke(String fileLocation) {
         this.fileLocation = fileLocation;
         this.ui = new Ui();

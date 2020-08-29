@@ -31,8 +31,8 @@ public class ToDoCommand extends Command {
         }
         ToDos task = new ToDos(super.input.substring(5));
         tasks.getTasks().add(task);
-        ui.printOutput("\tGot it. I've added this task:\n" + "\t"+task.toString() +
-                "\n\tNow you have " + tasks.getTasks().size() + " tasks in the list.");
+        ui.printOutput("\tGot it. I've added this task:\n" + "\t" + task.toString()
+                + "\n\tNow you have " + tasks.getTasks().size() + " tasks in the list.");
         storage.saveFile(tasks.getTasks());
     }
 

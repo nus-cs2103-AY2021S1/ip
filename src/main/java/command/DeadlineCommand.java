@@ -1,5 +1,9 @@
 package command;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 import exception.InvalidDateTimeFormatException;
 import exception.InvalidInputException;
 import exception.InvalidSaveFileException;
@@ -8,17 +12,13 @@ import logic.Ui;
 import tasks.Deadlines;
 import tasks.TaskList;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-
 /**
  * Adds the deadline entry that the user input to the
  * Arraylist of logic.Duke.
  */
-public class DeadlineCommand extends Command{
+public class DeadlineCommand extends Command {
 
-    public static DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+    private static DateTimeFormatter dateTimeFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
     public DeadlineCommand(String input) {
         super(input);
     }
@@ -40,18 +40,19 @@ public class DeadlineCommand extends Command{
             throw new InvalidInputException("\t☹ OOPS!!! The description of a deadline cannot be empty.");
         }
         String[] splitWord = super.input.split("/");
-        String desc = splitWord[0].substring(9,splitWord[0].length()-1);
+        String desc = splitWord[0].substring(9, splitWord[0].length() - 1);
         String deadline = splitWord[1].substring(3);
         Deadlines task;
         try {
-            task = new Deadlines(desc, LocalDateTime.parse(deadline,dtf));
+            task = new Deadlines(desc, LocalDateTime.parse(deadline, dateTimeFormat));
         } catch (DateTimeParseException e) {
-            throw new InvalidDateTimeFormatException("\tDeadline input must follow a certain format: yyyy-mm-dd HH:mm " +
-                    "e.g. 2020-08-23 16:45");
+            throw new InvalidDateTimeFormatException(
+                    "\tDeadline input must follow a certain format: yyyy-mm-dd HH:mm "
+                    + "e.g. 2020-08-23 16:45");
         }
         tasks.addTask(task);
-        ui.printOutput("\tGot it. I've added this task:\n" + "\t" + task.toString() +
-                "\n\tNow you have " + tasks.getTasks().size() + " tasks in the list.");
+        ui.printOutput("\tGot it. I've added this task:\n" + "\t" + task.toString()
+                + "\n\tNow you have " + tasks.getTasks().size() + " tasks in the list.");
         storage.saveFile(tasks.getTasks());
     }
 

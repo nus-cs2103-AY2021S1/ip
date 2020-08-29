@@ -10,6 +10,12 @@ public class Events extends Task {
 
     protected LocalDateTime timing;
 
+    /**
+     * Constructor for creating an Events object.
+     *
+     * @param taskDesc Description of the task.
+     * @param timing Timing to finish the task.
+     */
     public Events(String taskDesc, LocalDateTime timing) {
         super(taskDesc);
         this.timing = timing;
@@ -17,7 +23,7 @@ public class Events extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " +
-                timing.format(DateTimeFormatter.ofPattern("HH:mm MMM d yyyy"))+ ")";
+        return "[E]" + super.toString() + " (at: "
+                + timing.format(DateTimeFormatter.ofPattern("HH:mm MMM d yyyy")) + ")";
     }
 }

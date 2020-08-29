@@ -1,11 +1,5 @@
 package logic;
 
-import exception.InvalidSaveFileException;
-import tasks.Deadlines;
-import tasks.Events;
-import tasks.Task;
-import tasks.ToDos;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -14,6 +8,12 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
+import exception.InvalidSaveFileException;
+import tasks.Deadlines;
+import tasks.Events;
+import tasks.Task;
+import tasks.ToDos;
 
 /**
  * Handles saving of the list and reading it upon startup.
@@ -54,7 +54,7 @@ public class Storage {
                         int index = entry.indexOf("(");
                         String datetime = entry.substring(index + 5, entry.length() - 1);
                         LocalDateTime ldt = LocalDateTime.parse(datetime, dtf2);
-                        Deadlines d = new Deadlines(entry.substring(7, index-1),
+                        Deadlines d = new Deadlines(entry.substring(7, index - 1),
                                 ldt);
                         if (entry.contains("✓")) {
                             d.completeTask();
@@ -64,7 +64,7 @@ public class Storage {
                         int index = entry.indexOf("(");
                         String datetime = entry.substring(index + 5, entry.length() - 1);
                         LocalDateTime ldt = LocalDateTime.parse(datetime, dtf2);
-                        Events e = new Events(entry.substring(7, index-1),
+                        Events e = new Events(entry.substring(7, index - 1),
                                 ldt);
                         if (entry.contains("✓")) {
                             e.completeTask();
@@ -74,8 +74,8 @@ public class Storage {
                 }
             }
         } catch (IOException e) {
-            throw new InvalidSaveFileException("Hmmmm....there is something wrong with the previous save file! We " +
-                    "will have to write a new one!");
+            throw new InvalidSaveFileException("Hmmmm....there is something wrong with the previous save file! We "
+                    + "will have to write a new one!");
         }
         return toDoList;
     }
@@ -93,14 +93,15 @@ public class Storage {
         }
         try {
             FileWriter fw = new FileWriter(fileLocation);
-            for (int i=0; i<toDoList.size();i++) {
+            for (int i = 0; i < toDoList.size(); i++) {
                 Task interim = toDoList.get(i);
                 String desc = interim.toString();
-                fw.write(desc+"\n");
+                fw.write(desc + "\n");
             }
             fw.close();
         } catch (IOException e) {
-            throw new InvalidSaveFileException("\t☹ OOPS!!! logic.Duke is experiencing IO errors when writing to save file!");
+            throw new InvalidSaveFileException(
+                    "\t☹ OOPS!!! logic.Duke is experiencing IO errors when writing to save file!");
         }
     }
 }

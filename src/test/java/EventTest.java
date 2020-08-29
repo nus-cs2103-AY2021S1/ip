@@ -1,34 +1,35 @@
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
-import tasks.Events;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+
+import tasks.Events;
 
 public class EventTest {
 
-    static DateTimeFormatter dtf;
-    static LocalDateTime ldt;
+    private static DateTimeFormatter dateTimeFormatter;
+    private static LocalDateTime localDateTime;
 
     @BeforeAll
     static void init() {
-        dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-        ldt = LocalDateTime.parse("2020-08-23 18:00",dtf);
+        dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        localDateTime = LocalDateTime.parse("2020-08-23 18:00", dateTimeFormatter);
     }
     @Test
     public void constructorTest() {
-        Events events = new Events("kiwis", ldt);
+        Events events = new Events("kiwis", localDateTime);
         assertEquals(
-                "[E]["+"\u2718"+"] kiwis (at: 18:00 Aug 23 2020)",events.toString());
+                "[E][" + "\u2718" + "] kiwis (at: 18:00 Aug 23 2020)", events.toString());
     }
 
     @Test
     public void completionTest() {
-        Events events = new Events("kiwis", ldt);
+        Events events = new Events("kiwis", localDateTime);
         events.completeTask();
-        assertEquals("[E]["+"\u2713"+"] kiwis (at: 18:00 Aug 23 2020)",events.toString());
+        assertEquals("[E][" + "\u2713" + "] kiwis (at: 18:00 Aug 23 2020)", events.toString());
     }
 
 }

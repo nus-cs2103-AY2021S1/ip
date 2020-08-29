@@ -10,6 +10,12 @@ public class Deadlines extends Task {
 
     protected LocalDateTime deadline;
 
+    /**
+     * Constructor for creating a Deadlines object
+     *
+     * @param taskDesc Description of the Deadlines.
+     * @param deadline Deadline of task.
+     */
     public Deadlines(String taskDesc, LocalDateTime deadline) {
         super(taskDesc);
         this.deadline = deadline;
@@ -17,6 +23,7 @@ public class Deadlines extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: "+ deadline.format(DateTimeFormatter.ofPattern("HH:mm MMM d yyyy")) + ")";
+        return "[D]" + super.toString() + " (by: "
+                + deadline.format(DateTimeFormatter.ofPattern("HH:mm MMM d yyyy")) + ")";
     }
 }

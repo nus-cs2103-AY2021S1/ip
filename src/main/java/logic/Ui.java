@@ -7,7 +7,7 @@ import java.util.Scanner;
  */
 public class Ui {
 
-    Scanner sc;
+    private Scanner sc;
     public Ui() {
         sc = new Scanner(System.in);
     }
@@ -26,7 +26,7 @@ public class Ui {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
         System.out.println("\t____________________________________________________________");
-        System.out.println("\tHello! I'm logic.Duke\n\tWhat can I do for you?");
+        System.out.println("\tHello! I'm Duke\n\tWhat can I do for you?");
         System.out.println("\t____________________________________________________________");
     }
 

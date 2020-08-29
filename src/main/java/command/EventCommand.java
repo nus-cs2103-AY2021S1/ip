@@ -1,5 +1,9 @@
 package command;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 import exception.InvalidDateTimeFormatException;
 import exception.InvalidInputException;
 import exception.InvalidSaveFileException;
@@ -8,18 +12,14 @@ import logic.Ui;
 import tasks.Events;
 import tasks.TaskList;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-
 /**
  * Adds the event entry that the user input to the
  * Arraylist of logic.Duke.
  */
-public class EventCommand extends Command{
+public class EventCommand extends Command {
     
-    public static DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-    
+    private static DateTimeFormatter dateTimeFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+
     public EventCommand(String input) {
         super(input);
     }
@@ -40,18 +40,19 @@ public class EventCommand extends Command{
             throw new InvalidInputException("\t☹ OOPS!!! The description of an event cannot be empty.");
         }
         String[] splitWord = super.input.split("/");
-        String desc = splitWord[0].substring(6,splitWord[0].length()-1);
+        String desc = splitWord[0].substring(6, splitWord[0].length() - 1);
         String timing = splitWord[1].substring(3);
         Events task;
         try {
-            task = new Events(desc,LocalDateTime.parse(timing,dtf) );
-        } catch(DateTimeParseException e) {
-            throw new InvalidDateTimeFormatException("\tEvent timing input must follow a certain format: yyyy-mm-dd HH:mm " +
-                    "e.g. 2020-08-23 16:45");
+            task = new Events(desc, LocalDateTime.parse(timing, dateTimeFormat));
+        } catch (DateTimeParseException e) {
+            throw new InvalidDateTimeFormatException(
+                    "\tEvent timing input must follow a certain format: yyyy-mm-dd HH:mm "
+                    + "e.g. 2020-08-23 16:45");
         }
         tasks.addTask(task);
-        System.out.println("\tGot it. I've added this task:\n" + "\t"+task.toString() +
-                "\n\tNow you have " + tasks.getTasks().size() + " tasks in the list.");
+        System.out.println("\tGot it. I've added this task:\n" + "\t" + task.toString()
+                + "\n\tNow you have " + tasks.getTasks().size() + " tasks in the list.");
         storage.saveFile(tasks.getTasks());
     }
 

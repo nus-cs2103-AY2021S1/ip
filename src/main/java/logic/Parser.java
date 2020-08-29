@@ -1,6 +1,14 @@
 package logic;
 
-import command.*;
+import command.Command;
+import command.DeadlineCommand;
+import command.DeleteCommand;
+import command.DoneCommand;
+import command.EventCommand;
+import command.ExitCommand;
+import command.FindCommand;
+import command.ListCommand;
+import command.ToDoCommand;
 import exception.InvalidInputException;
 
 /**
@@ -33,7 +41,7 @@ public class Parser {
         } else if (fullCommand.startsWith("find")) {
             return new FindCommand(fullCommand);
         } else {
-            throw new InvalidInputException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            throw new InvalidInputException("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
     }
 }
