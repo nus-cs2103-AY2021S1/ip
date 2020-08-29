@@ -13,6 +13,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class App extends Application {
@@ -92,24 +93,12 @@ public class App extends Application {
     }
 
     /**
-     * Creates a label with the specified text and adds it to the dialog container.
-     * @param text String containing text to add
-     * @return a label with the specified text that has word wrap enabled.
-     */
-    public Label getDialogLabel(String text) {
-        Label textToAdd = new Label(text);
-        textToAdd.setWrapText(true);
-
-        return textToAdd;
-    }
-
-    /**
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
     private void handleUserInput() {
         Label userText = new Label(userInput.getText());
-        Label dukeText = new Label(getResponse(userInput.getText()));
+        Label dukeText = getResponse(userInput.getText());
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(userText, new ImageView(user)),
                 DialogBox.getDukeDialog(dukeText, new ImageView(duke))
@@ -121,15 +110,15 @@ public class App extends Application {
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
-    public String getResponse(String input) {
+    public Label getResponse(String input) {
         Command c = Parser.parse(input);
         if (c.isExit()) {
             System.exit(0);
         }
         try {
-            return c.execute(runningDuke.getUi(), runningDuke.getList(), runningDuke.getStorage());
+            return new Label(c.execute(runningDuke.getUi(), runningDuke.getList(), runningDuke.getStorage()));
         } catch (InvalidCommandException e) {
-            return e.getMessage();
+            return new Label(e.getMessage());
         }
     }
 }
