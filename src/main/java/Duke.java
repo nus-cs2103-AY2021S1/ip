@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 
 public class Duke {
-    private static List<String> commands = new ArrayList<>();
+    private static List<Task> tasks = new ArrayList<>();
 
     public static void main(String[] args) {
         String logo = " ____        _        \n"
@@ -23,8 +23,12 @@ public class Duke {
                 exit();
             } else if (command.equals("list")){
                 printList();
+            } else if (command.split(" ")[0].equals("done")) {
+                int index = Integer.parseInt(command.split(" ")[1]);
+                done(tasks.get(index - 1));
             } else {
-                add(command);
+                Task task = new Task(command);
+                add(task);
             }
         }
     }
@@ -41,15 +45,21 @@ public class Duke {
         System.out.println("" + command);
     }
 
-    private static void add(String command) {
-        commands.add(command);
-        System.out.println("added: " + command);
+    private static void add(Task task) {
+        tasks.add(task);
+        System.out.println("added: " + task.toString());
+    }
+
+    private static void done(Task task) {
+        task.setDone();
+        System.out.println("Nice! I've marked this task as done:\n" + task.toString());
     }
 
     private static void printList() {
-        for (int i = 0; i < commands.size(); i++) {
-            if (commands.get(i) != null) {
-                System.out.println((i + 1) + ". " + commands.get(i));
+        System.out.println("Here are the tasks in your list:");
+        for (int i = 0; i < tasks.size(); i++) {
+            if (tasks.get(i) != null) {
+                System.out.println((i + 1) + ". " + tasks.get(i).toString());
             }
         }
     }
