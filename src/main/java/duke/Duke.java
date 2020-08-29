@@ -14,6 +14,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 import java.io.IOException;
+import java.util.LinkedList;
 
 import command.Command;
 import exception.DukeException;
@@ -37,7 +38,15 @@ public class Duke extends Application{
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
-    public Duke() {}
+    public Duke() {
+        ui = new Ui();
+        storage = new Storage("data/duke.txt");
+        try {
+            tasks = new TaskList(storage.load());
+        } catch (IOException e) {
+            tasks = new TaskList(new LinkedList<>());
+        }
+    }
     /**
      * A constructor to create Duke object.
      * @param filePath the saved location of the database.
@@ -48,7 +57,7 @@ public class Duke extends Application{
         try {
             tasks = new TaskList(storage.load());
         } catch (IOException e) {
-            tasks = new TaskList();
+            tasks = new TaskList(new LinkedList<>());
         }
     }
 
@@ -156,7 +165,14 @@ public class Duke extends Application{
      * Replace this stub with your completed method.
      */
     public String getResponse(String input) {
-        return "Duke heard: " + input;
+        Command c = Parser.parse(input);
+        String s = "";
+        try {
+            s = c.execute(tasks, ui, storage);
+        } catch (DukeException e) {
+            s = e.toString();
+        }
+        return s;
     }
 
     /**

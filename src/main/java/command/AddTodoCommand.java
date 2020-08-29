@@ -28,15 +28,15 @@ public class AddTodoCommand extends Command {
      * @throws DukeException if there are no description.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
             Task temp = new Task(commands[1]);
             tasks.addTask(temp);
-            try {
-                storage.saveFile(tasks);
-            } catch (IOException e) {
-                System.out.println(e);
-            }
+            String s = "Added new task " + temp;
+            storage.saveFile(tasks);
+            return s;
+        } catch(IOException e) {
+            return e.toString();
         } catch (IndexOutOfBoundsException e) {
             throw new TaskException();
         }

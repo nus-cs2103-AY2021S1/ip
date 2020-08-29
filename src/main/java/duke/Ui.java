@@ -23,8 +23,8 @@ public class Ui {
     /**
      * A function to print goodbye message.
      */
-    public void goodbyeMessage() {
-        System.out.println("GoodBye, Hope to see you back soon.");
+    public String goodbyeMessage() {
+        return "GoodBye, Hope to see you back soon.";
     }
 
     /**

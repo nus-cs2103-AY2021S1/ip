@@ -16,10 +16,11 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
             String toBeSearched = commands[1];
-            tasks.find(toBeSearched);
+            String s = tasks.find(toBeSearched);
+            return s;
         } catch (IndexOutOfBoundsException e) {
             throw new FindException();
         }

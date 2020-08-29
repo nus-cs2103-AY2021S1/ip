@@ -34,18 +34,20 @@ public class AddDeadlineCommand extends Command {
      * @throws DukeException if they use the wrong format or no description.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
             String[] str = commands[1].split("/by ", 2);
             DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
             LocalDateTime date = LocalDateTime.parse(str[1], dateFormatter);
             Task temp = new Deadline(str[0], date);
             tasks.addTask(temp);
+            String s = "Added new task " + temp;
             try {
                 storage.saveFile(tasks);
             } catch (IOException e) {
-                System.out.println(e);
+                return e.toString();
             }
+            return s;
         } catch (IndexOutOfBoundsException e) {
             throw new DeadlineException();
         } catch (DateTimeParseException e) {

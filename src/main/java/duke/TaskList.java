@@ -17,9 +17,6 @@ public class TaskList {
         this.taskList = taskList;
     }
 
-    public TaskList() {
-        this.taskList = new LinkedList<>();
-    }
 
     public List<Task> getTaskList() {
         return this.taskList;
@@ -28,10 +25,12 @@ public class TaskList {
     /**
      * A function to print out all the task.
      */
-    public void printList() {
+    public String printList() {
+        String s = "";
         for (int i = 0; i < this.taskList.size(); i++) {
-            System.out.println((i + 1) + ". " + this.taskList.get(i));
+            s += (i + 1) + ". " + this.taskList.get(i) + "\n";
         }
+        return s;
     }
 
     /**
@@ -39,11 +38,12 @@ public class TaskList {
      * @param index which is the task to be marked as done.
      * @throws DoneOutOfBoundException if there are no such task.
      */
-    public void changeIsDone(int index) throws DoneOutOfBoundException {
+    public String changeIsDone(int index) throws DoneOutOfBoundException {
         try {
             this.taskList.get(index - 1).changeIsDone();
-            System.out.println("This task has been mark as done.");
-            System.out.println(this.taskList.get(index - 1));
+            String s = "This task has been mark as done.";
+            s += this.taskList.get(index - 1);
+            return s;
         } catch (IndexOutOfBoundsException e) {
             throw new DoneOutOfBoundException();
         }
@@ -54,12 +54,13 @@ public class TaskList {
      * @param index the index of the task to be deleted.
      * @throws DeleteOutOfBoundException if there are no such task.
      */
-    public void delete(int index) throws DeleteOutOfBoundException {
+    public String delete(int index) throws DeleteOutOfBoundException {
         try {
             Task cur = this.taskList.get(index - 1);
             this.taskList.remove(index - 1);
-            System.out.println("This task has been deleted.");
-            System.out.println(cur);
+            String s = "This task has been deleted.";
+            s += cur;
+            return s;
         } catch (IndexOutOfBoundsException e) {
             throw new DeleteOutOfBoundException();
         }
@@ -71,22 +72,23 @@ public class TaskList {
      */
     public void addTask(Task task) {
         this.taskList.add(task);
-        System.out.println("Added new task " + task);
     }
 
     /**
      * A function to find word in the task list.
      * @param search the key to search.
      */
-    public void find(String search) {
+    public String find(String search) {
         int len = this.taskList.size();
+        String s = "";
         int index = 1;
         for (int i = 0; i < len; i++) {
             if (this.taskList.get(i).toString().contains(search)) {
-                System.out.println(index + ". " + this.taskList.get(i).toString());
+                s += index + ". " + this.taskList.get(i).toString() + "\n";
                 index++;
             }
         }
+        return s;
     }
 
     /**

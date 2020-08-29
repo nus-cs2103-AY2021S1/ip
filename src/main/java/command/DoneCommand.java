@@ -28,15 +28,16 @@ public class DoneCommand extends Command {
      * @throws DukeException if there are no value or it is not integer.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
             Integer toBeChanged = Integer.valueOf(commands[1]);
-            tasks.changeIsDone(toBeChanged);
+            String s = tasks.changeIsDone(toBeChanged);
             try {
                 storage.saveFile(tasks);
             } catch (IOException e) {
-                System.out.println(e);
+                return e.toString();
             }
+            return s;
         } catch (DoneOutOfBoundException e) {
             throw e;
         } catch (NumberFormatException e) {

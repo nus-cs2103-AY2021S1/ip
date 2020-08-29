@@ -24,8 +24,8 @@ public class PrintListCommand extends Command {
      * @param storage deals with loading tasks from the file and saving tasks in the file.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        tasks.printList();
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        return tasks.printList();
     }
 
     /**

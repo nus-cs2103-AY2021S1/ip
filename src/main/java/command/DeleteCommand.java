@@ -28,15 +28,16 @@ public class DeleteCommand extends Command {
      * @throws DukeException if there are no value or it is not a number.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
             Integer toBeDeleted = Integer.valueOf(commands[1]);
-            tasks.delete(toBeDeleted);
+            String s = tasks.delete(toBeDeleted);
             try {
                 storage.saveFile(tasks);
             } catch (IOException e) {
-                System.out.println(e);
+                return e.toString();
             }
+            return s;
         } catch (DeleteOutOfBoundException e) {
             throw e;
         } catch (NumberFormatException e) {
