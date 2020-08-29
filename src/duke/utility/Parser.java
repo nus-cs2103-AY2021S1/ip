@@ -1,5 +1,10 @@
 package duke.utility;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 import duke.command.Command;
 import duke.command.DeadlineCommand;
 import duke.command.DeleteCommand;
@@ -26,11 +31,6 @@ import duke.task.DeadlineTask;
 import duke.task.EventTask;
 import duke.task.Task;
 import duke.task.ToDoTask;
-
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 
 /**
  * Class to parse the user input. This class will try to
@@ -125,11 +125,11 @@ public class Parser {
             arg = userInputArr[1];
         }
 
-        if (command.equals(Command.COMMAND_BYE)) {
+        if (command.equals(Command.getCommandBye())) {
             return new ExitCommand();
-        } else if (command.equals(Command.COMMAND_LIST)) {
+        } else if (command.equals(Command.getCommandList())) {
             return new ListCommand();
-        } else if (command.equals(Command.COMMAND_DONE)) {
+        } else if (command.equals(Command.getCommandDone())) {
             if (arg == null) {
                 throw new DoneException();
             }
@@ -143,7 +143,7 @@ public class Parser {
             }
 
             return new DoneCommand(taskNumber);
-        } else if (command.equals(Command.COMMAND_DELETE)) {
+        } else if (command.equals(Command.getCommandDelete())) {
             if (arg == null) {
                 throw new DeleteException();
             }
@@ -157,7 +157,7 @@ public class Parser {
             }
 
             return new DeleteCommand(taskNumber);
-        } else if (command.equals(Command.COMMAND_TASK_AFTER)) {
+        } else if (command.equals(Command.getCommandTaskAfter())) {
             if (arg == null) {
                 throw new InvalidDateFormatException();
             }
@@ -171,7 +171,7 @@ public class Parser {
             }
 
             return new TaskAfterCommand(parsedDate);
-        } else if (command.equals(Command.COMMAND_TASK_BEFORE)) {
+        } else if (command.equals(Command.getCommandTaskBefore())) {
             if (arg == null) {
                 throw new InvalidDateFormatException();
             }
@@ -185,12 +185,12 @@ public class Parser {
             }
 
             return new TaskBeforeCommand(parsedDate);
-        } else if (command.equals(Command.COMMAND_TODO)) {
+        } else if (command.equals(Command.getCommandTodo())) {
             if (arg == null) {
                 throw new ToDoException();
             }
             return new ToDoCommand(arg);
-        } else if (command.equals(Command.COMMAND_DEADLINE)) {
+        } else if (command.equals(Command.getCommandDeadline())) {
             if (arg == null) {
                 throw new DeadlineException();
             }
@@ -214,7 +214,7 @@ public class Parser {
             }
 
             return new DeadlineCommand(taskForDeadline, deadlineDate);
-        } else if (command.equals(Command.COMMAND_EVENT)) {
+        } else if (command.equals(Command.getCommandEvent())) {
             if (arg == null) {
                 throw new EventException();
             }
@@ -237,7 +237,7 @@ public class Parser {
             }
 
             return new EventCommand(taskForEvent, eventDate);
-        } else if (command.equals(Command.COMMAND_FIND)) {
+        } else if (command.equals(Command.getCommandFind())) {
             if (arg == null) {
                 throw new FindException();
             }

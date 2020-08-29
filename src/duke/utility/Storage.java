@@ -1,8 +1,5 @@
 package duke.utility;
 
-import duke.exception.DukeException;
-import duke.exception.FailToReadFileException;
-import duke.task.Task;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -11,6 +8,10 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
+import duke.exception.DukeException;
+import duke.exception.FailToReadFileException;
+import duke.task.Task;
 
 /**
  * This class deals with saving, changing, or deleting

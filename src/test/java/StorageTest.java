@@ -1,11 +1,3 @@
-import duke.task.DeadlineTask;
-import duke.task.EventTask;
-import duke.task.ToDoTask;
-import duke.utility.Storage;
-import duke.utility.TaskList;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
-
 import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -13,9 +5,18 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+
+import duke.task.DeadlineTask;
+import duke.task.EventTask;
+import duke.task.ToDoTask;
+import duke.utility.Storage;
+import duke.utility.TaskList;
+
 public class StorageTest {
     @Test
-    public void StorageSaveTest() {
+    public void storageSaveTest() {
         Path path = Paths.get("junit-test/ACTUAL_STORAGE_SAVE.txt");
         Storage storage = new Storage(path.toString());
 
@@ -79,7 +80,7 @@ public class StorageTest {
     }
 
     @Test
-    public void StorageChangeToDoneTest() {
+    public void storageChangeToDoneTest() {
         Path path = Paths.get("junit-test/ACTUAL_STORAGE_CHANGE_TO_DONE.txt");
         Storage storage = new Storage(path.toString());
 
@@ -145,7 +146,7 @@ public class StorageTest {
     }
 
     @Test
-    public void StorageDeleteTest() {
+    public void storageDeleteTest() {
         Path path = Paths.get("junit-test/ACTUAL_STORAGE_DELETE.txt");
         Storage storage = new Storage(path.toString());
 

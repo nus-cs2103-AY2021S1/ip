@@ -1,3 +1,9 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+
 import duke.exception.DeadlineException;
 import duke.exception.DeleteException;
 import duke.exception.DoneException;
@@ -12,13 +18,6 @@ import duke.task.EventTask;
 import duke.task.Task;
 import duke.task.ToDoTask;
 import duke.utility.Parser;
-
-import org.junit.jupiter.api.Test;
-
-import org.junit.jupiter.api.Assertions;
-
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 public class ParserTest {
     @Test
@@ -268,19 +267,19 @@ public class ParserTest {
 
     @Test
     public void parseNotACommandTest() {
-        String NotACommand1 = "abc";
+        String notACommand1 = "abc";
         Assertions.assertThrows(NotACommandException.class, () -> {
-            Parser.parseUserInput(NotACommand1);
+            Parser.parseUserInput(notACommand1);
         });
 
-        String NotACommand2 = "cba";
+        String notACommand2 = "cba";
         Assertions.assertThrows(NotACommandException.class, () -> {
-            Parser.parseUserInput(NotACommand2);
+            Parser.parseUserInput(notACommand2);
         });
 
-        String NotACommand3 = "dead line";
+        String notACommand3 = "dead line";
         Assertions.assertThrows(NotACommandException.class, () -> {
-            Parser.parseUserInput(NotACommand3);
+            Parser.parseUserInput(notACommand3);
         });
     }
 }

@@ -1,14 +1,14 @@
 package duke.utility;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Scanner;
+
 import duke.exception.DukeException;
 import duke.task.DeadlineTask;
 import duke.task.EventTask;
 import duke.task.Task;
 import duke.task.ToDoTask;
-
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.Scanner;
 
 /**
  * This class deals with unit interface of Duke.
@@ -16,8 +16,8 @@ import java.util.Scanner;
  * reading the user input.
  */
 public class Ui {
+    private static final String INDENTATION = "  ";
     private Scanner sc;
-    private final String INDENTATION = "  ";
 
     /**
      * Constructs a new Ui object.
@@ -71,8 +71,8 @@ public class Ui {
      * @return delete success message
      */
     public String deleteSuccess(Task task, int taskSize) {
-        return "Okay. I will delete this task:\n" + INDENTATION + task + "\n" +
-                "Now you have " + taskSize + " " + (taskSize == 1 ? "task " : "tasks ") + "in the list.";
+        return "Okay. I will delete this task:\n" + INDENTATION + task + "\n"
+                + "Now you have " + taskSize + " " + (taskSize == 1 ? "task " : "tasks ") + "in the list.";
     }
 
     /**
@@ -84,8 +84,8 @@ public class Ui {
      * @return add success message
      */
     public String addSuccess(Task task, int taskSize) {
-        return "Okay. I will add this task:\n" + INDENTATION + task + "\n" +
-                "Now you have " + taskSize + " " + (taskSize == 1 ? "task " : "tasks ") + "in the list.";
+        return "Okay. I will add this task:\n" + INDENTATION + task + "\n"
+                + "Now you have " + taskSize + " " + (taskSize == 1 ? "task " : "tasks ") + "in the list.";
     }
 
     /**

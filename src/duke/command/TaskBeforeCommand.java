@@ -1,11 +1,10 @@
 package duke.command;
 
+import java.time.LocalDate;
+
 import duke.utility.Storage;
 import duke.utility.TaskList;
 import duke.utility.Ui;
-
-import java.time.LocalDate;
-
 /**
  * This class represents the task before command.
  * When executed, the class will display all the task before or

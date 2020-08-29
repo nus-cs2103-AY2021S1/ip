@@ -1,12 +1,13 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+
 import duke.task.DeadlineTask;
 import duke.task.EventTask;
 import duke.task.Task;
 import duke.task.ToDoTask;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
-
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 public class TaskTest {
     @Test

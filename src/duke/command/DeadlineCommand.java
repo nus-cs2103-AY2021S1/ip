@@ -1,13 +1,13 @@
 package duke.command;
 
+import java.time.LocalDateTime;
+
 import duke.exception.DukeException;
 import duke.task.DeadlineTask;
 import duke.task.Task;
 import duke.utility.Storage;
 import duke.utility.TaskList;
 import duke.utility.Ui;
-
-import java.time.LocalDateTime;
 
 /**
  * This class represents the deadline command.

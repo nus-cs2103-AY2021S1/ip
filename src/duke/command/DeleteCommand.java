@@ -1,11 +1,11 @@
 package duke.command;
 
 import duke.exception.DukeException;
+import duke.exception.InvalidTaskNumberException;
+import duke.task.Task;
 import duke.utility.Storage;
 import duke.utility.TaskList;
 import duke.utility.Ui;
-import duke.exception.InvalidTaskNumberException;
-import duke.task.Task;
 
 /**
  * This class represents the delete command.
