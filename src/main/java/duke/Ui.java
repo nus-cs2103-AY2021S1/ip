@@ -23,7 +23,6 @@ public class Ui {
      */
     public void sendMessage(String message) {
         System.out.println(String.format("----------\n%s\n----------\n", message));
-        return;
     }
 
     /**
@@ -31,7 +30,7 @@ public class Ui {
      * @return input from client
      */
     public String getInput() {
-        String input = this.scanner.nextLine();
-        return input;
+        return this.scanner.nextLine();
     }
+
 }
