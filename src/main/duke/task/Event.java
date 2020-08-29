@@ -5,13 +5,24 @@ import java.time.format.DateTimeFormatter;
 
 public class Event extends Task {
 
-    LocalDate time;
+    private LocalDate time;
 
+    /**
+     * Constructor for a Event object.
+     * @param name the name for this Event task
+     * @param time the time for the event
+     */
     public Event(String name, LocalDate time) {
         super(name);
         this.time = time;
     }
 
+    /**
+     * Constructor for a Event object with the ability to set completion status.
+     * @param name the name for this Event task
+     * @param time the time for the event
+     * @param completed the completion status of this Event.
+     */
     public Event(String name, LocalDate time, String completed) {
         super(name, completed);
         this.time = time;
@@ -19,7 +30,8 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return String.format("[E] %s (at: %s)", super.toString(), time.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
+        return String.format("[E] %s (at: %s)", super.toString(),
+                time.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
     }
 
 

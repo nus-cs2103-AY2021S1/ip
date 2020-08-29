@@ -1,18 +1,19 @@
 package duke;
 
+import java.util.Scanner;
+
 import duke.command.Command;
 import duke.exception.DukeArgumentException;
 import duke.exception.DukeExecutionException;
-import duke.exception.DukeIOException;
+import duke.exception.DukeIoException;
 import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.ui.Ui;
 
-import java.util.Scanner;
 
 public class Duke {
 
-    private final static String PATH = "data.txt";
+    private static final String PATH = "data.txt";
 
     public static void main(String[] args) {
         run();
@@ -37,11 +38,10 @@ public class Duke {
                     Ui.wrapText(dee.getMessage());
                 }
             }
-        } catch (DukeIOException die) {
+        } catch (DukeIoException die) {
             Ui.wrapText(die.getMessage());
         }
         Ui.showExit();
     }
-
 
 }

@@ -2,7 +2,7 @@ package duke.command;
 
 import duke.exception.DukeArgumentException;
 import duke.exception.DukeExecutionException;
-import duke.exception.DukeIOException;
+import duke.exception.DukeIoException;
 import duke.storage.Storage;
 import duke.ui.Ui;
 
@@ -11,10 +11,11 @@ import duke.ui.Ui;
  */
 public class DoneCommand extends Command {
 
-    int index;
+    private int index;
 
     /**
      * Constructor for a DoneCommand
+     *
      * @param args the input string to be parsed for the index of the list to be marked as complete.
      * @throws DukeArgumentException if the index provided in the input string is invalid.
      */
@@ -34,6 +35,7 @@ public class DoneCommand extends Command {
 
     /**
      * Attempts to mark the Task object at the index of the Storage object as completed.
+     *
      * @param storage The Storage object in which to mark the Task at the index given as complete.
      * @throws DukeExecutionException if the index is out of range, or the program runs into an IOException
      */
@@ -42,9 +44,9 @@ public class DoneCommand extends Command {
         try {
             Ui.showTaskCompletion(storage.complete(index));
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeExecutionException(String.format("Could not execute command due to the index %d being out " +
-                    "of range", index));
-        } catch (DukeIOException die) {
+            throw new DukeExecutionException(String.format("Could not execute command due to the index %d being out "
+                    + "of range", index));
+        } catch (DukeIoException die) {
             throw new DukeExecutionException("Could not execute command due to IO exception.");
         }
 

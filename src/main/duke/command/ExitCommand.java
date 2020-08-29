@@ -8,7 +8,6 @@ import duke.storage.Storage;
 public class ExitCommand extends Command {
 
     /**
-     *
      * @param storage The Storage object to perform the operations on.
      */
     @Override
@@ -18,6 +17,7 @@ public class ExitCommand extends Command {
 
     /**
      * Returns true to tell the program to terminate.
+     *
      * @return true
      */
     @Override

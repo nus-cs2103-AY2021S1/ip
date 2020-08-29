@@ -1,6 +1,6 @@
 package parser;
 
-import duke.exception.DukeIOException;
+import duke.exception.DukeIoException;
 import duke.parser.Parser;
 import duke.task.Todo;
 import org.junit.jupiter.api.DisplayName;
@@ -17,7 +17,7 @@ public class ParserTest {
     public void parseLineFromFile_validTodo_todoReturned() {
         try {
             assertEquals("[T] [✓] todo", Parser.parseLine("[T],, 1,, todo").toString());
-        } catch (DukeIOException e) {
+        } catch (DukeIoException e) {
             fail(e.getMessage());
         }
     }

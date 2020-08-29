@@ -2,8 +2,8 @@ package duke.task;
 
 public class Task {
 
-    public String name;
-    public Boolean completed;
+    protected String name;
+    protected Boolean completed;
 
     Task(String name) {
         this.name = name;
@@ -28,12 +28,20 @@ public class Task {
         completed = !completed;
     }
 
+    /**
+     * Converts the task into an array of the type, completion status, and name in Strings.
+     * @return Array of Task details.
+     */
     public String[] toArray() {
         String[] strings = new String[3];
         strings[0] = "[T]";
         strings[1] = completed ? "1" : "0";
         strings[2] = name;
         return strings;
+    }
+
+    public String getName() {
+        return name;
     }
 
 }

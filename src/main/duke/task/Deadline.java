@@ -5,13 +5,24 @@ import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
 
-    LocalDate time;
+    private LocalDate time;
 
+    /**
+     * Constructor for a Deadline object.
+     * @param name the name for this Deadline task
+     * @param time the time for the deadline
+     */
     public Deadline(String name, LocalDate time) {
         super(name);
         this.time = time;
     }
 
+    /**
+     * Constructor for a Deadline object with the ability to set completion status.
+     * @param name the name for this Deadline task
+     * @param time the time for the deadline
+     * @param completed the completion status of this Deadline.
+     */
     public Deadline(String name, LocalDate time, String completed) {
         super(name, completed);
         this.time = time;
@@ -19,7 +30,8 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return String.format("[D] %s (by: %s)", super.toString(), time.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
+        return String.format("[D] %s (by: %s)", super.toString(),
+                time.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
     }
 
     @Override

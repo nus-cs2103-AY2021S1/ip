@@ -1,6 +1,5 @@
 package duke.command;
 
-import duke.exception.DukeExecutionException;
 import duke.storage.Storage;
 import duke.storage.TaskList;
 import duke.ui.Ui;
@@ -10,10 +9,11 @@ import duke.ui.Ui;
  */
 public class FindCommand extends Command {
 
-    String keyword;
+    private String keyword;
 
     /**
      * Constructor for a FindCommand.
+     *
      * @param input the text to search for
      */
     public FindCommand(String input) {
@@ -28,6 +28,7 @@ public class FindCommand extends Command {
     /**
      * Attempts to find all Tasks containing the keyword within the Storage's list,
      * then uses Ui to print the list out.
+     *
      * @param storage The Storage object to search for the keyword in.
      */
     @Override

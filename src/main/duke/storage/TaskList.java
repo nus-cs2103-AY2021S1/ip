@@ -1,8 +1,8 @@
 package duke.storage;
 
-import duke.task.Task;
-
 import java.util.ArrayList;
+
+import duke.task.Task;
 
 /**
  * Represents an ArrayList of Tasks
@@ -20,6 +20,7 @@ public class TaskList {
 
     /**
      * Removes the object from the ArrayList at the given index.
+     *
      * @param index the index to delete from
      * @return the Task that was removed
      */
@@ -29,6 +30,7 @@ public class TaskList {
 
     /**
      * Adds the Task to the ArrayList.
+     *
      * @param task the task to be added
      */
     public void add(Task task) {
@@ -37,6 +39,7 @@ public class TaskList {
 
     /**
      * Returns the ArrayList of tasks
+     *
      * @return the ArrayList of all the tasks stored
      */
     public ArrayList<Task> list() {
@@ -45,6 +48,7 @@ public class TaskList {
 
     /**
      * Returns whether or not the list is currently empty.
+     *
      * @return true if tasks is empty, false otherwise
      */
     public boolean isEmpty() {
@@ -53,6 +57,7 @@ public class TaskList {
 
     /**
      * Marks the Task in the ArrayList at the given index as completed.
+     *
      * @param index the index to mark as complete
      * @return the Task that was completed.
      */

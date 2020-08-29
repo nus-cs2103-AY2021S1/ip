@@ -1,32 +1,40 @@
 package duke.parser;
 
-import duke.command.*;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
+import duke.command.Command;
+import duke.command.DeadlineCommand;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.EventCommand;
+import duke.command.ExitCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
+import duke.command.TodoCommand;
 import duke.exception.DukeArgumentException;
 import duke.exception.DukeException;
-import duke.exception.DukeIOException;
+import duke.exception.DukeIoException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
-
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 /**
  * Utility class for reading input and files
  */
 public final class Parser {
 
-    final static String REGEX_SEPARATOR = ",, ";
+    static final String REGEX_SEPARATOR = ",, ";
 
-    private final static String BYE = "bye";
-    private final static String LIST = "list";
-    private final static String FIND = "find";
-    private final static String DONE = "done";
-    private final static String DELETE = "delete";
-    private final static String TODO = "todo";
-    private final static String EVENT = "event";
-    private final static String DEADLINE = "deadline";
+    private static final String BYE = "bye";
+    private static final String LIST = "list";
+    private static final String FIND = "find";
+    private static final String DONE = "done";
+    private static final String DELETE = "delete";
+    private static final String TODO = "todo";
+    private static final String EVENT = "event";
+    private static final String DEADLINE = "deadline";
 
     /**
      * Reads a String and splits it to create a new duke.Tasks.Task based on its type and values.
@@ -37,7 +45,7 @@ public final class Parser {
      * @return A duke.Tasks.Task object
      * @throws DukeException if the line does not follow the given regex.
      */
-    public static Task parseLine(String line) throws DukeIOException {
+    public static Task parseLine(String line) throws DukeIoException {
         String[] values = line.split(REGEX_SEPARATOR);
         switch (values[0]) {
         case "[T]":
@@ -46,14 +54,16 @@ public final class Parser {
             return new Event(values[2], LocalDate.parse(values[3], DateTimeFormatter.ofPattern("MMM d yyyy")),
                     values[1]);
         case "[D]":
-            return new Deadline(values[2], LocalDate.parse(values[3], DateTimeFormatter.ofPattern("MMM d yyyy")), values[1]);
+            return new Deadline(values[2], LocalDate.parse(values[3], DateTimeFormatter.ofPattern("MMM d yyyy")),
+                    values[1]);
         default:
-            throw new DukeIOException(String.format("The line '%s' could not be parsed.", line));
+            throw new DukeIoException(String.format("The line '%s' could not be parsed.", line));
         }
     }
 
     /**
      * Converts a Task into a String format for writing to disk.
+     *
      * @param task the Task to be converted
      * @return the String representation of the Task to be used in the data file.
      */
@@ -68,6 +78,7 @@ public final class Parser {
 
     /**
      * Converts input text into the appropriate command.
+     *
      * @param text the input text from the user
      * @return the Command to be executed
      * @throws DukeArgumentException if the input text did not match any existing Command types.

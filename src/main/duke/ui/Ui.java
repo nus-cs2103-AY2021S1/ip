@@ -7,10 +7,10 @@ import duke.task.Task;
  */
 public final class Ui {
 
-    private final static String STRING_TOP_LINE = "_____________________________________________________DUKE___";
-    private final static String STRING_BOTTOM_LINE = "------------------------------------------------------------";
-    private final static String STRING_GREETING = "Hello, this is Duke.";
-    private final static String STRING_EXIT = "Goodbye.";
+    private static final String STRING_TOP_LINE = "_____________________________________________________DUKE___";
+    private static final String STRING_BOTTOM_LINE = "------------------------------------------------------------";
+    private static final String STRING_GREETING = "Hello, this is Duke.";
+    private static final String STRING_EXIT = "Goodbye.";
 
     public static void printStartLine() {
         System.out.println(STRING_TOP_LINE);
