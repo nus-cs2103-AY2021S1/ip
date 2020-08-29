@@ -16,6 +16,10 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Duke constructor to take initialize Storage, TaskList and Ui.
+     * @param filePath path to saved file.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);

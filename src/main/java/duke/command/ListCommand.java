@@ -1,11 +1,9 @@
 package duke.command;
 
-import duke.Duke;
-import duke.exceptions.DukeException;
-import duke.exceptions.InvalidInputException;
 import duke.Storage;
-import duke.tasks.TaskList;
 import duke.Ui;
+import duke.exceptions.InvalidInputException;
+import duke.tasks.TaskList;
 
 /**
  * ListCommand class to execute command that list out all tasks

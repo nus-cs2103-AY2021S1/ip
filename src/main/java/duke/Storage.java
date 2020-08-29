@@ -1,12 +1,21 @@
 package duke;
 
-import duke.exceptions.InvalidFileException;
-import duke.tasks.*;
-
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+
+import duke.exceptions.InvalidFileException;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.TaskList;
+import duke.tasks.Todo;
 
 /**
  * Storage class that contains save and load methods to keep task list
@@ -14,10 +23,10 @@ import java.util.ArrayList;
  */
 public class Storage {
 
-    public DateTimeFormatter formatter
-            = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-
     public final String path;
+
+    private DateTimeFormatter formatter =
+            DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
     public Storage(String storagePath) {
         this.path = storagePath;
@@ -26,6 +35,7 @@ public class Storage {
 
     /**
      * Save task list into path specified.
+     *
      * @param taskList task list to be saved.
      * @throws InvalidFileException failed to save.
      */
@@ -34,7 +44,7 @@ public class Storage {
         File saved = new File(this.path);
         try {
             BufferedWriter bw = new BufferedWriter(new FileWriter(saved));
-            for (Task t: currTaskList) {
+            for (Task t : currTaskList) {
                 bw.write(t.getState());
                 bw.newLine();
                 bw.flush();
@@ -48,6 +58,7 @@ public class Storage {
 
     /**
      * Load saved file into task list.
+     *
      * @return TaskList
      * @throws InvalidFileException failed to load, read or create new file.
      */
@@ -73,20 +84,20 @@ public class Storage {
                 boolean taskDone = readLine[1].equals("1");
                 Task newTask = new Task("");
                 String type = readLine[0];
-                switch(type) {
-                    case "T":
-                        newTask = new Todo(readLine[2]);
-                        break;
-                    case "D":
-                        newTask = new Deadline(readLine[2],
-                                LocalDateTime.parse(readLine[3], formatter));
-                        break;
-                    case "E":
-                        newTask = new Event(readLine[2],
-                                LocalDateTime.parse(readLine[3], formatter));
-                        break;
-                    default:
-                        break;
+                switch (type) {
+                case "T":
+                    newTask = new Todo(readLine[2]);
+                    break;
+                case "D":
+                    newTask = new Deadline(readLine[2],
+                            LocalDateTime.parse(readLine[3], formatter));
+                    break;
+                case "E":
+                    newTask = new Event(readLine[2],
+                            LocalDateTime.parse(readLine[3], formatter));
+                    break;
+                default:
+                    break;
                 }
                 taskList.addTask(newTask);
                 if (taskDone) {

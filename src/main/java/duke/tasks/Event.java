@@ -14,15 +14,15 @@ public class Event extends Task {
 
     @Override
     public String getState() {
-        return "E|" + (this.isDone ? "1" : "0") + "|" +
-                this.description + "|" +
-                this.date.toString().replace("T", " ");
+        return "E|" + (this.isDone ? "1" : "0") + "|"
+                + this.description + "|"
+                + this.date.toString().replace("T", " ");
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() +
-                "(at: " +
-                date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm a")) + ")";
+        return "[E]" + super.toString()
+                + "(at: "
+                + date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm a")) + ")";
     }
 }

@@ -1,4 +1,4 @@
-package test.java.duke.tasks;
+package duke.tasks;
 
 import duke.tasks.Todo;
 import org.junit.jupiter.api.Test;
@@ -11,7 +11,7 @@ class TodoTest {
     @Test
     public void constructorTest() {
         Todo todoTask = new Todo("read book");
-        assertEquals("[T][✘] read book", todoTask.toString());
+        assertEquals("[T][\u2718] read book", todoTask.toString());
     }
 
     @Test
@@ -24,6 +24,6 @@ class TodoTest {
     void doneTask() {
         Todo todoTask = new Todo("read book");
         todoTask.markAsDone();
-        assertEquals("[T][✓] read book", todoTask.toString());
+        assertEquals("[T][\u2713] read book", todoTask.toString());
     }
 }

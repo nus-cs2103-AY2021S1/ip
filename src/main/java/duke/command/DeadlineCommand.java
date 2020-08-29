@@ -1,5 +1,9 @@
 package duke.command;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 import duke.Storage;
 import duke.Ui;
 import duke.exceptions.InvalidFileException;
@@ -8,10 +12,6 @@ import duke.tasks.Deadline;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-
 /**
  * Deadline Command class to execute command that adds a deadline to
  * the TaskList.
@@ -19,8 +19,8 @@ import java.time.format.DateTimeParseException;
 public class DeadlineCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Got it. I've added this task:\n";
-    public static final String MESSAGE_PARSE_ERROR = "Invalid date and time format.\n" +
-            "Please enter date and time in the format: yyyy-MM-dd HH:mm";
+    public static final String MESSAGE_PARSE_ERROR = "Invalid date and time format.\n"
+            + "Please enter date and time in the format: yyyy-MM-dd HH:mm";
 
     public DeadlineCommand(String input) {
         super(input);
@@ -38,8 +38,7 @@ public class DeadlineCommand extends Command {
     public void execute(TaskList tasks, Ui ui, Storage storage)
             throws InvalidInputException, InvalidFileException {
         if (super.input.length() <= 8) {
-            throw new InvalidInputException
-                    ("☹ OOPS!!! The description of a deadline cannot be empty.\n");
+            throw new InvalidInputException("☹ OOPS!!! The description of a deadline cannot be empty.\n");
         }
         try {
             String[] split = super.input.substring(9).split("/by ", 2);

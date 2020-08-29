@@ -1,4 +1,4 @@
-package test.java.duke;
+package duke;
 
 import duke.Parser;
 import duke.command.Command;
