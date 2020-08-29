@@ -95,6 +95,9 @@ public class Ui {
         Ui.printLines();
     }
 
+    /**
+     * Static method to end Duke GUI when user input "Bye".
+     */
     public static String endDuke() {
         String goodBye = "Bye! Hope to see you again soon." + "\n";
         String exit = goodBye;

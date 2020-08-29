@@ -13,6 +13,11 @@ public class DialogBox extends HBox {
     private Label text;
     private ImageView displayPicture;
 
+    /**
+     * Creates DialogBox for Duke to chat with User on GUI.
+     * @param l label for Scene in Javafx.
+     * @param iv ImageView.
+     */
     public DialogBox(Label l, ImageView iv) {
         text = l;
         displayPicture = iv;

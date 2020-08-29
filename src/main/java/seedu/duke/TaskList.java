@@ -58,6 +58,12 @@ public class TaskList {
         }
     }
 
+    /**
+     * Marks the task as done in a list.
+     *
+     * @param userInput Task to be completed.
+     * @return String output after completing Task.
+     */
     public String completeTaskToString(String userInput) {
         try {
             String[] splitUserInput = userInput.split(" ");
@@ -76,7 +82,7 @@ public class TaskList {
                 }
             }
         } catch (StringIndexOutOfBoundsException e) {
-            return("Index out of range! Try again.\n");
+            return "Index out of range! Try again.\n";
         }
     }
 
@@ -99,7 +105,12 @@ public class TaskList {
             Ui.print(info);
         }
     }
-
+    /**
+     * Task to be deleted from tasklist.
+     *
+     * @param userInput String of the task to be deleted.
+     * @return String output after deleting task.
+     */
     public String deleteTaskToString(String userInput) {
         String[] splitUserInput = userInput.split(" ");
         int index = Integer.parseInt(splitUserInput[1]);
@@ -138,6 +149,12 @@ public class TaskList {
         }
     }
 
+    /**
+     * Todo to be added to tasklist.
+     *
+     * @param userInput String of the todo.
+     * @return String output after creating Todo object.
+     */
     public String addToDoToString(String userInput) {
         try {
             this.checkForItem(userInput.substring(4), "todo");
@@ -182,6 +199,12 @@ public class TaskList {
         }
     }
 
+    /**
+     * Deadline to be added to tasklist.
+     *
+     * @param userInput String of the deadline.
+     * @return String output after creating Deadline object.
+     */
     public String addDeadlineToString(String userInput) {
         try {
             checkForItem(userInput.substring(8), "deadline");
@@ -197,7 +220,7 @@ public class TaskList {
             info += "Now you have " + taskLists.size() + " tasks in the list\n";
             return info;
         } catch (DukeException err) {
-           return err.getMessage();
+            return err.getMessage();
         } catch (IOException e) {
             return e.getMessage();
         }
@@ -230,9 +253,10 @@ public class TaskList {
     }
 
     /**
-     * Finds tasks that contain the keyword in the string input.
+     * Event to be added to the tasklist.
      *
-     * @param userInput Keyword that is used to find related tasks.
+     * @param userInput String of the event.
+     * @return String output after creating Event object.
      */
     public String addEventToString(String userInput) {
         try {
@@ -255,6 +279,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Finds tasks that contain the keyword in the string input.
+     *
+     * @param input Keyword that is used to find related tasks.
+     */
     public void find(String input) {
         try {
             checkForItem(input.substring(5), "find");
@@ -280,6 +309,12 @@ public class TaskList {
         }
     }
 
+    /**
+     * Finds tasks that contain the keyword in the string input.
+     *
+     * @param input Keyword that is used to find related tasks.
+     * @return String output after finding keyword in TaskList.
+     */
     public String findToString(String input) {
         try {
             checkForItem(input.substring(5), "find");
@@ -301,7 +336,7 @@ public class TaskList {
                 return info;
             }
         } catch (DukeException err) {
-          return err.getMessage();
+            return err.getMessage();
         }
     }
 

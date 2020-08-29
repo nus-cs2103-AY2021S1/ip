@@ -1,30 +1,30 @@
 package seedu.duke;
 
-import javafx.application.Application;
-import javafx.application.Platform;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
-import javafx.scene.layout.Region;
-import javafx.scene.control.Label;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
+
+import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 /**
  * Main class to run Duke program.
  * Creates and stores tasks such as todo, event and deadline.
  */
 
-public class Duke extends Application{
+public class Duke extends Application {
     private Storage storage;
     private TaskList taskLists;
     private Ui ui;
@@ -38,6 +38,24 @@ public class Duke extends Application{
     private Image user = new Image(this.getClass().getResourceAsStream("/images/Patrick.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/Spongebob.png"));
 
+    /**
+     * Initializes the Duke class and creates an instance of Storage, TaskList, Parser and Ui.
+     */
+    public Duke() {
+        try {
+            this.storage = new Storage();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+        try {
+            taskLists = new TaskList(storage.load(new ArrayList<Task>()));
+            this.parser = new Parser(taskLists);
+            this.ui = new Ui(parser);
+        } catch (IOException e) {
+            this.parser = new Parser(taskLists);
+            this.ui = new Ui(parser);
+        }
+    }
 
     @Override
     public void start(Stage stage) {
@@ -163,25 +181,6 @@ public class Duke extends Application{
         }
         return this.ui.getUserInput(input);
     }
-    /**
-     * Initializes the Duke class and creates an instance of Storage, Tasklist, Ui and Parser.
-     */
-    public Duke() {
-        try {
-            this.storage = new Storage();
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
-        }
-        try {
-            taskLists = new TaskList(storage.load(new ArrayList<Task>()));
-            this.parser = new Parser(taskLists);
-            this.ui = new Ui(parser);
-        } catch (IOException e) {
-            this.parser = new Parser(taskLists);
-            this.ui = new Ui(parser);
-        }
-    }
-
 
     /**
      * Method to run Duke program.

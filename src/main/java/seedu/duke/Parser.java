@@ -71,6 +71,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Takes in input by user from GUI and return Duke output.
+     *
+     * @param input String input by user.
+     * @return String output processed by Duke.
+     */
     public String readInput(String input) {
         try {
             this.checkForInvalidInput(input);
@@ -86,7 +92,7 @@ public class Parser {
                 return taskLists.addDeadlineToString(input);
             } else if (input.contains("event")) {
                 return taskLists.addEventToString(input);
-            } else if (input.contains("find")){
+            } else if (input.contains("find")) {
                 return taskLists.findToString(input);
             } else {
                 return "Not valid input!";
