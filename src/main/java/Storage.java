@@ -88,6 +88,12 @@ public class Storage {
         return LocalDateTime.of(year, month, date, hour, min);
     }
 
+    /**
+     * @return List of previous tasks stored in an ArrayList.
+     * @throws DukeException If file does not exists or from getPastTasks method.
+     * @throws IOException By FileReader object.
+     * @throws ParseException From getPastTasks method.
+     */
     public ArrayList<Task> load() throws DukeException, IOException, ParseException {
         File file = new File(this.filePath);
         if (!file.exists()) {
