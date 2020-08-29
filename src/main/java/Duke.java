@@ -1,5 +1,9 @@
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.io.File;
 
 public class Duke {
     public static void invalidInput() throws DukeException {
@@ -12,6 +16,61 @@ public class Duke {
         System.out.println(output);
     }
 
+    private static void writeToFile(String filePath, String textToAdd) throws IOException {
+        FileWriter fw = new FileWriter(filePath);
+        fw.write(textToAdd);
+        fw.close();
+    }
+
+    public static void saveToDisk(ArrayList<Task> lst) {
+        String filePath = "./data/data.txt";
+        String info = "";
+        for (int i = 0; i < lst.size(); i ++) {
+            Task currentTask = lst.get(i);
+            if (i == lst.size() - 1){
+                info += currentTask.toText();
+            }
+            else {
+                info += currentTask.toText() + System.lineSeparator();
+            }
+        }
+        try {
+            writeToFile(filePath, info);
+        } catch (IOException e) {
+            System.out.println("Error saving data to disk");
+            e.printStackTrace();
+        }
+    }
+
+    public static void saveDataToList(String content, ArrayList<Task> lst) {
+        Scanner s = new Scanner(content);
+        while (s.hasNext()) {
+            String line = s.nextLine();
+            String[] arr = line.split("\\|");
+            String type = arr[0].trim();
+            int status = Integer.parseInt(arr[1].trim());
+            String description = arr[2].trim();
+            if (type.equals("T")) {
+                lst.add(new ToDo(description, status == 1));
+            } else {
+                String additionalInfo = arr[3].trim();
+                if (type.equals("D")) {
+                    lst.add(new Deadline(description, additionalInfo, status == 1));
+                } else {
+                    lst.add(new Event(description, additionalInfo, status == 1));
+                }
+            }
+        }
+    }
+    public static String readFileContents(String filePath) throws FileNotFoundException {
+        File f = new File(filePath);
+        String content = "";
+        Scanner s = new Scanner(f);
+        while (s.hasNext()) {
+            content += s.nextLine() + System.lineSeparator();
+        }
+        return content;
+    }
     public static Task createTask(String firstWord, String input) throws DukeException {
         Task newTask;
         if (firstWord.equals("todo")) {
@@ -36,7 +95,6 @@ public class Duke {
                     newTask = new Deadline(tsk, deadline);
                 }
             }
-
         } else {
             String[] arr = input.split("event ");
             if (arr.length == 1) {
@@ -61,7 +119,8 @@ public class Duke {
             String firstWord = input.split(" ")[0];
             String output = "";
             if (input.equals("bye")) {
-                break;
+                saveToDisk(lst);
+                output = "Bye. Take care!";
             } else if (input.equals("list")) {
                 output += "Here are the tasks in your list:";
                 for (int i = 0; i < lst.size(); i ++) {
@@ -107,15 +166,28 @@ public class Duke {
             }
             printMessage(output);
         }
-
-        String goodbyeMessage = "Bye. Take care!";
-        printMessage(goodbyeMessage);
     }
     public static void main(String[] args) {
         String greetings = "Hello! I'm Duke, your personal assistant.\nWhat can I do for you?";
         printMessage(greetings);
 
         ArrayList<Task> lst = new ArrayList<>();
+
+        String filePath = "./data/data.txt";
+        try {
+            File f = new File(filePath);
+            if (f.exists()) {
+                String content = readFileContents(filePath);
+                saveDataToList(content, lst);
+            } else {
+                f.createNewFile();
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to read contents. File not found");
+        } catch (IOException e) {
+            System.out.println("Unable to create new file.");
+            e.printStackTrace();
+        }
 
         Scanner sc = new Scanner(System.in);
         mainLogic(sc, lst);
