@@ -72,7 +72,7 @@ public class Parser {
      * @throws CommandNotFoundException If the command cannot be parsed.
      */
     public static Command evaluateAddCommand(String string, String command, CommandType commandType) throws CommandNotFoundException {
-        if(commandType == CommandType.ADD_TODO) {
+        if (commandType == CommandType.ADD_TODO) {
 
             if (command.strip().split(" ").length == 1) {
                 throw new CommandNotFoundException("The description for todo should not be empty");

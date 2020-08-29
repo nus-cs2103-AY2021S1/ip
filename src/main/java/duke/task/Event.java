@@ -42,7 +42,7 @@ public class Event extends Task{
      */
     @Override
     public String record() {
-        if(this.isCompleted) {
+        if (this.isCompleted) {
             return "E | 1 | " + description + " | " + at;
         } else {
             return "E | 0 | " + description + " | " + at;
