@@ -27,9 +27,10 @@ public class FindCommand implements Command {
      * tasks that have names that contain the search terms.
      * @param ui the ui used to print out responses.
      * @param tasks the task list.
+     * @return the string showing all tasks found.
      */
     @Override
-    public void execute(Ui ui, TaskList tasks) {
+    public String execute(Ui ui, TaskList tasks) {
         TaskList found = new TaskList();
         if (searchTerm.length() > 0) {
             for (int j = 0; j < tasks.size(); j++) {
@@ -39,7 +40,7 @@ public class FindCommand implements Command {
                 }
             }
         }
-        ui.printFoundList(found);
+        return ui.printFoundList(found);
     }
 
     /**

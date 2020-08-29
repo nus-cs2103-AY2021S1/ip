@@ -1,7 +1,5 @@
 package main.ui;
 
-import java.util.Scanner;
-
 import main.task.Task;
 import main.task.TaskList;
 
@@ -13,123 +11,103 @@ import main.task.TaskList;
  * @since v0.1
  */
 public class Ui {
-    private static final String SEPARATOR = "    ____________________________________"
-            + "________________________\n";
-    private static final String ERROR_MESSAGE = String.format("     ☹ OOPS!!! "
-            + "Something went wrong!\n%s", SEPARATOR);
 
     /**
-     * Gets the input from the user.
-     * @param sc the scanner used for the
-     * @return
+     * Returns the string bidding the user farewell.
+     * @return the string bidding the user farewell.
      */
-    public String[] getInput(Scanner sc) {
-        System.out.println();
-        String[] input = sc.nextLine().trim().split(" ", 2);
-        printSeparator();
-
-        return input;
+    public String printExit() {
+        return "Bye. Hope to see you again soon!";
     }
 
     /**
-     * Prints the exit message.
+     * Returns the greeting message.
+     * @return the greeting message.
      */
-    public void printExit() {
-        System.out.printf("     Bye. Hope to see you again soon!\n%s",
-                SEPARATOR);
+    public String printGreeting() {
+        return "Hello! I'm Duke\nWhat can I do for you?";
     }
 
     /**
-     * Prints the greeting message.
-     */
-    public void printGreeting() {
-        System.out.printf("%s     Hello! I'm Duke\n"
-                + "     What can I do for you?\n%s", SEPARATOR, SEPARATOR);
-    }
-
-    /**
-     * Prints the task list.
+     * Returns a string with all tasks listed
      * @param tasks the task list.
+     * @return the string with all tasks listed.
      */
-    public void printTaskList(TaskList tasks) {
-        for (int i = 0; i < tasks.size(); i++) {
-            System.out.printf("     %d.%s\n", i + 1, tasks.get(i));
-        }
+    public String printTaskList(TaskList tasks) {
+        StringBuilder list = new StringBuilder();
+
         if (tasks.size() == 0) {
-            System.out.println("     There are no tasks yet!");
+            return "There are no tasks yet!";
         }
-        System.out.print(SEPARATOR);
+
+        for (int i = 0; i < tasks.size(); i++) {
+            list.append(String.format("     %d.%s\n", i + 1, tasks.get(i)));
+        }
+
+        return list.toString();
     }
 
     /**
-     * Prints out the tasks found via the find command.
+     * Returns a string with all the tasks found via the find command.
      * @param tasks the tasks found via the find command.
+     * @return a string with all the tasks found via the find command.
      */
-    public void printFoundList(TaskList tasks) {
+    public String printFoundList(TaskList tasks) {
+        StringBuilder foundList;
+
         if (tasks.size() == 0) {
-            System.out.println("     There are no tasks found!");
+            return "There are no tasks found!";
         } else {
-            System.out.println("     Here are the matching tasks in your list:");
+            foundList = new StringBuilder("Here are the matching tasks in your list:\n");
         }
+
         for (int i = 0; i < tasks.size(); i++) {
-            System.out.printf("     %d.%s\n", i + 1, tasks.get(i));
+            foundList.append(String.format("%d.%s\n", i + 1, tasks.get(i)));
         }
-        System.out.print(SEPARATOR);
+
+        return foundList.toString();
     }
 
     /**
-     * Prints when a task has been successfully added.
+     * Returns a string indicating a task has been added successfully.
      * @param task the task added.
      * @param taskNum the number of tasks in the list.
+     * @return the string indicating a task has been added successfully.
      */
-    public void printAddSuccess(Task task, int taskNum) {
+    public String printAddSuccess(Task task, int taskNum) {
         boolean isSingular = taskNum == 1;
-        System.out.printf("     Got it. I've added this task:\n"
-                        + "       %s\n"
-                        + "     Now you have %d %s in the list.\n%s",
-                task, taskNum, isSingular ? "task" : "tasks", SEPARATOR);
+        return String.format("Got it. I've added this task:\n%s\n"
+                        + "Now you have %d %s in the list.",
+                task, taskNum, isSingular ? "task" : "tasks");
     }
 
     /**
-     * Prints when the task has been successfully marked as done.
+     * Returns a string indicating a task has been marked as done.
      * @param task the task marked as done.
+     * @return a string indicating a task has been marked as done.
      */
-    public void printDoneSuccess(Task task) {
-        System.out.printf("     Nice! I've marked this task as done:\n"
-                        + "       %s\n%s", task, SEPARATOR);
+    public String printDoneSuccess(Task task) {
+        return String.format("Nice! I've marked this task as done:\n%s", task);
     }
 
     /**
-     * Prints when the task has been removed successfully.
+     * Returns a string indicating a task has been removed successfully.
      * @param removed the task removed.
      * @param taskNum the number of tasks in the list.
+     * @return a string indicating a task has been removed successfully.
      */
-    public void printRemoveSuccess(Task removed, int taskNum) {
+    public String printRemoveSuccess(Task removed, int taskNum) {
         boolean isSingular = taskNum == 1;
-        System.out.printf("     Noted. I've removed this task:\n       %s\n"
-                        + "     Now you have %d %s in the list.\n%s",
-                removed, taskNum, isSingular ? "task" : "tasks", SEPARATOR);
+        return String.format("Noted. I've removed this task:\n%s\n"
+                        + "Now you have %d %s in the list.",
+                removed, taskNum, isSingular ? "task" : "tasks");
     }
 
     /**
-     * Prints the default error message.
+     * Returns a string with a generic error message.
+     * @return a string with a generic error message.
      */
-    public void printError() {
-        System.out.print(ERROR_MESSAGE);
-    }
-
-    /**
-     * Prints the message of the exception thrown.
-     * @param e the exception thrown.
-     */
-    public void printExceptionMessage(Exception e) {
-        System.out.printf("%s\n%s", e.getMessage(), SEPARATOR);
-    }
-
-    /**
-     * Prints the separator.
-     */
-    public void printSeparator() {
-        System.out.printf("%s", SEPARATOR);
+    public String printError() {
+        return "Seems like something went wrong!";
     }
 }

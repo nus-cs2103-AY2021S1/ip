@@ -72,7 +72,7 @@ public class ParserTest {
             InvalidTaskException exception = assertThrows(
                     InvalidTaskException.class, () ->
                             Parser.parse(new String[] { "done" }));
-            assertEquals("     ☹ OOPS!!! Your selected task does not exist!",
+            assertEquals("Your selected task does not exist!",
                     exception.getMessage());
         }
     }
@@ -100,7 +100,7 @@ public class ParserTest {
             InvalidTaskException exception = assertThrows(
                     InvalidTaskException.class, () ->
                             Parser.parse(new String[] { "delete" }));
-            assertEquals("     ☹ OOPS!!! Your selected task does not exist!",
+            assertEquals("Your selected task does not exist!",
                     exception.getMessage());
         }
     }
@@ -129,7 +129,7 @@ public class ParserTest {
             EmptyMessageException exception = assertThrows(
                     EmptyMessageException.class, () ->
                             Parser.parse(new String[] { "todo" }));
-            assertEquals("     ☹ OOPS!!! The description of a todo cannot be empty.",
+            assertEquals("The description of a todo cannot be empty.",
                     exception.getMessage());
         }
     }
@@ -163,7 +163,7 @@ public class ParserTest {
             EmptyMessageException exception = assertThrows(
                     EmptyMessageException.class, () ->
                             Parser.parse(new String[] { "deadline" }));
-            assertEquals("     ☹ OOPS!!! The description of a deadline cannot be empty.",
+            assertEquals("The description of a deadline cannot be empty.",
                     exception.getMessage());
         }
 
@@ -173,8 +173,8 @@ public class ParserTest {
             InvalidDeadlineFormatException exception = assertThrows(
                     InvalidDeadlineFormatException.class, () ->
                             Parser.parse(new String[] { "deadline", "name" }));
-            assertEquals("     ☹ OOPS!!! A deadline needs to have this format:\n"
-                            + "       \"task name\" /by \"task deadline\"",
+            assertEquals("A deadline needs to have this format:\n"
+                            + "\"task name\" /by \"task deadline\"",
                     exception.getMessage());
         }
 
@@ -187,8 +187,8 @@ public class ParserTest {
                                 "deadline",
                                 "name /by 1931-3-30"
                             }));
-            assertEquals("     ☹ OOPS!!! Your date needs to"
-                            + " have this format:\n     \"YYYY-MM-DD HHMM\"",
+            assertEquals("Your date needs to"
+                            + " have this format:\n\"YYYY-MM-DD HHMM\"",
                     exception.getMessage());
         }
 
@@ -201,8 +201,8 @@ public class ParserTest {
                                 "deadline",
                                 "name /by 1992-03 1923"
                             }));
-            assertEquals("     ☹ OOPS!!! Your date needs to"
-                            + " have this format:\n     \"YYYY-MM-DD\"",
+            assertEquals("Your date needs to"
+                            + " have this format:\n\"YYYY-MM-DD\"",
                     exception.getMessage());
         }
 
@@ -215,8 +215,7 @@ public class ParserTest {
                                 "deadline",
                                 "name /by 1992-03-12 12394"
                             }));
-            assertEquals("     ☹ OOPS!!! Your time needs to"
-                            + " have this format:\n     \"HHMM\"",
+            assertEquals("Your time needs to have this format:\n\"HHMM\"",
                     exception.getMessage());
         }
 
@@ -229,8 +228,8 @@ public class ParserTest {
                                 "deadline",
                                 "name /by abc-12-1 1923"
                             }));
-            assertEquals("     ☹ OOPS!!! Please check that you've"
-                            + " entered\n       the date and time correctly",
+            assertEquals("Please check that you've entered "
+                            + "the date and time correctly",
                     exception.getMessage());
         }
 
@@ -243,8 +242,8 @@ public class ParserTest {
                                 "deadline",
                                 "name /by 1998-12-45 1923"
                             }));
-            assertEquals("     ☹ OOPS!!! Please check that you've"
-                            + " entered\n       the date and time correctly",
+            assertEquals("Please check that you've entered"
+                            + " the date and time correctly",
                     exception.getMessage());
         }
     }
@@ -278,7 +277,7 @@ public class ParserTest {
             EmptyMessageException exception = assertThrows(
                     EmptyMessageException.class, () ->
                             Parser.parse(new String[] { "event" }));
-            assertEquals("     ☹ OOPS!!! The description of a event cannot be empty.",
+            assertEquals("The description of a event cannot be empty.",
                     exception.getMessage());
         }
 
@@ -288,8 +287,8 @@ public class ParserTest {
             InvalidEventFormatException exception = assertThrows(
                     InvalidEventFormatException.class, () ->
                             Parser.parse(new String[] { "event", "name" }));
-            assertEquals("     ☹ OOPS!!! An event needs to have this format:\n"
-                            + "      \"task name\" /at \"event time\"",
+            assertEquals("An event needs to have this format:\n"
+                            + "\"task name\" /at \"event time\"",
                     exception.getMessage());
         }
 
@@ -302,8 +301,8 @@ public class ParserTest {
                                 "event",
                                 "name /at 1931-3-30"
                             }));
-            assertEquals("     ☹ OOPS!!! Your date needs to"
-                            + " have this format:\n     \"YYYY-MM-DD HHMM\"",
+            assertEquals("Your date needs to"
+                            + " have this format:\n\"YYYY-MM-DD HHMM\"",
                     exception.getMessage());
         }
 
@@ -316,8 +315,7 @@ public class ParserTest {
                                 "event",
                                 "name /at 1992-03 1923"
                             }));
-            assertEquals("     ☹ OOPS!!! Your date needs to"
-                            + " have this format:\n     \"YYYY-MM-DD\"",
+            assertEquals("Your date needs to have this format:\n\"YYYY-MM-DD\"",
                     exception.getMessage());
         }
 
@@ -330,8 +328,8 @@ public class ParserTest {
                                 "event",
                                 "name /at 1992-03-12 12394"
                             }));
-            assertEquals("     ☹ OOPS!!! Your time needs to"
-                            + " have this format:\n     \"HHMM\"",
+            assertEquals("Your time needs to"
+                            + " have this format:\n\"HHMM\"",
                     exception.getMessage());
         }
 
@@ -344,8 +342,8 @@ public class ParserTest {
                                 "event",
                                 "name /at abc-12-1 1923"
                             }));
-            assertEquals("     ☹ OOPS!!! Please check that you've"
-                            + " entered\n       the date and time correctly",
+            assertEquals("Please check that you've entered "
+                            + "the date and time correctly",
                     exception.getMessage());
         }
 
@@ -358,8 +356,8 @@ public class ParserTest {
                                 "event",
                                 "name /at 1998-12-45 1923"
                             }));
-            assertEquals("     ☹ OOPS!!! Please check that you've"
-                            + " entered\n       the date and time correctly",
+            assertEquals("Please check that you've entered "
+                            + "the date and time correctly",
                     exception.getMessage());
         }
     }
@@ -399,7 +397,7 @@ public class ParserTest {
             UnknownCommandException exception = assertThrows(
                     UnknownCommandException.class, () ->
                             Parser.parse(new String[] { "yeet" }));
-            assertEquals("     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(",
+            assertEquals("I'm sorry, but I don't know what that means.",
                     exception.getMessage());
         }
     }

@@ -13,7 +13,7 @@ public class InvalidEventFormatException extends DukeException {
      * Constructs an InvalidEventFormatException instance.
      */
     public InvalidEventFormatException() {
-        super("     ☹ OOPS!!! An event needs to have this format:\n"
-                + "      \"task name\" /at \"event time\"");
+        super("An event needs to have this format:\n"
+                + "\"task name\" /at \"event time\"");
     }
 }

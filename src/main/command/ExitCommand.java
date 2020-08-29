@@ -16,9 +16,12 @@ public class ExitCommand implements Command {
      * Does not execute anything.
      * @param ui the ui used to print out responses.
      * @param tasks the task list.
+     * @return the string bidding farewell to the user.
      */
     @Override
-    public void execute(Ui ui, TaskList tasks) { }
+    public String execute(Ui ui, TaskList tasks) {
+        return ui.printExit();
+    }
 
     /**
      * Returns false as there are no more commands after this.

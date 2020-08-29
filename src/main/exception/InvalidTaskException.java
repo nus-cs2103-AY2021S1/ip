@@ -13,6 +13,6 @@ public class InvalidTaskException extends DukeException {
      * Constructs an InvalidTaskException instance.
      */
     public InvalidTaskException() {
-        super("     ☹ OOPS!!! Your selected task does not exist!");
+        super("Your selected task does not exist!");
     }
 }

@@ -13,7 +13,7 @@ public class InvalidDeadlineFormatException extends DukeException {
      * Constructs an InvalidDeadlineFormatException instance.
      */
     public InvalidDeadlineFormatException() {
-        super("     ☹ OOPS!!! A deadline needs to have this format:\n"
-                + "       \"task name\" /by \"task deadline\"");
+        super("A deadline needs to have this format:\n"
+                + "\"task name\" /by \"task deadline\"");
     }
 }

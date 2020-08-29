@@ -15,7 +15,6 @@ public class EmptyMessageException extends DukeException {
      * @param command the command that does not have a description.
      */
     public EmptyMessageException(String command) {
-        super(String.format("     ☹ OOPS!!! The description of a %s"
-                        + " cannot be empty.", command));
+        super(String.format("The description of a %s cannot be empty.", command));
     }
 }
