@@ -1,4 +1,8 @@
-import java.io.*;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.FileNotFoundException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -14,10 +18,11 @@ public class Storage {
         this.pathString = pathString;
     }
 
-    public TaskList getFileList() {
+    public TaskList getListFromStorage() {
         Path path = Path.of(pathString);
         File savedListFile = new File(pathString);
         TaskList taskList = new TaskList();
+        Parser parser = new Parser();
         try {
             boolean doesSavedListExist = savedListFile.createNewFile();
             if (!doesSavedListExist) {
@@ -31,25 +36,7 @@ public class Storage {
                 }
 
                 for (String taskLine : contents) {
-                    String[] taskData = taskLine.split(" \\| ");
-                    String taskType = taskData[0];
-                    boolean taskIsDone = Integer.valueOf(taskData[1]) == 1;
-                    String taskName = taskData[2];
-
-                    if (!taskType.equals("T")) {
-                        String taskTime = taskData[3];
-                        if (taskType.equals("D")) {
-                            TaskDate dueTime = DateParser.parseDateFromStorage(taskTime);
-                            taskList.addTask(new Deadline(taskName, dueTime));
-                        } else {
-                            TaskDate startDate = DateParser.parseRangeFromStorage(taskTime, true);
-                            TaskDate endDate = DateParser.parseRangeFromStorage(taskTime, false);
-
-                            taskList.addTask(new Event(taskName, startDate, endDate));
-                        }
-                    } else {
-                        taskList.addTask(new Todo(taskName));
-                    }
+                    taskList.addTask(parser.parseFromStorage(taskLine));
                 }
             } else {
                 System.out.printf(horizontalLine + "     Existing list not found, creating new list\n" + horizontalLine);
@@ -78,11 +65,7 @@ public class Storage {
     }
 
     public void saveListToFile(TaskList taskList) {
-        String stringToWrite = "";
-        for (int i = 1; i <= taskList.getSize(); i++) {
-            Task task = taskList.getTask(i);
-            stringToWrite += task.getAbbreviatedString() + "\n";
-        }
+        String stringToWrite = taskList.getListForStorage();
 
         Path listFilePath = Path.of(pathString);
 
@@ -100,7 +83,5 @@ public class Storage {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        //System.out.printf(horizontalLine + "     List has been saved to file.%n"  + horizontalLine);
     }
 }

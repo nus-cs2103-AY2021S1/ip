@@ -5,18 +5,18 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 public class DateParser {
-    public static TaskDate parseDate(String dateString) throws InvalidInputException {
+    public static TaskDate parseDate(String dateString) throws InvalidTaskTimeException {
         try {
             LocalDateTime dateTime = LocalDateTime.parse(dateString,
                     DateTimeFormatter.ofPattern("yyyy/MM/dd HHmm"));
 
             return new TaskDate(dateTime);
         } catch (DateTimeException e) {
-            throw new InvalidInputException("Date/time formatting error: " + e.getMessage());
+            throw new InvalidTaskTimeException("Date/time formatting error: " + e.getMessage());
         }
     }
 
-    public static TaskDate getRange(String dateString, boolean startOrEnd) throws InvalidInputException {
+    public static TaskDate getRange(String dateString, boolean startOrEnd) throws InvalidTaskTimeException {
         String[] dateAndTimes = dateString.split(" ");
         String[] dates = dateAndTimes[0].split("/");
 
@@ -35,7 +35,7 @@ public class DateParser {
                                             DateTimeFormatter.ofPattern("HHmm"))));
             }
         } catch (DateTimeException e) {
-            throw new InvalidInputException("Date/time formatting error: " + e.getMessage());
+            throw new InvalidTaskTimeException("Date/time formatting error: " + e.getMessage());
         }
     }
 

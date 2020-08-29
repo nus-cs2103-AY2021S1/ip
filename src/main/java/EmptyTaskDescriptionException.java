@@ -1,4 +1,4 @@
-public class EmptyTaskDescriptionException extends CartonaException{
+public class EmptyTaskDescriptionException extends InvalidInputException {
     EmptyTaskDescriptionException(String errorMsg) {
         super(errorMsg);
     }

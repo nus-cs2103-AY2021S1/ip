@@ -10,7 +10,6 @@ public class TaskDate {
         this.dateTime = date.atTime(LocalTime.parse(time,
                                     DateTimeFormatter.ofPattern("HHmm")));
     }
-
     TaskDate(LocalDateTime dateTime) {
         this.dateTime = dateTime;
     }
@@ -22,10 +21,6 @@ public class TaskDate {
     public String getTime() {
         return this.dateTime.toLocalTime().format(
                              DateTimeFormatter.ofPattern("HHmm"));
-    }
-
-    public String getStorageString() {
-        return this.dateTime.format(DateTimeFormatter.ofPattern("yyyy/MM/dd HHmm"));
     }
 
     @Override

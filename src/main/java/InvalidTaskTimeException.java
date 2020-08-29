@@ -1,4 +1,4 @@
-public class InvalidTaskTimeException extends CartonaException {
+public class InvalidTaskTimeException extends InvalidInputException {
     InvalidTaskTimeException(String errorMsg) {
         super(errorMsg);
     }

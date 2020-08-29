@@ -1,27 +1,27 @@
 public abstract class Task {
     protected String name;
-    protected boolean done;
+    protected boolean isDone;
     protected String type;
 
     Task(String name) {
         this.name = name;
-        this.done = false;
+        this.isDone = false;
         this.type = " ";
     }
 
-    Task(String name, String type) {
+    Task(String name, boolean isDone, String type) {
         this.name = name;
-        this.done = false;
+        this.isDone = isDone;
         this.type = type;
     }
 
     public void complete() {
-        this.done = true;
+        this.isDone = true;
     }
 
     @Override
     public String toString() {
-        if (this.done) {
+        if (this.isDone) {
             return String.format("[✓] %s", name);
         } else {
             return String.format("[✗] %s", name);
@@ -29,7 +29,11 @@ public abstract class Task {
     }
 
     public String getAbbreviatedString() {
-        int isDoneRep = this.done ? 1 : 0;
+        int isDoneRep = this.isDone ? 1 : 0;
         return String.format("%s | %d | %s", this.type, isDoneRep, this.name);
+    }
+
+    public boolean checkIfDone() {
+        return this.isDone;
     }
 }

@@ -1,10 +1,8 @@
-import java.awt.*;
-
 public class Deadline extends Task {
     private TaskDate dueTime;
 
-    Deadline(String name, TaskDate dueTime) {
-        super(name, "D");
+    Deadline(String name, boolean isDone, TaskDate dueTime) {
+        super(name, isDone, "D");
         this.dueTime = dueTime;
     }
 
@@ -15,7 +13,7 @@ public class Deadline extends Task {
 
     @Override
     public String getAbbreviatedString() {
-        int isDoneRep = this.done ? 1 : 0;
+        int isDoneRep = this.isDone ? 1 : 0;
         return String.format("%s | %d | %s | %s", this.type, isDoneRep, this.name, this.dueTime);
     }
 }

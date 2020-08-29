@@ -8,33 +8,25 @@ public class TaskList {
         this.taskArrayList = new ArrayList<>();
     }
 
-    public String addTask(Task newTask) {
+    public void addTask(Task newTask) {
         taskArrayList.add(newTask);
-
-        return String.format("%s     Got it. I've added this task:%n       %s%n     " +
-                             "Now you have %d tasks in the list.%n%s",
-                                    horizontalLine, newTask,
-                                    taskArrayList.size(), horizontalLine);
     }
 
-    public String deleteTask(int taskNum) {
-        Task toDelete = taskArrayList.get(taskNum - 1);
+    public void deleteTask(int taskNum) {
         taskArrayList.remove(taskNum - 1);
-        String deleteMsg = String.format("     Noted. I've removed this task:%n       %s%n", toDelete);
-        String countMsg = String.format("     Now you have %d tasks in the list.%n", taskArrayList.size());
-        return horizontalLine + deleteMsg + countMsg + horizontalLine;
     }
 
     public Task getTask(int taskNum) {
         return this.taskArrayList.get(taskNum - 1);
     }
 
-    public String completeTask(int taskNum) {
+    public void completeTask(int taskNum) throws CartonaException {
         Task toComplete = taskArrayList.get(taskNum - 1);
+        if (toComplete.checkIfDone()) {
+            throw new CartonaException(String.format("Error: Task %d is already done.", taskNum));
+        }
+
         toComplete.complete();
-        String completion = "     Nice! I've marked this task as done:\n" +
-                String.format("       %s%n", toComplete);
-        return horizontalLine + completion + horizontalLine;
     }
 
     @Override
@@ -47,6 +39,17 @@ public class TaskList {
         }
         return printedListString;
     }
+
+    public String getListForStorage() {
+        String stringToWrite = "";
+        for (int i = 1; i <= this.getSize(); i++) {
+            Task task = this.getTask(i);
+            stringToWrite += task.getAbbreviatedString() + "\n";
+        }
+
+        return stringToWrite;
+    }
+
 
     public int getSize() {
         return this.taskArrayList.size();

@@ -1,4 +1,4 @@
-public class UnknownCommandException extends CartonaException {
+public class UnknownCommandException extends InvalidInputException {
     UnknownCommandException(String errorMsg) {
         super(errorMsg);
     }

@@ -2,8 +2,8 @@ public class Event extends Task {
     private TaskDate start;
     private TaskDate end;
 
-    Event(String name, TaskDate start, TaskDate end) {
-        super(name, "E");
+    Event(String name, boolean isDone, TaskDate start, TaskDate end) {
+        super(name, isDone,"E");
         this.start = start;
         this.end = end;
     }
@@ -15,7 +15,7 @@ public class Event extends Task {
 
     @Override
     public String getAbbreviatedString() {
-        int isDoneRep = this.done ? 1 : 0;
+        int isDoneRep = this.isDone ? 1 : 0;
         return String.format("%s | %d | %s | %s - %s", this.type, isDoneRep, this.name,
                                     this.start.toString(), this.end.getTime());
     }
