@@ -45,7 +45,7 @@ public class TaskList {
         this.list.remove(i-1);
         this.count = this.count - 1;
         return "Noted. I've removed this task:\n\t" +
-                "  " + t.toString() +
+                t.toString() +
                 "\n\tNow you have " + count + " tasks in the list.";
     }
 
