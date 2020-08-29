@@ -69,9 +69,9 @@ public class Duke {
     }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
-     * @return
+     * Gets response from Focus based on user's input.
+     * @param input User's input.
+     * @return Focus' response.
      */
     public String getResponse(String input) {
         boolean exit;

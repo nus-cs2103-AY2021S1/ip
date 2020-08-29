@@ -27,18 +27,14 @@ public class UI {
     /**
      * Greets the user upon entering the Focus.
      */
-    public String greetUser() {
-        String logo =
-                " __\n"
-                        + "/ _|   ___    ___  _   _  ___\n"
-                        + "| |_  / _ \\  / __|| | | |/ __|\n"
-                        + "|  _|| (_) || (__ | |_| |\\__ \\ _\n"
-                        + "|_|   \\___/  \\___| \\__,_||___/(_)\n";
-        System.out.println("Welcome to\n" + logo);
-        String greetings = divider
-                + "\"\\(*^O^*) I am Pocus, your personal assistant!"
-                + "\nBefore we start, may I know your name?\n"
-                + divider;
+    public static String greetUser() {
+        String logo = " __\n"
+                    + "/ _|   ___    ___  _   _  ___\n"
+                    + "| |_  / _ \\  / __|| | | |/ __|\n"
+                    + "|  _|| (_) || (__ | |_| |\\__ \\ _\n"
+                    + "|_|   \\___/  \\___| \\__,_||___/(_)\n\n";
+        String greetings = "Welcome to\n" + logo + "\"\\(*^O^*) I am Pocus, your personal assistant!"
+                + "\nBefore we start, may I know your name?\n";
         return greetings;
     }
 
@@ -46,12 +42,10 @@ public class UI {
      * Addresses the user with the name provided.
      * @param name Name of user.
      */
-    public String addressUser(String name) {
-        String address = divider
-                + "Hello there, " + name + "! How can I help you today?\n"
+    public static String addressUser(String name) {
+        String address = "Hello there, " + name + "! How can I help you today?\n"
                 + "Note: If you are a first time user,\n"
-                + "type 'help' for the list of commands to get started!\n"
-                + divider;
+                + "type 'help' for the list of commands to get started!\n";
         return address;
     }
 

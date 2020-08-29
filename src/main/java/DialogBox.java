@@ -6,24 +6,36 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
 
 import java.io.IOException;
 import java.util.Collections;
 
 /**
- * An example of a custom control using FXML.
- * This control represents a dialog box consisting of an ImageView to represent the speaker's face and a label
- * containing text from the speaker.
+ * A custom control using FXML.
+ * This control represents a dialog box consisting of a Circle to be filled by images to represent the
+ * speaker's face and a label containing text from the speaker.
  */
 public class DialogBox extends HBox {
+    /**
+     * Dialog label for text.
+     */
     @FXML
     private Label dialog;
+    /**
+     * Circle for speaker's images.
+     */
     @FXML
-    private ImageView displayPicture;
+    private Circle circle;
 
-    private DialogBox(String text, Image img) {
+    /**
+     * Constructor for DialogBox.
+     * @param text Inputs and responses.
+     * @param image Speaker's image.
+     */
+    private DialogBox(String text, Image image) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
             fxmlLoader.setController(this);
@@ -34,11 +46,11 @@ public class DialogBox extends HBox {
         }
 
         dialog.setText(text);
-        displayPicture.setImage(img);
+        circle.setFill(new ImagePattern(image));
     }
 
     /**
-     * Flips the dialog box such that the ImageView is on the left and text on the right.
+     * Flips the dialog box such that the Circle is on the left and text on the right.
      */
     private void flip() {
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
@@ -47,13 +59,25 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
-    public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+    /**
+     * Creates a new DialogBox for user.
+     * @param input User's input.
+     * @param image Image of user.
+     * @return DialogBox for user.
+     */
+    public static DialogBox getUserDialog(String input, Image image) {
+        return new DialogBox(input, image);
     }
 
-    public static DialogBox getDukeDialog(String text, Image img) {
-        var db = new DialogBox(text, img);
-        db.flip();
-        return db;
+    /**
+     * Creates a new DialogBox for Duke.
+     * @param response Duke's response.
+     * @param image Image of Duke.
+     * @return DialogBox for Duke.
+     */
+    public static DialogBox getDukeDialog(String response, Image image) {
+        DialogBox dialogBox = new DialogBox(response, image);
+        dialogBox.flip();
+        return dialogBox;
     }
 }

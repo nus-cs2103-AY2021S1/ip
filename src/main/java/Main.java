@@ -1,6 +1,7 @@
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -10,21 +11,30 @@ import java.io.IOException;
  * A GUI for Duke using FXML.
  */
 public class Main extends Application {
+    /**
+     * Creates Duke.
+     */
+    private final Duke duke = new Duke();
+    /**
+     * Gets the image for Duke.
+     */
+    private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
-    private Duke duke = new Duke();
-
-    public static Stage stage = new Stage();
-
+    /**
+     * Overrides start method of JavaFX.
+     * @param stage Stage.
+     */
     @Override
     public void start(Stage stage) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
-            Main.stage.setTitle("Focus");
-            Main.stage.setScene(scene);
+            stage.setTitle("focus.");
+            stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
-            Main.stage.show();
+            stage.show();
+
         } catch (IOException e) {
             e.printStackTrace();
         }
