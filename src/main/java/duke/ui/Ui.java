@@ -15,7 +15,7 @@ public class Ui {
     }
 
     public String formatMessage(String msg) {
-        String result = String.format("%s \n %s \n &s", LINE_SEPARATOR, msg, LINE_SEPARATOR);
+        String result = String.format("%s \n %s \n %s", LINE_SEPARATOR, msg, LINE_SEPARATOR);
         return result;
     }
 
