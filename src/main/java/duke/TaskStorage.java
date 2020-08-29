@@ -1,30 +1,30 @@
 package duke;
 
-import duke.exceptions.DukeException;
-import duke.tasks.Deadline;
-import duke.tasks.Event;
-import duke.tasks.Task;
-import duke.tasks.Todo;
-
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
+import duke.exceptions.DukeException;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.Todo;
+
 /**
  * Represents the storage for tasks.
  * Handles the saving, loading and creating of the tasks.
  */
 public class TaskStorage {
-    static String taskStoragePath;
+    private static final String taskStoragePath = "./tmp/storage.txt";
 
-    static {
-        taskStoragePath = "./tmp/storage.txt";
-    }
-
-    List<Task> taskList;
+    private final List<Task> taskList;
 
     private TaskStorage(List<Task> taskList) {
         this.taskList = taskList;
@@ -35,7 +35,7 @@ public class TaskStorage {
      * If no storage file is found in the path, creates a new storage file.
      *
      * @return Initialized taskStorage.
-     * @throws IOException   If an input or output exception occurred.
+     * @throws IOException If an input or output exception occurred.
      * @throws DukeException If an exception related to Duke occurred.
      */
     public static TaskStorage init() throws IOException, DukeException {
@@ -75,14 +75,14 @@ public class TaskStorage {
             String content = lineSplit[2];
             String datetime = lineSplit[3];
             switch (taskType) {
-                case "D":
-                    return new Deadline(content, datetime, isTaskComplete);
-                case "E":
-                    return new Event(content, datetime, isTaskComplete);
-                case "T":
-                    return new Todo(content, isTaskComplete);
-                default:
-                    throw new DukeException("Error in parsing line, invalid task type.");
+            case "D":
+                return new Deadline(content, datetime, isTaskComplete);
+            case "E":
+                return new Event(content, datetime, isTaskComplete);
+            case "T":
+                return new Todo(content, isTaskComplete);
+            default:
+                throw new DukeException("Error in parsing line, invalid task type.");
             }
         } catch (IndexOutOfBoundsException exception) {
             throw new DukeException(exception.getMessage());
@@ -91,16 +91,17 @@ public class TaskStorage {
 
     private static boolean convertToBoolean(String value) {
         boolean returnValue = false;
-        if ("1".equalsIgnoreCase(value) || "yes".equalsIgnoreCase(value) ||
-                "true".equalsIgnoreCase(value) || "on".equalsIgnoreCase(value))
+        if ("1".equalsIgnoreCase(value) || "yes".equalsIgnoreCase(value)
+                || "true".equalsIgnoreCase(value) || "on".equalsIgnoreCase(value)) {
             returnValue = true;
+        }
         return returnValue;
     }
 
     /**
      * Returns and saves the current taskStorage in memory locally.
      *
-     * @return updated taskStorage
+     * @return Updated taskStorage.
      * @throws IOException If an input or output exception occurred.
      */
     public TaskStorage save() throws IOException {
@@ -158,12 +159,17 @@ public class TaskStorage {
 
     /**
      * Returns a list of tasks that contains the content
+     *
      * @param content Search term used.
      * @return The list of tasks that contains the content specified.
      */
     public List<Task> findAllContaining(String content) {
         return taskList.stream()
-                .filter(task -> task.content.contains(content))
+                .filter(task -> task.getContent().contains(content))
                 .collect(Collectors.toList());
+    }
+
+    public List<Task> getTaskList() {
+        return taskList;
     }
 }

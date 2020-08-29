@@ -1,13 +1,13 @@
 package duke.commands;
 
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import duke.MessageManager;
 import duke.TaskManager;
 import duke.patterns.InputPattern;
 import duke.tasks.Task;
-
-import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * Represents a command to find all containing a keyword.
@@ -16,6 +16,7 @@ public class FindAllContainingCommand extends Command {
 
     /**
      * Class constructor.
+     *
      * @param input User input.
      */
     public FindAllContainingCommand(String input) {

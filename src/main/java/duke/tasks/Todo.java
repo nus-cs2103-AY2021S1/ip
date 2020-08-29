@@ -10,7 +10,7 @@ public class Todo extends Task {
     /**
      * Class constructor specifying whether the todo is complete.
      *
-     * @param content    Contents of the todo.
+     * @param content Contents of the todo.
      * @param isComplete Completion status of the todo.
      * @throws DukeException If an exception related to Duke occurred.
      */

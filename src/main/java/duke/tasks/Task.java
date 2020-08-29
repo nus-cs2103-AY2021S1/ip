@@ -7,11 +7,12 @@ import duke.exceptions.DukeException;
  */
 public class Task {
 
-    public String content;
-    public boolean isComplete;
+    protected String content;
+    protected boolean isComplete;
 
     /**
      * Class constructor.
+     *
      * @param content Contents of the task.
      * @throws DukeException If an exception related to Duke occurred.
      */
@@ -25,6 +26,7 @@ public class Task {
 
     /**
      * Class constructor specifying whether the task is complete.
+     *
      * @param content Contents of the task.
      * @throws DukeException If an exception related to Duke occurred.
      */
@@ -33,8 +35,13 @@ public class Task {
         this.isComplete = isComplete;
     }
 
+    private static int booleanToInt(boolean bool) {
+        return bool ? 1 : 0;
+    }
+
     /**
      * Sets the completion status of the task.
+     *
      * @param isComplete Completion status of the task.
      */
     public void setComplete(boolean isComplete) {
@@ -43,6 +50,7 @@ public class Task {
 
     /**
      * Returns a user-readable task string.
+     *
      * @return User-readable task string.
      */
     @Override
@@ -54,15 +62,16 @@ public class Task {
         }
     }
 
-    private static int booleanToInt(boolean bool) {
-        return bool ? 1 : 0;
-    }
-
     /**
      * Returns a task string readable by storage.
+     *
      * @return Storage-safe task string.
      */
     public String toSaveString() {
         return String.format("%s/%s", booleanToInt(isComplete), content);
+    }
+
+    public String getContent() {
+        return content;
     }
 }

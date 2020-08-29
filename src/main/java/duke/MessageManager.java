@@ -1,10 +1,10 @@
 package duke;
 
-import duke.tasks.Task;
-
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+
+import duke.tasks.Task;
 
 /**
  * Represents a MessageManager.
@@ -22,9 +22,9 @@ public class MessageManager {
      * and remaining number of tasks
      */
     public static String getListMessage(TaskManager taskManager) {
-        String listStringFormat = "Here are the tasks in your list:\n" +
-                "%s\n" +
-                "You have %s task(s) in your list.";
+        String listStringFormat = "Here are the tasks in your list:\n"
+                + "%s\n"
+                + "You have %s task(s) in your list.";
         return String.format(
                 listStringFormat,
                 taskManager.toString(),
@@ -35,15 +35,15 @@ public class MessageManager {
     /**
      * Returns the deleted task and remaining number of tasks in message form.
      *
-     * @param task        the deleted task
+     * @param task the deleted task
      * @param taskManager the taskManager to retrieve all tasks from
      * @return the message containing the deleted task
      * and remaining number of tasks
      */
     public static String getDeleteSuccessMessage(Task task, TaskManager taskManager) {
-        String successfulTaskDeleteStringFormat = "Noted. I've removed this task:\n" +
-                "%s\n" +
-                "Now you have %d task(s) in the list.";
+        String successfulTaskDeleteStringFormat = "Noted. I've removed this task:\n"
+                + "%s\n"
+                + "Now you have %d task(s) in the list.";
         return String.format(
                 successfulTaskDeleteStringFormat,
                 task,
@@ -77,8 +77,8 @@ public class MessageManager {
      * @return the message containing the completed task
      */
     public static String getCompleteSuccessMessage(Task task) {
-        String successfulTaskCompleteStringFormat = "Nice! I've marked this task as done:\n" +
-                "%s";
+        String successfulTaskCompleteStringFormat = "Nice! I've marked this task as done:\n"
+                + "%s";
         return String.format(
                 successfulTaskCompleteStringFormat,
                 task);
@@ -87,15 +87,15 @@ public class MessageManager {
     /**
      * Returns the added task and remaining number of tasks in message form.
      *
-     * @param task        the added task
+     * @param task the added task
      * @param taskManager the taskManager to retrieve all tasks from
      * @return the message containing the added task
      * and remaining number of tasks
      */
     public static String getAddSuccessMessage(Task task, TaskManager taskManager) {
-        String successfulTaskAddStringFormat = "Got it. I've added this task:\n" +
-                "%s\n" +
-                "Now you have %d task(s) in the list.";
+        String successfulTaskAddStringFormat = "Got it. I've added this task:\n"
+                + "%s\n"
+                + "Now you have %d task(s) in the list.";
         return String.format(
                 successfulTaskAddStringFormat,
                 task,

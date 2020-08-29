@@ -1,14 +1,14 @@
 package duke.commands;
 
+import java.io.IOException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import duke.MessageManager;
 import duke.TaskManager;
 import duke.exceptions.DukeException;
 import duke.patterns.InputPattern;
 import duke.tasks.Task;
-
-import java.io.IOException;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * Represents a command to delete a task.

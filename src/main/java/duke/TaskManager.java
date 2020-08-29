@@ -1,15 +1,15 @@
 package duke;
 
+import java.io.IOException;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
 import duke.exceptions.DukeException;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.Task;
 import duke.tasks.Todo;
-
-import java.io.IOException;
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 /**
  * Represents a TaskManager.
@@ -21,7 +21,7 @@ public class TaskManager {
     /**
      * Constructor for TaskManager.
      *
-     * @throws IOException   If an input or output exception occurred.
+     * @throws IOException If an input or output exception occurred.
      * @throws DukeException If an exception related to Duke occurred.
      */
     public TaskManager() throws IOException, DukeException {
@@ -33,7 +33,7 @@ public class TaskManager {
      *
      * @param content String description of todo.
      * @return Created todo.
-     * @throws IOException   If an input or output exception occurred.
+     * @throws IOException If an input or output exception occurred.
      * @throws DukeException If an exception related to Duke occurred.
      */
     public Todo addTodo(String content) throws DukeException, IOException {
@@ -45,10 +45,10 @@ public class TaskManager {
     /**
      * Creates and adds a Deadline to the taskStorage.
      *
-     * @param content     String description of deadline.
+     * @param content String description of deadline.
      * @param datetimeDue Datetime of when the deadline is.
      * @return Created deadline.
-     * @throws IOException   If an input or output exception occurred.
+     * @throws IOException If an input or output exception occurred.
      * @throws DukeException If an exception related to Duke occurred.
      */
     public Deadline addDeadline(String content, String datetimeDue) throws DukeException, IOException {
@@ -60,10 +60,10 @@ public class TaskManager {
     /**
      * Creates and adds an Event to the taskStorage.
      *
-     * @param content  String description of event.
+     * @param content String description of event.
      * @param datetime Datetime of when the event is.
      * @return Created todo.
-     * @throws IOException   If an input or output exception occurred.
+     * @throws IOException If an input or output exception occurred.
      * @throws DukeException If an exception related to Duke occurred.
      */
     public Event addEvent(String content, String datetime) throws DukeException, IOException {
@@ -77,7 +77,7 @@ public class TaskManager {
      *
      * @param taskNumber Task number of task to be deleted.
      * @return Deleted task.
-     * @throws IOException   If an input or output exception occurred.
+     * @throws IOException If an input or output exception occurred.
      * @throws DukeException If an exception related to Duke occurred.
      */
     public Task deleteTask(int taskNumber) throws DukeException, IOException {
@@ -90,7 +90,7 @@ public class TaskManager {
      *
      * @param taskNumber Task number of task to complete.
      * @return Completed task.
-     * @throws IOException   If an input or output exception occurred.
+     * @throws IOException If an input or output exception occurred.
      * @throws DukeException If an exception related to Duke occurred.
      */
     public Task completeTask(int taskNumber) throws DukeException, IOException {
@@ -120,7 +120,7 @@ public class TaskManager {
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
         return IntStream.range(0, taskStorage.getTaskCount())
-                .mapToObj(i -> String.format("%d. %s", i + 1, taskStorage.taskList.get(i).toString()))
+                .mapToObj(i -> String.format("%d. %s", i + 1, taskStorage.getTaskList().get(i).toString()))
                 .collect(Collectors.joining("\n"));
     }
 
@@ -130,6 +130,7 @@ public class TaskManager {
 
     /**
      * Returns a list of tasks from the taskManager that contains the content
+     *
      * @param content The search term used.
      * @return The list of tasks that contains the content specified
      */

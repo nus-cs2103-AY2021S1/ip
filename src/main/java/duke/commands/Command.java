@@ -7,8 +7,8 @@ import duke.TaskManager;
  */
 public abstract class Command {
 
-    public boolean isExit;
-    String input;
+    protected boolean isExit;
+    protected String input;
 
     /**
      * Execution instructions for the command.
@@ -17,4 +17,8 @@ public abstract class Command {
      * @return String response of command.
      */
     public abstract String execute(TaskManager taskManager);
+
+    public boolean isExit() {
+        return isExit;
+    }
 }
