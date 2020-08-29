@@ -42,7 +42,7 @@ public abstract class Task implements Serialisable {
      * @return <code>✓</code> if the task is done, <code>✘</code> otherwise.
      */
     private String getStatusIcon() {
-        return (this.isDone ? "✓" : "✘");
+        return (this.isDone ? "\u2713" : "\u2718"); // return tick or X symbols
     }
 
     /**
