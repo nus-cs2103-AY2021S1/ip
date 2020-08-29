@@ -32,5 +32,19 @@ public class AddCommand extends Command {
         return false;
     }
 
-
+    @Override
+    public boolean equals(Object o){
+        if (o == this) {
+            return true;
+        } else if (o instanceof AddCommand){
+            AddCommand temp = (AddCommand) o;
+            if (temp.command.equals(this.command)){
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
 }

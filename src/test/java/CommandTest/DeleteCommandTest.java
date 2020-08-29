@@ -15,14 +15,14 @@ public class DeleteCommandTest {
     @Test
     public void DeleteCommandErrorTest() {
         assertThrows(WrongIndexError.class, () -> {
-            new DeleteCommand("delete 4").execute(new TaskList(new Storage("data/duke.txt").load()), new Ui(), new Storage("data/duke.txt"));
+            new DeleteCommand("delete 4").execute(new TaskList(new Storage("data").load()), new Ui(), new Storage("data/duke.txt"));
         });
     }
 
     @Test
     public void DeleteCommandErrorTest2() {
         assertThrows(MissingSpecifiedDeleteError.class, () -> {
-            new DeleteCommand("delete").execute(new TaskList(new Storage("data/duke.txt").load()), new Ui(), new Storage("data/duke.txt"));
+            new DeleteCommand("delete").execute(new TaskList(new Storage("data").load()), new Ui(), new Storage("data/duke.txt"));
         });
     }
 }

@@ -14,7 +14,7 @@ public class DoneCommandTest {
     @Test
     public void DeleteCommandErrorTest() {
         assertThrows(WrongIndexError.class, () -> {
-            new DoneCommand("done 4").execute(new TaskList(new Storage("data/duke.txt").load()), new Ui(), new Storage("data/duke.txt"));
+            new DoneCommand("done 4").execute(new TaskList(new Storage("data/").load()), new Ui(), new Storage("data/duke.txt"));
         });
     }
 }
