@@ -1,4 +1,10 @@
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.time.format.FormatStyle;
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.Scanner;
 
 public class Duke {
@@ -7,7 +13,7 @@ public class Duke {
         run();
     }
 
-    public static void greet(){
+    public static void greet() {
         String logo = "____________________________________________________________\n"
                 /*+ " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -20,7 +26,7 @@ public class Duke {
         System.out.println(logo);
     }
 
-    public static void run(){
+    public static void run() {
         Scanner sc = new Scanner(System.in);
         boolean isRunning = true;
         String input;
@@ -28,106 +34,130 @@ public class Duke {
         ArrayList<Task> list = new ArrayList<>();
         Task task;
         int num, index;
-        while(isRunning){
+        while (isRunning) {
             input = sc.nextLine();
 
-            if(input.equals("list")){
+            if (input.equals("list")) {
+                printLine()
                 list(list);
-            }
-            else if(input.equals("bye")){
+                printLine()
+            } else if (input.equals("bye")) {
+                printLine()
                 isRunning = bye();
-            }
-            else if(getWord(input).equals("done")){
+                printLine()
+            } else if (getWord(input).equals("done")) {
+                printLine()
                 done(input, list);
-
-            }
-            else if(getWord(input).equals("todo")){
+                printLine()
+            } else if (getWord(input).equals("todo")) {
+                printLine()
                 todo(input, list);
-            }
-            else if(getWord(input).equals("deadline")) {
+                printLine()
+            } else if (getWord(input).equals("deadline")) {
+                printLine();
                 deadline(input, list);
-            }
-            else if(getWord(input).equals("event")) {
+                printLine();
+            } else if (getWord(input).equals("event")) {
+                printLine()
                 event(input, list);
-            }
-            else if(getWord(input).equals("delete")) {
+                printLine()
+            } else if (getWord(input).equals("delete")) {
+                printLine()
                 delete(input, list);
-            }
-            else{
+                printLine()
+            } else {
+                printLine()
                 error();
+                printLine()
             }
         }
     }
 
-    public static String getWord(String string){
+    public static String getWord(String string) {
 
         int firstSpaceIndex = string.indexOf(' ');
-        if(firstSpaceIndex == -1){
+        if (firstSpaceIndex == -1) {
             return string;
         }
         return string.substring(0, firstSpaceIndex);
     }
 
-    public static void list(ArrayList<Task> list){
-        printLine();
+    public static void list(ArrayList<Task> list) {
         Task task;
         System.out.println("Here are the tasks in your list:");
-        for(int i = 1; i <= list.size(); i++){
-            task = list.get(i-1);
+        for (int i = 1; i <= list.size(); i++) {
+            task = list.get(i - 1);
             System.out.println(i + "." + task.getTypeString() + task.getDoneString() + task.getString());
         }
-        printLine();
     }
 
-    public static boolean bye(){
-        printLine();
+    public static boolean bye() {
         System.out.println("Bye. Hope to see you again soon!");
-        printLine();
         return false;
     }
 
-    public static void todo(String input, ArrayList<Task> list){
-        printLine();
+    public static void todo(String input, ArrayList<Task> list) {
         input = input.substring(4);
-        if(input.isEmpty()){
+        if (input.isEmpty()) {
             System.out.println("☹ OOPS!!! The description of a todo cannot be empty.");
-        }
-        else {
+        } else {
             Task task = new Task(TaskType.TODO, false, input);
             list.add(task);
             System.out.println("Got it. I've added this task: ");
             System.out.println(" " + task.getTypeString() + task.getDoneString() + input);
             System.out.println("Now you have " + list.size() + " tasks in the list.");
         }
-        printLine();
     }
 
-    public static void deadline(String input, ArrayList<Task> list){
+    public static void deadline(String input, ArrayList<Task> list) {
         input = input.substring(8);
-        printLine();
-        if(input.isEmpty()){
+        if (input.isEmpty()) {
             System.out.println("☹ OOPS!!! The description of a deadline cannot be empty.");
-        }else {
-            int index = input.indexOf("/by");
-            if (index == -1) {
-                System.out.println("☹ OOPS!!! The description of a deadline must have a indicated deadline.");
-            } else {
-                StringBuilder stringBuilder = new StringBuilder();
-                stringBuilder.append(input.substring(0, index)).append("(by:").append(input.substring(index + 3)).append(")");
-                input = stringBuilder.toString();
-                Task task = new Task(TaskType.DEADLINE, false, input);
-                list.add(task);
-                System.out.println("Got it. I've added this task: ");
-                System.out.println(" " + task.getTypeString() + task.getDoneString() + input);
-                System.out.println("Now you have " + list.size() + " tasks in the list.");
-            }
+            return;
         }
-        printLine();
-    }
+        int index = input.indexOf("/by");
+        if (index == -1) {
+            System.out.println("☹ OOPS!!! The description of a deadline must have a indicated deadline.");
+            return;
+        }
+        StringBuilder stringBuilder = new StringBuilder();
+        String[] strings = new String[1];
+        if(input.length() >= index + 4) {
+            strings = input.substring(index + 4).split("/");
+        }
+        if( (strings.length >= 3) && (strings[2].length() >= 9) ) {
+            if(strings[0].length() < 2){
+                strings[0] = "0" + strings[0];
+            }
+            stringBuilder.append(strings[2].substring(0, 4))
+                    .append("-").append(strings[1])
+                    .append("-").append(strings[0])
+                    .append("T")
+                    .append(strings[2].substring(5, 7))
+                    .append(":")
+                    .append(strings[2].substring(7, 9));
+        }
+        try{
+            LocalDateTime localDateTime = LocalDateTime.parse(stringBuilder.toString(), DateTimeFormatter.ISO_LOCAL_DATE_TIME);
+            stringBuilder = new StringBuilder();
+            stringBuilder.append(input.substring(0, index))
+                    .append("(by: ")
+                    .append(localDateTime.format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM, FormatStyle.SHORT)))
+                    .append(input.substring(index + 18))
+                    .append(")");
+            input = stringBuilder.toString();
+            Task task = new Task(TaskType.DEADLINE, false, input, Optional.of(localDateTime));
+            list.add(task);
+            System.out.println("Got it. I've added this task: ");
+            System.out.println(" " + task.getTypeString() + task.getDoneString() + input);
+            System.out.println("Now you have " + list.size() + " tasks in the list.");
+        } catch(DateTimeParseException e) {
+            System.out.println("☹ OOPS!!! The description of a deadline must have a valid date and time. (Format: /by dd/mm/yyyy tttt e.g 2/12/2019 1800");
 
+        }
+    }
     public static void event(String input, ArrayList<Task> list){
         input = input.substring(5);
-        printLine();
         if(input.isEmpty()){
             System.out.println("☹ OOPS!!! The description of a event cannot be empty.");
         }else {
@@ -145,12 +175,10 @@ public class Duke {
                 System.out.println("Now you have " + list.size() + " tasks in the list.");
             }
         }
-        printLine();
     }
 
     public static void done(String input, ArrayList<Task> list){
         input = input.substring(4);
-        printLine();
         if(input.isEmpty()){
             System.out.println("☹ OOPS!!! Please indicate which task is done.");
         }else{
@@ -179,12 +207,10 @@ public class Duke {
                 System.out.println("☹ OOPS!!! Incorrect entry for finished task.");
             }
         }
-        printLine();
     }
 
     public static void delete(String input, ArrayList<Task> list){
         input = input.substring(6);
-        printLine();
         if(input.isEmpty()){
             System.out.println("☹ OOPS!!! Please indicate which task is done.");
         }else{
@@ -212,7 +238,6 @@ public class Duke {
                 System.out.println("☹ OOPS!!! Incorrect entry for finished task.");
             }
         }
-        printLine();
     }
 
     public static void printLine(){
@@ -220,20 +245,27 @@ public class Duke {
     }
 
     public static void error(){
-        printLine();
         System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
-        printLine();
     }
+
 }
 class Task{
     TaskType taskType;
     boolean isDone;
     String string;
+    Optional<LocalDateTime> dateTime;
 
+    public Task(TaskType taskType, boolean isDone, String string, Optional<LocalDateTime> date){
+        this.taskType = taskType;
+        this.isDone = isDone;
+        this.string = string;
+        this.dateTime = dateTime;
+    }
     public Task(TaskType taskType, boolean isDone, String string){
         this.taskType = taskType;
         this.isDone = isDone;
         this.string = string;
+        this.dateTime = Optional.empty();
     }
 
     public String getString() {
@@ -272,6 +304,7 @@ class Task{
         return string;
     }
 }
+
 enum TaskType{
     TODO,
     DEADLINE,
