@@ -1,8 +1,8 @@
 package com.duke.tasks;
 
-import com.duke.parser.Parser;
-
 import java.time.LocalDate;
+
+import com.duke.parser.Parser;
 
 /**
  * Represents a Deadline task item.
@@ -12,6 +12,12 @@ public class Deadlines extends Task {
     protected LocalDate date;
     protected int time;
 
+    /**
+     * Constructor for Deadlines.
+     *
+     * @param task Task description.
+     * @param dateAndTime date and time of deadline.
+     */
     public Deadlines(String task, String dateAndTime) {
         //date = 2019-12-02 1800
         String[] dateAndTimeArr = dateAndTime.split(" ");
@@ -20,6 +26,13 @@ public class Deadlines extends Task {
         this.time = Integer.parseInt(dateAndTimeArr[1]);
     }
 
+    /**
+     * Constructor for Deadlines.
+     *
+     * @param task Task description.
+     * @param dateAndTime date and time of deadline.
+     * @param isDone Whether task is done or not.
+     */
     public Deadlines(String task, String dateAndTime, boolean isDone) {
         String[] dateAndTimeArr = dateAndTime.split(" ");
 

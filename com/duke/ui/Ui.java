@@ -1,7 +1,6 @@
 package com.duke.ui;
 
 import java.io.IOException;
-import java.util.List;
 import java.util.Scanner;
 
 public class Ui {
@@ -14,6 +13,30 @@ public class Ui {
 
     public Ui() {
         this.taskList = null;
+    }
+
+    private static void sectionize() {
+        System.out.println("\t____________________________________________________________");
+    }
+
+    private static String errorMessage() {
+        return "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
+    }
+
+    public static void initialize() {
+        Ui ui = new Ui(new TaskList());
+        ui.showWelcome();
+        ui.listen();
+    }
+
+    public static void initialize(TaskList taskList) {
+        Ui ui = new Ui(taskList);
+        ui.showWelcome();
+        ui.listen();
+    }
+
+    private static void exit() {
+        System.exit(0);
     }
 
     private void reply() {
@@ -73,33 +96,10 @@ public class Ui {
         System.out.println("Hello! I'm DukeBot");
         System.out.println("What can I do for you?");
     }
-    private static void sectionize() {
-        System.out.println("\t____________________________________________________________");
-    }
-
-    private static String errorMessage() {
-        return "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
-    }
-
-    public static void initialize() {
-        Ui ui = new Ui(new TaskList());
-        ui.showWelcome();
-        ui.listen();
-    }
-
-    public static void initialize(TaskList taskList) {
-        Ui ui = new Ui(taskList);
-        ui.showWelcome();
-        ui.listen();
-    }
 
     public void showLoadingError() {
         System.out.println("File failed to load. Initializing new File...");
         initialize();
-    }
-
-    private static void exit() {
-        System.exit(0);
     }
 
     private void listen() {
@@ -107,7 +107,7 @@ public class Ui {
         if (Parser.isDone(input)) {
             int index = Integer.parseInt(input.substring(5, 6)) - 1;
             this.markDone(index);
-        } else if(Parser.isDelete(input)) {
+        } else if (Parser.isDelete(input)) {
             int index = Integer.parseInt(input.split(" ")[1]) - 1;
             this.remove(index);
         } else if (input.equals("bye")) {
@@ -128,27 +128,27 @@ public class Ui {
                 String date;
                 //System.out.println(task);
                 switch (taskType) {
-                    case ("todo"):
-                        taskList.addItem(new ToDos(task));
-                        this.reply();
-                        break;
-                    case ("deadline"):
-                        // date = 'by Sunday'
-                        taskAndDateArr = Parser.splitTaskAndDate(task);
-                        task = taskAndDateArr[0];
-                        date = taskAndDateArr[1];
-                        taskList.addItem(new Deadlines(task, date));
-                        this.reply();
-                        break;
-                    case ("event"):
-                        taskAndDateArr = Parser.splitTaskAndDate(task);
-                        task = taskAndDateArr[0];
-                        date = taskAndDateArr[1];
-                        taskList.addItem(new Events(task, date));
-                        this.reply();
-                        break;
-                    default:
-                        throw new DukeException(Ui.errorMessage());
+                case ("todo"):
+                    taskList.addItem(new ToDos(task));
+                    this.reply();
+                    break;
+                case ("deadline"):
+                    // date = 'by Sunday'
+                    taskAndDateArr = Parser.splitTaskAndDate(task);
+                    task = taskAndDateArr[0];
+                    date = taskAndDateArr[1];
+                    taskList.addItem(new Deadlines(task, date));
+                    this.reply();
+                    break;
+                case ("event"):
+                    taskAndDateArr = Parser.splitTaskAndDate(task);
+                    task = taskAndDateArr[0];
+                    date = taskAndDateArr[1];
+                    taskList.addItem(new Events(task, date));
+                    this.reply();
+                    break;
+                default:
+                    throw new DukeException(Ui.errorMessage());
                 }
             } catch (DukeException e) {
                 Ui.sectionize();

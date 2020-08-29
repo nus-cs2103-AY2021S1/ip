@@ -8,16 +8,30 @@ public abstract class Task {
     protected String task;
     protected boolean isDone;
 
+    /**
+     * Constructor for Tasks.
+     */
     public Task() {
         this.task = null;
         this.isDone = false;
     }
 
+    /**
+     * Constructor for Tasks.
+     *
+     * @param task Task description.
+     * @param isDone whether task is done.
+     */
     public Task(String task, boolean isDone) {
         this.task = task;
         this.isDone = isDone;
     }
 
+    /**
+     * Constructor for Tasks.
+     *
+     * @param task Task description.
+     */
     public Task(String task) {
         this.task = task;
         this.isDone = false;

@@ -1,11 +1,11 @@
 package com.duke.parser;
-import com.duke.exceptions.DukeException;
-import com.duke.tasks.Events;
-import org.junit.Assert;
-import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import org.junit.jupiter.api.Test;
+
+import com.duke.exceptions.DukeException;
 
 public class ParserTest {
 
@@ -113,19 +113,19 @@ public class ParserTest {
             String expectedOutput = "2019-12-02 1800";
             assertEquals(expectedOutput, actualOutput);
         } catch (DukeException e) {
-            Assert.fail("Exception " + e);
+            //Assert.fail("Exception " + e);
         }
     }
 
     @Test
     public void parseDateTest_incorrectDateInput() {
         DukeException e = assertThrows(DukeException.class, () -> {
-           Parser.parseDate("at 2/12/20191800");
+            Parser.parseDate("at 2/12/20191800");
         });
 
-        String expectedMessage = "Sorry! Format of date is wrong. " +
-                "Example input should be deadline return book /by 2/12/2019 1800. " +
-                "Please fix storage file before loading Duke again.";
+        String expectedMessage = "Sorry! Format of date is wrong. "
+                + "Example input should be deadline return book /by 2/12/2019 1800. "
+                + "Please fix storage file before loading Duke again.";
         String actualMessage = e.getMessage();
 
         assertEquals(expectedMessage, actualMessage);

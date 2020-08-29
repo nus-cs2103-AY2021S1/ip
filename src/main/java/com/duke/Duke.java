@@ -16,6 +16,9 @@ public class Duke {
     private Ui ui;
     private TaskList tasks;
 
+    /**
+     * Duke Default Constructor. Includes filepath to persistent storage.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -27,8 +30,11 @@ public class Duke {
         }
     }
 
+    /**
+     * Duke main method. Initializes tasks from persistent storage file.
+     */
     public static void main(String[] args) throws DukeException {
-        Duke duke = new Duke("src/main/data/input.txt");
+        Duke duke = new Duke(FILE_PATH);
         duke.ui.initialize(duke.tasks);
     }
 

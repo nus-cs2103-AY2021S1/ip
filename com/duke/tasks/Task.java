@@ -27,7 +27,9 @@ public class Task {
         return this.task;
     }
 
-    public boolean getDone() { return this.done; }
+    public boolean getDone() {
+        return this.done;
+    }
 
     //format date from 'by Sunday' to '(by: Sunday)'
     public static String reformatDate(String input) {

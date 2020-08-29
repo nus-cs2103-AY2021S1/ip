@@ -1,9 +1,6 @@
 package com.duke.parser;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
 
 public class Parser {
 
@@ -11,14 +8,14 @@ public class Parser {
         String[] inputArr = input.split(" ");
         return inputArr.length == 2
                 && input.substring(0, 4).equals("done")
-                && isNumber(input.substring(5,6));
+                && isNumber(input.substring(5, 6));
     }
 
     public static boolean isDelete(String input) {
         String[] inputArr = input.split(" ");
         return inputArr.length == 2
                 && input.substring(0, 6).equals("delete")
-                && isNumber(input.substring(7,8));
+                && isNumber(input.substring(7, 8));
     }
 
     public static boolean isNumber(String input) {

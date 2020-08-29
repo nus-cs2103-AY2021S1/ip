@@ -1,5 +1,5 @@
 package com.duke.tasklist;
-import java.io.IOException;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,5 +37,7 @@ public class TaskList {
 
     public Task remove(int index) {
         return this.list.remove(index);
-    };
+    }
+
+    ;
 }

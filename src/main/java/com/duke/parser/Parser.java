@@ -1,12 +1,13 @@
 package com.duke.parser;
 
+import java.time.LocalDate;
+
+import com.duke.exceptions.DukeException;
 import com.duke.tasks.Deadlines;
 import com.duke.tasks.Events;
 import com.duke.tasks.Task;
 import com.duke.tasks.ToDos;
-import com.duke.exceptions.DukeException;
 
-import java.time.LocalDate;
 
 /**
  * Parser which is responsible in parsing all instruction from user.
@@ -138,10 +139,10 @@ public class Parser {
         //date input could be "at 2/12/2019 1800"
         //returns "2019-12-02 1800"
         try {
-            String errMessage = "Sorry! Format of date is wrong. " +
-                    "Example input should be " +
-                    "deadline return book /by 2/12/2019 1800. " +
-                    "Please fix storage file before loading Duke again.";
+            String errMessage = "Sorry! Format of date is wrong. "
+                    + "Example input should be "
+                    + "deadline return book /by 2/12/2019 1800. "
+                    + "Please fix storage file before loading Duke again.";
 
             String[] strArr = date.split(" ");
             if (strArr.length != 3 && strArr.length != 2) {

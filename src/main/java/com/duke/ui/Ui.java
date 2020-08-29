@@ -1,26 +1,23 @@
 package com.duke.ui;
 
-import com.duke.tasks.Deadlines;
-import com.duke.tasks.Events;
-import com.duke.tasks.Task;
-import com.duke.tasks.ToDos;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
 import com.duke.exceptions.DukeException;
 import com.duke.parser.Parser;
 import com.duke.storage.Storage;
 import com.duke.tasklist.TaskList;
-
-import java.io.IOException;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
+import com.duke.tasks.Deadlines;
+import com.duke.tasks.Events;
+import com.duke.tasks.Task;
+import com.duke.tasks.ToDos;
 
 /**
  * Deals with responding to the user.
  * Calls methods of other classes to save/pull entries into/from session-based storage.
  */
-
 public class Ui {
     private TaskList taskList;
     private Scanner scanner = new Scanner(System.in);
@@ -55,6 +52,8 @@ public class Ui {
             date = taskAndDateArr[1];
             taskList.addItem(new Deadlines(task, date));
             break;
+        default:
+            throw new DukeException(Ui.errorMessage());
         }
         System.out.println("\tGot it. I've added this task: ");
         System.out.println("\t\t" + this.taskList.getList().get(this.taskList.size() - 1).toString());
@@ -194,6 +193,9 @@ public class Ui {
         ui.listen();
     }
 
+    /**
+     * Tells user that persistent file failed to load.
+     */
     public void showLoadingError() {
         System.out.println("File failed to load. Initializing new File...");
         initialize();

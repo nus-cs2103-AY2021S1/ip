@@ -1,8 +1,8 @@
 package com.duke.tasks;
 
-import com.duke.parser.Parser;
-
 import java.time.LocalDate;
+
+import com.duke.parser.Parser;
 
 /**
  * Represents a Event task item.
@@ -12,14 +12,27 @@ public class Events extends Task {
     protected LocalDate date;
     protected int time;
 
+    /**
+     * Constructor for Events.
+     *
+     * @param task Task description.
+     * @param dateAndTime date and time of deadline.
+     */
     public Events(String task, String dateAndTime) {
-//        // date = 'at Sunday 2-4pm'
+        // date = 'at Sunday 2-4pm'
         String[] dateAndTimeArr = dateAndTime.split(" ");
         this.task = task;
         this.date = LocalDate.parse(dateAndTimeArr[0]);
         this.time = Integer.parseInt(dateAndTimeArr[1]);
     }
 
+    /**
+     * Constructor for Events.
+     *
+     * @param task Task description.
+     * @param dateAndTime date and time of deadline.
+     * @param isDone Whether task is done or not.
+     */
     public Events(String task, String dateAndTime, boolean isDone) {
         String[] dateAndTimeArr = dateAndTime.split(" ");
 

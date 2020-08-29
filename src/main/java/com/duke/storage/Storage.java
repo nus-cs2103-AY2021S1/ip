@@ -1,10 +1,5 @@
 package com.duke.storage;
 
-import com.duke.tasks.Task;
-import com.duke.exceptions.DukeException;
-import com.duke.parser.Parser;
-import com.duke.tasklist.TaskList;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -12,6 +7,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
+import com.duke.exceptions.DukeException;
+import com.duke.parser.Parser;
+import com.duke.tasklist.TaskList;
+import com.duke.tasks.Task;
 
 /**
  * Represents a Storage.
@@ -27,6 +27,9 @@ public class Storage {
         this.filePath = filePath;
     }
 
+    /**
+     * Prints contents from persistent file.
+     */
     public void printFileContents() {
         try {
             File f = new File(this.filePath); // create a File for the given file path

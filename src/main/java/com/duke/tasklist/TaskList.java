@@ -1,9 +1,10 @@
 package com.duke.tasklist;
 
-import com.duke.tasks.Task;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import com.duke.tasks.Task;
+
 
 /**
  * Represents a Tasklist holding tasks.

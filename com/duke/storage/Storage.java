@@ -1,4 +1,5 @@
 package com.duke.storage;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -6,7 +7,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import java.io.IOException;
 
 public class Storage {
     private static String FILE_PATH = "src/main/data/input.txt";
@@ -28,8 +28,8 @@ public class Storage {
         }
     }
 
-    public List<Task> load() throws DukeException{
-        try{
+    public List<Task> load() throws DukeException {
+        try {
             File f = new File(this.filePath);
             Scanner s = new Scanner(f);
             List<Task> taskArr = new ArrayList<>();
