@@ -1,3 +1,5 @@
+package duke;
+
 /**
  * To Do class.
  * Represents a to do task.

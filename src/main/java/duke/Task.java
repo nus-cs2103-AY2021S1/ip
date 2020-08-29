@@ -1,3 +1,5 @@
+package duke;
+
 /**
  * Abstract class to represent a task.
  * Contains task name and completed status.

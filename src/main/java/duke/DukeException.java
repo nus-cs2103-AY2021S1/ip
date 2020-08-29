@@ -1,3 +1,5 @@
+package duke;
+
 /**
  * Thrown to indicate that an exception with duke has occurred.
  *

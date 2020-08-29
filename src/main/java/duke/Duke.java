@@ -1,3 +1,5 @@
+package duke;
+
 /**
  * Duke class.
  * Driver class for Duke.
