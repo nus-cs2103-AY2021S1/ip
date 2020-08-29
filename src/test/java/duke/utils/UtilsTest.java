@@ -1,16 +1,16 @@
 package duke.utils;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.util.stream.Stream;
+
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import java.util.stream.Stream;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 public class UtilsTest {
     private static Stream<Arguments> getConcatenateArguments() {
-        String[] arr = new String[]{"This", "is", "," ,"a", "test", "case", "."};
+        String[] arr = new String[]{"This", "is", "," , "a", "test", "case", "."};
         return Stream.of(
                 Arguments.of(arr, 0, 7, "This is , a test case ."),
                 Arguments.of(arr, 1, 6, "is , a test case"),
@@ -26,7 +26,7 @@ public class UtilsTest {
     }
 
     private static Stream<Arguments> getIndexOfArguments() {
-        String[] arr = new String[]{"This", "is", "/some" ,"*special*", "test","."};
+        String[] arr = new String[]{"This", "is", "/some", "*special*", "test", "."};
         return Stream.of(
                 Arguments.of(arr, "This", 0),
                 Arguments.of(arr, "/some", 2),

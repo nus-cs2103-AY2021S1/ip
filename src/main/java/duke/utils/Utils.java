@@ -6,6 +6,8 @@ import java.util.Arrays;
  * The utilities class for Duke.
  */
 public final class Utils {
+    public static final int INDEX_NOT_FOUND = -1;
+
     /**
      * Concatenates the <code>String</code> elements of the array with specified indexes.
      * A whitespace is inserted in between all elements of the array.
@@ -24,8 +26,6 @@ public final class Utils {
         }
         return builder.toString();
     }
-
-    public static final int INDEX_NOT_FOUND = -1;
 
     /**
      * Retrieves the index of a specified <code>String</code> within the array.

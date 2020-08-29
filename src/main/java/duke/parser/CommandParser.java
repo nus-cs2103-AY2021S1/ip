@@ -3,15 +3,15 @@ package duke.parser;
 import java.time.LocalDateTime;
 
 import duke.exception.DukeException;
-import duke.operation.Operation;
 import duke.operation.AddDeadlineOperation;
 import duke.operation.AddEventOperation;
 import duke.operation.AddTodoOperation;
 import duke.operation.DeleteOperation;
 import duke.operation.DoneOperation;
 import duke.operation.ExitOperation;
-import duke.operation.ListOperation;
 import duke.operation.FindOperation;
+import duke.operation.ListOperation;
+import duke.operation.Operation;
 import duke.storage.TaskStorage;
 import duke.task.Deadline;
 import duke.task.Event;

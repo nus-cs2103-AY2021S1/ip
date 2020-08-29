@@ -1,14 +1,14 @@
 package duke.task;
 
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
 
 public class TodoTest {
-    private static Todo TODO_ONE = new Todo("test", false);
-    private static Todo TODO_TWO = new Todo("test 2", true);
+    private static final Todo TODO_ONE = new Todo("test", false);
+    private static final Todo TODO_TWO = new Todo("test 2", true);
 
     @Test
     public void testCreateTodo() {

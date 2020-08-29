@@ -1,21 +1,21 @@
 package duke.task;
 
-import duke.utils.Datetime;
-
-import java.util.Optional;
 import java.time.LocalDateTime;
+import java.util.Optional;
+
+import duke.utils.Datetime;
 
 /**
  * Represents Deadline objects.
  * Inherits from the abstract <code>Task</code> class.
  */
 public class Deadline extends Task {
-    private final Datetime datetime;
-
     public static final String DEADLINE_SYMBOL = "D";
     public static final String DATE_FORMAT_INPUT = "dd-MM-yyyy HHmm";
     public static final String DATE_FORMAT_OUTPUT = "MMM dd yyyy hh:mm a";
     public static final String DEADLINE_BREAK = "/by";
+
+    private final Datetime datetime;
 
     /**
      * Constructor method.
@@ -39,7 +39,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Converts the <code>Deadline to a <code>String</code>.
+     * Converts the <code>Deadline</code> to a <code>String</code>.
      * @return a <code>String</code> representing the <code>Deadline</code>.
      */
     @Override

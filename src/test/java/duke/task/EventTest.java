@@ -1,19 +1,19 @@
 package duke.task;
 
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
 
 public class EventTest {
+    private static final Event EVENT_ONE = new Event("test", false, getLocalDate());
+    private static final Event EVENT_TWO = new Event("test 2", true, getLocalDate());
+
     private static LocalDateTime getLocalDate() {
         return LocalDateTime.of(2020, 12, 12, 6, 0);
     }
-
-    private static final Event EVENT_ONE = new Event("test", false, getLocalDate());
-    private static final Event EVENT_TWO = new Event("test 2", true, getLocalDate());
 
     @Test
     public void testCreateEvent() {

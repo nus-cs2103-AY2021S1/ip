@@ -14,11 +14,11 @@ import duke.task.TaskList;
  * Class that loads and converts the <code>TaskList</code> in Duke with a text file.
  */
 public class TaskStorage {
+    private static final String DEFAULT_FILENAME = "taskstorage.txt";
+    private static final String DEFAULT_FILEPATH = "src/main/java/duke/storage/";
+
     private final File file;
     private final StorageParser storageParser;
-
-    private static final String DEFAULT_FILEPATH = "src/main/java/duke/storage/";
-    private static final String DEFAULT_FILENAME = "taskstorage.txt";
 
     private TaskStorage(File file) {
         this.file = file;

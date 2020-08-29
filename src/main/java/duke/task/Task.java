@@ -6,11 +6,11 @@ import java.util.Optional;
  * Represents the Task object.
  */
 public abstract class Task {
+    private static final String TICK = "\u2713";
+    private static final String CROSS = "\u2717";
+
     protected final String description;
     protected boolean isCompleted;
-
-    protected static String TICK = "\u2713";
-    protected static String CROSS = "\u2717";
 
     /**
      * Constructor method of <code>Task</code>.
@@ -33,8 +33,8 @@ public abstract class Task {
     }
 
     protected boolean isEqual(Task task) {
-        return this.description.equals(task.getTaskDescription()) &&
-                this.isCompleted == task.isTaskCompleted();
+        return this.description.equals(task.getTaskDescription())
+                && this.isCompleted == task.isTaskCompleted();
     }
 
     /**

@@ -1,28 +1,28 @@
 package duke.parser;
 
-import duke.exception.DukeException;
-import duke.operation.Operation;
-import duke.operation.AddDeadlineOperation;
-import duke.operation.AddEventOperation;
-import duke.operation.AddTodoOperation;
-import duke.operation.ExitOperation;
-import duke.operation.FindOperation;
-import duke.operation.ListOperation;
-import duke.operation.DeleteOperation;
-import duke.operation.DoneOperation;
-import duke.storage.TaskStorage;
-import duke.task.TaskList;
-import duke.task.Todo;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.util.stream.Stream;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import java.util.stream.Stream;
-
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import duke.exception.DukeException;
+import duke.operation.AddDeadlineOperation;
+import duke.operation.AddEventOperation;
+import duke.operation.AddTodoOperation;
+import duke.operation.DeleteOperation;
+import duke.operation.DoneOperation;
+import duke.operation.ExitOperation;
+import duke.operation.FindOperation;
+import duke.operation.ListOperation;
+import duke.operation.Operation;
+import duke.storage.TaskStorage;
+import duke.task.TaskList;
+import duke.task.Todo;
 
 public class CommandParserTest {
     private final CommandParser commandParser = new CommandParser();

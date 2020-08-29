@@ -6,13 +6,14 @@ import java.util.Scanner;
  * Represents the user interface class.
  */
 public class Ui {
-    private final Scanner scanner;
     private static final String DIVIDER = "---------------------------------------------------------";
     private static final String LOGO = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
+
+    private final Scanner scanner;
 
     /**
      * Constructor method.

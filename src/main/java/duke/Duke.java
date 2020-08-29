@@ -4,8 +4,8 @@ import duke.exception.DukeException;
 import duke.operation.Operation;
 import duke.operation.StartOperation;
 import duke.parser.CommandParser;
-import duke.task.TaskList;
 import duke.storage.TaskStorage;
+import duke.task.TaskList;
 import duke.ui.Ui;
 
 /**
@@ -50,6 +50,10 @@ public class Duke {
         }
     }
 
+    /**
+     * Driver method for the running of Duke.
+     * @param args
+     */
     public static void main(String[] args) {
         Duke duke = new Duke();
         duke.runDuke();

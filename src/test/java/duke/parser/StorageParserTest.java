@@ -1,21 +1,22 @@
 package duke.parser;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.time.LocalDateTime;
+import java.util.stream.Stream;
+
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
+
 import duke.exception.DukeException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.MethodSource;
-
-import java.time.LocalDateTime;
-import java.util.stream.Stream;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class StorageParserTest {
-    private static StorageParser storageParser = new StorageParser();
+    private static final StorageParser storageParser = new StorageParser();
 
     private static Stream<Arguments> getArguments() {
         LocalDateTime dateTimeOne = LocalDateTime.of(2010, 5, 30, 14, 20);

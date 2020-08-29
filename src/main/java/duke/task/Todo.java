@@ -30,7 +30,6 @@ public class Todo extends Task {
     /**
      * Converts the <code>Todo</code> to a <code>String</code>,
      * @return a <code>String</code> representing the <code>Todo</code>.
-     * @return a <code>String</code> representing the <code>Todo</code>.
      */
     @Override
     public String toString() {

@@ -2,8 +2,8 @@ package duke.operation;
 
 import java.time.LocalDateTime;
 
-import duke.task.TaskList;
 import duke.task.Deadline;
+import duke.task.TaskList;
 
 /**
  * Represents the operation that adds <code>Deadlines</code>.

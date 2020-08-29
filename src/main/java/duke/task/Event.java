@@ -1,22 +1,21 @@
 package duke.task;
 
-import duke.utils.Datetime;
-
-import java.util.Optional;
 import java.time.LocalDateTime;
+import java.util.Optional;
+
+import duke.utils.Datetime;
 
 /**
  * Represents Event objects.
  * Inherits from the abstract <code>Task</code> class.
  */
-public class Event extends Task{
-    private final Datetime time;
-
+public class Event extends Task {
     public static final String EVENT_SYMBOL = "E";
     public static final String TIME_FORMAT_INPUT = "HHmm";
     public static final String TIME_FORMAT_OUTPUT = "hh:mm a";
     public static final String EVENT_BREAK = "/at";
 
+    private final Datetime time;
     /**
      * Constructor method.
      * @param description the description of the <code>Event</code>.
@@ -30,7 +29,7 @@ public class Event extends Task{
 
     /**
      * Creates an <code>Event</code> that is not completed.
-     * @param description the description of the <code>Event.
+     * @param description the description of the <code>Event</code>.
      * @param time the <code>LocalDateTime</code> the <code>Event</code> task is to be completed by.
      * @return an uncompleted <code>Event</code>.
      */
