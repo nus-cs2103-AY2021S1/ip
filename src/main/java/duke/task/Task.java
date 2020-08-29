@@ -14,6 +14,10 @@ public class Task {
         this.isDone = isDone;
     }
 
+    public boolean contains(String input) {
+        return description.contains(input);
+    }
+
     public String getStatusIcon() {
         String sign = isDone ? "\u2713" : "\u2718"; //return tick or X symbols
         return (String.format("[%s]", sign));

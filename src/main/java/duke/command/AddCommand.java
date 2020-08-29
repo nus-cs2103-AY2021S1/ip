@@ -14,7 +14,6 @@ import duke.task.Event;
  * It is executed when the execute method is called.
  */
 public class AddCommand extends Command{
-
     String input;
 
     public AddCommand(String input) {
