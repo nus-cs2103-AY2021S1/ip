@@ -28,11 +28,11 @@ public class TaskList {
     public String add(Task task) {
         list.add(task);
         StringBuilder output = new StringBuilder();
-        output.append("    ____________________________________________________________\n");
+        // output.append("    ____________________________________________________________\n");
         output.append("     Got it. I've added this task:\n");
         output.append(String.format("       %s\n", task));
         output.append(String.format("     Now you have %d tasks in the list.\n", list.size()));
-        output.append("    ____________________________________________________________\n");
+        // output.append("    ____________________________________________________________\n");
 
         return output.toString();
     }
@@ -53,7 +53,7 @@ public class TaskList {
      */
     public String listOut() {
         StringBuilder output = new StringBuilder();
-        output.append("    ____________________________________________________________\n");
+        // output.append("    ____________________________________________________________\n");
         output.append("     Here are the tasks in your list:\n");
 
 
@@ -62,7 +62,7 @@ public class TaskList {
 
         }
 
-        output.append("    ____________________________________________________________\n");
+        // output.append("    ____________________________________________________________\n");
         return output.toString();
     }
 
@@ -93,11 +93,11 @@ public class TaskList {
             list.remove(index - 1);
 
             StringBuilder output = new StringBuilder();
-            output.append("    ____________________________________________________________\n");
+            // output.append("    ____________________________________________________________\n");
             output.append("     Noted. I've removed this task:\n");
             output.append(String.format("       %s\n", task));
             output.append(String.format("     Now you have %d tasks in the list.\n", list.size()));
-            output.append("    ____________________________________________________________\n");
+            // output.append("    ____________________________________________________________\n");
             return output.toString();
         }
     }
@@ -129,10 +129,10 @@ public class TaskList {
             Task task = list.get(index - 1);
             task.completed();
             StringBuilder output = new StringBuilder();
-            output.append("    ____________________________________________________________\n");
+            // output.append("    ____________________________________________________________\n");
             output.append("     Nice! I've marked this task as done:\n");
             output.append(String.format("       %s\n", task));
-            output.append("    ____________________________________________________________\n");
+            // output.append("    ____________________________________________________________\n");
             return output.toString();
         }
     }
@@ -155,12 +155,12 @@ public class TaskList {
         }
 
         StringBuilder output = new StringBuilder();
-        output.append("    ____________________________________________________________\n");
+        // output.append("    ____________________________________________________________\n");
         output.append("     Here are the matching tasks in your list:\n");
         for (int i = 0; i < hits.size(); i++) {
             output.append(String.format("     %d. %s \n", i + 1, hits.get(i)));
         }
-        output.append("    ____________________________________________________________\n");
+        // output.append("    ____________________________________________________________\n");
         return output.toString();
     }
 
