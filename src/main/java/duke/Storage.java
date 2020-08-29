@@ -7,13 +7,26 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Represents the storage of the chat bot that can load and write data into the hard disk.
+ */
 public class Storage {
+	/** the path to the file for saved tasks. */
 	String filePath;
 
+	/**
+	 * Constructor for Storage.
+	 * @param filePath the file path of the saved tasks.
+	 */
 	public Storage(String filePath) {
 		this.filePath = filePath;
 	}
 
+	/**
+	 * Loads tasks data from the hard disk.
+	 * @return the current task list.
+	 * @throws FileNotFoundException if there is no file data in the hard disk.
+	 */
 	public ArrayList<Task> loadData() throws FileNotFoundException {
 		ArrayList<Task> taskList = new ArrayList<>();
 		File f = new File(filePath);
@@ -33,6 +46,11 @@ public class Storage {
 		return taskList;
 	}
 
+	/**
+	 * Writes tasks into the hard disk.
+	 * @param taskList the current task list.
+	 * @throws IOException if there is an error in writing the tasks into file in hard disk.
+	 */
 	public void writeData(TaskList taskList) throws IOException {
 		File f = new File(filePath);
 		if (!f.exists()) {

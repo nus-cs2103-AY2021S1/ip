@@ -1,5 +1,8 @@
 package duke;
 
+/**
+ * Represents the commands available in Duke.
+ */
 public enum Commands {
 	TODO,
 	DEADLINE,
