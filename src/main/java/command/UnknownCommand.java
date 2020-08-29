@@ -26,7 +26,7 @@ public class UnknownCommand extends Command {
      * @param storage Storage of the Duke.
      * @throws DukeException In all cases to state that the command is not defined.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         throw new UnknownCommandException();
     }
 

@@ -31,20 +31,20 @@ public class DeleteCommand extends Command {
      * @throws DukeException If failed to save to <code>storage</code>, no command argument provided in
      * <code>splitCommand</code>, or invalid command argument.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
             String oneBasedIndex = splitCommand[1];
             int zeroBasedIndex = Integer.parseInt(oneBasedIndex) - 1;
             Task toDelete = tasks.remove(zeroBasedIndex);
 
-            ui.sayDeletedTask(toDelete, tasks.size());
             storage.save(tasks);
+            return ui.sayDeletedTask(toDelete, tasks.size());
         } catch (IOException e) {
-            ui.sayException(e);
+            return ui.sayException(e);
         } catch (IndexOutOfBoundsException e) { // No description
             throw new EmptyDeleteException();
         } catch (NoSuchTaskException e) {
-            ui.sayException(e);
+            return ui.sayException(e);
         }
     }
 

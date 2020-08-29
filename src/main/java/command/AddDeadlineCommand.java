@@ -36,7 +36,7 @@ public class AddDeadlineCommand extends Command {
      * <code>splitCommand</code>, or invalid date and time format (the date and time are
      * located inside the command argument).
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
             String argument = splitCommand[1];
             String description = argument.split(" /by ", 2)[0];
@@ -45,14 +45,14 @@ public class AddDeadlineCommand extends Command {
                     DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm")));
 
             tasks.add(toAdd);
-            ui.sayAddedTask(toAdd, tasks.size());
             storage.save(tasks);
+            return ui.sayAddedTask(toAdd, tasks.size());
         } catch (IOException e) {
-            ui.sayException(e);
+            return ui.sayException(e);
         } catch (IndexOutOfBoundsException e) { // No description
             throw new EmptyDeadlineException();
         } catch (DateTimeParseException e) {
-            ui.say("The date and time format must be: [dd/MM/yyyy HHmm]\nFor example, 02/12/2019 1800");
+            return ui.say("The date and time format must be: [dd/MM/yyyy HHmm]\nFor example, 02/12/2019 1800");
         }
     }
 

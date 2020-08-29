@@ -29,12 +29,27 @@ public class Duke {
         }
     }
 
+//    /**
+//     * You should have your own function to generate a response to user input.
+//     * Replace this stub with your completed method.
+//     */
+//    public String getResponse(String input) {
+//        return "Duke heard: " + input;
+//    }
+
     /**
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
     public String getResponse(String input) {
-        return "Duke heard: " + input;
+        Command c = Parser.parse(input);
+        String toPrint = "";
+        try {
+            toPrint += c.execute(tasks, ui, storage);
+        } catch (DukeException e) {
+            toPrint += ui.sayException(e);
+        }
+        return toPrint;
     }
 
     /**

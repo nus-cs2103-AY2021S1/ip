@@ -25,7 +25,7 @@ public abstract class Command {
      * @param storage Storage of the Duke.
      * @throws DukeException If the <code>splitCommand</code> is not compatible with the execution.
      */
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
+    public abstract String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
 
     /**
      * Returns whether the <code>Command</code> object indicates exiting the Duke.

@@ -29,16 +29,18 @@ public class FindCommand extends Command {
      * @param storage Storage of the Duke.
      * @throws DukeException If no keyword is provided in <code>splitCommand</code>.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
             String keyword = splitCommand[1];
             int index = 1;
+            String toPrint = "";
             for (Task task : tasks.all()) {
                 if (task.toString().contains(keyword)) {
-                    ui.say(index + ". " + task.toString());
+                    toPrint += ui.say(index + ". " + task.toString());
                     index++;
                 }
             }
+            return toPrint;
         } catch (IndexOutOfBoundsException e) { // No keyword
             throw new EmptyFindException();
         }

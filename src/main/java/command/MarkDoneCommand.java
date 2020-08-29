@@ -31,21 +31,21 @@ public class MarkDoneCommand extends Command {
      * @throws DukeException If failed to save to <code>storage</code>, no command argument provided in
      * <code>splitCommand</code>, or invalid task index.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
             String oneBasedIndex = splitCommand[1];
             int zeroBasedIndex = Integer.parseInt(oneBasedIndex) - 1;
             Task toMark = tasks.get(zeroBasedIndex);
 
             toMark.markAsDone();
-            ui.sayMarkedTask(toMark);
             storage.save(tasks);
+            return ui.sayMarkedTask(toMark);
         } catch (IOException e) {
-            ui.sayException(e);
+            return ui.sayException(e);
         } catch (IndexOutOfBoundsException e) { // No description
             throw new EmptyDoneException();
         } catch (NoSuchTaskException e) {
-            ui.sayException(e);
+            return ui.sayException(e);
         }
     }
 

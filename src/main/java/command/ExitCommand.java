@@ -24,8 +24,8 @@ public class ExitCommand extends Command {
      * @param ui Ui of the Duke.
      * @param storage Storage of the Duke.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.bye();
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        return ui.bye();
     }
 
     /**

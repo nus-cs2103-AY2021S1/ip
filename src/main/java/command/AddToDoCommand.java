@@ -32,16 +32,16 @@ public class AddToDoCommand extends Command {
      * @throws DukeException If failed to save to <code>storage</code> or no description provided in
      * <code>splitCommand</code>.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
             String description = splitCommand[1];
             Task toAdd = new ToDo(description);
 
             tasks.add(toAdd);
-            ui.sayAddedTask(toAdd, tasks.size());
             storage.save(tasks);
+            return ui.sayAddedTask(toAdd, tasks.size());
         } catch (IOException e) {
-            ui.sayException(e);
+            return ui.sayException(e);
         } catch (IndexOutOfBoundsException e) { // No description
             throw new EmptyTodoException();
         }

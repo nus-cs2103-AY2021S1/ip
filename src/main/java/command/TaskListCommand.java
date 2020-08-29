@@ -24,8 +24,8 @@ public class TaskListCommand extends Command {
      * @param ui Ui of the Duke.
      * @param storage Storage of the Duke.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.displayTasks(tasks);
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        return ui.displayTasks(tasks);
     }
 
     /**
