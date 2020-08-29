@@ -28,6 +28,7 @@ public class DeleteCommand extends Command {
      * @param tasks  Task list of the Duke.
      * @param ui Ui of the Duke.
      * @param storage Storage of the Duke.
+     * @return The response text.
      * @throws DukeException If failed to save to <code>storage</code>, no command argument provided in
      * <code>splitCommand</code>, or invalid command argument.
      */

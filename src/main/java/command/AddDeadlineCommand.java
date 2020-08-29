@@ -26,12 +26,13 @@ public class AddDeadlineCommand extends Command {
     }
 
     /**
-     * Adds the <code>Deadline</code> to <code>tasks</code> and save the <code>Deadline</code> to
+     * Adds the <code>Deadline</code> to <code>tasks</code> and saves the <code>Deadline</code> to
      * <code>storage</code>.
      *
      * @param tasks  Task list of the Duke.
      * @param ui Ui of the Duke.
      * @param storage Storage of the Duke.
+     * @return The response text.
      * @throws DukeException If failed to save to <code>storage</code>, no description provided in
      * <code>splitCommand</code>, or invalid date and time format (the date and time are
      * located inside the command argument).

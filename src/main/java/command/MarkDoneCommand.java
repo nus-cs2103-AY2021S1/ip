@@ -23,11 +23,12 @@ public class MarkDoneCommand extends Command {
     }
 
     /**
-     * Marks the <code>Task</code> as done and save the changes to <code>tasks</code> and <code>storage</code>.
+     * Marks the <code>Task</code> as done and saves the changes to <code>tasks</code> and <code>storage</code>.
      *
      * @param tasks  Task list of the Duke.
      * @param ui Ui of the Duke.
      * @param storage Storage of the Duke.
+     * @return The response text.
      * @throws DukeException If failed to save to <code>storage</code>, no command argument provided in
      * <code>splitCommand</code>, or invalid task index.
      */

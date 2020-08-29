@@ -23,6 +23,7 @@ public abstract class Command {
      * @param tasks  Task list of the Duke.
      * @param ui Ui of the Duke.
      * @param storage Storage of the Duke.
+     * @return The response text.
      * @throws DukeException If the <code>splitCommand</code> is not compatible with the execution.
      */
     public abstract String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;

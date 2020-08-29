@@ -23,12 +23,13 @@ public class AddToDoCommand extends Command {
     }
 
     /**
-     * Adds the <code>ToDo</code> to <code>tasks</code> and save the <code>ToDo</code> to
+     * Adds the <code>ToDo</code> to <code>tasks</code> and saves the <code>ToDo</code> to
      * <code>storage</code>.
      *
      * @param tasks  Task list of the Duke.
      * @param ui Ui of the Duke.
      * @param storage Storage of the Duke.
+     * @return The response text.
      * @throws DukeException If failed to save to <code>storage</code> or no description provided in
      * <code>splitCommand</code>.
      */

@@ -22,11 +22,12 @@ public class FindCommand extends Command {
     }
 
     /**
-     * Finds the tasks containing the keyword and uses the <code>ui</code> to display those tasks.
+     * Finds the tasks containing the keyword and displays those tasks.
      *
      * @param tasks  Task list of the Duke.
      * @param ui Ui of the Duke.
      * @param storage Storage of the Duke.
+     * @return The response text.
      * @throws DukeException If no keyword is provided in <code>splitCommand</code>.
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {

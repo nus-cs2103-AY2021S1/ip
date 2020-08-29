@@ -46,7 +46,7 @@ public class Ui {
      * Displays an exiting message.
      */
     public String bye() {
-        return say("Bye. Hope to see you again soon!");
+        return say("Bye! See you later!");
     }
 
     /**

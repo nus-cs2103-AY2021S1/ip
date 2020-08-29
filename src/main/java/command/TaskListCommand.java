@@ -18,11 +18,12 @@ public class TaskListCommand extends Command {
     }
 
     /**
-     * Uses the <code>ui</code> to display all <code>Task</code> in <code>tasks</code>.
+     * Displays all <code>Task</code> in <code>tasks</code>.
      *
      * @param tasks  Task list of the Duke.
      * @param ui Ui of the Duke.
      * @param storage Storage of the Duke.
+     * @return The response text.
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         return ui.displayTasks(tasks);
