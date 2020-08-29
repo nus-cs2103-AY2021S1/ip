@@ -27,6 +27,19 @@ public class ByeCommand extends Command {
         ui.printResponse("Bye. Hope to see you again soon!");
     }
 
+    /**
+     * Returns a response after executing the bye command.
+     *
+     * @param tasks Contains the current tasks.
+     * @param ui Responsible for displaying information to the user.
+     * @param storage Reads and stores data into memory.
+     * @return Bye message.
+     */
+    @Override
+    public String executeWithResponse(TaskList tasks, Ui ui, Storage storage) {
+        return "Bye. Hope to see you again soon!";
+    }
+
     @Override
     public String toString() {
         return "bye";

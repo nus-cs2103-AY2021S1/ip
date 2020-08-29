@@ -1,6 +1,5 @@
 package duke.command;
 
-
 import duke.task.Task;
 import duke.task.ToDo;
 import duke.util.Storage;
@@ -39,6 +38,25 @@ public class ToDoCommand extends Command {
                 task, tasks.size()
         );
         ui.printResponse(response);
+    }
+
+    /**
+     * Returns a response after executing the todo command.
+     *
+     * @param tasks Contains the current tasks.
+     * @param ui Responsible for displaying information to the user.
+     * @param storage Reads and stores data into memory.
+     * @return Message when the command is completed.
+     */
+    @Override
+    public String executeWithResponse(TaskList tasks, Ui ui, Storage storage) {
+        Task task = new ToDo(description);
+        tasks.add(task);
+        storage.save(tasks);
+        return String.format(
+                "I've added this task:\n  %s \nNow you have %s tasks in the list.",
+                task, tasks.size()
+        );
     }
 
     @Override

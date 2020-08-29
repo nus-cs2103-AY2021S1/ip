@@ -45,6 +45,25 @@ public class EventCommand extends Command {
         ui.printResponse(response);
     }
 
+    /**
+     * Returns a response after executing the event command.
+     *
+     * @param tasks Contains the current tasks.
+     * @param ui Responsible for displaying information to the user.
+     * @param storage Reads and stores data into memory.
+     * @return Message when the command is completed.
+     */
+    @Override
+    public String executeWithResponse(TaskList tasks, Ui ui, Storage storage) {
+        Task task = new Event(description, at);
+        tasks.add(task);
+        storage.save(tasks);
+        return String.format(
+                "I've added this task:\n  %s \nNow you have %s tasks in the list.",
+                task, tasks.size()
+        );
+    }
+
     @Override
     public String toString() {
         return "event <task> /at <date>";
