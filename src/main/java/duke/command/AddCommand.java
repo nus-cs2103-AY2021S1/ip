@@ -1,8 +1,8 @@
 package duke.command;
 
+import duke.Storage;
 import duke.exception.DukeException;
 import duke.task.Task;
-import duke.Storage;
 import duke.tool.TaskList;
 import duke.ui.Ui;
 
@@ -28,7 +28,7 @@ public class AddCommand implements Command {
     @Override
     public void excute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         tasks.add(targetTask);
-        ui.showAddedNotification(targetTask,tasks);
+        ui.showAddedNotification(targetTask, tasks);
         storage.save(tasks);
     }
 
