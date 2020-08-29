@@ -40,7 +40,7 @@ public final class DeleteCommand extends Command {
 
             //Throw an Ultron exception if it is out of range
             throw new UltronException("delete",
-                    Integer.toString(index+1),
+                    Integer.toString(index + 1),
                     ExceptionType.INVALID_ARGUMENT);
         }
 

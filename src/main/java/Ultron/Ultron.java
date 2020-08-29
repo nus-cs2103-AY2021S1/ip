@@ -1,9 +1,9 @@
 package ultron;
 
+import java.util.ArrayList;
+
 import ultron.commands.Command;
 import ultron.exceptions.UltronException;
-
-import java.util.ArrayList;
 
 public final class Ultron {
 

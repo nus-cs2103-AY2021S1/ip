@@ -1,18 +1,20 @@
 package ultron;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import ultron.commands.ByeCommand;
-import ultron.commands.FindCommand;
-import ultron.commands.DoneCommand;
+import ultron.commands.Command;
 import ultron.commands.DeleteCommand;
+import ultron.commands.DoneCommand;
+import ultron.commands.FindCommand;
 import ultron.commands.HelpCommand;
 import ultron.commands.ListCommand;
 import ultron.commands.TaskAllocator;
-import ultron.commands.Command;
 import ultron.exceptions.ExceptionType;
 import ultron.exceptions.UltronException;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+
 
 public final class Parser {
 
@@ -39,32 +41,32 @@ public final class Parser {
 
         //Switch case to process the commands
         switch (command) {
-            //If the user keys in bye
-            case "bye":
-                return new ByeCommand(arguments);
+        //If the user keys in bye
+        case "bye":
+            return new ByeCommand(arguments);
 
-            case "find":
-                return new FindCommand(arguments);
+        case "find":
+            return new FindCommand(arguments);
 
-            //If the user keys in list
-            case "list":
-                return new ListCommand(arguments);
+        //If the user keys in list
+        case "list":
+            return new ListCommand(arguments);
 
-            //Check if the user is asking for help
-            case "help":
-                return new HelpCommand(arguments);
+        //Check if the user is asking for help
+        case "help":
+            return new HelpCommand(arguments);
 
-            //Check if the user is deleting some of the items
-            case "delete":
-                return new DeleteCommand(arguments);
+        //Check if the user is deleting some of the items
+        case "delete":
+            return new DeleteCommand(arguments);
 
-            //Check if the user is done with any task
-            case "done":
-                return new DoneCommand(arguments);
+        //Check if the user is done with any task
+        case "done":
+            return new DoneCommand(arguments);
 
-            //Otherwise it will be a task to be added
-            default:
-                return new TaskAllocator(command, arguments);
+        //Otherwise it will be a task to be added
+        default:
+            return new TaskAllocator(command, arguments);
         }
 
     }

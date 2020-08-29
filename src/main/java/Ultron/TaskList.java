@@ -1,8 +1,8 @@
 package ultron;
 
-import ultron.tasks.Task;
-
 import java.util.ArrayList;
+
+import ultron.tasks.Task;
 
 public final class TaskList {
 

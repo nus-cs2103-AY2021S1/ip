@@ -1,11 +1,11 @@
 package ultron.commands;
 
+import java.util.function.Function;
+
 import ultron.tasks.Deadline;
 import ultron.tasks.Event;
 import ultron.tasks.Task;
 import ultron.tasks.Todo;
-
-import java.util.function.Function;
 
 public enum TaskCommand {
 

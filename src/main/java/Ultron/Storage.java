@@ -1,10 +1,5 @@
 package ultron;
 
-import ultron.commands.TaskCommand;
-import ultron.exceptions.ExceptionType;
-import ultron.exceptions.UltronException;
-import ultron.tasks.Task;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -13,6 +8,11 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import ultron.commands.TaskCommand;
+import ultron.exceptions.ExceptionType;
+import ultron.exceptions.UltronException;
+import ultron.tasks.Task;
 
 /**
  * The main Storage class for Ultron.
