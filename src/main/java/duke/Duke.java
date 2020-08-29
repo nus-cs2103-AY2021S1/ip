@@ -65,4 +65,12 @@ public class Duke {
     public static void main(String[] args) {
         new Duke("./data/tasks.txt").run();
     }
+
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    public String getResponse(String input) {
+        return "Duke heard: " + input;
+    }
 }
