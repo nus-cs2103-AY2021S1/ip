@@ -80,8 +80,10 @@ public class TaskListTest {
 
         TaskList tasks = new TaskList(testInputTasks);
         TaskList filteredTasks = tasks.search("blah");
-        assertEquals("1. [T][✘] todo blahblah\n2. [D][✘] deadline blah (by: Dec 30 2020)\n"
-                + "3. [E][✘] event blah blah (at: Dec 30 2020)", filteredTasks.toString());
+        assertEquals(
+                "1. [T][\u2718] todo blahblah\n2. [D][\u2718] deadline blah (by: Dec 30 2020)\n"
+                        + "3. [E][\u2718] event blah blah (at: Dec 30 2020)",
+                filteredTasks.toString());
     }
 
     @Test
@@ -95,8 +97,8 @@ public class TaskListTest {
 
         TaskList tasks = new TaskList(testInputTasks);
         TaskList filteredTasks = tasks.search("BLAh");
-        assertEquals("1. [T][✘] todo blaH\n2. [D][✘] deadline BLAH (by: Dec 30 2020)\n"
-                + "3. [E][✘] event blah blah (at: Dec 30 2020)", filteredTasks.toString());
+        assertEquals("1. [T][\u2718] todo blaH\n2. [D][\u2718] deadline BLAH (by: Dec 30 2020)\n"
+                + "3. [E][\u2718] event blah blah (at: Dec 30 2020)", filteredTasks.toString());
     }
 
     @Test
@@ -115,8 +117,8 @@ public class TaskListTest {
         testInputTasks.add(new Event("event desc1", "2020-12-30"));
 
         TaskList tasks = new TaskList(testInputTasks);
-        assertEquals("1. [T][✘] todo desc1\n" + "2. [T][✘] todo desc2\n" + "3. [D][✘] deadline "
-                        + "desc1 (by: Dec 30 2020)\n" + "4. [E][✘] event desc1 (at: Dec 30 2020)",
-                tasks.toString());
+        assertEquals("1. [T][\u2718] todo desc1\n" + "2. [T][\u2718] todo desc2\n"
+                + "3. [D][\u2718] deadline " + "desc1 (by: Dec 30 2020)\n"
+                + "4. [E][\u2718] event desc1 (at: Dec 30 2020)", tasks.toString());
     }
 }

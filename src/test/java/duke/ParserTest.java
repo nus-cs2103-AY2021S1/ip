@@ -52,7 +52,7 @@ public class ParserTest {
         } catch (DukeException e) {
             assertTrue(e instanceof MissingKeywordException);
             assertEquals(
-                    "☹ OOPS!!! I'm not sure what tasks to search for... Please specify a keyword!",
+                    "OOPS!!! I'm not sure what tasks to search for... Please specify a keyword!",
                     e.getMessage());
         }
     }
@@ -83,7 +83,7 @@ public class ParserTest {
             Parser.parse("done");
         } catch (DukeException e) {
             assertTrue(e instanceof MissingTaskIdException);
-            assertEquals("☹ OOPS!!! Failed to mark task as complete! No task was specified!",
+            assertEquals("OOPS!!! Failed to mark task as complete! No task was specified!",
                     e.getMessage());
         }
     }
@@ -118,9 +118,8 @@ public class ParserTest {
             Parser.parse("done task1");
         } catch (DukeException e) {
             assertTrue(e instanceof InvalidTaskIdException);
-            assertEquals(
-                    "☹ OOPS!!! Failed to mark task as complete! Please key in only the integer "
-                            + "representing the task!", e.getMessage());
+            assertEquals("OOPS!!! Failed to mark task as complete! Please key in only the integer "
+                    + "representing the task!", e.getMessage());
         }
     }
 
@@ -131,7 +130,7 @@ public class ParserTest {
             Parser.parse("delete");
         } catch (DukeException e) {
             assertTrue(e instanceof MissingTaskIdException);
-            assertEquals("☹ OOPS!!! Failed to delete task! No task was specified!", e.getMessage());
+            assertEquals("OOPS!!! Failed to delete task! No task was specified!", e.getMessage());
         }
     }
 
@@ -165,7 +164,7 @@ public class ParserTest {
             Parser.parse("delete task1");
         } catch (DukeException e) {
             assertTrue(e instanceof InvalidTaskIdException);
-            assertEquals("☹ OOPS!!! Failed to delete task! Please key in only the integer "
+            assertEquals("OOPS!!! Failed to delete task! Please key in only the integer "
                     + "representing the task!", e.getMessage());
         }
     }
@@ -177,7 +176,7 @@ public class ParserTest {
             Parser.parse("todo");
         } catch (DukeException e) {
             assertTrue(e instanceof MissingTaskDetailsException);
-            assertEquals("☹ OOPS!!! Failed to create task! Insufficient details provided!",
+            assertEquals("OOPS!!! Failed to create task! Insufficient details provided!",
                     e.getMessage());
         }
     }
@@ -188,7 +187,7 @@ public class ParserTest {
             Parser.parse("deadline");
         } catch (DukeException e) {
             assertTrue(e instanceof MissingTaskDetailsException);
-            assertEquals("☹ OOPS!!! Failed to create task! Insufficient details provided!",
+            assertEquals("OOPS!!! Failed to create task! Insufficient details provided!",
                     e.getMessage());
         }
     }
@@ -199,7 +198,7 @@ public class ParserTest {
             Parser.parse("event");
         } catch (DukeException e) {
             assertTrue(e instanceof MissingTaskDetailsException);
-            assertEquals("☹ OOPS!!! Failed to create task! Insufficient details provided!",
+            assertEquals("OOPS!!! Failed to create task! Insufficient details provided!",
                     e.getMessage());
         }
     }
@@ -228,7 +227,7 @@ public class ParserTest {
             Parser.parse("deadline blahblah");
         } catch (DukeException e) {
             assertTrue(e instanceof MissingTaskDetailsException);
-            assertEquals("☹ OOPS!!! Failed to create Deadline task! No deadline was specified!",
+            assertEquals("OOPS!!! Failed to create Deadline task! No deadline was specified!",
                     e.getMessage());
         }
     }
@@ -251,7 +250,7 @@ public class ParserTest {
             Parser.parse("event blahblah");
         } catch (DukeException e) {
             assertTrue(e instanceof MissingTaskDetailsException);
-            assertEquals("☹ OOPS!!! Failed to create Event task! No date was specified!",
+            assertEquals("OOPS!!! Failed to create Event task! No date was specified!",
                     e.getMessage());
         }
     }
@@ -293,8 +292,7 @@ public class ParserTest {
         try {
             Parser.parse("help");
         } catch (DukeException e) {
-            assertEquals("☹ OOPS!!! I'm sorry, but I don't know what that means :-(",
-                    e.getMessage());
+            assertEquals("OOPS!!! I'm sorry, but I don't know what that means :-(", e.getMessage());
         }
     }
 
@@ -303,8 +301,7 @@ public class ParserTest {
         try {
             Parser.parse("");
         } catch (DukeException e) {
-            assertEquals("☹ OOPS!!! I'm sorry, but I don't know what that means :-(",
-                    e.getMessage());
+            assertEquals("OOPS!!! I'm sorry, but I don't know what that means :-(", e.getMessage());
         }
     }
 
@@ -313,8 +310,7 @@ public class ParserTest {
         try {
             Parser.parse("todoo");
         } catch (DukeException e) {
-            assertEquals("☹ OOPS!!! I'm sorry, but I don't know what that means :-(",
-                    e.getMessage());
+            assertEquals("OOPS!!! I'm sorry, but I don't know what that means :-(", e.getMessage());
         }
     }
 }
