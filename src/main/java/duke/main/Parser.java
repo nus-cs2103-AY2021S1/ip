@@ -1,14 +1,28 @@
 package duke.main;
 
-import duke.command.*;
-import duke.error.*;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.ToDo;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+import duke.command.AddTaskCommand;
+import duke.command.ByeCommand;
+import duke.command.Command;
+import duke.command.DeleteTaskCommand;
+import duke.command.DisplayListCommand;
+import duke.command.DoneTaskCommand;
+import duke.command.ErrorCommand;
+import duke.command.FindCommand;
+import duke.command.HelpCommand;
+import duke.command.SaveCommand;
+import duke.error.DukeError;
+import duke.error.EmptyDateError;
+import duke.error.EmptyTaskError;
+import duke.error.InvalidDateInputError;
+import duke.error.InvalidNumberError;
+import duke.error.UnknownCommandError;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.ToDo;
 
 /**
  * The class that parses the user's input into commands that Duke can understand.
@@ -47,52 +61,54 @@ public abstract class Parser {
         } else {
             try {
                 switch (arr[0]) {
-                    case "todo":
-                        String todo = inputLine.substring(4).trim();
-                        if (todo.equals("")) {
-                            throw new EmptyTaskError();
-                        } else {
-                            return new AddTaskCommand(new ToDo(todo));
-                        }
+                case "todo":
+                    String todo = inputLine.substring(4).trim();
+                    if (todo.equals("")) {
+                        throw new EmptyTaskError();
+                    } else {
+                        return new AddTaskCommand(new ToDo(todo));
+                    }
 
-                    case "deadline":
-                        int by = inputLine.indexOf("/by");
-                        String deadline, byDate;
-                        if (by == -1) {
-                            deadline = inputLine.substring(8).trim();
-                            byDate = "";
-                        } else {
-                            deadline = inputLine.substring(8, by).trim();
-                            byDate = inputLine.substring(by + 3).trim();
-                        }
-                        if (deadline.equals("")) {
-                            throw new EmptyTaskError();
-                        } else if (byDate.equals("")) {
-                            throw new EmptyDateError();
-                        } else {
-                            return new AddTaskCommand(new Deadline(deadline, formatDateTime(byDate)));
-                        }
+                case "deadline":
+                    int by = inputLine.indexOf("/by");
+                    String deadline;
+                    String byDate;
+                    if (by == -1) {
+                        deadline = inputLine.substring(8).trim();
+                        byDate = "";
+                    } else {
+                        deadline = inputLine.substring(8, by).trim();
+                        byDate = inputLine.substring(by + 3).trim();
+                    }
+                    if (deadline.equals("")) {
+                        throw new EmptyTaskError();
+                    } else if (byDate.equals("")) {
+                        throw new EmptyDateError();
+                    } else {
+                        return new AddTaskCommand(new Deadline(deadline, formatDateTime(byDate)));
+                    }
 
-                    case "event":
-                        int at = inputLine.indexOf("/at");
-                        String event, atDate;
-                        if (at == -1) {
-                            event = inputLine.substring(5).trim();
-                            atDate = "";
-                        } else {
-                            event = inputLine.substring(5, at).trim();
-                            atDate = inputLine.substring(at + 3).trim();
-                        }
-                        if (event.equals("")) {
-                            throw new EmptyTaskError();
-                        } else if (atDate.equals("")) {
-                            throw new EmptyDateError();
-                        } else {
-                            return new AddTaskCommand(new Event(event, formatDateTime(atDate)));
-                        }
+                case "event":
+                    int at = inputLine.indexOf("/at");
+                    String event;
+                    String atDate;
+                    if (at == -1) {
+                        event = inputLine.substring(5).trim();
+                        atDate = "";
+                    } else {
+                        event = inputLine.substring(5, at).trim();
+                        atDate = inputLine.substring(at + 3).trim();
+                    }
+                    if (event.equals("")) {
+                        throw new EmptyTaskError();
+                    } else if (atDate.equals("")) {
+                        throw new EmptyDateError();
+                    } else {
+                        return new AddTaskCommand(new Event(event, formatDateTime(atDate)));
+                    }
 
-                    default:
-                        throw new UnknownCommandError();
+                default:
+                    throw new UnknownCommandError();
                 }
             } catch (DukeError e) {
                 return new ErrorCommand(e);

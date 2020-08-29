@@ -1,9 +1,9 @@
 package duke.main;
 
-import duke.task.Task;
-
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import duke.task.Task;
 
 /**
  * The class that interacts with the user.
@@ -110,7 +110,7 @@ public class UI {
                 s = s.concat(" Here are the matching tasks in your list:\n");
             }
             for (int i = 0; i < taskList.size(); i++) {
-                s = s.concat(" " + (i+1) + "." + taskList.get(i) + "\n");
+                s = s.concat(" " + (i + 1) + "." + taskList.get(i) + "\n");
             }
             s = s.substring(0, s.length() - 1);
             showCmd(s);
@@ -185,8 +185,8 @@ public class UI {
      * Displays the help message to the user.
      */
     public void showHelp() {
-        showCmd("Here are the list of commands you can use:\n" +
-                "help\nlist\nsave\nbye\ntodo 'TASK'\ndeadline 'TASK' /by 'dd/MM/yyyy HH:mm'\n" +
-                "event 'TASK' /at 'dd/MM/yyyy HH:mm'\ndone 'n'\ndelete 'n'");
+        showCmd("Here are the list of commands you can use:\n"
+                + "help\nlist\nsave\nbye\ntodo 'TASK'\ndeadline 'TASK' /by 'dd/MM/yyyy HH:mm'\n"
+                + "event 'TASK' /at 'dd/MM/yyyy HH:mm'\ndone 'n'\ndelete 'n'");
     }
 }

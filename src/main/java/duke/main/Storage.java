@@ -1,10 +1,5 @@
 package duke.main;
 
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.ToDo;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -15,6 +10,11 @@ import java.nio.file.Path;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
 
 /**
  * The class that saves and loads data.
@@ -54,29 +54,29 @@ public class Storage {
                 String[] str = s.split("\\|");
                 DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
                 switch (str[0]) {
-                    case "T":
-                        ToDo toDo = new ToDo(str[2]);
-                        if (str[1].equals("true")) {
-                            toDo.markAsDone();
-                        }
-                        taskList.addTask(toDo);
-                        break;
-                    case "D":
-                        Deadline deadline = new Deadline(str[2], LocalDateTime.parse(str[3], dateFormatter));
-                        if (str[1].equals("true")) {
-                            deadline.markAsDone();
-                        }
-                        taskList.addTask(deadline);
-                        break;
-                    case "E":
-                        Event event = new Event(str[2], LocalDateTime.parse(str[3], dateFormatter));
-                        if (str[1].equals("true")) {
-                            event.markAsDone();
-                        }
-                        taskList.addTask(event);
-                        break;
-                    default:
-                        throw new IOException();
+                case "T":
+                    ToDo toDo = new ToDo(str[2]);
+                    if (str[1].equals("true")) {
+                        toDo.markAsDone();
+                    }
+                    taskList.addTask(toDo);
+                    break;
+                case "D":
+                    Deadline deadline = new Deadline(str[2], LocalDateTime.parse(str[3], dateFormatter));
+                    if (str[1].equals("true")) {
+                        deadline.markAsDone();
+                    }
+                    taskList.addTask(deadline);
+                    break;
+                case "E":
+                    Event event = new Event(str[2], LocalDateTime.parse(str[3], dateFormatter));
+                    if (str[1].equals("true")) {
+                        event.markAsDone();
+                    }
+                    taskList.addTask(event);
+                    break;
+                default:
+                    throw new IOException();
                 }
             }
             scanner.close();

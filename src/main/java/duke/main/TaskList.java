@@ -1,8 +1,8 @@
 package duke.main;
 
-import duke.task.Task;
-
 import java.util.ArrayList;
+
+import duke.task.Task;
 
 /**
  * The class that is responsible of taking care of the user's list of tasks.

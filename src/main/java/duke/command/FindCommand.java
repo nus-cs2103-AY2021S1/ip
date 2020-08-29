@@ -1,11 +1,11 @@
 package duke.command;
 
+import java.util.ArrayList;
+
 import duke.main.Storage;
 import duke.main.TaskList;
 import duke.main.UI;
 import duke.task.Task;
-
-import java.util.ArrayList;
 
 public class FindCommand implements Command {
     private final String keyword;
