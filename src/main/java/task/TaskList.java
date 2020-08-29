@@ -68,7 +68,7 @@ public class TaskList {
         if (taskNo - 1 < tasks.size()) {
             if (tasks.get(taskNo - 1).isDone) {
                 // task marked as done already
-                throw new DukeException("Duke.Task.Task is already done! :)\n");
+                throw new DukeException("Task is already done! :)\n");
             } else {
                 tasks.get(taskNo - 1).markAsDone();
                 System.out.println("Nice! I've marked this task as done:");
