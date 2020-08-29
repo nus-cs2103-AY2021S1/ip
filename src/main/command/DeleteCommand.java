@@ -29,15 +29,17 @@ public class DeleteCommand implements Command {
      * as done.
      * @param ui the ui used to print out responses.
      * @param tasks the task list.
+     * @return the string indicating the task has been removed.
      * @throws InvalidTaskException if the taskNum is outside of the size of the task list.
      */
     @Override
-    public void execute(Ui ui, TaskList tasks) throws InvalidTaskException {
+    public String execute(Ui ui, TaskList tasks) throws InvalidTaskException {
         if (taskNum < 1 || taskNum > tasks.size()) {
             throw new InvalidTaskException();
         }
         Task removed = tasks.remove(taskNum - 1);
-        ui.printRemoveSuccess(removed, tasks.size());
+
+        return ui.printRemoveSuccess(removed, tasks.size());
     }
 
     /**

@@ -39,20 +39,20 @@ public class Parser {
     private static LocalDateTime toDateTime(String dateTime) throws InvalidDateException {
         String[] dateTimeSplit = dateTime.split(" ");
         if (dateTimeSplit.length != 2) {
-            throw new InvalidDateException("     ☹ OOPS!!! Your date needs to"
-                    + " have this format:\n     \"YYYY-MM-DD HHMM\"");
+            throw new InvalidDateException("Your date needs to"
+                    + " have this format:\n\"YYYY-MM-DD HHMM\"");
         }
 
         String[] date = dateTimeSplit[0].split("-");
         String time = dateTimeSplit[1];
 
         if (date.length != 3) {
-            throw new InvalidDateException("     ☹ OOPS!!! Your date needs to"
-                    + " have this format:\n     \"YYYY-MM-DD\"");
+            throw new InvalidDateException("Your date needs to"
+                    + " have this format:\n\"YYYY-MM-DD\"");
         }
         if (time.length() != 4) {
-            throw new InvalidDateException("     ☹ OOPS!!! Your time needs to"
-                    + " have this format:\n     \"HHMM\"");
+            throw new InvalidDateException("Your time needs to"
+                    + " have this format:\n\"HHMM\"");
         }
 
         try {
@@ -64,8 +64,8 @@ public class Parser {
 
             return LocalDateTime.of(year, month, day, hour, minute);
         } catch (NumberFormatException | DateTimeException e) {
-            throw new InvalidDateException("     ☹ OOPS!!! Please check that you've"
-                    + " entered\n       the date and time correctly");
+            throw new InvalidDateException("Please check that you've"
+                    + " entered the date and time correctly");
         }
     }
 

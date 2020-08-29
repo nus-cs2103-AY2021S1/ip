@@ -31,11 +31,12 @@ public class AddDeadlineCommand implements Command {
      * from the ui.
      * @param ui the ui used to print out responses.
      * @param tasks the task list.
+     * @return the string indicating the task has been added successfully.
      */
     @Override
-    public void execute(Ui ui, TaskList tasks) {
+    public String execute(Ui ui, TaskList tasks) {
         tasks.add(deadline);
-        ui.printAddSuccess(deadline, tasks.size());
+        return ui.printAddSuccess(deadline, tasks.size());
     }
 
     /**

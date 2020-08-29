@@ -17,9 +17,10 @@ public interface Command {
      * the task list accordingly.
      * @param ui the ui used to print out responses.
      * @param tasks the task list.
+     * @return the string that indicates the execution of the command.
      * @throws InvalidTaskException if task is not found in list.
      */
-    void execute(Ui ui, TaskList tasks) throws InvalidTaskException;
+    String execute(Ui ui, TaskList tasks) throws InvalidTaskException;
 
     /**
      * Checks if there are still commands after this command

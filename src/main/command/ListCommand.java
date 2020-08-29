@@ -16,10 +16,11 @@ public class ListCommand implements Command {
      * Prints out the entire task list via the ui.
      * @param ui the ui used to print out responses.
      * @param tasks the task list.
+     * @return the string showing all tasks.
      */
     @Override
-    public void execute(Ui ui, TaskList tasks) {
-        ui.printTaskList(tasks);
+    public String execute(Ui ui, TaskList tasks) {
+        return ui.printTaskList(tasks);
     }
 
     /**
