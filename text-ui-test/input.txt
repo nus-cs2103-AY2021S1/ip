@@ -11,11 +11,8 @@ event Sample Event
 event Sample Event /at
 event Sample Event /at 010120200000
 event Sample Event /at 01-01-2020 0000
-done 0
-done 1
-done -1
-done 4
-delete 3
-list
+delete 1
+delete 1
+delete 1
 blah
 bye

@@ -1,15 +1,25 @@
-Warning: Unable to find file containing task history. Please carry on if this is the first time using Duke.
 Hello! I'm Duke
 What can I do for you?
 
 ____________________________________________________________
-You have no tasks!
+1.[T][?] Sample Todo Task
+2.[D][?] Sample Deadline Task (by: Jan 01 2020 12:00 am)
+3.[E][?] Sample Event (at: Jan 01 2020 12:00 am)
+4.[T][?] Sample Todo Task
+5.[D][?] Sample Deadline Task (by: Jan 01 2020 12:00 am)
+6.[E][?] Sample Event (at: Jan 01 2020 12:00 am)
+7.[T][?] Sample Todo Task
+8.[D][?] Sample Deadline Task (by: Jan 01 2020 12:00 am)
+9.[E][?] Sample Event (at: Jan 01 2020 12:00 am)
 ____________________________________________________________
 ____________________________________________________________
-Please enter a valid task number!
+Nice! I've marked this task as done:
+  [T][?] Sample Todo Task
 ____________________________________________________________
 ____________________________________________________________
-Please enter a valid task number!
+Noted. I've removed this task:
+  [T][?] Sample Todo Task
+Now you have 8 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
 Unable to read command. Please enter it in the correct format!
@@ -17,7 +27,7 @@ ____________________________________________________________
 ____________________________________________________________
 Got it. I've added this task:
   [T][?] Sample Todo Task
-Now you have 1 tasks in the list
+Now you have 9 tasks in the list
 ____________________________________________________________
 ____________________________________________________________
 Unable to read command. Please enter it in the correct format!
@@ -31,7 +41,7 @@ ____________________________________________________________
 ____________________________________________________________
 Got it. I've added this task:
   [D][?] Sample Deadline Task (by: Jan 01 2020 12:00 am)
-Now you have 2 tasks in the list
+Now you have 10 tasks in the list
 ____________________________________________________________
 ____________________________________________________________
 Unable to read command. Please enter it in the correct format!
@@ -45,29 +55,22 @@ ____________________________________________________________
 ____________________________________________________________
 Got it. I've added this task:
   [E][?] Sample Event (at: Jan 01 2020 12:00 am)
-Now you have 3 tasks in the list
+Now you have 11 tasks in the list
 ____________________________________________________________
 ____________________________________________________________
-Please enter a valid task number!
-____________________________________________________________
-____________________________________________________________
-Nice! I've marked this task as done:
-  [T][?] Sample Todo Task
-____________________________________________________________
-____________________________________________________________
-Please enter a valid task number!
-____________________________________________________________
-____________________________________________________________
-Please enter a valid task number!
+Noted. I've removed this task:
+  [D][?] Sample Deadline Task (by: Jan 01 2020 12:00 am)
+Now you have 10 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
 Noted. I've removed this task:
   [E][?] Sample Event (at: Jan 01 2020 12:00 am)
-Now you have 2 tasks in the list.
+Now you have 9 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
-1.[T][?] Sample Todo Task
-2.[D][?] Sample Deadline Task (by: Jan 01 2020 12:00 am)
+Noted. I've removed this task:
+  [T][?] Sample Todo Task
+Now you have 8 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
 Unable to read command. Please enter it in the correct format!
