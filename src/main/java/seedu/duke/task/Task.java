@@ -48,7 +48,7 @@ public abstract class Task {
     }
 
     public String toString() {
-        String status = this.isDone ? "✓" : "✗";
+        String status = this.isDone ? "\u2713" : "\u2718";
         return "[" + status + "] " + this.title;
     }
 

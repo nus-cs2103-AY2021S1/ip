@@ -1,9 +1,9 @@
 package seedu.duke.command;
 
 import seedu.duke.DukeException;
+import seedu.duke.Message;
 import seedu.duke.Storage;
 import seedu.duke.TaskList;
-import seedu.duke.Ui;
 import seedu.duke.task.Event;
 
 /**
@@ -16,11 +16,11 @@ public class EventCommand implements Command {
         this.command = command;
     }
 
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public Message execute(TaskList taskList, Storage storage) throws DukeException {
         Event event = Event.of(this.command);
         taskList.add(event);
         storage.appendToFile(event);
-        ui.showTaskAdded(event);
+        return new Message(Message.TASK_ADDED + event.toString());
     }
 
     public boolean isDone() {

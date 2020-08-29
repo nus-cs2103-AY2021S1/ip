@@ -1,9 +1,9 @@
 package seedu.duke.command;
 
 import seedu.duke.DukeException;
+import seedu.duke.Message;
 import seedu.duke.Storage;
 import seedu.duke.TaskList;
-import seedu.duke.Ui;
 import seedu.duke.task.Deadline;
 
 /**
@@ -16,11 +16,11 @@ public class DeadlineCommand implements Command {
         this.command = command;
     }
 
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public Message execute(TaskList taskList, Storage storage) throws DukeException {
         Deadline deadline = Deadline.of(this.command);
         taskList.add(deadline);
         storage.appendToFile(deadline);
-        ui.showTaskAdded(deadline);
+        return new Message(Message.TASK_ADDED + deadline.toString());
     }
 
     public boolean isDone() {

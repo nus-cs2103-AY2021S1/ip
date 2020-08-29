@@ -1,6 +1,7 @@
 package seedu.duke.command;
 
 import seedu.duke.DukeException;
+import seedu.duke.Message;
 import seedu.duke.Storage;
 import seedu.duke.TaskList;
 import seedu.duke.Ui;
@@ -16,14 +17,14 @@ public class DeleteCommand implements Command {
         this.command = command;
     }
 
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public Message execute(TaskList taskList, Storage storage) throws DukeException {
         if (command.length != 2) {
             throw new DukeException("Wrong format.");
         }
         try {
             Task task = taskList.delete(Integer.parseInt(command[1]));
-            ui.showTaskDeleted(task);
             storage.writeToFile(taskList);
+            return new Message(Message.TASK_DELETED + task.toString());
         } catch (NumberFormatException e) {
             throw new DukeException("Wrong format.");
         }

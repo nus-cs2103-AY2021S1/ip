@@ -1,5 +1,6 @@
 package seedu.duke.command;
 
+import seedu.duke.Message;
 import seedu.duke.Storage;
 import seedu.duke.TaskList;
 import seedu.duke.Ui;
@@ -8,8 +9,8 @@ import seedu.duke.Ui;
  * Represents a <code>Command</code> telling Duke to stop running.
  */
 public class ByeCommand implements Command {
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
-        ui.showGoodbye();
+    public Message execute(TaskList taskList, Storage storage) {
+        return Message.getGoodbye();
     }
 
     public boolean isDone() {

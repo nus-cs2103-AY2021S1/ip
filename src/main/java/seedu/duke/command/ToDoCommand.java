@@ -1,6 +1,7 @@
 package seedu.duke.command;
 
 import seedu.duke.DukeException;
+import seedu.duke.Message;
 import seedu.duke.Storage;
 import seedu.duke.TaskList;
 import seedu.duke.Ui;
@@ -16,11 +17,11 @@ public class ToDoCommand implements Command {
         this.command = command;
     }
 
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public Message execute(TaskList taskList, Storage storage) throws DukeException {
         ToDo toDo = ToDo.of(this.command);
         taskList.add(toDo);
         storage.appendToFile(toDo);
-        ui.showTaskAdded(toDo);
+        return new Message(Message.TASK_ADDED + toDo.toString());
     }
 
     public boolean isDone() {

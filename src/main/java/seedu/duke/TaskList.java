@@ -88,70 +88,67 @@ public class TaskList {
 
     /**
      * Prints out all the tasks in this list.
-     *
-     * @param ui Used to format the responses before printing.
      */
-    public void showList(Ui ui) {
-        ui.showHorizontalLine();
+    public Message showList() {
         if (this.tasks.size() <= 0) {
-            ui.showIndentedMessage("No tasks added.");
+            return new Message("No tasks added.");
         } else {
+            String[] response = new String[this.tasks.size()];
             int position = 1;
             for (Task task : this.tasks) {
-                ui.showIndentedMessage(position + ". " + task);
+                response[position - 1] = position + ". " + task;
                 position++;
             }
+            return new Message(response);
         }
-        ui.showHorizontalLine();
     }
 
     /**
      * Prints out tasks that take place or are due by a certain date.
      *
      * @param date the date entered by the user
-     * @param ui   Used to format the responses before printing.
      */
-    public void showList(LocalDate date, Ui ui) {
-        ui.showHorizontalLine();
+    public Message showList(LocalDate date) {
         if (this.tasks.size() <= 0) {
-            ui.showIndentedMessage("No tasks added.");
+            return new Message("No tasks added.");
         } else {
-            int position = 1;
+            ArrayList<String> response = new ArrayList<>();
+            int totalPosition = 1;
             boolean hasTask = false;
             for (Task task : this.tasks) {
                 if ((task instanceof Event || task instanceof Deadline)
                         && task.getDate().equals(date)) {
-                    ui.showIndentedMessage(position + ". " + task);
+                    response.add(totalPosition + ". " + task);
                     hasTask = true;
                 }
-                position++;
+                totalPosition++;
             }
             if (!hasTask) {
-                ui.showIndentedMessage("No tasks on that date.");
+                return new Message("No tasks found.");
             }
+            return new Message(response.toArray(new String[0]));
         }
-        ui.showHorizontalLine();
     }
 
-    public void find(String keyword, Ui ui) {
-        ui.showHorizontalLine();
+    public Message find(String keyword) {
         if (this.tasks.size() <= 0) {
-            ui.showIndentedMessage("No tasks added.");
+            return new Message("No tasks added.");
         } else {
-            int position = 1;
+            ArrayList<String> response = new ArrayList<>();
+            int totalPosition = 1;
             boolean hasTask = false;
             for (Task task : this.tasks) {
                 if (task.containsKeyword(keyword)) {
-                    ui.showIndentedMessage(position + ". " + task);
+                    response.add(totalPosition + ". " + task);
                     hasTask = true;
                 }
-                position++;
+                totalPosition++;
             }
             if (!hasTask) {
-                ui.showIndentedMessage("No tasks found.");
+                return new Message("No tasks found.");
             }
+            return new Message(response.toArray(new String[0]));
         }
-        ui.showHorizontalLine();
     }
 
     /**

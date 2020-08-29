@@ -35,84 +35,27 @@ public class Ui {
 
     /**
      * Prints out a welcome message for the user.
-     */
+     *//*
     public void showWelcome() {
         String logo = indentation + " ____        _        \n"
                 + indentation + "|  _ \\ _   _| | _____ \n"
                 + indentation + "| | | | | | | |/ / _ \\\n"
                 + indentation + "| |_| | |_| |   <  __/\n"
                 + indentation + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println(horizontalLine);
-        System.out.println(indentation + "Hello from\n" + logo);
-        System.out.println(horizontalLine);
-    }
-
-    /**
-     * Prints out a goodbye message for the user.
-     */
-    public void showGoodbye() {
-        System.out.println(horizontalLine);
-        System.out.println(indentation + "Have a nice day.");
-        System.out.println(horizontalLine);
-    }
-
-    /**
-     * Prints out an error that occurred.
-     *
-     * @param message the error message
-     */
-    public void showError(String message) {
+        String message = "Hello from\n" + logo;
         System.out.println(horizontalLine);
         System.out.println(indentation + message);
         System.out.println(horizontalLine);
     }
 
     /**
-     * Prints out a message telling the user that a task was added.
+     * Prints out an message to the user.
      *
-     * @param task the <code>Task</code> added
+     * @param message the message to be printed
      */
-    public void showTaskAdded(Task task) {
+    public void showMessage(Message message) {
         System.out.println(horizontalLine);
-        System.out.println(indentation + "Task added: " + task);
-        System.out.println(horizontalLine);
-    }
-
-    /**
-     * Prints out a message telling the user that a task was deleted.
-     *
-     * @param task the <code>Task</code> deleted
-     */
-    public void showTaskDeleted(Task task) {
-        System.out.println(horizontalLine);
-        System.out.println(indentation + "Task deleted: " + task);
-        System.out.println(horizontalLine);
-    }
-
-    /**
-     * Prints out a message telling the user that a task was marked as done.
-     *
-     * @param task the <code>Task</code> marked as done
-     */
-    public void showTaskMarkedDone(Task task) {
-        System.out.println(horizontalLine);
-        System.out.println(indentation + "Task marked as done: " + task);
-        System.out.println(horizontalLine);
-    }
-
-    /**
-     * Prints out a message to the user with the correct indentation.
-     *
-     * @param message the message to print
-     */
-    public void showIndentedMessage(String message) {
-        System.out.println(indentation + message);
-    }
-
-    /**
-     * Prints out an indented horizontal line.
-     */
-    public void showHorizontalLine() {
+        message.forEach(line -> System.out.println(indentation + line));
         System.out.println(horizontalLine);
     }
 }

@@ -4,6 +4,7 @@ import java.time.DateTimeException;
 import java.time.LocalDate;
 
 import seedu.duke.DukeException;
+import seedu.duke.Message;
 import seedu.duke.Storage;
 import seedu.duke.TaskList;
 import seedu.duke.Ui;
@@ -18,13 +19,13 @@ public class ListCommand implements Command {
         this.command = command;
     }
 
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public Message execute(TaskList taskList, Storage storage) throws DukeException {
         if (command.length == 1) {
-            taskList.showList(ui);
+            return taskList.showList();
         } else if (command.length == 2) {
             try {
                 LocalDate date = LocalDate.parse(command[1]);
-                taskList.showList(date, ui);
+                return taskList.showList(date);
             } catch (DateTimeException e) {
                 throw new DukeException("Please provide date in yyyy-mm-dd format.");
             }
