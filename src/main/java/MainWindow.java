@@ -1,4 +1,7 @@
 import duke.Duke;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -6,6 +9,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.util.Duration;
 
 public class MainWindow extends AnchorPane {
     @FXML
@@ -21,6 +25,8 @@ public class MainWindow extends AnchorPane {
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+
+    private Timeline exitDelay = new Timeline(new KeyFrame(Duration.millis(2000), ae -> Platform.exit()));
 
     @FXML
     public void initialize() {
@@ -44,5 +50,20 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
+        if (duke.isExit()) {
+            exitDelay.play();
+            userInput.setDisable(true);
+            sendButton.setDisable(true);
+        }
+    }
+
+    /**
+     * Creates one dialog box that contains Duke's greeting message.
+     */
+    public void greet() {
+        String greeting = duke.getGreeting();
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(greeting, dukeImage)
+        );
     }
 }

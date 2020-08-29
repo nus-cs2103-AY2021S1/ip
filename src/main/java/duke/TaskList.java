@@ -31,7 +31,6 @@ public class TaskList {
                 Ui.addMessage(task);
             }
         }
-        Ui.sendMessages();
     }
 
     /**
@@ -45,7 +44,6 @@ public class TaskList {
         Ui.addMessage("Got it. I've added this task:");
         Ui.addMessage("  " + task);
         Ui.addMessage("Now you have " + size + " " + taskWord + " in the list.");
-        Ui.sendMessages();
     }
 
     /**
@@ -57,7 +55,6 @@ public class TaskList {
         taskList.remove(index);
         Ui.addMessage("Got it. I've removed this task:");
         Ui.addMessage("  " + task);
-        Ui.sendMessages();
     }
 
     /**
@@ -70,7 +67,6 @@ public class TaskList {
 
         Ui.addMessage("Nice! I've marked this task as done:");
         Ui.addMessage("  " + task);
-        Ui.sendMessages();
     }
 
     /**
@@ -96,7 +92,6 @@ public class TaskList {
                 Ui.addMessage(task);
             }
         }
-        Ui.sendMessages();
     }
 
     /**

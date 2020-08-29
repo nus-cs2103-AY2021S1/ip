@@ -13,24 +13,20 @@ public class Ui {
         messages.add(message);
     }
 
-    /**
-     * Prints each message in the list of messages on a new line.
-     * The entire message is wrapped by two horizontal lines.
-     */
-    public static void sendMessages() {
-        System.out.println("\t____________________________________________________________");
+    public static String getMessages() {
+        StringBuilder stringBuilder = new StringBuilder();
         for (String message : messages) {
-            System.out.println("\t " + message);
+            stringBuilder.append(message).append("\n");
         }
-        System.out.println("\t____________________________________________________________");
         messages = new ArrayList<>(); // clear all messages
+        return stringBuilder.toString();
     }
 
     /**
      * Prints the logo.
      */
     public static void printLogo() {
-        String logo = "\t    ,---,                                     \n"
+        String logo = "\t    ,---,                                       \n"
                 + "\t  .'  .' `\\                     ,---,              \n"
                 + "\t,---.'     \\          ,--,    ,---.'|              \n"
                 + "\t|   |  .`\\  |       ,'_ /|    |   | :              \n"
