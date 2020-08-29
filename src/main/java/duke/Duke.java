@@ -13,7 +13,7 @@ import javafx.stage.Stage;
 
 /**
  * Duke class.
- * Driver class for Duke.
+ * Driver class for Duke with GUI.
  * Contains task list, storage, parser and ui.
  *
  * @author YanCheng
@@ -26,10 +26,15 @@ public class Duke extends Application {
     public static Parser parser = new Parser();
     public static Ui ui = new Ui(taskList, storage, parser);
 
-    Stage window;
+    private Stage window;
     // output
-    TextArea outputTextArea = new TextArea("Hello! I'm Duke. \nWhat can I do for you?");
+    private TextArea outputTextArea = new TextArea("Hello! I'm Duke. \nWhat can I do for you?");
 
+    /**
+     * Method to start JavaFX
+     * @param stage Window that is to be launched
+     * @throws Exception If any exception occurs during the process
+     */
     @Override
     public void start(Stage stage) throws Exception {
         // stage is window
@@ -52,7 +57,7 @@ public class Duke extends Application {
         }
 
         // command label
-        Label commandLabel = new Label("Command");
+        Label commandLabel = new Label("Command: ");
         GridPane.setConstraints(commandLabel, 0, 10);
 
         // command input

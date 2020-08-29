@@ -3,6 +3,7 @@ package duke;
 /**
  * DukeMain class.
  * Driver class for Duke but without GUI.
+ * It is for use with CLI
  * Contains task list, storage, parser and ui.
  *
  * @author YanCheng
