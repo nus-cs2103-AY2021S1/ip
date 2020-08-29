@@ -27,7 +27,7 @@ public class DeadlineCommand extends Command {
      * @throws WrongDateFormatException when the date is not typed in the correct format.
      */
     @Override
-    protected void execute(TaskList tasks, UI dukeUI)
+    protected String execute(TaskList tasks, UI dukeUI)
             throws InvalidTaskDescriptionException, WrongDateFormatException {
         try {
             String[] taskDetails = this.command.split("/");
@@ -35,7 +35,8 @@ public class DeadlineCommand extends Command {
             String[] taskDetailsWithoutDate = taskDetails[0].split(" ", 2);
             Deadline newDeadline = new Deadline(taskDetailsWithoutDate[1], taskDate);
             tasks.addTask(newDeadline);
-            dukeUI.addTask(tasks, newDeadline);
+            String dukeResponse = dukeUI.addTask(tasks, newDeadline);
+            return dukeResponse;
         } catch (IndexOutOfBoundsException e) {
             throw new InvalidTaskDescriptionException();
         } catch (DateTimeParseException e) {

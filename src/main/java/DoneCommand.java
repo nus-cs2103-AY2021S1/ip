@@ -22,7 +22,7 @@ public class DoneCommand extends Command {
      * @throws InvalidTaskNumberException when an inaccurate task number is entered.
      */
     @Override
-    protected void execute(TaskList tasks, UI dukeUI) throws InvalidTaskNumberException {
+    protected String execute(TaskList tasks, UI dukeUI) throws InvalidTaskNumberException {
         int taskIndex;
         try {
             String[] doneCommand = this.command.split(" ");
@@ -32,7 +32,8 @@ public class DoneCommand extends Command {
                 if (!completedTask.getStatus()) {
                     tasks.markTaskDone(completedTask);
                 }
-                dukeUI.doneTask(completedTask);
+                String dukeResponse = dukeUI.doneTask(completedTask);
+                return dukeResponse;
             } else {
                 throw new InvalidTaskNumberException();
             }

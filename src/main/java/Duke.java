@@ -8,31 +8,44 @@ import java.io.IOException;
 
 public class Duke {
 
+    private Storage dukeStorage;
+    private TaskList dukeTaskList;
+    private UI dukeUI;
+    private Parser dukeParser;
+
     /**
      * Initiates the bot.
      * @throws DukeException
      * @throws IOException
      */
-    private static void startBot() throws DukeException, IOException {
-        Storage storage = new Storage("data" + File.separator + "duke.txt");
-        TaskList dukeTaskList = new TaskList(storage.loadData());
-        UI dukeUI = new UI();
-        Parser dukeParser = new Parser();
+    public Duke() throws IOException {
+        dukeStorage = new Storage("data" + File.separator + "duke.txt");
+        dukeTaskList = new TaskList(dukeStorage.loadData());
+        dukeUI = new UI();
+        dukeParser = new Parser();
 
-        dukeUI.greetUser();
+        //dukeUI.greetUser();
 
-        boolean isExit = false;
-
-        while (!isExit) {
-            String userCommand = dukeUI.readCommand();
-            Command cmd = dukeParser.parseCommand(userCommand);
-            cmd.execute(dukeTaskList, dukeUI);
-            isExit = cmd.isExit();
-            storage.writeData(dukeTaskList);
-        }
+//        boolean isExit = false;
+//
+//        while (!isExit) {
+//            String userCommand = dukeUI.readCommand();
+//            Command cmd = dukeParser.parseCommand(userCommand);
+//            cmd.execute(dukeTaskList, dukeUI);
+//            ixsExit = cmd.isExit();
+//            storage.writeData(dukeTaskList);
+//        }
     }
 
-    public static void main(String[] args) throws Exception {
-        startBot();
+    public String getResponse(String input) {
+        try {
+            String userCommand = input;
+            Command cmd = dukeParser.parseCommand(userCommand);
+            String dukeResponse = cmd.execute(dukeTaskList, dukeUI);
+            dukeStorage.writeData(dukeTaskList);
+            return dukeResponse;
+        } catch (DukeException | IOException e) {
+            return e.getMessage();
+        }
     }
 }

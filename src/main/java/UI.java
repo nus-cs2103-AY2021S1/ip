@@ -38,12 +38,14 @@ public class UI {
      * Prints responses when a task is completed.
      * @param task the completed task.
      */
-    protected void doneTask(Task task) {
+    protected String doneTask(Task task) {
         if (task.getStatus()) {
-            System.out.println("\nNice! I have completed this task!");
-            System.out.println(" " + task + "\n");
+            String str1 = "\nNice! I have completed this task!";
+            String str2 = " " + task + "\n";
+            return str1 + str2;
         } else {
-            System.out.println("\nThis task has already been completed!\n");
+            String str1 = "\nThis task has already been completed!\n";
+            return str1;
         }
     }
 
@@ -52,12 +54,13 @@ public class UI {
      * @param tasks TaskList containing all tasks.
      * @param newTask Task to be completed.
      */
-    protected void addTask(TaskList tasks, Task newTask) {
-        System.out.println("\nGot it. This task is now added.");
-        System.out.println(" " + newTask);
+    protected String addTask(TaskList tasks, Task newTask) {
+        String str1 = "\nGot it. This task is now added.";
+        String str2 = " " + newTask;
         int tasksLeft = tasks.checkTasksLeft();
-        System.out.println("You have " + tasksLeft
-                + " tasks left in your list!\n");
+        String str3 = "You have " + tasksLeft
+                + " tasks left in your list!\n";
+        return str1 + str2 + str3;
     }
 
     /**
@@ -65,43 +68,46 @@ public class UI {
      * @param tasks TaskList containing all tasks.
      * @param deletedTask Task to be deleted.
      */
-    protected void deleteTask(TaskList tasks, Task deletedTask) {
-        System.out.println("\nGot it. Deleting task.....");
-        System.out.println(" " + deletedTask);
-        System.out.println("You have " + tasks.getTaskList().size()
-                + " tasks left in your list!\n");
+    protected String deleteTask(TaskList tasks, Task deletedTask) {
+        String str1 = "\nGot it. Deleting task.....";
+        String str2 = " " + deletedTask;
+        String str3 = "You have " + tasks.getTaskList().size()
+                + " tasks left in your list!\n";
+        return str1 + str2 + str3;
     }
 
     /**
      * Prints all the tasks stored.
      * @param taskList TaskList containing all the tasks.
      */
-    protected void displayTasks(TaskList taskList) {
+    protected String displayTasks(TaskList taskList) {
         int index = 1;
-        System.out.println("\n");
-        System.out.println("Here are the tasks in your tasklist:");
+        String allTask = "";
+        String str1 = "Here are the tasks in your tasklist:";
         for (Task task : taskList.getTaskList()) {
-            System.out.println(index + "." + task);
+            allTask += index + "." + task + "\n";
             index++;
         }
-        System.out.println("\n");
+        return str1 + allTask;
     }
 
     /**
      * Prints tasks found using find command.
      * @param foundTasks tasks found with find command.
      */
-    protected void findTask(ArrayList<Task> foundTasks) {
+    protected String findTask(ArrayList<Task> foundTasks) {
         if (foundTasks.isEmpty()) {
-            System.out.println("\nNo matching tasks found!\n");
+            String str1 = "\nNo matching tasks found!\n";
+            return str1;
         } else {
-            System.out.println("\nHere are the tasks in your list!\n");
+            String str2 = "\nHere are the tasks in your list!\n";
             int index = 1;
+            String allTask = "";
             for (Task task : foundTasks) {
-                System.out.println(index + "." + task);
+                allTask += index + "." + task + "\n";
                 index++;
             }
-            System.out.println("\n");
+            return str2 + allTask;
         }
     }
 }

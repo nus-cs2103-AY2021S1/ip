@@ -11,7 +11,7 @@ public abstract class Command {
      * @param ui
      * @throws DukeException
      */
-    abstract void execute(TaskList tasks, UI ui) throws DukeException;
+    abstract String execute(TaskList tasks, UI ui) throws DukeException;
 
     /**
      * Abstract method which would be implemented in the subclasses.
