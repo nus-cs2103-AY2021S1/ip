@@ -1,10 +1,11 @@
 package duke;
 
-import duke.exception.DukeInvalidIndexException;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.Todo;
+import seedu.duke.TaskList;
+import seedu.duke.exception.DukeInvalidIndexException;
+import seedu.duke.task.Deadline;
+import seedu.duke.task.Event;
+import seedu.duke.task.Task;
+import seedu.duke.task.Todo;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
