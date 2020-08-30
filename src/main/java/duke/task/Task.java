@@ -4,6 +4,9 @@ package duke.task;
  * This class represents a Task that the user wants to add/remove/complete/etc. in his todo list.
  */
 public class Task {
+    private static final String CHECKMARK = "[✓]";
+    private static final String CROSS = "[✗]";
+
     private final String taskName;
     private boolean isDone = false;
 
@@ -60,8 +63,6 @@ public class Task {
      */
     @Override
     public String toString() {
-        final String CHECKMARK = "[✓]";
-        final String CROSS = "[✗]";
         return isDone
                 ? CHECKMARK + " " + taskName
                 : CROSS + " " + taskName;

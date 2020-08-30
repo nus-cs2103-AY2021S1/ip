@@ -6,7 +6,7 @@ import duke.Ui;
 import duke.task.Task;
 import duke.task.ToDo;
 
-public class ToDoCommand extends Command{
+public class ToDoCommand extends Command {
     private String taskName;
 
     public ToDoCommand(String taskName) {

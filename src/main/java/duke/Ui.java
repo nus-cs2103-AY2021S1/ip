@@ -8,14 +8,15 @@ import duke.task.Task;
  */
 public class Ui {
     private static final String HORIZONTAL_RULE = "____________________________________________________________";
+    private static final String HELLO_MESSAGE = "Hello, and welcome to my humble abode. \n"
+            + "I'm supposed to help you but I'll be the judge of that. Anyway what do you want.";
+    private static final String BYE_MESSAGE = "Thank you for that utter waste of time.\n"
+            + "Can't wait to see you again...";
 
     /**
      * Prints out a string which gives a greeting to the user
      */
     public void displayGreeting() {
-        final String HELLO_MESSAGE = "Hello, and welcome to my humble abode. \n" +
-                "I'm supposed to help you but I'll be the judge of that. Anyway what do you want.";
-
         System.out.println(HORIZONTAL_RULE);
         System.out.println(HELLO_MESSAGE);
         System.out.println(HORIZONTAL_RULE);
@@ -25,19 +26,10 @@ public class Ui {
      * Prints out a string for when the program exits
      */
     public void displayExit() {
-        final String BYE_MESSAGE = "Thank you for that utter waste of time.\n" +
-                "Can't wait to see you again...";
-
         System.out.println(HORIZONTAL_RULE);
         System.out.println(BYE_MESSAGE);
         System.out.println(HORIZONTAL_RULE);
     }
-
-    /**
-     * Prints out all items in the specified TaskList
-     * @param tasks TaskList consisting of items to be printed
-     */
-    public void printList(TaskList tasks) { printList(tasks, "Here are all your burdens"); }
 
     /**
      * Prints out tasks that have been found from a find query
@@ -45,6 +37,14 @@ public class Ui {
      */
     public void printFindResult(TaskList tasks) {
         printList(tasks, "Found these for you, couch potato");
+    }
+
+    /**
+     * Prints out all items in the specified TaskList
+     * @param tasks TaskList consisting of items to be printed
+     */
+    public void printList(TaskList tasks) {
+        printList(tasks, "Here are all your burdens");
     }
 
     private void printList(TaskList tasks, String message) {
