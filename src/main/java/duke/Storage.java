@@ -15,7 +15,6 @@ public class Storage {
 
     /**
      * Constructs a Storage class with specified file path.
-     * 
      * @param filePath Location of the file where data is to be stored.
      */
     Storage(String filePath) {
@@ -24,7 +23,6 @@ public class Storage {
 
     /**
      * Writes tasks to file.
-     * 
      * @param tasks Tasks to be written.
      * @throws IOException If an error occurs during writing.
      */
@@ -33,19 +31,19 @@ public class Storage {
         StringBuilder s = new StringBuilder();
         for (int i = 0; i < tasks.size(); i++) {
             if (tasks.get(i) instanceof Todo) {
-                s.append(String.format("T | %d | %s", 
-                        tasks.get(i).getStatus() ? 1 : 0, 
+                s.append(String.format("T | %d | %s",
+                        tasks.get(i).getStatus() ? 1 : 0,
                         tasks.get(i).getDescription()));
             } else if (tasks.get(i) instanceof Deadline) {
-                s.append(String.format("D | %d | %s | %s", 
-                        tasks.get(i).getStatus() ? 1 : 0, 
-                        tasks.get(i).getDescription(), 
-                        ((Deadline) tasks.get(i)).getDate()));
+                s.append(String.format("D | %d | %s | %s",
+                        tasks.get(i).getStatus() ? 1 : 0,
+                        tasks.get(i).getDescription(), (
+                        (Deadline) tasks.get(i)).getDate()));
             } else if (tasks.get(i) instanceof Event) {
-                s.append(String.format("E | %d | %s | %s", 
-                        tasks.get(i).getStatus() ? 1 : 0, 
-                        tasks.get(i).getDescription(), 
-                        ((Event) tasks.get(i)).getDate()));
+                s.append(String.format("E | %d | %s | %s",
+                        tasks.get(i).getStatus() ? 1 : 0,
+                        tasks.get(i).getDescription(), (
+                        (Event) tasks.get(i)).getDate()));
             }
             s.append("\n");
         }
@@ -55,7 +53,6 @@ public class Storage {
 
     /**
      * Reads file and returns ArrayList of tasks stored.
-     * 
      * @return ArrayList of tasks stored.
      * @throws DukeException If error occurs during reading file.
      */
@@ -77,17 +74,17 @@ public class Storage {
                 String[] strArray = row.split(" \\| ");
                 switch (strArray[0]) {
                 case "T":
-                    tasks.add(new Todo(strArray[2], 
+                    tasks.add(new Todo(strArray[2],
                             "1".equals(strArray[1])));
                     break;
                 case "D":
-                    tasks.add(new Deadline(strArray[2], 
-                            "1".equals(strArray[1]), 
+                    tasks.add(new Deadline(strArray[2],
+                            "1".equals(strArray[1]),
                             LocalDate.parse(strArray[3])));
                     break;
                 case "E":
-                    tasks.add(new Event(strArray[2], 
-                            "1".equals(strArray[1]), 
+                    tasks.add(new Event(strArray[2],
+                            "1".equals(strArray[1]),
                             LocalDate.parse(strArray[3])));
                     break;
                 default:

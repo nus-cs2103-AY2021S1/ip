@@ -9,14 +9,13 @@ public class Task {
 
     /**
      * Constructs a task with description.
-     * 
      * @param description Description of task.
      */
     public Task(String description) {
         this.description = description;
         this.isDone = false;
     }
-    
+
     /**
      * Constructs a task with description and state of it.
      *
@@ -27,14 +26,13 @@ public class Task {
         this.description = description;
         this.isDone = isDone;
     }
-    
+
     private String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
 
     /**
      * Returns status of task.
-     * 
      * @return Status of task.
      */
     public boolean getStatus() {
@@ -43,7 +41,6 @@ public class Task {
 
     /**
      * Returns description of task.
-     * 
      * @return Description of task.
      */
     public String getDescription() {

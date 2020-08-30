@@ -11,7 +11,6 @@ public class Event extends Task {
 
     /**
      * Constructs an Event task with description and date.
-     * 
      * @param description Description of Event task.
      * @param at Date of event.
      */
@@ -22,7 +21,6 @@ public class Event extends Task {
 
     /**
      * Constructs an Event task with description, status and date.
-     * 
      * @param description Description of Event task.
      * @param isDone Status of task.
      * @param at Date of event.
@@ -31,10 +29,9 @@ public class Event extends Task {
         super(description, isDone);
         this.at = at;
     }
-    
+
     /**
      * Returns date of event.
-     *
      * @return String representation of date of event.
      */
     public String getDate() {
@@ -43,10 +40,10 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E]" 
-                + super.toString() 
-                + " (at: " 
-                + at.format(DateTimeFormatter.ofPattern("MMM d yyyy")) 
+        return "[E]"
+                + super.toString()
+                + " (at: "
+                + at.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
                 + ")";
     }
 }

@@ -11,17 +11,17 @@ public class Ui {
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
-    
-    private final String instructions = "Hello! I'm duke.Duke\n" +
-            "Send me a task in one of the following formats and I'll store it for you.\n" +
-            "\tTodo: \"todo <description>\"\n" +
-            "\tDeadline: \"deadline <description> /by <YYYY-MM-DD>\"\n" +
-            "\tEvent: \"event <description> /at <YYYY-MM-DD>\"\n" +
-            "Send \"list\" to see all tasks.\n" +
-            "Send \"find <string of choice>\" to see all related tasks.\n" +
-            "Send \"done <item number>\" to mark an item as done\n" +
-            "Send \"delete <item number>\" to delete and item from the list\n" +
-            "Send \"bye\" to end our conversation.";
+
+    private final String instructions = "Hello! I'm duke.Duke\n"
+            + "Send me a task in one of the following formats and I'll store it for you.\n"
+            + "\tTodo: \"todo <description>\"\n"
+            + "\tDeadline: \"deadline <description> /by <YYYY-MM-DD>\"\n"
+            + "\tEvent: \"event <description> /at <YYYY-MM-DD>\"\n"
+            + "Send \"list\" to see all tasks.\n"
+            + "Send \"find <string of choice>\" to see all related tasks.\n"
+            + "Send \"done <item number>\" to mark an item as done\n"
+            + "Send \"delete <item number>\" to delete and item from the list\n"
+            + "Send \"bye\" to end our conversation.";
 
     private final Scanner scanner = new Scanner(System.in);
 
@@ -34,7 +34,6 @@ public class Ui {
 
     /**
      * Prints specified error message.
-     * 
      * @param message Error message.
      */
     public void showError(String message) {
@@ -50,7 +49,6 @@ public class Ui {
 
     /**
      * Prints specified output message for user.
-     * 
      * @param output Message for the user.
      */
     public void showOutput(String output) {
@@ -66,7 +64,6 @@ public class Ui {
 
     /**
      * Reads the next input line by user.
-     * 
      * @return Input line by user.
      */
     public String readCommand() {
