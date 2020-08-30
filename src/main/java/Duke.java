@@ -105,15 +105,21 @@ public class Duke {
                         break;
 
                     case "deadline":
-                        String date = task_details.split(" /")[1];
-                        Task deadline = new Deadline(task_info, date);
+                        String date_n_time_d[] = task_details.split("by ")[1].split(" ");
+                        String str_date_d = date_n_time_d[0];
+                        LocalDate date_d = LocalDate.parse(str_date_d);
+                        String time_d = date_n_time_d[1];
+                        Task deadline = new Deadline(task_info, date_d, time_d);
                         task_list.add(deadline);
                         PrintTask(task_list, deadline);
                         break;
 
                     case "event":
-                        String time = task_details.split(" /")[1];
-                        Task event = new Event(task_info, time);
+                        String date_n_time_e[] = task_details.split("at ")[1].split(" ");
+                        String str_date_e = date_n_time_e[0];
+                        LocalDate date_e = LocalDate.parse(str_date_e);
+                        String time_e = date_n_time_e[1];
+                        Task event = new Event(task_info, date_e, time_e);
                         task_list.add(event);
                         PrintTask(task_list, event);
                         break;
@@ -166,9 +172,9 @@ public class Duke {
             if (task instanceof ToDo) {
                 writer.write("T|" + task.task_completion + "|" + task.task_info + "\n");
             } else if (task instanceof Deadline) {
-                writer.write("D|" + task.task_completion + "|" + task.task_info + "|by " + ((Deadline) task).date + "\n");
+                writer.write("D|" + task.task_completion + "|" + task.task_info + "|by " + ((Deadline) task).date + ((Deadline) task).time + "\n");
             } else if (task instanceof Event) {
-                writer.write("E|" + task.task_completion + "|" + task.task_info + "|at " + ((Event) task).time + "\n");
+                writer.write("E|" + task.task_completion + "|" + task.task_info + "|at " + ((Event) task).date + ((Event) task).time + "\n");
             }
         }
         writer.close();
@@ -203,14 +209,14 @@ public class Duke {
                     task_list.add(toDo);
                     break;
                 case "D":
-                    Task deadLine = new Deadline(task_info, taskContent[3]);
+                    Task deadLine = new Deadline(task_info, getDate(taskContent[3]), getTime(taskContent[3]));
                     if (status.equals("true")) {
                         deadLine.task_completion = true;
                     }
                     task_list.add(deadLine);
                     break;
                 case "E":
-                    Task event = new Event(task_info, taskContent[3]);
+                    Task event = new Event(task_info, getDate(taskContent[3]), getTime(taskContent[3]));
                     if (status.equals("true")) {
                         event.task_completion = true;
                     }
@@ -221,6 +227,14 @@ public class Duke {
             }
         }
         return task_list;
+    }
+
+    public static String getTime(String s) {
+        return s.substring(14);
+    }
+
+    public static LocalDate getDate(String s) {
+        return LocalDate.parse(s.substring(3,13));
     }
 }
 
