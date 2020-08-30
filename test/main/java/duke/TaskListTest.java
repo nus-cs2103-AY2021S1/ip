@@ -1,5 +1,7 @@
 package main.java.duke;
 
+import duke.DukeException;
+import duke.TaskList;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

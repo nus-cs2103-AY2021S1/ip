@@ -1,7 +1,9 @@
-package main.java;
-
-import main.java.duke.*;
-import main.java.duke.task.Task;
+import duke.Parser;
+import duke.Storage;
+import duke.TaskList;
+import main.java.duke.Ui;
+import duke.task.Task;
+import duke.DukeException;
 
 import java.util.Scanner;
 

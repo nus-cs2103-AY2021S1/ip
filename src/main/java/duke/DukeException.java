@@ -1,4 +1,4 @@
-package main.java.duke;
+package duke;
 
 /**
  * Custom Exception for the project: Duke

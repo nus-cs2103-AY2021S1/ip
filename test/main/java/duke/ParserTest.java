@@ -2,8 +2,8 @@ package main.java.duke;
 
 import java.util.Arrays;
 import org.junit.jupiter.api.Test;
+import duke.Parser;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
 
 class ParserTest {
     @Test

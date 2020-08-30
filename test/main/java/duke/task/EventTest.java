@@ -1,6 +1,7 @@
 package main.java.duke.task;
 
-import main.java.duke.DukeException;
+import duke.DukeException;
+import duke.task.Event;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
