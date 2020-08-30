@@ -1,20 +1,28 @@
 package viscount;
 
-import viscount.command.Command;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
 
+import viscount.command.Command;
 import viscount.exception.ViscountException;
 import viscount.exception.ViscountIOException;
 
 /**
  * Represents Viscount, a chatbot that helps the user keep track of tasks.
  */
-public class Viscount {
+public class Viscount extends Application {
     private static final String DATA_DIRECTORY_PATH = System.getProperty("user.dir") + "/data/";
     
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
     private boolean shouldRun;
+    
+    public Viscount() {
+        
+    }
     
     public Viscount(String filePathString) {
         this.storage = new Storage(filePathString);
@@ -58,7 +66,7 @@ public class Viscount {
 
     /**
      * Starts Viscount.
-     * 
+     *
      * @param args Standard arguments
      */
     public static void main(String[] args) {
@@ -68,5 +76,19 @@ public class Viscount {
         } else {
             viscount.exit();
         }
+    }
+
+    /**
+     * Starts Viscount.
+     *
+     * @param stage Stage to show.
+     */
+    @Override
+    public void start(Stage stage) {
+        Label helloWorld = new Label("Hello World!");
+        Scene scene = new Scene(helloWorld);
+
+        stage.setScene(scene);
+        stage.show();
     }
 }
