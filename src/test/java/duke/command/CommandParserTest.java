@@ -13,7 +13,7 @@ import duke.exception.UnknownCommandException;
 
 public class CommandParserTest {
     @Test
-    public void parseTodoCommand() {
+    public void parseCommand_addTaskCommand() {
         CommandParser parser = new CommandParser();
         try {
             assertTrue(parser.parseCommand("todo exercise") instanceof AddTaskCommand);
@@ -23,7 +23,7 @@ public class CommandParserTest {
     }
 
     @Test
-    public void parseIncompleteTodoCommand() {
+    public void parseCommand_incompleteTodoDescription_exceptionThrown() {
         CommandParser parser = new CommandParser();
         try {
             parser.parseCommand("todo");
@@ -33,7 +33,7 @@ public class CommandParserTest {
     }
 
     @Test
-    public void parseEventCommand() {
+    public void parseCommand_validEventCreated() {
         CommandParser parser = new CommandParser();
         try {
             assertTrue(parser.parseCommand("event meeting /at 2020-08-30") instanceof AddTaskCommand);
@@ -43,7 +43,7 @@ public class CommandParserTest {
     }
 
     @Test
-    public void parseIncompleteEventCommand() {
+    public void parseCommand_incompleteEventDescription_exceptionThrown() {
         CommandParser parser = new CommandParser();
         try {
             parser.parseCommand("event meeting");
@@ -53,7 +53,7 @@ public class CommandParserTest {
     }
 
     @Test
-    public void parseInvalidDateEventCommand() {
+    public void parseCommand_invalidEventDate_exceptionThrown() {
         CommandParser parser = new CommandParser();
         try {
             parser.parseCommand("event meeting /at 2020-8-9");
@@ -62,7 +62,8 @@ public class CommandParserTest {
         }
     }
 
-    public void parseDeadlineCommand() {
+    @Test
+    public void parseCommand_validDeadlineCreated() {
         CommandParser parser = new CommandParser();
         try {
             assertTrue(parser.parseCommand("deadline homework /by 2020-09-23") instanceof AddTaskCommand);
@@ -72,7 +73,7 @@ public class CommandParserTest {
     }
 
     @Test
-    public void parseIncompleteDeadlineCommand() {
+    public void parseCommand_incompleteDeadlineDescription_exceptionThrown() {
         CommandParser parser = new CommandParser();
         try {
             parser.parseCommand("deadline homework");
@@ -82,7 +83,7 @@ public class CommandParserTest {
     }
 
     @Test
-    public void parseInvalidDateDeadlineCommand() {
+    public void parseCommand_invalidDeadlineDate_exceptionThrown() {
         CommandParser parser = new CommandParser();
         try {
             parser.parseCommand("deadline meeting /by 2020-8-9");
@@ -92,7 +93,7 @@ public class CommandParserTest {
     }
 
     @Test
-    public void parseDeleteCommand() {
+    public void parseCommand_deleteCommand() {
         CommandParser parser = new CommandParser();
         try {
             assertTrue(parser.parseCommand("delete 3") instanceof DeleteCommand);
@@ -102,7 +103,7 @@ public class CommandParserTest {
     }
 
     @Test
-    public void parseInvalidDeleteCommand() {
+    public void parseCommand_missingtaskIndex_exceptionThrown() {
         CommandParser parser = new CommandParser();
         try {
             parser.parseCommand("delete");
@@ -112,27 +113,27 @@ public class CommandParserTest {
     }
 
     @Test
-    public void parseDoneCommand() {
+    public void parseCommand_doneCommand() {
         CommandParser parser = new CommandParser();
         try {
-            assertTrue(parser.parseCommand("done 2") instanceof DoneCommand);
+            assertTrue(parser.parseCommand("done 3") instanceof DoneCommand);
         } catch (DukeException e) {
             fail("Exception should not be thrown");
         }
     }
 
     @Test
-    public void parseInvalidDoneCommand() {
+    public void parseCommand_invalidtaskIndex_exceptionThrown() {
         CommandParser parser = new CommandParser();
         try {
-            parser.parseCommand("done");
+            parser.parseCommand("done a");
         } catch (DukeException e) {
             assertTrue(e instanceof InvalidTaskException);
         }
     }
 
     @Test
-    public void parseTodayCommand() {
+    public void parseCommand_todayCommand() {
         CommandParser parser = new CommandParser();
         try {
             assertTrue(parser.parseCommand("today") instanceof TodayCommand);
@@ -142,7 +143,7 @@ public class CommandParserTest {
     }
 
     @Test
-    public void parseListCommand() {
+    public void parseCommand_listCommand() {
         CommandParser parser = new CommandParser();
         try {
             assertTrue(parser.parseCommand("list") instanceof ListCommand);
@@ -152,7 +153,7 @@ public class CommandParserTest {
     }
 
     @Test
-    public void parseExitCommand() {
+    public void parseCommand_exitCommand() {
         CommandParser parser = new CommandParser();
         try {
             assertTrue(parser.parseCommand("bye") instanceof ExitCommand);
@@ -162,7 +163,7 @@ public class CommandParserTest {
     }
 
     @Test
-    public void parseInvalidCommand() {
+    public void parseCommand_invalidComand_exceptionThrown() {
         CommandParser parser = new CommandParser();
         try {
             parser.parseCommand("lorem ipsum");
