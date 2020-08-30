@@ -66,6 +66,6 @@ public class Task implements ITask {
 
     @Override
     public String toString() {
-        return String.format("[%s] %s", isDone ? "✓" : "✗", description);
+        return String.format("[%s] %s", isDone ? "V" : "X", description);
     }
 }
