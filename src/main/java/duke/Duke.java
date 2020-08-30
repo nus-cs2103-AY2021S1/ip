@@ -39,7 +39,7 @@ public class Duke {
                 .split("-").length == 2;
     }
 
-    public void run() throws DukeException{
+    public void run() throws DukeException {
         // Print Duke welcome message
         ui.welcomeMessage();
 
@@ -69,6 +69,7 @@ public class Duke {
                 description = input.substring(4);
                 t = new ToDo(description);
                 userTasks.addTask(t);
+                storage.saveToFile(userTasks.getTaskList());
                 ui.printTaskAddedMessage(t, userTasks.getTaskListSize());
                 continue;
             case DEADLINE:
@@ -77,6 +78,7 @@ public class Duke {
                 description = inputSplit[0].substring(8);
                 t = new Deadline(description, by);
                 userTasks.addTask(t);
+                storage.saveToFile(userTasks.getTaskList());
                 ui.printTaskAddedMessage(t, userTasks.getTaskListSize());
                 continue;
             case EVENT:
@@ -86,6 +88,7 @@ public class Duke {
                 description = inputSplit[0].substring(5);
                 t = new Event(description, at, timeRange);
                 userTasks.addTask(t);
+                storage.saveToFile(userTasks.getTaskList());
                 ui.printTaskAddedMessage(t, userTasks.getTaskListSize());
                 continue;
             case LIST:
@@ -181,7 +184,7 @@ public class Duke {
             }
 
             // Update Tasklist.txt after adding task
-            storage.saveToFile(userTasks.getTaskList());
+//            storage.saveToFile(userTasks.getTaskList());
         }
     }
 
