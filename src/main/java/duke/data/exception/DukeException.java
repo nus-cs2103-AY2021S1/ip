@@ -3,9 +3,6 @@ package src.main.java.duke.data.exception;
 /**
  * Duke exception is customised exception class for Bot
  *
- * @author Zeng Yu Ting
- * @version 3.0
- * @since 2020-15-08
  */
 public class DukeException extends Exception {
     // Type of exceptions to handle

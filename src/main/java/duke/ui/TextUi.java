@@ -9,7 +9,8 @@ import java.util.Scanner;
 
 import src.main.java.duke.commands.CommandResult;
 import src.main.java.duke.data.task.Task;
-
+import static src.main.java.duke.commons.Messages.DIVIDER_STRING;
+import static src.main.java.duke.commons.Messages.INDENT;
 
 
 /**
@@ -21,9 +22,6 @@ public class TextUi {
     public static final int DISPLAYED_INDEX_OFFSET = 1;
     private static final String MESSAGE_INDEXED_LIST_ITEM = "\t%1$d. %2$s";
 
-
-    private static String INDENT = "   ";
-    private static String DIVIDER = "----------------------------";
 
     private final Scanner in;
     private final PrintStream out;
@@ -98,11 +96,11 @@ public class TextUi {
 
     /** Shows message(s) to the user */
     public void showToUser(String... message) {
-        out.println(INDENT + DIVIDER);
+        out.println(INDENT + DIVIDER_STRING);
         for (String m : message) {
             if (m.length() > 0) {
                 out.println(INDENT + m);
-                out.println(INDENT + DIVIDER);
+                out.println(INDENT + DIVIDER_STRING);
             }
         }
     }

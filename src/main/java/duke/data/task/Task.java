@@ -5,9 +5,6 @@ import java.util.Objects;
 /**
  * The task class that represents a task.
  *
- * @author Zeng Yu Ting
- * @version 3.0
- * @since 2020-15-08
  */
 public class Task {
     protected String description;

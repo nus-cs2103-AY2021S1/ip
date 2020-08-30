@@ -6,9 +6,6 @@ import java.time.format.DateTimeFormatter;
 /**
  * The Event class that represents a event task.
  *
- * @author Zeng Yu Ting
- * @version 3.0
- * @since 2020-15-08
  */
 public class Event extends Task {
     private LocalDateTime dueDate;

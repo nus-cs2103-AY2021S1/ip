@@ -7,9 +7,6 @@ import java.time.format.DateTimeFormatter;
 /**
  * The Deadline class that represents a deadline task.
  *
- * @author Zeng Yu Ting
- * @version 3.0
- * @since 2020-15-08
  */
 public class Deadline extends Task {
     private LocalDateTime dueDate;
