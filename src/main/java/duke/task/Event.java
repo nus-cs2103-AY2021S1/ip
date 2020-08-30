@@ -1,16 +1,16 @@
-package main.java.task;
+package duke.task;
 
 import java.time.LocalDateTime;
 
-public class Deadline extends Task {
-    public Deadline(String description, LocalDateTime time) {
+public class Event extends Task {
+    public Event(String description, LocalDateTime time) {
         super(description, time);
-        super.type = "deadline";
+        super.type = "event";
     }
 
     @Override
     public String toString() {
-        return String.format("[D][%s] %s (by: %s)", (
+        return String.format("[E][%s] %s (at: %s)", (
                 super.isDone ? "\u2713" : "\u2718"),
                 super.description,
                 super.time);

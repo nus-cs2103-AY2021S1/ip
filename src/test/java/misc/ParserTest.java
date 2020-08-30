@@ -1,7 +1,7 @@
 package misc;
 
-import main.java.exception.InvalidArgumentException;
-import main.java.misc.Parser;
+import duke.exception.InvalidArgumentException;
+import duke.misc.Parser;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;

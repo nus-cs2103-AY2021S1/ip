@@ -1,4 +1,4 @@
-package main.java.exception;
+package duke.exception;
 
 public class UserException extends Exception {
     public UserException(String message) {

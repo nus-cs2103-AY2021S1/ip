@@ -1,9 +1,9 @@
-package main.java.command;
+package duke.command;
 
 import java.util.List;
 
-import main.java.misc.Ui;
-import main.java.task.TaskList;
+import duke.misc.Ui;
+import duke.task.TaskList;
 
 
 public class ListCommand extends Command {
@@ -12,7 +12,7 @@ public class ListCommand extends Command {
     }
 
     @Override
-    public void run(TaskList taskList) {
-        Ui.list(taskList.printTasks());
+    public String run(TaskList taskList) {
+        return Ui.list(taskList.printTasks());
     }
 }

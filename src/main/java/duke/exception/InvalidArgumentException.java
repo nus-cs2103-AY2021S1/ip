@@ -1,4 +1,4 @@
-package main.java.exception;
+package duke.exception;
 
 public class InvalidArgumentException extends UserException {
     public InvalidArgumentException(String message) {

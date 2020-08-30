@@ -1,12 +1,12 @@
-package main.java.task;
+package duke.task;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import main.java.exception.InvalidArgumentException;
-import main.java.misc.Parser;
-import main.java.misc.Storage;
+import duke.exception.InvalidArgumentException;
+import duke.misc.Parser;
+import duke.misc.Storage;
 
 public class TaskList {
     private List<Task> database = new ArrayList<>();

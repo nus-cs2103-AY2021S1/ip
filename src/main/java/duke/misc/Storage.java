@@ -1,4 +1,4 @@
-package main.java.misc;
+package duke.misc;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -8,7 +8,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
-import main.java.task.Task;
+import duke.task.Task;
 
 public class Storage {
     /**

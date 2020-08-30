@@ -1,11 +1,11 @@
-package main.java.misc;
+package duke.misc;
 
 import java.time.DateTimeException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import main.java.exception.InvalidArgumentException;
+import duke.exception.InvalidArgumentException;
 
 
 public class Parser {

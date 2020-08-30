@@ -1,12 +1,12 @@
-package main.java.command;
+package duke.command;
 
 import java.util.List;
 
-import main.java.exception.InvalidArgumentException;
-import main.java.exception.UserException;
-import main.java.misc.Ui;
-import main.java.task.Task;
-import main.java.task.TaskList;
+import duke.exception.InvalidArgumentException;
+import duke.exception.UserException;
+import duke.misc.Ui;
+import duke.task.Task;
+import duke.task.TaskList;
 
 
 public class TaskCommand extends Command {
@@ -15,12 +15,12 @@ public class TaskCommand extends Command {
     }
 
     @Override
-    public void run(TaskList taskList) throws UserException {
+    public String run(TaskList taskList) throws UserException {
         Task task;
         if (input.size() < 4) {
             throw new InvalidArgumentException("Missing argument(s)");
         }
         task = taskList.addTask(input);
-        Ui.task(task.toString(), taskList.count());
+        return Ui.task(task.toString(), taskList.count());
     }
 }

@@ -1,9 +1,9 @@
-package main.java.command;
+package duke.command;
 
 import java.util.List;
 
-import main.java.misc.Ui;
-import main.java.task.TaskList;
+import duke.misc.Ui;
+import duke.task.TaskList;
 
 public class ByeCommand extends Command {
     public ByeCommand(List<String> input) {
@@ -11,8 +11,8 @@ public class ByeCommand extends Command {
     }
 
     @Override
-    public void run(TaskList taskList) {
+    public String run(TaskList taskList) {
         taskList.save();
-        Ui.bye();
+        return Ui.bye();
     }
 }

@@ -1,4 +1,4 @@
-package main.java.misc;
+package duke.misc;
 
 import java.util.List;
 import java.util.Scanner;
@@ -46,9 +46,12 @@ public class Ui {
     /**
      * Close the Scanner object and farewell the user.
      */
-    public static void bye() {
+    public static String bye() {
+        return ("See you again!\n");
+    }
+
+    public static void close() {
         sc.close();
-        wrap(() -> System.out.println("See you again!"));
     }
 
     /**
@@ -56,24 +59,22 @@ public class Ui {
      *
      * @param tasks list of tasks to be printed
      */
-    public static void list(List<String> tasks) {
-        wrap(() -> {
-            System.out.println("Here are the tasks in your list: ");
-            List<String> output = tasks;
-            for (String s : output) {
-                System.out.println(s);
-            }
-        });
+    public static String list(List<String> tasks) {
+        String response = "Here are the tasks in your list: \n";
+        List<String> output = tasks;
+        for (String s : output) {
+            response += (s + "\n");
+        }
+        return response;
     }
 
-    public static void find(List<String> tasks) {
-        wrap(() -> {
-            System.out.println("Here are the matching tasks in your list: ");
-            List<String> output = tasks;
-            for (String s : output) {
-                System.out.println(s);
-            }
-        });
+    public static String find(List<String> tasks) {
+        String response = "Here are the matching tasks in your list: \n";
+        List<String> output = tasks;
+        for (String s : output) {
+            response += (s + "\n");
+        }
+        return response;
     }
 
     /**
@@ -81,11 +82,9 @@ public class Ui {
      *
      * @param task the task that is marked as finished
      */
-    public static void done(String task) {
-        wrap(() -> {
-            System.out.println("Nice! I've marked this task as done:");
-            System.out.println("    " + task);
-        });
+    public static String done(String task) {
+        return "Nice! I've marked this task as done:\n"
+                + "    " + task + "\n";
     }
 
     /**
@@ -94,21 +93,17 @@ public class Ui {
      * @param task  the task deleted
      * @param count the number of tasks left in the list.
      */
-    public static void delete(String task, int count) {
-        wrap(() -> {
-            System.out.println("Noted. I've removed this task: ");
-            System.out.println("    " + task);
-            System.out.printf("Now you have %d tasks in the list. \n", count);
-        });
+    public static String delete(String task, int count) {
+        return "Noted. I've removed this task: \n"
+                + "    " + task + "\n"
+                + "Now you have " + count + " tasks in the list. \n";
     }
 
     /**
      * Prints the response of the CLEAR command.
      */
-    public static void clear() {
-        wrap(() -> {
-            System.out.println("All tasks cleared!");
-        });
+    public static String clear() {
+        return "All tasks cleared!\n";
     }
 
     /**
@@ -117,11 +112,9 @@ public class Ui {
      * @param task  the task created
      * @param count the current number of tasks in the list
      */
-    public static void task(String task, int count) {
-        wrap(() -> {
-            System.out.println("Got it. I've added this task: ");
-            System.out.println("    " + task);
-            System.out.printf("Now you have %d tasks in the list. \n", count);
-        });
+    public static String task(String task, int count) {
+        return "Got it. I've added this task: \n"
+                + "    " + task + "\n"
+                + "Now you have " + count + " tasks in the list. \n";
     }
 }
