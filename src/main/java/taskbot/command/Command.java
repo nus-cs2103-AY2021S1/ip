@@ -22,13 +22,12 @@ public abstract class Command {
     }
 
     /**
-     * Executes the relevant operation tied to the Command type.
+     * Performs the relevant operation tied to the Command type on the given task list.
      *
      * @param taskList The task list to be operated on.
-     * @param ui The UI that can be operated on.
      * @throws TaskbotException Any exception thrown by the Commands.
      */
-    public abstract void execute(TaskList taskList, Ui ui) throws TaskbotException;
+    public abstract String execute(TaskList taskList) throws TaskbotException;
 
     /**
      * @return A boolean saying whether it is an ExitCommand.

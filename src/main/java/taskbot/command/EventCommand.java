@@ -29,8 +29,8 @@ public class EventCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList taskList, Ui ui) throws TaskbotException {
-        taskList.addEventTask(task);
+    public String execute(TaskList taskList) throws TaskbotException {
+        return taskList.addEventTask(task);
     }
 
     @Override

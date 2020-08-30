@@ -29,8 +29,8 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList taskList, Ui ui) throws TaskbotException {
-        taskList.deleteTask(taskIndex);
+    public String execute(TaskList taskList) throws TaskbotException {
+        return taskList.deleteTask(taskIndex);
     }
 
     @Override

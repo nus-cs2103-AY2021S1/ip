@@ -2,7 +2,6 @@ package taskbot.command;
 
 import taskbot.exceptions.TaskbotException;
 import taskbot.task.TaskList;
-import taskbot.ui.Ui;
 
 /**
  * Encapsulates a command to add a deadline task.
@@ -24,8 +23,9 @@ public class DeadlineCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList taskList, Ui ui) throws TaskbotException {
+    public String execute(TaskList taskList) throws TaskbotException {
         taskList.addDeadlineTask(task);
+        return null;
     }
 
     @Override

@@ -26,20 +26,15 @@ public class FindCommand extends Command {
     }
 
     /**
-     * @return The keyword stored within this command.
+     * @return The keywords stored within this command.
      */
     public String[] getKeywords() {
         return keywords;
     }
 
-    /**
-     * Calls the given task list to find the keyword.
-     * @param taskList The task list given.
-     * @param ui The ui of TaskBot
-     */
     @Override
-    public void execute(TaskList taskList, Ui ui) {
-        taskList.findTasks(keywords);
+    public String execute(TaskList taskList) {
+        return taskList.findTasks(keywords);
     }
 
     @Override

@@ -8,6 +8,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import taskbot.logic.Taskbot;
+
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -22,7 +24,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Button sendButton;
 
-    private Ui ui;
+    private Taskbot taskbot;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
@@ -32,8 +34,8 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
-    public void setDuke(Ui ui) {
-        this.ui = ui;
+    public void setTaskbot(Taskbot taskbot) {
+        this.taskbot = taskbot;
     }
 
     /**
@@ -43,7 +45,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        String response = ui.getResponse(input);
+        String response = taskbot.getResponse(input);
         DialogBox db = DialogBox.getUserDialog(input, userImage);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),

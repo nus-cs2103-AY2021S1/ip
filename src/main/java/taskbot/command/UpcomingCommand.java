@@ -28,8 +28,8 @@ public class UpcomingCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList taskList, Ui ui) {
-        taskList.getUpcoming(days);
+    public String execute(TaskList taskList) {
+        return taskList.getUpcoming(days);
     }
 
     @Override

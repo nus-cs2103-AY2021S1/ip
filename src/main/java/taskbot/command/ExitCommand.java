@@ -1,7 +1,6 @@
 package taskbot.command;
 
 import taskbot.task.TaskList;
-import taskbot.ui.Ui;
 
 /**
  * Encapsulates a command to end the program.
@@ -15,9 +14,9 @@ public class ExitCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList taskList, Ui ui) {
-        // Prints a farewell message to console and the program terminates
-        ui.sayBye();
+    public String execute(TaskList taskList) {
+        // Returns a farewell message
+        return "Goodbye, I await your next visit.";
     }
 
     @Override

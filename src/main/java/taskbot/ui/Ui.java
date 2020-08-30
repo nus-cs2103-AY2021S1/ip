@@ -161,13 +161,6 @@ public class Ui extends Application {
     }
 
     /**
-     * Prints a farewell message to the console.
-     */
-    public void sayBye() {
-        System.out.println("Goodbye, I await your next visit.");
-    }
-
-    /**
      * Prints the error message to console.
      *
      * @param err The error message

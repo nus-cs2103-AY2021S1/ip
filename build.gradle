@@ -51,7 +51,7 @@ task cleanTest(type: GradleBuild) {
 }
 
 application {
-    mainClassName = "taskbot.main.Taskbot"
+    mainClassName = "taskbot.main.Main"
 }
 
 shadowJar {
