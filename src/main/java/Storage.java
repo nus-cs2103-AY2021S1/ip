@@ -1,6 +1,7 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -67,7 +68,7 @@ public class Storage {
             }
             bufferedReader.close();
             return outputTaskArray;
-        } catch (Exception error) {
+        } catch (IOException error) {
             throw new DukeException("'duke.txt' cannot be loaded from the specified file path. Please try again.");
         }
 
