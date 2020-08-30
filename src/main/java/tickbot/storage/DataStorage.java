@@ -1,6 +1,11 @@
 package tickbot.storage;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -12,9 +17,11 @@ import com.opencsv.CSVWriter;
 
 import net.harawata.appdirs.AppDirs;
 import net.harawata.appdirs.AppDirsFactory;
-
 import tickbot.exception.CorruptedDataException;
-import tickbot.task.*;
+import tickbot.task.Deadline;
+import tickbot.task.Event;
+import tickbot.task.Task;
+import tickbot.task.Todo;
 
 /**
  * The class to represent the data storage.
@@ -68,7 +75,7 @@ public class DataStorage {
         }
         return tasks;
     }
-    
+
     /**
      * Write the task list into the application data directory.
      * @param tasks the task list to write.

@@ -10,6 +10,12 @@ public abstract class Task {
     private final LocalDate time;
     private boolean completed;
 
+    Task(boolean completed, String content, LocalDate time) {
+        this.content = content;
+        this.completed = completed;
+        this.time = time;
+    }
+
     /**
      * The string to represent the type of the task (e.g. T, D, E, ...)
      * @return the type string.
@@ -20,12 +26,6 @@ public abstract class Task {
      * @return the word used, {@code null} if none.
      */
     public abstract String getTimeMarker();
-
-    Task(boolean completed, String content, LocalDate time) {
-        this.content = content;
-        this.completed = completed;
-        this.time = time;
-    }
 
     /**
      * Get the content of the task.
@@ -63,7 +63,7 @@ public abstract class Task {
     public String toString() {
         String timeMarker = getTimeMarker();
         if (timeMarker != null) {
-            return String.format("[%s][%s] %s (%s: %s)", getTaskType(), 
+            return String.format("[%s][%s] %s (%s: %s)", getTaskType(),
                     getCompleteMark(), getContent(), timeMarker, getTime());
         } else {
             return String.format("[%s][%s] %s", getTaskType(),

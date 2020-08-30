@@ -7,6 +7,9 @@ import java.time.LocalDate;
 import org.junit.jupiter.api.Test;
 
 public class TaskTests {
+    /**
+     * Test if task can process content with spaces.
+     */
     @Test
     public void testSpace() {
         LocalDate date = LocalDate.parse("2020-01-01");
@@ -14,6 +17,9 @@ public class TaskTests {
         assertEquals("[D][✘] with space (by: 2020-01-01)", deadline.toString());
     }
 
+    /**
+     * Test if task can process content with commas.
+     */
     @Test
     public void testComma() {
         LocalDate date = LocalDate.parse("2020-01-01");
@@ -21,6 +27,9 @@ public class TaskTests {
         assertEquals("[E][✘] with, comma (at: 2020-01-01)", event.toString());
     }
 
+    /**
+     * Test if task can process content with back slashes.
+     */
     @Test
     public void testBackSlash() {
         Todo todo = new Todo(true, "with \\ backslash");

@@ -8,8 +8,6 @@ import java.util.Map.Entry;
  * The class to represent output in the text UI.
  */
 public class Output {
-    private Output() { } // not meant to be initialized
-
     private static Map<String, String> usages = new HashMap<>() {
         private static final long serialVersionUID = 1L;
         {
@@ -23,6 +21,8 @@ public class Output {
             put("event", "event <content> /at <YYYY-MM-DD>");
         }
     };
+
+    private Output() { } // not meant to be initialized
 
     /**
      * Display a message in text UI.

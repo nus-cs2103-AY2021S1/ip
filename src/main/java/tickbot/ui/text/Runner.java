@@ -7,10 +7,13 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.Map.Entry;
 import java.util.function.BiFunction;
 
-import tickbot.task.*;
+import tickbot.task.Deadline;
+import tickbot.task.Event;
+import tickbot.task.Task;
+import tickbot.task.TaskList;
+import tickbot.task.Todo;
 
 /**
  * The class to represent the runner of commands.
@@ -85,14 +88,14 @@ public class Runner {
         for (int i = 1; i < args.length; i++) {
             searchText += args[i];
         }
-        class Entry { 
-            int index;
-            Task task;
+        class Entry {
+            private int index;
+            private Task task;
             Entry(int index, Task task) {
                 this.index = index;
                 this.task = task;
             }
-         }
+        }
 
         List<Entry> result = new ArrayList<>();
         for (int i = 0; i < tasks.size(); i++) {
@@ -157,5 +160,4 @@ public class Runner {
             Output.printMessage("Bad date format. Please input in YYYY-MM-DD format.");
         }
     }
-
 }
