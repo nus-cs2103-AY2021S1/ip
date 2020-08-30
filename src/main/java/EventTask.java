@@ -1,11 +1,11 @@
 public class EventTask extends Task{
     protected DukeDate due;
 
-    public EventTask(String description, String due) {
+    public EventTask(String description, String due) throws DukeException {
         super(description);
         this.due = new DukeDate(due);
     }
-    public EventTask(String description, String due, boolean isCompleted) {
+    public EventTask(String description, String due, boolean isCompleted) throws DukeException {
         super(description);
         this.due = new DukeDate(due);
         this.isCompleted = isCompleted;

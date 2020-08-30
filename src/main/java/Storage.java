@@ -47,15 +47,15 @@ public class Storage {
     /** Helper: generate the Tasks based on the text file.
      * @return TaskList that contains the collection of Tasks in the storage.
      */
-    public ArrayList<Task> generateTaskList () throws DukeException {
+    public TaskList generateTaskList () throws DukeException {
         try {
-            ArrayList<Task> taskList = new ArrayList<>();
+            ArrayList<Task> tasks = new ArrayList<>();
             Scanner scanner = new Scanner(file);
             while (scanner.hasNext()) {
                 Task task = generateTaskFromFileString(scanner.nextLine());
-                taskList.add(task);
+                tasks.add(task);
             }
-            return taskList;
+            return new TaskList(tasks);
 
 
         } catch (FileNotFoundException e) {
@@ -67,7 +67,7 @@ public class Storage {
     /** Initialise the storage for Duke.
      * @return TaskList that contains the collection of Tasks in the storage.
      */
-    public ArrayList<Task> init() throws DukeException {
+    public TaskList init() throws DukeException {
         try {
             createFileIfNotPresent();
             return generateTaskList();
@@ -80,7 +80,7 @@ public class Storage {
     /** Updates the file in storage based on new task list.
      * @param taskList the list of new tasks
      */
-    public void updateFile(ArrayList<Task> taskList) throws IOException {
+    public void updateFile(TaskList taskList) throws IOException {
         FileWriter fileWriter = new FileWriter(filePath);
         for (int index = 0; index < taskList.size(); index++) {
             Task task = taskList.get(index);

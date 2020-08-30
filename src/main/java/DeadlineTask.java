@@ -1,11 +1,11 @@
 public class DeadlineTask extends Task {
     protected DukeDate due;
 
-    public DeadlineTask(String description, String due) {
+    public DeadlineTask(String description, String due) throws DukeException {
         super(description);
         this.due = new DukeDate(due);
     }
-    public DeadlineTask(String description, String due, boolean isCompleted) {
+    public DeadlineTask(String description, String due, boolean isCompleted) throws DukeException {
         super(description);
         this.due = new DukeDate(due);
         this.isCompleted = isCompleted;

@@ -1,13 +1,16 @@
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 
 public class DukeDate {
     private LocalDate localDate;
 
-    public DukeDate(String datetimeString) {
-        System.out.println(datetimeString);
+    public DukeDate(String datetimeString) throws DukeException {
         String[] datetimeArray = datetimeString.split(" ");
-        System.out.println(datetimeArray[1].trim());
-        this.localDate = LocalDate.parse(datetimeArray[1].trim());
+        try {
+            this.localDate = LocalDate.parse(datetimeArray[0].trim());
+        } catch (DateTimeParseException e) {
+            throw new DukeException("I can't really understand the due dates.");
+        }
     }
 
     @Override
