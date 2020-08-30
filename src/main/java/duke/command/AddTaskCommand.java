@@ -43,7 +43,7 @@ public class AddTaskCommand extends Command {
     /**
      * Executes the AddTaskCommand.
      * The Task is first created and added the TaskList, before being stored in local storage.
-     * Then, a message is printed to indicate the Task was succesfully created
+     * Then, a message is printed to indicate the Task was successfully created.
      * @param list A TaskList containing the user's Tasks.
      * @param storage A Storage object that handles the storage of tasks in local storage, allowing them to persist.
      * @throws StorageException if Task cannot be stored in local storage.
