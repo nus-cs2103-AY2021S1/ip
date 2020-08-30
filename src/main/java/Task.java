@@ -18,6 +18,6 @@ public class Task {
     }
 
     public void printDescription() {
-        System.out.println("     [" + getStatusIcon() + "] " + description);
+        System.out.println("[" + getStatusIcon() + "] " + description);
     }
 }
