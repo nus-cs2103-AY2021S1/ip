@@ -1,15 +1,20 @@
 package duke.tasks;
 
+import duke.Ui;
+
 import duke.tool.Storage;
 import duke.tool.TaskList;
-
-import duke.Ui;
 
 /**
  * Represent a done task.
  */
-public class Done extends Task{
-    int i;
+public class Done extends Task {
+    private int i;
+
+    /**
+     * Constructs a done task.
+     * @param i ith item in the list.
+     */
     public Done(int i) {
         super("done", true);
         this.i = i;

@@ -1,17 +1,22 @@
 package duke.tasks;
 
+import duke.Ui;
 import duke.tool.Storage;
 import duke.tool.TaskList;
-import duke.Ui;
 
 /**
  * The class to Represent a task.
  */
 public class Task {
+    public boolean isExit;
     protected String name;
     protected boolean isDone;
-    public boolean isExit;
 
+    /**
+     * Constructs a task.
+     * @param name
+     * @param isDone
+     */
     public Task(String name, boolean isDone) {
         this.name = name;
         this.isDone = isDone;
@@ -48,7 +53,7 @@ public class Task {
      * @return
      */
     public String toString() {
-        return "[" + this.getStatusIcon() +"] " + this.name;
+        return "[" + this.getStatusIcon() + "] " + this.name;
     }
 
     /**

@@ -1,13 +1,13 @@
 package duke.tasks;
 
+import duke.Ui;
 import duke.tool.Storage;
 import duke.tool.TaskList;
-import duke.Ui;
 
 /**
  * Represent a to do task.
  */
-public class Todo extends Task{
+public class Todo extends Task {
     public Todo(String description, boolean isDone) {
         super(description, isDone);
     }

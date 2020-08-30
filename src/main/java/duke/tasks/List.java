@@ -1,14 +1,16 @@
 package duke.tasks;
 
+import duke.Ui;
 import duke.tool.Storage;
 import duke.tool.TaskList;
-
-import duke.Ui;
 
 /**
  * Represent the list task.
  */
-public class List extends Task{
+public class List extends Task {
+    /**
+     * Constructs a list command.
+     */
     public List() {
         super("list", true);
     }

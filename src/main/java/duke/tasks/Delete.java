@@ -1,15 +1,19 @@
 package duke.tasks;
 
+import duke.Ui;
 import duke.tool.Storage;
 import duke.tool.TaskList;
-
-import duke.Ui;
 
 /**
  * Represent a delete task.
  */
-public class Delete extends Task{
-    int i;
+public class Delete extends Task {
+    private int i;
+
+    /**
+     * Constructs a Delete task.
+     * @param i ith item in the list.
+     */
     public Delete(int i) {
         super("delete", true);
         this.i = i;

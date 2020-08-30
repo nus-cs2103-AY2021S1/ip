@@ -1,11 +1,11 @@
 package duke.tasks;
 
-import duke.tool.Storage;
-import duke.tool.TaskList;
-import duke.Ui;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+
+import duke.Ui;
+import duke.tool.Storage;
+import duke.tool.TaskList;
 
 /**
  * Represents a deadline task.
@@ -13,13 +13,19 @@ import java.time.format.DateTimeFormatter;
 public class Deadline extends Task {
     protected LocalDateTime by;
 
+    /**
+     * Constructs a deadline task.
+     * @param description
+     * @param by
+     * @param isDone
+     */
     public Deadline(String description, LocalDateTime by, Boolean isDone) {
         super(description, isDone);
         this.by = by;
     }
 
     /**
-     * Mark the deadline task as done,
+     * Marks the deadline task as done,
      * @return
      */
     @Override
@@ -29,8 +35,8 @@ public class Deadline extends Task {
     }
 
     /**
-     * Add the task into the list and print the added message.
-     * Write the changes into the file.
+     * Adds the task into the list and print the added message.
+     * Writes the changes into the file.
      * @param tasklist
      * @param ui
      * @param storage
@@ -44,7 +50,7 @@ public class Deadline extends Task {
 
 
     /**
-     * String representation of the deadline task.
+     * Shows string representation of the deadline task.
      * @return
      */
     @Override
@@ -54,14 +60,14 @@ public class Deadline extends Task {
     }
 
     /**
-     * Formatted String representation of the task.
+     * Shows formatted String representation of the task.
      * @return
      */
     @Override
     public String fileFormattedString() {
         String doneOrNot = isDone ? "1" : "0";
-        return "D | " + doneOrNot + " | " + this.name + " | " +
-                by.format(DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm"));
+        return "D | " + doneOrNot + " | " + this.name + " | "
+                + by.format(DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm"));
     }
 
 }

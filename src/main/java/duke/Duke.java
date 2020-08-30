@@ -1,13 +1,12 @@
 package duke;
 
+import java.io.IOException;
+
 import duke.exceptions.DukeException;
 import duke.tasks.Task;
-
 import duke.tool.Parser;
 import duke.tool.Storage;
 import duke.tool.TaskList;
-
-import java.io.IOException;
 
 /**
  * The Duke server which can mange tasks.

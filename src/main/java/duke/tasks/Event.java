@@ -1,11 +1,11 @@
 package duke.tasks;
 
-import duke.tool.Storage;
-import duke.tool.TaskList;
-import duke.Ui;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+
+import duke.Ui;
+import duke.tool.Storage;
+import duke.tool.TaskList;
 
 /**
  * Represent a event task.
@@ -13,6 +13,12 @@ import java.time.format.DateTimeFormatter;
 public class Event extends Task {
     protected LocalDateTime at;
 
+    /**
+     * Constructs a Event.
+     * @param description
+     * @param at
+     * @param isDone
+     */
     public Event(String description, LocalDateTime at, Boolean isDone) {
         super(description, isDone);
         this.at = at;
@@ -48,8 +54,8 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " +
-                at.format(DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm"))  + ")";
+        return "[E]" + super.toString() + " (at: "
+                + at.format(DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm"))  + ")";
     }
 
     /**
@@ -59,8 +65,8 @@ public class Event extends Task {
     @Override
     public String fileFormattedString() {
         String doneOrNot = isDone ? "1" : "0";
-        return "E | " + doneOrNot + " | " + this.name + " | " +
-                at.format(DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm"));
+        return "E | " + doneOrNot + " | " + this.name + " | "
+                + at.format(DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm"));
     }
 
 }

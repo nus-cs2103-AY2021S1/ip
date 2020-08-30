@@ -1,12 +1,20 @@
 package duke.tasks;
 
+import duke.Ui;
 import duke.tool.Storage;
 import duke.tool.TaskList;
-import duke.Ui;
 
-public class Find extends Task{
+/**
+ * The find command when user wants to find
+ * the tasks in the list.
+ */
+public class Find extends Task {
     protected String toFind;
 
+    /**
+     * Constructs a find task.
+     * @param toFind
+     */
     public Find(String toFind) {
         super("find", false);
         this.toFind = toFind;

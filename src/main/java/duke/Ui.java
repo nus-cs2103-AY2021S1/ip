@@ -1,9 +1,9 @@
 package duke;
 
-import duke.tool.TaskList;
-import duke.tasks.Task;
-
 import java.util.Scanner;
+
+import duke.tasks.Task;
+import duke.tool.TaskList;
 
 /**
  * The class deals with interactions with the user.
@@ -76,9 +76,9 @@ public class Ui {
      * @param i ith task.
      */
     public void showDoneMessage(TaskList tasklist, int i) {
-        printFormmat(spaceBeforeOder() + "Nice! I've marked this task as done:\n" +
-                spaceBeforeOder() + tasklist.getTask(i) + "\n" + spaceBeforeOder() + "Now you have " +
-                tasklist.getNumOfTasks() + " tasks in the list.");
+        printFormmat(spaceBeforeOder() + "Nice! I've marked this task as done:\n"
+                + spaceBeforeOder() + tasklist.getTask(i) + "\n" + spaceBeforeOder() + "Now you have "
+                + tasklist.getNumOfTasks() + " tasks in the list.");
     }
 
     /**
@@ -87,9 +87,9 @@ public class Ui {
      * @param removed the removed task.
      */
     public void showDeleteMessage(TaskList tasklist, Task removed) {
-        printFormmat(spaceBeforeOder() + "Noted. I've removed this task:\n" +
-                spaceBeforeOder() + removed + "\n" + spaceBeforeOder() + "Now you have " +
-                tasklist.getNumOfTasks() + " tasks in the list.");
+        printFormmat(spaceBeforeOder() + "Noted. I've removed this task:\n"
+                + spaceBeforeOder() + removed + "\n" + spaceBeforeOder() + "Now you have "
+                + tasklist.getNumOfTasks() + " tasks in the list.");
     }
 
     /**
@@ -98,10 +98,10 @@ public class Ui {
      * @param num current number of tasks in the list.
      */
     public void showAddedMessage(TaskList tasklist, int num) {
-        printFormmat(spaceBeforeOder() + "Got it. I've added this task:\n" +
-                spaceBeforeOder() + tasklist.getTask(num) +
-                "\n" + spaceBeforeOder() + "Now you have " +
-                (num + 1) + " tasks in the list.");
+        printFormmat(spaceBeforeOder() + "Got it. I've added this task:\n"
+                + spaceBeforeOder() + tasklist.getTask(num)
+                + "\n" + spaceBeforeOder() + "Now you have "
+                + (num + 1) + " tasks in the list.");
     }
 
     /**
@@ -112,8 +112,8 @@ public class Ui {
         System.out.println(seperateLine());
         System.out.println(spaceBeforeOder() + "Here are the tasks in your list:");
         for (int i = 0; i < tasklist.getNumOfTasks(); i++) {
-            System.out.println(spaceBeforeOder() + (i + 1) + ". " +
-                    tasklist.getTask(i));
+            System.out.println(spaceBeforeOder() + (i + 1) + ". "
+                    + tasklist.getTask(i));
         }
         System.out.println(seperateLine());
     }
@@ -127,10 +127,10 @@ public class Ui {
         System.out.println(seperateLine());
         System.out.println(spaceBeforeOder() + "Here are the matching tasks in your list:");
         int count = 1;
-        for (int i = 0; i < tasklist.getNumOfTasks(); i++){
+        for (int i = 0; i < tasklist.getNumOfTasks(); i++) {
             if (tasklist.getTask(i).getName().contains(toFind)) {
-                System.out.println(spaceBeforeOder() + count + ". " +
-                        tasklist.getTask(i));
+                System.out.println(spaceBeforeOder() + count + ". "
+                        + tasklist.getTask(i));
                 count++;
             }
         }
@@ -141,7 +141,7 @@ public class Ui {
      * Print the goodbye message.
      */
     public void showGoodbye() {
-        printFormmat(spaceBeforeOder() + "Bye. Very nice to meet you!\n" +
-                spaceBeforeOder() + "Hope to see you again soon!");
+        printFormmat(spaceBeforeOder() + "Bye. Very nice to meet you!\n"
+                + spaceBeforeOder() + "Hope to see you again soon!");
     }
 }
