@@ -2,6 +2,8 @@ package duke.task;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 /**
  * This class represents a list of Tasks. Tasks can only be modified through this class.
@@ -12,7 +14,8 @@ public class TaskList {
 
     public TaskList() {
         list = new ArrayList<>();
-        saveFunction = (list) -> {};
+        saveFunction = (list) -> {
+        };
     }
 
     /**
@@ -73,5 +76,24 @@ public class TaskList {
     public void markAsDone(int index) {
         get(index).markAsDone();
         saveFunction.save(this);
+    }
+
+    /**
+     * Returns the Tasks in this TaskList as a Stream.
+     *
+     * @return a Stream of Tasks
+     */
+    public Stream<Task> toStream() {
+        return IntStream.range(0, size()).mapToObj(list::get);
+    }
+
+    /**
+     * Returns the Tasks in this TaskList as a List. It is not possible to modify the Tasks in the returned list,
+     * and changes in the returned list will also not be reflected in this TaskList.
+     *
+     * @return a List of Tasks
+     */
+    public List<Task> toList() {
+        return new ArrayList<>(list);
     }
 }

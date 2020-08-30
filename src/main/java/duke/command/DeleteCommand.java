@@ -8,31 +8,28 @@ import duke.task.TaskList;
  * This Command will delete a Task from the TaskList.
  */
 public class DeleteCommand implements Command {
-    private int index;
+    private int taskNumber;
 
     /**
      * Creates a DeleteCommand.
      *
-     * @param index the index of the Task to delete
+     * @param taskNumber the number (1-based) of the Task to delete
      */
-    public DeleteCommand(int index) {
-        this.index = index;
+    public DeleteCommand(int taskNumber) {
+        this.taskNumber = taskNumber;
     }
 
     @Override
     public void execute(Bot bot, TaskList list) {
-        if (list.size() == 0) {
-            bot.sayLine("Nothing to delete, your list is empty.");
-        } else if (index < 0) { // TODO: reduce repetition in validating list index. See AddCommand.
-            bot.sayLine("That's not a valid number, please give a number from 1 to " + list.size() + ".");
-        } else if (index >= list.size()) {
-            bot.sayLine(String.format("That's not a valid number, you only have %d item(s) in your list.",
-                    list.size()));
-        } else {
-            Task t = list.delete(index);
-            bot.sayLine("Noted. I've removed this task:");
-            bot.sayLine("  " + t.displayString());
-            bot.sayLine("Now you have " + list.size() + " item(s) in your list.");
+        try {
+            Helper.validateTaskNumber(taskNumber, list);
+        } catch (InvalidTaskNumberException e) {
+            bot.sayLine(e.getMessage());
+            return;
         }
+        Task t = list.delete(taskNumber - 1);
+        bot.sayLine("Noted. I've removed this task:");
+        bot.sayLine("  " + t.displayString());
+        bot.sayLine(Helper.getNumberOfTasksString(list));
     }
 }

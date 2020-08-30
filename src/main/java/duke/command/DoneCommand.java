@@ -8,35 +8,32 @@ import duke.task.TaskList;
  * This Command will mark a Task as done.
  */
 public class DoneCommand implements Command {
-    private int index;
+    private int taskNumber;
 
     /**
      * Creates a DoneCommand.
      *
-     * @param index index of the Task to mark as done
+     * @param taskNumber the number (1-based) of the Task to mark as done
      */
-    public DoneCommand(int index) {
-       this.index = index;
+    public DoneCommand(int taskNumber) {
+       this.taskNumber = taskNumber;
     }
 
     @Override
     public void execute(Bot bot, TaskList list) {
-        if (list.size() == 0) {
-            bot.sayLine("Your list is empty.");
-        } else if (index < 0) {
-            bot.sayLine("That's not a valid number, please give a number from 1 to " + list.size() + ".");
-        } else if (index >= list.size()) {
-            bot.sayLine(String.format("That's not a valid number, you only have %d item(s) in your list.",
-                    list.size()));
-        } else {
-            Task t = list.get(index);
-            if (t.isDone()) {
-                bot.sayLine("You've already completed this task:");
-            } else {
-                list.markAsDone(index);
-                bot.sayLine("Nice! I've marked this task as done:");
-            }
-            bot.sayLine("  " + t.displayString());
+        try {
+            Helper.validateTaskNumber(taskNumber, list);
+        } catch (InvalidTaskNumberException e) {
+            bot.sayLine(e.getMessage());
+            return;
         }
+        Task t = list.get(taskNumber - 1);
+        if (t.isDone()) {
+            bot.sayLine("You've already completed this task:");
+        } else {
+            list.markAsDone(taskNumber);
+            bot.sayLine("Nice! I've marked this task as done:");
+        }
+        bot.sayLine("  " + t.displayString());
     }
 }

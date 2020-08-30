@@ -24,6 +24,6 @@ public class AddCommand implements Command {
         list.add(task);
         bot.sayLine("Got it, I've added this task:");
         bot.sayLine("  " + task.displayString());
-        bot.sayLine("Now you have " + list.size() + " item(s) in your list.");
+        bot.sayLine(Helper.getNumberOfTasksString(list));
     }
 }

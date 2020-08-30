@@ -36,11 +36,11 @@ public class Parser {
                 ensureNoArgs(args, command);
                 return new ListCommand();
             } else if (command.equals("done")) {
-                int index = parseTaskNumber(args, "you have completed", "done 1") - 1;
-                return new DoneCommand(index);
+                int taskNumber = parseTaskNumber(args, "you have completed", "done 1");
+                return new DoneCommand(taskNumber);
             } else if (command.equals("delete")) {
-                int index = parseTaskNumber(args, "you want to remove", "delete 1") - 1;
-                return new DeleteCommand(index);
+                int taskNumber = parseTaskNumber(args, "you want to remove", "delete 1");
+                return new DeleteCommand(taskNumber);
             } else if (command.equals("todo")) {
                 if (args.isEmpty()) {
                     return new ErrorCommand(
@@ -143,6 +143,7 @@ public class Parser {
 
     private static Date parseDate(String dateString) throws DukeParsingException {
         final DateFormat dateOnly = new SimpleDateFormat("d/M/y");
+        // TODO: improve time parsing - this accepts nonsense time formats eg. 27:00. Hm also does not work for some reason.
         final DateFormat withTime = new SimpleDateFormat("d/M/y H:m");
 
         try {

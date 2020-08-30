@@ -7,9 +7,6 @@ import duke.ui.Ui;
 
 import java.util.Scanner;
 
-// TODO: setup code style check
-// TODO: consider whether Commands should throw Exceptions, or stay as they are now
-
 /**
  * This is the main class. Start Duke by running the main method.
  */
