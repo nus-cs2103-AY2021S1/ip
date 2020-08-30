@@ -53,8 +53,30 @@ public class InputParser {
             return CommandType.EVENT;
         }
 
-        if (input.equals("list")) {
-            return CommandType.LIST;
+        if (input.startsWith("list ")) {
+            if (input.equals("list all")) {
+                return CommandType.LIST_ALL_TASKS;
+            }
+
+            if (input.equals("list all done")) {
+                return CommandType.LIST_ALL_DONE;
+            }
+
+            if (input.equals("list all not done")) {
+                return CommandType.LIST_ALL_NOT_DONE;
+            }
+
+            if (input.equals("list all todos")) {
+                return CommandType.LIST_ALL_TODOS;
+            }
+
+            if (input.equals("list all deadlines")) {
+                return CommandType.LIST_ALL_DEADLINES;
+            }
+
+            if (input.equals("list all events")) {
+                return CommandType.LIST_ALL_EVENTS;
+            }
         }
 
         if (input.startsWith("done ")) {

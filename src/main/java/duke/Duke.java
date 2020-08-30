@@ -1,5 +1,7 @@
 package duke;
 
+import java.util.ArrayList;
+
 public class Duke {
 
     private Ui ui;
@@ -31,6 +33,11 @@ public class Duke {
             System.out.println(ui.getUserPrompt());
             input = inputParser.getInput();
             System.out.println();
+            if (input.equals("get all events")) {
+                ArrayList<Task> events = new TaskFinder().findAllEvents(userTasks.getTaskList());
+                ui.printAllEvents(events);
+                continue;
+            }
 
             command = inputParser.parseInput(input);
 
@@ -64,8 +71,33 @@ public class Duke {
                 storage.saveToFile(userTasks.getTaskList());
                 ui.printTaskAddedMessage(t, userTasks.getTaskListSize());
                 continue;
-            case LIST:
-                ui.printListOfTasks(userTasks.getTaskList());
+            case LIST_ALL_TASKS:
+                ui.printAllTasks(userTasks.getTaskList());
+                continue;
+            case LIST_ALL_DONE:
+                ArrayList<Task> tasksDone = new TaskFinder()
+                        .findAllDone(userTasks.getTaskList());
+                ui.printAllEvents(tasksDone);
+                continue;
+            case LIST_ALL_NOT_DONE:
+                ArrayList<Task> tasksNotDone = new TaskFinder()
+                        .findAllNotDone(userTasks.getTaskList());
+                ui.printAllEvents(tasksNotDone);
+                continue;
+            case LIST_ALL_TODOS:
+                ArrayList<Task> toDos = new TaskFinder()
+                        .findAllToDos(userTasks.getTaskList());
+                ui.printAllEvents(toDos);
+                continue;
+            case LIST_ALL_DEADLINES:
+                ArrayList<Task> deadlines = new TaskFinder()
+                        .findAllDeadlines(userTasks.getTaskList());
+                ui.printAllEvents(deadlines);
+                continue;
+            case LIST_ALL_EVENTS:
+                ArrayList<Task> events = new TaskFinder()
+                        .findAllEvents(userTasks.getTaskList());
+                ui.printAllEvents(events);
                 continue;
             case DONE:
                 // Get the index stated after "done" by parsing the string

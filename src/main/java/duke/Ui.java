@@ -88,18 +88,6 @@ public class Ui {
     }
 
     /**
-     * Prints all the task in the task list.
-     *
-     * @param userTasks This is the task list to be printed.
-     * @return Nothing.
-     */
-    public void printListOfTasks(ArrayList<Task> userTasks) {
-        System.out.println(SERVANT_SPEAK
-                + "    Here are your tasks your Majesty:");
-        System.out.println(new TaskList(userTasks).toString());
-    }
-
-    /**
      * Prints a message to indicate that the task has been marked as done.
      * Prints back to the console the task that was marked as done.
      *
@@ -123,6 +111,82 @@ public class Ui {
         System.out.println(SERVANT_SPEAK
                 + "    As you wish Sire. I removed this task:\n"
                 + "       " + task.toString());
+    }
+
+    /**
+     * Prints all the task in the task list.
+     *
+     * @param userTasks This is the task list to be printed.
+     * @return Nothing.
+     */
+    public void printAllTasks(ArrayList<Task> userTasks) {
+        System.out.println(SERVANT_SPEAK
+                + "    Here are your tasks your Majesty:");
+        System.out.println(new TaskList(userTasks).toString());
+    }
+
+    /**
+     * Prints all the tasks in the task list
+     * that were marked as done.
+     *
+     * @param userTasksDone This is the list of tasks to be printed.
+     * @return Nothing.
+     */
+    public void printAllTasksDone(ArrayList<Task> userTasksDone) {
+        System.out.println(SERVANT_SPEAK
+                + "    Here are all the tasks that you have"
+                + " done your Majesty:");
+        System.out.println(new TaskList(userTasksDone).toString());
+    }
+
+    /**
+     * Prints all the tasks in the task list
+     * that were not marked as done.
+     *
+     * @param userTasksNotDone This is the list of tasks to be printed.
+     * @return Nothing.
+     */
+    public void printAllTasksNotDone(ArrayList<Task> userTasksNotDone) {
+        System.out.println(SERVANT_SPEAK
+                + "    Here are all the tasks that you have"
+                + " not done your Majesty:");
+        System.out.println(new TaskList(userTasksNotDone).toString());
+    }
+
+    /**
+     * Prints all the to do tasks in the task list.
+     *
+     * @param userToDos This is the list of to do to do tasks to be printed.
+     * @return Nothing.
+     */
+    public void printAllToDos(ArrayList<Task> userToDos) {
+        System.out.println(SERVANT_SPEAK
+                + "    Here are all your to do tasks your Majesty:");
+        System.out.println(new TaskList(userToDos).toString());
+    }
+
+    /**
+     * Prints all the events in the task list.
+     *
+     * @param userDeadlines This is the list of deadlines to be printed.
+     * @return Nothing.
+     */
+    public void printAllDeadlines(ArrayList<Task> userDeadlines) {
+        System.out.println(SERVANT_SPEAK
+                + "    Here are all your tasks with a deadline your Majesty:");
+        System.out.println(new TaskList(userDeadlines).toString());
+    }
+
+    /**
+     * Prints all the events in the task list.
+     *
+     * @param userEvents This is the list of events to be printed.
+     * @return Nothing.
+     */
+    public void printAllEvents(ArrayList<Task> userEvents) {
+        System.out.println(SERVANT_SPEAK
+                + "    Here are all your events your Majesty:");
+        System.out.println(new TaskList(userEvents).toString());
     }
 
     /**
