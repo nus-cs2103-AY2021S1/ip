@@ -20,7 +20,9 @@ public class Duke {
             storage = new Storage(filePath);
             taskList = new TaskList(storage.readFromFile());
         } catch (DukeException e) {
+            Ui.showUpperLine();
             Ui.showMessage(e.getMessage());
+            Ui.showLowerLine();
         }
     }
 
@@ -41,8 +43,8 @@ public class Duke {
             } catch (DukeException e) {
                 Ui.showMessage(e.getMessage());
             } finally {
-                input = scanner.nextLine();
                 Ui.showLowerLine();
+                input = scanner.nextLine();
             }
         }
 
