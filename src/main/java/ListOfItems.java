@@ -1,11 +1,9 @@
 import java.time.LocalDate;
 import java.time.LocalTime;
-
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Contains the task list, handles all of the list manipulations + checks.
@@ -245,14 +243,15 @@ public class ListOfItems {
             System.out.println(divider);
             System.out.println("Task(s) due by " + date.format(DateTimeFormatter.ofPattern("d MMM yyyy")) + " :");
             for (int i = 0; i < this.list.size(); i++) {
-                if ((this.list.get(i) instanceof Deadline && ((Deadline) this.list.get(i)).date.equals(date)) ||
-                        (this.list.get(i) instanceof Event && ((Event) this.list.get(i)).date.equals(date))) {
+                if ((this.list.get(i) instanceof Deadline && ((Deadline) this.list.get(i)).date.equals(date))
+                        || (this.list.get(i) instanceof Event && ((Event) this.list.get(i)).date.equals(date))) {
                     hasResults = true;
                     System.out.println(this.list.get(i));
                 }
             }
             if (!hasResults) {
-                System.out.println("- No tasks due on " + date.format(DateTimeFormatter.ofPattern("d MMM yyyy")) + " -");
+                System.out.println("- No tasks due on " + date.format(DateTimeFormatter.ofPattern("d MMM yyyy"))
+                        + " -");
             }
             System.out.println(divider);
         } catch (DateTimeParseException | StringIndexOutOfBoundsException e) {
@@ -281,16 +280,18 @@ public class ListOfItems {
                 // only consists of date
                 LocalDate date = LocalDate.parse(info, dateFormat);
                 System.out.println(divider);
-                System.out.println("Task(s) due before " + date.format(DateTimeFormatter.ofPattern("d MMM yyyy")) + " :");
+                System.out.println("Task(s) due before " + date.format(DateTimeFormatter.ofPattern("d MMM yyyy"))
+                        + " :");
                 for (int i = 0; i < this.list.size(); i++) {
-                    if ((this.list.get(i) instanceof Deadline && !((Deadline) this.list.get(i)).date.isAfter(date)) ||
-                            (this.list.get(i) instanceof Event && !((Event) this.list.get(i)).date.isAfter(date))) {
+                    if ((this.list.get(i) instanceof Deadline && !((Deadline) this.list.get(i)).date.isAfter(date))
+                            || (this.list.get(i) instanceof Event && !((Event) this.list.get(i)).date.isAfter(date))) {
                         hasResults = true;
                         System.out.println(this.list.get(i));
                     }
                 }
                 if (!hasResults) {
-                    System.out.println("- No tasks due before " + date.format(DateTimeFormatter.ofPattern("d MMM yyyy")) + " -");
+                    System.out.println("- No tasks due before " + date.format(DateTimeFormatter.ofPattern("d MMM yyyy"))
+                            + " -");
                 }
                 System.out.println(divider);
             } else {
@@ -302,9 +303,11 @@ public class ListOfItems {
                         + ", " + time.format(DateTimeFormatter.ofPattern("h:mma")) + " :");
                 for (int i = 0; i < this.list.size(); i++) {
                     if ((this.list.get(i) instanceof Deadline && !((Deadline) this.list.get(i)).date.isAfter(date)
-                            && ((Deadline) this.list.get(i)).time != null && !((Deadline) this.list.get(i)).time.isAfter(time))
+                            && ((Deadline) this.list.get(i)).time != null
+                            && !((Deadline) this.list.get(i)).time.isAfter(time))
                             || (this.list.get(i) instanceof Event && !((Event) this.list.get(i)).date.isAfter(date)
-                            && ((Event) this.list.get(i)).endTime != null && !((Event) this.list.get(i)).endTime.isAfter(time))) {
+                            && ((Event) this.list.get(i)).endTime != null
+                            && !((Event) this.list.get(i)).endTime.isAfter(time))) {
                         hasResults = true;
                         System.out.println(this.list.get(i));
                     }

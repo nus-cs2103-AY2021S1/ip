@@ -31,7 +31,8 @@ public class Deadline extends Task {
 
             if (dateTime.length > 4) {
                 // if user inputs time after date
-                String date = dateTime[1] + "/" + dateTime[2] + "/" + dateTime[3].substring(0, dateTime[3].length() - 1);
+                String date = dateTime[1] + "/" + dateTime[2] + "/"
+                        + dateTime[3].substring(0, dateTime[3].length() - 1);
                 this.date = LocalDate.parse(date, dateFormat);
                 this.time = LocalTime.parse(dateTime[4], timeFormat);
                 this.hasTime = true;

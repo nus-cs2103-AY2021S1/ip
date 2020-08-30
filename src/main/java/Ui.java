@@ -23,8 +23,8 @@ public class Ui {
      * Greets the user when the program starts.
      */
     protected void hello() {
-        String intro = "Hello! I'm Bob\n" +
-                "What can I do for you?\n";
+        String intro = "Hello! I'm Bob\n"
+                + "What can I do for you?\n";
         System.out.println(divider + "\n" + intro + "\n" + divider);
     }
 
@@ -49,4 +49,5 @@ public class Ui {
         String message = "Bye. Hope to see you again soon! :)";
         System.out.println(divider + "\n" + message + "\n" + divider);
     }
+
 }
