@@ -32,33 +32,33 @@ public class Storage {
                     String taskType = data[0];
 
                     switch (taskType) {
-                    case "T":
-                        Todo todo = new Todo(data[2]);
+                        case "T":
+                            Todo todo = new Todo(data[2]);
 
-                        if (data[1].equals("1")) {
-                            todo.markAsDone();
-                        }
+                            if (data[1].equals("1")) {
+                                todo.markAsDone();
+                            }
 
-                        tasks.add(todo);
-                        break;
-                    case "D":
-                        Deadline deadline = new Deadline(data[2], data[3]);
+                            tasks.add(todo);
+                            break;
+                        case "D":
+                            Deadline deadline = new Deadline(data[2], data[3]);
 
-                        if (data[1].equals("1")) {
-                            deadline.markAsDone();
-                        }
+                            if (data[1].equals("1")) {
+                                deadline.markAsDone();
+                            }
 
-                        tasks.add(deadline);
-                        break;
-                    case "E":
-                        Event event = new Event(data[2], data[3]);
+                            tasks.add(deadline);
+                            break;
+                        case "E":
+                            Event event = new Event(data[2], data[3]);
 
-                        if (data[1].equals("1")) {
-                            event.markAsDone();
-                        }
+                            if (data[1].equals("1")) {
+                                event.markAsDone();
+                            }
 
-                        tasks.add(event);
-                        break;
+                            tasks.add(event);
+                            break;
                     }
                 }
                 return tasks;
