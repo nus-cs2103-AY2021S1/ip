@@ -41,7 +41,7 @@ public class StorageTest {
     @Test
     void write() {
         ArrayList<Task> list = new ArrayList<>();
-        list.add(new Task("deadline", "what", LocalDate.parse("2019-01-01")));
+        list.add(new Task(TaskType.DEADLINE, "what", LocalDate.parse("2019-01-01")));
         try {
             storage1.write(list);
         } catch (DukeException e) {

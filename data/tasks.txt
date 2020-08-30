@@ -1,4 +1,2 @@
-T | 0 | then
-T | 0 | whats next
+D | 0 | what | 2019-01-01
 T | 1 | what
-T | 1 | how
