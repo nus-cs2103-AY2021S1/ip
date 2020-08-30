@@ -1,4 +1,5 @@
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 
 /**
  * <h1> Duke Parser class </h1>
@@ -74,7 +75,7 @@ public class Parser {
         String[] stringarr = cmd.split(" ", 2);
         if (stringarr[0].equals("todo")) {
             if (stringarr.length <= 1) {
-                String message = "OOPS!!! The description of a Todo cannot be empty";
+                String message = "The description of a Todo cannot be empty";
                 throw new DukeException(message);
             } else {
                 Todo todo = new Todo(stringarr[1]);
@@ -83,18 +84,23 @@ public class Parser {
             }
         } else if (stringarr[0].equals("deadline")) {
             if (stringarr.length <= 1) {
-                String message = "OOPS!!! The description of a Deadline cannot be empty";
+                String message = "The description of a Deadline cannot be empty";
                 throw new DukeException(message);
             } else {
-                String[] secondarr = stringarr[1].split("/by", 2);
-                LocalDate date = LocalDate.parse(secondarr[1].trim());
-                Deadline deadline = new Deadline(secondarr[0], date);
-                taskList.addTask(deadline);
-                return deadline.toString();
+                try {
+                    String[] secondarr = stringarr[1].split("/by", 2);
+                    LocalDate date = LocalDate.parse(secondarr[1].trim());
+                    Deadline deadline = new Deadline(secondarr[0], date);
+                    taskList.addTask(deadline);
+                    return deadline.toString();
+                } catch (DateTimeParseException e) {
+                    String message = "That does not look like a proper Date. Please input YYYY-MM-DD";
+                    throw new DukeException(message);
+                }
             }
         } else if (stringarr[0].equals("event")) {
             if (stringarr.length <= 1) {
-                String message = "OOPS!!! The description of an Event cannot be empty";
+                String message = "The description of an Event cannot be empty";
                 throw new DukeException(message);
             } else {
                 String[] secondarr = stringarr[1].split("/at", 2);
