@@ -22,6 +22,8 @@ import java.io.IOException;
 public class Duke extends Application {
     private final String FILEPATH = System.getProperty("user.dir")
                                         + "/duke.txt";
+    private String input;
+    private String output;
     private final Storage storage;
     private final TaskList tasks;
     private final Parser parser;
@@ -40,7 +42,7 @@ public class Duke extends Application {
      * @param args expecting the array of objects.
      */
     public static void main(String[] args) throws IOException {
-        new Duke().run();
+        new Duke();
     }
 
     /**
@@ -55,8 +57,27 @@ public class Duke extends Application {
         storage.load();
     }
 
+    /**
+     * Runs the entire program.
+     * Main driver of Duke bot.
+     */
+    public void run(String fullCommand) throws IOException {
+//        while (true) {
+//            String fullCommand = ui.readCommand();
+            input = fullCommand;
+            String first = parser.parse(fullCommand);
+            if (first.equals("bye")) {
+                output = "Bye. Hope to see you again soon!";
+                storage.appendToFile(output);
+//                break;
+            } else {
+                output = tasks.operate(storage, fullCommand, first);
+            }
+//        }
+    }
+
     @Override
-    public void start(Stage stage) {
+    public void start(Stage stage) throws IOException {
         //Step 1. Formatting the window to look as expected.
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
@@ -102,6 +123,8 @@ public class Duke extends Application {
         AnchorPane.setLeftAnchor(userInput , 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
+        welcomeMessage();
+
         //Step 3. Add functionality to handle user input.
         sendButton.setOnMouseClicked((event) -> {
             dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
@@ -146,10 +169,25 @@ public class Duke extends Application {
      * the dialog container. Clears the user input after processing.
      */
     private void handleUserInput() {
-        Label userText = new Label(userInput.getText());
-        Label dukeText = new Label(getResponse(userInput.getText()));
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(userText, new ImageView(user)),
+        try {
+            run(userInput.getText());
+            Label userText = new Label(this.input);
+            Label dukeText = new Label(getResponse(this.output));
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getUserDialog(userText, new ImageView(user)),
+                    DialogBox.getDukeDialog(dukeText, new ImageView(duke))
+            );
+            userInput.clear();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void welcomeMessage() throws IOException {
+        output = "Hello! I'm Duke\n" + "What can I do for you?";
+        storage.appendToFile(this.output);
+        Label dukeText = new Label("Welcome!\n" + this.output);
+        dialogContainer.getChildren().add(
                 DialogBox.getDukeDialog(dukeText, new ImageView(duke))
         );
         userInput.clear();
@@ -161,23 +199,5 @@ public class Duke extends Application {
      */
     String getResponse(String input) {
         return "Duke heard: " + input;
-    }
-
-    /**
-     * Runs the entire program.
-     * Main driver of Duke bot.
-     */
-    public void run() throws IOException {
-        storage.appendToFile("Hello! I'm Duke\n" + "What can I do for you?");
-
-        while (true) {
-            String fullCommand = ui.readCommand();
-            String first = parser.parse(fullCommand);
-            if (first.equals("bye")) {
-                storage.appendToFile("Bye. Hope to see you again soon!");
-                break;
-            }
-            tasks.operate(storage, fullCommand, first);
-        }
     }
 }

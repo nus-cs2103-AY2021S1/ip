@@ -29,22 +29,26 @@ public class TaskList {
      * @throws EmptyDeadlineException  when the deadline request is empty.
      * @throws UnknownCommandException  when the command is unknown.
      */
-    public void operate(Storage storage, String fullCommand, String first) throws IOException {
+    public String operate(Storage storage, String fullCommand, String first) throws IOException {
         String[] s = fullCommand.split("\\s");
+        String text = "";
 
         try {
             if (first.equals("list")) {
-                storage.appendToFile("Here are the tasks in your list:");
+                text = "Here are the tasks in your list:\n";
+                storage.appendToFile(text);
                 for (int i = 0; i < books.size(); i++) {
                     int l = i + 1;
-                    storage.appendToFile(l + "." + books.get(i));
+                    text += l + "." + books.get(i) + "\n";
+                    storage.appendToFile(text);
                 }
             } else if (first.equals("done")) {
                 int index = Integer.parseInt(s[1]);
                 books.get(index - 1).markAsDone();
-                storage.appendToFile("Nice! I've marked this task as done:\n  "
-                                        + books.get(index - 1).getStatusIcon()
-                                        + " return book");
+                text = "Nice! I've marked this task as done:\n  "
+                        + books.get(index - 1).getStatusIcon()
+                        + " return book";
+                storage.appendToFile(text);
             } else {
                 if (first.equals("todo")) {
                     if (s.length == 1) {
@@ -52,12 +56,12 @@ public class TaskList {
                     }
                     Todo t = new Todo(fullCommand.substring(5));
                     books.add(t);
-
-                    storage.appendToFile("Got it. I've added this task:");
-                    storage.appendToFile("  " + books.get(books.size() - 1));
-                    storage.appendToFile("Now you have "
-                                                + books.size()
-                                                + " tasks in the list.");
+                    text = "Got it. I've added this task:\n"
+                            + "  " + books.get(books.size() - 1) + "\n"
+                            + "Now you have "
+                            + books.size()
+                            + " tasks in the list.";
+                    storage.appendToFile(text);
                 } else if (first.equals("event")) {
                     if (s.length == 1) {
                         throw new EmptyEventsException();
@@ -69,12 +73,13 @@ public class TaskList {
 
                     Event t = new Event(fullCommand.substring(6, start - 1), formattedDate);
                     books.add(t);
+                    text = "Got it. I've added this task:\n"
+                            + "  " + books.get(books.size() - 1) + "\n"
+                            + "Now you have "
+                            + books.size()
+                            + " tasks in the list.";
+                    storage.appendToFile(text);
 
-                    storage.appendToFile("Got it. I've added this task:");
-                    storage.appendToFile("  " + books.get(books.size() - 1));
-                    storage.appendToFile("Now you have "
-                                                + books.size()
-                                                + " tasks in the list.");
                 } else if (first.equals("deadline")) {
                     if (s.length == 1) {
                         throw new EmptyDeadlineException();
@@ -87,21 +92,22 @@ public class TaskList {
 
                     Deadline t = new Deadline(fullCommand.substring(9, start - 1), formattedDate);
                     books.add(t);
-
-                    storage.appendToFile("Got it. I've added this task:");
-                    storage.appendToFile("  " + books.get(books.size() - 1));
-                    storage.appendToFile("Now you have "
-                                                + books.size()
-                                                + " tasks in the list.");
+                    text = "Got it. I've added this task:\n"
+                            + "  " + books.get(books.size() - 1) + "\n"
+                            + "Now you have "
+                            + books.size()
+                            + " tasks in the list.";
+                    storage.appendToFile(text);
                 } else if (first.equals("delete")) {
                     int index = Integer.parseInt(s[1]);
                     Task t = books.get(index - 1);
                     books.remove(index - 1);
-                    storage.appendToFile("Noted. I've removed this task:");
-                    storage.appendToFile("  " + t);
-                    storage.appendToFile("Now you have "
-                                                + books.size()
-                                                + " tasks in the list.");
+                    text = "Noted. I've removed this task:\n"
+                            + "  " + t + "\n"
+                            + "Now you have "
+                            + books.size()
+                            + " tasks in the list.";
+                    storage.appendToFile(text);
                 } else if (first.equals("find")) {
                     ArrayList<Task> tempList = new ArrayList<>();
                     for (int i = 0; i < books.size(); i++) {
@@ -109,20 +115,24 @@ public class TaskList {
                             tempList.add(books.get(i));
                         }
                     }
-
-                    storage.appendToFile("Here are the matching tasks in your list:");
+                    text = "Here are the matching tasks in your list:\n";
+                    storage.appendToFile(text);
 
                     for (int i = 0; i < tempList.size(); i++) {
                         int l = i + 1;
-                        storage.appendToFile(l + "." + tempList.get(i));
+                        text += l + "." + tempList.get(i) + "\n";
+                        storage.appendToFile(text);
                     }
                 } else {
                     throw new UnknownCommandException();
                 }
             }
-        } catch (DukeException e) {
-            storage.appendToFile(e.getMessage());
-        }
-    }
 
+            return text;
+        } catch (DukeException e) {
+            text += "\n" + e.getMessage();
+            storage.appendToFile(text);
+        }
+        return text;
+    }
 }
