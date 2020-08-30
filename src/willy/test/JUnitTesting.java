@@ -13,23 +13,27 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class JUnitTesting {
     TaskStore store = new TaskStore();
-    ArrayList<Task> listOfTask = store.retrieveStorage();
-    TaskList list = new TaskList(listOfTask, store);
+    ArrayList<Task> listOfTask;
+    TaskList list;
 
     @Test
     public void addTaskToList_success() {
         // clear text file first, store.clearFile() not working
-//        store.clearFile();
+        store.clearFile();
+        listOfTask = store.retrieveStorage();
+        list = new TaskList(listOfTask, store);
         String activity = "read book";
         ToDoTask newTask = new ToDoTask(activity, TaskSymbol.TODO);
         list.addToList(newTask);
-        assertEquals(2,list.getList().size(), "Number of Lists after adding a task");
+        assertEquals(1,list.getList().size(), "Number of Lists after adding a task");
     }
 
     @Test
     public void removeTaskFromList_success() {
         // Clear text file first, store.clearFile() not working
-//        store.clearFile();
+        store.clearFile();
+        listOfTask = store.retrieveStorage();
+        list = new TaskList(listOfTask, store);
         String activity1 = "read book";
         String activity2 = "go Home";
         // Add 2 tasks
