@@ -22,21 +22,25 @@ public class Duke {
 
     Duke(String path) {
         ui = new Ui();
-        ui.welcome();
+//        ui.welcome();
 
         fileHandler = new DukeFileHandler(path);
 
+
+//        run();
+    }
+
+    public void showWelcome() {
+        ui.welcome();
         try {
             tasks = new TaskList(fileHandler.readFile());
             if (!tasks.isNull()) {
-                ui.displayList(tasks.getList());
+                ui.displayList(tasks.getList(), "Here are your current tasks:");
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
             tasks = new TaskList(new ArrayList<>());
         }
-
-//        run();
     }
 
 
@@ -91,7 +95,8 @@ public class Duke {
      */
     public String getResponse(String input) {
         enteredInput(input);
-        return "Duke heard: " + input;
+
+        return "This is left empty";
     }
 
 
