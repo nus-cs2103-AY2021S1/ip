@@ -1,7 +1,8 @@
 package duke.task;
 
-import java.time.LocalDateTime;
 import org.junit.jupiter.api.Test;
+
+import java.time.LocalDateTime;
 
 public class DukeTaskTest {
     @Test
@@ -14,9 +15,7 @@ public class DukeTaskTest {
     public void createDeadlineTest() {
         LocalDateTime testTime = LocalDateTime.of(2020, 8, 26, 12, 50);
         Deadline deadline = new Deadline("Conduct Deadline Test: Creation", testTime);
-        assert deadline
-                .toString()
-                .equals("[D][\u2718] Conduct Deadline Test: Creation (by: Wed, 26/Aug/2020 1250)");
+        assert deadline.toString().equals("[D][\u2718] Conduct Deadline Test: Creation (by: Wed, 26/Aug/2020 1250)");
     }
 
     @Test
@@ -25,10 +24,8 @@ public class DukeTaskTest {
         LocalDateTime testEndTime = LocalDateTime.of(2020, 8, 26, 19, 50);
         Event event = new Event("Conduct Event Test: Creation", testStartTime, testEndTime);
         System.out.println(event);
-        assert event
-                .toString()
-                .equals(
-                        "[E][\u2718] Conduct Event Test: Creation (at: Wed, 26/Aug/2020 1250 till Wed, 26/Aug/2020 1950)");
+        assert event.toString().equals("[E][\u2718] Conduct Event Test: " +
+                "Creation (at: Wed, 26/Aug/2020 1250 till Wed, 26/Aug/2020 1950)");
     }
 
     @Test
@@ -43,8 +40,7 @@ public class DukeTaskTest {
         LocalDateTime testTime = LocalDateTime.of(2020, 8, 26, 12, 50);
         Deadline deadline = new Deadline("Conduct Deadline Test: Mark Task Done", testTime);
         deadline.markAsDone();
-        assert deadline
-                .toString()
+        assert deadline.toString()
                 .equals("[D][\u2713] Conduct Deadline Test: Mark Task Done (by: Wed, 26/Aug/2020 1250)");
     }
 
@@ -54,10 +50,8 @@ public class DukeTaskTest {
         LocalDateTime testEndTime = LocalDateTime.of(2020, 8, 26, 19, 50);
         Event event = new Event("Conduct Event Test: Mark Task Done", testStartTime, testEndTime);
         event.markAsDone();
-        assert event
-                .toString()
-                .equals(
-                        "[E][\u2713] Conduct Event Test: Mark Task Done (at: Wed, 26/Aug/2020 1250 till Wed, 26/Aug/2020 1950)");
+        assert event.toString()
+                .equals("[E][\u2713] Conduct Event Test: Mark Task Done (at: Wed, 26/Aug/2020 1250 till Wed, 26/Aug/2020 1950)");
     }
 
     @Test

@@ -4,6 +4,7 @@ import duke.command.Command;
 import duke.io.Storage;
 import duke.io.TaskList;
 import duke.parser.Parser;
+
 import java.io.File;
 
 /**
@@ -65,7 +66,7 @@ public class Duke {
      *
      * @param args stores hava command line arguments.
      */
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         final String dataDir = CURRENT_DIRECTORY + File.separator + "data";
         final String dataFile = "duke.txt";
         new Duke(dataDir + File.separator + dataFile).run();

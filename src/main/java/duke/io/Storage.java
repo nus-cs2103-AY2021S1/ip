@@ -5,6 +5,7 @@ import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -63,9 +64,9 @@ public class Storage {
                         taskArrayList.add(tempDeadline);
                         break;
                     case "duke.task.Event":
-                        Task tempEvent =
-                                new Event(
-                                        tempArr[2], LocalDateTime.parse(tempArr[3]), LocalDateTime.parse(tempArr[4]));
+                        Task
+                                tempEvent =
+                                new Event(tempArr[2], LocalDateTime.parse(tempArr[3]), LocalDateTime.parse(tempArr[4]));
                         if (tempArr[1].equals("true")) {
                             tempEvent.markAsDone();
                         }
@@ -95,14 +96,12 @@ public class Storage {
                 if (taskType.equals("duke.task.Todo")) {
                     writer.append(String.format("%s,%s,%s", taskType, task.isDone, task.description));
                 } else if (taskType.equals("duke.task.Deadline")) {
-                    writer.append(
-                            String.format(
-                                    "%s,%s,%s,%s", taskType, task.isDone, task.description, ((Deadline) task).by));
+                    writer.append(String.format("%s,%s,%s,%s", taskType, task.isDone, task.description,
+                            ((Deadline) task).by));
                 } else {
                     writer.append(
-                            String.format(
-                                    "%s,%s,%s,%s,%s",
-                                    taskType, task.isDone, task.description, ((Event) task).at, ((Event) task).end));
+                            String.format("%s,%s,%s,%s,%s", taskType, task.isDone, task.description, ((Event) task).at,
+                                    ((Event) task).end));
                 }
                 writer.write("\n");
             }

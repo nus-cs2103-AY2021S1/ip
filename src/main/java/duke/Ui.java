@@ -15,12 +15,10 @@ public class Ui {
      * Print out welcome message with the menu.
      */
     public void showWelcome() {
-        String logo =
-                " ____        _        \n"
-                        + "|  _ \\ _   _| | _____ \n"
-                        + "| | | | | | | |/ / _ \\\n"
-                        + "| |_| | |_| |   <  __/\n"
-                        + "|____/ \\__,_|_|\\_\\___|\n";
+        String
+                logo =
+                " ____        _        \n" + "|  _ \\ _   _| | _____ \n" + "| | | | | | | |/ / _ \\\n" +
+                        "| |_| | |_| |   <  __/\n" + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println(logo + "\nHello ! I'm Duke.\nWhat can I do for you?");
         System.out.println(menu());
     }
@@ -31,16 +29,12 @@ public class Ui {
      * @return String menu
      */
     private String menu() {
-        return "1. list\n"
-                + "2. done {item number}\n"
-                + "3. todo {description}\n"
-                + "4. deadline {description} /by {dd/mm/yyyy} {hhmm}\n"
-                + "\t e.g. deadline return book /by 1/12/2020 1800\n"
-                + "5. event {description} /at {dd/mm/yyyy} {hhmm}-{hhmm}\n"
-                + "\t e.g. event meeting /at 1/12/2020 1800-1900\n"
-                + "7. delete {item number}\n"
-                + "8. find {item to find}\n"
-                + "9. bye\n";
+        return "1. list\n" + "2. done {item number}\n" + "3. todo {description}\n" +
+                "4. deadline {description} /by {dd/mm/yyyy} {hhmm}\n" +
+                "\t e.g. deadline return book /by 1/12/2020 1800\n" +
+                "5. event {description} /at {dd/mm/yyyy} {hhmm}-{hhmm}\n" +
+                "\t e.g. event meeting /at 1/12/2020 1800-1900\n" + "7. delete {item number}\n" +
+                "8. find {item to find}\n" + "9. bye\n";
     }
 
     /**
@@ -66,8 +60,7 @@ public class Ui {
      * Use to divide the application to be more user friendly.
      */
     public void showLine() {
-        System.out.println(
-                "_____________________________________________________________________________");
+        System.out.println("_____________________________________________________________________________");
     }
 
     /**

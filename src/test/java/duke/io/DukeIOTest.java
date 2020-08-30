@@ -7,10 +7,11 @@ import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
+import org.junit.jupiter.api.Test;
+
 import java.io.File;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import org.junit.jupiter.api.Test;
 
 public class DukeIOTest {
     final String dataDir = System.getProperty("user.dir") + File.separator + "dataTest";
