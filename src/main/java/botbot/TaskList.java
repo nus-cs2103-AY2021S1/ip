@@ -11,10 +11,17 @@ import java.util.LinkedList;
 public class TaskList extends LinkedList<Task> {
     /**
      * Creates a task list.
-     * 
+     */
+    public TaskList() {
+        super();
+    }
+
+    /**
+     * Creates a task list.
+     *
      * @param tasks Tasks in task list.
      */
-    TaskList(Collection<Task> tasks) {
+    public TaskList(Collection<Task> tasks) {
         super(tasks);
     }
 

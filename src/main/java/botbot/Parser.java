@@ -4,9 +4,11 @@ import botbot.commands.AddCommand;
 import botbot.commands.Command;
 import botbot.commands.DeleteCommand;
 import botbot.commands.ExitCommand;
+import botbot.commands.FindCommand;
 import botbot.commands.InvalidCommand;
 import botbot.commands.ListCommand;
 import botbot.commands.MarkAsDoneCommand;
+import botbot.exceptions.EmptySearchException;
 import botbot.exceptions.EmptyTaskException;
 import botbot.exceptions.EmptyTaskNumberException;
 import botbot.exceptions.InvalidFormatException;
@@ -36,7 +38,7 @@ public class Parser {
      * @throws NoSuchCommandException If input does not match any command.
      */
     static Command parseCommand(String input) throws EmptyTaskException, EmptyTaskNumberException,
-            InvalidFormatException, NoSuchCommandException {
+            InvalidFormatException, NoSuchCommandException, EmptySearchException {
         if (input.equals("bye")) {
             return new ExitCommand();
         } else if (input.equals("list")) {
@@ -79,6 +81,11 @@ public class Parser {
         } else if (input.equals("event")
                 || (input.length() >= 6 && input.substring(0, 6).equals("event "))) {
             throw new EmptyTaskException("an event");
+        } else if (input.length() >= 6 && input.substring(0, 5).equals("find ")) {
+            String keyword = input.substring(5);
+            return new FindCommand(keyword);
+        } else if (input.equals("find") || (input.length() >= 5 && input.substring(0, 5).equals("find "))) {
+            throw new EmptySearchException();
         } else {
             throw new NoSuchCommandException();
         }
