@@ -15,4 +15,10 @@ public class DoneCommand extends Command {
         ui.displayCompleteTask();
         tasks.getTask(taskIndex).doTask();
     }
+
+    @Override
+    public String executeWithOutput(TaskList tasks, Ui ui) {
+        tasks.getTask(taskIndex).doTask();
+        return ui.getCompleteTaskResponseAsString();
+    }
 }

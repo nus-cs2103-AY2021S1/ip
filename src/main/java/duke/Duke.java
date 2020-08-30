@@ -50,12 +50,15 @@ public class Duke {
         }
 
         ui.displayExit();
-
         try {
-            storage.storeTaskList(tasks);
+            storeTasks();
         } catch (IOException e) {
             System.out.println(e);
         }
+    }
+
+    public void storeTasks() throws IOException {
+        storage.storeTaskList(tasks);
     }
 
     /**
@@ -70,7 +73,7 @@ public class Duke {
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
-    public String getResponse(String input) {
-        return "Duke heard: " + input;
+    public String getResponse(String input) throws DukeException {
+        return parser.parse(input).executeWithOutput(tasks, ui);
     }
 }

@@ -6,5 +6,7 @@ import duke.Ui;
 
 public abstract class Command {
 
-    public abstract void execute(TaskList tasklist, Ui ui) throws DukeException;
+    public abstract void execute(TaskList tasks, Ui ui) throws DukeException;
+
+    public abstract String executeWithOutput(TaskList tasks, Ui ui) throws DukeException;
 }

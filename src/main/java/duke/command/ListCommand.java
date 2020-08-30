@@ -9,4 +9,9 @@ public class ListCommand extends Command {
     public void execute(TaskList tasks, Ui ui) {
         ui.printList(tasks);
     }
+
+    @Override
+    public String executeWithOutput(TaskList tasks, Ui ui) {
+        return ui.getPrintListResponseAsString(tasks);
+    }
 }
