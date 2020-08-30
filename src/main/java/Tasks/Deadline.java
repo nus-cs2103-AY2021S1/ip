@@ -1,7 +1,5 @@
 package Tasks;
 
-import Tasks.task;
-
 /**
  * Represents a Deadline task that is created by the user.
  * Stores the set if information of the task entered by the user.
@@ -14,7 +12,7 @@ public class Deadline extends task {
      * @param name name of Deadline.
      * @param type type of the task.
      */
-    public Deadline(String name, String type){
+    public Deadline(String name, String type) {
         super(name, type);
     }
 }

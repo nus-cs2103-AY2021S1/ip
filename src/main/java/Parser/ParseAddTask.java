@@ -22,7 +22,7 @@ public class ParseAddTask extends Parse {
         String current = s;
         if (current.equals("todo")) {
             AddTodoCommand.execute(input);
-        } else if (current.equals("deadline")){
+        } else if (current.equals("deadline")) {
             AddDeadlineCommand.execute(input);
         } else if (current.equals("event")) {
             AddEventCommand.execute(input);

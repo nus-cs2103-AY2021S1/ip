@@ -10,7 +10,7 @@ public class ParseShow extends Parse {
     /**
      * Calls the show command.
      */
-    public static void execute(){
+    public static void execute() {
         ShowFunctionCommand.execute();
     }
 }

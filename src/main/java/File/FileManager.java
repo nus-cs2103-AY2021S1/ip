@@ -1,18 +1,24 @@
 package File;
 
-import DateTime.DateTimeManager;
-import Errors.ErrorExceptions;
-import Tasks.*;
-
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
+
+import DateTime.DateTimeManager;
+import Errors.ErrorExceptions;
+import Tasks.Deadline;
+import Tasks.Event;
+import Tasks.TaskManager;
+import Tasks.Todo;
+import Tasks.task;
+
+
 
 /**
  * Represents a manager that handles all actions related to File.
@@ -26,7 +32,7 @@ public class FileManager {
      * @throws IOException missing file.
      */
     public static void add(String location, String text) throws IOException {
-        FileWriter f = new FileWriter(location,true);
+        FileWriter f = new FileWriter(location, true);
         f.write(text);
         f.write(System.lineSeparator());
         f.close();
@@ -61,11 +67,13 @@ public class FileManager {
         try {
             sc.next(); // skip the symbols
             String current = sc.next();
-            while (current.charAt(0)!='(') {
+            while (current.charAt(0) != '(') {
                 name = name + current + " ";
                 current = sc.next();
             }
-        } catch (NoSuchElementException e) {}
+        } catch (NoSuchElementException e) {
+            // Do nothing
+        }
         return name;
     }
 
@@ -81,17 +89,17 @@ public class FileManager {
         String date = "";
         try {
             String current = sc.next();
-            while (current.charAt(0)!='(') {
+            while (current.charAt(0) != '(') {
                 current = sc.next();
             }
             current = sc.next();
-            while (current.charAt(current.length()-1)!=')') {
+            while (current.charAt(current.length() - 1) != ')') {
                 date = date + current + " ";
                 current = sc.next();
             }
-            int l = current.length()-1;
+            int l = current.length() - 1;
             String last = "";
-            for (int i=0; i<l; i++) {
+            for (int i = 0; i < l; i++) {
                 last = last + current.charAt(i);
             }
             date = date + last;
@@ -99,7 +107,7 @@ public class FileManager {
             System.out.println(e);
         }
         DateTimeFormatter d = DateTimeFormatter.ofPattern("dd MMM yyyy HHmm");
-        LocalDateTime dt = LocalDateTime.parse(date,d);
+        LocalDateTime dt = LocalDateTime.parse(date, d);
         return dt.format(DateTimeFormatter.ofPattern("dd-MM-uuuu HHmm"));
     }
 
@@ -173,19 +181,19 @@ public class FileManager {
                     String name = FileManager.getName(current);
                     boolean done = FileManager.getDone(current);
                     if (type == 1) {
-                        Todo t = new Todo(name,"[T]");
-                        if(done) {
+                        Todo t = new Todo(name, "[T]");
+                        if (done) {
                             t.setDone();
                         }
                         store.add(t);
                     } else if (type == 2) {
                         try {
                             String date = FileManager.getDate(current);
-                            Deadline d = new Deadline(name,"[D]");
+                            Deadline d = new Deadline(name, "[D]");
                             if (done) {
                                 d.setDone();
                             }
-                            DateTimeManager.addDate(d,date);
+                            DateTimeManager.addDate(d, date);
                             store.add(d);
                         } catch (ErrorExceptions e) {
                             System.out.println(e);
@@ -193,11 +201,11 @@ public class FileManager {
                     } else {
                         try {
                             String date = FileManager.getDate(current);
-                            Event e = new Event(name,"[E]");
+                            Event e = new Event(name, "[E]");
                             if (done) {
                                 e.setDone();
                             }
-                            DateTimeManager.addDate(e,date);
+                            DateTimeManager.addDate(e, date);
                             store.add(e);
                         } catch (ErrorExceptions e) {
                             System.out.println(e);

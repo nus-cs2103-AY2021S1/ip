@@ -1,12 +1,22 @@
 package Parser;
 
-import Command.FindCommand;
-import Errors.ErrorExceptions;
-
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
+import Command.FindCommand;
+import Errors.ErrorExceptions;
+
+/**
+ * Represents the bridging class that connects to the find Command.
+ */
 public class ParseFind extends Parse {
+    /**
+     * Takes the user input and breaks down into the search keywords and pass it to the
+     * find Command.
+     *
+     * @param input
+     * @throws ErrorExceptions
+     */
     public static void execute(String input) throws ErrorExceptions {
         Scanner sc = new Scanner(input);
         sc.next();
@@ -18,9 +28,8 @@ public class ParseFind extends Parse {
                 current = sc.next();
             }
             name = name + current + " ";
-//        System.out.println(name);
             FindCommand.execute(name);
-        } catch (NoSuchElementException e){
+        } catch (NoSuchElementException e) {
             throw new ErrorExceptions("Wrong format! Missing name!");
         }
     }

@@ -2,10 +2,7 @@ package Parser;
 
 import Command.DeleteCommand;
 import Errors.ErrorExceptions;
-import Tasks.TaskManager;
-import Tasks.task;
-import UI.UserInterface;
-import java.util.NoSuchElementException;
+
 
 /**
  * Represents the bridge that calls the appropriate delete task command.

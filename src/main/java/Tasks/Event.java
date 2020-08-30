@@ -1,6 +1,5 @@
 package Tasks;
 
-import Tasks.task;
 
 /**
  * Represents an Event task that is created by the user.
@@ -14,7 +13,7 @@ public class Event extends task {
      * @param name name of Event.
      * @param type type of the task.
      */
-    public Event(String name, String type){
+    public Event(String name, String type) {
         super(name, type);
     }
 }

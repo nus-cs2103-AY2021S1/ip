@@ -9,7 +9,7 @@ public class ListCommand extends Command {
     /**
      * Prints all the existing task and its information.
      */
-    public static void execute(){
+    public static void execute() {
         TaskManager.listing();
     }
 }

@@ -8,7 +8,7 @@ public class ErrorExceptions extends Exception {
      * Throws an ErrorExceptions object with the input message.
      * @param message message when printing the error.
      */
-    public ErrorExceptions(String message){
+    public ErrorExceptions(String message) {
         super(message);
     }
 }

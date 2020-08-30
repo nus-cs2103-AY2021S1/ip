@@ -31,7 +31,7 @@ public class task {
      *
      * @return String name of the task.
      */
-    public String getTaskName(){
+    public String getTaskName() {
         return this.name;
     }
 
@@ -40,14 +40,14 @@ public class task {
      *
      * @return boolean completion.
      */
-    public boolean getTaskCompleted(){
+    public boolean getTaskCompleted() {
         return this.completed;
     }
 
     /**
      * Sets the task to be completed.
      */
-    public void setDone(){
+    public void setDone() {
         this.completed = true;
     }
 
@@ -56,21 +56,21 @@ public class task {
      *
      * @return String type of task.
      */
-    public String getTaskType(){ return this.type; }
+    public String getTaskType() { return this.type; }
 
     /**
      * Returns the date and time of the task to be completed by.
      *
      * @return LocalDateTime date and time.
      */
-    public LocalDateTime getTaskDate(){ return this.date; }
+    public LocalDateTime getTaskDate() { return this.date; }
 
     /**
      * Sets the date and time of the task.
      *
      * @param date date and time of the task.
      */
-    public void setDate(LocalDateTime date){
+    public void setDate(LocalDateTime date) {
         this.date = date;
     }
 

@@ -1,7 +1,5 @@
 package UI;
 
-import Errors.ErrorExceptions;
-import Parser.InputManager;
 import Tasks.TaskManager;
 import Tasks.task;
 
@@ -11,16 +9,16 @@ import Tasks.task;
  * replies from the bot.
  */
 public class UserInterface {
+    private static boolean isExit = false;
     private String input;
-    public static boolean exit = false;
 
     /**
      * Creates a UserInterface object that helps to handle all the user inputs and pass it along to
      * the parser to be broken down.
      */
     public UserInterface() {
-        System.out.println("Welcome to MattBot v1.0!" + System.lineSeparator() +
-                        "How may I assist you today?");
+        System.out.println("Welcome to MattBot v1.0!" + System.lineSeparator()
+                        + "How may I assist you today?");
     }
 
     /**
@@ -28,21 +26,21 @@ public class UserInterface {
      *
      * @param input
      */
-    public void input(String input){
+    public void input(String input) {
         this.input = input;
     }
 
     /**
      * Calls the Parser and pass the user input along to be broken down and understood.
      */
-    private void action(){
+    private void action() {
         InitiateParser.parser(input);
     }
 
     /**
      * Prints the error message when an empty command is entered into the bot.
      */
-    private void failed(){
+    private void failed() {
         System.out.println("No commands entered, please enter a command!");
     }
 
@@ -63,14 +61,14 @@ public class UserInterface {
      * Prints the closing off statement when the user shuts down the Mattbot.
      */
     public static void stop() {
-        exit = true;
+        isExit = true;
         System.out.println("Awww, leaving so soon? Hope to see you again!");
     }
 
     /**
      * Prints the task processing message when the user tries to mark a task as completed.
      */
-    public static void done(){
+    public static void done() {
         System.out.println("Beep Boop Beep .....");
     }
 
@@ -80,14 +78,14 @@ public class UserInterface {
      *
      * @return boolean whether the user entered the exit command.
      */
-    public boolean getStop(){
-        return exit;
+    public boolean getStop() {
+        return isExit;
     }
 
     /**
      * Prints the error message when an invalid command is entered by the user.
      */
-    public static void wrongCommand(){
+    public static void wrongCommand() {
         System.out.println("Errroorrrr! Invalid command entered! Cannot compute!");
     }
 
@@ -96,7 +94,7 @@ public class UserInterface {
      *
      * @param t the selected task to be added.
      */
-    public static void addedTask(task t){
+    public static void addedTask(task t) {
         System.out.println("Task has been successfully added!");
         System.out.println("    " + TaskManager.read(t));
         System.out.println("MattBot is tracking " + TaskManager.storeIndex() + " number of Tasks.task!");

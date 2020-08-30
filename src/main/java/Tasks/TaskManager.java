@@ -1,14 +1,17 @@
 package Tasks;
 
-import DateTime.DateTimeManager;
-import Errors.ErrorExceptions;
-import UI.UserInterface;
-import File.FileManager;
-
 import java.io.File;
 import java.io.IOException;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+
+import DateTime.DateTimeManager;
+import Errors.ErrorExceptions;
+import File.FileManager;
+import UI.UserInterface;
+
+
+
 
 /**
  * Represents the object that handles all the actions carried out by the task.
@@ -29,17 +32,17 @@ public class TaskManager {
     public static void newTask(String name, String itype, String date, String fileDir) throws ErrorExceptions {
         task Task;
         if (itype.equals("Todo")) {
-            Task = new Todo(name,"[T]");
+            Task = new Todo(name, "[T]");
         } else if (itype.equals("Deadline")) {
-            Task = new Deadline(name,"[D]");
-            DateTimeManager.addDate(Task,date);
+            Task = new Deadline(name, "[D]");
+            DateTimeManager.addDate(Task, date);
         } else {
-            Task = new Event(name,"[E]");
-            DateTimeManager.addDate(Task,date);
+            Task = new Event(name, "[E]");
+            DateTimeManager.addDate(Task, date);
         }
         store.add(Task);
         UserInterface.addedTask(Task);
-        save(fileDir,Task);
+        save(fileDir, Task);
     }
 
     /**
@@ -49,7 +52,7 @@ public class TaskManager {
      * @return task selected task.
      */
     public static task getTask(int index) {
-        task t = store.get(index-1);
+        task t = store.get(index - 1);
         return t;
     }
 
@@ -73,7 +76,7 @@ public class TaskManager {
      * @param index index of the task.
      */
     public static void delete(int index) {
-        store.remove(index-1);
+        store.remove(index - 1);
         try {
             FileManager.edit(fileDir, store);
         } catch (IOException e) {
@@ -86,24 +89,31 @@ public class TaskManager {
      *
      * @return int number of tasks.
      */
-    public static int storeIndex(){
+    public static int storeIndex() {
         return store.size();
     }
+
+    /**
+     * Returns the printing String of a task which contain all the information.
+     *
+     * @param t task.
+     * @return String message.
+     */
     public static String read(task t) {
         String done = "";
         if (t.getTaskCompleted()) {
             done = "[O]";
-        }  else {
+        } else {
             done = "[X]";
         }
         if (t.getTaskType().equals("[T]")) {
             return t.getTaskType() + done + " " + t.getTaskName();
         } else if (t.getTaskType().equals("[D]")) {
-            return t.getTaskType() + done + " " + t.getTaskName() + "(by: " +
-                    t.getTaskDate().format(DateTimeFormatter.ofPattern("dd MMM uuuu HHmm")) + ")";
+            return t.getTaskType() + done + " " + t.getTaskName() + "(by: "
+                    + t.getTaskDate().format(DateTimeFormatter.ofPattern("dd MMM uuuu HHmm")) + ")";
         } else {
-            return t.getTaskType() + done + " " + t.getTaskName() + "(at: " +
-                    t.getTaskDate().format(DateTimeFormatter.ofPattern("dd MMM uuuu HHmm")) + ")";
+            return t.getTaskType() + done + " " + t.getTaskName() + "(at: "
+                    + t.getTaskDate().format(DateTimeFormatter.ofPattern("dd MMM uuuu HHmm")) + ")";
         }
     }
 
@@ -123,8 +133,8 @@ public class TaskManager {
      * Loads the local save file into the program to continue the previous list.
      * @param save
      */
-    public static void load(File save){
-        FileManager.read(save,store);
+    public static void load(File save) {
+        FileManager.read(save, store);
     }
 
     /**
@@ -132,9 +142,9 @@ public class TaskManager {
      * @param fileDir file directory of the local save.
      * @param t task.
      */
-    public static void save(String fileDir,task t) {
-        try{
-            FileManager.add(fileDir,TaskManager.read(t));
+    public static void save(String fileDir, task t) {
+        try {
+            FileManager.add(fileDir, TaskManager.read(t));
         } catch (IOException e) {
             System.out.println(e);
         }
@@ -145,14 +155,15 @@ public class TaskManager {
      *
      * @param d file file directory.
      */
-    public static void fileDir(String d){
+    public static void fileDir(String d) {
         fileDir = d;
     }
 
     /**
      * Clones and returns the ArrayList the stores all the tasks.
      *
-     * @return ArrayList<task> task store.
+     * @return ArrayList task store.
+     *
      */
     public static ArrayList<task> getStore() {
         ArrayList<task> clone = new ArrayList<>();

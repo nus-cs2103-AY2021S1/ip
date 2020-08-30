@@ -10,7 +10,7 @@ public class WrongCommand extends Command {
     /**
      * Calls UserInterface to print the error message.
      */
-    public static void execute(){
+    public static void execute() {
         UserInterface.wrongCommand();
     }
 }

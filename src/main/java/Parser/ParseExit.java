@@ -1,8 +1,6 @@
 package Parser;
 
 import Command.ExitCommand;
-import Errors.ErrorExceptions;
-import UI.UserInterface;
 
 /**
  * Represents the bridge that calls the appropriate exit command.

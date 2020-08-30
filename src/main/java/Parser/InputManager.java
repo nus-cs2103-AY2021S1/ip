@@ -1,12 +1,13 @@
 package Parser;
 
+import java.util.NoSuchElementException;
+import java.util.Scanner;
+
 import Errors.ErrorExceptions;
 import Tasks.TaskManager;
 import Tasks.task;
-import UI.UserInterface;
 
-import java.util.NoSuchElementException;
-import java.util.Scanner;
+
 
 /**
  * Represents a manager that handles all actions carried out by the parser.
@@ -60,7 +61,7 @@ public class InputManager {
                 System.out.println(e);
             }
         } else { // add tasks
-            ParseAddTask.execute(current,input);
+            ParseAddTask.execute(current, input);
         }
     }
 
@@ -85,6 +86,7 @@ public class InputManager {
                         current = sc.next();
                     }
                 } catch (NoSuchElementException e) {
+                    // do nothing
                 }
             } else {
                 try {
@@ -92,7 +94,9 @@ public class InputManager {
                         name = name + current + " ";
                         current = sc.next();
                     }
-                } catch (NoSuchElementException e) {}
+                } catch (NoSuchElementException e) {
+                    // do nothing
+                }
             }
             return name;
         } catch (NoSuchElementException e) {
@@ -138,7 +142,7 @@ public class InputManager {
         } catch (NoSuchElementException e) {
             if (type == 1) {
                 return date;
-            } else{
+            } else {
                 throw new ErrorExceptions("Wrong deadline or event command format, missing /action: task");
             }
         }
@@ -150,7 +154,7 @@ public class InputManager {
      *
      * @param d file directory.
      */
-    public static void fileDir(String d){
+    public static void fileDir(String d) {
         fileDir = d;
     }
 
@@ -159,5 +163,7 @@ public class InputManager {
      *
      * @return String file directory.
      */
-    public static String getFileDir() { return fileDir; }
+    public static String getFileDir() {
+        return fileDir;
+    }
 }

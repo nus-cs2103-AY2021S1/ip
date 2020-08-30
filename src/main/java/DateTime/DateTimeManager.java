@@ -1,14 +1,14 @@
 package DateTime;
 
-import Errors.ErrorExceptions;
-import Tasks.task;
-
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
+
+import Errors.ErrorExceptions;
+import Tasks.task;
+
 
 /**
  * Represents a manager that handles all actions and requests that involves dates and time.
@@ -22,7 +22,7 @@ public class DateTimeManager {
      */
     public static LocalDateTime setDateTime(CharSequence s) {
         DateTimeFormatter format = DateTimeFormatter.ofPattern("d-MM-uuuu HHmm");
-        LocalDateTime dt = LocalDateTime.parse(s,format);
+        LocalDateTime dt = LocalDateTime.parse(s, format);
         return dt;
     }
 

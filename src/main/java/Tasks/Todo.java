@@ -1,7 +1,5 @@
 package Tasks;
 
-import Tasks.task;
-
 /**
  * Represents a Todo task that is created by the user.
  * Stores the set if information of the task entered by the user.
@@ -14,7 +12,7 @@ public class Todo extends task {
      * @param name name of Todo.
      * @param type type of the task.
      */
-    public Todo(String name, String type){
+    public Todo(String name, String type) {
         super(name, type);
     }
 
