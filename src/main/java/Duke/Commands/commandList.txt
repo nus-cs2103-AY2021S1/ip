@@ -1,0 +1,7 @@
+1)list
+2)todo
+3)deadline
+4)event
+5)delete
+6)done
+7)bye
