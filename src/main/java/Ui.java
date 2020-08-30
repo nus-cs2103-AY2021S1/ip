@@ -33,9 +33,19 @@ public class Ui {
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Initializing\n" + logo);
-        System.out.println("Yo what's up man, it's ya boi DUKE \n"
-                + "What can I do for you today, Sir?");
+        String version = "Version 1.0";
+        String indent = "        ";
+        String commands = indent + "list: Shows the current List \n"
+                + indent + "delete (index): Delete the task from the List \n"
+                + indent + "todo (activity): Creates a Todo Task \n"
+                + indent +"deadline /by (date) YYYY-MM-DD: Creates a Deadline Task \n"
+                + indent + "event /at (string): Creates an Event Task \n"
+                + indent + "find (keyword): Finds all occurrences of the keyword in the List";
+        System.out.println("INITIALIZING \n" + logo);
+        System.out.println("Current version: " + version);
+        System.out.println("Welcome to DUKE, the ToDo list creator \n"
+                + "We current support these commands: \n" + commands);
+        System.out.println("Please input a command:");
     }
 
     /**
