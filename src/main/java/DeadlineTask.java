@@ -1,9 +1,9 @@
 public class DeadlineTask extends Task {
-    protected String due;
+    protected DukeDate due;
 
     public DeadlineTask(String description, String due) {
         super(description);
-        this.due = due;
+        this.due = new DukeDate(due);
     }
 
     @Override

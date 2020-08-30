@@ -1,2 +1,1 @@
-T | 0 | todo homework
-E | 0 | sndc  | at 9pm
+D | 0 | hgello  | 21 DECEMBER 2019
