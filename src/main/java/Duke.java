@@ -1,5 +1,7 @@
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.time.LocalDate;
 
 public class Duke {
 
@@ -121,11 +123,16 @@ class ToDo extends Task {
 }
 
 class Deadline extends Task {
+    final static private DateTimeFormatter MYDATEFORMATTER =
+            DateTimeFormatter.ofPattern("LLL dd uuuu");
     protected String by;
+    protected LocalDate date;
+
 
     public Deadline(String name, String by) {
         super(name);
-        this.by = by;
+        this.date = LocalDate.parse(by);
+        this.by = this.date.format(MYDATEFORMATTER);
     }
 
     @Override
