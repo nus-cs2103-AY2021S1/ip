@@ -44,7 +44,6 @@ public class TaskList {
      * Adds a task to the task list.
      *
      * @param t task to be added
-     * @return Nothing.
      */
     public void addTask(Task t) {
         taskList.add(t);
@@ -54,7 +53,6 @@ public class TaskList {
      * Deletes specified task from the task list.
      *
      * @param index index of task to be deleted from the task list.
-     * @return Nothing.
      */
     public void deleteTask(int index) {
         taskList.remove(index);
@@ -64,7 +62,6 @@ public class TaskList {
      * Marks the specified task as done.
      *
      * @param index index of task to be marked as done.
-     * @return Nothing.
      */
     public void markTaskAsDone(int index) {
         taskList.get(index).setDone();

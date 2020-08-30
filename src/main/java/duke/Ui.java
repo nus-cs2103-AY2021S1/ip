@@ -38,8 +38,6 @@ public class Ui {
 
     /**
      * Prints a welcome message every time the chat bot is activated.
-     *
-     * @return Nothing.
      */
     public void welcomeMessage() {
         // Introduction at the beginning of the chat
@@ -51,8 +49,6 @@ public class Ui {
     /**
      * Prints all the available commands that the user can input.
      * This includes the format of the command so as to be accepted as a command.
-     *
-     * @return Nothing.
      */
     public void printAvailableCommands() {
         System.out.println(SERVANT_SPEAK
@@ -77,7 +73,6 @@ public class Ui {
      *
      * @param task task that was added to the task list.
      * @param size size of task list.
-     * @return Nothing.
      */
     public void printTaskAddedMessage(Task task, int size) {
         System.out.println(SERVANT_SPEAK
@@ -92,7 +87,6 @@ public class Ui {
      * Prints back to the console the task that was marked as done.
      *
      * @param task task that was marked as done.
-     * @return Nothing.
      */
     public void printMarkAsDoneMessage(Task task) {
         System.out.println(SERVANT_SPEAK
@@ -105,7 +99,6 @@ public class Ui {
      * Prints back to the console the task that was removed from the task list.
      *
      * @param task task that was removed from the task list.
-     * @return Nothing.
      */
     public void printTaskDeletedMessage(Task task) {
         System.out.println(SERVANT_SPEAK
@@ -117,7 +110,6 @@ public class Ui {
      * Prints all the task in the task list.
      *
      * @param userTasks This is the task list to be printed.
-     * @return Nothing.
      */
     public void printAllTasks(ArrayList<Task> userTasks) {
         System.out.println(SERVANT_SPEAK
@@ -130,7 +122,6 @@ public class Ui {
      * that were marked as done.
      *
      * @param userTasksDone This is the list of tasks to be printed.
-     * @return Nothing.
      */
     public void printAllTasksDone(ArrayList<Task> userTasksDone) {
         System.out.println(SERVANT_SPEAK
@@ -144,7 +135,6 @@ public class Ui {
      * that were not marked as done.
      *
      * @param userTasksNotDone This is the list of tasks to be printed.
-     * @return Nothing.
      */
     public void printAllTasksNotDone(ArrayList<Task> userTasksNotDone) {
         System.out.println(SERVANT_SPEAK
@@ -157,7 +147,6 @@ public class Ui {
      * Prints all the to do tasks in the task list.
      *
      * @param userToDos This is the list of to do to do tasks to be printed.
-     * @return Nothing.
      */
     public void printToDos(ArrayList<Task> userToDos) {
         System.out.println(SERVANT_SPEAK
@@ -170,7 +159,6 @@ public class Ui {
      * that were marked as done.
      *
      * @param userToDosDone This is the list of tasks to be printed.
-     * @return Nothing.
      */
     public void printToDosDone(ArrayList<Task> userToDosDone) {
         System.out.println(SERVANT_SPEAK
@@ -184,7 +172,6 @@ public class Ui {
      * that were not marked as done.
      *
      * @param userToDosNotDone This is the list of tasks to be printed.
-     * @return Nothing.
      */
     public void printToDosNotDone(ArrayList<Task> userToDosNotDone) {
         System.out.println(SERVANT_SPEAK
@@ -197,7 +184,6 @@ public class Ui {
      * Prints all the deadlines in the task list.
      *
      * @param userDeadlines This is the list of deadlines to be printed.
-     * @return Nothing.
      */
     public void printDeadlines(ArrayList<Task> userDeadlines) {
         System.out.println(SERVANT_SPEAK
@@ -210,7 +196,6 @@ public class Ui {
      * that were marked as done.
      *
      * @param userDeadlinesDone This is the list of deadlines to be printed.
-     * @return Nothing.
      */
     public void printDeadlinesDone(ArrayList<Task> userDeadlinesDone) {
         System.out.println(SERVANT_SPEAK
@@ -224,7 +209,6 @@ public class Ui {
      * that were not marked as done.
      *
      * @param userDeadlinesNotDone This is the list of deadlines to be printed.
-     * @return Nothing.
      */
     public void printDeadlinesNotDone(ArrayList<Task> userDeadlinesNotDone) {
         System.out.println(SERVANT_SPEAK
@@ -237,7 +221,6 @@ public class Ui {
      * Prints all the events in the task list.
      *
      * @param userEvents This is the list of events to be printed.
-     * @return Nothing.
      */
     public void printEvents(ArrayList<Task> userEvents) {
         System.out.println(SERVANT_SPEAK
@@ -250,7 +233,6 @@ public class Ui {
      * that were marked as done.
      *
      * @param userEventsDone This is the list of events to be printed.
-     * @return Nothing.
      */
     public void printEventsDone(ArrayList<Task> userEventsDone) {
         System.out.println(SERVANT_SPEAK
@@ -264,7 +246,6 @@ public class Ui {
      * that were not marked as done.
      *
      * @param userEventsNotDone This is the list of events to be printed.
-     * @return Nothing.
      */
     public void printEventsNotDone(ArrayList<Task> userEventsNotDone) {
         System.out.println(SERVANT_SPEAK
@@ -275,8 +256,6 @@ public class Ui {
 
     /**
      * Prints a message to the console when the user ends the chat with Duke.
-     *
-     * @return Nothing.
      */
     public void printByeMessage() {
         System.out.println(SERVANT_SPEAK
@@ -288,7 +267,6 @@ public class Ui {
      * Prints out the error message generated by the DukeException object.
      *
      * @param ex This is the DukeException object created by the error.
-     * @return Nothing.
      */
     public void printError(DukeException ex) {
         System.out.println(ex);

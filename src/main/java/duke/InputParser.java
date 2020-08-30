@@ -2,6 +2,11 @@ package duke;
 
 import java.util.Scanner;
 
+/**
+ * This class is the one handling all the parsing of user input
+ * and return the appropriate enum command. Any invalid input
+ * will return an invalid command enum type.
+ */
 public class InputParser {
 
     private Scanner myObj;
@@ -13,10 +18,22 @@ public class InputParser {
         this.ui = new Ui();
     }
 
+    /**
+     * Reads and returns the input from user
+     * as a string.
+     *
+     * @return String input from user
+     */
     public String getInput() {
         return myObj.nextLine().trim();
     }
 
+    /**
+     * Takes the given input and parses it to
+     * return the appropriate command enum type.
+     * @param input input from the user
+     * @return CommandType type of command to be executed
+     */
     public CommandType parseInput(String input) {
         if (input.isEmpty()) {
             return CommandType.INVALID_IS_EMPTY;
@@ -118,26 +135,37 @@ public class InputParser {
         return CommandType.INVALID_COMMAND;
     }
 
-    public boolean isValidCommand(String input) {
-        return input.equals("help")
-                || input.startsWith("todo")
-                || input.startsWith("deadline")
-                || input.startsWith("event")
-                || input.equals("list")
-                || input.startsWith("done")
-                || input.startsWith("delete")
-                || input.equals("bye");
-    }
-
+    /**
+     * Returns true if the input requests a task to be
+     * created without a description.
+     *
+     * @param input input from user
+     * @return boolean true if description is missing
+     */
     public boolean isEmptyDescription(String input) {
         return input.split(" ").length == 1;
     }
 
+    /**
+     * Returns true if the input requests a deadline to
+     * be created without a date and time.
+     *
+     * @param input input from user
+     * @return boolean true if date and time is missing
+     */
     public boolean hasDeadlineBy(String input) {
         return input.contains("/by")
                 && input.split(" /by ").length == 2;
     }
 
+    /**
+     * Returns true if the input requests an event to
+     * be created without a start and end date and time
+     *
+     * @param input input from user
+     * @return boolean true if start and end date and time
+     *         is missing
+     */
     public boolean hasEventStartEndTime(String input) {
         return input.contains("/at")
                 && input.split(" /at ").length == 2

@@ -1,5 +1,9 @@
 package duke;
 
+/**
+ * This is the enum class to store the types of
+ * commands a user can input to Duke
+ */
 public enum CommandType {
     HELP,
     TODO,

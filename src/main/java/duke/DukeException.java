@@ -1,5 +1,8 @@
 package duke;
 
+/**
+ * This class handles all exceptions that is thrown from the Duke chatbot.
+ */
 public class DukeException extends Exception {
     protected final String MESSAGE_ALL_TASKS_EMPTY_INPUT = "    I am sorry my Lord. "
             + "You have to give a command.\n";
@@ -21,6 +24,11 @@ public class DukeException extends Exception {
         this.exceptionType = exceptionType;
     }
 
+    /**
+     * Returns error message as a string.
+     *
+     * @return String error message to be printed to console.
+     */
     @Override
     public String toString() {
         String errorMessage = "";

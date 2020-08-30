@@ -40,8 +40,6 @@ public class Task {
 
     /**
      * Sets done status of Task object as done
-     *
-     * @return Nothing.
      */
     public void setDone() {
         this.isDone = true;

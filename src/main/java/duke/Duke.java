@@ -2,6 +2,9 @@ package duke;
 
 import java.util.ArrayList;
 
+/**
+ * This class handles the logic behind the Duke chatbot
+ */
 public class Duke {
 
     private Ui ui;
@@ -14,6 +17,11 @@ public class Duke {
         this.inputParser = new InputParser();
     }
 
+    /**
+     * Runs the Duke chat bot.
+     *
+     * @throws DukeException
+     */
     public void run() throws DukeException {
         // Print Duke welcome message
         ui.welcomeMessage();
@@ -25,9 +33,9 @@ public class Duke {
         CommandType command = CommandType.HELP;
         // Start chat
         while (command != CommandType.BYE) {
-            Task t;
-            String[] inputSplit;
-            String description;
+            Task t = new Task("");
+            String[] inputSplit = new String[] {};
+            String description = "";
 
             // Get input from user
             System.out.println(ui.getUserPrompt());
@@ -217,7 +225,6 @@ public class Duke {
                     continue;
                 }
             }
-
         }
     }
 }
