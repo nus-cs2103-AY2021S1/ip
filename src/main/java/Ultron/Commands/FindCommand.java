@@ -2,8 +2,8 @@ package ultron.commands;
 
 import ultron.Storage;
 import ultron.TaskList;
-import ultron.UI;
 import ultron.tasks.Task;
+import ultron.ui.UI;
 
 public class FindCommand extends Command {
 

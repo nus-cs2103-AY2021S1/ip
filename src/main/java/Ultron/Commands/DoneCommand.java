@@ -3,9 +3,9 @@ package ultron.commands;
 import ultron.Parser;
 import ultron.Storage;
 import ultron.TaskList;
-import ultron.UI;
 import ultron.exceptions.ExceptionType;
 import ultron.exceptions.UltronException;
+import ultron.ui.UI;
 
 public final class DoneCommand extends Command {
 
