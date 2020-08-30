@@ -1,5 +1,8 @@
 package duke.ui.fxcomponents;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import duke.Duke;
 import duke.ui.GuiHelper;
 import javafx.fxml.FXML;
@@ -60,14 +63,8 @@ public class MainWindow extends AnchorPane {
     }
 
     private void sendWelcomeMessage() {
-        final String[] welcomeMessageParts = {
-            "hello sir",
-            "its me your assistant sir",
-            "how may i be of service sir"
-        };
-        for (String message : welcomeMessageParts) {
-            dukeMessage(message);
-        }
+        final String welcomeMessage = "hello sir\nits me your assistant sir\nhow may i be of service sir";
+        this.dukeMessage(welcomeMessage);
     }
 
     private void closeWindow() {
@@ -76,11 +73,53 @@ public class MainWindow extends AnchorPane {
         stage.close();
     }
 
+    private void sendMessage(String message, boolean isFromDuke) {
+        this.splitMessage(message).stream().forEach((line) -> {
+            if (isFromDuke) {
+                outputContainer.getChildren().add(DialogBox.createDukeDialog(line, dukeImage));
+            } else {
+                outputContainer.getChildren().add(DialogBox.createUserDialog(line, userImage));
+            }
+        });
+    }
+
     private void dukeMessage(String message) {
-        outputContainer.getChildren().add(DialogBox.createDukeDialog(message, dukeImage));
+        this.sendMessage(message, true);
     }
 
     private void userMessage(String message) {
-        outputContainer.getChildren().add(DialogBox.createUserDialog(message, userImage));
+        this.sendMessage(message, false);
+    }
+
+    /**
+     * Splits long messages up such that they can be displayed in
+     * the DialogBox properly.
+     * Wraps each line at 40 characters, and groups every 4 lines
+     * together in an ArrayList.
+     * @param message
+     * @return
+     */
+    private ArrayList<String> splitMessage(String message) {
+        final int numLines = 4;
+        String[] lines = message.split("\\n");
+        ArrayList<String> allLines = new ArrayList<>();
+        for (String line : lines) {
+            // split the string every 40 chars, code from:
+            // https://stackoverflow.com/questions/2297347/splitting-a-string-at-every-n-th-character
+            allLines.addAll(Arrays.asList(line.split("(?<=\\G.{40})")));
+        }
+
+        ArrayList<String> messageChunks = new ArrayList<>();
+        for (int i = 0; i < allLines.size(); i += numLines) {
+            String chunk = "";
+            for (int j = i; j < allLines.size() && j < i + numLines; j++) {
+                if (j != i) {
+                    chunk += "\n";
+                }
+                chunk += allLines.get(j);
+            }
+            messageChunks.add(chunk);
+        }
+        return messageChunks;
     }
 }
