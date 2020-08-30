@@ -18,9 +18,9 @@ public class Task {
     @Override
     public String toString() {
         if (completed) {
-            return String.format("[✓] %s", name);
+            return String.format("[\u2713] %s", name);
         } else {
-            return String.format("[✗] %s", name);
+            return String.format("[\u2717] %s", name);
         }
     }
 
