@@ -12,33 +12,6 @@ public class Duke {
         this.inputParser = new InputParser();
     }
 
-    public static boolean isEmptyInput(String input) {
-        return input.isEmpty();
-    }
-
-    public static boolean isValidCommand(String input) {
-        return input.toLowerCase().startsWith("todo")
-                || input.toLowerCase().startsWith("deadline")
-                || input.toLowerCase().startsWith("event");
-    }
-
-    public static boolean isEmptyDescription(String input) {
-        return input.split(" ").length == 1;
-    }
-
-    public static boolean hasDeadlineBy(String input) {
-        return input.contains("/by")
-                && input.split(" /by ").length == 2;
-    }
-
-    public static boolean hasEventStartEndTime(String input) {
-        return input.contains("/at")
-                && input.split(" /at ").length == 2
-                && input.split(" /at ")[1].split(" ").length == 2
-                && input.split(" /at ")[1].split(" ")[1]
-                .split("-").length == 2;
-    }
-
     public void run() throws DukeException {
         // Print Duke welcome message
         ui.welcomeMessage();
@@ -183,12 +156,6 @@ public class Duke {
                 }
             }
 
-            // Update Tasklist.txt after adding task
-//            storage.saveToFile(userTasks.getTaskList());
         }
-    }
-
-    public static void main(String[] args) throws DukeException {
-        new Duke().run();
     }
 }
