@@ -1,6 +1,11 @@
+import java.awt.*;
 import java.util.List;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 
 public class Duke {
@@ -16,6 +21,11 @@ public class Duke {
 
         Scanner scanner = new Scanner(System.in);
 
+        try {
+            readFile();
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found");
+        }
         greet();
         while (scanner.hasNextLine()) {
             String command = scanner.nextLine();
@@ -78,14 +88,29 @@ public class Duke {
         } else if (command.split(" ")[0].equals("done")) {
             int index = Integer.parseInt(command.split(" ")[1]);
             done(tasks.get(index - 1));
+            try {
+                writeToFile();
+            } catch (IOException e) {
+                System.out.println("Oops! " + e.getMessage());
+            }
         } else if (command.split(" ")[0].equals("delete")) {
             delete(Integer.parseInt(command.split(" ")[1]));
+            try {
+                writeToFile();
+            } catch (IOException e) {
+                System.out.println("Oops! " + e.getMessage());
+            }
         } else if (command.split(" ")[0].equals("todo")) {
             String taskcommand = command.replace("todo", "");
             if (!taskcommand.equals("")) {
                 add(new ToDo(taskcommand));
             } else {
                 throw new DukeException("EmptyToDo");
+            }
+            try {
+                writeToFile();
+            } catch (IOException e) {
+                System.out.println("Oops! " + e.getMessage());
             }
         } else if (command.split(" ")[0].equals("deadline")) {
             String taskcommand = command.split("/")[0].replace("deadline", "");
@@ -95,6 +120,11 @@ public class Duke {
             } else {
                 throw new DukeException("EmptyDeadline");
             }
+            try {
+                writeToFile();
+            } catch (IOException e) {
+                System.out.println("Oops! " + e.getMessage());
+            }
         } else if (command.split(" ")[0].equals("event")) {
             String taskcommand = command.split("/")[0].replace("event", "");
             if (!taskcommand.equals("")) {
@@ -103,8 +133,60 @@ public class Duke {
             } else {
                 throw new DukeException("EmptyEvent");
             }
+            try {
+                writeToFile();
+            } catch (IOException e) {
+                System.out.println("Oops! " + e.getMessage());
+            }
         } else {
             throw new DukeException("invalid");
         }
+    }
+
+    private static void readFile() throws FileNotFoundException {
+        File file = new File("C:\\Users\\e0316059\\Desktop\\cs2103 ip\\src\\main\\java\\data\\duke.txt");
+        Scanner sc = new Scanner(file);
+        while (sc.hasNextLine()) {
+            String[] data = sc.nextLine().split(" \\| ");
+            if (data[0].equals("T")) {
+                ToDo todo = new ToDo(data[2]);
+                add(todo);
+                if (data[1].equals("1")) {
+                    todo.setDone();
+                }
+            } else if (data[0].equals("D")) {
+                Deadline deadline = new Deadline(data[2], data[3]);
+                add(deadline);
+                if (data[1].equals("1")) {
+                    deadline.setDone();
+                }
+            } else if (data[0].equals("E")) {
+                Event event = new Event(data[2], data[3]);
+                add(event);
+                if (data[1].equals("1")) {
+                    event.setDone();
+                }
+            }
+        }
+    }
+
+    private static void writeToFile() throws IOException {
+        FileWriter fileWriter = new FileWriter("C:\\Users\\e0316059\\Desktop\\cs2103 ip\\src\\main\\java\\data\\duke.txt");
+        for (int i = 0; i < tasks.size(); i++)  {
+            Task task = tasks.get(i);
+            if (task instanceof ToDo) {
+                String text = "T | " + (task.getStatus() ? "1" : "0") + " | " + task.getCommand();
+                fileWriter.write(text + System.lineSeparator());
+            } else if (task instanceof Deadline) {
+                String text = "D | " + (task.getStatus() ? "1" : "0") + " | " + task.getCommand()
+                        + " | " + ((Deadline) task).getTime();
+                fileWriter.write(text + System.lineSeparator());
+            } else if (task instanceof Event) {
+                String text = "E | " + (task.getStatus() ? "1" : "0") + " | " + task.getCommand()
+                        + " | " + ((Event) task).getTime();
+                fileWriter.write(text + System.lineSeparator());
+            }
+        }
+        fileWriter.close();
     }
 }
