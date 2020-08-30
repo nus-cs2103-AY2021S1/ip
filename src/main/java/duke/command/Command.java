@@ -16,9 +16,10 @@ public abstract class Command {
      * @param tasks TaskList linked to the program.
      * @param ui Ui linked to the program.
      * @param storage Storage linked to the program.
+     * @return String that contains the executed command.
      * @throws DukeException If an error is encountered.
      */
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
+    public abstract String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
 
     /**
      * Returns a boolean that dictates if the program is running.

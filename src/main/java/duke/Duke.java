@@ -16,6 +16,13 @@ public class Duke {
      * Creates a new instance of Duke object.
      */
     public Duke() {
+        ui = new Ui();
+        storage = new Storage("data/tasks.txt");
+        try {
+            tasks = new TaskList(storage.load());
+        } catch (DukeException e) {
+            tasks = new TaskList();
+        }
     }
 
     /**
@@ -30,7 +37,7 @@ public class Duke {
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
-            ui.showLoadingError();
+            System.out.println(ui.showLoadingError());
             tasks = new TaskList();
         }
     }
@@ -39,19 +46,19 @@ public class Duke {
      * Executes the running of the chat bot.
      */
     public void run() {
-        ui.greet();
+        System.out.println(ui.greet());
         boolean isExit = false;
         while (!isExit) {
             try {
                 String fullCommand = ui.readCommand();
-                ui.showLine();
+                System.out.println(ui.showLine());
                 Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
+                System.out.println(c.execute(tasks, ui, storage));
                 isExit = c.isExit();
             } catch (DukeException e) {
-                ui.showError(e.getMessage());
+                System.out.println(ui.showError(e.getMessage()));
             } finally {
-                ui.showLine();
+                System.out.println(ui.showLine());
             }
         }
     }
@@ -64,6 +71,11 @@ public class Duke {
     }
 
     public String getResponse(String input) {
-        return "Duke heard: " + input;
+        try {
+            Command c = Parser.parse(input);
+            return c.execute(tasks, ui, storage);
+        } catch (DukeException e) {
+            return ui.showError(e.getMessage());
+        }
     }
 }

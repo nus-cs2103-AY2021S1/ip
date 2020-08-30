@@ -28,14 +28,15 @@ public class DeleteCommand extends Command {
      * @param tasks TaskList linked to the program.
      * @param ui Ui linked to the program.
      * @param storage Storage linked to the program.
+     * @return String that contains the executed DeleteCommand.
      * @throws DukeTaskNotFoundException If the task is not found.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeTaskNotFoundException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeTaskNotFoundException {
         int taskNumber = Character.getNumericValue(commandDetails[1].charAt(0)) - 1;
         if (!tasks.getTasks().isEmpty() && taskNumber < tasks.getTasks().size()) {
             Task removedTask = tasks.getTasks().remove(taskNumber);
-            ui.showDeletedTask(removedTask, tasks.getTasks().size());
+            return ui.showDeletedTask(removedTask, tasks.getTasks().size());
         } else {
             throw new DukeTaskNotFoundException(" ERROR... TASK NOT FOUND. \n PLEASE TRY AGAIN ");
         }

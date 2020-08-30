@@ -27,12 +27,13 @@ public class ToDoCommand extends Command {
      * @param tasks TaskList linked to the program.
      * @param ui Ui linked to the program.
      * @param storage Storage linked to the program.
+     * @return String that contains the executed ToDoCommand.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         ToDo toDo = new ToDo(commandDetails[1]);
         tasks.getTasks().add(toDo);
-        ui.showTask(toDo, tasks.getTasks().size());
+        return ui.showTask(toDo, tasks.getTasks().size());
     }
 
     /**

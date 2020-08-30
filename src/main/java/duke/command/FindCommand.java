@@ -30,10 +30,11 @@ public class FindCommand extends Command {
      * @param tasks TaskList linked to the program.
      * @param ui Ui linked to the program.
      * @param storage Storage linked to the program.
+     * @return String that contains the executed FindCommand.
      * @throws DukeTaskNotFoundException If no matching tasks are found.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeTaskNotFoundException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeTaskNotFoundException {
         ArrayList<Task> taskArrayList = new ArrayList<>();
         for (Task task : tasks.getTasks()) {
             if (task.getDescription().toLowerCase().contains(keyword)) {
@@ -41,7 +42,7 @@ public class FindCommand extends Command {
             }
         }
         if (!taskArrayList.isEmpty()) {
-            ui.showMatchingTask(taskArrayList);
+            return ui.showMatchingTask(taskArrayList);
         } else {
             throw new DukeTaskNotFoundException(" NO MATCHING TASK FOUND. \n PLEASE TRY AGAIN. ");
         }

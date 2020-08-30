@@ -31,7 +31,8 @@ public class CommandTest {
         TaskList taskList = new TaskList();
         ToDo toDo = new ToDo("read book");
         taskList.getTasks().add(toDo);
-        Parser.parse("delete 1").execute(taskList, new Ui(), new Storage("invalidPath/task.txt"));
+        System.out.println(Parser.parse("delete 1")
+                .execute(taskList, new Ui(), new Storage("invalidPath/task.txt")));
 
         assertEquals("Noted. Target Scraped: \n   " + toDo.toString()
                 + " \n Now you have 0 tasks in the list.", outputStreamCaptor.toString().trim());
@@ -42,7 +43,8 @@ public class CommandTest {
         TaskList taskList = new TaskList();
         ToDo toDo = new ToDo("read book");
         taskList.getTasks().add(toDo);
-        Parser.parse("done 1").execute(taskList, new Ui(), new Storage("invalidPath/task.txt"));
+        System.out.println(Parser.parse("done 1")
+                .execute(taskList, new Ui(), new Storage("invalidPath/task.txt")));
 
         assertEquals("Nice! Target Eliminated: \n   " + toDo.toString(), outputStreamCaptor.toString().trim());
     }
@@ -53,7 +55,8 @@ public class CommandTest {
         ToDo toDo = new ToDo("read book");
         toDo.doneTask();
         taskList.getTasks().add(toDo);
-        Parser.parse("undo 1").execute(taskList, new Ui(), new Storage("invalidPath/task.txt"));
+        System.out.println(Parser.parse("undo 1")
+                .execute(taskList, new Ui(), new Storage("invalidPath/task.txt")));
 
         assertEquals("Task has been undone: \n   " + toDo.toString(), outputStreamCaptor.toString().trim());
     }
@@ -61,18 +64,19 @@ public class CommandTest {
     @Test
     public void parse_toDoCommand_exceptionThrown() throws DukeException {
         TaskList taskList = new TaskList();
-        Parser.parse("todo read book").execute(taskList, new Ui(), new Storage("invalidPath/task.txt"));
+        System.out.println(Parser.parse("todo read book")
+                .execute(taskList, new Ui(), new Storage("invalidPath/task.txt")));
 
-        assertEquals("Got it. I've added this task: " + System.lineSeparator() + "   [T][X] read book "
+        assertEquals("Got it. I've added this task: \n" + "   [T][X] read book "
                 + "\n Now you have 1 tasks in the list.", outputStreamCaptor.toString().trim());
     }
 
     @Test
     public void parse_deadline_exceptionThrown() throws DukeException {
         TaskList taskList = new TaskList();
-        Parser.parse("deadline return book /by 2/12/2019 1800").execute(taskList, new Ui(),
-                new Storage("invalidPath/task.txt"));
-        assertEquals("Got it. I've added this task: " + System.lineSeparator()
+        System.out.println(Parser.parse("deadline return book /by 2/12/2019 1800")
+                .execute(taskList, new Ui(), new Storage("invalidPath/task.txt")));
+        assertEquals("Got it. I've added this task: \n"
                 + "   [D][X] return book  (by: Dec 2 2019 6:00 PM) "
                 + "\n Now you have 1 tasks in the list.", outputStreamCaptor.toString().trim());
     }
@@ -80,9 +84,9 @@ public class CommandTest {
     @Test
     public void parse_event_exceptionThrown() throws DukeException {
         TaskList taskList = new TaskList();
-        Parser.parse("event return book /at 2/12/2019 4-6pm").execute(taskList, new Ui(),
-                new Storage("invalidPath/task.txt"));
-        assertEquals("Got it. I've added this task: " + System.lineSeparator()
+        System.out.println(Parser.parse("event return book /at 2/12/2019 4-6pm")
+                .execute(taskList, new Ui(), new Storage("invalidPath/task.txt")));
+        assertEquals("Got it. I've added this task: \n"
                 + "   [E][X] return book  (at: 2/12/2019 4-6pm) "
                 + "\n Now you have 1 tasks in the list.", outputStreamCaptor.toString().trim());
     }

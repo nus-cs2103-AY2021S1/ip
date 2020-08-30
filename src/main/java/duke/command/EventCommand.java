@@ -27,13 +27,14 @@ public class EventCommand extends Command {
      * @param tasks TaskList linked to the program.
      * @param ui Ui linked to the program.
      * @param storage Storage linked to the program.
+     * @return String that contains the executed EventCommand.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         String at = commandDetails[1].split(" ", 2)[1];
         Event event = new Event(commandDetails[0], at);
         tasks.getTasks().add(event);
-        ui.showTask(event, tasks.getTasks().size());
+        return ui.showTask(event, tasks.getTasks().size());
     }
 
     /**

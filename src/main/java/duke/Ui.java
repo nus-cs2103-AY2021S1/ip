@@ -22,37 +22,43 @@ public class Ui {
 
     /**
      * Displays the welcome message when the program starts.
+     *
+     * @return String containing greeting message.
      */
-    public void greet() {
+    public String greet() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo + "\n"
+        return ("Hello from\n" + logo + "\n"
                 + "~ \n Hello I'm the Terminator \n What can I do for you? \n~");
     }
 
     /**
      * Displays the message when there is a loading error.
+     *
+     * @return String containing loading error message.
      */
-    public void showLoadingError() {
-        System.out.println(" ERROR DETECTED! UNABLE TO LOAD TASKLIST. \n CREATING NEW TASKLIST");
+    public String showLoadingError() {
+        return " ERROR DETECTED! UNABLE TO LOAD TASKLIST. \n CREATING NEW TASKLIST";
     }
 
     /**
      * Displays the list of task in the TaskList.
      *
      * @param taskList ArrayList of task.
+     * @return String containing all the tasks.
      */
-    public void showTaskList(ArrayList<Task> taskList) {
-        System.out.println(" Here are targets in your kill list: ");
+    public String showTaskList(ArrayList<Task> taskList) {
+        StringBuilder output = new StringBuilder(" Here are targets in your kill list: \n");
         if (!taskList.isEmpty()) {
             for (int i = 0; i < taskList.size(); i++) {
                 int count = i + 1;
-                System.out.println(String.format("   %d. ", count) + taskList.get(i).toString());
+                output.append(String.format("   %d. ", count)).append(taskList.get(i).toString());
             }
         }
+        return output.toString();
     }
 
     /**
@@ -67,58 +73,67 @@ public class Ui {
 
     /**
      * Displays text when the program stops.
+     *
+     * @return String containing message to terminate.
      */
-    public void showBye() {
-        System.out.println(" I will be back! ");
+    public String showBye() {
+        return " I will be back! ";
     }
 
     /**
      * Displays error message.
      *
      * @param message Error message.
+     * @return String containing error message.
      */
-    public void showError(String message) {
-        System.out.println(message);
+    public String showError(String message) {
+        return message;
     }
 
     /**
      * Displays divider.
+     *
+     * @return String containing a divider.
      */
-    public void showLine() {
-        System.out.println("\n ******************************************************************** \n");
+    public String showLine() {
+        return "\n ******************************************************************** \n";
     }
 
     /**
      * Displays the list of matching task in the TaskList.
      *
      * @param tasks ArrayList of task.
+     * @return String that contains list of matching tasks.
      */
-    public void showMatchingTask(ArrayList<Task> tasks) {
-        System.out.println(" Here are the matching tasks in your list:");
+    public String showMatchingTask(ArrayList<Task> tasks) {
+        StringBuilder output = new StringBuilder(" Here are the matching tasks in your list:\n");
         for (int i = 0; i < tasks.size(); i++) {
             int count = i + 1;
-            System.out.println(String.format("   %d. ", count) + tasks.get(i).toString());
+            output.append(String.format("   %d. ", count)).append(tasks.get(i).toString());
         }
+        return output.toString();
     }
 
     /**
      * Displays the task that is completed.
      *
      * @param task Task that is completed.
+     * @return String that contains the task that is done.
      */
-    public void showDoneTask(Task task) {
-        System.out.println(" Nice! Target Eliminated: \n   "
-                + task.toString());
+    public String showDoneTask(Task task) {
+        return " Nice! Target Eliminated: \n   "
+                + task.toString();
     }
 
     /**
      * Displays the task that has been undone.
      *
      * @param task Task that is undone.
+     * @return String that contains the task that has been undone.
      */
-    public void showUndoTask(Task task) {
-        System.out.println(" Task has been undone: \n   "
-                + task.toString());
+    public String showUndoTask(Task task) {
+        return " Task has been undone: \n   "
+                + task.toString();
     }
 
     /**
@@ -126,10 +141,11 @@ public class Ui {
      *
      * @param task Task that is deleted.
      * @param numTask Number of tasks.
+     * @return String that contains the deleted task.
      */
-    public void showDeletedTask(Task task, int numTask) {
-        System.out.println(String.format(" Noted. Target Scraped: \n   %s \n "
-                + "Now you have %d tasks in the list. ", task.toString(), numTask));
+    public String showDeletedTask(Task task, int numTask) {
+        return String.format(" Noted. Target Scraped: \n   %s \n "
+                + "Now you have %d tasks in the list. ", task.toString(), numTask);
     }
 
     /**
@@ -137,10 +153,12 @@ public class Ui {
      *
      * @param task Task that is added.
      * @param numTask Number of tasks.
+     * @return String containing the task added.
      */
-    public void showTask(Task task, int numTask) {
-        System.out.println(" Got it. I've added this task: ");
-        System.out.println(String.format("   %s \n Now you have %d tasks in the list. ",
-                task, numTask));
+    public String showTask(Task task, int numTask) {
+        String output = new StringBuilder().append(" Got it. I've added this task: \n")
+                .append(
+                        String.format("   %s \n Now you have %d tasks in the list. ", task, numTask)).toString();
+        return output;
     }
 }

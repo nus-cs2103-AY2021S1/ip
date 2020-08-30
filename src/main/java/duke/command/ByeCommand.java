@@ -15,11 +15,12 @@ public class ByeCommand extends Command {
      * @param tasks TaskList linked to the program.
      * @param ui Ui linked to the program.
      * @param storage Storage linked to the program.
+     * @return String that contains the executed ByeCommand.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         storage.save(tasks.getTasks());
-        ui.showBye();
+        return ui.showBye();
     }
 
     /**
