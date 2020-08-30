@@ -66,10 +66,19 @@ public class Ui {
     }
 
     /**
-     * Shows filtered list interface.
+     * Shows date filtered list interface.
      */
     public void showDateFilterList() {
         System.out.println("\tYou have these tasks on this date:");
+    }
+
+    /**
+     * Shows key filtered list interface.
+     *
+     * @param key The key used to filter the list.
+     */
+    public void showFind(String key) {
+        System.out.println("\tYou have these tasks containing \"" + key + "\":");
     }
 
     /**
