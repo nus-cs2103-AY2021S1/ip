@@ -1,5 +1,7 @@
 package command;
 
+import java.io.IOException;
+
 import exception.AnonymousException;
 import exception.DescriptionException;
 import exception.DukeDateTimeParserException;
@@ -9,7 +11,7 @@ import storage.Storage;
 import task.TaskList;
 import ui.Ui;
 
-import java.io.IOException;
+
 
 /**
  * The Command class implements methods that will be used
@@ -26,7 +28,7 @@ public abstract class Command {
     public static final String FIND_COMMAND = "find";
     public static final String HELP_COMMAND = "--help";
     public static final String LIST_COMMAND = "list";
-    public static final String TODO_COMMAND ="todo";
+    public static final String TODO_COMMAND = "todo";
     public static final String SHOW_AFTER_COMMAND = "show after";
     public static final String SHOW_BEFORE_COMMAND = "show before";
     public static final String DELETE_ALL_COMMAND = "delete all";
@@ -61,7 +63,8 @@ public abstract class Command {
      * that should be specified in the command.
      * @throws DukeKeywordException Thrown when user failed to specify the keyword in the command.
      */
-    public abstract void execute (TaskList tasks, Ui ui, Storage storage) throws IOException, AnonymousException, DescriptionException, DukeDateTimeParserException, NoIndexException, DukeKeywordException;
+    public abstract void execute (TaskList tasks, Ui ui, Storage storage) throws IOException, AnonymousException,
+            DescriptionException, DukeDateTimeParserException, NoIndexException, DukeKeywordException;
 
     /**
      * A getter method that returns the state whether a program is ready to exit or not.

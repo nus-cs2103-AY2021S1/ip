@@ -1,12 +1,5 @@
 package storage;
 
-import parser.Parser;
-import task.DeadlineTask;
-import task.EventTask;
-import task.Task;
-import task.TaskList;
-import task.TodoTask;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -16,6 +9,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import parser.Parser;
+import task.DeadlineTask;
+import task.EventTask;
+import task.Task;
+import task.TaskList;
+import task.TodoTask;
 
 /**
  * This Storage class is used to handle creating, reading, and writing
@@ -87,7 +86,7 @@ public class Storage {
         FileWriter fw = new FileWriter(this.filepath);
         StringBuilder txtToAdd = new StringBuilder();
 
-        for(Task task : tasks.getTasks()) {
+        for (Task task : tasks.getTasks()) {
             if (task instanceof TodoTask) {
                 TodoTask todoTask = (TodoTask) task;
                 if (todoTask.isDone()) {
@@ -104,7 +103,8 @@ public class Storage {
                     txtToAdd.append("E").append(" | ").append("0").append(" | ");
                 }
                 txtToAdd.append(eventTask.getDescription()).append(" | ")
-                        .append(eventTask.getDateTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"))).append("\n");
+                        .append(eventTask.getDateTime().format(DateTimeFormatter
+                                .ofPattern("yyyy-MM-dd HH:mm"))).append("\n");
             } else if (task instanceof DeadlineTask) {
                 DeadlineTask deadlineTask = (DeadlineTask) task;
                 if (deadlineTask.isDone()) {
@@ -113,7 +113,8 @@ public class Storage {
                     txtToAdd.append("D").append(" | ").append("0").append(" | ");
                 }
                 txtToAdd.append(deadlineTask.getDescription()).append(" | ")
-                        .append(deadlineTask.getDateTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"))).append("\n");
+                        .append(deadlineTask.getDateTime().format(DateTimeFormatter
+                                .ofPattern("yyyy-MM-dd HH:mm"))).append("\n");
             }
         }
         fw.write(txtToAdd.toString());

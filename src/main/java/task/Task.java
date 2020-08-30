@@ -65,7 +65,7 @@ public class Task {
      * return "[X]" otherwise.
      */
     private String getStatus() {
-        return isDone? "[O]": "[X]";
+        return isDone ? "[O]" : "[X]";
     }
 
 

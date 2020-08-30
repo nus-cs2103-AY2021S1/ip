@@ -13,7 +13,7 @@ public class DukeCreateFileException extends DukeException {
      * @return String exception message
      */
     @Override
-    public String toString(){
+    public String toString() {
         return super.toString() + "Failed to create a file";
     }
 }

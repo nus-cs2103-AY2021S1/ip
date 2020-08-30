@@ -1,13 +1,15 @@
 package command;
 
-import parser.Parser;
+import java.io.IOException;
+
 import exception.NoIndexException;
+import parser.Parser;
 import storage.Storage;
 import task.Task;
 import task.TaskList;
 import ui.Ui;
 
-import java.io.IOException;
+
 
 /**
  * DoneCommand would execute the program when user specify
@@ -47,11 +49,11 @@ public class DoneCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws IOException, NoIndexException {
         int index = Parser.findIndexParser(this.command);
-        Task task = tasks.getTask(index-1);
+        Task task = tasks.getTask(index - 1);
         task.setDone(true);
 
         ui.getMessageTemplate(ui.formatMessage("Nice! I've marked this task as done:\n"
-                +ui.formatMessage(task.toString())));
+                + ui.formatMessage(task.toString())));
 
         storage.updateFile(tasks);
 

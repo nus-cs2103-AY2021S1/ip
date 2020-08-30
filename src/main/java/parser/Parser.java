@@ -1,5 +1,12 @@
 package parser;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.HashMap;
+import java.util.Map;
+
 import command.Command;
 import command.DeadlineCommand;
 import command.DeleteAllCommand;
@@ -8,13 +15,13 @@ import command.DoneAllCommand;
 import command.DoneCommand;
 import command.EventCommand;
 import command.ExitCommand;
+import command.FindCommand;
 import command.HelpCommand;
 import command.ListCommand;
 import command.ShowAfterCommand;
 import command.ShowBeforeCommand;
 import command.TodoCommand;
 import command.WrongCommand;
-import command.FindCommand;
 import exception.DescriptionException;
 import exception.DukeDateTimeParserException;
 import exception.DukeKeywordException;
@@ -24,12 +31,6 @@ import task.EventTask;
 import task.Task;
 import task.TodoTask;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * The Parser class are used to parse any user input and process
@@ -85,7 +86,7 @@ public class Parser {
             }
             String[] taskDetails = strings[2].split("\\|");
             deadlineTask.setDescription(taskDetails[0].trim());
-            deadlineTask.setDate(LocalDateTime.parse(taskDetails[1].trim(),formatter));
+            deadlineTask.setDate(LocalDateTime.parse(taskDetails[1].trim(), formatter));
             return deadlineTask;
         case "E" :
             EventTask eventTask = new EventTask();
@@ -98,10 +99,10 @@ public class Parser {
             }
             String[] taskDetails2 = strings[2].split("\\|");
             eventTask.setDescription(taskDetails2[0].trim());
-            eventTask.setDateTime(LocalDateTime.parse(taskDetails2[1].trim(),formatter));
+            eventTask.setDateTime(LocalDateTime.parse(taskDetails2[1].trim(), formatter));
             return eventTask;
         default :
-            return new Task() ;
+            return new Task();
         }
     }
 
@@ -119,7 +120,7 @@ public class Parser {
             return new ListCommand();
         } else if (command.toLowerCase().equals(Command.DONE_ALL_COMMAND)) {
             return new DoneAllCommand();
-        }else if (command.toLowerCase().contains(Command.DONE_COMMAND)) {
+        } else if (command.toLowerCase().contains(Command.DONE_COMMAND)) {
             return new DoneCommand(command);
         } else if (command.toLowerCase().contains(Command.TODO_COMMAND)) {
             return new TodoCommand(command);
@@ -129,15 +130,15 @@ public class Parser {
             return new EventCommand(command);
         } else if (command.toLowerCase().equals(Command.HELP_COMMAND)) {
             return new HelpCommand();
-        } else if  (command.toLowerCase().contains(Command.DELETE_ALL_COMMAND)) {
+        } else if (command.toLowerCase().contains(Command.DELETE_ALL_COMMAND)) {
             return new DeleteAllCommand();
-        } else if (command.toLowerCase().contains(Command.DELETE_COMMAND)){
+        } else if (command.toLowerCase().contains(Command.DELETE_COMMAND)) {
             return new DeleteCommand(command);
         } else if (command.toLowerCase().contains(Command.SHOW_AFTER_COMMAND)) {
             return new ShowAfterCommand(command);
         } else if (command.toLowerCase().contains(Command.SHOW_BEFORE_COMMAND)) {
             return new ShowBeforeCommand(command);
-        } else if(command.toLowerCase().contains(Command.FIND_COMMAND)) {
+        } else if (command.toLowerCase().contains(Command.FIND_COMMAND)) {
             return new FindCommand(command);
         } else {
             return new WrongCommand(command);
@@ -157,7 +158,7 @@ public class Parser {
         try {
             int index = Integer.parseInt(input.split("\\s")[1]);
             return index;
-        } catch(IndexOutOfBoundsException e) {
+        } catch (IndexOutOfBoundsException e) {
             throw new NoIndexException();
         }
     }
@@ -190,13 +191,13 @@ public class Parser {
      * @throws DescriptionException This exception is thrown when user forget to specify
      * either the task description or the date-time.
      */
-    public static Map<String,String> findDescriptionParser(String input) throws DescriptionException {
+    public static Map<String, String> findDescriptionParser(String input) throws DescriptionException {
         try {
             Map<String, String> map = new HashMap<>();
             String[] getDetails = input.split("\\s", 2);
             String[] details = getDetails[1].split("/", 2);
             map.put("taskDescription", details[0].trim());
-            String[] splitTimeDetails = details[1].split("\\s",2);
+            String[] splitTimeDetails = details[1].split("\\s", 2);
             map.put("taskTime", splitTimeDetails[1]);
             return map;
         } catch (IndexOutOfBoundsException e) {
@@ -231,7 +232,7 @@ public class Parser {
     public static String findKeywordParser(String input) throws DukeKeywordException {
         try {
             String keyword = input.split("\\s", 2)[1];
-            if(keyword.equals("") || keyword.equals("\\s")) {
+            if (keyword.equals("") || keyword.equals("\\s")) {
                 throw new DukeKeywordException();
             } else {
                 return keyword.trim();

@@ -15,6 +15,6 @@ public class DukeFileNotFoundException extends DukeException {
      */
     @Override
     public String toString() {
-        return super.toString() +" I cannot find your file. Sorry! :(";
+        return super.toString() + " I cannot find your file. Sorry! :(";
     }
 }

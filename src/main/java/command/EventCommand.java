@@ -1,19 +1,19 @@
 package command;
 
+import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.Map;
+
 import exception.DescriptionException;
 import exception.DukeDateTimeParserException;
-
 import parser.Parser;
 import storage.Storage;
 import task.EventTask;
 import task.TaskList;
 import ui.Ui;
 
-import java.io.IOException;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-import java.util.Map;
 
 /**
  * EventCommand would execute the program when user specify
@@ -55,7 +55,8 @@ public class EventCommand extends Command {
      * user failed to enter the specified format of date-time in the command.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws IOException, DescriptionException, DukeDateTimeParserException {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws IOException, DescriptionException,
+            DukeDateTimeParserException {
         try {
             Map<String, String> taskDetails = Parser.findDescriptionParser(this.command);
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
@@ -67,7 +68,7 @@ public class EventCommand extends Command {
             ui.getTaskMessage(eventTask, tasks.size());
 
             storage.updateFile(tasks);
-        } catch (DescriptionException e){
+        } catch (DescriptionException e) {
             throw new DescriptionException();
         } catch (DateTimeParseException e) {
             throw new DukeDateTimeParserException();

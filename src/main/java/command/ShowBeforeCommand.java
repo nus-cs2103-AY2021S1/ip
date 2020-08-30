@@ -1,5 +1,6 @@
 package command;
 
+import java.time.LocalDate;
 
 import exception.DukeDateTimeParserException;
 import parser.Parser;
@@ -10,7 +11,6 @@ import task.Task;
 import task.TaskList;
 import ui.Ui;
 
-import java.time.LocalDate;
 
 /**
  * ShowBeforeCommand would execute the program when user specify
@@ -19,7 +19,7 @@ import java.time.LocalDate;
  */
 public class ShowBeforeCommand extends Command {
 
-    private String  command;
+    private String command;
 
     /**
      * Constructs a ShowBeforeCommand with the given
@@ -48,14 +48,14 @@ public class ShowBeforeCommand extends Command {
         StringBuilder sb = new StringBuilder();
         int i = 1;
 
-        for(Task task : tasks.getTasks()) {
+        for (Task task : tasks.getTasks()) {
             if (task instanceof DeadlineTask) {
                 DeadlineTask deadlineTask = (DeadlineTask) task;
                 if (deadlineTask.getDateTime().toLocalDate().isBefore(localDate)) {
                     sb.append(ui.formatMessage(i + ". " + deadlineTask + "\n"));
                     i++;
                 }
-            } else if(task instanceof EventTask) {
+            } else if (task instanceof EventTask) {
                 EventTask eventTask = (EventTask) task;
                 if (eventTask.getDateTime().toLocalDate().isBefore(localDate)) {
                     sb.append(ui.formatMessage(i + ". " + eventTask + "\n"));

@@ -1,13 +1,15 @@
 package command;
 
-import parser.Parser;
+import java.io.IOException;
+
 import exception.NoIndexException;
+import parser.Parser;
 import storage.Storage;
 import task.Task;
 import task.TaskList;
 import ui.Ui;
 
-import java.io.IOException;
+
 
 /**
  * DeleteCommand would execute the program when user specify
@@ -48,7 +50,7 @@ public class DeleteCommand extends Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) throws IOException, NoIndexException {
         int index = Parser.findIndexParser(this.command);
 
-        Task removedTask = tasks.remove(index-1);
+        Task removedTask = tasks.remove(index - 1);
 
         ui.getMessageTemplate(ui.formatMessage("Noted. I've removed this task:\n")
                 + ui.formatMessage(removedTask.toString() + "\n")

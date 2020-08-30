@@ -1,5 +1,10 @@
 package command;
 
+import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.Map;
 
 import exception.DescriptionException;
 import exception.DukeDateTimeParserException;
@@ -9,11 +14,7 @@ import task.DeadlineTask;
 import task.TaskList;
 import ui.Ui;
 
-import java.io.IOException;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-import java.util.Map;
+
 
 /**
  * DeadlineCommand class would execute the program when user specify
@@ -31,7 +32,7 @@ public class DeadlineCommand extends Command {
      */
     public DeadlineCommand(String command) {
         super();
-        this.command =command;
+        this.command = command;
     }
 
     /**
@@ -51,8 +52,9 @@ public class DeadlineCommand extends Command {
      * valid date-time details on the command
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws IOException, DescriptionException, DukeDateTimeParserException {
-          try {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws IOException, DescriptionException,
+            DukeDateTimeParserException {
+        try {
             Map<String, String> taskDetails = Parser.findDescriptionParser(this.command);
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
             DeadlineTask deadlineTask = new DeadlineTask(taskDetails.get("taskDescription"),

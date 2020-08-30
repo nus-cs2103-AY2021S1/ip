@@ -21,7 +21,7 @@ public class AnonymousException extends DukeException {
      */
     @Override
     public String toString() {
-        return super.toString() + " There are no commands that start with " +  this.input + "\n"
-                + "      "+"Please type --help to see all the commands";
+        return super.toString() + " There are no commands that start with " + this.input + "\n"
+                + "      " + "Please type --help to see all the commands";
     }
 }

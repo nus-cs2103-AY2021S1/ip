@@ -1,8 +1,8 @@
 package ui;
 
-import task.Task;
-
 import java.util.Scanner;
+
+import task.Task;
 
 /**
  * Ui class deals with everything that has to do
@@ -65,25 +65,25 @@ public class Ui {
      * @return String Formats strings with some indentation.
      */
     public String formatCommandList(String command, String format) {
-        String indentation = "%-20s%s%n" ;
-        return formatMessage(String.format(indentation,command,format));
+        String indentation = "%-20s%s%n";
+        return formatMessage(String.format(indentation, command, format));
     }
 
     /**
      * Gets the list of existing commands that is available
      * in Duke program ans shows it to the user via HelpCommand.
      */
-    public void getCommandList(){
-        getMessageTemplate( formatCommandList("COMMAND", "FORMAT")
+    public void getCommandList() {
+        getMessageTemplate(formatCommandList("COMMAND", "FORMAT")
                 + formatCommandList("deadline", "deadline <DEADLINE_NAME> /by <yyyy-MM-dd> <HH:mm>")
                 + formatCommandList("delete", "delete <TASK_NUMBER>")
                 + formatCommandList("delete all", "delete all")
                 + formatCommandList("done", "done <TASK_NUMBER>")
                 + formatCommandList("done all", "done all")
-                + formatCommandList("event","event <EVENT_NAME> /at <yyyy-MM-dd> <HH:mm>")
+                + formatCommandList("event", "event <EVENT_NAME> /at <yyyy-MM-dd> <HH:mm>")
                 + formatCommandList("show after", "show after <yyyy-MM-dd>")
                 + formatCommandList("show before", "show before <yyyy-MM-dd>")
-                + formatCommandList("todo","todo <TASK_NAME>")
+                + formatCommandList("todo", "todo <TASK_NAME>")
         );
     }
 
@@ -112,7 +112,7 @@ public class Ui {
      */
     public void greet() {
         getMessageTemplate(formatMessage("Hello! I'm Rich.\n")
-                + formatMessage( "What can I do for you?"));
+                + formatMessage("What can I do for you?"));
     }
 
     /**
@@ -131,7 +131,7 @@ public class Ui {
      */
     public void getTaskMessage(Task task, int size) {
         getMessageTemplate(formatMessage("Got it. I've added this task :\n")
-                + formatMessage(task +"\n")
+                + formatMessage(task + "\n")
                 + formatMessage("Now you have " + size + " tasks in the list"));
     }
 }

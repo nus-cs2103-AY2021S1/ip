@@ -1,5 +1,6 @@
 package command;
 
+import java.time.LocalDate;
 
 import exception.DukeDateTimeParserException;
 import parser.Parser;
@@ -10,7 +11,6 @@ import task.Task;
 import task.TaskList;
 import ui.Ui;
 
-import java.time.LocalDate;
 
 /**
  * ShowAfterCommand would execute the program when user specify
@@ -48,7 +48,7 @@ public class ShowAfterCommand extends Command {
         StringBuilder sb = new StringBuilder();
         int i = 1;
 
-        for(Task task : tasks.getTasks()) {
+        for (Task task : tasks.getTasks()) {
             if (task instanceof DeadlineTask) {
                 DeadlineTask deadlineTask = (DeadlineTask) task;
                 if (deadlineTask.getDateTime().toLocalDate().isAfter(localDate)) {
@@ -56,7 +56,7 @@ public class ShowAfterCommand extends Command {
                     i++;
                 }
 
-            } else if(task instanceof EventTask) {
+            } else if (task instanceof EventTask) {
                 EventTask eventTask = (EventTask) task;
                 if (eventTask.getDateTime().toLocalDate().isAfter(localDate)) {
                     sb.append(ui.formatMessage(i + ". " + eventTask + "\n"));

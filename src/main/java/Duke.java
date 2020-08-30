@@ -1,3 +1,6 @@
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 import command.Command;
 import exception.AnonymousException;
 import exception.DescriptionException;
@@ -12,9 +15,6 @@ import storage.Storage;
 import task.TaskList;
 import ui.Ui;
 
-
-import java.io.FileNotFoundException;
-import java.io.IOException;
 
 /**
  * Duke is the main program that runs and
@@ -83,7 +83,7 @@ public class Duke {
      * The main program of Duke.
      * @param args String[] arbitrary arguments.
      */
-    public static void main (String[]args){
+    public static void main (String[]args) {
         Duke duke = new Duke("data/data.txt");
         duke.mainProgram();
     }

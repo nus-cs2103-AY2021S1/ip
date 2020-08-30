@@ -1,13 +1,13 @@
 package command;
 
+import java.io.IOException;
+
 import exception.DescriptionException;
 import parser.Parser;
 import storage.Storage;
 import task.TaskList;
 import task.TodoTask;
 import ui.Ui;
-
-import java.io.IOException;
 
 /**
  * TodoCommand would execute the program when user specify
@@ -27,7 +27,7 @@ public class TodoCommand extends Command {
      */
     public TodoCommand(String command) {
         super();
-        this.command =command;
+        this.command = command;
     }
 
     /**
@@ -50,7 +50,7 @@ public class TodoCommand extends Command {
 
         tasks.add(todoTask);
 
-        ui.getTaskMessage(todoTask,tasks.size());
+        ui.getTaskMessage(todoTask, tasks.size());
 
         storage.updateFile(tasks);
     }

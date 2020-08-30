@@ -1,11 +1,12 @@
 package command;
 
+import java.io.IOException;
+
 import storage.Storage;
 import task.Task;
 import task.TaskList;
 import ui.Ui;
 
-import java.io.IOException;
 
 /**
  * DoneAllCommand would execute the program when user specify
@@ -36,16 +37,16 @@ public class DoneAllCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
-        for(Task task : tasks.getTasks()) {
-            if(!task.isDone()) {
+        for (Task task : tasks.getTasks()) {
+            if (!task.isDone()) {
                 task.setDone(true);
             }
         }
 
         StringBuilder sb = new StringBuilder();
-        for(int i = 0 ; i < tasks.size(); i++) {
-            if (i != tasks.size()-1) {
-                sb.append(ui.formatMessage((i + 1) + ". " +tasks.getTask(i) + "\n"));
+        for (int i = 0; i < tasks.size(); i++) {
+            if (i != tasks.size() - 1) {
+                sb.append(ui.formatMessage((i + 1) + ". " + tasks.getTask(i) + "\n"));
             } else {
                 sb.append(ui.formatMessage((i + 1) + ". " + tasks.getTask(i)));
             }

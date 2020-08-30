@@ -11,7 +11,7 @@ import ui.Ui;
 /**
  * FindCommand executes when use specify "find" in the command.
  */
-public class FindCommand extends Command{
+public class FindCommand extends Command {
 
     private String command;
 
@@ -43,13 +43,13 @@ public class FindCommand extends Command{
         StringBuilder sb = new StringBuilder();
         int i = 1;
 
-        for(Task task : tasks.getTasks()) {
-            if(task.getDescription().contains(keyword)) {
+        for (Task task : tasks.getTasks()) {
+            if (task.getDescription().contains(keyword)) {
                 sb.append(ui.formatMessage((i) + ". " + task + "\n"));
                 i++;
             }
         }
-        sb.deleteCharAt(sb.length()-1);
+        sb.deleteCharAt(sb.length() - 1);
         ui.getMessageTemplate(ui.formatMessage("Here are the matching tasks in your list:\n" + sb.toString()));
     }
 }

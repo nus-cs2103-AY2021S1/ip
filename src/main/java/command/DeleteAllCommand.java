@@ -1,11 +1,12 @@
 package command;
 
+import java.io.IOException;
 
 import storage.Storage;
 import task.TaskList;
 import ui.Ui;
 
-import java.io.IOException;
+
 
 
 /**
@@ -39,7 +40,7 @@ public class DeleteAllCommand extends Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
 
         int length = tasks.size();
-        for(int i = 0 ; i < length; i++) {
+        for (int i = 0; i < length; i++) {
             tasks.remove(0);
         }
 
