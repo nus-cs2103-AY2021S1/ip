@@ -6,6 +6,11 @@ public class Event extends Task {
 
     private String at;
 
+    /**
+     * Returns an Event.
+     * @param description a description of the Event.
+     * @param at the date at which the Event occurs.
+     */
     public Event(String description, String at) {
         super(description);
         this.at = at;
@@ -22,7 +27,7 @@ public class Event extends Task {
      * @return a String representation of the Event.
      */
     public String getFormattedString() {
-        return "E | " + (super.isDone? 1 : 0) + " | " + super.description + " | " +
-                at;
+        return "E | " + (super.isDone ? 1 : 0) + " | " + super.description + " | "
+                + at;
     }
 }

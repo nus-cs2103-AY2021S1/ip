@@ -8,6 +8,11 @@ public class Duke {
     private Command command;
     private Ui ui;
 
+    /**
+     * Returns a Duke.
+     * @param filePath path of file that contains Tasks.
+     * @throws IOException if an error occurs while accessing/creating the directory/file.
+     */
     public Duke(String filePath) throws IOException {
         storage = new Storage(filePath);
         parser = new Parser();
@@ -20,14 +25,18 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs the Duke application.
+     * @throws IOException if an error occurs while accessing/creating the directory/file.
+     */
     public void run() throws IOException {
         ui.showWelcome();
         command.receive(ui.readCommand());
-        while(!command.exit()) {
+        while (!command.exit()) {
             try {
                 command.executeTask(parser, tasks, storage, ui);
-            } catch (InvalidTaskArgumentException |  InvalidDoneException | InvalidCommandException |
-                    InvalidDeleteException | DateException e) {
+            } catch (InvalidTaskArgumentException | InvalidDoneException | InvalidCommandException
+                    | InvalidDeleteException | DateException e) {
                 ui.showError(e.getMessage());
             } finally {
                 command.receive(ui.readCommand());
@@ -36,6 +45,10 @@ public class Duke {
         ui.showFarewell();
     }
 
+    /**
+     * Provides the entry point to the Duke application.
+     * @param args command-line arguments.
+     */
     public static void main(String[] args) {
         try {
             new Duke("data/tasks.txt").run();

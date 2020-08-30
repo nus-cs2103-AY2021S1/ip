@@ -12,6 +12,10 @@ public class TaskList {
         this.tasks = new ArrayList<>();
     }
 
+    /**
+     * Returns a TaskList.
+     * @param lst list of String objects representing Tasks.
+     */
     public TaskList(ArrayList<String> lst) {
         ArrayList<Task> temp = new ArrayList<>();
         for (String s : lst) {

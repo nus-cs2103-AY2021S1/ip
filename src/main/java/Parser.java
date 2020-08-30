@@ -33,7 +33,7 @@ public class Parser {
                     time -= 1200;
                 }
                 int hour = (int) (time / 100);
-                if(hour == 24 || hour == 0) {
+                if (hour == 24 || hour == 0) {
                     processedTime += "12.";
                 } else {
                     processedTime += hour + ".";
@@ -44,8 +44,8 @@ public class Parser {
                 } else {
                     processedTime += minute;
                 }
-                if ((Double.parseDouble(dates[1]) >= 1200) &&
-                        (Double.parseDouble(dates[1]) < 2400)) {
+                if ((Double.parseDouble(dates[1]) >= 1200)
+                        && (Double.parseDouble(dates[1]) < 2400)) {
                     processedTime += "pm";
                 } else {
                     processedTime += "am";

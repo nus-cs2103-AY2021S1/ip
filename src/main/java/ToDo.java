@@ -20,6 +20,6 @@ public class ToDo extends Task {
      * @return a String representation of the ToDo.
      */
     public String getFormattedString() {
-        return "T | " + (super.isDone? 1 : 0) + " | " + super.description;
+        return "T | " + (super.isDone ? 1 : 0) + " | " + super.description;
     }
 }

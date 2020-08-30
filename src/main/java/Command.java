@@ -1,5 +1,5 @@
-import java.util.ArrayList;
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * Represents a component of the Duke application that coordinates the roles of

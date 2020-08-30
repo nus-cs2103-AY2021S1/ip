@@ -6,6 +6,11 @@ public class Deadline extends Task {
 
     private String by;
 
+    /**
+     * Returns a Deadline
+     * @param description description of the Deadline.
+     * @param by the date that the Deadline is due.
+     */
     public Deadline(String description, String by) {
         super(description);
         this.by = by;
@@ -22,7 +27,7 @@ public class Deadline extends Task {
      * @return a String representation of the Deadline.
      */
     public String getFormattedString() {
-        return "D | " + (super.isDone? 1 : 0) + " | " + super.description + " | " +
-                by;
+        return "D | " + (super.isDone ? 1 : 0) + " | " + super.description + " | "
+                + by;
     }
 }
