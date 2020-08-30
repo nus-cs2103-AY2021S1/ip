@@ -1,3 +1,7 @@
+package duke.task;
+
+import java.time.LocalDate;
+
 /**
  * <h1> Event Task class </h1>
  *
@@ -20,6 +24,10 @@ public class Event extends Task {
 
     private String getEvent() {
         return this.event;
+    }
+
+    public static Event createEvent(String task, String event) {
+        return new Event(task, event);
     }
 
     @Override

@@ -1,3 +1,12 @@
+package duke.command;
+
+import duke.storage.Storage;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.TaskList;
+import duke.task.Todo;
+import duke.ui.Ui;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
@@ -78,7 +87,7 @@ public class Parser {
                 String message = "The description of a Todo cannot be empty";
                 throw new DukeException(message);
             } else {
-                Todo todo = new Todo(stringarr[1]);
+                Todo todo = Todo.createTodo(stringarr[1]);
                 taskList.addTask(todo);
                 return todo.toString();
             }
@@ -90,7 +99,7 @@ public class Parser {
                 try {
                     String[] secondarr = stringarr[1].split("/by", 2);
                     LocalDate date = LocalDate.parse(secondarr[1].trim());
-                    Deadline deadline = new Deadline(secondarr[0], date);
+                    Deadline deadline = Deadline.createDeadline(secondarr[0], date);
                     taskList.addTask(deadline);
                     return deadline.toString();
                 } catch (DateTimeParseException e) {
@@ -104,7 +113,7 @@ public class Parser {
                 throw new DukeException(message);
             } else {
                 String[] secondarr = stringarr[1].split("/at", 2);
-                Event event = new Event(secondarr[0], secondarr[1]);
+                Event event = Event.createEvent(secondarr[0], secondarr[1]);
                 taskList.addTask(event);
                 return event.toString();
             }

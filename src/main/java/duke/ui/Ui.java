@@ -1,3 +1,5 @@
+package duke.ui;
+
 /**
  * <h1>Ui Class</h1>
  * The Ui class manages the interactions with
