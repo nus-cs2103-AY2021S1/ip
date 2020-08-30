@@ -1,7 +1,7 @@
 package duke.exception;
 
 public class EmptyTaskException extends Exception {
-    String taskType;
+    private String taskType;
 
     public EmptyTaskException(String taskType) {
         this.taskType = taskType;
