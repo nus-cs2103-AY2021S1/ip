@@ -3,23 +3,7 @@ import java.util.ArrayList;
 /**
  * <p>The UI class deals with interactions with the user.</p>
  */
-public class UI {
-    private String separationLine = "     _____________________________________________________\n";
-    private String indentation = "      ";
-    private String topPartOfBotReplyMessage = separationLine + indentation;
-    private String botPartOfBotReplyMessage = "\n" + separationLine.substring(0, separationLine.length() - 1);
-
-    /**
-     * Prints a formatted message.
-     * @param message A String that represents the message to print
-     */
-    public void printMessage(String message) {
-        System.out.println(topPartOfBotReplyMessage + message + botPartOfBotReplyMessage);
-    }
-
-    public String printMessage_new(String message) {
-        return topPartOfBotReplyMessage + message + botPartOfBotReplyMessage;
-    }
+public class NewUI {
 
     /**
      * Returns the a list that contains the bot's reply to different user inputs:
@@ -53,6 +37,7 @@ public class UI {
      * @return A String to represent the formatted body
      */
     public String formatBotReplyBody(String body) {
+        String indentation = "      ";
         return indentation + body;
     }
 }
