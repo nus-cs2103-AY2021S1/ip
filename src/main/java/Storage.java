@@ -10,10 +10,10 @@ public class Storage {
     public static String  folderPath = "Data";
     public static String writePath = "Data/Duke.txt";
     
-    public static void writeToFile(List<Task> list) throws IOException {
+    public static void writeToFile(TaskList taskList) throws IOException {
         FileWriter fw = new FileWriter(writePath);
         fw.write("");
-        for (Task task : list) {
+        for (Task task : taskList.getListOfTasks()) {
             fw.append(task.storeFormat() + "\n");
         }
         fw.close();

@@ -34,12 +34,12 @@ public class UI {
                 "Now you have %d tasks in the list.", task.getTaskSymbol(), task.getSymbol(), task.toString(), Task.remainingTasks()));
     }
 
-    public static void listTasks (List<Task> tasks) {
+    public static void listTasks (TaskList taskList) {
         int i;
         StringBuilder sb = new StringBuilder();
-        for (i = 0 ; i < tasks.size() ; i++) {
-            Task task = tasks.get(i);
-            if (i==tasks.size()-1) {
+        for (i = 0 ; i < taskList.getTotalTask() ; i++) {
+            Task task = taskList.get(i);
+            if (i==taskList.getTotalTask()-1) {
                 sb.append(String.format("%d.%s %s",i+1,task.getSymbol(),task));
             } else {
                 sb.append(String.format("%d.%s %s\n", i+1,task.getSymbol(), task));

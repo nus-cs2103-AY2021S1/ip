@@ -1,8 +1,6 @@
 
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 
@@ -13,7 +11,7 @@ public class Duke {
     
     public static void main(String[] args) throws IOException {
         UI userInterface = new UI();
-        List<Task> tasks = Storage.loadFile();
+        TaskList taskList  = new TaskList(Storage.loadFile());
         userInterface.greetUser();
         Printable input;
         Scanner sc = new Scanner(System.in);
@@ -23,13 +21,13 @@ public class Duke {
                 input = getUserInput(sc);
                 String command = input.print();
                 if (command.toLowerCase().equals("bye")) {
-                    Storage.writeToFile(tasks);
+                    Storage.writeToFile(taskList);
                     userInterface.goodbye();
                     break;
                 } else if (command.toLowerCase().equals("list")) {
-                    userInterface.listTasks(tasks);
+                    userInterface.listTasks(taskList);
                 } else if (command.split("\\s+")[0].equals("done")) {
-                    Task task = tasks.get(Integer.parseInt(command.split("\\s+")[1]) - 1);
+                    Task task = taskList.get(Integer.parseInt(command.split("\\s+")[1]) - 1);
                     task.setDone();
                     userInterface.taskCompletedMessage(task);
                 }else if (command.split("\\s+")[0].equals("delete")){
@@ -39,16 +37,16 @@ public class Duke {
                     try {
                         int i = Integer.parseInt(command.split("\\s+")[1]);
                         Task.decrementTask();
-                        Task task = tasks.get(i-1);
-                        tasks.remove(i-1);
+                        Task task = taskList.get(i-1);
+                        taskList.deleteTaskIndex(i-1);
                         userInterface.taskDeletedMessage(task);
-                    } catch (IndexOutOfBoundsException e) {
-                        System.out.println("Please choose a valid task number to delete");
+                    } catch (TaskListError e) {
+                        System.out.println(e.getDetails());
                         continue;
                     }
 
                 } else {
-                    storeInput(command, tasks, userInterface);
+                    storeInput(command, taskList, userInterface);
                 }
             } catch (IllegalArgumentException | IOException e) {
                 System.out.println(e);
@@ -62,7 +60,7 @@ public class Duke {
         return () -> sc.nextLine();
     }
 
-    public static void storeInput(String command, List<Task> tasks,UI userInterface) {
+    public static void storeInput(String command, TaskList taskList,UI userInterface) {
         String cmd1 = command.split("\\s+")[0];
         String cmd2 ;
         Task task =null;
@@ -87,7 +85,7 @@ public class Duke {
         }
 
         if (task != null) {
-            tasks.add(task);
+            taskList.addTask(task);
             userInterface.taskAddedMessage(task);
         }
         return;
