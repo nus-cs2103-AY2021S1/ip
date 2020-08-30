@@ -3,7 +3,6 @@ T | 0 | get monitor
 E | 1 | get 6packs | Aug 13 2011 14:26:00
 T | 1 | add milk
 D | 1 | finish task 8 | Sep 20 2024 14:44:00
-T | 1 | get ryzen
 E | 0 | halo infinite | Sep 10 2021 15:21:00
 E | 1 | buy steak| Jan 21 2020 14:32:00
 D | 1 | test | May 21 2040 13:43:00
