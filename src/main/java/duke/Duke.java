@@ -1,7 +1,6 @@
 package duke;
 
-import duke.command.Command;
-
+import duke.command.CommandResult;
 import duke.exception.DukeException;
 
 import javafx.application.Application;
@@ -23,6 +22,8 @@ import javafx.stage.Stage;
  */
 public class Duke extends Application {
 
+    private static final String DEFAULT_SAVE_PATH = "data/tasks.txt";
+
     private Ui ui;
     private Storage storage;
     private TaskList tasks;
@@ -42,14 +43,21 @@ public class Duke extends Application {
      * @param filePath A string representing the destination file path.
      */
     public Duke(String filePath) {
-        initialiseDuke(filePath);
+        ui = new Ui();
+        try {
+            this.storage = new Storage(filePath);
+            tasks = new TaskList(storage.load());
+        } catch (DukeException e) {
+            ui.printGeneralChatWindow(e.toString());
+            tasks = new TaskList();
+        }
     }
 
     /**
      * Class constructor with no specified file path.
      */
     public Duke() {
-        initialiseDuke("");
+        this(DEFAULT_SAVE_PATH);
     }
 
     /**
@@ -64,24 +72,24 @@ public class Duke extends Application {
      */
     public void run() {
         // Initial greeting, prompt user for commands
-        ui.printWelcome();
-        boolean isExit = false;
-
-        while (!isExit) {
-            try {
-                String input = ui.readInput();
-                ui.printBorder(); // Print top border
-                Command c = Parser.parse(input);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                ui.printGeneralChatWindow(e.toString());
-            } finally {
-                ui.printBorder(); // Print bottom border
-            }
-        }
-
-        ui.printLogo();
+//        ui.printWelcome();
+//        boolean isExit = false;
+//
+//        while (!isExit) {
+//            try {
+//                String input = ui.readInput();
+//                ui.printBorder(); // Print top border
+//                Command c = Parser.parse(input);
+//                c.execute(tasks, ui, storage);
+//                isExit = c.isExit();
+//            } catch (DukeException e) {
+//                ui.printGeneralChatWindow(e.toString());
+//            } finally {
+//                ui.printBorder(); // Print bottom border
+//            }
+//        }
+//
+//        ui.printLogo();
     }
 
     /**
@@ -161,18 +169,7 @@ public class Duke extends Application {
      * @param filePath A string representing the destination file path.
      */
     private void initialiseDuke(String filePath) {
-        ui = new Ui();
-        try {
-            if (filePath.equals("")) {
-                this.storage = new Storage();
-            } else {
-                this.storage = new Storage(filePath);
-            }
-            tasks = new TaskList(storage.load());
-        } catch (DukeException e) {
-            ui.printGeneralChatWindow(e.toString());
-            tasks = new TaskList();
-        }
+
     }
 
     private void showWelcome() {
@@ -188,27 +185,38 @@ public class Duke extends Application {
      */
     private void handleUserInput() {
         Label userText = new Label(userInput.getText());
-        Label dukeText = new Label(getResponse(userInput.getText()));
+        Label dukeText;
+        CommandResult result = null;
+        try {
+            result = execute(userInput.getText());
+            dukeText = new Label(result.getFeedback());
+        } catch (DukeException e) {
+            dukeText = new Label(e.toString());
+        }
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(userText, new ImageView(user)),
                 DialogBox.getDukeDialog(dukeText, new ImageView(duke))
         );
         userInput.clear();
+
+        if (result == null) {
+            return;
+        }
+        if (result.isExit()) {
+            // TODO: add a delay
+            Platform.exit();
+        }
     }
 
     /**
      * Executes a command based on the user input, and returns an appropriate response.
      *
      * @param input A string representing the user input.
-     * @return A string representing the response upon the execution of the command.
+     * @return A command result upon the execution of the command.
+     * @throws DukeException If the input is invalid.
      */
-    private String getResponse(String input) {
-        try {
-            Command c = Parser.parse(input);
-            return c.execute(tasks, ui, storage);
-        } catch (DukeException e) {
-            return e.toString();
-        }
+    private CommandResult execute(String input) throws DukeException {
+        return Parser.parse(input).execute(tasks, ui, storage);
     }
 
 }

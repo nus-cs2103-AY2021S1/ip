@@ -26,13 +26,13 @@ public class AddTaskCommand extends Command {
     }
 
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage)
+    public CommandResult execute(TaskList tasks, Ui ui, Storage storage)
             throws DukeInvalidTaskTimeException,
             DukeInvalidTaskDescriptionException,
             DukeLoadingErrorException {
         Task toAdd = tasks.addTask(tag, input);
         storage.save(tasks.getTasks());
-        return ui.printAddTaskChatWindow(toAdd, tasks.getTasks().size());
+        return new CommandResult(ui.printAddTaskChatWindow(toAdd, tasks.getTasks().size()));
 
     }
 

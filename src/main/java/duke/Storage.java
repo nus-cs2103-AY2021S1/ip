@@ -27,7 +27,6 @@ import duke.task.ToDo;
  */
 public class Storage {
 
-    private static final String DEFAULT_PATH = "data/tasks.txt";
     private Path path;
 
     /**
@@ -38,14 +37,6 @@ public class Storage {
      */
     public Storage(String filePath) throws DukeLoadingErrorException {
         initialiseStorage(filePath);
-    }
-
-    /**
-     * Class constructor with no specified file path.
-     * @throws DukeLoadingErrorException If a loading error occurs.
-     */
-    public Storage() throws DukeLoadingErrorException {
-        initialiseStorage(DEFAULT_PATH);
     }
 
     /**
