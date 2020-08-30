@@ -9,6 +9,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 
 public class MainWindow extends BorderPane {
+    private Duke duke;
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -18,9 +19,7 @@ public class MainWindow extends BorderPane {
     @FXML
     private Label welcomeLabel;
 
-    Duke duke;
-
-    void setDuke (Duke duke) {
+    void setDuke(Duke duke) {
         this.duke = duke;
     }
 

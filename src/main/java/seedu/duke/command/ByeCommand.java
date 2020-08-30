@@ -3,7 +3,6 @@ package seedu.duke.command;
 import seedu.duke.Message;
 import seedu.duke.Storage;
 import seedu.duke.TaskList;
-import seedu.duke.Ui;
 
 /**
  * Represents a <code>Command</code> telling Duke to stop running.

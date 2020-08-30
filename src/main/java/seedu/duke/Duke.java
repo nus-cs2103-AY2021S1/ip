@@ -1,7 +1,6 @@
 package seedu.duke;
 
 import javafx.application.Platform;
-
 import seedu.duke.command.Command;
 
 /**

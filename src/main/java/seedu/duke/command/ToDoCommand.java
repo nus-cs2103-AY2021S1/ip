@@ -4,7 +4,6 @@ import seedu.duke.DukeException;
 import seedu.duke.Message;
 import seedu.duke.Storage;
 import seedu.duke.TaskList;
-import seedu.duke.Ui;
 import seedu.duke.task.ToDo;
 
 /**
@@ -21,7 +20,7 @@ public class ToDoCommand implements Command {
         ToDo toDo = ToDo.of(this.command);
         taskList.add(toDo);
         storage.appendToFile(toDo);
-        return new Message(Message.TASK_ADDED + toDo.toString());
+        return Message.getTaskAdded(toDo);
     }
 
     public boolean isDone() {

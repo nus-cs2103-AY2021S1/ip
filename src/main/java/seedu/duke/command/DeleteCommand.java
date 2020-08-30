@@ -4,7 +4,6 @@ import seedu.duke.DukeException;
 import seedu.duke.Message;
 import seedu.duke.Storage;
 import seedu.duke.TaskList;
-import seedu.duke.Ui;
 import seedu.duke.task.Task;
 
 /**
@@ -24,7 +23,7 @@ public class DeleteCommand implements Command {
         try {
             Task task = taskList.delete(Integer.parseInt(command[1]));
             storage.writeToFile(taskList);
-            return new Message(Message.TASK_DELETED + task.toString());
+            return Message.getTaskDeleted(task);
         } catch (NumberFormatException e) {
             throw new DukeException("Wrong format.");
         }

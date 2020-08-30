@@ -2,8 +2,6 @@ package seedu.duke;
 
 import java.util.Scanner;
 
-import seedu.duke.task.Task;
-
 /**
  * Represents a group of methods that deal with interactions with the user.
  */
@@ -31,21 +29,6 @@ public class Ui {
         } else {
             throw new DukeException("No next line");
         }
-    }
-
-    /**
-     * Prints out a welcome message for the user.
-     *//*
-    public void showWelcome() {
-        String logo = indentation + " ____        _        \n"
-                + indentation + "|  _ \\ _   _| | _____ \n"
-                + indentation + "| | | | | | | |/ / _ \\\n"
-                + indentation + "| |_| | |_| |   <  __/\n"
-                + indentation + "|____/ \\__,_|_|\\_\\___|\n";
-        String message = "Hello from\n" + logo;
-        System.out.println(horizontalLine);
-        System.out.println(indentation + message);
-        System.out.println(horizontalLine);
     }
 
     /**

@@ -7,14 +7,14 @@ import javafx.application.Application;
  */
 public class Launcher {
     public static void main(String[] args) {
-        runGUI(args);
+        runCli(args);
     }
 
-    public static void runCLI(String[] args) {
+    public static void runCli(String[] args) {
         new Duke().run();
     }
 
-    public static void runGUI(String[] args) {
+    public static void runGui(String[] args) {
         Application.launch(Main.class, args);
     }
 }

@@ -20,7 +20,7 @@ public class DeadlineCommand implements Command {
         Deadline deadline = Deadline.of(this.command);
         taskList.add(deadline);
         storage.appendToFile(deadline);
-        return new Message(Message.TASK_ADDED + deadline.toString());
+        return Message.getTaskAdded(deadline);
     }
 
     public boolean isDone() {

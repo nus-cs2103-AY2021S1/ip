@@ -20,7 +20,7 @@ public class EventCommand implements Command {
         Event event = Event.of(this.command);
         taskList.add(event);
         storage.appendToFile(event);
-        return new Message(Message.TASK_ADDED + event.toString());
+        return Message.getTaskAdded(event);
     }
 
     public boolean isDone() {
