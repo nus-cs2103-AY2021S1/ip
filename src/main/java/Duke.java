@@ -1,3 +1,4 @@
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.IOException;
@@ -7,7 +8,8 @@ import java.io.FileWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Duke {
     // Level 6
@@ -128,8 +130,12 @@ public class Duke {
                     System.out.println("Ka To:");
                     System.out.println();
                     int number = firstSlashTracker(order);
+
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                    LocalDate localDate = LocalDate.parse(order.substring(number + 3).replace('/', '-'), formatter);
                     System.out.println("Yup, this is now added! " + " [D][x] " +  order.substring(8, number) + "(by: " +
-                            order.substring(number + 3) + ")");
+                            localDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")");
+
                     int size = orders.size() + 1;
                     System.out.println(" You have " + size + " task added now! ");
                 }
@@ -139,8 +145,12 @@ public class Duke {
                     System.out.println("Ka To:");
                     System.out.println();
                     int number = firstSlashTracker(order);
+
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                    LocalDate localDate = LocalDate.parse(order.substring(number + 3).replace('/', '-'), formatter);
+
                     System.out.println(" Yup, this is now added! " + " [E][x] " +  order.substring(5, number) + "(at: " +
-                            order.substring(number + 3) + ")");
+                            localDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")");
                     int size = orders.size() + 1;
                     System.out.println(" You have " + size + " task added now! ");
                 }
