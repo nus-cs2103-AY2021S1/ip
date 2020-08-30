@@ -6,7 +6,7 @@ import java.util.List;
 
 import chatterbox.ChatterboxException;
 import chatterbox.Storage;
-import chatterbox.Ui;
+import chatterbox.ui.Ui;
 
 /**
  * Handles the modification of and other operations relating to the task list.

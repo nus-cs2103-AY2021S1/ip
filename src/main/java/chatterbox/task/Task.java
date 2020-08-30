@@ -1,22 +1,20 @@
 package chatterbox.task;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 /**
  * General task.
  */
 public class Task {
-    protected static final DateTimeFormatter DF = DateTimeFormatter.ofPattern("MMM d yyyy HHmm'H'");
+    private static final String TICK = "\u2713";
+    private static final String CROSS = "\u2717";
+
     protected LocalDateTime deadline;
-
+    protected String prefix;
     protected String inputString;
-    private String contents;
-    private boolean isDone = false;
+    protected String contents;
 
-    protected void setContents(String contents) {
-        this.contents = contents;
-    }
+    private boolean isDone = false;
 
     public void setDone(boolean isDone) {
         this.isDone = isDone;
@@ -37,6 +35,6 @@ public class Task {
 
     @Override
     public String toString() {
-        return (isDone ? "[\u2713]" : "[\u2717]") + " " + contents;
+        return String.format("[%s][%s] %s", prefix, (isDone ? TICK : CROSS), contents);
     }
 }

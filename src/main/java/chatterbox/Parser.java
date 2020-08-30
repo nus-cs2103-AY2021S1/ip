@@ -4,6 +4,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 import chatterbox.task.Deadline;
@@ -15,6 +16,7 @@ import chatterbox.task.ToDo;
  * Utility class for parsing date and time, as well as task inputs.
  */
 public class Parser {
+    protected static final DateTimeFormatter DF = DateTimeFormatter.ofPattern("MMM d yyyy HHmm'H'");
     private static final String[] dateFormats = new String[] {
         "d/M/y HHmm", "d-M-y HHmm", "d/M/y", "d-M-y"
     };
@@ -35,6 +37,25 @@ public class Parser {
             }
         }
         return null;
+    }
+
+    /**
+     * Parse the task contents to change the date display.
+     *
+     * @param input String to format.
+     * @return  The formatted string.
+     */
+    public static String parseDateTimeTask(String input, LocalDateTime deadline) {
+        if (input.contains("/")) {
+            String[] split = input.split("/", 2);
+            String dateTime = split[1].substring(split[1].indexOf(' ') + 1);
+            if (deadline != null) {
+                dateTime = deadline.format(DF);
+            }
+            return String.format("%s(%s: %s)", split[0], split[1].split(" ")[0], dateTime);
+        } else {
+            return input;
+        }
     }
 
     /**

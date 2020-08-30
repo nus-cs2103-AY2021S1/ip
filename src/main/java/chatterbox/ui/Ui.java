@@ -1,4 +1,4 @@
-package chatterbox;
+package chatterbox.ui;
 
 import chatterbox.task.Task;
 

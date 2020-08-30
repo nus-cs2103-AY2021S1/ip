@@ -21,7 +21,9 @@ public class Chatterbox {
 
     /**
      * Loads stored tasks.
-     * @throws IOException
+     *
+     * @throws ChatterboxException  If tasks cannot be loaded.
+     * @throws IOException  If tasks cannot be loaded.
      */
     public void loadTasks() throws ChatterboxException, IOException {
         tasks.loadTasks();
@@ -47,7 +49,7 @@ public class Chatterbox {
      */
     private String processInput(String input) throws ChatterboxException, IOException {
         // Check if input is just whitespace
-        if (input.strip().equals("")) {
+        if (input.equals("")) {
             throw new ChatterboxException("Input cannot be empty.");
         }
 
