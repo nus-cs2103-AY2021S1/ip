@@ -6,7 +6,7 @@ import java.util.Scanner;
 /**
  * Main part of logic of Duke.
  */
-public class Duke {
+public class Duke  {
 
     /**
      * Holds the storage of data
@@ -111,5 +111,4 @@ public class Duke {
     public static void main(String[] args) {
         new Duke("./data/duke.txt").run();
     }
-
 }
