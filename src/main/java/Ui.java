@@ -14,14 +14,17 @@ public class Ui {
 
     // General style properties of the chatbot.
     private static final String LEFT_MARGIN = "    ";
-    private static final String BORDER = LEFT_MARGIN + "_______________________________________________________\n";
+    private static final String BORDER = LEFT_MARGIN
+            + "______________________________________________________________________________\n";
     private static final String LOGO = "\n" + LEFT_MARGIN
-            + "███╗   ███╗     █████╗     ██████╗     ██╗     ██████╗ \n" + LEFT_MARGIN
-            + "████╗ ████║    ██╔══██╗    ██╔══██╗    ██║    ██╔═══██╗\n" + LEFT_MARGIN
-            + "██╔████╔██║    ███████║    ██████╔╝    ██║    ██║   ██║\n" + LEFT_MARGIN
-            + "██║╚██╔╝██║    ██╔══██║    ██╔══██╗    ██║    ██║   ██║\n" + LEFT_MARGIN
-            + "██║ ╚═╝ ██║    ██║  ██║    ██║  ██║    ██║    ╚██████╔╝\n" + LEFT_MARGIN
-            + "╚═╝     ╚═╝    ╚═╝  ╚═╝    ╚═╝  ╚═╝    ╚═╝     ╚═════╝ \n";
+            + "888b     d888             d8888      8888888b.       8888888       .d88888b.  \n" + LEFT_MARGIN
+            + "8888b   d8888            d88888      888   Y88b        888        d88P\" \"Y88b \n" + LEFT_MARGIN
+            + "88888b.d88888           d88P888      888    888        888        888     888 \n" + LEFT_MARGIN
+            + "888Y88888P888          d88P 888      888   d88P        888        888     888 \n" + LEFT_MARGIN
+            + "888 Y888P 888         d88P  888      8888888P\"         888        888     888 \n" + LEFT_MARGIN
+            + "888  Y8P  888        d88P   888      888 T88b          888        888     888 \n" + LEFT_MARGIN
+            + "888   \"   888       d8888888888      888  T88b         888        Y88b. .d88P \n" + LEFT_MARGIN
+            + "888       888      d88P     888      888   T88b      8888888       \"Y88888P\"  \n";
     private static final String LEFT_MARGIN_DOUBLE = LEFT_MARGIN + LEFT_MARGIN;
 
     // Other messages
