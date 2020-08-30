@@ -6,4 +6,3 @@
 [T][X] read 
 [T][X] add read book 
 [T][X] read book 
-[T][X] gradle test 
