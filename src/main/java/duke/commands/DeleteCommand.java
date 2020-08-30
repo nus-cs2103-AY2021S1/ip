@@ -32,7 +32,7 @@ public class DeleteCommand extends Command {
      * not fall within the valid range.
      */
     @Override
-    public void executeCommand(TaskList taskList, Ui ui, Storage storage) throws InvalidDeleteFormatException,
+    public String executeCommand(TaskList taskList, Ui ui, Storage storage) throws InvalidDeleteFormatException,
             IncorrectDeleteInputException {
         String[] tempArray = fullCommand.trim().split(" ");
         if (tempArray.length != 2) {
@@ -45,7 +45,7 @@ public class DeleteCommand extends Command {
         }
         Task deletedTask = taskList.getSpecificTask(itemIndex);
         taskList.deleteTask(itemIndex);
-        ui.deleteMessage(deletedTask.toString(), taskList.getTaskListLength());
+        return ui.deleteMessage(deletedTask.toString(), taskList.getTaskListLength());
     }
 
     /**

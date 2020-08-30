@@ -44,7 +44,7 @@ public class AddCommand extends Command {
      * @throws InvalidEventFormatException If event command format is wrong.
      */
     @Override
-    public void executeCommand(TaskList taskList, Ui ui, Storage storage) throws InvalidToDoFormatException,
+    public String executeCommand(TaskList taskList, Ui ui, Storage storage) throws InvalidToDoFormatException,
             InvalidDeadlineFormatException, InvalidTimeException, InvalidCommandException,
             InvalidEventFormatException {
 
@@ -57,8 +57,7 @@ public class AddCommand extends Command {
             String task = fullCommand.substring(5);
             ToDo newToDoTask = new ToDo(task);
             taskList.addTask(newToDoTask);
-            ui.taskMessage(newToDoTask.toString(), taskList.getTaskListLength());
-            return;
+            return ui.taskMessage(newToDoTask.toString(), taskList.getTaskListLength());
         }
 
         if (Parser.isEventCommand(tempArray[0])) {
@@ -72,8 +71,7 @@ public class AddCommand extends Command {
             }
             Event newEventTask = new Event(eventDateArray[0], Time.getFormattedTime(eventDateArray[1]));
             taskList.addTask(newEventTask);
-            ui.taskMessage(newEventTask.toString(), taskList.getTaskListLength());
-            return;
+            return ui.taskMessage(newEventTask.toString(), taskList.getTaskListLength());
         }
 
         if (Parser.isDeadlineCommand(tempArray[0])) {
@@ -87,8 +85,7 @@ public class AddCommand extends Command {
             }
             Deadline newDeadlineTask = new Deadline(deadlineDateArray[0], Time.getFormattedTime(deadlineDateArray[1]));
             taskList.addTask(newDeadlineTask);
-            ui.taskMessage(newDeadlineTask.toString(), taskList.getTaskListLength());
-            return;
+            return ui.taskMessage(newDeadlineTask.toString(), taskList.getTaskListLength());
         }
 
         throw new InvalidCommandException();

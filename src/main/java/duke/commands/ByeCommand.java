@@ -29,12 +29,12 @@ public class ByeCommand extends Command {
      * @throws InvalidByeCommandException If the format of bye command is wrong.
      */
     @Override
-    public void executeCommand(TaskList taskList, Ui ui, Storage storage)
+    public String executeCommand(TaskList taskList, Ui ui, Storage storage)
             throws InvalidByeCommandException {
         String[] tempArray = fullCommand.trim().split(" ");
         if (tempArray.length != 1) {
             throw new InvalidByeCommandException();
         }
-        ui.byeMessage();
+        return ui.byeMessage();
     }
 }

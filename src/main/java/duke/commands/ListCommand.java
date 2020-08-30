@@ -28,11 +28,11 @@ public class ListCommand extends Command {
      * @throws InvalidListCommandException If the format of list command is wrong.
      */
     @Override
-    public void executeCommand(TaskList taskList, Ui ui, Storage storage) throws InvalidListCommandException {
+    public String executeCommand(TaskList taskList, Ui ui, Storage storage) throws InvalidListCommandException {
         String[] tempArray = fullCommand.trim().split(" ");
         if (tempArray.length != 1) {
             throw new InvalidListCommandException();
         }
-        ui.listMessage(taskList.toString());
+        return ui.listMessage(taskList.toString());
     }
 }
