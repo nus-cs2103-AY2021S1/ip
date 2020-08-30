@@ -6,7 +6,7 @@ import java.util.ArrayList;
 /**
  * Engages all the other classes to execute Duke
  */
-public class Duke {
+public class   Duke {
     public static String filePath;
     private TaskList tasks;
     private Ui ui;
