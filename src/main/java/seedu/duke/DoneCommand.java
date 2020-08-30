@@ -1,10 +1,19 @@
 package seedu.duke;
 
+/**
+ * Class that represents marking a task as done.
+ */
 public class DoneCommand extends Command {
     public DoneCommand(String[] words) {
         super(words);
     }
 
+    /**
+     * Marks the given task as done.
+     * @param ls The current list of tasks.
+     * @param ui The ui that takes of printing output.
+     * @throws DukeException If the given task does not exist.
+     */
     @Override
     public void execute(TaskList ls, Ui ui) throws DukeException {
         int number = Integer.parseInt(words[1]);

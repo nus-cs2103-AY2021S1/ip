@@ -6,6 +6,9 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
+/**
+ * Class that represents adding a task with a deadline.
+ */
 public class AddDeadline extends AddCommand {
     public static DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("d MMM yyyy kkmm", Locale.ENGLISH);
 
@@ -13,6 +16,12 @@ public class AddDeadline extends AddCommand {
         super(words);
     }
 
+    /**
+     * Adds the task to the list of current tasks.
+     * @param ls The current list of tasks.
+     * @param ui The ui that takes of printing output.
+     * @throws DateTimeException If the user inputs a wrong format of the date.
+     */
     @Override
     public void execute(TaskList ls, Ui ui) throws DateTimeException {
         String[] stuff = words[1].split(" /by ");

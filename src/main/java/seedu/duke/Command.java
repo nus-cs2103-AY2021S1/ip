@@ -1,5 +1,8 @@
 package seedu.duke;
 
+/**
+ * Class that represents user commands.
+ */
 public class Command {
     protected String[] words;
 
