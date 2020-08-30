@@ -25,10 +25,12 @@ public class CommandExecution {
      *
      * @param enumCommand the enumeration type of the input command.
      * @param instruction the string of input command.
-     * @param tasks the TaskList storing the list of tasks.
+     * @param tasks       the TaskList storing the list of tasks.
+     * @return a string representing the command output.
      * @throws DukeException if the description or the datetime format of the task is illegal.
      */
-    public static void executeCommand(EnumCommand enumCommand, String instruction, TaskList tasks) throws DukeException {
+    public static String executeCommand(EnumCommand enumCommand, String instruction, TaskList tasks)
+            throws DukeException {
         Ui ui = new Ui();
         switch (enumCommand) {
         case TODO:
@@ -36,8 +38,8 @@ public class CommandExecution {
                 throw new DukeException("The description of a todo cannot be empty.");
             }
             tasks.add(new ToDo(instruction.substring(4).strip()));
-            ui.addTaskAlert(tasks);
-            break;
+            return ui.addTaskAlert(tasks);
+
         case DEADLINE:
             if (instruction.substring(8).strip().equals("")) {
                 throw new DukeException("The description of a deadline cannot be empty.");
@@ -53,8 +55,7 @@ public class CommandExecution {
             String deadlineDateTime = tempDeadline[1].strip();
             LocalDateTime deadlineDate = dateTimeParser(deadlineDateTime);
             tasks.add(new Deadline(deadlineDescription, deadlineDate));
-            ui.addTaskAlert(tasks);
-            break;
+            return ui.addTaskAlert(tasks);
 
         case EVENT:
             if (instruction.substring(5).strip().equals("")) {
@@ -71,12 +72,11 @@ public class CommandExecution {
             String eventDateTime = tempEvent[1].strip(); // clear the white spaces at the front and at the back
             LocalDateTime eventDate = dateTimeParser(eventDateTime);
             tasks.add(new Event(eventDescription, eventDate));
-            ui.addTaskAlert(tasks);
-            break;
+            return ui.addTaskAlert(tasks);
+
         case BYE:
-            ui.farewell();
-            System.exit(0);
-            break;
+            return ui.farewell();
+
         case DONE:
 
             if (instruction.substring(4).strip().equals("")) {
@@ -92,8 +92,8 @@ public class CommandExecution {
             Task tempDone = tasks.get(indexDone);
             tempDone.markAsDone();
             tasks.set(indexDone, tempDone);
-            ui.doneAlert(tempDone);
-            break;
+            return ui.doneAlert(tempDone);
+
         case DELETE:
             if (instruction.substring(6).strip().equals("")) {
                 throw new DukeException("The description of a delete message cannot be empty.");
@@ -107,11 +107,11 @@ public class CommandExecution {
 
             Task tempDelete = tasks.get(indexDelete);
             tasks.remove((int) indexDelete);
-            ui.deleteTaskAlert(tempDelete, tasks);
-            break;
+            return ui.deleteTaskAlert(tempDelete, tasks);
+
         case LIST:
-            ui.showList(tasks);
-            break;
+            return ui.showList(tasks);
+
         case CHECK:
             if (instruction.substring(5).strip().equals("")) {
                 throw new DukeException("The \"check\" command is not entered correctly");
@@ -120,8 +120,8 @@ public class CommandExecution {
             String dateTimeToCheck = instruction.substring(5).strip();
             LocalDate dateToCheck = dateParser(dateTimeToCheck);
             TaskList occurings = searchTasksByTime(dateToCheck, tasks);
-            ui.showList(occurings);
-            break;
+            return ui.showList(occurings);
+
         case FIND:
             if (instruction.substring(4).strip().equals("")) {
                 throw new DukeException("The \"find\" command is not entered correctly");
@@ -129,11 +129,15 @@ public class CommandExecution {
 
             String keyword = instruction.substring(4).strip();
             TaskList matches = findTaskByKeyword(keyword, tasks);
-            ui.findTaskAlert(matches);
-            break;
-        }
+            return ui.findTaskAlert(matches);
 
+        default:
+            return "";
+        }
     }
+
+
+
 
     /**
      * Returns a TaskList of tasks that meet the input date requirement.
@@ -143,7 +147,7 @@ public class CommandExecution {
      * @return the TaskList of tasks that meet the input date requirement.
      */
     public static TaskList searchTasksByTime(LocalDate localDate, TaskList tasks) {
-        TaskList occurings = new TaskList();
+        TaskList occurrings = new TaskList();
 
         for (int i = 0; i < tasks.getSize(); i++) {
             boolean isMatch = false;
@@ -161,11 +165,11 @@ public class CommandExecution {
                 }
             }
             if (isMatch) {
-                occurings.add(temp);
+                occurrings.add(temp);
             }
         }
 
-        return occurings;
+        return occurrings;
     }
 
 

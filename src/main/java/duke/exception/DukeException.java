@@ -4,9 +4,6 @@ package duke.exception;
  * An exception to be thrown in the Duke application when illegal commands or exceptions are met.
  */
 public class DukeException extends Exception {
-    private String line = "___________________________________________________________________________________";
-    private String smallSpace = "    ";
-    private String bigSpace = "     ";
 
     /**
      * Constructs the DukeException.
@@ -23,7 +20,6 @@ public class DukeException extends Exception {
      * @return a string that represents the exception message.
      */
     public String toString() {
-        return smallSpace + line + "\n" + bigSpace + "☹ OOPS!!! "
-                + this.getMessage() + "\n" + smallSpace + line + "\n";
+        return "☹ OOPS!!! " + this.getMessage() + "\n" + "\n";
     }
 }

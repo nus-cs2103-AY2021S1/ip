@@ -2,14 +2,13 @@ package duke;
 
 import java.util.Scanner;
 
-import duke.commands.EnumCommand;
 import duke.commands.CommandExecution;
+import duke.commands.EnumCommand;
 import duke.exception.DukeException;
 import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.tasks.TaskList;
 import duke.ui.Ui;
-
 
 /**
  * A class that represents the Duke application which contains the main method in the class.
@@ -36,6 +35,12 @@ public class Duke {
         }
     }
 
+    /**
+     * Constructs a Duke object without taking in arguments.
+     */
+    public Duke() {
+
+    }
 
     /**
      * The main method of the application.
@@ -57,7 +62,7 @@ public class Duke {
             String instruction = sc.nextLine();
             try {
                 EnumCommand enumCommand = Parser.parseCommand(instruction);
-                CommandExecution.executeCommand(enumCommand, instruction, result);
+                String commandResult = CommandExecution.executeCommand(enumCommand, instruction, result);
                 storage.storeToFile(result);
             } catch (Exception e) {
                 ui.showError(e);
@@ -65,5 +70,22 @@ public class Duke {
         }
     }
 
+
+    /**
+     * Returns a string representing the response by the program after user input.
+     *
+     * @param input a string of input by the user.
+     * @return a string representing the response by the program after user input.
+     */
+    public String getResponse(String input) {
+        try {
+            EnumCommand enumCommand = Parser.parseCommand(input);
+            String commandResult = CommandExecution.executeCommand(enumCommand, input, result);
+            storage.storeToFile(result);
+            return commandResult;
+        } catch (Exception e) {
+            return ui.showError(e);
+        }
+    }
 
 }

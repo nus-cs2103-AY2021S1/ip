@@ -47,6 +47,7 @@ public class Event extends Task {
      *         and description.
      */
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + this.startTime.format(DateTimeFormatter.ofPattern("MMM d yyyy HH : mm")) + ")";
+        return "[E]" + super.toString() + " (at: "
+                + this.startTime.format(DateTimeFormatter.ofPattern("MMM d yyyy HH : mm")) + ")";
     }
 }

@@ -109,7 +109,8 @@ public class Parser {
         if (time.length() != 4) {
             throw new DukeException("The input time format is incorrect");
         }
-        LocalTime localTime = LocalTime.of(Integer.parseInt(time.substring(0, 2)), Integer.parseInt(time.substring(2, 4)));
+        LocalTime localTime = LocalTime.of(Integer.parseInt(time.substring(0, 2)),
+                Integer.parseInt(time.substring(2, 4)));
         LocalDateTime localDateTime = LocalDateTime.of(localDate, localTime);
         return localDateTime;
     }
