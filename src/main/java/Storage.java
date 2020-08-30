@@ -6,12 +6,11 @@ import java.util.Scanner;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class FileSaver {
-    public static String  filePath = "Data";
+public class Storage {
+    public static String  folderPath = "Data";
     public static String writePath = "Data/Duke.txt";
     
     public static void writeToFile(List<Task> list) throws IOException {
-        File f = new File(writePath);
         FileWriter fw = new FileWriter(writePath);
         fw.write("");
         for (Task task : list) {
@@ -31,8 +30,8 @@ public class FileSaver {
             }
             return tasks;
         } catch (FileNotFoundException e) {
-            System.out.println("Creating new folder");
-            File f2 = new  File(filePath);
+            System.out.println("Initializing storage");
+            File f2 = new  File(folderPath);
             f2.mkdir();
             return tasks;
         }
@@ -43,7 +42,7 @@ public class FileSaver {
         String [] arr = taskString.split("\\s+");
         boolean isCompleted = booleanToString(arr[1]);
         if (arr[0].equals("[D]")) {
-            task = new Deadline(arr[2],isCompleted,arr[3] + " " + arr[4]);
+            task = generateDeadline(arr,isCompleted);
         } else if (arr[0].equals("[E]")) {
             task = new Event(arr[2],isCompleted,arr[3]);
         } else if (arr[0].equals("[T]")) {
@@ -52,6 +51,16 @@ public class FileSaver {
             System.out.println("This task cannot be read: " + taskString);
         }
         return task;
+    }
+    
+    public static Deadline generateDeadline(String[] arr, boolean isCompleted) {
+        String deadline = arr[arr.length-2] + " " +arr[arr.length-1];
+        String description = arr[2];
+        int i;
+        for (i =3 ; i < arr.length-2 ;i++) {
+            description += " " + arr[i];
+        }
+        return new Deadline(description,isCompleted,deadline);
     }
     
     private static boolean booleanToString (String bool) {
