@@ -9,6 +9,7 @@ public class NoIndexException extends DukeException {
      * @param deleteOrDone The type of command: DeleteCommand or DoneCommand.
      */
     public NoIndexException(String deleteOrDone) {
-        super("Invalid format. After \"" + deleteOrDone + "\", you need to put a positive integer");
+        super("Invalid format. After \"" + deleteOrDone + "\", you need to put "
+            + "at least one positive integer separated by [space]");
     }
 }
