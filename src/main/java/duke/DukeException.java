@@ -10,7 +10,7 @@ public class DukeException extends Exception {
      * Constructor
      * @param error the error message to show
      */
-    DukeException(String error) {
+    public DukeException(String error) {
         // TODO: use super(error) constructor instead
         this.error = error;
     }

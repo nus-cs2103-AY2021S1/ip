@@ -1,5 +1,8 @@
 package duke.commands;
 
+import duke.DukeException;
+import duke.tasks.Task;
+
 /**
  * <code>duke.commands.CompleteCommand</code> inherits from the base class <code>duke.commands.Command</code>
  * and will handle the job of marking duke.tasks as complete.

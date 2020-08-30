@@ -1,5 +1,8 @@
 package duke.commands;
 
+import duke.DukeException;
+import duke.tasks.Deadline;
+
 /**
  * <code>duke.commands.DeadlineCommand</code> inherits from the base class <code>duke.commands.Command</code>
  * and will handle the job of adding deadlines to the task manager.
