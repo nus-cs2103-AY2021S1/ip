@@ -43,19 +43,19 @@ public class TaskList {
      * @throws ArrayIndexOutOfBoundsException If /by or /at user input not written properly.
      *                                        E.g deadline return book /bylmklmlmlkmlkmlmlmlmlmkl Sunday.
      */
-    public void addTask(String userCommand) {
+    public String addTask(String userCommand) {
         if (userCommand.contains("todo")) { // To Do
             // E.g todowork
             if (userCommand.split(" ").length == 1) {
-                DukeException.invalidTodo();
+                return DukeException.invalidTodo();
             } else {
                 // Add and report that the todo is added
                 String[] userCommandSplit = userCommand.split(" ", 2);
                 String description = userCommandSplit[1];
                 Task newTask = new Todo(description);
                 this.tasks.add(newTask);
-                TaskDescription.addedTaskDescription(this.tasks, newTask);
                 Storage.appendToFile(newTask.toString());
+                return TaskDescription.addedTaskDescription(this.tasks, newTask);
             }
         } else if (userCommand.contains("deadline")) { // Deadline
             try {
@@ -66,11 +66,11 @@ public class TaskList {
                 // Add and report that the deadline is added
                 Task newTask = new Deadline(description, by);
                 this.tasks.add(newTask);
-                TaskDescription.addedTaskDescription(this.tasks, newTask);
                 Storage.appendToFile(newTask.toString());
+                return TaskDescription.addedTaskDescription(this.tasks, newTask);
             } catch (ArrayIndexOutOfBoundsException e) {
                 // E.g deadline return book /bylmklmlmlkmlkmlmlmlmlmkl Sunday
-                DukeException.invalidDeadline();
+                return DukeException.invalidDeadline();
             }
         } else { // Event
             try {
@@ -81,11 +81,11 @@ public class TaskList {
                 // Add and report that the event is added
                 Task newTask = new Event(description, at);
                 this.tasks.add(newTask);
-                TaskDescription.addedTaskDescription(this.tasks, newTask);
                 Storage.appendToFile(newTask.toString());
+                return TaskDescription.addedTaskDescription(this.tasks, newTask);
             } catch (ArrayIndexOutOfBoundsException e) {
                 // E.g event project meeting /atlmklmlmlkmlkmlmlmlmlmkl Mon 2-4pm
-                DukeException.invalidEvent();
+                return DukeException.invalidEvent();
             }
         }
     }
@@ -100,14 +100,14 @@ public class TaskList {
      *                                   task list.
      * @throws NumberFormatException     If user input is invalid. E.g "done work".
      */
-    public void markTaskDone(String userCommand) {
+    public String markTaskDone(String userCommand) {
         try {
             // E.g given "done 1", we split to ["done", "1"]
             String[] userCommandSplit = userCommand.split(" ");
 
             // To prevent cases such as "done 1 7", "done", "done123123123"
             if (userCommandSplit.length != 2) {
-                DukeException.invalidCommand();
+                return DukeException.invalidCommand();
             } else {
                 // Take serial number e.g 1 "done 1"
                 int serialNumber = Integer.parseInt(userCommandSplit[1]);
@@ -118,15 +118,15 @@ public class TaskList {
                 String currentText = doneTask.toString();
                 doneTask.markAsDone();
                 String amendedText = doneTask.toString();
-                TaskDescription.doneTaskDescription(doneTask);
                 Storage.amendFile(currentText, amendedText);
+                return TaskDescription.doneTaskDescription(doneTask);
             }
         } catch (IndexOutOfBoundsException e) {
             // E.g "done 719329813298712398123" is not valid as number of tasks is cap to 100 by requirements
-            DukeException.noSuchTask();
+            return DukeException.noSuchTask();
         } catch (NumberFormatException e) {
             // E.g "done work"
-            DukeException.invalidCommand();
+            return DukeException.invalidCommand();
         }
     }
 
@@ -139,14 +139,14 @@ public class TaskList {
      *                                   cap to 100 by requirements.
      *                                   E.g "delete 7" is not valid if there are only 6 tasks in the task list.
      */
-    public void deleteTask(String userCommand) {
+    public String deleteTask(String userCommand) {
         try {
             // E.g given "delete 1", we split to ["delete", "1"]
             String[] userCommandSplit = userCommand.split(" ");
 
             // To prevent cases such as "delete 1 7", "delete", "delete123123123"
             if (userCommandSplit.length != 2) {
-                DukeException.invalidCommand();
+                return DukeException.invalidCommand();
             } else {
                 // Take serial number e.g 1 "delete 1" and delete
                 int serialNumber = Integer.parseInt(userCommandSplit[1]);
@@ -155,12 +155,12 @@ public class TaskList {
                 // Mark as deleted and report that the task is deleted
                 Task deletedTask = this.tasks.get(index);
                 this.tasks.remove(index);
-                TaskDescription.deletedTaskDescription(this.tasks, deletedTask);
                 Storage.deleteFromFile(deletedTask.toString());
+                return TaskDescription.deletedTaskDescription(this.tasks, deletedTask);
             }
         } catch (IndexOutOfBoundsException e) {
             // E.g "delete 719329813298712398123" is not valid as number of tasks is cap to 100 by requirements
-            DukeException.noSuchTask();
+            return DukeException.noSuchTask();
         }
     }
 
@@ -169,18 +169,18 @@ public class TaskList {
      *
      * @param userCommand User input.
      */
-    public void findTask(String userCommand) {
+    public String findTask(String userCommand) {
         // E.g given "find book", we split to ["find", "book"]
         String[] userCommandSplit = userCommand.split(" ", 2);
         // To prevent cases such as "findasd"
         if (userCommandSplit.length != 2) {
-            DukeException.invalidCommand();
+            return DukeException.invalidCommand();
         } else {
             String keyword = userCommandSplit[1];
             // Make a copy of the existing tasks and remove a task if keyword is not found
             List<Task> tasksCopy = this.tasks;
             tasksCopy.removeIf(task -> !task.getDescription().contains(keyword));
-            TaskDescription.searchedTaskDescription(tasksCopy);
+            return TaskDescription.searchedTaskDescription(tasksCopy);
         }
     }
 }

@@ -129,4 +129,8 @@ public class UI {
                 "\t  |,-'--|--'-.|\n");
         System.out.println("\t<CAKE><CAKE><CAKE><CAKE><CAKE><CAKE><CAKE><CAKE><CAKE><CAKE>\n");
     }
+
+    public static String farewellForJavaFx() {
+        return "\tBYE, GONNA GO NUKE AMERICA NOW!!!!!!!!!!!\n";
+    }
 }
