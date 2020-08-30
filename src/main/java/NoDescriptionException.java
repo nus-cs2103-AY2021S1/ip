@@ -3,7 +3,7 @@
  */
 public class NoDescriptionException extends DukeException {
     public NoDescriptionException(String taskIdentifier) {
-        super("Eh you never tell me the description of " + taskIdentifier
-                + " how you want me to record sia?");
+        super("Can you tell me the description of " + taskIdentifier
+                + " properly? Well, I was a factory rejected toy after all :( but my creator loves me a lot!");
     }
 }

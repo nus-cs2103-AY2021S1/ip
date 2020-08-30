@@ -3,6 +3,6 @@
  */
 public class InvalidTaskNumber extends DukeException {
     public InvalidTaskNumber() {
-        super("Aiyo, don't have this task number leh...");
+        super("Oh no, don't be blur like Nobita >_<. This task number does not exist!");
     }
 }

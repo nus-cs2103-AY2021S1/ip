@@ -48,12 +48,14 @@ public class Ui {
      * Prints the list of tasks when user calls for 'list'.
      * @param taskList The list of task to be printed.
      */
-    public void showListTasks(List<Task> taskList) {
-        System.out.println("Lao Duke not so blur like you. Tsk. I got remember your tasks one hor.");
+    public String showListTasks(List<Task> taskList) {
+        StringBuilder reply = new StringBuilder();
+        reply.append("I remembered your tasks well because I have such good memory! :D Here you go:\n");
         for (int i = 0; i < taskList.size(); i++) {
             Task tsk = taskList.get(i);
-            System.out.println("Task " + (i + 1) + ": " + tsk);
+            reply.append("Task " + (i + 1) + ": " + tsk + (i == taskList.size() - 1 ? "" : "\n"));
         }
+        return reply.toString();
     }
 
     /**
@@ -61,14 +63,16 @@ public class Ui {
      * when user calls for 'print /date'.
      * @param taskList The list of tasks with same date.
      */
-    public void showRequiredTasks(List<Task> taskList) {
+    public String showRequiredTasks(List<Task> taskList) {
         if (taskList.size() > 0) {
-            System.out.println("I how smart...I have matched your queries as below:");
-            for (Task tsk : taskList) {
-                System.out.println(tsk);
+            StringBuilder reply = new StringBuilder();
+            reply.append("I have matched your queries as below. Don't forget to complete them if not your mom will scold you!\n");
+            for (int i = 0; i < taskList.size(); i++) {
+                reply.append((i + 1) + ". " + taskList.get(i) + (i == taskList.size() - 1 ? "" : "\n"));
             }
+            return reply.toString();
         } else {
-            System.out.println("Wah cannot find any matching tasks leh...");
+            return "Oh no >_< I can't seem to find any matching tasks.";
         }
     }
 
@@ -76,46 +80,46 @@ public class Ui {
      * Prints the task that has been added to the list.
      * @param tsk The task that has been added.
      */
-    public void showAddTask(Task tsk) {
-        System.out.println("Lao Duke has added this task for you:\n" + tsk);
+    public String showAddTask(Task tsk) {
+        return "I have added this task for you:\n" + tsk;
     }
 
     /**
      * Prints the task that has been marked as done when user calls 'done /task'.
      * @param tsk The task that is completed.
      */
-    public void showDoneTask(Task tsk) {
-        System.out.println("Wah very good! I am proud that you got do your task!\n" + tsk);
+    public String showDoneTask(Task tsk) {
+        return "Excellent! Don't procrastinate like Nobita :P. You have completed:\n" + tsk;
     }
 
     /**
      * Prints the task that has been deleted when user calls for 'delete /task'
      * @param tsk The task that is deleted.
      */
-    public void showDeleteTask(Task tsk) {
-        System.out.println("Can can I removed this task for you:\n" + tsk);
+    public String showDeleteTask(Task tsk) {
+        return "I have removed this task for you:\n" + tsk;
     }
 
     /**
      * Prints the total number of tasks in list.
      * @param num The total number of tasks.
      */
-    public void showTotalTasks(int num) {
-        System.out.println("You have " + num + " task(s) in your list!");
+    public String showTotalTasks(int num) {
+        return "You have " + num + " task(s) in your list!";
     }
 
     /**
      * Prints the error when an IOException occurs.
      */
-    public void showLoadingError() {
-        System.out.println("Error with reading / writing file!");
+    public String showLoadingError() {
+        return "Error with reading / writing file!";
     }
 
     /**
      * Prints the error when a DukeException occurs.
      * @param e The DukeException that arises.
      */
-    public void showDukeError(DukeException e) {
-        System.out.println(e);
+    public String showDukeError(DukeException e) {
+        return e.toString();
     }
 }

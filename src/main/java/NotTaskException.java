@@ -3,6 +3,7 @@
  */
 public class NotTaskException extends DukeException {
     public NotTaskException() {
-        super("Excuse me, Lao Duke is not so smart. You must follow the format for input... Don't anyhow hor >:(");
+        super("I know you like to talk to me :D But I cannot understand what task this is..."
+                + "Is it because my ears got bitten by a mouse? :(");
     }
 }
