@@ -8,11 +8,11 @@ import service.DukeService;
  * Syntax: list
  */
 public class ListCommand extends Command {
-    public static final String commandWord = "list";
+    public static final String COMMAND_WORD = "list";
 
     /**
      * Constructor.
-     * @param raw: raw command input by users
+     * @param raw raw command input by users
      */
     public ListCommand(String raw) {
         super(raw);
@@ -20,7 +20,7 @@ public class ListCommand extends Command {
 
     /**
      * Overriden method, to execute the command given the service
-     * @param service: duke service
+     * @param service duke service
      * @return a duke response
      * @throws Exception if execution fails
      */

@@ -9,12 +9,12 @@ import service.DukeService;
  * Syntax: done + task_id.
  */
 public class DoneCommand extends Command {
-    public static final String commandWord = "done";
+    public static final String COMMAND_WORD = "done";
     private int position;
 
     /**
      * Constructor.
-     * @param raw: raw command input by users
+     * @param raw raw command input by users
      */
     public DoneCommand(String raw) {
         super(raw);
@@ -22,14 +22,14 @@ public class DoneCommand extends Command {
 
     /**
      * Overriden method, to execute the command given the service
-     * @param service: duke service
+     * @param service duke service
      * @return a duke response
      * @throws Exception if execution fails
      */
     @Override
     public DukeResponse execute(DukeService service) throws Exception {
         if (!super.isParse) {
-             throw new Exception("Command has not been parsed");
+            throw new Exception("Command has not been parsed");
         }
         return service.markAsDone(position);
     }

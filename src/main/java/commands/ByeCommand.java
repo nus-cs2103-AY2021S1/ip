@@ -9,12 +9,12 @@ import service.DukeService;
  * Syntax: bye
  */
 public class ByeCommand extends Command {
-    public static final String commandWord = "bye";
+    public static final String COMMAND_WORD = "bye";
     private static final String BYE_STATEMENT = "Bye. Hope to see you again soon!\n";
 
     /**
      * Constructor.
-     * @param raw: raw command input by users
+     * @param raw raw command input by users
      */
     public ByeCommand(String raw) {
         super(raw);

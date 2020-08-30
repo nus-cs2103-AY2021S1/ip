@@ -6,19 +6,31 @@ import exceptions.InvalidCommandException;
  * Mold of tasks.
  */
 public abstract class Task {
-    public String[] tokens;
-    public String taskWord;
-    public boolean isDone;
+    protected String[] tokens;
+    protected String taskWord;
+    protected boolean isDone;
 
     /**
      * Constructor
-     * @param tokens list of tokens
-     * @param taskWord: either todo, event or deadline
+     * @param tokens list of {@token}
+     * @param taskWord either todo, event or deadline, denoting {@taskWord}
      */
     public Task(String[] tokens, String taskWord) {
         this.isDone = false;
         this.tokens = tokens;
         this.taskWord = taskWord;
+    }
+
+    public String[] getTokens() {
+        return this.tokens;
+    }
+
+    public String getTaskWord() {
+        return this.taskWord;
+    }
+
+    public boolean isDone() {
+        return this.isDone;
     }
 
     /**

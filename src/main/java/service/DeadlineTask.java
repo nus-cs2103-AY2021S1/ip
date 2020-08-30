@@ -1,18 +1,19 @@
 package service;
 
-import exceptions.InvalidCommandException;
-import parser.Flag;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-
-
 import java.util.Map;
+
+import exceptions.InvalidCommandException;
+import parser.Flag;
+
+
 
 /**
  * A class represents a Deadline task
  */
 public class DeadlineTask extends Task {
-    public static final String taskWord = "deadline";
+    public static final String TASK_WORD = "deadline";
 
     private String description;
     private String time;
@@ -20,10 +21,10 @@ public class DeadlineTask extends Task {
 
     /**
      * Constructor
-     * @param tokens: an array of tokens starting with task name: todo meet Chau
+     * @param tokens an array of tokens starting with task name: todo meet Chau
      */
     public DeadlineTask(String[] tokens) {
-        super(tokens, taskWord);
+        super(tokens, TASK_WORD);
     }
 
     /**

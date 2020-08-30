@@ -1,21 +1,22 @@
 package service;
 
+import java.util.Map;
+
 import exceptions.InvalidCommandException;
 import parser.Flag;
 
-import java.util.Map;
 
 /**
  * A class represents a Event task
  */
 public class EventTask extends Task {
-    public static final String taskWord = "event";
+    public static final String TASK_WORD = "event";
 
     private String description;
     private String time;
 
     public EventTask(String[] tokens) {
-        super(tokens, taskWord);
+        super(tokens, TASK_WORD);
     }
 
     /**

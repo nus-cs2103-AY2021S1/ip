@@ -1,11 +1,10 @@
 package parser;
 
-import exceptions.InvalidCommandException;
-import utils.TokenUtils;
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
+
+import exceptions.InvalidCommandException;
 
 /**
  * Enum flags: flags that can be parsed by task parser.
@@ -37,15 +36,15 @@ public enum Flag {
 
     /**
      * From a token, get the flag corresponding to the token
-     * @param token: raw token
+     * @param token raw token
      * @return optional of flag. If cannot find any token matched, return Optional.empty()
      */
     private static Optional<Flag> getFlags(String token) {
         if (token.length() == 0) {
-            return  Optional.empty();
+            return Optional.empty();
         }
         for (Flag flag: Flag.values()) {
-            if (token.equals(flag.value )) {
+            if (token.equals(flag.value)) {
                 return Optional.of(flag);
             }
         }
@@ -53,7 +52,7 @@ public enum Flag {
     }
 
     /**
-     * Parse a list of tokens to a list of pair<flag, value>: <"/by", "2020-06-06">, ....
+     * Parse a list of tokens to a list of pair flag, value: <"/by", "2020-06-06">
      * @param tokens a list of tokens
      * @return a map of pair(flag, value)
      * @throws InvalidCommandException when that command is invalid
@@ -74,7 +73,10 @@ public enum Flag {
                 currentFlag = flag.get();
                 sb = new StringBuilder();
             } else {
-                if (sb.length() > 0) sb.append(" ");
+                if (sb.length() > 0) {
+                    sb.append(" ");
+                }
+
                 sb.append(token);
             }
         }

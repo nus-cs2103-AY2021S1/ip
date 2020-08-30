@@ -1,14 +1,15 @@
 package service;
 
+import java.util.Optional;
+
 import exceptions.InvalidCommandException;
 
-import java.util.Optional;
 
 /**
  * A class represents a Todo task
  */
 public class TodoTask extends Task {
-    public static final String taskWord = "todo";
+    public static final String TASK_WORD = "todo";
 
     private String description;
 
@@ -17,7 +18,7 @@ public class TodoTask extends Task {
      * @param tokens an array of tokens
      */
     public TodoTask(String[] tokens) {
-        super(tokens, taskWord);
+        super(tokens, TASK_WORD);
     }
 
     /**

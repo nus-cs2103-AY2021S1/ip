@@ -12,29 +12,31 @@ import utils.TokenUtils;
  * Syntax: add + task_type + decs + tags...
  */
 public class AddCommand extends Command {
-    public static final String commandWord = "add";
+    public static final String COMMAND_WORD = "add";
     private static TaskParser taskParser = null;
     private Task toAdd;
 
-    /**
-     * Constructor
-     * @param parser: a task parser that has registered all tasks.
-     */
-    public static void setTaskParser(TaskParser parser) {
-        AddCommand.taskParser = parser;
-    }
 
     /**
      * Constructor.
-     * @param raw: raw command input by users
+     * @param raw raw command input by users
      */
     public AddCommand(String raw) {
         super(raw);
     }
 
     /**
+     * Constructor
+     * @param parser a task parser that has registered all tasks
+     */
+    public static void setTaskParser(TaskParser parser) {
+        AddCommand.taskParser = parser;
+    }
+
+
+    /**
      * Overriden method, to execute the command given the service
-     * @param service: duke service
+     * @param service duke service
      * @return a duke response
      * @throws Exception if execution fails
      */

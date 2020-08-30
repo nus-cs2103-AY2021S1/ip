@@ -1,10 +1,11 @@
 package parser;
 
+import java.util.ArrayList;
+import java.util.function.Function;
+
 import commands.Command;
 import exceptions.InvalidCommandException;
 
-import java.util.ArrayList;
-import java.util.function.Function;
 
 /**
  * A parser that parses raw commands to real commands.
@@ -20,7 +21,7 @@ public class CommandParser {
             this.commandWord = commandWord;
         }
     }
-    ArrayList<CommandInstance> allCommandInstances;
+    private ArrayList<CommandInstance> allCommandInstances;
 
     /**
      * Constructor
@@ -32,8 +33,8 @@ public class CommandParser {
     /**
      * Registers a command to the parser, receive constructor provider and the command word.
      * It makes creating a new command easier, less error prone.
-     * @param constructor: constructor provider
-     * @param commandWord: command words: add, delete, done, ...
+     * @param constructor constructor provider
+     * @param commandWord command words: add, delete, done, ...
      */
     public void registerCommand(Function<String, Command> constructor, String commandWord) {
         allCommandInstances.add(new CommandInstance(constructor, commandWord));
@@ -41,7 +42,7 @@ public class CommandParser {
 
     /**
      * Explicitly parse the command from raw strings to Command objeccts
-     * @param raw: raw command as a strinjg
+     * @param raw raw command as a strinjg
      * @return a new Command object
      * @throws InvalidCommandException when systax fail. It is helpful to return errors to users;
      */

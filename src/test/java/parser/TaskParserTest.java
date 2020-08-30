@@ -11,7 +11,7 @@ public class TaskParserTest {
     @Test
     public void ParseFailedTest() {
         TaskParser parser = new TaskParser();
-        parser.registerTask(DeadlineTask::new, DeadlineTask.taskWord);
+        parser.registerTask(DeadlineTask::new, DeadlineTask.TASK_WORD);
 
         String rawTask = "event meet Chau \\at 2020-09-09";
         try {

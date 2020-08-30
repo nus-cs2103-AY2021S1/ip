@@ -22,7 +22,7 @@ public class TokenUtils {
 
     /**
      * A list of tokens to string
-     * @param tokens: array of tokens
+     * @param tokens array of tokens
      * @return a string
      */
     public static String tokensToString(String[] tokens) {

@@ -1,5 +1,7 @@
 package commands;
 
+import java.util.function.Predicate;
+
 import exceptions.InvalidCommandException;
 import exceptions.ServiceException;
 import service.DukeResponse;
@@ -7,10 +9,9 @@ import service.DukeService;
 import service.Task;
 import utils.TokenUtils;
 
-import java.util.function.Predicate;
 
 public class FindCommand extends Command {
-    public static final String commandWord = "find";
+    public static final String COMMAND_WORD = "find";
     private Predicate<Task> predicate;
 
     public FindCommand(String raw) {

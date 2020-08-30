@@ -1,5 +1,11 @@
 package storage;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Scanner;
+
 import exceptions.DukeException;
 import exceptions.InvalidCommandException;
 import parser.TaskParser;
@@ -7,11 +13,6 @@ import service.DukeService;
 import service.Task;
 import utils.TokenUtils;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Scanner;
 
 /**
  * Storage reads and writes data to a text file
@@ -23,8 +24,8 @@ public class Storage {
 
     /**
      * Constructor
-     * @param fileDirectory: relative directory
-     * @param parser: task parser, a helper to parse tasks to strings vice and versa
+     * @param fileDirectory relative directory
+     * @param parser task parser, a helper to parse tasks to strings vice and versa
      */
     public Storage(String fileDirectory, TaskParser parser) {
         tasks = new ArrayList<>();
@@ -34,11 +35,11 @@ public class Storage {
 
     private String taskToString(Task task) {
         StringBuilder sb = new StringBuilder();
-        sb.append(task.isDone ? "1" : "0")
-          .append(" | ")
-          .append(task.taskWord)
-          .append(" | ")
-          .append(TokenUtils.tokensToString(task.tokens));
+        sb.append(task.isDone() ? "1" : "0")
+            .append(" | ")
+            .append(task.getTaskWord())
+            .append(" | ")
+            .append(TokenUtils.tokensToString(task.getTokens()));
         return sb.toString();
     }
 
@@ -59,7 +60,7 @@ public class Storage {
     }
 
     /**
-     * @param service: DukeService to get all tasks
+     * @param service DukeService to get all tasks
      * @throws DukeException throws exception if reading error happens
      */
     public void readFromFile(DukeService service) throws DukeException {
@@ -81,8 +82,8 @@ public class Storage {
     }
 
     /**
-     * @param service: DukeService to put all tasks
-     * @throws DukeException: throws exception
+     * @param service DukeService to put all tasks
+     * @throws DukeException throws exception
      */
     public void writeToFile(DukeService service) throws DukeException {
         String[] parsedStrings = service.getParsedTasks(this::taskToString);
@@ -97,7 +98,9 @@ public class Storage {
                 writer.write("\n");
             }
             writer.close();
-        } catch (IOException ignored) {
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
         }
     }
 }

@@ -1,10 +1,11 @@
 package service;
 
-import exceptions.ServiceException;
-
 import java.util.ArrayList;
 import java.util.function.Function;
 import java.util.function.Predicate;
+
+import exceptions.ServiceException;
+
 
 /**
  * Core of Duke
@@ -20,13 +21,13 @@ public class DukeService {
     }
 
     private String numberOfElementsAnnouncement() {
-         return String.format("You have %d elements in the list", tasks.size());
+        return String.format("You have %d elements in the list", tasks.size());
     }
 
     /**
      * Adds a new task to taskList
-     * @param toAdd; the new task
-     * @return: a dedicated message
+     * @param toAdd the new task
+     * @return a dedicated message
      */
     public DukeResponse addTask(Task toAdd) {
         tasks.add(toAdd);
@@ -43,7 +44,7 @@ public class DukeService {
 
     /**
      * Parse tasks to string to write to files
-     * @param parser: parser
+     * @param parser parser
      * @return a list of strings
      */
     public String[] getParsedTasks(Function<Task, String> parser) {
@@ -56,7 +57,7 @@ public class DukeService {
 
     /**
      * Deletes a tasks
-     * @param position: position to be deleted
+     * @param position position to be deleted
      * @return a dedicated message
      * @throws ServiceException if position is invalid
      */
@@ -74,7 +75,7 @@ public class DukeService {
 
     /**
      * Find all tasks that satisfy a given prediate
-     * @param predicate: the given preidate
+     * @param predicate the given preidate
      * @return dedicated message that contains all matched tasks.
      */
     public DukeResponse findTasks(Predicate<Task> predicate) {
@@ -106,7 +107,7 @@ public class DukeService {
 
     /**
      * Marks a job as done
-     * @param position: position of the job in the list
+     * @param position position of the job in the list
      * @return a dedicated message
      */
     public DukeResponse markAsDone(int position) {

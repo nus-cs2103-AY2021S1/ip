@@ -1,11 +1,11 @@
 package parser;
 
+import java.util.ArrayList;
+import java.util.function.Function;
+
 import exceptions.InvalidCommandException;
 import service.Task;
 import utils.TokenUtils;
-
-import java.util.ArrayList;
-import java.util.function.Function;
 
 public class TaskParser {
     ///helper class
@@ -18,7 +18,7 @@ public class TaskParser {
             this.taskWord = taskWord;
         }
     }
-    ArrayList<TaskInstance> allTaskInstances;
+    private ArrayList<TaskInstance> allTaskInstances;
 
     public TaskParser() {
         allTaskInstances = new ArrayList<>();
@@ -28,6 +28,12 @@ public class TaskParser {
         allTaskInstances.add(new TaskInstance(constructor, taskWord));
     }
 
+    /**
+     *
+     * @param tokens list of tokens
+     * @return a new Task
+     * @throws InvalidCommandException when facing invalid syntax
+     */
     public Task parse(String[] tokens) throws InvalidCommandException {
         if (tokens.length <= 1) {
             throw new InvalidCommandException("Should contain more tokens");

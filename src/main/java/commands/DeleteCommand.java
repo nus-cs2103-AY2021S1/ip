@@ -11,12 +11,12 @@ import service.DukeService;
  * Syntax: delete + task_index
  */
 public class DeleteCommand extends Command {
-    public static final String commandWord = "delete";
+    public static final String COMMAND_WORD = "delete";
     private int position;
 
     /**
      * Constructor.
-     * @param raw: raw command input by users
+     * @param raw raw command input by users
      */
     public DeleteCommand(String raw) {
         super((raw));
@@ -24,9 +24,9 @@ public class DeleteCommand extends Command {
 
     /**
      * Overriden method, to execute the command given the service
-     * @param service: duke service
+     * @param service duke service
      * @return a duke response
-     * @throws Exception if execution fails
+     * @throws DukeException if execution fails
      */
     @Override
     public DukeResponse execute(DukeService service) throws DukeException {
