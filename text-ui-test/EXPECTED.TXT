@@ -6,31 +6,53 @@ todo: Add a To-Do task.
 event: Add an Event task.
 deadline: Add a Deadline task.
 find: Find a task which matches your description.
+------------------------------------------------
 Enter input:
 Got it, I've added this task: [T][X] make coffee
 Now you have 1 tasks in the list.
+------------------------------------------------
 Enter input:
 Got it, I've added this task: [E][X] go for tutorial (at: Thursday 2pm)
 Now you have 2 tasks in the list.
+------------------------------------------------
 Enter input:
 Got it, I've added this task: [D][X] individual project stage 8 (by: Saturday 4pm)
 Now you have 3 tasks in the list.
+------------------------------------------------
 Enter input:
 Nice! I've marked this task as done:
 [T][✓] make coffee
+------------------------------------------------
 Enter input:
 Nice! I've marked this task as done:
 [E][✓] go for tutorial (at: Thursday 2pm)
+------------------------------------------------
 Enter input:
 Got it, I've added this task: [T][X] eat dinner
 Now you have 4 tasks in the list.
+------------------------------------------------
 Enter input:
 Noted. I have removed this task:
 [D][X] individual project stage 8 (by: Saturday 4pm)
 Now you have 3 tasks in the list.
+------------------------------------------------
 Enter input:
 Got it, I've added this task: [E][X] presentation (at: 20th Sept 2pm)
 Now you have 4 tasks in the list.
+------------------------------------------------
+Enter input:
+Got it, I've added this task: [E][X] 4th event (at: OCTOBER 20 2021 12:45 AM)
+Now you have 5 tasks in the list.
+------------------------------------------------
+Enter input:
+Here are the tasks in your list:
+1. [T][✓] make coffee
+2. [E][✓] go for tutorial (at: Thursday 2pm)
+3. [T][X] eat dinner
+4. [E][X] presentation (at: 20th Sept 2pm)
+5. [E][X] 4th event (at: OCTOBER 20 2021 12:45 AM)
+------------------------------------------------
 Enter input:
 ...Saved your list.
 Bye, see you soon. Exiting...
+------------------------------------------------

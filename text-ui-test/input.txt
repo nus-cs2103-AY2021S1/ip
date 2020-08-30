@@ -5,10 +5,7 @@ done 1
 done 2
 todo eat dinner
 delete 3
-<<<<<<< HEAD
 event presentation /at 20th Sept 2pm
-=======
 event 4th event /at 20-10-2021 1245
 list
->>>>>>> branch-Level-8
 bye

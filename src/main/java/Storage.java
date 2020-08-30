@@ -13,7 +13,7 @@ public class Storage {
         this.filePath = filePath;
     }
 
-    public ArrayList<Task> load() {
+    public ArrayList<Task> load() throws DukeException {
         File taskListFile = new File(filePath);
         try {
             if (!taskListFile.exists()) {
@@ -26,7 +26,7 @@ public class Storage {
                 System.out.println("Found your data! Give me some time to read it...");
             }
         } catch (IOException e) {
-            System.out.println("Exception while opening task list file: " + e);
+            throw new DukeException("Exception while opening task list file: " + e);
         }
 
         ArrayList<Task> outputTaskList = new ArrayList<>();
@@ -38,8 +38,8 @@ public class Storage {
                 // Note, this is assuming that format of
                 // Task.getDescriptionForDatabase() remains the same.
                 String[] formattedTaskString = taskFromFile.split(" - ");
-                CommandEnum.Command taskCommand = CommandEnum.getCommand(formattedTaskString[0]);
-                boolean isTaskDone = formattedTaskString[1].equals("0");
+                Parser.Command taskCommand = Parser.parseCommand(formattedTaskString[0]);
+                boolean isTaskDone = formattedTaskString[1].equals("1");
                 switch (taskCommand) {
                     case TODO:
                         outputTaskList.add(new Todo(formattedTaskString[2], isTaskDone));
@@ -66,7 +66,7 @@ public class Storage {
             }
             taskReader.close();
         } catch (FileNotFoundException e) {
-            System.out.println("Exception while scanning task list file: " + e);
+            throw new DukeException("Exception while scanning task list file: " + e);
         }
         return outputTaskList;
     }
@@ -74,7 +74,7 @@ public class Storage {
     /**
      * Save the current list into a file and closes the program
      */
-    public void store(TaskList tasks) {
+    public void store(TaskList taskList) throws DukeException {
         try {
             File taskListFile = new File(filePath);
             // Clear the pre-existing file if there is one.
@@ -82,9 +82,9 @@ public class Storage {
                 taskListFile.delete();
                 taskListFile.createNewFile();
             }
-            if (tasks.size() > 0) {
+            if (taskList.getSize() > 0) {
                 FileWriter taskWriter = new FileWriter(taskListFile);
-                for (Task t : tasks) {
+                for (Task t : taskList.getTaskList()) {
                     taskWriter.write(t.getDescriptionForDatabase());
                     taskWriter.write("\n");
                 }
@@ -92,7 +92,7 @@ public class Storage {
                 taskWriter.close();
             }
         } catch (IOException e) {
-            System.out.println("Exception occurred while storing into file: " + e.toString());
+            throw new DukeException("Exception occurred while storing into file: " + e);
         }
         System.out.println("Bye, see you soon. Exiting...");
     }
