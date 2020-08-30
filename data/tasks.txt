@@ -1,3 +1,4 @@
-T | 0 | join sports club
-E | 1 | concert | Oct 10 2020 3.00pm
-D | 0 | project | Dec 12 2020
+D | 1 | project | Dec 12 2020
+T | 0 | borrow book
+D | 0 | homework | Oct 10 2020 6.00pm
+E | 0 | concert | Aug 19 2020
