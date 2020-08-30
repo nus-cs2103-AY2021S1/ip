@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Objects;
 
 import duke.exception.DeadlineInvalidDate;
 import duke.exception.DuplicateTaskException;
@@ -208,15 +209,18 @@ public class TaskList {
     /**
      * Marks the task with the given index as done.
      *
-     * @param taskIndex The index of the task to be marked.
-     * @throws InvalidIndexException If the taskIndex < 0 or larger than the size of the taskList.
+     * @param taskNumbers The indexes of the tasks to be marked.
+     * @throws InvalidIndexException If the taskNumbers < 0 or larger than the size of the taskList.
      */
-    public void markDone(int taskIndex) throws InvalidIndexException {
+    public void markDone(Integer... taskNumbers) throws InvalidIndexException {
         try {
-            tasks.set(taskIndex, tasks.get(taskIndex).markDone());
 
-            System.out.println("Nice! I've marked this task as done:");
-            System.out.println(tasks.get(taskIndex));
+            for (int taskNo: taskNumbers) {
+                tasks.set(taskNo - 1, tasks.get(taskNo - 1).markDone());
+                System.out.println("Nice! I've marked this task as done:");
+                System.out.println(tasks.get(taskNo - 1));
+            }
+
         } catch (IndexOutOfBoundsException e) {
             throw new InvalidIndexException(tasks.size());
         }
@@ -225,32 +229,53 @@ public class TaskList {
     /**
      * Deletes the task with the given index.
      *
-     * @param taskIndex The index of the task to be deleted.
-     * @throws InvalidIndexException If the taskIndex < 0 or larger than the size of the taskList.
+     * @param taskNumbers The numbers of the tasks to be deleted.
+     * @throws InvalidIndexException If the taskNumbers < 1 or larger than the size of the taskList.
      */
-    public void deleteTask(int taskIndex) throws InvalidIndexException {
+    public void deleteTask(Integer... taskNumbers) throws InvalidIndexException {
         try {
-            Task deleted = tasks.remove(taskIndex);
 
-            System.out.println("Noted. I've removed this task:");
-            System.out.println(deleted);
+            ArrayList<Task> deletedTasks = new ArrayList<>();
+
+            for (Integer taskNo: taskNumbers) {
+                deletedTasks.add(tasks.get(taskNo - 1));
+                tasks.set(taskNo - 1, null);
+            }
+
+            tasks.removeIf(Objects::isNull);
+
+            System.out.println("Noted. I've removed these tasks:");
+            for (Task deleted: deletedTasks) {
+                System.out.println(deleted);
+            }
+
         } catch (IndexOutOfBoundsException e) {
             throw new InvalidIndexException(tasks.size());
         }
     }
 
     /**
-     * Finds tasks with the given keyword.
+     * Finds tasks that contains any of the given keywords.
      *
-     * @param keyword The keyword to search for in tasks.
+     * @param keywords The keywords to search for in tasks.
      */
-    public void findTasks(String keyword) {
-
-        keyword = keyword.trim().toLowerCase();
+    public void findTasks(String... keywords) {
 
         int i = 0;
+        boolean containsKeyword;
+
         for (Task task : tasks) {
-            if (task.getTask().contains(keyword)) {
+
+            containsKeyword = false;
+
+            for (String keyword: keywords) {
+                if (task.getTask().contains(keyword)) {
+                    containsKeyword = true;
+                    break;
+                }
+            }
+
+            if (containsKeyword) {
                 if (i == 0) {
                     System.out.println("Here are the matching tasks on your list.");
                 }

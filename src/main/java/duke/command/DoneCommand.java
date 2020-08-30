@@ -1,5 +1,6 @@
 package duke.command;
 
+import java.util.Arrays;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
@@ -9,15 +10,15 @@ import duke.exception.DukeException;
 public class DoneCommand extends Command {
 
     /** The number of the task to be marked as done. */
-    private int taskNo;
+    private Integer[] taskNumbers;
 
     /**
      * Constructs a DoneCommand.
      *
-     * @param taskNo The number of the task to be marked as done.
+     * @param taskNumbers The number of the task to be marked as done.
      */
-    public DoneCommand(int taskNo) {
-        this.taskNo = taskNo;
+    public DoneCommand(Integer... taskNumbers) {
+        this.taskNumbers = taskNumbers;
         isExit = false;
     }
 
@@ -31,7 +32,7 @@ public class DoneCommand extends Command {
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        taskList.markDone(taskNo - 1);
+        taskList.markDone(taskNumbers);
         storage.saveTasks(taskList.getTasks());
     }
 
@@ -47,7 +48,7 @@ public class DoneCommand extends Command {
             return true;
         } else if (o instanceof DoneCommand) {
             DoneCommand t = (DoneCommand) o;
-            return t.taskNo == this.taskNo;
+            return Arrays.equals(t.taskNumbers, this.taskNumbers);
         } else {
             return false;
         }

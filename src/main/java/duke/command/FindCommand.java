@@ -9,17 +9,17 @@ import duke.exception.NoKeywordException;
 public class FindCommand extends Command {
 
     /** The keyword to find in tasks. */
-    private String keyword;
+    private String[] keywords;
 
     /**
      * Constructs a FindCommand.
      *
-     * @param fullCommand The input given by the user.
+     * @param keywords The input given by the user.
      * @throws NoKeywordException If the fullCommand has no keyword following find command.
      */
-    public FindCommand(String fullCommand) throws NoKeywordException {
+    public FindCommand(String... keywords) throws NoKeywordException {
         try {
-            this.keyword = fullCommand.substring("find".length() + 1).trim();
+            this.keywords = keywords;
         } catch (StringIndexOutOfBoundsException e) {
             throw new NoKeywordException();
         }
@@ -34,6 +34,6 @@ public class FindCommand extends Command {
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
-        taskList.findTasks(keyword);
+        taskList.findTasks(keywords);
     }
 }

@@ -1,5 +1,6 @@
 package duke.command;
 
+import java.util.Arrays;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
@@ -9,15 +10,15 @@ import duke.exception.DukeException;
 public class DeleteCommand extends Command {
 
     /** The task number to be deleted. */
-    private int taskNo;
+    private Integer[] taskNumbers;
 
     /**
      * Constructs a DeleteCommand.
      *
-     * @param taskNo The task number to be deleted.
+     * @param taskNumbers The task number to be deleted.
      */
-    public DeleteCommand(int taskNo) {
-        this.taskNo = taskNo;
+    public DeleteCommand(Integer... taskNumbers) {
+        this.taskNumbers = taskNumbers;
         isExit = false;
     }
 
@@ -31,7 +32,7 @@ public class DeleteCommand extends Command {
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        taskList.deleteTask(taskNo - 1);
+        taskList.deleteTask(taskNumbers);
         storage.saveTasks(taskList.getTasks());
     }
 
@@ -47,7 +48,7 @@ public class DeleteCommand extends Command {
             return true;
         } else if (o instanceof DeleteCommand) {
             DeleteCommand t = (DeleteCommand) o;
-            return t.taskNo == this.taskNo;
+            return Arrays.equals(t.taskNumbers, this.taskNumbers);
         } else {
             return false;
         }

@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
+import java.util.stream.Stream;
 
 import duke.command.Command;
 import duke.command.DeadlineCommand;
@@ -46,18 +47,25 @@ public class Parser {
         switch (firstWord) {
         case "todo":
             return new ToDoCommand(getTask(fullCommand, "todo"));
-        // Fallthrough
+            // Fallthrough
+
         case "event":
             return new EventCommand(getTask(fullCommand, "event"));
-        // Fallthrough
+            // Fallthrough
+
         case "deadline":
             return new DeadlineCommand(getTask(fullCommand, "deadline"));
-        // Fallthrough
+            // Fallthrough
+
         case "list":
             return new ListCommand(fullCommand);
-        // Fallthrough
+            // Fallthrough
+
         case "find":
-            return new FindCommand(fullCommand);
+            String[] keywords = fullCommand.substring("find".length() + 1).trim().split(" ");
+            return new FindCommand(keywords);
+            // Fallthrough
+
         case "done":
 
             if (fullCommand.equalsIgnoreCase("done")) {
@@ -65,7 +73,9 @@ public class Parser {
             } else {
 
                 try {
-                    int taskNo = Integer.parseInt(fullCommand.substring(5));
+
+                    String[] taskNumbers = fullCommand.substring("done".length() + 1).split(" ");
+                    Integer[] taskNo = Stream.of(taskNumbers).map(Integer::valueOf).toArray(Integer[]::new);
                     return new DoneCommand(taskNo);
 
                 } catch (NumberFormatException numError) {
@@ -73,13 +83,15 @@ public class Parser {
                 }
             }
             // Fallthrough
+
         case "delete":
             if (fullCommand.equalsIgnoreCase("delete")) {
                 throw new NoIndexException("delete");
             } else {
 
                 try {
-                    int taskNo = Integer.parseInt(fullCommand.substring(7));
+                    String[] taskNumbers = fullCommand.substring("delete".length() + 1).split(" ");
+                    Integer[] taskNo = Stream.of(taskNumbers).map(Integer::valueOf).toArray(Integer[]::new);
                     return new DeleteCommand(taskNo);
 
                 } catch (NumberFormatException numError) {
@@ -88,15 +100,25 @@ public class Parser {
 
             }
             // Fallthrough
+
         case "bye":
             return new ExitCommand();
-        // Fallthrough
+            // Fallthrough
+
         default:
             throw new UnrecognizedTaskException();
             // Fallthrough
         }
     }
 
+    /**
+     * Returns the description of a task.
+     *
+     * @param fullCommand   The input given by the user.
+     * @param firstWord     The command.
+     * @return The task description
+     * @throws EmptyTaskException If the input is an empty string, or contains only whitespaces.
+     */
     private static String getTask(String fullCommand, String firstWord) throws EmptyTaskException {
         try {
             return fullCommand.substring(firstWord.length() + 1);
