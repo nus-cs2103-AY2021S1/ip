@@ -3,14 +3,12 @@ package duke;
 import duke.command.Command;
 import duke.command.InvalidCommandException;
 import duke.component.ActualStorage;
+import duke.component.CliUi;
 import duke.component.FxmlUi;
 import duke.component.Parser;
 import duke.component.Storage;
 import duke.component.TaskList;
-import duke.component.CliUi;
 import duke.component.Ui;
-
-import java.io.InputStream;
 
 /**
  * Is the Main class of this program.

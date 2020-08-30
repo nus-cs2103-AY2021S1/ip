@@ -13,7 +13,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class App extends Application {
@@ -25,8 +24,8 @@ public class App extends Application {
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
-    String home = System.getProperty("user.home");
-    java.nio.file.Path path = java.nio.file.Paths.get(home, "Desktop", "cs2103", "ip", "data", "tasks.txt");
+    private String home = System.getProperty("user.home");
+    private java.nio.file.Path path = java.nio.file.Paths.get(home, "Desktop", "cs2103", "ip", "data", "tasks.txt");
     private Duke runningDuke = new Duke(path.toString(), false);
 
     @Override

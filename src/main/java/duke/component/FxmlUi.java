@@ -1,8 +1,8 @@
 package duke.component;
 
-import duke.task.Task;
-
 import java.util.function.Predicate;
+
+import duke.task.Task;
 
 public class FxmlUi implements Ui {
     @Override
