@@ -17,7 +17,7 @@ public class DukeController {
     private final TaskList tasks;
 
     /**
-     * Initializes duke controller.
+     * Initializes the duke controller.
      */
     public DukeController() {
         this.ui = new Ui();
