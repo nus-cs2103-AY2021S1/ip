@@ -1,8 +1,9 @@
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.junit.jupiter.api.Test;
 import java.io.FileWriter;
 import java.io.IOException;
+
+import org.junit.jupiter.api.Test;
 
 public class DukeTest {
     // Overwrite "stored.txt" to start from clean slate
