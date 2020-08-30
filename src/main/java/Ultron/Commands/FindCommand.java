@@ -6,6 +6,7 @@ import ultron.UI;
 import ultron.exceptions.ExceptionType;
 import ultron.exceptions.UltronException;
 import ultron.tasks.Task;
+import ultron.ui.UI;
 
 public class FindCommand extends Command {
 

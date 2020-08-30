@@ -1,4 +1,4 @@
-package ultron;
+package ultron.ui;
 
 import java.util.Scanner;
 

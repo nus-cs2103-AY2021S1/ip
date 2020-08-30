@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import javafx.application.Platform;
 import ultron.commands.Command;
 import ultron.exceptions.UltronException;
+import ultron.ui.UI;
 
 public final class Ultron {
     /**
