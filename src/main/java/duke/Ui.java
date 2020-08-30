@@ -43,7 +43,9 @@ public class Ui {
         // Introduction at the beginning of the chat
         System.out.println(SERVANT_SPEAK
                 + "    Greetings my Liege.\n"
-                + "    Why have you summoned me?\n");
+                + "    Why have you summoned me?\n"
+                + "    You may type \"help\" for a list"
+                + " of available commands Sire.\n");
     }
 
     /**
@@ -62,7 +64,10 @@ public class Ui {
                 + "    event <Description of event>"
                 + " /at <Date in YYYY-MM-DD> <Time in hh:mm>"
                 + " - To add an event\n"
-                + "    list - Show list of tasks\n"
+                + "    list all/todos/deadlines/events"
+                + " - List all <task type> tasks\n"
+                + "    list all/todos/deadlines/events done/not done"
+                + " - List <task type> tasks that are <done/not done>\n"
                 + "    done <task number> - Mark task as done\n"
                 + "    delete <task number> - Delete task from list\n");
     }
