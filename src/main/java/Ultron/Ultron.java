@@ -44,40 +44,10 @@ public final class Ultron {
     }
 
     /**
-     * Main function for the CLI Version of Ultron
-     *
-     * @param args Command line arguments
+     * GetResponse of Ultron based on input
+     * @param input input from the user
+     * @return String message by Ultron for the user
      */
-    public static void main(String[] args) {
-        Ultron ultron = new Ultron();
-        ultron.mainLoop();
-    }
-
-    /**
-     * Mainloop to run Ultron.
-     */
-    public void mainLoop() {
-
-        //Print the intro
-        ui.printIntro();
-
-        //Initialise the exit boolean
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.getInput();
-                ui.showLine();
-                Command c = Parser.parseCommand(fullCommand);
-                c.execute(taskList, ui, storage);
-                isExit = c.isExit();
-            } catch (UltronException e) {
-                ui.showError(e.getMessage());
-            } finally {
-                ui.showLine();
-            }
-        }
-    }
-
     public String getResponse(String input) {
 
         //Check if it is the command to show the intro message

@@ -28,36 +28,6 @@ public final class UI {
     }
 
     /**
-     * Show the error as output to System out.
-     *
-     * @param message message to be shown
-     */
-    public void showError(final String message) {
-        //Wrapper when printing the error message
-        System.out.println("Heh, you can't even type in a correct command\n"
-            + message
-            + "\nI'll give u a pity tip\n"
-            + "Use 'help' for more information");
-    }
-
-    /**
-     * Get a line of input from system in.
-     *
-     * @return String input received
-     */
-    public String getInput() {
-
-        //Declare type
-        String input;
-
-        // Take in input
-        input = this.scanner.nextLine();
-
-        //Return the input
-        return input;
-    }
-
-    /**
      * Prints a message.
      *
      * @param argument message to be printed
@@ -89,13 +59,6 @@ public final class UI {
     }
 
     /**
-     * Set the end message.
-     */
-    public void setEnd() {
-        setMessage("Clearly you were not worth my time.");
-    }
-
-    /**
      * Set the intro message
      */
     public void setIntro() {
@@ -107,26 +70,11 @@ public final class UI {
     }
 
     /**
-     * Prints the intro message.
-     */
-    public void printIntro() {
-        // Print the intro messages
-        print(getIntro());
-    }
-
-    /**
      * Get the new line separator.
      *
      * @return String newline seperator
      */
     private String getLine() {
         return "";
-    }
-
-    /**
-     * Prints the new line separator.
-     */
-    public void showLine() {
-        print(getLine());
     }
 }
