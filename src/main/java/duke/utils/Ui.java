@@ -95,7 +95,7 @@ public class Ui {
 
     private void displayString(String s) {
         //        System.out.println("    " + s);
-        Main.window.showsToDialog(s);
+        Main.getWindow().showsToDialog(s);
     }
     //
     //
