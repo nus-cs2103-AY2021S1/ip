@@ -25,7 +25,7 @@ import javafx.stage.Stage;
  */
 public class Ui {
     /**Welcome message*/
-    private static final String WELCOME_MESSAGE = "Hello, I am Duke! \n\t What can I do for you?";
+    public static final String WELCOME_MESSAGE = "Hello, I am Duke! \n\t What can I do for you?";
     /**
      * Horizontal Line
      */
@@ -205,4 +205,5 @@ public class Ui {
     private String formatOut(String s) {
         return String.format("  %s\n    %s\n  %s\n", Ui.LINE, s, Ui.LINE);
     }
+
 }

@@ -2,22 +2,17 @@ package duke;
 
 import java.io.IOException;
 
+import duke.command.Command;
 import duke.exception.DukeException;
+import duke.tool.Parser;
 import duke.tool.TaskList;
 import duke.ui.Ui;
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 
 
 /**
  * Represents the duke system.
  */
-public class Duke extends Application {
+public class Duke {
 
     /** Storage of the system */
     private final Storage storage;
@@ -26,46 +21,37 @@ public class Duke extends Application {
     private TaskList tasks;
 
     /** User interface to interact with user */
-    private final Ui ui;
-
-    private ScrollPane scrollPane;
-    private VBox dialogContainer;
-    private TextField userInput;
-    private Button sendButton;
-    private Scene scene;
-
+    private  Ui ui = null;
 
     /**
      * Creates new Duke chat bot from given storage path.
      *
      * @param filePath Data file path.
      */
-    public Duke(String filePath) throws DukeException {
+    public Duke(String filePath) {
         storage = new Storage(filePath);
 
         try {
             tasks = new TaskList(storage.load());
-            ui = new Ui(storage, tasks);
+            //ui = new Ui(storage, tasks);
         } catch (IOException e) {
-            throw new DukeException("Cannot open data file");
+            e.printStackTrace();
         }
     }
 
-    public Duke() throws DukeException {
+    public Duke() {
         this("data/duke.txt");
     }
 
 
+    public String getResponse(String input) {
+        try {
+            Command c = Parser.parse(input);
+            c.execute(tasks, storage);
 
-    public static void main(String[] args) {
-        Application.launch(Duke.class, args);
-    }
-
-
-
-    @Override
-    public void start(Stage stage) {
-        //Setting up required components
-        ui.process(stage);
+            return c.getResponse();
+        } catch (DukeException e) {
+            return e.getMessage();
+        }
     }
 }
