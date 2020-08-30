@@ -4,6 +4,7 @@ import duke.exception.DukeException;
 import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.task.TaskList;
+import duke.ui.Cli;
 import duke.ui.Ui;
 
 /**
@@ -19,7 +20,7 @@ public class Duke {
      * Constructor for the Duke object.
      */
     public Duke() {
-        this.ui = new Ui();
+        this.ui = new Cli();
         try {
             this.storage = new Storage("duke.json");
             this.taskList = this.storage.load();
@@ -42,7 +43,7 @@ public class Duke {
     }
 
     private void run() {
-        ui.welcomeMessage();
+        ui.start();
         while (ui.isActive()) {
             String input = ui.nextLine();
             try {
