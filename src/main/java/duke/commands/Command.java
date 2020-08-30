@@ -38,7 +38,7 @@ public class Command {
      * @param ui User interface object.
      * @param storage Storage object.
      */
-    public void execute(TaskList taskList, UI ui, Storage storage) {
-        ui.showError("Can't execute generic command");
+    public String execute(TaskList taskList, UI ui, Storage storage) {
+        return ui.showError("Can't execute generic command");
     }
 }

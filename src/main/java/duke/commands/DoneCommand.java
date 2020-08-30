@@ -32,9 +32,10 @@ public class DoneCommand extends Command {
      * @param storage Storage object.
      */
     @Override
-    public void execute(TaskList taskList, UI ui, Storage storage) {
+    public String execute(TaskList taskList, UI ui, Storage storage) {
         Task task = taskList.getTaskAtIndex(Integer.parseInt(commandDescription) + sizeOffset);
         task.setDone();
-        ui.displayDoneTask(task);
+        storage.saveData(taskList, ui);
+        return ui.displayDoneTask(task);
     }
 }

@@ -27,7 +27,7 @@ public class HelpCommand extends Command {
      * @param storage Storage object.
      */
     @Override
-    public void execute(TaskList taskList, UI ui, Storage storage) {
-        ui.showHelp();
+    public String execute(TaskList taskList, UI ui, Storage storage) {
+        return ui.showHelp();
     }
 }

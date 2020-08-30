@@ -22,13 +22,13 @@ public class DeadlineTest {
     @Test
     public void deadlineDisplay_taskNotDone_crossPrinted() {
         Deadline deadline = new Deadline("test1", "test1");
-        assertEquals("[D][☒] test1 (by: test1)", deadline.toString());
+        assertEquals("[D][" + "\u2718" + "] test1 (by: test1)", deadline.toString());
     }
 
     @Test
     public void deadlineDisplay_taskDone_tickPrinted() {
         Deadline deadline = new Deadline("test1", "test1");
         deadline.setDone();
-        assertEquals("[D][☑] test1 (by: test1)", deadline.toString());
+        assertEquals("[D][" + "\u2713" + "] test1 (by: test1)", deadline.toString());
     }
 }

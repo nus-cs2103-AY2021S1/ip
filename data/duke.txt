@@ -1,2 +1,4 @@
-T | 0 | read book
-D | 0 | another book to read | tomrrow
+T | 1 | new task
+D | 1 | this work | 2020-06-05
+E | 1 | something | 2020-06-05
+T | 0 | something

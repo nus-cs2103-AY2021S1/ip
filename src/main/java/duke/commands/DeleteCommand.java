@@ -31,9 +31,10 @@ public class DeleteCommand extends Command {
      * @param storage Storage object.
      */
     @Override
-    public void execute(TaskList taskList, UI ui, Storage storage) {
+    public String execute(TaskList taskList, UI ui, Storage storage) {
         Task task = taskList.getTaskAtIndex(Integer.parseInt(commandDescription) + sizeOffset);
         taskList.removeFromList(Integer.parseInt(commandDescription) + sizeOffset);
-        ui.displayDeletedTask(task, taskList.getListSize());
+        storage.saveData(taskList, ui);
+        return ui.displayDeletedTask(task, taskList.getListSize());
     }
 }

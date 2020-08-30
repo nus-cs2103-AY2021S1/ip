@@ -38,7 +38,7 @@ public class GetEventsCommand extends Command {
      * @param storage Storage object.
      */
     @Override
-    public void execute(TaskList taskList, UI ui, Storage storage) {
+    public String execute(TaskList taskList, UI ui, Storage storage) {
         try {
             ArrayList<Task> listOfTasks = new ArrayList<>();
             for (int i = 0; i < taskList.getListSize(); i++) {
@@ -47,9 +47,10 @@ public class GetEventsCommand extends Command {
                     listOfTasks.add(task);
                 }
             }
-            ui.displayEventsOnDate(listOfTasks, localDate);
+            storage.saveData(taskList, ui);
+            return ui.displayEventsOnDate(listOfTasks, localDate);
         } catch (DateTimeParseException e) {
-            ui.showError("Please input a valid date format");
+            return ui.showError("Please input a valid date format");
         }
     }
 }
