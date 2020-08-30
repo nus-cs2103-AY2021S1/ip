@@ -2,6 +2,9 @@ package duke;
 
 import java.util.ArrayList;
 
+/**
+ * A list for Duke to store Tasks in.
+ */
 public class TaskList {
     int count;
     ArrayList<Task> list;
@@ -11,10 +14,19 @@ public class TaskList {
         list = new ArrayList<>();
     }
 
+    /**
+     * Creates an empty Task List.
+     * @return An empty TaskList.
+     */
     public static TaskList startList() {
         return new TaskList();
     }
 
+    /**
+     * Adds a specified Task to the existing Task List.
+     * @param t Task to be added to the Task List.
+     * @return
+     */
     public String addToList(Task t) {
         this.count = this.count + 1;
         this.list.add(t);
@@ -24,6 +36,12 @@ public class TaskList {
                 "\n\tNow you have " + count + " tasks in the list.";
     }
 
+    /**
+     * Marks a specified Task in the Task List as 'done'.
+     * @param i Index of Task to be marked as 'done'.
+     * @return A success message if successful.
+     * @throws InvalidTaskNumberException If index specified is out of bounds.
+     */
     public String markAsDone(int i) throws InvalidTaskNumberException{
         Task t;
         try {
@@ -35,6 +53,12 @@ public class TaskList {
                 "  " + t.toString();
     }
 
+    /**
+     * Removes a specified Task from the Task List.
+     * @param i Index of Task to be removed.
+     * @return A success message if successful.
+     * @throws InvalidTaskNumberException If index specified is out of bounds.
+     */
     public String remove(int i) throws InvalidTaskNumberException{
         Task t;
         try {
@@ -49,6 +73,33 @@ public class TaskList {
                 "\n\tNow you have " + count + " tasks in the list.";
     }
 
+    /**
+     * Finds Tasks containing the specified keyword
+     * @param keyword Keyword to be searched for in Task description.
+     * @return A String of all the matching Tasks.
+     */
+    public String find(String keyword) {
+        ArrayList<Task> matchingTasks = new ArrayList<>();
+        for (Task t : this.list) {
+            if (t.getDescription().contains(keyword)) {
+                matchingTasks.add(t);
+            }
+        }
+
+        String msg = "Here are the matching tasks in your list:\n\t";
+        int num = 1;
+        for (Task s : matchingTasks) {
+            msg = msg + num + ". " + s.toString() + "\n\t";
+            num++;
+        }
+        return msg;
+
+    }
+
+    /**
+     * Generates a String to be stored in the save file, duke.txt.
+     * @return A String of all the Tasks in this Task List.
+     */
     public String listToTxt() {
         String str = "";
         for (Task t : this.list) {
