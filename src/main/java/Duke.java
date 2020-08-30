@@ -16,6 +16,15 @@ import javafx.scene.image.ImageView;
  */
 public class Duke extends Application {
 
+    Ui myDukeBot = new Ui();
+    Storage myStorage = new Storage();
+    Parser myParser = new Parser();
+    TaskList myTaskList = new TaskList();
+
+
+
+
+
     private Image user = new Image(this.getClass().getResourceAsStream("/images/SeanDuke.JPG"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/SeanDuke.JPG"));
 
@@ -25,26 +34,32 @@ public class Duke extends Application {
     private Button sendButton;
     private Scene scene;
 
-//    public static void main(String[] args) {
+    public static void main(String[] args) {
 
-//        Ui myDukeBot = new Ui();
-//        Storage myStorage = new Storage();
-//        Parser myParser = new Parser();
-//        TaskList myTaskList = new TaskList();
-//
-//        myDukeBot.greeting();
-//        myStorage.createDirectory("To##Do");
-//        myStorage.populateList(myTaskList);
-//        myTaskList.list();
-//
-//        myParser.listener(myTaskList, myDukeBot);
-//
-//        myStorage.updateDirectory(myTaskList);
-//        System.out.println("End");
-//    }
+        Ui myDukeBot = new Ui();
+        Storage myStorage = new Storage();
+        Parser myParser = new Parser();
+        TaskList myTaskList = new TaskList();
+
+        myDukeBot.greeting();
+        myStorage.createDirectory("To##Do");
+        myStorage.populateList(myTaskList);
+        myTaskList.list();
+
+        myParser.listener(myTaskList, myDukeBot);
+
+        myStorage.updateDirectory(myTaskList);
+        System.out.println("End");
+    }
 
     @Override
     public void start(Stage stage) throws Exception {
+
+        myStorage.createDirectory("ToDo");
+        myStorage.populateList(myTaskList);
+
+
+
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
         scrollPane.setContent(dialogContainer);
@@ -130,11 +145,21 @@ public class Duke extends Application {
      */
     private void handleUserInput() {
         Label userText = new Label(userInput.getText());
-        Label dukeText = new Label(getResponse(userInput.getText()));
+        String userIn = getResponse(userInput.getText());
+        System.out.println("user input:"+userIn);
+
+        String response = myParser.listenerForUI(myTaskList, myDukeBot,userIn);
+
+        System.out.println("response:"+response);
+
+
+
+        Label dukeText = new Label(getResponse(response));
         dialogContainer.getChildren().addAll(
             new DialogBox(userText, new ImageView(user)),
             new DialogBox(dukeText, new ImageView(duke))
         );
+        myStorage.updateDirectory(myTaskList);
         userInput.clear();
     }
 
@@ -144,7 +169,7 @@ public class Duke extends Application {
      */
 
     private String getResponse(String input) {
-        return "Duke heard: " + input;
+        return  input;
     }
 
     private Label getDialogLabel(String text) {

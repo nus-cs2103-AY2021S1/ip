@@ -22,7 +22,7 @@ public class Ui {
      */
     public String horizontalRule() {
         String myLine = "____________________________________________________________";
-        System.out.println(myLine);
+       // System.out.println(myLine);
         return myLine;
     }
 
@@ -37,10 +37,14 @@ public class Ui {
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+      //  System.out.println("Hello from\n" + logo);
         return logo;
 
 
+    }
+
+    public void print(String myStr){
+        System.out.println(myStr);
     }
 
 
