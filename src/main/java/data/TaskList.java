@@ -1,9 +1,9 @@
 package data;
 
-import data.task.Task;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import data.task.Task;
 
 /**
  * Represents the entire task list. Contains the data of all the tasks.

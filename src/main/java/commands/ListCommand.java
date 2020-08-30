@@ -1,8 +1,8 @@
 package commands;
 
-import data.task.Task;
-
 import java.util.List;
+
+import data.task.Task;
 
 /**
  * Lists all the tasks in the task list to the user.

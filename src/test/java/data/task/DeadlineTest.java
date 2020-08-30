@@ -1,16 +1,16 @@
 package data.task;
 
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.time.LocalDateTime;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
 class DeadlineTest {
 
     final LocalDateTime dateTime = LocalDateTime.parse("2020-10-18T14:30");
     final Deadline deadline = new Deadline("return book", dateTime);
-    final Deadline completeDeadline = new Deadline(true,"return book", dateTime);
+    final Deadline completeDeadline = new Deadline(true, "return book", dateTime);
 
     @Test
     void fileFormat() {

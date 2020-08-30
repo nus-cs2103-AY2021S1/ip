@@ -1,14 +1,14 @@
 package storage;
 
-import data.TaskList;
-import data.exception.IllegalValueException;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+
+import data.TaskList;
+import data.exception.IllegalValueException;
 
 /**
  * Represents the file used to store task list data.
@@ -42,6 +42,8 @@ public class Storage {
     }
 
     /**
+     * Creates a {@code Storage}.
+     * @param filePath A valid file path.
      * @throws InvalidStorageFilePathException if the given file path is invalid
      */
     public Storage(String filePath) throws InvalidStorageFilePathException {

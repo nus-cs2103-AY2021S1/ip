@@ -1,9 +1,9 @@
 package storage;
 
-import data.TaskList;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import data.TaskList;
 
 /**
  * Encodes the {@code TaskList} object into a data file for storage.

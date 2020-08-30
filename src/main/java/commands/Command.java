@@ -1,11 +1,11 @@
 package commands;
 
+import java.util.List;
+
 import data.TaskList;
 import data.task.Task;
 import ui.Ui;
 import utils.Messages;
-
-import java.util.List;
 
 /**
  * Represents an executable command.
@@ -15,10 +15,15 @@ public abstract class Command {
     protected TaskList taskList;
     private int targetIndex = -1;
 
+    /**
+     * Constructs a {@code Command}.
+     * @param targetIndex
+     */
     public Command(int targetIndex) {
         this.targetIndex = targetIndex;
     }
 
+    /** Constructs a {@code Command}. */
     protected Command() {}
 
     /**
@@ -50,6 +55,6 @@ public abstract class Command {
     /**
      * Executes the command and returns the result.
      */
-    abstract public CommandResult execute();
+    public abstract CommandResult execute();
 
 }

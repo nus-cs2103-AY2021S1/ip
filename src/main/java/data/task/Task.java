@@ -13,11 +13,20 @@ public abstract class Task {
     protected boolean isDone;
     protected DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEE, dd MMM yyyy hh:mm a");
 
+    /**
+     * Constructs a {@code Task}.
+     * @param description The task description.
+     */
     public Task(String description) {
         this.description = description;
         this.isDone = false;
     }
 
+    /**
+     * Constructs a {@code Task}.
+     * @param isDone True if task is completed, false otherwise.
+     * @param description The task description.
+     */
     public Task(boolean isDone, String description) {
         this.description = description;
         this.isDone = isDone;
