@@ -1,8 +1,8 @@
 package duke.tasklist;
 
-import duke.task.Task;
-
 import java.util.ArrayList;
+
+import duke.task.Task;
 
 /**
  * Keeps and handles all operations regarding the user tasks.

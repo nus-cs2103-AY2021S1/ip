@@ -9,6 +9,16 @@ public class UnknownCommandException extends DukeException {
     private static final int NUM_OF_COMMANDS = 7;
     private static final String MSG_1 = "I'm sorry, but I don't know what that means.\n";
     private static final String MSG_2 = "    Here are the available commands that I know:\n";
+    private static final String[] listOfCommands = new String[]{
+        "todo _ (e.g. todo 3)",
+        "deadline 'task name' /by 'end time' (e.g. deadline Exercise /by Sunday)",
+        "'event name' /at 'start time - end time' (e.g. meeting /at Sunday 2pm - 4pm)",
+        "list",
+        "done _ (e.g. done 4)",
+        "delete _ (e.g. delete 4)",
+        "find '   ' (e.g. find book)",
+        "bye",
+    };
 
     /**
      * Initializes the UnknownCommandException object.
@@ -17,16 +27,7 @@ public class UnknownCommandException extends DukeException {
         super(UnknownCommandException.getListOfCommands());
     }
 
-    private static final String[] listOfCommands = new String[]{
-            "todo _ (e.g. todo 3)",
-            "deadline 'task name' /by 'end time' (e.g. deadline Exercise /by Sunday)",
-            "'event name' /at 'start time - end time' (e.g. meeting /at Sunday 2pm - 4pm)",
-            "list",
-            "done _ (e.g. done 4)",
-            "delete _ (e.g. delete 4)",
-            "find '   ' (e.g. find book)",
-            "bye",
-    };
+
 
     private static String getListOfCommands() {
         StringBuilder str1 = new StringBuilder();

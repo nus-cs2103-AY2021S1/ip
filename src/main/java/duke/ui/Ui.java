@@ -1,10 +1,9 @@
 package duke.ui;
 
-import duke.task.Task;
-
-import duke.tasklist.TaskList;
-
 import java.util.Scanner;
+
+import duke.task.Task;
+import duke.tasklist.TaskList;
 
 /**
  * Handles the program interactions with user.
@@ -103,8 +102,8 @@ public class Ui {
      * @param size Size of task list.
      */
     public void deleteTask(Task current, int size) {
-        printMsg(String.format("Noted. I've removed this task:\n      %s\n" +
-                "    Now you have %d tasks in the list.", current, size));
+        printMsg(String.format("Noted. I've removed this task:\n      %s\n"
+                + "    Now you have %d tasks in the list.", current, size));
     }
 
     /**
@@ -114,8 +113,8 @@ public class Ui {
      * @param size Size of task list.
      */
     public void addTask(Task newTask, int size) {
-        printMsg(String.format("Got it. I've added this task:\n      %s\n" +
-                "    Now you have %d tasks in the list.", newTask, size));
+        printMsg(String.format("Got it. I've added this task:\n      %s\n"
+                + "    Now you have %d tasks in the list.", newTask, size));
     }
 
     /**

@@ -1,17 +1,13 @@
 package duke.command;
 
 import duke.exception.DukeException;
-import duke.exception.TaskAlreadyDoneException;
-import duke.exception.InvalidTaskNumberException;
-import duke.exception.InvalidDoneException;
 import duke.exception.InvalidDeleteException;
-
+import duke.exception.InvalidDoneException;
+import duke.exception.InvalidTaskNumberException;
+import duke.exception.TaskAlreadyDoneException;
 import duke.storage.Storage;
-
 import duke.task.Task;
-
 import duke.tasklist.TaskList;
-
 import duke.ui.Ui;
 
 /**
@@ -22,6 +18,12 @@ public class SimpleCommand extends Command {
     private final String input;
     private final SimpleCommandType type;
 
+    /**
+     * Initializes the SimpleCommand class with the input string and SimpleCommandType.
+     *
+     * @param input Input string.
+     * @param type SimpleCommandType.
+     */
     public SimpleCommand(String input, SimpleCommandType type) {
         this.input = input;
         this.type = type;

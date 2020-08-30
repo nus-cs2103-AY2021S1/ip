@@ -1,18 +1,16 @@
 package duke.storage;
 
-import duke.task.Task;
-
-import duke.tasklist.TaskList;
-
-import duke.ui.Ui;
-
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.BufferedReader;
-import java.io.FileReader;
-
 import java.util.ArrayList;
+
+import duke.task.Task;
+import duke.tasklist.TaskList;
+import duke.ui.Ui;
+
 
 /**
  * Handles the interactions with the user's CSV file.
@@ -58,7 +56,7 @@ public class Storage {
             if (header != null) {
                 String line = br.readLine();
                 while (line != null) {
-                    Task newTask = CSVConverter.parseToTask(line, ui);
+                    Task newTask = CsvConverter.parseToTask(line, ui);
                     if (newTask != null) {
                         taskList.add(newTask);
                     }
@@ -83,7 +81,7 @@ public class Storage {
             String header = "Task type  ,Description  ,Time  ,Status\n";
             StringBuilder stringBuilder = new StringBuilder(header);
             for (Task task : tasks.getTasks()) {
-                stringBuilder.append(convertToCSVFormat(task));
+                stringBuilder.append(convertToCsvFormat(task));
             }
             fileWriter.write(stringBuilder.toString());
             fileWriter.close();
@@ -92,7 +90,7 @@ public class Storage {
         }
     }
 
-    private String convertToCSVFormat(Task task) {
+    private String convertToCsvFormat(Task task) {
         return String.format("%s  ,%s  ,%s  ,%s\n",
                 task.getTaskName(), task.getDescription(), task.getTime(), task.getStatus());
     }

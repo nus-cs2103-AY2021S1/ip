@@ -1,17 +1,15 @@
 package duke.parser;
 
+import duke.command.AddComplexTaskCommand;
+import duke.command.AddToDoCommand;
 import duke.command.Command;
+import duke.command.ExitCommand;
+import duke.command.FindCommand;
 import duke.command.ShowCommand;
 import duke.command.SimpleCommand;
 import duke.command.SimpleCommandType;
-import duke.command.AddToDoCommand;
-import duke.command.AddComplexTaskCommand;
-import duke.command.ExitCommand;
-import duke.command.FindCommand;
-
 import duke.exception.DukeException;
 import duke.exception.UnknownCommandException;
-
 import duke.task.TaskType;
 
 /**
