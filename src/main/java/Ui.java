@@ -27,6 +27,16 @@ public final class Ui {
         }
     }
 
+    public String formatListItems(List<Task> lst, String action) {
+        String result = String.format("Here are the %s tasks in your list:\n", action.equals("search") ? "matching" : "");
+
+        for (int i = 0; i < lst.size(); i++) {
+            result += String.format("%d.%s\n", i + 1, lst.get(i));
+        }
+
+        return result;
+    }
+
     /**
      * Shows add message
      */
