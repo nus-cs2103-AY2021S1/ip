@@ -33,12 +33,13 @@ public class Storage {
                 desc = sc.nextLine();
                 status = Integer.parseInt(sc.nextLine());
                 switch (type) {
-                    case "todo" -> lst.add(new Todo(desc));
-                    case "deadline" -> {
+                    case "todo":
+                        lst.add(new Todo(desc));
+                    case "deadline": {
                         by = sc.nextLine();
                         lst.add(new Deadline(desc, by));
                     }
-                    case "event" -> {
+                    case "event": {
                         at = sc.nextLine();
                         lst.add(new Event(desc, at));
                     }
