@@ -16,7 +16,7 @@ public class MarkAsDoneCommand extends Command {
     public void execute(Storage storage, TaskList tasks, Ui ui) {
         try {
             Task task = tasks.get(id);
-            tasks.delete(id);
+            task.markAsDone();
             storage.save(tasks);
             ui.printStatus("    nice! I've marked this task as done:\n      " + task + "\n");
         } catch (IndexOutOfBoundsException e) {
