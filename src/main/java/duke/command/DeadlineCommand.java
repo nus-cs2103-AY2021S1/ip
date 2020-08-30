@@ -9,6 +9,7 @@ import duke.task.Task;
 public class DeadlineCommand extends Command {
     private String taskName;
     private String deadlineString;
+    private String response;
 
     /**
      * Object representing Commands that refer to Deadline tasks
@@ -22,14 +23,26 @@ public class DeadlineCommand extends Command {
 
     @Override
     public void execute(TaskList tasks, Ui ui) throws DukeException {
+        verifyInput();
+
+        Task task = new Deadline(taskName, deadlineString);
+        tasks.addTask(task);
+        ui.displayAddTask(task, tasks.numTasks());
+    }
+
+    @Override
+    public String executeWithOutput(TaskList tasks, Ui ui) throws DukeException {
+        verifyInput();
+        Task task = new Deadline(taskName, deadlineString);
+        tasks.addTask(task);
+        return ui.getAddTaskResponseAsString(task, tasks.numTasks());
+    }
+
+    private void verifyInput() throws DukeException {
         if (taskName.isBlank()) {
             throw DukeException.badDeadlineTask();
         } else if (deadlineString.isBlank()) {
             throw DukeException.badDeadlineDate();
         }
-
-        Task task = new Deadline(taskName, deadlineString);
-        tasks.addTask(task);
-        ui.displayAddTask(task, tasks.numTasks());
     }
 }

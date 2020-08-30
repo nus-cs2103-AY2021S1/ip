@@ -17,18 +17,34 @@ public class Ui {
      * Prints out a string which gives a greeting to the user
      */
     public void displayGreeting() {
-        System.out.println(HORIZONTAL_RULE);
-        System.out.println(HELLO_MESSAGE);
-        System.out.println(HORIZONTAL_RULE);
+        System.out.println(getGreetingResponseAsString());
+    }
+
+    /**
+     * Get's bot's greeting as a String
+     * @return String representing bot's opening greeting
+     */
+    public String getGreetingResponseAsString() {
+        return HORIZONTAL_RULE
+                + "\n" + HELLO_MESSAGE
+                + "\n" + HORIZONTAL_RULE;
     }
 
     /**
      * Prints out a string for when the program exits
      */
     public void displayExit() {
-        System.out.println(HORIZONTAL_RULE);
-        System.out.println(BYE_MESSAGE);
-        System.out.println(HORIZONTAL_RULE);
+        System.out.println(getExitResponseAsString());
+    }
+
+    /**
+     * Get's bot's response to an exit command, as a String
+     * @return String representing bot's response
+     */
+    public String getExitResponseAsString() {
+        return HORIZONTAL_RULE
+                + "\n" + BYE_MESSAGE
+                + "\n" + HORIZONTAL_RULE;
     }
 
     /**
@@ -36,7 +52,16 @@ public class Ui {
      * @param tasks TaskList containing found Tasks
      */
     public void printFindResult(TaskList tasks) {
-        printList(tasks, "Found these for you, couch potato");
+        System.out.println(getFindResultAsString(tasks));
+    }
+
+    /**
+     * Get's bot's response to a Find query, as a String
+     * @param tasks TaskList containing all the current tasks
+     * @return String representing bot's response
+     */
+    public String getFindResultAsString(TaskList tasks) {
+        return getPrintListResponseAsString(tasks, "Found these for you, couch potato");
     }
 
     /**
@@ -44,31 +69,46 @@ public class Ui {
      * @param tasks TaskList consisting of items to be printed
      */
     public void printList(TaskList tasks) {
-        printList(tasks, "Here are all your burdens");
+        System.out.println(getPrintListResponseAsString(tasks));
     }
 
-    private void printList(TaskList tasks, String message) {
+    /**
+     * Get's the bot's response to a Print list request, as a String
+     * @param tasks A TaskList with all the current tasks
+     * @return String representing bot's response
+     */
+    public String getPrintListResponseAsString(TaskList tasks) {
+        return getPrintListResponseAsString(tasks, "Here are all your burdens");
+    }
 
-        System.out.println(HORIZONTAL_RULE);
-        System.out.println(message);
+    private String getPrintListResponseAsString(TaskList tasks, String message) {
+        String res = HORIZONTAL_RULE + "\n" + message + "\n";
 
         for (int i = 1; i <= tasks.numTasks(); i++) {
             Task item = tasks.getTask(i - 1);
             String fullItem = i + ". " + item.toString();
 
-            System.out.println(fullItem);
+            res += "\n" + fullItem + "\n";
         }
 
-        System.out.println(HORIZONTAL_RULE);
+        return res + HORIZONTAL_RULE;
     }
 
     /**
      * Prints out string for when the user has completed a task
      */
     public void displayCompleteTask() {
-        System.out.println(HORIZONTAL_RULE);
-        System.out.println("Congratulations, you actually did something");
-        System.out.println(HORIZONTAL_RULE);
+        System.out.println(getCompleteTaskResponseAsString());
+    }
+
+    /**
+     * Get's the bot's response to Completing Task, as a String
+     * @return String representing bot's response
+     */
+    public String getCompleteTaskResponseAsString() {
+        return HORIZONTAL_RULE
+                + "\nCongratulations, you actually did something\n"
+                + HORIZONTAL_RULE;
     }
 
     /**
@@ -77,11 +117,21 @@ public class Ui {
      * @param size Number of items in the TaskList
      */
     public void displayAddTask(Task task, int size) {
-        System.out.println(HORIZONTAL_RULE);
-        System.out.println("One more task added for you sire");
-        System.out.println(task);
-        System.out.println("You have " + size + " tasks. Enjoy!");
-        System.out.println(HORIZONTAL_RULE);
+        System.out.println(getAddTaskResponseAsString(task, size));
+    }
+
+    /**
+     * Get's the bot's response to adding the Task as a String
+     * @param task Task that is added
+     * @param size Number of tasks added thus far
+     * @return String representing bot's response
+     */
+    public String getAddTaskResponseAsString(Task task, int size) {
+        return HORIZONTAL_RULE
+                + "\nOne more task added for you sire\n"
+                + task.toString()
+                + "\nYou have " + size + " tasks. Enjoy!\n"
+                + HORIZONTAL_RULE;
     }
 
     /**
@@ -90,19 +140,37 @@ public class Ui {
      * @param size Number of items remaining in the TaskList
      */
     public void displayDeleteTask(Task removedTask, int size) {
-        System.out.println(HORIZONTAL_RULE);
-        System.out.println("Finished so soon? Fine I've removed the following task. Good day.");
-        System.out.println("    " + removedTask);
-        System.out.println("You have " + size + " tasks. Enjoy!");
-        System.out.println(HORIZONTAL_RULE);
+        System.out.println(getDeleteTaskResponseAsString(removedTask, size));
+    }
+
+    /**
+     * Get's bot's response to receving a delete command, as a String
+     * @param removedTask Task to be removed
+     * @param size Current number of tasks
+     * @return String representing bot's response
+     */
+    public String getDeleteTaskResponseAsString(Task removedTask, int size) {
+        return HORIZONTAL_RULE
+                + "\nFinished so soon? Fine I've removed the following task. Good day.\n"
+                + "    " + removedTask
+                + "\nYou have " + size + "tasks. Enjoy!\n"
+                + HORIZONTAL_RULE;
     }
 
     /**
      * Prints out a string for when there is an error loading the stored data
      */
     public void showLoadingError() {
-        System.out.println(HORIZONTAL_RULE);
-        System.out.println("Something messed up with your hard disk file i don't really know what. Figure it out.");
-        System.out.println(HORIZONTAL_RULE);
+        System.out.println(getLoadingErrorAsString());
+    }
+
+    /**
+     * Get's the loading error message as a String
+     * @return String representing laoding error message
+     */
+    public String getLoadingErrorAsString() {
+        return HORIZONTAL_RULE
+                + "\nSomething messed up with your hard disk file i don't really know what. Figure it out.\n"
+                + HORIZONTAL_RULE;
     }
 }

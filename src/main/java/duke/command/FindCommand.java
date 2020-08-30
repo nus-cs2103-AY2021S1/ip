@@ -6,7 +6,7 @@ import duke.Ui;
 import duke.task.Task;
 
 public class FindCommand extends Command {
-    private String query;
+    private final String query;
 
     public FindCommand(String query) {
         this.query = query;
@@ -14,18 +14,29 @@ public class FindCommand extends Command {
 
     @Override
     public void execute(TaskList tasks, Ui ui) throws DukeException {
-        if (query.isBlank()) {
-            throw DukeException.badFind();
-        }
+        verifyInput();
+        ui.printFindResult(getListQueryResult(tasks));
+    }
 
+    @Override
+    public String executeWithOutput(TaskList tasks, Ui ui) throws DukeException {
+        verifyInput();
+        return ui.getFindResultAsString(getListQueryResult(tasks));
+    }
+
+    private TaskList getListQueryResult(TaskList tasks) {
         TaskList foundTasks = new TaskList();
-
         for (Task task : tasks) {
             if (task.getTaskName().contains(query)) {
                 foundTasks.addTask(task);
             }
         }
 
-        ui.printFindResult(foundTasks);
+        return foundTasks;
+    }
+    private void verifyInput() throws DukeException {
+        if (query.isBlank()) {
+            throw DukeException.badFind();
+        }
     }
 }
