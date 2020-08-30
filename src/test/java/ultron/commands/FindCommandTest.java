@@ -9,9 +9,9 @@ import org.junit.jupiter.api.Test;
 
 import ultron.Storage;
 import ultron.TaskList;
-import ultron.UI;
 import ultron.exceptions.UltronException;
 import ultron.tasks.Todo;
+import ultron.ui.UI;
 
 public class FindCommandTest {
     /**

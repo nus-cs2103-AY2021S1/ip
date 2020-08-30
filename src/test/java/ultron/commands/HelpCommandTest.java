@@ -9,8 +9,8 @@ import org.junit.jupiter.api.Test;
 
 import ultron.Storage;
 import ultron.TaskList;
-import ultron.UI;
 import ultron.exceptions.UltronException;
+import ultron.ui.UI;
 
 public class HelpCommandTest {
     /**
