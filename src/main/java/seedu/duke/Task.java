@@ -1,4 +1,4 @@
-package main.java;
+package seedu.duke;
 
 /**
  * Holds the task object and relative operations.

@@ -1,4 +1,4 @@
-package main.java;
+package seedu.duke;
 
 /**
  * Holds the Todo object and relative operations.
