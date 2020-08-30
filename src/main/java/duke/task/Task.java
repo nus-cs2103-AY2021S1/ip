@@ -7,6 +7,11 @@ public class Task {
     protected boolean isCompleted;
     protected String taskName;
 
+    /**
+     * Creates a Task.
+     * @param name A string representing the name of the task.
+     * @param isCompleted A boolean value representing whether the task has been completed.
+     */
     protected Task(String name, boolean isCompleted) {
         this.taskName = name;
         this.isCompleted = isCompleted;

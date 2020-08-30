@@ -4,6 +4,11 @@ package duke.task;
  * Represents a Todo object.
  */
 public class Todo extends Task {
+    /**
+     * Creates a todo.
+     * @param name A string representing the name of the todo.
+     * @param isCompleted A boolean value representing whether the todo has been completed.
+     */
     protected Todo(String name, boolean isCompleted) {
         super(name, isCompleted);
     }
