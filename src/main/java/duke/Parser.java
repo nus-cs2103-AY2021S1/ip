@@ -35,7 +35,7 @@ public class Parser { // deals with making sense of the user command
             }
         } catch (NumberFormatException e) {
             throw new DukeException("SORRY!!! Task number is not valid.");
-        } catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) { // IllegalArgumentException is a parent class of NumberFormatException
             throw new DukeException("SORRY!!! I don't know what that means :-(");
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("SORRY!!! The description of a task cannot be empty.");
