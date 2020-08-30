@@ -3,14 +3,15 @@ list
 bye
 */
 package duke;
-import java.util.*;
+
+import java.util.Scanner;
 
 public class Duke {
     public static void main(String[] args) {
 
         Scanner in = new Scanner(System.in);
         TaskList taskList = new TaskList();
-        Helper.init();
+        Ui.init();
         Ui.greet();
 
         while (in.hasNextLine()) {
@@ -31,9 +32,9 @@ public class Duke {
                     throw new IllegalArgumentException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
             } catch (IllegalArgumentException e) {
-                System.out.println(Helper.horiLine);
+                System.out.println(Ui.seperateLine);
                 System.out.println(e.getMessage());
-                System.out.println(Helper.horiLine);
+                System.out.println(Ui.seperateLine);
             }
         }
     }

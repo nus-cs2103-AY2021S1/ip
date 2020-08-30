@@ -1,6 +1,11 @@
 package duke;
-import java.util.*;
-import java.io.*;
+
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 
 public class Storage {
     File file;
@@ -27,14 +32,16 @@ public class Storage {
                 type = sc.nextLine();
                 desc = sc.nextLine();
                 status = Integer.parseInt(sc.nextLine());
-                if (type.equals("todo"))
-                    lst.add(new Todo(desc));
-                else if (type.equals("deadline")) {
-                    by = sc.nextLine();
-                    lst.add(new Deadline(desc, by));
-                } else if (type.equals("event")) {
-                    at = sc.nextLine();
-                    lst.add(new Event(desc, at));
+                switch (type) {
+                    case "todo" -> lst.add(new Todo(desc));
+                    case "deadline" -> {
+                        by = sc.nextLine();
+                        lst.add(new Deadline(desc, by));
+                    }
+                    case "event" -> {
+                        at = sc.nextLine();
+                        lst.add(new Event(desc, at));
+                    }
                 }
                 if (status == 1) lst.get(lst.size() - 1).markDone();
             }

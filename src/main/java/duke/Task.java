@@ -12,7 +12,7 @@ public abstract class Task {
     }
     @Override
     public String toString() {
-        char sign = (done == true ? '✓' : '✗');
+        char sign = (done ? '✓' : '✗');
         return String.format("[%c] %s", sign, desc);
     }
 

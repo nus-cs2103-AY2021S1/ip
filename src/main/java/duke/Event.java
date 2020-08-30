@@ -1,5 +1,6 @@
 package duke;
-import java.time.*;
+
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class Event extends Task {
@@ -18,6 +19,6 @@ public class Event extends Task {
 
     @Override
     public String toDisk() {
-        return String.format("event\n%s\n%d\n%s", desc, (done == true ? 1 : 0), at);
+        return String.format("event\n%s\n%d\n%s", desc, (done ? 1 : 0), at);
     }
 }

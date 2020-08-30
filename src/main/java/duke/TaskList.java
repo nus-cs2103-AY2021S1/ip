@@ -1,10 +1,11 @@
 package duke;
-import java.util.*;
-import java.io.*;
+
+import java.util.List;
 
 public class TaskList {
-    List<Task> lst = new ArrayList<>();
+    List<Task> lst;
     Storage storage;
+
     TaskList() {
         storage = new Storage("data.txt");
         lst = storage.loadFile();

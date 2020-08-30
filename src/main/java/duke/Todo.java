@@ -11,6 +11,6 @@ public class Todo extends Task {
 
     @Override
     public String toDisk() {
-        return String.format("todo\n%s\n%d", desc, (done == true ? 1 : 0));
+        return String.format("todo\n%s\n%d", desc, (done ? 1 : 0));
     }
 }
