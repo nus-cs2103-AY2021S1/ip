@@ -9,8 +9,13 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 public class ToDoTest {
     @Test
-    public void factoryMethod_success() throws EmptyTaskException {
-        assertEquals(ToDo.createFromFile("test event"), ToDo.create("todo test event"));
+    public void factoryMethod_success() {
+        try {
+            assertEquals(ToDo.createFromFile("test event"), ToDo.create("todo test event"));
+        } catch (EmptyTaskException e) {
+            e.printStackTrace();
+            fail();
+        }
     }
 
     @Test
