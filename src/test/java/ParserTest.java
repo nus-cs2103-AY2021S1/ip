@@ -1,5 +1,3 @@
-package duke.tests;
-
 import duke.Parser;
 import duke.Storage;
 import duke.TaskList;
@@ -13,11 +11,10 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
 
-import org.junit.jupiter.api.Test;
-
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
+import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
