@@ -11,8 +11,8 @@ public interface Command {
     /**
      * Performs the action to be taken.
      *
-     * @param tasks The TaskList to add the task to.
-     * @param ui The Ui to show responses or error messages.
+     * @param tasks   The TaskList to add the task to.
+     * @param ui      The Ui to show responses or error messages.
      * @param storage The Storage to save the TaskList.
      * @return True if Duke should continue running.
      */

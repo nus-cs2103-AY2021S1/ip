@@ -1,13 +1,13 @@
 package duke;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
 import duke.exception.DukeInvalidIndexException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
-
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Contains the list of tasks.
@@ -86,9 +86,9 @@ public class TaskList {
      * @param alternative String returned if list is empty.
      * @return String representing the tasks in the list.
      */
-    public static String getListAsStringFromList(List<Task>  list, String alternative) {
+    public static String getListAsStringFromList(List<Task> list, String alternative) {
         String s = "";
-        for (int i = 0; i < list.size(); i ++) {
+        for (int i = 0; i < list.size(); i++) {
             s += (i + 1) + "." + list.get(i);
             if (i != list.size() - 1) {
                 s += '\n' + INDENT;
@@ -164,7 +164,9 @@ public class TaskList {
         List<Task> tasksWithKeyword = new ArrayList<>();
         for (Task t : list) {
             String description = t.getDescription();
-            if (description.contains(keyword)) tasksWithKeyword.add(t);
+            if (description.contains(keyword)) {
+                tasksWithKeyword.add(t);
+            }
         }
         return getListAsStringFromList(tasksWithKeyword,
                 "No tasks with " + keyword + " was found");

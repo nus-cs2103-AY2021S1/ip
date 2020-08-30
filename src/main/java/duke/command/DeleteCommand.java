@@ -1,12 +1,12 @@
 package duke.command;
 
+import java.io.IOException;
+
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 import duke.exception.DukeInvalidIndexException;
 import duke.task.Task;
-
-import java.io.IOException;
 
 /**
  * Represents a delete task action.

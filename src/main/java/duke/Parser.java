@@ -1,12 +1,5 @@
 package duke;
 
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.Todo;
-import duke.command.*;
-import duke.exception.*;
-
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -14,6 +7,27 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import duke.command.AddCommand;
+import duke.command.ByeCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
+import duke.command.ListDateCommand;
+import duke.command.UnknownCommand;
+import duke.exception.DukeEmptyAtException;
+import duke.exception.DukeEmptyByException;
+import duke.exception.DukeEmptyDescriptionException;
+import duke.exception.DukeEmptyIndexException;
+import duke.exception.DukeEmptyKeywordException;
+import duke.exception.DukeInvalidDateTimeInputException;
+import duke.exception.DukeUnknownInputException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
 
 /**
  * An object that reads and understands user inputs.
@@ -29,7 +43,9 @@ public class Parser {
      * @return List of LocalDateTime where index 0 is Date and index 1 is Time.
      * @throws DukeInvalidDateTimeInputException If Date or Time is invalid.
      */
-    protected static List<LocalDateTime> getCustomDateTimeList(String dateTimeString) throws DukeInvalidDateTimeInputException {
+
+    protected static List<LocalDateTime> getCustomDateTimeList(String dateTimeString)
+        throws DukeInvalidDateTimeInputException {
         //dateTimeString should be given in "dd/mm/yyyy hhmm"
         //will use manual parser to check for invalid date time inputs
         List<LocalDateTime> results = new ArrayList<>();
@@ -61,7 +77,9 @@ public class Parser {
                 int min = Integer.parseInt(timeString.substring(2));
                 results.add(LocalDateTime.of(LocalDate.now(), LocalTime.of(hr, min)));
             } catch (DateTimeException e) {
-                throw new DukeInvalidDateTimeInputException("☹ OOPS!!! Invalid time. You can only input up to 23hr and 59min.");
+
+                throw new DukeInvalidDateTimeInputException(
+                    "☹ OOPS!!! Invalid time. You can only input up to 23hr and 59min.");
             }
         }
         return results;
@@ -72,14 +90,14 @@ public class Parser {
      *
      * @param command The user input.
      * @return AddCommand with specific Task.
-     * @throws DukeEmptyDescriptionException If description of task is empty.
-     * @throws DukeEmptyByException If user did not input deadline date time.
-     * @throws DukeEmptyAtException If user did not input event date time.
-     * @throws DukeUnknownInputException If user input is unknown.
+     * @throws DukeEmptyDescriptionException     If description of task is empty.
+     * @throws DukeEmptyByException              If user did not input deadline date time.
+     * @throws DukeEmptyAtException              If user did not input event date time.
+     * @throws DukeUnknownInputException         If user input is unknown.
      * @throws DukeInvalidDateTimeInputException If date and time inputted is erroneous.
      */
     public static Command add(String command) throws DukeEmptyDescriptionException,
-            DukeEmptyByException, DukeEmptyAtException, DukeUnknownInputException, DukeInvalidDateTimeInputException {
+        DukeEmptyByException, DukeEmptyAtException, DukeUnknownInputException, DukeInvalidDateTimeInputException {
         Task toBeAdded;
         String des;
         String[] tokens;
@@ -211,16 +229,17 @@ public class Parser {
      *
      * @param command The user input.
      * @return Command corresponding to user input.
-     * @throws DukeEmptyIndexException If user did not input index.
-     * @throws DukeEmptyDescriptionException If user did not input description.
-     * @throws DukeEmptyAtException If user did not input event date time.
-     * @throws DukeEmptyByException If user did not input deadline date time.
+     * @throws DukeEmptyIndexException           If user did not input index.
+     * @throws DukeEmptyDescriptionException     If user did not input description.
+     * @throws DukeEmptyAtException              If user did not input event date time.
+     * @throws DukeEmptyByException              If user did not input deadline date time.
      * @throws DukeInvalidDateTimeInputException If date and time inputted is erroneous.
      */
-       public static Command parse(String command) throws DukeEmptyIndexException,
-            DukeEmptyDescriptionException, DukeEmptyAtException,
-            DukeEmptyByException, DukeInvalidDateTimeInputException,
-            DukeEmptyKeywordException {
+
+    public static Command parse(String command) throws DukeEmptyIndexException,
+        DukeEmptyDescriptionException, DukeEmptyAtException,
+        DukeEmptyByException, DukeInvalidDateTimeInputException,
+        DukeEmptyKeywordException {
         if (command.equals("bye")) {
             return new ByeCommand();
         } else if (command.equals("list")) {

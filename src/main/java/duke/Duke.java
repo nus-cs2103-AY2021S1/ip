@@ -1,9 +1,15 @@
 package duke;
 
-import duke.command.Command;
-import duke.exception.*;
-
 import java.io.File;
+
+import duke.command.Command;
+import duke.exception.DukeEmptyAtException;
+import duke.exception.DukeEmptyByException;
+import duke.exception.DukeEmptyDescriptionException;
+import duke.exception.DukeEmptyIndexException;
+import duke.exception.DukeEmptyKeywordException;
+import duke.exception.DukeInvalidDataException;
+import duke.exception.DukeInvalidDateTimeInputException;
 
 /**
  * Represents the chat bot.
@@ -64,7 +70,7 @@ public class Duke {
     public static void checkAndMakeDir(String filePath) {
         File f = new File(filePath);
         if (f.mkdir()) {
-           System.out.printf("Created a directory '%s'%n", filePath);
+            System.out.printf("Created a directory '%s'%n", filePath);
         }
     }
 
