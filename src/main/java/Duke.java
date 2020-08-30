@@ -7,8 +7,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.io.BufferedWriter;
 
-import java.util.Date;
-import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import java.io.File;
 
@@ -232,9 +232,10 @@ public class Duke {
         }
 
         try (BufferedWriter writer = Files.newBufferedWriter(Paths.get(dataPath.toString(), taskLogName))) {
-            Date date = new Date();
-            SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
-            String msg = "Task list (Last updated " + formatter.format(date) + "):";
+            LocalDateTime now = LocalDateTime.now();
+            String msg = "Task list (Last updated "
+                         + now.format(DateTimeFormatter.ofPattern("MMM d yyyy, HH:mm:ss a"))
+                         + "):";
             for (int i = 0; i < tasks.size(); i++) {
                 msg += "\n" +(i + 1) + ". " + tasks.get(i);
             }
