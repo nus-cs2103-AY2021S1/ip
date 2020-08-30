@@ -13,35 +13,20 @@ public class Ui {
     }
 
     /**
-     * Reads user command.
-     * @return User command.
-     */
-    public String readCommand() {
-        return sc.nextLine();
-    }
-
-    /**
      * Prints the welcome message.
      */
-    public void welcomeMessage() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        String intro = "Eh yo, I am Duke! Some kids call me 'Lao Duke' (which means old Duke).\n"
-                + "I like to speak Singlish but I also can remember your tasks one. Come try la! ";
-        System.out.println(logo);
-        System.out.println(intro);
+    public String welcomeMessage() {
+        String intro = "Hello, I am Doraemon! I can help you remember and keep track of your tasks.\n"
+                + "I assume that you are as forgetful as Nobita. Remember to bribe me with loads of Dorayaki too!";
+        return intro;
     }
 
     /**
      * Prints the goodbye message.
      */
-    public void byeMessage() {
-        String bye = "Alamak, you sure you finished all your tasks? Ok lah I also need to sleep anyway Zzzz.\n"
-                + "Goodbye!";
-        System.out.println(bye);
+    public String byeMessage() {
+        String bye = "Goodbye, I need to find my sister now! >_<";
+        return bye;
     }
 
     /**
