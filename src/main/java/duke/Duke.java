@@ -62,4 +62,8 @@ public class Duke {
     public static void main(String[] args) {
         new Duke("data/tasks.txt").run();
     }
+
+    public String getResponse(String input) {
+        return "Duke heard: " + input;
+    }
 }
