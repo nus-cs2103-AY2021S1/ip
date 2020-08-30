@@ -23,7 +23,7 @@ public class Task {
      * @param name A string representing the name of the new task.
      * @return The new task created.
      */
-    public static Task newTask(String name){
+    public static Task newTask(String name) {
         return new Task(name, false);
     }
 
@@ -35,7 +35,7 @@ public class Task {
      * @param isCompleted A boolean value representing whether the task has been completed.
      * @return The existing task created.
      */
-    public static Task existingTask(String name, boolean isCompleted){
+    public static Task existingTask(String name, boolean isCompleted) {
         return new Task(name, isCompleted);
     }
 
@@ -43,7 +43,7 @@ public class Task {
      * Gets the name of the task.
      * @return A string representing the name of the task.
      */
-    public String getTaskName(){
+    public String getTaskName() {
         return this.taskName;
     }
 
@@ -51,7 +51,7 @@ public class Task {
      * Gets the completion status of the task.
      * @return A boolean value representing whether the task has been completed.
      */
-    public boolean getIsCompleted(){
+    public boolean getIsCompleted() {
         return this.isCompleted;
     }
 
@@ -59,7 +59,7 @@ public class Task {
      * Sets the completion status of the task as true.
      * @return The task that was marked as completed.
      */
-    public Task markAsDone(){
+    public Task markAsDone() {
         this.isCompleted = true;
         return this;
     }
@@ -78,7 +78,7 @@ public class Task {
      * This is the default implementation for subclasses that do not contain such a field.
      * @return false (default implementation).
      */
-    public boolean isToday(){
+    public boolean isToday() {
         return false;
     }
 
@@ -98,7 +98,7 @@ public class Task {
      * The different fields are separated by a "|" character.
      * @return A string representation of the task object to be saved in storage.
      */
-    public String toSaveString(){
+    public String toSaveString() {
         return (this.isCompleted ? "1" : "0") + " | " + this.taskName;
     }
 }

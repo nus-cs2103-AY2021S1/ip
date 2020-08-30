@@ -2,6 +2,7 @@ package duke.command;
 
 import duke.Storage;
 import duke.Ui;
+
 import duke.task.TaskList;
 
 /**
@@ -14,7 +15,7 @@ public class ExitCommand extends Command {
      * @param storage A Storage object that handles the storage of tasks in local storage, allowing them to persist.
      */
     @Override
-    public void execute(TaskList list, Storage storage){
+    public void execute(TaskList list, Storage storage) {
         Ui.goodbyeMessage();
     }
 
@@ -23,7 +24,7 @@ public class ExitCommand extends Command {
      * @return true
      */
     @Override
-    public boolean isExit(){
+    public boolean isExit() {
         return true;
     }
 }

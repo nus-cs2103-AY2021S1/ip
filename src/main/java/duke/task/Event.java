@@ -29,7 +29,7 @@ public class Event extends Task {
      * @param date A LocalDate representing the date of the new event.
      * @return The new event created.
      */
-    public static Event newEvent(String name, LocalDate date){
+    public static Event newEvent(String name, LocalDate date) {
         return new Event(name, false, date);
     }
 
@@ -42,7 +42,7 @@ public class Event extends Task {
      * @param date A LocalDate representing the date of the existing event.
      * @return The existing event created.
      */
-    public static Event existingEvent(String name, boolean isCompleted, LocalDate date){
+    public static Event existingEvent(String name, boolean isCompleted, LocalDate date) {
         return new Event(name, isCompleted, date);
     }
 
@@ -50,7 +50,7 @@ public class Event extends Task {
      * Gets whether the event date is set as today.
      * @return The boolean value representing whether the event is today.
      */
-    public boolean isToday(){
+    public boolean isToday() {
         return this.date.isEqual(LocalDate.now());
     }
 
@@ -71,7 +71,7 @@ public class Event extends Task {
      * Completion status is represented by a 1 or 0.
      * @return A string representation of the event object to be saved in storage.
      */
-    public String toSaveString(){
+    public String toSaveString() {
         return "E" + " | " + super.toSaveString() + " | " + this.date + "\n";
     }
 }

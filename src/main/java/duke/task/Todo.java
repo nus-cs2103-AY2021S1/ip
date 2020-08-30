@@ -19,7 +19,7 @@ public class Todo extends Task {
      * @param name A string representing the name of the new todo.
      * @return The new todo created.
      */
-    public static Todo newTodo(String name){
+    public static Todo newTodo(String name) {
         return new Todo(name, false);
     }
 
@@ -31,7 +31,7 @@ public class Todo extends Task {
      * @param isCompleted A boolean value representing whether the todo has been completed.
      * @return The existing todo created.
      */
-    public static Todo existingTodo(String name, boolean isCompleted){
+    public static Todo existingTodo(String name, boolean isCompleted) {
         return new Todo(name, isCompleted);
     }
 
@@ -51,7 +51,7 @@ public class Todo extends Task {
      * Completion status is represented by a 1 or 0.
      * @return A string representation of the todo object to be saved in storage.
      */
-    public String toSaveString(){
+    public String toSaveString() {
         return "T" + " | " + super.toSaveString() + "\n";
     }
 }

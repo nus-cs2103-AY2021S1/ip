@@ -1,9 +1,12 @@
 package duke;
 
 import java.util.Scanner;
+
 import duke.command.Command;
 import duke.command.CommandParser;
+
 import duke.task.TaskList;
+
 import duke.exception.DukeException;
 
 public class Duke {
@@ -13,13 +16,13 @@ public class Duke {
             TaskList taskList = TaskList.initialiseTaskList(storage);
             CommandParser parser = new CommandParser();
 
-            Scanner sc = new Scanner(System.in);
+            Scanner scanner = new Scanner(System.in);
             Ui.welcomeMessage();
             boolean isExit = false;
 
-            while(!isExit) {
+            while (!isExit) {
                 try {
-                    String userCommand = sc.nextLine();
+                    String userCommand = scanner.nextLine();
                     Command parsedCommand = parser.parseCommand(userCommand);
                     parsedCommand.execute(taskList, storage);
                     isExit = parsedCommand.isExit();
@@ -27,6 +30,7 @@ public class Duke {
                     Ui.errorMessage(e.getUiMessage());
                 }
             }
+            scanner.close();
         } catch (DukeException e) {
             Ui.errorMessage(e.getUiMessage());
         }

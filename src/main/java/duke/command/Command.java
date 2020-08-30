@@ -1,8 +1,10 @@
 package duke.command;
 
 import duke.Storage;
-import duke.exception.DukeException;
+
 import duke.task.TaskList;
+
+import duke.exception.DukeException;
 
 /**
  * Represents a Command given by the user.
@@ -21,8 +23,7 @@ public abstract class Command {
      * This will be overridden in the ExitCommand subclass.
      * This is the default implementation for all other subclasses.
      * @return false (default implementation).
-     */
-    public boolean isExit(){
+     */public boolean isExit() {
         return false;
     }
 }

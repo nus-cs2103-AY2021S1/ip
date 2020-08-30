@@ -29,7 +29,7 @@ public class Deadline extends Task {
      * @param date A LocalDate representing the date of the new deadline.
      * @return The new deadline created.
      */
-    public static Deadline newDeadline(String name, LocalDate date){
+    public static Deadline newDeadline(String name, LocalDate date) {
         return new Deadline(name, false, date);
     }
 
@@ -42,7 +42,7 @@ public class Deadline extends Task {
      * @param date A LocalDate representing the date of the existing deadline.
      * @return The existing deadline created.
      */
-    public static Deadline existingDeadline(String name, boolean isCompleted, LocalDate date){
+    public static Deadline existingDeadline(String name, boolean isCompleted, LocalDate date) {
         return new Deadline(name, isCompleted, date);
     }
 
@@ -50,7 +50,7 @@ public class Deadline extends Task {
      * Gets whether the deadline date is set as today.
      * @return The boolean value representing whether the deadline is today.
      */
-    public boolean isToday(){
+    public boolean isToday() {
         return this.date.isEqual(LocalDate.now());
     }
 
@@ -71,7 +71,7 @@ public class Deadline extends Task {
      * Completion status is represented by a 1 or 0.
      * @return A string representation of the deadline object to be saved in storage.
      */
-    public String toSaveString(){
+    public String toSaveString() {
         return "D" + " | " + super.toSaveString() + " | " + this.date + "\n";
     }
 }

@@ -2,10 +2,12 @@ package duke.command;
 
 import duke.Storage;
 import duke.Ui;
-import duke.exception.InvalidTaskException;
-import duke.exception.StorageException;
+
 import duke.task.Task;
 import duke.task.TaskList;
+
+import duke.exception.InvalidTaskException;
+import duke.exception.StorageException;
 
 /**
  * Represents a Command given by the user to mark a Task as done.

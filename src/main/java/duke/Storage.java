@@ -1,12 +1,13 @@
 package duke;
 
-import duke.exception.StorageException;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+
 import java.util.Scanner;
 import java.util.ArrayList;
+
+import duke.exception.StorageException;
 
 /**
  * Storage is a class that handles the interactions between the application and local storage.
@@ -30,10 +31,10 @@ public class Storage {
     public ArrayList<String> readTaskStorage() throws StorageException {
         ArrayList<String> existingTasks = new ArrayList<>();
         try {
-            if(this.storage.exists()){
+            if (this.storage.exists()) {
                 // Load into taskList if file is not empty
                 Scanner s = new Scanner(this.storage);
-                if (this.storage.length() != 0){
+                if (this.storage.length() != 0) {
                     while (s.hasNext()) {
                         existingTasks.add(s.nextLine());
                     }
@@ -43,7 +44,7 @@ public class Storage {
                 this.storage.createNewFile();
             }
 
-            if(!this.storage.exists()){
+            if (!this.storage.exists()) {
                 throw new IOException();
             }
         } catch (IOException e) {
