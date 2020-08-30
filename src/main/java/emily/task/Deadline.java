@@ -25,7 +25,7 @@ public class Deadline extends Task {
      * @return timestamp in the format yyy-mm--dd
      */
     public String getBy(){
-        return this.str;
+        return this.timeStamp;
 
     }
 

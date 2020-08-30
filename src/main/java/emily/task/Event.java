@@ -8,8 +8,6 @@ import java.time.format.DateTimeFormatter;
  * Represents an Event task which has a timestamp at a given time
  * and description
  */
-public class Event extends Task{
-
 public class Event extends Task {
 
     protected LocalDate at;
@@ -17,7 +15,8 @@ public class Event extends Task {
 
     public Event(String description, String timeStamp) {
         super(description);
-        this.at = LocalDate.parse(str);
+        this.timeStamp = timeStamp;
+        this.at = LocalDate.parse(timeStamp);
         this.type = 'E';
     }
 
