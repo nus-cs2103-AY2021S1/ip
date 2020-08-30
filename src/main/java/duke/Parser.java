@@ -1,13 +1,20 @@
 package duke;
 
-import duke.command.*;
+import java.util.Arrays;
+import java.util.List;
+
+import duke.command.AddCommand;
+import duke.command.ByeCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 
-import java.util.Arrays;
-import java.util.List;
 
 /**
  * Represents a parser for parsing the command.
@@ -56,12 +63,14 @@ public class Parser {
                 throw new DukeException(":( Oops!!! The description of a Deadline task cannot be empty. :-(");
             }
             if (index == -1 || words.size() - index <= 1) {
-                throw new DukeException(":( Oops!!! Please type \"deadline [task description] /by [yyyy-mm-dd]\" to add a Deadline task");
+                throw new DukeException(":( Oops!!! Please type \"deadline [task description] /by [yyyy-mm-dd]\" "
+                        + "to add a Deadline task");
             }
             String taskDescription = combineWords(words.subList(1, index));
             String by = combineWords(words.subList(index + 1, words.size()));
             if (!by.matches("([12]\\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01]))")) {
-                throw new DukeException(":( Oops!!! Please type \"deadline [task description] /by [yyyy-mm-dd]\" to add a Deadline task");
+                throw new DukeException(":( Oops!!! Please type \"deadline [task description] /by [yyyy-mm-dd]\" "
+                        + "to add a Deadline task");
             }
             task = new Deadline(taskDescription, by);
         } else if (taskType.equalsIgnoreCase("event")) {
@@ -70,13 +79,15 @@ public class Parser {
                 throw new DukeException(":( Oops!!! The description of a Event task cannot be empty. :-(");
             }
             if (index == -1 || words.size() - index <= 1) {
-                throw new DukeException(":( Oops!!! Please type \"event [task description] /at [event time] \" to add a Event task");
+                throw new DukeException(":( Oops!!! Please type \"event [task description] /at [event time] \" "
+                        + "to add a Event task");
             }
             String taskDescription = combineWords(words.subList(1, index));
             String at = combineWords(words.subList(index + 1, words.size()));
             task = new Event(taskDescription, at);
         } else {
-            throw new DukeException(":( Oops!!! I'm sorry, but I don't know what that means :-(\n\tCommands: list | done | delete | todo | deadline | event");
+            throw new DukeException(":( Oops!!! I'm sorry, but I don't know what that means "
+                    + ":-(\n\tCommands: list | done | delete | todo | deadline | event");
         }
         return task;
     }
@@ -90,7 +101,7 @@ public class Parser {
         } else if (fullCommand.startsWith("delete")) {
             int taskNumber = extractTaskNumber(fullCommand);
             return new DeleteCommand(taskNumber);
-        } else if (fullCommand.equalsIgnoreCase("bye")){
+        } else if (fullCommand.equalsIgnoreCase("bye")) {
             return new ByeCommand();
         } else if (fullCommand.startsWith("find")) {
             if (fullCommand.length() <= 5) {

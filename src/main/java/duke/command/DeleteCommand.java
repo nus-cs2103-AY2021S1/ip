@@ -10,7 +10,7 @@ import duke.task.Task;
  * Represents a delete task command.
  * @author Tee Kok Siang
  */
-public class DeleteCommand extends Command{
+public class DeleteCommand extends Command {
     private final int taskNumber;
 
     /**

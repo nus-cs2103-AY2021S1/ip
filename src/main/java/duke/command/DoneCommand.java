@@ -9,7 +9,7 @@ import duke.Ui;
  * Represents a done task command.
  * @author Tee Kok Siang
  */
-public class DoneCommand extends Command{
+public class DoneCommand extends Command {
     private final int taskNumber;
 
     /**

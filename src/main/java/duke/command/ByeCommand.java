@@ -1,6 +1,5 @@
 package duke.command;
 
-import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
@@ -9,7 +8,7 @@ import duke.Ui;
  * Represents an exit command.
  * @author Tee Kok Siang
  */
-public class ByeCommand extends Command{
+public class ByeCommand extends Command {
     /**
      * Constructs an ByeCommand object.
      */

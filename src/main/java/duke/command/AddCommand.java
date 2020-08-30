@@ -9,7 +9,7 @@ import duke.task.Task;
  * Represents an add task command.
  * @author Tee Kok Siang
  */
-public class AddCommand extends Command{
+public class AddCommand extends Command {
     /**
      * Constructs an AddCommand object.
      *

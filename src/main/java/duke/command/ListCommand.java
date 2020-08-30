@@ -1,17 +1,17 @@
 package duke.command;
 
+import java.util.List;
+
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 import duke.task.Task;
 
-import java.util.List;
-
 /**
  * Represents a list task command.
  * @author Tee Kok Siang
  */
-public class ListCommand extends Command{
+public class ListCommand extends Command {
     /**
      * Executes a ListCommand to list all the tasks.
      * Display the tasks.
