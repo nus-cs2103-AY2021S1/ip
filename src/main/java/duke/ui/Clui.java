@@ -64,26 +64,6 @@ public class Clui implements Ui {
     }
 
     /**
-     * Prints the message for failing to load storage.
-     */
-    public void showLoadingError() {
-        String loadingErrorMessage = "I think I lost my memory... Let me start afresh.";
-        System.out.printf(prependIndent(DIVIDER, 4));
-        System.out.printf(prependIndent(loadingErrorMessage, 5));
-        System.out.println(prependIndent(DIVIDER, 4));
-    }
-
-    /**
-     * Prints the default goodbye message.
-     */
-    public void exit() {
-        String exitMessage = "Ja ne!\n";
-        System.out.printf(prependIndent(DIVIDER, 4));
-        System.out.printf(prependIndent(exitMessage, 5));
-        System.out.println(prependIndent(DIVIDER, 4));
-    }
-
-    /**
      * Reads in user input until the next line separator.
      *
      * @return the user input that was read.

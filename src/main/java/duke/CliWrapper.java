@@ -1,25 +1,23 @@
-import duke.command.Command;
+package duke;
+
 import duke.exceptions.DukeException;
+import duke.exceptions.DukeStorageException;
 import duke.exceptions.IncompleteDukeCommandException;
-import duke.parser.Parser;
 import duke.storage.Storage;
-import duke.task.TaskList;
 import duke.ui.Clui;
 
-public class DukeCli {
+public class CliWrapper {
 
-    private Storage storage;
-    private TaskList taskList;
+    private Duke duke;
     private Clui ui;
 
-    DukeCli(String filePath) {
+    private CliWrapper(String filePath) {
         ui = new Clui();
-        storage = new Storage(filePath);
         try {
-            taskList = new TaskList(storage.load());
-        } catch (DukeException e) {
-            ui.showLoadingError();
-            taskList = new TaskList();
+            duke = new Duke(filePath, true);
+        } catch (DukeStorageException e) {
+            ui.print(e.getMessage());
+            duke = new Duke(filePath, false);
         }
     }
 
@@ -29,10 +27,9 @@ public class DukeCli {
         while (!isExit) {
             try {
                 String fullCommand = ui.readCommand();
-                Command c = Parser.parse(fullCommand);
-                c.execute(taskList, storage);
-                c.printFeedback(ui);
-                isExit = c.isExit();
+                Response response = duke.getResponse(fullCommand);
+                ui.print(response.getResponseMessage());
+                isExit = response.shouldExit();
             } catch (IncompleteDukeCommandException e) {
                 ui.print("Something went wrong, but I'm not sure what...");
             } catch (DukeException e) {
@@ -42,6 +39,6 @@ public class DukeCli {
     }
 
     public static void main(String[] args) {
-        new DukeCli(Storage.FILE_PATH).run();
+        new CliWrapper(Storage.FILE_PATH).run();
     }
 }

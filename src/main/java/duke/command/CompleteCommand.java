@@ -4,7 +4,6 @@ import duke.exceptions.IncompleteDukeCommandException;
 import duke.storage.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
-import duke.ui.Ui;
 
 /**
  * The {@code CompleteCommand} class represents a command to mark a {@link Task} in a {@link TaskList} as complete.
@@ -40,15 +39,13 @@ public class CompleteCommand extends Command {
     /**
      * Prints a feedback confirming the execution of this {@code CompleteCommand}.
      *
-     * @param ui the {@link Ui} instance to use for formatting.
      * @throws IncompleteDukeCommandException if this {@code CompleteCommand} was not executed.
      */
     @Override
-    public void printFeedback(Ui ui) throws IncompleteDukeCommandException {
+    public String feedback() throws IncompleteDukeCommandException {
         if (super.completed) {
-            String feedback = String.format("Nice! I've marked this task as complete:\n  %s\n",
+            return String.format("Nice! I've marked this task as complete:\n  %s\n",
                     completedTask.toString());
-            ui.print(feedback);
         } else {
             throw new IncompleteDukeCommandException("Complete command was not completed.");
         }

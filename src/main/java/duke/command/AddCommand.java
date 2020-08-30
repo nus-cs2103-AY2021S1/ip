@@ -9,7 +9,6 @@ import duke.task.Task;
 import duke.task.TaskList;
 import duke.task.TaskType;
 import duke.task.ToDo;
-import duke.ui.Ui;
 
 /**
  * The {@code CompleteCommand} class represents a command to create a new {@link Task}.
@@ -59,17 +58,15 @@ public class AddCommand extends Command {
     /**
      * Prints a feedback confirming the execution of this {@code AddCommand}.
      *
-     * @param ui the {@link Ui} instance to use for formatting.
      * @throws IncompleteDukeCommandException if this {@code AddCommand} was not executed.
      */
     @Override
-    public void printFeedback(Ui ui) throws IncompleteDukeCommandException {
+    public String feedback() throws IncompleteDukeCommandException {
         if (super.completed) {
-            String feedback = String.format(
+            return String.format(
                     "Got it. I've added this task:\n  %s\nNow you have %d tasks in your list.\n",
                     createdTask.toString(),
                     remainingTaskCount);
-            ui.print(feedback);
         } else {
             throw new IncompleteDukeCommandException("Add command was not completed.");
         }
