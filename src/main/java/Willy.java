@@ -1,6 +1,5 @@
 package main.java;
 
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -10,7 +9,6 @@ import java.util.Scanner;
 public class Willy {
 
     private static TaskStore storage;
-    private String message;
     static String style = "\t________________________________________________________________\n";
     static String logo = "__       ____       __\n"
             + "\\  \\    /    \\    /  /\n"
@@ -18,16 +16,20 @@ public class Willy {
             + "  \\  \\/  /  \\  \\/  /\n"
             + "   \\____/    \\____/ ILLY ~(^-^)~\n";
 
-
-    public static void main(String[] args) throws WillyException, FileNotFoundException {
+    public Willy() {
         System.out.println(logo + "    Your personal life secretary");
-
-        Scanner input = new Scanner(System.in);
         Greet startDuke = new Greet();
         // prints out intro
         System.out.println(startDuke);
         storage = new TaskStore();
         storage.createFile();
+    }
+
+
+    public static void main(String[] args) throws WillyException {
+
+        new Willy();
+        Scanner input = new Scanner(System.in);
         ArrayList<Task> listOfTask  = storage.retrieveStorage();
         TaskList list = new TaskList(listOfTask, storage);
         Parser parser = new Parser(list);
