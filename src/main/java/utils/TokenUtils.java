@@ -50,6 +50,15 @@ public class TokenUtils {
         System.out.println("");
     }
 
+    public static void printTokensVargs(String ... tokens) {
+        System.out.println("Token here");
+        for (String token: tokens) {
+            System.out.print(token + " ");
+        }
+        System.out.println("");
+    }
+
+
     /**
      * Test whether a string S is a subsequence of String t
      * @param s the String s
