@@ -31,16 +31,4 @@ public class DeadlineTest {
         assertEquals("hello /by 02-02-2002 1800", new Deadline("hello", "02-02-2002 1800").getCommand());
     }
 
-    /**
-     * Test Parsing functionality of deadline class.
-     */
-    @Test
-    public void parseCommandTest() {
-        Task deadline = Deadline.parseCommand("hello /by 02-02-2002 1800");
-        assertEquals("hello", deadline.getMessage());
-        assertEquals("DEADLINE", deadline.getType());
-        assertEquals("✘", deadline.getStatusIcon());
-        assertEquals("[D][✘] hello (by: 02-02-2002 1800)", deadline.toString());
-    }
-
 }
