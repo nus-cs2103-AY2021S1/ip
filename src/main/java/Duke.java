@@ -1,6 +1,7 @@
 package main.java;
 
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Duke {
     public static void main(String[] args) {
@@ -12,41 +13,44 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
         System.out.println("    ____________________________________________________________");
-        System.out.println("     Hello! I'm Duke\nWhat can I do for you?");
+        System.out.println("     Hello! I'm Duke\n     What can I do for you?");
         System.out.println("    ____________________________________________________________\n");
 
-        String[] store = new String[100];
-        boolean[] flag = new boolean[100];
-        int count = 0;
-        String input = sc.nextLine();
+        ArrayList<Task> taskList = new ArrayList<Task>();
 
         while (true) {
-            if (input.equals("bye")) {
-                System.out.println("    ____________________________________________________________");
-                System.out.println("     Bye. Hope to see you again soon!");
-                System.out.println("    ____________________________________________________________\n");
-                return;
+            String command = sc.next();
+            switch(command) {
+                case "bye":
+                    System.out.println("    ____________________________________________________________");
+                    System.out.println("     Bye. Hope to see you again soon!");
+                    System.out.println("    ____________________________________________________________\n");
+                    return;
+                case "list":
+                    System.out.println("    ____________________________________________________________");
+                    System.out.println("     Here are the tasks in your list:");
+                    for (Task task: taskList) {
+                        task.printDescription();
+                    }
+                    System.out.println("    ____________________________________________________________\n");
+                    break;
+                case "done":
+                    int index = sc.nextInt();
+                    Task currentTask = taskList.get(index - 1);
+                    currentTask.markAsDone();
+                    System.out.println("    ____________________________________________________________");
+                    System.out.println("     Nice! I've marked this task as done: ");
+                    currentTask.printDescription();
+                    System.out.println("    ____________________________________________________________\n");
+                    break;
+                default:
+                    String event = sc.nextLine();
+                    taskList.add(new Task(command + event));
+                    System.out.println("    ____________________________________________________________");
+                    System.out.println("     added: " + command + event);
+                    System.out.println("    ____________________________________________________________\n");
+                    break;
             }
-
-            if (input.equals("done")) {
-
-            }
-
-            if (input.equals("list")) {
-                System.out.println("    ____________________________________________________________");
-                for (int i = 0; i < count; i++) {
-                    System.out.println("     " + Integer.toString(i + 1) + "." + store[i]);
-                }
-                System.out.println("    ____________________________________________________________\n");
-            } else {
-                System.out.println("    ____________________________________________________________");
-                System.out.println("     added: " + input);
-                System.out.println("    ____________________________________________________________\n");
-                store[count] = input;
-                flag[count] = false;
-                count++;
-            }
-            input = sc.nextLine();
         }
     }
 }
