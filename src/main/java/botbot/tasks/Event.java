@@ -11,10 +11,10 @@ import java.time.format.DateTimeParseException;
  * Represents an event with a description, time and completion status.
  */
 public class Event extends Task {
-    private LocalDateTime at;
     public static final char TYPE_CODE = 'E';
     public static final String FORMAT = "event <description> /at <D-M-YYYY HHmm> (eg. 17-3-2020 0945 "
             + "or 3-4-2020 with no time specified)";
+    private LocalDateTime at;
 
     /**
      * Creates an event.

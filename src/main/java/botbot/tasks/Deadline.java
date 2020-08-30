@@ -11,10 +11,10 @@ import java.time.format.DateTimeParseException;
  * Represents a deadline with a description, deadline and completion status.
  */
 public class Deadline extends Task {
-    private LocalDateTime by;
     public static final char TYPE_CODE = 'D';
     public static final String FORMAT = "deadline <description> /by <D-M-YYYY HHmm> (eg. 17-3-2020 0945 "
             + "or 3-4-2020 with no time specified)";
+    private LocalDateTime by;
 
     /**
      * Creates a deadline.
