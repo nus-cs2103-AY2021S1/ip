@@ -9,35 +9,18 @@ public class Deadline extends Task {
     /**
      * Stores the original user input including the command word, then formats and sets task content.
      *
-     * @param contents  User input without the command word.
+     * @param input  User input without the command word.
      */
-    public Deadline(String contents) {
-        inputString = this.getClass().getSimpleName().toLowerCase() + " " + contents;
-        setContents(format(contents));
-    }
-
-    /**
-     * Formats the deadline contents to change the date display.
-     *
-     * @param s String to format.
-     * @return  The formatted string.
-     */
-    private String format(String s) {
-        if (s.contains("/")) {
-            String[] split = s.split("/", 2);
+    public Deadline(String input) {
+        inputString = this.getClass().getSimpleName().toLowerCase() + " " + input;
+        try {
+            String[] split = input.split("/", 2);
             String dateTime = split[1].substring(split[1].indexOf(' ') + 1);
             deadline = Parser.parseDateTime(dateTime);
-            if (deadline != null) {
-                dateTime = deadline.format(DF);
-            }
-            return split[0] + "(" + split[1].split(" ")[0] + ": " + dateTime + ")";
-        } else {
-            return s;
+            contents = Parser.parseDateTimeTask(input, deadline);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            contents = input;
         }
-    }
-
-    @Override
-    public String toString() {
-        return "[D]" + super.toString();
+        prefix = "D";
     }
 }

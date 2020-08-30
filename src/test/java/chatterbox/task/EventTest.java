@@ -9,8 +9,8 @@ public class EventTest {
     public void checkEventFormatting() {
         Event e = new Event("borrow books /at 20/1/2019 1800");
         assertEquals(e.inputString, "event borrow books /at 20/1/2019 1800");
-        assertEquals(e.toString(), "[E][✗] borrow books (at: Jan 20 2019 1800H)");
+        assertEquals(e.toString(), "[E][\u2717] borrow books (at: Jan 20 2019 1800H)");
         e.setDone(true);
-        assertEquals(e.toString(), "[E][✓] borrow books (at: Jan 20 2019 1800H)");
+        assertEquals(e.toString(), "[E][\u2713] borrow books (at: Jan 20 2019 1800H)");
     }
 }
