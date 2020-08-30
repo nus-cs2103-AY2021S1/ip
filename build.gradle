@@ -39,6 +39,7 @@ shadowJar {
 
 checkstyle {
     toolVersion = '8.23'
+    configFile = file("${rootDir}/config/checkstyle/checkstyle.xml")
 }
 
 compileJava {

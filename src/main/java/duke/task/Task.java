@@ -11,6 +11,7 @@ public class Task {
 
     /**
      * Creates a new task based on the description and marks it as not done.
+     *
      * @param description Details of the task.
      */
     public Task(String description) {
@@ -42,6 +43,7 @@ public class Task {
 
     /**
      * Expresses the task as a string which is used for storage purposes.
+     *
      * @return A string representing the task.
      */
     public String store() {

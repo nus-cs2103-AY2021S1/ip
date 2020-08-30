@@ -1,5 +1,7 @@
 package duke;
 
+import java.util.ArrayList;
+
 import duke.exceptions.EmptyCommandException;
 import duke.exceptions.EmptyFindException;
 import duke.exceptions.InvalidCommandException;
@@ -11,8 +13,6 @@ import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
-
-import java.util.ArrayList;
 
 /**
  * Stores the current list of tasks.
@@ -44,10 +44,11 @@ public class TaskList {
 
     /**
      * Adds a task to the list based on user input.
+     *
      * @param s User input
      * @throws InvalidCommandException If command is not valid.
-     * @throws EmptyCommandException If task is missing description.
-     * @throws MissingTimeException If task is missing time.
+     * @throws EmptyCommandException   If task is missing description.
+     * @throws MissingTimeException    If task is missing time.
      */
     public void addTask(String s) throws InvalidCommandException, EmptyCommandException, MissingTimeException {
         String str = s.trim();
@@ -102,8 +103,9 @@ public class TaskList {
 
     /**
      * Finds and displays tasks containing the relevant keyword
+     *
      * @param str The keyword the user is searching for.
-     * @throws EmptyFindException If there is no keyword given.
+     * @throws EmptyFindException      If there is no keyword given.
      * @throws InvalidCommandException If command is not valid.
      */
     public void find(String str) throws EmptyFindException, InvalidCommandException {
@@ -115,7 +117,7 @@ public class TaskList {
             int i = 1;
             boolean flag = false;
             //search if there are any matching tasks
-            for (Task t: tasks) {
+            for (Task t : tasks) {
                 if (t.getDescription().contains(keyword)) {
                     flag = true;
                     break;
@@ -139,6 +141,7 @@ public class TaskList {
 
     /**
      * Completes the task at the position in the list which the user specifies.
+     *
      * @param str User input
      * @throws TaskCompletionException If the number is out of range of the list.
      */
@@ -161,6 +164,7 @@ public class TaskList {
 
     /**
      * Deletes the task at the position in the list which the user specifies.
+     *
      * @param str User input
      * @throws TaskDeletionException If the number is out of range of the list.
      */

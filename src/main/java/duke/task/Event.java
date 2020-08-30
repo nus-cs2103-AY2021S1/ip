@@ -14,6 +14,7 @@ public class Event extends TimedTask {
 
     /**
      * Loads an Event from its stored form.
+     *
      * @param str String representing the task in the storage file.
      * @return The corresponding Event.
      */
@@ -30,5 +31,6 @@ public class Event extends TimedTask {
     public String store() {
         return "E|" + super.store() + "|" + this.dateTime;
     }
-
 }
+
+

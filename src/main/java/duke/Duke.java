@@ -1,8 +1,8 @@
 package duke;
 
-import duke.exceptions.DukeException;
-
 import java.util.Scanner;
+
+import duke.exceptions.DukeException;
 
 /**
  * The main program of Duke.
