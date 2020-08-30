@@ -2,6 +2,8 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import duke.ToDo;
+
 public class ToDoTest {
     ToDo toDo = new ToDo("Test ToDo");
 

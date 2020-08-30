@@ -1,3 +1,5 @@
+package duke;
+
 /**
  * Inherits from the Task class. Represents a to do task.
  * ToDo object stores task description and done status. A ToDo object is marked as not done by default.

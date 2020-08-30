@@ -1,3 +1,5 @@
+package duke;
+
 public enum ExceptionType {
     EMPTY_INPUT,
     INVALID_COMMAND,

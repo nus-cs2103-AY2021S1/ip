@@ -1,3 +1,5 @@
+package duke;
+
 public class DukeException extends Exception {
     protected final String MESSAGE_ALL_TASKS_EMPTY_INPUT = "    I am sorry my Lord. "
             + "You have to give a command.\n";
