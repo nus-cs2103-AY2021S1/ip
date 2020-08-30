@@ -1,8 +1,8 @@
-package main.java.command;
+package command;
 
-import main.java.storage.Storage;
-import main.java.task.TaskList;
-import main.java.ui.Ui;
+import storage.Storage;
+import task.TaskList;
+import ui.Ui;
 
 /**
  * HelpCommand would execute the program when user specify

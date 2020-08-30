@@ -1,11 +1,11 @@
-package main.java.storage;
+package storage;
 
-import main.java.parser.Parser;
-import main.java.task.DeadlineTask;
-import main.java.task.EventTask;
-import main.java.task.Task;
-import main.java.task.TaskList;
-import main.java.task.TodoTask;
+import parser.Parser;
+import task.DeadlineTask;
+import task.EventTask;
+import task.Task;
+import task.TaskList;
+import task.TodoTask;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -60,7 +60,7 @@ public class Storage {
      * various type of Task object (based on the data), and return
      * a list of task.
      *
-     * @return List<Task> Returns a list of type Task.
+     * @return List(Task) Returns a list of type Task.
      * @throws FileNotFoundException This exception would be thrown if
      * the specified file was not found in user's local.
      */

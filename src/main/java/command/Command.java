@@ -1,13 +1,13 @@
-package main.java.command;
+package command;
 
-import main.java.exception.AnonymousException;
-import main.java.exception.DescriptionException;
-import main.java.exception.DukeDateTimeParserException;
-import main.java.exception.DukeKeywordException;
-import main.java.exception.NoIndexException;
-import main.java.storage.Storage;
-import main.java.task.TaskList;
-import main.java.ui.Ui;
+import exception.AnonymousException;
+import exception.DescriptionException;
+import exception.DukeDateTimeParserException;
+import exception.DukeKeywordException;
+import exception.NoIndexException;
+import storage.Storage;
+import task.TaskList;
+import ui.Ui;
 
 import java.io.IOException;
 

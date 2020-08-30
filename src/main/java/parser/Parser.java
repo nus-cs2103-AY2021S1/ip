@@ -1,28 +1,28 @@
-package main.java.parser;
+package parser;
 
-import main.java.command.Command;
-import main.java.command.DeadlineCommand;
-import main.java.command.DeleteAllCommand;
-import main.java.command.DeleteCommand;
-import main.java.command.DoneAllCommand;
-import main.java.command.DoneCommand;
-import main.java.command.EventCommand;
-import main.java.command.ExitCommand;
-import main.java.command.HelpCommand;
-import main.java.command.ListCommand;
-import main.java.command.ShowAfterCommand;
-import main.java.command.ShowBeforeCommand;
-import main.java.command.TodoCommand;
-import main.java.command.WrongCommand;
-import main.java.command.FindCommand;
-import main.java.exception.DescriptionException;
-import main.java.exception.DukeDateTimeParserException;
-import main.java.exception.DukeKeywordException;
-import main.java.exception.NoIndexException;
-import main.java.task.DeadlineTask;
-import main.java.task.EventTask;
-import main.java.task.Task;
-import main.java.task.TodoTask;
+import command.Command;
+import command.DeadlineCommand;
+import command.DeleteAllCommand;
+import command.DeleteCommand;
+import command.DoneAllCommand;
+import command.DoneCommand;
+import command.EventCommand;
+import command.ExitCommand;
+import command.HelpCommand;
+import command.ListCommand;
+import command.ShowAfterCommand;
+import command.ShowBeforeCommand;
+import command.TodoCommand;
+import command.WrongCommand;
+import command.FindCommand;
+import exception.DescriptionException;
+import exception.DukeDateTimeParserException;
+import exception.DukeKeywordException;
+import exception.NoIndexException;
+import task.DeadlineTask;
+import task.EventTask;
+import task.Task;
+import task.TodoTask;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -182,11 +182,11 @@ public class Parser {
     }
 
     /**
-     * This method would return Map<String,String> that contains task's description and
+     * This method would return Map(String,String) that contains task's description and
      * task's date-time. Usually used by DeadlineCommand and EventCommand.
      *
      * @param input user command.
-     * @return Map<String,String> Returns map that contains task's description and task's date-time.
+     * @return Map (String,String) Returns map that contains task's description and task's date-time.
      * @throws DescriptionException This exception is thrown when user forget to specify
      * either the task description or the date-time.
      */

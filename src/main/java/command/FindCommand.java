@@ -1,12 +1,12 @@
-package main.java.command;
+package command;
 
 
-import main.java.exception.DukeKeywordException;
-import main.java.parser.Parser;
-import main.java.storage.Storage;
-import main.java.task.Task;
-import main.java.task.TaskList;
-import main.java.ui.Ui;
+import exception.DukeKeywordException;
+import parser.Parser;
+import storage.Storage;
+import task.Task;
+import task.TaskList;
+import ui.Ui;
 
 /**
  * FindCommand executes when use specify "find" in the command.
@@ -18,7 +18,7 @@ public class FindCommand extends Command{
     /**
      * Constructs a new FindCommand with the specified
      * user command.
-     * @param command
+     * @param command String user command
      */
     public FindCommand(String command) {
         this.command = command;

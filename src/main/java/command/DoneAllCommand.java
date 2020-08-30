@@ -1,9 +1,9 @@
-package main.java.command;
+package command;
 
-import main.java.storage.Storage;
-import main.java.task.Task;
-import main.java.task.TaskList;
-import main.java.ui.Ui;
+import storage.Storage;
+import task.Task;
+import task.TaskList;
+import ui.Ui;
 
 import java.io.IOException;
 
