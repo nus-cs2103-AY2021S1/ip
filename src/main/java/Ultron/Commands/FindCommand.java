@@ -3,6 +3,8 @@ package ultron.commands;
 import ultron.Storage;
 import ultron.TaskList;
 import ultron.UI;
+import ultron.exceptions.ExceptionType;
+import ultron.exceptions.UltronException;
 import ultron.tasks.Task;
 
 public class FindCommand extends Command {
@@ -26,12 +28,15 @@ public class FindCommand extends Command {
     @Override
     public void execute(final TaskList taskList,
                         final UI ui,
-                        final Storage storage) {
+                        final Storage storage) throws UltronException {
 
+        if (getArguments().length() == 0) {
+            throw new UltronException("find", getArguments(), ExceptionType.NO_ARGUMENTS_SUPPLIED);
+        }
         boolean printed = false;
         int count = 1;
         StringBuilder message = new StringBuilder();
-        ui.print("Why do you always bothering me?\n");
+        message.append("Why do you always bothering me?\n");
         for (Task task : taskList.getList()) {
             if (task.getMessage().contains(getArguments())) {
                 message.append((String.format("%d. %s\n", count++, task.toString())));
