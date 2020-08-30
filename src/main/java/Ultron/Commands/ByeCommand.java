@@ -40,6 +40,7 @@ public final class ByeCommand extends Command {
         //Save the storage
         storage.writeAll(taskList.getList());
 
-        ui.printEnd();
+        //Close the application
+        Platform.exit();
     }
 }

@@ -12,12 +12,12 @@ public final class Event extends Task {
      * Store the regex for parsing the command for event.
      */
     private static final Pattern DATE_MATCH =
-            Pattern.compile("^(.*) (/at) (.*)$");
+        Pattern.compile("^(.*) (/at) (.*)$");
     /**
      * Store the date format regex.
      */
     private static final DateFormat DATE_FORMAT =
-            new SimpleDateFormat("dd-MM-yyyy HHmm");
+        new SimpleDateFormat("dd-MM-yyyy HHmm");
     /**
      * Index of the group to get the name of the task.
      */
@@ -140,7 +140,7 @@ public final class Event extends Task {
     @Override
     public String toString() {
         return "[E]"
-                + super.toString()
-                + String.format(" (at: %s)", this.getDate());
+            + super.toString()
+            + String.format(" (at: %s)", this.getDate());
     }
 }

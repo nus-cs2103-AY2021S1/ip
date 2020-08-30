@@ -14,12 +14,12 @@ public final class Deadline extends Task {
      * Pattern string the regex for parsing the command.
      */
     private static final Pattern DATE_MATCH =
-            Pattern.compile("^(.*) (/by) (.*)$");
+        Pattern.compile("^(.*) (/by) (.*)$");
     /**
      * Pattern string for the regex for the date.
      */
     private static final DateFormat DATE_FORMAT =
-            new SimpleDateFormat("dd-MM-yyyy HHmm");
+        new SimpleDateFormat("dd-MM-yyyy HHmm");
     /**
      * Index of the group to get the name of the task.
      */
@@ -125,7 +125,7 @@ public final class Deadline extends Task {
     @Override
     public String toString() {
         return "[D]"
-                + super.toString()
-                + String.format(" (by: %s)", this.getDate());
+            + super.toString()
+            + String.format(" (by: %s)", this.getDate());
     }
 }

@@ -104,7 +104,7 @@ public abstract class Task {
 
         //Convert the object to string
         return String.format("[%s] %s",
-                this.getStatusIcon(),
-                this.getMessage());
+            this.getStatusIcon(),
+            this.getMessage());
     }
 }

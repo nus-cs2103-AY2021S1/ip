@@ -48,7 +48,7 @@ public final class Storage {
          * @return String containing the command
          */
         return String.format("%s~%d~%s", task.getType(),
-                task.isDone() ? 1 : 0, task.getCommand());
+            task.isDone() ? 1 : 0, task.getCommand());
     }
 
     /**
@@ -111,7 +111,7 @@ public final class Storage {
      * @throws UltronException If there are any IO errors
      */
     public void writeAll(final ArrayList<Task> taskArrayList)
-            throws UltronException {
+        throws UltronException {
 
         //Check if the directory exist
         if (!f.exists()) {
@@ -119,7 +119,7 @@ public final class Storage {
                 Files.createDirectory(Path.of(f.getParent()));
             } catch (IOException e) {
                 throw new UltronException(f.getPath(),
-                        ExceptionType.DIRECTORY_NOT_CREATED);
+                    ExceptionType.DIRECTORY_NOT_CREATED);
             }
         }
 

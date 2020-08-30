@@ -8,6 +8,7 @@ public final class UI {
      * Store the scanner object.
      */
     private final Scanner scanner;
+    private String string;
 
     /**
      * UI to handle all the displaying.
@@ -16,6 +17,7 @@ public final class UI {
 
         //Create a new scanner object
         scanner = new Scanner(System.in);
+        setIntro();
     }
 
     /**
@@ -26,9 +28,9 @@ public final class UI {
     public void showError(final String message) {
         //Wrapper when printing the error message
         System.out.println("Heh, you can't even type in a correct command\n"
-                + message
-                + "\nI'll give u a pity tip\n"
-                + "Use 'help' for more information");
+            + message
+            + "\nI'll give u a pity tip\n"
+            + "Use 'help' for more information");
     }
 
     /**
@@ -54,7 +56,21 @@ public final class UI {
      * @param argument message to be printed
      */
     public void print(final String argument) {
-        System.out.print(argument);
+        System.out.println(argument);
+    }
+
+    /**
+     * Get the message that is currently stored
+     */
+    public String getMessage() {
+        return getLine() + string + getLine();
+    }
+
+    /**
+     * Set the message to be shown in gui.
+     */
+    public void setMessage(final String argument) {
+        string = argument;
     }
 
     /**
@@ -62,7 +78,32 @@ public final class UI {
      */
     public void printEnd() {
         // Print the end message
-        System.out.println("Clearly you were not worth my time.");
+        print(getEnd());
+    }
+
+    /**
+     * Set the end message.
+     */
+    public void setEnd() {
+        setMessage("Clearly you were not worth my time.");
+    }
+
+    /**
+     * Set the intro message
+     */
+    public void setIntro() {
+        setMessage(getIntro());
+    }
+
+    public static String getIntro() {
+
+        //Print the intro
+        return "Hello lesser being, I am Ultron\n"
+            + "What do you want?\n";
+    }
+
+    private String getEnd() {
+        return "Clearly you were not worth my time.\n";
     }
 
     /**
@@ -70,28 +111,22 @@ public final class UI {
      */
     public void printIntro() {
         // Print the intro messages
+        print(getIntro());
+    }
 
-        //Logo for the mascot
-        String logo = "  _    _ _ _                   \n"
-                + " | |  | | | |                  \n"
-                + " | |  | | | |_ _ __ ___  _ __  \n"
-                + " | |  | | | __| '__/ _ \\| '_ \\ \n"
-                + " | |__| | | |_| | | (_) | | | |\n"
-                + "  \\____/|_|\\__|_|  \\___/|_| |_|\n";
-
-        //Print the intro
-        System.out.println(logo);
-        showLine();
-        System.out.println("Hello lesser being, I am Ultron\n"
-                + "What do you want?\n");
-        showLine();
+    /**
+     * Get the new line separator.
+     *
+     * @return String newline seperator
+     */
+    private String getLine() {
+        return "";
     }
 
     /**
      * Prints the new line separator.
      */
     public void showLine() {
-        System.out.println("_______________________________"
-                + "_____________________________\n");
+        print(getLine());
     }
 }

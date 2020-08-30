@@ -15,14 +15,13 @@ import ultron.exceptions.ExceptionType;
 import ultron.exceptions.UltronException;
 
 
-
 public final class Parser {
 
     /**
      * The regex pattern for checking the commands and inputs.
      */
     private static final Pattern PATTERN =
-            Pattern.compile("(^\\s?\\w+\\b) ?(.*)?$");
+        Pattern.compile("(^\\s?\\w+\\b) ?(.*)?$");
 
     private Parser() {
     }
@@ -37,7 +36,7 @@ public final class Parser {
      */
     private static Command checkInput(final String command,
                                       final String arguments)
-            throws UltronException {
+        throws UltronException {
 
         //Switch case to process the commands
         switch (command) {
@@ -100,7 +99,7 @@ public final class Parser {
      * @throws UltronException
      */
     public static Command parseCommand(final String input)
-            throws UltronException {
+        throws UltronException {
         //Use regex to get the grp
         Matcher inputs = PATTERN.matcher(input);
 

@@ -6,12 +6,10 @@ import ultron.commands.Command;
 import ultron.exceptions.UltronException;
 
 public final class Ultron {
-
     /**
      * Store the UI class.
      */
     private final UI ui;
-
     /**
      * Store the Storage.
      */
@@ -23,12 +21,9 @@ public final class Ultron {
 
     /**
      * The Ultron class.
-     *
-     * @param path path to the datafile which stores the tasks
      */
-    public Ultron(final String path) {
-
-        //Create the Storage object
+    public Ultron() {
+        String path = "data/data.txt";
         storage = new Storage(path);
 
         try {
@@ -48,18 +43,13 @@ public final class Ultron {
     }
 
     /**
-     * Entry point of the code.
+     * Main function for the CLI Version of Ultron
      *
-     * @param args Command line arguments provided
+     * @param args Command line arguments
      */
-    public static void main(final String[] args) {
-
-        //Create a new duke
-        Ultron ultron = new Ultron("data/data.txt");
-
-        //Run the main loop
+    public static void main(String[] args) {
+        Ultron ultron = new Ultron();
         ultron.mainLoop();
-
     }
 
     /**
@@ -86,4 +76,18 @@ public final class Ultron {
             }
         }
     }
+
+    public String getResponse(String input) {
+        try {
+            if (input == "showIntro") {
+                return ui.getMessage();
+            }
+            Command c = Parser.parseCommand(input);
+            c.execute(taskList, ui, storage);
+            return ui.getMessage();
+        } catch (UltronException e) {
+            return e.getMessage();
+        }
+    }
+
 }
