@@ -27,12 +27,13 @@ public class Add implements Executable {
      * @param tasks the list of tasks to append to
      * @param ui the ui object handling displays
      * @param store the storage object handling i/o
+     * @return output after running this command
      */
     @Override
-    public void run(TaskList tasks, Ui ui, Storage store) {
+    public String run(TaskList tasks, Ui ui, Storage store) {
         tasks.add(toAdd);
-        ui.display(ADDED_MESSAGE, "\t" + toAdd.toString(), TASK_COUNT_FRONT
-                + tasks.size() + TASK_COUNT_END);
         store.write(tasks);
+        return ui.output(ADDED_MESSAGE, "\t" + toAdd.toString(), TASK_COUNT_FRONT
+                + tasks.size() + TASK_COUNT_END);
     }
 }

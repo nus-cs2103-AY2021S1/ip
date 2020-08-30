@@ -10,5 +10,5 @@ import duke.task.TaskList;
 import duke.ui.Ui;
 
 public interface Executable {
-    public void run(TaskList tasks, Ui ui, Storage storage) throws DukeException;
+    String run(TaskList tasks, Ui ui, Storage storage) throws DukeException;
 }

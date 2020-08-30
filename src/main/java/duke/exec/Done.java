@@ -26,9 +26,10 @@ public class Done implements Executable {
      * @param tasks the list of tasks
      * @param ui the ui object handling displays
      * @param store the storage object handling i/o
+     * @return output after running this command
      */
     @Override
-    public void run(TaskList tasks, Ui ui, Storage store) throws DukeException {
+    public String run(TaskList tasks, Ui ui, Storage store) throws DukeException {
         Task toToggle = tasks.get(index);
 
         // if it is done, there is no need to set as done
@@ -37,7 +38,7 @@ public class Done implements Executable {
         }
 
         toToggle.setTaskAsDone();
-        ui.display(TOGGLE_MESSAGE, "\t" + toToggle.toString());
         store.write(tasks);
+        return ui.output(TOGGLE_MESSAGE, "\t" + toToggle.toString());
     }
 }
