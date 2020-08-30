@@ -48,6 +48,8 @@ public class TimedTask extends Task {
                 }
             }
         } catch (Exception e) {
+            this.hasTime = false;
+            this.hasDate = false;
         }
     }
 
@@ -61,11 +63,15 @@ public class TimedTask extends Task {
         if (hasDate) {
             if (hasTime) {
                 SimpleDateFormat dfFormat = new SimpleDateFormat("h:mm a");
-                return firstLetter + super.toString() + connecting + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " " + dfFormat.format(time) + ")";
+                return firstLetter + super.toString() + connecting
+                        + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " " + dfFormat.format(time) + ")";
             } else {
-                return firstLetter + super.toString() + connecting + date.format(DateTimeFormatter.ofPattern("MMM d yyyy"))  + time2 + ")";
+                //has date but not time
+                return firstLetter + super.toString() + connecting
+                        + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + time2 + ")";
             }
         } else {
+            //no date and no time
             return firstLetter + super.toString() + connecting + dateTime + ")";
         }
     }
