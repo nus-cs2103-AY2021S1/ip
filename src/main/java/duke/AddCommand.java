@@ -4,11 +4,11 @@ package duke;
  * Adds a task to the tasklist command.
  */
 public class AddCommand extends Command {
-    Task task;
+    private Task task;
 
     /**
      * AddCommand constructor.
-     * 
+     *
      * @param task task to be added to the tasklist.
      */
     public AddCommand(Task task) {
