@@ -14,15 +14,17 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (taskNumberToDelete > tasks.getSize() | taskNumberToDelete < 1) {
             throw new DukeException("There is no such task number.");
         } else {
             Task taskToDelete = tasks.deleteTask(this.taskNumberToDelete);
             String successfulMsg = "Noted. I've removed this task:\n" + taskToDelete;
             String remainingTasksMsg = "\nNow you have " + tasks.getSize() + " tasks in the list.";
-            ui.showMessage(successfulMsg + remainingTasksMsg);
+            String finalMsg = successfulMsg + remainingTasksMsg;
+            ui.showMessage(finalMsg);
             storage.save(tasks);
+            return finalMsg;
         }
     }
 }

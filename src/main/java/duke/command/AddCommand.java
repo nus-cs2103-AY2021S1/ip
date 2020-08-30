@@ -28,7 +28,7 @@ public class AddCommand extends Command{
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DateTimeParseException, DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DateTimeParseException, DukeException {
         Task newTask;
 
         switch (taskCategory) {
@@ -48,7 +48,9 @@ public class AddCommand extends Command{
         tasks.addTask(newTask);
         String successMsg = "Got it. I've added this task:\n" + newTask;
         String remainingTasksMsg = "\nNow you have " + tasks.getSize() + " tasks in the list.";
-        ui.showMessage(successMsg + remainingTasksMsg);
+        String finalMsg = successMsg + remainingTasksMsg;
+        ui.showMessage(finalMsg);
         storage.save(tasks);
+        return finalMsg;
     }
 }

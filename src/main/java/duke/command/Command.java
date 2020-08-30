@@ -13,7 +13,7 @@ public abstract class Command {
      * @param ui the frontend interface to communicate with the user.
      * @param storage the storage file to save and load tasks from.
      */
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
+    public abstract String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
 
     public Command() {
     };

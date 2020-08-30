@@ -14,15 +14,17 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         String[] tasksFound = tasks.findTasksToString(this.searchTerms);
         if (tasksFound.length > 0) {
             String listTasksFound = String.join("\n", tasksFound);
             String successfulMsg = "Here are the matching tasks in your list:\n" + listTasksFound;
             ui.showMessage(successfulMsg);
+            return successfulMsg;
         } else {
             String unsuccessfulMsg = "There were no matches to that term";
             ui.showMessage(unsuccessfulMsg);
+            return unsuccessfulMsg;
         }
     }
 }

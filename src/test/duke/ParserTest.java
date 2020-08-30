@@ -1,9 +1,5 @@
 package duke;
 
-import duke.Parser;
-import duke.Storage;
-import duke.TaskList;
-import duke.Ui;
 import duke.exception.DukeException;
 import org.junit.jupiter.api.Test;
 
