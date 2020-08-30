@@ -2,6 +2,7 @@ package duke;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
@@ -31,6 +32,8 @@ public class DialogBox extends HBox {
         displayPicture.setFitHeight(100.0);
 
         this.setAlignment(Pos.TOP_RIGHT);
+        this.setPadding(new Insets(0, 0, 15, 0));
+        this.setSpacing(10);
         this.getChildren().addAll(text, displayPicture);
     }
 

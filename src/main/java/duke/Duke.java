@@ -27,7 +27,7 @@ public class Duke extends Application {
     private Storage storage;
     private TaskList tasks;
 
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+    private Image user = new Image(this.getClass().getResourceAsStream("/images/Kenny.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
     private ScrollPane scrollPane;
@@ -197,8 +197,10 @@ public class Duke extends Application {
     }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Executes a command based on the user input, and returns an appropriate response.
+     *
+     * @param input A string representing the user input.
+     * @return A string representing the response upon the execution of the command.
      */
     private String getResponse(String input) {
         try {
