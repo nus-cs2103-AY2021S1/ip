@@ -21,7 +21,7 @@ public class Duke {
                 try {
                     String userCommand = sc.nextLine();
                     Command parsedCommand = parser.parseCommand(userCommand);
-                    parsedCommand.execute(taskList);
+                    parsedCommand.execute(taskList, storage);
                     isExit = parsedCommand.isExit();
                 } catch (DukeException e) {
                     Ui.errorMessage(e.getUiMessage());

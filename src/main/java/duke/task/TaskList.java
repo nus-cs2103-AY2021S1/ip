@@ -1,7 +1,6 @@
 package duke.task;
 
 import duke.Storage;
-import duke.Ui;
 import duke.exception.DateParseException;
 import duke.exception.InvalidTaskException;
 import duke.exception.StorageException;
@@ -45,73 +44,56 @@ public class TaskList {
         return newTaskList;
     }
 
-    public ArrayList<Task> getTaskList(){
-        return this.taskList;
-    }
-
-    public void printTasks(){
-        Ui.listMessage(this.taskList);
-    }
-
-    public void printTasksToday(){
-        Ui.todayMessage(this.taskList);
-    }
-
-    public void addTask(String taskName) throws StorageException {
+    public Task addTask(String taskName) throws StorageException {
         Todo newTodo = Todo.newTodo(taskName);
         this.taskList.add(newTodo);
-        Ui.addTaskMessage(newTodo, this.taskList.size());
-        appendTask(newTodo);
+        return newTodo;
     }
 
-    public void addTask(TaskType type, String taskName, LocalDate taskDate) throws StorageException {
+    public Task addTask(TaskType type, String taskName, LocalDate taskDate) throws InvalidTaskException {
         switch(type){
             case EVENT:
                 Event newEvent = Event.newEvent(taskName, taskDate);
                 this.taskList.add(newEvent);
-                Ui.addTaskMessage(newEvent, this.taskList.size());
-                appendTask(newEvent);
-                break;
+                return newEvent;
             case DEADLINE:
                 Deadline newDeadline = Deadline.newDeadline(taskName, taskDate);
                 this.taskList.add(newDeadline);
-                Ui.addTaskMessage(newDeadline, this.taskList.size());
-                appendTask(newDeadline);
-                break;
+                return newDeadline;
         }
+        // TODO: fix exception message
+        throw new InvalidTaskException("Unknown task added");
     }
 
-    public void completeTask(int index) throws InvalidTaskException, StorageException {
+    public Task completeTask(int index) throws InvalidTaskException, StorageException {
         if(index > this.taskList.size() || index <= 0) {
             throw new InvalidTaskException("Oh noes! I don't think you specified a valid task index :<");
         }
-        Task task = this.taskList.get(index - 1).markAsDone();
-        saveTasks();
-
-        Ui.doneTaskMessage(task);
+        return this.taskList.get(index - 1).markAsDone();
     }
 
-    public void deleteTask(int index) throws InvalidTaskException, StorageException {
+    public Task deleteTask(int index) throws InvalidTaskException, StorageException {
         if(index > this.taskList.size() || index <= 0) {
             throw new InvalidTaskException("Oh noes! I don't think you specified a valid task index :<");
         }
-
         Task task = this.taskList.get(index - 1);
         this.taskList.remove(index - 1);
-        saveTasks();
-
-        Ui.deleteTaskMessage(task, this.taskList.size());
+        return task;
     }
 
-    private void appendTask(Task t) throws StorageException {
-        this.storage.appendTaskStorage(t.toSaveString());
+    public ArrayList<Task> getTaskList(){
+        return this.taskList;
     }
 
-    private void saveTasks() throws StorageException {
+    public int taskListSize(){
+        return this.taskList.size();
+    }
+
+    public String getSaveString()  {
         StringBuilder saveString = new StringBuilder();
         for(Task task : this.taskList) {
             saveString.append(task.toSaveString());
         }
-        this.storage.writeTaskStorage(saveString.toString());
+        return(saveString.toString());
     }
 }

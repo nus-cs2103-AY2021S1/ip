@@ -1,7 +1,10 @@
 package duke.command;
 
+import duke.Storage;
+import duke.Ui;
 import duke.exception.InvalidTaskException;
 import duke.exception.StorageException;
+import duke.task.Task;
 import duke.task.TaskList;
 
 public class DoneCommand extends Command {
@@ -12,7 +15,9 @@ public class DoneCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList list) throws InvalidTaskException, StorageException {
-        list.completeTask(this.taskIndex);
+    public void execute(TaskList list, Storage storage) throws InvalidTaskException, StorageException {
+        Task doneTask = list.completeTask(this.taskIndex);
+        storage.writeTaskStorage(list.getSaveString());
+        Ui.doneTaskMessage(doneTask);
     }
 }

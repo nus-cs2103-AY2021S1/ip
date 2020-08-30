@@ -49,7 +49,6 @@ public class Storage {
         } catch (IOException e) {
             throw new StorageException("Oh noes! I can't seem to save this task ;A;");
         }
-
     }
 
     public void writeTaskStorage(String taskString) throws StorageException {
