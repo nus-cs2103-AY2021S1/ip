@@ -20,10 +20,6 @@ public class Storage {
         this.path = DEFAULT_STORAGE_FILEPATH;
     }
 
-    public Storage(String filepath) {
-        this.path = filepath;
-    }
-
     public ArrayList<Task> load() throws IOException {
         File f = new File(this.path);
         f.createNewFile();
