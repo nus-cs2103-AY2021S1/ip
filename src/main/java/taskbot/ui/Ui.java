@@ -1,75 +1,48 @@
 package taskbot.ui;
 
-import java.util.Scanner;
+import java.io.IOException;
+
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
+import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
+import javafx.scene.paint.Color;
+import javafx.stage.Stage;
+import taskbot.logic.Taskbot;
 
 /**
- * Handles user input and interactions.
+ * A GUI for TaskBot using FXML.
  */
-public class Ui {
-    private final String logo =
-            "___________              __   __________        __   \n"
-            + "\\__    ___/____    _____|  | _\\______   \\ _____/  |_ \n"
-            + "  |    |  \\__  \\  /  ___/  |/ /|    |  _//  _ \\   __\\\n"
-            + "  |    |   / __ \\_\\___ \\|    < |    |   (  <_> )  |  \n"
-            + "  |____|  (____  /____  >__|_ \\|______  /\\____/|__|  \n"
-            + "               \\/     \\/     \\/       \\/             ";
-    private final String name = "TaskBot";
-    private Scanner sc;
+public class Ui extends Application {
 
-    /**
-     * Creates a UI with a Scanner instance.
-     */
-    public Ui() {
-        sc = new Scanner(System.in);
-    }
+    private Taskbot taskbot = new Taskbot();
 
-    /**
-     * Prints the title to the console.
-     */
-    public void printTitle() {
-        System.out.println(logo);
-    }
+    @Override
+    public void start(Stage stage) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(Ui.class.getResource("/view/MainWindow.fxml"));
+            AnchorPane anchorPane = fxmlLoader.load();
+            Scene scene = new Scene(anchorPane);
 
-    /**
-     * Prints the greeting to the console.
-     */
-    public void greet() {
-        System.out.printf("Hello there, my name is %s.\nHow may I be of assistance today?\n", name);
-    }
+            // Setting up background
+            BackgroundFill backgroundFill = new BackgroundFill(Color.CORNFLOWERBLUE,
+                    CornerRadii.EMPTY, Insets.EMPTY);
+            Background background = new Background(backgroundFill);
+            anchorPane.setBackground(background);
 
-    /**
-     * Prints a farewell message to the console.
-     */
-    public void sayBye() {
-        System.out.println("Goodbye, I await your next visit.");
-    }
+            stage.setScene(scene);
+            stage.setResizable(false);
+            stage.setTitle("TaskBot");
 
-    /**
-     * Prints the error message to console.
-     *
-     * @param err The error message
-     */
-    public void showError(String err) {
-        System.out.println(err);
-    }
+            fxmlLoader.<MainWindow>getController().setTaskbot(taskbot);
 
-    /**
-     * Prints a line separator to console.
-     */
-    public void showLine() {
-        System.out.println("----------------------------------------------");
-    }
-
-    /**
-     * Accepts user input.
-     *
-     * @return The user input as a string, empty if no input.
-     */
-    public String readCommand() {
-        if (!sc.hasNextLine()) {
-            return "";
-        } else {
-            return sc.nextLine();
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }

@@ -1,7 +1,6 @@
 package taskbot.command;
 
 import taskbot.task.TaskList;
-import taskbot.ui.Ui;
 
 /**
  * Encapsulates a command to list all tasks.
@@ -15,8 +14,8 @@ public class ListCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList taskList, Ui ui) {
-        taskList.listTasks();
+    public String execute(TaskList taskList) {
+        return taskList.listTasks();
     }
 
     @Override

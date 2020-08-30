@@ -91,7 +91,7 @@ public class Parser {
         case "bye":
             return new ExitCommand();
         default:
-            throw new InvalidCommandException("That was not a valid command. Please try again.");
+            throw new InvalidCommandException("That was not a valid command.\nPlease try again.");
         }
     }
 }

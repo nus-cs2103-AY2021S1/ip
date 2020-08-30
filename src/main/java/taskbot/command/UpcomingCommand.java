@@ -1,7 +1,6 @@
 package taskbot.command;
 
 import taskbot.task.TaskList;
-import taskbot.ui.Ui;
 
 /**
  * Encapsulates a command to get upcoming tasks.
@@ -28,8 +27,8 @@ public class UpcomingCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList taskList, Ui ui) {
-        taskList.getUpcoming(days);
+    public String execute(TaskList taskList) {
+        return taskList.getUpcoming(days);
     }
 
     @Override

@@ -2,7 +2,6 @@ package taskbot.command;
 
 import taskbot.exceptions.TaskbotException;
 import taskbot.task.TaskList;
-import taskbot.ui.Ui;
 
 /**
  * Encapsulates a command to add an event task.
@@ -29,8 +28,8 @@ public class EventCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList taskList, Ui ui) throws TaskbotException {
-        taskList.addEventTask(task);
+    public String execute(TaskList taskList) throws TaskbotException {
+        return taskList.addEventTask(task);
     }
 
     @Override

@@ -46,12 +46,12 @@ public class TaskList {
 
     /**
      * Lists all the tasks.
+     * @return a String representing the list of tasks, or no tasks.
      */
-    public void listTasks() {
-        //If tasks list is empty
+    public String listTasks() {
+        //Checks if list is empty
         if (tasks.size() == 0) {
-            System.out.println("You currently have no tasks pending.");
-            return;
+            return "You currently have no tasks pending.";
         }
 
         StringBuilder sb = new StringBuilder("These are the following task(s) to complete:\n");
@@ -63,8 +63,8 @@ public class TaskList {
         }
         sb.append(size).append(". ").append(tasks.get(size - 1));
 
-        // Prints the string
-        System.out.print(sb.toString());
+        // Returns the list of tasks
+        return sb.toString();
     }
 
     /**
@@ -78,9 +78,11 @@ public class TaskList {
 
     /**
      * Adds a todo Task to the list
+     *
      * @param task The task to be added
+     * @return a String informing the task has been added.
      */
-    public void addTodoTask(String task) {
+    public String addTodoTask(String task) {
         // Makes a new todo task
         Todo newTask = new Todo(task);
         //Adds the new task to the list
@@ -90,18 +92,19 @@ public class TaskList {
             storage.setTasksList(tasks);
         }
         // Informs the user that the task has been added
-        System.out.println("I have added a Todo:\n" + newTask
-                + "\n" + listTaskSize());
+        return "I have added a Todo:\n" + newTask
+                + "\n" + listTaskSize();
     }
 
     /**
      * Adds an event Task to the list.
      *
      * @param input The task to be added followed by time.
+     * @return a String informing the task has been added.
      * @throws InvalidDateTimeException if the given date time argument has a wrong format.
      * @throws WrongFormatException if the given input does not match the required format for an event.
      */
-    public void addEventTask(String input) throws InvalidDateTimeException, WrongFormatException {
+    public String addEventTask(String input) throws InvalidDateTimeException, WrongFormatException {
         // Splits the input according to whitespace
         String[] parsedString = input.split("/at");
 
@@ -122,18 +125,19 @@ public class TaskList {
         }
 
         // Informs the user that the task has been added
-        System.out.println("I have added an Event:\n" + newTask
-                + "\n" + listTaskSize());
+        return "I have added an Event:\n" + newTask
+                + "\n" + listTaskSize();
     }
 
     /**
      * Adds a deadline Task to the list.
      *
      * @param input The task to be added followed by time.
+     * @return a String informing the task has been added.
      * @throws InvalidDateTimeException if the given date time argument has a wrong format.
      * @throws WrongFormatException if the given input does not match the required format for a deadline.
      */
-    public void addDeadlineTask(String input) throws InvalidDateTimeException, WrongFormatException {
+    public String addDeadlineTask(String input) throws InvalidDateTimeException, WrongFormatException {
         // Splits the input according to whitespace
         String[] parsedString = input.split("/by");
         if (parsedString.length != 2) {
@@ -155,8 +159,8 @@ public class TaskList {
         }
 
         // Informs the user that the task has been added
-        System.out.println("I have added a Deadline:\n" + newTask
-                + "\n" + listTaskSize());
+        return "I have added a Deadline:\n" + newTask
+                + "\n" + listTaskSize();
     }
 
     /**
@@ -178,10 +182,11 @@ public class TaskList {
      * Completes a task in the given index.
      *
      * @param taskIndex Index of the task in the list.
+     * @return a String informing the task has been completed.
      * @throws InvalidIndexException when the given index is not within the size of the list.
      * @throws TaskAlreadyCompleteException when the task to complete is already completed.
      */
-    public void completeTask(int taskIndex) throws InvalidIndexException, TaskAlreadyCompleteException {
+    public String completeTask(int taskIndex) throws InvalidIndexException, TaskAlreadyCompleteException {
         try {
             if (tasks.get(taskIndex).getStatusIcon().equals("\u2713")) {
                 throw new TaskAlreadyCompleteException("The specified task has already been completed.");
@@ -193,7 +198,7 @@ public class TaskList {
             }
             String message = "Understood. The following task is now marked as done:\n";
             message += "    " + tasks.get(taskIndex);
-            System.out.println(message);
+            return message;
         } catch (IndexOutOfBoundsException e) {
             throw new InvalidIndexException(
                     "You have specified an index not within the ranges of the list. Please try again.");
@@ -204,13 +209,13 @@ public class TaskList {
      * Deletes the task at the specified index.
      *
      * @param taskIndex Index of the task in the list.
+     * @return a String informing the task has been deleted.
      * @throws InvalidIndexException when the given index is not within the size of the list.
      */
-    public void deleteTask(int taskIndex) throws InvalidIndexException {
+    public String deleteTask(int taskIndex) throws InvalidIndexException {
         try {
             if (tasks.size() == 0) {
-                System.out.println("You currently have no tasks pending.");
-                return;
+                return "You currently have no tasks pending.";
             }
             String message = "Understood. The following task has been deleted.\n";
             message += "    " + tasks.get(taskIndex) + "\n";
@@ -220,7 +225,7 @@ public class TaskList {
                 storage.setTasksList(tasks);
             }
             message += listTaskSize();
-            System.out.println(message);
+            return message;
         } catch (IndexOutOfBoundsException e) {
             throw new InvalidIndexException(
                     "You have specified an index not within the ranges of the list. Please try again.");
@@ -232,12 +237,12 @@ public class TaskList {
      * Tasks without time limits are included as well.
      *
      * @param days Number of days ahead to check for tasks.
+     * @return a String containing tasks occuring in the upcoming days.
      */
-    public void getUpcoming(int days) {
+    public String getUpcoming(int days) {
         //If tasks is empty
         if (tasks.size() == 0) {
-            System.out.println("You currently have no tasks pending.");
-            return;
+            return "You currently have no tasks pending.\n";
         }
 
         StringBuilder sb = new StringBuilder("These are the following task(s) to complete:\n");
@@ -255,8 +260,8 @@ public class TaskList {
             }
             sb.append(i + 1).append(". ").append(task).append("\n");
         }
-        // Prints the list of tasks that fall within the time frame
-        System.out.print(sb.toString());
+        // Returns the list of tasks that fall within the time frame
+        return sb.toString();
     }
 
     /**
@@ -264,12 +269,12 @@ public class TaskList {
      * This method ignores casing.
      *
      * @param keywords Keywords within a task's description
+     * @return a String describing the tasks matching the keywords.
      */
-    public void findTasks(String[] keywords) {
+    public String findTasks(String[] keywords) {
         //If tasks is empty
         if (tasks.size() == 0) {
-            System.out.println("You currently have no tasks pending.");
-            return;
+            return "You currently have no tasks pending.\n";
         }
 
         StringBuilder sb = new StringBuilder("Here are the matching tasks in your list:\n");
@@ -292,15 +297,15 @@ public class TaskList {
 
         if (!found) {
             //Printed if no matches found
-            System.out.println("Sorry, that keyword did not return any results. Please try another.");
+            return "Sorry, that keyword did not return any results. Please try another.";
         } else {
             int counter = 1;
             for (String task : uniqueTasks) {
                 sb.append(counter).append(". ").append(task).append("\n");
                 counter++;
             }
-            //Prints the lists of tasks found matching the keyword
-            System.out.print(sb.toString());
+            //Returns the lists of tasks found matching the keyword
+            return sb.toString();
         }
     }
 }

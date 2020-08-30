@@ -2,7 +2,6 @@ package taskbot.command;
 
 import taskbot.exceptions.TaskbotException;
 import taskbot.task.TaskList;
-import taskbot.ui.Ui;
 
 /**
  * Encapsulates a command to delete a task.
@@ -29,8 +28,8 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList taskList, Ui ui) throws TaskbotException {
-        taskList.deleteTask(taskIndex);
+    public String execute(TaskList taskList) throws TaskbotException {
+        return taskList.deleteTask(taskIndex);
     }
 
     @Override

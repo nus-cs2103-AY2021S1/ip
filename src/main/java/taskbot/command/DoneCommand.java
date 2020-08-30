@@ -2,7 +2,6 @@ package taskbot.command;
 
 import taskbot.exceptions.TaskbotException;
 import taskbot.task.TaskList;
-import taskbot.ui.Ui;
 
 /**
  * Encapsulates a command to complete a task.
@@ -30,8 +29,8 @@ public class DoneCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList taskList, Ui ui) throws TaskbotException {
-        taskList.completeTask(taskIndex);
+    public String execute(TaskList taskList) throws TaskbotException {
+        return taskList.completeTask(taskIndex);
     }
 
     @Override

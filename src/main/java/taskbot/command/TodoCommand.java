@@ -1,7 +1,6 @@
 package taskbot.command;
 
 import taskbot.task.TaskList;
-import taskbot.ui.Ui;
 
 /**
  * Encapsulates a command to add a todo task.
@@ -25,8 +24,8 @@ public class TodoCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList taskList, Ui ui) {
-        taskList.addTodoTask(task);
+    public String execute(TaskList taskList) {
+        return taskList.addTodoTask(task);
     }
 
     @Override
