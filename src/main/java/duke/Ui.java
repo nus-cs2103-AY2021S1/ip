@@ -1,4 +1,4 @@
-package main.java;
+package duke;
 
 /**
  * Prints necessary output to user.

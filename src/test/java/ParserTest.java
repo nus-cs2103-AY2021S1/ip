@@ -1,5 +1,5 @@
-import main.java.Parser;
-import main.java.TaskList;
+import duke.Parser;
+import duke.TaskList;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;

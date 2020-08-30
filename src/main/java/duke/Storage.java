@@ -1,8 +1,8 @@
-package main.java;
+package duke;
 
-import main.java.Task.Deadline;
-import main.java.Task.Event;
-import main.java.Task.Task;
+import duke.Task.Deadline;
+import duke.Task.Event;
+import duke.Task.Task;
 
 import java.io.BufferedReader;
 import java.io.File;

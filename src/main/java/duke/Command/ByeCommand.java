@@ -1,7 +1,7 @@
-package main.java.Command;
+package duke.Command;
 
-import main.java.TaskList;
-import main.java.Ui;
+import duke.TaskList;
+import duke.Ui;
 
 /**
  * Represents command to leave conversation.

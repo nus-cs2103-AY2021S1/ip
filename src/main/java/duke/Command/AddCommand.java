@@ -1,10 +1,10 @@
-package main.java.Command;
+package duke.Command;
 
-import main.java.Task.Event;
-import main.java.Task.Deadline;
-import main.java.Task.Task;
-import main.java.TaskList;
-import main.java.Ui;
+import duke.Task.Event;
+import duke.Task.Deadline;
+import duke.Task.Task;
+import duke.TaskList;
+import duke.Ui;
 
 import java.time.DateTimeException;
 import java.time.LocalDate;

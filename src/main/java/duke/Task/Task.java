@@ -1,6 +1,6 @@
-package main.java.Task;
+package duke.Task;
 
-import main.java.Ui;
+import duke.Ui;
 
 /**
  * Represents a Task that user wishes to add.

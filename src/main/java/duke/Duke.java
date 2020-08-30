@@ -1,7 +1,4 @@
-
-import main.java.TaskList;
-import main.java.Parser;
-import main.java.Ui;
+package duke;
 
 import java.util.Scanner;
 

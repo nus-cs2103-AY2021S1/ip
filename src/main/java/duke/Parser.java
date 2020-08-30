@@ -1,11 +1,11 @@
-package main.java;
+package duke;
 
-import main.java.Command.AddCommand;
-import main.java.Command.ListCommand;
-import main.java.Command.DoneCommand;
-import main.java.Command.DeleteCommand;
-import main.java.Command.ByeCommand;
-import main.java.Command.Command;
+import duke.Command.AddCommand;
+import duke.Command.ListCommand;
+import duke.Command.DoneCommand;
+import duke.Command.DeleteCommand;
+import duke.Command.ByeCommand;
+import duke.Command.Command;
 
 import java.util.zip.DataFormatException;
 /**

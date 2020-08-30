@@ -1,6 +1,6 @@
-package main.java.Command;
+package duke.Command;
 
-import main.java.TaskList;
+import duke.TaskList;
 
 /**
  * Represents command to list all current tasks.

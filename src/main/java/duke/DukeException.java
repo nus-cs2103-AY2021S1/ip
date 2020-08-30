@@ -1,4 +1,4 @@
-package main.java;
+package duke;
 
 class DukeGotNoArgumentsException extends IllegalArgumentException {
     public DukeGotNoArgumentsException(String message) {
