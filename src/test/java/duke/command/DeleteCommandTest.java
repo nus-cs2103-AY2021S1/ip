@@ -6,11 +6,11 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 import org.junit.jupiter.api.Test;
 
+import duke.component.CliUi;
 import duke.component.Parser;
 import duke.component.Storage;
 import duke.component.StorageStub;
 import duke.component.TaskList;
-import duke.component.CliUi;
 import duke.task.Task;
 import duke.task.ToDo;
 

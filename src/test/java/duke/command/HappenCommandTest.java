@@ -9,10 +9,10 @@ import java.time.format.DateTimeFormatter;
 
 import org.junit.jupiter.api.Test;
 
+import duke.component.CliUi;
 import duke.component.Storage;
 import duke.component.StorageStub;
 import duke.component.TaskList;
-import duke.component.CliUi;
 import duke.task.Deadline;
 import duke.task.Event;
 

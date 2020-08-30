@@ -5,10 +5,10 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import org.junit.jupiter.api.Test;
 
+import duke.component.CliUi;
 import duke.component.Storage;
 import duke.component.StorageStub;
 import duke.component.TaskList;
-import duke.component.CliUi;
 import duke.task.Task;
 import duke.task.ToDo;
 
