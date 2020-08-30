@@ -61,12 +61,10 @@ public class Storage {
         char firstChar = line.charAt(0);
         switch (firstChar) {
             case 'D':
-                int len = words[3].length();
-                return new Deadline(words[2], words[3].toString().substring(0,len - 1),
+                return new Deadline(words[2], words[3],
                         words[1].equals("1"));
             case 'E':
-                int len2 = words[3].length();
-                return new Event(words[2], words[3].toString().substring(0, len2 - 1),
+                return new Event(words[2], words[3],
                         words[1].equals("1"));
             default:
                 return new Todo(words[2], words[1].equals("1"));

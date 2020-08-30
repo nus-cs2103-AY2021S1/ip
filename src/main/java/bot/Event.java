@@ -20,7 +20,9 @@ public class Event extends Task {
 
     @Override
     public String toFileFormat() {
-        return "E" + " | " + super.toFileFormat() + " | " + this.timePeriod + "\n";
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        return "E" + " | " + super.toFileFormat() + " | " + this.timePeriod.format(formatter)
+                + "\n";
     }
 
     @Override

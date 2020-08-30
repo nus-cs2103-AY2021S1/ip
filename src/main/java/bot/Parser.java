@@ -58,19 +58,24 @@ public class Parser {
         StringBuilder name = new StringBuilder();
         StringBuilder deadline = new StringBuilder();
         Boolean deadlineWords = false;
-        for (int i = 1; i < words.length; i++) {
-            if (words[i].equals("/by")) {
-                name.deleteCharAt(name.length() - 1);
-                deadlineWords = true;
-                i++;
+        try {
+            for (int i = 1; i < words.length; i++) {
+                if (words[i].equals("/by")) {
+                    name.deleteCharAt(name.length() - 1);
+                    deadlineWords = true;
+                    i++;
+                }
+                if (deadlineWords) {
+                    deadline.append(words[i]);
+                    deadline.append(" ");
+                } else {
+                    name.append(words[i]);
+                    name.append(" ");
+                }
             }
-            if (deadlineWords) {
-                deadline.append(words[i]);
-                deadline.append(" ");
-            } else {
-                name.append(words[i]);
-                name.append(" ");
-            }
+        } catch (Exception e) {
+            throw new InvalidInputException("Sorry, do what? Please give me a valid input." +
+                    " Thank you.");
         }
         if (name.length() == 0 || deadline.length() == 0) {
             throw new InvalidInputException("Sorry, do what? Please give me a valid input." +
@@ -95,19 +100,24 @@ public class Parser {
         StringBuilder name = new StringBuilder();
         StringBuilder deadline = new StringBuilder();
         Boolean deadlineWords = false;
-        for (int i = 1; i < words.length; i++) {
-            if (words[i].equals("/at")) {
-                name.deleteCharAt(name.length() - 1);
-                deadlineWords = true;
-                i++;
+        try{
+            for (int i = 1; i < words.length; i++) {
+                if (words[i].equals("/at")) {
+                    name.deleteCharAt(name.length() - 1);
+                    deadlineWords = true;
+                    i++;
+                }
+                if (deadlineWords) {
+                    deadline.append(words[i]);
+                    deadline.append(" ");
+                } else {
+                    name.append(words[i]);
+                    name.append(" ");
+                }
             }
-            if (deadlineWords) {
-                deadline.append(words[i]);
-                deadline.append(" ");
-            } else {
-                name.append(words[i]);
-                name.append(" ");
-            }
+        } catch (Exception e) {
+            throw new InvalidInputException("Sorry, do what? Please give me a valid input." +
+                    " Thank you.");
         }
         if (name.length() == 0 || deadline.length() == 0) {
             throw new InvalidInputException("Sorry, do what? Please give me a valid input." +
