@@ -26,7 +26,7 @@ public class Ui {
     }
 
     /**
-     * Printswelcome message.
+     * Prints welcome message.
      */
     public void showWelcome() {
         String logo = "  ____        _        \n"
@@ -39,7 +39,7 @@ public class Ui {
     }
 
     /**
-     * Printsthe string with dashes.
+     * Prints the string with dashes.
      *
      * @param str the str.
      */
@@ -50,7 +50,7 @@ public class Ui {
     }
 
     /**
-     * Printsdashes.
+     * Prints dashes.
      */
     private void printDashes() {
         int length = 60;
@@ -58,7 +58,7 @@ public class Ui {
     }
 
     /**
-     * Printsexit message.
+     * Prints exit message.
      */
     public void printExitMessage() {
         String bye = "Bye. Hope to see you again soon!";
@@ -66,7 +66,7 @@ public class Ui {
     }
 
     /**
-     * Printsadd task.
+     * Prints add task.
      *
      * @param task   the task.
      * @param length the length of the tasks.
@@ -79,7 +79,7 @@ public class Ui {
     }
 
     /**
-     * Printslist.
+     * Prints list.
      *
      * @param tasks the tasks.
      */
@@ -103,7 +103,7 @@ public class Ui {
     }
 
     /**
-     * Printstasks found with the date.
+     * Prints tasks found with the date.
      *
      * @param localDate the date.
      * @param list      the list.
@@ -111,7 +111,7 @@ public class Ui {
     public void printFound(LocalDate localDate, ArrayList<Task> list) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy");
         String formattedDate = localDate.format(formatter);
-        if (list.size() == 0) {
+        if (list.isEmpty()) {
             String message = String.format(" I couldn't find anything on %s.", formattedDate);
             printWithDashes(message);
         } else {
@@ -122,13 +122,13 @@ public class Ui {
     }
 
     /**
-     * Printstasks found with the description.
+     * Prints tasks found with the description.
      *
      * @param description the description.
      * @param list        the list.
      */
     public void printFound(String description, ArrayList<Task> list) {
-        if (list.size() == 0) {
+        if (list.isEmpty()) {
             String message = String.format(" I couldn't find anything matching %s.", description);
             printWithDashes(message);
         } else {
@@ -139,7 +139,7 @@ public class Ui {
     }
 
     /**
-     * Printsmark task as done.
+     * Prints mark task as done.
      *
      * @param task the task.
      */
@@ -148,7 +148,7 @@ public class Ui {
     }
 
     /**
-     * Printsdelete task.
+     * Prints delete task.
      *
      * @param task   the task.
      * @param length the length of the tasks.
@@ -160,7 +160,7 @@ public class Ui {
     }
 
     /**
-     * Printsduke exception.
+     * Prints duke exception.
      *
      * @param ex the exception.
      */
@@ -180,5 +180,12 @@ public class Ui {
             this.scanner.close();
             return "bye";
         }
+    }
+
+    /**
+     * Closes the scanner.
+     */
+    public void closeScanner() {
+        this.scanner.close();
     }
 }

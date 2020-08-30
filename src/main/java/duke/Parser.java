@@ -26,6 +26,12 @@ import duke.task.Todo;
  * The Parser deals with making sense of the user command.
  */
 public class Parser {
+
+    /**
+     * The constant minStringLength.
+     */
+    private static final int minStringLength = 1;
+
     /**
      * Returns the command after parsing the input.
      *
@@ -76,7 +82,7 @@ public class Parser {
             throw new EmptyInputException("The task to be marked as done is not specified.");
         }
 
-        if (taskIndexStr.length() < 1) {
+        if (taskIndexStr.length() < minStringLength) {
             throw new EmptyInputException("The task to be marked as done is not specified.");
         }
 
@@ -107,7 +113,7 @@ public class Parser {
             throw new EmptyInputException("The task to be deleted is not specified.");
         }
 
-        if (taskIndexStr.length() < 1) {
+        if (taskIndexStr.length() < minStringLength) {
             throw new EmptyInputException("The task to be deleted is not specified.");
         }
 
@@ -134,7 +140,7 @@ public class Parser {
         }
 
         String description = input.substring(5).trim();
-        if (description.length() < 1) {
+        if (description.length() < minStringLength) {
             throw new EmptyTaskException("description", TaskType.TODO);
         }
 
@@ -158,12 +164,12 @@ public class Parser {
         }
 
         String description = input.substring(6, slashIndex).trim();
-        if (description.length() < 1) {
+        if (description.length() < minStringLength) {
             throw new EmptyTaskException("description", TaskType.EVENT);
         }
 
         String dateStr = input.substring(slashIndex + 3).trim();
-        if (dateStr.length() < 1) {
+        if (dateStr.length() < minStringLength) {
             throw new EmptyTaskException("date", TaskType.EVENT);
         }
 
@@ -195,12 +201,12 @@ public class Parser {
         }
 
         String description = input.substring(9, slashIndex).trim();
-        if (description.length() < 1) {
+        if (description.length() < minStringLength) {
             throw new EmptyTaskException("description", TaskType.DEADLINE);
         }
 
         String deadlineStr = input.substring(slashIndex + 3).trim();
-        if (deadlineStr.length() < 1) {
+        if (deadlineStr.length() < minStringLength) {
             throw new EmptyTaskException("date", TaskType.DEADLINE);
         }
 
@@ -233,7 +239,7 @@ public class Parser {
             throw new EmptyInputException("The date to be searched is not specified.");
         }
 
-        if (dateStr.length() < 1) {
+        if (dateStr.length() < minStringLength) {
             throw new EmptyInputException("The date to be searched is not specified.");
         }
 
@@ -263,7 +269,7 @@ public class Parser {
             throw new EmptyInputException("The task to be searched is not specified.");
         }
 
-        if (itemStr.length() < 1) {
+        if (itemStr.length() < minStringLength) {
             throw new EmptyInputException("The task to be searched is not specified.");
         }
 

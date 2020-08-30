@@ -51,6 +51,7 @@ public class Event extends Task {
      *
      * @return the data.
      */
+    @Override
     public String getData() {
         return String.format("%s_%s ", super.getData(), date);
     }

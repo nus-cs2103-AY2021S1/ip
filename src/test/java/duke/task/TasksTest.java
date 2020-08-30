@@ -28,10 +28,19 @@ public class TasksTest {
      */
     private Tasks createTasks() {
         Tasks tasks = new Tasks();
-        tasks.addTask(new Todo("todo"));
+        tasks.addTask(createTodo());
         tasks.addTask(new Deadline("deadline", LocalDate.parse("2020-02-12")));
         tasks.addTask(new Event("event", LocalDate.parse("2020-04-12")));
         return tasks;
+    }
+
+    /**
+     * Returns a todo.
+     *
+     * @return the todo.
+     */
+    private Task createTodo() {
+        return new Todo("todo");
     }
 
     /**
@@ -41,7 +50,7 @@ public class TasksTest {
      */
     @Test
     public void testGetTask_success() throws IndexOutOfBoundsException {
-        assertEquals(new Todo("todo").toString(), createTasks().getTask(0).toString());
+        assertEquals(createTodo().toString(), createTasks().getTask(0).toString());
     }
 
     /**
@@ -70,7 +79,7 @@ public class TasksTest {
      */
     @Test
     public void testGetData() {
-        String expected = new Todo("todo").getData() + "\n";
+        String expected = createTodo().getData() + "\n";
         expected += new Deadline("deadline", LocalDate.parse("2020-02-12")).getData() + "\n";
         expected += new Event("event", LocalDate.parse("2020-04-12")).getData() + "\n";
         assertEquals(expected, createTasks().getData());

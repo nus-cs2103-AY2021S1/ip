@@ -35,6 +35,7 @@ public class TaskCommand extends Command {
      * @param storage loads and save tasks.
      * @throws SaveTaskFailedException If the task cannot be saved.
      */
+    @Override
     public void execute(Tasks tasks, Ui ui, Storage storage) throws SaveTaskFailedException {
         tasks.addTask(this.task);
         try {

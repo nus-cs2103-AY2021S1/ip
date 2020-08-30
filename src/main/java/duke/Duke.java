@@ -48,13 +48,11 @@ public class Duke {
      * @throws ReadFailedException If reading the data failed.
      */
     private static Storage initialiseStorage(String filePath) throws ReadFailedException {
-        Storage storage;
         try {
-            storage = new Storage(filePath);
+            return new Storage(filePath);
         } catch (IOException ex) {
             throw new ReadFailedException("data");
         }
-        return storage;
     }
 
     /**
@@ -85,5 +83,6 @@ public class Duke {
                 this.ui.printDukeException(ex);
             }
         }
+        this.ui.closeScanner();
     }
 }

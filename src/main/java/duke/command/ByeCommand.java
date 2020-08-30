@@ -9,11 +9,6 @@ import duke.task.Tasks;
  */
 public class ByeCommand extends Command {
     /**
-     * The constant EXIT_STATUS.
-     */
-    private static final int EXIT_STATUS = 0;
-
-    /**
      * Instantiates a new Bye command.
      */
     public ByeCommand() {
@@ -27,8 +22,8 @@ public class ByeCommand extends Command {
      * @param ui      interacts with user.
      * @param storage loads and save tasks.
      */
+    @Override
     public void execute(Tasks tasks, Ui ui, Storage storage) {
         ui.printExitMessage();
-        System.exit(EXIT_STATUS);
     }
 }
