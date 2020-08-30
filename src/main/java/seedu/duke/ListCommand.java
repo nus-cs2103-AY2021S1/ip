@@ -9,8 +9,8 @@ public class ListCommand extends Command {
     public void execute(TaskList ls, Ui ui) {
         ui.printResult("Here are the tasks in your list:");
 
-        for (Task t : ls.getList()) {
-            ui.printResult(((ls.indexOf(t) + 1) + ". " + t.getStatus()));
+        for (Task task : ls.getList()) {
+            ui.printResult(((ls.indexOf(task) + 1) + ". " + task.getStatus()));
         }
     }
 }

@@ -10,6 +10,7 @@ public class Parser {
         String toDoCommand = "todo";
         String deadlineCommand = "deadline";
         String eventCommand = "event";
+        String findCommand = "find";
 
         if (input.equals(listCommand)) {
             return new ListCommand();
@@ -23,6 +24,8 @@ public class Parser {
                 return new DoneCommand(words);
             } else if (words[0].equals(deleteCommand)) { // the case where a task is deleted
                 return new DeleteCommand(words);
+            } else if (words[0].equals(findCommand)) {
+                return new FindCommand(words);
             } else { // the case where tasks are added
                 if (words[0].equals(toDoCommand)) {
                     return new AddTodo(words);
