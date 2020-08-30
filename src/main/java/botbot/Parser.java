@@ -19,9 +19,22 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Represents a parser.
+ */
 public class Parser {
     private static final String NO_TIME_FLAG = String.format(" 0%.0f", Math.PI * Math.pow(10, 13));
-    
+
+    /**
+     * Parses the given user input into a command.
+     * 
+     * @param input Input to be parsed.
+     * @return Command parsed from input.
+     * @throws EmptyTaskException If no task description is provided when adding task to task list.
+     * @throws EmptyTaskNumberException If no task number is provided when deleting or marking task as done.
+     * @throws InvalidFormatException If input is of an invalid format.
+     * @throws NoSuchCommandException If input does not match any command.
+     */
     static Command parseCommand(String input) throws EmptyTaskException, EmptyTaskNumberException,
             InvalidFormatException, NoSuchCommandException {
         if (input.equals("bye")) {
@@ -70,14 +83,29 @@ public class Parser {
             throw new NoSuchCommandException();
         }
     }
-    
+
+    /**
+     * Parses the input for a task ID.
+     * 
+     * @param input Input to be parsed.
+     * @param command Command parsed from input.
+     * @return Task ID parsed from input.
+     */
     static int parseCommandId(String input, String command) {
         return Integer.parseInt(input.substring(command.length())) - 1;
     }
-    
-    public static LocalDateTime parseDateTime(String str, String identifier) throws DateTimeParseException {
-        int index = str.indexOf(identifier) + identifier.length() + 1;
-        String dateStr = str.substring(index).strip();
+
+    /**
+     * Parses the input for a date (and a time). 
+     * 
+     * @param input Input to be parsed.
+     * @param identifier Identifier which comes before the date.
+     * @return Date (and time) parsed from input.
+     * @throws DateTimeParseException If input does not follow expected datetime format.
+     */
+    public static LocalDateTime parseDateTime(String input, String identifier) throws DateTimeParseException {
+        int index = input.indexOf(identifier) + identifier.length() + 1;
+        String dateStr = input.substring(index).strip();
         if (dateStr.length() < 13) {
             dateStr += NO_TIME_FLAG;
         }

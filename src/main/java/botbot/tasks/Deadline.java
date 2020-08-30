@@ -7,12 +7,21 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Represents a deadline with a description, deadline and completion status.
+ */
 public class Deadline extends Task {
     private LocalDateTime by;
     public static final char TYPE_CODE = 'D';
     public static final String FORMAT = "deadline <description> /by <D-M-YYYY HHmm> (eg. 17-3-2020 0945 "
             + "or 3-4-2020 with no time specified)";
 
+    /**
+     * Creates a deadline.
+     * 
+     * @param command Command to create deadline.
+     * @throws InvalidFormatException If command is of invalid format.
+     */
     public Deadline(String command) throws InvalidFormatException {
         super(TYPE_CODE, extractNameFromCommand(command));
         try {
@@ -22,6 +31,13 @@ public class Deadline extends Task {
         }
     }
 
+    /**
+     * Creates a deadline.
+     * 
+     * @param description Description of deadline.
+     * @param isDone Completion status of deadline.
+     * @param by Deadline of deadline.
+     */
     public Deadline(String description, boolean isDone, String by) {
         super(TYPE_CODE, description, isDone);
         this.by = LocalDateTime.parse(by);
@@ -32,11 +48,21 @@ public class Deadline extends Task {
         return command.substring(9, index);
     }
 
+    /**
+     * Returns the time of the deadline.
+     *
+     * @return Null.
+     */
     @Override
     public String getAt() {
         return null;
     }
 
+    /**
+     * Returns the deadline of the deadline.
+     *
+     * @return Deadline of deadline.
+     */
     @Override
     public String getBy() {
         return by.toString();

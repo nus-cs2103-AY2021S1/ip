@@ -7,12 +7,21 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Represents an event with a description, time and completion status.
+ */
 public class Event extends Task {
     private LocalDateTime at;
     public static final char TYPE_CODE = 'E';
     public static final String FORMAT = "event <description> /at <D-M-YYYY HHmm> (eg. 17-3-2020 0945 "
             + "or 3-4-2020 with no time specified)";
 
+    /**
+     * Creates an event.
+     *
+     * @param command Command to create event.
+     * @throws InvalidFormatException If command is of invalid format.
+     */
     public Event(String command) throws InvalidFormatException {
         super(TYPE_CODE, extractNameFromCommand(command));
         try {
@@ -22,6 +31,13 @@ public class Event extends Task {
         }
     }
 
+    /**
+     * Creates an event.
+     *
+     * @param description Description of event.
+     * @param isDone Completion status of event.
+     * @param at Time of event.
+     */
     public Event(String description, boolean isDone, String at) {
         super(TYPE_CODE, description, isDone);
         this.at = LocalDateTime.parse(at);
@@ -31,12 +47,22 @@ public class Event extends Task {
         int index = command.indexOf(" /at ");
         return command.substring(6, index);
     }
-    
+
+    /**
+     * Returns the time of the event.
+     *
+     * @return Time of event.
+     */
     @Override
     public String getAt() {
         return at.toString();
     }
-    
+
+    /**
+     * Returns the deadline of the event.
+     *
+     * @return Null.
+     */
     @Override
     public String getBy() {
         return null;

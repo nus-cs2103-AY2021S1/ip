@@ -5,11 +5,24 @@ import botbot.tasks.Task;
 import java.util.Collection;
 import java.util.LinkedList;
 
+/**
+ * Represents the task list in the chatbot.
+ */
 public class TaskList extends LinkedList<Task> {
+    /**
+     * Creates a task list.
+     * 
+     * @param tasks Tasks in task list.
+     */
     TaskList(Collection<Task> tasks) {
         super(tasks);
     }
 
+    /**
+     * Deletes a task in the task list.
+     * 
+     * @param id ID of task to be deleted.
+     */
     public void delete(int id) {
         remove(id);
     }

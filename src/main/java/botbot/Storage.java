@@ -14,13 +14,27 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Represents the storage of data from the chatbot.
+ */
 public class Storage {
-    private String filePath;
-    
+    private final String filePath;
+
+    /**
+     * Creates a storage at the specified filepath.
+     * 
+     * @param filePath Filepath where storage is created.
+     */
     Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Loads any existing data at the filepath.
+     * If there is no existing data, a new file is created at the filepath.
+     * 
+     * @return List of existing tasks.
+     */
     List<Task> load() {
         File file = new File(filePath);
         file.getParentFile().mkdirs();
@@ -37,6 +51,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Reads the existing data at the filepath.
+     * 
+     * @return List of existing tasks.
+     */
     List<Task> read() {
         List<Task> list = new LinkedList<>();
         try {
@@ -66,6 +85,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Saves the current task list in the storage.
+     * 
+     * @param tasks Task list to be saved.
+     */
     public void save(TaskList tasks) {
         try {
             FileWriter fw = new FileWriter(filePath);
