@@ -1,25 +1,40 @@
 package duke.command;
 
-import duke.exceptions.DukeException;
+import java.util.ArrayList;
+import java.util.List;
+
 import duke.exceptions.IncompleteDukeCommandException;
 import duke.storage.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
-import java.util.ArrayList;
-import java.util.List;
-
+/**
+ * The {@code SearchCommand} class represents a command that allows the user to search for tasks.
+ * The user is able to search for tasks either through their description or
+ * their date (if the type of task supports it).
+ */
 public class SearchCommand extends Command {
 
     private String searchParameter;
     private List<Task> results;
 
+    /**
+     * Constructs a {@code SearchCommand} with the specified {@code searchParameter}.
+     *
+     * @param searchParameter the string for which to search for.
+     */
     public SearchCommand(String searchParameter) {
         this.searchParameter = searchParameter;
         results = new ArrayList<>();
     }
 
+    /**
+     * Executes this {@code CompleteCommand}.
+     *
+     * @param list    the currently loaded {@link TaskList} object.
+     * @param storage the currently loaded {@link Storage} object.
+     */
     @Override
     public void execute(TaskList list, Storage storage) {
         for (Task task : list) {
@@ -30,8 +45,14 @@ public class SearchCommand extends Command {
         super.completed = true;
     }
 
+    /**
+     * Prints the result of executing this {@code SearchCommand}.
+     *
+     * @param ui the {@link Ui} instance to use for formatting.
+     * @throws IncompleteDukeCommandException if this {@code DeleteCommand} was not executed.
+     */
     @Override
-    public void printFeedback(Ui ui) throws DukeException {
+    public void printFeedback(Ui ui) throws IncompleteDukeCommandException {
         if (super.completed) {
             String resultPrint = "";
             for (Task result : results) {
@@ -46,6 +67,9 @@ public class SearchCommand extends Command {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean isExit() {
         return false;

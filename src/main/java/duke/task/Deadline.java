@@ -1,19 +1,17 @@
 package duke.task;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 import duke.exceptions.DukeException;
 import duke.exceptions.DukeStorageException;
 import duke.exceptions.DukeTaskCreationException;
 import duke.parser.DateParser;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-
 /**
  * The {@code Deadline} class represents a task with a specific deadline.
  * Extends the {@link Task} class.
  */
-
-
 public class Deadline extends Task {
 
     private static final String DEADLINE_DELIMITER = "by";
@@ -91,6 +89,8 @@ public class Deadline extends Task {
                 return true;
             }
         } catch (DukeException e) {
+            // We attempt to parse the string as a LocalDate and compare it to the deadline date,
+            // but upon failure, we perform a comparison with the deadline description.
         }
         return searchParameter.contains(description) || description.contains(searchParameter);
     }

@@ -1,10 +1,10 @@
 package duke.task;
 
-import duke.exceptions.DukeException;
-
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+
+import duke.exceptions.DukeException;
 
 /**
  * The {@code TaskList} class is an ordered collection of {@link Task}.
@@ -84,18 +84,6 @@ public class TaskList implements Iterable<Task> {
     public boolean clearList() {
         store = new ArrayList<>();
         return true;
-    }
-
-    public String listItems() {
-        if (store.size() == 0) {
-            return "Congratulations! You don't have any tasks left to do.";
-        } else {
-            String list = "Here are the tasks in your list:\n";
-            for (int i = 0; i < store.size(); i++) {
-                list += String.format("%d.%s\n", i + 1, store.get(i).toString());
-            }
-            return list;
-        }
     }
 
     /**

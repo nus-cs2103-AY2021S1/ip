@@ -1,7 +1,5 @@
 package duke.parser;
 
-import duke.exceptions.DukeException;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -10,8 +8,11 @@ import java.time.format.DateTimeParseException;
 import java.util.Arrays;
 import java.util.List;
 
+import duke.exceptions.DukeException;
+
 /**
- * The {@code DateParser} class provides methods for converting between {@code LocalDateTime} objects and strings.
+ * The {@code DateParser} class provides methods for parsing date-time and duration related strings.
+ * Also provides methods for converting {@code LocalDateTime} objects to standardised strings.
  */
 public class DateParser {
 
@@ -24,10 +25,10 @@ public class DateParser {
     private static final int NULL_TIME_INDICATOR = 30;
 
     /**
-     * Converts the specified input into a {@code LocalDateTime} object.
+     * Parses the specified input into a {@code LocalDateTime} object.
      * Does not support storing seconds.
      *
-     * @param input the string to be converted.
+     * @param input the string to be parsed.
      * @return the {@code LocalDateTime} object representing the specified date and time.
      * @throws DukeException if the format of the input is not recognised.
      */
@@ -40,6 +41,7 @@ public class DateParser {
                     return LocalDateTime.parse(input, formatter)
                             .withSecond(HAS_TIME_INDICATOR);
                 } catch (DateTimeParseException e) {
+                    // We continue to try other formats until all fails before we throw an exception.
                 }
             }
         } else {
@@ -52,12 +54,20 @@ public class DateParser {
                     return LocalDate.parse(input, formatter).atStartOfDay()
                             .withSecond(NULL_TIME_INDICATOR);
                 } catch (DateTimeParseException e) {
+                    // We continue to try other formats until all fails before we throw an exception.
                 }
             }
         }
         throw new DukeException("I can't quite understand what you're saying...");
     }
 
+    /**
+     * Parses the specified input string into its corresponding duration in minutes.
+     *
+     * @param input the string to be parsed.
+     * @return the parsed duration in minutes.
+     * @throws DukeException if the format of the input is not recognised.
+     */
     public static int parseDuration(String input) throws DukeException {
         try {
             int minutes = 0;
@@ -100,6 +110,12 @@ public class DateParser {
         }
     }
 
+    /**
+     * Returns true if the {@code LocalDateTime} object represents only a date with no time.
+     *
+     * @param dateTime the {@code LocalDateTime} object to test.
+     * @return true if the {@code LocalDateTime} object represents only a date with no time.
+     */
     public static boolean isDateOnly(LocalDateTime dateTime) {
         return dateTime.getSecond() == NULL_TIME_INDICATOR;
     }

@@ -1,12 +1,12 @@
 package duke.task;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 import duke.exceptions.DukeException;
 import duke.exceptions.DukeStorageException;
 import duke.exceptions.DukeTaskCreationException;
 import duke.parser.DateParser;
-
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 /**
  * The {@code Event} class represents an event with a scheduled time.
@@ -127,6 +127,8 @@ public class Event extends Task {
                 return true;
             }
         } catch (DukeException e) {
+            // We attempt to parse the string as a LocalDate and compare it to the event date,
+            // but upon failure, we perform a comparison with the event description.
         }
         return searchParameter.contains(description) || description.contains(searchParameter);
     }

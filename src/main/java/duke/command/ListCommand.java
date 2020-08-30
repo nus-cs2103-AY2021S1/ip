@@ -1,16 +1,21 @@
 package duke.command;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import duke.exceptions.IncompleteDukeCommandException;
 import duke.storage.Storage;
+import duke.task.Task;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
 /**
- * The {@code DeleteAllCommand} class represents a command to print all contents of a {@link TaskList}.
+ * The {@code ListCommand} class represents a command to print all contents of a {@link TaskList}.
+ * The output of the {@code ListCommand} retains the same order of tasks in the {@code TaskList}.
  */
 public class ListCommand extends Command {
 
-    private String printout;
+    private List<Task> existingTasks;
 
     /**
      * Executes this {@code ListCommand}.
@@ -20,7 +25,10 @@ public class ListCommand extends Command {
      */
     @Override
     public void execute(TaskList list, Storage storage) {
-        printout = list.listItems();
+        existingTasks = new ArrayList<>();
+        for (Task task : list) {
+            existingTasks.add(task);
+        }
         super.completed = true;
     }
 
@@ -33,6 +41,15 @@ public class ListCommand extends Command {
     @Override
     public void printFeedback(Ui ui) throws IncompleteDukeCommandException {
         if (super.completed) {
+            String printout = "";
+            if (existingTasks.size() == 0) {
+                printout = "Congratulations! You don't have any tasks left to do.";
+            } else {
+                printout = "Here are the tasks in your list:\n";
+                for (int i = 0; i < existingTasks.size(); i++) {
+                    printout += String.format("%d.%s\n", i + 1, existingTasks.get(i).toString());
+                }
+            }
             ui.formattedPrint(ui.prependIndent(printout, 1));
         } else {
             throw new IncompleteDukeCommandException("List command was not completed.");

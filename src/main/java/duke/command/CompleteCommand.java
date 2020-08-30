@@ -46,7 +46,8 @@ public class CompleteCommand extends Command {
     @Override
     public void printFeedback(Ui ui) throws IncompleteDukeCommandException {
         if (super.completed) {
-            String feedback = String.format("Nice! I've marked this task as complete:\n  %s\n", completedTask.toString());
+            String feedback = String.format("Nice! I've marked this task as complete:\n  %s\n",
+                    completedTask.toString());
             ui.formattedPrint(ui.prependIndent(feedback, 1));
         } else {
             throw new IncompleteDukeCommandException("Complete command was not completed.");
