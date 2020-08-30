@@ -101,12 +101,12 @@ public class Parser {
         if (text.contains(" ")) {
             int i = text.indexOf(' ');
             String test = text.substring(0, i).toLowerCase();
-            String next = text.substring(i).toLowerCase();
-            return " ";
-//            if (checkList(test)) {
-//                taskList.displayList();
-//            } else if (checkFind(test)) {
-//                taskList.findTask(next);
+            String next = text.substring(i + 1);
+            if (checkFind(test)) {
+                return taskList.findTask(next);
+            } else {
+                return "contains: " + text;
+            }
 //            } else if (checkDone(test)) {
 //                try {
 //                    taskList.doneTask(next);
@@ -132,6 +132,9 @@ public class Parser {
         } else {
             if (checkBye(text.toLowerCase())) {
                 return ui.exitLine();
+            } else if (checkList(text)) {
+                return taskList.displayList();
+//
             } else {
                 return text;
             }

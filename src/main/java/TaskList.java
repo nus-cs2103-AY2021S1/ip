@@ -18,19 +18,18 @@ public class TaskList {
     /**
      * Displays the task list.
      */
-    public  void displayList() {
+    public String displayList() {
         if (storage.isEmpty()) {
-            System.out.println(ui.getBorder() + "Your list is empty!\n" + ui.getBorder());
+            return ui.getBorder() + "Your list is empty!\n" + ui.getBorder();
         } else {
             int listLen = storage.size();
-            System.out.println(ui.getBorder().replace("\n", ""));
-            System.out.println("Here are the tasks in your list:");
+            String output = "Here are the tasks in your list:\n";
 
             for (int i = 1; i <= listLen; i++) {
                 Task curr = storage.get(i - 1);
-                System.out.println(i + "." + curr);
+                output = output.concat(i + "." + curr + "\n");
             }
-            System.out.println(ui.getBorder());
+            return output;
         }
     }
 
@@ -157,20 +156,23 @@ public class TaskList {
      * Prints the list of tasks that contain the given string.
      * @param s The string that should appear in the task
      */
-    public void findTask(String s) {
+    public String findTask(String s) {
         if (storage.isEmpty()) {
-            System.out.println(ui.getBorder() + "Your list is empty!\n" + ui.getBorder());
+            return "Your list is empty!\n";
         } else {
             int index = 1;
-            System.out.println(ui.getBorder().replace("\n", ""));
-            System.out.println("Here are the matching tasks in your list:\n");
+            String output = "Here are the matching tasks in your list:\n";
             for (Task curr : storage) {
                 if (curr.getName().toLowerCase().contains(s.toLowerCase())) {
-                    System.out.println(index + "." + curr);
+                    output = output.concat(index + "." + curr + "\n");
                     index++;
                 }
             }
-            System.out.println(ui.getBorder());
+            if (index == 1) {
+                return "There was no match!";
+            } else {
+                return output;
+            }
         }
     }
 

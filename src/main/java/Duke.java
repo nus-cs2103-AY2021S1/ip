@@ -31,7 +31,11 @@ public class Duke {
     }
 
     public String getResponse(String input) {
-        return Parser.parse(taskList, storage, input);
+        if (input.equals("start")) {
+            return ui.startUp(taskList, storage);
+        } else {
+            return Parser.parse(taskList, storage, input);
+        }
     }
 
     public static void main(String[] args) {

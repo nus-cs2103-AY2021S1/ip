@@ -16,18 +16,14 @@ public class Ui {
      * @param taskList The handler for task list calls
      * @param storage The handler for storage calls
      */
-    public void startUp(TaskList taskList, Storage storage) {
+    public String startUp(TaskList taskList, Storage storage) {
         storage.fileCheck();
         if (!storage.getFile().exists() || storage.getFile().length() == 0) {
-            System.out.println(
-                BORDER + "Hello! I'm Duke\n"
-                    + "What can I do for you?\n" + BORDER
-            );
+           return BORDER + "Hello! I'm Duke\n"
+                    + "What can I do for you?\n" + BORDER;
         } else {
-            System.out.println(
-                BORDER + "Well come back!\n" + "You still have "
-                    + taskList.getList().size() + " tasks left to clear.\n" + BORDER
-            );
+            return BORDER + "Well come back!\n" + "You still have "
+                    + taskList.getList().size() + " tasks left to clear.\n" + BORDER;
         }
     }
 
