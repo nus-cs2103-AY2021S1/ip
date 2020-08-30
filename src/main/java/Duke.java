@@ -25,14 +25,14 @@ import javafx.stage.Stage;
  * @version 1.0
  * @since 2020-08-25
  */
-public class Duke extends Application{
+public class Duke extends Application {
 
     private Storage storage;
     private TaskList taskList;
 
-    public Duke(String filePath) {
+    public Duke() {
         this.taskList = TaskList.createTaskList();
-        this.storage = Storage.createDukeFile(filePath);
+        this.storage = Storage.createDukeFile("Saved");
     }
 
     /**
@@ -72,7 +72,7 @@ public class Duke extends Application{
 //     * @param args Unused.
 //     */
 //    public static void main(String[] args) {
-//        new Duke("Saved").run();
+//        new Duke().run();
 //    }
 
     @Override
