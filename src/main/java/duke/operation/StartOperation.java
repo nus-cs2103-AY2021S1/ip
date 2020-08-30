@@ -1,6 +1,5 @@
 package duke.operation;
 
-import com.sun.prism.ResourceFactoryListener;
 import duke.result.Result;
 import duke.storage.TaskStorage;
 import duke.task.TaskList;
