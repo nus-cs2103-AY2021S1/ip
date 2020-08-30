@@ -1,12 +1,12 @@
 package duke.task;
 
-import duke.exception.EmptyTaskException;
-import duke.exception.InvalidDateException;
-import duke.exception.MissingDateException;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+import duke.exception.EmptyTaskException;
+import duke.exception.InvalidDateException;
+import duke.exception.MissingDateException;
 
 public class Event extends Task {
     private final LocalDate date;
@@ -42,7 +42,9 @@ public class Event extends Task {
         for (DateFormat format : DateFormat.values()) {
             try {
                 dateTime = LocalDate.parse(taskInfo[1], format.toDateFormat());
-            } catch (DateTimeParseException ignored) { }
+            } catch (DateTimeParseException ignored) {
+                continue;
+            }
         }
         if (dateTime == null) {
             throw new InvalidDateException();
