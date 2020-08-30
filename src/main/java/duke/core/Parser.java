@@ -124,6 +124,7 @@ public class Parser {
             throws CommandNotFoundException {
         String type = command.split(" ")[0];
         //System.out.println(type);
+        
         try {
 
             if (command.split(type).length == 0) {
