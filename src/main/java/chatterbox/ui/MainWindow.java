@@ -10,6 +10,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 
 /**
@@ -41,11 +42,11 @@ public class MainWindow extends AnchorPane {
             chatterbox.loadTasks();
         } catch (ChatterboxException | IOException e) {
             dialogContainer.getChildren().add(
-                    DialogBox.getDukeDialog(Ui.getErrorMessage("Unable to load tasks."), chatterboxImage)
+                    DialogBox.getChatterboxDialog(Ui.getErrorMessage("Unable to load tasks."), chatterboxImage)
             );
         }
         dialogContainer.getChildren().add(
-                DialogBox.getDukeDialog(Ui.getWelcomeMessage(), chatterboxImage)
+                DialogBox.getChatterboxDialog(Ui.getWelcomeMessage(), chatterboxImage)
         );
     }
 
@@ -60,9 +61,13 @@ public class MainWindow extends AnchorPane {
             System.exit(0);
         }
         String response = chatterbox.getResponse(input);
+        DialogBox userDialog = DialogBox.getUserDialog(input, userImage);
+        DialogBox chatterboxDialog = DialogBox.getChatterboxDialog(response, chatterboxImage);
+        userDialog.setMinHeight(Region.USE_PREF_SIZE);
+        chatterboxDialog.setMinHeight(Region.USE_PREF_SIZE);
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, chatterboxImage)
+                userDialog,
+                chatterboxDialog
         );
         userInput.clear();
     }

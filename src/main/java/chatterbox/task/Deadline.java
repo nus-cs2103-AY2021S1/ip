@@ -13,10 +13,14 @@ public class Deadline extends Task {
      */
     public Deadline(String input) {
         inputString = this.getClass().getSimpleName().toLowerCase() + " " + input;
-        String[] split = input.split("/", 2);;
-        String dateTime = split[1].substring(split[1].indexOf(' ') + 1);
-        deadline = Parser.parseDateTime(dateTime);
-        contents = Parser.parseDateTimeTask(input, deadline);
+        try {
+            String[] split = input.split("/", 2);
+            String dateTime = split[1].substring(split[1].indexOf(' ') + 1);
+            deadline = Parser.parseDateTime(dateTime);
+            contents = Parser.parseDateTimeTask(input, deadline);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            contents = input;
+        }
         prefix = "D";
     }
 }

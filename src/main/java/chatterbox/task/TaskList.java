@@ -52,7 +52,7 @@ public class TaskList {
      */
     public String getPrintableTaskList() {
         if (tasks.size() != 0) {
-            StringBuilder fullList = new StringBuilder("\n");
+            StringBuilder fullList = new StringBuilder();
             for (int i = 0; i < tasks.size(); i++) {
                 fullList.append(i + 1).append(". ").append(tasks.get(i)).append("\n");
             }
