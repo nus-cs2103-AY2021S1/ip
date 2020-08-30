@@ -1,31 +1,41 @@
-
-
 import java.io.IOException;
-import java.util.Scanner;
-
-
-
 
 
 public class Duke {
+    private TaskList taskList;
+    private UI userInterface;
     
-    public static void main(String[] args) throws IOException {
-        UI userInterface = new UI();
-        TaskList taskList  = new TaskList(Storage.loadFile());
-        userInterface.greetUser();
-        Printable input;
-        Scanner sc = new Scanner(System.in);
+    public Duke() {
+        try {
+            this.userInterface = new UI();
+            this.taskList = new TaskList(Storage.loadFile());
+        } catch (IOException e) {
+            System.out.println("An error has occurred: " + e);
+        }
+    }
 
-        do {
+    public static void main(String[] args) throws IOException {
+        Duke duke = new Duke();
+        duke.run();
+    }
+    
+    public void run() {
+        userInterface.greetUser();
+        do{
             try {
-                input = getUserInput(sc);
-                String command = input.print();
-                if (command.toLowerCase().equals("bye")) {
+                String input = Parser.getUserCommand();
+                String command = input.toLowerCase();
+
+                if (command.equals("bye")) {
+
                     Storage.writeToFile(taskList);
                     userInterface.goodbye();
                     break;
-                } else if (command.toLowerCase().equals("list")) {
+
+                } else if (command.equals("list")) {
+
                     userInterface.listTasks(taskList);
+
                 } else if (command.split("\\s+")[0].equals("done")) {
                     Task task = taskList.get(Integer.parseInt(command.split("\\s+")[1]) - 1);
                     task.setDone();
@@ -46,28 +56,26 @@ public class Duke {
                     }
 
                 } else {
-                    storeInput(command, taskList, userInterface);
+                    storeInput(input, taskList, userInterface);
                 }
             } catch (IllegalArgumentException | IOException e) {
                 System.out.println(e);
                 continue;
             }
         } while (true);
+        
     }
     
-
-    public static Printable getUserInput(Scanner sc) {
-        return () -> sc.nextLine();
-    }
-
+    
+    
     public static void storeInput(String command, TaskList taskList,UI userInterface) {
         String cmd1 = command.split("\\s+")[0];
-        String cmd2 ;
+        String cmd2;
         Task task =null;
         if (cmd1.equals("deadline")) {
             cmd2 =  command.substring(cmd1.length()+1);
             try {
-                task = parseDeadline(cmd2);
+                task = Parser.parseDeadline(cmd2);
             }catch (Exception e) {
                System.out.println( "Please specify time in format YYYY-MM-DD hh:hh \n for instance : 2019-10-15 18:00");
             }
@@ -79,7 +87,7 @@ public class Duke {
             task = new Todo(cmd2,false);
         } else if (cmd1.equals("event")) {
             cmd2 =  command.substring(cmd1.length()+1);
-            task = parseEvent(cmd2);
+            task = Parser.parseEvent(cmd2);
         } else {
             throw new IllegalUserInputException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
@@ -90,45 +98,4 @@ public class Duke {
         }
         return;
     }
-    
-
-     private static Deadline parseDeadline(String input) {
-        String[] arr = input.split("\\s+");
-        String description="";
-        String deadline="";
-        boolean flag = false;
-        for (int i = 0; i<arr.length;i++) {
-            if (arr[i].equals("/by")) {
-                flag = true;
-                continue;
-            }
-            if (!flag) {
-                description += arr[i] + " ";
-            } else {
-                deadline += arr[i] + " ";
-            }
-        }
-
-        return new Deadline (description.substring(0,description.length()-1),false,deadline.substring(0,deadline.length()-1));
-     }
-
-     private static Event parseEvent (String input) {
-         String[] arr = input.split("\\s+");
-         String description="";
-         String duration="";
-         boolean flag = false;
-         for (int i = 0; i<arr.length;i++) {
-             if (arr[i].equals("/at")) {
-                 flag = true;
-                 continue;
-             }
-             if (!flag) {
-                 description += arr[i] + " ";
-             } else {
-                 duration += arr[i] + " ";
-             }
-         }
-
-         return new Event (description.substring(0,description.length()-1),false,duration.substring(0,duration.length()-1));
-     }
 }
