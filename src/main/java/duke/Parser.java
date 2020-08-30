@@ -1,5 +1,6 @@
 package duke;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -128,6 +129,143 @@ public class Parser {
                         System.out.println(Duke.getTasks().get(Duke.getTasks().size() - 1));
                         System.out.println("Now you have " + Duke.getTasks().size()
                                 + " tasks in your list.");
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * Alternative parse method that works the same way, but used for GUI
+     *
+     * @param command user input
+     * @param tasks list of tasks
+     * @param storage storage of tasks
+     * @param output duke's reply
+     * @return duke's reply
+     * @throws IOException if filePath does not exist
+     */
+    public static String parse(String command, TaskList tasks, Storage storage, String output) throws IOException {
+        if (command.equals("bye")) {
+            isExit = true;
+            return "Goodbye, have a nice day :D";
+
+        } else if (command.equals("list")) {
+            output += "Here are the tasks in your list:" + "\n";
+            for (int i = 1; i < tasks.size() + 1; i++) {
+                output += i + ". " + tasks.get(i - 1) + "\n";
+            }
+            return output;
+
+        } else if (command.startsWith("done")) {
+            if (command.length() == 4) {
+                return new DukeException("Hold up! Please specify "
+                        + "which task is done.").getMessage();
+            } else {
+                int taskToMark = Integer.parseInt(command.substring(5)) - 1;
+                tasks.get(taskToMark).markAsDone();
+                output += "Task Accomplished! I've marked this "
+                        + "task as done:\n";
+                output += tasks.get(taskToMark);
+                storage.refresh(tasks);
+                return output;
+            }
+
+        } else if (command.startsWith("delete")) {
+            if (command.length() == 6) {
+                return new DukeException("Hold up! Please specify "
+                        + "which task to delete.").getMessage();
+            } else {
+                int taskToDelete = Integer.parseInt(command.substring(7)) - 1;
+                output += "Alright! I've removed this task:\n";
+                output += tasks.remove(taskToDelete) + "\n";
+                output += "Now you have " + tasks.size()
+                        + " tasks in your list.";
+                storage.refresh(tasks);
+                return output;
+            }
+
+        } else if (command.startsWith("find")) {
+            if (command.length() == 4) {
+                return new DukeException("Hold up! Please specify keyword.").getMessage();
+            } else {
+                output += "Here are the matching tasks in your list:\n";
+                String keyword = command.substring(5);
+                for (int i = 1; i < tasks.size() + 1; i++) {
+                    Task currentTask = tasks.get(i - 1);
+                    if (currentTask.toString().contains(keyword)) {
+                        output += i + ". " + currentTask + "\n";
+                    }
+                }
+                return output;
+            }
+
+        } else {
+            if (!command.startsWith("todo") && !command.startsWith("deadline")
+                    && !command.startsWith("event")) {
+                return new DukeException("Sorry, I'm not sure what "
+                        + "you mean by that :(").getMessage();
+            } else {
+
+                if (command.startsWith("todo")) {
+                    if (command.length() == 4) {
+                        return new DukeException("Hold up! The "
+                                + "description of todo cannot be empty...").getMessage();
+                    } else {
+                        output += "Got it! I've added this task:\n";
+                        tasks.add(new ToDo(command.substring(5)));
+                        output += tasks.get(
+                                tasks.size() - 1) + "\n";
+                        output += "Now you have " + tasks.size()
+                                + " tasks in your list.";
+                        storage.append(new ToDo(command.substring(5)));
+                        return output;
+                    }
+
+                } else if (command.startsWith("deadline")) {
+                    if (command.length() == 8) {
+                        return new DukeException("Hold up! The "
+                                + "description of deadline cannot be empty...").getMessage();
+                    } else if (!command.contains("/by")) {
+                        return new DukeException("Please specify "
+                                + "deadline using: /by (deadline)").getMessage();
+                    } else {
+                        output += "Got it! I've added this task:\n";
+                        int endIndex = command.indexOf("/by") - 1;
+                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(
+                                "yyyy-MM-dd HHmm");
+                        LocalDateTime dateTime = LocalDateTime.parse(
+                                command.substring(endIndex + 5), formatter);
+                        tasks.add(new Deadline(command.substring(9, endIndex),
+                                dateTime.format(DateTimeFormatter.ofPattern(
+                                        "MMM d yyyy HHmm"))));
+                        output += tasks.get(tasks.size() - 1) + "\n";
+                        output += "Now you have " + tasks.size()
+                                + " tasks in your list.";
+                        storage.append(new Deadline(command.substring(9, endIndex),
+                                dateTime.format(DateTimeFormatter.ofPattern(
+                                        "MMM d yyyy HHmm"))));
+                        return output;
+                    }
+
+                } else {
+                    if (command.length() == 5) {
+                        return new DukeException("Hold up! The "
+                                + "description of event cannot be empty...").getMessage();
+                    } else if (!command.contains("/at")) {
+                        return new DukeException("Please specify "
+                                + "timing using: /at (timing)").getMessage();
+                    } else {
+                        output += "Got it! I've added this task:\n";
+                        int endIndex = command.indexOf("/at") - 1;
+                        tasks.add(new Event(command.substring(6, endIndex),
+                                command.substring(endIndex + 5)));
+                        output += tasks.get(tasks.size() - 1) + "\n";
+                        output += "Now you have " + tasks.size()
+                                + " tasks in your list.";
+                        storage.append(new Event(command.substring(6, endIndex),
+                                command.substring(endIndex + 5)));
+                        return output;
                     }
                 }
             }
