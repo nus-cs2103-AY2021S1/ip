@@ -1,4 +1,0 @@
-[T]|✓|read book
-[E]|✓|attend meeting|02/09/2020 19:00
-[T]|✘|sleep
-[D]|✘|homework|20/09/2020 18:00

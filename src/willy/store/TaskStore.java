@@ -117,5 +117,15 @@ public class TaskStore {
         }
     }
 
+    public void clearFile() { // For test purposes
+        try {
+            FileWriter fw = new FileWriter(FILE_PATH);
+            fw.write("");
+            fw.close();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
 
 }

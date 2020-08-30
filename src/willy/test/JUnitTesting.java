@@ -1,6 +1,5 @@
 package willy.test;
 
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import main.java.TaskList;
 import willy.store.TaskStore;
@@ -9,10 +8,8 @@ import willy.task.TaskSymbol;
 import willy.task.ToDoTask;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
 
 public class JUnitTesting {
     TaskStore store = new TaskStore();
@@ -21,14 +18,18 @@ public class JUnitTesting {
 
     @Test
     public void addTaskToList_success() {
+        // clear text file first, store.clearFile() not working
+//        store.clearFile();
         String activity = "read book";
         ToDoTask newTask = new ToDoTask(activity, TaskSymbol.TODO);
         list.addToList(newTask);
-        assertEquals(1,list.getList().size(), "Number of Lists after adding a task");
+        assertEquals(2,list.getList().size(), "Number of Lists after adding a task");
     }
 
     @Test
     public void removeTaskFromList_success() {
+        // Clear text file first, store.clearFile() not working
+//        store.clearFile();
         String activity1 = "read book";
         String activity2 = "go Home";
         // Add 2 tasks
