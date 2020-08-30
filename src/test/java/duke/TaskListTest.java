@@ -1,6 +1,5 @@
 package duke;
 
-import seedu.duke.TaskList;
 import duke.exception.DukeInvalidIndexException;
 import duke.task.Deadline;
 import duke.task.Event;
@@ -14,16 +13,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
-<<<<<<< HEAD
-=======
-import seedu.duke.TaskList;
-import duke.exception.DukeInvalidIndexException;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.Todo;
->>>>>>> branch-A-Checkstyle
 
 public class TaskListTest {
     TaskList taskList = new TaskList();
