@@ -8,10 +8,10 @@ import java.time.LocalDate;
  */
 public class Task {
 
+    protected LocalDate localDate;
     private String taskName;
     private boolean isDone;
     private boolean hasFormattedDate;
-    protected LocalDate localDate;
 
     /**
      * Creates an instance of a Task object with the appropriate

@@ -40,7 +40,10 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + (super.hasDate() ? localDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")) : eventDate) + ")";
+        return "[E]" + super.toString() + " (at: "
+                + (super.hasDate()
+                        ? localDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
+                        : eventDate) + ")";
     }
 
     /**

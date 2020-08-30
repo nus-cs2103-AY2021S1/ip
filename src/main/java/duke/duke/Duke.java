@@ -2,11 +2,11 @@ package duke.duke;
 
 import java.io.File;
 
+import duke.commands.Command;
+import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.tasks.TaskList;
 import duke.ui.UI;
-import duke.commands.Command;
-import duke.parser.Parser;
 
 /**
  * Represents Duke object. Is responsible for the overall running of Duke.

@@ -2,7 +2,6 @@ package duke.ui;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -13,10 +12,10 @@ import duke.tasks.Task;
  */
 public class UI {
 
-    private final String HORIZONTAL_BREAK = "____________________________________________________________";
-    private final String OFFSET = "     ";
-    private final String ITEM_OFFSET = "       ";
-    private final String BLANK_LINE = "";
+    private static final String HORIZONTAL_BREAK = "____________________________________________________________";
+    private static final String OFFSET = "     ";
+    private static final String ITEM_OFFSET = "       ";
+    private static final String BLANK_LINE = "";
 
     private Scanner scanner;
 
@@ -31,7 +30,7 @@ public class UI {
      * Prints a horizontal line to the screen.
      */
     public void showLine() {
-        System.out.println(OFFSET + HORIZONTAL_BREAK);
+        System.out.println(UI.OFFSET + UI.HORIZONTAL_BREAK);
     }
 
     /**
@@ -57,7 +56,7 @@ public class UI {
                 + "         `======/";
         System.out.println(logo);
         showLine();
-        System.out.println(OFFSET + "I am duke, keeper of all tasks. How may I help you?");
+        System.out.println(UI.OFFSET + "I am duke, keeper of all tasks. How may I help you?");
         showLine();
         displayBlankLine();
     }
@@ -67,7 +66,7 @@ public class UI {
      */
     public void displayGoodbye() {
         showLine();
-        System.out.println(OFFSET + "Bye! Hope to see you again :)");
+        System.out.println(UI.OFFSET + "Bye! Hope to see you again :)");
         showLine();
     }
 
@@ -76,8 +75,8 @@ public class UI {
      * @param s Error message to be printed.
      */
     public void showLoadingError(String s) {
-        System.out.println(OFFSET + "Looks like there was an error retrieving your data");
-        System.out.println(OFFSET + s);
+        System.out.println(UI.OFFSET + "Looks like there was an error retrieving your data");
+        System.out.println(UI.OFFSET + s);
     }
 
     /**
@@ -86,7 +85,7 @@ public class UI {
      */
     public void showError(String s) {
         this.showLine();
-        System.out.println(OFFSET + s);
+        System.out.println(UI.OFFSET + s);
         this.showLine();
     }
 
@@ -98,9 +97,9 @@ public class UI {
      */
     public void displayAddedTask(Task task, int listSize) {
         this.showLine();
-        System.out.println(OFFSET + "Got it. I've added this task:");
-        System.out.println(ITEM_OFFSET + task);
-        System.out.println(OFFSET + "Now you have " + listSize + " tasks in the list.");
+        System.out.println(UI.OFFSET + "Got it. I've added this task:");
+        System.out.println(UI.ITEM_OFFSET + task);
+        System.out.println(UI.OFFSET + "Now you have " + listSize + " tasks in the list.");
         this.showLine();
     }
 
@@ -112,9 +111,9 @@ public class UI {
      */
     public void displayDeletedTask(Task task, int listSize) {
         this.showLine();
-        System.out.println(OFFSET + "Noted. I've removed this task:");
-        System.out.println(ITEM_OFFSET + task);
-        System.out.println(OFFSET + "Now you have " + listSize + " tasks in the list.");
+        System.out.println(UI.OFFSET + "Noted. I've removed this task:");
+        System.out.println(UI.ITEM_OFFSET + task);
+        System.out.println(UI.OFFSET + "Now you have " + listSize + " tasks in the list.");
         this.showLine();
     }
 
@@ -125,8 +124,8 @@ public class UI {
      */
     public void displayDoneTask(Task task) {
         this.showLine();
-        System.out.println(OFFSET + "Nice! I've marked this task as done:");
-        System.out.println(ITEM_OFFSET + task);
+        System.out.println(UI.OFFSET + "Nice! I've marked this task as done:");
+        System.out.println(UI.ITEM_OFFSET + task);
         this.showLine();
     }
 
@@ -138,10 +137,10 @@ public class UI {
      */
     public void displayEventsOnDate(ArrayList<Task> tasks, LocalDate localDate) {
         this.showLine();
-        System.out.println(OFFSET + "Here are your events on " +
-                localDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ":");
+        System.out.println(UI.OFFSET + "Here are your events on "
+                + localDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ":");
         for (Task task : tasks) {
-            System.out.println(ITEM_OFFSET + task);
+            System.out.println(UI.ITEM_OFFSET + task);
         }
         this.showLine();
     }
@@ -153,14 +152,14 @@ public class UI {
      */
     public void displayAllItems(ArrayList<Task> tasks) {
         this.showLine();
-        System.out.println(OFFSET + "Here are the tasks in your list:");
+        System.out.println(UI.OFFSET + "Here are the tasks in your list:");
         int taskCount = 1;
         for (Task task : tasks) {
-            System.out.println(OFFSET + (taskCount) + ". " + task);
+            System.out.println(UI.OFFSET + (taskCount) + ". " + task);
             taskCount++;
         }
         if (tasks.size() == 0) {
-            System.out.println(OFFSET + "This is a very empty list... UwU");
+            System.out.println(UI.OFFSET + "This is a very empty list... UwU");
         }
         this.showLine();
     }
@@ -169,7 +168,7 @@ public class UI {
      * Displays blank line on screen.
      */
     public void displayBlankLine() {
-        System.out.println(BLANK_LINE);
+        System.out.println(UI.BLANK_LINE);
     }
 
     /**
@@ -177,9 +176,9 @@ public class UI {
      */
     public void showHelp() {
         this.showLine();
-        System.out.println(OFFSET + "I can't help you either ._.");
+        System.out.println(UI.OFFSET + "I can't help you either ._.");
         this.showLine();
-        System.out.println(this.BLANK_LINE);
+        System.out.println(UI.BLANK_LINE);
     }
 
     /**

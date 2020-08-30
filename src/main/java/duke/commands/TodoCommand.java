@@ -1,9 +1,9 @@
 package duke.commands;
 
-import duke.tasks.Task;
-import duke.tasks.ToDo;
 import duke.storage.Storage;
+import duke.tasks.Task;
 import duke.tasks.TaskList;
+import duke.tasks.ToDo;
 import duke.ui.UI;
 
 /**
