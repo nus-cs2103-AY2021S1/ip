@@ -1,4 +1,4 @@
-package tickbot.ui.text;
+package tickbot.ui;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

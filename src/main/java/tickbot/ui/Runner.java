@@ -1,4 +1,4 @@
-package tickbot.ui.text;
+package tickbot.ui;
 
 import java.time.DateTimeException;
 import java.time.LocalDate;

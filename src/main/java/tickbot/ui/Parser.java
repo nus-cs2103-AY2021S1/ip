@@ -1,4 +1,4 @@
-package tickbot.ui.text;
+package tickbot.ui;
 
 /**
  * The class to represent the command parser.
