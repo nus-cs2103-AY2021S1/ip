@@ -1,9 +1,6 @@
 package duke;
 
 import duke.task.Task;
-
-import java.util.Scanner;
-
 /**
  * Handles the interaction with the user.
  */

@@ -1,14 +1,13 @@
 package duke.task;
 
 import duke.exception.DoneException;
-import duke.exception.DukeException;
 
 /**
  * Represents a task object
  * A <code>Task</code> object corresponds to a task created using the command
  * given by the user such as "todo", "event", "deadline".
  */
-abstract public class Task {
+public abstract class Task {
 
     protected String description;
     protected int status;
@@ -69,7 +68,7 @@ abstract public class Task {
      * @param status current status of the task
      * @return string representation of the task
      */
-    abstract public String saveText(int status);
+    public abstract String saveText(int status);
 
     /**
      * Returns a string representation of a task object

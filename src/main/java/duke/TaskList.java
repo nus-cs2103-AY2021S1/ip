@@ -1,9 +1,9 @@
 package duke;
 
-import duke.task.Task;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import duke.task.Task;
 
 /**
  * Represents a list of Tasks that uses an ArrayList
@@ -72,7 +72,7 @@ public class TaskList {
      * @return list of tasks
      */
     public String printList() {
-        String content  = "";
+        String content = "";
         int i = 1;
 
         if (taskList.isEmpty()) {
@@ -103,5 +103,4 @@ public class TaskList {
         }
         return content;
     }
-    
 }

@@ -49,7 +49,7 @@ public class DialogBox extends HBox {
         Collections.reverse(tmp);
         getChildren().setAll(tmp);
         setAlignment(Pos.TOP_LEFT);
-        setMargin(dialog, new Insets(0,0,0,10));
+        setMargin(dialog, new Insets(0, 0, 0, 10));
     }
 
     public static DialogBox getUserDialog(String text, Image img) {

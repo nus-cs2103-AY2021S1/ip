@@ -1,9 +1,9 @@
 package duke.command;
 
-import duke.exception.DukeException;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
+import duke.exception.DukeException;
 
 /**
  * Command is an abstract class for all commands that the user will be inputting.
@@ -37,5 +37,5 @@ public abstract class Command {
      * @param storage The Storage Object that handles reading and writing from the datafile
      * @throws DukeException Exception that happens when there is an invalid input
      */
-    abstract public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException;
+    public abstract String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException;
 }

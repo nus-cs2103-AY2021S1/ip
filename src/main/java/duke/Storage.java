@@ -1,22 +1,29 @@
 package duke;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 import duke.exception.DukeException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 
-import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Handles the read and write operations to the data file
  */
 public class Storage {
 
-    String path;
-    String content = "";
+    private String path;
+    private String content = "";
 
     /**
      * Constructor for the Storage Class
@@ -54,15 +61,17 @@ public class Storage {
                     content += fileLine + "\n";
                     String[] str = fileLine.split(" \\| ");
                     switch (str[0]) {
-                        case "T":
-                            taskList.add(new Todo(str[2], Integer.parseInt(str[1])));
-                            break;
-                        case "D":
-                            taskList.add(new Deadline(str[2], Integer.parseInt(str[1]), str[3]));
-                            break;
-                        case "E":
-                            taskList.add(new Event(str[2], Integer.parseInt(str[1]), str[3]));
-                            break;
+                    case "T":
+                        taskList.add(new Todo(str[2], Integer.parseInt(str[1])));
+                        break;
+                    case "D":
+                        taskList.add(new Deadline(str[2], Integer.parseInt(str[1]), str[3]));
+                        break;
+                    case "E":
+                        taskList.add(new Event(str[2], Integer.parseInt(str[1]), str[3]));
+                        break;
+                    default:
+                        break;
                     }
                 }
                 content = content.trim();
@@ -82,7 +91,7 @@ public class Storage {
      * @param task task to be saved
      */
     public void save(Task task) {
-        if(content.isEmpty()) {
+        if (content.isEmpty()) {
             content = task.saveText(task.getStatus());
         } else {
             content = content + "\n" + task.saveText(task.getStatus());

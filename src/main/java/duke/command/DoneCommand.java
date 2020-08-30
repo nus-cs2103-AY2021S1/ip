@@ -1,11 +1,11 @@
 package duke.command;
 
 import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
 import duke.exception.DoneException;
 import duke.exception.DukeException;
 import duke.task.Task;
-import duke.TaskList;
-import duke.Ui;
 
 /**
  * Represent a "Done" command
@@ -14,7 +14,7 @@ import duke.Ui;
  */
 public class DoneCommand extends Command {
 
-    int index;
+    private int index;
 
     /**
      * Constructor of the DoneCommand Class
@@ -34,7 +34,7 @@ public class DoneCommand extends Command {
      * @param storage The Storage Object that handles reading and writing from the datafile
      */
     @Override
-    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException{
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         Task task = taskList.getTask(index);
         try {
             task.markAsDone();

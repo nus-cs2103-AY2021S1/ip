@@ -1,6 +1,8 @@
 package duke.command;
 
-import duke.*;
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
 import duke.exception.DukeException;
 import duke.task.Deadline;
 import duke.task.Task;
@@ -12,7 +14,8 @@ import duke.task.Task;
  */
 public class DeadlineCommand extends Command {
 
-    String description, date;
+    private String description;
+    private String date;
 
     /**
      * Constructor of the DeadlineCommand class

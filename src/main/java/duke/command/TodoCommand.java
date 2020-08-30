@@ -1,6 +1,8 @@
 package duke.command;
 
-import duke.*;
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
 import duke.exception.DukeException;
 import duke.task.Task;
 import duke.task.Todo;
@@ -10,9 +12,9 @@ import duke.task.Todo;
  * A <code>TodoCommand</code> object that corresponds to a command of an input "event"
  * and contains a description as a String
  */
-public class TodoCommand extends Command{
+public class TodoCommand extends Command {
 
-    String description;
+    private String description;
 
     /**
      * Constructor of the TodoCommand Class

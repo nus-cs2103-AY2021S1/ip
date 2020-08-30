@@ -1,6 +1,8 @@
 package duke.command;
 
-import duke.*;
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
 import duke.exception.DukeException;
 import duke.task.Task;
 
@@ -11,7 +13,7 @@ import duke.task.Task;
  */
 public class DeleteCommand extends Command {
 
-    int index;
+    private int index;
 
     /**
      * Constructor of the DeleteCommand Class
@@ -31,7 +33,7 @@ public class DeleteCommand extends Command {
      * @param storage The Storage Object that handles reading and writing from the datafile
      */
     @Override
-    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException{
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         Task task = taskList.getTask(index);
         taskList.removeTask(task);
         storage.delete(task);

@@ -5,7 +5,6 @@ import duke.TaskList;
 import duke.Ui;
 import duke.exception.DukeException;
 import duke.exception.FindException;
-import duke.task.Task;
 
 /**
  * Represent a "Find" Command
@@ -14,7 +13,7 @@ import duke.task.Task;
  */
 public class FindCommand extends Command {
 
-    String description;
+    private String description;
 
     /**
      * Constructor of the FindCommand Class
@@ -41,8 +40,8 @@ public class FindCommand extends Command {
         if (taskList.printMatching(description).equals("")) {
             throw new FindException("There is no matching results. Please re-enter:");
         } else {
-           content += ui.printFind();
-           content += taskList.printMatching(description);
+            content += ui.printFind();
+            content += taskList.printMatching(description);
         }
         return content;
     }
