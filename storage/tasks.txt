@@ -1,3 +1,3 @@
-[T]|✘|read book
-[D]|✘|go library|12/12/2020 18:00
-[E]|✘|attend meeting|02/09/2020 19:00
+[T]|✓|read book
+[E]|✓|attend meeting|02/09/2020 19:00
+[T]|✘|go for a jog
