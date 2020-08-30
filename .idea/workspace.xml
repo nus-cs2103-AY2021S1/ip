@@ -6,40 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="f48f93c2-feee-4960-9630-ec0bc55c7b48" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Command/AddEventCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Command/AddEventCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Command/AddTodoCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Command/AddTodoCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Command/Command.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Command/Command.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Command/DeleteCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Command/DeleteCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Command/ExitCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Command/ExitCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Command/FilterDateCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Command/FilterDateCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Command/FindCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Command/FindCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Command/ListCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Command/ListCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Command/ShowFunctionCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Command/ShowFunctionCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Command/WrongCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Command/WrongCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/DateTime/DateTimeManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DateTime/DateTimeManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Duke.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Duke.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Errors/ErrorExceptions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Errors/ErrorExceptions.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/File/FileManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/File/FileManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Parser/InputManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Parser/InputManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Parser/ParseAddTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Parser/ParseAddTask.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Parser/ParseDelete.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Parser/ParseDelete.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Parser/ParseExit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Parser/ParseExit.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Parser/ParseFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Parser/ParseFilter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Parser/ParseFind.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Parser/ParseFind.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Parser/ParseList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Parser/ParseList.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Parser/ParseShow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Parser/ParseShow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Tasks/Deadline.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Tasks/Deadline.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Tasks/Event.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Tasks/Event.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Tasks/TaskManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Tasks/TaskManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Tasks/Todo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Tasks/Todo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Tasks/task.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Tasks/task.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/UI/InitiateParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/UI/InitiateParser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/UI/UserInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/UI/UserInterface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/Tasks/DeadlineTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Tasks/DeadlineTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/Tasks/EventTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Tasks/EventTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/Tasks/TaskManagerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Tasks/TaskManagerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/Tasks/TodoTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Tasks/TodoTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/Tasks/taskTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Tasks/taskTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
