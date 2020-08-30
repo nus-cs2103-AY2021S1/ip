@@ -3,9 +3,14 @@
  */
 public class Task {
     private Boolean isDone;
-    private String taskName;
-    private TaskType type;
+    private final String taskName;
+    private final TaskType type;
 
+    /**
+     * Creates a Task instance
+     * @param taskName task description
+     * @param type type of task
+     */
     public Task(String taskName, TaskType type) {
         this.isDone = false;
         this.taskName = taskName;

@@ -1,21 +1,22 @@
-import org.junit.jupiter.api.DynamicTest;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 public class DogeTest {
 
     @Test
-    public void dummyTest(){
+    public void dummyTest() {
         assertEquals(2, 2);
     }
 
-    @Test
+    /*@Test
     public void uiTest() {
         Ui ui = new Ui();
         String testString = "--------------------------------------" + "\n"
                 + "Added to list : " + "printable message" + "\n"
                 + "--------------------------------------";
-    }
+    }*/
 
     @Test
     public void taskTest() {
@@ -28,18 +29,18 @@ public class DogeTest {
     public void taskListTest() {
         Task task = new Task("Cycling", TaskType.E);
         TaskList.addToList(task);
-        assertEquals(task, TaskList.TO_DO_LIST.get(0));
+        assertEquals(task, TaskList.toDoList.get(0));
     }
 
     @Test
-    public void  parserTest() {
+    public void parserTest() {
         boolean isAddCommand = false;
         try {
             Command addCommand = Parser.manage("todo feed doge");
             isAddCommand = addCommand instanceof AddCommand;
+        } catch (DukeException e) {
+            System.out.println(e.getMessage());
         }
-        catch (DukeException e) {
-        }
-        assertEquals(true, isAddCommand);
+        assertTrue(isAddCommand);
     }
 }

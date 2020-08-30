@@ -1,5 +1,5 @@
 public class RemoveCommand extends Command {
-    public int removeInt;
+    final int removeInt;
 
     public RemoveCommand(int removeInt) {
         this.removeInt = removeInt;
@@ -15,7 +15,7 @@ public class RemoveCommand extends Command {
     public void execute(Ui ui, Storage storage) {
         ui.removePrint(removeInt);
         TaskList.removeFromList(removeInt);
-        storage.save(TaskList.TO_DO_LIST);
-        ui.printNumberOfTasks(TaskList.TO_DO_LIST.size());
+        storage.save(TaskList.toDoList);
+        ui.printNumberOfTasks(TaskList.toDoList.size());
     }
 }

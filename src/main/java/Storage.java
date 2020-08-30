@@ -9,9 +9,7 @@ import java.util.List;
  * Object to enable permanent storing of task list onto hard drive.
  */
 public class Storage {
-    
-    private String filePath;
-
+    private final String filePath;
     public Storage(String filePath) {
         this.filePath = filePath;
     }
@@ -22,18 +20,16 @@ public class Storage {
      */
     public void save(List<Task> toDoList) {
         String path = System.getProperty("user.dir") + filePath;
-        if(!Files.exists(Paths.get(path))) {
+        if (!Files.exists(Paths.get(path))) {
             try {
                 Files.createFile(Paths.get(path));
-            }
-            catch (IOException e) {
+            } catch (IOException e) {
                 System.out.println("error creating file");
             }
         }
         try {
             new FileWriter(path, false).close();
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             System.out.println("error deleting file");
         }
 
@@ -50,9 +46,8 @@ public class Storage {
 
             }
             out.close();
-        }
-        catch (IOException e) {
-            System.out.println(e);
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
         }
 
     }

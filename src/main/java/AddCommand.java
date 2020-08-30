@@ -1,5 +1,5 @@
-public class AddCommand extends Command{
-    private Task myTask;
+public class AddCommand extends Command {
+    final Task myTask;
     public AddCommand(Task myTask) {
         this.myTask = myTask;
     }
@@ -13,8 +13,8 @@ public class AddCommand extends Command{
     @Override
     public void execute(Ui ui, Storage storage) {
         TaskList.addToList(myTask);
-        storage.save(TaskList.TO_DO_LIST);
+        storage.save(TaskList.toDoList);
         ui.printFormat(myTask.toString());
-        ui.printNumberOfTasks(TaskList.TO_DO_LIST.size());
+        ui.printNumberOfTasks(TaskList.toDoList.size());
     }
 }

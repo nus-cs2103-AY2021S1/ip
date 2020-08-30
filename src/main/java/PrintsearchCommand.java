@@ -1,5 +1,5 @@
-public class PrintsearchCommand extends Command{
-    private String keyword;
+public class PrintsearchCommand extends Command {
+    final String keyword;
 
     public PrintsearchCommand(String keyword) {
         this.keyword = keyword;

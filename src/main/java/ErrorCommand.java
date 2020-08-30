@@ -1,5 +1,5 @@
-public class ErrorCommand extends Command{
-    public String errorMessage;
+public class ErrorCommand extends Command {
+    final String errorMessage;
     public ErrorCommand(String errorMessage) {
         this.errorMessage = errorMessage;
     }
