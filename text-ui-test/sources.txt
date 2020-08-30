@@ -1,6 +1,11 @@
 C:\Users\Wong Jun Long\Documents\ip\src\main\java\Duke.java
 C:\Users\Wong Jun Long\Documents\ip\src\main\java\datetimeconverter\DateTimeConverter.java
 C:\Users\Wong Jun Long\Documents\ip\src\main\java\exception\DukeException.java
+C:\Users\Wong Jun Long\Documents\ip\src\main\java\javafx\DialogBox.java
+C:\Users\Wong Jun Long\Documents\ip\src\main\java\javafx\JavaFX.java
+C:\Users\Wong Jun Long\Documents\ip\src\main\java\javafx\Launcher.java
+C:\Users\Wong Jun Long\Documents\ip\src\main\java\javafx\Main.java
+C:\Users\Wong Jun Long\Documents\ip\src\main\java\javafx\MainWindow.java
 C:\Users\Wong Jun Long\Documents\ip\src\main\java\parser\Parser.java
 C:\Users\Wong Jun Long\Documents\ip\src\main\java\storage\Storage.java
 C:\Users\Wong Jun Long\Documents\ip\src\main\java\task\TaskDescription.java

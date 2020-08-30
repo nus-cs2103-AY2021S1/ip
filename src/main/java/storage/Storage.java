@@ -35,7 +35,7 @@ public class Storage {
     /**
      * Creates a folder path for duke.txt if there isn't a folder for duke.txt.
      */
-    public static void createFolder() {
+    public static String createFolder() {
         try {
             File writingDirectory = new File(Storage.FOLDERPATH);
 
@@ -43,9 +43,10 @@ public class Storage {
             if (!writingDirectory.exists()) {
                 writingDirectory.mkdir();
             }
+            return "";
         } catch (Exception e) {
-            DukeException.errorCreatingFolder();
             System.out.println("Error Message: " + e.getMessage());
+            return DukeException.errorCreatingFolder();
         }
     }
 
@@ -54,7 +55,7 @@ public class Storage {
      *
      * @param textToAdd Text to be appended to duke.txt.
      */
-    public static void appendToFile(String textToAdd) {
+    public static String appendToFile(String textToAdd) {
         try {
             // Create src\main\java\data folder if needed
             Storage.createFolder();
@@ -63,9 +64,10 @@ public class Storage {
             FileWriter fw = new FileWriter(Storage.FILEPATH, true);
             fw.write(textToAdd + "\n");
             fw.close();
+            return "";
         } catch (IOException e) {
-            DukeException.errorAppendingToFile();
             System.out.println("Error Message: " + e.getMessage());
+            return DukeException.errorAppendingToFile();
         }
     }
 
@@ -75,7 +77,7 @@ public class Storage {
      * @param currentText Targeted text to be amended.
      * @param amendedText New text written in place of targeted text.
      */
-    public static void amendFile(String currentText, String amendedText) {
+    public static String amendFile(String currentText, String amendedText) {
         try {
             File file = new File(Storage.FILEPATH);
 
@@ -86,9 +88,10 @@ public class Storage {
 
             // TRUNCATE_EXISTING overwrites our existing text file and rewrites the text file
             Files.write(file.toPath(), out, StandardOpenOption.WRITE, StandardOpenOption.TRUNCATE_EXISTING);
+            return "";
         } catch (IOException e) {
-            DukeException.errorAmendingFile();
             System.out.println("Error Message: " + e.getMessage());
+            return DukeException.errorAmendingFile();
         }
     }
 
@@ -97,7 +100,7 @@ public class Storage {
      *
      * @param textToDelete Targeted text to be deleted.
      */
-    public static void deleteFromFile(String textToDelete) {
+    public static String deleteFromFile(String textToDelete) {
         try {
             File file = new File(Storage.FILEPATH);
 
@@ -108,9 +111,10 @@ public class Storage {
 
             // TRUNCATE_EXISTING replaces old contents of duke.txt file
             Files.write(file.toPath(), out, StandardOpenOption.WRITE, StandardOpenOption.TRUNCATE_EXISTING);
+            return "";
         } catch (IOException e) {
-            DukeException.errorDeletingTextFromFile();
             System.out.println("Error Message: " + e.getMessage());
+            return DukeException.errorDeletingTextFromFile();
         }
     }
 
