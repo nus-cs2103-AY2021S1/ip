@@ -17,37 +17,37 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class DukeTest {
     @Test
-    public void toDoTest(){
+    public void toDoTest() {
         Duke duke = new Duke("duke.txt");
         Parser parser = new Parser(duke);
         ArrayList<Task> arr = new ArrayList<>();
         TaskList taskList = new TaskList(arr);
-        Command cmd = parser.parse("todo Tutorial 1",taskList);
+        Command cmd = parser.parse("todo Tutorial 1", taskList);
         cmd.execute();
 
         Task taskInserted = taskList.list.get(0);
-        assertEquals(taskInserted.task,"Tutorial 1");
+        assertEquals(taskInserted.task, "Tutorial 1");
     }
 
     @Test
-    public void deadlineTest(){
+    public void deadlineTest() {
         Duke duke = new Duke("duke.txt");
         Parser parser = new Parser(duke);
         ArrayList<Task> arr = new ArrayList<>();
         TaskList taskList = new TaskList(arr);
-        Command cmd = parser.parse("deadline Tutorial 1 /by 2020-02-01",taskList);
+        Command cmd = parser.parse("deadline Tutorial 1 /by 2020-02-01", taskList);
         cmd.execute();
 
         Deadline deadlineInserted = (Deadline) taskList.list.get(0);
         assertEquals(deadlineInserted.deadline, LocalDate.parse("2020-02-01"));
     }
     @Test
-    public void eventTest(){
+    public void eventTest() {
         Duke duke = new Duke("duke.txt");
         Parser parser = new Parser(duke);
         ArrayList<Task> arr = new ArrayList<>();
         TaskList taskList = new TaskList(arr);
-        Command cmd = parser.parse("event Tutorial 1 /at 2020-02-01",taskList);
+        Command cmd = parser.parse("event Tutorial 1 /at 2020-02-01", taskList);
         cmd.execute();
 
         Event eventInserted = (Event) taskList.list.get(0);

@@ -7,7 +7,7 @@ public class Command {
     public boolean isExit;
     TaskList tasklist;
 
-    public Command(TaskList tasklist){
+    public Command(TaskList tasklist) {
         this.isExit = false;
         this.tasklist = tasklist;
     }

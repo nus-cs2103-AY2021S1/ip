@@ -12,7 +12,7 @@ public class listCommand extends Command {
      * Executes the Command to show the Task List.
      */
     @Override
-    public void execute(){
+    public void execute() {
         this.tasklist.showList();
     }
 }

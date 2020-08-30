@@ -14,7 +14,7 @@ public class Duke {
     public TaskList tasklist;
     public Ui ui;
 
-    public Duke (String filePath){
+    public Duke (String filePath) {
         this.storage = new Storage(filePath);
         this.tasklist = new TaskList(storage.arr);
         this.ui = new Ui();
@@ -29,10 +29,10 @@ public class Duke {
         duke.ui.greetingMessage();
         String userinput = "";
 
-        while(!isExit) {
+        while (!isExit) {
             duke.ui.prompt();
             userinput = duke.ui.readCommand();
-            Command command = parser.parse(userinput,duke.tasklist);
+            Command command = parser.parse(userinput, duke.tasklist);
             command.execute();
             isExit = command.isExit;
         }

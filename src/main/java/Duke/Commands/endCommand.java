@@ -4,7 +4,7 @@ import main.java.Duke.Task.TaskList;
 
 public class endCommand extends Command {
 
-    public endCommand(TaskList taskList){
+    public endCommand(TaskList taskList) {
         super(taskList);
     }
 

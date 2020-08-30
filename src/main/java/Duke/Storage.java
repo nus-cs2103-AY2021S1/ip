@@ -13,7 +13,7 @@ public class Storage {
     public String filePath;
     public ArrayList<Task> arr;
 
-    public Storage(String filePath){
+    public Storage(String filePath) {
         this.filePath = filePath;
         this.arr = new ArrayList<>();
         readTasks();
@@ -25,7 +25,7 @@ public class Storage {
      *
      * @throws IOException when file is unreadable.
      */
-    public void readTasks(){
+    public void readTasks() {
         BufferedReader objReader = null;
         try {
             String strCurrentLine;
@@ -33,28 +33,28 @@ public class Storage {
             objReader = new BufferedReader(new FileReader(filePath));
 
             while ((strCurrentLine = objReader.readLine()) != null) {
-                String taskType = strCurrentLine.substring(1,2);
-                boolean taskCompletion = strCurrentLine.contains("✗")?false:true;
+                String taskType = strCurrentLine.substring(1, 2);
+                boolean taskCompletion = strCurrentLine.contains("✗") ? false : true;
                 String taskDetails = taskCompletion
-                        ? strCurrentLine.substring(strCurrentLine.indexOf("✓")+3)
-                        : strCurrentLine.substring(strCurrentLine.indexOf("✗")+3);
+                        ? strCurrentLine.substring(strCurrentLine.indexOf("✓") + 3)
+                        : strCurrentLine.substring(strCurrentLine.indexOf("✗") + 3);
 
-                switch (taskType){
+                switch (taskType) {
                 case "T":
-                    arr.add(new toDo(taskDetails,taskCompletion));
+                    arr.add(new toDo(taskDetails, taskCompletion));
                     break;
 
                 case "D":
-                    String deadlineString = taskDetails.substring(0,taskDetails.indexOf("("));
-                    String taskDeadlineString = taskDetails.substring(taskDetails.indexOf("by:")+3,taskDetails.indexOf(")"));
+                    String deadlineString = taskDetails.substring(0, taskDetails.indexOf("("));
+                    String taskDeadlineString = taskDetails.substring(taskDetails.indexOf("by:") + 3, taskDetails.indexOf(")"));
                     LocalDate taskDeadline = LocalDate.parse(taskDeadlineString);
-                    arr.add(new Deadline(deadlineString,taskCompletion,taskDeadline));
+                    arr.add(new Deadline(deadlineString, taskCompletion, taskDeadline));
                     break;
                 case "E":
-                    String eventString = taskDetails.substring(0,taskDetails.indexOf("("));
-                    String eventDateString = taskDetails.substring(taskDetails.indexOf("at:")+3,taskDetails.indexOf(")"));
+                    String eventString = taskDetails.substring(0, taskDetails.indexOf("("));
+                    String eventDateString = taskDetails.substring(taskDetails.indexOf("at:") + 3, taskDetails.indexOf(")"));
                     LocalDate eventDate = LocalDate.parse(eventDateString);
-                    arr.add(new Event(eventString,taskCompletion,eventDate));
+                    arr.add(new Event(eventString, taskCompletion, eventDate));
                 }
             }
 
@@ -62,8 +62,9 @@ public class Storage {
             e.printStackTrace();
         } finally {
             try {
-                if (objReader != null)
+                if (objReader != null) {
                     objReader.close();
+                }
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
@@ -75,7 +76,7 @@ public class Storage {
      *
      * @param arr Current task list.
      */
-    public void saveTasks(ArrayList<Task> arr){
+    public void saveTasks(ArrayList<Task> arr) {
         try {
             // Creates a FileWriter
             FileWriter file = new FileWriter(filePath);
@@ -84,8 +85,8 @@ public class Storage {
             BufferedWriter output = new BufferedWriter(file);
 
             // Writes the string to the file
-            for(int i = 0 ; i < arr.size() ; i ++ ) {
-                output.write(arr.get(i).stringify()+"\n");
+            for (int i = 0 ; i < arr.size() ; i++ ) {
+                output.write(arr.get(i).stringify() + "\n");
             }
             // Closes the writer
             output.close();

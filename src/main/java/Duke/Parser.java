@@ -14,11 +14,11 @@ import java.time.format.DateTimeParseException;
 public class Parser {
     Duke duke;
 
-     public Parser(Duke duke){
-         this.duke = duke;
-     }
+    public Parser(Duke duke) {
+        this.duke = duke;
+    }
 
-    /**
+     /**
      * Parses the user input and returns a Command to be executed.
      *
      * @param userInput User input from the user.
@@ -32,10 +32,10 @@ public class Parser {
          String commandType;
          String description = null;
 
-        if(userInput.contains(" ")){ 
+        if (userInput.contains(" ")) {
             commandType = userInput.substring(0, userInput.indexOf(' '));
-            description = userInput.substring(userInput.indexOf(' ')+1);
-        }else{
+            description = userInput.substring(userInput.indexOf(' ') + 1);
+        } else {
             commandType = userInput;
         }
          
@@ -51,9 +51,9 @@ public class Parser {
                 }
                 String todoDescription = userInput.substring(5);
                 toDo task = new toDo(todoDescription, false);
-                return new addCommand(tasklist,task);
+                return new addCommand(tasklist, task);
 
-            }catch(DukeException e){
+            } catch (DukeException e) {
                 duke.ui.showException("Must include description for todo");
             }
             break;
@@ -67,11 +67,11 @@ public class Parser {
                     String deadlineDateString = userInput.substring(index + 4);
                     LocalDate deadlineDate = LocalDate.parse(deadlineDateString);
                     Deadline deadline = new Deadline(userInput.substring(9, index), false, deadlineDate);
-                    return new addCommand(tasklist,deadline);
+                    return new addCommand(tasklist, deadline);
                 }
-            }catch(DateTimeParseException e){
+            } catch (DateTimeParseException e) {
                 duke.ui.showException("Please input date in the format: YYYY-MM-DD");
-            }catch(DukeException e){
+            } catch (DukeException e) {
                 duke.ui.showException("deadline must include '/by'");
             }
             break;
@@ -87,9 +87,9 @@ public class Parser {
                     Event event = new Event(userInput.substring(6, index), false, eventDate);
                     return new addCommand(tasklist,event);
                 }
-            }catch(DateTimeParseException e){
+            } catch (DateTimeParseException e) {
                 duke.ui.showException("Please input date in the format: YYYY-MM-DD");
-            }catch(DukeException e){
+            } catch (DukeException e) {
                 duke.ui.showException("event must include '/at'");
             }
             break;
@@ -103,7 +103,7 @@ public class Parser {
                 if (taskNumber > tasklist.list.size()) {
                     throw new DukeArrayException();
                 }
-                return new deleteCommand(tasklist,taskNumber);
+                return new deleteCommand(tasklist, taskNumber);
             } catch (DukeArrayException e) {
                 System.out.println("Number cannot be longer than the list.");
             } catch (DukeException e) {
@@ -122,10 +122,10 @@ public class Parser {
                 if (taskNumber >= tasklist.list.size()) {
                     throw new DukeArrayException();
                 }
-                return new doneCommand(tasklist,taskNumber);
-            }catch(DukeArrayException e){
+                return new doneCommand(tasklist, taskNumber);
+            } catch (DukeArrayException e){
                 duke.ui.showException("Number cannot be longer than list.");
-            }catch(DukeException e) {
+            } catch (DukeException e) {
                 duke.ui.showException("Must include number after 'done'.");
             }
             break;
@@ -134,12 +134,12 @@ public class Parser {
             return new endCommand(tasklist);
 
         case "find":
-            try{
+            try {
                 if (userInput.length() < 6) {
                     throw new DukeException();
                 }
-                return new findCommand(tasklist,description);
-            } catch (DukeException e){
+                return new findCommand(tasklist, description);
+            } catch (DukeException e) {
                 duke.ui.showException("Must include name after 'find'.");
             }
             break;

@@ -12,10 +12,10 @@ public class toDo extends Task {
      * @return Description of task in a String.
      */
     @Override
-    public String stringify(){
-        if(this.isComplete == true) {
+    public String stringify() {
+        if (this.isComplete == true) {
             return "[T][✓] " + this.task;
-        }else{
+        } else {
             return "[T][✗] " + this.task;
         }
     }
