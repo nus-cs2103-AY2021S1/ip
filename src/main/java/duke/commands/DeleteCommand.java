@@ -28,11 +28,12 @@ public class DeleteCommand extends Command {
             taskManager.deleteTask(taskIndex);
             storage.save(taskManager);
             String output = "Noted. I have removed the task: \n";
-            formatter.print(output + Colour.Red(deletedTask.toString()));
+            formatter.print(output + Colour.convertTextToRed(deletedTask.toString()));
         } catch (StorageOperationException e) {
-            formatter.print(Colour.Red(e.getMessage()));
+            formatter.print(Colour.convertTextToRed(e.getMessage()));
         } catch (IndexOutOfBoundsException e) {
-            formatter.print(Colour.Red(ResourceHandler.getMessage("commandline.invalidTaskIndexErrorMessage")));
+            formatter.print(Colour.convertTextToRed(ResourceHandler.getMessage(
+                    "commandline.invalidTaskIndexErrorMessage")));
         }
     }
 }

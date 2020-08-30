@@ -93,7 +93,7 @@ public enum CommandTypes {
         @Override
         public void checkInput(String input) throws DukeException {
             String content = input.replaceFirst("^find", "");
-            if(content.isBlank()){
+            if (content.isBlank()) {
                 throw new DukeException(ResourceHandler.getMessage("command.invalidFindCommand"));
             }
         }

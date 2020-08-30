@@ -1,3 +1,4 @@
+
 package duke.parser;
 
 import duke.exceptions.DukeException;
@@ -15,13 +16,19 @@ import java.time.format.DateTimeParseException;
  */
 
 public class DateTimeParser {
-    private static final String[] DATE_TIME_PATTERNS_WITHOUT_TIME = {"d/M/yyyy", "d MMM yyyy", "d MMMM yyyy", "d-M-yyyy"
-            , "yyyy-M-d", "MM d yyyy", "MMM d yyyy", "MMMM d yyyy"};
+    private static final String[] DATE_TIME_PATTERNS_WITHOUT_TIME = {"d/M/yyyy", "d MMM yyyy", "d MMMM yyyy",
+        "d-M-yyyy", "yyyy-M-d", "MM d yyyy", "MMM d yyyy", "MMMM d yyyy"};
     private static final String[] DATE_TIME_PATTERNS_WITH_TIME = {"d/M/yyyy H:mm", "d/M/yyyy h:mm a", "d/M/yyyy Hmm",
-            "d MMM yyyy H:mm", "d MMM yyyy h:mm a", "d MMM yyyy Hmm", "d MMMM yyyy H:mm", "d MMMM yyyy h:mm a",
-            "d MMMM yyyy Hmm", "d-M-yyyy H:mm", "d-M-yyyy h:mm a", "d-M-yyyy Hmm", "yyyy-M-d H:mm",
-            "yyyy-M-d h:mm a", "yyyy-M-d Hmm", "d/M/yyyy ha", "d/M/yyyy h:mma"};
+        "d MMM yyyy H:mm", "d MMM yyyy h:mm a", "d MMM yyyy Hmm", "d MMMM yyyy H:mm", "d MMMM yyyy h:mm a",
+        "d MMMM yyyy Hmm", "d-M-yyyy H:mm", "d-M-yyyy h:mm a", "d-M-yyyy Hmm", "yyyy-M-d H:mm",
+        "yyyy-M-d h:mm a", "yyyy-M-d Hmm", "d/M/yyyy ha", "d/M/yyyy h:mma"};
 
+    /**
+     * Parses the input into a {@link DukeDateTime} object.
+     * @param input The date and/or time input
+     * @return The DukeDateTime object
+     * @throws DukeException If the user did not input in the accepted format.
+     */
     public static DukeDateTime parseDateTime(String input) throws DukeException {
         int index = patternsWithTime(input);
         if (index != -1) {
@@ -64,5 +71,4 @@ public class DateTimeParser {
         }
         return -1;
     }
-
 }

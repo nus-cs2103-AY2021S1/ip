@@ -10,6 +10,6 @@ public class DukeException extends Exception {
 
     @Override
     public String toString() {
-        return Colour.Red(this.getMessage());
+        return Colour.convertTextToRed(this.getMessage());
     }
 }

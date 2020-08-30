@@ -30,12 +30,13 @@ public class DoneCommand extends Command {
             storage.save(taskManger);
             String taskDoneMessage = ResourceHandler.getMessage("taskManager.taskDoneMessage");
             StringBuilder stringBuilder = new StringBuilder(taskDoneMessage);
-            stringBuilder.append(Colour.Green(completedTask.toString()));
+            stringBuilder.append(Colour.convertTextToGreen(completedTask.toString()));
             formatter.print(stringBuilder.toString());
         } catch (StorageOperationException e) {
-            formatter.print(Colour.Red(e.getMessage()));
+            formatter.print(Colour.convertTextToRed(e.getMessage()));
         } catch (IndexOutOfBoundsException e) {
-            formatter.print(Colour.Red(ResourceHandler.getMessage("commandline.invalidTaskIndexErrorMessage")));
+            formatter.print(Colour.convertTextToRed(ResourceHandler.getMessage(
+                    "commandline.invalidTaskIndexErrorMessage")));
         }
     }
 }

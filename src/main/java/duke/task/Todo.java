@@ -15,7 +15,7 @@ public class Todo extends Task {
     }
 
     @Override
-    public String toDataFileFormat(){
+    public String toDataFileFormat() {
         return String.format("T | %d | %s", isDone ? 1 : 0, content);
     }
 

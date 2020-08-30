@@ -4,12 +4,12 @@ import duke.exceptions.DukeException;
 
 import duke.parser.DateTimeParser;
 
-import duke.task.Todo;
-import duke.task.Event;
 import duke.task.Deadline;
 import duke.task.DukeDateTime;
-import duke.task.TaskManager;
+import duke.task.Event;
 import duke.task.Task;
+import duke.task.TaskManager;
+import duke.task.Todo;
 
 import duke.utils.Colour;
 import duke.utils.Ui;
@@ -25,31 +25,39 @@ import java.util.List;
 
 public class DataTranslator {
     private static final Ui formatter = new Ui();
-    public static TaskManager decode(List<String> lines){
+
+    /**
+     * Decodes a list of Strings into a TaskManager
+     *
+     * @param lines The list of Strings
+     * @return The taskManager
+     */
+    public static TaskManager decode(List<String> lines) {
         TaskManager taskManager = new TaskManager();
-        for(String line : lines){
+        for (String line : lines) {
             Task task = null;
             String[] parsedLine = line.split(" \\| ");
             DukeDateTime dukeDateTime;
             try {
                 switch (parsedLine[0]) {
-                    case "T":
-                        task = new Todo(parsedLine[2]);
-                        break;
-                    case "D":
-                        dukeDateTime = DateTimeParser.parseDateTime(parsedLine[3]);
-                        task = new Deadline(parsedLine[2], dukeDateTime);
-                        break;
-                    case "E":
-                        dukeDateTime = DateTimeParser.parseDateTime(parsedLine[3]);
-                        task = new Event(parsedLine[2], dukeDateTime);
-                    default:
-                        break;
+                case "T":
+                    task = new Todo(parsedLine[2]);
+                    break;
+                case "D":
+                    dukeDateTime = DateTimeParser.parseDateTime(parsedLine[3]);
+                    task = new Deadline(parsedLine[2], dukeDateTime);
+                    break;
+                case "E":
+                    dukeDateTime = DateTimeParser.parseDateTime(parsedLine[3]);
+                    task = new Event(parsedLine[2], dukeDateTime);
+                    break;
+                default:
+                    break;
                 }
-            } catch(DukeException e){
-                formatter.print(Colour.Red(e.getMessage()));
+            } catch (DukeException e) {
+                formatter.print(Colour.convertTextToRed(e.getMessage()));
             }
-            if(parsedLine[1].equals("1")){
+            if (parsedLine[1].equals("1")) {
                 assert task != null;
                 task.markTaskAsDone();
             }
@@ -58,10 +66,15 @@ public class DataTranslator {
         return taskManager;
     }
 
-    public static List<String> encode(TaskManager taskManager){
+    /**
+     * Encodes a {@link TaskManager} into a list of Strings to be saved into a file
+     * @param taskManager The {@link TaskManager}
+     * @return The list of strings
+     */
+    public static List<String> encode(TaskManager taskManager) {
         List<String> data = new ArrayList<>();
         List<Task> tasks = taskManager.getTasks();
-        for(Task task : tasks){
+        for (Task task : tasks) {
             data.add(task.toDataFileFormat());
         }
         return data;

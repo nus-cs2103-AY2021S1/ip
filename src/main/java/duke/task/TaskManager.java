@@ -2,8 +2,8 @@ package duke.task;
 
 import duke.utils.Colour;
 
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Represents a list of tasks. A <code>TaskManager</code> object will be able to carry out certain functions
@@ -21,15 +21,15 @@ public class TaskManager {
         tasks.remove(taskIndex - 1);
     }
 
-    public Task getTask(int taskIndex){
+    public Task getTask(int taskIndex) {
         return this.tasks.get(taskIndex);
     }
 
-    public List<Task> getTasks(){
+    public List<Task> getTasks() {
         return this.tasks;
     }
 
-    public int getTotalNumberOfTasks(){
+    public int getTotalNumberOfTasks() {
         return this.tasks.size();
     }
 
@@ -61,28 +61,28 @@ public class TaskManager {
         }
         boolean isPluralCompletedTasks = getCompletedTasks() >= 2;
         boolean isPluralUncompletedTasks = getUncompletedTasks() >= 2;
-        String completedTasks = Colour.Green(getCompletedTasks()
+        String completedTasks = Colour.convertTextToGreen(getCompletedTasks()
                 + (isPluralCompletedTasks ? " tasks" : " task"));
-        String uncompletedTasks = Colour.Red(getUncompletedTasks()
+        String uncompletedTasks = Colour.convertTextToRed(getUncompletedTasks()
                 + (isPluralUncompletedTasks ? " tasks." : " task"));
         stringBuilder.append("You have completed " + completedTasks + " and have yet to complete "
                 + uncompletedTasks);
         return stringBuilder.toString();
     }
 
-    public List<Task> findTasksByKeyword(String keyword){
+    public List<Task> findTasksByKeyword(String keyword) {
         List<Task> filteredTasks = new ArrayList<>();
-        for(Task task : tasks){
-            if(task.getContent().contains(keyword)){
+        for (Task task : tasks) {
+            if (task.getContent().contains(keyword)) {
                 filteredTasks.add(task);
             }
         }
         return filteredTasks;
     }
 
-    public void markTaskAsDone(int taskIndex){
-            Task updatedTask = tasks.get(taskIndex - 1);
-            updatedTask.markTaskAsDone();
-            tasks.set(taskIndex - 1, updatedTask);
+    public void markTaskAsDone(int taskIndex) {
+        Task updatedTask = tasks.get(taskIndex - 1);
+        updatedTask.markTaskAsDone();
+        tasks.set(taskIndex - 1, updatedTask);
     }
 }

@@ -19,8 +19,8 @@ import java.util.List;
  */
 
 public class Storage {
-    private final Path path;
     private static final String DEFAULT_FILEPATH = "./data/duke.txt";
+    private final Path path;
 
     public Storage() throws InvalidFilePathException {
         this(DEFAULT_FILEPATH);

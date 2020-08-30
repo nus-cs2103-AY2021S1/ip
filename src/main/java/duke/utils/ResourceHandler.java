@@ -2,8 +2,8 @@ package duke.utils;
 
 import java.util.HashMap;
 import java.util.Locale;
-import java.util.ResourceBundle;
 import java.util.Map;
+import java.util.ResourceBundle;
 
 /**
  * Interface which is used to retrieve string resources.

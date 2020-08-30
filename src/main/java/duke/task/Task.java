@@ -22,15 +22,15 @@ public class Task {
         return String.format("? | %d | %s", isDone ? 1 : 0, this.content);
     }
 
-    public void markTaskAsDone(){
+    public void markTaskAsDone() {
         isDone = true;
-    };
+    }
 
     public boolean getIsDone() {
         return this.isDone;
     }
 
-    public String getContent(){
+    public String getContent() {
         return this.content;
     }
 

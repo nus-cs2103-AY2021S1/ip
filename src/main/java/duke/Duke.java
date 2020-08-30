@@ -18,33 +18,34 @@ public class Duke {
     private Storage storage;
     private TaskManager taskManager;
 
-    public Duke (){
+    public Duke() {
         this.ui = new Ui();
         try {
             this.storage = new Storage();
             this.taskManager = storage.load();
-        } catch (InvalidFilePathException e){
-            ui.print(Colour.Red(e.getMessage()));
-        } catch (StorageOperationException e){
-            ui.print(Colour.Red(e.getMessage()));
+        } catch (InvalidFilePathException e) {
+            ui.print(Colour.convertTextToRed(e.getMessage()));
+        } catch (StorageOperationException e) {
+            ui.print(Colour.convertTextToRed(e.getMessage()));
         }
     }
 
-    public void run(){
+    public void run() {
         ui.print(ResourceHandler.getMessage("commandline.welcomeMessage"));
         boolean isExit = false;
-        while(!isExit){
-            try{
+        while (!isExit) {
+            try {
                 Command c = CommandLineInterfaceParser.parse();
                 c.executeCommand(taskManager, ui, storage);
                 isExit = c.isExit();
-            } catch(DukeException e){
-                ui.print(Colour.Red(e.getMessage()));
-            } catch(IllegalArgumentException e){
-                ui.print(Colour.Red(ResourceHandler.getMessage("commandline.invalidCommandInputMessage")));
+            } catch (DukeException e) {
+                ui.print(Colour.convertTextToRed(e.getMessage()));
+            } catch (IllegalArgumentException e) {
+                ui.print(Colour.convertTextToRed(ResourceHandler.getMessage("commandline.invalidCommandInputMessage")));
             }
         }
     }
+
     public static void main(String[] args) {
         new Duke().run();
     }

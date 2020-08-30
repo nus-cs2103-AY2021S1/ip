@@ -5,8 +5,8 @@ package duke.utils;
  */
 
 public class Ui {
-    private final static int DIVIDER_LENGTH = 80;
-    private final static int LEFT_PADDING = 7;
+    private static final int DIVIDER_LENGTH = 80;
+    private static final int LEFT_PADDING = 7;
 
     public void printLeftPadding() {
         for (int i = 0; i < LEFT_PADDING; i++) {
