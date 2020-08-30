@@ -12,18 +12,13 @@ import duke.ui.Ui;
 public class ExitCommand extends Command {
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             storage.save(tasks.getTaskList());
-            ui.sayBye();
+            return ui.sayBye();
         } catch (IOException ex) {
-            ui.printExceptions(ex);
+            return ui.printExceptions(ex);
         }
-    }
-
-    @Override
-    public boolean isDone() {
-        return true;
     }
 
 }

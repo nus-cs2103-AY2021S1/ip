@@ -21,8 +21,8 @@ public class Task {
 
     public String getStatusIcon() {
         return isDone
-                ? "✓"
-                : "✘";
+                ? "Y"
+                : "N";
     }
 
     public String getDescription() {

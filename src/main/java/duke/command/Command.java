@@ -10,7 +10,6 @@ import duke.ui.Ui;
  */
 public abstract class Command {
 
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage);
-    public abstract boolean isDone();
+    public abstract String execute(TaskList tasks, Ui ui, Storage storage);
 
 }

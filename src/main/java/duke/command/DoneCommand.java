@@ -19,21 +19,16 @@ public class DoneCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         ArrayList<Task> lib = tasks.getTaskList();
 
         if (index >= lib.size() || lib.size() == 0 || index < 0) {
-            ui.printExceptions(new DukeException(
+            return ui.printExceptions(new DukeException(
                     "This task ID does not exist in the database!"));
         } else {
             tasks.completeTask(index);
-            ui.printDoneStatement(lib.get(index).toString());
+            return ui.printDoneStatement(lib.get(index).toString());
         }
-    }
-
-    @Override
-    public boolean isDone() {
-        return false;
     }
 
 }

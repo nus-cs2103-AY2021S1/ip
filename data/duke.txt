@@ -1,3 +1,3 @@
-E > ✘ > new stuff > at: 2020-10-07
-T > ✘ > this other stuff
-D > ✘ > new deadline > by: 2020-07-03
+T > N > this thing
+E > N > attend meeting > at: 2020-08-29
+D > N > finish project > by: 2020-03-12
