@@ -23,7 +23,9 @@ public class Duke {
         }
     }
 
-
+    /**
+     * Runs the whole duke program
+     */
     public static void main(String[] args) {
         Duke dukeMessager = new Duke();
         dukeMessager.run();
@@ -122,7 +124,8 @@ public class Duke {
                 } catch (DukeDeleteException e) {
                     UI.printFormattedMessage("OOPS!!! The invalid delete number.");
                 } catch (DateTimeParseException e) {
-                    UI.printFormattedMessage("OOPS!!! The invalid date format has been keyed in. PLease enter in dd-MM-yyyy HH:mm format");
+                    UI.printFormattedMessage("OOPS!!! The invalid date format has "
+                            + "been keyed in. PLease enter in dd-MM-yyyy HH:mm format");
                 } catch (DukeNoMatchesExcpetion e) {
                     UI.printFormattedMessage("ERROR: No matches found!");
                 } catch (DukeEmptyFindException e) {

@@ -3,16 +3,28 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 
+/**
+ * Represents a strorage systems that stores the input information
+ */
 public class Storage {
+    /**
+     * The default relative path to the saving file.
+     */
     private static final String DEFAULT_PATH = "./data/duke.txt";
+    /**
+     * Stores the path object with the default path.
+     */
     private final Path path;
 
+    /**
+     * Constructs the storage class.
+     */
     public Storage() throws IOException {
         path = Paths.get(DEFAULT_PATH);
         File file = new File(DEFAULT_PATH);
@@ -20,6 +32,11 @@ public class Storage {
 
     }
 
+    /**
+     * Constructs a Tasklist of the tasks that are present in the storage.
+     *
+     * @return Tasklist of the previous tasks that have been stored.
+     */
     public TaskList load() {
         if (!Files.exists(path) || !Files.isRegularFile(path)) {
             return new TaskList();
@@ -35,7 +52,12 @@ public class Storage {
         }
     }
 
-
+    /**
+     * Constructs a Tasklist of the tasks that are present in the storage.
+     *
+     * @param tasklist Contains the list of all the tasks.
+     * @return Arraylist that will be coverted from a tasklist object.
+     */
     public ArrayList<String> convertArrayToSaveFormat(TaskList tasklist) {
         ArrayList<String> strings = new ArrayList<>();
         for (Task tasks : tasklist.getTasks()) {
@@ -44,6 +66,12 @@ public class Storage {
         return strings;
     }
 
+    /**
+     * Converts a list of strings to tasks.
+     *
+     * @param lines lines of strings that represents the tasks.
+     * @return Tasklist generated from the list of strings that have been given.
+     */
     public TaskList convertTextToTask(List<String> lines) {
         TaskList tasks = new TaskList();
         try {
@@ -70,6 +98,11 @@ public class Storage {
     }
 
 
+    /**
+     * Saves the list of strings into the folder
+     *
+     * @param strings Strings of the different tasks.
+     */
     public void save(ArrayList<String> strings) {
         try {
             Files.write(path, strings);

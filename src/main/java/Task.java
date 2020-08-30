@@ -1,5 +1,3 @@
-import java.time.format.DateTimeParseException;
-
 /**
  * Represents an Task reminder.
  */
@@ -57,7 +55,7 @@ public class Task {
         return "[" + getStatusIcon() + "]" + " " + description;
     }
 
-    public boolean containsKeyword(String substring){
+    public boolean containsKeyword(String substring) {
         return this.description.contains(substring);
     }
 

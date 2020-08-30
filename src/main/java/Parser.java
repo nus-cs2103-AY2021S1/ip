@@ -26,23 +26,52 @@ public class Parser {
 
     }
 
+    /**
+     * Checks the input if there is command done present.
+     *
+     * @param input Input of the user.
+     * @return True if there is "done".
+     */
     public static boolean isDone(String input) {
         return input.split(" ")[0].equals(TaskElement.DONE.label);
     }
 
-
+    /**
+     * Checks the input if there is command Todo present.
+     *
+     * @param input Input of the user.
+     * @return True if there is "Todo".
+     */
     public static boolean isToDo(String input) {
         return input.split(" ")[0].equals(TaskElement.TODO.label);
     }
 
+    /**
+     * Checks the input if there is command deadline present.
+     *
+     * @param input Input of the user.
+     * @return True if there is "deadline".
+     */
     public static boolean isDeadline(String input) {
         return input.split(" ")[0].equals(TaskElement.DEADLINE.label);
     }
 
+    /**
+     * Checks the input if there is command event present.
+     *
+     * @param input Input of the user.
+     * @return True if there is "event".
+     */
     public static boolean isEvent(String input) {
         return input.split(" ")[0].equals(TaskElement.EVENT.label);
     }
 
+    /**
+     * Checks the input if there is command delete present.
+     *
+     * @param input Input of the user.
+     * @return True if there is "delete".
+     */
     public static boolean isDelete(String input) {
         return input.split(" ")[0].equals(TaskElement.DELETE.label);
     }
@@ -118,7 +147,13 @@ public class Parser {
         return store;
     }
 
-    public static boolean isFind(String input){
+    /**
+     * Parses the input to check for "find".
+     *
+     * @param input Input of the user.
+     * @return True if there is "find".
+     */
+    public static boolean isFind(String input) {
         return input.split(" ")[0].equals(TaskElement.FIND.label);
     }
 

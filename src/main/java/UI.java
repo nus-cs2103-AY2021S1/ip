@@ -67,12 +67,12 @@ public class UI {
     public static void printKeywordTasks(String substring, ArrayList<Task> stringStore) throws DukeNoMatchesExcpetion {
         ArrayList<Task> keywordTasks = new ArrayList<>();
         for (int i = 0; i < stringStore.size(); i++) {
-            if(stringStore.get(i).containsKeyword(substring)) {
+            if (stringStore.get(i).containsKeyword(substring)) {
                 keywordTasks.add(stringStore.get(i));
             }
         }
         try {
-            if(keywordTasks.size() == 0){
+            if (keywordTasks.size() == 0) {
                 throw new DukeNoMatchesExcpetion("ERROR: No matches found!");
             }
             printHorizontalLine();
@@ -82,7 +82,7 @@ public class UI {
                 System.out.println(i + "." + keywordTasks.get(i - 1));
             }
             printHorizontalLine();
-        } catch (DukeNoMatchesExcpetion e){
+        } catch (DukeNoMatchesExcpetion e) {
             UI.printFormattedMessage("ERROR: No matches found!");
 
         }
