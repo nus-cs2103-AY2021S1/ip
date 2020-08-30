@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 public class Duke {
     /**
-     * Entry point to the Duke programme. 
+     * Entry point to the Duke programme.
      * When run, this function will load all the necessary classes required to start Duke.
      * @param args Input arguments to the programme.
      */
@@ -19,7 +19,7 @@ public class Duke {
         // Initialise TaskList
         Storage.loadTasksFrom("data/duke.txt", taskList);
         
-        ui.showWelcomeScreen();
+        ui.showWelcomeScreen(); 
         
         // Initialise booleans and scanners
         Scanner inputScanner = new Scanner(System.in);
@@ -31,7 +31,7 @@ public class Duke {
             //trim the input to remove leading and ending whitespace
             newInput = newInput.trim();
             
-            if (!parser.parse(newInput)) {
+            if (!parser.parse(newInput)) { 
                 break;
             }
         }
