@@ -69,12 +69,29 @@ public class Ui {
         System.out.println("    ____________________________________________________________");
     }
 
+    public static void findMessage(ArrayList<Task> taskList) {
+        if (taskList.size() == 0) {
+            System.out.println("    ____________________________________________________________");
+            System.out.println("    Oh dear, I couldn't find any matching tasks :o");
+            System.out.println("    ____________________________________________________________");
+        } else {
+            System.out.println("    ____________________________________________________________");
+            System.out.println("    Here are your search results!!");
+            int index = 1;
+            for(Task task: taskList) {
+                System.out.println("    " + index + ". " + task);
+                index++;
+            }
+            System.out.println("    ____________________________________________________________");
+        }
+    }
+
     /**
      * Prints a message indicating the specified task has been added.
      * @param task The Task that has been added.
      * @param size An integer value representing the new size of the TaskList.
      */
-    public static void addTaskMessage(Task task, int size) {
+    public static void addTaskMessage(Task task, int size){
         System.out.println("    ____________________________________________________________");
         System.out.println("     Okies! I've added this task~");
         System.out.println("       " + task);

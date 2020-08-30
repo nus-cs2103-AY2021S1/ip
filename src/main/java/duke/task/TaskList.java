@@ -121,6 +121,16 @@ public class TaskList {
         return task;
     }
 
+    public ArrayList<Task> findTasks(String matchString) {
+        ArrayList<Task> filteredList = new ArrayList<>();
+        for (Task task : this.taskList) {
+            if (task.getTaskName().contains(matchString)) {
+                filteredList.add(task);
+            }
+        }
+        return filteredList;
+    }
+
     /**
      * Gets the list of Tasks.
      * @return An ArrayList containing all Task in the TaskList.

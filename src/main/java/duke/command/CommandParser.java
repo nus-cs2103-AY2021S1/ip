@@ -7,6 +7,7 @@ import duke.task.TaskType;
 
 import duke.exception.DateParseException;
 import duke.exception.IncompleteTaskException;
+import duke.exception.InvalidSearchException;
 import duke.exception.InvalidTaskException;
 import duke.exception.UnknownCommandException;
 
@@ -24,7 +25,7 @@ public class CommandParser {
      * @throws InvalidTaskException if task index provided by user is invalid or missing.
      */
     public Command parseCommand(String command) throws UnknownCommandException, DateParseException,
-            IncompleteTaskException, InvalidTaskException {
+            IncompleteTaskException, InvalidTaskException, InvalidSearchException {
         command = command.trim();
         if (command.equals("bye")) {
             return new ExitCommand();
@@ -32,7 +33,9 @@ public class CommandParser {
             return new ListCommand();
         } else if (command.equals("today")) {
             return new TodayCommand();
-        } else if (command.length() >= 4 && command.substring(0, 4).equals("done")) {
+        } else if (command.length() >= 4 && command.substring(0, 4).equals("find")){
+            return parseFindCommand(command);
+        } else if (command.length() >= 4 && command.substring(0, 4).equals("done")){
             return parseDoneCommand(command);
         } else if (command.length() >= 6 && command.substring(0, 6).equals("delete")) {
             return parseDeleteCommand(command);
@@ -51,6 +54,14 @@ public class CommandParser {
     private boolean validAddTaskCommand(String command) {
         return command.split(" ")[0].equals("todo") || command.split(" ")[0].equals("deadline") ||
                 command.split(" ")[0].equals("event");
+    }
+
+    private FindCommand parseFindCommand(String command) throws InvalidSearchException {
+        if (command.length() < 5) {
+            throw new InvalidSearchException("Oh noes! I don't think you specified a search string :<");
+        }
+        String matchString = command.substring(5);
+        return new FindCommand(matchString);
     }
 
     /**
