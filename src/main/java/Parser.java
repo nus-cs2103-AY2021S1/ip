@@ -12,7 +12,7 @@ public class Parser {
      * @param ui Ui object that deals with user interaction.
      * @param storage Storage object that deals with loading tasks from the file and saving tasks in the file.
      */
-    public static void parse(String userInput, TaskList lst, Ui ui, Storage storage) {
+    public void parse(String userInput, TaskList lst, Ui ui, Storage storage) {
         String[] strArr = userInput.split(" ");
         try {
             check(strArr);
@@ -110,7 +110,7 @@ public class Parser {
      * @param arr Array of user input.
      * @throws DukeException Exception specific to Duke.
      */
-    public static void check(String[] arr) throws DukeException {
+    public void check(String[] arr) throws DukeException {
         if (arr.length == 1 && (arr[0].equals("todo") || arr[0].equals("deadline") || arr[0].equals("event") ||
                 arr[0].equals("done") || arr[0].equals("delete") || arr[0].equals("find"))) {
             throw new DukeException(arr[0]);

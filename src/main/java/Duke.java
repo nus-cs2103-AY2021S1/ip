@@ -10,7 +10,22 @@ public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
+    private Parser parser;
 
+    /**
+     * Creates Duke object.
+     */
+    public Duke() {
+        ui = new Ui();
+        storage = new Storage(PATH);
+        parser = new Parser();
+        try {
+            tasks = new TaskList(storage.loadFile());
+        } catch (IOException e) {
+            tasks = new TaskList();
+        }
+    }
+    
     /**
      * Creates Duke object.
      * @param filePath Pathname of the file that stores tasks.
@@ -18,6 +33,7 @@ public class Duke {
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
+        parser = new Parser();
         try {
             tasks = new TaskList(storage.loadFile());
         } catch (IOException e) {
@@ -32,7 +48,7 @@ public class Duke {
         ui.greet();
         Scanner sc = new Scanner(System.in);
         while (sc.hasNext()) {
-            Parser.parse(sc.nextLine(), tasks, ui, storage);
+            parser.parse(sc.nextLine(), tasks, ui, storage);
         }
     }
 
