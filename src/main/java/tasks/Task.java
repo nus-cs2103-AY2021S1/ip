@@ -66,9 +66,9 @@ public class Task {
      */
     public String toString() {
         if (!this.done) {
-            return "[✗]" + this.work;
+            return "[Not done]" + this.work;
         } else {
-            return "[✓]" + this.work;
+            return "[Donezo]" + this.work;
         }
     }
 }

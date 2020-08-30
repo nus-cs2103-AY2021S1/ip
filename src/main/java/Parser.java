@@ -11,6 +11,7 @@ import exceptions.InvalidNumberException;
 import exceptions.UnknownCommandException;
 import tasks.Deadline;
 import tasks.Event;
+import tasks.Task;
 import tasks.ToDos;
 
 /**
@@ -18,25 +19,94 @@ import tasks.ToDos;
  */
 public class Parser {
     /**
+     * Parse the user input and get the right response
+     * @param input String inputted by the user
+     * @param list A TaskList containing all the tasks inputted by the user
+     * @return String containing the response from duke
+     */
+    public static String getResponse(String input, TaskList list) {
+        input = input.trim();
+        try {
+            validity(input);
+        } catch (UnknownCommandException ex) {
+            return "Unknown command";
+        }
+        String[] inputs = input.split(" ");
+        String str;
+        switch(inputs[0]) {
+        case "todo":
+            try {
+                str = getTodo(input, list);
+            } catch (EmptyTodoException ex) {
+                return "Empty todo provided";
+            }
+            break;
+        case "event":
+            try {
+                str = getEventTest(input, list);
+            } catch (InvalidEventException e) {
+                return "Invalid event provided";
+            }
+            break;
+        case "deadline":
+            try {
+                str = getDeadline(input, list);
+            } catch (InvalidDeadlineException e) {
+                return "Invalid deadline given";
+            }
+            break;
+        case "delete":
+            if (inputs.length != 2) {
+                str = "Incorrect format provided";
+            } else {
+                str = delete(inputs[1], list);
+            }
+            break;
+        case "find":
+            try {
+                str = find(input, list);
+            } catch (InvalidNumberException e) {
+                return "No searches found";
+            }
+            break;
+        case "list":
+            str = list.toString();
+            break;
+        case "bye":
+            str = "Bye!! Hope to see you soon";
+            break;
+        case "number":
+            str = "Number of tasks to do is " + list.getSize();
+            break;
+        default:
+            if (inputs.length != 2) {
+                return "Invalid number of arguments";
+            }
+            str = update(inputs[1], list);
+        }
+        Storage.save(list);
+        return str;
+    }
+
+    /**
      * Removes the user requested task from the tasklist
      * @param request A string containing the integer value of the index.
      * @param list The tasklist object containing all the stored tasks.
      */
-    public static void delete(String request, TaskList list) {
+
+    public static String delete(String request, TaskList list) {
         try {
             int index = Integer.parseInt(request);
             isNumeric(index, list);
-            System.out.println("The event has been removed as per your request: \n "
-                    + list.get(index));
+            String str = "The event has been removed as per your request: \n "
+                    + list.get(index);
             list.delete(index);
-            System.out.println("Now you have " + list.getSize() + " tasks in the list+ \n"
-                    + "_____________________________");
+            str += "Now you have" + list.getSize() + " tasks to the list";
+            return str;
         } catch (NumberFormatException e) {
-            System.out.println("You have not provided a valid number\n"
-                    + "_____________________________");
+            return "You have not provided a valid number";
         } catch (InvalidNumberException e) {
-            System.out.println("The number provided was greater or lesser than the number of items in the list\n"
-                    + "_____________________________");
+            return "The number provided was greater or lesser than the number of items in the list";
         }
     }
 
@@ -45,39 +115,22 @@ public class Parser {
      * @param request A String containing the integer value of the index
      * @param list The tasklist object containing all the stored tasks.
      */
-    public static void update(String request, TaskList list) {
+
+    public static String update(String request, TaskList list) {
         try {
+            System.out.println(request);
             int index = Integer.parseInt(request);
             isNumeric(index, list);
             list.updateStatus(index);
-            System.out.println("Nice! I've marked this task as done: \n "
-                    + list.get(index));
-            System.out.println("Now you have " + list.getSize() + " tasks in the list \n_____________________________");
+            String str = "Nice! I've marked this task as done: \n "
+                    + list.get(index);
+            str += "Now you have " + list.getSize() + " tasks in the list";
+            return str;
         } catch (NumberFormatException e) {
-            System.out.println("You have not provided a valid number\n"
-                    + "_____________________________");
+            return "You have not provided a valid number";
         } catch (InvalidNumberException e) {
-            System.out.println("The number provided was greater or lesser than the "
-                    + "number of items in the list\n_____________________________");
-        }
-    }
-
-    /**
-     * Adds a toDo object containing the description provided to the list of tasks
-     * @param request A String containing the description of the todo object that needs to be added
-     * @param list The tasklist object containing all the stored tasks.
-     */
-
-    public static void addTodo(String request, TaskList list) {
-        try {
-            ToDos todo = getTodo(request);
-            System.out.println("Got it. I've added this task:" + todo);
-            list.update(todo);
-            System.out.println("Now you have " + list.getSize()
-                    + " tasks in the list.\n_____________________________");
-        } catch (EmptyTodoException ex) {
-            System.out.println("Oops!!! I'm sorry, but the description of a "
-                    + "todo cannot be empty\n_____________________________");
+            return "The number provided was greater or lesser than the "
+                    + "number of items in the list";
         }
     }
 
@@ -97,9 +150,10 @@ public class Parser {
      * Adds a deadline object with description and datetime into the tasklist provided
      * @param word The input provided by the user with the description of the deadline as well as the date and time
      * @param list The tasklist object containing all the stored tasks.
+     * @return String containing the details of the deadline
      * @throws InvalidDeadlineException
      */
-    public static void getDeadline(String word, TaskList list) throws InvalidDeadlineException {
+    public static String getDeadline(String word, TaskList list) throws InvalidDeadlineException {
         if (word.contains("/by") && !word.substring(word.indexOf("/by") + 3).equals("")) {
             word = word.substring(8);
             int index = word.indexOf("/by");
@@ -129,63 +183,22 @@ public class Parser {
                 LocalDateTime date = LocalDateTime.parse(datestr, formatter);
                 Deadline deadline = new Deadline(word.substring(0, index), date);
                 list.update(deadline);
-                System.out.println("Got it. I've added this task: " + deadline);
-                System.out.println("Now you have " + list.getSize() + " tasks in the list.");
+                return deadline.toString();
             } catch (DateTimeParseException e) {
-                System.out.println("Invalid date provided");
+                return "Invalid Date provided";
             }
-            System.out.println("_____________________________");
         } else {
             throw new InvalidDeadlineException();
         }
     }
-
-    public static String getEventTest(String word) throws InvalidEventException {
-        if (word.contains("/at") && !word.substring(word.indexOf("/at") + 3).equals("")) {
-            word = word.substring(5);
-            int index = word.indexOf("/at");
-            String str = word.substring(index + 3).trim();
-            String datestr = str.replaceAll("-", "/");
-            String[] datearr = datestr.split("/");
-            if (datearr.length < 2) {
-                throw new InvalidEventException();
-            }
-            if (datearr[0].length() < 2) {
-                datestr = "0" + datestr;
-                datearr[0] = "0" + datearr[0];
-            }
-            if (datearr[1].length() < 2) {
-                datestr = datearr[0] + "/0" + datearr[1] + "/" + datearr[2];
-            }
-            if (!datestr.contains(":")) {
-                String[] arr = datestr.split(" ");
-                if (arr.length > 2) {
-                    throw new InvalidEventException();
-                }
-                arr[1] = arr[1].substring(0, 2) + ":" + arr[1].substring(2);
-                datestr = arr[0] + " " + arr[1];
-            }
-            try {
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
-                LocalDateTime date = LocalDateTime.parse(datestr, formatter);
-                Event event = new Event(word.substring(0, index), date);
-                return event.toString();
-            } catch (DateTimeParseException e) {
-                System.out.println("Incorrect Date format used");
-                return null;
-            }
-        } else {
-            throw new InvalidEventException();
-        }
-    }
-
     /**
      * Adds an event object with description and datetime into the tasklist provided
      * @param word The input provided by the user with the description of the event as well as the date and time
      * @param list The tasklist object containing all the stored tasks.
+     * @return String object containing the details of the event
      * @throws InvalidEventException
      */
-    public static void getEvent(String word, TaskList list) throws InvalidEventException {
+    public static String getEventTest(String word, TaskList list) throws InvalidEventException {
         if (word.contains("/at") && !word.substring(word.indexOf("/at") + 3).equals("")) {
             word = word.substring(5);
             int index = word.indexOf("/at");
@@ -214,13 +227,11 @@ public class Parser {
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
                 LocalDateTime date = LocalDateTime.parse(datestr, formatter);
                 Event event = new Event(word.substring(0, index), date);
-                System.out.println("Got it. I've added this task:\n" + event);
                 list.update(event);
-                System.out.println("Now you have " + list.getSize() + " tasks in the list.");
+                return event.toString();
             } catch (DateTimeParseException e) {
-                System.out.println("Incorrect Date format used");;
+                return "Incorrect Date format used";
             }
-            System.out.println("_____________________________");
         } else {
             throw new InvalidEventException();
         }
@@ -232,8 +243,12 @@ public class Parser {
      * @throws UnknownCommandException
      */
     public static void validity(String line) throws UnknownCommandException {
-        ArrayList<String> list = new ArrayList<>(Arrays.asList("delete", "done", "todo", "event", "deadline", "find"));
+        ArrayList<String> list = new ArrayList<>(Arrays.asList("delete", "done", "todo",
+                "event", "deadline", "find", "list", "bye", "number"));
         String[] words = line.split(" ");
+        if (line.equals("list") || line.equals("bye") || line.equals("number")) {
+            return;
+        }
         if (list.contains(words[0]) && words.length > 1) {
 
         } else {
@@ -244,25 +259,33 @@ public class Parser {
     /**
      * Finds a task based on a keyword
      * @param input A user-inputted string which is the keyword
-     * @param tasks A list of tasks from which to search
      * @throws InvalidNumberException
      */
-    public static void find(String input, TaskList tasks) throws InvalidNumberException {
+    public static String find(String input, TaskList list) throws InvalidNumberException {
         String[] requests = input.split(" ");
+        ArrayList<Task> tasks = new ArrayList<>();
         if (requests.length != 2) {
             throw new InvalidNumberException("More than one keyword was provided");
         }
-        for (int i = 1; i <= tasks.getSize(); i++) {
-            if (tasks.get(i).getWork().contains(requests[1])) {
-                System.out.println(tasks.get(i));
+        for (int i = 1; i <= list.getSize(); i++) {
+            if (list.get(i).getWork().contains(requests[1])) {
+                tasks.add(list.get(i));
             }
         }
-        System.out.println("_____________________________");
+        return new TaskList(tasks).toString();
     }
 
-    public static ToDos getTodo(String work) throws EmptyTodoException {
+    /**
+     * Adds a toDo object containing the description provided to the list of tasks
+     * @param work A String containing the description of the todo object that needs to be added
+     * @param list The tasklist object containing all the stored tasks.
+     * @return
+     */
+    public static String getTodo(String work, TaskList list) throws EmptyTodoException {
         if (work.length() > 4) {
-            return new ToDos(work.substring(4));
+            ToDos todo = new ToDos(work.substring(4));
+            list.update(todo);
+            return todo.toString();
         } else {
             throw new EmptyTodoException();
         }

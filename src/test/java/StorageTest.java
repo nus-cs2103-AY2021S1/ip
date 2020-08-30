@@ -1,4 +1,4 @@
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 import tasks.Deadline;
 import tasks.Event;
 import tasks.Task;
@@ -9,32 +9,21 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.Assert.assertEquals;
 
 public class StorageTest {
     @Test
-    public void emptyFile(){
+    public void emptyFile() {
         //Simulating an empty or non existent file
         Storage store = new Storage("data/dike.txt");
         TaskList list = store.load();
         ArrayList<Task> tasks = list.getTasks();
         assertEquals(new ArrayList<>(), tasks);
     }
-//    @Test
-//    public void storedTestLoad(){
-//        //Simulating if there is a file and it is opened
-//        Storage store = new Storage("data/duke.txt");
-//        TaskList list = store.load();
-//        String test = "[D][0] add me in |02/02/2030 21:23\n" +
-//                "[T][0] 1234567\n" +
-//                "[E][1] do by |02/04/2020 23:22\n" +
-//                "[T][1] add me in";
-//        assertEquals(test, list.save());
-//    }
 
     @Test
-    public void saveReopenTest(){
-        // simulating what would happen if you load up a file and then write to it and close it again        File f = new File("data/doke.txt");
+    public void saveReopenTest() {
+        // simulating what would happen if you load up a file and then write to it and close it again
         File f = new File("data/doke.txt");
         f.delete();
         Storage store = new Storage("data/doke.txt");

@@ -1,15 +1,7 @@
-import java.util.Scanner;
-
-import exceptions.InvalidDeadlineException;
-import exceptions.InvalidEventException;
-import exceptions.InvalidNumberException;
-import exceptions.UnknownCommandException;
-
 /**
  * The User Interface Object with a scanner and storage object that takes in and stores user input
  */
 public class UI {
-    private Scanner sc;
     private Storage storage;
 
     /**
@@ -18,7 +10,6 @@ public class UI {
      */
     public UI(Storage store) {
         this.storage = store;
-        this.sc = new Scanner(System.in);
     }
 
     /**
@@ -32,58 +23,13 @@ public class UI {
     }
 
     /**
-     * Takes in user input and uses regex to analyze it and then chooses a parser method to make sense of it
+     * Gets a response to an user input
+     * @param input A String from the user
+     * @return String containing the response
      */
-    public void run() {
-        String input = sc.nextLine();
-        TaskList list = storage.load();
-        while (!input.equals("bye")) {
-            input = input.trim().replaceAll("\\s{2,}", " ");
-            System.out.println("_____________________________");
-            if (input.equals("list")) {
-                System.out.println(list);
-                System.out.println("_____________________________");
-                input = sc.nextLine();
-                continue;
-            }
-            String[] request = input.split(" ");
-            try {
-                Parser.validity(input);
-                if (request[0].equals("done")) {
-                    Parser.update(request[1], list);
-                } else if (request[0].equals("todo")) {
-                    Parser.addTodo(input, list);
-                } else if (request[0].equals("deadline")) {
-                    try {
-                        Parser.getDeadline(input, list);
-                    } catch (InvalidDeadlineException ex) {
-                        System.out.println("Oops, somewhere your deadline was wrong. "
-                                + "Please check whether you used a /by tag");
-                        System.out.println("_____________________________");
-                    }
-                } else if (request[0].equals("event")) {
-                    try {
-                        Parser.getEvent(input, list);
-                    } catch (InvalidEventException ex) {
-                        System.out.println("Oops seems like your event is invalid. "
-                                + "Please check your /at tag");
-                        System.out.println("_____________________________");
-                    }
-                } else if (request[0].equals("find")) {
-                    try {
-                        Parser.find(input, list);
-                    } catch (InvalidNumberException ex) {
-                        System.out.println("More than one keyword was entered");
-                    }
-                } else {
-                    Parser.delete(request[1], list);
-                }
-            } catch (UnknownCommandException ex) {
-                System.out.println("OOPS!!! I'm sorry, but I don't know what that means :-(\n"
-                        + "_____________________________");
-            }
-            input = sc.nextLine();
-        }
+    public String getResponse(String input) {
+        TaskList list = Storage.load();
+        return Parser.getResponse(input, list);
     }
 
     /**
