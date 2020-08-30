@@ -13,7 +13,7 @@ import javafx.stage.Stage;
  * Loads the fxml files and sets the scene.
  */
 public class Main extends Application {
-    private Chatterbox chatterbox = new Chatterbox();
+    private final Chatterbox chatterbox = new Chatterbox();
 
     /**
      * The main entry point for all JavaFX applications.

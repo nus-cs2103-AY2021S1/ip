@@ -5,12 +5,6 @@ import java.util.Scanner;
 
 import chatterbox.task.Task;
 import chatterbox.task.TaskList;
-import chatterbox.ui.DialogBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.VBox;
 
 /**
  * Handles the main loop and the high level logic flow of the program.
@@ -27,20 +21,6 @@ public class Chatterbox {
         tasks = new TaskList(store);
         tasks.loadTasks();
         scanner = new Scanner(System.in);
-    }
-
-    /**
-     * Iteration 1:
-     * Creates a label with the specified text and adds it to the dialog container.
-     * @param text String containing text to add
-     * @return a label with the specified text that has word wrap enabled.
-     */
-    private Label getDialogLabel(String text) {
-        // You will need to import `javafx.scene.control.Label`.
-        Label textToAdd = new Label(text);
-        textToAdd.setWrapText(true);
-
-        return textToAdd;
     }
 
     /**
