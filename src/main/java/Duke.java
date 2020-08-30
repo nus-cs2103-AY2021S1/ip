@@ -1,7 +1,16 @@
+import java.io.IOException;
+import java.nio.file.Files;
 import java.util.Scanner;
 import java.util.ArrayList;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.io.BufferedWriter;
 
+import java.util.Date;
+import java.text.SimpleDateFormat;
+
+import java.io.File;
 
 public class Duke {
 
@@ -50,9 +59,13 @@ public class Duke {
 
     private static final String line = "-------------------------------------------------------------------------------";
 
-
+    private static final Path dataPath = Paths.get("data");
+    private static final String taskLogName = "tasks.txt";
 
     public static void main(String[] args) {
+        System.out.println("Tasks will be saved to: " + dataPath.toAbsolutePath());
+
+
         Scanner scanner = new Scanner(System.in);
         String userInput = "";
         Boolean running = true;
@@ -92,6 +105,7 @@ public class Duke {
                         } else {
                             System.out.println(fmtMsg("I PUT NEW TING IN DA LIST\n  " + tasks.get(tasks.size() - 1) +
                                     "\nNAO U HAS " +  tasks.size() + " FINGS IN DA LIST LULZIES"));
+                            saveTasksToFile(tasks);
                         }
 
                         break;
@@ -115,6 +129,7 @@ public class Duke {
                                     tasks.add(new Deadline(item, date));
                                     System.out.println(fmtMsg("I PUT NEW TING IN DA LIST\n  " + tasks.get(tasks.size() - 1) +
                                             "\nNAO U HAS " +  tasks.size() + " FINGS IN DA LIST LULZIES"));
+                                    saveTasksToFile(tasks);
                                 }
                             }
                         }
@@ -141,6 +156,7 @@ public class Duke {
                                     tasks.add(new Deadline(item, date));
                                     System.out.println(fmtMsg("I PUT NEW TING IN DA LIST\n  " + tasks.get(tasks.size() - 1) +
                                             "\nNAO U HAS " +  tasks.size() + " FINGS IN DA LIST LULZIES"));
+                                    saveTasksToFile(tasks);
                                 }
                             }
                         }
@@ -168,6 +184,7 @@ public class Duke {
                                 tasks.get(idx).setDone(true);
                                 System.out.println(fmtMsg("TASK IZ NAO DUNZ!!!!1!11!\n" +
                                         "  " + tasks.get(idx)));
+                                saveTasksToFile(tasks);
                             }
                         } catch (NumberFormatException e) {
                             throw new DukeException("U MUST ONLY PUT INDEX OV TASK LULS");
@@ -186,6 +203,7 @@ public class Duke {
                                 System.out.println(fmtMsg("TASK IZ NAO DELETZ!!!!1!11!\n" +
                                         "  " + tasks.get(idx) + "\nNAO U HAS " +  (tasks.size() - 1) + " FINGS IN DA LIST LULZIES"));
                                 tasks.remove(idx);
+                                saveTasksToFile(tasks);
                             }
                         } catch (NumberFormatException e) {
                             throw new DukeException("U MUST ONLY PUT INDEX OV TASK LULS");
@@ -204,6 +222,26 @@ public class Duke {
         }
 
         System.out.println(fmtMsg("OKAIS I IZ GOIN 2 NOM BYEEEEE C U !!!1!1!!"));
+    }
+
+    private static void saveTasksToFile(ArrayList tasks) throws DukeException {
+        //save tasks
+        File dataDir = dataPath.toAbsolutePath().toFile();
+        if (!dataDir.exists()) {
+            dataDir.mkdir();
+        }
+
+        try (BufferedWriter writer = Files.newBufferedWriter(Paths.get(dataPath.toString(), taskLogName))) {
+            Date date = new Date();
+            SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+            String msg = "Task list (Last updated " + formatter.format(date) + "):";
+            for (int i = 0; i < tasks.size(); i++) {
+                msg += "\n" +(i + 1) + ". " + tasks.get(i);
+            }
+            writer.write(msg);
+        } catch (IOException x) {
+            System.err.format("IOException: %s%n", x);
+        }
     }
 
     public static String fmtMsg(String msg) {
