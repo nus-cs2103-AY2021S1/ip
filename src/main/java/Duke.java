@@ -11,8 +11,9 @@ public class Duke {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
-        System.out.println("\n\n");
-        System.out.println("Hello! I'm Duke\nWhat can I do for you?\n\n");
+        System.out.println("    ____________________________________________________________");
+        System.out.println("     Hello! I'm Duke\nWhat can I do for you?");
+        System.out.println("    ____________________________________________________________\n");
 
         String[] store = new String[100];
         boolean[] flag = new boolean[100];
@@ -21,7 +22,9 @@ public class Duke {
 
         while (true) {
             if (input.equals("bye")) {
-                System.out.println("Bye. Hope to see you again soon!\n");
+                System.out.println("    ____________________________________________________________");
+                System.out.println("     Bye. Hope to see you again soon!");
+                System.out.println("    ____________________________________________________________\n");
                 return;
             }
 
@@ -30,19 +33,20 @@ public class Duke {
             }
 
             if (input.equals("list")) {
+                System.out.println("    ____________________________________________________________");
                 for (int i = 0; i < count; i++) {
-                    System.out.println(Integer.toString(i + 1) + "." + store[i]);
+                    System.out.println("     " + Integer.toString(i + 1) + "." + store[i]);
                 }
-                System.out.println("\n");
-                input = sc.nextLine();
+                System.out.println("    ____________________________________________________________\n");
             } else {
-
-                System.out.println("\n added: " + input + "\n");
+                System.out.println("    ____________________________________________________________");
+                System.out.println("     added: " + input);
+                System.out.println("    ____________________________________________________________\n");
                 store[count] = input;
                 flag[count] = false;
                 count++;
-                input = sc.nextLine();
             }
+            input = sc.nextLine();
         }
     }
 }
