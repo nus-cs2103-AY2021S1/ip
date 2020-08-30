@@ -3,14 +3,13 @@ package duke;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import duke.task.Task;
-import duke.task.ToDo;
 import duke.task.Deadline;
 import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
 
 /**
  *  Deals with loading tasks from the file and saving tasks in the file
@@ -67,9 +66,10 @@ public class Storage {
      */
     public void save(TaskList tasksToSave) throws IOException {
         FileWriter fw = new FileWriter(this.filePath, true);
-        for (Task task : tasksToSave.getListOfTasks())
-        fw.write(task.toString() + System.lineSeparator());
-        fw.close();
+        for (Task task : tasksToSave.getListOfTasks()) {
+            fw.write(task.toString() + System.lineSeparator());
+            fw.close();
+        }
     }
 
     /**

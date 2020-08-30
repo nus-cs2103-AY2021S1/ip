@@ -7,8 +7,8 @@ import java.io.IOException;
  */
 public class Duke {
 
-    private Storage storage;
     private static TaskList tasks;
+    private Storage storage;
     private Ui ui;
 
     /**
