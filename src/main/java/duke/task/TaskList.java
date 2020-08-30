@@ -9,15 +9,30 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
+/**
+ * Represents a list of Tasks.
+ */
 public class TaskList {
     private ArrayList<Task> taskList;
     private Storage storage;
 
+    /**
+     * Creates a TaskList.
+     * @param storage A Storage object that handles the storage of tasks in local storage, allowing them to persist.
+     */
     private TaskList(Storage storage){
         this.taskList = new ArrayList<>();
         this.storage = storage;
     }
 
+    /**
+     * Creates and initialises a TaskList.
+     * The TaskList is initialised by adding tasks stored in the local storage from previous sessions.
+     * @param storage A Storage object that handles the storage of tasks in local storage, allowing them to persist.
+     * @return The new TaskList created, filled with existing Tasks.
+     * @throws StorageException if Task cannot be stored in local storage.
+     * @throws DateParseException if Task date (if any) cannot be parsed into LocalDate object.
+     */
     public static TaskList initialiseTaskList(Storage storage) throws StorageException, DateParseException {
         TaskList newTaskList = new TaskList(storage);
 
@@ -44,12 +59,25 @@ public class TaskList {
         return newTaskList;
     }
 
-    public Task addTask(String taskName) throws StorageException {
+    /**
+     * Adds a task of type Todo to the TaskList.
+     * @param taskName A string representing the name of the todo.
+     * @return The todo added to the TaskList.
+     */
+    public Task addTask(String taskName) {
         Todo newTodo = Todo.newTodo(taskName);
         this.taskList.add(newTodo);
         return newTodo;
     }
 
+    /**
+     * Adds a task of type Deadline or Event to the TaskList.
+     * @param type A TaskType representing the type of Task to be added.
+     * @param taskName A string representing the name of the task.
+     * @param taskDate A string representing the date of the task.
+     * @return The task added to the TaskList.
+     * @throws InvalidTaskException if task type is neither Deadline nor Event.
+     */
     public Task addTask(TaskType type, String taskName, LocalDate taskDate) throws InvalidTaskException {
         switch(type){
             case EVENT:
@@ -61,18 +89,29 @@ public class TaskList {
                 this.taskList.add(newDeadline);
                 return newDeadline;
         }
-        // TODO: fix exception message
-        throw new InvalidTaskException("Unknown task added");
+        throw new InvalidTaskException("Oh dear! I'm not sure what kind of task to add ;A;");
     }
 
-    public Task completeTask(int index) throws InvalidTaskException, StorageException {
+    /**
+     * Marks Task as completed.
+     * @param index An integer representing the index of the task in the TaskList.
+     * @return The task marked as completed.
+     * @throws InvalidTaskException if index specified is invalid (does not refer to a task in the TaskList).
+     */
+    public Task completeTask(int index) throws InvalidTaskException {
         if(index > this.taskList.size() || index <= 0) {
             throw new InvalidTaskException("Oh noes! I don't think you specified a valid task index :<");
         }
         return this.taskList.get(index - 1).markAsDone();
     }
 
-    public Task deleteTask(int index) throws InvalidTaskException, StorageException {
+    /**
+     * Removes a Task from the TaskList.
+     * @param index An integer representing the index of the task in the TaskList.
+     * @return The removed task.
+     * @throws InvalidTaskException if index specified is invalid (does not refer to a task in the TaskList).
+     */
+    public Task deleteTask(int index) throws InvalidTaskException {
         if(index > this.taskList.size() || index <= 0) {
             throw new InvalidTaskException("Oh noes! I don't think you specified a valid task index :<");
         }
@@ -81,14 +120,27 @@ public class TaskList {
         return task;
     }
 
+    /**
+     * Gets the list of Tasks.
+     * @return An ArrayList containing all Task in the TaskList.
+     */
     public ArrayList<Task> getTaskList(){
         return this.taskList;
     }
 
+    /**
+     * Gets the number of Tasks in the TaskList.
+     * @return An integer value representing the number of Tasks in the TaskList.
+     */
     public int taskListSize(){
         return this.taskList.size();
     }
 
+    /**
+     * Gets a String containing values of all Tasks in the TaskList.
+     * This String is to be stored in local storage, allowing tasks to persist between sessions.
+     * @return A String containing values of all Tasks in the TaskList.
+     */
     public String getSaveString()  {
         StringBuilder saveString = new StringBuilder();
         for(Task task : this.taskList) {

@@ -4,7 +4,13 @@ import duke.task.Task;
 
 import java.util.ArrayList;
 
+/**
+ * Ui is a class that prints messages to the user.
+ */
 public class Ui {
+    /**
+     * Prints a welcome message.
+     */
     public static void welcomeMessage(){
         String catLogo = "        /\\_____/\\\n" +
                 "       /  o   o  \\\n" +
@@ -21,12 +27,19 @@ public class Ui {
         System.out.println("    ____________________________________________________________");
     }
 
+    /**
+     * Prints a goodbye message.
+     */
     public static void goodbyeMessage(){
         System.out.println("    ____________________________________________________________");
         System.out.println("     Bye~ Hope to see you again soon ;w;");
         System.out.println("    ____________________________________________________________");
     }
 
+    /**
+     * Prints all tasks in the TaskList.
+     * @param taskList An ArrayList containing all existing Tasks.
+     */
     public static void listMessage(ArrayList<Task> taskList){
         System.out.println("    ____________________________________________________________");
         System.out.println("    Here are the tasks in your list!!");
@@ -38,6 +51,10 @@ public class Ui {
         System.out.println("    ____________________________________________________________");
     }
 
+    /**
+     * Prints all tasks whose date is set as the current date (today).
+     * @param taskList An ArrayList containing all existing Tasks.
+     */
     public static void todayMessage(ArrayList<Task> taskList){
         // TODO: refactor to filter in duke.task.TaskList class
         System.out.println("    ____________________________________________________________");
@@ -52,6 +69,11 @@ public class Ui {
         System.out.println("    ____________________________________________________________");
     }
 
+    /**
+     * Prints a message indicating the specified task has been added.
+     * @param task The Task that has been added.
+     * @param size An integer value representing the new size of the TaskList.
+     */
     public static void addTaskMessage(Task task, int size){
         System.out.println("    ____________________________________________________________");
         System.out.println("     Okies! I've added this task~");
@@ -60,6 +82,10 @@ public class Ui {
         System.out.println("    ____________________________________________________________");
     }
 
+    /**
+     * Prints a message indicating the specified task has been marked completed.
+     * @param task The Task that has been marked completed.
+     */
     public static void doneTaskMessage(Task task){
         System.out.println("    ____________________________________________________________");
         System.out.println("     Yay! I've marked this task as done :3");
@@ -67,6 +93,11 @@ public class Ui {
         System.out.println("    ____________________________________________________________");
     }
 
+    /**
+     * Prints a message indicating the specified task has been deleted.
+     * @param task The Task that has been deleted.
+     * @param size An integer value representing the new size of the TaskList.
+     */
     public static void deleteTaskMessage(Task task, int size) {
         System.out.println("    ____________________________________________________________");
         System.out.println("     Got it! I'll remove this task :>");
@@ -75,6 +106,10 @@ public class Ui {
         System.out.println("    ____________________________________________________________");
     }
 
+    /**
+     * Prints out the error message of the exception that occurred.
+     * @param UiMessage The error message of the exception that occurred.
+     */
     public static void errorMessage(String UiMessage){
         System.out.println("    ____________________________________________________________");
         System.out.println("    " + UiMessage);
