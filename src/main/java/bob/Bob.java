@@ -9,16 +9,18 @@ import bob.exceptions.BobException;
 import bob.parser.Parser;
 import bob.storage.Storage;
 import bob.ui.Ui;
-
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
 
 /**
  * Represents the task-managing ChatBot.
  */
-public class Bob {
+public class Bob extends Application {
     private final Storage storage;
     private final Tasklist tasks;
     private final Ui ui;
-
     /**
      * Creates a Bob.
      *
@@ -79,5 +81,14 @@ public class Bob {
         } catch (IOException e) {
             System.out.println(Messages.INVALID_PATHNAME);
         }
+    }
+
+    @Override
+    public void start(Stage stage) {
+        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
+        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
+
+        stage.setScene(scene); // Setting the stage to show our screen
+        stage.show(); // Render the stage.
     }
 }
