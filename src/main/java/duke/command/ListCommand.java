@@ -13,10 +13,10 @@ public class ListCommand extends Command {
     /**
      * Creates a new ListCommand.
      *
-     * @param stringArray Tokenized array form of the input command string.
+     * @param userStrings Tokenized array form of the input command string.
      */
-    public ListCommand(String[] stringArray) {
-        super(stringArray);
+    public ListCommand(String[] userStrings) {
+        super(userStrings);
     }
 
     /**

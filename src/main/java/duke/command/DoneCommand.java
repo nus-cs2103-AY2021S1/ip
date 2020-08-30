@@ -15,10 +15,10 @@ public class DoneCommand extends Command {
     /**
      * Creates a new DoneCommand.
      *
-     * @param stringArray Tokenized array form of the input command string.
+     * @param userStrings Tokenized array form of the input command string.
      */
-    public DoneCommand(String[] stringArray) {
-        super(stringArray);
+    public DoneCommand(String[] userStrings) {
+        super(userStrings);
     }
 
     /**

@@ -12,10 +12,10 @@ public class ExitCommand extends Command {
     /**
      * Creates a new ExitCommand.
      *
-     * @param stringArray Tokenized array form of the input command string.
+     * @param userStrings Tokenized array form of the input command string.
      */
-    public ExitCommand(String[] stringArray) {
-        super(stringArray);
+    public ExitCommand(String[] userStrings) {
+        super(userStrings);
     }
 
     /**

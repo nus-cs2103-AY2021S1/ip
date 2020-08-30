@@ -19,7 +19,7 @@ public abstract class Task {
      */
     Task(String name) {
         this.name = name;
-        this.done = false;
+        done = false;
     }
 
     /**
@@ -38,7 +38,7 @@ public abstract class Task {
      * Marks the task as done by setting the done status to true.
      */
     public void markDone() {
-        this.done = true;
+        done = true;
     }
 
     /**
@@ -74,6 +74,6 @@ public abstract class Task {
     @Override
     public String toString() {
         String doneString = (done == true ? "✓" : "✗");
-        return "[" + doneString + "] " + this.name;
+        return "[" + doneString + "] " + name;
     }
 }

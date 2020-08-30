@@ -1,5 +1,13 @@
 package duke.command;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
 import duke.DukeException;
 import duke.Storage;
 import duke.Ui;
@@ -9,15 +17,6 @@ import duke.task.Task;
 import duke.task.TaskList;
 import duke.task.Todo;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.stream.Collectors;
-
-
 /**
  * Represents an add command. An AddCommand object represents a command
  * to insert a task into a TaskList. This task can be either a todo, deadline or event.
@@ -25,7 +24,7 @@ import java.util.stream.Collectors;
 public class AddCommand extends Command {
 
     /** String array storing the user input. */
-    private String[] stringArray;
+    private String[] userStrings;
 
     /** Done status of the task associated with the command. */
     private boolean isDone;
@@ -33,21 +32,21 @@ public class AddCommand extends Command {
     /**
      * Creates a new AddCommand and initialises its done status to false.
      *
-     * @param stringArray Tokenized array form of the input command string.
+     * @param userStrings Tokenized array form of the input command string.
      */
-    public AddCommand(String[] stringArray) {
-        super(stringArray);
-        this.isDone = false;
+    public AddCommand(String[] userStrings) {
+        super(userStrings);
+        isDone = false;
     }
 
     /**
      * Creates a new AddCommand and allows the initialisation of its done status.
      *
-     * @param stringArray Tokenized array form of the input command string.
+     * @param userStrings Tokenized array form of the input command string.
      * @param isDone The done status to set for the task represented by the command.
      */
-    public AddCommand(String[] stringArray, boolean isDone) {
-        super(stringArray);
+    public AddCommand(String[] userStrings, boolean isDone) {
+        super(userStrings);
         this.isDone = isDone;
     }
 
@@ -75,8 +74,8 @@ public class AddCommand extends Command {
         }
 
         //Array to store 3 fields - task name, date and time (if available)
-        ArrayList<String> newArray = new ArrayList<>();
-        newArray.add(taskName);
+        ArrayList<String> nameDateTimeStrings = new ArrayList<>();
+        nameDateTimeStrings.add(taskName);
 
         //More than necessary words or date and time in wrong format
         if (dateTime.length > 2) {
@@ -86,31 +85,31 @@ public class AddCommand extends Command {
         //Append date and time into newArray if they exist
         for (int i = 0; i < dateTime.length; i++) {
             if (!dateTime[i].equals("")) {
-                newArray.add(dateTime[i]);
+                nameDateTimeStrings.add(dateTime[i]);
             }
         }
 
         try {
-            LocalDate taskDate = LocalDate.parse(newArray.get(1), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            LocalDate taskDate = LocalDate.parse(nameDateTimeStrings.get(1), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
             //Make sure deadline set is in the future
             LocalDate todayDate = LocalDate.now();
             if (taskDate.isBefore(todayDate)) {
                 throw new DukeException("Date for deadline/event tasks must be set in the future!");
             }
             //Time Exists
-            if (newArray.size() > 2) {
-                LocalTime taskTime = LocalTime.parse(newArray.get(2), DateTimeFormatter.ofPattern("HHmm"));
+            if (nameDateTimeStrings.size() > 2) {
+                LocalTime taskTime = LocalTime.parse(nameDateTimeStrings.get(2), DateTimeFormatter.ofPattern("HHmm"));
                 //Make sure time has not passed
                 LocalTime timeNow = LocalTime.now();
                 if (todayDate.isEqual(taskDate) && taskTime.isBefore(timeNow)) {
                     throw new DukeException("The date/time combination you specified has already passed!");
                 }
                 return (taskType.equals("deadline")
-                        ? new Deadline(newArray.get(0), taskDate, taskTime)
-                        : new Event(newArray.get(0), taskDate, taskTime));
+                        ? new Deadline(nameDateTimeStrings.get(0), taskDate, taskTime)
+                        : new Event(nameDateTimeStrings.get(0), taskDate, taskTime));
             } else {
-                return (taskType.equals("deadline") ? new Deadline(newArray.get(0), taskDate)
-                        : new Event(newArray.get(0), taskDate));
+                return (taskType.equals("deadline") ? new Deadline(nameDateTimeStrings.get(0), taskDate)
+                        : new Event(nameDateTimeStrings.get(0), taskDate));
             }
         } catch (DateTimeParseException e) {
             throw new DukeException("Check your date/time! All deadline/event tasks' date must be in yyyy-mm-dd "
@@ -121,12 +120,12 @@ public class AddCommand extends Command {
     /**
      * Carries out the addition of a task to the task list specified.
      *
-     * @param taskList The task list to add the new task into.
+     * @param tasks The task list to add the new task into.
      * @return The same task that is added to the task list.
      * @throws DukeException If task string does not contain task name, is unrecognized,
      * or the delimiter used to process deadline/event tasks.
      */
-    public Task addTask(TaskList taskList) throws DukeException {
+    public Task addTask(TaskList tasks) throws DukeException {
         //Makes sure task name is available
         if (getArray().length < 2 || getFirstIndex().equals("")) {
             throw new DukeException("Your Task Name cannot be empty!");
@@ -134,7 +133,7 @@ public class AddCommand extends Command {
         switch (getArray()[0]) {
         case ("todo"):
             Task todo = new Todo(Arrays.stream(getArray()).skip(1).collect(Collectors.joining(" ")));
-            taskList.addTask(todo);
+            tasks.addTask(todo);
             return todo;
         case ("deadline"):
             if (!containsString("/by")) {
@@ -142,16 +141,16 @@ public class AddCommand extends Command {
                         + "task name and date!");
             }
             Task deadline = processTask("/by", "deadline");
-            taskList.addTask(deadline);
+            tasks.addTask(deadline);
             return deadline;
         case ("event"):
             if (!containsString("/at")) {
-                throw new DukeException("Your event task input must contain the delimiter /at to separate your " +
-                        "task name and date!");
+                throw new DukeException("Your event task input must contain the delimiter /at to separate your "
+                        + "task name and date!");
             }
 
             Task event = processTask("/at", "event");
-            taskList.addTask(event);
+            tasks.addTask(event);
             return event;
         default:
             throw new DukeException("I don't understand what task you want to be added! Only deadline/todo/event!");
@@ -161,12 +160,12 @@ public class AddCommand extends Command {
     /**
      * Carries out the addition of a task from a local file to the task list specified.
      *
-     * @param taskList The task list to operate on.
+     * @param tasks The task list to operate on.
      * @throws DukeException If the addition of the task fails.
      */
-    public void executeFromFile(TaskList taskList) throws DukeException {
-        Task task = addTask(taskList);
-        if (this.isDone) {
+    public void executeFromFile(TaskList tasks) throws DukeException {
+        Task task = addTask(tasks);
+        if (isDone) {
             task.markDone();
         }
     }

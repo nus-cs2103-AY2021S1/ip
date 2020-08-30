@@ -8,13 +8,13 @@ import java.util.ArrayList;
 public class TaskList {
 
     /** Stores the description of the Task. */
-    private ArrayList<Task> taskList;
+    private ArrayList<Task> tasks;
 
     /**
      * Initialises the task list with an empty ArrayList.
      */
     public TaskList() {
-        this.taskList = new ArrayList<>();
+        tasks = new ArrayList<>();
     }
 
     /**
@@ -86,7 +86,7 @@ public class TaskList {
      * @return The ArrayList used to contain the tasks.
      */
     public ArrayList<Task> getTaskList() {
-        return this.taskList;
+        return tasks;
     }
 
 }

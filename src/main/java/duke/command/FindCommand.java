@@ -1,12 +1,13 @@
 package duke.command;
 
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
 import duke.DukeException;
 import duke.Storage;
 import duke.Ui;
 import duke.task.TaskList;
 
-import java.util.Arrays;
-import java.util.stream.Collectors;
 
 /**
  * Represents a Find Command that gives users a way to find a task by searching for a keyword.
@@ -18,10 +19,10 @@ public class FindCommand extends Command {
     /**
      * Initialises the find command with the user input string array.
      *
-     * @param stringArray String array that represents the user input.
+     * @param userStrings String array that represents the user input.
      */
-    public FindCommand(String[] stringArray) {
-        super(stringArray);
+    public FindCommand(String[] userStrings) {
+        super(userStrings);
     }
 
     /**

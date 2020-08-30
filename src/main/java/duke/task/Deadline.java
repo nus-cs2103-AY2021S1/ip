@@ -37,7 +37,7 @@ public class Deadline extends Task {
      */
     public Deadline(String name, LocalDate date) {
         super(name);
-        this.time = null;
+        time = null;
         this.date = date;
     }
 
@@ -49,7 +49,7 @@ public class Deadline extends Task {
     public String appendFile() {
         String doneString = (isDone() == true ? "1" : "0");
         String time = this.time != null ? this.time.format(DateTimeFormatter.ofPattern("HHmm")) : "";
-        return "deadline" + " | " + doneString + " | " + getName() + " | " + this.date + " | " + time;
+        return "deadline" + " | " + doneString + " | " + getName() + " | " + date + " | " + time;
     }
 
     /**
@@ -61,9 +61,9 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         String doneString = (isDone() == true ? "✓" : "✗");
-        String dateFormat = this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        String dateFormat = date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
         return "[D]" + "[" + doneString + "] " + getName() + " (by: " + dateFormat
-                + (this.time != null ? " " + this.time.format(DateTimeFormatter.ofPattern("HHmma")) + " " : "") + ")";
+                + (time != null ? " " + time.format(DateTimeFormatter.ofPattern("HHmma")) + " " : "") + ")";
     }
 }
 

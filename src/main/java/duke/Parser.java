@@ -1,5 +1,7 @@
 package duke;
 
+import java.util.Arrays;
+
 import duke.command.AddCommand;
 import duke.command.Command;
 import duke.command.DeleteCommand;
@@ -8,7 +10,6 @@ import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
 
-import java.util.Arrays;
 
 /**
  * Deals with parsing and making sense of the user command.
@@ -30,12 +31,12 @@ public class Parser {
     /**
      * Checks if an array of items contains a specified input string.
      *
-     * @param inputStr A specified input string to check.
+     * @param inputString A specified input string to check.
      * @param items The array of elements to be compared with the input string.
      * @return True if the array of elements contains the input string.
      */
-    public boolean containsString(String inputStr, String[] items) {
-        return Arrays.stream(items).anyMatch(inputStr::contains);
+    public boolean containsString(String inputString, String[] items) {
+        return Arrays.stream(items).anyMatch(inputString::contains);
     }
 
     /**
@@ -74,19 +75,19 @@ public class Parser {
      * @return AddCommand to add tasks from the file to a task list.
      * @throws DukeException If the input string from the file is empty or unrecognized.
      */
-        public AddCommand parseFromFile(boolean isDone) throws DukeException {
-            //Assuming that written file will only contain events to be added
-            String[] addCommands = new String[]{"todo", "deadline", "event"};
-            String[] splitInput = getString().split(" ");
-            String commandType = splitInput[0];
-            if (commandType.equals("")) {
-                throw new DukeException("File has empty input String!");
-            } else if (containsString(commandType, addCommands)) {
-                return new AddCommand(splitInput, isDone);
-            } else {
-                throw new DukeException("Your Input Command from the file is not Recognized!");
-            }
+    public AddCommand parseFromFile(boolean isDone) throws DukeException {
+        //Assuming that written file will only contain events to be added
+        String[] addCommands = new String[]{"todo", "deadline", "event"};
+        String[] splitInput = getString().split(" ");
+        String commandType = splitInput[0];
+        if (commandType.equals("")) {
+            throw new DukeException("File has empty input String!");
+        } else if (containsString(commandType, addCommands)) {
+            return new AddCommand(splitInput, isDone);
+        } else {
+            throw new DukeException("Your Input Command from the file is not Recognized!");
         }
+    }
 
     /**
      * Gets the input string of the user.
@@ -94,7 +95,7 @@ public class Parser {
      * @return The inputstring of the user.
      */
     public String getString() {
-        return this.inputString;
+        return inputString;
     }
 
 }

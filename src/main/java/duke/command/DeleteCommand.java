@@ -15,10 +15,10 @@ public class DeleteCommand extends Command {
     /**
      * Creates a new DeleteCommand.
      *
-     * @param stringArray Tokenized array form of the input command string.
+     * @param userStrings Tokenized array form of the input command string.
      */
-    public DeleteCommand(String[] stringArray) {
-        super(stringArray);
+    public DeleteCommand(String[] userStrings) {
+        super(userStrings);
     }
 
     /**

@@ -1,10 +1,11 @@
 package duke;
 
+import java.util.ArrayList;
+import java.util.Scanner;
+
 import duke.task.Task;
 import duke.task.TaskList;
 
-import java.util.ArrayList;
-import java.util.Scanner;
 
 /**
  * Deals with interactions with the user.
@@ -18,7 +19,7 @@ public class Ui {
      * Initialises the scanner the take in user input.
      */
     Ui() {
-        this.sc = new Scanner(System.in);
+        sc = new Scanner(System.in);
     }
 
     /**
@@ -27,7 +28,7 @@ public class Ui {
      * @return String that is read from user input.
      */
     public String readCommand() {
-        String userInput = this.sc.nextLine();
+        String userInput = sc.nextLine();
         return userInput;
     }
 

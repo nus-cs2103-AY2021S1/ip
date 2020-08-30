@@ -1,9 +1,5 @@
 package duke;
 
-import duke.command.AddCommand;
-import duke.task.Task;
-import duke.task.TaskList;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -12,6 +8,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.stream.Collectors;
+
+import duke.command.AddCommand;
+import duke.task.Task;
+import duke.task.TaskList;
 
 /**
  * Deals with loading tasks from the local file and saving tasks in the local file.
@@ -49,7 +49,7 @@ public class Storage {
                 result.add(input[i]);
             }
         }
-        String returnArray[] = new String[result.size()];
+        String[] returnArray = new String[result.size()];
         return Arrays.stream(result.toArray(returnArray)).collect(Collectors.joining(" "));
     }
 
@@ -61,7 +61,7 @@ public class Storage {
      */
     public TaskList load() throws DukeException {
         try {
-            File file = new File(this.filePath);
+            File file = new File(filePath);
             FileReader fr = new FileReader(file);
             BufferedReader br = new BufferedReader(fr);
             String line = br.readLine();
@@ -81,7 +81,7 @@ public class Storage {
             fr.close();
             return newTaskList;
         } catch (IOException e) {
-            throw new DukeException("Sorry, there were some issues reading the file located at: " + this.filePath
+            throw new DukeException("Sorry, there were some issues reading the file located at: " + filePath
                     + ": " + e.getMessage());
         }
     }
@@ -110,7 +110,7 @@ public class Storage {
             }
             fw.close();
         } catch (IOException e) {
-            throw new DukeException("Sorry, there were some issues writing to the file located at: " + this.filePath
+            throw new DukeException("Sorry, there were some issues writing to the file located at: " + filePath
                     + ": " + e.getMessage());
         }
     }

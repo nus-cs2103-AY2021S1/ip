@@ -57,9 +57,8 @@ public class Duke {
      * Represents the entry point for the application.
      *
      * @param args An array of command-line arguments for the application
-     * @throws DukeException If there are any errors with the program execution.
      */
-    public static void main(String[] args) throws DukeException {
+    public static void main(String[] args) {
         new Duke("data/tasks.txt").run();
     }
 }

@@ -1,11 +1,12 @@
 package duke.command;
 
+import java.util.Arrays;
+
 import duke.DukeException;
 import duke.Storage;
 import duke.Ui;
 import duke.task.TaskList;
 
-import java.util.Arrays;
 
 /**
  * Represents an abstract command that the user intends to execute.
@@ -13,15 +14,15 @@ import java.util.Arrays;
 public abstract class Command {
 
     /** String array storing the user input. */
-    private String[] stringArray;
+    private String[] userStrings;
 
     /**
      * Creates a new Command and initialises its string array.
      *
-     * @param stringArray Tokenized array form of the input command string.
+     * @param userStrings Tokenized array form of the input command string.
      */
-    Command(String[] stringArray) {
-        this.stringArray = stringArray;
+    Command(String[] userStrings) {
+        this.userStrings = userStrings;
     }
 
     /**
@@ -30,7 +31,7 @@ public abstract class Command {
      * @return True if the first index of the string array variable is empty.
      */
     public boolean isFirstIndexEmpty() {
-        return stringArray.length < 2 || stringArray[1].equals("");
+        return userStrings.length < 2 || userStrings[1].equals("");
     }
 
 
@@ -79,6 +80,6 @@ public abstract class Command {
      * @return The string array.
      */
     protected String[] getArray() {
-        return this.stringArray;
+        return userStrings;
     }
 }
