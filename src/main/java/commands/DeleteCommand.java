@@ -28,7 +28,8 @@ public class DeleteCommand extends Command {
     @Override
     public void exec(TaskList tasks, Ui ui, Storage storage) throws TaskNotFoundException,
             InvalidTaskNumberException {
-        ui.printDelTask(tasks, index);
+        // ui.printDelTask(tasks, index);
+        ui.setMessageDeleteTask(tasks, index);
         deleteTask(index, tasks);
     }
 

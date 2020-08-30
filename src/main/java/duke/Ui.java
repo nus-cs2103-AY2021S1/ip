@@ -9,8 +9,10 @@ import tasks.TaskList;
  * Handles interactions with users, namely accepting inputs and printing of info
  */
 public class Ui {
+    private static final String LINE = "---------------------------------------------------------------";
+    private static final String INTRO = "Welcome to Duke! How may I help you today?";
     private Scanner sc;
-    private final String ln = "----------------------------------------------------------------";
+    private String message;
 
     public Ui() {
         this.sc = new Scanner(System.in);
@@ -23,66 +25,58 @@ public class Ui {
     public String takeInput() {
         return sc.nextLine();
     }
-
-    /**
-     * Prints the welcome message
-     */
-    public void showWelcome() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+    public String getMessage() {
+        return message;
+    }
+    public static String getIntro() {
+        return INTRO;
+    }
+    public void setMessageException(DukeException e) {
+        this.message = e.getMessage();
+    }
+    public void setMessageHelp() {
+        this.message = "Welcome to Duke! Here is a list of commands you can use: \n"
+                + "exit - shuts down the bot\n"
+                + "todo <name> - adds a Todo task to your list\n"
+                + "deadline <name> <time> - adds a Deadline task to your list\n"
+                + "event <name> <time> - adds an Event task to your list\n"
+                + "done <number> - marks a task as done\n"
+                + "delete <number> - deletes a task from your list\n"
+                + "list - displays the current list of your tasks\n"
+                + "help - displays this helpful message\n";
+    }
+    public void setMessageList(TaskList tasks) {
+        message = "Here are your tasks:\n"
+                + LINE + "\n"
+                + tasks + "\n"
+                + LINE;
+    }
+    public void setMessageExit() {
+        message = "Goodbye!";
+    }
+    public void setMessageAddTask(String task, int size) {
+        message = "Added new task: " + task + "\n"
+                + "You now have " + size + (size == 1
+                        ? "task in your list."
+                        : " tasks in your list.");
+    }
+    public void setMessageDoneTask() {
+        message = "Congrats, I've marked that task as finished!";
+    }
+    public void setMessageDeleteTask(TaskList tasks, int idx) {
+        message = "The task " + tasks.getTasks().get(idx - 1) + " has been removed.";
+    }
+    public void setMessageFindTask(String tasks, int num) {
+        if (num == 0) {
+            message = "I couldn't find any tasks matching your keyword.";
+        } else {
+            message = "I found " + num + (num > 1 ? " tasks " : " task ") + "matching your keyword.\n" + tasks;
+        }
+    }
+    public void setMessageUndoneTask() {
+        message = "I've marked that task as unfinished.";
     }
     public void printException(DukeException e) {
         System.out.println(e.getMessage());
-    }
-
-    /**
-     * Prints a statement informing the user about the size of their TaskList currently.
-     * @param size The size of the TaskList currently.
-     */
-    public void printListSize(int size) {
-        System.out.println("You now have " + size + (size == 1
-                ? " task in your list."
-                : " tasks in your list."));
-    }
-
-    /**
-     * Prints the TaskList for the user in a neat format.
-     * @param tasks The TaskList to be printed.
-     */
-    public void printList(TaskList tasks) {
-        System.out.println("Here are your tasks:");
-        System.out.println(ln);
-        System.out.println(tasks);
-        System.out.println(ln);
-    }
-    public void printExitMessage() {
-        System.out.println("Goodbye!");
-    }
-    public void printAddTask(String task) {
-        System.out.println("Added new task: " + task);
-    }
-    public void printDoneTask() {
-        System.out.println("Congrats, I've marked this task as finished!");
-    }
-    public void printDelTask(TaskList tasks, int idx) {
-        System.out.println("The task " + tasks.getTasks().get(idx - 1) + " has been removed.");
-    }
-
-    /**
-     * Prints the tasks matching the user's input keyword, or an alternative message if no tasks are found.
-     * @param tasks The tasks to be printed, already converted to a String.
-     * @param num The number of tasks in the TaskList.
-     */
-    public void printFindTask(String tasks, int num) {
-        if (num == 0) {
-            System.out.println("I couldn't find any tasks matching your keyword.");
-        } else {
-            System.out.println("I found " + num + (num > 1 ? " tasks " : " task ") + "matching your keyword.\n"
-                    + tasks);
-        }
     }
 }
