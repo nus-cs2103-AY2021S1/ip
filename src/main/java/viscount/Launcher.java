@@ -1,6 +1,7 @@
 package viscount;
 
 import javafx.application.Application;
+import viscount.gui.Main;
 
 public class Launcher {
 
@@ -10,6 +11,6 @@ public class Launcher {
      * @param args Standard arguments.
      */
     public static void main(String[] args) {
-        Application.launch(Viscount.class, args);
+        Application.launch(Main.class, args);
     }
 }
