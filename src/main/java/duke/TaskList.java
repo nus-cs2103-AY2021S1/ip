@@ -27,10 +27,11 @@ public class TaskList {
 
     /**
      * Lists all the tasks in the list.
+     * @return All the tasks in the list.
      */
-    public void listItems() {
+    public String listItems() {
         if (this.tasks.size() == 0) {
-            System.out.println("You don't have any task in your list.");
+            return "You don't have any task in your list.";
         } else {
             StringBuilder todoList = new StringBuilder("Here are the task(s) in your list: \n");
             int num = 1;
@@ -38,37 +39,44 @@ public class TaskList {
                 todoList.append(num + ". " + item.toString() + "\n");
                 num++;
             }
-            System.out.println(todoList);
+            return todoList.toString();
         }
     }
 
     /**
      * Deletes a task based on the corresponding number.
+     *
      * @param index Index of the list containing the task
+     * @return Delete message.
      * @throws DeleteException If the index < 0 or more than the size.
      */
-    public void deleteTask(int index) throws DeleteException {
+    public String deleteTask(int index) throws DeleteException {
         if (index < 0 || index > tasks.size()) {
             throw new DeleteException("Please enter a valid task number.");
         } else {
             Task task = this.tasks.get(index);
+            String msg;
             this.tasks.remove(task);
             Storage.updateData(this.tasks);
-            System.out.println("Noted. I've removed this task for you: \n"
+            msg = "Noted. I've removed this task for you: \n"
                 + task.toString() + "\n"
-                + "Now you have " + this.tasks.size() + " task(s) in the list.");
+                + "Now you have " + this.tasks.size() + " task(s) in the list.";
+            return msg;
         }
-
     }
 
     /**
      * Saves the task to the list.
      * @param task Task to save to the list.
+     * @return Save message.
      */
-    public void saveToList(Task task) {
+    public String saveToList(Task task) {
         this.tasks.add(task);
-        System.out.println("Okay~ I've added this task: \n" + task.toString());
-        System.out.println("Now you have " + this.tasks.size() + " task(s) in the list.");
+        Storage.updateData(this.tasks);
+        String msg;
+        msg = "Okay~ I've added this task: \n" + task.toString()
+            + "\nNow you have " + this.tasks.size() + " task(s) in the list.";
+        return msg;
     }
 
     /**
@@ -83,33 +91,41 @@ public class TaskList {
     /**
      * Marks the task corresponding to the task number as done.
      * @param taskNum Task number of the task.
+     * @return Marked as done message.
      * @throws DoneException If the index < 0 or more than the size.
      */
-    public void markTaskAsDone(int taskNum) throws DoneException {
+    public String markTaskAsDone(int taskNum) throws DoneException {
         if (taskNum <= 0 || taskNum > tasks.size()) {
             throw new DoneException("Please enter a valid task number.");
         } else {
             int index = taskNum - 1;
+            String msg;
+
             Task oldTask = this.tasks.get(index);
             Task newTask = oldTask.markAsDone();
+
             this.tasks.remove(oldTask);
             this.tasks.add(index, newTask);
             Storage.updateData(this.tasks);
-            System.out.println("YAYY! I've marked this task as done : \n"
-                + newTask.toString());
+
+            msg = "YAYY! I've marked this task as done : \n"
+                + newTask.toString();
+            return msg;
         }
     }
 
     /**
      * Shows the all task(s) on the input day.
      * @param date Date to show.
+     * @return All tasks on the input date.
      * @throws CalendarException If the date input is in invalid format.
      */
-    public void showDate(String date) throws CalendarException {
+    public String showDate(String date) throws CalendarException {
         try {
             LocalDate localDate = LocalDate.parse(date);
             Boolean hasSomething = false;
-            System.out.println("Task(s) on : " + localDate.getDayOfWeek() + ", "
+            StringBuilder builder = new StringBuilder();
+            builder.append("Task(s) on : " + localDate.getDayOfWeek() + ", "
                 + localDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
 
             for (Task task : this.tasks) {
@@ -119,7 +135,7 @@ public class TaskList {
                     LocalDate eventDate = event.getDate();
                     if (eventDate.equals(localDate)) {
                         hasSomething = true;
-                        System.out.println(task);
+                        builder.append("\n" + task.toString());
                     }
 
                 } else if (type.equals("D")) {
@@ -127,7 +143,7 @@ public class TaskList {
                     LocalDate deadlineDate = deadline.getDeadline();
                     if (deadlineDate.equals(localDate)) {
                         hasSomething = true;
-                        System.out.println(task);
+                        builder.append("\n" + task.toString());
                     }
 
                 } else {
@@ -136,8 +152,11 @@ public class TaskList {
             }
 
             if (!hasSomething) {
-                System.out.println("You have nothing to do on this day!");
+                return "You have nothing to do on this day!";
             }
+
+            return builder.toString();
+
         } catch (DateTimeParseException e) {
             throw new CalendarException("Invalid input date format. Please try again.");
         }

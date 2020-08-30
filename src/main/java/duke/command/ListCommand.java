@@ -12,23 +12,25 @@ public class ListCommand extends Command {
 
     /**
      * Processes the list command to list all the task(s) in the list.
+     *
      * @param taskList List of tasks.
      * @param ui       UI of the bot.
      * @param storage  Storage managing the file in hard disk.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
         //try {
-        processList(taskList);
+        return processList(taskList);
     }
 
     /**
      * Calls the TaskList to list all the task(s).
+     *
      * @param taskList TaskList that stores the list of tasks.
      */
-    public void processList(TaskList taskList) { //throws DukeException {
+    public String processList(TaskList taskList) { //throws DukeException {
         //try {
-        taskList.listItems();
+        return taskList.listItems();
         //} catch (IndexOutOfBoundsException e) {
         //    throw new DukeException("Please input a valid number.");
         //}

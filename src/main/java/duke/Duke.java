@@ -5,7 +5,7 @@ import java.io.IOException;
 import duke.command.Command;
 import duke.exception.DukeException;
 
-public class Duke {
+public class Duke { //extends Application {
 
     private Storage storage;
     private TaskList tasks;
@@ -13,6 +13,20 @@ public class Duke {
 
     /**
      * Constructs Duke bot.
+     */
+    public Duke() {
+        this.storage = new Storage("tasks.txt");
+        this.ui = new Ui();
+        try {
+            tasks = new TaskList(Storage.readFile());
+        } catch (IOException | DukeException e) {
+            this.tasks = new TaskList();
+        }
+    }
+
+    /**
+     * Constructs Duke bot.
+     *
      * @param filePath File path containing data.
      */
     public Duke(String filePath) {
@@ -48,13 +62,26 @@ public class Duke {
                 String fullCommand = ui.readCommand();
                 ui.showLine(); // show the divider line ("_______")
                 Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
+                //c.executeGUI(tasks, ui, storage);
                 isExit = c.isExit();
             } catch (DukeException e) {
                 ui.showError(e.getMessage());
             } finally {
                 ui.showLine();
             }
+        }
+    }
+
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    public String getResponse(String input) {
+        try {
+            Command c = Parser.parse(input);
+            return c.execute(tasks, ui, storage);
+        } catch (DukeException e) {
+            return e.getMessage();
         }
     }
 }

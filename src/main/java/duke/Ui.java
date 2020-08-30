@@ -31,6 +31,7 @@ public class Ui {
 
     /**
      * Reads user's command from Scanner.
+     *
      * @return user's command.
      */
     public String readCommand() {
@@ -41,12 +42,12 @@ public class Ui {
     /**
      * Exits the bot and shows bye message.
      */
-    public void bye() {
+    public String bye() {
         sc.close();
-        System.out.println("Time to say goodbye :( \n"
-            + "Have a great day!");
-        System.exit(0);
-        return;
+        return "Time to say goodbye :( \n"
+            + "Have a great day!";
+//        System.exit(0);
+//        return;
     }
 
     /**
@@ -56,12 +57,13 @@ public class Ui {
         System.out.println(
             "\n__̴ı̴̴̡̡̡ ̡͌l̡̡̡ ̡͌l̡*̡̡ ̴̡ı̴̴̡ ̡̡͡|̲̲̲͡͡͡ ̲▫̲͡ "
                 + "̲̲̲͡͡π̲̲͡͡ ̲̲͡▫̲̲͡͡ ̲|̡̡̡ ̡ ̴̡ı̴̡̡ ̡͌l̡̡̡̡.___"
-            + "__̴ı̴̴̡̡̡ ̡͌l̡̡̡ ̡͌l̡*̡̡ ̴̡ı̴̴̡ ̡̡͡|̲̲̲͡͡͡ ̲▫̲͡ "
+                + "__̴ı̴̴̡̡̡ ̡͌l̡̡̡ ̡͌l̡*̡̡ ̴̡ı̴̴̡ ̡̡͡|̲̲̲͡͡͡ ̲▫̲͡ "
                 + "̲̲̲͡͡π̲̲͡͡ ̲̲͡▫̲̲͡͡ ̲|̡̡̡ ̡ ̴̡ı̴̡̡ ̡͌l̡̡̡̡.__\n");
     }
 
     /**
      * Shows error message.
+     *
      * @param msg Error message.
      */
     public void showError(String msg) {

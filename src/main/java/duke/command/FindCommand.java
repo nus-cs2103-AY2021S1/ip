@@ -16,16 +16,16 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
         try {
-            processFind(this.task, taskList, ui, storage);
+            return processFind(this.task, taskList, ui, storage);
         } catch (FindException find) {
-            System.out.println(find.getMessage());
+            return find.getMessage();
         }
     }
 
-    public void processFind(String toFind, TaskList taskList, Ui ui, Storage storage) throws FindException {
-        findTask(toFind, taskList);
+    public String processFind(String toFind, TaskList taskList, Ui ui, Storage storage) throws FindException {
+        return findTask(toFind, taskList);
     }
 
     @Override
@@ -39,26 +39,27 @@ public class FindCommand extends Command {
         return false;
     }
 
-    private List<Task> findTask(String toFind, TaskList taskList) {
+    private String findTask(String toFind, TaskList taskList) {
         //try {
         List<Task> tasks = taskList.getTasks();
         List<Task> tasksFound = new ArrayList<>();
+        StringBuilder builder = new StringBuilder();
         int num = 1;
 
 
-        System.out.println("Here are the matching task(s) in your list : ");
+        builder.append("Here are the matching task(s) in your list : ");
         for (Task task : tasks) {
             if (task.getDescription().contains(toFind)) {
                 tasksFound.add(task);
-                System.out.println(num + ". " + task.toString());
+                builder.append(num + ". " + task.toString());
             }
         }
 
         if (tasksFound.size() == 0) {
-            System.out.println("Nothing match this keyword. \n"
-                + "Please try again with another keyword.");
+            return "Nothing match this keyword. \n"
+                + "Please try again with another keyword.";
         }
 
-        return tasksFound;
+        return builder.toString();
     }
 }
