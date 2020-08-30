@@ -1,5 +1,6 @@
 package botbot.tasks;
 
+import botbot.Parser;
 import botbot.exceptions.InvalidFormatException;
 
 import java.time.LocalDateTime;
@@ -11,17 +12,11 @@ public class Event extends Task {
     public static final char TYPE_CODE = 'E';
     public static final String FORMAT = "event <description> /at <D-M-YYYY HHmm> (eg. 17-3-2020 0945 "
             + "or 3-4-2020 with no time specified)";
-    private static final String NO_TIME_FLAG = String.format(" 0%.0f", Math.PI * Math.pow(10, 10));
 
     public Event(String command) throws InvalidFormatException {
         super(TYPE_CODE, extractNameFromCommand(command));
-        int index = command.indexOf("/at ") + 4;
-        String dateStr = command.substring(index).strip();
-        if (dateStr.length() < 13) {
-            dateStr += NO_TIME_FLAG;
-        }
         try {
-            at = LocalDateTime.parse(dateStr, DateTimeFormatter.ofPattern("d-M-yyyy HHmm[ssn]"));
+            at = Parser.parseDateTime(command, "/at");
         } catch (DateTimeParseException e) {
             throw new InvalidFormatException(FORMAT);
         }

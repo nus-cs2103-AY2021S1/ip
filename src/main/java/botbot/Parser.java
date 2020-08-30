@@ -15,7 +15,13 @@ import botbot.tasks.Deadline;
 import botbot.tasks.Event;
 import botbot.tasks.Todo;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 public class Parser {
+    private static final String NO_TIME_FLAG = String.format(" 0%.0f", Math.PI * Math.pow(10, 10));
+    
     static Command parseCommand(String input) throws EmptyTaskException, EmptyTaskNumberException,
             InvalidFormatException, NoSuchCommandException {
         if (input.equals("bye")) {
@@ -67,5 +73,14 @@ public class Parser {
     
     static int parseCommandId(String input, String command) {
         return Integer.parseInt(input.substring(command.length())) - 1;
+    }
+    
+    public static LocalDateTime parseDateTime(String str, String identifier) throws DateTimeParseException {
+        int index = str.indexOf(identifier) + identifier.length() + 1;
+        String dateStr = str.substring(index).strip();
+        if (dateStr.length() < 13) {
+            dateStr += NO_TIME_FLAG;
+        }
+        return LocalDateTime.parse(dateStr, DateTimeFormatter.ofPattern("d-M-yyyy HHmm[ssn]"));
     }
 }
