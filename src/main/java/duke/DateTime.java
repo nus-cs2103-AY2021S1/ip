@@ -8,9 +8,11 @@ import java.time.format.DateTimeParseException;
  * DateTime class used to store date objects.
  */
 public class DateTime {
+    static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    static final String INVALID_DATE_MESSAGE = "Your Date must be in the format yyyy-MM-dd."
+            +
+            " Initialising date to Today!";
     private LocalDate date = LocalDate.now();
-    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-    private final String INVALID_DATE_MESSAGE = "Your Date must be in the format yyyy-MM-dd. Initialising date to Today!";
 
     /**
      * Constructor for the DateTime class.

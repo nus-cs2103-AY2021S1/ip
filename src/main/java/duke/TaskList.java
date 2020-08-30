@@ -1,14 +1,14 @@
 package duke;
 
-import java.util.ArrayList;
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * TaskList class to store all the tasks in Duke.
  */
 public class TaskList {
     private ArrayList<Task> items;
-    Storage storage;
+    private Storage storage;
 
     /**
      * Constructor for TaskList class.
@@ -36,7 +36,9 @@ public class TaskList {
      */
     public void add(Task toAdd) {
         this.items.add(toAdd);
-        Ui.addLine(String.format("    Got it. I've added this task:\n    %s\n    Now you have %d tasks in the list.", toAdd, this.items.size()));
+        Ui.addLine(String.format("    Got it. I've added this task:\n    %s\n    "
+                +
+                "Now you have %d tasks in the list.", toAdd, this.items.size()));
     }
 
     /**
@@ -110,6 +112,8 @@ public class TaskList {
         }
         Task t = this.items.get(idx);
         this.items.remove(idx);
-        Ui.addLine(String.format("    Nice! I've removed this task:\n    %s\n    Now you have %d tasks in the list.", t, this.items.size()));
+        Ui.addLine(String.format("    Nice! I've removed this task:\n    %s\n    "
+                +
+                "Now you have %d tasks in the list.", t, this.items.size()));
     }
 }

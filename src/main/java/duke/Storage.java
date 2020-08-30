@@ -1,24 +1,26 @@
 package duke;
 
-import java.util.ArrayList;
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
 
 /**
  * Storage class that interacts with the .txt file to store and retrieve data.
  */
 public class Storage {
-    private final String HOME = System.getProperty("user.home");
-    private final Path DIR = Paths.get(HOME, "data");
-    private final Path PATH = Paths.get(HOME, "data", "iPStore.txt");
-    private final String IO_MESSAGE = "Sorry! There was an IOException! Initialising with an empty Tasklist!";
-    private final String INVALID_MESSAGE = "Sorry! There was an error in reading your data! Initialising with a semi-complete Tasklist!";
+    static final String HOME = System.getProperty("user.home");
+    static final Path DIR = Paths.get(HOME, "data");
+    static final Path PATH = Paths.get(HOME, "data", "iPStore.txt");
+    static final String IO_MESSAGE = "Sorry! There was an IOException! Initialising with an empty Tasklist!";
+    static final String INVALID_MESSAGE = "Sorry! There was an error in reading your data! "
+            +
+            "Initialising with a semi-complete Tasklist!";
 
     /**
      * Constructor for Storage class.
@@ -66,6 +68,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Writes data to the .txt file.
+     *
+     * @param items List of items to write
+     * @throws IOException In case there are errors when reading the data.
+     */
     public void writeData(ArrayList<Task> items) throws IOException {
         boolean directoryExists = Files.exists(DIR);
 
@@ -85,6 +93,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Reads data from .txt file.
+     *
+     * @return An ArrayList of tasks.
+     */
     public ArrayList<Task> readData() {
         boolean pathExists = Files.exists(PATH);
 
