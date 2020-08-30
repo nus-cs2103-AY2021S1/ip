@@ -8,7 +8,7 @@ import java.time.format.DateTimeFormatter;
  * The instance of the Event class has the description and
  * the time of the event.
  */
-public class Event extends Task{
+public class Event extends Task {
     protected LocalDate at;
 
     /**
@@ -42,7 +42,7 @@ public class Event extends Task{
      */
     @Override
     public String record() {
-        if(this.isCompleted) {
+        if (this.isCompleted) {
             return "E | 1 | " + description + " | " + at;
         } else {
             return "E | 0 | " + description + " | " + at;

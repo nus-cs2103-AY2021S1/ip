@@ -1,7 +1,6 @@
 package duke.task;
 
-public class ToDo extends Task{
-
+public class ToDo extends Task {
     /**
      * Creates a corresponding task with the description of the task.
      *
@@ -30,7 +29,7 @@ public class ToDo extends Task{
      */
     @Override
     public String record() {
-        if(this.isCompleted) {
+        if (this.isCompleted) {
             return "T | 1 | " + description;
         } else {
             return "T | 0 | " + description;

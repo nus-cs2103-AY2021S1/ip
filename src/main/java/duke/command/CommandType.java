@@ -15,7 +15,7 @@ public enum CommandType {
     EXIT("exit"),
     FIND("find");
 
-    String type;
+    private String type;
 
     /**
      * Takes in the name of the type of the command and returns a command type.

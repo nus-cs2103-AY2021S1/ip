@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.core.Result;
 import duke.core.Storage;
 import duke.core.TaskList;
 import duke.core.Ui;
@@ -33,7 +34,7 @@ public class SearchCommand extends Command {
      * @throws IOException If the storage process needs to be handled
      */
     @Override
-    public void excecute(TaskList taskList, Ui ui, Storage storage) throws TaskNotFoundException, IOException {
-        ui.showList(taskList.findTaskWithDescription(key));
+    public Result excecute(TaskList taskList, Ui ui, Storage storage) throws TaskNotFoundException, IOException {
+        return new Result(ui.showList(taskList.findTaskWithDescription(key)), this.isContinuing());
     }
 }

@@ -18,7 +18,7 @@ import duke.handle.LoadingException;
  * the local record when the list of tasks is changed.
  */
 public class Storage {
-    public String path;
+    private String path;
 
     /**
      * Takes in the path of the local record and returns a storage manager.
@@ -69,10 +69,12 @@ public class Storage {
                         }
                         tasks.add(event);
                     } else {
-                        throw new LoadingException("The previous record cannot be read becuase the format of a task is incorrect\nCleaning the record to start again");
+                        throw new LoadingException(
+                                "The previous record cannot be read becuase the format of a task is incorrect\nCleaning the record to start again");
                     }
                 } else {
-                    throw new LoadingException("The previous record cannot be read because the complete state of a task is incorrect\nCleaning the record to start again");
+                    throw new LoadingException(
+                            "The previous record cannot be read because the complete state of a task is incorrect\nCleaning the record to start again");
                 }
             }
             return tasks;
@@ -96,7 +98,7 @@ public class Storage {
         ArrayList<Task> tasks = taskList.getTasks();
         String string = "";
 
-        for(int i = 0; i < tasks.size(); i = i + 1) {
+        for (int i = 0; i < tasks.size(); i = i + 1) {
             string = string.concat(tasks.get(i).record() + System.lineSeparator());
         }
         fileWriter.write(string);

@@ -13,10 +13,11 @@ import duke.task.Task;
  */
 public class Ui {
     public static final String INDENTATION = "    ";
-    public static final String DIVIDER = "____________________________________________________________";
+    public static final String DIVIDER = "_______________________________";
     public static final String GREETING = "Hello! I am Smith\n" + "What can I do for you?";
     public static final String EXITMESSAGE = "Bye. Hope to see you again soon!";
-    public static final String logo = " ____        _        \n"
+    public static final String LOADMESSAGE = "Load the local record.";
+    public static final String LOGO = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
@@ -24,7 +25,7 @@ public class Ui {
 
     public final Scanner scanner;
 
-    PrintStream out;
+    private PrintStream out;
 
     /**
      * Creates a user interface component.
@@ -48,11 +49,11 @@ public class Ui {
     public String makeBlock(String string) {
         String[] strings = string.split("\n");
         String result = INDENTATION + DIVIDER + "\n";
-        for(int i = 0; i < strings.length; i = i + 1) {
+        for (int i = 0; i < strings.length; i = i + 1) {
             result = result + INDENTATION + strings[i] + "\n";
         }
         result = result + INDENTATION + DIVIDER + "\n";
-        return  result;
+        return result;
     }
 
     /**
@@ -67,9 +68,10 @@ public class Ui {
     /**
      * Shows the greeting information.
      */
-    public void showGreeting() {
+    public String showGreeting() {
         //System.out.println("Hello from\n" + logo);
-        out.println(makeBlock(logo + "\n" + GREETING));
+        //out.println(makeBlock(logo + "\n" + GREETING));
+        return makeBlock(LOGO + "\n" + GREETING);
     }
 
     /**
@@ -77,8 +79,9 @@ public class Ui {
      *
      * @param exception The exception corresponding to the problem.
      */
-    public void handle(Exception exception) {
-        out.println(makeBlock(exception.getMessage()));
+    public String handle(Exception exception) {
+        //out.println(makeBlock(exception.getMessage()));
+        return makeBlock(exception.getMessage());
     }
 
     /**
@@ -87,10 +90,11 @@ public class Ui {
      * @param task The task to be added.
      * @param size The number of tasks after the execution.
      */
-    public void showAdd(Task task, int size) {
+    public String showAdd(Task task, int size) {
         String result = "Got it. I have added this task:\n  " + task.toString() + "\nNow you have " + size + " tasks in the list.";
         //System.out.println(makeBlock(result));
-        out.println(makeBlock(result));
+        //out.println(makeBlock(result));
+        return makeBlock(result);
     }
 
     /**
@@ -98,8 +102,9 @@ public class Ui {
      *
      * @param taskList The task list.
      */
-    public void showList(TaskList taskList) {
-        out.println(makeBlock(taskList.toString()));
+    public String showList(TaskList taskList) {
+        //out.println(makeBlock(taskList.toString()));
+        return makeBlock(taskList.toString());
     }
 
     /**
@@ -108,8 +113,9 @@ public class Ui {
      * @param task The task to be marked as completed.
      * @param count The count of the task to be completed.
      */
-    public void showDone(Task task, int count) {
-        out.println(makeBlock("Nice! I have marked this task as done:\n" + String.valueOf(count) + "." + task.toString()));
+    public String showDone(Task task, int count) {
+        //out.println(makeBlock("Nice! I have marked this task as done:\n" + String.valueOf(count) + "." + task.toString()));
+        return makeBlock("Nice! I have marked this task as done:\n" + String.valueOf(count) + "." + task.toString());
     }
 
     /**
@@ -119,17 +125,26 @@ public class Ui {
      * @param count The count of the task.
      * @param size The number of tasks in the task list.
      */
-    public void showDelete(Task task, int count, int size) {
+    public String showDelete(Task task, int count, int size) {
+        /*
         out.println(makeBlock("Noted. I have removed this task:\n" +
                 String.valueOf(count) +
                 "." + task.toString() +
                 "\nNow you have " + size + " tasks in the list."));
+        */
+        return makeBlock(
+                "Noted. I have removed this task:\n" + String.valueOf(count) + "." + task.toString() + "\nNow you have " + size + " tasks in the list.");
+    }
+
+    public String showLoad() {
+        return makeBlock(LOADMESSAGE);
     }
 
     /**
      * Shows the result of the executing the exit command.
      */
-    public void showExit() {
-        out.println(makeBlock(EXITMESSAGE));
+    public String showExit() {
+        //out.println(makeBlock(EXITMESSAGE));
+        return makeBlock(EXITMESSAGE);
     }
 }
