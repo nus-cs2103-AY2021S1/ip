@@ -1,6 +1,7 @@
 package duke;
 
 import java.nio.file.Path;
+
 import duke.command.Command;
 
 /**
@@ -12,7 +13,7 @@ import duke.command.Command;
 public class Duke {
 
     /** The path where the tasks are saved. */
-    public static final Path path = java.nio.file.Paths.get(".", "data.txt");
+    private static final Path PATH = java.nio.file.Paths.get(".", "data.txt");
 
     private Storage storage;
     private TaskList taskList;
@@ -50,6 +51,6 @@ public class Duke {
      * Creates a Duke and start interacting with user.
      */
     public static void main(String[] args) {
-        new Duke(path).run();
+        new Duke(PATH).run();
     }
 }

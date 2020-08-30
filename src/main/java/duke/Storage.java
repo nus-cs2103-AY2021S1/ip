@@ -12,10 +12,11 @@ import java.nio.file.Path;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import duke.task.Task;
-import duke.task.ToDo;
+
 import duke.task.Deadline;
 import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
 
 /**
  * The Storage class deals with loading tasks from the file and saving tasks in the file.
@@ -72,6 +73,7 @@ public class Storage {
                                 LocalDateTime.parse(eventArr[1].trim()));
                         list.add(event);
                         break;
+                    default:
                     }
                 }
             } else {
