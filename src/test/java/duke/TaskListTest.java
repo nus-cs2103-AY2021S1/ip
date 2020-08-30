@@ -1,28 +1,29 @@
 package duke;
 
-import duke.exceptions.DukeException;
-import org.junit.jupiter.api.Test;
-
-import java.util.ArrayList;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
+import java.util.ArrayList;
+
+import org.junit.jupiter.api.Test;
+
+import duke.exceptions.DukeException;
+
 public class TaskListTest {
-    TaskList tasks = new TaskList(new ArrayList<>());
+    private TaskList tasks = new TaskList(new ArrayList<>());
 
     @Test
-    public void testAddTask(){
+    public void testAddTask() {
         try {
             tasks.addTask("todo project");
         } catch (DukeException e) {
             System.out.println(e.getMessage());
         }
-        assertEquals( "[T][\u2718] project", tasks.getTasks().get(0).toString());
+        assertEquals("[T][\u2718] project", tasks.getTasks().get(0).toString());
     }
 
     @Test
-    public void testCompleteTask(){
+    public void testCompleteTask() {
         try {
             tasks.addTask("todo project");
             tasks.completeTask("done 1");
@@ -33,7 +34,7 @@ public class TaskListTest {
     }
 
     @Test
-    public void completeTask_exceptionThrown(){
+    public void completeTask_exceptionThrown() {
         try {
             tasks.addTask("todo project");
             tasks.completeTask("done 2");
@@ -45,7 +46,7 @@ public class TaskListTest {
     }
 
     @Test
-    public void testDeleteTask(){
+    public void testDeleteTask() {
         try {
             tasks.addTask("todo project");
             tasks.deleteTask("delete 1");
@@ -56,7 +57,7 @@ public class TaskListTest {
     }
 
     @Test
-    public void deleteTask_exceptionThrown(){
+    public void deleteTask_exceptionThrown() {
         try {
             tasks.addTask("todo project");
             tasks.deleteTask("delete 2");

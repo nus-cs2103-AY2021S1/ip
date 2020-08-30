@@ -1,17 +1,19 @@
 package duke;
 
-import duke.exceptions.DukeException;
-import duke.exceptions.InvalidCommandException;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
+
+import duke.exceptions.DukeException;
+import duke.exceptions.InvalidCommandException;
 
 public class ParserTest {
-    Parser parser = new Parser();
-    TaskList taskList = new TaskList(new ArrayList<>());
-    StorageStub storage = new StorageStub();
+    private Parser parser = new Parser();
+    private TaskList taskList = new TaskList(new ArrayList<>());
+    private StorageStub storage = new StorageStub();
 
     @Test
     public void testCommand() throws DukeException {
