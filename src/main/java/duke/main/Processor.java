@@ -1,12 +1,12 @@
-package main.java.duke.main;
+package duke.main;
 
-import main.java.duke.exception.DukeException;
+import duke.exception.DukeException;
 
-import main.java.duke.task.DeadLine;
-import main.java.duke.task.Event;
-import main.java.duke.task.Task;
-import main.java.duke.task.ToDo;
-import main.java.duke.task.TaskList;
+import duke.task.DeadLine;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
+import duke.task.TaskList;
 
 /**
  * Handles the logic flow of Duke.

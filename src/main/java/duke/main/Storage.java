@@ -1,4 +1,4 @@
-package main.java.duke.main;
+package duke.main;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -8,11 +8,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import main.java.duke.task.DeadLine;
-import main.java.duke.task.Event;
-import main.java.duke.task.Task;
-import main.java.duke.task.TaskList;
-import main.java.duke.task.ToDo;
+import duke.task.DeadLine;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.ToDo;
 
 /**
  * Saves the tasks in the hard disk automatically whenever the task list changes and

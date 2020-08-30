@@ -1,5 +1,5 @@
 import org.junit.Test;
-import main.java.Parser;
+import duke.main.Parser;
 
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertFalse;
