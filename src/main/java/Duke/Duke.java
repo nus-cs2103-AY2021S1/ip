@@ -1,5 +1,4 @@
 package Duke;
-import java.io.*;
 
 import Duke.Commands.Command;
 import Duke.Errors.DukeException;
@@ -7,6 +6,10 @@ import Duke.Helpers.Parser;
 import Duke.Helpers.Storage;
 import Duke.Helpers.TaskList;
 import Duke.Helpers.Ui;
+
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintStream;
 
 /**
  * This Duke class is the main class that prints out the relevant outputs by including all the subclasses of Task and
@@ -71,14 +74,15 @@ public class Duke {
      *  Then, prints out relevant information using the output() func.
      */
     public static void main(String[] args) throws IOException {
-        Duke duke = new Duke("src/main/java/tasks.txt");
+       // Duke duke = new Duke("src/main/java/tasks.txt");
+        //duke.run();
+        PrintStream fileOut = new PrintStream("src/main/java/output.txt");
+        System.setOut(fileOut);
+        FileWriter fw = new FileWriter("src/main/java/tasks.txt");
+        fw.write("");
+        fw.close();
+        Duke duke = new Duke("src/main/java/tasks.txt", "src/main/java/input.txt");
         duke.run();
-        //PrintStream fileOut = new PrintStream("src/main/java/output.txt");
-        //System.setOut(fileOut);
-        //FileWriter fw = new FileWriter("src/main/java/tasks.txt");
-        //fw.write("");
-        //fw.close();
-        //Duke duke = new Duke("src/main/java/tasks.txt", "src/main/java/input.txt");
     }
 }
 
