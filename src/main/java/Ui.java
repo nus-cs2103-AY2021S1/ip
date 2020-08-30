@@ -1,3 +1,5 @@
+import tasks.Task;
+
 /**
  * <code>Ui</code> contains all the methods and information needed to diplay
  * the user interface on the screen.
@@ -66,7 +68,7 @@ public class Ui {
      */
     public void askTodo() {
         System.out.println(LINE);
-        System.out.println("What is the name of your Todo?"); 
+        System.out.println("What is the name of your tasks.Todo?");
         System.out.println(LINE);
         System.out.print("> ");
     }
@@ -76,7 +78,7 @@ public class Ui {
      */
     public void askDeadlineName() {
         System.out.println(LINE);
-        System.out.println("What is the name of your Deadline?"); 
+        System.out.println("What is the name of your tasks.Deadline?");
         System.out.println(LINE);
         System.out.print("> ");
     }
@@ -96,7 +98,7 @@ public class Ui {
      */
     public void askEventName() {
         System.out.println(LINE);
-        System.out.println("What is the name of your Event?"); 
+        System.out.println("What is the name of your tasks.Event?");
         System.out.println(LINE);
         System.out.print("> ");
     }

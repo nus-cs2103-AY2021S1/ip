@@ -1,3 +1,8 @@
+import tasks.Deadline;
+import tasks.Event;
+import tasks.Task;
+import tasks.Todo;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -17,7 +22,7 @@ class Storage {
      * <code>List</code>. Since each task from the file is
      * comma seperated, it splits each string into a string array using ","
      * as a delimiter. Then it creates objects of the child classes of
-     * <code>Task</code> according to the information provided.
+     * <code>tasks.Task</code> according to the information provided.
      * @return a list of tasks as a <code>List</code>
      * @throws DukeException if there is an IOexception while creating a new empty file
      */
