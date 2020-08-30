@@ -10,7 +10,7 @@ public class TaskList {
         this.storage = new Storage();
         try {
           this.database = this.storage.loadFromDatabase();
-        } catch (WishException e) {
+        } catch (DukeException e) {
 
         }
     }
@@ -160,8 +160,8 @@ public class TaskList {
 
         if (description.equals("")) {
             try {
-                throw new WishException("The description of a todo cannot be empty");
-            } catch (WishException e) {
+                throw new DukeException("The description of a todo cannot be empty");
+            } catch (DukeException e) {
                 System.out.println(e.getMessage());
             }
         } else {
@@ -172,8 +172,8 @@ public class TaskList {
 
     public void noSuchCommand() {
         try {
-            throw new WishException("Oops! I am sorry but I don't understand what that means");
-        } catch (WishException e) {
+            throw new DukeException("Oops! I am sorry but I don't understand what that means");
+        } catch (DukeException e) {
             System.out.println(e.getMessage());
         }
     }

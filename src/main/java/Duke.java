@@ -1,8 +1,8 @@
-public class Wish {
+public class Duke {
     private Ui ui;
 
     public static void main(String[] args) {
-        new Wish().run();
+        new Duke().run();
     }
 
     private void run() {
@@ -11,7 +11,7 @@ public class Wish {
         try {
             ui.greet();
             ui.getUserInput();
-        } catch (WishException e) {
+        } catch (DukeException e) {
             System.out.println(e.getMessage());
         }
     }

@@ -20,10 +20,10 @@ public class Storage {
      * If the directory does not exist, a new folder to store the .txt file will be created.
      *
      * @return an ArrayList containing all the tasks of the user
-     * @throws WishException if the folder to store the .txt file cannot be created
+     * @throws DukeException if the folder to store the .txt file cannot be created
      * @throws FileNotFoundException if the .txt file cannot be found
      */
-    public ArrayList<Task> loadFromDatabase() throws WishException {
+    public ArrayList<Task> loadFromDatabase() throws DukeException {
         boolean directoryExists = Files.exists(DATABASE_DIRECTORY_PATH);
         ArrayList<Task> database = new ArrayList<>(100);
 
@@ -35,7 +35,7 @@ public class Storage {
             if (createdNewFolder) {
                 System.out.println("I have created a new folder to store saved data");
             } else {
-                throw new WishException("Could not create new directory to store saved data");
+                throw new DukeException("Could not create new directory to store saved data");
             }
         } else {
             if (Files.exists(SAVED_FILE_PATH)) {
