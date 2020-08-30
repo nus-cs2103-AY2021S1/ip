@@ -1,5 +1,7 @@
 package duke.commands;
 
+import duke.DukeException;
+
 /**
  * <code>duke.commands.DeleteCommand</code> inherits from the base class <code>duke.commands.Command</code>
  * and will handle the job of deleting duke.tasks.

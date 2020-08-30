@@ -1,5 +1,8 @@
 package duke.commands;
 
+import duke.DukeException;
+import duke.tasks.Event;
+
 /**
  * <code>duke.commands.EventCommand</code> inherits from the base class <code>duke.commands.Command</code>
  * and will handle the job of adding events to the task manager.
