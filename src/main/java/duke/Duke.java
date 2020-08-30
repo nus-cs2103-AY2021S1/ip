@@ -50,12 +50,15 @@ public class Duke {
         }
 
         ui.displayExit();
-
         try {
-            storage.storeTaskList(tasks);
+            storeTasks();
         } catch (IOException e) {
             System.out.println(e);
         }
+    }
+
+    public void storeTasks() throws IOException {
+        storage.storeTaskList(tasks);
     }
 
     /**
