@@ -5,15 +5,17 @@ import java.util.Scanner;
 
 import chatterbox.task.Task;
 import chatterbox.task.TaskList;
-import javafx.application.Application;
-import javafx.scene.Scene;
+import chatterbox.ui.DialogBox;
 import javafx.scene.control.Label;
-import javafx.stage.Stage;
+import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.VBox;
 
 /**
  * Handles the main loop and the high level logic flow of the program.
  */
-public class Chatterbox extends Application {
+public class Chatterbox {
     private final TaskList tasks;
     private final Scanner scanner;
 
@@ -28,22 +30,17 @@ public class Chatterbox extends Application {
     }
 
     /**
-     * The main entry point for all JavaFX applications.
-     * The start method is called after the init method has returned,
-     * and after the system is ready for the application to begin running.
-     *
-     * @param stage The primary stage for this application, onto which
-     *              the application scene can be set.
-     *              Applications may create other stages, if needed, but they will not be
-     *              primary stages.
+     * Iteration 1:
+     * Creates a label with the specified text and adds it to the dialog container.
+     * @param text String containing text to add
+     * @return a label with the specified text that has word wrap enabled.
      */
-    @Override
-    public void start(Stage stage) {
-        Label helloWorld = new Label("Hello World!");
-        Scene scene = new Scene(helloWorld);
+    private Label getDialogLabel(String text) {
+        // You will need to import `javafx.scene.control.Label`.
+        Label textToAdd = new Label(text);
+        textToAdd.setWrapText(true);
 
-        stage.setScene(scene);
-        stage.show();
+        return textToAdd;
     }
 
     /**
