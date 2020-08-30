@@ -18,7 +18,7 @@ class taskListHandlerTest {
 
     @Test
     void getTaskList() {
-        taskListHandler handler = new taskListHandler(new ArrayList<>());
+        TaskListHandler handler = new TaskListHandler(new ArrayList<>());
         handler.getTasks().add(new Todo("assignment"));
 
         ArrayList<Task> newTaskList = new ArrayList<>();
@@ -29,7 +29,7 @@ class taskListHandlerTest {
 
     @Test
     void addToList() {
-        taskListHandler handler = new taskListHandler(new ArrayList<>());
+        TaskListHandler handler = new TaskListHandler(new ArrayList<>());
         handler.addToList(new Event("mega sale", "12pm"));
         ArrayList<Task> newTaskList = new ArrayList<>();
         newTaskList.add(new Event("mega sale", "12pm"));
@@ -40,7 +40,7 @@ class taskListHandlerTest {
     @Test
     void clearList() {
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-        taskListHandler handler = new taskListHandler(new ArrayList<>());
+        TaskListHandler handler = new TaskListHandler(new ArrayList<>());
         handler.addToList(new Event("mega sale", "12pm"));
         System.setOut(new PrintStream(outContent));
         handler.clearList();
@@ -64,7 +64,7 @@ class taskListHandlerTest {
     void printList() throws DukeException {
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
-        taskListHandler handler = new taskListHandler(new ArrayList<>());
+        TaskListHandler handler = new TaskListHandler(new ArrayList<>());
         handler.addToList(new Event("mega sale", "12pm"));
         handler.addToList(new Todo("assignment"));
         handler.addToList(new Deadline("submission", "9pm"));

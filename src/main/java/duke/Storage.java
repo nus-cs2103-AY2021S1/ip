@@ -106,13 +106,13 @@ public class Storage {
                 // Read all tasks from savefile
                 String input = sc.nextLine();
                 if (input.startsWith("todo")) {
-                    Task newTodo = Parser.parseNewTaskCommand(input, Task.taskType.TODO);
+                    Task newTodo = Parser.parseNewTaskCommand(input, Task.TaskType.TODO);
                     list.add(newTodo);
                 } else if (input.startsWith("deadline")) {
-                    Task newDeadline = Parser.parseNewTaskCommand(input, Task.taskType.DEADLINE);
+                    Task newDeadline = Parser.parseNewTaskCommand(input, Task.TaskType.DEADLINE);
                     list.add(newDeadline);
                 } else if (input.startsWith("event")) {
-                    Task newEvent = Parser.parseNewTaskCommand(input, Task.taskType.EVENT);
+                    Task newEvent = Parser.parseNewTaskCommand(input, Task.TaskType.EVENT);
                     list.add(newEvent);
                 } else {
                     throw new DukeException("\u2639 Oops, error parsing " + '"' + input + '"' + " in save file");

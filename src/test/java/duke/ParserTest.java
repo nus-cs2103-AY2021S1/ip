@@ -24,7 +24,7 @@ class ParserTest {
 
     @Test
     void parseModifyTaskCommand() throws DukeException {
-        taskListHandler handler = new taskListHandler(new ArrayList<>());
+        TaskListHandler handler = new TaskListHandler(new ArrayList<>());
         handler.addToList(new Deadline("assignment", "8pm"));
         handler.getTasks().get(0).markAsDone();
         Deadline newDeadline = new Deadline("assignment", "8pm");
@@ -37,7 +37,7 @@ class ParserTest {
     void parseNewTaskCommand() throws DukeException {
         Todo newToDo = new Todo("assignment");
         String command = "todo assignment";
-        assertEquals(Parser.parseNewTaskCommand(command,Task.taskType.TODO), newToDo);
+        assertEquals(Parser.parseNewTaskCommand(command, Task.TaskType.TODO), newToDo);
         System.out.println("Passed: parseNewTaskCommandTest!");
     }
 
@@ -45,7 +45,7 @@ class ParserTest {
     void parseTaskWithTime() throws DukeException {
         Event newEvent = new Event("fan-signing", "2pm");
         String command = "event fan-signing /at 2pm";
-        assertEquals(Parser.parseTaskWithTime(command, Task.taskType.EVENT, "/at"), newEvent);
+        assertEquals(Parser.parseTaskWithTime(command, Task.TaskType.EVENT, "/at"), newEvent);
         System.out.println("Passed: parseTaskWithTimeTest!");
     }
 

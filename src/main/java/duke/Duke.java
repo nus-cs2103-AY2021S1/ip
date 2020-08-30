@@ -1,7 +1,7 @@
 package duke;
 
 public class Duke {
-    public static void main(String[] args)  {
+    public static void main(String[] args) {
         initialize();
     }
 
@@ -14,7 +14,7 @@ public class Duke {
             return;
         }
         Ui.greet();
-        taskListHandler handler = new taskListHandler(storage.getListFromFile());
+        TaskListHandler handler = new TaskListHandler(storage.getListFromFile());
         Ui userInterface = new Ui(handler, storage);
         userInterface.run();
     }

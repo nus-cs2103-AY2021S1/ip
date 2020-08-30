@@ -1,8 +1,8 @@
 package duke.command;
 
-import duke.task.Task;
-
 import java.util.Objects;
+
+import duke.task.Task;
 
 /**
  * Adds a to do task to the list.

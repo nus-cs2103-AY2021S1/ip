@@ -8,6 +8,12 @@ package duke.task;
 public class Event extends Task {
     protected final String at;
 
+    /**
+     * Initializes with a description and the time of event.
+     *
+     * @param desc Description.
+     * @param at Time of the event.
+     */
     public Event(String desc, String at) {
         super(desc);
         this.at = at;

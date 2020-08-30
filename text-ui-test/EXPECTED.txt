@@ -171,7 +171,7 @@ Successfully loaded: 1 task(s)
 *______________________________________________________________*
 
 duke.DukeException: ? Oops, the list of tasks is empty, pls add tasks first!
-	at duke.taskListHandler.printList(taskListHandler.java:61)
+	at duke.TaskListHandler.printList(taskListHandler.java:61)
 	at duke.command.ListCommand.execute(ListCommand.java:22)
 	at duke.Ui.run(Ui.java:42)
 	at duke.Duke.initialize(Duke.java:19)

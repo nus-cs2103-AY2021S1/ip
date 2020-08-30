@@ -7,24 +7,29 @@ import java.util.Objects;
  */
 public class Task {
     protected final String description;
-    protected taskStatus status;
+    protected TaskStatus status;
 
     /**
      * Denotes whether task is done or not done.
      */
-    public enum taskStatus {
+    public enum TaskStatus {
         DONE, NOTDONE
     }
 
     /**
      * Denotes specific type of task.
      */
-    public enum taskType {
+    public enum TaskType {
         TODO, DEADLINE, EVENT
     }
 
+    /**
+     * Initializes with a description and sets task to not done by default.
+     *
+     * @param desc Description.
+     */
     public Task(String desc) {
-        this.status = taskStatus.NOTDONE;
+        this.status = TaskStatus.NOTDONE;
         this.description = desc;
     }
 
@@ -43,16 +48,17 @@ public class Task {
      * @return unicode character for tick/cross.
      */
     public String getStatusIcon() {
-        return (this.status == taskStatus.DONE
-                ? "\u2713" // return tick
-                : "\u2718");  // or X symbols
+        return (this.status == TaskStatus.DONE
+            // return tick or X symbols
+            ? "\u2713"
+            : "\u2718");
     }
 
     /**
      * Marks given task as done.
      */
     public void markAsDone() {
-        this.status = taskStatus.DONE;
+        this.status = TaskStatus.DONE;
     }
 
     /**
@@ -61,7 +67,7 @@ public class Task {
      * @return whether the task is done or not
      */
     public boolean isDone() {
-        return this.status == taskStatus.DONE;
+        return this.status == TaskStatus.DONE;
     }
 
     /**
@@ -88,11 +94,15 @@ public class Task {
      */
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Task)) return false;
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Task)) {
+            return false;
+        }
         Task task = (Task) o;
-        return description.equals(task.description) &&
-                status == task.status;
+        return description.equals(task.description)
+            && status == task.status;
     }
     @Override
     public int hashCode() {

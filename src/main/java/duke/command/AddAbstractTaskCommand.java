@@ -1,12 +1,12 @@
 package duke.command;
 
+import java.util.ArrayList;
+
 import duke.DukeException;
 import duke.Storage;
+import duke.TaskListHandler;
 import duke.Ui;
 import duke.task.Task;
-import duke.taskListHandler;
-
-import java.util.ArrayList;
 
 /**
  * Generic add task command which inherits from generic command class.
@@ -27,7 +27,7 @@ public abstract class AddAbstractTaskCommand extends Command {
      * @param storage Storage instance.
      */
     @Override
-    public void execute(taskListHandler handler, Storage storage) {
+    public void execute(TaskListHandler handler, Storage storage) {
         try {
             ArrayList<Task> taskList = handler.getTasks();
             handler.addToList(newTask);

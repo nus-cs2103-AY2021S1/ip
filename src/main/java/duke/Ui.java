@@ -1,10 +1,10 @@
 package duke;
 
-import duke.command.Command;
-import duke.task.Task;
-
 import java.util.NoSuchElementException;
 import java.util.Scanner;
+
+import duke.command.Command;
+import duke.task.Task;
 
 /**
  * Represents all user interaction with Duke.
@@ -12,11 +12,16 @@ import java.util.Scanner;
 public class Ui {
     /** Class-wide variable to know whether to continue running user interface. */
     protected static boolean isRunning = true;
-    protected final taskListHandler handler;
+    protected final TaskListHandler handler;
     protected final Storage storage;
 
-
-    public Ui(taskListHandler handler, Storage storage) {
+    /**
+     * Initializes the Ui with the task list and storage.
+     *
+     * @param handler Contains the task list and its operations.
+     * @param storage Contains all operations related to loading and saving of tasks to disk.
+     */
+    public Ui(TaskListHandler handler, Storage storage) {
         this.handler = handler;
         this.storage = storage;
     }
@@ -41,7 +46,7 @@ public class Ui {
                 Command c = Parser.parse(input, handler);
                 c.execute(handler, storage);
                 System.out.println();
-            }  catch (NoSuchElementException e1) {
+            } catch (NoSuchElementException e1) {
                 // Encounter end of file, terminate
                 isRunning = false;
             } catch (DukeException e) {
@@ -51,11 +56,17 @@ public class Ui {
         }
     }
 
+    /**
+     * Draws the top border of the chatbot's response.
+     */
     public static void drawTopBorder() {
         System.out.println(" ______________________________________________________________ ");
         System.out.println("*                                                              *");
-
     }
+
+    /**
+     * Draws the bottom border of the chatbot's response.
+     */
     public static void drawBottomBorder() {
         System.out.println();
         System.out.println("*______________________________________________________________*");
@@ -68,7 +79,7 @@ public class Ui {
      * @param times The number of 4 spaces to be printed.
      */
     public static void indent(int times) {
-        for (int i=0; i<times; i++) {
+        for (int i = 0; i < times; i++) {
             System.out.print("    ");
         }
     }

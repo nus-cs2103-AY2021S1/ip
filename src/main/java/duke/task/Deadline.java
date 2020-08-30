@@ -11,6 +11,12 @@ import java.time.format.DateTimeParseException;
 public class Deadline extends Task {
     protected String by;
 
+    /**
+     * Initializes with a description and the time that deadline should be completed by.
+     *
+     * @param desc Description.
+     * @param by Time to be completed by.
+     */
     public Deadline(String desc, String by) {
         super(desc);
         this.by = by;

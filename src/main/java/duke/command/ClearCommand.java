@@ -1,11 +1,11 @@
 package duke.command;
 
+import java.util.ArrayList;
+
 import duke.DukeException;
 import duke.Storage;
-import duke.taskListHandler;
+import duke.TaskListHandler;
 import duke.task.Task;
-
-import java.util.ArrayList;
 
 public class ClearCommand extends Command {
 
@@ -16,7 +16,7 @@ public class ClearCommand extends Command {
      * @param storage Storage instance.
      */
     @Override
-    public void execute(taskListHandler handler, Storage storage) {
+    public void execute(TaskListHandler handler, Storage storage) {
         ArrayList<Task> tasks;
         try {
             tasks = handler.clearList();
@@ -24,7 +24,7 @@ public class ClearCommand extends Command {
                 System.out.println(t1);
             }
             storage.saveToFile(tasks);
-        } catch (DukeException e){
+        } catch (DukeException e) {
             e.printStackTrace(System.out);
             DukeException.tryAgain();
         }

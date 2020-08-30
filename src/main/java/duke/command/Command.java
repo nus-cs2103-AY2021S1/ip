@@ -2,7 +2,7 @@ package duke.command;
 
 import duke.DukeException;
 import duke.Storage;
-import duke.taskListHandler;
+import duke.TaskListHandler;
 
 /**
  * Generic abstract command class with a execute method to be implemented.
@@ -15,6 +15,6 @@ public abstract class Command {
      * @param handler Task list.
      * @param storage Storage instance.
      */
-    public abstract void execute(taskListHandler handler, Storage storage) throws DukeException;
+    public abstract void execute(TaskListHandler handler, Storage storage) throws DukeException;
 
 }

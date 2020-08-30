@@ -2,7 +2,7 @@ package duke.command;
 
 import duke.DukeException;
 import duke.Storage;
-import duke.taskListHandler;
+import duke.TaskListHandler;
 
 /**
  * Throws DukeException when invalid command is given.
@@ -22,7 +22,7 @@ public class InvalidCommand extends Command {
      * @param storage Storage instance.
      */
     @Override
-    public void execute(taskListHandler handler, Storage storage) {
+    public void execute(TaskListHandler handler, Storage storage) {
         try {
             throw new DukeException("\u2639 Oops, I'm sorry but I don't know what "
                 + '"' + invalidInput + '"' + " means :-(");

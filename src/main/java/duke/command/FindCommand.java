@@ -1,12 +1,12 @@
 package duke.command;
 
+import java.util.ArrayList;
+
 import duke.DukeException;
 import duke.Storage;
-import duke.taskListHandler;
+import duke.TaskListHandler;
 import duke.Ui;
 import duke.task.Task;
-
-import java.util.ArrayList;
 
 /**
  * Inherits from generic command class.
@@ -27,7 +27,7 @@ public class FindCommand extends Command {
      * @throws DukeException if keyword to search for is empty
      */
     @Override
-    public void execute(taskListHandler handler, Storage storage) throws DukeException {
+    public void execute(TaskListHandler handler, Storage storage) throws DukeException {
         ArrayList<Task> foundTasks = new ArrayList<>();
         try {
             String keyword = input.split(" ")[1];

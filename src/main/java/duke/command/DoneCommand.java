@@ -1,13 +1,13 @@
 package duke.command;
 
-import duke.DukeException;
-import duke.Storage;
-import duke.taskListHandler;
-import duke.Ui;
-import duke.task.Task;
-
 import java.util.ArrayList;
 import java.util.Objects;
+
+import duke.DukeException;
+import duke.Storage;
+import duke.TaskListHandler;
+import duke.Ui;
+import duke.task.Task;
 
 /**
  * Marks a provided task as done.
@@ -26,7 +26,7 @@ public class DoneCommand extends AbstractModifyTaskCommand {
      * @param storage Storage instance.
      */
     @Override
-    public void execute(taskListHandler handler, Storage storage) {
+    public void execute(TaskListHandler handler, Storage storage) {
         try {
             ArrayList<Task> tasks = handler.getTasks();
             task.markAsDone();

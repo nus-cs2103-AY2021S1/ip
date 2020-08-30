@@ -1,12 +1,13 @@
 package duke;
 
-import duke.task.Task;
 import java.util.ArrayList;
+
+import duke.task.Task;
 
 /**
  * Contains the task list and handles any operations regarding the task list.
  */
-public class taskListHandler {
+public class TaskListHandler {
     protected ArrayList<Task> tasks;
 
     /**
@@ -14,7 +15,7 @@ public class taskListHandler {
      *
      * @param list Task list.
      */
-    public taskListHandler(ArrayList<Task> list) {
+    public TaskListHandler(ArrayList<Task> list) {
         this.tasks = list;
     }
 
@@ -64,7 +65,7 @@ public class taskListHandler {
         Ui.drawTopBorder();
         Ui.indent(1);
         System.out.println("Here are the tasks in your list:");
-        for (int i = 0; i < tasks.size(); i++,listPos++) {
+        for (int i = 0; i < tasks.size(); i++, listPos++) {
             Ui.indent(2);
             System.out.println(listPos + ". " + tasks.get(i));
         }
@@ -79,7 +80,7 @@ public class taskListHandler {
      * @param times The number of 4 spaces to be printed.
      */
     public static void indent(int times) {
-        for (int i=0; i<times; i++) {
+        for (int i = 0; i < times; i++) {
             System.out.print("    ");
         }
     }
