@@ -28,7 +28,7 @@ public class Storage {
     public List<String> load() throws DukeException {
         try {
             Scanner s = new Scanner(file);
-            List store = new ArrayList<>();
+            List<String> store = new ArrayList<>();
             while (s.hasNext()) {
                 store.add(s.nextLine());
             }
@@ -65,7 +65,7 @@ public class Storage {
 
     /**
      * Writes a given text to file
-     * @param filePath
+     * @param filePath of the given file
      * @param textToAdd input text
      * @throws IOException if file not found
      */
@@ -78,7 +78,7 @@ public class Storage {
 
     /**
      * Adds on a given text to existing strings in file specified by the filePath
-     * @param filePath
+     * @param filePath of the specified file to run
      * @param textToAppend the given text
      * @throws IOException if file not found
      */

@@ -6,10 +6,10 @@ package duke;
 
 public class Duke {
 
-    private Storage storage;
+    private final Storage storage;
     private TaskList tasks;
-    private Ui ui;
-    private String filePath;
+    private final Ui ui;
+    private final String filePath;
 
     /**
      * Constructs a duke that read a file from filePath to retrieve previously stored data
