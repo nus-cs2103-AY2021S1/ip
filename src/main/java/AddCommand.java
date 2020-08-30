@@ -11,10 +11,12 @@ public class AddCommand extends Command {
      * @param storage a Storage instance to enable calling of Storage functions
      */
     @Override
-    public void execute(Ui ui, Storage storage) {
+    public String execute(Ui ui, Storage storage) {
         TaskList.addToList(myTask);
         storage.save(TaskList.toDoList);
-        ui.printFormat(myTask.toString());
-        ui.printNumberOfTasks(TaskList.toDoList.size());
+        String returnStr;
+        returnStr = ui.printFormat(myTask.toString())
+                + ui.printNumberOfTasks(TaskList.toDoList.size());
+        return returnStr;
     }
 }

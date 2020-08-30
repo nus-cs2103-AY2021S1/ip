@@ -1,3 +1,3 @@
 public abstract class Command {
-    public abstract void execute(Ui ui, Storage storage);
+    public abstract String execute(Ui ui, Storage storage);
 }

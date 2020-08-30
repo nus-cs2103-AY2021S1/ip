@@ -70,8 +70,10 @@ public class Ui {
      * Prints a given string but adds "Added : " in front of the message.
      * @param msg given string
      */
-    public void taskPrint(String msg) {
+    public String taskPrint(String msg) {
+        String returnStr = "Added : " + msg;
         System.out.println("Added : " + msg);
+        return returnStr;
     }
 
 
@@ -80,14 +82,18 @@ public class Ui {
      * @param toDoList given todolist
      * @param displayMessage message to be displayed
      */
-    public void displayList(List<Task> toDoList, String displayMessage) {
+    public String displayList(List<Task> toDoList, String displayMessage) {
+        StringBuilder returnStr = new StringBuilder(displayMessage + "\n");
         System.out.println(displayMessage);
         int i = 1;
         for (Task s : toDoList) {
-            System.out.println(i + ". " + " [" + s.getType() + "] "
-                    + s.toString() + " [" + s.getTaskStatusIcon() + "]");
+            String addStr = i + ". " + " [" + s.getType() + "] "
+                    + s.toString() + " [" + s.getTaskStatusIcon() + "]";
+            System.out.println(addStr);
             i += 1;
+            returnStr.append(addStr).append("\n");
         }
+        return returnStr.toString();
     }
 
     /**
@@ -95,40 +101,63 @@ public class Ui {
      * @param task task description
      * @param taskStatus icon representing completion of task
      */
-    public void checkList(String task, String taskStatus) {
-        System.out.println("--------------------------------------");
+    public String checkList(String task, String taskStatus) {
+        String returnStr;
+        returnStr = "--------------------------------------" + "\n"
+                + "Such wow! I have completed the following task!" + "\n"
+                + task + " [" + taskStatus + "]" + "\n"
+                + "--------------------------------------";
+        /*System.out.println("--------------------------------------");
         System.out.println("Such wow! I have completed the following task!");
         System.out.println(task + " [" + taskStatus + "]");
-        System.out.println("--------------------------------------");
+        System.out.println("--------------------------------------");*/
+        System.out.println(returnStr);
+        return returnStr;
     }
 
     /**
      * Prints formatted message when task is removed
      * @param taskId given task id
      */
-    public void removePrint(int taskId) {
+    public String removePrint(int taskId) {
         Task tr = TaskList.toDoList.get(taskId - 1);
-        System.out.println("Task successfully removed!");
-        System.out.println("-> " + tr.toString());
+        String returnStr;
+        returnStr = "Task successfully removed!" + "\n"
+                + "-> " + tr.toString();
+        System.out.println(returnStr);
+        /*System.out.println("Task successfully removed!");
+        System.out.println("-> " + tr.toString());*/
+        return returnStr;
     }
 
     /**
      * Formats and prints input String
      * @param print input string
      */
-    public void printFormat(String print) {
-        System.out.println("--------------------------------------");
+    public String printFormat(String print) {
+        String returnStr;
+        returnStr = "--------------------------------------" + "\n"
+                + "Added to list : " + print + "\n"
+                + "--------------------------------------";
+        /*System.out.println("--------------------------------------");
         //System.out.println("Added to task list : " + print);
         System.out.println("Added to list : " + print);
-        System.out.println("--------------------------------------");
+        System.out.println("--------------------------------------");*/
+        System.out.println(returnStr);
+        return returnStr;
     }
 
     /**
      * Prints number of tasks left
      * @param listSize number of tasks left
      */
-    public void printNumberOfTasks(int listSize) {
-        System.out.println("You have a total of " + listSize + " tasks");
-        System.out.println("--------------------------------------");
+    public String printNumberOfTasks(int listSize) {
+        String returnStr;
+        returnStr = "You have a total of " + listSize + " tasks" + "\n"
+                + "--------------------------------------";
+        /*System.out.println("You have a total of " + listSize + " tasks");
+        System.out.println("--------------------------------------");*/
+        System.out.println(returnStr);
+        return returnStr;
     }
 }

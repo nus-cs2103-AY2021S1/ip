@@ -12,10 +12,10 @@ public class RemoveCommand extends Command {
      * @param storage a Storage instance to enable calling of Storage functions
      */
     @Override
-    public void execute(Ui ui, Storage storage) {
-        ui.removePrint(removeInt);
+    public String execute(Ui ui, Storage storage) {
+        String returnStr = ui.removePrint(removeInt);
         TaskList.removeFromList(removeInt);
         storage.save(TaskList.toDoList);
-        ui.printNumberOfTasks(TaskList.toDoList.size());
+        return returnStr + ui.printNumberOfTasks(TaskList.toDoList.size());
     }
 }
