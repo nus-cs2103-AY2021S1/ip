@@ -1,9 +1,12 @@
-package Duke;
+package main.java.Duke;
 
-import Duke.Commands.*;
-import Duke.DukeException.DukeArrayException;
-import Duke.DukeException.DukeException;
-import Duke.Task.*;
+import main.java.Duke.Commands.*;
+import main.java.Duke.DukeException.DukeArrayException;
+import main.java.Duke.DukeException.DukeException;
+import main.java.Duke.Task.Deadline;
+import main.java.Duke.Task.Event;
+import main.java.Duke.Task.TaskList;
+import main.java.Duke.Task.toDo;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;

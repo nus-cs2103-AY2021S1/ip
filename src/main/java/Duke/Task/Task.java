@@ -1,9 +1,12 @@
-package Duke.Task;
+package main.java.Duke.Task;
 
-public class toDo extends Task{
+public class Task{
+    public String task;
+    public boolean isComplete;
 
-    public toDo(String task, boolean isComplete) {
-        super(task, isComplete);
+    public Task(String task, boolean isComplete){
+        this.task = task;
+        this.isComplete = isComplete;
     }
 
     /**
@@ -11,7 +14,6 @@ public class toDo extends Task{
      *
      * @return Description of task in a String.
      */
-    @Override
     public String stringify(){
         if(this.isComplete == true) {
             return "[T][✓] " + this.task;

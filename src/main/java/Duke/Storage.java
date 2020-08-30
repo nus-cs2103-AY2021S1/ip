@@ -1,9 +1,9 @@
-package Duke;
+package main.java.Duke;
 
-import Duke.Task.Deadline;
-import Duke.Task.Event;
-import Duke.Task.Task;
-import Duke.Task.toDo;
+import main.java.Duke.Task.Deadline;
+import main.java.Duke.Task.Event;
+import main.java.Duke.Task.Task;
+import main.java.Duke.Task.toDo;
 
 import java.io.*;
 import java.time.LocalDate;

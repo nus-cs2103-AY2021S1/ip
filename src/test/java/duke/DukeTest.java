@@ -1,15 +1,19 @@
 package duke;
 
-import Duke.Commands.Command;
-import Duke.Duke;
-import Duke.Parser;
-import Duke.Task.*;
-import org.junit.Test;
+
+import main.java.Duke.Commands.Command;
+import main.java.Duke.Duke;
+import main.java.Duke.Parser;
+import main.java.Duke.Task.Deadline;
+import main.java.Duke.Task.Event;
+import main.java.Duke.Task.Task;
+import main.java.Duke.Task.TaskList;
+import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class DukeTest {
     @Test

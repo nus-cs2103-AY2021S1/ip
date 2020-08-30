@@ -1,8 +1,8 @@
-package Duke.Task;
+package main.java.Duke.Task;
 
 import java.time.LocalDate;
 
-public class Event extends Deadline{
+public class Event extends Deadline {
 
     public Event(String task, boolean isComplete,LocalDate date) {
         super(task, isComplete ,date);

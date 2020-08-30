@@ -1,9 +1,9 @@
-package Duke.Commands;
+package main.java.Duke.Commands;
 
-import Duke.Task.Task;
-import Duke.Task.TaskList;
+import main.java.Duke.Task.Task;
+import main.java.Duke.Task.TaskList;
 
-public class addCommand extends Command{
+public class addCommand extends Command {
     Task task;
     public addCommand(TaskList tasklist, Task task){
         super(tasklist);

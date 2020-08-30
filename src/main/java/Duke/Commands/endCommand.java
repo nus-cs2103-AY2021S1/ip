@@ -1,6 +1,6 @@
-package Duke.Commands;
+package main.java.Duke.Commands;
 
-import Duke.Task.TaskList;
+import main.java.Duke.Task.TaskList;
 
 public class endCommand extends Command {
 
