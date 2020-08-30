@@ -21,7 +21,7 @@ public class Ui {
     public void showStartScreen() {
         System.out.println(LINE);
         System.out.println("Hello from\n" + LOGO);
-        System.out.println("Hello! I'm duke.Duke \nWhat can I do for you?");
+        System.out.println("Hello! I'm Duke \nWhat can I do for you?");
         System.out.println(LINE + "\n");
     }
 
@@ -70,7 +70,7 @@ public class Ui {
      */
     public void askTodo() {
         System.out.println(LINE);
-        System.out.println("What is the name of your duke.tasks.Todo?");
+        System.out.println("What is the name of your Todo?");
         System.out.println(LINE);
         System.out.print("> ");
     }
@@ -80,7 +80,7 @@ public class Ui {
      */
     public void askDeadlineName() {
         System.out.println(LINE);
-        System.out.println("What is the name of your duke.tasks.Deadline?");
+        System.out.println("What is the name of your Deadline?");
         System.out.println(LINE);
         System.out.print("> ");
     }
@@ -100,7 +100,7 @@ public class Ui {
      */
     public void askEventName() {
         System.out.println(LINE);
-        System.out.println("What is the name of your duke.tasks.Event?");
+        System.out.println("What is the name of your Event?");
         System.out.println(LINE);
         System.out.print("> ");
     }
