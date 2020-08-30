@@ -33,6 +33,15 @@ public class TaskList {
     }
 
     /**
+     * Adds task from listOfTasks.txt into user's list of tasks.
+     *
+     * @param task
+     */
+    public static void addStoredTask(Task task) {
+        tasks.add(task);
+    }
+
+    /**
      * Prints user's list of tasks.
      *
      * @throws DukeException

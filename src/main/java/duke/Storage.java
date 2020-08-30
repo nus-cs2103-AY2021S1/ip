@@ -38,13 +38,13 @@ public class Storage {
                 boolean isDone = details[1].equals("1") ? true : false;
                 switch (details[0]) {
                     case "T":
-                        tasks.addTask(new ToDos(details[2], isDone));
+                        tasks.addStoredTask(new ToDos(details[2], isDone));
                         break;
                     case "D":
-                        tasks.addTask(new Deadlines(details[2], details[3], isDone));
+                        tasks.addStoredTask(new Deadlines(details[2], details[3], isDone));
                         break;
                     case "E":
-                        tasks.addTask(new Events(details[2], details[3], isDone));
+                        tasks.addStoredTask(new Events(details[2], details[3], isDone));
                         break;
                 }
                 line = br.readLine();
