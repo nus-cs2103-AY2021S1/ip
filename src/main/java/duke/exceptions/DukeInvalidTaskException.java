@@ -5,7 +5,7 @@ package duke.exceptions;
  * when the user input does not match any commands.
  */
 public class DukeInvalidTaskException extends DukeException {
-    public final static String ERROR_INVALID_TASK = "⚠⚠⚠ I'm sorry, but I don't know what that means :-(";
+    public static final String ERROR_INVALID_TASK = "⚠⚠⚠ I'm sorry, but I don't know what that means :-(";
 
     /**
      * DukeInvalidTaskException constructor.

@@ -5,7 +5,7 @@ package duke.exceptions;
  * when the description for the event command is empty.
  */
 public class DukeEmptyEventException extends DukeException {
-    public final static String ERROR_EMPTY_EVENT_TASK = "⚠⚠⚠ The description of a 'event' cannot be empty.";
+    public static final String ERROR_EMPTY_EVENT_TASK = "⚠⚠⚠ The description of a 'event' cannot be empty.";
 
     /**
      * DukeEmptyEventException constructor.

@@ -5,7 +5,7 @@ package duke.exceptions;
  * when the date and time input is not in the proper format.
  */
 public class DukeDateTimeParseException extends DukeException {
-    public final static String ERROR_INVALID_DATE = "⚠⚠⚠ Please input the proper date in this"
+    public static final String ERROR_INVALID_DATE = "⚠⚠⚠ Please input the proper date in this"
             + '\n' + "     " + " format: 'yyyy-MM-dd HH:mm'";
 
     /**

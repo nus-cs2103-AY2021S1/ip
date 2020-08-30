@@ -5,7 +5,7 @@ package duke.exceptions;
  * when the task is already marked as done.
  */
 public class DukeAlreadyDoneException extends DukeException {
-    public final static String ERROR_ALREADY_DONE = "⚠⚠⚠ This task is already done!";
+    public static final String ERROR_ALREADY_DONE = "⚠⚠⚠ This task is already done!";
 
     /**
      * DukeAlreadyDoneException constructor.

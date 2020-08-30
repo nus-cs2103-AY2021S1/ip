@@ -5,7 +5,7 @@ package duke.exceptions;
  * when the input format for the deadline command is invalid.
  */
 public class DukeDeadlineFormatException extends DukeException {
-    public final static String ERROR_DEADLINE_FORMAT = "⚠⚠⚠ The description of 'deadline' should be accompanied"
+    public static final String ERROR_DEADLINE_FORMAT = "⚠⚠⚠ The description of 'deadline' should be accompanied"
             + '\n' + "     " + "    by '/by' followed by the date in this format: 'yyyy-MM-dd HH:mm'";
 
     /**

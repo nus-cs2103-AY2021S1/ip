@@ -10,7 +10,7 @@ import duke.task.Task;
  * Handles the addition of a task in the chatbot.
  */
 public class AddCommand implements Command {
-    public Task task;
+    private Task task;
 
     /**
      * AddCommand constructor.

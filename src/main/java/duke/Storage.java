@@ -1,5 +1,14 @@
 package duke;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
 import duke.exceptions.DukeException;
 import duke.exceptions.DukeFileNotFoundException;
 import duke.task.Deadline;
@@ -7,16 +16,7 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
 
-import java.time.format.DateTimeFormatter;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
 
 /**
  * Storage deals with loading tasks from the file and saving tasks in the file.
@@ -43,8 +43,8 @@ public class Storage {
 
         // Creates a string path that is universal across multiple operating systems.
         String home = System.getProperty("user.home");
-        String dataPath = java.nio.file.Paths.get(home,"data").toString();
-        fileName = java.nio.file.Paths.get(dataPath,"duke.txt").toString();
+        String dataPath = java.nio.file.Paths.get(home, "data").toString();
+        fileName = java.nio.file.Paths.get(dataPath, "duke.txt").toString();
 
         // Check and load/create the file accordingly
         File dataDirectory = new File(dataPath);
@@ -57,7 +57,7 @@ public class Storage {
         try {
             // Scanning the document
             Scanner sc = new Scanner(file);
-            while(sc.hasNextLine()) {
+            while (sc.hasNextLine()) {
                 String currentLine = sc.nextLine();
                 String[] arrOfString = currentLine.split(" \\| ");
 
@@ -115,18 +115,18 @@ public class Storage {
             for (Task task: tasks) {
                 if (task instanceof ToDo) {
                     myWriter.write("T | "
-                            + (task.isDone ? "1 | ": "0 | ")
-                            + task.description);
+                            + (task.getIsDone() ? "1 | " : "0 | ")
+                            + task.getDescription());
                 } else if (task instanceof Deadline) {
                     myWriter.write("D | "
-                            + (task.isDone ? "1 | ": "0 | ")
-                            + task.description + " | "
-                            + ((Deadline) task).date.format(style));
+                            + (task.getIsDone() ? "1 | " : "0 | ")
+                            + task.getDescription() + " | "
+                            + ((Deadline) task).getDate().format(style));
                 } else {
                     myWriter.write("E | "
-                            + (task.isDone ? "1 | ": "0 | ")
-                            + task.description + " | "
-                            + ((Event) task).date.format(style));
+                            + (task.getIsDone() ? "1 | " : "0 | ")
+                            + task.getDescription() + " | "
+                            + ((Event) task).getDate().format(style));
                 }
                 myWriter.write("\n");
             }

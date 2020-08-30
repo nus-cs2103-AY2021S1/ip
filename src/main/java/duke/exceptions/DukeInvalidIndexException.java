@@ -5,7 +5,7 @@ package duke.exceptions;
  * when the index after an action command is invalid.
  */
 public class DukeInvalidIndexException extends DukeException {
-    public final static String ERROR_INVALID_INDEX = "⚠⚠⚠ There appears to be a problem with your task number.";
+    public static final String ERROR_INVALID_INDEX = "⚠⚠⚠ There appears to be a problem with your task number.";
 
     /**
      * DukeInvalidIndexException constructor.

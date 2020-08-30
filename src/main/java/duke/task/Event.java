@@ -7,7 +7,7 @@ import java.time.format.DateTimeFormatter;
  * A sub class of Task, which represents any events.
  */
 public class Event extends Task {
-    public LocalDateTime date;
+    private LocalDateTime date;
 
     /**
      * Event constructor.
@@ -18,6 +18,10 @@ public class Event extends Task {
     public Event(String description, boolean isDone, LocalDateTime date) {
         super(description, isDone);
         this.date = date;
+    }
+
+    public LocalDateTime getDate() {
+        return this.date;
     }
 
     @Override

@@ -11,7 +11,7 @@ import duke.task.Task;
  * Handles the deletion of a task in the chatbot.
  */
 public class DeleteCommand implements Command {
-    public Integer index;
+    private Integer index;
 
     /**
      * DeleteCommand constructor.

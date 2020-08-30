@@ -5,7 +5,7 @@ package duke.exceptions;
  * when the description for the to do command is empty.
  */
 public class DukeEmptyToDoException extends DukeException {
-    public final static String ERROR_EMPTY_TODO_TASK = "⚠⚠⚠ The description of a 'todo' cannot be empty.";
+    public static final String ERROR_EMPTY_TODO_TASK = "⚠⚠⚠ The description of a 'todo' cannot be empty.";
 
     /**
      * DukeEmptyToDoException constructor.

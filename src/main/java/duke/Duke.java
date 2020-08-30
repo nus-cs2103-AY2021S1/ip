@@ -1,9 +1,10 @@
 package duke;
 
+import java.util.ArrayList;
+
 import duke.commands.Command;
 import duke.exceptions.DukeException;
 
-import java.util.ArrayList;
 
 /**
  * Duke helps you manage tasks through a chatbot.
@@ -52,13 +53,14 @@ public class Duke {
 
     /**
      * Main method that executes Duke chatbot.
+     *
      * @param args String array of arguments.
      */
     public static void main(String[] args) {
         Duke chatbot = new Duke();
         chatbot.chat();
     }
-
+}
     //    public static void main(String[] args) {
 //        String logo = " ____        _        \n"
 //                + "|  _ \\ _   _| | _____ \n"
@@ -66,5 +68,5 @@ public class Duke {
 //                + "| |_| | |_| |   <  __/\n"
 //                + "|____/ \\__,_|_|\\_\\___|\n";
 //        System.out.println("Hello from\n" + logo);
-//    }
-}
+//}
+
