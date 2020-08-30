@@ -1,6 +1,5 @@
 package ultron.commands;
 
-import javafx.application.Platform;
 import ultron.Storage;
 import ultron.TaskList;
 import ultron.UI;
@@ -39,8 +38,5 @@ public final class ByeCommand extends Command {
 
         //Save the storage
         storage.writeAll(taskList.getList());
-
-        //Close the application
-        Platform.exit();
     }
 }
