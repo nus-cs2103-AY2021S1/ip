@@ -8,8 +8,6 @@ import duke.dependencies.storage.TaskList;
 import duke.dependencies.task.Task;
 
 
-import java.util.function.BooleanSupplier;
-
 import static duke.dependencies.executable.CommandType.*;
 
 /**
