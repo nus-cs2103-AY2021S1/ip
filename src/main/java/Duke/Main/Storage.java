@@ -67,7 +67,7 @@ public class Storage {
      * @return List of Tasks from file
      * @throws IOException the io exception
      */
-    public List<Task> getFileContents() throws IOException {
+    public List<Task> getFileContents() throws Exception {
         FileReader fr = new FileReader(filepath);
         BufferedReader br = new BufferedReader(fr);
         List<Task> lst = new ArrayList<>();

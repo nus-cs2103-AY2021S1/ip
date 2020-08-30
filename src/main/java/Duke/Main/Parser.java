@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 import duke.errors.InvalidCommandException;
+import duke.errors.DateFormatException;
 
 /**
  * The type Parser.
@@ -16,7 +17,7 @@ public class Parser {
      * @param by the by
      * @return LocalDateTime object
      */
-    public static LocalDateTime strToDate(String by) {
+    public static LocalDateTime strToDate(String by) throws Exception {
         String[] arr = by.split("\\s+");
         LocalDate localDate;
         LocalDateTime localDateTime;
@@ -41,8 +42,7 @@ public class Parser {
 
             return localDateTime;
         } catch (Exception e) {
-            Ui.echo("☹ OOPS!!! Please enter date format as yyyy-mm-dd hhmm, e.g. 2019-12-01 1800");
-            return null;
+            throw new DateFormatException();
         }
     }
 
