@@ -19,27 +19,10 @@ public class Duke {
         greet();
         while (scanner.hasNextLine()) {
             String command = scanner.nextLine();
-            if (command.equals("bye")) {
-                exit();
-            } else if (command.equals("list")){
-                printList();
-            } else if (command.split(" ")[0].equals("done")) {
-                int index = Integer.parseInt(command.split(" ")[1]);
-                done(tasks.get(index - 1));
-            } else if (command.split(" ")[0].equals("todo")) {
-                String taskcommand = command.replace("todo ", "");
-                add(new ToDo(taskcommand));
-            } else if (command.split(" ")[0].equals("deadline")) {
-                String taskcommand = command.split("/")[0].replace("deadline ", "");
-                String time = command.split("/")[1].replace("by ", "");
-                add(new Deadline(taskcommand, time));
-            } else if (command.split(" ")[0].equals("event")) {
-                String taskcommand = command.split("/")[0].replace("event ", "");
-                String time = command.split("/")[1].replace("at ", "");
-                add(new Event(taskcommand, time));
-            } else {
-                Task task = new Task(command);
-                add(task);
+            try {
+                handleCommand(command);
+            } catch (DukeException e) {
+                System.out.println(e.getMessage());
             }
         }
     }
@@ -73,6 +56,47 @@ public class Duke {
             if (tasks.get(i) != null) {
                 System.out.println((i + 1) + ". " + tasks.get(i).toString());
             }
+        }
+    }
+
+    /**
+     * this method handles two types of error: invalid input (does not contain todo/deadline/event)
+     * and empty task (if the input starts with todo/deadline/event and the content is not empty,
+     * it is assumed that the input has correct structure)
+     */
+    private static void handleCommand(String command) throws DukeException {
+        if (command.equals("bye")) {
+            exit();
+        } else if (command.equals("list")) {
+            printList();
+        } else if (command.split(" ")[0].equals("done")) {
+            int index = Integer.parseInt(command.split(" ")[1]);
+            done(tasks.get(index - 1));
+        } else if (command.split(" ")[0].equals("todo")) {
+            String taskcommand = command.replace("todo", "");
+            if (!taskcommand.equals("")) {
+                add(new ToDo(taskcommand));
+            } else {
+                throw new DukeException("EmptyToDo");
+            }
+        } else if (command.split(" ")[0].equals("deadline")) {
+            String taskcommand = command.split("/")[0].replace("deadline", "");
+            if (!taskcommand.equals("")) {
+                String time = command.split("/")[1].replace("by ", "");
+                add(new Deadline(taskcommand, time));
+            } else {
+                throw new DukeException("EmptyDeadline");
+            }
+        } else if (command.split(" ")[0].equals("event")) {
+            String taskcommand = command.split("/")[0].replace("event", "");
+            if (!taskcommand.equals("")) {
+                String time = command.split("/")[1].replace("at ", "");
+                add(new Event(taskcommand, time));
+            } else {
+                throw new DukeException("EmptyEvent");
+            }
+        } else {
+            throw new DukeException("invalid");
         }
     }
 }
