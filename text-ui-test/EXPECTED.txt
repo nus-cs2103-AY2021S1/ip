@@ -1,98 +1,197 @@
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
+Loading from save file...
+Successfully loaded: 1 task(s)
+ ______________________________________________________________ 
+*                                                              *
 
-Hello! I'm Duke the chatbot! 
-What can I do for you?
+     ___              ___                  
+    (   )            (   )                 
+  .-.| |   ___  ___   | |   ___     .--.   
+ /   \ |  (   )(   )  | |  (   )   /    \  
+|  .-. |   | |  | |   | |  ' /    |  .-. ; 
+| |  | |   | |  | |   | |,' /     |  | | | 
+| |  | |   | |  | |   | .  '.     |  |/  | 
+| |  | |   | |  | |   | | `. \    |  ' _.' 
+| '  | |   | |  ; '   | |   \ \   |  .'.-. 
+' `-'  /   ' `-'  /   | |    \ .  '  `-' / 
+ `.__,'     '.__.'   (___ ) (___)  `.__.'  
+                                           
+                                           
 
-    Successfully added:
+    Hey! I'm Duke the chatbot!
+    What can I do for you?
+
+*______________________________________________________________*
+ ______________________________________________________________ 
+*                                                              *
+    The list of tasks has successfully been cleared.
+
+*______________________________________________________________*
+
+ ______________________________________________________________ 
+*                                                              *
+    Yes! I have successfully added:
         [D][?] submit assignment (by: tues 9pm)
     You have 1 task(s) in the list.
 
+*______________________________________________________________*
+
+ ______________________________________________________________ 
+*                                                              *
     Here are the tasks in your list:
         1. [D][?] submit assignment (by: tues 9pm)
     You have 1 task(s) in the list
 
-    Successfully added:
+*______________________________________________________________*
+
+ ______________________________________________________________ 
+*                                                              *
+    Yes! I have successfully added:
         [E][?] meeting (at: monday 2pm)
     You have 2 task(s) in the list.
 
+*______________________________________________________________*
+
+ ______________________________________________________________ 
+*                                                              *
     Here are the tasks in your list:
         1. [D][?] submit assignment (by: tues 9pm)
         2. [E][?] meeting (at: monday 2pm)
     You have 2 task(s) in the list
 
-    Successfully added:
+*______________________________________________________________*
+
+ ______________________________________________________________ 
+*                                                              *
+    Yes! I have successfully added:
         [T][?] finish assignment
     You have 3 task(s) in the list.
 
+*______________________________________________________________*
+
+ ______________________________________________________________ 
+*                                                              *
     Here are the tasks in your list:
         1. [D][?] submit assignment (by: tues 9pm)
         2. [E][?] meeting (at: monday 2pm)
         3. [T][?] finish assignment
     You have 3 task(s) in the list
 
+*______________________________________________________________*
+
+ ______________________________________________________________ 
+*                                                              *
     Good job! You completed:
         [D][?] submit assignment (by: tues 9pm)
 
+*______________________________________________________________*
+
+ ______________________________________________________________ 
+*                                                              *
     Here are the tasks in your list:
         1. [D][?] submit assignment (by: tues 9pm)
         2. [E][?] meeting (at: monday 2pm)
         3. [T][?] finish assignment
     You have 3 task(s) in the list
 
+*______________________________________________________________*
+
+ ______________________________________________________________ 
+*                                                              *
     Good job! You completed:
         [E][?] meeting (at: monday 2pm)
 
+*______________________________________________________________*
+
+ ______________________________________________________________ 
+*                                                              *
     Here are the tasks in your list:
         1. [D][?] submit assignment (by: tues 9pm)
         2. [E][?] meeting (at: monday 2pm)
         3. [T][?] finish assignment
     You have 3 task(s) in the list
 
+*______________________________________________________________*
+
+ ______________________________________________________________ 
+*                                                              *
     Good job! You completed:
         [T][?] finish assignment
 
+*______________________________________________________________*
+
+ ______________________________________________________________ 
+*                                                              *
     Here are the tasks in your list:
         1. [D][?] submit assignment (by: tues 9pm)
         2. [E][?] meeting (at: monday 2pm)
         3. [T][?] finish assignment
     You have 3 task(s) in the list
 
-    Noted. I've removed this task:
+*______________________________________________________________*
+
+ ______________________________________________________________ 
+*                                                              *
+    Alright! I've removed this task:
         [T][?] finish assignment
     You have 2 task(s) in the list.
 
+*______________________________________________________________*
+
+ ______________________________________________________________ 
+*                                                              *
     Here are the tasks in your list:
         1. [D][?] submit assignment (by: tues 9pm)
         2. [E][?] meeting (at: monday 2pm)
     You have 2 task(s) in the list
 
-    Noted. I've removed this task:
+*______________________________________________________________*
+
+ ______________________________________________________________ 
+*                                                              *
+    Alright! I've removed this task:
         [E][?] meeting (at: monday 2pm)
     You have 1 task(s) in the list.
 
+*______________________________________________________________*
+
+ ______________________________________________________________ 
+*                                                              *
     Here are the tasks in your list:
         1. [D][?] submit assignment (by: tues 9pm)
     You have 1 task(s) in the list
 
-    Noted. I've removed this task:
+*______________________________________________________________*
+
+ ______________________________________________________________ 
+*                                                              *
+    Alright! I've removed this task:
         [D][?] submit assignment (by: tues 9pm)
     You have 0 task(s) in the list.
 
-DukeException: Empty list, pls add tasks to list first
-	at taskListHandler.printList(taskListHandler.java:21)
-	at Duke.startChat(Duke.java:37)
-	at Duke.main(Duke.java:8)
+*______________________________________________________________*
 
-    Successfully added:
+duke.DukeException: ? Oops, the list of tasks is empty, pls add tasks first!
+	at duke.taskListHandler.printList(taskListHandler.java:61)
+	at duke.command.ListCommand.execute(ListCommand.java:22)
+	at duke.Ui.run(Ui.java:42)
+	at duke.Duke.initialize(Duke.java:19)
+	at duke.Duke.main(Duke.java:5)
+
+ ______________________________________________________________ 
+*                                                              *
+    Yes! I have successfully added:
         [T][?] final task
     You have 1 task(s) in the list.
 
+*______________________________________________________________*
+
+ ______________________________________________________________ 
+*                                                              *
     Here are the tasks in your list:
         1. [T][?] final task
     You have 1 task(s) in the list
 
-    Bye bye! Hope to see you again soon!
+*______________________________________________________________*
+
+Bye bye! Hope to see you again soon!
+

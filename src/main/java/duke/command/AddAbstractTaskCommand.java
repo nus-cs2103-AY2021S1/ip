@@ -2,9 +2,9 @@ package duke.command;
 
 import duke.DukeException;
 import duke.Storage;
-import duke.taskListHandler;
 import duke.Ui;
 import duke.task.Task;
+import duke.taskListHandler;
 
 import java.util.ArrayList;
 
@@ -33,7 +33,7 @@ public abstract class AddAbstractTaskCommand extends Command {
             handler.addToList(newTask);
             Ui.printSuccess("add", newTask, taskList.size());
             storage.saveToFile(taskList);
-        } catch (DukeException e){
+        } catch (DukeException e) {
             e.printStackTrace(System.out);
             DukeException.tryAgain();
         }

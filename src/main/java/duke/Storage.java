@@ -1,6 +1,5 @@
 package duke;
 
-import duke.task.Task;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -11,6 +10,8 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
+
+import duke.task.Task;
 
 /**
  * Represents all loading and saving operations to the save file.
@@ -66,14 +67,14 @@ public class Storage {
      */
     public void checkIfSaveFileExists() throws DukeException {
         try {
-                Path path = Paths.get(location);
-        if (!Files.isDirectory(path)) {
-            File dir = new File(location);
-            boolean isDirCreated = dir.mkdir();
-            if (isDirCreated) {
-                System.out.println("Created directory: " + location);
+            Path path = Paths.get(location);
+            if (!Files.isDirectory(path)) {
+                File dir = new File(location);
+                boolean isDirCreated = dir.mkdir();
+                if (isDirCreated) {
+                    System.out.println("Created directory: " + location);
+                }
             }
-        }
             this.isEmptySave = savefile.createNewFile();
         } catch (IOException e) {
             throw new DukeException("\u2639 Oops, error checking if save file exists");
@@ -110,7 +111,7 @@ public class Storage {
                 } else if (input.startsWith("deadline")) {
                     Task newDeadline = Parser.parseNewTaskCommand(input, Task.taskType.DEADLINE);
                     list.add(newDeadline);
-                } else if (input.startsWith("event")){
+                } else if (input.startsWith("event")) {
                     Task newEvent = Parser.parseNewTaskCommand(input, Task.taskType.EVENT);
                     list.add(newEvent);
                 } else {
@@ -118,7 +119,7 @@ public class Storage {
                 }
             }
             // Mark tasks as done
-            while(sc.hasNext()) {
+            while (sc.hasNext()) {
                 int doneTaskIndex = Integer.parseInt(sc.next());
                 list.get(doneTaskIndex).markAsDone();
             }
@@ -127,7 +128,7 @@ public class Storage {
 
         } catch (IOException e1) {
             throw new DukeException("\u2639 Oops, error reading from " + location + FILE_NAME);
-        } catch (IndexOutOfBoundsException |NoSuchElementException | NumberFormatException e) {
+        } catch (IndexOutOfBoundsException | NoSuchElementException | NumberFormatException e) {
             throw new DukeException("\u2639 Oops, save file is corrupted, error encountered: "
                 + e.getLocalizedMessage().toLowerCase());
         } catch (DukeException e) {
@@ -172,21 +173,21 @@ public class Storage {
      */
     public void saveToFile(ArrayList<Task> list) throws DukeException {
         try {
-            this.writer = new FileWriter(location+ FILE_NAME);
+            this.writer = new FileWriter(location + FILE_NAME);
             String doneIndexes;
 
             // System.out.println("Wrote: " + list.size());
             writer.write(list.size() + System.lineSeparator());
             // Saving each task to savefile
             StringBuilder doneIndexesBuilder = new StringBuilder();
-            for (int i = 0; i<list.size(); i++) {
-                    Task t = list.get(i);
-                    if (t.isDone()) {
-                        doneIndexesBuilder.append(i).append(" ");
-                    }
+            for (int i = 0; i < list.size(); i++) {
+                Task t = list.get(i);
+                if (t.isDone()) {
+                    doneIndexesBuilder.append(i).append(" ");
+                }
 
-                    // System.out.println("Wrote: " + t.toSaveFormat());
-                    writer.write(t.toSaveFormat() + System.lineSeparator());
+                // System.out.println("Wrote: " + t.toSaveFormat());
+                writer.write(t.toSaveFormat() + System.lineSeparator());
             }
             doneIndexes = doneIndexesBuilder.toString();
             if (!doneIndexes.equals("")) {
