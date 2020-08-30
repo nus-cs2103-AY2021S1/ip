@@ -6,7 +6,11 @@ import java.util.Collection;
 import java.util.LinkedList;
 
 public class TaskList extends LinkedList<Task> {
-    TaskList(Collection<Task> tasks) {
+    public TaskList() {
+        super();
+    }
+    
+    public TaskList(Collection<Task> tasks) {
         super(tasks);
     }
 
