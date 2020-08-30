@@ -1,13 +1,23 @@
 package duke;
+import duke.commands.AddCommand;
+import duke.commands.ByeCommand;
+import duke.commands.Command;
+import duke.commands.Commands;
+import duke.commands.DateCommand;
+import duke.commands.DeleteCommand;
+import duke.commands.DoneCommand;
+import duke.commands.FindCommand;
+import duke.commands.ListCommand;
+import duke.commands.TimeCommand;
 
-import duke.commands.*;
+
 
 /**
  * Parses user input to make sense of the command and find out what user wants.
  */
 public class Parser {
-    boolean entered = false;
-    String description = "";
+    private boolean entered = false;
+    private String description = "";
     private Commands command;
 
     /**
@@ -27,7 +37,8 @@ public class Parser {
             if (description.substring(3).split(" ").length == 1) {
                 throw new DukeException("you need to give a number.");
             } else if (description.split(" ").length > 2) {
-                throw new DukeException("Check one at a time pls and only one space between your 'done' and the task number.");
+                throw new DukeException("Check one at a time pls and only one "
+                        + "space between your 'done' and the task number.");
             }
             command = Commands.DONE;
             this.description = description.split(" ")[1];
@@ -61,7 +72,8 @@ public class Parser {
             if (description.substring(5).split(" ").length == 1) {
                 throw new DukeException("you need to give a number.");
             } else if (description.split(" ").length > 2) {
-                throw new DukeException("Delete one at a time pls and only have one space between 'delete' and the task number.");
+                throw new DukeException("Delete one at a time pls and "
+                        + "only have one space between 'delete' and the task number.");
             }
             command = Commands.DELETE;
             this.description = description.split(" ")[1];
@@ -93,9 +105,11 @@ public class Parser {
             throw new DukeException("you gotta put in a correct command.");
         } else {
             entered = true;
-            throw new DukeException("type in 'todo', 'deadline', 'event' to start!\n" +
-                    "Also, type 'date' and key in a date in YYYY-MM-DD format to search for events/deadlines happening on that date!\n" +
-                    " Or type 'time' and key in time in HH:mm format to search for events/deadline happening on that time!");
+            throw new DukeException("type in 'todo', 'deadline', 'event' to start!\n"
+                    + "Also, type 'date' and key in a date in YYYY-MM-DD format "
+                    + "to search for events/deadlines happening on that date!\n"
+                    + " Or type 'time' and key in time in HH:mm format "
+                    + "to search for events/deadline happening on that time!");
         }
     }
 }

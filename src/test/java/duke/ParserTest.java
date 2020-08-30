@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ParserTest {
-    Parser parser = new Parser();
+    private Parser parser = new Parser();
     @Test
     public void doneCommand_exceptionThrown() {
         try {
@@ -31,8 +31,11 @@ public class ParserTest {
         try {
             Command command = parser.findCommand("Todo");
         } catch (DukeException e) {
-            assertEquals(e.getMessage(), "Hi my friend, type in 'todo', 'deadline', 'event' to start!\nAlso, type 'date' and key in a date in YYYY-MM-DD format to search for events/deadlines happening on that date!\n"
-                    + " Or type 'time' and key in time in HH:mm format to search for events/deadline happening on that time!");
+            assertEquals(e.getMessage(), "Hi my friend, type in 'todo', 'deadline', 'event' to start!\n"
+                    + "Also, type 'date' and key in a date in YYYY-MM-DD format to search "
+                    + "for events/deadlines happening on that date!\n"
+                    + " Or type 'time' and key in time in HH:mm format "
+                    + "to search for events/deadline happening on that time!");
         }
     }
 }

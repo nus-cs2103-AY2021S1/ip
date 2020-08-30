@@ -1,17 +1,16 @@
 package duke.tasks;
-
 import duke.DukeException;
-
-import java.time.LocalTime;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 /**
  * Type of task which includes end date.
  */
+@SuppressWarnings("ALL")
 public class Deadline extends Task {
-    String date;
+    private String date;
 
     /**
      * Constructor to create Deadline object.
@@ -42,7 +41,8 @@ public class Deadline extends Task {
             } catch (DateTimeParseException e) {
                 try {
                     String decideAMorPm = LocalTime.parse(descriptions[i]).isAfter(LocalTime.NOON) ? "pm" : "am";
-                    d1 += " " + LocalTime.parse(descriptions[i]).format(DateTimeFormatter.ofPattern("hh:mm")) + decideAMorPm;
+                    d1 += " " + LocalTime.parse(descriptions[i])
+                            .format(DateTimeFormatter.ofPattern("hh:mm")) + decideAMorPm;
                 } catch (DateTimeParseException e2) {
                     d1 += " " + descriptions[i];
                 }

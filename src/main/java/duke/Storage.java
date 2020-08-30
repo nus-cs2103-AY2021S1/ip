@@ -99,15 +99,19 @@ public class Storage {
                     }
                 } else if (task instanceof Deadline) {
                     if (task.getDone()) {
-                        fw.write("D" + "|" + "T" + "|" + task.getDescription() + "|" + ((Deadline) task).getDate() + System.lineSeparator());
+                        fw.write("D" + "|" + "T" + "|" + task.getDescription()
+                                + "|" + ((Deadline) task).getDate() + System.lineSeparator());
                     } else {
-                        fw.write("D" + "|" + "F" + "|" + task.getDescription() + "|" + ((Deadline) task).getDate() + System.lineSeparator());
+                        fw.write("D" + "|" + "F" + "|" + task.getDescription()
+                                + "|" + ((Deadline) task).getDate() + System.lineSeparator());
                     }
                 } else if (task instanceof Event) {
                     if (task.getDone()) {
-                        fw.write("E" + "|" + "T" + "|" + task.getDescription() + "|" + ((Event) task).getDate() + System.lineSeparator());
+                        fw.write("E" + "|" + "T" + "|" + task.getDescription()
+                                + "|" + ((Event) task).getDate() + System.lineSeparator());
                     } else {
-                        fw.write("E" + "|" + "F" + "|" + task.getDescription() + "|" + ((Event) task).getDate() + System.lineSeparator());
+                        fw.write("E" + "|" + "F" + "|" + task.getDescription()
+                                + "|" + ((Event) task).getDate() + System.lineSeparator());
                     }
                 }
             }

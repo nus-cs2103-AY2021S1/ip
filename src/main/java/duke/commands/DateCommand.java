@@ -1,6 +1,8 @@
 package duke.commands;
 
-import duke.*;
+import duke.DukeException;
+import duke.Storage;
+import duke.Ui;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.Task;
@@ -33,7 +35,7 @@ public class DateCommand extends Command {
         boolean dateExists = false;
         for (Task i : tasklist.getList()) {
             if (i instanceof Deadline) {
-                if(((Deadline) i).hasDate(description)) {
+                if (((Deadline) i).hasDate(description)) {
                     ui.showMessage(i.toString());
                     dateExists = true;
                 }

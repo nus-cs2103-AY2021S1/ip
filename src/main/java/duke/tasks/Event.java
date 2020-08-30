@@ -7,11 +7,12 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+
 /**
  * Type of task which includes date.
  */
 public class Event extends Task {
-    String date;
+    private String date;
 
     /**
      * Constructor to create Event object.
@@ -42,7 +43,8 @@ public class Event extends Task {
             } catch (DateTimeParseException e) {
                 try {
                     String decideAMorPm = LocalTime.parse(descriptions[i]).isAfter(LocalTime.NOON) ? "pm" : "am";
-                    d1 += " " + LocalTime.parse(descriptions[i]).format(DateTimeFormatter.ofPattern("hh:mm")) + decideAMorPm;
+                    d1 += " " + LocalTime.parse(descriptions[i])
+                            .format(DateTimeFormatter.ofPattern("hh:mm")) + decideAMorPm;
                 } catch (DateTimeParseException e2) {
                     d1 += " " + descriptions[i];
                 }
