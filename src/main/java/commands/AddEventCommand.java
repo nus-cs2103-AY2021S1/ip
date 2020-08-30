@@ -1,8 +1,8 @@
 package commands;
 
-import data.task.Event;
-
 import java.time.LocalDateTime;
+
+import data.task.Event;
 
 /**
  * Adds an Event to the task list.

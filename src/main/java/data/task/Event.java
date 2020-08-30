@@ -13,12 +13,23 @@ public class Event extends Task {
     protected LocalDateTime dateTime;
     protected String dateTimeStr;
 
+    /**
+     * Constructs an {@code Event}
+     * @param description The {@code Event}'s description.
+     * @param dateTime Date and time of the {@code Event}.
+     */
     public Event(String description, LocalDateTime dateTime) {
         super(description);
         this.dateTime = dateTime;
         this.dateTimeStr = dateTime.format(super.formatter);
     }
 
+    /**
+     * Constructs as {@code Event}.
+     * @param isDone True if {@code Event} is completed, false otherwise.
+     * @param description The {@code Event}'s description.
+     * @param dateTime Date and time of the {@code Event}
+     */
     public Event(boolean isDone, String description, LocalDateTime dateTime) {
         super(isDone, description);
         this.dateTime = dateTime;

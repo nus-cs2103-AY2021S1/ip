@@ -1,8 +1,8 @@
 package commands;
 
-import data.task.Deadline;
-
 import java.time.LocalDateTime;
+
+import data.task.Deadline;
 
 /**
  * Adds a Deadline to the task list.

@@ -12,15 +12,15 @@ public class HelpCommand extends Command {
 
     @Override
     public CommandResult execute() {
-        return new CommandResult("Commands [todo, deadline, event, done, delete, find, list, exit]\n" +
-                AddTodoCommand.MESSAGE_USAGE + "\n\n" +
-                AddDeadlineCommand.MESSAGE_USAGE + "\n\n" +
-                AddEventCommand.MESSAGE_USAGE + "\n\n" +
-                DoneCommand.MESSAGE_USAGE + "\n\n" +
-                DeleteCommand.MESSAGE_USAGE + "\n\n" +
-                FindCommand.MESSAGE_USAGE + "\n\n" +
-                ListCommand.MESSAGE_USAGE + "\n\n" +
-                ExitCommand.MESSAGE_USAGE
+        return new CommandResult("Commands [todo, deadline, event, done, delete, find, list, exit]\n"
+                + AddTodoCommand.MESSAGE_USAGE + "\n\n"
+                + AddDeadlineCommand.MESSAGE_USAGE + "\n\n"
+                + AddEventCommand.MESSAGE_USAGE + "\n\n"
+                + DoneCommand.MESSAGE_USAGE + "\n\n"
+                + DeleteCommand.MESSAGE_USAGE + "\n\n"
+                + FindCommand.MESSAGE_USAGE + "\n\n"
+                + ListCommand.MESSAGE_USAGE + "\n\n"
+                + ExitCommand.MESSAGE_USAGE
         );
     }
 

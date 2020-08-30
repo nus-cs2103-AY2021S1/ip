@@ -1,15 +1,13 @@
 package data.task;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.Test;
-
-import java.time.LocalDateTime;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class TodoTest {
 
     final Todo todo = new Todo("read book");
-    final Todo completedTodo = new Todo(true,"read book");
+    final Todo completedTodo = new Todo(true, "read book");
 
     @Test
     void fileFormat() {

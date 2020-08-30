@@ -1,15 +1,15 @@
 package ui;
 
-import commands.CommandResult;
-import data.task.Task;
-import utils.Messages;
-
 import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
+
+import commands.CommandResult;
+import data.task.Task;
+import utils.Messages;
 
 /**
  * UI of the application.
@@ -25,7 +25,7 @@ public class Ui {
     /** A decorative prefix added to the beginning of lines printed by AddressBook */
     private static final String LINE_PREFIX = "| ";
 
-    private static final String DIVIDER = "------------------------------------------------------------------------------";
+    private static final String DIVIDER = "---------------------------------------------------------------------------";
 
     /** Format of indexed list item */
     private static final String MESSAGE_INDEXED_LIST_ITEM = "\t%1$d. %2$s";
@@ -33,10 +33,14 @@ public class Ui {
     private final Scanner in;
     private final PrintStream out;
 
+    /** Starts the UI of the application. */
     public Ui() {
         this(System.in, System.out);
     }
 
+    /**
+     * Starts the UI of the application.
+     */
     public Ui(InputStream in, PrintStream out) {
         this.in = new Scanner(in);
         this.out = out;

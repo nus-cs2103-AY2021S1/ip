@@ -1,10 +1,10 @@
 package data.task;
 
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.time.LocalDateTime;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
 class TaskTest {
 
@@ -12,9 +12,9 @@ class TaskTest {
     final Todo todo = new Todo("read book");
     final Deadline deadline = new Deadline("return book", dateTime);
     final Event event = new Event("project meeting", dateTime);
-    final Todo completedTodo = new Todo(true,"read book");
-    final Deadline completeDeadline = new Deadline(true,"return book", dateTime);
-    final Event completedEvent = new Event(true,"project meeting", dateTime);
+    final Todo completedTodo = new Todo(true, "read book");
+    final Deadline completeDeadline = new Deadline(true, "return book", dateTime);
+    final Event completedEvent = new Event(true, "project meeting", dateTime);
 
     @Test
     void getStatusIcon() {
