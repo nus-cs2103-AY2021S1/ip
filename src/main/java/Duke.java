@@ -2,7 +2,6 @@ import java.util.Scanner;
 
 /**
  * Main method that runs input and output between system and user
- *
  */
 public class Duke {
     private Storage storage;
@@ -22,7 +21,6 @@ public class Duke {
 
     /**
      * Driver method that handles input/output between user and system
-     *
      */
     public void run() {
         ui.Greet();

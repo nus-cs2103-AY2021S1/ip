@@ -1,6 +1,5 @@
 /**
  * DukeExceptionHandler outputs exception messages
- *
  */
 public class DukeExceptionHandler {
 

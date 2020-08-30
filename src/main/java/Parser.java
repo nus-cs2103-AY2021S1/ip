@@ -4,7 +4,6 @@ import java.time.format.DateTimeParseException;
 
 /**
  * Parser class handles interpretation of user input
- *
  */
 public class Parser {
 
@@ -37,8 +36,7 @@ public class Parser {
 
         if (input.equals("list")) {
             tasks.printTasks();
-        }
-        else {
+        } else {
             String[] words = input.split(" ", 2);
             String inputType = words[0];
             String description = words[1];
@@ -57,8 +55,7 @@ public class Parser {
                     tasks.setDone(Integer.parseInt(description), storage);
                 } else if (inputType.equals("delete")) {
                     tasks.delete(Integer.parseInt(description));
-                }
-                else if (inputType.equals("find")) {
+                } else if (inputType.equals("find")) {
                     tasks.find(input.substring(5));
                 }
             } catch (FileNotFoundException e) {
@@ -67,8 +64,7 @@ public class Parser {
                 System.out.println("Something went wrong: " + e.getMessage());
             } catch (DateTimeParseException e) {
                 System.out.println("Date must be in the YYYY-MM-DD format!");
-            }
-            catch (DukeException e) {
+            } catch (DukeException e) {
                 e.printStackTrace();
             }
         }

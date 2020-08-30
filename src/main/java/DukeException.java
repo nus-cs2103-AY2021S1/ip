@@ -1,6 +1,5 @@
 /**
  * Throwable exception to be caught in other classes and methods
- *
  */
 
 public class DukeException extends Throwable {

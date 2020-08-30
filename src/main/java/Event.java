@@ -3,7 +3,6 @@ import java.time.format.DateTimeFormatter;
 
 /**
  * Handles instances of Event, a subclass of Task that involves description and LocalDate
- *
  */
 public class Event extends Task {
 
