@@ -3,6 +3,15 @@ import java.util.Scanner;
 
 public class Ui {
 
+    // Messages used in the package classes
+    static final String MESSAGE_EXIT = "Hey! Come back here! You big-a monkey!";
+    static final String MESSAGE_INVALID_ID =
+            "That task wasn't even on the list! You can save the princess if you're that free...";
+    static final String MESSAGE_TASK_ID_MISSING = "You didn't give me the task number to work with...";
+    static final String MESSAGE_WRONG_FORMAT = "The date format should be in DD-MM-YY and the time in HH:MM";
+    static final String MESSAGE_ALR_DONE = "Do you happen to have short term memory?";
+    static final String MESSAGE_ERROR_IO = "An error occurred while loading/saving to disk";
+
     // General style properties of the chatbot.
     private static final String LEFT_MARGIN = "    ";
     private static final String BORDER = LEFT_MARGIN + "_______________________________________________________\n";
@@ -15,7 +24,7 @@ public class Ui {
             + "╚═╝     ╚═╝    ╚═╝  ╚═╝    ╚═╝  ╚═╝    ╚═╝     ╚═════╝ \n";
     private static final String LEFT_MARGIN_DOUBLE = LEFT_MARGIN + LEFT_MARGIN;
 
-    // Messages
+    // Other messages
     private static final String MESSAGE_WELCOME = "It's a-me, Mario! how can I help you today?";
     private static final String MESSAGE_EMPTY = "What do you expect me to say when you didn't save any tasks?";
     private static final String MESSAGE_TASKS = "As you wish, here's what you gotta do:";
@@ -23,13 +32,6 @@ public class Ui {
     private static final String MESSAGE_ADD = "Got it! I've added this task:";
     private static final String MESSAGE_COUNT = "Now you have %s tasks in the list.";
     private static final String MESSAGE_DELETE = "Got it. I removed this task:";
-    static final String MESSAGE_EXIT = "Hey! Come back here! You big-a monkey!";
-    static final String MESSAGE_INVALID_ID =
-            "That task wasn't even on the list! You can save the princess if you're that free...";
-    static final String MESSAGE_TASK_ID_MISSING = "You didn't give me the task number to work with...";
-    static final String MESSAGE_WRONG_FORMAT = "The date format should be in DD-MM-YY and the time in HH:MM";
-    static final String MESSAGE_ALR_DONE = "Do you happen to have short term memory?";
-    static final String MESSAGE_ERROR_IO = "An error occurred while loading/saving to disk";
     private static final String MESSAGE_NO_MATCHES = "Since when did you save a task like that?";
     private static final String MESSAGE_MATCHES = "These are the matching tasks in your list:";
 

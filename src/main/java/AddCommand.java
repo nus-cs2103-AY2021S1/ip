@@ -27,7 +27,7 @@ public class AddCommand extends Command {
         this.date = date;
         this.time = time;
     }
-    
+
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws BlankTaskException, IOException {
         tasks.add(type, name, date, time);
@@ -50,10 +50,10 @@ public class AddCommand extends Command {
             return false;
         }
         AddCommand that = (AddCommand) o;
-        return type == that.type &&
-                Objects.equals(name, that.name) &&
-                Objects.equals(date, that.date) &&
-                Objects.equals(time, that.time);
+        return type == that.type
+                && Objects.equals(name, that.name)
+                && Objects.equals(date, that.date)
+                && Objects.equals(time, that.time);
     }
 
     /**

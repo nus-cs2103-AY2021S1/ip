@@ -84,8 +84,8 @@ public class Event extends Task {
             return false;
         }
         Event event = (Event) o;
-        return Objects.equals(date, event.date) &&
-                Objects.equals(time, event.time);
+        return Objects.equals(date, event.date)
+                && Objects.equals(time, event.time);
     }
 
     /**

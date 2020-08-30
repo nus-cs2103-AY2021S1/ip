@@ -85,8 +85,8 @@ public class Deadline extends Task {
             return false;
         }
         Deadline deadline = (Deadline) o;
-        return Objects.equals(dueDate, deadline.dueDate) &&
-                Objects.equals(time, deadline.time);
+        return Objects.equals(dueDate, deadline.dueDate)
+                && Objects.equals(time, deadline.time);
     }
 
     /**

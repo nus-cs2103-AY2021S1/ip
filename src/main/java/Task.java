@@ -4,9 +4,9 @@ import java.util.Objects;
  * Abstract class to represent any type of task. All task objects will have a name, and a boolean attribute done.
  */
 public abstract class Task {
+    private static final String MESSAGE_BLANK_TASK = "Did you casually forget to put in the description of the task?";
     private final String name;
     private boolean isDone = false;
-    private static final String MESSAGE_BLANK_TASK = "Did you casually forget to put in the description of the task?";
 
     /**
      * Public Constructor for a task object.
@@ -67,8 +67,8 @@ public abstract class Task {
             return false;
         }
         Task task = (Task) o;
-        return isDone == task.isDone &&
-                Objects.equals(name, task.name);
+        return isDone == task.isDone
+                && Objects.equals(name, task.name);
     }
 
     @Override
