@@ -1,5 +1,7 @@
 package duke.command;
 
+import java.util.stream.Stream;
+
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
@@ -8,8 +10,10 @@ import duke.exception.DukeException;
 
 public class DoneCommand extends Command {
 
-    public DoneCommand(String task) {
-        super(task);
+    private String[] tasks;
+
+    public DoneCommand(String... tasks) {
+        this.tasks = tasks;
     }
 
     /**
@@ -21,7 +25,7 @@ public class DoneCommand extends Command {
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) {
         try {
-            return processDone(this.task, taskList, ui, storage);
+            return processDone(this.tasks, taskList, ui, storage);
         } catch (DoneException done) {
             return done.getMessage();
         }
@@ -29,19 +33,28 @@ public class DoneCommand extends Command {
 
     /**
      * Processes all the done command to determine the correct output.
-     * @param theRest  Parsed string containing task details.
-     * @param taskList List containing all the task(s).
-     * @param ui       UI of the bot
-     * @param storage  Storage managing the file in hard disk.
+     * @param taskNumbers Parsed string containing task numbers.
+     * @param taskList    List containing all the task(s).
+     * @param ui          UI of the bot
+     * @param storage     Storage managing the file in hard disk.
      * @throws DoneException If user's input is incomplete or in the wrong format.
      */
 
     public String processDone(
-        String theRest, TaskList taskList, Ui ui, Storage storage) throws DoneException {
+        String[] taskNumbers, TaskList taskList, Ui ui, Storage storage) throws DoneException {
         try {
-            Integer taskNum = Integer.parseInt(theRest);
-            Storage.updateData(taskList.getTasks());
-            return taskList.markTaskAsDone(taskNum);
+            int num = 1;
+            Integer[] parsedNumbers = Stream.of(taskNumbers).map(Integer::valueOf).toArray(Integer[]::new);
+            StringBuilder builder = new StringBuilder();
+            builder.append("YAYY! I've marked these task(s) as done\n");
+
+            for (int taskNum : parsedNumbers) {
+                Storage.updateData(taskList.getTasks());
+                builder.append(num + ". " + taskList.markTaskAsDone(taskNum) + "\n");
+                num++;
+            }
+
+            return builder.toString();
 
         } catch (DukeException d) {
             throw new DoneException("Please enter a valid task number");
@@ -51,6 +64,7 @@ public class DoneCommand extends Command {
     /**
      * Evaluates whether this and other object if this and
      * other object is the same or of the same type and task details.
+     *
      * @param other Other object to compare.
      * @return True if this object
      */

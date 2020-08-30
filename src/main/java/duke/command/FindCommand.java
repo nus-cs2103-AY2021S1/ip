@@ -11,20 +11,23 @@ import duke.task.Task;
 
 public class FindCommand extends Command {
 
-    public FindCommand(String task) {
-        super(task);
+    private String[] keywords;
+
+    public FindCommand(String... keywords) {
+        this.keywords = keywords;
     }
 
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) {
         try {
-            return processFind(this.task, taskList, ui, storage);
+            return processFind(this.keywords, taskList, ui, storage);
+
         } catch (FindException find) {
             return find.getMessage();
         }
     }
 
-    public String processFind(String toFind, TaskList taskList, Ui ui, Storage storage) throws FindException {
+    public String processFind(String[] toFind, TaskList taskList, Ui ui, Storage storage) throws FindException {
         return findTask(toFind, taskList);
     }
 
@@ -39,19 +42,32 @@ public class FindCommand extends Command {
         return false;
     }
 
-    private String findTask(String toFind, TaskList taskList) {
+    private String findTask(String[] toFind, TaskList taskList) {
+
         //try {
         List<Task> tasks = taskList.getTasks();
         List<Task> tasksFound = new ArrayList<>();
         StringBuilder builder = new StringBuilder();
         int num = 1;
+        boolean containsKeyword;
 
+        builder.append("Here are the matching task(s) in your list : \n");
 
-        builder.append("Here are the matching task(s) in your list : ");
         for (Task task : tasks) {
-            if (task.getDescription().contains(toFind)) {
+            containsKeyword = false;
+
+            for (int i = 0; i < toFind.length; i++) {
+
+                if (task.getDescription().contains(toFind[i])) {
+                    containsKeyword = true;
+                    break;
+                }
+            }
+
+            if (containsKeyword) {
                 tasksFound.add(task);
-                builder.append(num + ". " + task.toString());
+                builder.append(num + ". " + task.toString() + "\n");
+                num++;
             }
         }
 
@@ -59,7 +75,6 @@ public class FindCommand extends Command {
             return "Nothing match this keyword. \n"
                 + "Please try again with another keyword.";
         }
-
         return builder.toString();
     }
 }
