@@ -1,1 +1,3 @@
-Todo | false | sleep
+Todo | true | sleep
+Event | false | dinner | 6:15pm
+Deadline | false | this | 2020-08-24
