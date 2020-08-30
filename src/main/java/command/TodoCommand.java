@@ -1,11 +1,11 @@
-package main.java.command;
+package command;
 
-import main.java.exception.DescriptionException;
-import main.java.parser.Parser;
-import main.java.storage.Storage;
-import main.java.task.TaskList;
-import main.java.task.TodoTask;
-import main.java.ui.Ui;
+import exception.DescriptionException;
+import parser.Parser;
+import storage.Storage;
+import task.TaskList;
+import task.TodoTask;
+import ui.Ui;
 
 import java.io.IOException;
 
@@ -39,8 +39,9 @@ public class TodoCommand extends Command {
      * @param tasks TaskList List of task.
      * @param ui Ui updating user interface to show intended messages.
      * @param storage Storage to update external file whenever needed.
-     * @throws IOException
-     * @throws DescriptionException
+     * @throws IOException Thrown when system failed to access external file.
+     * @throws DescriptionException Thrown when user forget to include task
+     * description in user command.
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws IOException, DescriptionException {

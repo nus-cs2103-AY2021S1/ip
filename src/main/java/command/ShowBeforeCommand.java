@@ -1,14 +1,14 @@
-package main.java.command;
+package command;
 
 
-import main.java.exception.DukeDateTimeParserException;
-import main.java.parser.Parser;
-import main.java.storage.Storage;
-import main.java.task.DeadlineTask;
-import main.java.task.EventTask;
-import main.java.task.Task;
-import main.java.task.TaskList;
-import main.java.ui.Ui;
+import exception.DukeDateTimeParserException;
+import parser.Parser;
+import storage.Storage;
+import task.DeadlineTask;
+import task.EventTask;
+import task.Task;
+import task.TaskList;
+import ui.Ui;
 
 import java.time.LocalDate;
 

@@ -1,4 +1,4 @@
-package main.java.task;
+package task;
 
 /**
  * The Task class implements methods that will be used

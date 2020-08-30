@@ -1,6 +1,6 @@
-package main.java.ui;
+package ui;
 
-import main.java.task.Task;
+import task.Task;
 
 import java.util.Scanner;
 

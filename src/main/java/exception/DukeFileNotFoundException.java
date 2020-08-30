@@ -1,4 +1,4 @@
-package main.java.exception;
+package exception;
 
 /**
  * Thrown to notify user that system failed to find

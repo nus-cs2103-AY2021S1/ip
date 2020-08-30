@@ -1,4 +1,4 @@
-package main.java.task;
+package task;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +22,7 @@ public class TaskList {
     /**
      * Constructs a new TaskList with the
      * specified list of tasks.
-     * @param tasks List<Task> List of task
+     * @param tasks List(Task) List of task
      */
     public TaskList(List<Task> tasks) {
         this.tasks = tasks;
@@ -30,7 +30,7 @@ public class TaskList {
 
     /**
      * Gets the list of tasks.
-     * @return List<Task> Returns list of tasks.
+     * @return List(Task) Returns list of tasks.
      */
     public List<Task> getTasks() {
         return tasks;
@@ -39,7 +39,7 @@ public class TaskList {
     /**
      * Sets the current list of tasks to
      * the specified list of tasks.
-     * @param tasks List<Task> list of task.
+     * @param tasks List(Task) list of task.
      */
     public void setTasks(List<Task> tasks) {
         this.tasks = tasks;
@@ -56,7 +56,7 @@ public class TaskList {
     /**
      * Remove the specified task from the list.
      * @param index int list's index.
-     * @return
+     * @return Task task
      */
     public Task remove(int index) {
         return this.tasks.remove(index);

@@ -1,9 +1,9 @@
-package main.java.command;
+package command;
 
-import main.java.exception.AnonymousException;
-import main.java.storage.Storage;
-import main.java.task.TaskList;
-import main.java.ui.Ui;
+import exception.AnonymousException;
+import storage.Storage;
+import task.TaskList;
+import ui.Ui;
 
 /**
  * WrongCommand class would execute the program when user specify
@@ -34,7 +34,8 @@ public class WrongCommand extends Command {
      * @param tasks TaskList List of task.
      * @param ui Ui updating user interface to show intended messages.
      * @param storage Storage to update external file whenever needed.
-     * @throws AnonymousException
+     * @throws AnonymousException Thrown when user run a command that
+     * does not exist in the program.
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws AnonymousException {

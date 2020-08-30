@@ -1,9 +1,9 @@
-package main.java.command;
+package command;
 
 
-import main.java.storage.Storage;
-import main.java.task.TaskList;
-import main.java.ui.Ui;
+import storage.Storage;
+import task.TaskList;
+import ui.Ui;
 
 import java.io.IOException;
 
@@ -33,7 +33,7 @@ public class DeleteAllCommand extends Command {
      * @param tasks TaskList List of task.
      * @param ui Ui updating user interface to show intended messages.
      * @param storage Storage to update external file whenever needed.
-     * @throws IOException
+     * @throws IOException Thrown when system failed to open external file.
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
