@@ -9,6 +9,10 @@ import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Scanner;
 
+/**
+ * Represents a storage space for the program output.
+ */
+
 public class Storage {
 
     public static final String DEFAULT_STORAGE_FILEPATH = "duke.txt";
@@ -24,6 +28,11 @@ public class Storage {
         this.path = filepath;
     }
 
+    /**
+     * Loads the tasks from the textfile so that Duke can access the tasks
+     * @return List containing the tasks
+     * @throws IOException When the path is incorrect
+     */
     public ArrayList<Task> load() throws IOException {
         File f = new File(this.path);
         f.createNewFile();
@@ -53,6 +62,11 @@ public class Storage {
         return ls;
     }
 
+    /**
+     * Writes the tasks from the current running Duke and saves it in a text file
+     * @param textToAdd The string version of the task to be added
+     * @throws IOException When the path is incorrect
+     */
     public void save(String textToAdd) throws IOException {
         FileWriter fw = new FileWriter(this.path);
         fw.write(textToAdd + System.lineSeparator());

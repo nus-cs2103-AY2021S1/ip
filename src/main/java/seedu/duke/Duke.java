@@ -5,6 +5,10 @@ import java.time.DateTimeException;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
+/**
+ * Runs the Duke program, where user types in commands to add, delete, and mark tasks as done.
+ */
+
 public class Duke {
 
     public static DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("d MMM yyyy kkmm", Locale.ENGLISH);
@@ -23,6 +27,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs the actual program.
+     */
     public void run() {
         this.ui.start();
 

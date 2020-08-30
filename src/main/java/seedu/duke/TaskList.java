@@ -2,6 +2,9 @@ package seedu.duke;
 
 import java.util.ArrayList;
 
+/**
+ * Class that represents the list of tasks.
+ */
 public class TaskList {
     ArrayList<Task> ls;
 

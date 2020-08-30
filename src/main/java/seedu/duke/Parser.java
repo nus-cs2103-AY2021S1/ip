@@ -1,7 +1,16 @@
 package seedu.duke;
 
+/**
+ * Takes care of parsing user commands.
+ */
 public class Parser {
 
+    /**
+     * Returns the command that the user has inputted.
+     * @param input User command inputted.
+     * @return Command the user wants
+     * @throws DukeException If the command is invalid
+     */
     public Command parse(String input) throws DukeException {
         String endCommand = "bye";
         String listCommand = "list";
