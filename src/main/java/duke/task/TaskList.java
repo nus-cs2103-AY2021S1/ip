@@ -81,6 +81,16 @@ public class TaskList {
         return task;
     }
 
+    public ArrayList<Task> findTasks(String matchString) {
+        ArrayList<Task> filteredList = new ArrayList<>();
+        for (Task task : this.taskList) {
+            if (task.getTaskName().contains(matchString)) {
+                filteredList.add(task);
+            }
+        }
+        return filteredList;
+    }
+
     public ArrayList<Task> getTaskList(){
         return this.taskList;
     }
