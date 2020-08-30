@@ -2,7 +2,7 @@ package duke.parser;
 
 import java.time.LocalDateTime;
 
-import duke.exception.DukeException;
+import duke.exception.DukeParseException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -37,44 +37,46 @@ public class StorageParser {
         return symbol + completed + description + datetime + "\n";
     }
 
-    private Todo createTodo(String[] storageTask, String storageTaskString) throws DukeException {
+    private Todo createTodo(String[] storageTask, String storageTaskString) throws DukeParseException {
         if (storageTask.length < TODO_COMMAND_LENGTH) {
             String msg = String.format("It appears this todo: '%s' is corrupted.", storageTaskString);
-            throw new DukeException(msg);
+            throw new DukeParseException(msg);
         }
         boolean isCompleted = storageTask[1].equals(IS_COMPLETED);
         return new Todo(storageTask[2], isCompleted);
     }
 
-    private Deadline createDeadline(String[] storageTask, String storageTaskString) throws DukeException {
+    private Deadline createDeadline(
+            String[] storageTask, String storageTaskString) throws DukeParseException {
         if (storageTask.length < DEADLINE_COMMAND_LENGTH) {
             String msg = String.format("It appears this deadline: '%s' is corrupted.", storageTaskString);
-            throw new DukeException(msg);
+            throw new DukeParseException(msg);
         }
         boolean isCompleted = storageTask[1].equals(IS_COMPLETED);
         try {
-            LocalDateTime dateTime = Datetime.parseDateTimeString(storageTask[3], Deadline.DATE_FORMAT_OUTPUT);
+            LocalDateTime dateTime = Datetime.parseDateTimeString(
+                    storageTask[3], Deadline.DATE_FORMAT_OUTPUT);
             return new Deadline(storageTask[2], isCompleted, dateTime);
-        } catch (DukeException exception) {
+        } catch (DukeParseException exception) {
             String msg = String.format("It appears the datetime of this deadline: '%s' is corrupted.",
                     storageTaskString);
-            throw new DukeException(msg);
+            throw new DukeParseException(msg);
         }
     }
 
-    private Event createEvent(String[] storageTask, String storageTaskString) throws DukeException {
+    private Event createEvent(String[] storageTask, String storageTaskString) throws DukeParseException {
         if (storageTask.length < EVENT_COMMAND_LENGTH) {
             String msg = String.format("It appears this event: '%s' is corrupted.", storageTaskString);
-            throw new DukeException(msg);
+            throw new DukeParseException(msg);
         }
         boolean isCompleted = storageTask[1].equals(IS_COMPLETED);
         try {
             LocalDateTime time = Datetime.parseTimeString(storageTask[3], Event.TIME_FORMAT_OUTPUT);
             return new Event(storageTask[2], isCompleted, time);
-        } catch (DukeException exception) {
+        } catch (DukeParseException exception) {
             String msg = String.format("It appears the time of this event: '%s' is corrupted.",
                     storageTaskString);
-            throw new DukeException(msg);
+            throw new DukeParseException(msg);
         }
     }
 
@@ -82,9 +84,10 @@ public class StorageParser {
      * Converts a <code>String</code> from the storage text file into its associated <code>Task</code>.
      * @param storageTaskString the <code>String</code> that is to be converted.
      * @return the associated <code>Task</code> from the given <code>String</code>.
-     * @throws DukeException if this does not recognise the format of the <code>String</code> being parsed.
+     * @throws DukeParseException if this does not recognise the
+     * format of the <code>String</code> being parsed.
      */
-    public Task convertStorageToTask(String storageTaskString) throws DukeException {
+    public Task convertStorageToTask(String storageTaskString) throws DukeParseException {
         String[] storageTask = storageTaskString.split(DELIMITER);
         switch(storageTask[0]) {
         case Todo.TODO_SYMBOL:
@@ -95,7 +98,7 @@ public class StorageParser {
             return createEvent(storageTask, storageTaskString);
         default:
             String err = String.format("It appears this line: '%s' is corrupted.", storageTaskString);
-            throw new DukeException(err);
+            throw new DukeParseException(err);
         }
     }
 }

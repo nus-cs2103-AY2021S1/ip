@@ -37,8 +37,13 @@ public class DeleteOperation extends Operation {
      */
     @Override
     public Result execute() {
+        String message;
+        if (!this.taskList.isValidIndex(index)) {
+            message = "The index you have passed in cannot be found in the list of tasks.";
+            return new Result(false, message, this.isExit());
+        }
         Task removed = this.taskList.removeTask(this.index);
-        String message = "Noted. I've removed this task:\n"
+        message = "Noted. I've removed this task:\n"
                 + removed + "\n"
                 + String.format("You now have %d tasks in the list", this.taskList.getCurrCapacity());
         return new Result(true, message, this.isExit());

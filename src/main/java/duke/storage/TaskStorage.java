@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.util.Scanner;
 
 import duke.exception.DukeException;
+import duke.exception.DukeOperationException;
+import duke.exception.DukeParseException;
 import duke.parser.StorageParser;
 import duke.task.Task;
 import duke.task.TaskList;
@@ -57,7 +59,7 @@ public class TaskStorage {
             try {
                 Task task = this.storageParser.convertStorageToTask(s.nextLine());
                 taskList.addTask(task);
-            } catch (DukeException exception) {
+            } catch (DukeParseException exception) {
                 sb.append(exception.getMessage());
                 sb.append("\n");
             }
@@ -82,7 +84,7 @@ public class TaskStorage {
      * @param taskList the <code>TaskList</code> that is to be saved.
      * @throws DukeException if the text file cannot be written onto.
      */
-    public void saveToDisk(TaskList taskList) throws DukeException {
+    public void saveToDisk(TaskList taskList) throws DukeOperationException {
         StringBuilder sb = new StringBuilder();
         for (Task task : taskList) {
             String storageTask = this.storageParser.convertTaskToStorage(task);
@@ -91,7 +93,7 @@ public class TaskStorage {
         try {
             writeToFile(sb.toString());
         } catch (IOException exception) {
-            throw new DukeException("There were some problems when writing to the file. "
+            throw new DukeOperationException("There were some problems when writing to the file. "
                     + exception.getMessage());
         }
     }

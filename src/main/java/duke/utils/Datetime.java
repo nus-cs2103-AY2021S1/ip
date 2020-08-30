@@ -7,6 +7,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 import duke.exception.DukeException;
+import duke.exception.DukeParseException;
 
 /**
  * Represents a DateTime object.
@@ -48,13 +49,13 @@ public class Datetime {
      * pattern <code>String</code>.
      */
     public static LocalDateTime parseDateTimeString(String datetime, String pattern)
-            throws DukeException {
+            throws DukeParseException {
         try {
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern(pattern);
             return LocalDateTime.parse(datetime, dtf);
         } catch (DateTimeParseException exception) {
             String msg = String.format("Ensure the datetime passed in is of the form: '%s'.", pattern);
-            throw new DukeException(msg);
+            throw new DukeParseException(msg);
         }
     }
 
@@ -68,14 +69,14 @@ public class Datetime {
      * @throws DukeException if the time <code>String</code> does not match
      * the pattern <code>String</code>.
      */
-    public static LocalDateTime parseTimeString(String time, String pattern) throws DukeException {
+    public static LocalDateTime parseTimeString(String time, String pattern) throws DukeParseException {
         try {
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern(pattern);
             LocalTime localTime = LocalTime.parse(time, dtf);
             return LocalDateTime.of(LocalDate.now(), localTime);
         } catch (DateTimeParseException exception) {
             String msg = String.format("Ensure the time passed in is of the form: '%s'.", pattern);
-            throw new DukeException(msg);
+            throw new DukeParseException(msg);
         }
     }
 }

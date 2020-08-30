@@ -32,12 +32,17 @@ public class DoneOperation extends Operation {
 
     /**
      * Executes the operation by converting the specified <code>Task</code> into completed.
-     * @return a <code>Result</code> indicating the <code>Task</code> has been completed.
+     * @return a <code>Result</code> indicating if the <code>Task</code> has been completed.
      */
     @Override
     public Result execute() {
+        String message;
+        if (!this.taskList.isValidIndex(index)) {
+            message = "The index you have passed in cannot be found in the list of tasks.";
+            return new Result(false, message, this.isExit());
+        }
         Task completed = this.taskList.completeTask(this.index);
-        String message = "You have completed this task:\n" + completed;
+        message = "You have completed this task:\n" + completed;
         return new Result(true, message, this.isExit());
     }
 }

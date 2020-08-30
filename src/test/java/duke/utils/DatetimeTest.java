@@ -13,7 +13,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import duke.exception.DukeException;
+import duke.exception.DukeParseException;
 
 public class DatetimeTest {
     private static Stream<Arguments> getParseDateTimeString_correctFormat_arguments() {
@@ -28,7 +28,7 @@ public class DatetimeTest {
     @ParameterizedTest
     @MethodSource("getParseDateTimeString_correctFormat_arguments")
     public void parseDateTimeString_correctFormat_success(
-            String datetime, String pattern, LocalDateTime actual) throws DukeException {
+            String datetime, String pattern, LocalDateTime actual) throws DukeParseException {
         assertEquals(Datetime.parseDateTimeString(datetime, pattern), actual);
     }
 
@@ -39,7 +39,7 @@ public class DatetimeTest {
             LocalDateTime actual = LocalDateTime.of(2019, 2, 19, 19, 20);
             assertEquals(Datetime.parseDateTimeString("2019-19-02", pattern), actual);
             fail();
-        } catch (DukeException exception) {
+        } catch (DukeParseException exception) {
             String expected = String.format(
                     "Apologies. Ensure the datetime passed in is of the form: '%s'.", pattern);
             assertEquals(expected, exception.getMessage());
@@ -58,7 +58,7 @@ public class DatetimeTest {
     @ParameterizedTest
     @MethodSource("getParseTimeString_correctFormat_arguments")
     public void parseTimeString_correctFormat_success(
-            String time, String pattern, LocalTime actualTime) throws DukeException {
+            String time, String pattern, LocalTime actualTime) throws DukeParseException {
         LocalDateTime actual = LocalDateTime.of(LocalDate.now(), actualTime);
         assertEquals(Datetime.parseTimeString(time, pattern), actual);
     }
@@ -71,7 +71,7 @@ public class DatetimeTest {
         try {
             assertEquals(Datetime.parseDateTimeString("18-08", pattern), actual);
             fail();
-        } catch (DukeException exception) {
+        } catch (DukeParseException exception) {
             String expected = String.format(
                     "Apologies. Ensure the datetime passed in is of the form: '%s'.", pattern);
             assertEquals(expected, exception.getMessage());

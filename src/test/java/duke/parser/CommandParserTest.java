@@ -10,7 +10,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import duke.exception.DukeException;
+import duke.exception.DukeParseException;
 import duke.operation.AddDeadlineOperation;
 import duke.operation.AddEventOperation;
 import duke.operation.AddTodoOperation;
@@ -28,7 +28,7 @@ public class CommandParserTest {
     private final CommandParser commandParser = new CommandParser();
 
     @Test
-    public void parse_correctInput_success() throws DukeException {
+    public void parse_correctInput_success() throws DukeParseException {
         Todo mockTodo = new Todo("mock", false);
         TaskList taskList = new TaskList();
         taskList.addTask(mockTodo);
@@ -103,7 +103,7 @@ public class CommandParserTest {
         TaskStorage storage = TaskStorage.createTaskStorage();
         try {
             commandParser.parse(command, taskList, storage);
-        } catch (DukeException exception) {
+        } catch (DukeParseException exception) {
             assertNotNull(exception.getMessage());
         }
     }

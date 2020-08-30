@@ -9,7 +9,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import duke.exception.DukeException;
+import duke.exception.DukeParseException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -47,7 +47,7 @@ public class StorageParserTest {
     @ParameterizedTest
     @MethodSource("getArguments")
     public void convertStorageToTask_correctSymbol_success(
-            Task actual, String storage) throws DukeException {
+            Task actual, String storage) throws DukeParseException {
         Task converted = storageParser.convertStorageToTask(storage);
         assertEquals(converted, actual);
     }
@@ -66,7 +66,7 @@ public class StorageParserTest {
     public void convertStorageToTask_wrongSymbol_exceptionThrown(String storageString, String task) {
         try {
             storageParser.convertStorageToTask(storageString);
-        } catch (DukeException exception) {
+        } catch (DukeParseException exception) {
             String err = String.format(
                     "Apologies. It appears this %s: '%s' is corrupted.", task, storageString);
             assertEquals(err, exception.getMessage());
