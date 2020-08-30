@@ -7,9 +7,6 @@ import java.util.Locale;
 /**
  * The Deadline class encapsulates information and methods pertaining to a
  * Deadline.
- *
- * @author  Yen Pin Hsuan
- * @version 1.0
  */
 public class Deadline extends Task {
     private LocalDateTime date;

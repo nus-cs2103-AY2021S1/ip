@@ -19,9 +19,6 @@ import duke.task.Event;
 
 /**
  * The Storage class deals with loading tasks from the file and saving tasks in the file.
- *
- * @author  Yen Pin Hsuan
- * @version 1.0
  */
 public class Storage {
 

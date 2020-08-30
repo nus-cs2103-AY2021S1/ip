@@ -5,9 +5,6 @@ import duke.command.Command;
 
 /**
  * The Duke program chat bot which can help users keep track of tasks.
- *
- * @author  Yen Pin Hsuan
- * @version 1.0
  */
 public class Duke {
 
@@ -32,7 +29,7 @@ public class Duke {
         boolean isExit = false;
         while (!isExit) {
             try {
-                String command = ui.readCommand();
+                String command = ui.readInput();
                 Command c = Parser.parse(command);
                 c.execute(taskList, storage, ui);
                 isExit = c.isExit();

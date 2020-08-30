@@ -2,9 +2,6 @@ package duke.task;
 
 /**
  * The ToDo class encapsulates information and methods pertaining to a ToDo.
- *
- * @author  Yen Pin Hsuan
- * @version 1.0
  */
 public class ToDo extends Task {
 

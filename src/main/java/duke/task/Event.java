@@ -7,9 +7,6 @@ import java.util.Locale;
 /**
  * The Event class encapsulates information and methods pertaining to an
  * Event.
- *
- * @author  Yen Pin Hsuan
- * @version 1.0
  */
 public class Event extends Task {
     private LocalDateTime date;

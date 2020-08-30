@@ -1,26 +1,14 @@
 package duke;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Scanner;
 import duke.task.Task;
-import duke.task.ToDo;
-import duke.task.Event;
-import duke.task.Deadline;
 
 /**
  * The Ui class deals with interactions with the user.
- *
- * @author  Yen Pin Hsuan
- * @version 1.0
  */
 public class Ui {
 
     private static final String LINE = "    ____________________________________________________________\n";
-    private static List<String> dateFormats = Arrays.asList("yyyy/MM/dd HHmm", "y/M/d HHmm", "y-M-d HHmm");
 
     private Scanner sc;
 
@@ -56,16 +44,8 @@ public class Ui {
      * Returns the input given by user.
      * @return The input of user.
      */
-    public String readCommand() {
-        return sc.next();
-    }
-
-    /**
-     * Return the task number the user input.
-     * @return Task number that the user input.
-     */
-    public int readTaskNumber() {
-        return sc.nextInt();
+    public String readInput() {
+        return sc.nextLine();
     }
 
     /**
@@ -74,60 +54,6 @@ public class Ui {
      */
     public void showError(String message) {
         System.out.println(LINE + "    " + message + "\n" + LINE);
-    }
-
-    /**
-     * Return the todo the user specified.
-     * @return A todo with the details given by user.
-     */
-    public ToDo getToDo() throws DukeException {
-        String detail = sc.nextLine().trim();
-        if (detail.equals("")) {
-            throw new DukeException("Oops! Todo cannot be empty");
-        }
-        return new ToDo(detail);
-    }
-
-    /**
-     * Return the event the user specified.
-     * @return A event with the details and date given by user.
-     */
-    public Event getEvent() throws DukeException {
-        String s = sc.nextLine();
-        if (s.trim().equals("")) {
-            throw new DukeException("Oops! Event cannot be empty");
-        }
-        String[] arr = s.split("/at");
-        if (arr.length == 1) {
-            throw new DukeException("Oops! You need to include both detail and time.");
-        }
-        String detail = arr[0].trim();
-        LocalDateTime date = parseDate(arr[1].trim());
-        if (date == null) {
-            throw new DukeException("Oops! Format of date and time might be wrong.");
-        }
-        return new Event(detail, date);
-    }
-
-    /**
-     * Return the deadline the user specified.
-     * @return A deadline with the details and date given by user.
-     */
-    public Deadline getDeadline() throws DukeException {
-        String s = sc.nextLine();
-        if (s.trim().equals("")) {
-            throw new DukeException("Oops! Deadline cannot be empty");
-        }
-        String[] arr = s.split("/by");
-        if (arr.length == 1) {
-            throw new DukeException("Oops! You need to include both detail and time.");
-        }
-        String detail = arr[0].trim();
-        LocalDateTime date = parseDate(arr[1].trim());
-        if (date == null) {
-            throw new DukeException("Oops! Format of date and time might be wrong.");
-        }
-        return new Deadline(detail, date);
     }
 
     /**
@@ -157,29 +83,10 @@ public class Ui {
     }
 
     /**
-     * Get the keyword from user input.
-     * @return Keyword to search for.
-     */
-    public String getKeyword() {
-        return sc.nextLine().trim();
-    }
-
-    /**
      * Prints the text given.
      * @param text Text to be printed.
      */
     public void print(String text) {
         System.out.println(LINE + text + LINE);
-    }
-
-    private LocalDateTime parseDate(String dateString) {
-        for (String format : dateFormats) {
-            try {
-                return LocalDateTime.parse(dateString, DateTimeFormatter.ofPattern(format));
-            } catch (DateTimeParseException e) {
-
-            }
-        }
-        return null;
     }
 }

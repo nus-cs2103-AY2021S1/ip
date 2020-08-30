@@ -7,9 +7,6 @@ import duke.task.Task;
 
 /**
  * The TaskList class contains the task list and operations on the list.
- *
- * @author  Yen Pin Hsuan
- * @version 1.0
  */
 public class TaskList {
     private List<Task> list;

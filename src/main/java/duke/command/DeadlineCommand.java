@@ -1,6 +1,5 @@
 package duke.command;
 
-import duke.DukeException;
 import duke.TaskList;
 import duke.Storage;
 import duke.Ui;
@@ -8,22 +7,20 @@ import duke.task.Deadline;
 
 /**
  * The DeadlineCommand class contains methods pertaining to the DeadlineCommand.
- *
- *  @author  Yen Pin Hsuan
- *  @version 1.0
  */
 public class DeadlineCommand extends Command {
 
+    private Deadline deadline;
+
+    public DeadlineCommand(Deadline deadline) {
+        this.deadline = deadline;
+    }
+
     @Override
     public void execute(TaskList taskList, Storage storage, Ui ui) {
-        try {
-            Deadline deadline = ui.getDeadline();
-            taskList.addTask(deadline);
-            ui.addTask(deadline, taskList);
-            storage.addData(deadline.store());
-        } catch (DukeException e) {
-            ui.showError(e.getMessage());
-        }
+        taskList.addTask(deadline);
+        ui.addTask(deadline, taskList);
+        storage.addData(deadline.store());
     }
 
     @Override

@@ -2,9 +2,6 @@ package duke.task;
 
 /**
  * The Task class encapsulates information and methods pertaining to a Task.
- *
- * @author  Yen Pin Hsuan
- * @version 1.0
  */
 public class Task {
     protected boolean isDone;

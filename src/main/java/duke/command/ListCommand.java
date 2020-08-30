@@ -6,9 +6,6 @@ import duke.Ui;
 
 /**
  * The ListCommand class contains methods pertaining to the ListCommand.
- *
- *  @author  Yen Pin Hsuan
- *  @version 1.0
  */
 public class ListCommand extends Command {
 
