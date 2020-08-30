@@ -1,4 +1,4 @@
-package main.java;
+package willy.task;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -7,8 +7,8 @@ import java.time.format.DateTimeFormatter;
  * A type of Task with a deadline.
  */
 public class DeadlineTask extends Task {
-    protected String stringDeadline;
-    protected LocalDateTime deadline;
+    public String stringDeadline;
+    public LocalDateTime deadline;
 
     public DeadlineTask(String deadline, String task, TaskSymbol taskType) {
         super(task, taskType);

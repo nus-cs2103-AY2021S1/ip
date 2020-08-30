@@ -1,4 +1,4 @@
-package main.java;
+package willy.task;
 
 /**
  * Basic Task with no additional conditions.

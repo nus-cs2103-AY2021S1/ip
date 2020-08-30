@@ -1,4 +1,4 @@
-package main.java;
+package willy.task;
 
 /**
  * Responsible for the symbol allocation of each type of task.

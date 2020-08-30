@@ -1,7 +1,12 @@
-package main.java;
+package willy.test;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import main.java.TaskList;
+import willy.store.TaskStore;
+import willy.task.Task;
+import willy.task.TaskSymbol;
+import willy.task.ToDoTask;
 
 import java.util.ArrayList;
 import java.util.List;

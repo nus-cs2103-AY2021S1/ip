@@ -1,13 +1,13 @@
-package main.java;
+package willy.task;
 
 /**
  * Work that people need to do that will be keep tracked of by the bot.
  * Status of task to be marked done or undone.
  */
 public class Task {
-    protected boolean done;
-    protected String task;
-    protected TaskSymbol taskType;
+    public boolean done;
+    public String task;
+    public TaskSymbol taskType;
 
     public Task(String task, TaskSymbol taskType) {
         this.task = task;

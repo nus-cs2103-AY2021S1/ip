@@ -1,4 +1,4 @@
-package main.java;
+package willy.exceptions;
 
 /**
  * Handles the errors that may arise in the process of using the bot.

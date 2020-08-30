@@ -1,5 +1,8 @@
 package main.java;
 
+import willy.store.TaskStore;
+import willy.task.Task;
+
 import java.util.ArrayList;
 
 /**
@@ -11,7 +14,7 @@ public class TaskList {
     private ArrayList<Task> listOfTasks;
     private TaskStore storage;
 
-    TaskList(ArrayList<Task> listOfTasks, TaskStore storage) {
+    public TaskList(ArrayList<Task> listOfTasks, TaskStore storage) {
         this.listOfTasks = listOfTasks;
         this.storage = storage;
     }

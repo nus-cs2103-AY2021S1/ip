@@ -1,4 +1,4 @@
-package main.java;
+package willy.store;
 
 import java.io.FileNotFoundException;
 import java.nio.file.Path;
@@ -8,6 +8,11 @@ import java.io.IOException;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Scanner;
+import willy.task.Task;
+import willy.task.TaskSymbol;
+import willy.task.ToDoTask;
+import willy.task.DeadlineTask;
+import willy.task.EventsTask;
 
 /**
  * Stores the tasks recorded by the bot in a hard drive.

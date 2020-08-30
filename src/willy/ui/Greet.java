@@ -1,4 +1,4 @@
-package main.java;
+package willy.ui;
 
 /**
  * Greetings that the bot can do.
