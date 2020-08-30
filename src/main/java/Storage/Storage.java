@@ -127,7 +127,7 @@ public class Storage {
         } catch (MugException ex) {
             throw new MugException(ex.getMessage());
         } catch (IOException ex) {
-            throw new MugException("Something went wrong. MUG fail to add the Tasks.Task :_:");
+            throw new MugException("Something went wrong. Mug fail to add the Tasks.Task :_:");
         }
     }
 
@@ -165,7 +165,7 @@ public class Storage {
             File renameFile = new File(this.filepath);
             newFile.renameTo(renameFile);
         } catch (IOException ex) {
-            throw new MugException("Something went wrong. MUG fail to delete the Tasks.Task :_:");
+            throw new MugException("Something went wrong. Mug fail to delete the Tasks.Task :_:");
         }
     }
 

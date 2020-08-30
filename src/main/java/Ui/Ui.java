@@ -22,20 +22,10 @@ public class Ui {
 
         String welcome = logo
                 + "\n"
-                + "** Hello! I'm MUG  **\n"
-                + "** What can MUG do for you ?_? **";
+                + "** Hello! I'm Mug  **\n"
+                + "** What can Mug do for you ?_? **";
 
         System.out.println(welcome);
-    }
-
-    /**
-     * Adds design to the messages.
-     *
-     * @param word Messages.
-     * @return Design messages.
-     */
-    private static String printDesign(String word) {
-        return "**\n" + word + "\n**";
     }
 
     /**
@@ -54,7 +44,7 @@ public class Ui {
 
             switch (command) {
             case LIST:
-                output = printDesign(tasks.readList());
+                output = tasks.readList();
                 break;
             case BYE:
                 output = "** Bye. Hope to see you soon!! **";
@@ -63,13 +53,13 @@ public class Ui {
                 Parser.input(command, splitOrder.length, false);
                 Parser.info(command, splitOrder[1], false);
                 int doneTaskId = Parser.index(splitOrder[1], splitOrder.length);
-                output = printDesign(tasks.taskDone(doneTaskId));
+                output = tasks.taskDone(doneTaskId);
                 break;
             case DELETE:
                 Parser.input(command, splitOrder.length, false);
                 Parser.info(command, splitOrder[1], false);
                 int deleteTaskId = Parser.index(splitOrder[1], splitOrder.length);
-                output = printDesign(tasks.deleteTask(deleteTaskId));
+                output = tasks.deleteTask(deleteTaskId);
                 break;
             case TODO:
             case DEADLINE:
@@ -77,23 +67,23 @@ public class Ui {
                 Parser.input(command, splitOrder.length, false);
                 Parser.info(command, splitOrder[1], false);
                 String info = splitOrder[1];
-                output = printDesign(tasks.addTask(command, info));
+                output = tasks.addTask(command, info);
                 break;
             case FIND:
                 Parser.input(command, splitOrder.length, false);
                 Parser.info(command, splitOrder[1], false);
                 String keyword = splitOrder[1];
-                output = printDesign(tasks.searchTask(keyword));
+                output = tasks.searchTask(keyword);
                 break;
             default:
-                String errorCommand = "Hey!!! I'm sorry, but MUG don't know what that means :-()";
-                output = printDesign(errorCommand);
+                String errorCommand = "Hey!!! I'm sorry, but Mug don't know what that means :3";
+                output = errorCommand;
                 break;
             }
         } catch (MugException ex) {
-            output = printDesign(ex.getMessage());
+            output = ex.getMessage();
         } catch (ArrayIndexOutOfBoundsException ex) {
-            output = printDesign("There is Something wrong with your Storage.Storage");
+            output = "There is Something wrong with your Storage.Storage";
         }
 
         return output;

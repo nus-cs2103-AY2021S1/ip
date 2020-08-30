@@ -23,12 +23,12 @@ public class Parser {
         if (splitNum < 2) {
             if ((isTime && command == Command.DEADLINE)
             ) {
-                throw new MugException("HEY!!! Feed me with {/by [date]}. MUG is hungry T_T");
+                throw new MugException("HEY!!! Feed me with {/by [date]}. Mug is hungry T_T");
             } else if (isTime
                     && command == Command.EVENT) {
-                throw new MugException("HEY!!! Feed me with {/at [date]}. MUG is hungry T_T");
+                throw new MugException("HEY!!! Feed me with {/at [date]}. Mug is hungry T_T");
             } else {
-                throw new MugException("HEY!!! Don't be stingy give MUG more information >.<");
+                throw new MugException("HEY!!! Don't be stingy give Mug more information >.<");
             }
         }
     }
@@ -45,12 +45,12 @@ public class Parser {
         if (info.trim().equals("")) {
             if ((isTime && command == Command.DEADLINE)
             ) {
-                throw new MugException("HEY!!! Feed me with {/by [date]}. MUG is hungry T_T");
+                throw new MugException("HEY!!! Feed me with {/by [date]}. Mug is hungry T_T");
             } else if (isTime
                     && command == Command.EVENT) {
-                throw new MugException("HEY!!! Feed me with {/at [date]}. MUG is hungry T_T");
+                throw new MugException("HEY!!! Feed me with {/at [date]}. Mug is hungry T_T");
             } else {
-                throw new MugException("HEY!!! Don't be stingy give MUG more information >.<");
+                throw new MugException("HEY!!! Don't be stingy give Mug more information >.<");
             }
         }
     }
@@ -66,7 +66,7 @@ public class Parser {
         try {
             return LocalDate.parse(date);
         } catch (DateTimeParseException ex) {
-            throw new MugException("MUG is picky. Give him the correct date format(YYYY-MM-DD) XD");
+            throw new MugException("Mug is picky. Give him the correct date format(YYYY-MM-DD) XD");
         }
     }
 
@@ -81,7 +81,7 @@ public class Parser {
         try {
             return Command.valueOf(command.toUpperCase());
         } catch (IllegalArgumentException ex) {
-            throw new MugException("Hey!!! I'm sorry, but MUG don't know what that means :-()");
+            throw new MugException("Hey!!! I'm sorry, but Mug don't know what that means :3");
         }
     }
 
@@ -98,11 +98,11 @@ public class Parser {
             int index = Integer.parseInt(strIndex);
 
             if (splitNum < 2) {
-                throw new MugException("HEY!!! Don't be stingy give MUG more information >.<");
+                throw new MugException("HEY!!! Don't be stingy give Mug more information >.<");
             }
             return index;
         } catch (NumberFormatException ex) {
-            throw new MugException("Please feed MUG an integer number ~_~");
+            throw new MugException("Please feed Mug an integer number ~_~");
         }
     }
 }
