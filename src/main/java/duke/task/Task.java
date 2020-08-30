@@ -1,3 +1,5 @@
+package duke.task;
+
 
 /**
  * <h1> Task Class </h1>

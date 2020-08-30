@@ -1,3 +1,5 @@
+package duke.storage;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -23,13 +25,13 @@ public class Storage {
     }
 
 
-    public File retrieveFile(String filePath) throws IOException {
-        File file = new File(filePath);
-        if (!file.exists()) {
-            file.createNewFile();
-        }
-        return file;
-    }
+//    public File retrieveFile(String filePath) throws IOException {
+//        File file = new File(filePath);
+//        if (!file.exists()) {
+//            file.createNewFile();
+//        }
+//        return file;
+//    }
 
     /**
      * Saves the current list of task to a textfile.

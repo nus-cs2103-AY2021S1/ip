@@ -1,6 +1,11 @@
+import duke.command.DukeException;
+import duke.command.Parser;
+import duke.storage.Storage;
+import duke.task.TaskList;
+import duke.ui.Ui;
+
 import java.io.IOException;
 import java.util.Scanner;
-import java.util.ArrayList;
 
 /**
  * <h1> DUKE CLASS </h1>
