@@ -25,7 +25,7 @@ public class DateParser {
     private static final int NULL_TIME_INDICATOR = 30;
 
     /**
-     * Parses the specified input into a {@code LocalDateTime} object.
+     * Parses the specified {@code input} string into a {@code LocalDateTime} object.
      * Does not support storing seconds.
      *
      * @param input the string to be parsed.
@@ -62,7 +62,7 @@ public class DateParser {
     }
 
     /**
-     * Parses the specified input string into its corresponding duration in minutes.
+     * Parses the specified {@code input} string into its corresponding duration in minutes.
      *
      * @param input the string to be parsed.
      * @return the parsed duration in minutes.
@@ -111,7 +111,7 @@ public class DateParser {
     }
 
     /**
-     * Returns true if the {@code LocalDateTime} object represents only a date with no time.
+     * Returns true if the specified {@code LocalDateTime} object represents only a date with no time.
      *
      * @param dateTime the {@code LocalDateTime} object to test.
      * @return true if the {@code LocalDateTime} object represents only a date with no time.

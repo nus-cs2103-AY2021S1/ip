@@ -30,7 +30,7 @@ public class SearchCommand extends Command {
     }
 
     /**
-     * Executes this {@code CompleteCommand}.
+     * Executes this {@code SearchCommand}.
      *
      * @param list    the currently loaded {@link TaskList} object.
      * @param storage the currently loaded {@link Storage} object.

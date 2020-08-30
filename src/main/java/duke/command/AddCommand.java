@@ -20,22 +20,22 @@ public class AddCommand extends Command {
     private int remainingTaskCount;
 
     /**
-     * Constructs an add command with the specified type and specified {@code Task} parameter.
+     * Constructs an {@code AddCommand} with the specified type and specified task details.
      *
      * @param type           the type of {@code Task} to be added.
-     * @param taskParameters the parameters used for creating the task.
+     * @param taskDetail     the details of the task to be added.
      * @throws DukeException if the specified type is null.
      */
-    public AddCommand(TaskType type, String taskParameters) throws DukeException {
+    public AddCommand(TaskType type, String taskDetail) throws DukeException {
         switch (type) {
         case DEADLINE:
-            createdTask = Deadline.createTask(taskParameters);
+            createdTask = Deadline.createTask(taskDetail);
             break;
         case EVENT:
-            createdTask = Event.createTask(taskParameters);
+            createdTask = Event.createTask(taskDetail);
             break;
         case TODO:
-            createdTask = ToDo.createTask(taskParameters);
+            createdTask = ToDo.createTask(taskDetail);
             break;
         default:
             throw new DukeException("I don't understand.");

@@ -24,7 +24,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Returns a {@code Deadline} object with the specified details.
+     * Returns a {@code Deadline} object with the specified {@code details}.
      *
      * @param details the description and deadline of the task.
      * @return a {@code Deadline} object with the specified details.

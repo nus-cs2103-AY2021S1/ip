@@ -55,15 +55,15 @@ public class Parser {
     /**
      * Parses the specified user input and returns its corresponding {@link Command}.
      *
-     * @param fullCommand the user input to be parsed.
+     * @param userInput the user input to be parsed.
      * @return a {@code Command} object to be executed.
      * @throws ParseDukeCommandException if the user input is not recognised.
      */
-    public static Command parse(String fullCommand) throws ParseDukeCommandException {
-        String[] inputs = fullCommand.split(" ", 2);
+    public static Command parse(String userInput) throws ParseDukeCommandException {
+        String[] inputs = userInput.split(" ", 2);
         // By spec, inputs is guaranteed to have at least one element.
-        String userInput = inputs[0];
-        Keyword keyword = Keyword.findKeyword(userInput);
+        String inputKeyword = inputs[0];
+        Keyword keyword = Keyword.findKeyword(inputKeyword);
         switch (keyword) {
         case EXIT:
             return new ExitCommand();
@@ -71,7 +71,7 @@ public class Parser {
             return new ListCommand();
         case COMPLETE:
             try {
-                int index = Integer.parseInt(fullCommand.split(" ")[1]) - 1;
+                int index = Integer.parseInt(userInput.split(" ")[1]) - 1;
                 return new CompleteCommand(index);
             } catch (ArrayIndexOutOfBoundsException e) {
                 throw new ParseDukeCommandException("What did you complete exaclty?");
@@ -80,10 +80,10 @@ public class Parser {
             }
         case DELETE:
             try {
-                if (fullCommand.toLowerCase().contains("all")) {
+                if (userInput.toLowerCase().contains("all")) {
                     return new DeleteAllCommand();
                 } else {
-                    int index = Integer.parseInt(fullCommand.split(" ")[1]) - 1;
+                    int index = Integer.parseInt(userInput.split(" ")[1]) - 1;
                     return new DeleteCommand(index);
                 }
             } catch (ArrayIndexOutOfBoundsException e) {

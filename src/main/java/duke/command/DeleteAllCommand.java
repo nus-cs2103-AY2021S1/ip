@@ -11,7 +11,7 @@ import duke.ui.Ui;
 public class DeleteAllCommand extends Command {
 
     /**
-     * Executes this {@code CompleteCommand}.
+     * Executes this {@code DeleteAllCommand}.
      * Deletes all contents in the specified {@code list}.
      *
      * @param list    the currently loaded {@link TaskList} object.
@@ -25,7 +25,7 @@ public class DeleteAllCommand extends Command {
     }
 
     /**
-     * Prints a feedback confirming the execution of this {@code DeleteCommand}.
+     * Prints a feedback confirming the execution of this {@code DeleteAllCommand}.
      *
      * @param ui the {@link Ui} instance to use for formatting.
      * @throws IncompleteDukeCommandException if this {@code DeleteAllCommand} was not executed.

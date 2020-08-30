@@ -14,7 +14,7 @@ public class ToDo extends Task {
     }
 
     /**
-     * Returns a {@code ToDo} object with the specified details.
+     * Returns a {@code ToDo} object with the specified {@code details}.
      *
      * @param details the description of the task.
      * @return a {@code ToDo} object with the specified details.

@@ -32,7 +32,7 @@ public class Event extends Task {
     }
 
     /**
-     * Returns an {@code Event} object with the specified details.
+     * Returns an {@code Event} object with the specified {@code details}.
      *
      * @param details the description and time of the event.
      * @return an {@code Event} object with the specified details.

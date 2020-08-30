@@ -25,7 +25,7 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Executes this {@code CompleteCommand}.
+     * Executes this {@code DeleteCommand}.
      * Deletes the {@code Task} in the specified {@code list} at the stored {@code index}.
      *
      * @param list    the currently loaded {@link TaskList} object.
