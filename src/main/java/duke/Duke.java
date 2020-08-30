@@ -28,6 +28,16 @@ public class Duke {
     }
 
     /**
+     * Generates a response to user input
+     * @param input user input
+     * @return duke's reply
+     * @throws IOException if filePath does not exist
+     */
+    public String getResponse(String input) throws IOException {
+        return Parser.parse(input, tasks, storage, "");
+    }
+
+    /**
      * Getter to retrieve tasks
      *
      * @return list of tasks

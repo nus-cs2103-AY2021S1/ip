@@ -68,8 +68,31 @@ public class Storage {
         FileWriter fw = new FileWriter(this.filePath, true);
         for (Task task : tasksToSave.getListOfTasks()) {
             fw.write(task.toString() + System.lineSeparator());
-            fw.close();
         }
+        fw.close();
+    }
+
+    /**
+     * Adds a task to the storage filePath
+     *
+     * @param task task to be added
+     * @throws IOException if filePath does not exist
+     */
+    public void append(Task task) throws IOException {
+        FileWriter fw = new FileWriter(this.filePath, true);
+        fw.write(task.toString() + System.lineSeparator());
+        fw.close();
+    }
+
+    /**
+     * Carries out clear() and save() sequentially
+     *
+     * @param tasksToRefresh a TaskList of all existing tasks
+     * @throws IOException if filePath does not exist
+     */
+    public void refresh(TaskList tasksToRefresh) throws IOException {
+        this.clear();
+        this.save(tasksToRefresh);
     }
 
     /**
