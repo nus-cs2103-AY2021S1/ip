@@ -1,5 +1,2 @@
-T | 0 | yo
-T | 0 | ded
-T | 0 | haha
-T | 0 | yey
-T | 0 | what
+T | 1 | yyooyoyoy
+T | 1 | llalalala

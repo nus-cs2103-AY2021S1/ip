@@ -11,20 +11,22 @@ import duke.task.Task;
 
 public class FindCommand extends Command {
 
-    public FindCommand(String task) {
-        super(task);
+    private String[] keywords;
+
+    public FindCommand(String... keywords) {
+        this.keywords = keywords;
     }
 
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         try {
-            processFind(this.task, taskList, ui, storage);
+            processFind(this.keywords, taskList, ui, storage);
         } catch (FindException find) {
             System.out.println(find.getMessage());
         }
     }
 
-    public void processFind(String toFind, TaskList taskList, Ui ui, Storage storage) throws FindException {
+    public void processFind(String[] toFind, TaskList taskList, Ui ui, Storage storage) throws FindException {
         findTask(toFind, taskList);
     }
 
@@ -39,16 +41,27 @@ public class FindCommand extends Command {
         return false;
     }
 
-    private List<Task> findTask(String toFind, TaskList taskList) {
+    private void findTask(String[] toFind, TaskList taskList) {
         //try {
         List<Task> tasks = taskList.getTasks();
         List<Task> tasksFound = new ArrayList<>();
         int num = 1;
-
+        boolean containsKeyword;
 
         System.out.println("Here are the matching task(s) in your list : ");
+
         for (Task task : tasks) {
-            if (task.getDescription().contains(toFind)) {
+            containsKeyword = false;
+
+            for (int i = 0; i < toFind.length; i++) {
+
+                if (task.getDescription().contains(toFind[i])) {
+                    containsKeyword = true;
+                    break;
+                }
+            }
+
+            if (containsKeyword) {
                 tasksFound.add(task);
                 System.out.println(num + ". " + task.toString());
             }
@@ -59,6 +72,5 @@ public class FindCommand extends Command {
                 + "Please try again with another keyword.");
         }
 
-        return tasksFound;
     }
 }
