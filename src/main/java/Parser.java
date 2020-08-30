@@ -98,43 +98,41 @@ public class Parser {
     }
 
     public static String parse(TaskList taskList, Storage storage, String text) {
+        String output;
         if (text.contains(" ")) {
             int i = text.indexOf(' ');
             String test = text.substring(0, i).toLowerCase();
             String next = text.substring(i + 1);
             if (checkFind(test)) {
                 return taskList.findTask(next);
+            } else if (checkDone(test)) {
+                try {
+                    output =  taskList.doneTask(next);
+                    storage.updateFile();
+                    return output;
+                } catch (DukeException e) {
+                    return e.getMessage();
+                }
+            } else if (checkDel(test)) {
+                try {
+                    output = taskList.delTask(next);
+                    storage.updateFile();
+                    return output;
+                } catch (DukeException e) {
+                    return e.getMessage();                }
             } else {
-                return "contains: " + text;
+                try {
+                    output = taskList.addTask(test, next);
+                    storage.updateFile();
+                    return output;
+                } catch (DukeException e) {
+                    return e.getMessage();                }
             }
-//            } else if (checkDone(test)) {
-//                try {
-//                    taskList.doneTask(next);
-//                    storage.updateFile();
-//                } catch (DukeException e) {
-//                    System.out.println(ui.getBorder() + e.getMessage() + "\n" + ui.getBorder());
-//                }
-//            } else if (checkDel(test)) {
-//                try {
-//                    taskList.delTask(next);
-//                    storage.updateFile();
-//                } catch (DukeException e) {
-//                    System.out.println(ui.getBorder() + e.getMessage() + "\n" + ui.getBorder());
-//                }
-//            } else {
-//                try {
-//                    taskList.addTask(test, next);
-//                    storage.updateFile();
-//                } catch (DukeException e) {
-//                    System.out.println(ui.getBorder() + e.getMessage() + "\n" + ui.getBorder());
-//                }
-//            }
         } else {
             if (checkBye(text.toLowerCase())) {
                 return ui.exitLine();
             } else if (checkList(text)) {
                 return taskList.displayList();
-//
             } else {
                 return text;
             }

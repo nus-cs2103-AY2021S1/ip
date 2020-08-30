@@ -32,11 +32,9 @@ public class Ui {
      * @param toAdd The new task to add to the list
      * @param size  The size of current list
      */
-    public void addTaskLine(Task toAdd, int size) {
-        System.out.println(
-            BORDER + "Got it. I've added this task:\n" + "  " + toAdd + "\n"
-                + "Now you have " + size + " tasks in the list.\n" + BORDER
-        );
+    public String addTaskLine(Task toAdd, int size) {
+        return "Got it. I've added this task:\n" + "  " + toAdd + "\n"
+                + "Now you have " + size + " tasks in the list.\n";
     }
 
     /**
@@ -44,11 +42,9 @@ public class Ui {
      * @param toRemove The task to remove
      * @param size The size of current list
      */
-    public void removeTaskLine(Task toRemove, int size) {
-        System.out.println(
-                BORDER + "Noted. I've removed this task:\n" + "  " + toRemove + "\n"
-                    + "Now you have " + size + " tasks in the list.\n" + BORDER
-        );
+    public String removeTaskLine(Task toRemove, int size) {
+        return "Noted. I've removed this task:\n" + "  " + toRemove + "\n"
+                    + "Now you have " + size + " tasks in the list.\n";
     }
 
     /**
