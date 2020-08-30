@@ -41,5 +41,13 @@ public abstract class Task {
     public static void decrementTask() {
         Task.total --;
     }
+    @Override
+    public boolean equals(Object other) {
+        if (this.getClass().equals(other.getClass())) {
+            Task object2 = (Task)other;
+            return this.description.equals(object2.description) && this.isDone==object2.isDone();
+        }
+        return false;
+    }
 
 }
