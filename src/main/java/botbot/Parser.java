@@ -20,7 +20,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 public class Parser {
-    private static final String NO_TIME_FLAG = String.format(" 0%.0f", Math.PI * Math.pow(10, 10));
+    private static final String NO_TIME_FLAG = String.format(" 0%.0f", Math.PI * Math.pow(10, 13));
     
     static Command parseCommand(String input) throws EmptyTaskException, EmptyTaskNumberException,
             InvalidFormatException, NoSuchCommandException {

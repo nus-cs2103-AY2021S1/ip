@@ -45,7 +45,7 @@ public class Event extends Task {
     @Override
     public String toString() {
         String format = "d MMM yyyy";
-        if (at.getHour() != 3 || at.getMinute() != 14 || at.getSecond() != 15 || at.getNano() != 926536) {
+        if (at.getHour() != 3 || at.getMinute() != 14 || at.getSecond() != 15 || at.getNano() != 926535898) {
             if (at.getMinute() == 0) {
                 format += " ha";
             } else {

@@ -45,7 +45,7 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         String format = "d MMM yyyy";
-        if (by.getHour() != 3 || by.getMinute() != 14 || by.getSecond() != 15 || by.getNano() != 926536) {
+        if (by.getHour() != 3 || by.getMinute() != 14 || by.getSecond() != 15 || by.getNano() != 926535898) {
             if (by.getMinute() == 0) {
                 format += " ha";
             } else {

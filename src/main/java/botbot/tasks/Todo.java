@@ -11,7 +11,7 @@ public class Todo extends Task {
         super(TYPE_CODE, description, isDone);
     }
 
-    static String extractNameFromCommand(String command) {
+    private static String extractNameFromCommand(String command) {
         return command.substring(5);
     }
 
