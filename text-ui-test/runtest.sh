@@ -1,13 +1,14 @@
 @ECHO OFF
 
 REM create bin directory if it doesn't exist
-if not exist ..\bin mkdir ..\bin
+if not exist C:\Users\e0316059\Desktop\cs2103 ip\bin mkdir C:\Users\e0316059\Desktop\cs2103 ip\bin
 
 REM delete output from previous run
 del ACTUAL.TXT
 
 REM compile the code into the bin folder
-javac  -cp ..\src\main\java -Xlint:none -d ..\bin ..\src\main\java\*.java
+javac  -cp C:\Users\e0316059\Desktop\cs2103 ip\src\main\java -Xlint:none -d C:\Users\e0316059\Desktop\cs2103 ip\bin C:\Users\e0316059\Desktop\cs2103 ip\src\main\java\Duke.java
+
 IF ERRORLEVEL 1 (
     echo ********** BUILD FAILURE **********
     exit /b 1
