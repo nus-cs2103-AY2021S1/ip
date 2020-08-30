@@ -1,27 +1,27 @@
 package duke;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.List;
-
-import org.junit.jupiter.api.Test;
-
 import seedu.duke.TaskList;
 import seedu.duke.exception.DukeInvalidIndexException;
 import seedu.duke.task.Deadline;
 import seedu.duke.task.Event;
 import seedu.duke.task.Task;
 import seedu.duke.task.Todo;
+import org.junit.jupiter.api.Test;
+
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 
 public class TaskListTest {
-    private TaskList taskList = new TaskList();
+    TaskList taskList = new TaskList();
 
-    private Task todo = new Todo("task 1");
-    private Task deadline = new Deadline("task 2", LocalDate.of(2020, 8, 24), LocalTime.of(8, 24));
-    private Task event = new Event("task 3", LocalDate.of(2020, 9, 9), LocalTime.of(9, 9));
+    Task todo = new Todo("task 1");
+    Task deadline = new Deadline("task 2", LocalDate.of(2020, 8, 24), LocalTime.of(8,24));
+    Task event = new Event("task 3", LocalDate.of(2020, 9, 9), LocalTime.of(9, 9));
 
     @Test
     public void addTodo_validTodo_success() {

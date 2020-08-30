@@ -1,12 +1,12 @@
 package seedu.duke.command;
 
-import java.io.IOException;
-
 import seedu.duke.Storage;
 import seedu.duke.TaskList;
 import seedu.duke.Ui;
 import seedu.duke.exception.DukeInvalidIndexException;
 import seedu.duke.task.Task;
+
+import java.io.IOException;
 
 /**
  * Represents a delete task action.
