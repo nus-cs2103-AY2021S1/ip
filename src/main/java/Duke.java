@@ -1,7 +1,11 @@
+import java.time.DateTimeException;
+import java.time.LocalDateTime;
 import java.util.Scanner;
 import java.util.ArrayList;
 
-
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 
 public class Duke {
 
@@ -50,8 +54,6 @@ public class Duke {
 
     private static final String line = "-------------------------------------------------------------------------------";
 
-
-
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         String userInput = "";
@@ -77,8 +79,8 @@ public class Duke {
                 }
                 String rest = space_idx == -1 ? "" : userInput.substring(space_idx + 1).trim();
 
-                String item, date;
-                int date_idx;
+                String item, dateStr;
+                int dateStrIdx;
 
                 switch(command) {
                     case BYE:
@@ -100,19 +102,19 @@ public class Duke {
                         if (rest.isEmpty()) {
                             throw new DukeException("ME FINKZ DAT U NED 2 ENTR NAYM 4 UR DEDLINE ITEM LULZ");
                         } else {
-                            date_idx = rest.indexOf("/by");
-                            if (date_idx == -1) {
+                            dateStrIdx = rest.indexOf("/by");
+                            if (dateStrIdx == -1) {
                                 throw new DukeException("ME FINKZ U NED 2 GIV DATE 4 TIEM 4 DA DEDLINE USIN /by");
                             } else {
-                                item = rest.substring(0, date_idx).trim();
-                                date = rest.substring(date_idx + 3).trim();
+                                item = rest.substring(0, dateStrIdx).trim();
+                                dateStr = rest.substring(dateStrIdx + 3).trim();
 
                                 if (item.isEmpty()) {
                                     throw new DukeException("ME FINKZ U NED 2 GIV DA DEDLINE A NAEM");
-                                } else if (date.isEmpty()) {
+                                } else if (dateStr.isEmpty()) {
                                     throw new DukeException("ME FINKZ U NED 2 PUT SUMTHIN 4 DA DATE OR TIEM");
                                 } else {
-                                    tasks.add(new Deadline(item, date));
+                                    tasks.add(new Deadline(item, dateStr));
                                     System.out.println(fmtMsg("I PUT NEW TING IN DA LIST\n  " + tasks.get(tasks.size() - 1) +
                                             "\nNAO U HAS " +  tasks.size() + " FINGS IN DA LIST LULZIES"));
                                 }
@@ -121,24 +123,24 @@ public class Duke {
                         break;
 
                     case EVENT:
-                        date_idx = rest.indexOf("/at");
+                        dateStrIdx = rest.indexOf("/at");
 
                         if (rest.isEmpty()) {
                             throw new DukeException("ME FINKZ DAT U NED 2 ENTR NAYM 4 UR EVENT ITEM LULZ");
                         } else {
-                            date_idx = rest.indexOf("/at");
-                            if (date_idx == -1) {
+                            dateStrIdx = rest.indexOf("/at");
+                            if (dateStrIdx == -1) {
                                 throw new DukeException("ME FINKZ U NED 2 GIV DATE 4 TIEM 4 DA EVENT USIN /at");
                             } else {
-                                item = rest.substring(0, date_idx).trim();
-                                date = rest.substring(date_idx + 3).trim();
+                                item = rest.substring(0, dateStrIdx).trim();
+                                dateStr = rest.substring(dateStrIdx + 3).trim();
 
                                 if (item.isEmpty()) {
                                     throw new DukeException("ME FINKZ U NED 2 GIV DA EVENT A NAEM");
-                                } else if (date.isEmpty()) {
+                                } else if (dateStr.isEmpty()) {
                                     throw new DukeException("ME FINKZ U NED 2 PUT SUMTHIN 4 DA DATE OR TIEM");
                                 } else {
-                                    tasks.add(new Deadline(item, date));
+                                    tasks.add(new Event(item, dateStr));
                                     System.out.println(fmtMsg("I PUT NEW TING IN DA LIST\n  " + tasks.get(tasks.size() - 1) +
                                             "\nNAO U HAS " +  tasks.size() + " FINGS IN DA LIST LULZIES"));
                                 }
@@ -151,11 +153,43 @@ public class Duke {
                         if (tasks.isEmpty()) {
                             System.out.println(fmtMsg("UR LIST HAZ NUTHIN LOLOL"));
                         } else {
-                            String msg = "U HAS DEES TINGS IN UR LIST.";
-                            for (int i = 0; i < tasks.size(); i++) {
-                                msg += "\n" +(i + 1) + ". " + tasks.get(i);
+                            dateStrIdx = rest.indexOf("/by");
+                            if (dateStrIdx == -1) {
+                                String msg = "U HAS DEES TINGS IN UR LIST.";
+                                for (int i = 0; i < tasks.size(); i++) {
+                                    msg += "\n" +(i + 1) + ". " + tasks.get(i);
+                                }
+                                System.out.println(fmtMsg(msg));
+                            } else {
+                                dateStr = rest.substring(dateStrIdx + 3).trim();
+                                if (DateTimeUtility.checkDateTimeType(dateStr) == DateTimeFormat.String) {
+                                    throw new DukeException("U NID 2 GIV CORRECT DATE FOMAT!");
+                                } else {
+                                    String msg = "U HAS DEES TINGS IN UR LIST DAT R DUE/HAPPENIN BY "
+                                                 + DateTimeUtility.formatString(dateStr) + ": ";
+
+                                    for (int i = 0; i < tasks.size(); i++) {
+                                        if (tasks.get(i) instanceof TimedTask) {
+                                            try {
+                                                if (DateTimeUtility.compare(dateStr,
+                                                        ((TimedTask) tasks.get(i)).getByString()) >= 0) {
+                                                    msg += "\n" + (i + 1) + ". " + tasks.get(i);
+                                                }
+                                            } catch (DateTimeException e) {}
+                                        }
+                                    }
+                                    System.out.println(fmtMsg(msg));
+
+                                }
+
+
+
+
                             }
-                            System.out.println(fmtMsg(msg));
+
+
+
+
                         }
                         break;
 
