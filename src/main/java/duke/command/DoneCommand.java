@@ -3,9 +3,9 @@ package duke.command;
 import java.io.IOException;
 
 import duke.core.Result;
-import duke.core.Ui;
-import duke.core.TaskList;
 import duke.core.Storage;
+import duke.core.TaskList;
+import duke.core.Ui;
 import duke.handle.TaskNotFoundException;
 
 /**
@@ -36,7 +36,7 @@ public class DoneCommand extends Command {
     @Override
     public Result excecute(TaskList taskList, Ui ui, Storage storage) throws TaskNotFoundException, IOException {
 
-        if(!taskList.has(count - 1)) {
+        if (!taskList.has(count - 1)) {
             //System.out.println(Duke.makeBlock("There is no such task"));
             throw new TaskNotFoundException("There is no such task");
         } else {

@@ -48,7 +48,7 @@ public class Parser {
             parsedCommand = evaluateCompleteOrDelete(command, CommandType.DONE);
         } else if (command.split(" ")[0].equals("delete")) {
             parsedCommand = evaluateCompleteOrDelete(command, CommandType.DELETE);
-        }  else if (command.split(" ")[0].equals("todo")) {
+        } else if (command.split(" ")[0].equals("todo")) {
             parsedCommand = evaluateAddCommand("", command, CommandType.ADD_TODO);
         } else if (command.split(" ")[0].equals("deadline")) {
             parsedCommand = evaluateAddCommand(" /by ", command, CommandType.ADD_DEADLINE);
@@ -71,7 +71,8 @@ public class Parser {
      * @return The parsed command.
      * @throws CommandNotFoundException If the command cannot be parsed.
      */
-    public static Command evaluateAddCommand(String string, String command, CommandType commandType) throws CommandNotFoundException {
+    public static Command evaluateAddCommand(String string, String command, CommandType commandType)
+            throws CommandNotFoundException {
         if (commandType == CommandType.ADD_TODO) {
 
             if (command.strip().split(" ").length == 1) {
@@ -85,7 +86,8 @@ public class Parser {
             String content = (command.split("\\s+", 2)[1]);
 
             if (content.strip().split(string).length <= 1) {
-                throw new CommandNotFoundException("The description should be in the format:\n" + command.split(" ")[0] + " description" + string + "time");
+                throw new CommandNotFoundException(
+                        "The description should be in the format:\n" + command.split(" ")[0] + " description" + string + "time");
             } else {
                 try {
                     String time;
@@ -93,7 +95,7 @@ public class Parser {
                     time = content.strip().split(string, 2)[1];
                     LocalDate localDate = LocalDate.parse(time.strip());
 
-                    if(commandType == CommandType.ADD_DEADLINE) {
+                    if (commandType == CommandType.ADD_DEADLINE) {
                         return new AddCommand(new Deadline(description, localDate));
                     } else if (commandType == CommandType.ADD_EVENT) {
                         return new AddCommand(new Event(description, localDate));
@@ -118,23 +120,26 @@ public class Parser {
      * @return The parsed command.
      * @throws CommandNotFoundException If the command cannot be parsed.
      */
-    public static Command evaluateCompleteOrDelete(String command, CommandType commandType) throws CommandNotFoundException {
+    public static Command evaluateCompleteOrDelete(String command, CommandType commandType)
+            throws CommandNotFoundException {
         String type = command.split(" ")[0];
         //System.out.println(type);
         try {
 
-            if(command.split(type).length == 0) {
-                throw new CommandNotFoundException("The " + type + " command needs to contain the number label of the task to be completed");
+            if (command.split(type).length == 0) {
+                throw new CommandNotFoundException(
+                        "The " + type + " command needs to contain the number label of the task to be completed");
             }
             int number = Integer.parseInt(command.split("\\s+", 2)[1]);
 
-            if(commandType == CommandType.DONE) {
+            if (commandType == CommandType.DONE) {
                 return new DoneCommand(number);
             } else {
                 return new DeleteCommand(number);
             }
         } catch (NumberFormatException exception) {
-            throw new CommandNotFoundException("The " + type + " command should be in the format:\n" + type + " number label of the task to be completed");
+            throw new CommandNotFoundException(
+                    "The " + type + " command should be in the format:\n" + type + " number label of the task to be completed");
         }
     }
 
@@ -148,7 +153,8 @@ public class Parser {
     public static Command evaluateListDate(String command) throws CommandNotFoundException {
         try {
             if (command.split("\\s+").length != 2) {
-                throw new CommandNotFoundException("Type list to list all the tasks. Type list yyyy-MM-dd to list the tasks on a specific date");
+                throw new CommandNotFoundException(
+                        "Type list to list all the tasks. Type list yyyy-MM-dd to list the tasks on a specific date");
             } else {
                 LocalDate localDate = LocalDate.parse(command.split("\\s+")[1]);
                 return new ListDateCommand(localDate);

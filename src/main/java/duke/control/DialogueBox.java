@@ -26,28 +26,6 @@ public class DialogueBox extends HBox {
 
     @FXML
     private ImageView picture;
-    /*
-    public DialogueBox(String string, Image image) {
-        this.dialogueLabel = new Label(string);
-        this.picture = new ImageView(image);
-        dialogueLabel.setWrapText(true);
-        picture.setFitWidth(100.0);
-        picture.setFitHeight(100.0);
-
-
-        dialogueLabel.setPadding(new Insets(5));
-        HBox.setMargin(picture, new Insets(5));
-
-
-        Circle circle = new Circle(50, 50, 50);
-
-        this.picture.setClip(circle);
-
-        this.setAlignment(Pos.TOP_RIGHT);
-        this.getChildren().addAll(dialogueLabel, picture);
-        this.setPadding(new Insets(5));
-    }
-    */
 
     private DialogueBox(String text, Image img) {
         try {
@@ -99,7 +77,8 @@ public class DialogueBox extends HBox {
 
     public static DialogueBox getUserDialogueBox(String string, Image image) {
         DialogueBox dialogueBox = new DialogueBox(string, image);
-        dialogueBox.setBackground(new Background(new BackgroundFill(Color.GREEN, new CornerRadii(10), new Insets(5, 5, 5, 50))));
+        dialogueBox.setBackground(new Background(
+                new BackgroundFill(Color.GREEN, new CornerRadii(10), new Insets(5, 5, 5, 50))));
         HBox.setMargin(dialogueBox.label, new Insets(0, 0, 0, 50));
         return dialogueBox;
     }
@@ -107,7 +86,8 @@ public class DialogueBox extends HBox {
     public static DialogueBox getDukeDialogueBox(String string, Image image) {
         DialogueBox dialogueBox = new DialogueBox(string, image);
         dialogueBox.flip();
-        dialogueBox.setBackground(new Background(new BackgroundFill(Color.YELLOW, new CornerRadii(10), new Insets(5, 50, 5, 5))));
+        dialogueBox.setBackground(
+                new Background(new BackgroundFill(Color.YELLOW, new CornerRadii(10), new Insets(5, 50, 5, 5))));
         HBox.setMargin(dialogueBox.label, new Insets(0, 50, 0, 0));
         return dialogueBox;
     }

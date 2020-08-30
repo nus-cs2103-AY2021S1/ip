@@ -42,6 +42,12 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
+    /**
+     * Starts the bot and loads the local record with
+     * the load message and greeting message shown.
+     *
+     * @param stage The stage to show the information.
+     */
     public void start(Stage stage) {
         try {
             duke = new Duke();
@@ -77,7 +83,7 @@ public class MainWindow extends AnchorPane {
                 DialogueBox.getDukeDialogueBox((String) response.getMessage(), dukeImage)
         );
         userInput.clear();
-        if(!(response.isContinuing())) {
+        if (!(response.isContinuing())) {
 
             //Stage stage = (Stage) this.getScene().getWindow();
             PauseTransition pauseTransition = new PauseTransition(Duration.seconds(1));

@@ -1,9 +1,9 @@
 package duke.command;
 
 import duke.core.Result;
-import duke.core.Ui;
-import duke.core.TaskList;
 import duke.core.Storage;
+import duke.core.TaskList;
+import duke.core.Ui;
 
 /**
  * The ListCommand class represents a command that lists the tasks in the task list.

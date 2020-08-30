@@ -1,12 +1,11 @@
 package duke.command;
 
 import java.io.IOException;
-import java.util.HashMap;
 
 import duke.core.Result;
-import duke.core.Ui;
-import duke.core.TaskList;
 import duke.core.Storage;
+import duke.core.TaskList;
+import duke.core.Ui;
 import duke.task.Task;
 
 /**

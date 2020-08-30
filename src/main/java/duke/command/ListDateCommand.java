@@ -4,15 +4,15 @@ import java.io.IOException;
 import java.time.LocalDate;
 
 import duke.core.Result;
-import duke.core.Ui;
-import duke.core.TaskList;
 import duke.core.Storage;
+import duke.core.TaskList;
+import duke.core.Ui;
 import duke.handle.TaskNotFoundException;
 
 /**
  * The ListDateCommand class represents a command that lists a task on a specific date in the task list.
  */
-public class ListDateCommand extends Command{
+public class ListDateCommand extends Command {
     private LocalDate localDate;
 
     /**

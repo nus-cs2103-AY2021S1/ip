@@ -1,9 +1,9 @@
 package duke.command;
 
 import duke.core.Result;
-import duke.core.Ui;
-import duke.core.TaskList;
 import duke.core.Storage;
+import duke.core.TaskList;
+import duke.core.Ui;
 
 /**
  * The ExitCommand class represents a command that exits the program.

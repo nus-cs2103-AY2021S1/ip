@@ -8,7 +8,7 @@ import java.time.format.DateTimeFormatter;
  * The instance of the Deadline class has the description and
  * the time of the deadline.
  */
-public class Deadline extends Task{
+public class Deadline extends Task {
     protected LocalDate by;
 
     /**
@@ -42,7 +42,7 @@ public class Deadline extends Task{
      */
     @Override
     public String record() {
-        if(this.isCompleted) {
+        if (this.isCompleted) {
             return "D | 1 | " + description + " | " + by;
         } else {
             return "D | 0 | " + description + " | " + by;

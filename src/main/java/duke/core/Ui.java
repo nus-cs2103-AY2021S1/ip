@@ -25,7 +25,7 @@ public class Ui {
 
     public final Scanner scanner;
 
-    PrintStream out;
+    private PrintStream out;
 
     /**
      * Creates a user interface component.
@@ -49,11 +49,11 @@ public class Ui {
     public String makeBlock(String string) {
         String[] strings = string.split("\n");
         String result = INDENTATION + DIVIDER + "\n";
-        for(int i = 0; i < strings.length; i = i + 1) {
+        for (int i = 0; i < strings.length; i = i + 1) {
             result = result + INDENTATION + strings[i] + "\n";
         }
         result = result + INDENTATION + DIVIDER + "\n";
-        return  result;
+        return result;
     }
 
     /**
@@ -132,10 +132,8 @@ public class Ui {
                 "." + task.toString() +
                 "\nNow you have " + size + " tasks in the list."));
         */
-        return makeBlock("Noted. I have removed this task:\n" +
-                String.valueOf(count) +
-                "." + task.toString() +
-                "\nNow you have " + size + " tasks in the list.");
+        return makeBlock(
+                "Noted. I have removed this task:\n" + String.valueOf(count) + "." + task.toString() + "\nNow you have " + size + " tasks in the list.");
     }
 
     public String showLoad() {

@@ -13,6 +13,6 @@ public class CommandNotFoundException extends Exception {
      * @param message The message of why the command cannot be parsed.
      */
     public CommandNotFoundException(String message) {
-        super(message);   
+        super(message);
     }
 }

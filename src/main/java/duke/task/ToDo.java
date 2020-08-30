@@ -1,7 +1,6 @@
 package duke.task;
 
-public class ToDo extends Task{
-
+public class ToDo extends Task {
     /**
      * Creates a corresponding task with the description of the task.
      *
