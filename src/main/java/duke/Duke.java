@@ -6,6 +6,7 @@ import duke.component.Parser;
 import duke.component.Storage;
 import duke.component.Ui;
 import duke.task.TaskList;
+import javafx.application.Application;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -33,6 +34,7 @@ public class Duke {
 
     public static void main(String[] args) {
         Duke duke = new Duke();
+        Application.launch(Graphics.class, args);
         duke.run();
     }
 
