@@ -1,4 +1,4 @@
-package main.java.duke;
+package duke;
 /**
  * Parser class to interpret the input given by the user
  */

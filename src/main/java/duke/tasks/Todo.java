@@ -1,6 +1,6 @@
-package main.java.duke.tasks;
+package duke.tasks;
 
-import main.java.duke.exception.DukeInvalidTaskException;
+import duke.exception.DukeInvalidTaskException;
 
 /**
  * The Todo class is used to represent the task of a Todo nature with no time specified

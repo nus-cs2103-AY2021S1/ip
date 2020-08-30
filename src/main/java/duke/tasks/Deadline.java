@@ -1,7 +1,7 @@
-package main.java.duke.tasks;
+package duke.tasks;
 
-import main.java.duke.exception.DukeInvalidDateException;
-import main.java.duke.exception.DukeInvalidTaskException;
+import duke.exception.DukeInvalidDateException;
+import duke.exception.DukeInvalidTaskException;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;

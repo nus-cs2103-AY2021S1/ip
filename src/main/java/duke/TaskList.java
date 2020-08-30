@@ -1,14 +1,14 @@
-package main.java.duke;
+package duke;
 
-import main.java.duke.tasks.Task;
-import main.java.duke.tasks.Event;
-import main.java.duke.tasks.Deadline;
-import main.java.duke.tasks.Todo;
+import duke.tasks.Task;
+import duke.tasks.Event;
+import duke.tasks.Deadline;
+import duke.tasks.Todo;
 
-import main.java.duke.exception.DukeException;
-import main.java.duke.exception.DukeInvalidTaskException;
-import main.java.duke.exception.DukeInvalidDayException;
-import main.java.duke.exception.DukeInvalidDateException;
+import duke.exception.DukeException;
+import duke.exception.DukeInvalidTaskException;
+import duke.exception.DukeInvalidDayException;
+import duke.exception.DukeInvalidDateException;
 
 import java.io.FileNotFoundException;
 

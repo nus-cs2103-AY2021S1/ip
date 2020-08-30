@@ -1,6 +1,6 @@
-package main.java.duke.tasks;
+package duke.tasks;
 
-import main.java.duke.exception.DukeInvalidTaskException;
+import duke.exception.DukeInvalidTaskException;
 
 /**
  * Task object
