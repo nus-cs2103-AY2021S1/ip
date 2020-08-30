@@ -1,5 +1,7 @@
 package duke.ui;
 
+import static duke.utils.Messages.MESSAGE_GREETING;
+
 import duke.Duke;
 import duke.commands.CommandResult;
 import javafx.application.Platform;
@@ -29,9 +31,13 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
+    /** Initialises the main window with a greeting message. **/
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        dialogContainer.getChildren().add(
+            DialogBox.getUserDialog(MESSAGE_GREETING, dukeImage)
+        );
     }
 
     public void setDuke(Duke d) {
@@ -46,14 +52,15 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         CommandResult result = duke.getResult(input);
+        if (result.isExit()) {
+            Platform.exit();
+            return;
+        }
         String response = result.getFeedbackToUser();
         dialogContainer.getChildren().addAll(
             DialogBox.getUserDialog(input, userImage),
             DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
-        if (result.isExit()) {
-            Platform.exit();
-        }
     }
 }
