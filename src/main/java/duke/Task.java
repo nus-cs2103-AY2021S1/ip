@@ -1,3 +1,5 @@
+package duke;
+
 /**
  * Represents a task that is to be done.
  * Task object stores task description and done status. A task object is marked as not done by default.
