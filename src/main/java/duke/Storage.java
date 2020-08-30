@@ -1,10 +1,5 @@
 package duke;
 
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.ToDo;
-
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -13,6 +8,11 @@ import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
 
 /**
  * This class deals with the operations regarding the data stored and needed by the programme
@@ -39,14 +39,10 @@ public class Storage {
      * @throws FileNotFoundException If file is not found
      * @throws DukeException If the data contains invalid tasks
      */
-    public List<Task> load() throws FileNotFoundException, DukeException {
+    public List<Task> load() throws IOException, DukeException {
         List<Task> tasks = new ArrayList<>();
         List<String> linesOfFile = new ArrayList<>();
-        try {
-            linesOfFile = Files.readAllLines(Paths.get(filePath));
-        } catch (IOException e) {
-            System.err.println(e);
-        }
+        linesOfFile = Files.readAllLines(Paths.get(filePath));
 
         for (String inputLine : linesOfFile) {
             String[] parsedTask = inputLine.split(" \\| ");
@@ -76,6 +72,8 @@ public class Storage {
                 }
                 newTask = new Event(parsedTask[2], parsedTask[3]);
                 break;
+            default:
+                throw DukeException.badCommand();
             }
 
             if (parsedTask[1].equals("1")) {

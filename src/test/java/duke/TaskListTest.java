@@ -1,12 +1,14 @@
 package duke;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import org.junit.jupiter.api.Test;
+
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class TaskListTest {
 
@@ -56,7 +58,7 @@ class TaskListTest {
     }
 
     @Test
-    void getTask_outOfBound_IndexOutOfBoundException() {
+    void getTask_outOfBound_indexOutOfBoundException() {
         assertThrows(IndexOutOfBoundsException.class, () -> makeTestList().getTask(makeTestList().numTasks()));
     }
 
@@ -77,7 +79,7 @@ class TaskListTest {
     }
 
     @Test
-    void removeTask_outOfBound_IndexOutOfBoundException() {
+    void removeTask_outOfBound_indexOutOfBoundException() {
         assertThrows(IndexOutOfBoundsException.class, () -> makeTestList().removeTask(makeTestList().numTasks()));
     }
 }

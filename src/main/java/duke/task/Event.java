@@ -11,6 +11,11 @@ public class Event extends Task {
     private String eventDateString;
     private LocalDate eventDate = null;
 
+    /**
+     * Object representing Event tasks
+     * @param taskName Name of Event task
+     * @param eventTime String representing time of event. Will be specially formatted if it's a valid date format
+     */
     public Event(String taskName, String eventTime) {
         super(taskName);
         try {

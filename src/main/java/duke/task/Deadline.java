@@ -11,6 +11,11 @@ public class Deadline extends Task {
     private String deadlineString;
     private LocalDate deadline = null;
 
+    /**
+     * Object representing Deadline tasks
+     * @param taskName Name of Deadline task
+     * @param deadlineString String representing deadline. Will be specially formatted if it's a valid date format
+     */
     public Deadline(String taskName, String deadlineString) {
         super(taskName);
         try {

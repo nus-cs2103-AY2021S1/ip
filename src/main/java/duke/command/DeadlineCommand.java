@@ -10,6 +10,11 @@ public class DeadlineCommand extends Command {
     private String taskName;
     private String deadlineString;
 
+    /**
+     * Object representing Commands that refer to Deadline tasks
+     * @param taskName Name of Deadline task
+     * @param deadlineString String representing deadline
+     */
     public DeadlineCommand(String taskName, String deadlineString) {
         this.taskName = taskName;
         this.deadlineString = deadlineString;

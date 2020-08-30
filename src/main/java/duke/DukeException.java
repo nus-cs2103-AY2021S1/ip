@@ -8,17 +8,17 @@ package duke;
 public class DukeException extends Exception {
     private static final String HORIZONTAL_RULE = "____________________________________________________________";
     private static final String BAD_COMMAND_ERROR = "I have literally no idea what you're asking of me. \uD83D\uDE20";
-    private static final String BAD_TODO_ERROR = "HELLO! Please fill up a description of todo. " +
-            "Can't be empty!!! \uD83D\uDE20";
+    private static final String BAD_TODO_ERROR = "HELLO! Please fill up a description of todo. "
+            + "Can't be empty!!! \uD83D\uDE20";
     private static final String BAD_FIND_ERROR = "HELLO! How can I find something if you don't tell me what to find?";
-    private static final String BAD_DEADLINE_DATE_ERROR = "HELLO! Please fill up due date for the deadline. " +
-            "Can't be empty!!! \uD83D\uDE20";
-    private static final String BAD_DEADLINE_TASK_ERROR = "HELLO! Please fill up the task for the deadline. " +
-            "Can't be empty!!! \uD83D\uDE20";
-    private static final String BAD_EVENT_DATE_ERROR = "HELLO! Please fill up the date for the event. " +
-            "Can't be empty!!! \uD83D\uDE20";
-    private static final String BAD_EVENT_TASK_ERROR = "HELLO! Please fill up the event details. " +
-            "Can't be empty!!! \uD83D\uDE20";
+    private static final String BAD_DEADLINE_DATE_ERROR = "HELLO! Please fill up due date for the deadline. "
+            + "Can't be empty!!! \uD83D\uDE20";
+    private static final String BAD_DEADLINE_TASK_ERROR = "HELLO! Please fill up the task for the deadline. "
+            + "Can't be empty!!! \uD83D\uDE20";
+    private static final String BAD_EVENT_DATE_ERROR = "HELLO! Please fill up the date for the event. "
+            + "Can't be empty!!! \uD83D\uDE20";
+    private static final String BAD_EVENT_TASK_ERROR = "HELLO! Please fill up the event details. "
+            + "Can't be empty!!! \uD83D\uDE20";
 
     /**
      * Initialises a DukeException object with the message that is passed in the argument
