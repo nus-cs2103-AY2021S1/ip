@@ -1,4 +1,4 @@
-package main.java.duke;
+package duke;
 
 /**
  * DukeException is an exception class for Duke.

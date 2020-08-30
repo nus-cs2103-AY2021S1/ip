@@ -1,12 +1,17 @@
-package main.java.duke;
+package duke;
 
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
+
 /**
  * Duke is a chatbot that can perform specified commands requested by clients.
  */
-public class Duke {
+public class Duke extends Application {
     private Storage storage;
     private Ui ui;
     private TaskList tasks;
@@ -41,8 +46,18 @@ public class Duke {
             isExit = Parser.execute(tasks, ui, storage, userInput);
         }
     }
-    
+
+    @Override
+    public void start(Stage stage) {
+        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
+        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
+
+        stage.setScene(scene); // Setting the stage to show our screen
+        stage.show(); // Render the stage.
+    }
+
     public static void main(String[] args) throws DukeException, FileNotFoundException {
         new Duke("./data/duke.txt").run();
     }
 }
+

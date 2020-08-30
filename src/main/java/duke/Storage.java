@@ -1,4 +1,4 @@
-package main.java.duke;
+package duke;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -33,7 +33,7 @@ class Storage {
 
     /**
      * Loads all data from database.
-     * 
+     *
      * @return List list of tasks in database.
      */
     public List<Task> load() {
