@@ -14,14 +14,14 @@ public class DoneCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList taskList, Ui ui, DukeStorage storage) {
+    public String execute(TaskList taskList, Ui ui, DukeStorage storage) {
         // needs a valid number
         int taskNo = Integer.parseInt(afterCommand) - 1;
         if (taskNo >= taskList.tasksSize() || taskNo < 0) {
-            ui.throwDukeException(new DukeException("Please enter a valid task no!"));
+            return ui.throwDukeException(new DukeException("Please enter a valid task no!"));
         } else {
             taskList.markTaskCompleted(taskNo);
-            ui.displayCompletedTask(taskList.get(taskNo));
+            return ui.displayCompletedTask(taskList.get(taskNo));
         }
     }
 

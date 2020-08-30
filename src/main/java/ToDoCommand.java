@@ -13,15 +13,15 @@ public class ToDoCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList taskList, Ui ui, DukeStorage storage) {
+    public String execute(TaskList taskList, Ui ui, DukeStorage storage) {
         // needs an after command
         if (afterCommand == null) {
-            ui.throwDukeException(new DukeException(
+            return ui.throwDukeException(new DukeException(
                     "Please do not leave the todo description empty!"));
         } else {
             Task newToDo = new ToDo(afterCommand);
             taskList.addTask(newToDo);
-            ui.addTask(newToDo, taskList.tasksSize());
+            return ui.addTask(newToDo, taskList.tasksSize());
         }
     }
 
