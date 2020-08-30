@@ -6,7 +6,7 @@ import java.util.Scanner;
  */
 public class Ui {
     public static String greeting = "Hello, I'm Duke, your personal assistant. \n What can I do for you?";
-    public static String home = System.getProperty("user.home");//home = C:/Users/david
+    public static String home = System.getProperty("user.home"); //home = C:/Users/david
     public PlayBot bot;
     /**
      * Greets with user.
@@ -21,6 +21,15 @@ public class Ui {
         System.out.println(greeting);
     }
 
+    public String greet() {
+        String logo = " ____        _        \n"
+                + "|  _ \\ _   _| | _____ \n"
+                + "| | | | | | | |/ / _ \\\n"
+                + "| |_| | |_| |   <  __/\n"
+                + "|____/ \\__,_|_|\\_\\___|\n";
+        return "Hello from\n" + logo + greeting;
+    }
+
     /**
      * Interacts with user.
      * @throws IOException
@@ -32,6 +41,10 @@ public class Ui {
             String reply = Parser.process(order);
             System.out.println(reply);
         }
+    }
+
+    public String getResponse(String input) throws IOException {
+        return Parser.process(input);
     }
 
     public void setBot(PlayBot bot) {

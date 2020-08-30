@@ -44,7 +44,7 @@ public class Parser {
                 String content = order.substring(9, indexOfSlash);
                 String due = order.substring(indexOfSlash + 4);
                 LocalDate ddl = LocalDate.parse(due);
-                TaskList.list.add(new Deadline(false,content, ddl));
+                TaskList.list.add(new Deadline(false, content, ddl));
                 Storage.writeData(TaskList.list);
 
                 return "    added:" + content + "\n" + "    Now you have " + TaskList.list.size() + " task(s) in the list";
