@@ -1,3 +1,4 @@
-T | 0 |  return book
-E | 1 |  meeting  | 4pm
-D | 0 |  homework  | Sun2359
+T | 0 | return book
+D | 0 |  meeting  | 2020-08-31T12:00
+D | 0 |  homework  | 2020-08-31T23:59
+T | 0 |  quiz

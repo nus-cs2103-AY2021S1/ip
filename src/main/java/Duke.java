@@ -6,6 +6,8 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 
 public class Duke {
@@ -116,7 +118,8 @@ public class Duke {
             String taskcommand = command.split("/")[0].replace("deadline", "");
             if (!taskcommand.equals("")) {
                 String time = command.split("/")[1].replace("by ", "");
-                add(new Deadline(taskcommand, time));
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+                add(new Deadline(taskcommand, LocalDateTime.parse(time, formatter)));
             } else {
                 throw new DukeException("EmptyDeadline");
             }
@@ -129,7 +132,8 @@ public class Duke {
             String taskcommand = command.split("/")[0].replace("event", "");
             if (!taskcommand.equals("")) {
                 String time = command.split("/")[1].replace("at ", "");
-                add(new Event(taskcommand, time));
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+                add(new Deadline(taskcommand, LocalDateTime.parse(time, formatter)));
             } else {
                 throw new DukeException("EmptyEvent");
             }
@@ -155,13 +159,17 @@ public class Duke {
                     todo.setDone();
                 }
             } else if (data[0].equals("D")) {
-                Deadline deadline = new Deadline(data[2], data[3]);
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+                LocalDateTime time = LocalDateTime.parse(data[3], formatter);
+                Deadline deadline = new Deadline(data[2], time);
                 add(deadline);
                 if (data[1].equals("1")) {
                     deadline.setDone();
                 }
             } else if (data[0].equals("E")) {
-                Event event = new Event(data[2], data[3]);
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+                LocalDateTime time = LocalDateTime.parse(data[3], formatter);
+                Event event = new Event(data[2], time);
                 add(event);
                 if (data[1].equals("1")) {
                     event.setDone();
