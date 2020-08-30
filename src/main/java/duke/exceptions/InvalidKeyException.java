@@ -1,4 +1,4 @@
-package duke.task;
+package duke.exceptions;
 
 public class InvalidKeyException extends Exception{
     public InvalidKeyException(String message){

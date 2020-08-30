@@ -1,4 +1,4 @@
-package duke.task;
+package duke.tasks;
 
 /**
  * Deadline is a type of Task.

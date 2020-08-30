@@ -1,7 +1,4 @@
-package duke.task;
-
-import java.util.*;
-
+import duke.ui.Ui;
 /**
  * Duke can take in command and manage tasks.
  */

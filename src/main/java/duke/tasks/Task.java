@@ -1,9 +1,8 @@
-package duke.task;
+package duke.tasks;
 
 public class Task {
-    protected String name;
-    protected boolean isDone;
-
+    public String name;
+    public boolean isDone;
     /** Construct a new Task
      * @param name Take in the name of the task.
      */

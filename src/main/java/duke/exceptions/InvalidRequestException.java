@@ -1,5 +1,4 @@
-package duke.task;
-
+package duke.exceptions;
 /**
  * An exception which indicates that the command is invalid.
  */

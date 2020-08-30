@@ -1,4 +1,4 @@
-package duke.task;
+package duke.tasks;
 
 /**
  * Event is a type of Task
