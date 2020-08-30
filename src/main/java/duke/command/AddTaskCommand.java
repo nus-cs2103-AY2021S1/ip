@@ -54,14 +54,14 @@ public class AddTaskCommand extends Command {
         switch(this.type){
         case TODO:
             Task newTodo = list.addTask(this.taskName);
-            Ui.addTaskMessage(newTodo, list.taskListSize());
             storage.appendTaskStorage(newTodo.toSaveString());
+            Ui.addTaskMessage(newTodo, list.taskListSize());
             break;
         case EVENT:
         case DEADLINE:
             Task newTask = list.addTask(this.type, this.taskName, this.taskDate);
-            Ui.addTaskMessage(newTask, list.taskListSize());
             storage.appendTaskStorage(newTask.toSaveString());
+            Ui.addTaskMessage(newTask, list.taskListSize());
             break;
         }
     }
