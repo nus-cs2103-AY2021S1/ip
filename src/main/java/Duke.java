@@ -4,10 +4,15 @@ import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
+
 /**
  * Represent the main class to run the Duke program.
  */
-public class Duke {
+public class Duke extends Application {
     private Ui ui;
     private Storage storage;
     private Parser parser;
@@ -16,6 +21,13 @@ public class Duke {
     public Duke(String filePath) {
         this.ui = new Ui();
         this.storage = new Storage(filePath);
+        this.parser = new Parser();
+        this.tasks = new TaskList(storage.load());
+    }
+    
+    public Duke() {
+        this.ui = new Ui();
+        this.storage = new Storage("data/storage/duke.txt");
         this.parser = new Parser();
         this.tasks = new TaskList(storage.load());
     }
@@ -48,5 +60,14 @@ public class Duke {
     public static void main(String[] args) {
         Duke duke = new Duke("data/storage/duke.txt");
         duke.run();
+    }
+
+    @Override
+    public void start(Stage stage) {
+        Label helloWorld = new Label("Hello World");
+        Scene scene = new Scene(helloWorld);
+        
+        stage.setScene(scene);
+        stage.show();
     }
 }
