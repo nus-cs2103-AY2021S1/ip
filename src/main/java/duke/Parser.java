@@ -17,6 +17,7 @@ public class Parser {
 
     /**
      * Returns the command based on user's input.
+     *
      * @param command User's input.
      * @return Corresponding command.
      * @throws DukeException If user's input is not compatible to any command.
@@ -77,6 +78,7 @@ public class Parser {
 
     /**
      * Returns the task details by removing the command.
+     *
      * @param command User's input.
      * @return task details containing the description, date, and time.
      * @throws DukeException if the command consists of only one word.

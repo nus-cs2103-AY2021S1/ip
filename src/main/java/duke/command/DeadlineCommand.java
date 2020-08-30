@@ -20,21 +20,23 @@ public class DeadlineCommand extends Command {
 
     /**
      * Executes any command corresponding to Deadline keyword.
+     *
      * @param taskList List of tasks.
      * @param ui       UI of the bot.
      * @param storage  Storage managing the file in hard disk.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
         try {
-            processDeadline(this.task, taskList, ui, storage);
+            return processDeadline(this.task, taskList, ui, storage);
         } catch (DeadlineException dead) {
-            System.out.println(dead.getMessage());
+            return dead.getMessage();
         }
     }
 
     /**
      * Processes all the deadline command to determine the correct output.
+     *
      * @param theRest  Parsed string containing task details.
      * @param taskList List containing all the task(s).
      * @param ui       UI of the bot
@@ -42,7 +44,7 @@ public class DeadlineCommand extends Command {
      * @throws DeadlineException If user's input is incomplete or in the wrong format.
      */
 
-    public void processDeadline(
+    public String processDeadline(
         String theRest, TaskList taskList, Ui ui, Storage storage) throws DeadlineException {
         try {
             String[] taskAndDeadlineAndTime = theRest.split(" /by ", 2);
@@ -65,8 +67,8 @@ public class DeadlineCommand extends Command {
                         LocalTime localTime = LocalTime.parse(time);
                         deadline = new Deadline(task, false, localDate, localTime);
                     }
-                    taskList.saveToList(deadline);
                     Storage.updateData(taskList.getTasks());
+                    return taskList.saveToList(deadline);
 
                 } catch (DateTimeParseException e) {
                     throw new CalendarException("Please enter the date in YYYY/MM/DD format and time in HH:MM format.");
@@ -84,6 +86,7 @@ public class DeadlineCommand extends Command {
     /**
      * Evaluates whether this and other object if this and
      * other object is the same or of the same type and task details.
+     *
      * @param other Other object to compare.
      * @return True if this object
      */

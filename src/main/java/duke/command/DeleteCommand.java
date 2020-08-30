@@ -14,21 +14,24 @@ public class DeleteCommand extends Command {
 
     /**
      * Processes all the delete command to determine the correct output.
+     *
      * @param taskList List of tasks.
      * @param ui       UI of the bot.
      * @param storage  Storage managing the file in hard disk.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
         try {
-            processDelete(this.task, taskList, ui, storage);
+            return processDelete(this.task, taskList, ui, storage);
         } catch (DeleteException d) {
-            System.out.println(d.getMessage());
+            return d.getMessage();
         }
+
     }
 
     /**
      * Processes all the deadline command to determine the correct output.
+     *
      * @param theRest  Parsed string containing task details.
      * @param taskList List containing all the task(s).
      * @param ui       UI of the bot
@@ -36,14 +39,13 @@ public class DeleteCommand extends Command {
      * @throws DeleteException If user's input is incomplete or in the wrong format.
      */
 
-    public void processDelete(
+    public String processDelete(
         String theRest, TaskList taskList, Ui ui, Storage storage) throws DeleteException {
         try {
             Integer taskNum = Integer.parseInt(theRest);
             int index = taskNum - 1;
-            taskList.deleteTask(index);
             Storage.updateData(taskList.getTasks());
-
+            return taskList.deleteTask(index);
         } catch (DukeException d) {
             throw new DeleteException("Please enter a number. I cannot delete nothing :(");
         }
@@ -52,6 +54,7 @@ public class DeleteCommand extends Command {
     /**
      * Evaluates whether this and other object if this and
      * other object is the same or of the same type and task details.
+     *
      * @param other Other object to compare.
      * @return True if this object
      */
