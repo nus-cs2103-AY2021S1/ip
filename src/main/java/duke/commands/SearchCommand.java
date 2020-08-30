@@ -1,11 +1,12 @@
 package duke.commands;
 
-import duke.tasks.Task;
+import java.util.ArrayList;
+
 import duke.storage.Storage;
+import duke.tasks.Task;
 import duke.tasks.TaskList;
 import duke.ui.UI;
 
-import java.util.ArrayList;
 
 /**
  * Represents a seach command when the user wants to

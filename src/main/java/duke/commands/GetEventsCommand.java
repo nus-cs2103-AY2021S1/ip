@@ -2,11 +2,10 @@ package duke.commands;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
-
 import java.util.ArrayList;
 
-import duke.tasks.Task;
 import duke.storage.Storage;
+import duke.tasks.Task;
 import duke.tasks.TaskList;
 import duke.ui.UI;
 

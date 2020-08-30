@@ -2,9 +2,7 @@ package duke.tasks;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-
 import java.time.LocalDate;
-
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -52,6 +50,8 @@ public class TaskList {
                         newTask = new Event(line[2].strip(), line[3].strip());
                     }
                     break;
+                default:
+                    continue;
                 }
                 if (line[1].strip().equals("1")) {
                     newTask.setDone();

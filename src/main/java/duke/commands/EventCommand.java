@@ -2,8 +2,8 @@ package duke.commands;
 
 import java.time.LocalDate;
 
-import duke.tasks.Event;
 import duke.storage.Storage;
+import duke.tasks.Event;
 import duke.tasks.TaskList;
 import duke.ui.UI;
 
