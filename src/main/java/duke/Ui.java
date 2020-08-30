@@ -1,4 +1,4 @@
-package main.java.duke;
+package duke;
 
 /**
  * UI class displays information to answer clients' queries.
