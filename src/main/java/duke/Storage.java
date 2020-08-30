@@ -17,7 +17,7 @@ import java.util.Scanner;
  * <code>duke.Storage</code> handles all file read and writes.
  */
 public class Storage {
-    final static String TASKS_TEXT_FILE_PATH = "../tasks.txt";
+    final static String TASKS_TEXT_FILE_PATH = "../../tasks.txt";
 
     /**
      * Loads the information from the file "duke.tasks.txt" into a
