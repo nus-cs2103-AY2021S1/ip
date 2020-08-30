@@ -2,6 +2,7 @@ package ultron;
 
 import java.util.ArrayList;
 
+import javafx.application.Platform;
 import ultron.commands.Command;
 import ultron.exceptions.UltronException;
 
@@ -79,11 +80,23 @@ public final class Ultron {
 
     public String getResponse(String input) {
         try {
+            //Check if it is the command to show the intro message
             if (input == "showIntro") {
                 return ui.getMessage();
             }
+
+            //Get the command to execute
             Command c = Parser.parseCommand(input);
+
+            //Execute the command
             c.execute(taskList, ui, storage);
+
+            //Check if it is a quitting command
+            if (c.isExit()) {
+                //Close the application
+                Platform.exit();
+            }
+            //Return the message stored in the UI
             return ui.getMessage();
         } catch (UltronException e) {
             return e.getMessage();
