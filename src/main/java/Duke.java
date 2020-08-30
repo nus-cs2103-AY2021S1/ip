@@ -3,18 +3,19 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import javafx.application.Application;
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.scene.text.Font;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
-import javafx.scene.layout.Region;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.shape.Circle;
 
 /**
  * The main class that directs the required actions to the respective classes.
@@ -48,7 +49,6 @@ public class Duke extends Application {
     private Scene scene;
     private Image user = new Image(this.getClass().getResourceAsStream("/images/nobita.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/doraemon.png"));
-
     /**
      * Iteration 2:
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
@@ -61,6 +61,9 @@ public class Duke extends Application {
                 DialogBox.getUserDialog(userText, new ImageView(user)),
                 DialogBox.getDukeDialog(dukeText, new ImageView(duke))
         );
+        dialogContainer.setSpacing(10);
+        //dialogContainer.setBackground(new Background(new BackgroundFill(Color.rgb(255,250,205),
+        //        CornerRadii.EMPTY, Insets.EMPTY)));
         userInput.clear();
     }
 
@@ -130,7 +133,7 @@ public class Duke extends Application {
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
         scrollPane.setContent(dialogContainer);
-
+        dialogContainer.setPadding(new Insets(10,10,10,10));
         userInput = new TextField();
         sendButton = new Button("Send");
 
