@@ -89,22 +89,16 @@ public class Ui {
     /**
      * Prints out answers according to commands with front reminder, and tail reminder.
      *
-     * @param frontGuidance a string representing reminders at the front.
-     * @param answer a string representing the answer to the user command.
-     * @param tailGuidance a string representing reminders at the tail.
+     * @param answers a vararg string parameter representing strings to be printed.
      * @return a string representing answers according to commands with front reminder, and tail reminder.
      */
-    public static String printAnswer(String frontGuidance, String answer, String tailGuidance) {
+    public static String printAnswer(String... answers) {
         String result;
 
 
         result = "\n";
-        if (frontGuidance.length() != 0) {
-            result += frontGuidance + "\n";
-        }
-        result += answer + "\n";
-        if (tailGuidance.length() != 0) {
-            result += tailGuidance + "\n";
+        for (int i = 0; i < answers.length; i++) {
+            result += answers[i] + "\n";
         }
         result += "\n" + "\n";
 

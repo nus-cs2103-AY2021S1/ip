@@ -1,5 +1,7 @@
-package duke;
+package duke.ui;
 
+import duke.Duke;
+import duke.ui.DialogBox;
 import duke.ui.Ui;
 import javafx.animation.PauseTransition;
 import javafx.application.Platform;
@@ -14,7 +16,7 @@ import javafx.util.Duration;
 
 
 /**
- * Controller for duke.MainWindow. Provides the layout for the other controls.
+ * Controller for duke.ui.MainWindow. Provides the layout for the other controls.
  */
 public class MainWindow extends AnchorPane {
     @FXML
