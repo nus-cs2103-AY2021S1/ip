@@ -1,4 +1,4 @@
-package exceptions;
+package duke.exceptions;
 
 /**
  * If a command entered does not have a valid description,

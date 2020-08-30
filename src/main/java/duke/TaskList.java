@@ -1,8 +1,10 @@
+package duke;
+
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * TaskList is responsible to store the array of lists temporarily,
+ * duke.TaskList is responsible to store the array of lists temporarily,
  * and able to add new task into the list.
  */
 public class TaskList {

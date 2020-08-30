@@ -1,5 +1,7 @@
+package duke;
+
 /**
- * Task contains the description of command by user and
+ * duke.Task contains the description of command by user and
  * the state of task, whether it is done or not done.
  */
 public class Task {

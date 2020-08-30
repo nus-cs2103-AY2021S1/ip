@@ -1,6 +1,10 @@
-import exceptions.DukeEmptyMessageException;
-import exceptions.DukeInvalidMessageException;
-import exceptions.DukeMissingTimeException;
+package duke;
+
+import duke.exceptions.DukeEmptyMessageException;
+import duke.exceptions.DukeInvalidMessageException;
+import duke.exceptions.DukeMissingTimeException;
+
+import javax.print.DocFlavor;
 
 public class Command {
 
@@ -8,10 +12,10 @@ public class Command {
     private Ui ui;
 
     /**
-     * Constructor for Command.
+     * Constructor for duke.Command.
      *
      * @param taskList taskList
-     * @param ui Ui
+     * @param ui duke.Ui
      */
     public Command(TaskList taskList, Ui ui) {
         this.taskList = taskList;
@@ -25,7 +29,7 @@ public class Command {
      * @throws DukeEmptyMessageException thrown when description is empty.
      * @throws DukeInvalidMessageException thrown when description is not a valid number.
      */
-    public void handleDone(String toEcho) throws DukeEmptyMessageException, DukeInvalidMessageException {
+    public String handleDone(String toEcho) throws DukeEmptyMessageException, DukeInvalidMessageException {
         String[] command = Parser.splitCommandAndDescription(toEcho);
         if (toEcho.length() == 4) {
             throw new DukeEmptyMessageException("Done");
@@ -34,7 +38,7 @@ public class Command {
         } else {
             int index = Integer.parseInt(command[1]) - 1;
             taskList.markDone(index);
-            ui.printDone(index);
+            return ui.printDone(index);
         }
     }
 
@@ -43,14 +47,14 @@ public class Command {
      *
      * @param description description of todo.
      */
-    public void handleTodo(String description) throws DukeEmptyMessageException {
+    public String handleTodo(String description) throws DukeEmptyMessageException {
         String[] command = Parser.splitCommandAndDescription(description);
         if (description.length() == 4) {
             throw new DukeEmptyMessageException("Todo");
         }
         Todo todo = new Todo(command[1]);
         TaskList.getTaskLists().add(todo);
-        ui.printTask(todo);
+        return ui.printTask(todo);
     }
 
     /**
@@ -59,7 +63,7 @@ public class Command {
      * @param toEcho full description of deadline, including the command.
      * @throws DukeMissingTimeException thrown when user does not input the timing required.
      */
-    public void handleDeadline(String toEcho) throws DukeMissingTimeException {
+    public String handleDeadline(String toEcho) throws DukeMissingTimeException {
         try {
             String[] command = Parser.splitCommandAndDescription(toEcho);
             if (toEcho.length() == 8) {
@@ -70,11 +74,11 @@ public class Command {
             String time = strArr[1];
             Deadline deadline = new Deadline(todo, time);
             taskList.add(deadline);
-            ui.printTask(deadline);
+            return ui.printTask(deadline);
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeMissingTimeException();
         } catch (DukeEmptyMessageException e) {
-            System.out.println(e.getMessage());
+            return e.getMessage();
         }
     }
 
@@ -84,7 +88,7 @@ public class Command {
      * @param toEcho full description of event, including command.
      * @throws DukeMissingTimeException thrown when user does not input the timing required.
      */
-    public void handleEvent(String toEcho) throws DukeMissingTimeException {
+    public String handleEvent(String toEcho) throws DukeMissingTimeException {
         try {
             String[] command = Parser.splitCommandAndDescription(toEcho);
             if (toEcho.length() == 5) {
@@ -95,11 +99,11 @@ public class Command {
             String time = strArr[1];
             Event event = new Event(todo, time);
             taskList.add(event);
-            ui.printTask(event);
+            return ui.printTask(event);
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeMissingTimeException();
         } catch (DukeEmptyMessageException e) {
-            System.out.println(e.getMessage());
+            return e.getMessage();
         }
     }
 
@@ -110,7 +114,7 @@ public class Command {
      * @throws DukeEmptyMessageException thrown when description is empty.
      * @throws DukeInvalidMessageException thrown when description is not a valid number.
      */
-    public void handleDelete(String toEcho) throws DukeEmptyMessageException, DukeInvalidMessageException {
+    public String handleDelete(String toEcho) throws DukeEmptyMessageException, DukeInvalidMessageException {
         String[] command = Parser.splitCommandAndDescription(toEcho);
         if (toEcho.length() == 6) {
             throw new DukeEmptyMessageException("Delete");
@@ -119,7 +123,7 @@ public class Command {
             throw new DukeInvalidMessageException();
         }
         int indexToDelete = Integer.parseInt(command[1]) - 1;
-        ui.printDelete(indexToDelete);
+        return ui.printDelete(indexToDelete);
     }
 
     /**
@@ -129,11 +133,11 @@ public class Command {
      * @param toEcho command and description.
      * @throws DukeEmptyMessageException thrown when keyword is empty
      */
-    public void handleFind(String toEcho) throws DukeEmptyMessageException {
+    public String handleFind(String toEcho) throws DukeEmptyMessageException {
         String[] command = Parser.splitCommandAndDescription(toEcho);
         if (toEcho.length() == 4) {
             throw new DukeEmptyMessageException("Find");
         }
-        ui.printFind(command[1]);
+        return ui.printFind(command[1]);
     }
 }

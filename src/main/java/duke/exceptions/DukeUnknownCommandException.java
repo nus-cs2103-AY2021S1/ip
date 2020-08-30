@@ -1,4 +1,4 @@
-package exceptions;
+package duke.exceptions;
 
 /**
  * If command is unknown, <tt>DukeUnknownCommandException</tt>

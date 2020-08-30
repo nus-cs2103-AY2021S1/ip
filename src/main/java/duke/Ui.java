@@ -1,7 +1,9 @@
+package duke;
+
 import java.util.Scanner;
 
 /**
- * Ui class is responsible for printing the necessary messages
+ * duke.Ui class is responsible for printing the necessary messages
  * such that the user would be able to view them on
  * the interface.
  */
@@ -18,7 +20,7 @@ public class Ui {
     private Scanner sc;
 
     /**
-     * Constructor of Ui.
+     * Constructor of duke.Ui.
      */
     Ui() {
         this.sc = new Scanner(System.in);
@@ -36,45 +38,47 @@ public class Ui {
     /**
      * Returns greeting message.
      */
-    public void greeting() {
-        System.out.println(GREETING);
+    public String greeting() {
+        return GREETING;
     }
 
     /**
      * Shows all the list.
      */
-    public void showList() {
-        System.out.println(SHOW_TASK);
+    public String showList() {
+        String list = "";
         for (int i = 0; i < TaskList.getTaskLists().size(); i++) {
             int number = i + 1;
-            System.out.println(number + "." + TaskList.getTaskLists().get(i));
+            list = list + number + "." + TaskList.getTaskLists().get(i) + "\n";
         }
-        System.out.println(HORIZONTAL_LINE);
+        return SHOW_TASK + "\n" + list + HORIZONTAL_LINE;
     }
 
     /**
      * Returns bye message.
      */
-    public void bye() {
-        System.out.println(BYE + "\n" + HORIZONTAL_LINE);
+    public String bye() {
+        return BYE + "\n" + HORIZONTAL_LINE;
     }
 
     /**
      * Searches and returns the keywords found in the list.
      * @param description keyword.
      */
-    public void printFind(String description) {
+    public String printFind(String description) {
+        String output = "";
         TaskList.searchKeyword(description);
         if (TaskList.getTempLists().size() == 0) {
-            System.out.println(FIND_NOTHING);
+            output = FIND_NOTHING;
         } else {
-            System.out.println(FIND_OPENING);
+            output = FIND_OPENING;
             for (int i = 0; i < TaskList.getTempLists().size(); i++) {
                 int number = i + 1;
-                System.out.println(number + "." + TaskList.getTempLists().get(i));
+                output += number + "." + TaskList.getTempLists().get(i) + "\n";
             }
         }
-        System.out.println(HORIZONTAL_LINE);
+        output += HORIZONTAL_LINE;
+        return output;
     }
 
     /**
@@ -82,11 +86,13 @@ public class Ui {
      *
      * @param task task to be added.
      */
-    public void printTask(Task task) {
-        System.out.println("Got it. I've added this task:");
-        System.out.println(TAB + task);
-        System.out.println("Now you have " + TaskList.getTaskLists().size() + " tasks in the list.");
-        System.out.println(HORIZONTAL_LINE);
+    public String printTask(Task task) {
+        String output = "";
+        output = "Got it. I've added this task:" + "\n";
+        output += TAB + task + "\n";
+        output += "Now you have " + TaskList.getTaskLists().size() + " tasks in the list." + "\n";
+        output += HORIZONTAL_LINE;
+        return output;
     }
 
     /**
@@ -94,10 +100,9 @@ public class Ui {
      *
      * @param index number of list item to be marked done.
      */
-    public void printDone(int index) {
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.println(TAB + TaskList.getTaskLists().get(index));
-        System.out.println(HORIZONTAL_LINE);
+    public String printDone(int index) {
+        return "Nice! I've marked this task as done:" + "\n" + TAB + TaskList.getTaskLists().get(index) + "\n"
+                + HORIZONTAL_LINE;
     }
 
     /**
@@ -105,12 +110,12 @@ public class Ui {
      *
      * @param indexToDelete number of list item to be deleted.
      */
-    public void printDelete(int indexToDelete) {
-        System.out.println("Noted. I've removed this task:");
-        System.out.println(TAB + TaskList.getTaskLists().get(indexToDelete));
-        TaskList.getTaskLists().remove(indexToDelete);
-        System.out.println("Now you have " + TaskList.getTaskLists().size() + " tasks in the list.");
-        System.out.println(HORIZONTAL_LINE);
+    public String printDelete(int indexToDelete) {
+        return "Noted. I've removed this task:" + "\n"
+                + TAB + TaskList.getTaskLists().get(indexToDelete) + "\n"
+                + TaskList.getTaskLists().remove(indexToDelete) + "\n"
+                + "Now you have " + TaskList.getTaskLists().size() + " tasks in the list." + "\n"
+                + HORIZONTAL_LINE;
     }
 
     /**
@@ -130,4 +135,5 @@ public class Ui {
     public void printDateTimeParseError(String e) {
         System.out.println(TAB + "Please enter date in 'yyyy-MM-dd' format");
     }
+
 }

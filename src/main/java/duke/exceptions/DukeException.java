@@ -1,4 +1,4 @@
-package exceptions;
+package duke.exceptions;
 
 /**
  * If there is any error related to duke chatbot,

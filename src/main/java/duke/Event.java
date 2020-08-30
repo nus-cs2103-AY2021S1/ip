@@ -1,19 +1,21 @@
+package duke;
+
 import java.time.LocalDate;
 
 /**
- * Deadline is a type of task with a deadline timing.
+ * duke.Event is a type of task with a day time.
  */
-public class Deadline extends Task {
+public class Event extends Task {
 
     protected LocalDate time;
 
     /**
-     * Constructor of deadline.
+     * Constructor of event.
      *
-     * @param description description of deadline.
-     * @param time deadline time.
+     * @param description description of event.
+     * @param time day of the event time.
      */
-    public Deadline(String description, String time) {
+    public Event(String description, String time) {
         super(description);
         this.time = Parser.stringToDate(time);
     }
@@ -26,11 +28,11 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         String timeStr = Parser.dateToString(this.time);
-        return String.format("[D]%s(by: %s)", super.toString(), timeStr);
+        return String.format("[E]%s(at: %s)", super.toString(), timeStr);
     }
 
     @Override
     public String toSaveString() {
-        return String.format("%s || deadline || %s || %s", super.toSaveString(), this.description, this.time);
+        return String.format("%s || event || %s || %s", super.toSaveString(), this.description, this.time);
     }
 }
