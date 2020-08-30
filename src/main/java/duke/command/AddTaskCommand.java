@@ -23,8 +23,7 @@ public abstract class AddTaskCommand extends Command {
     public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         addTask(taskList, input);
         storage.saveTasks(taskList.getTasks());
-//        taskList.printNewTask();
-        return taskList.newTaskStatement();
+        return taskList.printNewTask();
     }
 
     /**

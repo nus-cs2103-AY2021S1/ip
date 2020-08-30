@@ -79,15 +79,13 @@ public class TaskList {
     private String printList() {
 
         if (tasks.size() == 0) {
-//            System.out.println("You have nothing on your list!");
             return "You have nothing on your list!";
         }
 
-        StringBuilder str =  new StringBuilder();
+        StringBuilder str = new StringBuilder();
 
         int i = 1;
         for (Task todo : tasks) {
-//            System.out.println(i + ". " + todo);
             str.append(String.format("%d. %s\n", i, todo));
             i++;
         }
@@ -107,16 +105,14 @@ public class TaskList {
 
         int i = 0;
         for (Task task : tasks) {
+
             if (task.getDate().equals(date)) {
                 if (i == 0) {
-//                    System.out.println("Here's your list on "
-//                        + date.format(DateTimeFormatter.ofPattern("dd MMM y:")));
                     str.append("Here's your list on ");
                     str.append(date.format(DateTimeFormatter.ofPattern("dd MMM y")));
                     str.append(":\n");
                 }
 
-//                System.out.println((i + 1) + ". " + task);
                 str.append(String.format("%d. %s\n", (i + 1), task));
 
                 i++;
@@ -124,9 +120,6 @@ public class TaskList {
         }
 
         if (i == 0 || tasks.size() == 0) {
-//            System.out.println("You have nothing to do on "
-//                + date.format(DateTimeFormatter.ofPattern("dd MMM y.")));
-
             return "You have nothing to do on "
                 + date.format(DateTimeFormatter.ofPattern("dd MMM y."));
         }
@@ -231,10 +224,6 @@ public class TaskList {
     public String markDone(int taskIndex) throws InvalidIndexException {
         try {
             tasks.set(taskIndex, tasks.get(taskIndex).markDone());
-
-//            System.out.println("Nice! I've marked this task as done:");
-//            System.out.println(tasks.get(taskIndex));
-
             return String.format("Nice! I've marked this task as done:\n %s", tasks.get(taskIndex));
 
         } catch (IndexOutOfBoundsException e) {
@@ -251,10 +240,6 @@ public class TaskList {
     public String deleteTask(int taskIndex) throws InvalidIndexException {
         try {
             Task deleted = tasks.remove(taskIndex);
-
-//            System.out.println("Noted. I've removed this task:");
-//            System.out.println(deleted);
-
             return String.format("Noted. I've removed this task:\n %s", deleted);
 
         } catch (IndexOutOfBoundsException e) {
@@ -277,12 +262,8 @@ public class TaskList {
         for (Task task : tasks) {
             if (task.getTask().contains(keyword)) {
                 if (i == 0) {
-//                    System.out.println("Here are the matching tasks on your list.");
                     str.append("Here are the matching tasks on your list.\n");
                 }
-
-//                System.out.print((i + 1) + ". ");
-//                System.out.println(task);
 
                 str.append(String.format("%d. ", (i + 1)));
                 str.append(String.format("%s\n", task));
@@ -298,21 +279,8 @@ public class TaskList {
         return str.toString();
     }
 
-    /** Prints the size of the taskList. */
-    public void printListSize() {
-        String taskText = tasks.size() == 1 ? " task " : " tasks ";
-        System.out.println("You have " + tasks.size() + taskText + "on your list.");
-    }
-
     /** Prints the recently added task. */
-    public void printNewTask() {
-        System.out.println("Got it. I've added this task:");
-        System.out.println(tasks.get(tasks.size() - 1).toString());
-
-        printListSize();
-    }
-
-    public String newTaskStatement() {
+    public String printNewTask() {
         return String.format("Got it. I've added this task:\n %s\n"
             + "You have %d %s on your list.",
             tasks.get(tasks.size() - 1), tasks.size(), tasks.size() == 1 ? "task" : "tasks");
