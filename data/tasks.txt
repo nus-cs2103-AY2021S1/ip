@@ -1,3 +1,5 @@
 T | 0 | get my life in check
-E | 0 | attend azula's coronation | 1123-11-13 1000
-D | 0 | CS2103T post-lecture quiz | 2020-09-03 1159
+E | 0 | attend azula's coronation | 0027-11-16 1000
+D | 0 | CS2103T post-lecture quiz | 0012-03-09 1159
+D | 0 | help me | 0026-03-13 0600
+E | 0 | celebration | 2020-10-20 0700

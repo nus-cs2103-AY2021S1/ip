@@ -16,8 +16,8 @@ public class DateFormatter {
     // @@author aizatazhar-reused
     // Reused from https://stackoverflow.com/a/16990333/12003017 with minor modifications
     private static List<String> dateFormats = Arrays.asList(
-            "yyyy-MM-dd hhmm",
-            "yyyy-MM-dd"
+            "dd-MM-yyyy hhmm",
+            "dd-MM-yyyy"
     );
 
     /**
@@ -38,7 +38,7 @@ public class DateFormatter {
         }
 
         throw new DukeException("Invalid input for date. Given '" + strDate + "', "
-                + "expecting format yyyy-MM-dd hhmm or yyyy-MM-dd.");
+                + "expecting format dd-MM-yyyy hhmm");
     }
     // @@author
 
