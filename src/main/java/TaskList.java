@@ -22,4 +22,16 @@ public class TaskList {
     public void deleteTask(int number) {
         tasks.remove(number);
     }
+
+    public TaskList findTasks(String word) {
+        TaskList matchingTasks = new TaskList();
+
+        for(Task task: tasks) {
+            if(task.getDescription().contains(word)) {
+                matchingTasks.addTask(task);
+            }
+        }
+
+        return matchingTasks;
+    }
 }

@@ -40,6 +40,15 @@ public class Ui {
         System.out.println(LINE + "\n");
     }
 
+    public void find(TaskList taskList) {
+        System.out.println(LINE);
+        System.out.println("Here are the matching tasks in your list:");
+        for (int i = 0; i < taskList.count(); i++) {
+            System.out.println(String.format("  %d. ", i + 1) + taskList.get(i).toString());
+        }
+        System.out.println(LINE + "\n");
+    }
+
     public void printException(DukeException e) {
         printPart(e.getMessage());
     }
