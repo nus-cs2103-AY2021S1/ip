@@ -1,7 +1,6 @@
 package bob.data.task;
 
 import bob.data.dateandtime.DateAndTime;
-
 import bob.exceptions.BobInvalidDateAndTimeException;
 
 /**
@@ -18,7 +17,7 @@ public class Event extends Task {
      * @param time Time of event.
      * @throws BobInvalidDateAndTimeException If date and time parsed is not valid.
      */
-    public Event(String description, String date, String time) throws BobInvalidDateAndTimeException{
+    public Event(String description, String date, String time) throws BobInvalidDateAndTimeException {
         super(description);
         this.dateAndTime = new DateAndTime(date, time);
     }

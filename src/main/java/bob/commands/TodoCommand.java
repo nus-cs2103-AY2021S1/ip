@@ -1,14 +1,12 @@
 package bob.commands;
 
+import java.io.IOException;
+
 import bob.data.task.Task;
 import bob.data.task.Tasklist;
-
 import bob.exceptions.BobEmptyTaskException;
-
 import bob.storage.Storage;
 import bob.ui.Ui;
-
-import java.io.IOException;
 
 /**
  * Adds a task to Bob's tasklist.

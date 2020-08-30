@@ -1,16 +1,25 @@
 package bob.parser;
 
-import org.junit.jupiter.api.BeforeEach;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import bob.commands.*;
-
+import bob.commands.Command;
+import bob.commands.DeadlineCommand;
+import bob.commands.DeleteCommand;
+import bob.commands.DoneCommand;
+import bob.commands.EventCommand;
+import bob.commands.ExitCommand;
+import bob.commands.FindCommand;
+import bob.commands.ListCommand;
+import bob.commands.TodoCommand;
 import bob.exceptions.BobEmptyFindException;
 import bob.exceptions.BobEmptyTaskException;
 import bob.exceptions.BobInvalidCommandException;
 
-import static org.junit.jupiter.api.Assertions.*;
+
 
 public class ParserTest {
     private Parser parser;
@@ -83,31 +92,31 @@ public class ParserTest {
     @Test
     public void parse_command_parsedIncorrectly() {
         String input = "bad command";
-        assertThrows(BobInvalidCommandException.class,() -> parser.parse(input));
+        assertThrows(BobInvalidCommandException.class, () -> parser.parse(input));
     }
 
     @Test
     public void parse_todoCommand_parsedNoTaskDescription() {
         String input = "todo";
-        assertThrows(BobEmptyTaskException.class,() -> parser.parse(input));
+        assertThrows(BobEmptyTaskException.class, () -> parser.parse(input));
     }
 
     @Test
     public void parse_eventCommand_parsedNoTaskDescription() {
         String input = "event";
-        assertThrows(BobEmptyTaskException.class,() -> parser.parse(input));
+        assertThrows(BobEmptyTaskException.class, () -> parser.parse(input));
     }
 
     @Test
     public void parse_deadlineCommand_parsedNoTaskDescription() {
         String input = "deadline";
-        assertThrows(BobEmptyTaskException.class,() -> parser.parse(input));
+        assertThrows(BobEmptyTaskException.class, () -> parser.parse(input));
     }
 
     @Test
     public void parse_findCommand_parsedNoFindDescription() {
         String input = "find   ";
-        assertThrows(BobEmptyFindException.class,() -> parser.parse(input));
+        assertThrows(BobEmptyFindException.class, () -> parser.parse(input));
     }
 
     private <T extends Command> void parseAndAssertCommandType(String input, Class<T> expectedCommandClass)

@@ -1,7 +1,5 @@
 package bob.data.dateandtime;
 
-import bob.exceptions.BobInvalidDateAndTimeException;
-
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -9,6 +7,7 @@ import java.time.format.DateTimeParseException;
 import java.time.format.FormatStyle;
 import java.util.Locale;
 
+import bob.exceptions.BobInvalidDateAndTimeException;
 
 /**
  * Represents a date and time for events/deadlines.
@@ -24,7 +23,7 @@ public class DateAndTime {
      * @param time String representing time.
      * @throws BobInvalidDateAndTimeException If date and time parsed is not valid.
      */
-    public DateAndTime(String date, String time) throws BobInvalidDateAndTimeException{
+    public DateAndTime(String date, String time) throws BobInvalidDateAndTimeException {
         try {
             this.date = LocalDate.parse(date);
             this.time = LocalTime.parse(time);

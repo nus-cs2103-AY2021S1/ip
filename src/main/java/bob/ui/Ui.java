@@ -1,14 +1,13 @@
 package bob.ui;
 
-import bob.common.Messages;
-import bob.data.task.Task;
-import bob.data.task.Tasklist;
-import bob.exceptions.BobException;
-
 import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.Scanner;
 
+import bob.common.Messages;
+import bob.data.task.Task;
+import bob.data.task.Tasklist;
+import bob.exceptions.BobException;
 
 /**
  * Represents the UI that interacts with the user.
@@ -30,6 +29,11 @@ public class Ui {
         this(System.in, System.out);
     }
 
+    /**
+     * Creates a Ui.
+     * @param in InputStream.
+     * @param out PrintStream.
+     */
     public Ui (InputStream in, PrintStream out) {
         this.in = new Scanner(in);
         this.out = out;
@@ -120,7 +124,7 @@ public class Ui {
 
     /**
      * Shows delete message to user.
-     * 
+     *
      * @param task
      */
     public void showDeleteMessage(Task task) {
@@ -143,11 +147,11 @@ public class Ui {
     }
 
     public void showTasksFoundMessage(String input, String tasksFound) {
-        showToUser(Messages.findMessage(input), tasksFound);
+        showToUser(Messages.genFindMessage(input), tasksFound);
     }
 
     public void showNoTaskFoundMessage(String input) {
-        showToUser(Messages.noTaskFoundMessage(input));
+        showToUser(Messages.genNoTaskFoundMessage(input));
     }
 
 

@@ -1,7 +1,6 @@
 package bob.commands;
 
 import bob.data.task.Tasklist;
-
 import bob.storage.Storage;
 import bob.ui.Ui;
 

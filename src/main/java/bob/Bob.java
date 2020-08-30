@@ -1,14 +1,15 @@
 package bob;
 
+import java.io.IOException;
+
 import bob.commands.Command;
 import bob.common.Messages;
 import bob.data.task.Tasklist;
+import bob.exceptions.BobException;
 import bob.parser.Parser;
 import bob.storage.Storage;
 import bob.ui.Ui;
-import bob.exceptions.BobException;
 
-import java.io.IOException;
 
 /**
  * Represents the task-managing ChatBot.
@@ -66,17 +67,17 @@ public class Bob {
      * @param args Command line arguments.
      */
     public static void main(String[] args) {
-         //File path of saved task list
-         String filePath = System.getProperty("user.dir").endsWith("text-ui-test")
-                 ? "test.txt"
-                 : System.getProperty("user.dir").endsWith("ip")
-                 ? "data/bob.txt"
-                 // Creates a save file on the user's home directory if user is not in ip directory
-                 : System.getProperty("user.home") + "/bob.txt";
-         try {
-             new Bob(filePath).run();
-         } catch (IOException e) {
-             System.out.println(Messages.INVALID_PATHNAME);
-         }
+        //File path of saved task list
+        String filePath = System.getProperty("user.dir").endsWith("text-ui-test")
+                ? "test.txt"
+                : System.getProperty("user.dir").endsWith("ip")
+                ? "data/bob.txt"
+                // Creates a save file on the user's home directory if user is not in ip directory
+                : System.getProperty("user.home") + "/bob.txt";
+        try {
+            new Bob(filePath).run();
+        } catch (IOException e) {
+            System.out.println(Messages.INVALID_PATHNAME);
+        }
     }
 }

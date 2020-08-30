@@ -1,15 +1,13 @@
 package bob.commands;
 
+import java.io.IOException;
+
 import bob.data.task.Deadline;
 import bob.data.task.Tasklist;
-
 import bob.exceptions.BobEmptyTaskException;
 import bob.exceptions.BobInvalidDateAndTimeException;
-
 import bob.storage.Storage;
 import bob.ui.Ui;
-
-import java.io.IOException;
 
 /**
  * Adds a deadline to the Bob's tasklist.
@@ -25,7 +23,7 @@ public class DeadlineCommand extends Command {
      */
     public DeadlineCommand(String input) throws BobEmptyTaskException {
         //Removes all whitespaces and checks if input is empty
-        if (input.replaceAll("\\s+","").length() == 0) {
+        if (input.replaceAll("\\s+", "").length() == 0) {
             throw new BobEmptyTaskException();
         }
 

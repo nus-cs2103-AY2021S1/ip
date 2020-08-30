@@ -1,15 +1,13 @@
 package bob.commands;
 
+import java.io.IOException;
+
 import bob.data.task.Task;
 import bob.data.task.Tasklist;
-
 import bob.exceptions.BobInvalidNumberException;
 import bob.exceptions.BobListIndexOutOfBoundsException;
-
 import bob.storage.Storage;
 import bob.ui.Ui;
-
-import java.io.IOException;
 
 /**
  * Deletes a task from Bob's tasklist

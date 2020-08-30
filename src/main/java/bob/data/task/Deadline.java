@@ -1,7 +1,6 @@
 package bob.data.task;
 
 import bob.data.dateandtime.DateAndTime;
-
 import bob.exceptions.BobInvalidDateAndTimeException;
 
 /**
@@ -19,7 +18,7 @@ public class Deadline extends Task {
      * @throws BobInvalidDateAndTimeException If date and time parsed is not valid.
      */
     public Deadline(String description, String date, String time)
-            throws BobInvalidDateAndTimeException{
+            throws BobInvalidDateAndTimeException {
         super(description);
         this.dateAndTime = new DateAndTime(date, time);
     }
@@ -53,6 +52,6 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D][" + getStatusIcon() + "] " + getDescription() + " (by: " +  this.dateAndTime + ")";
+        return "[D][" + getStatusIcon() + "] " + getDescription() + " (by: " + this.dateAndTime + ")";
     }
 }
