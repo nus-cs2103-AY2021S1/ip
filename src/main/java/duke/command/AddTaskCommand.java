@@ -1,14 +1,16 @@
 package duke.command;
 
+import java.time.LocalDate;
+
 import duke.Storage;
 import duke.Ui;
-import duke.exception.InvalidTaskException;
-import duke.exception.StorageException;
+
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.task.TaskType;
 
-import java.time.LocalDate;
+import duke.exception.InvalidTaskException;
+import duke.exception.StorageException;
 
 public class AddTaskCommand extends Command {
     private TaskType type;

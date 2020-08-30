@@ -1,10 +1,15 @@
 package duke.command;
 
-import duke.exception.*;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
+
+import duke.exception.DateParseException;
+import duke.exception.DukeException;
+import duke.exception.IncompleteTaskException;
+import duke.exception.InvalidTaskException;
+import duke.exception.UnknownCommandException;
 
 public class CommandParserTest {
     @Test

@@ -5,7 +5,6 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.TextStyle;
 import java.util.Locale;
 
-
 public class Event extends Task {
     protected LocalDate date;
 

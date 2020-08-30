@@ -1,12 +1,13 @@
 package duke;
 
-import duke.exception.StorageException;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+
 import java.util.Scanner;
 import java.util.ArrayList;
+
+import duke.exception.StorageException;
 
 public class Storage {
     private final String filePath = "data/tasks.txt";

@@ -1,13 +1,14 @@
 package duke.task;
 
-import duke.Storage;
-import duke.exception.DateParseException;
-import duke.exception.InvalidTaskException;
-import duke.exception.StorageException;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+
+import duke.Storage;
+
+import duke.exception.DateParseException;
+import duke.exception.InvalidTaskException;
+import duke.exception.StorageException;
 
 public class TaskList {
     private ArrayList<Task> taskList;

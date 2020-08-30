@@ -2,10 +2,12 @@ package duke.command;
 
 import duke.Storage;
 import duke.Ui;
-import duke.exception.InvalidTaskException;
-import duke.exception.StorageException;
+
 import duke.task.Task;
 import duke.task.TaskList;
+
+import duke.exception.InvalidTaskException;
+import duke.exception.StorageException;
 
 public class DeleteCommand extends Command {
     private int index;
