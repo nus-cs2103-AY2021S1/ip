@@ -49,8 +49,10 @@ public enum TaskCommand {
     public Task createTask(final String description) {
         return commandParser.apply(description);
     }
+
     /**
      * Get the parser to create the task.
+     *
      * @return Function command Parser
      */
     public Function<String, Task> getCommandParser() {

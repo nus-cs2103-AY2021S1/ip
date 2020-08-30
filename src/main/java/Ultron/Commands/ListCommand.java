@@ -39,20 +39,21 @@ public final class ListCommand extends Command {
         if (taskList.size() == 0) {
 
             //When there is no task
-            ui.print("You have no business with me\n");
+            ui.setMessage("You have no business with me\n");
 
         } else {
-
-            //Print the starting list
-            ui.print("Heh, you cant even remember what you had\n");
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.append("Heh, you cant even remember what you had\n");
 
             //Iterate through the task and print it
             for (int i = 0; i < taskList.size(); ++i) {
 
                 //Print out each item on the list
-                ui.print(String.format("%d.%s\n", i + 1, taskList.get(i)));
+                stringBuilder.append(String.format("%d.%s\n", i + 1, taskList.get(i)));
 
             }
+
+            ui.setMessage(stringBuilder.toString());
 
         }
 

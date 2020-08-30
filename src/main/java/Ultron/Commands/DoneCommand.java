@@ -35,12 +35,12 @@ public final class DoneCommand extends Command {
 
         if (this.getArguments().trim().length() < 1) {
             throw new UltronException("done",
-                    ExceptionType.NO_ARGUMENTS_SUPPLIED);
+                ExceptionType.NO_ARGUMENTS_SUPPLIED);
         }
 
         if (this.getArguments().trim().length() > 1) {
             throw new UltronException("done",
-                    ExceptionType.TOO_MUCH_ARGUMENTS);
+                ExceptionType.TOO_MUCH_ARGUMENTS);
         }
 
         //Mark the task as done
@@ -48,12 +48,12 @@ public final class DoneCommand extends Command {
 
             //Throw an error if the method return false
             throw new UltronException("done",
-                    Integer.toString(index),
-                    ExceptionType.INVALID_ARGUMENT);
+                Integer.toString(index),
+                ExceptionType.INVALID_ARGUMENT);
         }
 
         //Print the done message
-        ui.print(String.format("Finally! Making yourself useful\n"
-                + "  %s%n", taskList.get(index)));
+        ui.setMessage(String.format("Finally! Making yourself useful\n"
+            + "  %s%n", taskList.get(index)));
     }
 }

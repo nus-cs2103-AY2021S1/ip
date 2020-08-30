@@ -1,11 +1,15 @@
 package ultron.commands;
 
+import javafx.application.Platform;
 import ultron.Storage;
 import ultron.TaskList;
 import ultron.UI;
 import ultron.exceptions.ExceptionType;
 import ultron.exceptions.UltronException;
 
+/**
+ * Bye comamnd
+ */
 public final class ByeCommand extends Command {
     /**
      * Creates the bye command with arguments.

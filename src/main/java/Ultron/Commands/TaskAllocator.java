@@ -35,7 +35,7 @@ public final class TaskAllocator extends Command {
 
             //Throw a Duke exception
             throw new UltronException(command,
-                    ExceptionType.INVALID_COMMAND);
+                ExceptionType.INVALID_COMMAND);
         }
     }
 
@@ -62,7 +62,7 @@ public final class TaskAllocator extends Command {
 
             //Throw an exception when there is nothing supplied
             throw new UltronException(command,
-                    ExceptionType.NO_ARGUMENTS_SUPPLIED);
+                ExceptionType.NO_ARGUMENTS_SUPPLIED);
         }
 
         try {
@@ -73,15 +73,15 @@ public final class TaskAllocator extends Command {
 
             //Throw a Duke exception
             throw new UltronException(command,
-                    ExceptionType.INVALID_COMMAND);
+                ExceptionType.INVALID_COMMAND);
         }
 
         //Add the task to the task list
         taskList.add(task);
 
         //Print out the message
-        ui.print(String.format("Can't you keep track of '%s' yourself?\n"
-                        + "Now you have %d burdens%n",
-                task, taskList.size()));
+        ui.setMessage(String.format("Can't you keep track of '%s' yourself?\n"
+                + "Now you have %d burdens%n",
+            task, taskList.size()));
     }
 }

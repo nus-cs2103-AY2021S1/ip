@@ -40,8 +40,8 @@ public final class DeleteCommand extends Command {
 
             //Throw an Ultron exception if it is out of range
             throw new UltronException("delete",
-                    Integer.toString(index + 1),
-                    ExceptionType.INVALID_ARGUMENT);
+                Integer.toString(index + 1),
+                ExceptionType.INVALID_ARGUMENT);
         }
 
         //Get the task
@@ -51,9 +51,9 @@ public final class DeleteCommand extends Command {
         taskList.remove(index);
 
         //Print the delete message
-        ui.print(String.format("What are you doing removing this?!?!\n  "
-                        + "%s\nNow you have %d burdens%n",
-                tsk,
-                taskList.size()));
+        ui.setMessage(String.format("What are you doing removing this?!?!\n  "
+                + "%s\nNow you have %d burdens%n",
+            tsk,
+            taskList.size()));
     }
 }
