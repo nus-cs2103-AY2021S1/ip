@@ -1,5 +1,5 @@
 public class AddCommand extends Command {
-    private Task myTask;
+    final Task myTask;
     public AddCommand(Task myTask) {
         this.myTask = myTask;
     }

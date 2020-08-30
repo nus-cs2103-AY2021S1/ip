@@ -82,13 +82,6 @@ public class Ui {
      */
     public void displayList(List<Task> toDoList, String displayMessage) {
         System.out.println(displayMessage);
-    }
-    /**
-     * Formats and prints a given list of tasks.
-     * @param toDoList given list of tasks
-     */
-    public void displayList(List<Task> toDoList) {
-        System.out.println("Check out your missions!");
         int i = 1;
         for (Task s : toDoList) {
             System.out.println(i + ". " + " [" + s.getType() + "] "
@@ -98,9 +91,9 @@ public class Ui {
     }
 
     /**
-     *
-     * @param task
-     * @param taskStatus
+     * Prints the completion of a task
+     * @param task task description
+     * @param taskStatus icon representing completion of task
      */
     public void checkList(String task, String taskStatus) {
         System.out.println("--------------------------------------");
@@ -109,12 +102,20 @@ public class Ui {
         System.out.println("--------------------------------------");
     }
 
+    /**
+     * Prints formatted message when task is removed
+     * @param taskId given task id
+     */
     public void removePrint(int taskId) {
         Task tr = TaskList.toDoList.get(taskId - 1);
         System.out.println("Task successfully removed!");
         System.out.println("-> " + tr.toString());
     }
 
+    /**
+     * Formats and prints input String
+     * @param print input string
+     */
     public void printFormat(String print) {
         System.out.println("--------------------------------------");
         //System.out.println("Added to task list : " + print);
@@ -122,6 +123,10 @@ public class Ui {
         System.out.println("--------------------------------------");
     }
 
+    /**
+     * Prints number of tasks left
+     * @param listSize number of tasks left
+     */
     public void printNumberOfTasks(int listSize) {
         System.out.println("You have a total of " + listSize + " tasks");
         System.out.println("--------------------------------------");

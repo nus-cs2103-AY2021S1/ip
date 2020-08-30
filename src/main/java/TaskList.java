@@ -6,9 +6,6 @@ import java.util.List;
  */
 public class TaskList {
     protected static List<Task> toDoList = new ArrayList<>();
-    /*public TaskList() {
-        this.toDoList = new ArrayList<>();
-    }*/
 
     /**
      * Adds a given task to the list.
@@ -28,8 +25,8 @@ public class TaskList {
 
     /**
      * Returns an ArrayList of tasks that match the User keyword given
-     * @param keyword
-     * @return
+     * @param keyword user keyword
+     * @return ArrayList of tasks
      */
     public static ArrayList<Task> searchList(String keyword) {
         ArrayList<Task> returnList = new ArrayList<>();

@@ -9,7 +9,7 @@ import java.util.List;
  * Object to enable permanent storing of task list onto hard drive.
  */
 public class Storage {
-    private String filePath;
+    private final String filePath;
     public Storage(String filePath) {
         this.filePath = filePath;
     }
@@ -47,7 +47,7 @@ public class Storage {
             }
             out.close();
         } catch (IOException e) {
-            System.out.println(e);
+            System.out.println(e.getMessage());
         }
 
     }

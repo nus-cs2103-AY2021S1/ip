@@ -1,5 +1,5 @@
 public class CheckCommand extends Command {
-    private int checkInt;
+    final int checkInt;
     public CheckCommand(int checkInt) {
         this.checkInt = checkInt;
     }

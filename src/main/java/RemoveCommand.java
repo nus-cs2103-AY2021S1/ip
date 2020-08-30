@@ -1,5 +1,5 @@
 public class RemoveCommand extends Command {
-    private int removeInt;
+    final int removeInt;
 
     public RemoveCommand(int removeInt) {
         this.removeInt = removeInt;
