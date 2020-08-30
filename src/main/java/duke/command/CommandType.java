@@ -25,4 +25,18 @@ public enum CommandType {
     CommandType(String type) {
         this.type = type;
     }
+
+    /**
+     * Takes in the command types and returns the names of the command types.
+     *
+     * @param types The command tpyes.
+     * @return The names of the command types.
+     */
+    public static String[] getTypeName(CommandType ... types) {
+        String[] typeNames = new String[10];
+        for (int i = 0; i < types.length; i = i + 1) {
+            typeNames[i] = types[i].type;
+        }
+        return typeNames;
+    }
 }
