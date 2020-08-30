@@ -9,7 +9,8 @@ public class DeadlineTask extends Task {
 
     /**
      * Default Constructor for Deadline Task
-     * @param name Name of Task
+     *
+     * @param name     Name of Task
      * @param deadline Deadline of Task
      */
     public DeadlineTask(String name, LocalDateTime deadline) {
@@ -19,9 +20,10 @@ public class DeadlineTask extends Task {
 
     /**
      * Alternative Constructor for Deadline Task
-     * @param name Name of Task
+     *
+     * @param name         Name of Task
      * @param hasCompleted boolean to show if task has been completed
-     * @param deadline Deadline of task
+     * @param deadline     Deadline of task
      */
     public DeadlineTask(String name, int hasCompleted, LocalDateTime deadline) {
         super(name, hasCompleted);

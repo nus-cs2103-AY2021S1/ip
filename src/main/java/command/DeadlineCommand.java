@@ -16,6 +16,7 @@ public class DeadlineCommand extends Command {
 
     /**
      * Constructor for DeadlineCommand
+     *
      * @param taskName Name of the task
      * @param deadline deadline of the task
      */

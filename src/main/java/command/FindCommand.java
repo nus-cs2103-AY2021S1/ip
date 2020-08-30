@@ -13,17 +13,19 @@ public class FindCommand extends Command {
 
     /**
      * Constructor for the find command
+     *
      * @param findString string to find
      */
     public FindCommand(String findString) {
         super(CommandType.Find);
         this.findString = findString;
     }
-  @Override
-  public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-    TaskList filteredTaskList = taskList.find(this.findString);
-    return ui.displayMatchingTasks(filteredTaskList);
-  }
+
+    @Override
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+        TaskList filteredTaskList = taskList.find(this.findString);
+        return ui.displayMatchingTasks(filteredTaskList);
+    }
 
     @Override
     public boolean equals(Object o) {

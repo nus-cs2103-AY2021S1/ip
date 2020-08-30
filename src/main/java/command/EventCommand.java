@@ -24,11 +24,12 @@ public class EventCommand extends Command {
         this.taskName = taskName;
         this.timing = timing;
     }
-  @Override
-  public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-    Task eventTask = new EventTask(this.taskName, this.timing);
-    taskList.addTask(eventTask);
-    return ui.showAdd(eventTask, taskList.getSize());
-  }
+
+    @Override
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+        Task eventTask = new EventTask(this.taskName, this.timing);
+        taskList.addTask(eventTask);
+        return ui.showAdd(eventTask, taskList.getSize());
+    }
 
 }

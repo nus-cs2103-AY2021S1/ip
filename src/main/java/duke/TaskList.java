@@ -29,6 +29,7 @@ public class TaskList {
 
     /**
      * Remove task from arraylist
+     *
      * @param index index of task to remove
      */
     public void removeTask(int index) {
@@ -45,6 +46,7 @@ public class TaskList {
 
     /**
      * Method that returns a new TaskList containing matching tasks
+     *
      * @param findString String to match
      * @return Object of TaskList class
      */

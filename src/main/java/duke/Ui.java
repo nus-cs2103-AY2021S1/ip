@@ -46,6 +46,11 @@ public class Ui {
         System.out.println(errMsg);
     }
 
+    /**
+     * Returns a string displaying the list of tasks
+     * @param taskList Object of task list class
+     * @return String containing information of tasks
+     */
     public String displayTaskList(TaskList taskList) {
         StringBuilder s = new StringBuilder("Here are your current tasks:\n");
         for (int i = 0; i < taskList.getTaskList().size(); i++) {
@@ -69,6 +74,11 @@ public class Ui {
         }
     }
 
+    /**
+     * Function to display matching tasks
+     * @param filteredTaskList TaskList containing already filtered task objects
+     * @return String containing information of matching tasks
+     */
     public String displayMatchingTasks(TaskList filteredTaskList) {
 
         if (filteredTaskList.getSize() > 0) {
@@ -83,6 +93,9 @@ public class Ui {
         }
     }
 
+    /**
+     * Method to print welcome Message
+     */
     public void showWelcome() {
         System.out.println(line);
         System.out.println(this.welcomeMessage);

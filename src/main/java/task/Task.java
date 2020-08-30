@@ -6,6 +6,7 @@ public class Task {
 
     /**
      * Default Constructor for Task
+     *
      * @param name Name of Task
      */
     public Task(String name) {
@@ -15,7 +16,8 @@ public class Task {
 
     /**
      * Alternative Constructor for Task
-     * @param name Name of Task
+     *
+     * @param name         Name of Task
      * @param hasCompleted boolean to determine whether task is completed
      */
     public Task(String name, int hasCompleted) {

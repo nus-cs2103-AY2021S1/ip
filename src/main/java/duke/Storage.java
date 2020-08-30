@@ -34,6 +34,7 @@ public class Storage {
 
     /**
      * Method that returns a List of Task objects read from a file
+     *
      * @return List containing objects of Task type
      * @throws DukeException Exception when there is error in loading tasks
      */
@@ -101,26 +102,26 @@ public class Storage {
      * @throws DukeException Exceptions in parsing the file
      */
     public List<Task> parseFile(File file) throws DukeException {
-            List<Task> result = new ArrayList<>();
-            try {
-                BufferedReader reader = new BufferedReader(new FileReader(file));
-                String line;
-                // T | 1 | read book
+        List<Task> result = new ArrayList<>();
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(file));
+            String line;
+            // T | 1 | read book
 
-                while ((line = reader.readLine()) != null) {
-                    Task task = readLine(line);
-                    if (task != null) {
-                        result.add(task);
-                    }
+            while ((line = reader.readLine()) != null) {
+                Task task = readLine(line);
+                if (task != null) {
+                    result.add(task);
                 }
-                return result;
-            } catch (FileNotFoundException e) {
-                throw new DukeFileException();
-            } catch (IOException e2) {
-                throw new DukeIoException();
             }
-
+            return result;
+        } catch (FileNotFoundException e) {
+            throw new DukeFileException();
+        } catch (IOException e2) {
+            throw new DukeIoException();
         }
+
+    }
 
     /**
      * Saves the contents of the taskList into a txt file
