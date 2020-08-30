@@ -242,7 +242,7 @@ public class TaskList {
     public String getUpcoming(int days) {
         //If tasks is empty
         if (tasks.size() == 0) {
-            return "You currently have no tasks pending.";
+            return "You currently have no tasks pending.\n";
         }
 
         StringBuilder sb = new StringBuilder("These are the following task(s) to complete:\n");
@@ -269,11 +269,12 @@ public class TaskList {
      * This method ignores casing.
      *
      * @param keywords Keywords within a task's description
+     * @return a String describing the tasks matching the keywords.
      */
     public String findTasks(String[] keywords) {
         //If tasks is empty
         if (tasks.size() == 0) {
-            return "You currently have no tasks pending.";
+            return "You currently have no tasks pending.\n";
         }
 
         StringBuilder sb = new StringBuilder("Here are the matching tasks in your list:\n");

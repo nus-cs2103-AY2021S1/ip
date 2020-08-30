@@ -2,7 +2,6 @@ package taskbot.command;
 
 import taskbot.exceptions.TaskbotException;
 import taskbot.task.TaskList;
-import taskbot.ui.Ui;
 
 /**
  * Encapsulates a command to delete a task.

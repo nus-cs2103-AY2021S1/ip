@@ -3,14 +3,10 @@ package taskbot.task;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 
@@ -22,9 +18,6 @@ public class TaskListTest {
     private TaskList taskList;
     private ArrayList<Task> tasks;
 
-    // Used to test console output
-    private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-
     public TaskListTest() {
         tasks = new ArrayList<>();
         // Adds task stubs
@@ -32,18 +25,6 @@ public class TaskListTest {
             tasks.add(new TaskStub("Task " + i));
         }
         taskList = new TaskList(tasks);
-    }
-
-    // Helps to test System.out.println output
-    @BeforeEach
-    public void setUpStream() {
-        System.setOut(new PrintStream(outContent));
-    }
-
-    // Restores the output stream to System.out
-    @AfterEach
-    public void restoreStream() {
-        System.setOut(System.out);
     }
 
     @Test
@@ -54,8 +35,7 @@ public class TaskListTest {
                 expected.append(i).append(". ").append("[✗] Task ").append(i).append("\n");
             }
             expected.append("3. [✗] Task 3");
-            taskList.listTasks();
-            assertEquals(expected.toString(), outContent.toString());
+            assertEquals(expected.toString(), taskList.listTasks());
         } catch (Exception e) {
             fail();
         }
@@ -73,10 +53,9 @@ public class TaskListTest {
             String task = "TodoTask 1";
             Todo todoTask = new Todo(task);
             String expected = "I have added a Todo:\n" + todoTask
-                    + "\n" + "You now have 4 task(s) in the list.\r\n";
+                    + "\n" + "You now have 4 task(s) in the list.";
 
-            taskList.addTodoTask(task);
-            assertEquals(expected, outContent.toString());
+            assertEquals(expected, taskList.addTodoTask(task));
 
             // Reset the TaskList
             taskList = new TaskList(tasks);
@@ -91,10 +70,9 @@ public class TaskListTest {
             String task = "EventTask /at 2020-08-03 0845";
             Event eventTask = new Event("EventTask ", LocalDateTime.parse("2020-08-03T08:45:00"));
             String expected = "I have added an Event:\n" + eventTask
-                    + "\n" + "You now have 4 task(s) in the list.\r\n";
+                    + "\n" + "You now have 4 task(s) in the list.";
 
-            taskList.addEventTask(task);
-            assertEquals(expected, outContent.toString());
+            assertEquals(expected, taskList.addEventTask(task));
 
             // Reset the TaskList
             taskList = new TaskList(tasks);
@@ -109,10 +87,9 @@ public class TaskListTest {
             String task = "DeadlineTask /by 2020-08-03 0845";
             Deadline deadlineTask = new Deadline("DeadlineTask ", LocalDateTime.parse("2020-08-03T08:45:00"));
             String expected = "I have added a Deadline:\n" + deadlineTask
-                    + "\n" + "You now have 4 task(s) in the list.\r\n";
+                    + "\n" + "You now have 4 task(s) in the list.";
 
-            taskList.addDeadlineTask(task);
-            assertEquals(expected, outContent.toString());
+            assertEquals(expected, taskList.addDeadlineTask(task));
 
             // Reset the TaskList
             taskList = new TaskList(tasks);
@@ -124,10 +101,9 @@ public class TaskListTest {
     @Test
     public void testCompleteTask() {
         try {
-            taskList.completeTask(2);
             String expected = "Understood. The following task is now marked as done:\n"
-                    + "    [✓] Task 3\r\n";
-            assertEquals(expected, outContent.toString());
+                    + "    [✓] Task 3";
+            assertEquals(expected, taskList.completeTask(2));
 
             // Reset the TaskList
             taskList = new TaskList(tasks);
@@ -139,11 +115,10 @@ public class TaskListTest {
     @Test
     public void testDeleteTask() {
         try {
-            taskList.deleteTask(2);
             String expected = "Understood. The following task has been deleted.\n"
                     + "    [✗] Task 3\n"
-                    + "You now have 2 task(s) in the list.\r\n";
-            assertEquals(expected, outContent.toString());
+                    + "You now have 2 task(s) in the list.";
+            assertEquals(expected, taskList.deleteTask(2));
 
             // Reset the TaskList
             taskList = new TaskList(tasks);
@@ -167,7 +142,7 @@ public class TaskListTest {
             tasks.add(new TimedTaskStub("Timed Task 3", currentDateTime.plusDays(7)));
 
             taskList = new TaskList(tasks);
-            taskList.getUpcoming(3);
+
             String expected = "These are the following task(s) to complete:\n"
                     + "1. [✗] Task 1\n"
                     + "2. [✗] Timed Task(test): Timed Task 1(Time: "
@@ -175,7 +150,8 @@ public class TaskListTest {
                     + "3. [✗] Timed Task(test): Timed Task 2(Time: "
                     + currentDateTime.plusDays(1).format(DateTimeFormatter.ofPattern("dd MMM yyyy hh:mm a"))
                     + ")\n";
-            assertEquals(expected, outContent.toString());
+
+            assertEquals(expected, taskList.getUpcoming(3));
 
             // Reset the TaskList
             taskList = new TaskList(tasks);
@@ -197,12 +173,12 @@ public class TaskListTest {
             taskList = new TaskList(tasks);
 
             String[] keywords = new String[]{"run"};
-            taskList.findTasks(keywords);
+
             String expected = "Here are the matching tasks in your list:\n"
                     + "1. [✗] Run\n"
                     + "2. [✗] run\n"
                     + "3. [✗] run away\n";
-            assertEquals(expected, outContent.toString());
+            assertEquals(expected, taskList.findTasks(keywords));
 
             //Reset the TaskList
             taskList = new TaskList(tasks);
@@ -211,6 +187,7 @@ public class TaskListTest {
         }
     }
 
+    @SuppressWarnings("checkstyle:SingleSpaceSeparator")
     @Test
     public void testFindTasksMultipleKeywords() {
         try {
@@ -224,12 +201,12 @@ public class TaskListTest {
             taskList = new TaskList(tasks);
 
             String[] keywords = new String[]{"run", "walk"};
-            taskList.findTasks(keywords);
+
             String expected = "Here are the matching tasks in your list:\n"
                     + "1. [✗] walk\n"
                     + "2. [✗] run\n"
                     + "3. [✗] run away\n";
-            assertEquals(expected, outContent.toString());
+            assertEquals(expected, taskList.findTasks(keywords));
 
             //Reset the TaskList
             taskList = new TaskList(tasks);

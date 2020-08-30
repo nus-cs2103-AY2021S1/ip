@@ -28,7 +28,7 @@ public class Taskbot {
             // Execute the command
             return cmd.execute(taskList);
         } catch (TaskbotException e) {
-            return e.getMessage();
+            return e.getMessage() + "\n";
         }
     }
 }

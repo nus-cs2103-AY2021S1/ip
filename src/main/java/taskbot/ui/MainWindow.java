@@ -1,13 +1,16 @@
 package taskbot.ui;
 
+import javafx.animation.PauseTransition;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.util.Duration;
 import taskbot.logic.Taskbot;
 
 
@@ -23,15 +26,28 @@ public class MainWindow extends AnchorPane {
     private TextField userInput;
     @FXML
     private Button sendButton;
+    @FXML
+    private ImageView title;
 
     private Taskbot taskbot;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/User.png"));
+    private Image taskbotImage = new Image(this.getClass().getResourceAsStream("/images/Taskbot.png"));
+    private Image titleImage = new Image(this.getClass().getResourceAsStream("/images/TitleCard.png"));
 
+    /**
+     * Initializes the main window to be displayed.
+     */
     @FXML
     public void initialize() {
+        // Making the scroll bar dynamically update by binding
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        // Setting the title card to be displayed
+        title.setImage(titleImage);
+
+        // Setting up Taskbot to greet the user
+        String greeting = "Hello there, my name is TaskBot.\nHow may I be of assistance today?\n";
+        dialogContainer.getChildren().add(DialogBox.getTaskbotDialog(greeting, taskbotImage));
     }
 
     public void setTaskbot(Taskbot taskbot) {
@@ -45,11 +61,20 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
+
+        // Check if exit is called
+        if (input.equals("bye")) {
+            // Pauses for 1.5s for goodbye text to be read before exiting
+            PauseTransition pause = new PauseTransition(Duration.seconds(1.5f));
+            pause.setOnFinished(event -> {
+                Platform.exit();
+            });
+            pause.play();
+        }
         String response = taskbot.getResponse(input);
-        DialogBox db = DialogBox.getUserDialog(input, userImage);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
-                DialogBox.getTaskbotDialog(response, dukeImage)
+                DialogBox.getTaskbotDialog(response, taskbotImage)
         );
         userInput.clear();
     }
