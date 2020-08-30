@@ -1,3 +1,5 @@
+package duke;
+
 public class Duke {
 
     private Ui ui;
@@ -10,34 +12,7 @@ public class Duke {
         this.inputParser = new InputParser();
     }
 
-    public static boolean isEmptyInput(String input) {
-        return input.isEmpty();
-    }
-
-    public static boolean isValidCommand(String input) {
-        return input.toLowerCase().startsWith("todo")
-                || input.toLowerCase().startsWith("deadline")
-                || input.toLowerCase().startsWith("event");
-    }
-
-    public static boolean isEmptyDescription(String input) {
-        return input.split(" ").length == 1;
-    }
-
-    public static boolean hasDeadlineBy(String input) {
-        return input.contains("/by")
-                && input.split(" /by ").length == 2;
-    }
-
-    public static boolean hasEventStartEndTime(String input) {
-        return input.contains("/at")
-                && input.split(" /at ").length == 2
-                && input.split(" /at ")[1].split(" ").length == 2
-                && input.split(" /at ")[1].split(" ")[1]
-                .split("-").length == 2;
-    }
-
-    public void run() throws DukeException{
+    public void run() throws DukeException {
         // Print Duke welcome message
         ui.welcomeMessage();
 
@@ -61,12 +36,13 @@ public class Duke {
 
             switch (command) {
             case HELP:
-                ui.availableCommands();
+                ui.printAvailableCommands();
                 continue;
             case TODO:
                 description = input.substring(4);
                 t = new ToDo(description);
                 userTasks.addTask(t);
+                storage.saveToFile(userTasks.getTaskList());
                 ui.printTaskAddedMessage(t, userTasks.getTaskListSize());
                 continue;
             case DEADLINE:
@@ -75,6 +51,7 @@ public class Duke {
                 description = inputSplit[0].substring(8);
                 t = new Deadline(description, by);
                 userTasks.addTask(t);
+                storage.saveToFile(userTasks.getTaskList());
                 ui.printTaskAddedMessage(t, userTasks.getTaskListSize());
                 continue;
             case EVENT:
@@ -84,6 +61,7 @@ public class Duke {
                 description = inputSplit[0].substring(5);
                 t = new Event(description, at, timeRange);
                 userTasks.addTask(t);
+                storage.saveToFile(userTasks.getTaskList());
                 ui.printTaskAddedMessage(t, userTasks.getTaskListSize());
                 continue;
             case LIST:
@@ -178,12 +156,6 @@ public class Duke {
                 }
             }
 
-            // Update Tasklist.txt after adding task
-            storage.saveToFile(userTasks.getTaskList());
         }
-    }
-
-    public static void main(String[] args) throws DukeException {
-        new Duke().run();
     }
 }

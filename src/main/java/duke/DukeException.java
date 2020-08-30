@@ -1,3 +1,5 @@
+package duke;
+
 public class DukeException extends Exception {
     protected final String MESSAGE_ALL_TASKS_EMPTY_INPUT = "    I am sorry my Lord. "
             + "You have to give a command.\n";
@@ -44,24 +46,4 @@ public class DukeException extends Exception {
         }
         return errorMessage;
     }
-
-//    public String emptyInputMessage() {
-//        return MESSAGE_ALL_TASKS_EMPTY_INPUT;
-//    }
-//
-//    public String invalidCommandMessage() {
-//        return MESSAGE_ALL_TASKS_INVALID_COMMAND;
-//    }
-//
-//    public String emptyDescriptionMessage() {
-//        return MESSAGE_ALL_TASKS_EMPTY_DESCRIPTION;
-//    }
-//
-//    public String deadlineNoByMessage() {
-//        return MESSAGE_DEADLINE_NO_BY;
-//    }
-//
-//    public String eventNoStartEndMessage() {
-//        return MESSAGE_EVENT_NO_START_END;
-//    }
 }

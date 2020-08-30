@@ -16,9 +16,6 @@ bin/
 # Text test files
 text-ui-test/*.txt
 
-# Class files
-src/main/java/*.class
-
 # Data folder
 data/
 ../../data/

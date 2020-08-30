@@ -1,3 +1,5 @@
+package duke;
+
 import java.util.ArrayList;
 
 /**
@@ -52,7 +54,7 @@ public class Ui {
      *
      * @return Nothing.
      */
-    public void availableCommands() {
+    public void printAvailableCommands() {
         System.out.println(SERVANT_SPEAK
                 + "    These are your available commands my Lord:\n\n"
                 + "    help - Show list of available commands\n"

@@ -1,3 +1,5 @@
+package duke;
+
 import java.util.Scanner;
 
 public class InputParser {
@@ -55,11 +57,11 @@ public class InputParser {
             return CommandType.LIST;
         }
 
-        if (input.startsWith("done")) {
+        if (input.startsWith("done ")) {
             return CommandType.DONE;
         }
 
-        if (input.startsWith("delete")) {
+        if (input.startsWith("delete ")) {
             return CommandType.DELETE;
         }
 
