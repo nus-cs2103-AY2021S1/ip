@@ -1,26 +1,22 @@
-import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * Duke class
+ * Represents a Duke class, which is an interactive chat bot which allows you to track tasks.
  */
 public class Duke {
 
-    public static void main(String[] args) throws DukeException {
-//        Initialising components
+    public static void main(String[] args) {
         Parser parser = new Parser();
-        Ui printer = new Ui();
         String currentDirectory = System.getProperty("user.dir");
-        Storage file = new Storage(currentDirectory + "/data/duke.txt");
+        Storage storage = new Storage(currentDirectory + "/data/duke.txt");
         Scanner scanner = new Scanner(System.in);
         TaskList taskList = new TaskList();
-        if (file.getExisted()) {
-            taskList = new TaskList(file.getTaskList());
+        if (storage.getExisted()) {
+            taskList = new TaskList(storage.getTaskList());
         }
-        printer.messagePrint(
+        Ui.messagePrint(
                 "Hello! I'm Duke\n" +
                 "What can I do for you?");
 
@@ -28,24 +24,26 @@ public class Duke {
             try {
                 String msg = scanner.nextLine();
                 if (parser.parse(msg) == Parser.Command.BYE) {
-                    printer.messagePrint("Bye. Hope to see you again soon!");
+                    // Exit program
+                    Ui.messagePrint("Bye. Hope to see you again soon!");
                     break;
 
-                    //          PRINTING LIST
                 } else if (parser.parse(msg) == Parser.Command.LIST) {
+                    // Print list to User
                     String listMessage = "";
                     for (int i = 0; i < taskList.size(); i++) {
                         listMessage += (i + 1) + ". " + taskList.get(i).toString();
+
                         // If is not last object, add a new line at the end of the item
                         if (i != taskList.size() - 1) {
                             listMessage += "\n";
                         }
                     }
-                    printer.messagePrint(listMessage);
+                    Ui.messagePrint(listMessage);
 
-                    //          UPDATING STATUS OF EVENTS
                 } else if (parser.parse(msg) == Parser.Command.DONE) {
-                    int updateTaskIndex = Integer.valueOf(msg.substring(5, msg.length())) - 1;
+                    /* Update status of Task to completed. */
+                    int updateTaskIndex = Integer.valueOf(msg.substring(5)) - 1;
                     if (updateTaskIndex >= taskList.size() || updateTaskIndex <= 0) {
                         throw new DukeException(DukeExceptionType.TASK_NOT_FOUND);
                     }
@@ -53,11 +51,12 @@ public class Duke {
                     taskToUpdate.updateStatus(true);
                     taskList.set(updateTaskIndex, taskToUpdate);
                     String completedMessage = "Nice! I've marked this task as done:\n" + "  " + taskList.get(updateTaskIndex).toString();
-                    printer.messagePrint(completedMessage);
-                    file.write(taskList.getList());
+                    Ui.messagePrint(completedMessage);
+                    storage.write(taskList);
 
                 } else if (parser.parse(msg) == Parser.Command.DELETE) {
-                    int updateTaskIndex = Integer.valueOf(msg.substring(7, msg.length())) - 1;
+                    // Delete task.
+                    int updateTaskIndex = Integer.valueOf(msg.substring(7)) - 1;
                     if (updateTaskIndex >= taskList.size() || updateTaskIndex < 0) {
                         throw new DukeException(DukeExceptionType.TASK_NOT_FOUND);
                     }
@@ -66,26 +65,30 @@ public class Duke {
                     String deletedMessage = "Noted. I've removed this task:\n" +
                            "  " + taskToUpdate.toString() + "\n" +
                                 "Now you have " + taskList.size() + " tasks in the list.";
-                    printer.messagePrint(deletedMessage);
-                    file.write(taskList.getList());
+                    Ui.messagePrint(deletedMessage);
+                    storage.write(taskList);
 
-                    //          CREATING NEW TASKS
                 } else if (parser.parse(msg) == Parser.Command.FIND) {
-                    String query = msg.substring(5, msg.length());
+                    //Find task according to query message.
+                    String query = msg.substring(5);
                     String output = "Here are the matching tasks in your list: \n";
-                    int i = 1;
-                    for (Task task : taskList.find(query).getList()) {
-                        output = output + i + "." + task.toString() + "\n";
-                    }
-                    printer.messagePrint(output);
-                } else {
+                    TaskList searchedTaskList = taskList.find(query);
+                    for (int i = 1; i <= searchedTaskList.size(); i++) {
+                        output = output + i + "." + searchedTaskList.get(i - 1).toString();
 
-                    //              DEADLINES
+                        if (i != searchedTaskList.size()) {
+                            output += "\n";
+                        }
+                    }
+                    Ui.messagePrint(output);
+                } else {
+                    // Creating new tasks.
                     Task newTask;
                     if (parser.parse(msg) == Parser.Command.DEADLINE) {
+                        // Create deadline.
                         int byIndex = msg.indexOf("/by");
-                        String task = msg.substring(9, byIndex); //Number 9 = starting index of deadline string.
-                        String dateString = msg.substring(byIndex + 4, msg.length());
+                        String task = msg.substring(9, byIndex - 1); //Number 9 = starting index of deadline string.
+                        String dateString = msg.substring(byIndex + 4);
                         try {
                             LocalDate date = LocalDate.parse(dateString);
                             newTask = new Deadline(task, date);
@@ -93,11 +96,11 @@ public class Duke {
                             newTask = new Deadline(task, dateString);
                         }
 
-                        //              EVENTS
                     } else if (parser.parse(msg) == Parser.Command.EVENT) {
+                        // Create event.
                         int atIndex = msg.indexOf("/at");
-                        String task = msg.substring(6, atIndex); //Number 6 = starting index of event string.
-                        String dateString = msg.substring(atIndex + 4, msg.length());
+                        String task = msg.substring(6, atIndex - 1); //Number 6 = starting index of event string.
+                        String dateString = msg.substring(atIndex + 4);
                         try {
                             LocalDate date = LocalDate.parse(dateString);
                             newTask = new Event(task, date);
@@ -105,26 +108,26 @@ public class Duke {
                             newTask = new Event(task, dateString);
                         }
 
-                        //              TODOS
                     } else if (parser.parse(msg) == Parser.Command.TODO) {
-                        String task = msg.substring(5, msg.length()); //Number 5 = starting index of todo string.
+                        // Create ToDo
+                        String task = msg.substring(5); //Number 5 = starting index of todo string.
                         newTask = new ToDo(task);
 
-//                        Checks for empty TODO
                     } else if (parser.parse(msg) == Parser.Command.EMPTY_TASK_TODO) {
+                        // Checks for empty task in a new ToDo
                         throw new DukeException(DukeExceptionType.EMPTY_TASK_TODO);
 
-//                        Checks for empty TASK for event/deadline
                     } else if (parser.parse(msg) == Parser.Command.EMPTY_TASK_EVENT_DEADLINE) {
+                        // Checks for empty task in a new deadline or event.
                         throw new DukeException(DukeExceptionType.EMPTY_TASK_EVENT_DEADLINE);
 
-//                        Checks for empty DATE for event/deadline
                     } else if (parser.parse(msg) == Parser.Command.EMPTY_DATE) {
+                        // Checks for empty date in a new deadline or event.
                         throw new DukeException(DukeExceptionType.EMPTY_DATE);
                     }
 
                     else {
-                        newTask = null;
+                        // Else if input is unrecognized, return null.
                         throw new DukeException(DukeExceptionType.INVALID_INPUT);
                     }
 
@@ -133,12 +136,11 @@ public class Duke {
                             "Got it. I've added this task:\n" +
                                     "  %s\n" +
                                     "Now you have %d tasks in the list.", newTask.toString(), taskList.size());
-                    printer.messagePrint(newTaskMsg);
-                    file.write(taskList.getList());
+                    Ui.messagePrint(newTaskMsg);
+                    storage.write(taskList);
                 }
             } catch (DukeException e) {
-                printer.messagePrint(e.toString());
-                continue;
+                Ui.messagePrint(e.toString());
             }
         }
     }

@@ -6,6 +6,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
+/**
+ * Represents a Storage.
+ * Able to retrieve and write data to a storage txt file stored locally.
+ */
 public class Storage {
     private String path;
     private File file;
@@ -31,15 +35,26 @@ public class Storage {
         }
     }
 
+    /**
+     * Return boolean if the storage txt file already exists.
+     *
+     * @return Boolean value of if the storage txt file already exists.
+     */
     public boolean getExisted() {
         return this.isExisted;
     }
 
-    void write(ArrayList<? extends Task> taskList) {
+    /**
+     * Writes to storage txt file the tasks in taskList.
+     *
+     * @param taskList TaskList of tasks to be written in storage txt file.
+     */
+    void write(TaskList taskList) {
         try {
             FileWriter fw = new FileWriter(path, false);
-            for (Task task : taskList) {
-                String taskString = task.getType() + " | " + (task.completed ? 1 : 0) + " | " + task.getTask();
+            for (int i = 0; i < taskList.size(); i++) {
+                Task task = taskList.get(i);
+                String taskString = task.getType() + " | " + (task.isCompleted ? 1 : 0) + " | " + task.getTask();
                 if (task.getDate() != "") {
                     taskString = taskString + " | " + task.getDate();
                 }
@@ -53,29 +68,33 @@ public class Storage {
         }
     }
 
+    /**
+     * Retrieve a list of Tasks from the storage txt file.
+     *
+     * @return An ArrayList of Tasks retrieved from the storage txt file.
+     */
     public ArrayList<Task> getTaskList() {
         ArrayList<Task> taskList = new ArrayList<Task>();
         try {
             Scanner s = new Scanner(file);
             while (s.hasNext()) {
                 String taskString = s.nextLine();
-                String[] taskParts = taskString.split(" | ");
+                String[] taskParts = taskString.split(" \\| ");
                 if (taskParts[0].equals("T")) {
-                    ToDo task = new ToDo(taskParts[4]);
-                    if (taskParts[2].equals("1")) {
+                    ToDo task = new ToDo(taskParts[2]);
+                    if (taskParts[1].equals("1")) {
                         task.updateStatus(true);
                     }
                     taskList.add(task);
                 } else if (taskParts[0].equals("E")) {
-                    System.out.println(Arrays.toString(taskParts));
-                    Event task = new Event(taskParts[4], taskParts[6]);
-                    if (taskParts[2].equals("1")) {
+                    Event task = new Event(taskParts[2], taskParts[3]);
+                    if (taskParts[1].equals("1")) {
                         task.updateStatus(true);
                     }
                     taskList.add(task);
                 } else if (taskParts[0].equals("D")) {
-                    Deadline task = new Deadline(taskParts[4], taskParts[6]);
-                    if (taskParts[2].equals("1")) {
+                    Deadline task = new Deadline(taskParts[2], taskParts[3]);
+                    if (taskParts[1].equals("1")) {
                         task.updateStatus(true);
                     }
                     taskList.add(task);

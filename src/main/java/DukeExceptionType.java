@@ -1,3 +1,6 @@
+/**
+ * Represents a DukeExceptionType, which is an enum to keep track of different DukeExceptions.
+ */
 public enum DukeExceptionType {
     EMPTY_TASK_TODO("☹ OOPS!!! The description of a todo cannot be empty."),
     EMPTY_TASK_EVENT_DEADLINE("☹ OOPS!!! The description of a event/deadline cannot be empty."),
