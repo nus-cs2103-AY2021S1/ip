@@ -4,18 +4,16 @@ import duke.exceptions.DukeEmptyMessageException;
 import duke.exceptions.DukeInvalidMessageException;
 import duke.exceptions.DukeMissingTimeException;
 
-import javax.print.DocFlavor;
-
 public class Command {
 
     private TaskList taskList;
     private Ui ui;
 
     /**
-     * Constructor for duke.Command.
+     * Constructor for Command.
      *
      * @param taskList taskList
-     * @param ui duke.Ui
+     * @param ui Ui
      */
     public Command(TaskList taskList, Ui ui) {
         this.taskList = taskList;
@@ -26,6 +24,7 @@ public class Command {
      * Marks an item in the list as done and prints the necessary string message.
      *
      * @param toEcho command and description number.
+     * @return String string from ui.printDone.
      * @throws DukeEmptyMessageException thrown when description is empty.
      * @throws DukeInvalidMessageException thrown when description is not a valid number.
      */
@@ -45,6 +44,7 @@ public class Command {
     /**
      * Adds todo into the list and print the relevant todo message.
      *
+     * @return String string returned from ui.printTask.
      * @param description description of todo.
      */
     public String handleTodo(String description) throws DukeEmptyMessageException {
@@ -61,6 +61,7 @@ public class Command {
      * Adds deadline into the list and print the relevant deadline message.
      *
      * @param toEcho full description of deadline, including the command.
+     * @return String string returned from ui.printTask.
      * @throws DukeMissingTimeException thrown when user does not input the timing required.
      */
     public String handleDeadline(String toEcho) throws DukeMissingTimeException {
@@ -86,6 +87,7 @@ public class Command {
      * Adds event into the list and print the relevant event message.
      *
      * @param toEcho full description of event, including command.
+     * @return String string returned from ui.printTask.
      * @throws DukeMissingTimeException thrown when user does not input the timing required.
      */
     public String handleEvent(String toEcho) throws DukeMissingTimeException {
@@ -111,6 +113,7 @@ public class Command {
      * Deletes an item from the list.
      *
      * @param toEcho delete command and description of type number.
+     * @return String string returned from ui.printDelete.
      * @throws DukeEmptyMessageException thrown when description is empty.
      * @throws DukeInvalidMessageException thrown when description is not a valid number.
      */
@@ -131,6 +134,7 @@ public class Command {
      * matches the keyword.
      *
      * @param toEcho command and description.
+     * @return String string returned from ui.printFind.
      * @throws DukeEmptyMessageException thrown when keyword is empty
      */
     public String handleFind(String toEcho) throws DukeEmptyMessageException {

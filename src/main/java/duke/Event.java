@@ -3,7 +3,7 @@ package duke;
 import java.time.LocalDate;
 
 /**
- * duke.Event is a type of task with a day time.
+ * Event is a type of task with a day time.
  */
 public class Event extends Task {
 

@@ -1,22 +1,22 @@
 package duke;
+import java.io.IOException;
+import java.time.format.DateTimeParseException;
 
 import duke.exceptions.DukeException;
 import duke.exceptions.DukeUnknownCommandException;
 
-import java.io.IOException;
 
-import java.time.format.DateTimeParseException;
 
 /**
- * duke.Duke Class is the main class that will run based on different commands
+ * Duke Class is the main class that will run based on different commands
  * given by user. Available commands include todo, deadline, event,
- * done, delete. duke.Todo, deadline and event are different types of tasks command.
+ * done, delete. Todo, deadline and event are different types of tasks command.
  * Done and delete are commands to mark the list item as done or to
  * delete it respectively.
  * duke.Todo, deadline and event are followed by a description or message.
  * Eg: todo do CS2103T project
  * This would translate to a todo list item added into the user's overall list.
- * duke.Event and duke.Deadline would require /at and /by to specify the timing.
+ * Event and duke.Deadline would require /at and /by to specify the timing.
  * Description of done and delete would be a number to specify which
  * item in the list that should be marked as done or deleted.
  */
@@ -26,6 +26,9 @@ public class Duke {
     private Storage storage;
     private TaskList taskList;
 
+    /**
+     * Empty constructor for duke, will be initiated when running GUI.
+     */
     public Duke() {
         ui = new Ui();
         storage = new Storage("data/tasks.txt");

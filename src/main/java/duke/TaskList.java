@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * duke.TaskList is responsible to store the array of lists temporarily,
+ * TaskList is responsible to store the array of lists temporarily,
  * and able to add new task into the list.
  */
 public class TaskList {
@@ -13,7 +13,7 @@ public class TaskList {
     private static List<Task> tempLists = new ArrayList<>();
 
     /**
-     * Constructor of tasklist.
+     * Constructor of Tasklist.
      */
     public TaskList() {
         taskLists = new ArrayList<>();

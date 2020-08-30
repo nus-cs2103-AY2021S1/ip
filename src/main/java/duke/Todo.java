@@ -1,7 +1,7 @@
 package duke;
 
 /**
- * duke.Todo is a type of task with a description.
+ * Todo is a type of task with a description.
  */
 public class Todo extends Task {
 

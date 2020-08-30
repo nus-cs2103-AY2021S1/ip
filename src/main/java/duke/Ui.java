@@ -3,7 +3,7 @@ package duke;
 import java.util.Scanner;
 
 /**
- * duke.Ui class is responsible for printing the necessary messages
+ * Ui class is responsible for printing the necessary messages
  * such that the user would be able to view them on
  * the interface.
  */
@@ -87,12 +87,10 @@ public class Ui {
      * @param task task to be added.
      */
     public String printTask(Task task) {
-        String output = "";
-        output = "Got it. I've added this task:" + "\n";
-        output += TAB + task + "\n";
-        output += "Now you have " + TaskList.getTaskLists().size() + " tasks in the list." + "\n";
-        output += HORIZONTAL_LINE;
-        return output;
+        return "Got it. I've added this task:" + "\n"
+        + TAB + task + "\n"
+        + "Now you have " + TaskList.getTaskLists().size() + " tasks in the list." + "\n"
+        + HORIZONTAL_LINE;
     }
 
     /**

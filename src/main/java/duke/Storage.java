@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.util.Scanner;
 
 /**
- * duke.Storage class is responsible to save the existing list
+ * Storage class is responsible to save the existing list
  * to a hardware storage. The list will auto-load when
  * user restart duke chatbot.
  */

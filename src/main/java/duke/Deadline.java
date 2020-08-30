@@ -3,7 +3,7 @@ package duke;
 import java.time.LocalDate;
 
 /**
- * duke.Deadline is a type of task with a deadline timing.
+ * Deadline is a type of task with a deadline timing.
  */
 public class Deadline extends Task {
 
