@@ -12,11 +12,10 @@ import duke.ui.Ui;
  */
 
 public class Duke {
+    public static final String FILENAME = System.getProperty("user.dir") + "/data/duke.txt";
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
-
-    public static final String FILENAME = System.getProperty("user.dir") + "/data/duke.txt";
 
     /**
      * Creates a new Duke object with the specified file path.

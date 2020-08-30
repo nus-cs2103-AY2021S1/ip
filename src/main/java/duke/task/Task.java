@@ -152,18 +152,30 @@ public class Task {
         }
     }
 
+    /**
+     * Converts this task to a Todo.
+     * @return Todo with this task's description
+     */
     public ToDo convertToTodo() {
         ToDo todo = new ToDo(this.description);
         todo.isDone = this.isDone;
         return todo;
     }
 
+    /**
+     * Converts this task to a Deadline.
+     * @return Deadline with this task's description
+     */
     public Deadline convertToDeadline() {
         Deadline d = new Deadline(this.description, this.getDate());
         d.isDone = this.isDone;
         return d;
     }
 
+    /**
+     * Converts this task to an Event.
+     * @return Event with this task's description
+     */
     public Event convertToEvent() {
         Event e = new Event(this.description, this.getDate());
         e.isDone = this.isDone;
