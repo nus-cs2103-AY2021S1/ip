@@ -1,5 +1,3 @@
-
-
 import command.Command;
 import exception.AnonymousException;
 import exception.DescriptionException;
