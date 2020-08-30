@@ -1,12 +1,11 @@
 package tasks;
 
-import command.Command;
-import storage.Storage;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import command.Command;
+import storage.Storage;
 
 public class TaskListTest {
 

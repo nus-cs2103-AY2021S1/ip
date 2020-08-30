@@ -1,11 +1,11 @@
 package ui;
 
-import storage.Storage;
-import tasks.TaskList;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import storage.Storage;
+import tasks.TaskList;
 
 public class UiTest {
     private Ui ui = new Ui();
@@ -14,7 +14,7 @@ public class UiTest {
 
     @Test
     public void readCommandTest() {
-        String actResult = this.ui.readCommand("bye",  taskList);
+        String actResult = this.ui.readCommand("bye", taskList);
         String expResult = "** Bye. Hope to see you soon!! **";
 
         assertEquals(expResult, actResult);

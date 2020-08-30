@@ -13,9 +13,9 @@ public class Mug {
     private final TaskList tasks;
 
     /**
-     * Constructs Mug object which create/read local storage with the path given
-     *  and load them onto a TaskList.
-     * @param filePath Local storage filepath.
+     * Constructs a Mug Object that create/read the file from the given filepath
+     * and pass the information from the file to TaskList.
+     * @param filePath Filepath
      */
     public Mug(String filePath) {
         this.ui = new Ui();
