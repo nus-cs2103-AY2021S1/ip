@@ -22,10 +22,11 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage)
+    public CommandResult execute(TaskList tasks, Ui ui, Storage storage)
             throws DukeInvalidListNumberInputException, DukeLoadingErrorException {
-        ui.printDeleteTaskChatWindow(tasks.deleteTask(input), tasks.getTasksSize());
+        String response = ui.printDeleteTaskChatWindow(tasks.deleteTask(input), tasks.getTasksSize());
         storage.save(tasks.getTasks());
+        return new CommandResult(response);
     }
 
 }

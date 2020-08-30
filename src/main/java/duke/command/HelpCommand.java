@@ -14,8 +14,8 @@ public class HelpCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.printHelpWindow(obtainCommands());
+    public CommandResult execute(TaskList tasks, Ui ui, Storage storage) {
+        return new CommandResult(ui.printHelpWindow(obtainCommands()));
     }
 
     private String[] obtainCommands() {

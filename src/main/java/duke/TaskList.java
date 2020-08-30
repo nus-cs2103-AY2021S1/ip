@@ -67,10 +67,10 @@ public class TaskList {
      * @throws DukeInvalidListNumberInputException If the task number provided is invalid.
      */
     public Task completeTask(String input) throws DukeInvalidListNumberInputException {
-        // Obtain index within list of tasks
-        int index = Integer.parseInt(input.substring(5)) - 1;
-
         try {
+            // Obtain index within list of tasks
+            int index = Integer.parseInt(input.substring(5)) - 1;
+
             Task task = tasks.get(index);
             task.markAsDone();
             return task;
@@ -87,10 +87,10 @@ public class TaskList {
      * @throws DukeInvalidListNumberInputException If the task number provided is invalid.
      */
     public Task deleteTask(String input) throws DukeInvalidListNumberInputException {
-        // Obtain index within list of tasks
-        int index = Integer.parseInt(input.substring(7)) - 1;
-
         try {
+            // Obtain index within list of tasks
+            int index = Integer.parseInt(input.substring(7)) - 1;
+
             Task task = tasks.get(index);
             tasks.remove(index);
             return task;

@@ -8,7 +8,7 @@ public class DukeInvalidDeadlineTimeException extends DukeInvalidTaskTimeExcepti
     @Override
     public String toString() {
         return "ERROR: Usage: <deadline> <description> /by <time>\n"
-                + "    Time formatting: dd-MM-yyyy HH:mm";
+                + "Time formatting: dd-MM-yyyy HH:mm";
     }
 
 }

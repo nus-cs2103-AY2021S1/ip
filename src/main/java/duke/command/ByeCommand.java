@@ -13,12 +13,12 @@ public class ByeCommand extends Command {
      * Class constructor.
      */
     public ByeCommand() {
-        super("bye", true);
+        super("bye");
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.printGoodbye();
+    public CommandResult execute(TaskList tasks, Ui ui, Storage storage) {
+        return new CommandResult(ui.printGoodbye(), true);
     }
 
 }

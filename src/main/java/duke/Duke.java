@@ -1,7 +1,6 @@
 package duke;
 
-import duke.command.Command;
-
+import duke.command.CommandResult;
 import duke.exception.DukeException;
 
 /**
@@ -9,7 +8,9 @@ import duke.exception.DukeException;
  */
 public class Duke {
 
-    private final Ui ui;
+    private static final String DEFAULT_SAVE_PATH = "data/tasks.txt";
+
+    private Ui ui;
     private Storage storage;
     private TaskList tasks;
 
@@ -30,35 +31,21 @@ public class Duke {
     }
 
     /**
-     * Runs the program. Main method.
+     * Class constructor with no specified file path.
      */
-    public static void main(String[] args) {
-        new Duke("data/tasks.txt").run();
+    public Duke() {
+        this(DEFAULT_SAVE_PATH);
     }
 
     /**
-     * Starts the chat bot, continuously takes in user input and executes the relevant command.
+     * Executes a command based on the user input, and returns an appropriate response.
+     *
+     * @param input A string representing the user input.
+     * @return A command result upon the execution of the command.
+     * @throws DukeException If the input is invalid.
      */
-    public void run() {
-        // Initial greeting, prompt user for commands
-        ui.printWelcome();
-        boolean isExit = false;
-
-        while (!isExit) {
-            try {
-                String input = ui.readInput();
-                ui.printBorder(); // Print top border
-                Command c = Parser.parse(input);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                ui.printGeneralChatWindow(e.toString());
-            } finally {
-                ui.printBorder(); // Print bottom border
-            }
-        }
-
-        ui.printLogo();
+    public CommandResult execute(String input) throws DukeException {
+        return Parser.parse(input).execute(tasks, ui, storage);
     }
 
 }
