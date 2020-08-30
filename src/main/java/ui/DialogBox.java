@@ -9,10 +9,14 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.shape.Circle;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
+import javafx.scene.text.TextFlow;
 
 /**
  * An example of a custom control using FXML.
@@ -21,7 +25,7 @@ import javafx.scene.layout.HBox;
  */
 public class DialogBox extends HBox {
     @FXML
-    private Label dialog;
+    private TextFlow dialog;
     @FXML
     private ImageView displayPicture;
 
@@ -35,8 +39,16 @@ public class DialogBox extends HBox {
             e.printStackTrace();
         }
 
-        dialog.setText(text);
+        Text response = new Text(text);
+        response.setFont(new Font(13));
+        dialog.getChildren().addAll(response);
+        dialog.setLineSpacing(1.15);
+        dialog.setTranslateX(-5);
+        dialog.setTextAlignment(TextAlignment.RIGHT);
+
         displayPicture.setImage(img);
+        displayPicture.setClip(new Circle(50, 50, 49));
+        this.setTranslateX(40);
     }
 
     public static DialogBox getUserDialog(String text, Image img) {
@@ -46,6 +58,10 @@ public class DialogBox extends HBox {
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();
+        db.setTranslateX(0);
+        db.dialog.setStyle("-fx-background-radius: 0px 10px 10px 10px");
+        db.dialog.setTranslateX(5);
+        db.dialog.setTextAlignment(TextAlignment.LEFT);
         return db;
     }
 
