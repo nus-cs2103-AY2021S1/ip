@@ -1,12 +1,11 @@
 package task;
-
-import exception.DateTimeInvalidFormatException;
-
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.regex.PatternSyntaxException;
+
+import exception.DateTimeInvalidFormatException;
 
 /**
  * Encapsulates the details of a task with a event time range.
@@ -17,11 +16,11 @@ import java.util.regex.PatternSyntaxException;
  * <p> (i) getters </p>
  */
 public class EventTask extends Task {
+    protected static final DateTimeFormatter TIME_FORMAT = DateTimeFormatter.ofPattern("kk:mm");
+    protected static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("dd MMM yyyy");
     protected LocalDate date;
     protected LocalTime startTime;
     protected LocalTime endTime;
-    protected static final DateTimeFormatter TIME_FORMAT = DateTimeFormatter.ofPattern("kk:mm");
-    protected static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("dd MMM yyyy");
 
     /**
      * Constructor to create this object.
@@ -59,7 +58,7 @@ public class EventTask extends Task {
             this.date = date;
             this.startTime = startTime;
             this.endTime = endTime;
-        } catch(NumberFormatException nfe) {
+        } catch (NumberFormatException nfe) {
             throw new DateTimeInvalidFormatException(
                     "Action invalid. Date and Time Format incorrect.\n"
                             + "     Correct Format: YYYY-MM-DD HHmm-HHmm"
@@ -119,7 +118,7 @@ public class EventTask extends Task {
             this.date = date;
             this.startTime = startTime;
             this.endTime = endTime;
-        } catch(NumberFormatException nfe) {
+        } catch (NumberFormatException nfe) {
             throw new DateTimeInvalidFormatException(
                     "Action invalid. Date and Time Format incorrect.\n"
                             + "     Correct Format: YYYY-MM-DD HHmm-HHmm"
@@ -178,7 +177,7 @@ public class EventTask extends Task {
     public String toString() {
         return "[E]" + super.toString() + " (at: "
                 + this.date.format(EventTask.DATE_FORMAT) + " "
-                + this.startTime .format(EventTask.TIME_FORMAT)+ "-"
+                + this.startTime.format(EventTask.TIME_FORMAT) + "-"
                 + this.endTime.format(EventTask.TIME_FORMAT) + ")";
     }
 }

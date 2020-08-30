@@ -1,13 +1,4 @@
 package processor;
-
-import exception.DukeException;
-import exception.FileCorruptedException;
-import task.DeadlineTask;
-import task.EventTask;
-import task.Task;
-import task.ToDoTask;
-import task.TaskList;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -16,6 +7,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.regex.PatternSyntaxException;
+
+import exception.DukeException;
+import exception.FileCorruptedException;
+import task.DeadlineTask;
+import task.EventTask;
+import task.Task;
+import task.TaskList;
+import task.ToDoTask;
 
 /**
  * Converts data from file to TaskList class.
@@ -34,7 +33,7 @@ public abstract class FileToTaskListConverter {
      * @param data the file loaded to be converted.
      * @return a TaskList containing all tasks inscribed in file
      * @throws FileCorruptedException If file is not formmatted in the correct order. ie
-     *  not in <type>//<done status>//<task description>//<date if applicable>//<time if applicable>
+     *  not in [type]//[status]//[task description]//[date if applicable]//[time if applicable]
      */
     public static TaskList convert(File data) throws FileCorruptedException {
         List<String> dataList = loadStringData(data);
@@ -49,7 +48,7 @@ public abstract class FileToTaskListConverter {
 
     /**
      * Saves TaskList to file provided.
-     * Data is stored in <type>//<done status>//<task description>//<date if applicable>//<time if applicable>
+     * Data is stored in [type]//[status]//[task description]//[date if applicable]//[time if applicable]
      * @param list the TaskList to be saved.
      * @param file the file to be saved in.
      * @return save status of TaskList. True if successful, false otherwise.
@@ -58,7 +57,7 @@ public abstract class FileToTaskListConverter {
         try {
             FileWriter fw = new FileWriter(file);
             StringBuilder sb = new StringBuilder();
-            for(int i = 0; i < list.size(); i++) {
+            for (int i = 0; i < list.size(); i++) {
                 Task task = list.getTask(i);
                 String type = task.getType();
 

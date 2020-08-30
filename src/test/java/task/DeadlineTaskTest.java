@@ -1,9 +1,10 @@
 package task;
 
-import exception.DateTimeInvalidFormatException;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import exception.DateTimeInvalidFormatException;
 
 public class DeadlineTaskTest {
 

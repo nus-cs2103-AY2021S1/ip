@@ -1,4 +1,8 @@
 package processor;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.function.Consumer;
 
 import exception.DukeException;
 import exception.EmptyActionException;
@@ -9,11 +13,6 @@ import task.EventTask;
 import task.Task;
 import task.TaskList;
 import task.ToDoTask;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.function.Consumer;
 
 /**
  * Processes command entered by user.
@@ -38,8 +37,8 @@ public class CommandProcessor {
         map.put("todo", (command) -> toDoCommand(command));
         map.put("deadline", (command) -> deadlineCommand(command));
         map.put("event", (command) -> eventCommand(command));
-        map.put("delete",(command) -> deleteCommand(command));
-        map.put("find",(command) -> findCommand(command));
+        map.put("delete", (command) -> deleteCommand(command));
+        map.put("find", (command) -> findCommand(command));
         return map;
     }
 
@@ -49,14 +48,14 @@ public class CommandProcessor {
      * @param command the command entered by user.
      */
     public void runCommand(String command) {
-        Consumer<String> action =  map.get(command.replaceAll(" .*", ""));
+        Consumer<String> action = map.get(command.replaceAll(" .*", ""));
         try {
             if (action == null) {
                 throw new InvalidCommandException();
             } else {
                 action.accept(command);
             }
-        } catch (DukeException e){
+        } catch (DukeException e) {
             System.out.println(e);
         }
     }
@@ -67,7 +66,7 @@ public class CommandProcessor {
 
     private void doneCommand(String command) {
         try {
-            int length  = command.length();
+            int length = command.length();
             if (length < 5) {
                 throw new EmptyActionException(); // only "done"
             } else {
@@ -126,7 +125,7 @@ public class CommandProcessor {
             if (spaceIndex == -1) {
                 throw new EmptyActionException(); // "deadline"
             } else if (slashIndex == -1 || spaceIndex + 1 == slashIndex || slashIndex + 4 > command.length()) {
-                throw new InvalidActionException(); // "deadline project submission", "deadline /by Sunday", "deadline return book /by"
+                throw new InvalidActionException(); // "deadline project submission | /by Sunday | return book /by"
             } else {
                 String description = command.substring(spaceIndex + 1, slashIndex - 1);
                 String time = command.substring(slashIndex + 4);
@@ -148,7 +147,7 @@ public class CommandProcessor {
             if (spaceIndex == -1) {
                 throw new EmptyActionException(); // "event"
             } else if (slashIndex == -1 || spaceIndex + 1 == slashIndex || slashIndex + 4 > command.length()) {
-                throw new InvalidActionException(); // "event project submission", "event /at 1-2pm", "deadline meeting /at"
+                throw new InvalidActionException(); //"event project submission""event /at 1-2pm""deadline meeting /at"
             } else {
                 String description = command.substring(spaceIndex + 1, slashIndex - 1);
                 String time = command.substring(slashIndex + 4);
@@ -164,7 +163,7 @@ public class CommandProcessor {
 
     private void deleteCommand(String command) {
         try {
-            int length  = command.length();
+            int length = command.length();
             if (length < 7) {
                 throw new EmptyActionException(); // only "delete"
             } else {

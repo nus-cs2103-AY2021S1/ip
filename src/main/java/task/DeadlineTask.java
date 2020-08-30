@@ -1,11 +1,10 @@
 package task;
-
-import exception.DateTimeInvalidFormatException;
-
 import java.time.DateTimeException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.regex.PatternSyntaxException;
+
+import exception.DateTimeInvalidFormatException;
 
 /**
  * Encapsulates the details of a task with a deadline.
@@ -16,8 +15,8 @@ import java.util.regex.PatternSyntaxException;
  * <p> (i) getters </p>
  */
 public class DeadlineTask extends Task {
-    protected LocalDateTime dateTime;
     protected static final DateTimeFormatter DATE_TIME_FORMAT = DateTimeFormatter.ofPattern("dd MMM yyyy kk:mm");
+    protected LocalDateTime dateTime;
 
     /**
      * Constructor to create this object.
@@ -40,7 +39,7 @@ public class DeadlineTask extends Task {
 
             LocalDateTime dateTime = LocalDateTime.of(year, mth, day, hour, min);
             this.dateTime = dateTime;
-        } catch(NumberFormatException nfe) { // Integer cannot parse string
+        } catch (NumberFormatException nfe) { // Integer cannot parse string
             throw new DateTimeInvalidFormatException(
                     "Action invalid. Date and Time Format incorrect.\n"
                             + "     Correct Format: YYYY-MM-DD HHmm"
@@ -85,7 +84,7 @@ public class DeadlineTask extends Task {
 
             LocalDateTime dateTime = LocalDateTime.of(year, mth, day, hour, min);
             this.dateTime = dateTime;
-        } catch(NumberFormatException nfe) { // Integer cannot parse string
+        } catch (NumberFormatException nfe) { // Integer cannot parse string
             throw new DateTimeInvalidFormatException(
                     "Action invalid. Date and Time Format incorrect.\n"
                             + "     Correct Format: YYYY-MM-DD HHmm"

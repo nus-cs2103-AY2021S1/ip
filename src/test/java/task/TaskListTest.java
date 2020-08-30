@@ -1,11 +1,11 @@
 package task;
 
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
 
 public class TaskListTest {
 
@@ -20,9 +20,9 @@ public class TaskListTest {
         list.add(TASK2);
         list.add(TASK3);
         TaskList tl = new TaskList(list);
-        assertEquals("[✘] Test",tl.getTask(0).toString());
-        assertEquals("[✘] Meh2",tl.getTask(1).toString());
-        assertEquals("[✘] GG3",tl.getTask(2).toString());
+        assertEquals("[✘] Test", tl.getTask(0).toString());
+        assertEquals("[✘] Meh2", tl.getTask(1).toString());
+        assertEquals("[✘] GG3", tl.getTask(2).toString());
     }
 
     @Test
@@ -30,11 +30,11 @@ public class TaskListTest {
         List<Task> list = new ArrayList<>();
         list.add(TASK);
         TaskList tl = new TaskList(list);
-        assertEquals(1,tl.size());
+        assertEquals(1, tl.size());
         list.add(TASK2);
-        assertEquals(2,tl.size());
+        assertEquals(2, tl.size());
         list.add(TASK3);
-        assertEquals(3,tl.size());
+        assertEquals(3, tl.size());
     }
 
     @Test
@@ -45,8 +45,8 @@ public class TaskListTest {
         list.add(TASK3);
         TaskList tl = new TaskList(list);
         assertEquals(TASK, tl.getTask(0));
-        assertEquals(TASK2,tl.getTask(1));
-        assertEquals(TASK3,tl.getTask(2));
+        assertEquals(TASK2, tl.getTask(1));
+        assertEquals(TASK3, tl.getTask(2));
     }
 
     @Test
@@ -55,9 +55,9 @@ public class TaskListTest {
         tl.addToTaskList(TaskListTest.TASK);
         tl.addToTaskList(TaskListTest.TASK2);
         tl.addToTaskList(TaskListTest.TASK3);
-        assertEquals(TASK,tl.getTask(0));
-        assertEquals(TASK2,tl.getTask(1));
-        assertEquals(TASK3,tl.getTask(2));
+        assertEquals(TASK, tl.getTask(0));
+        assertEquals(TASK2, tl.getTask(1));
+        assertEquals(TASK3, tl.getTask(2));
     }
 
     @Test
@@ -67,9 +67,9 @@ public class TaskListTest {
         tl.addToTaskList(TaskListTest.TASK2);
         tl.addToTaskList(TaskListTest.TASK3);
 
-        assertEquals(TASK,tl.getTask(0));
-        assertEquals(TASK2,tl.getTask(1));
-        assertEquals(TASK3,tl.getTask(2));
+        assertEquals(TASK, tl.getTask(0));
+        assertEquals(TASK2, tl.getTask(1));
+        assertEquals(TASK3, tl.getTask(2));
 
         tl.deleteFromTaskList(2);
 

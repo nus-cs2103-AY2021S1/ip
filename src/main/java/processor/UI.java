@@ -1,12 +1,12 @@
 package processor;
 
-import exception.FileCorruptedException;
-import task.TaskList;
-
 import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Scanner;
+
+import exception.FileCorruptedException;
+import task.TaskList;
 
 /**
  * Interacts with users command.

@@ -1,7 +1,7 @@
 package task;
 
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Encapsulates a list of tasks.
