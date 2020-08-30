@@ -5,10 +5,14 @@ import duke.ui.Gui;
 import duke.ui.Ui;
 import javafx.application.Application;
 
+/**
+ * Entrypoint to the application.
+ */
 public class Main {
     /**
      * Main function/entrypoint. Will create a new Duke instance and begin interaction with the user immediately.
-     * Takes in no command line arguments.
+     * Takes in one optional command line argument: --cli
+     * which starts Duke in cli mode.
      *
      * @param args command line arguments.
      */

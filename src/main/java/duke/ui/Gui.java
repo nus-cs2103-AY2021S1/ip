@@ -9,6 +9,9 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
+/**
+ * 'Main' class of the GUI component.
+ */
 public class Gui extends Application {
 
     @Override

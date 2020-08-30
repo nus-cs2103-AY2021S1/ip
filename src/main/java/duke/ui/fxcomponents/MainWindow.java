@@ -14,6 +14,10 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+/**
+ * MainWindow component of the GUI. Contains additional logic to
+ * format and display messages.
+ */
 public class MainWindow extends AnchorPane {
     @FXML
     private ScrollPane scrollArea;
@@ -56,6 +60,10 @@ public class MainWindow extends AnchorPane {
         userInput.clear();
     }
 
+    /**
+     * 'constructor' for this component.
+     * Initializes the component.
+     */
     public void setup() {
         this.guiHelper = new GuiHelper();
         this.duke = new Duke(guiHelper);

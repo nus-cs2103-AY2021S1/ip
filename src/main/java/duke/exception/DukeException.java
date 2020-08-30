@@ -4,6 +4,10 @@ package duke.exception;
  * Custom exception class for Duke-related exceptions.
  */
 public class DukeException extends Exception {
+    /**
+     * Enum containing each error type. A new DukeException can be created using
+     * DukeException.Errors.EXCEPTION_NAME.create().
+     */
     public enum Errors {
         UNKNOWN_COMMAND("sorry sir i dont understand your command sir\n"
                 + "please enter again sir thank you sir"),

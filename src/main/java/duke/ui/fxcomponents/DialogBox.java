@@ -14,6 +14,9 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
+/**
+ * DialogBox to contain messages from the user and Duke.
+ */
 public class DialogBox extends HBox {
     @FXML
     private Label dialog;

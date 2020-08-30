@@ -4,12 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-//TODO
+/**
+ * Container for messages from Duke to the GUI.
+ */
 public class GuiHelper implements Ui {
     private boolean isActive = false;
     private String userInput;
     private List<String> commandOutput;
-    private boolean shouldPrint = false;
+    private boolean isNotConsumed = false;
 
     public GuiHelper() {
         this.commandOutput = new ArrayList<>();
@@ -37,14 +39,24 @@ public class GuiHelper implements Ui {
 
     @Override
     public void systemMessage(String input) {
-        this.shouldPrint = true;
+        this.isNotConsumed = true;
         this.commandOutput.add(input);
     }
 
+    /**
+     * Returns the output from the Duke Command if any,
+     * else returns Optional.empty().
+     * If an output is returned, will mark it as 'consumed',
+     * and subsequent calls to consumeCommandOutput() will return
+     * Optional.empty() until new a new Command from Duke is run.
+     *
+     * @return Output from Duke Command if this is the first invocation
+     * and output from the Command is not empty, Optional.empty() otherwise.
+     */
     public Optional<List<String>> consumeCommandOutput() {
-        if (this.shouldPrint) {
+        if (this.isNotConsumed) {
             List<String> result = this.commandOutput;
-            this.shouldPrint = false;
+            this.isNotConsumed = false;
             this.commandOutput = new ArrayList<>();
             return Optional.of(result);
         } else {
