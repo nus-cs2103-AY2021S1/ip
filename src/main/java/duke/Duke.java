@@ -5,12 +5,17 @@ import duke.exceptions.DukeException;
 
 import java.util.ArrayList;
 
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
+
 /**
  * Duke helps you manage tasks through a chatbot.
  * Duke also saves your list of tasks and will load
  * where you left off.
  */
-public class Duke {
+public class Duke extends Application {
     protected Storage storage;
     protected Ui ui;
     protected String inquiry;
@@ -57,6 +62,14 @@ public class Duke {
     public static void main(String[] args) {
         Duke chatbot = new Duke();
         chatbot.chat();
+    }
+
+    public void start(Stage stage) {
+        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
+        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
+
+        stage.setScene(scene); // Setting the stage to show our screen
+        stage.show(); // Render the stage.
     }
 
     //    public static void main(String[] args) {
