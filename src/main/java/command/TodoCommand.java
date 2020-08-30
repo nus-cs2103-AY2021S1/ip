@@ -1,15 +1,15 @@
-package duke.command;
+package command;
 
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
-import duke.task.Todo;
+import task.Todo;
+import ui.Ui;
 
 /**
  * Insert a new todo into current task list
  */
 public class TodoCommand extends Command {
-    Todo todo;
+    private Todo todo;
 
     public TodoCommand(String description) {
         this.todo = new Todo(description);
@@ -23,11 +23,11 @@ public class TodoCommand extends Command {
      * @param storage storage file
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public CommandResult execute(TaskList tasks, Ui ui, Storage storage) {
         tasks.add(this.todo);
         storage.save(tasks);
 
         int size = tasks.size();
-        ui.printAddConfirmation(tasks.show(size - 1), size);
+        return new CommandResult(ui.printAddConfirmation(tasks.show(size - 1), size));
     }
 }

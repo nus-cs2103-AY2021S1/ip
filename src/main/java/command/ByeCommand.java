@@ -1,8 +1,8 @@
-package duke.command;
+package command;
 
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
+import ui.Ui;
 
 /**
  * Implements the Command object created when user quits the application
@@ -21,7 +21,7 @@ public class ByeCommand extends Command {
      * @param storage storage file
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.showCloseMessage();
+    public CommandResult execute(TaskList tasks, Ui ui, Storage storage) {
+        return new CommandResult(ui.showCloseMessage());
     }
 }

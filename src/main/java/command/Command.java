@@ -1,8 +1,8 @@
-package duke.command;
+package command;
 
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
+import ui.Ui;
 
 /**
  * Parent class of all supported commands
@@ -20,5 +20,5 @@ public abstract class Command {
      * @param ui      text ui interface
      * @param storage storage file
      */
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage);
+    public abstract CommandResult execute(TaskList tasks, Ui ui, Storage storage);
 }

@@ -1,4 +1,4 @@
-package duke;
+package ui;
 
 import java.util.Scanner;
 
@@ -6,7 +6,7 @@ import java.util.Scanner;
  * Represents the text ui interface
  */
 public class Ui {
-    Scanner sc;
+    private Scanner sc;
 
     public Ui() {
         sc = new Scanner(System.in);
@@ -45,18 +45,21 @@ public class Ui {
     /**
      * Show welcome message
      */
-    public void showWelcomeMessage() {
+    public String showWelcomeMessage() {
         buildChatFence();
         print("Hellowww!! I'm Alexa, your personal todo manager!");
         print("How can I help you today?");
         buildChatFence();
+
+        return "Hellowww!! I'm Alexa, your personal todo manager!\nHow can I help you today?";
     }
 
     /**
      * Show close message
      */
-    public void showCloseMessage() {
+    public String showCloseMessage() {
         print("Bye? I hope it's not forever! Come back soon!");
+        return "Bye? I hope it's not forever! Come back soon!";
     }
 
     /**
@@ -65,9 +68,12 @@ public class Ui {
      * @param message string to print
      * @param size    task list current size
      */
-    public void printAddConfirmation(String message, int size) {
+    public String printAddConfirmation(String message, int size) {
         print("Got it. I've added this task:");
         print(message);
         print(String.format("Now you have %d %s in the list", size, size > 1 ? "tasks" : "task"));
+        return "Got it. I've added this task:\n" 
+                + message + "\n" 
+                + String.format("Now you have %d %s in the list", size, size > 1 ? "tasks" : "task");
     }
 }
