@@ -8,10 +8,10 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 public class Deadline extends Task {
-    private LocalDateTime by;
     public static final char TYPE_CODE = 'D';
     public static final String FORMAT = "deadline <description> /by <D-M-YYYY HHmm> (eg. 17-3-2020 0945 "
             + "or 3-4-2020 with no time specified)";
+    private LocalDateTime by;
 
     public Deadline(String command) throws InvalidFormatException {
         super(TYPE_CODE, extractNameFromCommand(command));
