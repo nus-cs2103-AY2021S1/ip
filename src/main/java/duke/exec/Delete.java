@@ -27,13 +27,14 @@ public class Delete implements Executable {
      * @param tasks the list of tasks
      * @param ui the ui object handling displays
      * @param store the storage object handling i/o
+     * @return output after running this command
      */
     @Override
-    public void run(TaskList tasks, Ui ui, Storage store) {
+    public String run(TaskList tasks, Ui ui, Storage store) {
         Task toDelete = tasks.get(index);
         tasks.remove(index);
-        ui.display(DELETED_MESSAGE, "\t" + toDelete.toString(), TASK_COUNT_FRONT
-                + tasks.size() + TASK_COUNT_END);
         store.write(tasks);
+        return ui.output(DELETED_MESSAGE, "\t" + toDelete.toString(), TASK_COUNT_FRONT
+                + tasks.size() + TASK_COUNT_END);
     }
 }

@@ -19,15 +19,16 @@ public class Listing implements Executable {
      * @param tasks the list of tasks
      * @param ui the ui object handling displays
      * @param store the storage object handling i/o
+     * @return the output after running this command
      */
     @Override
-    public void run(TaskList tasks, Ui ui, Storage store) {
+    public String run(TaskList tasks, Ui ui, Storage store) {
         if (tasks.isEmpty()) {
-            ui.display(EMPTY_MESSAGE);
+            return ui.output(EMPTY_MESSAGE);
         } else {
             List<String> enumeration = tasks.enumerate();
             enumeration.add(0, LIST_MESSAGE);
-            ui.display(enumeration);
+            return ui.output(enumeration);
         }
     }
 }

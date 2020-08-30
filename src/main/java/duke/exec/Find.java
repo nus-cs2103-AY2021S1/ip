@@ -21,20 +21,22 @@ public class Find implements Executable {
     }
 
     /**
-     * Returns
+     * When run, finds tasks that contain the desired
+     * keyword
      *
      * @param tasks the list of tasks to append to
      * @param ui the ui object handling displays
      * @param store the storage object handling i/o
+     * @return output after running this command
      */
     @Override
-    public void run(TaskList tasks, Ui ui, Storage store) {
+    public String run(TaskList tasks, Ui ui, Storage store) {
         if (tasks.isEmpty()) {
-            ui.display("The list is empty");
+            return ui.output("The list is empty");
         } else {
             List<String> enumeration = tasks.filter(keyword).enumerate();
             enumeration.add(0, FIND_MESSAGE);
-            ui.display(enumeration);
+            return ui.output(enumeration);
         }
     }
 }
