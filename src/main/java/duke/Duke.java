@@ -1,5 +1,8 @@
 package duke;
 
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+
 import duke.command.Command;
 import duke.command.ExitCommand;
 import duke.utils.DukeException;
@@ -7,11 +10,7 @@ import duke.utils.DukeFileHandler;
 import duke.utils.Parser;
 import duke.utils.TaskList;
 import duke.utils.Ui;
-import javafx.scene.image.Image;
 
-import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.Scanner;
 
 
 public class Duke {
@@ -22,12 +21,9 @@ public class Duke {
 
     Duke(String path) {
         ui = new Ui();
-//        ui.welcome();
 
         fileHandler = new DukeFileHandler(path);
 
-
-//        run();
     }
 
     public void showWelcome() {
@@ -44,27 +40,27 @@ public class Duke {
     }
 
 
-//    private void run() {
-//
-//        Scanner scanner = new Scanner(System.in);
-//
-//        while (true) {
-//            String input = scanner.nextLine().trim();
-//
-//            try {
-//                Command command = Parser.parse(input);
-//                command.execute(tasks, ui, fileHandler);
-//
-//                if (command instanceof ExitCommand) {
-//                    break;
-//                }
-//
-//            } catch (DukeException ex) {
-//                ui.displayThis(ex.getMessage());
-//            }
-//
-//        }
-//    }
+    //    private void run() {
+    //
+    //        Scanner scanner = new Scanner(System.in);
+    //
+    //        while (true) {
+    //            String input = scanner.nextLine().trim();
+    //
+    //            try {
+    //                Command command = Parser.parse(input);
+    //                command.execute(tasks, ui, fileHandler);
+    //
+    //                if (command instanceof ExitCommand) {
+    //                    break;
+    //                }
+    //
+    //            } catch (DukeException ex) {
+    //                ui.displayThis(ex.getMessage());
+    //            }
+    //
+    //        }
+    //    }
 
 
     private void enteredInput(String input) {
@@ -84,9 +80,9 @@ public class Duke {
     }
 
 
-//    public static void main(String[] args) {
-//        new Duke("data/dukeData.txt");
-//    }
+    //    public static void main(String[] args) {
+    //        new Duke("data/dukeData.txt");
+    //    }
 
 
     /**
