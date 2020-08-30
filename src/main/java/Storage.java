@@ -1,11 +1,11 @@
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.io.IOException;
-import java.io.FileWriter;
-import java.io.BufferedReader;
-import java.io.FileReader;
 
 public class Storage {
 
@@ -59,6 +59,8 @@ public class Storage {
 
                         tasks.add(event);
                         break;
+                    default:
+                        throw new DukeException("Line cannot be read");
                     }
                 }
                 return tasks;
@@ -88,18 +90,21 @@ public class Storage {
      * @throws DukeException When there is error writing to the file.
      */
     public void writeNewDataToFile(String taskType, String done, String description, String deadline)
-            throws DukeException{
+            throws DukeException {
         try {
             FileWriter myWriter = new FileWriter(filePath, true);
             switch (taskType) {
-                case "T":
-                    myWriter.write("\n" + taskType + " | " + done + " | " + description);
-                    myWriter.close();
-                    break;
-                case "D":
-                case "E":
-                    myWriter.write("\n" + taskType + " | " + done + " | " + description + " | " + deadline);
-                    myWriter.close();
+            case "T":
+                myWriter.write("\n" + taskType + " | " + done + " | " + description);
+                myWriter.close();
+                break;
+            case "D":
+            case "E":
+                myWriter.write("\n" + taskType + " | " + done + " | " + description + " | " + deadline);
+                myWriter.close();
+                break;
+            default:
+                throw new DukeException("Data cannot be written to file due to missing task type.");
             }
         } catch (IOException ex) {
             System.out.println("Problem writing to file" + ex);
@@ -158,8 +163,7 @@ public class Storage {
             //Write entire string buffer into the file
             fw.write(sb.toString());
             fw.close();
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             System.out.println("Error editing file: " + e.getMessage());
             throw new DukeException("Error editing file");
         }
@@ -200,8 +204,7 @@ public class Storage {
             //Write entire string buffer into the file
             fw.write(sb.toString());
             fw.close();
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
             System.out.println("Error deleting task: " + ex.getMessage());
             throw new DukeException("Error deleting task.");
         }

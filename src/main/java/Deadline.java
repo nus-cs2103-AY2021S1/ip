@@ -17,7 +17,7 @@ public class Deadline extends Task {
         String[] date = dateAndTime[0].split("/");
         String time = dateAndTime[1];
         LocalDateTime dateTime = LocalDateTime.of(Integer.parseInt(date[2]), Integer.parseInt(date[1]),
-                Integer.parseInt(date[0]), Integer.parseInt(time.substring(0,2)), Integer.parseInt(time.substring(2)));
+                Integer.parseInt(date[0]), Integer.parseInt(time.substring(0, 2)), Integer.parseInt(time.substring(2)));
 
         this.by = by;
         this.dateTime = dateTime;

@@ -3,8 +3,6 @@ public class ListCommand extends Command {
 
     /**
      * Creates a ListCommand Object to handle user asking for the entire list of tasks.
-     *
-     * @param input The input that user types in.
      */
     public ListCommand() {
         super(IS_EXIT);

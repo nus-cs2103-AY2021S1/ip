@@ -56,6 +56,12 @@ public class TaskList {
         return tasks.remove(index);
     }
 
+    /**
+     * Find the all Tasks with descriptions containing the word.
+     *
+     * @param word Word to find.
+     * @return The lists of Tasks containing the word.
+     */
     public ArrayList<Task> find(String word) {
         ArrayList<Task> tasksWithWord = new ArrayList<>();
 
