@@ -5,13 +5,12 @@ import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Clui;
-import duke.ui.Ui;
 
 public class DukeCli {
 
     private Storage storage;
     private TaskList taskList;
-    private Ui ui;
+    private Clui ui;
 
     DukeCli(String filePath) {
         ui = new Clui();

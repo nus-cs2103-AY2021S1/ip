@@ -9,6 +9,4 @@ public interface Ui {
     void showLoadingError();
 
     void exit();
-
-    String readCommand();
 }
