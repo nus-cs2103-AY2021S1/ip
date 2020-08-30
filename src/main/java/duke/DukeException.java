@@ -1,3 +1,5 @@
+package duke;
+
 /**
  * An exception class that handles user input exceptions.
  */

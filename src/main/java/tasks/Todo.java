@@ -1,5 +1,7 @@
+package tasks;
+
 /**
- * <code>Todo</code> inherits from <code>Task</code>
+ * <code>tasks.Todo</code> inherits from <code>tasks.Task</code>
  * and is used to represent a todo.
  */
 class Todo extends Task {

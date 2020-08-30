@@ -1,7 +1,9 @@
+package duke;
+
 import tasks.Task;
 
 /**
- * <code>Ui</code> contains all the methods and information needed to diplay
+ * <code>duke.Ui</code> contains all the methods and information needed to diplay
  * the user interface on the screen.
  */
 public class Ui {
@@ -19,7 +21,7 @@ public class Ui {
     public void showStartScreen() {
         System.out.println(LINE);
         System.out.println("Hello from\n" + LOGO);
-        System.out.println("Hello! I'm Duke \nWhat can I do for you?");
+        System.out.println("Hello! I'm duke.Duke \nWhat can I do for you?");
         System.out.println(LINE + "\n");
     }
 

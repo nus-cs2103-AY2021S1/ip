@@ -1,10 +1,12 @@
+package tasks;
+
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * <code>Event</code> inherits from <code>Task</code>
+ * <code>tasks.Event</code> inherits from <code>tasks.Task</code>
  * and is used to represent an event.
  */
 class Event extends Task {

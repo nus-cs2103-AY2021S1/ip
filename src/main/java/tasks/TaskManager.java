@@ -1,14 +1,16 @@
+package tasks;
+
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * <code>TaskManager</code> handles every operation related to tasks.
+ * <code>tasks.TaskManager</code> handles every operation related to tasks.
  */
 class TaskManager {
     private List<Task> tasks;
 
     /**
-     * Constructs a new <code>TaskManager</code> object
+     * Constructs a new <code>tasks.TaskManager</code> object
      * and initialises its <code>tasks</code> field as
      * an empty <code>ArrayList</code>.
      */
@@ -17,7 +19,7 @@ class TaskManager {
     }
 
     /**
-     * Constructs a new <code>TaskManager</code> object
+     * Constructs a new <code>tasks.TaskManager</code> object
      * and initialises its <code>tasks</code> field using the provided
      * argument.
      * @param tasks the list of tasks to be initialised with
@@ -36,7 +38,7 @@ class TaskManager {
     }
 
     /**
-     * Gets the "save" text represenation of each <code>Task</code>
+     * Gets the "save" text represenation of each <code>tasks.Task</code>
      * and creates a <code>String</code> of the information to be saved.
      * This string information is then passed on to the <code>Storage</code>
      * class where it will handle the saving of the information.
@@ -68,7 +70,7 @@ class TaskManager {
      * is identified by the <code>taskNum</code>. <code>taskNum - 1</code>
      * is the index position of the task in the <code>ArrayList</code>.
      * @param taskNum the number of the task in the task list
-     * @return the <code>Task</code> that is marked done
+     * @return the <code>tasks.Task</code> that is marked done
      * @throws DukeException if the provided task number is out of bounds of the range of the <code>ArrayList</code>
      */
     public Task markDone(int taskNum) throws DukeException {

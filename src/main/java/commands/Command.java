@@ -1,7 +1,9 @@
+package commands;
+
 import java.util.Scanner;
 
 /**
- * Command is the abstract base class for all
+ * commands.Command is the abstract base class for all
  * commands
  */
 public abstract class Command {

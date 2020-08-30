@@ -1,11 +1,15 @@
+package commands;
+
+import commands.Command;
+
 /**
- * <code>EventCommand</code> inherits from the base class <code>Command</code>
+ * <code>commands.EventCommand</code> inherits from the base class <code>commands.Command</code>
  * and will handle the job of adding events to the task manager.
  */
 public class EventCommand extends Command {
     /**
      * Adds an <code>Event</code> to the task manager.
-     * Using the <code>Ui</code> object in the parent class, it prints out
+     * Using the <code>duke.Ui</code> object in the parent class, it prints out
      * the user interface to ask for the name, start time and end time of the event to be created.
      * It uses the <code>Scanner</code> object in the parent class to receive the name, start time
      * and end time of the deadline.

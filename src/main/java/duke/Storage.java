@@ -1,3 +1,5 @@
+package duke;
+
 import tasks.Deadline;
 import tasks.Event;
 import tasks.Task;
@@ -12,7 +14,7 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
- * <code>Storage</code> handles all file read and writes.
+ * <code>duke.Storage</code> handles all file read and writes.
  */
 class Storage {
     final static String TASKS_TEXT_FILE_PATH = "../tasks.txt";

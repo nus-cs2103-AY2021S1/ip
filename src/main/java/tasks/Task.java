@@ -1,5 +1,7 @@
+package tasks;
+
 /**
- * <code>Task</code> is the base class for all kinds of tasks.
+ * <code>tasks.Task</code> is the base class for all kinds of tasks.
  */
 class Task {
     private boolean isCompleted;
@@ -37,7 +39,7 @@ class Task {
      */
     public String saveText() {
         String completeStatus = isCompleted ? "1" : "0";
-        return "Task," +  completeStatus + "," + name;
+        return "tasks.Task," +  completeStatus + "," + name;
     }
 
     /**

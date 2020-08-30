@@ -1,11 +1,15 @@
+package commands;
+
+import commands.Command;
+
 /**
- * <code>CompleteCommand</code> inherits from the base class <code>Command</code>
+ * <code>commands.CompleteCommand</code> inherits from the base class <code>commands.Command</code>
  * and will handle the job of marking tasks as complete.
  */
 public class CompleteCommand extends Command {
     /**
      * Marks a task as complete.
-     * Using the <code>Ui</code> object in the parent class, it prints out
+     * Using the <code>duke.Ui</code> object in the parent class, it prints out
      * the user interface to ask for the number of the task to be completed.
      * It uses the <code>Scanner</code> object in the parent class to receive the number.
      * It uses the <code>TaskManager</code> object in the parent class and calls

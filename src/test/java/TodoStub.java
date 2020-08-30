@@ -1,3 +1,5 @@
+import tasks.Task;
+
 public class TodoStub extends Task {
     private String name;
     private boolean isCompleted;

@@ -1,11 +1,15 @@
+package commands;
+
+import commands.Command;
+
 /**
- * <code>DeadlineCommand</code> inherits from the base class <code>Command</code>
+ * <code>commands.DeadlineCommand</code> inherits from the base class <code>commands.Command</code>
  * and will handle the job of adding deadlines to the task manager.
  */
 public class DeadlineCommand extends Command {
     /**
      * Adds a <code>Deadline</code> to the task manager.
-     * Using the <code>Ui</code> object in the parent class, it prints out
+     * Using the <code>duke.Ui</code> object in the parent class, it prints out
      * the user interface to ask for the name and due date of the deadline to be created.
      * It uses the <code>Scanner</code> object in the parent class to receive the name and due date
      * of the deadline.

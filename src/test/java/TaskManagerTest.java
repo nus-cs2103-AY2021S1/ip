@@ -1,4 +1,9 @@
+import duke.DukeException;
 import org.junit.jupiter.api.Test;
+import tasks.Deadline;
+import tasks.Task;
+import tasks.TaskManager;
+import tasks.Todo;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
