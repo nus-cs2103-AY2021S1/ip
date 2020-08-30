@@ -1,4 +1,4 @@
-import java.io.*;
+import java.io.IOException;
 
 public class Duke {
 
@@ -6,12 +6,20 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Duke constructor takes in file path to setup duke
+     * @param filePath
+     * @throws IOException
+     */
     public Duke(String filePath) throws IOException {
         ui = new Ui();
         storage = new Storage(filePath);
         tasks = new TaskList(storage.load());
     }
 
+    /**
+     * Starts the Duke instance
+     */
     public void run() {
         ui.welcome();
         boolean exit = false;
