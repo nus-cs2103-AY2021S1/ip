@@ -1,8 +1,10 @@
+package duke;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Parser is responsible to do all the parsing required
+ * duke.Parser is responsible to do all the parsing required
  * for duke chatbot.
  */
 public class Parser {

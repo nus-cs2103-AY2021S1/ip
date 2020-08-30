@@ -1,3 +1,5 @@
+package duke;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -5,7 +7,7 @@ import java.io.IOException;
 import java.util.Scanner;
 
 /**
- * Storage class is responsible to save the existing list
+ * duke.Storage class is responsible to save the existing list
  * to a hardware storage. The list will auto-load when
  * user restart duke chatbot.
  */
@@ -27,14 +29,18 @@ public class Storage {
      *
      * @throws IOException if storage file cannot be found.
      */
-    public void saveTasks() throws IOException {
-        BufferedWriter taskWriter = new BufferedWriter(new FileWriter(path));
-        String tasks = "";
-        for (Task task : TaskList.taskLists) {
-            tasks += task.toSaveString() + "\n";
+    public void saveTasks() {
+        try {
+            BufferedWriter taskWriter = new BufferedWriter(new FileWriter(path));
+            String tasks = "";
+            for (Task task : TaskList.taskLists) {
+                tasks += task.toSaveString() + "\n";
+            }
+            taskWriter.write(tasks);
+            taskWriter.close();
+        } catch (IOException e) {
+            System.out.println("Sorry Boss, " + e.getMessage());
         }
-        taskWriter.write(tasks);
-        taskWriter.close();
     }
 
     /**

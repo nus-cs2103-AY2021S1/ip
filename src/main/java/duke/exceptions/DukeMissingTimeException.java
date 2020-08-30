@@ -1,4 +1,4 @@
-package exceptions;
+package duke.exceptions;
 
 /**
  * If event or deadline does not have a time,

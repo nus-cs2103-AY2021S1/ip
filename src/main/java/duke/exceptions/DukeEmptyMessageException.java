@@ -1,4 +1,4 @@
-package exceptions;
+package duke.exceptions;
 
 /**
  * If a command does not have any descriptions,
@@ -13,6 +13,6 @@ public class DukeEmptyMessageException extends DukeException {
      * @param message command given to the chatbot.
      */
     public DukeEmptyMessageException(String message) {
-        super("Oops! " + message + " cannot have an empty message!");
+        super("Oops! Command cannot have an empty message!");
     }
 }
