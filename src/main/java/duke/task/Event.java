@@ -5,11 +5,10 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.TextStyle;
 import java.util.Locale;
 
-
 public class Event extends Task {
     protected LocalDate date;
 
-    public Event(String name, boolean isCompleted, LocalDate date) {
+    protected Event(String name, boolean isCompleted, LocalDate date) {
         super(name, isCompleted);
         this.date = date;
     }
