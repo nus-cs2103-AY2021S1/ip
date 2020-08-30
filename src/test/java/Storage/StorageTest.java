@@ -1,12 +1,12 @@
 package storage;
 
-import java.util.ArrayList;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import tasks.Task;
+import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import tasks.Task;
 
 public class StorageTest {
     private Storage store = new Storage("test.txt");

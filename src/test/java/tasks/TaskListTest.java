@@ -1,12 +1,11 @@
 package tasks;
 
-import command.Command;
-import storage.Storage;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import command.Command;
+import storage.Storage;
 
 public class TaskListTest {
 
@@ -16,7 +15,7 @@ public class TaskListTest {
     @Test
     public void addTask() {
         String actResult = this.taskList.addTask(Command.TODO, "borrow book");
-        String expResult =  "Got it. MUG has added this task:\n"
+        String expResult = "Got it. MUG has added this task:\n"
                 + "[T][✘] borrow book"
                 + "\nNow you have "
                 + 3

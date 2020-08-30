@@ -1,13 +1,13 @@
 package parser;
 
-import java.time.LocalDate;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import command.Command;
-import mugexception.MugException;
+import java.time.LocalDate;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import command.Command;
+import mugexception.MugException;
 
 public class ParserTest {
 
