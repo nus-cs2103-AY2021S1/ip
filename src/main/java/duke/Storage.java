@@ -1,3 +1,10 @@
+package duke;
+
+import task.Deadline;
+import task.Event;
+import task.Task;
+import task.Todo;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -5,25 +12,19 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Storage {
+class Storage {
 
     private String filePath;
 
-    public Storage(String filePath) {
+    Storage(String filePath) {
         this.filePath = filePath;
     }
 
-    public ArrayList<Task> load() throws DukeException {
+    ArrayList<Task> load() throws DukeException {
         File taskListFile = new File(filePath);
         try {
-            if (!taskListFile.exists()) {
-                System.out.print(
-                        "Welcome, first time user. Let me create " +
-                                "a new database to store your tasks.."
-                );
-                System.out.println(taskListFile.createNewFile() ? " Success." : " Failure.");
-            } else {
-                System.out.println("Found your data! Give me some time to read it...");
+            if (!taskListFile.exists() && !taskListFile.createNewFile()) {
+                throw new DukeException("Failed to create new text file.");
             }
         } catch (IOException e) {
             throw new DukeException("Exception while opening task list file: " + e);
@@ -36,7 +37,7 @@ public class Storage {
             while (taskReader.hasNextLine()) {
                 String taskFromFile = taskReader.nextLine();
                 // Note, this is assuming that format of
-                // Task.getDescriptionForDatabase() remains the same.
+                // task.Task.getDescriptionForDatabase() remains the same.
                 String[] formattedTaskString = taskFromFile.split(" - ");
                 Parser.Command taskCommand = Parser.parseCommand(formattedTaskString[0]);
                 boolean isTaskDone = formattedTaskString[1].equals("1");
@@ -74,7 +75,7 @@ public class Storage {
     /**
      * Save the current list into a file and closes the program
      */
-    public void store(TaskList taskList) throws DukeException {
+    boolean store(TaskList taskList) throws DukeException {
         try {
             File taskListFile = new File(filePath);
             // Clear the pre-existing file if there is one.
@@ -88,13 +89,11 @@ public class Storage {
                     taskWriter.write(t.getDescriptionForDatabase());
                     taskWriter.write("\n");
                 }
-                System.out.println("...Saved your list.");
                 taskWriter.close();
             }
+            return true;
         } catch (IOException e) {
             throw new DukeException("Exception occurred while storing into file: " + e);
         }
-        System.out.println("Bye, see you soon. Exiting...");
     }
-
 }

@@ -1,8 +1,10 @@
-public class DukeException extends Exception {
+package duke;
+
+class DukeException extends Exception {
 
     private String errorMsg;
 
-    public DukeException(String msg) {
+    DukeException(String msg) {
         this.errorMsg = msg;
     }
 

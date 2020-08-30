@@ -1,26 +1,30 @@
+package duke;
+
+import task.Task;
+
 import java.util.ArrayList;
 
-public class TaskList {
+class TaskList {
 
     ArrayList<Task> tasks;
 
-    public TaskList() {
+    TaskList() {
         this.tasks = new ArrayList<>();
     }
 
-    public TaskList(ArrayList<Task> taskList) {
+    TaskList(ArrayList<Task> taskList) {
         this.tasks = taskList;
     }
 
-    public int getSize() {
+    int getSize() {
         return tasks.size();
     }
 
-    public ArrayList<Task> getTaskList() {
+    ArrayList<Task> getTaskList() {
         return tasks;
     }
 
-    public Task getTask(int index) throws DukeException {
+    Task getTask(int index) throws DukeException {
         try {
             return tasks.get(index);
         } catch (IndexOutOfBoundsException e) {
@@ -31,7 +35,7 @@ public class TaskList {
     /**
      * List all tasks currently stored in the system.
      */
-    public String listAllTasks() {
+    String listAllTasks() {
         int numEntries = tasks.size();
         String output = "";
         if (numEntries > 0) {
@@ -47,12 +51,12 @@ public class TaskList {
         return output;
     }
 
-    public boolean addTask(Task taskToAdd) {
+    boolean addTask(Task taskToAdd) {
         tasks.add(taskToAdd);
         return true;
     }
 
-    public boolean deleteTask(int taskNum) throws DukeException {
+    boolean deleteTask(int taskNum) throws DukeException {
         try {
             if (taskNum > 0 && taskNum <= tasks.size()) {
                 tasks.remove(taskNum - 1);
@@ -71,10 +75,10 @@ public class TaskList {
      *
      * @param taskNum The task number to mark as done.
      */
-    public boolean markTaskDone(int taskNum) throws DukeException {
+    boolean markTaskDone(int taskNum) throws DukeException {
         try {
             if (taskNum < 0 || taskNum > tasks.size()) {
-                throw new DukeException("Task number does not exist.");
+                throw new DukeException("task.Task number does not exist.");
             } else {
                 Task t = tasks.get(taskNum - 1);
                 t.markDone();

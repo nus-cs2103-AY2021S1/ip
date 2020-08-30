@@ -1,3 +1,5 @@
+package duke;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Month;
@@ -7,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Optional;
 
-public class DateTimeProcessor {
+class DateTimeProcessor {
 
     private ArrayList<String> possibleDateFormats = new ArrayList<>(
             Arrays.asList(
@@ -43,7 +45,7 @@ public class DateTimeProcessor {
         return Optional.empty();
     }
 
-    public String getParsedDate(String input) {
+    String getParsedDate(String input) {
         Optional<LocalDateTime> possibleDateTime = parseDateTime(input);
         Optional<LocalDate> possibleDate = parseDate(input);
         if (possibleDateTime.isPresent()) {

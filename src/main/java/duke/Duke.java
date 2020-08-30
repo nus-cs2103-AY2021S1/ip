@@ -1,5 +1,10 @@
+package duke;
 
-public class Duke {
+import task.Deadline;
+import task.Event;
+import task.Todo;
+
+class Duke {
 
     private Storage storage;
     private TaskList taskList;
@@ -7,7 +12,7 @@ public class Duke {
 
     private boolean isRunning;
 
-    public Duke(String filePath) {
+    Duke(String filePath) {
         this.ui = new Ui();
         this.storage = new Storage(filePath);
         this.isRunning = true;
@@ -35,7 +40,9 @@ public class Duke {
                 switch (command) {
                     case BYE:
                         this.isRunning = false;
-                        storage.store(taskList);
+                        if (storage.store(taskList)) {
+                            ui.showMessage("Saved your list. Exiting...");
+                        }
                         break;
                     case LIST:
                         ui.showMessage("Here are the tasks in your list:");
@@ -52,8 +59,8 @@ public class Duke {
                             String numString = input.substring(5);
                             int entryNum = Integer.parseInt(numString);
                             if (taskList.markTaskDone(entryNum)) {
-                                System.out.println("Nice! I've marked this task as done:");
-                                System.out.println(taskList.getTask(entryNum - 1));
+                                ui.showMessage("Nice! I've marked this task as done:");
+                                ui.showMessage(taskList.getTask(entryNum - 1).toString());
                             }
                         } else {
                             throw new DukeException("Invalid number for done command.");
@@ -129,7 +136,7 @@ public class Duke {
 
 
     /**
-     * Initialise program with a new instance of Duke.
+     * Initialise program with a new instance of duke.Duke.
      *
      * @param args String array passed into main.
      */

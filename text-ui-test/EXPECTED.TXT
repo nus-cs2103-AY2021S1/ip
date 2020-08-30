@@ -3,8 +3,8 @@ Hi, I'm your Professor, Martin.
 What can I do for you? You can ask me to do these:
 list: List the current tasks in your list.
 todo: Add a To-Do task.
-event: Add an Event task.
-deadline: Add a Deadline task.
+event: Add an task.Event task.
+deadline: Add a task.Deadline task.
 find: Find a task which matches your description.
 ------------------------------------------------
 Enter input:
