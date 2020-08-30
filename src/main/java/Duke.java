@@ -7,7 +7,7 @@ public class Duke {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
+                + "|  _ \\ _   _| | _____\n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
@@ -40,7 +40,7 @@ public class Duke {
                     Task currentTask = taskList.get(index - 1);
                     currentTask.markAsDone();
                     System.out.println("    ____________________________________________________________");
-                    System.out.println("     Nice! I've marked this task as done: ");
+                    System.out.println("     Nice! I've marked this task as done:");
                     System.out.print("     ");
                     currentTask.printDescription();
                     System.out.println("    ____________________________________________________________\n");
@@ -50,7 +50,7 @@ public class Duke {
                     Todo todo = new Todo(todoDescription);
                     taskList.add(todo);
                     System.out.println("    ____________________________________________________________");
-                    System.out.println("     Got it. I've added this task: ");
+                    System.out.println("     Got it. I've added this task:");
                     System.out.print("       ");
                     todo.printDescription();
                     System.out.println("     Now you have " + taskList.size() + " tasks in the list.");
@@ -67,7 +67,7 @@ public class Duke {
                     Deadline deadline = new Deadline(deadlineDescription, time);
                     taskList.add(deadline);
                     System.out.println("    ____________________________________________________________");
-                    System.out.println("     Got it. I've added this task: ");
+                    System.out.println("     Got it. I've added this task:");
                     System.out.print("        ");
                     deadline.printDescription();
                     System.out.println("     Now you have " + taskList.size() + " tasks in the list.");
@@ -84,7 +84,7 @@ public class Duke {
                     Event event = new Event(eventDescription, date);
                     taskList.add(event);
                     System.out.println("    ____________________________________________________________");
-                    System.out.println("     Got it. I've added this task: ");
+                    System.out.println("     Got it. I've added this task:");
                     System.out.print("        ");
                     event.printDescription();
                     System.out.println("     Now you have " + taskList.size() + " tasks in the list.");
