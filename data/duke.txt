@@ -1,5 +1,4 @@
 D | ✓ | do work | 2011-01-01T12:30
 T | ✗ | watch show
 E | ✗ | project meeting | 2011-01-02T12:40
-D | ✗ | laskjdlaskdjaslkdjasl | 2011-10-10T12:30
-T | ✗ | eat dinner
+T | ✓ | eat dinner

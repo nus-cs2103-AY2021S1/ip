@@ -31,7 +31,8 @@ public class Ui {
     }
 
     /**
-     * Greets the user with an opening message.
+     * Returns/Greets the user with an opening message.
+     * @return Returns a greeting string.
      */
     public String greet() {
         return format("Hello! I'm\n" + logo + "\n"
@@ -39,17 +40,19 @@ public class Ui {
     }
 
     /**
-     * Pattern for printing duke exception messages.
-     * @param ex DukeException
+     * Returns a string pattern for displaying duke exception messages.
+     * @param ex DukeException.
+     * @return Returns a string representation of a duke exception.
      */
     public String throwDukeException(DukeException ex) {
         return format(ex.getMessage());
     }
 
     /**
-     * Prints message upon a new task added.
+     * Returns/Prints message upon a new task added.
      * @param task task to be added.
      * @param size current number of tasks in tasklist.
+     * @return Returns a string message when a task is added.
      */
     public String addTask(Task task, int size) {
         return format("Got it. I've added this task:\n" + task + "\n"
@@ -57,17 +60,19 @@ public class Ui {
     }
 
     /**
-     * Prints completed task upon DONE Command.
+     * Returns/Prints completed task upon DONE Command.
      * @param task completed task.
+     * @return Returns a string message when a task is done.
      */
     public String displayCompletedTask(Task task) {
         return format("Nice! I've marked this task as done:\n" + task);
     }
 
     /**
-     * Prints deleted task upon DELETE Command.
+     * Returns/Prints deleted task upon DELETE Command.
      * @param task task to be deleted.
      * @param size current number of tasks in tasklist.
+     * @return Returns a string message when a task is deleted.
      */
     public String displayDeletedTask(Task task, int size) {
         return format("Noted. I've removed this task:\n" + task + "\n"
@@ -75,8 +80,9 @@ public class Ui {
     }
 
     /**
-     * Prints tasks according to LIST/FIND Command.
+     * Returns/Prints tasks according to LIST/FIND Command.
      * @param tasks tasks to be printed.
+     * @return Returns a string message of all the tasks.
      */
     public String displayTasksWithCommand(List<Task> tasks, String command) {
         StringBuilder sb = new StringBuilder();

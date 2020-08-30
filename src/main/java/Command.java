@@ -7,6 +7,7 @@ public abstract class Command {
      * @param taskList tasklist containing all tasks.
      * @param ui user interace to print.
      * @param storage data stored backend.
+     * @return String representation of command to be printed
      */
     public abstract String execute(TaskList taskList, Ui ui, DukeStorage storage);
 

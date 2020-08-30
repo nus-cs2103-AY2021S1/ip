@@ -1,7 +1,6 @@
 import java.io.IOException;
 
 import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
@@ -14,6 +13,10 @@ public class Main extends Application {
 
     private Duke duke = new Duke();
 
+    /**
+     * Starts the GUI for the Duke program.
+     * @param stage platform for GUI.
+     */
     @Override
     public void start(Stage stage) {
         try {

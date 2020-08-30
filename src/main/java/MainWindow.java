@@ -28,8 +28,12 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
-    public void setDuke(Duke d) {
-        duke = d;
+    /**
+     * Initialises duke and sends a greeting message
+     * @param duke duke program
+     */
+    public void setDuke(Duke duke) {
+        this.duke = duke;
         greetUser();
     }
 
@@ -47,7 +51,7 @@ public class MainWindow extends AnchorPane {
         String input = userInput.getText();
         String response = duke.getResponse(input);
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
+                DialogBox.getUserDialog("user: " + input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
