@@ -1,42 +1,24 @@
-import java.text.SimpleDateFormat;
-
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-
-import java.util.Date;
-
 public class Deadline extends Task {
-    private String date;
-    private String time;
+    private String deadline;
 
-    Deadline(String description, String date, String time) {
+    Deadline(String description, String deadline) {
         super(description);
-        try {
-            Date d = new SimpleDateFormat("dd/MM/yyyy").parse(date);
-            this.date = new SimpleDateFormat("MMM d yyyy").format(d);
-
-            LocalTime t = LocalTime.parse(time.substring(0, 2) + ":" + time.substring(2));
-            this.time = DateTimeFormatter.ofPattern("h.mma").format(t);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
+        this.deadline = deadline;
     }
 
-    Deadline(String description, boolean isDone, String dateTime) {
+    Deadline(String description, boolean isDone, String deadline) {
         super(description, isDone);
-        String[] split = dateTime.split(",");
-        this.date = split[0].trim();
-        this.time = split[1].trim();
+        this.deadline = deadline;
     }
 
     /**
      * Returns the deadline of the task.
-     * Deadline is returned in the format: MMM d yyyy, h.mma.
+     * Deadline is returned in the format MMM dd yyyy h.mma e.g. Sep 04 2020 4.00pm
      *
      * @return deadline of the task
      */
     public String getDeadline() {
-        return date + ", " + time;
+        return this.deadline;
     }
 
     @Override

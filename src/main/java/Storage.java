@@ -11,59 +11,66 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Storage {
-    private static String HOME = System.getProperty("user.home");
-    private static Path SAVED_FILE_PATH = Paths.get(HOME, "ip", "data", "wish.txt");
-    private static Path DATABASE_DIRECTORY_PATH = Paths.get(HOME, "ip", "data");
+    private final Path DATABASE_DIRECTORY_PATH;
+    private final Path DATABASE_FILE_PATH;
+
+    Storage(String databaseDirectoryPath) {
+        this.DATABASE_DIRECTORY_PATH = Paths.get(databaseDirectoryPath);
+        this.DATABASE_FILE_PATH = Paths.get(databaseDirectoryPath + "/tasks.txt");
+    }
 
     /**
-     * Loads the list of tasks of the user from a .txt file in the directory.
-     * If the directory does not exist, a new folder to store the .txt file will be created.
+     * Loads the saved tasks of the user from /data/tasks.txt.
+     * If the directory does not exist, a new folder will be created.
      *
-     * @return an ArrayList containing all the tasks of the user
-     * @throws DukeException if the folder to store the .txt file cannot be created
-     * @throws FileNotFoundException if the .txt file cannot be found
+     * @return an ArrayList containing all the tasks (if any) of the user
+     * @throws DukeException if the folder to store tasks.txt cannot be created
+     * @throws FileNotFoundException if tasks.txt cannot be found
      */
-    public ArrayList<Task> loadFromDatabase() throws DukeException {
-        boolean directoryExists = Files.exists(DATABASE_DIRECTORY_PATH);
+    public ArrayList<Task> load() throws DukeException {
+        boolean directoryExists = Files.exists(this.DATABASE_DIRECTORY_PATH);
         ArrayList<Task> database = new ArrayList<>(100);
 
         if (!directoryExists) {
-            System.out.println("Oops! Folder where data is saved does not exists");
-            File newFolder = new File(DATABASE_DIRECTORY_PATH.toString());
+            // Create new directory
+            File newFolder = new File(this.DATABASE_DIRECTORY_PATH.toString());
             boolean createdNewFolder = newFolder.mkdir();
 
-            if (createdNewFolder) {
-                System.out.println("I have created a new folder to store saved data");
-            } else {
+            // If directory could not be created
+            if (!createdNewFolder) {
                 throw new DukeException("Could not create new directory to store saved data");
             }
         } else {
-            if (Files.exists(SAVED_FILE_PATH)) {
+            // If the directory exists, check if tasks.txt exists
+            if (Files.exists(this.DATABASE_FILE_PATH)) {
                 try {
-                    System.out.println("I have loaded data from the database");
-                    File f = new File(SAVED_FILE_PATH.toString());
+                    File f = new File(this.DATABASE_FILE_PATH.toString());
                     Scanner s = new Scanner(f);
 
                     while (s.hasNext()) {
                         String currentLine = s.nextLine();
                         String[] parsed = currentLine.split(" \\| ");
+                        String description = parsed[2];
+                        boolean taskCompletionStatus = parsed[1].equals("1");
 
                         switch (parsed[0]) {
                         case "T":
-                            database.add(new ToDo(parsed[2], parsed[1].equals("1")));
+                            database.add(new ToDo(description, taskCompletionStatus));
                             break;
 
                         case "D":
-                            database.add(new Deadline(parsed[2], parsed[1].equals("1"), parsed[3]));
+                            String deadline = parsed[3];
+                            database.add(new Deadline(description, taskCompletionStatus, deadline));
                             break;
 
                         default:
-                            database.add(new Event(parsed[2], parsed[1].equals("1"), parsed[3]));
+                            String eventDateTimeStart = parsed[3];
+                            database.add(new Event(description, taskCompletionStatus, eventDateTimeStart));
                             break;
                         }
                     }
                 } catch (FileNotFoundException e) {
-                    System.out.println("File not found");
+                    throw new DukeException("Could not find tasks.txt");
                 }
             }
         }
@@ -72,12 +79,13 @@ public class Storage {
     }
 
     /**
-     * Saves all the tasks of the user to the .txt file.
-     * This method assumes that there is definitely a .txt file to store the data.
+     * Saves all the tasks of the user to data/tasks.txt.
+     *
+     * @throws DukeException if tasks cannot be saved to tasks.txt
      */
-    public void saveToDatabase(ArrayList<Task> database) {
+    public void save(ArrayList<Task> database) throws DukeException {
         try {
-            FileWriter fw = new FileWriter(SAVED_FILE_PATH.toString());
+            FileWriter fw = new FileWriter(this.DATABASE_FILE_PATH.toString());
 
             for (int i = 0; i < database.size(); i++) {
                 Task currentTask = database.get(i);
@@ -90,13 +98,13 @@ public class Storage {
                             currentTask.getDescription() + " | " + ((Deadline)currentTask).getDeadline() + "\n" );
                 } else {
                     fw.write("E | " + (currentTask.getDoneStatus() ? "1" : "0") + " | " +
-                            currentTask.getDescription() + " | " + ((Event)currentTask).getStartDate() + "\n" );
+                            currentTask.getDescription() + " | " + ((Event)currentTask).getEventDateTimeStart() + "\n" );
                 }
             }
 
             fw.close();
         } catch (IOException e) {
-            System.out.println(e.getMessage());
+            throw new DukeException("Could not save tasks to database");
         }
     }
 }

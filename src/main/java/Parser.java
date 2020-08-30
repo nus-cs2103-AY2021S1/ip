@@ -1,59 +1,50 @@
-import java.util.ArrayList;
+import java.time.format.DateTimeFormatter;
+
 import java.util.Scanner;
 
 public class Parser {
-    private TaskList tasks;
-
-    Parser() {
-      this.tasks = new TaskList();
-    }
+    public static final DateTimeFormatter DATE_INPUT_FORMAT = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    public static final DateTimeFormatter DATE_OUTPUT_FORMAT = DateTimeFormatter.ofPattern("MMM dd yyyy");
+    public static final DateTimeFormatter TIME_OUTPUT_FORMAT = DateTimeFormatter.ofPattern("h.mma");
 
     /**
-     * Reads the user input and executes the specific command desired by the user.
+     * Executes the relevant functions based on the given user command.
      */
-    public void parseCommands(String command, Scanner sc) {
+    public void parseCommands(TaskList tasks, String command, Scanner sc) throws DukeException {
         switch (command) {
         case "bye":
-            onByeCommand(this.tasks.getDatabase());
-            break;
-
-        case "list":
-            this.tasks.list();
-            break;
-
-        case "done":
-            this.tasks.onDoneCommand(sc);
-            break;
-
-        case "delete":
-            this.tasks.onDeleteCommand(sc);
-            break;
-
-        case "todo":
-            this.tasks.onToDoCommand(sc);
             break;
 
         case "deadline":
-            this.tasks.onDeadlineCommand(sc);
+            tasks.addNewDeadline(sc);
+            break;
+
+        case "delete":
+            tasks.deleteTask(sc);
+            break;
+
+        case "done":
+            tasks.markTaskAsDone(sc);
             break;
 
         case "event":
-            this.tasks.onEventCommand(sc);
+            tasks.addNewEvent(sc);
             break;
 
         case "find":
-            this.tasks.find(sc);
+            tasks.findTasks(sc);
+            break;
+
+        case "list":
+           tasks.listAllTasks();
+            break;
+
+        case "todo":
+            tasks.addNewToDo(sc);
             break;
 
         default:
-            this.tasks.noSuchCommand();
-            break;
+            throw new DukeException("Oops! I am sorry but I don't understand what that means");
         }
-    }
-
-    private void onByeCommand(ArrayList<Task> database) {
-        this.tasks.saveStateToDatabase();
-        System.out.println("Goodbye! All the best and see you again soon!");
-        System.exit(0);
     }
 }

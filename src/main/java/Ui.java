@@ -1,29 +1,33 @@
 import java.util.Scanner;
 
 public class Ui {
-    private Parser parser;
-
-    Ui() {
-        this.parser = new Parser();
+    /**
+     * Gets input from the user.
+     *
+     * @return the user input
+     */
+    public String getUserInput(Scanner sc) {
+        return sc.next();
     }
 
     /**
-     * Greets the user with a hard-coded message.
+     * Greets the user with a message when they start the application.
      */
-    public void greet() {
+    public void greetUser() {
         System.out.println("Hello! I am Duke\n" + "What can I do for you?");
     }
 
     /**
-     * Gets input from the user which is then parsed and executed.
+     * Prints the error message to the user.
      */
-    public void getUserInput() throws DukeException {
-        Scanner sc = new Scanner(System.in);
-        String command = sc.next();
+    public void showErrorMessage(String errorMessage) {
+        System.out.println(errorMessage);
+    }
 
-        while (true) {
-            this.parser.parseCommands(command, sc);
-            command = sc.next();
-        }
+    /**
+     * Shows exit message when user exits the application.
+     */
+    public void showExitMessage() {
+        System.out.println("Goodbye! See you again soon!");
     }
 }

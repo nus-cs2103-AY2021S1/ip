@@ -1,46 +1,28 @@
-import java.text.SimpleDateFormat;
-
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-
-import java.util.Date;
-
 public class Event extends Task {
-    private String date;
-    private String time;
+    private String eventDateTimeStart;
 
-    Event(String description, String date, String time) {
+    Event(String description, String eventDateTimeStart) {
         super(description);
-        try {
-            Date d = new SimpleDateFormat("dd/MM/yyyy").parse(date);
-            this.date = new SimpleDateFormat("MMM d yyyy").format(d);
-
-            LocalTime t = LocalTime.parse(time.substring(0, 2) + ":" + time.substring(2));
-            this.time = DateTimeFormatter.ofPattern("h.mma").format(t);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
+        this.eventDateTimeStart = eventDateTimeStart;
     }
 
-    Event(String description, boolean isDone, String dateTime) {
+    Event(String description, boolean isDone, String eventDateTimeStart) {
         super(description, isDone);
-        String[] split = dateTime.split(",");
-        this.date = split[0].trim();
-        this.time = split[1].trim();
+        this.eventDateTimeStart = eventDateTimeStart;
     }
 
     /**
      * Returns the date and time that the event is due to start at.
-     * Returned in the format: MMM d yyyy, h.mma.
+     * Returned in the format MMM dd yyyy h.mma e.g. Sep 04 2020 4.00pm
      *
-     * @return the start date and time of the event
+     * @return the date and time that the event is due to start at
      */
-    public String getStartDate() {
-      return this.date + ", " + this.time;
+    public String getEventDateTimeStart() {
+        return this.eventDateTimeStart;
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + this.getStartDate() + ")";
+        return "[E]" + super.toString() + " (at: " + this.getEventDateTimeStart() + ")";
     }
 }
