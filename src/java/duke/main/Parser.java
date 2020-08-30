@@ -5,7 +5,6 @@ import duke.exception.InvalidCommandException;
 import duke.exception.InvalidDateException;
 import duke.exception.InvalidIndexException;
 import duke.exception.MissingDateException;
-
 import duke.task.Task;
 
 public class Parser {

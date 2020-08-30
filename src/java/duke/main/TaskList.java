@@ -1,22 +1,20 @@
 package duke.main;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
 import duke.exception.EmptyTaskException;
 import duke.exception.InvalidCommandException;
 import duke.exception.InvalidDateException;
 import duke.exception.InvalidIndexException;
 import duke.exception.MissingDateException;
-
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
-
-import java.io.File;
-import java.io.FileNotFoundException;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
 
 public class TaskList {
     private final List<Task> tasks;
@@ -62,7 +60,9 @@ public class TaskList {
                     break;
                 }
                 if (task != null) {
-                    if (strings[1].equals("1")) task.setDone();
+                    if (strings[1].equals("1")) {
+                        task.setDone();
+                    }
                     tasks.add(task);
                 }
             }
@@ -104,7 +104,7 @@ public class TaskList {
      */
     Task add(String task) throws MissingDateException,
             InvalidDateException, InvalidCommandException, EmptyTaskException {
-        Task newTask = null;
+        Task newTask;
         if (task.startsWith("todo")) {
             newTask = ToDo.create(task);
         } else if (task.startsWith("deadline")) {
