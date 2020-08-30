@@ -21,7 +21,7 @@ public class ListCommand extends Command {
         String response = "Here are the tasks in your list:\n";
         for (int i = 0; i < tasks.size(); i++) {
             ui.print(String.format("%d. %s", i + 1, tasks.show(i)));
-            response += String.format("%d. %s", i + 1, tasks.show(i));
+            response += String.format("%d. %s%n", i + 1, tasks.show(i));
         }
         return new CommandResult(response);
     }

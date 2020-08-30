@@ -18,7 +18,7 @@ public class FindCommand extends Command {
         String response = "Here are the matching tasks in your list:\n";
         for (int i = 0; i < filtered.size(); i++) {
             ui.print(String.format("%d. %s", i + 1, filtered.show(i)));
-            response += String.format("%d. %s", i + 1, filtered.show(i));
+            response += String.format("%d. %s%n", i + 1, filtered.show(i));
         }
         return new CommandResult(response);
     }

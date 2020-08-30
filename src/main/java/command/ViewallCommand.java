@@ -30,7 +30,7 @@ public class ViewallCommand extends Command {
         String response = "Here are the tasks on given date:\n";
         for (int i = 0; i < filtered.size(); i++) {
             ui.print(String.format("%d. %s", i + 1, filtered.show(i)));
-            response += String.format("%d. %s", i + 1, filtered.show(i));
+            response += String.format("%d. %s%n", i + 1, filtered.show(i));
         }
         return new CommandResult(response);
     }
