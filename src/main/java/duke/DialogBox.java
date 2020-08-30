@@ -43,8 +43,6 @@ public class DialogBox extends HBox {
         dialog.setText(text);
         displayPicture.setImage(img);
         displayPicture.setClip(new Circle(50, 50, 45));
-
-        this.setBackground(new Background(new BackgroundFill(Color.BURLYWOOD, null, null)));
     }
 
     /**
@@ -58,12 +56,15 @@ public class DialogBox extends HBox {
     }
 
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+        var db = new DialogBox(text, img);
+        db.setBackground(new Background(new BackgroundFill(Color.BURLYWOOD, null, null)));
+        db.flip();
+        return db;
     }
 
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
-        db.flip();
+        db.setBackground(new Background(new BackgroundFill(Color.TEAL, null, null)));
         return db;
     }
 }
