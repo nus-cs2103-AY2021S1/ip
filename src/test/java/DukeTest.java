@@ -1,11 +1,19 @@
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import org.junit.jupiter.api.Test;
+import java.io.FileWriter;
+import java.io.IOException;
+
 public class DukeTest {
-    ListOfItems listOfItems = new ListOfItems();
-    HandleFile handleFile = new HandleFile(listOfItems);
-    Parser parser = new Parser(listOfItems, handleFile);
+    // Overwrite "stored.txt" to start from clean slate
+    private FileWriter fw = new FileWriter("stored.txt");
+
+    private ListOfItems listOfItems = new ListOfItems();
+    private HandleFile handleFile = new HandleFile(listOfItems);
+    private Parser parser = new Parser(listOfItems, handleFile);
+
+    public DukeTest() throws IOException {
+    }
 
     @Test
     void testTodo() {

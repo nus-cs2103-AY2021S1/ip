@@ -1,12 +1,9 @@
-import java.io.File;
-import java.io.IOException;
-
-import java.util.List;
-
-import java.util.Scanner;
-
-import java.io.FileWriter;
 import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.List;
+import java.util.Scanner;
 
 /**
  * Handles all of the file operations of "stored.txt" file.
