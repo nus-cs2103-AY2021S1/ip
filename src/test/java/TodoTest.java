@@ -1,5 +1,5 @@
-import main.java.DukeInvalidTaskException;
-import main.java.Todo;
+import main.java.duke.exception.DukeInvalidTaskException;
+import main.java.duke.tasks.Todo;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
