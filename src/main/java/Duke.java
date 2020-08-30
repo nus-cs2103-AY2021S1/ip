@@ -1,11 +1,23 @@
+import javafx.application.Application;
+import javafx.geometry.Insets;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.text.Font;
+import javafx.stage.Stage;
+
 /**
  * Encapsulates the main Duke program.
  */
-public class Duke {
+public class Duke extends Application {
 
     /**
      * Member variables that make up the main Duke program.
      */
+    private String savePath = "data/duke.txt";
     private DukeSaver saver;
     private TaskList taskList;
     private UI ui;
@@ -13,30 +25,70 @@ public class Duke {
 
     /**
      * Constructor for the Duke object.
-     *
-     * @param savePath Directory path to the save file.
      */
-    public Duke(String savePath) {
+    public Duke() {
         saver = new DukeSaver(savePath);
         taskList = new TaskList();
         ui = new UI();
         parser = new Parser(ui, taskList, saver);
+
+        saver.loadData(taskList);
     }
 
+
     /**
-     * Starts Duke.
+     * Starts the GUI using JavaFX.
      *
-     * @param args Command line arguments.
+     * @param stage Primary stage.
      */
-    public static void main(String[] args) {
-        new Duke("data/duke.txt").run();
+    @Override
+    public void start(Stage stage) {
+        Duke duke = new Duke();
+
+        stage.setTitle("DUKE"); // Window title.
+
+        stage.setResizable(false); // Fix window size.
+
+        BorderPane borderPane = new BorderPane(); // FOr layout of elemeents.
+        borderPane.setMinSize(400, 400); // Size of GUI.
+
+        Label outputDisplay = new Label(duke.ui.greet()); // Main output display.
+        outputDisplay.setFont(new Font(16)); // Font size.
+        duke.ui.setOutput(outputDisplay); // Sends this display to the UI system for printing text.
+
+        TextField inputField = new TextField(); // User input text field.
+        inputField.setPrefWidth(350); // Width of text field.
+
+        Button submitButton = new Button("SEND"); // Submit button.
+        submitButton.setOnAction(e -> { // Event handling for submit button click. Sends text value to parser.
+            try {
+                String input = inputField.getText();
+                inputField.setText("");
+                duke.parser.handleResponse(input);
+            } catch (DukeException ex) {
+                duke.ui.print(ex.toString());
+            }
+        });
+
+        HBox inputHbox = new HBox(); // Horizontal box to align text field and submit button.
+        inputHbox.setPadding(new Insets(15, 12, 15, 12));
+        inputHbox.setSpacing(10);
+
+        inputHbox.getChildren().addAll(inputField, submitButton); // Adding field and button to Hbox.
+
+        borderPane.setCenter(outputDisplay); // Places display at center.
+        borderPane.setBottom(inputHbox); // Places user inputs at bottom.
+
+        Scene scene = new Scene(borderPane); // Attach pane to scene.
+
+        stage.setScene(scene); // Setting the stage to show our screen.
+        stage.show(); // Render the stage.
     }
 
     /**
      * Holds the main driver code.
      */
     private void run() {
-        saver.loadData(taskList);
         ui.greet();
         while (true) {
             String response = ui.prompt();

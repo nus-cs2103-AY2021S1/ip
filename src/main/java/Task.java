@@ -73,6 +73,6 @@ public class Task {
      */
     @Override
     public String toString() {
-        return "[" + (this.isDone ? "✓" : "✘") + "] " + this.name;
+        return "[" + (this.isDone ? "O" : "X") + "] " + this.name;
     }
 }

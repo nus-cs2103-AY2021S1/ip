@@ -86,7 +86,7 @@ public class Parser {
 
         StringBuilder sb = new StringBuilder("Here are the tasks in your list:\n");
         for (int i = 0; i < taskList.size(); ++i) {
-            sb.append((i + 1) + "." + taskList.get(i) + "\n");
+            sb.append((i + 1) + ". " + taskList.get(i) + "\n");
         }
         sb.setLength(sb.length() - 1);
         ui.print(sb.toString());

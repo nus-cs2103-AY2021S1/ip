@@ -1,5 +1,7 @@
 import java.util.Scanner;
 
+import javafx.scene.control.Label;
+
 /**
  * Encapsulates the user interface which user uses to interact with Duke.
  */
@@ -8,7 +10,7 @@ public class UI {
     /**
      * Duke's logo.
      */
-    private static final String LOGO = " ____        _        \n"
+    private static final String LOGO = "____        _        \n"
                                      + "|  _ \\ _   _| | _____ \n"
                                      + "| | | | | | | |/ / _ \\\n"
                                      + "| |_| | |_| |   <  __/\n"
@@ -20,6 +22,12 @@ public class UI {
      * Input system using Java's scanner.
      */
     private static final Scanner in = new Scanner(System.in);
+
+    private Label outputDisplay;
+
+    public void setOutput(Label outputDisplay) {
+        this.outputDisplay = outputDisplay;
+    }
 
     /**
      * Gives the user a prompt to input commands.
@@ -38,17 +46,15 @@ public class UI {
      * @param message Message to be printed.
      */
     public void print(String message) {
-        System.out.println(DIVIDER);
-        System.out.println(message);
-        System.out.println(DIVIDER);
+        outputDisplay.setText(message);
     }
 
     /**
      * Greets the user.
      */
-    public void greet() {
-        String greeting = "Hi! I am\n" + LOGO + "\n" + "What can I do for you?";
-        System.out.println(greeting);
+    public String greet() {
+        String greeting = "Hi! I am " + "DUKE." + "\n" + "What can I do for you?";
+        return greeting;
     }
 
     /**

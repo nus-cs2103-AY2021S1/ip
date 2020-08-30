@@ -6,14 +6,14 @@ public class TaskTest {
     @Test
     public void constructorTest() {
         Task task = new Task("test name");
-        Assertions.assertEquals("[✘] test name", task.toString());
+        Assertions.assertEquals("[X] test name", task.toString());
     }
 
     @Test
     public void markDoneTest() {
         Task task = new Task("sample task");
         task.markDone();
-        Assertions.assertEquals("[✓] sample task", task.toString());
+        Assertions.assertEquals("[O] sample task", task.toString());
     }
 
     @Test
@@ -25,7 +25,7 @@ public class TaskTest {
     @Test
     public void parseValidTest() {
         String serial = "T|1|valid task";
-        Assertions.assertEquals("[T][✓] valid task", Task.parse(serial).toString());
+        Assertions.assertEquals("[T][O] valid task", Task.parse(serial).toString());
     }
 
     @Test
