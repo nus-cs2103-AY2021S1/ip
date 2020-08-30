@@ -1,11 +1,11 @@
-package duke;
+package duke.gui;
 
-import duke.util.TaskList;
+import duke.command.Command;
 import duke.util.DukeException;
 import duke.util.Parser;
 import duke.util.Storage;
+import duke.util.TaskList;
 import duke.util.Ui;
-import duke.command.Command;
 
 /**
  * Duke is a personal chat bot with the following functionalities:
@@ -46,6 +46,19 @@ public class Duke {
         tasks = temp;
     }
 
+    public Duke() {
+        TaskList temp;
+        ui = new Ui();
+        storage = new Storage("data/duke.txt");
+        try {
+            temp = new TaskList(storage.load());
+        } catch (DukeException e) {
+            ui.sendMessage(e.getMessage());
+            temp = new TaskList();
+        }
+        tasks = temp;
+    }
+
     /**
      * The main algorithm of the bot which runs indefinitely as long as
      * the running flag is true. The algorithm is summarized as:
@@ -75,8 +88,17 @@ public class Duke {
         }
     }
 
+    public String getResponse(String input) {
+        try {
+            Command c = Parser.parse(input);
+            return c.execute(tasks, ui, storage);
+        } catch (DukeException e) {
+            return e.getMessage();
+        }
+    }
+
     /**
-     * Driver to create the chat bot object and run it.
+     * Driver to create the chat bot object and run it in CLI mode.
      * @param args optional and will be treated as the first user input.
      */
     public static void main(String[] args) {
