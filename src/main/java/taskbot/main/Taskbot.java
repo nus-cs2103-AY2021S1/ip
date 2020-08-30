@@ -1,5 +1,7 @@
 package taskbot.main;
 
+import javafx.application.Application;
+
 import taskbot.command.Command;
 import taskbot.exceptions.TaskbotException;
 import taskbot.parser.Parser;
@@ -10,7 +12,7 @@ import taskbot.ui.Ui;
 /**
  * This is the main driver class.
  */
-public class Main {
+public class Taskbot {
     /**
      * Initialises the TaskBot UI and takes in commands from the user.
      * @param args Unused args.
@@ -19,6 +21,7 @@ public class Main {
         // Initialise Taskbot & required classes
         Ui ui = new Ui();
 
+        Application.launch(taskbot.ui.Main.class, args);
         // Prints the title to the console and greets the user
         ui.printTitle();
 
