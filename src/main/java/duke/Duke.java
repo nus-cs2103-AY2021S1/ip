@@ -1,9 +1,14 @@
 package duke;
 
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
+
 /**
  * Main class for running bot.
  */
-public class Duke {
+public class Duke extends Application {
     private static final String FILE_PATH = (System.getProperty("user.dir").endsWith("text-ui-test") 
         ? System.getProperty("user.dir").substring(0, System.getProperty("user.dir").length() - 13) 
             + "/data/duke.txt"
@@ -13,6 +18,10 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
+    public Duke() {
+        
+    }
+    
     /**
      * Constructs a Duke instance with the specified file name.
      * 
@@ -57,5 +66,14 @@ public class Duke {
      */
     public static void main(String[] args) {
         new Duke(FILE_PATH).run();
+    }
+
+    @Override
+    public void start(Stage stage) throws Exception {
+        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
+        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
+
+        stage.setScene(scene); // Setting the stage to show our screen
+        stage.show(); // Render the stage.
     }
 }
