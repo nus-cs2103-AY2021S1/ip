@@ -1,5 +1,6 @@
 package duke.operation;
 
+import duke.result.Result;
 import duke.task.Task;
 import duke.task.TaskList;
 
@@ -37,14 +38,15 @@ public abstract class AddOperation extends Operation {
 
     /**
      * Adds the <code>Task</code> into the <code>TaskList</code>.
-     * @return a <code>String</code> specifying the <code>Task</code> that been added and
+     * @return a <code>Result</code> specifying the <code>Task</code> that has been added and
      * the total number of <code>Tasks</code> in <code>TaskList</code>.
      */
     @Override
-    public String execute() {
+    public Result execute() {
         Task newTask = createTask();
         this.taskList.addTask(newTask);
-        return "I have added the task:\n" + newTask + "\n"
+        String message = "I have added the task:\n" + newTask + "\n"
                 + String.format("You now have %d tasks.", this.taskList.getCurrCapacity());
+        return new Result(true, message, this.isExit());
     }
 }

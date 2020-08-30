@@ -48,7 +48,6 @@ public class DialogBox extends HBox {
 
     public static DialogBox getDukeDialog(String text, Image img) {
         DialogBox db = new DialogBox(text, img);
-        System.out.println(db.heightProperty());
         db.setMinHeight(Region.USE_PREF_SIZE);
         db.flip();
         return db;

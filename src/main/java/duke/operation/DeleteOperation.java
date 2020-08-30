@@ -1,5 +1,6 @@
 package duke.operation;
 
+import duke.result.Result;
 import duke.task.Task;
 import duke.task.TaskList;
 
@@ -32,13 +33,14 @@ public class DeleteOperation extends Operation {
 
     /**
      * Removes the given <code>Task</code> from the <code>TaskList</code>.
-     * @return a <code>String</code> indicating the task that has been removed.
+     * @return a <code>Result</code> indicating the task that has been removed.
      */
     @Override
-    public String execute() {
+    public Result execute() {
         Task removed = this.taskList.removeTask(this.index);
-        return "Noted. I've removed this task:\n"
+        String message = "Noted. I've removed this task:\n"
                 + removed + "\n"
                 + String.format("You now have %d tasks in the list", this.taskList.getCurrCapacity());
+        return new Result(true, message, this.isExit());
     }
 }

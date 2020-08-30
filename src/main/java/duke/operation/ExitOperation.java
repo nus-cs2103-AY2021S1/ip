@@ -1,6 +1,7 @@
 package duke.operation;
 
 import duke.exception.DukeException;
+import duke.result.Result;
 import duke.storage.TaskStorage;
 import duke.task.TaskList;
 
@@ -33,16 +34,18 @@ public class ExitOperation extends Operation {
 
     /**
      * Saves the <code>Tasks</code> in <code>TaskList</code> into a text file.
+     * If the file cannot be saved, Duke will not be exited.
      * @return a goodbye message and an indication if the <code>Tasks</code> cannot be saved.
      */
     @Override
-    public String execute() {
-        String status = "";
+    public Result execute() {
         try {
             this.storage.saveToDisk(this.taskList);
+            String message = "Goodbye. Hope to see you again soon.";
+            return new Result(true, message, this.isExit());
         } catch (DukeException exception) {
-            status += "The list of tasks cannot be saved.\n";
+            String message = "The list of tasks cannot be saved.\n";
+            return new Result(false, message, false);
         }
-        return status + "Goodbye. Hope to see you again soon.";
     }
 }

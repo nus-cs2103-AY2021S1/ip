@@ -1,5 +1,7 @@
 package duke.operation;
 
+import com.sun.prism.ResourceFactoryListener;
+import duke.result.Result;
 import duke.storage.TaskStorage;
 import duke.task.TaskList;
 
@@ -31,11 +33,11 @@ public class StartOperation extends Operation {
 
     /**
      * Executes the operation by loading the storage file into <code>TaskList</code>.
-     * @return a status <code>String</code> of the loading.
+     * @return a <code>Result</code> containing the status of the loading.
      */
     @Override
-    public String execute() {
-        String status = this.taskStorage.loadTaskList(taskList);
-        return status;
+    public Result execute() {
+        String message = this.taskStorage.loadTaskList(taskList);
+        return new Result(true, message, this.isExit());
     }
 }

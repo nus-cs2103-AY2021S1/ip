@@ -1,5 +1,6 @@
 package duke.operation;
 
+import duke.result.Result;
 import duke.task.Task;
 import duke.task.TaskList;
 
@@ -31,11 +32,12 @@ public class DoneOperation extends Operation {
 
     /**
      * Executes the operation by converting the specified <code>Task</code> into completed.
-     * @return a <code>String</code> indicating the <code>Task</code> has been completed.
+     * @return a <code>Result</code> indicating the <code>Task</code> has been completed.
      */
     @Override
-    public String execute() {
+    public Result execute() {
         Task completed = this.taskList.completeTask(this.index);
-        return "You have completed this task:\n" + completed;
+        String message = "You have completed this task:\n" + completed;
+        return new Result(true, message, this.isExit());
     }
 }

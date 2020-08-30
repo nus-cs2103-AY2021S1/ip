@@ -1,5 +1,6 @@
 package duke.operation;
 
+import duke.result.Result;
 import duke.task.TaskList;
 
 /**
@@ -27,10 +28,11 @@ public class ListOperation extends Operation {
 
     /**
      * Executes the operation by retrieving all <code>Tasks</code> in <code>TaskList</code>.
-     * @return a <code>String</code> containing all <code>Tasks</code> stored in <code>TaskList</code>.
+     * @return a <code>Result</code> containing all <code>Tasks</code> stored in <code>TaskList</code>.
      */
     @Override
-    public String execute() {
-        return "Here are your tasks:\n" + this.taskList.toString();
+    public Result execute() {
+        String message = "Here are your tasks:\n" + this.taskList.toString();
+        return new Result(true, message, this.isExit());
     }
 }

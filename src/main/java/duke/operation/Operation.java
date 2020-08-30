@@ -1,5 +1,7 @@
 package duke.operation;
 
+import duke.result.Result;
+
 /**
  * Represents instructions to execute commands.
  */
@@ -12,7 +14,7 @@ public abstract class Operation {
 
     /**
      * Executes the series of instructions.
-     * @return a <code>String</code> containing the status of the execution.
+     * @return a <code>Result</code> containing the status of the execution.
      */
-    public abstract String execute();
+    public abstract Result execute();
 }

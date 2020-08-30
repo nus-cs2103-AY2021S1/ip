@@ -1,5 +1,6 @@
 package duke.operation;
 
+import duke.result.Result;
 import duke.task.TaskList;
 
 /**
@@ -31,14 +32,17 @@ public class FindOperation extends Operation {
     /**
      * Executes the operation by retrieving all <code>Tasks</code> in
      * <code>TaskList</code> containing the search word.
-     * @return a <code>String</code> containing all <code>Tasks</code> found.
+     * @return a <code>Result</code> containing all <code>Tasks</code> found.
      */
     @Override
-    public String execute() {
+    public Result execute() {
+        String message;
         String foundTasks = this.taskList.findString(searchWord);
         if (foundTasks.equals("")) {
-            return String.format("I have found no tasks that match: %s", this.searchWord);
+            message = String.format("I have found no tasks that match: %s", this.searchWord);
+        } else {
+            message = "Here are the tasks I have found:\n" + foundTasks.toString();
         }
-        return "Here are the tasks I have found:\n" + foundTasks.toString();
+        return new Result(true, message, this.isExit());
     }
 }
