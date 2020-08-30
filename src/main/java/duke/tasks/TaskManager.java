@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * <code>duke.tasks.TaskManager</code> handles every operation related to duke.tasks.
  */
-class TaskManager {
+public class TaskManager {
     private List<Task> tasks;
 
     /**
