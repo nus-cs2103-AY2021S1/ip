@@ -1,7 +1,15 @@
-package Duke.Tasks;
+package duke.tasks;
 
-
+/**
+ * The type Todo.
+ */
 public class Todo extends Task {
+    /**
+     * Instantiates a new Todo.
+     *
+     * @param description the description
+     * @param done        the done
+     */
     public Todo(String description, String done) {
         super(description, done);
     }

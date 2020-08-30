@@ -1,13 +1,26 @@
-package Duke.Tasks;
-
-import Duke.Main.Parser;
+package duke.tasks;
 
 import java.time.LocalDateTime;
 
+import duke.main.Parser;
+
+/**
+ * The type Deadline.
+ */
 public class Deadline extends Task {
 
+    /**
+     * The By.
+     */
     protected LocalDateTime by;
 
+    /**
+     * Instantiates a new Deadline.
+     *
+     * @param description the description
+     * @param done        the done
+     * @param by          the by
+     */
     public Deadline(String description, String done, LocalDateTime by) {
         super(description, done);
         this.by = by;

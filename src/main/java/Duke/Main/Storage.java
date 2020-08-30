@@ -1,21 +1,30 @@
-package Duke.Main;
+package duke.main;
 
-import Duke.Tasks.*;
-
-import java.io.File;
-
-import java.io.FileReader;
 import java.io.BufferedReader;
-import java.io.FileWriter;
 import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
-
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.Todo;
+
+/**
+ * The type Storage.
+ */
 public class Storage {
     private String filepath;
 
+    /**
+     * Instantiates a new Storage.
+     *
+     * @param filepath the filepath
+     */
     public Storage(String filepath) {
         File file = new File(filepath);
 
@@ -41,8 +50,9 @@ public class Storage {
 
     /**
      * Appends string to txt file
-     * @param textToAppend
-     * @throws IOException
+     *
+     * @param textToAppend the text to append
+     * @throws IOException the io exception
      */
     public void appendToFile(String textToAppend) throws IOException {
         FileWriter fw = new FileWriter(filepath, true); // create a FileWriter in append mode
@@ -53,8 +63,9 @@ public class Storage {
 
     /**
      * Returns the entire txt file
+     *
      * @return List of Tasks from file
-     * @throws IOException
+     * @throws IOException the io exception
      */
     public List<Task> getFileContents() throws IOException {
         FileReader fr = new FileReader(filepath);
@@ -67,20 +78,20 @@ public class Storage {
             String checked = arr[1];
             String desc = arr[2];
             switch (type) {
-                case "T":
-                    Task todo = new Todo(desc, checked);
-                    lst.add(todo);
-                    break;
-                case "E":
-                    Task event = new Event(desc, checked, Parser.strToDate(arr[3]));
-                    lst.add(event);
-                    break;
-                case "D":
-                    Task deadline = new Deadline(desc, checked, Parser.strToDate(arr[3]));
-                    lst.add(deadline);
-                    break;
-                default:
-                    break;
+            case "T":
+                Task todo = new Todo(desc, checked);
+                lst.add(todo);
+                break;
+            case "E":
+                Task event = new Event(desc, checked, Parser.strToDate(arr[3]));
+                lst.add(event);
+                break;
+            case "D":
+                Task deadline = new Deadline(desc, checked, Parser.strToDate(arr[3]));
+                lst.add(deadline);
+                break;
+            default:
+                break;
             }
             line = br.readLine();
         }
@@ -90,7 +101,8 @@ public class Storage {
 
     /**
      * Rewrites the file contents, each line corresponding to each element of list
-     * @param lst
+     *
+     * @param lst the lst
      */
     public void rewriteFileContents(List<Task> lst) {
         try {

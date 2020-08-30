@@ -1,13 +1,26 @@
-package Duke.Tasks;
+package duke.tasks;
 
 import java.time.LocalDateTime;
 
-import Duke.Main.Parser;
+import duke.main.Parser;
 
+/**
+ * The type Event.
+ */
 public class Event extends Task {
 
+    /**
+     * The At.
+     */
     protected LocalDateTime at;
 
+    /**
+     * Instantiates a new Event.
+     *
+     * @param description the description
+     * @param done        the done
+     * @param at          the at
+     */
     public Event(String description, String done, LocalDateTime at) {
         super(description, done);
         this.at = at;

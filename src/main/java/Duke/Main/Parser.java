@@ -1,15 +1,19 @@
-package Duke.Main;
-
-import Duke.Errors.*;
+package duke.main;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+import duke.errors.InvalidCommandException;
+
+/**
+ * The type Parser.
+ */
 public class Parser {
     /**
      * Converts a date string into LocalDateTime object
-     * @param by
+     *
+     * @param by the by
      * @return LocalDateTime object
      */
     public static LocalDateTime strToDate(String by) {
@@ -44,6 +48,7 @@ public class Parser {
 
     /**
      * Parses a LocalDateTime object into a String for printing on Duke
+     *
      * @param datetime LocalDateTime object
      * @return Parsed String
      */
