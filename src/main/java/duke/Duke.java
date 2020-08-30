@@ -1,3 +1,5 @@
+package duke;
+
 import javafx.scene.layout.VBox;
 import parser.Parser;
 import storage.Storage;
@@ -141,11 +143,19 @@ public class Duke extends Application {
 
         //Part 3. Add functionality to handle user input.
         sendButton.setOnMouseClicked((event) -> {
-            handleUserInput();
+            try {
+                handleUserInput();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         });
 
         userInput.setOnAction((event) -> {
-            handleUserInput();
+            try {
+                handleUserInput();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         });
     }
 
@@ -168,27 +178,27 @@ public class Duke extends Application {
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
-    private void handleUserInput() {
-        try {
-            run(userInput.getText());
-            Label userText = new Label(this.input);
-            Label dukeText = new Label(getResponse(this.output));
-            dialogContainer.getChildren().addAll(
-                    DialogBox.getUserDialog(userText, new ImageView(user)),
-                    DialogBox.getDukeDialog(dukeText, new ImageView(duke))
-            );
-            userInput.clear();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    private void handleUserInput() throws IOException {
+        run(userInput.getText());
+        String userText = this.input;
+        String dukeText = getResponse(this.output);
+        dialogContainer.getChildren().addAll(
+                DialogBox.getUserDialog(userText, user),
+                DialogBox.getDukeDialog(dukeText, duke)
+        );
+        userInput.clear();
     }
 
+    /**
+     * Creates one dialog box to welcome the user & appends them to
+     * the dialog container. Clears the user input after processing.
+     */
     private void welcomeMessage() throws IOException {
         output = "Hello! I'm Duke\n" + "What can I do for you?";
         storage.appendToFile(this.output);
-        Label dukeText = new Label("Welcome!\n" + this.output);
+        String dukeText = "Welcome!\n" + this.output;
         dialogContainer.getChildren().add(
-                DialogBox.getDukeDialog(dukeText, new ImageView(duke))
+                DialogBox.getDukeDialog(dukeText, duke)
         );
         userInput.clear();
     }
@@ -198,6 +208,6 @@ public class Duke extends Application {
      * Replace this stub with your completed method.
      */
     String getResponse(String input) {
-        return "Duke heard: " + input;
+        return "Duke heard: \n" + input;
     }
 }
