@@ -2,7 +2,7 @@
 	duke.txt file found, loading data
 	---------------------------
 	---------------------------
-	Hello! I'm duke.Duke
+	Hello! I'm Duke
 	What can I do for you?
 	---------------------------
 	---------------------------
