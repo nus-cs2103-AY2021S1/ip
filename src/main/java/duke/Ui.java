@@ -1,25 +1,23 @@
 package duke;
 
-import java.util.Scanner;
-
 /**
  * Class to initiate the Ui object. Contains various methods to handle different duke.commands.
  */
 public class Ui {
 
-    private static final String DIVIDER = "";
-    private final Scanner sc = new Scanner(System.in);
-
-    private String messageFormatter(String word) {
-        StringBuffer string = new StringBuffer(DIVIDER);
-        string.append(word);
+    /**
+     * Formats the message.
+     *
+     * @param words Words to be concatenated.
+     * @return String formatted message of the given words.
+     */
+    private String messageFormatter(String... words) {
+        StringBuilder string = new StringBuilder();
+        for (String message: words) {
+            string.append(message);
+        }
         string.append("\n");
-        string.append(DIVIDER);
         return string.toString();
-    }
-
-    public String readCommand() {
-        return sc.nextLine();
     }
 
     /**
@@ -28,8 +26,9 @@ public class Ui {
      * @param taskList Prints out the current tasks in list.
      */
     public String welcomeMessage(String taskList) {
-        return messageFormatter("Hello! I'm Duke! Welcome back!\n"
-                + "Here are the tasks in your list:\n" + taskList);
+        return messageFormatter("Hello! I'm Duke! Welcome back!\n",
+                "Here are the tasks in your list:\n",
+                taskList);
     }
 
     public String byeMessage() {
@@ -37,7 +36,7 @@ public class Ui {
     }
 
     public String listMessage(String taskList) {
-        return messageFormatter("Here are the tasks in your list:\n" + taskList);
+        return messageFormatter("Here are the tasks in your list:\n", taskList);
     }
 
     public String errorMessage(String error) {
@@ -50,7 +49,8 @@ public class Ui {
      * @param message Prints out the current task that is completed.
      */
     public String markAsDoneMessage(String message) {
-        return messageFormatter("Nice! I've marked this task as done:\n" + message);
+        return messageFormatter("Nice! I've marked this task as done:\n",
+                message);
     }
 
     /**
@@ -60,8 +60,8 @@ public class Ui {
      * @param size Number of tasks in the list.
      */
     public String deleteMessage(String task, int size) {
-        return messageFormatter("Noted. I've removed this task:\n" + task
-                + "\nNow you have " + size + " tasks in the list.");
+        return messageFormatter("Noted. I've removed this task:\n",
+                task, "\nNow you have ", String.valueOf(size), " tasks in the list.");
     }
 
     /**
@@ -71,8 +71,8 @@ public class Ui {
      * @param size Number of tasks in the list.
      */
     public String taskMessage(String task, int size) {
-        return messageFormatter("Got it. I've added this task:\n" + task
-                + "\nNow you have " + size + " tasks in the list.");
+        return messageFormatter("Got it. I've added this task:\n", task,
+                "\nNow you have ", String.valueOf(size), " tasks in the list.");
     }
 
     /**
@@ -85,7 +85,8 @@ public class Ui {
         if (size == 0) {
             return messageFormatter("There are not matching task in your list!");
         } else {
-            return messageFormatter("There are " + size + " matching tasks in your list:\n" + taskList);
+            return messageFormatter("There are ", String.valueOf(size),
+                    " matching tasks in your list:\n", taskList);
         }
     }
 
