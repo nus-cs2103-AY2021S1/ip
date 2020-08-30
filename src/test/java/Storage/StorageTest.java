@@ -9,7 +9,9 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class StorageTest {
-    private final Storage store = new Storage("test.txt");
+
+    private final Storage store = new Storage("mug-test.txt");
+
 
     @Test
     public void load() {
@@ -19,7 +21,7 @@ public class StorageTest {
         for (Task task: actResult) {
             actString.append(task);
         }
-        String expResult = "[T][✘] read book[T][✘] return book";
+        String expResult = "[T][\u2718] read book[T][\u2718] return book";
 
         assertEquals(expResult, actString.toString());
     }
