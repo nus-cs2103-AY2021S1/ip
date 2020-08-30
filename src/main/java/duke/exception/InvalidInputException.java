@@ -1,7 +1,7 @@
 package duke.exception;
 
 /**
- * The InvalidInputException class handles the exceptions related
+ * Represents an InvalidInputException and handles the exceptions related
  * to invalid user inputs.
  */
 public class InvalidInputException extends Exception {

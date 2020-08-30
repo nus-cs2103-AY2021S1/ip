@@ -18,8 +18,17 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 
+/**
+ * Represents a Parser class and consists of methods related to parsing user commands.
+ */
 public class Parser {
 
+    /**
+     * Returns a command object by parsing the user command.
+     *
+     * @param userCommand The user command.
+     * @return The command for Duke to execute.
+     */
     public static Command parse(String userCommand) {
         try {
             if (userCommand.equals("bye")) {
@@ -36,23 +45,23 @@ public class Parser {
                     }
                     if (wordArray[0].equals("done")) {
                         if (noOfWords == 1) {
-                            throw new InvalidRequestException("Please tell me which task you want "
+                            throw new InvalidRequestException("Please tell me which duke.task you want "
                                     + "to be marked as done.");
                         }
                         if (noOfWords > 2) {
                             throw new InvalidRequestException("I can only handle one request to "
-                                    + "mark a task as DONE once! Please check your command.");
+                                    + "mark a duke.task as DONE once! Please check your command.");
                         }
                         Integer index = Integer.parseInt(wordArray[1]);
                         return new DoneCommand(index);
                     } else if (wordArray[0].equals("delete")) {
                         if (noOfWords == 1) {
-                            throw new InvalidRequestException("Please tell me which task you want "
+                            throw new InvalidRequestException("Please tell me which duke.task you want "
                                     + "to delete!");
                         }
                         if (noOfWords > 2) {
                             throw new InvalidRequestException("I can only handle one request to "
-                                    + "delete a task at once! Please check your command.");
+                                    + "delete a duke.task at once! Please check your command.");
                         }
                         Integer index = Integer.parseInt(wordArray[1]);
                         return new DeleteCommand(index);
@@ -70,20 +79,20 @@ public class Parser {
                         if (wordArray[0].equals("todo")) {
                             if (noOfWords == 1) {
                                 throw new InvalidTodoException("Please tell me the name "
-                                        + "of the todo task! Or else I cannot add it into list.");
+                                        + "of the todo duke.task! Or else I cannot add it into list.");
                             }
                             String taskName = userCommand.split(" ", 2)[1];
                             newTask = new Todo(taskName);
                         } else if (wordArray[0].equals("deadline")) {
                             if (noOfWords == 1) {
                                 throw new InvalidDeadlineException("Please tell me the name "
-                                        + "and the time due of the deadline task! Or else I "
+                                        + "and the time due of the deadline duke.task! Or else I "
                                         + "cannot add it into list.");
                             }
                             String body = userCommand.split(" ", 2)[1];
                             if (body.split(" /by").length < 2) {
                                 throw new InvalidDeadlineException("Please tell me both the name and"
-                                        + " the time due of the deadline task in the correct form! "
+                                        + " the time due of the deadline duke.task in the correct form! "
                                         + "Don't forget to include the time by using /by.");
                             }
                             String taskName = body.split(" /by ")[0];
@@ -92,12 +101,12 @@ public class Parser {
                         } else if (wordArray[0].equals("event")) {
                             if (noOfWords == 1) {
                                 throw new InvalidEventException("Please tell me the name and time period"
-                                        + " of the event task! Or else I cannot add it into the list.");
+                                        + " of the event duke.task! Or else I cannot add it into the list.");
                             }
                             String body = userCommand.split(" ", 2)[1];
                             if (body.split(" /at").length < 2) {
                                 throw new InvalidEventException("Please tell me both the name and "
-                                        + "the time period of the event task in the correct form! "
+                                        + "the time period of the event duke.task in the correct form! "
                                         + "Don't forget to include the time by using /at.");
                             }
                             String taskName = body.split(" /at ")[0];
@@ -115,9 +124,6 @@ public class Parser {
             return new ErrorCommand(e.getMessage());
         }
     }
-
-
-
 
 
 }

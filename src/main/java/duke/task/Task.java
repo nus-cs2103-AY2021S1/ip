@@ -3,7 +3,7 @@ package duke.task;
 import java.time.LocalDate;
 
 /**
- * Task Class consists of methods related to Task.
+ * Represents a Task and consists of methods related to Task.
  */
 public class Task {
     protected String taskName;
@@ -12,9 +12,9 @@ public class Task {
     protected LocalDate localDate;
 
     /**
-     * Constructs a task.
+     * Constructs a duke.task.
      *
-     * @param taskName Name of the task.
+     * @param taskName Name of the duke.task.
      */
     public Task(String taskName) {
         this.taskName = taskName;
@@ -22,10 +22,10 @@ public class Task {
     }
 
     /**
-     * Constructs a task with time as an additional argument.
+     * Constructs a duke.task with time as an additional argument.
      *
-     * @param taskName Name of the task.
-     * @param time Time of the task.
+     * @param taskName Name of the duke.task.
+     * @param time Time of the duke.task.
      */
     public Task(String taskName, String time) {
         this.taskName = taskName;
@@ -39,16 +39,16 @@ public class Task {
     }
 
     /**
-     * Sets the task to be done.
+     * Sets the duke.task to be done.
      */
     public void setTaskToBeDone() {
         this.isDone = true;
     }
 
     /**
-     * Returns a string representing the status of the task.
+     * Returns a string representing the status of the duke.task.
      *
-     * @return Symbol of the status of the task.
+     * @return Symbol of the status of the duke.task.
      */
     public String getStatusSymbol() {
         if (isDone) {
@@ -59,9 +59,18 @@ public class Task {
     }
 
     /**
-     * Sets the task status.
+     * Returns the duke.task's name.
      *
-     * @param whetherIsDone Boolean showing whether the task is done.
+     * @return The name of the duke.task.
+     */
+    public String getName() {
+        return this.taskName;
+    }
+
+    /**
+     * Sets the duke.task status.
+     *
+     * @param whetherIsDone Boolean showing whether the duke.task is done.
      */
     public void setWhetherTaskDone(String whetherIsDone) {
          isDone = whetherIsDone.equals("true");
@@ -70,7 +79,7 @@ public class Task {
     /**
      * Returns a string of the format required by the storage file.
      *
-     * @return String describing the task.
+     * @return String describing the duke.task.
      */
     public String writeToFile() {
         return this.getStatusSymbol() + "|" + this.taskName;
@@ -79,7 +88,7 @@ public class Task {
     /**
      * Returns a string of a format to be printed by Duke.
      *
-     * @return String describing the task.
+     * @return String describing the duke.task.
      */
     @Override
     public String toString() {

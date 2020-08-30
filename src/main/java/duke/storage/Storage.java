@@ -13,13 +13,25 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * Represents the storage class. Storage class is a class consists of methods
+ * related to storing the list of tasks and updating the file used for
+ * storage.
+ */
 public class Storage {
 
-    /** The default file path if the user does not provide the file path.**/
+    // The default file path if the user does not provide the file path.
     private static final String DEFAULT_FILE_PATH = "data/tasks.txt";
     private String filePath;
     private String directoryPath;
 
+    /**
+     * Constructs a storage object.
+     *
+     * @param filePath The file path.
+     * @param directoryPath The directory path.
+     * @throws InvalidFilePathException If the file path is invalid.
+     */
     public Storage(String filePath, String directoryPath) throws InvalidFilePathException {
         try {
             File directory = new File(directoryPath);
@@ -39,11 +51,21 @@ public class Storage {
         }
     }
 
-
+    /**
+     * Checks if the file path is valid.
+     *
+     * @param filepath The file path.
+     * @return True if the file path is valid, false otherwise.
+     */
     private static boolean isValidFilePath(String filepath) {
         return filepath.endsWith(".txt");
     }
 
+    /**
+     * Returns the list of tasks stored in the file.
+     *
+     * @return The list of tasks stored in the file.
+     */
     public TaskList read() {
         try {
             ArrayList<Task> listOfTasks = new ArrayList<>();
@@ -76,11 +98,16 @@ public class Storage {
             scanner.close();
             return new TaskList(listOfTasks);
         } catch (IOException e) {
-            System.out.println(e.toString());
+            //System.out.println(e.toString());
             return new TaskList(new ArrayList<Task>());
         }
     }
 
+    /**
+     * Writes the list of tasks to the file.
+     *
+     * @param listOfTasks The list of tasks.
+     */
     public void write( ArrayList<Task> listOfTasks) {
         try {
             FileWriter fileWriter = new FileWriter(filePath);

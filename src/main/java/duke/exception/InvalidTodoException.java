@@ -2,7 +2,7 @@ package duke.exception;
 
 
 /**
- * The InvalidTodoException class handles the exceptions related
+ * Represents an InvalidTodoException and handles the exceptions related
  * to invalid todo tasks.
  */
 public class InvalidTodoException extends InvalidInputException {

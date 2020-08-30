@@ -5,15 +5,32 @@ import duke.task.TaskList;
 import duke.ui.Ui;
 import duke.exception.InvalidInputException;
 
+/**
+ * Represents a DoneCommand and handles methods related to commands
+ * about marking a task as done.
+ */
 public class DoneCommand extends Command {
 
     private Task task;
     private int index;
 
+    /**
+     * Constructs an DoneCommand.
+     */
     public DoneCommand(int index) {
         this.index = index;
     }
 
+    /**
+     * Executes the DoneCommand by displaying the message to users
+     * about the task is marked as done, and update the storage and
+     * the taskList.
+     *
+     * @param storage The storage object.
+     * @param taskList The taskList object.
+     * @param ui The ui object.
+     * @throws InvalidInputException If the input is invalid.
+     */
     @Override
     public void execute(Storage storage, TaskList taskList, Ui ui) throws InvalidInputException {
         Task task = taskList.getTask(index);

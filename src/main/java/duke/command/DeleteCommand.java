@@ -5,6 +5,10 @@ import duke.ui.Ui;
 import duke.exception.InvalidInputException;
 import duke.task.Task;
 
+/**
+ * Represents a DeleteCommand and handles methods related to commands
+ * about deleting a task.
+ */
 public class DeleteCommand extends Command {
 
     private int index;
@@ -12,18 +16,18 @@ public class DeleteCommand extends Command {
     /**
      * Constructs an DeleteCommand.
      *
-     * @param index The index of the task to be deleted.
+     * @param index The index of the duke.task to be deleted.
      */
     public DeleteCommand(int index) {
         this.index = index;
     }
 
     /**
-     * Executes the AddCommand by deleting the task from the list
+     * Executes the AddCommand by deleting the duke.task from the list
      * and giving user messages. The storage file is also updated.
      *
      * @param storage The storage object.
-     * @param taskList
+     * @param taskList The taskList object.
      * @param ui The ui object.
      * @throws InvalidInputException
      */

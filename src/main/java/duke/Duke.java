@@ -11,7 +11,8 @@ import duke.ui.Ui;
 import java.util.Scanner;
 
 /**
- * Duke class is the control class of Duke, include the logic of Duke.
+ * Represents Duke class, which is the control class of Duke and
+ * includes the logic of Duke.
  */
 public class Duke {
 

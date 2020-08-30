@@ -1,7 +1,7 @@
 package duke.exception;
 
 /**
- * The InvalidEventException class handles the exceptions related
+ * Represents an InvalidEventException and handles the exceptions related
  * to invalid event tasks.
  */
 public class InvalidEventException extends InvalidInputException {

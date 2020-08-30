@@ -3,7 +3,7 @@ package duke.exception;
 import duke.exception.InvalidInputException;
 
 /**
- * The InvalidRequestException class handles the exceptions related
+ * Represents an InvalidRequestException and handles the exceptions related
  * to invalid user requests.
  */
 public class InvalidRequestException extends InvalidInputException {

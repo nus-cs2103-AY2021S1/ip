@@ -1,7 +1,7 @@
 package duke.exception;
 
 /**
- * The InvalidDeadlineException class handles the exceptions related
+ * Represents an InvalidDeadlineException and handles the exceptions related
  * to invalid deadline tasks.
  */
 public class InvalidDeadlineException extends InvalidInputException {

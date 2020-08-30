@@ -4,6 +4,10 @@ import duke.task.TaskList;
 import duke.ui.Ui;
 import duke.exception.InvalidInputException;
 
+/**
+ * Represents an ExitCommand and handles methods related to commands
+ * about sending the exit message.
+ */
 public class ExitCommand extends Command {
 
     /**
@@ -17,7 +21,7 @@ public class ExitCommand extends Command {
      * Executes the ExitCommand by displaying the exit message to users.
      *
      * @param storage The storage object.
-     * @param taskList
+     * @param taskList The taskList object.
      * @param ui The ui object.
      * @throws InvalidInputException If the input is invalid.
      */

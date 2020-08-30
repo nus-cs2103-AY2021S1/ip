@@ -1,7 +1,7 @@
 package duke.task;
 
 /**
- * Todo Class consists of methods related to Todo Task.
+ * Represents a Todo and consists of methods related to Todo Task.
  */
 public class Todo extends Task {
 
@@ -17,7 +17,7 @@ public class Todo extends Task {
     /**
      * Returns a string of the format required by the storage file.
      *
-     * @return String describing the todo task.
+     * @return String describing the todo duke.task.
      */
     @Override
     public String writeToFile() {
@@ -29,7 +29,7 @@ public class Todo extends Task {
     /**
      * Returns a string of a format to be printed by Duke.
      *
-     * @return String describing the todo task.
+     * @return String describing the todo duke.task.
      */
     @Override
     public String toString() {

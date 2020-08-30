@@ -1,7 +1,7 @@
 package duke.exception;
 
 /**
- * The InvalidFilePathException class handles the exceptions related
+ * Represents an InvalidFilePathException and handles the exceptions related
  * to invalid file paths.
  */
 public class InvalidFilePathException extends Exception {
