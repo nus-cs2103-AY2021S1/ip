@@ -32,6 +32,14 @@ public class Duke {
         ui.run();
     }
 
+    public String getResponse(String input) throws IOException {
+        return ui.getResponse(input);
+    }
+
+    public String getGreeting() {
+        return ui.greet();
+    }
+
     public static void main(String[] args) throws IOException {
         String home = System.getProperty("user.home");
         boolean fileExists = new java.io.File(home + "/iP/File.txt").exists();
