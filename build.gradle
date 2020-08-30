@@ -29,7 +29,7 @@ test {
 }
 
 application {
-    mainClassName = "seedu.duke.Duke"
+    mainClassName = "duke.duke.Duke"
 }
 
 shadowJar {
@@ -43,4 +43,12 @@ checkstyle {
 
 run{
     standardInput = System.in
+}
+
+jar {
+    manifest {
+        attributes(
+                'Main-Class': 'duke.duke.Duke'
+        )
+    }
 }

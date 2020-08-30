@@ -74,9 +74,9 @@ public class Task {
     @Override
     public String toString() {
         if (isDone) {
-            return "[" + "\u2713" + "] " + taskName;
+            return "[" + "☑" + "] " + taskName;
         } else {
-            return "[" + "\u2717" + "] " + taskName;
+            return "[" + "☒" + "] " + taskName;
         }
     }
 
