@@ -28,7 +28,7 @@ public class Ui {
         System.out.println("Hello from\n" + LOGO);
 
         System.out.println(LINE_BREAK);
-        System.out.println(SPACE1 + "Hey, I'm Emilia \u2764 !\n" + SPACE1 +
+        System.out.println(SPACE1 + "Hey, I'm Emilia ♥ !\n" + SPACE1 +
                 "What can I do for you?");
         System.out.println(LINE_BREAK);
     }
@@ -50,7 +50,7 @@ public class Ui {
     }
 
     public void showBye() {
-        System.out.println(SPACE1 + "Welcome back \u2764 !" );
+        System.out.println(SPACE1 + "Welcome back ♥ !" );
     }
 
     public void showList() {
