@@ -9,7 +9,7 @@ del ACTUAL.TXT
 set JAVA_TOOL_OPTIONS=-Dfile.encoding=UTF-8
 
 REM compile the code into the bin folder
-javac  -cp ..\src -Xlint:none -d ..\bin ..\src\main\java\*.java
+javac  -cp ..\src -Xlint:none -d ..\bin ..\src\main\java\duke\*.java ..\src\main\java\duke\command\*.java ..\src\main\java\duke\exception\*.java ..\src\main\java\duke\task\*.java
 IF ERRORLEVEL 1 (
     echo ********** BUILD FAILURE **********
     PAUSE
