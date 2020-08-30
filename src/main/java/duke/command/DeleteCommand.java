@@ -51,7 +51,7 @@ public class DeleteCommand extends Command {
             String feedback = String.format("Noted. I've removed this task:\n  %s\nNow you have %d tasks in your list.",
                     deletedTask.toString(),
                     remainingTaskCount);
-            ui.formattedPrint(ui.prependIndent(feedback, 1));
+            ui.print(feedback);
         } else {
             throw new IncompleteDukeCommandException("Delete command was not completed.");
         }

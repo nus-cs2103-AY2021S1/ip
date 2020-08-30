@@ -34,7 +34,7 @@ public class DeleteAllCommand extends Command {
     public void printFeedback(Ui ui) throws IncompleteDukeCommandException {
         if (super.completed) {
             String feedback = "I've cleared all your tasks.\nYou sure are efficient.";
-            ui.formattedPrint(ui.prependIndent(feedback, 1));
+            ui.print(feedback);
         } else {
             throw new IncompleteDukeCommandException("Delete all command was not completed.");
         }

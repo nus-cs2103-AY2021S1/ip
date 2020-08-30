@@ -1,47 +1,16 @@
-import duke.command.Command;
-import duke.exceptions.DukeException;
-import duke.exceptions.IncompleteDukeCommandException;
-import duke.parser.Parser;
-import duke.storage.Storage;
-import duke.task.TaskList;
-import duke.ui.Ui;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
 
-public class Duke {
+public class Duke extends Application {
 
-    private Storage storage;
-    private TaskList taskList;
-    private Ui ui;
+    @Override
+    public void start(Stage stage) {
+        Label helloWorld = new Label("Hello World!");
+        Scene scene = new Scene(helloWorld);
 
-    Duke(String filePath) {
-        ui = new Ui();
-        storage = new Storage(filePath);
-        try {
-            taskList = new TaskList(storage.load());
-        } catch (DukeException e) {
-            ui.showLoadingError();
-            taskList = new TaskList();
-        }
-    }
-
-    private void run() {
-        ui.greet();
-        Boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                Command c = Parser.parse(fullCommand);
-                c.execute(taskList, storage);
-                c.printFeedback(ui);
-                isExit = c.isExit();
-            } catch (IncompleteDukeCommandException e) {
-                ui.formattedPrint(ui.prependIndent("Something went wrong, but I'm not sure what...", 1));
-            } catch (DukeException e) {
-                ui.formattedPrint(ui.prependIndent(e.getMessage(), 1));
-            }
-        }
-    }
-
-    public static void main(String[] args) {
-        new Duke(Storage.FILE_PATH).run();
+        stage.setScene(scene);
+        stage.show();
     }
 }

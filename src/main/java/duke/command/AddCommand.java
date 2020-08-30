@@ -69,7 +69,7 @@ public class AddCommand extends Command {
                     "Got it. I've added this task:\n  %s\nNow you have %d tasks in your list.\n",
                     createdTask.toString(),
                     remainingTaskCount);
-            ui.formattedPrint(ui.prependIndent(feedback, 1));
+            ui.print(feedback);
         } else {
             throw new IncompleteDukeCommandException("Add command was not completed.");
         }

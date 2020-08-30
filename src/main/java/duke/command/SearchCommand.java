@@ -61,7 +61,7 @@ public class SearchCommand extends Command {
                 }
                 resultPrint = resultPrint.concat(result.toString());
             }
-            ui.formattedPrint(ui.prependIndent(resultPrint, 1));
+            ui.print(resultPrint);
         } else {
             throw new IncompleteDukeCommandException("Search command was not completed.");
         }

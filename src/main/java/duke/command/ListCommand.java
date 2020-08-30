@@ -50,7 +50,7 @@ public class ListCommand extends Command {
                     printout += String.format("%d.%s\n", i + 1, existingTasks.get(i).toString());
                 }
             }
-            ui.formattedPrint(ui.prependIndent(printout, 1));
+            ui.print(printout);
         } else {
             throw new IncompleteDukeCommandException("List command was not completed.");
         }
