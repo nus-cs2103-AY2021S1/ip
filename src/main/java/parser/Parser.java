@@ -4,12 +4,10 @@ import java.util.List;
 import java.util.Scanner;
 
 import exception.DukeException;
-
-import task.TaskList;
-import task.TaskDescription;
-import task.tasks.Task;
-
 import storage.Storage;
+import task.TaskDescription;
+import task.TaskList;
+import task.tasks.Task;
 
 /**
  * Deals with making sense of the user command.
@@ -37,7 +35,9 @@ public class Parser {
             } else if (userCommand.contains("done")) {
                 // e.g done 1
                 tasklist.markTaskDone(userCommand);
-            } else if (userCommand.contains("todo") || userCommand.contains("deadline") || userCommand.contains("event")) {
+            } else if (userCommand.contains("todo")
+                    || userCommand.contains("deadline")
+                    || userCommand.contains("event")) {
                 // Add Task, e.g todo work
                 tasklist.addTask(userCommand);
             } else if (userCommand.contains("delete")) {

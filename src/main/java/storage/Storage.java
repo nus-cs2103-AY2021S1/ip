@@ -3,21 +3,19 @@ package storage;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.StandardOpenOption;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import task.tasks.Task;
-import task.tasks.Todo;
+import exception.DukeException;
 import task.tasks.Deadline;
 import task.tasks.Event;
+import task.tasks.Task;
+import task.tasks.Todo;
 
-import exception.DukeException;
 
 /**
  * Deals with loading tasks from duke.txt and saving tasks in duke.txt.
@@ -26,12 +24,12 @@ public class Storage {
     /**
      * Folder path of folder which duke.txt is found in.
      */
-    protected final static String FOLDERPATH =
+    protected static final String FOLDERPATH =
             java.nio.file.Paths.get(System.getProperty("user.dir"), "data").toString();
     /**
      * File path of duke.txt.
      */
-    protected final static String FILEPATH =
+    protected static final String FILEPATH =
             java.nio.file.Paths.get(System.getProperty("user.dir"), "data", "duke.txt").toString();
 
     /**
@@ -149,8 +147,10 @@ public class Storage {
                     String agenda = description.substring(0, description.lastIndexOf(" ("));
 
                     // Grab "by: Sunday" in "(by: Sunday)"
-                    // lastIndexOf ensures that something like return book (OK will do so) (by: Sunday) will not throw error
-                    String bracketText = description.substring(description.lastIndexOf("(") + 1, description.lastIndexOf(")"));
+                    // lastIndexOf ensures that something like
+                    // return book (OK will do so) (by: Sunday) will not throw error
+                    String bracketText = description.substring(
+                            description.lastIndexOf("(") + 1, description.lastIndexOf(")"));
 
                     // Grab "Sunday"
                     String by = bracketText.split("by: ", 2)[1];
@@ -163,8 +163,10 @@ public class Storage {
                     String agenda = description.substring(0, description.lastIndexOf(" ("));
 
                     // Grab "at: Mon 2-4pm"
-                    // lastIndexOf ensures that something like return book (OK will do so) (at: Mon 2-4pm) will not throw error
-                    String bracketText = description.substring(description.lastIndexOf("(") + 1, description.lastIndexOf(")"));
+                    // lastIndexOf ensures that something like
+                    // return book (OK will do so) (at: Mon 2-4pm) will not throw error
+                    String bracketText = description.substring(
+                            description.lastIndexOf("(") + 1, description.lastIndexOf(")"));
 
                     // Grab "Mon 2-4pm"
                     String at = bracketText.split("at: ", 2)[1];

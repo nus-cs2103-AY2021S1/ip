@@ -7,7 +7,7 @@ public class DukeException {
     /**
      * Line for proper formatting of error messages in DukeException methods.
      */
-    private final static String line = "\t____________________________________________________________\n";
+    private static final String line = "\t____________________________________________________________\n";
 
     /**
      * Renders an error message that user input has been written incorrectly.
@@ -83,8 +83,8 @@ public class DukeException {
      * Renders an error message that the application has issues loading task data from duke.txt into task list.
      */
     public static void errorLoadingTextIntoTaskList() {
-        System.out.println("<<IGNORE THIS ERROR IF IT IS YOUR FIRST TIME USING THE APPLICATION " +
-                "AND HAVE NOT ADD ANYTHING INTO TASK LIST!>>");
+        System.out.println("<<IGNORE THIS ERROR IF IT IS YOUR FIRST TIME USING THE APPLICATION "
+                + "AND HAVE NOT ADD ANYTHING INTO TASK LIST!>>");
         System.out.println("<<ERROR IS THROWN BECAUSE data\\duke.txt\\ HAS NOT BEEN CREATED YET ON FIRST RUN>>");
         System.out.println("Something went wrong while loading duke.txt into task list \n");
     }

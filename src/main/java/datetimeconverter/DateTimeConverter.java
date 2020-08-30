@@ -3,9 +3,8 @@ package datetimeconverter;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-
-import java.util.List;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * Accept dates in formats like dd-mm-yyyy and convert it to English date format.
