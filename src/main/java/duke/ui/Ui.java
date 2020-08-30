@@ -53,7 +53,7 @@ public class Ui {
      * Formatter to format any message. Easily customizable
      * @param messageList messages to be wrapped around the formatter.
      */
-    public String messageFormatter(String ...messageList) {
+    public String messageFormatter(String... messageList) {
         StringBuffer s = new StringBuffer("");
         for (int i = 0; i < messageList.length; i++) {
             s.append(messageList[i]).append("\n"); 

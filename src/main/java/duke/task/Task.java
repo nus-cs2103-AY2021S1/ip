@@ -39,7 +39,7 @@ public class Task {
      * @return Byte encoding strings of the symbols tick or X.
      */
     private String getStatusIcon() {
-        return (isDone ? "\u2713" : "\u2718");
+        return (isDone ? "\u2714" : "\u2718");
     }
     //@@author
 
@@ -72,7 +72,7 @@ public class Task {
     private int getTaskStatus() {
         return isDone ? 1 : 0;
     }
-
+    
     /**
      * Retrieves the details of the task.
      * 

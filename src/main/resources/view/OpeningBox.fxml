@@ -5,11 +5,15 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.VBox?>
 
-<fx:root maxHeight="Infinity" maxWidth="1.7976931348623157E308" prefWidth="900.0" type="javafx.scene.layout.VBox" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root maxHeight="Infinity" maxWidth="Infinity" type="javafx.scene.layout.VBox" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <Label alignment="CENTER" maxHeight="Infinity" fx:id="openingMessage" text="Label" wrapText="true" maxWidth="900.0"/>
-        <ImageView translateX="393" fx:id="displayPicture" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" />
-        <Label translateX="-10"  alignment="CENTER" maxHeight="Infinity" fx:id="greetingMessage" text="Label" wrapText="true" maxWidth="900.0"/>
+        <Label alignment="CENTER" maxHeight="Infinity" fx:id="openingMessage" text="Label" wrapText="true" maxWidth="Infinity"/>
+        <VBox translateX="-5" alignment="CENTER">
+            <children>
+                <ImageView fx:id="displayPicture" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" />
+            </children>
+        </VBox>
+        <Label translateX="-10"  alignment="CENTER" maxHeight="Infinity" fx:id="greetingMessage" text="Label" wrapText="true" maxWidth="Infinity"/>
     </children>
     <padding>
         <Insets bottom="15.0" left="5.0" right="5.0" top="15.0" />
