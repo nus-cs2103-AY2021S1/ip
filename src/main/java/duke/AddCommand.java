@@ -12,7 +12,6 @@ public class AddCommand extends Command {
 
     /**
      * Constructs AddCommand initialized with command type and description.
-     * 
      * @param type Type of add command.
      * @param description Description of the command.
      */
@@ -20,7 +19,7 @@ public class AddCommand extends Command {
         this.type = type;
         this.description = description;
     }
-    
+
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         String output = "";
@@ -32,8 +31,8 @@ public class AddCommand extends Command {
                 }
                 Task todoTask = new Todo(description);
                 tasks.add(todoTask);
-                output += "Got it. I've added this task:\n\t" 
-                        + todoTask + "\nYou now have " + tasks.size() 
+                output += "Got it. I've added this task:\n\t"
+                        + todoTask + "\nYou now have " + tasks.size()
                         + " tasks in the list.";
                 storage.writeToFile(tasks);
                 break;
@@ -42,8 +41,8 @@ public class AddCommand extends Command {
                 String by = description.split(" /by ")[1];
                 Task deadlineTask = new Deadline(task, LocalDate.parse(by));
                 tasks.add(deadlineTask);
-                output += "Got it. I've added this task:\n\t" 
-                        + deadlineTask + "\nYou now have " + tasks.size() 
+                output += "Got it. I've added this task:\n\t"
+                        + deadlineTask + "\nYou now have " + tasks.size()
                         + " tasks in the list.";
                 storage.writeToFile(tasks);
                 break;
@@ -52,8 +51,8 @@ public class AddCommand extends Command {
                 String at = description.split(" /at ")[1];
                 Task eventTask = new Event(task, LocalDate.parse(at));
                 tasks.add(eventTask);
-                output += "Got it. I've added this task:\n\t" 
-                        + eventTask + "\nYou now have " + tasks.size() 
+                output += "Got it. I've added this task:\n\t"
+                        + eventTask + "\nYou now have " + tasks.size()
                         + " tasks in the list.";
                 storage.writeToFile(tasks);
                 break;

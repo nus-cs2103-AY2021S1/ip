@@ -8,12 +8,11 @@ import java.util.Arrays;
 public class Parser {
     /**
      * Returns appropriate Command given user input.
-     * 
      * @param fullCommand User input.
      * @return Command of user input.
      * @throws DukeException If user inputs invalid command.
      */
-    public static Command parse(String fullCommand) throws DukeException{
+    public static Command parse(String fullCommand) throws DukeException {
         String[] strings = fullCommand.split(" ");
         String description = String.join(" ", Arrays.copyOfRange(strings, 1, strings.length));
         switch (convertToEnum(strings[0])) {

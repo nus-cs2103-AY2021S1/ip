@@ -12,7 +12,6 @@ public class Deadline extends Task {
 
     /**
      * Constructs a Deadline task with description and deadline.
-     * 
      * @param description Description of Deadline task.
      * @param by Deadline of task.
      */
@@ -23,7 +22,6 @@ public class Deadline extends Task {
 
     /**
      * Constructs a Deadline task with description, status and deadline.
-     * 
      * @param description Description of Deadline task.
      * @param isDone Status of task.
      * @param by Deadline of task.
@@ -35,7 +33,6 @@ public class Deadline extends Task {
 
     /**
      * Returns deadline of task.
-     * 
      * @return String representation of deadline.
      */
     public String getDate() {
@@ -44,10 +41,10 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" 
-                + super.toString() 
-                + " (by: " 
-                + by.format(DateTimeFormatter.ofPattern("MMM d yyyy")) 
+        return "[D]"
+                + super.toString()
+                + " (by: "
+                + by.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
                 + ")";
     }
 }

@@ -2,7 +2,6 @@ package duke;
 
 import java.util.ArrayList;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
  * Represents a Find Command
@@ -10,16 +9,16 @@ import java.util.stream.Stream;
 public class FindCommand extends Command {
     /**
      * Constructs a Find Command with description.
-     * 
      * @param description Description of command.
      */
     FindCommand(String description) {
         this.description = description;
     }
-    
+
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        tasks = new TaskList(new ArrayList<>(tasks.stream().filter(x -> x.description.contains(description)).collect(Collectors.toList())));
+        tasks = new TaskList(new ArrayList<>(tasks.stream()
+                .filter(x -> x.description.contains(description)).collect(Collectors.toList())));
         StringBuilder output = new StringBuilder();
         if (tasks.isEmpty()) {
             output = new StringBuilder("I'm sorry, there's nothing that matches your search.");
