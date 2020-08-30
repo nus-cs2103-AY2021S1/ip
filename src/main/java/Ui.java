@@ -6,8 +6,8 @@ import java.util.stream.Collectors;
  * Handles all elements displayed to the user
  */
 public class Ui {
-    Scanner scan;
-    static String format = "\t";
+    private Scanner scan;
+    static private String format = "\t";
 
     Ui() {
         this.scan = new Scanner(System.in);
@@ -66,7 +66,7 @@ public class Ui {
     public void printf(String printStr) {
         String print = format + printStr;
         String[] printSplit = print.split("\n");
-        for (int i = 1; i <  printSplit.length; i ++) {
+        for (int i = 1; i < printSplit.length; i++) {
             printSplit[i] = "\t" + printSplit[i];
         }
         System.out.println(Arrays.asList(printSplit).stream().collect(Collectors.joining("\n")));

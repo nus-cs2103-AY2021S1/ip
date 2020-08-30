@@ -8,8 +8,8 @@ import java.time.LocalDate;
 
 abstract class Command {
     protected boolean exit;
-    private static ExitCommand exitCommand = new ExitCommand();
-    private static ListCommand listCommand = new ListCommand();
+    static private ExitCommand exitCommand = new ExitCommand();
+    static private ListCommand listCommand = new ListCommand();
     private String type;
     private String task;
     private LocalDate date;
@@ -30,23 +30,23 @@ abstract class Command {
             return listCommand;
         } else if (command.contains("done ")) {
             int task = Integer.parseInt(command.replace("done ", "")) - 1;
-            return new doneCommand(task);
+            return new DoneCommand(task);
         } else if (command.contains("delete ")) {
             int task = Integer.parseInt(command.replace("delete ", "")) - 1;
-            return new deleteCommand(task);
+            return new DeleteCommand(task);
         } else if (command.contains("find ")) {
             String key = command.replace("find ", "");
-            return new findCommand(key);
+            return new FindCommand(key);
         } else {
             //actual entry
             String postFix = command.split(" ", 2)[1];
             String preFix = command.split(" ", 2)[0];
             if (preFix.equals("todo")) {
-                return new todoCommand(postFix);
+                return new TodoCommand(postFix);
             } else if (preFix.equals("deadline")) {
-                return new deadlineCommand(postFix);
+                return new DeadlineCommand(postFix);
             } else if (preFix.equals("event")) {
-                return new eventCommand(postFix);
+                return new EventCommand(postFix);
             } else {
                 throw new InvalidInput();
             }
@@ -100,10 +100,10 @@ class ListCommand extends Command {
 /**
  * A done command to mark a given task number as done
  */
-class doneCommand extends Command {
-    int doneTask;
+class DoneCommand extends Command {
+    private int doneTask;
 
-    doneCommand(int task) {
+    DoneCommand(int task) {
         super();
         this.doneTask = task;
     }
@@ -119,10 +119,10 @@ class doneCommand extends Command {
 /**
  * A delete command to delete a given task number
  */
-class deleteCommand extends Command {
-    int deleteTask;
+class DeleteCommand extends Command {
+    private int deleteTask;
 
-    deleteCommand(int task) {
+    DeleteCommand(int task) {
         super();
         this.deleteTask = task;
     }
@@ -139,10 +139,10 @@ class deleteCommand extends Command {
 /**
  * A Todo command to add a todo Task to the TaskList
  */
-class todoCommand extends Command {
-    String task;
+class TodoCommand extends Command {
+    private String task;
 
-    todoCommand(String toParse) {
+    TodoCommand(String toParse) {
         this.task = toParse;
     }
 
@@ -158,11 +158,11 @@ class todoCommand extends Command {
 /**
  * A Deadline command to add a Deadline Task to the TaskList
  */
-class deadlineCommand extends Command {
-    String task;
-    String deadline;
+class DeadlineCommand extends Command {
+    private String task;
+    private String deadline;
 
-    deadlineCommand(String toParse) {
+    DeadlineCommand(String toParse) {
         String[] split = toParse.split(" /by ");
         this.task = split[0];
         this.deadline = split[1];
@@ -180,10 +180,10 @@ class deadlineCommand extends Command {
 /**
  * An Event command to add an Event Task to the TaskList
  */
-class eventCommand extends Command {
-    String task;
-    String at;
-    eventCommand(String toParse) {
+class EventCommand extends Command {
+    private String task;
+    private String at;
+    EventCommand(String toParse) {
         String[] split = toParse.split(" /at ");
         this.task = split[0];
         this.at = split[1];
@@ -198,10 +198,10 @@ class eventCommand extends Command {
     }
 }
 
-class findCommand extends Command {
-    String key;
+class FindCommand extends Command {
+    private String key;
 
-    findCommand(String key) {
+    FindCommand(String key) {
         this.key = key;
     }
 

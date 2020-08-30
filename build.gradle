@@ -39,7 +39,11 @@ shadowJar {
 }
 
 checkstyle {
+<<<<<<< HEAD
     toolVersion = '8.23'
+=======
+    toolVersion = '8.29'
+>>>>>>> branch-A-CheckStyle
 }
 
 run{

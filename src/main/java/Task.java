@@ -1,7 +1,8 @@
 class Task {
-    String task;
-    String saveRep;
-    boolean done;
+    protected String task;
+    protected String saveRep;
+    protected boolean done;
+
     Task(String task) {
         this.task = task;
         this.done = false;
@@ -33,5 +34,9 @@ class Task {
     public void setDone() {
         this.done = true;
         this.updateRep();
+    }
+
+    public String getSaveRep() {
+        return this.saveRep;
     }
 }
