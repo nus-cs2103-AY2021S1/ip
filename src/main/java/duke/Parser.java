@@ -73,7 +73,7 @@ public class Parser {
                     errorMessage = "Missing task number! "
                             + "Please ensure to key in the task number :)\n";
                 } else if (action.equals("find")) {
-                    errorMessage ="Please indicate the keyword which you want to find.\n";
+                    errorMessage = "Please indicate the keyword which you want to find.\n";
                 }
             } else { // Deadline/Event missing their respective keywords
                 if (action.equals("deadline")) {

@@ -10,10 +10,11 @@ import java.util.List;
 import java.util.Scanner;
 
 import duke.exception.DukeException;
-import duke.task.Task;
-import duke.task.Todo;
 import duke.task.Deadline;
 import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
+
 
 /**
  * Represents a Duke storage that deals with
@@ -95,10 +96,10 @@ public class Storage {
                     data = letter + " | " + bit + " | " + description;
                 } else if (letter == 'D') {
                     String time = task.getDate().toString();
-                    data = letter + " | " + bit + " | " + description + " | " + time; 
+                    data = letter + " | " + bit + " | " + description + " | " + time;
                 } else { // letter == 'E'
                     String time = task.getDate().toString();
-                    data = letter + " | " + bit + " | " + description + " | " + time; 
+                    data = letter + " | " + bit + " | " + description + " | " + time;
                 }
                 myWriter.write(data + "\n");
             }

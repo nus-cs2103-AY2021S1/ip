@@ -43,7 +43,7 @@ public class Duke {
      * Runs and starts the programme.
      */
     public void run() {
-        ui.showWelcomeMessage();   
+        ui.showWelcomeMessage();
         boolean isExit = false;
         while (!isExit) {
             try {
@@ -57,6 +57,10 @@ public class Duke {
         }
     }
 
+    /**
+     * Starts up Duke.
+     * @param args Command line arguments.
+     */
     public static void main(String[] args) {
         Duke duke = new Duke("data/duke.txt");
         duke.run();
