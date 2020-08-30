@@ -1,66 +1,40 @@
 
 import java.io.File;
 import java.io.FileWriter;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
 
+    private Storage storage;
+    private TaskList tasks;
+    private Ui ui;
+
     private String filePath;
-    private ArrayList<Task> taskList;
     private boolean isRunning;
 
-    private enum Command {
-        BYE, LIST, DONE, DELETE, TODO, EVENT, DEADLINE, FIND, INVALID
-    }
 
     public Duke() {
-        this.filePath = System.getProperty("user.dir")
+        this.ui = new Ui();
+        String filePath = System.getProperty("user.dir")
                 + (System.getProperty("user.dir").endsWith("text-ui-test")
-                    ? "\\..\\data\\taskList.txt"
-                    : "\\data\\taskList.txt");
-        this.taskList = new ArrayList<>();
+                ? "\\..\\data\\taskList.txt"
+                : "\\data\\taskList.txt");
+        this.storage = new Storage(filePath);
         this.isRunning = true;
-    }
-
-    /**
-     * Take the first keyword from the user's input, and return
-     * an integer corresponding to the right command.
-     *
-     * @param input
-     * @return
-     */
-    private Command getCommand(String input) {
-        String lowerCaseInput = input.toLowerCase();
-        switch (lowerCaseInput) {
-            case "bye":
-                return Command.BYE;
-            case "list":
-                return Command.LIST;
-            case "done":
-                return Command.DONE;
-            case "delete":
-                return Command.DELETE;
-            case "todo":
-                return Command.TODO;
-            case "event":
-                return Command.EVENT;
-            case "deadline":
-                return Command.DEADLINE;
-            case "find":
-                return Command.FIND;
-            default:
-                return Command.INVALID;
+        try {
+            tasks = new TaskList(storage.load());
+        } catch (DukeException e) {
+            ui.showLoadingError();
+            tasks = new TaskList();
         }
     }
+
 
     /**
      * Main control system which loops user input until user exits with the
      * command 'bye'.
      */
     private void run() {
-        // TODO Need to GET saved list file and process it into ArrayList.
-        openTaskList();
         String introduction =
                 "Hi, I'm your Professor, Martin." +
                         "\nWhat can I do for you? You can ask me to do these:" +
@@ -78,10 +52,10 @@ public class Duke {
             try {
                 System.out.println("Enter input:");
                 input = sc.nextLine();
-                Command command = getCommand(input.split(" ")[0]);
+                CommandEnum.Command command = CommandEnum.getCommand(input.split(" ")[0]);
                 switch (command) {
                     case BYE:
-                        // TODO Need to implement saving mechanism.
+                        this.isRunning = false;
                         closeDuke();
                         break;
                     case LIST:
@@ -153,13 +127,13 @@ public class Duke {
      * List all tasks currently stored in the system.
      */
     private void listAllTasks() {
-        int numEntries = taskList.size();
+        int numEntries = tasks.size();
         if (numEntries == 0) {
             System.out.println("No tasks found.");
         } else {
             System.out.println("Here are the tasks in your list:");
             for (int i = 0; i < numEntries; i++) {
-                System.out.println((i + 1) + ". " + taskList.get(i));
+                System.out.println((i + 1) + ". " + tasks.get(i));
             }
         }
     }
@@ -170,9 +144,9 @@ public class Duke {
      * @param t Task to be stored into the ArrayList.
      */
     private void addTask(Task t) {
-        taskList.add(t);
+        tasks.add(t);
         System.out.println("Got it, I've added this task: " + t);
-        System.out.println("Now you have " + taskList.size() + " tasks in the list.");
+        System.out.println("Now you have " + tasks.size() + " tasks in the list.");
     }
 
     /**
@@ -183,10 +157,10 @@ public class Duke {
      */
     private void markTaskDone(int taskNum) {
         try {
-            if (taskNum < 0 || taskNum > taskList.size()) {
+            if (taskNum < 0 || taskNum > tasks.size()) {
                 throw new DukeException("Task number does not exist.");
             } else {
-                Task t = taskList.get(taskNum - 1);
+                Task t = tasks.get(taskNum - 1);
                 t.markDone();
                 System.out.println("Nice! I've marked this task as done:");
                 System.out.println(t);
@@ -198,11 +172,11 @@ public class Duke {
 
     private void deleteTask(int taskNum) {
         try {
-            if (taskNum > 0 && taskNum <= taskList.size()) {
+            if (taskNum > 0 && taskNum <= tasks.size()) {
                 System.out.println("Noted. I have removed this task:");
-                System.out.println(taskList.get(taskNum - 1));
-                taskList.remove(taskNum - 1);
-                System.out.println("Now you have " + taskList.size() + " tasks in the list.");
+                System.out.println(tasks.get(taskNum - 1));
+                tasks.remove(taskNum - 1);
+                System.out.println("Now you have " + tasks.size() + " tasks in the list.");
             } else {
                 throw new DukeException("Invalid task number for current task list.");
             }
@@ -242,7 +216,6 @@ public class Duke {
             // Event / Deadline description has been built, pass it to result[0].
             result[0] = sb.toString();
 
-            // TODO Need to check if date and time match pattern for level 8.
             sb = new StringBuilder();
             for (int k = indexToStop + 1; k < arr.length; k++) {
                 sb.append(arr[k]);
@@ -258,90 +231,12 @@ public class Duke {
         return result;
     }
 
-    /**
-     * Get task list from the taskList.txt and transfer the contents
-     * to the taskList ArrayList.
-     */
-    private void openTaskList() {
-        try {
-            File savedList = new File(filePath);
-            if (!savedList.exists()) {
-                System.out.print(
-                        "Welcome, first time user. Let me create " +
-                                "a new database to store your tasks.."
-                );
-                System.out.println(savedList.createNewFile() ? " Success." : " Failure.");
-            } else {
-                System.out.println("Found your data! Give me some time to read it...");
-                // TODO Get content from file. Transfer to arraylist.
-                Scanner taskReader = new Scanner(savedList);
-                while (taskReader.hasNextLine()) {
-                    String taskFromFile = taskReader.nextLine();
-                    // Note, this is assuming that format of
-                    // Task.getDescriptionForDatabase() remains the same.
-                    String[] formattedTaskString = taskFromFile.split(" - ");
-                    Command taskCommand = getCommand(formattedTaskString[0]);
-                    boolean isTaskDone = formattedTaskString[1].equals("0");
-                    switch (taskCommand) {
-                        case TODO:
-                            taskList.add(new Todo(formattedTaskString[2], isTaskDone));
-                            break;
-                        case EVENT:
-                            taskList.add(
-                                    new Event(
-                                            formattedTaskString[2],
-                                            formattedTaskString[3],
-                                            isTaskDone
-                                    )
-                            );
-                            break;
-                        case DEADLINE:
-                            taskList.add(
-                                    new Deadline(
-                                            formattedTaskString[2],
-                                            formattedTaskString[3],
-                                            isTaskDone
-                                    )
-                            );
-                            break;
-                    }
-                }
-                taskReader.close();
-            }
-
-        } catch (
-                Exception exception) {
-            System.out.println("Exception while opening task list file:" + exception);
-        }
-    }
 
     /**
      * Save the current list into a file and closes the program
-     * by setting isRunning to false.
      */
     private void closeDuke() {
-        isRunning = false;
-        // Begin process of saving Tasks in the taskList to the file.
-        try {
-            if (taskList.size() > 0) {
-                File savedList = new File(filePath);
-                FileWriter taskWriter = new FileWriter(savedList);
-                // Need to clear the existing file before writing.
-                if (savedList.exists()) {
-                    savedList.delete();
-                    savedList.createNewFile();
-                }
-                for (Task t : taskList) {
-                    taskWriter.write(t.getDescriptionForDatabase());
-                    taskWriter.write("\n");
-                }
-                System.out.println("...Saved your list.");
-                taskWriter.close();
-            }
-        } catch (Exception e) {
-            System.out.println("Exception occurred while closing Duke: " + e.toString());
-        }
-        System.out.println("Bye, see you soon. Exiting...");
+        this.storage.store(this.tasks);
     }
 
     /**
