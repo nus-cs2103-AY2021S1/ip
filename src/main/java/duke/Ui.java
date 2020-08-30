@@ -43,9 +43,9 @@ public class Ui {
         // Introduction at the beginning of the chat
         System.out.println(SERVANT_SPEAK
                 + "    Greetings my Liege.\n"
-                + "    Why have you summoned me?\n"
+                + "    Why have you summoned me?\n\n"
                 + "    You may type \"help\" for a list"
-                + " of available commands Sire.\n");
+                + " of available commands.\n");
     }
 
     /**
@@ -68,6 +68,7 @@ public class Ui {
                 + " - List all <task type> tasks\n"
                 + "    list all/todos/deadlines/events done/not done"
                 + " - List <task type> tasks that are <done/not done>\n"
+                + "    find <keyword> - Find tasks based on keyword input\n"
                 + "    done <task number> - Mark task as done\n"
                 + "    delete <task number> - Delete task from list\n");
     }
@@ -254,9 +255,23 @@ public class Ui {
      */
     public void printEventsNotDone(ArrayList<Task> userEventsNotDone) {
         System.out.println(SERVANT_SPEAK
-                + "    Here are all your eventse that you have"
+                + "    Here are all your events that you have"
                 + " not done your Majesty:");
         System.out.println(new TaskList(userEventsNotDone).toString());
+    }
+
+    /**
+     * Prints all the tasks in the task list
+     * that have been filtered according to given keyword.
+     *
+     * @param filteredTasks This is the list of tasks to be printed.
+     * @param keyword given keyword used by filter
+     */
+    public void printFilteredTasksByKeyword(ArrayList<Task> filteredTasks, String keyword) {
+        System.out.println(SERVANT_SPEAK
+                + "    Here are all the tasks containing "
+                + keyword + " your Majesty:");
+        System.out.println(new TaskList(filteredTasks).toString());
     }
 
     /**

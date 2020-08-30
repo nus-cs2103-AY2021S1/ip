@@ -217,6 +217,12 @@ public class TaskFinder {
      * @return ArrayList<Task> list of tasks containing given keyword
      */
     public ArrayList<Task> findByKeyword(ArrayList<Task> taskList, String keyword) {
-        return new ArrayList<>();
+        ArrayList<Task> filteredTasks = new ArrayList<Task>();
+        for (Task task: taskList) {
+            if (task.getDescription().contains(keyword)) {
+                filteredTasks.add(task);
+            }
+        }
+        return filteredTasks;
     }
 }

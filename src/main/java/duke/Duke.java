@@ -137,6 +137,12 @@ public class Duke {
                         .findEventsNotDone(userTasks.getTaskList());
                 ui.printEventsNotDone(eventsNotDone);
                 continue;
+            case LIST_BY_KEYWORD:
+                String keyword = input.split("find ")[1];
+                ArrayList<Task> filteredTasks = new TaskFinder()
+                        .findByKeyword(userTasks.getTaskList(), keyword);
+                ui.printFilteredTasksByKeyword(filteredTasks, keyword);
+                continue;
             case DONE:
                 // Get the index stated after "done" by parsing the string
                 int index = Integer.parseInt(input.substring(5)) - 1;

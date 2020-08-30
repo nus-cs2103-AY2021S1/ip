@@ -46,6 +46,15 @@ public class Task {
     }
 
     /**
+     * Returns this task's description
+     *
+     * @return String task's description
+     */
+    public String getDescription() {
+        return this.description;
+    }
+
+    /**
      * Returns icon associated with Task object's done status.
      *
      * @return String status icon representing done status of Task object

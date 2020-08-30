@@ -7,7 +7,9 @@ public class DukeException extends Exception {
     protected final String MESSAGE_ALL_TASKS_EMPTY_INPUT = "    I am sorry my Lord. "
             + "You have to give a command.\n";
     protected final String MESSAGE_ALL_TASKS_INVALID_COMMAND = "    I am sorry my Lord. "
-            + "I do not recognise that command.\n";
+            + "I do not recognise that command.\n\n"
+            + "    You may type \"help\" for a list"
+            + " of available commands.\n";
     protected final String MESSAGE_ALL_TASKS_EMPTY_DESCRIPTION = "    I am sorry my Lord. "
             + "Your description cannot be empty.\n";
     protected final String MESSAGE_DEADLINE_NO_BY = "    I am sorry my Lord. "

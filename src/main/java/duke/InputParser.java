@@ -120,6 +120,10 @@ public class InputParser {
             }
         }
 
+        if (input.startsWith("find ")) {
+            return CommandType.LIST_BY_KEYWORD;
+        }
+
         if (input.startsWith("done ")) {
             return CommandType.DONE;
         }
