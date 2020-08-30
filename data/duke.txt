@@ -1,4 +1,4 @@
-T | ✘ | join sports club | 
-D | ✘ | return book | 2/12/2019 1800
-E | ✓ | project meeting | 2/12/2019 1800
-D | ✘ | project | 2/2/2020 1000
+T | ? | join sports club | 
+D | ? | return book | 2/12/2019 1800
+E | ? | project meeting | 2/12/2019 1800
+D | ? | project | 2/2/2020 1000
