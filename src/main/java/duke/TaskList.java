@@ -62,32 +62,35 @@ public class TaskList {
      * @throws InvalidDateException If the command is of the format list [description]
      *                              but the [description] is in not in a valid date format.
      */
-    public void processList(String fullCommand) throws InvalidDateException {
+    public String processList(String fullCommand) throws InvalidDateException {
         if (fullCommand.trim().equalsIgnoreCase("list")) {
-            printList();
+            return printList();
         } else {
 
             LocalDate date = Parser.getDateTime(fullCommand.substring(
                 "list".length()).trim()).toLocalDate();
 
-            printList(date);
+            return printList(date);
 
         }
     }
 
     /** Prints the tasks in the list. */
-    private void printList() {
+    private String printList() {
 
         if (tasks.size() == 0) {
-            System.out.println("You have nothing on your list!");
+            return "You have nothing on your list!";
         }
+
+        StringBuilder str = new StringBuilder();
 
         int i = 1;
         for (Task todo : tasks) {
-            System.out.println(i + ". " + todo);
+            str.append(String.format("%d. %s\n", i, todo));
             i++;
         }
 
+        return str.toString();
     }
 
     /**
@@ -96,25 +99,32 @@ public class TaskList {
      *
      * @param date The date given by the user.
      */
-    private void printList(LocalDate date) {
+    private String printList(LocalDate date) {
+
+        StringBuilder str = new StringBuilder();
 
         int i = 0;
         for (Task task : tasks) {
+
             if (task.getDate().equals(date)) {
                 if (i == 0) {
-                    System.out.println("Here's your list on "
-                        + date.format(DateTimeFormatter.ofPattern("dd MMM y:")));
+                    str.append("Here's your list on ");
+                    str.append(date.format(DateTimeFormatter.ofPattern("dd MMM y")));
+                    str.append(":\n");
                 }
 
-                System.out.println((i + 1) + ". " + task);
+                str.append(String.format("%d. %s\n", (i + 1), task));
+
                 i++;
             }
         }
 
         if (i == 0 || tasks.size() == 0) {
-            System.out.println("You have nothing to do on "
-                + date.format(DateTimeFormatter.ofPattern("dd MMM y.")));
+            return "You have nothing to do on "
+                + date.format(DateTimeFormatter.ofPattern("dd MMM y."));
         }
+
+        return str.toString();
     }
 
     /**
@@ -211,12 +221,11 @@ public class TaskList {
      * @param taskIndex The index of the task to be marked.
      * @throws InvalidIndexException If the taskIndex < 0 or larger than the size of the taskList.
      */
-    public void markDone(int taskIndex) throws InvalidIndexException {
+    public String markDone(int taskIndex) throws InvalidIndexException {
         try {
             tasks.set(taskIndex, tasks.get(taskIndex).markDone());
+            return String.format("Nice! I've marked this task as done:\n %s", tasks.get(taskIndex));
 
-            System.out.println("Nice! I've marked this task as done:");
-            System.out.println(tasks.get(taskIndex));
         } catch (IndexOutOfBoundsException e) {
             throw new InvalidIndexException(tasks.size());
         }
@@ -228,12 +237,11 @@ public class TaskList {
      * @param taskIndex The index of the task to be deleted.
      * @throws InvalidIndexException If the taskIndex < 0 or larger than the size of the taskList.
      */
-    public void deleteTask(int taskIndex) throws InvalidIndexException {
+    public String deleteTask(int taskIndex) throws InvalidIndexException {
         try {
             Task deleted = tasks.remove(taskIndex);
+            return String.format("Noted. I've removed this task:\n %s", deleted);
 
-            System.out.println("Noted. I've removed this task:");
-            System.out.println(deleted);
         } catch (IndexOutOfBoundsException e) {
             throw new InvalidIndexException(tasks.size());
         }
@@ -244,19 +252,22 @@ public class TaskList {
      *
      * @param keyword The keyword to search for in tasks.
      */
-    public void findTasks(String keyword) {
+    public String findTasks(String keyword) {
 
         keyword = keyword.trim().toLowerCase();
+
+        StringBuilder str = new StringBuilder();
 
         int i = 0;
         for (Task task : tasks) {
             if (task.getTask().contains(keyword)) {
                 if (i == 0) {
-                    System.out.println("Here are the matching tasks on your list.");
+                    str.append("Here are the matching tasks on your list.\n");
                 }
 
-                System.out.print((i + 1) + ". ");
-                System.out.println(task);
+                str.append(String.format("%d. ", (i + 1)));
+                str.append(String.format("%s\n", task));
+
                 i++;
             }
         }
@@ -264,20 +275,15 @@ public class TaskList {
         if (i == 0) {
             System.out.println("OOPS. There are no tasks on your list with the following keyword.");
         }
-    }
 
-    /** Prints the size of the taskList. */
-    public void printListSize() {
-        String taskText = tasks.size() == 1 ? " task " : " tasks ";
-        System.out.println("You have " + tasks.size() + taskText + "on your list.");
+        return str.toString();
     }
 
     /** Prints the recently added task. */
-    public void printNewTask() {
-        System.out.println("Got it. I've added this task:");
-        System.out.println(tasks.get(tasks.size() - 1).toString());
-
-        printListSize();
+    public String printNewTask() {
+        return String.format("Got it. I've added this task:\n %s\n"
+            + "You have %d %s on your list.",
+            tasks.get(tasks.size() - 1), tasks.size(), tasks.size() == 1 ? "task" : "tasks");
     }
 
     public ArrayList<Task> getTasks() {

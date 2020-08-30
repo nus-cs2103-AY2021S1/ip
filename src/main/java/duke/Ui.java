@@ -39,10 +39,10 @@ public class Ui {
     }
 
     /** Says goodbye to the user. */
-    public void bye() {
+    public String bye() {
         sc.close();
-        System.out.println("Bye! Thank you for chatting with " + botName + "!");
-        System.out.println("Hope to see you again soon!");
+        return String.format("Bye! Thank you for chatting with %s!\n"
+            + "Hope to see you again soon!", botName);
     }
 
     /** Prints the border line. */

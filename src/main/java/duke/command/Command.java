@@ -21,7 +21,7 @@ public abstract class Command {
      * @param storage  The storage system of the bot.
      * @throws DukeException If there is something wrong with the task input.
      */
-    public abstract void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException;
+    public abstract String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException;
 
     /**
      * Returns the type of command.
@@ -31,5 +31,4 @@ public abstract class Command {
     public boolean isExit() {
         return isExit;
     }
-
 }

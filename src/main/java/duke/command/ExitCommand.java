@@ -20,7 +20,7 @@ public class ExitCommand extends Command {
      * @param storage  The storage system of the bot.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
-        ui.bye();
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
+        return ui.bye();
     }
 }

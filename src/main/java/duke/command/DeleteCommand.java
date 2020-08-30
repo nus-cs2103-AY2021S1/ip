@@ -30,9 +30,10 @@ public class DeleteCommand extends Command {
      * @throws DukeException If there is something wrong with the deleting process.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        taskList.deleteTask(taskNo - 1);
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+        String deleteTask = taskList.deleteTask(taskNo - 1);
         storage.saveTasks(taskList.getTasks());
+        return deleteTask;
     }
 
     /**

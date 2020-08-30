@@ -29,6 +29,11 @@ public class Duke {
         }
     }
 
+    /** Constructs a Duke bot with the default save location (data/duke.txt). */
+    public Duke() {
+        this("data");
+    }
+
     /** Runs the bot, accepts tasks and saves them into the file. */
     public void run() {
         ui.showWelcome();
@@ -54,5 +59,18 @@ public class Duke {
     public static void main(String[] args) {
         Duke bot = new Duke("data");
         bot.run();
+    }
+
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    public String getResponse(String input) {
+        try {
+            Command c = Parser.parse(input);
+            return c.execute(tasks, ui, storage);
+        } catch (DukeException e) {
+            return e.getMessage();
+        }
     }
 }

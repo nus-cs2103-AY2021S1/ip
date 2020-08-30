@@ -33,7 +33,7 @@ public class FindCommand extends Command {
      * @param storage  The storage for saving tasks.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
-        taskList.findTasks(keyword);
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
+        return taskList.findTasks(keyword);
     }
 }

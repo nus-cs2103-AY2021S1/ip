@@ -30,9 +30,10 @@ public class DoneCommand extends Command {
      * @throws DukeException If the taskNo is invalid.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        taskList.markDone(taskNo - 1);
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+        String taskDone = taskList.markDone(taskNo - 1);
         storage.saveTasks(taskList.getTasks());
+        return taskDone;
     }
 
     /**
