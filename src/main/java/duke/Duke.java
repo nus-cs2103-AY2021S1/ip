@@ -24,6 +24,11 @@ public class Duke {
         storage = new Storage();
         tasks = new TaskList();
         ui = new Ui();
+        try {
+            storage.loadTasks(tasks);
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     private void start() {
@@ -32,7 +37,6 @@ public class Duke {
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
-        ui.printGreeting();
         boolean isExit = false;
         while (!isExit) {
             try {
@@ -44,6 +48,21 @@ public class Duke {
                 System.out.println(e.getMessage());
             }
         }
+    }
+
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    public String getResponse(String input) {
+        String response;
+        try {
+            Command c = Parser.parse(input);
+            response = c.execute(storage, tasks, ui);
+        } catch (DukeException | IOException e) {
+            return e.getMessage();
+        }
+        return response;
     }
 
     /**

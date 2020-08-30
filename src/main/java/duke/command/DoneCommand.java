@@ -22,14 +22,14 @@ public class DoneCommand extends Command {
     }
 
     @Override
-    public void execute(Storage storage, TaskList tasks, Ui ui)
+    public String execute(Storage storage, TaskList tasks, Ui ui)
             throws DukeInvalidArgumentException,
             DukeInvalidTaskException {
         try {
             int taskNum = Integer.parseInt(extra)
                     - PARSE_INDEX;
             tasks.getTask(taskNum).markAsDone();
-            ui.printDone(tasks, taskNum);
+            return ui.printDone(tasks, taskNum);
         } catch (NumberFormatException e) {
             throw new DukeInvalidArgumentException(command);
         } catch (IndexOutOfBoundsException e) {
