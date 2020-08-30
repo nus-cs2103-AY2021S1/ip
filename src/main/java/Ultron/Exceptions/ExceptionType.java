@@ -4,12 +4,12 @@ public enum ExceptionType {
     /**
      * ExceptionType when too much arguments are supplied.
      */
-    TOO_MUCH_ARGUMENTS("Too much arguments supplied for %s"),
+    TOO_MUCH_ARGUMENTS("Clearly there is too much arguments for %s"),
 
     /**
      * ExceptionType when there are no arguments supplied.
      */
-    NO_ARGUMENTS_SUPPLIED("No arguments supplied for %s"),
+    NO_ARGUMENTS_SUPPLIED("%s has arguments you know"),
 
     /**
      * ExceptionType when arguments are invalid.
@@ -19,22 +19,22 @@ public enum ExceptionType {
     /**
      * ExceptionType when the input is not a valid number.
      */
-    INVALID_NUMBER("'%s' is not a valid number"),
+    INVALID_NUMBER("'%s' is not a valid number. Do you even know what is a number?"),
 
     /**
      * ExceptionType when there is no such command.
      */
-    INVALID_COMMAND("Invalid command '%s'"),
+    INVALID_COMMAND("What are you even saying? There is no '%s'"),
 
     /**
      * ExceptionType when there are IO errors.
      */
-    IO_EXCEPTION("How do I not have permission for %s"),
+    IO_EXCEPTION("Blasphemy! How do I not have permission for %s"),
 
     /**
      * ExceptionType when Directory cannot be created.
      */
-    DIRECTORY_NOT_CREATED("Unable to create directory %s");
+    DIRECTORY_NOT_CREATED("I've accidentally destroyed the folder that was suppose to be made %s");
 
     /**
      * Stores the error message for the enum.
