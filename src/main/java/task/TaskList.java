@@ -3,13 +3,11 @@ package task;
 import java.util.List;
 
 import exception.DukeException;
-
-import task.tasks.Task;
-import task.tasks.Todo;
+import storage.Storage;
 import task.tasks.Deadline;
 import task.tasks.Event;
-
-import storage.Storage;
+import task.tasks.Task;
+import task.tasks.Todo;
 
 /**
  * Contains list of tasks and provide operations to manipulate this list of tasks.
@@ -137,7 +135,8 @@ public class TaskList {
      *
      * @param userCommand User input.
      * @throws IndexOutOfBoundsException If given a non-existent task S/N number.
-     *                                   E.g "delete 719329813298712398123" is not valid as number of tasks is cap to 100 by requirements.
+     *                                   E.g "delete 719329813298712398123" is not valid as number of tasks is
+     *                                   cap to 100 by requirements.
      *                                   E.g "delete 7" is not valid if there are only 6 tasks in the task list.
      */
     public void deleteTask(String userCommand) {

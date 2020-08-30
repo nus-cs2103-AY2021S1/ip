@@ -1,5 +1,5 @@
-import ui.UI;
 import parser.Parser;
+import ui.UI;
 
 /**
  * Main class / Entry point of Duke Personal Assistant Chatbot (Kim Jong Duke).
