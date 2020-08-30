@@ -22,7 +22,7 @@ public class Ui {
     private TaskList taskList;
     private Scanner scanner = new Scanner(System.in);
 
-    private Ui(TaskList taskList) {
+    public Ui(TaskList taskList) {
         this.taskList = taskList;
     }
 
@@ -33,7 +33,7 @@ public class Ui {
     /**
      * Adds entry into Duke and replies with response.
      */
-    private void addItem(String taskType, String task) throws DukeException {
+    private String addItem(String taskType, String task) throws DukeException {
         Ui.sectionize();
         String date = "";
         switch (taskType) {
@@ -55,24 +55,35 @@ public class Ui {
         default:
             throw new DukeException(Ui.errorMessage());
         }
-        System.out.println("\tGot it. I've added this task: ");
-        System.out.println("\t\t" + this.taskList.getList().get(this.taskList.size() - 1).toString());
-        System.out.println("\tNow you have " + this.taskList.size() + " tasks in the list.");
+        String result = "\tGot it. I've added this task:\n";
+        result += "\t\t" + this.taskList.getList().get(this.taskList.size() - 1).toString() + "\n";
+        result += "\tNow you have " + this.taskList.size() + " tasks in the list.";
+        this.reply(result);
         Ui.sectionize();
+        return result;
+    }
+
+    private void reply(String reply) {
+        System.out.println(reply);
     }
 
     /**
      * Prints entries stored in Duke.
      */
-    private void listItems() {
+    private String listItems() {
+        System.out.println(this.taskList);
         Ui.sectionize();
-        System.out.println("\tHere are the tasks in your list:");
+        String res = "";
+        res += "\tHere are the tasks in your list:";
         int counter = 1;
         for (int i = 0; i < this.taskList.size(); i++) {
-            System.out.println("\t" + counter + "." + this.taskList.getItem(i).toString());
+            res += "\n";
+            res += "\t" + counter + "." + this.taskList.getItem(i).toString();
             counter++;
         }
+        reply(res);
         Ui.sectionize();
+        return res;
     }
 
     /**
@@ -80,7 +91,7 @@ public class Ui {
      *
      * @param input input keyword to match.
      */
-    private void findItem(String input) {
+    private String findItem(String input) {
         int len = this.taskList.size();
         ArrayList<Task> matchingTaskList = new ArrayList<>();
         //loop through taskstring in tasklist and find matching keywords
@@ -92,16 +103,18 @@ public class Ui {
             }
         }
         if (matchingTaskList.size() == 0) {
-            this.replyNoTaskFound(input);
+            return this.replyNoTaskFound(input);
         } else {
-            this.replyTasksFound(matchingTaskList);
+            return this.replyTasksFound(matchingTaskList);
         }
     }
 
-    private void replyNoTaskFound(String input) {
+    private String replyNoTaskFound(String input) {
         Ui.sectionize();
-        System.out.println("\tI'm sorry, there are no tasks found with keyword " + input + ".");
+        String result = "\tI'm sorry, there are no tasks found with keyword " + input + ".";
+        this.reply(result);
         Ui.sectionize();
+        return result;
     }
 
     /**
@@ -109,34 +122,45 @@ public class Ui {
      *
      * @param taskList list of tasks that match input keyword.
      */
-    private void replyTasksFound(List<Task> taskList) {
+    private String replyTasksFound(List<Task> taskList) {
         Ui.sectionize();
-        String reply = "\tHere are the matching tasks in your list:";
+        String result = "\tHere are the matching tasks in your list:";
         for (Task task : taskList) {
-            reply += "\n\t";
-            reply += task.toString();
+            result += "\n\t";
+            result += task.toString();
         }
-        System.out.println(reply);
+        this.reply(result);
         Ui.sectionize();
+        return result;
     }
 
-    private void sayBye() {
+    private String sayBye() {
+        String result = "";
         try {
             Storage.saveListToFile(this.taskList);
             Ui.sectionize();
-            System.out.println("\tBye. Hope to see you again soon!");
+            result = "\tBye. Hope to see you again soon!";
+            this.reply(result);
             Ui.sectionize();
+            return result;
         } catch (IOException e) {
-            System.out.println("Sorry! The file failed to save. Please try again.");
+            result = "Sorry! The file failed to save. Please try again.";
+            this.reply(result);
+            return result;
+        } finally {
+            exit();
         }
     }
 
-    private void markDone(int index) {
+    private String markDone(int index) {
+        String result = "";
         this.taskList.setDone(index);
         Ui.sectionize();
-        System.out.println("\tNice! I've marked this task as done: ");
-        System.out.println("\t" + this.taskList.getItem(index).toString());
+        result += "\tNice! I've marked this task as done:\n";
+        result += "\t" + this.taskList.getItem(index).toString();
+        this.reply(result);
         Ui.sectionize();
+        return result;
     }
 
     /**
@@ -144,27 +168,35 @@ public class Ui {
      *
      * @param index index of entry to be removed.
      */
-    private void remove(int index) {
+    private String remove(int index) {
+        String result = "";
         try {
             Task task = this.taskList.remove(index);
             Ui.sectionize();
-            System.out.println("\tNoted. I've removed this task: ");
-            System.out.println("\t\t" + task.toString());
-            System.out.println("\tNow you have " + this.taskList.size() + " tasks in the list.");
+            result += "\tNoted. I've removed this task:\n";
+            result += "\t\t" + task.toString() + "\n";
+            result += "\tNow you have " + this.taskList.size() + " tasks in the list.";
+            this.reply(result);
             Ui.sectionize();
+            return result;
         } catch (IndexOutOfBoundsException e) {
             Ui.sectionize();
-            System.out.println("\t☹ OOPS!!! I'm sorry, this task does not exist in your list!");
+            result += "\t☹ OOPS!!! I'm sorry, this task does not exist in your list!";
+            this.reply(result);
             Ui.sectionize();
+            return result;
         }
     }
 
     /**
      * Prints welcome message for Duke.
      */
-    public void showWelcome() {
-        System.out.println("Hello! I'm DukeBot");
-        System.out.println("What can I do for you?");
+    public String showWelcome() {
+        String result = "";
+        result += "Hello! I'm DukeBot\n";
+        result += "What can I do for you?";
+        this.reply(result);
+        return result;
     }
 
     private static void sectionize() {
@@ -172,7 +204,7 @@ public class Ui {
     }
 
     private static String errorMessage() {
-        return "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
+        return "\u2639 OOPS!!! I'm sorry, but I don't know what that means :-(";
     }
 
     /**
@@ -212,22 +244,38 @@ public class Ui {
      * Possible deadline command: "deadline add comments /by 2/12/2019 1800".
      * Possible todo command: "todo read book".
      */
-    private void listen() {
+    public void listen() {
         String input = scanner.nextLine();
+        handleCommand(input);
+        this.listen();
+    }
+
+    /**
+     * Listens from commands from user.
+     * Possible commands include: "done 1", "delete 2", "bye", "list".
+     * Possible event command: "event halloween party /at 2/12/2019 1800".
+     * Possible deadline command: "deadline add comments /by 2/12/2019 1800".
+     * Possible todo command: "todo read book".
+     */
+    public String listen(String input) {
+        String res = handleCommand(input);
+        return res;
+    }
+
+    private String handleCommand(String input) {
         if (Parser.isDone(input)) {
             int index = Integer.parseInt(input.substring(5, 6)) - 1;
-            this.markDone(index);
+            return this.markDone(index);
         } else if (Parser.isDelete(input)) {
             int index = Integer.parseInt(input.split(" ")[1]) - 1;
-            this.remove(index);
+            return this.remove(index);
         } else if (input.equals("bye")) {
-            this.sayBye();
-            exit();
+            return this.sayBye();
         } else if (input.equals("list")) {
-            this.listItems();
+            return this.listItems();
         } else if (Parser.isFind(input)) {
             String item = input.split(" ", 2)[1];
-            this.findItem(item);
+            return this.findItem(item);
         } else {
             try {
                 if (!Parser.isCorrectInputFormat(input)) {
@@ -239,24 +287,22 @@ public class Ui {
                 String task = input.substring(input.indexOf(" ") + 1);
                 switch (taskType) {
                 case ("todo"):
-                    this.addItem(taskType, task);
-                    break;
+                    return this.addItem(taskType, task);
                 case ("deadline"):
                     // date = 'by Sunday'
-                    this.addItem(taskType, task);
-                    break;
+                    return this.addItem(taskType, task);
                 case ("event"):
-                    this.addItem(taskType, task);
-                    break;
+                    return this.addItem(taskType, task);
                 default:
                     throw new DukeException(Ui.errorMessage());
                 }
             } catch (DukeException e) {
                 Ui.sectionize();
-                System.out.println("\t\t" + e.getMessage());
+                String errorMessage = "\t\t" + e.getMessage();
+                this.reply(errorMessage);
                 Ui.sectionize();
+                return errorMessage;
             }
         }
-        this.listen();
     }
 }

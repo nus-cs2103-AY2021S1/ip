@@ -10,10 +10,6 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
-import java.nio.file.FileSystems;
-import java.nio.file.Path;
-import java.sql.SQLOutput;
-
 public class MainWindow extends AnchorPane {
     @FXML
     private ScrollPane scrollPane;
@@ -51,12 +47,6 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
-    }
-
-    public static void main(String[] args) {
-        System.out.println("Working Directory = " + System.getProperty("user.dir"));
-        Path path = FileSystems.getDefault().getPath("DaDuke.png").toAbsolutePath();
-        System.out.println(path);
     }
 
 }

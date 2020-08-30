@@ -35,13 +35,14 @@ public class Duke extends Application {
      * Duke Default Constructor.
      */
     public Duke() {
-        this.ui = new Ui();
         this.storage = new Storage(FILE_PATH);
         try {
-            tasks = new TaskList(storage.load());
+            this.tasks = new TaskList(storage.load());
+            this.ui = new Ui(tasks);
         } catch (DukeException e) {
             ui.showLoadingError();
             tasks = new TaskList();
+            this.ui = new Ui(tasks);
         }
     }
     /**
@@ -137,7 +138,8 @@ public class Duke extends Application {
      * Replace this stub with your completed method.
      */
     public String getResponse(String input) {
-        return "Duke heard: " + input;
+        String res = this.ui.listen(input);
+        return res;
     }
 
     /**

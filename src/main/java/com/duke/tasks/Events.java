@@ -49,7 +49,7 @@ public class Events extends Task {
      */
     @Override
     public String toString() {
-        String doneIndicator = this.isDone ? "[✓]" : "[✗]";
+        String doneIndicator = this.isDone ? "[\u2713]" : "[\u2718]";
         int dayOfMonth = this.date.getDayOfMonth();
         String month = this.date.getMonth().toString();
         int year = this.date.getYear();
