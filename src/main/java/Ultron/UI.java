@@ -20,6 +20,13 @@ public final class UI {
         setIntro();
     }
 
+    public static String getIntro() {
+
+        //Print the intro
+        return "Hello lesser being, I am Ultron\n"
+            + "What do you want?\n";
+    }
+
     /**
      * Show the error as output to System out.
      *
@@ -93,13 +100,6 @@ public final class UI {
      */
     public void setIntro() {
         setMessage(getIntro());
-    }
-
-    public static String getIntro() {
-
-        //Print the intro
-        return "Hello lesser being, I am Ultron\n"
-            + "What do you want?\n";
     }
 
     private String getEnd() {
