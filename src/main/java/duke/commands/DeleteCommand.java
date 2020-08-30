@@ -1,10 +1,8 @@
-package commands;
-
-import commands.Command;
+package duke.commands;
 
 /**
- * <code>commands.DeleteCommand</code> inherits from the base class <code>commands.Command</code>
- * and will handle the job of deleting tasks.
+ * <code>duke.commands.DeleteCommand</code> inherits from the base class <code>duke.commands.Command</code>
+ * and will handle the job of deleting duke.tasks.
  */
 public class DeleteCommand extends Command {
     /**

@@ -1,10 +1,8 @@
-package commands;
-
-import commands.Command;
+package duke.commands;
 
 /**
- * <code>commands.ListCommand</code> inherits from the base class <code>commands.Command</code>
- * and will handle the job of listing tasks.
+ * <code>duke.commands.ListCommand</code> inherits from the base class <code>duke.commands.Command</code>
+ * and will handle the job of listing duke.tasks.
  */
 public class ListCommand extends Command {
     /**

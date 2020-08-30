@@ -1,9 +1,7 @@
-package commands;
-
-import commands.Command;
+package duke.commands;
 
 /**
- * <code>commands.DeadlineCommand</code> inherits from the base class <code>commands.Command</code>
+ * <code>duke.commands.DeadlineCommand</code> inherits from the base class <code>duke.commands.Command</code>
  * and will handle the job of adding deadlines to the task manager.
  */
 public class DeadlineCommand extends Command {

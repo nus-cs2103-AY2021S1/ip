@@ -1,9 +1,7 @@
-package commands;
-
-import commands.Command;
+package duke.commands;
 
 /**
- * <code>commands.TodoCommand</code> inherits from the base class <code>commands.Command</code>
+ * <code>duke.commands.TodoCommand</code> inherits from the base class <code>duke.commands.Command</code>
  * and will handle the job of adding todos to the task manager.
  */
 public class TodoCommand extends Command {

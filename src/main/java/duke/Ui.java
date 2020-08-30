@@ -1,6 +1,6 @@
 package duke;
 
-import tasks.Task;
+import duke.tasks.Task;
 
 /**
  * <code>duke.Ui</code> contains all the methods and information needed to diplay
@@ -70,7 +70,7 @@ public class Ui {
      */
     public void askTodo() {
         System.out.println(LINE);
-        System.out.println("What is the name of your tasks.Todo?");
+        System.out.println("What is the name of your duke.tasks.Todo?");
         System.out.println(LINE);
         System.out.print("> ");
     }
@@ -80,7 +80,7 @@ public class Ui {
      */
     public void askDeadlineName() {
         System.out.println(LINE);
-        System.out.println("What is the name of your tasks.Deadline?");
+        System.out.println("What is the name of your duke.tasks.Deadline?");
         System.out.println(LINE);
         System.out.print("> ");
     }
@@ -100,7 +100,7 @@ public class Ui {
      */
     public void askEventName() {
         System.out.println(LINE);
-        System.out.println("What is the name of your tasks.Event?");
+        System.out.println("What is the name of your duke.tasks.Event?");
         System.out.println(LINE);
         System.out.print("> ");
     }

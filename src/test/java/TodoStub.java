@@ -1,4 +1,4 @@
-import tasks.Task;
+import duke.tasks.Task;
 
 public class TodoStub extends Task {
     private String name;

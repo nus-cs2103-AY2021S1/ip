@@ -1,10 +1,8 @@
-package commands;
-
-import commands.Command;
+package duke.commands;
 
 /**
- * <code>commands.FindCommand</code> inherits from the base class <code>commands.Command</code>.
- * It handles the execution of finding tasks given a particular keyword.
+ * <code>duke.commands.FindCommand</code> inherits from the base class <code>duke.commands.Command</code>.
+ * It handles the execution of finding duke.tasks given a particular keyword.
  */
 public class FindCommand extends Command {
 

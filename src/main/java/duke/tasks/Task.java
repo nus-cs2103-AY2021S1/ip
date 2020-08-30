@@ -1,7 +1,7 @@
-package tasks;
+package duke.tasks;
 
 /**
- * <code>tasks.Task</code> is the base class for all kinds of tasks.
+ * <code>duke.tasks.Task</code> is the base class for all kinds of duke.tasks.
  */
 class Task {
     private boolean isCompleted;
@@ -39,7 +39,7 @@ class Task {
      */
     public String saveText() {
         String completeStatus = isCompleted ? "1" : "0";
-        return "tasks.Task," +  completeStatus + "," + name;
+        return "duke.tasks.Task," +  completeStatus + "," + name;
     }
 
     /**

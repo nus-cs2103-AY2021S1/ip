@@ -1,9 +1,7 @@
-package commands;
-
-import commands.Command;
+package duke.commands;
 
 /**
- * <code>commands.ExitCommand</code> inherits from the base class <code>commands.Command</code>
+ * <code>duke.commands.ExitCommand</code> inherits from the base class <code>duke.commands.Command</code>
  * and will handle the job of exiting duke.
  */
 public class ExitCommand extends Command {

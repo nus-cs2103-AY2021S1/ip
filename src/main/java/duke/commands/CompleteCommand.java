@@ -1,10 +1,8 @@
-package commands;
-
-import commands.Command;
+package duke.commands;
 
 /**
- * <code>commands.CompleteCommand</code> inherits from the base class <code>commands.Command</code>
- * and will handle the job of marking tasks as complete.
+ * <code>duke.commands.CompleteCommand</code> inherits from the base class <code>duke.commands.Command</code>
+ * and will handle the job of marking duke.tasks as complete.
  */
 public class CompleteCommand extends Command {
     /**

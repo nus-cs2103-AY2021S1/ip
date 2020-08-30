@@ -1,9 +1,7 @@
-package commands;
-
-import commands.Command;
+package duke.commands;
 
 /**
- * <code>commands.EventCommand</code> inherits from the base class <code>commands.Command</code>
+ * <code>duke.commands.EventCommand</code> inherits from the base class <code>duke.commands.Command</code>
  * and will handle the job of adding events to the task manager.
  */
 public class EventCommand extends Command {

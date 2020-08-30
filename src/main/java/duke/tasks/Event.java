@@ -1,4 +1,4 @@
-package tasks;
+package duke.tasks;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -6,7 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * <code>tasks.Event</code> inherits from <code>tasks.Task</code>
+ * <code>duke.tasks.Event</code> inherits from <code>duke.tasks.Task</code>
  * and is used to represent an event.
  */
 class Event extends Task {

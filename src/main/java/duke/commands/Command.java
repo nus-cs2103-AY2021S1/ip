@@ -1,10 +1,10 @@
-package commands;
+package duke.commands;
 
 import java.util.Scanner;
 
 /**
- * commands.Command is the abstract base class for all
- * commands
+ * duke.commands.Command is the abstract base class for all
+ * duke.commands
  */
 public abstract class Command {
     TaskManager tm;
