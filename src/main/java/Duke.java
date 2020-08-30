@@ -6,7 +6,23 @@ public class Duke {
     private Ui ui;
 
     /**
-     * Creates a Duke Object
+     * Creates a Duke Object.
+     */
+    public Duke() {
+        ui = new Ui();
+        String currentDir = System.getProperty("user.dir");
+        String filePath = currentDir + File.separator + "data" + File.separator + "duke.txt";
+        storage = new Storage(filePath);
+        try {
+            tasks = new TaskList(storage.load());
+        } catch (DukeException e) {
+            ui.showLoadingError();
+            tasks = new TaskList();
+        }
+    }
+
+    /**
+     * Creates a Duke Object.
      *
      * @param filePath The path to the txt file to store the data.
      */
@@ -19,6 +35,14 @@ public class Duke {
             ui.showLoadingError();
             tasks = new TaskList();
         }
+    }
+
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    public String getResponse(String input) {
+        return "Duke heard: " + input;
     }
 
     /**
