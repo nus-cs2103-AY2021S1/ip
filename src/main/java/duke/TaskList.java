@@ -11,6 +11,7 @@ import duke.exception.DeadlineInvalidDate;
 import duke.exception.DuplicateTaskException;
 import duke.exception.EventInvalidDate;
 import duke.exception.InvalidDateException;
+import duke.exception.InvalidEndDate;
 import duke.exception.InvalidIndexException;
 import duke.task.Deadline;
 import duke.task.Event;
@@ -141,7 +142,7 @@ public class TaskList {
      *                                and date is already on the list.
      * @throws EventInvalidDate       If the date of the event given is not in a valid date time format.
      */
-    public void addEvent(String input) throws DuplicateTaskException, EventInvalidDate {
+    public void addEvent(String input) throws DuplicateTaskException, EventInvalidDate, InvalidEndDate {
 
         try {
             String task = input.substring(0, input.indexOf('/')).trim();
@@ -159,6 +160,9 @@ public class TaskList {
                     endDate = Parser.getDateTime(endDateString);
                 }
 
+                if (endDate.isBefore(date)) {
+                    throw new InvalidEndDate();
+                }
             }
 
             Event event = endDate != null
