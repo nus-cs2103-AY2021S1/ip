@@ -1,7 +1,6 @@
 package Duke.Commands;
 
 import Duke.Errors.DukeException;
-
 import Duke.Helpers.Storage;
 import Duke.Helpers.TaskList;
 import Duke.Helpers.Ui;
@@ -40,5 +39,5 @@ abstract public class Command {
      * @param storage to change the input there if necessary
      * @throws DukeException if there are exceptions present
      */
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
+    public abstract String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
 }

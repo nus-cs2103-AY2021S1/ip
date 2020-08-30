@@ -1,11 +1,11 @@
 package Duke.Commands;
+
 import Duke.Errors.DoneException;
 import Duke.Errors.DukeException;
 import Duke.Errors.FileAbsentException;
 import Duke.Helpers.Storage;
 import Duke.Helpers.TaskList;
 import Duke.Helpers.Ui;
-
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -22,7 +22,7 @@ public class DoneCommand extends Command {
         super(string);
     }
 
-    private void rewrite(Storage storage, TaskList tasks, int ID) throws FileAbsentException {
+    private String rewrite(Storage storage, TaskList tasks, int ID) throws DukeException {
         tasks.getAllTasks().get(ID - 1).setDone(true);
         System.out.println("   Nice! I've marked this task as done:");
         System.out.println("   " + tasks.getAllTasks().get(ID - 1).toString());
@@ -34,6 +34,8 @@ public class DoneCommand extends Command {
             FileWriter fw = new FileWriter(storage.getFilePath());
             fw.write(s);
             fw.close();
+            return "   Nice! I've marked this task as done:\n" +
+                    "   " + tasks.getAllTasks().get(ID - 1).toString();
         } catch (IOException i) {
             throw new FileAbsentException(storage.getFilePath());
         }
@@ -46,7 +48,7 @@ public class DoneCommand extends Command {
      * @param storage to change the file as task is completed
      * @throws DukeException thrown if the ID is more than number of ID is absent
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (string.length() == 4 || string.length() == 5) {
             throw new DoneException(true, false);
         }else{
@@ -54,8 +56,22 @@ public class DoneCommand extends Command {
             if (ID > tasks.getAllTasks().size()) {
                 throw new DoneException(false, false);
             } else {
-                rewrite(storage, tasks, ID);
+                return rewrite(storage, tasks, ID);
             }
         }
     }
+
+
+    /*public String run(TaskList tasks, Storage storage) {
+        if (string.length() == 4 || string.length() == 5) {
+            return new DoneException(true, false).toString();
+        }else{
+            int ID = Integer.parseInt(string.substring(5));
+            if (ID > tasks.getAllTasks().size()) {
+                return new DoneException(false, false).toString();
+            } else {
+                return rewrite(storage, tasks, ID);
+            }
+        }
+    }*/
 }

@@ -2,10 +2,10 @@ package Duke.Commands;
 
 import Duke.Errors.DukeException;
 import Duke.Errors.EventException;
+import Duke.Errors.FileAbsentException;
 import Duke.Helpers.Storage;
 import Duke.Helpers.TaskList;
 import Duke.Helpers.Ui;
-
 import Duke.Tasks.event;
 
 import java.io.IOException;
@@ -77,7 +77,7 @@ public class EventCommand extends AddCommand{
      * @param storage to change the file in the if necessary when no erro
      * @throws DukeException if there no description after event no time or time is wrong format
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (string.length() == 5 || string.length() == 6) {
             throw new EventException(true, false, false, false);
         }
@@ -111,10 +111,10 @@ public class EventCommand extends AddCommand{
         }
         event d = provide(s.substring(1, s.length() - 1), string.substring(index + 4, end), string.substring(end + 1));
         try {
-            update(storage, d, tasks);
+            return update(storage, d, tasks);
 
         } catch (IOException i) {
-
+            throw new FileAbsentException(storage.getFilePath());
         }
     }
 }

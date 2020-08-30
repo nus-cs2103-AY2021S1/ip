@@ -30,14 +30,17 @@ abstract public class AddCommand extends Command {
      * @param taskList where the tasks here is updated with task added
      * @throws IOException when the file in storage is not present
      */
-    public static void update(Storage storage, Task task, TaskList taskList) throws IOException {
-        FileWriter fw = new FileWriter(storage.getFilePath(), true);
-        taskList.getAllTasks().add(task);
-        fw.write(task.inputListFormat() + "\n");
-        fw.close();
-        Task.tasks.add(task);
-        System.out.println("  Got it. I've added this task:\n  " + task.toString() + "\n" +
-                "  Now you have " + taskList.getAllTasks().size() + " tasks in the list.");
+    public static String update(Storage storage, Task task, TaskList taskList) throws IOException {
+            FileWriter fw = new FileWriter(storage.getFilePath(), true);
+            taskList.getAllTasks().add(task);
+            fw.write(task.inputListFormat() + "\n");
+            fw.close();
+            Task.tasks.add(task);
+            System.out.println("  Got it. I've added this task:\n  " + task.toString() + "\n" +
+                    "  Now you have " + taskList.getAllTasks().size() + " tasks in the list.");
+            return "  Got it. I've added this task:\n  " + task.toString() + "\n" +
+                    "  Now you have " + taskList.getAllTasks().size() + " tasks in the list.";
+
     }
 
     /**

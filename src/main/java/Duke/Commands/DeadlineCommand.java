@@ -2,6 +2,7 @@ package Duke.Commands;
 
 import Duke.Errors.DeadlineException;
 import Duke.Errors.DukeException;
+import Duke.Errors.FileAbsentException;
 import Duke.Helpers.Storage;
 import Duke.Helpers.TaskList;
 import Duke.Helpers.Ui;
@@ -54,7 +55,7 @@ public class DeadlineCommand extends AddCommand {
      * @throws DukeException whenever there is an error, where the time adn or date is absent or in wrong format, no
      * description
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DeadlineException{
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException{
         if (string.length() == 8 || string.length() == 9) {
             throw new DeadlineException(true, false);
         }
@@ -74,9 +75,42 @@ public class DeadlineCommand extends AddCommand {
         }
         Deadline d = provide(s.substring(1, s.length() - 1), string.substring(index + 4));
         try {
-            update(storage, d, tasks);
+            return update(storage, d, tasks);
         }catch (IOException i){
+            throw new FileAbsentException(storage.getFilePath());
+        }
+    }
 
+
+    public String run(TaskList tasks, Storage storage) {
+        if (string.length() == 8 || string.length() == 9) {
+            return new DeadlineException(true, false).toString();
+        }
+        String s = "";
+        int index = -1;
+        boolean time = false;
+        for (int i = 8; i < string.length(); i++) {
+            if (string.charAt(i) == '/') {
+                index = i;
+                time = true;
+                break;
+            }
+            s = s + string.charAt(i);
+        }
+        if (!time) {
+            return new DeadlineException(false, false).toString();
+        }
+        Deadline d;
+        try {
+            d = provide(s.substring(1, s.length() - 1), string.substring(index + 4));
+        }catch (DeadlineException e){
+            return e.toString();
+        }
+
+        try {
+            return update(storage, d, tasks);
+        }catch (IOException i){
+            return new FileAbsentException(storage.getFilePath()).toString();
         }
     }
 }

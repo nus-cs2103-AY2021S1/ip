@@ -1,2 +1,5 @@
 T | 1 | buy book
-D | 0 | submission | 14 Nov 2020
+D | 0 | submission  | 14 Nov 2020
+T | 0 | read book
+T | 0 | read book
+T | 0 | read book

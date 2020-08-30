@@ -1,6 +1,7 @@
 package Duke.Commands;
 
 import Duke.Errors.DukeException;
+import Duke.Errors.FileAbsentException;
 import Duke.Errors.TodoException;
 import Duke.Helpers.Storage;
 import Duke.Helpers.TaskList;
@@ -29,15 +30,15 @@ public class TodoCommand extends AddCommand{
      * @throws DukeException whenever there is an error, no
      * description
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException{
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException{
         if (string.length() == 4 || string.length() == 5) {
             throw new TodoException();
         } else {
             try {
                 todo t = new todo(string.substring(5));
-                update(storage, t, tasks);
+                return update(storage, t, tasks);
             }catch (IOException i){
-
+                throw new FileAbsentException(storage.getFilePath());
             }
         }
     }

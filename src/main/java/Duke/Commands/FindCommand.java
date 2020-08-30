@@ -54,7 +54,7 @@ public class FindCommand extends Command {
      * tasks.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if(string.length() == 4 || string.length() == 5){
             throw new FindException(false, "");
         }else{
@@ -64,11 +64,14 @@ public class FindCommand extends Command {
             if(this.tasks.size() == 0){
                 throw new FindException(true, find);
             }else{
+                String s = "  Here are the matching tasks in your list:";
                 System.out.println("  Here are the matching tasks in your list:");
                 for(int i = 0; i < this.tasks.size(); i++){
                     Task task = this.tasks.get(i);
                     System.out.println("  " + (i + 1) + "." + task.toString());
+                    s = s + "\n" + "  " + (i + 1) + "." + task.toString();
                 }
+                return s;
             }
         }
     }
