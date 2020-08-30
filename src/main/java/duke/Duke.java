@@ -18,13 +18,10 @@ public class Duke {
     private TaskList taskList;
     private Ui ui;
 
-    /**
-     * Create and initialize Duke.
-     * @param filePath The path where tasks are stored.
-     */
-    public Duke(Path filePath) {
+    /** Create and initialize Duke. */
+    public Duke() {
         ui = new Ui();
-        storage = new Storage(filePath);
+        storage = new Storage(path);
         taskList = new TaskList(storage.load());
     }
 
@@ -50,6 +47,10 @@ public class Duke {
      * Creates a Duke and start interacting with user.
      */
     public static void main(String[] args) {
-        new Duke(path).run();
+        new Duke().run();
+    }
+
+    public String getResponse(String input) {
+        return input;
     }
 }
