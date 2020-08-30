@@ -16,6 +16,9 @@ import tickbot.ui.Output;
 import tickbot.ui.Parser;
 import tickbot.ui.Ui;
 
+/**
+ * The class to represent the graphics UI.
+ */
 public class GraphicsUi extends Application implements Ui {
     private ScrollPane scrollPane;
     private VBox dialogContainer;
@@ -28,6 +31,9 @@ public class GraphicsUi extends Application implements Ui {
         Application.launch(GraphicsUi.class, args);
     }
 
+    /**
+     * Perform the basic logic of the main loop.
+     */
     public void performLogic() {
         DialogStream stream = new DialogStream(this);
         Parser parser = new Parser();
@@ -47,11 +53,14 @@ public class GraphicsUi extends Application implements Ui {
         sendButton.addEventHandler(MouseEvent.MOUSE_CLICKED, handler);
     }
 
+    /**
+     * Create a dialog in the main UI.
+     */
     public void writeDialog(String text) {
         Dialog dialog = new Dialog(text);
         dialogContainer.getChildren().add(dialog);
     }
-    
+
     @Override
     public void start(Stage stage) {
         // stage styles
@@ -74,6 +83,9 @@ public class GraphicsUi extends Application implements Ui {
         performLogic();
     }
 
+    /**
+     * Design the styles of the elements.
+     */
     private void designStyles() {
         // main layout styles
         mainLayout.setPrefSize(400.0, 600.0);

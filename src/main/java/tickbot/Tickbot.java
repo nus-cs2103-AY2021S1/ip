@@ -2,9 +2,9 @@ package tickbot;
 
 import java.util.Objects;
 
+import tickbot.ui.Ui;
 import tickbot.ui.graphics.GraphicsUi;
 import tickbot.ui.text.TextUi;
-import tickbot.ui.Ui;
 
 /**
  * The main class of the application.

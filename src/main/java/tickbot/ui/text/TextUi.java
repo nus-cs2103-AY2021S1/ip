@@ -10,9 +10,6 @@ import tickbot.ui.Ui;
  * The class to represent the text UI.
  */
 public class TextUi implements Ui {
-    /**
-     * Start the main loop of the text UI.
-     */
     @Override
     public void mainLoop(String[] args) {
         Output.printMessage("Hello, this is tickbot! How can I help you?");

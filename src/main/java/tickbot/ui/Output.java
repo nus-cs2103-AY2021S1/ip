@@ -12,8 +12,6 @@ public class Output {
     private static PrintStream printStream = System.out;
     private static String prefix = "  ";
 
-    private Output() { } // not meant to be initialized
-
     private static Map<String, String> usages = new HashMap<>() {
         private static final long serialVersionUID = 1L;
         {
@@ -28,12 +26,14 @@ public class Output {
         }
     };
 
+    private Output() { } // not meant to be initialized
+
     /**
      * Set the printing stream used by this class.
      * <p>{@code System.out} will be used if not set.</p>
      * @param stream The new printing stream.
      */
-    static public void setPrintStream(PrintStream stream) {
+    public static void setPrintStream(PrintStream stream) {
         Output.printStream = stream;
     }
 
@@ -42,7 +42,7 @@ public class Output {
      * <p>Two spaces are used if not set.</p>
      * @param prefix the new prefix string.
      */
-    static public void setPrefix(String prefix) {
+    public static void setPrefix(String prefix) {
         Output.prefix = prefix;
     }
 
@@ -50,14 +50,14 @@ public class Output {
      * Display a message in text UI.
      * <p>A line break will be appended to the message.</p>
      */
-    static public void printMessage(String message) {
+    public static void printMessage(String message) {
         printStream.println(prefix + message);
     }
 
     /**
      * List all available commands in the text UI.
      */
-    static public void printAllUsage() {
+    public static void printAllUsage() {
         printMessage("All available commands:");
         for (Entry<String, String> entry : usages.entrySet()) {
             printMessage(entry.getValue());
@@ -68,7 +68,7 @@ public class Output {
      * Display the usage for a given command.
      * @param commandName the name of the command to look up the usage.
      */
-    static public void printUsage(String commandName) {
+    public static void printUsage(String commandName) {
         String usageString = usages.get(commandName);
         if (usageString != null) {
             Output.printMessage(usageString);
