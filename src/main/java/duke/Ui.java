@@ -24,16 +24,7 @@ public class Ui {
             + "/__/     \\__\\  \\__/  \\__/     |_______|_"
             + "______/     \\______/  |__|  |__| |_______|        \\______/\n";
     private static final String indent = "    ";
-    private static final String doubleIndent = indent + indent;
     private static final String border = "_________________________________________________________";
-    private static Scanner scanner;
-
-    /**
-     * Class constructor.
-     */
-    public Ui() {
-        scanner = new Scanner(System.in);
-    }
 
     /**
      * Prompts the user for commands. Initial greeting.
@@ -45,15 +36,6 @@ public class Ui {
                 "Greetings! I'm Awesome-O.", "What can I do for you?",
                 "",
                 "...PSST! Type \"help\" for more information!");
-    }
-
-    /**
-     * Reads the user input.
-     *
-     * @return A string representing the user input.
-     */
-    public String readInput() {
-        return scanner.nextLine();
     }
 
     /**
