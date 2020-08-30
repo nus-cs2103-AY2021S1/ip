@@ -66,7 +66,7 @@ public class Parser {
                 || commandWordArray[0].equals(EVENT)) {
             if (command.substring(commandWordArray[0].length())
                     .isBlank()) {
-                throw new DukeEmptyDescriptionException(DONE);
+                throw new DukeEmptyDescriptionException(commandWordArray[0]);
             }
             return new AddCommand(commandWordArray[0],
                     command.substring(commandWordArray[0].length()

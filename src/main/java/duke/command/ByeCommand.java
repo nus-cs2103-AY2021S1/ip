@@ -21,11 +21,10 @@ public class ByeCommand extends Command {
     }
 
     @Override
-    public void execute(Storage storage, TaskList tasks, Ui ui)
+    public String execute(Storage storage, TaskList tasks, Ui ui)
             throws IOException {
         storage.saveTasks(tasks);
-        ui.printSave();
-        ui.printFarewell();
+        return ui.printSave() + "\n" + ui.printFarewell();
     }
 
     @Override

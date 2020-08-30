@@ -64,7 +64,22 @@ public abstract class Command {
         return isExit;
     }
 
-    public abstract void execute(Storage storage, TaskList tasks, Ui ui)
+    /**
+     * Executes the command input by user.
+     * @param storage Storage object in chat bot.
+     * @param tasks TaskList object in chat bot.
+     * @param ui Ui object in chat bot.
+     * @return String of the Ui text printed by chat bot.
+     * @throws IOException if error in loading file.
+     * @throws DukeEmptyArgumentException if argument of command is empty.
+     * @throws DukeInvalidCommandException if command is unrecognised by chat bot.
+     * @throws DukeInvalidDateException if date input format is invalid
+     * @throws DukeInvalidArgumentException if argument for command is unrecognised
+     * by chat bot
+     * @throws DukeInvalidTaskException if task is not found in the list.
+     * @throws DukeEmptyDescriptionException if description of command is empty.
+     */
+    public abstract String execute(Storage storage, TaskList tasks, Ui ui)
             throws IOException, DukeEmptyArgumentException,
             DukeInvalidCommandException, DukeInvalidDateException,
             DukeInvalidArgumentException, DukeInvalidTaskException, DukeEmptyDescriptionException;

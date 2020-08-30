@@ -19,18 +19,23 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public void execute(Storage storage, TaskList tasks, Ui ui) {
+    public String execute(Storage storage, TaskList tasks, Ui ui) {
         int counter = 0;
-        ui.printFind(tasks);
+        String reply = ui.printFind() + "\n";
         for (int i = 0; i < tasks.getSize(); i++) {
             if (tasks.getTask(i).getDescription().contains(extra)) {
-                System.out.println(i + 1 + "." + tasks.getTask(i));
+                if (i != tasks.getSize() - 1) {
+                    reply += i + 1 + "." + tasks.getTask(i) + "\n";
+                } else {
+                    reply += i + 1 + "." + tasks.getTask(i);
+                }
                 counter++;
             }
         }
         if (counter == 0) {
-            ui.printNoMatch(extra);
+            return ui.printNoMatch(extra);
         }
+        return reply;
     }
 
     @Override

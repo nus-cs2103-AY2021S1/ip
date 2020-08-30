@@ -27,7 +27,7 @@ public class AddCommand extends Command {
     }
 
     @Override
-    public void execute(Storage storage, TaskList tasks, Ui ui)
+    public String execute(Storage storage, TaskList tasks, Ui ui)
             throws DukeInvalidDateException,
             DukeInvalidArgumentException {
         Task taskToBeAdded = null;
@@ -51,7 +51,7 @@ public class AddCommand extends Command {
             throw new DukeInvalidArgumentException(command);
         }
         tasks.addTask(taskToBeAdded);
-        ui.printAdded(taskToBeAdded, tasks.getSize());
+        return ui.printAdded(taskToBeAdded, tasks.getSize());
     }
 
     @Override

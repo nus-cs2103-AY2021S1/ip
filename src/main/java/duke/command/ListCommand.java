@@ -18,16 +18,21 @@ public class ListCommand extends Command {
     }
 
     @Override
-    public void execute(Storage storage, TaskList tasks, Ui ui) {
+    public String execute(Storage storage, TaskList tasks, Ui ui) {
         int counter = 0;
-        ui.printList(tasks);
+        String reply = ui.printList() + "\n";
         for (int i = 0; i < tasks.getSize(); i++) {
-            System.out.println(i + TASK_INDEX + "." + tasks.getTask(i));
+            if (i != tasks.getSize() - 1) {
+                reply += i + TASK_INDEX + "." + tasks.getTask(i) + "\n";
+            } else {
+                reply += i + TASK_INDEX + "." + tasks.getTask(i);
+            }
             counter++;
         }
         if (counter == 0) {
-            ui.printNoTasks();
+            return ui.printNoTasks();
         }
+        return reply;
     }
 
     @Override
