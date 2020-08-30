@@ -47,6 +47,7 @@ public class GetEventsCommand extends Command {
                     listOfTasks.add(task);
                 }
             }
+            storage.saveData(taskList, ui);
             return ui.displayEventsOnDate(listOfTasks, localDate);
         } catch (DateTimeParseException e) {
             return ui.showError("Please input a valid date format");

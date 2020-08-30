@@ -60,6 +60,7 @@ public class EventCommand extends Command {
             eventTask = new Event(commandDescription, eventDate);
         }
         taskList.addToList(eventTask);
+        storage.saveData(taskList, ui);
         return ui.displayAddedTask(eventTask, taskList.getListSize());
     }
 }

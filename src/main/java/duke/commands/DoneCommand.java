@@ -35,6 +35,7 @@ public class DoneCommand extends Command {
     public String execute(TaskList taskList, UI ui, Storage storage) {
         Task task = taskList.getTaskAtIndex(Integer.parseInt(commandDescription) + sizeOffset);
         task.setDone();
+        storage.saveData(taskList, ui);
         return ui.displayDoneTask(task);
     }
 }

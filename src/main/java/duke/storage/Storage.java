@@ -56,7 +56,7 @@ public class Storage {
      * @param tasks List of tasks.
      * @param ui UI object.
      */
-    public void saveData(TaskList tasks, UI ui) {
+    public String saveData(TaskList tasks, UI ui) {
         File file = new File(directoryPath + "/" + fileName);
         try {
             resetFileContents(directoryPath + "/" + fileName);
@@ -65,8 +65,9 @@ public class Storage {
                 appendToFile(directoryPath + "/" + fileName, task.getSaveFormat() + "\n");
             }
         } catch (IOException e) {
-            ui.showError("Something went wrong while trying to save your data... :/");
+            return ui.showError("Something went wrong while trying to save your data... :/");
         }
+        return "";
     }
 
     //Resets the contents of the file at the given file path.
