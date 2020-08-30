@@ -1,14 +1,7 @@
 apply plugin: 'java'
+apply plugin: 'checkstyle'
 
-repositories {
-    mavenCentral()
-}
-
-dependencies {
-    testImplementation('org.junit.jupiter:junit-jupiter-api:5.4.2')
-    testRuntime('org.junit.jupiter:junit-jupiter-engine:5.4.2')
-}
-
-test {
-    useJUnitPlatform()
+checkstyle {
+    toolVersion = '8.32'
+    configDir = file("config/checkstyle/")
 }

@@ -1,15 +1,20 @@
 package duke;
 
+import java.io.EOFException;
+import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.io.IOException;
-import java.io.EOFException;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.ObjectOutputStream;
+
+
+
+
+
 
 public class Storage {
 
@@ -28,8 +33,9 @@ public class Storage {
      * @return ArrayList with the previous saved Tasks
      * @throws IOException
      * @throws ClassNotFoundException
-     */@SuppressWarnings("all")
-    public ArrayList<Task> load() throws IOException, ClassNotFoundException{
+     */
+    @SuppressWarnings("all")
+    public ArrayList<Task> load() throws IOException, ClassNotFoundException {
         ArrayList<Task> store = new ArrayList<Task>();
         try {
             Path relativePath = Paths.get(filename);
@@ -41,7 +47,7 @@ public class Storage {
                 store.add(task);
             }
         } catch (EOFException e) {
-
+            System.out.println("");
         } catch (IOException e) {
             File yourFile = new File("store.ser");
             yourFile.createNewFile();
@@ -55,7 +61,7 @@ public class Storage {
      * @param task the current ArrayList of Tasks
      * @throws IOException
      */
-    public static void store(ArrayList<Task> task) throws IOException{
+    public static void store(ArrayList<Task> task) throws IOException {
         Path relativePath = Paths.get("store.ser");
         Path absolutePath = relativePath.toAbsolutePath();
         ObjectOutputStream out = new ObjectOutputStream(

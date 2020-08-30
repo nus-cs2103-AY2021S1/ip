@@ -67,8 +67,12 @@ public class Events extends Task {
          */
     }
 
+    /**
+     * Returns string description of event.
+     * @return String description of event
+     */
     public String toString() {
         return "  [" + this.getType() + "][" + this.getStatusIcon() + "] "
-                + this.getDescription().substring(0,description.indexOf("/")) + "(at: " + this.getStart() + ")";
+                + this.getDescription().substring(0, description.indexOf("/")) + "(at: " + this.getStart() + ")";
     }
 }

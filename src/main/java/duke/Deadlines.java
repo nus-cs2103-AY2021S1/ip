@@ -1,7 +1,6 @@
 package duke;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 public class Deadlines extends Task {
 
@@ -63,8 +62,12 @@ public class Deadlines extends Task {
          */
     }
 
+    /**
+     * Returns string description of deadline.
+     * @return String description of deadline
+     */
     public String toString() {
         return "  [D][" + this.getStatusIcon() + "] "
-                + this.getDescription().substring(0,description.indexOf("/")) + "(by: " + this.getDeadline() + ")";
+                + this.getDescription().substring(0, description.indexOf("/")) + "(by: " + this.getDeadline() + ")";
     }
 }

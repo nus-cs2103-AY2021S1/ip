@@ -11,6 +11,10 @@ public class ToDos extends Task {
         this.type = "ToDos";
     }
 
+    /**
+     * Returns string description of ToDos.
+     * @return String description of ToDos.
+     */
     public String toString() {
         return "  [" + this.getType() + "][" + this.getStatusIcon() + "] "
                 + this.getDescription();

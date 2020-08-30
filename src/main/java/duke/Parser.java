@@ -1,6 +1,10 @@
 package duke;
 
-import java.io.*;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -38,7 +42,8 @@ public class Parser {
                 System.out.println("-------------------------");
                 for (Task task : store) {
                     if (task.getDescription() != null) {
-                        System.out.println(counter + ". [" + task.getType() + "][" + task.getStatusIcon() + "] " + task.getDescription());
+                        System.out.println(counter + ". [" + task.getType()
+                                + "][" + task.getStatusIcon() + "] " + task.getDescription());
                         counter++;
                     }
                 }
@@ -76,7 +81,8 @@ public class Parser {
                     StringBuilder result = new StringBuilder("");
                     for (Task task : store) {
                         if (task.getDescription() != null) {
-                            result.append("[" + task.getType() + "]" + "[" + task.getStatusIcon() + "] " + task.getDescription());
+                            result.append("[" + task.getType() + "]"
+                                    + "[" + task.getStatusIcon() + "] " + task.getDescription());
                             result.append("\n");
                         }
                     }
@@ -99,7 +105,8 @@ public class Parser {
                     System.out.println("-------------------------");
                     System.out.println("Got it. I've added this task:");
                     System.out.println("  [" + curr.getType() + "][" + curr.getStatusIcon() + "] "
-                            + curr.getDescription().substring(0, description.indexOf("/")) + "(by: " + curr.getDeadline() + ")");
+                            + curr.getDescription().substring(0, description.indexOf("/"))
+                            + "(by: " + curr.getDeadline() + ")");
                     System.out.println("Now you have " + store.size() + " tasks in the list.");
                     System.out.println("-------------------------");
                     Path relativePath = Paths.get("duke.txt");
@@ -109,7 +116,8 @@ public class Parser {
                     StringBuilder result = new StringBuilder("");
                     for (Task task : store) {
                         if (task.getDescription() != null) {
-                            result.append("[" + task.getType() + "]" + "[" + task.getStatusIcon() + "] " + task.getDescription());
+                            result.append("[" + task.getType() + "]"
+                                    + "[" + task.getStatusIcon() + "] " + task.getDescription());
                             result.append("\n");
                         }
                     }
@@ -132,7 +140,8 @@ public class Parser {
                     System.out.println("-------------------------");
                     System.out.println("Got it. I've added this task:");
                     System.out.println("  [" + curr.getType() + "][" + curr.getStatusIcon() + "] "
-                            + curr.getDescription().substring(0, description.indexOf("/")) + "(at: " + curr.getStart() + ")");
+                            + curr.getDescription().substring(0, description.indexOf("/"))
+                            + "(at: " + curr.getStart() + ")");
                     System.out.println("Now you have " + store.size() + " tasks in the list.");
                     System.out.println("-------------------------");
                     Path relativePath = Paths.get("data/duke.txt");
@@ -142,7 +151,8 @@ public class Parser {
                     StringBuilder result = new StringBuilder("");
                     for (Task task : store) {
                         if (task.getDescription() != null) {
-                            result.append("[" + task.getType() + "]" + "[" + task.getStatusIcon() + "] |" + task.getDescription());
+                            result.append("[" + task.getType() + "]" + "[" + task.getStatusIcon()
+                                    + "] |" + task.getDescription());
                             result.append("\n");
                         }
                     }

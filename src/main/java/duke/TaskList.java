@@ -29,12 +29,17 @@ public class TaskList {
         return this.list;
     }
 
+    /**
+     * Finds the Tasks stored in the array that corresponds to the specified String.
+     * @param str input String specified
+     */
     public void find(String str) {
         int counter = 1;
         System.out.println("-------------------------");
         for (Task task : this.list) {
             if (task.getDescription().contains(str)) {
-                System.out.println(counter + ". [" + task.getType() + "][" + task.getStatusIcon() + "] " + task.getDescription());
+                System.out.println(counter + ". [" + task.getType() + "]["
+                        + task.getStatusIcon() + "] " + task.getDescription());
                 counter++;
             }
         }
