@@ -2,6 +2,19 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.format.DateTimeParseException;
+import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.layout.Region;
+import javafx.stage.Stage;
+import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 /**
  * Main class for the Duke CLI task-tracking application.
@@ -12,14 +25,39 @@ public class Duke {
     private TaskList tasks;
     private final Ui ui;
 
+    String getResponse(String input) {
+        Command c;
+        try {
+            c = Parser.parse(input);
+        } catch (MissingDelimiterException | MissingDateTimeException | InvalidCommandException e) {
+            return e.getMessage();
+        } catch (DateTimeParseException e) {
+            return Ui.MESSAGE_WRONG_FORMAT;
+        } catch (IndexOutOfBoundsException e) {
+            return Ui.MESSAGE_TASK_ID_MISSING;
+        }
+        try {
+            String response=c.execute(tasks, ui, storage);
+            if (response.equals("exit")){
+                Platform.exit();
+            }
+            return response;
+        } catch (BlankTaskException e) {
+            return e.getMessage();
+        } catch (IOException e) {
+            return Ui.MESSAGE_ERROR_IO;
+        } catch (IndexOutOfBoundsException e) {
+            return Ui.MESSAGE_INVALID_ID;
+        }
+    }
+
     /**
      * Initialises the instance attributes: storage, tasks, ui.
-     *
-     * @param filePath File path of storage data.
      */
-    public Duke(Path filePath) {
+    public Duke(){
         ui = new Ui();
-        storage = new Storage(filePath);
+        Path dataPath = Paths.get("data", "duke.txt");
+        storage = new Storage(dataPath);
         try {
             tasks = new TaskList(storage.load());
         } catch (BlankTaskException e) {
@@ -27,49 +65,5 @@ public class Duke {
         } catch (IOException e) {
             ui.displayOutput(Ui.MESSAGE_ERROR_IO);
         }
-    }
-
-    /**
-     * Drives the application and all of the underlying processes.
-     */
-    public void run() {
-        ui.showWelcome();
-        boolean isExit = false;
-        while (!isExit) {
-            String fullCommand = ui.readCommand();
-            Command c;
-            try {
-                c = Parser.parse(fullCommand);
-            } catch (MissingDelimiterException | MissingDateTimeException | InvalidCommandException e) {
-                ui.displayOutput(e.getMessage());
-                continue;
-            } catch (DateTimeParseException e) {
-                ui.displayOutput(Ui.MESSAGE_WRONG_FORMAT);
-                continue;
-            } catch (IndexOutOfBoundsException e) {
-                ui.displayOutput(Ui.MESSAGE_TASK_ID_MISSING);
-                continue;
-            }
-            try {
-                c.execute(tasks, ui, storage);
-            } catch (BlankTaskException e) {
-                ui.displayOutput(e.getMessage());
-            } catch (IOException e) {
-                ui.displayOutput(Ui.MESSAGE_ERROR_IO);
-            } catch (IndexOutOfBoundsException e) {
-                ui.displayOutput(Ui.MESSAGE_INVALID_ID);
-            }
-            isExit = c.isExit();
-        }
-    }
-
-    /**
-     * Entry point of the program.
-     *
-     * @param args Command line arguments.
-     */
-    public static void main(String[] args) {
-        Path dataPath = Paths.get("data", "duke.txt");
-        new Duke(dataPath).run();
     }
 }

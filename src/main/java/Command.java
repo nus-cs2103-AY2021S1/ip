@@ -14,8 +14,9 @@ public abstract class Command {
      * @param storage Storage.
      * @throws BlankTaskException If task name is empty when adding tasks.
      * @throws IOException        If an error occurred while saving the task to disk.
+     * @return output string
      */
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws BlankTaskException, IOException;
+    public abstract String execute(TaskList tasks, Ui ui, Storage storage) throws BlankTaskException, IOException;
 
     /**
      * Returns true if the command is an exit command.

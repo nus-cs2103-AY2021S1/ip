@@ -25,12 +25,14 @@ public class DeleteCommand extends Command {
      * @param storage Storage.
      * @throws IOException               If there is an error during saving to disk.
      * @throws IndexOutOfBoundsException If the task number provided does not exist.
+     * @return
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws IOException, IndexOutOfBoundsException {
-        ui.showDelete((short) (tasks.size() - 1), tasks.getTaskAtIndex(id));
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws IOException, IndexOutOfBoundsException {
+        Task current=tasks.getTaskAtIndex(id);
         tasks.delete(id);
         storage.updateMemory(tasks.getList());
+        return ui.showDelete(tasks.size(), current);
     }
 
     /**

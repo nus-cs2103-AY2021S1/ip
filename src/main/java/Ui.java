@@ -50,16 +50,16 @@ public class Ui {
     }
 
     // displays the task list in the correct format
-    public void displayList(ArrayList<Task> tasks, boolean isFiltered) {
+    public String displayList(ArrayList<Task> tasks, boolean isFiltered) {
         if (tasks.size() == 0) {
-            displayOutput(isFiltered ? MESSAGE_NO_MATCHES : MESSAGE_EMPTY);
+            return isFiltered ? MESSAGE_NO_MATCHES : MESSAGE_EMPTY;
         } else {
             StringBuilder out = new StringBuilder(isFiltered ? MESSAGE_MATCHES : MESSAGE_TASKS).append("\n");
             for (short i = 0; i < tasks.size(); i++) {
-                out.append(LEFT_MARGIN_DOUBLE).append(i + 1)
+                out.append(LEFT_MARGIN).append(i + 1)
                         .append(".").append(tasks.get(i)).append("\n");
             }
-            displayOutput(out.substring(0, out.length() - 1));
+            return out.substring(0, out.length() - 1);
         }
     }
 
@@ -67,22 +67,19 @@ public class Ui {
         return sc.nextLine();
     }
 
-    public void showAdd(short id, Task task) {
-        displayOutput(MESSAGE_ADD + "\n" + LEFT_MARGIN_DOUBLE + task + "\n"
-                + LEFT_MARGIN + String.format(MESSAGE_COUNT, id));
+    public String showAdd(short id, Task task) {
+        return MESSAGE_ADD + "\n" + LEFT_MARGIN + task + "\n" + String.format(MESSAGE_COUNT, id);
     }
 
-    public void showDelete(short listSize, Task task) {
-        displayOutput(MESSAGE_DELETE + "\n" + LEFT_MARGIN_DOUBLE + task + "\n"
-                + LEFT_MARGIN + String.format(MESSAGE_COUNT, listSize));
+    public String showDelete(short listSize, Task task) {
+        return MESSAGE_DELETE + "\n" + LEFT_MARGIN + task + "\n"+ String.format(MESSAGE_COUNT, listSize);
     }
 
-    public void showDone(Task task) {
-        displayOutput(MESSAGE_DONE + "\n" + LEFT_MARGIN_DOUBLE + task);
+    public String showDone(Task task) {
+        return MESSAGE_DONE + "\n" + LEFT_MARGIN + task;
     }
 
-    public void showWelcome() {
-        System.out.print(BORDER + LOGO);
-        displayOutput(MESSAGE_WELCOME);
+    public static String showWelcome() {
+        return MESSAGE_WELCOME;
     }
 }

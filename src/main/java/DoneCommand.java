@@ -25,18 +25,18 @@ public class DoneCommand extends Command {
      * @param storage Storage.
      * @throws IOException               If there is an error during saving to disk.
      * @throws IndexOutOfBoundsException If the task number provided does not exist.
+     * @return
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage)
+    public String execute(TaskList tasks, Ui ui, Storage storage)
             throws IOException, IndexOutOfBoundsException {
         Task curr = tasks.getTaskAtIndex(id);
         if (curr.isDone()) {
-            ui.displayOutput(Ui.MESSAGE_ALR_DONE);
-            return;
+            return Ui.MESSAGE_ALR_DONE;
         }
         tasks.markAsDone(id);
-        ui.showDone(curr);
         storage.updateMemory(tasks.getList());
+        return ui.showDone(curr);
     }
 
     /**

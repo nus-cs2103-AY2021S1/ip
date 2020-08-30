@@ -29,10 +29,10 @@ public class AddCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws BlankTaskException, IOException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws BlankTaskException, IOException {
         tasks.add(type, name, date, time);
-        ui.showAdd(tasks.size(), tasks.getLastTask());
         storage.updateMemory(tasks.getList());
+        return ui.showAdd(tasks.size(), tasks.getLastTask());
     }
 
     /**
