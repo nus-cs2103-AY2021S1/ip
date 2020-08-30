@@ -42,9 +42,7 @@ public class Mug {
     }
 
     public String getResponse(String input) {
-        new Mug(
-
-        );
+        new Mug();
         return this.ui.readCommand(input, this.tasks);
     }
 }
