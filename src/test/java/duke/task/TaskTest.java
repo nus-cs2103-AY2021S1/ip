@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TaskTest {
     @Test
-    public void createNewTaskTest(){
+    public void createNewTaskTest() {
         Task newTask = Task.newTask("Exercise");
         assertEquals(newTask.getTaskName(), "Exercise", "Task name is incorrect");
         assertEquals(newTask.getIsCompleted(), false, "Task completion status is incorrect");
@@ -20,7 +20,7 @@ public class TaskTest {
     }
 
     @Test
-    public void markAsDoneTest(){
+    public void markAsDoneTest() {
         Task newTask = Task.newTask("Homework").markAsDone();
         assertEquals(newTask.getIsCompleted(), true,
                 "Task completion status is incorrect after marking as done");

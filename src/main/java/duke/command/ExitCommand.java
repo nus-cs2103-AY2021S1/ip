@@ -6,11 +6,11 @@ import duke.task.TaskList;
 
 public class ExitCommand extends Command {
     @Override
-    public void execute(TaskList list, Storage storage){
+    public void execute(TaskList list, Storage storage) {
         Ui.goodbyeMessage();
     }
 
-    public boolean isExit(){
+    public boolean isExit() {
         return true;
     }
 }

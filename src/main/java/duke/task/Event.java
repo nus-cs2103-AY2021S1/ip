@@ -14,15 +14,15 @@ public class Event extends Task {
         this.date = date;
     }
 
-    public static Event newEvent(String name, LocalDate date){
+    public static Event newEvent(String name, LocalDate date) {
         return new Event(name, false, date);
     }
 
-    public static Event existingEvent(String name, boolean isCompleted, LocalDate date){
+    public static Event existingEvent(String name, boolean isCompleted, LocalDate date) {
         return new Event(name, isCompleted, date);
     }
 
-    public boolean isToday(){
+    public boolean isToday() {
         return this.date.isEqual(LocalDate.now());
     }
 
@@ -31,7 +31,7 @@ public class Event extends Task {
                 date.getDayOfWeek().getDisplayName(TextStyle.FULL, Locale.getDefault()) + ")";
     }
 
-    public String toSaveString(){
+    public String toSaveString() {
         return "E" + " | " + super.toSaveString() + " | " + this.date + "\n";
     }
 }

@@ -15,19 +15,20 @@ public class AddTaskCommand extends Command {
     private String taskName;
     private LocalDate taskDate;
 
-    public AddTaskCommand(TaskType type, String name){
+    public AddTaskCommand(TaskType type, String name) {
         this.type = type;
         this.taskName = name;
     }
 
-    public AddTaskCommand(TaskType type, String name, LocalDate date){
+    public AddTaskCommand(TaskType type, String name, LocalDate date) {
         this.type = type;
         this.taskName = name;
         this.taskDate = date;
     }
+
     @Override
     public void execute(TaskList list, Storage storage) throws StorageException, InvalidTaskException {
-        switch(this.type){
+        switch (this.type) {
         case TODO:
             Task newTodo = list.addTask(this.taskName);
             Ui.addTaskMessage(newTodo, list.taskListSize());

@@ -1,6 +1,7 @@
 package duke;
 
 import java.util.Scanner;
+
 import duke.command.Command;
 import duke.command.CommandParser;
 import duke.task.TaskList;
@@ -17,7 +18,7 @@ public class Duke {
             Ui.welcomeMessage();
             boolean isExit = false;
 
-            while(!isExit) {
+            while (!isExit) {
                 try {
                     String userCommand = sc.nextLine();
                     Command parsedCommand = parser.parseCommand(userCommand);

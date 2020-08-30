@@ -8,7 +8,7 @@ public class DukeException extends Exception {
         this.UiMessage = errorMessage;
     }
 
-    public String getUiMessage(){
+    public String getUiMessage() {
         return this.UiMessage;
     }
 }

@@ -13,7 +13,7 @@ public class TaskList {
     private ArrayList<Task> taskList;
     private Storage storage;
 
-    private TaskList(Storage storage){
+    private TaskList(Storage storage) {
         this.taskList = new ArrayList<>();
         this.storage = storage;
     }
@@ -25,16 +25,16 @@ public class TaskList {
             storage.readTaskStorage().forEach(taskString -> {
                 String[] t = taskString.split(" [|] ");
                 // Tasks are stored in the format: type | isCompleted | taskName | date
-                switch (t[0]){
-                    case "T":
-                        newTaskList.taskList.add(Todo.existingTodo(t[2], t[1].equals("1")));
-                        break;
-                    case "D":
-                        newTaskList.taskList.add(Deadline.existingDeadline(t[2], t[1].equals("1"), LocalDate.parse(t[3])));
-                        break;
-                    case "E":
-                        newTaskList.taskList.add(Event.existingEvent(t[2], t[1].equals("1"), LocalDate.parse(t[3])));
-                        break;
+                switch (t[0]) {
+                case "T":
+                    newTaskList.taskList.add(Todo.existingTodo(t[2], t[1].equals("1")));
+                    break;
+                case "D":
+                    newTaskList.taskList.add(Deadline.existingDeadline(t[2], t[1].equals("1"), LocalDate.parse(t[3])));
+                    break;
+                case "E":
+                    newTaskList.taskList.add(Event.existingEvent(t[2], t[1].equals("1"), LocalDate.parse(t[3])));
+                    break;
                 }
             });
         } catch (DateTimeParseException e) {
@@ -51,29 +51,29 @@ public class TaskList {
     }
 
     public Task addTask(TaskType type, String taskName, LocalDate taskDate) throws InvalidTaskException {
-        switch(type){
-            case EVENT:
-                Event newEvent = Event.newEvent(taskName, taskDate);
-                this.taskList.add(newEvent);
-                return newEvent;
-            case DEADLINE:
-                Deadline newDeadline = Deadline.newDeadline(taskName, taskDate);
-                this.taskList.add(newDeadline);
-                return newDeadline;
+        switch (type) {
+        case EVENT:
+            Event newEvent = Event.newEvent(taskName, taskDate);
+            this.taskList.add(newEvent);
+            return newEvent;
+        case DEADLINE:
+            Deadline newDeadline = Deadline.newDeadline(taskName, taskDate);
+            this.taskList.add(newDeadline);
+            return newDeadline;
         }
         // TODO: fix exception message
         throw new InvalidTaskException("Unknown task added");
     }
 
     public Task completeTask(int index) throws InvalidTaskException, StorageException {
-        if(index > this.taskList.size() || index <= 0) {
+        if (index > this.taskList.size() || index <= 0) {
             throw new InvalidTaskException("Oh noes! I don't think you specified a valid task index :<");
         }
         return this.taskList.get(index - 1).markAsDone();
     }
 
     public Task deleteTask(int index) throws InvalidTaskException, StorageException {
-        if(index > this.taskList.size() || index <= 0) {
+        if (index > this.taskList.size() || index <= 0) {
             throw new InvalidTaskException("Oh noes! I don't think you specified a valid task index :<");
         }
         Task task = this.taskList.get(index - 1);
@@ -81,19 +81,19 @@ public class TaskList {
         return task;
     }
 
-    public ArrayList<Task> getTaskList(){
+    public ArrayList<Task> getTaskList() {
         return this.taskList;
     }
 
-    public int taskListSize(){
+    public int taskListSize() {
         return this.taskList.size();
     }
 
-    public String getSaveString()  {
+    public String getSaveString() {
         StringBuilder saveString = new StringBuilder();
-        for(Task task : this.taskList) {
+        for (Task task : this.taskList) {
             saveString.append(task.toSaveString());
         }
-        return(saveString.toString());
+        return (saveString.toString());
     }
 }

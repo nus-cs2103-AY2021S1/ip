@@ -14,15 +14,15 @@ public class Deadline extends Task {
         this.date = date;
     }
 
-    public static Deadline newDeadline(String name, LocalDate date){
+    public static Deadline newDeadline(String name, LocalDate date) {
         return new Deadline(name, false, date);
     }
 
-    public static Deadline existingDeadline(String name, boolean isCompleted, LocalDate date){
+    public static Deadline existingDeadline(String name, boolean isCompleted, LocalDate date) {
         return new Deadline(name, isCompleted, date);
     }
 
-    public boolean isToday(){
+    public boolean isToday() {
         return this.date.isEqual(LocalDate.now());
     }
 
@@ -31,7 +31,7 @@ public class Deadline extends Task {
                 ", " + date.getDayOfWeek().getDisplayName(TextStyle.FULL, Locale.getDefault()) + ")";
     }
 
-    public String toSaveString(){
+    public String toSaveString() {
         return "D" + " | " + super.toSaveString() + " | " + this.date + "\n";
     }
 }

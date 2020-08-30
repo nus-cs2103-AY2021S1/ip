@@ -5,11 +5,11 @@ public class Todo extends Task {
         super(name, isCompleted);
     }
 
-    public static Todo newTodo(String name){
+    public static Todo newTodo(String name) {
         return new Todo(name, false);
     }
 
-    public static Todo existingTodo(String name, boolean isCompleted){
+    public static Todo existingTodo(String name, boolean isCompleted) {
         return new Todo(name, isCompleted);
     }
 
@@ -17,7 +17,7 @@ public class Todo extends Task {
         return "[T]" + super.toString();
     }
 
-    public String toSaveString(){
+    public String toSaveString() {
         return "T" + " | " + super.toSaveString() + "\n";
     }
 }

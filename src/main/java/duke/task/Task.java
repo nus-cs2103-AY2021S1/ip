@@ -9,23 +9,23 @@ public class Task {
         this.isCompleted = isCompleted;
     }
 
-    public static Task newTask(String name){
+    public static Task newTask(String name) {
         return new Task(name, false);
     }
 
-    public static Task existingTask(String name, boolean isCompleted){
+    public static Task existingTask(String name, boolean isCompleted) {
         return new Task(name, isCompleted);
     }
 
-    public String getTaskName(){
+    public String getTaskName() {
         return this.taskName;
     }
 
-    public boolean getIsCompleted(){
+    public boolean getIsCompleted() {
         return this.isCompleted;
     }
 
-    public Task markAsDone(){
+    public Task markAsDone() {
         this.isCompleted = true;
         return this;
     }
@@ -34,7 +34,7 @@ public class Task {
         return (isCompleted ? "\u2713" : "\u2718"); //return tick or X symbols
     }
 
-    public boolean isToday(){
+    public boolean isToday() {
         return false;
     }
 
@@ -42,7 +42,7 @@ public class Task {
         return "[" + this.getStatusIcon() + "] " + this.taskName;
     }
 
-    public String toSaveString(){
+    public String toSaveString() {
         return (this.isCompleted ? "1" : "0") + " | " + this.taskName;
     }
 }
