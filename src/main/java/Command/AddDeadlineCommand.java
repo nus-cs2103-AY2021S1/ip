@@ -1,9 +1,12 @@
 package Command;
 
+import static Parser.InputManager.getDate;
+import static Parser.InputManager.getFileDir;
+import static Parser.InputManager.getName;
+
 import Errors.ErrorExceptions;
 import Tasks.TaskManager;
 
-import static Parser.InputManager.*;
 
 /**
  * Represents a command that adds a Deadline task.
@@ -16,7 +19,7 @@ public class AddDeadlineCommand extends Command {
      */
     public static void execute(String input) throws ErrorExceptions {
         String name = getName(input, 2);
-        String date = getDate(input,1);
-        TaskManager.newTask(name,"Deadline",date, getFileDir());
+        String date = getDate(input, 1);
+        TaskManager.newTask(name, "Deadline", date, getFileDir());
     }
 }
