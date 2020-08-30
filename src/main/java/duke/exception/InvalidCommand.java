@@ -3,7 +3,7 @@ package duke.exception;
 /**
  * Represents exception to be thrown when users enters any invalid command ot the bot.
  */
-public class InvalidCommand extends Exception{
+public class InvalidCommand extends Exception {
     private String errorMessage;
 
     /**

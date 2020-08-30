@@ -3,8 +3,8 @@ package duke.commands;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
-import duke.tasks.Task;
 import duke.exception.InvalidCommand;
+import duke.tasks.Task;
 
 /**
  * Represents a command to delete task from the task list.
@@ -37,7 +37,7 @@ public class DeleteCommand extends Command {
             Task removedTask = taskList.removeTask(itemIndex - 1);
             listStorage.deleteTask(removedTask);
             ui.deleteTask(removedTask, taskList);
-        } catch(IndexOutOfBoundsException ex) {
+        } catch (IndexOutOfBoundsException ex) {
             try {
                 throw new InvalidCommand("Please enter a valid task number.");
             } catch (InvalidCommand invalidCommand) {

@@ -4,7 +4,7 @@ package duke.tasks;
  * Represents to-do tasks created by users.
  *
  */
-public class ToDo extends Task{
+public class ToDo extends Task {
     /**
      * Creates ToDo object with relevant task name.
      *
@@ -20,7 +20,7 @@ public class ToDo extends Task{
      * @return Representation of to-do task in backend data storage.
      */
     public String getDataStorageName() {
-        return "T | " + (super.getStatus() == "\u2713" ? "1" : "0") + " | " + super.getTaskName();
+        return "T | " + (super.getStatus() == "Completed" ? "1" : "0") + " | " + super.getTaskName();
     }
 
     /**

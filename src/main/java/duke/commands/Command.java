@@ -14,6 +14,9 @@ public abstract class Command {
     protected boolean isExit;
     private int itemIndex;
 
+    /**
+     * Creates a Command object to handle logic of user's input.
+     */
     public Command() {
         this.isExit = false;
         this.itemIndex = -1;

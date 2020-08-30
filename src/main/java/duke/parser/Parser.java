@@ -3,17 +3,19 @@ package duke.parser;
 import java.time.LocalDate;
 
 import duke.Ui;
-import duke.tasks.Deadline;
-import duke.tasks.Event;
-import duke.tasks.ToDo;
-import duke.exception.InvalidCommand;
 import duke.commands.AddCommand;
 import duke.commands.ByeCommand;
 import duke.commands.Command;
 import duke.commands.DeleteCommand;
 import duke.commands.DoneCommand;
 import duke.commands.FindCommand;
+import duke.commands.HelpCommand;
 import duke.commands.ListCommand;
+import duke.exception.InvalidCommand;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.ToDo;
+
 
 /**
  * Represents parser to parse and create appropriate Command object to handle
@@ -57,7 +59,7 @@ public class Parser {
                     ToDo newToDo = new ToDo(taskToDo);
                     AddCommand ac = new AddCommand(newToDo);
                     return ac;
-                } catch(StringIndexOutOfBoundsException ex) {
+                } catch (StringIndexOutOfBoundsException ex) {
                     throw new InvalidCommand("OOPS!!! Please specify your task.");
                 } catch (InvalidCommand invalidCommand) {
                     Ui.commandError(invalidCommand);
@@ -126,15 +128,18 @@ public class Parser {
                     }
                     FindCommand fc = new FindCommand(requestKeywords);
                     return fc;
-                } catch(StringIndexOutOfBoundsException ex) {
+                } catch (StringIndexOutOfBoundsException ex) {
                     throw new InvalidCommand("OOPS!!! Please specify your task.");
                 } catch (InvalidCommand invalidCommand) {
                     Ui.commandError(invalidCommand);
                 }
+            } else if (command.contains("help")) {
+                HelpCommand hc = new HelpCommand();
+                return hc;
             } else {
                 throw new InvalidCommand("Please enter the correct command");
             }
-        } catch(InvalidCommand ex) {
+        } catch (InvalidCommand ex) {
             Ui.commandError(ex);
         }
         return null;

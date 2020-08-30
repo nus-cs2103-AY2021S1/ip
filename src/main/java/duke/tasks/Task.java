@@ -24,7 +24,7 @@ public class Task {
      * @return Current status of task;
      */
     protected String getStatus() {
-        return (this.hasCompleted ? "\u2713" : "\u2718");
+        return (this.hasCompleted ? "Completed" : "Do Soon");
     }
 
     /**

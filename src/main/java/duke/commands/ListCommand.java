@@ -8,7 +8,7 @@ import duke.Ui;
  * Represents a command to list all tasks in the task list.
  *
  */
-public class ListCommand extends Command{
+public class ListCommand extends Command {
     public ListCommand() {
         super();
     }

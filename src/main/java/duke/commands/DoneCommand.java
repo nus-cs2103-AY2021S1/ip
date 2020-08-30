@@ -3,8 +3,9 @@ package duke.commands;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
-import duke.tasks.Task;
 import duke.exception.InvalidCommand;
+import duke.tasks.Task;
+
 
 /**
  * Represents a command to mark a task done in the task list.

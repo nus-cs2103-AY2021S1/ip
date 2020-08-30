@@ -7,7 +7,7 @@ import java.time.format.DateTimeFormatter;
  * Represents event tasks created by users.
  *
  */
-public class Event extends Task{
+public class Event extends Task {
     private LocalDate time;
 
     /**
@@ -37,7 +37,7 @@ public class Event extends Task{
      * @return Representation of event task in task list.
      */
     @Override
-    public String toString(){
+    public String toString() {
         return "[E]" + super.toString() + " (at: "
                 + this.time.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
