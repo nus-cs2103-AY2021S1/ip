@@ -1,0 +1,3 @@
+T | 0 |  return book
+E | 1 |  meeting  | 4pm
+D | 0 |  homework  | Sun2359

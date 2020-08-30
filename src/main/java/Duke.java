@@ -1,6 +1,8 @@
 import java.util.List;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 
 public class Duke {
@@ -91,7 +93,8 @@ public class Duke {
             String taskcommand = command.split("/")[0].replace("deadline", "");
             if (!taskcommand.equals("")) {
                 String time = command.split("/")[1].replace("by ", "");
-                add(new Deadline(taskcommand, time));
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+                add(new Deadline(taskcommand, LocalDateTime.parse(time, formatter)));
             } else {
                 throw new DukeException("EmptyDeadline");
             }
@@ -99,7 +102,8 @@ public class Duke {
             String taskcommand = command.split("/")[0].replace("event", "");
             if (!taskcommand.equals("")) {
                 String time = command.split("/")[1].replace("at ", "");
-                add(new Event(taskcommand, time));
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+                add(new Deadline(taskcommand, LocalDateTime.parse(time, formatter)));
             } else {
                 throw new DukeException("EmptyEvent");
             }
