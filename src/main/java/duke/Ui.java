@@ -9,6 +9,8 @@ import duke.task.Task;
  * A class to deal with the interactions with users.
  */
 public class Ui {
+    public String showingString;
+
     protected String logo;
     protected String line;
     protected Scanner sc;
@@ -34,6 +36,7 @@ public class Ui {
                 + logo
                 + "\n Hello, I'm Duke \n What can I do for you?\n"
                 + line);
+        showingString = " Hello, I'm Duke \n What can I do for you?\n";
     }
 
     /**
@@ -54,6 +57,7 @@ public class Ui {
         System.out.println(line
                 + eMsg + "\n"
                 + line);
+        showingString = eMsg + "\n";
     }
 
     private void printLine() {
@@ -70,14 +74,18 @@ public class Ui {
             printLine();
             System.out.println(" Oops, no task YET. Try to add one!");
             printLine();
+            showingString = " Oops, no task YET. Try to add one!";
             return;
         }
+        StringBuffer finalString = new StringBuffer();
         printLine();
-        System.out.println(" Here are the tasks in your list:");
+        finalString.append(" Here are the tasks in your list:\n");
         for (int i = 0; i < taskList.size(); i++) {
-            System.out.println(" " + (i + 1) + ". " + taskList.get(i));
+            finalString.append(" ").append(i + 1).append(". ").append(taskList.get(i)).append("\n");
         }
+        System.out.println(finalString);
         printLine();
+        showingString = finalString.toString();
     }
 
     /**
@@ -86,10 +94,12 @@ public class Ui {
      * @param task the task to be done.
      */
     public void printDone(Task task) {
+        String finalString = " Nice! I've marked this task as done: "
+                + "\n   " + task + "\n";
         System.out.println(line
-                + " Nice! I've marked this task as done: "
-                + "\n   " + task + "\n"
+                + finalString
                 + line);
+        showingString = finalString;
     }
 
     /**
@@ -99,11 +109,13 @@ public class Ui {
      * @param size the size of the task list after deletion.
      */
     public void printDelete(Task task, int size) {
-        System.out.println(line
-                + " Noted. I've removed this task: "
+        String finalString = " Noted. I've removed this task: "
                 + "\n   " + task
-                + "\n Now you have " + size + " tasks in the list.\n"
+                + "\n Now you have " + size + " tasks in the list.\n";
+        System.out.println(line
+                + finalString
                 + line);
+        showingString = finalString;
     }
 
     /**
@@ -113,11 +125,13 @@ public class Ui {
      * @param size the size of the task list after addition.
      */
     public void printAdd(Task task, int size) {
+        String finalString = " Got it. I've added this task: \n"
+                + "   " + task
+                + "\n Now you have " + size + " tasks in the list.\n";
         System.out.println(line
-                + " Got it. I've added this task: ");
-        System.out.println("   " + task
-                + "\n Now you have " + size + " tasks in the list.\n"
+                + finalString
                 + line);
+        showingString = finalString;
     }
 
     /**
@@ -130,20 +144,26 @@ public class Ui {
             printLine();
             System.out.println(" No task founded. Try to add one!");
             printLine();
+            showingString = " No task founded. Try to add one!";
             return;
         }
+        StringBuffer finalString = new StringBuffer();
         printLine();
-        System.out.println(" Here are the matching tasks in your list:");
+        finalString.append(" Here are the matching tasks in your list:\n");
         for (int i = 0; i < findResult.size(); i++) {
-            System.out.println(" " + (i + 1) + ". " + findResult.get(i));
+            finalString.append(" ").append(i + 1).append(". ").append(findResult.get(i)).append("\n");
         }
+        System.out.println(finalString);
         printLine();
+        showingString = finalString.toString();
     }
 
     /**
      * Says good bye to user.
      */
     public void bye() {
-        System.out.println(line + " Bye. Hope to see you again soon!\n" + line);
+        String finalString = " Bye. Hope to see you again soon!\n";
+        System.out.println(line + finalString + line);
+        showingString = finalString;
     }
 }
