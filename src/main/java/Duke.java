@@ -232,13 +232,15 @@ class Deadline extends Task {
     final static private DateTimeFormatter MYDATEFORMATTER =
             DateTimeFormatter.ofPattern("LLL dd uuuu");
     protected String by;
+    protected String byFormat;
     protected LocalDate date;
 
 
     public Deadline(String name, String by) {
         super(name);
+        this.by = by;
         this.date = LocalDate.parse(by);
-        this.by = this.date.format(MYDATEFORMATTER);
+        this.byFormat = this.date.format(MYDATEFORMATTER);
     }
 
     @Override
@@ -248,7 +250,7 @@ class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by + ")";
+        return "[D]" + super.toString() + " (by: " + this.byFormat + ")";
     }
 }
 
