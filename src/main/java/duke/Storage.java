@@ -59,8 +59,6 @@ public class Storage {
         }
     }
 
-    ;
-
     /**
      * Storage constructor.
      *
