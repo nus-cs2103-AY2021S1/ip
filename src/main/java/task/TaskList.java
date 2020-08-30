@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import exceptions.DukeException;
 
 public class TaskList {
-    protected ArrayList<Task> tasks;
+    public ArrayList<Task> tasks;
 
     /**
      * Creates TaskList object that stores tasks.

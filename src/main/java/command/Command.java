@@ -5,7 +5,7 @@ import task.TaskList;
 
 public abstract class Command {
     protected TaskList tasks;
-    protected boolean isExit;
+    public boolean isExit;
 
     /**
      * Creates Command object to be executed.

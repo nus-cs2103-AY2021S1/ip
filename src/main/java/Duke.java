@@ -18,23 +18,27 @@ public class Duke {
     }
 
     /**
-     * Runs Duke program.
-     * @param args
+     * Creates Duke object to be used by JavaFX.
+     */
+    public Duke() {
+        this("duke.txt");
+    }
+
+    /**
+     * Runs Duke.
      * @throws DukeException
      */
-    public static void main(String[] args) throws DukeException {
-        Duke duke = new Duke("duke.txt");
-
+    public void run() throws DukeException {
         // displayed once Duke is run, without input from user
-        duke.ui.greetings();
-        Parser parser = new Parser(duke);
+        this.ui.greetings();
+        Parser parser = new Parser(this);
         boolean isExit = false;
 
         while (!isExit) {
-            String input = duke.ui.readCommand();
+            String input = this.ui.readCommand();
             try {
-                Command command = parser.parse(input, duke.taskList);
-                duke.ui.showLine();
+                Command command = parser.parse(input, this.taskList);
+                this.ui.showLine();
                 command.execute();
                 isExit = command.isExit;
             } catch (DukeException ex) {
@@ -42,12 +46,33 @@ public class Duke {
             }
 
             if (!isExit) {
-                duke.ui.showLine();
+                this.ui.showLine();
             }
         }
 
         // Save tasks before terminating program
-        duke.storage.saveTasks(duke.taskList.tasks);
-        duke.ui.goodbye();
+        this.storage.saveTasks(this.taskList.tasks);
+        this.ui.goodbye();
+    }
+
+    /**
+     * Runs Duke program.
+     * @param args
+     * @throws DukeException
+     */
+    public static void main(String[] args) throws DukeException {
+        Duke duke = new Duke("duke.txt");
+        duke.run();
+    }
+
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    String getResponse(String input) {
+        return "Your Dark Side: " + input;
     }
 }
+
+
+
