@@ -32,7 +32,7 @@ public class DoneCommand extends Command {
      * not fall within the valid range.
      */
     @Override
-    public void executeCommand(TaskList taskList, Ui ui, Storage storage) throws InvalidDoneFormatException,
+    public String executeCommand(TaskList taskList, Ui ui, Storage storage) throws InvalidDoneFormatException,
             IncorrectDoneInputException, TaskCompletedException {
         String[] tempArray = fullCommand.trim().split(" ");
         if (tempArray.length != 2) {
@@ -44,7 +44,7 @@ public class DoneCommand extends Command {
             throw new IncorrectDoneInputException(taskList.getTaskListLength());
         }
         taskList.markTaskAsDone(itemIndex);
-        ui.markAsDoneMessage(taskList.getSpecificTask(itemIndex).toString());
+        return ui.markAsDoneMessage(taskList.getSpecificTask(itemIndex).toString());
     }
 
     /**

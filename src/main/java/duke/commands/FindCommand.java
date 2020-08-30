@@ -29,7 +29,7 @@ public class FindCommand extends Command {
      * @throws InvalidFindFormatException If the format of find command is wrong.
      */
     @Override
-    public void executeCommand(TaskList taskList, Ui ui, Storage storage)
+    public String executeCommand(TaskList taskList, Ui ui, Storage storage)
             throws InvalidFindFormatException {
         String[] tempArray = fullCommand.trim().split(" ");
         if (tempArray.length == 1) {
@@ -40,7 +40,6 @@ public class FindCommand extends Command {
 
         TaskList matchingTaskList = taskList.findTask(keyword);
 
-        ui.findTaskMessage(matchingTaskList.toString(), matchingTaskList.getTaskListLength());
-
+        return ui.findTaskMessage(matchingTaskList.toString(), matchingTaskList.getTaskListLength());
     }
 }
