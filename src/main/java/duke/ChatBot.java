@@ -1,8 +1,9 @@
 package duke;
 
-import duke.exception.NoDataFileException;
-import duke.command.Command;
 import java.io.IOException;
+
+import duke.command.Command;
+import duke.exception.NoDataFileException;
 
 /**
  * The chat bot class to handle the internal logic.
