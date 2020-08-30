@@ -57,14 +57,7 @@ application {
     // Define the main class for the application.
     mainClassName = 'ip.App'
 }
-sourceSets {
-    main {
-        resources {
-            srcDirs = ["src/main/java"]
-            includes = ["**/*.css"]
-        }
-    }
-}
+
 test {
     // Use junit platform for unit tests
     useJUnitPlatform()

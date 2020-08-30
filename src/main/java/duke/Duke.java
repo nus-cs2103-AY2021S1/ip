@@ -8,26 +8,15 @@ import duke.dukehelper.Ui;
 import duke.exception.DukeException;
 import duke.helper.DateTimeHelper;
 import duke.task.Task;
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Scanner;
 
-public class Duke extends Application {
+public class Duke {
     private Ui ui;
     private Storage storage;
     private TaskList tasks;
     private Parser parser;
-    private Pane root = new Pane();
-    private Scene scene;
-
-
     /**
      * Constructor
      */
@@ -77,9 +66,9 @@ public class Duke extends Application {
                 LocalDate deadline = dtHelper.getDate();
                 return tasks.filteredTaskList(deadline);
             } else {
-                throw new DukeException("Wrong format\n   "
-                        + " Your date and time(optional) should be in this format:\n      "
-                        + "yyyy-mm-dd HHmm\n    e.g: 2019-10-15 1800 or 2019-10-15");
+                throw new DukeException("Wrong format\n"
+                        + " Your date and time(optional) should be in this format:\n"
+                        + "yyyy-mm-dd HHmm\ne.g: 2019-10-15 1800 or 2019-10-15");
             }
 
         } else if (commandType == Commands.FIND) {
@@ -116,64 +105,48 @@ public class Duke extends Application {
     /**
      * Reads input and return output to the user
      */
-    protected void run() {
-        Ui.printDialog("Hello! I'm the Riddler. Type 'help' if you know nothing HAHAHA\n    "
-                + "Your tasks will be saved at /data\n    What can WE do for you?");
-        Scanner sc = new Scanner(System.in);
+    protected String init() {
+        String result = "";
+        result += Ui.printDialog("Hello! I'm Elon Musk. Type 'help' if you know nothing HAHAHA\n"
+                + "Your tasks will be saved at /data\nWhat can WE do for you?");
         ArrayList<String> savedTasks = storage.loadSavedTasks();
         if (savedTasks.size() > 0 && savedTasks.get(0).equals("000")) {
-            Ui.printDialog("This is the first time you use Duke!");
+            result += Ui.printDialog("This is the first time you use Duke!");
         } else {
             try {
                 for (String task : savedTasks) {
                     processedCommand(task, true);
                 }
             } catch (DukeException e) {
-                Ui.printDialog("Something wrong happened while loading saved tasks");
+                result += Ui.printDialog("Something wrong happened while loading saved tasks");
             }
         }
-        while (true) {
-            String content = sc.nextLine();
-            content = content.strip();
-            if (content.equals(Commands.BYE.getAction())) {
-                Ui.printDialog("Bye. Hope to see you again soon!");
-                break;//exit the program
+        return result;
+    }
+    public String getResponse(String content) {
+        content = content.strip();
+        if (content.equals(Commands.BYE.getAction())) {
+            return Ui.printDialog("Bye. Hope to see you again soon!");
+            //exit the program
+        }
+        if (content.equals(Commands.HELP.getAction())) {
+            String res = "";
+            for(Commands command: Commands.values()) {
+                res += command.getAction() + ": " + command.getDescription();
+                res += "\n    ";
             }
-            if (content.equals(Commands.HELP.getAction())) {
-                String res = "";
-                for(Commands command: Commands.values()) {
-                    res += command.getAction() + ": " + command.getDescription();
-                    res += "\n    ";
-                }
-                Ui.printDialog(res);
-            } else if (content.equals(Commands.LIST.getAction())) {
-                Ui.printStoredTasks(this.tasks.getTaskList());
-            } else {
-                try {
-                    String result = processedCommand(content, false);
-                    if (!result.equals("")) Ui.printDialog(result);
-                } catch (DukeException e) {
-                    Ui.printDialog(e.getMessage());
-                }
+            return Ui.printDialog(res);
+        } else if (content.equals(Commands.LIST.getAction())) {
+            return Ui.printStoredTasks(this.tasks.getTaskList());
+        } else {
+            try {
+                String result = processedCommand(content, false);
+                if (!result.equals("")) return Ui.printDialog(result);
+            } catch (DukeException e) {
+                return Ui.printDialog(e.getMessage());
             }
         }
-    }
-
-    @Override
-    public void start(Stage primaryStage) throws Exception {
-        ui.initChatBox();
-        Label label1 = new Label("Command:");
-        TextField textField = new TextField();
-        root.getStylesheets().add(getClass().getResource("../style/chatbox.css").toExternalForm());
-        root.getChildren().addAll(ui.getContainer(),ui.getAdd(), label1, textField);
-        scene = new Scene(root,300,450);
-        primaryStage.setScene(scene);
-        primaryStage.show();
-    }
-
-    public static void main(String[] args) {
-        Duke dk = new Duke();
-        dk.run();
+        return "Type 'help' if you know nothing";
     }
 }
 
