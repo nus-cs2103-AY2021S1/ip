@@ -1,6 +1,12 @@
 package duke;
 
-import duke.command.*;
+import duke.command.Command;
+import duke.command.CommandAdd;
+import duke.command.CommandBye;
+import duke.command.CommandDelete;
+import duke.command.CommandDone;
+import duke.command.CommandFind;
+import duke.command.CommandList;
 import duke.exception.IllegalCommandException;
 import duke.exception.IllegalDeleteArgument;
 import duke.exception.IllegalDoneArgument;
@@ -40,7 +46,9 @@ public class Parser {
         if (keyWord.equals("find")) {
             if (response.split(" ").length == 1) {
                 throw new NoDescriptionException("find");
-            } else return new CommandFind(response.substring(5));
+            } else {
+                return new CommandFind(response.substring(5));
+            }
         } else if (keyWord.equals("done")) {
             if (response.split(" ").length == 1) {
                 throw new NoDescriptionException("done");
@@ -69,38 +77,38 @@ public class Parser {
             String firstCmd = response.split(" ")[0];
             Task newTask;
             switch (firstCmd) {
-                case "todo":
-                    if (response.split(" ").length == 1) {
-                        throw new NoDescriptionException("todo");
-                    }
-                    newTask = new Todo(response.substring(5));
-                    break;
-                case "deadline": {
-                    if (response.split(" ").length == 1) {
-                        throw new NoDescriptionException("deadline");
-                    }
-                    String nameAndTime = response.substring(9);
-                    if (nameAndTime.split(" /by ").length == 1) {
-                        throw new NoTimeException("deadline");
-                    }
-                    newTask = new Deadline(response.substring(9).split(" /by ")[0],
-                            response.substring(9).split(" /by ")[1]);
-                    break;
+            case "todo":
+                if (response.split(" ").length == 1) {
+                    throw new NoDescriptionException("todo");
                 }
-                case "event": {
-                    if (response.split(" ").length == 1) {
-                        throw new NoDescriptionException("event");
-                    }
-                    String nameAndTime = response.substring(6);
-                    if (nameAndTime.split(" /at ").length == 1) {
-                        throw new NoTimeException("event");
-                    }
-                    newTask = new Event(response.substring(6).split(" /at ")[0],
-                            response.substring(6).split(" /at ")[1]);
-                    break;
+                newTask = new Todo(response.substring(5));
+                break;
+            case "deadline": {
+                if (response.split(" ").length == 1) {
+                    throw new NoDescriptionException("deadline");
                 }
-                default:
-                    throw new IllegalCommandException(response);
+                String nameAndTime = response.substring(9);
+                if (nameAndTime.split(" /by ").length == 1) {
+                    throw new NoTimeException("deadline");
+                }
+                newTask = new Deadline(response.substring(9).split(" /by ")[0],
+                        response.substring(9).split(" /by ")[1]);
+                break;
+            }
+            case "event": {
+                if (response.split(" ").length == 1) {
+                    throw new NoDescriptionException("event");
+                }
+                String nameAndTime = response.substring(6);
+                if (nameAndTime.split(" /at ").length == 1) {
+                    throw new NoTimeException("event");
+                }
+                newTask = new Event(response.substring(6).split(" /at ")[0],
+                        response.substring(6).split(" /at ")[1]);
+                break;
+            }
+            default:
+                throw new IllegalCommandException(response);
             }
             return new CommandAdd(newTask);
         }

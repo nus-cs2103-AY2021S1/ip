@@ -42,17 +42,17 @@ public class Storage {
 
                 String[] parts = currentLine.split(" \\| ");
                 switch (parts[0]) {
-                    case "T":
-                        currentTask = new Todo(parts[2]);
-                        break;
-                    case "D":
-                        currentTask = new Deadline(parts[2], parts[3]);
-                        break;
-                    case "E":
-                        currentTask = new Event(parts[2], parts[3]);
-                        break;
-                    default:
-                        throw new IOException("Illegal string found in data file.");
+                case "T":
+                    currentTask = new Todo(parts[2]);
+                    break;
+                case "D":
+                    currentTask = new Deadline(parts[2], parts[3]);
+                    break;
+                case "E":
+                    currentTask = new Event(parts[2], parts[3]);
+                    break;
+                default:
+                    throw new IOException("Illegal string found in data file.");
                 }
                 if (parts[1].equals("1")) {
                     currentTask.markAsDone();
