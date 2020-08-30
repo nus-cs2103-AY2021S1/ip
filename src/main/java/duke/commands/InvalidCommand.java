@@ -26,7 +26,7 @@ public class InvalidCommand extends Command {
      * @param storage Storage object.
      */
     @Override
-    public void execute(TaskList taskList, UI ui, Storage storage) {
-        ui.showError(message);
+    public String execute(TaskList taskList, UI ui, Storage storage) {
+        return ui.showError(message);
     }
 }

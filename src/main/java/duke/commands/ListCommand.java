@@ -30,12 +30,12 @@ public class ListCommand extends Command {
      * @param storage  Storage object.
      */
     @Override
-    public void execute(TaskList taskList, UI ui, Storage storage) {
+    public String execute(TaskList taskList, UI ui, Storage storage) {
         ArrayList<Task> tasks = new ArrayList<>();
         for (int i = 0; i < taskList.getListSize(); i++) {
             Task task = taskList.getTaskAtIndex(i);
             tasks.add(task);
         }
-        ui.displayAllItems(tasks);
+        return ui.displayAllItems(tasks);
     }
 }

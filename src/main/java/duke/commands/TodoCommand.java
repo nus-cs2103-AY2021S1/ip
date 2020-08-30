@@ -31,9 +31,9 @@ public class TodoCommand extends Command {
      * @param storage Storage object.
      */
     @Override
-    public void execute(TaskList taskList, UI ui, Storage storage) {
+    public String execute(TaskList taskList, UI ui, Storage storage) {
         Task task = new ToDo(commandDescription);
         taskList.addToList(task);
-        ui.displayAddedTask(task, taskList.getListSize());
+        return ui.displayAddedTask(task, taskList.getListSize());
     }
 }

@@ -53,7 +53,7 @@ public class DeadlineCommand extends Command {
      * @param storage Storage object.
      */
     @Override
-    public void execute(TaskList taskList, UI ui, Storage storage) {
+    public String execute(TaskList taskList, UI ui, Storage storage) {
         Deadline deadlineTask;
         if (this.hasLocalDate) {
             deadlineTask = new Deadline(commandDescription, deadlineLocalDate);
@@ -61,6 +61,6 @@ public class DeadlineCommand extends Command {
             deadlineTask = new Deadline(commandDescription, deadlineDate);
         }
         taskList.addToList(deadlineTask);
-        ui.displayAddedTask(deadlineTask, taskList.getListSize());
+        return ui.displayAddedTask(deadlineTask, taskList.getListSize());
     }
 }

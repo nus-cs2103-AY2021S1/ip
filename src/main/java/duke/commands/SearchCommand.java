@@ -35,7 +35,7 @@ public class SearchCommand extends Command {
      * @param storage  Storage object.
      */
     @Override
-    public void execute(TaskList taskList, UI ui, Storage storage) {
+    public String execute(TaskList taskList, UI ui, Storage storage) {
         ArrayList<Task> tasks = new ArrayList<>();
         String pattern = "(.*)" + commandDescription + "(.*)";
         for (int i = 0; i < taskList.getListSize(); i++) {
@@ -44,6 +44,6 @@ public class SearchCommand extends Command {
                 tasks.add(task);
             }
         }
-        ui.displayAllItems(tasks);
+        return ui.displayAllItems(tasks);
     }
 }

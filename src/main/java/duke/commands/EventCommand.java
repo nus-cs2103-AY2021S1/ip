@@ -52,7 +52,7 @@ public class EventCommand extends Command {
      * @param storage Storage object.
      */
     @Override
-    public void execute(TaskList taskList, UI ui, Storage storage) {
+    public String execute(TaskList taskList, UI ui, Storage storage) {
         Event eventTask;
         if (this.hasLocalDate) {
             eventTask = new Event(commandDescription, eventLocalDate);
@@ -60,6 +60,6 @@ public class EventCommand extends Command {
             eventTask = new Event(commandDescription, eventDate);
         }
         taskList.addToList(eventTask);
-        ui.displayAddedTask(eventTask, taskList.getListSize());
+        return ui.displayAddedTask(eventTask, taskList.getListSize());
     }
 }
