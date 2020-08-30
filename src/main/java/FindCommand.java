@@ -5,7 +5,7 @@ public class FindCommand extends Command {
         this.query = query;
     }
 
-    @Override public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.displayList(tasks.find(query), true);
+    @Override public String execute(TaskList tasks, Ui ui, Storage storage) {
+        return ui.displayList(tasks.find(query), true);
     }
 }
