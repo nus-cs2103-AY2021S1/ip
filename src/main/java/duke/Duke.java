@@ -1,8 +1,8 @@
 package duke;
+import java.io.IOException;
+
 import duke.commands.Command;
 import duke.tasks.TaskList;
-
-import java.io.IOException;
 
 /**
  * Bot with personality which assists and keeps track of user's tasks.
