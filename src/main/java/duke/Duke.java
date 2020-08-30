@@ -4,17 +4,17 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 /**
- * Engages all the other classes to execute Duke
+ * Engages all the other classes to execute Duke.
  */
-public class   Duke {
+public class Duke {
     public static String filePath;
     private TaskList tasks;
     private Ui ui;
     private Storage storage;
 
     /**
-     * Constructor
-     * @param filePath
+     * Constructor.
+     * @param filePath filepath.
      */
     public Duke(String filePath) {
         ui = new Ui();
@@ -29,7 +29,7 @@ public class   Duke {
     }
 
     /**
-     * Loops to continuously check for user input
+     * Loops to continuously check for user input.
      */
     public void run() {
         ui.printWelcome();

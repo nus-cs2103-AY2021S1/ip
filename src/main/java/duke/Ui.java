@@ -3,42 +3,42 @@ package duke;
 import java.util.Scanner;
 
 /**
- * Deals with reading the input and printing the output
+ * Deals with reading the input and printing the output.
  */
 public class Ui {
     Scanner sc;
 
     /**
-     * Constructor
+     * Constructor.
      */
     public Ui() {
         this.sc = new Scanner(System.in);
     }
 
     /**
-     * Takes in the next input line
-     * @return
+     * Takes in the next input line.
+     * @return the next input line.
      */
     public String readCommand() {
         return sc.nextLine();
     }
 
     /**
-     * Prints the divider line that output is nested in
+     * Prints the divider line that output is nested in.
      */
     public void printDivider() {
         System.out.println("\t______________________________________________\n");
     }
 
     /**
-     * Prints divider line for errors
+     * Prints divider line for errors.
      */
     public void printErrorDivider() {
         System.out.println("\t!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n");
     }
 
     /**
-     * Prints welcome message when application starts up
+     * Prints welcome message when application starts up.
      */
     public void printWelcome() {
         printDivider();
@@ -57,7 +57,7 @@ public class Ui {
     }
 
     /**
-     * Prints goodbye message
+     * Prints goodbye message.
      */
     public void printGoodbye() {
         printDivider();
@@ -66,8 +66,8 @@ public class Ui {
     }
 
     /**
-     * Prints error message
-     * @param e
+     * Prints error message.
+     * @param e the DukeException.
      */
     public void printError(DukeException e) {
         printErrorDivider();
@@ -76,8 +76,8 @@ public class Ui {
     }
 
     /**
-     * Prints a message passed as argument
-     * @param msg
+     * Prints a message passed as argument.
+     * @param msg an arbitrary sentence to be printed.
      */
     public void printMsg(String msg) {
         System.out.println("\t" + msg);

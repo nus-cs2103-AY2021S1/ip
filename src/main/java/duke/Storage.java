@@ -1,11 +1,15 @@
 package duke;
 
-import java.io.*;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * Implements the loading and storing of Tasks to an external text file.
+ * Implements the loading and storing of Tasks to an external text file..
  */
 
 public class Storage {
@@ -17,9 +21,9 @@ public class Storage {
     }
 
     /**
-     * If the text file does not exist, create a file
-     * @param f Text file to check existence for
-     * @throws IOException
+     * If the text file does not exist, create a file.
+     * @param f Text file to check existence for.
+     * @throws IOException IOException.
      */
     public void checkFileExistence(File f) throws IOException {
         if (!f.exists()) {
@@ -28,9 +32,9 @@ public class Storage {
     }
 
     /**
-     * Method to update current task list to disk
-     * @param tasks TaskList that represents a collection of Task objects
-     * @throws DukeException
+     * Method to update current task list to disk.
+     * @param tasks TaskList that represents a collection of Task objects.
+     * @throws DukeException DukeException.
      */
     public void update(TaskList tasks) throws DukeException {
 
@@ -53,9 +57,9 @@ public class Storage {
 
 
     /**
-     * Method to load list of tasks from disk and make a new TaskList object
-     * @return TaskList that represents a collection of Task objects
-     * @throws DukeException
+     * Method to load list of tasks from disk and make a new TaskList object.
+     * @return TaskList that represents a collection of Task objects.
+     * @throws DukeException DukeException.
      */
     public TaskList load() throws DukeException {
         try {
@@ -77,6 +81,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Checks if a Task object has been marked as done.
+     * @param s the character that denotes whether a Task has been completed.
+     * @param task the task object that is being checked.
+     */
     public void checkIfDone(String s, Task task) {
         if (s.equals("1")) {
             task.markAsDone();
@@ -84,10 +93,10 @@ public class Storage {
     }
 
     /**
-     * Convert the task from String format in the disk to a Task object
-     * @param line
-     * @return a Task
-     * @throws DukeException
+     * Convert the task from String format in the disk to a Task object.
+     * @param line string of input from the disk in hard disk format.
+     * @return a Task.
+     * @throws DukeException DukeException.
      */
     private Task processTaskToLoad(String line) throws DukeException {
         String[] data = line.split(" , ");

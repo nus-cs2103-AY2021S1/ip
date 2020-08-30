@@ -1,7 +1,7 @@
 package duke;
 
 /**
- * Represents a Task object
+ * Represents a Task object.
  */
 public class Task {
     protected boolean isDone;
@@ -17,7 +17,7 @@ public class Task {
     }
 
     public String getStatusIcon() {
-            return isDone ? "X" : " ";
+        return isDone ? "X" : " ";
     }
 
     public Task markAsDone() {
@@ -30,16 +30,16 @@ public class Task {
     }
 
     /**
-     * String representation of Task object
-     * @return String representation of Task object
+     * String representation of Task object.
+     * @return String representation of Task object.
      */
     public String toString() {
         return "[" + getStatusIcon() + "] " + description;
     }
 
     /**
-     * String representation of Task object to be saved to hard disk
-     * @return String representation of Task object to be saved to hard disk
+     * String representation of Task object to be saved to hard disk.
+     * @return String representation of Task object to be saved to hard disk.
      */
     public String fileFormat() {
         String indicateDone = isDone ? "1" : "0";

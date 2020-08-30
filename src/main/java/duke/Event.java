@@ -1,7 +1,7 @@
 package duke;
 
 /**
- * Implements an Event task
+ * Implements an Event task.
  */
 public class Event extends Task {
 
@@ -13,16 +13,16 @@ public class Event extends Task {
     }
 
     /**
-     * String representation of Event object
-     * @return String representation of Event object
+     * String representation of Event object.
+     * @return String representation of Event object.
      */
     public String toString() {
         return "[E]" + super.toString() + " (at: " + at + ")";
     }
 
     /**
-     * String representation of Event object to be saved to hard disk
-     * @return String representation of Event object to be saved to hard disk
+     * String representation of Event object to be saved to hard disk.
+     * @return String representation of Event object to be saved to hard disk.
      */
     public String fileFormat() {
         return "E , " + super.fileFormat() + at.getStringDate();
