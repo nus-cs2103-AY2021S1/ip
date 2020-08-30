@@ -46,7 +46,7 @@ public class Duke {
      * Executes the running of the chat bot.
      */
     public void run() {
-        System.out.println(ui.greet());
+        System.out.println(Ui.greet());
         boolean isExit = false;
         while (!isExit) {
             try {
@@ -70,6 +70,12 @@ public class Duke {
         new Duke("data/tasks.txt").run();
     }
 
+    /**
+     * Parses user inputs into commands and returns it as a string.
+     *
+     * @param input User input.
+     * @return String of executed command.
+     */
     public String getResponse(String input) {
         try {
             Command c = Parser.parse(input);

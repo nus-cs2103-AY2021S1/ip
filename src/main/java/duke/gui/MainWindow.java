@@ -1,6 +1,10 @@
 package duke.gui;
 
 import duke.Duke;
+import duke.Ui;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -8,6 +12,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.util.Duration;
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -26,9 +32,15 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
+    /**
+     * Initializes the dialog container and display greeting message.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(Ui.greet(), dukeImage)
+        );
     }
 
     public void setDuke(Duke d) {
@@ -43,10 +55,21 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         String response = duke.getResponse(input);
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
-        );
+        if (input.toLowerCase().equals("bye")) {
+
+            KeyFrame keyFrame = new KeyFrame(Duration.seconds(0), e -> dialogContainer.getChildren().addAll(
+                    DialogBox.getUserDialog(input, userImage),
+                    DialogBox.getDukeDialog(response, dukeImage)
+            ));
+            KeyFrame exit = new KeyFrame(Duration.seconds(1.5), e -> Platform.exit());
+            Timeline timeline = new Timeline(keyFrame, exit);
+            Platform.runLater(timeline::play);
+        } else {
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getUserDialog(input, userImage),
+                    DialogBox.getDukeDialog(response, dukeImage)
+            );
+        }
         userInput.clear();
     }
 }
