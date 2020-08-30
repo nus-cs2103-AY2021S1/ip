@@ -1,5 +1,9 @@
 package duke;
 
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.Scanner;
+
 import duke.command.Command;
 import duke.command.ExitCommand;
 import duke.utils.DukeException;
@@ -8,9 +12,6 @@ import duke.utils.Parser;
 import duke.utils.TaskList;
 import duke.utils.Ui;
 
-import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.Scanner;
 
 
 public class Duke {

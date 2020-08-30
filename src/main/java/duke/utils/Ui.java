@@ -1,9 +1,8 @@
 package duke.utils;
 
-import duke.task.Task;
-
 import java.util.List;
 
+import duke.task.Task;
 
 /**
  * Handles the printing of output to the console
@@ -63,15 +62,15 @@ public class Ui {
 
         System.out.println(logo);
 
-        System.out.println("" +
-                "\n    Hello! I'm duke.Duke, your Windows duke.task.Task Manager" +
-                "\n    Valid command:" +
-                "\n    - list" +
-                "\n    - done <num>" +
-                "\n    - todo <task>" +
-                "\n    - deadline <task> /by <yyyy-mm-dd>" +
-                "\n    - event <task> /at <yyyy-mm-dd>" +
-                "\n    - find <keyword>\n");
+        System.out.println(""
+                + "\n    Hello! I'm duke.Duke, your Windows duke.task.Task Manager"
+                + "\n    Valid command:"
+                + "\n    - list"
+                + "\n    - done <num>"
+                + "\n    - todo <task>"
+                + "\n    - deadline <task> /by <yyyy-mm-dd>"
+                + "\n    - event <task> /at <yyyy-mm-dd>"
+                + "\n    - find <keyword>\n");
 
 
     }

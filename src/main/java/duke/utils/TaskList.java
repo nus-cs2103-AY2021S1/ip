@@ -1,9 +1,10 @@
 package duke.utils;
 
-import duke.task.Task;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import duke.task.Task;
+
 
 /**
  * Maintains the tasks list for the user.
@@ -27,8 +28,8 @@ public class TaskList {
      */
     public void addTask(Task task) {
         list.add(task);
-        ui.displayThis("Got it. I've added this task: \n         " + task +
-                "\n    Now you have " + list.size() + " tasks in the list");
+        ui.displayThis("Got it. I've added this task: \n         " + task
+                + "\n    Now you have " + list.size() + " tasks in the list");
     }
 
 

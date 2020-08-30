@@ -1,9 +1,5 @@
 package duke.utils;
 
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -11,6 +7,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
 
 /**
  * Class to handle the opening, writing and reading of file data.txt
@@ -95,7 +95,7 @@ public class DukeFileHandler {
             fileWriter.close();
 
         } catch (IOException e) {
-//            e.printStackTrace();
+            // e.printStackTrace();
         }
     }
 

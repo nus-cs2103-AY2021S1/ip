@@ -1,12 +1,13 @@
 package duke.command;
 
+import java.io.IOException;
+
 import duke.task.Task;
 import duke.utils.DukeException;
 import duke.utils.DukeFileHandler;
 import duke.utils.TaskList;
 import duke.utils.Ui;
 
-import java.io.IOException;
 
 public class TodoCommand extends Command {
     private final String description;
