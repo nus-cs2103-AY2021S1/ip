@@ -12,7 +12,7 @@ public class EventTest {
         try {
             event.hasDate("202020");
         } catch (DukeException e) {
-            assertEquals(e.getMessage(), "Hi my friend, Invalid date.");
+            assertEquals(e.getMessage(), "Hi my friend, invalid date. Put in format 'YYYY MM DD'.");
         }
     }
 }

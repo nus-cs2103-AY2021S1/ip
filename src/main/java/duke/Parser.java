@@ -15,6 +15,7 @@ public class Parser {
      *
      * @param description User input containing command and tasks description.
      * @return Specific command that user keyed in.
+     * @throws DukeException throw when error occurs.
      */
     public Command findCommand(String description) throws DukeException {
         if (description.length() == 0 && entered) {
