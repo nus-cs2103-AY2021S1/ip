@@ -1,4 +1,4 @@
-public class PrintsearchCommand extends Command{
+public class PrintsearchCommand extends Command {
     private String keyword;
 
     public PrintsearchCommand(String keyword) {
