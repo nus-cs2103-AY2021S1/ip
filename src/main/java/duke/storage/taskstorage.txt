@@ -1,0 +1,3 @@
+E;0;meeting;08:00 am
+T;0;read book
+D;1;return book;Jul 07 2017 07:07 am
