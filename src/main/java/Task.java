@@ -8,7 +8,7 @@ public class Task {
     }
 
     public String getStatusIcon() {
-        return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
+        return (isDone ? "\u2713" : "\u2718");
     }
 
     public String getDescription() {
@@ -25,6 +25,6 @@ public class Task {
     }
 
     public String toSave() {
-        return isDone? "1 " : "0 " + description;
+        return (isDone? "1 " : "0 ") + description;
     }
 }
