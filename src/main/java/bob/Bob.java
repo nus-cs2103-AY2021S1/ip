@@ -24,10 +24,15 @@ public class Bob extends Application {
     /**
      * Creates a Bob.
      *
-     * @param filePath File path of saved file containing tasks.
      * @throws IOException If saved file can't be loaded.
      */
-    public Bob(String filePath) throws IOException {
+    public Bob() throws IOException {
+        String filePath = System.getProperty("user.dir").endsWith("text-ui-test")
+                ? "test.txt"
+                : System.getProperty("user.dir").endsWith("ip")
+                ? "data/bob.txt"
+                // Creates a save file on the user's home directory if user is not in ip directory
+                : System.getProperty("user.home") + "/bob.txt";
         Tasklist tempTasks;
         this.ui = new Ui();
         this.storage = new Storage(filePath);
@@ -70,14 +75,8 @@ public class Bob extends Application {
      */
     public static void main(String[] args) {
         //File path of saved task list
-        String filePath = System.getProperty("user.dir").endsWith("text-ui-test")
-                ? "test.txt"
-                : System.getProperty("user.dir").endsWith("ip")
-                ? "data/bob.txt"
-                // Creates a save file on the user's home directory if user is not in ip directory
-                : System.getProperty("user.home") + "/bob.txt";
         try {
-            new Bob(filePath).run();
+            new Bob().run();
         } catch (IOException e) {
             System.out.println(Messages.INVALID_PATHNAME);
         }
