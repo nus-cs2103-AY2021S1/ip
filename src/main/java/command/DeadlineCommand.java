@@ -25,7 +25,6 @@ public class DeadlineCommand extends Command {
         this.deadline = deadline;
     }
 
-
     /**
      * Runs the command, modifying the contents of taskList, Ui or storage depending on the
      * implementation of child class
@@ -36,10 +35,10 @@ public class DeadlineCommand extends Command {
      * @throws DukeException Exception that occurs while executing the command
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         Task deadlineTask = new DeadlineTask(this.taskName, this.deadline);
         taskList.addTask(deadlineTask);
-        ui.showAdd(deadlineTask, taskList.getSize());
+        return ui.showAdd(deadlineTask, taskList.getSize());
     }
 
     @Override

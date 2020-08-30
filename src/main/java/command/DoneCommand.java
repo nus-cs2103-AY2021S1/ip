@@ -12,6 +12,7 @@ public class DoneCommand extends Command {
 
     /**
      * Constructor of the Done Command
+     *
      * @param index index of the task to be marked as done
      */
     public DoneCommand(int index) {
@@ -20,11 +21,11 @@ public class DoneCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         if (index != 0 && index <= taskList.getSize()) {
             Task task = taskList.get(index - 1);
             task.markAsDone();
-            ui.showDone(task);
+            return ui.showDone(task);
         } else {
             throw new InvalidInputException(
                     "Number provided is too small or too large, Please provide a valid task number");

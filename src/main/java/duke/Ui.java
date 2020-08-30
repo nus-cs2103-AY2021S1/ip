@@ -18,71 +18,40 @@ public class Ui {
         System.out.println(this.line);
     }
 
-    /**
-     * Show welcome method to print the welcome message
-     */
-    public void showWelcome() {
-        System.out.println(line);
-        System.out.println(this.welcomeMessage);
-        System.out.println(line);
+    public String getWelcomeMessage() {
+        return this.welcomeMessage;
     }
 
-    public void showGoodbye() {
-        System.out.println(this.goodbyeMessage);
+    public String showGoodbye() {
+        return this.goodbyeMessage;
     }
 
-    /**
-     * Method which prints out when a task is completed
-     * @param task Task to show
-     */
-    public void showDone(Task task) {
-        System.out.println("Nice! I've marked this task as done: ");
-        System.out.println(task);
+    public String showDone(Task task) {
+        return String.join("\n", "Nice! I've marked this task as done: ", task.toString());
     }
 
-    /**
-     * Print the task that has been added to taskList
-     * @param task Task to be added
-     * @param size Number of tasks
-     */
-    public void showAdd(Task task, int size) {
-        System.out.println("Added task.Task!");
-        System.out.println(task);
-        showTaskQty(size);
+    public String showAdd(Task task, int size) {
+        return String.join("\n", "Added task:", task.toString(), showTaskQty(size));
     }
 
-    /**
-     * Method to print the number of remaining tasks
-     * @param size Number of remaining tasks
-     */
-    public void showTaskQty(int size) {
-        System.out.println(String.format("You have %s remaining tasks left, work on them soon!", size));
+    public String showTaskQty(int size) {
+        return String.format("You have %s remaining tasks left, work on them soon!", size);
     }
 
-    /**
-     * Prints out the deleted task
-     * @param task Task to be deleted
-     * @param size Number of tasks
-     */
-    public void showDelete(Task task, int size) {
-        System.out.println("Deleting task.Task: ");
-        System.out.println(task);
-        showTaskQty(size);
+    public String showDelete(Task task, int size) {
+        return String.join("\n", "Deleting task.Task: ", task.toString(), showTaskQty(size));
     }
 
     public void showError(String errMsg) {
         System.out.println(errMsg);
     }
 
-    /**
-     * Prints out tasks in taskList
-     * @param taskList tasklist containing task objects
-     */
-    public void displayTaskList(TaskList taskList) {
-        System.out.println("Here are your current tasks:");
+    public String displayTaskList(TaskList taskList) {
+        StringBuilder s = new StringBuilder("Here are your current tasks:\n");
         for (int i = 0; i < taskList.getTaskList().size(); i++) {
-            System.out.println(i + 1 + "." + taskList.getTaskList().get(i));
+            s.append(i + 1).append(".").append(taskList.getTaskList().get(i)).append("\n");
         }
+        return s.toString();
     }
 
     /**
@@ -100,19 +69,23 @@ public class Ui {
         }
     }
 
-    /**
-     * Prints out contents of the filtered taskList
-     * @param filteredTaskList taskList object
-     */
-    public void displayMatchingTasks(TaskList filteredTaskList) {
+    public String displayMatchingTasks(TaskList filteredTaskList) {
 
         if (filteredTaskList.getSize() > 0) {
-            System.out.println("Here are the matching tasks in your list");
+            StringBuilder s = new StringBuilder("Here are the matching tasks in your list\n");
+
             for (int i = 0; i < filteredTaskList.getTaskList().size(); i++) {
-                System.out.println(i + 1 + "." + filteredTaskList.getTaskList().get(i));
+                s.append(i + 1).append(".").append(filteredTaskList.getTaskList().get(i)).append("\n");
             }
+            return s.toString();
         } else {
-            System.out.println("You have no matching tasks!");
+            return "You have no matching tasks!";
         }
+    }
+
+    public void showWelcome() {
+        System.out.println(line);
+        System.out.println(this.welcomeMessage);
+        System.out.println(line);
     }
 }

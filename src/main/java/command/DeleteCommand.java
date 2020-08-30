@@ -12,6 +12,7 @@ public class DeleteCommand extends Command {
 
     /**
      * Constructor for delete command
+     *
      * @param index index of the task to delete
      */
     public DeleteCommand(int index) {
@@ -20,14 +21,15 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         if (index != 0 && index <= taskList.getSize()) {
             Task task = taskList.get(index - 1);
             taskList.removeTask(index - 1);
-            ui.showDelete(task, taskList.getSize());
+            return ui.showDelete(task, taskList.getSize());
         } else {
             throw new InvalidInputException(
                     "Number provided is too small or too large, Please provide a valid task number");
         }
     }
 }
+

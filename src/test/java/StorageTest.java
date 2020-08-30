@@ -16,12 +16,12 @@ public class StorageTest {
 
   @Test
   public void TestReadValidFile() throws DukeException {
-    assertEquals(new Storage("data/duke.txt").readFile(), new File("data/duke.txt"));
+    assertEquals(new Storage("src/test/data/duke.txt").readFile(), new File("src/test/data/duke.txt"));
   }
 
   @Test
   public void TestLoad() throws DukeException {
-    List<Task> arrayList = new Storage("data/duke.txt").load();
+    List<Task> arrayList = new Storage("src/test/data/duke.txt").load();
     assertEquals(arrayList.size(), 1);
     assertEquals(arrayList.get(0), new TodoTask("Wash Clothes", 1));
   }
@@ -29,7 +29,7 @@ public class StorageTest {
   // Test data/duke.txt if it doesn't exist in test/data/duke.txt
   @Test
   public void TestLoadEmptyDirectory() throws DukeException {
-    assertEquals(new Storage("data/dukeEmpty.txt").load(), new ArrayList<>());
+    assertEquals(new Storage("src/test/data/dukeEmpty.txt").load(), new ArrayList<>());
   }
 
   @Test
@@ -41,7 +41,7 @@ public class StorageTest {
 
   @Test
   public void TestSaveTask() throws DukeException {
-    Storage testStorage = new Storage("data/saveTask.txt");
+    Storage testStorage = new Storage("src/test/data/saveTask.txt");
     testStorage.load();
     TaskList taskList = new TaskList();
 

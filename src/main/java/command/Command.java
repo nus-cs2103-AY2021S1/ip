@@ -24,7 +24,7 @@ public abstract class Command {
      * @param storage  Object of the Storage class
      * @throws DukeException Exception that occurs while executing the command
      */
-    public abstract void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException;
+    public abstract String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException;
 
     public boolean isExit() {
         return this.type.equals(CommandType.Bye);
@@ -39,9 +39,5 @@ public abstract class Command {
         Delete,
         List,
         Find
-    }
-
-    public CommandType getType() {
-        return type;
     }
 }

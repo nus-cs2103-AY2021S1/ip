@@ -19,12 +19,11 @@ public class FindCommand extends Command {
         super(CommandType.Find);
         this.findString = findString;
     }
-
-    @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        TaskList filteredTaskList = taskList.find(this.findString);
-        ui.displayMatchingTasks(filteredTaskList);
-    }
+  @Override
+  public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    TaskList filteredTaskList = taskList.find(this.findString);
+    return ui.displayMatchingTasks(filteredTaskList);
+  }
 
     @Override
     public boolean equals(Object o) {

@@ -21,13 +21,12 @@ public class TodoCommand extends Command {
         super(CommandType.Todo);
         this.todo = todo;
     }
-
-    @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        Task todoTask = new TodoTask(this.todo);
-        taskList.addTask(todoTask);
-        ui.showAdd(todoTask, taskList.getSize());
-    }
+  @Override
+  public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    Task todoTask = new TodoTask(this.todo);
+    taskList.addTask(todoTask);
+    return ui.showAdd(todoTask, taskList.getSize());
+  }
 
     @Override
     public boolean equals(Object o) {
