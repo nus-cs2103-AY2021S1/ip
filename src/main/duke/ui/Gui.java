@@ -18,6 +18,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -28,6 +29,10 @@ public class Gui extends Application {
     private final Image IMG_DUKE = new Image(this.getClass().getResourceAsStream("/images/duke.png"));
 
     private final DialogBox GREETING = DialogBox.dukeDialog(getDialogLabel("Hello."), new ImageView(IMG_DUKE));
+    /* Sets a black 1px border with 2px padding around the Label.*/
+    private final String CSS_LABEL =
+            "-fx-padding: 5px;\n" +
+            "-fx-text-fill: EEEBE7;\n";
 
     private TextField userInput = new TextField();
     private Button sendButton = new Button("Send");
@@ -71,7 +76,6 @@ public class Gui extends Application {
 
         userInput.setOnAction(event -> {
             if (handleUserInput()) {
-                scrollDialoguePane.addDialog(dukeDialog("Goodbye."));
                 PAUSE.setOnFinished(event1 -> {
                     stage.close();
                 });
@@ -84,6 +88,8 @@ public class Gui extends Application {
     private Label getDialogLabel(String text) {
         Label textToAdd = new Label(text);
         textToAdd.setWrapText(true);
+        textToAdd.setStyle(CSS_LABEL);
+        textToAdd.setTextFill(Color.web("#FFFFFF")); // white text
         return textToAdd;
     }
 
