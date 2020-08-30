@@ -19,15 +19,7 @@ public class Duke{
     private duke.Storage storage;
     private duke.TaskList tasks;
     private Ui ui;
-
-    private ScrollPane scrollPane;
-    private VBox dialogContainer;
-    private TextField userInput;
-    private Button sendButton;
-    private Scene scene;
-
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/ethan.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/anotherEthan.png"));
+    private Gui gui;
 
     public Duke(String filepath) throws IOException {
         ui = new Ui();
@@ -40,8 +32,16 @@ public class Duke{
         }
     }
 
-    public Duke() {
-
+    // For the Gui
+    public Duke() throws IOException {
+        gui = new Gui();
+        storage = new duke.Storage("data/tasks.txt");
+        try {
+            tasks = new duke.TaskList(storage.loadTask());
+        } catch (duke.DukeException e) {
+            gui.showLoadingError();
+            tasks = new duke.TaskList();
+        }
     }
 
     public static void main(String[] args) throws duke.DukeException, IOException {
@@ -62,7 +62,12 @@ public class Duke{
         ui.printExit();
     }
 
-    String getResponse(String input) {
-        return "Duke heard: " + input;
+    String getResponse(String input) throws FileNotFoundException, DukeException {
+        if (input.equals("bye")) {
+            return "Bye. Hope to see you again soon!";
+        } else {
+            GuiParser guiParser = new GuiParser();
+            return guiParser.interpretGui(input, tasks, storage);
+        }
     }
 }
