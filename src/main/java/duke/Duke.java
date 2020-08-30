@@ -2,7 +2,6 @@ package duke;
 
 import duke.exceptions.DukeException;
 import duke.exceptions.DukeUnknownCommandException;
-import javafx.fxml.FXML;
 
 import java.io.IOException;
 
@@ -96,7 +95,10 @@ public class Duke {
         }
     }
 
-    @FXML
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
     public String getResponse(String input) {
         try {
             Command c = new Command(taskList, ui);
