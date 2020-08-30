@@ -5,9 +5,9 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * Represents the storage system for the Duke application. The storage system is responsible for
- * loading tasks from the hard disk when the Duke application starts up, and for saving tasks to
- * the hard disk whenever the task list changes.
+ * Represents the storage system of the Duke application. The storage system is
+ * responsible for loading tasks from the hard disk whenever the Duke application
+ * starts up, and for saving tasks in the hard disk whenever the task list changes.
  */
 public class Storage {
 
@@ -19,9 +19,11 @@ public class Storage {
 
     /**
      * Loads tasks from the hard disk when the Duke application starts up.
-     * @return a list of String objects representing the tasks in the hard disk.
-     * @throws IOException if an error occurs while accessing/creating the directory/file.
-     * @throws DukeException if the directory/file did not exist initially.
+     * @return List of String objects representing the tasks in the hard disk.
+     * @throws IOException If an error occurs while accessing/creating the
+     * directory/file containing the tasks
+     * @throws DukeException If the directory/file containing the tasks
+     * did not exist initially.
      */
     public ArrayList<String> load() throws IOException, DukeException {
         boolean isFound = createFile();
@@ -40,8 +42,8 @@ public class Storage {
 
     /**
      * Creates the directory/file containing the tasks, if they did not exist initially.
-     * @return a boolean value indicating whether the directory/file existed initially.
-     * @throws IOException if an error occurs while accessing/creating the directory/file.
+     * @return Boolean value indicating whether the directory/file existed initially.
+     * @throws IOException If an error occurs while accessing/creating the directory/file.
      */
     public boolean createFile() throws IOException {
         boolean isFound = true;
@@ -60,8 +62,8 @@ public class Storage {
 
     /**
      * Saves the tasks in the task list to the hard disk.
-     * @param lst the task list.
-     * @throws IOException if an error occurs while accessing/creating the directory/file.
+     * @param lst Task list.
+     * @throws IOException If an error occurs while accessing/creating the directory/file.
      */
     public void save(ArrayList<Task> lst) throws IOException {
         File file = new File(filepath);

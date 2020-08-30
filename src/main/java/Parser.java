@@ -4,18 +4,19 @@ import java.util.ArrayList;
 
 /**
  * Represents the parser of the Duke application. The parser is responsible for
- * processing user commands so that they can be understood by the application.
+ * analysing the user command so that it can be understood by the application.
  */
 public class Parser {
 
     /**
-     * Processes the dates/times for deadlines and events in the task list.
-     * @param date a String that represents either a date in YYYY-MM-DD format, or a timestamp
-     *              in YYYY-MM-DD HHMM format.
-     * @return a String that represents an alternative format of the date/time.
-     * @throws DateException if the given date/time is not in the appropriate format.
+     * Parses the dates/times of deadlines and events.
+     * @param date String that represents either a date in YYYY-MM-DD
+     *             format, or a timestamp in YYYY-MM-DD HHMM format.
+     * @return String that represents an alternative format of the date/time.
+     * @throws DateException If the given date/time is not in a format
+     * appropriate for parsing.
      */
-    public static String processDate(String date) throws DateException {
+    public static String parseDate(String date) throws DateException {
         try {
             String[] dates = date.split(" ");
             String processedDate = "";
@@ -59,22 +60,21 @@ public class Parser {
     }
 
     /**
-     * Processes the user command.
-     * @param s the user command
-     * @param size the size of the task list.
-     * @return a list of String objects that represent the appropriate command to
-     * be executed.
-     * @throws InvalidDoneException if for a done command, either no task is specified or the
-     * argument provided does not represent a valid task.
-     * @throws InvalidTaskArgumentException if the command to add tasks is not correctly or
-     * completely specified.
-     * @throws InvalidDeleteException if for a delete command, either no task is specified or the
-     * argument provided does not represent a valid task.
-     * @throws InvalidCommandException if the user command cannot be understood
-     * @throws DateException if the date/time provided for an event/deadline is not in the appropriate
-     * format.
+     * Parses the user command.
+     * @param s User command.
+     * @param size Current size of the task list.
+     * @return List of String objects that represent the parsed user command.
+     * @throws InvalidDoneException If for a done command, either no task is
+     * specified or the argument provided does not represent a valid task.
+     * @throws InvalidTaskArgumentException If the command to add tasks is not
+     * correctly or completely specified.
+     * @throws InvalidDeleteException If for a delete command, either no task is
+     * specified or the argument provided does not represent a valid task.
+     * @throws InvalidCommandException If the user command cannot be understood.
+     * @throws DateException If the given date/time for an event/deadline is not
+     * in a format appropriate for parsing.
      */
-    public ArrayList<String> processString(String s, int size)
+    public ArrayList<String> parseString(String s, int size)
             throws InvalidDoneException, InvalidTaskArgumentException,
             InvalidDeleteException, InvalidCommandException, DateException {
         ArrayList<String> lst = new ArrayList<>();
@@ -123,7 +123,7 @@ public class Parser {
                     lst.add("Add");
                     lst.add("Deadline");
                     lst.add(arr[0]);
-                    lst.add(processDate(arr[1]));
+                    lst.add(parseDate(arr[1]));
                     return lst;
                 }
             }
@@ -140,7 +140,7 @@ public class Parser {
                     lst.add("Add");
                     lst.add("Event");
                     lst.add(arr[0]);
-                    lst.add(processDate(arr[1]));
+                    lst.add(parseDate(arr[1]));
                     return lst;
                 }
             }

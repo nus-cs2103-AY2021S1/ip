@@ -9,9 +9,10 @@ public class Duke {
     private Ui ui;
 
     /**
-     * Returns a Duke.
-     * @param filePath path of file that contains Tasks.
-     * @throws IOException if an error occurs while accessing/creating the directory/file.
+     * Returns a Duke application.
+     * @param filePath Path of file that contains tasks.
+     * @throws IOException If an error occurs while accessing/creating the
+     * directory/file containing the tasks.
      */
     public Duke(String filePath) throws IOException {
         storage = new Storage(filePath);
@@ -27,7 +28,8 @@ public class Duke {
 
     /**
      * Runs the Duke application.
-     * @throws IOException if an error occurs while accessing/creating the directory/file.
+     * @throws IOException If an error occurs while accessing/creating the
+     * directory/file containing the tasks.
      */
     public void run() throws IOException {
         ui.showWelcome();
@@ -47,7 +49,7 @@ public class Duke {
 
     /**
      * Provides the entry point to the Duke application.
-     * @param args command-line arguments.
+     * @param args Command-line arguments.
      */
     public static void main(String[] args) {
         try {

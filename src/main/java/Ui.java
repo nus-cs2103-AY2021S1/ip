@@ -2,8 +2,9 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * Represents the user interface for the Duke application. The user interface is responsible
- * for receiving commands from and displaying messages to the user.
+ * Represents the user interface of the Duke application. The
+ * user interface is responsible for receiving commands from and
+ * displaying messages to the user.
  */
 public class Ui {
 
@@ -45,7 +46,7 @@ public class Ui {
     /**
      * Displays an error message to the user when the Duke application encounters
      * an error.
-     * @param message the error message.
+     * @param message Error message.
      */
     public void showError(String message) {
         showLine();
@@ -55,7 +56,7 @@ public class Ui {
 
     /**
      * Displays a message indicating that a particular task has been marked as done.
-     * @param task the task that has been marked as done.
+     * @param task Task that has been marked as done.
      */
     public void showDone(Task task) {
         showLine();
@@ -67,8 +68,8 @@ public class Ui {
     /**
      * Displays a message indicating that a new task has been added to the task list.
      * The total number of tasks in the task list after addition is also displayed.
-     * @param task the task that has been added to the task list.
-     * @param size the total number of tasks in the task list after addition.
+     * @param task Task that has been added to the task list.
+     * @param size Total number of tasks in the task list after addition.
      */
     public void showAdd(Task task, int size) {
         showLine();
@@ -81,8 +82,8 @@ public class Ui {
     /**
      * Displays a message indicating that a task has been deleted from the task list.
      * The total number of tasks in the task list after deletion is also displayed.
-     * @param task the task that has been deleted from the task list.
-     * @param size the total number of tasks in the task list after deletion.
+     * @param task Task that has been deleted from the task list.
+     * @param size Total number of tasks in the task list after deletion.
      */
     public void showDelete(Task task, int size) {
         showLine();
@@ -94,7 +95,7 @@ public class Ui {
 
     /**
      * Displays the tasks in the task list.
-     * @param lst a list of String objects representing the tasks in the task list.
+     * @param lst List of String objects representing the tasks in the task list.
      */
     public void showList(ArrayList<String> lst) {
         showLine();
@@ -106,9 +107,8 @@ public class Ui {
     }
 
     /**
-     * Displays the tasks in the task list that match the keyword given by
-     * the user.
-     * @param lst a list of String objects representing the tasks in the task list
+     * Displays tasks in the task list that match a keyword given by the user.
+     * @param lst List of String objects representing the tasks in the task list
      *            that match the given keyword.
      */
     public void showFind(ArrayList<String> lst) {
@@ -122,7 +122,7 @@ public class Ui {
 
     /**
      * Reads the command entered by the user.
-     * @return the user command.
+     * @return User command.
      */
     public String readCommand() {
         return scanner.nextLine();

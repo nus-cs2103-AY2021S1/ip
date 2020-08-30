@@ -1,15 +1,16 @@
 /**
- * Represents a deadline. A deadline has both a description and a date/time indicating
- * when the task must be completed.
+ * Represents a deadline. A deadline has both a description of the
+ * activity which must be completed, and a date/time indicating when it
+ * is due.
  */
 public class Deadline extends Task {
 
     private String by;
 
     /**
-     * Returns a Deadline
-     * @param description description of the Deadline.
-     * @param by the date that the Deadline is due.
+     * Returns a Deadline.
+     * @param description Description of the Deadline.
+     * @param by Date/time that the Deadline is due.
      */
     public Deadline(String description, String by) {
         super(description);
@@ -22,9 +23,9 @@ public class Deadline extends Task {
     }
 
     /**
-     * Returns a String representation of the Deadline that will be saved in the
-     * hard disk.
-     * @return a String representation of the Deadline.
+     * Returns a String representation of the Deadline that will be
+     * saved to the hard disk.
+     * @return String representation of the Deadline.
      */
     public String getFormattedString() {
         return "D | " + (super.isDone ? 1 : 0) + " | " + super.description + " | "
