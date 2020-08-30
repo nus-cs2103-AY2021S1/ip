@@ -1,12 +1,5 @@
 package seedu.duke;
 
-import seedu.duke.task.Deadline;
-import seedu.duke.task.Event;
-import seedu.duke.task.Task;
-import seedu.duke.task.Todo;
-import seedu.duke.command.*;
-import seedu.duke.exception.*;
-
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -14,6 +7,26 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import seedu.duke.command.AddCommand;
+import seedu.duke.command.ByeCommand;
+import seedu.duke.command.Command;
+import seedu.duke.command.DeleteCommand;
+import seedu.duke.command.DoneCommand;
+import seedu.duke.command.FindCommand;
+import seedu.duke.command.ListCommand;
+import seedu.duke.command.ListDateCommand;
+import seedu.duke.exception.DukeEmptyAtException;
+import seedu.duke.exception.DukeEmptyByException;
+import seedu.duke.exception.DukeEmptyDescriptionException;
+import seedu.duke.exception.DukeEmptyIndexException;
+import seedu.duke.exception.DukeEmptyKeywordException;
+import seedu.duke.exception.DukeInvalidDateTimeInputException;
+import seedu.duke.exception.DukeUnknownInputException;
+import seedu.duke.task.Deadline;
+import seedu.duke.task.Event;
+import seedu.duke.task.Task;
+import seedu.duke.task.Todo;
 
 /**
  * An object that reads and understands user inputs.
@@ -29,7 +42,8 @@ public class Parser {
      * @return List of LocalDateTime where index 0 is Date and index 1 is Time.
      * @throws DukeInvalidDateTimeInputException If Date or Time is invalid.
      */
-    protected static List<LocalDateTime> getCustomDateTimeList(String dateTimeString) throws DukeInvalidDateTimeInputException {
+    protected static List<LocalDateTime> getCustomDateTimeList(String dateTimeString)
+            throws DukeInvalidDateTimeInputException {
         //dateTimeString should be given in "dd/mm/yyyy hhmm"
         //will use manual parser to check for invalid date time inputs
         List<LocalDateTime> results = new ArrayList<>();
@@ -61,7 +75,8 @@ public class Parser {
                 int min = Integer.parseInt(timeString.substring(2));
                 results.add(LocalDateTime.of(LocalDate.now(), LocalTime.of(hr, min)));
             } catch (DateTimeException e) {
-                throw new DukeInvalidDateTimeInputException("☹ OOPS!!! Invalid time. You can only input up to 23hr and 59min.");
+                throw new DukeInvalidDateTimeInputException(
+                        "☹ OOPS!!! Invalid time. You can only input up to 23hr and 59min.");
             }
         }
         return results;
@@ -217,10 +232,10 @@ public class Parser {
      * @throws DukeEmptyByException If user did not input deadline date time.
      * @throws DukeInvalidDateTimeInputException If date and time inputted is erroneous.
      */
-       public static Command parse(String command) throws DukeEmptyIndexException,
+    public static Command parse(String command) throws DukeEmptyIndexException,
             DukeEmptyDescriptionException, DukeEmptyAtException,
             DukeEmptyByException, DukeInvalidDateTimeInputException,
-            DukeEmptyKeywordException {
+            DukeEmptyKeywordException, DukeUnknownInputException {
         if (command.equals("bye")) {
             return new ByeCommand();
         } else if (command.equals("list")) {
@@ -234,13 +249,7 @@ public class Parser {
         } else if (command.startsWith("find")) {
             return find(command);
         } else {
-            try {
-                return add(command);
-            } catch (DukeUnknownInputException e) {
-                return new UnknownCommand();
-            } catch (DukeInvalidDateTimeInputException e) {
-                throw e;
-            }
+            return add(command);
         }
     }
 }

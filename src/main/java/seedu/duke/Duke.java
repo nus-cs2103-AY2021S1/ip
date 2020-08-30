@@ -1,9 +1,16 @@
 package seedu.duke;
 
-import seedu.duke.command.Command;
-import seedu.duke.exception.*;
-
 import java.io.File;
+
+import seedu.duke.command.Command;
+import seedu.duke.exception.DukeEmptyAtException;
+import seedu.duke.exception.DukeEmptyByException;
+import seedu.duke.exception.DukeEmptyDescriptionException;
+import seedu.duke.exception.DukeEmptyIndexException;
+import seedu.duke.exception.DukeEmptyKeywordException;
+import seedu.duke.exception.DukeInvalidDataException;
+import seedu.duke.exception.DukeInvalidDateTimeInputException;
+import seedu.duke.exception.DukeUnknownInputException;
 
 /**
  * Represents the chat bot.
@@ -44,12 +51,11 @@ public class Duke {
             try {
                 Command c = Parser.parse(fullCommand);
                 isExit = !c.execute(list, ui, storage);
-            } catch (DukeEmptyIndexException
-                    | DukeEmptyDescriptionException
-                    | DukeEmptyByException
-                    | DukeEmptyAtException
+            } catch (DukeEmptyIndexException | DukeEmptyDescriptionException
+                    | DukeEmptyByException | DukeEmptyAtException
                     | DukeInvalidDateTimeInputException
-                    | DukeEmptyKeywordException e) {
+                    | DukeEmptyKeywordException
+                    | DukeUnknownInputException e) {
                 ui.showError(e);
             }
         }
@@ -64,7 +70,7 @@ public class Duke {
     public static void checkAndMakeDir(String filePath) {
         File f = new File(filePath);
         if (f.mkdir()) {
-           System.out.printf("Created a directory '%s'%n", filePath);
+            System.out.printf("Created a directory '%s'%n", filePath);
         }
     }
 

@@ -6,7 +6,7 @@ package seedu.duke.task;
 public class Task {
     protected final String description;
     protected boolean isDone;
-    public final TaskType taskType;
+    protected final TaskType taskType;
 
     /**
      * Class constructor.
@@ -70,7 +70,8 @@ public class Task {
      */
     @Override
     public String toString() {
-        return taskType + "[" + getStatusIcon() +"] " + description;
+        return taskType + "[" + getStatusIcon()
+                + "] " + description;
     }
 }
 
