@@ -7,10 +7,10 @@
 <suppressions>
     <suppress checks="JavadocType" files=".*Test\.java"/>
     <suppress checks="MissingJavadocMethodCheck" files=".*Test\.java"/>
-    <suppress checks="JavadocType" files="./main/java/duke/task/EventStub.java"/>
-    <suppress checks="MissingJavadocMethodCheck" files="./main/java/duke/task/EventStub.java"/>
-    <suppress checks="JavadocType" files="./main/java/duke/ParserStub.java"/>
-    <suppress checks="MissingJavadocMethodCheck" files="./main/java/duke/ParserStub.java"/>
-    <suppress checks="JavadocType" files="./main/java/duke/StorageStub.java"/>
-    <suppress checks="MissingJavadocMethodCheck" files="./main/java/duke/StorageStub.java"/>
+    <suppress checks="JavadocType" files="./test/java/duke/task/EventStub.java"/>
+    <suppress checks="MissingJavadocMethodCheck" files="./test/java/duke/task/EventStub.java"/>
+    <suppress checks="JavadocType" files="./test/java/duke/ParserStub.java"/>
+    <suppress checks="MissingJavadocMethodCheck" files="./test/java/duke/ParserStub.java"/>
+    <suppress checks="JavadocType" files="./test/java/duke/StorageStub.java"/>
+    <suppress checks="MissingJavadocMethodCheck" files="./test/java/duke/StorageStub.java"/>
 </suppressions>

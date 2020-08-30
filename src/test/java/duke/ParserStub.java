@@ -52,5 +52,4 @@ public class ParserStub {
         }
         return s;
     }
-
 }
