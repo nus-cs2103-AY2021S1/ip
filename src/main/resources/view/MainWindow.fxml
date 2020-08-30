@@ -10,7 +10,7 @@
 <fx:root xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
          minWidth="-Infinity"
          prefHeight="600.0" prefWidth="400.0" type="AnchorPane" xmlns="http://javafx.com/javafx/11.0.1"
-         fx:controller="duke.MainWindow">
+         fx:controller="duke.gui.MainWindow">
     <children>
         <Button fx:id="sendButton" layoutX="324.0" layoutY="559.0" mnemonicParsing="false" onAction="#handleUserInput"
                 prefHeight="38.0" prefWidth="74.0" style="-fx-background-color: #034563;" text="Send"
