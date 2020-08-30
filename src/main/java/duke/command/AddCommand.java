@@ -54,7 +54,7 @@ public class AddCommand implements Command {
      * @param storage the storage.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             Task task = TaskList.createTask(type, description);
             tasks.add(task);
@@ -62,8 +62,10 @@ public class AddCommand implements Command {
             String msg = ui.getSuccessMessage("add", task);
             msg += "\n" + ui.getTaskReportMessage(tasks.size());
             ui.sendMessage(msg);
+            return msg;
         } catch (DukeException e) {
             ui.sendMessage(e.getMessage());
+            return e.getMessage();
         }
     }
 }

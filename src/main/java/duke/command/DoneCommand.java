@@ -39,14 +39,16 @@ public class DoneCommand implements Command {
      * @param storage the storage.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             Task task = tasks.markDone(index);
             storage.update(tasks.getList());
             String msg = ui.getSuccessMessage("done", task);
             ui.sendMessage(msg);
+            return msg;
         } catch (DukeException e) {
             ui.sendMessage(e.getMessage());
+            return e.getMessage();
         }
     }
 }

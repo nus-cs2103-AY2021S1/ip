@@ -16,7 +16,9 @@ public class ListCommand implements Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.sendMessage(tasks.getPrintMessage());
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        String msg = tasks.getPrintMessage();
+        ui.sendMessage(msg);
+        return msg;
     }
 }

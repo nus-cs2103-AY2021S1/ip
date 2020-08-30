@@ -43,7 +43,7 @@ public class FindCommand implements Command {
      * @param storage the storage.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         List<Integer> indices = new LinkedList<>();
         for (int i = 0; i < tasks.size(); i++) {
             Task t = tasks.get(i);
@@ -53,5 +53,6 @@ public class FindCommand implements Command {
         }
         String msg = tasks.getQueryResultMessage(indices);
         ui.sendMessage(msg);
+        return msg;
     }
 }

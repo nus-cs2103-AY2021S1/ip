@@ -52,12 +52,12 @@ public class RemoveCommand implements Command {
      * @param storage the storage.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         if (clear) {
             tasks.removeAll();
             storage.update(tasks.getList());
             ui.sendMessage("Your list has been cleared!!");
-            return;
+            return "Your list has been cleared!!";
         }
         try {
             Task task = tasks.remove(index);
@@ -65,8 +65,10 @@ public class RemoveCommand implements Command {
             String msg = ui.getSuccessMessage("remove", task);
             msg += "\n" + ui.getTaskReportMessage(tasks.size());
             ui.sendMessage(msg);
+            return msg;
         } catch (DukeException e) {
             ui.sendMessage(e.getMessage());
+            return e.getMessage();
         }
     }
 }
