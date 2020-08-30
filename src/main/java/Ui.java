@@ -64,10 +64,10 @@ public class Ui {
      * @param error The error message
      */
     public static void showError(String error) {
-        System.out.println("Sorry an unexpected error occured!! :( \n" +
+        System.out.println("Sorry an error occurred!! :( \n" +
                 "_________________________________________\n"
-                + error
-                + "\n_________________________________________");
+                + error + "\n"
+                + "_________________________________________");
     }
 
     public static void showResponse(String response, String command) {
