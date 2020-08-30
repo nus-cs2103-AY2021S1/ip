@@ -1,3 +1,5 @@
+package seedu.duke;
+
 public class DoneCommand extends Command {
     public DoneCommand(String[] words) {
         super(words);

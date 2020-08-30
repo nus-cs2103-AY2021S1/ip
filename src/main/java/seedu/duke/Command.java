@@ -1,6 +1,7 @@
+package seedu.duke;
+
 public class Command {
     protected String[] words;
-
 
     public Command() {}
 

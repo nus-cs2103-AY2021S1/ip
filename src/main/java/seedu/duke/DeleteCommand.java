@@ -1,3 +1,5 @@
+package seedu.duke;
+
 public class DeleteCommand extends Command {
     public DeleteCommand(String[] words) {
         super(words);

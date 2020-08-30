@@ -1,3 +1,5 @@
+package seedu.duke;
+
 public class AddTodo extends AddCommand {
     public AddTodo(String[] words) {
         super(words);

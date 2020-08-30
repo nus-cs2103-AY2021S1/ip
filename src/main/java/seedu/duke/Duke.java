@@ -1,13 +1,9 @@
+package seedu.duke;
+
 import java.io.IOException;
 import java.time.DateTimeException;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.FileNotFoundException;
 import java.util.Locale;
-import java.util.Scanner;
-import java.time.LocalDateTime;
 
 public class Duke {
 
