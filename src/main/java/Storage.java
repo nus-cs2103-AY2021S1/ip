@@ -1,7 +1,6 @@
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.StandardOpenOption;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -36,7 +35,7 @@ public class Storage {
                 taskListString.append(attribute).append("\n");
             }
         }
-        Files.writeString(filepath, taskListString, StandardOpenOption.WRITE);
+        Files.writeString(filepath, taskListString);
 
     }
 
