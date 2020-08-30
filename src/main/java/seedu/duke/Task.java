@@ -61,4 +61,12 @@ public class Task {
     public boolean isComplete() {
         return this.isDone;
     }
+
+    /**
+     * Returns the name of the task.
+     * @return String representing the name of the task.
+     */
+    public String getName() {
+        return this.name;
+    }
 }
