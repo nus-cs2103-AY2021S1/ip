@@ -34,8 +34,8 @@ public class Duke {
             input = inputParser.getInput();
             System.out.println();
             if (input.equals("get all events")) {
-                ArrayList<Task> events = new TaskFinder().findAllEvents(userTasks.getTaskList());
-                ui.printAllEvents(events);
+                ArrayList<Task> events = new TaskFinder().findEvents(userTasks.getTaskList());
+                ui.printEvents(events);
                 continue;
             }
 
@@ -71,33 +71,63 @@ public class Duke {
                 storage.saveToFile(userTasks.getTaskList());
                 ui.printTaskAddedMessage(t, userTasks.getTaskListSize());
                 continue;
-            case LIST_ALL_TASKS:
+            case LIST_ALL:
                 ui.printAllTasks(userTasks.getTaskList());
                 continue;
             case LIST_ALL_DONE:
                 ArrayList<Task> tasksDone = new TaskFinder()
                         .findAllDone(userTasks.getTaskList());
-                ui.printAllEvents(tasksDone);
+                ui.printAllTasksDone(tasksDone);
                 continue;
             case LIST_ALL_NOT_DONE:
                 ArrayList<Task> tasksNotDone = new TaskFinder()
                         .findAllNotDone(userTasks.getTaskList());
-                ui.printAllEvents(tasksNotDone);
+                ui.printAllTasksNotDone(tasksNotDone);
                 continue;
-            case LIST_ALL_TODOS:
+            case LIST_TODOS:
                 ArrayList<Task> toDos = new TaskFinder()
-                        .findAllToDos(userTasks.getTaskList());
-                ui.printAllEvents(toDos);
+                        .findToDos(userTasks.getTaskList());
+                ui.printToDos(toDos);
                 continue;
-            case LIST_ALL_DEADLINES:
+            case LIST_TODOS_DONE:
+                ArrayList<Task> toDosDone = new TaskFinder()
+                        .findToDosDone(userTasks.getTaskList());
+                ui.printToDosDone(toDosDone);
+                continue;
+            case LIST_TODOS_NOT_DONE:
+                ArrayList<Task> toDosNotDone = new TaskFinder()
+                        .findToDosNotDone(userTasks.getTaskList());
+                ui.printToDosNotDone(toDosNotDone);
+                continue;
+            case LIST_DEADLINES:
                 ArrayList<Task> deadlines = new TaskFinder()
-                        .findAllDeadlines(userTasks.getTaskList());
-                ui.printAllEvents(deadlines);
+                        .findDeadlines(userTasks.getTaskList());
+                ui.printDeadlines(deadlines);
                 continue;
-            case LIST_ALL_EVENTS:
+            case LIST_DEADLINES_DONE:
+                ArrayList<Task> deadlinesDone = new TaskFinder()
+                        .findDeadlinesDone(userTasks.getTaskList());
+                ui.printDeadlinesDone(deadlinesDone);
+                continue;
+            case LIST_DEADLINES_NOT_DONE:
+                ArrayList<Task> deadlinesNotDone = new TaskFinder()
+                        .findDeadlinesNotDone(userTasks.getTaskList());
+                ui.printDeadlinesNotDone(deadlinesNotDone);
+                continue;
+            case LIST_EVENTS:
                 ArrayList<Task> events = new TaskFinder()
-                        .findAllEvents(userTasks.getTaskList());
-                ui.printAllEvents(events);
+                        .findEvents(userTasks.getTaskList());
+                ui.printEvents(events);
+                continue;
+            case LIST_EVENTS_DONE:
+                ArrayList<Task> eventsDone = new TaskFinder()
+                        .findEventsDone(userTasks.getTaskList());
+                ui.printEventsDone(eventsDone);
+                continue;
+            case LIST_EVENTS_NOT_DONE:
+                ArrayList<Task> eventsNotDone = new TaskFinder()
+                        .findEventsNotDone(userTasks.getTaskList());
+                ui.printEventsNotDone(eventsNotDone);
                 continue;
             case DONE:
                 // Get the index stated after "done" by parsing the string
