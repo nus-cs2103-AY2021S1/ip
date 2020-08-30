@@ -61,7 +61,7 @@ public class Ui {
      *
      * @param message Message to be shown.
      */
-    public void showToUser(String... message) {
+    public void showToUser(String ... message) {
         for (String m : message) {
             out.println(m.replace("\n", LS));
         }
