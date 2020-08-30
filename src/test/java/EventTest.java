@@ -8,7 +8,7 @@ public class EventTest {
     
     @Test
     public void testToString() {
-        assertEquals("[E][✘] read books (at: 2020-08-25 4:00 PM)", event.toString());
+        assertEquals("[E][✘] read books (at: Aug 25 2020 4:00 PM)", event.toString());
     }
 
     @Test

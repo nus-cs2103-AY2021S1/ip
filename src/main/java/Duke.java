@@ -26,7 +26,6 @@ public class Duke {
     public void run() {
         String input = "";
         String output;
-        
         ui.showWelcome();
 
         while (!input.equals("bye")) {
