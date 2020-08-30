@@ -1,7 +1,6 @@
 package chatterbox;
 
 import java.io.IOException;
-import java.util.Scanner;
 
 import chatterbox.task.Task;
 import chatterbox.task.TaskList;
@@ -11,7 +10,6 @@ import chatterbox.task.TaskList;
  */
 public class Chatterbox {
     private final TaskList tasks;
-    private final Scanner scanner;
 
     /**
      * Initializes the task list and load stored tasks.
@@ -19,35 +17,35 @@ public class Chatterbox {
     public Chatterbox() {
         Storage store = new Storage();
         tasks = new TaskList(store);
+    }
+
+    /**
+     * Loads stored tasks.
+     * @throws IOException
+     */
+    public void loadTasks() throws ChatterboxException, IOException {
         tasks.loadTasks();
-        scanner = new Scanner(System.in);
     }
 
     /**
      * Shows the welcome message, then processes each line of user input until "bye" is typed.
      */
-    public void run() {
-        Ui.showWelcomeMessage();
-        String input = scanner.nextLine();
-        while (!input.equals("bye")) {
-            try {
-                processInput(input);
-            } catch (ChatterboxException | IOException e) {
-                Ui.showErrorMessage(e.toString());
-            }
-            input = scanner.nextLine();
+    public String getResponse(String input) {
+        try {
+            return processInput(input);
+        } catch (ChatterboxException | IOException e) {
+            return e.toString();
         }
-        Ui.showFarewellMessage();
     }
 
     /**
-     * Processes user input and executes actions based on them.
+     * Processes user input and returns Chatterbox's response.
      *
      * @param input Raw user input.
      * @throws ChatterboxException If input string is empty or invalid command is given.
      * @throws IOException         If data cannot be read/written from the save file.
      */
-    private void processInput(String input) throws ChatterboxException, IOException {
+    private String processInput(String input) throws ChatterboxException, IOException {
         // Check if input is just whitespace
         if (input.strip().equals("")) {
             throw new ChatterboxException("Input cannot be empty.");
@@ -58,7 +56,7 @@ public class Chatterbox {
 
         // Process command
         if (command.equals("list")) {
-            tasks.printAllTasks();
+            return tasks.getPrintableTaskList();
         } else if (command.equals("done") || command.equals("delete")) {
             // Get the task number after the command, check if it is valid
             int taskNo;
@@ -70,15 +68,15 @@ public class Chatterbox {
 
             // Mark as done or delete based on the command
             if (command.equals("done")) {
-                tasks.setTaskAsDone(taskNo);
+                return tasks.setTaskAsDone(taskNo);
             } else {
-                tasks.deleteTask(taskNo);
+                return tasks.deleteTask(taskNo);
             }
         } else if (command.equals("find")) {
-            tasks.findAndPrintTasks(input.split(" ", 2)[1]);
+            return tasks.findTasks(input.split(" ", 2)[1]);
         } else if (command.equals("deadline") || command.equals("todo") || command.equals("event")) {
             Task t = Parser.parseTask(input);
-            tasks.addTask(t);
+            return tasks.addTask(t);
         } else {
             throw new ChatterboxException("That's not a valid command.");
         }

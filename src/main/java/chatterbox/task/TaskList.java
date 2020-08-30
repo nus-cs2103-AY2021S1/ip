@@ -22,12 +22,8 @@ public class TaskList {
     /**
      * Gets tasks from storage.
      */
-    public void loadTasks() {
-        try {
-            tasks = store.getItems();
-        } catch (IOException e) {
-            Ui.showErrorMessage("Failed to load the save file, starting afresh.");
-        }
+    public void loadTasks() throws IOException, ChatterboxException {
+        tasks = store.getItems();
     }
 
     /**
@@ -35,10 +31,10 @@ public class TaskList {
      *
      * @param keyword   Keyword to match the tasks with.
      */
-    public void findAndPrintTasks(String keyword) {
+    public String findTasks(String keyword) {
         keyword = keyword.strip();
         if (keyword.equals("")) {
-            printAllTasks();
+            return getPrintableTaskList();
         } else {
             StringBuilder foundTasks = new StringBuilder("\nI've found these matching tasks in your list!\n");
             for (int i = 0; i < tasks.size(); i++) {
@@ -47,22 +43,22 @@ public class TaskList {
                     foundTasks.append(i + 1).append(". ").append(t).append("\n");
                 }
             }
-            Ui.showMessage(foundTasks.toString());
+            return foundTasks.toString();
         }
     }
 
     /**
      * Prints the full task list.
      */
-    public void printAllTasks() {
+    public String getPrintableTaskList() {
         if (tasks.size() != 0) {
             StringBuilder fullList = new StringBuilder("\n");
             for (int i = 0; i < tasks.size(); i++) {
                 fullList.append(i + 1).append(". ").append(tasks.get(i)).append("\n");
             }
-            Ui.showMessage(fullList.toString());
+            return fullList.toString();
         } else {
-            Ui.showMessage("Your list is currently empty.");
+            return "Your list is currently empty.";
         }
     }
 
@@ -71,10 +67,11 @@ public class TaskList {
      *
      * @throws IOException  If task list fails to save.
      */
-    public void addTask(Task t) throws IOException {
+    public String addTask(Task t) throws IOException {
         tasks.add(t);
-        Ui.showAddTaskMessage(t, tasks.size());
         store.saveItems(tasks);
+
+        return Ui.getAddTaskMessage(t, tasks.size());
     }
 
     /**
@@ -84,15 +81,15 @@ public class TaskList {
      * @throws ChatterboxException  If task number if invalid.
      * @throws IOException  If task list fails to save.
      */
-    public void setTaskAsDone(int taskNo) throws ChatterboxException, IOException {
+    public String setTaskAsDone(int taskNo) throws ChatterboxException, IOException {
         if (taskNo < 0 || taskNo >= tasks.size()) {
             throw new ChatterboxException("Invalid task number.");
         }
 
         Task t = tasks.get(taskNo);
         t.setDone(true);
-        Ui.showMessage("Nice! I've marked this task as done: \n" + t);
         store.saveItems(tasks);
+        return "Nice! I've marked this task as done: \n" + t;
     }
 
     /**
@@ -102,13 +99,13 @@ public class TaskList {
      * @throws ChatterboxException  If task number if invalid.
      * @throws IOException  If task list fails to save.
      */
-    public void deleteTask(int taskNo) throws ChatterboxException, IOException {
+    public String deleteTask(int taskNo) throws ChatterboxException, IOException {
         if (taskNo < 0 || taskNo >= tasks.size()) {
             throw new ChatterboxException("Invalid task number.");
         }
 
         Task t = tasks.remove(taskNo);
-        Ui.showDeleteTaskMessage(t, tasks.size());
         store.saveItems(tasks);
+        return Ui.getDeleteTaskMessage(t, tasks.size());
     }
 }

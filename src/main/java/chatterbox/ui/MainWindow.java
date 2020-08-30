@@ -1,6 +1,10 @@
 package chatterbox.ui;
 
+import java.io.IOException;
+
 import chatterbox.Chatterbox;
+import chatterbox.ChatterboxException;
+import chatterbox.Ui;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -32,8 +36,18 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
-    public void setChatterbox(Chatterbox d) {
-        chatterbox = d;
+    public void setChatterbox(Chatterbox c) {
+        chatterbox = c;
+        try {
+            chatterbox.loadTasks();
+        } catch (ChatterboxException | IOException e) {
+            dialogContainer.getChildren().add(
+                    DialogBox.getDukeDialog(Ui.getErrorMessage("Unable to load tasks."), chatterboxImage)
+            );
+        }
+        dialogContainer.getChildren().add(
+                DialogBox.getDukeDialog(Ui.getWelcomeMessage(), chatterboxImage)
+        );
     }
 
     /**
@@ -42,8 +56,11 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     private void handleUserInput() {
-        String input = userInput.getText();
-        String response = input;
+        String input = userInput.getText().strip();
+        if (input.equals("bye")) {
+            System.exit(0);
+        }
+        String response = chatterbox.getResponse(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, chatterboxImage)

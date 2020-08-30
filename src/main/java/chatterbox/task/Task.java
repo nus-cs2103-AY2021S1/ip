@@ -37,6 +37,6 @@ public class Task {
 
     @Override
     public String toString() {
-        return (isDone ? "[✓]" : "[✗]") + " " + contents;
+        return (isDone ? "[\u2713]" : "[\u2717]") + " " + contents;
     }
 }

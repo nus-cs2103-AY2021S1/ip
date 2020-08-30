@@ -10,7 +10,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 /**
- * Loads the fxml files and sets the scene.
+ * Loads the FXML files and sets the scene.
  */
 public class Main extends Application {
     private final Chatterbox chatterbox = new Chatterbox();

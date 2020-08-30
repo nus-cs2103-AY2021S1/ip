@@ -38,7 +38,7 @@ public class Storage {
      * @return  The list of tasks saved in the file.
      * @throws IOException  If the file cannot be read or parsed properly.
      */
-    public List<Task> getItems() throws IOException {
+    public List<Task> getItems() throws ChatterboxException, IOException {
         List<Task> items = new ArrayList<>();
         ensureExistence();
         Scanner scanner = new Scanner(saveFile);
@@ -51,8 +51,8 @@ public class Storage {
                 Task t = Parser.parseTask(line.substring(line.indexOf(' ') + 1));
                 t.setDone(Boolean.parseBoolean(line.substring(0, line.indexOf(' '))));
                 items.add(t);
-            } catch (ChatterboxException | IndexOutOfBoundsException e) {
-                Ui.showErrorMessage("One or more lines in the save file may have been corrupted.");
+            } catch (IndexOutOfBoundsException e) {
+                throw new ChatterboxException("One or more lines in the save file may have been corrupted.");
             }
         }
         return items;
