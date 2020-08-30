@@ -28,6 +28,6 @@ public class ToDoTest {
     public void parse_validTxtArray_returnsToDo() {
         String[] txtArray = {"T", "1", "A Valid Description"};
         ToDo toDo = ToDo.parse(txtArray);
-        assertEquals("[T][✓] A Valid Description", toDo.toString());
+        assertEquals("[T][\u2713] A Valid Description", toDo.toString());
     }
 }

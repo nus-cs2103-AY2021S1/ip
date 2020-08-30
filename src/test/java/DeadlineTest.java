@@ -16,7 +16,7 @@ public class DeadlineTest {
     @Test
     public void convertDateTime_validInput_returnsValidDateTime() throws Exception{
         Deadline deadline = new Deadline("Description", "2020-02-02 2020");
-        assertEquals("[D][✘] Description (by: 2 February 2020 08:20 PM)", deadline.toString());
+        assertEquals("[D][\u2718] Description (by: 2 February 2020 08:20 PM)", deadline.toString());
     }
 
     @Test
@@ -45,6 +45,6 @@ public class DeadlineTest {
     public void parse_validInput_returnsDeadline() throws Exception{
         String[] txtArray = {"D", "0", "A Valid Description", "24 August 2020 08:00 PM"};
         Deadline deadline = Deadline.parse(txtArray);
-        assertEquals("[D][✘] A Valid Description (by: 24 August 2020 08:00 PM)", deadline.toString());
+        assertEquals("[D][\u2718] A Valid Description (by: 24 August 2020 08:00 PM)", deadline.toString());
     }
 }
