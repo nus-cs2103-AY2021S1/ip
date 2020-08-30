@@ -13,14 +13,15 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList taskList, Ui ui, DukeStorage storage) {
+    public String execute(TaskList taskList, Ui ui, DukeStorage storage) {
         // needs a valid number
         int taskNo = Integer.parseInt(afterCommand) - 1;
         if (taskNo >= taskList.tasksSize() || taskNo < 0) {
-            ui.throwDukeException(new DukeException("Please enter a valid task no!"));
+            return ui.throwDukeException(new DukeException("Please enter a valid task no!"));
         } else {
-            ui.displayDeletedTask(taskList.get(taskNo), taskList.tasksSize() - 1);
+            Task deletedTask = taskList.get(taskNo);
             taskList.delete(taskNo);
+            return ui.displayDeletedTask(deletedTask, taskList.tasksSize());
         }
     }
 

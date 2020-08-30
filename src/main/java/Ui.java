@@ -24,16 +24,17 @@ public class Ui {
     /**
      * Provide a format to all responses by Duke.
      * @param input response to be given.
+     * @return Duke response.
      */
-    public void format(String input) {
-        System.out.println(line + "\n" + input + "\n" + line);
+    public String format(String input) {
+        return "Duke: " + input;
     }
 
     /**
      * Greets the user with an opening message.
      */
-    public void greet() {
-        format("Hello! I'm\n" + logo + "\n"
+    public String greet() {
+        return format("Hello! I'm\n" + logo + "\n"
                 + "What can I do for you?");
     }
 
@@ -41,8 +42,8 @@ public class Ui {
      * Pattern for printing duke exception messages.
      * @param ex DukeException
      */
-    public void throwDukeException(DukeException ex) {
-        format(ex.getMessage());
+    public String throwDukeException(DukeException ex) {
+        return format(ex.getMessage());
     }
 
     /**
@@ -50,8 +51,8 @@ public class Ui {
      * @param task task to be added.
      * @param size current number of tasks in tasklist.
      */
-    public void addTask(Task task, int size) {
-        format("Got it. I've added this task:\n" + task + "\n"
+    public String addTask(Task task, int size) {
+        return format("Got it. I've added this task:\n" + task + "\n"
             + "Now you have " + size + " tasks in the list.");
     }
 
@@ -59,8 +60,8 @@ public class Ui {
      * Prints completed task upon DONE Command.
      * @param task completed task.
      */
-    public void displayCompletedTask(Task task) {
-        format("Nice! I've marked this task as done:\n" + task);
+    public String displayCompletedTask(Task task) {
+        return format("Nice! I've marked this task as done:\n" + task);
     }
 
     /**
@@ -68,8 +69,8 @@ public class Ui {
      * @param task task to be deleted.
      * @param size current number of tasks in tasklist.
      */
-    public void displayDeletedTask(Task task, int size) {
-        format("Noted. I've removed this task:\n" + task + "\n"
+    public String displayDeletedTask(Task task, int size) {
+        return format("Noted. I've removed this task:\n" + task + "\n"
             + "Now you have " + size + " tasks in the list.");
     }
 
@@ -77,20 +78,19 @@ public class Ui {
      * Prints tasks according to LIST/FIND Command.
      * @param tasks tasks to be printed.
      */
-    public void displayTasksWithCommand(List<Task> tasks, String command) {
+    public String displayTasksWithCommand(List<Task> tasks, String command) {
         StringBuilder sb = new StringBuilder();
         int len = tasks.size();
         if (len == 0) {
             sb.append("No tasks!");
-            format(sb.toString());
-            return;
+            return format(sb.toString());
         }
         sb.append("Here are the" + (command.equals("find") ? " matching " : " ")
                 + "tasks in your list:\n");
         for (int i = 0; i < len; i++) {
             sb.append(i + 1 + "." + tasks.get(i) + "\n");
         }
-        format(sb.toString());
+        return format(sb.toString());
     }
 
     /**

@@ -3,8 +3,8 @@
  */
 public class ListCommand extends Command {
     @Override
-    public void execute(TaskList taskList, Ui ui, DukeStorage storage) {
-        ui.displayTasksWithCommand(taskList.getTasks(), "list");
+    public String execute(TaskList taskList, Ui ui, DukeStorage storage) {
+        return ui.displayTasksWithCommand(taskList.getTasks(), "list");
     }
 
     @Override

@@ -8,13 +8,13 @@ public class Duke {
     private DukeStorage storage;
     private Ui ui;
     private TaskList taskList;
+    private String filePath = "data/duke.txt";
 
     /**
      * Constructor for the Duke software.
      * Loads the tasklist with the file content.
-     * @param filePath savepath of file.
      */
-    public Duke(String filePath) {
+    public Duke() {
         storage = new DukeStorage(filePath);
         ui = new Ui();
         taskList = new TaskList();
@@ -27,6 +27,25 @@ public class Duke {
             ui.format("Its a duke exception!");
         }
     }
+
+    public Ui getUi() {
+        return this.ui;
+    }
+
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    public String getResponse(String input) {
+        try {
+            Command c = Parser.parse(input);
+            saveData(taskList, storage);
+            return c.execute(taskList, ui, storage);
+        } catch (DukeException ex) {
+            return ui.throwDukeException(ex);
+        }
+    }
+
 
     /**
      * Main driver code for running main.
@@ -63,7 +82,7 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke("data/duke.txt").run();
+        new Duke().run();
     }
 
 }

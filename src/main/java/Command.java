@@ -8,7 +8,7 @@ public abstract class Command {
      * @param ui user interace to print.
      * @param storage data stored backend.
      */
-    public abstract void execute(TaskList taskList, Ui ui, DukeStorage storage);
+    public abstract String execute(TaskList taskList, Ui ui, DukeStorage storage);
 
     /**
      * Checks if duke should stop taking in commands.

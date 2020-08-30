@@ -16,11 +16,10 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList taskList, Ui ui, DukeStorage storage) {
+    public String execute(TaskList taskList, Ui ui, DukeStorage storage) {
         // needs an after command
         if (afterCommand == null) {
-            ui.throwDukeException(new DukeException("Please enter the keyword!"));
-            return;
+            return ui.throwDukeException(new DukeException("Please enter the keyword!"));
         }
 
         List<Task> tempList = new ArrayList<>();
@@ -32,7 +31,7 @@ public class FindCommand extends Command {
             }
         }
         // display those tasks
-        ui.displayTasksWithCommand(tempList, "find");
+        return ui.displayTasksWithCommand(tempList, "find");
     }
 
     @Override

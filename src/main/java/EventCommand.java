@@ -13,19 +13,18 @@ public class EventCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList taskList, Ui ui, DukeStorage storage) {
+    public String execute(TaskList taskList, Ui ui, DukeStorage storage) {
         // needs an after command
         if (afterCommand == null) {
-            ui.throwDukeException(new DukeException(
+            return ui.throwDukeException(new DukeException(
                     "Please do not leave the event description empty!"));
-            return;
         }
         // first chunk is the event details, second chunk is at where
         String[] splittedEvent = afterCommand.split(("/"));
 
         // teach the user the format for the deadline
         if (splittedEvent.length == 1) {
-            ui.throwDukeException(new DukeException("Format of event recording: event keyword"
+            return ui.throwDukeException(new DukeException("Format of event recording: event keyword"
                 + ", event instructions, forward slash, at keyword with a colon, start/end time)"
                     + "\n e.g. project meeting /at Mon 2-4pm"));
         } else {
@@ -35,9 +34,9 @@ public class EventCommand extends Command {
             try {
                 Task newEvent = new Event(details, at);
                 taskList.addTask(newEvent);
-                ui.addTask(newEvent, taskList.tasksSize());
+                return ui.addTask(newEvent, taskList.tasksSize());
             } catch (DukeException ex) {
-                ui.throwDukeException(ex);
+                return ui.throwDukeException(ex);
             }
         }
     }
