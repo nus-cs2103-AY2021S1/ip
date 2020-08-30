@@ -72,6 +72,7 @@ public abstract class Command {
      * @param tasks   The list of tasks.
      * @param ui      The platform through which both user and chat bot interact.
      * @param storage The object responsible for saving and loading data.
+     * @return A string representing the response upon executing the command.
      * @throws DukeInvalidListNumberInputException If an invalid list number is given.
      * @throws DukeInvalidTaskTimeException        If an invalid task time is given.
      * @throws DukeInvalidTaskDescriptionException If an invalid task description is given.
@@ -79,7 +80,7 @@ public abstract class Command {
      * @throws DukeLoadingErrorException           If the file containing the save data cannot be loaded.
      * @throws DukeInvalidKeywordException         If the user input contains an invalid keyword.
      */
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage)
+    public abstract String execute(TaskList tasks, Ui ui, Storage storage)
             throws DukeInvalidListNumberInputException, DukeInvalidTaskTimeException,
             DukeInvalidTaskDescriptionException, DukeUnknownInputException,
             DukeLoadingErrorException, DukeInvalidKeywordException;

@@ -21,8 +21,8 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeInvalidKeywordException {
-        ui.printFindTaskChatWindow(tasks.findTasks(input));
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeInvalidKeywordException {
+        return ui.printFindTaskChatWindow(tasks.findTasks(input));
     }
 
 }

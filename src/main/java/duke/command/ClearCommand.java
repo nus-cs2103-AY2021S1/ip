@@ -19,10 +19,10 @@ public class ClearCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeLoadingErrorException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeLoadingErrorException {
         tasks.clearTasks();
-        ui.printClearTasksWindow();
         storage.save(tasks.getTasks());
+        return ui.printClearTasksWindow();
     }
 
 }

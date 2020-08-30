@@ -37,14 +37,14 @@ public class Ui {
 
     /**
      * Prompts the user for commands. Initial greeting.
+     *
+     * @return A string representing the welcome window.
      */
-    public void printWelcome() {
-        printLogo();
-        printBorder();
-        printGeneralChatWindow("Greetings! I'm Awesome-O.", "What can I do for you?");
-        printGeneralChatWindow("");
-        printGeneralChatWindow("...PSST! Type \"help\" for more information!");
-        printBorder();
+    public String printWelcome() {
+        return printGeneralChatWindow(printLogo(),
+                "Greetings! I'm Awesome-O.", "What can I do for you?",
+                "",
+                "...PSST! Type \"help\" for more information!");
     }
 
     /**
@@ -60,37 +60,43 @@ public class Ui {
      * Prints a chat window showing the list of available commands for the user input.
      *
      * @param commands A collection of commands whose description is to be printed.
+     * @return A string representing the list of available commands.
      */
-    public void printHelpWindow(String[] commands) {
-        printGeneralChatWindow(commands);
+    public String printHelpWindow(String[] commands) {
+        return printGeneralChatWindow(commands);
     }
 
     /**
      * Prints a chat window showing the list of tasks.
      *
      * @param tasks The list of tasks to be printed.
+     * @return A string representing the list of tasks.
      */
-    public void printTasksChatWindow(List<Task> tasks) {
-        printIndentedMessage("Here are the tasks in your list:");
+    public String printTasksChatWindow(List<Task> tasks) {
+        StringBuilder result = new StringBuilder();
+        result.append("Here are the tasks in your list:\n");
 
         if (tasks.isEmpty()) {
-            printIndentedMessage("No tasks currently");
+            result.append("No tasks currently\n");
         } else {
             int index = 0;
             for (Task task : tasks) {
-                System.out.printf("%s%d. %s\n", indent, ++index, task);
+                result.append(String.format("%d. %s\n", ++index, task));
             }
         }
+
+        return result.toString();
     }
 
     /**
      * Prints a chat window that describes the task that is done.
      *
      * @param task The task to be displayed as done.
+     * @return A string representing a completed task.
      */
-    public void printDoneTaskChatWindow(Task task) {
-        printIndentedMessage("Great! I've marked this task as done:");
-        printDoubleIndentedMessage(task.toString());
+    public String printDoneTaskChatWindow(Task task) {
+        return printGeneralChatWindow("Great! I've marked this task as done:",
+                String.format("%s%s", indent, task.toString()));
     }
 
     /**
@@ -98,18 +104,20 @@ public class Ui {
      *
      * @param task            The task to be displayed as deleted.
      * @param numOfTotalTasks The number of tasks in the list.
+     * @return A string representing a delete task.
      */
-    public void printDeleteTaskChatWindow(Task task, int numOfTotalTasks) {
-        printIndentedMessage("Okay. I've removed this task:");
-        printDoubleIndentedMessage(task.toString());
-        printNumberOfTasks(numOfTotalTasks);
+    public String printDeleteTaskChatWindow(Task task, int numOfTotalTasks) {
+        return printGeneralChatWindow("Okay. I've removed this task:",
+                String.format("%s%s", indent, task.toString()),
+                printNumberOfTasks(numOfTotalTasks));
     }
 
     /**
      * Prints a chat window that informs the user that all tasks have been cleared.
+     * @return A string representing the clearing of all tasks.
      */
-    public void printClearTasksWindow() {
-        printIndentedMessage("All tasks have been cleared!");
+    public String printClearTasksWindow() {
+        return "All tasks have been cleared!";
     }
 
     /**
@@ -117,76 +125,87 @@ public class Ui {
      *
      * @param task            The task to be displayed as added.
      * @param numOfTotalTasks The number of tasks in the list.
+     * @return A string representing an added task.
      */
-    public void printAddTaskChatWindow(Task task, int numOfTotalTasks) {
-        printIndentedMessage("Alright. I've added this task:");
-        printDoubleIndentedMessage(task.toString());
-        printNumberOfTasks(numOfTotalTasks);
+    public String printAddTaskChatWindow(Task task, int numOfTotalTasks) {
+        return printGeneralChatWindow("Alright. I've added this task:",
+                String.format("%s%s", indent, task.toString()),
+                printNumberOfTasks(numOfTotalTasks));
     }
 
     /**
      * Prints a chat window with a list of tasks matching the user input's keyword.
      *
      * @param tasks The list of matching tasks.
+     * @return A string representing the list of matching tasks.
      */
-    public void printFindTaskChatWindow(List<Task> tasks) {
-        printIndentedMessage("Here are the tasks that match the keyword:");
+    public String printFindTaskChatWindow(List<Task> tasks) {
+        StringBuilder result = new StringBuilder();
+        result.append(printGeneralChatWindow("Here are the tasks that match the keyword:"));
 
         if (tasks.isEmpty()) {
-            printIndentedMessage("No matching tasks!");
+            result.append("No matching tasks!");
         } else {
             int index = 0;
             for (Task task : tasks) {
-                System.out.printf("%s%d. %s\n", indent, ++index, task);
+                result.append(printGeneralChatWindow(
+                        String.format("%d. %s", ++index, task)));
             }
         }
+
+        return result.toString();
     }
 
     /**
      * Prints a goodbye chat window.
+     * @return A string representing the goodbye chat window.
      */
-    public void printGoodbye() {
-        printGeneralChatWindow("Thank you for talking to Awesome-O.", "Have a nice day. Goodbye!");
+    public String printGoodbye() {
+        return printGeneralChatWindow("Thank you for talking to Awesome-O.", "Have a nice day. Goodbye!");
     }
 
     /**
      * Prints an indented chat window with a customised message.
      *
      * @param messages A series of strings representing the customised message.
+     * @return A string representing a series of messages for the user to see.
      */
-    public void printGeneralChatWindow(String... messages) {
+    public String printGeneralChatWindow(String... messages) {
+        StringBuilder result = new StringBuilder();
+
         for (String message : messages) {
-            printIndentedMessage(message);
+            result.append(String.format("%s\n", message));
         }
+
+        return result.toString();
     }
 
     /**
      * Prints a border for the chat window.
+     *
+     * @return A string representing the border for the chat window.
      */
-    public void printBorder() {
-        System.out.printf("%s%s\n", indent, border);
+    public String printBorder() {
+        return border;
     }
 
     /**
      * Prints the Duke logo ("AWESOME-O").
+     *
+     * @return A string representing the Duke logo.
      */
-    public void printLogo() {
-        System.out.println(logo);
-    }
-
-    // Prints an indented generic message
-    private void printIndentedMessage(String s) {
-        System.out.printf("%s%s\n", indent, s);
-    }
-
-    // Prints a double-indented generic message
-    private void printDoubleIndentedMessage(String s) {
-        System.out.printf("%s%s\n", doubleIndent, s);
+    public String printLogo() {
+        return logo;
     }
 
     // Prints the number of tasks left in the list
-    private void printNumberOfTasks(int n) {
-        System.out.printf("%sNow you have %d tasks in the list.\n", indent, n);
+    private String printNumberOfTasks(int n) {
+        return String.format("Now you have %d tasks in the list.", n);
+    }
+
+    // Prints a newline character
+    private String printNewline() {
+        return "\n";
     }
 
 }

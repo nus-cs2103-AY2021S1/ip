@@ -5,6 +5,7 @@ import duke.command.Command;
 import duke.exception.DukeException;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -86,7 +87,7 @@ public class Duke extends Application {
     /**
      * Starts the Duke application.
      *
-     * * @param stage The primary stage that JavaFX provides.
+     * @param stage The primary stage that JavaFX provides.
      */
     @Override
     public void start(Stage stage) {
@@ -138,6 +139,9 @@ public class Duke extends Application {
         AnchorPane.setLeftAnchor(userInput , 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
+        // Print a welcome window and prompt for user input.
+        showWelcome();
+
         //Step 3. Add functionality to handle user input.
         sendButton.setOnMouseClicked((event) -> {
             handleUserInput();
@@ -171,8 +175,14 @@ public class Duke extends Application {
         }
     }
 
+    private void showWelcome() {
+        Label toShow = new Label(ui.printWelcome());
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(toShow, new ImageView(duke))
+        );
+    }
+
     /**
-     * Iteration 2:
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
@@ -191,7 +201,12 @@ public class Duke extends Application {
      * Replace this stub with your completed method.
      */
     private String getResponse(String input) {
-        return "Duke heard: \n" + input;
+        try {
+            Command c = Parser.parse(input);
+            return c.execute(tasks, ui, storage);
+        } catch (DukeException e) {
+            return e.toString();
+        }
     }
 
 }

@@ -22,10 +22,11 @@ public class DoneCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage)
+    public String execute(TaskList tasks, Ui ui, Storage storage)
             throws DukeInvalidListNumberInputException, DukeLoadingErrorException {
-        ui.printDoneTaskChatWindow(tasks.completeTask(input));
+        String result = ui.printDoneTaskChatWindow(tasks.completeTask(input));
         storage.save(tasks.getTasks());
+        return result;
     }
 
 }
