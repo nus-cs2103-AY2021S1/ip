@@ -23,7 +23,7 @@ public class FindCommandTest {
         assertFalse(findCommand.isExit());
     }
     /**
-     * Check if the find command returns the correct output
+     * Check if the find command returns the correct output.
      */
     @Test
     public void executeFind1Test() {
@@ -54,7 +54,7 @@ public class FindCommandTest {
     }
 
     /**
-     * Check if the find command returns the correct output
+     * Check if the find command returns the correct output.
      */
     @Test
     public void executeNoneTest() {
@@ -83,7 +83,7 @@ public class FindCommandTest {
 
     }
     /**
-     * Test Errors
+     * Test Errors when executing.
      */
     @Test
     public void executeErrorTest() {
