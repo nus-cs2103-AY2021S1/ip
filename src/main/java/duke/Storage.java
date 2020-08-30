@@ -27,7 +27,8 @@ import duke.task.ToDo;
  */
 public class Storage {
 
-    private final Path path;
+    private static final String DEFAULT_PATH = "data/tasks.txt";
+    private Path path;
 
     /**
      * Class constructor.
@@ -36,28 +37,15 @@ public class Storage {
      * @throws DukeLoadingErrorException If a loading error occurs.
      */
     public Storage(String filePath) throws DukeLoadingErrorException {
-        try {
-            String home = System.getProperty("user.home");
-            path = Paths.get(home, filePath);
+        initialiseStorage(filePath);
+    }
 
-            // If path doesn't exist, create one
-            if (Files.notExists(path)) {
-                File newDir = new File(String.valueOf(path));
-                String[] toCreate = filePath.split("/");
-
-                // Create folders for each directory specified in the filePath
-                for (int i = 0; i < toCreate.length - 1; i++) {
-                    String dir = toCreate[i];
-                    Path miniPath = Paths.get(home, dir);
-                    File miniDir = new File(String.valueOf(miniPath));
-                    miniDir.mkdir();
-                }
-
-                newDir.createNewFile();
-            }
-        } catch (IOException e) {
-            throw new DukeLoadingErrorException();
-        }
+    /**
+     * Class constructor with no specified file path.
+     * @throws DukeLoadingErrorException If a loading error occurs.
+     */
+    public Storage() throws DukeLoadingErrorException {
+        initialiseStorage(DEFAULT_PATH);
     }
 
     /**
@@ -145,6 +133,31 @@ public class Storage {
         }
 
         return tasks;
+    }
+
+    private void initialiseStorage(String filePath) throws DukeLoadingErrorException {
+        try {
+            String home = System.getProperty("user.home");
+            path = Paths.get(home, filePath);
+
+            // If path doesn't exist, create one
+            if (Files.notExists(path)) {
+                File newDir = new File(String.valueOf(path));
+                String[] toCreate = filePath.split("/");
+
+                // Create folders for each directory specified in the filePath
+                for (int i = 0; i < toCreate.length - 1; i++) {
+                    String dir = toCreate[i];
+                    Path miniPath = Paths.get(home, dir);
+                    File miniDir = new File(String.valueOf(miniPath));
+                    miniDir.mkdir();
+                }
+
+                newDir.createNewFile();
+            }
+        } catch (IOException e) {
+            throw new DukeLoadingErrorException();
+        }
     }
 
 }
