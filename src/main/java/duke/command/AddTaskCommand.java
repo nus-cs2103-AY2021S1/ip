@@ -20,10 +20,11 @@ public abstract class AddTaskCommand extends Command {
      * @throws DukeException If there is something wrong with the task input.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         addTask(taskList, input);
         storage.saveTasks(taskList.getTasks());
-        taskList.printNewTask();
+//        taskList.printNewTask();
+        return taskList.newTaskStatement();
     }
 
     /**
