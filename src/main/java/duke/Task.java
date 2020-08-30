@@ -15,7 +15,7 @@ abstract class Task {
 
     /**
      * Constructor of Task class.
-     * 
+     *
      * @param description description of the task.
      */
     public Task(String description) {
@@ -37,7 +37,7 @@ abstract class Task {
 
     /**
      * Gets status icon of the task.
-     * 
+     *
      * @return String status icon of the task.
      */
     public String getStatusIcon() {
@@ -45,7 +45,7 @@ abstract class Task {
     }
 
     /**
-     * Marks the task as done. 
+     * Marks the task as done.
      */
     public void markAsDone() {
         isDone = true;
@@ -53,7 +53,7 @@ abstract class Task {
 
     /**
      * Gets new format of the given time frame
-     * 
+     *
      * @return String new format of time frame
      */
     public String getNewFormatTime() {
@@ -67,13 +67,12 @@ abstract class Task {
 
     /**
      * Gets time as LocalDate format.
-     * 
+     *
      * @return LocalDate new format of time.
      */
     public LocalDate getLocalDate() {
         return LocalDate.parse(time);
     }
-    
     @Override
     public String toString() {
         return "[" + getStatusIcon() + "] " + description;
@@ -81,7 +80,7 @@ abstract class Task {
 
     /**
      * Get type of the task.
-     * 
+     *
      * @return String type of the task.
      */
     public abstract String getType();
@@ -90,7 +89,12 @@ abstract class Task {
      * Get task representation in hardware as string.
      */
     public abstract String toStringFile();
-    
+
+    /**
+     * Get description of the task.
+     *
+     * @return description of the task.
+     */
     public String getDescription() {
         return description;
     }

@@ -10,12 +10,10 @@ public class Event extends Task {
     public String toString() {
         return "[E]" + super.toString() + " (at: " + this.getNewFormatTime() + ")";
     }
-    
     @Override
     public String toStringFile() {
-        return "E" + " | " + (isDone? "1" : "0") + " | " + this.description + " | " + super.time;
+        return "E" + " | " + (isDone ? "1" : "0") + " | " + this.description + " | " + super.time;
     }
-    
     @Override
     public String getType() {
         return "Event";

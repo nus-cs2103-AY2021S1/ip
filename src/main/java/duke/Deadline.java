@@ -13,7 +13,7 @@ public class Deadline extends Task {
     
     @Override
     public String toStringFile() {
-        return "D" + " | " + (isDone? "1" : "0") + " | " + this.description + " | " + super.time;
+        return "D" + " | " + (isDone ? "1" : "0") + " | " + this.description + " | " + super.time;
     }
     
     @Override

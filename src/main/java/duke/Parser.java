@@ -10,7 +10,7 @@ public class Parser {
      * Command enum lists out all the types of commands.
      */
     public enum Command {
-        BYE("bye"), LIST("list"), DONE("done"), TODO("todo"), DEADLINE("deadline"), 
+        BYE("bye"), LIST("list"), DONE("done"), TODO("todo"), DEADLINE("deadline"),
               EVENT("event"), DELETE("delete"), FILTER("filter"), FIND("find");
         public String value;
         Command(String value) {
@@ -20,7 +20,7 @@ public class Parser {
 
     /**
      * Executes user's commands.
-     * 
+     *
      * @param tasks list of current tasks.
      * @param ui UI for client.
      * @param storage save and display data from database.
@@ -28,7 +28,8 @@ public class Parser {
      * @return boolean terminate when it returns true.
      * @throws FileNotFoundException If the file path cannot be found.
      */
-    public static boolean execute(TaskList tasks, Ui ui, Storage storage, String userInput) throws FileNotFoundException {
+    public static boolean execute(TaskList tasks, Ui ui, Storage storage, String userInput)
+            throws FileNotFoundException {
         if (userInput.equals(Command.BYE.value)) {
             ui.sayGoodbye();
             return true;
@@ -103,7 +104,7 @@ public class Parser {
             } catch (StringIndexOutOfBoundsException e) {
                 ui.showInvalidFormatCommandDescription();
             }
-        }else {
+        } else {
             ui.showMeaninglessCommandDescription();
         }
         return false;

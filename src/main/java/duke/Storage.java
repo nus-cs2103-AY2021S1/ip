@@ -1,13 +1,13 @@
 package main.java.duke;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.PrintWriter;
-import java.io.FileNotFoundException;
-
-import java.util.Scanner;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
 
 /**
  * Storage is used to store data in hardware and displays available data in client's server.
@@ -18,7 +18,7 @@ class Storage {
 
     /**
      * Constructor of Storage class.
-     * 
+     *
      * @param filePath relative address of file path
      */
     public Storage(String filePath) {
@@ -50,7 +50,7 @@ class Storage {
             }
 
             if (inputArray[1].trim().equals("1")) {
-                list.get(list.size()-1).markAsDone();
+                list.get(list.size() - 1).markAsDone();
             }
         }
         return list;
@@ -58,13 +58,13 @@ class Storage {
 
     /**
      * Saves tasks in database.
-     * 
+     *
      * @param list list of data that clients enter.
      * @throws FileNotFoundException If the file path cannot be found.
      */
     public void saveTasks(List<Task> list) throws FileNotFoundException {
         PrintWriter printWriter = new PrintWriter(new FileOutputStream(filePath));
-        for(Task task: list) {
+        for (Task task: list) {
             printWriter.println(task.toStringFile());
         }
         printWriter.close();
