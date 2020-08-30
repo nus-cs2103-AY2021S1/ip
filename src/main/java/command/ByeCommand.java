@@ -7,9 +7,9 @@ import exception.DukeException;
 
 public class ByeCommand extends Command {
   @Override
-  public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-    ui.showGoodbye();
+  public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
     storage.saveTasks(taskList);
+    return ui.showGoodbye();
   }
 
   public ByeCommand() {

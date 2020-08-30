@@ -1,6 +1,7 @@
 package controller;
 
 import duke.Duke;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -35,6 +36,9 @@ public class MainWindow extends AnchorPane {
         duke = d;
     }
 
+    public void dukeWelcome() {
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog("Hello! I'm Duke\n What can I do for you?",dukeImage));
+    }
     /**
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.

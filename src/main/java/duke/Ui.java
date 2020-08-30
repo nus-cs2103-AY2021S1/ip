@@ -8,7 +8,7 @@ import task.Task;
 public class Ui {
   private String line = "____________________________________________________________";
   String welcomeMessage = "Hello! I'm Duke\n What can I do for you?";
-  String goodbyeMessage = "Bye! Message me anytime!!";
+  String goodbyeMessage = "Bye! Message me anytime!!\nYou can now close the tab!";
   Scanner sc = new Scanner(System.in);
 
   public void showLine() {
@@ -21,43 +21,40 @@ public class Ui {
     System.out.println(line);
   }
 
-  public String getGoodbyeMessage() {
+  public String getWelcomeMessage() {
+    return this.welcomeMessage;
+  }
+
+  public String showGoodbye() {
     return this.goodbyeMessage;
   }
-  public void showGoodbye() {
-    System.out.println(this.goodbyeMessage);
+
+  public String showDone(Task task) {
+    return String.join("\n", "Nice! I've marked this task as done: ", task.toString());
   }
 
-  public void showDone(Task task) {
-    System.out.println("Nice! I've marked this task as done: ");
-    System.out.println(task);
+  public String showAdd(Task task, int size) {
+    return String.join("\n","Added task:", task.toString(), showTaskQty(size));
   }
 
-  public void showAdd(Task task, int size) {
-    System.out.println("Added task.Task!");
-    System.out.println(task);
-    showTaskQty(size);
+  public String showTaskQty(int size) {
+    return String.format("You have %s remaining tasks left, work on them soon!", size);
   }
 
-  public void showTaskQty(int size) {
-    System.out.println(String.format("You have %s remaining tasks left, work on them soon!", size));
-  }
-
-  public void showDelete(Task task, int size) {
-    System.out.println("Deleting task.Task: ");
-    System.out.println(task);
-    showTaskQty(size);
+  public String showDelete(Task task, int size) {
+    return String.join("\n", "Deleting task.Task: ", task.toString(), showTaskQty(size));
   }
 
   public void showError(String errMsg) {
     System.out.println(errMsg);
   }
 
-  public void displayTaskList(TaskList taskList) {
-    System.out.println("Here are your current tasks:");
+  public String displayTaskList(TaskList taskList) {
+    StringBuilder s = new StringBuilder("Here are your current tasks:\n");
     for (int i = 0; i < taskList.getTaskList().size(); i++) {
-      System.out.println(i + 1 + "." + taskList.getTaskList().get(i));
+      s.append(i + 1).append(".").append(taskList.getTaskList().get(i)).append("\n");
     }
+    return s.toString();
   }
 
   /**
@@ -75,15 +72,17 @@ public class Ui {
     }
   }
 
-  public void displayMatchingTasks(TaskList filteredTaskList) {
+  public String displayMatchingTasks(TaskList filteredTaskList) {
 
     if (filteredTaskList.getSize() > 0) {
-      System.out.println("Here are the matching tasks in your list");
+      StringBuilder s = new StringBuilder("Here are the matching tasks in your list\n");
+
       for (int i = 0; i < filteredTaskList.getTaskList().size(); i++) {
-        System.out.println(i + 1 + "." + filteredTaskList.getTaskList().get(i));
+        s.append(i + 1).append(".").append(filteredTaskList.getTaskList().get(i)).append("\n");
       }
+      return s.toString();
     } else {
-      System.out.println("You have no matching tasks!");
+      return "You have no matching tasks!";
     }
   }
 }

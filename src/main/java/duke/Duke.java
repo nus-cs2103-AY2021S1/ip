@@ -30,14 +30,11 @@ public class Duke {
     }
   }
 
-  public Duke() {
-
-  }
-
   /**
    * This method runs the chatbot, accepting user input and adding it to a task list.
    */
   public void run() {
+
     ui.showWelcome();
     boolean isExit = false;
     while (!isExit) {
@@ -45,10 +42,10 @@ public class Duke {
         String fullCommand = ui.readCommand();
         ui.showLine(); // show the divider line ("_______")
         Command c = Parser.parse(fullCommand);
-        c.execute(taskList, ui, storage);
+        System.out.println(c.execute(taskList, ui, storage));
         isExit = c.isExit();
       } catch (DukeException e) {
-        ui.showError(e.getMessage());
+         ui.showError(e.getMessage());
       } finally {
         ui.showLine();
       }
@@ -62,8 +59,7 @@ public class Duke {
   public String getResponse(String input) {
     try {
       Command c = Parser.parse(input.trim());
-      c.execute(taskList, ui, storage);
-      return "Duke heard: " + input;
+      return c.execute(taskList, ui, storage);
     } catch (DukeException e) {
       return e.getMessage();
     }

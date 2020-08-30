@@ -10,9 +10,9 @@ public class FindCommand extends Command {
   String findString;
 
   @Override
-  public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+  public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
     TaskList filteredTaskList = taskList.find(this.findString);
-    ui.displayMatchingTasks(filteredTaskList);
+    return ui.displayMatchingTasks(filteredTaskList);
   }
 
   public FindCommand(String findString) {

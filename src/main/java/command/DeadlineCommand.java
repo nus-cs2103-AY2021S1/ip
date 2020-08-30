@@ -14,10 +14,10 @@ public class DeadlineCommand extends Command {
   LocalDateTime deadline;
 
   @Override
-  public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+  public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
     Task deadlineTask = new DeadlineTask(this.taskName, this.deadline);
     taskList.addTask(deadlineTask);
-    ui.showAdd(deadlineTask, taskList.getSize());
+    return ui.showAdd(deadlineTask, taskList.getSize());
   }
 
   public DeadlineCommand(String taskName, LocalDateTime deadline) {

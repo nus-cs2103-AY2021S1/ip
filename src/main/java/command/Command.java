@@ -17,8 +17,9 @@ public abstract class Command {
    * @param ui Object of the Ui class
    * @param storage Object of the Storage class
    * @throws DukeException Exception that occurs while executing the command
+   * @return
    */
-  public abstract void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException;
+  public abstract String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException;
 
   public boolean isExit() {
     return this.type.equals(CommandType.Bye);

@@ -2,7 +2,7 @@ package duke;
 
 import exception.DukeException;
 import exception.DukeFileException;
-import exception.DukeIOException;
+import exception.DukeIoException;
 import exception.InvalidInputException;
 import java.io.*;
 import java.io.File;
@@ -46,7 +46,7 @@ public class Storage {
 
       return data;
     } catch (IOException e) {
-      throw new DukeIOException();
+      throw new DukeIoException();
     }
   }
 
@@ -107,7 +107,7 @@ public class Storage {
     } catch (FileNotFoundException e) {
       throw new DukeFileException();
     } catch (IOException e2) {
-      throw new DukeIOException();
+      throw new DukeIoException();
     }
   }
 
@@ -142,7 +142,7 @@ public class Storage {
       }
       writer.close();
     } catch (IOException e) {
-      throw new DukeIOException();
+      throw new DukeIoException();
     }
   }
 }

@@ -12,10 +12,10 @@ public class TodoCommand extends Command {
   String todo;
 
   @Override
-  public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+  public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
     Task todoTask = new TodoTask(this.todo);
     taskList.addTask(todoTask);
-    ui.showAdd(todoTask, taskList.getSize());
+    return ui.showAdd(todoTask, taskList.getSize());
   }
 
   public TodoCommand(String todo) {

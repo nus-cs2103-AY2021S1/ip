@@ -11,11 +11,11 @@ public class DoneCommand extends Command {
   int index;
 
   @Override
-  public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+  public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
     if (index != 0 && index <= taskList.getSize()) {
       Task task = taskList.get(index - 1);
       task.MarkAsDone();
-      ui.showDone(task);
+      return ui.showDone(task);
     } else {
       throw new InvalidInputException(
           "Number provided is too small or too large, Please provide a valid task number");
