@@ -4,6 +4,11 @@ public class FindCommand extends Command {
     public static final boolean IS_EXIT = false;
     protected String input;
 
+    /**
+     * Creates a FindCommand Object to handle user asking for a keyword.
+     *
+     * @param input Keyword to find.
+     */
     public FindCommand(String input) {
         super(IS_EXIT);
         this.input = input;
@@ -19,7 +24,7 @@ public class FindCommand extends Command {
 
         ArrayList<Task> tasksWithWord = tasks.find(splitStr[1]);
 
-        System.out.println("    Here are the matching tasks in your list:" );
+        System.out.println("    Here are the matching tasks in your list:");
         for (int i = 0; i < tasksWithWord.size(); i++) {
             Task task = tasksWithWord.get(i);
             System.out.println("    " + (i + 1) + "." + task);
