@@ -77,6 +77,8 @@ public class IOHandler {
                             for (String s : tasksFound) {
                                 System.out.println(s);
                             }
+                        } else {
+                            System.out.println("Nothing matches :(");
                         }
 
                     } else if (text.length() > 0) {
