@@ -60,11 +60,11 @@ public class Storage {
             return tasks;
         } catch (FileNotFoundException e) {
             // TODO: Customise font
-            System.out.println("File \"duke.tasks.txt\" does not exist. Attempting to create one for you.");
+            System.out.println("File \"tasks.txt\" does not exist. Attempting to create one for you.");
             try {
                 FileWriter fw = new FileWriter(TASKS_TEXT_FILE_PATH);
                 fw.close();
-                System.out.println("Successfully created file duke.tasks.txt");
+                System.out.println("Successfully created file tasks.txt");
                 return tasks;
             } catch (IOException ioException) {
                 throw new DukeException(ioException.getMessage());
