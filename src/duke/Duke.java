@@ -3,10 +3,21 @@ package duke;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
+/**
+ * Duke is an interactive chat-bot that allows the user to
+ * add, modify or delete tasks from a to-do list, which is
+ * saved locally as a .txt file.
+ * @author Ng Weng Fai
+ */
 public class Duke {
     private TaskList taskList;
     private Storage storage;
 
+    /**
+     * Instantiates Duke, which loads data from a previously
+     * saved  duke.txt, if it exists.
+     * @param filepath file path of duke.txt.
+     */
     public Duke(String filepath) {
         taskList = TaskList.startList();
         storage = new Storage(filepath);
@@ -17,6 +28,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Starts up Duke.
+     */
     public void run() {
         Scanner sc = new Scanner(System.in);
         Ui.displayMessage("Hello! I'm duke.Duke\n\tWhat can I do for you?");
@@ -37,6 +51,10 @@ public class Duke {
 
                     case "list":
                         msg = taskList.toString();
+                        break;
+
+                    case "find":
+                        msg = taskList.find(parsedInput[1]);
                         break;
 
                     case "done":
