@@ -19,7 +19,6 @@ public class UI {
         System.out.println("_____________________________");
         System.out.println("Hello! I'm Duke\n"
                 + "What can I do for you?");
-        System.out.println("_____________________________");
     }
 
     /**
