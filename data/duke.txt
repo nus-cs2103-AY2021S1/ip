@@ -1,0 +1,6 @@
+T | 1 | read book
+T | 1 | join sports club
+T | 0 | buy milk
+T | 1 | get sports magazine
+T | 0 | buy milk
+D | 1 | buy | Aug 12 2020 12:43:00
