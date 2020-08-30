@@ -14,7 +14,6 @@ public class DeleteCommand extends Command {
 
     /**
      * Processes all the delete command to determine the correct output.
-     *
      * @param taskList List of tasks.
      * @param ui       UI of the bot.
      * @param storage  Storage managing the file in hard disk.
@@ -31,7 +30,6 @@ public class DeleteCommand extends Command {
 
     /**
      * Processes all the deadline command to determine the correct output.
-     *
      * @param theRest  Parsed string containing task details.
      * @param taskList List containing all the task(s).
      * @param ui       UI of the bot
@@ -54,7 +52,6 @@ public class DeleteCommand extends Command {
     /**
      * Evaluates whether this and other object if this and
      * other object is the same or of the same type and task details.
-     *
      * @param other Other object to compare.
      * @return True if this object
      */

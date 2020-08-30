@@ -31,7 +31,6 @@ public class Ui {
 
     /**
      * Reads user's command from Scanner.
-     *
      * @return user's command.
      */
     public String readCommand() {
@@ -63,7 +62,6 @@ public class Ui {
 
     /**
      * Shows error message.
-     *
      * @param msg Error message.
      */
     public void showError(String msg) {

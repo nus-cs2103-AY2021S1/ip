@@ -45,7 +45,6 @@ public class TaskList {
 
     /**
      * Deletes a task based on the corresponding number.
-     *
      * @param index Index of the list containing the task
      * @return Delete message.
      * @throws DeleteException If the index < 0 or more than the size.
