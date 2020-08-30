@@ -15,7 +15,7 @@ public class DeadlineTask extends Task {
         this.stringDeadline = deadline;
         this.deadline = LocalDateTime.parse(deadline,
                 DateTimeFormatter.
-                        ofPattern("dd/MM/yyyy HHmm"));
+                        ofPattern("dd/MM/yyyy HH:mm"));
     }
 
     @Override
