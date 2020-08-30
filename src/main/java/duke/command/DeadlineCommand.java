@@ -29,22 +29,17 @@ public class DeadlineCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         ArrayList<Task> lib = tasks.getTaskList();
 
         try {
             Deadline deadline = new Deadline(description, time);
             tasks.addDeadline(deadline);
-            ui.printAddStatements(deadline.toString(), lib.size());
+            return ui.printAddStatements(deadline.toString(), lib.size());
         } catch (DukeException ex) {
-            ui.printExceptions(ex);
+            return ui.printExceptions(ex);
         }
 
-    }
-
-    @Override
-    public boolean isDone() {
-        return false;
     }
 
 }

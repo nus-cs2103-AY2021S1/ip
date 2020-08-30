@@ -21,25 +21,20 @@ public class CheckCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         ArrayList<Task> lib = tasks.getTaskList();
 
-        ui.printCheckStatement(date);
+        String result = ui.printCheckStatement(date);
         for (int i = 0; i < lib.size(); i++) {
             if (lib.get(i).getDate() == null) {
                 continue;
             }
 
             if (lib.get(i).getDate().equals(date)) {
-                ui.showTask(lib.get(i).toString());
+                result += ui.showTask(lib.get(i).toString());
             }
         }
-        ui.printEndLine();
-    }
-
-    @Override
-    public boolean isDone() {
-        return false;
+        return result;
     }
 
 }

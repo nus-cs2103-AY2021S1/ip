@@ -20,21 +20,19 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         ArrayList<Task> lib = tasks.getTaskList();
 
         if (index >= lib.size() || lib.size() == 0 || index < 0) {
-            ui.printExceptions(new DukeException(
+            return ui.printExceptions(new DukeException(
                     "This task ID does not exist in the database!"));
         } else {
-            ui.printDeleteStatement(lib.get(index).toString(), lib.size() - 1);
+            String task = lib.get(index).toString();
+            int size = lib.size() - 1;
             tasks.deleteTask(index);
-        }
-    }
 
-    @Override
-    public boolean isDone() {
-        return false;
+            return ui.printDeleteStatement(task, size);
+        }
     }
 
 }
