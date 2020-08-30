@@ -18,8 +18,8 @@ public class Duke {
     /**
      * Constructor for the Duke object.
      */
-    public Duke() {
-        this.ui = new Ui();
+    public Duke(Ui ui) {
+        this.ui = ui;
         try {
             this.storage = new Storage("duke.json");
             this.taskList = this.storage.load();
@@ -28,29 +28,20 @@ public class Duke {
             this.taskList = new TaskList();
         } finally {
             this.parser = new Parser(this.taskList, this.ui);
+            ui.start();
         }
     }
 
     /**
-     * Main function/entrypoint. Will create a new Duke instance and begin interaction with the user immediately.
-     * Takes in no command line arguments.
-     * @param args command line arguments.
+     * TODO
      */
-    public static void main(String[] args) {
-        Duke duke = new Duke();
-        duke.run();
-    }
-
-    private void run() {
-        ui.welcomeMessage();
-        while (ui.isActive()) {
-            String input = ui.nextLine();
-            try {
-                parser.parseAndRun(input);
-                this.storage.save(this.taskList);
-            } catch (DukeException e) {
-                ui.systemMessage(e.getMessage());
-            }
+    public void nextIteration() {
+        String input = ui.nextLine();
+        try {
+            parser.parseAndRun(input);
+            this.storage.save(this.taskList);
+        } catch (DukeException e) {
+            ui.systemMessage(e.getMessage());
         }
     }
 
