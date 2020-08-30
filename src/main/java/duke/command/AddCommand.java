@@ -1,5 +1,7 @@
 package duke.command;
 
+import java.time.format.DateTimeParseException;
+
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
@@ -9,8 +11,6 @@ import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
-
-import java.time.format.DateTimeParseException;
 
 /**
  * Represents a command to add a task.

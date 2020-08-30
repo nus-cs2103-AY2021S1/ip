@@ -1,10 +1,10 @@
 package duke.command;
 
+import java.io.IOException;
+
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
-
-import java.io.IOException;
 
 /**
  * Represents a command to shut down chat bot.

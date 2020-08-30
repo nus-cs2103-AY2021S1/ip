@@ -1,5 +1,7 @@
 package duke.command;
 
+import java.io.IOException;
+
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
@@ -10,19 +12,17 @@ import duke.exception.DukeInvalidCommandException;
 import duke.exception.DukeInvalidDateException;
 import duke.exception.DukeInvalidTaskException;
 
-import java.io.IOException;
-
 /**
  * Represents a command
  */
 public abstract class Command {
 
+    protected static final int PARSE_INDEX = 1;
+    protected static final int TASK_INDEX = 1;
+
     protected String command;
     protected String extra;
     protected boolean isExit;
-
-    protected static final int PARSE_INDEX = 1;
-    protected static final int TASK_INDEX = 1;
 
     /**
      * Class constructor without additional arguments.
