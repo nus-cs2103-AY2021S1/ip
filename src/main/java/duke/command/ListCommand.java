@@ -12,6 +12,7 @@ public class ListCommand extends Command {
 
     /**
      * Processes the list command to list all the task(s) in the list.
+     *
      * @param taskList List of tasks.
      * @param ui       UI of the bot.
      * @param storage  Storage managing the file in hard disk.
@@ -24,6 +25,7 @@ public class ListCommand extends Command {
 
     /**
      * Calls the TaskList to list all the task(s).
+     *
      * @param taskList TaskList that stores the list of tasks.
      */
     public void processList(TaskList taskList) { //throws DukeException {

@@ -29,7 +29,7 @@ public class DeleteCommand extends Command {
 
     /**
      * Processes all the deadline command to determine the correct output.
-     * @param theRest  Parsed string containing task details.
+     * @param number  Parsed string containing task number.
      * @param taskList List containing all the task(s).
      * @param ui       UI of the bot
      * @param storage  Storage managing the file in hard disk.
@@ -37,9 +37,9 @@ public class DeleteCommand extends Command {
      */
 
     public void processDelete(
-        String theRest, TaskList taskList, Ui ui, Storage storage) throws DeleteException {
+        String number, TaskList taskList, Ui ui, Storage storage) throws DeleteException {
         try {
-            Integer taskNum = Integer.parseInt(theRest);
+            Integer taskNum = Integer.parseInt(number);
             int index = taskNum - 1;
             taskList.deleteTask(index);
             Storage.updateData(taskList.getTasks());

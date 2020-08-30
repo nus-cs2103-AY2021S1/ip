@@ -44,6 +44,7 @@ public class TaskList {
 
     /**
      * Deletes a task based on the corresponding number.
+     *
      * @param index Index of the list containing the task
      * @throws DeleteException If the index < 0 or more than the size.
      */
@@ -63,6 +64,7 @@ public class TaskList {
 
     /**
      * Saves the task to the list.
+     *
      * @param task Task to save to the list.
      */
     public void saveToList(Task task) {
@@ -73,6 +75,7 @@ public class TaskList {
 
     /**
      * Returns the task corresponding to the task number.
+     *
      * @param taskNum Task number of the task.
      * @return The task corresponding to the task number.
      */
@@ -82,6 +85,7 @@ public class TaskList {
 
     /**
      * Marks the task corresponding to the task number as done.
+     *
      * @param taskNum Task number of the task.
      * @throws DoneException If the index < 0 or more than the size.
      */
@@ -102,6 +106,7 @@ public class TaskList {
 
     /**
      * Shows the all task(s) on the input day.
+     *
      * @param date Date to show.
      * @throws CalendarException If the date input is in invalid format.
      */
@@ -145,6 +150,7 @@ public class TaskList {
 
     /**
      * Returns all the tasks in the list.
+     *
      * @return List containing all of the tasks.
      */
     public List<Task> getTasks() {

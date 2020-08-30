@@ -10,6 +10,7 @@ public abstract class Command {
 
     /**
      * Constructs command
+     *
      * @param task Task description.
      */
     public Command(String task) {
@@ -19,7 +20,8 @@ public abstract class Command {
 
     /**
      * Constructs command.
-     * @param task Task description.
+     *
+     * @param task   Task description.
      * @param isExit Exit indicator.
      */
     public Command(String task, Boolean isExit) {
@@ -29,6 +31,7 @@ public abstract class Command {
 
     /**
      * Constructs command.
+     *
      * @param isExit Exit indicator.
      */
     public Command(Boolean isExit) {
@@ -46,6 +49,7 @@ public abstract class Command {
 
     /**
      * Determines whether the bot should exit or not.
+     *
      * @return true if the command is "exit" and false otherwise.
      */
     public boolean isExit() {
@@ -54,6 +58,7 @@ public abstract class Command {
 
     /**
      * Executes the user's command.
+     *
      * @param taskList List of tasks.
      * @param ui       UI of the bot.
      * @param storage  Storage managing the file in hard disk.
@@ -62,6 +67,7 @@ public abstract class Command {
 
     /**
      * Returns this command object.
+     *
      * @return this command.
      */
     public String getTask() {

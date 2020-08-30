@@ -13,6 +13,7 @@ public class Duke {
 
     /**
      * Constructs Duke bot.
+     *
      * @param filePath File path containing data.
      */
     public Duke(String filePath) {
