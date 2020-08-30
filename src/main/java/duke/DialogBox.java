@@ -12,7 +12,11 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 
 /**
  * An example of a custom control using FXML.
@@ -20,29 +24,11 @@ import javafx.scene.layout.HBox;
  * containing text from the speaker.
  */
 public class DialogBox extends HBox {
-//    private Label text;
-//    private ImageView displayPicture;
 
     @FXML
     private Label dialog;
     @FXML
     private ImageView displayPicture;
-
-
-//    public DialogBox(Label l, ImageView iv) {
-//        super(5);
-//        text = l;
-//        displayPicture = iv;
-//
-//        text.setWrapText(true);
-//        displayPicture.setFitWidth(100.0);
-//        displayPicture.setFitHeight(100.0);
-//        displayPicture.setClip(new Circle(50, 50, 50));
-//
-//        this.setBackground(new Background(new BackgroundFill(Color.BURLYWOOD, null, null)));
-//        this.setAlignment(Pos.TOP_RIGHT);
-//        this.getChildren().addAll(text, displayPicture);
-//    }
 
     private DialogBox(String text, Image img) {
         try {
@@ -56,6 +42,9 @@ public class DialogBox extends HBox {
 
         dialog.setText(text);
         displayPicture.setImage(img);
+        displayPicture.setClip(new Circle(50, 50, 45));
+
+        this.setBackground(new Background(new BackgroundFill(Color.BURLYWOOD, null, null)));
     }
 
     /**

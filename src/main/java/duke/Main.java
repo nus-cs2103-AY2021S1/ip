@@ -19,6 +19,9 @@ public class Main extends Application {
     public void start(Stage stage) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
+            MainWindow mw = new MainWindow();
+            fxmlLoader.setRoot(mw);
+            fxmlLoader.setController(mw);
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
