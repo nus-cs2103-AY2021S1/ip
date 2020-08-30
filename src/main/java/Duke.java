@@ -6,7 +6,6 @@
 public class Duke {
 
     private Ui ui;
-    private HandleFile handleFile;
     private Parser parser;
 
     /**
@@ -14,8 +13,7 @@ public class Duke {
      */
     public Duke() {
         ListOfItems listOfItems = new ListOfItems();
-        handleFile = new HandleFile(listOfItems);
-        parser = new Parser(listOfItems, handleFile);
+        parser = new Parser(listOfItems);
         ui = new Ui(parser);
     }
 
@@ -30,6 +28,10 @@ public class Duke {
 
     public static void main(String[] args) {
         new Duke();
+    }
+
+    public String getResponse(String input) {
+        return this.ui.run(input);
     }
 }
 

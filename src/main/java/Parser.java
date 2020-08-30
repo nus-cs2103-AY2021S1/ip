@@ -3,50 +3,45 @@
  */
 public class Parser {
 
-    protected HandleFile handleFile;
     protected ListOfItems listOfItems;
 
     /**
      * Constructor initialises a new Parser object.
      *
      * @param list list of tasks.
-     * @param handleFile handles "stored.txt" file.
      */
-    public Parser(ListOfItems list, HandleFile handleFile) {
-        this.handleFile = handleFile;
+    public Parser(ListOfItems list) {
         this.listOfItems = list;
     }
 
+    //TODO
     /**
      * Handles the user input and direct the input to the respective method in ListOfItems.
      * If it is not a valid command, a Duke Exception will be thrown.
      *
      * @param input user input.
      */
-    protected void run(String input) {
+    protected String run(String input) {
         try {
             if (input.equals("list")) {
-                listOfItems.getList();
+                return listOfItems.getList();
             } else if (input.contains("done")) {
-                listOfItems.doneItem(input);
-                handleFile.writeFile(listOfItems);
+                return listOfItems.doneItem(input);
             } else if (input.contains("delete")) {
-                listOfItems.deleteItem(input);
-                handleFile.writeFile(listOfItems);
+                return listOfItems.deleteItem(input);
             } else if (input.contains("items due by")) {
                 // check items due on a specific date
-                listOfItems.checkBy(input);
+                return listOfItems.checkBy(input);
             } else if (input.contains("items due before")) {
                 // check items due before a specific date + time
-                listOfItems.checkBefore(input);
+                return listOfItems.checkBefore(input);
             } else if (input.contains("find")) {
-                listOfItems.find(input);
+                return listOfItems.find(input);
             } else {
-                listOfItems.addItem(input);
-                handleFile.writeFile(listOfItems);
+                return listOfItems.addItem(input);
             }
         } catch (DukeException e) {
-            System.out.println(e.getMessage());
+            return e.getMessage();
         }
     }
 }

@@ -10,6 +10,7 @@ import java.util.List;
  */
 public class ListOfItems {
 
+    private HandleFile handleFile;
     protected List<Task> list;
     protected int index;
     protected String divider = "____________________________________________________________";
@@ -21,6 +22,7 @@ public class ListOfItems {
     public ListOfItems() {
         this.list = new ArrayList<>();
         this.index = 0;
+        this.handleFile = new HandleFile(this);
     }
 
     /**
@@ -67,43 +69,48 @@ public class ListOfItems {
         }
     }
 
+    //TODO
     /**
      * Retrieves the list and prints out every task.
      *
      * @throws DukeException if list is empty.
      */
-    protected void getList() throws DukeException {
-        System.out.println(divider);
+    protected String getList() throws DukeException {
+        String output = divider + "\n";
         if (list.size() == 0) {
             throw new DukeException("List is empty, you have free time (for now)! YAY :D" + "\n" + divider);
         } else {
-            System.out.println("Here are the task(s) in your list: ");
+            output = output + "Here are the task(s) in your list: \n";
             for (int i = 0; i < index; i++) {
-                System.out.println(list.get(i).id + "." + list.get(i));
+                output = output + list.get(i).id + "." + list.get(i) + "\n";
             }
         }
-        System.out.println(divider);
+        output = output + divider;
+        return output;
     }
 
+    //TODO
     /**
      * Marks a particular task is done.
      *
      * @param input user input.
      * @throws DukeException if number given is invalid.
      */
-    protected void doneItem(String input) throws DukeException {
+    protected String doneItem(String input) throws DukeException {
         try {
             // retrieve number after "done "
             int number = Integer.parseInt(input.substring(5));
 
             Task task = list.get(number - 1);
             if (task.isDone) {
-                System.out.println("Task already done!");
+                return "Task already done!";
             } else {
                 task.markedDone();
-                String message = "Good job! I've marked this task as done: ";
-                System.out.println(divider + "\n" + message + "\n" + tabSpacing
-                        + task + "\n" + divider);
+                handleFile.writeFile(this);
+                String message = "Good job! I've marked this task as done: \n";
+                String output = divider + "\n" + message + "\n" + tabSpacing
+                        + task + "\n" + divider;
+                return output;
             }
         } catch (IndexOutOfBoundsException | NumberFormatException e) {
             throw new DukeException("\n" + divider + "\n" + "Sorry, you did not enter a valid number. Please try again."
@@ -111,6 +118,7 @@ public class ListOfItems {
         }
     }
 
+    //TODO
     /**
      * Deletes a particular task.
      * Modifies other task's index if necessary, so that list is still in chronological order.
@@ -118,7 +126,7 @@ public class ListOfItems {
      * @param input user input.
      * @throws DukeException if number given is invalid.
      */
-    protected void deleteItem(String input) throws DukeException {
+    protected String deleteItem(String input) throws DukeException {
         try {
             int number = Integer.parseInt(input.substring(7));
             Task task = list.get(number - 1);
@@ -127,17 +135,18 @@ public class ListOfItems {
             }
             list.remove(task);
             index--;
-            System.out.println(divider);
-            System.out.println("Noted. I've removed this task: ");
-            System.out.println(tabSpacing + task);
-            System.out.println("Now you have " + index + " tasks in the list.");
-            System.out.println(divider);
+            handleFile.writeFile(this);
+            String output = divider + "\n" + "Noted. I've removed this task: " + "\n"
+                    + tabSpacing + task + "\n" + "Now you have " + index + " tasks in the list."
+                    + "\n" + divider;
+            return output;
         } catch (IndexOutOfBoundsException | NumberFormatException e) {
             throw new DukeException("\n" + divider + "\n" + "Whoops, you did not enter a valid number."
                     + "\n" + divider);
         }
     }
 
+    //TODO
     /**
      * Adds a new task to the list.
      * Checks what type of task is given and initialise a new sub-class of Task (To-do, Deadline, or Event).
@@ -145,7 +154,7 @@ public class ListOfItems {
      * @param input user input.
      * @throws DukeException if incomplete commands are given.
      */
-    protected void addItem(String input) throws DukeException {
+    protected String addItem(String input) throws DukeException {
         String addedMessage = "Got it. I've added this task: ";
         String totalMessage = "Now you have " + (index + 1) + " task(s) in the list.";
 
@@ -153,12 +162,13 @@ public class ListOfItems {
             try {
                 String description = input.substring(5);
                 Todo todo = new Todo(description, index + 1);
-
-                System.out.println(divider + "\n" + addedMessage);
+                String output = divider + "\n" + addedMessage + "\n";
                 list.add(index, todo);
-                System.out.println(tabSpacing + list.get(index));
-                System.out.println(totalMessage + "\n" + divider);
+                output = output + tabSpacing + list.get(index) + "\n"
+                    + totalMessage + "\n" + divider;
                 index++;
+                handleFile.writeFile(this);
+                return output;
             } catch (StringIndexOutOfBoundsException e) {
                 throw new DukeException("\n" + divider + "\n"
                         + "Whoops, you did not fill in the details of the Todo properly :("
@@ -171,12 +181,13 @@ public class ListOfItems {
                 String description = info[0].substring(9);
                 String dueDateTime = info[1];
                 Deadline deadline = new Deadline(description, index + 1, dueDateTime, false);
-
-                System.out.println(divider + "\n" + addedMessage);
+                String output = divider + "\n" + addedMessage + "\n";
                 list.add(index, deadline);
-                System.out.println(tabSpacing + list.get(index));
-                System.out.println(totalMessage + "\n" + divider);
+                output = output + tabSpacing + list.get(index) + "\n"
+                        + totalMessage + "\n" + divider;
                 index++;
+                handleFile.writeFile(this);
+                return output;
             } catch (StringIndexOutOfBoundsException e) {
                 throw new DukeException("\n" + divider + "\n"
                         + "Whoops, you did not fill in the details of the Deadline properly :("
@@ -199,12 +210,13 @@ public class ListOfItems {
                 String description = info[0].substring(6);
                 String duration = info[1];
                 Event event = new Event(description, index + 1, duration, false);
-
-                System.out.println(divider + "\n" + addedMessage);
+                String output = divider + "\n" + addedMessage + "\n";
                 list.add(index, event);
-                System.out.println(tabSpacing + list.get(index));
-                System.out.println(totalMessage + "\n" + divider);
+                output = output + tabSpacing + list.get(index) + "\n"
+                        + totalMessage + "\n" + divider;
                 index++;
+                handleFile.writeFile(this);
+                return output;
             } catch (StringIndexOutOfBoundsException e) {
                 throw new DukeException("\n" + divider + "\n"
                         + "Whoops, you did not fill in the details of the Event properly :("
@@ -228,32 +240,34 @@ public class ListOfItems {
         }
     }
 
+    //TODO
     /**
      * Checks and outputs all of the tasks that are due by a specific date.
      *
      * @param input user input.
      * @throws DukeException if input does not follow this format: "items due by DD/MM/YYYY".
      */
-    protected void checkBy(String input) throws DukeException {
+    protected String checkBy(String input) throws DukeException {
         try {
             boolean hasResults = false;
             String info = input.substring(13);
             DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("d/M/yyyy");
             LocalDate date = LocalDate.parse(info, dateFormat);
-            System.out.println(divider);
-            System.out.println("Task(s) due by " + date.format(DateTimeFormatter.ofPattern("d MMM yyyy")) + " :");
+            String output = divider + "Task(s) due by " + date.format(DateTimeFormatter.ofPattern("d MMM yyyy"))
+                    + " :" + "\n";
             for (int i = 0; i < this.list.size(); i++) {
                 if ((this.list.get(i) instanceof Deadline && ((Deadline) this.list.get(i)).date.equals(date))
                         || (this.list.get(i) instanceof Event && ((Event) this.list.get(i)).date.equals(date))) {
                     hasResults = true;
-                    System.out.println(this.list.get(i));
+                    output = output + this.list.get(i) + "\n";
                 }
             }
             if (!hasResults) {
-                System.out.println("- No tasks due on " + date.format(DateTimeFormatter.ofPattern("d MMM yyyy"))
-                        + " -");
+                output = output + "- No tasks due on " + date.format(DateTimeFormatter.ofPattern("d MMM yyyy"))
+                        + " -\n";
             }
-            System.out.println(divider);
+            output = output + divider;
+            return output;
         } catch (DateTimeParseException | StringIndexOutOfBoundsException e) {
             throw new DukeException("\n" + divider + "\n"
                     + "Sorry, you did not enter a valid date (DD/MM/YYYY)! "
@@ -262,6 +276,7 @@ public class ListOfItems {
         }
     }
 
+    //TODO
     /**
      * Checks and outputs all of the task that are due before a specific date and/or time.
      *
@@ -269,7 +284,7 @@ public class ListOfItems {
      * @throws DukeException if input does not follow this format: "items due before DD/MM/YYYY"
      * or "items due before DD/MM/YYYY HHmm".
      */
-    protected void checkBefore(String input) throws DukeException {
+    protected String checkBefore(String input) throws DukeException {
         try {
             boolean hasResults = false;
             String info = input.substring(17);
@@ -279,28 +294,28 @@ public class ListOfItems {
             if (info.length() <= 10) {
                 // only consists of date
                 LocalDate date = LocalDate.parse(info, dateFormat);
-                System.out.println(divider);
-                System.out.println("Task(s) due before " + date.format(DateTimeFormatter.ofPattern("d MMM yyyy"))
-                        + " :");
+                String output = divider + "\n" + "Task(s) due before "
+                        + date.format(DateTimeFormatter.ofPattern("d MMM yyyy")) + " :\n";
                 for (int i = 0; i < this.list.size(); i++) {
                     if ((this.list.get(i) instanceof Deadline && !((Deadline) this.list.get(i)).date.isAfter(date))
                             || (this.list.get(i) instanceof Event && !((Event) this.list.get(i)).date.isAfter(date))) {
                         hasResults = true;
-                        System.out.println(this.list.get(i));
+                        output = output + this.list.get(i) + "\n";
                     }
                 }
                 if (!hasResults) {
-                    System.out.println("- No tasks due before " + date.format(DateTimeFormatter.ofPattern("d MMM yyyy"))
-                            + " -");
+                    output = output + "- No tasks due before " + date.format(DateTimeFormatter.ofPattern("d MMM yyyy"))
+                            + " -\n";
                 }
-                System.out.println(divider);
+                output = output + divider;
+                return output;
             } else {
                 // date + time
                 LocalDate date = LocalDate.parse(info.split(" ")[0], dateFormat);
                 LocalTime time = LocalTime.parse(info.split(" ")[1], timeFormat);
-                System.out.println(divider);
-                System.out.println("Task(s) due before " + date.format(DateTimeFormatter.ofPattern("d MMM yyyy"))
-                        + ", " + time.format(DateTimeFormatter.ofPattern("h:mma")) + " :");
+                String output = divider + "\n" + "Task(s) due before "
+                        + date.format(DateTimeFormatter.ofPattern("d MMM yyyy"))
+                        + ", " + time.format(DateTimeFormatter.ofPattern("h:mma")) + " :\n";
                 for (int i = 0; i < this.list.size(); i++) {
                     if ((this.list.get(i) instanceof Deadline && !((Deadline) this.list.get(i)).date.isAfter(date)
                             && ((Deadline) this.list.get(i)).time != null
@@ -309,14 +324,15 @@ public class ListOfItems {
                             && ((Event) this.list.get(i)).endTime != null
                             && !((Event) this.list.get(i)).endTime.isAfter(time))) {
                         hasResults = true;
-                        System.out.println(this.list.get(i));
+                        output = output + this.list.get(i) + "\n";
                     }
                 }
                 if (!hasResults) {
-                    System.out.println("- No tasks due before " + date.format(DateTimeFormatter.ofPattern("d MMM yyyy"))
-                            + ", " + time.format(DateTimeFormatter.ofPattern("h:mma")) + " -");
+                    output = output + "- No tasks due before " + date.format(DateTimeFormatter.ofPattern("d MMM yyyy"))
+                            + ", " + time.format(DateTimeFormatter.ofPattern("h:mma")) + " -\n";
                 }
-                System.out.println(divider);
+                output = output + divider;
+                return output;
             }
         } catch (DateTimeParseException | StringIndexOutOfBoundsException e) {
             throw new DukeException("\n" + divider + "\n"
@@ -327,23 +343,22 @@ public class ListOfItems {
 
     }
 
-    protected void find(String input) throws DukeException {
+    protected String find(String input) throws DukeException {
         try {
             boolean hasResults = false;
             String info = input.substring(5);
-
-            System.out.println(divider);
-            System.out.println("Here are the matching tasks in your list:");
+            String output = divider + "\n" + "Here are the matching tasks in your list:\n";
             for (int i = 0; i < this.list.size(); i++) {
                 if (this.list.get(i).description.contains(info)) {
-                    System.out.println(this.list.get(i).id + ". " + this.list.get(i));
+                    output = output + this.list.get(i).id + ". " + this.list.get(i) + "\n";
                     hasResults = true;
                 }
             }
             if (!hasResults) {
-                System.out.println("- No results found -");
+                output = output + "- No results found -\n";
             }
-            System.out.println(divider);
+            output = output + divider;
+            return output;
         } catch (StringIndexOutOfBoundsException e) {
             throw new DukeException("\n" + divider + "\n"
                     + "Sorry, you did not enter a search. Please try again."
