@@ -3,16 +3,28 @@ import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.util.Scanner;
 
+/**
+ * deals with loading tasks from the file and saving tasks in the file.
+ */
 public class Storage {
     protected String path;
     protected File file;
     protected boolean isCreated;
 
+    /**
+     *  creates a new storage with a file path.
+     * @param path file path to the storage file
+     */
     public Storage(String path) {
             this.path = path;
             file = new File(path);
     }
 
+    /**
+     * saves all of the tasks in the task list into the storage file.
+     * @param tasks list of tasks to be saved
+     * @throws java.io.IOException possible exception when creating the file
+     */
     public void saveTasks(TaskList tasks) throws java.io.IOException {
         isCreated = file.createNewFile();
         PrintWriter pw = new PrintWriter(path);
@@ -24,6 +36,11 @@ public class Storage {
         writer.close();
     }
 
+    /**
+     * loads all of the tasks stored in the file to a task list.
+     * @param tasks the list that tasks will be loaded to
+     * @throws java.io.IOException possible exception when creating the file
+     */
     public void loadTasks(TaskList tasks) throws java.io.IOException {
         isCreated = file.createNewFile();
         int location;

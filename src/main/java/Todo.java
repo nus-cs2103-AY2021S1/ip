@@ -1,5 +1,12 @@
+/**
+ * represents a todo task that has a description, and a state of whether it has been done.
+ */
 public class Todo extends Task {
 
+    /**
+     * creates a new todo task.
+     * @param description the description of the todo task.
+     */
     public Todo(String description) {
         super(description);
     }

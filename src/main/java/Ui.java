@@ -1,5 +1,8 @@
 import java.util.Scanner;
 
+/**
+ * deals with interactions with the user.
+ */
 public class Ui {
 
     public static String LINE = "===================================================";
@@ -7,6 +10,10 @@ public class Ui {
     protected String[] command;
     protected Scanner scanner;
 
+    /**
+     * creates a new ui with a task list and initiates the scanner and command.
+     * @param tasks the task list to be implemented
+     */
     public Ui(TaskList tasks) {
         this.tasks = tasks;
         scanner = new Scanner(System.in);
@@ -21,6 +28,10 @@ public class Ui {
         printPart("Bye. Hope to see you again soon!");
     }
 
+    /**
+     * reads the command from the user.
+     * @return a string array command[2]. command[0] represents type and command[1] represents description.
+     */
     public String[] read() {
         command[0] = scanner.next();
         if(command[0].equals("list") || command[0].equals("bye")) {
@@ -31,6 +42,9 @@ public class Ui {
         return command;
     }
 
+    /**
+     * lists out all the tasks in the task list.
+     */
     public void list() {
         System.out.println(LINE);
         System.out.println("Here are the tasks in your list:");
@@ -40,6 +54,10 @@ public class Ui {
         System.out.println(LINE + "\n");
     }
 
+    /**
+     * lists out all the tasks in the matching task list.
+     * @param taskList a task list that contains all the matching tasks.
+     */
     public void find(TaskList taskList) {
         System.out.println(LINE);
         System.out.println("Here are the matching tasks in your list:");

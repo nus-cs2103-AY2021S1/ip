@@ -1,6 +1,9 @@
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * is the main class of the individual project.
+ */
 public class Duke {
     private Storage storage;
     private TaskList tasks;

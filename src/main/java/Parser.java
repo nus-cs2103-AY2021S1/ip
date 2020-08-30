@@ -1,5 +1,8 @@
 import java.time.LocalDate;
 
+/**
+ * deals with making sense of the user command.
+ */
 public class Parser {
     protected int location;
     protected String description;
@@ -10,12 +13,21 @@ public class Parser {
     protected Ui ui;
     protected boolean isFinished;
 
+    /**
+     * creates a new parser and initialized the state to false.
+     * @param tasks the task list that will be implemented
+     */
     public Parser(TaskList tasks) {
         this.tasks = tasks;
         ui = new Ui(tasks);
         isFinished = false;
     }
 
+    /**
+     * interprets the command from user.
+     * @param command a string array of length 2. Command[1] represents type and command[2] represents description.
+     * @throws DukeException possible exception when executing the commands
+     */
     public void parse(String[] command) throws DukeException {
         type = command[0];
         description = command[1];
@@ -83,7 +95,8 @@ public class Parser {
                     } else {
                         int n = Integer.parseInt(description.substring(1));
                         tasks.get(n - 1).markAsDone();
-                        ui.printPart("Nice! I've marked this task as done:\n" + "  " + tasks.get(n - 1).toString());
+                        ui.printPart("Nice! I've marked this task as done:\n" + "  "
+                                + tasks.get(n - 1).toString());
                     }
                     break;
 
