@@ -23,12 +23,16 @@ public class ListCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
+        String message = "";
+        message += "Here are the tasks in your list:\n";
         System.out.println("Here are the tasks in your list:");
         int index = 1;
         for (Task task : tasks.getList()) {
             System.out.println(index + ". " + task.toString());
+            message += index + ". " + task.toString() + "\n";
             index++;
         }
+        ui.setMessage(message);
     }
 
     /**

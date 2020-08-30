@@ -25,6 +25,7 @@ public class ExitCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
+        ui.setMessage("Bye. Hope to see you again soon!\n");
         System.out.println("Bye. Hope to see you again soon!");
         // saves tasks to filePath
         try {

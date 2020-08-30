@@ -24,11 +24,18 @@ public class ToDoCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
+
         Task task = new ToDo(input);
         tasks.add(task);
         System.out.println("Got it. I've added this task:");
         System.out.println(task);
         System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+
+        String message = "";
+        message += "Got it. I've added this task:\n";
+        message += task.toString() + "\n";
+        message += "Now you have " + tasks.size() + " tasks in the list.\n";
+        ui.setMessage(message);
     }
 
     /**

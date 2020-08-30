@@ -29,6 +29,7 @@ public class DeleteCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DeletionException {
+        String message = "";
         if (index >= tasks.size() || index < 0) {
             throw new DeletionException("Item does not exist in list!");
         }
@@ -39,6 +40,11 @@ public class DeleteCommand extends Command {
         System.out.println("Noted. I've removed this task:");
         System.out.println(task);
         System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+
+        message += "Noted. I've removed this task:\n";
+        message += task.toString() + "\n";
+        message += "Now you have " + tasks.size() + " tasks in the list.\n";
+        ui.setMessage(message);
     }
 
     /**

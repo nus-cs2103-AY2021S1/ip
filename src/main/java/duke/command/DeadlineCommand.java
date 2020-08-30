@@ -47,6 +47,8 @@ public class DeadlineCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DeadlineException {
 
+        String message = "";
+
         LocalDateTime dateTime = null;
         try {
             dateTime = LocalDateTime.of(year, month, day, hour, min);
@@ -60,6 +62,11 @@ public class DeadlineCommand extends Command {
         tasks.add(task);
         System.out.println(task);
         System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+
+        message += "Got it. I've added this task:\n";
+        message += task.toString() + "\n";
+        message += "Now you have " + tasks.size() + " tasks in the list.\n";
+        ui.setMessage(message);
 
     }
 

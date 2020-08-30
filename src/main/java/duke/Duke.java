@@ -28,6 +28,10 @@ public class Duke {
         this.ui = new Ui();
     }
 
+    public Ui getUi() {
+        return ui;
+    }
+
     /**
      * Runs Duke
      */
@@ -50,7 +54,19 @@ public class Duke {
     }
 
     public String getResponse(String input) {
-        return "Duke heard: " + input;
+        String response = "";
+        try {
+            Command c = Parser.parse(input);
+            c.execute(tasks, ui, storage);
+            response = ui.getMessage();
+            ui.clearMessage();
+        } catch (DukeException e) {
+            ui.showError(e.getMessage());
+            return e.getMessage();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return response;
     }
 
     public static void main(String[] args) {

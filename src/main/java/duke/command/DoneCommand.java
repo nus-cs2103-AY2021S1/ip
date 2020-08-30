@@ -28,12 +28,17 @@ public class DoneCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DoneException {
+        String message = "";
         if (listNumber > tasks.size() || listNumber <= 0) {
             throw new DoneException("Item number " + listNumber + " does not exist in list!");
         }
         tasks.get(listNumber - 1).completeTask();
         System.out.println("Nice! I've marked this task as done:");
         System.out.println(tasks.get(listNumber - 1).toString());
+
+        message += "Nice! I've marked this task as done:\n";
+        message += tasks.get(listNumber - 1).toString() + "\n";
+        ui.setMessage(message);
     }
 
     /**

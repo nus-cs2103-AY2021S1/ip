@@ -24,11 +24,13 @@ public class FindCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws FindException {
+        String message = "";
         String listOfTask = "";
         int index = 1;
         for (Task task : tasks.getList()) {
             if (task.toString().contains(input)) {
                 listOfTask += index + ". " + task.toString() + "\n";
+                message += listOfTask;
                 index++;
             }
         }
@@ -37,6 +39,9 @@ public class FindCommand extends Command {
         } else {
             System.out.println("Here are the matching tasks in your list:");
             System.out.println(listOfTask);
+
+            message = "Here are the matching tasks in your list:" + message;
+            ui.setMessage(message);
         }
     }
 
