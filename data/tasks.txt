@@ -1,7 +1,0 @@
-1.[D][✘] return book  (by: 2019-10-15)
-2.[T][✘] read book
-3.[T][✘] study
-4.[T][✘] d
-5.[T][✘] k
-6.[T][✘] dfsf
-
