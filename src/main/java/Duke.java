@@ -31,7 +31,7 @@ public class Duke {
     }
 
     public String getResponse(String input) {
-        return "Duke heard: " + input;
+        return Parser.parse(taskList, storage, input);
     }
 
     public static void main(String[] args) {

@@ -7,8 +7,8 @@ public class Ui {
     /**
      * Prints the exit line of the bot.
      */
-    public void exitLine() {
-        System.out.println(BORDER + "Bye. Hope to see you again soon!\n" + BORDER);
+    public String exitLine() {
+        return BORDER + "Bye. Hope to see you again soon!\n" + BORDER;
     }
 
     /**
