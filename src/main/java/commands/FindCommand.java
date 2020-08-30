@@ -23,6 +23,7 @@ public class FindCommand extends Command {
                 counter++;
             }
         }
-        ui.printFindTask(output.toString(), counter - 1);
+        // ui.printFindTask(output.toString(), counter - 1);
+        ui.setMessageFindTask(output.toString(), counter - 1);
     }
 }

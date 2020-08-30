@@ -8,6 +8,7 @@ import commands.ExitCommand;
 import commands.FindCommand;
 import commands.HelpCommand;
 import commands.ListCommand;
+import commands.UndoneCommand;
 
 
 /**
@@ -40,6 +41,8 @@ public class Parser {
             return new DeleteCommand(Integer.parseInt(input.substring(input.length() - 1)));
         } else if (input.startsWith("find ")) {
             return new FindCommand(input.substring(5));
+        } else if (input.startsWith("undone")) {
+            return new UndoneCommand(Integer.parseInt(input.substring(input.length() - 1)));
         } else {
             return new AddCommand(input);
         }

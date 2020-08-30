@@ -11,7 +11,7 @@ import tasks.TaskList;
  * Over-arching class containing the main information of the Duke bot.
  */
 
-class Duke {
+public class Duke {
     private TaskList tasks;
     private boolean quit;
     private Ui ui;
@@ -21,7 +21,7 @@ class Duke {
     /**
      * Attempts to read an existing stored data.txt file, and creates a new data.txt file if one is not found
      */
-    private Duke() {
+    public Duke() {
         this.tasks = new TaskList();
         this.quit = false;
         this.ui = new Ui();
@@ -35,13 +35,25 @@ class Duke {
         }
     }
 
+    public TaskList getTaskList() {
+        return tasks;
+    }
+    public Storage getStorage() {
+        return storage;
+    }
+    public Ui getUi() {
+        return ui;
+    }
+    public Parser getParser() {
+        return parser;
+    }
+
     /**
      * Allows the system to begin taking in user input and edits the stored data accordingly. Runs until an "exit"
      * command is received.
      */
 
-    private void run() {
-        ui.showWelcome();
+    public void run() {
         while (!quit) {
             String input = ui.takeInput();
             try {
@@ -54,6 +66,14 @@ class Duke {
         }
     }
 
+    public String getResponse() {
+        return ui.getMessage();
+    }
+
+    /**
+     * Driver method.
+     * @param args args.
+     */
     public static void main(String[] args) {
         Duke duke = new Duke();
         duke.run();

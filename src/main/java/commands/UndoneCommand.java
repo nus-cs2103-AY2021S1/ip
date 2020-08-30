@@ -7,18 +7,18 @@ import exceptions.TaskNotFoundException;
 import tasks.TaskList;
 
 /**
- * Represents an instruction from the user to mark a task as done
+ * Represents an instruction from the user to mark a task as not done
  */
 
-public class DoneCommand extends Command {
+public class UndoneCommand extends Command {
     private int index;
 
-    public DoneCommand(int index) {
+    public UndoneCommand(int index) {
         this.index = index;
     }
 
     /**
-     * Executes the command to mark the task as done
+     * Executes the command to mark the task as not done
      * @param tasks The current TaskList
      * @param ui The Ui object in use
      * @param storage The Storage object in use
@@ -28,21 +28,20 @@ public class DoneCommand extends Command {
     @Override
     public void exec(TaskList tasks, Ui ui, Storage storage) throws TaskNotFoundException,
             InvalidTaskNumberException {
-        // ui.printDoneTask();
-        ui.setMessageDoneTask();
-        doneTask(index, tasks);
+        ui.setMessageUndoneTask();
+        undoneTask(index, tasks);
     }
 
     /**
-     * Marks an input task as done
-     * @param idx Index of the task which the user wishes to mark as done
+     * Marks an input task as not done
+     * @param idx Index of the task which the user wishes to mark as not done
      * @throws TaskNotFoundException If input task number is not found in the list
      * @throws InvalidTaskNumberException If user enters a non-integer input
      */
 
-    public void doneTask(int idx, TaskList tasks) throws TaskNotFoundException, InvalidTaskNumberException {
+    public void undoneTask(int idx, TaskList tasks) throws TaskNotFoundException, InvalidTaskNumberException {
         try {
-            tasks.getTasks().get(idx - 1).setDone(true);
+            tasks.getTasks().get(idx - 1).setDone(false);
         } catch (IndexOutOfBoundsException e) {
             throw new TaskNotFoundException("Sorry, I couldn't find that task.");
         } catch (NumberFormatException ex) {

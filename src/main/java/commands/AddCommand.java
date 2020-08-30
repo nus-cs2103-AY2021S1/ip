@@ -43,16 +43,19 @@ public class AddCommand extends Command {
         String[] info = extractInfo(text);
         if (info[0].equals("todo")) {
             tasks.addItem(new Todo(info[1], false));
-            ui.printAddTask(info[1]);
-            ui.printListSize(tasks.size());
+            // ui.printAddTask(info[1]);
+            // ui.printListSize(tasks.size());
+            ui.setMessageAddTask(info[1], tasks.size());
         } else if (info[0].equals("deadline")) {
             tasks.addItem(new Deadline(info[1], stringToTime(info[2]), false));
-            ui.printAddTask(info[1]);
-            ui.printListSize(tasks.size());
+            // ui.printAddTask(info[1]);
+            // ui.printListSize(tasks.size());
+            ui.setMessageAddTask(info[1], tasks.size());
         } else {
             tasks.addItem(new Event(info[1], stringToTime(info[2]), false));
-            ui.printAddTask(info[1]);
-            ui.printListSize(tasks.size());
+            // ui.printAddTask(info[1]);
+            // ui.printListSize(tasks.size());
+            ui.setMessageAddTask(info[1], tasks.size());
         }
     }
 
