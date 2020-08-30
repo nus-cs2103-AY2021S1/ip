@@ -19,15 +19,6 @@ public class Messages {
     public static final String ADD_MSG = "Yes boss, I have added this task to your list:\n";
     public static final String DONE_MSG = "I have marked the task as done, good job boss.\n";
     public static final String DELETE_MSG = "I have deleted the task.\n";
-
-    public static String findMessage(String input) {
-        return "I found these tasks containing \"" + input + "\" in your list.\n";
-    }
-
-    public static String noTaskFoundMessage(String input) {
-        return "I can't find any task containing \"" + input + "\" in your list.\n";
-    }
-
     public static final String INVALID_COMMAND =
             "Sorry boss, I am not smart enough to understand that. Please give me a valid instruction.\n";
     public static final String EMPTY_TASK =
@@ -39,10 +30,6 @@ public class Messages {
                     + "Or, \"event birthday /at 2020/12/09 0000\".\n";
     public static final String INVALID_NUMBER =
             "Sorry but there is no valid task number. Please enter a valid task number.\n";
-    public static String listIndexOutOfBoundsMsgGenerator(int totalNoOfTasks, int taskNo, String action) {
-        return "Erm, you are asking me to " + action + " task " + taskNo + " but there is/are only "
-                + totalNoOfTasks + " tasks. Please enter the correct number instead.";
-    }
     public static final String EMPTY_FIND =
             "I don't know what you want me to find boss. :( Please enter a description for me to search.\n";
     public static final String LOADING_ERROR =
@@ -51,4 +38,24 @@ public class Messages {
             "Update to saved file has failed, file reader might be corrupted. :(\n";
     public static final String INVALID_PATHNAME =
             "Couldn't recognise the file name. Please restart Bob with a different file path name.\n";
+
+    public static String genFindMessage(String input) {
+        return "I found these tasks containing \"" + input + "\" in your list.\n";
+    }
+
+    public static String genNoTaskFoundMessage(String input) {
+        return "I can't find any task containing \"" + input + "\" in your list.\n";
+    }
+
+    /**
+     * Generates a ListIndexOutOfBounds error message.
+     * @param totalNoOfTasks Total number of tasks.
+     * @param taskNo Task number.
+     * @param action The command that was supposed to be executed.
+     * @return String message.
+     */
+    public static String genListIndexOutOfBoundsMsgGenerator(int totalNoOfTasks, int taskNo, String action) {
+        return "Erm, you are asking me to " + action + " task " + taskNo + " but there is/are only "
+                + totalNoOfTasks + " tasks. Please enter the correct number instead.";
+    }
 }

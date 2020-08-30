@@ -1,16 +1,16 @@
 package bob.storage;
 
-import bob.data.task.Task;
-import bob.data.task.Deadline;
-import bob.data.task.Event;
-import bob.exceptions.BobInvalidDateAndTimeException;
-
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import bob.data.task.Deadline;
+import bob.data.task.Event;
+import bob.data.task.Task;
+import bob.exceptions.BobInvalidDateAndTimeException;
 
 /**
  * Handles loading and saving of tasks.
@@ -30,7 +30,7 @@ public class Storage {
 
         // If file does not exist, creates file in directory
         if (!tempFile.exists()) {
-                tempFile.createNewFile();
+            tempFile.createNewFile();
         }
         this.file = tempFile;
         this.filePath = filePath;
@@ -83,7 +83,6 @@ public class Storage {
      * Updates the file data based on the list.
      *
      * @param list Bob's task list.
-     * @return A new storage with the updated file.
      * @throws IOException If error occurs while writing the file.
      */
     public void updateFile(ArrayList<Task> list) throws IOException {

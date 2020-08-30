@@ -1,6 +1,14 @@
 package bob.parser;
 
-import bob.commands.*;
+import bob.commands.Command;
+import bob.commands.DeadlineCommand;
+import bob.commands.DeleteCommand;
+import bob.commands.DoneCommand;
+import bob.commands.EventCommand;
+import bob.commands.ExitCommand;
+import bob.commands.FindCommand;
+import bob.commands.ListCommand;
+import bob.commands.TodoCommand;
 import bob.exceptions.BobEmptyFindException;
 import bob.exceptions.BobEmptyTaskException;
 import bob.exceptions.BobInvalidCommandException;

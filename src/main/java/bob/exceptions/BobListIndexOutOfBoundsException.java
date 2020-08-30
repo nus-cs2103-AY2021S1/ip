@@ -18,7 +18,7 @@ public class BobListIndexOutOfBoundsException extends BobException {
      * @param action Intended action based on command.
      */
     public BobListIndexOutOfBoundsException (int totalNoOfTasks, int taskNo, String action) {
-        super(Messages.listIndexOutOfBoundsMsgGenerator(totalNoOfTasks, taskNo, action));
+        super(Messages.genListIndexOutOfBoundsMsgGenerator(totalNoOfTasks, taskNo, action));
         this.totalNoOfTasks = totalNoOfTasks;
         this.taskNo = taskNo;
         this.action = action;
@@ -26,7 +26,7 @@ public class BobListIndexOutOfBoundsException extends BobException {
 
     @Override
     public String toString() {
-        String errMsg = Messages.listIndexOutOfBoundsMsgGenerator(totalNoOfTasks, taskNo, action);
+        String errMsg = Messages.genListIndexOutOfBoundsMsgGenerator(totalNoOfTasks, taskNo, action);
         return errMsg;
     }
 }

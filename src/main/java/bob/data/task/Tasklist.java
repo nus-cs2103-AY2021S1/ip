@@ -1,12 +1,12 @@
 package bob.data.task;
 
-import bob.exceptions.BobInvalidDateAndTimeException;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 
+import bob.exceptions.BobInvalidDateAndTimeException;
 import bob.storage.Storage;
 
-import java.util.ArrayList;
 
 /**
  * Represents the list containing tasks in Bob.
@@ -112,6 +112,11 @@ public class Tasklist {
         return output.toString();
     }
 
+    /**
+     * Finds tasks containing input.
+     * @param input User input.
+     * @return String of tasks containing the input.
+     */
     public String findTasks(String input) {
         StringBuilder tasksFound = new StringBuilder();
         for (Task task: list) {

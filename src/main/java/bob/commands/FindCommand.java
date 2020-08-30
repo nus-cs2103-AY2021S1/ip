@@ -9,7 +9,7 @@ import bob.ui.Ui;
  * Finds all tasks containing specific keyword.
  */
 public class FindCommand extends Command {
-    String input;
+    private String input;
 
     /**
      * Creates a find command.
@@ -20,7 +20,7 @@ public class FindCommand extends Command {
     public FindCommand(String input) throws BobEmptyFindException {
 
         //Removes all whitespaces and checks if input is empty
-        if (input.replaceAll("\\s+","").length() == 0) {
+        if (input.replaceAll("\\s+", "").length() == 0) {
             throw new BobEmptyFindException();
         }
 
