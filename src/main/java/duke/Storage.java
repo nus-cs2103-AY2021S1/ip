@@ -32,8 +32,8 @@ public class Storage {
 
     public void save() {
         if (tasks.getSize() > 0) {
-                Writer.overwrite(filepath, tasks.getTask(0).toPrint());
-                for (int i = 1; i < tasks.getSize(); i++) {
+            Writer.overwrite(filepath, tasks.getTask(0).toPrint());
+            for (int i = 1; i < tasks.getSize(); i++) {
                 Writer.writeOn(filepath, "\n" + tasks.getTask(i).toPrint());
             }
         }
@@ -48,19 +48,21 @@ public class Storage {
                 String[] dataSplit = data.split("\\|");
                 switch (dataSplit[0]) {
                 case TODO:
-                    tasks.addTask(new ToDos(dataSplit[1], dataSplit[2], dataSplit[3], dataSplit[4]));
+                    tasks.addTask(new ToDos(dataSplit));
                     break;
                 case DEADLINE:
-                    tasks.addTask(new Deadline(dataSplit[1], dataSplit[2], dataSplit[3], dataSplit[4]));
+                    tasks.addTask(new Deadline(dataSplit));
                     break;
                 case EVENT:
-                    tasks.addTask(new Event(dataSplit[1], dataSplit[2], dataSplit[3], dataSplit[4]));
+                    tasks.addTask(new Event(dataSplit));
                     break;
                 }
             }
             myReader.close();
         } catch (FileNotFoundException e) {
             System.out.println("No current data exists");
+        } catch (DukeException e) {
+            System.out.println(e);
         }
         return tasks;
     }

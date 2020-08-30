@@ -1,5 +1,7 @@
 package duke.task;
 
+import duke.exception.DukeException;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -29,14 +31,17 @@ public class Event extends Task {
         tag = "E";
     }
 
-    public Event(String done, String description, String date, String time) {
-        super(description);
+    public Event(String ... taskDescriptions) throws DukeException {
+        super(taskDescriptions[2]);
         tag = "E";
-        if (!date.equals("null")) {
-            this.date = LocalDate.parse(date);
-            this.at = time;
+        if (taskDescriptions.length == 3) {
+        } else if (taskDescriptions.length == 5) {
+            this.date = LocalDate.parse(taskDescriptions[3]);
+            this.at = taskDescriptions[4];
+        } else {
+            throw new DukeException("Task loading error...");
         }
-        if (done.equals("1")) {
+        if (taskDescriptions[1].equals("1")) {
             this.markAsDone();
         }
     }
@@ -47,7 +52,9 @@ public class Event extends Task {
     }
 
     public String toPrint(){
-        return super.toPrint() + "|" + date + "|" + at;
+        return date == null
+                ? super.toPrint()
+                : super.toPrint() + "|" + date + "|" + at;
     }
 
     @Override
