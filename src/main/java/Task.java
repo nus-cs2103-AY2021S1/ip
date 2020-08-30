@@ -11,6 +11,14 @@ public class Task {
         this.task_completion = true;
     }
 
+    public boolean get_task_completion() {
+        return task_completion;
+    }
+
+    public String getTask_info() {
+        return task_info;
+    }
+
     @Override
     public String toString() {
         return String.format("[%s] %s", task_completion ?  "Done" : "!!!!", task_info);

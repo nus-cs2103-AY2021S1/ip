@@ -1,5 +1,13 @@
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.time.LocalDate;
+
 
 public class Duke {
     public static void main(String[] args) {
@@ -17,13 +25,23 @@ public class Duke {
         System.out.println(hello);
 
         Scanner sc = new Scanner(System.in);
-        ArrayList<Task> task_list = new ArrayList<Task>(); //List to keep track of tasks
+        ArrayList<Task> task_list = new ArrayList<Task>();
+
+        try {
+            task_list = loadFile();
+        }
+
+        catch (IOException ioException) {
+            System.out.println(ioException.getMessage());
+        }
+
         Boolean bye = false;
 
         while (sc.hasNextLine() && !bye) {
             String command = sc.nextLine();
                 try {
                     Duke.TaskIdentifier(command, task_list);
+                    createFile(task_list);
                 }
 
                 catch (DukeInvalidCommandException e) {
@@ -32,6 +50,10 @@ public class Duke {
 
                 catch (DukeIncompleteCommandException e) {
                     System.out.println(e.toString());
+                }
+
+                catch (IOException ioException) {
+                    System.out.println(ioException.getMessage());
                 }
             }
         }
@@ -52,7 +74,7 @@ public class Duke {
             try {
 
                 if (!task_type.equals("list") && !task_type.equals("bye")) {
-                    task_details = command.split(task_type + " ")[1]; //Includes task description and date/time if applicable
+                    task_details = command.split(task_type + " ")[1]; //Includes task task_info and date/time if applicable
                     task_info = task_details.split(" /")[0];
                 }
 
@@ -121,7 +143,7 @@ public class Duke {
             catch (ArrayIndexOutOfBoundsException e) {
                 throw new DukeIncompleteCommandException(String.format(
                         "    ____________________________________________________________\n" +
-                        "     ☹ OOPS!!! The description of a %s cannot be empty.\n" +
+                        "     ☹ OOPS!!! The task_info of a %s cannot be empty.\n" +
                         "    ____________________________________________________________\n", task_type));
             }
     }
@@ -135,6 +157,70 @@ public class Duke {
                         "     Now you have %d tasks in the list.\n" +
                         "    ____________________________________________________________\n", t.toString(), task_list.size()));
 
+    }
+
+    public static void createFile(ArrayList<Task> task_list) throws IOException {
+        File file = getFile();
+        FileWriter writer = new FileWriter(file);
+        for (Task task : task_list) {
+            if (task instanceof ToDo) {
+                writer.write("T|" + task.task_completion + "|" + task.task_info + "\n");
+            } else if (task instanceof Deadline) {
+                writer.write("D|" + task.task_completion + "|" + task.task_info + "|by " + ((Deadline) task).date + "\n");
+            } else if (task instanceof Event) {
+                writer.write("E|" + task.task_completion + "|" + task.task_info + "|at " + ((Event) task).time + "\n");
+            }
+        }
+        writer.close();
+    }
+
+
+
+    public static File getFile() throws IOException {
+        Path path = Paths.get(System.getProperty("user.dir"), "data", "duke.txt");
+        if (!Files.exists(path)) {
+            Files.createDirectories(path.getParent());
+            Files.createFile(path);
+        }
+        return new File(path.toString());
+    }
+
+    public static ArrayList<Task> loadFile() throws IOException {
+        ArrayList<Task> task_list = new ArrayList<Task>();
+        File file = getFile();
+        Scanner sc = new Scanner(file);
+        while (sc.hasNextLine()) {
+            String[] taskContent = sc.nextLine().split("\\|");
+            String taskType = taskContent[0];
+            String status = taskContent[1];
+            String task_info = taskContent[2];
+            switch (taskType) {
+                case "T":
+                    Task toDo = new ToDo(task_info);
+                    if (status.equals("true")) {
+                        toDo.task_completion = true;
+                    }
+                    task_list.add(toDo);
+                    break;
+                case "D":
+                    Task deadLine = new Deadline(task_info, taskContent[3]);
+                    if (status.equals("true")) {
+                        deadLine.task_completion = true;
+                    }
+                    task_list.add(deadLine);
+                    break;
+                case "E":
+                    Task event = new Event(task_info, taskContent[3]);
+                    if (status.equals("true")) {
+                        event.task_completion = true;
+                    }
+                    task_list.add(event);
+                    break;
+                default:
+                    break;
+            }
+        }
+        return task_list;
     }
 }
 

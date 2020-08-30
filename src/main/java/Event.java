@@ -6,6 +6,10 @@ public class Event extends Task {
         this.time = time;
     }
 
+    public String getTime() {
+        return time;
+    }
+
     @Override
     public String toString() {
         return String.format("[E]" + super.toString() + " (%s)", time);
