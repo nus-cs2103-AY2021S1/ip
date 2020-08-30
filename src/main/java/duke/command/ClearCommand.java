@@ -1,10 +1,9 @@
 package duke.command;
 
-import duke.Storage;
-import duke.TaskList;
-import duke.Ui;
-
 import duke.exception.DukeLoadingErrorException;
+import duke.messages.Output;
+import duke.storage.Storage;
+import duke.task.TaskList;
 
 /**
  * Represents a command to clear the task list.
@@ -19,10 +18,10 @@ public class ClearCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(TaskList tasks, Ui ui, Storage storage) throws DukeLoadingErrorException {
+    public CommandResult execute(TaskList tasks, Output output, Storage storage) throws DukeLoadingErrorException {
         tasks.clearTasks();
         storage.save(tasks.getTasks());
-        return new CommandResult(ui.printClearTasksWindow());
+        return new CommandResult(output.printClearTasksWindow());
     }
 
 }

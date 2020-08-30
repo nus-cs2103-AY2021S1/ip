@@ -1,8 +1,8 @@
 package duke.command;
 
-import duke.Storage;
-import duke.TaskList;
-import duke.Ui;
+import duke.messages.Output;
+import duke.storage.Storage;
+import duke.task.TaskList;
 
 import duke.exception.DukeUnknownInputException;
 
@@ -19,7 +19,7 @@ public class UnknownCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(TaskList tasks, Ui ui, Storage storage) throws DukeUnknownInputException {
+    public CommandResult execute(TaskList tasks, Output output, Storage storage) throws DukeUnknownInputException {
         throw new DukeUnknownInputException();
     }
 

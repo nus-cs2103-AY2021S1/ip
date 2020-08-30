@@ -1,10 +1,9 @@
 package duke.ui;
 
 import duke.Duke;
-import duke.Ui;
-
 import duke.command.CommandResult;
 import duke.exception.DukeException;
+import duke.messages.Output;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -33,20 +32,19 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/Kenny.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
+    /**
+     * Starts the chat bot app.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(new Output().printWelcome(), dukeImage)
+        );
     }
 
     public void setDuke(Duke d) {
         duke = d;
-    }
-
-    @FXML
-    private void showWelcome() {
-        dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog(new Ui().printWelcome(), dukeImage)
-        );
     }
 
     /**

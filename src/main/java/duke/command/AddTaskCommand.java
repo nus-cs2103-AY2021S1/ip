@@ -1,14 +1,12 @@
 package duke.command;
 
-import duke.Storage;
-import duke.TaskList;
-import duke.Ui;
-
 import duke.exception.DukeInvalidTaskDescriptionException;
 import duke.exception.DukeInvalidTaskTimeException;
 import duke.exception.DukeLoadingErrorException;
-
+import duke.messages.Output;
+import duke.storage.Storage;
 import duke.task.Task;
+import duke.task.TaskList;
 
 /**
  * Represents a command to add a task.
@@ -26,13 +24,13 @@ public class AddTaskCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(TaskList tasks, Ui ui, Storage storage)
+    public CommandResult execute(TaskList tasks, Output output, Storage storage)
             throws DukeInvalidTaskTimeException,
             DukeInvalidTaskDescriptionException,
             DukeLoadingErrorException {
         Task toAdd = tasks.addTask(tag, input);
         storage.save(tasks.getTasks());
-        return new CommandResult(ui.printAddTaskChatWindow(toAdd, tasks.getTasks().size()));
+        return new CommandResult(output.printAddTaskChatWindow(toAdd, tasks.getTasks().size()));
 
     }
 

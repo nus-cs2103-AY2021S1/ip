@@ -1,10 +1,9 @@
 package duke.command;
 
-import duke.Storage;
-import duke.TaskList;
-import duke.Ui;
-
 import duke.exception.DukeInvalidKeywordException;
+import duke.messages.Output;
+import duke.storage.Storage;
+import duke.task.TaskList;
 
 /**
  * Represents a command to find tasks that match a given keyword.
@@ -21,8 +20,8 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(TaskList tasks, Ui ui, Storage storage) throws DukeInvalidKeywordException {
-        return new CommandResult(ui.printFindTaskChatWindow(tasks.findTasks(input)));
+    public CommandResult execute(TaskList tasks, Output output, Storage storage) throws DukeInvalidKeywordException {
+        return new CommandResult(output.printFindTaskChatWindow(tasks.findTasks(input)));
     }
 
 }

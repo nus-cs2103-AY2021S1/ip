@@ -1,11 +1,10 @@
 package duke.command;
 
-import duke.Storage;
-import duke.TaskList;
-import duke.Ui;
-
 import duke.exception.DukeInvalidListNumberInputException;
 import duke.exception.DukeLoadingErrorException;
+import duke.messages.Output;
+import duke.storage.Storage;
+import duke.task.TaskList;
 
 /**
  * Represents a command to complete a task.
@@ -22,9 +21,9 @@ public class DoneCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(TaskList tasks, Ui ui, Storage storage)
+    public CommandResult execute(TaskList tasks, Output output, Storage storage)
             throws DukeInvalidListNumberInputException, DukeLoadingErrorException {
-        String response = ui.printDoneTaskChatWindow(tasks.completeTask(input));
+        String response = output.printDoneTaskChatWindow(tasks.completeTask(input));
         storage.save(tasks.getTasks());
         return new CommandResult(response);
     }

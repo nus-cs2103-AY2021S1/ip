@@ -2,6 +2,10 @@ package duke;
 
 import duke.command.CommandResult;
 import duke.exception.DukeException;
+import duke.messages.Output;
+import duke.parsers.Parser;
+import duke.storage.Storage;
+import duke.task.TaskList;
 
 /**
  * Represents the chat bot itself. Main class.
@@ -10,7 +14,7 @@ public class Duke {
 
     private static final String DEFAULT_SAVE_PATH = "data/tasks.txt";
 
-    private Ui ui;
+    private Output output;
     private Storage storage;
     private TaskList tasks;
 
@@ -20,12 +24,12 @@ public class Duke {
      * @param filePath A string representing the destination file path.
      */
     public Duke(String filePath) {
-        ui = new Ui();
+        output = new Output();
         try {
             this.storage = new Storage(filePath);
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
-            ui.printGeneralChatWindow(e.toString());
+            output.printGeneralChatWindow(e.toString());
             tasks = new TaskList();
         }
     }
@@ -45,7 +49,7 @@ public class Duke {
      * @throws DukeException If the input is invalid.
      */
     public CommandResult execute(String input) throws DukeException {
-        return Parser.parse(input).execute(tasks, ui, storage);
+        return Parser.parse(input).execute(tasks, output, storage);
     }
 
 }

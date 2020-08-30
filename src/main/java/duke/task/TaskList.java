@@ -1,4 +1,4 @@
-package duke;
+package duke.task;
 
 import java.time.format.DateTimeParseException;
 
@@ -11,10 +11,6 @@ import duke.exception.DukeInvalidKeywordException;
 import duke.exception.DukeInvalidListNumberInputException;
 import duke.exception.DukeInvalidTaskDescriptionException;
 import duke.exception.DukeInvalidTaskTimeException;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.ToDo;
 
 /**
  * Contains the task list.

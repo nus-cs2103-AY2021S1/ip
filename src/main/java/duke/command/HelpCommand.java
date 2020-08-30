@@ -1,8 +1,8 @@
 package duke.command;
 
-import duke.Storage;
-import duke.TaskList;
-import duke.Ui;
+import duke.messages.Output;
+import duke.storage.Storage;
+import duke.task.TaskList;
 
 /**
  * Represents a command to print a help window to aid the user.
@@ -14,8 +14,8 @@ public class HelpCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(TaskList tasks, Ui ui, Storage storage) {
-        return new CommandResult(ui.printHelpWindow(obtainCommands()));
+    public CommandResult execute(TaskList tasks, Output output, Storage storage) {
+        return new CommandResult(output.printHelpWindow(obtainCommands()));
     }
 
     private String[] obtainCommands() {

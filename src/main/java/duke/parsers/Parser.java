@@ -1,4 +1,4 @@
-package duke;
+package duke.parsers;
 
 import duke.command.AddTaskCommand;
 import duke.command.ByeCommand;

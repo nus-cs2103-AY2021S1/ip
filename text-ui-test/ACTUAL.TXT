@@ -1,0 +1,122 @@
+     ___   ____    __    ____  _______     _______.  ______   .___  ___.  _______          ______
+    /   \  \   \  /  \  /   / |   ____|   /       | /  __  \  |   \/   | |   ____|        /  __  \
+   /  ^  \  \   \/    \/   /  |  |__     |   (----`|  |  |  | |  \  /  | |  |__    ______|  |  |  |
+  /  /_\  \  \            /   |   __|     \   \    |  |  |  | |  |\/|  | |   __|  |______|  |  |  |
+ /  _____  \  \    /\    /    |  |____.----)   |   |  `--'  | |  |  |  | |  |____        |  `--'  |
+/__/     \__\  \__/  \__/     |_______|_______/     \______/  |__|  |__| |_______|        \______/
+
+    _________________________________________________________
+    Greetings! I'm Awesome-O.
+    What can I do for you?
+    
+    ...PSST! Type "help" for more information!
+    _________________________________________________________
+    _________________________________________________________
+    - Help: Provides a list of possible commands
+        "help"
+    - List: Shows the list of tasks
+        "list"
+    - Done: Marks a task as complete
+        "done <task number>"
+    - Delete: Deletes a task from the list
+        "delete <task number>"
+    - Clear: Deletes ALL tasks from the list
+        "clear"
+    - Todo: Creates a todo task with specific description
+        "todo <description>"
+    - Event: Creates an event task with specific description and date/time
+        "event <description> /at <time>"
+        Time formatting: dd-MM-yyyy HH:mm
+    - Deadline: Creates a deadline task with specific description and date/time
+        "deadline <description> /at <time>"
+        Time formatting: dd-MM-yyyy HH:mm
+    - Find: Searches for task(s) which match the given keyword(s)
+        "find <keyword(s)>"
+    - Bye: Ends the conversation with Awesome-O
+        "bye"
+    _________________________________________________________
+    _________________________________________________________
+    All tasks have been cleared!
+    _________________________________________________________
+    _________________________________________________________
+    ERROR: Unknown input! Try again.
+    _________________________________________________________
+    _________________________________________________________
+    ERROR: The description of a task cannot be empty!
+    _________________________________________________________
+    _________________________________________________________
+    Alright. I've added this task:
+        [T][✘] borrow book
+    Now you have 1 tasks in the list.
+    _________________________________________________________
+    _________________________________________________________
+    ERROR: Usage: <deadline> <description> /by <time>
+    Time formatting: dd-MM-yyyy HH:mm
+    _________________________________________________________
+    _________________________________________________________
+    Alright. I've added this task:
+        [D][✘] return book (by: 23 Feb 2020, 12:00 AM)
+    Now you have 2 tasks in the list.
+    _________________________________________________________
+    _________________________________________________________
+    ERROR: Please specify a correct date/time for this task!
+    Time formatting: dd-MM-yyyy HH:mm
+    _________________________________________________________
+    _________________________________________________________
+    ERROR: Usage: <event> <description> /at <time>
+    Time formatting: dd-MM-yyyy HH:mm
+    _________________________________________________________
+    _________________________________________________________
+    Alright. I've added this task:
+        [E][✘] project meeting (at: 1 Jan 2020, 12:30 PM)
+    Now you have 3 tasks in the list.
+    _________________________________________________________
+    _________________________________________________________
+    ERROR: Please specify a correct date/time for this task!
+    Time formatting: dd-MM-yyyy HH:mm
+    _________________________________________________________
+    _________________________________________________________
+    Great! I've marked this task as done:
+        [D][✓] return book (by: 23 Feb 2020, 12:00 AM)
+    _________________________________________________________
+    _________________________________________________________
+    Here are the tasks in your list:
+    1. [T][✘] borrow book
+    2. [D][✓] return book (by: 23 Feb 2020, 12:00 AM)
+    3. [E][✘] project meeting (at: 1 Jan 2020, 12:30 PM)
+    _________________________________________________________
+    _________________________________________________________
+    Okay. I've removed this task:
+        [D][✓] return book (by: 23 Feb 2020, 12:00 AM)
+    Now you have 2 tasks in the list.
+    _________________________________________________________
+    _________________________________________________________
+    Here are the tasks in your list:
+    1. [T][✘] borrow book
+    2. [E][✘] project meeting (at: 1 Jan 2020, 12:30 PM)
+    _________________________________________________________
+    _________________________________________________________
+    ERROR: Invalid list number input!
+    _________________________________________________________
+    _________________________________________________________
+    Here are the tasks that match the keyword:
+    1. [T][✘] borrow book
+    _________________________________________________________
+    _________________________________________________________
+    Here are the tasks that match the keyword:
+    No matching tasks!
+    _________________________________________________________
+    _________________________________________________________
+    ERROR: The keyword cannot be empty!
+    _________________________________________________________
+    _________________________________________________________
+    Thank you for talking to Awesome-O.
+    Have a nice day. Goodbye!
+    _________________________________________________________
+     ___   ____    __    ____  _______     _______.  ______   .___  ___.  _______          ______
+    /   \  \   \  /  \  /   / |   ____|   /       | /  __  \  |   \/   | |   ____|        /  __  \
+   /  ^  \  \   \/    \/   /  |  |__     |   (----`|  |  |  | |  \  /  | |  |__    ______|  |  |  |
+  /  /_\  \  \            /   |   __|     \   \    |  |  |  | |  |\/|  | |   __|  |______|  |  |  |
+ /  _____  \  \    /\    /    |  |____.----)   |   |  `--'  | |  |  |  | |  |____        |  `--'  |
+/__/     \__\  \__/  \__/     |_______|_______/     \______/  |__|  |__| |_______|        \______/
+

@@ -1,7 +1,6 @@
-package duke;
+package duke.messages;
 
 import java.util.List;
-import java.util.Scanner;
 
 import duke.task.Task;
 
@@ -9,7 +8,7 @@ import duke.task.Task;
  * Deals with interactions with the user.
  * Also prints the relevant responses and messages.
  */
-public class Ui {
+public class Output {
 
     private static final String logo = "     ___   ____    __    ____  _______     _______."
             + "  ______   .___  ___.  _______          ______\n"
