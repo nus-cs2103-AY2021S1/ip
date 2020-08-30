@@ -1,3 +1,9 @@
+package duke;
+
+import duke.commands.Command;
+import duke.commands.CommandHandler;
+import duke.tasks.TaskManager;
+
 import java.util.Scanner;
 
 /**
@@ -48,8 +54,8 @@ public class Duke {
     //     String line = "------------------------";
 
     //     System.out.println(line);
-    //     TaskManager tm;
-    //     tm = new TaskManager();
+    //     duke.tasks.TaskManager tm;
+    //     tm = new duke.tasks.TaskManager();
     //     Scanner sc = new Scanner(System.in);
         
     //     while(true) {
@@ -62,14 +68,14 @@ public class Duke {
     //         }
     //         try {
     //             handleCmd(cmd, sc, tm);
-    //         } catch (DukeException e) {
+    //         } catch (duke.DukeException e) {
     //             System.out.println(e);
     //         }
     //         System.out.println(line);
     //     }
     // }
 
-    // private static void handleCmd(String cmd, Scanner sc, TaskManager tm) throws DukeException {
+    // private static void handleCmd(String cmd, Scanner sc, duke.tasks.TaskManager tm) throws duke.DukeException {
     //     switch(cmd) {
     //         case "list":
     //             tm.listTasks();
@@ -80,33 +86,33 @@ public class Duke {
     //         case "todo":
     //             try {
     //                 todo(sc, tm);
-    //             } catch (DukeException e) {
+    //             } catch (duke.DukeException e) {
     //                 throw e;
     //             }
     //             break;
     //         case "deadline":
     //             try {
     //                 deadline(sc, tm);
-    //             } catch (DukeException e) {
+    //             } catch (duke.DukeException e) {
     //                 throw e;
     //             }
     //             break;
     //         case "event":
     //             try {
     //                 event(sc, tm);
-    //             } catch (DukeException e) {
+    //             } catch (duke.DukeException e) {
     //                 throw e;
     //             }
     //             break;
     //         case "delete":
     //             try {
     //                 delete(sc, tm);
-    //             } catch (DukeException e) {
+    //             } catch (duke.DukeException e) {
     //                 throw e;
     //             }
     //             break;
     //         default:
-    //             throw new DukeException("That was an invalid command");
+    //             throw new duke.DukeException("That was an invalid command");
     //     }
     // }
 
@@ -114,77 +120,77 @@ public class Duke {
     //      System.out.println("Bye. Hope to see you again soon!");       
     // }
 
-    // private static void complete(Scanner sc, TaskManager tm) throws DukeException {
+    // private static void complete(Scanner sc, duke.tasks.TaskManager tm) throws duke.DukeException {
     //     System.out.println("Which task do you wish to mark complete? ");
     //     int taskNum = Integer.parseInt(sc.nextLine());
     //     try {
     //         tm.setCompleted(taskNum);
     //     } catch (IndexOutOfBoundsException e) {
-    //         throw new DukeException("You did not provide a valid task number!");
+    //         throw new duke.DukeException("You did not provide a valid task number!");
     //     }
     // }
 
-    // private static void todo(Scanner sc, TaskManager tm) throws DukeException {
+    // private static void todo(Scanner sc, duke.tasks.TaskManager tm) throws duke.DukeException {
     //     System.out.println("what is the name of the todo: ");
     //     String todoName = sc.nextLine();
     //     if (todoName.isEmpty()) {
-    //         throw new DukeException("You must provide a name for the todo task!");
+    //         throw new duke.DukeException("You must provide a name for the todo task!");
     //     }
-    //     tm.add(new Todo(todoName));
+    //     tm.add(new duke.tasks.Todo(todoName));
     //     System.out.println("*added: " + todoName);
     // }
 
-    // private static void deadline(Scanner sc, TaskManager tm) throws DukeException {
+    // private static void deadline(Scanner sc, duke.tasks.TaskManager tm) throws duke.DukeException {
     //     System.out.println("what is the name of the task: ");
     //     String deadlineName = sc.nextLine();
     //     if (deadlineName.isEmpty()) {
-    //         throw new DukeException("You must provide a name for the deadline task!");
+    //         throw new duke.DukeException("You must provide a name for the deadline task!");
     //     }
     //     System.out.println("when is the due date (Day Month Year): ");
     //     String dueDate = sc.nextLine();
     //     if (dueDate.isEmpty()) {
-    //         throw new DukeException("You must provide a due date for the deadline task!");
+    //         throw new duke.DukeException("You must provide a due date for the deadline task!");
     //     }
     //     try {
-    //         tm.add(new Deadline(deadlineName, dueDate));
+    //         tm.add(new duke.tasks.Deadline(deadlineName, dueDate));
     //         System.out.println("*added: " + deadlineName);
-    //     } catch (DukeException e) {
+    //     } catch (duke.DukeException e) {
     //         throw e;
     //     }
     // }
 
-    // private static void event(Scanner sc, TaskManager tm) throws DukeException {
+    // private static void event(Scanner sc, duke.tasks.TaskManager tm) throws duke.DukeException {
     //     System.out.println("what is the name of the event: ");
     //     String eventName = sc.nextLine();
     //     if (eventName.isEmpty()) {
-    //         throw new DukeException("You must provide a name for the event!");
+    //         throw new duke.DukeException("You must provide a name for the event!");
     //     }
     //     System.out.println("when does the event start (Day Month Year Hour:Minute): ");
     //     String start = sc.nextLine();
     //     if (start.isEmpty()) {
-    //         throw new DukeException("You must provide a start time for the event!");
+    //         throw new duke.DukeException("You must provide a start time for the event!");
     //     }
     //     System.out.println("when does the event end (Day Month Year Hour:Minute): ");
     //     String end = sc.nextLine();
     //     if (end.isEmpty()) {
-    //         throw new DukeException("You must provide an end time for the event!");
+    //         throw new duke.DukeException("You must provide an end time for the event!");
     //     }
     //     try {
-    //         tm.add(new Event(eventName, start, end));
+    //         tm.add(new duke.tasks.Event(eventName, start, end));
     //         System.out.println("*added: " + eventName);
-    //     } catch (DukeException e) {
+    //     } catch (duke.DukeException e) {
     //         throw e;
     //     }
         
     // }
 
-    // private static void delete (Scanner sc, TaskManager tm) throws DukeException {
+    // private static void delete (Scanner sc, duke.tasks.TaskManager tm) throws duke.DukeException {
     //     System.out.println("Which task would you like to remove: ");
     //     int taskNum = Integer.parseInt(sc.nextLine());
     //     try {
     //         tm.deleteTask(taskNum);
     //     } catch (IndexOutOfBoundsException e) {
-    //         throw new DukeException("You did not provide a valid task number!");
+    //         throw new duke.DukeException("You did not provide a valid task number!");
     //     }
     // }
 }

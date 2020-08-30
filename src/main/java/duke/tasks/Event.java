@@ -1,13 +1,17 @@
+package duke.tasks;
+
+import duke.DukeException;
+
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * <code>Event</code> inherits from <code>Task</code>
+ * <code>duke.tasks.Event</code> inherits from <code>duke.tasks.Task</code>
  * and is used to represent an event.
  */
-class Event extends Task {
+public class Event extends Task {
     private Date start;
     private Date end;
 
@@ -18,7 +22,7 @@ class Event extends Task {
      * @param end the end time of the event in the format "dd MM yyyy HH:mm"
      * @throws DukeException if the format of the given dates are wrong
      */
-    Event(String name, String start, String end) throws DukeException {
+    public Event(String name, String start, String end) throws DukeException {
         super(name);
         SimpleDateFormat formatter = new SimpleDateFormat("dd MM yyyy HH:mm");
         try {        

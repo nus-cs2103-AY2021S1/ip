@@ -1,3 +1,10 @@
+package duke;
+
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.Todo;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -7,18 +14,18 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
- * <code>Storage</code> handles all file read and writes.
+ * <code>duke.Storage</code> handles all file read and writes.
  */
-class Storage {
-    final static String TASKS_TEXT_FILE_PATH = "../tasks.txt";
+public class Storage {
+    final static String TASKS_TEXT_FILE_PATH = "../../tasks.txt";
 
     /**
-     * Loads the information from the file "tasks.txt" into a
+     * Loads the information from the file "duke.tasks.txt" into a
      * <code>List</code>. Since each task from the file is
      * comma seperated, it splits each string into a string array using ","
      * as a delimiter. Then it creates objects of the child classes of
-     * <code>Task</code> according to the information provided.
-     * @return a list of tasks as a <code>List</code>
+     * <code>duke.tasks.Task</code> according to the information provided.
+     * @return a list of duke.tasks as a <code>List</code>
      * @throws DukeException if there is an IOexception while creating a new empty file
      */
     public List<Task> load() throws DukeException {
@@ -66,7 +73,7 @@ class Storage {
     }
 
     /**
-     * Writes the list of tasks to the file "tasks.txt".
+     * Writes the list of duke.tasks to the file "duke.tasks.txt".
      * @param fileContent the comma seperated string information to be written to the file
      */
     public static void writeTasksFile(String fileContent) {

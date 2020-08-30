@@ -1,23 +1,27 @@
+package duke.tasks;
+
+import duke.DukeException;
+
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * <code>Deadline</code> inherits from <code>Task</code>
+ * <code>duke.tasks.Deadline</code> inherits from <code>duke.tasks.Task</code>
  * and is used to represent a deadline.
  */
-class Deadline extends Task {
+public class Deadline extends Task {
     private Date dueDate;
 
     /**
-     * Constructor for creating a new <code>Deadline</code> object.
+     * Constructor for creating a new <code>duke.tasks.Deadline</code> object.
      * Requires a <code>name</code> and a <code>dueDate</code>.
      * @param name the name of this object
      * @param dueDate the due date of this object in the format of "dd MM yyyy"
      * @throws DukeException if the date format given is invalid
      */
-    Deadline(String name, String dueDate) throws DukeException {
+    public Deadline(String name, String dueDate) throws DukeException {
         super(name);
         SimpleDateFormat formatter = new SimpleDateFormat("dd MM yyyy");
         try {        

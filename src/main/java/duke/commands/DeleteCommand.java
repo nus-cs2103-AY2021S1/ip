@@ -1,11 +1,15 @@
+package duke.commands;
+
+import duke.DukeException;
+
 /**
- * <code>DeleteCommand</code> inherits from the base class <code>Command</code>
- * and will handle the job of deleting tasks.
+ * <code>duke.commands.DeleteCommand</code> inherits from the base class <code>duke.commands.Command</code>
+ * and will handle the job of deleting duke.tasks.
  */
 public class DeleteCommand extends Command {
     /**
      * Deletes a task.
-     * Using the <code>Ui</code> object in the parent class, it prints out
+     * Using the <code>duke.Ui</code> object in the parent class, it prints out
      * the user interface to ask for the number of the task to be deleted.
      * It uses the <code>Scanner</code> object in the parent class to receive the number.
      * It uses the <code>TaskManager</code> object in the parent class and calls

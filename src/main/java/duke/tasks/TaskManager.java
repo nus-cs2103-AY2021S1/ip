@@ -1,15 +1,20 @@
+package duke.tasks;
+
+import duke.DukeException;
+import duke.Storage;
+
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * <code>TaskManager</code> handles every operation related to tasks.
+ * <code>duke.tasks.TaskManager</code> handles every operation related to duke.tasks.
  */
-class TaskManager {
+public class TaskManager {
     private List<Task> tasks;
 
     /**
-     * Constructs a new <code>TaskManager</code> object
-     * and initialises its <code>tasks</code> field as
+     * Constructs a new <code>duke.tasks.TaskManager</code> object
+     * and initialises its <code>duke.tasks</code> field as
      * an empty <code>ArrayList</code>.
      */
     public TaskManager() {
@@ -17,10 +22,10 @@ class TaskManager {
     }
 
     /**
-     * Constructs a new <code>TaskManager</code> object
-     * and initialises its <code>tasks</code> field using the provided
+     * Constructs a new <code>duke.tasks.TaskManager</code> object
+     * and initialises its <code>duke.tasks</code> field using the provided
      * argument.
-     * @param tasks the list of tasks to be initialised with
+     * @param tasks the list of duke.tasks to be initialised with
      */
     public TaskManager(List<Task> tasks) {
         this.tasks = tasks;   
@@ -36,7 +41,7 @@ class TaskManager {
     }
 
     /**
-     * Gets the "save" text represenation of each <code>Task</code>
+     * Gets the "save" text represenation of each <code>duke.tasks.Task</code>
      * and creates a <code>String</code> of the information to be saved.
      * This string information is then passed on to the <code>Storage</code>
      * class where it will handle the saving of the information.
@@ -50,12 +55,12 @@ class TaskManager {
     }
 
     /**
-     * Creates a string representation of all the tasks.
-     * @return the string representation of all the tasks
+     * Creates a string representation of all the duke.tasks.
+     * @return the string representation of all the duke.tasks
      */
     public String listTasks() {
         int i = 1;
-        StringBuffer sb = new StringBuffer("Here are your tasks\n");
+        StringBuffer sb = new StringBuffer("Here are your duke.tasks\n");
         for (Task task: tasks) {
             sb.append("\n" + i + ". " + task);
             i++;
@@ -68,7 +73,7 @@ class TaskManager {
      * is identified by the <code>taskNum</code>. <code>taskNum - 1</code>
      * is the index position of the task in the <code>ArrayList</code>.
      * @param taskNum the number of the task in the task list
-     * @return the <code>Task</code> that is marked done
+     * @return the <code>duke.tasks.Task</code> that is marked done
      * @throws DukeException if the provided task number is out of bounds of the range of the <code>ArrayList</code>
      */
     public Task markDone(int taskNum) throws DukeException {
@@ -92,7 +97,7 @@ class TaskManager {
         try {
             Task task = tasks.remove(taskNum - 1);
             System.out.println(String.format("Successfully removed the following task:\n %s", task));
-            System.out.println(String.format("You have a total of %d tasks left", tasks.size()));
+            System.out.println(String.format("You have a total of %d duke.tasks left", tasks.size()));
             save();
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("you gave an invalid task number!");
@@ -102,8 +107,8 @@ class TaskManager {
     /**
      * Finds a task with a given keyword in its name.
      * @param keyword the keyword to search for
-     * @return the string represenation of the list of tasks found. If none found, it will
-     * say that no tasks are found.
+     * @return the string represenation of the list of duke.tasks found. If none found, it will
+     * say that no duke.tasks are found.
      */
     public String findTask(String keyword) {
         List<Task> temp = new ArrayList<>();
@@ -113,9 +118,9 @@ class TaskManager {
             }
         }
         if (temp.isEmpty()) {
-            return "Sorry there are no tasks that matches your keyword";
+            return "Sorry there are no duke.tasks that matches your keyword";
         } else {
-            StringBuilder sb = new StringBuilder("Here are the tasks that match your keyword\n");
+            StringBuilder sb = new StringBuilder("Here are the duke.tasks that match your keyword\n");
             for (int i = 0; i < temp.size(); i++) {
                 sb.append("\n").append(i + 1).append(". ").append(temp.get(i));
             }

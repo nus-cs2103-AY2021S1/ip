@@ -1,5 +1,7 @@
+package duke.commands;
+
 /**
- * <code>ErrorCommand</code> inherits from the base class <code>Command</code>
+ * <code>duke.commands.ErrorCommand</code> inherits from the base class <code>duke.commands.Command</code>
  * and will handle the situation when the user gives an invalid command.
  */
 public class ErrorCommand extends Command {

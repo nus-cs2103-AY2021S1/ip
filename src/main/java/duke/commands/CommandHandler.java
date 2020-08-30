@@ -1,12 +1,14 @@
+package duke.commands;
+
 /**
- * CommandHandler is the class that will handle all the commands.
+ * duke.commands.CommandHandler is the class that will handle all the duke.commands.
  */
 public class CommandHandler {
     /**
      * Parses the <code>cmd</code> and returns
-     * an appropriate <code>Command</code> object.
+     * an appropriate <code>duke.commands.Command</code> object.
      * @param cmd the string command to be parsed.
-     * @return a <code>Command</code>.
+     * @return a <code>duke.commands.Command</code>.
      */
     public static Command parseCommand(String cmd) {
         switch (cmd) {

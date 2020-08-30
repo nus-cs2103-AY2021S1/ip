@@ -1,14 +1,16 @@
+package duke;
+
 /**
  * An exception class that handles user input exceptions.
  */
-class DukeException extends Exception {
+public class DukeException extends Exception {
     private String error;
 
     /**
      * Constructor
      * @param error the error message to show
      */
-    DukeException(String error) {
+    public DukeException(String error) {
         // TODO: use super(error) constructor instead
         this.error = error;
     }

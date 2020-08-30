@@ -1,4 +1,9 @@
+import duke.DukeException;
 import org.junit.jupiter.api.Test;
+import duke.tasks.Deadline;
+import duke.tasks.Task;
+import duke.tasks.TaskManager;
+import duke.tasks.Todo;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -9,7 +14,7 @@ public class TaskManagerTest {
             TaskManager tm = new TaskManager();
             tm.add(new Todo("eat"));
             tm.add(new Deadline("assignment", "24 5 2020"));
-            String expected = "Here are your tasks\n" +
+            String expected = "Here are your duke.tasks\n" +
                     "\n1. [T][x] eat" +
                     "\n2. [D][x] assignment (due: 24/05/2020)";
             assertEquals(expected, tm.listTasks());

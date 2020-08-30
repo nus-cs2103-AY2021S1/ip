@@ -1,8 +1,14 @@
+package duke.commands;
+
+import duke.Ui;
+import duke.tasks.TaskManager;
+import duke.DukeException;
+
 import java.util.Scanner;
 
 /**
- * Command is the abstract base class for all
- * commands
+ * duke.commands.Command is the abstract base class for all
+ * duke.commands
  */
 public abstract class Command {
     TaskManager tm;

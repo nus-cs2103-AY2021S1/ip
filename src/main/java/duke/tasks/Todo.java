@@ -1,9 +1,11 @@
+package duke.tasks;
+
 /**
- * <code>Todo</code> inherits from <code>Task</code>
+ * <code>duke.tasks.Todo</code> inherits from <code>duke.tasks.Task</code>
  * and is used to represent a todo.
  */
-class Todo extends Task {
-    Todo(String name) {
+public class Todo extends Task {
+    public Todo(String name) {
         super(name);
     }
 
