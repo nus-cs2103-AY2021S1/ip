@@ -34,22 +34,20 @@ public class FindCommand extends Command {
             throw new UltronException("find", getArguments(), ExceptionType.NO_ARGUMENTS_SUPPLIED);
         }
         boolean printed = false;
-        int count = 1;
+        int count = 0;
         StringBuilder message = new StringBuilder();
         message.append("Why do you always bothering me?\n");
         for (Task task : taskList.getList()) {
             if (task.getMessage().contains(getArguments())) {
-                message.append((String.format("%d. %s\n", count++, task.toString())));
+                message.append((String.format("%d. %s\n", ++count, task.toString())));
                 printed = true;
             }
         }
 
         if (!printed) {
             message.append("There is literally nothing here\n");
-            return;
         }
 
         ui.setMessage(message.toString());
-
     }
 }
