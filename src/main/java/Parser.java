@@ -26,8 +26,8 @@ public class Parser {
                 return dateFormatter.format(dateParser.parse(s));
             }
         } catch (ParseException e) {
-            return ui.getBorder() + "Please input the time and date in\n"
-                + dateParser.toPattern() + " or " + parser.toPattern() + "\n" + ui.getBorder();
+            return "Please input the time and date in\n"
+                + dateParser.toPattern() + " or " + parser.toPattern() + "\n";
         }
     }
 
@@ -56,46 +56,46 @@ public class Parser {
      * @param taskList The list of tasks handler
      * @param storage The storage call handler
      */
-    public static void parseInput(TaskList taskList, Storage storage) {
-        Scanner scan = new Scanner(System.in);
-
-        while (scan.hasNext()) {
-            String test = scan.next().toLowerCase();
-            if (checkBye(test)) {
-                ui.exitLine();
-                break;
-            } else {
-                String next = scan.nextLine().replaceFirst(" ", "");
-                if (checkList(test)) {
-                    taskList.displayList();
-                } else if (checkFind(test)) {
-                    taskList.findTask(next);
-                } else if (checkDone(test)) {
-                    try {
-                        taskList.doneTask(next);
-                        storage.updateFile();
-                    } catch (DukeException e) {
-                        System.out.println(ui.getBorder() + e.getMessage() + "\n" + ui.getBorder());
-                    }
-                } else if (checkDel(test)) {
-                    try {
-                        taskList.delTask(next);
-                        storage.updateFile();
-                    } catch (DukeException e) {
-                        System.out.println(ui.getBorder() + e.getMessage() + "\n" + ui.getBorder());
-                    }
-                } else {
-                    try {
-                        taskList.addTask(test, next);
-                        storage.updateFile();
-                    } catch (DukeException e) {
-                        System.out.println(ui.getBorder() + e.getMessage() + "\n" + ui.getBorder());
-                    }
-                }
-            }
-        }
-        scan.close();
-    }
+//    public static void parseInput(TaskList taskList, Storage storage) {
+//        Scanner scan = new Scanner(System.in);
+//
+//        while (scan.hasNext()) {
+//            String test = scan.next().toLowerCase();
+//            if (checkBye(test)) {
+//                ui.exitLine();
+//                break;
+//            } else {
+//                String next = scan.nextLine().replaceFirst(" ", "");
+//                if (checkList(test)) {
+//                    taskList.displayList();
+//                } else if (checkFind(test)) {
+//                    taskList.findTask(next);
+//                } else if (checkDone(test)) {
+//                    try {
+//                        taskList.doneTask(next);
+//                        storage.updateFile();
+//                    } catch (DukeException e) {
+//                        System.out.println(ui.getBorder() + e.getMessage() + "\n" + ui.getBorder());
+//                    }
+//                } else if (checkDel(test)) {
+//                    try {
+//                        taskList.delTask(next);
+//                        storage.updateFile();
+//                    } catch (DukeException e) {
+//                        System.out.println(ui.getBorder() + e.getMessage() + "\n" + ui.getBorder());
+//                    }
+//                } else {
+//                    try {
+//                        taskList.addTask(test, next);
+//                        storage.updateFile();
+//                    } catch (DukeException e) {
+//                        System.out.println(ui.getBorder() + e.getMessage() + "\n" + ui.getBorder());
+//                    }
+//                }
+//            }
+//        }
+//        scan.close();
+//    }
 
     public static String parse(TaskList taskList, Storage storage, String text) {
         String output;

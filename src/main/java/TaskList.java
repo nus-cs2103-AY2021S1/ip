@@ -20,7 +20,7 @@ public class TaskList {
      */
     public String displayList() {
         if (storage.isEmpty()) {
-            return ui.getBorder() + "Your list is empty!\n" + ui.getBorder();
+            return "Your list is empty!\n";
         } else {
             int listLen = storage.size();
             String output = "Here are the tasks in your list:\n";
@@ -56,7 +56,7 @@ public class TaskList {
             if (next.contains("/by ")) {
                 String[] ls = next.split(" /by ");
                 String date = Parser.parseDateTime(ls[1]);
-                if (date.contains(ui.getBorder())) {
+                if (date.contains("Please input the time and date in\n")) {
                     return date;
                 } else {
                     toAdd = new Deadline(ls[0], date);
@@ -71,7 +71,7 @@ public class TaskList {
             if (next.contains("/at ")) {
                 String[] ls = next.split(" /at ");
                 String date = Parser.parseDateTime(ls[1]);
-                if (date.contains(ui.getBorder())) {
+                if (date.contains("Please input the time and date in\n")) {
                     return date;
                 } else {
                     toAdd = new Event(ls[0], date);

@@ -15,12 +15,20 @@ public class Duke {
         this.storage = new Storage(taskList, "duke");
     }
 
-    /**
-     * Runs the Duke bot program
-     */
-    public void run() {
-        ui.startUp(taskList, storage);
-        Parser.parseInput(taskList, storage);
+//    /**
+//     * Runs the Duke bot program
+//     */
+//    public void run() {
+//        ui.startUp(taskList, storage);
+//        Parser.parseInput(taskList, storage);
+//    }
+
+    public TaskList getTaskList() {
+        return taskList;
+    }
+
+    public Storage getStorage() {
+        return storage;
     }
 
     public String getResponse(String input) {
@@ -29,9 +37,5 @@ public class Duke {
         } else {
             return Parser.parse(taskList, storage, input);
         }
-    }
-
-    public static void main(String[] args) {
-        new Duke().run();
     }
 }
