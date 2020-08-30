@@ -4,12 +4,11 @@ import org.junit.jupiter.api.BeforeEach;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.bob.commands.*;
+import bob.commands.*;
 
-import seedu.bob.exceptions.BobEmptyFindException;
-import seedu.bob.exceptions.BobEmptyTaskException;
-import seedu.bob.exceptions.BobInvalidCommandException;
-import seedu.bob.parser.Parser;
+import bob.exceptions.BobEmptyFindException;
+import bob.exceptions.BobEmptyTaskException;
+import bob.exceptions.BobInvalidCommandException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
