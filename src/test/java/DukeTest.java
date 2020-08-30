@@ -1,16 +1,15 @@
-import duke.Duke;
-import duke.exception.DukeException;
-import duke.Parser;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
+import duke.Duke;
+import duke.Parser;
+import duke.exception.DukeException;
 
 public class DukeTest {
 

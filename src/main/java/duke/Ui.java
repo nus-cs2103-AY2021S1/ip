@@ -1,9 +1,9 @@
 package duke;
 
-import duke.task.Task;
-
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import duke.task.Task;
 
 /**
  * Takes care of user interface for the chat bot.
@@ -128,8 +128,8 @@ public class Ui {
      * @param numTask Number of tasks.
      */
     public void showDeletedTask(Task task, int numTask) {
-        System.out.println( String.format(" Noted. Target Scraped: \n   %s \n " +
-                "Now you have %d tasks in the list. ", task.toString(), numTask));
+        System.out.println(String.format(" Noted. Target Scraped: \n   %s \n "
+                + "Now you have %d tasks in the list. ", task.toString(), numTask));
     }
 
     /**

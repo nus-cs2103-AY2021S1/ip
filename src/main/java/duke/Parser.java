@@ -3,13 +3,13 @@ package duke;
 import duke.command.ByeCommand;
 import duke.command.Command;
 import duke.command.DeadlineCommand;
-import duke.command.ListCommand;
 import duke.command.DeleteCommand;
-import duke.command.UndoCommand;
-import duke.command.EventCommand;
 import duke.command.DoneCommand;
-import duke.command.ToDoCommand;
+import duke.command.EventCommand;
 import duke.command.FindCommand;
+import duke.command.ListCommand;
+import duke.command.ToDoCommand;
+import duke.command.UndoCommand;
 import duke.exception.DukeInputNotRecognizedException;
 import duke.exception.DukeTaskNotFoundException;
 
@@ -28,7 +28,7 @@ public class Parser {
      * @param fullCommand User input.
      * @return Command.
      * @throws DukeInputNotRecognizedException If the input is not recognised.
-     * @throws DukeTaskNotFoundException If the task is not found.
+     * @throws DukeTaskNotFoundException       If the task is not found.
      */
     public static Command parse(String fullCommand) throws DukeInputNotRecognizedException, DukeTaskNotFoundException {
         String[] command = fullCommand.split(" ", 2);
@@ -52,6 +52,7 @@ public class Parser {
                 return parseUndo(command);
             case FIND:
                 return parseFind(command[1].trim());
+            default:
             }
         } else {
             throw new DukeInputNotRecognizedException(" ERROR... INPUT NOT RECOGNIZED. \n PLEASE TRY AGAIN. ");
@@ -85,8 +86,8 @@ public class Parser {
         if (commandDetails.length > 1 && Character.isDigit(commandDetails[1].charAt(0))) {
             return new DoneCommand(commandDetails);
         } else {
-            throw new DukeTaskNotFoundException(" ERROR... NON-INTEGER RECOGNIZED OR TASK NUMBER NOT INPUTTED. \n " +
-                    "PLEASE TRY AGAIN. ");
+            throw new DukeTaskNotFoundException(" ERROR... NON-INTEGER RECOGNIZED OR TASK NUMBER NOT INPUTTED. \n "
+                    + "PLEASE TRY AGAIN. ");
         }
     }
 
@@ -156,8 +157,8 @@ public class Parser {
         if (commandDetails.length > 1 && Character.isDigit(commandDetails[1].charAt(0))) {
             return new DeleteCommand(commandDetails);
         } else {
-            throw new DukeTaskNotFoundException(" ERROR... NON-INTEGER RECOGNIZED OR TASK NUMBER NOT INPUTTED. \n " +
-                    "PLEASE TRY AGAIN. ");
+            throw new DukeTaskNotFoundException(" ERROR... NON-INTEGER RECOGNIZED OR TASK NUMBER NOT INPUTTED. \n "
+                    + "PLEASE TRY AGAIN. ");
         }
     }
 
@@ -172,8 +173,8 @@ public class Parser {
         if (commandDetails.length > 1 && Character.isDigit(commandDetails[1].charAt(0))) {
             return new UndoCommand(commandDetails);
         } else {
-            throw new DukeTaskNotFoundException(" ERROR... NON-INTEGER RECOGNIZED OR TASK NUMBER NOT INPUTTED. \n " +
-                    "PLEASE TRY AGAIN. ");
+            throw new DukeTaskNotFoundException(" ERROR... NON-INTEGER RECOGNIZED OR TASK NUMBER NOT INPUTTED. \n "
+                    + "PLEASE TRY AGAIN. ");
         }
     }
 

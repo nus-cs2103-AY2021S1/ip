@@ -1,11 +1,5 @@
 package duke;
 
-import duke.exception.DukeFileNotFoundException;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.ToDo;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -15,6 +9,12 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import duke.exception.DukeFileNotFoundException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
 
 /**
  * Takes care of file related operation.
@@ -76,6 +76,7 @@ public class Storage {
                     }
                     taskList.add(event);
                     break;
+                default:
                 }
             }
         } catch (FileNotFoundException e) {
