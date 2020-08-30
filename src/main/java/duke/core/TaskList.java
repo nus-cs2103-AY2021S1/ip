@@ -102,7 +102,7 @@ public class TaskList {
     @Override
     public String toString() {
         String result = "";
-        
+
         for(int i = 0; i < tasks.size(); i = i + 1) {
             result = result + String.valueOf(i + 1) + "." + tasks.get(i).toString() + "\n";
         }
