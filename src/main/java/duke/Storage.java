@@ -37,15 +37,17 @@ public class Storage {
                 String[] details = line.split(" \\| ");
                 boolean isDone = details[1].equals("1") ? true : false;
                 switch (details[0]) {
-                    case "T":
-                        tasks.addStoredTask(new ToDos(details[2], isDone));
-                        break;
-                    case "D":
-                        tasks.addStoredTask(new Deadlines(details[2], details[3], isDone));
-                        break;
-                    case "E":
-                        tasks.addStoredTask(new Events(details[2], details[3], isDone));
-                        break;
+                case "T":
+                    tasks.addStoredTask(new ToDos(details[2], isDone));
+                    break;
+                case "D":
+                    tasks.addStoredTask(new Deadlines(details[2], details[3], isDone));
+                    break;
+                case "E":
+                    tasks.addStoredTask(new Events(details[2], details[3], isDone));
+                    break;
+                default:
+                    throw new IllegalStateException("Unexpected value: " + details[0]);
                 }
                 line = br.readLine();
             }

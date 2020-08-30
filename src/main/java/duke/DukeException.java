@@ -40,61 +40,72 @@ public class DukeException extends Exception {
      * @return error messages
      */
     @Override
-    public String toString(){
+    public String toString() {
         String error = "";
-        switch (exceptionType){
-            case EMPTY_LIST:
-                error += "    YOUR LIST IS EMPTY :-(\n";
+        switch (exceptionType) {
+        case EMPTY_LIST:
+            error += "    YOUR LIST IS EMPTY :-(\n";
+            break;
+        case UNKNOWN:
+            error += "    I DON'T KNOW WHAT YOU MEAN :-(\n";
+            break;
+        case NO_MATCHING_FOUND:
+            error += "    NO MATCHES FOUND :-(\n";
+            break;
+        case WRONG_FORMAT:
+            switch (commandType) {
+            case DEADLINE:
+                error += "    ERROR IN ADDING DEADLINE: WRONG FORMAT\n    ";
+                error += "Format: deadline <description> /by <datetime>\n";
                 break;
-            case UNKNOWN:
-                error += "    I DON'T KNOW WHAT YOU MEAN :-(\n";
+            case EVENT:
+                error += "    ERROR IN ADDING EVENT: WRONG FORMAT\n    Format: event <description> /at <datetime>\n";
                 break;
-            case NO_MATCHING_FOUND:
-                error += "    NO MATCHES FOUND :-(\n";
+            default:
+                throw new IllegalStateException("Unexpected value: " + commandType);
+            }
+            break;
+        case MISSING_DESCRIPTION:
+            switch (commandType) {
+            case TODO:
+                error += "    ERROR IN ADDING TODO: MISSING DESCRIPTION\n";
                 break;
-            case WRONG_FORMAT:
-                switch (commandType) {
-                    case DEADLINE:
-                        error += "    ERROR IN ADDING DEADLINE: WRONG FORMAT\n    Format: deadline <description> /by <datetime>\n";
-                        break;
-                    case EVENT:
-                        error += "    ERROR IN ADDING EVENT: WRONG FORMAT\n    Format: event <description> /at <datetime>\n";
-                        break;
-                }
+            case DEADLINE:
+                error += "    ERROR IN ADDING DEADLINE: MISSING DESCRIPTION\n";
                 break;
-            case MISSING_DESCRIPTION:
-                switch (commandType) {
-                    case TODO:
-                        error += "    ERROR IN ADDING TODO: MISSING DESCRIPTION\n";
-                        break;
-                    case DEADLINE:
-                        error += "    ERROR IN ADDING DEADLINE: MISSING DESCRIPTION\n";
-                        break;
-                    case EVENT:
-                        error += "    ERROR IN ADDING EVENT: MISSING DESCRIPTION\n";
-                        break;
-                }
+            case EVENT:
+                error += "    ERROR IN ADDING EVENT: MISSING DESCRIPTION\n";
                 break;
-            case MISSING_TIMING:
-                switch (commandType){
-                    case DEADLINE:
-                        error += "    ERROR IN ADDING DEADLINE: MISSING DUE DATE\n";
-                        break;
-                    case EVENT:
-                        error += "    ERROR IN ADDING EVENT: MISSING SCHEDULED DATE\n";
-                        break;
-                }
+            default:
+                throw new IllegalStateException("Unexpected value: " + commandType);
+            }
+            break;
+        case MISSING_TIMING:
+            switch (commandType) {
+            case DEADLINE:
+                error += "    ERROR IN ADDING DEADLINE: MISSING DUE DATE\n";
                 break;
-            case INVALID_INDEX:
-                switch (commandType){
-                    case DONE:
-                        error += "    ERROR IN MARKING TASK DONE: INVALID INDEX\n";
-                        break;
-                    case DELETE:
-                        error += "    ERROR IN DELETING TASK: INVALID INDEX\n";
-                        break;
-                }
+            case EVENT:
+                error += "    ERROR IN ADDING EVENT: MISSING SCHEDULED DATE\n";
                 break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + commandType);
+            }
+            break;
+        case INVALID_INDEX:
+            switch (commandType) {
+            case DONE:
+                error += "    ERROR IN MARKING TASK DONE: INVALID INDEX\n";
+                break;
+            case DELETE:
+                error += "    ERROR IN DELETING TASK: INVALID INDEX\n";
+                break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + commandType);
+            }
+            break;
+        default:
+            throw new IllegalStateException("Unexpected value: " + exceptionType);
         }
         return error;
     }

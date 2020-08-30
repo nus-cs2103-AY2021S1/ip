@@ -55,5 +55,7 @@ public class Deadlines extends Task {
      * @return String description of deadline
      */
     @Override
-    public String writeToFile() { return "D" + super.writeToFile() + " | " + due; }
+    public String writeToFile() {
+        return "D" + super.writeToFile() + " | " + due;
+    }
 }
