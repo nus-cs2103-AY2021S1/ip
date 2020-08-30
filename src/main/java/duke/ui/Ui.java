@@ -93,14 +93,11 @@ public class Ui {
      * @return a string representing answers according to commands with front reminder, and tail reminder.
      */
     public static String printAnswer(String... answers) {
-        String result;
+        String result = "";
 
-
-        result = "\n";
         for (int i = 0; i < answers.length; i++) {
             result += answers[i] + "\n";
         }
-        result += "\n" + "\n";
 
         return result;
     }
@@ -114,9 +111,8 @@ public class Ui {
      * @return a string representing a list.
      */
     public static String printList(String frontGuidance, TaskList result, String tailGuidance) {
-        String resultString;
+        String resultString = "";
 
-        resultString = "\n";
         if (frontGuidance.length() != 0) {
             resultString += frontGuidance + "\n";
         }
@@ -128,8 +124,6 @@ public class Ui {
         if (tailGuidance.length() != 0) {
             resultString += tailGuidance + "\n";
         }
-
-        resultString += "\n" + "\n";
 
         return resultString;
     }
