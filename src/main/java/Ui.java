@@ -38,7 +38,7 @@ public class Ui {
         String commands = indent + "list: Shows the current List \n"
                 + indent + "delete (index): Delete the task from the List \n"
                 + indent + "todo (activity): Creates a Todo Task \n"
-                + indent +"deadline /by (date) YYYY-MM-DD: Creates a Deadline Task \n"
+                + indent + "deadline /by (date) YYYY-MM-DD: Creates a Deadline Task \n"
                 + indent + "event /at (string): Creates an Event Task \n"
                 + indent + "find (keyword): Finds all occurrences of the keyword in the List";
         System.out.println("INITIALIZING \n" + logo);
