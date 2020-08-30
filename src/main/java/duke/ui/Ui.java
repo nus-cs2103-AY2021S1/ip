@@ -8,7 +8,7 @@ import duke.tasks.TaskList;
  */
 public class Ui {
     private static String greetings = "Hello! I'm Mr. Duke, your personal assistant\n     What can I do for you? : )";
-    private static String farewell = "Bye. Hope to see you again soon!";
+    private static String farewell = "Bye. Hope to see you again soon! This will automatically close in 3.3 seconds";
     private static String doneAlert = "Nice! I've marked this task as done:";
     private static String addTaskFrontAlert = "Got it. I've added this task for you:";
     private static String addTaskTailAlert = "Now you have %d tasks in the list.";
@@ -16,122 +16,138 @@ public class Ui {
     private static String findTaskFrontAlert = "Here are the matching tasks in your list:";
 
     /**
-     * Prints out greetings at the beginning.
+     * Returns greetings at the beginning.
+     *
+     * @return a string representing greetings at the beginning.
      */
-    public void greetings() {
-        printAnswer("", greetings, "");
+    public String greetings() {
+        return printAnswer("", greetings, "");
     }
 
     /**
-     * Prints out reminders when adding a task to the list.
+     * Returns reminders when adding a task to the list.
      *
      * @param result the TaskList of all tasks.
+     * @return a string representing reminders when adding a task to the list.
      */
-    public void addTaskAlert(TaskList result) {
-        printAnswer(addTaskFrontAlert, "   " + result.get(result.getSize() - 1).toString(), String.format(addTaskTailAlert, result.getSize()));
+    public String addTaskAlert(TaskList result) {
+        return printAnswer(addTaskFrontAlert, "   " + result.get(result.getSize() - 1).toString(),
+                String.format(addTaskTailAlert, result.getSize()));
     }
 
     /**
-     * Prints out the reminders when done with a task.
+     * Returns the reminders when done with a task.
      *
      * @param tempDone the task object that has been done.
+     * @return a string representing the reminders when done with a task.
      */
-    public void doneAlert(Task tempDone) {
-        printAnswer(doneAlert, "   " + tempDone.toString(), "");
+    public String doneAlert(Task tempDone) {
+        return printAnswer(doneAlert, "   " + tempDone.toString(), "");
     }
 
     /**
-     * Prints out a reminder when a task has been deleted.
+     * Returns a reminder when a task has been deleted.
      *
      * @param tempDelete the task object that has been deleted.
      * @param result the TaskList of all the tasks.
+     * @return a string representing a reminder when a task has been deleted.
      */
-    public void deleteTaskAlert(Task tempDelete, TaskList result) {
-        printAnswer(deleteTaskFrondAlert, "   " + tempDelete.toString(), String.format(addTaskTailAlert, result.getSize()));
+    public String deleteTaskAlert(Task tempDelete, TaskList result) {
+        return printAnswer(deleteTaskFrondAlert, "   " + tempDelete.toString(),
+                String.format(addTaskTailAlert, result.getSize()));
     }
 
     /**
-     * Prints out a list of tasks.
+     * Returns a list of tasks.
+     *
      * @param result the TaskList of task to be printed.
+     * @return a string representing a list of tasks.
      */
-    public void showList(TaskList result) {
-        printList(":) Here are all the tasks in your list:", result, "");
+    public String showList(TaskList result) {
+        return printList(":) Here are all the tasks in your list:", result, "");
     }
 
     /**
-     * Prints a farewell message when exiting the application.
+     * Returns a farewell message when exiting the application.
+     *
+     * @return a string representing a farewell message when exiting the application.
      */
-    public void farewell() {
-        printAnswer("", farewell, "");
+    public String farewell() {
+        return printAnswer("", farewell, "");
     }
 
     /**
-     * Prints out a list of tasks when finding by keywords.
+     * Returns a list of tasks when finding by keywords.
      *
      * @param result the list of tasks that are found by a keyword.
+     * @return a string representing a list of tasks when finding by keywords.
      */
-    public void findTaskAlert(TaskList result) {
-        printList(findTaskFrontAlert, result, "");
+    public String findTaskAlert(TaskList result) {
+        return printList(findTaskFrontAlert, result, "");
     }
 
     /**
      * Prints out answers according to commands with front reminder, and tail reminder.
      *
-     * @param FrontGuidance a string representing reminders at the front.
+     * @param frontGuidance a string representing reminders at the front.
      * @param answer a string representing the answer to the user command.
-     * @param TailGuidance a string representing reminders at the tail.
+     * @param tailGuidance a string representing reminders at the tail.
+     * @return a string representing answers according to commands with front reminder, and tail reminder.
      */
-    public static void printAnswer(String FrontGuidance, String answer, String TailGuidance) {
-        String line = "___________________________________________________________________________________";
-        String smallSpace = "    ";
-        String bigSpace = "     ";
+    public static String printAnswer(String frontGuidance, String answer, String tailGuidance) {
+        String result;
 
-        System.out.println(smallSpace + line);
-        if (FrontGuidance.length() != 0) {
-            System.out.println(bigSpace + FrontGuidance);
+
+        result = "\n";
+        if (frontGuidance.length() != 0) {
+            result += frontGuidance + "\n";
         }
-        System.out.println(bigSpace + answer);
-        if (TailGuidance.length() != 0) {
-            System.out.println(bigSpace + TailGuidance);
+        result += answer + "\n";
+        if (tailGuidance.length() != 0) {
+            result += tailGuidance + "\n";
         }
-        System.out.println(smallSpace + line + "\n");
+        result += "\n" + "\n";
+
+        return result;
     }
 
     /**
-     * Prints out a list according to commands with front reminder, and tail reminder.
+     * Returns a list according to commands with front reminder, and tail reminder.
      *
-     * @param FrontGuidance a string representing reminders at the front.
+     * @param frontGuidance a string representing reminders at the front.
      * @param result a TaskList to be printed.
-     * @param TailGuidance a string representing reminders at the tail.
+     * @param tailGuidance a string representing reminders at the tail.
+     * @return a string representing a list.
      */
-    public static void printList(String FrontGuidance, TaskList result, String TailGuidance) {
-        String line = "___________________________________________________________________________________";
-        String smallSpace = "    ";
-        String bigSpace = "     ";
+    public static String printList(String frontGuidance, TaskList result, String tailGuidance) {
+        String resultString;
 
-        System.out.println(smallSpace + line);
-        if (FrontGuidance.length() != 0) {
-            System.out.println(bigSpace + FrontGuidance);
+        resultString = "\n";
+        if (frontGuidance.length() != 0) {
+            resultString += frontGuidance + "\n";
         }
 
         for (int i = 0; i < result.getSize(); i++) {
-            System.out.println(bigSpace + (i + 1) + ". " + result.get(i));
+            resultString += (i + 1) + ". " + result.get(i) + "\n";
         }
 
-        if (TailGuidance.length() != 0) {
-            System.out.println(bigSpace + TailGuidance);
+        if (tailGuidance.length() != 0) {
+            resultString += tailGuidance + "\n";
         }
 
-        System.out.println(smallSpace + line + "\n");
+        resultString += "\n" + "\n";
+
+        return resultString;
     }
 
     /**
-     * Prints out the error message when encountering exceptions.
+     * Returns the error message when encountering exceptions.
      *
      * @param e the exception occurred.
+     * @return a string representing the error message when encountering exceptions.
      */
-    public void showError(Exception e) {
-        System.out.println(e.toString());
+    public String showError(Exception e) {
+        return e.toString();
     }
 
 }
