@@ -1,3 +1,4 @@
+package duke;
 public class Event extends Task{
     private String duration;
     public Event (String name,boolean isCompleted, String duration) {

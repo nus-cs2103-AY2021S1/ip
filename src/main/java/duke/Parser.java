@@ -1,4 +1,4 @@
-import java.io.IOException;
+package duke;
 import java.util.Scanner;
 public class Parser {
     private static Scanner scanner = new Scanner(System.in);

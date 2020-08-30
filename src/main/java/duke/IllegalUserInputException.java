@@ -1,3 +1,4 @@
+package duke;
 public class IllegalUserInputException extends IllegalArgumentException{
     private String description;
     public IllegalUserInputException (String description) {

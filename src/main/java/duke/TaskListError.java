@@ -1,4 +1,4 @@
-
+package duke;
 public class TaskListError extends IndexOutOfBoundsException {
     
     private static String errorType1 = "Accessing out of bounds index in TaskList " +

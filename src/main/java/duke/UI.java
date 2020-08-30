@@ -1,5 +1,4 @@
-import java.util.List;
-
+package duke;
 public class UI {
     private static final String LOGO = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
