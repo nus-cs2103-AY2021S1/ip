@@ -35,7 +35,7 @@ public class DukeFileHandler {
         if (!file.exists()) {
             try {
                 // todo find out why access is denied when creating file
-                file.mkdirs();
+                file.getParentFile().mkdirs();
                 file.createNewFile();
             } catch (IOException e) {
                 e.printStackTrace();
