@@ -1,13 +1,13 @@
 package alison.tool;
 
-import alison.exception.AlisonException;
-import alison.task.Task;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
+
+import alison.exception.AlisonException;
+import alison.task.Task;
 
 public class Storage {
 

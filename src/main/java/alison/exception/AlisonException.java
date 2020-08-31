@@ -14,8 +14,8 @@ public class AlisonException extends Exception {
     }
 
     public static AlisonException operationException() {
-        return new AlisonException("OOPS!!! You must provided the index of the task after this operation.\n" +
-                "(i.e. done/delete 3)");
+        return new AlisonException("OOPS!!! You must provided the index of the task after this operation.\n"
+               + "(i.e. done/delete 3)");
     }
 
     public static AlisonException emptyDescriptionException() {
@@ -27,20 +27,20 @@ public class AlisonException extends Exception {
     }
 
     public static AlisonException deadlineException() {
-        return new AlisonException("OOPS!!! You must provide a date " +
-                "after '/by' for a deadline. \n" +
-                "(i.e. deadline return book /by 2020-01-01)");
+        return new AlisonException("OOPS!!! You must provide a date "
+                + "after '/by' for a deadline. \n"
+                + "(i.e. deadline return book /by 2020-01-01)");
     }
 
     public static AlisonException eventException() {
-        return new AlisonException("OOPS!!! You must provide a time interval " +
-                "after '/at' for an event. \n" +
-                "(i.e. event project meeting /at Mon 2-4pm)");
+        return new AlisonException("OOPS!!! You must provide a time interval "
+                + "after '/at' for an event. \n"
+                + "(i.e. event project meeting /at Mon 2-4pm)");
     }
 
     public static AlisonException deadlineParseException() {
-        return new AlisonException("Sorry, I can't parse the time format you just inputted. \n" +
-                "Try it in this format: yyyy-mm-dd (e.g. 2020-01-01).");
+        return new AlisonException("Sorry, I can't parse the time format you just inputted. \n"
+                + "Try it in this format: yyyy-mm-dd (e.g. 2020-01-01).");
     }
 
     public static AlisonException loadingException() {

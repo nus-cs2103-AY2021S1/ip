@@ -29,6 +29,9 @@ public class Alison {
         }
     }
 
+    /**
+     * Run Alison Chat bot with this method.
+     */
     public void run() {
         ui.greeting();
         boolean isExit = false;
@@ -50,5 +53,5 @@ public class Alison {
     public static void main(String[] args) {
         new Alison("./data/tasks.txt").run();
     }
-    
+
 }

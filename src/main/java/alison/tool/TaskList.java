@@ -1,8 +1,8 @@
 package alison.tool;
 
-import alison.task.Task;
-
 import java.util.ArrayList;
+
+import alison.task.Task;
 
 public class TaskList extends ArrayList<Task> {
 

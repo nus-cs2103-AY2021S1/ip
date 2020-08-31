@@ -1,9 +1,9 @@
 package alison.task;
 
-import alison.exception.AlisonException;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+
+import alison.exception.AlisonException;
 
 public class Deadline extends Task {
 
