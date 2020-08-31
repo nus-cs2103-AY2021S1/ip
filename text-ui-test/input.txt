@@ -19,3 +19,4 @@ list
 delete 3
 delete 12
 list
+bye

@@ -1,5 +1,10 @@
 package bot;
 
+import bot.task.Deadline;
+import bot.task.Event;
+import bot.task.Task;
+import bot.task.Todo;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;

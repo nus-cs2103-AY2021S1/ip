@@ -1,5 +1,9 @@
 package bot;
 
+import bot.command.*;
+import bot.util.InvalidCommandException;
+import bot.util.InvalidInputException;
+
 public class Parser {
 
     /**
@@ -15,11 +19,33 @@ public class Parser {
         if (input.length() == 0) {
             throw new InvalidInputException("Please input something");
         }
-        String[] words = input.split(" ");
-        try {
-            return Command.valueOf(words[0].toUpperCase());
-        } catch (IllegalArgumentException e) {
-            throw new InvalidCommandException("What's that again? I can't understand.");
+        try{
+            String[] words = input.split(" ");
+            String args[] = new String[2];
+            switch(words[0]) {
+                case "list":
+                    return new ListCommand("list");
+                case "todo":
+                    return new AddCommand("todo", parseSingleArg(input));
+                case "deadline":
+                    args = parseDeadline(input);
+                    return new AddCommand("deadline", args[0], args[1]);
+                case "event":
+                    args = parseEvent(input);
+                    return new AddCommand("event", args[0], args[1]);
+                case "done":
+                    return new DoneCommand("done", parseIndex(input));
+                case "delete":
+                    return new DeleteCommand("delete", parseIndex(input));
+                case "find":
+                    return new FindCommand("find", parseSingleArg(input));
+                case "bye":
+                    return new ExitCommand("exit");
+                default:
+                    throw new InvalidCommandException("What's that again? I can't understand.");
+            }
+        } catch (InvalidCommandException | InvalidInputException e) {
+            throw e;
         }
     }
 

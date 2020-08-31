@@ -1,6 +1,6 @@
 package test;
 
-import bot.Todo;
+import bot.task.Todo;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

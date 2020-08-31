@@ -12,11 +12,6 @@ public class Ui {
         System.out.println(responseWrapper(greeting));
     }
 
-    public void goodbye() {
-        String farewell = responseWrapper("Have a good day, mate!");
-        System.out.println(farewell);
-    }
-
     public void showMessage(String input) {
         System.out.println(responseWrapper(input));
     }

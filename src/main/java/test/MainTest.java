@@ -1,18 +1,13 @@
 package test;
 
 import bot.*;
-import bot.Command;
-import bot.InvalidCommandException;
-import bot.InvalidInputException;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.jupiter.api.Test;
 
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Scanner;
-import java.util.concurrent.Executors;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

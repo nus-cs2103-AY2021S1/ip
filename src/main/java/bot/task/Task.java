@@ -1,4 +1,4 @@
-package bot;
+package bot.task;
 
 public class Task {
     protected String name;

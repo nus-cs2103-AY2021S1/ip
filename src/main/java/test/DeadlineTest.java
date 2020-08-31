@@ -2,7 +2,7 @@ package test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
-import bot.Deadline;
+import bot.task.Deadline;
 
 public class DeadlineTest {
 

@@ -1,5 +1,7 @@
 package bot;
 
+import bot.task.Task;
+
 import java.util.ArrayList;
 
 public class TaskList {
@@ -24,15 +26,14 @@ public class TaskList {
     /**
      * Returns the Task at userIndex - 1.
      * If no Task is found, throw IllegalArgumentException
-     * @param userIndex
+     * @param index
      * @return
      * @throws IllegalArgumentException
      */
-    public Task get(int userIndex) throws IllegalArgumentException {
+    public Task get(int index) throws IllegalArgumentException {
         try {
-            int index = userIndex - 1;
             return list.get(index);
-        } catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException | IndexOutOfBoundsException e) {
             throw new IllegalArgumentException();
         }
 
@@ -40,14 +41,15 @@ public class TaskList {
 
     /**
      * Removes the Task at userIndex - 1.
-     * @param userIndex
+     * @param index
      * @throws IllegalArgumentException
      */
-    public void remove(int userIndex) throws IllegalArgumentException {
+    public Task remove(int index) throws IllegalArgumentException {
         try {
-            int index = userIndex - 1;
+            Task task = this.list.get(index);
             this.list.remove(index);
-        } catch (IllegalArgumentException e) {
+            return task;
+        } catch (IllegalArgumentException | IndexOutOfBoundsException e) {
             throw new IllegalArgumentException();
         }
     }
