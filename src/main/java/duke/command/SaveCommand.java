@@ -20,8 +20,8 @@ public class SaveCommand implements Command {
      * Create a SaveCommand which saves all item in taskList into
      * a csv file specified by filePath.
      * Any existing data in filePath will be overwritten
-     * @param taskList
-     * @param filePath
+     * @param taskList Containing Tasks to be saved
+     * @param filePath The file to save taskList into (Existing data will be overwritten)
      */
     public SaveCommand(List<Task> taskList, String filePath) {
         this.taskList = taskList;

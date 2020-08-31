@@ -44,3 +44,31 @@ checkstyle {
 run{
     standardInput = System.in
 }
+
+/**
+ * @@author akgrenSoar-reused
+ * Solution adapted from: https://docs.gradle.org/current/dsl/org.gradle.api.tasks.Exec.html
+ */
+task runtest(type: Exec) {
+    workingDir "./text-ui-test"
+    commandLine 'cmd', '/C', 'runtest.bat'
+}
+
+task myCheck {
+    dependsOn 'checkstyleMain'
+    dependsOn 'checkstyleTest'
+    dependsOn 'test' // JUnit test
+    dependsOn 'runtest' // text-ui-test
+}
+
+/**
+ * @@author akgrenSoar-reused
+ * Solution adapted from: https://stackoverflow.com/a/45607934/6943913
+ */
+task myBuild(type: GradleBuild) {
+    tasks = ['clean',
+             'javadoc',
+             'shadowJar'
+    ]
+}
+

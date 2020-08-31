@@ -20,8 +20,8 @@ public class LoadCommand implements Command {
      * Load taskList from a csv file as specified by filePath.
      * taskList must be initialized and all entries will be cleared
      * on execution of this command
-     * @param taskList
-     * @param filePath
+     * @param taskList to load data into (Existing data will be deleted)
+     * @param filePath A csv file to read data from
      */
     public LoadCommand(List<Task> taskList, String filePath) {
         this.taskList = taskList;
