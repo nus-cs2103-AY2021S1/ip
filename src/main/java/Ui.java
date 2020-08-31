@@ -63,12 +63,12 @@ public class Ui {
      * Formats given String and prints in the UI
      * @param printStr String to be formatted and printed
      */
-    public void printf(String printStr) {
+    public String printf(String printStr) {
         String print = format + printStr;
         String[] printSplit = print.split("\n");
         for (int i = 1; i < printSplit.length; i++) {
             printSplit[i] = "\t" + printSplit[i];
         }
-        System.out.println(Arrays.asList(printSplit).stream().collect(Collectors.joining("\n")));
+        return Arrays.asList(printSplit).stream().collect(Collectors.joining("\n"));
     }
 }
