@@ -3,7 +3,7 @@ package duckie.command;
 import java.util.ArrayList;
 
 import duckie.Storage;
-import duckie.Ui;
+import duckie.ui.Ui;
 import duckie.exception.DuckieException;
 import duckie.exception.DuckieNoListException;
 import duckie.task.Task;

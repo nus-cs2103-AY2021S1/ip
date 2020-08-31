@@ -1,4 +1,4 @@
-package duckie;
+package duckie.ui;
 
 import java.util.ArrayList;
 import java.util.Scanner;

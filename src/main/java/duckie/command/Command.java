@@ -1,7 +1,7 @@
 package duckie.command;
 
 import duckie.Storage;
-import duckie.Ui;
+import duckie.ui.Ui;
 import duckie.exception.DuckieException;
 import duckie.task.TaskList;
 
