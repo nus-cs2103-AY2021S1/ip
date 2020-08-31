@@ -5,6 +5,11 @@ import duke.command.CommandParser;
 import duke.storage.Storage;
 import duke.util.TaskList;
 
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
+
 /**
  * Duke is a Personal Assistant Chatbot that helps a user keep track of various things.
  */
