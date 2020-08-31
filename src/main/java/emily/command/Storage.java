@@ -25,6 +25,7 @@ public class Storage {
     /**
      * Returns a list of tasks
      * Reads the information from the txt file and process into a list of task
+     *
      * @return an Arraylist of Task
      * @throws DukeException when the file is invalid
      */
@@ -63,6 +64,8 @@ public class Storage {
                             e.setFinished(isCompleted);
                             store.add(e);
                             break;
+                        default:
+                            throw new DukeException("invalid type of task");
 
                     }
                 }
@@ -82,10 +85,11 @@ public class Storage {
 
     /**
      * Updates the txt file when there are modifications to the task list
+     *
      * @param store contains the updated list of task
      * @throws DukeException for invalid file
      */
-    public void reWrite(ArrayList<Task> store) throws DukeException{
+    public void reWrite(ArrayList<Task> store) throws DukeException {
         try {
             FileWriter fw = new FileWriter(this.filepath);
             String txt = "";
@@ -94,11 +98,14 @@ public class Storage {
                 String temp = "";
                 Task current = store.get(i);
                 if (current instanceof ToDos) {
-                    temp = "T" + (current.isFinished() ? "1" : "0") + "," + current.getDescription();
+                    temp = "T" + (current.isFinished() ? "1" : "0")
+                            + "," + current.getDescription();
                 } else if (current instanceof Deadline) {
-                    temp = "D" + (current.isFinished() ? "1" : "0") + "," + current.getDescription() + "," + ((Deadline) current).getBy();
+                    temp = "D" + (current.isFinished() ? "1" : "0")
+                            + "," + current.getDescription() + "," + ((Deadline) current).getBy();
                 } else if (current instanceof Event) {
-                    temp = "E" + (current.isFinished() ? "1" : "0") + "," + current.getDescription() + "," + ((Event) current).getAt();
+                    temp = "E" + (current.isFinished() ? "1" : "0")
+                            + "," + current.getDescription() + "," + ((Event) current).getAt();
                 }
 
                 txt = txt + temp + System.lineSeparator();

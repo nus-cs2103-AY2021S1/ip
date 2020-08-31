@@ -9,6 +9,9 @@ public class Task {
     protected char type;
     protected boolean isFinished;
 
+    /**
+     * @param description
+     */
     public Task(String description) {
         this.description = description;
         this.isFinished = false;
@@ -30,7 +33,9 @@ public class Task {
         return (isFinished ? "\u2713" : "\u2718");
     }
 
-    public char getType() { return this.type; }
+    public char getType() {
+        return this.type;
+    }
 
     @Override
     public String toString() {

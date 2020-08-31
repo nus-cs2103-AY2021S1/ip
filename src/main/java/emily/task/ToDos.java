@@ -3,15 +3,20 @@ package main.java.emily.task;
 /**
  * Represents a task that has a simple description
  */
-public class ToDos extends Task{
+public class ToDos extends Task {
 
+    /**
+     * Subclass of Task with a given type
+     *
+     * @param description
+     */
     public ToDos(String description) {
         super(description);
         this.type = 'T';
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return "[T]" + super.toString();
     }
 }

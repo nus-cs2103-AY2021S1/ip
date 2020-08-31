@@ -12,7 +12,11 @@ public class Deadline extends Task {
     protected LocalDate by;
     protected String timeStamp;
 
-
+    /**
+     * Subclass of Task with timestamp
+     * @param description
+     * @param timeStamp
+     */
     public Deadline(String description, String timeStamp) {
         super(description);
         this.timeStamp = timeStamp;
@@ -24,7 +28,7 @@ public class Deadline extends Task {
      * Getter method to retrieve timestamp
      * @return timestamp in the format yyy-mm--dd
      */
-    public String getBy(){
+    public String getBy() {
         return this.timeStamp;
 
     }

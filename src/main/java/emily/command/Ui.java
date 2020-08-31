@@ -1,6 +1,7 @@
 package main.java.emily.command;
 
 import main.java.emily.task.Task;
+
 import java.util.ArrayList;
 
 
@@ -17,8 +18,9 @@ public class Ui {
 
     /**
      * Read a line of input from the user and modify the task list accordingly
+     *
      * @param input command from the user
-     * @param ls to be modified
+     * @param ls    to be modified
      * @throws DukeException when there is invalid command
      */
     public void reading(String input, TaskList ls) throws DukeException {
@@ -33,7 +35,7 @@ public class Ui {
             System.out.println(divider);
 
             int num = 1;
-            for (Task c : ls.retrieve()) {
+            for (Task c : ls.getStore()) {
                 String item = "    " + num + ". " + c;
                 num++;
                 System.out.println(item);
@@ -53,37 +55,37 @@ public class Ui {
                 //call parser to convert to task
                 current = p.process(input);
                 ls.add(current);
-                System.out.println("    Now you have " + (ls.retrieve().size()) + " tasks in the list" +
-                        "\n" + divider);
+                System.out.println("    Now you have " + (ls.getStore().size())
+                        + " tasks in the list" + "\n" + divider);
             }
 
-        } else if (input.contains("done") || input.contains("delete") ||input.contains("find")) {
-            if(input.contains("done")){
+        } else if (input.contains("done") || input.contains("delete") || input.contains("find")) {
+            if (input.contains("done")) {
 
                 int index = Character.getNumericValue(input.charAt(5)) - 1;
-                current = ls.retrieve().get(index);
+                current = ls.getStore().get(index);
                 current.setFinished(true);
-                System.out.println(divider + "\n    Nice work, I have marked this task as done: " + current
-                        + "\n" + divider);
+                System.out.println(divider + "\n    Nice work, I have marked this task as done: "
+                        + current + "\n" + divider);
 
-            } else if(input.contains("delete")){
+            } else if (input.contains("delete")) {
 
-                if(input.trim().equals("delete")){
+                if (input.trim().equals("delete")) {
                     throw new DukeException("missing index");
                 }
 
                 int index = Character.getNumericValue(input.charAt(7)) - 1;
-                if ((index + 1) > ls.retrieve().size()) {
+                if ((index + 1) > ls.getStore().size()) {
                     throw new DukeException("Invalid index");
                 }
-                current = ls.retrieve().get(index);
+                current = ls.getStore().get(index);
                 ls.delete(index);
 
                 System.out.println(divider + "\n    I have deleted this task for you: " + current);
-                System.out.println("    You have " + ls.retrieve().size() + " tasks in your list now" +
-                        "\n" + divider);
-            } else{ //case of finding
-                if(input.trim().equals("find")){
+                System.out.println("    You have " + ls.getStore().size() + " tasks in your list now"
+                        + "\n" + divider);
+            } else { //case of finding
+                if (input.trim().equals("find")) {
                     throw new DukeException("missing keyword");
                 }
                 String keyword = input.substring(5);
@@ -92,7 +94,7 @@ public class Ui {
 
                 System.out.println(divider + "\n    Here are the matching tasks in your list");
                 int index = 1;
-                for(Task t: arr){
+                for (Task t : arr) {
                     System.out.println(index + ". " + t);
                     index++;
                 }

@@ -8,11 +8,15 @@ import java.util.Scanner;
  */
 public class Emily {
 
-    private Storage storage;
+    private static final String FILE_PATH = "data/emily.txt";
+    private final Storage storage;
     private TaskList tasks;
-    private Ui ui;
-    static String FILE_PATH = "data/emily.txt";
+    private final Ui ui;
 
+    /**
+     * Initialises Emily bot
+     * @param filePath location to store the information
+     */
     public Emily(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -33,9 +37,9 @@ public class Emily {
         String divider = "-------------------";
         boolean end = false;
 
-        System.out.println("Hello, I am Emily\n" +
-                "What can i do for you?\n" +
-                divider);
+        System.out.println("Hello, I am Emily\n"
+                + "What can i do for you?\n"
+                + divider);
 
         while (!end) {
             try {
@@ -45,7 +49,7 @@ public class Emily {
                 while (!input.equals("bye")) {
                     ui.reading(input, tasks);
                     input = sc.nextLine();
-                    storage.reWrite(tasks.retrieve());
+                    storage.reWrite(tasks.getStore());
                 }
                 end = true;
             } catch (DukeException e) {

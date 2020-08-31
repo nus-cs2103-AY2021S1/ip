@@ -13,6 +13,11 @@ public class Event extends Task {
     protected LocalDate at;
     protected String timeStamp;
 
+    /**
+     * Subclass of Task with a timestamp
+     * @param description
+     * @param timeStamp
+     */
     public Event(String description, String timeStamp) {
         super(description);
         this.timeStamp = timeStamp;
