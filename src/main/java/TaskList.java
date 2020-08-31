@@ -40,7 +40,7 @@ public class TaskList implements Iterable<Task> {
      */
     public String markCompleted(int index) throws DukeException {
         try {
-            Task item = listOfItems.get(index);
+            Task item = this.listOfItems.get(index);
             item.markAsDone();
 
             return String.format("\nNice! I've marked this task as done:\n  %s\n", item.toString());
@@ -58,7 +58,7 @@ public class TaskList implements Iterable<Task> {
      */
     public String deleteTask(int index) throws DukeException {
         try {
-            Task item = listOfItems.remove(index);
+            Task item = this.listOfItems.remove(index);
 
             return String.format("\nNoted. I've removed this task:\n  %s\nNow you have %d tasks in your list.\n",
                     item.toString(),

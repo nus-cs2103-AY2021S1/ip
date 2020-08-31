@@ -18,10 +18,11 @@ public class UI {
      * adds the lines to make it look nice
      * @param content String item to be wrapped by two lines
      */
-    public static void addLines(String content) {
-        System.out.print(line);
-        System.out.print(content);
-        System.out.println(line);
+    public static String addLines(String content) {
+       // System.out.print(line);
+       // System.out.print(content);
+       // System.out.println(line);
+        return line + "\n" + content +"\n" + line;
     }
 
     /**

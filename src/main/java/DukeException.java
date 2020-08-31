@@ -12,7 +12,7 @@ public class DukeException extends RuntimeException {
 
     @Override
     public String toString() {
-        return "____________________________________________________________\n" + super.toString() + "\n____________________________________________________________";
+        return super.toString();
     }
 }
 
