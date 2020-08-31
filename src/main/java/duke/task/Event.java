@@ -16,7 +16,7 @@ public class Event extends Task {
      * as a LocalDateTime Object.
      *
      * @param description Describes the Event.
-     * @param at The specified timing of the Event.
+     * @param at          The specified timing of the Event.
      */
     public Event(String description, String at) {
         super(description);
@@ -29,9 +29,9 @@ public class Event extends Task {
      * attribute. String time Object has to have proper formatting "yyyy-MM-dd HH:mm"
      * as it will be parsed as a LocalDateTime Object.
      *
-     * @param done  Indicates whether the task has been done.
+     * @param done        Indicates whether the task has been done.
      * @param description Describes the Event.
-     * @param at The specified timing of the Event.
+     * @param at          The specified timing of the Event.
      */
     public Event(String done, String description, String at) {
         super(description);
@@ -52,7 +52,7 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " +
-                at.format(DateTimeFormatter.ofPattern("MMM d yyyy HH:mm")) + ")";
+        return "[E]" + super.toString() + " (at: "
+                + at.format(DateTimeFormatter.ofPattern("MMM d yyyy HH:mm")) + ")";
     }
 }

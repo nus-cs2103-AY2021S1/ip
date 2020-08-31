@@ -18,7 +18,7 @@ public class Todo extends Task {
     /**
      * Creates a Todo Task with a done indicator and a description.
      *
-     * @param done Indicates whether the task has been done.
+     * @param done        Indicates whether the task has been done.
      * @param description Describes the task.
      */
     public Todo(String done, String description) {
