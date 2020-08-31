@@ -16,7 +16,7 @@ import duke.ui.Ui;
 public class Duke {
     private static final String filePath = "duke.txt";
     private Storage storage;
-    private TaskList result;
+    private TaskList results;
     private Ui ui;
 
     /**
@@ -28,10 +28,10 @@ public class Duke {
         ui = new Ui();
         storage = new Storage(filePath);
         try {
-            result = new TaskList(storage.readFromFile());
+            results = new TaskList(storage.readFromFile());
         } catch (DukeException e) {
             ui.showError(e);
-            result = new TaskList();
+            results = new TaskList();
         }
     }
 
@@ -62,8 +62,8 @@ public class Duke {
             String instruction = sc.nextLine();
             try {
                 EnumCommand enumCommand = Parser.parseCommand(instruction);
-                String commandResult = CommandExecution.executeCommand(enumCommand, instruction, result);
-                storage.storeToFile(result);
+                String commandResult = CommandExecution.executeCommand(enumCommand, instruction, results);
+                storage.storeToFile(results);
             } catch (Exception e) {
                 ui.showError(e);
             }
@@ -80,8 +80,8 @@ public class Duke {
     public String getResponse(String input) {
         try {
             EnumCommand enumCommand = Parser.parseCommand(input);
-            String commandResult = CommandExecution.executeCommand(enumCommand, input, result);
-            storage.storeToFile(result);
+            String commandResult = CommandExecution.executeCommand(enumCommand, input, results);
+            storage.storeToFile(results);
             return commandResult;
         } catch (Exception e) {
             return ui.showError(e);
