@@ -21,7 +21,7 @@ public class Controller {
      */
     private final Executor exe;
 
-    private boolean isInUserAuthenthicationMode = false;
+    private boolean isInUserAuthenticationMode = false;
 
     /**
      * Private constructor for a Parser object.
@@ -69,7 +69,7 @@ public class Controller {
      */
     public String parseAndExec(String command) {
         Parser parser = null;
-        if (!isInUserAuthenthicationMode) {
+        if (!isInUserAuthenticationMode) {
             try {
                 parser = Parser.parseAndCheck(command);
             } catch (EmptyTaskException e) {
@@ -116,7 +116,7 @@ public class Controller {
                             exe.getListSize());
 
                 case AUTHCHECK:
-                    isInUserAuthenthicationMode = true;
+                    isInUserAuthenticationMode = true;
                     return "Please enter your password before I clear your whole list.";
 
                 case FIND:
@@ -135,7 +135,7 @@ public class Controller {
         } else {
             try {
                 parser = Parser.authenthicateUser(command);
-                isInUserAuthenthicationMode = false;
+                isInUserAuthenticationMode = false;
                 Executable e = parser.getExecutable();
                 String reply = exe.receiveAndExec(e);
                 return reply;

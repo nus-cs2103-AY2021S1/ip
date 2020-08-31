@@ -5,6 +5,8 @@ package duke.dependencies.storage;
  * Fowler-No-Voll hash utility function.
  */
 public class FNV64 {
+
+    // Unused class
     private static final long PRIME = 0x100000001b3L;
     private static final long OFFSET = 0xcbf29ce484222325L;
 
