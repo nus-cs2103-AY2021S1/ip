@@ -75,10 +75,6 @@ public class Parser {
 
     }
 
-    public String getCommandLine() {
-        return commandLine;
-    }
-
     public String getCommandWord() {
         return commandWord;
     }

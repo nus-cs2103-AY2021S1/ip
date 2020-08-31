@@ -17,7 +17,7 @@ public class Storage {
         this.filePath = filePath;
     }
 
-    public ArrayList<Task> load() throws DukeException {
+    public ArrayList<Task> load() {
         ArrayList<Task> result = new ArrayList<>();
 
         try {
