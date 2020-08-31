@@ -74,19 +74,19 @@ Here are the tasks in your list:
 5.[T][✘] wash dishes
 **************************************************************************
 --------------------------------------------------------------------------
-☹ OOPS! The description of a todo cannot be empty.
+☹ OOPS! The description of todo cannot be empty.
 --------------------------------------------------------------------------
 --------------------------------------------------------------------------
-☹ OOPS! The description/location of an event cannot be empty.
+☹ OOPS! The description/location of event cannot be empty.
 --------------------------------------------------------------------------
 --------------------------------------------------------------------------
-☹ OOPS! The description/deadline of a deadline cannot be empty.
+☹ OOPS! The description/date of deadline cannot be empty.
 --------------------------------------------------------------------------
 --------------------------------------------------------------------------
-☹ OOPS! The description/location of an event cannot be empty.
+☹ OOPS! The description/location of event cannot be empty.
 --------------------------------------------------------------------------
 --------------------------------------------------------------------------
-☹ OOPS! The description/deadline of a deadline cannot be empty.
+☹ OOPS! The description/date of deadline cannot be empty.
 --------------------------------------------------------------------------
 **************************************************************************
 Here are the tasks in your list:

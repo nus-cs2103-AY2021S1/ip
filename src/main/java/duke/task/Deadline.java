@@ -1,7 +1,5 @@
 package duke.task;
 
-import duke.task.Task;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -20,8 +18,8 @@ public class Deadline extends Task {
     }
 
     public String getParsedTask() {
-        return "deadline " + this.description + " /by " + this.by + "\n" 
-                + this.done + "\n";
+        return "deadline " + this.description + " /by " + this.by + System.lineSeparator() 
+                + this.done + System.lineSeparator();
     }
     
     @Override

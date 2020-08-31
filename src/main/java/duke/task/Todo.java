@@ -1,7 +1,5 @@
 package duke.task;
 
-import duke.task.Task;
-
 public class Todo extends Task {
 
     public Todo(String description) {
@@ -9,8 +7,8 @@ public class Todo extends Task {
     }
     
     public String getParsedTask() {
-        return "todo " + this.description + "\n" 
-                + this.done + "\n";
+        return "todo " + this.description + System.lineSeparator()
+                + this.done + System.lineSeparator();
     }
     
     @Override

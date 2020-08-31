@@ -11,7 +11,7 @@ public class Duke {
     private TaskList taskList;
     private Parser parser;
     
-    public Duke(String filePath) {
+    private Duke(String filePath) {
         try {
             storage = new Storage(filePath);
             taskList = new TaskList(storage.load());

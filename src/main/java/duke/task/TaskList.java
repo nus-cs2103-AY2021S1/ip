@@ -50,20 +50,41 @@ public class TaskList {
         System.out.println("added: " + input);
         System.out.println("Now you have " + list.size() + " tasks in the list.");
     }
+    
+    private void throwEmptyFieldException(String taskType, String ... fields) {
+        StringBuilder emptyFields = new StringBuilder();
+        boolean isFirstField = true;
+        for (String field: fields) {
+            if (isFirstField) {
+                emptyFields.append(field);
+                isFirstField = false;
+            } else {
+                emptyFields.append("/").append(field);
+            }
+        }
+        
+        throw new IllegalArgumentException("OOPS! The " + emptyFields + " of " + taskType + " cannot be empty.");
+    }
+    
+    private void throwInvalidTaskSyntaxException(String taskType) {
+        throw new IllegalArgumentException(String.format("OOPS! Invalid syntax. To add a %s, use:\n%s", taskType,
+                Task.getFormat(taskType.toUpperCase())));
+    }
 
     public Task add(String input, boolean echo) {
         String[] splitInput = input.split(" ", 2);
         String taskType = splitInput[0];
         Task newTask;
+        
         switch(taskType) {
             case "todo":
                 if (input.matches("todo (\\S+\\s?)+")) {
                     newTask = new Todo(splitInput[1]);
                     break;
                 } else if (input.matches("todo\\s?")) {
-                    throw new IllegalArgumentException("OOPS! The description of a todo cannot be empty.");
+                    throwEmptyFieldException("todo", "description");
                 } else {
-                    throw new IllegalArgumentException("OOPS! Invalid syntax. To add a todo, use:\n         " + Task.getFormat("TODO"));
+                    throwInvalidTaskSyntaxException("todo");
                 }
             case "deadline":
                 if (input.matches("deadline (\\S+\\s?)+ /by (\\S+\\s?)+")) {
@@ -73,9 +94,9 @@ public class TaskList {
                     newTask = new Deadline(deadlineDesc, by);
                     break;
                 } else if (input.matches("deadline\\s?") || !input.contains(" by ")){
-                    throw new IllegalArgumentException("OOPS! The description/deadline of a deadline cannot be empty.");
+                    throwEmptyFieldException("deadline", "description", "date");
                 } else {
-                    throw new IllegalArgumentException("OOPS! Invalid syntax. To add a deadline, use:\n         " + Task.getFormat("DEADLINE"));
+                    throwInvalidTaskSyntaxException("deadline");
                 }
             case "event":
                 if (input.matches("event (\\S+\\s?)+ /at (\\S+\\s?)+")) {
@@ -85,9 +106,9 @@ public class TaskList {
                     newTask = new Event(eventDesc, at);
                     break;
                 } else if (input.matches("event\\s?") || !input.contains(" at ")) {
-                    throw new IllegalArgumentException("OOPS! The description/location of an event cannot be empty.");
+                    throwEmptyFieldException("event", "description", "location");
                 } else {
-                    throw new IllegalArgumentException("OOPS! Invalid syntax. To add an event, use:\n         " + Task.getFormat("EVENT"));
+                    throwInvalidTaskSyntaxException("event");
                 }
             default:
                 throw new IllegalArgumentException("OOPS! There is no task of type " + taskType + "!");

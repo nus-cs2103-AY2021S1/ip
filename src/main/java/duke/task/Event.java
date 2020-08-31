@@ -1,7 +1,5 @@
 package duke.task;
 
-import duke.task.Task;
-
 public class Event extends Task {
     protected String at;
 
@@ -11,8 +9,8 @@ public class Event extends Task {
     }
 
     public String getParsedTask() {
-        return "event " + this.description + " /at " + this.at + "\n"
-                + this.done + "\n";
+        return "event " + this.description + " /at " + this.at + System.lineSeparator()
+                + this.done + System.lineSeparator();
     }
 
     @Override
