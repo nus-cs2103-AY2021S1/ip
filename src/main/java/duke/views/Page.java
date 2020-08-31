@@ -21,7 +21,7 @@ public interface Page {
     /**
      * The default font for Titles.
      */
-    Font DEFAULT_FONT = Font.font("Tahoma", FontWeight.NORMAL, 40);
+    Font DEFAULT_TITLE_FONT = Font.font("Tahoma", FontWeight.NORMAL, 40);
 
     /**
      * Renders a scene on the window.

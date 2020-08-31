@@ -42,7 +42,7 @@ public class Introduction implements Page {
 
         // set up title
         Text sceneTitle = new Text(Messenger.INTRO_MESSAGE);
-        sceneTitle.setFont(Page.DEFAULT_FONT);
+        sceneTitle.setFont(Page.DEFAULT_TITLE_FONT);
         root.add(sceneTitle, 3, 2);
 
         // set up window
