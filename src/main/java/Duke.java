@@ -9,7 +9,8 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
 
         ////Beginning of my own code:
-        System.out.println("Hello! Duke at your service. Please name your request.");
+        System.out.println("Hello! Duke at your service. Please name your request." +
+                "\nAll dates should be in the form of YYYY-MM-DD: ");
         Scanner sc = new Scanner(System.in);
 
         //Object to store the list
@@ -40,7 +41,7 @@ public class Duke {
                         if (name.isEmpty() || name.isBlank()) {
                             throw new DukeException("Oops, tasks cannot be empty");
                         }
-                        String dueDate = userMessage.split("/by")[1];
+                        String dueDate = userMessage.split("/by")[1].substring(1);
                         newItem = new Deadline(name, Task.Status.PENDING,dueDate);
                     }
                 } else if (userMessage.startsWith("event")) {
@@ -48,11 +49,11 @@ public class Duke {
                         throw new DukeException("Sorry, incorrect format for Events. \n Please specify a time " +
                                 "(and task name)");
                     } else {
-                        String name = userMessage.split("/at")[0].substring(5);
+                        String name = userMessage.split("/at ")[0].substring(5);
                         if (name.isEmpty() || name.isBlank()) {
                             throw new DukeException("Oops, tasks cannot be empty");
                         }
-                        String time = userMessage.split("/at")[1];
+                        String time = userMessage.split("/at ")[1];
                         newItem = new Event(name, Task.Status.PENDING,time);
                     }
                 } else {
