@@ -33,6 +33,7 @@ public class Ui {
 
     /**
      * Print the number of task in the list now.
+     *
      * @param i, number of task
      */
     public void printListSize(int i) {
@@ -41,7 +42,8 @@ public class Ui {
 
     /**
      * Returns user's direct input.
-     * @return
+     *
+     * @return user's next command
      */
     public String readCommand() {
         return sc.nextLine();

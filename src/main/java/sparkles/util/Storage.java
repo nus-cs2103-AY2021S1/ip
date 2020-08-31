@@ -32,6 +32,7 @@ public class Storage {
      * Update task.txt.
      * Task.txt is overwritten with respect to the
      * tasks in the list provided as parameter.
+     *
      * @param storage, list of task
      */
     public void updateFile(List<Task> storage) {
@@ -54,7 +55,13 @@ public class Storage {
     }
 
     /**
-     * Reads task.txt
+     * Reads task.txt.
+     * Meanwhile, update storage in Tasklist
+     * with the current Tasks in the task.txt.
+     * The text in the .txt is decoded to
+     * differentiate what kind of task(
+     * deadline, event, todo) it is.
+     *
      * @return a list with the corresponding task.
      * @throws SparklesException
      */
