@@ -15,7 +15,7 @@ dependencies {
 }
 
 test {
-    useJUnitPlatform()
+    useJUnitPlatform {}
 
     testLogging {
         events "passed", "skipped", "failed"
@@ -26,6 +26,7 @@ test {
         showStackTraces true
         showStandardStreams = false
     }
+
 }
 
 application {
@@ -43,4 +44,5 @@ checkstyle {
 
 run{
     standardInput = System.in
+    enableAssertions = true
 }

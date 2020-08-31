@@ -8,13 +8,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ParserTest {
 
-    Storage storage = new Storage();
-    Tasklist tasklist = new Tasklist(storage);
-    Parser parser;
+    private Storage storage = new Storage();
+    private Tasklist tasklist = new Tasklist(storage);
+    private Parser parser;
 
     @Test
     public void addInvalidTask() throws IOException{
-        tasklist.loadList();
         try {
             parser.commandTasks(tasklist, "todo", "");
         } catch (DukeTaskException e) {

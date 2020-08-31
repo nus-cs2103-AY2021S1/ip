@@ -9,8 +9,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ListCommandTest {
 
-    Storage storage = new Storage();
-    Tasklist tasklist = new Tasklist(storage);
+    private Storage storage = new Storage();
+    private Tasklist tasklist = new Tasklist(storage);
 
     @Test
     public void invalidListCommand() throws IOException{
