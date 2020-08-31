@@ -1,6 +1,5 @@
 package duke.command;
 
-import duke.exception.InvalidDateFormatException;
 import duke.parser.DateParser;
 import duke.storage.Storage;
 
@@ -17,16 +16,16 @@ import java.util.Optional;
  * Is responsible for handing commands starting with <code>find</code>.
  */
 public class FindCommand extends Command {
-    public final static String COMMAND = "find";
+    public static final String COMMAND = "find";
     
-    private String keyword;
+    private String[] keywords;
 
     /**
      * Creates a <code>FindCommand</code> object.
-     * @param keyword The searching keyword
+     * @param keywords The searching keywords
      */
-    public FindCommand(String keyword) {
-        this.keyword = keyword;
+    public FindCommand(String... keywords) {
+        this.keywords = keywords;
     }
 
     /**
@@ -35,21 +34,22 @@ public class FindCommand extends Command {
      * @param tasks A list of tasks
      * @param ui An Ui object that correspond to interacting with the user
      * @param storage A database that stores the task list locally when the program is not running
-     * @throws InvalidDateFormatException If the date cannot be parsed
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws InvalidDateFormatException {
-        Optional<LocalDate> optDate = DateParser.parse(keyword);
-        if (optDate.isPresent()) {
-            LocalDate date = optDate.get();
-            TaskList filteredTasks = tasks.filter((task) ->
-                    ((task instanceof Deadline && ((Deadline) task).isDueOn(date))
-                    || (task instanceof Event && ((Event) task).isOccuringOn(date))));
-            return ui.showFindResult(filteredTasks);
-        } else {
-            TaskList filteredTasks = tasks.filter((task) ->
-                    task.toString().toLowerCase().contains(keyword.toLowerCase()));
-            return ui.showFindResult(filteredTasks);
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        TaskList filteredTasks = tasks;
+        for (String keyword : keywords) {
+            Optional<LocalDate> optDate = DateParser.parse(keyword);
+            if (optDate.isPresent()) {
+                LocalDate date = optDate.get();
+                filteredTasks = tasks.filter((task) -> ((task instanceof Deadline && ((Deadline) task).isDueOn(date))
+                                || (task instanceof Event && ((Event) task).isOccuringOn(date))));
+
+            } else {
+                filteredTasks = tasks.filter((task) ->
+                        task.toString().toLowerCase().contains(keyword.toLowerCase()));
+            }
         }
+        return ui.showFindResult(filteredTasks);
     }
 }
