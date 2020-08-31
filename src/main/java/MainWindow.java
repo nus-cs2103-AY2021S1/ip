@@ -6,6 +6,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -31,9 +32,11 @@ public class MainWindow extends AnchorPane {
 
     @FXML
     public void initialize() {
+        Region spacer =  new Region();
+        spacer.setMinHeight(20);
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         String text = ui.startUp(duke.getTaskList(), duke.getStorage());
-        dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(text, dukeImage));
+        dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(text, dukeImage), spacer);
     }
 
     public void setDuke(Duke d) {
@@ -48,10 +51,18 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         String response = duke.getResponse(input);
+        Region spacer =  new Region();
+        spacer.setMinHeight(20);
+        Region spacer2 = new Region();
+        spacer2.setMinHeight(20);
+
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
+                spacer,
+                DialogBox.getDukeDialog(response, dukeImage),
+                spacer2
         );
+
         if (Parser.checkBye(input)) {
             Node source = userInput.getParent();
             Stage stage = (Stage) source.getScene().getWindow();
