@@ -63,7 +63,7 @@ public class Duke {
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
-    protected String getResponse(String input) {
+    public String getResponse(String input) {
         ui.intro();
             try {
                 Command command = Parser.parse(input);
