@@ -34,27 +34,25 @@ public class Storage {
         List<Task> lst = new ArrayList<>();
         try {
             Scanner sc = new Scanner(file);
-            String type, desc, by, at;
-            int status;
             while (sc.hasNext()) {
-                type = sc.nextLine();
-                desc = sc.nextLine();
-                status = Integer.parseInt(sc.nextLine());
+                String type = sc.nextLine();
+                String desc = sc.nextLine();
+                int status = Integer.parseInt(sc.nextLine());
                 switch (type) {
                 case "todo":
                     lst.add(new Todo(desc));
                     break;
                 case "deadline":
-                    by = sc.nextLine();
+                    String by = sc.nextLine();
                     lst.add(new Deadline(desc, by));
                     break;
                 case "event":
-                    at = sc.nextLine();
+                    String at = sc.nextLine();
                     lst.add(new Event(desc, at));
                     break;
                 }
                 if (status == 1) {
-                    lst.get(lst.size() - 1).markDone();
+                    lst.get(lst.size() - 1).setDone();
                 }
             }
         } catch (IOException e) {

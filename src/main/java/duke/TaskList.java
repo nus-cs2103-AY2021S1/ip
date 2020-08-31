@@ -6,12 +6,12 @@ import java.util.List;
  * Manage list of all tasks
  */
 public class TaskList {
-    private final List<Task> lst;
+    private final List<Task> tasks;
     private final Storage storage;
 
     public TaskList() {
         storage = new Storage("data.txt");
-        lst = storage.load();
+        tasks = storage.load();
     }
 
     private void addTodo(String desc) {
@@ -19,7 +19,7 @@ public class TaskList {
         if (desc.isEmpty()) {
             throw new IllegalArgumentException("☹ OOPS!!! The description of a todo cannot be empty.");
         }
-        lst.add(new Todo(desc));
+        tasks.add(new Todo(desc));
     }
 
     private void addDeadline(String desc) {
@@ -29,7 +29,7 @@ public class TaskList {
         }
         String newDesc = desc.substring(0, desc.indexOf('/') - 1);
         String time = desc.substring(desc.indexOf('/') + 4);
-        lst.add(new Deadline(newDesc, time));
+        tasks.add(new Deadline(newDesc, time));
 
     }
 
@@ -40,7 +40,7 @@ public class TaskList {
         }
         String newDesc = event.substring(0, event.indexOf('/') - 1);
         String time = event.substring(event.indexOf('/') + 4);
-        lst.add(new Event(newDesc, time));
+        tasks.add(new Event(newDesc, time));
     }
 
     /**
@@ -57,8 +57,8 @@ public class TaskList {
         } else if (command.startsWith("event")) {
             addEvent(command.substring(5));
         }
-        Ui.addTask(lst);
-        storage.write(lst);
+        Ui.addTask(tasks);
+        storage.write(tasks);
     }
 
     /**
@@ -68,9 +68,9 @@ public class TaskList {
      */
     public void markDone(String command) {
         int num = Integer.parseInt(command) - 1;
-        lst.get(num).markDone();
-        Ui.markDone(lst.get(num));
-        storage.write(lst);
+        tasks.get(num).setDone();
+        Ui.markDone(tasks.get(num));
+        storage.write(tasks);
     }
 
     /**
@@ -80,15 +80,15 @@ public class TaskList {
      */
     public void delete(String command) {
         int num = Integer.parseInt(command) - 1;
-        Task cur = lst.remove(num);
-        Ui.delete(cur, lst);
-        storage.write(lst);
+        Task cur = tasks.remove(num);
+        Ui.delete(cur, tasks);
+        storage.write(tasks);
     }
 
     /**
      * list all tasks in the list
      */
     public void list() {
-        Ui.list(lst);
+        Ui.list(tasks);
     }
 }

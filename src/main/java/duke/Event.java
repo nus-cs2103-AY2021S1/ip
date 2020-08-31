@@ -25,6 +25,6 @@ public class Event extends Task {
      */
     @Override
     protected String toDisk() {
-        return String.format("event\n%s\n%d\n%s", desc, (done ? 1 : 0), happenAt);
+        return String.format("event\n%s\n%d\n%s", desc, (isDone ? 1 : 0), happenAt);
     }
 }

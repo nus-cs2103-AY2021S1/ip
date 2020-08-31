@@ -26,6 +26,6 @@ public class Deadline extends Task {
      */
     @Override
     protected String toDisk() {
-        return String.format("deadline\n%s\n%d\n%s", desc, (done ? 1 : 0), deadline);
+        return String.format("deadline\n%s\n%d\n%s", desc, (isDone ? 1 : 0), deadline);
     }
 }

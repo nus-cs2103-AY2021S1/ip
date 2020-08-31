@@ -5,23 +5,23 @@ package duke;
  */
 public abstract class Task {
     protected String desc;
-    protected boolean done;
+    protected boolean isDone;
 
     public Task(String desc) {
         this.desc = desc;
-        this.done = false;
+        this.isDone = false;
     }
 
     /**
-     * use to mark this task to be done
+     * use to mark this task as done
      */
-    public void markDone() {
-        done = true;
+    public void setDone() {
+        isDone = true;
     }
 
     @Override
     public String toString() {
-        char sign = (done ? '✓' : '✗');
+        char sign = (isDone ? '✓' : '✗');
         return String.format("[%c] %s", sign, desc);
     }
 
