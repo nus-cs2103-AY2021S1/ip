@@ -16,9 +16,9 @@ public class Ui {
     /**
      * Prints welcome words to screen.
      */
-    public void welcomeWord() {
-        System.out.println("//////////\n" + "->Hello! I'm Duke\n" +
-                "->What can I do for you?" + "\n");
+    public String welcomeWord() {
+        return ("//////////\n" + "->Hello! I'm Duke\n"
+                + "->What can I do for you?" + "\n");
     }
 
     /**
@@ -26,12 +26,14 @@ public class Ui {
      *
      * @param taskList Task list with past tasks.
      */
-    public void showHistory(TaskList taskList) {
+    public String showHistory(TaskList taskList) {
+        String result = "";
         if (taskList.taskCount() != 0) {
-            System.out.println("\n-> Saved List:\n");
-            System.out.println(taskList.toString());
-            System.out.println("\n");
+            result += "\n-> Saved List:\n"
+                    + taskList.toString()
+                    + "\n";
         }
+        return result;
     }
 
     /**
@@ -40,14 +42,14 @@ public class Ui {
      *
      * @param taskList List of all tasks.
      */
-    public void listTask(TaskList taskList) {
+    public String listTask(TaskList taskList) {
+        String result = "";
         if (taskList.taskCount() > 0) {
-            System.out.println("\n-> Current List:\n");
-            System.out.println(taskList.toString());
-            System.out.println("\n");
+            result += "\n-> Current List:\n" + taskList.toString() + "\n";
         } else {
-            System.out.println("\n//////There is NO task in your list now//////\n");
+            result += "\n//////There is NO task in your list now//////\n";
         }
+        return result;
     }
 
     /**
@@ -58,29 +60,32 @@ public class Ui {
      * @param newTask  New task adding.
      * @param taskList List of all tasks.
      */
-    public void newTaskAdded(Task newTask, TaskList taskList) {
+    public String newTaskAdded(Task newTask, TaskList taskList) {
+        String result = "";
         if (newTask instanceof Todo) {
             Todo newTodo = (Todo) newTask;
-            System.out.println(
-                    "\n-> I have added a Todo:\n" +
-                            newTodo.toString() +
-                            "\nYou have " + taskList.taskCount() + " tasks in your list currently.\n"
-            );
+            result += (
+                    "\n-> I have added a Todo:\n"
+                            + newTodo.toString()
+                            + "\nYou have "
+                            + taskList.taskCount()
+                            + " tasks in your list currently.\n");
         } else if (newTask instanceof Event) {
             Event newEvent = (Event) newTask;
-            System.out.println(
-                    "\n-> I have added an Event:\n" +
-                            newEvent.toString() +
-                            "\nYou have " + taskList.taskCount() + " tasks in your list currently.\n"
-            );
+            result += (
+                    "\n-> I have added an Event:\n"
+                            + newEvent.toString()
+                            + "\nYou have " + taskList.taskCount()
+                            + " tasks in your list currently.\n");
         } else if (newTask instanceof Deadline) {
             Deadline newDeadline = (Deadline) newTask;
-            System.out.println(
-                    "\n-> I have added a Deadline:\n" +
-                            newDeadline.toString() +
-                            "\nYou have " + taskList.taskCount() + " tasks in your list currently.\n"
-            );
+            result += ("\n-> I have added a Deadline:\n"
+                            + newDeadline.toString()
+                            + "\nYou have "
+                            + taskList.taskCount()
+                            + " tasks in your list currently.\n");
         }
+        return result;
     }
 
     /**
@@ -90,8 +95,8 @@ public class Ui {
      * @return String representation of invalid order.
      */
     public String invalidOrder(String orderName) {
-        return "\n-> Oops, there is an error...\n" +
-                "-> please add correct description to \"" + orderName + "\" order\n";
+        return "\n-> Oops, there is an error...\n"
+                + "-> please add correct description to \"" + orderName + "\" order\n";
     }
 
     /**
@@ -99,66 +104,73 @@ public class Ui {
      *
      * @param userInput User input of order.
      */
-    public void parseFail(String userInput) {
+    public String parseFail(String userInput) {
+        String result = "";
         if (userInput.startsWith("todo")) {
-            invalidTodoOrder();
+            result = invalidTodoOrder();
         } else if (userInput.startsWith("deadline")) {
-            invalidDeadlineOrder();
+            result = invalidDeadlineOrder();
         } else if (userInput.startsWith("event")) {
-            invalidEventOrder();
+            result = invalidEventOrder();
         }
+        return result;
     }
 
     /**
      * Informs user the done order is invalid.
      */
-    public void invalidDoneOrder() {
-        System.out.println(invalidOrder("done") +
-                "-> done {order of task in task list}\n");
+    public String invalidDoneOrder() {
+        return (invalidOrder("done")
+                + "-> done {order of task in task list}\n");
     }
 
     /**
      * Informs user the adding todo order is invalid.
      */
-    public void invalidTodoOrder() {
-        System.out.println(invalidOrder("todo") +
-                "-> todo {task content}\n");
+    public String invalidTodoOrder() {
+        return (invalidOrder("todo")
+                + "-> todo {task content}\n");
     }
 
     /**
      * Informs user the adding deadline order is invalid.
      */
-    public void invalidDeadlineOrder() {
-        System.out.println(invalidOrder("deadline") +
-                "-> deadline {task content} /{yyyy-mm-dd}\n");
+    public String invalidDeadlineOrder() {
+        return (invalidOrder("deadline")
+                + "-> deadline {task content} /{yyyy-mm-dd}\n");
     }
 
     /**
      * Informs user the adding event order is invalid.
      */
-    public void invalidEventOrder() {
-        System.out.println(invalidOrder("event") +
-                "-> event {task content} /{yyyy-mm-dd}\n");
+    public String invalidEventOrder() {
+        return (invalidOrder("event")
+                + "-> event {task content} /{yyyy-mm-dd}\n");
     }
 
     /**
      * Informs user the delete order is invalid.
      */
-    public void invalidDeleteOrder() {
-        System.out.println(invalidOrder("delete") +
-                "-> delete {order of task in task list}\n");
+    public String invalidDeleteOrder() {
+        return (invalidOrder("delete")
+                + "-> delete {order of task in task list}\n");
     }
 
-    public void invalidFindOrder() {
-        System.out.println(invalidOrder("find") +
-                "-> find {keyword}\n");
+    /**
+     * Informs user the find order is invalid
+     *
+     * @return A string representing invalid find information.
+     */
+    public String invalidFindOrder() {
+        return (invalidOrder("find")
+                + "-> find {keyword}\n");
     }
 
     /**
      * Informs user the task operation is not exist.
      */
-    public void taskDoesNotExist() {
-        System.out.println("\n-> Sorry, this task does not exist...\n");
+    public String taskDoesNotExist() {
+        return ("\n-> Sorry, this task does not exist...\n");
     }
 
     /**
@@ -166,9 +178,8 @@ public class Ui {
      *
      * @param task Task marked as done.
      */
-    public void taskDone(Task task) {
-        System.out
-                .println("\n-> Good job! I have marked this task as done:\n" + task.toString() + "\n");
+    public String taskDone(Task task) {
+        return ("\n-> Good job! I have marked this task as done:\n" + task.toString() + "\n");
     }
 
     /**
@@ -177,22 +188,22 @@ public class Ui {
      * @param taskList     List of tasks.
      * @param deletingTask Task being deleted
      */
-    public void taskDeleted(TaskList taskList, Task deletingTask) {
-        System.out.println("\n-> I have removed this task:\n" + deletingTask.toString() + "\n");
-        System.out.println("Now you have " + taskList.taskCount() + " tasks in your list." + "\n");
+    public String taskDeleted(TaskList taskList, Task deletingTask) {
+        return ("\n-> I have removed this task:\n" + deletingTask.toString() + "\n")
+                + ("Now you have " + taskList.taskCount() + " tasks in your list." + "\n");
     }
 
     /**
      * Informs user there is a general error in his input.
      */
-    public void generalError() {
-        System.out.println(
-                "\n-> Sorry I cannot understand, please tap in your order correctly." +
-                        "\n-> todo {task content}   || add a todo task" +
-                        "\n-> deadline {task content} /{time}   || add a deadline task" +
-                        "\n-> event {task content} /{time} || add an event task" +
-                        "\n-> list   || list all tasks" +
-                        "\n-> done {order of task in task list}   || mark a task as done\n");
+    public String generalError() {
+        return (
+                "\n-> Sorry I cannot understand, please tap in your order correctly."
+                        + "\n-> todo {task content}   || add a todo task"
+                        + "\n-> deadline {task content} /{time}   || add a deadline task"
+                        + "\n-> event {task content} /{time} || add an event task"
+                        + "\n-> list   || list all tasks"
+                        + "\n-> done {order of task in task list}   || mark a task as done\n");
     }
 
     /**
@@ -200,22 +211,24 @@ public class Ui {
      *
      * @param resultList List of result from find order.
      */
-    public void showFindResult(List<Task> resultList) {
-        System.out.println("//////////Matching Result In Your List///////////\n");
+    public String showFindResult(List<Task> resultList) {
+        String result = "";
+        result += ("//////////Matching Result In Your List///////////\n");
         if (resultList.size() == 0) {
-            System.out.println("No Match Result...\n");
+            result += ("No Match Result...\n");
         } else {
             for (int i = 0; i < resultList.size(); i++) {
-                System.out.println(i + ". " + resultList.get(i).toString());
+                result += (i + ". " + resultList.get(i).toString());
             }
         }
-        System.out.println("\n//////////////////////////////////////////////////\n");
+        result += ("\n//////////////////////////////////////////////////\n");
+        return result;
     }
 
     /**
      * Say Goodbye to user.
      */
-    public void goodBye() {
-        System.out.println("\nBye. Hope to see you again soon!");
+    public String goodBye() {
+        return ("\nBye. Hope to see you again soon!");
     }
 }

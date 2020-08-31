@@ -69,6 +69,6 @@ public class Task {
      */
     @Override
     public String toString() {
-        return "[" + (status ? "o" : "x") + "] " + content;
+        return "[" + (status ? "Done" : "Undone") + "] " + content;
     }
 }

@@ -55,7 +55,7 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + (super.status ? "[√] " : "[×] ") + super.content + "(on " + time
+        return "[E]" + (super.status ? "[Done] " : "[Undone] ") + super.content + "(on " + time
                 .format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")" + "  <-";
     }
 }

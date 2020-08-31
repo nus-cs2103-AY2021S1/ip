@@ -12,4 +12,7 @@ CS2103 tP
 2020-08-01
 T
 0
-a
+goto Forum
+T
+0
+go for dinner
