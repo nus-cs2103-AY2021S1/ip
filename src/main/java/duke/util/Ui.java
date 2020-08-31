@@ -16,22 +16,22 @@ public class Ui {
     /**
      * Prints the greeting message.
      */
-    public void printHello() {
+    public String printHello() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        System.out.println("Hello! I'm Duke\nWhat can I do for you?");
+        return print("Hello from\n" + logo + "Hello! I'm Duke\nWhat can I do for you?");
     }
 
     /**
      * Helps print any message to standard out.
      * @param message Message to be printed.
      */
-    public void print(String message) {
+    public String print(String message) {
         System.out.println(message);
+        return message;
     }
 
     /**

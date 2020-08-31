@@ -14,23 +14,25 @@ public class FindCommand extends Command {
         this.matchString = matchString;
     }
 
-    public void execute(TaskList taskList, Ui ui) {
+    public String execute(TaskList taskList, Ui ui) {
         List<Task> store = taskList.getList();
         int count = 0;
         boolean hasMatching = false;
         String lowercaseString = matchString.toLowerCase();
+        String outputMessage = "";
         for (Task task : store) {
             count++;
             if (task.toString().toLowerCase().contains(lowercaseString)) {
                 if (!hasMatching) { // check if this is first match
-                    ui.print("Here are the matching tasks in your list:");
+                    outputMessage += ui.print("Here are the matching tasks in your list:\n");
                     hasMatching = true;
                 }
-                ui.print(String.format("%d. %s", count, task));
+                outputMessage += ui.print(String.format("%d. %s", count, task));
             }
         }
         if (!hasMatching) {
-            ui.print(String.format("You have no tasks matching '%s'", matchString));
+            outputMessage += ui.print(String.format("You have no tasks matching '%s'", matchString));
         }
+        return outputMessage;
     }
 }
