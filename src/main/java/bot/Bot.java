@@ -1,11 +1,10 @@
 package bot;
 
-import bot.command.*;
+
+import bot.command.Command;
+
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Scanner;
-import bot.util.*;
-import bot.task.*;
 
 public class Bot {
     private String name;

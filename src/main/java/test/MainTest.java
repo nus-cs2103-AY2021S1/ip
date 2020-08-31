@@ -1,12 +1,17 @@
 package test;
 
-import bot.*;
+import bot.Bot;
+
 import org.junit.After;
 import org.junit.Before;
 
-import java.io.*;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
+import java.io.PrintStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
+
 import java.util.Scanner;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -30,24 +35,27 @@ public class MainTest {
     }
 
     @org.junit.Test
-    public void mainTest_testCases_success() throws Exception {
+    public void mainTest_givenInputs_success() throws Exception {
         String expectedOutput = "";
         File file;
-        String filePath = "text-ui-test/input.txt";
+        String inputFilePath = "text-ui-test/input.txt";
+        String assetFilePath = "text-ui-test/test_assets.txt";
+        String expectedOutputFilePath = "text-ui-test/EXPECTED-UNIX.txt";
+
         try {
-            file = new File(filePath);
-            File outputFile = new File("text-ui-test/test_assets.txt");
+            file = new File(inputFilePath);
+            File outputFile = new File(assetFilePath);
             if (outputFile.exists()) {
                 outputFile.delete();
             }
-            expectedOutput = Files.readString(Path.of("text-ui-test/EXPECTED-UNIX.txt"));
+            expectedOutput = Files.readString(Path.of(expectedOutputFilePath));
         } catch (IOException e) {
             throw new IOException();
         }
 
-        Bot testBot = new Bot("Straw Bot", "text-ui-test/test_assets.txt");
+        Bot testBot = new Bot("Straw Bot", assetFilePath);
         testBot.init(new Scanner(file));
         assertEquals(expectedOutput,
-                outContent.toString().trim().replace("\r",""));
+                outContent.toString().strip().replace("\r",""));
     }
 }

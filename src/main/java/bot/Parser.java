@@ -83,30 +83,30 @@ public class Parser {
         String[] words = input.split(" ");
         StringBuilder name = new StringBuilder();
         StringBuilder deadline = new StringBuilder();
-        Boolean deadlineWords = false;
-        try {
-            for (int i = 1; i < words.length; i++) {
-                if (words[i].equals("/by")) {
-                    name.deleteCharAt(name.length() - 1);
-                    deadlineWords = true;
-                    i++;
-                }
-                if (deadlineWords) {
-                    deadline.append(words[i]);
-                    deadline.append(" ");
-                } else {
-                    name.append(words[i]);
-                    name.append(" ");
-                }
+        int indexDateDelimiter = -1;
+        for(int i = 0; i < words.length; i++) {
+            if (words[i].equals("/by")){
+                indexDateDelimiter = i;
             }
-        } catch (Exception e) {
+        }
+        try{
+            for(int i = 1; i < indexDateDelimiter; i++) {
+                name.append(words[i]);
+                name.append(" ");
+            }
+            for(int i = indexDateDelimiter + 1; i < words.length; i++) {
+                deadline.append(words[i]);
+                deadline.append(" ");
+            }
+            if (indexDateDelimiter == -1 || name.length() == 0 || deadline.length() == 0) {
+                throw new InvalidInputException("Sorry, do what? Please give me a valid input." +
+                        " Thank you.");
+            }
+        } catch (InvalidInputException e) {
             throw new InvalidInputException("Sorry, do what? Please give me a valid input." +
                     " Thank you.");
         }
-        if (name.length() == 0 || deadline.length() == 0) {
-            throw new InvalidInputException("Sorry, do what? Please give me a valid input." +
-                    " Thank you.");
-        }
+        name.deleteCharAt(name.length() - 1);
         deadline.deleteCharAt(deadline.length() - 1);
         output[0] = name.toString();
         output[1] = deadline.toString();
@@ -125,30 +125,31 @@ public class Parser {
         String[] words = input.split(" ");
         StringBuilder name = new StringBuilder();
         StringBuilder deadline = new StringBuilder();
-        Boolean deadlineWords = false;
-        try{
-            for (int i = 1; i < words.length; i++) {
-                if (words[i].equals("/at")) {
-                    name.deleteCharAt(name.length() - 1);
-                    deadlineWords = true;
-                    i++;
-                }
-                if (deadlineWords) {
-                    deadline.append(words[i]);
-                    deadline.append(" ");
-                } else {
-                    name.append(words[i]);
-                    name.append(" ");
-                }
+
+        int indexDateDelimiter = -1;
+        for(int i = 0; i < words.length; i++) {
+            if (words[i].equals("/at")){
+                indexDateDelimiter = i;
             }
-        } catch (Exception e) {
+        }
+        try{
+            for(int i = 1; i < indexDateDelimiter; i++) {
+                name.append(words[i]);
+                name.append(" ");
+            }
+            for(int i = indexDateDelimiter + 1; i < words.length; i++) {
+                deadline.append(words[i]);
+                deadline.append(" ");
+            }
+            if (indexDateDelimiter == -1 || name.length() == 0 || deadline.length() == 0) {
+                throw new InvalidInputException("Sorry, do what? Please give me a valid input." +
+                        " Thank you.");
+            }
+        } catch (InvalidInputException e) {
             throw new InvalidInputException("Sorry, do what? Please give me a valid input." +
                     " Thank you.");
         }
-        if (name.length() == 0 || deadline.length() == 0) {
-            throw new InvalidInputException("Sorry, do what? Please give me a valid input." +
-                    " Thank you.");
-        }
+        name.deleteCharAt(name.length() - 1);
         deadline.deleteCharAt(deadline.length() - 1);
         output[0] = name.toString();
         output[1] = deadline.toString();

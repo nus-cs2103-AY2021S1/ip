@@ -3,7 +3,6 @@ package bot.command;
 import bot.Storage;
 import bot.TaskList;
 import bot.task.Task;
-import bot.util.InvalidInputException;
 
 import java.io.IOException;
 

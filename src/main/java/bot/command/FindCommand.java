@@ -4,7 +4,6 @@ import bot.Storage;
 import bot.TaskList;
 import bot.task.Task;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 public class FindCommand extends Command {
