@@ -1,10 +1,10 @@
 package duke.command;
 
+import java.util.LinkedList;
+
 import duke.TaskList;
 import duke.Ui;
 import duke.task.Task;
-
-import java.util.LinkedList;
 
 /**
  * The command to list all task of a designated task list.
