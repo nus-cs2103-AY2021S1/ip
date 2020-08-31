@@ -14,6 +14,8 @@ import duke.exception.DukeException;
 import duke.exception.InadequateCommandException;
 import duke.exception.InvalidIndexException;
 
+import java.util.ArrayList;
+
 /**
  * Parses the input from the user.
  */
@@ -53,12 +55,12 @@ public class Parser {
             return new DoneCommand(splitted[1]);
         }
         
-        //command: find [date]
+        //command: find [keyword(s)]
         if (splitted[0].equals(FindCommand.COMMAND)) {
             if (splitted.length == 1) {
-                throw new DukeException("Missing date");
+                throw new DukeException("Missing keyword");
             } else {
-                return new FindCommand(splitted[1]);
+                return new FindCommand(splitted[1].split("\\s+"));
             }
         }
         

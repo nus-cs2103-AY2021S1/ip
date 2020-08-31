@@ -13,7 +13,7 @@ public class InadequateCommandException extends DukeException {
      *                   or <code>Event</code>)
      * @param missingSections The missing information sections in the input
      */
-    public InadequateCommandException(String typeOfTask, String[] missingSections) {
+    public InadequateCommandException(String typeOfTask, String... missingSections) {
         super("");
         this.typeOfTask = typeOfTask;
         this.missingSections = missingSections;
