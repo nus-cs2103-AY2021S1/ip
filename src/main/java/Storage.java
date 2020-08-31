@@ -62,7 +62,7 @@ public class Storage{
 			}
 
 		} catch (FileNotFoundException e) {
-			throw new DukeException();
+			throw new DukeException("File not found.");
 		}
 		return list;
 	}

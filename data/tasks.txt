@@ -1,2 +1,2 @@
 [T][✓] borrow book
-[T][✗] eat food
+[T][✗] borrow book

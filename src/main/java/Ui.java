@@ -30,8 +30,8 @@ public class Ui{
 		System.out.println("____________________________________________________________\n");
 	}
 
-	public void showError() {
-		System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+	public void showError(String string) {
+		System.out.println(string);
 	}
 
 	public void showOutput(String string){
