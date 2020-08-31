@@ -3,7 +3,9 @@ package duke.ui;
 import duke.Duke;
 import duke.Ui;
 import javafx.application.Platform;
+import javafx.concurrent.Service;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
@@ -49,6 +51,11 @@ public class MainWindow extends AnchorPane {
         );
     }
 
+    @SafeVarargs
+    private void addToDialogContainer(Node... nodes) {
+        dialogContainer.getChildren().addAll(nodes);
+    }
+
     /**
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
@@ -57,7 +64,7 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         String response = duke.getResponse(input);
-        dialogContainer.getChildren().addAll(
+        addToDialogContainer(
             DialogBox.getUserDialog(input, userImage),
             DialogBox.getDukeDialog(response, dukeImage)
         );

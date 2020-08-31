@@ -54,7 +54,7 @@ public class Parser {
         String dateString = tokens[0];
         String[] dateTokens = dateString.split("/");
         if (dateTokens.length != 3) {
-            throw new DukeInvalidDateTimeInputException("☹ OOPS!!! Invalid date format!");
+            throw new DukeInvalidDateTimeInputException("OOPS!!! Invalid date format!");
         } else {
             int year = Integer.parseInt(dateTokens[2]);
             int month = Integer.parseInt(dateTokens[1]);
@@ -63,14 +63,14 @@ public class Parser {
                 LocalDateTime date = LocalDateTime.of(year, month, day, 0, 0);
                 results.add(date);
             } catch (DateTimeException e) {
-                throw new DukeInvalidDateTimeInputException("☹ OOPS!!! Invalid date. Date do not exist!");
+                throw new DukeInvalidDateTimeInputException("OOPS!!! Invalid date. Date do not exist!");
             }
         }
         if (tokens.length == 1) {
         } else {
             String timeString = tokens[1];
             if (timeString.length() != 4) {
-                throw new DukeInvalidDateTimeInputException("☹ OOPS!!! Invalid time format!");
+                throw new DukeInvalidDateTimeInputException("OOPS!!! Invalid time format!");
             }
             try {
                 int hr = Integer.parseInt(timeString.substring(0, 2));
@@ -79,7 +79,7 @@ public class Parser {
             } catch (DateTimeException e) {
 
                 throw new DukeInvalidDateTimeInputException(
-                    "☹ OOPS!!! Invalid time. You can only input up to 23hr and 59min.");
+                    "OOPS!!! Invalid time. You can only input up to 23hr and 59min.");
             }
         }
         return results;
@@ -200,9 +200,9 @@ public class Parser {
             int[] date = Arrays.stream(dateToken).mapToInt((str) -> Integer.parseInt(str)).toArray();
             return new ListDateCommand(LocalDate.of(date[2], date[1], date[0]));
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeInvalidDateTimeInputException("☹ OOPS!!! Invalid date format!");
+            throw new DukeInvalidDateTimeInputException("OOPS!!! Invalid date format!");
         } catch (DateTimeException e) {
-            throw new DukeInvalidDateTimeInputException("☹ OOPS!!! Invalid date. Date to not exist!");
+            throw new DukeInvalidDateTimeInputException("OOPS!!! Invalid date. Date to not exist!");
         }
     }
 
