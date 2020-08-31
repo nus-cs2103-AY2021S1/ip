@@ -54,6 +54,8 @@ public class Event extends Task {
 
     /**
      * The String format of the date.
+     *
+     * @return The desired date time format.
      */
     private String dateFormat() {
         if (endDate != null) {
@@ -68,7 +70,11 @@ public class Event extends Task {
         }
     }
 
-    /** The String format of the date used for saving. */
+    /**
+     * The String format of the date used for saving.
+     *
+     * @return The desired date time format used for saving.
+     */
     private String dateSaveFormat() {
         String startDateString = String.format("%sT%s",
             startDate.format(DateTimeFormatter.ofPattern("y-MM-dd")),
@@ -100,21 +106,21 @@ public class Event extends Task {
     /**
      * Compares with another object.
      *
-     * @param o The object compared.
+     * @param obj The object compared.
      * @return True if the object compared is a Event with the same task, start and end dates.
      */
     @Override
-    public boolean equals(Object o) {
-        if (this == o) {
+    public boolean equals(Object obj) {
+        if (this == obj) {
             return true;
-        } else if (o instanceof Event) {
-            Event e = (Event) o;
+        } else if (obj instanceof Event) {
+            Event event = (Event) obj;
 
-            if (e.endDate == null && endDate == null) {
-                return e.task.equals(this.task) && e.startDate.equals(startDate);
-            } else if (e.endDate != null && endDate != null) {
-                return e.task.equals(this.task) && e.startDate.equals(startDate)
-                    && e.endDate.equals(endDate);
+            if (event.endDate == null && endDate == null) {
+                return event.task.equals(this.task) && event.startDate.equals(startDate);
+            } else if (event.endDate != null && endDate != null) {
+                return event.task.equals(this.task) && event.startDate.equals(startDate)
+                    && event.endDate.equals(endDate);
             } else {
                 return false;
             }
@@ -132,7 +138,6 @@ public class Event extends Task {
     @Override
     public String saveFormat() {
         return "E" + super.saveFormat() + dateSaveFormat();
-
     }
 
     /**

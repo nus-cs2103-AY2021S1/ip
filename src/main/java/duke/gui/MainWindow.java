@@ -7,6 +7,11 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.VBox;
 
 /** Controller for MainWindow. Provides the layout for the other controls. */
@@ -24,13 +29,18 @@ public class MainWindow extends AnchorPane {
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image bgImage = new Image(this.getClass().getResourceAsStream("/images/wallpaper.png"));
 
     /** Initializes the new window. */
     @FXML
     public void initialize() {
+        BackgroundImage bg = new BackgroundImage(bgImage, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.REPEAT,
+            BackgroundPosition.DEFAULT, new BackgroundSize(100, 100, true, true, true, false));
+        dialogContainer.setBackground(new Background(bg));
+
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         dialogContainer.getChildren().addAll(DialogBox.getDukeDialog("Hello! I am Bolot, "
-            + "your personal chat-bot companion.\nHow may I help you?", dukeImage));
+            + "your personal chat-bot companion.\n\nHow may I help you?", dukeImage));
     }
 
     public void setDuke(Duke d) {

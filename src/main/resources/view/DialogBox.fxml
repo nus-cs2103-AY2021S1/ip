@@ -6,21 +6,28 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.shape.Polygon?>
 <?import javafx.scene.text.Font?>
 
-<fx:root alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="400.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root alignment="TOP_RIGHT" minHeight="-Infinity" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="400.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <Label fx:id="dialog" style="-fx-background-color: #7132f2; overflow-y: visible;" text="Label" textFill="WHITE" wrapText="true" HBox.hgrow="ALWAYS">
-         <padding>
-            <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
-         </padding>
-         <HBox.margin>
-            <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
-         </HBox.margin>
+      <Label fx:id="dialog" minHeight="0.0" text="Label" textFill="WHITE" wrapText="true">
          <font>
             <Font name="Consolas" size="12.0" />
-         </font></Label>
-        <ImageView fx:id="displayPicture" fitHeight="75.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true">
+         </font>
+         <HBox.margin>
+            <Insets bottom="4.0" top="4.0" />
+         </HBox.margin>
+         <padding>
+            <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+         </padding>
+      </Label>
+      <Polygon fx:id="triangle" points="88.40058898925781, -49.19998550415039, 101.80059051513672, -49.19998550415039, 88.4006118774414, -35.19998550415039">
+         <HBox.margin>
+            <Insets top="4.0" />
+         </HBox.margin>
+      </Polygon>
+        <ImageView fx:id="displayPicture" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
          <HBox.margin>
             <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
          </HBox.margin>

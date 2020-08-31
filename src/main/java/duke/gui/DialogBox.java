@@ -7,13 +7,18 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Polygon;
 
 /**
  * An example of a custom control using FXML.
@@ -21,8 +26,11 @@ import javafx.scene.layout.Priority;
  * containing text from the speaker.
  */
 public class DialogBox extends HBox {
+
     @FXML
     private Label dialog;
+    @FXML
+    private Polygon triangle;
     @FXML
     private ImageView displayPicture;
 
@@ -37,6 +45,7 @@ public class DialogBox extends HBox {
         }
 
         dialog.setText(text);
+
         displayPicture.setImage(img);
     }
 
@@ -52,14 +61,23 @@ public class DialogBox extends HBox {
 
     public static DialogBox getUserDialog(String text, Image img) {
         var db = new DialogBox(text, img);
-        db.dialog.setStyle("-fx-background-color: #3434c5");
+        CornerRadii cornerRadii = new CornerRadii(10, 0, 10, 10, false);
+        Background bg = new Background(new BackgroundFill(Color.valueOf("#3c317c"), cornerRadii, Insets.EMPTY));
+        db.dialog.setBackground(bg);
+        db.triangle.setFill(Color.valueOf("#3c317c"));
         return db;
     }
 
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();
-        db.dialog.setStyle("-fx-background-color: #7336c3");
+
+        CornerRadii cornerRadii = new CornerRadii(0, 10, 10, 10, false);
+        Background bg = new Background(new BackgroundFill(Color.valueOf("#160e3c"), cornerRadii, Insets.EMPTY));
+        db.dialog.setBackground(bg);
+        db.triangle.setFill(Color.valueOf("#160e3c"));
+        db.triangle.setScaleX(-1);
+
         return db;
     }
 }

@@ -92,7 +92,7 @@ public class TaskList {
             i++;
         }
 
-        return str.toString();
+        return str.toString().trim();
     }
 
     /**
@@ -125,7 +125,7 @@ public class TaskList {
                 + date.format(DateTimeFormatter.ofPattern("dd MMM y."));
         }
 
-        return str.toString();
+        return str.toString().trim();
     }
 
     /**
@@ -236,7 +236,7 @@ public class TaskList {
                 str.append(String.format("%s\n", tasks.get(taskNo - 1)));
             }
 
-            return str.toString();
+            return str.toString().trim();
 
         } catch (IndexOutOfBoundsException e) {
             throw new InvalidIndexException(tasks.size());
@@ -268,7 +268,7 @@ public class TaskList {
                 str.append(String.format("%s\n", deleted));
             }
 
-            return str.toString();
+            return str.toString().trim();
 
         } catch (IndexOutOfBoundsException e) {
             throw new InvalidIndexException(tasks.size());
@@ -314,7 +314,7 @@ public class TaskList {
             System.out.println("OOPS. There are no tasks on your list with the following keyword.");
         }
 
-        return str.toString();
+        return str.toString().trim();
     }
 
     /** Prints the recently added task. */
