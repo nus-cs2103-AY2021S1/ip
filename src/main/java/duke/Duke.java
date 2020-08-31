@@ -46,7 +46,7 @@ class Duke {
                         break;
                     case LIST:
                         ui.showMessage("Here are the tasks in your list:");
-                        String tasksString = taskList.listAllTasks();
+                        String tasksString = taskList.getAllTasks();
                         if (tasksString.length() == 0) {
                             ui.showMessage("No tasks found.");
                         } else {
@@ -119,6 +119,16 @@ class Duke {
                         }
                         break;
                     case FIND:
+                        if (input.substring(4).length() > 1) {
+                            String description = input.substring(5);
+                            String matchingTasks = taskList.getMatchingTasks(description);
+                            if (matchingTasks.length() > 0) {
+                                ui.showMessage("Here are the matching tasks in your list:");
+                                ui.showMessage(matchingTasks);
+                            } else {
+                                ui.showMessage("No tasks matching your description was found.");
+                            }
+                        }
                         break;
 
                     // Default for INVALID command.

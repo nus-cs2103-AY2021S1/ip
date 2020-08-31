@@ -1,10 +1,13 @@
-Found your data! Give me some time to read it...
-Hi, I'm your Professor, Martin.
+Hi, I'm your Professor, Martin. I keep track of
+your tasks and load them if you have any saved.
 What can I do for you? You can ask me to do these:
 list: List the current tasks in your list.
+bye: Saves any tasks in the list and quits the program.
 todo: Add a To-Do task.
-event: Add an task.Event task.
-deadline: Add a task.Deadline task.
+event: Add an event task.
+deadline: Add a deadline task.
+done: Mark task as done based on the task's number.
+delete: Deletes task based on the task's number.
 find: Find a task which matches your description.
 ------------------------------------------------
 Enter input:
@@ -53,6 +56,9 @@ Here are the tasks in your list:
 5. [E][X] 4th event (at: OCTOBER 20 2021 12:45 AM)
 ------------------------------------------------
 Enter input:
-...Saved your list.
-Bye, see you soon. Exiting...
+Here are the matching tasks in your list:
+1. [T][✓] make coffee
+------------------------------------------------
+Enter input:
+Saved your list. Exiting...
 ------------------------------------------------

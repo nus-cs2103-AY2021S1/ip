@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 class TaskList {
 
-    ArrayList<Task> tasks;
+    private ArrayList<Task> tasks;
 
     TaskList() {
         this.tasks = new ArrayList<>();
@@ -33,9 +33,9 @@ class TaskList {
     }
 
     /**
-     * List all tasks currently stored in the system.
+     * Gets all tasks currently stored in the system.
      */
-    String listAllTasks() {
+    String getAllTasks() {
         int numEntries = tasks.size();
         String output = "";
         if (numEntries > 0) {
@@ -43,6 +43,28 @@ class TaskList {
             for (int i = 0; i < numEntries; i++) {
                 sb.append((i + 1) + ". " + tasks.get(i));
                 if (i < numEntries - 1) {
+                    sb.append("\n");
+                }
+            }
+            output = sb.toString();
+        }
+        return output;
+    }
+
+    String getMatchingTasks(String keywords) {
+        String output = "";
+        ArrayList<Task> filteredTaskList = new ArrayList<>();
+        tasks.forEach(task -> {
+            if (task.getDescription().contains(keywords)) {
+                filteredTaskList.add(task);
+            }
+        });
+        int taskListSize = filteredTaskList.size();
+        if (taskListSize > 0) {
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < taskListSize; i++) {
+                sb.append((i + 1) + ". " + filteredTaskList.get(i));
+                if (i < taskListSize - 1) {
                     sb.append("\n");
                 }
             }
