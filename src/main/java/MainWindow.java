@@ -2,6 +2,7 @@ import duke.Duke;
 import duke.Response;
 import duke.exceptions.DukeException;
 import duke.exceptions.DukeStorageException;
+import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -10,6 +11,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.util.Duration;
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -51,8 +54,9 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
-     * Creates two dialog boxes, one echoing user input and the other containing duke.Duke's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
+     * Creates two dialog boxes, one echoing user input and the other containing duke.
+     * Duke's reply and then appends them to the dialog container.
+     * Clears the user input after processing.
      */
     @FXML
     private void handleUserInput() {
@@ -62,7 +66,12 @@ public class MainWindow extends AnchorPane {
             Response response = duke.getResponse(input);
             print(response.getResponseMessage());
             if (response.shouldExit()) {
-                Platform.exit();
+                // Adapted from https://stackoverflow.com/a/27334614
+                PauseTransition pause = new PauseTransition((Duration.seconds(2)));
+                pause.setOnFinished((event) -> {
+                    Platform.exit();
+                });
+                pause.play();
             }
         } catch (DukeException e) {
             print(e.getMessage());
