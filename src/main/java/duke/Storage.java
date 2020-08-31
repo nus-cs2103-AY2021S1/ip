@@ -36,7 +36,7 @@ public class Storage {
     /**
      * Constructor for Parser.
      *
-     * @param pathStrArr path to storage file.
+     * @param pathStrArr varargs: path to storage file.
      */
     public Storage(String... pathStrArr) {
         this.path = Paths.get(projectRoot, pathStrArr);
