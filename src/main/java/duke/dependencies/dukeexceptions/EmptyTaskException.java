@@ -1,7 +1,5 @@
 package duke.dependencies.dukeexceptions;
 
-import duke.dependencies.dukeexceptions.DukeException;
-
 /**
  * <p>This class extends DukeExceptions, and indicates that the user has passed in a command
  * regarding a task but did not specify the task.</p>

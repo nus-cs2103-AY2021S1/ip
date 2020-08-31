@@ -1,7 +1,5 @@
 package duke.dependencies.dukeexceptions;
 
-import duke.dependencies.dukeexceptions.DukeException;
-
 /**
  * <p>This class extends DukeExceptions, and is thrown when the user passes a command that is invalid or unknown
  * and main.java.Duke cannot parse the command.</p>

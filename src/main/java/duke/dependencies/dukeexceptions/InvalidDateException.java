@@ -1,7 +1,5 @@
 package duke.dependencies.dukeexceptions;
 
-import duke.dependencies.dukeexceptions.DukeException;
-
 /**
  * <p>This class extends DukeExceptions, and indicates that the user has passed in a command
  * regarding a date that is invalid.</p>
