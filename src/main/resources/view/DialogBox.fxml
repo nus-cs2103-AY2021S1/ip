@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<fx:root alignment="TOP_RIGHT" maxWidth="1.7976931348623157E308" prefHeight="114.0" prefWidth="324.0" style="-fx-background-color: lightblue; -fx-background-radius: 30; -fx-border-color: black; -fx-border-radius: 2em;" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+      <Text fx:id="dialog" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+      <Region prefHeight="118.0" prefWidth="9.0" />
+      <VBox nodeOrientation="RIGHT_TO_LEFT" prefHeight="118.0" prefWidth="52.0">
+         <children>
+            <BorderPane prefHeight="79.0" prefWidth="41.0">
+               <center>
+                    <ImageView fx:id="displayPicture" fitHeight="65.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER" />
+               </center>
+               <bottom>
+                  <Label fx:id="displayName" contentDisplay="RIGHT" text="displayName" textAlignment="CENTER" BorderPane.alignment="CENTER" />
+               </bottom>
+            </BorderPane>
+            <Region prefHeight="5.0" prefWidth="99.0" />
+         </children>
+      </VBox>
+    </children>
+    <padding>
+        <Insets bottom="15.0" left="5.0" right="5.0" top="15.0" />
+    </padding>
+</fx:root>

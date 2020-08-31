@@ -8,23 +8,34 @@ public class Duke {
 
     /**
      * Creates a Duke bot.
-     * @param name The name of the text file data is stored at
      */
-    public Duke(String name) {
+    public Duke() {
         this.ui = new Ui();
         this.taskList = new TaskList();
-        this.storage = new Storage(taskList, name);
+        this.storage = new Storage(taskList, "duke");
     }
 
-    /**
-     * Runs the Duke bot program
-     */
-    public void run() {
-        ui.startUp(taskList, storage);
-        Parser.parseInput(taskList, storage);
+//    /**
+//     * Runs the Duke bot program
+//     */
+//    public void run() {
+//        ui.startUp(taskList, storage);
+//        Parser.parseInput(taskList, storage);
+//    }
+
+    public TaskList getTaskList() {
+        return taskList;
     }
 
-    public static void main(String[] args) {
-        new Duke("duke").run();
+    public Storage getStorage() {
+        return storage;
+    }
+
+    public String getResponse(String input) {
+        if (input.equals("start")) {
+            return ui.startUp(taskList, storage);
+        } else {
+            return Parser.parse(taskList, storage, input);
+        }
     }
 }

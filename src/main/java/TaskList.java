@@ -18,19 +18,19 @@ public class TaskList {
     /**
      * Displays the task list.
      */
-    public void displayList() {
+
+    public String displayList() {
         if (storage.isEmpty()) {
-            System.out.println(ui.getBorder() + "Your list is empty!\n" + ui.getBorder());
+            return "Your list is empty!\n";
         } else {
             int listLen = storage.size();
-            System.out.println(ui.getBorder().replace("\n", ""));
-            System.out.println("Here are the tasks in your list:");
+            String output = "Here are the tasks in your list:\n";
 
             for (int i = 1; i <= listLen; i++) {
                 Task curr = storage.get(i - 1);
-                System.out.println(i + "." + curr);
+                output = output.concat(i + "." + curr + "\n");
             }
-            System.out.println(ui.getBorder());
+            return output;
         }
     }
 
@@ -40,7 +40,7 @@ public class TaskList {
      * @param next The remaining task description
      * @throws DukeException The Exception of Duke bot
      */
-    public void addTask(String s, String next) throws DukeException {
+    public String addTask(String s, String next) throws DukeException {
         Task toAdd = null;
 
         if (s.matches("todo|deadline|event|done|delete") && next.equals("")) {
@@ -57,13 +57,13 @@ public class TaskList {
             if (next.contains("/by ")) {
                 String[] ls = next.split(" /by ");
                 String date = Parser.parseDateTime(ls[1]);
-                if (date.contains(ui.getBorder())) {
-                    System.out.println(date);
-                    return;
+                if (date.contains("Please input the time and date in\n")) {
+                    return date;
                 } else {
                     toAdd = new Deadline(ls[0], date);
                     storage.add(toAdd);
                 }
+
             } else {
                 throw new DukeException("Sorry, please specify expected deadline after \"/by\".");
             }
@@ -72,13 +72,13 @@ public class TaskList {
             if (next.contains("/at ")) {
                 String[] ls = next.split(" /at ");
                 String date = Parser.parseDateTime(ls[1]);
-                if (date.contains(ui.getBorder())) {
-                    System.out.println(date);
-                    return;
+                if (date.contains("Please input the time and date in\n")) {
+                    return date;
                 } else {
                     toAdd = new Event(ls[0], date);
                     storage.add(toAdd);
                 }
+
             } else {
                 throw new DukeException("Sorry, please specify event date after \"/at\".");
             }
@@ -87,7 +87,7 @@ public class TaskList {
             throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :(");
         }
 
-        ui.addTaskLine(toAdd, storage.size());
+        return ui.addTaskLine(toAdd, storage.size());
     }
 
     /**
@@ -95,7 +95,7 @@ public class TaskList {
      * @param s Index of task to be completed on the list
      * @throws DukeException The Exception of Duke bot
      */
-    public void doneTask(String s) throws DukeException {
+    public String doneTask(String s) throws DukeException {
         try {
             int i = Integer.parseInt(s);
             if (i < 1 || i > storage.size()) {
@@ -105,16 +105,11 @@ public class TaskList {
                 Task t = storage.get(i - 1);
                 Task completed = t.setDone(true);
                 storage.set(i - 1, completed);
-                System.out.println(
-                    ui.getBorder() + "Nice! I've marked this task as done:\n" + "  "
-                        + completed + "\n" + ui.getBorder()
-                );
+                return "Nice! I've marked this task as done:\n" + "  "
+                        + completed + "\n";
             }
         } catch (NumberFormatException nfe) {
-            System.out.println(
-                ui.getBorder() + "Please state the completed task number after \"done\".\n"
-                    + ui.getBorder()
-            );
+            return "Please state the completed task number after \"done\".\n";
         }
     }
 
@@ -123,15 +118,15 @@ public class TaskList {
      * @param s Index of task to be completed on the list
      * @throws DukeException The Exception of Duke bot
      */
-    public void delTask(String s) throws DukeException {
+    public String delTask(String s) throws DukeException {
         if (storage.size() == 0 || s.toLowerCase().equals("all")) {
             storage.clear();
-            System.out.println(ui.getBorder() + "All tasks cleared!!\n" + ui.getBorder());
+            return "All tasks cleared!!\n";
         } else if (s.equals("")) {
             try {
-                addTask("delete", "");
+                return addTask("delete", "");
             } catch (DukeException e) {
-                System.out.println(ui.getBorder() + e.getMessage() + "\n" + ui.getBorder());
+                return e.getMessage();
             }
         } else {
             try {
@@ -142,13 +137,10 @@ public class TaskList {
                 } else {
                     Task t = storage.get(i - 1);
                     storage.remove(i - 1);
-                    ui.removeTaskLine(t, storage.size());
+                    return ui.removeTaskLine(t, storage.size());
                 }
             } catch (NumberFormatException e) {
-                System.out.println(
-                    ui.getBorder() + "Please state the completed task number after \"delete\".\n"
-                        + ui.getBorder()
-                );
+                return "Please state the completed task number after \"delete\".\n";
             }
         }
     }
@@ -157,20 +149,23 @@ public class TaskList {
      * Prints the list of tasks that contain the given string.
      * @param s The string that should appear in the task
      */
-    public void findTask(String s) {
+    public String findTask(String s) {
         if (storage.isEmpty()) {
-            System.out.println(ui.getBorder() + "Your list is empty!\n" + ui.getBorder());
+            return "Your list is empty!\n";
         } else {
             int index = 1;
-            System.out.println(ui.getBorder().replace("\n", ""));
-            System.out.println("Here are the matching tasks in your list:\n");
+            String output = "Here are the matching tasks in your list:\n";
             for (Task curr : storage) {
                 if (curr.getName().toLowerCase().contains(s.toLowerCase())) {
-                    System.out.println(index + "." + curr);
+                    output = output.concat(index + "." + curr + "\n");
                     index++;
                 }
             }
-            System.out.println(ui.getBorder());
+            if (index == 1) {
+                return "There was no match!";
+            } else {
+                return output;
+            }
         }
     }
 
