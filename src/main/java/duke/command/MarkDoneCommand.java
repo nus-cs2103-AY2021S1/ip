@@ -23,21 +23,22 @@ public class MarkDoneCommand extends Command {
     }
 
     /**
-     * Marks task as done, then prints info
+     * Marks task as done, then returns its info
      *
      * @param tasks List of tasks
      * @param ui User interface to print task
      * @param storage File storage object
+     * @return Info on completed task
      * @throws DukeException if exception encountered
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (taskIndex >= tasks.size()) {
-            throw new DukeException("duke.tasks.Task does not exist _(´ཀ`」 ∠)_");
+            throw new DukeException("Task does not exist _(´ཀ`」 ∠)_");
         } else {
         Task completedTask = tasks.markDone(taskIndex);
         storage.updateFile(tasks);
-        ui.printTask(completedTask, ActionType.MARK_DONE);
+        return ui.printTask(completedTask, ActionType.MARK_DONE);
         }
     }
 }

@@ -15,6 +15,6 @@ public class DukeException extends Exception {
 
     @Override
     public String getMessage() {
-        return super.getMessage() + "\n Please restart!";
+        return super.getMessage() + "\n Please retry!";
     }
 }

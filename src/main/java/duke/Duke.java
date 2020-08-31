@@ -7,46 +7,28 @@ import duke.tasks.TaskList;
  * Duke main class
  */
 public class Duke {
-    private final Storage storage;
+    private Storage storage;
     private TaskList tasks;
-    private final Ui ui;
+    private Ui ui;
 
-    /**
-     * Duke constructor
-     *
-     * @param filePath Filepath of .txt file to save tasks in
-     */
-    public Duke(String filePath) {
+    public Duke() {
+        storage = new Storage("src/main/data.txt");
+        tasks = new TaskList(storage.getTasks());
         ui = new Ui();
-        storage = new Storage(filePath);
+    }
+
+    public String getResponse(String input) {
+        String output;
         try {
-            tasks = new TaskList(storage.getTasks());
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            tasks = new TaskList();
-        }
-    }
-
-    /**
-     * Runs the Duke program
-     */
-    public void run() {
-        ui.showWelcome();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
+            Command c = Parser.parse(input);
+            output = c.execute(tasks, ui, storage);
             } catch (DukeException e) {
-                System.out.println(e.getMessage());
+                output = (e.getMessage());
             }
-        }
-
+        return output;
     }
 
-    public static void main(String[] args) {
-        new Duke("src/main/data.txt").run();
+    public String getWelcomeMessage() {
+        return ui.showWelcome();
     }
 }

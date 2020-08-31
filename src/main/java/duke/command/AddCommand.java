@@ -31,27 +31,28 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Creates new task and adds it into list, then makes Ui print the task info
+     * Creates new task and adds it into list, then returns string containing task info
      *
      * @param tasks List of tasks
      * @param ui User interface to print task
      * @param storage File storage object
+     * @return String containing task info
      * @throws DukeException if exception encountered
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Task newTask = null;
         switch(actionType) {
         case ADD_TODO:
             if (input.length() < 6) {
-                throw new DukeException("duke.tasks.Task cannot be empty _(´ཀ`」 ∠)_");
+                throw new DukeException("Task cannot be empty _(´ཀ`」 ∠)_");
             } else {
                 newTask = new ToDo(input.substring(5), false);
             }
             break;
         case ADD_EVENT:
             if (input.length() < 7) {
-                throw new DukeException("duke.tasks.Event cannot be empty _(´ཀ`」 ∠)_");
+                throw new DukeException("Event cannot be empty _(´ཀ`」 ∠)_");
             } else {
                 String[] split = input.substring(6).split(" /at ");
                 String eventDesc = split[0];
@@ -61,7 +62,7 @@ public class AddCommand extends Command {
             break;
         case ADD_DEADLINE:
             if (input.length() < 10) {
-                throw new DukeException("duke.tasks.Deadline cannot be empty _(´ཀ`」 ∠)_");
+                throw new DukeException("Deadline cannot be empty _(´ཀ`」 ∠)_");
             } else {
                 String[] split = input.substring(9).split(" /by ");
                 String deadlineDesc = split[0];
@@ -72,7 +73,6 @@ public class AddCommand extends Command {
         }
         tasks.addTask(newTask);
         storage.updateFile(tasks);
-        ui.printTask(newTask, actionType);
-        ui.printTotalTasks(tasks);
+        return ui.printTask(newTask, actionType) + "\n" + ui.printTotalTasks(tasks);
     }
 }
