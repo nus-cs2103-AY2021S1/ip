@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import willy.store.TaskStore;
 import willy.task.TaskList;
-import willy.ui.Greet;
 import willy.exceptions.WillyException;
 import willy.task.Task;
 import willy.command.Parser;
