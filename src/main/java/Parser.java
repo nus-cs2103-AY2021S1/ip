@@ -20,6 +20,9 @@ public class Parser {
     public final static String BYORAT = "/by ";
     public final static String FIND = "find";
 
+    /**
+     * Constructs a Parser object to tackle the user inputs/commands.
+     */
     public Parser(){}
 
     public boolean isBye(String input){

@@ -17,6 +17,9 @@ public class Storage {
 
     private static boolean directoryExists = java.nio.file.Files.exists(path);
 
+    /**
+     * Retrieves stored tasks data from storage and print it for the user.
+     */
     public static void read() {
         try {
             File storage = new File(home);
@@ -58,6 +61,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Writes(stores) user data to hard disk.
+     * @param newTaskStorage the array list to store all tasks of the user
+     */
     public static void write(ArrayList<Task> newTaskStorage){
         try{
 
