@@ -9,19 +9,30 @@ import exception.DukeException;
 import task.Task;
 import task.TodoTask;
 
+/**
+ * Class to initiate the Todo Command
+ */
 public class TodoCommand extends Command {
     private String todo;
 
     /**
      * Command for creating Todos
      *
-     * @param todo Name of todo
+     * @param todo Name of todo.
      */
     public TodoCommand(String todo) {
         super(CommandType.Todo);
         this.todo = todo;
     }
 
+    /**
+     * Runs the command to add a new Todo Task into the TaskList
+     *
+     * @param taskList ArrayList of Tasks Objects.
+     * @param ui       Object of the Ui class.
+     * @param storage  Object of the Storage class.
+     * @throws DukeException Exception that occurs while executing the command.
+     */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         Task todoTask = new TodoTask(this.todo);

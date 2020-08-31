@@ -5,6 +5,9 @@ import duke.TaskList;
 import duke.Ui;
 import exception.DukeException;
 
+/**
+ * Class to initiate the Bye Command
+ */
 public class ByeCommand extends Command {
 
     public ByeCommand() {

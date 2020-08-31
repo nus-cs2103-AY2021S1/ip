@@ -10,15 +10,18 @@ import exception.DukeException;
 import task.DeadlineTask;
 import task.Task;
 
+/**
+ * Class to intiate the Deadline Command
+ */
 public class DeadlineCommand extends Command {
     private String taskName;
     private LocalDateTime deadline;
 
     /**
-     * Constructor for DeadlineCommand
+     * Constructor for DeadlineCommand.
      *
-     * @param taskName Name of the task
-     * @param deadline deadline of the task
+     * @param taskName Name of the task.
+     * @param deadline Deadline of the task.
      */
     public DeadlineCommand(String taskName, LocalDateTime deadline) {
         super(CommandType.Deadline);
@@ -27,13 +30,12 @@ public class DeadlineCommand extends Command {
     }
 
     /**
-     * Runs the command, modifying the contents of taskList, Ui or storage depending on the
-     * implementation of child class
+     * Runs the command to add a new Deadline Task into the TaskList
      *
-     * @param taskList ArrayList of Tasks Objects
-     * @param ui       Object of the Ui class
-     * @param storage  Object of the Storage class
-     * @throws DukeException Exception that occurs while executing the command
+     * @param taskList ArrayList of Tasks Objects.
+     * @param ui       Object of the Ui class.
+     * @param storage  Object of the Storage class.
+     * @throws DukeException Exception that occurs while executing the command.
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {

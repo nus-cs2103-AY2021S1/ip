@@ -23,7 +23,6 @@ import exception.InvalidInputException;
 /**
  * Class that Parses the user input given to the chatbot
  */
-
 public class Parser {
 
     private static Pattern todo = Pattern.compile("todo (.+)");

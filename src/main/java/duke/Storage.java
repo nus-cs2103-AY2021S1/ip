@@ -33,10 +33,10 @@ public class Storage {
     }
 
     /**
-     * Method that returns a List of Task objects read from a file
+     * Method that returns a List of Task objects read from a file.
      *
-     * @return List containing objects of Task type
-     * @throws DukeException Exception when there is error in loading tasks
+     * @return List containing objects of Task type.
+     * @throws DukeException Exception when there is error in loading tasks.
      */
     public List<Task> load() throws DukeException {
         File file = readFile();
@@ -44,10 +44,10 @@ public class Storage {
     }
 
     /**
-     * Reads the file from the file at location filePath
+     * Reads the file from the file at location filePath.
      *
-     * @return File located at location filePath
-     * @throws DukeException Exception when there are errors in file reading
+     * @return File located at location filePath.
+     * @throws DukeException Exception when there are errors in file reading.
      */
     public File readFile() throws DukeException {
         try {
@@ -62,10 +62,10 @@ public class Storage {
 
 
     /**
-     * ReadLine takes in a String and returns a Task
+     * ReadLine takes in a String and returns a Task.
      *
-     * @param line String containing information about a Task
-     * @return Task which corresponds to the String line
+     * @param line String containing information about a Task.
+     * @return Task which corresponds to the String line.
      * @throws DukeException Exception when there are errors in reading the line.
      */
     public Task readLine(String line) throws DukeException {
@@ -95,11 +95,11 @@ public class Storage {
     }
 
     /**
-     * Parses the contents of the file given into a list of tasks
+     * Parses the contents of the file given into a list of tasks.
      *
-     * @param file File that needs to parsed
-     * @return ArrayList containing Task Objects
-     * @throws DukeException Exceptions in parsing the file
+     * @param file File that needs to parsed.
+     * @return ArrayList containing Task Objects.
+     * @throws DukeException Exceptions in parsing the file.
      */
     public List<Task> parseFile(File file) throws DukeException {
         List<Task> result = new ArrayList<>();
@@ -124,10 +124,10 @@ public class Storage {
     }
 
     /**
-     * Saves the contents of the taskList into a txt file
+     * Saves the contents of the taskList into a txt file.
      *
-     * @param taskList ArrayList containing tasks to be saved
-     * @throws DukeException Exceptions in saving tasks
+     * @param taskList ArrayList containing tasks to be saved.
+     * @throws DukeException Exceptions in saving tasks.
      */
     public void saveTasks(TaskList taskList) throws DukeException {
         try {

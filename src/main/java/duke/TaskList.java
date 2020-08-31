@@ -28,9 +28,9 @@ public class TaskList {
     }
 
     /**
-     * Remove task from arraylist
+     * Removes task from Arraylist
      *
-     * @param index index of task to remove
+     * @param index index of task to remove.
      */
     public void removeTask(int index) {
         this.taskList.remove(index);
@@ -45,10 +45,10 @@ public class TaskList {
     }
 
     /**
-     * Method that returns a new TaskList containing matching tasks
+     * Returns a new TaskList containing matching tasks
      *
-     * @param findString String to match
-     * @return Object of TaskList class
+     * @param findString String to match.
+     * @return Object of TaskList class.
      */
     public TaskList find(String findString) {
         List<Task> findList = new ArrayList<>();

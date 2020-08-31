@@ -7,13 +7,16 @@ import exception.DukeException;
 import exception.InvalidInputException;
 import task.Task;
 
+/**
+ * Class to initiate the Delete Command
+ */
 public class DeleteCommand extends Command {
     private int index;
 
     /**
      * Constructor for delete command
      *
-     * @param index index of the task to delete
+     * @param index index of the task to delete.
      */
     public DeleteCommand(int index) {
         super(CommandType.Delete);

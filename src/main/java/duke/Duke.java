@@ -1,12 +1,12 @@
-/**
- * Duke is a chatbot that allows users to create, delete and complete tasks, which include todos,\
- * events, and deadlines
- */
 package duke;
 
 import command.Command;
 import exception.DukeException;
 
+/**
+ * Duke is a chatbot that allows users to create, delete and complete tasks, which include todos,\
+ * events, and deadlines
+ */
 public class Duke {
     private Storage storage;
     private TaskList taskList;

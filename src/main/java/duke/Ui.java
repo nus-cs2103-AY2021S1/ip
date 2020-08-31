@@ -48,6 +48,7 @@ public class Ui {
 
     /**
      * Returns a string displaying the list of tasks
+     *
      * @param taskList Object of task list class
      * @return String containing information of tasks
      */
@@ -76,6 +77,7 @@ public class Ui {
 
     /**
      * Function to display matching tasks
+     *
      * @param filteredTaskList TaskList containing already filtered task objects
      * @return String containing information of matching tasks
      */

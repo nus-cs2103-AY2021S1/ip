@@ -15,12 +15,12 @@ import task.TodoTask;
 public class StorageTest {
 
   @Test
-  public void TestReadValidFile() throws DukeException {
+  public void testReadFile_validFile() throws DukeException {
     assertEquals(new Storage("src/test/data/duke.txt").readFile(), new File("src/test/data/duke.txt"));
   }
 
   @Test
-  public void TestLoad() throws DukeException {
+  public void testLoad_validArrayList() throws DukeException {
     List<Task> arrayList = new Storage("src/test/data/duke.txt").load();
     assertEquals(arrayList.size(), 1);
     assertEquals(arrayList.get(0), new TodoTask("Wash Clothes", 1));
@@ -28,19 +28,19 @@ public class StorageTest {
 
   // Test data/duke.txt if it doesn't exist in test/data/duke.txt
   @Test
-  public void TestLoadEmptyDirectory() throws DukeException {
+  public void testLoadDirectory_emptyFileDirectory_newArrayListCreated() throws DukeException {
     assertEquals(new Storage("src/test/data/dukeEmpty.txt").load(), new ArrayList<>());
   }
 
   @Test
-  public void TestReadLine() throws DukeException {
+  public void testReadLine_taskReadSuccessfully() throws DukeException {
     assertEquals(
         new Storage("").readLine("D | 0 | tasking | 2020-02-02T18:00"),
         new DeadlineTask("tasking", LocalDateTime.of(2020, 2, 2, 18, 0)));
   }
 
   @Test
-  public void TestSaveTask() throws DukeException {
+  public void testSaveTask_taskSavedCorrectly() throws DukeException {
     Storage testStorage = new Storage("src/test/data/saveTask.txt");
     testStorage.load();
     TaskList taskList = new TaskList();
