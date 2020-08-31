@@ -2,15 +2,21 @@ package duke;
 
 import java.util.Scanner;
 
-public class Parser {
-    Scanner in;
-    TaskList taskList;
+/**
+ * Handle user input and control the program's logic
+ */
+class Parser {
+    private final Scanner in;
+    private final TaskList taskList;
 
     Parser(TaskList taskList) {
         in = new Scanner(System.in);
         this.taskList = taskList;
     }
 
+    /**
+     * start reading in users' input and parse them
+     */
     void run() {
         while (in.hasNextLine()) {
             try {

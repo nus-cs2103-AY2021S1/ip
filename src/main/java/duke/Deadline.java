@@ -3,22 +3,29 @@ package duke;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+
+/**
+ * Represent a deadline event
+ */
 public class Deadline extends Task {
 
-    protected LocalDate by;
+    private final LocalDate deadline;
 
-    public Deadline(String desc, String by) {
+    Deadline(String desc, String deadline) {
         super(desc);
-        this.by = LocalDate.parse(by);
+        this.deadline = LocalDate.parse(deadline);
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+        return "[D]" + super.toString() + " (by: " + deadline.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 
+    /**
+     * @return the representation of the event when written to disk
+     */
     @Override
-    public String toDisk() {
-        return String.format("deadline\n%s\n%d\n%s", desc, (done ? 1 : 0), by);
+    protected String toDisk() {
+        return String.format("deadline\n%s\n%d\n%s", desc, (done ? 1 : 0), deadline);
     }
 }

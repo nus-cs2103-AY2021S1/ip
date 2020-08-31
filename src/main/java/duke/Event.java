@@ -3,22 +3,28 @@ package duke;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represent an event with the time it takes place
+ */
 public class Event extends Task {
 
-    protected LocalDate at;
+    private final LocalDate happenAt;
 
-    public Event(String desc, String at) {
+    public Event(String desc, String happenAt) {
         super(desc);
-        this.at = LocalDate.parse(at);
+        this.happenAt = LocalDate.parse(happenAt);
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + at.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+        return "[E]" + super.toString() + " (at: " + happenAt.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 
+    /**
+     * @return the representation of the event when written to disk
+     */
     @Override
-    public String toDisk() {
-        return String.format("event\n%s\n%d\n%s", desc, (done ? 1 : 0), at);
+    protected String toDisk() {
+        return String.format("event\n%s\n%d\n%s", desc, (done ? 1 : 0), happenAt);
     }
 }

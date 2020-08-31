@@ -7,10 +7,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * handle loading files and saving program's data to disk
+ */
 public class Storage {
-    File file;
+    private File file;
 
-    Storage(String filename) {
+    public Storage(String filename) {
         try {
             file = new File(filename);
             if (file.createNewFile()) {
@@ -22,7 +25,12 @@ public class Storage {
         }
     }
 
-    public List<Task> loadFile() {
+    /**
+     * load the saved list of tasks
+     *
+     * @return the data of the file provided in the constructor
+     */
+    public List<Task> load() {
         List<Task> lst = new ArrayList<>();
         try {
             Scanner sc = new Scanner(file);
@@ -33,18 +41,21 @@ public class Storage {
                 desc = sc.nextLine();
                 status = Integer.parseInt(sc.nextLine());
                 switch (type) {
-                    case "todo":
-                        lst.add(new Todo(desc));
-                    case "deadline": {
-                        by = sc.nextLine();
-                        lst.add(new Deadline(desc, by));
-                    }
-                    case "event": {
-                        at = sc.nextLine();
-                        lst.add(new Event(desc, at));
-                    }
+                case "todo":
+                    lst.add(new Todo(desc));
+                    break;
+                case "deadline":
+                    by = sc.nextLine();
+                    lst.add(new Deadline(desc, by));
+                    break;
+                case "event":
+                    at = sc.nextLine();
+                    lst.add(new Event(desc, at));
+                    break;
                 }
-                if (status == 1) lst.get(lst.size() - 1).markDone();
+                if (status == 1) {
+                    lst.get(lst.size() - 1).markDone();
+                }
             }
         } catch (IOException e) {
             System.out.println("An error occurred when interacting with file.");
@@ -53,7 +64,12 @@ public class Storage {
         return lst;
     }
 
-    public void writeFile(List<Task> lst) {
+    /**
+     * save the current list of tasks to disk
+     *
+     * @param lst list of all tasks
+     */
+    public void write(List<Task> lst) {
         try {
             FileWriter writer = new FileWriter(file);
             for (Task task : lst) {

@@ -2,9 +2,16 @@ package duke;
 
 import java.util.List;
 
+/**
+ * Control all jobs related to the User Interface
+ * the class has methods to greet users & print feedback for users' input
+ */
 public class Ui {
     protected static String separatedLine;
 
+    /**
+     * print greeting content
+     */
     public static void greet() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -18,6 +25,9 @@ public class Ui {
         System.out.println(separatedLine);
     }
 
+    /**
+     * print the feedback after adding a task
+     */
     public static void addTask(List<Task> lst) {
         System.out.println(separatedLine);
         System.out.println("Got it. I've added this task: ");
@@ -26,6 +36,9 @@ public class Ui {
         System.out.println(separatedLine);
     }
 
+    /**
+     * print the feedback after marking a task as done
+     */
     public static void markDone(Task task) {
         System.out.println(separatedLine);
         System.out.println("Nice! I've marked this task as done:");
@@ -33,6 +46,9 @@ public class Ui {
         System.out.println(separatedLine);
     }
 
+    /**
+     * print the feedback after deleting a task
+     */
     public static void delete(Task task, List<Task> lst) {
         System.out.println(separatedLine);
         System.out.println("Noted. I've removed this task:");
@@ -41,7 +57,9 @@ public class Ui {
         System.out.println(separatedLine);
     }
 
-
+    /**
+     * print the list of all tasks
+     */
     public static void list(List<Task> lst) {
         System.out.println(separatedLine);
         System.out.println("Here are the tasks in your list:");
@@ -51,16 +69,27 @@ public class Ui {
         System.out.println(separatedLine);
     }
 
+    /**
+     * print the exit message
+     */
     public static void exit() {
         System.out.println(separatedLine);
         System.out.println("Bye. Hope to see you again soon!");
         System.out.println(separatedLine);
     }
 
+    /**
+     * initiate the class
+     */
     public static void init() {
         separatedLine = "-".repeat(30);
     }
 
+    /**
+     * print the error when users' input are invalid
+     *
+     * @param e the exception to be printed
+     */
     public static void printException(IllegalArgumentException e) {
         System.out.println(separatedLine);
         System.out.println(e.getMessage());
