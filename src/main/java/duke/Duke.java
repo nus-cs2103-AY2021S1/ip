@@ -14,6 +14,7 @@ import duke.ui.UiException;
 public class Duke {
     private static final String FILE_PATH = "./data/taskList.txt";
 
+    private boolean hasExited = false;
     private TaskList taskList;
     private Storage storage;
     private final UI ui;
@@ -34,13 +35,12 @@ public class Duke {
     }
 
     /**
-     * Accepts user inputs.
-     * Processes inputs.
+     * Accepts and processes user inputs.
+     * This supports the CLI for Duke.
      */
     private void run() {
         ui.showHelloMessage();
-        boolean isExit = false;
-        while (!isExit) {
+        while (!hasExited) {
             try {
                 String fullCommand = ui.readCommand();
                 ui.showLine();
@@ -48,7 +48,7 @@ public class Duke {
                 String result = command.execute(taskList, storage);
                 ui.printResult(result);
                 ui.showLine();
-                isExit = command.isExit();
+                hasExited = command.isExit();
             } catch (UiException e) {
                 ui.showLine();
                 ui.showErrorMessage(e.getMessage());
@@ -62,11 +62,39 @@ public class Duke {
         ui.closeScanner();
     }
 
-    public static void main(String[] args) {
-        new Duke().run();
+    /**
+     * Processes user inputs.
+     * This supports the GUI for Duke.
+     *
+     * @param input User input text.
+     * @return Duke logic response.
+     */
+    public String getResponse(String input) {
+        try {
+            Command command = Parser.parse(input);
+            String result = command.execute(taskList, storage);
+            hasExited = command.isExit();
+            return result;
+        } catch (StorageException | TaskException | DukeUnknownCommandException e) {
+            return e.getMessage();
+        }
     }
 
-    public String getResponse(String input) {
-        return "Duke heard: " + input;
+    /**
+     * Returns if the program should exit.
+     *
+     * @return True if an exit command had been received.
+     */
+    public boolean hasExited() {
+        return hasExited;
+    }
+
+    /**
+     * Runs the Duke CLI program.
+     *
+     * @param args Execution parameters.
+     */
+    public static void main(String[] args) {
+        new Duke().run();
     }
 }

@@ -49,5 +49,10 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
+
+        if (duke.hasExited()) {
+            userInput.setDisable(true);
+            sendButton.setDisable(true);
+        }
     }
 }
