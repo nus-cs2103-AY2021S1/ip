@@ -1,12 +1,5 @@
 package duke.command;
 
-import duke.command.AddCommand;
-import duke.command.Command;
-import duke.command.DeleteCommand;
-import duke.command.DoneCommand;
-import duke.command.ExitCommand;
-import duke.command.ListCommand;
-
 /**
  * Class handles the parsing of Strings into the appropriate type of command objects.
  */
