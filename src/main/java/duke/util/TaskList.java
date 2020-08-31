@@ -1,8 +1,8 @@
 package duke.util;
 
-import duke.task.Task;
-
 import java.util.List;
+
+import duke.task.Task;
 
 /**
  * Represents the list of tasks.
