@@ -4,20 +4,34 @@ import java.util.List;
 
 public class Ui {
 
+    /**
+     * Displays the separator star line
+     */
     public static void displayStarLine() {
         System.out.println("––––––––––––––––––––– *** –––––––––––––––––––––");
     }
 
+    /**
+     * Displays a message between two separator lines
+     *
+     * @param message
+     */
     public static void displayMessage(String message) {
         displayStarLine();
         System.out.println(message);
         displayStarLine();
     }
 
+    /**
+     * Displays the loading error
+     */
     public static void displayLoadingError() {
         displayMessage("Loading failed: Duke continues with empty duke.TaskList.");
     }
 
+    /**
+     * Displays the welcome message
+     */
     public static void displayWelcome() {
         String logo = " ____        _\n"
                 + "|  _ \\ _   _| | _____\n"
@@ -35,10 +49,18 @@ public class Ui {
         System.out.println();
     }
 
+    /**
+     * Displays the goodbye message
+     */
     public static void displayBye() {
         displayMessage("Alright, see you soon!");
     }
 
+    /**
+     * Displays the tasks in TaskList as a numbered list
+     * 
+     * @param taskList
+     */
     public static void displayList(TaskList taskList) {
         List<Task> tasks = taskList.getTasks();
         int pending = taskList.getNumOfPendingTasks();

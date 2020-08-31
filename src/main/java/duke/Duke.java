@@ -4,12 +4,21 @@ import duke.exception.DukeException;
 
 import java.util.*;
 
+/**
+ * Represents the main class for the Duke application.
+ */
 public class Duke {
 
     private Storage storage;
     private TaskList taskList;
     private Ui ui;
 
+    /**
+     * Initialises Duke with a given file save path.
+     * Runs Duke with empty TaskList if save file is not found.
+     *
+     * @param filePath String representation of the file path
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -22,6 +31,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs the initialised Duke.
+     */
     public void run() {
         Scanner sc = new Scanner(System.in);
         Parser parser = new Parser();

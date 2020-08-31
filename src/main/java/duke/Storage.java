@@ -17,6 +17,12 @@ public class Storage {
         this.filePath = filePath;
     }
 
+    /**
+     * Loads existing Duke save file before running.
+     *
+     * @return an ArrayList of Tasks used for TaskList.
+     * @throws DukeException If there are no save files
+     */
     public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> result = new ArrayList<>();
 
@@ -45,6 +51,11 @@ public class Storage {
         return result;
     }
 
+    /**
+     * Saves and/or overwrites the tasks into a Duke save file.
+     *
+     * @param taskList The final state of TaskList as Duke closes.
+     */
     public void save (TaskList taskList) {
         List<Task> tasks = taskList.getTasks();
         try {

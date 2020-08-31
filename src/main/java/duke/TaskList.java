@@ -7,6 +7,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * Represents the list of tasks together with a counter
+ * to keep track of pending tasks
+ */
 public class TaskList implements Cloneable {
     private List<Task> tasks;
     private int numOfPendingTasks;
@@ -27,18 +31,35 @@ public class TaskList implements Cloneable {
         }
     }
 
+    /**
+     * Extracts the list of tasks of a TaskList.
+     *
+     * @return a list of tasks contained in a TaskList object.
+     */
     public List<Task> getTasks() {
         return tasks;
     }
 
+    /**
+     * Checks if a call to task index in the CLI is valid.
+     *
+     * @param target Integer number
+     * @return true if target is usable as an array access
+     */
     public boolean isWithinValidRange(int target) {
         return target >= 0 && target < tasks.size();
     }
 
+    /**
+     * Adds one count to pending task.
+     */
     public void incrementPendingTasks() {
         this.numOfPendingTasks++;
     }
 
+    /**
+     * Subtracts one count to pending task.
+     */
     public void decrementPendingTasks() {
         this.numOfPendingTasks--;
     }
@@ -47,6 +68,15 @@ public class TaskList implements Cloneable {
         return numOfPendingTasks;
     }
 
+    /**
+     * Gets the intended access index of a task in TaskList
+     *
+     * @param parser Parser which contains the processed command line
+     * @return The corresponding array access
+     * @throws DukeException If the task is empty,
+     * no integer index provided,
+     * or index given is out of range
+     */
     public int getTaskID(Parser parser) throws DukeException {
         if (tasks.isEmpty()) {
             throw new EmptyTasksException("duke.Task is empty");
@@ -63,8 +93,13 @@ public class TaskList implements Cloneable {
         return target;
     }
 
+    /**
+     * Attempts to check a task as done, then display a success message
+     * If the checking as done fails, a fail message is displayed instead
+     *
+     * @param parser
+     */
     public void done(Parser parser) {
-
         try {
             Task targetTask = tasks.get(getTaskID(parser));
             if (targetTask.isDone) {
@@ -84,6 +119,13 @@ public class TaskList implements Cloneable {
             UI.displayMessage(e.toString());
         }
     }
+
+    /**
+     * Attempts to delete a task, then display a success message
+     * If the deletion fails, a fail message is displayed instead
+     *
+     * @param parser
+     */
     public void delete(Parser parser) {
         try {
             Task targetTask = tasks.get(getTaskID(parser));
@@ -101,6 +143,13 @@ public class TaskList implements Cloneable {
             UI.displayMessage(e.toString());
         }
     }
+
+    /**
+     * Attempts to add a task to the list, then display a success message
+     * If the addition fails, a fail message is displayed instead
+     *
+     * @param parser
+     */
     public void add(Parser parser) {
         try {
             String commandWord = parser.getCommandWord();

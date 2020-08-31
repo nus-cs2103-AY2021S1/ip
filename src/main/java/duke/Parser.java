@@ -4,6 +4,10 @@ import duke.exception.DukeException;
 import duke.exception.NullIndexException;
 import duke.exception.NullTaskNameException;
 
+/**
+ * Parses and contains the important info required
+ * for each call to Duke methods given through CLI.
+ */
 public class Parser {
     private String commandLine;
     private String commandWord;
@@ -19,11 +23,24 @@ public class Parser {
         taskNumber = 0;
     }
 
+    /**
+     * Sets the command line of <code>Parser</code> to
+     * a given string inputted via CLI
+     *
+     * @param commandLine The line typed into CLI
+     * @throws Exception
+     */
     public void setCommandLine(String commandLine) throws Exception {
         this.commandLine = commandLine;
         parseForCommand(commandLine);
     }
 
+    /**
+     * Parses the command line selectively based on the first word.
+     *
+     * @param commandLine The line typed into CLI
+     * @throws Exception When the parsing is unsuccessful
+     */
     private void parseForCommand(String commandLine) throws Exception {
         String[] words = commandLine.split(" ", 2);
         commandWord = words[0];
@@ -73,10 +90,6 @@ public class Parser {
             taskDate = unformatted[1];
         }
 
-    }
-
-    public String getCommandLine() {
-        return commandLine;
     }
 
     public String getCommandWord() {
