@@ -10,7 +10,7 @@ public class Todo extends Task {
     }
 
     /**
-     * Package the deadline to a format used to store in the task.txt.
+     * Package the Todo to a format used to store in the task.txt.
      * A file in the local disk to store tasks.
      *
      * @return String of Task's details
