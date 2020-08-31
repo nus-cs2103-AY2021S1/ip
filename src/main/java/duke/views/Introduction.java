@@ -20,7 +20,7 @@ public class Introduction implements Page {
     private Storage storage;
 
     /**
-     * Constructs a Welcome instance that displays a welcome view.
+     * Constructs a Introduction instance that displays the introduction view.
      *
      * @param storage a storage object used to read and store data.
      */
