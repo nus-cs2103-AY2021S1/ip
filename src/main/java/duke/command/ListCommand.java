@@ -1,8 +1,8 @@
 package duke.command;
 
 import duke.Storage;
-import duke.Ui;
 import duke.task.Tasks;
+import duke.ui.Ui;
 
 /**
  * The List command prints the task list.
@@ -16,14 +16,15 @@ public class ListCommand extends Command {
     }
 
     /**
-     * Prints the task list.
+     * Returns a response consisting a message with the task list.
      *
      * @param tasks   the task list.
      * @param ui      interacts with user.
      * @param storage loads and save tasks.
+     * @return the response to list command.
      */
     @Override
-    public void execute(Tasks tasks, Ui ui, Storage storage) {
-        ui.printList(tasks);
+    public CommandResponse execute(Tasks tasks, Ui ui, Storage storage) {
+        return new CommandResponse(ui.getListMessage(tasks), this.isExit());
     }
 }

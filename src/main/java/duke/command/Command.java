@@ -1,9 +1,9 @@
 package duke.command;
 
 import duke.Storage;
-import duke.Ui;
 import duke.exception.DukeException;
 import duke.task.Tasks;
+import duke.ui.Ui;
 
 /**
  * Command determines whether the program should continue running and executes commands.
@@ -19,17 +19,18 @@ public abstract class Command {
      *
      * @return the boolean.
      */
-    public boolean isExit() {
+    protected boolean isExit() {
         return this.commandType == CommandType.BYE;
     }
 
     /**
-     * Execute command.
+     * Execute command and returns a message.
      *
      * @param tasks   the task list.
      * @param ui      interacts with user.
      * @param storage loads and save tasks.
+     * @return the response to the command.
      * @throws DukeException If there is a duke exception thrown.
      */
-    public abstract void execute(Tasks tasks, Ui ui, Storage storage) throws DukeException;
+    public abstract CommandResponse execute(Tasks tasks, Ui ui, Storage storage) throws DukeException;
 }

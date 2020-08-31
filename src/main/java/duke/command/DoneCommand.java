@@ -3,10 +3,10 @@ package duke.command;
 import java.io.IOException;
 
 import duke.Storage;
-import duke.Ui;
 import duke.exception.InvalidTaskNumberException;
 import duke.exception.SaveTaskFailedException;
 import duke.task.Tasks;
+import duke.ui.Ui;
 
 /**
  * The Done command marks a task as done.
@@ -28,21 +28,23 @@ public class DoneCommand extends Command {
     }
 
     /**
-     * Mark the task as done and print a message to indicate successful mark as done.
+     * Mark the task as done and returns a response consisting a message to indicate successful mark as done.
      *
      * @param tasks   the task list.
      * @param ui      interacts with user.
      * @param storage loads and save tasks.
+     * @return the response to done command.
      * @throws InvalidTaskNumberException If the task number is invalid.
      * @throws SaveTaskFailedException    If the task list cannot be saved.
      */
     @Override
-    public void execute(Tasks tasks, Ui ui, Storage storage)
+    public CommandResponse execute(Tasks tasks, Ui ui, Storage storage)
             throws InvalidTaskNumberException, SaveTaskFailedException {
         try {
             tasks.getTask(this.taskIndex).markAsDone();
             storage.updateTasks(tasks);
-            ui.printMarkTaskAsDone(tasks.getTask(this.taskIndex));
+            return new CommandResponse(ui.getMarkTaskAsDoneMessage(tasks.getTask(this.taskIndex)),
+                    this.isExit());
         } catch (IndexOutOfBoundsException ex) {
             throw new InvalidTaskNumberException("The task to be marked as done does not exist!");
         } catch (IOException ex) {

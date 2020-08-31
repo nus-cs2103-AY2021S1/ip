@@ -4,9 +4,9 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 import duke.Storage;
-import duke.Ui;
 import duke.task.Task;
 import duke.task.Tasks;
+import duke.ui.Ui;
 
 /**
  * The Find date command finds tasks with the same date.
@@ -29,15 +29,16 @@ public class FindDateCommand extends FindCommand {
     }
 
     /**
-     * Find and print tasks with the date.
+     * Find and returns a response consisting a message with tasks on the date.
      *
      * @param tasks   the task list.
      * @param ui      interacts with user.
      * @param storage loads and save tasks.
+     * @return the response to find date command.
      */
     @Override
-    public void execute(Tasks tasks, Ui ui, Storage storage) {
+    public CommandResponse execute(Tasks tasks, Ui ui, Storage storage) {
         ArrayList<Task> taskList = tasks.findByDate(this.date);
-        ui.printFound(date, taskList);
+        return new CommandResponse(ui.getFoundMessage(date, taskList), this.isExit());
     }
 }

@@ -3,9 +3,12 @@ package duke;
 import java.io.IOException;
 
 import duke.command.Command;
+import duke.command.CommandResponse;
 import duke.exception.DukeException;
 import duke.exception.ReadFailedException;
+import duke.exception.UnknownInputException;
 import duke.task.Tasks;
+import duke.ui.Ui;
 
 /**
  * The main class, Duke.
@@ -26,6 +29,13 @@ public class Duke {
 
     /**
      * Instantiates a new Duke.
+     */
+    public Duke() {
+        this("data/tasks.txt");
+    }
+
+    /**
+     * Instantiates a new Duke.
      *
      * @param filePath the file path of data to be read.
      */
@@ -35,7 +45,7 @@ public class Duke {
             this.storage = initialiseStorage(filePath);
             this.tasks = storage.getTasks();
         } catch (ReadFailedException ex) {
-            this.ui.printDukeException(ex);
+            //            this.ui.printDukeException(ex);
             this.tasks = new Tasks();
         }
     }
@@ -56,33 +66,18 @@ public class Duke {
     }
 
     /**
-     * Instantiates Duke and runs it.
-     * The main method.
+     * Create a command from the input, executes it and return the response.
      *
-     * @param args unused.
+     * @param input the input.
+     * @return the response.
+     * @throws DukeException If the input is invalid.
      */
-    public static void main(String[] args) {
-        new Duke("data/tasks.txt").run();
-    }
-
-    /**
-     * Runs Duke by reading inputs using ui, generate commands using parser, executing commands and using
-     * ui to print output.
-     * Catch DukeExceptions and print it using ui.
-     */
-    public void run() {
-        this.ui.showWelcome();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String input = this.ui.readCommand();
-                Command command = Parser.parse(input);
-                command.execute(tasks, ui, storage);
-                isExit = command.isExit();
-            } catch (DukeException ex) {
-                this.ui.printDukeException(ex);
-            }
+    public CommandResponse execute(String input) throws DukeException {
+        Command command = Parser.parse(input);
+        CommandResponse response = command.execute(tasks, ui, storage);
+        if (response.isEmpty()) {
+            throw new UnknownInputException();
         }
-        this.ui.closeScanner();
+        return response;
     }
 }

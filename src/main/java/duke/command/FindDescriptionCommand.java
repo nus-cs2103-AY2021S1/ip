@@ -3,9 +3,9 @@ package duke.command;
 import java.util.ArrayList;
 
 import duke.Storage;
-import duke.Ui;
 import duke.task.Task;
 import duke.task.Tasks;
+import duke.ui.Ui;
 
 /**
  * The type Find description command finds tasks containing the description.
@@ -28,15 +28,16 @@ public class FindDescriptionCommand extends FindCommand {
     }
 
     /**
-     * Find and print tasks with the description.
+     * Find and returns a response consisting a message with tasks matching the description.
      *
      * @param tasks   the task list.
      * @param ui      interacts with user.
      * @param storage loads and save tasks.
+     * @return the response to find description command.
      */
     @Override
-    public void execute(Tasks tasks, Ui ui, Storage storage) {
+    public CommandResponse execute(Tasks tasks, Ui ui, Storage storage) {
         ArrayList<Task> taskList = tasks.findByDescription(this.description);
-        ui.printFound(description, taskList);
+        return new CommandResponse(ui.getFoundMessage(description, taskList), this.isExit());
     }
 }
