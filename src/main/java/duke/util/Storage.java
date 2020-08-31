@@ -1,10 +1,14 @@
 package duke.util;
 
-import duke.task.Task;
-
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
+
+import duke.task.Task;
 
 /**
  * Responsible for local disk file operations.
@@ -21,6 +25,7 @@ public class Storage {
      * Loads a list of tasks from disk.
      * @return TaskList with loaded list.
      */
+    @SuppressWarnings("unchecked")
     public TaskList load() {
         List<Task> lst;
         try {

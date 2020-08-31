@@ -1,13 +1,23 @@
 package duke.util;
 
-import duke.command.*;
-import duke.exception.*;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+
+import duke.command.AddCommand;
+import duke.command.ByeCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
+import duke.exception.InvalidCommandException;
+import duke.exception.InvalidDateFormatException;
+import duke.exception.InvalidDeadlineException;
+import duke.exception.InvalidDescriptionException;
+import duke.exception.InvalidEventException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Todo;
-
-import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
 
 /**
  * Helps parse user input.
@@ -70,7 +80,7 @@ public class Parser {
     private static Command parseTask(String command, String description)
             throws InvalidEventException, InvalidDeadlineException,
             InvalidCommandException, InvalidDateFormatException {
-        String splitted[];
+        String[] splitted;
         LocalDate date;
         try {
             switch (command) {
