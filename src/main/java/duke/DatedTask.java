@@ -7,7 +7,7 @@ import java.time.format.DateTimeFormatter;
  * Handles addition of date-based Tasks.
  */
 
-public class DatedTask extends Task {
+public abstract class DatedTask extends Task {
     /** Date of task */
     protected LocalDate date;
 

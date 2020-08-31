@@ -5,9 +5,7 @@ package duke;
  */
 
 public class Parser {
-    /**
-     * Constructor for duke.Parser.
-     */
+
     public Parser() {
     }
 

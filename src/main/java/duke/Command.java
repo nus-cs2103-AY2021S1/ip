@@ -5,9 +5,7 @@ package duke;
  */
 
 public abstract class Command {
-    /**
-     * Constructor for duke.Command.
-     */
+
     public Command() {
     }
 
