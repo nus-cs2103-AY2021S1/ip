@@ -1,3 +1,7 @@
+package duke.task;
+
+import duke.Storage;
+
 public class Task {
     private static final String tick = "\u2713";
     private static final String cross = "\u2718";
@@ -24,10 +28,10 @@ public class Task {
         return boxFormat(taskMarker) + boxFormat(status) + " " + description;
     }
 
-    public String generateSaveFormat() {
+    public String getSaveFormat() {
         int isDoneInt = isDone ? 1 : 0;
-        return taskMarker + Duke.line + isDoneInt
-                + Duke.line + description;
+        return taskMarker + Storage.line + isDoneInt
+                + Storage.line + description;
     }
 
     protected String boxFormat(String symbol) {

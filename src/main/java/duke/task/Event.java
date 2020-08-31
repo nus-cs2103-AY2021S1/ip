@@ -1,3 +1,7 @@
+package duke.task;
+
+import duke.Storage;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -11,8 +15,8 @@ public class Event extends Task {
     }
 
     @Override
-    public String generateSaveFormat() {
-        return super.generateSaveFormat() + Duke.line + date;
+    public String getSaveFormat() {
+        return super.getSaveFormat() + Storage.line + date;
     }
 
     @Override

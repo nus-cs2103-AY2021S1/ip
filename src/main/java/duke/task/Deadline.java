@@ -1,3 +1,7 @@
+package duke.task;
+
+import duke.Storage;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -10,8 +14,8 @@ public class Deadline extends Task {
     }
 
     @Override
-    public String generateSaveFormat() {
-        return super.generateSaveFormat() + Duke.line + deadline;
+    public String getSaveFormat() {
+        return super.getSaveFormat() + Storage.line + deadline;
     }
 
     @Override
