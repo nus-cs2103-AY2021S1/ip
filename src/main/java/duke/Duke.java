@@ -48,7 +48,7 @@ public class Duke {
      * Prints a welcome message when the bot is first launched.
      */
     public void welcomeMsg() {
-        String welcomeMsg = "Hello! I'm duke.Duke, some call me a parrot.\n"
+        String welcomeMsg = "Hello! I'm Duke, some call me a parrot.\n"
                 + "What can I do for you?";
         System.out.println(welcomeMsg);
     }
