@@ -1,14 +1,16 @@
 import java.nio.file.Paths;
-
 import java.util.Scanner;
 
 public class Duke {
-    private static final String DATABASE_DIRECTORY_PATH = Paths.get(System.getProperty("user.dir"), "../../../", "data").toString();
+    private static final String DATABASE_DIRECTORY_PATH = Paths.get(System.getProperty("user.dir"),
+            "../../../", "data").toString();
     private Parser parser;
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * */
     public Duke(String databaseDirectoryPath) {
         this.ui = new Ui();
         this.storage = new Storage(databaseDirectoryPath);
@@ -22,6 +24,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Starts the bot.
+     */
     public void run() {
         this.ui.greetUser();
 
@@ -35,7 +40,8 @@ public class Duke {
                     keepApplicationRunning = false;
                 }
                 this.parser.parseCommands(this.tasks, userInput, sc);
-                this.storage.save(this.tasks.getDatabase()); // Saves the state after each command instead of only saving to the database upon exit
+                // Saves the state after each command instead of only saving to the database upon exit
+                this.storage.save(this.tasks.getDatabase());
             } catch (DukeException e) {
                 this.ui.showErrorMessage(e.getMessage());
             }

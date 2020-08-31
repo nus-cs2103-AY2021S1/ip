@@ -1,5 +1,4 @@
 import java.time.format.DateTimeFormatter;
-
 import java.util.Scanner;
 
 public class Parser {
@@ -36,7 +35,7 @@ public class Parser {
             break;
 
         case "list":
-           tasks.listAllTasks();
+            tasks.listAllTasks();
             break;
 
         case "todo":
