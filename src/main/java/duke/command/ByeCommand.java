@@ -15,7 +15,6 @@ public class ByeCommand implements Command {
      * @param storage storage interface
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.print(BYE_MESSAGE);
+    public String execute(TaskList tasks, Ui ui, Storage storage) { return ui.format(BYE_MESSAGE);
     }
 }

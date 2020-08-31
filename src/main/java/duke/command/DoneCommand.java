@@ -23,7 +23,7 @@ public class DoneCommand implements Command {
      * @throws DukeException if the index passed is invalid, or if the task is already marked as done
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if(index < 0 || index >= tasks.size()) {
             throw new DukeException(ExceptionTypeEnum.INVALID_ITEM_NUMBER);
         }
@@ -33,7 +33,7 @@ public class DoneCommand implements Command {
             throw new DukeException(ExceptionTypeEnum.ITEM_ALREADY_DONE);
         }
         task.markAsDone();
-        ui.print("Nice, I've marked this task as done:", "\t" + task.toString());
         storage.write(tasks);
+        return ui.format("Nice, I've marked this task as done:", "\t" + task.toString());
     }
 }

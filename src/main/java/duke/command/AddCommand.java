@@ -1,10 +1,10 @@
 package duke.command;
 
 import duke.DukeException;
-import duke.storage.Storage;
-import duke.task.Task;
-import duke.task.TaskList;
-import duke.ui.Ui;
+        import duke.storage.Storage;
+        import duke.task.Task;
+        import duke.task.TaskList;
+        import duke.ui.Ui;
 
 public class AddCommand implements Command {
     Task task;
@@ -21,10 +21,10 @@ public class AddCommand implements Command {
      * @param storage storage interface to write the entire TaskList to file
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         tasks.add(task);
-        ui.print("Got it. I've added this task:", "\t" + task,
-                         "Now you have " + tasks.size() + " task(s) in the list");
         storage.write(tasks);
+        return ui.format("Got it. I've added this task:", "\t" + task,
+                "Now you have " + tasks.size() + " task(s) in the list");
     }
 }

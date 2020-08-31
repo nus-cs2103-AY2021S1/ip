@@ -23,15 +23,15 @@ public class DeleteCommand implements Command {
      * @param storage storage interface to write the current list of tasks in
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if(index < 0 || index <= tasks.size()) {
             throw new DukeException(ExceptionTypeEnum.INVALID_ITEM_NUMBER);
         }
 
         Task task = tasks.get(index);
         tasks.delete(index);
-        ui.print("The following task has been removed successfully:", "\t" + task.toString(),
-                         "Now you have " + tasks.size() + " items(s) left in the list.");
         storage.write(tasks);
+        return   ui.format("The following task has been removed successfully:", "\t" + task.toString(),
+                "Now you have " + tasks.size() + " items(s) left in the list.");
     }
 }

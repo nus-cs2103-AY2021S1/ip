@@ -7,12 +7,12 @@ public class Ui {
     /**
      * Prints the greeting message and prompt when Duke is launched.
      */
-    public void greet() {
-        print("Hello! I'm Duke", "What can I do for you?");
+    public String greet() {
+        return "Hello! I'm Duke. What can I do for you?";
     }
 
-    public void showLoadingError() {
-        print("Oops! I wasn't able to load past tasks properly :(");
+    public String showLoadingError() {
+        return "Oops! I wasn't able to load past tasks properly :(";
     }
 
     /**
@@ -20,15 +20,12 @@ public class Ui {
      *
      * @param strings a list of strings to be displayed on separate lines
      */
-    public void print(List<String> strings) {
-        final String INDENT = "\t";
-        final String SEPARATOR = "_".repeat(69);
-
-        System.out.println(INDENT + SEPARATOR);
+    public String format(List<String> strings) {
+        String res = "";
         for(String s: strings) {
-            System.out.println(INDENT + INDENT + s);
+            res += s;
         }
-        System.out.println(INDENT + SEPARATOR + "\n");
+        return res;
     }
 
     /**
@@ -36,7 +33,7 @@ public class Ui {
      *
      * @param strings an array of strings to be displayed on separate lines
      */
-    public void print(String ...strings) {
-        print(Arrays.asList(strings));
+    public String format(String ...strings) {
+        return format(Arrays.asList(strings));
     }
 }
