@@ -1,4 +1,4 @@
-package DukeExceptions;
+package exception;
 
 /**
  * Represents a DukeExceptions.DukeException when a user does not input a time

@@ -10,7 +10,7 @@ public class Ui {
         this.parser = new Parser();
     }
 
-    public static String LINE = "___________________________________________________";
+    public static final String LINE = "___________________________________________________";
 
     /**
      * Utilises the parser to parse user commands.
