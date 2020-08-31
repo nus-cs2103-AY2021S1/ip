@@ -1,0 +1,7 @@
+T | 0 | borrow book
+D | 0 | PR | Sep 1 2020 4.00pm
+D | 1 | help | Sep 04 2020 6.00pm
+D | 0 | ma | Sep 10 2020 12.00pm
+D | 0 | event | Aug 30 2020 8.00pm
+E | 0 | meeting | Feb 20 2020 2.00pm-parsedEndTime
+E | 0 | movie | Aug 30 2020 8.00pm-10.00pm
