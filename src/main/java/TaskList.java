@@ -97,13 +97,7 @@ public class TaskList {
         return str;
     }
 
-    public Task setDone(int id) {
-        Task task = list.get(id - 1);
-        task.done = true;
-        return task;
-    }
-
-    public TaskList filterByKeyword(String keyword) throws Exception {
+    public TaskList filterByKeyword(String keyword){
         List<Task> filteredList = list.stream()
                 .filter(t -> t.name.contains(keyword)).collect(Collectors.toList());
         return new TaskList(filteredList);
