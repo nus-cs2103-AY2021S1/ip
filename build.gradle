@@ -9,6 +9,12 @@ repositories {
     mavenCentral()
 }
 
+compileJava.options.encoding = 'UTF-8'
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
 dependencies {
     testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.5.0'
     testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.5.0'
@@ -26,10 +32,12 @@ test {
         showStackTraces true
         showStandardStreams = false
     }
+
+    systemProperty "file.encoding", "utf-8"
 }
 
 application {
-    mainClassName = "seedu.duke.Duke"
+    mainClassName = "duke.Duke"
 }
 
 shadowJar {
@@ -44,4 +52,6 @@ checkstyle {
 
 run{
     standardInput = System.in
+
+    systemProperty "file.encoding", "utf-8"
 }
