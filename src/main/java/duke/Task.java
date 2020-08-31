@@ -1,33 +1,25 @@
 package duke;
 
 public class Task {
-    private String description;
-    private boolean isDone;
+    protected final String description;
+    protected boolean isDone;
 
-    public Task(String description) {
-        this.description = description;
-        this.isDone = false;
-    }
-
+    /**
+     * Task constructor
+     *
+     * @param description Description string
+     * @param isDone Completion status of task
+     */
     public Task(String description, boolean isDone) {
         this.description = description;
         this.isDone = isDone;
     }
 
-    public String getDescription() {
-        return description;
+    public String getStatusIcon() {
+        return (this.isDone ? "\u2713" : "\u2718");
     }
 
     public void markAsDone() {
         this.isDone = true;
-    }
-
-    public String getStatusIcon() {
-        return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
-    }
-
-    @Override
-    public String toString() {
-        return "[" + getStatusIcon() + "] " + description;
     }
 }

@@ -2,30 +2,20 @@ package duke;
 
 import java.util.ArrayList;
 
+/**
+ * List class to store tasks
+ */
 public class TaskList {
-    private ArrayList<Task> list;
-
-    /**
-     * TaskList constructor
-     */
+    private final ArrayList<Task> list;
+    
     public TaskList() {
-        this.list = new ArrayList<Task>();
+        this.list = new ArrayList<>();
     }
 
-    /**
-     * TaskList constructor
-     *
-     * @param list contents of the TaskList
-     */
     public TaskList(ArrayList<Task> list) {
         this.list = list;
     }
 
-    /**
-     * Returns TaskList's size.
-     *
-     * @return this TaskList's size.
-     */
     public int size() {
         return list.size();
     }
@@ -34,7 +24,7 @@ public class TaskList {
         return list.get(index);
     }
 
-    public ArrayList<Task> getTasks() {
+    public ArrayList<Task> getList() {
         return list;
     }
 
@@ -42,7 +32,25 @@ public class TaskList {
         list.add(task);
     }
 
-    public void removeTask(int index) {
+    /**
+     * Marks task as done, then returns it
+     *
+     * @param index Index of task to be completed
+     */
+    public Task markDone(int index) {
+        Task doneTask = list.get(index);
+        doneTask.markAsDone();
+        return doneTask;
+    }
+
+    /**
+     * Deletes task, then returns it
+     *
+     * @param index Index of task to be deleted
+     */
+    public Task delete(int index) {
+        Task deletedTask = list.get(index);
         list.remove(index);
+        return deletedTask;
     }
 }
