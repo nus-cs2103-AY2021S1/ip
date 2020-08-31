@@ -1,5 +1,7 @@
+package DukeExceptions;
+
 /**
- * Represents a DukeException when a user does not input an appropriate
+ * Represents a DukeExceptions.DukeException when a user does not input an appropriate
  * command.
  */
 public class UnknownCommandException extends DukeException {

@@ -1,3 +1,9 @@
+import DukeExceptions.EmptyDescriptionException;
+import DukeExceptions.EmptyTimeException;
+import DukeExceptions.UnknownCommandException;
+import DukeExceptions.UnknownTaskException;
+import DukeExceptions.UnknownTimeException;
+
 /**
  * Represents the Parser class, that interprets user input commands.
  */
@@ -5,12 +11,13 @@ public class Parser {
 
     /**
      * Interprets user input text, into understandable commands.
+     *
      * @param command Commands input by user.
      * @return Command understood by Chatbot.
      */
     protected Command commandHandler(String command) {
         try {
-            if(command.split(" ")[0].equals("find")) {
+            if (command.split(" ")[0].equals("find")) {
                 String keyword = command.split(" ")[1];
                 return new Command("find", keyword);
             } else if (command.equals("bye")) {
