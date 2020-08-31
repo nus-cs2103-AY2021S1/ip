@@ -11,12 +11,12 @@ public interface Page {
     /**
      * The default width of a window page.
      */
-    int DEFAULT_PAGE_WIDTH = 600;
+    int DEFAULT_PAGE_WIDTH = 800;
 
     /**
      * The default height of a window page.
      */
-    int DEFAULT_PAGE_HEIGHT = 400;
+    int DEFAULT_PAGE_HEIGHT = 600;
 
     /**
      * The default font for Titles.

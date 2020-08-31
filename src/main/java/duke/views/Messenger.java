@@ -16,7 +16,7 @@ public class Messenger {
     /**
      * Introduction messages.
      */
-    public static final String INTRO_MESSAGE = "A Production by Zijian. For CS2103T 2020 Sem 1";
+    public static final String INTRO_MESSAGE = "A Production by Zijian.\n\nFor CS2103T 2020 Sem 1";
 
     /**
      * Messages for loading and saving files.
