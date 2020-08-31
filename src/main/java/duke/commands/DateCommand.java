@@ -1,4 +1,6 @@
 package duke.commands;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 
 import duke.DukeException;
 import duke.Storage;
@@ -32,14 +34,20 @@ public class DateCommand extends Command {
     public String execute(TaskList tasklist, Storage storage) throws DukeException {
         boolean dateExists = false;
         String response = "";
+        LocalDate dateSearched;
+        try {
+            dateSearched = LocalDate.parse(description);
+        } catch (DateTimeParseException e) {
+            throw new DukeException("invalid date. Put in format 'YYYY MM DD'.");
+        }
         for (Task i : tasklist.getList()) {
             if (i instanceof Deadline) {
-                if (((Deadline) i).hasDate(description)) {
+                if (((Deadline) i).isSameDate(dateSearched)) {
                     response += i.toString() + "\n";
                     dateExists = true;
                 }
             } else if (i instanceof Event) {
-                if (((Event) i).hasDate(description)) {
+                if (((Event) i).isSameDate(dateSearched)) {
                     response += i.toString() + "\n";;
                     dateExists = true;
                 }

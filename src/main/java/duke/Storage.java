@@ -37,7 +37,7 @@ public class Storage {
                 Scanner s = new Scanner(database);
                 while (s.hasNext()) {
                     String task = s.nextLine();
-                    convertIntoTasks(task);
+                    getSavedTasks(task);
                 }
                 this.database = database.getAbsolutePath();
                 return tasks;
@@ -57,7 +57,7 @@ public class Storage {
         }
     }
 
-    private void convertIntoTasks(String s) {
+    private void getSavedTasks(String s) {
         Task t;
         String[] descriptions = s.split("\\|");
         if (descriptions[0].equals("T")) {

@@ -1,4 +1,5 @@
 package duke.ui;
+
 import java.io.IOException;
 import java.util.Collections;
 
@@ -21,7 +22,6 @@ import javafx.scene.shape.Circle;
 
 
 public class DialogBox extends HBox {
-
     @FXML
     private Label dialog;
     @FXML

@@ -62,23 +62,19 @@ public class Deadline extends Task {
      * @return true or false if date is in list or not.
      * @throws DukeException if description provided does not match format of date.
      */
-    public boolean hasDate(String date) throws DukeException {
-        try {
-            LocalDate d1 = LocalDate.parse(date);
-            LocalDate d2 = null;
-            String[] descriptions = this.date.split(" ");
-            for (int i = 0; i < descriptions.length; i++) {
-                try {
-                    d2 = LocalDate.parse(descriptions[i]);
-                    return d2.equals(d1);
-                } catch (DateTimeParseException e) {
-                    continue;
-                }
+    public boolean isSameDate(LocalDate date) throws DukeException {
+        LocalDate d1 = date;
+        LocalDate d2 = null;
+        String[] descriptions = this.date.split(" ");
+        for (int i = 0; i < descriptions.length; i++) {
+            try {
+                d2 = LocalDate.parse(descriptions[i]);
+                return d2.equals(d1);
+            } catch (DateTimeParseException e) {
+                continue;
             }
-            return false;
-        } catch (DateTimeParseException e) {
-            throw new DukeException("invalid date. Put in format 'YYYY MM DD'.");
         }
+        return false;
     }
 
     /**
@@ -88,27 +84,23 @@ public class Deadline extends Task {
      * @return true or false if time is in list or not.
      * @throws DukeException if description provided does not match format of time.
      */
-    public boolean hasTime(String time) throws DukeException {
-        try {
-            LocalTime d1 = LocalTime.parse(time);
-            LocalTime d2 = null;
-            String[] descriptions = date.split(" ");
-            for (int i = 0; i < descriptions.length; i++) {
-                try {
-                    d2 = LocalTime.parse(descriptions[i]);
-                    if (d2.equals(d1)) {
-                        return d2.equals(d1);
-                    } else {
-                        continue;
-                    }
-                } catch (DateTimeParseException e) {
+    public boolean isSameTime(LocalTime time) throws DukeException {
+        LocalTime d1 = time;
+        LocalTime d2 = null;
+        String[] descriptions = date.split(" ");
+        for (int i = 0; i < descriptions.length; i++) {
+            try {
+                d2 = LocalTime.parse(descriptions[i]);
+                if (d2.equals(d1)) {
+                    return d2.equals(d1);
+                } else {
                     continue;
                 }
+            } catch (DateTimeParseException e) {
+                continue;
             }
-            return false;
-        } catch (DateTimeParseException e) {
-            throw new DukeException("invalid Time. Put in format 'HH:mm'.");
         }
+        return false;
     }
 
     /**
