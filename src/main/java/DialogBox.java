@@ -12,6 +12,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.text.Text;
 
 /**
  * An example of a custom control using FXML.
@@ -20,7 +21,7 @@ import javafx.scene.layout.HBox;
  */
 public class DialogBox extends HBox {
     @FXML
-    private Label dialog;
+    private Text dialog;
 
     @FXML
     private Label displayName;
@@ -41,7 +42,6 @@ public class DialogBox extends HBox {
 
         displayName.setText(name);
         dialog.setText(text);
-        dialog.setMaxHeight(Double.MAX_VALUE);
         displayPicture.setImage(img);
     }
 

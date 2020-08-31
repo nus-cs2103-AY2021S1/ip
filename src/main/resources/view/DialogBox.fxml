@@ -6,10 +6,11 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
 
 <fx:root alignment="TOP_RIGHT" maxWidth="1.7976931348623157E308" prefWidth="400.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <Label fx:id="dialog" text="Label" textFill="#1e1d1e" wrapText="true" />
+      <Text fx:id="dialog" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
       <Region prefHeight="118.0" prefWidth="9.0" />
       <VBox nodeOrientation="RIGHT_TO_LEFT">
          <children>
