@@ -6,6 +6,8 @@ import parser.Parser;
 import storage.Storage;
 import ui.Ui;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import java.util.ArrayList;
 
 /**
@@ -19,6 +21,9 @@ public class Duke {
     private TaskList taskList;
     private Storage storage;
     private Parser parser;
+
+    public Duke() {
+    }
 
     public Duke(String file) {
         this.isChatting = true;
@@ -48,6 +53,42 @@ public class Duke {
                 this.ui.showDukeError(e);
             }
         }
+    }
+
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    public String getResponse(String input) {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        PrintStream ps = new PrintStream(baos);
+        PrintStream old = System.out;
+        System.setOut(ps);
+        try {
+            Command user_command = this.parser.parseCommand(input);
+            user_command.execute();
+        } catch (DukeException e) {
+            this.ui.showDukeError(e);
+        }
+        System.out.flush();
+        System.setOut(old);
+        return baos.toString();
+    }
+
+    public String initDuke() {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        PrintStream ps = new PrintStream(baos);
+        PrintStream old = System.out;
+        System.setOut(ps);
+        this.ui.showGreeting();
+        System.out.flush();
+        System.setOut(old);
+        try {
+            this.storage.loadTaskList(this.taskList);
+        } catch (DukeInvalidUserInputException e) {
+            this.ui.showDukeError(e);
+        }
+        return baos.toString();
     }
 
     public static void main(String[] args) {
