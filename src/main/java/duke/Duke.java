@@ -2,9 +2,7 @@ package duke;
 
 import duke.command.Command;
 import duke.command.CommandParser;
-
 import duke.storage.Storage;
-
 import duke.util.TaskList;
 
 /**
@@ -31,6 +29,10 @@ public class Duke {
         ui = new Ui();
     }
 
+    /**
+     * Initialises and runs the Duke chat bot. Does not require input arguments.
+     * @param args Input arguments
+     */
     public static void main(String[] args) {
         Duke duke = new Duke();
         duke.run();

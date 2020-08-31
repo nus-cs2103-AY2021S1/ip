@@ -1,8 +1,8 @@
 package duke.command;
 
+import duke.Ui;
 import duke.storage.Storage;
 import duke.util.TaskList;
-import duke.Ui;
 
 /**
  * Executable command that handles manipulation of Tasks between TaskList, Ui and Storage.
