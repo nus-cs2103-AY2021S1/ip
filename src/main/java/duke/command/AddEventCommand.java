@@ -42,16 +42,18 @@ public class AddEventCommand extends Command {
      * @throws InvalidTaskDateTimeException If date and time format is invalid.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public CommandResponse execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
             Task task = new Event(description, at);
             tasks.addTask(task);
             storage.save(tasks);
-            ui.printMessage("Got it. I've added this event: \n\t   "
+            String responseMessage = "Got it. I've added this event: \n\t   "
                     + task + "\n\t "
                     + "Now you have "
                     + getTaskDescription(tasks.getNumberOfTask())
-                    + " in the list.");
+                    + " in the list.";
+            boolean shouldExit = getIsExit();
+            return new CommandResponse(responseMessage, shouldExit);
         } catch (DateTimeParseException e) {
             throw new InvalidTaskDateTimeException();
         }
@@ -71,5 +73,19 @@ public class AddEventCommand extends Command {
             taskDescription = noOfTask + " task";
         }
         return taskDescription;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        } else if (obj instanceof AddEventCommand) {
+            AddEventCommand c = (AddEventCommand) obj;
+            return c.description.equals(this.description)
+                    && c.at.equals(this.at)
+                    && c.getIsExit() == this.getIsExit();
+        } else {
+            return false;
+        }
     }
 }

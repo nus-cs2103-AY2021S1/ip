@@ -32,15 +32,17 @@ public class AddTodoCommand extends Command {
      * @param storage Storage use by Duke to save and load files.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public CommandResponse execute(TaskList tasks, Ui ui, Storage storage) {
         Task task = new Todo(description);
         tasks.addTask(task);
         storage.save(tasks);
-        ui.printMessage("Got it. I've added this todo: \n\t   "
+        String responseMessage = "Got it. I've added this todo: \n\t   "
                 + task + "\n\t "
                 + "Now you have "
                 + getTaskDescription(tasks.getNumberOfTask())
-                + " in the list.");
+                + " in the list.";
+        boolean shouldExit = getIsExit();
+        return new CommandResponse(responseMessage, shouldExit);
     }
 
     /**
@@ -57,5 +59,17 @@ public class AddTodoCommand extends Command {
             taskDescription = noOfTask + " task";
         }
         return taskDescription;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        } else if (obj instanceof AddTodoCommand) {
+            AddTodoCommand c = (AddTodoCommand) obj;
+            return c.description.equals(this.description) && c.getIsExit() == this.getIsExit();
+        } else {
+            return false;
+        }
     }
 }

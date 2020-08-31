@@ -24,8 +24,10 @@ public class ByeCommand extends Command {
      * @param storage Storage use by Duke to save and load files.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.printMessage("Bye. Hope to see you again soon!");
+    public CommandResponse execute(TaskList tasks, Ui ui, Storage storage) {
+        String responseMessage = "Bye. Hope to see you again soon!";
+        boolean shouldExit = getIsExit();
         storage.save(tasks);
+        return new CommandResponse(responseMessage, shouldExit);
     }
 }

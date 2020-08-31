@@ -30,15 +30,17 @@ public class DeleteCommand extends Command {
      * @param storage Storage use by Duke to save and load files.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public CommandResponse execute(TaskList tasks, Ui ui, Storage storage) {
         int noOfTask = tasks.getNumberOfTask() - 1;
-        ui.printMessage("Noted. I've removed this task:\n\t   "
+        String responseMessage = "Noted. I've removed this task:\n\t   "
                 + tasks.getTask(taskNumber) + "\n\t "
                 + "Now you have "
                 + getTaskDescription(noOfTask)
-                + " in the list.");
+                + " in the list.";
+        boolean shouldExit = getIsExit();
         tasks.removeTask(taskNumber);
         storage.save(tasks);
+        return new CommandResponse(responseMessage, shouldExit);
     }
 
     /**
@@ -55,6 +57,18 @@ public class DeleteCommand extends Command {
             taskDescription = noOfTask + " task";
         }
         return taskDescription;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        } else if (obj instanceof DeleteCommand) {
+            DeleteCommand c = (DeleteCommand) obj;
+            return c.taskNumber == this.taskNumber && c.getIsExit() == this.getIsExit();
+        } else {
+            return false;
+        }
     }
 
 }

@@ -14,14 +14,14 @@ public class ParserTest {
     @Test
     public void parse_validCommand_success() throws DukeException {
         TaskList tasks = new TaskList();
-        assertEquals(new ByeCommand().toString(), Parser.parse("bye", tasks).toString());
+        assertEquals(new ByeCommand(), Parser.parse("bye", tasks));
     }
 
     @Test
     public void parse_invalidCommand_exceptionThrown() {
         try {
             TaskList tasks = new TaskList();
-            assertEquals(new ByeCommand().toString(), Parser.parse("hello", tasks).getClass());
+            assertEquals(new ByeCommand(), Parser.parse("hello", tasks));
             fail();
         } catch (Exception e) {
             assertEquals("OOPS!!! I'm sorry, but I don't know what that means :-(", e.getMessage());

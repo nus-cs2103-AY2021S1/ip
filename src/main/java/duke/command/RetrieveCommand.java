@@ -17,7 +17,6 @@ import duke.ui.Ui;
  * a specific date from TaskList.
  */
 public class RetrieveCommand extends Command {
-
     /** Date of Deadline and Event to be retrieved */
     private final LocalDate date;
 
@@ -40,8 +39,9 @@ public class RetrieveCommand extends Command {
      * @throws InvalidTaskDateException If date and time format is invalid.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws InvalidTaskDateException {
+    public CommandResponse execute(TaskList tasks, Ui ui, Storage storage) throws InvalidTaskDateException {
         try {
+            String responseMessage = "";
             StringBuffer sb = new StringBuffer();
             int index = 1;
             sb.append(String.format("Here are the deadlines and events happening on %s:\n\t ",
@@ -66,15 +66,29 @@ public class RetrieveCommand extends Command {
                 }
             }
             if (hasTasks) {
-                ui.printMessage(sb.delete(sb.length() - 3, sb.length() - 1).toString());
+                responseMessage = sb.delete(sb.length() - 3, sb.length() - 1).toString();
             } else {
-                ui.printMessage(String.format(
+                responseMessage = String.format(
                         "You do not have any deadlines or events happening on %s! :)",
-                        date.format(DateTimeFormatter.ofPattern("dd MMMM yyyy"))));
+                        date.format(DateTimeFormatter.ofPattern("dd MMMM yyyy")));
             }
+            boolean shouldExit = getIsExit();
+            return new CommandResponse(responseMessage, shouldExit);
         } catch (DateTimeParseException e) {
             throw new InvalidTaskDateException();
         }
 
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        } else if (obj instanceof RetrieveCommand) {
+            RetrieveCommand c = (RetrieveCommand) obj;
+            return c.date.isEqual(this.date) && c.getIsExit() == this.getIsExit();
+        } else {
+            return false;
+        }
     }
 }

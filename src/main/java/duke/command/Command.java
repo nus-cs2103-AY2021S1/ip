@@ -30,7 +30,7 @@ public abstract class Command {
      * @param storage Storage use by Duke to save and load files.
      * @throws DukeException If error specific to Duke occurs.
      */
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
+    public abstract CommandResponse execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
 
     /**
      * Returns the Command's isExit value.
@@ -42,7 +42,14 @@ public abstract class Command {
     }
 
     @Override
-    public String toString() {
-        return "Duke Command";
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        } else if (obj instanceof Command) {
+            Command c = (Command) obj;
+            return c.isExit == this.isExit;
+        } else {
+            return false;
+        }
     }
 }

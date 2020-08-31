@@ -1,7 +1,10 @@
 ../src/main/java/duke/ui/Ui.java
+../src/main/java/duke/ui/DialogBox.java
+../src/main/java/duke/ui/MainWindow.java
 ../src/main/java/duke/parser/Parser.java
 ../src/main/java/duke/storage/Storage.java
 ../src/main/java/duke/tasklist/TaskList.java
+../src/main/java/duke/Main.java
 ../src/main/java/duke/task/Event.java
 ../src/main/java/duke/task/Task.java
 ../src/main/java/duke/task/Deadline.java
@@ -14,9 +17,11 @@
 ../src/main/java/duke/command/RetrieveCommand.java
 ../src/main/java/duke/command/AddDeadlineCommand.java
 ../src/main/java/duke/command/AddTodoCommand.java
+../src/main/java/duke/command/CommandResponse.java
 ../src/main/java/duke/command/FindCommand.java
 ../src/main/java/duke/command/DoneCommand.java
 ../src/main/java/duke/Duke.java
+../src/main/java/duke/Launcher.java
 ../src/main/java/duke/exception/NoTaskContentException.java
 ../src/main/java/duke/exception/NoTaskDurationException.java
 ../src/main/java/duke/exception/NoFindContentException.java

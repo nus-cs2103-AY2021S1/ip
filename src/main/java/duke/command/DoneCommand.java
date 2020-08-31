@@ -30,11 +30,25 @@ public class DoneCommand extends Command {
      * @param storage Storage use by Duke to save and load files.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public CommandResponse execute(TaskList tasks, Ui ui, Storage storage) {
         tasks.doTask(taskNumber);
         storage.save(tasks);
-        ui.printMessage("Nice! I've marked this task as done:\n\t   "
-                + tasks.getTask(taskNumber));
+        String responseMessage = "Nice! I've marked this task as done:\n\t   "
+                + tasks.getTask(taskNumber);
+        boolean shouldExit = getIsExit();
+        return new CommandResponse(responseMessage, shouldExit);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        } else if (obj instanceof DoneCommand) {
+            DoneCommand c = (DoneCommand) obj;
+            return c.taskNumber == this.taskNumber && c.getIsExit() == this.getIsExit();
+        } else {
+            return false;
+        }
     }
 
 }

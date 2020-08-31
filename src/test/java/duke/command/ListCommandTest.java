@@ -2,11 +2,6 @@ package duke.command;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
-
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import duke.storage.Storage;
@@ -18,18 +13,6 @@ import duke.tasklist.TaskList;
 import duke.ui.Ui;
 
 public class ListCommandTest {
-    private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-    private final PrintStream originalOut = System.out;
-
-    @BeforeEach
-    public void setUpStreams() {
-        System.setOut(new PrintStream(outContent));
-    }
-
-    @AfterEach
-    public void restoreStreams() {
-        System.setOut(originalOut);
-    }
 
     @Test
     public void testExecute() {
@@ -43,11 +26,12 @@ public class ListCommandTest {
         Ui ui = new Ui();
         Storage storage = new Storage();
         ListCommand listCommand = new ListCommand();
-        listCommand.execute(tasks, ui, storage);
-        String expectedPrintStatement = "\t Here are the tasks in your list:\n"
+        CommandResponse actual = listCommand.execute(tasks, ui, storage);
+        String expectedMessage = "Here are the tasks in your list:\n"
                 + "\t 1.[T][✘] eat\n"
                 + "\t 2.[D][✘] sleep (by: 12 February 2012, 12:12 PM)\n"
-                + "\t 3.[E][✘] play (at: 12 April 2014, 12:14 PM) \n";
-        assertEquals(expectedPrintStatement, outContent.toString());
+                + "\t 3.[E][✘] play (at: 12 April 2014, 12:14 PM) ";
+        CommandResponse expected = new CommandResponse(expectedMessage, false);
+        assertEquals(expected, actual);
     }
 }
