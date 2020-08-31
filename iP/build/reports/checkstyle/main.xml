@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checkstyle version="8.32">
+<file name="/Users/qiuyueyouji/Documents/NUS/year2sem1/CS2103/iP/src/main/java/duke/Deadline.java">
+<error line="9" column="35" severity="error" message="&apos;{&apos; の前にホワイトスペースがありません。" source="com.puppycrawl.tools.checkstyle.checks.whitespace.WhitespaceAroundCheck"/>
+</file>
+<file name="/Users/qiuyueyouji/Documents/NUS/year2sem1/CS2103/iP/src/main/java/duke/Duke.java">
+<error line="12" column="5" severity="error" message="変数アクセスの定義順序が間違っています。" source="com.puppycrawl.tools.checkstyle.checks.coding.DeclarationOrderCheck"/>
+<error line="12" column="21" severity="error" message="変数 &apos;tasks&apos; は private とし、アクセッサメソッドを持つべきです。" source="com.puppycrawl.tools.checkstyle.checks.design.VisibilityModifierCheck"/>
+<error line="69" column="43" severity="warning" message="名前 &apos;user_input&apos; はパターン &apos;^[a-z][a-zA-Z0-9]*$&apos; に一致しなければなりません。" source="com.puppycrawl.tools.checkstyle.checks.naming.ParameterNameCheck"/>
+<error line="88" column="26" severity="error" message="&apos;{&apos; の前にホワイトスペースがありません。" source="com.puppycrawl.tools.checkstyle.checks.whitespace.WhitespaceAroundCheck"/>
+<error line="99" column="26" severity="error" message="&apos;{&apos; の前にホワイトスペースがありません。" source="com.puppycrawl.tools.checkstyle.checks.whitespace.WhitespaceAroundCheck"/>
+<error line="109" column="26" severity="error" message="&apos;{&apos; の前にホワイトスペースがありません。" source="com.puppycrawl.tools.checkstyle.checks.whitespace.WhitespaceAroundCheck"/>
+<error line="121" column="30" severity="error" message="&apos;{&apos; の前にホワイトスペースがありません。" source="com.puppycrawl.tools.checkstyle.checks.whitespace.WhitespaceAroundCheck"/>
+<error line="134" column="27" severity="warning" message="名前 &apos;l_time&apos; はパターン &apos;^[a-z][a-zA-Z0-9]*$&apos; に一致しなければなりません。" source="com.puppycrawl.tools.checkstyle.checks.naming.LocalVariableNameCheck"/>
+<error line="145" column="52" severity="error" message="&apos;{&apos; の前にホワイトスペースがありません。" source="com.puppycrawl.tools.checkstyle.checks.whitespace.WhitespaceAroundCheck"/>
+<error line="151" column="27" severity="warning" message="名前 &apos;l_time&apos; はパターン &apos;^[a-z][a-zA-Z0-9]*$&apos; に一致しなければなりません。" source="com.puppycrawl.tools.checkstyle.checks.naming.LocalVariableNameCheck"/>
+<error line="155" column="30" severity="error" message="&apos;{&apos; の前にホワイトスペースがありません。" source="com.puppycrawl.tools.checkstyle.checks.whitespace.WhitespaceAroundCheck"/>
+<error line="164" column="26" severity="error" message="&apos;{&apos; の前にホワイトスペースがありません。" source="com.puppycrawl.tools.checkstyle.checks.whitespace.WhitespaceAroundCheck"/>
+</file>
+<file name="/Users/qiuyueyouji/Documents/NUS/year2sem1/CS2103/iP/src/main/java/duke/DukeException.java">
+</file>
+<file name="/Users/qiuyueyouji/Documents/NUS/year2sem1/CS2103/iP/src/main/java/duke/Event.java">
+<error line="1" severity="error" message="ファイルが新しい行で終了していません。" source="com.puppycrawl.tools.checkstyle.checks.NewlineAtEndOfFileCheck"/>
+</file>
+<file name="/Users/qiuyueyouji/Documents/NUS/year2sem1/CS2103/iP/src/main/java/duke/Parser.java">
+<error line="14" column="43" severity="warning" message="名前 &apos;user_input&apos; はパターン &apos;^[a-z][a-zA-Z0-9]*$&apos; に一致しなければなりません。" source="com.puppycrawl.tools.checkstyle.checks.naming.ParameterNameCheck"/>
+<error line="24" column="42" severity="warning" message="名前 &apos;user_input&apos; はパターン &apos;^[a-z][a-zA-Z0-9]*$&apos; に一致しなければなりません。" source="com.puppycrawl.tools.checkstyle.checks.naming.ParameterNameCheck"/>
+<error line="34" column="40" severity="warning" message="名前 &apos;user_input&apos; はパターン &apos;^[a-z][a-zA-Z0-9]*$&apos; に一致しなければなりません。" source="com.puppycrawl.tools.checkstyle.checks.naming.ParameterNameCheck"/>
+<error line="44" column="44" severity="warning" message="名前 &apos;user_input&apos; はパターン &apos;^[a-z][a-zA-Z0-9]*$&apos; に一致しなければなりません。" source="com.puppycrawl.tools.checkstyle.checks.naming.ParameterNameCheck"/>
+<error line="59" column="65" severity="warning" message="名前 &apos;user_input&apos; はパターン &apos;^[a-z][a-zA-Z0-9]*$&apos; に一致しなければなりません。" source="com.puppycrawl.tools.checkstyle.checks.naming.ParameterNameCheck"/>
+<error line="71" column="19" severity="warning" message="名前 &apos;l_time&apos; はパターン &apos;^[a-z][a-zA-Z0-9]*$&apos; に一致しなければなりません。" source="com.puppycrawl.tools.checkstyle.checks.naming.LocalVariableNameCheck"/>
+<error line="72" column="75" severity="error" message="&apos;{&apos; の前にホワイトスペースがありません。" source="com.puppycrawl.tools.checkstyle.checks.whitespace.WhitespaceAroundCheck"/>
+<error line="73" column="67" severity="error" message="文は1行に1つだけにしてください。" source="com.puppycrawl.tools.checkstyle.checks.coding.OneStatementPerLineCheck"/>
+<error line="83" column="62" severity="warning" message="名前 &apos;user_input&apos; はパターン &apos;^[a-z][a-zA-Z0-9]*$&apos; に一致しなければなりません。" source="com.puppycrawl.tools.checkstyle.checks.naming.ParameterNameCheck"/>
+<error line="95" column="19" severity="warning" message="名前 &apos;l_time&apos; はパターン &apos;^[a-z][a-zA-Z0-9]*$&apos; に一致しなければなりません。" source="com.puppycrawl.tools.checkstyle.checks.naming.LocalVariableNameCheck"/>
+<error line="97" column="67" severity="error" message="文は1行に1つだけにしてください。" source="com.puppycrawl.tools.checkstyle.checks.coding.OneStatementPerLineCheck"/>
+<error line="102" column="41" severity="warning" message="名前 &apos;user_input&apos; はパターン &apos;^[a-z][a-zA-Z0-9]*$&apos; に一致しなければなりません。" source="com.puppycrawl.tools.checkstyle.checks.naming.ParameterNameCheck"/>
+</file>
+<file name="/Users/qiuyueyouji/Documents/NUS/year2sem1/CS2103/iP/src/main/java/duke/Storage.java">
+<error line="13" column="19" severity="error" message="変数 &apos;filePath&apos; は private とし、アクセッサメソッドを持つべきです。" source="com.puppycrawl.tools.checkstyle.checks.design.VisibilityModifierCheck"/>
+<error line="24" column="38" severity="warning" message="名前 &apos;Duke&apos; はパターン &apos;^[a-z][a-zA-Z0-9]*$&apos; に一致しなければなりません。" source="com.puppycrawl.tools.checkstyle.checks.naming.ParameterNameCheck"/>
+<error line="30" column="24" severity="warning" message="名前 &apos;user_input&apos; はパターン &apos;^[a-z][a-zA-Z0-9]*$&apos; に一致しなければなりません。" source="com.puppycrawl.tools.checkstyle.checks.naming.LocalVariableNameCheck"/>
+</file>
+<file name="/Users/qiuyueyouji/Documents/NUS/year2sem1/CS2103/iP/src/main/java/duke/Task.java">
+</file>
+<file name="/Users/qiuyueyouji/Documents/NUS/year2sem1/CS2103/iP/src/main/java/duke/TaskList.java">
+<error line="8" column="28" severity="error" message="変数 &apos;taskList&apos; は private とし、アクセッサメソッドを持つべきです。" source="com.puppycrawl.tools.checkstyle.checks.design.VisibilityModifierCheck"/>
+<error line="51" column="5" severity="error" message="Javadoc コメントがありません。" source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+</file>
+<file name="/Users/qiuyueyouji/Documents/NUS/year2sem1/CS2103/iP/src/main/java/duke/Todo.java">
+<error line="5" column="31" severity="error" message="&apos;{&apos; の前にホワイトスペースがありません。" source="com.puppycrawl.tools.checkstyle.checks.whitespace.WhitespaceAroundCheck"/>
+</file>
+<file name="/Users/qiuyueyouji/Documents/NUS/year2sem1/CS2103/iP/src/main/java/duke/Ui.java">
+<error line="105" column="52" severity="error" message="非空白文字を分離する際は、スペースは1つにしてください。" source="com.puppycrawl.tools.checkstyle.checks.whitespace.SingleSpaceSeparatorCheck"/>
+<error line="106" column="16" severity="warning" message="名前 &apos;user_input&apos; はパターン &apos;^[a-z][a-zA-Z0-9]*$&apos; に一致しなければなりません。" source="com.puppycrawl.tools.checkstyle.checks.naming.LocalVariableNameCheck"/>
+<error line="107" column="43" severity="error" message="非空白文字を分離する際は、スペースは1つにしてください。" source="com.puppycrawl.tools.checkstyle.checks.whitespace.SingleSpaceSeparatorCheck"/>
+<error line="111" column="5" severity="error" message="Javadoc コメントがありません。" source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="119" severity="error" message="行が無効なパターン &apos;Trailing whitespace&apos; に合致しました。" source="com.puppycrawl.tools.checkstyle.checks.regexp.RegexpCheck"/>
+</file>
+</checkstyle>

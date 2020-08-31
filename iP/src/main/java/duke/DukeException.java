@@ -1,5 +1,4 @@
 package duke;
-
 /**
  * Exception related to Duke application
  */
