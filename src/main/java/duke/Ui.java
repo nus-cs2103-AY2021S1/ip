@@ -1,4 +1,4 @@
-package duke;
+package main.java.duke;
 
 import java.util.ArrayList;
 
@@ -33,7 +33,7 @@ public class Ui {
      * Prints the load file error
      */
     public void showLoadingError(){
-        System.out.println("no ./data/duke.txt found");
+        System.out.println("no ./data/main.java.duke.txt found");
     }
 
     /**

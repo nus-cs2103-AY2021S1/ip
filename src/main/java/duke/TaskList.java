@@ -1,4 +1,4 @@
-package duke;
+package main.java.duke;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -24,7 +24,7 @@ public class TaskList {
 
     /**
      * Construction a TaskList object
-     * @param reader a BufferedReader to read the ./data/duke.txt
+     * @param reader a BufferedReader to read the ./data/main.java.duke.txt
      * @throws IOException
      */
     public TaskList(BufferedReader reader) throws IOException {
@@ -36,9 +36,9 @@ public class TaskList {
     }
 
     /**
-     * Reads all the Tasks in ./data/duke.txt and puts all the Tasks in an ArrayList
-     * @param reader a BufferedReader for reading ./data/duke.txt
-     * @return an ArrayList of all Tasks in ./data/duke.txt
+     * Reads all the Tasks in ./data/main.java.duke.txt and puts all the Tasks in an ArrayList
+     * @param reader a BufferedReader for reading ./data/main.java.duke.txt
+     * @return an ArrayList of all Tasks in ./data/main.java.duke.txt
      * @throws IOException
      */
     public static ArrayList<Task> readTextFile2List(BufferedReader reader) throws IOException {

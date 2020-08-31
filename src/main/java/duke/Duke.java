@@ -1,9 +1,6 @@
-package duke;
+package main.java.duke;
 
 import java.io.*;
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
@@ -59,6 +56,6 @@ public class Duke {
      * @throws IOException
      */
     public static void main(String[] args) throws IOException {
-        new Duke("data/duke.txt").run();
+        new Duke("data/main.java.duke.txt").run();
     }
 }

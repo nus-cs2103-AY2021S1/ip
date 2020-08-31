@@ -1,6 +1,4 @@
-package duke;
-
-import java.util.ArrayList;
+package main.java.duke;
 
 public class Parser {
 

@@ -1,7 +1,6 @@
-package duke;
+package main.java.duke;
 
 import java.io.*;
-import java.util.ArrayList;
 
 public class Storage {
 
@@ -51,16 +50,16 @@ public class Storage {
     }
 
     /**
-     * Returns the BufferedReader for ./data/duke.txt
-     * @return the BufferedReader for ./data/duke.txt
+     * Returns the BufferedReader for ./data/main.java.duke.txt
+     * @return the BufferedReader for ./data/main.java.duke.txt
      */
     public BufferedReader load(){
         return reader;
     }
 
     /**
-     * Returns whether ./data/duke.txt exists
-     * @return whether ./data/duke.txt exists
+     * Returns whether ./data/main.java.duke.txt exists
+     * @return whether ./data/main.java.duke.txt exists
      */
     public boolean isFileExist(){
         return fileExist;
@@ -75,7 +74,7 @@ public class Storage {
         if(!fileExist){
             new File("./data").mkdir();
         }
-        FileWriter fileWriter = new FileWriter("./data/duke.txt");
+        FileWriter fileWriter = new FileWriter("./data/main.java.duke.txt");
         writeArrayList2file(list, fileWriter);
     }
 }

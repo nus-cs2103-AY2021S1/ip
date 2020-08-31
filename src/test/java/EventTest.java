@@ -1,5 +1,6 @@
-import duke.Event;
-import org.junit.jupiter.api.DynamicTest;
+package test.java;
+
+import main.java.duke.Event;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
