@@ -1,11 +1,10 @@
 package duke;
 
-import java.util.Scanner;
-
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.FileNotFoundException;
+import java.util.Scanner;
 
 /**
  * Handles storage, reading, and writing of tasks to .txt file.

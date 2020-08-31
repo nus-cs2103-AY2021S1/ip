@@ -1,7 +1,7 @@
 package duke;
 
-import java.time.LocalDateTime;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
@@ -9,9 +9,9 @@ import java.time.format.DateTimeFormatter;
  * Inherits from abstract class Task.
  */
 public abstract class TimedTask extends Task {
+    protected static final DateTimeFormatter INPUT_FORMAT = DateTimeFormatter.ofPattern("d-M-yyyy k:mm");
+    protected static final DateTimeFormatter PRINT_FORMAT = DateTimeFormatter.ofPattern("dd MMM yyyy hh.mma");
     protected LocalDateTime dateTime;
-    protected static final DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("d-M-yyyy k:mm");
-    protected static final DateTimeFormatter printFormatter = DateTimeFormatter.ofPattern("dd MMM yyyy hh.mma");
 
     /**
      * (Abstract) constructor to be called by concrete subclasses.
@@ -21,7 +21,7 @@ public abstract class TimedTask extends Task {
      */
     protected TimedTask(String description, String datetime) {
         super(description);
-        this.dateTime = LocalDateTime.parse(datetime, TimedTask.inputFormatter);
+        this.dateTime = LocalDateTime.parse(datetime, TimedTask.INPUT_FORMAT);
     }
 
     /**
@@ -31,7 +31,7 @@ public abstract class TimedTask extends Task {
      * @return date and time string.
      */
     protected String getDateTimeString() {
-        return this.dateTime.format(TimedTask.printFormatter);
+        return this.dateTime.format(TimedTask.PRINT_FORMAT);
     }
 
     /**
