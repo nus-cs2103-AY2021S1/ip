@@ -7,6 +7,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import duke.exception.FileUpdateFailException;
 import duke.exception.InvalidFileFormatException;
 import duke.task.Task;
 import duke.tasklist.TaskList;
@@ -40,7 +41,7 @@ public class Storage {
             File newFile = new File(filePath);
             newFile.createNewFile();
         } catch (IOException e) {
-            ui.fileCreationError();
+            System.out.println(e.getMessage());
         }
     }
 
@@ -74,7 +75,7 @@ public class Storage {
      *
      * @param tasks Task list.
      */
-    public void update(TaskList tasks) {
+    public void update(TaskList tasks) throws FileUpdateFailException {
         try {
             FileWriter fileWriter = new FileWriter(filePath);
             String header = "Task type  ,Description  ,Time  ,Status\n";
@@ -85,7 +86,7 @@ public class Storage {
             fileWriter.write(stringBuilder.toString());
             fileWriter.close();
         } catch (IOException e) {
-            ui.fileUpdateError();
+            throw new FileUpdateFailException();
         }
     }
 

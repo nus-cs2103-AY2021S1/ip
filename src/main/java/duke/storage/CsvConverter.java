@@ -5,7 +5,6 @@ import duke.task.ComplexTask;
 import duke.task.Task;
 import duke.task.TaskType;
 import duke.task.ToDo;
-import duke.ui.Ui;
 
 /**
  * Converts the task in CSV format to a Task object.
@@ -27,7 +26,6 @@ public class CsvConverter {
         String time = inputArr[2];
         String status = inputArr[3];
         boolean isDone = checkStatus(status);
-        System.out.println(isDone);
 
         if (taskType.equals("TODO")) {
             return new ToDo(description, isDone);

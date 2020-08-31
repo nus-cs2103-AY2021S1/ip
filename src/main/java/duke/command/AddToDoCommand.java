@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.exception.DukeException;
 import duke.exception.EmptyTaskException;
 import duke.storage.Storage;
 import duke.task.TaskType;
@@ -25,7 +26,7 @@ public class AddToDoCommand extends AddCommand {
      * @throws EmptyTaskException If the task detail is empty.
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws EmptyTaskException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (getTaskDetails().isEmpty()) {
             throw new EmptyTaskException(TaskType.TODO);
         } else {

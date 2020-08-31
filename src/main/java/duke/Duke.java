@@ -18,7 +18,7 @@ public class Duke {
     private final TaskList tasks;
 
     /**
-     * Initializes the duke controller.
+     * Initializes the duke backend.
      */
     public Duke() {
         this.ui = new Ui();
@@ -37,11 +37,11 @@ public class Duke {
         }).start();
     }
 
-    // TODO enable greetings!
-
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Obtains input from user and outputs accordingly.
+     *
+     * @param input User input.
+     * @return Duke response message.
      */
     protected String getResponse(String input) {
         try {

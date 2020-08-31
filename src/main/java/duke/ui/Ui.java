@@ -32,27 +32,6 @@ public class Ui {
     }
 
     /**
-     * Prints the file creation message.
-     */
-    public String fileCreationError() {
-        return "Error in creating file";
-    }
-
-    /**
-     * Prints the file update error.
-     */
-    public String fileUpdateError() {
-        return "Error in updating file";
-    }
-
-    /**
-     * Prints the file read error when reading from the CSV file.
-     */
-    public String fileReadingError() {
-        return "Error in reading from csv file";
-    }
-
-    /**
      * Prints task done message.
      *
      * @param current Input task.
@@ -101,9 +80,9 @@ public class Ui {
         str1.append(String.format("Here are the %s tasks in your list:\n", extra));
         int size = tasks.size();
         for (int i = 0; i < size - 1; i++) {
-            str1.append(String.format("     %d.%s\n", i + 1, tasks.get(i)));
+            str1.append(String.format("   %d.%s\n", i + 1, tasks.get(i)));
         }
-        str1.append(String.format("     %d.%s", size, tasks.get(size - 1)));
+        str1.append(String.format("   %d.%s", size, tasks.get(size - 1)));
         return str1.toString();
     }
 
@@ -114,5 +93,19 @@ public class Ui {
      */
     public String emptyFind(String queryWord) {
         return String.format("There are no matching tasks with the keyword %s.", queryWord);
+    }
+
+    /**
+     * Prints the file update error.
+     */
+    public void fileUpdateError() {
+        System.out.println("Error in updating file");
+    }
+
+    /**
+     * Prints the file read error when reading from the CSV file.
+     */
+    public void fileReadingError() {
+        System.out.println("Error in reading from csv file");
     }
 }
