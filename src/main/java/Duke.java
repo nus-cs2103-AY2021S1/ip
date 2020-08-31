@@ -1,8 +1,8 @@
-import java1.exception.*;
-import java1.parser.Parser;
-import java1.tasklist.*;
-import java1.storage.*;
-import java1.ui.*;
+import exception.*;
+import parser.Parser;
+import tasklist.*;
+import storage.*;
+import ui.*;
 
 import java.io.IOException;
 import java.util.Scanner;

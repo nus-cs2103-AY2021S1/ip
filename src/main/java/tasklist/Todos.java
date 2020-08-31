@@ -1,4 +1,4 @@
-package java1.tasklist;
+package tasklist;
 
 public class Todos extends Task {
 

@@ -1,7 +1,7 @@
-package java1.parser;
+package parser;
 
-import java1.tasklist.*;
-import java1.exception.*;
+import tasklist.*;
+import exception.*;
 import java.time.DateTimeException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;

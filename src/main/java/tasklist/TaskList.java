@@ -1,8 +1,8 @@
-package java1.tasklist;
+package tasklist;
 
 import java.util.ArrayList;
 
-import java1.storage.Storage;
+import storage.Storage;
 
 /**
  * The TaskList class encapsulates information regarding the list of tasks in Duke.

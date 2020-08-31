@@ -1,6 +1,6 @@
-package java1.storage;
+package storage;
 
-import java1.tasklist.*;
+import tasklist.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;

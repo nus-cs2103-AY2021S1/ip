@@ -1,4 +1,4 @@
-package java1.tasklist;
+package tasklist;
 
 /**
  * Encapsulates a Task object in the Duke.
