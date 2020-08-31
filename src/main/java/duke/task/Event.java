@@ -1,11 +1,12 @@
 package duke.task;
 
-import duke.exception.DukeException;
-
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+import duke.exception.DukeException;
+
 
 /**
  * Encapsulates a task that has to be attended by a specified and time.
@@ -42,8 +43,8 @@ public class Event extends Task {
             this.dateBy = LocalDate.parse(parts[0]);
             this.timeBy = LocalTime.parse(parts[1]);
         } catch (DateTimeParseException e) {
-            throw new DukeException("Please input date and time in correct format: " +
-                    "'yyyy-MM-dd HH:MM' (24-hour time format).");
+            throw new DukeException("Please input date and time in correct format:"
+                    + " 'yyyy-MM-dd HH:MM' (24-hour time format).");
         }
     }
 
@@ -56,15 +57,15 @@ public class Event extends Task {
      * @param isDone            Whether the task is done or not.
      * @throws DukeException    If the program fails at any point.
      */
-    public Event(String description, String at, boolean isDone) throws DukeException{
+    public Event(String description, String at, boolean isDone) throws DukeException {
         super(description, isDone);
         try {
             String[] parts = at.split(" ", 2);
             this.dateBy = LocalDate.parse(parts[0]);
             this.timeBy = LocalTime.parse(parts[1]);
         } catch (DateTimeParseException e) {
-            throw new DukeException("Please input date and time in correct format: " +
-                    "'yyyy-MM-dd HH:MM' (24-hour time format)");
+            throw new DukeException("Please input date and time in correct format:"
+                    + " 'yyyy-MM-dd HH:MM' (24-hour time format)");
         }
     }
 

@@ -1,8 +1,13 @@
 package duke.command;
 
-import duke.*;
+import duke.Storage;
+import duke.Ui;
 import duke.exception.DukeException;
-import duke.task.*;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.Todo;
 
 /**
  * Encapsulates a command that will add a task according the the input it is given.
@@ -40,35 +45,35 @@ public class AddCommand extends Command {
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         switch (this.command) {
-            case TODO:
-                Task newTodoTask = new Todo(this.input);
-                addTask(newTodoTask, taskList, ui, storage);
-                break;
+        case TODO:
+            Task newTodoTask = new Todo(this.input);
+            addTask(newTodoTask, taskList, ui, storage);
+            break;
 
-            case DEADLINE:
-                try {
-                    String[] split = this.input.split(" /by ", 2);
-                    Task newDeadlineTask = new Deadline(split[0], split[1]);
-                    addTask(newDeadlineTask, taskList, ui, storage);
-                } catch (ArrayIndexOutOfBoundsException e) {
-                    throw new DukeException("Please enter a deadline to complete the task by " +
-                            "or follow the exact command format!");
-                }
-                break;
+        case DEADLINE:
+            try {
+                String[] split = this.input.split(" /by ", 2);
+                Task newDeadlineTask = new Deadline(split[0], split[1]);
+                addTask(newDeadlineTask, taskList, ui, storage);
+            } catch (ArrayIndexOutOfBoundsException e) {
+                throw new DukeException("Please enter a deadline to complete the task by"
+                        + " or follow the exact command format!");
+            }
+            break;
 
-            case EVENT:
-                try {
-                    String[] split = this.input.split(" /at ", 2);
-                    Task newEventTask = new Event(split[0], split[1]);
-                    addTask(newEventTask, taskList, ui, storage);
-                } catch (ArrayIndexOutOfBoundsException e) {
-                    throw new DukeException("Please enter the time at which the event will take place " +
-                            "or follow the exact command format!");
-                }
-                break;
+        case EVENT:
+            try {
+                String[] split = this.input.split(" /at ", 2);
+                Task newEventTask = new Event(split[0], split[1]);
+                addTask(newEventTask, taskList, ui, storage);
+            } catch (ArrayIndexOutOfBoundsException e) {
+                throw new DukeException("Please enter the time at which the event will take place"
+                        + " or follow the exact command format!");
+            }
+            break;
 
-            default:
-                throw new DukeException("Sorry! I don't recognize the type of task you're tyring to add!");
+        default:
+            throw new DukeException("Sorry! I don't recognize the type of task you're tyring to add!");
         }
     }
 

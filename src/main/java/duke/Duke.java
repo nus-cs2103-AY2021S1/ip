@@ -1,11 +1,12 @@
 package duke;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 import duke.command.Command;
 import duke.exception.DukeException;
 import duke.task.TaskList;
 
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
 /**
  * Personal chat bot to keep track of user's tasks.
@@ -51,6 +52,11 @@ public class Duke {
         duke.run();
     }
 
+    /**
+     * Runs the duke chat bot by displaying messages using ui and parsing inputs using parser.
+     * Takes in command and executes it.
+     * If command is an exit command, while loop breaks and chat bot stops running.
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;

@@ -1,8 +1,9 @@
 package duke.command;
 
 import duke.Storage;
-import duke.task.TaskList;
 import duke.Ui;
+import duke.task.TaskList;
+
 
 /**
  * Encapsulates a command that will show all the current tasks in the task list.

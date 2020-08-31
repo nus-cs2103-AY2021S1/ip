@@ -1,9 +1,9 @@
 package duke.command;
 
-import duke.exception.DukeException;
 import duke.Storage;
-import duke.task.TaskList;
 import duke.Ui;
+import duke.exception.DukeException;
+import duke.task.TaskList;
 
 /**
  * Encapsulates a command that will be sent to the chat bot.

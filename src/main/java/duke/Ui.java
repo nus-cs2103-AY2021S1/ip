@@ -6,10 +6,6 @@ import java.util.Scanner;
  * User interaction class that handles how the bot replies.
  */
 public class Ui {
-    /**
-     * The scanner to take in inputs from the user.
-     */
-    private final Scanner sc;
 
     /**
      * The messages that the chat bot sends out.
@@ -23,9 +19,13 @@ public class Ui {
     static final String DELETE_MESSAGE = "Noted. I've removed this task:\n";
     static final String TASK_NOT_FOUND_MESSAGE = "No matching tasks found!";
     static final String TASK_FOUND_MESSAGE = "Here are the matching tasks in your list:\n";
-    static final String LOADING_ERROR_MESSAGE = "Something went wrong when loading previously saved tasks!\n" +
-            " Starting with an empty tasks list instead...";
+    static final String LOADING_ERROR_MESSAGE = "Something went wrong when loading previously saved tasks!\n"
+            + "Starting with an empty tasks list instead...";
 
+    /**
+     * The scanner to take in inputs from the user.
+     */
+    private final Scanner sc;
     /**
      * Initializes a new UI object.
      */

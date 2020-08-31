@@ -1,18 +1,18 @@
 package duke;
 
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardOpenOption;
+import java.util.ArrayList;
+import java.util.List;
+
 import duke.exception.DukeException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
-
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.StandardOpenOption;
-import java.nio.file.Path;
-import java.nio.file.Files;
-import java.util.List;
-import java.util.ArrayList;
 
 /**
  * The link between the {@link duke.task.TaskList} and a local .txt file.
@@ -101,6 +101,8 @@ public class Storage {
                     throw new DukeException("Date was not stored properly!");
                 }
                 break;
+            default:
+                throw new DukeException("I received an unknown task!");
             }
 
         }
