@@ -7,7 +7,7 @@ package duke;
  */
 public class Task {
     protected String description;
-    public boolean isDone;
+    private boolean isDone;
 
     /**
      * Constructor for duke.Task.
@@ -19,13 +19,21 @@ public class Task {
     }
 
     /**
-     *This method is used to check if the task is done.
+     * This method is used to check if the task is done.
      * @return String This returns 'O' if done and 'X' if not done.
      */
     public String getStatusIcon() {
         // return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
         return (isDone ? "O" : "X"); //return tick or X symbols
 
+    }
+
+    /**
+     * Checks if task is done.
+     * @return boolean True if task is done, false otherwise.
+     */
+    public boolean isDone() {
+        return isDone;
     }
 
     /**

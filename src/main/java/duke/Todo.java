@@ -4,7 +4,7 @@ package duke;
  * <h>To-do duke.Task Type</h>
  * This class is a type of tasks without any date/time attached to it.
  */
-public class Todo extends Task{
+public class Todo extends Task {
     /**
      * Constructor of to-do class
      * @param description Name of the task input by user.

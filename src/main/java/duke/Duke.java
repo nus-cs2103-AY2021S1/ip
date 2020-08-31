@@ -43,7 +43,6 @@ public class Duke {
      */
     public void run() throws IOException {
         ui.showWelcome();
-        
         // Using Scanner for Getting Input from User
         Scanner in = new Scanner(System.in);
 
@@ -65,7 +64,7 @@ public class Duke {
             case BYE:
                 ui.showBye();
                 // rewrite the file to update latest changes
-                Storage.saveFile(this.storage.file, ls);
+                Storage.saveFile(this.storage.getFile(), ls);
                 break WhileLoop;
             case LIST:
                 if (ls.isEmpty()) {
@@ -150,11 +149,11 @@ public class Duke {
                         for (int i = 0; i < ls.size(); i++) {
                             Task task = ls.get(i);
                             if (task instanceof Event) {
-                                if (((Event) task).getAt().equals(date) && !task.isDone) {
+                                if (((Event) task).getAt().equals(date) && !task.isDone()) {
                                     counter += 1;
                                     System.out.println(counter + ". " + task.toString());
                                 }
-                            } else if (task instanceof Deadline && !task.isDone) {
+                            } else if (task instanceof Deadline && !task.isDone()) {
                                 if (((Deadline) task).getDate().equals(date)) {
                                     counter += 1;
                                     System.out.println(counter + ". " + task.toString());
