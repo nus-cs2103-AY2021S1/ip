@@ -1,10 +1,9 @@
 package duke;
 
-import duke.exception.DukeException;
-import duke.exception.NullIndexException;
-import duke.exception.NullTaskNameException;
+import duke.exception.*;
 
 public class Parser {
+    public String comparator;
     private String commandLine;
     private String commandWord;
     private String taskName;
@@ -12,6 +11,7 @@ public class Parser {
     private Integer taskNumber;
 
     Parser() {
+        comparator = "";
         commandLine = "";
         commandWord = "";
         taskName = "";
@@ -49,6 +49,13 @@ public class Parser {
                     throw new NullTaskNameException(commandWord);
                 }
                 break;
+            case "find":
+                try {
+                    parseForComparator(words[1].trim());
+                } catch (Exception e) {
+                    throw new EmptyComparatorException(commandWord);
+                }
+                break;
             default:
                 throw new DukeException(commandWord);
         }
@@ -72,11 +79,17 @@ public class Parser {
             String[] unformatted = words[1].split(" ", 2);
             taskDate = unformatted[1];
         }
-
     }
 
-    public String getCommandLine() {
-        return commandLine;
+    private void parseForComparator(String remain) throws DukeException {
+        String trimmedRemain = remain.trim();
+
+        if (trimmedRemain.isBlank()) {
+            comparator = "";
+            throw new EmptyComparatorException(commandWord);
+        } else {
+            comparator = trimmedRemain;
+        }
     }
 
     public String getCommandWord() {

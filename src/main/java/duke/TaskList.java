@@ -84,6 +84,7 @@ public class TaskList implements Cloneable {
             UI.displayMessage(e.toString());
         }
     }
+
     public void delete(Parser parser) {
         try {
             Task targetTask = tasks.get(getTaskID(parser));
@@ -101,6 +102,7 @@ public class TaskList implements Cloneable {
             UI.displayMessage(e.toString());
         }
     }
+
     public void add(Parser parser) {
         try {
             String commandWord = parser.getCommandWord();
@@ -121,6 +123,39 @@ public class TaskList implements Cloneable {
         } catch (DukeException e) {
             UI.displayMessage(e.toString());
         }
+    }
+
+    public void find(Parser parser) {
+        List<Task> matches = getMatchingTask(parser.comparator);
+
+        UI.displayStarLine();
+        if (matches.isEmpty()) {
+            System.out.println("No matches found!");
+        } else {
+            int count = 1;
+
+            System.out.println(String.format("Found %d match(es) for '%s':", matches.size(), parser.comparator));
+            for (Task task : matches) {
+                System.out.println(String.format("   %d. %s", count, task.toString()));
+                count++;
+            }
+        }
+        UI.displayStarLine();
+    }
+
+    public List<Task> getMatchingTask(String comparator) {
+        List<Task> matchingTasks = new ArrayList<>();
+
+        for (Task task : tasks) {
+            boolean emptyComparator = comparator.isBlank();
+            boolean hasSubstring = task.getTaskName().contains(comparator);
+            boolean isContained = hasSubstring && !emptyComparator;
+
+            if (isContained) {
+                matchingTasks.add(task);
+            }
+        }
+        return matchingTasks;
     }
 
     @Override

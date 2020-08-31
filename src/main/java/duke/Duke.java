@@ -49,6 +49,9 @@ public class Duke {
                     case "delete":
                         taskList.delete(parser);
                         break;
+                    case "find":
+                        taskList.find(parser);
+                        break;
                     case "deadline":
                     case "event":
                     case "todo":
