@@ -1,9 +1,28 @@
-package main.java;
-import main.java.UI.UI;
-import main.java.commands.Parser;
+package Duke;
+
+import Duke.TaskList.TaskList;
+import Duke.UI.UI;
+import Duke.commands.Parser;
 
 public class Duke {
-    protected static void doItAgain() {
+
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    public String getResponse(String input) {
+        try {
+            return Parser.parseAndAddToList(input);
+        } catch (DukeExceptions e) {
+            return e.getMessage();
+        }
+    }
+
+    public static String getGreeting() {
+        return UI.getMessage("WELCOME_MSG") + "\n";
+    }
+
+    private static void doItAgain() {
         try {
             UI.start();
             Storage.writeToFile();
@@ -16,7 +35,7 @@ public class Duke {
     }
 
     /**
-     * Main method for Duke.
+     * Main method for Duke.TaskList.Duke.
      * @param args
      */
     public static void main(String[] args) {

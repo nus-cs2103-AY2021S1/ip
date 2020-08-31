@@ -1,4 +1,4 @@
-package main.java.TaskList.tasks;
+package Duke.TaskList.tasks;
 
 public class ToDos extends Task {
     private String type = "Todos";

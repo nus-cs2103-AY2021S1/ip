@@ -1,12 +1,11 @@
-package main.java.commands;
+package Duke.commands;
 
-import main.java.Duke;
-import main.java.DukeExceptions;
-import main.java.TaskList.TaskList;
-import main.java.TaskList.tasks.Events;
-import main.java.TaskList.tasks.ToDos;
-import main.java.UI.UI;
-import main.java.TaskList.tasks.Deadlines;
+import Duke.DukeExceptions;
+import Duke.TaskList.TaskList;
+import Duke.TaskList.tasks.Deadlines;
+import Duke.TaskList.tasks.Events;
+import Duke.TaskList.tasks.ToDos;
+import Duke.UI.UI;
 
 import java.io.FileReader;
 import java.io.File;
@@ -62,21 +61,22 @@ public class Parser {
     }
 
     /**
-     * Parses through input text to check for commands
+     * Parses through input text to check for Duke.TaskList.Duke.commands
      * then adds a type of Task to the ArrayList of tasks.
      * @param input User-input string.
      * @throws DukeExceptions
      */
-    public static void parseAndAddToList(String input) throws DukeExceptions {
+    public static String parseAndAddToList(String input) throws DukeExceptions {
+        String output = "";
         int startingSize = TaskList.getThingsOnListSize();
         boolean searched = false;
         if (!input.isEmpty()) {
             UI.printLine();
             if (input.equals(UI.getMessage("BYE"))) {
                 UI.stop();
-                UI.printGoodbye();
+                return UI.getMessage("GOODBYE_MSG");
             } else if (input.equals(UI.getMessage("LIST"))) {
-                TaskList.viewList();
+                return TaskList.getListView();
             } else if (!input.isEmpty()) {
                 int spaceIndex = input.indexOf(" ");
                 if (spaceIndex != -1 && spaceIndex != input.length() - 1
@@ -88,13 +88,12 @@ public class Parser {
                             throw new DukeExceptions("    Woof? (This task doesn't exist?)");
                         }
                         if (input.substring(0, spaceIndex).equals(UI.getMessage("DONE"))) {
-                            System.out.println("    BARK BARK!!! (Task marked as done!!!)");
                             TaskList.markDone(x);
-                            TaskList.viewList();
+                            return TaskList.getListView() + "    BARK BARK!!! (Task marked as done!!!)";
                         } else if (input.substring(0, spaceIndex).equals(UI.getMessage("DELETE"))) {
-                            System.out.println("    Bark bark: bork bark. (Removing task: " +
-                                    TaskList.getThingsOnList().get(x) + ".");
                             TaskList.deleteFromList(x);
+                            return ("    Bark bark: bork bark. (Removing task: " +
+                                    TaskList.getThingsOnList().get(x) + ".");
                         }
                     } catch (NumberFormatException e) {
                         throw new DukeExceptions("    Bark. (That number isn't on the list.)");
@@ -125,18 +124,18 @@ public class Parser {
                         if (input.substring(5).isEmpty()) {
                             throw new DukeExceptions("    Bork?? (This find is empty?)");
                         }
-                        TaskList.find(input.substring(5));
+                        return TaskList.getFind(input.substring(5));
                     }
                     if (TaskList.getThingsOnListSize() == startingSize && !searched) {
-                        throw new DukeExceptions("    Bark bark bark! (Please use me with proper commands!)");
+                        throw new DukeExceptions("    Bark bark bark! (Please use me with proper Duke.TaskList.Duke.commands!)");
                     } else {
-                        System.out.println("    Bark. Bork: bark bark woof. (Roger. I've added this task:\n    " +
+                        return ("    Bark. Bork: bark bark woof. (Roger. I've added this task:\n    " +
                                 TaskList.getLastTask() + "\n    " +
                                 "Now you have " + TaskList.getThingsOnListSize() + " tasks in the list.)");
                     }
                 }
             }
-            UI.printLine();
         }
+        return output;
     }
 }

@@ -1,6 +1,6 @@
-package main.java.UI;
-import main.java.DukeExceptions;
-import main.java.commands.Parser;
+package Duke.UI;
+import Duke.DukeExceptions;
+import Duke.commands.Parser;
 
 import java.util.Random;
 import java.util.Scanner;
@@ -9,17 +9,17 @@ public class UI {
     private static Scanner sc = new Scanner(System.in);
     private static boolean isStillGoing = true;
     private enum Messages {
-        WRONG_INPUT("    Bark bark? (This doesn't make sense?)"),
-        MISSING_INPUT("    Bork bark?? Bark bark woof. (What does this command mean?? Try again with todo *task*, " +
+        WRONG_INPUT("Bark bark? (This doesn't make sense?)"),
+        MISSING_INPUT("Bork bark?? Bark bark woof. (What does this command mean?? Try again with todo *task*, " +
                 "*task* /at *start date/time* *end date/time*, or *task* by *deadline.)"),
-        DONE_ERROR("    Bork. (Sorry, can't be done.)"),
+        DONE_ERROR("Bork. (Sorry, can't be done.)"),
         BYE("bye"),
         LIST("list"),
         DONE("done"),
         DELETE("delete"),
         FIND("find"),
-        GOODBYE_MSG("    BARK! (Come back soon!)"),
-        WELCOME_MSG("    BARK BARK WOOF! (Welcome! Tell me your tasks and I'll help you keep track of them!)"),
+        GOODBYE_MSG("BARK! (Come back soon!)"),
+        WELCOME_MSG("BARK BARK WOOF! (Welcome! Tell me your tasks and I'll help you keep track of them!)"),
         LOGO("                    ........,.....\n" +
                 "              ...,,,,,.........,,,,,,,,,,,,.\n" +
                 "             ..,,*,,,..........,.,,,,,,,,*****,.\n" +
@@ -117,6 +117,14 @@ public class UI {
     }
 
     /**
+     * Gets a standard line to create spacing.
+     * @return The line.
+     */
+    public static String getLine() {
+        return "    ************************************************************";
+    }
+
+    /**
      * Prints logo of a dog.
      */
     protected static void printLogo() {
@@ -148,7 +156,7 @@ public class UI {
     }
 
     /**
-     * Starts the UI, and the rest of the programme.
+     * Starts the Duke.TaskList.Duke.UI, and the rest of the programme.
      * @throws DukeExceptions
      */
     public static void start() throws DukeExceptions {

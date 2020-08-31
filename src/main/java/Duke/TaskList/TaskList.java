@@ -1,6 +1,6 @@
-package main.java.TaskList;
+package Duke.TaskList;
 
-import main.java.TaskList.tasks.Task;
+import Duke.TaskList.tasks.Task;
 
 import java.util.ArrayList;
 
@@ -68,6 +68,18 @@ public class TaskList {
         }
     }
 
+    public static String getListView() {
+        String list = "";
+        if (thingsOnList.size() == 0) {
+            list = "    Bark bark. (No tasks right now.)";
+        } else {
+            for (int i = 0; i < thingsOnList.size(); i++) {
+                list += "    " + (i + 1) + ". " + thingsOnList.get(i) + "\n";
+            }
+        }
+        return list;
+    }
+
     /**
      * Searches the list for the key word, and prints a new list containing tasks with the key word.
      * @param keyWord Key word for the search
@@ -84,5 +96,21 @@ public class TaskList {
         if (!printed) {
             System.out.println("Bark bar :< (There were no tasks that matched :<)");
         }
+    }
+
+    public static String getFind(String keyWord) {
+        String listView = "";
+        boolean printed = false;
+        listView += ("Woof bark: (Here are the tasks that match your key word: )\n");
+        for (int i = 0; i < thingsOnList.size(); i++) {
+            if (thingsOnList.get(i).toString().contains(keyWord)) {
+                listView += (    (i + 1) + ". "  + thingsOnList.get(i)) + "\n";
+                printed = true;
+            }
+        }
+        if (!printed) {
+            return ("Bark bark :< (There were no tasks that matched :<)");
+        }
+        return listView;
     }
 }

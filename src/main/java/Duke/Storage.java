@@ -1,6 +1,6 @@
-package main.java;
-import main.java.TaskList.TaskList;
-import main.java.TaskList.tasks.Task;
+package Duke;
+import Duke.TaskList.TaskList;
+import Duke.TaskList.tasks.Task;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -11,7 +11,7 @@ public class Storage {
     private static File tmpFile = new File(System.getProperty("user.dir") + File.separator + "List.txt");
     private static FileWriter writer;
     private static ArrayList<Task> taskList;
-    protected static void createNewFile() {
+    public static void createNewFile() {
         try {
             if (!tmpFile.exists()) {
                 tmpFile.createNewFile();
@@ -21,11 +21,11 @@ public class Storage {
         }
     }
 
-    protected static File getTmpFile() {
+    public static File getTmpFile() {
         return tmpFile;
     }
 
-    protected static void writeToFile() {
+    public static void writeToFile() {
         try {
             taskList = TaskList.getThingsOnList();
             writer = new FileWriter(tmpFile);
