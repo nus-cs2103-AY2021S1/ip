@@ -27,18 +27,32 @@ public class Ui {
     }
 
     /**
-     * Iterates the todolist and prints out its objects.
-     * @param list Todo List
+     * Returns welcome message.
+     * @return String welcome message
      */
 
-    public void displayList(List<Task> list) {
-        System.out.println(line);
+    public String welcome() {
+        return "\nHello! I'm Duke!\n" + "What can I do for you?\n";
+    }
+
+    /**
+     * Iterates the todolist and prints out its objects.
+     * @param list Todo List
+     * @return String message of all tasks in list
+     */
+
+    public String displayList(List<Task> list) {
+        //System.out.println(line);
         if (list.size() == 0) {
-            System.out.println("Sorry. No matches found!");
+            return "Sorry. No matches found!";
+            //System.out.println("Sorry. No matches found!");
         } else {
+            StringBuilder tasklist = new StringBuilder();
             for (Task task : list) {
+                tasklist.append(task.getStatusWithIndex()).append("\n");
                 System.out.println(task.getStatusWithIndex());
             }
+            return tasklist.toString();
         }
     }
 
@@ -46,59 +60,74 @@ public class Ui {
      * Prints out the text after addition of the main types of tasks.
      * @param task Task added
      * @param list Todo List used for storage
+     * @return String message
      */
 
-    public void addTask(Task task, List<Task> list) {
-        System.out.println(task == null
-                ? "Failed!"
-                : line + "\nGot it. I've added this task:\n   " + task.toString()
-                    + "\nNow you have " + list.size() + " tasks in the list.");
+    public String addTask(Task task, List<Task> list) {
+        return task == null ? "Failed" : "\nGot it. I've added this task:\n   " + task.toString()
+                + "\nNow you have " + list.size() + " tasks in the list.";
+//        System.out.println(task == null
+//                ? "Failed!"
+//                : line + "\nGot it. I've added this task:\n   " + task.toString()
+//                    + "\nNow you have " + list.size() + " tasks in the list.");
     }
 
     /**
-     * Prints out the text after addition of a normal task.
+     * Returns out the text after addition of a normal task.
      * @param task Task added
+     * @return String message after task addition
      */
 
-    public void addOtherTask(String task) {
-        System.out.println(line + "\nadded: " + task);
+    public String addOtherTask(String task) {
+        //System.out.println(line + "\nadded: " + task);
+        return "\nadded: " + task;
     }
 
     /**
-     * Prints out the status of a task once it is checked as complete.
+     * Returns out the string status of a task once it is checked as complete.
      * @param task Task completed
+     * @return String Task completion message
      */
 
-    public void completeTask(Task task) {
+    public String completeTask(Task task) {
         System.out.println(line + "\nNice! I have marked this task as done: \n  "
                 + task.toString());
+        return "\nNice! I have marked this task as done: \n  "
+                + task.toString();
     }
 
     /**
-     * Deletes a task from the current todolist.
+     * Returns the string message after deletion of a task from the current todolist.
      * @param task Task to be removed
      * @param list Todo List to remove tasks from
+     * @return String message after deleting task.
      */
 
-    public void deleteTask(Task task, List<Task> list) {
+    public String deleteTask(Task task, List<Task> list) {
         System.out.println(line + "\nNoted. I've removed this task:\n  " + task.toString()
                 + "\nNow you have " + list.size() + " tasks in the list.");
+        return "\nNoted. I've removed this task:\n  " + task.toString()
+                + "\nNow you have " + list.size() + " tasks in the list.";
     }
 
     /**
-     * Prints out the complete message after ending program successfully.
+     * Returns out the complete message after ending program successfully.
+     * @return goodbye message
      */
 
-    public void endDuke() {
+    public String endDuke() {
         System.out.println(line + "\nBye. Hope to see you again soon!\n" + line);
+        return "\nBye. Hope to see you again soon!";
     }
 
     /**
-     * Prints out all error messages from exceptions.
+     * Returns out all error messages from exceptions.
      * @param error Error message derived from exceptions
+     * @return String error message
      */
-    public void printError(String error) {
+    public String printError(String error) {
         System.out.println(error);
+        return error.toString();
     }
 
 }
