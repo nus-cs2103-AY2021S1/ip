@@ -11,7 +11,7 @@ public class DeadlineStub extends TimedTask {
     @Override
     public String toString() {
         String[] arr = description.split("/by", 2);
-        arr[1] = LocalDateTime.parse(arr[1].trim(), DeadlineStub.inputFormatter).format(DeadlineStub.printFormatter);
+        arr[1] = LocalDateTime.parse(arr[1].trim(), DeadlineStub.INPUT_FORMAT).format(DeadlineStub.PRINT_FORMAT);
         return "[D]" + "[✗]" + " " + arr[0].trim() + " (by: " + arr[1].trim() + ")";
     }
 }

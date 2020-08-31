@@ -24,7 +24,7 @@ public class Deadline extends TimedTask {
      */
     @Override
     protected String getTxtFormat() {
-        return "deadline, " + super.getTxtFormat() + "/by" + this.dateTime.format(Deadline.inputFormatter);
+        return "deadline, " + super.getTxtFormat() + "/by" + this.dateTime.format(Deadline.INPUT_FORMAT);
     }
 
     /**

@@ -1,17 +1,26 @@
 package duke;
 
+import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
-
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.lang.Iterable;
-import java.time.LocalDate;
 
 /**
  * Stores the list of task for the current Duke instance.
  */
 public class TaskList implements Iterable<Task> {
     private final ArrayList<Task> list;
+
+    /**
+     * Instantiates a new TaskList object.
+     */
+    public TaskList() {
+        this.list = new ArrayList<>();
+    }
+
+    private TaskList(ArrayList<Task> arr) {
+        this.list = arr;
+    }
 
     /**
      * Returns an iterator() of tasks in this TaskList object.
@@ -33,13 +42,6 @@ public class TaskList implements Iterable<Task> {
     }
 
     /**
-     * Instantiates a new TaskList object.
-     */
-    public TaskList() {
-        this.list = new ArrayList<>();
-    }
-
-    /**
      * Returns true if no tasks in this TaskList object.
      * Otherwise, returns false.
      *
@@ -47,10 +49,6 @@ public class TaskList implements Iterable<Task> {
      */
     public boolean isEmpty() {
         return this.list.isEmpty();
-    }
-
-    private TaskList(ArrayList<Task> arr) {
-        this.list = arr;
     }
 
     /**
@@ -188,6 +186,12 @@ public class TaskList implements Iterable<Task> {
         return output.toString();
     }
 
+    /**
+     * Returns tasks containing the keyword.
+     * @param keyword
+     * @return list of tasks containing keyword
+     * @throws DukeException if no such task
+     */
     public TaskList findTask(String keyword) throws DukeException {
         ArrayList<Task> keywordTasks = new ArrayList<>(this.list);
         keywordTasks.removeIf(i -> i.getDescription().contains(keyword));

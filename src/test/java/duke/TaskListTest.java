@@ -1,12 +1,12 @@
 package duke;
 
-import org.junit.jupiter.api.Test;
-import java.time.format.DateTimeFormatter;
-
-import java.time.LocalDate;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
+import org.junit.jupiter.api.Test;
 
 public class TaskListTest {
     @Test
@@ -70,11 +70,11 @@ public class TaskListTest {
 
         // test 5
         try {
-            list.addTask("event","today8-09-2020 8:00");
+            list.addTask("event", "today8-09-2020 8:00");
             fail();
         } catch (DukeException e) {
             assertEquals("OOPS!!! I'm sorry, when is the event? (/at...)", e.getMessage());
-        } 
+        }
     }
 
 
@@ -97,7 +97,8 @@ public class TaskListTest {
             task = new EventStub("today/at8-09-2020 8:00");
             list.addTask("event", "today/at8-09-2020 8:00");
             listString = "1." + task.toString();
-            assertEquals(listString, list.getTimedTasks(LocalDate.parse(("8-09-2020"), DateTimeFormatter.ofPattern("d-M-yyyy k:mm"))).toString());
+            assertEquals(listString, list.getTimedTasks(LocalDate.parse(("8-09-2020"),
+                    DateTimeFormatter.ofPattern("d-M-yyyy k:mm"))).toString());
         } catch (DukeException e) {
             fail();
         }
@@ -113,7 +114,8 @@ public class TaskListTest {
                 if (i < 23) {
                     listString += "\n";
                 }
-                assertEquals(listString, list.getTimedTasks(LocalDate.parse("9-10-2021", DateTimeFormatter.ofPattern("d-M-yyyy k:mm"))).toString());
+                assertEquals(listString, list.getTimedTasks(LocalDate.parse("9-10-2021",
+                        DateTimeFormatter.ofPattern("d-M-yyyy k:mm"))).toString());
             } catch (DukeException e) {
                 fail();
             }

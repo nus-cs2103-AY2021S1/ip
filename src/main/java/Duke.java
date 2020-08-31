@@ -1,9 +1,9 @@
-import duke.Storage;
-import duke.Ui;
-import duke.TaskList;
 import duke.Command;
-import duke.Parser;
 import duke.DukeException;
+import duke.Parser;
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
 
 /**
  * Represents a Duke chat bot. A <code>Duke</code> object
