@@ -79,7 +79,7 @@ class Storage {
             switch (curr.charAt(1)) {
             case 'T':
                 try {
-                    if (curr.charAt(4) == '✗') {
+                    if (curr.charAt(4) == 'X') {
                         tl.addTodo(ui, list, curr.split(" ", 2)[1], false, false);
                     } else {
                         tl.addTodo(ui, list, curr.split(" ", 2)[1], false, true);
@@ -90,7 +90,7 @@ class Storage {
                 break;
             case 'D':
                 try {
-                    if (curr.charAt(4) == '✗') {
+                    if (curr.charAt(4) == 'X') {
                         tl.addDeadline(ui, list, curr.split(" ", 2)[1], false, false);
                     } else {
                         tl.addDeadline(ui, list, curr.split(" ", 2)[1], false, true);
@@ -101,7 +101,7 @@ class Storage {
                 break;
             case 'E':
                 try {
-                    if (curr.charAt(4) == '✗') {
+                    if (curr.charAt(4) == 'X') {
                         tl.addEvent(ui, list, curr.split(" ", 2)[1], false, false);
                     } else {
                         tl.addEvent(ui, list, curr.split(" ", 2)[1], false, true);
