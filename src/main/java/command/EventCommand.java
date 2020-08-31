@@ -34,7 +34,7 @@ public class EventCommand extends Command {
      * @throws InvalidSaveFileException If there is an issue writing the save file.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws InvalidDateTimeFormatException,
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws InvalidDateTimeFormatException,
             InvalidInputException, InvalidSaveFileException {
 
         final int INPUT_INDEX = 6;
@@ -56,8 +56,8 @@ public class EventCommand extends Command {
                     + "e.g. 2020-08-23 16:45");
         }
         tasks.addTask(task);
-        System.out.println("\tGot it. I've added this task:\n" + "\t" + task.toString()
-                + "\n\tNow you have " + tasks.getTasks().size() + " tasks in the list.");
         storage.saveFile(tasks.getTasks());
+        return ui.printOutput("\tGot it. I've added this task:\n" + "\t" + task.toString()
+                + "\n\tNow you have " + tasks.getTasks().size() + " tasks in the list.");
     }
 }

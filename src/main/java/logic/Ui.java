@@ -12,22 +12,24 @@ public class Ui {
         sc = new Scanner(System.in);
     }
     public void showLine() {
-        System.out.println("\t____________________________________________________________");
+        System.out.println("\t______________________________________________________");
     }
 
     /**
      * Show user the greeting message.
      */
-    public void showGreeting() {
-        String logo = " ____        _        \n"
+    public String showGreeting() {
+        String result = "";
+        String logo = "\n ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        System.out.println("\t____________________________________________________________");
-        System.out.println("\tHello! I'm Duke\n\tWhat can I do for you?");
-        System.out.println("\t____________________________________________________________");
+        result += "Hello from" + logo;
+        result += "\t__________________________________________________\n";
+        result += "\tHello! I'm Duke\n\tWhat can I do for you?\n";
+        result += "\t__________________________________________________\n";
+        return result;
     }
 
     /**
@@ -53,7 +55,7 @@ public class Ui {
      *
      * @param input Output for the user to read.
      */
-    public void printOutput(String input) {
-        System.out.println(input);
+    public String printOutput(String input) {
+        return input;
     }
 }

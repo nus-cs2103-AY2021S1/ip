@@ -22,9 +22,9 @@ public class ExitCommand extends Command {
      * @throws InvalidSaveFileException If there is an issue writing the save file.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws InvalidSaveFileException {
-        ui.printOutput("\tBye. Hope to see you again soon!");
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws InvalidSaveFileException {
         storage.saveFile(tasks.getTasks());
+        return ui.printOutput("\tBye. Hope to see you again soon!");
     }
 
     /**

@@ -6,10 +6,10 @@ import java.time.format.DateTimeFormatter;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import tasks.Deadlines;
+import tasks.Deadline;
 
 
-public class DeadlinesTest {
+public class DeadlineTest {
 
     private static DateTimeFormatter dateTimeFormat;
     private static LocalDateTime localDateTime;
@@ -21,14 +21,14 @@ public class DeadlinesTest {
     }
     @Test
     public void constructorTest() {
-        Deadlines events = new Deadlines("kiwis", localDateTime);
+        Deadline events = new Deadline("kiwis", localDateTime);
         assertEquals(
                 "[D][" + "\u2718" + "] kiwis (by: 18:00 Aug 23 2020)", events.toString());
     }
 
     @Test
     public void completionTest() {
-        Deadlines events = new Deadlines("kiwis", localDateTime);
+        Deadline events = new Deadline("kiwis", localDateTime);
         events.completeTask();
         assertEquals("[D][" + "\u2713" + "] kiwis (by: 18:00 Aug 23 2020)", events.toString());
     }

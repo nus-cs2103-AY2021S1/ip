@@ -26,7 +26,8 @@ public class DeleteCommand extends Command {
      * @throws InvalidSaveFileException If there is an issue writing the save file.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws InvalidInputException, InvalidSaveFileException {
+    public String execute(TaskList tasks, Ui ui, Storage storage)
+            throws InvalidInputException, InvalidSaveFileException {
 
         final int INPUT_INDEX = 7;
         //Check if description is empty
@@ -42,8 +43,8 @@ public class DeleteCommand extends Command {
         }
         Task task = tasks.getTasks().get(index - 1);
         tasks.removeTask(index - 1);
-        ui.printOutput("\tNoted. I've removed this task:\n" + "\t" + task.toString()
-                + "\n\tNow you have " + tasks.getTasks().size() + " tasks in the list.");
         storage.saveFile(tasks.getTasks());
+        return ui.printOutput("\tNoted. I've removed this task:\n" + "\t" + task.toString()
+                + "\n\tNow you have " + tasks.getTasks().size() + " tasks in the list.");
     }
 }

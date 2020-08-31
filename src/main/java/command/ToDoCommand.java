@@ -25,7 +25,8 @@ public class ToDoCommand extends Command {
      * @throws InvalidSaveFileException If writing the save file goes wrong.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws InvalidInputException, InvalidSaveFileException {
+    public String execute(TaskList tasks, Ui ui, Storage storage)
+            throws InvalidInputException, InvalidSaveFileException {
 
         final int INPUT_INDEX = 5;
 
@@ -35,8 +36,8 @@ public class ToDoCommand extends Command {
         }
         ToDo task = new ToDo(super.input.substring(INPUT_INDEX));
         tasks.getTasks().add(task);
-        ui.printOutput("\tGot it. I've added this task:\n" + "\t" + task.toString()
-                + "\n\tNow you have " + tasks.getTasks().size() + " tasks in the list.");
         storage.saveFile(tasks.getTasks());
+        return ui.printOutput("\tGot it. I've added this task:\n" + "\t" + task.toString()
+                + "\n\tNow you have " + tasks.getTasks().size() + " tasks in the list.");
     }
 }

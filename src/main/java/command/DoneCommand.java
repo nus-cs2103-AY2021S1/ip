@@ -26,7 +26,8 @@ public class DoneCommand extends Command {
      * @throws InvalidSaveFileException If there is an issue writing the save file.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws InvalidInputException, InvalidSaveFileException {
+    public String execute(TaskList tasks, Ui ui, Storage storage)
+            throws InvalidInputException, InvalidSaveFileException {
 
         final int INPUT_INDEX = 5;
         //Check if task was specified
@@ -38,10 +39,10 @@ public class DoneCommand extends Command {
         try {
             Task current = tasks.getTasks().get(completed - 1);
             current.completeTask();
-            ui.printOutput("\tNice! I've marked this task as done:\n" + "\t\t" + current.toString());
+            storage.saveFile(tasks.getTasks());
+            return ui.printOutput("\tNice! I've marked this task as done:\n" + "\t\t" + current.toString());
         } catch (IndexOutOfBoundsException e) {
             throw new InvalidInputException("\tIndex out of bounds! Please try again.");
         }
-        storage.saveFile(tasks.getTasks());
     }
 }

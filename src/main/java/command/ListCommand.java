@@ -1,5 +1,6 @@
 package command;
 
+import exception.InvalidInputException;
 import logic.Storage;
 import logic.Ui;
 import tasks.Task;
@@ -20,15 +21,16 @@ public class ListCommand extends Command {
      * @param storage Writing of the save file.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws InvalidInputException {
         if (tasks.getTasks().size() == 0) {
-            ui.printOutput("\tList is empty! Start adding some tasks");
+            throw new InvalidInputException("\tList is empty! Start adding some tasks");
         } else {
-            System.out.println("\t Here are the tasks in your list:");
+            String result = "\t Here are the tasks in your list:";
             for (int i = 1; i <= tasks.getTasks().size(); i++) {
                 Task current = tasks.getTasks().get(i - 1);
-                ui.printOutput("\t" + i + "." + current.toString());
+                result += ui.printOutput("\n\t" + i + "." + current.toString());
             }
+            return result;
         }
     }
 }

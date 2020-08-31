@@ -35,8 +35,9 @@ public class DeadlineCommand extends Command {
      * @throws InvalidSaveFileException If there is an issue writing the save file.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws InvalidDateTimeFormatException,
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws InvalidDateTimeFormatException,
             InvalidInputException, InvalidSaveFileException {
+
         final int INPUT_INDEX = 9;
 
         //Check if the description is empty
@@ -57,9 +58,10 @@ public class DeadlineCommand extends Command {
                     "\tDeadline input must follow a certain format: yyyy-mm-dd HH:mm "
                     + "e.g. 2020-08-23 16:45");
         }
+
         tasks.addTask(task);
-        ui.printOutput("\tGot it. I've added this task:\n" + "\t" + task.toString()
-                + "\n\tNow you have " + tasks.getTasks().size() + " tasks in the list.");
         storage.saveFile(tasks.getTasks());
+        return ui.printOutput("\tGot it. I've added this task:\n" + "\t" + task.toString()
+                + "\n\tNow you have " + tasks.getTasks().size() + " tasks in the list.");
     }
 }

@@ -16,7 +16,7 @@ public abstract class Command {
     public Command(String input) {
         this.input = input;
     }
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
+    public abstract String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
     public boolean isExit() {
         return false;
     };

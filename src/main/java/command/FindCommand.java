@@ -19,7 +19,7 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws InvalidInputException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws InvalidInputException {
 
         final int INPUT_INDEX = 5;
 
@@ -29,12 +29,13 @@ public class FindCommand extends Command {
         }
         List<Task> foundTasks = tasks.findTasks(super.input.substring(INPUT_INDEX));
         if (foundTasks.size() == 0) {
-            ui.printOutput("\tThere is no item that matches your description!");
+            return ui.printOutput("\tThere is no item that matches your description!");
         } else {
-            ui.printOutput("\tHere are the matching tasks in your list:");
+            String result = ui.printOutput("\tHere are the matching tasks in your list:");
             for (int x = 0; x < foundTasks.size(); x++) {
-                ui.printOutput("\t" + (x + 1) + "." + foundTasks.get(x).toString());
+                result += ui.printOutput("\n\t" + (x + 1) + "." + foundTasks.get(x).toString());
             }
+            return result;
         }
     }
 }
