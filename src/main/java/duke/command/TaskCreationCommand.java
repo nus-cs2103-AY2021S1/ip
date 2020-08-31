@@ -15,8 +15,8 @@ abstract class TaskCreationCommand extends Command {
      * @param ui An Ui object that correspond to interacting with the user
      * @param tasks a list to which the <code>ask</code> will be added
      */
-    public void execute(Task task, Ui ui, TaskList tasks) {
+    public String execute(Task task, Ui ui, TaskList tasks) {
         tasks.add(task);
-        ui.showAddSuccessful(task, tasks);
+        return ui.showAddSuccessful(task, tasks);
     }
 }

@@ -36,8 +36,8 @@ public class DeadlineCommand extends TaskCreationCommand {
      * @param storage A database that stores the task list locally when the program is not running
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         Task task = new Deadline(description, time);
-        super.execute(task, ui, tasks);
+        return super.execute(task, ui, tasks);
     }
 }

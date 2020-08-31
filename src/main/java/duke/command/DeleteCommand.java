@@ -36,9 +36,9 @@ public class DeleteCommand extends Command {
      * @throws InvalidIndexException If that position is out of the range of the <code>TaskList</code>
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws InvalidIndexException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws InvalidIndexException {
         try {
-            ui.showDeleteTask(tasks.remove(index), tasks);
+            return ui.showDeleteTask(tasks.remove(index), tasks);
         } catch (IndexOutOfBoundsException e) {
             throw new InvalidIndexException();
         }

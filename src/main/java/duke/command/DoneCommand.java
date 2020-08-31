@@ -37,10 +37,10 @@ public class DoneCommand extends Command{
      * @throws InvalidIndexException If that position is out of the range of the <code>TaskList</code>
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws InvalidIndexException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws InvalidIndexException {
         try {
             tasks.markAsDone(index);
-            ui.showMarkAsDoneTask(tasks.get(index));
+            return ui.showMarkAsDoneTask(tasks.get(index));
         } catch (IndexOutOfBoundsException e) {
             throw new InvalidIndexException();
         }

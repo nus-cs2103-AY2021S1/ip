@@ -36,8 +36,8 @@ public class ExitCommand extends Command{
      * @param storage A database that stores the task list locally when the program is not running
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         storage.write(tasks);
-        ui.showGoodbye();
+        return ui.showGoodbye();
     }
 }

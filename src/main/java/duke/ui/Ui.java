@@ -16,17 +16,15 @@ public class Ui {
     /**
      * Prints the welcome message
      */
-    public void showWelcome() {
-        String logo = " ____        _" + System.lineSeparator()
-                + "|  _ \\ _   _| | _____" + System.lineSeparator()
-                + "| | | | | | | |/ / _ \\" + System.lineSeparator()
-                + "| |_| | |_| |   <  __/" + System.lineSeparator()
-                + "|____/ \\__,_|_|\\_\\___|" + System.lineSeparator();
-        String greeting = "Hello human, I'm Duke the supporting chatbot" + System.lineSeparator()
+    public String showWelcome() {
+        String logo = " ____           _" + "\n"
+                + "|   _  \\ _   __|  |  _  __" + "\n"
+                + "|  |  |  |  |  |  |  |/  /  _ \\" + "\n"
+                + "|  |_|   |  |_|  |     \\   __/" + "\n"
+                + "|____/ \\__,_ |_ |\\_ \\___|" + "\n";
+        String greeting = "Hello human, I'm Duke the supporting chatbot\n"
                 + "What can I do for you?";
-        System.out.println(logo);
-        System.out.println(horizontalLine);
-        System.out.println(greeting);
+        return logo + "\n" + horizontalLine + "\n" + greeting;
     }
 
     /**
@@ -45,14 +43,13 @@ public class Ui {
      * Shows the items in the task.
      * @param tasks The list of items to be shown
      */
-    public void showTasks(TaskList tasks) {
+    public String showTasks(TaskList tasks) {
         String lazyHumanBash = "You have nothing in your list. Find something to do you human!";
         String showTasksMsg = "Here are the task(s) in your list:";
         if (tasks.size() == 0) {
-            System.out.println(lazyHumanBash);
+            return lazyHumanBash;
         } else {
-            System.out.println(showTasksMsg);
-            System.out.println(tasks);
+            return showTasksMsg + "\n" + tasks.toString();
         }
     }
 
@@ -67,23 +64,23 @@ public class Ui {
      * Prints out any error message that passed in 
      * @param errorMessage The error message to be printed 
      */
-    public void showError(String errorMessage) {
-        System.out.println(errorMessage);
+    public String showError(String errorMessage) {
+        return errorMessage;
     }
 
     /**
      * Says goodbye to the user.
      */
-    public void showGoodbye() {
-        System.out.println("Bye human. See you again soon!");
+    public String showGoodbye() {
+        return "Bye human. See you again soon!";
     }
 
     /**
      * Prints out the number of item in the task.
      * @param tasks The task
      */
-    public void taskReport(TaskList tasks) {
-        System.out.println("You have " + tasks.size() + " task(s) in your list");
+    public String taskReport(TaskList tasks) {
+        return "You have " + tasks.size() + " task(s) in your list";
     }
 
     /**
@@ -91,27 +88,27 @@ public class Ui {
      * @param task The deleted task
      * @param tasks The remaining task list
      */
-    public void showDeleteTask(Task task, TaskList tasks) {
-        System.out.println("Noted. I've deleted this task:");
-        System.out.println(task);
-        taskReport(tasks);
+    public String showDeleteTask(Task task, TaskList tasks) {
+        return "Noted. I've deleted this task:\n"
+                + task.toString() + "\n"
+                + taskReport(tasks);
     }
 
     /**
      * Notifies the user after successfully marking a task as done.
      * @param task The task being marked as done
      */
-    public void showMarkAsDoneTask(Task task) {
-        System.out.println("Good job bud! I've marked this task as done:");
-        System.out.println(task);
+    public String showMarkAsDoneTask(Task task) {
+        return "Good job bud! I've marked this task as done:\n"
+                + task.toString();
     }
 
     /**
      * Notifies the user whenever the system cannot understand the input command.
      */
-    public void showUnrecognizedCommandMessage() {
-        System.out.println("I don't understand a single word you say, human!");
-        System.out.println("Speak robot language pls");
+    public String showUnrecognizedCommandMessage() {
+        return "I don't understand a single word you say, human!\n"
+                + "Speak robot language pls";
     }
 
     /**
@@ -119,20 +116,18 @@ public class Ui {
      * @param task The added task
      * @param tasks The task list
      */
-    public void showAddSuccessful(Task task, TaskList tasks) {
-        System.out.println("Got it. I've added this task:");
-        System.out.println(task);
-        taskReport(tasks);
+    public String showAddSuccessful(Task task, TaskList tasks) {
+        return "Got it. I've added this task:\n"
+                + task.toString() + "\n"
+                + taskReport(tasks);
     }
 
     /**
      * Show the user the result of a find command.
      * @param tasks The list of tasks that fulfill the requirement
      */
-    public void showFindResult(TaskList tasks) {
-        System.out.println("Here are the matching task(s) in your list: ");
-        for (int i = 0; i < tasks.size(); i++) {
-            System.out.println(tasks.get(i));
-        }
+    public String showFindResult(TaskList tasks) {
+        String response = "Here are the matching task(s) in your list: \n";
+        return response + tasks.toString();
     }
 }

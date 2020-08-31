@@ -74,7 +74,7 @@ public class TaskList {
     public String toString() {
         String str = "";
         for (int i = 0; i < tasks.size() - 1; i++) {
-            str += (i + 1) + ". " + tasks.get(i).toString() + System.lineSeparator();
+            str += (i + 1) + ". " + tasks.get(i).toString() + "\n";
         }
         str += tasks.size() + ". " + tasks.get(tasks.size() - 1);
         return str;

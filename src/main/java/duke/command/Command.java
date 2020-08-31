@@ -32,7 +32,7 @@ public class Command {
      * @param storage A database that stores the task list locally when the program is not running
      * @throws DukeException When facing errors parsing or running the program
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        ui.showUnrecognizedCommandMessage();
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        return ui.showUnrecognizedCommandMessage();
     }
 }
