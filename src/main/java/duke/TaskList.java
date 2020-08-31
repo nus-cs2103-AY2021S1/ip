@@ -75,9 +75,11 @@ public class TaskList {
 
     /**
      * Clears all tasks from taskList.
+     * @return
      */
-    public void clearAll() {
+    public String clearAll() {
         taskList.clear();
+        return "Task list cleared";
     }
 
     /**

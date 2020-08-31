@@ -33,10 +33,10 @@ public class ToDoCommand extends Command {
      * @throws duke.DukeException if there is error saving task to storage. 
      */
     @Override
-    public void execute(TaskList taskItems, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList taskItems, Ui ui, Storage storage) throws DukeException {
         taskItems.addTask(task);
-        ui.addTaskReply(task, taskItems);
         storage.saveTaskToMemory(taskItems.getAll());
+        return ui.addTaskReply(task, taskItems);
     }
 
     /**

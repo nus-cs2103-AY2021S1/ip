@@ -17,7 +17,7 @@ abstract public class Command {
      * @param storage Object for saving and loading tasks list to hard disk.
      * @throws DukeException
      */
-    public abstract void execute(TaskList taskItems, Ui ui, Storage storage) throws DukeException;
+    public abstract String execute(TaskList taskItems, Ui ui, Storage storage) throws DukeException;
 
     /**
      * Returns instruction to Duke class whether to terminate program.

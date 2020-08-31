@@ -7,16 +7,16 @@ public class Duke {
     private Storage storage;
     private TaskList taskItems;
     private Ui ui;
+    private Parser parser;
     public static final String FILE_PATH = "data/duke.txt";
 
     /**
      * Instantiates Duke Object which initializes variables needed throughout program. 
      * 
-     * @param filePath path for storage object to write to.
      */
-    public Duke(String filePath) {
+    public Duke() {
         ui = new Ui();
-        storage = new Storage(filePath);
+        storage = new Storage(FILE_PATH);
         try {
             taskItems = new TaskList(storage.loadTasksFromMemory());
         } catch (DukeException e) {
@@ -36,7 +36,7 @@ public class Duke {
             try {
                 String fullCommand = ui.readCommand();
                 Command c = Parser.parse(fullCommand);
-                c.execute(taskItems, ui, storage);
+                System.out.println(ui.formatReply(c.execute(taskItems, ui, storage)));
                 isExit = c.isExit();
             } catch (DukeException duked) {
                 ui.showError(duked.getMessage());
@@ -44,12 +44,18 @@ public class Duke {
             }
         }
     }
+
+    public String getResponse(String input) throws DukeException {
+        return Parser.parse(input).execute(taskItems, ui, storage);
+    }
+    
     /**
      * Executes the Duke process.
-     * 
+     *
      * @param args command line argument it is a collection of variables in the string format.
      */
     public static void main(String[] args) {
-        new Duke(FILE_PATH).run(); 
+        new Duke().run();
     }
+
 }

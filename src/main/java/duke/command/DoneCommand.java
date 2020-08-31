@@ -32,14 +32,14 @@ public class DoneCommand extends Command {
      * @throws duke.DukeException if task number specified by user does not exist.
      */
     @Override
-    public void execute(TaskList taskItems, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList taskItems, Ui ui, Storage storage) throws DukeException {
         try {
             // parse for argument - item number
             int itemNumber = Integer.parseInt(args.split(" ")[1]) - 1;
             Task task = taskItems.getTask(itemNumber);
             task.markDone();
-            ui.doneTaskReply(task);
             storage.saveTaskToMemory(taskItems.getAll());
+            return ui.doneTaskReply(task);
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Task number does not exist");
         }

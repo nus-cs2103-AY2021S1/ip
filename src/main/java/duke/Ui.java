@@ -10,32 +10,36 @@ import java.util.Scanner;
  */
 public class Ui {
     private static final Scanner SCANNER = new Scanner(System.in);
-    private final String GREETING_LOGO =
-            "8888888 888b    888 88888888888 8888888b.  888     888 888888b.    .d88888b. 88888888888 \n"
-                    + "  888   8888b   888     888     888   Y88b 888     888 888  \"88b  d88P\" \"Y88b    888     \n" 
-                    + "  888   88888b  888     888     888    888 888     888 888  .88P  888     888    888     \n"
-                    + "  888   888Y88b 888     888     888   d88P 888     888 8888888K.  888     888    888     \n"
-                    + "  888   888 Y88b888     888     8888888P\"  888     888 888  \"Y88b 888     888    888     \n"
-                    + "  888   888  Y88888     888     888 T88b   888     888 888    888 888     888    888     \n"
-                    + "  888   888   Y8888     888     888  T88b  Y88b. .d88P 888   d88P Y88b. .d88P    888     \n"
-                    + "8888888 888    Y888     888     888   T88b  \"Y88888P\"  8888888P\"   \"Y88888P\"     888";
+
     /**
-     * Sends a greeting to user.
+     * Sends greeting message to user.
+     *
+     * @return String representation of greeting message.
      */
-    public void greetUser() {
-        printReply(formatReply("ITS ME: \n" + GREETING_LOGO + "\nI want to know EVERYTHING ABOUT YOU"));
+    public String greetUser() {
+        String greetingLogo = "8888888 888b    888 88888888888 8888888b.  888     888 888888b.    .d88888b. 88888888888 \n"
+                + "  888   8888b   888     888     888   Y88b 888     888 888  \"88b  d88P\" \"Y88b    888     \n"
+                + "  888   88888b  888     888     888    888 888     888 888  .88P  888     888    888     \n"
+                + "  888   888Y88b 888     888     888   d88P 888     888 8888888K.  888     888    888     \n"
+                + "  888   888 Y88b888     888     8888888P\"  888     888 888  \"Y88b 888     888    888     \n"
+                + "  888   888  Y88888     888     888 T88b   888     888 888    888 888     888    888     \n"
+                + "  888   888   Y8888     888     888  T88b  Y88b. .d88P 888   d88P Y88b. .d88P    888     \n"
+                + "8888888 888    Y888     888     888   T88b  \"Y88888P\"  8888888P\"   \"Y88888P\"     888";
+        return "ITS ME: \n" + greetingLogo + "\nI want to know EVERYTHING ABOUT YOU";
     }
 
     /**
-     * Sends Goodbye message to user.
+     * Sends good bye message to user. 
+     *
+     * @return String with good bye message.
      */
-    public void sayGoodbye() {
-        printReply("SAYONARA!");
+    public String sayGoodbye() {
+        return "SAYONARA!";
     }
 
     /**
      * Wraps message in partitioning for clearer readability.
-     * 
+     *
      * @param reply to be wrapped in partition.
      * @return String representation of reply.
      */
@@ -47,34 +51,35 @@ public class Ui {
 
     /**
      * Formats list object to be String representation.
-     * 
+     *
      * @param taskItems taskItems to be converted to appropriate String representation.
      * @return String representation of taskItems.
      */
     public static String listFormatter(List<Task> taskItems) {
-        String formattedListString = "";
+        StringBuilder formattedListString = new StringBuilder();
         for (int i = 0; i < taskItems.size(); i ++) {
-            formattedListString+= String.format("%d. %s\n", i + 1, taskItems.get(i));
+            formattedListString.append(String.format("%d. %s\n", i + 1, taskItems.get(i)));
         }
-        return formattedListString;
+        return formattedListString.toString();
     }
 
     /**
      * Shows Task error message with a wrapper.
-     * 
+     *
      * @param errorMessage custom error message.
      */
-    public void showError(String errorMessage) {
-        System.out.println(formatReply(String.format("Something is amiss `(OCO)/ !!: %s", errorMessage)));
+    public static String showError(String errorMessage) {
+        return String.format("Something is amiss `(OCO)/ !!: %s", errorMessage);
     }
 
     /**
      * Shows Task done message.
-     * 
+     *
      * @param task which is mark complete.
+     * @return String representation of task done message.
      */
-    public void doneTaskReply(Task task) {
-        printReply(formatReply("Nice! I've marked this task as done:\n" + task.toString()));
+    public String doneTaskReply(Task task) {
+        return "Nice! I've marked this task as done:\n" + task.toString();
     }
 
     /**
@@ -82,38 +87,36 @@ public class Ui {
      *
      * @param task which is added.
      */
-    public void addTaskReply(Task task, TaskList taskItems) {
-        printReply(formatReply(String.format("Got it. I've added this task:\n    %s\nNow you have %d tasks in the list"
-                , task.toString(), taskItems.getSize())));
+    public String addTaskReply(Task task, TaskList taskItems) {
+        return String.format("Got it. I've added this task:\n    %s\nNow you have %d tasks in the list"
+                , task.toString(), taskItems.getSize());
     }
 
     /**
      * Shows Task deleted message.
      *
      * @param task which is deleted.
+     * @return String representation of delete message
      */
-    public void deleteTaskReply(Task task, TaskList taskItems) {
-        printReply(formatReply(String.format("HAI. I've deleted this task:\n    %s\nNow you have %d tasks in the list"
-                , task.toString(), taskItems.getSize())));
+    public String deleteTaskReply(Task task, TaskList taskItems) {
+        return String.format("HAI. I've deleted this task:\n    %s\nNow you have %d tasks in the list"
+                , task.toString(), taskItems.getSize());
     }
 
-    
-    public void findTaskReply(List<Task> matchingTasks) { 
-        printReply(formatReply(String.format("HAI. Here are matching tasks:\n%s",listFormatter(matchingTasks))));
-    }
-    
+
     /**
-     * Prints String to console. 
+     * Shows Task found message.
      *
-     * @param reply String to be printed.
+     * @param matchingTasks list of matching tasks.
+     * @return String representation of delete message
      */
-    public void printReply(String reply) {
-        System.out.println(reply);
+    public String findTaskReply(List<Task> matchingTasks) {
+        return String.format("HAI. Here are matching tasks:\n%s",listFormatter(matchingTasks));
     }
 
     /**
      * Reads user input in the command line.
-     * 
+     *
      * @return String representation of user input.
      */
     public String readCommand() {

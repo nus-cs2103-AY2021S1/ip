@@ -30,7 +30,7 @@ public class EventCommand extends ToDoCommand {
      * @throws duke.DukeException if there is error saving task to storage. 
      */
     @Override
-    public void execute(TaskList taskItems, Ui ui, Storage storage) throws DukeException {
-        super.execute(taskItems, ui, storage);
+    public String execute(TaskList taskItems, Ui ui, Storage storage) throws DukeException {
+        return super.execute(taskItems, ui, storage);
     }
 }

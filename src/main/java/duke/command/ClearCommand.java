@@ -7,8 +7,8 @@ import duke.Ui;
 
 public class ClearCommand extends Command {
     @Override
-    public void execute(TaskList taskItems, Ui ui, Storage storage) throws DukeException {
-        taskItems.clearAll();
+    public String execute(TaskList taskItems, Ui ui, Storage storage) throws DukeException {
+        return taskItems.clearAll();
     }
 
     @Override

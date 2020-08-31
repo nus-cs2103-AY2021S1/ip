@@ -19,8 +19,8 @@ public class ListCommand extends Command {
      * @throws duke.DukeException if task number specified by user does not exist.
      */
     @Override
-    public void execute(TaskList taskItems, Ui ui, Storage storage) throws DukeException {
-        ui.printReply(ui.formatReply(taskItems.toString()));
+    public String execute(TaskList taskItems, Ui ui, Storage storage) throws DukeException {
+        return ui.listFormatter(taskItems.getAll());
     }
 
     /**
