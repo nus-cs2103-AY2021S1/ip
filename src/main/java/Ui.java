@@ -33,4 +33,8 @@ class Ui{
 	public void showError() {
 		System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
 	}
+
+	public void showOutput(String string){
+		System.out.println(string);
+	}
 }
