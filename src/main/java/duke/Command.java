@@ -10,7 +10,9 @@ public abstract class Command {
      *
      * @return <code>true</code> if this is ExitCommand instance, else false.
      */
-    public boolean isExit() { return false; }
+    public boolean isExit() {
+        return false;
+    }
 
     /**
      * Executes the command by processing the input TaskList, Ui, and Storage instances.
