@@ -180,10 +180,17 @@ public class Duke extends Application {
     }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Returns string representation of the response by Duke.
+     *
+     * @param input The input message by the user.
+     * @return The response by Duke after processing the input message.
      */
     private String getResponse(String input) {
-        return "Duke heard: " + input;
+        try {
+            Command command = Parser.parseCommand(input);
+            return command.execute(manager, ui, storage);
+        } catch (DukeException e) {
+            return e.getMessage();
+        }
     }
 }

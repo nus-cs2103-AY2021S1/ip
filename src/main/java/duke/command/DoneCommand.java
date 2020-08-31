@@ -26,13 +26,13 @@ public class DoneCommand extends Command {
     }
 
     @Override
-    public void execute(TaskManager manager, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskManager manager, Ui ui, Storage storage) throws DukeException {
         try {
             int index = Integer.parseInt(taskNumber) - 1;
             Task task = manager.getTasks().get(index);
             manager.markTaskAsDone(task);
-            ui.showDoneMessage(task);
             storage.saveTasks(manager.getTasks());
+            return ui.showDoneMessage(task);
         } catch (IndexOutOfBoundsException | NumberFormatException e) {
             // Invalid task number or number out of range
             String errorMessage = "Invalid task number! "

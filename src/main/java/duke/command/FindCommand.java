@@ -24,8 +24,8 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public void execute(TaskManager manager, Ui ui, Storage storage) {
-        ui.displayMatchingTasks(manager.findTasks(keyword));
+    public String execute(TaskManager manager, Ui ui, Storage storage) {
+        return ui.displayMatchingTasks(manager.findTasks(keyword));
     }
 
     @Override

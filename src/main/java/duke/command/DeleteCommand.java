@@ -26,12 +26,12 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public void execute(TaskManager manager, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskManager manager, Ui ui, Storage storage) throws DukeException {
         try {
             int index = Integer.parseInt(taskNumber) - 1;
             Task task = manager.deleteTask(index);
-            ui.showDeleteMessage(task, manager.getTasks().size());
             storage.saveTasks(manager.getTasks());
+            return ui.showDeleteMessage(task, manager.getTasks().size());
         } catch (IndexOutOfBoundsException | NumberFormatException e) {
             // Invalid task number or number out of range
             String errorMessage = "Invalid task number! "

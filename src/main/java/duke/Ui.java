@@ -11,6 +11,17 @@ import duke.task.Task;
 public class Ui {
 
     /**
+     * The greeting message to be shown when the programme starts.
+     */
+    private static final String GREETINGS = "Hello! I'm Duke.\n"
+            + "What can I do for you?\n";
+
+    /**
+     * The exit message to be shown when the programme terminates.
+     */
+    private static final String GOODBYE = "Goodbye! Hope to see you again soon!";
+
+    /**
      * A scanner object to take in user input.
      */
     private final Scanner sc;
@@ -32,52 +43,61 @@ public class Ui {
     }
 
     /**
-     * Displays the welcome message to the user.
+     * Returns string representation of the welcome message to the user.
+     *
+     * @return The welcome message to the user.
      */
-    public void showWelcomeMessage() {
-        System.out.println("Hello! I'm Duke.");
-        System.out.println("What can I do for you?\n");
+    public String showWelcomeMessage() {
+        return GREETINGS;
     }
 
     /**
-     * Displays the exit message to the user.
+     * Returns string representation of the exit message to the user.
+     *
+     * @return The exit message to the user.
      */
-    public void showExitMessage() {
-        System.out.println("Goodbye! Hope to see you again soon!");
+    public String showExitMessage() {
+        return GOODBYE;
     }
 
     /**
-     * Displays the message when a task is being added.
+     * Returns string representation of the message when a task is being added.
      *
      * @param task The task to be added.
      * @param numTasks The total number of tasks after adding.
+     * @return The message indicating a task has been added.
      */
-    public void showAddMessage(Task task, int numTasks) {
-        System.out.println("Okay! Task added for you!");
-        System.out.println(task);
-        System.out.println("Now you have " + numTasks + " task(s) in the list." + "\n");
+    public String showAddMessage(Task task, int numTasks) {
+        String message = "Okay! Task added for you!\n";
+        message = message.concat(task.toString() + "\n");
+        message = message.concat("Now you have " + numTasks + " task(s) in the list." + "\n");
+        return message;
     }
 
     /**
-     * Displays the message when a task is being deleted.
+     * Returns string representation of the message when a task is being deleted.
      *
      * @param task The task to be deleted.
      * @param numTasks The total number of tasks after deleting.
+     * @return The message indicating a task has been deleted.
      */
-    public void showDeleteMessage(Task task, int numTasks) {
-        System.out.println("Noted. The following task is removed:");
-        System.out.println(task);
-        System.out.println("Now you have " + numTasks + " task(s) in the list." + "\n");
+    public String showDeleteMessage(Task task, int numTasks) {
+        String message = "Noted. The following task is removed:";
+        message = message.concat(task.toString() + "\n");
+        message = message.concat("Now you have " + numTasks + " task(s) in the list." + "\n");
+        return message;
     }
 
     /**
-     * Displays the message when a task is being marked as done.
+     * Returns string representation of the message when a task is being marked as done.
      *
      * @param task The task to be marked as done.
+     * @return The message indicating a task has been marked as done.
      */
-    public void showDoneMessage(Task task) {
-        System.out.println("Good job! I've marked this task as done:");
-        System.out.println(task + "\n");
+    public String showDoneMessage(Task task) {
+        String message = "Good job! I've marked this task as done:";
+        message = message.concat(task + "\n");
+        return message;
     }
 
     /**
@@ -90,36 +110,39 @@ public class Ui {
     }
 
     /**
-     * Displays the list of tasks to the user.
+     * Returns string representation of the list of tasks to the user.
      *
      * @param tasks The list of tasks to be displayed.
+     * @return The list of tasks to the user.
      */
-    public void displayTasks(List<Task> tasks) {
+    public String displayTasks(List<Task> tasks) {
+        String message;
         if (tasks.isEmpty()) {
-            System.out.println("No tasks added to your list yet!\n");
+            message = "No tasks added to your list yet!\n";
         } else {
-            System.out.println("Here are the tasks in your list:");
+            message = "Here are the tasks in your list:\n";
             for (int i = 0; i < tasks.size(); i++) {
-                System.out.println(i + 1 + ". " + tasks.get(i));
+                message = message.concat(i + 1 + ". " + tasks.get(i) + "\n");
             }
-            System.out.println();
         }
+        return message;
     }
 
     /**
-     * Displays the list of matching tasks to the user.
+     * Returns string representation of the list of matching tasks to the user.
      *
      * @param tasks The list of tasks to be displayed.
      */
-    public void displayMatchingTasks(List<Task> tasks) {
+    public String displayMatchingTasks(List<Task> tasks) {
+        String message;
         if (tasks.isEmpty()) {
-            System.out.println("No matching tasks found in your list!\n");
+            message = "No matching tasks found in your list!\n";
         } else {
-            System.out.println("Here are the matching tasks in your list:");
+            message = "Here are the matching tasks in your list:\n";
             for (int i = 0; i < tasks.size(); i++) {
-                System.out.println(i + 1 + ". " + tasks.get(i));
+                message = message.concat(i + 1 + ". " + tasks.get(i) + "\n");
             }
-            System.out.println();
         }
+        return message;
     }
 }

@@ -10,8 +10,8 @@ import duke.Ui;
 public class ListCommand extends Command {
 
     @Override
-    public void execute(TaskManager manager, Ui ui, Storage storage) {
-        ui.displayTasks(manager.getTasks());
+    public String execute(TaskManager manager, Ui ui, Storage storage) {
+        return ui.displayTasks(manager.getTasks());
     }
 
     @Override
