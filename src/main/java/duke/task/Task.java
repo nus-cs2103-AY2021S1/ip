@@ -18,7 +18,8 @@ public class Task implements Serializable {
      *
      * @param description A string description for that Task
      */
-    public Task(String description) {
+    public Task(String description, int taskID) {
+        this.taskID = taskID;
         this.taskID = ++taskCount;
         this.description = description;
         this.completed = false;

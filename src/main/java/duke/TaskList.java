@@ -10,16 +10,20 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 // todo: find a better way to assign numbers to the tasks. the current error is that after loading,
-//  Task class is restarting the counter from 0
+//  Task class is restarting the counter from 0. changed the counter to be kept at TaskList, but for some
+//   reason, the error still happens. this error only is recreated when running testscripts I think.
+//  not that easy to replicate, so shall solve it another time :')
 
 /**
  * Holds a Collection of Tasks and has methods to manipulate these Tasks, is serializable as well
  */
 public class TaskList implements Serializable {
     private final ArrayList<Task> taskList;
+    private int currentTaskCount;
     
     public TaskList() {
         this.taskList = new ArrayList<>();
+        this.currentTaskCount = 0;
     }
     
     
@@ -35,17 +39,18 @@ public class TaskList implements Serializable {
      */
     // side effect: create & add task + return response
     public String addEntry(String[] parsedInput, String commandTag) throws DukeException {
+        int newTaskID = ++currentTaskCount;
         switch (commandTag) {
         case "T":
-            ToDo newToDo = new ToDo(parsedInput[1]);
+            ToDo newToDo = new ToDo(parsedInput[1], newTaskID);
             this.taskList.add(newToDo);
             return newToDo.toString();
         case "D":
-            Deadline newDeadline = Deadline.createDeadline(parsedInput);
+            Deadline newDeadline = Deadline.createDeadline(parsedInput, newTaskID);
             this.taskList.add(newDeadline);
             return newDeadline.toString();
         case "E":
-            Event newEvent = Event.createEvent(parsedInput);
+            Event newEvent = Event.createEvent(parsedInput, newTaskID);
             this.taskList.add(newEvent);
             return newEvent.toString();
         default:
@@ -78,6 +83,7 @@ public class TaskList implements Serializable {
      * @throws DukeException If it's an invalid task
      */
     public String deleteTask(int taskID) throws DukeException {
+        currentTaskCount--;
         verifyTaskValidity(taskID);
         Task toDelete = taskList.get(taskID - 1);
         taskList.remove(toDelete);
@@ -119,10 +125,12 @@ public class TaskList implements Serializable {
                 incompleteTasks++;
             }
         }
-        return "Now you have " + incompleteTasks
-                + ((incompleteTasks == 1)
-                   ? " undone task"
-                   : " undone tasks")
-                + " in the list.";
+        return "Now you have " + incompleteTasks + ((incompleteTasks == 1)
+                                                    ? " undone task"
+                                                    : " undone tasks") + " in the list.";
+    }
+    
+    public int getCurrentTaskCount() {
+        return this.currentTaskCount;
     }
 }

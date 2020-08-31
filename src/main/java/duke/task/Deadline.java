@@ -17,8 +17,8 @@ public class Deadline extends Task {
     private LocalDate date;
     private LocalTime time;
     
-    public Deadline(String description, String dateString) throws DukeException {
-        super(description);
+    public Deadline(String description, String dateString, int newTaskID) throws DukeException {
+        super(description, newTaskID);
         setDateTime(dateString);
     }
     
@@ -29,10 +29,10 @@ public class Deadline extends Task {
      *
      * @return Deadline
      */
-    public static Deadline createDeadline(String[] parsedInput) throws DukeException {
+    public static Deadline createDeadline(String[] parsedInput, int newTaskID) throws DukeException {
         String description = parsedInput[1];
         String dateString = parsedInput[2];
-        return new Deadline(description, dateString);
+        return new Deadline(description, dateString, newTaskID);
     }
     
     @Override

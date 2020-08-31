@@ -10,8 +10,8 @@ public class Event extends Task {
             endTime,
             dateString;
     
-    public Event(String description, String dateString, String startTime, String endTime) {
-        super(description);
+    public Event(String description, String dateString, String startTime, String endTime, int newTaskID) {
+        super(description, newTaskID);
         this.dateString = dateString;
         this.startTime = startTime;
         this.endTime = endTime;
@@ -22,12 +22,12 @@ public class Event extends Task {
      * @param parsedInput Parser's output
      * @return Event
      */
-    public static Event createEvent(String[] parsedInput) {
+    public static Event createEvent(String[] parsedInput, int newTaskID) {
         String description = parsedInput[1];
         String dateString = parsedInput[2];
         String startTime = parsedInput[3];
         String endTime = parsedInput[4];
-        return new Event(description, dateString, startTime, endTime);
+        return new Event(description, dateString, startTime, endTime, newTaskID);
     }
     
     @Override
