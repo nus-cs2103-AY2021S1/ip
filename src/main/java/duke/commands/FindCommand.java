@@ -28,8 +28,9 @@ public class FindCommand extends Command {
      * @param ui
      * @param listStorage
      * @param taskList
+     * @return UI message after executing find command.
      */
-    public void execute(Ui ui, Storage listStorage, TaskList taskList) {
+    public String execute(Ui ui, Storage listStorage, TaskList taskList) {
         TaskList keywordTasks = new TaskList();
         for (int i = 0; i < taskList.getNumTask(); i++) {
             Task nextTask = taskList.get(i);
@@ -37,6 +38,6 @@ public class FindCommand extends Command {
                 keywordTasks.add(nextTask);
             }
         }
-        ui.printFoundItems(keywordTasks, this.keyword);
+        return ui.printFoundItems(keywordTasks, this.keyword);
     }
 }

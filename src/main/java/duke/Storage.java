@@ -36,9 +36,10 @@ public class Storage {
      * Loads data from the database when bot starts and update previously saved data if any.
      *
      * @param currTaskList Task list of bot.
+     * @return Message after loading data.
      */
-    public void loadData(TaskList currTaskList) {
-        this.checkHistory();
+    public String loadData(TaskList currTaskList) {
+        String loadingDataFileMessage = this.checkHistory();
         BufferedReader rb = null;
         try {
             rb = new BufferedReader(new FileReader(this.storageFile));
@@ -81,31 +82,42 @@ public class Storage {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        if (loadingDataFileMessage.length() == 0) {
+            return "________________________________________________________" + "\n"
+                    + "     Found directories and file" + "\n"
+                    + "________________________________________________________" + "\n";
+        }
+        return loadingDataFileMessage;
     }
 
     /**
      * Checks if user has the current directory and data file to store or load data.
      * Creates the relevant directory and data file if user do not have them.
      *
+     * @return Message indicating directory and/or datafile found (if applicable).
      */
-    private void checkHistory() {
+    private String checkHistory() {
+        String overallHistoryMessage = "";
         try {
             FileReader readFile = new FileReader(DATA_FILE_DIRECTORY);
         } catch (FileNotFoundException e) {
             File newData = new File(DATA_FILE_DIRECTORY);
             if (!newData.exists()) {
                 newData.mkdirs();
-                Ui.addDirectory();
+                overallHistoryMessage += Ui.addDirectory();
+                overallHistoryMessage += "\n";
             }
         }
 
         try {
             if (this.storageFile.createNewFile()) {
-                Ui.addDataFile();
+                overallHistoryMessage += Ui.addDataFile();
+                overallHistoryMessage += "\n";
             }
         } catch (IOException e) {
             System.out.println("Unable to create file");
         }
+        return overallHistoryMessage;
     }
 
     /**

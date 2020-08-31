@@ -31,5 +31,13 @@ public abstract class Command {
         return this.isExit;
     }
 
-    public abstract void execute(Ui ui, Storage listStorage, TaskList taskList);
+    /**
+     * Executes main logic of command object. To be implemented by subclasses.
+     *
+     * @param ui
+     * @param listStorage
+     * @param taskList
+     * @return UI message representing the relevant execution.
+     */
+    public abstract String execute(Ui ui, Storage listStorage, TaskList taskList);
 }

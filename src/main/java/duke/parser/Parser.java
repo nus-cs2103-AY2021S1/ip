@@ -1,6 +1,7 @@
 package duke.parser;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 
 import duke.Ui;
 import duke.commands.AddCommand;
@@ -95,6 +96,8 @@ public class Parser {
                     return ac;
                 } catch (StringIndexOutOfBoundsException ex) {
                     throw new InvalidCommand("OOPS!!! Please specify your task.");
+                } catch (DateTimeParseException ex) {
+                    throw new InvalidCommand ("OOPS!!! Invalid date.");
                 }
             } else if (command.contains("list")) {
                 if (command.split(" ").length > 1) {

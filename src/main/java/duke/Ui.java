@@ -37,9 +37,9 @@ public class Ui {
                 + "                                       "
                 + "     \"Y88P\"                                  ";
 
-        this.lines = "    ____________________________________________________________";
-        this.defaultGreeting = this.lines + "\n" + "     Hello! I'm Chatty Bot ^~^ \n" + "     "
-                + "What can I do for you?\n" + "     Type 'help' if you wish to know more about"
+        this.lines = "______________________________________________________";
+        this.defaultGreeting = this.lines + "\n" + "     Hello! I'm Chatty Bot ^~^ \n"
+                + "     What can I do for you?\n" + "Type 'help' if you wish to know more about"
                 + " what I can do!" + "\n" + lines + "\n";
         this.commandParser = new Parser();
     }
@@ -55,101 +55,106 @@ public class Ui {
     }
 
     /**
-     * Prints welcome message to user.
+     * Returns welcome message to user.
      *
+     * @return Welcome message.
      */
-    public void printWelcome() {
-        System.out.println(defaultGreeting);
+    public String printWelcome() {
+        return this.defaultGreeting;
     }
 
     /**
-     * Prints UI message when loading storage files.
+     * Returns UI message when loading storage files.
      *
+     * @return Load files message.
      */
-    public void loadFile() {
-        System.out.println(this.lines);
-        System.out.println("     Previously saved list (if any) loaded. You may enter your commands now:");
-        System.out.println(this.lines);
+    public String loadFile() {
+        String loadFileMessage = this.lines + "\n" + "     Previously saved list (if any) loaded."
+                + " You may enter your commands now:" + "\n" + this.lines;
+        return loadFileMessage;
     }
 
     /**
-     * Prints UI message when adding a new directory to store bot data.
+     * Returns UI message when adding a new directory to store bot data.
      *
+     * @return Directory added message.
      */
-    public static void addDirectory() {
-        System.out.println("    ____________________________________________________________");
-        System.out.println("     I see that you do not have a directory to store data. "
-                + "Created one for you before we proceed.");
-        System.out.println("    ____________________________________________________________");
+    public static String addDirectory() {
+        String addDirectorymessage = "______________________________________________________"
+                + "\n" + "     I see that you do not have a directory to store data. "
+                + "Created one for you before we proceed." + "\n"
+                + "______________________________________________________";
+        return addDirectorymessage;
     }
 
     /**
-     * Prints UI message when addign a new data file to store bot data.
+     * Returns UI message when adding a new data file to store bot data.
      *
+     * @return Adds data file message.
      */
-    public static void addDataFile() {
-        System.out.println("    ____________________________________________________________");
-        System.out.println("     I see that this is your first time using Chatty Bot, "
-                + "I have created a file to log your history from now on!");
-        System.out.println("    ____________________________________________________________");
+    public static String addDataFile() {
+        String addDataFileMessage = "______________________________________________________" + "\n"
+                + "     I see that this is your first time using Chatty Bot, "
+                + "I have created a file to log your history from now on!" + "\n"
+                + "______________________________________________________";
+        return addDataFileMessage;
     }
 
     /**
-     * Prints UI message when a task is marked as done.
+     * Returns UI message when a task is marked as done.
      *
      * @param taskIndex Index of task marked as done
      * @param currList Task list with updated list of tasks.
+     * @return UI message for done task.
      */
-    public void markAsDone(int taskIndex, TaskList currList) {
-        System.out.println(this.lines);
-        System.out.println("     Nice! I've marked this task as done:");
-        System.out.println("       " + currList.get(taskIndex));
-        System.out.println(this.lines);
+    public String markAsDone(int taskIndex, TaskList currList) {
+        String markedDoneMessage = this.lines + "\n" + "     Nice! I've marked this task as done:"
+                + "\n" + "       " + currList.get(taskIndex) + "\n" + this.lines;
+        return markedDoneMessage;
     }
 
     /**
-     * Prints UI message when a task has been added to the task list.
+     * Returns UI message when a task has been added to the task list.
      *
      * @param newTask Task added.
      * @param currList Task list with updated list of tasks.
+     * @return UI message for task added.
      */
-    public void addTask(Task newTask, TaskList currList) {
-        System.out.println(this.lines + "\n" + "     Got it. I've added this task:");
-        System.out.println("       " + newTask);
-        System.out.println("     Now you have " + String.valueOf(currList.getNumTask())
-                + " task(s) in the list.");
-        System.out.println(this.lines);
+    public String addTask(Task newTask, TaskList currList) {
+        String taskAddedUi = this.lines + "\n" + "     Got it. I've added this task:" + "\n" + "       "
+                + newTask + "\n" + "     Now you have " + String.valueOf(currList.getNumTask())
+                + " task(s) in the list." + "\n" + this.lines;
+        return taskAddedUi;
     }
 
     /**
-     * Prints UI message to list out tasks in the current task list.
+     * Returns UI message to list out tasks in the current task list.
      *
      * @param currList Task list with updated list of tasks.
+     * @return UI message of task list.
      */
-    public void listItems(TaskList currList) {
-        System.out.println(this.lines);
-        System.out.println("     Here are the tasks in your list:");
-        currList.listItems();
-        System.out.println(this.lines);
+    public String listItems(TaskList currList) {
+        String listInString = this.lines + "\n" + "     Here are the tasks in your list:" + "\n"
+                + currList.listItems() + this.lines + "\n";
+        return listInString;
     }
 
     /**
-     * Prints UI message when a task is removed.
+     * Returns UI message when a task is removed.
      *
      * @param removeTask Removed task.
      * @param currList Task list with updated list of tasks.
+     * @return UI message of removed task.
      */
-    public void deleteTask(Task removeTask, TaskList currList) {
-        System.out.println(this.lines);
-        System.out.println("     Alright, the following task has been removed");
-        System.out.println("     " + removeTask);
-        System.out.println("     Now you have " + String.valueOf(currList.getNumTask())
-                + " task(s) in the list.");
-        System.out.println(this.lines);
+    public String deleteTask(Task removeTask, TaskList currList) {
+        String deleteMessage = this.lines + "\n" + "     Alright, the following task has been removed" + "\n"
+                + "       " + removeTask + "\n" + "     Now you have " + String.valueOf(currList.getNumTask())
+                + " task(s) in the list." + "\n" + this.lines;
+        return deleteMessage;
     }
 
     /**
-     * Prints UI message when users input an invalid command.
+     * Returns UI message when users input an invalid command.
      *
      * @param ex Relevant invalid command message.
      */
@@ -160,32 +165,33 @@ public class Ui {
     }
 
     /**
-     * Prints UI message when users close the bot.
+     * Returns UI message when users close the bot.
      *
+     * @return UI message for goodbye.
      */
-    public void goodBye() {
+    public String goodBye() {
         String endGreeting = this.lines + "\n" + "     Bye. Hope to see you again soon!\n" + this.lines;
-        System.out.println(endGreeting);
+        return endGreeting;
     }
 
     /**
-     * Prints UI message after tasks are found using a keyword.
-     *
+     * Returns UI message after tasks are found using a keyword.
      * @param foundTasks Task list with tasks found.
      * @param keyword Keyword used to find tasks.
+     * @return UI message for found tasks.
      */
-    public void printFoundItems(TaskList foundTasks, String keyword) {
-        System.out.println(this.lines);
-        System.out.println("     Here are the matching tasks for keyword \"" + keyword + "\" in your list:");
-        foundTasks.listItems();
-        System.out.println(lines);
+    public String printFoundItems(TaskList foundTasks, String keyword) {
+        String foundItemsMessage = this.lines + "\n" + "     Here are the matching tasks for keyword \""
+                + keyword + "\" in your list:" + "\n" + foundTasks.listItems() + this.lines;
+        return foundItemsMessage;
     }
 
     /**
-     * Prints help message to user.
+     * Returns help message to user.
      *
+     * @return UI help message.
      */
-    public void helpMessage() {
+    public String helpMessage() {
         String helpMessage = "     Seems like you need some help! There are a few things I can do for you";
         String addTasksInstructions = "     There are three types of tasks you can insert, namely To-Do,"
                 + " Deadline and Event. The instructions for each task is as follows:" + "\n";
@@ -210,10 +216,20 @@ public class Ui {
                 + " as done.";
         String exitBotInstructions = "     If you are done editing your task list, feel free to close down"
                 + "  this bot with the bye command by typing 'bye'.";
-        System.out.println(lines + "\n" + helpMessage);
-        System.out.println(addTasksInstructions + addToDoInstructions + "\n" + addDeadlineInstructions);
-        System.out.println(addEventInstructions + "\n" + deleteTaskInstructions);
-        System.out.println(listTasksInstructions + "\n" + findTasksInstructions);
-        System.out.println(markTaskAsDoneInstructions + "\n" + exitBotInstructions + "\n" + lines);
+        String helpMessageToBePrinted = this.lines + "\n" + helpMessage + "\n" + addTasksInstructions
+                + addToDoInstructions + "\n" + addDeadlineInstructions + "\n" + addEventInstructions
+                + "\n" + deleteTaskInstructions + "\n" + listTasksInstructions + "\n" + findTasksInstructions
+                + "\n" + markTaskAsDoneInstructions + "\n" + exitBotInstructions + "\n" + lines + "\n";
+        return helpMessageToBePrinted;
+    }
+
+    /**
+     * Returns UI message when bot loads data from storage.
+     *
+     * @param loadData
+     * @return UI message for loading data.
+     */
+    public String loadStorage(String loadData) {
+        return loadData;
     }
 }

@@ -31,12 +31,13 @@ public class DoneCommand extends Command {
      * @param ui Ui used to generate messages to users.
      * @param listStorage Backend storage to store items in the task list.
      * @param taskList List of tasks added by users so far.
+     * @return UI message after executing done command.
      */
-    public void execute(Ui ui, Storage listStorage, TaskList taskList) {
+    public String execute(Ui ui, Storage listStorage, TaskList taskList) {
         try {
             Task editedTask = taskList.get(this.taskIndex);
             listStorage.editTask(editedTask, this.taskIndex, taskList);
-            ui.markAsDone(this.taskIndex, taskList);
+            return ui.markAsDone(this.taskIndex, taskList);
         } catch (IndexOutOfBoundsException ex) {
             try {
                 throw new InvalidCommand("Please enter a valid task number.");
@@ -44,5 +45,6 @@ public class DoneCommand extends Command {
                 invalidCommand.printStackTrace();
             }
         }
+        return "Cannot mark as done!";
     }
 }
