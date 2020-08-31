@@ -41,27 +41,27 @@ public class Parser {
     public static Command parse(String input) throws DukeException {
         String[] inputInformation = input.split(" ");
         if (inputInformation[0].equals(CommandType.BYE.getInput())) {
-            return new Command(CommandType.BYE);
+            return new ExitCommand();
         } else if (inputInformation[0].equals(CommandType.LIST.getInput())) {
-            return new Command(CommandType.LIST);
+            return new ListCommand();
         } else if (inputInformation[0].equals(CommandType.DONE.getInput())) {
             if (inputInformation.length > 1 && isNumber(inputInformation[1])) {
                 int taskNumber = Integer.parseInt(inputInformation[1]);
-                return new Command((CommandType.DONE), taskNumber);
+                return new DoneCommand(taskNumber);
             } else {
                 throw new DukeException("You need to include your task number to mark done...");
             }
         } else if (inputInformation[0].equals(CommandType.DELETE.getInput())) {
             if (inputInformation.length > 1 && isNumber(inputInformation[1])) {
                 int taskNumber = Integer.parseInt(inputInformation[1]);
-                return new Command((CommandType.DELETE), taskNumber);
+                return new DeleteCommand(taskNumber);
             } else {
                 throw new DukeException("You need to include your task number to delete...");
             }
         } else if (inputInformation[0].equals(CommandType.TODO.getInput())) {
             if (inputInformation.length > 1) {
                 String description = getStringFromArray(inputInformation, 1, inputInformation.length);
-                return new Command(CommandType.TODO, description);
+                return new AddCommand(CommandType.TODO, description);
             } else {
                 throw new DukeException("Your todo description can't be empty...");
             }
@@ -75,7 +75,7 @@ public class Parser {
                 } else {
                     String description = getStringFromArray(inputInformation, 1, indexOfBy);
                     String by = getStringFromArray(inputInformation, indexOfBy + 1, inputInformation.length);
-                    return new Command(CommandType.DEADLINE, description, by);
+                    return new AddCommand(CommandType.DEADLINE, description, by);
                 }
             } else {
                 throw new DukeException("Your deadline description or deadline can't be empty...");
@@ -90,7 +90,7 @@ public class Parser {
                 } else {
                     String description = getStringFromArray(inputInformation, 1, indexOfAt);
                     String at = getStringFromArray(inputInformation, indexOfAt + 1, inputInformation.length);
-                    return new Command(CommandType.EVENT, description, at);
+                    return new AddCommand(CommandType.EVENT, description, at);
                 }
             } else {
                 throw new DukeException("Your event description or event period can't be empty...");
@@ -98,7 +98,7 @@ public class Parser {
         } else if (inputInformation[0].equals(CommandType.FIND.getInput())) {
             if (inputInformation.length > 1) {
                 String searchDescription = getStringFromArray(inputInformation, 1, inputInformation.length);
-                return new Command((CommandType.FIND), searchDescription);
+                return new FindCommand(searchDescription);
             } else {
                 throw new DukeException("You need to include your keyword...");
             }
