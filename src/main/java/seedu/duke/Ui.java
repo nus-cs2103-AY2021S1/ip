@@ -40,7 +40,7 @@ public class Ui {
      * Shows welcome message to user.
      */
     public void showWelcome() {
-        String name = "Omega";
+        String name = "Duke";
         this.outputLine("Hi! I am " + name + ", your personal assistant.");
         this.outputLine("How may I help you today?");
     }

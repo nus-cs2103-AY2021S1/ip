@@ -27,6 +27,15 @@ public class Duke {
     }
 
     /**
+     * Returns welcome message for duke program
+     */
+    public String getWelcomeMessage() {
+        this.ui.clearOutputMessage();
+        this.ui.showWelcome();
+        return ui.getOutputMessage();
+    }
+
+    /**
      * Returns the output of Duke based on the user's input and decide whether to exit program
      */
     public String getResponse(String input) {
