@@ -1,10 +1,13 @@
 package duke.command;
 
+import duke.Gui;
 import duke.component.DukeException;
 import duke.component.EnumUserInstruction;
 import duke.component.Storage;
 import duke.component.Ui;
 import duke.task.*;
+
+import java.util.ArrayList;
 
 public class AddCommand extends Command {
     String fullCommand;
@@ -25,12 +28,13 @@ public class AddCommand extends Command {
      * Executes command, main logic for creating a new task
      *
      * @param taskList list of tasks.
-     * @param ui instance of Ui to deal with user interface.
+     * @param gui instance of Ui to deal with user interface.
      * @param storage to read / write to storage.
      * @throws DukeException exception thrown when exception caught while running.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public ArrayList<String> execute(TaskList taskList, Gui gui, Storage storage, ArrayList<String> responseList)
+            throws DukeException {
         String[] userInputArr = this.fullCommand.split(" ");
         switch (this.instructionCommand) {
         case TODO:
@@ -40,15 +44,14 @@ public class AddCommand extends Command {
                 }
                 Task todoTask = new Todo(fullCommand.substring(5));
                 taskList.addItem(todoTask);
-                ui.addMessage(todoTask, taskList.getTasksLeft());
-
                 // change data file
                 storage.addTask(todoTask);
+
+                return gui.addMessage(todoTask, taskList.getTasksLeft());
 
             } catch (ArrayIndexOutOfBoundsException e) {
                 throw new DukeException("The description of a todo cannot be empty");
             }
-            break;
         case DEADLINE:
             try {
                 String substring = fullCommand.substring(9);
@@ -57,9 +60,10 @@ public class AddCommand extends Command {
                 String date = strArr[1];
                 Task deadlineTask = new Deadline(description, date);
                 taskList.addItem(deadlineTask);
-                ui.addMessage(deadlineTask, taskList.getTasksLeft());
-
+                // change data file
                 storage.addTask(deadlineTask);
+
+                return gui.addMessage(deadlineTask, taskList.getTasksLeft());
 
             } catch (StringIndexOutOfBoundsException e) {
                 throw new DukeException("Please give me details for your deadline task");
@@ -68,7 +72,6 @@ public class AddCommand extends Command {
             } catch (DukeException e) {
                 throw new DukeException(e.getMessage());
             }
-            break;
         case EVENT:
             try {
                 String substring = fullCommand.substring(6);
@@ -77,9 +80,11 @@ public class AddCommand extends Command {
                 String date = strArr[1];
                 Task eventTask = new Event(description, date);
                 taskList.addItem(eventTask);
-                ui.addMessage(eventTask, taskList.getTasksLeft());
 
+                // change data file
                 storage.addTask(eventTask);
+
+                return gui.addMessage(eventTask, taskList.getTasksLeft());
 
             } catch (StringIndexOutOfBoundsException e) {
                 throw new DukeException("Please give me information about your event!");
@@ -88,9 +93,11 @@ public class AddCommand extends Command {
             } catch (DukeException e) {
                 throw new DukeException(e.getMessage());
             }
-            break;
         default:
 
         }
+        ArrayList<String> l = new ArrayList<>();
+        l.add("THIS SHOULD NOT SHOW, addcommand class last line");
+        return l;
     }
 }

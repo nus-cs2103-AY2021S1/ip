@@ -1,8 +1,12 @@
 package duke.command;
 
+import duke.Gui;
 import duke.component.Storage;
 import duke.task.TaskList;
 import duke.component.Ui;
+
+
+import java.util.ArrayList;
 
 public class ByeCommand extends Command {
 
@@ -10,12 +14,12 @@ public class ByeCommand extends Command {
      * Used to show bye message to user
      *
      * @param tasks list of tasks.
-     * @param ui instance of Ui to deal with user interface.
+     * @param gui instance of Ui to deal with user interface.
      * @param storage to read / write to storage.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.showBye();
+    public ArrayList<String> execute(TaskList tasks, Gui gui, Storage storage, ArrayList<String> responseList) {
+        return gui.showBye();
     }
 
     /**

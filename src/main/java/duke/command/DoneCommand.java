@@ -1,10 +1,13 @@
 package duke.command;
 
+import duke.Gui;
 import duke.component.DukeException;
 import duke.component.Storage;
 import duke.component.Ui;
 import duke.task.Task;
 import duke.task.TaskList;
+
+import java.util.ArrayList;
 
 public class DoneCommand extends Command {
     private final String fullCommand;
@@ -21,12 +24,12 @@ public class DoneCommand extends Command {
     /**
      * Executes command, main logic for creating a new task.
      * @param taskList list of tasks.
-     * @param ui instance of Ui to deal with user interface.
+     * @param gui instance of Ui to deal with user interface.
      * @param storage to read / write to storage.
      * @throws DukeException exception thrown when exception caught while running.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public ArrayList<String> execute(TaskList taskList, Gui gui, Storage storage, ArrayList<String> responseList) throws DukeException {
         try {
             String numberCharacter = this.fullCommand.substring(5);
             int index = Integer.parseInt(numberCharacter) - 1;
@@ -36,8 +39,10 @@ public class DoneCommand extends Command {
 
             storage.modifyTask(taskToChange, index);
 
-            ui.showDone();
-            ui.print(taskToChange.toString());
+            responseList.addAll(gui.showDone());
+            responseList.add(taskToChange.toString());
+
+            return responseList;
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Please enter a task number within the range of tasks");
         } catch (NumberFormatException a) {

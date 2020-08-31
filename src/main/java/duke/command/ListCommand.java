@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.Gui;
 import duke.component.DukeException;
 import duke.component.Storage;
 import duke.task.Task;
@@ -13,12 +14,13 @@ public class ListCommand extends Command {
     /**
      * Executes command, main logic for creating a new task.
      * @param taskList list of tasks.
-     * @param ui instance of Ui to deal with user interface.
+     * @param gui instance of Ui to deal with user interface.
      * @param storage to read / write to storage.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public ArrayList<String> execute(TaskList taskList, Gui gui, Storage storage, ArrayList<String> responseList) {
         ArrayList<Task> listOfTasks = taskList.getList();
-        ui.listAllTasks(listOfTasks);
+        responseList.addAll(gui.listAllTasks(listOfTasks));
+        return responseList;
     }
 }

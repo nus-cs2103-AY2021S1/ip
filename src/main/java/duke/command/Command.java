@@ -1,20 +1,24 @@
 package duke.command;
 
+import duke.Gui;
 import duke.component.DukeException;
 import duke.component.Storage;
 import duke.task.TaskList;
 import duke.component.Ui;
+
+import java.util.ArrayList;
 
 public abstract class Command {
 
     /**
      * abstract method to be implemented by child classes.
      * @param tasks list of tasks.
-     * @param ui instance of Ui to deal with user interface.
+     * @param gui instance of Ui to deal with user interface.
      * @param storage to read / write to storage.
      * @throws DukeException exception caught when method implemented by child classes.
      */
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
+    public abstract ArrayList<String> execute(TaskList tasks, Gui gui, Storage storage,
+        ArrayList<String> responseList) throws DukeException;
 
     /**
      * method that returns false by default.

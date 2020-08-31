@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.Gui;
 import duke.component.DukeException;
 import duke.component.Storage;
 import duke.component.Ui;
@@ -22,17 +23,18 @@ public class FindCommand extends Command {
     /**
      * Main logic executed to perform search
      * @param tasks list of tasks.
-     * @param ui instance of Ui to deal with user interface.
+     * @param gui instance of Ui to deal with user interface.
      * @param storage to read / write to storage.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public ArrayList<String> execute(TaskList tasks, Gui gui, Storage storage, ArrayList<String> responseList) {
         ArrayList<Task> listOfTasksFound = new ArrayList<>();
         for (Task task : tasks.getList()) {
             if (task.isContain(this.bodyCommand)) {
                 listOfTasksFound.add(task);
             }
         }
-        ui.findMessage(listOfTasksFound);
+        responseList.addAll(gui.findMessage(listOfTasksFound));
+    return responseList;
     }
 }
