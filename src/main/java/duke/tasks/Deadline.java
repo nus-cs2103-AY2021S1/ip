@@ -1,4 +1,7 @@
-package duke;
+package duke.tasks;
+
+import duke.util.DukeDate;
+import duke.DukeException;
 
 /**
  * Implements a Deadline Task.

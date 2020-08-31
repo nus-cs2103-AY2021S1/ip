@@ -1,4 +1,7 @@
-package duke;
+package duke.util;
+
+import duke.commands.*;
+import duke.DukeException;
 
 import java.util.Scanner;
 

@@ -1,8 +1,10 @@
-package duke;
+package duke.util;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+import duke.DukeException;
 
 /**
  * Class to convert between a String object and LocalDate object.

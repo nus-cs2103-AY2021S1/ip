@@ -1,4 +1,7 @@
-package duke;
+package duke.tasks;
+
+import duke.util.DukeDate;
+import duke.DukeException;
 
 /**
  * Implements an Event task.
