@@ -1,6 +1,6 @@
-package data;
+package main.java.data;
 
-import exception.ChatbotException;
+import main.java.exception.ChatbotException;
 
 public class Todo extends Task {
 

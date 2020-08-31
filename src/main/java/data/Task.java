@@ -2,9 +2,7 @@
  * Represents a task (e.g todo, deadline, event) with a description, type, completion status and date.
  */
 
-package data;
-
-import common.Type;
+package main.java.data;
 
 import java.time.LocalDate;
 

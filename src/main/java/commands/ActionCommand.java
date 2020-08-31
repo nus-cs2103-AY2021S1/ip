@@ -1,11 +1,11 @@
-package commands;
+package main.java.commands;
 
-import common.Type;
-import data.Task;
-import data.TaskList;
-import exception.ChatbotException;
-import storage.Storage;
-import ui.Ui;
+import main.java.common.Type;
+import main.java.data.Task;
+import main.java.data.TaskList;
+import main.java.exception.ChatbotException;
+import main.java.storage.Storage;
+import main.java.ui.Ui;
 
 /**
  * Represents a command to either delete or mark task as done given a type.

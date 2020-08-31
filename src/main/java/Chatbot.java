@@ -1,13 +1,15 @@
-import commands.Command;
-import data.TaskList;
-import exception.ChatbotException;
-import parser.Parser;
-import storage.Storage;
-import ui.Ui;
+package main.java;
+
+import main.java.commands.Command;
+import main.java.data.TaskList;
+import main.java.exception.ChatbotException;
+import main.java.parser.Parser;
+import main.java.storage.Storage;
+import main.java.ui.Ui;
 
 import java.nio.file.Path;
 
-public class Main {
+public class Chatbot {
 
     private static TaskList taskList;
     private static Storage taskStorage;

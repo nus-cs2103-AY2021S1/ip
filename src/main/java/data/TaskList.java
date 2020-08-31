@@ -3,9 +3,9 @@
  * tasks due on a specific date.
  */
 
-package data;
+package main.java.data;
 
-import exception.ChatbotException;
+import main.java.exception.ChatbotException;
 
 import java.util.ArrayList;
 import java.time.LocalDate;

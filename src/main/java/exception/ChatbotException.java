@@ -3,7 +3,7 @@
  * or an invalid action is encountered.
  */
 
-package exception;
+package main.java.exception;
 
 public class ChatbotException extends Exception {
 

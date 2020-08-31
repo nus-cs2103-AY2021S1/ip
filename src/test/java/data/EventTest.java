@@ -1,6 +1,7 @@
 package data;
 
-import exception.ChatbotException;
+import main.java.data.Event;
+import main.java.exception.ChatbotException;
 
 import org.junit.jupiter.api.Test;
 

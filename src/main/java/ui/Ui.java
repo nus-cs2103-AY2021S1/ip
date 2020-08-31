@@ -3,9 +3,9 @@
  * from the user and displaying data, success/error messages to the user.
  */
 
-package ui;
+package main.java.ui;
 
-import data.Task;
+import main.java.data.Task;
 
 import java.util.ArrayList;
 import java.util.Iterator;

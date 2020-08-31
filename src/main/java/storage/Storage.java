@@ -2,13 +2,13 @@
  * A storage class that contains methods for loading and saving tasks.
  */
 
-package storage;
+package main.java.storage;
 
-import data.Deadline;
-import data.Event;
-import data.Task;
-import data.Todo;
-import exception.ChatbotException;
+import main.java.data.Deadline;
+import main.java.data.Event;
+import main.java.data.Task;
+import main.java.data.Todo;
+import main.java.exception.ChatbotException;
 
 import java.io.IOException;
 import java.nio.file.Files;

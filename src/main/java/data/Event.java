@@ -1,7 +1,7 @@
-package data;
+package main.java.data;
 
-import common.Message;
-import exception.ChatbotException;
+import main.java.common.Message;
+import main.java.exception.ChatbotException;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
