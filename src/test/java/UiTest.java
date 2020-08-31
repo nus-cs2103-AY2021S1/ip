@@ -3,9 +3,25 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 
 public class UiTest {
+    private Ui ui = new Ui();
+
     @Test
-    public void getBorder() {
-        assertEquals("____________________________________________________________\n",
-                new Ui().getBorder());
+    public void exitLine() {
+        String line = "Bye. Hope to see you again soon!\n";
+        assertEquals(line, ui.exitLine());
+    }
+
+    @Test
+    public void unknownInputLine() {
+        String line = "Below are the list of commands:\n"
+                + "list\n"
+                + "find [keyword]\n"
+                + "todo [taskname]\n"
+                + "deadline [taskname] /by [yyyy-MM-dd HHmm]\n"
+                + "event [taskname] /at [yyy-MM-dd HHmm]\n"
+                + "remove [index or all]\n"
+                + "bye";
+
+        assertEquals(line, ui.unknownInputLine());
     }
 }
