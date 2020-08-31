@@ -15,14 +15,6 @@ public class Duke {
         this.storage = new Storage(taskList, "duke");
     }
 
-//    /**
-//     * Runs the Duke bot program
-//     */
-//    public void run() {
-//        ui.startUp(taskList, storage);
-//        Parser.parseInput(taskList, storage);
-//    }
-
     public TaskList getTaskList() {
         return taskList;
     }

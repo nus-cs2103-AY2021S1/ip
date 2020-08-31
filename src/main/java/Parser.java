@@ -1,6 +1,5 @@
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Scanner;
 
 /**
  * Represents the user input Parser handler.
@@ -55,48 +54,9 @@ public class Parser {
      * Parses the user input and calls the appropriate functions.
      * @param taskList The list of tasks handler
      * @param storage The storage call handler
+     * @param text The user input
+     * @return String for command executed
      */
-//    public static void parseInput(TaskList taskList, Storage storage) {
-//        Scanner scan = new Scanner(System.in);
-//
-//        while (scan.hasNext()) {
-//            String test = scan.next().toLowerCase();
-//            if (checkBye(test)) {
-//                ui.exitLine();
-//                break;
-//            } else {
-//                String next = scan.nextLine().replaceFirst(" ", "");
-//                if (checkList(test)) {
-//                    taskList.displayList();
-//                } else if (checkFind(test)) {
-//                    taskList.findTask(next);
-//                } else if (checkDone(test)) {
-//                    try {
-//                        taskList.doneTask(next);
-//                        storage.updateFile();
-//                    } catch (DukeException e) {
-//                        System.out.println(ui.getBorder() + e.getMessage() + "\n" + ui.getBorder());
-//                    }
-//                } else if (checkDel(test)) {
-//                    try {
-//                        taskList.delTask(next);
-//                        storage.updateFile();
-//                    } catch (DukeException e) {
-//                        System.out.println(ui.getBorder() + e.getMessage() + "\n" + ui.getBorder());
-//                    }
-//                } else {
-//                    try {
-//                        taskList.addTask(test, next);
-//                        storage.updateFile();
-//                    } catch (DukeException e) {
-//                        System.out.println(ui.getBorder() + e.getMessage() + "\n" + ui.getBorder());
-//                    }
-//                }
-//            }
-//        }
-//        scan.close();
-//    }
-
     public static String parse(TaskList taskList, Storage storage, String text) {
         String output;
         if (text.contains(" ")) {
@@ -107,7 +67,7 @@ public class Parser {
                 return taskList.findTask(next);
             } else if (checkDone(test)) {
                 try {
-                    output =  taskList.doneTask(next);
+                    output = taskList.doneTask(next);
                     storage.updateFile();
                     return output;
                 } catch (DukeException e) {
@@ -119,14 +79,16 @@ public class Parser {
                     storage.updateFile();
                     return output;
                 } catch (DukeException e) {
-                    return e.getMessage();                }
+                    return e.getMessage();
+                }
             } else {
                 try {
                     output = taskList.addTask(test, next);
                     storage.updateFile();
                     return output;
                 } catch (DukeException e) {
-                    return e.getMessage();                }
+                    return e.getMessage();
+                }
             }
         } else {
             if (checkBye(text.toLowerCase())) {

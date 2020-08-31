@@ -30,9 +30,12 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
+    /**
+     * Initializes methods when launching GUI
+     */
     @FXML
     public void initialize() {
-        Region spacer =  new Region();
+        Region spacer = new Region();
         spacer.setMinHeight(20);
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         String text = ui.startUp(duke.getTaskList(), duke.getStorage());
@@ -51,7 +54,7 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         String response = duke.getResponse(input);
-        Region spacer =  new Region();
+        Region spacer = new Region();
         spacer.setMinHeight(20);
         Region spacer2 = new Region();
         spacer2.setMinHeight(20);

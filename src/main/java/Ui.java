@@ -4,6 +4,7 @@
 public class Ui {
     /**
      * Prints the exit line of the bot.
+     * @return String for exit line
      */
     public String exitLine() {
         return "Bye. Hope to see you again soon!\n";
@@ -13,11 +14,12 @@ public class Ui {
      * Prints the Welcome message depending on the save state.
      * @param taskList The handler for task list calls
      * @param storage The handler for storage calls
+     * @return String for welcome message
      */
     public String startUp(TaskList taskList, Storage storage) {
         storage.fileCheck();
         if (!storage.getFile().exists() || storage.getFile().length() == 0) {
-           return "Hello! I'm Duke\n"
+            return "Hello! I'm Duke\n"
                     + "What can I do for you?\n";
         } else {
             return "Well come back!\n" + "You still have "
@@ -29,6 +31,7 @@ public class Ui {
      * Prints the line for adding tasks.
      * @param toAdd The new task to add to the list
      * @param size  The size of current list
+     * @return String for adding tasks
      */
     public String addTaskLine(Task toAdd, int size) {
         return "Got it. I've added this task:\n" + "  " + toAdd + "\n"
@@ -39,12 +42,17 @@ public class Ui {
      * Prints the line for removing tasks.
      * @param toRemove The task to remove
      * @param size The size of current list
+     * @return String for removing tasks
      */
     public String removeTaskLine(Task toRemove, int size) {
         return "Noted. I've removed this task:\n" + "  " + toRemove + "\n"
                     + "Now you have " + size + " tasks in the list.\n";
     }
 
+    /**
+     * Prints the line for an unknown input.
+     * @return String for unknown input line
+     */
     public String unknownInputLine() {
         return "Below are the list of commands:\n"
                 + "list\n"
