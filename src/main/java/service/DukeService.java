@@ -77,7 +77,7 @@ public class DukeService {
             int parameter = Integer.parseInt(components[1]);
             dukeDomain.deleteTask(parameter - 1);
         } catch (NumberFormatException exception) {
-            printResponse("☹ OOPS!!! the task number has to be a postive integer.");
+            printResponse("☹ OOPS!!! the task number has to be a positive integer.");
         } catch (IndexOutOfBoundsException exception) {
             printResponse("☹ OOPS!!! the task number has to be valid");
         }
