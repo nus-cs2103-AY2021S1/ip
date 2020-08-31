@@ -38,10 +38,9 @@ public class Task {
         System.out.println(index + ". " +this.toString());
     }
 
-
     @Override
     /**
-     * The toString method ofTask
+     * The toString method of Task
      * Print the correct format of a task.
      */
     public String toString(){

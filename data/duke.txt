@@ -1,0 +1,4 @@
+T | 0 | homework
+D | 0 | return book | Monday
+D | 0 | project meeting | Mon 2-4pm
+T | 0 | project

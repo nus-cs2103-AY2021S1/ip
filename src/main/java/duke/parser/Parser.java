@@ -241,6 +241,10 @@ public class Parser {
 
                     processCommand(command);
 
+                    TaskStorage taskStorage = new TaskStorage(taskListManager);
+
+                    taskStorage.saveDataToFile();
+
                 }
             } catch(Exception e){
 
