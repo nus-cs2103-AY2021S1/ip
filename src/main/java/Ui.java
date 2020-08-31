@@ -48,6 +48,13 @@ public class Ui {
         System.out.printf(toPrint);
     }
 
+    public void printMatchingTaskList(TaskList matchingTaskList) {
+        String toPrint = horizontalLine + "     Here are the matching tasks in your list:\n";
+        toPrint += matchingTaskList.toString();
+        toPrint += horizontalLine;
+        System.out.printf(toPrint);
+    }
+
     public void printExitMessage() {
         String toPrint = horizontalLine + "     List saved! Goodbye!%n" + horizontalLine;
         System.out.printf(toPrint);

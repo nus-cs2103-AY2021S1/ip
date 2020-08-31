@@ -125,6 +125,14 @@ public class Parser {
             } catch (NumberFormatException e) {
                 throw new InvalidInputException("Error: Invalid number argument after 'delete'");
             }
+        case ("find"):
+            if (userInput.length() <= 5) {
+                throw new InvalidInputException("Error: Please specify search keyword");
+            }
+
+            String keyword = userInput.substring(5);
+
+            return new FindTaskCommand(keyword);
         }
 
         throw new InvalidInputException("Error: Invalid command keyword!");
