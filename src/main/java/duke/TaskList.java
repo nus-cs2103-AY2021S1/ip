@@ -22,7 +22,7 @@ public class TaskList {
      *
      * @param task
      */
-    public static void addTask(Task task) {
+    public static String addTask(Task task) {
         tasks.add(task);
         String str = "   ____________________________________________________________"
                 + "\n    Got it. I've added this task:"
@@ -30,10 +30,7 @@ public class TaskList {
                 + "\n    Now you have " + tasks.size() + " task(s) in the list."
                 + "\n   ____________________________________________________________\n";
         System.out.println(str);
-    }
-
-    public static void addStoredTask(Task task) {
-        tasks.add(task);
+        return str;
     }
 
     /**
@@ -50,12 +47,14 @@ public class TaskList {
      *
      * @throws DukeException
      */
-    public static void getListOfTasks() throws DukeException {
+    public static String getListOfTasks() throws DukeException {
+        String str = "";
         if (tasks.isEmpty()) {
             try {
                 throw new DukeException("", DukeExceptionType.EMPTY_LIST);
             } catch (DukeException e) {
                 System.err.println(e);
+                str += e;
             }
         } else {
             String lst = "   ____________________________________________________________"
@@ -66,7 +65,9 @@ public class TaskList {
             }
             lst += "\n   ____________________________________________________________\n";
             System.out.println(lst);
+            str += lst;
         }
+        return str;
     }
 
     /**
@@ -74,13 +75,14 @@ public class TaskList {
      *
      * @param index
      */
-    public static void done(Integer index) {
+    public static String done(Integer index) {
         tasks.get(index - 1).markAsDone();
         String str = "   ____________________________________________________________"
                 + "\n    Nice! I've marked this task as done:\n      "
                 + tasks.get(index - 1)
                 + "\n   ____________________________________________________________\n";
         System.out.println(str);
+        return str;
     }
 
     /**
@@ -88,13 +90,14 @@ public class TaskList {
      *
      * @param index
      */
-    public static void delete(Integer index) {
+    public static String delete(Integer index) {
         String str = "   ____________________________________________________________"
                 + "\n    Noted. I've removed this task:\n      "
                 + tasks.remove(index - 1)
                 + "\n    Now you have " + tasks.size() + " task(s) in the list."
                 + "\n   ____________________________________________________________\n";
         System.out.println(str);
+        return str;
     }
 
     /**
@@ -102,7 +105,8 @@ public class TaskList {
      *
      * @param keyword
      */
-    public static void findTasks(String keyword) {
+    public static String findTasks(String keyword) {
+        String str = "";
         ArrayList<Task> matchingTasks = new ArrayList<>();
         for (Task task: tasks) {
             if (task.getDescription().contains(keyword)) {
@@ -117,7 +121,7 @@ public class TaskList {
             }
         } else {
             int index = 1;
-            String str = "   ____________________________________________________________"
+            str += "   ____________________________________________________________"
                     + "\n    Here are the matching tasks in your list:";
             for (Task task : matchingTasks) {
                 str += "\n     " + index + ". " + task;
@@ -126,5 +130,6 @@ public class TaskList {
             str += "\n   ____________________________________________________________\n";
             System.out.println(str);
         }
+        return str;
     }
 }

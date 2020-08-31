@@ -113,7 +113,7 @@ public class DukeException extends Exception {
     /**
      * Returns error in user's input due to wrong time format.
      */
-    public static void wrongTimeFormat() {
-        System.err.println("    ERROR IN ADDING DEADLINE: WRONG FORMAT\n    Format: YYYY-MM-DD\n");
+    public static String wrongTimeFormat() {
+        return "    ERROR IN ADDING DEADLINE: WRONG FORMAT\n    Format: YYYY-MM-DD\n";
     }
 }
