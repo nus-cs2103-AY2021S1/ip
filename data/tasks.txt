@@ -1,2 +1,9 @@
-T | 0 | memememememememem
-T | 0 | lalalala
+T | 1 | memememememememem
+T | 1 | lalalala
+T | 1 | yyooyoyoy
+T | 1 | llalalala
+T | 1 | lalala
+T | 1 | lelelele
+T | 0 | nani
+D | 0 | something | 2020-09-08 | 21:00
+E | 0 | lab | 2020-08-31 | 15:20-15:30

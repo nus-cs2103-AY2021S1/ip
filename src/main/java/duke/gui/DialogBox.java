@@ -48,7 +48,6 @@ public class DialogBox extends HBox {
 
         dialog.getChildren().add(textFill);
         dialog.setLineSpacing(1.15);
-        dialog.setTranslateX(-5);
         dialog.setTextAlignment(TextAlignment.LEFT);
 
         displayPicture.setImage(img);
