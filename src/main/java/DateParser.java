@@ -48,9 +48,8 @@ public class DateParser {
         } else {
             return new TaskDate(LocalDate.parse(dateAndTime[0],
                     DateTimeFormatter.ofPattern("MMM dd yyyy HHmm"))
-
-                    .atTime(LocalTime.parse(dateAndTime[1],
-                            DateTimeFormatter.ofPattern("HHmm"))));
+                        .atTime(LocalTime.parse(dateAndTime[1],
+                                DateTimeFormatter.ofPattern("HHmm"))));
         }
     }
 

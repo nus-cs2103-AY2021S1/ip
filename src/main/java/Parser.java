@@ -6,8 +6,10 @@ public class Parser {
         if (consoleArg.length() <= 4) {
             throw new UnknownCommandException("Error: Missing task type keyword");
         }
+
         String[] parsedArr = consoleArg.substring(4).split(" ");
         String keyword = parsedArr[0];
+
         if (keyword.equals("todo")) {
             String name = "";
 
@@ -18,6 +20,7 @@ public class Parser {
                     name += parsedArr[i];
                 }
             }
+
             if (name.equals("")) {
                 throw new EmptyTaskDescriptionException("Error: Empty task name not allowed");
             }
@@ -47,6 +50,7 @@ public class Parser {
                     }
                 }
             }
+
             if (name.equals("")) {
                 throw new EmptyTaskDescriptionException("Error: Empty task name not allowed");
             }
@@ -61,6 +65,7 @@ public class Parser {
             String name = "";
             String timeRange = "";
             boolean nameOrTime = true;
+
             for (int i = 1; i < parsedArr.length; i++) {
                 if (nameOrTime) {
                     if (parsedArr[i].contains("/at")) {
@@ -69,6 +74,7 @@ public class Parser {
                     } else {
                         name += parsedArr[i] + " ";
                     }
+
                 } else {
                     if (i != parsedArr.length - 1) {
                         timeRange += parsedArr[i] + " ";

@@ -10,7 +10,6 @@ import java.nio.file.StandardOpenOption;
 import java.util.List;
 
 public class Storage {
-    private static String horizontalLine = "    ____________________________________________________________\n";
 
     private String pathString;
 
@@ -76,7 +75,7 @@ public class Storage {
         }
 
         try (BufferedWriter writer = Files.newBufferedWriter(listFilePath, StandardCharsets.UTF_8,
-                StandardOpenOption.WRITE)) {
+                                                                StandardOpenOption.WRITE)) {
             writer.write(stringToWrite, 0, stringToWrite.length());
             writer.flush();
 
