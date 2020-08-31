@@ -25,10 +25,6 @@ public class Duke {
         }
     }
 
-    public static void main(String[] args) {
-        new Duke("data/duke.txt").run();
-    }
-
     /**
      * Runs the chat bot program continuously until the user gives the exit program command.
      */
@@ -49,5 +45,9 @@ public class Duke {
                 ui.showLine();
             }
         }
+    }
+
+    public String getResponse(String input) {
+        return input;
     }
 }
