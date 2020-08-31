@@ -166,6 +166,24 @@ public class Parser {
 
                     newTask = new Todo(name);
 
+                }else if(words[0].equals("event")){
+
+                    if(numberOfWords == 1){
+                        throw new InvalidEventException("What is the event that you would like to be added to list?");
+                    }
+
+                    String content = command.split(" ", 2)[1];
+
+                    if(content.split(" /at ").length < 2){
+                        throw new InvalidEventException("Please enter both the name as well as the period of time of the event!");
+                    }
+
+                    String name = content.split(" /at ")[0];
+
+                    String timePeriod = content.split(" /at ")[1];
+
+                    newTask = new Event(name, timePeriod);
+
                 }else if(words[0].equals("deadline")){
 
                     if(numberOfWords == 1){
@@ -175,7 +193,7 @@ public class Parser {
                     String content = command.split(" ", 2)[1];
 
                     if(content.split(" /by ").length < 2){
-                        throw new InvalidDeadlineException("Please enter both the name as well as the due date of the deadline!");
+                        throw new InvalidDeadlineException("Please enter both the name as well as the due date of the event!");
                     }
 
                     String name = content.split(" /by ")[0];
@@ -187,24 +205,6 @@ public class Parser {
                     String formattedDueDate = timeConverter.convertTime(dueDate);
 
                     newTask = new Deadline(name, formattedDueDate);
-
-                }else if(words[0].equals("event")){
-
-                    if(numberOfWords == 1){
-                        throw new InvalidEventException("What is the event that you would like to be added to list?");
-                    }
-
-                    String content = command.split(" ", 2)[1];
-
-                    if(content.split(" /at ").length < 2){
-                        throw new InvalidEventException("Please enter both the name as well as the due date of the deadline!");
-                    }
-
-                    String name = content.split(" /at ")[0];
-
-                    String timePeriod = content.split(" /at ")[1];
-
-                    newTask = new Event(name, timePeriod);
 
                 }else{
 
