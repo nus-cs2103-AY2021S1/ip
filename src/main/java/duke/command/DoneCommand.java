@@ -1,10 +1,10 @@
 package duke.command;
 
 import duke.Storage;
-import duke.Ui;
 import duke.exception.DukeException;
 import duke.task.Task;
 import duke.task.TaskList;
+import duke.ui.Ui;
 
 /**
  * Encapsulates a command that will mark a task as done.
@@ -31,16 +31,17 @@ public class DoneCommand extends Command {
      * @param taskList          The list of tasks known by the chat bot.
      * @param ui                The Ui that is used by the chat bot.
      * @param storage           The storage used by the chat bot.
+     * @return                  Chat bot message
      * @throws DukeException    If the execution fails at any step.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         try {
             int num = Integer.parseInt(this.input);
             Task curr = taskList.getTask(num);
             curr.markAsDone();
             storage.updateTask(num, curr);
-            ui.replyDone(curr.toString());
+            return ui.replyDone(curr.toString());
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Please key in the number of an existing task to be marked as done!");
         }

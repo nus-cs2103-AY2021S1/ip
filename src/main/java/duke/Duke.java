@@ -6,7 +6,8 @@ import java.nio.file.Paths;
 import duke.command.Command;
 import duke.exception.DukeException;
 import duke.task.TaskList;
-
+import duke.ui.Ui;
+import javafx.application.Platform;
 
 /**
  * Personal chat bot to keep track of user's tasks.
@@ -39,36 +40,20 @@ public class Duke {
     }
 
     /**
-     * Runs Duke, waits for the user to interact with it and responds to the user.
-     * <p>
-     * Supports the commands:
-     * bye, done, delete, list, find, deadline, event, todo
-     * </p>
+     * Gets a response from the duke chat bot to reply the user input.
      *
-     * @param args user input.
+     * @param input input by the user through the GUI.
+     * @return the response given by Duke.
      */
-    public static void main(String[] args) {
-        Duke duke = new Duke();
-        duke.run();
-    }
-
-    /**
-     * Runs the duke chat bot by displaying messages using ui and parsing inputs using parser.
-     * Takes in command and executes it.
-     * If command is an exit command, while loop breaks and chat bot stops running.
-     */
-    public void run() {
-        ui.showWelcome();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                ui.showError(e.getMessage());
+    public String getResponse(String input) {
+        try {
+            Command c = Parser.parse(input);
+            if (c.isExit()) {
+                Platform.exit();
             }
+            return c.execute(this.tasks, this.ui, this.storage);
+        } catch (DukeException e) {
+            return (e.getMessage());
         }
     }
 }
