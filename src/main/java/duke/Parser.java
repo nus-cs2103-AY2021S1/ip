@@ -1,33 +1,46 @@
 package duke;
 
+/**
+ * Contains two parse functions, one for interpreting user input
+ * to get the correct Command used, and another function to separate
+ * strings with time into its description and time.
+ */
 class Parser {
 
     enum Command {
         BYE, LIST, DONE, DELETE, TODO, EVENT, DEADLINE, FIND, INVALID
     }
 
+    /**
+     * Given the full input string, this method checks the first
+     * few characters to see if the keyword corresponds to a specific
+     * Command.
+     *
+     * @param fullCommand The entire command from the user input.
+     * @return The Command corresponding to the keyword from the user.
+     */
     static Command parseCommand(String fullCommand) {
         String[] splitWords = fullCommand.split(" ");
         String keyword = splitWords[0].toLowerCase();
         switch (keyword) {
-            case "bye":
-                return Command.BYE;
-            case "list":
-                return Command.LIST;
-            case "done":
-                return Command.DONE;
-            case "delete":
-                return Command.DELETE;
-            case "todo":
-                return Command.TODO;
-            case "event":
-                return Command.EVENT;
-            case "deadline":
-                return Command.DEADLINE;
-            case "find":
-                return Command.FIND;
-            default:
-                return Command.INVALID;
+        case "bye":
+            return Command.BYE;
+        case "list":
+            return Command.LIST;
+        case "done":
+            return Command.DONE;
+        case "delete":
+            return Command.DELETE;
+        case "todo":
+            return Command.TODO;
+        case "event":
+            return Command.EVENT;
+        case "deadline":
+            return Command.DEADLINE;
+        case "find":
+            return Command.FIND;
+        default:
+            return Command.INVALID;
         }
     }
 

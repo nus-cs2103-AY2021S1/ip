@@ -1,5 +1,9 @@
 package duke;
 
+/**
+ * Wrapper exception for exceptions thrown when
+ * Duke program is run.
+ */
 class DukeException extends Exception {
 
     private String errorMsg;

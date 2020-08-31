@@ -1,5 +1,8 @@
 package task;
 
+/**
+ * A To-do is a Task to be done some time in the future.
+ */
 public class Todo extends Task {
 
     public Todo(String description) {

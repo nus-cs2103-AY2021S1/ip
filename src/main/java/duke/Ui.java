@@ -2,6 +2,9 @@ package duke;
 
 import java.util.Scanner;
 
+/**
+ * Handles console input and output.
+ */
 class Ui {
 
     String introduction;
@@ -22,27 +25,48 @@ class Ui {
                 "find: Find a task which matches your description.";
     }
 
+    /**
+     * Reads input from user.
+     * @return Console input string from user.
+     */
     String readCommand() {
         System.out.println("Enter input:");
         return reader.hasNextLine() ? reader.nextLine() : "";
     }
 
+    /**
+     * Prints the introduction message onto console.
+     */
     void showIntroduction() {
         System.out.println(introduction);
     }
 
+    /**
+     * Prints a dashed line to indicate a new section of the program.
+     */
     void showLine() {
         System.out.println("------------------------------------------------");
     }
 
+    /**
+     * Displays messages onto console.
+     * @param message Message to printed.
+     */
     void showMessage(String message) {
         System.out.println(message);
     }
 
+    /**
+     * Closes the Scanner to save resources.
+     */
     void closeUi() {
         this.reader.close();
     }
 
+    /**
+     * Prints an exception's message onto console.
+     * @param e Exception to be printed onto console.
+     */
     void showException(Exception e) {
         System.out.println(e);
     }

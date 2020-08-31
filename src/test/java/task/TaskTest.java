@@ -3,7 +3,15 @@ package task;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+/**
+ * JUnit test class to test the Task class.
+ */
 class TaskTest {
+
+    /**
+     * Tests if a sample to-do Task produces the right
+     * description for both the Ui and the Database.
+     */
     @Test
     void testTodoCorrectDescription() {
         Todo todo = new Todo("Deliver Parcel", true);
@@ -13,6 +21,10 @@ class TaskTest {
         assertEquals("[T][✓] Deliver Parcel", todoText);
     }
 
+    /**
+     * Tests if a sample Event produces the right
+     * description for both the Ui and the Database.
+     */
     @Test
     void testEventCorrectDescription() {
         Event event = new Event("Concert with Friends", "OCTOBER 20 2021 12:45 AM", false);
@@ -22,6 +34,10 @@ class TaskTest {
         assertEquals("[E][X] Concert with Friends (at: OCTOBER 20 2021 12:45 AM)", eventDescription);
     }
 
+    /**
+     * Tests if a sample Deadline Task produces the right
+     * description for both the Ui and the Database.
+     */
     @Test
     void testDeadlineCorrectDescription() {
         Deadline deadline = new Deadline(

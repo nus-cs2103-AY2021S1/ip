@@ -9,12 +9,19 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
+/**
+ * JUnit test class to test the Storage class.
+ */
 class StorageTest {
+
+    /**
+     * Tests if a sample TaskList loads correctly.
+     */
     @Test
     void testStorage_sampleTaskList_LoadsCorrectly() {
         Storage storage = new Storage(
                 System.getProperty("user.dir")
-                + "\\src\\test\\data\\testTaskListToLoad.txt"
+                        + "\\src\\test\\data\\testTaskListToLoad.txt"
         );
 
         try {
@@ -25,6 +32,9 @@ class StorageTest {
         }
     }
 
+    /**
+     * Tests if a sample TaskList stores correctly..
+     */
     @Test
     void testStorage_sampleTaskList_StoresCorrectly() {
         TaskList sampleList = new TaskList();
@@ -45,6 +55,9 @@ class StorageTest {
         }
     }
 
+    /**
+     * Tests if a invalid file path will trigger an exception.
+     */
     @Test
     void testStorage_fakeFilePath_willThrowExceptionOnStore() {
         Storage storage = new Storage("fakeFilePath!");
