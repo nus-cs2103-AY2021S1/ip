@@ -9,7 +9,7 @@ public class Task {
     protected boolean isDone;
 
     /**
-     * Initialize a Task object.
+     * Initializes a Task object.
      * @param description A string describing
      *                    the task.
      */
@@ -19,7 +19,7 @@ public class Task {
     }
 
     /**
-     * Return tick when the task is done,
+     * Returns tick when the task is done,
      * cross when the task is not done.
      *
      * @return A string showing a tick or
@@ -32,8 +32,7 @@ public class Task {
     }
 
     /**
-     * This method is to set the task
-     * as done.
+     * Sets the task as done.
      */
     public void setDone() {
         this.isDone = true;

@@ -4,21 +4,22 @@ import java.util.ArrayList;
 
 /**
  * This class is to contain tasks.
- * @param <T>
+ * @param <T> The data type of the object in the task list.
  */
 public class TaskList<T> {
     private ArrayList<T> taskList;
 
     /**
-     * Initialize a TaskList.
+     * Initializes a TaskList.
      */
     public TaskList() {
         this.taskList = new ArrayList<>();
     }
 
     /**
-     * This is to add new tasks into
+     * Adds new tasks into
      * the TaskList.
+     *
      * @param event new task to be added.
      */
     public void addMemory(T event) {
@@ -26,8 +27,8 @@ public class TaskList<T> {
     }
 
     /**
-     * This is to get all Tasks in the list.
-     * @return
+     * Gets all Tasks in the list.
+     * @return The arrayList which stores all the tasks.
      */
     public ArrayList<T> getTaskList() {
         return this.taskList;

@@ -1,73 +1,45 @@
 package Duke.exception;
 
-import Duke.main.Formating;
+import Duke.main.Format;
 
 /**
  * This class consists all exceptions related to Duke input.
  */
 public class DukeException {
-
     public static void classCastException() {
-        System.out.println(
-                new Formating<>(Exceptions.CLASSCASTEXCEPTION.toString())
-        );
+        System.out.println(new Format<>(Exceptions.CLASSCASTEXCEPTION.toString()));
     }
 
     public static void numberFormatException() {
-        System.out.println(
-                new Formating<>(Exceptions.NUMBERFORMATEXCEPTION.toString())
-        );
+        System.out.println(new Format<>(Exceptions.NUMBERFORMATEXCEPTION.toString()));
     }
 
     public static void numberExcessException() {
-        System.out.println(
-                new Formating<>(Exceptions.NUMBEREXCESSEXCEPTION.toString())
-        );
+        System.out.println(new Format<>(Exceptions.NUMBEREXCESSEXCEPTION.toString()));
     }
 
     public static void emptyTaskException() {
-        System.out.println(
-                new Formating<>(Exceptions.EMPTYTASKEXCEPTION.toString())
-        );
+        System.out.println(new Format<>(Exceptions.EMPTYTASKEXCEPTION.toString()));
     }
 
     public static void inputFormatException() {
-        System.out.println(
-                new Formating<>(Exceptions.INPUTFORMATEXCEPTION.toString())
-        );
+        System.out.println(new Format<>(Exceptions.INPUTFORMATEXCEPTION.toString()));
     }
 
     public static void timeMissingException() {
-        System.out.println(
-                new Formating<>(Exceptions.NOTIMEEXCEPTION.toString())
-        );
+        System.out.println(new Format<>(Exceptions.NOTIMEEXCEPTION.toString()));
     }
 
-<<<<<<< HEAD
-    public static void fileException() {
-        System.out.println(new Formating<>(Exceptions.FILEEXCEPTION.toString()));
-    }
-
-    public static void readLineException() {
-        System.out.println(new Formating<>(Exceptions.READLINEEXCEPTION.toString()));
-=======
     public static void FileException() {
-        System.out.println(
-                new Formating<>(Exceptions.FILEEXCEPTION.toString())
-        );
+        System.out.println(new Format<>(Exceptions.FILEEXCEPTION.toString()));
     }
 
     public static void ReadLineException() {
-        System.out.println(
-                new Formating<>(Exceptions.READLINEEXCEPTION.toString())
-        );
->>>>>>> branch-A-JavaDoc
+        System.out.println(new Format<>(Exceptions.READLINEEXCEPTION.toString()));
     }
 
 
     public static void timeFormatException() {
-        System.out.println(
-                new Formating<>(Exceptions.TIMEFORMATEXCEPTION.toString())
-        );
+        System.out.println(new Format<>(Exceptions.TIMEFORMATEXCEPTION.toString()));
     }
 }

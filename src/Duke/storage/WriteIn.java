@@ -8,14 +8,14 @@ import java.io.IOException;
 
 /**
  * This class is to write the information
- * into Duke.txt at ./data.
+ * into the file provided in the Directory class.
  */
 public class WriteIn {
     private String path;
     private boolean append_to_file;
 
     /**
-     * Initialize a WriteIn object.
+     * Initializes a WriteIn object.
      *
      * @param path A string which contains
      *             the directory of the file
@@ -28,16 +28,13 @@ public class WriteIn {
         this.append_to_file = append_to_file;
     }
 
-<<<<<<< HEAD
-    public void writeToFile(String input) {
-=======
     /**
-     * This method is to write the input into
-     * Duke.txt.
+     * Writes the input into the file whose path is from the
+     * Directory class.
+     *
      * @param input The input from the users.
      */
     public void writeToFile (String input) {
->>>>>>> branch-A-JavaDoc
         try {
             FileWriter writeIn = new FileWriter(path, append_to_file);
             PrintWriter printWrite = new PrintWriter(writeIn);
@@ -47,7 +44,7 @@ public class WriteIn {
             printWrite.close();
 
         } catch (IOException e) {
-            DukeException.fileException();
+            DukeException.FileException();
         }
     }
 }

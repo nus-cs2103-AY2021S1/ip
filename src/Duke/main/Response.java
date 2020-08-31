@@ -8,7 +8,7 @@ public class Response {
     protected String response;
 
     /**
-     * Initialize a Response.
+     * Initializes a Response.
      *
      * @param response A string which
      *                 is the content of

@@ -8,19 +8,19 @@ import Duke.task.Todo;
 
 /**
  * This class handles the final format
- * that is printed out by Duke
+ * that is printed out by Duke.
  *
  * @param <T>: T is the data type of the input.
  */
-public class Formating<T> {
+public class Format<T> {
     private final T content;
 
     /**
-     * Initialize Formating object with content.
+     * Initializes Format object with content.
      *
      * @param content object of any type.
      */
-    public Formating(T content) {
+    public Format(T content) {
         this.content = content;
     }
 
@@ -37,13 +37,13 @@ public class Formating<T> {
      * This method only can be used when the content
      * is of the type of String.
      *
-     * Returns a Formating object whose content has been
+     * Returns a Format object whose content has been
      * shortened by eliminating the extra spaces at the
      * beginning of the content and at the end of the content.
      *
-     * @return The above described Formating object.
+     * @return The above described Format object.
      */
-    public Formating<String> shorten() {
+    public Format<String> shorten() {
         try {
             String input = (String) content;
             int length = input.length();
@@ -58,9 +58,9 @@ public class Formating<T> {
             }
 
             if (frontPos > backPos) {
-                return new Formating<>("");
+                return new Format<>(FormatString.EMPTY.toString());
             }
-            return new Formating<>(input.substring(frontPos, backPos + 1));
+            return new Format<>(input.substring(frontPos, backPos + 1));
         } catch (ClassCastException e) {
             DukeException.classCastException();
             return null;
@@ -80,10 +80,10 @@ public class Formating<T> {
     public Task stringToTask() {
         try {
             String input = (String) content;
-            String[] inputArray = input.split(" ");
+            String[] inputArray = input.split(FormatString.SPACE.toString());
             char typeOfTask = inputArray[0].charAt(1);
             boolean isDone = false;
-            if (inputArray[0].substring(4, 5).equals("\u2713")) {
+            if (inputArray[0].substring(4, 5).equals(FormatString.TICK.toString())) {
                 isDone = true;
             }
 
@@ -114,22 +114,23 @@ public class Formating<T> {
 
     @Override
     public String toString() {
-        String underscore =
-                "  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
-
         if (this.content instanceof Task) {
 
-            return underscore + "\n" +
-                    Status.TASKADDED.toString() +
-                    content + "\n" +
-                    String.format(Status.REPORT.toString(), Parser.taskList.getTaskList().size()) +
-                    "\n" +
-                    underscore;
+            return  FormatString.UNDERSCORE.toString() +
+                    FormatString.NEXTLINE.toString() +
+                    Statement.TASKADDED.toString() +
+                    content +
+                    FormatString.NEXTLINE.toString() +
+                    String.format(Statement.REPORT.toString(), Parser.taskList.getTaskList().size()) +
+                    FormatString.NEXTLINE.toString() +
+                    FormatString.UNDERSCORE;
         }
 
-        return underscore + "\n" +
-                content + "\n" +
-                underscore;
+        return  FormatString.UNDERSCORE.toString() +
+                FormatString.NEXTLINE.toString() +
+                content +
+                FormatString.NEXTLINE.toString() +
+                FormatString.UNDERSCORE.toString();
     }
 }
 

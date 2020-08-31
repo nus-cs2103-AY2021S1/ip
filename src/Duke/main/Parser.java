@@ -4,7 +4,11 @@ import Duke.exception.DukeException;
 import Duke.storage.EditFile;
 import Duke.storage.ReadFile;
 import Duke.storage.WriteIn;
-import Duke.task.*;
+import Duke.task.Deadline;
+import Duke.task.Event;
+import Duke.task.Task;
+import Duke.task.TaskList;
+import Duke.task.Todo;
 
 /**
  * This class deals with the strings from the client
@@ -18,14 +22,14 @@ public class Parser {
     private static final int taskTime = 2;
 
     /**
-     * This is to initialize the Parser.
+     * Initializes the Parser.
      */
     public Parser() {
         taskList = new TaskList<>();
     }
 
     /**
-     * This method is to refresh the taskList.
+     * Refreshes the taskList.
      */
     public static void reloadTaskList() {
         taskList = new TaskList<>();
@@ -33,61 +37,53 @@ public class Parser {
     }
 
     /**
-     * Return true if the input from the
+     * Returns true if the input from the
      * user is "bye".
      *
      * @param inputFromClient Input from the
      *                        user.
-     * @return Return true if input is "bye".
+     * @return Returns true if input is "bye".
      */
     public boolean isEnd(String inputFromClient) {
-        return inputFromClient.equals(Status.BYE.name().toLowerCase());
+        return inputFromClient.equals(Command.BYE.toString());
     }
 
     /**
-     * The method is to run the Parser.
+     * Runs the Parser.
      *
      * @param order The order is the string after
-     *              being shortened by Formating.shorten().
+     *              being shortened by Format.shorten().
      */
     public static void run(String order) {
 
         extract = extract(order);
         reloadTaskList();
 
-        if (order.equals(Status.LIST.name().toLowerCase())) {
+        if (order.equals(Command.LIST.toString())) {
             System.out.println(
-                    new Formating<>(Status.LIST.toString() + taskList)
+                    new Format<>(Statement.LIST.toString() + taskList)
             );
         } else {
 
-
-            if (extract[command].equals(Status.DONE.name().toLowerCase())) {
-                done();
-            } else if (extract[command].equals(Status.DELETE.name().toLowerCase())){
-                delete();
-            } else if (extract[command].equals((Status.FIND.name().toLowerCase()))) {
-                find(extract[taskDetail]);
-            } else if (order.length() == 0) { }
-
-            else {
-                identifier();
+            if (order.length() > 0) {
+                if (extract[command].equals(Command.DONE.toString())) {
+                    done();
+                } else if (extract[command].equals(Command.DELETE.toString())) {
+                    delete();
+                } else if (extract[command].equals((Command.FIND.toString()))) {
+                    find(extract[taskDetail]);
+                } else {
+                    identifier();
+                }
             }
         }
     }
 
-<<<<<<< HEAD
-    public static void done() {
-=======
     /**
-     * This method is to set done the corresponding
+     * Sets done the corresponding
      * task on both the taskList and Duke.txt.
-     *
-     * @param order The order is the string after
-     *              being shortened by Formating.shorten().
-     */
-    public static void done(String order) {
->>>>>>> branch-A-JavaDoc
+      */
+    public static void done() {
         try {
             int num = Integer.parseInt(extract[taskDetail]);
             if (num > taskList.getTaskList().size()) {
@@ -99,25 +95,18 @@ public class Parser {
                 editFile.setTaskDone(num);
 
                 System.out.println(
-                        new Formating<>(new Response(Status.DONE.toString() + task)));
+                        new Format<>(new Response(Statement.DONE.toString() + task)));
             }
         } catch (NumberFormatException e) {
             DukeException.numberFormatException();
         }
     }
 
-<<<<<<< HEAD
-    public static void delete() {
-=======
     /**
-     * This method is to delete the corresponding
+     * Deletes the corresponding
      * task on both the taskList and Duke.txt.
-     *
-     * @param order The order is the string after
-     *              being shortened by Formating.shorten().
      */
-    public static void delete(String order) {
->>>>>>> branch-A-JavaDoc
+    public static void delete() {
         try {
             int num = Integer.parseInt(extract[taskDetail]);
 
@@ -130,44 +119,50 @@ public class Parser {
                 editFile.deleteLine(num);
 
                 String response =
-                        Status.DELETE.toString() +
+                        Statement.DELETE.toString() +
                                 task + "\n" +
                                 String.format
-                                        (Status.REPORT.toString(), taskList.getTaskList().size());
+                                        (Statement.REPORT.toString(), taskList.getTaskList().size());
 
                 System.out.println(
-                        new Formating<>(new Response(response)));
+                        new Format<>(new Response(response)));
             }
         } catch (NumberFormatException e) {
             DukeException.numberFormatException();
         }
     }
 
-<<<<<<< HEAD
+    /**
+     * Finds the related content from the task details
+     * of the tasks in the taskList.
+     *
+     * @param content The user input content.
+     */
     public static void find(String content) {
         taskList = new TaskList<>();
         ReadFile readFile = new ReadFile(Directory.FILEDIRECTORY.toString());
         readFile.matchContent(content);
         System.out.println(
-                new Formating<>(taskList)
+                new Format<>(taskList)
         );
     }
 
-    private static String[] extract(String description) {
-=======
     /**
-     * This method is to identify the type of Tasks
-     * from the description passed down from the upper
-     * level, which is essentially the input from the
-     * user.
+     * Extracts out the type of command,
+     * and possibly the task detail and
+     * task time if the command is to
+     * add a new task.
      *
-     * @param description The description passed down
-     *                    from the upper level, which
-     *                    is essentially the input from
-     *                    the user.
+     * @param description The user input.
+     * @return Returns a string array whose
+     *         length is 3 and first element
+     *         is the command string, second
+     *         element is the task detail,
+     *         and the third element is the
+     *         task time.
+     *
      */
-    public static void identifier(String description) {
->>>>>>> branch-A-JavaDoc
+    private static String[] extract(String description) {
         int len = description.length();
         int pointer = 0;
 
@@ -189,7 +184,7 @@ public class Parser {
         }
 
         //details of the description is found
-        extract[taskDetail] = new Formating<>(
+        extract[taskDetail] = new Format<>(
                 description
                         .substring(pointer + 1, separator)
                 )
@@ -202,7 +197,7 @@ public class Parser {
 
         //time of the description is found
         if (separator < len - 1) {
-            extract[taskTime] = new Formating<>(
+            extract[taskTime] = new Format<>(
                     description
                             .substring(separator + 1)
                     )
@@ -212,6 +207,12 @@ public class Parser {
         return extract;
     }
 
+    /**
+     * Identifies the type of Tasks
+     * from the description passed down from the upper
+     * level, which is essentially the input from the
+     * user.
+     */
     public static void identifier() {
         String identity = extract[command];
         String detail = extract[taskDetail];
@@ -219,9 +220,9 @@ public class Parser {
         System.out.println(identity);
 
         //to check if the input is not a todo or event or deadline
-        if (!identity.equals(Status.TODO.toString())
-                & !identity.equals(Status.EVENT.toString())
-                & !identity.equals(Status.DEADLINE.toString())) {
+        if (!identity.equals(Command.TODO.toString())
+                & !identity.equals(Command.EVENT.toString())
+                & !identity.equals(Command.DEADLINE.toString())) {
             DukeException.inputFormatException();
             return;
         }
@@ -233,7 +234,7 @@ public class Parser {
         }
 
         Task task;
-        if (identity.equals(Status.TODO.toString())) {
+        if (identity.equals(Command.TODO.toString())) {
 
             task = new Todo(detail);
 
@@ -241,7 +242,7 @@ public class Parser {
             try {
                 Time date = new Time(time);
 
-                if (identity.equals(Status.DEADLINE.toString())) {
+                if (identity.equals(Command.DEADLINE.toString())) {
                     task = new Deadline(detail, date.toString());
                 } else {
                     task = new Event(detail, date.toString());
@@ -254,9 +255,9 @@ public class Parser {
         taskList.addMemory(task);
         WriteIn data = new WriteIn(Directory.FILEDIRECTORY.toString(), true);
         data.writeToFile(task.toString());
-        Formating<Task> formatedResponse =
-                new Formating<>(task);
-        System.out.println(formatedResponse);
+        Format<Task> ResponseWithFormat =
+                new Format<>(task);
+        System.out.println(ResponseWithFormat);
     }
 
 

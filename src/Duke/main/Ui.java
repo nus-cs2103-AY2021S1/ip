@@ -9,7 +9,7 @@ public class Ui {
     private Scanner scanner;
 
     /**
-     * Initialize a Ui.
+     * Initializes a Ui.
      */
     public Ui() {
         scanner = new Scanner(System.in);
@@ -26,38 +26,38 @@ public class Ui {
     }
 
     /**
-     * This method eliminates the spaces
+     * Eliminates the spaces
      * around the user input.
      *
      * @return A string with spaces around it.
      */
     public String conciseInput() {
         String extract = readFromClient();
-        return new Formating<>(extract).shorten().getContent();
+        return new Format<>(extract).shorten().getContent();
     }
 
     /**
-     * This method prints the beginning greeting that
+     * Prints the beginning greeting that
      * a user will receive at the start of Duke operation.
      */
     public void greet() {
         System.out.println(
-                new Formating<>(
-                        new Response(Status.GREET.toString()
+                new Format<>(
+                        new Response(Statement.GREET.toString()
                         )
                 )
         );
     }
 
     /**
-     * This method prints the ending words that
+     * Prints the ending words that
      * a user will receive after he inputs "bye"
      */
     public void exit() {
         scanner.close();
         System.out.println(
-                new Formating<>(
-                        new Response(Status.BYE.toString()
+                new Format<>(
+                        new Response(Statement.BYE.toString()
                         )
                 )
         );

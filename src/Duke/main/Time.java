@@ -11,7 +11,7 @@ public class Time {
     private LocalDate localDate;
 
     /**
-     * Initialize a Time.
+     * Initializes a Time.
      * @param time A string of format
      *             of "yyyy-mm-dd".
      */

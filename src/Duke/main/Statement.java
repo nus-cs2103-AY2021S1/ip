@@ -1,11 +1,11 @@
 package Duke.main;
 
 /**
- * This enum class consist of
+ * This enum class consists of
  * all pattern strings printed out
  * by Duke except the exceptions.
  */
-public enum Status {
+public enum Statement {
     GREET {
         @Override
         public String toString() {
@@ -53,29 +53,6 @@ public enum Status {
         }
     },
 
-
-
-    TODO {
-        @Override
-        public String toString() {
-            return "todo";
-        }
-    },
-
-    DEADLINE {
-        @Override
-        public String toString() {
-            return "deadline";
-        }
-    },
-
-    EVENT {
-        @Override
-        public String toString() {
-            return "event";
-        }
-    },
-
     TASKADDED {
         @Override
         public String toString() {
@@ -89,15 +66,5 @@ public enum Status {
         public String toString() {
             return "    Now you have %d tasks in the list.";
         }
-    },
-
-
-    FINISHED {
-        @Override
-        public String toString() {
-            return "\u2713";
-        }
     }
-
-
 }

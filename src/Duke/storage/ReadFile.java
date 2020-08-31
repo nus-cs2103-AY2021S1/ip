@@ -1,22 +1,22 @@
 package Duke.storage;
 
 import Duke.exception.DukeException;
+import Duke.main.Format;
 import Duke.main.Parser;
-import Duke.main.Formating;
 
 import java.io.IOException;
 import java.io.FileReader;
 import java.io.BufferedReader;
 
 /**
- * This class is to read the Duke.txt
- * at ./data.
+ * This class is to read the file in
+ * the Directory class.
  */
 public class ReadFile {
     private String path;
 
     /**
-     * Initialize a ReadFile object.
+     * Initializes a ReadFile object.
      *
      * @param path A string which contains
      *             the directory of the file
@@ -27,8 +27,7 @@ public class ReadFile {
     }
 
     /**
-     * This method is to convert the
-     * tasks in Duke.txt into Parser.taskList.
+     * Converts the tasks in Directory file into Parser.taskList.
      */
     public void readFile() {
         try {
@@ -38,15 +37,15 @@ public class ReadFile {
             String currentLine = textReader.readLine();
 
             while (currentLine != null) {
-                Formating<String> stringFormating = new Formating<>(currentLine);
-                Parser.taskList.addMemory(stringFormating.stringToTask());
+                Format<String> stringFormat = new Format<>(currentLine);
+                Parser.taskList.addMemory(stringFormat.stringToTask());
                 currentLine = textReader.readLine();
             }
 
             textReader.close();
 
         } catch (IOException e) {
-            DukeException.fileException();
+            DukeException.FileException();
         }
     }
 
@@ -59,8 +58,8 @@ public class ReadFile {
 
             while (currentLine != null) {
                 if (currentLine.contains(content)) {
-                    Formating<String> stringFormating = new Formating<>(currentLine);
-                    Parser.taskList.addMemory(stringFormating.stringToTask());
+                    Format<String> stringFormat = new Format<>(currentLine);
+                    Parser.taskList.addMemory(stringFormat.stringToTask());
                 }
                 currentLine = textReader.readLine();
             }
