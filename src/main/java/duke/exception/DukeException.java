@@ -10,6 +10,6 @@ public class DukeException extends Exception {
      * @param msg Message to be displayed when exception is thrown.
      */
     protected DukeException(String msg) {
-        super(String.format("☹OOPS!!! %s", msg));
+        super(String.format("OOPS!!! %s", msg));
     }
 }

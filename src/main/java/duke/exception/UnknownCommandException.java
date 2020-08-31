@@ -27,8 +27,6 @@ public class UnknownCommandException extends DukeException {
         super(UnknownCommandException.getListOfCommands());
     }
 
-
-
     private static String getListOfCommands() {
         StringBuilder str1 = new StringBuilder();
         str1.append(MSG_1);

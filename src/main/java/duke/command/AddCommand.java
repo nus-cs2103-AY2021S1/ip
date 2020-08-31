@@ -38,9 +38,9 @@ public abstract class AddCommand extends Command {
      * @param ui User Interface object.
      * @param storage Storage object.
      */
-    protected void addTask(Task newTask, TaskList tasks, Ui ui, Storage storage) {
+    protected String addTask(Task newTask, TaskList tasks, Ui ui, Storage storage) {
         tasks.add(newTask);
-        ui.addTask(newTask, tasks.size());
         storage.update(tasks);
+        return ui.addTask(newTask, tasks.size());
     }
 }

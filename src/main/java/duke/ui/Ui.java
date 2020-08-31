@@ -1,7 +1,5 @@
 package duke.ui;
 
-import java.util.Scanner;
-
 import duke.task.Task;
 import duke.tasklist.TaskList;
 
@@ -10,80 +8,39 @@ import duke.tasklist.TaskList;
  */
 public class Ui {
 
-    private final Scanner scanner;
-
-    /**
-     * Initialises the Ui object and scanner.
-     */
-    public Ui() {
-        this.scanner = new Scanner(System.in);
-    }
-
-    /**
-     * Takes in one line of user input.
-     *
-     * @return User input.
-     */
-    public String readCommand() {
-        return scanner.nextLine();
-    }
-
-    /**
-     * Prints the formatted input message.
-     *
-     * @param msg Input message.
-     */
-    public void printMsg(String msg) {
-        String separator = "   ---------------------------------------------------------------------------\n";
-        System.out.print(separator);
-        System.out.printf("    %s\n", msg);
-        System.out.println(separator);
-    }
-
     /**
      * Greets the user upon starting the program.
      */
-    public void greetings() {
-        System.out.println("Hello, I'm Duke!\nWhat can I do for you?");
+    public String greetings() {
+        return "Hello, I'm Duke!\nWhat can I do for you?";
     }
 
     /**
-     * Prints the goodbye message.
-     * Closes scanner.
+     * Retrieves the goodbye message.
      */
-    public void goodBye() {
-        printMsg("Bye! Hope to see you again soon! ☺");
-        scanner.close();
+    public String goodBye() {
+        return "Bye! Hope to see you again soon!";
     }
 
     /**
      * Prints the file creation message.
      */
-    public void fileCreationError() {
-        System.out.println("Error in creating file.\n");
+    public String fileCreationError() {
+        return "Error in creating file.\n";
     }
 
     /**
      * Prints the file update error.
      */
-    public void fileUpdateError() {
-        System.out.println("Error in updating file\n");
+    public String fileUpdateError() {
+        return "Error in updating file\n";
     }
 
     /**
      * Prints the file read error when reading from the CSV file.
      */
-    public void fileReadingError() {
-        System.out.println("Error in reading from csv file\n");
-    }
-
-    /**
-     * Prints out a message with basic formatting.
-     *
-     * @param input Input message.
-     */
-    public void printBasic(String input) {
-        System.out.printf("%s\n\n", input);
+    public String fileReadingError() {
+        return "Error in reading from csv file\n";
     }
 
     /**
@@ -91,8 +48,8 @@ public class Ui {
      *
      * @param current Input task.
      */
-    public void markTaskAsDone(Task current) {
-        printMsg(String.format("Nice! I've marked this task as done:\n      %s", current));
+    public String markTaskAsDone(Task current) {
+        return String.format("Nice! I've marked this task as done:\n      %s", current);
     }
 
     /**
@@ -101,9 +58,9 @@ public class Ui {
      * @param current Current task.
      * @param size Size of task list.
      */
-    public void deleteTask(Task current, int size) {
-        printMsg(String.format("Noted. I've removed this task:\n      %s\n"
-                + "    Now you have %d tasks in the list.", current, size));
+    public String deleteTask(Task current, int size) {
+        return String.format("Noted. I've removed this task:\n      %s\n"
+            + "Now you have %d tasks in the list.", current, size);
     }
 
     /**
@@ -112,16 +69,16 @@ public class Ui {
      * @param newTask New task added.
      * @param size Size of task list.
      */
-    public void addTask(Task newTask, int size) {
-        printMsg(String.format("Got it. I've added this task:\n      %s\n"
-                + "    Now you have %d tasks in the list.", newTask, size));
+    public String addTask(Task newTask, int size) {
+        return String.format("Got it. I've added this task:\n      %s\n"
+            + "Now you have %d tasks in the list.", newTask, size);
     }
 
     /**
      * Prints the empty task list message.
      */
-    public void emptyTaskList() {
-        printMsg("You currently have no tasks in the list.");
+    public String emptyTaskList() {
+        return "You currently have no tasks in the list.";
     }
 
     /**
@@ -130,7 +87,7 @@ public class Ui {
      * @param tasks Task list.
      * @param extra Extra word to add in, if any.
      */
-    public void showTaskList(TaskList tasks, String extra) {
+    public String showTaskList(TaskList tasks, String extra) {
         StringBuilder str1 = new StringBuilder();
         str1.append(String.format("Here are the %s tasks in your list:\n", extra));
         int size = tasks.size();
@@ -138,7 +95,7 @@ public class Ui {
             str1.append(String.format("     %d.%s\n", i + 1, tasks.get(i)));
         }
         str1.append(String.format("     %d.%s", size, tasks.get(size - 1)));
-        printMsg(str1.toString());
+        return str1.toString();
     }
 
     /**
@@ -146,7 +103,7 @@ public class Ui {
      *
      * @param queryWord Word use to query task list.
      */
-    public void emptyFind(String queryWord) {
-        printMsg(String.format("There are no matching tasks with the keyword %s.", queryWord));
+    public String emptyFind(String queryWord) {
+        return String.format("There are no matching tasks with the keyword %s.", queryWord);
     }
 }

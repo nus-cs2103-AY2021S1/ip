@@ -7,6 +7,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import duke.exception.InvalidFileFormatException;
 import duke.task.Task;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
@@ -57,14 +58,12 @@ public class Storage {
                 String line = br.readLine();
                 while (line != null) {
                     Task newTask = CsvConverter.parseToTask(line, ui);
-                    if (newTask != null) {
-                        taskList.add(newTask);
-                    }
+                    taskList.add(newTask);
                     line = br.readLine();
                 }
             }
             return taskList;
-        } catch (IOException e) {
+        } catch (IOException | InvalidFileFormatException e) {
             ui.fileReadingError();
             return taskList;
         }
@@ -92,6 +91,6 @@ public class Storage {
 
     private String convertToCsvFormat(Task task) {
         return String.format("%s  ,%s  ,%s  ,%s\n",
-                task.getTaskName(), task.getDescription(), task.getTime(), task.getStatus());
+            task.getTaskName(), task.getDescription(), task.getTime(), task.getStatus());
     }
 }

@@ -17,11 +17,11 @@ public class ShowCommand extends Command {
      * @param storage Storage object.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         if (tasks.isEmpty()) {
-            ui.emptyTaskList();
+            return ui.emptyTaskList();
         } else {
-            ui.showTaskList(tasks, "");
+            return ui.showTaskList(tasks, "");
         }
     }
 }

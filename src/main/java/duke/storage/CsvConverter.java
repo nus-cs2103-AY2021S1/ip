@@ -18,30 +18,25 @@ public class CsvConverter {
      * @param ui User interface.
      * @return Task.
      */
-    protected static Task parseToTask(String input, Ui ui) {
-        try {
-            String[] inputArr = input.split("\\s{2},", 4);
-            if (inputArr.length < 4) {
-                throw new InvalidFileFormatException();
-            }
-            String taskType = inputArr[0].toUpperCase();
-            String description = inputArr[1];
-            String time = inputArr[2];
-            String status = inputArr[3];
-            boolean isDone = checkStatus(status);
+    protected static Task parseToTask(String input, Ui ui) throws InvalidFileFormatException {
+        String[] inputArr = input.split("\\s{2},", 4);
+        if (inputArr.length < 4) {
+            throw new InvalidFileFormatException();
+        }
+        String taskType = inputArr[0].toUpperCase();
+        String description = inputArr[1];
+        String time = inputArr[2];
+        String status = inputArr[3];
+        boolean isDone = checkStatus(status);
 
-            if (taskType.equals("TODO")) {
-                return new ToDo(description, isDone);
-            } else if (taskType.equals("EVENT")) {
-                return new ComplexTask(description, time, TaskType.EVENT);
-            } else if (taskType.equals("DEADLINE")) {
-                return new ComplexTask(description, time, TaskType.DEADLINE);
-            } else {
-                throw new InvalidFileFormatException();
-            }
-        } catch (InvalidFileFormatException e) {
-            ui.printBasic(e.getMessage());
-            return null;
+        if (taskType.equals("TODO")) {
+            return new ToDo(description, isDone);
+        } else if (taskType.equals("EVENT")) {
+            return new ComplexTask(description, time, TaskType.EVENT);
+        } else if (taskType.equals("DEADLINE")) {
+            return new ComplexTask(description, time, TaskType.DEADLINE);
+        } else {
+            throw new InvalidFileFormatException();
         }
     }
 

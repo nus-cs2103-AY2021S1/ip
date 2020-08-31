@@ -51,7 +51,7 @@ public class AddComplexTaskCommand extends AddCommand {
      * @param storage Storage object.
      * @throws DukeException If input format is wrong.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         String[] inputArr = getTaskDetails().split(identifier(), 2);
         if (inputArr.length == 1) {
             if (taskType == TaskType.DEADLINE) {
@@ -72,7 +72,7 @@ public class AddComplexTaskCommand extends AddCommand {
         } else {
             ct = new ComplexTask(inputArr[0], date, taskType);
         }
-        addTask(ct, tasks, ui, storage);
+        return addTask(ct, tasks, ui, storage);
     }
 
     private void checkIfEmpty(String[] inputArr) throws DukeException {
