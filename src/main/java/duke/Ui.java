@@ -1,7 +1,7 @@
 package duke;
 
-import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  * Represents the Duke User Interface which deals with interactions with the user
@@ -22,6 +22,11 @@ public class Ui {
         System.out.println("Hello! I'm Duke\n" + "What can I do for you?");
     }
 
+    /**
+     * Simulates an exit event when the user inputs the bye command.
+     *
+     * @return Returns "Bye" if the user inputs the bye command.
+     */
     public String goodbye() {
         System.out.println("Bye! Hope to see you again soon!");
         return "Bye";
@@ -63,7 +68,7 @@ public class Ui {
     public void delete(Task t, int size) {
         System.out.println("Noted. I've removed this task:");
         System.out.println(t.recordString());
-        System.out.println("Now, you have " +  size + " tasks in the list");
+        System.out.println("Now, you have " + size + " tasks in the list");
     }
 
     /**

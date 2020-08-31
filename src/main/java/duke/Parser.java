@@ -87,8 +87,8 @@ public class Parser {
                     throw new DukeException("Please enter a valid YYYY-MM-DD date format!");
                 }
                 break;
-                default:
-                    throw new DukeException("I'm sorry, but I don't know what that means :-(");
+            default:
+                throw new DukeException("I'm sorry, but I don't know what that means :-(");
             }
         }
         ArrayList<Task> tasksCopy = tasks.clone();

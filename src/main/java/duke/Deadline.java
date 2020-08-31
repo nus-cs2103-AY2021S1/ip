@@ -11,6 +11,9 @@ public class Deadline extends Task {
     /** Formatted date to be printed to the user only */
     protected String formattedDate;
 
+    /**
+     * Constructor for the Deadline class
+     */
     public Deadline (String description, String by) {
         super(description);
         this.by = by;

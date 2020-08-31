@@ -1,8 +1,8 @@
 package duke;
 
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
 class TaskTest {
 
@@ -15,3 +15,4 @@ class TaskTest {
         assertEquals("[✘] not read book", notReadBook.toString());
     }
 }
+

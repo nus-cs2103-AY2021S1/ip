@@ -1,8 +1,8 @@
 package duke;
 
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
 class DeadlineTest {
 
@@ -24,3 +24,4 @@ class DeadlineTest {
         assertEquals("[D][✘] not read book (by: 2020-01-01)", notReadBook.toString());
     }
 }
+

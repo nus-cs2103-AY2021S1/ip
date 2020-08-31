@@ -11,6 +11,9 @@ public class Event extends Task {
     /** Formatted date to be printed to the user only */
     protected String formattedDate;
 
+    /**
+     * Constructor for the Event class
+     */
     public Event(String description, String start) {
         super(description);
         this.start = start;

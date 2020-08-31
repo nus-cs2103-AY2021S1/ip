@@ -1,8 +1,8 @@
 package duke;
 
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
 class EventTest {
 
@@ -24,3 +24,4 @@ class EventTest {
         assertEquals("[E][✘] not read book (at: 2020-01-01)", notReadBook.toString());
     }
 }
+
