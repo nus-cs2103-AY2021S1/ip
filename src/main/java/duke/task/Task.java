@@ -8,14 +8,17 @@ public abstract class Task {
     protected String description;
     /** Marks if the task is done or not. */
     protected boolean isDone;
+    /** Represents the type of the task. */
+    protected TaskType taskType;
 
     /**
      * Creates a new task with the specified description.
      * @param description The description of the task.
      */
-    public Task(String description) {
+    public Task(String description, TaskType taskType) {
         this.description = description;
         this.isDone = false;
+        this.taskType = taskType;
     }
 
     /**
@@ -44,10 +47,12 @@ public abstract class Task {
     }
 
     /**
-     * Gets the short form of this task.
-     * @return The short form of this task.
+     * Gets the short form string representation of this task.
+     * @return The short form string representation of this task.
      */
-    public abstract String getShortForm();
+    public String getShortForm() {
+        return taskType.getShortForm();
+    }
 
     /**
      * Marks this task as done.
@@ -62,6 +67,6 @@ public abstract class Task {
      */
     @Override
     public String toString() {
-        return this.getStatusIcon() + " " + this.description;
+        return String.format("[%s]%s %s", this.taskType.getShortForm(), this.getStatusIcon(), this.description);
     }
 }

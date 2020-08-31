@@ -24,14 +24,14 @@ public class AddCommand extends Command {
     /**
      * Adds the task to the specified task list.
      * @param tasks The task list the command is executed with.
-     * @param ui The ui the command is executed with.
      * @param storage The storage the command is executed with.
+     * @return A command response that represents the result of completing an add command.
      * @throws DukeException If there was a problem with executing the command.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public CommandResponse execute(TaskList tasks, Storage storage) throws DukeException {
         tasks.addTask(task);
-        ui.printAddTask(task, tasks);
         storage.save(tasks.getTasks());
+        return new CommandResponse(Ui.respondAddTask(task, tasks), this.isExit());
     }
 }

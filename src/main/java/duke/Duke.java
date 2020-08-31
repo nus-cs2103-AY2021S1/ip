@@ -1,6 +1,7 @@
 package duke;
 
 import duke.command.Command;
+import duke.command.CommandResponse;
 
 /**
  * Represents a Personal Assistant Chatbot that helps a person to keep track of various tasks.
@@ -8,46 +9,32 @@ import duke.command.Command;
 public class Duke {
     private Storage storage;
     private TaskList tasks;
-    private Ui ui;
 
     /**
      * Creates a new Duke Chatbot that saves and loads tasks from the given filepath.
      * @param filePath The file path to load tasks from and save tasks to.
      */
     public Duke(String filePath) {
-        ui = new Ui();
         storage = new Storage(filePath);
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
-            ui.showError(e);
+            Ui.respondError(e);
             tasks = new TaskList();
         }
     }
 
     /**
-     * Runs the Chatbot until an exit command is issued.
+     * Generates a response to user input.
+     * @param input The string input from the user.
+     * @return The command response to the user input.
      */
-    public void run() {
-        ui.greet();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readInput();
-                Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                ui.showError(e);
-            }
+    public CommandResponse getResponse(String input) {
+        try {
+            Command c = Parser.parse(input);
+            return c.execute(tasks, storage);
+        } catch (DukeException e) {
+            return new CommandResponse(Ui.respondError(e), false);
         }
-    }
-
-    /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
-     */
-    String getResponse(String input) {
-        return "Duke heard: " + input;
     }
 }

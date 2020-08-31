@@ -10,16 +10,7 @@ public class Todo extends Task {
      * @param description The description of the todo.
      */
     public Todo(String description) {
-        super(description);
-    }
-
-    /**
-     * Gets the short form of this todo.
-     * @return The short form of this todo.
-     */
-    @Override
-    public String getShortForm() {
-        return "T";
+        super(description, TaskType.TODO);
     }
 
     /**
@@ -28,6 +19,6 @@ public class Todo extends Task {
      */
     @Override
     public String toString() {
-        return "[T]" + super.toString();
+        return super.toString();
     }
 }

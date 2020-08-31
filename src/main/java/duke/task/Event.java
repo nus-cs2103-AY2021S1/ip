@@ -16,25 +16,16 @@ public class Event extends Task {
      * @param at The date at which the event occurs.
      */
     public Event(String description, LocalDate at) {
-        super(description);
+        super(description, TaskType.EVENT);
         this.at = at;
     }
 
     /**
      * Gets the date at which this task occurs.
-     * @return  The date at which this task occurs.
+     * @return The date at which this task occurs.
      */
     public LocalDate getAt() {
         return this.at;
-    }
-
-    /**
-     * Gets the short form of this event.
-     * @return The short form of this event.
-     */
-    @Override
-    public String getShortForm() {
-        return "E";
     }
 
     /**
@@ -43,7 +34,6 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: "
-                + at.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+        return super.toString() + " (at: " + at.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 }
