@@ -35,4 +35,13 @@ public class DoneCommand extends Command {
 		ui.printMessage("Nice! I've marked this task as done:\n"
 				+ taskToSetDone.toString());
 	}
+
+	@Override
+	public String execute(TaskList taskList, Storage storage) throws DukeException {
+		Task taskToSetDone = taskList.getTask(indexOfTask);
+		taskList.setTaskDone(indexOfTask);
+		storage.updateStorage(taskList);
+		return "Nice! I've marked this task as done:\n"
+				+ taskToSetDone.toString();
+	}
 }

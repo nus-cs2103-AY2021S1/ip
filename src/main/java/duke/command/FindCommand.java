@@ -49,4 +49,26 @@ public class FindCommand extends Command {
 			ui.printMessage("There are no tasks yet!");
 		}
 	}
+
+	@Override
+	public String execute(TaskList taskList, Storage storage) throws DukeException {
+		if (taskList.numberOfTasks() > 0) {
+			ArrayList<Task> tasksWithKeyWord = taskList.find(keyWord);
+			if (tasksWithKeyWord.size() > 0) {
+				StringBuilder stringBuilder = new StringBuilder();
+				stringBuilder.append("Here are the tasks with \"" + keyWord + "\" in your list:\n");
+
+				for (int i = 0; i < tasksWithKeyWord.size(); i++) {
+					Task currentTask = tasksWithKeyWord.get(i);
+					stringBuilder.append((i + 1) + ". " + currentTask.toString() + "\n");
+				}
+
+				return stringBuilder.toString();
+			} else {
+				return "No tasks with \"" + keyWord + "\" in your list.";
+			}
+		} else {
+			return "There are no tasks yet!";
+		}
+	}
 }

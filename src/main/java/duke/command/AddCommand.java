@@ -34,4 +34,13 @@ public class AddCommand extends Command {
 				+ taskToAdd.toString() + "\n"
 					+ "Now you have " + tasks.numberOfTasks() + " tasks in the list.");
 	}
+
+	@Override
+	public String execute(TaskList tasks, Storage storage) throws DukeException {
+		tasks.addTask(taskToAdd);
+		storage.updateStorage(tasks);
+		return "Got it. I've added this task:\n"
+				+ taskToAdd.toString() + "\n"
+				+ "Now you have " + tasks.numberOfTasks() + " tasks in the list.";
+	}
 }

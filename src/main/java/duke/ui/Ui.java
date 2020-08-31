@@ -2,6 +2,7 @@ package duke.ui;
 
 import java.util.Scanner;
 
+
 public class Ui {
 
 	static String INDENTATION = "    ";
@@ -37,6 +38,8 @@ public class Ui {
 			System.out.println(str);
 		}
 		showLine();
+
+
 	}
 
 	/**

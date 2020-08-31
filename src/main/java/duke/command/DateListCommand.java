@@ -60,4 +60,33 @@ public class DateListCommand extends Command {
 		}
 	}
 
+	@Override
+	public String execute(TaskList taskList, Storage storage) throws DukeException {
+		StringBuilder stringBuilder = new StringBuilder();
+		int numberOfTasksFound = 0;
+		stringBuilder.append("Here are the tasks with the date: " + localDate.toString() + "\n");
+
+		for (int i = 0; i < taskList.numberOfTasks(); i++) {
+			Task currentTask = taskList.getTask(i);
+			if (currentTask instanceof Deadline) {
+				Deadline deadline = (Deadline) currentTask;
+				if (deadline.getLocalDate().equals(localDate)) {
+					stringBuilder.append((i + 1) + ". " + deadline.toString() + "\n");
+					numberOfTasksFound++;
+				}
+			} else if (currentTask instanceof Event) {
+				Event event = (Event) currentTask;
+				if (event.getLocalDate().equals(localDate)) {
+					stringBuilder.append((i + 1) + ". " + event.toString() + "\n");
+					numberOfTasksFound++;
+				}
+			}
+		}
+		if (numberOfTasksFound > 0) {
+			return stringBuilder.toString();
+		} else {
+			return "There are no tasks with the date: " + localDate.toString();
+		}
+	}
+
 }
