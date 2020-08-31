@@ -26,7 +26,7 @@ public class Ui {
     /**
      * Displays the logo of Duke.
      */
-    void showLogo() {
+    public void showLogo() {
         String logo = "\t██████╗ ██╗   ██╗██╗  ██╗███████╗\n"
                 + "\t██╔══██╗██║   ██║██║ ██╔╝██╔════╝\n"
                 + "\t██║  ██║██║   ██║█████╔╝ █████╗  \n"
@@ -39,7 +39,7 @@ public class Ui {
     /**
      * Displays the welcome message.
      */
-    void showWelcome() {
+    public void showWelcome() {
         showLogo();
         System.out.println("\tWhat can I do for you?");
         System.out.println("\t_____________________________________________________\n");
@@ -48,14 +48,14 @@ public class Ui {
     /**
      * Prints a horizontal line.
      */
-    void showLine() {
+    public void showLine() {
         System.out.println("\t_____________________________________________________");
     }
 
     /**
      * Prints a new empty line.
      */
-    void newLine() {
+    public void newLine() {
         System.out.println();
     }
 
@@ -70,7 +70,7 @@ public class Ui {
      * Reads in a line and returns it.
      * @return The next line read from the terminal.
      */
-    String readCommand() {
+    public String readCommand() {
         return s.nextLine();
     }
 }

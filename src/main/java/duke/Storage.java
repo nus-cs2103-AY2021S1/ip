@@ -48,7 +48,7 @@ public class Storage {
      * @return A list of {@link Task}s.
      * @throws IOException Exception when reading from storage file.
      */
-    List<Task> processStorage() throws IOException {
+    public List<Task> processStorage() throws IOException {
         File f = new File(filePath);
         Scanner sc = new Scanner(f);
         List<Task> list = new ArrayList<>();
