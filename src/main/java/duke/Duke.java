@@ -47,7 +47,7 @@ public class Duke extends Application {
     public Duke() {
         storage = Storage.init();
         taskList = storage.readStoredData();
-        ui = new Ui();
+        ui = new UiDefault();
     }
 
     /**
@@ -69,7 +69,7 @@ public class Duke extends Application {
         boolean isExit = false;
         while (!isExit) {
             try {
-                Command command = CommandParser.parse(ui.getCommand());
+                Command command = CommandParser.parse(ui.getResponse());
                 command.execute(taskList, ui, storage);
                 isExit = command.isExit();
             } catch (DukeException e) {
