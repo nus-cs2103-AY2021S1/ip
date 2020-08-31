@@ -46,13 +46,7 @@ public class Duke {
         tasks = storage.load();
 
     }
-
-    public Duke() {
-        ui = new Ui();
-        storage = new Storage("./taskdata.txt");
-        tasks = storage.load();
-    }
-
+    
 //    /**
 //     * Executes the Duke program.
 //     */

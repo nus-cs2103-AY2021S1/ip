@@ -19,14 +19,6 @@ public class Ui {
     }
 
     /**
-     * Greeting message to the user.
-     */
-    public void greetUser() {
-        String logo = "Duke Melvin";
-        System.out.println("Hello from\n" + logo + "\n" + "What can I do for you?");
-    }
-
-    /**
      * Goodbye message to the user.
      */
     public String sayGoodBye() {
