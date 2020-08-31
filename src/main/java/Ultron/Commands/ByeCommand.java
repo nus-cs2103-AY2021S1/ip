@@ -13,7 +13,7 @@ public final class ByeCommand extends Command {
     /**
      * Creates the bye command with arguments.
      *
-     * @param arguments Arguments for bye command
+     * @param arguments Arguments for bye command.
      */
     public ByeCommand(final String arguments) {
         super(true, arguments);
@@ -22,10 +22,10 @@ public final class ByeCommand extends Command {
     /**
      * Execute the instructions for bye command.
      *
-     * @param taskList Task list which holds the task
-     * @param ui       UI for Ultron
-     * @param storage  Storage for the task
-     * @throws UltronException
+     * @param taskList Task list which holds the task.
+     * @param ui       UI for Ultron.
+     * @param storage  Storage for the task.
+     * @throws UltronException when there are too much arguments.
      */
     @Override
     public void execute(final TaskList taskList,

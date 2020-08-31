@@ -12,7 +12,7 @@ public class FindCommand extends Command {
     /**
      * The find command for search function.
      *
-     * @param arguments String to find
+     * @param arguments String to find.
      */
     public FindCommand(final String arguments) {
         super(false, arguments);
@@ -21,9 +21,10 @@ public class FindCommand extends Command {
     /**
      * Execute the command of Find command.
      *
-     * @param taskList List of tasks
-     * @param ui       UI for Ultron
-     * @param storage  Storage for Ultron
+     * @param taskList List of tasks.
+     * @param ui       UI for Ultron.
+     * @param storage  Storage for Ultron.
+     * @throws UltronException When there are no arguments.
      */
     @Override
     public void execute(final TaskList taskList,

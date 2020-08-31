@@ -15,7 +15,7 @@ import ultron.ui.UI;
 
 public class ListCommandTest {
     /**
-     * Check if isExit is correct for List command
+     * Check if isExit is correct for List command.
      */
     @Test
     public void isExitTest() {
@@ -23,7 +23,7 @@ public class ListCommandTest {
         assertFalse(listCommand.isExit());
     }
     /**
-     * Check if the list command has the correct output with no items
+     * Check if the list command has the correct output with no items.
      */
     @Test
     public void executeNoneTest() {
@@ -41,7 +41,7 @@ public class ListCommandTest {
         }
     }
     /**
-     * Check if the list command has the correct output with some items
+     * Check if the list command has the correct output with some items.
      */
     @Test
     public void executeSomeTest() {
@@ -64,7 +64,7 @@ public class ListCommandTest {
         }
     }
     /**
-     * Check if the list command can detect too much arguments
+     * Check if the list command can detect too much arguments.
      */
     @Test
     public void executeErrorTest() {

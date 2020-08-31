@@ -19,16 +19,14 @@ import ultron.tasks.Task;
  */
 public final class Storage {
 
-    /**
-     * To store the datafile location.
-     */
+    /** To store the datafile location. */
     private final File f;
 
     /**
      * The Storage class.
-     * This writes the data to a file and retrieves it when needed
+     * This writes the data to a file and retrieves it when needed.
      *
-     * @param path Path to the storage file
+     * @param path Path to the storage file.
      */
     public Storage(final String path) {
         //Create a new file object
@@ -39,8 +37,8 @@ public final class Storage {
     /**
      * Encodes a Task to a string.
      *
-     * @param task A Task to be encoded
-     * @return String The encoded String of the task
+     * @param task A Task to be encoded.
+     * @return String The encoded String of the task.
      */
     private String encode(final Task task) {
         /*
@@ -54,9 +52,9 @@ public final class Storage {
     /**
      * Decodes a string to a Task.
      *
-     * @param string String to be decoded to a Task
-     * @return task A task based on the string
-     * @throws UltronException If the command or line is invalid
+     * @param string String to be decoded to a Task.
+     * @return task A task based on the string.
+     * @throws UltronException If the command or line is invalid.
      **/
     private Task decode(final String string) throws UltronException {
 
@@ -83,8 +81,8 @@ public final class Storage {
     /**
      * Fetches all of the data in the storage file to an arraylist of task.
      *
-     * @return taskArrayList An Arraylist containing the tasks stored
-     * @throws UltronException If there is an error decoding the file
+     * @return taskArrayList An Arraylist containing the tasks stored.
+     * @throws UltronException If there is an error decoding the file.
      */
     public ArrayList<Task> load() throws UltronException {
 
@@ -107,8 +105,8 @@ public final class Storage {
     /**
      * Writes all the task in the tasklist to a folder.
      *
-     * @param taskArrayList Tasklist containing all the tasks
-     * @throws UltronException If there are any IO errors
+     * @param taskArrayList Tasklist containing all the tasks.
+     * @throws UltronException If there are any IO errors.
      */
     public void writeAll(final ArrayList<Task> taskArrayList)
         throws UltronException {

@@ -8,17 +8,11 @@ import ultron.exceptions.UltronException;
 import ultron.ui.UI;
 
 public final class Ultron {
-    /**
-     * Store the UI class.
-     */
+    /** Store the UI class. */
     private final UI ui;
-    /**
-     * Store the Storage.
-     */
+    /** Store the Storage. */
     private final Storage storage;
-    /**
-     * Task list to store the tasks.
-     */
+    /** Task list to store the tasks. */
     private TaskList taskList;
 
     /**
@@ -45,9 +39,10 @@ public final class Ultron {
     }
 
     /**
-     * GetResponse of Ultron based on input
-     * @param input input from the user
-     * @return String message by Ultron for the user
+     * GetResponse of Ultron based on input.
+     *
+     * @param input input from the user.
+     * @return String message by Ultron for the user.
      */
     public String getResponse(String input) {
 

@@ -13,7 +13,7 @@ public final class DeleteCommand extends Command {
     /**
      * Constructor for DeleteCommand.
      *
-     * @param arguments Arguments for delete command
+     * @param arguments Arguments for delete command.
      */
     public DeleteCommand(final String arguments) {
         super(false, arguments);
@@ -22,10 +22,10 @@ public final class DeleteCommand extends Command {
     /**
      * Executes the Delete Command.
      *
-     * @param taskList List of tasks
-     * @param ui       UI for Ultron
-     * @param storage  Storage for Ultron
-     * @throws UltronException if the arguments are invalid
+     * @param taskList List of tasks.
+     * @param ui       UI for Ultron.
+     * @param storage  Storage for Ultron.
+     * @throws UltronException if the arguments are invalid.
      */
     @Override
     public void execute(final TaskList taskList,

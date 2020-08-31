@@ -8,14 +8,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public final class Event extends Task {
-    /**
-     * Store the regex for parsing the command for event.
-     */
+    /** Stores the regex for parsing the command for event. */
     private static final Pattern DATE_MATCH =
         Pattern.compile("^(.*) (/at) (.*)$");
-    /**
-     * Store the date format regex.
-     */
+    /** Stores the date format regex.*/
     private static final DateFormat DATE_FORMAT =
         new SimpleDateFormat("dd-MM-yyyy HHmm");
     /**
@@ -39,8 +35,8 @@ public final class Event extends Task {
     /**
      * Task event.
      *
-     * @param description Description of the Event
-     * @param at          Date of the event as a string
+     * @param description Description of the Event.
+     * @param at          Date of the event as a string.
      */
     public Event(final String description, final String at) {
 
@@ -54,8 +50,8 @@ public final class Event extends Task {
     /**
      * Task Event.
      *
-     * @param description Description of the Event
-     * @param at          Date of the event as a Date object
+     * @param description Description of the Event.
+     * @param at          Date of the event as a Date object.
      */
     //Constructor for the event class
     public Event(final String description, final Date at) {
@@ -70,8 +66,8 @@ public final class Event extends Task {
     /**
      * Parse the commands to Event class.
      *
-     * @param args Arguments for the Event task
-     * @return Event with the arguments parsed
+     * @param args Arguments for the Event task.
+     * @return Event with the arguments parsed.
      */
     public static Event parseCommand(final String args) {
 
@@ -105,7 +101,7 @@ public final class Event extends Task {
     /**
      * Gets the date of the event.
      *
-     * @return date Date of the event
+     * @return date Date of the event.
      */
     public String getDate() {
         if (at != null) {
@@ -120,7 +116,7 @@ public final class Event extends Task {
     /**
      * Gets the type of the event.
      *
-     * @return String type
+     * @return String type.
      */
     @Override
     public String getType() {
@@ -130,7 +126,7 @@ public final class Event extends Task {
     /**
      * Gets the command representation of the event.
      *
-     * @return String command
+     * @return String command.
      */
     @Override
     public String getCommand() {

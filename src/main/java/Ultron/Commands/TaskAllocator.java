@@ -17,9 +17,9 @@ public final class TaskAllocator extends Command {
     /**
      * Allocates the correct task.
      *
-     * @param command   Command given
-     * @param arguments Arguments given
-     * @throws UltronException if the command is invalid
+     * @param command   Command given.
+     * @param arguments Arguments given.
+     * @throws UltronException if the command is invalid.
      */
     public TaskAllocator(final String command,
                          final String arguments) throws UltronException {
@@ -42,11 +42,11 @@ public final class TaskAllocator extends Command {
     /**
      * Add the correct Task to the tasklist.
      *
-     * @param taskList List of tasks
-     * @param ui       UI for Ultron
-     * @param storage  Storage for Ultron
-     * @throws UltronException if there are no arguments or
-     *                         if there was an error creating the task
+     * @param taskList List of tasks.
+     * @param ui       UI for Ultron.
+     * @param storage  Storage for Ultron.
+     * @throws UltronException if there are no arguments or.
+     *                         if there was an error creating the task.
      */
     @Override
     public void execute(final TaskList taskList,

@@ -41,8 +41,8 @@ public final class Deadline extends Task {
     /**
      * A Deadline Task.
      *
-     * @param description Description for the task
-     * @param by          The deadline for the task in string format
+     * @param description Description for the task.
+     * @param by          The deadline for the task in string format.
      */
     //Constructor for the event class
     public Deadline(final String description, final String by) {
@@ -57,8 +57,8 @@ public final class Deadline extends Task {
     /**
      * A Deadline Task.
      *
-     * @param description Description for the task
-     * @param by          The deadline for the task in Date format
+     * @param description Description for the task.
+     * @param by          The deadline for the task in Date format.
      */
     //Constructor for the event class
     public Deadline(final String description, final Date by) {
@@ -71,8 +71,9 @@ public final class Deadline extends Task {
     }
 
     /**
-     * @param args Arguments to Deadline task
-     * @return Deadline task
+     * Parses the command for deadline format.
+     * @param args Arguments to Deadline task.
+     * @return Deadline task.
      */
     public static Deadline parseCommand(final String args) {
         //Create the matcher
@@ -104,7 +105,7 @@ public final class Deadline extends Task {
     /**
      * String representation of deadline.
      *
-     * @return String representation of Deadline
+     * @return String representation of Deadline.
      */
     //Getter for the date of the
     public String getDate() {

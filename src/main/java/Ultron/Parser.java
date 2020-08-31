@@ -17,9 +17,7 @@ import ultron.exceptions.UltronException;
 
 public final class Parser {
 
-    /**
-     * The regex pattern for checking the commands and inputs.
-     */
+    /** The regex pattern for checking the commands and inputs. */
     private static final Pattern PATTERN =
         Pattern.compile("(^\\s?\\w+\\b) ?(.*)?$");
 
@@ -29,10 +27,10 @@ public final class Parser {
     /**
      * Check the input string and arguments.
      *
-     * @param command   Input command of the user
-     * @param arguments Arguments provided by the user
-     * @return Command corresponding to the input given by user
-     * @throws UltronException if there are errors in getting the command
+     * @param command   Input command of the user.
+     * @param arguments Arguments provided by the user.
+     * @return Command corresponding to the input given by user.
+     * @throws UltronException if there are errors in getting the command.
      */
     private static Command checkInput(final String command,
                                       final String arguments)
@@ -73,9 +71,9 @@ public final class Parser {
     /**
      * Parse the integer provided by the user to an index in list.
      *
-     * @param args User arguments to be converted to index
-     * @return int parsedInteger
-     * @throws UltronException if there is an error parsing the integer
+     * @param args User arguments to be converted to index.
+     * @return int parsedInteger.
+     * @throws UltronException if there is an error parsing the integer.
      */
     public static int parseInteger(final String args) throws UltronException {
         //Catch any errors in the number
@@ -94,9 +92,9 @@ public final class Parser {
     /**
      * Parsing commands.
      *
-     * @param input raw input of the user
-     * @return Command corresponding to the raw input
-     * @throws UltronException
+     * @param input raw input of the user.
+     * @return Command corresponding to the raw input.
+     * @throws UltronException when there is an invalid command.
      */
     public static Command parseCommand(final String input)
         throws UltronException {

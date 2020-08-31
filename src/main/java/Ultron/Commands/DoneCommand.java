@@ -12,7 +12,7 @@ public final class DoneCommand extends Command {
     /**
      * Contructor for Done Command.
      *
-     * @param arguments
+     * @param arguments Arguments for the command.
      */
     public DoneCommand(final String arguments) {
         super(false, arguments);
@@ -21,10 +21,10 @@ public final class DoneCommand extends Command {
     /**
      * Execute the done command.
      *
-     * @param taskList List of tasks
-     * @param ui       UI for Ultron
-     * @param storage  Storage for Ultron
-     * @throws UltronException if there are too much or too little arguments
+     * @param taskList List of tasks.
+     * @param ui       UI for Ultron.
+     * @param storage  Storage for Ultron.
+     * @throws UltronException if there are too much or too little arguments.
      */
     @Override
     public void execute(final TaskList taskList,

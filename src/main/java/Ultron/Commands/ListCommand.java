@@ -11,7 +11,7 @@ public final class ListCommand extends Command {
     /**
      * Constructor for List command.
      *
-     * @param arguments Arguments needed for list command
+     * @param arguments Arguments needed for list command.
      */
     public ListCommand(final String arguments) {
         super(false, arguments);
@@ -20,10 +20,10 @@ public final class ListCommand extends Command {
     /**
      * Execute the list command.
      *
-     * @param taskList List of tasks
-     * @param ui       UI for Ultron
-     * @param storage  Storage for Ultron
-     * @throws UltronException if there are > 0 arguments
+     * @param taskList List of tasks.
+     * @param ui       UI for Ultron.
+     * @param storage  Storage for Ultron.
+     * @throws UltronException if there are > 0 arguments.
      */
     @Override
     public void execute(final TaskList taskList,

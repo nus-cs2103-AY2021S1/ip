@@ -5,8 +5,8 @@ public class UltronException extends Exception {
     /**
      * Ultron Exception for Ultron class.
      *
-     * @param inputString Input the user has provided
-     * @param errorType   The error type
+     * @param inputString Input the user has provided.
+     * @param errorType   The error type.
      */
     public UltronException(final String inputString,
                            final ExceptionType errorType) {
@@ -18,9 +18,9 @@ public class UltronException extends Exception {
     /**
      * Ultron Exception for Ultron class.
      *
-     * @param inputString    Input the user has provided
-     * @param inputArguments The arguments provided
-     * @param errorType      The error type
+     * @param inputString    Input the user has provided.
+     * @param inputArguments The arguments provided.
+     * @param errorType      The error type.
      */
     public UltronException(final String inputString,
                            final String inputArguments,
