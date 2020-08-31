@@ -33,6 +33,7 @@ public class MainWindow extends AnchorPane {
 
     @FXML
     public void initialize() {
+        dialogContainer.getChildren().add(DialogBox.getKingDialog(UI.welcome(),kingImage));
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
