@@ -196,7 +196,7 @@ public class Duke extends Application{
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
-    private String getResponse(String input) {
+    public String getResponse(String input) {
         try {
             Command c = Parser.parse(input);
             return c.execute(this.tasks, this.ui, this.storage);
