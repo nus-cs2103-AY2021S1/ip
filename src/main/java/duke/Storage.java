@@ -1,6 +1,7 @@
 package duke;
 
 import duke.exception.DukeException;
+import duke.exception.UnknownCommandException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -56,6 +57,8 @@ public class Storage {
                 case EVENT:
                     tasks.addTask(new Event(dataSplit));
                     break;
+                default:
+                    throw new UnknownCommandException("Unknown Task Type");
                 }
             }
             myReader.close();

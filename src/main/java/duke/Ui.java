@@ -22,12 +22,7 @@ public class Ui {
                 + "dun wanna see yu ever agin";
         System.out.println(farewell);
     }
-    /* public String readCommand() {
-        Scanner sc = new Scanner(System.in);
-        String nextLine = sc.nextLine();
-        sc.close();
-        return nextLine;
-    }*/
+
     /**
      * Prints a horizontal line.
      */

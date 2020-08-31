@@ -1,9 +1,9 @@
+import java.util.Scanner;
+
 import duke.Parser;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
-
-import java.util.Scanner;
 
 /**
  * Main driving force for the Duke application.
@@ -45,5 +45,4 @@ public class Duke {
     public static void main(String[] args) {
         new Duke("data/tasks.txt").run();
     }
-
 }

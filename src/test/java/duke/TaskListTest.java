@@ -35,7 +35,7 @@ public class TaskListTest {
         String actualResult = new TaskList().addTask(Task.TaskType.TODOS, "CS2103T Exams", "2020-12-31 2021");
 
         String expectedResult = "Got it, here yur task bij\n" +
-                "[T][✘] CS2103T Exams (by: 2020-12-31 2021)\n" +
+                "[T][✘] CS2103T Exams (by: Dec 31 2020, 8:21PM)\n" +
                 "Now you have 1 tasks in the list.";
 
         assertEquals(expectedResult, actualResult);
@@ -48,7 +48,7 @@ public class TaskListTest {
         tasks.addTask(Task.TaskType.TODOS, "CS2103T Exams", "2020-12-31 2021");
         String actualResult = tasks.removeTask(0);
 
-        String expectedResult = "[T][✘] CS2103T Exams (by: 2020-12-31 2021)";
+        String expectedResult = "[T][✘] CS2103T Exams (by: Dec 31 2020, 8:21PM)";
 
         assertEquals(expectedResult, actualResult);
     }

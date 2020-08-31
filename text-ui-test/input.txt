@@ -1,14 +1,14 @@
 hi
 list
 done
-todo something /by 1pm lol
+todo something /by 2020-12-31 2021
 done 1
 list
-event exciting!! /at in da fuTureZ!!
-deadline homework /by idk whenz
+event exciting!! /at 2020-11-30 1921
+deadline homework /by 2019-10-20 1845
 list
 event exciting!! yay
-deadline homework /by still idk
+deadline homework /by 2018-02-28 2359
 todo even more homework omg
 list
 delete 8
