@@ -5,8 +5,13 @@ import main.java.seedu.duke.Storage;
 import main.java.seedu.duke.TaskList;
 import main.java.seedu.duke.Ui;
 
-public class FindCommand extends Command{
+public class FindCommand extends Command {
     private String keyword;
+
+    /**
+     * Constructor for FindCommand.
+     * @param keyword The keyword to be found.
+     */
     public FindCommand(String keyword) {
         super("find");
         this.keyword = keyword;

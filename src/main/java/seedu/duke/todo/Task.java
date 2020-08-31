@@ -9,11 +9,20 @@ public class Task {
     protected String description;
     protected boolean isDone;
 
+    /**
+     * Constructor for Task.
+     * @param description The task description.
+     */
     public Task(String description) {
         this.description = description;
         this.isDone = false;
     }
 
+    /**
+     * Alternative constructor for Task.
+     * @param description The task description.
+     * @param isDone The marker whether the task is done.
+     */
     public Task(String description, boolean isDone) {
         this.description = description;
         this.isDone = isDone;

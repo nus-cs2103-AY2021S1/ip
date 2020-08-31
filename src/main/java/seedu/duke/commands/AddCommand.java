@@ -1,10 +1,9 @@
 package main.java.seedu.duke.commands;
 
-import main.java.seedu.duke.DukeException;
-import main.java.seedu.duke.todo.Task;
+import main.java.seedu.duke.Storage;
 import main.java.seedu.duke.TaskList;
 import main.java.seedu.duke.Ui;
-import main.java.seedu.duke.Storage;
+import main.java.seedu.duke.todo.Task;
 
 /**
  * Represents the command to add task.
@@ -12,6 +11,10 @@ import main.java.seedu.duke.Storage;
 public class AddCommand extends Command {
     private Task newTask;
 
+    /**
+     * Constructor for AddCommand.
+     * @param newTask
+     */
     public AddCommand(Task newTask) {
         super("add");
         this.newTask = newTask;

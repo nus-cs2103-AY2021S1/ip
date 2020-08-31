@@ -1,11 +1,11 @@
 package main.java.seedu.duke.commands;
 
+import java.time.LocalDate;
+
 import main.java.seedu.duke.DukeException;
 import main.java.seedu.duke.Storage;
 import main.java.seedu.duke.TaskList;
 import main.java.seedu.duke.Ui;
-
-import java.time.LocalDate;
 
 /**
  * Represents the command to list out tasks on a specific date.
@@ -13,6 +13,10 @@ import java.time.LocalDate;
 public class DateCommand extends Command {
     private LocalDate time;
 
+    /**
+     * Constructor for DateCommand.
+     * @param time
+     */
     public DateCommand(LocalDate time) {
         super("done");
         this.time = time;

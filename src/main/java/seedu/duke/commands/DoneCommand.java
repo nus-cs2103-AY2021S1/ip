@@ -1,6 +1,5 @@
 package main.java.seedu.duke.commands;
 
-import main.java.seedu.duke.DukeException;
 import main.java.seedu.duke.Storage;
 import main.java.seedu.duke.TaskList;
 import main.java.seedu.duke.Ui;
@@ -11,6 +10,10 @@ import main.java.seedu.duke.Ui;
 public class DoneCommand extends Command {
     private int taskNo;
 
+    /**
+     * Constructor of DoneCommand.
+     * @param taskNo The task number of the task to be marked as done.
+     */
     public DoneCommand(int taskNo) {
         super("done");
         this.taskNo = taskNo;

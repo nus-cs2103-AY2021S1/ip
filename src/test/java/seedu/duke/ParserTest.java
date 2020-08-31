@@ -1,13 +1,17 @@
 package seedu.duke;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
+
 import main.java.seedu.duke.Parser;
 import main.java.seedu.duke.todo.Task;
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+
+
 
 public class ParserTest {
     @Test
-    public void parseTest(){
+    public void parseTest() {
         String input = "todo borrow book";
         Task newTask = Parser.parseTask(input);
         String description = newTask.getDescription();

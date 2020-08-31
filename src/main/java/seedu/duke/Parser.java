@@ -4,11 +4,18 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.regex.Pattern;
 
-import main.java.seedu.duke.commands.*;
+import main.java.seedu.duke.commands.AddCommand;
+import main.java.seedu.duke.commands.Command;
+import main.java.seedu.duke.commands.DateCommand;
+import main.java.seedu.duke.commands.DeleteCommand;
+import main.java.seedu.duke.commands.DoneCommand;
+import main.java.seedu.duke.commands.ExitCommand;
+import main.java.seedu.duke.commands.FindCommand;
+import main.java.seedu.duke.commands.ListCommand;
 import main.java.seedu.duke.todo.Deadline;
 import main.java.seedu.duke.todo.Event;
-import main.java.seedu.duke.todo.Todo;
 import main.java.seedu.duke.todo.Task;
+import main.java.seedu.duke.todo.Todo;
 
 /**
  * Used for parsing strings for Duke project.
@@ -102,7 +109,7 @@ public class Parser {
      * @return Task.
      */
     public static Task parseTask(String taskStr) {
-        String[] splits = taskStr.split(" ",2);
+        String[] splits = taskStr.split(" ", 2);
         String taskType = splits[0].toLowerCase();
         String taskBody = splits[1];
         Task newTask;
@@ -129,7 +136,7 @@ public class Parser {
     }
 
     public static String standardizeTimeString(String timeStr) {
-        return timeStr.replaceAll(" ","").replaceAll("/", "-").trim();
+        return timeStr.replaceAll(" ", "").replaceAll("/", "-").trim();
     }
 
 }

@@ -11,11 +11,18 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Constructor for Duke.
+     */
     public Duke() {
         this.tasks = new TaskList();
         this.storage = new Storage(this.tasks);
         this.ui = new Ui();
     }
+
+    /**
+     * Run Duke.
+     */
     public void run() {
         ui.greet();
         storage.readFile();
@@ -35,6 +42,10 @@ public class Duke {
         }
     }
 
+    /**
+     * Entry point of the whole program.
+     * @param args
+     */
     public static void main(String[] args) {
         new Duke().run();
     }

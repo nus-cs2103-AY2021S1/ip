@@ -10,8 +10,12 @@ import main.java.seedu.duke.todo.Task;
  * Represents a list of tasks. A task list supports various modifications of the task list.
  */
 public class TaskList {
-    ArrayList<Task> tasks = new ArrayList<>();
+    private ArrayList<Task> tasks = new ArrayList<>();
     private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy");
+
+    public ArrayList<Task> getTasks() {
+        return this.tasks;
+    }
 
     /**
      * Lists out all the tasks in the list.
@@ -68,9 +72,9 @@ public class TaskList {
         System.out.println("Nice! I've marked this task as done:");
         Task completedTask = tasks.get(taskNo - 1);
         completedTask.markAsDone();
-        System.out.println(" " + " " +
-                "[" + completedTask.getStatusIcon() + "] " +
-                completedTask.getDescription());
+        System.out.println(" " + " "
+                + "[" + completedTask.getStatusIcon() + "] "
+                + completedTask.getDescription());
     }
 
     /**
@@ -98,13 +102,18 @@ public class TaskList {
             System.out.println("Noted. I've removed this task:");
             Task taskToBeDeleted = tasks.get(taskNo - 1);
             tasks.remove(taskNo - 1);
-            System.out.println(" " + " " +
-                    "[" + taskToBeDeleted.getStatusIcon() + "] " +
-                    taskToBeDeleted.getDescription());
+            System.out.println(" " + " "
+                    + "[" + taskToBeDeleted.getStatusIcon() + "] "
+                    + taskToBeDeleted.getDescription());
             System.out.println("Now you have " + tasks.size() + " tasks in the list.");
         }
     }
 
+    /**
+     * Searches tasks that match the keyword.
+     * @param keyword The keyword provided by the user.
+     * @throws DukeException
+     */
     public void searchKeyword(String keyword) throws DukeException {
         if (tasks.size() <= 0) {
             throw new DukeException("You don't have any tasks.");
@@ -124,7 +133,7 @@ public class TaskList {
                 System.out.println(taskNo + "." + task);
             }
         } else {
-            System.out.println("You don't have anything related to " + "\""+ keyword + "\"");
+            System.out.println("You don't have anything related to " + "\"" + keyword + "\"");
         }
     }
 }

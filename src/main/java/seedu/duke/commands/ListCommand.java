@@ -1,14 +1,18 @@
 package main.java.seedu.duke.commands;
 
+import main.java.seedu.duke.DukeException;
+import main.java.seedu.duke.Storage;
 import main.java.seedu.duke.TaskList;
 import main.java.seedu.duke.Ui;
-import main.java.seedu.duke.Storage;
-import main.java.seedu.duke.DukeException;
 
 /**
  * Represents the command to list out all the task.
  */
 public class ListCommand extends Command {
+
+    /**
+     * Constructor of ListCommand.
+     */
     public ListCommand() {
         super("list");
     }

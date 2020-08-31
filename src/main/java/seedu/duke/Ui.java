@@ -10,6 +10,9 @@ public class Ui {
     private String line;
     private Scanner sc;
 
+    /**
+     * Constructor of Ui.
+     */
     public Ui() {
         this.line = getHorizontalLine();
         this.sc = new Scanner(System.in);
@@ -56,23 +59,26 @@ public class Ui {
         System.out.println("Bye. Hope to see you again soon!");
     }
 
+    /**
+     * Prints the graphical representation of Duke.
+     */
     public void greet() {
         String logo =
-                "                 .   ,\n" +
-                        "               .';_.';\n" +
-                        "                    _   \\\n" +
-                        "             .     (.) (.)--._\n" +
-                        "            .       \"   \"     `.\n" +
-                        "           .                   :\n" +
-                        "          .           `\"-.___.\"\n" +
-                        "         .   .         `.\n" +
-                        "         .    .  `.      .\n" +
-                        ",,.      .      ` . `.    .\n" +
-                        "\\W;      .         \"`     .\n" +
-                        "   `--'    ,    __,..-   '  .\n" +
-                        "          .   .'     `.   `' ;\n" +
-                        "          `.   `,      `.  .'\n" +
-                        "            \"._.'        `'";
+                "                 .   ,\n"
+                        + "               .';_.';\n"
+                        + "                    _   \\\n"
+                        + "             .     (.) (.)--._\n"
+                        + "            .       \"   \"     `.\n"
+                        + "           .                   :\n"
+                        + "          .           `\"-.___.\"\n"
+                        + "         .   .         `.\n"
+                        + "         .    .  `.      .\n"
+                        + ",,.      .      ` . `.    .\n"
+                        + "\\W;      .         \"`     .\n"
+                        + "   `--'    ,    __,..-   '  .\n"
+                        + "          .   .'     `.   `' ;\n"
+                        + "          `.   `,      `.  .'\n"
+                        + "            \"._.'        `'";
         System.out.println("Hello from Moomin\n" + logo);
         System.out.println("I'm your personal assistant.");
     }
