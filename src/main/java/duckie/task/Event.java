@@ -6,8 +6,8 @@ import java.time.format.DateTimeFormatter;
 /**
  * A task type in charge of task containing Event date and time
  */
-public class Event extends Task{
-    protected final static DateTimeFormatter DT_FORMATTER = DateTimeFormatter.ofPattern("E, MMM dd yyyy hh:mm a");
+public class Event extends Task {
+    protected static final DateTimeFormatter DT_FORMATTER = DateTimeFormatter.ofPattern("E, MMM dd yyyy hh:mm a");
     protected LocalDateTime dateTime;
 
     /**

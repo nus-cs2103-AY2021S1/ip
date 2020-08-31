@@ -4,7 +4,7 @@ package duckie.exception;
  * DuckieException thrown when there are insufficient info input
  */
 public class DuckieInsufficientInfoException extends DuckieException {
-    protected final static String INDENT = "\t";
+    protected static final String INDENT = "\t";
 
     /**
      * Instantiate DuckieInsufficientInfoErrorException

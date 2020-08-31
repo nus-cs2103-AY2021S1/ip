@@ -1,12 +1,14 @@
 package duckie.command;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
-import duckie.task.*;
-import duckie.exception.*;
-import duckie.Ui;
 import duckie.Storage;
+import duckie.Ui;
+import duckie.exception.DuckieException;
+import duckie.exception.DuckieNoIndexException;
+import duckie.exception.DuckieNoListException;
+import duckie.task.Task;
+import duckie.task.TaskList;
 
 /**
  * Command to mark a task as Done
