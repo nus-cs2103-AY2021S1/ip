@@ -1,3 +1,5 @@
+package duke;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -13,8 +15,14 @@ import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import exception.DukeException;
+import task.Deadline;
+import task.Event;
+import task.Task;
+import task.Todo;
+
 /**
- * A Storage object deals with loading tasks from the file and saving tasks in the file.
+ * A duke.Storage object deals with loading tasks from the file and saving tasks in the file.
  *
  * @author amelia
  * @version 1.0
@@ -31,7 +39,7 @@ public class Storage {
     /**
      * Store all tasks in a file.
      *
-     * @param tasks List of tasks as a TaskList object.
+     * @param tasks List of tasks as a duke.TaskList object.
      * @throws IOException If directory or file does not exist.
      */
     public void writeToFile(TaskList tasks) throws IOException {
@@ -61,7 +69,7 @@ public class Storage {
      * Converts date to a LocalDateTime object.
      *
      * @param taskDate Date of a task obtained from a .txt file.
-     * @return LocalDateTime object representing the date related to Task.
+     * @return LocalDateTime object representing the date related to task.Task.
      * @throws ParseException If an error has been reached while parsing.
      */
     public LocalDateTime getDate(String taskDate) throws ParseException {
@@ -135,7 +143,7 @@ public class Storage {
             }
 
             Task currTask;
-            if (taskType.equals("T")) { // Todo
+            if (taskType.equals("T")) { // task.Todo
                 String taskName = line.substring(pos + 1);
                 currTask = new Todo(taskName, isCompleted);
             } else {
@@ -146,12 +154,12 @@ public class Storage {
                 String taskDate = taskNameAndDate.split("\\)")[0].split("\\(")[1].substring(4);
                 LocalDateTime taskTime = getDate(taskDate);
 
-                if (taskType.equals("D")) { // Deadline
+                if (taskType.equals("D")) { // task.Deadline
                     currTask = new Deadline(taskName, isCompleted, taskTime);
-                } else if (taskType.equals("E")) { // Event
+                } else if (taskType.equals("E")) { // task.Event
                     currTask = new Event(taskName, isCompleted, taskTime);
                 } else {
-                    throw new DukeException("Task type is not recognised.");
+                    throw new DukeException("task.Task type is not recognised.");
                 }
             }
             pastTasks.add(currTask);

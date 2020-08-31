@@ -1,8 +1,12 @@
+package duke;
+
 import java.io.IOException;
 import java.text.ParseException;
 
+import exception.DukeException;
+
 /**
- * A Duke object represents the chatbot which responds to users' inputs.
+ * A duke.Duke object represents the chatbot which responds to users' inputs.
  *
  * @author amelia
  * @version 1.0
@@ -15,7 +19,7 @@ public class Duke {
     private Ui ui;
 
     /**
-     * Public constructor of Duke to create a Duke object to deal with user inputs.
+     * Public constructor of duke.Duke to create a duke.Duke object to deal with user inputs.
      *
      * @param filePath Path where file containing past and new tasks can be loaded from and saved to.
      */
@@ -30,7 +34,7 @@ public class Duke {
     }
 
     /**
-     * Starts the Duke chatbot.
+     * Starts the duke.Duke chatbot.
      *
      * @throws IOException If directory or file to write output to does not exist.
      */
@@ -44,21 +48,29 @@ public class Duke {
      * Prints a welcome message when the bot is first launched.
      */
     public void welcomeMsg() {
-        String welcomeMsg = "Hello! I'm Duke, some call me a parrot.\n"
+        String welcomeMsg = "Hello! I'm duke.Duke, some call me a parrot.\n"
                 + "What can I do for you?";
         System.out.println(welcomeMsg);
     }
 
     /**
-     * Creates new Duke object to process user inputs when the bot is launched.
+     * Creates new duke.Duke object to process user inputs when the bot is launched.
      *
      * @param args Command-line arguments.
      */
     public static void main(String[] args) {
         try {
-            new Duke("./data/duke.txt").run();
+            new Duke("../data/duke.txt").run();
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    public String getResponse(String input) {
+        return "Duke heard: " + input;
     }
 }

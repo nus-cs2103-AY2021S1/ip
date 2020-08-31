@@ -1,8 +1,16 @@
+package duke;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
+import exception.DukeException;
+import task.Deadline;
+import task.Event;
+import task.Task;
+import task.Todo;
+
 /**
- * A Parser object deals with making sense of user command.
+ * A duke.Parser object deals with making sense of user command.
  *
  * @author amelia
  * @version 1.0
@@ -11,7 +19,7 @@ import java.util.ArrayList;
 public class Parser {
     private TaskList currList;
 
-    Parser(TaskList currList) {
+    public Parser(TaskList currList) {
         this.currList = currList;
     }
 
@@ -44,7 +52,7 @@ public class Parser {
             Task currTask = currList.get(taskNumber - 1);
             if (currTask.getStatus()) {
                 // task has already marked done before
-                throw new DukeException("Task has already been completed earlier on!");
+                throw new DukeException("task.Task has already been completed earlier on!");
             } else {
                 currTask.markAsComplete();
                 System.out.println("Nice! I've marked this task as done:\n" + currTask.toString());
@@ -77,8 +85,8 @@ public class Parser {
     /**
      * Processes the input date by user.
      *
-     * @param inputDeadline Date related to Task.
-     * @return LocalDateTime object representing the date related to Task.
+     * @param inputDeadline Date related to task.Task.
+     * @return LocalDateTime object representing the date related to task.Task.
      * @throws DukeException If input date format is invalid.
      */
     public LocalDateTime processDate(String inputDeadline) throws DukeException {

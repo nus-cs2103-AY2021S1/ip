@@ -1,7 +1,9 @@
+package duke;
+
 import java.util.Scanner;
 
 /**
- * A Ui object deals with interactions with the user.
+ * A duke.Ui object deals with interactions with the user.
  *
  * @author amelia
  * @version 1.0
@@ -10,7 +12,7 @@ import java.util.Scanner;
 public class Ui {
 
     /**
-     * Obtain user inputs and edit the TaskList currList accordingly.
+     * Obtain user inputs and edit the duke.TaskList currList accordingly.
      *
      * @param currList Current list of tasks.
      */
