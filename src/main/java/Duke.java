@@ -9,8 +9,16 @@ public class Duke {
     private Storage stores;
     private TaskList tasks;
 
+    /**
+     * default constructor for launcher
+     */
     public Duke() {
-        // nothing
+        this.stores = new Storage("./data/duke.txt");
+        try {
+            this.tasks = new TaskList(stores);
+        } catch (Exception e) {
+            this.tasks = new TaskList();
+        }
     }
 
     /**
@@ -55,6 +63,6 @@ public class Duke {
     }
 
     String getResponse(String input) {
-        return "Duke heard: " + input;
+        return Parser.response(tasks, stores, input);
     }
 }

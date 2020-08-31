@@ -8,6 +8,8 @@ public class Task {
     private String name;
     private Type type;
     private LocalDate date;
+    private final Character cross = 'X';
+    private final String tick = "\u2713";
 
     enum Type {
         TODO("todo"),
@@ -73,9 +75,9 @@ public class Task {
 
     public String getCompletion() {
         if (completion) {
-            return "[✓]";
+            return "[" + tick + "]";
         } else {
-            return "[✗]";
+            return "[" + cross + "]";
         }
     }
 
