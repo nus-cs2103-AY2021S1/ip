@@ -21,7 +21,7 @@ public class Deadlines extends Task {
      * @param time date and time of deadline in the form of a string
      */
     Deadlines(String name, String time) {
-        super(name,time);
+        super(name, time);
         String[] by = time.split(" ");
         this.date = parseDate(by[1]);
         this.time = parseTime(by[2]);
@@ -65,7 +65,7 @@ public class Deadlines extends Task {
      */
     @Override
     public String toString() {
-        if (super.isDone) {
+        if (super.getDone()) {
             return "[D]" + "[" + "✓" + "] " + super.getName() + "(by: " + printDateTime() + ")";
         } else {
             return "[D]" + "[" + "✗" + "] " + super.getName() + "(by: " + printDateTime() + ")";

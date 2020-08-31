@@ -7,7 +7,7 @@ package duke;
  * @version 0.1
  * @since   27/8/2020
  */
-public class ToDo extends Task{
+public class ToDo extends Task {
 
     /**
      * ToDo constructor to initialize a ToDo object with the name
@@ -22,8 +22,8 @@ public class ToDo extends Task{
      * @return String
      */
     @Override
-    public String toString(){
-        if (super.isDone){
+    public String toString() {
+        if (super.getDone()) {
             return "[T]" + "[" + "✓" + "] " + super.getName();
         } else {
             return "[T]" + "[" + "✗" + "] " + super.getName();

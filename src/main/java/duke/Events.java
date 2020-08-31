@@ -11,7 +11,7 @@ import java.time.format.DateTimeFormatter;
  * @version 0.1
  * @since   27/8/2020
  */
-public class Events extends Task{
+public class Events extends Task {
     private LocalDate date;
     private LocalTime startTime;
     private LocalTime endTime;
@@ -22,7 +22,7 @@ public class Events extends Task{
      * @param time date and time of event in the form of a string
      */
     Events(String name, String time) {
-        super(name,time);
+        super(name, time);
         String[] at = time.split(" ");
         this.date = parseDate(at[1]);
         String[] timeArray = at[2].split("-");
@@ -69,11 +69,11 @@ public class Events extends Task{
      * @return String
      */
     @Override
-    public String toString(){
-        if (super.isDone) {
-            return "[E]" + "[" + "✓" + "] " + super.getName() + "(at: " + printDateTime()  +")";
+    public String toString() {
+        if (super.getDone()) {
+            return "[E]" + "[" + "✓" + "] " + super.getName() + "(at: " + printDateTime() + ")";
         } else {
-            return "[E]" + "[" + "✗" + "] " + super.getName() + "(at: " + printDateTime()  +")";
+            return "[E]" + "[" + "✗" + "] " + super.getName() + "(at: " + printDateTime() + ")";
         }
 
     }
