@@ -3,15 +3,17 @@ package main.java.emily.command;
 import java.io.File;
 import java.util.Scanner;
 
+
 /**
  * Main program
  */
 public class Emily {
 
     private static final String FILE_PATH = "data/emily.txt";
-    private final Storage storage;
+    private Storage storage;
     private TaskList tasks;
-    private final Ui ui;
+    private Ui ui;
+
 
     /**
      * Initialises Emily bot
