@@ -144,6 +144,6 @@ public class Ui {
      */
     public void sendCount(TaskList tasks) {
         int count = tasks.getCount();
-        System.out.println("Now you have " + count + (count==1?" task ":" tasks ") + "in the list.");
+        System.out.println("Now you have " + count + (count == 1 ? " task " : " tasks ") + "in the list.");
     }
 }

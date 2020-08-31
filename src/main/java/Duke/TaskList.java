@@ -4,6 +4,7 @@ import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
+
 import java.util.ArrayList;
 import java.util.Optional;
 import java.util.stream.Stream;
@@ -13,8 +14,8 @@ import java.util.stream.Stream;
  */
 public class TaskList {
 
-    public ArrayList<Task> list;
-    public int count;
+    private ArrayList<Task> list;
+    private int count;
 
     /**
      * Constructs an empty TaskList.
@@ -39,33 +40,35 @@ public class TaskList {
                 char startChar = line.charAt(0);
                 boolean isDone = line.charAt(4) == '1';
                 switch (startChar) {
-                    case 'T': {
-                        String description = line.substring(8);
-                        ToDo taskToAdd = new ToDo(description, isDone);
-                        this.list.add(taskToAdd);
-                        this.count++;
-                        break;
-                    }
-                    case 'D': {
-                        String descriptionAndDeadline = line.substring(8);
-                        int stringBreak = descriptionAndDeadline.indexOf('|');
-                        String deadline = descriptionAndDeadline.substring(stringBreak + 2);
-                        String description = descriptionAndDeadline.substring(0, stringBreak - 1);
-                        Deadline taskToAdd = new Deadline(description, deadline, isDone);
-                        this.list.add(taskToAdd);
-                        this.count++;
-                        break;
-                    }
-                    case 'E': {
-                        String descriptionAndDate = line.substring(8);
-                        int stringBreak = descriptionAndDate.indexOf('|');
-                        String date = descriptionAndDate.substring(stringBreak + 2);
-                        String description = descriptionAndDate.substring(0, stringBreak - 1);
-                        Event taskToAdd = new Event(description, date, isDone);
-                        this.list.add(taskToAdd);
-                        this.count++;
-                        break;
-                    }
+                case 'T': {
+                    String description = line.substring(8);
+                    ToDo taskToAdd = new ToDo(description, isDone);
+                    this.list.add(taskToAdd);
+                    this.count++;
+                    break;
+                }
+                case 'D': {
+                    String descriptionAndDeadline = line.substring(8);
+                    int stringBreak = descriptionAndDeadline.indexOf('|');
+                    String deadline = descriptionAndDeadline.substring(stringBreak + 2);
+                    String description = descriptionAndDeadline.substring(0, stringBreak - 1);
+                    Deadline taskToAdd = new Deadline(description, deadline, isDone);
+                    this.list.add(taskToAdd);
+                    this.count++;
+                    break;
+                }
+                case 'E': {
+                    String descriptionAndDate = line.substring(8);
+                    int stringBreak = descriptionAndDate.indexOf('|');
+                    String date = descriptionAndDate.substring(stringBreak + 2);
+                    String description = descriptionAndDate.substring(0, stringBreak - 1);
+                    Event taskToAdd = new Event(description, date, isDone);
+                    this.list.add(taskToAdd);
+                    this.count++;
+                    break;
+                }
+                default: {
+                }
                 }
             });
         }
