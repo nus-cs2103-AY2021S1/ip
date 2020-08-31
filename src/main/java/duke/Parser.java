@@ -45,50 +45,45 @@ public class Parser {
      * @param input User input.
      * @param tl    TaskList to be used.
      */
-    public static void allocate(String input, TaskList tl) {
+    public static String allocate(String input, TaskList tl) {
         String[] arr = input.split(" ");
         int idx;
 
         switch (arr[0]) {
         case "bye":
             tl.bye();
-            break;
+            return Ui.GOODBYE;
         case "list":
-            tl.display();
-            break;
+            return tl.display();
         case "find":
             try {
-                tl.find(input);
+                return tl.find(input);
             } catch (InvalidDescriptionException e) {
-                Ui.addLine(e.toString());
+                return e.toString();
             }
-            break;
         case "done":
             idx = Integer.parseInt(arr[1]) - 1;
             try {
-                tl.completeTask(idx);
+                return tl.completeTask(idx);
             } catch (InvalidIndexException e) {
-                Ui.addLine(e.toString());
+                return e.toString();
             }
-            break;
         case "delete":
             idx = Integer.parseInt(arr[1]) - 1;
             try {
-                tl.deleteTask(idx);
+                return tl.deleteTask(idx);
             } catch (InvalidIndexException e) {
-                Ui.addLine(e.toString());
+                return e.toString();
             }
-            break;
         default:
             try {
                 Task toAdd = handleInput(input);
-                tl.add(toAdd);
+                return tl.add(toAdd);
             } catch (InvalidDescriptionException e) {
-                Ui.addLine(e.toString());
+                return e.toString();
             } catch (InvalidTypeException e) {
-                Ui.addLine(e.toString());
+                return e.toString();
             }
-            break;
         }
     }
 }
