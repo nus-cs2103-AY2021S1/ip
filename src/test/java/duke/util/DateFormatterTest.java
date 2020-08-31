@@ -15,9 +15,9 @@ public class DateFormatterTest {
     @Test
     public void extractTimestampInput_dateString_dateObject() {
         try {
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hhmm");
-            Date expected = sdf.parse("2020-10-10 1800");
-            Date actual = DateFormatter.extractTimestampInput("2020-10-10 1800");
+            SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy hhmm");
+            Date expected = sdf.parse("10-10-2020 1800");
+            Date actual = DateFormatter.extractTimestampInput("10-10-2020 1800");
             assertEquals(expected, actual);
         } catch (DukeException | ParseException e) {
             fail("Exception thrown:" + e.getMessage());
@@ -31,7 +31,7 @@ public class DateFormatterTest {
             fail("Exception not thrown");
         } catch (DukeException e) {
             String expectedError = "Invalid input for date. Given '" + "2020 Oct 10 1021" + "', "
-                    + "expecting format yyyy-MM-dd hhmm or yyyy-MM-dd.";
+                    + "expecting format dd-MM-yyyy hhmm";
             assertEquals(e.getMessage(), expectedError);
         }
     }
