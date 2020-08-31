@@ -1,9 +1,12 @@
+package duke;
+
 import duke.command.Parser;
 import duke.exception.InvalidUserCommandException;
 import duke.exception.StorageException;
 import duke.storage.Storage;
 import duke.storage.TaskList;
 import duke.ui.Ui;
+
 
 /**
  * Represents a chatbot that maintains a task list for users.
