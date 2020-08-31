@@ -1,16 +1,20 @@
 package duke.task;
 
-import org.junit.jupiter.api.Test;
-
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.util.ArrayList;
+
+import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class DukeTest {
     @Test
-    public void TaskListOperationsTest() {
+    public void taskListOperationsTest() {
         //creating basic TaskList
         ArrayList<Task> al = new ArrayList<>();
         al.add(new Todo("test 1"));
@@ -32,7 +36,7 @@ public class DukeTest {
     }
 
     @Test
-    public void StorageUploadTest() throws YooException, IOException {
+    public void storageUploadTest() throws YooException, IOException {
 
         //upload() dummy text for testing
         Storage storage = new Storage("../../data/tasks.txt");
@@ -45,7 +49,7 @@ public class DukeTest {
         BufferedReader br = new BufferedReader(new FileReader(test));
         String actual = "";
         String line;
-        while( (line = br.readLine()) != null) {
+        while ((line = br.readLine()) != null) {
             actual += line;
         }
 

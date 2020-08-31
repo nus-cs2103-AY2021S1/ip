@@ -65,7 +65,7 @@ public class Parser {
 
     private static void findKeyword(TaskList tasks, String[] cmd, Ui ui) {
         TaskList tasksWithKeyword = new TaskList();
-        for (int i = 0; i < tasks.length(); i ++) {
+        for (int i = 0; i < tasks.length(); i++) {
             Task t = tasks.get(i);
             if (t.getDescription().contains(cmd[1])) {
                 tasksWithKeyword.add(t);

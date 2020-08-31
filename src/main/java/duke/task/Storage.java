@@ -1,6 +1,10 @@
 package duke.task;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -9,8 +13,8 @@ import java.util.ArrayList;
  */
 public class Storage {
 
-    ArrayList<Task> al;
-    String filePath;
+    private ArrayList<Task> al;
+    private String filePath;
 
     /**
      * Initialises a storage object containing a list of tasks.
@@ -41,7 +45,7 @@ public class Storage {
                     BufferedReader br = new BufferedReader(fr);
                     String line;
                     while ((line = br.readLine()) != null) {
-                        String temp[] = line.split(" // ", 4);
+                        String[] temp = line.split(" // ", 4);
                         addTaskToArrayList(temp, al);
                     }
                     fr.close();
@@ -75,6 +79,8 @@ public class Storage {
             Event e = new Event(temp[2], isDone, eDate);
             al.add(e);
             break;
+        default:
+            System.out.println("task cannot be added");
         }
     }
 
@@ -106,6 +112,8 @@ public class Storage {
                     Event e = (Event) t;
                     fw.write("E // " + isDone + " // " + e.getDescription() + " // " + e.at + "\n");
                     break;
+                default:
+                    System.out.println("task not written");
                 }
             }
             fw.close();
