@@ -22,7 +22,6 @@ public class DukeException extends Exception {
 
     @Override
     public String toString() {
-        return "---------------------------------------------------"
-                + "\nFAILURE: " + super.getMessage();
+        return "\nFAILURE: " + super.getMessage();
     }
 }

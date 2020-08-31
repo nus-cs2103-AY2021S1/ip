@@ -8,6 +8,12 @@ import duke.exceptions.EmptyDukeException;
 import duke.tasks.Task;
 
 
+
+
+
+
+
+
 /**
  * The Duke class implements the DukeChatBot that is wired to store, display, update and delete
  * a variety of tasks.
@@ -20,10 +26,8 @@ public class Duke {
     private Parser parser;
     private TaskList taskList;
     private Ui ui;
-
     /**
-     * Constructor whereby the duke class loads data from a pre-defined path on the hard disk.
-     *
+     * Constructor whereby the duke class loads data from a given path on the hard disk.
      * @param path File path for local data
      */
     public Duke(String path) {
@@ -41,18 +45,33 @@ public class Duke {
         }
     }
 
+    /** Constructor whereby the duke class loads data from a given path on the hard disk */
+
+    public Duke() {
+        try {
+            data = new Data("data/duke.txt");
+            this.taskList = new TaskList(data.loadData());
+        } catch (IOException | DukeInvalidTimeException | ArrayIndexOutOfBoundsException e) {
+            System.out.println("FAILURE: Unable to load data from local drive.");
+            try {
+                data = new Data();
+                this.taskList = new TaskList(data.loadData());
+            } catch (IOException | ArrayIndexOutOfBoundsException | DukeInvalidTimeException err) {
+                System.out.println("FAILURE: Unable to create any file for saving data");
+            }
+        }
+    }
+
     /**
      * Main method whereby the Duke chatbot runs.
-     *
      * @param args Command to run program
      */
     public static void main(String[] args) {
-        new Duke("data/duke.txt").run();
+        new Duke().run(); // new Duke("data/duke.txt").run();
     }
 
     /**
      * Void method that abstracts away most the logic behind running the Duke chatbot.
-     *
      */
     public void run() {
 
@@ -67,7 +86,13 @@ public class Duke {
         }
 
         this.ui.endDuke();
+        localSave();
+    }
 
+    /**
+     * Abstracts the process of saving latest changes to disk.
+     */
+    public void localSave() {
         try {
             data.save(this.taskList.todoList);
         } catch (IOException | NullPointerException e) {
@@ -77,69 +102,70 @@ public class Duke {
 
     /**
      * Void method that carries the logic behind assigning an action based on the command.
-     *
      * @param command Type of command
      * @param task Actual task
      */
 
-    public void assign(Commands command, String task) {
+    public String assign(Commands command, String task) {
+        String completedString = "";
         switch (command) {
         case LIST:
-            this.ui.displayList(this.taskList.todoList);
+            completedString = this.ui.displayList(this.taskList.todoList);
             break;
         case FIND:
             try {
-                this.ui.displayList(this.taskList.find(task));
+                completedString = this.ui.displayList(this.taskList.find(task));
             } catch (DukeInvalidTimeException e) {
-                this.ui.printError(e.toString());
+                completedString = this.ui.printError(e.toString());
             }
             break;
         case TODO:
         case EVENT:
         case DEADLINE:
-            decideTaskType(command, task);
+            completedString = decideTaskType(command, task);
             break;
         case DONE:
             Task todo = this.taskList.markDone(task);
-            this.ui.completeTask(todo);
+            completedString = this.ui.completeTask(todo);
             break;
         case DELETE:
             Task deletedTask = this.taskList.delete(task);
-            this.ui.deleteTask(deletedTask, this.taskList.todoList);
+            completedString = this.ui.deleteTask(deletedTask, this.taskList.todoList);
             break;
         case BLAH:
         case TASK:
-            assignOtherTasks(task);
+            completedString = assignOtherTasks(task);
             break;
         default:
+            completedString = ui.endDuke();
             break;
         }
+        System.out.println(completedString);
+        return completedString;
     }
 
     /**
      * Void method that carries the logic behind assigning the unconventional tasks.
      * tasks like normal tasks and blah.
-     *
      * @param task Actual task
      */
 
-    public void assignOtherTasks(String task) {
+    public String assignOtherTasks(String task) {
         try {
             this.taskList.storeTask(task);
-            this.ui.addOtherTask(task);
+            return this.ui.addOtherTask(task);
         } catch (BlahException e) {
-            this.ui.printError(e.toString());
+            return this.ui.printError(e.toString());
         }
     }
 
     /**
      * Void method that abstracts away the logic behind assigning a method based on task type.
-     *
      * @param commands Commands of TODO, DEADLINE & EVENT
      * @param task Actual activity
      */
 
-    public void decideTaskType(Commands commands, String task) {
+    public String decideTaskType(Commands commands, String task) {
         Task todo = null;
         try {
             switch (commands) {
@@ -155,10 +181,21 @@ public class Duke {
             default:
                 break;
             }
-            this.ui.addTask(todo, this.taskList.todoList);
+            return this.ui.addTask(todo, this.taskList.todoList);
         } catch (EmptyDukeException | DukeInvalidTimeException e) {
-            this.ui.printError(e.toString());
+            return this.ui.printError(e.toString());
         }
     }
-
+    /**
+     * Generates a response to user input.
+     * @param input the task/command given to Duke
+     * @return String message from Duke
+     */
+    public String getResponse(String input) {
+        this.ui = new Ui();
+        this.parser = new Parser();
+        Commands currentCommand = this.parser.analyse(input);
+        String response = assign(currentCommand, input);
+        return "Duke says: \n" + response;
+    }
 }

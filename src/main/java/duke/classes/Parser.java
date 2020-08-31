@@ -18,7 +18,6 @@ public class Parser {
 
     /**
      * Method to determine the type of command given to the chatbot.
-     *
      * @param command   Command given to the chatbot.
      * @return Commands from the Commands ENUM class
      */
@@ -39,6 +38,8 @@ public class Parser {
             return Commands.BLAH;
         } else if (command.startsWith("done")) {
             return Commands.DONE;
+        } else if (command.startsWith("bye")) {
+            return Commands.BYE;
         } else {
             return Commands.TASK;
         }
