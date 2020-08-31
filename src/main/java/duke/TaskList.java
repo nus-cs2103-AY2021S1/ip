@@ -11,6 +11,7 @@ public class TaskList {
     public TaskList() {
         this.tasks = new ArrayList<>();
     }
+
     public TaskList(List<Task> tasks) {
         this.tasks = new ArrayList<>(tasks);
     }
@@ -26,7 +27,7 @@ public class TaskList {
     }
 
     public void markAsDone(int taskNum) {
-        this.tasks.get(taskNum - 1).markAsDone(); // calling method in Task class
+        this.tasks.get(taskNum - 1).markAsDone();
     }
 
     public Task getTask(int taskNum) {

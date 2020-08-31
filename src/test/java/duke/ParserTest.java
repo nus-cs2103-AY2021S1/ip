@@ -11,6 +11,7 @@ public class ParserTest {
         Exception e = assertThrows(DukeException.class, () -> {
             Parser.parse("delete letter");
         });
+
         String expected = "SORRY!!! Task number is not valid.";
         String actual = e.getMessage();
         assertEquals(expected, actual);
@@ -21,6 +22,7 @@ public class ParserTest {
         Exception e = assertThrows(DukeException.class, () -> {
             Parser.parse("hey");
         });
+
         String expected = "SORRY!!! I don't know what that means :-(";
         String actual = e.getMessage();
         assertEquals(expected, actual);
@@ -31,6 +33,7 @@ public class ParserTest {
         Exception e = assertThrows(DukeException.class, () -> {
             Parser.parse("todo");
         });
+
         String expected = "SORRY!!! The description of a task cannot be empty.";
         String actual = e.getMessage();
         assertEquals(expected, actual);
@@ -41,6 +44,7 @@ public class ParserTest {
         Exception e = assertThrows(DukeException.class, () -> {
             Parser.parse("deadline CS2103T /by");
         });
+
         String expected = "SORRY!!! The description of a task cannot be empty.";
         String actual = e.getMessage();
         assertEquals(expected, actual);
@@ -51,6 +55,7 @@ public class ParserTest {
         Exception e = assertThrows(DukeException.class, () -> {
             Parser.parse("event CCA /at 7th June");
         });
+
         String expected = "SORRY!!! Wrong date format encountered!";
         String actual = e.getMessage();
         assertEquals(expected, actual);

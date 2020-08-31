@@ -1,23 +1,33 @@
 package duke;
 
-import duke.command.*;
-import duke.task.*;
+import duke.command.AddCommand;
+import duke.command.Command;
+import duke.command.CommandTypes;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.ExitCommand;
+import duke.command.ListCommand;
+
+import duke.task.ToDo;
+import duke.task.Deadline;
+import duke.task.Event;
 
 import java.time.format.DateTimeParseException;
 
-public class Parser { // deals with making sense of the user command
+public class Parser {
+
     public static Command parse(String fullCommand) throws DukeException {
         try {
-            String[] splitCommand = fullCommand.split(" ", 2); // limit is the result threshold; return 2 strings
+            String[] splitCommand = fullCommand.split(" ", 2);
             CommandTypes command = CommandTypes.valueOf(splitCommand[0].toUpperCase());
-            switch (command) { // use switch case for easy scalability
+            switch (command) {
                 case BYE:
                     return new ExitCommand();
                 case LIST:
                     return new ListCommand();
                 case DONE:
-                    return new DoneCommand(Integer.parseInt(splitCommand[1])); // if cannot change to integer,
-                case DELETE:                                                   // catch NumberFormatException
+                    return new DoneCommand(Integer.parseInt(splitCommand[1]));
+                case DELETE:
                     return new DeleteCommand(Integer.parseInt(splitCommand[1]));
                 case TODO:
                     ToDo todo = new ToDo(splitCommand[1]);
@@ -35,7 +45,7 @@ public class Parser { // deals with making sense of the user command
             }
         } catch (NumberFormatException e) {
             throw new DukeException("SORRY!!! Task number is not valid.");
-        } catch (IllegalArgumentException e) { // IllegalArgumentException is a parent class of NumberFormatException
+        } catch (IllegalArgumentException e) {
             throw new DukeException("SORRY!!! I don't know what that means :-(");
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("SORRY!!! The description of a task cannot be empty.");

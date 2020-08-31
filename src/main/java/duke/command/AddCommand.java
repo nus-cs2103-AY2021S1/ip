@@ -1,6 +1,10 @@
 package duke.command;
 
-import duke.*;
+import duke.DukeException;
+import duke.TaskList;
+import duke.Ui;
+import duke.Storage;
+
 import duke.task.Task;
 
 public class AddCommand extends Command {
@@ -9,6 +13,7 @@ public class AddCommand extends Command {
     public AddCommand(Task task) {
         this.task = task;
     }
+
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         tasks.addTask(task);

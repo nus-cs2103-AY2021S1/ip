@@ -3,9 +3,9 @@ package duke;
 import duke.command.Command;
 
 public class Duke {
-    private Ui ui;           // deals with interactions with the user
-    private Storage storage; // deals with loading/saving tasks from/in the file
-    private TaskList tasks;  // contains operations to add/delete tasks in the list
+    private Ui ui;
+    private Storage storage;
+    private TaskList tasks;
 
     public Duke(String filePath) {
         ui = new Ui();

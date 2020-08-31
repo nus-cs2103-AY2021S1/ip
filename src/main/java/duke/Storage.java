@@ -1,14 +1,17 @@
 package duke;
 
-import duke.task.*;
+import duke.task.Task;
+import duke.task.ToDo;
+import duke.task.Deadline;
+import duke.task.Event;
 
-import java.util.Scanner;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Storage {
     private final File file;
@@ -17,7 +20,7 @@ public class Storage {
         this.file = new File(filepath);
         file.getParentFile().mkdir();
         try {
-            file.createNewFile(); // returns true if filepath does not exist and a new file is created
+            file.createNewFile();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -27,6 +30,7 @@ public class Storage {
         try {
             Scanner sc = new Scanner(file);
             List<Task> taskList = new ArrayList<>();
+
             while (sc.hasNextLine()) {
                 String loadTask = sc.nextLine();
                 Task task;
@@ -54,7 +58,7 @@ public class Storage {
             FileWriter fw = new FileWriter(file);
             for (Task task : tasks) {
                 int isFinished = task.getIsDone() ? 1 : 0;
-                fw.write(task.save(isFinished) + "\n"); // write the task onto txt file with the | format
+                fw.write(task.save(isFinished) + "\n");
             }
             fw.close();
         } catch (IOException e) {
