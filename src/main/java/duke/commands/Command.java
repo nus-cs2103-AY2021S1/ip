@@ -16,6 +16,7 @@ public abstract class Command {
      * @param tasklist list of all the tasks stored in Duke so far.
      * @param ui prints out messages notifying user of what is being done.
      * @param storage stores all the tasks being added so far into user's local storage.
+     * @throws DukeException throw when error occurs while executing commands
      */
     public abstract void execute(TaskList tasklist, Ui ui, Storage storage) throws DukeException;
 

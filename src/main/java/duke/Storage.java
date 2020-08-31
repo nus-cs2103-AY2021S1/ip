@@ -24,6 +24,7 @@ public class Storage {
      * Reads the text file 'database.txt' which contains the saved tasks user input previously.
      *
      * @return List of tasks which user had from the last time they used the program.
+     * @throws DukeException throw when error occurs.
      */
     public List<Task> readFile() throws DukeException {
         String currentDirectory = System.getProperty("user.dir");
@@ -83,31 +84,37 @@ public class Storage {
      * Writes the list of tasks into text file 'database.txt' and saves it for future use.
      *
      * @param tasks current list of tasks of user.
+     * @throws IOException throw when FileWriter operations fail.
+     * @throws DukeException throw when error occurs and need to print error message.
      */
-    public void save(List<Task> tasks) throws IOException {
-        FileWriter fw = new FileWriter(database);
-        for (Task task : tasks) {
-            if (task instanceof Todo) {
-                if (task.getDone()) {
-                    fw.write("T" + "|" + "T" + "|" + task.getDescription() + System.lineSeparator());
-                } else {
-                    fw.write("T" + "|" + "F" + "|" + task.getDescription() + System.lineSeparator());
-                }
-            } else if (task instanceof Deadline) {
-                if (task.getDone()) {
-                    fw.write("D" + "|" + "T" + "|" + task.getDescription() + "|" + ((Deadline) task).getDate() + System.lineSeparator());
-                } else {
-                    fw.write("D" + "|" + "F" + "|" + task.getDescription() + "|" + ((Deadline) task).getDate() + System.lineSeparator());
-                }
-            } else if (task instanceof Event) {
-                if (task.getDone()) {
-                    fw.write("E" + "|" + "T" + "|" + task.getDescription() + "|" + ((Event) task).getDate() + System.lineSeparator());
-                } else {
-                    fw.write("E" + "|" + "F" + "|" + task.getDescription() + "|" + ((Event) task).getDate() + System.lineSeparator());
+    public void save(List<Task> tasks) throws IOException, DukeException {
+        try {
+            FileWriter fw = new FileWriter(database);
+            for (Task task : tasks) {
+                if (task instanceof Todo) {
+                    if (task.getDone()) {
+                        fw.write("T" + "|" + "T" + "|" + task.getDescription() + System.lineSeparator());
+                    } else {
+                        fw.write("T" + "|" + "F" + "|" + task.getDescription() + System.lineSeparator());
+                    }
+                } else if (task instanceof Deadline) {
+                    if (task.getDone()) {
+                        fw.write("D" + "|" + "T" + "|" + task.getDescription() + "|" + ((Deadline) task).getDate() + System.lineSeparator());
+                    } else {
+                        fw.write("D" + "|" + "F" + "|" + task.getDescription() + "|" + ((Deadline) task).getDate() + System.lineSeparator());
+                    }
+                } else if (task instanceof Event) {
+                    if (task.getDone()) {
+                        fw.write("E" + "|" + "T" + "|" + task.getDescription() + "|" + ((Event) task).getDate() + System.lineSeparator());
+                    } else {
+                        fw.write("E" + "|" + "F" + "|" + task.getDescription() + "|" + ((Event) task).getDate() + System.lineSeparator());
+                    }
                 }
             }
+            fw.close();
+        } catch (IOException e) {
+            throw new DukeException("error while saving :(");
         }
-        fw.close();
     }
 }
 

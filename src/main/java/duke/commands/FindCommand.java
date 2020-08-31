@@ -15,7 +15,7 @@ public class FindCommand extends Command {
     /**
      * Constructor to create FindCommand object.
      *
-     * @param description
+     * @param description description of task being searched for
      */
     public FindCommand(String description) {
         this.description = description;
