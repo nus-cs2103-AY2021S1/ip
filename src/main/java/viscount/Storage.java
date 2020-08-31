@@ -16,7 +16,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
-import viscount.exception.ViscountIOException;
+import viscount.exception.ViscountSaveDataException;
 import viscount.task.*;
 
 /**
@@ -39,9 +39,9 @@ public class Storage {
      * Saves task list data to disk.
      * 
      * @param tasks Task list saved.
-     * @throws ViscountIOException If exception occurs when writing to disk.
+     * @throws ViscountSaveDataException If exception occurs when writing to disk.
      */
-    public void saveToDisk(List<Task> tasks) throws ViscountIOException {
+    public void saveToDisk(List<Task> tasks) throws ViscountSaveDataException {
         Path filePath = Paths.get(filePathString);
         List<String> savedData = new ArrayList<>();
 
@@ -52,7 +52,7 @@ public class Storage {
         try {
             Files.write(filePath, savedData, StandardCharsets.UTF_8);
         } catch (IOException e) {
-            throw new ViscountIOException("saving");
+            throw new ViscountSaveDataException();
         }
     }
 
@@ -60,9 +60,9 @@ public class Storage {
      * Loads task list data from disk.
      * 
      * @return Task list loaded.
-     * @throws ViscountIOException If exception occurs when loading from disk or creating a new data file.
+     * @throws IOException If exception occurs when loading from disk or creating a new data file.
      */
-    public List<Task> loadFromDisk() throws ViscountIOException {
+    public List<Task> loadFromDisk() throws IOException {
         File directory = new File(dataDirectoryPath);
         
         if (!directory.exists()) {
@@ -74,45 +74,37 @@ public class Storage {
         List<Task> tasks = new ArrayList<>();
 
         if (doesFileExist) {
-            try {
-                File f = new File(filePathString);
-                Scanner sc = new Scanner(f);
+            File f = new File(filePathString);
+            Scanner sc = new Scanner(f);
 
-                while (sc.hasNext()) {
-                    String line = sc.nextLine();
-                    
-                    if (line.isEmpty()) {
-                        // If the data file has empty lines, skip them
-                        continue;
-                    } else {
-                        List<String> taskData = Arrays.asList(line.split("\\|"));
+            while (sc.hasNext()) {
+                String line = sc.nextLine();
+                
+                if (line.isEmpty()) {
+                    // If the data file has empty lines, skip them
+                    continue;
+                } else {
+                    List<String> taskData = Arrays.asList(line.split("\\|"));
 
-                        TaskType taskType = TaskType.valueOf(taskData.get(0));
-                        boolean isDone = !taskData.get(1).equals("0");
-                        String taskDescription = taskData.get(2);
+                    TaskType taskType = TaskType.valueOf(taskData.get(0));
+                    boolean isDone = !taskData.get(1).equals("0");
+                    String taskDescription = taskData.get(2);
 
-                        if (taskType == TaskType.Todo) {
-                            tasks.add(new Todo(taskDescription, isDone));
-                        } else if (taskType == TaskType.Deadline) {
-                            LocalDateTime dueDate = Parser.parseDateTime(
-                                    taskData.get(3), Parser.TASK_DATA_DATE_TIME_FORMATTER);
-                            tasks.add(new Deadline(taskDescription, isDone, dueDate));
-                        } else if (taskType == TaskType.Event) {
-                            LocalDateTime eventTime = Parser.parseDateTime(
-                                    taskData.get(3), Parser.TASK_DATA_DATE_TIME_FORMATTER);
-                            tasks.add(new Event(taskDescription, isDone, eventTime));
-                        }
+                    if (taskType == TaskType.Todo) {
+                        tasks.add(new Todo(taskDescription, isDone));
+                    } else if (taskType == TaskType.Deadline) {
+                        LocalDateTime dueDate = Parser.parseDateTime(
+                                taskData.get(3), Parser.TASK_DATA_DATE_TIME_FORMATTER);
+                        tasks.add(new Deadline(taskDescription, isDone, dueDate));
+                    } else if (taskType == TaskType.Event) {
+                        LocalDateTime eventTime = Parser.parseDateTime(
+                                taskData.get(3), Parser.TASK_DATA_DATE_TIME_FORMATTER);
+                        tasks.add(new Event(taskDescription, isDone, eventTime));
                     }
                 }
-            } catch (Exception e) {
-                throw new ViscountIOException("loading");
             }
         } else {
-            try {
-                Files.write(filePath, new ArrayList<String>(), StandardCharsets.UTF_8, StandardOpenOption.CREATE_NEW);
-            } catch (IOException e) {
-                throw new ViscountIOException("creating a new file for");
-            }
+            Files.write(filePath, new ArrayList<String>(), StandardCharsets.UTF_8, StandardOpenOption.CREATE_NEW);
         }
         
         return tasks;

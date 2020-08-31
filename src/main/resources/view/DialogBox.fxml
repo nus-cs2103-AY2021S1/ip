@@ -17,11 +17,12 @@
         <Label 
                 fx:id="dialog" 
                 text="Label" 
-                wrapText="true" />
+                wrapText="true"
+                minHeight="-Infinity"/>
         <ImageView 
                 fx:id="displayPicture" 
-                fitHeight="99.0" 
-                fitWidth="99.0" 
+                fitHeight="50.0" 
+                fitWidth="50.0" 
                 pickOnBounds="true" 
                 preserveRatio="true" />
     </children>

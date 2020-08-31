@@ -41,7 +41,7 @@ public class ListCommand extends Command {
      * @throws ViscountDateTimeParseException If exception occurs with parsing date string
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws ViscountException {
+    public String executeAndGetResponse(TaskList taskList, Ui ui, Storage storage) throws ViscountException {
         Predicate<Task> filterByModifier = task -> taskTypeModifier.isEmpty()
                 || task.getTaskType() == TaskType.valueOf(taskTypeModifier.toUpperCase());
         
@@ -56,7 +56,7 @@ public class ListCommand extends Command {
                     .filter(filterByDescription)
                     .collect(Collectors.toList());
             
-            ui.showList(filteredTasks, taskTypeModifier, dateString);
+            return ui.getListResponse(filteredTasks, taskTypeModifier, dateString);
         } else {
             try {
                 LocalDateTime queriedDateTime = dateString.equals("today")
@@ -72,7 +72,7 @@ public class ListCommand extends Command {
                         .sorted(Comparator.comparing(Task::getDateTime))
                         .collect(Collectors.toList());
 
-                ui.showList(
+                return ui.getListResponse(
                         filteredTasks,
                         taskTypeModifier, 
                         dateString.equals("today") 

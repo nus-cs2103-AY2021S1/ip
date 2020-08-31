@@ -57,8 +57,6 @@ public class Parser {
             return parseDoneCommand(arguments);
         case "delete":
             return parseDeleteCommand(arguments);
-        case "bye":
-            return new ExitCommand();
         default:
             throw new ViscountUnknownCommandException(baseCommand);
         }

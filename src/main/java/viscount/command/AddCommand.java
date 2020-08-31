@@ -6,7 +6,7 @@ import viscount.*;
 
 import viscount.task.*;
 
-import viscount.exception.ViscountIOException;
+import viscount.exception.ViscountSaveDataException;
 
 /**
  * Represents an add command.
@@ -24,18 +24,18 @@ public class AddCommand extends Command {
 
     /**
      * Executes the add command.
-     * 
+     *
      * @param taskList Task list where tasks are stored.
      * @param ui Ui to display response.
      * @param storage Storage to save changes to disk.
-     * @throws ViscountIOException If exception occurs with writing to disk.
+     * @throws ViscountSaveDataException If exception occurs with writing to disk.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws ViscountIOException {
+    public String executeAndGetResponse(TaskList taskList, Ui ui, Storage storage) throws ViscountSaveDataException {
         Task newTask = getNewTask();
         taskList.add(newTask);
         storage.saveToDisk(taskList.getTasks());
-        ui.showAdd(newTask, taskList.getTasksSize());
+        return ui.getAddResponse(newTask, taskList.getTasksSize());
     }
     
     private Task getNewTask() {
