@@ -15,7 +15,6 @@ public class Duke {
      * Constructs a duke that read a file from filePath to retrieve previously stored data
      * @param filePath the file path of the stored data
      */
-
     public Duke(String filePath) {
         this.filePath = filePath;
         ui = new Ui();
@@ -36,7 +35,7 @@ public class Duke {
         //...
         Parser p = new Parser();
         boolean isExit = false;
-        while(!isExit) {
+        while (!isExit) {
             String command = ui.ask();
             if (command.contains("bye")) {
                 isExit = true;

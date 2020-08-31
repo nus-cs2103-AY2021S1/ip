@@ -23,7 +23,7 @@ public class DukeException extends Exception {
             return "Meimei doesn't understand this command!";
         } else if (msg.equals("time")) {
             return "Date format error";
-        }else {
+        } else {
             return "☹ OOPS!!! The description of a " + msg + " cannot be empty.";
         }
     }

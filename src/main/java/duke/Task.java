@@ -10,14 +10,23 @@ public class Task {
     private String description;
     private Boolean isDone;
 
-     public Task(String name) {
+    /**
+     * Constructor for a task with a name
+     * @param name
+     */
+    public Task(String name) {
         this.description = name;
         this.isDone = false;
     }
 
+    /**
+     * Overloaded constructor for a task with a name
+     * @param name
+     * @param isDone if the task is completed
+     */
     public Task(String name, boolean isDone) {
-         this.description = name;
-         this.isDone = isDone;
+        this.description = name;
+        this.isDone = isDone;
     }
 
     public boolean findTask(String name) {
@@ -60,7 +69,7 @@ public class Task {
     }
 
     public String inputStyle() {
-         return this.isDone + " " +description;
+        return this.isDone + " " + description;
     }
 
     /**
@@ -68,14 +77,14 @@ public class Task {
      * @return
      */
     public String getStatusIcon() {
-         return (isDone) ? "\u2713" : "\u2718";
+        return (isDone) ? "\u2713" : "\u2718";
     }
 
     public void markAsDone() {
-         this.isDone = true;
+        this.isDone = true;
     }
     @Override
     public String toString() {
-         return "[" + this.getStatusIcon() + "] " + description;
+        return "[" + this.getStatusIcon() + "] " + description;
     }
 }

@@ -16,6 +16,10 @@ public class WriteFile {
         fw.close();
     }
 
+    /**
+     * The main method to run the WriteFile file
+     * @param args
+     */
     public static void main(String[] args) {
         String file2 = "/Users/ngjiaxin/Desktop/AY2021/CS2103T/Week 2/data";
         try {

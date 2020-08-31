@@ -6,7 +6,7 @@ import java.util.Scanner;
  */
 
 public class Ui {
-    Scanner sc = new Scanner(System.in);
+    private Scanner sc = new Scanner(System.in);
 
     public Ui() {
         System.out.println("Hello! I'm meimei ^_^\nI could scream at you all day!");

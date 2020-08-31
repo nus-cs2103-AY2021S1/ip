@@ -22,6 +22,10 @@ public class ReadFile {
         }
     }
 
+    /**
+     * The main method to test out the ReadFile file
+     * @param args
+     */
     public static void main(String[] args) {
         try {
             printFileContents("data");

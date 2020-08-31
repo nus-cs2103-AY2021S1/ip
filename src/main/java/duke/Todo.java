@@ -16,7 +16,7 @@ public class Todo extends Task {
 
     @Override
     public String inputStyle() {
-        return "todo " + super.inputStyle() ;
+        return "todo " + super.inputStyle();
     }
     @Override
     public String toString() {

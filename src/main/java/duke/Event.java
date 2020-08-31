@@ -9,13 +9,24 @@ import java.time.format.DateTimeFormatter;
 public class Event extends Task {
     protected LocalDate at;
 
+    /**
+     * Constructor for an event task
+     * @param description
+     * @param at the specified time
+     */
     public Event(String description, String at) {
         super(description);
         this.at = LocalDate.parse(at);
     }
 
-    Event(String description, String at, boolean done) {
-        super(description, done);
+    /**
+     * Overloaded constructor for an event task
+     * @param description
+     * @param at the specified time
+     * @param isDone is the event completed
+     */
+    Event(String description, String at, boolean isDone) {
+        super(description, isDone);
         this.at = LocalDate.parse(at);
     }
     /**
@@ -24,12 +35,13 @@ public class Event extends Task {
      */
     @Override
     public String inputStyle() {
-        return "event " + super.inputStyle() + " /at " + at;
+        return "event " + super.inputStyle()
+                + " /at " + at;
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " +
-                at.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+        return "[E]" + super.toString() + " (at: "
+                + at.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 }

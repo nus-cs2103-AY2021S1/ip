@@ -1,7 +1,6 @@
 package duke;
 
 import java.time.format.DateTimeParseException;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,9 +34,9 @@ public class TaskList {
 
     public static void doneTask(String remain) {
         int index = Integer.parseInt(remain);
-        tasks.get(index-1).markAsDone();
+        tasks.get(index - 1).markAsDone();
         System.out.println("Nice! This task is marked as done!");
-        System.out.println(tasks.get(index-1));
+        System.out.println(tasks.get(index - 1));
     }
 
     /**
@@ -84,7 +83,7 @@ public class TaskList {
             Ui.addedTask(new Deadline(description, by), tasks.size());
         } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println(new DukeException("deadline"));
-        }  catch (DateTimeParseException e2) {
+        } catch (DateTimeParseException e2) {
             System.out.println(new DukeException("time"));
         }
     }
@@ -97,6 +96,11 @@ public class TaskList {
         return tasks;
     }
 
+    /**
+     * Void method to add a task in string format from file
+     * @param task to be added to arraylist of tasks
+     * @param store the arraylist of tasks stored
+     */
     public static void addTaskFromFile(String task, ArrayList<Task> store) {
         String type = task.split(" ", 2)[0];
         String remain = task.split(" ", 2)[1];
@@ -125,6 +129,10 @@ public class TaskList {
         }
     }
 
+    /**
+     * Void method to search for a task with a given keyword
+     * @param name of the keyword
+     */
     public static void findTask(String name) {
         List<Task> result = new ArrayList<>();
         for (int i = 0; i < tasks.size(); i++) {
@@ -142,10 +150,13 @@ public class TaskList {
         }
     }
 
+    /**
+     * Void method to print the list of tasks stored.
+     */
     public static void printTaskList() {
         System.out.println("Here are the tasks in your list: ");
         for (int i = 0; i < tasks.size(); i++) {
-            System.out.println((i+1) + "." + tasks.get(i).toString());
+            System.out.println((i + 1) + "." + tasks.get(i).toString());
         }
     }
 
@@ -156,7 +167,7 @@ public class TaskList {
 
     public static void deleteTask(String command) {
         int index = Integer.parseInt(command);
-        Task k = tasks.get(index-1);
+        Task k = tasks.get(index - 1);
         tasks.remove(k);
         Ui.deletedTask(k);
     }

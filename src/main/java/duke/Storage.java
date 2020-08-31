@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -14,9 +13,9 @@ import java.util.Scanner;
  */
 
 public class Storage {
-    File file;
+    private File file;
 
-    Storage(String filePath)  {
+    Storage(String filePath) {
         this.file = new File(filePath);
     }
 
