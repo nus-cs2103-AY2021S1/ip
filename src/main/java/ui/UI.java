@@ -13,7 +13,7 @@ import tasks.TaskList;
 public class UI {
 
     // maximum number of characters across a screen
-    public static final int CHAT_WIDTH = 47;
+    public static final int CHAT_WIDTH = 35;
 
     // Buffer to wrap text to the next line if the text if too long.
     // This buffer helps to keep words intact while wrapping the text
@@ -38,15 +38,29 @@ public class UI {
     }
 
     /**
-     * Returns a chat box wrapped around a given text.
+     * Returns a chat box for KING wrapped around a given text.
      *
      * @param chatContent text string.
      * @return String chat box around text.
+     * @see king.King
      */
-    public static String chatBox(String chatContent) {
-        return "\t======= King says ===================================\n\t"
+    public static String kingChatBox(String chatContent) {
+        return "\t" + printString("King says", 5, '-') + "\n\t"
                 + formatStringIfLong(chatContent) + "\n"
-                + "\t=====================================================\n";
+                + "\t" + printString("", CHAT_WIDTH, '-') + "\n";
+    }
+
+    /**
+     * Returns a chat box for KING wrapped around a given text.
+     *
+     * @param chatContent text string.
+     * @return String chat box around text.
+     * @see king.King
+     */
+    public static String userChatBox(String chatContent) {
+        return "\t" + printString("", CHAT_WIDTH, '=') + "\n\t"
+                + formatStringIfLong(chatContent) + "\n"
+                + "\t" + printString("", CHAT_WIDTH, '=') + "\n";
     }
 
     /**
@@ -56,9 +70,9 @@ public class UI {
      * @return String error box around error message.
      */
     public static String errorBox(String error) {
-        return "-------- Error Encountered -------------------------------------\n\t"
+        return printString("Error Encountered", 4, '=') + "\n\t"
                 + formatStringIfLong(error) + "\n"
-                + "----------------------------------------------------------------\n";
+                + printString("", CHAT_WIDTH, '=') + "\n";
     }
 
     /**
@@ -70,7 +84,7 @@ public class UI {
      * @see TaskList
      */
     public static String addItemChatBox(String chatContent, int numOfItems) {
-        return chatBox("Got it. I've added this task:\n"
+        return kingChatBox("Got it. I've added this task:\n"
                 + "\t\t" + chatContent
                 + "\n\t Now you have " + numOfItems + " tasks in the list.");
     }
@@ -84,7 +98,7 @@ public class UI {
      * @see TaskList
      */
     public static String deleteItemChatBox(String chatContent, int numOfItemsLeft) {
-        return chatBox("I have deleted the following item:\n"
+        return kingChatBox("I have deleted the following item:\n"
                 + "\t\t" + chatContent
                 + "\n\tYou got " + numOfItemsLeft + " task(s) left.");
     }
@@ -97,7 +111,7 @@ public class UI {
      * @see tasks.Task
      */
     public static String doneChatBox(String chatContent) {
-        return chatBox("Nice! I've marked this task as done:\n\t\t"
+        return kingChatBox("Nice! I've marked this task as done:\n\t\t"
                 + chatContent
         );
     }
@@ -114,7 +128,7 @@ public class UI {
         for (int number = 0; number < len; number++) {
             formatted.append("\n\t  " + (number + 1) + ". " + taskList.get(number).toString());
         }
-        return chatBox("There are " + len + " items in your list:"
+        return kingChatBox("There are " + len + " items in your list:"
                 + formatted.toString());
     }
 
@@ -130,7 +144,7 @@ public class UI {
         for (int number = 0; number < len; number++) {
             formatted.append("\n\t  " + (number + 1) + ". " + taskList.get(number).toString());
         }
-        return chatBox("I found " + len + " items with the " + keyword + " keyword:"
+        return kingChatBox("I found " + len + " items with the " + keyword + " keyword:"
                 + formatted.toString());
     }
 
@@ -163,5 +177,17 @@ public class UI {
         } else {
             return unformattedString;
         }
+    }
+
+    private static String printString(String text, int posOfText, char symbol) {
+        StringBuilder result = new StringBuilder();
+        for (int i = 0; i < posOfText; i++) {
+            result.append(symbol);
+        }
+        result.append(text);
+        for (int i = result.length(); i < CHAT_WIDTH; i++) {
+            result.append(symbol);
+        }
+        return result.toString();
     }
 }
