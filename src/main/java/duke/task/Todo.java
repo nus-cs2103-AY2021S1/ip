@@ -1,6 +1,5 @@
 package duke.task;
 
-import java.time.LocalDate;
 
 /**
  * <h1> Todo Task class </h1>
