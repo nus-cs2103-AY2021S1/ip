@@ -1,9 +1,8 @@
 package duke.task;
 
-import duke.task.Task;
-
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
+
 
 /**
  * Encapsulates a list of tasks.
@@ -57,7 +56,7 @@ public class TaskList {
      * @return Task that was deleted.
      */
     public Task deleteTask(int id) {
-        return this.tasks.remove(id -1);
+        return this.tasks.remove(id - 1);
     }
 
     /**

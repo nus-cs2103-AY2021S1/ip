@@ -1,11 +1,12 @@
 package duke.task;
 
-import duke.exception.DukeException;
-
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+import duke.exception.DukeException;
+
 
 /**
  * Encapsulates a task that needs to be done by a certain date and time.
@@ -42,8 +43,8 @@ public class Deadline extends Task {
             this.dateBy = LocalDate.parse(parts[0]);
             this.timeBy = LocalTime.parse(parts[1]);
         } catch (DateTimeParseException e) {
-            throw new DukeException("Please input date and time in correct format: " +
-                    "'yyyy-MM-dd HH:MM' (24-hour time format).");
+            throw new DukeException("Please input date and time in correct format:"
+                    + " 'yyyy-MM-dd HH:MM' (24-hour time format).");
         }
     }
 
@@ -63,8 +64,8 @@ public class Deadline extends Task {
             this.dateBy = LocalDate.parse(parts[0]);
             this.timeBy = LocalTime.parse(parts[1]);
         } catch (DateTimeParseException e) {
-            throw new DukeException("Please input date and time in correct format: " +
-                    "'yyyy-MM-dd HH:MM' (24-hour time format)");
+            throw new DukeException("Please input date and time in correct format:"
+                    + " 'yyyy-MM-dd HH:MM' (24-hour time format)");
         }
     }
 
