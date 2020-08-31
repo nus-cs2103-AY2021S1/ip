@@ -22,7 +22,7 @@ public class Deadline extends Task {
 
     @Override
     public String getDescriptionForDatabase() {
-        return "deadline - " + (this.isTaskDone() ? "1" : "0") + " - " +
-                this.getDescription() + " - " + this.deadline;
+        return "deadline - " + (isTaskDone() ? "1" : "0") + " - " +
+                getDescription() + " - " + deadline;
     }
 }

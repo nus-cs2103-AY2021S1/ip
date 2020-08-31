@@ -8,8 +8,8 @@ class TaskTest {
     void testTodoCorrectDescription() {
         Todo todo = new Todo("Deliver Parcel", true);
         String todoText = todo.toString();
-        String todoDBText = todo.getDescriptionForDatabase();
-        assertEquals("todo - 1 - Deliver Parcel", todoDBText);
+        String todoDatabaseText = todo.getDescriptionForDatabase();
+        assertEquals("todo - 1 - Deliver Parcel", todoDatabaseText);
         assertEquals("[T][✓] Deliver Parcel", todoText);
     }
 
@@ -17,8 +17,8 @@ class TaskTest {
     void testEventCorrectDescription() {
         Event event = new Event("Concert with Friends", "OCTOBER 20 2021 12:45 AM", false);
         String eventDescription = event.toString();
-        String eventDBDescription = event.getDescriptionForDatabase();
-        assertEquals("event - 0 - Concert with Friends - OCTOBER 20 2021 12:45 AM", eventDBDescription);
+        String eventDatabaseDescription = event.getDescriptionForDatabase();
+        assertEquals("event - 0 - Concert with Friends - OCTOBER 20 2021 12:45 AM", eventDatabaseDescription);
         assertEquals("[E][X] Concert with Friends (at: OCTOBER 20 2021 12:45 AM)", eventDescription);
     }
 

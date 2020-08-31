@@ -21,15 +21,15 @@ public abstract class Task {
 
     @Override
     public String toString() {
-        return "[" + (isDone ? "✓" : "X") + "] " + this.description;
+        return "[" + (isDone ? "✓" : "X") + "] " + description;
     }
 
     public String getDescription() {
-        return this.description;
+        return description;
     }
 
     public boolean isTaskDone() {
-        return this.isDone;
+        return isDone;
     }
 
     public abstract String getDescriptionForDatabase();
