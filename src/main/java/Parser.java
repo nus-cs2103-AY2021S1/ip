@@ -51,4 +51,48 @@ public class Parser {
         }
     }
   }
+
+  public String parseCommandUi(String[] inputs, TaskList tasks) {
+    String command = inputs[0];
+    switch (command) {
+      case "list":
+        return tasks.list();
+      case "done":
+        try {
+          return tasks.handleDone(inputs);
+        } catch (DukeException e) {
+          System.out.println(e);
+          return e.getMessage();
+        }
+      case "deadline":
+        return tasks.handleDeadline(inputs);
+      case "event":
+        return tasks.handleEvent(inputs);
+      case "todo":
+        try {
+          return tasks.handleToDo(inputs);
+        } catch (DukeException e) {
+          System.out.println(e);
+          return e.getMessage();
+        }
+      case "delete":
+        try {
+          return tasks.handleDelete(inputs);
+        } catch (DukeException e) {
+          System.out.println(e);
+          return e.getMessage();
+        }
+      case "find":
+        return tasks.handleFind(inputs);
+      case "bye":
+        return "Bye. Hope to see you again soon!";
+      default:
+        try {
+          throw new DukeException("I'm sorry, but I don't know what that means :-(");
+        } catch (DukeException e) {
+          System.out.println(e);
+          return e.getMessage();
+        }
+    }
+  }
 }
