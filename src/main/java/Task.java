@@ -19,5 +19,7 @@ public abstract class Task {
     public boolean isDone() {
         return isDone;
     }
+
+    public abstract String[] getSaveData();
 }
 

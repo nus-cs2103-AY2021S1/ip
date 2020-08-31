@@ -12,6 +12,17 @@ public class DeadlineTask extends Task {
         deadline = output[1].replaceAll(pattern, "$3");
     }
 
+    public DeadlineTask(String description, boolean done, String deadline) {
+        super(description);
+        isDone = done;
+        this.deadline = deadline;
+    }
+
+    @Override
+    public String[] getSaveData() {
+        return new String[] {"D", isDone ? "1" : "0", description, deadline};
+    }
+
     @Override
     public String toString()
     {
