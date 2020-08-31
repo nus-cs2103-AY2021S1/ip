@@ -41,28 +41,28 @@ public class Duke {
         }
     }
 
-//    /**
-//     * Runs the chat bot, continuously interact with user.
-//     * It also executes the command corresponding to user input.
-//     */
-//    public void run() {
-//        ui.intro();
-//        boolean shouldExit = false;
-//        while (!shouldExit) {
-//            String fullCommand = ui.readCommand();
-//            try {
-//                Command c = Parser.parse(fullCommand);
-//                shouldExit = !c.execute(list, ui, storage);
-//            } catch (DukeEmptyIndexException
-//                    | DukeEmptyDescriptionException
-//                    | DukeEmptyByException
-//                    | DukeEmptyAtException
-//                    | DukeInvalidDateTimeInputException
-//                    | DukeEmptyKeywordException e) {
-//                ui.showError(e);
-//            }
-//        }
-//    }
+    //    /**
+    //     * Runs the chat bot, continuously interact with user.
+    //     * It also executes the command corresponding to user input.
+    //     */
+    //    public void run() {
+    //        ui.intro();
+    //        boolean shouldExit = false;
+    //        while (!shouldExit) {
+    //            String fullCommand = ui.readCommand();
+    //            try {
+    //                Command c = Parser.parse(fullCommand);
+    //                shouldExit = !c.execute(list, ui, storage);
+    //            } catch (DukeEmptyIndexException
+    //                    | DukeEmptyDescriptionException
+    //                    | DukeEmptyByException
+    //                    | DukeEmptyAtException
+    //                    | DukeInvalidDateTimeInputException
+    //                    | DukeEmptyKeywordException e) {
+    //                ui.showError(e);
+    //            }
+    //        }
+    //    }
 
     /**
      * Checks to see if directory is found.
@@ -100,15 +100,15 @@ public class Duke {
         }
     }
 
-//    /**
-//     * Main method that runs the program.
-//     *
-//     * @param args The String array.
-//     */
-//    public static void main(String[] args) {
-//        String homePath = System.getProperty("user.home");
-//        checkAndMakeDir(homePath + "/data");
-//        Duke duke = new Duke(homePath + "/data/duke.txt");
-//        duke.run();
-//    }
+    //    /**
+    //     * Main method that runs the program.
+    //     *
+    //     * @param args The String array.
+    //     */
+    //    public static void main(String[] args) {
+    //        String homePath = System.getProperty("user.home");
+    //        checkAndMakeDir(homePath + "/data");
+    //        Duke duke = new Duke(homePath + "/data/duke.txt");
+    //        duke.run();
+    //    }
 }
