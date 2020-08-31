@@ -1,6 +1,6 @@
 public class Task {
-    private static final String ICON_TICK = "✓";
-    private static final String ICON_CROSS = "✗";
+    public static final String ICON_TICK = "✓";
+    public static final String ICON_CROSS = "✗";
 
     protected String description;
     protected boolean isDone;
