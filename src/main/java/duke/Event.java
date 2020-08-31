@@ -4,16 +4,22 @@ import java.time.LocalDate;
 import java.time.format.TextStyle;
 import java.util.Locale;
 
+/**
+ * Represents a task with a LocalDate
+ * signifying the time of the event.
+ */
 public class Event extends Task {
     private LocalDate time;
 
+    /**
+     * Constructor for Event, initialises the description and time
+     * of event.
+     * @param description description of the task.
+     * @param time the time the event starts.
+     */
     public Event(String description, LocalDate time) {
         super(description);
         this.time = time;
-    }
-
-    public String getTime() {
-        return time.toString();
     }
 
     @Override

@@ -1,22 +1,44 @@
 package duke;
 
+/**
+ * Represents a task that has a description and
+ * can be completed.
+ */
 public class Task {
     protected String description;
     private boolean isDone;
 
+    /**
+     * Constructor for Task, initialised with a description
+     * and not completed.
+     * @param description The description describes the task.
+     */
     public Task(String description) {
         this.description = description;
         this.isDone = false;
     }
 
+    /**
+     * Returns the corresponding unicode symbol based
+     * on whether the task is completed.
+     * @return String of either a checkmark or cross depending on whether
+     * the task is completed.
+     */
     public String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
 
+    /**
+     * Getter for isDone.
+     * @return boolean of the status of the task.
+     */
     public boolean getIsDone() {
         return isDone;
     }
 
+    /**
+     * Sets isDone as true to mark the task as completed.
+     */
     public void markAsDone() {
         isDone = true;
     }

@@ -8,6 +8,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Used to load and save data files to the
+ * file path specified.
+ */
 public class Storage {
     private String filePath;
 
@@ -15,6 +19,10 @@ public class Storage {
         this.filePath = filePath;
     }
 
+    /**
+     * Loads and parses data files into a list of tasks.
+     * @return A list of provided in the data file.
+     */
     public List<Task> load() {
         List<Task> tasks = new ArrayList<>();
         File dataFile = new File(filePath);
@@ -54,6 +62,10 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Formats a task and appends a given task to the end of the data file.
+     * @param task The task that will be appended to the data file.
+     */
     public void saveToFile(Task task) {
         try {
             FileWriter fileWriter = new FileWriter("data.txt", true);

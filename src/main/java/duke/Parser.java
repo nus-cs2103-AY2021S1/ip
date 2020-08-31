@@ -2,8 +2,19 @@ package duke;
 
 import java.time.LocalDate;
 
+/**
+ * Parses user input.
+ */
 public class Parser {
 
+    /**
+     * Parses user input and performs corresponding actions
+     * through ui, taskList and storage.
+     * @param userInput The line of text keyed in by the user.
+     * @param ui User interface displayed by the application.
+     * @param taskList Collection of the list of tasks.
+     * @param storage Storage to save and load files.
+     */
     public static void parseUserInput(String userInput, Ui ui, TaskList taskList, Storage storage) {
         if (userInput.startsWith("bye")) {
             ui.printMessage("Bye! See you next time :)");

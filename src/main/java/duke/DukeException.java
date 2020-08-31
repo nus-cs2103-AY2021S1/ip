@@ -1,14 +1,15 @@
 package duke;
 
+/**
+ * Base class for custom exceptions specific to Duke.
+ */
 public class DukeException extends Exception{
-    protected final String message;
 
+    /**
+     * Constructor for custom Exception.
+     * @param message Error message explaining the error.
+     */
     public DukeException(String message) {
-        this.message = message;
-    }
-
-    @Override
-    public String toString() {
-        return message;
+        super(message);
     }
 }

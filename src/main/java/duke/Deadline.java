@@ -4,16 +4,22 @@ import java.time.LocalDate;
 import java.time.format.TextStyle;
 import java.util.Locale;
 
+/**
+ * Represents a Deadline as a Task with
+ * a due date.
+ */
 public class Deadline extends Task {
     private LocalDate dueDate;
 
+    /**
+     * Constructor for Deadline, initialises description
+     * in the base class and also the dueDate.
+     * @param description description of the task.
+     * @param dueDate date indicating when the task is due.
+     */
     public Deadline(String description, LocalDate dueDate) {
         super(description);
         this.dueDate = dueDate;
-    }
-
-    public String getDueDate() {
-        return dueDate.toString();
     }
 
     @Override

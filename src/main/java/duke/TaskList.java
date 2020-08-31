@@ -3,6 +3,10 @@ package duke;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Data class containing the list of tasks
+ * with operations to add or delete tasks.
+ */
 public class TaskList {
     private List<Task> tasks;
 
