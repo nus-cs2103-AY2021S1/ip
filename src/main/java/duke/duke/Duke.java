@@ -1,21 +1,15 @@
 package duke.duke;
 
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.stage.Stage;
-
 import duke.command.DukeException;
 import duke.command.Parser;
-
 import duke.storage.Storage;
-
 import duke.task.TaskList;
+import javafx.fxml.FXML;
 
 /**
  * Duke class that runs the Duke chat bot program.
  */
-public class Duke extends Application {
+public class Duke {
 
     private Storage storage;
     private TaskList list;
@@ -50,13 +44,19 @@ public class Duke extends Application {
         storage.updateFile(list);
     }
 
-    @Override
-    public void start(Stage stage) {
-        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
-        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
-
-        stage.setScene(scene); // Setting the stage to show our screen
-        stage.show(); // Render the stage.
+    /**
+     * Gets the response after processing the user input.
+     *
+     * @param input The input provided by the user.
+     * @return String representation of the resulting command that was executed.
+     */
+    @FXML
+    public String getResponse(String input) {
+        try {
+            return parser.processCommand(input);
+        } catch (DukeException e) {
+            return e.getMessage();
+        }
     }
 
     public static void main(String[] args) {
