@@ -44,33 +44,6 @@ public class Duke {
     }
 
     /**
-     * Runs and starts the programme.
-     */
-    public void run() {
-        ui.showWelcomeMessage();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                Command command = Parser.parseCommand(fullCommand);
-                command.execute(manager, ui, storage);
-                isExit = command.isExit();
-            } catch (DukeException e) {
-                ui.showErrorMessage(e.getMessage());
-            }
-        }
-    }
-
-    /**
-     * Starts up Duke.
-     * @param args Command line arguments.
-     */
-    public static void main(String[] args) {
-        Duke duke = new Duke("data/duke.txt");
-        duke.run();
-    }
-
-    /**
      * Returns string representation of the response by Duke.
      *
      * @param input The input message by the user.
