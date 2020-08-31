@@ -21,6 +21,7 @@ public class ExitCommand extends Command {
      * @param tasks no change made
      * @param ui
      * @param storage no change made
+     * @return String returns the string of the output that informs the exit action has been complete.
      * @throws DukeException not thrown
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {

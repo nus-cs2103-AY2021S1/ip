@@ -4,17 +4,17 @@ package Duke.Errors;
  * The class FindException deals with what happens when an error occurs for task with find keyword
  */
 public class FindException extends DukeException {
-    private boolean description;
-    private String string;
+    private boolean descriptionAbsent;
+    private String description;
 
     /**
      * constructor assigns values of description and string
-     * @param description value is assigned to this.description
-     * @param string value is assigned to this.string
+     * @param descriptionAbsent value is assigned to this.description
+     * @param description value is assigned to this.string
      */
-    public FindException(boolean description, String string){
+    public FindException(boolean descriptionAbsent, String description){
+        this.descriptionAbsent = descriptionAbsent;
         this.description = description;
-        this.string = string;
     }
 
     /**
@@ -24,8 +24,8 @@ public class FindException extends DukeException {
      * message regarding that would be released.
      */
     public String toString(){
-        if(description){
-            return "there are no matches to your keyword: " + string;
+        if(descriptionAbsent){
+            return "there are no matches to your keyword: " + description;
         }
         return "description of find cannot be empty!";
     }

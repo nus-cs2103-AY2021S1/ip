@@ -30,7 +30,7 @@ abstract public class AddCommand extends Command {
      * @param taskList where the tasks here is updated with task added
      * @throws IOException when the file in storage is not present
      */
-    public static String update(Storage storage, Task task, TaskList taskList) throws IOException {
+    public static String updateTaskList(Storage storage, Task task, TaskList taskList) throws IOException {
             FileWriter fw = new FileWriter(storage.getFilePath(), true);
             taskList.getAllTasks().add(task);
             fw.write(task.inputListFormat() + "\n");
@@ -48,7 +48,7 @@ abstract public class AddCommand extends Command {
      * @param string string to convert to date
      * @return local date which is converted from string, if cannot then DateTimeException thrown
      */
-    public static LocalDate localDate(String string){
+    public static LocalDate stringToLocalDate(String string){
         try{
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy MM dd");
             LocalDate parsedDate = LocalDate.parse(string, formatter);
@@ -62,7 +62,7 @@ abstract public class AddCommand extends Command {
      * @param string string to convert to dateTime
      * @return local dateTime which is converted from string, if cannot then DateTimeException thrown
      */
-    public static LocalDateTime localDateTime(String string){
+    public static LocalDateTime stringToLocalDateTime(String string){
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy MM dd, HH:mm");
             LocalDateTime parsedDate = LocalDateTime.parse(string, formatter);
@@ -77,7 +77,7 @@ abstract public class AddCommand extends Command {
      * @param string string to convert to time
      * @return local time which is converted from string, if cannot then DateTimeException thrown
      */
-    public static LocalTime localTime(String string){
+    public static LocalTime stringToLocalTime(String string){
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
             LocalTime parsedDate = LocalTime.parse(string, formatter);

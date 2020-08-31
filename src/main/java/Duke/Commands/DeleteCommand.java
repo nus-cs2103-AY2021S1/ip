@@ -48,16 +48,17 @@ public class DeleteCommand extends Command {
      * @param tasks to change the taskList since item is deleted
      * @param ui
      * @param storage to change the file since item is deleted
+     * @return String returns the string of the output that informs the delete action has been complete.
      * @throws DukeException thrown if the ID is more than number of ID is absent
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        if (string.length() == 4 || string.length() == 5) {
-           throw new DeleteException(true, false);
+        if (commandDescription.length() == 4 || commandDescription.length() == 5) {
+           throw new DeleteException(true);
         }else{
-            int ID = Integer.parseInt(string.substring(7));
+            int ID = Integer.parseInt(commandDescription.substring(7));
             if (ID > tasks.getAllTasks().size()) {
-                throw new DeleteException(false, false);
+                throw new DeleteException(false);
             }else {
                 return rewrite(storage, tasks, ID);
             }

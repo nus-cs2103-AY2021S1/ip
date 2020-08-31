@@ -10,18 +10,18 @@ import Duke.Helpers.Ui;
  */
 abstract public class Command {
     /**
-     * string which contains information on task and details to perform task
-     * exit is used to tell whether program terminates, where id true, it terminates
+     * commandName which contains information on task and details to perform task
+     * isExit is used to tell whether program terminates, where id true, it terminates
      */
-    public String string;
-    boolean exit = false;
+    public String commandDescription;
+    boolean isExit = false;
 
     /**
      * used to assign string to a value
-     * @param string assigns this.string to string
+     * @param commandDescription assigns this.string to string
      */
-    Command(String string){
-        this.string = string;
+    Command(String commandDescription){
+        this.commandDescription = commandDescription;
     }
 
     /**
@@ -29,7 +29,7 @@ abstract public class Command {
      * @return exit
      */
     public boolean isExit(){
-        return exit;
+        return this.isExit;
     }
 
     /**

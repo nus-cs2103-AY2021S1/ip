@@ -22,6 +22,7 @@ public class ListCommand extends Command {
      * @param tasks to access the list and print them
      * @param ui
      * @param storage
+     * @return String returns the string of the output that informs the action has been complete.
      * @throws DukeException
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {

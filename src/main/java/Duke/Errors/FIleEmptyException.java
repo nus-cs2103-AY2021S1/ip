@@ -1,14 +1,12 @@
 package Duke.Errors;
 
-import Duke.Errors.DukeException;
-
 /**
  * This exception is thrown when the file is empty
  */
 public class FIleEmptyException extends DukeException {
     /**
      * this overrides the toString() method
-     * @return a String representation of FileEmptyExcleption
+     * @return a String representation of FileEmptyException
      */
     @Override
     public String toString() {

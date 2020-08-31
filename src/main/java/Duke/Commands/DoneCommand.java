@@ -46,15 +46,16 @@ public class DoneCommand extends Command {
      * @param tasks to change the taskList as a task is completed
      * @param ui
      * @param storage to change the file as task is completed
+     * @return String returns the string of the output that informs the done action has been complete.
      * @throws DukeException thrown if the ID is more than number of ID is absent
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        if (string.length() == 4 || string.length() == 5) {
-            throw new DoneException(true, false);
+        if (commandDescription.length() == 4 || commandDescription.length() == 5) {
+            throw new DoneException(true);
         }else{
-            int ID = Integer.parseInt(string.substring(5));
+            int ID = Integer.parseInt(commandDescription.substring(5));
             if (ID > tasks.getAllTasks().size()) {
-                throw new DoneException(false, false);
+                throw new DoneException(false);
             } else {
                 return rewrite(storage, tasks, ID);
             }

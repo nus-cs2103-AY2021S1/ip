@@ -22,6 +22,7 @@ public class RandomCommand extends Command {
      * @param tasks
      * @param ui
      * @param storage
+     * @return String returns the string of the output that informs the action has been complete.
      * @throws WrongInputException is thrown
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) throws WrongInputException {

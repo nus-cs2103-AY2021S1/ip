@@ -50,15 +50,16 @@ public class FindCommand extends Command {
      * @param tasks to look for the task's string value
      * @param ui
      * @param storage no need
+     * @return String returns the string of the output that informs the find action is successful.
      * @throws DukeException used to throw error when no words mentioned after find or the keyword is not present in
      * tasks.
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        if(string.length() == 4 || string.length() == 5){
+        if(commandDescription.length() == 4 || commandDescription.length() == 5){
             throw new FindException(false, "");
         }else{
-            String find = string.substring(5);
+            String find = commandDescription.substring(5);
             String[] strings = find.split(" ", -2);
             setTasks(strings, tasks);
             if(this.tasks.size() == 0){

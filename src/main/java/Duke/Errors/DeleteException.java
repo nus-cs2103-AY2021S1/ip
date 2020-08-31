@@ -11,16 +11,14 @@ public class DeleteException extends DukeException {
      * deleted checks whether the task was previously deleted, if deleted it is true else false.
      */
     private boolean IDabsent;
-    private boolean deleted;
 
     /**
      * constructor that assigns tne 2 variables its respective values
      * @param IDabsent input, depending on whether the ID is present or not in the input.txt file. If present it is false
      *   else it is true.
      */
-    public DeleteException(boolean IDabsent, boolean deleted){
+    public DeleteException(boolean IDabsent){
         this.IDabsent = IDabsent;
-        this.deleted = deleted;
     }
 
     /**
@@ -31,9 +29,6 @@ public class DeleteException extends DukeException {
      */
     @Override
     public String toString() {
-        if(deleted){
-            return "  '\u2639' OOPS!!! This task is previously deleted.";
-        }
         if(IDabsent){
             return "  '\u2639' OOPS!!! The description of delete cannot be empty.";
         }

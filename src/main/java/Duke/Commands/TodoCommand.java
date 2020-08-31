@@ -27,16 +27,17 @@ public class TodoCommand extends AddCommand{
      * @param tasks to change the taskList if necessary
      * @param ui
      * @param storage to change the file in the if necessary
+     * @return String returns the string of the output that informs the action has been complete.
      * @throws DukeException whenever there is an error, no
      * description
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException{
-        if (string.length() == 4 || string.length() == 5) {
+        if (commandDescription.length() == 4 || commandDescription.length() == 5) {
             throw new TodoException();
         } else {
             try {
-                todo t = new todo(string.substring(5));
-                return update(storage, t, tasks);
+                todo t = new todo(commandDescription.substring(5));
+                return updateTaskList(storage, t, tasks);
             }catch (IOException i){
                 throw new FileAbsentException(storage.getFilePath());
             }
