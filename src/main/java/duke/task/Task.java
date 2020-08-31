@@ -12,8 +12,8 @@ package duke.task;
  * @since 2020-08-25.
  */
 public class Task {
-    String task;
-    boolean done;
+    protected String task;
+    protected boolean done;
 
     protected Task(String task) {
         this.task = task;
