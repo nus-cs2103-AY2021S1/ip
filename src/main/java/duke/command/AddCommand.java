@@ -29,12 +29,12 @@ public class AddCommand extends Command {
      * @param storage Storage of tasks in hard disk.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         tasks.addTasks(task);
         String echoizer = "\t Got it. I've added this task:\n"
                 + "\t %s\n"
                 + "\t Now you have %d tasks in the list.\n";
-        ui.showAction(String.format(echoizer, task, tasks.numTasks()));
         storage.save(tasks);
+        return ui.showAction(String.format(echoizer, task, tasks.numTasks()));
     }
 }

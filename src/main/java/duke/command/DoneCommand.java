@@ -31,15 +31,15 @@ public class DoneCommand extends Command {
      * @throws DukeException If command is invalid.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
             Task t = tasks.tasks.get(i - 1);
             t.markAsDone();
-            ui.showAction(String.format("\t Nice! I've marked this task as done:\n"
+            storage.save(tasks);
+            return ui.showAction(String.format("\t Nice! I've marked this task as done:\n"
                     + "\t   %s\n", t));
         } catch (IndexOutOfBoundsException ex) {
             throw new DukeException("Can't complete a task that does not exist.");
         }
-        storage.save(tasks);
     }
 }

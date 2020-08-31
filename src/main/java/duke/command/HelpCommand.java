@@ -23,7 +23,7 @@ public class HelpCommand extends Command {
      * @param storage Storage of tasks in hard disk.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         String commandsList =
                 "\t These are the common Nite commands used in various situations:\n"
                 + "\t add a task\n\t\t todo <description>\n"
@@ -34,6 +34,6 @@ public class HelpCommand extends Command {
                 + "\t list all tasks\n\t\t list\n"
                 + "\t find a task\n\t\t find <keyword>\n"
                 + "\t exit Nite\n\t\t bye\n";
-        ui.showAction(commandsList);
+        return ui.showAction(commandsList);
     }
 }

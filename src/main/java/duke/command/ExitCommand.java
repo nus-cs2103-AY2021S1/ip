@@ -23,10 +23,10 @@ public class ExitCommand extends Command{
      * @param storage Storage of tasks in hard disk.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.showFarewell();
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         storage.save(tasks);
-        System.exit(0);
+        //System.exit(0);
+        return ui.showFarewell();
     }
 
     /**

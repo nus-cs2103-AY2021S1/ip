@@ -30,6 +30,7 @@ public class Duke extends Application {
     private static Ui ui;
     private static Storage storage;
     private static TaskList tasks;
+    private boolean isInitialised;
 
     private ScrollPane scrollPane;
     private VBox dialogContainer;
@@ -58,7 +59,6 @@ public class Duke extends Application {
     }
 
     public Duke() {
-
     }
 
     /**
@@ -108,7 +108,7 @@ public class Duke extends Application {
         stage.show();
 
         //Step 2. Formatting the window to look as expected
-        stage.setTitle("duke.Duke");
+        stage.setTitle("Duke");
         stage.setResizable(false);
         stage.setMinHeight(600.0);
         stage.setMinWidth(400.0);
@@ -184,6 +184,30 @@ public class Duke extends Application {
      * Replace this stub with your completed method.
      */
     String getResponse(String input) {
-        return "duke.Duke heard: " + input;
+        if (!isInitialised) {
+            ui = new Ui();
+            storage = new Storage("/data/duke.txt", "/data");
+            try {
+                tasks = new TaskList(storage.load());
+            } catch (DukeException e) {
+                ui.showLoadingError();
+                tasks = new TaskList();
+            }
+            isInitialised = true;
+            return ui.showWelcome();
+        }
+        boolean isExit = false;
+        try {
+            Command c = Parser.parse(input);
+            isExit = c.isExit();
+            if (isExit) {
+                System.exit(0);
+                return ui.showFarewell();
+            }
+            return c.execute(tasks, ui, storage);
+        } catch (DukeException e) {
+            return ui.showError(e.getMessage());
+        }
+        //return " heard: " + input;
     }
 }

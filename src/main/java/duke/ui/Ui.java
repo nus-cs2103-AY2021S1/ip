@@ -35,16 +35,15 @@ public class Ui {
     /**
      * Displays the welcome message when user starts up duke.Duke.
      */
-    public void showWelcome() {
-        System.out.println(LOGO);
-        System.out.println(DIVIDER + GREETING + DIVIDER);
+    public String showWelcome() {
+        return LOGO + DIVIDER + GREETING + DIVIDER;
     }
 
     /**
      * Displays the farewell message when user exits duke.Duke.
      */
-    public void showFarewell() {
-        System.out.print(DIVIDER + GOODBYE + DIVIDER);
+    public String showFarewell() {
+        return DIVIDER + GOODBYE + DIVIDER;
     }
 
     /**
@@ -52,9 +51,9 @@ public class Ui {
      *
      * @param errorMessage Error message of the DukeException.
      */
-    public void showError(String errorMessage) {
+    public String showError(String errorMessage) {
         String enhancedMessage = "\t :-( OOPS!!! " + errorMessage + "\n";
-        System.out.println(DIVIDER + enhancedMessage + DIVIDER);
+        return DIVIDER + enhancedMessage + DIVIDER;
     }
 
     /**
@@ -62,15 +61,15 @@ public class Ui {
      *
      * @param actionMessage Message to be shown to user.
      */
-    public void showAction(String actionMessage) {
-        System.out.println(DIVIDER + actionMessage + DIVIDER);
+    public String showAction(String actionMessage) {
+        return DIVIDER + actionMessage + DIVIDER;
     }
 
     /**
      * Displays a loading error if unable to load tasks from text file.
      */
-    public void showLoadingError() {
-        System.out.println("Unable to load Tasklist");
+    public String showLoadingError() {
+        return "Unable to load Tasklist";
     }
 
     /**
