@@ -1,14 +1,17 @@
+package TaskList;
+
 import java.util.ArrayList;
+import Tasks.*;
 
 /**
- * TaskList is the list of tasks and handles the list functions (get, add, remove, size) in the program and the storage.
+ * TaskList.TaskList is the list of tasks and handles the list functions (get, add, remove, size) in the program and the storage.
  */
 public class TaskList {
     private Storage storage;
     private ArrayList<Task> taskList;
 
     /**
-     * The constructor that takes in Storage for saving and loading data.
+     * The constructor that takes in TaskList.Storage for saving and loading data.
      */
     public TaskList(Storage storage) {
         this.storage = storage;
@@ -52,14 +55,14 @@ public class TaskList {
     public Task remove(int index) {
         Task temp = taskList.remove(index);
         storage.reset();
-        storage.addAll(taskList);
+        storage.addAll(this);
         return temp;
     }
 
     public void setCompleted(int whichTask) {
         taskList.get(whichTask).setCompleted();
         storage.reset();
-        storage.addAll(taskList);
+        storage.addAll(this);
     }
 
     /**

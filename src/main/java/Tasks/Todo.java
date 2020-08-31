@@ -1,8 +1,10 @@
+package Tasks;
+
 /**
- * Todo is the most general type of Task.
+ * Tasks.Todo is the most general type of Tasks.Task.
  */
-class Todo extends Task {
-    Todo(String name) {
+public class Todo extends Task {
+    public Todo(String name) {
         super(name, Type.TODO);
     }
 

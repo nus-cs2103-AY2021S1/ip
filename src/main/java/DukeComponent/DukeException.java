@@ -1,3 +1,5 @@
+package DukeComponent;
+
 /**
  * A collection of exceptions due to invalid commands passed to the Duke program.
  */

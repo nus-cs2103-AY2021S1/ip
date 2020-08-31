@@ -1,10 +1,12 @@
+package Tasks;
+
 import java.time.format.DateTimeFormatter;
 
 /**
- * Task is the parent class of Todo, Deadline and Event.
+ * Tasks.Task is the parent class of Tasks.Todo, Tasks.Deadline and Tasks.Event.
  * Contains functions used by all 3 subclasses.
  */
-class Task {
+public class Task {
     public static final DateTimeFormatter DATE_FORMAT_OUT = DateTimeFormatter.ofPattern("MMM dd yyyy");
     public static final DateTimeFormatter DATE_FORMAT_IN = DateTimeFormatter.ISO_LOCAL_DATE;
     private String name;
@@ -37,7 +39,7 @@ class Task {
         return (completed ? "[✓]" : "[✗]") + " " + name;
     }
 
-    enum Type {
+    public enum Type {
         TODO, DEADLINE, EVENT;
     }
 }

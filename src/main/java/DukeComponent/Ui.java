@@ -1,7 +1,12 @@
+package DukeComponent;
+
+import TaskList.TaskList;
+import Tasks.Task;
+
 import java.util.ArrayList;
 
 /**
- * Ui contains all the responses the program can give to a command.
+ * Components.Ui contains all the responses the program can give to a command.
  */
 public class Ui {
     private static void print(String s) {

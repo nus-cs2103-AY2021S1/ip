@@ -1,13 +1,15 @@
+package Tasks;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
 /**
- * Deadline is a type of Task with deadline.
+ * Tasks.Deadline is a type of Tasks.Task with deadline.
  */
-class Deadline extends Task {
+public class Deadline extends Task {
     private LocalDate deadline;
 
-    Deadline(String name, String time) {
+    public Deadline(String name, String time) {
         super(name, Type.DEADLINE);
         try {
             this.deadline = LocalDate.parse(time, DATE_FORMAT_IN);

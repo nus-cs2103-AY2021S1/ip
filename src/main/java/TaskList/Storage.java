@@ -1,3 +1,5 @@
+package TaskList;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -6,21 +8,26 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
+
+import Tasks.*;
 
 /**
- * Storage saves the list in a file so the state of the list can be preserved
+ * TaskList.Storage saves the list in a file so the state of the list can be preserved
  * when the program restarts.
  */
 public class Storage {
     private File file;
     private boolean added = false;
 
-    Storage(File file) {
-        this.file = file;
+    public Storage(File file) {
+        try {
+            this.file = file;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
-    Storage() {
+    public Storage() {
         try {
             String dir = System.getProperty("user.dir") + "/data";
             File path = new File(dir);
@@ -96,50 +103,50 @@ public class Storage {
         return list;
     }
 
-    /**
-     * Parses the text file into tasks and add them to the list given as parameter.
-     * @param list the list for tasks to be added into
-     */
-    void readAll(List<Task> list) {
-        if (added) {
-            return;
-        }
-        try (BufferedReader bufferedReader =
-                     new BufferedReader(new FileReader(file.getAbsolutePath()))) {
-            String line = bufferedReader.readLine();
-            while (line != null) {
-                String[] parts = line.split("</>");
-                Task task;
-                if (parts[0].equals("TODO") && parts.length == 3) {
-                    task = new Todo(parts[2]);
-                    if (parts[1].equals("true")) {
-                        task.setCompleted();
-                    }
-                    list.add(task);
-                } else if (parts[0].equals("DEADLINE") && parts.length == 4) {
-                    task = new Deadline(parts[2], parts[3]);
-                    if (parts[1].equals("true")) {
-                        task.setCompleted();
-                    }
-                    list.add(task);
-                } else if (parts[0].equals("EVENT") && parts.length == 4) {
-                    task = new Event(parts[2], parts[3]);
-                    if (parts[1].equals("true")) {
-                        task.setCompleted();
-                    }
-                    list.add(task);
-                }
-                line = bufferedReader.readLine();
-            }
-            added = true;
-        } catch (FileNotFoundException e) {
-            // Exception handling
-            System.out.println(e.getMessage());
-        } catch (IOException e) {
-            // Exception handling
-            System.out.println(e.getMessage());
-        }
-    }
+//    /**
+//     * Parses the text file into tasks and add them to the list given as parameter.
+//     * @param list the list for tasks to be added into
+//     */
+//    void readAll(List<Task> list) {
+//        if (added) {
+//            return;
+//        }
+//        try (BufferedReader bufferedReader =
+//                     new BufferedReader(new FileReader(file.getAbsolutePath()))) {
+//            String line = bufferedReader.readLine();
+//            while (line != null) {
+//                String[] parts = line.split("</>");
+//                Task task;
+//                if (parts[0].equals("TODO") && parts.length == 3) {
+//                    task = new Todo(parts[2]);
+//                    if (parts[1].equals("true")) {
+//                        task.setCompleted();
+//                    }
+//                    list.add(task);
+//                } else if (parts[0].equals("DEADLINE") && parts.length == 4) {
+//                    task = new Deadline(parts[2], parts[3]);
+//                    if (parts[1].equals("true")) {
+//                        task.setCompleted();
+//                    }
+//                    list.add(task);
+//                } else if (parts[0].equals("EVENT") && parts.length == 4) {
+//                    task = new Event(parts[2], parts[3]);
+//                    if (parts[1].equals("true")) {
+//                        task.setCompleted();
+//                    }
+//                    list.add(task);
+//                }
+//                line = bufferedReader.readLine();
+//            }
+//            added = true;
+//        } catch (FileNotFoundException e) {
+//            // Exception handling
+//            System.out.println(e.getMessage());
+//        } catch (IOException e) {
+//            // Exception handling
+//            System.out.println(e.getMessage());
+//        }
+//    }
 
     /**
      * Adds one task to the storage file.
@@ -169,8 +176,8 @@ public class Storage {
      * Adds all the tasks in the given list to the file.
      * @param list the list containing the tasks to be added
      */
-    void addAll(List<Task> list) {
-        for (Task t : list) {
+    public void addAll(TaskList list) {
+        for (Task t : list.getTaskList()) {
             addTask(t);
         }
     }

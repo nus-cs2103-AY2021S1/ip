@@ -1,13 +1,15 @@
+package Tasks;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
 /**
- * Event is a type of Task with time.
+ * Tasks.Event is a type of Tasks.Task with time.
  */
-class Event extends Task {
+public class Event extends Task {
     private LocalDate time;
 
-    Event(String name, String time) {
+    public Event(String name, String time) {
         super(name, Type.EVENT);
         try {
             this.time = LocalDate.parse(time, DATE_FORMAT_IN);
