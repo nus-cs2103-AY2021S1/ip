@@ -1,6 +1,6 @@
 package duke.tasks;
 
-import duke.Ui;
+import duke.ui.Ui;
 import duke.tool.Storage;
 import duke.tool.TaskList;
 
@@ -25,11 +25,12 @@ public class Delete extends Task {
      * @param tasklist
      * @param ui
      * @param storage
+     * @return
      */
     @Override
-    public void excute(TaskList tasklist, Ui ui, Storage storage) {
+    public String execute(TaskList tasklist, Ui ui, Storage storage) {
         Task removed = tasklist.delete(i);
-        ui.showDeleteMessage(tasklist, removed);
-        storage.writeData(tasklist.taskList);
+        storage.writeData(tasklist.getTaskList());
+        return ui.showDeleteMessage(tasklist, removed);
     }
 }

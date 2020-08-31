@@ -1,6 +1,6 @@
 package duke.tasks;
 
-import duke.Ui;
+import duke.ui.Ui;
 import duke.tool.Storage;
 import duke.tool.TaskList;
 
@@ -21,7 +21,7 @@ public class Find extends Task {
     }
 
     @Override
-    public void excute(TaskList tasklist, Ui ui, Storage storage) {
-        ui.listMatchedTasks(tasklist, this.toFind);
+    public String execute(TaskList tasklist, Ui ui, Storage storage) {
+        return ui.listMatchedTasks(tasklist, this.toFind);
     }
 }

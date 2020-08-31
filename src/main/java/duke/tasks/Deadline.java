@@ -3,7 +3,7 @@ package duke.tasks;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-import duke.Ui;
+import duke.ui.Ui;
 import duke.tool.Storage;
 import duke.tool.TaskList;
 
@@ -40,14 +40,14 @@ public class Deadline extends Task {
      * @param tasklist
      * @param ui
      * @param storage
+     * @return
      */
     @Override
-    public void excute(TaskList tasklist, Ui ui, Storage storage) {
+    public String execute(TaskList tasklist, Ui ui, Storage storage) {
         tasklist.add(this);
-        ui.showAddedMessage(tasklist, tasklist.getNumOfTasks() - 1);
-        storage.writeData(tasklist.taskList);
+        storage.writeData(tasklist.getTaskList());
+        return ui.showAddedMessage(tasklist, tasklist.getNumOfTasks() - 1);
     }
-
 
     /**
      * Shows string representation of the deadline task.

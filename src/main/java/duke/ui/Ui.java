@@ -1,4 +1,4 @@
-package duke;
+package duke.ui;
 
 import java.util.Scanner;
 
@@ -50,8 +50,8 @@ public class Ui {
     /**
      * Print the greeting message.
      */
-    public void showGreeting() {
-        printFormmat(spaceBeforeOder() + "Hello! I'm Duke yy\n      What can I do for you?");
+    public String showGreeting() {
+        return  "Hello! I'm Duke DuiDui\nWhat can I do for you?";
     }
 
     /**
@@ -74,22 +74,24 @@ public class Ui {
      * Print the message showing the task is done.
      * @param tasklist
      * @param i ith task.
+     * @return
      */
-    public void showDoneMessage(TaskList tasklist, int i) {
-        printFormmat(spaceBeforeOder() + "Nice! I've marked this task as done:\n"
+    public String showDoneMessage(TaskList tasklist, int i) {
+        return "Nice! I've marked this task as done:\n"
                 + spaceBeforeOder() + tasklist.getTask(i) + "\n" + spaceBeforeOder() + "Now you have "
-                + tasklist.getNumOfTasks() + " tasks in the list.");
+                + tasklist.getNumOfTasks() + " tasks in the list.";
     }
 
     /**
      * Print the message showing the task is deleted.
      * @param tasklist
      * @param removed the removed task.
+     * @return
      */
-    public void showDeleteMessage(TaskList tasklist, Task removed) {
-        printFormmat(spaceBeforeOder() + "Noted. I've removed this task:\n"
+    public String showDeleteMessage(TaskList tasklist, Task removed) {
+        return "Noted. I've removed this task:\n"
                 + spaceBeforeOder() + removed + "\n" + spaceBeforeOder() + "Now you have "
-                + tasklist.getNumOfTasks() + " tasks in the list.");
+                + tasklist.getNumOfTasks() + " tasks in the list.";
     }
 
     /**
@@ -97,51 +99,55 @@ public class Ui {
      * @param tasklist
      * @param num current number of tasks in the list.
      */
-    public void showAddedMessage(TaskList tasklist, int num) {
-        printFormmat(spaceBeforeOder() + "Got it. I've added this task:\n"
+    public String showAddedMessage(TaskList tasklist, int num) {
+        return "Got it. I've added this task:\n"
                 + spaceBeforeOder() + tasklist.getTask(num)
                 + "\n" + spaceBeforeOder() + "Now you have "
-                + (num + 1) + " tasks in the list.");
+                + (num + 1) + " tasks in the list.";
     }
 
     /**
      * Print the tasks in the list.
      * @param tasklist
+     * @return
      */
-    public void listTasks(TaskList tasklist) {
-        System.out.println(seperateLine());
-        System.out.println(spaceBeforeOder() + "Here are the tasks in your list:");
+    public String listTasks(TaskList tasklist) {
+        String output;
+        output = "Here are the tasks in your list:\n";
         for (int i = 0; i < tasklist.getNumOfTasks(); i++) {
-            System.out.println(spaceBeforeOder() + (i + 1) + ". "
-                    + tasklist.getTask(i));
+            output += spaceBeforeOder() + (i + 1) + ". "
+                    + tasklist.getTask(i) + "\n";
         }
-        System.out.println(seperateLine());
+        return output;
     }
 
     /**
      * Print the tasks in the list which contain the certain string.
      * @param tasklist
      * @param toFind
+     * @return
      */
-    public void listMatchedTasks(TaskList tasklist, String toFind) {
-        System.out.println(seperateLine());
-        System.out.println(spaceBeforeOder() + "Here are the matching tasks in your list:");
+    public String listMatchedTasks(TaskList tasklist, String toFind) {
+        String output;
+        output = "Here are the matching tasks in your list:\n";
         int count = 1;
         for (int i = 0; i < tasklist.getNumOfTasks(); i++) {
             if (tasklist.getTask(i).getName().contains(toFind)) {
-                System.out.println(spaceBeforeOder() + count + ". "
-                        + tasklist.getTask(i));
+                output += spaceBeforeOder() + count + ". "
+                        + tasklist.getTask(i) + "\n";
                 count++;
             }
         }
-        System.out.println(seperateLine());
+        return output;
     }
 
     /**
      * Print the goodbye message.
+     * @return
      */
-    public void showGoodbye() {
-        printFormmat(spaceBeforeOder() + "Bye. Very nice to meet you!\n"
-                + spaceBeforeOder() + "Hope to see you again soon!");
+    public String showGoodbye() {
+        return "Bye. Very nice to meet you!\n"
+                + "Do remember my name is DuiDui.\n"
+                + "Hope to see you again soon!";
     }
 }

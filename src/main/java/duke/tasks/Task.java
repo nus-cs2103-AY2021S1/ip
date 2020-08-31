@@ -1,6 +1,6 @@
 package duke.tasks;
 
-import duke.Ui;
+import duke.ui.Ui;
 import duke.tool.Storage;
 import duke.tool.TaskList;
 
@@ -66,10 +66,13 @@ public class Task {
     }
 
     /**
-     * Excute the task.
+     * Executes the task.
      * @param tasklist
      * @param ui
      * @param storage
+     * @return
      */
-    public void excute(TaskList tasklist, Ui ui, Storage storage){};
+    public String execute(TaskList tasklist, Ui ui, Storage storage) {
+        return null;
+    };
 }

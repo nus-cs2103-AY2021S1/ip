@@ -22,6 +22,10 @@ public class TaskList {
         this.taskList = new ArrayList<Task>();
     }
 
+    public ArrayList<Task> getTaskList() {
+        return this.taskList;
+    }
+
     /**
      * Add a task to the list.
      * @param t task waiting to be added.

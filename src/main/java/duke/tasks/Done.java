@@ -1,6 +1,6 @@
 package duke.tasks;
 
-import duke.Ui;
+import duke.ui.Ui;
 
 import duke.tool.Storage;
 import duke.tool.TaskList;
@@ -26,11 +26,12 @@ public class Done extends Task {
      * @param tasklist
      * @param ui
      * @param storage
+     * @return
      */
     @Override
-    public void excute(TaskList tasklist, Ui ui, Storage storage) {
+    public String execute(TaskList tasklist, Ui ui, Storage storage) {
         tasklist.markDone(this.i);
-        ui.showDoneMessage(tasklist, this.i);
-        storage.writeData(tasklist.taskList);
+        storage.writeData(tasklist.getTaskList());
+        return ui.showDoneMessage(tasklist, this.i);
     }
 }
