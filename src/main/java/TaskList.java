@@ -80,8 +80,8 @@ public class TaskList {
 
     public void listFilteredTasks(String filter) {
         for (int i = 1; i <= totalTasks; i++) {
-            if (tasksList.get(i - 1).description.contains(filter)) {
-                System.out.println(i + "." + tasksList.get(i - 1));
+            if (tasks.get(i - 1).description.contains(filter)) {
+                System.out.println(i + "." + tasks.get(i - 1));
             }
         }
     }
