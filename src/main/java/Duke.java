@@ -13,11 +13,13 @@ public class Duke {
      *Class constructor
      */
     public Duke() {
-        this.taskList = new TaskList();
-        this.parser = new Parser(taskList);
-        this.ui = new Ui();
-        try{
-            this.storage = new Storage(taskList,parser);
+
+        taskList = new TaskList();
+        parser = new Parser(taskList);
+        ui = new Ui();
+
+        try {
+            storage = new Storage(taskList);
         } catch (DukeException e) {
             ui.showLoadingError();
         }
@@ -28,7 +30,7 @@ public class Duke {
      */
     public void run() {
         ui.printStarting();
-        while(taskList.isUpdating()) {
+        while (taskList.isUpdating()) {
             String[] fullCommand = ui.readCommand();
             parser.ParseCommand(fullCommand);
             ui.printLine();
@@ -40,9 +42,9 @@ public class Duke {
      * Save the stored tasks into the hard drive
      */
     public void stop() {
-        try{
+        try {
             storage.saveFile();
-        }catch(DukeException e){
+        } catch(DukeException e) {
             ui.showSavingError();
         }
     }

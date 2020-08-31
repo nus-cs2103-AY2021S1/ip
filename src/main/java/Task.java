@@ -27,7 +27,7 @@ public abstract class Task {
      * Prints add task message for the current task
      *
      */
-    public void printAddTask(){
+    public void printAddTask() {
         System.out.println(
                 String.format("Got it. I've added this task:\n  %s",this.toString())
         );
@@ -37,7 +37,7 @@ public abstract class Task {
      * Prints delete task message for the current task
      *
      */
-    public void printDeleteTask(){
+    public void printDeleteTask() {
         System.out.println(
                 String.format("Noted. I've removed this task:\n %s",this.toString())
         );
@@ -48,7 +48,8 @@ public abstract class Task {
      *
      * @return String of the stored task
      */
-    public String safeFileFormat(){
+
+    public String safeFileFormat() {
         return "";
     }
 

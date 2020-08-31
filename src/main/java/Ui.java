@@ -53,12 +53,13 @@ public class Ui {
     /**
      * Prints the start of the program
      */
-    public void printStarting(){
+    public void printStarting() {
         System.out.println("My name is\n");
         printLogo();
         System.out.println("What do you want?");
         printLine();
     }
+
 
     /**
      * Reads the in all the inputs
@@ -66,7 +67,8 @@ public class Ui {
      *
      * @return An array of strings containing the command, task description and if there is Time/Date for the task
      */
-    public String[] readCommand(){
+
+    public String[] readCommand() {
         return sc.nextLine().trim().split(" ", 2);
     }
 }
