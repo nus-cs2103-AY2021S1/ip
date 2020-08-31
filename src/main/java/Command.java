@@ -1,6 +1,20 @@
+/**
+ * The Command class is an interface for classes that are used to run commands from the user.
+ *
+ * @author Jaya Rengam
+ */
 public interface Command {
-
+    /**
+     * Executes the command using the given arguments.
+     * @param taskList The TaskList being manipulated by the Command
+     * @param ui The Ui object that is used to print the action to the console.
+     * @param storage The Storage object used to update the text file, if the TaskList is being modified.
+     * @throws CartonaException if there is an error during execution of the command.
+     */
     void execute(TaskList taskList, Ui ui, Storage storage) throws CartonaException;
 
+    /**
+     * Get a boolean describing whether the command is an exit command.
+     */
     boolean isExitCmd();
 }

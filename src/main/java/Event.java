@@ -1,3 +1,8 @@
+/**
+ * The Event class is a Task that represents an event, with a start date and an end date - represented by TaskDates.
+ *
+ * @author Jaya Rengam
+ */
 public class Event extends Task {
     private TaskDate start;
     private TaskDate end;
@@ -17,6 +22,6 @@ public class Event extends Task {
     public String getAbbreviatedString() {
         int isDoneRep = this.isDone ? 1 : 0;
         return String.format("%s | %d | %s | %s - %s", this.type, isDoneRep, this.name,
-                                    this.start.toString(), this.end.getTime());
+                                this.start.toString(), this.end.getTime());
     }
 }

@@ -1,18 +1,26 @@
+/**
+ * The ExitCommand class runs the steps required before termination of the program.
+ *
+ * @author Jaya Rengam
+ */
 public class ExitCommand implements Command {
-
-    private boolean isDone;
+    private boolean hasExecuted;
 
     ExitCommand() {
-        this.isDone = false;
+        this.hasExecuted = false;
     }
 
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws CartonaException {
-        if (isDone) {
+        // Check if the command has already been executed.
+        if (hasExecuted) {
             throw new CartonaException("Error: PrintErrorCommand already executed");
         }
+
+        // Print UI message
         ui.printExitMessage();
-        this.isDone = true;
+
+        this.hasExecuted = true;
     }
 
     @Override

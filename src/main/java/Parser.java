@@ -1,3 +1,6 @@
+/**
+ * The Parser class is responsible for parsing various types of Strings encountered within the program.
+ */
 public class Parser {
 
     private Task parseTaskToAdd(String consoleArg) throws EmptyTaskDescriptionException, InvalidTaskTimeException,
@@ -93,6 +96,11 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses one line of user input and returns a Command describing what type of action to execute.
+     * @throws InvalidInputException if there is a formatting error in the input after the first keyword.
+     * @throws UnknownCommandException if the keyword is not recognised.
+     */
     public Command parseCommand(String userInput) throws InvalidInputException, UnknownCommandException {
         String[] words = userInput.split(" ");
 
@@ -127,9 +135,12 @@ public class Parser {
             }
         }
 
-        throw new InvalidInputException("Error: Invalid command keyword!");
+        throw new UnknownCommandException("Error: Invalid command keyword!");
     }
 
+    /**
+     * Parses the storage string representation of a Task and returns the Task.
+     */
     public Task parseFromStorage(String storageLine) {
         String[] taskData = storageLine.split(" \\| ");
         String taskType = taskData[0];
