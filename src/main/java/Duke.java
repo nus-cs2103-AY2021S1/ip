@@ -32,7 +32,7 @@ public class Duke {
         ui.printStarting();
         while (taskList.isUpdating()) {
             String[] fullCommand = ui.readCommand();
-            parser.ParseCommand(fullCommand);
+            parser.parseCommand(fullCommand);
             ui.printLine();
         }
     }
@@ -44,11 +44,14 @@ public class Duke {
     public void stop() {
         try {
             storage.saveFile();
-        } catch(DukeException e) {
+        } catch (DukeException e) {
             ui.showSavingError();
         }
     }
 
+    /**
+     * main method
+     */
     public static void main(String[] args) {
         Duke duke = new Duke();
         duke.run();

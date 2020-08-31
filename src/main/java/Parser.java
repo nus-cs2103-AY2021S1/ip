@@ -7,7 +7,7 @@ public class Parser {
      *Class constructor
      *
      */
-    public Parser(TaskList taskList){
+    public Parser(TaskList taskList) {
         this.taskList = taskList;
     }
 
@@ -16,10 +16,10 @@ public class Parser {
      *
      * @param inputs the array of command and taskDescription obtain from user
      */
-    public void ParseCommand(String[] inputs) {
+    public void parseCommand(String[] inputs) {
 
         try {
-            Commands command = GetCommand(inputs[0]);
+            Commands command = getCommand(inputs[0]);
             String taskDescription = "";
             if (inputs.length > 1) {
                 taskDescription = inputs[1];
@@ -48,28 +48,29 @@ public class Parser {
             }
             case TODO: {
                 Task newTask = new Todo(taskDescription);
-                taskList.addTask(newTask,true);
+                taskList.addTask(newTask, true);
                 break;
             }
             case DEADLINE: {
                 Task newTask = Deadline.create(taskDescription);
-                taskList.addTask(newTask,true);
+                taskList.addTask(newTask, true);
                 break;
             }
             case EVENT: {
                 Task newTask = Event.create(taskDescription);
-                taskList.addTask(newTask,true);
+                taskList.addTask(newTask, true);
                 break;
             }
             case DELETE: {
                 int index = Integer.parseInt(taskDescription) - 1;
                 taskList.deleteTask(index);
+                break;
             }
             default: {
                 throw new DukeException("smlj??????");
             }
             }
-        } catch(DukeException e) {
+        } catch (DukeException e) {
             System.out.println(e.getMessage());
         }
     }
@@ -80,11 +81,11 @@ public class Parser {
      *
      * @param commandInput command from the user
      */
-    public Commands GetCommand(String commandInput){
+    public Commands getCommand(String commandInput) {
         Commands command;
-        try{
+        try {
             command = Commands.valueOf(commandInput.toUpperCase());
-        } catch(IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             command = Commands.UNKNOWN;
         }
         return command;

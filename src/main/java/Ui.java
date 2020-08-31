@@ -6,47 +6,47 @@ public class Ui {
     private Scanner sc;
     /** Line separator to beautify duke bot **/
     private String line = "____________________________\n"
-                         +"____________________________\n";
+                        + "____________________________\n";
 
     /** Logo for duke bot **/
     private String logo = "****** ****** ****** ******\n"
-                         +"   *   *      *      *\n"
-                         +"   *   ****** ****** ******\n"
-                         +"*  *   *      *      *\n"
-                         +"***    ****** *      *\n";
+                        + "   *   *      *      *\n"
+                        + "   *   ****** ****** ******\n"
+                        + "*  *   *      *      *\n"
+                        + "***    ****** *      *\n";
 
     /**
      *Class constructor
      */
-    public Ui(){
+    public Ui() {
         sc = new Scanner(System.in);
     }
 
     /**
      * Prints loading error message
      */
-    public void showLoadingError(){
+    public void showLoadingError() {
         System.out.println("******LOADING ERROR******");
     }
 
     /**
      * Prints saving error message
      */
-    public void showSavingError(){
+    public void showSavingError() {
         System.out.println("******SAVING ERROR******");
     }
 
     /**
      * Prints line separator
      */
-    public void printLine(){
+    public void printLine() {
         System.out.println(line);
     }
 
     /**
      * Prints Logo
      */
-    public void printLogo(){
+    public void printLogo() {
         System.out.println(logo);
     }
 

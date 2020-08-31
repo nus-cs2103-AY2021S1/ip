@@ -1,5 +1,5 @@
-import java.time.LocalTime;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
@@ -25,13 +25,17 @@ public class Deadline extends Task {
      * @throws DukeException if the format of the task description is wrong
      */
     public static Deadline create(String taskDescription) throws DukeException {
-            if (!taskDescription.contains("/by")) {
-                throw new DukeException("Please include '/by' in front of the deadline");
-            }
-            String[] NameTimePair = taskDescription.split(" /by");
-            String taskName = NameTimePair[0];
-            String taskDateTime = NameTimePair[1];
-            return new Deadline(taskName,taskDateTime);
+        if (!taskDescription.contains("/by")) {
+            throw new DukeException("Please include '/by' in front of the deadline");
+        }
+        String[] nameTimePair = taskDescription.split(" /by");
+        String taskName = nameTimePair[0];
+        String taskDateTime = nameTimePair[1];
+        return new Deadline(taskName, taskDateTime);
+    }
+
+    public static Deadline create(String taskName, String taskTime) throws DukeException {
+        return new Deadline(taskName, taskTime);
     }
 
     /**
@@ -42,41 +46,34 @@ public class Deadline extends Task {
      * @throws DukeException if the format of the task date/time is wrong
      */
     private void parseTime(String taskDateTime) throws DukeException {
-         String[] dateTime = taskDateTime.replace("/","-").split(" ",2);
-         try{
-             this.byDate = LocalDate.parse(dateTime[0]);
-         }catch (DateTimeParseException e) {
-             throw new DukeException("please enter a valid yyyy-mm-dd format");
-         }
-
-         try{
-             if (dateTime.length == 2) {
-                 this.byTime = LocalTime.parse(dateTime[1]);
-             }
-         } catch(DateTimeParseException e) {
-             throw new DukeException("please enter a valid HH:MM format");
-         }
+        String[] dateTime = taskDateTime.replace("/", "-").split(" ", 2);
+        try {
+            this.byDate = LocalDate.parse(dateTime[0]);
+        } catch (DateTimeParseException e) {
+            throw new DukeException("please enter a valid yyyy-mm-dd format");
+        }
+        try {
+            if (dateTime.length == 2) {
+                this.byTime = LocalTime.parse(dateTime[1]);
+            }
+        } catch (DateTimeParseException e) {
+            throw new DukeException("please enter a valid HH:MM format");
+        }
     }
-
-
-    public static Deadline create(String taskName, String taskTime) throws DukeException {
-        return new Deadline(taskName,taskTime);
-    }
-
     /**
-     * return the summarised form of the task
+     *  * return the summarised form of the task
      *
      * @return String format of the summarised details of the task
      */
     @Override
-    public String toString(){
+    public String toString() {
         String symbol = isDone ? "\u2713" : "\u2718";
         if (byTime != null) {
-            return String.format("[%s][%s] %s (by: %s %s)", tag, symbol, taskName
-                                , byDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")), byTime.toString());
+            return String.format("[%s][%s] %s (by: %s %s)", tag, symbol, taskName,
+                    byDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")), byTime.toString());
         } else {
-            return String.format("[%s][%s] %s (by: %s)", tag, symbol, taskName
-                                , byDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
+            return String.format("[%s][%s] %s (by: %s)", tag, symbol, taskName,
+                    byDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
         }
     }
 
@@ -86,11 +83,11 @@ public class Deadline extends Task {
      * @return String format of the summarised details of the task to be saved
      */
     @Override
-    public String safeFileFormat(){
+    public String safeFileFormat() {
         int done = isDone ? 1 : 0;
         if (byTime == null) {
             return String.format("%s | %d | %s | %s \n", tag, done, taskName, byDate.toString());
-        }else{
+        } else {
             return String.format("%s | %d | %s | %s %s \n", tag, done, taskName, byDate.toString(), byTime.toString());
         }
     }

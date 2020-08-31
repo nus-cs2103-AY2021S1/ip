@@ -1,4 +1,7 @@
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -69,7 +72,7 @@ public class Storage {
                     }
 
                     default: {
-                         throw new DukeException("smlj??????");
+                        throw new DukeException("smlj??????");
                     }
                     }
 
@@ -83,7 +86,7 @@ public class Storage {
                 }
 
             }
-        }catch(IOException e){
+        } catch (IOException e) {
             throw new DukeException("unable to load file");
         }
 
@@ -94,14 +97,14 @@ public class Storage {
      *
      * @throws DukeException If the tasks are unable to be saved into the file
      */
-    public void saveFile() throws DukeException{
+    public void saveFile() throws DukeException {
         try {
             FileWriter fw = new FileWriter(storageFilePath.toString());
             for (int i = 0; i < taskList.getTaskListSize(); i++) {
                 fw.write(taskList.getTask(i).safeFileFormat());
             }
             fw.close();
-        } catch(IOException e) {
+        } catch (IOException e) {
             throw new DukeException("unable to save file");
         }
     }
