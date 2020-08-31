@@ -1,13 +1,13 @@
 package dd;
 
+import java.io.IOException;
+
 import dd.commands.Command;
 import dd.exception.DukeException;
 import dd.parser.Parser;
 import dd.storage.DataStorage;
 import dd.tasks.TaskList;
 import dd.ui.Ui;
-
-import java.io.IOException;
 
 /**
  * The main Duke class to create and manage a task list.
@@ -49,7 +49,7 @@ public class Duke {
 
                 c.execute(tasks, ui, ds);
                 isExit = c.isExit();
-            } catch (DukeException e){
+            } catch (DukeException e) {
                 ui.showError(e.getMessage());
             } finally {
                 ui.printLine();

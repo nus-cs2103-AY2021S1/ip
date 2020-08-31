@@ -1,13 +1,13 @@
 package dd.commands;
 
+import java.util.ArrayList;
+
 import dd.datetimehandler.DateTimeHandler;
 import dd.exception.DukeException;
 import dd.storage.DataStorage;
 import dd.tasks.Task;
 import dd.tasks.TaskList;
 import dd.ui.Ui;
-
-import java.util.ArrayList;
 
 /**
  * A list command of a certain type and user input goes through the current
@@ -38,7 +38,7 @@ public class ListCommand extends Command {
         }
     }
 
-    public void checkDate() throws DukeException {
+    private void checkDate() throws DukeException {
         boolean isValidInput = dth.isValidInput(item);
 
         if (isValidInput && item.length() == 10) {

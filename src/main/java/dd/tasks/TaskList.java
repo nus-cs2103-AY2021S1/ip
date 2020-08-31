@@ -69,7 +69,7 @@ public class TaskList {
      * @return Last task in the ArrayList of tasks.
      */
     public Task getLastTask() {
-        return taskList.get(taskList.size()-1);
+        return taskList.get(taskList.size() - 1);
     }
 
     /**
