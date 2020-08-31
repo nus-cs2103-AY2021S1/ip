@@ -13,7 +13,7 @@ import java.util.Scanner;
  * Deals with loading tasks from the file and saving tasks in the file.
  */
 public class Storage {
-    File file;
+    private final File file;
 
     /**
      * Constructor for duke.Storage class.
@@ -152,7 +152,7 @@ public class Storage {
                 Task task = ls.get(i);
                 if (task instanceof Todo) {
                     String str;
-                    if (!task.isDone) {
+                    if (!task.isDone()) {
                         str = "T" + link + "0" + link + task.getDescription();
                     } else {
                         str = "T" + link + "1" + link + task.getDescription();
@@ -161,7 +161,7 @@ public class Storage {
 
                 } else if (task instanceof Event) {
                     String str;
-                    if (!task.isDone) {
+                    if (!task.isDone()) {
                         str = "E" + link + "0" + link + task.getDescription() + link
                                 + ((Event) task).getAt().toString();
                     } else {
@@ -172,7 +172,7 @@ public class Storage {
 
                 } else if (task instanceof Deadline) {
                     String str;
-                    if (!task.isDone) {
+                    if (!task.isDone()) {
                         str = "D" + link + "0" + link + task.getDescription() + link
                                 + ((Deadline) task).getDate().toString() + " " + ((Deadline) task).getTime().toString();
                     } else {

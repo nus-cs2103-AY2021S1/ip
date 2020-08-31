@@ -7,7 +7,7 @@ import java.util.ArrayList;
  * Contains the task list
  */
 public class TaskList {
-    ArrayList<Task> ls;
+    private final ArrayList<Task> ls;
 
     /**
      * Constructor of duke.TaskList.

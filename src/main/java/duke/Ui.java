@@ -105,7 +105,7 @@ public class Ui {
     public void showTodoMsg(TaskList ls, Task newTask) {
         horizontalDiv();
         System.out.println("Got it. I've added this task: \n" + newTask.toString());
-        if(ls.size() > 1) {
+        if (ls.size() > 1) {
             System.out.println("Now you have " + ls.size() + " tasks in the list.");
         } else {
             System.out.println("Now you have " + ls.size() + " task in the list.");
@@ -131,7 +131,7 @@ public class Ui {
     public void showDeadlineEventMsg(TaskList ls, Task newTask) {
         horizontalDiv();
         System.out.println("Got it. I've added this task: \n" + newTask.toString());
-        if(ls.size() > 1) {
+        if (ls.size() > 1) {
             System.out.println("Now you have " + ls.size() + " tasks in the list.");
         } else {
             System.out.println("Now you have " + ls.size() + " task in the list.");
