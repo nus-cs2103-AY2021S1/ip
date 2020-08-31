@@ -14,66 +14,67 @@ import duke.ui.Ui;
  */
 public class Duke {
 
-	private Storage storage;
-	private TaskList tasks;
-	private Ui ui;
+    private Storage storage;
+    private TaskList tasks;
+    private Ui ui;
 
 
-	/** Constructs a Duke object from a specified filePath. If a valid .txt file containing
-	 * a TaskList is found, it will be loaded. Otherwise, a new TaskList object is created
-	 * to store the tasks.
-	 *
-	 * @param filePath Relative filepath from project source.
-	 * */
-	public Duke(String filePath) {
+    /**
+     * Constructs a Duke object from a specified filePath. If a valid .txt file containing
+     * a TaskList is found, it will be loaded. Otherwise, a new TaskList object is created
+     * to store the tasks.
+     *
+     * @param filePath Relative filepath from project source.
+     */
+    public Duke(String filePath) {
 
-		//initialize User interface
-		ui = new Ui();
+        //initialize User interface
+        ui = new Ui();
 
-		//Initialize Storage location
-		storage = new Storage(filePath);
+        //Initialize Storage location
+        storage = new Storage(filePath);
 
-		//Initialize TaskList
-		try {
-			tasks = new TaskList(storage.load());
-		} catch (DukeException e) {
-			tasks = new TaskList();
-			storage.writeToFile(storage.getPath().toString(), "");
-		}
+        //Initialize TaskList
+        try {
+            tasks = new TaskList(storage.load());
+        } catch (DukeException e) {
+            tasks = new TaskList();
+            storage.writeToFile(storage.getPath().toString(), "");
+        }
 
-	}
+    }
 
-	/** Main program loop until termination when "bye" is called by the user. */
-	public void run() {
+    /**
+     * Main program loop until termination when "bye" is called by the user.
+     */
+    public void run() {
 
-		//print greeting message
-		ui.printGreeting();
+        //print greeting message
+        ui.printGreeting();
 
-		boolean isExit = false;
-		while (!isExit) {
-			try {
+        boolean isExit = false;
+        while (!isExit) {
+            try {
 
-				String fullCommand = ui.readCommand();
-				ui.printDivider();
-				Command c = Parser.parse(fullCommand);
-				c.execute(tasks, ui, storage);
-				isExit = c.isExit();
-			} catch (DukeException e) {
-				ui.showError(e.getMessage());
-			} finally {
-				ui.printDivider();
-				System.out.println();
-			}
-		}
+                String fullCommand = ui.readCommand();
+                ui.printDivider();
+                Command c = Parser.parse(fullCommand);
+                c.execute(tasks, ui, storage);
+                isExit = c.isExit();
+            } catch (DukeException e) {
+                ui.showError(e.getMessage());
+            } finally {
+                ui.printDivider();
+                System.out.println();
+            }
+        }
 
-	}
-
-
-	public static void main(String[] args) {
-		new Duke("DukenizerTaskList.txt").run();
-	}
+    }
 
 
+    public static void main(String[] args) {
+        new Duke("DukenizerTaskList.txt").run();
+    }
 
 
 }

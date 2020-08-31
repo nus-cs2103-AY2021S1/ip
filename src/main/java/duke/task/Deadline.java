@@ -16,7 +16,7 @@ public class Deadline extends Task {
      * as a LocalDateTime Object.
      *
      * @param description Describes the Deadline Task.
-     * @param by The due timing of the Deadline Task.
+     * @param by          The due timing of the Deadline Task.
      */
     public Deadline(String description, String by) {
         super(description);
@@ -29,9 +29,9 @@ public class Deadline extends Task {
      * String time Object has to have proper formatting "yyyy-MM-dd HH:mm" as it will be parsed
      * as a LocalDateTime Object.
      *
-     * @param done Indicates whether the task has been done.
+     * @param done        Indicates whether the task has been done.
      * @param description Describes the Deadline Task.
-     * @param by The due timing of the Deadline Task.
+     * @param by          The due timing of the Deadline Task.
      */
     public Deadline(String done, String description, String by) {
         super(description);
@@ -51,7 +51,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " +
-                by.format(DateTimeFormatter.ofPattern("MMM d yyyy HH:mm")) + ")";
+        return "[D]" + super.toString() + " (by: "
+                + by.format(DateTimeFormatter.ofPattern("MMM d yyyy HH:mm")) + ")";
     }
 }
