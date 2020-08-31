@@ -28,7 +28,8 @@ class Parser {
                     taskList.list();
                 } else if (command.startsWith("done")) {
                     taskList.markDone(command.substring(5));
-                } else if (command.startsWith("deadline") || command.startsWith("event") || command.startsWith("todo")) {
+                } else if (command.startsWith("deadline") || command.startsWith("event")
+                        || command.startsWith("todo")) {
                     taskList.addTask(command);
                 } else if (command.startsWith("delete")) {
                     taskList.delete(command.substring(7));
@@ -40,7 +41,8 @@ class Parser {
             } catch (IllegalArgumentException e) {
                 Ui.printException(e);
             } catch (StringIndexOutOfBoundsException e) {
-                Ui.printException(new IllegalArgumentException("☹ OOPS!!! I'm sorry, but I don't know what that means :-("));
+                Ui.printException(new IllegalArgumentException("☹ OOPS!!! I'm sorry, but I don't know what that means"
+                        + " :-("));
             }
         }
     }

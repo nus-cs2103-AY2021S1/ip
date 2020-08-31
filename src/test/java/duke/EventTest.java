@@ -12,5 +12,4 @@ class EventTest {
         System.out.println(e);
         assertEquals(e.toString(), "[E][✗] sample (at: Oct 20 2020)");
     }
-
 }

@@ -96,6 +96,11 @@ public class Ui {
         System.out.println(separatedLine);
     }
 
+    /**
+     * print the find result
+     *
+     * @param foundTasks list of tasks matches the find pattern
+     */
     public static void find(List<Task> foundTasks) {
         System.out.println(separatedLine);
         System.out.println("Here are the matching tasks in your list:");

@@ -13,6 +13,12 @@ import java.util.Scanner;
 public class Storage {
     private File file;
 
+    /**
+     * Storage constructor, use to pass in the data filename
+     * If the file doesn't exist, create it
+     *
+     * @param filename the name of the data file
+     */
     public Storage(String filename) {
         try {
             file = new File(filename);
@@ -50,6 +56,8 @@ public class Storage {
                     String at = sc.nextLine();
                     lst.add(new Event(desc, at));
                     break;
+                default:
+                    throw new IllegalStateException("The data file is corrupted");
                 }
                 if (status == 1) {
                     lst.get(lst.size() - 1).setDone();
@@ -58,6 +66,8 @@ public class Storage {
         } catch (IOException e) {
             System.out.println("An error occurred when interacting with file.");
             e.printStackTrace();
+        } catch (IllegalStateException e) {
+            System.out.println(e);
         }
         return lst;
     }

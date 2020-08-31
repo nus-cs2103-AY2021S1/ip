@@ -10,6 +10,10 @@ public class Event extends Task {
 
     private final LocalDate happenAt;
 
+    /**
+     * @param desc     description for Event
+     * @param happenAt the time for the Event to take place
+     */
     public Event(String desc, String happenAt) {
         super(desc);
         this.happenAt = LocalDate.parse(happenAt);

@@ -10,6 +10,9 @@ public class TaskList {
     private final List<Task> tasks;
     private final Storage storage;
 
+    /**
+     * Constructor for TaskList, do storage initilization
+     */
     public TaskList() {
         storage = new Storage("data.txt");
         tasks = storage.load();

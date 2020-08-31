@@ -7,7 +7,12 @@ public abstract class Task {
     protected String desc;
     protected boolean isDone;
 
-    public Task(String desc) {
+    /**
+     * Constructor for Task, to be called only by subclasses
+     *
+     * @param desc description for the task
+     */
+    protected Task(String desc) {
         this.desc = desc;
         this.isDone = false;
     }
