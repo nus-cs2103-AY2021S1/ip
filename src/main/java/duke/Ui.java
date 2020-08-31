@@ -1,5 +1,8 @@
 package duke;
 
+/**
+ * Interact with the users with customized output based on what the user has keyed in.
+ */
 public class Ui {
 
     public Ui() {

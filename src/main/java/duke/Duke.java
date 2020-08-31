@@ -1,7 +1,7 @@
 import duke.Parser;
 import duke.Storage;
 import duke.TaskList;
-import main.java.duke.Ui;
+import duke.Ui;
 import duke.task.Task;
 import duke.DukeException;
 
