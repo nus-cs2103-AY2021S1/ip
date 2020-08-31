@@ -13,8 +13,8 @@ public class ByeCommand extends Command {
      * @param storage the storage that working on data file.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        System.out.println(END);
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        return END;
     }
 
     /**
