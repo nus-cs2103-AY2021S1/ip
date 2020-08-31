@@ -1,4 +1,4 @@
-package main.java.duke.exception;
+package duke.exception;
 
 public class InvalidDateFormatException extends DukeException {
     private static String messageNoTime = "Entered date is in the wrong format. Please "

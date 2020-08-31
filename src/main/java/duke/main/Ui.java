@@ -1,9 +1,9 @@
-package main.java.duke.main;
+package duke.main;
 
-import main.java.duke.exception.DukeException;
+import duke.exception.DukeException;
 
-import main.java.duke.task.Task;
-import main.java.duke.task.TaskList;
+import duke.task.Task;
+import duke.task.TaskList;
 
 /**
  * Deals with the interaction and prints information to the user.

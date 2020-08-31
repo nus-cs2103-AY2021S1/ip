@@ -1,11 +1,11 @@
-package main.java.duke.main;
+package duke.main;
 
 import java.util.Scanner;
 
-import main.java.duke.exception.EmptyDateException;
-import main.java.duke.exception.EmptyTaskException;
-import main.java.duke.exception.InvalidDateFormatException;
-import main.java.duke.exception.InvalidIndexException;
+import duke.exception.EmptyDateException;
+import duke.exception.EmptyTaskException;
+import duke.exception.InvalidDateFormatException;
+import duke.exception.InvalidIndexException;
 
 /**
  * Reads and parses the user input.

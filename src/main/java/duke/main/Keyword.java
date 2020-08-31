@@ -1,6 +1,6 @@
-package main.java.duke.main;
+package duke.main;
 
-import main.java.duke.exception.InvalidCommandException;
+import duke.exception.InvalidCommandException;
 
 public enum Keyword {
     TODO("todo"),

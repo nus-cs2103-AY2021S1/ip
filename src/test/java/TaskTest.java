@@ -1,5 +1,5 @@
 import org.junit.Test;
-import main.java.Task;
+import duke.task.Task;
 
 import static org.junit.Assert.assertEquals;
 

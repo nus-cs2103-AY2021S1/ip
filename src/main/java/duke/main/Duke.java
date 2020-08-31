@@ -1,8 +1,8 @@
-package main.java.duke.main;
+package duke.main;
 
 import java.io.IOException;
-import main.java.duke.task.TaskList;
-import main.java.duke.exception.DukeException;
+import duke.task.TaskList;
+import duke.exception.DukeException;
 
 /**
  * Represents the Duke object to start the program.

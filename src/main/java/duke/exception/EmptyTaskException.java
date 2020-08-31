@@ -1,4 +1,4 @@
-package main.java.duke.exception;
+package duke.exception;
 
 public class EmptyTaskException extends DukeException {
     private static String message = "OOPS!!! The description of a task cannot be empty.";

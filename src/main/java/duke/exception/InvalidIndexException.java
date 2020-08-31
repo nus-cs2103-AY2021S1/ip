@@ -1,4 +1,4 @@
-package main.java.duke.exception;
+package duke.exception;
 
 public class InvalidIndexException extends DukeException {
     private static String message = "OOPS!!! The task index is empty :'(";

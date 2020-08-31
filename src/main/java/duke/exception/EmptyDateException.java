@@ -1,4 +1,4 @@
-package main.java.duke.exception;
+package duke.exception;
 
 public class EmptyDateException extends DukeException {
     private static String message = "OOPS!!! Please specify the date";
