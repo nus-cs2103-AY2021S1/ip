@@ -35,14 +35,14 @@ public class Storage {
                 String task = List.nextLine();
                 Task currentTask = null;
                 if (task.charAt(1) == 'T') {
-                    currentTask = new ToDo("todo " + task.substring(8));
+                    currentTask = new ToDo("todo " + task.substring(7));
                     taskList.add(currentTask);
 
                 } else if (task.charAt(1) == 'D') {
 
                     currentTask = new Deadline(
                             "deadline " + task.substring(
-                                    8,
+                                    7,
                                     task.indexOf('(') - 1
                             ),
                             LocalDate.parse(task.substring(
@@ -56,7 +56,7 @@ public class Storage {
 
                     currentTask = new Event(
                             "event " + task.substring(
-                                    8,
+                                    7,
                                     task.indexOf('(') - 1
                             ),
                             LocalDate.parse(task.substring(
