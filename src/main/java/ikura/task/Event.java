@@ -14,7 +14,7 @@ import ikura.util.InvalidInputException;
  */
 public class Event extends Task {
 
-	private final LocalDate eventDate;
+    private final LocalDate eventDate;
 
     /**
      * Constructs a new Event task with the given description and date.
@@ -24,7 +24,7 @@ public class Event extends Task {
      */
     public Event(String name, LocalDate date) {
         super(name);
-		this.eventDate = date;
+        this.eventDate = date;
     }
 
     /**
