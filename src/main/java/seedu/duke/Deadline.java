@@ -37,10 +37,12 @@ public class Deadline extends Task {
     }
 
     /**
-     * Sets the date or datetime object of when this deadline will be upon initializing it, based on the String "by" input.
+     * Sets the date or datetime object of when this deadline will be upon initializing it,
+     * based on the String "by" input.
      * If the input cannot be parsed, no action will be done.
      * To set just the date, the format of "by" has to be "YYYY-MM-DD" e.g. "2019-03-04".
-     * To set both the datetime and date, the format of "by" has to be "YYYY-MM-DD'T'HH:mm:ss" e.g. "2019-03-04T00:05:02".
+     * To set both the datetime and date,
+     * the format of "by" has to be "YYYY-MM-DD'T'HH:mm:ss" e.g. "2019-03-04T00:05:02".
      */
     private void setByDateAndTime() {
         try {
@@ -49,7 +51,9 @@ public class Deadline extends Task {
         } catch (DateTimeParseException e) {
             try {
                 this.byDate = LocalDate.parse(this.by);
-            } catch (DateTimeParseException ignored) { }
+            } catch (DateTimeParseException ignored) {
+                this.byDate = null;
+            }
         }
     }
 

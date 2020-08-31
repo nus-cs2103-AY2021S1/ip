@@ -40,7 +40,8 @@ public class Event extends Task {
      * Sets the date or datetime object of when this event will be upon initializing it, based on the String "at" input.
      * If the input cannot be parsed, no action will be done.
      * To set just the date, the format of "at" has to be "YYYY-MM-DD" e.g. "2019-03-04".
-     * To set both the datetime and date, the format of "at" has to be "YYYY-MM-DD'T'HH:mm:ss" e.g. "2019-03-04T00:05:02".
+     * To set both the datetime and date,
+     * the format of "at" has to be "YYYY-MM-DD'T'HH:mm:ss" e.g. "2019-03-04T00:05:02".
      */
     private void setAtDateAndTime() {
         try {

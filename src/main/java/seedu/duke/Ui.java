@@ -2,8 +2,8 @@ package seedu.duke;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Scanner;
 import java.util.List;
+import java.util.Scanner;
 
 /**
  * Handles all interaction with the user, including the reading of user input and outputting text.
@@ -95,7 +95,7 @@ public class Ui {
         }
     }
 
-    public void showTasks(List<Task> taskList) {
+    private void showTasks(List<Task> taskList) {
         int idx = 1;
         for (Task task : taskList) {
             System.out.println(String.format("%d.%s", idx, task.toString()));
