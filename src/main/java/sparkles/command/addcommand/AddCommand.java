@@ -20,6 +20,8 @@ public class AddCommand extends Command {
      * Deals with user's command
      * Add the task to the TaskList and
      * local disk file.
+     * Before that, parse the command to differentiate
+     * between AddDeadline, AddEvent or AddTodo.
      *
      * @param taskList, TaskList object containing list
      *                  of tasks.
