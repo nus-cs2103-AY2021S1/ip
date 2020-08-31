@@ -1,3 +1,4 @@
 [T][✘] run
 [D][✘] homework (by: 2020-09-10)
-[T][✘] eat
+[T][✓] eat
+[T][✘] bathe

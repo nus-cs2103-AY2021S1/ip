@@ -96,4 +96,81 @@ public class Ui {
     }
 
 
+    /**
+     * prints a task list.
+     *
+     * @param taskList task list to be printed
+     */
+    public String returnTaskList(ArrayList<Task> taskList){
+
+        String output = "";
+
+        for (int i = 0; i < taskList.size(); i++) {
+
+            Task currentTask = taskList.get(i);
+
+            output = output+((i + 1) + ". " + currentTask.toString()+"\n");
+        }
+        return output;
+    }
+
+    /**
+     * prints a message when the task is marked as done.
+     *
+     * @param currentTask task to be marked as done.
+     */
+
+    public String returnDoneTask(Task currentTask){
+        return
+                "_______________________________\n" +
+                        "Nice! I've marked this task as done:\n"+
+                        currentTask.toString()+"\n"+
+                        "_______________________________";
+
+    }
+
+    public String returnAddTask(Task currentTask, ArrayList<Task> currentTaskList){
+        return(
+                "_______________________________\n" +
+                        "Got it. I've added this task:\n" +
+                        currentTask.toString() + "\n" +
+                        "Now you have " + currentTaskList.size() + " task(s) in the list.\n" +
+                        "_______________________________");
+
+    }
+
+    public String returnBye(){
+
+        return("_______________________________\n"+
+                "Bye. Hope to see you again soon!");
+    }
+
+    public String returnNotValid(){
+
+        return(
+                "_______________________________\n" +
+                        " OOPS!!! I'm sorry, but I don't know what that means :-(\n" +
+                        "_______________________________");
+
+    }
+
+    public String returnDeleteTask(Task currentTask, ArrayList<Task> currentTaskList){
+        return(
+                "_______________________________\n" +
+                        "Noted. I've removed this task:\n" +
+                        currentTask.toString()+"\n"+
+                        "Now you have "+currentTaskList.size()+" tasks in the list.\n"+
+                        "_______________________________");
+
+    }
+
+    public String returnFindTask(ArrayList<Task> foundTaskList){
+        return(
+                "_______________________________\n" +
+                        "Here are the matching tasks in your list:\n"+
+        returnTaskList(foundTaskList)+
+        "_______________________________");
+    }
+
+
 }
