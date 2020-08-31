@@ -1,5 +1,7 @@
 package duke.views;
 
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
 /**
@@ -15,6 +17,11 @@ public interface Page {
      * The default height of a window page.
      */
     int DEFAULT_PAGE_HEIGHT = 400;
+
+    /**
+     * The default font for Titles.
+     */
+    Font DEFAULT_FONT = Font.font("Tahoma", FontWeight.NORMAL, 40);
 
     /**
      * Renders a scene on the window.

@@ -2,7 +2,7 @@ package duke.components;
 
 import duke.tasks.TaskList;
 import duke.utils.Storage;
-import duke.views.Welcome;
+import duke.views.Introduction;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -23,6 +23,6 @@ public class Starter extends Application {
         // execute GUI loop
         TaskList list = new TaskList();
         Storage storage = new Storage(list);
-        new Welcome(storage).setScene(window);
+        new Introduction(storage).setScene(window);
     }
 }

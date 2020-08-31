@@ -35,6 +35,7 @@ public class Welcome implements Page {
         Button startButton = new Button("Start Duke!");
         Button closeButton = new Button("Exit");
         Label logo = new Label(Messenger.LOGO);
+        logo.setFont(Page.DEFAULT_FONT);
 
         // read in file and print outcome
         Label storageText = new Label();

@@ -14,6 +14,11 @@ public class Messenger {
             + "|____/ \\__,_|_|\\_\\___|\n";
 
     /**
+     * Introduction messages.
+     */
+    public static final String INTRO_MESSAGE = "A Production by Zijian. For CS2103T 2020 Sem 1";
+
+    /**
      * Messages for loading and saving files.
      */
     public static final String FILE_LOADING = "Hold a while, trying to retrieve where you were last time...";
