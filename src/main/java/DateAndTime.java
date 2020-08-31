@@ -10,11 +10,18 @@ public class DateAndTime {
     private final LocalDate date;
     private final LocalTime time;
 
+    /**
+     * Construct an date and time object for tasks without specified time.
+     */
     public DateAndTime(){
         this.date = null;
         this.time = null;
     }
 
+    /**
+     * Construct a date and time object for storage by Duke for tasks with specified timing.
+     * @param dateAndTime A string passed to Duke by the user containing time information
+     */
     public DateAndTime(String dateAndTime){
 
         String date = dateAndTime.substring(0, "2020-02-02".length());
@@ -25,6 +32,10 @@ public class DateAndTime {
 
     }
 
+    /**
+     * Overridden toString() method to print out the desired format of date and time.
+     * @return A string that represents the date and time stored
+     */
     @Override
     public String toString(){
         return date.getYear() + " " +

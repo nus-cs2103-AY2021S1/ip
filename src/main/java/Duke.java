@@ -3,6 +3,12 @@
  */
 public class Duke {
 
+    /**
+     * The main method which handles users and calls relevant methods:
+     * Storage is called to print out stored tasks on the hard disk from the previous run,
+     * Ui is called to handle user inputs/ commands specifically.
+     * @param args standard format
+     */
     public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
