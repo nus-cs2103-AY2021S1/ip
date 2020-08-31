@@ -5,14 +5,14 @@ package duke;
  */
 public class Ui {
 
-    private static String BORDER = "-----------------------------------------------------------";
-    private static String INDENTATION = "    ";
+    private static String border = "-----------------------------------------------------------";
+    private static String indentation = "    ";
 
     /**
      * Prints the formatting for the Duke application.
      */
     public void printBorder() {
-        System.out.println(INDENTATION + BORDER);
+        System.out.println(indentation + border);
     }
 
     /**
@@ -20,7 +20,7 @@ public class Ui {
      */
     public void greet() {
         printBorder();
-        System.out.println(INDENTATION + "Hello! I'm Duke\n    What can I do for you?");
+        System.out.println(indentation + "Hello! I'm Duke\n    What can I do for you?");
         printBorder();
     }
 
@@ -29,7 +29,7 @@ public class Ui {
      */
     public void exit() {
         printBorder();
-        System.out.println(INDENTATION + "Bye. Hope to see you again soon!");
+        System.out.println(indentation + "Bye. Hope to see you again soon!");
         printBorder();
     }
 
@@ -40,10 +40,10 @@ public class Ui {
      */
     public void list(TaskList taskList) {
         printBorder();
-        System.out.println(INDENTATION + "Here are the tasks in your list:");
+        System.out.println(indentation + "Here are the tasks in your list:");
         for (Task task : taskList.getTasks()) {
             int index = taskList.getTasks().indexOf(task) + 1;
-            System.out.println(INDENTATION + index + "." + task);
+            System.out.println(indentation + index + "." + task);
         }
         printBorder();
     }
@@ -60,19 +60,25 @@ public class Ui {
         taskList.replace(oldTask, newTask);
 
         printBorder();
-        System.out.println(INDENTATION + "Nice! I've marked this task as done:");
-        System.out.println(INDENTATION + INDENTATION + newTask.getStatusIcon() + " " + newTask.description);
+        System.out.println(indentation + "Nice! I've marked this task as done:");
+        System.out.println(indentation + indentation + newTask.getStatusIcon() + " " + newTask.description);
         printBorder();
     }
 
+    /**
+     * find all tasks containing search keyword(s)
+     *
+     * @param taskList a TaskList object containing a list of tasks
+     * @param textToMatch the text to be used to find matching tasks
+     */
     public void findMatching(TaskList taskList, String textToMatch) {
         printBorder();
-        System.out.println(INDENTATION + "Here are the matching tasks in your list:");
+        System.out.println(indentation + "Here are the matching tasks in your list:");
         int index = 1;
         for (Task task : taskList.getTasks()) {
             String description = task.getDescription();
             if (description.contains(textToMatch)) {
-                System.out.println(INDENTATION + index + "." + task);
+                System.out.println(indentation + index + "." + task);
                 index++;
             }
         }

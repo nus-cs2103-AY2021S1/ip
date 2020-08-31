@@ -9,9 +9,9 @@ import java.util.List;
  */
 public class TaskList {
 
+    private static String border = "-----------------------------------------------------------";
+    private static String indentation = "    ";
     private List<Task> tasks;
-    private static String BORDER = "-----------------------------------------------------------";
-    private static String INDENTATION = "    ";
 
     /**
      * Constructor to initialise a new list of tasks.
@@ -33,7 +33,7 @@ public class TaskList {
      * Prints the formatting for the Duke application.
      */
     public static void printBorder() {
-        System.out.println(INDENTATION + BORDER);
+        System.out.println(indentation + border);
     }
 
     /**
@@ -58,9 +58,9 @@ public class TaskList {
                 + task.getDescription() + " @ " + task.getDate() + "\n";
         Storage.appendToFile(Storage.getFilePath(), textToAppend);
 
-        System.out.println(INDENTATION + "Got it. I've added this task:");
-        System.out.println(INDENTATION + INDENTATION + task);
-        System.out.println(INDENTATION + "Now you have " + (tasks.size() != 1
+        System.out.println(indentation + "Got it. I've added this task:");
+        System.out.println(indentation + indentation + task);
+        System.out.println(indentation + "Now you have " + (tasks.size() != 1
                 ? tasks.size() + " tasks in the list."
                 : tasks.size() + " task in the list."));
         printBorder();
@@ -78,9 +78,9 @@ public class TaskList {
         Storage.updateFile(Storage.getFilePath(), this);
 
         printBorder();
-        System.out.println(INDENTATION + "Noted. I've removed this task:");
-        System.out.println(INDENTATION + INDENTATION + task);
-        System.out.println(INDENTATION + "Now you have " + (tasks.size() != 1
+        System.out.println(indentation + "Noted. I've removed this task:");
+        System.out.println(indentation + indentation + task);
+        System.out.println(indentation + "Now you have " + (tasks.size() != 1
                 ? tasks.size() + " tasks in the list."
                 : tasks.size() + " task in the list."));
         printBorder();
