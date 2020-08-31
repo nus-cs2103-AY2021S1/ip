@@ -1,7 +1,7 @@
 package duke;
 
 public class DoneCommand extends Command {
-    int idx;
+    private int idx;
 
     /**
      * Instantiates DoneCommand.

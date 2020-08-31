@@ -6,7 +6,7 @@ import java.util.ArrayList;
  * Supports finding the task with given keyword.
  */
 public class FindCommand extends Command {
-    String input;
+    private String input;
 
     FindCommand(String input) {
         this.input = input;

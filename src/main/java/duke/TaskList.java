@@ -6,7 +6,7 @@ import java.util.ArrayList;
  * Encapsulates an ArrayList containing the tasks.
  */
 public class TaskList {
-    ArrayList<Task> tasksList;
+    private ArrayList<Task> tasksList;
 
     /**
      * Instantiates TaskList containing empty ArrayList.
