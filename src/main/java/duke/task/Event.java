@@ -15,6 +15,7 @@ public class Event extends Task {
     /**
      * Creates a new instance of an Event object with attributes defined
      * in the parameters.
+     *
      * @param description Description of the event.
      * @param date Date that the event is on.
      */
@@ -28,6 +29,7 @@ public class Event extends Task {
      * Creates a new instance of an Event object with attributes defined
      * in the parameters.
      * Overloaded constructor which specifies the completion status of the task.
+     *
      * @param description Description of the event.
      * @param date Date that the event is on.
      * @param isDone Completion status of the event.
@@ -39,6 +41,7 @@ public class Event extends Task {
 
     /**
      * Retrieves the date of the event.
+     *
      * @return Returns the date.
      */
     public String getDate() {
@@ -47,6 +50,7 @@ public class Event extends Task {
 
     /**
      * Overrides the default toString() method in the Task class.
+     *
      * @return Returns a String describing the attributes of the event.
      */
     @Override

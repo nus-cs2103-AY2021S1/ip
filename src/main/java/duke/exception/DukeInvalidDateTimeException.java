@@ -6,6 +6,7 @@ package duke.exception;
 public class DukeInvalidDateTimeException extends DukeException {
     /**
      * Constructor.
+     *
      * @param message string representing the exception
      */
     public DukeInvalidDateTimeException(String message) {

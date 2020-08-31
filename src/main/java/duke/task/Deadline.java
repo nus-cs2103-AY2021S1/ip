@@ -15,6 +15,7 @@ public class Deadline extends Task {
     /**
      * Creates a new instance of a Deadline object with attributes defined
      * in the parameters.
+     *
      * @param description Description of the deadline task.
      * @param date Date that the task is due by.
      */
@@ -27,6 +28,7 @@ public class Deadline extends Task {
      * Creates a new instance of a Deadline object with attributes defined
      * in the parameters.
      * Overloaded constructor which specifies the completion status of the task.
+     *
      * @param description Description of the task.
      * @param date Date that the task is due by.
      * @param done Completion status of the task.
@@ -38,6 +40,7 @@ public class Deadline extends Task {
 
     /**
      * Retrieves the due date of the task.
+     *
      * @return Returns the date.
      */
     public String getDate() {
@@ -46,6 +49,7 @@ public class Deadline extends Task {
 
     /**
      * Overrides the default toString() method in the Task class.
+     *
      * @return Returns a String describing the attributes of the deadline task.
      */
     @Override

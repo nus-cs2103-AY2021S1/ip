@@ -21,6 +21,7 @@ public class DeleteCommand extends Command {
     /**
      * Creates a new instance of a DeleteCommand with attributes defined
      * in the parameters.
+     *
      * @param taskNo number of the task to be deleted.
      */
     public DeleteCommand(int taskNo) {
@@ -29,6 +30,7 @@ public class DeleteCommand extends Command {
 
     /**
      * Executes a deleteTask operation.
+     *
      * @param taskList TaskList that the task is deleted from.
      * @param ui Ui responsible for the operation.
      * @param storage Storage where the changes are written to.

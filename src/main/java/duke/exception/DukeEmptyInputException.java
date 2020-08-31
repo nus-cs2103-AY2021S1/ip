@@ -6,6 +6,7 @@ package duke.exception;
 public class DukeEmptyInputException extends DukeException {
     /**
      * Constructor.
+     *
      * @param message string representing the exception
      */
     public DukeEmptyInputException(String message) {

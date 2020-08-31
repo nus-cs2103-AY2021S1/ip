@@ -31,6 +31,7 @@ public class Storage {
     /**
      * Creates a new instance of a Storage object with attributes defined
      * in the parameters.
+     *
      * @param filePath Path associated with the file.
      */
     Storage(String filePath) {
@@ -52,6 +53,7 @@ public class Storage {
 
     /**
      * Loads the task list in the file.
+     *
      * @return Returns a {@code List<Task>}that corresponds to the file data.
      * @throws DukeFileNotFoundException If file is not found.
      */
@@ -88,6 +90,7 @@ public class Storage {
 
     /**
      * Parses the Task into a string stored in the file.
+     *
      * @return Returns a String that corresponds to the Task attributes.
      */
     String parseTaskAsText(Task task) {
@@ -104,6 +107,7 @@ public class Storage {
 
     /**
      * Saves the task list in the file.
+     *
      * @param taskList TaskList to be saved.
      * @throws DukeLoadingErrorException If I/O operation fails.
      */

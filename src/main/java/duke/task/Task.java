@@ -17,6 +17,7 @@ public class Task {
     /**
      * Creates a new instance of a Task object with attributes defined
      * in the parameters.
+     *
      * @param description Description of the task.
      */
     Task(String description) {
@@ -28,6 +29,7 @@ public class Task {
      * Creates a new instance of a Task object with attributes defined
      * in the parameters.
      * Overloaded constructor which specifies the completion status of the task.
+     *
      * @param description Description of the task.
      * @param done Completion status of the task.
      */
@@ -38,6 +40,7 @@ public class Task {
 
     /**
      * Retrieves the completion status of the task.
+     *
      * @return Returns the completion status.
      */
     public boolean getStatus() {
@@ -46,6 +49,7 @@ public class Task {
 
     /**
      * Retrieves the description of the task.
+     *
      * @return Returns the description.
      */
     public String getDescription() {
@@ -61,6 +65,7 @@ public class Task {
 
     /**
      * Overrides the default toString() method in the Object class.
+     *
      * @return Returns a String describing the attributes of the task.
      */
     @Override

@@ -26,6 +26,7 @@ public class Parser {
 
     /**
      * Parses the user input and returns a Command based on the input.
+     *
      * @param fullCommand User input.
      * @throws DukeEmptyInputException If input is empty.
      * @throws DukeInvalidDateTimeException If date and time input is invalid.
@@ -69,7 +70,8 @@ public class Parser {
     }
 
     /**
-     * Parses a ByeCommand
+     * Parses a ByeCommand.
+     *
      * @return Returns a ByeCommand.
      */
     static ByeCommand parseBye() {
@@ -77,7 +79,8 @@ public class Parser {
     }
 
     /**
-     * Parses a ListCommand
+     * Parses a ListCommand.
+     *
      * @return Returns a ListCommand.
      */
     static ListCommand parseList() {
@@ -85,7 +88,8 @@ public class Parser {
     }
 
     /**
-     * Parses a DoneCommand
+     * Parses a DoneCommand.
+     *
      * @param taskNo Number of the task that is to be completed.
      * @return Returns a DoneCommand associated with the task to be completed.
      */
@@ -94,7 +98,8 @@ public class Parser {
     }
 
     /**
-     * Parses a DeleteCommand
+     * Parses a DeleteCommand.
+     *
      * @param taskNo Number of the task that is to be deleted.
      * @return Returns a DeleteCommand associated with the task to be deleted.
      */
@@ -104,6 +109,7 @@ public class Parser {
 
     /**
      * Parses an FindCommand associated with a keyword.
+     *
      * @param keyword Search keyword.
      * @return Returns an FindCommand associated with the search keyword.
      */
@@ -113,6 +119,7 @@ public class Parser {
 
     /**
      * Parses an AddCommand associated with a Todo.
+     *
      * @param description Description of the Todo.
      * @return Returns an AddCommand associated with the Todo to be added.
      * @throws DukeEmptyInputException If input is empty.
@@ -126,6 +133,7 @@ public class Parser {
 
     /**
      * Parses an AddCommand associated with a Deadline task.
+     *
      * @param description Description of the Deadline task.
      * @return Returns an AddCommand associated with the Deadline task to be added.
      * @throws DukeEmptyInputException If input is empty.
@@ -148,6 +156,7 @@ public class Parser {
 
     /**
      * Parses an AddCommand associated with an Event task.
+     *
      * @param description Description of the Event task.
      * @return Returns an AddCommand associated with the Event task to be added.
      * @throws DukeEmptyInputException If input is empty.

@@ -40,6 +40,7 @@ public class Ui {
 
     /**
      * Prints a string.
+     *
      * @param s Message to be printed.
      */
     public String print(String s) {
@@ -49,6 +50,7 @@ public class Ui {
 
     /**
      * Parses and prints the task list.
+     *
      * @param taskList TaskList to be printed.
      */
     public String list(TaskList taskList) {
@@ -65,6 +67,7 @@ public class Ui {
 
     /**
      * Parses the list of tasks and prints the search result.
+     *
      * @param searchResult Search result for task list.
      */
     public String printSearchResult(List<Task> searchResult) {
@@ -86,7 +89,7 @@ public class Ui {
     }
 
     /**
-     * Read the user input.
+     * Reads the user input.
      */
     String readCommand() {
         return s.nextLine();

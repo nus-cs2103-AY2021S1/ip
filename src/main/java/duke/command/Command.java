@@ -13,6 +13,7 @@ public abstract class Command {
 
     /**
      * Executes an operation.
+     *
      * @param taskList TaskList associated with the operation.
      * @param ui Ui responsible for the operation.
      * @param storage Storage associated with the operation.
@@ -23,6 +24,7 @@ public abstract class Command {
 
     /**
      * Indicates whether operation should continue running.
+     *
      * @return true.
      */
     public boolean isRunning() {

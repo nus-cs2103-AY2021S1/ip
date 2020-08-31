@@ -28,6 +28,7 @@ public class Duke {
      * Creates a new instance of a Duke object with attributes defined
      * in the parameters.
      * Initializes the Ui, Storage and TaskList.
+     *
      * @param filePath Path of the file where the data is written to.
      */
     public Duke(String filePath) {
@@ -75,6 +76,12 @@ public class Duke {
         }
     }
 
+    /**
+     * Gets response for a user input.
+     *
+     * @param input User input.
+     * @return Returns a Duke response as a String.
+     */
     public String getResponse(String input) {
         try {
             Command c = Parser.parse(input);

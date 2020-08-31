@@ -22,6 +22,7 @@ public class AddCommand extends Command {
     /**
      * Creates a new instance of an AddCommand with attributes defined
      * in the parameters.
+     *
      * @param task Task to be allocated.
      */
     public AddCommand(Task task) {
@@ -30,6 +31,7 @@ public class AddCommand extends Command {
 
     /**
      * Executes an addTask operation.
+     *
      * @param taskList TaskList that the task is added to.
      * @param ui Ui responsible for the operation.
      * @param storage Storage where the changes are written to.

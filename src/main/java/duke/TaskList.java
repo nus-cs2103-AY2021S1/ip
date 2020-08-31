@@ -26,6 +26,7 @@ public class TaskList {
     /**
      * Creates a new instance of a TaskList object with attributes defined
      * in the parameters.
+     *
      * @param tasks The list of tasks.
      */
     public TaskList(List<Task> tasks) {
@@ -34,6 +35,7 @@ public class TaskList {
 
     /**
      * Retrieves the task according to the index given.
+     *
      * @param i Index of the task in the list.
      * @return Returns the task.
      */
@@ -43,6 +45,7 @@ public class TaskList {
 
     /**
      * Retrieves the size of the task list.
+     *
      * @return Returns the size.
      */
     public int size() {
@@ -51,6 +54,7 @@ public class TaskList {
 
     /**
      * Retrieves the task list.
+     *
      * @return Returns the list of tasks.
      */
     public List<Task> getList() {
@@ -59,6 +63,7 @@ public class TaskList {
 
     /**
      * Adds a task to the task list.
+     *
      * @param task Task to be added.
      */
     public void addTask(Task task) {
@@ -67,6 +72,7 @@ public class TaskList {
 
     /**
      * Marks a task in the task list as complete.
+     *
      * @param taskNo Index of the task to be completed.
      * @return Returns the task.
      */
@@ -78,6 +84,7 @@ public class TaskList {
 
     /**
      * Removes a task in the task list.
+     *
      * @param taskNo Index of the task to be removed.
      * @return Returns the removed task.
      */
@@ -89,6 +96,7 @@ public class TaskList {
 
     /**
      * Finds the tasks related to keyword.
+     *
      * @param keyword Keyword used to find the related tasks.
      * @return Returns a list of related tasks.
      */
@@ -104,6 +112,7 @@ public class TaskList {
 
     /**
      * Retrieves a string describing the task size.
+     *
      * @return Returns the string.
      */
     public String getTaskSizeMessage() {
