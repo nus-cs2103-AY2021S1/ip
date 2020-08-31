@@ -17,6 +17,8 @@ dependencies {
 test {
     useJUnitPlatform()
 
+    systemProperty "file.encoding", "utf-8"
+
     testLogging {
         events "passed", "skipped", "failed"
 
@@ -28,8 +30,14 @@ test {
     }
 }
 
+compileJava.options.encoding = 'UTF-8'
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
 application {
-    mainClassName = "seedu.duke.Duke"
+    mainClassName = "duke.Duke"
 }
 
 shadowJar {
@@ -41,6 +49,7 @@ checkstyle {
     toolVersion = '8.23'
 }
 
-run{
+run {
     standardInput = System.in
+    systemProperty "file.encoding", "utf-8"
 }
