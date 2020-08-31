@@ -36,5 +36,4 @@ class ParserTest {
                 Parser.parseCommand("even t concert /at tonight!")
         );
     }
-
 }
