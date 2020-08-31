@@ -1,10 +1,13 @@
 package duke.task;
 
+/**
+ * Represents an abstract Task object. Inherited by Deadline, Event and Todo classes.
+ */
 public abstract class Task {
     protected final String description;
     protected Boolean isDone;
 
-    public enum TaskType {
+    private enum TaskType {
         DEADLINE("deadline <task description> /by <yyyy-mm-dd>"),
         EVENT("event <event description> /at <event location>"),
         TODO("todo <task description>");
@@ -15,23 +18,36 @@ public abstract class Task {
             this.format = format;
         }
         
-        public String getFormat() {
+        String getFormat() {
             return this.format;
         }
     }
-
-
-    public Task(String description, boolean isDone) {
+    
+    protected Task(String description, boolean isDone) {
         this.description = description;
         this.isDone = isDone;
     }
-    
+
+    /**
+     * Returns format of command to add a specific task type.
+     * @param taskTypeString String indicating task type (event, deadline or todo).
+     * @return Format of command to add task of type as specified by taskTypeString.
+     */
     public static String getFormat(String taskTypeString) {
         return TaskType.valueOf(taskTypeString.toUpperCase()).getFormat();
     }
-    
+
+    /**
+     * Returns task in String format that is suitable for saving to and retrieving from hard disk.
+     * @return String of task in format for saving to and retrieving from hard disk.
+     */
     public abstract String getParsedTask();
-    
+
+    /**
+     * Returns checkbox with tick/cross representing if task is done (tick) or not (cross).
+     * @return String representing checkbox with unicode character CHECK MARK (U+2713) if task is done 
+     * or HEAVY BALLOT X (U+2718) if task is not done.
+     */
     public String getCheckBox() {
         if (this.isDone) {
             return "[\u2713]";
@@ -40,15 +56,23 @@ public abstract class Task {
         }
     }
 
+    /**
+     * Marks this task as done.
+     */
     public void markDone() {
         this.isDone = true;
     }
-
+    
     @Override
     public String toString() {
         return getCheckBox() + " " + this.description;
     }
-    
+
+    /**
+     * Overrides Object equals method.
+     * @param other Object compared to.
+     * @return True if other is also a Task object with the same description and isDone fields. False otherwise.
+     */
     @Override
     public boolean equals(Object other) {
         if (this == other) {

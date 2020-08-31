@@ -4,9 +4,18 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Represents a Deadline object which inherits from Task.
+ */
 public class Deadline extends Task {
     protected LocalDate by;
 
+    /**
+     * Constructs an instance of Deadline object.
+     * @param description Description of task.
+     * @param by Due date for task.
+     * @param isDone Whether task is done or not.
+     */
     public Deadline(String description, String by, boolean isDone) {
         super(description, isDone);
         try {
@@ -17,6 +26,10 @@ public class Deadline extends Task {
         }
     }
 
+    /**
+     * Implements method specified by abstract class Task.
+     * @return String of Deadline object in format for saving to and retrieving from hard disk.
+     */
     public String getParsedTask() {
         return "deadline " + this.description + " /by " + this.by + System.lineSeparator() 
                 + this.isDone + System.lineSeparator();
@@ -27,6 +40,11 @@ public class Deadline extends Task {
         return "[D]" + super.toString() + " (by: " + this.by.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
     }
 
+    /**
+     * Overrides Object and Task equals method.
+     * @param other Object compared to.
+     * @return True if other is also a Deadline object with the same description, by and isDone fields. False otherwise.
+     */
     @Override
     public boolean equals(Object other) {
         if (this == other) {

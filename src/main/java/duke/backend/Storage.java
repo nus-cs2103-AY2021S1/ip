@@ -6,35 +6,51 @@ import duke.task.TaskList;
 import java.io.*;
 import java.util.List;
 
+/**
+ * Deals with loadings tasks from the file and saving tasks in the file.
+ */
 public class Storage {
     private final File file;
-    private final String filePath;
-    
+
+    /**
+     * Constructs an instance Storage object, that loads and saves tasks to file specified by filePath.
+     * If file and/or parent directories does not exist yet, creates them.
+     * @param filePath Specifies pathname of file to save tasks to and load tasks from.
+     */
     public Storage(String filePath) {
         File file = new File(filePath);
         if (!file.exists()) {
             createFile(file);
         }
-        this.filePath = filePath;
         this.file = file;
     }
     
-    public void createFile(File file){
+    private void createFile(File file){
         try {
             String dir = file.getParent();
             File dirFile = new File(dir);
             dirFile.mkdirs();
             file.createNewFile();
         } catch (IOException e) {
-            System.out.println(e);
+            System.out.println(e.getMessage());
         }
     }
-    
+
+    /**
+     * Loads file into a BufferedReader and returns the BufferedReader for use by TaskList to populate the task list.
+     * @return BufferedReader reading from saved task file.
+     * @throws FileNotFoundException If file of the Storage object is not found.
+     */
     public BufferedReader load() throws FileNotFoundException {
         FileReader f = new FileReader(this.file);
         return new BufferedReader(f);
     }
-    
+
+    /**
+     * Saves Tasks from taskList onto hard drive. 
+     * Overwrites saved txt file each time with updated values.
+     * @param taskList TaskList containing list of tasks to save.
+     */
     public void save(TaskList taskList) {
         try {
             boolean deleted = file.delete();
