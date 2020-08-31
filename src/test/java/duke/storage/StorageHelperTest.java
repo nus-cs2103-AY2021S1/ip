@@ -1,12 +1,14 @@
 package duke.storage;
 
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.io.File;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
 public class StorageHelperTest {
     @Test
@@ -76,7 +78,6 @@ public class StorageHelperTest {
 
     @Test
     public void open_missingFile_throwException() {
-        assertThrows(FileMissingException.class,
-                () -> StorageHelper.open((String s) -> s, "nonExistentFile.txt"));
+        assertThrows(FileMissingException.class, () -> StorageHelper.open((String s) -> s, "nonExistentFile.txt"));
     }
 }

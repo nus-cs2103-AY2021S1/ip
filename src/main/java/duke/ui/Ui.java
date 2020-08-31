@@ -9,30 +9,29 @@ import java.util.List;
 public class Ui {
 
     /**
-     * Prints the given string to the console as a response from Duke, wrapping lines that exceed 68
-     * characters in length.
+     * Prints the given string to the console as a response from Duke, wrapping lines that exceed 68 characters in
+     * length.
      *
      * @param string the string to print.
      */
     public void say(String string) {
-        final String INDENT = "  ";
-        final int LINE_LENGTH = 68;
-        final String SEPARATOR = INDENT + "_".repeat(LINE_LENGTH);
-        List<String> strings = splitIntoLines(string, LINE_LENGTH);
-        System.out.println(SEPARATOR);
+        final String indent = "  ";
+        final int lineLength = 68;
+        final String separator = indent + "_".repeat(lineLength);
+        List<String> strings = splitIntoLines(string, lineLength);
+        System.out.println(separator);
         for (String s : strings) {
-            System.out.println(INDENT + s);
+            System.out.println(indent + s);
         }
-        System.out.println(SEPARATOR);
+        System.out.println(separator);
         System.out.println();
     }
 
     /**
-     * Splits a string into lines with at most lineLength number of characters. This method does not
-     * account for characters of differing widths (eg. tab character, or if non-monospace fonts are
-     * used).
+     * Splits a string into lines with at most lineLength number of characters. This method does not account for
+     * characters of differing widths (eg. tab character, or if non-monospace fonts are used).
      *
-     * @param string the string to split.
+     * @param string     the string to split.
      * @param lineLength the maximum number of characters per line.
      * @return a list of strings where each string corresponds to 1 line.
      */

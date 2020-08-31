@@ -16,7 +16,7 @@ public class DoneCommand implements Command {
      * @param taskNumber the number (1-based) of the Task to mark as done.
      */
     public DoneCommand(int taskNumber) {
-       this.taskNumber = taskNumber;
+        this.taskNumber = taskNumber;
     }
 
     @Override

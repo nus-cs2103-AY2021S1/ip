@@ -12,6 +12,9 @@ public class TaskList {
     private List<Task> list;
     private SaveFunction saveFunction;
 
+    /**
+     * Creates an empty TaskList.
+     */
     public TaskList() {
         list = new ArrayList<>();
         saveFunction = (list) -> {

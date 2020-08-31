@@ -1,0 +1,5 @@
+((nil . ((lsp-java-format-settings-url . "styleguide.xml")
+         (lsp-java-format-settings-profile . "GoogleStyle")
+         (lsp-java-save-actions-organize-imports . t)
+         ))
+ )

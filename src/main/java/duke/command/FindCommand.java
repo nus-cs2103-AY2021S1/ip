@@ -1,15 +1,14 @@
 package duke.command;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import duke.Bot;
 import duke.task.Task;
 import duke.task.TaskList;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 /**
- * This Command will cause Duke to find and display the Tasks whose description contains the specified
- * String.
+ * This Command will cause Duke to find and display the Tasks whose description contains the specified String.
  */
 public class FindCommand implements Command {
     private String query;
@@ -28,9 +27,8 @@ public class FindCommand implements Command {
         if (list.size() == 0) {
             bot.sayLine("There are no items in your list.");
         } else {
-            List<Task> matches = list.toStream()
-                    .filter(t -> t.getDescription().contains(query))
-                    .collect(Collectors.toList());
+            List<Task> matches =
+                    list.toStream().filter(t -> t.getDescription().contains(query)).collect(Collectors.toList());
 
             if (matches.isEmpty()) {
                 bot.sayLine("No matching tasks found!");

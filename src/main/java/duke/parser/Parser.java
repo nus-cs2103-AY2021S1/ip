@@ -4,6 +4,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
 import duke.command.AddCommand;
 import duke.command.ByeCommand;
 import duke.command.Command;
@@ -48,8 +49,7 @@ public class Parser {
                 return new DeleteCommand(taskNumber);
             } else if (command.equals("todo")) {
                 if (args.isEmpty()) {
-                    return new ErrorCommand(
-                            "Couldn't add todo! The description of a todo cannot be empty.");
+                    return new ErrorCommand("Couldn't add todo! The description of a todo cannot be empty.");
                 }
                 return new AddCommand(new Task(args));
             } else if (command.equals("deadline")) {
@@ -76,8 +76,7 @@ public class Parser {
 
     private static void ensureNoArgs(String args, String commandName) throws DukeParsingException {
         if (!args.isEmpty()) {
-            throw new DukeParsingException(
-                    String.format("I don't understand that. Did you mean %s?", commandName));
+            throw new DukeParsingException(String.format("I don't understand that. Did you mean %s?", commandName));
         }
     }
 
@@ -87,8 +86,7 @@ public class Parser {
             return Integer.parseInt(args);
         } catch (NumberFormatException e) {
             throw new DukeParsingException(
-                    String.format("You need to tell me the number of the task %s. Eg. %s",
-                            taskDescription, example));
+                    String.format("You need to tell me the number of the task %s. Eg. %s", taskDescription, example));
         }
     }
 
@@ -129,8 +127,8 @@ public class Parser {
     }
 
     /**
-     * Splits a string into 2 around the first occurence of a regex pattern. An exception is thrown
-     * if the pattern does not exist, or if either of the tokens are blank.
+     * Splits a string into 2 around the first occurence of a regex pattern. An exception is thrown if the pattern does
+     * not exist, or if either of the tokens are blank.
      */
     private static String[] splitAround(String string, String pattern) throws DukeParsingException {
         int n = 2;
@@ -148,12 +146,15 @@ public class Parser {
 
     private static Date parseDate(String dateString) throws DukeParsingException {
         final DateFormat dateOnly = new SimpleDateFormat("d/M/y");
-        // TODO: improve time parsing - this accepts nonsense time formats eg. 27:00. Hm also does not work for some reason.
+        // TODO: improve time parsing - this accepts nonsense time formats eg. 27:00. Hm also does not work for some
+        // reason.
         final DateFormat withTime = new SimpleDateFormat("d/M/y H:m");
 
         try {
             return withTime.parse(dateString);
-        } catch (ParseException e) {}
+        } catch (ParseException e) {
+            // ignore, because we want to try parsing with date only
+        }
 
         try {
             return dateOnly.parse(dateString);

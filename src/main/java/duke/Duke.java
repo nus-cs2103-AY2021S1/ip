@@ -1,11 +1,11 @@
 package duke;
 
+import java.util.Scanner;
+
 import duke.parser.Parser;
 import duke.storage.TaskListStorage;
 import duke.task.TaskList;
 import duke.ui.Ui;
-
-import java.util.Scanner;
 
 /**
  * This is the main class. Start Duke by running the main method.
