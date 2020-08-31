@@ -31,7 +31,7 @@ public abstract class UserCommand {
      * @param ui       ui that prints output.
      * @throws DukeException
      */
-    public abstract void execute(TaskList taskList, Ui ui) throws DukeException;
+    public abstract String execute(TaskList taskList, Ui ui) throws DukeException;
 
     /**
      * @return isExit boolean

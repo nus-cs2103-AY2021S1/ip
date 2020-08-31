@@ -26,7 +26,7 @@ public class DeadlineCommand extends UserCommand {
      * @throws DukeException
      */
     @Override
-    public void execute(TaskList taskList, Ui ui) throws DukeException {
+    public String execute(TaskList taskList, Ui ui) throws DukeException {
 
         String[] deadlineArr = userInput.split("/", 2);
         String by = deadlineArr[1].substring(deadlineArr[1].indexOf("by") + 3);
@@ -34,8 +34,9 @@ public class DeadlineCommand extends UserCommand {
         LocalDate localDeadlineDate = TimeFormatter.localDate(by);
         Deadline deadline = new Deadline(deadlineString, localDeadlineDate);
         taskList.addTask(deadline);
-        ui.printResponse("Got it. I've added this task:");
-        ui.printResponse(deadline.toString());
-        ui.printListCount(taskList);
+
+        return ui.printResponse("Got it. I've added this task:") + "\n" +
+                ui.printResponse(deadline.toString()) + "\n" +
+                ui.printListCount(taskList);
     }
 }

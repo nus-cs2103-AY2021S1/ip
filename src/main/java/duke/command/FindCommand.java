@@ -26,7 +26,7 @@ public class FindCommand extends UserCommand {
      * @throws DukeException
      */
     @Override
-    public void execute(TaskList taskList, Ui ui) throws DukeException {
+    public String execute(TaskList taskList, Ui ui) throws DukeException {
         if (userInput.trim().length() <= 4) {
             throw new EmptyFindException();
         } else {
@@ -39,10 +39,10 @@ public class FindCommand extends UserCommand {
                 }
             }
             if (temp.isEmpty()) {
-                System.out.println("No results found.");
+                return ui.printResponse("No results found.");
             } else {
                 TaskList tempList = new TaskList(temp);
-                ui.printList(tempList);
+                return ui.printList(tempList);
             }
         }
     }

@@ -29,8 +29,8 @@ public class Ui {
     /**
      * Goodbye message to the user.
      */
-    public void sayGoodBye() {
-        System.out.println("Bye. Hope to see you again soon!");
+    public String sayGoodBye() {
+        return "Bye. Hope to see you again soon!";
     }
 
     /**
@@ -38,10 +38,12 @@ public class Ui {
      *
      * @param taskList list containing all the tasks.
      */
-    public void printList(TaskList taskList) {
+    public String printList(TaskList taskList) {
+        String s = "\n";
         for (int x = 0; x < taskList.listSize(); x++) {
-            System.out.println(x + 1 + ":" + taskList.getTask(x).toString());
+            s = s + (int) (x + 1) + ":" + taskList.getTask(x).toString() + "\n";
         }
+        return s;
     }
 
     /**
@@ -49,8 +51,8 @@ public class Ui {
      *
      * @param taskList list containing all the tasks.
      */
-    public void printListCount(TaskList taskList) {
-        System.out.format("Now you have %d tasks in the list\n", taskList.listSize());
+    public String printListCount(TaskList taskList) {
+        return "Now you have " + taskList.listSize() + " tasks in the list";
     }
 
     /**
@@ -66,7 +68,7 @@ public class Ui {
      *
      * @param response string to be output.
      */
-    public void printResponse(String response) {
-        System.out.println(response);
+    public String printResponse(String response) {
+        return response;
     }
 }

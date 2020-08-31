@@ -24,7 +24,7 @@ public class DeleteCommand extends UserCommand {
      * @throws DukeException
      */
     @Override
-    public void execute(TaskList taskList, Ui ui) throws DukeException {
+    public String execute(TaskList taskList, Ui ui) throws DukeException {
         String[] deleteCommandArray = userInput.split(" ");
         if (deleteCommandArray.length < 2) {
             throw new InvalidDeleteCommandException();
@@ -35,9 +35,9 @@ public class DeleteCommand extends UserCommand {
             } else {
                 Task item = taskList.getTask(itemToBeDeleted - 1);
                 taskList.deleteTask(itemToBeDeleted - 1);
-                ui.printResponse("Noted. I've removed this task:");
-                ui.printResponse(item.toString());
-                ui.printListCount(taskList);
+                return ui.printResponse("Noted. I've removed this task:") + "\n" +
+                        ui.printResponse(item.toString()) + "\n" +
+                        ui.printListCount(taskList);
             }
         }
     }

@@ -23,7 +23,7 @@ public class InvalidCommand extends UserCommand {
      * @throws DukeException
      */
     @Override
-    public void execute(TaskList taskList, Ui ui) throws DukeException {
+    public String execute(TaskList taskList, Ui ui) throws DukeException {
         throw new InvalidCommandException();
     }
 }
