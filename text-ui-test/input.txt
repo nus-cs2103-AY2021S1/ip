@@ -1,0 +1,14 @@
+delete all
+list
+hello
+todo borrow books
+list
+deadline
+event
+event Homecoming /at 5 Aug 2020 07:50 PM
+deadline quiz /by 10 Aug 2020
+todo
+list
+done 2
+list
+bye
