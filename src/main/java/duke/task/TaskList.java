@@ -7,7 +7,7 @@ import java.util.List;
 
 public class TaskList {
     private List<Task> list;
-    private static final String starline = "**************************************************************************";
+    private static final String starline = "**************************************************************************\n";
     
     public TaskList() {
         this.list = new ArrayList<>();
@@ -17,16 +17,24 @@ public class TaskList {
         try {
             this.list = new ArrayList<>();
             String line = br.readLine();
+            boolean fileCorrupted = false;
             while (line != null) {
-                Task task = this.add(line, false);
-                boolean done = Boolean.parseBoolean(br.readLine());
-                if (done) task.markDone();
-                line = br.readLine();
+                try {
+                    boolean isDone = Boolean.parseBoolean(br.readLine());
+                    this.add(line, isDone,false);
+                } catch (IllegalArgumentException e) {
+                    if (!fileCorrupted) {
+                        System.out.println(starline + 
+                                "WARNING: Your stored data appears to be in a corrupted format. Some tasks may be lost.");
+                        fileCorrupted = true;
+                    }
+                } finally {
+                    line = br.readLine();
+                }
             }
         } catch (IOException e) {
             System.out.println("Error populating task list with saved tasks: " + e);
-        }
-        
+        } 
     }
     
     public List<Task> getTaskList() {
@@ -34,7 +42,7 @@ public class TaskList {
     }
 
     public void list() {
-        System.out.println(starline + "\nHere are the tasks in your list:");
+        System.out.println(starline + "Here are the tasks in your list:");
         for (int i=0; i < this.list.size(); i++) {
             printTask(i);
         }
@@ -68,10 +76,10 @@ public class TaskList {
     
     private void throwInvalidTaskSyntaxException(String taskType) {
         throw new IllegalArgumentException(String.format("OOPS! Invalid syntax. To add a %s, use:\n%s", taskType,
-                Task.getFormat(taskType.toUpperCase())));
+                Task.getFormat(taskType)));
     }
 
-    public Task add(String input, boolean echo) {
+    public void add(String input, boolean isDone, boolean echo) {
         String[] splitInput = input.split(" ", 2);
         String taskType = splitInput[0];
         Task newTask;
@@ -79,7 +87,7 @@ public class TaskList {
         switch(taskType) {
             case "todo":
                 if (input.matches("todo (\\S+\\s?)+")) {
-                    newTask = new Todo(splitInput[1]);
+                    newTask = new Todo(splitInput[1], isDone);
                     break;
                 } else if (input.matches("todo\\s?")) {
                     throwEmptyFieldException("todo", "description");
@@ -91,7 +99,7 @@ public class TaskList {
                     String[] splitDeadline = splitInput[1].split(" /by ");
                     String deadlineDesc = splitDeadline[0];
                     String by = splitDeadline[1];
-                    newTask = new Deadline(deadlineDesc, by);
+                    newTask = new Deadline(deadlineDesc, by, isDone);
                     break;
                 } else if (input.matches("deadline\\s?") || !input.contains(" by ")){
                     throwEmptyFieldException("deadline", "description", "date");
@@ -103,7 +111,7 @@ public class TaskList {
                     String[] splitEvent = splitInput[1].split(" /at ");
                     String eventDesc = splitEvent[0];
                     String at = splitEvent[1];
-                    newTask = new Event(eventDesc, at);
+                    newTask = new Event(eventDesc, at, isDone);
                     break;
                 } else if (input.matches("event\\s?") || !input.contains(" at ")) {
                     throwEmptyFieldException("event", "description", "location");
@@ -115,7 +123,6 @@ public class TaskList {
         }
         this.list.add(newTask);
         if (echo) echo(newTask.toString());
-        return newTask;
     }
 
     public void markTaskAsDone(String listIndexString) {

@@ -2,14 +2,14 @@ package duke.task;
 
 public abstract class Task {
     protected final String description;
-    protected Boolean done;
+    protected Boolean isDone;
 
     public enum TaskType {
         DEADLINE("deadline <task description> /by <yyyy-mm-dd>"),
         EVENT("event <event description> /at <event location>"),
         TODO("todo <task description>");
         
-        private String format;
+        private final String format;
         
         TaskType(String format) {
             this.format = format;
@@ -21,19 +21,19 @@ public abstract class Task {
     }
 
 
-    public Task(String description) {
+    public Task(String description, boolean isDone) {
         this.description = description;
-        this.done = false;
+        this.isDone = isDone;
     }
     
     public static String getFormat(String taskTypeString) {
-        return TaskType.valueOf(taskTypeString).getFormat();
+        return TaskType.valueOf(taskTypeString.toUpperCase()).getFormat();
     }
     
     public abstract String getParsedTask();
     
     public String getCheckBox() {
-        if (this.done) {
+        if (this.isDone) {
             return "[\u2713]";
         } else {
             return "[\u2718]";
@@ -41,11 +41,23 @@ public abstract class Task {
     }
 
     public void markDone() {
-        this.done = true;
+        this.isDone = true;
     }
 
     @Override
     public String toString() {
         return getCheckBox() + " " + this.description;
+    }
+    
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        } else if (other instanceof Task) {
+            Task otherTask = (Task) other;
+            return this.description.equals(otherTask.description) && this.isDone == otherTask.isDone;
+        } else {
+            return false;
+        }
     }
 }

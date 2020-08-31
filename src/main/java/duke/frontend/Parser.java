@@ -43,7 +43,7 @@ public class Parser {
             } else if (splitNext[0].equals("todo") || splitNext[0].equals("deadline") || splitNext[0].equals("event")){
                 // for ToDos, Deadlines, Events
                 try {
-                    this.taskList.add(next, true);
+                    this.taskList.add(next, false, true);
                 } catch (IllegalArgumentException ex) {
                     System.out.println(dashline + "\n\u2639 " + ex.getMessage() + "\n" + dashline);
                 }
