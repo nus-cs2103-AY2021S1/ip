@@ -14,15 +14,15 @@ import java.util.Scanner;
  * @author Lio
  */
 public class Storage {
-    Scanner data;
+    private Scanner data;
 
     /**
      * Constructor
      *
      * @param filePath File path of the storage file
      */
-    public Storage(String filePath) throws Exception{
-        File file= new File(filePath);
+    public Storage(String filePath) throws Exception {
+        File file = new File(filePath);
         try {
             Boolean fileCreated = file.createNewFile();
         } catch (IOException e) {

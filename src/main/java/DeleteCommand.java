@@ -6,7 +6,7 @@ package main.java;
  * @author Lio
  */
 public class DeleteCommand extends Command {
-    int id;
+    private int id;
 
     /**
      * Constructor

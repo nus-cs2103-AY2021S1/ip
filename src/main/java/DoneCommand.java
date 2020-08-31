@@ -6,7 +6,7 @@ package main.java;
  * @author Lio
  */
 public class DoneCommand extends Command {
-    int id;
+    private int id;
 
     /**
      * Constructor
