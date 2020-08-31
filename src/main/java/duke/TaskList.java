@@ -1,6 +1,6 @@
 package duke;
 
-import duke.commands.Commands;
+import duke.commands.Command;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.Task;
@@ -62,11 +62,11 @@ public class TaskList {
         String[] lineSplit = line.split("\\|");
         boolean done = lineSplit[2].equals("1");
         if (lineSplit[0].equals("T")) {
-            addTask(lineSplit[1], Commands.TODO, "", done);
+            addTask(lineSplit[1], 1, "", done);
         } else if (lineSplit[0].equals("D")) {
-            addTask(lineSplit[1], Commands.DEADLINE, lineSplit[3], done);
+            addTask(lineSplit[1], 2, lineSplit[3], done);
         } else {
-            addTask(lineSplit[1], Commands.EVENT, lineSplit[3], done);
+            addTask(lineSplit[1], 3, lineSplit[3], done);
         }
     }
 
@@ -78,11 +78,11 @@ public class TaskList {
      * @param ddl Task deadline
      * @param done whether task has been marked done
      */
-    private void addTask(String task, Commands type, String ddl, boolean done) {
+    private void addTask(String task, int type, String ddl, boolean done) {
         Task newTask;
-        if (type == Commands.TODO) {
+        if (type == 1) {
             newTask = new Todo(task);
-        } else if (type == Commands.DEADLINE) {
+        } else if (type == 2) {
             newTask = new Deadline(task, LocalDate.parse(ddl));
         } else {
             newTask = new Event(task, LocalDate.parse(ddl));

@@ -1,6 +1,6 @@
 package duke;
 
-import duke.commands.Commands;
+import duke.commands.Command;
 
 /**
  * Class to parse user input and process it.
@@ -32,29 +32,29 @@ public class Parser {
      * @throws DukeException Duke-related exception due to erroneous inputs
      */
     public boolean processInput(String input) throws DukeException {
-        if (Commands.BYE.check(input)) {
+        if (Command.BYE.check(input)) {
             exit();
             return false;
-        } else if (Commands.LIST.check(input)) {
+        } else if (Command.LIST.check(input)) {
             ui.writeOutput(taskList.listTasks());
         } else {
             String[] inputSplits = input.split(" ", 2);
-            if (Commands.TODO.check(inputSplits[0])) {
+            if (Command.TODO.check(inputSplits[0])) {
                 if (inputSplits.length < 2) {
                     throw new DukeException("The description of a todo cannot be empty");
                 }
                 ui.writeAdd(taskList.addTask(inputSplits[1]), taskList.getSize());
-            } else if (Commands.DEADLINE.check(inputSplits[0])) {
+            } else if (Command.DEADLINE.check(inputSplits[0])) {
                 if (inputSplits.length < 2) {
                     throw new DukeException("The description of a deadline cannot be empty");
                 }
                 ui.writeAdd(taskList.addTask(inputSplits[1], false), taskList.getSize());
-            } else if (Commands.EVENT.check(inputSplits[0])) {
+            } else if (Command.EVENT.check(inputSplits[0])) {
                 if (inputSplits.length < 2) {
                     throw new DukeException("The description of an event cannot be empty");
                 }
                 ui.writeAdd(taskList.addTask(inputSplits[1], true), taskList.getSize());
-            } else if (Commands.DONE.check(inputSplits[0])) {
+            } else if (Command.DONE.check(inputSplits[0])) {
                 if (inputSplits.length < 2) {
                     throw new DukeException("Task number cannot be empty");
                 }
@@ -63,7 +63,7 @@ public class Parser {
                 } catch (NumberFormatException ex) {
                     throw new DukeException("Task number must be a valid integer");
                 }
-            } else if (Commands.DELETE.check(inputSplits[0])) {
+            } else if (Command.DELETE.check(inputSplits[0])) {
                 if (inputSplits.length < 2) {
                     throw new DukeException("Task number cannot be empty");
                 }
@@ -72,7 +72,7 @@ public class Parser {
                 } catch (NumberFormatException ex) {
                     throw new DukeException("Task number must be a valid integer");
                 }
-            } else if (Commands.FIND.check((inputSplits[0]))) {
+            } else if (Command.FIND.check((inputSplits[0]))) {
                 if (inputSplits.length != 2) {
                     throw new DukeException("Search key cannot be empty");
                 }
