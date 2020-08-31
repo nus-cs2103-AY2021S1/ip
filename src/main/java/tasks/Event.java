@@ -1,6 +1,5 @@
 package main.java.tasks;
 
-import main.java.tasks.Task;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 

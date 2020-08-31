@@ -1,7 +1,5 @@
 package main.java.exceptions;
 
-import main.java.exceptions.DukeException;
-
 public class WrongDateFormatException extends DukeException {
     public WrongDateFormatException(String errorMessage) {
         super(errorMessage);

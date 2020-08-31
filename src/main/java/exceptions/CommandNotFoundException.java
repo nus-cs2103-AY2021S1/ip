@@ -1,6 +1,5 @@
 package main.java.exceptions;
 
-
 public class CommandNotFoundException extends DukeException {
 
     public CommandNotFoundException() {

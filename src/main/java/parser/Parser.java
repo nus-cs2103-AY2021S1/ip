@@ -12,7 +12,7 @@ public class Parser {
 
     /**
      * Cut an user-input String to smaller piece of information
-     * Return different command constructed with the info pieces
+     * Returns different command constructed with the info pieces
      * @param fullCommand
      * @return
      * @throws EmptyTaskException
@@ -48,6 +48,14 @@ public class Parser {
                 String time = parseArray[1];
                 int index = Integer.parseInt(time) - 1;
                 command = new DoneCommand(index);
+            }
+            break;
+        case "find":
+            if (parseArray.length == 1) {
+                throw new IncompleteMessageException("Please specify keyword. (´∀`)");
+            } else {
+                String keyword = parseArray[1];
+                command = new FindCommand(keyword);
             }
             break;
         case "delete":

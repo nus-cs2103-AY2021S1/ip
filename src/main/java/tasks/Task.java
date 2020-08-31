@@ -26,14 +26,14 @@ public class Task {
     }
 
     /**
-     * Reduce the count of tasks
+     * Reduces the count of tasks
      */
     public static void reduceOneTasks() {
         numberOfTasks--;
     }
 
     /**
-     * Get the tick or cross sign which indicates is a task is complete
+     * Gets the tick or cross sign which indicates is a task is complete
      * @return
      */
     public String getStatusIcon() {
@@ -52,9 +52,8 @@ public class Task {
         return description;
     }
 
-
     /**
-     * mark a task as finished
+     * Marks a task as finished
      * @return
      */
     public Task markAsDone() {
@@ -68,7 +67,7 @@ public class Task {
     }
 
     /**
-     * Return the message when a task is marked as done
+     * Returns the message when a task is marked as done
      * @return mark-as-done Message
      */
     public String markAsDoneMessage() {
@@ -77,7 +76,7 @@ public class Task {
     }
 
     /**
-     * Return the message when a new task is added
+     * Returns the message when a new task is added
      */
     public String addMessage() {
         return "Got it.(^∇^) I've added this task:\n"
@@ -85,7 +84,7 @@ public class Task {
     }
 
     /**
-     * Return the message when a task is deleted
+     * Returns the message when a task is deleted
      */
     public String deleteMessage() {
         return "Got it.(^∇^) I've deleted this task:\n"
@@ -93,7 +92,7 @@ public class Task {
     }
 
     /**
-     * Return info about the task in the format for data storage
+     * Returns info about the task in the format for data storage
      * @return A string
      */
     public String data() {
