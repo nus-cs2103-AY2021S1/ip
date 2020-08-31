@@ -23,9 +23,9 @@ import duke.task.Todo;
 public class Storage {
 
     /**
-     * The file path to load tasks from and save tasks to.
+     * The file instance to load tasks from and save tasks to.
      */
-    private final String filePath;
+    private final File file;
 
     /**
      * Initializes a storage instance for a particular file path.
@@ -33,7 +33,14 @@ public class Storage {
      * @param filePath The path of the file.
      */
     public Storage(String filePath) {
-        this.filePath = filePath;
+        this.file = new File(filePath);
+        if (!file.exists()) {
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     /**
@@ -43,7 +50,6 @@ public class Storage {
      * @throws DukeException If the file is not found.
      */
     public List<Task> loadTasks() throws DukeException {
-        File file = new File(filePath);
         List<Task> tasks = new ArrayList<>();
         try {
             Scanner sc = new Scanner(file);
@@ -71,7 +77,7 @@ public class Storage {
             sc.close();
             return tasks;
         } catch (FileNotFoundException e) {
-            String errorMessage = "No history found, "
+            String errorMessage = "No previous save file found, "
                     + "starting up with no saved records...\n";
             throw new DukeException(errorMessage);
         }
@@ -105,8 +111,8 @@ public class Storage {
             }
             myWriter.close();
         } catch (IOException e) {
-            String errorMessage = "File path specified could not be created or opened,"
-                    + "unable to save tasks :(";
+            String errorMessage = "An error occurred, "
+                    + "unable to save tasks to file :(";
             throw new DukeException(errorMessage);
         }
     }
