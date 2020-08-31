@@ -1,3 +1,7 @@
+/**
+ * Controller for MainWindow. Provides the layout for the other controls.
+ * */
+
 package ui.controllers;
 
 import javafx.application.Platform;
@@ -12,9 +16,6 @@ import king.King;
 import ui.DialogBox;
 import ui.UI;
 
-/**
- * Controller for MainWindow. Provides the layout for the other controls.
- */
 public class MainWindow extends AnchorPane {
     @FXML
     private ScrollPane scrollPane;

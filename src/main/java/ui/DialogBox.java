@@ -1,4 +1,12 @@
+/**
+ * An example of a custom control using FXML.
+ * This control represents a dialog box consisting of an ImageView to represent the speaker's face and a label
+ * containing text from the speaker.
+ */
 package ui;
+
+import java.io.IOException;
+import java.util.Collections;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -12,14 +20,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import ui.controllers.MainWindow;
 
-import java.io.IOException;
-import java.util.Collections;
-
-/**
- * An example of a custom control using FXML.
- * This control represents a dialog box consisting of an ImageView to represent the speaker's face and a label
- * containing text from the speaker.
- */
 public class DialogBox extends HBox {
     @FXML
     private Label dialog;

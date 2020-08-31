@@ -1,11 +1,8 @@
+/**
+ * Handles all Files input-output related functions.
+ *
+ */
 package king;
-
-import tasks.Deadline;
-import tasks.Event;
-import tasks.Task;
-import tasks.TaskList;
-import tasks.ToDo;
-import ui.UI;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -15,6 +12,13 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import tasks.Deadline;
+import tasks.Event;
+import tasks.Task;
+import tasks.TaskList;
+import tasks.ToDo;
+import ui.UI;
 
 public class Storage {
 
@@ -135,7 +139,11 @@ public class Storage {
         return tasksFound;
     }
 
-    // data to Task
+    /**
+     * Converts data to Task.
+     * @param data data stored in the asset file.
+     * @return Task task created from data.
+     */
     private Task dataToTask(String data) {
         String[] dataTokens = data.split("@", 4);
         Task task;

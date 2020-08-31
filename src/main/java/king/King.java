@@ -6,10 +6,10 @@
  */
 package king;
 
+import java.util.Scanner;
+
 import tasks.TaskList;
 import ui.UI;
-
-import java.util.Scanner;
 
 public class King {
 
