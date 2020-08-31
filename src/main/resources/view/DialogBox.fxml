@@ -15,7 +15,7 @@
       <Region prefHeight="118.0" prefWidth="9.0" />
       <VBox nodeOrientation="RIGHT_TO_LEFT" prefHeight="118.0" prefWidth="52.0">
          <children>
-            <BorderPane prefHeight="79.0" prefWidth="41.0" style="-fx-border-color: black;">
+            <BorderPane prefHeight="79.0" prefWidth="41.0">
                <center>
                     <ImageView fx:id="displayPicture" fitHeight="65.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER" />
                </center>

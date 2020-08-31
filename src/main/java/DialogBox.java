@@ -12,6 +12,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 
 /**
@@ -29,6 +30,8 @@ public class DialogBox extends HBox {
     @FXML
     private ImageView displayPicture;
 
+    private Circle clip = new Circle(30, 30, 30);
+
     private DialogBox(String text, Image img, String name) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
@@ -43,6 +46,7 @@ public class DialogBox extends HBox {
         displayName.setText(name);
         dialog.setText(text);
         displayPicture.setImage(img);
+        displayPicture.setClip(clip);
     }
 
     /**
