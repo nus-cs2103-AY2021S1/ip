@@ -14,6 +14,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.shape.Circle;
 
 public class DialogBox extends HBox {
     @FXML
@@ -33,6 +34,14 @@ public class DialogBox extends HBox {
 
         dialog.setText(text);
         displayPicture.setImage(img);
+        clipDisplayPicture(30.0);
+    }
+
+    private void clipDisplayPicture(double radius) {
+        double width = displayPicture.getFitWidth() / 2;
+        double height = displayPicture.getFitHeight() / 2;
+        Circle clip = new Circle(width, height, radius);
+        displayPicture.setClip(clip);
     }
 
     private void flip() {
