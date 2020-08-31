@@ -1,19 +1,19 @@
-package command;
+package duke.command;
 
-import exception.DukeException;
+import duke.exception.DukeException;
 
-import storage.Storage;
+import duke.storage.Storage;
 
-import tasklist.TaskList;
+import duke.tasklist.TaskList;
 
-import ui.Ui;
+import duke.ui.Ui;
 
 public class InvalidCommand extends Command{
     public InvalidCommand() {}
 
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        throw new DukeException(ui.LINE + "Invalid command! \n" + ui.LINE);
+        throw new DukeException(ui.LINE + "Invalid duke.command! \n" + ui.LINE);
     }
 
     @Override

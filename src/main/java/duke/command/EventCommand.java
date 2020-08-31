@@ -1,14 +1,14 @@
-package command;
+package duke.command;
 
-import exception.DukeException;
+import duke.exception.DukeException;
 
-import storage.Storage;
+import duke.storage.Storage;
 
-import task.Event;
+import duke.task.Event;
 
-import tasklist.TaskList;
+import duke.tasklist.TaskList;
 
-import ui.Ui;
+import duke.ui.Ui;
 
 public class EventCommand extends Command {
     private String eventDetails;
@@ -31,7 +31,7 @@ public class EventCommand extends Command {
             String[] details = this.eventDetails.split(" /at ", 2);
             Event newEvent = new Event(details[0], details[1], false);
             taskList.add(newEvent);
-            String output = ui.LINE + "Got it. I've added this task: \n"
+            String output = ui.LINE + "Got it. I've added this duke.task: \n"
                     + taskList.get(taskList.size() - 1) + "\n"
                     + "Now you have " + taskList.size() + " tasks in the list."
                     + "\n" + ui.LINE;

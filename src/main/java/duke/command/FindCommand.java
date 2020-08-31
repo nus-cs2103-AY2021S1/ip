@@ -1,12 +1,10 @@
-package command;
+package duke.command;
 
-import exception.DukeException;
+import duke.storage.Storage;
 
-import storage.Storage;
+import duke.tasklist.TaskList;
 
-import tasklist.TaskList;
-
-import ui.Ui;
+import duke.ui.Ui;
 
 public class FindCommand extends Command {
     private String keyword;
@@ -30,7 +28,7 @@ public class FindCommand extends Command {
                 output = output + i + ". " + taskList.get(i - 1) + "\n";
             }
         }
-        System.out.println(ui.LINE + "Here are your task that matches your search: \n" + output + ui.LINE);
+        System.out.println(ui.LINE + "Here are your duke.task that matches your search: \n" + output + ui.LINE);
     }
 
     @Override

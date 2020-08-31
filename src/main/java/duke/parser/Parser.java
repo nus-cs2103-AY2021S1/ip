@@ -1,9 +1,9 @@
-package parser;
+package duke.parser;
 
-import command.*;
-import command.FindCommand;
+import duke.command.*;
+import duke.command.FindCommand;
 
-import exception.DukeException;
+import duke.exception.DukeException;
 
 /**
  * Deals with understanding the input from user and determining Command to execute.
@@ -29,9 +29,9 @@ public class Parser {
             try {
                 return new DoneCommand(inputSplit[1]);
             } catch (ArrayIndexOutOfBoundsException e) {
-                throw new DukeException(LINE + "Invalid input! Please specify which task you have completed! \n" + LINE);
+                throw new DukeException(LINE + "Invalid input! Please specify which duke.task you have completed! \n" + LINE);
             }
-        } else if (userCommand.equals("todo")) { // Add new to do task
+        } else if (userCommand.equals("todo")) { // Add new to do duke.task
             try {
                 return new TodoCommand(inputSplit[1]);
             } catch (ArrayIndexOutOfBoundsException e) {
@@ -49,11 +49,11 @@ public class Parser {
             } catch (ArrayIndexOutOfBoundsException e) {
                 throw new DukeException(LINE + "Invalid input! Please specify your event description and details! \n" + LINE);
             }
-        } else if (userCommand.equals("delete")) { // Delete task
+        } else if (userCommand.equals("delete")) { // Delete duke.task
             try {
                 return new DeleteCommand(inputSplit[1]);
             } catch (ArrayIndexOutOfBoundsException e) {
-                throw new DukeException(LINE + "Invalid input! Please specify which task you want to delete! \n" + LINE);
+                throw new DukeException(LINE + "Invalid input! Please specify which duke.task you want to delete! \n" + LINE);
             }
         } else if (userCommand.equals("filter")) { // Filter taskList
             try {

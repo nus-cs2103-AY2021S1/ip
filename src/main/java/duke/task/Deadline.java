@@ -1,4 +1,4 @@
-package task;
+package duke.task;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -29,9 +29,9 @@ public class Deadline extends Task {
     }
 
     /**
-     * Encode task into a String to be saved in text file.
+     * Encode duke.task into a String to be saved in text file.
      *
-     * @return String of encoded task details.
+     * @return String of encoded duke.task details.
      */
     public String toEncoding() {
         int completedBinary = this.completed ? 1 : 0;

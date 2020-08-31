@@ -1,14 +1,14 @@
-package command;
+package duke.command;
 
-import exception.DukeException;
+import duke.exception.DukeException;
 
-import storage.Storage;
+import duke.storage.Storage;
 
-import task.ToDo;
+import duke.task.ToDo;
 
-import tasklist.TaskList;
+import duke.tasklist.TaskList;
 
-import ui.Ui;
+import duke.ui.Ui;
 
 public class TodoCommand extends Command {
     private String todoDetails;
@@ -17,7 +17,7 @@ public class TodoCommand extends Command {
     }
 
     /**
-     * Creates new task, adds task to TaskList then updates the Storage.
+     * Creates new duke.task, adds duke.task to TaskList then updates the Storage.
      *
      * @param taskList the list of tasks
      * @param ui
@@ -29,7 +29,7 @@ public class TodoCommand extends Command {
         try {
             ToDo newToDo = new ToDo(this.todoDetails, false);
             taskList.add(newToDo);
-            String output = ui.LINE + "Got it. I've added this task: \n"
+            String output = ui.LINE + "Got it. I've added this duke.task: \n"
                     + taskList.get(taskList.size() - 1) + "\n"
                     + "Now you have " + taskList.size() + " tasks in the list."
                     + "\n" + ui.LINE;

@@ -1,14 +1,16 @@
-import command.*;
+package duke;
 
-import exception.DukeException;
+import duke.command.*;
 
-import parser.Parser;
+import duke.exception.DukeException;
 
-import storage.Storage;
+import duke.parser.Parser;
 
-import tasklist.TaskList;
+import duke.storage.Storage;
 
-import ui.Ui;
+import duke.tasklist.TaskList;
+
+import duke.ui.Ui;
 
 import org.junit.Test;
 

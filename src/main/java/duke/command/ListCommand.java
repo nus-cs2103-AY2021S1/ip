@@ -1,12 +1,12 @@
-package command;
+package duke.command;
 
-import exception.DukeException;
+import duke.exception.DukeException;
 
-import storage.Storage;
+import duke.storage.Storage;
 
-import tasklist.TaskList;
+import duke.tasklist.TaskList;
 
-import ui.Ui;
+import duke.ui.Ui;
 
 public class ListCommand extends Command {
     public ListCommand() {}

@@ -1,4 +1,4 @@
-package ui;
+package duke.ui;
 
 import java.util.Scanner;
 
@@ -28,7 +28,7 @@ public class Ui {
      */
     public void welcome() {
         String open = "_______________________________________ \n"
-                + "Hello! I'm Duke \n"
+                + "Hello! I'm duke.Duke \n"
                 + "What can I do for you? \n"
                 + "_______________________________________ \n";
         System.out.println(open);

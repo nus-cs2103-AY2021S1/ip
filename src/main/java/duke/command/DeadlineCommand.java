@@ -1,12 +1,12 @@
-package command;
+package duke.command;
 
-import exception.DukeException;
-import storage.Storage;
-import task.Deadline;
+import duke.exception.DukeException;
+import duke.storage.Storage;
+import duke.task.Deadline;
 
-import tasklist.TaskList;
+import duke.tasklist.TaskList;
 
-import ui.Ui;
+import duke.ui.Ui;
 
 public class DeadlineCommand extends Command {
     private String deadlineDetails;
@@ -16,7 +16,7 @@ public class DeadlineCommand extends Command {
     }
 
     /**
-     * Creates new task with deadline, adds task to TaskList then updates the Storage.
+     * Creates new duke.task with deadline, adds duke.task to TaskList then updates the Storage.
      *
      * @param taskList the list of tasks.
      * @param ui
@@ -29,7 +29,7 @@ public class DeadlineCommand extends Command {
             String[] details = this.deadlineDetails.split(" /by ", 2);
             Deadline newDeadline = new Deadline(details[0], details[1], false);
             taskList.add(newDeadline);
-            String output = ui.LINE + "Got it. I've added this task: \n"
+            String output = ui.LINE + "Got it. I've added this duke.task: \n"
                     + taskList.get(taskList.size() - 1) + "\n"
                     + "Now you have " + taskList.size() + " tasks in the list."
                     + "\n" + ui.LINE;

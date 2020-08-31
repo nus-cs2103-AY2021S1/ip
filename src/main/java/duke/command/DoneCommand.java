@@ -1,12 +1,12 @@
-package command;
+package duke.command;
 
-import exception.DukeException;
+import duke.exception.DukeException;
 
-import storage.Storage;
+import duke.storage.Storage;
 
-import tasklist.TaskList;
+import duke.tasklist.TaskList;
 
-import ui.Ui;
+import duke.ui.Ui;
 
 public class DoneCommand extends Command {
     private String taskIdString;
@@ -16,7 +16,7 @@ public class DoneCommand extends Command {
     }
 
     /**
-     * Sets specified task in tasklist as completed and updates Storage.
+     * Sets specified duke.task in duke.tasklist as completed and updates Storage.
      *
      * @param taskList
      * @param ui
@@ -28,15 +28,15 @@ public class DoneCommand extends Command {
         try {
             int taskId = Integer.parseInt(this.taskIdString);
             if (taskId <= 0 || taskId > taskList.size()) {
-                throw new DukeException(ui.LINE + "Invalid input! That task does not exist! \n" + ui.LINE);
+                throw new DukeException(ui.LINE + "Invalid input! That duke.task does not exist! \n" + ui.LINE);
             } else {
                 taskList.get(taskId - 1).setCompleted();
-                System.out.println(ui.LINE + "Nice! I've marked this task as done: \n"
+                System.out.println(ui.LINE + "Nice! I've marked this duke.task as done: \n"
                         + taskList.get(taskId - 1) + "\n" + ui.LINE);
             }
             storage.save(taskList);
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeException(ui.LINE + "Invalid input! Please specify which task you have completed! \n" + ui.LINE);
+            throw new DukeException(ui.LINE + "Invalid input! Please specify which duke.task you have completed! \n" + ui.LINE);
         }
     }
 

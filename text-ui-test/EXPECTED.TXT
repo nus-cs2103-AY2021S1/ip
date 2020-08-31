@@ -1,22 +1,22 @@
 _______________________________________
-Hello! I'm Duke
+Hello! I'm duke.Duke
 What can I do for you?
 _______________________________________
 
 _______________________________________
-Got it. I've added this task:
+Got it. I've added this duke.task:
 [T][?] wake up
 Now you have 1 tasks in the list.
 _______________________________________
 
 _______________________________________
-Got it. I've added this task:
+Got it. I've added this duke.task:
 [D][?] eat lunch (by: 12pm)
 Now you have 2 tasks in the list.
 _______________________________________
 
 _______________________________________
-Got it. I've added this task:
+Got it. I've added this duke.task:
 [E][?] work (at: 2pm)
 Now you have 3 tasks in the list.
 _______________________________________

@@ -1,14 +1,11 @@
-import command.Command;
+package duke;
 
-import exception.DukeException;
-
-import parser.Parser;
-
-import storage.Storage;
-
-import tasklist.TaskList;
-
-import ui.Ui;
+import duke.command.Command;
+import duke.exception.DukeException;
+import duke.parser.Parser;
+import duke.storage.Storage;
+import duke.tasklist.TaskList;
+import duke.ui.Ui;
 
 /**
  * Main class.
@@ -49,6 +46,6 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke("src/main/java/data/duke.txt").run();
+        new Duke("src/main/java/duke.data/duke.txt").run();
     }
 }

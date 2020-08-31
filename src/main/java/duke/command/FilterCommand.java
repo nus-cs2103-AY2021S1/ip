@@ -1,12 +1,12 @@
-package command;
+package duke.command;
 
-import exception.DukeException;
+import duke.exception.DukeException;
 
-import storage.Storage;
+import duke.storage.Storage;
 
-import tasklist.TaskList;
+import duke.tasklist.TaskList;
 
-import ui.Ui;
+import duke.ui.Ui;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -39,7 +39,7 @@ public class FilterCommand extends Command {
                     output = output + i + ". " + taskList.get(i - 1) + "\n";
                 }
             }
-            System.out.println(ui.LINE + "Here are your task due on "
+            System.out.println(ui.LINE + "Here are your duke.task due on "
                     + filterDate.format(DateTimeFormatter.ofPattern("MMM d yyy")) + ": \n" + output + ui.LINE);
         } catch (DateTimeParseException e) {
             throw new DukeException(ui.LINE + "Invalid input! Please enter a valid date! \n" + ui.LINE);
