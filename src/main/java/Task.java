@@ -2,11 +2,22 @@ public abstract class Task {
     protected String description;
     protected boolean isDone;
 
+    /**
+     * This constructor will be called by constructors of its subclasses.
+     *
+     * @param description takes in the description of the task
+     */
     public Task(String description) {
         this.description = description;
         this.isDone = false;
     }
 
+    /**
+     * This constructor will be called by constructors of its subclasses.
+     *
+     * @param description takes in the description of the task
+     * @param isDone takes in the task completion status
+     */
     public Task(String description, boolean isDone) {
         this.description = description;
         this.isDone = isDone;

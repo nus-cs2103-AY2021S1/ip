@@ -1,6 +1,5 @@
 import java.time.LocalDate;
 import java.time.LocalTime;
-
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -62,13 +61,16 @@ public class TaskList {
         if (!toParse.equals("")) {
             String[] parsed = toParse.split("/at ");
             if (parsed.length == 1) {
-                throw new DukeException("Please input the start and end timing in a valid format e.g. /at 20/02/2020 1600-1800");
+                throw new DukeException("Please input the start and end timing in a valid format"
+                        + "e.g. /at 20/02/2020 1600-1800");
             } else {
                 String[] dateTime = parsed[1].trim().split(" ");
                 LocalDate date = LocalDate.parse(dateTime[0], Parser.DATE_INPUT_FORMAT);
                 String[] startEndTime = dateTime[1].split("-");
-                LocalTime startTime = LocalTime.parse(startEndTime[0].substring(0, 2) + ":" + startEndTime[0].substring(2));
-                LocalTime endTime = LocalTime.parse(startEndTime[1].substring(0, 2) + ":" + startEndTime[1].substring(2));
+                LocalTime startTime = LocalTime.parse(startEndTime[0].substring(0, 2) + ":"
+                        + startEndTime[0].substring(2));
+                LocalTime endTime = LocalTime.parse(startEndTime[1].substring(0, 2) + ":"
+                        + startEndTime[1].substring(2));
 
                 String parsedDate = date.format(Parser.DATE_OUTPUT_FORMAT);
                 String parsedStartTime = startTime.format(Parser.TIME_OUTPUT_FORMAT);
