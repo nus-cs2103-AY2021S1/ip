@@ -29,7 +29,7 @@ public class DeadlineCommand extends Command {
      * @throws DeadlineException to show incorrect user input.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DeadlineException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DeadlineException {
         ArrayList<Task> store = new ArrayList<>();
         int index = 0;
         for (int i = 1; i < input.length; i++) {
@@ -63,9 +63,9 @@ public class DeadlineCommand extends Command {
         Deadline newTask = new Deadline(description.trim(), new SimpleDateFormat("MMM dd yyyy HH:mm").format(date));
         store.add(newTask);
         storage.save(new TaskList(store));
-        System.out.println(ADD_TASK_TITLE);
-        System.out.println(TAB + "   " + newTask);
-        System.out.println(TAB + " Now you have " + store.size() + " tasks in the list.");
+        return ADD_TASK_TITLE + "\n"
+                + TAB + "   " + newTask + "\n"
+                + TAB + " Now you have " + store.size() + " tasks in the list.";
     }
 
     /**

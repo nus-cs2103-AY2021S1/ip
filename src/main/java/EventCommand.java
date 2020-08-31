@@ -29,7 +29,7 @@ public class EventCommand extends Command {
      * @throws EventException to show incorrect user input.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws EventException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws EventException {
         ArrayList<Task> store = new ArrayList<>();
         int index = 0;
         for (int i = 1; i < input.length; i++) {
@@ -63,10 +63,9 @@ public class EventCommand extends Command {
         Event newTask = new Event(description.trim(), new SimpleDateFormat("MMM dd yyyy HH:mm").format(date));
         store.add(newTask);
         storage.save(new TaskList(store));
-
-        System.out.println(ADD_TASK_TITLE);
-        System.out.println(TAB + "   " + newTask);
-        System.out.println(TAB + " Now you have " + store.size() + " tasks in the list.");
+        return ADD_TASK_TITLE + "\n"
+                + TAB + "   " + newTask + "\n"
+                + TAB + " Now you have " + store.size() + " tasks in the list.";
     }
 
     /**

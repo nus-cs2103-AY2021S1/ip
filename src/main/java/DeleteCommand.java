@@ -26,7 +26,7 @@ public class DeleteCommand extends Command {
      * @throws DeleteException exception for invalid input.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DeleteException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DeleteException {
         ArrayList<Task> store = tasks.getTaskList();
         if (this.input.length == 1) { //incomplete done command
             throw new DeleteException(" ☹ OOPS!!! The description of a delete cannot be empty.");
@@ -41,10 +41,9 @@ public class DeleteCommand extends Command {
         Task deletingTask = store.get(indexOfMarkingTask);
         store.remove(indexOfMarkingTask);
         storage.save(new TaskList(store));
-
-        System.out.println(DELETE_TITLE);
-        System.out.println(TAB + "   " + deletingTask);
-        System.out.println(TAB + " Now you have " + store.size() + " tasks in the list.");
+        return DELETE_TITLE + "\n"
+                + TAB + "   " + deletingTask + "\n"
+                + TAB + " Now you have " + store.size() + " tasks in the list.";
     }
 
     /**

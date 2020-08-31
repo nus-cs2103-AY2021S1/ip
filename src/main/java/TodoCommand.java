@@ -26,7 +26,7 @@ public class TodoCommand extends Command {
      * @throws TodoException to show incorrect user input.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws TodoException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws TodoException {
         ArrayList<Task> store = tasks.getTaskList();
         if (input.length == 1) {
             throw new TodoException(" ☹ OOPS!!! The description of a todo cannot be empty.");
@@ -39,9 +39,9 @@ public class TodoCommand extends Command {
 
         store.add(newTask);
         storage.save(new TaskList(store));
-        System.out.println(ADD_TASK_TITLE);
-        System.out.println(TAB + "   " + newTask);
-        System.out.println(TAB + " Now you have " + store.size() + " tasks in the list.");
+        return ADD_TASK_TITLE + "\n"
+                + TAB + "   " + newTask + "\n"
+                + TAB + " Now you have " + store.size() + " tasks in the list.";
     }
 
     /**
