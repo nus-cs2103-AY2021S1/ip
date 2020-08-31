@@ -10,22 +10,22 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 /**
- * Encapsulates a scene that displays the welcome page in the GUI.
+ * Encapsulates a scene that displays the Menu page in the GUI.
  */
-public class Welcome implements Page {
+public class Menu implements Page {
     private Storage storage;
 
     /**
-     * Constructs a Welcome instance that displays a welcome view.
+     * Constructs a Menu instance that displays a menu view.
      *
      * @param storage a storage object used to read and store data.
      */
-    public Welcome(Storage storage) {
+    public Menu(Storage storage) {
         this.storage = storage;
     }
 
     /**
-     * Sets the scene of the given stage to the welcome scene.
+     * Sets the scene of the given stage to the menu scene.
      *
      * @param window the window on which the scene displays.
      */

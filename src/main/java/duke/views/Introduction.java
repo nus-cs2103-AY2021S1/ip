@@ -46,7 +46,7 @@ public class Introduction implements Page {
         root.add(sceneTitle, 3, 2);
 
         // set up window
-        window.setTitle("Welcome");
+        window.setTitle("Menu");
         Scene scene = new Scene(root, Page.DEFAULT_PAGE_WIDTH, Page.DEFAULT_PAGE_HEIGHT);
         window.setScene(scene);
         window.show();
@@ -60,7 +60,7 @@ public class Introduction implements Page {
                 if (root.getOpacity() < THRESHOLD_OPACITY) {
 
                     // execute next view if triggered
-                    new Welcome(storage).setScene(window);
+                    new Menu(storage).setScene(window);
 
                     // end animation
                     animationTimeLine.stop();

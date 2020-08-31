@@ -68,7 +68,7 @@ public class App implements Page {
         Button backButton = new Button("Back to Menu");
         backButton.setOnAction(e -> {
             storage.saveDataToFile(textDisplay);
-            new Welcome(storage).setScene(window);
+            new Menu(storage).setScene(window);
         });
         GridPane.setConstraints(backButton, 2, 1);
 
