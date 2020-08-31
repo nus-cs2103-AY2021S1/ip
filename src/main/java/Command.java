@@ -11,12 +11,16 @@ public class Command {
 
     private Ui ui;
     private Parser parser;
-    private boolean terminated;
+    private boolean isTerminated;
 
     Command() {
         this.ui = new Ui();
         this.parser = new Parser();
-        this.terminated = false;
+        this.isTerminated = false;
+    }
+
+    public boolean isTerminated() {
+        return this.isTerminated;
     }
 
     /**
@@ -25,65 +29,64 @@ public class Command {
      * @param userInput The input given by the user.
      * @param tasks The current list of tasks.
      * @param storage The current storage object.
+     * @return The relevant response.
      * @throws DukeException If any Duke-type exceptions are thrown.
      */
-    public void execute(String userInput, TaskList tasks, Storage storage) throws DukeException {
+    public String execute(String userInput, TaskList tasks, Storage storage) throws DukeException {
         //determining user input type via the first word
         String[] splitInput = splitUserInput(userInput);
         String keyWord = getKeyWord(userInput);
-
-        if (keyWord.equals("bye")) {
-            byeCommand();
-            terminated = true;
+        if (keyWord.equals("welcome")) {
+            return welcomeCommand();
+        } else if (keyWord.equals("bye")) {
+            this.isTerminated = true;
+            return byeCommand();
         } else if (keyWord.equals("help")) {
-            helpCommand();
+            return helpCommand();
         } else if (keyWord.equals("list")) {
-            listCommand(tasks);
+            return listCommand(tasks);
         } else if (keyWord.equals("done")) {
-            doneCommand(splitInput, tasks, storage);
+            return doneCommand(splitInput, tasks, storage);
         } else if (keyWord.equals("delete")) {
-            deleteCommand(tasks, splitInput, ui, storage);
+            return deleteCommand(tasks, splitInput, ui, storage);
         } else if (keyWord.equals("todo") || keyWord.equals("deadline")
                 || keyWord.equals("event")) {
-            addTaskCommand(splitInput, keyWord, tasks, storage);
+            return addTaskCommand(splitInput, keyWord, tasks, storage);
         } else if (keyWord.equals("find")) {
-            findCommand(tasks, splitInput);
+            return findCommand(tasks, splitInput);
         } else {
-            throw new DukeException("Unknown execution error.");
+            return ui.showErrorMessage(new DukeException("Unknown execution error.").getMessage());
         }
-    }
-
-    public boolean isTerminated() {
-        return this.terminated;
     }
 
     public String[] splitUserInput(String userInput) {
         return userInput.split(" ");
     }
 
-    public void welcomeCommand() {
-        ui.showWelcome();
+    public String welcomeCommand() {
+        return ui.showWelcome();
     }
 
     /**
      * Calls for the required ui methods when list keyword is used.
      *
      * @param tasks The current list of tasks.
+     * @return The list of tasks(if applicable).
      */
-    public void listCommand(TaskList tasks) {
+    public String listCommand(TaskList tasks) {
         if (tasks.noOfTasks() == 0) {
-            ui.showNoPastTasks();
+            return ui.showNoPastTasks();
         } else {
-            ui.showPastTasks(tasks);
+            return ui.showPastTasks(tasks);
         }
     }
 
-    public void byeCommand() {
-        ui.showGoodbye();
+    public String byeCommand() {
+        return ui.showGoodbye();
     }
 
-    public void helpCommand() {
-        ui.showHelp();
+    public String helpCommand() {
+        return ui.showHelp();
     }
 
     /**
@@ -94,12 +97,14 @@ public class Command {
      *     denote as done.
      * @param ui The UI object used.
      * @param storage The storage used.
+     * @return The deleted task message.
      * @throws DeleteFailureException If the deleting process fails.
      */
-    public void deleteCommand(TaskList tasks, String[] splitInput, Ui ui, Storage storage)
+    public String deleteCommand(TaskList tasks, String[] splitInput, Ui ui, Storage storage)
             throws DeleteFailureException {
-        tasks.deleteTask(tasks, splitInput, ui);
+        String toReturn = tasks.deleteTask(tasks, splitInput, ui);
         storage.updateTaskFile(tasks);
+        return toReturn;
     }
 
     /**
@@ -109,16 +114,19 @@ public class Command {
      *     to denote as done.
      * @param tasks The current list of tasks.
      * @param storage The storage used.
+     * @return The done task message.
      * @throws InvalidFormatException If the input format is wrong.
      */
-    public void doneCommand(String[] splitInput, TaskList tasks, Storage storage)
+    public String doneCommand(String[] splitInput, TaskList tasks, Storage storage)
             throws InvalidFormatException {
         //checks the formatting of user input
         if (splitInput.length > 2) {
-            throw new InvalidFormatException("Please use the correct format: done <task number>");
+            return ui.showErrorMessage(new InvalidFormatException("Please use the correct format:"
+                    + " done <task number>").getMessage());
         }
-        tasks.doneTask(splitInput, tasks, ui);
+        String toReturn = tasks.doneTask(splitInput, tasks, ui);
         storage.updateTaskFile(tasks);
+        return toReturn;
     }
 
     /**
@@ -129,19 +137,22 @@ public class Command {
      * @param keyWord The type of task.
      * @param tasks The current list of tasks.
      * @param storage The storage used.
+     * @return The added task message.
      * @throws DukeException If any Duke-type exceptions are encountered.
      */
-    public void addTaskCommand(String[] splitInput, String keyWord, TaskList tasks, Storage storage)
+    public String addTaskCommand(String[] splitInput, String keyWord, TaskList tasks, Storage storage)
             throws DukeException {
         String[] data = processUserTaskInput(splitInput);
-        tasks.addTask(data, keyWord, tasks, ui);
+        String toReturn = tasks.addTask(data, keyWord, tasks, ui);
         storage.updateTaskFile(tasks);
+        return toReturn;
     }
 
     /**
      * Obtains the keyword in the user input to determine command needed.
      *
      * @param input The given keyword from user input.
+     * @return The keyword if it is valid.
      * @throws InvalidKeyWordException If the keyword not valid.
      */
     public String getKeyWord(String input) throws InvalidKeyWordException {
@@ -149,7 +160,7 @@ public class Command {
         if (parser.isValidKeyWord(splitInput[0])) {
             return splitInput[0];
         } else {
-            throw new InvalidKeyWordException("☹ OOPS!!! I'm sorry, but I don't know what "
+            throw new InvalidKeyWordException("\u2639 OOPS!!! I'm sorry, but I don't know what "
                     + "that means :-(");
         }
     }
@@ -282,8 +293,9 @@ public class Command {
      * @param tasks The current list of tasks.
      * @param splitInput A valid string array is of length 2, index 1 being the description
      *     to find.
+     * @return The found tasks.
      */
-    public void findCommand(TaskList tasks, String[] splitInput) {
+    public String findCommand(TaskList tasks, String[] splitInput) {
         String desToFind = "";
         for (int i = 1; i < splitInput.length; i++) {
             desToFind += splitInput[i];
@@ -291,6 +303,6 @@ public class Command {
                 desToFind += " ";
             }
         }
-        ui.showFoundTasks(tasks, desToFind);
+        return ui.showFoundTasks(tasks, desToFind);
     }
 }

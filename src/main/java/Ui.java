@@ -8,37 +8,37 @@
 public class Ui {
 
     /** Divides each command call. */
-    static final String LINE_BREAK = "=========================================================="
-            + "===============";
+    static final String LINE_BREAK = "==========================================================";
 
     /**
-     * Prints the welcome logo and how to start.
+     * Provides the welcome logo and how to start.
      */
-    public void showWelcome() {
+    public String showWelcome() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        System.out.println("Hello! I'm Duke\n"
+        return "Hello from\n" + logo + "\n" + "Hello! I'm Duke\n"
                 + "What can I do for you today? (type: \"help\" to view list of commands)\n"
-                + LINE_BREAK);
+                + LINE_BREAK;
     }
 
-    public void showLineBreak() {
-        System.out.println(LINE_BREAK);
+    public String showLineBreak() {
+        return LINE_BREAK;
     }
 
-    public void showGoodbye() {
-        System.out.println("Duke says: Goodbye and have a nice day! :D");
+    public String showGoodbye() {
+        return "Duke says: Goodbye and have a nice day! :D";
     }
 
     /**
-     * Prints the available input commands and their respective formatting requirements.
+     * Provides the available input commands and their respective formatting requirements.
+     *
+     * @return The help string.
      */
-    public void showHelp() {
-        System.out.println("list: displays a sequential view of past inputs\n"
+    public String showHelp() {
+        return "list: displays a sequential view of past inputs\n"
                 + "find <task description>: finds all the tasks matched\n"
                 + "done <task number>: denotes a task as done by checking it\n"
                 + "delete <task number>: deletes an existing task\n"
@@ -47,97 +47,104 @@ public class Ui {
                 + "event <description> /at <YYYY-MM-DD> <HH:MM>: adds an event with "
                 + "desired date/time\n"
                 + "todo <description>: adds a todo task\n"
-                + "bye: terminates program");
+                + "bye: terminates program";
     }
 
-    public void showNoPastTasks() {
-        System.out.println("Duke says: No past tasks found");
+    public String showNoPastTasks() {
+        return "Duke says: No past tasks found";
     }
 
     /**
-     * Prints the list of stored tasks in hard drive in sequential order.
+     * Provides the list of stored tasks in hard drive in sequential order.
      *
      * @param taskList The current tasks in hard drive.
+     * @return The list of past tasks in string.
      */
-    public void showPastTasks(TaskList taskList) {
-        System.out.println("Here are your tasks:");
+    public String showPastTasks(TaskList taskList) {
+        String toReturn = "Here are your tasks:\n";
         for (int i = 1; i <= taskList.noOfTasks(); i++) {
-            System.out.println(i + ". " + taskList.getTask(i - 1));
+            toReturn += i + ".  " + taskList.getTask(i - 1) + "\n";
         }
-        System.out.println("If you wish to mark a task as completed, input: done <task number>");
+        return toReturn + "If you wish to mark a task as completed, input: done <task number>";
     }
 
     /**
-     * Prints the message denoting a task is done.
+     * Provides the message denoting a task is done.
      *
      * @param task The done task.
+     * @return The string denoting a successful deletion and the task involved.
      */
-    public void showTaskIsDone(Task task) {
-        System.out.println("Duke says: Good Job! I've marked this task as done:");
-        System.out.println(task);
+    public String showTaskIsDone(Task task) {
+        return "Duke says: Good Job! I've marked this task as done:\n" + task;
     }
 
     /**
-     * Prints the message denoting an invalid task number error.
+     * Provides the message denoting an invalid task number error.
+     *
+     * @return The string that prompts a valid task number input.
      */
-    public void showInvalidTaskNumber() {
-        System.out.println("Duke says: Please try again with a valid task number");
+    public String showInvalidTaskNumber() {
+        return "Duke says: Please try again with a valid task number";
     }
 
     /**
-     * Prints the message denoting a successful deletion of task.
+     * Provides the message denoting a successful deletion of task.
      *
      * @param removedTask The deleted task.
      * @param remaining The number of remaining tasks.
+     * @return The string denoting a successful deletion and the task involved.
      */
-    public void showSuccessfulDelete(Task removedTask, int remaining) {
-        System.out.println("Successfully deleted the task!\n" + removedTask);
-        showRemainingTasks(remaining);
+    public String showSuccessfulDelete(Task removedTask, int remaining) {
+        return "Successfully deleted the task!\n" + removedTask + "\n"
+                + showRemainingTasks(remaining);
     }
 
-    public void showRemainingTasks(int remaining) {
-        System.out.println("You now have " + remaining + " task(s) in your list");
+    public String showRemainingTasks(int remaining) {
+        return "You now have " + remaining + " task(s) in your list";
     }
 
     /**
-     * Prints the message denoting a task being added.
+     * Provides the message denoting a task being added.
      *
      * @param task The added task.
      * @param remaining The number of remaining tasks.
+     * @return The string denoting a successful addition and the task involved.
      */
-    public void showTasksAdded(Task task, int remaining) {
-        System.out.println("Duke added into your task list:\n" + task);
-        showRemainingTasks(remaining);
+    public String showTasksAdded(Task task, int remaining) {
+        return "Duke added into your task list:\n" + task + "\n" + showRemainingTasks(remaining);
     }
 
-    public void showErrorMessage(String message) {
-        System.out.println(message);
+    public String showErrorMessage(String message) {
+        return message;
     }
 
     /**
-     * Prints the list of found tasks in sequential order.
+     * Provides the list of found tasks in sequential order.
      *
      * @param taskList The list of tasks in the hard drive.
      * @param desToFind The string used to search for the relevant tasks.
+     * @return The string of found tasks.
      */
-    public void showFoundTasks(TaskList taskList, String desToFind) {
+    public String showFoundTasks(TaskList taskList, String desToFind) {
         int number = 1;
         boolean hasResults = false;
+        String toReturn = "";
         for (int i = 1; i <= taskList.noOfTasks(); i++) {
             if (taskList.getTask(i - 1).description.contains(desToFind)) {
                 if (!hasResults) {
-                    System.out.println("Here are your tasks:");
+                    toReturn += "Here are your tasks:\n";
                 }
-                System.out.println(number + ". " + taskList.getTask(i - 1));
+                toReturn += number + ".  " + taskList.getTask(i - 1) + "\n";
                 number++;
                 hasResults = true;
             }
         }
         if (hasResults) {
-            System.out.println("If you wish to mark a task as completed, "
-                    + "input: done <task number>");
+            toReturn += "If you wish to mark a task as completed, input: done <task number>";
         } else {
-            System.out.println("Sorry there are no matching results :(");
+            toReturn += "Sorry there are no matching results :(";
         }
+        return toReturn;
     }
+
 }

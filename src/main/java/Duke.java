@@ -20,11 +20,22 @@ public class Duke {
         this.command = new Command();
     }
 
+    public String getResponse(String input) {
+        try {
+            String userInput = input;
+            return command.execute(userInput, tasks, storage) + "\n" + ui.showLineBreak();
+        } catch (DukeException ex) {
+            return ui.showErrorMessage(ex.getMessage());
+        }
+    }
+
     public static void main(String[] args) {
         new Duke("./data", "./data/tasks.txt").run();
     }
 
-    /** Runs the Duke program. */
+    /**
+     * Runs the Duke program.
+     */
     public void run() {
         command.welcomeCommand();
         Scanner scanner = new Scanner(System.in);
