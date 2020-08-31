@@ -3,6 +3,7 @@ package duke;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 
 import duke.exception.DeleteOutOfRangeException;
 import duke.exception.DoneOutOfRangeException;
@@ -47,6 +48,22 @@ public class Duke {
     }
 
     /**
+     * Overloaded constructor that constructs Duke Bot with default file path,
+     * if it is not specified.
+     */
+    public Duke() {
+        String filePath = System.getProperty("user.dir") + "/data/Duke.txt";
+        this.ui = new Ui();
+        this.storage = new Storage(filePath);
+        try {
+            this.tasks = new TaskList(storage.load());
+        } catch (FileNotFoundException e) {
+            this.ui.sendFailedInitialiseMessage();
+            this.tasks = new TaskList();
+        }
+    }
+
+    /**
      * Runs Duke Bot.
      */
     public void run() {
@@ -63,32 +80,15 @@ public class Duke {
                 ) {
                     this.storage.save(tasks);
                 }
-            } catch (MissingDoneArgumentException e) {
-                this.ui.sendExceptionMessage(e);
-            } catch (DoneOutOfRangeException e) {
-                this.ui.sendExceptionMessage(e);
-            } catch (MissingDeleteArgumentException e) {
-                this.ui.sendExceptionMessage(e);
-            } catch (DeleteOutOfRangeException e) {
-                this.ui.sendExceptionMessage(e);
-            } catch (EmptyTodoException e) {
-                this.ui.sendExceptionMessage(e);
-            } catch (MissingDeadlineDateException e) {
-                this.ui.sendExceptionMessage(e);
-            } catch (EmptyDeadlineException e) {
-                this.ui.sendExceptionMessage(e);
-            } catch (MissingEventDateException e) {
-                this.ui.sendExceptionMessage(e);
-            } catch (EmptyEventException e) {
-                this.ui.sendExceptionMessage(e);
-            } catch (UnknownCommandException e) {
-                this.ui.sendExceptionMessage(e);
-            } catch (IOException e) {
+            } catch (MissingDoneArgumentException | DoneOutOfRangeException | MissingDeleteArgumentException
+                    | DeleteOutOfRangeException | EmptyTodoException | MissingDeadlineDateException
+                    | EmptyDeadlineException | MissingEventDateException | EmptyEventException
+                    | UnknownCommandException | MissingFindArgumentException e) {
                 this.ui.sendExceptionMessage(e);
             } catch (DateTimeParseException e) {
                 this.ui.sendExceptionMessage("\uD83D\uDE41 OOPS! Date should be in the format: YYYY-MM-DD");
-            } catch (MissingFindArgumentException e) {
-                this.ui.sendExceptionMessage(e);
+            } catch (IOException e) {
+                this.ui.sendExceptionMessage("\uD83D\uDE41 OOPS! Duke failed to save");
             }
             this.ui.sendBar();
             userInput = this.ui.getUserInput();
@@ -96,6 +96,37 @@ public class Duke {
         this.ui.sendBar();
         this.ui.bidFarewell();
         this.ui.sendBar();
+    }
+
+    public String getGreeting() {
+        return this.ui.getGreeting();
+    }
+
+    public ArrayList<String> getResponses(String input) {
+        ParseInfo parseInfo = new ParseInfo();
+        try {
+            parseInfo = Parser.parseAndExecuteAndGetMessage(input, this.tasks, this.ui);
+            if (parseInfo.isListUpdated()) {
+                this.storage.save(tasks);
+            }
+        } catch (MissingDoneArgumentException | DoneOutOfRangeException | MissingDeleteArgumentException
+                | DeleteOutOfRangeException | EmptyTodoException | MissingDeadlineDateException
+                | EmptyDeadlineException | MissingEventDateException | EmptyEventException
+                | UnknownCommandException | MissingFindArgumentException e) {
+            parseInfo.addResponse(
+                    this.ui.getExceptionMessage(e)
+            );
+        } catch (DateTimeParseException e) {
+            //this.ui.sendExceptionMessage("\uD83D\uDE41 OOPS! Date should be in the format: YYYY-MM-DD");
+            parseInfo.addResponse(
+                    this.ui.getExceptionMessage("\uD83D\uDE41 OOPS! Date should be in the format: YYYY-MM-DD")
+            );
+        } catch (IOException e) {
+            parseInfo.addResponse(
+                    this.ui.getExceptionMessage("\uD83D\uDE41 OOPS! Duke failed to save")
+            );
+        }
+        return parseInfo.getResponses();
     }
 
     public static void main(String[] args) {

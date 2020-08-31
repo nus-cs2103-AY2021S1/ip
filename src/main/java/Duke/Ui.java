@@ -49,6 +49,10 @@ public class Ui {
         System.out.println("Hello from\n" + this.logo);
     }
 
+    public String getInitialiseMessage() {
+        return "Hello from\n" + this.logo;
+    }
+
     /**
      * Sends Duke's greeting.
      */
@@ -56,12 +60,16 @@ public class Ui {
         System.out.println(this.greeting);
     }
 
+    public String getGreeting() {
+        return this.greeting;
+    }
     /**
      * Sends a long bar of "-"s to space out outputs.
      */
     public void sendBar() {
         System.out.println(this.bar);
     }
+
 
     /**
      * Sends Duke's goodbye message.
@@ -79,6 +87,11 @@ public class Ui {
         System.out.println("  " + taskString);
     }
 
+    public String getAddTaskMessage(String taskString) {
+        return this.add + "\n"
+                + "  " + taskString;
+    }
+
     /**
      Sends Duke's message after marking a task as done.
      * @param taskString  String representation of the task marked as done.
@@ -88,6 +101,11 @@ public class Ui {
         System.out.println("  " + taskString);
     }
 
+    public String getMarkedAsDoneMessage(String taskString) {
+        return this.done + "\n"
+                + "  " + taskString;
+    }
+
     /**
      * Sends Duke's message after deleting a task.
      * @param taskString  String representation of the task deleted.
@@ -95,6 +113,10 @@ public class Ui {
     public void sendDeleteTaskMessage(String taskString) {
         System.out.println(this.delete);
         System.out.println("  " + taskString);
+    }
+    public String getDeleteTaskMessage(String taskString) {
+        return this.delete + "\n"
+                + "  " + taskString;
     }
 
     /**
@@ -120,12 +142,24 @@ public class Ui {
         System.out.println(message);
     }
 
+    public String getExceptionMessage(Exception e) {
+        return e.toString();
+    }
+
+    public String getExceptionMessage(String message) {
+        return message;
+    }
+
     /**
      * Sends Duke's formatted list of tasks.
      * @param tasks  TaskList to be sent.
      */
     public void listTasks(TaskList tasks) {
         System.out.println(tasks);
+    }
+
+    public String getTaskList(TaskList tasks) {
+        return tasks.toString();
     }
 
     /**
@@ -138,6 +172,11 @@ public class Ui {
         System.out.println(tasks.findTasks(keyword));
     }
 
+    public String getFoundTasks(TaskList tasks, String keyword) {
+        return this.foundMessage + "\n"
+                + tasks.findTasks(keyword);
+    }
+
     /**
      * Sends Duke's message of the current number of tasks in the TaskList.
      * @param tasks  TaskLists with tasks to be counted.
@@ -145,5 +184,10 @@ public class Ui {
     public void sendCount(TaskList tasks) {
         int count = tasks.getCount();
         System.out.println("Now you have " + count + (count == 1 ? " task " : " tasks ") + "in the list.");
+    }
+
+    public String getCountMessage(TaskList tasks) {
+        int count = tasks.getCount();
+        return "Now you have " + count + (count == 1 ? " task " : " tasks ") + "in the list.";
     }
 }

@@ -154,4 +154,163 @@ public class Parser {
             throw new UnknownCommandException();
         }
     }
+
+    /**
+     * Parses and executes user input and provides Duke's output message
+     *
+     * @param input  A String of user input.
+     * @param tasks  A TaskList object that the tasks will be modified in.
+     * @param ui  An Ui object that will display the outputs and collect user inputs.
+     * @return  A Boolean of whether TaskList was updated.
+     * @throws MissingDoneArgumentException  If done was input without an argument.
+     * @throws DoneOutOfRangeException  If done was input with an argument out of range.
+     * @throws MissingDeleteArgumentException  If delete was input without an argument.
+     * @throws DeleteOutOfRangeException  If delete was input with an argument out of range.
+     * @throws EmptyTodoException  If todo was input without a description.
+     * @throws MissingDeadlineDateException  If deadline was input without a date.
+     * @throws EmptyDeadlineException  If deadline was input without a description.
+     * @throws MissingEventDateException  If event was input without a date.
+     * @throws EmptyEventException  If event was input without a description.
+     * @throws UnknownCommandException  If input is not recognised by Duke.
+     * @throws MissingFindArgumentException  If find was input without a keyword.
+     */
+    public static ParseInfo parseAndExecuteAndGetMessage(String input, TaskList tasks, Ui ui)
+            throws MissingDoneArgumentException, DoneOutOfRangeException, MissingDeleteArgumentException,
+            DeleteOutOfRangeException, EmptyTodoException, MissingDeadlineDateException, EmptyDeadlineException,
+            MissingEventDateException, EmptyEventException, UnknownCommandException, MissingFindArgumentException {
+        ParseInfo returnable = new ParseInfo();
+        //DONE PORTION HERE----------------------------------------------------------
+        if (input.length() >= 4 && input.substring(0, 4).equals("done")) {
+            if (input.length() <= 5) {
+                throw new MissingDoneArgumentException();
+            }
+            int index = Integer.parseInt(input.substring(5)) - 1;
+            if (index >= tasks.getCount() || index < 0) {
+                throw new DoneOutOfRangeException();
+            }
+            returnable.addResponse(
+                    ui.getMarkedAsDoneMessage(
+                            tasks.markTaskAsDone(index) //checkthis
+                    )
+            );
+
+            returnable.taskListDidUpdate();
+
+            //DELETE PORTION HERE---------------------------------------------------------
+        } else if (input.length() >= 6 && input.substring(0, 6).equals("delete")) {
+            if (input.length() <= 7) {
+                throw new MissingDeleteArgumentException();
+            }
+            int index = Integer.parseInt(input.substring(7)) - 1;
+            if (index >= tasks.getCount() || index < 0) {
+                throw new DeleteOutOfRangeException();
+            }
+            returnable.addResponse(
+                    ui.getDeleteTaskMessage(
+                            tasks.deleteTask(index)
+                    )
+            );
+            returnable.addResponse(
+                    ui.getCountMessage(tasks)
+            );
+            returnable.taskListDidUpdate();
+
+            //TOD0 PORTION HERE-----------------------------------------------------------
+        } else if (input.length() >= 4 && input.substring(0, 4).equals("todo")) {
+            if (input.length() == 4) {
+                throw new EmptyTodoException();
+            }
+            String description = input.substring(5);
+            if (description.length() == 0) {
+                throw new EmptyTodoException();
+            }
+            ToDo taskToAdd = new ToDo(description);
+            returnable.addResponse(
+                    ui.getAddTaskMessage(
+                            tasks.addTask(taskToAdd)
+                    )
+            );
+            returnable.addResponse(
+                    ui.getCountMessage(tasks)
+            );
+
+            returnable.taskListDidUpdate();
+
+            //DEADLINE PORTION HERE--------------------------------------------------------
+        } else if (input.length() >= 8 && input.substring(0, 8).equals("deadline")) {
+            int index = input.indexOf("/");
+            if (index == -1) {
+                throw new MissingDeadlineDateException();
+            }
+            if (input.length() == 8 || input.indexOf("/") <= 9) {
+                throw new EmptyDeadlineException();
+            }
+            String description = input.substring(9, index - 1);
+            if (description.length() == 0) {
+                throw new EmptyDeadlineException();
+            }
+            String date = input.substring(index + 4);
+            if (date.length() == 0) {
+                throw new MissingDeadlineDateException();
+            }
+            Deadline taskToAdd = new Deadline(description, date);
+            returnable.addResponse(
+                    ui.getAddTaskMessage(
+                            tasks.addTask(taskToAdd)
+                    )
+            );
+            returnable.addResponse(
+                    ui.getCountMessage(tasks)
+            );
+            returnable.taskListDidUpdate();
+
+            //EVENT PORTION HERE-----------------------------------------------------------
+        } else if (input.length() >= 5 && input.substring(0, 5).equals("event")) {
+            int index = input.indexOf("/");
+            if (index == -1) {
+                throw new MissingEventDateException();
+            }
+            if (input.length() == 5 || input.indexOf("/") <= 6) {
+                throw new EmptyEventException();
+            }
+            String description = input.substring(6, index - 1);
+            if (description.length() == 0) {
+                throw new EmptyEventException();
+            }
+            String date = input.substring(index + 4);
+            if (date.length() == 0) {
+                throw new MissingEventDateException();
+            }
+            Event taskToAdd = new Event(description, date);
+            returnable.addResponse(
+                    ui.getAddTaskMessage(
+                            tasks.addTask(taskToAdd)
+                    )
+            );
+            returnable.addResponse(
+                    ui.getCountMessage(tasks)
+            );
+            returnable.taskListDidUpdate();
+
+            //LIST PORTION HERE------------------------------------------------------------
+        } else if (input.equals("list")) {
+            returnable.addResponse(
+                    ui.getTaskList(tasks)
+            );
+            //task list did not update, did not change returnable
+            //FIND PORTION HERE------------------------------------------------------------
+        } else if (input.length() >= 4 && input.substring(0, 4).equals("find")) {
+            if (input.length() <= 5) {
+                throw new MissingFindArgumentException();
+            }
+            String keyword = input.substring(5);
+            returnable.addResponse(
+                    ui.getFoundTasks(tasks, keyword)
+            );
+            //task list did not update, did not change returnable
+        } else {
+            throw new UnknownCommandException();
+        }
+        return returnable;
+    }
 }

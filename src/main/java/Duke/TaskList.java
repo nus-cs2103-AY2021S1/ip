@@ -128,6 +128,8 @@ public class TaskList {
                 representation += (i + 1 + ". " + list.get(i) + "\n");
             }
             representation += this.count + ". " + list.get(this.count - 1);
+        } else {
+            representation += "Your task list is empty! Add a task with todo deadline or event!";
         }
         return representation;
     }
