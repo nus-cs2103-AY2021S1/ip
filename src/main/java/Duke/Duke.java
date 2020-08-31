@@ -90,7 +90,8 @@ public class Duke {
      */
     public static void main(String[] args) throws IOException {
         Duke duke = new Duke("src/main/java/tasks.txt");
-        String s = duke.getResponse("todo read book");
+        duke.run();
+        //String s = duke.getResponse("ToDo read book");
         /*PrintStream fileOut = new PrintStream("src/main/java/output.txt");
         System.setOut(fileOut);
         FileWriter fw = new FileWriter("src/main/java/tasks.txt");

@@ -6,7 +6,7 @@ import Duke.Errors.FileAbsentException;
 import Duke.Helpers.Storage;
 import Duke.Helpers.TaskList;
 import Duke.Helpers.Ui;
-import Duke.Tasks.event;
+import Duke.Tasks.Event;
 
 import java.io.IOException;
 import java.time.DateTimeException;
@@ -16,7 +16,7 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 /**
- * handles cases when event is keyword
+ * handles cases when Event is keyword
  */
 public class EventCommand extends AddCommand{
     /**
@@ -27,15 +27,15 @@ public class EventCommand extends AddCommand{
         super(string);
     }
 
-    private static event provide(String name, String string, String end) throws DukeException {
-        event e;
+    private static Event provide(String name, String string, String end) throws DukeException {
+        Event e;
         try{
             LocalDate parsedDate = stringToLocalDate(string);
             LocalDate endDate = stringToLocalDate(end);
             if(parsedDate.isAfter(endDate)){
                 throw new EventException(false, false, true, false);
             }
-            e = new event(name, parsedDate.format(DateTimeFormatter.ofPattern("dd LLL yyyy")),
+            e = new Event(name, parsedDate.format(DateTimeFormatter.ofPattern("dd LLL yyyy")),
                     endDate.format(DateTimeFormatter.ofPattern("dd LLL yyyy")));
         }catch (EventException event){
             throw new EventException(false, false, true, false);
@@ -46,7 +46,7 @@ public class EventCommand extends AddCommand{
                 if(parsedDate.isAfter(endDate)){
                     throw new EventException(false, false, true, false);
                 }
-                e = new event(name, parsedDate.format(DateTimeFormatter.ofPattern("dd LLL yyyy, HH:mm")),
+                e = new Event(name, parsedDate.format(DateTimeFormatter.ofPattern("dd LLL yyyy, HH:mm")),
                         endDate.format(DateTimeFormatter.ofPattern("dd LLL yyyy, HH:mm")));
             } catch (EventException event){
                 throw new EventException(false, false, true, false);
@@ -58,7 +58,7 @@ public class EventCommand extends AddCommand{
                     if(parsedDate.isAfter(endDate)){
                         throw new EventException(false, false, true, false);
                     }
-                    e = new event(name, parsedDate.format(DateTimeFormatter.ofPattern("HH:mm")),
+                    e = new Event(name, parsedDate.format(DateTimeFormatter.ofPattern("HH:mm")),
                             endDate.format(DateTimeFormatter.ofPattern("HH:mm")));
                 }catch (EventException y){
                     throw new EventException(false, false, true, false);
@@ -71,12 +71,12 @@ public class EventCommand extends AddCommand{
     }
 
     /**
-     * is used to add event task or handle exceptions
+     * is used to add Event task or handle exceptions
      * @param tasks to change the taskList if necessary when no error
      * @param ui
      * @param storage to change the file in the if necessary when no error
      * @return String returns the string of the output that informs the action has been complete.
-     * @throws DukeException if there no description after event no time or time is wrong format
+     * @throws DukeException if there no description after Event no time or time is wrong format
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (commandDescription.length() == 5 || commandDescription.length() == 6) {
@@ -110,7 +110,7 @@ public class EventCommand extends AddCommand{
         if (!duration) {
             throw new EventException(false, true, false, false);
         }
-        event d = provide(s.substring(1, s.length() - 1), commandDescription.substring(index + 4, end), commandDescription.substring(end + 1));
+        Event d = provide(s.substring(1, s.length() - 1), commandDescription.substring(index + 4, end), commandDescription.substring(end + 1));
         try {
             return updateTaskList(storage, d, tasks);
 

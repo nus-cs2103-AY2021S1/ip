@@ -2,8 +2,10 @@ package Duke;
 
 import org.junit.jupiter.api.Test;
 
-import java.io.*;
-
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -62,8 +64,8 @@ public class DukeTest {
     public void Test2()  {
         try {
             FileWriter fw = new FileWriter("src/main/java/input.txt");
-            fw.append("event book club /at 12:00-14:00\n");
-            fw.append("todo read book\n");
+            fw.append("Event book club /at 12:00-14:00\n");
+            fw.append("ToDo read book\n");
             fw.append("deadline submission /by 2019 12 12\n");
             fw.append("done 1\n");
             fw.append("delete 4\n");
@@ -134,10 +136,10 @@ public class DukeTest {
         try {
             FileWriter fw = new FileWriter("src/main/java/input.txt");
             FileWriter fileWriter = new FileWriter("src/main/java/expected.txt");
-            fw.write("event concert /at 12:00-10:00\n" +
-                 "todo buy book\n" +
+            fw.write("Event concert /at 12:00-10:00\n" +
+                 "ToDo buy book\n" +
                  "done 1\n" +
-                 "event book club /at 12:00-10:00\n" +
+                 "Event book club /at 12:00-10:00\n" +
                  "delete 2\n" +
                  "deadline submission /by 2020 11 14\n" +
                  "list\n" +

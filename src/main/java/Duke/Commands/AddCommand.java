@@ -12,7 +12,7 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 /**
- * This class handles the case of adding different tasks which are todo, deadline and event
+ * This class handles the case of adding different tasks which are ToDo, deadline and Event
  */
 abstract public class AddCommand extends Command {
     /**

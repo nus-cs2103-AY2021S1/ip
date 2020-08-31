@@ -1,14 +1,14 @@
 /**
- * The todo is a subclass of Task and it is used to describe tasks that have no specific deadline
+ * The ToDo is a subclass of Task and it is used to describe tasks that have no specific deadline
  */
 package Duke.Tasks;
 
-public class todo extends Task {
+public class ToDo extends Task {
     /**
      * assigns name to name value
      * @param name super(name) so that it does whatever is mentioned in the parent class
      */
-    public todo(String name) {
+    public ToDo(String name) {
         super(name);
     }
 
@@ -17,13 +17,13 @@ public class todo extends Task {
      * @param name assigns name to this.name
      * @param done assigns done to this.done
      */
-    public todo(String name, boolean done){
+    public ToDo(String name, boolean done){
         super(name, done);
     }
 
     /**
      * takes no arguments and overrides the toString method
-     * @return the specific representation for todo class as mentioned with [T] indicating that it is a todo class
+     * @return the specific representation for ToDo class as mentioned with [T] indicating that it is a ToDo class
      *
      */
     @Override
@@ -33,7 +33,7 @@ public class todo extends Task {
 
     /**
      * gives a specific string representation for that in the tasks.txt file and overrides that in Task to make
-     * it unique to that for todo
+     * it unique to that for ToDo
      * @return the string representation
      */
     public String inputListFormat(){

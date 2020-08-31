@@ -1,11 +1,12 @@
 package Duke.Helpers;
+
 import Duke.Errors.DukeException;
 import Duke.Errors.FIleEmptyException;
 import Duke.Errors.FileAbsentException;
 import Duke.Tasks.Deadline;
+import Duke.Tasks.Event;
 import Duke.Tasks.Task;
-import Duke.Tasks.event;
-import Duke.Tasks.todo;
+import Duke.Tasks.ToDo;
 
 import java.io.File;
 import java.io.IOException;
@@ -42,7 +43,7 @@ public class Storage {
                     char bool = s.charAt(4);
                     boolean done = (bool == '1');
                     if(s.charAt(0) == 'T'){
-                        tasks.add(new todo(s.substring(8), done));
+                        tasks.add(new ToDo(s.substring(8), done));
                     }else if(s.charAt(0) == 'E'){
                         String string = "";
                         int index = -1;
@@ -61,7 +62,7 @@ public class Storage {
                             }
                             another = another + s.charAt(i);
                         }
-                        tasks.add(new event(string, done, another, s.substring(index + 1)));
+                        tasks.add(new Event(string, done, another, s.substring(index + 1)));
                     }else {
                         String string = "";
                         int index = -1;

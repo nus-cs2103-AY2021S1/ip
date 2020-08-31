@@ -6,12 +6,12 @@ import Duke.Errors.TodoException;
 import Duke.Helpers.Storage;
 import Duke.Helpers.TaskList;
 import Duke.Helpers.Ui;
-import Duke.Tasks.todo;
+import Duke.Tasks.ToDo;
 
 import java.io.IOException;
 
 /**
- * has the method if todo is keyword deadline
+ * has the method if ToDo is keyword deadline
  */
 public class TodoCommand extends AddCommand{
     /**
@@ -36,7 +36,7 @@ public class TodoCommand extends AddCommand{
             throw new TodoException();
         } else {
             try {
-                todo t = new todo(commandDescription.substring(5));
+                ToDo t = new ToDo(commandDescription.substring(5));
                 return updateTaskList(storage, t, tasks);
             }catch (IOException i){
                 throw new FileAbsentException(storage.getFilePath());

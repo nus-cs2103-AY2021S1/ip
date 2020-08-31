@@ -7,9 +7,9 @@ package Duke.Errors;
 public class TodoException extends DukeException {
     /**
      * doesn't take in any arguments, overrides the in-built toString() method.
-     * @return returns a string informing that the description of the todo is absent as it cant be.
+     * @return returns a string informing that the description of the ToDo is absent as it cant be.
      */
     public String toString(){
-        return "  '\u2639' OOPS!!! The description of a todo cannot be empty";
+        return "  '\u2639' OOPS!!! The description of a ToDo cannot be empty";
     }
 }

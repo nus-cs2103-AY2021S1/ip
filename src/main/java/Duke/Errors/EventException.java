@@ -39,7 +39,7 @@ public class EventException extends DukeException {
      */
     public String toString(){
         if(this.descriptionAbsent){
-            return "  '\u2639' OOPS!!! The description of an event cannot be empty.";
+            return "  '\u2639' OOPS!!! The description of an Event cannot be empty.";
         }
         if(this.endTimeAbsent){
             return "  '\u2639' OOPS!!! There should be 2 occurrences of date and/or time values.";
@@ -51,6 +51,6 @@ public class EventException extends DukeException {
             return "  '\u2639' OOPS!!! Start and should be of the same format. The formats include " +
                     "yyyy MM dd/ yyyy MM dd, HH:mm/ HH:mm";
         }
-        return "  '\u2639' OOPS!!! The specific date of an event cannot be empty." ;
+        return "  '\u2639' OOPS!!! The specific date of an Event cannot be empty." ;
     }
 }
