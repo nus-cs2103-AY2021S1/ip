@@ -3,6 +3,10 @@ public class Task {
     private boolean completed;
     public String name;
 
+    /**
+     * Constructor for Task.
+     * @param name
+     */
     public Task(String name) {
         this.name = name;
         this.completed = false;
