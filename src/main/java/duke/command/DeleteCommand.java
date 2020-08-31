@@ -28,4 +28,22 @@ public class DeleteCommand extends Command {
             ui.showError(e.getMessage());
         }
     }
+
+    /**
+     * Returns string success/error information after execution of
+     * deleting of task in TaskList.
+     *
+     * @param storage Storage where deleting of task is written in hard disk.
+     * @param taskList TaskList where task is deleted.
+     * @param ui Ui that shows success/error messages from the deleting action.
+     * @return String success/error information
+     */
+    @Override
+    public String executeToString(Storage storage, TaskList taskList, Ui ui) {
+        try {
+            return taskList.deleteTask(storage, this.input);
+        } catch (DukeException e) {
+            return e.getMessage();
+        }
+    }
 }

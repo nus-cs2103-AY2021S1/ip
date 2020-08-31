@@ -50,7 +50,8 @@ public class Ui {
                 + "(e.g. event team project meeting /at 2019-10-02 1400-1500)\n"
                 + "\nAdditional Information:"
                 + "\nTo mark a task as done, input 'done <task number>'."
-                + "\nTo delete a task from your list, input 'delete <task number>'.");
+                + "\nTo delete a task from your list, input 'delete <task number>'."
+                + "\nTo find a task in your list, input 'find <keyword>'.");
     }
 
     /**

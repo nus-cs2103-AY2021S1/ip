@@ -62,4 +62,19 @@ public class Duke {
     public static void main(String[] args) {
         new Duke("./data/tasklist.txt").run();
     }
+
+    /**
+     * Get the response from Dino given the user input.
+     *
+     * @param input The command input user types in.
+     * @return The response from duke command agent.
+     */
+    public String getResponse(String input) {
+        try {
+            Command c = Parser.parse(input);
+            return c.executeToString(storage, tasks, ui);
+        } catch (DukeException e) {
+            return e.getMessage();
+        }
+    }
 }

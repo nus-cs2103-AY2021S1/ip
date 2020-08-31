@@ -27,4 +27,22 @@ public class AddCommand extends Command {
             ui.showError(e.getMessage());
         }
     }
+
+    /**
+     * Returns string success/error information after execution of
+     * adding of task in TaskList.
+     *
+     * @param storage Storage where adding of task is written in hard disk.
+     * @param taskList TaskList where task is added.
+     * @param ui Ui that shows success/error messages from the adding action.
+     * @return String success/error information
+     */
+    @Override
+    public String executeToString(Storage storage, TaskList taskList, Ui ui) {
+        try {
+            return taskList.addTask(storage, this.input);
+        } catch (DukeException e) {
+            return e.getMessage();
+        }
+    }
 }

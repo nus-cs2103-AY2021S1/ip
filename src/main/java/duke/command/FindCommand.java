@@ -28,4 +28,22 @@ public class FindCommand extends Command {
             ui.showError(e.getMessage());
         }
     }
+
+    /**
+     * Returns string success/error information after execution of
+     * finding of task in TaskList.
+     *
+     * @param storage Storage data of tasks in hard disk.
+     * @param taskList TaskList where finding of task that matches is done.
+     * @param ui Ui that shows success/error messages from the finding action.
+     * @return String success/error information
+     */
+    @Override
+    public String executeToString(Storage storage, TaskList taskList, Ui ui) {
+        try {
+            return taskList.findTask(this.input);
+        } catch (DukeException e) {
+            return e.getMessage();
+        }
+    }
 }
