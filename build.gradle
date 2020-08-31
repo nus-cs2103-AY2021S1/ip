@@ -2,6 +2,7 @@ plugins {
     id 'java'
     id 'application'
     id 'checkstyle'
+    id "java-test-fixtures"
     id 'com.github.johnrengelman.shadow' version '5.1.0'
 }
 
@@ -29,7 +30,7 @@ test {
 }
 
 application {
-    mainClassName = "seedu.duke.Duke"
+    mainClassName = "Duke"
 }
 
 shadowJar {
