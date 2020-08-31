@@ -20,7 +20,7 @@ public class DukeException extends Exception {
     }
 
     /**
-     * Overloaded constructor that creates a DukeException a specified
+     * Overloaded constructor that creates a DukeException with specified
      * dukeExceptionType.
      * @param message the error message of the Exception.
      * @param dukeExceptionType the type of Exception.
