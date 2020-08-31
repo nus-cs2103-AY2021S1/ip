@@ -5,12 +5,13 @@ import java.time.LocalDateTime;
 import viscount.Storage;
 import viscount.TaskList;
 import viscount.Ui;
-import viscount.exception.ViscountIoException;
+import viscount.exception.ViscountSaveDataException;
 import viscount.task.Deadline;
 import viscount.task.Event;
 import viscount.task.Task;
 import viscount.task.TaskType;
 import viscount.task.Todo;
+
 
 /**
  * Represents an add command.
@@ -34,21 +35,27 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Executes the add command.
+     * Executes the add command and returns the response from Viscount.
      *
      * @param taskList Task list where tasks are stored.
      * @param ui Ui to display response.
      * @param storage Storage to save changes to disk.
-     * @throws ViscountIoException If exception occurs with writing to disk.
+     * @throws ViscountSaveDataException If exception occurs with writing to disk.
+     * @return The response from Viscount.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws ViscountIoException {
+    public String executeAndGetResponse(TaskList taskList, Ui ui, Storage storage) throws ViscountSaveDataException {
         Task newTask = getNewTask();
         taskList.add(newTask);
         storage.saveToDisk(taskList.getTasks());
-        ui.showAdd(newTask, taskList.getTasksSize());
+        return ui.getAddResponse(newTask, taskList.getTasksSize());
     }
 
+    /**
+     * Gets a new task to be added.
+     *
+     * @return A new task to be added.
+     */
     private Task getNewTask() {
         Task newTask = null;
 
@@ -67,10 +74,5 @@ public class AddCommand extends Command {
         }
 
         return newTask;
-    }
-
-    @Override
-    public boolean isExit() {
-        return false;
     }
 }

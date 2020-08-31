@@ -1,76 +1,52 @@
 package viscount;
 
+import java.io.IOException;
+
 import viscount.command.Command;
 import viscount.exception.ViscountException;
-import viscount.exception.ViscountIoException;
+
 
 /**
  * Represents Viscount, a chatbot that helps the user keep track of tasks.
  */
 public class Viscount {
-    private static final String DATA_DIRECTORY_PATH = System.getProperty("user.dir") + "/data/";
-
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
-    private boolean shouldRun;
 
     /**
-     * Instantiates a new Viscount object.
+     * Instantiates a new Viscount chatbot.
      *
-     * @param filePathString Path of data file.
+     * @param filePathString String of path of data file loaded.
+     * @throws IOException if an error occurs while loading data from save file.
      */
-    public Viscount(String filePathString) {
+    public Viscount(String filePathString) throws IOException {
         this.storage = new Storage(filePathString);
         this.ui = new Ui();
-        try {
-            this.tasks = new TaskList(storage.loadFromDisk());
-            this.shouldRun = true;
-        } catch (ViscountIoException e) {
-            ui.showError(e.getMessage());
-            this.shouldRun = false;
-        }
+        this.tasks = new TaskList(storage.loadFromDisk());
     }
 
     /**
-     * Runs Viscount.
-     */
-    private void run() {
-        ui.showWelcome();
-
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String rawInput = ui.readInput();
-                Command command = Parser.parse(rawInput);
-                command.execute(tasks, ui, storage);
-                isExit = command.isExit();
-            } catch (ViscountException e) {
-                ui.showError(e.getMessage());
-            }
-        }
-
-        exit();
-    }
-
-    /**
-     * Closes Viscount.
-     */
-    private void exit() {
-        ui.showExit();
-    }
-
-    /**
-     * Starts Viscount.
+     * Gets the appropriate string response from Viscount, given an input.
      *
-     * @param args Standard arguments
+     * @param input Input to be parsed and responded to.
+     * @return The appropriate string response from Viscount.
      */
-    public static void main(String[] args) {
-        Viscount viscount = new Viscount(DATA_DIRECTORY_PATH);
-        if (viscount.shouldRun) {
-            viscount.run();
-        } else {
-            viscount.exit();
+    public String getResponse(String input) {
+        try {
+            Command command = Parser.parse(input);
+            return command.executeAndGetResponse(tasks, ui, storage);
+        } catch (ViscountException e) {
+            return e.getMessage();
         }
+    }
+
+    /**
+     * Gets the UI of Viscount.
+     *
+     * @return UI of Viscount.
+     */
+    public Ui getUi() {
+        return ui;
     }
 }

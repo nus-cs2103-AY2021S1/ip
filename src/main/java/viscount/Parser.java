@@ -12,7 +12,6 @@ import viscount.command.AddCommand;
 import viscount.command.Command;
 import viscount.command.DeleteCommand;
 import viscount.command.DoneCommand;
-import viscount.command.ExitCommand;
 import viscount.command.ListCommand;
 import viscount.exception.ViscountDateTimeParseException;
 import viscount.exception.ViscountException;
@@ -59,8 +58,6 @@ public class Parser {
             return parseDoneCommand(arguments);
         case "delete":
             return parseDeleteCommand(arguments);
-        case "bye":
-            return new ExitCommand();
         default:
             throw new ViscountUnknownCommandException(baseCommand);
         }

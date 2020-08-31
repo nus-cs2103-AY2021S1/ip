@@ -40,15 +40,16 @@ public class ListCommand extends Command {
     }
 
     /**
-     * Executes the list command.
+     * Executes the list command and returns the response from Viscount.
      *
      * @param taskList Task list where tasks are stored.
      * @param ui Ui to display response.
      * @param storage Storage to save changes to disk.
      * @throws ViscountDateTimeParseException If exception occurs with parsing date string
+     * @return The response from Viscount.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws ViscountException {
+    public String executeAndGetResponse(TaskList taskList, Ui ui, Storage storage) throws ViscountException {
         Predicate<Task> filterByModifier = task -> taskTypeModifier.isEmpty()
                 || task.getTaskType() == TaskType.valueOf(taskTypeModifier.toUpperCase());
 
@@ -63,7 +64,7 @@ public class ListCommand extends Command {
                     .filter(filterByDescription)
                     .collect(Collectors.toList());
 
-            ui.showList(filteredTasks, taskTypeModifier, dateString);
+            return ui.getListResponse(filteredTasks, taskTypeModifier, dateString);
         } else {
             try {
                 LocalDateTime queriedDateTime = dateString.equals("today")
@@ -79,7 +80,7 @@ public class ListCommand extends Command {
                         .sorted(Comparator.comparing(Task::getDateTime))
                         .collect(Collectors.toList());
 
-                ui.showList(
+                return ui.getListResponse(
                         filteredTasks,
                         taskTypeModifier,
                         dateString.equals("today")
@@ -89,10 +90,5 @@ public class ListCommand extends Command {
                 throw new ViscountDateTimeParseException("date query");
             }
         }
-    }
-
-    @Override
-    public boolean isExit() {
-        return false;
     }
 }
