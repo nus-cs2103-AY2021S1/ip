@@ -7,8 +7,14 @@ import duke.command.CommandParser;
 import duke.exception.DukeException;
 import duke.task.TaskList;
 
-
+/**
+ * Duke is the class encapsulating all application processes.
+ */
 public class Duke {
+    /**
+     * Launches and runs the application.
+     * @param args Standard arguments
+     */
     public static void main(String[] args) {
         try {
             Storage storage = new Storage();
