@@ -17,9 +17,9 @@ public class Ui {
 
     /** Prints out message to indicate Task is updated */
     public static void updateTaskText(String update, Task taskToUpdate, int size) {
-        Ui.prettyPrint("Got it. I've " + update + " this task: \n" +
-                "\t" + taskToUpdate + "\n" +
-                "\tNow you have " + size +" tasks in the list.");
+        Ui.prettyPrint("Got it. I've " + update + " this task: \n"
+                + "\t" + taskToUpdate + "\n"
+                + "\tNow you have " + size + " tasks in the list.");
     }
 
     /**

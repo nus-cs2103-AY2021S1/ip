@@ -42,7 +42,7 @@ public class Parser {
      * @return sentence after the first word
      */
     public static String getDetails(String line) {
-        String[] splitString =  stringSplitLimit(line, " ", 2);
+        String[] splitString = stringSplitLimit(line, " ", 2);
         return splitString.length < 2 ? "" : splitString[1];
     }
 

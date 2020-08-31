@@ -7,6 +7,7 @@ import java.util.Scanner;
 
 /** Duke class to encapsulate the behaviour of a task manager */
 public class Duke {
+    private static Scanner scan = new Scanner(System.in);
     private static final String SAVE_PATH = "./src/data/SaveData.txt";
     private static enum AcceptedCommands {
         TODO,
@@ -20,11 +21,10 @@ public class Duke {
         HELLO,
         FIND,
     }
-    public static Scanner scan = new Scanner(System.in);
     private Storage storage;
     private TaskList tasks;
 
-    public Duke(String filepath) {
+    Duke(String filepath) {
         storage = new Storage(filepath);
         tasks = storage.loadTask();
     }
@@ -49,40 +49,42 @@ public class Duke {
                 String[] description;
                 Task taskToUpdate;
                 switch (command) {
-                    case "list":
-                        Ui.prettyPrint(tasks);
-                        break;
-                    case "done":
-                        taskToUpdate = tasks.updateTaskStatus(Parser.getIndex(userInput), true);
-                        Ui.prettyPrint("Nice! I've marked this task as done: \n" + "\t" + taskToUpdate);
-                        break;
-                    case "todo":
-                        taskToUpdate = tasks.addTask(new ToDo(Parser.getDetails(userInput)));
-                        Ui.updateTaskText("added", taskToUpdate, tasks.length());
-                        break;
-                    case "event":
-                        description = Parser.stringSplit(details, " /at ");
-                        taskToUpdate = tasks.addTask(new Event(description[0], LocalDate.parse(description[1])));
-                        Ui.updateTaskText("added", taskToUpdate, tasks.length());
-                        break;
-                    case "deadline":
-                        description = Parser.stringSplit(details, " /by ");
-                        taskToUpdate = tasks.addTask(new Deadline(description[0], LocalDate.parse(description[1])));
-                        Ui.updateTaskText("added", taskToUpdate, tasks.length());
-                        break;
-                    case "delete":
-                        taskToUpdate = tasks.removeTask(Parser.getIndex(userInput));
-                        Ui.updateTaskText("removed", taskToUpdate, tasks.length());
-                        break;
-                    case "clear":
-                        System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
-                        break;
-                    case "hello":
-                        Ui.greet();
-                        break;
-                    case "find":
-                        Ui.prettyPrint(tasks.contains(details));
-                        break;
+                case "list":
+                    Ui.prettyPrint(tasks);
+                    break;
+                case "done":
+                    taskToUpdate = tasks.updateTaskStatus(Parser.getIndex(userInput), true);
+                    Ui.prettyPrint("Nice! I've marked this task as done: \n" + "\t" + taskToUpdate);
+                    break;
+                case "todo":
+                    taskToUpdate = tasks.addTask(new ToDo(Parser.getDetails(userInput)));
+                    Ui.updateTaskText("added", taskToUpdate, tasks.length());
+                    break;
+                case "event":
+                    description = Parser.stringSplit(details, " /at ");
+                    taskToUpdate = tasks.addTask(new Event(description[0], LocalDate.parse(description[1])));
+                    Ui.updateTaskText("added", taskToUpdate, tasks.length());
+                    break;
+                case "deadline":
+                    description = Parser.stringSplit(details, " /by ");
+                    taskToUpdate = tasks.addTask(new Deadline(description[0], LocalDate.parse(description[1])));
+                    Ui.updateTaskText("added", taskToUpdate, tasks.length());
+                    break;
+                case "delete":
+                    taskToUpdate = tasks.removeTask(Parser.getIndex(userInput));
+                    Ui.updateTaskText("removed", taskToUpdate, tasks.length());
+                    break;
+                case "clear":
+                    System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+                    break;
+                case "hello":
+                    Ui.greet();
+                    break;
+                case "find":
+                    Ui.prettyPrint(tasks.contains(details));
+                    break;
+                default:
+                    break;
                 }
             } catch (DukeIllegalCommandException | DukeMissingArgumentException | DukeTaskOutOfBoundsException e) {
                 System.out.println(e.toString());
@@ -133,7 +135,7 @@ public class Duke {
                 || command.equalsIgnoreCase(AcceptedCommands.BYE.name())
                 || command.equalsIgnoreCase(AcceptedCommands.CLEAR.name())
                 || command.equalsIgnoreCase(AcceptedCommands.HELLO.name()))
-                        && (details.isEmpty())) {
+                && (details.isEmpty())) {
             throw new DukeMissingArgumentException(command);
         }
     }

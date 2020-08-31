@@ -1,8 +1,8 @@
 package duke;
 
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
 
 public class ParserTest {
     @Test
@@ -14,7 +14,7 @@ public class ParserTest {
     @Test
     public void stringSplitLimit_splitTwoString_success() {
         assertEquals("world how are you",
-                Parser.stringSplitLimit("Hello world how are you", " ",2)[1]);
+                Parser.stringSplitLimit("Hello world how are you", " ", 2)[1]);
     }
 
     @Test

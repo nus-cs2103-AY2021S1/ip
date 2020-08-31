@@ -2,16 +2,16 @@ package duke;
 
 /** Exception for missing arguments */
 public class DukeMissingArgumentException extends ArrayIndexOutOfBoundsException {
-    private final String DESCRIPTION;
+    private final String description;
 
     DukeMissingArgumentException(String description) {
-        this.DESCRIPTION = description;
+        this.description = description;
     }
 
     @Override
     public String toString() {
-        return "\t____________________________________________________________\n" +
-                "\t☹ OOPS!!! The description of " + DESCRIPTION +" cannot be empty.\n" +
-                "\t____________________________________________________________";
+        return "\t____________________________________________________________\n"
+                + "\t☹ OOPS!!! The description of " + description + " cannot be empty.\n"
+                + "\t____________________________________________________________";
     }
 }

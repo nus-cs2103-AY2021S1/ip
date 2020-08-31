@@ -67,20 +67,23 @@ public class Storage {
                 // Add the tasks
                 String[] description;
                 switch (taskType) {
-                    case 'T':
-                        tasks.addTask(new ToDo(newTask, isDone));
-                        break;
-                    case 'D':
-                        description = Parser.stringSplit(newTask, "/by");
-                        tasks.addTask(new Deadline(description[0], isDone, LocalDate.parse(description[1])));
-                        break;
-                    case 'E':
-                        description = Parser.stringSplit(newTask, "/at");
-                        tasks.addTask(new Event(description[0], isDone, LocalDate.parse(description[1])));
-                        break;
+                case 'T':
+                    tasks.addTask(new ToDo(newTask, isDone));
+                    break;
+                case 'D':
+                    description = Parser.stringSplit(newTask, "/by");
+                    tasks.addTask(new Deadline(description[0], isDone, LocalDate.parse(description[1])));
+                    break;
+                case 'E':
+                    description = Parser.stringSplit(newTask, "/at");
+                    tasks.addTask(new Event(description[0], isDone, LocalDate.parse(description[1])));
+                    break;
+                default:
+                    break;
                 }
             }
         } catch (FileNotFoundException e) {
+            System.out.println("File not found");
         }
 
         return tasks;
