@@ -1,4 +1,4 @@
-package main.java;
+package main.java.TaskList.tasks;
 
 public class Task {
     private String task;
@@ -15,11 +15,11 @@ public class Task {
         return type;
     }
 
-    protected String getFullText() {
+    public String getFullText() {
         return fullText;
     }
 
-    protected void markAsDone() {
+    public void markAsDone() {
         done = true;
     }
 

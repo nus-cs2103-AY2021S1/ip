@@ -1,11 +1,14 @@
-package main.java;
+package main.java.UI;
+import main.java.DukeExceptions;
+import main.java.commands.Parser;
+
 import java.util.Random;
 import java.util.Scanner;
 
 public class UI {
     private static Scanner sc = new Scanner(System.in);
     private static boolean stillGoing = true;
-    protected enum Messages {
+    private enum Messages {
         WRONG_INPUT("    Bark bark? (This doesn't make sense?)"),
         MISSING_INPUT("    Bork bark?? Bark bark woof. (What does this command mean?? Try again with todo *task*, " +
                 "*task* /at *start date/time* *end date/time*, or *task* by *deadline.)"),
@@ -98,27 +101,31 @@ public class UI {
     private static final Messages[] ERROR_MESSAGES = {Messages.WRONG_INPUT, Messages.MISSING_INPUT,
             Messages.MISSING_INPUT, Messages.DONE_ERROR};
 
-    protected static void printGoodbye() {
+    public static void printGoodbye() {
         System.out.println(Messages.GOODBYE_MSG);
     }
-    protected static void printLine() {
+    public static void printLine() {
         System.out.println("    ************************************************************");
     }
     protected static void printLogo() {
         System.out.println(Messages.LOGO);
     }
 
-    protected static void printWrongInput() {
+    public static void printWrongInput() {
         int rnd = new Random().nextInt(ERROR_MESSAGES.length);
         System.out.println(ERROR_MESSAGES[rnd].toString());
     }
 
-    protected static void stop() {
+    public static void stop() {
         stillGoing = false;
 
     }
 
-    protected static void start() throws DukeExceptions {
+    public static String getMessage(String cmd) {
+        return Messages.valueOf(cmd).toString();
+    }
+
+    public static void start() throws DukeExceptions {
         stillGoing = true;
         while (sc.hasNextLine()) {
             Parser.parseAndAddToList(sc.nextLine());

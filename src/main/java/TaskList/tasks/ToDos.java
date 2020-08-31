@@ -1,8 +1,8 @@
-package main.java;
+package main.java.TaskList.tasks;
 
 public class ToDos extends Task {
     private String type = "Todos";
-    protected ToDos(String string) {
+    public ToDos(String string) {
         super(string.substring(5), string);
     }
     public String toString() {

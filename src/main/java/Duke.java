@@ -1,4 +1,6 @@
 package main.java;
+import main.java.UI.UI;
+import main.java.commands.Parser;
 
 public class Duke {
     protected static void doItAgain() {
@@ -14,7 +16,7 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        System.out.println(UI.Messages.LOGO.toString() + UI.Messages.WELCOME_MSG.toString());
+        System.out.println(UI.getMessage("LOGO") + UI.getMessage("WELCOME_MSG"));
         UI.printLine();
         Storage.createNewFile();
         try {

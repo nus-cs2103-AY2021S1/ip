@@ -1,4 +1,7 @@
 package main.java;
+import main.java.TaskList.TaskList;
+import main.java.TaskList.tasks.Task;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;

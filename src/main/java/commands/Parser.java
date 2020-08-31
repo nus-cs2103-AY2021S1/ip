@@ -1,4 +1,11 @@
-package main.java;
+package main.java.commands;
+
+import main.java.DukeExceptions;
+import main.java.TaskList.TaskList;
+import main.java.TaskList.tasks.Events;
+import main.java.TaskList.tasks.ToDos;
+import main.java.UI.UI;
+import main.java.TaskList.tasks.Deadlines;
 
 import java.io.FileReader;
 import java.io.File;
@@ -11,7 +18,7 @@ import java.time.format.DateTimeParseException;
 public class Parser {
     private static FileReader taskReader;
 
-    protected static void readSave(File tmpFile) throws DukeExceptions {
+    public static void readSave(File tmpFile) throws DukeExceptions {
         try {
             taskReader = new FileReader(tmpFile);
             PrintStream oldOutput = System.out;
@@ -36,29 +43,29 @@ public class Parser {
         }
     }
 
-    protected static void parseAndAddToList(String input) throws DukeExceptions {
+    public static void parseAndAddToList(String input) throws DukeExceptions {
         int startingSize = TaskList.getThingsOnListSize();
         if (!input.isEmpty()) {
             UI.printLine();
-            if (input.equals(UI.Messages.BYE.toString())) {
+            if (input.equals(UI.getMessage("BYE"))) {
                 UI.stop();
                 UI.printGoodbye();
-            } else if (input.equals(UI.Messages.LIST.toString())) {
+            } else if (input.equals(UI.getMessage("LIST"))) {
                 TaskList.viewList();
             } else if (!input.isEmpty()) {
                 int spaceIndex = input.indexOf(" ");
-                if (spaceIndex != -1 && spaceIndex != input.length() - 1 && (input.contains(UI.Messages.DELETE.toString())
-                        || input.contains(UI.Messages.DONE.toString()))) {
+                if (spaceIndex != -1 && spaceIndex != input.length() - 1 && (input.contains(UI.getMessage("DELETE"))
+                        || input.contains(UI.getMessage("DONE")))) {
                     try {
                         int x = Integer.parseInt(input.substring(spaceIndex + 1)) - 1;
                         if (x + 1 > TaskList.getThingsOnListSize()) {
                             throw new DukeExceptions("    Woof? (This task doesn't exist?");
                         }
-                        if (input.substring(0, spaceIndex).equals(UI.Messages.DONE.toString())) {
+                        if (input.substring(0, spaceIndex).equals(UI.getMessage("DONE"))) {
                             System.out.println("    BARK BARK!!! (Task marked as done!!!)");
                             TaskList.markDone(x);
                             TaskList.viewList();
-                        } else if (input.substring(0, spaceIndex).equals(UI.Messages.DELETE.toString())) {
+                        } else if (input.substring(0, spaceIndex).equals(UI.getMessage("DELETE"))) {
                             System.out.println("    Bark bark: bork bark. (Removing task: " +
                                     TaskList.getThingsOnList().get(x) + ".");
                             TaskList.deleteFromList(x);
