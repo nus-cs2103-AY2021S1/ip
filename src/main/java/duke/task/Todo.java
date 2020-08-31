@@ -1,6 +1,5 @@
 package duke.task;
 
-import java.time.LocalDate;
 
 /**
  * <h1> Todo Task class </h1>
@@ -13,7 +12,7 @@ import java.time.LocalDate;
  * @version 1.0
  * @since 2020-08-25
  */
-public class Todo extends Task{
+public class Todo extends Task {
 
     protected Todo(String task) {
         super(task);

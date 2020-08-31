@@ -1,11 +1,11 @@
+import java.io.IOException;
+import java.util.Scanner;
+
 import duke.command.DukeException;
 import duke.command.Parser;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
-
-import java.io.IOException;
-import java.util.Scanner;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -30,6 +30,11 @@ public class Duke extends Application {
     private Storage storage;
     private TaskList taskList;
 
+    /**
+     * Instantiate a Duke Object with the filepath as that name
+     * of the file which the lists will be saved to.
+     *
+     */
     public Duke() {
         this.taskList = TaskList.createTaskList();
         this.storage = Storage.createDukeFile("Saved");

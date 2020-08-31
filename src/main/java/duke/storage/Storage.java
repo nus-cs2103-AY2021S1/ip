@@ -1,6 +1,5 @@
 package duke.storage;
 
-import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -23,15 +22,6 @@ public class Storage {
         this.fileName = fileName;
         this.recordArrayLst = new ArrayList<>();
     }
-
-
-//    public File retrieveFile(String filePath) throws IOException {
-//        File file = new File(filePath);
-//        if (!file.exists()) {
-//            file.createNewFile();
-//        }
-//        return file;
-//    }
 
     /**
      * Saves the current list of task to a textfile.
@@ -72,7 +62,7 @@ public class Storage {
      * @param index The index of the task in the list.
      */
     public void updateRecord(String record, int index) {
-        int i = index -1;
+        int i = index - 1;
         recordArrayLst.set(i, record);
     }
 
