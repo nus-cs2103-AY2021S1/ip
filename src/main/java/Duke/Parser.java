@@ -54,13 +54,12 @@ public class Parser {
                 return new addCommand(tasklist, task);
 
             } catch (DukeException e) {
-                duke.ui.showException("Must include description for todo");
+                return new exceptionCommand(tasklist,duke.ui.showException("Must include description for todo"));
             }
-            break;
 
         case "deadline":
             try {
-                if (!description.contains("/by")) {
+                if (!userInput.contains("/by")) {
                     throw new DukeException();
                 } else {
                     int index = userInput.indexOf("/by");
@@ -70,11 +69,11 @@ public class Parser {
                     return new addCommand(tasklist, deadline);
                 }
             } catch (DateTimeParseException e) {
-                duke.ui.showException("Please input date in the format: YYYY-MM-DD");
+                return new exceptionCommand(tasklist,duke.ui.showException("Please input date in the format: YYYY-MM-DD"));
             } catch (DukeException e) {
-                duke.ui.showException("deadline must include '/by'");
+                return new exceptionCommand(tasklist,duke.ui.showException("deadline must include '/by'"));
             }
-            break;
+
 
         case "event":
             try {
@@ -88,11 +87,11 @@ public class Parser {
                     return new addCommand(tasklist,event);
                 }
             } catch (DateTimeParseException e) {
-                duke.ui.showException("Please input date in the format: YYYY-MM-DD");
+                return new exceptionCommand(tasklist,duke.ui.showException("Please input date in the format: YYYY-MM-DD"));
             } catch (DukeException e) {
-                duke.ui.showException("event must include '/at'");
+                return new exceptionCommand(tasklist,duke.ui.showException("event must include '/at'"));
             }
-            break;
+
 
         case "delete":
             try {
@@ -105,13 +104,12 @@ public class Parser {
                 }
                 return new deleteCommand(tasklist, taskNumber);
             } catch (DukeArrayException e) {
-                System.out.println("Number cannot be longer than the list.");
+                return new exceptionCommand(tasklist,duke.ui.showException("Number cannot be longer than the list."));
             } catch (DukeException e) {
-                System.out.println("Must include number after 'delete'");
+                return new exceptionCommand(tasklist,duke.ui.showException("Must include number after 'delete'"));
             } catch (NumberFormatException e) {
-                System.out.println("Must include number after 'delete'");
+                return new exceptionCommand(tasklist,duke.ui.showException("Must include number after 'delete'"));
             }
-            break;
 
         case "done":
             try {
@@ -124,11 +122,10 @@ public class Parser {
                 }
                 return new doneCommand(tasklist, taskNumber);
             } catch (DukeArrayException e){
-                duke.ui.showException("Number cannot be longer than list.");
+                return new exceptionCommand(tasklist,duke.ui.showException("Number cannot be longer than list."));
             } catch (DukeException e) {
-                duke.ui.showException("Must include number after 'done'.");
+                return new exceptionCommand(tasklist,duke.ui.showException("Must include number after 'done'."));
             }
-            break;
 
         case "bye":
             return new endCommand(tasklist);
@@ -140,16 +137,13 @@ public class Parser {
                 }
                 return new findCommand(tasklist, description);
             } catch (DukeException e) {
-                duke.ui.showException("Must include name after 'find'.");
+                return new exceptionCommand(tasklist,duke.ui.showException("Must include name after 'find'."));
             }
-            break;
-
 
         default:
-            duke.ui.badInput();
+            return new Command(tasklist,duke.ui.badInput());
 
         }
-        return new Command(tasklist);
-    }
+     }
 
 }
