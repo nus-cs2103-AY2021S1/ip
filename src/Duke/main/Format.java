@@ -7,7 +7,7 @@ import Duke.task.Task;
 import Duke.task.Todo;
 
 /**
- * This class handles the final format
+ * This class handles the final Format object
  * that is printed out by Duke.
  *
  * @param <T>: T is the data type of the input.
@@ -25,7 +25,7 @@ public class Format<T> {
     }
 
     /**
-     * Returns the content in the format.
+     * Returns the content in the Format object.
      *
      * @return content.
      */

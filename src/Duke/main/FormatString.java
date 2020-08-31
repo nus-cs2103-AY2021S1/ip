@@ -26,6 +26,13 @@ public enum FormatString {
         }
     },
 
+    CROSS {
+        @Override
+        public String toString() {
+            return "\u2718";
+        }
+    },
+
     SPACE {
         @Override
         public String toString() {

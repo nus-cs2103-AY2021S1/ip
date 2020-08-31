@@ -4,10 +4,11 @@ import Duke.exception.DukeException;
 import Duke.main.FormatString;
 
 import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.io.FileReader;
 import java.io.File;
 import java.io.BufferedReader;
-import java.io.IOException;
 
 /**
  * This class is to edit the file in
@@ -59,6 +60,15 @@ public class EditFile {
             fileWriter.close();
         } catch (IOException e) {
             DukeException.ReadLineException();
+        }
+    }
+
+    public void clearFile() {
+        try {
+            PrintWriter printWriter = new PrintWriter(path);
+            printWriter.close();
+        } catch (IOException e) {
+            DukeException.FileException();
         }
     }
 

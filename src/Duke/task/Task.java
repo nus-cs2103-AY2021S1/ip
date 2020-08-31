@@ -1,5 +1,7 @@
 package Duke.task;
 
+import Duke.main.FormatString;
+
 /**
  * This class simulates the tasks
  * that the users give to Duke.
@@ -27,8 +29,17 @@ public class Task {
      */
     public String getStatusIcon() {
         return isDone
-                ? "[" + "\u2713" + "]"
-                : "[" + "\u2718" + "]";
+                ? "[" + FormatString.TICK.toString() + "]"
+                : "[" + FormatString.CROSS.toString() + "]";
+    }
+
+    /**
+     * Returns the description of a Task.
+     *
+     * @return The description of a Task.
+     */
+    public String getDescription() {
+        return this.description;
     }
 
     /**

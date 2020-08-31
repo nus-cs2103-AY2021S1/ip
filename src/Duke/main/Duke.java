@@ -14,7 +14,7 @@ public class Duke {
         Parser parser = new Parser();
         String clientInput = ui.conciseInput();
         while (!parser.isEnd(clientInput)) {
-            parser.run(clientInput);
+            Parser.run(clientInput);
             clientInput = ui.conciseInput();
         }
 

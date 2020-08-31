@@ -1,5 +1,6 @@
 package test.java;
 
+import Duke.main.Command;
 import Duke.main.Parser;
 import Duke.main.Time;
 import Duke.task.Deadline;
@@ -16,7 +17,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * other related methods are tested.
  */
 public class ParserTest {
-    //Warning: clear the strings in data/Duke.txt before testing.
 
     /**
      * Tests the "todo" command.
@@ -28,19 +28,15 @@ public class ParserTest {
         Task expected = new Todo("reading");
         boolean isExist = false;
 
-        int index = 1;
         int size = Parser.taskList.getTaskList().size();
         for (int i = 0; i < size; i++) {
             Task currentTask = Parser.taskList.getTaskList().get(i);
             if (currentTask.toString().equals(expected.toString())) {
-                index = i;
-                System.out.println(i);
-                System.out.println(index);
                 isExist = true;
             }
         }
 
-        Parser.run(String.format("delete %d", index + 1));
+        Parser.run(Command.CLEAR.toString());
         assertTrue(isExist);
     }
 
@@ -53,17 +49,15 @@ public class ParserTest {
         Task expected = new Deadline("eating", new Time("2020-08-30").toString());
         boolean isExist = false;
 
-        int index = 1;
         int size = Parser.taskList.getTaskList().size();
         for (int i = 0; i < size; i++) {
             Task currentTask = Parser.taskList.getTaskList().get(i);
             if (currentTask.toString().equals(expected.toString())) {
                 isExist = true;
-                index = i;
             }
         }
 
-        Parser.run(String.format("delete %d", index + 1));
+        Parser.run(Command.CLEAR.toString());
         assertTrue(isExist);
     }
 
@@ -76,17 +70,15 @@ public class ParserTest {
         Task expected = new Event("working", new Time("2020-08-30").toString());
         boolean isExist = false;
 
-        int index = 1;
         int size = Parser.taskList.getTaskList().size();
         for (int i = 0; i < size; i++) {
             Task currentTask = Parser.taskList.getTaskList().get(i);
             if (currentTask.toString().equals(expected.toString())) {
                 isExist = true;
-                index = i;
             }
         }
 
-        Parser.run(String.format("delete %d", index + 1));
+        Parser.run(Command.CLEAR.toString());
         assertTrue(isExist);
     }
 
@@ -95,6 +87,7 @@ public class ParserTest {
      */
     @Test
     public void runDeleteTest() {
+        Parser.run(Command.CLEAR.toString());
         Parser.run("event working /by 2020-08-30");
         Parser.run("delete 1");
         Task expected = new Event("working", new Time("2020-08-30").toString());
@@ -116,23 +109,22 @@ public class ParserTest {
      */
     @Test
     public void runDoneTest() {
+        Parser.run(Command.CLEAR.toString());
         Parser.run("event working /by 2020-08-30");
         Parser.run("done 1");
         Task expected = new Event("working", new Time("2020-08-30").toString());
         expected.setDone();
         boolean isDone = false;
 
-        int index = 1;
         int size = Parser.taskList.getTaskList().size();
         for (int i = 0; i < size; i++) {
             Task currentTask = Parser.taskList.getTaskList().get(i);
             if (currentTask.toString().equals(expected.toString())) {
                 isDone = true;
-                index = i;
             }
         }
 
-        Parser.run(String.format("delete %d", index + 1));
+        Parser.run(Command.CLEAR.toString());
         assertTrue(isDone);
     }
 

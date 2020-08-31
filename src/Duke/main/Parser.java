@@ -72,6 +72,8 @@ public class Parser {
                     delete();
                 } else if (extract[command].equals((Command.FIND.toString()))) {
                     find(extract[taskDetail]);
+                } else if (extract[command].equals((Command.CLEAR.toString()))) {
+                    clear();
                 } else {
                     identifier();
                 }
@@ -120,7 +122,8 @@ public class Parser {
 
                 String response =
                         Statement.DELETE.toString() +
-                                task + "\n" +
+                                task +
+                                FormatString.NEXTLINE.toString() +
                                 String.format
                                         (Statement.REPORT.toString(), taskList.getTaskList().size());
 
@@ -142,8 +145,33 @@ public class Parser {
         taskList = new TaskList<>();
         ReadFile readFile = new ReadFile(Directory.FILEDIRECTORY.toString());
         readFile.matchContent(content);
+
+        Response response = new Response(
+                Statement.FIND.toString() +
+                taskList.toString()
+        );
+
         System.out.println(
-                new Format<>(taskList)
+                new Format<>(response)
+        );
+
+    }
+
+    /**
+     * Clears all records in the file from the
+     * directory in Directory class.
+     */
+    public static void clear() {
+        EditFile deleteAll = new EditFile(Directory.FILEDIRECTORY.toString());
+        deleteAll.clearFile();
+        taskList = new TaskList<>();
+
+        Response response = new Response(
+                Statement.CLEAR.toString()
+        );
+
+        System.out.println(
+                new Format<>(response)
         );
     }
 
@@ -160,7 +188,6 @@ public class Parser {
      *         element is the task detail,
      *         and the third element is the
      *         task time.
-     *
      */
     private static String[] extract(String description) {
         int len = description.length();

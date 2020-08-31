@@ -36,14 +36,14 @@ public class TaskList<T> {
 
     @Override
     public String toString() {
-        String results = "";
+        StringBuilder results = new StringBuilder();
         int size = this.taskList.size();
         if (size != 0) {
             for (int i = 1; i < size; i++) {
-                results += "    " + i + ". " + taskList.get(i - 1) + "\n";
+                results.append("    ").append(i).append(". ").append(taskList.get(i - 1)).append("\n");
             }
-            results += "    " + size + ". " + taskList.get(size - 1);
+            results.append("    ").append(size).append(". ").append(taskList.get(size - 1));
         }
-        return results;
+        return results.toString();
     }
 }

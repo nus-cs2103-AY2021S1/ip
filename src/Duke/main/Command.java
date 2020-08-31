@@ -60,4 +60,11 @@ public enum Command {
             return "find";
         }
     },
+
+    CLEAR {
+        @Override
+        public String toString() {
+            return "clear";
+        }
+    }
 }

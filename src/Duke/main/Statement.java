@@ -48,8 +48,14 @@ public enum Statement {
     FIND {
         @Override
         public String toString() {
-            return "    Here are the matching tasks in your list\n" +
-                    "      ";
+            return "    Here are the matching tasks in your list\n";
+        }
+    },
+
+    CLEAR {
+        @Override
+        public String toString() {
+            return "    Your tasks have been cleared.\n";
         }
     },
 

@@ -26,10 +26,6 @@ public class DukeException {
         System.out.println(new Format<>(Exceptions.INPUTFORMATEXCEPTION.toString()));
     }
 
-    public static void timeMissingException() {
-        System.out.println(new Format<>(Exceptions.NOTIMEEXCEPTION.toString()));
-    }
-
     public static void FileException() {
         System.out.println(new Format<>(Exceptions.FILEEXCEPTION.toString()));
     }
