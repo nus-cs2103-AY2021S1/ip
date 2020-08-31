@@ -6,7 +6,7 @@ package dukeclass;
  */
 public class Todo extends Task{
 
-    public static String icon = "T";
+    private static final String ICON = "T";
 
     public Todo(String taskString) {
         super(taskString);
@@ -20,7 +20,7 @@ public class Todo extends Task{
     @Override
     public String toString() {
         String statusIcon = (status)?"✓":"✗";
-        return "[" + icon + "]" + "[" + statusIcon + "] " + this.taskString;
+        return "[" + ICON + "]" + "[" + statusIcon + "] " + this.taskString;
     }
 
     @Override

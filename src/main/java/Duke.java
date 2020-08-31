@@ -26,14 +26,14 @@ import java.util.Scanner;
 public class Duke {
 
     public static void startDuke() {
-        TaskList inputList = new TaskList();
+        TaskList taskList = new TaskList();
 
         File f = Storage.createFile();
 
         System.out.println(Ui.welcomeMessage());
 
         try {
-            Storage.readFileContents(f, inputList);
+            Storage.readFromFile(f, taskList);
         } catch (FileNotFoundException e) {
             System.out.println("File not found");
         }
@@ -42,7 +42,7 @@ public class Duke {
 
 
         try {
-            inputList = Parser.parseCommands(inputList);
+            Parser.parseCommands(taskList);
 
         } catch (Exception e) {
             System.out.println(Ui.unknownInputErrorMessage(e));
@@ -50,7 +50,7 @@ public class Duke {
 
 
         try {
-            Storage.writeToFile(f, inputList);
+            Storage.writeToFile(f, taskList);
         } catch (IOException e) {
             System.out.println("Something went wrong: " + e.getMessage());
         }

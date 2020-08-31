@@ -1,6 +1,5 @@
 package dukeclass;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -11,7 +10,7 @@ import java.time.format.DateTimeFormatter;
  */
 public class Deadline extends Task{
 
-    public static String icon = "D";
+    private static final String ICON = "D";
     private String preposition;
     private LocalDateTime dateTime;
 
@@ -32,7 +31,7 @@ public class Deadline extends Task{
     @Override
     public String toString() {
         String statusIcon = (status)?"✓":"✗";
-        return "[" + icon + "]" + "[" + statusIcon + "] "
+        return "[" + ICON + "]" + "[" + statusIcon + "] "
                 + this.taskString + " (" + this.preposition + ": "
                 + dateTime.format(DateTimeFormatter.ofPattern("d MMM yyyy")) + ")";
     }

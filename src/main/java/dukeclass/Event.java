@@ -10,7 +10,7 @@ import java.time.format.DateTimeFormatter;
  */
 public class Event extends Task {
 
-    public static String icon = "E";
+    public static final String ICON = "E";
     private String preposition;
     private LocalDateTime dateTime;
 
@@ -30,7 +30,7 @@ public class Event extends Task {
     @Override
     public String toString() {
         String statusIcon = (status)?"✓":"✗";
-        return "[" + icon + "]" + "[" + statusIcon + "] "
+        return "[" + ICON + "]" + "[" + statusIcon + "] "
                 + this.taskString + " (" + this.preposition + ": "
                 + dateTime.format(DateTimeFormatter.ofPattern("d MMM yyyy")) + ")";
     }

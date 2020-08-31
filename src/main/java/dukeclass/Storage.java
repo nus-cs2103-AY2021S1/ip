@@ -1,10 +1,11 @@
 package dukeclass;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
+
+import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
+
 import java.util.Scanner;
 
 
@@ -46,10 +47,8 @@ public class Storage {
      * @return Task of a specific type e.g. todo, deadline.
      * @throws InvalidInputException  If the data is not correctly formatted.
      */
-    public static Task databaseParser(String input) throws InvalidInputException{
+    public static Task parseDatabase(String input) throws InvalidInputException{
         String[] splitString = input.split("//");
-
-        int splitStringLength = splitString.length;
 
         if (splitString[0].equals("todo")) {
 
@@ -106,11 +105,11 @@ public class Storage {
      * @return TaskList of task after being parsed.
      * @throws FileNotFoundException  If the directory cannot be found/File could not be created.
      */
-    public static TaskList readFileContents(File f, TaskList list) throws FileNotFoundException {
+    public static TaskList readFromFile(File f, TaskList list) throws FileNotFoundException {
         Scanner s = new Scanner(f); // create a Scanner using the File as the source
         while (s.hasNext()) {
             try {
-                list.add(Storage.databaseParser(s.nextLine()));
+                list.add(Storage.parseDatabase(s.nextLine()));
             } catch (Exception e) {
                 e.printStackTrace();
                 System.out.println("ERROR IN DATABASE!!!!!!!!!!!!!!!!!!!!!");

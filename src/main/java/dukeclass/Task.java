@@ -6,7 +6,6 @@ package dukeclass;
  */
 public abstract class Task {
 
-    public static String icon;
     protected String taskString;
     protected Boolean status;
 
