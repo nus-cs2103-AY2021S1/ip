@@ -1,6 +1,11 @@
 package dd.parser;
 
-import dd.commands.*;
+import dd.commands.AddCommand;
+import dd.commands.Command;
+import dd.commands.DeleteCommand;
+import dd.commands.DoneCommand;
+import dd.commands.ExitCommand;
+import dd.commands.ListCommand;
 import dd.exception.DukeException;
 import dd.ui.Ui;
 

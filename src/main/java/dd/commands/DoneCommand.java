@@ -31,11 +31,12 @@ public class DoneCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, DataStorage ds) throws DukeException {
-        int taskNum = 0;
+        int taskNum;
 
         try {
             taskNum = Integer.parseInt(item);
         } catch (NumberFormatException ignored) {
+            taskNum = 0;
         }
 
         if (taskNum > 0 && taskNum <= tasks.getTaskSize()) {

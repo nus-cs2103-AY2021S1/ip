@@ -1,8 +1,8 @@
 package dd.ui;
 
-import dd.tasks.Task;
-
 import java.util.Scanner;
+
+import dd.tasks.Task;
 
 /**
  * A Ui deals with interaction with the user and prints out
