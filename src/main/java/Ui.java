@@ -12,7 +12,7 @@ public class Ui {
     /**
      * Constructs a ui object to handle user inputs.
      */
-    public Ui(){
+    public Ui() {
         scanner = new Scanner(System.in);
         parser = new Parser();
     }
@@ -22,7 +22,7 @@ public class Ui {
      * Currently, the designing of deal() function is not in line with our 2103 coding
      * standards, I will continue to work on it :).
      */
-    public void deal(){
+    public void deal() {
         for (int i = 0; i < 100000; i++) {
 
             String input = this.scanner.nextLine();
@@ -42,7 +42,7 @@ public class Ui {
 
                             if (parser.isTodo(input)) {
 
-                                if(parser.isValidTodo(input)) {
+                                if (parser.isValidTodo(input)) {
 
                                     description = input.substring(Parser.TODO_VALIDATION.length(),
                                             Parser.TODO_VALIDATION.length() + 1);
@@ -61,7 +61,7 @@ public class Ui {
                                                         "OOPS!!! The description of a todo cannot be empty."));
                                     }
 
-                                }else{
+                                } else {
                                     System.out.println(
                                             new DukeException(
                                                     "The description of a todo cannot be empty lah."));
@@ -74,14 +74,14 @@ public class Ui {
 
                                 if (parser.isEvent(input)) {
 
-                                    if(parser.isValidEvent(input)) {
+                                    if (parser.isValidEvent(input)) {
 
                                         description = input.substring(Parser.EVT_VALIDATION.length(),
                                                 Parser.EVT_VALIDATION.length() + 1);
 
                                         if (!parser.isEmptyDescription(description)) {
 
-                                            byOrAt =new DateAndTime(dateAndTime);
+                                            byOrAt = new DateAndTime(dateAndTime);
 
                                             correctedInput = input.substring(Parser.EVT_VALIDATION.length());
                                             TaskList.write(correctedInput, Parser.EVT, byOrAt);
@@ -91,14 +91,14 @@ public class Ui {
                                             System.out.println(new DukeException(
                                                     "The description of an event cannot be empty lah."));
                                         }
-                                    }else{
+                                    } else {
                                         System.out.println(new DukeException(
                                                 "The description of an event cannot be empty lah."));
                                     }
 
-                                }else {
+                                } else {
 
-                                    if(parser.isValidDeadline(input)) {
+                                    if (parser.isValidDeadline(input)) {
 
                                         description = input.substring(Parser.DDL_VALIDATION.length(),
                                                 Parser.DDL_VALIDATION.length() + 1);
@@ -117,7 +117,7 @@ public class Ui {
                                                             "The description of a deadline cannot be empty lah.")
                                             );
                                         }
-                                    }else{
+                                    } else {
                                         System.out.println(
                                                 new DukeException(
                                                         "The description of a deadline cannot be empty lah.")
@@ -135,7 +135,7 @@ public class Ui {
 
                     } else {
 
-                        if(parser.isDone(input)) {
+                        if (parser.isDone(input)) {
 
                             int ref = Integer.parseInt(Character.toString(
                                     input.charAt(Parser.DONE_VALID.length() - 1))) - 1;
@@ -159,7 +159,7 @@ public class Ui {
 
                             }
 
-                        }else{
+                        } else {
 
                             int ref = Integer.parseInt(Character.toString(
                                     input.charAt(Parser.DEL_VALID.length() - 1))) - 1;
@@ -170,11 +170,11 @@ public class Ui {
                         }
 
                     }
-                }else {
+                } else {
 
-                    if(!parser.isFind(input)) {
+                    if (!parser.isFind(input)) {
                         TaskList.read();
-                    }else{
+                    } else {
                         TaskList.find(input.substring(Parser.FIND.length() + 1));
                     }
                 }

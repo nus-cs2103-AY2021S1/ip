@@ -13,16 +13,17 @@ public class DateAndTime {
     /**
      * Construct an date and time object for tasks without specified time.
      */
-    public DateAndTime(){
+    public DateAndTime() {
         this.date = null;
         this.time = null;
     }
 
     /**
      * Construct a date and time object for storage by Duke for tasks with specified timing.
+     *
      * @param dateAndTime A string passed to Duke by the user containing time information
      */
-    public DateAndTime(String dateAndTime){
+    public DateAndTime(String dateAndTime) {
 
         String date = dateAndTime.substring(0, "2020-02-02".length());
         String time = dateAndTime.substring("2020-02-02".length() + 1);
@@ -34,13 +35,14 @@ public class DateAndTime {
 
     /**
      * Overridden toString() method to print out the desired format of date and time.
+     *
      * @return A string that represents the date and time stored
      */
     @Override
-    public String toString(){
+    public String toString() {
         return date.getYear() + " " +
                 date.getMonth() + " " +
-                date.getDayOfMonth() + " "  +
+                date.getDayOfMonth() + " " +
                 date.getDayOfWeek() + " " +
                 time.toString() + "hr";
     }

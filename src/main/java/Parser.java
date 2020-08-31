@@ -23,53 +23,54 @@ public class Parser {
     /**
      * Constructs a Parser object to tackle the user inputs/commands.
      */
-    public Parser(){}
+    public Parser() {
+    }
 
-    public boolean isBye(String input){
+    public boolean isBye(String input) {
         return input.equals(BYE);
     }
 
-    public boolean isList(String input){
+    public boolean isList(String input) {
         return input.equals(LIST);
     }
 
-    public boolean isDone(String input){
+    public boolean isDone(String input) {
         return input.contains(DONE);
     }
 
-    public boolean isDelete(String input){
+    public boolean isDelete(String input) {
         return input.contains(DEL);
     }
 
-    public boolean isTodo(String input){
+    public boolean isTodo(String input) {
         return input.contains(TODO);
     }
 
-    public boolean isValidTodo(String input){
+    public boolean isValidTodo(String input) {
         return input.length() > TODO_VALIDATION.length();
     }
 
-    public boolean isEvent(String input){
+    public boolean isEvent(String input) {
         return input.contains(EVT);
     }
 
-    public boolean isValidEvent(String input){
+    public boolean isValidEvent(String input) {
         return input.length() > EVT_VALIDATION.length();
     }
 
-    public boolean isDeadline(String input){
+    public boolean isDeadline(String input) {
         return input.contains(DDL);
     }
 
-    public boolean isValidDeadline(String input){
+    public boolean isValidDeadline(String input) {
         return input.length() > DDL_VALIDATION.length();
     }
 
-    public boolean isEmptyDescription(String input){
+    public boolean isEmptyDescription(String input) {
         return input.equals(EMPTY);
     }
 
-    public boolean isFind(String input){
+    public boolean isFind(String input) {
         return input.contains(FIND);
     }
 

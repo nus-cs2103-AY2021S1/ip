@@ -24,23 +24,23 @@ public class Storage {
         try {
             File storage = new File(home);
 
-            if(!directoryExists){
+            if (!directoryExists) {
                 System.out.println("I am sorry, but the folder does not exist yet.\n" +
                         "Let me create one for you now :).");
 
-                if(storage.mkdir()){
+                if (storage.mkdir()) {
                     System.out.println("Folder is created");
-                }else{
+                } else {
                     System.out.println("Folder cannot be created");
                 }
             }
 
             File myFile = path.toFile();
 
-            if(!myFile.createNewFile()){
+            if (!myFile.createNewFile()) {
                 Scanner sc = new Scanner(myFile);
 
-                while (sc.hasNextLine()){
+                while (sc.hasNextLine()) {
                     String item = sc.nextLine();
                     System.out.println(item);
 
@@ -48,12 +48,12 @@ public class Storage {
                 sc.close();
                 System.out.println("All items successfully shown");
 
-            }else{
+            } else {
                 System.out.println("I am sorry, but the file does not exist yet.\n" +
                         "Please create one.");
             }
 
-        }catch (IOException e){
+        } catch (IOException e) {
 
             e.printStackTrace();
             //throw e;
@@ -63,13 +63,14 @@ public class Storage {
 
     /**
      * Writes(stores) user data to hard disk.
+     *
      * @param newTaskStorage the array list to store all tasks of the user
      */
-    public static void write(ArrayList<Task> newTaskStorage){
-        try{
+    public static void write(ArrayList<Task> newTaskStorage) {
+        try {
 
             FileWriter fw = new FileWriter(path.toFile());
-            for(Task task : newTaskStorage){
+            for (Task task : newTaskStorage) {
                 String[] formatter = task.toString().split(" ");
                 fw.write(formatter[0] + " " +
                         formatter[1] + " " +
@@ -78,7 +79,7 @@ public class Storage {
 
             fw.close();
 
-        }catch (IOException e){
+        } catch (IOException e) {
 
             e.printStackTrace();
 
