@@ -1,8 +1,8 @@
+import java.util.ArrayList;
+
 /**
  * Encapsulates a list that stores Tasks
  */
-
-import java.util.ArrayList;
 
 public class TaskList {
     protected ArrayList<Task> list;
@@ -41,6 +41,15 @@ public class TaskList {
     }
 
     /**
+     * Provides the actual list that is storing the Tasks
+     *
+     * @return the list
+     */
+    protected ArrayList<Task> get() {
+        return this.list;
+    }
+
+    /**
      * Returns the index of a specific Task
      *
      * @param task is the Task of the index to be retrieved
@@ -68,12 +77,4 @@ public class TaskList {
         this.list.remove(task);
     }
 
-    /**
-     * Provides the actual list that is storing the Tasks
-     *
-     * @return the list
-     */
-    protected ArrayList<Task> get() {
-        return this.list;
-    }
 }

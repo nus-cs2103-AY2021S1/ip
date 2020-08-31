@@ -1,10 +1,15 @@
-public class WrongFormatException extends DukeException{
+public class WrongFormatException extends DukeException {
     private String type;
 
     public WrongFormatException(String type) {
         this.type = type;
     }
 
+    /**
+     * Gives the String representation of the Exception
+     *
+     * @return a String
+     */
     public String toString() {
         if (type.equals("todo")) {
             return "____________________________________________________________"
@@ -15,13 +20,15 @@ public class WrongFormatException extends DukeException{
         } else if (type.equals("deadline")) {
             return "____________________________________________________________"
                     + "\n"
-                    + " ☹ OOPS!!! Proper input format required! Proper format: deadline{space}{description}{space}/by{space}{YYYY-MM-DD} ."
+                    + " ☹ OOPS!!! Proper input format required!"
+                    + " Proper format: deadline{space}{description}{space}/by{space}{YYYY-MM-DD} ."
                     + "\n"
                     + "____________________________________________________________";
         } else if (type.equals("event")) {
             return "____________________________________________________________"
                     + "\n"
-                    + " ☹ OOPS!!! Proper input format required! Proper format: deadline{space}{description}{space}/at{space}{time-slot}."
+                    + " ☹ OOPS!!! Proper input format required!"
+                    + " Proper format: deadline{space}{description}{space}/at{space}{time-slot}."
                     + "\n"
                     + "____________________________________________________________";
         } else {

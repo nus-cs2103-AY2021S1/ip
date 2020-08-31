@@ -5,12 +5,12 @@
 
 public class Ui {
 
-    protected final String LINE = "____________________________________________________________";
+    private static final String LINE = "____________________________________________________________";
 
-    protected final String GREETING = "____________________________________________________________\n" +
-            "Hello! I'm Duke\n" +
-            "What can I do for you?\n" +
-            "____________________________________________________________";
+    private static final String GREETING = "____________________________________________________________\n"
+            + "Hello! I'm Duke\n"
+            + "What can I do for you?\n"
+            + "____________________________________________________________";
 
     /**
      * Prints out the greeting message
@@ -80,4 +80,5 @@ public class Ui {
     protected void findMsg() {
         System.out.println(" Here are the matching tasks in your list:");
     }
+
 }

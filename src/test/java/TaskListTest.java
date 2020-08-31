@@ -1,12 +1,12 @@
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 public class TaskListTest {
     @Test
-    public void lengthTest(){
+    public void lengthTest() {
         TaskList list = new TaskList();
         Todo todo = new Todo("Run");
         Deadline deadline = new Deadline("Return book", LocalDate.parse("2019-08-02"));
@@ -18,7 +18,7 @@ public class TaskListTest {
     }
 
     @Test
-    public void indexTest(){
+    public void indexTest() {
         TaskList list = new TaskList();
         Todo todo = new Todo("Run");
         Deadline deadline = new Deadline("Return book", LocalDate.parse("2019-08-02"));
@@ -30,7 +30,7 @@ public class TaskListTest {
     }
 
     @Test
-    public void removeTest(){
+    public void removeTest() {
         TaskList list = new TaskList();
         Todo todo = new Todo("Run");
         Deadline deadline = new Deadline("Return book", LocalDate.parse("2019-08-02"));

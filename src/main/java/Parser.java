@@ -1,10 +1,10 @@
+import java.time.LocalDate;
+import java.util.ArrayList;
+
 /**
  * Encapsulates a Parser
  * Deals with making sense of the user command
  */
-
-import java.time.LocalDate;
-import java.util.ArrayList;
 
 public class Parser {
 
