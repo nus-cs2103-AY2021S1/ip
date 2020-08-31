@@ -18,10 +18,10 @@ public class TaskList {
 
     /**
      * Generates an Task list based on the retrieved file of the user's saved tasks.
-     * @param file
+     * @param file The file that the task list is to be generated from.
      * @throws FileNotFoundException If the file does not exist.
      */
-    public static void generateList(File file) throws FileNotFoundException {
+    public void generateList(File file) throws FileNotFoundException {
         Scanner scanner = new Scanner(file);
         while (scanner.hasNext()) {
             String nextLine = scanner.nextLine();
@@ -31,18 +31,10 @@ public class TaskList {
     }
 
     /**
-     * Generates a list of tasks.
-     * @return A list of the tasks.
-     */
-    public static List<Task> getList() {
-        return taskList;
-    }
-
-    /**
      * Adds new tasks to the list of tasks.
-     * @param task
+     * @param task to be added into the task list.
      */
-    public static void add(Task task) {
+    public void add(Task task) {
         taskList.add(task);
     }
 
@@ -50,31 +42,44 @@ public class TaskList {
      * Returns the number of tasks in the list.
      * @return Size of the task list.
      */
-    public static int size() {
+    public int size() {
         return taskList.size();
     }
 
     /**
      * Returns the task at the specified index.
-     * @param index
+     * @param index of the task to retrieve
      * @return Task at the specified index of the TaskList.
      */
-    public static Task get(int index) {
+    public Task getTask(int index) {
         return taskList.get(index);
     }
 
-    public static void delete(int index) {
+    /**
+     * Deletes the task at the specific index.
+     * @param index of the task to delete.
+     */
+    public void delete(int index) {
         taskList.remove(index);
     }
 
-    public static void markDone(int index) {
+    /**
+     * Marks the task as done in the specified index.
+     * @param index of the task that is done.
+     */
+    public void markDone(int index) {
         taskList.set(index, taskList.get(index).markDone());
     }
 
-    public static void flush() {
+    /**
+     * Removes all task in the task list.
+     */
+    public void flush() {
         taskList.clear();
     }
 
+    //Method that converts the saved tasks in the file which is in String format
+    //into Task objects in the task list.
     private static Task convertToTask(String line) {
         if (line.startsWith("[T]", 2)) {
             //Is a todo task
@@ -92,16 +97,17 @@ public class TaskList {
             String[] split = parts[1].split("\\(at:");
             String desc = split[0];
             String timeInfo = split[1].split("\\)")[0];
+
             if (line.contains("[✘]")) {
                 String[] dateTime = timeInfo.trim().split(", ");
                 String date = dateTime[1];
                 String time = dateTime[2];
-                return new Events(desc, LocalDate.parse(date, myDateFormat), LocalTime.parse(time, myTimeFormat));
+                return new Event(desc, LocalDate.parse(date, myDateFormat), LocalTime.parse(time, myTimeFormat));
             } else {
                 String[] dateTime = timeInfo.trim().split(", ");
                 String date = dateTime[1];
                 String time = dateTime[2];
-                return new Events(desc, LocalDate.parse(date, myDateFormat), LocalTime.parse(time, myTimeFormat));
+                return new Event(desc, LocalDate.parse(date, myDateFormat), LocalTime.parse(time, myTimeFormat));
             }
         } else {
             DateTimeFormatter myDateFormat = DateTimeFormatter.ofPattern("d MMM yyyy");
@@ -111,16 +117,17 @@ public class TaskList {
             String[] split = parts[1].split("\\(by:");
             String desc = split[0];
             String timeInfo = split[1].split("\\)")[0];
+
             if (line.contains("[✘]")) {
                 String[] dateTime = timeInfo.trim().split(", ");
                 String date = dateTime[1];
                 String time = dateTime[2];
-                return new Deadlines(desc, LocalDate.parse(date, myDateFormat), LocalTime.parse(time, myTimeFormat));
+                return new Deadline(desc, LocalDate.parse(date, myDateFormat), LocalTime.parse(time, myTimeFormat));
             } else {
                 String[] dateTime = timeInfo.trim().split(", ");
                 String date = dateTime[1];
                 String time = dateTime[2];
-                return new Deadlines(desc, LocalDate.parse(date, myDateFormat), LocalTime.parse(time, myTimeFormat)).markDone();
+                return new Deadline(desc, LocalDate.parse(date, myDateFormat), LocalTime.parse(time, myTimeFormat)).markDone();
             }
         }
     }

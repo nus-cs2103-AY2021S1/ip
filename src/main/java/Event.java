@@ -6,17 +6,17 @@ import java.time.format.DateTimeFormatter;
 /**
  * Represents that represents an event of a start date and time.
  */
-public class Events extends Task {
+public class Event extends Task {
     private LocalDate startDate;
     private LocalTime startTime;
 
-    public Events(String description, LocalDate startDate, LocalTime startTime) {
+    public Event(String description, LocalDate startDate, LocalTime startTime) {
         super(description);
         this.startDate = startDate;
         this.startTime = startTime;
     }
 
-    private Events(String description, LocalDate startDate, LocalTime startTime, boolean bool) {
+    private Event(String description, LocalDate startDate, LocalTime startTime, boolean bool) {
         super(description, bool);
         this.startDate = startDate;
         this.startTime = startTime;
@@ -27,16 +27,20 @@ public class Events extends Task {
      * @return Completed Event task.
      */
     @Override
-    public Events markDone() {
-        return new Events(this.description, this.startDate, this.startTime, true);
+    public Event markDone() {
+        return new Event(this.description, this.startDate, this.startTime, true);
     }
 
     @Override
     public String toString() {
+        //Format for the date
         DateTimeFormatter myDateFormat = DateTimeFormatter.ofPattern("E, d MMM yyyy");
+        //Format for the time
         DateTimeFormatter myTimeFormat = DateTimeFormatter.ofPattern("h:mm a");
+
         String formattedDate = this.startDate.format(myDateFormat);
         String formattedTime =this.startTime.format(myTimeFormat);
+
         if (this.isComplete) {
             return "[E][\u2713] " + this.description + "(at:" + formattedDate + ", " + formattedTime + ")";
         } else {

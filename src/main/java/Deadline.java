@@ -6,17 +6,17 @@ import java.time.format.DateTimeFormatter;
 /**
  * Represents a deadline with a due date and time.
  */
-public class Deadlines extends Task {
+public class Deadline extends Task {
     private LocalDate dueDate;
     private LocalTime dueTime;
 
-    public Deadlines(String description, LocalDate dueDate, LocalTime dueTime) {
+    public Deadline(String description, LocalDate dueDate, LocalTime dueTime) {
         super(description);
         this.dueDate = dueDate;
         this.dueTime = dueTime;
     }
 
-    private Deadlines(String description, LocalDate dueDate, LocalTime dueTime, boolean bool) {
+    private Deadline(String description, LocalDate dueDate, LocalTime dueTime, boolean bool) {
         super(description, bool);
         this.dueDate = dueDate;
         this.dueTime = dueTime;
@@ -27,16 +27,20 @@ public class Deadlines extends Task {
      * @return Completed Deadline task.
      */
     @Override
-    public Deadlines markDone() {
-        return new Deadlines(this.description, this.dueDate, this.dueTime, true);
+    public Deadline markDone() {
+        return new Deadline(this.description, this.dueDate, this.dueTime, true);
     }
 
     @Override
     public String toString() {
+        //Format for the date
         DateTimeFormatter myDateFormat = DateTimeFormatter.ofPattern("E, d MMM yyyy");
+        //Format for the time
         DateTimeFormatter myTimeFormat = DateTimeFormatter.ofPattern("h:mm a");
+
         String formattedDate = this.dueDate.format(myDateFormat);
         String formattedTime =this.dueTime.format(myTimeFormat);
+
         if (this.isComplete) {
             return "[D][\u2713] " + this.description + "(by:" + formattedDate + ", " +  formattedTime + ")";
         } else {
