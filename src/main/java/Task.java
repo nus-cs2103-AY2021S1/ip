@@ -1,6 +1,6 @@
 public class Task {
 
-    private boolean completed;
+    private boolean isCompleted;
     public String name;
 
     /**
@@ -9,7 +9,7 @@ public class Task {
      */
     public Task(String name) {
         this.name = name;
-        this.completed = false;
+        this.isCompleted = false;
     }
 
     /**
@@ -17,14 +17,14 @@ public class Task {
      * @return boolean
      */
     public String getStatusIcon() {
-        return (completed ? "\u2713" : "\u2718"); //return tick or X symbols
+        return (isCompleted ? "\u2713" : "\u2718"); //return tick or X symbols
     }
 
     /**
      * Mark the task as completed
      */
     public void markAsDone() {
-        this.completed = true;
+        this.isCompleted = true;
     }
 
     /**
@@ -36,7 +36,7 @@ public class Task {
     }
 
     public int completedAsNumber() {
-        return this.completed ? 1 : 0;
+        return this.isCompleted ? 1 : 0;
     }
 
     /**
