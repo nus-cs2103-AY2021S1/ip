@@ -1,6 +1,14 @@
 package duke.parser;
 
-import duke.command.*;
+import duke.command.Command;
+import duke.command.DeadlineCommand;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.EventCommand;
+import duke.command.ExitCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
+import duke.command.ToDoCommand;
 
 import duke.exception.DukeException;
 import duke.exception.InadequateCommandException;
@@ -31,7 +39,7 @@ public class Parser {
         
         // command: delete [index]
         if (splitted[0].equals(DeleteCommand.COMMAND)) {
-            if (splitted.length == 0) {
+            if (splitted.length == 1) {
                 throw new InvalidIndexException();
             }
             return new DeleteCommand(splitted[1]);
@@ -39,7 +47,7 @@ public class Parser {
         
         // command: done [index]
         if (splitted[0].equals(DoneCommand.COMMAND)) {
-            if (splitted.length == 0) {
+            if (splitted.length == 1) {
                 throw new InvalidIndexException();
             }
             return new DoneCommand(splitted[1]);
@@ -47,7 +55,7 @@ public class Parser {
         
         //command: find [date]
         if (splitted[0].equals(FindCommand.COMMAND)) {
-            if (splitted.length == 0) {
+            if (splitted.length == 1) {
                 throw new DukeException("Missing date");
             } else {
                 return new FindCommand(splitted[1]);
@@ -62,10 +70,11 @@ public class Parser {
             return new ToDoCommand(splitted[1]);
         }
         
-        // command: deadline [description] /by [time] 
+        // command: deadline [description] /by [time]
         // or: event [description] /at [time]
         if (splitted[0].equals(DeadlineCommand.COMMAND) || splitted[0].equals(EventCommand.COMMAND)) {
-            String type, timeSpecifier;
+            String type;
+            String timeSpecifier;
             boolean isDeadline;
             if (splitted[0].equals(DeadlineCommand.COMMAND)) {
                 type = "deadline";
@@ -83,9 +92,9 @@ public class Parser {
                 String content = splitted[1];
                 String[] split2Test = content.split("\\s+");
                 int timeIdx = content.indexOf(" " + timeSpecifier);
-                if (split2Test.length == 0 ||
-                        (split2Test.length == 1 &&
-                                (split2Test[0].equals(timeSpecifier) || split2Test[0].equals(""))
+                if (split2Test.length == 0 || (
+                        split2Test.length == 1
+                                && (split2Test[0].equals(timeSpecifier) || split2Test[0].equals(""))
                         )
                 ) {
                     String[] missing = {"description", "time"};
