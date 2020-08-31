@@ -4,7 +4,7 @@ package duke.task;
  * Represents an abstract Task object. Inherited by Deadline, Event and Todo classes.
  */
 public abstract class Task {
-    protected final String description;
+    protected String description;
     protected Boolean isDone;
 
     private enum TaskType {

@@ -39,8 +39,8 @@ public class DeadlineTest {
     @Test
     public void getParsedTaskTest() {
         Deadline deadline = new Deadline("Eat Apple", "2020-12-12", true);
-        String expectedParsedTask = "deadline Eat Apple /by 2020-12-12" + System.lineSeparator() + 
-                "true" + System.lineSeparator();
+        String expectedParsedTask = "deadline Eat Apple /by 2020-12-12" + System.lineSeparator()
+                + "true" + System.lineSeparator();
         assertEquals(expectedParsedTask, deadline.getParsedTask());
     }
 
@@ -57,4 +57,5 @@ public class DeadlineTest {
         Deadline deadline2 = new Deadline("Eat Apple", "2020-12-12", true);
         assertTrue(deadline1.equals(deadline2));
     }
+    
 }

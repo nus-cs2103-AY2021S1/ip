@@ -12,10 +12,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class TaskListTest {
     
     public enum SampleTask {
-        EVENT("event Pool Party /at Matt's House", false, 
-                new Event("Pool Party", "Matt's House", false)),
         DEADLINE("deadline Math Test /by 2020-08-31", true, 
                 new Deadline("Math Test", "2020-08-31", true)),
+        EVENT("event Pool Party /at Matt's House", false,
+                new Event("Pool Party", "Matt's House", false)),
         TODO("todo Write English Essay", false, 
                 new Todo("Write English Essay", false));
         

@@ -42,9 +42,9 @@ public class Event extends Task {
             return true;
         } else if (other instanceof Event) {
             Event otherEvent = (Event) other;
-            return this.description.equals(otherEvent.description) &&
-                    this.isDone == otherEvent.isDone &&
-                    this.at.equals(otherEvent.at);
+            return this.description.equals(otherEvent.description)
+                    && this.isDone == otherEvent.isDone
+                    && this.at.equals(otherEvent.at);
         } else {
             return false;
         }

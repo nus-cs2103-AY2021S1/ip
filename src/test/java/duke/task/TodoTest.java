@@ -6,9 +6,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class TodoTest {
+    
     @Test
     public void constructorTest() {
-
         // Test with correct arguments
         Todo todo1 = new Todo("Eat Apple", false);
         Todo todo2 = new Todo("Write paper",  true);
@@ -22,8 +22,8 @@ public class TodoTest {
     @Test
     public void getParsedTaskTest() {
         Todo todo = new Todo("Eat Apple", true);
-        String expectedParsedTask = "todo Eat Apple" + System.lineSeparator() +
-                "true" + System.lineSeparator();
+        String expectedParsedTask = "todo Eat Apple" + System.lineSeparator()
+                + "true" + System.lineSeparator();
         assertEquals(expectedParsedTask, todo.getParsedTask());
     }
 
