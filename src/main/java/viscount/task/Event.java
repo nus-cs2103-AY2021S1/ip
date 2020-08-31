@@ -16,6 +16,13 @@ public class Event extends Task {
      */
     private LocalDateTime eventTime;
 
+    /**
+     * Instantiates a new event task.
+     *
+     * @param description Description of event added.
+     * @param isDone Represents if event is done.
+     * @param eventTime Date and time of the event.
+     */
     public Event(String description, boolean isDone, LocalDateTime eventTime) {
         super(TaskType.Event, description, isDone);
         this.eventTime = eventTime;
@@ -25,7 +32,7 @@ public class Event extends Task {
     public boolean hasDateTime() {
         return true;
     }
-    
+
     @Override
     public LocalDateTime getDateTime() {
         return eventTime;
@@ -44,7 +51,7 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return String.format(Event.STRING_FORMAT, getStatusIcon(), description, 
+        return String.format(Event.STRING_FORMAT, getStatusIcon(), description,
                 eventTime.format(Parser.OUTPUT_DATE_TIME_FORMATTER));
     }
 }

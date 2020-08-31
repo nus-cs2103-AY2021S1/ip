@@ -5,12 +5,15 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.temporal.TemporalAccessor;
-
 import java.util.Arrays;
 import java.util.List;
 
-import viscount.command.*;
-
+import viscount.command.AddCommand;
+import viscount.command.Command;
+import viscount.command.DeleteCommand;
+import viscount.command.DoneCommand;
+import viscount.command.ExitCommand;
+import viscount.command.ListCommand;
 import viscount.exception.ViscountDateTimeParseException;
 import viscount.exception.ViscountException;
 import viscount.exception.ViscountMissingArgumentDescriptionException;
@@ -19,27 +22,26 @@ import viscount.exception.ViscountMissingDescriptionException;
 import viscount.exception.ViscountNumberFormatException;
 import viscount.exception.ViscountUnknownCommandException;
 import viscount.exception.ViscountUnsupportedOperationException;
-
 import viscount.task.TaskType;
 
 /**
  * Represent's Viscount's parser.
- * 
+ *
  * Handles making sense of the user's input commands.
  */
 public class Parser {
-    public static final DateTimeFormatter INPUT_DATE_TIME_FORMATTER
-            = DateTimeFormatter.ofPattern("dd-MM-yyyy[ HHmm]");
-    public static final DateTimeFormatter TASK_DATA_DATE_TIME_FORMATTER
-            = DateTimeFormatter.ofPattern("yyyyMMdd HHmm");
-    public static final DateTimeFormatter OUTPUT_DATE_FORMATTER
-            = DateTimeFormatter.ofPattern("MMM dd yyyy");
-    public static final DateTimeFormatter OUTPUT_DATE_TIME_FORMATTER
-            = DateTimeFormatter.ofPattern("MMM dd yyyy, HH:mm");
+    public static final DateTimeFormatter INPUT_DATE_TIME_FORMATTER =
+            DateTimeFormatter.ofPattern("dd-MM-yyyy[ HHmm]");
+    public static final DateTimeFormatter TASK_DATA_DATE_TIME_FORMATTER =
+            DateTimeFormatter.ofPattern("yyyyMMdd HHmm");
+    public static final DateTimeFormatter OUTPUT_DATE_FORMATTER =
+            DateTimeFormatter.ofPattern("MMM dd yyyy");
+    public static final DateTimeFormatter OUTPUT_DATE_TIME_FORMATTER =
+            DateTimeFormatter.ofPattern("MMM dd yyyy, HH:mm");
 
     /**
      * Parses a raw command.
-     * 
+     *
      * @param rawCommand Raw command in String form parsed.
      * @return Command object representing the raw command.
      * @throws ViscountException If command is unsupported or used wrongly.
@@ -66,7 +68,7 @@ public class Parser {
 
     /**
      * Parses a list command.
-     * 
+     *
      * @param arguments Arguments from user input.
      * @return List command representing input from user.
      * @throws ViscountException If command contains unknown arguments or was used wrongly.
@@ -128,9 +130,9 @@ public class Parser {
         if (arguments.size() < 2) {
             throw new ViscountMissingArgumentException("task type");
         }
-        
+
         String taskTypeArgument = arguments.get(1);
-        
+
         if (taskTypeArgument.equals("todo")) {
             String description = String.join(" ", arguments.subList(2, arguments.size()));
 
@@ -187,7 +189,7 @@ public class Parser {
             throw new ViscountUnsupportedOperationException("task type " + taskTypeArgument);
         }
     }
-    
+
     /**
      * Parses a done command.
      *
@@ -237,7 +239,7 @@ public class Parser {
 
     /**
      * Parses a String representing a date and time using the given formatter.
-     * 
+     *
      * @param dateTimeString Date and time string parsed.
      * @param formatter Formatter used.
      * @return LocalDateTime object representing the date and time in the String.

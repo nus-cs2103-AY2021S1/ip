@@ -1,9 +1,10 @@
 package viscount;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
-
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
@@ -12,25 +13,26 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import viscount.task.*;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import viscount.task.Deadline;
+import viscount.task.Event;
+import viscount.task.Task;
+import viscount.task.Todo;
 
 public class UiTest {
-    private static final String VISCOUNT_LOGO = "        _  _____  _____                  _    \n" +
-            "       (_)/ ____|/ ____|                | |   \n" +
-            " __   ___| (___ | |     ___  _   _ _ __ | |_  \n" +
-            " \\ \\ / / |\\___ \\| |    / _ \\| | | | '_ \\| __| \n" +
-            "  \\ V /| |____) | |___| (_) | |_| | | | | |_  \n" +
-            "   \\_/ |_|_____/ \\_____\\___/ \\__,_|_| |_|\\__|";
+    private static final String VISCOUNT_LOGO =
+            "        _  _____  _____                  _    \n"
+            + "       (_)/ ____|/ ____|                | |   \n"
+            + " __   ___| (___ | |     ___  _   _ _ __ | |_  \n"
+            + " \\ \\ / / |\\___ \\| |    / _ \\| | | | '_ \\| __| \n"
+            + "  \\ V /| |____) | |___| (_) | |_| | | | | |_  \n"
+            + "   \\_/ |_|_____/ \\_____\\___/ \\__,_|_| |_|\\__|";
     private static final String HORIZONTAL_LINE = "__________________________________________________";
     private static final String TICK_ICON = "\u2713";
     private static final String CROSS_ICON = "\u2718";
-    
+
     private static final List<Task> DEFAULT_TASKS = Arrays.asList(
             new Todo("t1", false),
             new Deadline("t2", true, LocalDateTime.of(2020, 8, 24, 10, 0)),
@@ -42,39 +44,39 @@ public class UiTest {
     //Reused from https://www.baeldung.com/java-testing-system-out-println with minor modifications
     private final PrintStream standardOut = System.out;
     private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
-    
+
     @BeforeEach
     public void setUp() {
         System.setOut(new PrintStream(outputStreamCaptor));
     }
-    
+
     @AfterEach
     public void tearDown() {
         System.setOut(standardOut);
     }
     //@@author
-    
+
     @Test
     @DisplayName("Show welcome message")
     public void showWelcome_invokeMethod_success() {
         String welcomeMessage = "Good day to you! I'm Viscount.\nWhat can I do for you on this blessed day?";
         String expectedResult = VISCOUNT_LOGO + System.lineSeparator() + putInChatBox(welcomeMessage);
-        
+
         new Ui().showWelcome();
         String actualResult = outputStreamCaptor.toString();
 
         assertEquals(expectedResult, actualResult);
     }
-    
+
     @Test
     @DisplayName("Show exit message")
     public void showExit_inputCommand_success() {
         String exitMessage = "Farewell my friend, I hope to see you again!";
         String expectedResult = putInChatBox(exitMessage);
-        
+
         new Ui().showExit();
         String actualResult = outputStreamCaptor.toString();
-        
+
         assertEquals(expectedResult, actualResult);
     }
 
@@ -88,7 +90,7 @@ public class UiTest {
                 + "4.[E][" + TICK_ICON + "] t4 (at: Aug 24 2020, 11:00)\n"
                 + "5.[E][" + CROSS_ICON + "] t5 (at: Aug 27 2020, 12:00)";
         String expectedResult = putInChatBox(listMessage).replaceAll("\\p{Cntrl}", "");
-        
+
         new Ui().showList(DEFAULT_TASKS, "", "");
         String actualResult = outputStreamCaptor.toString().replaceAll("\\p{Cntrl}", "");
 
@@ -164,7 +166,7 @@ public class UiTest {
 
         assertEquals(expectedResult, actualResult);
     }
-    
+
     @Test
     @DisplayName("Show add task message")
     public void showAdd_task_success() {
@@ -172,7 +174,7 @@ public class UiTest {
                 + "[T][" + CROSS_ICON + "] t1\n"
                 + "Now you have 1 tasks in the list.";
         String expectedResult = putInChatBox(addMessage).replaceAll("\\p{Cntrl}", "");
-        
+
         new Ui().showAdd(new Todo("t1", false), 1);
         String actualResult = outputStreamCaptor.toString().replaceAll("\\p{Cntrl}", "");
 
@@ -218,9 +220,9 @@ public class UiTest {
     }
 
     private static String putInChatBox(String message) {
-        return HORIZONTAL_LINE + System.lineSeparator() +
-                message + System.lineSeparator() +
-                HORIZONTAL_LINE + System.lineSeparator() +
-                System.lineSeparator();
+        return HORIZONTAL_LINE + System.lineSeparator()
+                + message + System.lineSeparator()
+                + HORIZONTAL_LINE + System.lineSeparator()
+                + System.lineSeparator();
     }
 }

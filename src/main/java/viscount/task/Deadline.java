@@ -16,16 +16,23 @@ public class Deadline extends Task {
      */
     private LocalDateTime dueDate;
 
+    /**
+     * Initialises a new deadline task.
+     *
+     * @param description Description of the deadline created.
+     * @param isDone Represents if the deadline is done.
+     * @param dueDate Due date of the deadline.
+     */
     public Deadline(String description, boolean isDone, LocalDateTime dueDate) {
         super(TaskType.Deadline, description, isDone);
         this.dueDate = dueDate;
     }
-    
+
     @Override
     public boolean hasDateTime() {
         return true;
     }
-    
+
     @Override
     public LocalDateTime getDateTime() {
         return dueDate;
@@ -44,7 +51,7 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return String.format(Deadline.STRING_FORMAT, getStatusIcon(), description, 
+        return String.format(Deadline.STRING_FORMAT, getStatusIcon(), description,
                 dueDate.format(Parser.OUTPUT_DATE_TIME_FORMATTER));
     }
 }

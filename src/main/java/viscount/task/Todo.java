@@ -25,7 +25,7 @@ public class Todo extends Task {
 
     /**
      * Gives a task data representation of the task in String format.
-     * 
+     *
      * @return Task data representation of the task.
      */
     @Override

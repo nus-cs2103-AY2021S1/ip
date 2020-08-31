@@ -8,25 +8,25 @@ import viscount.task.Task;
 
 /**
  * Represents Viscount's User Interface.
- * 
+ *
  * Handles interactions with the user.
  */
 public class Ui {
     private static final String VISCOUNT_LOGO =
-            "        _  _____  _____                  _    \n" + 
-                    "       (_)/ ____|/ ____|                | |   \n" +
-                    " __   ___| (___ | |     ___  _   _ _ __ | |_  \n" +
-                    " \\ \\ / / |\\___ \\| |    / _ \\| | | | '_ \\| __| \n" +
-                    "  \\ V /| |____) | |___| (_) | |_| | | | | |_  \n" +
-                    "   \\_/ |_|_____/ \\_____\\___/ \\__,_|_| |_|\\__|";
+            "        _  _____  _____                  _    \n"
+            + "       (_)/ ____|/ ____|                | |   \n"
+            + " __   ___| (___ | |     ___  _   _ _ __ | |_  \n"
+            + " \\ \\ / / |\\___ \\| |    / _ \\| | | | '_ \\| __| \n"
+            + "  \\ V /| |____) | |___| (_) | |_| | | | | |_  \n"
+            + "   \\_/ |_|_____/ \\_____\\___/ \\__,_|_| |_|\\__|";
     private static final String HORIZONTAL_LINE = "__________________________________________________";
-    
+
     private Scanner scanner;
-    
+
     public Ui() {
         this.scanner = new Scanner(System.in);
     }
-    
+
     public Ui(InputStream is) {
         this.scanner = new Scanner(is);
     }
@@ -48,7 +48,7 @@ public class Ui {
 
     /**
      * Reads the next input from the user.
-     * 
+     *
      * @return Input of user as a String.
      */
     public String readInput() {
@@ -57,7 +57,7 @@ public class Ui {
 
     /**
      * Prints the list response.
-     * 
+     *
      * @param tasks List of tasks listed
      * @param modifier Modifier of list command
      * @param dateString Date argument of list command
@@ -68,8 +68,7 @@ public class Ui {
                 : ("occurring " + (dateString.equals("today")
                         ? dateString
                         : "on " + dateString) + " ");
-                
-        
+
         speak(String.format("Here are the %ss %sin your list:\n%s",
                 modifier.isEmpty() ? "task" : modifier,
                 finalDateString,
@@ -78,7 +77,7 @@ public class Ui {
 
     /**
      * Prints the add task response.
-     * 
+     *
      * @param task Task added.
      * @param tasksSize Size of task list after adding new task.
      */
@@ -91,18 +90,18 @@ public class Ui {
 
     /**
      * Prints the done response.
-     * 
+     *
      * @param task Task marked as done.
      */
     public void showDone(Task task) {
-        speak(String.format("Very good! I have marked this %s as done:\n%s", 
+        speak(String.format("Very good! I have marked this %s as done:\n%s",
                 task.getTaskType().name().toLowerCase(),
                 task.toString()));
     }
 
     /**
      * Prints the delete response.
-     * 
+     *
      * @param task Task deleted.
      * @param tasksSize Size of task list after deleting new task.
      */
@@ -115,7 +114,7 @@ public class Ui {
 
     /**
      * Prints error message.
-     * 
+     *
      * @param errorMessage Error message printed.
      */
     public void showError(String errorMessage) {
@@ -136,7 +135,7 @@ public class Ui {
 
     /**
      * Converts task list to String format.
-     * 
+     *
      * @param tasks Task list to be converted.
      * @return String representation of the task list.
      */

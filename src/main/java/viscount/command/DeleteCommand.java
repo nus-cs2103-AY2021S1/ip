@@ -1,10 +1,10 @@
 package viscount.command;
 
-import viscount.*;
-
-import viscount.exception.ViscountIOException;
+import viscount.Storage;
+import viscount.TaskList;
+import viscount.Ui;
 import viscount.exception.ViscountIndexOutOfBoundsException;
-
+import viscount.exception.ViscountIoException;
 import viscount.task.Task;
 
 /**
@@ -24,11 +24,11 @@ public class DeleteCommand extends Command {
      * @param ui Ui to display response.
      * @param storage Storage to save changes to disk.
      * @throws ViscountIndexOutOfBoundsException If taskIndex is < 0 or >= list size
-     * @throws ViscountIOException If exception occurs with writing to disk.
+     * @throws ViscountIoException If exception occurs with writing to disk.
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws ViscountIndexOutOfBoundsException,
-            ViscountIOException {
+            ViscountIoException {
         Task removedTask = taskList.remove(taskIndex);
         storage.saveToDisk(taskList.getTasks());
         ui.showDelete(removedTask, taskList.getTasksSize());
