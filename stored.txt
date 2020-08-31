@@ -1,2 +1,3 @@
-[T][✘] a
 [D][✘] this (by 31 Aug 2020)
+[E][✘] party (from 1 Sep 2020, 8:00PM - 11:59PM)
+[T][✘] a

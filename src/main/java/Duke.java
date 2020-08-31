@@ -30,8 +30,14 @@ public class Duke {
         new Duke();
     }
 
+    //TODO
     public String getResponse(String input) {
         return this.ui.run(input);
+    }
+
+    //TODO
+    public Ui getUi() {
+        return this.ui;
     }
 }
 

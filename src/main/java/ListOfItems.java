@@ -107,7 +107,7 @@ public class ListOfItems {
             } else {
                 task.markedDone();
                 handleFile.writeFile(this);
-                String message = "Good job! I've marked this task as done: \n";
+                String message = "Good job! I've marked this task as done:";
                 String output = divider + "\n" + message + "\n" + tabSpacing
                         + task + "\n" + divider;
                 return output;
@@ -136,9 +136,9 @@ public class ListOfItems {
             list.remove(task);
             index--;
             handleFile.writeFile(this);
-            String output = divider + "\n" + "Noted. I've removed this task: " + "\n"
-                    + tabSpacing + task + "\n" + "Now you have " + index + " tasks in the list."
-                    + "\n" + divider;
+            String output = divider + "\n" + "Noted. I've removed this task:\n"
+                    + tabSpacing + task + "\n" + "Now you have " + index + " tasks in the list.\n"
+                    + divider;
             return output;
         } catch (IndexOutOfBoundsException | NumberFormatException e) {
             throw new DukeException("\n" + divider + "\n" + "Whoops, you did not enter a valid number."
@@ -253,7 +253,7 @@ public class ListOfItems {
             String info = input.substring(13);
             DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("d/M/yyyy");
             LocalDate date = LocalDate.parse(info, dateFormat);
-            String output = divider + "Task(s) due by " + date.format(DateTimeFormatter.ofPattern("d MMM yyyy"))
+            String output = divider + "\n" + "Task(s) due by " + date.format(DateTimeFormatter.ofPattern("d MMM yyyy"))
                     + " :" + "\n";
             for (int i = 0; i < this.list.size(); i++) {
                 if ((this.list.get(i) instanceof Deadline && ((Deadline) this.list.get(i)).date.equals(date))
