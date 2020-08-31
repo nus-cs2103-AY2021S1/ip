@@ -1,3 +1,4 @@
+
 plugins {
     id 'java'
     id 'application'
@@ -14,8 +15,8 @@ tasks.withType(JavaCompile) {
 }
 
 dependencies {
-    testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.5.0'
-    testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.5.0'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
 }
 
 test {
@@ -47,4 +48,5 @@ checkstyle {
 
 run{
     standardInput = System.in
+    enableAssertions = true
 }
