@@ -8,6 +8,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class FindCommandTest {
     
@@ -42,7 +43,6 @@ public class FindCommandTest {
     public void testHelperContains_matchExactSearchTerm_returnsTrue(String query) {
         String text = "hello world i am ritesh hohohehe hi";
         FindCommand command = new FindCommand("hello");
-        assertEquals((command.containsExactWord(text, query)),
-                     true);
+        assertTrue((command.containsExactWord(text, query)));
     }
 }
