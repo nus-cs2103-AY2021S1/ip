@@ -2,9 +2,9 @@
  * Represents an event task.
  */
 public class Event extends Task {
-    protected String at;
+    protected static final String TYPE = "event";
 
-    static final String TYPE = "event";
+    protected String at;
 
     Event(String description, String at) {
         super(description, TYPE);

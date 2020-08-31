@@ -12,8 +12,8 @@ import java.util.Scanner;
  * Represents the file used for storing user data.
  */
 public class Storage {
-    protected final static String SRC = System.getProperty("user.dir");
-    protected final static Path PATH = Paths.get(SRC, "data", "duke.txt");
+    protected static final String SRC = System.getProperty("user.dir");
+    protected static final Path PATH = Paths.get(SRC, "data", "duke.txt");
     protected boolean hasDirectory;
 
     Storage() {

@@ -2,7 +2,7 @@
  * Adds a todo task to the list of tasks.
  */
 public class ToDoCommand extends Command {
-    public final static String COMMAND_WORD = "todo";
+    public static final String COMMAND_WORD = "todo";
 
     ToDoCommand(String arguments) {
         super(arguments);

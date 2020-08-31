@@ -20,6 +20,10 @@ public class Duke {
         }
     }
 
+    /**
+     * Reads user command and executes it.
+     * Application is terminated when an exit command is given.
+     */
     public void run() {
         this.ui.showWelcomeMessage();
         Scanner sc = new Scanner(System.in);

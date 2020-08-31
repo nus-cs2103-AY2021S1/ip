@@ -2,9 +2,9 @@
  * Represents a deadline task.
  */
 public class Deadline extends Task {
-    protected String by;
+    protected static final String TYPE = "deadline";
 
-    static final String TYPE = "deadline";
+    protected String by;
 
     Deadline(String description, String by) {
         super(description, TYPE);

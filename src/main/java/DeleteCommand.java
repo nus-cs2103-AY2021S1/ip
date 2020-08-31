@@ -2,7 +2,7 @@
  * Deletes a task from the list of tasks.
  */
 public class DeleteCommand extends Command {
-    public final static String COMMAND_WORD = "delete";
+    public static final String COMMAND_WORD = "delete";
 
     DeleteCommand(String arguments) {
         super(arguments);

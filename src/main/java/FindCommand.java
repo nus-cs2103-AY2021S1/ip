@@ -4,7 +4,7 @@ import java.util.ArrayList;
  * Finds a task based on the given keyword.
  */
 public class FindCommand extends Command {
-    public final static String COMMAND_WORD = "find";
+    public static final String COMMAND_WORD = "find";
 
     FindCommand(String arguments) {
         super(arguments);

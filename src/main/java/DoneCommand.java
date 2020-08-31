@@ -2,7 +2,7 @@
  * Marks a task as completed.
  */
 public class DoneCommand extends Command {
-    public final static String COMMAND_WORD = "done";
+    public static final String COMMAND_WORD = "done";
 
     DoneCommand(String arguments) {
         super(arguments);

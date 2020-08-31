@@ -2,11 +2,11 @@
  * Represents an executable command.
  */
 public class Command {
+    protected static final String ADD_MESSAGE = "Got it. I've added this task:\n";
+    protected static final String DELETE_MESSAGE = "Noted. I've removed this task: \n";
+
     protected String arguments;
     protected boolean isExit;
-
-    protected final static String ADD_MESSAGE = "Got it. I've added this task:\n";
-    protected final static String DELETE_MESSAGE = "Noted. I've removed this task: \n";
 
     /**
      * Constructor for class Command.

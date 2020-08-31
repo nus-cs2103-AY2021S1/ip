@@ -2,7 +2,7 @@
  * Command that signals the termination of the application.
  */
 public class ExitCommand extends Command {
-    public final static String COMMAND_WORD = "bye";
+    public static final String COMMAND_WORD = "bye";
 
     ExitCommand(String arguments) {
         super(arguments);
