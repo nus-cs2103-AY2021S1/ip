@@ -1,12 +1,10 @@
 package duke;
 
-import duke.tasks.Task;
-
 import java.util.Scanner;
 
+import duke.tasks.Task;
+
 public class Ui {
-    
-    public Ui() {}
 
     /**
      * Shows message upon starting Duke
@@ -28,10 +26,8 @@ public class Ui {
     public void showByeMessage() {
         System.out.println ("Bye!! See you again :)");
     }
-
     /**
      * Shows message when a task is added to the task list
-     * 
      * @param t task added to the list
      * @param number number of tasks in the list
      */
@@ -43,7 +39,6 @@ public class Ui {
 
     /**
      * Shows message when a task is removed from the task list
-     * 
      * @param t task removed from list
      * @param number number of tasks in the list
      */
@@ -55,7 +50,6 @@ public class Ui {
 
     /**
      * Shows message when a task is marked as done
-     * 
      * @param t task that is marked done
      */
     public void showDoneMessage (Task t) {
@@ -65,22 +59,23 @@ public class Ui {
 
     /**
      * Reads the user input line by line
-     * 
      * @return user input
      */
     public String readUserInput() {
         Scanner sc = new Scanner (System.in);
         return sc.nextLine();
     }
-    
+
+    /**
+     * Prints out all the tasks in the list
+     * @param list list containing all the tasks
+     */
     public void showList(TaskList list) {
         System.out.println("Here are the tasks in your list:");
         for (int i = 0; i < list.size(); i++) {
             System.out.printf ("%d. %s \n", i + 1, list.get(i));
         }
     }
-    
-    
     public void showLoadingError() {
         System.out.println ("Sorry, I could not retrieve your previous tasks \n");
     }
@@ -105,8 +100,7 @@ public class Ui {
     public void showNoTaskExistException() {
         System.out.println ("Task does not exist");
     }
-    
-    public void showDoNotUnderstandMesssage() {
+    public void showDoNotUnderstandMessage() {
         System.out.println ("Sorry >_< I don't know what you mean...");
     }
 }
