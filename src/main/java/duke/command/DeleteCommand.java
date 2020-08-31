@@ -1,25 +1,23 @@
 package duke.command;
 
+import java.io.IOException;
+import java.util.ArrayList;
+
 import duke.Storage;
 import duke.TaskList;
 import duke.enums.Message;
 import duke.exception.DukeException;
 import duke.ui.Ui;
 
-import java.io.IOException;
-import java.util.ArrayList;
 
 /**
  * Deletes Tasks from the TaskList and invokes appropriate UI messages about it
  */
 public class DeleteCommand implements Command {
-    
     private final String[] parsedInput;
-    
     public DeleteCommand(String[] parsedInput) {
         this.parsedInput = parsedInput;
     }
-    
     /**
      * Prints out a deletion message of the command, removes the entry from TaskList and displays the current status of
      * the TaskList
@@ -39,7 +37,6 @@ public class DeleteCommand implements Command {
         ui.display(lines);
         Storage.save(tasks);
     }
-    
     @Override
     public boolean isExit() {
         return false;

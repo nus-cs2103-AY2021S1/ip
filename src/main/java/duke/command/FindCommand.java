@@ -1,21 +1,23 @@
 package duke.command;
 
-import duke.TaskList;
-import duke.enums.Message;
-import duke.exception.DukeException;
-import duke.task.Task;
-import duke.ui.Ui;
-
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import duke.TaskList;
+import duke.enums.Message;
+import duke.task.Task;
+import duke.ui.Ui;
+
 public class FindCommand implements Command {
-    
     private final String searchTerm;
-    
+    /**
+     * Finds tasks related to User's input query
+     *
+     * @param userInput User's Search query
+     */
     public FindCommand(String userInput) {
         StringTokenizer st = new StringTokenizer(userInput);
         st.nextToken();
@@ -25,7 +27,6 @@ public class FindCommand implements Command {
         }
         this.searchTerm = searchTermBuilder.toString().trim();
     }
-    
     /**
      * Returns an appropriate matcher for that exact search term
      *
@@ -37,7 +38,6 @@ public class FindCommand implements Command {
         Pattern p = Pattern.compile("\\b" + searchTerm.trim() + "\\b");
         return p.matcher("");
     }
-    
     /**
      * Displays the tasks that match a specific word/phrase passed in
      *
@@ -60,7 +60,6 @@ public class FindCommand implements Command {
             ui.display(lines);
         }
     }
-    
     /**
      * Tests if a word/phrases is exactly present in a text
      *
@@ -75,8 +74,6 @@ public class FindCommand implements Command {
         Matcher myMatcher = pattern.matcher(text);
         return myMatcher.find();
     }
-    
-    
     @Override
     public boolean isExit() {
         return false;
