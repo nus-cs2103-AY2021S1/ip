@@ -40,18 +40,22 @@ public class TaskList {
     public List<Task> getTaskList() {
         return this.list;
     }
-
-    public void list() {
-        System.out.println(starline + "Here are the tasks in your list:");
-        for (int i=0; i < this.list.size(); i++) {
-            printTask(i);
+    
+    private void printList(List<Task> list, String listObjectDescription) {
+        System.out.println(starline + String.format("Here are the %s in your list:", listObjectDescription));
+        for (int i=0; i < list.size(); i++) {
+            printTask(i + 1, list.get(i));
         }
         System.out.println(starline);
     }
 
-    public void printTask(int listIndex) {
-        String task = String.format("%d.%s", listIndex+1, this.list.get(listIndex));
-        System.out.println(task);
+    public void list() {
+        printList(this.list, "tasks");
+    }
+
+    public void printTask(int listIndex, Task task) {
+        String taskString = String.format("%d.%s", listIndex, task);
+        System.out.println(taskString);
     }
 
     public void echo(String input) {
@@ -152,4 +156,17 @@ public class TaskList {
                     "   delete <task index>");
         }
     }
+    
+    public List<Task> find(String keyword) {
+        List<Task> matchingTasks = new ArrayList<>();
+        for (Task task : this.list) {
+            if (task.description.contains(keyword)) {
+                matchingTasks.add(task);
+            }
+        }
+        printList(matchingTasks, "matching tasks");
+        return matchingTasks;
+    }
+
+    
 }

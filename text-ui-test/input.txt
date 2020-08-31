@@ -2,19 +2,19 @@ hello
 todo eat chocolate
 deadline project /by 2020-05-22
 event meeting tomorrow /at home
-list
-done 2
-list
 event run a marathon /at sentosa
 deadline code website /by tonight
-todo throw chocolate wrapper
+todo write book
 todo wash dishes
+event book event /at library
 list
+done 2
 done 4
-delete 5
+delete 3
 delete
 delete this task
-done 3
+find book
+find
 done 10
 delete 8
 list

@@ -33,11 +33,18 @@ public class Parser {
                 }
                 
             } else if (splitNext[0].equals("delete")) {
-            // to "delete" tasks from the taskList
+                // to "delete" tasks from the taskList
                 try {
                     this.taskList.deleteTask(splitNext[1]);
                 } catch (IndexOutOfBoundsException ex) {
                     System.out.println(dashline + "\n\u2639 Please indicate which task you'd like to delete!");
+                }
+                
+            } else if (splitNext[0].equals("find")) {
+                if (splitNext.length == 1) {
+                    this.taskList.find("");
+                } else {
+                    this.taskList.find(splitNext[1]);
                 }
                 
             } else if (splitNext[0].equals("todo") || splitNext[0].equals("deadline") || splitNext[0].equals("event")){
