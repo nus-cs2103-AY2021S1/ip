@@ -15,28 +15,6 @@ import duke.task.TaskList;
 import duke.task.ToDo;
 
 public class StorageTest {
-<<<<<<< HEAD
-	@Test
-	public void invalidStorageFile() {
-		try {
-			Storage storage = new Storage("src/test/data/invalidDuke.txt");
-			storage.load();
-			fail("Should have thrown an exception due to invalid storage text file");
-		} catch (DukeException e) {
-			return;
-		}
-	}
-
-	@Test
-	public void validStorageFile() {
-		try {
-			Storage storage = new Storage("src/test/data/duke.txt");
-			storage.load();
-		} catch (DukeException e) {
-			fail("Should not have thrown an exception due to valid storage text file");
-		}
-	}
-=======
     @Test
     public void invalidStorageFile() {
         try {
@@ -57,7 +35,6 @@ public class StorageTest {
             fail("Should not have thrown an exception due to valid storage text file");
         }
     }
->>>>>>> add-checkstyle
 
     @Test
     public void readAndWriteToFile() {
