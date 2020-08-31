@@ -3,54 +3,64 @@ package duke;
 import duke.commands.Command;
 import duke.commands.CommandHandler;
 import duke.tasks.TaskManager;
-
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
 import java.util.Scanner;
 
 /**
  * Main class that will oversee the running of the program.
  */
-public class Duke {
-    Ui ui;
-    TaskManager taskManager;
-    CommandHandler commandHandler;
-
-    Duke() {
-        this.ui = new Ui();
-        this.commandHandler = new CommandHandler();
-        try {
-            this.taskManager = new TaskManager(new Storage().load());
-        } catch (DukeException e) {
-            System.out.println(e);
-        }
-    }
+public class Duke extends Application {
+//    Ui ui;
+//    TaskManager taskManager;
+//    CommandHandler commandHandler;
+//
+//    Duke() {
+//        this.ui = new Ui();
+//        this.commandHandler = new CommandHandler();
+//        try {
+//            this.taskManager = new TaskManager(new Storage().load());
+//        } catch (DukeException e) {
+//            System.out.println(e);
+//        }
+//    }
 
     /**
      * Starts the program.
      */
-    private void start() {
-        ui.showStartScreen();
-        boolean running = true;
-        Scanner sc = new Scanner(System.in);
-        while (running) {
-            ui.askForCommand();
-            String s = sc.nextLine();
-            Command cmd = CommandHandler.parseCommand(s);
-            cmd.setUtility(taskManager, ui, sc);
-            try {
-                boolean result = cmd.execute();
-                running = result;
-            } catch (DukeException e) {
-                System.out.println(e);
-            }
-        }
-        ui.showExitScreen();
-        sc.close();
+    @Override
+    public void start(Stage stage) {
+        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
+        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
+
+        stage.setScene(scene); // Setting the stage to show our screen
+        stage.show();
+//        ui.showStartScreen();
+//        boolean running = true;
+//        Scanner sc = new Scanner(System.in);
+//        while (running) {
+//            ui.askForCommand();
+//            String s = sc.nextLine();
+//            Command cmd = CommandHandler.parseCommand(s);
+//            cmd.setUtility(taskManager, ui, sc);
+//            try {
+//                boolean result = cmd.execute();
+//                running = result;
+//            } catch (DukeException e) {
+//                System.out.println(e);
+//            }
+//        }
+//        ui.showExitScreen();
+//        sc.close();
     }
 
-    public static void main(String[] args) {
-        new Duke().start();
-        return;
-    }
+//    public static void main(String[] args) {
+//        Application.launch(Duke.class, args);
+//        new Duke().start();
+//        return;
+//    }
     //     String line = "------------------------";
 
     //     System.out.println(line);
