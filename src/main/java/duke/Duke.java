@@ -42,14 +42,7 @@ public class Duke extends Application {
      * Constructs an instance of Duke.
      */
     public Duke() {
-        ui = new Ui();
-        storage = new Storage("tasks.txt");
-        try {
-            tasks = new TaskList(storage.load());
-        } catch (DukeException e) {
-            ui.showLoadingError();
-            tasks = new TaskList();
-        }
+        this("tasks.txt");
     }
 
     /**
