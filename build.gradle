@@ -1,0 +1,60 @@
+plugins {
+    id 'java'
+    id 'application'
+    id 'checkstyle'
+    id 'com.github.johnrengelman.shadow' version '5.1.0'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.5.0'
+    testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.5.0'
+}
+
+sourceSets {
+    java {
+        sourceSets.main.java.srcDirs = ['src/sparrow']
+    }
+}
+
+test {
+    useJUnitPlatform()
+
+    testLogging {
+        events "passed", "skipped", "failed"
+
+        showExceptions true
+        exceptionFormat "full"
+        showCauses true
+        showStackTraces true
+        showStandardStreams = false
+    }
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'sparrow.Sparrow'
+    }
+}
+
+application {
+    mainClassName = "sparrow.Sparrow"
+}
+
+shadowJar {
+    archiveBaseName = "sparrow"
+    archiveClassifier = null
+}
+
+checkstyle {
+    toolVersion = '8.23'
+}
+checkstyleTest.enabled = false
+
+run{
+    standardInput = System.in
+}
+
