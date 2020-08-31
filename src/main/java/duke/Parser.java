@@ -158,6 +158,16 @@ public class Parser {
         }
     }
 
+    private static Command handleFind(String input) throws DukeException {
+        String pattern = "(find\\s)(.+)";
+        if (input.trim().matches(pattern)) {
+            String keyword = input.replaceAll(pattern, "$2");
+            return new FindCommand(keyword);
+        } else {
+            throw (DukeException.emptyDesc("find"));
+        }
+    }
+
     /**
      * Returns a command to respond to the user input.
      *
@@ -184,6 +194,8 @@ public class Parser {
             return handleDueIn(input);
         } else if (input.equals("bye")) {
             return new ByeCommand();
+        } else if (input.startsWith("find")) {
+            return handleFind(input);
         } else {
             throw (DukeException.unknownCommand());
         }

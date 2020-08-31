@@ -31,8 +31,8 @@ public class Event extends Task {
                 : "[E][✗] " + text + " (at: " + dueDate + ")";
     }
 
-    public boolean compareTime(LocalDateTime now, long hours) {
-        return now.plusHours(hours).isAfter(dateTime);
+    public boolean compareTime(LocalDateTime givenDateTime, long hours) {
+        return givenDateTime.plusHours(hours).isAfter(dateTime);
     }
 
     @Override

@@ -33,4 +33,9 @@ public abstract class Task {
      * @return True or False.
      */
     abstract public boolean compareTime(LocalDateTime givenDateTime, long hours);
+
+    public boolean find(String keyword) {
+        String pattern = "(.*)" + keyword + "(.*)";
+        return text.matches(pattern);
+    }
 }

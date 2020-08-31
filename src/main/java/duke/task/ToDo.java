@@ -23,7 +23,7 @@ public class ToDo extends Task {
     }
 
     @Override
-    public boolean compareTime(LocalDateTime now, long hours) {
+    public boolean compareTime(LocalDateTime givenDateTime, long hours) {
         return false;
     }
 }
