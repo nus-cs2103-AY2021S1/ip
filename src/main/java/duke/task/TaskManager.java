@@ -67,16 +67,18 @@ public class TaskManager {
     }
 
     /**
-     * Finds all matching tasks with the specified keyword.
+     * Finds all matching tasks with the specified keyword(s).
      *
-     * @param keyword The keyword used to find matching tasks.
-     * @return The list of tasks that match the keyword.
+     * @param keywords The keyword(s) used to find matching tasks.
+     * @return The list of tasks that match the keyword(s).
      */
-    public List<Task> findTasks(String keyword) {
+    public List<Task> findTasks(String... keywords) {
         List<Task> matchingTasks = new ArrayList<>();
         for (Task task : tasks) {
-            if (task.getDescription().contains(keyword)) {
-                matchingTasks.add(task);
+            for (String keyword : keywords) {
+                if (task.getDescription().contains(keyword) && !matchingTasks.contains(task)) {
+                    matchingTasks.add(task);
+                }
             }
         }
         return matchingTasks;

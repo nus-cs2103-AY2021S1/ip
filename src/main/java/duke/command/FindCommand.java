@@ -10,22 +10,22 @@ import duke.ui.Ui;
 public class FindCommand extends Command {
 
     /**
-     * The keyword used to find matching tasks.
+     * The keyword(s) used to find matching tasks.
      */
-    private final String keyword;
+    private final String[] keywords;
 
     /**
      * Constructs a command that finds all matching tasks.
      *
-     * @param keyword The keyword used to find matching tasks.
+     * @param keywords The keyword(s) used to find matching tasks.
      */
-    public FindCommand(String keyword) {
-        this.keyword = keyword;
+    public FindCommand(String... keywords) {
+        this.keywords = keywords;
     }
 
     @Override
     public String execute(TaskManager manager, Ui ui, Storage storage) {
-        return ui.displayMatchingTasks(manager.findTasks(keyword));
+        return ui.displayMatchingTasks(manager.findTasks(keywords));
     }
 
     @Override

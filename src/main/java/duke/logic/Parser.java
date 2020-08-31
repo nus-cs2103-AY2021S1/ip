@@ -60,7 +60,8 @@ public class Parser {
                 command = new DeleteCommand(taskNumber);
             } else if (action.equals("find")) {
                 String keyword = splitCommand[1];
-                command = new FindCommand(keyword);
+                String[] keywords = keyword.split(" ");
+                command = new FindCommand(keywords);
             } else {
                 command = new InvalidCommand();
             }
