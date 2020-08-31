@@ -1,2 +1,2 @@
-T | 0 | i
-T | 0 | luv me
+T | 1 | say hi
+T | 1 | byebye
