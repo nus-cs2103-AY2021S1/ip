@@ -1,9 +1,9 @@
 package willy.test;
 
 import org.junit.jupiter.api.Test;
-import main.java.TaskList;
 import willy.store.TaskStore;
 import willy.task.Task;
+import willy.task.TaskList;
 import willy.task.TaskSymbol;
 import willy.task.ToDoTask;
 

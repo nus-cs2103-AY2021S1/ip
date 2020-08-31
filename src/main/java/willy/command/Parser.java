@@ -1,8 +1,6 @@
 package willy.command;
 
-import main.java.TaskList;
 import willy.exceptions.WillyException;
-import main.java.TaskList;
 import willy.task.*;
 import willy.ui.Greet;
 
