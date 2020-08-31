@@ -11,7 +11,7 @@ public abstract class Task {
         this.task = task;
         this.done = false;
     }
-    
+
     Task(String task, boolean done) {
         this.task = task;
         this.done = done;
@@ -19,7 +19,7 @@ public abstract class Task {
 
     /**
      * Gets the task description.
-     * 
+     *
      * @return String of task description.
      */
     public String getTaskDescription() {
@@ -27,12 +27,12 @@ public abstract class Task {
     }
 
     /**
-     * Returns a String representation of the task to be stored in the 
+     * Returns a String representation of the task to be stored in the
      * storage file.
      *
      * @return Formatted String representing the task.
      */
-    abstract public String toDataString();
+    public abstract String toDataString();
 
     /**
      * Sets the task as done.
@@ -43,7 +43,7 @@ public abstract class Task {
 
     /**
      * Returns a String representation of the task status.
-     * 
+     *
      * @return A tick if done, a cross otherwise.
      */
     public String getStatusToString() {
@@ -52,7 +52,7 @@ public abstract class Task {
 
     /**
      * Returns a String representation of the task for display.
-     * 
+     *
      * @return String representation of the task for display.
      */
     @Override

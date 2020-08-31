@@ -10,7 +10,7 @@ import duke.ui.Ui;
 public class ExitCommand implements Command {
     /**
      * Prints a goodbye message to the user.
-     * 
+     *
      * @param tasks List of user's tasks.
      * @param ui UI of Duke.
      */
@@ -21,7 +21,7 @@ public class ExitCommand implements Command {
 
     /**
      * Tells Duke to exit.
-     * 
+     *
      * @return true.
      */
     @Override

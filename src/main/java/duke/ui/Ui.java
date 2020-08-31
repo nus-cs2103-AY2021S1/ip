@@ -1,23 +1,27 @@
 package duke.ui;
 
+import java.util.ArrayList;
+import java.util.Scanner;
+
 import duke.task.Task;
 import duke.task.TaskList;
 
-import java.util.ArrayList;
-import java.util.Scanner;
 
 /**
  * Encapsulates the user interface for Duke.
  */
 public class Ui {
+    private static final String ADD_TASK_LINE = ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>";
+    private static final String DONE_TASK_LINE = "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
+    private static final String LIST_TASK_LINE = "________________________________________________________";
+    private static final String BYE_LINE = "========================================================";
+    private static final String INDENT = "    ";
+
     private Scanner scanner;
-    
-    static String ADD_TASK_LINE = ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>";
-    static String DONE_TASK_LINE = "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
-    static String LIST_TASK_LINE = "________________________________________________________";
-    static String BYE_LINE = "========================================================";
-    static String INDENT = "    ";
-    
+
+    /**
+     * Creates a Duke UI instance and starts the scanner.
+     */
     public Ui() {
         scanner = new Scanner(System.in);
     }
@@ -35,8 +39,8 @@ public class Ui {
     }
 
     /**
-     * Prints out the list of the user's tasks. 
-     * 
+     * Prints out the list of the user's tasks.
+     *
      * @param tasks TaskList of user's tasks.
      */
     public void displayTaskList(TaskList tasks) {
@@ -53,8 +57,8 @@ public class Ui {
 
     /**
      * Prints the list of matching tasks according to find keyword.
-     * 
-     * @param tasks List of matching tasks. 
+     *
+     * @param tasks List of matching tasks.
      */
     public void displayMatchingTaskList(TaskList tasks) {
         ArrayList<Task> list = tasks.getList();
@@ -87,7 +91,7 @@ public class Ui {
 
     /**
      * Prints out a message to confirm that the user has deleted a task.
-     * 
+     *
      * @param task Task deleted by user.
      * @param taskCount Updated number of tasks in the user's task list.
      */
@@ -103,14 +107,14 @@ public class Ui {
 
     /**
      * Prints out a message to confirm that the user has added a task to the list.
-     * 
+     *
      * @param task Task added by user.
      * @param taskCount Updated number of tasks in the user's task list.
      */
     public void displayAddTaskSuccess(Task task, int taskCount) {
         System.out.println(
             INDENT + ADD_TASK_LINE + "\n"
-            + INDENT + "Added task:" +"\n"
+            + INDENT + "Added task:" + "\n"
             + INDENT + INDENT + task.toString() + "\n"
             + INDENT + "You now have " + taskCount + " task(s) in the list.\n"
             + INDENT + ADD_TASK_LINE
@@ -119,7 +123,7 @@ public class Ui {
 
     /**
      * Prints out an error message when an Duke encounters an error.
-     * 
+     *
      * @param errorMessage Error message.
      */
     public void displayError(String errorMessage) {
@@ -139,7 +143,7 @@ public class Ui {
 
     /**
      * Reads user input and returns a String representing the input.
-     * 
+     *
      * @return String of user input
      */
     public String readInput() {

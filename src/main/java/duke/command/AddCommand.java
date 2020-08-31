@@ -1,15 +1,15 @@
 package duke.command;
 
-import duke.task.Event;
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 import duke.task.Deadline;
+import duke.task.Event;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.task.ToDo;
 
 import duke.ui.Ui;
-
-import java.time.LocalDate;
-import java.time.LocalTime;
 
 /**
  * Represents an add task command.
@@ -21,6 +21,12 @@ public class AddCommand implements Command {
     private LocalDate date;
     private LocalTime time;
 
+    /**
+     * Creates an AddCommand instance with no date/time for todos.
+     *
+     * @param key Todo command
+     * @param taskDescription Task description.
+     */
     public AddCommand(String key, String taskDescription) {
         this.key = key;
         this.taskDescription = taskDescription;
@@ -28,6 +34,14 @@ public class AddCommand implements Command {
         this.time = null;
     }
 
+    /**
+     * Creates an AddCommand instance with date and time for events and deadlines.
+     *
+     * @param key Deadline or event command.
+     * @param taskDescription Task description.
+     * @param date Date of task.
+     * @param time Time of task.
+     */
     public AddCommand(String key, String taskDescription, LocalDate date, LocalTime time) {
         this.key = key;
         this.taskDescription = taskDescription;
@@ -37,11 +51,11 @@ public class AddCommand implements Command {
 
     /**
      * Creates a Task instance with the task details and adds it to the user's task list.
-     * 
+     *
      * @param tasks List of user's tasks.
      * @param ui UI of Duke.
      */
-    @Override 
+    @Override
     public void execute(TaskList tasks, Ui ui) {
         if (CommandKey.equalsCommandKey(key, CommandKey.TODO)) {
             Task task = new ToDo(taskDescription);
@@ -60,7 +74,7 @@ public class AddCommand implements Command {
 
     /**
      * Tells Duke to continue running.
-     * 
+     *
      * @return false.
      */
     @Override

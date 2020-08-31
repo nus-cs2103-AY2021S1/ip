@@ -1,29 +1,30 @@
 package duke;
 
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.TaskList;
-import duke.task.ToDo;
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
-import java.nio.file.Path;
 import java.nio.file.Files;
+import java.nio.file.Path;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.TaskList;
+import duke.task.ToDo;
+
 
 /**
  * Represents the storage for the user's tasks.
  */
 public class Storage {
     private Path storagePath;
-    
+
     Storage(Path storagePath) {
         this.storagePath = storagePath;
     }
-    
+
     private void deleteStorage() {
         try {
             Files.deleteIfExists(storagePath);
@@ -31,7 +32,7 @@ public class Storage {
             System.out.println(e);
         }
     }
-    
+
     private void createStorage() {
         try {
             if (!Files.exists(storagePath)) {
@@ -41,7 +42,7 @@ public class Storage {
             System.out.println(e);
         }
     }
-    
+
     private void writeData(TaskList tasks) {
         try {
             String[] data = new String[tasks.size()];
@@ -63,9 +64,9 @@ public class Storage {
     }
 
     /**
-     * Reads the data from the storage file and returns a TaskList of the user's  
+     * Reads the data from the storage file and returns a TaskList of the user's
      * stored tasks. Returns an empty list if there are no stored tasks.
-     * 
+     *
      * @return List of cached tasks.
      */
     public TaskList readData() {
@@ -105,9 +106,9 @@ public class Storage {
     }
 
     /**
-     * Sets up the storage and creates the storage file at the path if the storage 
+     * Sets up the storage and creates the storage file at the path if the storage
      * file does not exist.
-     * 
+     *
      * @param storagePath Path for the storage file.
      * @return A Storage instance.
      */
@@ -120,7 +121,7 @@ public class Storage {
     /**
      * Updates the storage file by deleting the existing file, recreating the storage
      * file and writing the updated tasks into the new storage file.
-     * 
+     *
      * @param tasks List of updated tasks.
      */
     public void update(TaskList tasks) {

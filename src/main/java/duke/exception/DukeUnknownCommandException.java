@@ -9,7 +9,7 @@ public class DukeUnknownCommandException extends DukeException {
     }
 
     /**
-     * Returns the error message containing the user input which caused the error. 
+     * Returns the error message containing the user input which caused the error.
      *
      * @return String of error message.
      */

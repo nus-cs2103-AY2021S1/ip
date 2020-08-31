@@ -9,14 +9,14 @@ import duke.ui.Ui;
  */
 public class FindCommand implements Command {
     private String keyword;
-    
+
     public FindCommand(String keyword) {
         this.keyword = keyword;
     }
 
     /**
      * Finds matching tasks by keyword and prints them out in a list.
-     * 
+     *
      * @param tasks List of user's tasks.
      * @param ui UI for the Duke.
      */
@@ -28,7 +28,7 @@ public class FindCommand implements Command {
 
     /**
      * Tells Duke to keep on keeping on.
-     * 
+     *
      * @return false.
      */
     @Override

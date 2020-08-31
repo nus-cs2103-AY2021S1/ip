@@ -12,14 +12,14 @@ import duke.ui.Ui;
  */
 public class DeleteCommand implements Command {
     private int index;
-    
+
     public DeleteCommand(int index) {
         this.index = index;
     }
 
     /**
      * Checks if the index given to the command is valid.
-     * 
+     *
      * @param tasks List of user's tasks.
      * @throws DukeOutOfBoundsException If index is invalid.
      */
@@ -31,7 +31,7 @@ public class DeleteCommand implements Command {
 
     /**
      * Deletes the task from the user's task list.
-     * 
+     *
      * @param tasks List of user's tasks.
      * @param ui UI of Duke.
      */

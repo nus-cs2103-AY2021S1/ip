@@ -10,7 +10,7 @@ import duke.ui.Ui;
 public class ListCommand implements Command {
     /**
      * Prints out the list of the user's tasks.
-     * 
+     *
      * @param tasks List of user's tasks.
      * @param ui UI of Duke.
      */
@@ -21,7 +21,7 @@ public class ListCommand implements Command {
 
     /**
      * Tells Duke to continue running.
-     * 
+     *
      * @return false.
      */
     @Override

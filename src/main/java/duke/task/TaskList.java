@@ -7,7 +7,7 @@ import java.util.ArrayList;
  */
 public class TaskList {
     private ArrayList<Task> tasks;
-    
+
     public TaskList() {
         tasks = new ArrayList<>();
     }
@@ -15,7 +15,7 @@ public class TaskList {
     /**
      * Returns the collection that holds the tasks. Should only be used to
      * iterate over the list.
-     * 
+     *
      * @return Collection of Tasks.
      */
     public ArrayList<Task> getList() {
@@ -24,7 +24,7 @@ public class TaskList {
 
     /**
      * Adds a task to the task list.
-     * 
+     *
      * @param task
      * @return true.
      */
@@ -34,7 +34,7 @@ public class TaskList {
 
     /**
      * Deletes a task from the list by index.
-     * 
+     *
      * @param index Index of the task to delete.
      * @return The deleted task.
      */
@@ -44,7 +44,7 @@ public class TaskList {
 
     /**
      * Returns the size of the list.
-     * 
+     *
      * @return Number of elements of the list.
      */
     public int size() {
@@ -53,7 +53,7 @@ public class TaskList {
 
     /**
      * Gets the task by index from the list.
-     * 
+     *
      * @param index Index of the task.
      * @return The specified task.
      */
@@ -63,8 +63,8 @@ public class TaskList {
 
     /**
      * Finds matching tasks by keyword and adds them to another TaskList.
-     * 
-     * @param keyword Keyword used to search tasks. 
+     *
+     * @param keyword Keyword used to search tasks.
      * @return TaskList of matching tasks.
      */
     public TaskList find(String keyword) {

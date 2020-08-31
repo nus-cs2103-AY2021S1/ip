@@ -17,7 +17,7 @@ public class ParserTest {
             assertEquals(e.toString(), "ERROR: Duke can't find your task details -> " + testInput);
         }
     }
-    
+
     @Test
     public void parse_noParameterForDone_exceptionThrown() {
         String testInput = "done";
@@ -39,7 +39,7 @@ public class ParserTest {
             assertEquals(e.toString(), "ERROR: Duke doesn't know what to delete -> " + testInput);
         }
     }
-    
+
     @Test
     public void parse_unknownCommand_exceptionThrown() {
         String testInput = "i want to delete 1";
@@ -50,7 +50,7 @@ public class ParserTest {
             assertEquals(e.toString(), "ERROR: Duke can't recognise your command -> " + testInput);
         }
     }
-    
+
     @Test
     public void parse_invalidDate_exceptionThrown() {
         String invalidDate = "2020-13-22";
@@ -74,7 +74,7 @@ public class ParserTest {
             assertEquals(e.toString(), "ERROR: Duke doesn't recognise the date/time -> " + invalidTime);
         }
     }
-    
+
     @Test
     public void parse_tooManyFindKeywords_exceptionThrown() {
         String testInput = "find an event";

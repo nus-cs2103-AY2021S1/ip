@@ -11,8 +11,8 @@ public class DukeException extends Exception {
     }
 
     /**
-     * Returns the error message containing the user input which caused the error. 
-     * 
+     * Returns the error message containing the user input which caused the error.
+     *
      * @return String of error message.
      */
     @Override

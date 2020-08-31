@@ -12,20 +12,20 @@ public enum CommandKey {
     DEADLINE("deadline"),
     EXIT("bye"),
     FIND("find");
-    
+
     private String key;
-    
+
     CommandKey(String key) {
         this.key = key;
     }
-    
+
     String getKey() {
         return key;
     }
 
     /**
      * Checks if the user's command is valid.
-     * 
+     *
      * @param userCommand User's command keyword (first word in the user's input).
      * @param key Supported command key.
      * @return Whether user's command keyword is supported.

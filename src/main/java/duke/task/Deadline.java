@@ -11,9 +11,16 @@ import java.time.format.FormatStyle;
  * Represents a deadline task.
  */
 public class Deadline extends Task {
-    LocalDate date;
-    LocalTime time;
+    private LocalDate date;
+    private LocalTime time;
 
+    /**
+     * Creates a Deadline instance with task description, date and time.
+     *
+     * @param task Task description.
+     * @param date Date of deadline.
+     * @param time Time of deadline.
+     */
     public Deadline(String task, LocalDate date, LocalTime time) {
         super(task);
         this.date = date;
@@ -23,7 +30,7 @@ public class Deadline extends Task {
     /**
      * Returns a Deadline with the appropriate details. Should only be used when reading from
      * the storage file.
-     * 
+     *
      * @param task Task description.
      * @param inputDate String representing the date in the format YYYY-MM-DD
      * @param inputTime String representing the time in the format HH:MM
@@ -46,18 +53,18 @@ public class Deadline extends Task {
     }
 
     /**
-     * Returns a String representation of the deadline to be stored in the 
+     * Returns a String representation of the deadline to be stored in the
      * storage file.
      *
      * @return Formatted String representing the deadline.
      */
     @Override
     public String toDataString() {
-        return "D // " + (done ? "1": "0") + " // " + task + " // "
+        return "D // " + (done ? "1" : "0") + " // " + task + " // "
             + date.format(DateTimeFormatter.ISO_LOCAL_DATE) + " // "
             + time.format(DateTimeFormatter.ISO_LOCAL_TIME);
     }
-    
+
     /**
      * Returns a String representation of the deadline for display. The date and
      * time substring is in the format Mmm DD, YYYY H:MM AM/PM.

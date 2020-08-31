@@ -12,7 +12,7 @@ public class TaskListTest {
         testUnit.add(testTask);
         assertEquals(testUnit.getList().get(0).toString(), "[T][✘] this");
     }
-    
+
     @Test
     public void delete_success() {
         Task testTask = new ToDo("this");
@@ -21,13 +21,13 @@ public class TaskListTest {
         testUnit.delete(1);
         assertEquals(testUnit.getList().size(), 0);
     }
-    
-    @Test 
+
+    @Test
     public void size_success() {
         TaskList testUnit = new TaskList();
         assertEquals(testUnit.size(), 0);
     }
-    
+
     @Test
     public void get_success() {
         Task testTask = new ToDo("this");

@@ -7,13 +7,13 @@ public class ToDo extends Task {
     public ToDo(String task) {
         super(task);
     }
-    
+
     public ToDo(String task, boolean done) {
         super(task, done);
     }
 
     /**
-     * Returns a String representation of the task to be stored in the 
+     * Returns a String representation of the task to be stored in the
      * storage file.
      *
      * @return Formatted String representing the task.

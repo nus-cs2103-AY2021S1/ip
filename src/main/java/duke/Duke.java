@@ -1,5 +1,8 @@
 package duke;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 import duke.command.Command;
 
 import duke.exception.DukeException;
@@ -7,9 +10,6 @@ import duke.exception.DukeException;
 import duke.task.TaskList;
 
 import duke.ui.Ui;
-
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
 /**
  * Represents the chatbot Duke.
@@ -19,7 +19,7 @@ public class Duke {
     private Parser parser;
     private TaskList tasks;
     private Storage storage;
-    
+
     Duke() {
         ui = new Ui();
         parser = new Parser();
@@ -60,7 +60,7 @@ public class Duke {
 
     /**
      * Runs Duke.
-     * 
+     *
      * @param args
      */
     public static void main(String[] args) {

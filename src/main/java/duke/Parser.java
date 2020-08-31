@@ -1,5 +1,10 @@
 package duke;
 
+import java.time.DateTimeException;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+
 import duke.command.AddCommand;
 import duke.command.Command;
 import duke.command.CommandKey;
@@ -17,11 +22,6 @@ import duke.exception.DukeNoItemToMarkDoneException;
 import duke.exception.DukeNoKeywordException;
 import duke.exception.DukeTooManyKeywordsException;
 import duke.exception.DukeUnknownCommandException;
-
-import java.time.DateTimeException;
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 
 /**
  * Represents a parser for parsing user inputs.
@@ -45,7 +45,7 @@ public class Parser {
 
     /**
      * Parses and validates user input before returning a command to be executed.
-     * 
+     *
      * @param input The user input.
      * @return Command to be executed.
      * @throws DukeException If the user input is invalid.
@@ -66,7 +66,7 @@ public class Parser {
             if (processedInput.length == 1) {
                 throw new DukeNoItemToMarkDoneException(input);
             }
-            return new DoneCommand(Integer.parseInt(processedInput[1])); 
+            return new DoneCommand(Integer.parseInt(processedInput[1]));
         } else if (CommandKey.equalsCommandKey(processedInput[0], CommandKey.FIND)) {
             if (processedInput.length == 1) {
                 throw new DukeNoKeywordException(input);
