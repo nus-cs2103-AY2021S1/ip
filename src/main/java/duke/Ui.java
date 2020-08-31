@@ -3,34 +3,17 @@ package duke;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
 
-import java.util.Scanner;
-
 /**
  * Ui class to deal with user interaction
  */
 public class Ui {
-    private static final Scanner sc = new Scanner(System.in);
-    private void showLine() {
-        System.out.println("   __________________________________________________________________");
-    }
-
-    /**
-     * Returns next line of user input
-     *
-     * @return Next line of user input
-     */
-    public String readCommand() {
-        return sc.nextLine();
-    }
 
     /**
      * Prints welcome message
      */
     public void showWelcome() {
-        showLine();
         System.out.println("    Hello, I'm Duke");
         System.out.println("    I can help you keep track of all your tasks! ☆*:.｡.o(≧▽≦)o.｡.:*☆");
-        showLine();
         System.out.println("    How to add tasks to the list:");
         System.out.println("    ToDo - type 'todo' followed by the description");
         System.out.println("    Deadline - type 'deadline' followed by the description,");
@@ -42,79 +25,77 @@ public class Ui {
         System.out.println("    Type 'list' to see the list");
         System.out.println("    Type 'find' followed by keyword to search for tasks");
         System.out.println("    Type 'bye' to exit");
-        showLine();
     }
 
     /**
-     * Prints list of existing tasks
+     * Returns string containing list of existing tasks
      *
      * @param tasks List of tasks
+     * @return String of tasks
      */
-    public void printList(TaskList tasks) {
-        showLine();
+    public String printList(TaskList tasks) {
+        String tasksString = "";
         if (tasks.size() == 0) {
-            System.out.println("    List is empty");
+            tasksString += "List is empty \n";
         } else {
-            System.out.println("    Items in list:");
+            tasksString += "Items in list: \n";
             for (int i = 0; i < tasks.size(); i++) {
-                System.out.println("      " + (i + 1) + ". " + tasks.get(i).toString());
+                tasksString += ((i + 1) + ". " + tasks.get(i).toString() + "\n");
             }
         }
-        showLine();
+        return tasksString;
     }
 
     /**
-     * Prints appropriate message for task depending on action type
+     * Returns appropriate message for task depending on action type
      *
      * @param task Task to be printed
      * @param action Action type; determines format of text that is printed
+     * @return String containing task info
      */
-    public void printTask(Task task, ActionType action) {
-        showLine();
+    public String printTask(Task task, ActionType action) {
+        String taskString = "";
         switch(action){
         case MARK_DONE:
-            System.out.println("    Task marked complete:");
+            taskString += "Task marked complete: \n";
             break;
         case DELETE:
-            System.out.println("    Task deleted:");
+            taskString += "Task deleted: \n";
             break;
         default:
-            System.out.println("    Added: ");
+            taskString += "Added: \n";
         }
-        System.out.println("      " + task.toString());
-        showLine();
+        taskString += task.toString();
+        return taskString;
     }
 
-    public void search(TaskList tasks, String input) {
+    public String search(TaskList tasks, String input) {
         int count = 1;
-        showLine();
-        System.out.println("    Matching tasks:");
+        String result = "Matching tasks: \n";
         for (Task task: tasks.getList()) {
             String taskString = task.toString();
             if (taskString.contains(input)) {
-                System.out.println("      " + count + ". " + taskString);
+                result += (count + ". " + taskString + "\n");
                 count++;
             }
         }
-        showLine();
+        return result;
     }
 
     /**
      * Prints total number of tasks
      *
      * @param tasks List of tasks
+     * @return String with total number of tasks
      */
-    public void printTotalTasks(TaskList tasks) {
-        System.out.println("    Total tasks: " + tasks.size());
-        showLine();
+    public String printTotalTasks(TaskList tasks) {
+        return "Total tasks: " + tasks.size();
     }
 
     /**
      * Prints goodbye message
      */
-    public void goodbye() {
-        showLine();
-        System.out.println("    See you again soon (hopefully)! :>");
-        showLine();
+    public String goodbye() {
+        return "See you again soon (hopefully)! :>";
     }
 }

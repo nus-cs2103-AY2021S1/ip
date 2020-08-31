@@ -13,14 +13,15 @@ public class ListCommand extends Command {
     }
 
     /**
-     * Makes Ui print list of tasks
+     * Returns string containing list of tasks
      *
      * @param tasks List of tasks
      * @param ui User interface to print task
      * @param storage File storage object
+     * @return List of tasks in string format
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.printList(tasks);
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        return ui.printList(tasks);
     }
 }

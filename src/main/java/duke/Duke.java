@@ -26,44 +26,9 @@ public class Duke extends Application {
     private Scene scene;
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
-//    private final Storage storage;
-//    private TaskList tasks;
-//    private final Ui ui;
-//
-//    /**
-//     * Duke constructor
-//     *
-//     * @param filePath Filepath of .txt file to save tasks in
-//     */
-//    public Duke(String filePath) {
-//        ui = new Ui();
-//        storage = new Storage(filePath);
-//        try {
-//            tasks = new TaskList(storage.getTasks());
-//        } catch (Exception e) {
-//            System.out.println(e.getMessage());
-//            tasks = new TaskList();
-//        }
-//    }
-//
-//    /**
-//     * Runs the Duke program
-//     */
-//    public void run() {
-//        ui.showWelcome();
-//        boolean isExit = false;
-//        while (!isExit) {
-//            try {
-//                String fullCommand = ui.readCommand();
-//                Command c = Parser.parse(fullCommand);
-//                c.execute(tasks, ui, storage);
-//                isExit = c.isExit();
-//            } catch (DukeException e) {
-//                System.out.println(e.getMessage());
-//            }
-//        }
-//
-//    }
+    private Storage storage = new Storage("src/main/data.txt");
+    private TaskList tasks = new TaskList(storage.getTasks());
+    private Ui ui = new Ui();
 
     @Override
     public void start(Stage stage) {
@@ -129,21 +94,6 @@ public class Duke extends Application {
     }
 
     /**
-     * Iteration 1:
-     * Creates a label with the specified text and adds it to the dialog container.
-     * @param text String containing text to add
-     * @return a label with the specified text that has word wrap enabled.
-     */
-    private Label getDialogLabel(String text) {
-        // You will need to import `javafx.scene.control.Label`.
-        Label textToAdd = new Label(text);
-        textToAdd.setWrapText(true);
-
-        return textToAdd;
-    }
-
-    /**
-     * Iteration 2:
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
@@ -162,9 +112,13 @@ public class Duke extends Application {
      * Replace this stub with your completed method.
      */
     private String getResponse(String input) {
-        return "Duke heard: " + input;
+        String output;
+        try {
+            Command c = Parser.parse(input);
+            output = c.execute(tasks, ui, storage);
+            } catch (DukeException e) {
+                output = (e.getMessage());
+            }
+        return output;
     }
-//    public static void main(String[] args) {
-//        new Duke("src/main/data.txt").run();
-//    }
 }

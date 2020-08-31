@@ -23,21 +23,22 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Deletes task from list and prints its info
+     * Deletes task from list and returns its info
      *
      * @param tasks List of tasks
      * @param ui User interface to print task
      * @param storage File storage object
+     * @return Info on deleted task
      * @throws DukeException if exception encountered
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (taskIndex >= tasks.getList().size()) {
-            throw new DukeException("duke.tasks.Task does not exist _(´ཀ`」 ∠)_");
+            throw new DukeException("Task does not exist _(´ཀ`」 ∠)_");
         } else {
             Task deletedTask = tasks.delete(taskIndex);
             storage.updateFile(tasks);
-            ui.printTask(deletedTask, ActionType.MARK_DONE);
+            return ui.printTask(deletedTask, ActionType.MARK_DONE);
         }
     }
 }
