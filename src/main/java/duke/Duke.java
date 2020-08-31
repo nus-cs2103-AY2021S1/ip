@@ -1,5 +1,10 @@
 package duke;
 
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
+
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
@@ -7,12 +12,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class Duke {
+public class Duke extends Application {
 
     private UserInterface ui;
     private Storage storage;
     private Parser parser;
     private TaskList taskList;
+
+    public Duke() {} // empty constructor needed for javaFX?
 
     public Duke(String filePath) {
         this.ui = new UserInterface();
@@ -217,4 +224,12 @@ public class Duke {
     }
 
 
+    @Override
+    public void start(Stage stage) throws Exception {
+        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
+        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
+
+        stage.setScene(scene); // Setting the stage to show our screen
+        stage.show(); // Render the stage.
+    }
 }
