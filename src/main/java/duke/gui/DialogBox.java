@@ -13,6 +13,12 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
+import javafx.scene.text.TextFlow;
 
 /**
  * An example of a custom control using FXML.
@@ -21,7 +27,8 @@ import javafx.scene.layout.HBox;
  */
 public class DialogBox extends HBox {
     @FXML
-    private Label dialog;
+    //private Label dialog;
+    private TextFlow dialog;
     @FXML
     private ImageView displayPicture;
 
@@ -35,7 +42,15 @@ public class DialogBox extends HBox {
             e.printStackTrace();
         }
 
-        dialog.setText(text);
+        //dialog.setText(text);
+        Text textFill = new Text(text);
+        textFill.setFont(Font.font("Libre Baskerville", FontPosture.REGULAR, 12));
+
+        dialog.getChildren().add(textFill);
+        dialog.setLineSpacing(1.15);
+        dialog.setTranslateX(-5);
+        dialog.setTextAlignment(TextAlignment.LEFT);
+
         displayPicture.setImage(img);
     }
 
