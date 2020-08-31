@@ -1,5 +1,3 @@
-package test.java;
-
 import luoyi.duke.common.TimeWrapper;
 import org.junit.jupiter.api.Test;
 

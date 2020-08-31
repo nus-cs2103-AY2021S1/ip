@@ -1,5 +1,3 @@
-package test.java;
-
 import luoyi.duke.data.task.Deadline;
 import luoyi.duke.data.task.Event;
 import luoyi.duke.data.task.TaskList;
@@ -38,23 +36,20 @@ public class UiTest {
     @Test
     public void greet_stringPrinted() {
         Ui.greet();
-        String expectedOutput
-                = "　　＼　　　　　／\n　　　＼∧∧∧／\n　　　＜　 Ｃ ＞\n　　　＜ 　Ａ ＞\n　　　＜　 Ｔ ＞\n"
-                + "　 ───＜ Ｂ　 ＞───\n　　　＜ Ｏ　 ＞\n　　　＜ Ｔ　 ＞\n　　　／∨∨∨＼\n　　／ ∧_∧　　＼\n"
-                + "　／　( ･ω･)　　 ＼\n／　＿(_つ/￣￣￣/　＼\n　　 　＼/＿＿＿/\n"
-                + "∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴\n"
-                + "∴‥	Hi I'm Cat Bot.\n∴‥	What can I do for you?\n"
-                + "∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴\n";
+        String expectedOutput = "CAT BOT\n"
+                + "------------------------------------------------------------------\n"
+                + "|\tHi I'm Cat Bot.\n"
+                + "|\tWhat can I do for you?\n"
+                + "------------------------------------------------------------------\n";
         assertEquals(expectedOutput, outContent.toString());
     }
 
     @Test
     public void bye_stringPrinted() {
         Ui.bye();
-        String expectedOutput
-                = "∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴\n"
-                + "∴‥\tBye! Hope to see you again!\n"
-                + "∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴\n";
+        String expectedOutput = "------------------------------------------------------------------\n"
+                + "|\tBye! Hope to see you again!\n"
+                + "------------------------------------------------------------------\n";
         assertEquals(expectedOutput, outContent.toString());
     }
 
@@ -62,9 +57,9 @@ public class UiTest {
     public void displayTasks_emptyList_emptyListPromptPrinted() {
         TaskList list = new TaskList(new ArrayList<>());
         Ui.displayTasks(list);
-        String expectedOutput = "∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴\n"
-                + "∴‥\tOops! Looks like there's no task in the list!\n"
-                + "∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴\n";
+        String expectedOutput = "------------------------------------------------------------------\n"
+                + "|\tOops! Looks like there's no task in the list!\n"
+                + "------------------------------------------------------------------\n";
         assertEquals(expectedOutput, outContent.toString());
     }
 
@@ -75,12 +70,12 @@ public class UiTest {
         list.add(Deadline.getDeadline("Homework", "20201111"));
         list.add(Event.getEvent("Tutorial", "2020 11 11 11:22").markComplete());
         Ui.displayTasks(list);
-        String expectedOutput = "∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴\n"
-                + "∴‥\tHere are the tasks in your list:\n"
-                + "∴‥\t 1. [T][✗] Have lunch.\n"
-                + "∴‥\t 2. [D][✗] Homework (by: 2020-11-11)\n"
-                + "∴‥\t 3. [E][✓] Tutorial (at: 2020-11-11T11:22)\n"
-                + "∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴\n";
+        String expectedOutput = "------------------------------------------------------------------\n"
+                + "|\tHere are the tasks in your list:\n"
+                + "|\t 1. [T][X] Have lunch.\n"
+                + "|\t 2. [D][X] Homework (by: 2020-11-11)\n"
+                + "|\t 3. [E][V] Tutorial (at: 2020-11-11T11:22)\n"
+                + "------------------------------------------------------------------\n";
         assertEquals(expectedOutput, outContent.toString());
     }
 
@@ -88,11 +83,12 @@ public class UiTest {
     public void displayTasks_correctDate_matchingTaskPrinted() {
         TaskList list = setUpTestList();
         Ui.displayTasks(list, new int[]{2, 3});
-        String expectedOutput = "∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴\n"
-                + "∴‥\tHere are the task on you are looking for:\n"
-                + "∴‥\t 3. [E][✓] Tutorial (at: 2020-11-11T11:22)\n"
-                + "∴‥\t 4. [E][✓] Lecture (at: 2020-11-12T10:45)\n"
-                + "∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴\n";
+        String expectedOutput
+                = "------------------------------------------------------------------\n"
+                + "|\tHere are the task on you are looking for:\n"
+                + "|\t 3. [E][V] Tutorial (at: 2020-11-11T11:22)\n"
+                + "|\t 4. [E][V] Lecture (at: 2020-11-12T10:45)\n"
+                + "------------------------------------------------------------------\n";
         assertEquals(expectedOutput, outContent.toString());
     }
 
@@ -100,9 +96,10 @@ public class UiTest {
     public void displayTasks_noMatch_noMatchPromptPrinted() {
         TaskList list = setUpTestList();
         Ui.displayTasks(list, new int[]{});
-        String expectedOutput = "∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴\n"
-                + "∴‥\tOops! Looks like there's no matching task!\n"
-                + "∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴\n";
+        String expectedOutput
+                = "------------------------------------------------------------------\n"
+                + "|\tOops! Looks like there's no matching task!\n"
+                + "------------------------------------------------------------------\n";
         assertEquals(expectedOutput, outContent.toString());
     }
 
