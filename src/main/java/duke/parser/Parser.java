@@ -4,7 +4,11 @@ import duke.exceptions.InvalidDeadlineException;
 import duke.exceptions.InvalidEventException;
 import duke.exceptions.InvalidKeyException;
 import duke.exceptions.InvalidRequestException;
-import duke.tasks.*;
+import duke.tasks.Event;
+import duke.tasks.Deadline;
+import duke.tasks.Task;
+import duke.tasks.TaskList;
+import duke.tasks.Todo;
 import duke.storage.Storage;
 
 import java.util.ArrayList;
@@ -204,7 +208,7 @@ public class Parser {
 
                 }else{
 
-                    throw new InvalidRequestException("Sorry, I could not understand your command. Please say another one!");
+                    throw new InvalidRequestException("Sorry, I could not understand what you said. Please say another one!");
 
                 }
 
