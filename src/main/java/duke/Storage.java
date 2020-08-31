@@ -1,5 +1,8 @@
 package duke;
 
+import duke.exception.DukeException;
+import duke.exception.LoadingErrorException;
+import duke.exception.StorageIOException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -71,7 +74,7 @@ public class Storage {
             }
             return list;
         } catch (FileNotFoundException e) {
-            throw DukeException.loadingError(filePath);
+            throw new LoadingErrorException(filePath);
         } catch (DukeException e) {
             throw (e);
         }
@@ -97,7 +100,7 @@ public class Storage {
             fw.write(data);
             fw.close();
         } catch (IOException e) {
-            throw DukeException.storageIOException(e.getMessage());
+            throw new StorageIOException(e.getMessage());
         }
     }
 }

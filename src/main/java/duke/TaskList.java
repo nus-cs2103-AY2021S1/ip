@@ -1,5 +1,8 @@
 package duke;
 
+import duke.exception.DukeException;
+import duke.exception.EmptyListException;
+import duke.exception.OutOfBoundsException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -33,7 +36,7 @@ public class TaskList {
             }
             return text;
         } else {
-            throw (DukeException.emptyList());
+            throw (new EmptyListException());
         }
     }
 
@@ -74,7 +77,7 @@ public class TaskList {
             list.remove(index);
             return task.toString();
         } catch (IndexOutOfBoundsException e) {
-            throw(DukeException.outOfBounds());
+            throw(new OutOfBoundsException());
         }
     }
 
@@ -90,7 +93,7 @@ public class TaskList {
             list.get(index).setDone();
             return list.get(index).toString();
         } catch (IndexOutOfBoundsException e) {
-            throw (DukeException.outOfBounds());
+            throw (new OutOfBoundsException());
         }
     }
 

@@ -1,6 +1,27 @@
 package duke;
 
-import duke.command.*;
+import duke.command.ByeCommand;
+import duke.command.Command;
+import duke.command.DeadlineCommand;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.DueInCommand;
+import duke.command.EventCommand;
+import duke.command.FindCommand;
+import duke.command.HelpCommand;
+import duke.command.ListCommand;
+import duke.command.ToDoCommand;
+
+import duke.exception.DukeException;
+import duke.exception.EmptyDescriptionException;
+import duke.exception.InvalidDateTimeException;
+import duke.exception.MissingTaskException;
+import duke.exception.MissingTimeException;
+import duke.exception.OutOfBoundsException;
+import duke.exception.TypeMismatchException;
+import duke.exception.UnknownCommandException;
+import duke.exception.WrongDateTimeFormatException;
+import duke.exception.WrongDueInFormatException;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
@@ -17,22 +38,22 @@ public class Parser {
                 int index = parseInt(number) - 1;
                 return new DoneCommand(index);
             } else {
-                throw (DukeException.emptyDesc("done"));
+                throw (new EmptyDescriptionException("done"));
             }
         } catch (NumberFormatException e) {
-            throw (DukeException.typeMismatch("done"));
+            throw (new TypeMismatchException("done"));
         } catch (DukeException e) {
             throw (e);
         }
     }
 
-    private static Command handleToDo(String input) throws DukeException {
+    private static Command handleToDo(String input) throws EmptyDescriptionException {
         String pattern = "(todo\\s)(.+)";
         if (input.trim().matches(pattern)) {
             String task = input.replaceAll(pattern, "$2");
             return new ToDoCommand(task);
         } else {
-            throw (DukeException.emptyDesc("todo"));
+            throw (new EmptyDescriptionException("todo"));
         }
     }
 
@@ -51,15 +72,15 @@ public class Parser {
                         LocalDateTime dateTime = extractDateTime(input, completePattern);
                         return new DeadlineCommand(task, dateTime);
                     } else {
-                        throw (DukeException.wrongDateTimeFormat());
+                        throw (new WrongDateTimeFormatException());
                     }
                 } else if (input.trim().matches(missingTaskPattern)) {
-                    throw (DukeException.missingTask());
+                    throw (new MissingTaskException());
                 } else {
-                    throw (DukeException.missingTime("by"));
+                    throw (new MissingTimeException("by"));
                 }
             } else {
-                throw (DukeException.emptyDesc("deadline"));
+                throw (new EmptyDescriptionException("deadline"));
             }
         } catch (DukeException e) {
             throw (e);
@@ -81,15 +102,15 @@ public class Parser {
                         LocalDateTime dateTime = extractDateTime(input, completePattern);
                         return new EventCommand(task, dateTime);
                     } else {
-                        throw (DukeException.wrongDateTimeFormat());
+                        throw (new WrongDateTimeFormatException());
                     }
                 } else if (input.trim().matches(missingTaskPattern)) {
-                    throw (DukeException.missingTask());
+                    throw (new MissingTaskException());
                 } else {
-                    throw (DukeException.missingTime("at"));
+                    throw (new MissingTimeException("at"));
                 }
             } else {
-                throw (DukeException.emptyDesc("event"));
+                throw (new EmptyDescriptionException("event"));
             }
         } catch (DukeException e) {
             throw (e);
@@ -104,12 +125,12 @@ public class Parser {
                 int index = parseInt(number) - 1;
                 return new DeleteCommand(index);
             } else {
-                throw (DukeException.emptyDesc("delete"));
+                throw (new EmptyDescriptionException("delete"));
             }
         } catch (NumberFormatException e) {
-            throw (DukeException.typeMismatch("delete"));
+            throw (new TypeMismatchException("delete"));
         } catch (IndexOutOfBoundsException e) {
-            throw (DukeException.outOfBounds());
+            throw (new OutOfBoundsException());
         }
     }
 
@@ -119,9 +140,9 @@ public class Parser {
      * @param input User input.
      * @param completePattern Regex pattern that follows the command format.
      * @return LocalDateTime of specified dateTime.
-     * @throws DukeException If dateTime in input is invalid.
+     * @throws InvalidDateTimeException If dateTime in input is invalid.
      */
-    public static LocalDateTime extractDateTime(String input, String completePattern) throws DukeException {
+    public static LocalDateTime extractDateTime(String input, String completePattern) throws InvalidDateTimeException {
         try {
             String date = input.replaceAll(completePattern, "$4");
             String hours = input.replaceAll(completePattern, "$5");
@@ -129,7 +150,7 @@ public class Parser {
             String time = hours + ":" + minutes;
             return LocalDateTime.parse(date + "T" + time);
         } catch (DateTimeParseException e) {
-            throw (DukeException.invalidDateTime());
+            throw (new InvalidDateTimeException());
         }
     }
 
@@ -146,25 +167,25 @@ public class Parser {
                     long time = parseInt(input.replaceAll(dayPattern, "$2"));
                     return new DueInCommand(time, false);
                 } else {
-                    throw (DukeException.wrongDueInFormat());
+                    throw (new WrongDueInFormatException());
                 }
             } else {
-                throw (DukeException.emptyDesc("due in"));
+                throw (new EmptyDescriptionException("due in"));
             }
         } catch (NumberFormatException e) {
-            throw (DukeException.typeMismatch("due in"));
+            throw (new TypeMismatchException("due in"));
         } catch (IndexOutOfBoundsException e) {
-            throw (DukeException.outOfBounds());
+            throw (new OutOfBoundsException());
         }
     }
 
-    private static Command handleFind(String input) throws DukeException {
+    private static Command handleFind(String input) throws EmptyDescriptionException {
         String pattern = "(find\\s)(.+)";
         if (input.trim().matches(pattern)) {
             String keyword = input.replaceAll(pattern, "$2");
             return new FindCommand(keyword);
         } else {
-            throw (DukeException.emptyDesc("find"));
+            throw (new EmptyDescriptionException("find"));
         }
     }
 
@@ -197,7 +218,7 @@ public class Parser {
         } else if (input.startsWith("find")) {
             return handleFind(input);
         } else {
-            throw (DukeException.unknownCommand());
+            throw (new UnknownCommandException());
         }
     }
 }
