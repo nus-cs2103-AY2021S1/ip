@@ -50,7 +50,7 @@ public class TaskListTest {
         try {
             assertEquals(tl.deleteTask(1), todo);
         } catch (DukeInvalidIndexException e) {
-            assertEquals("☹ OOPS!!! There is no such task.", e.getMessage());
+            assertEquals("OOPS!!! There is no such task.", e.getMessage());
         }
     }
 
@@ -72,7 +72,7 @@ public class TaskListTest {
         try {
             assertEquals(markDoneTodo, tl.markDone(1));
         } catch (DukeInvalidIndexException e) {
-            assertEquals("☹ OOPS!!! There is no such task.", e.getMessage());
+            assertEquals("OOPS!!! There is no such task.", e.getMessage());
         }
     }
 
@@ -152,7 +152,7 @@ public class TaskListTest {
         try {
             assertEquals(todo, tl.get(0));
         } catch (DukeInvalidIndexException e) {
-            assertEquals("☹ OOPS!!! There is no such task.", e.getMessage());
+            assertEquals("OOPS!!! There is no such task.", e.getMessage());
         }
     }
 
