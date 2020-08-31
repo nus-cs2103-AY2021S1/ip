@@ -1,17 +1,17 @@
 package sparkles.command;
 
+import java.util.List;
+
 import sparkles.SparklesException;
 import sparkles.task.Task;
 import sparkles.task.TaskList;
 import sparkles.util.Storage;
 import sparkles.util.Ui;
 
-import java.util.List;
-
 /**
  * Represent a find command.
  */
-public class FindCommand extends Command{
+public class FindCommand extends Command {
     public FindCommand(String command) {
         super(command);
     }
@@ -22,10 +22,10 @@ public class FindCommand extends Command{
      * to the keyword and display to
      * the user.
      *
-     * @param taskList, TaskList object containing list
-     *                  of tasks.
-     * @param ui,       Ui Object that interacts with user.
-     * @param storage,  storage object dealing with
+     * @param taskList TaskList object containing list
+     *                  of tasks
+     * @param ui       Ui Object that interacts with user
+     * @param storage  storage object dealing with
      *                  local disk file
      */
     @Override
@@ -55,7 +55,8 @@ public class FindCommand extends Command{
                 }
             } catch (Exception ex) {
                 if (ex instanceof StringIndexOutOfBoundsException) {
-                    throw new SparklesException("     OOPS!! Related keyword of task in the list to find is not specified!");
+                    throw new SparklesException(
+                            "     OOPS!! Related keyword of task in the list to find is not specified!");
                 }
             }
         }

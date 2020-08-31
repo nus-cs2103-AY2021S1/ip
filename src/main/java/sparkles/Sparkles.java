@@ -15,6 +15,12 @@ public class Sparkles {
     private TaskList tasks;
     private final Ui ui;
 
+    /**
+     * Creates the Sparkles object with the destinated filepath.
+     * Initialised the Ui, Storage and TaskList object.
+     *
+     * @param filePath file path where task.txt is to be created
+     */
     public Sparkles(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);

@@ -34,7 +34,7 @@ public class Ui {
     /**
      * Print the number of task in the list now.
      *
-     * @param i, number of task
+     * @param i number of task
      */
     public void printListSize(int i) {
         print("     Now you have " + i + " task(s) in your list.");

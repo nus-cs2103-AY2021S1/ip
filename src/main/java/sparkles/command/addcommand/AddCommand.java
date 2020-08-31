@@ -23,12 +23,12 @@ public class AddCommand extends Command {
      * Before that, parse the command to differentiate
      * between AddDeadline, AddEvent or AddTodo.
      *
-     * @param taskList, TaskList object containing list
-     *                  of tasks.
-     * @param ui,       Ui Object that interacts with user.
-     * @param storage,  storage object dealing with
+     * @param taskList TaskList object containing list
+     *                  of tasks
+     * @param ui       Ui Object that interacts with user
+     * @param storage  storage object dealing with
      *                  local disk file
-     * @throws SparklesException, custom exception that handles
+     * @throws SparklesException custom exception that handles
      * exception of Sparkles
      */
     @Override

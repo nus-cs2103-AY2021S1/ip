@@ -13,8 +13,7 @@ public class Todo extends Task {
      * Package the Todo to a format used to store in the task.txt.
      * A file in the local disk to store tasks.
      *
-     * @return String of Task's details
-     * in custom disk format.
+     * @return String of Task's details in custom disk format
      */
     @Override
     public String convertToDiskFormat() {

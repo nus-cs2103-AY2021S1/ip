@@ -1,12 +1,12 @@
 package sparkles.command;
 
+import java.util.List;
+
 import sparkles.SparklesException;
 import sparkles.task.Task;
 import sparkles.task.TaskList;
 import sparkles.util.Storage;
 import sparkles.util.Ui;
-
-import java.util.List;
 
 /**
  * Represent a show list command.
@@ -21,12 +21,12 @@ public class ShowListCommand extends Command {
      * Deals with user's command.
      * Display user's tasks to the user.
      *
-     * @param taskList, TaskList object containing list
-     *                  of tasks.
-     * @param ui,       Ui Object that interacts with user.
-     * @param storage,  storage object dealing with
+     * @param taskList TaskList object containing list
+     *                  of tasks
+     * @param ui       Ui Object that interacts with user
+     * @param storage  storage object dealing with
      *                  local disk file
-     * @throws SparklesException, custom exception that handles
+     * @throws SparklesException custom exception that handles
      * exception of Sparkles
      */
     @Override

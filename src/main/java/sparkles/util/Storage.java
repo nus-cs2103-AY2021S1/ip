@@ -1,11 +1,5 @@
 package sparkles.util;
 
-import sparkles.SparklesException;
-import sparkles.task.Deadline;
-import sparkles.task.Event;
-import sparkles.task.Task;
-import sparkles.task.Todo;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -13,6 +7,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
+import sparkles.SparklesException;
+import sparkles.task.Deadline;
+import sparkles.task.Event;
+import sparkles.task.Task;
+import sparkles.task.Todo;
 
 /**
  * Represent a storage object, taking in the file path of the task.txt.
@@ -33,7 +33,7 @@ public class Storage {
      * Task.txt is overwritten with respect to the
      * tasks in the list provided as parameter.
      *
-     * @param storage, list of task
+     * @param storage list of task
      */
     public void updateFile(List<Task> storage) {
         String userDir = new File("").getAbsolutePath();
@@ -50,6 +50,7 @@ public class Storage {
             fileWriter.write(append.toString());
             fileWriter.close();
         } catch (IOException ignored) {
+            System.out.println("Error");
         }
 
     }
@@ -62,7 +63,7 @@ public class Storage {
      * differentiate what kind of task(
      * deadline, event, todo) it is.
      *
-     * @return a list with the corresponding task.
+     * @return a list with the corresponding task
      * @throws SparklesException
      */
     public List<Task> load() throws SparklesException {
@@ -108,6 +109,7 @@ public class Storage {
                 System.out.println("     Task.txt did not exist and cannot be created in directory");
             }
         } catch (IOException ignored) {
+            System.out.println("Error");
         }
     }
 
