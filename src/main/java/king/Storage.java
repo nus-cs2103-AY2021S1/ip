@@ -1,11 +1,5 @@
 package king;
 
-import tasks.Deadline;
-import tasks.Event;
-import tasks.Task;
-import tasks.TaskList;
-import tasks.ToDo;
-
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
@@ -15,9 +9,15 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import tasks.Deadline;
+import tasks.Event;
+import tasks.Task;
+import tasks.TaskList;
+import tasks.ToDo;
+
 public class Storage {
 
-    public final String FILE_PATH;
+    public final String filePath;
     private File data;
 
     /**
@@ -28,7 +28,7 @@ public class Storage {
      * @param filepath file path for an existing asset or to initialise a new asset.
      */
     Storage(String filepath) {
-        this.FILE_PATH = filepath;
+        this.filePath = filepath;
         String[] tokens = filepath.split("/");
         int pathLength = tokens.length;
         if (pathLength == 0) {
@@ -55,7 +55,7 @@ public class Storage {
      * Storage read the asset in the filepath and loads the
      * Tasks in the asset into an ArrayList.
      *
-     * @return ArrayList<Task>
+     * @return ArrayList list of tasks
      */
     public ArrayList<Task> load() {
         ArrayList<Task> items = new ArrayList<>();
@@ -84,7 +84,7 @@ public class Storage {
      */
     public boolean persistTaskList(TaskList taskList) {
         try {
-            BufferedWriter output = new BufferedWriter(new FileWriter(FILE_PATH));
+            BufferedWriter output = new BufferedWriter(new FileWriter(filePath));
             for (int i = 0; i < taskList.size(); i++) {
                 Task task = taskList.get(i);
                 String isLoaded = task.isDone() ? "1" : "0";
@@ -110,6 +110,11 @@ public class Storage {
         return true;
     }
 
+    /**
+     * Finds a keyword in the asset file.
+     * @param keyword
+     * @return
+     */
     public TaskList find(String keyword) {
         TaskList tasksFound = new TaskList();
         try {
@@ -131,14 +136,14 @@ public class Storage {
         String[] dataTokens = data.split("@", 4);
         Task task;
         switch (dataTokens[0]) {
-            case "T":
-                task = new ToDo(dataTokens[2]);
-                break;
-            case "D":
-                task = new Deadline(dataTokens[2], LocalDateTime.parse(dataTokens[3]));
-                break;
-            default:
-                task = new Event(dataTokens[2], dataTokens[3]);
+        case "T":
+            task = new ToDo(dataTokens[2]);
+            break;
+        case "D":
+            task = new Deadline(dataTokens[2], LocalDateTime.parse(dataTokens[3]));
+            break;
+        default:
+            task = new Event(dataTokens[2], dataTokens[3]);
         }
         if (dataTokens[1].equals("1")) {
             task.markAsDone();

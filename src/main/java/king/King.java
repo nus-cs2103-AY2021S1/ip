@@ -7,9 +7,9 @@
  */
 package king;
 
-import tasks.TaskList;
-
 import java.util.Scanner;
+
+import tasks.TaskList;
 
 public class King {
 
@@ -30,6 +30,17 @@ public class King {
     }
 
     /**
+     * Main to execute the program
+     *
+     * @param args
+     */
+    public static void main(String[] args) {
+        System.out.println(UI.welcome());
+        King king = new King("data/king.txt");
+        king.chat();
+    }
+
+    /**
      * Run the King program. King replies to the user.
      */
     public void chat() {
@@ -44,11 +55,5 @@ public class King {
         }
         System.out.print(UI.chatBox("Bye! Hope to see you again soon."));
         scanner.close();
-    }
-
-    public static void main(String[] args) {
-        System.out.println(UI.welcome());
-        King king = new King("data/king.txt");
-        king.chat();
     }
 }

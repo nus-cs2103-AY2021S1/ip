@@ -13,12 +13,12 @@ import tasks.TaskList;
 public class UI {
 
     // maximum number of characters across a screen
-    public static int CHAT_WIDTH = 47;
+    public static final int CHAT_WIDTH = 47;
 
     // Buffer to wrap text to the next line if the text if too long.
     // This buffer helps to keep words intact while wrapping the text
     // to the next line.
-    public static int BUFFER = CHAT_WIDTH - 6;
+    public static final int BUFFER = CHAT_WIDTH - 6;
 
     /**
      * Returns the Welcome message and logo.
@@ -27,12 +27,12 @@ public class UI {
      */
     public static String welcome() {
         String logo =
-                " ____  __.__\n" +
-                        "|    |/ _|__| ____    ____\n" +
-                        "|      < |  |/    \\  / ___\\\n" +
-                        "|    |  \\|  |   |  \\/ /_/  >\n" +
-                        "|____|__ \\__|___|  /\\___  /\n" +
-                        "        \\/       \\//_____/\n";
+                " ____  __.__\n"
+                        + "|    |/ _|__| ____    ____\n"
+                        + "|      < |  |/    \\  / ___\\\n"
+                        + "|    |  \\|  |   |  \\/ /_/  >\n"
+                        + "|____|__ \\__|___|  /\\___  /\n"
+                        + "        \\/       \\//_____/\n";
 
         return logo + "\n" + "Hello! I'm King!\nWhat can I do for you?";
     }
@@ -44,9 +44,9 @@ public class UI {
      * @return String chat box around text.
      */
     public static String chatBox(String chatContent) {
-        return "\t======= King says ===================================\n\t" +
-                formatStringIfLong(chatContent) + "\n" +
-                "\t=====================================================\n";
+        return "\t======= King says ===================================\n\t"
+                + formatStringIfLong(chatContent) + "\n"
+                + "\t=====================================================\n";
     }
 
     /**
@@ -56,9 +56,9 @@ public class UI {
      * @return String error box around error message.
      */
     public static String errorBox(String error) {
-        return "-------- Error Encountered -------------------------------------\n\t" +
-                formatStringIfLong(error) + "\n" +
-                "----------------------------------------------------------------\n";
+        return "-------- Error Encountered -------------------------------------\n\t"
+                + formatStringIfLong(error) + "\n"
+                + "----------------------------------------------------------------\n";
     }
 
     /**
@@ -70,9 +70,9 @@ public class UI {
      * @see TaskList
      */
     public static String addItemChatBox(String chatContent, int numOfItems) {
-        return chatBox("Got it. I've added this task:\n" +
-                "\t\t" + chatContent +
-                "\n\t Now you have " + numOfItems + " tasks in the list.");
+        return chatBox("Got it. I've added this task:\n"
+                + "\t\t" + chatContent
+                + "\n\t Now you have " + numOfItems + " tasks in the list.");
     }
 
     /**
@@ -84,9 +84,9 @@ public class UI {
      * @see TaskList
      */
     public static String deleteItemChatBox(String chatContent, int numOfItemsLeft) {
-        return chatBox("I have deleted the following item:\n" +
-                "\t\t" + chatContent +
-                "\n\tYou got " + numOfItemsLeft + " task(s) left.");
+        return chatBox("I have deleted the following item:\n"
+                + "\t\t" + chatContent
+                + "\n\tYou got " + numOfItemsLeft + " task(s) left.");
     }
 
     /**
@@ -114,8 +114,8 @@ public class UI {
         for (int number = 0; number < len; number++) {
             formatted.append("\n\t  " + (number + 1) + ". " + taskList.get(number).toString());
         }
-        return chatBox("There are " + len + " items in your list:" +
-                formatted.toString());
+        return chatBox("There are " + len + " items in your list:"
+                + formatted.toString());
     }
 
     /**
@@ -130,8 +130,8 @@ public class UI {
         for (int number = 0; number < len; number++) {
             formatted.append("\n\t  " + (number + 1) + ". " + taskList.get(number).toString());
         }
-        return chatBox("I found " + len + " items with the " + keyword + " keyword:" +
-                formatted.toString());
+        return chatBox("I found " + len + " items with the " + keyword + " keyword:"
+                + formatted.toString());
     }
 
     // folds a string if it is too long to fit into the chat box

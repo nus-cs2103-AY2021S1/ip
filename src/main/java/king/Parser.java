@@ -4,19 +4,19 @@
  */
 package king;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 import tasks.Deadline;
 import tasks.Event;
 import tasks.Task;
 import tasks.TaskList;
 import tasks.ToDo;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-
 public class Parser {
 
-    private final Storage  storage;
-    private       TaskList taskList;
+    private final Storage storage;
+    private TaskList taskList;
 
     /**
      * Parse the commands from the King Program
@@ -96,7 +96,7 @@ public class Parser {
                 ));
             }
             try {
-                LocalDateTime datetime = StringToLocalDateTime(tokens[1]);
+                LocalDateTime datetime = stringToLocalDateTime(tokens[1]);
                 Deadline deadline = new Deadline(tokens[0], datetime);
                 taskList.add(deadline);
                 reply = UI.addItemChatBox(deadline.toString(), taskList.size());
@@ -130,7 +130,7 @@ public class Parser {
     }
 
     // takes a Date Time string and returns a LocalDateTime
-    private LocalDateTime StringToLocalDateTime(String localDateTime) throws KingException {
+    private LocalDateTime stringToLocalDateTime(String localDateTime) throws KingException {
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
             return LocalDateTime.parse(localDateTime, formatter);

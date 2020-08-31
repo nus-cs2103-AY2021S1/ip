@@ -54,12 +54,12 @@ public class Task {
     @Override
     public String toString() {
         switch (state) {
-            case DONE:
-                return "[\u2713] " + description;
-            case UNDONE:
-                return "[\u2718] " + description;
-            default:
-                return description;
+        case DONE:
+            return "[\u2713] " + description;
+        case UNDONE:
+            return "[\u2718] " + description;
+        default:
+            return description;
         }
     }
 }
