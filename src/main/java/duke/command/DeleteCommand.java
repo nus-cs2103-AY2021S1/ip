@@ -1,5 +1,13 @@
+package duke.command;
+
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
+import duke.exception.InvalidIndexException;
+import duke.task.Task;
+
 public class DeleteCommand extends Command {
-    DeleteCommand(String fullCommand) {
+    public DeleteCommand(String fullCommand) {
         super(fullCommand);
         this.isExit = false;
     }

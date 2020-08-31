@@ -1,3 +1,8 @@
+package duke;
+
+import duke.command.Command;
+import duke.exception.DukeException;
+
 /**
  * duke is a chat bot cum task manager
  */

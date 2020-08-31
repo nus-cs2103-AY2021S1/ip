@@ -1,3 +1,11 @@
+package duke;
+
+import duke.exception.DukeException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -23,12 +31,10 @@ public class Storage {
 
     public void save(TaskList taskList) {
         try {
-            ArrayList<String> encodedTasks = new ArrayList<>();
             FileWriter fw = new FileWriter(this.filePath);
 
             for (Task task : taskList.getTaskList()) {
                 String encodedTask = task.encode();
-                encodedTasks.add(encodedTask);
                 fw.write(encodedTask + System.lineSeparator());
             }
 

@@ -1,3 +1,5 @@
+package duke.task;
+
 /**
  * represents a task
  */

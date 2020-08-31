@@ -1,3 +1,8 @@
+package duke.task;
+
+import duke.exception.EmptyDateException;
+import duke.exception.EmptyDescriptionException;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -9,9 +14,11 @@ import java.time.format.DateTimeParseException;
 public class Deadline extends Task {
     protected String deadline;
 
-    public Deadline(String taskDescription) throws EmptyDescriptionException {
+    public Deadline(String taskDescription) throws EmptyDescriptionException, EmptyDateException {
         if (taskDescription.length() <= 9) {
             throw new EmptyDescriptionException("oops! the description of a deadline cannot be empty");
+        } else if (!taskDescription.contains("/")) {
+            throw new EmptyDateException("oops! the date for the deadline was not specified");
         } else {
             int space = taskDescription.indexOf(" ");
             int slash = taskDescription.indexOf("/");
@@ -51,7 +58,7 @@ public class Deadline extends Task {
         return encodedTask.toString();
     }
 
-    public static Deadline decode(String string) throws EmptyDescriptionException {
+    public static Deadline decode(String string) throws EmptyDescriptionException, EmptyDateException {
         String[] split = string.split(" \\| ");
 
         String taskDescription = "deadline " + split[2] + " /by " + split[3];

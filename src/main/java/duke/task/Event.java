@@ -1,3 +1,8 @@
+package duke.task;
+
+import duke.exception.EmptyDateException;
+import duke.exception.EmptyDescriptionException;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -9,9 +14,11 @@ import java.time.format.DateTimeParseException;
 public class Event extends Task {
     protected String eventTime;
 
-    public Event(String taskDescription) throws EmptyDescriptionException {
+    public Event(String taskDescription) throws EmptyDescriptionException, EmptyDateException {
         if (taskDescription.length() <= 6) {
             throw new EmptyDescriptionException("oops! the description of an event cannot be empty");
+        } else if (!taskDescription.contains("/")) {
+            throw new EmptyDateException("oops! the date for the event was not specified");
         } else {
             int space = taskDescription.indexOf(" ");
             int slash = taskDescription.indexOf("/");
@@ -62,7 +69,7 @@ public class Event extends Task {
         return encodedTask.toString();
     }
 
-    public static Event decode(String string) throws EmptyDescriptionException {
+    public static Event decode(String string) throws EmptyDescriptionException, EmptyDateException {
         String[] split = string.split(" \\| ");
 
         String taskDescription = "event " + split[2] + " /at " + split[3];

@@ -1,5 +1,13 @@
+package duke.command;
+
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
+import duke.exception.InvalidIndexException;
+import duke.task.Task;
+
 public class DoneCommand extends Command {
-    DoneCommand(String fullCommand) {
+    public DoneCommand(String fullCommand) {
         super(fullCommand);
         this.isExit = false;
     }

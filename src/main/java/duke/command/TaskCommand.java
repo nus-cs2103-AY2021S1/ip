@@ -1,3 +1,8 @@
+package duke.command;
+
+import duke.task.Task;
+import duke.TaskList;
+
 public abstract class TaskCommand extends Command {
     TaskCommand(String fullCommand) {
         super(fullCommand);

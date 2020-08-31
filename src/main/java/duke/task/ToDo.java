@@ -1,3 +1,7 @@
+package duke.task;
+
+import duke.exception.EmptyDescriptionException;
+
 /**
  * represents a todo task
  */

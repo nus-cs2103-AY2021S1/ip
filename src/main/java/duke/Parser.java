@@ -1,3 +1,7 @@
+package duke;
+
+import duke.command.*;
+
 /**
  * deals with making sense of the user command
  */

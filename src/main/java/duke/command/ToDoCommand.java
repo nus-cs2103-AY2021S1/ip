@@ -1,5 +1,13 @@
+package duke.command;
+
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
+import duke.exception.EmptyDescriptionException;
+import duke.task.ToDo;
+
 public class ToDoCommand extends TaskCommand {
-    ToDoCommand(String fullCommand) {
+    public ToDoCommand(String fullCommand) {
         super(fullCommand);
     }
 
