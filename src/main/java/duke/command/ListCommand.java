@@ -31,5 +31,14 @@ public class ListCommand extends Command {
             System.out.println("    " + (i + 1) + ". " + tasks.get(i));
         }
     }
+
+    public String executeToString(TaskList tasks, Ui ui, Storage storage) {
+        String result = "    Here are the tasks in your list:";
+        for (int i = 0; i < tasks.size(); i++) {
+            result += "\n    " + (i + 1) + ". " + tasks.get(i);
+
+        }
+        return result;
+    }
 }
 

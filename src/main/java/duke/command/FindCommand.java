@@ -38,4 +38,18 @@ public class FindCommand extends Command {
             }
         }
     }
+
+    public String executeToString(TaskList tasks, Ui ui, Storage storage) {
+        String result = "    Here are the matching tasks in your list:";
+
+        String wordToFind = userInput.substring(5);
+
+        for (int i = 0; i < tasks.size(); i++) {
+            Task curr = tasks.get(i);
+            if (curr.getDescription().contains(wordToFind)) {
+                result += "\n    " + (i + 1) + ". " + curr;
+            }
+        }
+        return  result;
+    }
 }

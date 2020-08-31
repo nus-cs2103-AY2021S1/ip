@@ -43,5 +43,25 @@ public class DeleteCommand extends Command {
         // saves fileString to txt file
         Storage.save(Duke.FILENAME, fileString);
     }
+
+    public String executeToString(TaskList tasks, Ui ui, Storage storage) {
+        String fileString = tasks.listToString();
+
+        String result = "";
+
+        int taskNumber = Integer.parseInt(userInput.substring(7));
+        Task curr = tasks.get(taskNumber - 1);
+        String taskToBeDeleted = curr.taskToText();
+        result = "    Noted. I've removed this task:\n"
+                + "        " + tasks.get(taskNumber - 1);
+        tasks.remove(taskNumber - 1);
+        result += ("\n    Now you have " + tasks.size() + " tasks in the list.");
+
+        fileString = fileString.replace(taskToBeDeleted + "\n", "");
+
+        // saves fileString to txt file
+        Storage.save(Duke.FILENAME, fileString);
+        return result;
+    }
 }
 

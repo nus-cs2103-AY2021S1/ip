@@ -46,5 +46,24 @@ public class DoneCommand extends Command {
         System.out.println("    Nice! I've marked this task as done:\n"
                 + "        " + tasks.get(taskNumber - 1));
     }
+
+    public String executeToString(TaskList tasks, Ui ui, Storage storage) {
+        String fileString = tasks.listToString();
+        int taskNumber = Integer.parseInt(userInput.substring(5));
+        Task curr = tasks.get(taskNumber - 1);
+        String beforeDone = curr.taskToText();
+
+        curr.markAsDone();
+        String afterDone = curr.taskToText();
+
+        // mark this task as done in fileString
+        fileString = fileString.replace(beforeDone, afterDone);
+
+        // saves fileString to txt file
+        Storage.save(Duke.FILENAME, fileString);
+
+        return "    Nice! I've marked this task as done:\n"
+                + "        " + tasks.get(taskNumber - 1);
+    }
 }
 
