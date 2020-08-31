@@ -21,11 +21,21 @@ public class MainWindow extends AnchorPane {
 
     private Mug mug;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/Pot.png"));
-    private Image mugImage = new Image(this.getClass().getResourceAsStream("/images/Mug.png"));
+    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/Pot.png"));
+    private final Image mugImage = new Image(this.getClass().getResourceAsStream("/images/Mug.png"));
+
+    /**
+     * Prints welcome messages.
+     */
+    private static String welcome() {
+        return "Hello! I'm Mug\n"
+                + "What can Mug do for you ?_?";
+    }
 
     @FXML
     public void initialize() {
+        DialogBox welcome = DialogBox.getMugDialog(MainWindow.welcome(), mugImage);
+        dialogContainer.getChildren().add(welcome);
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
