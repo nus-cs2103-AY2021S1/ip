@@ -10,8 +10,6 @@ import duke.commands.FindCommand;
 import duke.commands.ListCommand;
 import duke.commands.TimeCommand;
 
-
-
 /**
  * Parses user input to make sense of the command and find out what user wants.
  */
