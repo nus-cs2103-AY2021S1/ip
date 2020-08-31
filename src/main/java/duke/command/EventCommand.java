@@ -30,7 +30,7 @@ public class EventCommand extends Command {
             tasks.add(task, dateTime, TaskType.EVENT);
             ui.say("Added Event '" + task + "' to your list!");
         } else {
-            throw(DukeException.pastDateTime());
+            throw (DukeException.pastDateTime());
         }
     }
 

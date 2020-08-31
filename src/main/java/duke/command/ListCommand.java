@@ -20,7 +20,7 @@ public class ListCommand extends Command {
             String text = tasks.listContents();
             ui.say(text);
         } catch (DukeException e) {
-            throw(e);
+            throw (e);
         }
     }
 
