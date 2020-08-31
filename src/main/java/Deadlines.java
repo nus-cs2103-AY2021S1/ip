@@ -2,6 +2,7 @@ package main.java;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 
 public class Deadlines extends Task {
@@ -9,7 +10,7 @@ public class Deadlines extends Task {
     private DateTimeFormatter inFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     private DateTimeFormatter outFormat = DateTimeFormatter.ofPattern("dd-MM-yyyy");
     private String type = "Deadlines";
-    protected Deadlines (String string) {
+    protected Deadlines (String string) throws DateTimeParseException {
         super(string.substring(0, string.indexOf("/") - 1), string);
         this.due = LocalDate.parse(string.substring(string.indexOf("/") + 4), inFormat);
     }
