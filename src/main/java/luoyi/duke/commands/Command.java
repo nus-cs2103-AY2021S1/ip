@@ -26,9 +26,9 @@ public class Command {
      * Executes the command and return the resultant Duke object.
      * Command must be initiated with a Duke object first.
      *
-     * @return Resultant Duke object after execution.
+     * @return Resultant string prompt.
      */
-    public IDuke execute() {
+    public String execute() {
         throw new UnsupportedOperationException("This method is to"
                 + " be implemented by child classes.");
     }

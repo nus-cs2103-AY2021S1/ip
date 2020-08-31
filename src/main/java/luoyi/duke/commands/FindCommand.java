@@ -38,20 +38,20 @@ public class FindCommand extends Command {
      * @return Resultant duke object.
      */
     @Override
-    public IDuke execute() {
+    public String execute() {
         if (duke == null) {
             throw new RuntimeException(Message.ERR_DUKE_NOT_INIT.toString());
         }
-        handleFind(searchString);
-        return duke;
+        return handleFind(searchString);
     }
 
     /**
      * Prints the list of matching tasks.
      *
      * @param searchString Search string.
+     * @throws DukeIllegalArgumentException If find param invalid.
      */
-    private void handleFind(String searchString) {
+    private String handleFind(String searchString) throws DukeIllegalArgumentException {
         if (searchString.length() == 0) {
             throw new DukeIllegalArgumentException(
                     "The keyword of find cannot be empty!");
@@ -61,7 +61,7 @@ public class FindCommand extends Command {
                 .range(0, list.size())
                 .filter(x -> list.get(x).getDescription().contains(searchString))
                 .toArray();
-        Ui.displayTasks(list, indexes);
+        return Ui.displayTasks(list, indexes);
     }
 
     /**

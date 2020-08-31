@@ -41,21 +41,20 @@ public class ListCommand extends Command {
      * @return Resultant duke object.
      */
     @Override
-    public IDuke execute() {
+    public String execute() {
         if (duke == null) {
             throw new RuntimeException(Message.ERR_DUKE_NOT_INIT.toString());
         }
         if (date == null) {
-            handleDisplay();
+            return handleDisplay();
         } else {
-            handleDisplay(date);
+            return handleDisplay(date);
         }
-        return duke;
     }
 
-    private void handleDisplay() {
+    private String handleDisplay() {
         TaskList list = duke.getTasks();
-        displayTasks(list);
+        return Ui.displayTasks(list);
     }
 
     /**
@@ -63,22 +62,13 @@ public class ListCommand extends Command {
      *
      * @param date Date by which the tasks are filtered by.
      */
-    private void handleDisplay(String date) {
+    private String handleDisplay(String date) {
         TaskList list = duke.getTasks();
         int[] indexes = IntStream
                 .range(0, list.size())
                 .filter(x -> list.get(x).isSameTime(date))
                 .toArray();
-        Ui.displayTasks(list, indexes);
-    }
-
-    /**
-     * Prints all tasks in the tasklist.
-     *
-     * @param list Tasklist to be printed.
-     */
-    public void displayTasks(TaskList list) {
-        Ui.displayTasks(list);
+        return Ui.displayTasks(list, indexes);
     }
 
     @Override

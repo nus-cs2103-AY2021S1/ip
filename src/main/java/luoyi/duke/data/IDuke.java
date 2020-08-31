@@ -6,14 +6,16 @@ import luoyi.duke.storage.Storage;
 
 public interface IDuke {
     /**
-     * Prints greeting message.
+     * Prints and returns greeting message.
      */
-    void greet();
+    String greet();
 
     /**
-     * Prints goodbye message.
+     * Saves a task in Duke.
+     *
+     * @param task Task to be saved.
      */
-    void bye();
+    void storeTask(ITask task);
 
     /**
      * Returns a specific task from the list.
@@ -37,12 +39,14 @@ public interface IDuke {
     int getNumTask();
 
     /**
-     * Handles a given command and returns the resulting Duke.
+     * Handles a given command and returns the resulting message.
      *
      * @param command A user command.
-     * @return Resulting Duke object.
+     * @return Response string from Duke.
      */
-    IDuke handleCommand(String command);
+    String handleCommand(String command);
 
     Storage getStorage();
+
+    String getResponse(String input);
 }

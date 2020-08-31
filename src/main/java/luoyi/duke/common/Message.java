@@ -5,7 +5,7 @@ package luoyi.duke.common;
  */
 public enum Message {
     WELCOME ("Hi I'm Cat Bot.\nWhat can I do for you?\n"),
-    FAREWELL ("Bye! Hope to see you again!\n"),
+    FAREWELL ("Bye! Hope to see you again! (App closing in 5s)\n"),
     LIST ("Here are the tasks in your list:\n"),
     MARKED_DONE ("Naisu! I've marked this task done!\n"),
     REMOVED_TASK ("Hmmm~! I've removed this task:\n"),

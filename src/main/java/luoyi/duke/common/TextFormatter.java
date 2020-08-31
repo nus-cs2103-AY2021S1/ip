@@ -9,20 +9,8 @@ public class TextFormatter {
     private static final String HORIZONTAL_LINE_2 = "▼△▼△▼△▼△▼△▼△▼△▼△▼△▼△▼△▼△▼△▼△▼△▼△▼△▼△▼△▼△▼△▼△▼";
 
     /** Bot Logo */
-    public static final String LOGO =
-            "　　＼　　　　　／\n"
-            + "　　　＼∧∧∧／\n"
-            + "　　　＜　 Ｃ ＞\n"
-            + "　　　＜ 　Ａ ＞\n"
-            + "　　　＜　 Ｔ ＞\n"
-            + "　 ───＜ Ｂ　 ＞───\n"
-            + "　　　＜ Ｏ　 ＞\n"
-            + "　　　＜ Ｔ　 ＞\n"
-            + "　　　／∨∨∨＼\n"
-            + "　　／ ∧_∧　　＼\n"
-            + "　／　( ･ω･)　　 ＼\n"
-            + "／　＿(_つ/￣￣￣/　＼\n"
-            + "　　 　＼/＿＿＿/\n";
+    public static final String LOGO = "LOGO";
+
 
     /**
      * Returns text formatted with indentation and lines.

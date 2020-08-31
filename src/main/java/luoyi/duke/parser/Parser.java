@@ -75,6 +75,8 @@ public class Parser {
             }
             String searchString = commandStr.split(" ", 2)[1];
             return FindCommand.getFindCommand(searchString);
+        } else if (commandStr.equals("bye")) {
+            return ByeCommand.getByeCommand();
         }
         throw new DukeUnrecognizedArgumentException(Message.ERR_WRONG_CMD.toString());
     }
