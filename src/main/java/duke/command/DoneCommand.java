@@ -1,13 +1,13 @@
 package duke.command;
 
+import java.io.IOException;
+
 import duke.Storage;
 import duke.Ui;
 import duke.exception.DukeException;
 import duke.exception.InvalidArgumentException;
 import duke.task.Task;
 import duke.task.TaskList;
-
-import java.io.IOException;
 
 public class DoneCommand extends Command {
     /**

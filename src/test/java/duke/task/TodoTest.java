@@ -1,18 +1,19 @@
 package duke.task;
 
-import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
 
 public class TodoTest {
     @Test
-    void encode_incompleteToDo_Test() {
+    void encode_incompleteToDo_test() {
         ToDo todo = new ToDo("Reading");
-        assertEquals( "T | 0 | Reading", todo.encode());
+        assertEquals(todo.getId() + " | T | 0 | Reading", todo.encode());
     }
 
     @Test
-    void encode_completedToDo_Test() {
+    void encode_completedToDo_test() {
         ToDo todo = new ToDo("Reading", "1");
-        assertEquals("T | 1 | Reading", todo.encode());
+        assertEquals(todo.getId() + " | T | 1 | Reading", todo.encode());
     }
 }

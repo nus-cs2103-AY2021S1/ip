@@ -1,10 +1,10 @@
 package duke;
 
+import java.io.IOException;
+
 import duke.command.Command;
 import duke.exception.DukeException;
 import duke.task.TaskList;
-
-import java.io.IOException;
 
 /**
  * The main class for the project. Initialises the Duke class and runs it.
@@ -50,6 +50,10 @@ public class Duke {
         }
     }
 
+    /**
+     * The main method for the project.
+     * @param args Command line arguments.
+     */
     public static void main(String[] args) {
         Duke duke = new Duke();
         duke.run();

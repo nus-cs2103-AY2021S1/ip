@@ -1,13 +1,13 @@
 package duke.command;
 
+import java.io.IOException;
+
 import duke.Storage;
 import duke.Ui;
 import duke.exception.DukeException;
 import duke.exception.StorageAccessException;
 import duke.task.Task;
 import duke.task.TaskList;
-
-import java.io.IOException;
 
 /**
  * Represents a {@link Command} that will add a {@link Task} to the {@link TaskList}.

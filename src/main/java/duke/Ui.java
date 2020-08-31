@@ -6,7 +6,7 @@ import java.util.Scanner;
  * The Ui class handles the I/O of the programme.
  */
 public class Ui {
-    Scanner s;
+    private Scanner s;
 
     /**
      * Instantiates an Ui object.
@@ -27,12 +27,12 @@ public class Ui {
      * Displays the logo of Duke.
      */
     void showLogo() {
-        String logo = "\t██████╗ ██╗   ██╗██╗  ██╗███████╗\n" +
-                "\t██╔══██╗██║   ██║██║ ██╔╝██╔════╝\n" +
-                "\t██║  ██║██║   ██║█████╔╝ █████╗  \n" +
-                "\t██║  ██║██║   ██║██╔═██╗ ██╔══╝  \n" +
-                "\t██████╔╝╚██████╔╝██║  ██╗███████╗\n" +
-                "\t╚═════╝  ╚═════╝ ╚═╝  ╚═╝╚══════╝\n";
+        String logo = "\t██████╗ ██╗   ██╗██╗  ██╗███████╗\n"
+                + "\t██╔══██╗██║   ██║██║ ██╔╝██╔════╝\n"
+                + "\t██║  ██║██║   ██║█████╔╝ █████╗  \n"
+                + "\t██║  ██║██║   ██║██╔═██╗ ██╔══╝  \n"
+                + "\t██████╔╝╚██████╔╝██║  ██╗███████╗\n"
+                + "\t╚═════╝  ╚═════╝ ╚═╝  ╚═╝╚══════╝\n";
         System.out.println("\tHello boss! This is\n\n" + logo);
     }
 
