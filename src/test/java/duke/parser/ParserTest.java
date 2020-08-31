@@ -31,7 +31,7 @@ class ParserTest {
     }
 
     @Test
-    void parseAddCommand_success() {
+    void parse_addCommand_success() {
         String input;
 
         input = "todo light";
@@ -48,7 +48,7 @@ class ParserTest {
     }
 
     @Test
-    void parseAddCommand_failure() {
+    void parse_addCommand_failure() {
         String input;
 
         input = "todo";
@@ -68,13 +68,13 @@ class ParserTest {
     }
 
     @Test
-    void parseDeleteCommand_success() {
+    void parse_deleteCommand_success() {
         String input = "delete 1";
         assertTrue(Parser.parse(taskList, input) instanceof DeleteCommand);
     }
 
     @Test
-    void parseDeleteCommand_failure() {
+    void parse_deleteCommand_failure() {
         String input;
 
         input = "delete";
@@ -91,13 +91,13 @@ class ParserTest {
     }
 
     @Test
-    void parseDoneCommand_success() {
+    void parse_doneCommand_success() {
         String input = "done 1";
         assertTrue(Parser.parse(taskList, input) instanceof DoneCommand);
     }
 
     @Test
-    void parseDoneCommand_failure() {
+    void parse_doneCommand_failure() {
         String input;
 
         input = "done";
@@ -114,13 +114,13 @@ class ParserTest {
     }
 
     @Test
-    void parseExitCommand_success() {
+    void parse_exitCommand_success() {
         String input = "bye";
         assertTrue(Parser.parse(taskList, input) instanceof ExitCommand);
     }
 
     @Test
-    void parseFindCommand_success() {
+    void parse_findCommand_success() {
         String input;
 
         input = "find Dummy";
@@ -134,13 +134,13 @@ class ParserTest {
     }
 
     @Test
-    void parseHelpCommand_success() {
+    void parse_helpCommand_success() {
         String input = "help";
         assertTrue(Parser.parse(taskList, input) instanceof HelpCommand);
     }
 
     @Test
-    void parseInvalidCommand_success() {
+    void parse_invalidCommand_success() {
         String input;
 
         input = "";
@@ -154,31 +154,31 @@ class ParserTest {
     }
 
     @Test
-    void parseListCommand_success() {
+    void parse_listCommand_success() {
         String input = "list";
         assertTrue(Parser.parse(taskList, input) instanceof ListCommand);
     }
 
     @Test
-    void parseLoadCommand_success() {
+    void parse_loadCommand_success() {
         String input = "load save.txt";
         assertTrue(Parser.parse(taskList, input) instanceof LoadCommand);
     }
 
     @Test
-    void parseLoadCommand_failure() {
+    void parse_loadCommand_failure() {
         String input = "load";
         assertTrue(Parser.parse(taskList, input) instanceof InvalidCommand);
     }
 
     @Test
-    void parseSaveCommand_success() {
+    void parse_saveCommand_success() {
         String input = "save save.txt";
         assertTrue(Parser.parse(taskList, input) instanceof SaveCommand);
     }
 
     @Test
-    void parseSaveCommand_failure() {
+    void parse_saveCommand_failure() {
         String input = "save";
         assertTrue(Parser.parse(taskList, input) instanceof InvalidCommand);
     }

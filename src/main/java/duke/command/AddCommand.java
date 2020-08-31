@@ -12,6 +12,11 @@ public class AddCommand implements ReversibleCommand {
     private final List<Task> taskList;
     private final Task task;
 
+    /**
+     * Create an AddCommand which adds the Task into the TaskList
+     * @param taskList which task will be added to
+     * @param task to add into the taskList
+     */
     public AddCommand(List<Task> taskList, Task task) {
         this.taskList = taskList;
         this.task = task;

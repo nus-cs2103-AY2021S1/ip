@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class AddCommandTest {
 
     @Test
-    void executeAndUndo() {
+    void executeAndReverse_success() {
         DukeDateTime dateTime = new DukeDateTime();
         List<Task> taskList = new ArrayList<>(5);
 
@@ -27,19 +27,23 @@ class AddCommandTest {
         ReversibleCommand c2 = new AddCommand(taskList, task2);
         ReversibleCommand c3 = new AddCommand(taskList, task3);
 
+        // Execute 3 AddCommands
         c1.execute();
         c2.execute();
         c3.execute();
 
+        // Ensure 3 items are added to list
         assertEquals(3, taskList.size());
         assertEquals(task1, taskList.get(0));
         assertEquals(task2, taskList.get(1));
         assertEquals(task3, taskList.get(2));
 
+        // Undo 3 AddCommands
         c3.reverse();
         c2.reverse();
         c1.reverse();
 
+        // Ensure 3 items are removed from list
         assertEquals(0, taskList.size());
 
     }

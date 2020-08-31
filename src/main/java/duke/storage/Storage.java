@@ -13,6 +13,9 @@ import java.util.function.Predicate;
 import java.util.function.Supplier;
 import java.util.stream.Stream;
 
+/**
+ * The Storage class provides methods to save/load the taskList to/from a csv file
+ */
 public class Storage {
 
     /**

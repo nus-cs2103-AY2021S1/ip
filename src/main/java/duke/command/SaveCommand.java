@@ -7,14 +7,22 @@ import java.io.IOException;
 import java.util.List;
 
 /**
- * Save taskList to file
- * The tasks will be saved in a defined csv format
+ * Save taskList to file.
+ * The tasks will be saved in a defined csv format.
+ * Any existing data in filePath will be overwritten
  */
 public class SaveCommand implements Command {
 
     private final List<Task> taskList;
     private final String filePath;
 
+    /**
+     * Create a SaveCommand which saves all item in taskList into
+     * a csv file specified by filePath.
+     * Any existing data in filePath will be overwritten
+     * @param taskList
+     * @param filePath
+     */
     public SaveCommand(List<Task> taskList, String filePath) {
         this.taskList = taskList;
         this.filePath = filePath;

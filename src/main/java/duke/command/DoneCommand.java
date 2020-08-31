@@ -9,6 +9,10 @@ public class DoneCommand implements ReversibleCommand {
 
     private final Task task;
 
+    /**
+     * Create a DoneCommand to mark a Task as done/not done
+     * @param task to be marked done/not done
+     */
     public DoneCommand(Task task) {
         this.task = task;
     }

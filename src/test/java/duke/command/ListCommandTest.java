@@ -16,7 +16,7 @@ class ListCommandTest {
     private final List<Task> taskList = new ArrayList<>(1);
 
     @Test
-    void testExecute() {
+    void execute_outputExpected() {
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         PrintStream originalOut = System.out;
         System.setOut(new PrintStream(outContent));

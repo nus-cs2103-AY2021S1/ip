@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class DoneCommandTest {
 
     @Test
-    void executeAndUndo() {
+    void executeAndReverse_success() {
         DukeDateTime dateTime = new DukeDateTime();
         List<Task> taskList = new ArrayList<>(5);
 
@@ -29,30 +29,35 @@ class DoneCommandTest {
         taskList.add(task2);
         taskList.add(task3);
 
-        // Pre-test
+        // Pre-test, ensure there are 3 items in taskList
         assertEquals(3, taskList.size());
 
+        // Pre-test, ensure items are not completed
         assertFalse(taskList.get(0).isCompleted());
         assertFalse(taskList.get(1).isCompleted());
         assertFalse(taskList.get(2).isCompleted());
 
-        // Actual test
         ReversibleCommand c1 = new DoneCommand(task1);
         ReversibleCommand c2 = new DoneCommand(task2);
         ReversibleCommand c3 = new DoneCommand(task3);
 
+        // Actual test
+        // Execute 3 DoneCommands
         c1.execute();
         c2.execute();
         c3.execute();
 
+        // Ensure Tasks are marked done
         assertTrue(taskList.get(0).isCompleted());
         assertTrue(taskList.get(1).isCompleted());
         assertTrue(taskList.get(2).isCompleted());
 
+        // Undo the DoneCommand
         c1.reverse();
         c2.reverse();
         c3.reverse();
 
+        // Ensure Tasks are marked as not done
         assertFalse(taskList.get(0).isCompleted());
         assertFalse(taskList.get(1).isCompleted());
         assertFalse(taskList.get(2).isCompleted());

@@ -15,18 +15,18 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class SaveAndLoadCommandTest {
 
     @Test
-    void testSaveAndLoad() {
+    void saveAndLoad_success() {
 
-        // Save taskList to file
+        // Create a list and populate with data
         List<Task> originalTaskList = new ArrayList<>(3);
         Task task1 = new ToDo("task1");
         Task task2 = new Deadline("task2", new DukeDateTime());
         Task task3 = new Event("task3", new DukeDateTime(), new DukeDateTime());
-
         originalTaskList.add(task1);
         originalTaskList.add(task2);
         originalTaskList.add(task3);
 
+        // Save taskList to file
         new SaveCommand(originalTaskList, "save.txt").execute();
 
         // Load taskList from file

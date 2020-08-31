@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class DeleteCommandTest {
 
     @Test
-    void executeAndUndo() {
+    void executeAndReverse_success() {
         DukeDateTime dateTime = new DukeDateTime();
         List<Task> taskList = new ArrayList<>(5);
 
@@ -27,7 +27,7 @@ class DeleteCommandTest {
         taskList.add(task2);
         taskList.add(task3);
 
-        // Pre-test
+        // Pre-test, ensure there are 3 items in taskList
         assertEquals(3, taskList.size());
 
         ReversibleCommand c1 = new DeleteCommand(taskList, task1);
@@ -35,16 +35,20 @@ class DeleteCommandTest {
         ReversibleCommand c3 = new DeleteCommand(taskList, task3);
 
         // Actual test
+        // Execute 3 DeleteCommands
         c1.execute();
         c2.execute();
         c3.execute();
 
+        // Ensure 3 items are removed from taskList
         assertEquals(0, taskList.size());
 
+        // Undo the 3 DeleteCommands
         c1.reverse();
         c2.reverse();
         c3.reverse();
 
+        // Ensure there are 3 items in taskList
         assertEquals(3, taskList.size());
     }
 

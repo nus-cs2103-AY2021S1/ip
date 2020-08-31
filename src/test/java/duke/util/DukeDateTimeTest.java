@@ -21,7 +21,7 @@ class DukeDateTimeTest {
     }
 
     @Test
-    void constructor_emptyString_failure() {
+    void constructor_emptyString_exceptionThrown() {
         try {
             new DukeDateTime("");
             fail();

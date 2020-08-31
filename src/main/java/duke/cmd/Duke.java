@@ -26,6 +26,9 @@ public class Duke {
     private final List<Task> taskList;
     private final Scanner scanner;
 
+    /**
+     * Initialize Duke cmd with default array size of 100 and default input/output
+     */
     public Duke() {
         this.taskList = new ArrayList<>(100);
         this.scanner = new Scanner(System.in);
@@ -37,25 +40,32 @@ public class Duke {
      */
     public void run() {
 
+        // Print greetings
         System.out.println("Hello from\n" + LOGO);
         System.out.println(GREETING);
 
+        // Loop until 'bye' input received
         while (true) {
 
             // Prompt for input
             String input = scanner.nextLine();
-            if (input.isBlank()) continue;
+            if (input.isBlank()) {
+                continue;
+            }
 
             // Parse command
             Command command = Parser.parse(taskList, input);
 
-            // Received exit command
-            if (command instanceof ExitCommand) break;
+            // Check for exit command
+            if (command instanceof ExitCommand) {
+                break;
+            }
 
             // Execute command
             command.execute();
         }
 
+        // Print ending greetings
         System.out.println(ENDING_GREETING);
     }
 

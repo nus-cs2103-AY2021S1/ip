@@ -66,14 +66,28 @@ public class DukeDateTime {
         return localDateTime.format(DukeDateTime.DEFAULT);
     }
 
+    /**
+     * Two DukeDateTime are equal if they refer to the same
+     * year, month, day, hour and minute
+     * @param obj The other object to compare to
+     * @return true if they are equivalent. Otherwise, false
+     */
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof DukeDateTime)) return false;
-        DukeDateTime that = (DukeDateTime) o;
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (!(obj instanceof DukeDateTime)) {
+            return false;
+        }
+        DukeDateTime that = (DukeDateTime) obj;
         return localDateTime.equals(that.localDateTime);
     }
 
+    /**
+     * @return The hashCode of a LocalDateTime which contains only the year,
+     * month, day, hours and minutes
+     */
     @Override
     public int hashCode() {
         return Objects.hash(localDateTime);

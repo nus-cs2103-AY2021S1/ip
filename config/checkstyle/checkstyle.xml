@@ -199,11 +199,9 @@
         if (true)
           return 1; // Not allowed
         -->
-        <!--@SoarDisabled
         <module name="NeedBraces">
             <property name="allowEmptyLoopBody" value="true"/>
         </module>
-        -->
 
         <!-- Checks that each variable declaration is in its own statement and on its own line. -->
         <module name="MultipleVariableDeclarations"/>
@@ -317,13 +315,11 @@
              "::" when used as a reference to a method or constructor without arguments.
                e.g. String::compareToIgnoreCase
         -->
-        <!--@SoarDisabled
         <module name="OperatorWrap">
             <property name="tokens" value="QUESTION, COLON, EQUAL, NOT_EQUAL, DIV, PLUS, MINUS, STAR, MOD, SR, BSR,
         GE, GT, SL, LE, LT, BXOR, BOR, LOR, BAND, LAND, LITERAL_INSTANCEOF, TYPE_EXTENSION_AND, METHOD_REF"/>
             <property name="option" value="nl"/>
         </module>
-        -->
         <module name="OperatorWrap">
             <!-- Checks that the assignment type operator is at the previous end of line in a line wrap.
                  This includes "=", "/=", "+=", "-=", "*=", "%=", ">>=", ">>>=", "<<=", "^=", "&=".
@@ -397,13 +393,11 @@
 
         <module name="InvalidJavadocPosition"/>
 
-        <!--@SoarDisabled
         <module name="MissingJavadocMethodCheck">
             <property name="minLineCount" value="1"/>
             <property name="allowMissingPropertyJavadoc" value="true"/>
             <property name="ignoreMethodNamesRegex" value="(set.*|get.*)"/>
         </module>
-        -->
 
     </module>
 </module>

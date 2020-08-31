@@ -15,7 +15,7 @@ import java.util.regex.Pattern;
 public class Parser {
 
     /**
-     * Parse user input into an executable command.
+     * Parse user input and convert it into an executable command.
      * The resulting command, when executed, may perform modifications to taskList
      * @param taskList The taskList which the Duke Command will execute on
      * @param input The raw user input
@@ -30,7 +30,9 @@ public class Parser {
         Matcher matcher = pattern.matcher(input);
 
         // No input received
-        if (!matcher.matches()) return new InvalidCommand("Empty input!");
+        if (!matcher.matches()) {
+            return new InvalidCommand("Empty input!");
+        }
 
         // Find and generate the matching duke.command
         String firstWord = matcher.group(1).toUpperCase();

@@ -15,9 +15,12 @@ public class HelpCommand implements Command {
     @Override
     public void execute() {
         System.out.println("Command list:");
+
+        // CommandFactory is an enum of all available commands, simply print them
         Arrays.stream(CommandFactory.values())
                 .map((p) -> " " + p.toString().toLowerCase())
                 .forEach(System.out::print);
+
         System.out.println();
     }
 

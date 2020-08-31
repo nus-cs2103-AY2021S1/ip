@@ -12,6 +12,11 @@ public class DeleteCommand implements ReversibleCommand {
     private final List<Task> taskList;
     private final Task task;
 
+    /**
+     * Create a DeleteCommand to remove the specified Task from the TaskList
+     * @param taskList which specified task should be removed from
+     * @param task to be removed from taskList
+     */
     public DeleteCommand(List<Task> taskList, Task task) {
         this.taskList = taskList;
         this.task = task;

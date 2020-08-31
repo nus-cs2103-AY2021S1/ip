@@ -5,6 +5,9 @@ package duke.command;
  */
 public interface ReversibleCommand extends Command {
 
+    /**
+     * A ReversibleCommand can be undone
+     */
     void reverse();
 
 }

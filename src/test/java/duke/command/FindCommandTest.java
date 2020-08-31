@@ -16,18 +16,23 @@ class FindCommandTest {
     private final List<Task> taskList = new ArrayList<>(1);
 
     @Test
-    void testExecute() {
+    void execute_success() {
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         PrintStream originalOut = System.out;
         System.setOut(new PrintStream(outContent));
 
-        // Attempt to match
+        // Populate taskList with 1 item
         taskList.add(new ToDo("Eat some chips"));
+
+        // Execute the FindCommand
         new FindCommand(taskList, "t some c").execute();
-        assertEquals("Here are the matching tasks in your list:\r\n" +
-                "1. [T][✗] Eat some chips\r\n" +
-                "Number of tasks found: 1\r\n",
-                outContent.toString());
+
+        String expectedOutput = "Here are the matching tasks in your list:\r\n"
+                + "1. [T][✗] Eat some chips\r\n"
+                + "Number of tasks found: 1\r\n";
+
+        // Check output is same as expected
+        assertEquals(expectedOutput, outContent.toString());
 
         System.setOut(originalOut);
     }

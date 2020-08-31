@@ -5,6 +5,7 @@ package duke.command;
  */
 public interface Command {
 
+    // All commands can be executed
     void execute();
 
 }

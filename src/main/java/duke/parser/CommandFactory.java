@@ -52,6 +52,7 @@ public enum CommandFactory {
     DONE {
         @Override
         public Command generate(List<Task> taskList, String commandParam) {
+            // Generate a DoneCommand which when executed, marks the task specified by the index as done
             try {
                 int index = Integer.parseInt(commandParam.trim()) - 1;
                 Task task = taskList.get(index);
@@ -67,6 +68,7 @@ public enum CommandFactory {
     DELETE {
         @Override
         public Command generate(List<Task> taskList, String commandParam) {
+            // Generate a DeleteCommand which when executed, removes the task specified by the index from the list
             try {
                 int index = Integer.parseInt(commandParam.trim()) - 1;
                 Task task = taskList.get(index);
@@ -86,6 +88,8 @@ public enum CommandFactory {
                 return new InvalidCommand("Format: todo {description}");
             }
 
+            // Generate an AddCommand which when executed, adds
+            // the new To-Do task to the taskList
             Task task = new ToDo(commandParam.trim());
             return new AddCommand(taskList, task);
         }
@@ -94,14 +98,19 @@ public enum CommandFactory {
     DEADLINE {
         @Override
         public Command generate(List<Task> taskList, String commandParam) {
+            // Regex to obtain param1 and param2 in Deadline(description, deadline)
+            // param1: Description (String class)
+            // param2: Deadline (DukeDateTime class)
             Pattern pattern = Pattern.compile("^(.+)/by(.+)$");
             Matcher matcher = pattern.matcher(commandParam);
 
+            // Ensure that both param1 and param2 exists
             if (!matcher.matches() || matcher.group(1).isBlank() || matcher.group(2).isBlank()) {
                 return new InvalidCommand("Format: deadline {description} /by {ddMMyyyy HHmm}");
             }
 
             try {
+                // Generate an AddCommand which when executed, adds the newly created Deadline to taskList
                 Task task = new Deadline(
                         matcher.group(1).trim(),
                         new DukeDateTime(matcher.group(2).trim())
@@ -116,9 +125,14 @@ public enum CommandFactory {
     EVENT {
         @Override
         public Command generate(List<Task> taskList, String commandParam) {
+            // Regex to obtain param1, param2 and param3 in Event(description, start, end)
+            // param1: Description (String class)
+            // param2: start (DukeDateTime class)
+            // param3: end (DukeDateTime class)
             Pattern pattern = Pattern.compile("^(.+)/from(.+)/till(.+)$");
             Matcher matcher = pattern.matcher(commandParam);
 
+            // Ensure that both param1, param2 and param3 exists
             if (!matcher.matches()
                     || matcher.group(1).isBlank()
                     || matcher.group(2).isBlank()
@@ -127,6 +141,7 @@ public enum CommandFactory {
             }
 
             try {
+                // Generate an AddCommand which when executed, adds the newly created Event to taskList
                 Task task = new Event(
                         matcher.group(1).trim(),
                         new DukeDateTime(matcher.group(2).trim()),
@@ -146,6 +161,7 @@ public enum CommandFactory {
                 return new InvalidCommand("Format: save {filepath}");
             }
 
+            // Generate a SaveCommand which when executed, saves the taskList into specified file path
             return new SaveCommand(taskList, commandParam.trim());
         }
     },
@@ -157,6 +173,7 @@ public enum CommandFactory {
                 return new InvalidCommand("Format: load {filepath}");
             }
 
+            // Generate a LoadCommand which when executed, loads data from specified file path into taskList
             return new LoadCommand(taskList, commandParam.trim());
         }
     },
@@ -168,6 +185,7 @@ public enum CommandFactory {
                 return new InvalidCommand("Format: find {keyword}");
             }
 
+            // Generate a FindCommand which when executed, search for all instance of searchString in taskList
             return new FindCommand(taskList, commandParam.trim());
         }
     };
