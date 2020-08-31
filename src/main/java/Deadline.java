@@ -11,7 +11,7 @@ public class Deadline extends Task {
     }
 
     public String getDueDate() {
-        return dueDate;
+        return dueDate.toString();
     }
 
     @Override

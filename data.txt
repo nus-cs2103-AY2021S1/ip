@@ -1,5 +1,0 @@
-[T] | 0 |  hello
-[T] | 0 |  how are u
-[T] | 0 |  hello
-[T] | 0 |  how are you
-[T] | 0 |  hello
