@@ -14,6 +14,12 @@ dependencies {
     testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.5.0'
 }
 
+sourceSets {
+    java {
+        sourceSets.main.java.srcDirs = ['src/sparrow']
+    }
+}
+
 test {
     useJUnitPlatform()
 
@@ -28,19 +34,27 @@ test {
     }
 }
 
+jar {
+    manifest {
+        attributes 'Main-Class': 'sparrow.Sparrow'
+    }
+}
+
 application {
-    mainClassName = "seedu.duke.Duke"
+    mainClassName = "sparrow.Sparrow"
 }
 
 shadowJar {
-    archiveBaseName = "duke"
+    archiveBaseName = "sparrow"
     archiveClassifier = null
 }
 
 checkstyle {
     toolVersion = '8.23'
 }
+checkstyleTest.enabled = false
 
 run{
     standardInput = System.in
 }
+
