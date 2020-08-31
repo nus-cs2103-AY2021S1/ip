@@ -28,8 +28,6 @@ public class Duke {
     public static void startDuke() {
         TaskList inputList = new TaskList();
 
-        Scanner sc = new Scanner(System.in);
-
         File f = Storage.createFile();
 
         System.out.println(Ui.welcomeMessage());
@@ -42,19 +40,14 @@ public class Duke {
 
         System.out.println("Loading done");
 
-        String currInput = sc.nextLine();
 
-        while (!currInput.equals("bye")) {
+        try {
+            inputList = Parser.parseCommands(inputList);
 
-            try {
-                Parser.commandParser(currInput, inputList);
-
-            } catch (Exception e) {
-                System.out.println(Ui.unknownInputErrorMessage(e));
-            }
-
-            currInput = sc.nextLine();
+        } catch (Exception e) {
+            System.out.println(Ui.unknownInputErrorMessage(e));
         }
+
 
         try {
             Storage.writeToFile(f, inputList);
@@ -64,7 +57,7 @@ public class Duke {
 
         System.out.println(Ui.endMessage());
 
-        sc.close();
+
     }
 
     public static void main(String[] args) throws FileNotFoundException {

@@ -19,7 +19,7 @@ public class Parser {
      * @return Task of a specific type e.g. todo, deadline.
      * @throws InvalidInputException  If the user did not enter the entry in the correct format.
      */
-    public static Task parser(String rawInput) throws InvalidInputException{
+    public static Task parseTask(String rawInput) throws InvalidInputException{
         String[] splitString = rawInput.split(" ");
         int splitStringLength = splitString.length;
 
@@ -72,58 +72,65 @@ public class Parser {
         }
     }
 
-    public static TaskList commandParser(String rawInput, TaskList list) throws InvalidInputException {
+    public static TaskList parseCommands(TaskList list) throws InvalidInputException {
 
-        String[] splitString = rawInput.split(" ");
+        Scanner sc = new Scanner(System.in);
+
+        String rawInput = sc.nextLine();
+
+        while (!rawInput.equals("bye")) {
+
+            try {
+                String[] splitString = rawInput.split(" ");
 
 
-        if (splitString[0].equals("list")) {
+                if (splitString[0].equals("list")) {
 
-            System.out.println(Ui.printTaskList(list));
+                    System.out.println(Ui.printTaskList(list));
 
-            return list;
+                } else if (splitString[0].equals("done")) {
+                    //print OG list
+                    // can add error handling exception in case out of bounds
+                    // can add error handling for exception already done
+                    int index = Integer.parseInt(splitString[1]);
+                    list.get(index - 1).setStatus(true);
 
-        } else if (splitString[0].equals("done")) {
-            //print OG list
-            // can add error handling exception in case out of bounds
-            // can add error handling for exception already done
-            int index = Integer.parseInt(splitString[1]);
-            list.get(index - 1).setStatus(true);
+                    System.out.println(Ui.printTaskList(list));
 
-            System.out.println(Ui.printTaskList(list));
+                } else if (splitString[0].equals("delete")) {
+                    // can add error handling exception in case out of bounds
+                    int index = Integer.parseInt(splitString[1]);
+                    list.remove(index - 1);
 
-            return list;
+                    System.out.println(Ui.printTaskList(list));
 
-        } else if (splitString[0].equals("delete")) {
-            // can add error handling exception in case out of bounds
-            int index = Integer.parseInt(splitString[1]);
-            list.remove(index - 1);
+                } else if (splitString[0].equals("find")) {
 
-            System.out.println(Ui.printTaskList(list));
+                    TaskList tempList = new TaskList();
+                    for (int i = 0; i < list.size(); i++) {
+                        if (list.get(i).toString().contains(splitString[1])) {
+                            tempList.add(list.get(i));
+                        }
+                    }
+                    System.out.println(tempList.toString());
 
-            return list;
+                } else {
+                    Task currTask = Parser.parseTask(rawInput);
+                    list.add(currTask);
+                    System.out.println(Ui.printTask(currTask));
 
-        } else if (splitString[0].equals("find")) {
-
-            TaskList tempList = new TaskList();
-            for (int i = 0; i < list.size(); i++) {
-                if (list.get(i).toString().contains(splitString[1])) {
-                    tempList.add(list.get(i));
                 }
+
+            } catch (Exception e) {
+                System.out.println(Ui.unknownInputErrorMessage(e));
             }
-            System.out.println(tempList.toString());
-            return list;
 
-        } else {
-            Task currTask = Parser.parser(rawInput);
-            list.add(currTask);
-            System.out.println(Ui.printTask(currTask));
-
-            return list;
-
+            rawInput = sc.nextLine();
         }
 
+        sc.close();
 
+        return list;
 
     }
 }

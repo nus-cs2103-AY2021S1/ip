@@ -9,7 +9,7 @@ class ParserTest {
     @Test
     public void parser_emptyTodoDescription_exceptionThrown() {
         try {
-            Parser.parser("todo");
+            Parser.parseTask("todo");
             fail(); // the test should not reach this line
         } catch (Exception e) {
             assertEquals("Description of To Do cannot be empty", e.getMessage());
@@ -19,7 +19,7 @@ class ParserTest {
     @Test
     public void parser_emptyDeadlineDescription_exceptionThrown() {
         try {
-            Parser.parser("deadline");
+            Parser.parseTask("deadline");
             fail(); // the test should not reach this line
         } catch (Exception e) {
             assertEquals("Description of Deadline cannot be empty", e.getMessage());
