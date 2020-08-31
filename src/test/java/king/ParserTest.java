@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import tasks.Event;
 import tasks.TaskList;
 import tasks.ToDo;
+import ui.UI;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;

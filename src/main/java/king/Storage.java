@@ -1,3 +1,7 @@
+/**
+ * Handles all Files input-output related functions.
+ *
+ */
 package king;
 
 import java.io.BufferedWriter;
@@ -14,6 +18,7 @@ import tasks.Event;
 import tasks.Task;
 import tasks.TaskList;
 import tasks.ToDo;
+import ui.UI;
 
 public class Storage {
 
@@ -111,9 +116,12 @@ public class Storage {
     }
 
     /**
-     * Finds a keyword in the asset file.
-     * @param keyword
-     * @return
+     * Finds a keyword in the asset file
+     * and returns the corresponding tasks found in
+     * a taskList.
+     *
+     * @param keyword keyword to search for.
+     * @return TaskList containing the tasks with the keywords
      */
     public TaskList find(String keyword) {
         TaskList tasksFound = new TaskList();
@@ -131,7 +139,11 @@ public class Storage {
         return tasksFound;
     }
 
-    // data to Task
+    /**
+     * Converts data to Task.
+     * @param data data stored in the asset file.
+     * @return Task task created from data.
+     */
     private Task dataToTask(String data) {
         String[] dataTokens = data.split("@", 4);
         Task task;

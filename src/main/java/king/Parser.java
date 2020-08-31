@@ -12,6 +12,7 @@ import tasks.Event;
 import tasks.Task;
 import tasks.TaskList;
 import tasks.ToDo;
+import ui.UI;
 
 public class Parser {
 
@@ -43,11 +44,13 @@ public class Parser {
     public String parse(String phrase) throws KingException {
         int phraseLength = phrase.length();
         String reply;
-        if (phrase.equals("list")) {
+        if (phrase.equals("bye")) {
+            return UI.kingChatBox("Bye! Come back soon.");
+        } else if (phrase.equals("list")) {
             return UI.showTaskList(taskList);
         } else if (phrase.equals("clear list")) {
             taskList.clear();
-            reply = UI.chatBox("I have cleared the list!");
+            reply = UI.kingChatBox("I have cleared the list!");
         } else if ((phrase.startsWith("done") && phraseLength == 4) || phrase.startsWith("done ")) {
             String stringItem = phrase.substring(4).trim();
             try {

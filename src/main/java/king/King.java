@@ -1,5 +1,4 @@
 /**
- * Runs the King program.
  * King is an individual project under cs2103t in the
  * National University of Singapore.
  *
@@ -10,6 +9,7 @@ package king;
 import java.util.Scanner;
 
 import tasks.TaskList;
+import ui.UI;
 
 public class King {
 
@@ -30,30 +30,35 @@ public class King {
     }
 
     /**
-     * Main to execute the program
+     * Returns a response from King given an input
+     * from the user.
      *
-     * @param args
+     * @param input input from the user.
+     * @see Parser
      */
-    public static void main(String[] args) {
-        System.out.println(UI.welcome());
-        King king = new King("data/king.txt");
-        king.chat();
+    public String getResponse(String input) {
+        try {
+            return parser.parse(input);
+        } catch (KingException e) {
+            return UI.kingChatBox(e.message);
+        }
     }
 
     /**
      * Run the King program. King replies to the user.
+     * Used to run the King Program on the terminal.
+     *
+     * @deprecated Deprecated method since JavaFx was implemented.
      */
-    public void chat() {
+    @Deprecated
+    public void run() {
         Scanner scanner = new Scanner(System.in);
         String phrase;
         while (scanner.hasNextLine() && !(phrase = scanner.nextLine()).equals("bye")) {
-            try {
-                System.out.println(parser.parse(phrase));
-            } catch (KingException e) {
-                System.out.println(UI.chatBox(e.message));
-            }
+            System.out.println(getResponse(phrase));
         }
-        System.out.print(UI.chatBox("Bye! Hope to see you again soon."));
+        System.out.print(UI.kingChatBox("Bye! Hope to see you again soon."));
         scanner.close();
     }
+
 }
