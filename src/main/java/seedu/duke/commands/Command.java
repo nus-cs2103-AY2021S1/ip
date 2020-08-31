@@ -1,9 +1,9 @@
-package main.java.seedu.duke.commands;
+package seedu.duke.commands;
 
-import main.java.seedu.duke.DukeException;
-import main.java.seedu.duke.Storage;
-import main.java.seedu.duke.TaskList;
-import main.java.seedu.duke.Ui;
+import seedu.duke.DukeException;
+import seedu.duke.Storage;
+import seedu.duke.TaskList;
+import seedu.duke.Ui;
 
 /**
  * Represents the command given by the user.

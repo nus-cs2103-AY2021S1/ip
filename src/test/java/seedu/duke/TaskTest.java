@@ -1,7 +1,7 @@
 package seedu.duke;
 
-import main.java.seedu.duke.todo.Todo;
-import main.java.seedu.duke.todo.Task;
+import seedu.duke.todo.Todo;
+import seedu.duke.todo.Task;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

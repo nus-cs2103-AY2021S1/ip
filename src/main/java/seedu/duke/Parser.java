@@ -1,14 +1,14 @@
-package main.java.seedu.duke;
+package seedu.duke;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.regex.Pattern;
 
-import main.java.seedu.duke.commands.*;
-import main.java.seedu.duke.todo.Deadline;
-import main.java.seedu.duke.todo.Event;
-import main.java.seedu.duke.todo.Todo;
-import main.java.seedu.duke.todo.Task;
+import seedu.duke.commands.*;
+import seedu.duke.todo.Deadline;
+import seedu.duke.todo.Event;
+import seedu.duke.todo.Todo;
+import seedu.duke.todo.Task;
 
 /**
  * Used for parsing strings for Duke project.
