@@ -15,7 +15,7 @@ public class ExitCommand extends Command{
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.replyToUser(MESSAGE_EXIT);
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        return MESSAGE_EXIT;
     }
 }

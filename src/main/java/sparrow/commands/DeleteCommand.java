@@ -17,13 +17,13 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             Task deletedTask = tasks.deleteTask(getTargetIndex());
             storage.saveToFile(tasks);
-            ui.replyToUser(String.format(MESSAGE_DELETE_TASK_SUCCESS, deletedTask));
+            return String.format(MESSAGE_DELETE_TASK_SUCCESS, deletedTask);
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("INDEX OUT OF BOUNDS");
+            return "INDEX OUT OF BOUNDS";
         }
     }
 }

@@ -11,8 +11,8 @@ public class ListCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Here are the tasks in your list: \n%s";
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         String tasksAsString = ui.taskListToString(tasks.getTasks());
-        ui.replyToUser(String.format(MESSAGE_SUCCESS, tasksAsString));
+        return String.format(MESSAGE_SUCCESS, tasksAsString);
     }
 }

@@ -16,13 +16,13 @@ public class DoneCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             Task completedTask = tasks.markAsDone(getTargetIndex());
             storage.saveToFile(tasks);
-            ui.replyToUser(String.format(MESSAGE_COMPLETED_TASK_SUCCESS, completedTask));
+            return String.format(MESSAGE_COMPLETED_TASK_SUCCESS, completedTask);
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("INDEX OUT OF BOUNDS");
+            return "INDEX OUT OF BOUNDS";
         }
     }
 }

@@ -10,7 +10,7 @@ public class HelpCommand extends Command {
 
     // TODO: implement proper help documentation
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.replyToUser("You asked for help?");
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        return "You asked for help?";
     }
 }

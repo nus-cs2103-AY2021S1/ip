@@ -23,6 +23,16 @@ public class Sparrow {
         }
     }
 
+    public Sparrow() {
+        ui = new Ui();
+        try {
+            storage = new Storage();
+            tasks = storage.loadFromFile();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public void run() {
         ui.greet();
 
@@ -32,14 +42,22 @@ public class Sparrow {
         while (!isExit) {
             String command = sc.nextLine();
             Command c = parser.parseCommand(command);
-            c.execute(tasks, ui, storage);
+            String result = c.execute(tasks, ui, storage);
+            ui.replyToUser(result);
             isExit = c.getIsExit();
         }
         sc.close();
 
     }
 
+    public String getResponse(String userInput) {
+        Parser parser = new Parser();
+        Command c = parser.parseCommand(userInput);
+        return c.execute(tasks, ui, storage);
+    }
+
     public static void main(String[] args) {
+
         Sparrow sparrow = new Sparrow("Sparrow.txt");
         sparrow.run();
     }

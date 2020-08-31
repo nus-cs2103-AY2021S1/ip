@@ -16,7 +16,7 @@ dependencies {
 
 sourceSets {
     java {
-        sourceSets.main.java.srcDirs = ['src/sparrow']
+//        sourceSets.main.java.srcDirs = ['src']
     }
 }
 
@@ -34,11 +34,11 @@ test {
     }
 }
 
-jar {
-    manifest {
-        attributes 'Main-Class': 'sparrow.Sparrow'
-    }
-}
+//jar {
+//    manifest {
+//        attributes 'Main-Class': 'sparrow.Sparrow'
+//    }
+//}
 
 application {
     mainClassName = "sparrow.Sparrow"
@@ -51,8 +51,9 @@ shadowJar {
 
 checkstyle {
     toolVersion = '8.23'
+    sourceSets = []
 }
-checkstyleTest.enabled = false
+//checkstyleTest.enabled = false
 
 run{
     standardInput = System.in
