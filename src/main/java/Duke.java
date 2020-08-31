@@ -38,6 +38,7 @@ public class Duke {
 
     /**
      * Gets response from Focus based on user's input.
+     *
      * @param input User's input.
      * @return Focus' response.
      */

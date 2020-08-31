@@ -14,6 +14,7 @@ public class Event extends Task {
 
     /**
      * Creates Event with user provided description, date and time.
+     *
      * @param description Description of Event.
      * @param at Date and time of Event task.
      */
@@ -24,6 +25,7 @@ public class Event extends Task {
 
     /**
      * Converts Event to string form to be saved in user's files.
+     *
      * @return String format of Event task.
      */
     @Override
@@ -33,6 +35,7 @@ public class Event extends Task {
 
     /**
      * Returns string format of Event.
+     *
      * @return A string representation of Event.
      */
     @Override

@@ -10,6 +10,7 @@ import duke.task.TaskList;
 public class ListCommand extends Command {
     /**
      * Returns false since ListCommand is not an ExitCommand.
+     *
      * @return False.
      */
     public boolean isExit() {
@@ -18,6 +19,7 @@ public class ListCommand extends Command {
 
     /**
      * Executes ListCommand to list the tasks.
+     *
      * @param input User's input.
      * @param taskList Task list created for user.
      * @param storage Storage created for user.

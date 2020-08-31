@@ -6,6 +6,7 @@ package duke.ui;
 public class UI {
     /**
      * Greets the user upon entering the Focus.
+     *
      * @return Greetings.
      */
     public static String greetUser() {
@@ -21,6 +22,7 @@ public class UI {
 
     /**
      * Addresses the user with the name provided.
+     *
      * @param name Name of user.
      * @return Addressing of user.
      */
@@ -33,6 +35,7 @@ public class UI {
 
     /**
      * Lists out the commands that the user can use.
+     *
      * @return List of commands.
      */
     public static String listCommands() {
@@ -56,6 +59,7 @@ public class UI {
 
     /**
      * Exits Focus.
+     *
      * @return Exit output.
      */
     public String exitFocus() {

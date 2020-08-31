@@ -24,6 +24,7 @@ import duke.task.ToDo;
 public class Parser {
     /**
      * Parses user's inputs to Command.
+     *
      * @param input User's input.
      * @return Different commands depending on user's input.
      */
@@ -55,6 +56,7 @@ public class Parser {
 
     /**
      * Parses strings from text file to different types of Task.
+     *
      * @param text Task in string form in text file.
      * @return Different types of Task.
      */

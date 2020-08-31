@@ -10,6 +10,7 @@ import duke.task.TaskList;
 public class InvalidCommand extends Command {
     /**
      * Returns false since InvalidCommand is not an ExitCommand.
+     *
      * @return False.
      */
     public boolean isExit() {
@@ -18,6 +19,7 @@ public class InvalidCommand extends Command {
 
     /**
      * Executes InvalidCommand to notify user that the inputs are not recognised.
+     *
      * @param input User's input.
      * @param taskList Task list created for user.
      * @param storage Storage created for user.

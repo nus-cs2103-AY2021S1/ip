@@ -10,6 +10,7 @@ import duke.task.TaskList;
 public class DoneCommand extends Command {
     /**
      * Returns false since DoneCommand is not an ExitCommand.
+     *
      * @return False.
      */
     public boolean isExit() {
@@ -18,6 +19,7 @@ public class DoneCommand extends Command {
 
     /**
      * Executes DoneCommand to mark tasks done.
+     *
      * @param input User's input.
      * @param taskList Task list created for user.
      * @param storage Storage created for user.

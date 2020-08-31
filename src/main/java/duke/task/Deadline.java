@@ -14,6 +14,7 @@ public class Deadline extends Task {
 
     /**
      * Creates Deadline with user provided description and deadline.
+     *
      * @param description Description of Deadline.
      * @param by Deadline of Deadline task.
      */
@@ -24,6 +25,7 @@ public class Deadline extends Task {
 
     /**
      * Converts Deadline to string form to be saved in user's files.
+     *
      * @return String format of Deadline task.
      */
     @Override
@@ -33,6 +35,7 @@ public class Deadline extends Task {
 
     /**
      * Returns string format of Deadline.
+     *
      * @return A string representation of Deadline.
      */
     @Override

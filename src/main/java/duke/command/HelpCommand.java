@@ -11,6 +11,7 @@ import duke.ui.UI;
 public class HelpCommand extends Command {
     /**
      * Returns false since HelpCommand is not an ExitCommand.
+     *
      * @return False.
      */
     public boolean isExit() {
@@ -19,6 +20,7 @@ public class HelpCommand extends Command {
 
     /**
      * Executes HelpCommand help users with the commands.
+     *
      * @param input User's input.
      * @param taskList Task list created for user.
      * @param storage Storage created for user.

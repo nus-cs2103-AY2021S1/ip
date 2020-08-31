@@ -19,6 +19,7 @@ public class Task {
 
     /**
      * Creates a Task with a given task name, with it being not done yet.
+     *
      * @param taskName Description of task.
      */
     public Task(String taskName) {
@@ -29,6 +30,7 @@ public class Task {
 
     /**
      * Returns the description of task.
+     *
      * @return Task name.
      */
     public String getTaskName() {
@@ -37,6 +39,7 @@ public class Task {
 
     /**
      * Returns a tick or a cross based on whether the task is done or not done.
+     *
      * @return Tick or cross symbols.
      */
     public String getStatusIcon() {
@@ -55,6 +58,7 @@ public class Task {
 
     /**
      * Converts Task to string form to be saved in user's files.
+     *
      * @return Empty string.
      */
     public String taskToText() {
@@ -63,6 +67,7 @@ public class Task {
 
     /**
      * Returns string format of Task.
+     *
      * @return A string representation of Task.
      */
     @Override

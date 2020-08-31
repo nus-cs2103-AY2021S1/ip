@@ -9,6 +9,7 @@ import duke.task.TaskList;
 public class ExitCommand extends Command {
     /**
      * Returns true since ExitCommand is not an ExitCommand.
+     *
      * @return True.
      */
     public boolean isExit() {
@@ -17,6 +18,7 @@ public class ExitCommand extends Command {
 
     /**
      * Executes ExitCommand to exit Focus.
+     *
      * @param input User's input (not used here).
      * @param taskList Task list created for user (not used here).
      * @param storage Storage created for user (not used here).

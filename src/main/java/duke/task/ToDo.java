@@ -7,6 +7,7 @@ public class ToDo extends Task {
 
     /**
      * Creates To-Do with user provided description.
+     *
      * @param description Description of To-Do.
      */
     public ToDo(String description) {
@@ -15,6 +16,7 @@ public class ToDo extends Task {
 
     /**
      * Converts To-Do to string form to be saved in user's files.
+     *
      * @return String format of To-Do task.
      */
     @Override
@@ -24,6 +26,7 @@ public class ToDo extends Task {
 
     /**
      * Returns string format of To-Do.
+     *
      * @return A string representation of To-Do.
      */
     @Override

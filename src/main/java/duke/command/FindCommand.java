@@ -10,6 +10,7 @@ import duke.task.TaskList;
 public class FindCommand extends Command {
     /**
      * Returns false since FindCommand is not an ExitCommand.
+     *
      * @return False.
      */
     public boolean isExit() {
@@ -18,6 +19,7 @@ public class FindCommand extends Command {
 
     /**
      * Executes FindCommand to find tasks based on user's input.
+     *
      * @param input User's input.
      * @param taskList Task list created for user.
      * @param storage Storage created for user.

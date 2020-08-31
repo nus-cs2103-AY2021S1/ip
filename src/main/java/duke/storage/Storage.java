@@ -41,6 +41,7 @@ public class Storage {
 
     /**
      * Creates or retrieves the text file from user's files.
+     *
      * @return True if user has an existing text file,
      * false if user does not have an existing text file.
      */
@@ -63,6 +64,7 @@ public class Storage {
 
     /**
      * Loads the data from user's text file if it already exists.
+     *
      * @return Arraylist of tasks in string format.
      */
     public ArrayList<String> loadData() {
@@ -85,6 +87,7 @@ public class Storage {
 
     /**
      * Adds the data to user's text file.
+     *
      * @param item Item to be added to text file.
      */
     public void addData(Task item) {
@@ -101,6 +104,7 @@ public class Storage {
 
     /**
      * Updates the data in user's text file.
+     *
      * @param tasks Task list to be updated.
      */
     public void updateData(ArrayList<Task> tasks) {

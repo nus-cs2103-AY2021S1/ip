@@ -10,6 +10,7 @@ import duke.task.TaskList;
 public class DeleteCommand extends Command {
     /**
      * Returns false since DeleteCommand is not an ExitCommand.
+     *
      * @return False.
      */
     public boolean isExit() {
@@ -18,6 +19,7 @@ public class DeleteCommand extends Command {
 
     /**
      * Executes DeleteCommand to delete tasks.
+     *
      * @param input User's input.
      * @param taskList Task list created for user.
      * @param storage Storage created for user.

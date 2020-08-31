@@ -25,6 +25,7 @@ public class TaskList {
 
     /**
      * Creates a task list with user's existing data.
+     *
      * @param tasks String representation of tasks in user's data.
      */
     public TaskList(ArrayList<String> tasks) {
@@ -36,6 +37,7 @@ public class TaskList {
 
     /**
      * Returns number of tasks in task list.
+     *
      * @return number of tasks.
      */
     public int getSize() {
@@ -44,6 +46,7 @@ public class TaskList {
 
     /**
      * Adds To-Do tasks into task list.
+     *
      * @param description Description of To-Do.
      * @param storage Storage created for user.
      * @return String representation of added To-Do.
@@ -60,6 +63,7 @@ public class TaskList {
 
     /**
      * Adds Deadline tasks into task list.
+     *
      * @param description Description of Deadline.
      * @param date Deadline of Deadline task.
      * @param storage Storage created for user.
@@ -77,6 +81,7 @@ public class TaskList {
 
     /**
      * Adds Event tasks into task list.
+     *
      * @param description Description of Event.
      * @param date Date and time of Event.
      * @param storage Storage created for user.
@@ -94,6 +99,7 @@ public class TaskList {
 
     /**
      * Deletes tasks from task list.
+     *
      * @param index Index of task user wants to remove.
      * @param storage Storage created for user.
      * @return String representation of deleted task.
@@ -111,6 +117,7 @@ public class TaskList {
 
     /**
      * Marks tasks done on task list.
+     *
      * @param index Index of task user wants to mark as done.
      * @param storage Storage created for user.
      * @return String representation of done task.
@@ -126,6 +133,7 @@ public class TaskList {
 
     /**
      * Lists all the tasks on task list.
+     *
      * @return String representation of list of tasks.
      */
     public String listTasks() {
@@ -140,6 +148,7 @@ public class TaskList {
 
     /**
      * Finds the tasks according to the keyword user input.
+     *
      * @param keyword Keyword provided by user.
      * @return String representation of found tasks.
      */

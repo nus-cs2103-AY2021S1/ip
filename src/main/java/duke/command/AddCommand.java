@@ -18,6 +18,7 @@ public class AddCommand extends Command {
 
     /**
      * Creates AddCommand with the given task type.
+     *
      * @param taskType Type of task (to-do, deadline or event).
      */
     public AddCommand(String taskType) {
@@ -26,6 +27,7 @@ public class AddCommand extends Command {
 
     /**
      * Returns false since AddCommand is not an ExitCommand.
+     *
      * @return False.
      */
     public boolean isExit() {
@@ -34,6 +36,7 @@ public class AddCommand extends Command {
 
     /**
      * Executes AddCommand to add To-Do, Deadline or Event.
+     *
      * @param input User's input.
      * @param taskList Task list created for user.
      * @param storage Storage created for user.
@@ -53,6 +56,7 @@ public class AddCommand extends Command {
 
     /**
      * Adds To-Do tasks into task list.
+     *
      * @param input User's input.
      * @param taskList Task list created for user.
      * @param storage Storage created for user.
@@ -79,6 +83,7 @@ public class AddCommand extends Command {
 
     /**
      * Adds Deadline tasks into task list.
+     *
      * @param input User's input.
      * @param taskList Task list created for user.
      * @param storage Storage created for user.
@@ -136,6 +141,7 @@ public class AddCommand extends Command {
 
     /**
      * Adds Event tasks into task list.
+     *
      * @param input User's input.
      * @param taskList Task list created for user.
      * @param storage Storage created for user.

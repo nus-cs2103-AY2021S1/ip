@@ -6,6 +6,7 @@ import javafx.application.Application;
 public class Launcher {
     /**
      * Entry point to run Focus.
+     *
      * @param args Args.
      */
     public static void main(String[] args) {

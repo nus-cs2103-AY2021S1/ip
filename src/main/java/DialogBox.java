@@ -32,6 +32,7 @@ public class DialogBox extends HBox {
 
     /**
      * Constructor for DialogBox.
+     *
      * @param text Inputs and responses.
      * @param image Speaker's image.
      */
@@ -61,6 +62,7 @@ public class DialogBox extends HBox {
 
     /**
      * Creates a new DialogBox for user.
+     *
      * @param input User's input.
      * @param image Image of user.
      * @return DialogBox for user.
@@ -71,6 +73,7 @@ public class DialogBox extends HBox {
 
     /**
      * Creates a new DialogBox for Duke.
+     *
      * @param response Duke's response.
      * @param image Image of Duke.
      * @return DialogBox for Duke.
