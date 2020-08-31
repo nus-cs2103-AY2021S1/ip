@@ -1,5 +1,12 @@
 package king;
 
+import tasks.Deadline;
+import tasks.Event;
+import tasks.Task;
+import tasks.TaskList;
+import tasks.ToDo;
+import ui.UI;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
@@ -8,13 +15,6 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
-
-import tasks.Deadline;
-import tasks.Event;
-import tasks.Task;
-import tasks.TaskList;
-import tasks.ToDo;
-import ui.UI;
 
 public class Storage {
 
@@ -112,9 +112,12 @@ public class Storage {
     }
 
     /**
-     * Finds a keyword in the asset file.
-     * @param keyword
-     * @return
+     * Finds a keyword in the asset file
+     * and returns the corresponding tasks found in
+     * a taskList.
+     *
+     * @param keyword keyword to search for.
+     * @return TaskList containing the tasks with the keywords
      */
     public TaskList find(String keyword) {
         TaskList tasksFound = new TaskList();
