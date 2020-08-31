@@ -8,7 +8,6 @@ import duke.util.Parser;
 import duke.util.Storage;
 import duke.util.TaskList;
 import duke.util.Ui;
-
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.scene.Scene;
