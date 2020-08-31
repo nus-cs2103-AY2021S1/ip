@@ -30,10 +30,11 @@ public class AddCommand extends Command {
      * @param ui Ui used to generate messages to users.
      * @param listStorage Backend storage to store items in the task list.
      * @param taskList List of tasks added by users so far.
+     * @return @return UI message after executing add command.
      */
-    public void execute (Ui ui, Storage listStorage, TaskList taskList) {
+    public String execute (Ui ui, Storage listStorage, TaskList taskList) {
         taskList.add(this.newTask);
         listStorage.addTask(this.newTask);
-        ui.addTask(this.newTask, taskList);
+        return ui.addTask(this.newTask, taskList);
     }
 }

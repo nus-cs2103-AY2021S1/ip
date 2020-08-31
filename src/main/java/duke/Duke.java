@@ -17,37 +17,60 @@ public class Duke {
      *
      * @param fileName Storage filename.
      */
-    public Duke(String fileName) {
+    private Duke(String fileName) {
         this.listStorage = new Storage(fileName);
         this.taskList = new TaskList();
         this.ui = new Ui(this.listStorage, this.taskList);
     }
 
     /**
-     * Processes user's input through parsing and executing relevant commands.
+     * Creates a Duke object with dataFile.txt as the storage file name.
      *
      */
-    public void run() {
-        this.ui.printWelcome();
-        this.listStorage.loadData(this.taskList);
-        this.ui.loadFile();
-        boolean isExit = false;
-        while (!isExit) {
-            String command = this.ui.getInput();
-            Command c = Parser.parse(command);
-            if (c != null) {
-                c.execute(this.ui, this.listStorage, this.taskList);
-                isExit = c.canExit();
-            }
-        }
+    public Duke() {
+        this("dataFile.txt");
     }
 
     /**
-     * Creates a new bot and start to run the bot to accept user's commands.
+     * Returns appropriate response to user's input.
      *
-     * @param args
+     * @param input User's input.
+     * @return Message response to user's input.
      */
-    public static void main(String[] args) {
-        new Duke("dataFile.txt").run();
+    protected String getResponse(String input) {
+        String uiMessage = "";
+        Command c = Parser.parse(input);
+        if (c != null) {
+            uiMessage = c.execute(this.ui, this.listStorage, this.taskList);
+        }
+        return uiMessage;
     }
+
+    /**
+     * Returns welcome message when bot has started.
+     *
+     * @return Welcome message.
+     */
+    public String saysWelcome() {
+        return this.ui.printWelcome();
+    }
+
+    /**
+     * Returns storage loading messages when bot has started.
+     *
+     * @return Storage loading messages.
+     */
+    public String loadStorage() {
+        return this.ui.loadStorage(this.listStorage.loadData(this.taskList));
+    }
+
+    /**
+     * Returns storage successfully loaded message.
+     *
+     * @return Storage successfully loaded message.
+     */
+    public String loadedStorage() {
+        return this.ui.loadFile();
+    }
+
 }

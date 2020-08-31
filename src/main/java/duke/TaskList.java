@@ -49,12 +49,15 @@ public class TaskList {
     /**
      * Lists tasks currently in the task list.
      *
+     * @return String representation of items in task list.
      */
-    public void listItems() {
+    public String listItems() {
+        String listOfItemsInString = "";
         for (int i = 0; i < this.taskList.size(); i++) {
             String currentLine = "      " + (i + 1) + ". " + this.taskList.get(i);
-            System.out.println(currentLine);
+            listOfItemsInString += currentLine + "\n";
         }
+        return listOfItemsInString;
     }
 
     /**
