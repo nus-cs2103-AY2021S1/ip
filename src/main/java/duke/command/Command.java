@@ -26,5 +26,10 @@ public interface Command {
      */
     boolean isExit();
 
+    /**
+     * Returns the response after executing a certain command.
+     *
+     * @return String of the response.
+     */
     String getResponse();
 }

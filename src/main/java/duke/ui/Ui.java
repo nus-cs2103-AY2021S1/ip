@@ -36,7 +36,7 @@ public class Ui {
     /**
      * Logo of Duke.
      */
-    private String logo = " ____        _        \n"
+    private final String logo = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
@@ -131,7 +131,6 @@ public class Ui {
     }
 
     /**
-     * Iteration 2:
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
