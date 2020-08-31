@@ -3,6 +3,11 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * The TaskDate class represents the Date associated with some subclasses of Tasks.
+ *
+ * @author Jaya Rengam
+ */
 public class TaskDate {
     private LocalDateTime dateTime;
 
@@ -10,6 +15,10 @@ public class TaskDate {
         this.dateTime = date.atTime(LocalTime.parse(time,
                                     DateTimeFormatter.ofPattern("HHmm")));
     }
+
+    /**
+     * Creates a TaskDate object with the given date and time.
+     */
     TaskDate(LocalDateTime dateTime) {
         this.dateTime = dateTime;
     }

@@ -1,20 +1,27 @@
+/**
+ * The PrintErrorCommand, when executed prints an error message to the console.
+ *
+ * @author Jaya Rengam
+ */
 public class PrintErrorCommand implements Command {
 
-    private boolean isDone;
+    private boolean hasExecuted;
     private String errorMessage;
 
     PrintErrorCommand(String errorMessage) {
-        this.isDone = false;
+        this.hasExecuted = false;
         this.errorMessage = errorMessage;
     }
 
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws CartonaException {
-        if (isDone) {
+        if (hasExecuted) {
             throw new CartonaException("Error: PrintErrorCommand already executed");
         }
+
         ui.printErrorMessage(errorMessage);
-        this.isDone = true;
+
+        this.hasExecuted = true;
     }
 
     @Override
