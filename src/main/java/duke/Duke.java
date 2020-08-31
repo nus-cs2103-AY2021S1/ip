@@ -39,7 +39,7 @@ class Duke {
                 Parser.Command command = Parser.parseCommand(input);
                 switch (command) {
                     case BYE:
-                        this.isRunning = false;
+                        isRunning = false;
                         if (storage.store(taskList)) {
                             ui.showMessage("Saved your list. Exiting...");
                         }

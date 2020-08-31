@@ -22,7 +22,7 @@ public class Event extends Task {
 
     @Override
     public String getDescriptionForDatabase() {
-        return "event - " + (this.isTaskDone() ? "1" : "0") + " - " +
-                this.getDescription() + " - " + this.eventDate;
+        return "event - " + (isTaskDone() ? "1" : "0") + " - " +
+                getDescription() + " - " + eventDate;
     }
 }

@@ -40,7 +40,7 @@ class Ui {
     }
 
     void closeUi() {
-        this.reader.close();
+        reader.close();
     }
 
     void showException(Exception e) {
