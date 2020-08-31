@@ -1,7 +1,7 @@
 package duke.task;
 
 public abstract class Task {
-    protected final String description;
+    protected String description;
     protected Boolean isDone;
 
     public enum TaskType {

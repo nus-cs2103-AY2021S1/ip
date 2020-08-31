@@ -7,7 +7,7 @@ import java.util.List;
 
 public class TaskList {
     private List<Task> list;
-    private static final String starline = "**************************************************************************\n";
+    private static final String STARLINE = "**************************************************************************\n";
     
     public TaskList() {
         this.list = new ArrayList<>();
@@ -17,16 +17,16 @@ public class TaskList {
         try {
             this.list = new ArrayList<>();
             String line = br.readLine();
-            boolean fileCorrupted = false;
+            boolean isFileCorrupted = false;
             while (line != null) {
                 try {
                     boolean isDone = Boolean.parseBoolean(br.readLine());
                     this.add(line, isDone,false);
                 } catch (IllegalArgumentException e) {
-                    if (!fileCorrupted) {
-                        System.out.println(starline + 
-                                "WARNING: Your stored data appears to be in a corrupted format. Some tasks may be lost.");
-                        fileCorrupted = true;
+                    if (!isFileCorrupted) {
+                        System.out.println(STARLINE + "WARNING: Your stored data appears to be in a corrupted format. "
+                                + "Some tasks may be lost.");
+                        isFileCorrupted = true;
                     }
                 } finally {
                     line = br.readLine();
@@ -42,20 +42,20 @@ public class TaskList {
     }
 
     public void list() {
-        System.out.println(starline + "Here are the tasks in your list:");
+        System.out.println(STARLINE + "Here are the tasks in your list:");
         for (int i=0; i < this.list.size(); i++) {
             printTask(i);
         }
-        System.out.println(starline);
+        System.out.println(STARLINE);
     }
 
     public void printTask(int listIndex) {
-        String task = String.format("%d.%s", listIndex+1, this.list.get(listIndex));
+        String task = String.format("%d.%s", listIndex + 1, this.list.get(listIndex));
         System.out.println(task);
     }
 
-    public void echo(String input) {
-        System.out.println("added: " + input);
+    public void echo(String task) {
+        System.out.println("added: " + task);
         System.out.println("Now you have " + list.size() + " tasks in the list.");
     }
     
@@ -84,42 +84,42 @@ public class TaskList {
         String taskType = splitInput[0];
         Task newTask;
         
-        switch(taskType) {
-            case "todo":
-                if (input.matches("todo (\\S+\\s?)+")) {
-                    newTask = new Todo(splitInput[1], isDone);
-                    break;
-                } else if (input.matches("todo\\s?")) {
-                    throwEmptyFieldException("todo", "description");
-                } else {
-                    throwInvalidTaskSyntaxException("todo");
-                }
-            case "deadline":
-                if (input.matches("deadline (\\S+\\s?)+ /by (\\S+\\s?)+")) {
-                    String[] splitDeadline = splitInput[1].split(" /by ");
-                    String deadlineDesc = splitDeadline[0];
-                    String by = splitDeadline[1];
-                    newTask = new Deadline(deadlineDesc, by, isDone);
-                    break;
-                } else if (input.matches("deadline\\s?") || !input.contains(" by ")){
-                    throwEmptyFieldException("deadline", "description", "date");
-                } else {
-                    throwInvalidTaskSyntaxException("deadline");
-                }
-            case "event":
-                if (input.matches("event (\\S+\\s?)+ /at (\\S+\\s?)+")) {
-                    String[] splitEvent = splitInput[1].split(" /at ");
-                    String eventDesc = splitEvent[0];
-                    String at = splitEvent[1];
-                    newTask = new Event(eventDesc, at, isDone);
-                    break;
-                } else if (input.matches("event\\s?") || !input.contains(" at ")) {
-                    throwEmptyFieldException("event", "description", "location");
-                } else {
-                    throwInvalidTaskSyntaxException("event");
-                }
-            default:
-                throw new IllegalArgumentException("OOPS! There is no task of type " + taskType + "!");
+        switch(taskType) { 
+        case "todo":
+            if (input.matches("todo (\\S+\\s?)+")) {
+                newTask = new Todo(splitInput[1], isDone);
+                break;
+            } else if (input.matches("todo\\s?")) {
+                throwEmptyFieldException("todo", "description");
+            } else {
+                throwInvalidTaskSyntaxException("todo");
+            }
+        case "deadline":
+            if (input.matches("deadline (\\S+\\s?)+ /by (\\S+\\s?)+")) {
+                String[] splitDeadline = splitInput[1].split(" /by ");
+                String deadlineDesc = splitDeadline[0];
+                String by = splitDeadline[1];
+                newTask = new Deadline(deadlineDesc, by, isDone);
+                break;
+            } else if (input.matches("deadline\\s?") || !input.contains(" by ")){
+                throwEmptyFieldException("deadline", "description", "date");
+            } else {
+                throwInvalidTaskSyntaxException("deadline");
+            }
+        case "event":
+            if (input.matches("event (\\S+\\s?)+ /at (\\S+\\s?)+")) {
+                String[] splitEvent = splitInput[1].split(" /at ");
+                String eventDesc = splitEvent[0];
+                String at = splitEvent[1];
+                newTask = new Event(eventDesc, at, isDone);
+                break;
+            } else if (input.matches("event\\s?") || !input.contains(" at ")) {
+                throwEmptyFieldException("event", "description", "location");
+            } else {
+                throwInvalidTaskSyntaxException("event");
+            }
+        default:
+            throw new IllegalArgumentException("OOPS! There is no task of type " + taskType + "!");
         }
         this.list.add(newTask);
         if (echo) echo(newTask.toString());
@@ -134,8 +134,8 @@ public class TaskList {
         } catch (IndexOutOfBoundsException ex) { // if list index is not in the list
             System.out.println("OOPS! This task index does not exist! Type 'list' to check out your tasks.");
         } catch (NumberFormatException ex) { // if list index string is not an integer
-            System.out.println("OOPS! The keyword 'done' is used to check off tasks as follows:" +
-                    "   done <task index>");
+            System.out.println("OOPS! The keyword 'done' is used to check off tasks as follows:"
+                    + "   done <task index>");
         }
     }
     
@@ -148,8 +148,8 @@ public class TaskList {
         } catch (IndexOutOfBoundsException ex) {
             System.out.println("OOPS! This task index does not exist! Type 'list' to check out your tasks.");
         } catch (NumberFormatException ex) { // if list index string is not an integer
-            System.out.println("OOPS! The keyword 'delete' is used to delete tasks as follows:" +
-                    "   delete <task index>");
+            System.out.println("OOPS! The keyword 'delete' is used to delete tasks as follows:"
+                    + "   delete <task index>");
         }
     }
 }

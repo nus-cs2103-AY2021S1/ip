@@ -22,7 +22,7 @@ public class Todo extends Task {
             return true;
         } else if (other instanceof Todo) {
             Todo otherTodo = (Todo) other;
-            return this.description.equals(otherTodo.description) && this.isDone == otherTodo.isDone;
+            return this.description.equals(otherTodo.description) && (this.isDone == otherTodo.isDone);
         } else {
             return false;
         }

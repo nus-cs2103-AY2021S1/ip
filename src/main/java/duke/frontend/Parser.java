@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class Parser {
     private final TaskList taskList;
-    private static final String dashline = "--------------------------------------------------------------------------";
+    private static final String DASHLINE = "--------------------------------------------------------------------------";
     
     public Parser(TaskList taskList) {
         this.taskList = taskList;
@@ -29,7 +29,7 @@ public class Parser {
                 try {
                     this.taskList.markTaskAsDone(splitNext[1]);
                 } catch (IndexOutOfBoundsException ex) {
-                    System.out.println(dashline + "\n\u2639 Please indicate which task you'd like to check off!");
+                    System.out.println(DASHLINE + "\n\u2639 Please indicate which task you'd like to check off!");
                 }
                 
             } else if (splitNext[0].equals("delete")) {
@@ -37,18 +37,18 @@ public class Parser {
                 try {
                     this.taskList.deleteTask(splitNext[1]);
                 } catch (IndexOutOfBoundsException ex) {
-                    System.out.println(dashline + "\n\u2639 Please indicate which task you'd like to delete!");
+                    System.out.println(DASHLINE + "\n\u2639 Please indicate which task you'd like to delete!");
                 }
                 
             } else if (splitNext[0].equals("todo") || splitNext[0].equals("deadline") || splitNext[0].equals("event")){
-                // for ToDos, Deadlines, Events
+            // for ToDos, Deadlines, Events
                 try {
                     this.taskList.add(next, false, true);
                 } catch (IllegalArgumentException ex) {
-                    System.out.println(dashline + "\n\u2639 " + ex.getMessage() + "\n" + dashline);
+                    System.out.println(DASHLINE + "\n\u2639 " + ex.getMessage() + "\n" + DASHLINE);
                 }
             } else {
-                System.out.println(dashline + "\n\u2639 Sorry I don't know what that means!\n" + dashline);
+                System.out.println(DASHLINE + "\n\u2639 Sorry I don't know what that means!\n" + DASHLINE);
             }
             next = sc.nextLine();
         }

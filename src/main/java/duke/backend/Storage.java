@@ -3,7 +3,12 @@ package duke.backend;
 import duke.task.Task;
 import duke.task.TaskList;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.BufferedReader;
+import java.io.FileWriter;
 import java.util.List;
 
 public class Storage {
@@ -23,6 +28,8 @@ public class Storage {
         try {
             String dir = file.getParent();
             File dirFile = new File(dir);
+
+            // Create file and parent directories if they do not exist yet
             dirFile.mkdirs();
             file.createNewFile();
         } catch (IOException e) {
@@ -37,8 +44,13 @@ public class Storage {
     
     public void save(TaskList taskList) {
         try {
-            boolean deleted = file.delete();
-            if (deleted) createFile(file);
+            // Delete old saved file if it exists
+            boolean isDeleted = file.delete();
+            if (isDeleted) {
+                createFile(file);
+            }
+
+            // Write tasks to new file overwriting the old file
             FileWriter fw = new FileWriter(file);
             List<Task> tl = taskList.getTaskList();
             for (Task t : tl) {

@@ -2,14 +2,12 @@ package duke.task;
 
 import org.junit.jupiter.api.Test;
 
-import java.time.LocalDate;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 public class EventTest {
+    
     @Test
     public void constructorTest() {
-
         // Test with correct arguments
         Event event1 = new Event("Eat Apple", "NUS", false);
         Event event2 = new Event("Write paper", "Matt's House", true);
@@ -25,8 +23,8 @@ public class EventTest {
     @Test
     public void getParsedTaskTest() {
         Event event = new Event("Eat Apple", "NUS", true);
-        String expectedParsedTask = "event Eat Apple /at NUS" + System.lineSeparator() +
-                "true" + System.lineSeparator();
+        String expectedParsedTask = "event Eat Apple /at NUS" + System.lineSeparator()
+                + "true" + System.lineSeparator();
         assertEquals(expectedParsedTask, event.getParsedTask());
     }
 
@@ -43,4 +41,5 @@ public class EventTest {
         Event event2 = new Event("Eat Apple", "NUS", true);
         assertTrue(event1.equals(event2));
     }
+    
 }
