@@ -8,11 +8,11 @@ public class FindCommand extends Command {
     @Override
     void execute(TaskList<Task> tasks, Ui ui, Storage storage) throws DukeException {
         // if length is not 2, nothing was passed in after 'find'
-        if (parsedCommand.length != 2) {
+        if (getParsedCommand().length != 2) {
             throw new DukeException("NANI??! Tell us something to find!\n");
         }
 
-        String inputDescription = parsedCommand[1].trim();
+        String inputDescription = getParsedCommand()[1].trim();
         boolean taskFound = false;
         System.out.println("Here are the matching tasks in your list:");
         for (int i = 0; i < tasks.size(); i++) {

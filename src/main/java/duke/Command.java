@@ -4,7 +4,7 @@ package duke;
  * Encapsulates an Abstract Command class
  */
 public abstract class Command {
-    String[] parsedCommand;
+    private String[] parsedCommand;
 
     /**
      * Instantiates a Command.
@@ -12,6 +12,10 @@ public abstract class Command {
      */
     public Command(String[] parsedCommand) {
         this.parsedCommand = parsedCommand;
+    }
+
+    public String[] getParsedCommand() {
+        return parsedCommand;
     }
 
     /**

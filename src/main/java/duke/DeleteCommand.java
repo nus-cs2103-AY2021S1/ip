@@ -23,11 +23,11 @@ public class DeleteCommand extends Command {
     void execute(TaskList<Task> tasks, Ui ui, Storage storage) throws DukeException {
         try {
             // if length is not 2, nothing was passed in after 'done'
-            if (parsedCommand.length != 2) {
+            if (getParsedCommand().length != 2) {
                 throw new DukeException("Which task do you want to delete? Please key in the task number!\n");
             }
             // check if taskNumber is a number
-            int taskNumber = Integer.parseInt(parsedCommand[1]);
+            int taskNumber = Integer.parseInt(getParsedCommand()[1]);
             // check if taskNumber is valid
             if (taskNumber <= 0 || taskNumber > tasks.size()) {
                 throw new DukeException("Sorry, no such task to delete!\n");
@@ -40,7 +40,7 @@ public class DeleteCommand extends Command {
             printToDoListSize(tasks);
 
         } catch (NumberFormatException e) {
-            throw new DukeException("'" + parsedCommand[1] + "'" + " is not an integer!\n");
+            throw new DukeException("'" + getParsedCommand()[1] + "'" + " is not an integer!\n");
         }
     }
 

@@ -21,11 +21,11 @@ public class AddToDoCommand extends Command {
      */
     @Override
     void execute(TaskList<Task> tasks, Ui ui, Storage storage) throws DukeException {
-        if (parsedCommand.length != 2) {
+        if (getParsedCommand().length != 2) {
             throw new DukeException("NANI??! Enter a description for your todo!\n");
         }
 
-        String description = parsedCommand[1];
+        String description = getParsedCommand()[1];
         Task taskToAdd = new ToDo(description);
         addTask(tasks, taskToAdd);
     }

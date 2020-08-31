@@ -23,12 +23,12 @@ public class AddEventCommand extends Command {
     @Override
     void execute(TaskList<Task> tasks, Ui ui, Storage storage) throws DukeException {
         // if length is not 2, nothing was passed in after 'makeEvent'
-        if (parsedCommand.length != 2) {
+        if (getParsedCommand().length != 2) {
             throw new DukeException("NANI??! Enter a description for your event!\n");
         }
 
         // if event is lacking a /at keyword
-        String description = parsedCommand[1];
+        String description = getParsedCommand()[1];
         if (description.indexOf("/at") < 0) {
             throw new DukeException("Please enter a valid event! Remember to add '/at'\n");
         }
