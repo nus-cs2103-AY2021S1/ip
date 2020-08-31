@@ -28,13 +28,13 @@ public class Ui {
         System.out.println("    Hello, I'm DukeQ");
         System.out.println("    todo then your instructions e.g. todo read book");
         System.out.println("    deadline then your instructions e.g. deadline by 2020-09-01");
-        System.out.println("    Event - type 'event' followed by the description,");
+        System.out.println("    type 'event' followed by the description,");
         System.out.println("    then '/at', then timing in yyyy-MM-dd format");
-        System.out.println("    Type 'done' followed by the task number " +
-                "and I'll mark it as done");
-        System.out.println("    Type 'list' to see the list");
-        System.out.println("    Type 'find' followed by keyword to search for tasks");
-        System.out.println("    Type 'bye' to exit");
+        System.out.println("    done followed by the task number " +
+                "ok I have marked it as done");
+        System.out.println("    type list to see the list");
+        System.out.println("    type find followed by keywords to search for tasks");
+        System.out.println("    type bye to exit");
         delimiter();
     }
 

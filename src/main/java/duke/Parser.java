@@ -29,7 +29,7 @@ public class Parser {
         } else if (input.length() >= 8 && input.substring(0, 8).equalsIgnoreCase("deadline")) {
             return new AddCommand(input, ActionType.ADD_DEADLINE);
         } else {
-            throw new DukeException("I have no idea what that means ¯\\_(ツ)_/¯");
+            throw new DukeException("Sorry but I think you enter a wrong command...");
         }
     }
 }
