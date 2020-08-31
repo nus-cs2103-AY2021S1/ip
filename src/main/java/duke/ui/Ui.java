@@ -66,19 +66,27 @@ public class Ui {
      * @param error The error message
      */
     public static void showError(String error) {
-        System.out.println("Sorry an error occurred!! :( \n" +
-                "_________________________________________\n"
+        System.out.println("Sorry an error occurred!! :( \n"
+                + "_________________________________________\n"
                 + error + "\n"
                 + "_________________________________________");
     }
 
+    /**
+     * Prints a formatted response of a successful Task execution
+     * @param response The String representation of the response from the command input
+     * @param command The String command from the command from User Input
+     */
     public static void showResponse(String response, String command) {
-        System.out.println("Task: " + command + "\nExecution Success: \n" +
-                "_________________________________________\n"
+        System.out.println("Task: " + command + "\nExecution Success: \n"
+                + "_________________________________________\n"
                 + response
                 + "\n_________________________________________");
     }
 
+    /**
+     * Prints a formatted response to inform the user that saving is in progress.
+     */
     public static void showSaving() {
         System.out.println("Currently saving tasks. Do not Exit!");
     }

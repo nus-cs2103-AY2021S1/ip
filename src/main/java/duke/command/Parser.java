@@ -1,14 +1,14 @@
 package duke.command;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+
 import duke.storage.Storage;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.TaskList;
 import duke.task.Todo;
 import duke.ui.Ui;
-
-import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
 
 /**
  * <h1> Duke Parser class </h1>
@@ -56,8 +56,7 @@ public class Parser {
         }
     }
 
-
-    public static void processorFind(TaskList taskList, String key) {
+    private static void processorFind(TaskList taskList, String key) {
         int counter = 1;
         Ui.showCommandMessage("Here are the matching tasks in your list:");
         for (int i = 0; i < taskList.getListSize(); i++) {
@@ -69,18 +68,16 @@ public class Parser {
         Ui.showLine();
     }
 
-
-    public static void processorList(TaskList taskList) {
+    private static void processorList(TaskList taskList) {
         Ui.showCommandMessage("Here are the tasks in your list:");
         for (int i = 0; i < taskList.getListSize(); i++) {
-            int index = i+1;
+            int index = i + 1;
             System.out.println(index + "." + taskList.getTask(i).toString());
         }
         Ui.showLine();
     }
 
-
-    public static String processorAdd(String cmd, TaskList taskList) throws DukeException {
+    private static String processorAdd(String cmd, TaskList taskList) throws DukeException {
         String[] stringarr = cmd.split(" ", 2);
         if (stringarr[0].equals("todo")) {
             if (stringarr.length <= 1) {
