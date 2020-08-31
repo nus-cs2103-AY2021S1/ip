@@ -15,6 +15,7 @@ import duke.command.InvalidCommand;
 import duke.command.ListCommand;
 import duke.command.TodoCommand;
 import duke.exception.DukeException;
+import duke.logic.Parser;
 
 public class ParserTest {
     @Test

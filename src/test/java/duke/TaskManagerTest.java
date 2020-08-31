@@ -1,12 +1,15 @@
 package duke;
 
-import static org.junit.jupiter.api.Assertions.*;
+import java.util.ArrayList;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-
 import duke.task.Task;
+import duke.task.TaskManager;
 
 public class TaskManagerTest {
     @Test
