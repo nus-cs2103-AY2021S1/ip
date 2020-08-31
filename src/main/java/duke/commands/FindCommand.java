@@ -25,8 +25,7 @@ public class FindCommand implements Command {
      * @param storage Storage.
      * @return A boolean to indicate that it is not the terminating command.
      */
-    public boolean execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.filteredList(tasks.findTasks(keyword));
-        return false;
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        return ui.filteredList(tasks.findTasks(keyword));
     }
 }

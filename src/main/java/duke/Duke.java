@@ -5,6 +5,8 @@ import duke.exceptions.DukeException;
 
 import java.util.ArrayList;
 
+
+
 /**
  * Duke helps you manage tasks through a chatbot.
  * Duke also saves your list of tasks and will load
@@ -35,19 +37,7 @@ public class Duke {
      * based on specific keywords.
      */
     public void chat() {
-        ui.intro();
-        boolean endLoop = false;
-        while (!endLoop) {
-            try {
-                this.inquiry = ui.nextInquiry();
-                Command command = Parser.parse(inquiry);
-                endLoop = command.execute(tasks, ui, storage);
-            } catch (DukeException e) {
-                ui.reply(e.getMessage());
-            } finally {
-                ui.showLine();
-            }
-        }
+
     }
 
     /**
@@ -59,6 +49,7 @@ public class Duke {
         chatbot.chat();
     }
 
+
     //    public static void main(String[] args) {
 //        String logo = " ____        _        \n"
 //                + "|  _ \\ _   _| | _____ \n"
@@ -67,4 +58,18 @@ public class Duke {
 //                + "|____/ \\__,_|_|\\_\\___|\n";
 //        System.out.println("Hello from\n" + logo);
 //    }
+
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    public String getResponse(String input) {
+        ui.intro();
+            try {
+                Command command = Parser.parse(input);
+                return command.execute(tasks, ui, storage);
+            } catch (DukeException e) {
+                return e.getMessage();
+            }
+    }
 }

@@ -19,6 +19,6 @@ public interface Command {
      * @throws DukeException Exceptions when executing the different methods of TaskList,
      * Ui and Storage.
      */
-    boolean execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
+    String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
 
 }

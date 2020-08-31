@@ -31,15 +31,15 @@ public class DeleteCommand implements Command {
      * @throws DukeException Exceptions when executing the different methods of TaskList,
      * Ui and Storage.
      */
-    public boolean execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (index >= tasks.getSize() || index < 0) {
             throw new DukeInvalidIndexException();
         }
         Task currentTask = tasks.getTask(index);
         tasks.deleteTask(index);
-        ui.deleteMessage(currentTask, tasks.getSize());
+        String reply = ui.deleteMessage(currentTask, tasks.getSize());
         storage.save(tasks.getPlanner());
-        return false;
+        return reply;
     }
 
 }
