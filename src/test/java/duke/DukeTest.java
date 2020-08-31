@@ -1,14 +1,14 @@
 package duke;
 
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
 
 public class DukeTest {
 
-    TaskList t = new TaskList();
+    private TaskList t = new TaskList();
 
-    Storage s = new Storage();
+    private Storage s = new Storage();
 
     @Test
     public void invalidCommandTest() {
