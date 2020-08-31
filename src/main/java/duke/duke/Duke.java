@@ -1,5 +1,10 @@
 package duke.duke;
 
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
+
 import duke.command.DukeException;
 import duke.command.Parser;
 
@@ -10,7 +15,7 @@ import duke.task.TaskList;
 /**
  * Duke class that runs the Duke chat bot program.
  */
-public class Duke {
+public class Duke extends Application {
 
     private Storage storage;
     private TaskList list;
@@ -43,6 +48,15 @@ public class Duke {
             }
         }
         storage.updateFile(list);
+    }
+
+    @Override
+    public void start(Stage stage) {
+        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
+        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
+
+        stage.setScene(scene); // Setting the stage to show our screen
+        stage.show(); // Render the stage.
     }
 
     public static void main(String[] args) {
