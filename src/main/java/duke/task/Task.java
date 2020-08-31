@@ -4,8 +4,8 @@ package duke.task;
  * An abstract class to represent the tasks stored and modified in the chatbot.
  */
 public abstract class Task {
-    public String description;
-    public boolean isDone;
+    private String description;
+    private boolean isDone;
 
     /**
      * Task constructor.
@@ -30,6 +30,12 @@ public abstract class Task {
      */
     public void done() {
         this.isDone = true;
+    }
+    public String getDescription() {
+        return this.description;
+    }
+    public boolean getIsDone() {
+        return this.isDone;
     }
 
     @Override

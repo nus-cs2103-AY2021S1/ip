@@ -1,9 +1,11 @@
 package duke;
 
-import duke.task.Task;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import duke.task.Task;
+
+
 
 /**
  * Contains the task list and operations.
@@ -79,7 +81,7 @@ public class TaskList {
     public List<Task> findTasks(String keyword) {
         List<Task> filteredTasks = new ArrayList<>();
         for (Task task : tasks) {
-            if (task.description.contains(keyword)) {
+            if (task.getDescription().contains(keyword)) {
                 filteredTasks.add(task);
             }
         }

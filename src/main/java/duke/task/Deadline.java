@@ -7,7 +7,7 @@ import java.time.format.DateTimeFormatter;
  * A sub class of Task, which represents any deadlines.
  */
 public class Deadline extends Task {
-    public LocalDateTime date;
+    private LocalDateTime date;
 
     /**
      * Deadline constructor.
@@ -18,6 +18,9 @@ public class Deadline extends Task {
     public Deadline(String description, boolean isDone, LocalDateTime date) {
         super(description, isDone);
         this.date = date;
+    }
+    public LocalDateTime getDate() {
+        return this.date;
     }
 
     @Override

@@ -8,7 +8,7 @@ import duke.Ui;
  * Handles the filtering of tasks using a keyword in the chatbot.
  */
 public class FindCommand implements Command {
-    public String keyword;
+    private String keyword;
 
     /**
      * FindCommand constructor.

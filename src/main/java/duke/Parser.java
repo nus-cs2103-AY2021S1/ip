@@ -1,20 +1,38 @@
 package duke;
 
-import duke.commands.*;
-import duke.exceptions.*;
+import java.time.DateTimeException;
+import java.time.LocalDateTime;
+
+import duke.commands.AddCommand;
+import duke.commands.Command;
+import duke.commands.DeleteCommand;
+import duke.commands.DoneCommand;
+import duke.commands.ExitCommand;
+import duke.commands.FindCommand;
+import duke.commands.ListCommand;
+import duke.exceptions.DukeDateTimeParseException;
+import duke.exceptions.DukeDeadlineFormatException;
+import duke.exceptions.DukeEmptyActionException;
+import duke.exceptions.DukeEmptyDeadlineException;
+import duke.exceptions.DukeEmptyEventException;
+import duke.exceptions.DukeEmptyFindException;
+import duke.exceptions.DukeEmptyToDoException;
+import duke.exceptions.DukeEventFormatException;
+import duke.exceptions.DukeException;
+import duke.exceptions.DukeInvalidIndexException;
+import duke.exceptions.DukeInvalidTaskException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
 
-import java.time.DateTimeException;
-import java.time.LocalDateTime;
+
 
 /**
  * Parser deals with making sense of the user command.
  */
 public class Parser {
-    public String commandLine;
+    private String commandLine;
 
     /**
      * Parser constructor.
@@ -209,7 +227,7 @@ public class Parser {
             }
         }
 
-        if (arrOfString.length != 2 ) {
+        if (arrOfString.length != 2) {
             throw new DukeDateTimeParseException();
         }
 

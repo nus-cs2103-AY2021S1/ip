@@ -1,17 +1,19 @@
 package duke;
 
-import duke.task.Task;
-
 import java.util.List;
 import java.util.Scanner;
+
+import duke.task.Task;
+
+
 
 /**
  * Deals with interactions with the user.
  */
 public class Ui {
+    private static final String INDENTATION = "     ";
+    private static final String LINE = "    ____________________________________________________________";
     private Scanner scanner;
-    protected final String INDENTATION = "     ";
-    protected final String LINE = "    ____________________________________________________________";
 
     /**
      * Ui constructor.

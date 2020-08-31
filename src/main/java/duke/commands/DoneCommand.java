@@ -12,7 +12,7 @@ import duke.task.Task;
  * Handles the marking of a task as done in the chatbot.
  */
 public class DoneCommand implements Command {
-    public Integer index;
+    private Integer index;
 
     /**
      * DoneCommand constructor.
@@ -38,7 +38,7 @@ public class DoneCommand implements Command {
         }
         Task currentTask = tasks.getTask(index);
 
-        if (currentTask.isDone) {
+        if (currentTask.getIsDone()) {
             throw new DukeAlreadyDoneException();
         }
         tasks.markAsDone(index);

@@ -1,9 +1,10 @@
 package duke;
 
+import java.util.ArrayList;
+
 import duke.commands.Command;
 import duke.exceptions.DukeException;
 
-import java.util.ArrayList;
 
 
 
@@ -42,6 +43,7 @@ public class Duke {
 
     /**
      * Main method that executes Duke chatbot.
+     *
      * @param args String array of arguments.
      */
     public static void main(String[] args) {
@@ -49,15 +51,16 @@ public class Duke {
         chatbot.chat();
     }
 
-
-    //    public static void main(String[] args) {
-//        String logo = " ____        _        \n"
-//                + "|  _ \\ _   _| | _____ \n"
-//                + "| | | | | | | |/ / _ \\\n"
-//                + "| |_| | |_| |   <  __/\n"
-//                + "|____/ \\__,_|_|\\_\\___|\n";
-//        System.out.println("Hello from\n" + logo);
-//    }
+    /*
+    public static void main(String[] args) {
+        String logo = " ____        _        \n"
+                + "|  _ \\ _   _| | _____ \n"
+                + "| | | | | | | |/ / _ \\\n"
+                + "| |_| | |_| |   <  __/\n"
+                + "|____/ \\__,_|_|\\_\\___|\n";
+        System.out.println("Hello from\n" + logo);
+}
+*/
 
     /**
      * You should have your own function to generate a response to user input.
@@ -65,11 +68,11 @@ public class Duke {
      */
     public String getResponse(String input) {
         ui.intro();
-            try {
-                Command command = Parser.parse(input);
-                return command.execute(tasks, ui, storage);
-            } catch (DukeException e) {
-                return e.getMessage();
-            }
+        try {
+            Command command = Parser.parse(input);
+            return command.execute(tasks, ui, storage);
+        } catch (DukeException e) {
+            return e.getMessage();
+        }
     }
 }
