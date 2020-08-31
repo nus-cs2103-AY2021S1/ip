@@ -4,7 +4,7 @@ package duckie.exception;
  * DuckieException thrown when the input index is not found in the TaskList
  */
 public class DuckieNoIndexException extends DuckieException {
-    protected final static String INDENT = "\t";
+    protected static final String INDENT = "\t";
 
     /**
      * Instantiate DuckieNoIndexException

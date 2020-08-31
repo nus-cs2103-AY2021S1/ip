@@ -1,13 +1,12 @@
 package duckie.command;
 
+import java.util.ArrayList;
+
 import duckie.Storage;
 import duckie.Ui;
 import duckie.exception.DuckieException;
-import duckie.exception.DuckieInsufficientInfoException;
 import duckie.task.Task;
 import duckie.task.TaskList;
-
-import java.util.ArrayList;
 
 /**
  * Command to retrieve all Tasks containing the keyword

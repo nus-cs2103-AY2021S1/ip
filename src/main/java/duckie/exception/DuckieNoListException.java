@@ -5,7 +5,7 @@ package duckie.exception;
  * task in the List
  */
 public class DuckieNoListException extends DuckieException {
-    protected final static String INDENT = "\t";
+    protected static final String INDENT = "\t";
 
     /**
      * Instantiate DuckieNoListException

@@ -1,7 +1,5 @@
 package duckie.task;
 
-import java.time.LocalDate;
-
 /**
  * Parent class of all Tasks type
  */

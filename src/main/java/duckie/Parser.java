@@ -1,20 +1,30 @@
 package duckie;
 
-import java.io.IOException;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-import duckie.command.*;
-import duckie.exception.*;
-import duckie.task.*;
+import duckie.command.AddCommand;
+import duckie.command.ByeCommand;
+import duckie.command.Command;
+import duckie.command.DeleteAllCommand;
+import duckie.command.DeleteCommand;
+import duckie.command.DoneCommand;
+import duckie.command.FindCommand;
+import duckie.command.ListCommand;
+import duckie.exception.DuckieException;
+import duckie.exception.DuckieInsufficientInfoException;
+import duckie.exception.DuckieInvalidCommandException;
+import duckie.task.Deadline;
+import duckie.task.Event;
+import duckie.task.Task;
+import duckie.task.Todo;
 
 /**
  * Responsible for the parsing of input Commands
  */
 public class Parser {
-    private static boolean is_Word(String s) {
+    private static boolean isAWord(String s) {
         return (s.length() > 0 && s.split("\\s+").length == 1);
     }
 
@@ -31,7 +41,7 @@ public class Parser {
         } else if (input.equalsIgnoreCase("list")) {
             return new ListCommand();
         } else if (input.toLowerCase().indexOf("done") == 0) {
-            if (is_Word(input)) {
+            if (isAWord(input)) {
                 throw new DuckieInsufficientInfoException();
             }
 
@@ -45,7 +55,7 @@ public class Parser {
 
             return new DoneCommand(ind);
         } else if (input.toLowerCase().indexOf("delete") == 0) {
-            if (is_Word(input)) {
+            if (isAWord(input)) {
                 throw new DuckieInsufficientInfoException();
             }
 
@@ -64,20 +74,20 @@ public class Parser {
                 return new DeleteCommand(ind);
             }
         } else if (input.toLowerCase().indexOf("todo") == 0) {
-            if (is_Word(input)) {
+            if (isAWord(input)) {
                 throw new DuckieInsufficientInfoException();
             }
             String todo = input.split(" ", 2)[1];
             Task t1 = new Todo(todo);
             return new AddCommand(t1);
         } else if (input.toLowerCase().indexOf("deadline") == 0) {
-            if (is_Word(input)) {
+            if (isAWord(input)) {
                 throw new DuckieInsufficientInfoException();
             }
 
             if (input.contains("/")) {
                 String[] splitted = input.split("/");
-                if (is_Word(splitted[1])) {
+                if (isAWord(splitted[1])) {
                     throw new DuckieException("Please state a date in the format 'DD MMM YYYY' after '/by'.\n"
                             + "\t" + "For example, 'deadline Quiz /by 21 Aug 2000'.");
                 }
@@ -91,13 +101,13 @@ public class Parser {
                 throw new DuckieException("Please use '/by' to indicate the date input.");
             }
         } else if (input.toLowerCase().indexOf("event") == 0) {
-            if (is_Word(input)) {
+            if (isAWord(input)) {
                 throw new DuckieInsufficientInfoException();
             }
 
             if (input.contains("/")) {
                 String[] splitted = input.split("/");
-                if (is_Word(splitted[1])) {
+                if (isAWord(splitted[1])) {
                     throw new DuckieException("Please state a date in the format 'DD MMM YYYY HH:MM a' after '/at'.\n"
                             + "\t" + "For example, 'event Party /at 21 Aug 2000 07:20 PM'.");
                 }
@@ -111,7 +121,7 @@ public class Parser {
                 throw new DuckieException("Please use '/at' to indicate the date input.");
             }
         } else if (input.toLowerCase().indexOf("find") == 0) {
-            if (is_Word(input)) {
+            if (isAWord(input)) {
                 throw new DuckieInsufficientInfoException();
             }
 

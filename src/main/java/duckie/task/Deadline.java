@@ -7,7 +7,7 @@ import java.time.format.DateTimeFormatter;
  * A task type in charge of task containing deadline date
  */
 public class Deadline extends Task {
-    protected final static DateTimeFormatter DT_FORMATTER = DateTimeFormatter.ofPattern("E, MMM dd yyyy");
+    protected static final DateTimeFormatter DT_FORMATTER = DateTimeFormatter.ofPattern("E, MMM dd yyyy");
     protected LocalDate deadline;
 
     /**

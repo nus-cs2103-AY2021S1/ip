@@ -9,10 +9,10 @@ import duckie.task.Task;
  * Deals with the interaction with users
  */
 public class Ui {
-    private final static String INDENT = "\t";
-    private final static String HORIZ_LINE = INDENT +
-            "____________________________________________________________";
-    private final static String LOGO = INDENT
+    private static final String INDENT = "\t";
+    private static final String HORIZ_LINE = INDENT
+            + "____________________________________________________________";
+    private static final String LOGO = INDENT
             + "           ____                   _      _\n"
             + INDENT + "    __    |  _ \\   _   _    ___  | | _  (_)  ___     __\n"
             + INDENT + "___( o)>  | | | | | | | | /  __| | |/ / | | / _ \\  <(o )___ \n"
@@ -32,7 +32,7 @@ public class Ui {
      *
      * @return the horizontal line String
      */
-    public static String getHORIZ_LINE() {
+    public static String getHorizLine() {
         return HORIZ_LINE;
     }
 
@@ -47,8 +47,8 @@ public class Ui {
      * Display Duckie introduction and the loading tasks message
      */
     public static void showIntro() {
-        System.out.println(HORIZ_LINE + "\n" + LOGO + "\n" +
-                INDENT + "Quack. Duckie is here to remember your tasks!" );
+        System.out.println(HORIZ_LINE + "\n" + LOGO + "\n"
+                + INDENT + "Quack. Duckie is here to remember your tasks!");
         showLoading();
     }
 
@@ -56,8 +56,8 @@ public class Ui {
      * Display Duckie ending when 'bye' is input
      */
     public static void showEnding() {
-        System.out.println(INDENT +
-                "Quack! Hope to see you again!");
+        System.out.println(INDENT
+                + "Quack! Hope to see you again!");
     }
 
     /**
@@ -122,8 +122,8 @@ public class Ui {
      * @param t1 Task being deleted
      */
     public static void deleteTaskReply(Task t1) {
-        System.out.println(INDENT + "Quack! I've remove this task: \n" +
-                INDENT + t1);
+        System.out.println(INDENT + "Quack! I've remove this task: \n"
+                + INDENT + t1);
     }
 
     /**

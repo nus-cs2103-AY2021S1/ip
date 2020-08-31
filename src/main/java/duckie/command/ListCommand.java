@@ -1,9 +1,10 @@
 package duckie.command;
 
-import duckie.task.*;
-import duckie.exception.*;
-import duckie.Ui;
 import duckie.Storage;
+import duckie.Ui;
+import duckie.exception.DuckieException;
+import duckie.exception.DuckieNoListException;
+import duckie.task.TaskList;
 
 /**
  * Command to list all the current tasks in the TaskList

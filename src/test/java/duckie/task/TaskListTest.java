@@ -1,16 +1,16 @@
 package duckie.task;
 
-import duckie.exception.DuckieException;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
+import org.junit.jupiter.api.Test;
+
+import duckie.exception.DuckieException;
 
 public class TaskListTest {
     @Test
-    public void displayList_NoListException() {
+    public void displayList_noListException() {
         TaskList tL = new TaskList();
         try {
             tL.displayList();

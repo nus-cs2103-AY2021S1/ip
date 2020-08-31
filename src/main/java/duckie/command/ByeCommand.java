@@ -1,8 +1,8 @@
 package duckie.command;
 
-import duckie.task.TaskList;
-import duckie.Ui;
 import duckie.Storage;
+import duckie.Ui;
+import duckie.task.TaskList;
 
 /**
  * Command to signify the exit of the chatbot

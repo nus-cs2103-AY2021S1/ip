@@ -2,8 +2,9 @@ package duckie.task;
 
 import java.util.ArrayList;
 
-import duckie.exception.*;
 import duckie.Ui;
+import duckie.exception.DuckieException;
+import duckie.exception.DuckieNoListException;
 
 /**
  * Contains all the saved tasks in a List form
@@ -87,6 +88,11 @@ public class TaskList {
         Ui.displayListReply(tasks);
     }
 
+    /**
+     * Filter the list based on the keyword provided
+     * @param keyword
+     * @return ArrayList containing all the tasks matching the keyword
+     */
     public ArrayList<Task> filterList(String keyword) {
         ArrayList<Task> filteredList = new ArrayList<>();
         for (Task t1 : tasks) {

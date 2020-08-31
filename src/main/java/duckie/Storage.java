@@ -4,20 +4,20 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-
-import java.nio.file.Path;
-import java.nio.file.Paths;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import duckie.exception.*;
-import duckie.Ui;
-import duckie.task.*;
+import duckie.exception.DuckieException;
+import duckie.exception.DuckieFileErrorException;
+import duckie.task.Deadline;
+import duckie.task.Event;
+import duckie.task.Task;
+import duckie.task.Todo;
+
+
 
 /**
  * Deals with the stored duckie file in the HardDrive
@@ -108,6 +108,8 @@ public class Storage {
                         taskE.markDone();
                     }
                     tasks.add(taskE);
+                    break;
+                default:
                     break;
                 }
             }
