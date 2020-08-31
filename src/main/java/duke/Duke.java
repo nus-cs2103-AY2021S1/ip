@@ -22,11 +22,14 @@ public class Duke {
 
     /**
      * Class constructor.
-     * @param filePath The file path of the Storage text file.
      */
-    public Duke(String filePath) {
+    public Duke() {
         ui = new Ui();
+        String filePath = System.getProperty("user.home") + "/data";
+        checkAndMakeDir(filePath);
+        filePath += "/duke.txt";
         storage = new Storage(filePath);
+
         try {
             list = new TaskList(storage.load());
         } catch (DukeInvalidDataException e) {
@@ -38,28 +41,28 @@ public class Duke {
         }
     }
 
-    /**
-     * Runs the chat bot, continuously interact with user.
-     * It also executes the command corresponding to user input.
-     */
-    public void run() {
-        ui.intro();
-        boolean isExit = false;
-        while (!isExit) {
-            String fullCommand = ui.readCommand();
-            try {
-                Command c = Parser.parse(fullCommand);
-                isExit = !c.execute(list, ui, storage);
-            } catch (DukeEmptyIndexException
-                    | DukeEmptyDescriptionException
-                    | DukeEmptyByException
-                    | DukeEmptyAtException
-                    | DukeInvalidDateTimeInputException
-                    | DukeEmptyKeywordException e) {
-                ui.showError(e);
-            }
-        }
-    }
+//    /**
+//     * Runs the chat bot, continuously interact with user.
+//     * It also executes the command corresponding to user input.
+//     */
+//    public void run() {
+//        ui.intro();
+//        boolean shouldExit = false;
+//        while (!shouldExit) {
+//            String fullCommand = ui.readCommand();
+//            try {
+//                Command c = Parser.parse(fullCommand);
+//                shouldExit = !c.execute(list, ui, storage);
+//            } catch (DukeEmptyIndexException
+//                    | DukeEmptyDescriptionException
+//                    | DukeEmptyByException
+//                    | DukeEmptyAtException
+//                    | DukeInvalidDateTimeInputException
+//                    | DukeEmptyKeywordException e) {
+//                ui.showError(e);
+//            }
+//        }
+//    }
 
     /**
      * Checks to see if directory is found.
@@ -69,20 +72,43 @@ public class Duke {
      */
     public static void checkAndMakeDir(String filePath) {
         File f = new File(filePath);
-        if (f.mkdir()) {
-            System.out.printf("Created a directory '%s'%n", filePath);
-        }
+        f.mkdir();
     }
 
     /**
-     * Main method that runs the program.
+     * Returns the response message to be shown on UI.
      *
-     * @param args The String array.
+     * @param input The user input.
+     * @return Response message.
      */
-    public static void main(String[] args) {
-        String homePath = System.getProperty("user.home");
-        checkAndMakeDir(homePath + "/data");
-        Duke duke = new Duke(homePath + "/data/duke.txt");
-        duke.run();
+    public String getResponse(String input) {
+        try {
+            Command c = Parser.parse(input);
+            return c.execute(list, ui, storage);
+        } catch (DukeEmptyIndexException e) {
+            return e.getMessage();
+        } catch (DukeEmptyDescriptionException e) {
+            return e.getMessage();
+        } catch (DukeEmptyAtException e) {
+            return e.getMessage();
+        } catch (DukeEmptyByException e) {
+            return e.getMessage();
+        } catch (DukeInvalidDateTimeInputException e) {
+            return e.getMessage();
+        } catch (DukeEmptyKeywordException e) {
+            return e.getMessage();
+        }
     }
+
+//    /**
+//     * Main method that runs the program.
+//     *
+//     * @param args The String array.
+//     */
+//    public static void main(String[] args) {
+//        String homePath = System.getProperty("user.home");
+//        checkAndMakeDir(homePath + "/data");
+//        Duke duke = new Duke(homePath + "/data/duke.txt");
+//        duke.run();
+//    }
 }

@@ -9,6 +9,16 @@ import duke.Ui;
  */
 public class ListCommand implements Command {
     /**
+     * Returns false because command does not exit.
+     *
+     * @return false.
+     */
+    @Override
+    public boolean shouldExit() {
+        return false;
+    }
+
+    /**
      * Performs the printing of list of Tasks in TaskList.
      * @param tasks The TaskList for Duke.
      * @param ui The Ui to show responses or error messages.
@@ -16,8 +26,7 @@ public class ListCommand implements Command {
      * @return True because Duke should continue running.
      */
     @Override
-    public boolean execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.showList(tasks);
-        return true;
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        return ui.showList(tasks);
     }
 }

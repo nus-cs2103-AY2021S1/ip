@@ -10,6 +10,6 @@ public class DukeEmptyDescriptionException extends DukeTaskException {
      * @param task String representation of the task.
      */
     public DukeEmptyDescriptionException(String task) {
-        super(String.format("☹ OOPS!!! The description of %s cannot be empty.", task));
+        super(String.format("OOPS!!! The description of %s cannot be empty.", task));
     }
 }

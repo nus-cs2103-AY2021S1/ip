@@ -8,6 +8,6 @@ public class DukeInvalidIndexException extends DukeIndexException {
      * Class constructor.
      */
     public DukeInvalidIndexException() {
-        super("☹ OOPS!!! There is no such task.");
+        super("OPS!!! There is no such task.");
     }
 }

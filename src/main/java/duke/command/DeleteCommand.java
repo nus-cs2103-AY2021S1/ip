@@ -24,6 +24,16 @@ public class DeleteCommand implements Command {
     }
 
     /**
+     * Returns false because command does not exit.
+     *
+     * @return false.
+     */
+    @Override
+    public boolean shouldExit() {
+        return false;
+    }
+
+    /**
      * Performs the deleting of task from task list.
      *
      * @param tasks The TaskList to delete the task from.
@@ -32,16 +42,15 @@ public class DeleteCommand implements Command {
      * @return True because Duke should continue running.
      */
     @Override
-    public boolean execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             Task task = tasks.deleteTask(index);
             storage.save(tasks);
-            ui.showDeleted(task, tasks.getSize());
+            return ui.showDeleted(task, tasks.getSize());
         } catch (DukeInvalidIndexException e) {
-            ui.showError(e);
+            return ui.showError(e);
         } catch (IOException e) {
-            ui.showError(e);
+            return ui.showError(e);
         }
-        return true;
     }
 }

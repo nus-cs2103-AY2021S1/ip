@@ -8,6 +8,6 @@ public class DukeEmptyByException extends DukeTaskException {
      * Class constructor.
      */
     public DukeEmptyByException() {
-        super("☹ OOPS!!! The deadline cannot be empty.");
+        super("OOPS!!! The deadline cannot be empty.");
     }
 }

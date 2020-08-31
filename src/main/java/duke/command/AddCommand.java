@@ -25,6 +25,16 @@ public class AddCommand implements Command {
     }
 
     /**
+     * Returns false because command does not exit.
+     *
+     * @return false.
+     */
+    @Override
+    public boolean shouldExit() {
+        return false;
+    }
+
+    /**
      * Performs the corresponding action of the command.
      *
      * @param tasks The TaskList to add the task to.
@@ -33,14 +43,13 @@ public class AddCommand implements Command {
      * @return True because Duke should continue running.
      */
     @Override
-    public boolean execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             tasks.addTask(this.task);
             storage.save(tasks);
-            ui.showAdded(this.task, tasks.getSize());
+            return ui.showAdded(this.task, tasks.getSize());
         } catch (IOException | DukeInvalidIndexException e) {
-            ui.showError(e);
+            return ui.showError(e);
         }
-        return true;
     }
 }

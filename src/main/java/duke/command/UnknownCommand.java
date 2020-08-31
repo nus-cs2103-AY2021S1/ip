@@ -10,6 +10,16 @@ import duke.exception.DukeUnknownInputException;
  */
 public class UnknownCommand implements Command {
     /**
+     * Returns false because command does not exit.
+     *
+     * @return false.
+     */
+    @Override
+    public boolean shouldExit() {
+        return false;
+    }
+
+    /**
      * Performs the printing of an unknown input error message.
      *
      * @param tasks The TaskList to add the task to.
@@ -18,8 +28,7 @@ public class UnknownCommand implements Command {
      * @return True because Duke should continue running.
      */
     @Override
-    public boolean execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.showError(new DukeUnknownInputException());
-        return true;
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        return ui.showError(new DukeUnknownInputException());
     }
 }

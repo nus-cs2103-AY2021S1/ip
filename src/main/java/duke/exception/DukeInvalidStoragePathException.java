@@ -8,6 +8,6 @@ public class DukeInvalidStoragePathException extends DukeStorageException {
      * Class constructor.
      */
     public DukeInvalidStoragePathException() {
-        super("☹ OOPS!!! Invalid file path!");
+        super("OOPS!!! Invalid file path!");
     }
 }

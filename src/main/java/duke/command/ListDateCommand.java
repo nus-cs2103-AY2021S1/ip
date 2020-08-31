@@ -18,6 +18,16 @@ public class ListDateCommand implements Command {
     }
 
     /**
+     * Returns false because command does not exit.
+     *
+     * @return false.
+     */
+    @Override
+    public boolean shouldExit() {
+        return false;
+    }
+
+    /**
      * Performs the printing of all the Task on the specified date.
      *
      * @param tasks The TaskList for Duke.
@@ -26,8 +36,7 @@ public class ListDateCommand implements Command {
      * @return True because Duke should continue running.
      */
     @Override
-    public boolean execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.printWindow(tasks.getTasksOnDate(date));
-        return true;
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        return (tasks.getTasksOnDate(date));
     }
 }

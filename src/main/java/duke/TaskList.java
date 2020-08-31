@@ -14,7 +14,6 @@ import duke.task.Task;
  * The <code>TaskList</code> object handles operations done to the list.
  */
 public class TaskList {
-    static final String INDENT = "    ";
     protected List<Task> list;
 
     /**
@@ -91,7 +90,7 @@ public class TaskList {
         for (int i = 0; i < list.size(); i++) {
             s += (i + 1) + "." + list.get(i);
             if (i != list.size() - 1) {
-                s += '\n' + INDENT;
+                s += '\n' + Ui.INDENT;
             }
         }
         if (s.equals("")) {

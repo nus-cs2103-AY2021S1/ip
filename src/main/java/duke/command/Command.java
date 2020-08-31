@@ -9,6 +9,13 @@ import duke.Ui;
  */
 public interface Command {
     /**
+     * Returns true if command exits, false otherwise.
+     *
+     * @return true if command exits, false otherwise.
+     */
+    boolean shouldExit();
+
+    /**
      * Performs the action to be taken.
      *
      * @param tasks   The TaskList to add the task to.
@@ -16,5 +23,5 @@ public interface Command {
      * @param storage The Storage to save the TaskList.
      * @return True if Duke should continue running.
      */
-    boolean execute(TaskList tasks, Ui ui, Storage storage);
+    String execute(TaskList tasks, Ui ui, Storage storage);
 }

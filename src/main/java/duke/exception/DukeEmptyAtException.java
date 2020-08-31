@@ -8,6 +8,6 @@ public class DukeEmptyAtException extends DukeTaskException {
      * Class constructor.
      */
     public DukeEmptyAtException() {
-        super("☹ OOPS!!! The event time cannot be empty.");
+        super("OOPS!!! The event time cannot be empty.");
     }
 }

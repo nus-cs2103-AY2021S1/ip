@@ -97,7 +97,7 @@ public class TaskListTest {
         list.add(todo);
         list.add(deadline);
         String expectedResult = "1." + todo.toString() + "\n"
-                + TaskList.INDENT + "2." + deadline.toString();
+                + Ui.INDENT + "2." + deadline.toString();
         assertEquals(expectedResult, TaskList.getListAsStringFromList(list, "Alternative"));
     }
 
@@ -120,7 +120,7 @@ public class TaskListTest {
         tl.addTask(todo);
         tl.addTask(deadline);
         assertEquals("1." + todo.toString()
-                + "\n" + TaskList.INDENT
+                + "\n" + Ui.INDENT
                 + "2." + deadline.toString(), tl.getListAsString());
     }
 

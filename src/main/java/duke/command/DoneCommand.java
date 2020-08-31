@@ -23,6 +23,16 @@ public class DoneCommand implements Command {
     }
 
     /**
+     * Returns false because command does not exit.
+     *
+     * @return false.
+     */
+    @Override
+    public boolean shouldExit() {
+        return false;
+    }
+
+    /**
      *
      * @param tasks The TaskList for Duke.
      * @param ui The Ui to show responses or error messages.
@@ -30,14 +40,13 @@ public class DoneCommand implements Command {
      * @return True because Duke should continue running.
      */
     @Override
-    public boolean execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             tasks.markDone(index);
             storage.save(tasks);
-            ui.showMarkDone(tasks.get(index));
+            return ui.showMarkDone(tasks.get(index));
         } catch (DukeInvalidIndexException | IOException e) {
-            ui.showError(e);
+            return ui.showError(e);
         }
-        return true;
     }
 }

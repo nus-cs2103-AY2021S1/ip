@@ -20,6 +20,16 @@ public class FindCommand implements Command {
     }
 
     /**
+     * Returns false because command does not exit.
+     *
+     * @return false.
+     */
+    @Override
+    public boolean shouldExit() {
+        return false;
+    }
+
+    /**
      * Performs an action of searching the tasks by key word.
      * Prints out the list of task containing the keyword.
      *
@@ -29,8 +39,7 @@ public class FindCommand implements Command {
      * @return True because the program will continue running.
      */
     @Override
-    public boolean execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.printWindow(tasks.getTaskWithKeyword(keyword));
-        return true;
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        return (tasks.getTaskWithKeyword(keyword));
     }
 }
