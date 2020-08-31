@@ -11,20 +11,19 @@ public class Ui {
     /**
      * Prints welcome message
      */
-    public void showWelcome() {
-        System.out.println("    Hello, I'm Duke");
-        System.out.println("    I can help you keep track of all your tasks! ☆*:.｡.o(≧▽≦)o.｡.:*☆");
-        System.out.println("    How to add tasks to the list:");
-        System.out.println("    ToDo - type 'todo' followed by the description");
-        System.out.println("    Deadline - type 'deadline' followed by the description,");
-        System.out.println("    then '/by', then due date in yyyy-MM-dd format");
-        System.out.println("    Event - type 'event' followed by the description,");
-        System.out.println("    then '/at', then timing in yyyy-MM-dd format");
-        System.out.println("    Type 'done' followed by the task number " +
-                "and I'll mark it as done");
-        System.out.println("    Type 'list' to see the list");
-        System.out.println("    Type 'find' followed by keyword to search for tasks");
-        System.out.println("    Type 'bye' to exit");
+    public String showWelcome() {
+        return "Hello, I'm Duke \n"
+                + "I can help you keep track of all your tasks! ☆*:.｡.o(≧▽≦)o.｡.:*☆ \n"
+                + "How to add tasks to the list: \n"
+                + "ToDo - type 'todo' followed by the description \n"
+                + "Deadline - type 'deadline' followed by the description, "
+                + "then '/by', then due date in yyyy-MM-dd format \n"
+                + "Event - type 'event' followed by the description,"
+                + "then '/at', then timing in yyyy-MM-dd format \n"
+                + "Type 'done' followed by the task number and I'll mark it as done \n"
+                + "Type 'list' to see the list of tasks \n"
+                + "Type 'find' followed by keyword to search for tasks \n"
+                + "Type 'bye' to exit \n";
     }
 
     /**

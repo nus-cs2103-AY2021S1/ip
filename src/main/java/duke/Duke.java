@@ -89,6 +89,11 @@ public class Duke extends Application {
             handleUserInput();
         });
 
+        Label dukeWelcome = new Label(ui.showWelcome());
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(dukeWelcome, new ImageView(duke))
+        );
+
         //Scroll down to the end every time dialogContainer's height changes.
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
     }
