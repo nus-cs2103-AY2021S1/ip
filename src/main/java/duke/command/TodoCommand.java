@@ -1,7 +1,7 @@
 package duke.command;
 
-import duke.TaskList;
 import duke.Storage;
+import duke.TaskList;
 import duke.Ui;
 import duke.task.ToDo;
 
@@ -10,7 +10,7 @@ import duke.task.ToDo;
  */
 public class TodoCommand extends Command {
 
-    public ToDo todo;
+    private ToDo todo;
 
     public TodoCommand(ToDo todo) {
         this.todo = todo;

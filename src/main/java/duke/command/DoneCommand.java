@@ -11,7 +11,7 @@ import duke.task.Task;
  */
 public class DoneCommand extends Command {
 
-    public int taskNumber;
+    private int taskNumber;
 
     public DoneCommand(int taskNumber) {
         this.taskNumber = taskNumber;

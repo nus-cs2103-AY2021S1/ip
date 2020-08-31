@@ -1,5 +1,11 @@
 package duke;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.Arrays;
+import java.util.List;
+
 import duke.command.ByeCommand;
 import duke.command.Command;
 import duke.command.DeadlineCommand;
@@ -12,12 +18,6 @@ import duke.command.TodoCommand;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.ToDo;
-
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-import java.util.Arrays;
-import java.util.List;
 
 /**
  * The Parser class takes in inputs from the user and convert into commands.
@@ -76,7 +76,7 @@ public class Parser {
             try {
                 return LocalDateTime.parse(dateString, DateTimeFormatter.ofPattern(format));
             } catch (DateTimeParseException e) {
-
+                e.getMessage();
             }
         }
         return null;
