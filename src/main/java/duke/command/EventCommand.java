@@ -1,12 +1,13 @@
 package duke.command;
 
+import java.time.LocalDate;
+
 import duke.storage.Storage;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
-import java.time.LocalDate;
 
 /**
  * Implements event command objects.
@@ -17,6 +18,11 @@ public class EventCommand extends Command {
     private String description;
     private LocalDate time;
 
+    /**
+     * Initializes an EventCommand object.
+     * @param description The task description.
+     * @param time The event time.
+     */
     public EventCommand(String description, LocalDate time) {
         this.description = description;
         this.time = time;
@@ -24,7 +30,7 @@ public class EventCommand extends Command {
 
     /**
      * Executes the given command.
-     * 
+     *
      * @param tasks Task list the user currently have.
      * @param ui Tool to interact with user.
      * @param storage Storage to load and save data.

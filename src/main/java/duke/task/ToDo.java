@@ -2,7 +2,7 @@ package duke.task;
 
 /**
  * Implements to do objects.
- * 
+ *
  * @author Audrey Felicio Anwar
  */
 public class ToDo extends Task {

@@ -2,13 +2,19 @@ package duke.task;
 
 /**
  * Implements task objects.
- * 
+ *
  * @author Audrey Felicio Anwar
  */
 public class Task {
     protected String description;
     protected boolean done;
 
+    /**
+     * Initializes a task object.
+     *
+     * @param description The task description.
+     * @param done Indicates whether the task is done.
+     */
     public Task(String description, boolean done) {
         this.description = description;
         this.done = done;
@@ -44,7 +50,7 @@ public class Task {
 
     /**
      * Returns description of task.
-     * 
+     *
      * @return Description of task.
      */
     public String getDescription() {

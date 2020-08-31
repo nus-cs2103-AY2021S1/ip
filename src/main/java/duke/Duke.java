@@ -9,14 +9,19 @@ import duke.ui.Ui;
 
 /**
  * Implements the chatbot application
- * 
+ *
  * @author Audrey Felicio Anwar
  */
 public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
-    
+
+    /**
+     * Initializes a Duke object
+     *
+     * @param filePath The location of saved data.
+     */
     public Duke(String filePath) {
         try {
             this.ui = new Ui();
@@ -58,10 +63,10 @@ public class Duke {
 
     /**
      * Initializes and runs the program.
-     * 
+     *
      * @param args Command line inputs.
      */
     public static void main(String[] args) {
-       new Duke("./tasks.txt").run();
+        new Duke("./tasks.txt").run();
     }
 }

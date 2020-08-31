@@ -11,14 +11,14 @@ import duke.ui.Ui;
  */
 public class DoneCommand extends Command {
     private int index;
-    
+
     public DoneCommand(int index) {
         this.index = index;
     }
 
     /**
      * Executes the given command.
-     * 
+     *
      * @param tasks Task list the user currently have.
      * @param ui Tool to interact with user.
      * @param storage Storage to load and save data.
