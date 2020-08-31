@@ -1,7 +1,8 @@
-package main.java;
+package willy.task;
 
 import willy.store.TaskStore;
 import willy.task.Task;
+import willy.ui.Willy;
 
 import java.util.ArrayList;
 

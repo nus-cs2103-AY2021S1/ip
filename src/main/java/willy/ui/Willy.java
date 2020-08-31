@@ -1,8 +1,9 @@
-package main.java;
+package willy.ui;
 
 import java.util.ArrayList;
 import java.util.Scanner;
 import willy.store.TaskStore;
+import willy.task.TaskList;
 import willy.ui.Greet;
 import willy.exceptions.WillyException;
 import willy.task.Task;
@@ -14,8 +15,8 @@ import willy.command.Parser;
 public class Willy {
 
     private static TaskStore storage;
-    static String style = "\t________________________________________________________________\n";
-    static String logo = "__       ____       __\n"
+    public static String style = "\t________________________________________________________________\n";
+    public static String logo = "__       ____       __\n"
             + "\\  \\    /    \\    /  /\n"
             + " \\  \\  /  /\\  \\  /  /\n"
             + "  \\  \\/  /  \\  \\/  /\n"
