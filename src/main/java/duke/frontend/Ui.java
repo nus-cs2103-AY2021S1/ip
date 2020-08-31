@@ -1,5 +1,9 @@
 package duke.frontend;
 
+/**
+ * Deals with basic interaction with the user.
+ * Contains methods that greets user on start and exit of program.
+ */
 public class Ui {
     private static final String starline = "**************************************************************************";
     private static final String logo =
@@ -9,6 +13,9 @@ public class Ui {
                     + "| |_| | |_| |   <  __/\n"
                     + "|____/ \\__,_|_|\\_\\___|";
 
+    /**
+     * Prints welcome greeting to user at start of program.
+     */
     public static void greet() {
         System.out.println(starline +
                 "\nWelcome! I am\n" + logo +
@@ -22,6 +29,9 @@ public class Ui {
                 starline);
     }
 
+    /**
+     * Prints farewell greeting to user at end of program.
+     */
     public static void exit() {
         System.out.println(
                 " _____  ___  ___  _____\n" +

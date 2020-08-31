@@ -4,14 +4,27 @@ import duke.task.TaskList;
 
 import java.util.Scanner;
 
+/**
+ * Deals with parsing and making sense of user commands.
+ */
 public class Parser {
     private final TaskList taskList;
     private static final String dashline = "--------------------------------------------------------------------------";
-    
+
+    /**
+     * Constructs an instance of Parser that adds, retrieves and delete tasks from taskList.
+     * @param taskList taskList that contains and handles the user's list of Tasks.
+     */
     public Parser(TaskList taskList) {
         this.taskList = taskList;
     }
-    
+
+    /**
+     * Parses user input commands and handles them appropriately. 
+     * Feedbacks to user if commands are not understandable/ in the wrong format.
+     * 
+     * Handles the following command types: bye, done, delete, todo, deadline and event.
+     */
     public void parseInputCommands() {
         Scanner sc = new Scanner(System.in);
         String next = sc.nextLine();
