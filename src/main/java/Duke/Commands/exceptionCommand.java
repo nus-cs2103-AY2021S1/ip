@@ -3,15 +3,12 @@ package main.java.Duke.Commands;
 
 import main.java.Duke.Task.TaskList;
 
-public class Command {
+public class exceptionCommand extends Command {
     public boolean isExit;
     TaskList tasklist;
-    String str;
 
-    public Command(TaskList tasklist, String str) {
-        this.isExit = false;
-        this.tasklist = tasklist;
-        this.str = str;
+    public exceptionCommand(TaskList tasklist,String str) {
+        super(tasklist,str);
     }
 
     /**

@@ -6,12 +6,12 @@ import main.java.Duke.Task.TaskList;
 public class addCommand extends Command {
     Task task;
     public addCommand(TaskList tasklist, Task task) {
-        super(tasklist);
+        super(tasklist,"");
         this.task = task;
     }
 
     @Override
-    public void execute() {
-        this.tasklist.addTask(this.task);
+    public String execute() {
+        return this.tasklist.addTask(this.task);
     }
 }

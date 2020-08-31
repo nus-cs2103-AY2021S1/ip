@@ -5,7 +5,7 @@ import main.java.Duke.Task.TaskList;
 public class doneCommand extends Command {
     int taskNumber;
     public doneCommand(TaskList taskList, int taskNumber) {
-        super(taskList);
+        super(taskList,"");
         this.taskNumber = taskNumber;
     }
 
@@ -13,7 +13,7 @@ public class doneCommand extends Command {
      * Executes the command to mark a task as done.
      */
     @Override
-    public void execute() {
-        this.tasklist.completeTask(taskNumber);
+    public String execute() {
+        return this.tasklist.completeTask(taskNumber);
     }
 }

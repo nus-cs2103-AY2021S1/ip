@@ -34,8 +34,8 @@ public class Ui {
     /**
      * When the user input is invalid, prints the list of possible input for the user.
      */
-    public void badInput() {
-        System.out.println(
+    public String badInput() {
+        return (
                 "Please input:\n"
                 + "1)list - to access the list\n"
                 + "2)todo - to create a todo task\n"
@@ -51,8 +51,8 @@ public class Ui {
      *
      * @param str Exception message.
      */
-    public void showException(String str){
-        System.out.println(str);
+    public String showException(String str){
+        return (str);
     }
 
 }
