@@ -15,10 +15,9 @@ public class CsvConverter {
      * Creates a task from the CSV format of the task.
      *
      * @param input CSV format of task.
-     * @param ui User interface.
      * @return Task.
      */
-    protected static Task parseToTask(String input, Ui ui) throws InvalidFileFormatException {
+    protected static Task parseToTask(String input) throws InvalidFileFormatException {
         String[] inputArr = input.split("\\s{2},", 4);
         if (inputArr.length < 4) {
             throw new InvalidFileFormatException();
@@ -28,13 +27,14 @@ public class CsvConverter {
         String time = inputArr[2];
         String status = inputArr[3];
         boolean isDone = checkStatus(status);
+        System.out.println(isDone);
 
         if (taskType.equals("TODO")) {
             return new ToDo(description, isDone);
         } else if (taskType.equals("EVENT")) {
-            return new ComplexTask(description, time, TaskType.EVENT);
+            return new ComplexTask(description, isDone, TaskType.EVENT, time);
         } else if (taskType.equals("DEADLINE")) {
-            return new ComplexTask(description, time, TaskType.DEADLINE);
+            return new ComplexTask(description, isDone, TaskType.DEADLINE, time);
         } else {
             throw new InvalidFileFormatException();
         }

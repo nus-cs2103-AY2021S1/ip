@@ -12,7 +12,7 @@ public class ComplexTaskTest {
     public void test() {
         String description = "workout";
         String time = "2pm";
-        ComplexTask newDeadline = new ComplexTask(description, time, TaskType.DEADLINE);
+        ComplexTask newDeadline = new ComplexTask(description, TaskType.DEADLINE, time);
         // Check default
         assertFalse(newDeadline.isDone());
         assertEquals("Not done", newDeadline.getStatus());

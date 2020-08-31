@@ -57,7 +57,7 @@ public class Storage {
             if (header != null) {
                 String line = br.readLine();
                 while (line != null) {
-                    Task newTask = CsvConverter.parseToTask(line, ui);
+                    Task newTask = CsvConverter.parseToTask(line);
                     taskList.add(newTask);
                     line = br.readLine();
                 }

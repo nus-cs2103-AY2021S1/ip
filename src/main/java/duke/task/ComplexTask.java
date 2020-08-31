@@ -11,12 +11,26 @@ public class ComplexTask extends Task {
     /**
      * Initializes the complex task.
      *
-     * @param description description of the task.
-     * @param time time of the task.
-     * @param taskType type of task, either EVENT or DEADLINE.
+     * @param description Description of the task.
+     * @param taskType Type of task, either EVENT or DEADLINE.
+     * @param time Time of the task.
      */
-    public ComplexTask(String description, String time, TaskType taskType) {
+    public ComplexTask(String description, TaskType taskType, String time) {
         super(description, false, taskType, time);
+        this.time = time;
+        this.taskType = taskType;
+    }
+
+    /**
+     * Initializes the complex task with isDone boolean value.
+     *
+     * @param description Description of the task.
+     * @param isDone Boolean to represent if task is done or not.
+     * @param taskType Type of task, either EVENT or DEADLINE.
+     * @param time Time of the task.
+     */
+    public ComplexTask(String description, boolean isDone, TaskType taskType, String time) {
+        super(description, isDone, taskType, time);
         this.time = time;
         this.taskType = taskType;
     }

@@ -64,13 +64,13 @@ public class AddComplexTaskCommand extends AddCommand {
         String date = inputArr[1].trim();
         ComplexTask ct;
         if (isDateAndTimeFormat(date.replace(" ", "T"))) {
-            ct = new ComplexTask(inputArr[0], dateAndTimeToString(date), taskType);
+            ct = new ComplexTask(inputArr[0], taskType, dateAndTimeToString(date));
         } else if (isDateFormat(date)) {
-            ct = new ComplexTask(inputArr[0], dateToString(date), taskType);
+            ct = new ComplexTask(inputArr[0], taskType, dateToString(date));
         } else if (isTimeFormat(date)) {
-            ct = new ComplexTask(inputArr[0], timeToString(date), taskType);
+            ct = new ComplexTask(inputArr[0], taskType, timeToString(date));
         } else {
-            ct = new ComplexTask(inputArr[0], date, taskType);
+            ct = new ComplexTask(inputArr[0], taskType, date);
         }
         return addTask(ct, tasks, ui, storage);
     }
