@@ -6,6 +6,9 @@ import bot.util.InvalidInputException;
 
 import java.io.IOException;
 
+/**
+ * An abstract class that deals with logic associated with commands given by the user.
+ */
 public abstract class Command {
     protected String cmd;
 

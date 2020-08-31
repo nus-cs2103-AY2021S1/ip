@@ -6,6 +6,9 @@ import bot.task.Task;
 
 import java.util.ArrayList;
 
+/**
+ * A type of command that lists out all Task that contains the item.
+ */
 public class FindCommand extends Command {
     private String item;
 
@@ -14,6 +17,15 @@ public class FindCommand extends Command {
         this.item = item;
     }
 
+    /**
+     * Displays a list of tasks where the name of the tasks contains the item.
+     * The item can be a substring of the task's name.
+     *
+     * @param taskList the TaskList to be filter.
+     * @param storage the storage associated with tasklist.
+     * @return Response shown to the user.
+     * @throws IllegalArgumentException
+     */
     @Override
     public String run(TaskList taskList, Storage storage) throws IllegalArgumentException {
         try {

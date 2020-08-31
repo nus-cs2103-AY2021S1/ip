@@ -6,6 +6,9 @@ import bot.task.Task;
 
 import java.io.IOException;
 
+/**
+ * A type of command that removes Task from TaskList.
+ */
 public class DeleteCommand extends Command{
     private int itemIndex;
 
@@ -14,6 +17,15 @@ public class DeleteCommand extends Command{
         itemIndex = ind-1;
     }
 
+    /**
+     * The task of the index, itemIndex, is removed from the taskList and its storage is updated accordingly.
+     *
+     * @param taskList taskList where the task is removed from.
+     * @param storage storage associated with the taskList.
+     * @return Response shown to the user.
+     * @throws IllegalArgumentException
+     * @throws IOException
+     */
     @Override
     public String run(TaskList taskList, Storage storage) throws IllegalArgumentException, IOException {
         try {

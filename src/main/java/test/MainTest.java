@@ -16,6 +16,9 @@ import java.util.Scanner;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+/**
+ * JUnit test for Main.
+ */
 public class MainTest {
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
     private final ByteArrayOutputStream errContent = new ByteArrayOutputStream();
@@ -34,6 +37,11 @@ public class MainTest {
         System.setErr(originalErr);
     }
 
+    /**
+     * Test is passed with there is no difference between the actual output and expected output.
+     *
+     * @throws Exception Error loading files required to run the test.
+     */
     @org.junit.Test
     public void mainTest_givenInputs_success() throws Exception {
         String expectedOutput = "";

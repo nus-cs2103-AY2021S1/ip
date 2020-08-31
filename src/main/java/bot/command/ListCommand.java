@@ -4,11 +4,21 @@ import bot.Storage;
 import bot.TaskList;
 import bot.task.Task;
 
+/**
+ * A type of command that shows every tasks in the TaskList.
+ */
 public class ListCommand extends Command {
     public ListCommand(String cmd) {
         super(cmd);
     }
 
+    /**
+     * Displayed all tasks in tasklist
+     *
+     * @param taskList taskLIst where the items are to be shown.
+     * @param storage storage associated with taskList.
+     * @return A string of all Tasks in tasklist.
+     */
     @Override
     public String run(TaskList taskList, Storage storage) {
         int index = 0;

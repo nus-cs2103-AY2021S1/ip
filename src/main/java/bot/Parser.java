@@ -4,6 +4,9 @@ import bot.command.*;
 import bot.util.InvalidCommandException;
 import bot.util.InvalidInputException;
 
+/**
+ * Deals with making sense of the user command.
+ */
 public class Parser {
 
     /**
@@ -21,7 +24,7 @@ public class Parser {
         }
         try{
             String[] words = input.split(" ");
-            String args[] = new String[2];
+            String[] args = new String[2];
             switch(words[0]) {
                 case "list":
                     return new ListCommand("list");

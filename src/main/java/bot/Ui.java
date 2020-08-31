@@ -1,5 +1,8 @@
 package bot;
 
+/**
+ * Deals with interactions with the user
+ */
 public class Ui {
     private String name;
 

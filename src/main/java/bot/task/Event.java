@@ -3,6 +3,10 @@ package bot.task;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * A special type of Task characterised by the input "/at" which indicates the date and time of which the task
+ * should start.
+ */
 public class Event extends Task {
     private LocalDateTime timePeriod;
 
@@ -18,6 +22,10 @@ public class Event extends Task {
         this.timePeriod = LocalDateTime.parse(timePeriod, formatter);
     }
 
+    /**
+     * Serialises the object.
+     * @return A string that is formatted to be read and stored in Storage.
+     */
     @Override
     public String toFileFormat() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");

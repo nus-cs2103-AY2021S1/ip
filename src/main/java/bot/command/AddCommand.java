@@ -9,6 +9,9 @@ import bot.util.InvalidInputException;
 
 import java.io.IOException;
 
+/**
+ * A class that differentiates the different subtypes of Task and increments TaskList.
+ */
 public class AddCommand extends Command {
     private String name;
     private String date;
@@ -25,6 +28,16 @@ public class AddCommand extends Command {
         }
     }
 
+    /**
+     * A different subtype of Task is created depending on the command given.
+     * This newly created Task is then added to taskList and updated in the storage.
+     *
+     * @param taskList The TaskList to be incremented.
+     * @param storage The storage to store the new TaskLIst.
+     * @return Response that the user will see.
+     * @throws InvalidInputException
+     * @throws IOException
+     */
     @Override
     public String run(TaskList taskList, Storage storage) throws InvalidInputException, IOException {
         try{

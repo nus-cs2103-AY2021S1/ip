@@ -1,11 +1,13 @@
 package bot;
 
-
 import bot.command.Command;
 
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * Encompasses the UI, logic, model and all other factors that make up the application.
+ */
 public class Bot {
     private String name;
     private Storage storage;
@@ -15,6 +17,7 @@ public class Bot {
 
     /**
      * Constructor for bot.
+     *
      * @param name name of the bot
      * @param filePath the relative path where user's data is stored
      */

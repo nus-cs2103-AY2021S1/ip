@@ -3,6 +3,9 @@ package bot.task;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * A special type of task characterised by the input "/by" which implies the importance of the deadline.
+ */
 public class Deadline extends Task {
     private LocalDateTime deadline;
 
@@ -18,6 +21,10 @@ public class Deadline extends Task {
         this.deadline = LocalDateTime.parse(deadline, formatter);
     }
 
+    /**
+     * Serialises the object.
+     * @return A string that is formatted to be read and stored in Storage.
+     */
     @Override
     public String toFileFormat() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
