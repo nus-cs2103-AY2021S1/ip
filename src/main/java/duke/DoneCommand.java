@@ -21,7 +21,7 @@ public class DoneCommand extends Command {
      * @throws DukeException if parsedCommand does not meet the requirements
      */
     @Override
-    void execute(TaskList<Task> tasks, Ui ui, Storage storage) throws DukeException{
+    void execute(TaskList<Task> tasks, Ui ui, Storage storage) throws DukeException {
         try {
             // if length is not 2, nothing was passed in after 'done'
             if (parsedCommand.length != 2) {

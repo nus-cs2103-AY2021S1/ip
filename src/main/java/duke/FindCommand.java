@@ -1,7 +1,5 @@
 package duke;
 
-import java.util.ArrayList;
-
 public class FindCommand extends Command {
     public FindCommand(String[] parsedCommand) {
         super(parsedCommand);
@@ -22,7 +20,7 @@ public class FindCommand extends Command {
                     .getDescription()
                     .contains(inputDescription)) {
                 taskFound = true;
-                System.out.println((i+1) + ". " + tasks.get(i));
+                System.out.println((i + 1) + ". " + tasks.get(i));
             }
         }
         if (!taskFound) {

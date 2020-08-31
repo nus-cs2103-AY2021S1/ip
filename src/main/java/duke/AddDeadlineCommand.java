@@ -40,7 +40,7 @@ public class AddDeadlineCommand extends Command {
 
         String[] descriptionArray = description.split("/by");
         if (descriptionArray.length != 2) {
-            throw new DukeException("NANI??! Enter your deadline name & a date and time(optional) (e.g. 2020-01-30 18:30)!\n");
+            throw new DukeException("NANI??! Enter your deadline name, date & time(if any) (e.g. 2020-01-30 18:30)!\n");
         }
 
         String deadlineName = descriptionArray[0];
