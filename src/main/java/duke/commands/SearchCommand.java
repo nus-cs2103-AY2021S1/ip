@@ -1,6 +1,8 @@
 package duke.commands;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 import duke.storage.Storage;
 import duke.tasks.Task;
@@ -14,15 +16,17 @@ import duke.ui.UI;
  */
 public class SearchCommand extends Command {
     public static final String COMMAND_WORD = "search";
+    public String[] commandKeywords;
 
     /**
      * Creates an instance of a Search Command with the appropriate
      * search keyword.
      *
-     * @param commandDescription Search keyword.
+     * @param commandKeywords Search Keywords.
      */
-    public SearchCommand(String commandDescription) {
-        super(commandDescription, false);
+    public SearchCommand(String... commandKeywords) {
+        super("Search Command", false);
+        this.commandKeywords = commandKeywords;
     }
 
     /**
@@ -37,14 +41,17 @@ public class SearchCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList, UI ui, Storage storage) {
-        ArrayList<Task> tasks = new ArrayList<>();
-        String pattern = "(.*)" + commandDescription + "(.*)";
-        for (int i = 0; i < taskList.getListSize(); i++) {
-            Task task = taskList.getTaskAtIndex(i);
-            if (task.toString().matches(pattern)) {
-                tasks.add(task);
+        Set<Task> tasksFound = new HashSet<>();
+        for (String keyword : commandKeywords) {
+            String keywordPattern = "(.*)" + keyword + "(.*)";
+            for (int i = 0; i < taskList.getListSize(); i++) {
+                Task task = taskList.getTaskAtIndex(i);
+                if (task.toString().matches(keywordPattern)) {
+                    tasksFound.add(task);
+                }
             }
         }
+        ArrayList<Task> tasks = new ArrayList<>(tasksFound);
         return ui.displayAllItems(tasks);
     }
 }

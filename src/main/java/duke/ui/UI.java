@@ -184,7 +184,7 @@ public class UI {
                        + "\n"
                        + "getEvents <date> : Retrieves all tasks with the corresponding date\n"
                        + "\n"
-                       + "search <keyword> : Searches for all tasks matching the keyword\n"
+                       + "search <keyword1 keyword2....> : Searches for all tasks matching the keywords\n"
                        + "\n"
                        + "bye : Exits the program";
     }

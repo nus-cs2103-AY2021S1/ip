@@ -144,10 +144,11 @@ public class Parser {
     //Ensures the search keyword is a non-empty string and creates a SearchCommand object if it is.
     //Otherwise, returns an InvalidCommand object.
     private static Command prepareSearch(String commandBody) {
-        if (commandBody.length() == 0) {
+        String[] keywords = commandBody.split(" ");
+        if (keywords.length == 0) {
             return new InvalidCommand();
         } else {
-            return new SearchCommand(commandBody);
+            return new SearchCommand(keywords);
         }
     }
 
