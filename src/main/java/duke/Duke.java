@@ -37,19 +37,7 @@ public class Duke {
      * based on specific keywords.
      */
     public void chat() {
-        ui.intro();
-        boolean endLoop = false;
-        while (!endLoop) {
-            try {
-                this.inquiry = ui.nextInquiry();
-                Command command = Parser.parse(inquiry);
-                endLoop = command.execute(tasks, ui, storage);
-            } catch (DukeException e) {
-                ui.reply(e.getMessage());
-            } finally {
-                ui.showLine();
-            }
-        }
+
     }
 
     /**
@@ -76,7 +64,12 @@ public class Duke {
      * Replace this stub with your completed method.
      */
     protected String getResponse(String input) {
-        return "Duke heard: " + input;
-        
+        ui.intro();
+            try {
+                Command command = Parser.parse(input);
+                return command.execute(tasks, ui, storage);
+            } catch (DukeException e) {
+                return e.getMessage();
+            }
     }
 }

@@ -32,7 +32,7 @@ public class DoneCommand implements Command {
      * @throws DukeException Exceptions when executing the different methods of TaskList,
      * Ui and Storage. Also accounts for index errors.
      */
-    public boolean execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (index >= tasks.getSize() || index < 0) {
             throw new DukeInvalidIndexException();
         }
@@ -42,8 +42,8 @@ public class DoneCommand implements Command {
             throw new DukeAlreadyDoneException();
         }
         tasks.markAsDone(index);
-        ui.doneMessage(currentTask);
+        String reply = ui.doneMessage(currentTask);
         storage.save(tasks.getPlanner());
-        return false;
+        return reply;
     }
 }

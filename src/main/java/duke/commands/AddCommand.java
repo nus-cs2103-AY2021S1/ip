@@ -30,11 +30,11 @@ public class AddCommand implements Command {
      * @throws DukeException Exceptions when executing the different methods of TaskList,
      * Ui and Storage.
      */
-    public boolean execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         tasks.addToPlanner(task);
-        ui.addMessage(task, tasks.getSize());
+        String response = ui.addMessage(task, tasks.getSize());
         storage.save(tasks.getPlanner());
-        return false;
+        return response;
     }
 
     @Override

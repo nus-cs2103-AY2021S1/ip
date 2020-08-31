@@ -16,8 +16,7 @@ public class ExitCommand implements Command {
      * @param storage Storage.
      * @return A boolean to signify the termination of the chatbot.
      */
-    public boolean execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.farewell();
-        return true;
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        return ui.farewell();
     }
 }

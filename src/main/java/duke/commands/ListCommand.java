@@ -16,8 +16,7 @@ public class ListCommand implements Command {
      * @param storage Storage.
      * @return A boolean to indicate that it is not the terminating command.
      */
-    public boolean execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.list(tasks.getPlanner());
-        return false;
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        return ui.list(tasks.getPlanner());
     }
 }

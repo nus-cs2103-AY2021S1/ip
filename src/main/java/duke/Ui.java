@@ -23,60 +23,63 @@ public class Ui {
     /**
      * Displays the introductions.
      */
-    void intro() {
-        reply("Hello, I'm Ravenloss");
-        reply("What can I do for you?");
-        System.out.println(LINE);
+    String intro() {
+        return reply("Hello, I'm Ravenloss") + "\n"
+                + reply("What can I do for you?");
     }
 
     /**
      * Displays the message with the indentation.
      * @param string String to be displayed.
      */
-    public void reply(String string) {
-        System.out.println(INDENTATION + string);
+    public String reply(String string) {
+        return INDENTATION + string;
     }
 
-    /**
-     * Gives the next command line inputted by the user.
-     * @return The next inquiry.
-     */
-    public String nextInquiry() {
-        return scanner.nextLine();
-    }
+//    /**
+//     * Gives the next command line inputted by the user.
+//     * @return The next inquiry.
+//     */
+//    public String nextInquiry() {
+//        return scanner.nextLine();
+//    }
 
     /**
      * Displays the list of tasks
      * @param tasks The list of tasks.
      */
-    public void list(List<Task> tasks) {
+    public String list(List<Task> tasks) {
+        StringBuilder buffer = new StringBuilder();
         if (tasks.size() == 0) {
-            reply("You have no pending tasks");
+            buffer.append(reply("You have no pending tasks"));
         } else {
-            reply("Here are the tasks in your list:");
+            buffer.append(reply("Here are the tasks in your list:")).append("\n");
             for (int i = 0; i < tasks.size(); i++) {
                 String number = (i + 1) + ".";
                 Task currentTask = tasks.get(i);
-                reply(number + currentTask.toString());
+                buffer.append(reply(number + currentTask.toString())).append("\n");
             }
         }
+        return buffer.toString();
     }
 
     /**
      * Display the filtered list with the proper response message to the user.
      * @param filteredTasks The filtered tasks.
      */
-    public void filteredList(List<Task> filteredTasks) {
+    public String filteredList(List<Task> filteredTasks) {
+        StringBuilder buffer = new StringBuilder();
         if (filteredTasks.size() == 0) {
-            reply("No tasks found");
+            buffer = new StringBuilder(reply("No tasks found"));
         } else {
-            reply("Here are the matching tasks in your list:");
+            buffer.append(reply("Here are the matching tasks in your list:")).append("\n");
             for (int i = 0; i < filteredTasks.size(); i++) {
                 String number = (i + 1) + ".";
                 Task currentTask = filteredTasks.get(i);
-                reply(number + currentTask.toString());
+                buffer.append(reply(number + currentTask.toString())).append("\n");
             }
         }
+        return buffer.toString();
     }
 
     /**
@@ -84,27 +87,31 @@ public class Ui {
      * @param currentTask The task to be added.
      * @param size The size of the list.
      */
-    public void addMessage(Task currentTask, Integer size) {
-        reply("Got it. I've added this duke.task:");
-        reply(INDENTATION + currentTask.toString());
-        reply("Now you have " + size + " tasks in the list.");
+    public String addMessage(Task currentTask, Integer size) {
+        StringBuilder buffer = new StringBuilder();
+        buffer.append(reply("Got it. I've added this duke.task:")).append("\n")
+                .append(reply(INDENTATION + currentTask.toString())).append("\n")
+                .append(reply("Now you have " + size + " tasks in the list.")).append("\n");
+        return buffer.toString();
     }
 
     /**
      * Displays the message when a task is marked as done.
      * @param currentTask The tasks that was marked as done.
      */
-    public void doneMessage(Task currentTask) {
+    public String doneMessage(Task currentTask) {
         currentTask.done();
-        reply("Good job! I've marked this task as done");
-        reply(INDENTATION + currentTask.toString());
+        StringBuilder buffer = new StringBuilder();
+        buffer.append(reply("Good job! I've marked this task as done")).append("\n")
+                .append(reply(INDENTATION + currentTask.toString())).append("\n");
+        return buffer.toString();
     }
 
     /**
      * Displays the farewell message.
      */
-    public void farewell() {
-        reply("Bye. Hope to see you again soon!");
+    public String farewell() {
+        return reply("Bye. Hope to see you again soon!");
     }
 
     /**
@@ -112,10 +119,13 @@ public class Ui {
      * @param currentTask The task deleted.
      * @param sizeLeft The size of the list after deleting the task.
      */
-    public void deleteMessage(Task currentTask, Integer sizeLeft) {
-        reply("Noted. I've removed this duke.task: ");
-        reply(INDENTATION + currentTask.toString());
-        reply("Now you have " + sizeLeft + " tasks in the list.");
+    public String deleteMessage(Task currentTask, Integer sizeLeft) {
+        StringBuilder buffer = new StringBuilder();
+        buffer.append(reply("Noted. I've removed this task: ")).append("\n")
+                .append(reply(INDENTATION + currentTask.toString())).append("\n")
+                .append(reply("Now you have " + sizeLeft + " tasks in the list."))
+                .append("\n");
+        return buffer.toString();
     }
 
     /**
