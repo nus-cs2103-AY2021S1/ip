@@ -10,21 +10,21 @@ import java.util.Scanner;
 public class Ui {
 
     /** Duke a.k.a. Star Bot's logo shown upon start up */
-    private static final String LOGO = "     _______.___________.    ___     " +
-            " .______      \n" +
-            "    /       |           |   /   \\     |   _  \\     \n" +
-            "   |   (----`---|  |----`  /  ^  \\    |  |_)  |    \n" +
-            "    \\   \\       |  |      /  /_\\  \\   |      /     \n" +
-            ".----)   |      |  |     /  _____  \\  |  |\\  \\----.\n" +
-            "|_______/       |__|    /__/     \\__\\ | _| `._____|\n" +
-            "                                                   \n" +
-            "         .______     ______   .___________.        \n" +
-            "         |   _  \\   /  __  \\  |           |        \n" +
-            "         |  |_)  | |  |  |  | `---|  |----`        \n" +
-            "         |   _  <  |  |  |  |     |  |             \n" +
-            "         |  |_)  | |  `--'  |     |  |             \n" +
-            "         |______/   \\______/      |__|             \n" +
-            "                                                   ";
+    private static final String LOGO = "     _______.___________.    ___     "
+            + " .______      \n"
+            + "    /       |           |   /   \\     |   _  \\     \n"
+            + "   |   (----`---|  |----`  /  ^  \\    |  |_)  |    \n"
+            + "    \\   \\       |  |      /  /_\\  \\   |      /     \n"
+            + ".----)   |      |  |     /  _____  \\  |  |\\  \\----.\n"
+            + "|_______/       |__|    /__/     \\__\\ | _| `._____|\n"
+            + "                                                   \n"
+            + "         .______     ______   .___________.        \n"
+            + "         |   _  \\   /  __  \\  |           |        \n"
+            + "         |  |_)  | |  |  |  | `---|  |----`        \n"
+            + "         |   _  <  |  |  |  |     |  |             \n"
+            + "         |  |_)  | |  `--'  |     |  |             \n"
+            + "         |______/   \\______/      |__|             \n"
+            + "                                                   ";
 
     /** Divider that delineates Duke's replies */
     private static final String DIVIDER =
@@ -111,7 +111,6 @@ public class Ui {
      * Formats the task list to be shown to the user.
      *
      * @param tasks The list of tasks to be shown.
-     * @return The list of tasks in String format.
      */
     public void showTaskList(TaskList tasks) {
         if (tasks.isEmpty()) {
