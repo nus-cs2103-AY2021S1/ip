@@ -3,11 +3,11 @@ import java.util.Scanner;
 
 public class Ui {
     private final String LINE = "____________________________________________________________";
-    private final String GREETING_MESSAGE = LINE +
-            "\n Quack! I am Duck" +
-            "\n How can I help you today?\n" + LINE;
-    private final String EXIT_MESSAGE = LINE +
-            "\n Waddling off now. See you soon! \n" + LINE;
+    private final String GREETING_MESSAGE = LINE
+            + "\n Quack! I am Duck"
+            + "\n How can I help you today?\n" + LINE;
+    private final String EXIT_MESSAGE = LINE
+            + "\n Waddling off now. See you soon! \n" + LINE;
 
     private Scanner sc;
 
@@ -34,14 +34,14 @@ public class Ui {
         sc.close();
     }
 
-    public void listStoredTasks(List<Task> stored_tasks) {
-        if (stored_tasks.isEmpty()) {
+    public void listStoredTasks(List<Task> storedTasks) {
+        if (storedTasks.isEmpty()) {
             System.out.println("No tasks stored...");
         } else {
             System.out.println(LINE);
             System.out.println("Quack! Here are the tasks in your list:");
             int count = 1;
-            for (Task task : stored_tasks) {
+            for (Task task : storedTasks) {
                 System.out.println(count + ". " + task);
                 count++;
             }
