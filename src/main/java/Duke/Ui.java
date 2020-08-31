@@ -84,7 +84,7 @@ public class Ui {
      * Show farewell message.
      */
     public void showFarewell() {
-        show(DIVIDER, FAREWELL, DIVIDER);
+        show(FAREWELL);
     }
 
     /**
