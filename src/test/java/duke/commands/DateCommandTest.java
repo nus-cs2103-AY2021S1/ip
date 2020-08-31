@@ -1,19 +1,19 @@
 package duke.commands;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
 
 import duke.DukeException;
 import duke.Storage;
 import duke.Ui;
 import duke.tasks.TaskList;
 
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class DateCommandTest {
-    Command command = new DateCommand("2020-09-20");
-    Ui ui = new Ui();
-    Storage storage = new Storage();
-    TaskList list = new TaskList();
+    private Command command = new DateCommand("2020-09-20");
+    private Ui ui = new Ui();
+    private Storage storage = new Storage();
+    private TaskList list = new TaskList();
 
     @Test
     public void dateDoesNotExist_exceptionThrown() {

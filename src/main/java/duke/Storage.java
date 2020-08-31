@@ -1,17 +1,18 @@
 package duke;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 
 import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.Task;
 import duke.tasks.Todo;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Scanner;
-import java.util.List;
+
 
 /**
  * Saves and stores tasks that user has input.
@@ -99,15 +100,19 @@ public class Storage {
                     }
                 } else if (task instanceof Deadline) {
                     if (task.getDone()) {
-                        fw.write("D" + "|" + "T" + "|" + task.getDescription() + "|" + ((Deadline) task).getDate() + System.lineSeparator());
+                        fw.write("D" + "|" + "T" + "|" + task.getDescription()
+                                + "|" + ((Deadline) task).getDate() + System.lineSeparator());
                     } else {
-                        fw.write("D" + "|" + "F" + "|" + task.getDescription() + "|" + ((Deadline) task).getDate() + System.lineSeparator());
+                        fw.write("D" + "|" + "F" + "|" + task.getDescription()
+                                + "|" + ((Deadline) task).getDate() + System.lineSeparator());
                     }
                 } else if (task instanceof Event) {
                     if (task.getDone()) {
-                        fw.write("E" + "|" + "T" + "|" + task.getDescription() + "|" + ((Event) task).getDate() + System.lineSeparator());
+                        fw.write("E" + "|" + "T" + "|" + task.getDescription()
+                                + "|" + ((Event) task).getDate() + System.lineSeparator());
                     } else {
-                        fw.write("E" + "|" + "F" + "|" + task.getDescription() + "|" + ((Event) task).getDate() + System.lineSeparator());
+                        fw.write("E" + "|" + "F" + "|" + task.getDescription()
+                                + "|" + ((Event) task).getDate() + System.lineSeparator());
                     }
                 }
             }

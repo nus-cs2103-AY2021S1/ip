@@ -2,8 +2,8 @@ package duke.commands;
 
 import duke.DukeException;
 import duke.Storage;
-import duke.tasks.TaskList;
 import duke.Ui;
+import duke.tasks.TaskList;
 
 /**
  * Command sent to Duke from user input.
