@@ -18,7 +18,7 @@ public class ByeCommand extends Command {
      * @param taskList TaskList which the Task is added to.
      * @param ui Ui which helps prints output.
      */
-    public void execute(TaskList taskList, Ui ui) {
-        ui.print("Bye. Hope to see you again soon!");
+    public String execute(TaskList taskList, Ui ui) {
+        return ui.print("Bye. Hope to see you again soon!");
     }
 }

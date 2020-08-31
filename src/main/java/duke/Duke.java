@@ -11,7 +11,6 @@ import duke.util.Ui;
  * Represents the Duke program.
  */
 public class Duke {
-
     private TaskList tasks;
     private Storage storage;
     private Ui ui;
@@ -25,6 +24,21 @@ public class Duke {
     public static void main(String[] args) {
         Duke duke = new Duke("./data/duke.txt");
         duke.run();
+    }
+
+    public String getResponse(String input) {
+        try {
+            Command c = Parser.parse(input);
+            String res = c.execute(tasks, ui);
+            storage.save(tasks);
+            return res;
+        } catch (DukeException e) {
+            return ui.print(e.getMessage());
+        }
+    }
+
+    public String printHello() {
+        return ui.printHello();
     }
 
     /**

@@ -20,9 +20,8 @@ public class DoneCommand extends Command {
      * @param taskList TaskList which the Task is added to.
      * @param ui Ui which helps prints output.
      */
-    public void execute(TaskList taskList, Ui ui) {
+    public String execute(TaskList taskList, Ui ui) {
         Task task = taskList.completeTask(taskNumber);
-        ui.print("Nice! I've marked this task as done:");
-        ui.print(task.toString());
+        return ui.print("Nice! I've marked this task as done:\n" + task.toString());
     }
 }

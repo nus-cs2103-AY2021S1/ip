@@ -15,9 +15,9 @@ public class Task implements Serializable {
     @Override
     public String toString() {
         if (isDone) {
-            return String.format("[✓] %s", name);
+            return String.format("[\u2713] %s", name);
         } else {
-            return String.format("[✗] %s", name);
+            return String.format("[\u2718] %s", name);
         }
     }
 

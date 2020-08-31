@@ -16,13 +16,15 @@ public class ListCommand extends Command {
      * @param taskList TaskList which the Task is added to.
      * @param ui Ui which helps prints output.
      */
-    public void execute(TaskList taskList, Ui ui) {
-        ui.print("Here are the tasks in your list:");
+    public String execute(TaskList taskList, Ui ui) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(ui.print("Here are the tasks in your list:\n"));
         List<Task> store = taskList.getList();
         int count = 0;
         for (Task task : store) {
             count++;
-            ui.print(String.format("%d. %s", count, task));
+            sb.append(ui.print(String.format("%d. %s\n", count, task)));
         }
+        return sb.toString();
     }
 }

@@ -20,10 +20,9 @@ public class AddCommand extends Command {
      * @param taskList TaskList which the Task is added to.
      * @param ui Ui which helps prints output.
      */
-    public void execute(TaskList taskList, Ui ui) {
+    public String execute(TaskList taskList, Ui ui) {
         taskList.addTask(task);
-        ui.print("Got it. I've added this task:");
-        ui.print(task.toString());
-        ui.print(String.format("Now you have %d tasks in the list", taskList.getNumberOfTasks()));
+        return ui.print(String.format("Got it. I've added this task:\n%s\n Now you have %d tasks in the list",
+                task.toString(), taskList.getNumberOfTasks()));
     }
 }

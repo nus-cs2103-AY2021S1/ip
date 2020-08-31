@@ -20,12 +20,9 @@ public class DeleteCommand extends Command {
      * @param taskList TaskList which the Task is added to.
      * @param ui Ui which helps prints output.
      */
-    public void execute(TaskList taskList, Ui ui) {
+    public String execute(TaskList taskList, Ui ui) {
         Task task = taskList.deleteTask(taskNumber);
-        ui.print("Noted. I've removed this task:");
-        ui.print(task.toString());
-        ui.print(String.format("Now you have %d tasks in the list", taskList.getNumberOfTasks()));
-
+        return ui.print(String.format("Noted. I've removed this task:\n%s\nNow you have %d tasks in the list",
+                task.toString(), taskList.getNumberOfTasks()));
     }
-
 }
