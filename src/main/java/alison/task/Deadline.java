@@ -8,7 +8,6 @@ import java.time.format.DateTimeFormatter;
 public class Deadline extends Task {
 
     private String by;
-    private LocalDate ddl = null;
 
     public Deadline(String description, String by) {
         super(description);
@@ -26,7 +25,7 @@ public class Deadline extends Task {
      */
     public void parseTime() throws AlisonException {
         try {
-            this.ddl = LocalDate.parse(by);
+            LocalDate ddl = LocalDate.parse(by);
             this.by = ddl.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
         } catch (Exception exception) {
             throw AlisonException.deadlineParseException();

@@ -2,7 +2,7 @@ package alison.task;
 
 public class Event extends Task {
 
-    private String at;
+    private final String at;
 
     public Event(String description, String at) {
         super(description);

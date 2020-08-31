@@ -8,7 +8,7 @@ import alison.tool.Ui;
 
 public class DeleteCommand extends Command {
 
-    private int index;
+    private final int index;
 
     /**
      * Build a DeleteCommand with the index of the task being deleted.

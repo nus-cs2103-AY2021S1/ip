@@ -19,7 +19,7 @@ public class Task {
     }
 
     public String getStatusIcon() {
-        return (isDone ? "✓" : "✗"); //return tick or X symbols
+        return (isDone ? "✓" : "✗"); //return ✓ or ✗ symbols
     }
 
     public void markAsDone() {

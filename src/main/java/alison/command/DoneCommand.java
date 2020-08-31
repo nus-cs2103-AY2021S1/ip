@@ -8,7 +8,7 @@ import alison.tool.Ui;
 
 public class DoneCommand extends Command {
 
-    private int index;
+    private final int index;
 
     /**
      * Build a DoneCommand with the index of the task being marked as Done.
@@ -25,7 +25,7 @@ public class DoneCommand extends Command {
      * @param tasks TaskList.
      * @param ui User Interface.
      * @param storage Storage.
-     * @throws AlisonException
+     * @throws AlisonException when Command failed to be executed.
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws AlisonException {

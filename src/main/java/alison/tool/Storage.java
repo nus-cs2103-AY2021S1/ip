@@ -11,7 +11,7 @@ import java.util.Scanner;
 
 public class Storage {
 
-    private String filePath;
+    private final String filePath;
 
     public Storage(String path) {
         this.filePath = path;
@@ -20,7 +20,7 @@ public class Storage {
     /**
      * This method load the data from the hard disk when Alison starts up.
      * @return TaskList converted from text file.
-     * @throws AlisonException
+     * @throws AlisonException when Alison fails to load the file.
      */
     public TaskList load() throws AlisonException {
         TaskList tasks = new TaskList();
@@ -43,8 +43,8 @@ public class Storage {
 
     /**
      * This methods update the tasks list in your file automatically whenever the task list changes.
-     * @param tasks tasklist store in the bot.
-     * @throws AlisonException
+     * @param tasks task list store in the bot.
+     * @throws AlisonException when Alison fail to update the file upon the change.
      */
     public void update(TaskList tasks) throws AlisonException {
         try {

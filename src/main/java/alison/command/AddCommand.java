@@ -9,7 +9,7 @@ import alison.tool.Ui;
 
 public class AddCommand extends Command {
 
-    private Task task;
+    private final Task task;
 
     /**
      * Build a AddCommand with the Task being added.
@@ -26,7 +26,7 @@ public class AddCommand extends Command {
      * @param tasks TaskList.
      * @param ui User Interface.
      * @param storage Storage.
-     * @throws AlisonException
+     * @throws AlisonException when Command failed to be executed.
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws AlisonException {

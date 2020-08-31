@@ -10,8 +10,8 @@ import alison.tool.Ui;
 public class Alison {
 
     private TaskList tasks;
-    private Storage storage;
-    private Ui ui;
+    private final Storage storage;
+    private final Ui ui;
 
     /**
      * Create a Alison bot with a file path you want to store all your data in.

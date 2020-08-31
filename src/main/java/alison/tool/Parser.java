@@ -13,7 +13,7 @@ public class Parser {
      * This method parse a task string into its corresponding Task.
      * @param taskString Saved line from file path.
      * @return Corresponding Task.
-     * @throws AlisonException
+     * @throws AlisonException when it is none of the known task.
      */
     public static Task parseTask(String taskString) throws AlisonException {
         String[] words = taskString.split(" \\| ");
@@ -40,7 +40,7 @@ public class Parser {
      * This method deals with making sense of the user command.
      * @param cmd Full string of command entered by the user.
      * @return a Command object.
-     * @throws AlisonException
+     * @throws AlisonException when Parser fails to parse a command.
      */
     public static Command parse(String cmd) throws AlisonException {
         String[] words = cmd.split(" ");
@@ -51,9 +51,13 @@ public class Parser {
                 return new ExitCommand();
             case "list":
                 return new ShowCommand();
-            case "done", "delete":
+            case "done":
+            case "delete":
                 throw AlisonException.operationException();
-            case "todo", "deadline", "event", "find":
+            case "todo":
+            case "deadline":
+            case "event":
+            case "find":
                 throw AlisonException.emptyDescriptionException();
             default:
                 throw AlisonException.defaultException();

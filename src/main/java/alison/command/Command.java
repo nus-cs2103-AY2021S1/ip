@@ -12,7 +12,7 @@ public abstract class Command {
      * @param tasks TaskList.
      * @param ui User Interface.
      * @param storage Storage.
-     * @throws AlisonException
+     * @throws AlisonException when Command failed to be executed.
      */
     public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws AlisonException;
 
