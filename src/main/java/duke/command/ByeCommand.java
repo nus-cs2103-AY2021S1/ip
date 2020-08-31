@@ -22,7 +22,7 @@ public class ByeCommand extends UserCommand {
      * @param ui       ui that prints output.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui) {
-        ui.sayGoodBye();
+    public String execute(TaskList taskList, Ui ui) {
+        return ui.sayGoodBye();
     }
 }

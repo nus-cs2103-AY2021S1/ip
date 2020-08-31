@@ -17,16 +17,16 @@ public class ToDoCommand extends UserCommand {
      * @throws DukeException
      */
     @Override
-    public void execute(TaskList taskList, Ui ui) throws DukeException {
+    public String execute(TaskList taskList, Ui ui) throws DukeException {
         if (userInput.trim().length() <= 4) {
             throw new EmptyToDoException();
         } else {
             String todoString = userInput.substring(5);
             ToDo todo = new ToDo(todoString);
             taskList.addTask(todo);
-            ui.printResponse("Got it. I've added this task:");
-            ui.printResponse(todo.toString());
-            ui.printListCount(taskList);
+            return ui.printResponse("Got it. I've added this task:") + "\n" +
+                    ui.printResponse(todo.toString()) + "\n" +
+                    ui.printListCount(taskList);
         }
     }
 }

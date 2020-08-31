@@ -25,15 +25,15 @@ public class EventCommand extends UserCommand {
      * @throws DukeException
      */
     @Override
-    public void execute(TaskList taskList, Ui ui) throws DukeException {
+    public String execute(TaskList taskList, Ui ui) throws DukeException {
         String[] eventArr = userInput.split("/", 2);
         String at = eventArr[1].substring(eventArr[1].indexOf("at") + 3);
         String eventString = eventArr[0].substring(6);
         LocalDate localEventDate = TimeFormatter.localDate(at);
         Event event = new Event(eventString, localEventDate);
         taskList.addTask(event);
-        ui.printResponse("Got it. I've added this task:");
-        ui.printResponse(event.toString());
+        return ui.printResponse("Got it. I've added this task:") + "\n" +
+        ui.printResponse(event.toString()) + "\n" +
         ui.printListCount(taskList);
 
     }

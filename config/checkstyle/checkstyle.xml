@@ -72,7 +72,7 @@
         <module name="RedundantImport"/>
 
         <!-- Checks for unused import statements.
-        An import statement is unused if:
+        An import statement is unused if:R
           It's not referenced in the file.
         -->
         <module name="UnusedImports"/>

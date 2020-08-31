@@ -7,7 +7,7 @@ import duke.ui.Ui;
 /**
  * Represents a command that shows the task in the task list.
  */
-public class ListCommand extends UserCommand{
+public class ListCommand extends UserCommand {
 
     /**
      * @param userInput user's input.
@@ -22,7 +22,7 @@ public class ListCommand extends UserCommand{
      * @throws DukeException
      */
     @Override
-    public void execute(TaskList taskList, Ui ui) throws DukeException {
-        ui.printList(taskList);
+    public String execute(TaskList taskList, Ui ui) throws DukeException {
+        return ui.printList(taskList);
     }
 }

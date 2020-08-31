@@ -23,7 +23,7 @@ public class DoneCommand extends UserCommand {
      * @throws DukeException
      */
     @Override
-    public void execute(TaskList taskList, Ui ui) throws DukeException {
+    public String execute(TaskList taskList, Ui ui) throws DukeException {
         String[] doneCommandArray = userInput.split(" ");
         if (doneCommandArray.length < 2) {
             throw new InvalidDoneCommandException();
@@ -35,5 +35,6 @@ public class DoneCommand extends UserCommand {
                 taskList.getTask(itemToBeMarkedAsDone - 1).markAsDone();
             }
         }
+        return "";
     }
 }
