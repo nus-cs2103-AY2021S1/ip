@@ -1,0 +1,51 @@
+package duke.command;
+
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
+import duke.task.Task;
+
+import java.io.IOException;
+
+/**
+ * Represents a command where user completes a task.
+ */
+public class DoneCommand extends Command {
+
+    int index;
+
+    /**
+     * Instantiates a DoneCommand with the index of task that is completed.
+     * @param index the index of task that is completed
+     */
+    public DoneCommand(int index) {
+        this.index = index;
+    }
+
+    /**
+     * Returns false since this is not an exit command.
+     * @return false
+     */
+    @Override
+    public boolean isExit() {
+        return false;
+    }
+
+    /**
+     * Executes the command by completing the task from taskList, updating in file and displaying
+     * the success message.
+     * @param taskList the list of tasks user has
+     * @param ui ui instance to display messages
+     * @param storage storage instance to manage updating on disk
+     */
+    @Override
+    public void execute(TaskList taskList, Ui ui, Storage storage) {
+        try {
+            Task task = taskList.completeTask(index);
+            ui.completeSuccess(task);
+            storage.saveData(taskList);
+        } catch (IOException e) {
+            ui.printMessage(e.getMessage());
+        }
+    }
+}

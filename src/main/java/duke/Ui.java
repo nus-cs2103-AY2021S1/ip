@@ -2,16 +2,26 @@ package duke;
 
 import duke.task.Task;
 import java.util.List;
+import java.util.Scanner;
 
 /**
- * Interacts with the user by outputting certain responses
- * based on user input
+ * Interacts with the user by reading user inputs and outputting the
+ * appropriate responses.
  */
 public class Ui {
     private final static String line = "______________________________________________________";
     private final static String lineIndent = "    ";
     private final static String listIndent = "       ";
     private final static String textIndent = "     ";
+    private Scanner sc;
+
+    /**
+     * Creates an instance of UI with a scanner to read in
+     * user inputs.
+     */
+    public Ui() {
+        sc = new Scanner(System.in);
+    }
 
     /**
      * Displays a welcome message when the user first starts up the program.
@@ -27,6 +37,14 @@ public class Ui {
     }
 
     /**
+     * Reads in user input using the scanner.
+     * @return the user input in the form of a string
+     */
+    public String readCommand() {
+        return sc.nextLine();
+    }
+
+    /**
      * Displays a formatted message for the user.
      * @param message the message displayed to the user
      */
@@ -39,11 +57,11 @@ public class Ui {
      * Lists down all the tasks the user has
      * @param taskList the current tasks the user has
      */
-    public void listTasks(List<Task> taskList) {
+    public void listTasks(TaskList taskList) {
         String output = "Here are the tasks in your list:\n";
-        int taskLen = taskList.size();
+        int taskLen = taskList.getCount();
         for (int i = 0; i < taskLen; i++) {
-            output += String.format("%s%d. %s", textIndent, i + 1, taskList.get(i));
+            output += String.format("%s%d. %s", textIndent, i + 1, taskList.getTasks().get(i));
             if (i != taskLen - 1) {
                 output += "\n";
             }
@@ -83,21 +101,10 @@ public class Ui {
     }
 
     /**
-     * Lists all the tasks the user has that are on a specified date.
-     * @param taskList the list of tasks on a specified date
-     * @param dateString the queried date
+     * Lists all the tasks the user has queried.
+     * @param taskList the list of tasks matching the user query
      */
-    public void listTasksWithDate(List<Task> taskList, String dateString) {
-        String output = String.format("Here are the tasks with the date %s:\n", dateString);
-        int counter = 1;
-        for (Task task : taskList) {
-            output += String.format("%s%d. %s\n", textIndent, counter, task);
-            counter++;
-        }
-        printMessage(output);
-    }
-
-    public void listTasksWithWord(List<Task> taskList) {
+    public void listQueriedTasks(List<Task> taskList) {
         String output = "Here are the matching tasks in your list:\n";
         int taskSize = taskList.size();
         for (int i = 0; i < taskSize; i++) {
@@ -107,5 +114,12 @@ public class Ui {
             }
         }
         printMessage(output);
+    }
+
+    /**
+     * Closes the scanner after user exits the program.
+     */
+    public void close() {
+        sc.close();
     }
 }

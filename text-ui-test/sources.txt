@@ -8,6 +8,14 @@
 ../src/main/java/duke/task/Deadline.java
 ../src/main/java/duke/task/Todo.java
 ../src/main/java/duke/format/DateFormat.java
+../src/main/java/duke/command/DeleteCommand.java
+../src/main/java/duke/command/ListCommand.java
+../src/main/java/duke/command/Command.java
+../src/main/java/duke/command/AddCommand.java
+../src/main/java/duke/command/GetCommand.java
+../src/main/java/duke/command/FindCommand.java
+../src/main/java/duke/command/ExitCommand.java
+../src/main/java/duke/command/DoneCommand.java
 ../src/main/java/duke/Duke.java
 ../src/main/java/duke/exception/DateException.java
 ../src/main/java/duke/exception/MissingInformationException.java

@@ -1,127 +1,129 @@
 package duke;
 
+import duke.command.AddCommand;
+import duke.command.GetCommand;
+import duke.command.DoneCommand;
+import duke.command.DeleteCommand;
+import duke.command.FindCommand;
+import duke.command.ExitCommand;
+import duke.command.ListCommand;
+import duke.command.Command;
 import duke.exception.DateException;
+import duke.exception.DukeException;
 import duke.exception.MissingInformationException;
 import duke.format.DateFormat;
+import duke.task.TaskType;
+
 import java.util.Date;
 
 /**
  * Represents a decoder to make sense of the user input.
- * It stores the user's command in the form of an array to separate
- * the different components of the command.
  */
 public class Parser {
-    String[] commandArr;
 
     /**
-     * Creates an instance of Parser that splits the user
-     * command into two parts, the first being the key command word
-     * and the second being the description after that.
-     * @param userInput The user's command
+     * Transforms a given user command from string type to Command type.
+     * @param fullCommand the command user inputs
+     * @return a Command that can be executed
+     * @throws MissingInformationException If there are missing information in user input.
+     * @throws DateException If the date provided is of the wrong format.
+     * @throws DukeException If the user command is invalid.
      */
-    public Parser(String userInput) {
-        this.commandArr = userInput.split(" ", 2);
+    public static Command parse(String fullCommand) throws MissingInformationException, DateException, DukeException {
+        String[] commandArr = fullCommand.split(" ", 2);
+        if (commandArr[0].equals("todo")) {
+            return parseTodo(commandArr);
+        } else if (commandArr[0].equals("deadline")) {
+           return parseDeadline(commandArr);
+        } else if (commandArr[0].equals("event")) {
+            return parseEvent(commandArr);
+        } else if (commandArr[0].equals("list")) {
+            return new ListCommand();
+        } else if (commandArr[0].equals("done")) {
+            return parseDone(commandArr);
+        } else if (commandArr[0].equals("delete")) {
+            return parseDelete(commandArr);
+        } else if (commandArr[0].equals("get")) {
+            return parseGet(commandArr);
+        } else if (commandArr[0].equals("find")) {
+            return parseFind(commandArr);
+        } else if (commandArr[0].equals("bye")) {
+            return new ExitCommand();
+        } else {
+            throw new DukeException("I am sorry, I don't know what that means :(");
+        }
+
     }
 
-    /**
-     * Extracts the key command word of the user command.
-     * @return the key word of user command
-     */
-    public String getCommand() {
-        return this.commandArr[0];
+    private static void checkDescription(String[] commandArr, String message) throws MissingInformationException {
+        if (commandArr.length < 2 || commandArr[1].isBlank()) {
+            throw new MissingInformationException(message);
+        }
+    }
+
+    private static Command parseDelete(String[] commandArr) throws MissingInformationException {
+        int index = getIndex(commandArr);
+        return new DeleteCommand(index);
+    }
+
+    private static Command parseDone(String[] commandArr) throws MissingInformationException {
+        int index = getIndex(commandArr);
+        return new DoneCommand(index);
+    }
+
+    private static Command parseGet(String[] commandArr) throws MissingInformationException, DateException {
+        checkDescription(commandArr, "Date is missing!");
+        Date date = DateFormat.parseDate(commandArr[1]);
+        return new GetCommand(date);
+
+    }
+
+    private static Command parseFind(String[] commandArr) throws MissingInformationException {
+        checkDescription(commandArr, "Key word is missing!");
+        return new FindCommand(commandArr[1]);
+    }
+
+    private static Command parseTodo(String[] commandArr) throws MissingInformationException {
+        checkDescription(commandArr, "The description of a todo cannot be empty.");
+        return new AddCommand(TaskType.TODO, commandArr[1]);
+    }
+
+    private static Command parseDeadline(String[] commandArr) throws MissingInformationException, DateException {
+        checkDescription(commandArr, "The description of a deadline cannot be empty.");
+
+        String[] descriptionArr = commandArr[1].split(" /by ", 2);
+        if (descriptionArr.length < 2 || descriptionArr[1].isBlank()) {
+            throw new MissingInformationException("Deadline is missing a date.");
+        }
+        Date date = DateFormat.parseDate(descriptionArr[1]);
+        return new AddCommand(TaskType.DEADLINE, descriptionArr[0], date);
+
+    }
+
+    private static Command parseEvent(String[] commandArr) throws MissingInformationException, DateException {
+        checkDescription(commandArr, "The description of an event cannot be empty.");
+
+        String[] descriptionArr = commandArr[1].split(" /at ", 2);
+        if (descriptionArr.length < 2 || descriptionArr[1].isBlank()) {
+            throw new MissingInformationException("Event is missing a date.");
+        }
+        Date date = DateFormat.parseDate(descriptionArr[1]);
+        return new AddCommand(TaskType.EVENT, descriptionArr[0], date);
+
     }
 
     /**
      * Extracts the task number referred to in the user command.
+     * @param  commandArr the user input represented in the form of an array
      * @return the task number
      * @throws MissingInformationException If task number is not provided.
-     * @throws NumberFormatException If the task number is not given in the form of a number.
      */
-    public int getIndex() throws MissingInformationException, NumberFormatException {
+    private static int getIndex(String[] commandArr) throws MissingInformationException {
 
-        if (this.commandArr.length < 2 || commandArr[1].isBlank()) {
-            throw new MissingInformationException("duke.Task number is missing!");
+        if (commandArr.length < 2 || commandArr[1].isBlank()) {
+            throw new MissingInformationException("Task number is missing!");
         }
         return Integer.parseInt(commandArr[1]);
     }
 
-    /**
-     * Extracts the description of command after the key word
-     * @param taskType the type of task that we want extract description for
-     * @return the description of command
-     * @throws MissingInformationException If description is not provided.
-     */
-    public String getDescription(String taskType) throws MissingInformationException {
-        if (commandArr.length < 2 || commandArr[1].isBlank()) {
-            throw new MissingInformationException(
-                    String.format("The description of a %s cannot be empty.", taskType));
-        }
-
-        return commandArr[1];
-    }
-
-
-    /**
-     * Extracts the name of the task from command.
-     * @param taskType the type of task that we want extract name for
-     * @return the name of the task
-     * @throws MissingInformationException If the name is not provided.
-     */
-    public String getName(String taskType) throws MissingInformationException {
-        String description = getDescription(taskType);
-        String splitBy = taskType.equals("deadline") ? " /by " : " /at ";
-        String[] detailArr = description.split(splitBy, 2);
-        return detailArr[0];
-    }
-
-    public String getKeyWord() throws MissingInformationException {
-        if (commandArr.length < 2 || commandArr[1].isBlank()) {
-            throw new MissingInformationException("Key word is missing!");
-        }
-
-        return commandArr[1];
-    }
-
-    /**
-     * Extracts the date of deadline from user command.
-     * @return the date of deadline
-     * @throws MissingInformationException If the date is not provided.
-     * @throws DateException If the date provided is of the wrong format.
-     */
-    public Date getDeadlineBy() throws MissingInformationException, DateException {
-        String details = commandArr[1];
-        String[] detailArr = details.split(" /by ", 2);
-        if (detailArr.length < 2 || detailArr[1].isBlank()) {
-            throw new MissingInformationException("duke.task.Deadline is missing a date.");
-        }
-        return DateFormat.parseDate(detailArr[1]);
-    }
-
-    /**
-     * Extracts the date of event from user command.
-     * @return the date of event
-     * @throws MissingInformationException If the date is not provided.
-     * @throws DateException If the date provided is of the wrong format.
-     */
-    public Date getEventAt() throws MissingInformationException, DateException {
-        String details = commandArr[1];
-        String[] detailArr = details.split(" /at ", 2);
-        if (detailArr.length < 2 || detailArr[1].isBlank()) {
-            throw new MissingInformationException("duke.task.Event is missing a date.");
-        }
-        return DateFormat.parseDate(detailArr[1]);
-    }
-
-    /**
-     * Extracts the date when the user queries for all tasks with a specified date.
-     * @return the date being queried
-     * @throws MissingInformationException If the date is not provided.
-     */
-    public String getDate() throws MissingInformationException {
-        if (commandArr.length < 2 || commandArr[1].isBlank()) {
-            throw new MissingInformationException("Date is missing!");
-        } else {
-            return commandArr[1];
-        }
-    }
 }

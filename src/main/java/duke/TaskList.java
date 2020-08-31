@@ -51,9 +51,8 @@ public class TaskList {
      * Marks a particular task as completed and returns it.
      * @param index the task number to be marked as completed
      * @return the completed task
-     * @throws IndexOutOfBoundsException If the task number provided is invalid.
      */
-    public Task completeTask(int index) throws IndexOutOfBoundsException {
+    public Task completeTask(int index) {
         taskList.get(index - 1).markAsDone();
         return taskList.get(index - 1);
     }
@@ -62,9 +61,8 @@ public class TaskList {
      * Deletes a particular task and returns it.
      * @param index the task number to be deleted
      * @return the deleted task
-     * @throws IndexOutOfBoundsException If the task number provided is invalid.
      */
-    public Task deleteTask(int index) throws IndexOutOfBoundsException {
+    public Task deleteTask(int index) {
         return taskList.remove(index - 1);
     }
 
@@ -92,7 +90,7 @@ public class TaskList {
     }
 
     /**
-     * Adds a event to the list of tasks and returns it.
+     * Adds an event to the list of tasks and returns it.
      * @param name the name of the event task
      * @param at the date the event is on
      * @return the newly added event
@@ -126,6 +124,11 @@ public class TaskList {
         return result;
     }
 
+    /**
+     * Obtains a list of tasks containing the specific keyword or keywords.
+     * @param keyword the keyword queried by user
+     * @return the list of tasks with the specific keyword or keywords
+     */
     public List<Task> getTasksWithWord(String keyword) {
         List<Task> result = new ArrayList<>();
         for (Task task : taskList) {

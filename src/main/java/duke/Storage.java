@@ -64,7 +64,7 @@ public class Storage {
      * @param taskList the current list of tasks
      * @throws IOException If there are errors writing tasks to the storage file.
      */
-    public void saveData(List<Task> taskList) throws IOException {
+    public void saveData(TaskList taskList) throws IOException {
 
         File dataFile = new File(this.filePath);
         String DIR_PATH = dataFile.getParent();
@@ -75,7 +75,7 @@ public class Storage {
         dataFile.createNewFile();
         FileWriter writer = new FileWriter(this.filePath);
         String data = "";
-        for (Task task : taskList) {
+        for (Task task : taskList.getTasks()) {
             data += String.format("%s\n", formatTask(task));
         }
         writer.write(data);
