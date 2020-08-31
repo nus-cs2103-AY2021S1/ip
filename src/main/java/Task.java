@@ -3,7 +3,7 @@ package duke;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
-class Task{
+public class Task{
 	duke.TaskType taskType;
 	boolean isDone;
 	String string;
