@@ -1,10 +1,5 @@
 package duke;
 
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.ToDo;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -18,22 +13,37 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
 
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
+
 /**
  * Represents a class to manage the storing of the TaskList into a text file,
  * and reading a text file to create a TaskList.
  */
 public class Storage {
 
-    /** File path where the text file is stored. */
+
+    /**
+     * Represents time and date.
+     */
+    private static final SimpleDateFormat DATE_TIME_CONVERTER_FORMAT = new SimpleDateFormat("MMM dd yyyy hh:mma");
+    /**
+     * Represents date.
+     */
+    private static final SimpleDateFormat DATE_CONVERTER_FORMAT = new SimpleDateFormat("MMM dd yyyy");
+
+
+    /**
+     * File path where the text file is stored.
+     */
     private Path filepath;
 
-    /** Represents time and date. */
-    private static final SimpleDateFormat DATE_TIME_CONVERTER_FORMAT = new SimpleDateFormat("MMM dd yyyy hh:mma");
-    /** Represents date. */
-    private static final SimpleDateFormat DATE_CONVERTER_FORMAT = new SimpleDateFormat("MMM dd yyyy");
 
     /**
      * Initialises Storage with filepath where text file is stored.
+     *
      * @param filepath Filepath where the text file is stored.
      */
     public Storage(String filepath) {
@@ -43,6 +53,7 @@ public class Storage {
     /**
      * Reads existing text file and converts the text into tasks to be placed
      * into an ArrayList. If the text file does not exists, it is created.
+     *
      * @return an ArrayList containing the tasks from the text file.
      */
     public ArrayList<Task> readFile() {
@@ -67,14 +78,17 @@ public class Storage {
                         break;
                     case "D":
                         isTime = arr[4].equals("1");
-                        date = (isTime) ? DATE_TIME_CONVERTER_FORMAT.parse(arr[3]) : DATE_CONVERTER_FORMAT.parse(arr[3]);
+                        date = (isTime) ? DATE_TIME_CONVERTER_FORMAT.parse(arr[3])
+                                : DATE_CONVERTER_FORMAT.parse(arr[3]);
                         tasks.add(new Deadline(arr[2], date, isTime, isDone));
                         break;
                     case "E":
                         isTime = arr[4].equals("1");
-                        date = (isTime) ? DATE_TIME_CONVERTER_FORMAT.parse(arr[3]) : DATE_CONVERTER_FORMAT.parse(arr[3]);
+                        date = (isTime) ? DATE_TIME_CONVERTER_FORMAT.parse(arr[3])
+                                : DATE_CONVERTER_FORMAT.parse(arr[3]);
                         tasks.add(new Event(arr[2], date, isTime, isDone));
                         break;
+                    default:
                     }
                 }
             } catch (FileNotFoundException e) {
@@ -109,6 +123,7 @@ public class Storage {
 
     /**
      * Converts the tasks into String to be stored into the text file.
+     *
      * @param arrayList ArrayList containing the tasks.
      */
     public void writeToFile(ArrayList<Task> arrayList) {

@@ -1,13 +1,21 @@
 package duke;
 
-import duke.command.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import duke.command.AddCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.ExitCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.ToDo;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+
 
 /**
  * Provides a class to interprets user inputs and converts them into Commands
@@ -15,9 +23,13 @@ import java.util.Date;
  */
 public class Parser {
 
-    /** Represents date and time. */
+    /**
+     * Represents date and time.
+     */
     private static final SimpleDateFormat DATE_TIME_FORMAT = new SimpleDateFormat("dd/MM/yyyy HHmm");
-    /** Represents date. */
+    /**
+     * Represents date.
+     */
     private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd/MM/yyyy");
 
     /**

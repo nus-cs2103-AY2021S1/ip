@@ -9,10 +9,6 @@ import duke.Ui;
  */
 public class ExitCommand extends Command {
 
-    /**
-     * Creates exit command.
-     */
-
 
     /**
      * Prints goodbye message.

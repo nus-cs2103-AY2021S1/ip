@@ -7,10 +7,11 @@ package duke.task;
  * Represents Task that has a description that can be marked as done.
  */
 public abstract class Task {
-    /** Description of the task. */
-    private String description;
     /** Represents task as done or not done. */
     protected boolean isDone;
+    /** Description of the task. */
+    private String description;
+
 
     /**
      * Creates a new Task object with a default not done.

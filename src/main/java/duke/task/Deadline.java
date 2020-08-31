@@ -1,7 +1,5 @@
 package duke.task;
 
-import duke.task.Task;
-
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -57,6 +55,8 @@ public class Deadline extends Task {
     @Override
     public String toStoredTextString() {
         String s = isTime ? "MMM dd yyyy hh:mma" : "MMM dd yyyy";
-        return "D | " + super.toStoredTextString() + " | " + new SimpleDateFormat(s).format(date) + " | " + (isTime ? "1" : "0");
+        return "D | " + super.toStoredTextString() + " | "
+                + new SimpleDateFormat(s).format(date) + " | "
+                + (isTime ? "1" : "0");
     }
 }
