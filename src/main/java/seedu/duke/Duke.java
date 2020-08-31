@@ -1,11 +1,16 @@
-package main.java.seedu.duke;
+package seedu.duke;
 
-import main.java.seedu.duke.commands.Command;
+import seedu.duke.commands.Command;
+
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
 
 /**
  * Represents the main Duke who acts as the user's personal assistant.
  */
-public class Duke {
+public class Duke extends Application {
 
     private Storage storage;
     private TaskList tasks;
@@ -48,5 +53,14 @@ public class Duke {
      */
     public static void main(String[] args) {
         new Duke().run();
+    }
+
+    @Override
+    public void start(Stage stage) {
+        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
+        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
+
+        stage.setScene(scene); // Setting the stage to show our screen
+        stage.show(); // Render the stage.
     }
 }

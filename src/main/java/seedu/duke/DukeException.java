@@ -1,4 +1,4 @@
-package main.java.seedu.duke;
+package seedu.duke;
 
 /**
  * Encapsulates all exceptions that are related to Duke.

@@ -1,4 +1,4 @@
-package main.java.seedu.duke.todo;
+package seedu.duke.todo;
 
 /**
  * Represent a todo item.

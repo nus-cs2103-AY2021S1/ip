@@ -4,8 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
-import main.java.seedu.duke.Parser;
-import main.java.seedu.duke.todo.Task;
+import seedu.duke.Parser;
+import seedu.duke.todo.Task;
 
 
 

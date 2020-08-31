@@ -1,8 +1,8 @@
-package main.java.seedu.duke.commands;
+package seedu.duke.commands;
 
-import main.java.seedu.duke.Storage;
-import main.java.seedu.duke.TaskList;
-import main.java.seedu.duke.Ui;
+import seedu.duke.TaskList;
+import seedu.duke.Ui;
+import seedu.duke.Storage;
 
 /**
  * Represents the command to exit the program.
