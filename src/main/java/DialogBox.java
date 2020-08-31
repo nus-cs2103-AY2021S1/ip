@@ -53,12 +53,16 @@ public class DialogBox extends HBox {
      * Flips the dialog box such that the ImageView is on the left and text on the right.
      */
     private void flip() {
+        String cssLayout = "-fx-background-color: whitesmoke;\n"
+                            + "-fx-background-radius: 30;\n"
+                            + "-fx-border-color: black;\n"
+                            + "-fx-border-radius: 2em";
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
         Collections.reverse(tmp);
         getChildren().setAll(tmp);
         setAlignment(Pos.TOP_LEFT);
         getChildren().get(0).setNodeOrientation(NodeOrientation.LEFT_TO_RIGHT);
-        setStyle("-fx-background-color: whitesmoke");
+        setStyle(cssLayout);
     }
 
     public static DialogBox getUserDialog(String text, Image img) {
