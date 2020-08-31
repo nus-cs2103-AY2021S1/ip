@@ -1,9 +1,8 @@
 package duke;
 
 import java.io.IOException;
-import java.util.List;
 import java.util.ArrayList;
-
+import java.util.List;
 
 /**
  * A Tasklist to handle operations pertaining to the Tasklist.

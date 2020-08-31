@@ -1,13 +1,16 @@
 package duke.command;
 
-import duke.*;
-import duke.exception.*;
+
+import duke.Tasklist;
+import duke.UserInterface;
+import duke.exception.DukeIndexException;
+import duke.exception.DukeListException;
 
 /**
  * Abstract command class
  * @author Kor Ming Soon
  */
-abstract public class Command {
+abstract class Command {
 
     /**
      * Commmand that all commands are able to execute, with varying purposes dependent on the command.

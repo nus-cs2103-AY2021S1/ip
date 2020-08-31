@@ -1,11 +1,17 @@
 package duke;
 
-import duke.exception.*;
-import duke.command.*;
-
 import java.io.IOException;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
+
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
+import duke.exception.DukeCommandException;
+import duke.exception.DukeIndexException;
+import duke.exception.DukeListException;
+import duke.exception.DukeTaskException;
 
 /**
  * Parser class to parse through the input given by the user.
@@ -41,8 +47,7 @@ public class Parser {
                 } else if (command.equals("find")) {
                     String wordToFind = this.parseMessage.substring(command.length());
                     new FindCommand(wordToFind).execute(tasklist, ui);
-                }
-                else if (command.equals("done")) {
+                } else if (command.equals("done")) {
                     int index = Integer.parseInt(parseMessage.split(" ")[1]) - 1;
                     new DoneCommand(index).execute(tasklist, ui);
                 } else if (command.equals("delete")) {
@@ -52,7 +57,8 @@ public class Parser {
                     String dissectedMessage = this.parseMessage.substring(command.length());
                     commandTasks(tasklist, command, dissectedMessage);
                 } else {
-                    String errorMessage = "Command is wrong. Please start with delete, list, done, deadline, todo or event.";
+                    String errorMessage = "Command is wrong. Please start with delete, "
+                            + "list, done, deadline, todo or event.";
                     throw new DukeCommandException(errorMessage);
                 }
                 this.parseMessage = sc.nextLine();

@@ -42,7 +42,6 @@ public class FindCommand extends Command {
         if (tempTaskList.getTaskSize() == 0) {
             throw new DukeListException("Your search result yields nothing.");
         }
-        
         new ListCommand().execute(tempTaskList, new UserInterface());
     }
 }

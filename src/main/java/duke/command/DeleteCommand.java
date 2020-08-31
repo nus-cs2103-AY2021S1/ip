@@ -1,7 +1,9 @@
 package duke.command;
 
-import duke.*;
-import duke.exception.*;
+
+import duke.Tasklist;
+import duke.UserInterface;
+import duke.exception.DukeIndexException;
 
 /**
  * DeleteCommand class for when delete command is prompted by User
@@ -29,8 +31,9 @@ public class DeleteCommand extends Command {
     public void execute(Tasklist tasklist, UserInterface ui) throws DukeIndexException {
 
         if (this.index > tasklist.getTaskSize() - 1 || this.index < 0) {
-            String errorMessage = "Wrong list number input. " +
-                    "Please put a number between 1 and " + tasklist.getTaskSize();
+            String errorMessage = "Wrong list number input. "
+                    + "Please put a number between 1 and "
+                    + tasklist.getTaskSize();
             throw new DukeIndexException(errorMessage);
         }
 

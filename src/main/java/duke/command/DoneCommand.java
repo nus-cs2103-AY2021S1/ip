@@ -1,7 +1,9 @@
 package duke.command;
 
-import duke.*;
-import duke.exception.*;
+
+import duke.Tasklist;
+import duke.UserInterface;
+import duke.exception.DukeIndexException;
 
 /**
  * DoneCommand class for when Done command is prompted by User
@@ -28,8 +30,9 @@ public class DoneCommand extends Command {
     public void execute(Tasklist tasklist, UserInterface ui) throws DukeIndexException {
 
         if (index > tasklist.getTaskSize() - 1 || index < 0) {
-            String errorMessage = "Wrong list number input. " +
-                    "Please put a number between 1 and " + tasklist.getTaskSize();
+            String errorMessage = "Wrong list number input. "
+                    + "Please put a number between 1 and "
+                    + tasklist.getTaskSize();
             throw new DukeIndexException(errorMessage);
         }
 

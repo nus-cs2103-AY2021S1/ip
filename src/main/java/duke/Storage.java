@@ -4,8 +4,8 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -17,7 +17,7 @@ import java.util.Scanner;
  */
 public class Storage {
 
-    private final static String DEFAULT_PATH = "./duke.txt";
+    private final String defaultPath = "./duke.txt";
     private final Path path;
 
     /**
@@ -26,8 +26,8 @@ public class Storage {
      * If not available, the storage object will create a file.
      */
     public Storage() {
-        path = Paths.get(DEFAULT_PATH);
-        File file = new File(DEFAULT_PATH);
+        path = Paths.get(defaultPath);
+        File file = new File(defaultPath);
         if (Files.notExists(this.path)) {
             try {
                 file.createNewFile();
@@ -43,24 +43,26 @@ public class Storage {
      * @throws IOException
      */
     public void writeData(List<Task> taskList) throws IOException {
-        FileWriter file = new FileWriter(DEFAULT_PATH);
+        FileWriter file = new FileWriter(defaultPath);
         for (Task tasking : taskList) {
             String toBeSaved = "";
             switch (tasking.getTasktype()) {
-                case TODO:
-                    toBeSaved = String.format("%s\t%s\t%s",
-                            tasking.getTasktype(),
-                            tasking.isTaskDone(),
-                            tasking.getTask());
-                    break;
-                case EVENT:
-                case DEADLINE:
-                    toBeSaved = String.format("%s\t%s\t%s\t%s",
-                            tasking.getTasktype(),
-                            tasking.isTaskDone(),
-                            tasking.getTask(),
-                            tasking.getDuration());
-                    break;
+            case TODO:
+                toBeSaved = String.format("%s\t%s\t%s",
+                        tasking.getTasktype(),
+                        tasking.isTaskDone(),
+                        tasking.getTask());
+                break;
+            case EVENT:
+            case DEADLINE:
+                toBeSaved = String.format("%s\t%s\t%s\t%s",
+                        tasking.getTasktype(),
+                        tasking.isTaskDone(),
+                        tasking.getTask(),
+                        tasking.getDuration());
+                break;
+            default:
+                continue;
             }
             file.write(toBeSaved + "\n");
         }
@@ -82,15 +84,17 @@ public class Storage {
             boolean isDone = storedTask[1].equals("true");
             Task taskToBeAdded = null;
             switch (tasktype) {
-                case "T":
-                    taskToBeAdded = new Todo(storedTask[2], isDone);
-                    break;
-                case "D":
-                    taskToBeAdded = new Deadline(storedTask[2], storedTask[3], isDone);
-                    break;
-                case "E":
-                    taskToBeAdded = new Event(storedTask[2], storedTask[3], isDone);
-                    break;
+            case "T":
+                taskToBeAdded = new Todo(storedTask[2], isDone);
+                break;
+            case "D":
+                taskToBeAdded = new Deadline(storedTask[2], storedTask[3], isDone);
+                break;
+            case "E":
+                taskToBeAdded = new Event(storedTask[2], storedTask[3], isDone);
+                break;
+            default:
+                continue;
             }
             taskList.add(taskToBeAdded);
         }

@@ -1,7 +1,9 @@
 package duke.command;
 
-import duke.*;
-import duke.exception.*;
+
+import duke.Tasklist;
+import duke.UserInterface;
+import duke.exception.DukeListException;
 
 /**
  * ListCommand class to execute list command when given by user.
