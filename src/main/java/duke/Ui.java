@@ -109,6 +109,11 @@ public class Ui {
         System.out.println(message);
     }
 
+    /**
+     * Prints the tasks that matches the keyword.
+     *
+     * @param tasks TaskList of tasks that matches keyword.
+     */
     public void showTasksFound(TaskList tasks) {
         System.out.println("Here are the matching tasks in your list:");
         int index = 1;

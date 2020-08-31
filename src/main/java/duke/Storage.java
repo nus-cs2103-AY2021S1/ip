@@ -12,7 +12,7 @@ import java.util.Scanner;
  * Encapsulates data storage into hard disk.
  */
 public class Storage {
-    File file;
+    private File file;
 
     /**
      * Instantiates a Storage object.
@@ -82,11 +82,15 @@ public class Storage {
             fileWriter = new FileWriter(file);
             for (Task task : tasks.getTasksList()) {
                 if (task instanceof Todo) {
-                    fileWriter.write("T" + " / " + (task.getIsDone() ? "1" : "0") + " / " + task.getDescription() + System.lineSeparator());
+                    fileWriter.write("T" + " / " + (task.getIsDone() ? "1" : "0") + " / "
+                            + task.getDescription() + System.lineSeparator());
                 } else if (task instanceof Event) {
-                    fileWriter.write("E" + " / " + (task.getIsDone() ? "1" : "0") + " / " + task.getDescription() + " / " + ((Event) task).formatDateTime() + System.lineSeparator());
+                    fileWriter.write("E" + " / " + (task.getIsDone() ? "1" : "0") + " / "
+                            + task.getDescription() + " / " + ((Event) task).formatDateTime() + System.lineSeparator());
                 } else if (task instanceof Deadline) {
-                    fileWriter.write("D" + " / " + (task.getIsDone() ? "1" : "0") + " / " + task.getDescription() + " / " + ((Deadline) task).formatDateTime() + System.lineSeparator());
+                    fileWriter.write("D" + " / " + (task.getIsDone() ? "1" : "0") + " / "
+                            + task.getDescription() + " / " + ((Deadline) task).formatDateTime()
+                            + System.lineSeparator());
                 } else {
                     throw new DukeException("Error saving task to file.");
                 }

@@ -4,7 +4,7 @@ package duke;
  * Supports deleting of tasks from the TaskList.
  */
 public class DeleteCommand extends Command {
-    int taskIdx;
+    private int taskIdx;
 
     /**
      * Instantiates DeleteCommand.

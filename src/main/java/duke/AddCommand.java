@@ -7,7 +7,7 @@ import java.time.format.DateTimeFormatter;
  * Supports adding of tasks to the TaskList.
  */
 public class AddCommand extends Command {
-    String input;
+    private String input;
 
     /**
      * Instantiates AddCommand.
