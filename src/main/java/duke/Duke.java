@@ -100,6 +100,9 @@ public class Duke extends Application {
             dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
             userInput.clear();
         });
+
+        //Scroll down to the end every time dialogContainer's height changes.
+        dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
 //        ui.showStartScreen();
 //        boolean running = true;
 //        Scanner sc = new Scanner(System.in);
