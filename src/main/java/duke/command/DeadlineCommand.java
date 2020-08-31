@@ -3,9 +3,7 @@ package duke.command;
 import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.task.Deadline;
-
 import duke.tasklist.TaskList;
-
 import duke.ui.Ui;
 
 public class DeadlineCommand extends Command {
@@ -36,8 +34,9 @@ public class DeadlineCommand extends Command {
             System.out.println(output);
             storage.save(taskList);
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeException(ui.LINE + "Invalid input! Please specify your deadline description and details! \n" + ui.LINE);        }
+            throw new DukeException(ui.LINE + "Invalid input! Please specify your deadline description and details! \n" + ui.LINE);
         }
+    }
 
     @Override
     public boolean isExit() {
