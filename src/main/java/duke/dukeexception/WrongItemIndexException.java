@@ -1,3 +1,5 @@
+package duke.dukeexception;
+
 // for delete and done commands
 public class WrongItemIndexException extends DukeException {
 

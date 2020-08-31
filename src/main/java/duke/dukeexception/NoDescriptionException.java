@@ -1,3 +1,5 @@
+package duke.dukeexception;
+
 public class NoDescriptionException extends DukeException {
 
     public NoDescriptionException(String cmd) {

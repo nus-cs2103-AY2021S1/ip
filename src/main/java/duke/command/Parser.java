@@ -1,3 +1,9 @@
+package duke.command;
+
+import duke.dukeexception.DukeException;
+import duke.dukeexception.NoCommandException;
+import duke.dukeexception.NoDescriptionException;
+
 enum CommandType {
     LIST,
     DONE,

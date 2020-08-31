@@ -1,3 +1,5 @@
+package duke.task;
+
 //Adapted from https://nus-cs2103-ay2021s1.github.io/website/schedule/week2/project.html
 public class Task {
     protected final String taskName;

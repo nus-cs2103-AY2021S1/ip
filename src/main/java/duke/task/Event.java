@@ -1,13 +1,12 @@
-//@@author {FooJingYi}-reused
-//Reused from https://nus-cs2103-ay2021s1.github.io/website/schedule/week2/project.html with minor modifications
+package duke.task;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class Deadline extends Task {
+public class Event extends Task {
     protected LocalDateTime dateTime;
 
-    public Deadline(String taskName, LocalDateTime dateTime)  {
+    public Event(String taskName, LocalDateTime dateTime)  {
         super(taskName);
         this.dateTime = dateTime;
     }
@@ -18,7 +17,7 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " by: " +
+        return "[E]" + super.toString() + " at: " +
                 this.dateTime.format(DateTimeFormatter.ofPattern("d MMM yyyy, h.m a"));
     }
 }

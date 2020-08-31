@@ -1,3 +1,5 @@
+package duke.dukeexception;
+
 public class NoCommandException extends DukeException {
 
     public NoCommandException() {
