@@ -3,6 +3,9 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import duke.*;
 
+/**
+ * The Duke class that runs the Duke task manager program
+ */
 public class Duke {
 
     /**

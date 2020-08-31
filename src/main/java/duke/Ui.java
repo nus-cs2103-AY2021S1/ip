@@ -2,6 +2,9 @@ package duke;
 
 import java.util.ArrayList;
 
+/**
+ * The Ui class handles all of the Ui interaction with the users using its various static methods
+ */
 public class Ui {
     private static String divider = "************************************************\n";
 
