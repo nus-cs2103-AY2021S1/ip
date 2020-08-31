@@ -2,12 +2,25 @@ package test.java;
 
 import Duke.main.Parser;
 import Duke.main.Time;
-import Duke.task.*;
+import Duke.task.Deadline;
+import Duke.task.Event;
+import Duke.task.Task;
+import Duke.task.Todo;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+/**
+ * This class is to test the Parser class.
+ * Mainly the commands of the Parser and
+ * other related methods are tested.
+ */
 public class ParserTest {
+    //Warning: clear the strings in data/Duke.txt before testing.
+
+    /**
+     * Tests the "todo" command.
+     */
     @Test
     public void runTodoTest() {
         Parser.run("todo reading");
@@ -31,6 +44,9 @@ public class ParserTest {
         assertTrue(isExist);
     }
 
+    /**
+     * Tests the "deadline" command.
+     */
     @Test
     public void runDeadlineTest() {
         Parser.run("deadline eating /by 2020-08-30");
@@ -43,6 +59,7 @@ public class ParserTest {
             Task currentTask = Parser.taskList.getTaskList().get(i);
             if (currentTask.toString().equals(expected.toString())) {
                 isExist = true;
+                index = i;
             }
         }
 
@@ -50,6 +67,9 @@ public class ParserTest {
         assertTrue(isExist);
     }
 
+    /**
+     * Tests the "event" command.
+     */
     @Test
     public void runEventTest() {
         Parser.run("event working /by 2020-08-30");
@@ -62,6 +82,7 @@ public class ParserTest {
             Task currentTask = Parser.taskList.getTaskList().get(i);
             if (currentTask.toString().equals(expected.toString())) {
                 isExist = true;
+                index = i;
             }
         }
 
@@ -69,6 +90,9 @@ public class ParserTest {
         assertTrue(isExist);
     }
 
+    /**
+     * Tests the "delete" command.
+     */
     @Test
     public void runDeleteTest() {
         Parser.run("event working /by 2020-08-30");
@@ -87,6 +111,9 @@ public class ParserTest {
         assertTrue(isDeleted);
     }
 
+    /**
+     * Tests the "done" command.
+     */
     @Test
     public void runDoneTest() {
         Parser.run("event working /by 2020-08-30");
@@ -101,11 +128,11 @@ public class ParserTest {
             Task currentTask = Parser.taskList.getTaskList().get(i);
             if (currentTask.toString().equals(expected.toString())) {
                 isDone = true;
-                index = i + 1;
+                index = i;
             }
         }
 
-        Parser.run(String.format("delete %d", index));
+        Parser.run(String.format("delete %d", index + 1));
         assertTrue(isDone);
     }
 

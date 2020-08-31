@@ -1,5 +1,9 @@
 package Duke.main;
 
+/**
+ * This is the main class that
+ * is directly called by the users.
+ */
 public class Duke {
     public static void main(String[] args) {
 

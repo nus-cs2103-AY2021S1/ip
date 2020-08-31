@@ -1,5 +1,9 @@
 package Duke.exception;
 
+/**
+ * This is an enum class that contains
+ * all String for the exception error message.
+ */
 public enum Exceptions {
     NUMBEREXCESSEXCEPTION {
         @Override
