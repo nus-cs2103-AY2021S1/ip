@@ -17,22 +17,30 @@ public class Ui {
         System.out.println("What can i do for you?");
     }
 
-    public String getWelcomeMessage() {
-        return "Hello! I'm Duke\n" + "What can i do for you?";
-    }
-
+    /**
+     * Set's message in UI to input message
+     * @param message To over write UI's message
+     */
     public void setMessage(String message) {
         this.message = message;
     }
 
+    /**
+     * Returns the String message embedded in UI
+     * @return String representation of message
+     * @throws UiMessageException Thrown when message is empty
+     */
     public String getMessage() throws UiMessageException {
-        if (message.isEmpty()) {
+        if (message == null || message.equals("")) {
             throw new UiMessageException("Message is empty for UI! Please setMessage");
         } else {
             return message;
         }
     }
 
+    /**
+     * Clears message found in UI
+     */
     public void clearMessage() {
         this.setMessage("");
     }

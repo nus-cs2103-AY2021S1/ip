@@ -53,6 +53,11 @@ public class Duke {
         }
     }
 
+    /**
+     * Returns a String that represents Duke's response to user's input
+     * @param input user's input
+     * @return String that represents Duke's response
+     */
     public String getResponse(String input) {
         String response = "";
         try {
