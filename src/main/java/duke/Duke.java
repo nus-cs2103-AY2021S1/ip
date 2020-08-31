@@ -13,7 +13,7 @@ import tasks.TaskList;
 
 public class Duke {
     private TaskList tasks;
-    private boolean quit;
+    private boolean isQuit;
     private Ui ui;
     private Storage storage;
     private Parser parser;
@@ -23,7 +23,7 @@ public class Duke {
      */
     public Duke() {
         this.tasks = new TaskList();
-        this.quit = false;
+        this.isQuit = false;
         this.ui = new Ui();
         this.parser = new Parser();
         try {
@@ -54,7 +54,7 @@ public class Duke {
      */
 
     public void run() {
-        while (!quit) {
+        while (!isQuit) {
             String input = ui.takeInput();
             try {
                 Command command = parser.parse(input);
@@ -62,7 +62,7 @@ public class Duke {
             } catch (DukeException e) {
                 ui.printException(e);
             }
-            quit = parser.isQuit();
+            isQuit = parser.getQuit();
         }
     }
 
