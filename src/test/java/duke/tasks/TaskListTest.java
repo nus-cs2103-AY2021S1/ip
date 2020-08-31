@@ -3,9 +3,6 @@ package duke.tasks;
 import duke.exceptions.DukeException;
 import org.junit.jupiter.api.Test;
 
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class TaskListTest {
