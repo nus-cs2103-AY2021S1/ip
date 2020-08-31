@@ -1,4 +1,4 @@
-package DukeExceptions;
+package exception;
 
 /**
  * Represents a general Exception specific to the Duke Chatbot.

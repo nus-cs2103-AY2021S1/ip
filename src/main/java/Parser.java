@@ -1,8 +1,8 @@
-import DukeExceptions.EmptyDescriptionException;
-import DukeExceptions.EmptyTimeException;
-import DukeExceptions.UnknownCommandException;
-import DukeExceptions.UnknownTaskException;
-import DukeExceptions.UnknownTimeException;
+import exception.EmptyDescriptionException;
+import exception.EmptyTimeException;
+import exception.UnknownCommandException;
+import exception.UnknownTaskException;
+import exception.UnknownTimeException;
 
 /**
  * Represents the Parser class, that interprets user input commands.
@@ -44,7 +44,7 @@ public class Parser {
                 if (inputText.length() <= 9) {
                     throw new EmptyDescriptionException("No Description entered");
                 }
-                if (splitArr.length == 1 ) {
+                if (splitArr.length == 1) {
                     throw new UnknownTimeException("No by time added");
                 }
                 String[] newSplitArr = inputText.substring(9).split("/by ");
@@ -58,7 +58,7 @@ public class Parser {
                 if (inputText.length() <= 6) {
                     throw new EmptyDescriptionException("No Description entered");
                 }
-                if (splitArr.length == 1 ) {
+                if (splitArr.length == 1) {
                     throw new UnknownTimeException("No at time added");
                 }
                 String[] newSplitArr = inputText.substring(6).split("/at ");
