@@ -31,11 +31,12 @@ public class GetEventsCommand extends Command {
     /**
      * Executes the command.
      * Searches the list of tasks for tasks that have a due date
-     * matching the date given as input and prints them.
+     * matching the date given as input and returns them.
      *
      * @param taskList List of tasks currently being tracked.
      * @param ui User interface object.
      * @param storage Storage object.
+     * @return String of Duke response.
      */
     @Override
     public String execute(TaskList taskList, UI ui, Storage storage) {

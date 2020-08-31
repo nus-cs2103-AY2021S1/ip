@@ -18,13 +18,13 @@ public class ExitCommand extends Command {
     }
 
     /**
-     * Executes the command.
+     * Executes the command and returns Duke's response.
      * Saves all current tasks in the list to the hard drive.
-     * Prints goodbye message.
      *
      * @param taskList List of tasks currently being tracked.
      * @param ui User interface object.
      * @param storage Storage object.
+     * @return String of Duke response.
      */
     @Override
     public String execute(TaskList taskList, UI ui, Storage storage) {

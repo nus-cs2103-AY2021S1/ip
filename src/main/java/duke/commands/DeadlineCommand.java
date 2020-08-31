@@ -44,13 +44,14 @@ public class DeadlineCommand extends Command {
     }
 
     /**
-     * Executes the command.
+     * Executes the command and returns Duke's response.
      * Creates a new Deadline object and adds it to the list
-     * of taks.
+     * of tasks.
      *
      * @param taskList List of tasks currently being tracked.
      * @param ui User interface object.
      * @param storage Storage object.
+     * @return String of Duke response.
      */
     @Override
     public String execute(TaskList taskList, UI ui, Storage storage) {

@@ -23,12 +23,13 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Executes the command.
+     * Executes the command and returns Duke's response.
      * Deletes the appropriate task from the task list.
      *
      * @param taskList List of tasks currently being tracked.
      * @param ui User interface object.
      * @param storage Storage object.
+     * @return String of Duke response.
      */
     @Override
     public String execute(TaskList taskList, UI ui, Storage storage) {

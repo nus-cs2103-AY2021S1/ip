@@ -24,12 +24,13 @@ public class DoneCommand extends Command {
     }
 
     /**
-     * Executes the command.
+     * Executes the command and returns Duke's response.
      * Marks the appropriate task as done.
      *
      * @param taskList List of tasks currently being tracked.
      * @param ui User interface object.
      * @param storage Storage object.
+     * @return String of Duke response.
      */
     @Override
     public String execute(TaskList taskList, UI ui, Storage storage) {

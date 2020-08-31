@@ -32,11 +32,12 @@ public class Command {
     }
 
     /**
-     * Executes the command.
+     * Executes the command and returns Duke's response.
      *
      * @param taskList List of tasks currently being tracked.
      * @param ui User interface object.
      * @param storage Storage object.
+     * @return String of Duke response.
      */
     public String execute(TaskList taskList, UI ui, Storage storage) {
         return ui.showError("Can't execute generic command");

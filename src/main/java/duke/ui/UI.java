@@ -34,7 +34,8 @@ public class UI {
     }
 
     /**
-     * Prints the display greeting to the screen.
+     * Returns the display greeting.
+     * @return Display greeting as a String.
      */
     public String displayGreeting() {
         String logo = "        ___\n"
@@ -58,15 +59,17 @@ public class UI {
     }
 
     /**
-     * Prints the goodbye message to the screen.
+     * Returns the goodbye message.
+     * @return Goodbye message as a String.
      */
     public String displayGoodbye() {
         return "Bye! Hope to see you again :)";
     }
 
     /**
-     * Prints a loading error to the screen.
+     * Returns a loading error.
      * @param s Error message to be printed.
+     * @return Error message as a String.
      */
     public String showLoadingError(String s) {
         return "Looks like there was an error retrieving your data\n"
@@ -74,18 +77,20 @@ public class UI {
     }
 
     /**
-     * Prints an error to the screen.
+     * Returns an error message.
      * @param s Error message to be printed.
+     * @return Error message as a String.
      */
     public String showError(String s) {
         return s;
     }
 
     /**
-     * Prints the added task to the screen.
+     * Returns the added task.
      *
      * @param task Task that was added.
      * @param listSize Size of the list of tasks.
+     * @return Task added message as a String.
      */
     public String displayAddedTask(Task task, int listSize) {
         return "Got it. I've added this task:\n"
@@ -95,29 +100,32 @@ public class UI {
     }
 
     /**
-     * Prints the deleted task to the screen.
+     * Returns the deleted task.
      *
      * @param task Task that was deleted.
      * @param listSize Size of the list of tasks.
+     * @return Task deleted message as a String.
      */
     public String displayDeletedTask(Task task, int listSize) {
         return "Noted. I've removed this task:\n" + task + "\n" + "Now you have " + listSize + " tasks in the list.";
     }
 
     /**
-     * Prints the done task to the screen.
+     * Returns the done task.
      *
      * @param task Task that was set as done.
+     * @return Task done message as a String.
      */
     public String displayDoneTask(Task task) {
         return "Nice! I've marked this task as done:\n" + task;
     }
 
     /**
-     * Prints all tasks that are due on the given date.
+     * Returns all tasks that are due on the given date.
      *
      * @param tasks List of current tasks.
      * @param localDate Due date.
+     * @return Tasks with corresponding due date as a String.
      */
     public String displayEventsOnDate(ArrayList<Task> tasks, LocalDate localDate) {
         String answer = "Here are your events on "
@@ -129,10 +137,11 @@ public class UI {
     }
 
     /**
-     * Prints all items to the screen.
+     * Returns all items currently in the list.
      *
      * @param tasks List of current tasks.
-     */
+     * @return All tasks in the list as a String.
+     * */
     public String displayAllItems(ArrayList<Task> tasks) {
         String result = "Here are the tasks in your list:\n";
         int taskCount = 1;
@@ -154,10 +163,30 @@ public class UI {
     }
 
     /**
-     * Prints help information to the screen.
+     * Returns help information.
+     * @return Help information as a String.
      */
     public String showHelp() {
-        return "I can't help you either ._.";
+        return "Welcome to Duke! these are the commands you can use: \n"
+                       + "--help : Displays help information\n"
+                       + "\n"
+                       + "todo <task description> : Adds task as Todo item\n"
+                       + "\n"
+                       + "deadline <task description> /by <due date> : Adds task as Deadline\n"
+                       + "\n"
+                       + "event <task description> /at <event date> : Adds task as Event\n"
+                       + "\n"
+                       + "delete <number> : Deletes item with index <number>\n"
+                       + "\n"
+                       + "done <number> : Marks item at index <number> as done\n"
+                       + "\n"
+                       + "list : Lists all items currently being tracked\n"
+                       + "\n"
+                       + "getEvents <date> : Retrieves all tasks with the corresponding date\n"
+                       + "\n"
+                       + "search <keyword> : Searches for all tasks matching the keyword\n"
+                       + "\n"
+                       + "bye : Exits the program";
     }
 
     /**

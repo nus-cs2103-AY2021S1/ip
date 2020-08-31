@@ -1,25 +1,23 @@
 package duke.duke;
 
 import java.io.File;
-import java.util.concurrent.TimeUnit;
 
 import duke.commands.Command;
 import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.tasks.TaskList;
 import duke.ui.UI;
-
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Label;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.image.ImageView;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
@@ -201,7 +199,7 @@ public class Duke extends Application {
         });
     }
 
-    public Label getDialogLabel(String text) {
+    private Label getDialogLabel(String text) {
         // You will need to import `javafx.scene.control.Label`.
         Label textToAdd = new Label(text);
         textToAdd.setWrapText(true);
@@ -215,8 +213,8 @@ public class Duke extends Application {
         ImageView dukePicture = new ImageView(dukeImage);
         ImageView userPicture = new ImageView(userImage);
         Insets padding = new Insets(10, 0, 10, 0);
-        dukePicture.setClip(new Circle(50, 50,50));
-        userPicture.setClip(new Circle(50,50,50));
+        dukePicture.setClip(new Circle(50, 50, 50));
+        userPicture.setClip(new Circle(50, 50, 50));
 
         DialogBox userDialog = DialogBox.getUserDialog(userText, userPicture);
         DialogBox dukeDialog = DialogBox.getDukeDialog(dukeText, dukePicture);
@@ -236,11 +234,7 @@ public class Duke extends Application {
         }
     }
 
-    /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
-     */
-    public String getResponse(String input) {
+    private String getResponse(String input) {
         Command command = Parser.parse(input);
         String response = command.execute(tasks, ui, store);
         isExit = command.isExit();
