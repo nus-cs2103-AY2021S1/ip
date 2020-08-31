@@ -20,10 +20,10 @@ public class DeadlineTest {
     @Test
     void storeTest() {
         assertEquals(
-                "D F borrow book /by 2020-08-25T14:30\n",
+                "D F borrow book /by 2020-08-25T14:30",
                 new Deadline("borrow book", LocalDateTime.parse("2020-08-25T14:30")).store());
         assertEquals(
-                "D T return book /by 2020-08-31T20:00\n",
+                "D T return book /by 2020-08-31T20:00",
                 new Deadline("return book", true, LocalDateTime.parse("2020-08-31T20:00")).store());
     }
 }

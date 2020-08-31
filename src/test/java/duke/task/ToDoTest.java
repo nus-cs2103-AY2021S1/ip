@@ -13,7 +13,7 @@ public class ToDoTest {
 
     @Test
     void storeTest() {
-        assertEquals("T F return book\n", new ToDo("return book").store());
-        assertEquals("T T borrow book\n", new ToDo("borrow book", true).store());
+        assertEquals("T F return book", new ToDo("return book").store());
+        assertEquals("T T borrow book", new ToDo("borrow book", true).store());
     }
 }

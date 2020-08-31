@@ -89,7 +89,7 @@ public class Storage {
         try {
             BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(
                     new FileOutputStream(String.valueOf(path), true), "UTF-8"));
-            bufferedWriter.write(data);
+            bufferedWriter.write(data + "\n");
             bufferedWriter.close();
         } catch (IOException e) {
             e.printStackTrace();

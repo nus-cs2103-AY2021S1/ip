@@ -19,10 +19,10 @@ public class EventTest {
     @Test
     void storeTest() {
         assertEquals(
-                "E F borrow book /at 2020-08-25T14:30\n",
+                "E F borrow book /at 2020-08-25T14:30",
                 new Event("borrow book", LocalDateTime.parse("2020-08-25T14:30")).store());
         assertEquals(
-                "E T return book /at 2020-08-31T20:00\n",
+                "E T return book /at 2020-08-31T20:00",
                 new Event("return book", true, LocalDateTime.parse("2020-08-31T20:00")).store());
     }
 }

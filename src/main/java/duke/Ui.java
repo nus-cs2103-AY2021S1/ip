@@ -1,32 +1,33 @@
 package duke;
 
-import java.util.Scanner;
 import duke.task.Task;
+import javafx.scene.image.Image;
+import javafx.scene.layout.VBox;
 
 /**
  * The Ui class deals with interactions with the user.
  */
 public class Ui {
 
-    private static final String LINE = "    ____________________________________________________________\n";
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/duke.png"));
 
-    private Scanner sc;
+    private VBox dialogContainer;
 
     /** Create and initiate an Ui object. */
-    public Ui() {
-        this.sc = new Scanner(System.in);
+    public Ui(VBox dialogContainer) {
+        this.dialogContainer = dialogContainer;
     }
 
     /** Greet the user. */
     public void greet() {
-        String greet = LINE + "    Hello! I'm Duke\n" + "    What can I do for you?\n" + LINE;
-        System.out.println(greet);
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(
+                "Hello! I'm Duke\n" + "What can I do for you?\n", dukeImage));
     }
 
     /** Say bye to the user. */
     public void bye() {
-        String exit = LINE + "     Bye. Hope to see you again soon!\n" + LINE;
-        System.out.println(exit);
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(
+                "Bye. Hope to see you again soon!", dukeImage));
     }
 
     /**
@@ -34,18 +35,8 @@ public class Ui {
      * @param task The task that has being marked as done.
      */
     public void done(Task task) {
-        System.out.println(LINE
-                + "    Nice! I've marked this task as done:" + "\n"
-                + "    " + task.toString() + "\n"
-                + LINE);
-    }
-
-    /**
-     * Returns the input given by user.
-     * @return The input of user.
-     */
-    public String readInput() {
-        return sc.nextLine();
+        String text = "Nice! I've marked this task as done:\n" + task.toString();
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(text, dukeImage));
     }
 
     /**
@@ -53,7 +44,7 @@ public class Ui {
      * @param message The message ti be displayed.
      */
     public void showError(String message) {
-        System.out.println(LINE + "    " + message + "\n" + LINE);
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(message, dukeImage));
     }
 
     /**
@@ -62,11 +53,10 @@ public class Ui {
      * @param taskList The list of task remaining.
      */
     public void deleteTask(Task task, TaskList taskList) {
-        System.out.println(LINE
-                + "    Noted. I've removed this task:" + "\n"
-                + "      " + task.toString() + "\n"
-                + String.format("    Now you have %d tasks in the list.\n", taskList.size())
-                + LINE);
+        String text = "Noted. I've removed this task:" + "\n"
+                + task.toString() + "\n"
+                + String.format("Now you have %d tasks in the list.", taskList.size());
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(text, dukeImage));
     }
 
     /**
@@ -75,11 +65,10 @@ public class Ui {
      * @param taskList The list containing all tasks.
      */
     public void addTask(Task task, TaskList taskList) {
-        System.out.println(LINE
-                + "    Got it! I have added this task to the list!" + "\n"
-                + "      " + task + "\n"
-                + String.format("    Now you have %d tasks in the list.", taskList.size()) + "\n"
-                + LINE);
+        String text = "Got it! I have added this task to the list!\n"
+                + task.toString() + "\n"
+                + String.format("Now you have %d tasks in the list.", taskList.size());
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(text, dukeImage));
     }
 
     /**
@@ -87,6 +76,7 @@ public class Ui {
      * @param text Text to be printed.
      */
     public void print(String text) {
-        System.out.println(LINE + text + LINE);
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(
+                text, dukeImage));
     }
 }

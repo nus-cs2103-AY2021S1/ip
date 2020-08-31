@@ -2,6 +2,7 @@ package duke;
 
 import java.nio.file.Path;
 import duke.command.Command;
+import javafx.scene.layout.VBox;
 
 /**
  * The Duke program chat bot which can help users keep track of tasks.
@@ -17,37 +18,26 @@ public class Duke {
 
     /** Create and initialize Duke. */
     public Duke() {
-        ui = new Ui();
-        storage = new Storage(path);
-        taskList = new TaskList(storage.load());
+        this.storage = new Storage(path);
+        this.taskList = new TaskList(storage.load());
     }
 
+    public void setUi(VBox dialogContainer) {
+        this.ui = new Ui(dialogContainer);
+    }
 
-    /** Start the chat with user. */
-    public void run() {
-        ui.greet();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String command = ui.readInput();
-                Command c = Parser.parse(command);
-                c.execute(taskList, storage, ui);
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                ui.showError(e.getMessage());
-            }
+    public boolean getResponse(String input) {
+        try {
+            Command c = Parser.parse(input);
+            c.execute(taskList, storage, ui);
+            return c.isExit();
+        } catch (DukeException e) {
+            ui.showError(e.getMessage());
         }
+        return false;
     }
 
-    /**
-     * The main method for Duke.
-     * Creates a Duke and start interacting with user.
-     */
-    public static void main(String[] args) {
-        new Duke().run();
-    }
-
-    public String getResponse(String input) {
-        return input;
+    public void greet() {
+        ui.greet();
     }
 }
