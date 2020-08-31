@@ -13,7 +13,7 @@ public class TaskList {
     private List<Task> allItems;
 
     /**
-     * Creates an empty Tasklist.
+     * Creates an empty TaskList.
      */
     public TaskList() {
         this.savedStorage = new Storage();
@@ -35,7 +35,7 @@ public class TaskList {
     /**
      * Retrieves all the tasks currently stored.
      *
-     * @return
+     * @return the tasks currently stored in a List
      */
     public List<Task> getAllTasks() {
         return this.allItems;
