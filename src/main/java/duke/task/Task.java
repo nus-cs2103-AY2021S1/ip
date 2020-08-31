@@ -5,7 +5,7 @@ package duke.task;
  * May be a ToDo, Event, or Deadline.
  */
 
-public class Task {
+public abstract class Task {
     protected String description;
     protected boolean isDone;
 
@@ -28,17 +28,16 @@ public class Task {
     }
 
     /**
-     * Marks the event as done.
-     * If the event is already completed, indicate to the user.
+     * Marks the task as done.
+     * @return Indicator if the task is already completed.
      */
-    public void complete() {
+    public boolean complete() {
         if (this.isDone) {
-            System.out.println("Task is already completed.");
+            return true;
         } else {
-            System.out.println("Task completed: ");
+            this.isDone = true;
+            return false;
         }
-        this.isDone = true;
-        System.out.println(this.toString());
     }
 
     /**

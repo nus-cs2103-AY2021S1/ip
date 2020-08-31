@@ -9,7 +9,7 @@ import java.util.Date;
  * Encapsulates a task with possible date and time assigned to it.
  */
 
-public class TimedTask extends Task {
+public abstract class TimedTask extends Task {
 
     protected String dateTime;
     protected LocalDate date;
