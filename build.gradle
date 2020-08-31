@@ -29,7 +29,7 @@ test {
 }
 
 application {
-    mainClassName = "seedu.duke.Duke"
+    mainClassName = "src.main.java.duke.Main"
 }
 
 shadowJar {
