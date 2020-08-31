@@ -1,3 +1,5 @@
+package duke;
+
 import java.time.LocalDate;
 
 public class Parser {
@@ -15,7 +17,7 @@ public class Parser {
         } else if (userInput.matches("done ([0-9]+)")) {
             int number = Integer.parseInt(userInput.split(" ")[1]);
             if (number > taskList.getTasks().size()) {
-                ui.printMessage("Task not found please choose another number!");
+                ui.printMessage("duke.Task not found please choose another number!");
             }
             else if (number < 100 && number > 0) {
                 taskList.getTask(number - 1).markAsDone();

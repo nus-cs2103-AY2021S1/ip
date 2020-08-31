@@ -1,5 +1,7 @@
+package duke;
+
 public class ToDoMissingDescriptionException extends DukeException {
     public ToDoMissingDescriptionException() {
-        super("ToDo task needs a description :)");
+        super("duke.ToDo task needs a description :)");
     }
 }
