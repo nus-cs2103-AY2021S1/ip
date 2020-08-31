@@ -9,16 +9,20 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Optional;
 
+/**
+ * This processor parses strings and returns a neatly
+ * formatted Date-Time String.
+ */
 class DateTimeProcessor {
 
-    private ArrayList<String> possibleDateFormats = new ArrayList<>(
+    private final ArrayList<String> possibleDateFormats = new ArrayList<>(
             Arrays.asList(
                     "dd/MM/yyyy", "yyyy/MM/dd", "MM/dd/yyyy",
                     "dd-MM-yyyy", "yyyy-MM-dd", "MM-dd-yyyy"
                     )
     );
 
-    private ArrayList<String> possibleDateTimeFormats = new ArrayList<>(
+    private final ArrayList<String> possibleDateTimeFormats = new ArrayList<>(
             Arrays.asList(
                     "dd/MM/yyyy HHmm", "yyyy/MM/dd HHmm", "MM/dd/yyyy HHmm",
                     "HHmm dd/MM/yyyy", "HHmm yyyy/MM/dd", "HHmm MM/dd/yyyy",
@@ -45,6 +49,13 @@ class DateTimeProcessor {
         return Optional.empty();
     }
 
+    /**
+     * The string passed as date and/or time to an Event or Deadline
+     * can be formatted to a neater format if it matches a pattern,
+     * such as dd/MM/yyyy HHmm.
+     * @param input The date-time string which may not be formatted properly.
+     * @return The neatly formatted date-time string.
+     */
     String getParsedDate(String input) {
         Optional<LocalDateTime> possibleDateTime = parseDateTime(input);
         Optional<LocalDate> possibleDate = parseDate(input);

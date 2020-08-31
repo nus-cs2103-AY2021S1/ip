@@ -1,8 +1,11 @@
 package task;
 
+/**
+ * An event is a task which occurs at a particular date and time.
+ */
 public class Event extends Task {
 
-    String eventDate;
+    private String eventDate;
 
     public Event(String description, String date) {
         super(description);

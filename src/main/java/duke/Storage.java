@@ -12,6 +12,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Handles the opening and storing of tasks from text files.
+ */
 class Storage {
 
     private String filePath;
@@ -20,6 +23,13 @@ class Storage {
         this.filePath = filePath;
     }
 
+    /**
+     * Parses text file from file path specified to get
+     * the Task objects stored, and returns them all
+     * packaged in an ArrayList.
+     * @return ArrayList containing Task objects.
+     * @throws DukeException Exception while loading from text file.
+     */
     ArrayList<Task> load() throws DukeException {
         File taskListFile = new File(filePath);
         try {
@@ -42,27 +52,27 @@ class Storage {
                 Parser.Command taskCommand = Parser.parseCommand(formattedTaskString[0]);
                 boolean isTaskDone = formattedTaskString[1].equals("1");
                 switch (taskCommand) {
-                    case TODO:
-                        outputTaskList.add(new Todo(formattedTaskString[2], isTaskDone));
-                        break;
-                    case EVENT:
-                        outputTaskList.add(
-                                new Event(
-                                        formattedTaskString[2],
-                                        formattedTaskString[3],
-                                        isTaskDone
-                                )
-                        );
-                        break;
-                    case DEADLINE:
-                        outputTaskList.add(
-                                new Deadline(
-                                        formattedTaskString[2],
-                                        formattedTaskString[3],
-                                        isTaskDone
-                                )
-                        );
-                        break;
+                case TODO:
+                    outputTaskList.add(new Todo(formattedTaskString[2], isTaskDone));
+                    break;
+                case EVENT:
+                    outputTaskList.add(
+                            new Event(
+                                    formattedTaskString[2],
+                                    formattedTaskString[3],
+                                    isTaskDone
+                            )
+                    );
+                    break;
+                case DEADLINE:
+                    outputTaskList.add(
+                            new Deadline(
+                                    formattedTaskString[2],
+                                    formattedTaskString[3],
+                                    isTaskDone
+                            )
+                    );
+                    break;
                 }
             }
             taskReader.close();
@@ -73,7 +83,10 @@ class Storage {
     }
 
     /**
-     * Save the current list into a file and closes the program
+     * Saves the Tasks stored in a TaskList into the file path of the Storage.
+     * @param taskList TaskList object containing Task(s) to store.
+     * @return true if store was successful.
+     * @throws DukeException Exception while storing into file.
      */
     boolean store(TaskList taskList) throws DukeException {
         try {

@@ -4,8 +4,15 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
+/**
+ * JUnit test class to test methods in Parser.
+ */
 class ParserTest {
 
+    /**
+     * Tests Parser if it returns the correct formatted date and time
+     * provided the input date/time matches the format.
+     */
     @Test
     void testParserCorrectTime() {
         String correctFormatTime = "random description /by 20-01-2021 2359";
@@ -25,6 +32,9 @@ class ParserTest {
         }
     }
 
+    /**
+     * Tests the parseCommand method for invalid Commands.
+     */
     @Test
     void testParserInvalidCommand() {
         assertEquals(

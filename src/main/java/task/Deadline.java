@@ -1,8 +1,11 @@
 package task;
 
+/**
+ * A Task with a time-based deadline.
+ */
 public class Deadline extends Task {
 
-    String deadline;
+    private String deadline;
 
     public Deadline(String description, String deadline) {
         super(description);
