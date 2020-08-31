@@ -13,7 +13,7 @@ import java.util.List;
  * The Storage class handles the saving of the TaskList to a file, and the loading of Tasks from a file.
  */
 public class Storage {
-    private static String horizontalLine = "    ____________________________________________________________\n";
+    private static String HORIZONTAL_LINE = "    ____________________________________________________________\n";
 
     private String pathString;
 
@@ -45,11 +45,11 @@ public class Storage {
                 // If the file exists, read its contents
                 List<String> contents = Files.readAllLines(path, StandardCharsets.UTF_8);
                 if (contents.size() > 0) {
-                    System.out.printf(horizontalLine + "     Found an existing list at %s%n" + horizontalLine,
+                    System.out.printf(HORIZONTAL_LINE + "     Found an existing list at %s%n" + HORIZONTAL_LINE,
                                             path);
                 } else {
-                    System.out.printf(horizontalLine + "     Found an existing list, but it was empty!%n" +
-                                        horizontalLine);
+                    System.out.printf(HORIZONTAL_LINE + "     Found an existing list, but it was empty!%n" +
+                            HORIZONTAL_LINE);
                 }
 
                 // Parse each line of text and add it to the TasKList
@@ -57,7 +57,7 @@ public class Storage {
                     taskList.addTask(parser.parseFromStorage(taskLine));
                 }
             } else {
-                System.out.printf(horizontalLine + "     Existing list not found, creating new list\n" + horizontalLine);
+                System.out.printf(HORIZONTAL_LINE + "     Existing list not found, creating new list\n" + HORIZONTAL_LINE);
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
