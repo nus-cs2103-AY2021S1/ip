@@ -10,14 +10,6 @@ public class Deadline extends Task {
     protected String by;
 
     /**
-     * Returns deadline date and time as a String.
-     * @return The deadline date and time as a String.
-     */
-    public String getBy() {
-        return by;
-    }
-
-    /**
      * Initializes the Deadline with a description, LocalDate and LocalTime as its deadline.
      *
      * @param description The description of the deadline.
@@ -30,6 +22,16 @@ public class Deadline extends Task {
         this.time = time;
         this.by = convertDateAndTimeToString();
     }
+
+    /**
+     * Returns deadline date and time as a String.
+     * @return The deadline date and time as a String.
+     */
+    public String getBy() {
+        return by;
+    }
+
+
 
     // Date time format is dd/MM/yyyy tttt
     String convertDateAndTimeToString() {
@@ -57,6 +59,6 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() +  " (by: " + by + ")";
+        return "[D]" + super.toString() + " (by: " + by + ")";
     }
 }

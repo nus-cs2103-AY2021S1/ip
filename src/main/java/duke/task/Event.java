@@ -10,15 +10,6 @@ public class Event extends Task {
     protected String at;
 
     /**
-     * Returns the date and time of the event.
-     *
-     * @return The date and time of the event.
-     */
-    public String getAt() {
-        return at;
-    }
-
-    /**
      * Initializes an event task with its description, LocalDate and LocalTime for
      * the date and time of event.
      *
@@ -32,6 +23,17 @@ public class Event extends Task {
         this.time = time;
         this.at = convertDateAndTimeToString();
     }
+
+    /**
+     * Returns the date and time of the event.
+     *
+     * @return The date and time of the event.
+     */
+    public String getAt() {
+        return at;
+    }
+
+
 
 
     String convertDateAndTimeToString() {

@@ -17,3 +17,7 @@ dependencies {
 repositories {
     mavenCentral()
 }
+
+checkstyle {
+    toolVersion = '8.29'
+}
