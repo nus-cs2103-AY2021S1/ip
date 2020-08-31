@@ -6,6 +6,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -85,21 +86,37 @@ public class Duke extends Application {
         // Create button with text "Send" as the send button
         sendButton = new Button();
         sendButton.setText("Send");
+        sendButton.setPrefWidth(55.0);
 
         // Create the scroll pane
         scrollPane = new ScrollPane();
+        scrollPane.setPrefSize(385, 535);
+        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
+
+        scrollPane.setVvalue(1.0);
+        scrollPane.setFitToWidth(true);
 
         // Create the text input
         userInputTextField = new TextField();
+        userInputTextField.setPrefWidth(325.0);
 
         // Create the vertical box pane for the dialogue container
         dialogueContainer = new VBox();
+        dialogueContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
 
         // Add the content to the scroll pane for a scrollable content
         scrollPane.setContent(dialogueContainer);
 
         // Creates the main layout pane
         AnchorPane mainLayout = new AnchorPane();
+        AnchorPane.setTopAnchor(scrollPane, 1.0);
+
+        AnchorPane.setBottomAnchor(sendButton, 1.0);
+        AnchorPane.setRightAnchor(sendButton, 1.0);
+
+        AnchorPane.setLeftAnchor(userInputTextField , 1.0);
+        AnchorPane.setBottomAnchor(userInputTextField, 1.0);
         mainLayout.getChildren().addAll(scrollPane, userInputTextField, sendButton);
 
         // Sets the main layout as a scene
