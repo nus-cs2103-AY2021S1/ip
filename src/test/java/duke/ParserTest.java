@@ -9,7 +9,7 @@ import duke.commands.Command;
 public class ParserTest {
     private Parser parser = new Parser();
     @Test
-    public void doneCommand_exceptionThrown() {
+    public void doneCommand_noNumberGiven_exceptionThrown() {
         try {
             Command command = parser.findCommand("done five");
         } catch (DukeException e) {
@@ -18,7 +18,7 @@ public class ParserTest {
     }
 
     @Test
-    public void todoCommand_exceptionThrown() {
+    public void todoCommand_noDescriptionGiven_exceptionThrown() {
         try {
             Command command = parser.findCommand("todo");
         } catch (DukeException e) {
@@ -27,7 +27,7 @@ public class ParserTest {
     }
 
     @Test
-    public void wrongCommand_exceptionThrown() {
+    public void findCommand_wrongCommandGiven_exceptionThrown() {
         try {
             Command command = parser.findCommand("Todo");
         } catch (DukeException e) {

@@ -33,6 +33,10 @@ public class Event extends Task {
         return this.date;
     }
 
+    /**
+     * Reads through LocalDate and LocalTime of deadline in userInput and converts them to Strings.
+     * @return Formatted String version of LocalDate and LocalTime in input.
+     */
     private String convertDateAndTime() {
         String d1 = "";
         String[] descriptions = date.split(" ");

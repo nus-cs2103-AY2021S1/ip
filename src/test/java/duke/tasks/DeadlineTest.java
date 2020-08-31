@@ -10,7 +10,7 @@ import duke.DukeException;
 
 public class DeadlineTest {
     @Test
-    public void isSameDate_trueOrFalse() throws DukeException {
+    public void deadline_isSameDate_isTrue() throws DukeException {
         Deadline deadline = new Deadline("hi", "2020-10-19");
         LocalDate d1;
         d1 = LocalDate.parse("2020-10-19");

@@ -14,7 +14,7 @@ public class DateCommandTest {
     private TaskList list = new TaskList();
 
     @Test
-    public void dateDoesNotExist_exceptionThrown() {
+    public void dateCommandExecution_dateDoesNotExist_exceptionThrown() {
         try {
             command.execute(list, storage);
         } catch (DukeException e) {

@@ -1,4 +1,5 @@
 package duke;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -88,7 +89,7 @@ public class Storage {
      * @throws IOException throw when FileWriter operations fail.
      * @throws DukeException throw when error occurs and need to print error message.
      */
-    public void save(List<Task> tasks) throws IOException, DukeException {
+    public void saveToFile(List<Task> tasks) throws IOException, DukeException {
         try {
             FileWriter fw = new FileWriter(database);
             for (Task task : tasks) {

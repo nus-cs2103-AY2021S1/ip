@@ -1,4 +1,5 @@
 package duke;
+
 import java.io.IOException;
 
 import duke.commands.Command;
@@ -49,7 +50,7 @@ public class Duke {
                 Platform.exit();
             }
             String response = command.execute(tasks, storage);
-            storage.save(tasks.getList());
+            storage.saveToFile(tasks.getList());
             return response;
         } catch (DukeException | IOException e) {
             return (e.getMessage());
@@ -60,7 +61,7 @@ public class Duke {
      * Greets the user.
      * @return greeting message.
      */
-    public String greeting() {
+    public String getGreeting() {
         /*String logo = " ______  ___       __         __        _____\n"
                 + "   |    /         /  \\       /  \\     /\n"
                 + "   |    \\___     /____\\     /____\\   |\n"
