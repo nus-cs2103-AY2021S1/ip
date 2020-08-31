@@ -1,9 +1,9 @@
-package duke.Command;
+package duke.command;
 
 import duke.Storage;
-import duke.Task.TaskList;
-import duke.Ui.Message;
-import duke.Ui.Ui;
+import duke.task.TaskList;
+import duke.ui.Message;
+import duke.ui.Ui;
 
 /**
  * Lists all the tasks in the task list.

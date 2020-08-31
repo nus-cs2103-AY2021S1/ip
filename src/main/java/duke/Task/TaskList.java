@@ -1,7 +1,7 @@
-package duke.Task;
+package duke.task;
 
-import duke.Exception.DukeException;
-import duke.Ui.Ui;
+import duke.exception.DukeException;
+import duke.ui.Ui;
 
 import java.util.ArrayList;
 
@@ -12,7 +12,7 @@ public class TaskList {
      * Constructs a task list containing the elements of the specifies ArrayList of tasks,
      * in the order they are returned by the list's iterator.
      *
-     * @param tasks The ArrayList of tasks whose tasks are to be placed in the task list
+     * @param tasks The ArrayList of tasks whose tasks are to be placed in the task list.
      */
     public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
@@ -32,9 +32,9 @@ public class TaskList {
     /**
      * Retrieves the requested <code>Task</code> Object from the list.
      *
-     * @param taskId The 1-based index of the task to be fetched
-     * @return The requested <code>Task</code> object
-     * @throws DukeException If an invalid taskId is passed in
+     * @param taskId The 1-based index of the task to be fetched.
+     * @return The requested <code>Task</code> object.
+     * @throws DukeException If an invalid taskId is passed in.
      */
     public Task get(int taskId) throws DukeException {
         try {
@@ -53,9 +53,9 @@ public class TaskList {
     /**
      * Removes the requested <code>Task</code> Object from the list.
      *
-     * @param taskId The 1-based index of the task to be fetched
-     * @return The requested <code>Task</code> object
-     * @throws DukeException If an invalid taskId is passed in
+     * @param taskId The 1-based index of the task to be fetched.
+     * @return The requested <code>Task</code> object.
+     * @throws DukeException If an invalid taskId is passed in.
      */
     public Task remove(int taskId) throws DukeException {
         Task task = get(taskId);
@@ -66,7 +66,7 @@ public class TaskList {
     /**
      * Returns the number of tasks in the task list.
      *
-     * @return The number of tasks in the task list
+     * @return The number of tasks in the task list.
      */
     public int size() {
         return tasks.size();
@@ -75,7 +75,7 @@ public class TaskList {
     /**
      * Returns true if the task list contains no tasks.
      *
-     * @return True if the task list contains no task
+     * @return True if the task list contains no task.
      */
     public boolean isEmpty() {
         return tasks.isEmpty();
@@ -84,8 +84,8 @@ public class TaskList {
     /**
      * Filters the task list that contains the given keyword and returns a new task list.
      *
-     * @param keyword The keyword from user input to filter the task list
-     * @return The list of <code>Task</code> objects that contains the keyword
+     * @param keyword The keyword from user input to filter the task list.
+     * @return The list of <code>Task</code> objects that contains the keyword.
      */
     public TaskList filter(String keyword) {
         ArrayList<Task> resultWithKeyword = new ArrayList<>();

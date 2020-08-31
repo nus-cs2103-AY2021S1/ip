@@ -1,10 +1,10 @@
-package duke.Parser;
+package duke.parser;
 
-import duke.Command.AddCommand;
-import duke.Command.ExitCommand;
-import duke.Command.ListCommand;
-import duke.Command.CompleteCommand;
-import duke.Command.DeleteCommand;
+import duke.command.AddCommand;
+import duke.command.ExitCommand;
+import duke.command.ListCommand;
+import duke.command.CompleteCommand;
+import duke.command.DeleteCommand;
 
 import org.junit.jupiter.api.Test;
 

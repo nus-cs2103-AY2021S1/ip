@@ -1,6 +1,6 @@
-package duke.Task;
+package duke.task;
 
-import duke.Exception.DukeException;
+import duke.exception.DukeException;
 
 public abstract class Task {
     protected String description;
@@ -9,7 +9,7 @@ public abstract class Task {
     /**
      * Constructs a <code>Task</code> Object to represent a task.
      *
-     * @param description The description of a task
+     * @param description The description of a task.
      */
     public Task(String description) {
         this.description = description;
@@ -32,7 +32,7 @@ public abstract class Task {
     /**
      * Sets the status of a task as done.
      *
-     * @throws DukeException If a task is already marked as done before
+     * @throws DukeException If a task is already marked as done before.
      */
     public void markAsDone() throws DukeException {
         if (isDone) {

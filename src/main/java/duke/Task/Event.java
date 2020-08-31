@@ -1,6 +1,6 @@
-package duke.Task;
+package duke.task;
 
-import duke.Exception.DukeException;
+import duke.exception.DukeException;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -23,9 +23,9 @@ public class Event extends Task {
     /**
      * Constructs an <code>Event</code> Object to represent an event.
      *
-     * @param description The description of the event item
-     * @param at          The duration of the event (including the start and end of both date and time)
-     * @throws DukeException If the format of either date or time is incorrect
+     * @param description The description of the event item.
+     * @param at          The duration of the event (including the start and end of both date and time).
+     * @throws DukeException If the format of either date or time is incorrect.
      */
     public Event(String description, String at) throws DukeException {
         super(description);
@@ -40,7 +40,7 @@ public class Event extends Task {
             this.endDate = parseDate(dateSplit[1]);
 
             if (this.startDate.compareTo(this.endDate) > 0) {
-                throw new DukeException("The start date cannot be after the end date");
+                throw new DukeException("The start date cannot be after the end date.");
             }
         } else {
             this.startDate = parseDate(dateTime[0]);
@@ -51,7 +51,7 @@ public class Event extends Task {
         this.endTime = parseTime(timeSplit[1]);
 
         if (this.startTime.compareTo(this.endTime) > 0) {
-            throw new DukeException("The start time cannot be after the end time");
+            throw new DukeException("The start time cannot be after the end time.");
         }
 
     }
@@ -59,8 +59,8 @@ public class Event extends Task {
     /**
      * Parses a text and returns the date of an event.
      *
-     * @param dateString The text to be parsed
-     * @return The date of an event
+     * @param dateString The text to be parsed.
+     * @return The date of an event.
      */
     private LocalDate parseDate(String dateString) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy");
@@ -70,8 +70,8 @@ public class Event extends Task {
     /**
      * Parses a text and returns the time of an event.
      *
-     * @param timeString The text to be parsed
-     * @return The time of an event
+     * @param timeString The text to be parsed.
+     * @return The time of an event.
      */
     private LocalTime parseTime(String timeString) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("Hmm");

@@ -1,4 +1,4 @@
-package duke.Task;
+package duke.task;
 
 /**
  * Represents a task with description only.
@@ -8,7 +8,7 @@ public class ToDo extends Task {
     /**
      * Constructs a <code>ToDo</code> Object to represent a todo.
      *
-     * @param description The description of a todo item
+     * @param description The description of a todo item.
      */
     public ToDo(String description) {
         super(description);

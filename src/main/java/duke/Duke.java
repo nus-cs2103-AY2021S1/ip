@@ -1,15 +1,15 @@
 package duke;
 
-import duke.Command.Command;
+import duke.command.Command;
 
-import duke.Exception.DukeException;
+import duke.exception.DukeException;
 
-import duke.Parser.Parser;
+import duke.parser.Parser;
 
-import duke.Task.TaskList;
+import duke.task.TaskList;
 
-import duke.Ui.Message;
-import duke.Ui.Ui;
+import duke.ui.Message;
+import duke.ui.Ui;
 
 public class Duke {
 

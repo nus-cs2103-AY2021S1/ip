@@ -1,17 +1,17 @@
-package duke.Command;
+package duke.command;
 
 import duke.Storage;
 
-import duke.Exception.DukeException;
+import duke.exception.DukeException;
 
-import duke.Task.Task;
-import duke.Task.TaskList;
-import duke.Task.Deadline;
-import duke.Task.Event;
-import duke.Task.ToDo;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.ToDo;
 
-import duke.Ui.Message;
-import duke.Ui.Ui;
+import duke.ui.Message;
+import duke.ui.Ui;
 
 import java.util.Arrays;
 
@@ -25,7 +25,7 @@ public class AddCommand extends Command {
     /**
      * Constructs an <code>AddCommand</code> Object given description.
      *
-     * @param taskDescription The task description from user input, excluding the command word
+     * @param taskDescription The task description from user input, excluding the command word.
      */
     public AddCommand(String taskDescription) {
         this.desc = taskDescription;
@@ -35,12 +35,28 @@ public class AddCommand extends Command {
         return String.join(" ", Arrays.copyOfRange(strArr, 1, strArr.length));
     }
 
-    private static String getDate(String str, String delimiter) throws DukeException {
+    /**
+     * Retrieves both the date and time of an event or a deadline.
+     *
+     * @param str A string containing the description, date and time of an event or
+     *            deadline.
+     * @param delimiter The delimiter /at or /by.
+     * @return The date and time of an event or a deadline.
+     * @throws DukeException If the date and time of an event or a deadline is empty.
+     */
+    private static String getDateAndTime(String str, String delimiter) throws DukeException {
         String[] splitString = str.split("\\s+");
-        if (delimiter.equals(Deadline.delimiterBy) && splitString[splitString.length - 1].equals("/by")) {
-            throw new DukeException("The due time of a deadline cannot by empty");
-        } else if (delimiter.equals(Event.delimiterAt) && splitString[splitString.length - 1].equals("/at")) {
-            throw new DukeException("The time of an event cannot by empty");
+
+        boolean isDelimiterByMatched = delimiter.equals(Deadline.delimiterBy);
+        boolean isDelimiterAtMatched = delimiter.equals(Event.delimiterAt);
+
+        boolean isDeadlineTimeEmpty = splitString[splitString.length - 1].equals("/by");
+        boolean isEventTimeEmpty = splitString[splitString.length - 1].equals("/at");
+
+        if (isDelimiterByMatched && isDeadlineTimeEmpty) {
+            throw new DukeException("The due date and time of a deadline cannot by empty.");
+        } else if (isDelimiterAtMatched && isEventTimeEmpty) {
+            throw new DukeException("The date and time of an event cannot by empty.");
         }
 
         if (str.split(delimiter).length == 1) {
@@ -51,13 +67,28 @@ public class AddCommand extends Command {
         return str.split(delimiter)[1];
     }
 
-
-    private static String getWithoutDelimiter(String str, String delimiter) throws DukeException {
+    /**
+     * Retrieves the description of an event or a deadline.
+     *
+     * @param str A string containing the description, date and time of an event or
+     *            deadline.
+     * @param delimiter The delimiter /at or /by.
+     * @return The description of an event or a deadline.
+     * @throws DukeException If the description of an event or a deadline is empty.
+     */
+    private static String getDescription(String str, String delimiter) throws DukeException {
         String[] splitString = str.split("\\s+");
-        if (delimiter.equals(Deadline.delimiterBy) && splitString[0].equals("/by")) {
-            throw new DukeException("The description of a deadline cannot by empty");
-        } else if (delimiter.equals(Event.delimiterAt) && splitString[0].equals("/at")) {
-            throw new DukeException("The description of an event cannot by empty");
+
+        boolean isDelimiterByMatched = delimiter.equals(Deadline.delimiterBy);
+        boolean isDelimiterAtMatched = delimiter.equals(Event.delimiterAt);
+
+        boolean isDeadlineDescrEmpty = splitString[0].equals("/by");
+        boolean isEventDescrEmpty = splitString[0].equals("/at");
+
+        if (isDelimiterByMatched && isDeadlineDescrEmpty) {
+            throw new DukeException("The description of a deadline cannot by empty.");
+        } else if (isDelimiterAtMatched && isEventDescrEmpty) {
+            throw new DukeException("The description of an event cannot by empty.");
         }
         return str.split(delimiter)[0];
     }
@@ -72,8 +103,8 @@ public class AddCommand extends Command {
         String stringWithoutKeyword;
         stringWithoutKeyword = getStringWithoutKeyword(words);
 
-        String date;
-        String stringWithoutDelimiter;
+        String dateAndTime;
+        String description;
 
         switch (keyword) {
         case "todo":
@@ -85,22 +116,21 @@ public class AddCommand extends Command {
             break;
         case "deadline":
             if (words.length == 1 || (words[1].equals("/by") && words.length == 2)) {
-                throw new DukeException("The description and the due time of a deadline cannot be empty.");
+                throw new DukeException("The description and the due date and time of a deadline cannot be empty.");
             }
 
-            date = getDate(stringWithoutKeyword, Deadline.delimiterBy);
-            stringWithoutDelimiter = getWithoutDelimiter(stringWithoutKeyword, Deadline.delimiterBy);
-            newTask = new Deadline(stringWithoutDelimiter, date);
+            dateAndTime = getDateAndTime(stringWithoutKeyword, Deadline.delimiterBy);
+            description = getDescription(stringWithoutKeyword, Deadline.delimiterBy);
+            newTask = new Deadline(description, dateAndTime);
             break;
         case "event":
             if (words.length == 1 || (words[1].equals("/at") && words.length == 2)) {
-                throw new DukeException("The description and the time of an event cannot be empty.");
+                throw new DukeException("The description and the date and time of an event cannot be empty.");
             }
 
-            date = getDate(stringWithoutKeyword, Event.delimiterAt);
-            stringWithoutDelimiter = getWithoutDelimiter(stringWithoutKeyword, Event.delimiterAt);
-            newTask = new Event(stringWithoutDelimiter, date);
-
+            dateAndTime = getDateAndTime(stringWithoutKeyword, Event.delimiterAt);
+            description = getDescription(stringWithoutKeyword, Event.delimiterAt);
+            newTask = new Event(description, dateAndTime);
             break;
         default:
             throw new DukeException("I'm sorry, but I don't know what that means :-(");

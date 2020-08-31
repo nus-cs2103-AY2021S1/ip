@@ -4,13 +4,13 @@ import java.util.Scanner;
 
 import java.util.ArrayList;
 
-import duke.Exception.DukeException;
+import duke.exception.DukeException;
 
-import duke.Task.Task;
-import duke.Task.TaskList;
-import duke.Task.ToDo;
-import duke.Task.Deadline;
-import duke.Task.Event;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.ToDo;
+import duke.task.Deadline;
+import duke.task.Event;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -29,7 +29,7 @@ public class Storage {
     /**
      * Constructs a <code>Storage</code> Object using filePath.
      *
-     * @param filePath The filePath where the data is stored
+     * @param filePath The filePath where the data is stored.
      */
     public Storage(String filePath) {
         this.filePath = filePath;
@@ -38,8 +38,8 @@ public class Storage {
     /**
      * Loads the existing tasks from the data file.
      *
-     * @return An ArrayList of tasks which are stored in the data file
-     * @throws DukeException If file does not exist
+     * @return An ArrayList of tasks which are stored in the data file.
+     * @throws DukeException If file does not exist.
      */
     public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> tasks = new ArrayList<>();
@@ -81,8 +81,8 @@ public class Storage {
     /**
      * Saves the current tasks in the list to the data file.
      *
-     * @param tasks The TaskList to be saved to the destined filePath
-     * @throws DukeException If writing to file fails
+     * @param tasks The TaskList to be saved to the destined filePath.
+     * @throws DukeException If writing to file fails.
      */
     public void saveTasks(TaskList tasks) throws DukeException {
         try {

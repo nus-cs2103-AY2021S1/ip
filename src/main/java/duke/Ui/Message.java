@@ -1,6 +1,6 @@
-package duke.Ui;
+package duke.ui;
 
-import duke.Task.TaskList;
+import duke.task.TaskList;
 
 public class Message {
     public static final String MESSAGE_WELCOME = "Hello! I'm Duke\nWhat can I do for you?";
@@ -17,8 +17,8 @@ public class Message {
     /**
      * Prints the total number of tasks in the task list.
      *
-     * @param taskList The task list containing all the tasks
-     * @return A message of the total number of tasks in the task list
+     * @param taskList The task list containing all the tasks.
+     * @return A message of the total number of tasks in the task list.
      */
     public static String getTotalTaskMessage(TaskList taskList) {
         return "Now you have " + taskList.size()

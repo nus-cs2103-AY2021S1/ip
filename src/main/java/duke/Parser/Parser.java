@@ -1,12 +1,12 @@
-package duke.Parser;
+package duke.parser;
 
-import duke.Command.Command;
-import duke.Command.CompleteCommand;
-import duke.Command.ExitCommand;
-import duke.Command.ListCommand;
-import duke.Command.DeleteCommand;
-import duke.Command.AddCommand;
-import duke.Command.FindCommand;
+import duke.command.Command;
+import duke.command.CompleteCommand;
+import duke.command.ExitCommand;
+import duke.command.ListCommand;
+import duke.command.DeleteCommand;
+import duke.command.AddCommand;
+import duke.command.FindCommand;
 
 /**
  * Handles making sense of the user command.
@@ -16,8 +16,8 @@ public class Parser {
     /**
      * Parses user input and returns an executable <code>Command</code> Object.
      *
-     * @param str The raw user input
-     * @return An executable <code>Command</code> object
+     * @param str The raw user input.
+     * @return An executable <code>Command</code> object.
      */
     public static Command parse(String str) {
         if (str.equals("bye")) {
