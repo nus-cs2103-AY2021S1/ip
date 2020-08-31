@@ -31,6 +31,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        printIntro();
     }
 
     public void setDuke(Duke d) {
@@ -50,5 +51,10 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
+    }
+
+    private void printIntro() {
+        DialogBox intro = DialogBox.getDukeDialog("Hello from Duke! What can I do for you?", new Image(this.getClass().getResourceAsStream("/images/anotherEthan.png")));
+        dialogContainer.getChildren().addAll(intro);
     }
 }
