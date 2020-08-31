@@ -20,6 +20,7 @@ public class Datetime {
 
     /**
      * Constructor method.
+     *
      * @param datetime the actual <code>LocalDateTime</code>.
      * @param inputPattern the <code>String</code> format that <code>LocalDateTime</code>
      *                     is originally read in as.
@@ -34,6 +35,7 @@ public class Datetime {
 
     /**
      * Converts the datetime attribute to the format specified by <code>outputFormatter</code>.
+     *
      * @return the formatted date time <code>String</code>.
      */
     public String getOutputDatetimeString() {
@@ -42,6 +44,7 @@ public class Datetime {
 
     /**
      * Parses the datetime <code>String</code>, with its pattern to a <code>LocalDateTime</code>.
+     *
      * @param datetime the <code>String</code> that is to be parsed.
      * @param pattern the specified format of the datetime <code>String</code>.
      * @return the parsed <code>LocalDateTime</code>.
@@ -63,6 +66,7 @@ public class Datetime {
      * Parses the time <code>String</code> into a <code>LocalDateTime</code>.
      * The time is converted into a <code>LocalTime</code> first,
      * and then converted into a <code>LocalDateTime</code> with the date of today.
+     *
      * @param time the <code>String</code> that is to be parsed.
      * @param pattern the specified format of the time <code>String</code>.
      * @return the parsed <code>LocalDateTime</code>.

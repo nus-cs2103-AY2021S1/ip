@@ -24,6 +24,7 @@ public class StorageParser {
 
     /**
      * Converts a <code>Task</code> to a <code>String</code> that will be saved onto the storage text file.
+     *
      * @param task the <code>Task</code> that is to be converted.
      * @return the <code>String</code> representing the <code>Task</code>.
      */
@@ -82,6 +83,7 @@ public class StorageParser {
 
     /**
      * Converts a <code>String</code> from the storage text file into its associated <code>Task</code>.
+     *
      * @param storageTaskString the <code>String</code> that is to be converted.
      * @return the associated <code>Task</code> from the given <code>String</code>.
      * @throws DukeParseException if this does not recognise the

@@ -11,6 +11,7 @@ public final class Utils {
     /**
      * Concatenates the <code>String</code> elements of the array with specified indexes.
      * A whitespace is inserted in between all elements of the array.
+     *
      * @param arr the array of <code>String</code> that is to be concatenated.
      * @param start the starting index of the desired <code>String</code>.
      * @param end the last index the desired <code>String</code> is to end with.
@@ -30,6 +31,7 @@ public final class Utils {
     /**
      * Retrieves the index of a specified <code>String</code> within the array.
      * The method returns -1 if the specified <code>String</code> cannot be found.
+     *
      * @param arr the array that is to be searched on.
      * @param target the <code>String</code> that is to be searched for.
      * @return the index position of the target <code>String</code> in the array.
@@ -41,6 +43,7 @@ public final class Utils {
     /**
      * Checks if the given <code>String</code> element of the array can be
      * parsed into an <code>Integer</code>.
+     *
      * @param command the array that contains the <code>String</code> that can be
      *                parsed into an <code>Integer</code>.
      * @param index the index of the element that is to be checked.
