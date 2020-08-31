@@ -35,7 +35,7 @@ public class Task {
      * Checks if the task is done
      * @return a boolean indicating if the task is done
      */
-    public Boolean isDone(){
+    public Boolean isDone() {
         return this.done;
     }
 
@@ -43,7 +43,7 @@ public class Task {
      * Gets the task name
      * @return String representing the task's name
      */
-    public String getTaskName(){
+    public String getTaskName() {
         return this.taskName;
     }
 
@@ -52,7 +52,7 @@ public class Task {
      * @return String object representing the task
      */
     @Override
-    public String toString(){
+    public String toString() {
         String finished = this.done ? "✓" : "✗";
         String toReturn = "[" + finished + "]" + taskName;
         return toReturn;

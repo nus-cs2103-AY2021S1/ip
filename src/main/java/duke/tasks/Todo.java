@@ -15,7 +15,7 @@ public class Todo extends Task {
      * @param taskName name or description of task
      * @throws DukeInvalidTaskException
      */
-    public Todo(String taskName) throws DukeInvalidTaskException{
+    public Todo(String taskName) throws DukeInvalidTaskException {
         super(taskName);
     }
 

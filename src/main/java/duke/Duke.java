@@ -1,9 +1,9 @@
 package duke;
 
+import java.io.FileNotFoundException;
+
 import duke.exception.DukeException;
 
-import java.io.IOException;
-import java.io.FileNotFoundException;
 
 /**
  * The Duke class is the main class in which the program is run.
@@ -27,7 +27,7 @@ public class Duke {
             parser = new Parser();
         } catch (DukeException err) {
             System.out.println(err.getMessage());
-        } catch (FileNotFoundException err){
+        } catch (FileNotFoundException err) {
             System.out.println("File not found in filepath provided");
         }
     }
@@ -35,7 +35,7 @@ public class Duke {
     /**
      * Runs the program
      */
-    public void run(){
+    public void run() {
         ui.welcomeMessage(taskList);
         ui.start();
         boolean isEnd = false;

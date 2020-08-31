@@ -1,11 +1,11 @@
 package duke.tasks;
 
-import duke.exception.DukeInvalidDayException;
-import duke.exception.DukeInvalidTaskException;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+import duke.exception.DukeInvalidDayException;
+import duke.exception.DukeInvalidTaskException;
 
 /**
  * The Event class is used to represent the task of an event nature.
@@ -46,7 +46,7 @@ public class Event extends Task {
      *
      * @return a String representing the day.
      */
-    public String getDate(){
+    public String getDate() {
         if (dateTime != null) {
             return dateTime.toString();
         } else {

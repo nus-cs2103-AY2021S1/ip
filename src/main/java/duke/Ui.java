@@ -1,21 +1,27 @@
 package duke;
 
-import duke.tasks.Task;
-
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import duke.tasks.Task;
 
 /**
  * User Interface class where interactions with user are handled
  */
 public class Ui {
     private Scanner input;
-    private final static String UNDERSCORE = "____________________________________________________________ \n";
 
     /**
      * Initializes the Ui object
      */
     public Ui() { }
+
+    /**
+     * Shows a line to dictate separation
+     */
+    public static void showLine() {
+        System.out.println("____________________________________________________________ \n");
+    }
 
     /**
      * Displays a welcome message
@@ -36,8 +42,8 @@ public class Ui {
      * Displays a message to show that the task has been added
      */
     public void showAdded () {
-        System.out.println("Okay! I've added it to the list." +
-                " To view your current tasks, type 'list'");
+        System.out.println("Okay! I've added it to the list."
+                + " To view your current tasks, type 'list'");
     }
 
     /**
@@ -47,8 +53,8 @@ public class Ui {
      */
 
     public void showList(ArrayList<Task> list) {
-        System.out.println(UNDERSCORE);
-        if(list.size() == 0){
+        showLine();
+        if (list.size() == 0) {
             System.out.println("you do not have any tasks yet");
         } else {
             for (int i = 0; i < list.size(); i++) {
@@ -56,7 +62,7 @@ public class Ui {
                 System.out.println(" " + number + "." + list.get(i));
             }
         }
-        System.out.println(UNDERSCORE);
+        showLine();
     }
 
     /**
@@ -70,8 +76,8 @@ public class Ui {
      * Reads the next command
      * @return a String representing the command
      */
-    public String readCommand(){
-        if(input.hasNextLine()){
+    public String readCommand() {
+        if (input.hasNextLine()) {
             return input.nextLine();
         } else {
             return null;
@@ -82,13 +88,15 @@ public class Ui {
      * Displays a message indicating that the program has come to an end.
      */
     public void showEnd() {
-        System.out.println(UNDERSCORE + " Bye. Hope to see you again soon!" + "\n" + UNDERSCORE);
+        showLine();
+        System.out.println(" Bye. Hope to see you again soon!" + "\n");
+        showLine();
     }
 
     /**
      * Closes the Scanner object
      */
-    public void close(){
+    public void close() {
         input.close();
     }
 

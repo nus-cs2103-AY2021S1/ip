@@ -1,9 +1,10 @@
 package duke;
 
-import duke.tasks.Task;
-import duke.exception.DukeException;
-
 import java.util.ArrayList;
+
+import duke.exception.DukeException;
+import duke.tasks.Task;
+
 
 /**
  * The command class is used to handle and execute commands
@@ -65,7 +66,7 @@ public class Command {
             String toFind = split[1];
             ArrayList<Task> list = taskList.getList();
             ArrayList<Task> filtered = new ArrayList<>();
-            if(list.size() == 0) {
+            if (list.size() == 0) {
                 System.out.println("You do not have any tasks yet");
             } else {
                 System.out.println("Here are the tasks that matches '" + toFind + "'");
@@ -87,7 +88,7 @@ public class Command {
      * with the user, false indicating otherwise.
      */
 
-    public boolean isEnd(){
+    public boolean isEnd() {
         return this.end;
     }
 }

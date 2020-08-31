@@ -1,20 +1,16 @@
 package duke;
 
-import duke.tasks.Task;
-import duke.tasks.Event;
-import duke.tasks.Deadline;
-import duke.tasks.Todo;
-
-import duke.exception.DukeException;
-import duke.exception.DukeInvalidTaskException;
-import duke.exception.DukeInvalidDayException;
-import duke.exception.DukeInvalidDateException;
-
 import java.io.FileNotFoundException;
-
 import java.util.ArrayList;
 
-
+import duke.exception.DukeException;
+import duke.exception.DukeInvalidDateException;
+import duke.exception.DukeInvalidDayException;
+import duke.exception.DukeInvalidTaskException;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.Todo;
 
 /**
  * The TaskList class is used to keep track of the tasks given by the user.
@@ -24,7 +20,6 @@ import java.util.ArrayList;
 public class TaskList {
     private ArrayList<Task> todo;
     private Storage storage;
-    final static String UNDERSCORE = "____________________________________________________________ \n";
 
     /**
      * Initalizes a TaskList object
@@ -46,21 +41,21 @@ public class TaskList {
      * @throws DukeException
      */
 
-    public void delete(String line) throws DukeException{
+    public void delete(String line) throws DukeException {
         String[] splits = line.split("delete ");
-        try{
-            if(splits.length > 1) {
+        try {
+            if (splits.length > 1) {
                 int taskNumber = Integer.parseInt(splits[1]);
-                if (taskNumber - 1 >= todo.size() || taskNumber - 1 < 0 || todo.size() == 0){
+                if (taskNumber - 1 >= todo.size() || taskNumber - 1 < 0 || todo.size() == 0) {
                     throw new DukeException("Invalid task number");
                 } else {
                     int size = todo.size() - 1;
-                    System.out.println(UNDERSCORE + "Noted. I've removed this task: \n"
+                    Ui.showLine();
+                    System.out.println("Noted. I've removed this task: \n"
                             + todo.get(taskNumber - 1) + "\n" + "Now you have " + size + " task in the list \n"
-                            + UNDERSCORE
                     );
+                    Ui.showLine();
                     todo.remove(taskNumber - 1);
-    //                update storage file
                     storage.overwriteFile(todo);
                 }
             } else {
@@ -81,15 +76,17 @@ public class TaskList {
 
     public void addEvent (String line) throws DukeInvalidDayException, DukeInvalidTaskException {
         String[] splits = line.split("event |/at ");
-        if (splits.length > 2){
+        if (splits.length > 2) {
             Event task = new Event(splits[1], splits[2]);
             todo.add(task);
-            System.out.println(UNDERSCORE + "Got it. I've added this to task: \n" + task + "\n"
-                    + "Now you have " + todo.size() + " tasks in the list \n" + UNDERSCORE
+            Ui.showLine();
+            System.out.println("Got it. I've added this to task: \n" + task + "\n"
+                    + "Now you have " + todo.size() + " tasks in the list \n"
             );
+            Ui.showLine();
             String textToAppend = "\nE | 0 | " + splits[1] + " | " + splits[2];
             storage.appendFile(textToAppend);
-        } else if (splits.length > 1){
+        } else if (splits.length > 1) {
             throw new DukeInvalidDayException();
         } else {
             throw new DukeInvalidTaskException();
@@ -109,9 +106,11 @@ public class TaskList {
         if (splits.length > 2) {
             Deadline task = new Deadline(splits[1], splits[2]);
             todo.add(task);
-            System.out.println(UNDERSCORE + "Got it. I've added this to task: \n" + task + "\n"
-                    + "Now you have " + todo.size() + " tasks in the list \n" + UNDERSCORE
+            Ui.showLine();
+            System.out.println("Got it. I've added this to task: \n" + task + "\n"
+                    + "Now you have " + todo.size() + " tasks in the list \n"
             );
+            Ui.showLine();
             String textToAppend = "\nD | 0 | " + splits[1] + " | " + splits[2];
             storage.appendFile(textToAppend);
         } else if (splits.length > 1) {
@@ -129,12 +128,14 @@ public class TaskList {
      */
     public void addToDo (String line) throws DukeInvalidTaskException {
         String[] splits = line.split("todo ");
-        if(splits.length > 1) {
+        if (splits.length > 1) {
             Todo task = new Todo(splits[1]);
             todo.add(task);
-            System.out.println(UNDERSCORE + "Got it. I've added this to task: \n" + task + "\n"
-                    + "Now you have " + todo.size() + " tasks in the list \n" + UNDERSCORE
+            Ui.showLine();
+            System.out.println("Got it. I've added this to task: \n" + task + "\n"
+                    + "Now you have " + todo.size() + " tasks in the list \n"
             );
+            Ui.showLine();
             String textToAppend = "\nT | 0 | " + splits[1];
             storage.appendFile(textToAppend);
         } else {
@@ -150,9 +151,11 @@ public class TaskList {
 
     public void checkOff (Integer taskNumber) {
         todo.get(taskNumber - 1).checkOff();
-        System.out.println(UNDERSCORE + "Nice! I've marked this task as done: \n" +
-                todo.get(taskNumber - 1) + "\n" + UNDERSCORE
+        Ui.showLine();
+        System.out.println("Nice! I've marked this task as done: \n"
+                + todo.get(taskNumber - 1) + "\n"
         );
+        Ui.showLine();
         storage.overwriteFile(todo);
     }
 

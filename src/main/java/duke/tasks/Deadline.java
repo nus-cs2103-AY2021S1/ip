@@ -1,11 +1,12 @@
 package duke.tasks;
 
-import duke.exception.DukeInvalidDateException;
-import duke.exception.DukeInvalidTaskException;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+import duke.exception.DukeInvalidDateException;
+import duke.exception.DukeInvalidTaskException;
+
 
 /**
  * The Deadline class is used to represent the task of a deadline nature.
@@ -13,7 +14,7 @@ import java.time.format.DateTimeParseException;
  * Inherits from Task class.
  */
 
-public class Deadline extends Task{
+public class Deadline extends Task {
     private String date;
     private LocalDate dateTime;
 
@@ -28,9 +29,9 @@ public class Deadline extends Task{
 
     public Deadline(String taskName, String date) throws DukeInvalidDateException, DukeInvalidTaskException {
         super(taskName);
-        if(!date.equals(null) && !date.equals(" ")){
+        if (!date.equals(null) && !date.equals(" ")) {
             this.date = date;
-            try{
+            try {
                 this.dateTime = LocalDate.parse(date);
             } catch (DateTimeParseException err) {
                 System.out.println("for dates, please input the date in yyyy-mm-dd format");
@@ -46,7 +47,7 @@ public class Deadline extends Task{
      * @return a String representing the date.
      */
 
-    public String getDate(){
+    public String getDate() {
         if (dateTime == null) {
             return date;
         } else {
@@ -64,9 +65,9 @@ public class Deadline extends Task{
     public String toString() {
         String finished = this.done ? "✓" : "✗";
         String toReturn = dateTime == null
-                            ? "[D]" + "[" + finished + "] " + taskName + " (by: " + date +")"
+                            ? "[D]" + "[" + finished + "] " + taskName + " (by: " + date + ")"
                             : "[D]" + "[" + finished + "] " + taskName + " (by: "
-                                + dateTime.format(DateTimeFormatter.ofPattern("MMM d yyyy")) +")";
+                                + dateTime.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
         return toReturn;
     }
 }

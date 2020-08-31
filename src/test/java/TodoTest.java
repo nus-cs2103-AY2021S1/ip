@@ -1,12 +1,15 @@
-import duke.exception.DukeInvalidTaskException;
-import duke.tasks.Todo;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import duke.exception.DukeInvalidTaskException;
+import duke.tasks.Todo;
+
+
 
 public class TodoTest {
     @Test
-    public void initializeTodo(){
+    public void initializeTodo() {
         try {
             Todo task = new Todo("hi");
             String expected = "[T]" + "[✗] hi";
