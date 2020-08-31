@@ -7,7 +7,7 @@ import java.time.format.DateTimeFormatter;
 public class Event extends Task {
 
     /** The date which the event is happening at. */
-    public LocalDate date;
+    private LocalDate date;
 
     /** Constructor.
      *
@@ -28,6 +28,13 @@ public class Event extends Task {
     public Event(boolean isDone, String name, LocalDate date) {
         super(isDone, name);
         this.date = date;
+    }
+
+    /**
+     * @return The date which the event is happening at.
+     */
+    public LocalDate getDate() {
+        return date;
     }
 
     /** Returns the string representation of the task. */

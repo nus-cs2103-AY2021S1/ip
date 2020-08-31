@@ -1,7 +1,5 @@
 package duke.storage;
 
-import duke.tasks.Task;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -9,11 +7,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import duke.tasks.Task;
+
 /** Represents the storage system that saves the list of tasks. */
 public class Storage {
 
     /** The file that stores in the list of tasks in the hard disk. */
-    File dataFile;
+    private File dataFile;
 
     /** Constructor.
      *
@@ -49,7 +49,7 @@ public class Storage {
             System.out.println("An error occurred");
             e.printStackTrace();
         }
-            return lines;
+        return lines;
     }
 
     /** Saves the list of tasks into the hard disk.

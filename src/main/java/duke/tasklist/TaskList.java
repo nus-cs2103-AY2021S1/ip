@@ -1,14 +1,14 @@
 package duke.tasklist;
 
-import duke.tasks.Task;
-
 import java.util.ArrayList;
+
+import duke.tasks.Task;
 
 /** Represents the dynamic list of tasks. */
 public class TaskList {
 
     /** The list of tasks. */
-    public ArrayList<Task> tasks;
+    private ArrayList<Task> tasks;
 
     /** Constructor.
      *
@@ -16,6 +16,13 @@ public class TaskList {
      */
     public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
+    }
+
+    /**
+      * @return the list of tasks.
+     */
+    public ArrayList<Task> getTasks() {
+        return tasks;
     }
 
     /** Marks a task that is stored in the list as done.

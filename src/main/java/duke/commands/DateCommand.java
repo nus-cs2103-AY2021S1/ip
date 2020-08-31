@@ -1,18 +1,20 @@
 package duke.commands;
 
-import duke.storage.Storage;
-import duke.tasklist.TaskList;
-import duke.ui.Ui;
-import duke.tasks.*;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
+
+import duke.storage.Storage;
+import duke.tasklist.TaskList;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.ui.Ui;
 
 /** Represents the command that shows the deadlines/events occurring on a specific date inputted. */
 public class DateCommand extends Command {
 
     /** The inputted date. */
-    public LocalDate queryDate;
+    private LocalDate queryDate;
 
     /** Constructor.
      *
@@ -30,15 +32,15 @@ public class DateCommand extends Command {
      */
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         ArrayList<Task> tasksOnDate = new ArrayList<>();
-        for (Task task : taskList.tasks) {
+        for (Task task : taskList.getTasks()) {
             if (task instanceof Deadline) {
                 Deadline deadline = (Deadline) task;
-                if (deadline.date.equals(queryDate)) {
+                if (deadline.getDate().equals(queryDate)) {
                     tasksOnDate.add(deadline);
                 }
             } else if (task instanceof Event) {
                 Event event = (Event) task;
-                if (event.date.equals(queryDate)) {
+                if (event.getDate().equals(queryDate)) {
                     tasksOnDate.add(event);
                 }
             }

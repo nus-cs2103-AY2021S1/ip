@@ -8,7 +8,7 @@ import duke.ui.Ui;
 public class DeleteCommand extends Command {
 
     /** The index of the task to be deleted. */
-    public int num;
+    private int num;
 
     /** Constructor.
      *
@@ -27,8 +27,8 @@ public class DeleteCommand extends Command {
      * @param storage The storage system that saves the taskList.
      */
     public void execute(TaskList taskList, Ui ui, Storage storage) {
-        ui.formatDeleteTask(taskList.tasks, num);
+        ui.formatDeleteTask(taskList.getTasks(), num);
         taskList.deleteTask(num);
-        storage.saveTaskList(taskList.tasks);
+        storage.saveTaskList(taskList.getTasks());
     }
 }

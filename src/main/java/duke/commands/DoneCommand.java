@@ -5,10 +5,10 @@ import duke.tasklist.TaskList;
 import duke.ui.Ui;
 
 /** Represents the command that marks a task in the taskList as done. */
-public class DoneCommand extends  Command {
+public class DoneCommand extends Command {
 
     /** The index of the task to be marked as done. */
-    public int num;
+    private int num;
 
     /** Constructor.
      *
@@ -29,7 +29,7 @@ public class DoneCommand extends  Command {
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         taskList.markTaskAsDone(num);
-        ui.formatMarkAsDone(taskList.tasks, num);
-        storage.saveTaskList(taskList.tasks);
+        ui.formatMarkAsDone(taskList.getTasks(), num);
+        storage.saveTaskList(taskList.getTasks());
     }
 }

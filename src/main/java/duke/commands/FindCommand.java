@@ -1,17 +1,17 @@
 package duke.commands;
 
+import java.util.ArrayList;
+
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
 import duke.tasks.Task;
 import duke.ui.Ui;
 
-import java.util.ArrayList;
-
 /** Represents the command that finds the tasks that contain the keyword. */
 public class FindCommand extends Command {
 
     /** The keyword to query. */
-    public String keyword;
+    private String keyword;
 
     /** Constructor.
      *
@@ -30,8 +30,8 @@ public class FindCommand extends Command {
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         ArrayList<Task> matchingTasks = new ArrayList<>();
-        for (Task task : taskList.tasks) {
-            if (task.name.contains(keyword)) {
+        for (Task task : taskList.getTasks()) {
+            if (task.getName().contains(keyword)) {
                 matchingTasks.add(task);
             }
         }

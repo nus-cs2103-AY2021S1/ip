@@ -3,9 +3,9 @@ package duke.tasks;
 /** Represents the task that is stored in the list. */
 public class Task {
     /** The indicator of whether the task is done. */
-    public boolean isDone;
+    private boolean isDone;
     /** The description of the task. */
-    public String name;
+    private String name;
 
     /** Constructor.
      *
@@ -26,6 +26,20 @@ public class Task {
         this.name = name;
     }
 
+    /**
+     * @return The indicator of whether the task is done.
+     */
+    public boolean getIsDone() {
+        return isDone;
+    }
+
+    /**
+     * @return The description of the task.
+     */
+    public String getName() {
+        return name;
+    }
+
     /** Marks the task as done. */
     public void markAsDone() {
         isDone = true;
@@ -33,6 +47,6 @@ public class Task {
 
     /** Returns the string representation of the task. */
     public String toString() {
-        return String.format("[%s] %s", isDone ? "DONE" : "NOT DONE", name);
+        return String.format("[%s] %s", isDone ? "O" : "X", name);
     }
 }

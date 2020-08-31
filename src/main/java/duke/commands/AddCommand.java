@@ -1,15 +1,15 @@
 package duke.commands;
 
 import duke.storage.Storage;
-import duke.tasks.Task;
 import duke.tasklist.TaskList;
+import duke.tasks.Task;
 import duke.ui.Ui;
 
 /** Represents the command that adds a task to the taskList when executed. */
 public class AddCommand extends Command {
 
     /** The task to be added. */
-    public Task task;
+    private Task task;
 
     /** Constructor.
      *
@@ -30,7 +30,7 @@ public class AddCommand extends Command {
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         taskList.addTask(task);
-        ui.formatAddTask(taskList.tasks, task);
-        storage.saveTaskList(taskList.tasks);
+        ui.formatAddTask(taskList.getTasks(), task);
+        storage.saveTaskList(taskList.getTasks());
     }
 }

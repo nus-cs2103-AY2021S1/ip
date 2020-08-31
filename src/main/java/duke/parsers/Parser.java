@@ -1,29 +1,27 @@
 package duke.parsers;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+
 import duke.commands.AddCommand;
 import duke.commands.ByeCommand;
 import duke.commands.Command;
+import duke.commands.DateCommand;
 import duke.commands.DeleteCommand;
 import duke.commands.DoneCommand;
 import duke.commands.FindCommand;
 import duke.commands.ListCommand;
-import duke.commands.DateCommand;
-
 import duke.exceptions.DukeException;
 import duke.exceptions.InvalidDukeCommandException;
 import duke.exceptions.InvalidTaskIndexException;
 import duke.exceptions.MissingDateTimeException;
 import duke.exceptions.MissingTaskDescriptionException;
 import duke.exceptions.MissingTaskIndexException;
-
 import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.Task;
 import duke.tasks.ToDo;
-
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 
 /** Represents a parser that parses the user inputs and the list saved in the hard disk into a suitable format
  * for Duke to process. */
@@ -124,7 +122,6 @@ public class Parser {
     }
 
     private boolean isDone(String symbol) {
-        String tick = "" + '\u2713';
-        return symbol.equals(tick);
+        return symbol.equals("O");
     }
 }

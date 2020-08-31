@@ -1,6 +1,7 @@
 package duke.tasklist;
 
-import duke.tasks.*;
+import duke.tasks.Task;
+import duke.tasks.ToDo;
 
 import java.util.ArrayList;
 
@@ -17,7 +18,7 @@ public class TaskListTest {
         ToDo toDo = new ToDo("read book");
         taskList.addTask(toDo);
         taskList.markTaskAsDone(0);
-        assertEquals(true, toDo.isDone);
+        assertEquals(true, toDo.getIsDone());
     }
 
     @Test

@@ -1,19 +1,18 @@
 package duke;
 
-import duke.storage.Storage;
-import duke.tasklist.TaskList;
-import duke.ui.Ui;
-import duke.parsers.Parser;
-import duke.tasks.Task;
-import duke.exceptions.DukeException;
-import duke.commands.Command;
-
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
+import duke.commands.Command;
+import duke.exceptions.DukeException;
+import duke.parsers.Parser;
+import duke.storage.Storage;
+import duke.tasklist.TaskList;
+import duke.tasks.Task;
+import duke.ui.Ui;
+
 /** Represents the main class. */
 public class Duke {
-
     private Storage storage;
     private TaskList taskList;
     private Ui ui;
@@ -40,7 +39,7 @@ public class Duke {
         try {
             while (!isExit) {
                 String userInput = ui.readCommand();
-                Command c = parser.parse(userInput, taskList.tasks);
+                Command c = parser.parse(userInput, taskList.getTasks());
                 c.execute(taskList, ui, storage);
                 isExit = c.isExit();
             }

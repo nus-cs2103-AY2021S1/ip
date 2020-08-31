@@ -1,12 +1,12 @@
 package duke.ui;
 
-import duke.tasks.Task;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.Scanner;
+
+import duke.tasks.Task;
 
 /** Represents the UI that prints out messages in Duke format. */
 public class Ui {
@@ -53,7 +53,7 @@ public class Ui {
         if (size > 0) {
             System.out.println("Here are the tasks in your list:");
             for (int i = 1; i <= tasks.size(); i++) {
-                System.out.println(i + "." + tasks.get(i-1));
+                System.out.println(i + "." + tasks.get(i - 1));
             }
         } else {
             System.out.println("There are no tasks in your list.");
@@ -113,7 +113,7 @@ public class Ui {
             System.out.println(String.format("The following deadlines/events are scheduled on %s.",
                     queryDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy"))));
             for (int i = 1; i <= tasksOnDate.size(); i++) {
-                System.out.println(i + "." + tasksOnDate.get(i-1));
+                System.out.println(i + "." + tasksOnDate.get(i - 1));
             }
         } else {
             System.out.println(String.format("There are no deadlines/events scheduled on %s.",
@@ -131,7 +131,7 @@ public class Ui {
         if (!matchingTasks.isEmpty()) {
             System.out.println("Here are the matching tasks in your list:");
             for (int i = 1; i <= matchingTasks.size(); i++) {
-                System.out.println(i + "." + matchingTasks.get(i-1));
+                System.out.println(i + "." + matchingTasks.get(i - 1));
             }
         } else {
             System.out.println("There are no matching tasks in your list.");

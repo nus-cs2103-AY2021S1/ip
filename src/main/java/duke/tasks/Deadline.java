@@ -7,7 +7,7 @@ import java.time.format.DateTimeFormatter;
 public class Deadline extends Task {
 
     /** The date which the deadline should be done by. */
-    public LocalDate date;
+    private LocalDate date;
 
     /** Constructor.
      *
@@ -28,6 +28,13 @@ public class Deadline extends Task {
     public Deadline(boolean isDone, String name, LocalDate date) {
         super(isDone, name);
         this.date = date;
+    }
+
+    /**
+     * @return The date which the deadline should be done by.
+     */
+    public LocalDate getDate() {
+        return date;
     }
 
     /** Returns the string representation of the task. */
