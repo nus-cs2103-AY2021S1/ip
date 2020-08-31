@@ -3,6 +3,7 @@ package duke;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
@@ -83,10 +84,19 @@ public class Duke extends Application {
         primaryStage.setMinWidth(400.0);
         primaryStage.setMinHeight(600.0);
 
+
         // Create button with text "Send" as the send button
         sendButton = new Button();
         sendButton.setText("Send");
         sendButton.setPrefWidth(55.0);
+
+
+        // Set send button event handlers
+        sendButton.setOnMouseClicked(event -> {
+            dialogueContainer.getChildren().add(getDialogLabel(userInputTextField.getText()));
+            userInputTextField.clear();
+        });
+
 
         // Create the scroll pane
         scrollPane = new ScrollPane();
@@ -97,16 +107,27 @@ public class Duke extends Application {
         scrollPane.setVvalue(1.0);
         scrollPane.setFitToWidth(true);
 
+
         // Create the text input
         userInputTextField = new TextField();
         userInputTextField.setPrefWidth(325.0);
+
+
+        // Sets the action on text change
+        userInputTextField.setOnAction(event -> {
+            dialogueContainer.getChildren().add(getDialogLabel(userInputTextField.getText()));
+            userInputTextField.clear();
+        });
+
 
         // Create the vertical box pane for the dialogue container
         dialogueContainer = new VBox();
         dialogueContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
 
+
         // Add the content to the scroll pane for a scrollable content
         scrollPane.setContent(dialogueContainer);
+
 
         // Creates the main layout pane
         AnchorPane mainLayout = new AnchorPane();
@@ -119,11 +140,27 @@ public class Duke extends Application {
         AnchorPane.setBottomAnchor(userInputTextField, 1.0);
         mainLayout.getChildren().addAll(scrollPane, userInputTextField, sendButton);
 
+
         // Sets the main layout as a scene
         Scene scene = new Scene(mainLayout, 300 ,500);
+
 
         // Sets the scene for the stage
         primaryStage.setScene(scene);
         primaryStage.show();
+    }
+
+    /**
+     * Iteration 1:
+     * Creates a label with the specified text and adds it to the dialog container.
+     * @param text String containing text to add
+     * @return a label with the specified text that has word wrap enabled.
+     */
+    private Label getDialogLabel(String text) {
+        // You will need to import `javafx.scene.control.Label`.
+        Label textToAdd = new Label(text);
+        textToAdd.setWrapText(true);
+
+        return textToAdd;
     }
 }
