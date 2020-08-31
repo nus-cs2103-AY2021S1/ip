@@ -22,6 +22,14 @@ public class Main extends Application {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
+            stage.setTitle("Duke Chatbot");
+            stage.setOnCloseRequest(e -> {
+                e.consume();
+                Boolean answer = ConfirmBox.display("Title", "Are you sure you want to exit duke, Boss?");
+                if (answer) {
+                    stage.close();
+                }
+            });
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.show();
@@ -29,4 +37,5 @@ public class Main extends Application {
             e.printStackTrace();
         }
     }
+
 }
