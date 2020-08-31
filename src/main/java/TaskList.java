@@ -14,7 +14,7 @@ import java.util.Scanner;
  */
 public class TaskList {
 
-    private static List<Task> taskList = new ArrayList<>();
+    private List<Task> taskList = new ArrayList<>();
 
     /**
      * Generates an Task list based on the retrieved file of the user's saved tasks.

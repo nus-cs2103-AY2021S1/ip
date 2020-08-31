@@ -9,18 +9,46 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class TaskListTest {
 
-    @Test
-    void generateList() {
+    String home = System.getProperty("user.home");
+    File testFile = new File(home + "/ip/src/main/java/Data/TestFile.txt");
 
+    @Test
+    void generateList_validFile() {
+        TaskList taskList = new TaskList();
+
+        try {
+            taskList.generateList(testFile);
+            assertEquals(2, taskList.size());
+        } catch (Exception e) {
+            fail();
+        }
     }
 
     @Test
-    void size() {
+    void generateList_nonExistentFile() {
+        TaskList taskList = new TaskList();
 
+        try {
+            File file = new File("testFile.txt");
+            taskList.generateList(file);
+        } catch (FileNotFoundException e) {
+
+        } catch (Exception e) {
+            fail();
+        }
     }
 
     @Test
-    void get() {
+    void size_correctSize() {
+        TaskList list = new TaskList();
 
+        try {
+            list.generateList(testFile);
+            list.add(new Task("test"));
+            assertEquals(3, list.size());
+        } catch (Exception e) {
+            fail();
+        }
     }
+
 }

@@ -244,6 +244,11 @@ public class Parser {
 
             //Split into date + time
             String[] parts = timeDate.split(" ", 2);
+
+            if (parts.length < 2) {
+                throw new InvalidCommandException("Missing time");
+            }
+
             String date = parts[0].trim();
 
             return LocalDate.parse(date);
@@ -260,6 +265,11 @@ public class Parser {
 
             //Split into date + time
             String[] parts = timeDate.split(" ", 2);
+
+            if (parts.length < 2) {
+                throw new InvalidCommandException("Missing time");
+            }
+
             String date = parts[1].trim();
 
             return LocalTime.parse(date);
