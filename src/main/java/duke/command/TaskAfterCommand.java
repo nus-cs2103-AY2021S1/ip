@@ -35,8 +35,7 @@ public class TaskAfterCommand extends Command {
      * @param storage Storage to save the data to the hard disk.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        String message = ui.eachTaskAfter(date, tasks);
-        ui.sendMessage(message);
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        return ui.eachTaskAfter(date, tasks);
     }
 }

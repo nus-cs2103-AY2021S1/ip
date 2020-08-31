@@ -25,12 +25,11 @@ public class ListCommand extends Command {
      * @throws DukeException If TaskList is empty.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (tasks.isEmpty()) {
             throw new NoTaskException();
         } else {
-            String message = ui.showList(tasks);
-            ui.sendMessage(message);
+            return ui.showList(tasks);
         }
     }
 }

@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import duke.utility.Storage;
 import duke.utility.TaskList;
 import duke.utility.Ui;
+
 /**
  * This class represents the task before command.
  * When executed, the class will display all the task before or
@@ -35,8 +36,7 @@ public class TaskBeforeCommand extends Command {
      * @param storage Storage to save the data to the hard disk.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        String message = ui.eachTaskBefore(date, tasks);
-        ui.sendMessage(message);
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        return ui.eachTaskBefore(date, tasks);
     }
 }

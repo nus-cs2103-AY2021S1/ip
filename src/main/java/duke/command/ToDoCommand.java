@@ -37,11 +37,10 @@ public class ToDoCommand extends Command {
      * @throws DukeException If the storage fails to save to the hard disk.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Task task = new ToDoTask(taskName);
         tasks.addTask(task);
         storage.saveTaskToFile(task);
-        String message = ui.addSuccess(task, tasks.size());
-        ui.sendMessage(message);
+        return ui.addSuccess(task, tasks.size());
     }
 }

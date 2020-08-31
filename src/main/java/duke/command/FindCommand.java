@@ -31,8 +31,7 @@ public class FindCommand extends Command {
      * @param storage Storage to save the data to the hard disk.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        String message = ui.findTask(keyword, tasks);
-        ui.sendMessage(message);
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        return ui.findTask(keyword, tasks);
     }
 }

@@ -38,17 +38,17 @@ public class Ui {
     /**
      * Welcomes the user when the user starts Duke.
      */
-    public void welcome() {
-        String message = "Hi! My name is Duke.\nWhat do you want me to do?";
-        sendMessage(message);
+    public String welcome() {
+        return "Hi! My name is Duke.\nWhat do you want me to do?";
+//        sendMessage(message);
     }
 
     /**
      * Sends a farewell message to the user when the user exit Duke.
      */
-    public void exit() {
-        String message = "Bye. Thank you for using me!";
-        sendMessage(message);
+    public String exit() {
+        return "Bye. Thank you for using me!";
+//        sendMessage(message);
     }
 
     /**

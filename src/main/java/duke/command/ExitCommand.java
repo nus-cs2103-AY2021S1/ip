@@ -19,7 +19,8 @@ public class ExitCommand extends Command {
      * @param storage Storage to save the data to the hard disk.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         super.exit();
+        return ui.exit();
     }
 }

@@ -6,8 +6,7 @@ import duke.utility.TaskList;
 import duke.utility.Ui;
 
 /**
- * Class to represents all command. This class also contains
- * specific string for commands.
+ * Class to represents all command. This class also contains specific string for commands.
  */
 public abstract class Command {
     private static final String COMMAND_BYE = "bye";
@@ -31,7 +30,6 @@ public abstract class Command {
 
     /**
      * Returns whether the Duke should stop running or not.
-     *
      * @return Duke's current state to continue running.
      */
     public boolean isExit() {
@@ -47,7 +45,6 @@ public abstract class Command {
 
     /**
      * Gets the string representation to start bye command
-     *
      * @return String to specify of bye command
      */
     public static String getCommandBye() {
@@ -56,7 +53,6 @@ public abstract class Command {
 
     /**
      * Gets the string representation to start list command
-     *
      * @return String to specify of list command
      */
     public static String getCommandList() {
@@ -65,7 +61,6 @@ public abstract class Command {
 
     /**
      * Gets the string representation to start done command
-     *
      * @return String to specify of done command
      */
     public static String getCommandDone() {
@@ -74,7 +69,6 @@ public abstract class Command {
 
     /**
      * Gets the string representation to start delete command
-     *
      * @return String to specify of delete command
      */
     public static String getCommandDelete() {
@@ -83,7 +77,6 @@ public abstract class Command {
 
     /**
      * Gets the string representation to start todo command
-     *
      * @return String to specify of todo command
      */
     public static String getCommandTodo() {
@@ -92,7 +85,6 @@ public abstract class Command {
 
     /**
      * Gets the string representation to start deadline command
-     *
      * @return String to specify of deadline command
      */
     public static String getCommandDeadline() {
@@ -101,7 +93,6 @@ public abstract class Command {
 
     /**
      * Gets the string representation to start event command
-     *
      * @return String to specify of event command
      */
     public static String getCommandEvent() {
@@ -110,7 +101,6 @@ public abstract class Command {
 
     /**
      * Gets the string representation to start task after command
-     *
      * @return String to specify of task after command
      */
     public static String getCommandTaskAfter() {
@@ -119,7 +109,6 @@ public abstract class Command {
 
     /**
      * Gets the string representation to start task before command
-     *
      * @return String to specify of task before command
      */
     public static String getCommandTaskBefore() {
@@ -128,7 +117,6 @@ public abstract class Command {
 
     /**
      * Gets the string representation to start find command
-     *
      * @return String to specify of find command
      */
     public static String getCommandFind() {
@@ -137,11 +125,10 @@ public abstract class Command {
 
     /**
      * Executes the command.
-     *
      * @param tasks TaskList of the current task.
      * @param ui Ui to deals with interactions with the user.
      * @param storage Storage to save the data to the hard disk.
      * @throws DukeException Thrown when something when wrong when executing the command.
      */
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
+    public abstract String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
 }

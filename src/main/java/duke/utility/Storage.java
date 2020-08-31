@@ -74,7 +74,6 @@ public class Storage {
                         taskLine = taskLine.replaceFirst("0", "1");
                     }
                 }
-
                 sb.append(taskLine);
                 count++;
             }
