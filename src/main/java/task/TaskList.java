@@ -20,43 +20,47 @@ public class TaskList {
     }
 
     /**
-     * Prints the tasks in the list.
+     * Creates string to print the tasks in the list.
+     * @return str String to be returned.
      */
-    public void list() {
-        System.out.println("Here are the tasks in your list:");
+    public String list() {
+        String str = "Here are the tasks in your list:\n";
         for (int i = 1; i < tasks.size() + 1; i++) {
-            String item = i + "." + tasks.get(i - 1).toString();
-            System.out.println(item);
+            str += i + "." + tasks.get(i - 1).toString() + '\n';
         }
+        return str;
     }
 
     /**
      * Adds the tasks to the tasklist.
      *
      * @param task Task to be added.
+     * @return str String to be returned.
      */
-    public void addTask(Task task) {
+    public String addTask(Task task) {
         this.tasks.add(task);
         // inform user item has been added
-        System.out.println("Got it. I've added this task:");
-        System.out.println(task.toString());
-        System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+        String str = "Got it. I've added this task:\n"
+            + task.toString() + "\n"
+            + "Now you have " + tasks.size() + " tasks in the list.\n";
+        return str;
     }
-
 
     /**
      * Deletes the tasks from the tasklist.
      *
      * @param taskNo Task number to be deleted.
+     * @return str String to be returned.
      */
-    public void deleteTask(int taskNo) throws DukeException {
+    public String deleteTask(int taskNo) throws DukeException {
         // verify task number exists, then delete
         if (taskNo - 1 < tasks.size()) {
             Task toDelete = tasks.get(taskNo - 1);
             tasks.remove(taskNo - 1);
-            System.out.println("Noted. I've removed this task:");
-            System.out.println(toDelete.toString());
-            System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+            String str = "Noted. I've removed this task:\n"
+                + toDelete.toString() + "\n"
+                + "Now you have " + tasks.size() + " tasks in the list.\n";
+            return str;
         } else {
             // task number does not exist
             throw new DukeException("Sorry, this task does not exist!\n");
@@ -67,8 +71,9 @@ public class TaskList {
      * Marks the tasks as completed in the tasklist.
      *
      * @param taskNo Task number to be marked as done.
+     * @return str String to be returned.
      */
-    public void markTaskDone(int taskNo) throws DukeException {
+    public String markTaskDone(int taskNo) throws DukeException {
         // verify task number exists, then mark as done
         if (taskNo - 1 < tasks.size()) {
             if (tasks.get(taskNo - 1).isDone) {
@@ -76,8 +81,9 @@ public class TaskList {
                 throw new DukeException("Task is already done! :)\n");
             } else {
                 tasks.get(taskNo - 1).markAsDone();
-                System.out.println("Nice! I've marked this task as done:");
-                System.out.println(tasks.get(taskNo - 1).toString());
+                String str = "Nice! I've marked this task as done:\n"
+                    + tasks.get(taskNo - 1).toString();
+                return str;
             }
         } else {
             // task number does not exist
@@ -89,21 +95,23 @@ public class TaskList {
      * Finds tasks with given keyword and prints them.
      *
      * @param keyword String that user wants to find task with.
+     * @return str String to be returned.
      * @throws DukeException if keyword is empty.
      */
-    public void findTask(String keyword) throws DukeException {
+    public String findTask(String keyword) throws DukeException {
         if (keyword == null) {
             throw new DukeException("Please indicate the keyword you wish to use to find tasks with.");
         } else {
-            System.out.println("Here are the matching tasks in your list:");
+            String str = "Here are the matching tasks in your list:\n";
             for (int i = 0; i < tasks.size(); i++) {
                 Task task = tasks.get(i);
                 boolean isFound = task.description.contains(keyword);
 
                 if (isFound) {
-                    System.out.println((i + 1) + "." + task.toString());
+                    str += (i + 1) + "." + task.toString() + "\n";
                 }
             }
+            return str;
         }
     }
 }

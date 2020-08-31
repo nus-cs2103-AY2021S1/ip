@@ -6,15 +6,19 @@ public class Duke {
     protected Storage storage;
     protected TaskList taskList;
     protected Ui ui;
+    protected Parser parser;
+    protected boolean hasGreeted;
 
     /**
      * Creates Duke object by loading tasks stored locally in filePath.
+     *
      * @param filePath File path to .txt file to load tasks stored locally.
      */
     public Duke(String filePath) {
         this.storage = new Storage(filePath);
         this.ui = new Ui();
         this.taskList = new TaskList(storage.tasks);
+        this.parser = new Parser(this);
     }
 
     /**
@@ -26,33 +30,25 @@ public class Duke {
 
     /**
      * Runs Duke.
+     *
      * @throws DukeException
      */
-    public void run() throws DukeException {
-        // displayed once Duke is run, without input from user
-        this.ui.greetings();
-        Parser parser = new Parser(this);
-        boolean isExit = false;
+    public String run(String input) throws DukeException {
+        String response = null;
+        try {
+            Command command = parser.parse(input, this.taskList);
+            response = command.execute();
+            if (response.equals("exit")) {
+                // Save tasks before terminating program
+                this.storage.saveTasks(this.taskList.tasks);
+                return this.ui.goodbye();
+            } else if (response == null) {
 
-        while (!isExit) {
-            String input = this.ui.readCommand();
-            try {
-                Command command = parser.parse(input, this.taskList);
-                this.ui.showLine();
-                command.execute();
-                isExit = command.isExit;
-            } catch (DukeException ex) {
-                System.out.println(ex);
             }
-
-            if (!isExit) {
-                this.ui.showLine();
-            }
+        } catch (DukeException ex) {
+            response = ex.getMessage();
         }
-
-        // Save tasks before terminating program
-        this.storage.saveTasks(this.taskList.tasks);
-        this.ui.goodbye();
+        return response;
     }
 
     /**
@@ -62,15 +58,21 @@ public class Duke {
      */
     public static void main(String[] args) throws DukeException {
         Duke duke = new Duke("duke.txt");
-        duke.run();
     }
 
     /**
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
-    String getResponse(String input) {
-        return "Your Dark Side: " + input;
+    String getResponse(String input) throws DukeException {
+        return "Your Dark Side:\n" + this.run(input);
+    }
+
+    /**
+     * Sets hasGreeted boolean to true;
+     */
+    void setHasGreeted() {
+        this.hasGreeted = true;
     }
 }
 

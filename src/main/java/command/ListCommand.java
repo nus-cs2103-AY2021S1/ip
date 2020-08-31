@@ -10,10 +10,11 @@ public class ListCommand extends Command {
 
     /**
      * Lists tasks in list of tasks.
+     * @return String that lists all tasks.
      */
     @Override
-    public void execute() {
-        this.tasks.list();
+    public String execute() {
+        return this.tasks.list();
     }
 }
 

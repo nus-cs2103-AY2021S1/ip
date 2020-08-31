@@ -10,9 +10,10 @@ public class EndCommand extends Command {
 
     /**
      * Updates isExit boolean to true.
+     * @return String "exit" to signal termination of program.
      */
     @Override
-    public void execute() {
-        this.isExit = true;
+    public String execute() {
+        return "exit";
     }
 }

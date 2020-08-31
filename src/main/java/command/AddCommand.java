@@ -18,10 +18,11 @@ public class AddCommand extends Command {
 
     /**
      * Adds task to list of tasks.
+     * @return String to inform user task has been added.
      */
     @Override
-    public void execute() {
-        this.tasks.addTask(this.task);
+    public String execute() {
+        return this.tasks.addTask(this.task);
     }
 }
 

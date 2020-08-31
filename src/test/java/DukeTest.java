@@ -1,8 +1,10 @@
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
+
 import command.Command;
 import exceptions.DukeException;
-import org.junit.jupiter.api.Test;
 import task.Task;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class DukeTest {
     @Test

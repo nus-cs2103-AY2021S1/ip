@@ -1,8 +1,9 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
-import command.Command;
 import command.AddCommand;
+import command.BadCommand;
+import command.Command;
 import command.DeleteCommand;
 import command.DoneCommand;
 import command.EndCommand;
@@ -51,8 +52,12 @@ public class Parser {
                 throw new DukeException("Please include a task number after 'delete' command.");
             }
         case "done":
-            int doneTaskNo = Integer.parseInt(description);
-            return new DoneCommand(tasks, doneTaskNo);
+            if (description != null) {
+                int doneTaskNo = Integer.parseInt(description);
+                return new DoneCommand(tasks, doneTaskNo);
+            } else {
+                throw new DukeException("Please include a task number after 'done' command.\n");
+            }
         case "todo":
             if (description != null) {
                 Todo newTodo = new Todo(description);
@@ -92,8 +97,7 @@ public class Parser {
             return new FindCommand(tasks, description);
 
         default:
-            duke.ui.badInput();
+            return new BadCommand();
         }
-        return null;
     }
 }

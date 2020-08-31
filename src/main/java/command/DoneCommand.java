@@ -18,11 +18,11 @@ public class DoneCommand extends Command {
 
     /**
      * Marks task as done in list of tasks.
-     *
+     * @return String to inform user task has been marked as done.
      * @throws DukeException
      */
     @Override
-    public void execute() throws DukeException {
-        this.tasks.markTaskDone(taskNo);
+    public String execute() throws DukeException {
+        return this.tasks.markTaskDone(taskNo);
     }
 }

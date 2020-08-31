@@ -5,7 +5,13 @@ import task.TaskList;
 
 public abstract class Command {
     protected TaskList tasks;
-    public boolean isExit;
+
+    /**
+     * Creates Command object to be executed.
+     */
+    public Command() {
+        this.tasks = null;
+    }
 
     /**
      * Creates Command object to be executed.
@@ -13,13 +19,14 @@ public abstract class Command {
      */
     public Command(TaskList tasks) {
         this.tasks = tasks;
-        this.isExit = false;
     }
 
     /**
      * Executes the command.
-     *
+     * @return String to be printed, if any.
      * @throws DukeException
      */
-    public void execute() throws DukeException { }
+    public String execute() throws DukeException {
+        return null;
+    }
 }

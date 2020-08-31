@@ -16,8 +16,13 @@ public class FindCommand extends Command {
         this.keyword = keyword;
     }
 
+    /**
+     * Finds task with given keyword in list of tasks.
+     * @return String to inform user task of tasks that match keyword.
+     * @throws DukeException
+     */
     @Override
-    public void execute() throws DukeException {
-        this.tasks.findTask(keyword);
+    public String execute() throws DukeException {
+        return this.tasks.findTask(keyword);
     }
 }

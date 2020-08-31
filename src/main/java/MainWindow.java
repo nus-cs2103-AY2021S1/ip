@@ -1,12 +1,12 @@
+import exceptions.DukeException;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -22,8 +22,8 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/Kermit.jpeg"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/KermitOhNo.jpg"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/Kermit.jpeg"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/KermitOhNo.jpg"));
 
     @FXML
     public void initialize() {
@@ -32,6 +32,17 @@ public class MainWindow extends AnchorPane {
 
     public void setDuke(Duke d) {
         duke = d;
+        greetUser();
+    }
+
+    /**
+     * Adds greeting to dialog box.
+     */
+    public void greetUser() {
+        String response = duke.ui.greetings();
+        duke.setHasGreeted();
+        dialogContainer.getChildren().add(
+                DialogBox.getDukeDialog(response, dukeImage));
     }
 
     /**
@@ -41,11 +52,17 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        String response = duke.getResponse(input);
+        String response = null;
+        try {
+            response = duke.getResponse(input);
+        } catch (DukeException e) {
+            e.printStackTrace();
+        }
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)
         );
+
         userInput.clear();
     }
 }
