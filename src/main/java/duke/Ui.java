@@ -60,7 +60,7 @@ public class Ui {
      * @param output Message for the user.
      */
     public void showOutputOnScreen(String output) {
-        Duke.outputLabel.setText(output);
+        Duke.getOutputLabel().setText(output);
     }
 
     /**
