@@ -1,10 +1,10 @@
 package duke.task;
 
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
+
+import org.junit.jupiter.api.Test;
 
 /**
  * JUnit test class for testing the Event class
@@ -19,9 +19,9 @@ public class EventTest {
         String input1 = "meeting /at 21-09-2020 0800-1000";
         String input2 = "meeting /at 21-09-2020 0800-21-09-2020 1000";
         String input3 = "meeting /at 21-09-2020 0800-23-09-2020 1000";
-        String output1 = "[E][✘] meeting (at: 21-09-2020 0800-1000)";
-        String output2 = "[E][✘] meeting (at: 21-09-2020 0800-1000)";
-        String output3 = "[E][✓] meeting (at: 21-09-2020 0800-23-09-2020 1000)";
+        String output1 = "[E][\u2718] meeting (at: 21-09-2020 0800-1000)";
+        String output2 = "[E][\u2718] meeting (at: 21-09-2020 0800-1000)";
+        String output3 = "[E][\u2713] meeting (at: 21-09-2020 0800-23-09-2020 1000)";
         Event event3 = new Event(input3);
         event3.markDone();
         assertEquals(output1, new Event(input1).toString());

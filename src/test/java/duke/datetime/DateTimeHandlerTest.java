@@ -1,16 +1,15 @@
 package duke.datetime;
 
-import org.junit.jupiter.api.Test;
+import static duke.datetime.DateTimeHandler.STANDARD_DATETIME_FORMAT;
+import static duke.datetime.DateTimeHandler.parseDateTime;
+import static duke.datetime.DateTimeHandler.parseEventTimings;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import java.time.LocalDateTime;
 
-import static duke.datetime.DateTimeHandler.parseDateTime;
-import static duke.datetime.DateTimeHandler.parseEventTimings;
-import static duke.datetime.DateTimeHandler.STANDARD_DATETIME_FORMAT;
-
+import org.junit.jupiter.api.Test;
 
 public class DateTimeHandlerTest {
 
