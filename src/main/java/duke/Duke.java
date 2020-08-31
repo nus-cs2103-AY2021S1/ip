@@ -2,6 +2,9 @@ package duke;
 
 import java.util.Scanner;
 
+/**
+ * Runs the chatbot.
+ */
 public class Duke {
     private TaskList taskList;
 
@@ -14,6 +17,9 @@ public class Duke {
         mrduke.run();
     }
 
+    /**
+     * Starts the chatbot.
+     */
     public void run() {
         boolean toContinue;
         Ui.showWelcome();

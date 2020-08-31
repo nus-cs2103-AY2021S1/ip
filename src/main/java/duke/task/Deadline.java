@@ -1,4 +1,4 @@
-package duke.Task;
+package duke.task;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -11,8 +11,9 @@ public class Deadline extends Task {
 
     /**
      * Constructs an deadline with the description of the deadline and the date of the deadline.
+     *
      * @param description description of the deadline.
-     * @param date date of the deadline.
+     * @param date        date of the deadline.
      */
     public Deadline(String description, LocalDate date) {
         super(description);
@@ -21,9 +22,10 @@ public class Deadline extends Task {
 
     /**
      * Constructs a deadline with the description of the deadline, date of the deadline and status of completion.
+     *
      * @param description of the deadline.
-     * @param date date of the deadline.
-     * @param isDone boolean value of whether it is completed.
+     * @param date        date of the deadline.
+     * @param isDone      boolean value of whether it is completed.
      */
     public Deadline(String description, LocalDate date, boolean isDone) {
         super(description, isDone);
@@ -32,6 +34,7 @@ public class Deadline extends Task {
 
     /**
      * Returns the type of task, which is deadline.
+     *
      * @return type of task, which is deadline.
      */
     @Override
@@ -49,6 +52,7 @@ public class Deadline extends Task {
 
     /**
      * Returns the representation of deadline to be stored in hard disk.
+     *
      * @return String representation of the deadline for storage.
      */
     @Override

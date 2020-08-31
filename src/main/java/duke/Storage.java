@@ -1,20 +1,18 @@
 package duke;
 
-import duke.Task.Deadline;
-import duke.Task.Event;
-import duke.Task.Task;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
 
 class Storage {
     private File savedCopy;
@@ -37,7 +35,7 @@ class Storage {
     }
 
     private void retrieveStorage() {
-// LIMITATION CANNOT HAVE COMMA IN DESCRIPTION OF TASKS
+        // LIMITATION CANNOT HAVE COMMA IN DESCRIPTION OF TASKS
         try {
             FileReader fileReader = new FileReader(this.savedCopy);
             BufferedReader bufferedReader = new BufferedReader(fileReader);
@@ -51,7 +49,7 @@ class Storage {
                     toAdd = new Task(description, isDone);
                     this.savedTasks.add(toAdd);
                 } else {
-//                    assert simplerData.length == 4;
+                    // assert simplerData.length == 4;
                     if (simplerData[0].equals("D")) {
                         String description = simplerData[2].strip();
                         boolean isDone = !simplerData[1].strip().equals("N");
@@ -97,6 +95,4 @@ class Storage {
             System.out.println("Something went wrong:  " + e.getMessage());
         }
     }
-
-
 }

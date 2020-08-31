@@ -1,4 +1,4 @@
-package duke.Task;
+package duke.task;
 
 import duke.Ui;
 
@@ -11,17 +11,19 @@ public class Task {
 
     /**
      * Constructs task with the description of the task.
+     *
      * @param description description of the task.
      */
-     public Task(String description) {
+    public Task(String description) {
         this.description = description;
         this.isDone = false;
     }
 
     /**
      * Constructs task with the description of the task and status of whether it is completed.
-     * @param description  description of the task.
-     * @param isDone boolean of whether the task is completed.
+     *
+     * @param description description of the task.
+     * @param isDone      boolean of whether the task is completed.
      */
     public Task(String description, boolean isDone) {
         this.description = description;
@@ -40,6 +42,7 @@ public class Task {
 
     /**
      * Returns the tick and cross symbol for a complete and incomplete task respectively.
+     *
      * @return unicode character for tick and cross
      */
     public String getStatusIcon() {
@@ -47,7 +50,8 @@ public class Task {
     }
 
     /**
-     *  Returns the type of task.
+     * Returns the type of task.
+     *
      * @return type of task.
      */
     public String getTypeOfTask() {
@@ -61,6 +65,7 @@ public class Task {
 
     /**
      * Returns the representation of task to be stored in hard disk.
+     *
      * @return String representation of the task for storage.
      */
     public String getStoreRepresentation() {

@@ -1,35 +1,23 @@
 package duke;
 
-import duke.Command.AddCommand;
-import duke.Command.ListCommand;
-import duke.Command.DoneCommand;
-import duke.Command.DeleteCommand;
-import duke.Command.ByeCommand;
-import duke.Command.Command;
-
 import java.util.zip.DataFormatException;
+
+import duke.command.AddCommand;
+import duke.command.ByeCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.ListCommand;
+
+
 /**
  * Understands inputs given by user and validates them.
  */
 public class Parser {
 
-    enum COMMANDS {
-        TODO("todo"),
-        DEADLINE("deadline"),
-        EVENT("event"),
-        LIST("list"),
-        EXIT("bye"),
-        DONE("done"),
-        DELETE("delete");
-        public String text;
-
-        COMMANDS(String text) {
-            this.text = text;
-        }
-    }
-
     /**
      * Understands input from user
+     *
      * @param userText input from user
      * @param taskList list of tasks user has currently
      * @return boolean value of whether conversation is to be continued
@@ -38,25 +26,25 @@ public class Parser {
         try {
             String edittedAnswer = userText.strip().toLowerCase();
             String[] answers = userText.split(" ");
-            if (answers.length == 2 && answers[0].equals(COMMANDS.DONE.text)) {
+            if (answers.length == 2 && answers[0].equals(Commands.DONE.text)) {
                 Parser.furtherUnderstandTaskNumber(answers[0], answers[1], taskList);
 
-            } else if (answers.length == 2 && answers[0].equals(COMMANDS.DELETE.text)) {
+            } else if (answers.length == 2 && answers[0].equals(Commands.DELETE.text)) {
                 Command command = new DeleteCommand();
                 Parser.furtherUnderstandTaskNumber(answers[0], answers[1], taskList);
 
-            } else if (edittedAnswer.equals(COMMANDS.LIST.text)) {
+            } else if (edittedAnswer.equals(Commands.LIST.text)) {
                 Command command = new ListCommand();
                 command.execute(" ", taskList);
 
-            } else if (edittedAnswer.equals(COMMANDS.EXIT.text)) {
+            } else if (edittedAnswer.equals(Commands.EXIT.text)) {
                 Command command = new ByeCommand();
                 command.execute(" ", taskList);
                 return false;
 
-            } else if (answers[0].equals(COMMANDS.TODO.text) ||
-                    answers[0].equals(COMMANDS.DEADLINE.text) ||
-                    answers[0].equals(COMMANDS.EVENT.text)) {
+            } else if (answers[0].equals(Commands.TODO.text)
+                    || answers[0].equals(Commands.DEADLINE.text)
+                    || answers[0].equals(Commands.EVENT.text)) {
                 Parser.furtherUnderstandTask(userText, taskList);
 
             } else {
@@ -74,15 +62,16 @@ public class Parser {
             int oneIndex = Integer.parseInt(answer);
             int realIndex = oneIndex - 1;
             Command command;
-            if (stringCommand.equals(COMMANDS.DONE.text)) {
+            if (stringCommand.equals(Commands.DONE.text)) {
                 command = new DoneCommand();
             } else {
                 command = new DeleteCommand();
             }
             command.execute(String.valueOf(realIndex), taskList);
         } catch (NumberFormatException e) {
-            System.out.println("I can't seem to understand what task you are referring to.\n" +
-                    "Please let me know in this format: " + stringCommand + " <number of task>\n" + Ui.LINE);
+            System.out.println("I can't seem to understand what task you are referring to.\n"
+                    + "Please let me know in this format: " + stringCommand
+                    + " <number of task>\n" + Ui.LINE);
         } catch (IndexOutOfBoundsException e) {
             System.out.println("Hmm... I don't have a task numbered " + answer + "\n" + Ui.LINE);
         }
@@ -97,8 +86,8 @@ public class Parser {
                 String[] partsOfTask = task.split("/");
 
                 // checking for event and deadline if the date is given or not
-                if (type.equals(COMMANDS.TODO.text) || partsOfTask.length == 2) {
-                    if (type.equals(COMMANDS.TODO.text)) {
+                if (type.equals(Commands.TODO.text) || partsOfTask.length == 2) {
+                    if (type.equals(Commands.TODO.text)) {
                         Command command = new AddCommand(type);
                         command.execute(task, taskList);
 
@@ -117,7 +106,7 @@ public class Parser {
                     }
                 } else {
                     String instruction = "<type of task> <description> / <deadline>";
-                    if (type.equals(COMMANDS.EVENT.text)) {
+                    if (type.equals(Commands.EVENT.text)) {
                         instruction = "<type of task> <description> / <date of event>";
                     }
                     throw new DukeGotNoArgumentsException(instruction);
@@ -125,10 +114,11 @@ public class Parser {
             } else {
                 // handles the case when no description
                 String instruction = "<type of task> <description>";
-                if (answers[0].equals(COMMANDS.DEADLINE.text))
+                if (answers[0].equals(Commands.DEADLINE.text)) {
                     instruction = "<type of task> <description> / <due date>";
-                else if (answers[0].equals(COMMANDS.EVENT.text))
+                } else if (answers[0].equals(Commands.EVENT.text)) {
                     instruction = "<type of task> <description> / <date of event>";
+                }
                 throw new DukeGotNoArgumentsException(instruction);
             }
         } catch (DukeGotNoArgumentsException e) {
@@ -137,6 +127,21 @@ public class Parser {
             System.out.println("Please key in again with the date in the ddmmyyyy format." + "\n" + Ui.LINE);
         } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println(answer);
+        }
+    }
+
+    enum Commands {
+        TODO("todo"),
+        DEADLINE("deadline"),
+        EVENT("event"),
+        LIST("list"),
+        EXIT("bye"),
+        DONE("done"),
+        DELETE("delete");
+        private String text;
+
+        Commands(String text) {
+            this.text = text;
         }
     }
 

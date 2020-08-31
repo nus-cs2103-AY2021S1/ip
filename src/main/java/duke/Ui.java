@@ -4,7 +4,7 @@ package duke;
  * Prints necessary output to user.
  */
 public class Ui {
-    public final static String LINE = "____________________________________________________________\n";
+    public static final String LINE = "____________________________________________________________\n";
 
     /**
      * Introduces bot with welcome message.
@@ -15,20 +15,21 @@ public class Ui {
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        String INITIAL_PRINTING = logo + "Hello! I'm Duke\n" + "What can I do for you?\n" +
-                "____________________________________________________________\n";
-        System.out.println(INITIAL_PRINTING);
+        String initialPrinting = logo + "Hello! I'm Duke\n" + "What can I do for you?\n"
+                + "____________________________________________________________\n";
+        System.out.println(initialPrinting);
     }
 
     /**
      * Signs off with Bye message.
      */
-     public static void showByeMessage() {
-         System.out.println("Byeeeee see you later!\n" + LINE);
-     }
+    public static void showByeMessage() {
+        System.out.println("Byeeeee see you later!\n" + LINE);
+    }
 
     /**
      * Prints message to user.
+     *
      * @param message the message to be printed.
      */
     public static void printMessageToUser(String message) {

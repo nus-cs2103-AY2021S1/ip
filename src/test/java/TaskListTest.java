@@ -1,4 +1,4 @@
-import duke.Task.Task;
+import duke.task.Task;
 import duke.TaskList;
 import org.junit.jupiter.api.Test;
 

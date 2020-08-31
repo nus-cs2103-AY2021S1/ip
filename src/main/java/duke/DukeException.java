@@ -8,7 +8,7 @@ class DukeGotNoArgumentsException extends IllegalArgumentException {
 
 class DukeCannotUnderstandException extends IllegalArgumentException {
     public DukeCannotUnderstandException() {
-        super("Hmm I did not understand what you meant.\n" +
-                "Could you try again?");
+        super("Hmm I did not understand what you meant.\n"
+                + "Could you try again?");
     }
 }
