@@ -21,6 +21,7 @@ public class Task {
         isDone = true;
     }
 
+    @Override
     public String toString() {
         return String.format("|[%s] | %s", getStatusIcon(), description);
     }
