@@ -1,4 +1,4 @@
-package duke;
+package duke.ui;
 
 import java.io.IOException;
 
@@ -53,13 +53,6 @@ public class DialogBox extends HBox {
         dialog.setBackground(new Background(new BackgroundFill(color, radii, Insets.EMPTY)));
 
         displayPicture.setImage(image);
-
-        //        // Clips display picture into a circular view
-        //        Circle displayPicture = new Circle(40);
-        //        ImagePattern imagePattern = new ImagePattern(image);
-        //        displayPicture.setFill(imagePattern);
-        //
-        //        this.setAlignment(Pos.TOP_RIGHT);
     }
 
     /**

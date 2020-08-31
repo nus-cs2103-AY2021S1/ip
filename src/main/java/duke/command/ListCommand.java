@@ -1,8 +1,8 @@
 package duke.command;
 
-import duke.Storage;
-import duke.TaskManager;
-import duke.Ui;
+import duke.logic.Storage;
+import duke.task.TaskManager;
+import duke.ui.Ui;
 
 /**
  * Represents a command to list all existing tasks.

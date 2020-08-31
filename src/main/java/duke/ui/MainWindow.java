@@ -1,5 +1,6 @@
-package duke;
+package duke.ui;
 
+import duke.Duke;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -10,7 +11,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
 /**
- * Controller for duke.MainWindow. Provides the layout for the other controls.
+ * Controller for duke.ui.MainWindow. Provides the layout for the other controls.
  */
 public class MainWindow extends AnchorPane {
     @FXML
@@ -56,18 +57,14 @@ public class MainWindow extends AnchorPane {
         if (response.equals(new Ui().showExitMessage())) {
             userInput.setDisable(true);
             // Exit programme after 2 seconds
-            setTimeout(Platform::exit, 2000);
+            new Thread(() -> {
+                try {
+                    Thread.sleep(2000);
+                    Platform.exit();
+                } catch (InterruptedException e) {
+                    System.err.println(e.getMessage());
+                }
+            }).start();
         }
-    }
-
-    private void setTimeout(Runnable runnable, int delay) {
-        new Thread(() -> {
-            try {
-                Thread.sleep(delay);
-                runnable.run();
-            } catch (Exception e) {
-                System.err.println(e);
-            }
-        }).start();
     }
 }

@@ -1,4 +1,4 @@
-package duke;
+package duke.logic;
 
 import java.io.File;
 import java.io.FileNotFoundException;

@@ -2,6 +2,10 @@ package duke;
 
 import duke.command.Command;
 import duke.exception.DukeException;
+import duke.logic.Parser;
+import duke.logic.Storage;
+import duke.task.TaskManager;
+import duke.ui.Ui;
 
 /**
  * Represents the driver class to run the Duke programme.

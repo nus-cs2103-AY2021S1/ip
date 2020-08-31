@@ -1,9 +1,9 @@
 package duke.command;
 
-import duke.Storage;
-import duke.TaskManager;
-import duke.Ui;
 import duke.exception.DukeException;
+import duke.logic.Storage;
+import duke.task.TaskManager;
+import duke.ui.Ui;
 
 /**
  * Represents an invalid command.
