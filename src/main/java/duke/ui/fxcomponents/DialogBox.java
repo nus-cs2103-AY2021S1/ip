@@ -13,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
 
 /**
  * DialogBox to contain messages from the user and Duke.
@@ -33,6 +34,7 @@ public class DialogBox extends HBox {
             e.printStackTrace();
         }
 
+        this.dialog.setMinHeight(Label.USE_PREF_SIZE);
         this.dialog.setText(text);
         this.displayPicture.setImage(img);
     }

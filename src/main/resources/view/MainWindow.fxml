@@ -17,7 +17,7 @@
                  prefWidth="552.0" />
       <ScrollPane fx:id="scrollArea" prefHeight="369.0" prefWidth="600.0">
          <content>
-            <VBox fx:id="outputContainer" prefHeight="366.0" prefWidth="597.0" />
+            <VBox fx:id="outputContainer" prefWidth="597.0" />
          </content>
       </ScrollPane>
    </children>
