@@ -18,9 +18,9 @@ public class Duke {
     }
 
     /**
-     * Public getter method for JUnit testing purpose only.
+     * Getter method for JUnit testing purpose only.
      *
-     * @return parser
+     * @return Parser object
      */
     public Parser getParser() {
         return this.parser;
@@ -30,12 +30,21 @@ public class Duke {
         new Duke();
     }
 
-    //TODO
+    /**
+     * Retrieve response from Ui after receiving input.
+     *
+     * @param input user's command
+     * @return output given by the chatbot
+     */
     public String getResponse(String input) {
         return this.ui.run(input);
     }
 
-    //TODO
+    /**
+     * Getter method to get instance of Ui.
+     *
+     * @return Ui object
+     */
     public Ui getUi() {
         return this.ui;
     }

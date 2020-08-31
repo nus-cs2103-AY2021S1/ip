@@ -15,10 +15,10 @@ public class Event extends Task {
     /**
      * Constructor that creates a new Event object based on stored data or input.
      *
-     * @param description describes the event.
-     * @param id position of event.
-     * @param duration duration of event.
-     * @param stored whether it is from stored.txt or a new input.
+     * @param description describes the event
+     * @param id position of event
+     * @param duration duration of event
+     * @param stored whether it is from stored.txt or a new input
      */
     public Event(String description, int id, String duration, boolean stored) {
         super(description, id);

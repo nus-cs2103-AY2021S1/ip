@@ -10,8 +10,8 @@ public class Task {
     /**
      * Constructor initialises a new Task object.
      *
-     * @param description describes the task.
-     * @param id position of task.
+     * @param description describes the task
+     * @param id position of task
      */
     public Task(String description, int id) {
         this.description = description;
@@ -22,14 +22,14 @@ public class Task {
     /**
      * Retrieves the icon for the task.
      *
-     * @return icon to determine whether task is completed.
+     * @return icon to determine whether task is completed
      */
     public String getStatusIcon() {
         return (isDone ? "✓" : "✘");
     }
 
     /**
-     *  Marks a task as complete.
+     *  Marks a task as completed.
      */
     public void markedDone() {
         this.isDone = true;

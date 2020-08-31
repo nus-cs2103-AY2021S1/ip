@@ -9,15 +9,16 @@ public class Ui {
     /**
      * Constructor creates an Ui object.
      *
-     * @param parser parser object.
+     * @param parser parser object
      */
     public Ui(Parser parser) {
         this.parser = parser;
     }
 
-    //TODO
     /**
      * Greets the user when the program starts.
+     *
+     * @return hello message
      */
     protected String hello() {
         String intro = "Hello! I'm Bob\n"
@@ -25,9 +26,10 @@ public class Ui {
         return divider + "\n" + intro + "\n" + divider;
     }
 
-    //TODO
     /**
      * Handles all of the user inputs and passes it to the parser.
+     *
+     * @return output of chatbot
      */
     protected String run(String input) {
         if (!input.equals("bye")) {
@@ -37,9 +39,10 @@ public class Ui {
         }
     }
 
-    //TODO
     /**
      * Handles it when the user wants to exit the program.
+     *
+     * @return goodbye message
      */
     protected String goodbye() {
         String message = divider + "\n" + "Bye. Hope to see you again soon! :)" + "\n" + divider;

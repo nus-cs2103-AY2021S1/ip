@@ -15,10 +15,10 @@ public class Deadline extends Task {
     /**
      * Constructor that creates a new Deadline object based on stored data or input.
      *
-     * @param description describes the deadline.
-     * @param id position of deadline.
-     * @param dueDateTime when it is due by.
-     * @param stored whether it is from stored.txt or a new input.
+     * @param description describes the deadline
+     * @param id position of deadline
+     * @param dueDateTime when it is due by
+     * @param stored whether it is from stored.txt or a new input
      */
     public Deadline(String description, int id, String dueDateTime, boolean stored) {
         super(description, id);

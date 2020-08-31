@@ -8,18 +8,18 @@ public class Parser {
     /**
      * Constructor initialises a new Parser object.
      *
-     * @param list list of tasks.
+     * @param list list of tasks
      */
     public Parser(ListOfItems list) {
         this.listOfItems = list;
     }
 
-    //TODO
     /**
      * Handles the user input and direct the input to the respective method in ListOfItems.
      * If it is not a valid command, a Duke Exception will be thrown.
      *
-     * @param input user input.
+     * @param input user input
+     * @return output of chatbot
      */
     protected String run(String input) {
         try {

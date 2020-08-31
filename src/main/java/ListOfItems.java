@@ -18,6 +18,7 @@ public class ListOfItems {
 
     /**
      * Initialises a new ArrayList, and index starts from 0.
+     * Also, it initialises a new HandleFile and takes in ListOfItems.
      */
     public ListOfItems() {
         this.list = new ArrayList<>();
@@ -29,7 +30,7 @@ public class ListOfItems {
      * Handles all of the information from "stored.txt" and adds it to the list.
      * It also updates the index with every addition.
      *
-     * @param input a line from "stored.txt".
+     * @param input a line from "stored.txt"
      */
     protected void addStored(String input) {
         char type = input.charAt(1);
@@ -69,11 +70,11 @@ public class ListOfItems {
         }
     }
 
-    //TODO
     /**
      * Retrieves the list and prints out every task.
      *
-     * @throws DukeException if list is empty.
+     * @throws DukeException if list is empty
+     * @return output of chatbot
      */
     protected String getList() throws DukeException {
         String output = divider + "\n";
@@ -89,12 +90,12 @@ public class ListOfItems {
         return output;
     }
 
-    //TODO
     /**
      * Marks a particular task is done.
      *
-     * @param input user input.
-     * @throws DukeException if number given is invalid.
+     * @param input user input
+     * @throws DukeException if number given is invalid
+     * @return output of chatbot
      */
     protected String doneItem(String input) throws DukeException {
         try {
@@ -118,13 +119,13 @@ public class ListOfItems {
         }
     }
 
-    //TODO
     /**
      * Deletes a particular task.
      * Modifies other task's index if necessary, so that list is still in chronological order.
      *
-     * @param input user input.
-     * @throws DukeException if number given is invalid.
+     * @param input user input
+     * @throws DukeException if number given is invalid
+     * @return output of chatbot
      */
     protected String deleteItem(String input) throws DukeException {
         try {
@@ -146,13 +147,13 @@ public class ListOfItems {
         }
     }
 
-    //TODO
     /**
      * Adds a new task to the list.
      * Checks what type of task is given and initialise a new sub-class of Task (To-do, Deadline, or Event).
      *
-     * @param input user input.
-     * @throws DukeException if incomplete commands are given.
+     * @param input user input
+     * @throws DukeException if incomplete commands are given
+     * @return output of chatbot
      */
     protected String addItem(String input) throws DukeException {
         String addedMessage = "Got it. I've added this task: ";
@@ -240,12 +241,12 @@ public class ListOfItems {
         }
     }
 
-    //TODO
     /**
      * Checks and outputs all of the tasks that are due by a specific date.
      *
-     * @param input user input.
-     * @throws DukeException if input does not follow this format: "items due by DD/MM/YYYY".
+     * @param input user input
+     * @throws DukeException if input does not follow this format: "items due by DD/MM/YYYY"
+     * @return output of chatbot
      */
     protected String checkBy(String input) throws DukeException {
         try {
@@ -276,13 +277,13 @@ public class ListOfItems {
         }
     }
 
-    //TODO
     /**
      * Checks and outputs all of the task that are due before a specific date and/or time.
      *
-     * @param input user input.
+     * @param input user input
      * @throws DukeException if input does not follow this format: "items due before DD/MM/YYYY"
-     * or "items due before DD/MM/YYYY HHmm".
+     * or "items due before DD/MM/YYYY HHmm"
+     * @return output of chatbot
      */
     protected String checkBefore(String input) throws DukeException {
         try {
@@ -343,6 +344,13 @@ public class ListOfItems {
 
     }
 
+    /**
+     * Finds all tasks that contains the phrase given by the user's input.
+     *
+     * @param input user input
+     * @throws DukeException if input does not follow the proper search syntax
+     * @return output of chatbot
+     */
     protected String find(String input) throws DukeException {
         try {
             boolean hasResults = false;
