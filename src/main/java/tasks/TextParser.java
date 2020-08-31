@@ -32,8 +32,8 @@ public class TextParser {
 
     /**
      * Parse String Input into the Command Parser to return a Enum of the command encoded.
-     * @param cmd
-     * @return
+     * @param cmd the string command for the Duke Application
+     * @return Command Enumeration
      */
 
     public Command parseCommand(String cmd) {

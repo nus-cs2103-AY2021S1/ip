@@ -66,7 +66,7 @@ public class TaskIOParser {
 
     /**
      * For initialising new TaskList
-     * @return returns a new List<Task>
+     * @return returns a new List of Tasks
      */
     public List<Task> loadNewTaskList() {
         return new ArrayList<>();

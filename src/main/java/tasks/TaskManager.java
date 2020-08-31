@@ -27,6 +27,7 @@ public class TaskManager {
 
     /**
      * Parses the current list and prints the output
+     * @return String representation of the Task List
      */
     public String parseoutput() {
         StringBuilder sb = new StringBuilder();
@@ -47,8 +48,8 @@ public class TaskManager {
     public String doTask(String index) throws DukeCommandException, DukeIndexException {
         try {
             int i = Integer.parseInt(index) - 1;//0 indexing
-            this.get(i).doTask();
-            return "\tNice! I've marked this task as done: \n\t" + this.get(i) + "\n";
+            this.getTask(i).doTask();
+            return "\tNice! I've marked this task as done: \n\t" + this.getTask(i) + "\n";
         } catch (IllegalArgumentException e) {
             throw new DukeCommandException(index);
         } catch (IndexOutOfBoundsException e) {
@@ -60,7 +61,7 @@ public class TaskManager {
     public String deleteTask(String index) throws DukeCommandException, DukeIndexException {
         try {
             int i = Integer.parseInt(index) - 1;//0 indexing
-            Task t = this.get(i);
+            Task t = this.getTask(i);
             this.taskList.remove(i);
             return new StringBuilder().append("\tNoted! I've removed this task from your list: \n\t")
                     .append(t)
@@ -77,18 +78,16 @@ public class TaskManager {
 
     /**
      * Get task from the internal list
-     *
-     * @param i
-     * @return
+     * @param index index of the internal list
+     * @return Task the task at that index
      */
-    public Task get(int i) {
-        return this.taskList.get(i);
+    public Task getTask(int index) {
+        return this.taskList.get(index);
     }
 
     /**
      * generic polymorphic data flow for adding a task to the runtime database
-     *
-     * @param t
+     * @param t task
      * @return String to be wrapped and printed
      */
     private String add(Task t) {
@@ -112,43 +111,41 @@ public class TaskManager {
 
     /**
      * Takes in command to add an "to do" task to task list
-     *
-     * @param cmd
-     * @return
-     * @throws DukeNoInputException
+     * @param description Description of the Todo Task
+     * @return String Representation of the Task to complete
+     * @throws DukeNoInputException throw exception if there is no input given to the function
      */
-    public String addToDo(String cmd) throws DukeNoInputException {
-        if (cmd.isBlank()) {
-            throw new DukeNoInputException(cmd);
+    public String addToDo(String description) throws DukeNoInputException {
+        if (description.isBlank()) {
+            throw new DukeNoInputException(description);
         }
-        ToDo task = new ToDo(cmd);
+        ToDo task = new ToDo(description);
         return this.add(task);
     }
 
     /**
      * Takes in command to add an deadline task to task list
      *
-     * @param cmd
-     * @return Deadline Task is added and a print string is returned to the main loop
-     * @throws DukeDateTimeException
-     * @throws DukeNoInputException
+     * @param userInput Input for the user
+     * @return returns a string representation of the given input for use by the parser
+     * @throws DukeDateTimeException throws the exception from textparser.extractTime
+     * @throws DukeNoInputException If no description is given
      */
-    public String addDeadline(String cmd) throws DukeDateTimeException, DukeNoInputException {
-        if (cmd.isBlank()) {
-            throw new DukeNoInputException(cmd);
+    public String addDeadline(String userInput) throws DukeDateTimeException, DukeNoInputException {
+        if (userInput.isBlank()) {
+            throw new DukeNoInputException(userInput);
         }
-        String[] timeSEP = textParser.extractTime(cmd);
+        String[] timeSEP = textParser.extractTime(userInput);
         Deadline d = new Deadline(timeSEP[0], timeSEP[1]);
         return add(d);
     }
 
     /**
      * Takes in command to add an event task to task list
-     *
-     * @param cmd
+     * @param cmd the description of the task
      * @return returns a string representation of the given input for use by the parser
-     * @throws DukeDateTimeException
-     * @throws DukeNoInputException
+     * @throws DukeDateTimeException throws the exception from textparser.extractTime
+     * @throws DukeNoInputException If no description is given
      */
 
     public String addEvent(String cmd) throws DukeDateTimeException, DukeNoInputException {
@@ -162,13 +159,17 @@ public class TaskManager {
 
     /**
      * Message Passing for Tasks
-     *
-     * @throws DukeIOException
+     * @throws DukeIOException if the task cannot be read to the file
      */
     public void saveTasks() throws DukeIOException {
         ioparser.writeTask(taskList);
     }
 
+    /**
+     * Regex pattern string search
+     * @param pattern Regex Pattern or substring of description of any task in the list
+     * @return String representation of tasks that match the given pattern
+     */
     public String findTasks(String pattern) {
         StringBuilder sb = new StringBuilder("");
         if (this.taskList.size()>0) {

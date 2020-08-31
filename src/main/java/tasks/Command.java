@@ -17,6 +17,10 @@ public enum Command {
     BLANK("");
     private final String commandEncoding;
 
+    /**
+     * Constructor for the enumeration for commands
+     * @param code
+     */
     Command(String code) {
         this.commandEncoding = code;
     }

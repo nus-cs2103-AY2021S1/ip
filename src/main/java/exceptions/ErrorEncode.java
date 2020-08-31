@@ -19,9 +19,8 @@ public enum ErrorEncode {
 
     /**
      * Parse an error code into the Enum List for the given error message
-     *
-     * @param code
-     * @return
+     * @param code int code of error
+     * @return ErrorEncode Enumeration of the type of code
      */
     public static ErrorEncode parseCode(int code) {
         ErrorEncode e = UnknownError;

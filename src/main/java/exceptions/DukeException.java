@@ -28,6 +28,7 @@ public abstract class DukeException extends Exception {
 
     /**
      * Returns the template user error message of the DukeException class
+     * @param s String Message to wrap generic error Message
      * @return String message to be printed out to player.
      */
     public String message(String s) {

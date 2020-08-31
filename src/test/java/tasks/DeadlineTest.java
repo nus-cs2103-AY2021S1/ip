@@ -4,6 +4,7 @@ import exceptions.DukeDateTimeException;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -22,7 +23,7 @@ public class DeadlineTest {
     public void testDeadlineConstructor_autoCorrectsBlankDateField_CorrectstoCurrentDate() {
         try {
             Deadline deadline = new Deadline("random_desc", "");
-            assertEquals(deadline.getDateby(), LocalDate.now().toString());
+            assertEquals(LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-YYYY")),deadline.getDateby());
         } catch (Exception e) {
             e.printStackTrace();
         }
