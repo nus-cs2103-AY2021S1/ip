@@ -13,23 +13,26 @@ public class CheckCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList list, Ui ui, Storage storage) {
+    public String execute(TaskList list, Ui ui, Storage storage) {
+        String out = "";
         boolean hasFound = false;
         int count = 1;
         for (Task task : list.getList()) {
             if (task.getDate().equals(this.target)) {
                 if (!hasFound) {
-                    ui.showCheck();
+                    out = out + ui.showCheck() + "\n";
                     hasFound = true;
                 }
-                ui.showTask(count, task);
+                out = out + ui.showTask(count, task) + "\n";
                 count++;
             }
         }
 
         if(!hasFound) {
-            ui.showNothingFound();
+            out = ui.showNothingFound();
         }
+
+        return out;
     }
 
     @Override

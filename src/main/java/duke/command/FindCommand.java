@@ -13,24 +13,25 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList list, Ui ui, Storage storage) {
+    public String execute(TaskList list, Ui ui, Storage storage) {
+        String out = "";
         boolean hasFound = false;
-
         int count = 1;
         for (Task task : list.getList()) {
             if (task.getName().contains(this.target)) {
                 if (!hasFound) {
-                    ui.showFind();
+                    out = out + ui.showFind() + "\n";
                     hasFound = true;
                 }
-                ui.showTask(count, task);
+                out = out + ui.showTask(count, task) + "\n";
                 count++;
             }
         }
 
         if(!hasFound) {
-            ui.showNothingFound();
+            out = ui.showNothingFound();
         }
+        return out;
     }
 
     @Override
