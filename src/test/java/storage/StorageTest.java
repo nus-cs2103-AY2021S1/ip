@@ -1,9 +1,10 @@
 package storage;
 
-import duke.storage.Storage;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import duke.storage.Storage;
 
 public class StorageTest {
 
