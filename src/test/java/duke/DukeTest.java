@@ -12,10 +12,10 @@ import duke.tasklist.TaskList;
 
 import duke.ui.Ui;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class DukeTest {
     @Test
@@ -29,32 +29,6 @@ public class DukeTest {
         assertTrue(Parser.parse("deadline d1 /by 20/02/2020 1200") instanceof DeadlineCommand);
         assertTrue(Parser.parse("event e1 /at 20/02/2020 1200") instanceof EventCommand);
     }
-
-    @Test(expected = DukeException.class)
-    public void testIncorrectDone() throws DukeException {
-        Parser.parse("done").execute(new TaskList(), new Ui(), new Storage("demo"));
-    }
-
-    @Test(expected = DukeException.class)
-    public void testIncorrectDelete() throws DukeException {
-        Parser.parse("delete").execute(new TaskList(), new Ui(), new Storage("demo"));
-    }
-
-    @Test(expected = DukeException.class)
-    public void testIncorrectTodo() throws DukeException {
-        Parser.parse("todo").execute(new TaskList(), new Ui(), new Storage("demo"));
-    }
-
-    @Test(expected = DukeException.class)
-    public void testIncorrectDeadline() throws DukeException {
-        Parser.parse("deadline d1 ").execute(new TaskList(), new Ui(), new Storage("demo"));
-    }
-
-    @Test(expected = DukeException.class)
-    public void testIncorrectEvent() throws DukeException {
-        Parser.parse("event e1").execute(new TaskList(), new Ui(), new Storage("demo"));
-    }
-
 
     @Test
     public void testExits() {

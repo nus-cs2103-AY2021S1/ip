@@ -16,7 +16,7 @@ public class Duke {
     public static Ui ui;
     public static boolean exit;
 
-    public Duke(String filePath){
+    public Duke(String filePath) {
         this.ui = new Ui();
         this.storage = new Storage(filePath);
         try {
@@ -32,7 +32,7 @@ public class Duke {
     public void run() {
         ui.welcome();
         this.exit = false;
-        while(!exit) {
+        while (!exit) {
             try {
                 String userInput = ui.getUserInput();
                 Command command = Parser.parse(userInput);
@@ -46,6 +46,6 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke("src/main/java/duke.data/duke.txt").run();
+        new Duke("src/main/java/duke/data/duke.txt").run();
     }
 }
