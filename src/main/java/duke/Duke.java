@@ -1,25 +1,24 @@
 package duke;
 
-import java.util.Scanner;
-
 public class Duke {
+
+    private TaskList taskList;
+    private Parser parser;
+
     /**
-     * Main function for Duke.
-     * @param args Possible arguments for the main function (not used).
+     * Function to get Duke's response to user inputs.
+     *
+     * @param input User input.
+     * @return A string representing Duke's response.
      */
-    public static void main(String[] args) {
-        Ui.printWelcome();
-        Scanner sc = new Scanner(System.in);
+    public String getResponse(String input) {
+        return parser.allocate(input, taskList);
+    }
 
-        TaskList t = new TaskList();
-
-        String input = "";
-
-        while (!input.equals("bye")) {
-            input = sc.nextLine();
-            Parser.allocate(input, t);
-        }
-
-        Ui.printGoodbye();
+    /**
+     * Constructor for Duke class
+     */
+    public Duke() {
+        taskList = new TaskList();
     }
 }
