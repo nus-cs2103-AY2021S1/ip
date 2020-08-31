@@ -33,7 +33,10 @@ public class Duke {
     }
 
     /**
-     * TODO
+     * Calls the next iteration of Duke. Uses Ui#nextLine as input
+     * for the next command, runs that command and sends the output
+     * to Ui#systemMessage. Any errors will also be sent to
+     * Ui#systemMessage.
      */
     public void nextIteration() {
         String input = ui.nextLine();

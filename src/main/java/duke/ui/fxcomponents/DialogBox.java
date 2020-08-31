@@ -13,7 +13,6 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Region;
 
 /**
  * DialogBox to contain messages from the user and Duke.
@@ -50,14 +49,14 @@ public class DialogBox extends HBox {
     }
 
     /**
-     * TODO
+     * Creates a dialog box for messages sent by the user.
      */
     public static DialogBox createUserDialog(String text, Image img) {
         return new DialogBox(text, img);
     }
 
     /**
-     * TODO
+     * Creates a dialog box for the output of commands from Duke.
      */
     public static DialogBox createDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
