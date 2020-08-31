@@ -11,6 +11,7 @@ public class ToDoTask extends Task {
 
     /**
      * Constructor to create this object.
+     *
      * @param description the description of the task.
      */
     public ToDoTask(String description) {
@@ -19,6 +20,7 @@ public class ToDoTask extends Task {
 
     /**
      * Constructor to create this object.
+     *
      * @param description the description of the task.
      * @param isDone the completion status of the task.
      */
@@ -28,6 +30,7 @@ public class ToDoTask extends Task {
 
     /**
      * Gets the type of Tasks.
+     *
      * @return type of Task.
      */
     @Override
@@ -37,6 +40,7 @@ public class ToDoTask extends Task {
 
     /**
      * String representation of this object.
+     *
      * @return string representation of this object ([statusIcon] description).
      */
     @Override

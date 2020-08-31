@@ -25,6 +25,7 @@ public class EventTask extends Task {
     /**
      * Constructor to create this object.
      * Use dateTimeString inputted to get LocalTime and LocalTime.
+     *
      * @param description the description of the task.
      * @param dateTimeString the end dateTime of the task.
      * @throws DateTimeInvalidFormatException if dateTimeString is not formatted in "YYYY-MM-DD HHmm-HHmm"
@@ -83,6 +84,7 @@ public class EventTask extends Task {
     /**
      * Constructor to create this object.
      * Use dateTimeString inputted to get LocalTime and LocalTime.
+     *
      * @param description the description of the task.
      * @param dateTimeString the end dateTime of the task.
      * @param isDone completion status of this object.
@@ -142,6 +144,7 @@ public class EventTask extends Task {
 
     /**
      * Gets the type of Tasks.
+     *
      * @return type of Task.
      */
     @Override
@@ -151,6 +154,7 @@ public class EventTask extends Task {
 
     /**
      * Gets the date inputted by user in string.
+     *
      * @return date inputted by user.
      */
     @Override
@@ -160,6 +164,7 @@ public class EventTask extends Task {
 
     /**
      * Gets the date inputted by user in string.
+     *
      * @return time inputted by user.
      */
     @Override
@@ -171,6 +176,7 @@ public class EventTask extends Task {
 
     /**
      * String representation of this object.
+     *
      * @return string representation of this object ([type][statusIcon] description (by: date time-time)).
      */
     @Override

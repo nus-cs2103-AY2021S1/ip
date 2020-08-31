@@ -45,6 +45,7 @@ public class CommandProcessor {
     /**
      * Run command enter by user.
      * Prints error message if command is invalid.
+     *
      * @param command the command entered by user.
      */
     public void runCommand(String command) {

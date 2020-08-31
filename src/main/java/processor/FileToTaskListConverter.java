@@ -49,6 +49,7 @@ public abstract class FileToTaskListConverter {
     /**
      * Saves TaskList to file provided.
      * Data is stored in [type]//[status]//[task description]//[date if applicable]//[time if applicable]
+     *
      * @param list the TaskList to be saved.
      * @param file the file to be saved in.
      * @return save status of TaskList. True if successful, false otherwise.

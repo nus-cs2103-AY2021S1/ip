@@ -20,6 +20,7 @@ public class DateTimeInvalidFormatException extends InvalidActionException {
 
     /**
      * Constructor of this object.
+     *
      * @param message error message of this exception.
      */
     public DateTimeInvalidFormatException(String message) {

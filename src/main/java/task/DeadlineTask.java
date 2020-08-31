@@ -21,6 +21,7 @@ public class DeadlineTask extends Task {
     /**
      * Constructor to create this object.
      * Use dateTimeString inputted to get LocalDateTime object
+     *
      * @param description the description of the task.
      * @param dateTimeString the end dateTime of the task.
      * @throws DateTimeInvalidFormatException if dateTimeString is not formatted in "YYYY-MM-DD HHmm"
@@ -64,6 +65,7 @@ public class DeadlineTask extends Task {
     /**
      * Constructor to create this object.
      * Use dateTimeString inputted to get LocalDateTime object
+     *
      * @param description the description of the task.
      * @param dateTimeString the end dateTime of the task.
      * @param isDone completion status of this object.
@@ -108,6 +110,7 @@ public class DeadlineTask extends Task {
 
     /**
      * Gets the type of Tasks.
+     *
      * @return type of Task.
      */
     @Override
@@ -117,6 +120,7 @@ public class DeadlineTask extends Task {
 
     /**
      * Gets the date inputted by user in string.
+     *
      * @return date inputted by user.
      */
     @Override
@@ -126,6 +130,7 @@ public class DeadlineTask extends Task {
 
     /**
      * Gets the date inputted by user in string.
+     *
      * @return time inputted by user.
      */
     @Override
@@ -135,6 +140,7 @@ public class DeadlineTask extends Task {
 
     /**
      * String representation of this object.
+     *
      * @return string representation of this object ([type][statusIcon] description (by: date time)).
      */
     @Override

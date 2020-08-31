@@ -29,6 +29,7 @@ public class TaskList {
 
     /**
      * Constructor to create this object.
+     *
      * @param list the list of tasks to be encapsulated.
      */
     public TaskList(List<task.Task> list) {
@@ -37,6 +38,7 @@ public class TaskList {
 
     /**
      * Add a task to the list.
+     *
      * @param task the task to be added.
      */
     public void addToTaskList(task.Task task) {
@@ -56,6 +58,7 @@ public class TaskList {
     /**
      * Delete a task from the list.
      * IndexOutOfBoundsException will still be thrown if index exceeds size or is negative.
+     *
      * @param index the index of task to be delete.
      */
     public void deleteFromTaskList(int index) {
@@ -76,6 +79,7 @@ public class TaskList {
     /**
      * Gets a task from the list.
      * IndexOutOfBoundsException will still be thrown if index exceeds size or is negative.
+     *
      * @param index the index of task to be receive.
      * @return Task at this particular index
      */
@@ -85,6 +89,7 @@ public class TaskList {
 
     /**
      * Gets the size of the list.
+     *
      * @return size of list.
      */
     public int size() {

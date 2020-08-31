@@ -20,6 +20,7 @@ public class InvalidActionException extends DukeException {
 
     /**
      * Constructor of this object.
+     *
      * @param message error message of this exception.
      */
     public InvalidActionException(String message) {

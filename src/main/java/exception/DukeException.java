@@ -11,6 +11,7 @@ public class DukeException extends Exception {
 
     /**
      * Constructor of this object.
+     *
      * @param message error message of this exception.
      */
     public DukeException(String message) {
@@ -19,6 +20,7 @@ public class DukeException extends Exception {
 
     /**
      * String representation of this object.
+     *
      * @return string representation of this object. Contains display frame and error message.
      */
     @Override

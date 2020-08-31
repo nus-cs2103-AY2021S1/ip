@@ -13,6 +13,7 @@ public class Task {
 
     /**
      * Constructor to create Task.
+     *
      * @param description the description of the task.
      */
     public Task(String description) {
@@ -22,6 +23,7 @@ public class Task {
 
     /**
      * Constructor to create Task.
+     *
      * @param description the description of the task.
      * @param isDone the completion status of the task.
      */
@@ -32,6 +34,7 @@ public class Task {
 
     /**
      * Gets statusIcon of this object.
+     *
      * @return statusIcon of this object.
      */
     public String getStatusIcon() {
@@ -47,6 +50,7 @@ public class Task {
 
     /**
      * Check if this object is done.
+     *
      * @return status of this object, true if completed, false otherwise.
      */
     public boolean isDone() {
@@ -55,6 +59,7 @@ public class Task {
 
     /**
      * Gets the type of Tasks.
+     *
      * @return type of Task.
      */
     public String getType() {
@@ -63,6 +68,7 @@ public class Task {
 
     /**
      * Gets description of this object.
+     *
      * @return description of this object.
      */
     public String getDescription() {
@@ -71,6 +77,7 @@ public class Task {
 
     /**
      * Gets the date inputted by user in string.
+     *
      * @return date inputted by user.
      */
     public String getDateInput() {
@@ -79,6 +86,7 @@ public class Task {
 
     /**
      * Gets the date inputted by user in string.
+     *
      * @return time inputted by user.
      */
     public String getTimeInput() {
@@ -87,6 +95,7 @@ public class Task {
 
     /**
      * String representation of this object.
+     *
      * @return string representation of this object ([statusIcon] description).
      */
     @Override
