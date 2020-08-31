@@ -12,6 +12,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
+/**
+ * Encapsulates an App class that renders the view of the main app
+ * inside the GUI.
+ */
 public class App implements Page {
     private Storage storage;
 

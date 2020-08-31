@@ -10,7 +10,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 /**
- * Encapsulates a scene that displays the welcome page.
+ * Encapsulates a scene that displays the welcome page in the GUI.
  */
 public class Welcome implements Page {
     private Storage storage;
