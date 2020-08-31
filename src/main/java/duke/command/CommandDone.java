@@ -9,6 +9,7 @@ import duke.exception.IllegalDoneArgument;
  */
 public class CommandDone implements Command {
     private int index;
+    private String message = "";
 
     /**
      * Construct a new command to mark the task at given index as done.
@@ -30,7 +31,9 @@ public class CommandDone implements Command {
         }
         tasks.markAsDone(index);
         ui.printLine("Nice! I've marked this task as done:");
+        message += "Nice! I've marked this task as done:\n";
         ui.printLine(tasks.getList().get(index).toString());
+        message += tasks.getList().get(index).toString();
     }
 
     /**
@@ -39,5 +42,9 @@ public class CommandDone implements Command {
      */
     public boolean isExit() {
         return false;
+    }
+
+    public String getMessage() {
+        return message;
     }
 }

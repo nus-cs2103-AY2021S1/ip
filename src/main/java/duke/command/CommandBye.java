@@ -23,4 +23,8 @@ public class CommandBye implements Command {
     public void execute(TaskList tasks, Ui ui) {
         ui.printLine("Bye. Hope to see you again soon!");
     }
+
+    public String getMessage() {
+        return "Bye. Hope to see you again soon!";
+    }
 }

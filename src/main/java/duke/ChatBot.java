@@ -55,4 +55,15 @@ public class ChatBot {
             ui.printHorizontal();
         }
     }
+
+    public String getResponse(String input) {
+        try {
+            Command cmd = parser.parse(input);
+            cmd.execute(tasks, ui);
+            Storage.save(tasks.getList());
+            return cmd.getMessage();
+        } catch (Exception e) {
+            return e.getMessage();
+        }
+    }
 }

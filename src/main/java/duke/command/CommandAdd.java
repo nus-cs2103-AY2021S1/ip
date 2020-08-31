@@ -9,6 +9,7 @@ import duke.task.Task;
  */
 public class CommandAdd implements Command {
     private final Task newTask;
+    private String message;
 
     /**
      * Construct a new command to add a specified task.
@@ -16,6 +17,7 @@ public class CommandAdd implements Command {
      */
     public CommandAdd(Task newTask) {
         this.newTask = newTask;
+        this.message = "";
     }
 
     /**
@@ -26,9 +28,12 @@ public class CommandAdd implements Command {
     @Override
     public void execute(TaskList tasks, Ui ui) {
         ui.printLine("Got it. I've added this task:");
+        message = "Got it. I've added this task:";
         ui.printLine(newTask.toString());
+        message += "\n" + newTask.toString() + "\n";
         tasks.add(newTask);
         ui.printLine("Now you have " + tasks.size() + " tasks in the list.");
+        message += "Now you have " + tasks.size() + " tasks in the list.";
     }
 
     /**
@@ -37,5 +42,9 @@ public class CommandAdd implements Command {
      */
     public boolean isExit() {
         return false;
+    }
+
+    public String getMessage() {
+        return message;
     }
 }
