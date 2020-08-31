@@ -18,9 +18,9 @@ public class ListCommand extends Command {
      * @param storage Storage object that reads and writes to duke.ser
      */
     @Override
-    public void execute(String command, TaskList list, Storage storage) {
+    public String execute(String command, TaskList list, Storage storage) {
         String horizontalLine = "____________________________________\n";
-        System.out.println(horizontalLine + "Here are the things you need to do lor: \n");
-        System.out.println(list.iterateToDo() + horizontalLine);
+        return horizontalLine + "Here are the things you need to do lor: \n"
+            + list.iterateToDo() + horizontalLine;
     }
 }

@@ -19,9 +19,9 @@ public class ByeCommand extends Command {
      * @param storage Storage object that reads and writes to duke.ser
      */
     @Override
-    public void execute(String command, TaskList list, Storage storage) {
+    public String execute(String command, TaskList list, Storage storage) {
         String horizontalLine = "____________________________________\n";
-        System.out.println(horizontalLine + "Bye bye. See you soon bro!\n" + horizontalLine);
+        return horizontalLine + "Bye bye. See you soon bro!\n" + horizontalLine;
     }
 
     @Override

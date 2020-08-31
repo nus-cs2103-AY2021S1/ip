@@ -1,17 +1,5 @@
 package duke;
 
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
-import javafx.scene.layout.Region;
-import javafx.stage.Stage;
-import javafx.scene.image.Image;
-
 /**
  * Main class to run Ui object and listen for user input
  */
@@ -35,18 +23,17 @@ public class Duke {
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
-    String getResponse(String input) {
-        ui.showWelcome();
-        return "Duke heard: " + input;
+    String getResponse(String input) throws Exception {
+        return "Duke heard: \n" + this.run(input);
     }
 
-    public void run() throws Exception {
-        this.ui.initialise(tasks, storage);
+    public String run(String input) throws Exception {
+        return this.ui.initialise(tasks, storage, input);
     }
 
     public static void main(String[] args) throws Exception {
         // remember to change filepath to "../../../data/duke.ser" during jar build
         Duke duke = new Duke("data/duke.ser");
-        duke.run();
+        // duke.run();
     }
 }

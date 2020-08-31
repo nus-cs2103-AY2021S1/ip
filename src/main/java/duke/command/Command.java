@@ -25,12 +25,13 @@ public class Command {
     }
 
     /**
-     * To be overriden by subclasses
+     * To be overridden by subclasses
      * @param command User input
      * @param list TaskList object containing all tasks
      * @param storage Storage object that reads and writes to duke.ser
      */
-    public void execute(String command, TaskList list, Storage storage) {
+    public String execute(String command, TaskList list, Storage storage) {
+        return "";
     }
 
     public boolean isExit() {
