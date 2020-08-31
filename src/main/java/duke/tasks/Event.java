@@ -6,11 +6,12 @@ public class Event extends Task {
 
     private final String time;
 
-    public Event(String description, String time) {
-        super(description, "Event");
-        this.time = time;
-    }
-    
+    /**
+     * Constructor for event class
+     * @param description description of event
+     * @param time time at which the event occurs
+     * @param isDone whether the event has occurred or not
+     */
     public Event (String description, String time, boolean isDone) {
         super (description, "Event", isDone);
         this.time = time;
