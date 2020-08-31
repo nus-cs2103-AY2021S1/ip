@@ -1,11 +1,11 @@
 package sparkles.util;
 
-import org.junit.jupiter.api.Test;
-import sparkles.command.DoneCommand;
-import sparkles.command.ShowListCommand;
-
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import org.junit.jupiter.api.Test;
+
+import sparkles.command.DoneCommand;
+import sparkles.command.ShowListCommand;
 
 public class ParserTest {
 

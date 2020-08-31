@@ -11,6 +11,10 @@ public class TaskList {
 
     protected List<Task> storage = new ArrayList<>();
 
+    public TaskList(List<Task> storage) {
+        this.storage = storage;
+    }
+
     public TaskList() {
     }
 
@@ -18,14 +22,10 @@ public class TaskList {
         return storage;
     }
 
-    public TaskList(List<Task> storage) {
-        this.storage = storage;
-    }
-
     /**
      * Replace the list with input list.
      *
-     * @param taskList, list to be replaced.
+     * @param taskList list to be replaced
      */
     public void updateList(List<Task> taskList) {
         storage = new ArrayList<>(taskList);

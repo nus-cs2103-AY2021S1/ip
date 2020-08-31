@@ -7,6 +7,11 @@ public class Task {
     protected String description;
     protected boolean isDone;
 
+    /**
+     * Create a Task object representing a Task from the user.
+     *
+     * @param description description of the task
+     */
     public Task(String description) {
         this.description = description;
         this.isDone = false;
@@ -33,7 +38,7 @@ public class Task {
     /**
      * Print task's details with numbering.
      *
-     * @param i, numbering of the task.
+     * @param i numbering of the task
      */
     public void printTask(int i) {
         String output = "     " + i + "." + this.toString();
@@ -56,8 +61,7 @@ public class Task {
      * Package the deadline to a format used to store in the task.txt.
      * A file in the local disk to store tasks.
      *
-     * @return String of Task's details
-     * in custom disk format.
+     * @return String of Task's details in custom disk format
      */
     public String convertToDiskFormat() {
         return this.getStatusIcon() + " | " + this.description;
@@ -67,7 +71,7 @@ public class Task {
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;
-        } else if (!(obj instanceof  Task)) {
+        } else if (!(obj instanceof Task)) {
             return false;
         } else {
             Task t = (Task) obj;

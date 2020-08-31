@@ -22,12 +22,12 @@ public class AddDeadlineCommand extends Command {
      * Add the deadline to the TaskList and
      * local disk file.
      *
-     * @param taskList, TaskList object containing list
-     *                  of tasks.
-     * @param ui,       Ui Object that interacts with user.
-     * @param storage,  storage object dealing with
+     * @param taskList TaskList object containing list
+     *                  of tasks
+     * @param ui       Ui Object that interacts with user
+     * @param storage  storage object dealing with
      *                  local disk file
-     * @throws SparklesException, custom exception that handles
+     * @throws SparklesException custom exception that handles
      * exception of Sparkles
      */
     @Override

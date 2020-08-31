@@ -1,6 +1,5 @@
 package sparkles.command;
 
-import sparkles.SparklesException;
 import sparkles.task.TaskList;
 import sparkles.util.Storage;
 import sparkles.util.Ui;
@@ -8,7 +7,7 @@ import sparkles.util.Ui;
 /**
  * Represent an exit command.
  */
-public class ExitCommand extends Command{
+public class ExitCommand extends Command {
 
     public ExitCommand(String command) {
         super(command);
@@ -18,10 +17,10 @@ public class ExitCommand extends Command{
      * Deals with user's command.
      * Perform exit on the system.
      *
-     * @param taskList, TaskList object containing list
-     *                  of tasks.
-     * @param ui,       Ui Object that interacts with user.
-     * @param storage,  storage object dealing with
+     * @param taskList TaskList object containing list
+     *                  of tasks
+     * @param ui       Ui Object that interacts with user
+     * @param storage  storage object dealing with
      *                  local disk file
      */
     @Override
@@ -33,6 +32,7 @@ public class ExitCommand extends Command{
 
     /**
      * Only command that returns true for this method.
+     *
      * @return true
      */
     @Override

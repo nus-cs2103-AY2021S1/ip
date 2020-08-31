@@ -1,6 +1,5 @@
 package sparkles.command;
 
-import sparkles.SparklesException;
 import sparkles.task.TaskList;
 import sparkles.util.Storage;
 import sparkles.util.Ui;
@@ -16,12 +15,12 @@ public class TaskUnclearCommand extends Command {
 
     /**
      * Deals with user's command.
-     * Executed when user input an unknow command.
+     * Executed when user input an unknown command.
      *
-     * @param taskList, TaskList object containing list
-     *                  of tasks.
-     * @param ui,       Ui Object that interacts with user.
-     * @param storage,  storage object dealing with
+     * @param taskList TaskList object containing list
+     *                  of tasks
+     * @param ui       Ui Object that interacts with user
+     * @param storage  storage object dealing with
      *                  local disk file
      */
     @Override

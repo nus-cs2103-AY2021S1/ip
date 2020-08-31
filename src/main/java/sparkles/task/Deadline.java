@@ -14,6 +14,13 @@ public class Deadline extends Task {
     protected String by;
 
 
+    /**
+     * Create a Deadline object representing
+     * a deadline task.
+     *
+     * @param description description of the deadline
+     * @param by          Date and time it is due by
+     */
     public Deadline(String description, String by) {
         super(description);
         parseDateAndTime(by);
@@ -50,8 +57,7 @@ public class Deadline extends Task {
      * Package the deadline to a format used to store in the task.txt.
      * A file in the local disk to store tasks.
      *
-     * @return String of Deadline's details
-     * in custom disk format.
+     * @return String of Deadline's details in custom disk format
      */
     @Override
     public String convertToDiskFormat() {

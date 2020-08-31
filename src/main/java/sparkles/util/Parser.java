@@ -4,8 +4,8 @@ import sparkles.command.Command;
 import sparkles.command.DeleteCommand;
 import sparkles.command.DoneCommand;
 import sparkles.command.ExitCommand;
-import sparkles.command.ShowListCommand;
 import sparkles.command.FindCommand;
+import sparkles.command.ShowListCommand;
 import sparkles.command.TaskUnclearCommand;
 import sparkles.command.addcommand.AddCommand;
 import sparkles.command.addcommand.AddDeadlineCommand;
@@ -20,7 +20,7 @@ public class Parser {
     /**
      * Taking in user's input as one String and return the correct Command class to execute.
      *
-     * @param command, user's input
+     * @param command user's input
      * @return corresponding Command
      */
     public static Command parse(String command) {
@@ -48,7 +48,7 @@ public class Parser {
     /**
      * Taking in user's input as one String and return the correct AddCommand class to execute.
      *
-     * @param command, user's input
+     * @param command user's input
      * @return corresponding AddCommand
      */
     public static Command parseAddCommand(String command) {

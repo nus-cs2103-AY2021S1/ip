@@ -22,12 +22,12 @@ public class DeleteCommand extends Command {
      * Printing out necessary information with regards to this
      * execution.
      *
-     * @param taskList, TaskList object containing list
-     *                  of tasks.
-     * @param ui,       Ui Object that interacts with user.
-     * @param storage,  storage object dealing with
+     * @param taskList TaskList object containing list
+     *                  of tasks
+     * @param ui       Ui Object that interacts with user
+     * @param storage  Storage object dealing with
      *                  local disk file
-     * @throws SparklesException, custom exception that handles
+     * @throws SparklesException custom exception that handles
      * exception of Sparkles
      */
     @Override
@@ -46,8 +46,8 @@ public class DeleteCommand extends Command {
             if (ex instanceof StringIndexOutOfBoundsException) {
                 throw new SparklesException("     OOPS!! Task in the list to be deleted is not specified!");
             } else {
-                if(taskList.getStorage().isEmpty()) {
-                    throw new SparklesException( "     OOPS!! Task list is empty!");
+                if (taskList.getStorage().isEmpty()) {
+                    throw new SparklesException("     OOPS!! Task list is empty!");
                 } else {
                     throw new SparklesException("     OOPS!! Task does not exist!");
                 }

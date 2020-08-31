@@ -6,11 +6,18 @@ import java.time.format.DateTimeFormatter;
 /**
  * Represent an Event object.
  */
-public class Event extends Task{
+public class Event extends Task {
 
     protected LocalDate date;
     protected String at;
 
+    /**
+     * Create a Event object representing
+     * an event task.
+     *
+     * @param description description of the event
+     * @param at          Date of event
+     */
     public Event(String description, String at) {
         super(description);
         this.date = parseDate(at);
@@ -30,8 +37,7 @@ public class Event extends Task{
      * Package the deadline to a format used to store in the task.txt.
      * A file in the local disk to store tasks.
      *
-     * @return String of Task's details
-     * in custom disk format.
+     * @return String of Task's detail in custom disk format
      */
     @Override
     public String convertToDiskFormat() {
