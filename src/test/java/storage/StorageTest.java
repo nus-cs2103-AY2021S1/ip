@@ -1,3 +1,5 @@
+package storage;
+
 import duke.storage.Storage;
 import org.junit.jupiter.api.Test;
 

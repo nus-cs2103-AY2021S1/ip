@@ -1,3 +1,5 @@
+package command;
+
 import duke.command.DukeException;
 import duke.command.Parser;
 import duke.storage.Storage;
