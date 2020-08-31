@@ -1,8 +1,7 @@
 package duke.exception;
 
 /**
- * The exception thrown when the Scanner or FileWriter class
- * fails to read the file in the hard disk.
+ * The exception thrown when the Scanner or FileWriter class fails to read the file in the hard disk.
  */
 public class FailToReadFileException extends DukeException {
 

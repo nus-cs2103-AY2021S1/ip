@@ -7,8 +7,6 @@ import duke.task.Task;
 
 /**
  * Class to represents the Task's list.
- * This class is used to control the list of task such as
- * add task, delete task, get task, etc.
  */
 public class TaskList {
     private List<Task> tasks;
@@ -22,7 +20,6 @@ public class TaskList {
 
     /**
      * Constructs a new TaskList with the specified list of tasks.
-     *
      * @param tasks List of tasks
      */
     public TaskList(List<Task> tasks) {
@@ -31,7 +28,6 @@ public class TaskList {
 
     /**
      * Gets the list of tasks.
-     *
      * @return list of tasks
      */
     public List<Task> getTasks() {
@@ -39,9 +35,7 @@ public class TaskList {
     }
 
     /**
-     * Deletes a specific task according to the task number.
-     * Note that the task count starts from 0.
-     *
+     * Deletes a specific task according to the task number. Note that the task count starts from 0.
      * @param taskNum task's number that wants to be deleted
      * @return the deleted task
      */
@@ -51,7 +45,6 @@ public class TaskList {
 
     /**
      * Gets the current size of the TaskList.
-     *
      * @return current size of the TaskList
      */
     public int size() {
@@ -60,7 +53,6 @@ public class TaskList {
 
     /**
      * Adds the specified task to the TaskList.
-     *
      * @param task task that wants to be added
      */
     public void addTask(Task task) {
@@ -68,9 +60,7 @@ public class TaskList {
     }
 
     /**
-     * Gets a specific task according to the task number.
-     * Note that the task count starts from 0.
-     *
+     * Gets a specific task according to the task number. Note that the task count starts from 0.
      * @param taskNum task's number of a task
      * @return task corresponding to the task's number
      */
@@ -79,9 +69,7 @@ public class TaskList {
     }
 
     /**
-     * Returns the current state of the Task List. If there is a task
-     * in the Task List, it return false. Otherwise, it returns true.
-     *
+     * Returns true if the TaskList contains no elements.
      * @return list condition
      */
     public boolean isEmpty() {

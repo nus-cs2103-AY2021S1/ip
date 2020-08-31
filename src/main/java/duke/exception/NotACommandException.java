@@ -1,8 +1,7 @@
 package duke.exception;
 
 /**
- * The exception thrown when the user input something
- * that duke does not recognized as a command.
+ * The exception thrown when the user input something that duke does not recognized as a command.
  */
 public class NotACommandException extends DukeException {
 

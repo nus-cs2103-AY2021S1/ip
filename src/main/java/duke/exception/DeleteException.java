@@ -1,8 +1,7 @@
 package duke.exception;
 
 /**
- * The exception thrown when the user does not input any number
- * in order to delete a task in the list.
+ * The exception thrown when the user does not input any number in order to delete a task in the list.
  */
 public class DeleteException extends DukeException {
 

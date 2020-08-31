@@ -1,9 +1,8 @@
 package duke.exception;
 
 /**
- * The exception thrown when the user does not input any description
- * for the event's task name or does not use /at to specify the
- * task's date.
+ * The exception thrown when the user does not input any description for the event's task name or does not use
+ * /at to specify the task's date.
  */
 public class EventException extends DukeException {
 

@@ -1,8 +1,7 @@
 package duke.exception;
 
 /**
- * The exception thrown when the user input invalid data
- * such as characters.
+ * The exception thrown when the user input invalid data such as characters.
  */
 public class InvalidTaskNumberException extends DukeException {
 

@@ -8,15 +8,13 @@ import duke.utility.TaskList;
 import duke.utility.Ui;
 
 /**
- * This class represents the done command.
- * When executed, the class will mark the specified task as done.
+ * This class represents the done command. When executed, the class will mark the specified task as done.
  */
 public class DoneCommand extends Command {
     private int taskNumber;
 
     /**
-     * Constructs a Command to mark the specified task number
-     * as done.
+     * Constructs a Command to mark the specified task number as done.
      * @param taskNumber the task's number you want to mark as done
      */
     public DoneCommand(int taskNumber) {
@@ -24,10 +22,8 @@ public class DoneCommand extends Command {
     }
 
     /**
-     * Executes the DoneCommand. Executing this command will
-     * mark the task corresponding to the task number as done in the list as well as
-     * in the hard disk. The Ui will shown the corresponding message based on if an
-     * exception is thrown or not.
+     * Executes the DoneCommand. Executing this command will mark the task corresponding to the task number as done
+     * in the list as well as in the hard disk.
      * @param tasks TaskList of the current task.
      * @param ui Ui to deals with interactions with the user.
      * @param storage Storage to save the data to the hard disk.
@@ -42,6 +38,7 @@ public class DoneCommand extends Command {
             Task task = tasks.getTask(taskNumber - 1);
             task.setStatusToDone();
             storage.changeTaskInFile(taskNumber);
+            ui.sendMessage(ui.doneSuccess(task));
             return ui.doneSuccess(task);
         }
     }

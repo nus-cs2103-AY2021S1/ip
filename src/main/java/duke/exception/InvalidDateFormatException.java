@@ -1,9 +1,8 @@
 package duke.exception;
 
 /**
- * The exception thrown when the user does not input any date
- * or input invalid date format when using taskbefore or taskafter
- * command.
+ * The exception thrown when the user does not input any date or input invalid date format when using taskbefore or
+ * taskafter command.
  */
 public class InvalidDateFormatException extends DukeException {
 

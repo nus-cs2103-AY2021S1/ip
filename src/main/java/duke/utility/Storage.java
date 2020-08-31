@@ -14,16 +14,13 @@ import duke.exception.FailToReadFileException;
 import duke.task.Task;
 
 /**
- * This class deals with saving, changing, or deleting
- * data in the hard disk. These are done in order to remember
- * all the current task when running the Duke again.
+ * This class deals with saving, changing, or deleting data in the hard disk.
  */
 public class Storage {
     private Path storagePath;
 
     /**
      * Constructs a Storage object with the specified file path.
-     *
      * @param filePath The file path to the storage file
      */
     public Storage(String filePath) {
@@ -31,10 +28,8 @@ public class Storage {
     }
 
     /**
-     * Saves the task to the hard disk. The task will be parsed
-     * to the task's saving format before it is saved to the hard disk.
-     * Note that the new task will be appended to the end of the file.
-     *
+     * Saves the task to the hard disk.
+     * The task will be parsed to the task's saving format before it is saved to the hard disk.
      * @param task The task to be saved
      * @throws DukeException If the FileWriter fails to read the file
      */
@@ -51,10 +46,7 @@ public class Storage {
     }
 
     /**
-     * Changes the task's status to done in the hard disk based on
-     * the line number specified. This will change '0' (which indicates
-     * ongoing task) in the hard disk to '1' (which indicates done task).
-     *
+     * Changes the task's status to done in the hard disk based on the line number specified.
      * @param line The task line that wanted to be changed
      * @throws DukeException If the Scanner or FileWriter fails to read the file
      */
@@ -62,10 +54,9 @@ public class Storage {
         try {
             StringBuilder sb = new StringBuilder();
             File file = new File(storagePath.toString());
-
             Scanner sc = new Scanner(file);
-
             int count = 1;
+
             while (sc.hasNext()) {
                 String taskLine = sc.nextLine() + "\n";
 
@@ -78,10 +69,8 @@ public class Storage {
                 count++;
             }
 
-            String tobeWritten = sb.toString();
             FileWriter fw = new FileWriter(storagePath.toString());
-
-            fw.write(tobeWritten);
+            fw.write(sb.toString());
             fw.close();
         } catch (IOException e) {
             throw new FailToReadFileException();
@@ -89,9 +78,7 @@ public class Storage {
     }
 
     /**
-     * Delete a task in the hard disk based on the line number
-     * specified.
-     *
+     * Delete a task in the hard disk based on the line number specified.
      * @param line The task line that wanted to be changed
      * @throws DukeException If the Scanner or FileWriter fails to read the file
      */
@@ -99,23 +86,19 @@ public class Storage {
         try {
             StringBuilder sb = new StringBuilder();
             File file = new File(storagePath.toString());
-
             Scanner sc = new Scanner(file);
-
             int count = 1;
+
             while (sc.hasNext()) {
                 String taskLine = sc.nextLine() + "\n";
-
                 if (count != line) {
                     sb.append(taskLine);
                 }
                 count++;
             }
 
-            String tobeWritten = sb.toString();
             FileWriter fw = new FileWriter(storagePath.toString());
-
-            fw.write(tobeWritten);
+            fw.write(sb.toString());
             fw.close();
         } catch (IOException e) {
             throw new FailToReadFileException();
@@ -126,12 +109,11 @@ public class Storage {
         try {
             Path dataPath = storagePath.getParent();
             File dataFile = new File(dataPath.toString());
+            File storageFile = new File(storagePath.toString());
 
             if (!dataFile.exists()) {
                 dataFile.mkdir();
             }
-
-            File storageFile = new File(storagePath.toString());
 
             if (!storageFile.exists()) {
                 storageFile.createNewFile();
@@ -142,17 +124,13 @@ public class Storage {
     }
 
     /**
-     * Read the storage file in the hard disk. If no folder or
-     * file has been created, it will create the folder or file
-     * automatically. All the strings read from the hard disk
-     * will be parsed to their corresponding task and added to the
-     * list of task.
-     *
+     * Read the storage file in the hard disk. If no folder or file has been created, it will create the folder or file
+     * automatically.
      * @return List of task
      * @throws DukeException If fails to create the new file locally
      * or the Scanner fails to read the file
      */
-    public List<Task> load() throws DukeException {
+    public List<Task> loadTasksFromDisk() throws DukeException {
         try {
             createStorageFile();
             File file = new File(storagePath.toString());

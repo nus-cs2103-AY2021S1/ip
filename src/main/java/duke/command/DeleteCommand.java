@@ -8,15 +8,13 @@ import duke.utility.TaskList;
 import duke.utility.Ui;
 
 /**
- * This class represents the delete command.
- * When executed, the class will delete the specified task.
+ * This class represents the delete command. When executed, the class will delete the specified task.
  */
 public class DeleteCommand extends Command {
     private int taskNumber;
 
     /**
-     * Constructs a Command for delete with the specified task number
-     * that want to be deleted.
+     * Constructs a Command for delete with the specified task number that want to be deleted.
      * @param taskNumber the task's number you want to delete
      */
     public DeleteCommand(int taskNumber) {
@@ -24,10 +22,8 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Executes the DeleteCommand. Executing this command will
-     * delete the task corresponding to the task number in the list as well as
-     * in the hard disk. The Ui will shown the corresponding message based on if an
-     * exception is thrown or not.
+     * Executes the DeleteCommand. Executing this command will delete the task corresponding to the task number in
+     * the list as well as in the hard disk.
      * @param tasks TaskList of the current task.
      * @param ui Ui to deals with interactions with the user.
      * @param storage Storage to save the data to the hard disk.
@@ -41,6 +37,7 @@ public class DeleteCommand extends Command {
         } else {
             Task task = tasks.deleteTask(taskNumber - 1);
             storage.deleteTaskInFile(taskNumber);
+            ui.sendMessage(ui.deleteSuccess(task, tasks.size()));
             return ui.deleteSuccess(task, tasks.size());
         }
     }

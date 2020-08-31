@@ -1,9 +1,8 @@
 package duke.exception;
 
 /**
- * The exception thrown when the user does not input any description
- * for the deadline's task name or does not use /by to specify the
- * task's date.
+ * The exception thrown when the user does not input any description for the deadline's task name or does not use
+ * /by to specify the task's date.
  */
 public class DeadlineException extends DukeException {
 

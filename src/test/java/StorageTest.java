@@ -5,58 +5,48 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
+import duke.task.Task;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import duke.task.DeadlineTask;
 import duke.task.EventTask;
 import duke.task.ToDoTask;
 import duke.utility.Storage;
-import duke.utility.TaskList;
 
 public class StorageTest {
+    private Task toDoTask;
+    private Task deadlineTask;
+    private Task eventTask;
+
+    @BeforeEach
+    public void init() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+        LocalDateTime dateTest = LocalDateTime.parse("2020-01-01 0000", formatter);
+        String taskName = "Sample task";
+        this.toDoTask = new ToDoTask(taskName);
+        toDoTask.setStatusToDone();
+        this.deadlineTask = new DeadlineTask(taskName, dateTest);
+        deadlineTask.setStatusToDone();
+        this.eventTask = new EventTask(taskName, dateTest);
+
+    }
     @Test
     public void storageSaveTest() {
         Path path = Paths.get("junit-test/ACTUAL_STORAGE_SAVE.txt");
         Storage storage = new Storage(path.toString());
-
         File actualStorageSave = new File(path.toString());
 
         if (actualStorageSave.exists()) {
             actualStorageSave.delete();
         }
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
-
-        TaskList taskList = new TaskList();
-        String taskName = "Sample task";
-
-        ToDoTask toDoTask = new ToDoTask(taskName);
-
-        LocalDateTime deadlineDate1 = LocalDateTime.parse("2020-05-05 0000", formatter);
-        LocalDateTime deadlineDate2 = LocalDateTime.parse("2019-05-05 0000", formatter);
-
-        DeadlineTask deadlineTask1 = new DeadlineTask(taskName, deadlineDate1);
-        deadlineTask1.setStatusToDone();
-        DeadlineTask deadlineTask2 = new DeadlineTask(taskName, deadlineDate2);
-
-        taskList.addTask(deadlineTask1);
-        taskList.addTask(deadlineTask2);
-
-        LocalDateTime eventDate1 = LocalDateTime.parse("2020-10-10 0000", formatter);
-        LocalDateTime eventDate2 = LocalDateTime.parse("2019-10-10 0000", formatter);
-
-        EventTask eventTask1 = new EventTask(taskName, eventDate1);
-        EventTask eventTask2 = new EventTask(taskName, eventDate2);
-        eventTask2.setStatusToDone();
-
         Assertions.assertDoesNotThrow(() -> {
             actualStorageSave.createNewFile();
             storage.saveTaskToFile(toDoTask);
-            storage.saveTaskToFile(deadlineTask1);
-            storage.saveTaskToFile(deadlineTask2);
-            storage.saveTaskToFile(eventTask1);
-            storage.saveTaskToFile(eventTask2);
+            storage.saveTaskToFile(deadlineTask);
+            storage.saveTaskToFile(eventTask);
         });
 
         Assertions.assertDoesNotThrow(() -> {
@@ -83,45 +73,17 @@ public class StorageTest {
     public void storageChangeToDoneTest() {
         Path path = Paths.get("junit-test/ACTUAL_STORAGE_CHANGE_TO_DONE.txt");
         Storage storage = new Storage(path.toString());
-
         File actualStorageChangeToDone = new File(path.toString());
 
         if (actualStorageChangeToDone.exists()) {
             actualStorageChangeToDone.delete();
         }
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
-
-        TaskList taskList = new TaskList();
-        String taskName = "Sample task";
-
-        ToDoTask toDoTask = new ToDoTask(taskName);
-
-        LocalDateTime deadlineDate1 = LocalDateTime.parse("2020-05-05 0000", formatter);
-        LocalDateTime deadlineDate2 = LocalDateTime.parse("2019-05-05 0000", formatter);
-
-        DeadlineTask deadlineTask1 = new DeadlineTask(taskName, deadlineDate1);
-        deadlineTask1.setStatusToDone();
-        DeadlineTask deadlineTask2 = new DeadlineTask(taskName, deadlineDate2);
-
-        taskList.addTask(deadlineTask1);
-        taskList.addTask(deadlineTask2);
-
-        LocalDateTime eventDate1 = LocalDateTime.parse("2020-10-10 0000", formatter);
-        LocalDateTime eventDate2 = LocalDateTime.parse("2019-10-10 0000", formatter);
-
-        EventTask eventTask1 = new EventTask(taskName, eventDate1);
-        EventTask eventTask2 = new EventTask(taskName, eventDate2);
-        eventTask2.setStatusToDone();
-
         Assertions.assertDoesNotThrow(() -> {
             actualStorageChangeToDone.createNewFile();
             storage.saveTaskToFile(toDoTask);
-            storage.saveTaskToFile(deadlineTask1);
-            storage.saveTaskToFile(deadlineTask2);
-            storage.saveTaskToFile(eventTask1);
-            storage.saveTaskToFile(eventTask2);
-            storage.changeTaskInFile(1);
+            storage.saveTaskToFile(deadlineTask);
+            storage.saveTaskToFile(eventTask);
             storage.changeTaskInFile(3);
         });
 
@@ -156,39 +118,12 @@ public class StorageTest {
             actualStorageDelete.delete();
         }
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
-
-        TaskList taskList = new TaskList();
-        String taskName = "Sample task";
-
-        ToDoTask toDoTask = new ToDoTask(taskName);
-
-        LocalDateTime deadlineDate1 = LocalDateTime.parse("2020-05-05 0000", formatter);
-        LocalDateTime deadlineDate2 = LocalDateTime.parse("2019-05-05 0000", formatter);
-
-        DeadlineTask deadlineTask1 = new DeadlineTask(taskName, deadlineDate1);
-        deadlineTask1.setStatusToDone();
-        DeadlineTask deadlineTask2 = new DeadlineTask(taskName, deadlineDate2);
-
-        taskList.addTask(deadlineTask1);
-        taskList.addTask(deadlineTask2);
-
-        LocalDateTime eventDate1 = LocalDateTime.parse("2020-10-10 0000", formatter);
-        LocalDateTime eventDate2 = LocalDateTime.parse("2019-10-10 0000", formatter);
-
-        EventTask eventTask1 = new EventTask(taskName, eventDate1);
-        EventTask eventTask2 = new EventTask(taskName, eventDate2);
-        eventTask2.setStatusToDone();
-
         Assertions.assertDoesNotThrow(() -> {
             actualStorageDelete.createNewFile();
             storage.saveTaskToFile(toDoTask);
-            storage.saveTaskToFile(deadlineTask1);
-            storage.saveTaskToFile(deadlineTask2);
-            storage.saveTaskToFile(eventTask1);
-            storage.saveTaskToFile(eventTask2);
-            storage.deleteTaskInFile(3);
-            storage.deleteTaskInFile(4);
+            storage.saveTaskToFile(deadlineTask);
+            storage.saveTaskToFile(eventTask);
+            storage.deleteTaskInFile(2);
         });
 
         Assertions.assertDoesNotThrow(() -> {

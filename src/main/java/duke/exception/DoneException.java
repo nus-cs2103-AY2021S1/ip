@@ -1,8 +1,7 @@
 package duke.exception;
 
 /**
- * The exception thrown when the user does not input any number
- * in order to mark a task as done.
+ * The exception thrown when the user does not input any number in order to mark a task as done.
  */
 public class DoneException extends DukeException {
 

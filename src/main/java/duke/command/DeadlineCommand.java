@@ -28,8 +28,7 @@ public class DeadlineCommand extends Command {
 
     /**
      * Executes the DeadlineCommand. Executing this command will create a new DeadlineTask that will be added to
-     * the TaskList and will be saved to the hard disk by Storage. The Ui will shown the corresponding message
-     * depending on whether an exception is thrown or not.
+     * the TaskList and will be saved to the hard disk by Storage.
      * @param tasks TaskList of the current task.
      * @param ui Ui to deals with interactions with the user.
      * @param storage Storage to save the data to the hard disk.
@@ -40,6 +39,7 @@ public class DeadlineCommand extends Command {
         Task task = new DeadlineTask(taskName, date);
         tasks.addTask(task);
         storage.saveTaskToFile(task);
+        ui.sendMessage(ui.addSuccess(task, tasks.size()));
         return ui.addSuccess(task, tasks.size());
     }
 }

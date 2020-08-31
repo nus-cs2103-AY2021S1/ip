@@ -33,25 +33,21 @@ import duke.task.Task;
 import duke.task.ToDoTask;
 
 /**
- * Class to parse the user input. This class will try to
- * change the user input to a functional command.
+ * Class to parse the user input. This class will try to change the user input to a functional command.
  */
 public class Parser {
+    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
 
     /**
      * Parses the task so that it will be saved in the specific format
-     * in the hard disk. This is done to make it easier to read the data
-     * that is stored locally when running the Duke again.
-     *
+     * in the hard disk.
      * @param task Task to be parsed
      * @return parsed task for saving purpose
      */
     public static String parseForSave(Task task) {
         String taskName = task.getTaskName();
         String parsed = null;
-        String isDone = task.isDone()
-                ? "1"
-                : "0";
+        String isDone = task.isDone() ? "1" : "0";
 
         if (task instanceof ToDoTask) {
             parsed = "T | " + isDone + " | " + taskName + "\n";
@@ -69,9 +65,7 @@ public class Parser {
     }
 
     /**
-     * Parses the string that is being read in the hard disk and creates
-     * the task representation of the string.
-     *
+     * Parses the string that is being read in the hard disk and creates the task representation of the string.
      * @param taskString String that represents a task in the hard disk
      * @return The task representation of the string
      */
@@ -84,18 +78,20 @@ public class Parser {
 
         Task newTask = null;
 
-        if (taskType.equals("T")) {
+        switch (taskType) {
+        case "T":
             newTask = new ToDoTask(taskName);
-        } else if (taskType.equals("D")) {
-            String date = taskArr[3].trim();
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
-            LocalDateTime deadlineDate = LocalDateTime.parse(date, formatter);
+            break;
+        case "D":
+            String dateForDeadline = taskArr[3].trim();
+            LocalDateTime deadlineDate = LocalDateTime.parse(dateForDeadline, FORMATTER);
             newTask = new DeadlineTask(taskName, deadlineDate);
-        } else if (taskType.equals("E")) {
-            String date = taskArr[3].trim();
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
-            LocalDateTime eventDate = LocalDateTime.parse(date, formatter);
+            break;
+        case "E":
+            String dateForEvent = taskArr[3].trim();
+            LocalDateTime eventDate = LocalDateTime.parse(dateForEvent, FORMATTER);
             newTask = new EventTask(taskName, eventDate);
+            break;
         }
 
         if (isDone) {
@@ -107,9 +103,6 @@ public class Parser {
 
     /**
      * Parses the user input in order to change it into a functional command.
-     * If the user input a wrong command or the user does not supply any arg
-     * while the command needs an arg, it will throws an exception.
-     *
      * @param userInput The user input
      * @return The command representation of the user input
      * @throws DukeException If there is no arg or wrong arg for
@@ -135,7 +128,6 @@ public class Parser {
             }
 
             int taskNumber;
-
             try {
                 taskNumber = Integer.parseInt(arg);
             } catch (NumberFormatException e) {
@@ -149,7 +141,6 @@ public class Parser {
             }
 
             int taskNumber;
-
             try {
                 taskNumber = Integer.parseInt(arg);
             } catch (NumberFormatException e) {
@@ -163,7 +154,6 @@ public class Parser {
             }
 
             LocalDate parsedDate;
-
             try {
                 parsedDate = LocalDate.parse(arg);
             } catch (DateTimeParseException e) {
@@ -177,7 +167,6 @@ public class Parser {
             }
 
             LocalDate parsedDate;
-
             try {
                 parsedDate = LocalDate.parse(arg);
             } catch (DateTimeParseException e) {
@@ -189,6 +178,7 @@ public class Parser {
             if (arg == null) {
                 throw new ToDoException();
             }
+
             return new ToDoCommand(arg);
         } else if (command.equals(Command.getCommandDeadline())) {
             if (arg == null) {
@@ -203,12 +193,10 @@ public class Parser {
 
             String taskForDeadline = arrForDeadline[0].trim();
             String dateForDeadline = arrForDeadline[1].trim();
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
 
             LocalDateTime deadlineDate;
-
             try {
-                deadlineDate = LocalDateTime.parse(dateForDeadline, formatter);
+                deadlineDate = LocalDateTime.parse(dateForDeadline, FORMATTER);
             } catch (DateTimeParseException e) {
                 throw new InvalidDateTimeFormatException();
             }
@@ -218,6 +206,7 @@ public class Parser {
             if (arg == null) {
                 throw new EventException();
             }
+
             String[] arrForEvent = arg.split("/at", 2);
 
             if (arrForEvent.length == 1) {
@@ -226,12 +215,10 @@ public class Parser {
 
             String taskForEvent = arrForEvent[0].trim();
             String dateForEvent = arrForEvent[1].trim();
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
 
             LocalDateTime eventDate;
-
             try {
-                eventDate = LocalDateTime.parse(dateForEvent, formatter);
+                eventDate = LocalDateTime.parse(dateForEvent, FORMATTER);
             } catch (DateTimeParseException e) {
                 throw new InvalidDateTimeFormatException();
             }

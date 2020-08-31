@@ -1,8 +1,7 @@
 package duke.exception;
 
 /**
- * The exception thrown when the user does not input any keyword
- * when using find commmand.
+ * The exception thrown when the user does not input any keyword when using find command.
  */
 public class FindException extends DukeException {
 

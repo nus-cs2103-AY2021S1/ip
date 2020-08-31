@@ -8,16 +8,13 @@ import duke.utility.TaskList;
 import duke.utility.Ui;
 
 /**
- * This class represents the todo command.
- * When executed, the class will add the todo task and save it
- * locally.
+ * This class represents the todo command. When executed, the class will add the todo task and save it locally.
  */
 public class ToDoCommand extends Command {
     private String taskName;
 
     /**
      * Constructs a Command for event with the specified task's name.
-     *
      * @param taskName the task's name
      */
     public ToDoCommand(String taskName) {
@@ -25,12 +22,8 @@ public class ToDoCommand extends Command {
     }
 
     /**
-     * Executes the ToDoCommand. Executing this command will
-     * create a new ToDoTask that will be added to the TaskList
-     * and will be saved to the hard disk by Storage. The Ui will shown
-     * the corresponding message depending on whether an exception is thrown
-     * or not.
-     *
+     * Executes the ToDoCommand. Executing this command will create a new ToDoTask that will be added to the
+     * TaskList and will be saved to the hard disk by Storage.
      * @param tasks TaskList of the current task.
      * @param ui Ui to deals with interactions with the user.
      * @param storage Storage to save the data to the hard disk.
@@ -41,6 +34,7 @@ public class ToDoCommand extends Command {
         Task task = new ToDoTask(taskName);
         tasks.addTask(task);
         storage.saveTaskToFile(task);
+        ui.sendMessage(ui.addSuccess(task, tasks.size()));
         return ui.addSuccess(task, tasks.size());
     }
 }

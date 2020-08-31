@@ -11,8 +11,7 @@ import duke.task.Task;
 import duke.task.ToDoTask;
 
 /**
- * This class deals with unit interface of Duke.
- * This includes the messages that Duke will send as well as
+ * This class deals with unit interface of Duke. This includes the messages that Duke will send as well as
  * reading the user input.
  */
 public class Ui {
@@ -28,7 +27,6 @@ public class Ui {
 
     /**
      * Reads the user input as a string.
-     *
      * @return user input
      */
     public String readLine() {
@@ -40,7 +38,6 @@ public class Ui {
      */
     public String welcome() {
         return "Hi! My name is Duke.\nWhat do you want me to do?";
-//        sendMessage(message);
     }
 
     /**
@@ -48,24 +45,19 @@ public class Ui {
      */
     public String exit() {
         return "Bye. Thank you for using me!";
-//        sendMessage(message);
     }
 
     /**
-     * Returns a message about the specified task has been marked
-     * as done.
-     *
+     * Returns a message about the specified task has been marked as done.
      * @param task task that was marked as done
      * @return done success message
      */
     public String doneSuccess(Task task) {
-        return "Sucessfully marked this task as done:\n" + INDENTATION + task.toString();
+        return "Successfully marked this task as done:\n" + INDENTATION + task.toString();
     }
 
     /**
      * Returns a message about the specified task has been deleted.
-     * The message will also tells how many tasks left in the list.
-     *
      * @param task task that was deleted
      * @param taskSize the task size after deletion
      * @return delete success message
@@ -77,8 +69,6 @@ public class Ui {
 
     /**
      * Returns a message about the specified task has been added.
-     * The message will also tells how many tasks left in the list.
-     *
      * @param task task that was added
      * @param taskSize the task size after addition
      * @return add success message
@@ -90,9 +80,6 @@ public class Ui {
 
     /**
      * Returns a message showing all of tasks in the list.
-     * The numbering shown in this message is used when the user
-     * wants to delete task or mark task as done.
-     *
      * @param tasks TaskList to be shown
      * @return message about all the tasks in the list
      */
@@ -108,18 +95,17 @@ public class Ui {
     }
 
     /**
-     * Returns a message showing all the tasks in the list that happens
-     * after the specified date.
-     *
+     * Returns a message showing all the tasks in the list that happens after the specified date.
      * @param date the specified date by the user
      * @param tasks list of tasks
      * @return message about all the tasks in the list after the specified date
      */
-    public String eachTaskAfter(LocalDate date, TaskList tasks) {
+    public String showTaskAfter(LocalDate date, TaskList tasks) {
         StringBuilder sb = new StringBuilder();
         sb.append("Here is the tasks after "
                 + date.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ":\n");
         int count = 1;
+
         for (Task task : tasks.getTasks()) {
             if (task instanceof ToDoTask) {
                 continue;
@@ -142,19 +128,18 @@ public class Ui {
     }
 
     /**
-     * Returns a message showing all the tasks in the list that happens
-     * before or equals to the specified date.
-     *
+     * Returns a message showing all the tasks in the list that happens before or equals to the specified date.
      * @param date the specified date by the user
      * @param tasks list of tasks
      * @return message about all the tasks in the list before
      * or equals the specified date
      */
-    public String eachTaskBefore(LocalDate date, TaskList tasks) {
+    public String showTaskBefore(LocalDate date, TaskList tasks) {
         StringBuilder sb = new StringBuilder();
         sb.append("Here is the tasks before "
                 + date.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ":\n");
         int count = 1;
+
         for (Task task : tasks.getTasks()) {
             if (task instanceof ToDoTask) {
                 continue;
@@ -179,9 +164,7 @@ public class Ui {
     }
 
     /**
-     * Returns a message showing all the tasks in the list that contains
-     * the specified keyword.
-     *
+     * Returns a message showing all the tasks in the list that contains the specified keyword.
      * @param keyword keyword to find task
      * @param tasks list of tasks
      * @return message about all the task that contains the specified keyword
@@ -208,7 +191,6 @@ public class Ui {
 
     /**
      * Gets the DukeException's message and prints it to the user.
-     *
      * @param e exception thrown when running duke
      */
     public void showError(DukeException e) {
@@ -217,7 +199,6 @@ public class Ui {
 
     /**
      * Prints the specified message to the user.
-     *
      * @param sendMessage message to be sent to the user
      */
     public void sendMessage(String sendMessage) {
@@ -226,8 +207,7 @@ public class Ui {
 
     /**
      * Creates a line of equals sign before and after the specified message.
-     * The length of the line may change depends on the length of
-     * the message.
+     * The length of the line may change depends on the length of the message.
      *
      * @param message the specified message
      * @return message with line before and after it

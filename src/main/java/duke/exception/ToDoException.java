@@ -1,8 +1,7 @@
 package duke.exception;
 
 /**
- * The exception thrown when the user does not input any description
- * for the todo's task name.
+ * The exception thrown when the user does not input any description for the todo's task name.
  */
 public class ToDoException extends DukeException {
 

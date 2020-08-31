@@ -1,9 +1,8 @@
 package duke.exception;
 
 /**
- * The exception thrown when the user does not input any date
- * or input invalid date format when using deadline or event
- * command.
+ * The exception thrown when the user does not input any date or input invalid date format
+ * when using deadline or event command.
  */
 public class InvalidDateTimeFormatException extends DukeException {
 
