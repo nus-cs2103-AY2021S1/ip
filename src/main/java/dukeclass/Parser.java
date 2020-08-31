@@ -10,6 +10,8 @@ import java.util.Scanner;
 
 public class Parser {
 
+
+
     /**
      * Parse the input String by the user and returns a task.
      *
@@ -74,20 +76,54 @@ public class Parser {
 
         String[] splitString = rawInput.split(" ");
 
-        if (splitString[0].equals("find")) {
+
+        if (splitString[0].equals("list")) {
+
+            System.out.println(Ui.printTaskList(list));
+
+            return list;
+
+        } else if (splitString[0].equals("done")) {
+            //print OG list
+            // can add error handling exception in case out of bounds
+            // can add error handling for exception already done
+            int index = Integer.parseInt(splitString[1]);
+            list.get(index - 1).setStatus(true);
+
+            System.out.println(Ui.printTaskList(list));
+
+            return list;
+
+        } else if (splitString[0].equals("delete")) {
+            // can add error handling exception in case out of bounds
+            int index = Integer.parseInt(splitString[1]);
+            list.remove(index - 1);
+
+            System.out.println(Ui.printTaskList(list));
+
+            return list;
+
+        } else if (splitString[0].equals("find")) {
 
             TaskList tempList = new TaskList();
             for (int i = 0; i < list.size(); i++) {
-                if(list.get(i).toString().contains(splitString[1])) {
+                if (list.get(i).toString().contains(splitString[1])) {
                     tempList.add(list.get(i));
                 }
             }
-
-            return tempList;
+            System.out.println(tempList.toString());
+            return list;
 
         } else {
-            throw new InvalidInputException("Unrecognized command");
+            Task currTask = Parser.parser(rawInput);
+            list.add(currTask);
+            System.out.println(Ui.printTask(currTask));
+
+            return list;
+
         }
+
+
 
     }
 }

@@ -14,6 +14,31 @@ import java.util.Scanner;
 public class Storage {
 
     /**
+     * Create the file and directory for storage if it does not exist yet.
+     *
+     * @return File for storage of TaskList.
+     */
+    public static File createFile() {
+        File d = new File("data");
+        File f = new File("data/task.txt");
+        try {
+            if (!d.exists()) {
+                if(d.mkdir()) {
+                    System.out.println("New data directory created");
+                }
+            }
+
+            if(f.createNewFile()) {
+                System.out.println("new task data file created");
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return f;
+    }
+
+    /**
      * Parse the input String line by line and returns a task.
      * Each segment in an entry must be split by "//".
      *
