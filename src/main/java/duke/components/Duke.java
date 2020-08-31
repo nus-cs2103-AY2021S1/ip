@@ -1,12 +1,9 @@
 package duke.components;
 
 import duke.exceptions.DukeException;
-import javafx.application.Application;
-import javafx.stage.Stage;
-
 import java.io.*;
 
-public class Duke extends Application {
+public class Duke {
 
     private Storage storage;
     private TaskList tasks;
@@ -72,9 +69,5 @@ public class Duke extends Application {
         new Duke("duke.txt").run();
     }
 
-    @Override
-    public void start(Stage primaryStage) throws Exception {
-
-    }
 
 }
