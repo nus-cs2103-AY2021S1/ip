@@ -1,7 +1,8 @@
-import java.util.ArrayList;
+package Duke;
+
 import java.util.Scanner;
 
-class Ui {
+public class Ui {
     Scanner sc;
 
     public Ui(){
@@ -38,7 +39,8 @@ class Ui {
     }
 
     public void showTotalTasks(int size){
-        System.out.println("Now you have " + size + " tasks in the list.");
+        String plural = size != 1 ? "tasks" : "task";
+        System.out.println("Now you have " + size + " " + plural + " in the list.");
     }
 
     public void printMessage(String output){
