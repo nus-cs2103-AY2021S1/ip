@@ -8,14 +8,27 @@ import duke.exception.DukeException;
 import duke.task.TaskList;
 import javafx.application.Platform;
 
+/**
+ * Represents the Duke chat bot.
+ */
 public class Duke {
+    /**
+     * The file path where tasks will be stored.
+     */
     private static final Path filePath = Paths.get(".", "data", "duke.txt");
 
+    /**
+     * The storage associated with the chat bot.
+     */
     private final Storage storage;
+
+    /**
+     * The list of tasks associated with the chat bot.
+     */
     private TaskList tasks;
 
     /**
-     * Initialises a new instance of Duke
+     * Initialises a new instance of Duke.
      */
     public Duke() {
         this.storage = new Storage(Duke.filePath);
@@ -39,7 +52,7 @@ public class Duke {
 
 
     /**
-     * Generates the Duke's response to the given input
+     * Generates the Duke's response to the given input.
      *
      * @param input The input by the user.
      * @return The response given by Duke.
