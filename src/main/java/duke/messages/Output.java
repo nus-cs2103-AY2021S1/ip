@@ -5,8 +5,7 @@ import java.util.List;
 import duke.task.Task;
 
 /**
- * Deals with interactions with the user.
- * Also prints the relevant responses and messages.
+ * Contains the relevant responses and messages.
  */
 public class Output {
 

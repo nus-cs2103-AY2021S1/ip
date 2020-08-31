@@ -1,4 +1,4 @@
-package duke;
+package duke.task;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -11,11 +11,6 @@ import duke.exception.DukeInvalidKeywordException;
 import duke.exception.DukeInvalidListNumberInputException;
 import duke.exception.DukeInvalidTaskDescriptionException;
 import duke.exception.DukeInvalidTaskTimeException;
-
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.ToDo;
 
 public class TaskListTest {
 
@@ -66,7 +61,7 @@ public class TaskListTest {
                     tasks.addTask("event", "event /at blah").toString());
         } catch (DukeInvalidTaskTimeException e) {
             assertEquals("ERROR: Usage: <event> <description> /at <time>\n"
-                    + "    Time formatting: dd-MM-yyyy HH:mm", e.toString());
+                    + "Time formatting: dd-MM-yyyy HH:mm", e.toString());
         }
     }
 
@@ -85,7 +80,7 @@ public class TaskListTest {
                     tasks.addTask("deadline", "deadline /by blah").toString());
         } catch (DukeInvalidTaskTimeException e) {
             assertEquals("ERROR: Usage: <deadline> <description> /by <time>\n"
-                    + "    Time formatting: dd-MM-yyyy HH:mm", e.toString());
+                    + "Time formatting: dd-MM-yyyy HH:mm", e.toString());
         }
     }
 
