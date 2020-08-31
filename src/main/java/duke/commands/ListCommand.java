@@ -2,7 +2,6 @@ package duke.commands;
 
 import duke.DukeException;
 import duke.Storage;
-import duke.Ui;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
 
@@ -15,17 +14,18 @@ public class ListCommand extends Command {
      * Prints out list of tasks of user.
      *
      * @param tasklist list of all the tasks stored in Duke so far.
-     * @param ui prints out messages notifying user of what is being done.
      * @param storage stores all the tasks being added so far into user's local storage.
      * @throws DukeException when no task in list.
      */
-    public void execute(TaskList tasklist, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasklist, Storage storage) throws DukeException {
+        String response = "";
         if (tasklist.getSize() == 0) {
             throw new DukeException("there's nothing on the list yet.");
         } else {
             for (Task i : tasklist.getList()) {
-                ui.showMessage(tasklist.getList().indexOf(i) + 1 + "." + i);
+                response += (tasklist.getList().indexOf(i) + 1 + "." + i) + "\n";
             }
         }
+        return response;
     }
 }

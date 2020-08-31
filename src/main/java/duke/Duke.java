@@ -3,6 +3,8 @@ import java.io.IOException;
 
 import duke.commands.Command;
 import duke.tasks.TaskList;
+import javafx.application.Platform;
+
 
 /**
  * Bot with personality which assists and keeps track of user's tasks.
@@ -10,7 +12,6 @@ import duke.tasks.TaskList;
 public class Duke {
     private Storage storage;
     private TaskList tasks;
-    private Ui ui;
     private Parser parser;
 
     /**
@@ -24,13 +25,11 @@ public class Duke {
      * making sense of user's commands and keeping track of user's tasks respectively.
      */
     public Duke() {
-        ui = new Ui();
         storage = new Storage();
         parser = new Parser();
         try {
             tasks = new TaskList(storage.readFile());
         } catch (DukeException e) {
-            ui.showLoadingError();
             tasks = new TaskList();
         }
     }
@@ -43,29 +42,31 @@ public class Duke {
      * to parse and find command of user, executes command and
      * sends result to be saved in storage.
      */
-    public void run() {
-        ui.showWelcome();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                Command command = parser.findCommand(fullCommand);
-                command.execute(tasks, ui, storage);
-                storage.save(tasks.getList());
-                isExit = command.isExit();
-            } catch (DukeException | IOException e) {
-                ui.showError(e.getMessage());
+    public String getResponse(String input) {
+        try {
+            Command command = parser.findCommand(input);
+            if (command.isExit()) {
+                Platform.exit();
             }
+            String response = command.execute(tasks, storage);
+            storage.save(tasks.getList());
+            return response;
+        } catch (DukeException | IOException e) {
+            return (e.getMessage());
         }
     }
 
     /**
-     * Starts Duke up.
-     *
-     * @param args user input from the command line.
+     * Greets the user.
+     * @return greeting message.
      */
-    public static void main(String[] args) {
-        new Duke().run();
+    public String greeting() {
+        /*String logo = " ______  ___       __         __        _____\n"
+                + "   |    /         /  \\       /  \\     /\n"
+                + "   |    \\___     /____\\     /____\\   |\n"
+                + "   |        \\   /      \\   /      \\   \\\n"
+                + " ------  ___/  /        \\ /        \\    -----\n";*/
+        return "Hello! I'm Duke!" + "\nWhat can I do for you?";
     }
 }
 
