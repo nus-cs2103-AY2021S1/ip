@@ -17,24 +17,26 @@ public class Parser {
      * @throws DukeException when user input is not a valid command
      */
 
-    public void command(String str, TaskList tasks, Storage storage) throws DukeException {
+    public String command(String str, TaskList tasks, Storage storage) throws DukeException {
         if (str.equals("list")) {
-            tasks.displayTasks();
+            return tasks.displayTasks();
         } else if (str.startsWith("find")) {
-            tasks.find(str);
+            return tasks.find(str);
         } else {
+            String result = "";
             if (str.startsWith("done")) {
-                tasks.completeTask(str);
+                result = tasks.completeTask(str);
             } else if (str.startsWith("delete")) {
-                tasks.deleteTask(str);
+                result = tasks.deleteTask(str);
             } else if (str.startsWith("todo") | str.startsWith("event") | str.startsWith("deadline")) {
-                tasks.addTask(str);
+                result = tasks.addTask(str);
             } else if (str.equals("clear")) {
-                tasks.clear();
+                result = tasks.clear();
             } else {
                 throw new InvalidCommandException();
             }
             storage.save(tasks);
+            return result;
         }
     }
 }

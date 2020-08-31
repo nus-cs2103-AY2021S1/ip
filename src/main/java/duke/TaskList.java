@@ -32,25 +32,28 @@ public class TaskList {
 
     /**
      * Prints all the tasks line by line to the user.
+     * @return All tasks in order.
      */
-    public void displayTasks() {
-        System.out.println("Here are the tasks in your list:");
+    public String displayTasks() {
+        StringBuilder res = new StringBuilder("Here are the tasks in your list:");
         int i = 1;
         for (Task t : tasks) {
-            System.out.println(i + "." + t.toString());
+            res.append("\n").append(i).append(".").append(t.toString());
             i++;
         }
+        return res.toString();
     }
 
     /**
      * Adds a task to the list based on user input.
      *
      * @param s User input
+     * @return A string to indicate task has been added.
      * @throws InvalidCommandException If command is not valid.
      * @throws EmptyCommandException   If task is missing description.
      * @throws MissingTimeException    If task is missing time.
      */
-    public void addTask(String s) throws InvalidCommandException, EmptyCommandException, MissingTimeException {
+    public String addTask(String s) throws InvalidCommandException, EmptyCommandException, MissingTimeException {
         String str = s.trim();
         if (str.equals("todo") || str.equals("deadline") || str.equals("event")) {
             throw new EmptyCommandException(str);
@@ -61,8 +64,7 @@ public class TaskList {
             switch (arr[0]) {
             case "todo":
                 ToDo td = new ToDo(str2);
-                insert(td);
-                break;
+                return insert(td);
             case "deadline":
                 if (str2.contains("/by")) {
                     String[] arr2 = str2.split("/by", 2);
@@ -73,11 +75,10 @@ public class TaskList {
                         throw new MissingTimeException("deadline");
                     }
                     Deadline dl = new Deadline(arr2[0], arr2[1].trim());
-                    insert(dl);
+                    return insert(dl);
                 } else {
                     throw new MissingTimeException("deadline");
                 }
-                break;
             case "event":
                 if (str2.contains("/at")) {
                     String[] arr2 = str2.split("/at", 2);
@@ -88,11 +89,10 @@ public class TaskList {
                         throw new MissingTimeException("event");
                     }
                     Event ev = new Event(arr2[0], arr2[1].trim());
-                    insert(ev);
+                    return insert(ev);
                 } else {
                     throw new MissingTimeException("event");
                 }
-                break;
             default:
                 throw new InvalidCommandException();
             }
@@ -105,10 +105,11 @@ public class TaskList {
      * Finds and displays tasks containing the relevant keyword
      *
      * @param str The keyword the user is searching for.
+     * @return The tasks which contain the keyword.
      * @throws EmptyFindException      If there is no keyword given.
      * @throws InvalidCommandException If command is not valid.
-     */
-    public void find(String str) throws EmptyFindException, InvalidCommandException {
+     **/
+    public String find(String str) throws EmptyFindException, InvalidCommandException {
         String s = str.trim();
         if (s.equals("find")) {
             throw new EmptyFindException();
@@ -124,15 +125,16 @@ public class TaskList {
                 }
             }
             if (flag) {
-                System.out.println("Here are the matching tasks in your list:");
+                StringBuilder res = new StringBuilder("Here are the matching tasks in your list:");
                 for (Task t : tasks) {
                     if (t.getDescription().contains(keyword)) {
-                        System.out.println(i + "." + t);
+                        res.append("\n").append(i).append(".").append(t);
                         i++;
                     }
                 }
+                return res.toString();
             } else {
-                System.out.println("No matching task has been found");
+                return "No matching task has been found";
             }
         } else {
             throw new InvalidCommandException();
@@ -143,9 +145,10 @@ public class TaskList {
      * Completes the task at the position in the list which the user specifies.
      *
      * @param str User input
+     * @return A string indicating completion of the task.
      * @throws TaskCompletionException If the number is out of range of the list.
      */
-    public void completeTask(String str) throws TaskCompletionException {
+    public String completeTask(String str) throws TaskCompletionException {
         if (!str.startsWith("done ")) {
             throw new TaskCompletionException(tasks.size());
         }
@@ -153,7 +156,11 @@ public class TaskList {
         if (isInteger(val)) {
             int i = Integer.parseInt(val);
             if (i > 0 && i <= tasks.size()) {
-                tasks.get(i - 1).complete();
+                if (tasks.get(i - 1).complete()) {
+                    return "Task is already completed.\n" + tasks.get(i - 1);
+                } else {
+                    return "Task completed: " + tasks.get(i - 1);
+                }
             } else {
                 throw new TaskCompletionException(tasks.size());
             }
@@ -166,9 +173,10 @@ public class TaskList {
      * Deletes the task at the position in the list which the user specifies.
      *
      * @param str User input
+     * @return A string indicating deletion of the task.
      * @throws TaskDeletionException If the number is out of range of the list.
      */
-    public void deleteTask(String str) throws TaskDeletionException {
+    public String deleteTask(String str) throws TaskDeletionException {
         if (!str.startsWith("delete ")) {
             throw new TaskDeletionException(tasks.size());
         }
@@ -176,7 +184,10 @@ public class TaskList {
         if (isInteger(val)) {
             int i = Integer.parseInt(val);
             if (i > 0 && i <= tasks.size()) {
+                String res = "Task has been removed.\n" + tasks.get(i - 1);
                 delete(i);
+                res += "\nYou now have " + tasks.size() + " tasks in the list";
+                return res;
             } else {
                 throw new TaskDeletionException(tasks.size());
             }
@@ -187,25 +198,21 @@ public class TaskList {
 
     /**
      * Deletes all items in the current list.
+     * @return A string indicating tasks have been cleared.
      */
-    public void clear() {
+    public String clear() {
         tasks.clear();
-        System.out.println("Task List has been cleared.");
+        return "Task List has been cleared.";
     }
 
-    private void insert(Task task) {
+    private String insert(Task task) {
         tasks.add(task);
-        System.out.println("Task has been added:");
-        System.out.println(task.toString());
-        System.out.println("You now have " + tasks.size() + " tasks in the list");
+        return "Task has been added:\n" + task + "\nYou now have " + tasks.size() + " tasks in the list";
     }
 
     private void delete(int i) {
         Task t = tasks.get(i - 1);
         tasks.remove(i - 1);
-        System.out.println("Task has been removed.");
-        System.out.println(t.toString());
-        System.out.println("You now have " + tasks.size() + " tasks in the list");
     }
 
     //helper function to check if part of user input is an integer

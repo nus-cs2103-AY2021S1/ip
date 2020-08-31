@@ -9,14 +9,10 @@ public class Ui {
 
     /**
      * Greets the user when Duke is opened.
+     * @return A string to greet the user.
      */
-    public void welcome() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello! I'm duke. What can I do for you? \n" + logo);
+    public String welcome() {
+        return "Hello! I'm duke. What can I do for you?";
     }
 
     /**
@@ -31,9 +27,10 @@ public class Ui {
 
     /**
      * Greets the user upon exiting Duke.
+     * @return A string to greet the user.
      */
-    public void exit() {
-        System.out.println("Bye. Hope to see you again soon!");
+    public String exit() {
+        return "Bye. Hope to see you again soon!";
     }
 
 }

@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class TaskTest {
 
-    Task task = new Task("t");
+    Task task = new ToDo("t");
 
     @Test
     public void testComplete() {
@@ -18,7 +18,7 @@ public class TaskTest {
     @Test
     public void test() {
         String str = task.store();
-        assertEquals("false|t", str);
+        assertEquals("T|false|t", str);
     }
 
 }

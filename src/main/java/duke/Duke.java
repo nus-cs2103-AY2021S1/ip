@@ -3,6 +3,8 @@ package duke;
 import java.util.Scanner;
 
 import duke.exceptions.DukeException;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 
 /**
  * The main program of Duke.
@@ -14,10 +16,15 @@ public class Duke {
     private Ui ui;
     private Parser parser;
 
-    public Duke(String filepath) {
+    public Duke() {
         ui = new Ui();
-        storage = new Storage(filepath);
         parser = new Parser();
+    }
+
+    public void start() {
+        storage = new Storage("data/duke.txt");
+        tasks = new TaskList(storage.load());
+        new Alert(Alert.AlertType.NONE, ui.welcome(), ButtonType.OK).showAndWait();
     }
 
     /**
@@ -25,14 +32,15 @@ public class Duke {
      * Receive and process user input until user keys "bye".
      */
     public void run() {
-        ui.welcome();
+        storage = new Storage("data/duke.txt");
+        System.out.println(ui.welcome());
         tasks = new TaskList(storage.load());
         Scanner sc = new Scanner(System.in);
         String str = sc.nextLine();
         while (!str.equals("bye")) {
             ui.line();
             try {
-                parser.command(str, tasks, storage);
+                System.out.println(parser.command(str, tasks, storage));
             } catch (DukeException e) {
                 System.out.println(e.getMessage());
             }
@@ -40,11 +48,24 @@ public class Duke {
             str = sc.nextLine();
         }
         sc.close();
-        ui.exit();
+        System.out.println(ui.exit());
     }
 
     public static void main(String[] args) {
-        new Duke("data/duke.txt").run();
+        new Duke().run();
     }
 
+    protected String getResponse(String input) {
+        if (input.equals("bye")) {
+            return ui.exit();
+        } else {
+            try {
+                return parser.command(input, tasks, storage);
+            } catch (DukeException e) {
+                return e.getMessage();
+            }
+        }
+    }
 }
+
+
