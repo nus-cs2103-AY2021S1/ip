@@ -7,18 +7,25 @@ import duke.Exceptions.DukeException;
  */
 public class Task {
 
-    /** The description of the task. */
-    private String name;
-
     /** Boolean to determine if the task is completed. */
     protected boolean isDone;
 
+    /** The description of the task. */
+    private String name;
+
     /** Constructor to create a Task. */
-    public Task(String name){
+    public Task(String name) {
         this.name = name;
         isDone = false;
     }
 
+    /**
+     * Checks if the current task has a description that matches the search description.
+     * @param description Represents the search keyword.
+     * @return True if the description of the task matches the search keyword.
+     *             Else returns false.
+     * @throws DukeException
+     */
     public boolean isResult(String description) throws DukeException {
         try {
             return this.name.contains(description);
@@ -30,7 +37,7 @@ public class Task {
     /**
      * Mark the task as completed.
      */
-    public void completed(){
+    public void completed() {
         this.isDone = true;
     }
 
@@ -38,7 +45,7 @@ public class Task {
      * Converts the task to a writable format for the data file.
      * @return The string representation of the task for the data file.
      */
-    public String toData(){
+    public String toData() {
         return (isDone ? "1///" : "0///") + name + "///";
     }
 
@@ -47,7 +54,7 @@ public class Task {
      * @return The string representation for the task for the user.
      */
     @Override
-    public String toString(){
+    public String toString() {
         return (isDone ? "[\u2705]" : "[\u2718]") + " " + name;
     }
 }

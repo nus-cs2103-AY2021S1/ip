@@ -32,7 +32,7 @@ public class Deadline extends Task {
      * @return The string representation of the task for the data file.
      */
     @Override
-    public String toData(){
+    public String toData() {
         return "D///" + super.toData() + localDate.toString() + " " + localTime.toString();
     }
 

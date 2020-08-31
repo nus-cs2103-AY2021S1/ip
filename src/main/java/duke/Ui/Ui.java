@@ -1,9 +1,8 @@
 package duke.Ui;
 
-import duke.Tasks.Task;
-
-import java.util.ArrayList;
 import java.util.Scanner;
+
+import duke.Tasks.Task;
 
 /**
  * Contains and executes all user interaction methods.
@@ -92,7 +91,7 @@ public class Ui {
      * Prints the done message.
      * @param task The task that is completed.
      */
-    public void markDone(Task task){
+    public void markDone(Task task) {
         System.out.println("    Nice! I've marked this task as done:");
         System.out.println("    " + task.toString());
     }
@@ -102,7 +101,7 @@ public class Ui {
      * @param listSize The size of the task list.
      * @param task The task to delete from the list.
      */
-    public void markDelete(int listSize,Task task){
+    public void markDelete(int listSize, Task task) {
         System.out.println("    Noted. I've removed this task:");
         System.out.println("    " + task.toString());
         System.out.println("    Now you have " + listSize + " tasks in the list.");

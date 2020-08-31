@@ -1,17 +1,19 @@
 package duke.Commands;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 import duke.Exceptions.DukeException;
 import duke.Storage.Storage;
 import duke.Tasks.TaskList;
 import duke.Ui.Ui;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
+
 
 /**
  * A command to add different types of tasks.
  */
-public class AddCommand extends Command{
+public class AddCommand extends Command {
 
     /** Stores the type of the task to be added. */
     private String taskType;
@@ -71,6 +73,8 @@ public class AddCommand extends Command{
         case "deadline" :
             tasks.addDeadline(ui, this.description, this.localDate, this.localTime);
             storage.Save(tasks.convertToFile());
+            break;
+        default:
             break;
         }
     }

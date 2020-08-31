@@ -1,19 +1,18 @@
 package duke.Parser;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 import duke.Commands.AddCommand;
 import duke.Commands.Command;
 import duke.Commands.DeleteCommand;
 import duke.Commands.DoneCommand;
 import duke.Commands.ExitCommand;
-import duke.Commands.ListCommand;
 import duke.Commands.FindCommand;
-
+import duke.Commands.ListCommand;
 import duke.Exceptions.DukeException;
-
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 
 /**
  * Parses and understands user commands.
@@ -70,17 +69,19 @@ public class Parser {
                 throw new DukeException("   ☹ OOPS!!! We can't seem to find your event description.");
             }
             if (content[1].equals("")) {
-                throw new DukeException("   ☹ OOPS!!! We can't seem to find your event time. Please type /by before your preferred timing");
+                throw new DukeException("   ☹ OOPS!!! We can't seem to find your event time. Please type "
+                        + "/by before your preferred timing");
             }
             try {
-                String[] dateTime = content[1].split(" ",3);
+                String[] dateTime = content[1].split(" ", 3);
                 LocalDate localDate = LocalDate.from(dateFormatter.parse(dateTime[1]));
                 LocalTime localTime = LocalTime.from(timeFormatter.parse(dateTime[2]));
                 return new AddCommand("deadline", content[0], localDate, localTime);
 
             } catch (DateTimeParseException error) {
-                throw new DukeException("   ☹ OOPS!!! It seems like you've provided us with the wrong date time format for your event. " +
-                        "Please structure it as yyyy-mm-dd hh:mm");
+                throw new DukeException("   ☹ OOPS!!! It seems like you've provided us "
+                        + "with the wrong date time format for your event. "
+                        + "Please structure it as yyyy-mm-dd hh:mm");
             }
             //Fallthrough
 
@@ -93,17 +94,19 @@ public class Parser {
                 throw new DukeException("   ☹ OOPS!!! We can't seem to find your event description.");
             }
             if (content2[1].equals("")) {
-                throw new DukeException("   ☹ OOPS!!! We can't seem to find your event time. Please type /at before your preferred timing");
+                throw new DukeException("   ☹ OOPS!!! We can't seem to find your event time. "
+                        + "Please type /at before your preferred timing");
             }
             try {
-                String[] dateTime = content2[1].split(" ",3);
+                String[] dateTime = content2[1].split(" ", 3);
                 LocalDate localDate = LocalDate.from(dateFormatter.parse(dateTime[1]));
                 LocalTime localTime = LocalTime.from(timeFormatter.parse(dateTime[2]));
                 return new AddCommand("event", content2[0], localDate, localTime);
 
             } catch (DateTimeParseException error) {
-                throw new DukeException("   ☹ OOPS!!! It seems like you've provided us with the wrong date time format for your event. " +
-                        "Please structure it as yyyy-mm-dd hh:mm");
+                throw new DukeException("   ☹ OOPS!!! It seems like you've provided us "
+                        + "with the wrong date time format for your event. "
+                        + "Please structure it as yyyy-mm-dd hh:mm");
             }
             //Fallthrough
 

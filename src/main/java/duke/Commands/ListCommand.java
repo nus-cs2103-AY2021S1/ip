@@ -7,7 +7,7 @@ import duke.Ui.Ui;
 /**
  * A command to display the tasks in the task list.
  */
-public class ListCommand extends Command{
+public class ListCommand extends Command {
 
     /**
      * Executes the command to perform its appropriate action.

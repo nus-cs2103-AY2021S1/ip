@@ -1,9 +1,14 @@
 package duke.Storage;
 
-import duke.Exceptions.DukeException;
-
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
+
+import duke.Exceptions.DukeException;
 
 /**
  * Initialises a storage object to save and load from the data file for duke.
@@ -30,7 +35,7 @@ public class Storage {
      * Creates a folder in the directory if it does not exist.
      * @throws DukeException
      */
-    public void makeFolder() throws DukeException{
+    public void makeFolder() throws DukeException {
         File savedFolder = new File(folderPath);
         savedFolder.mkdir();
         this.makeFile();
@@ -40,9 +45,9 @@ public class Storage {
      * Creates the data file if it does not exist in the directory.
      * @throws DukeException
      */
-    public void makeFile() throws DukeException{
+    public void makeFile() throws DukeException {
         File savedFile = new File(filePath);
-        try{
+        try {
             savedFile.createNewFile();
         } catch (IOException e) {
             throw new DukeException("    Error creating data storage file for duke");
@@ -58,7 +63,7 @@ public class Storage {
         File savedFolder = new File(folderPath);
         File savedFile = new File(filePath);
 
-        if(savedFolder.exists()){
+        if (savedFolder.exists()) {
             if (savedFile.exists()) {
                 try {
                     BufferedReader bufferedReader = new BufferedReader(new FileReader(savedFile));

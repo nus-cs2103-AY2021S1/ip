@@ -1,15 +1,12 @@
 package duke.Tasks;
 
-import duke.Commands.AddCommand;
-import duke.Commands.Command;
-import duke.Exceptions.DukeException;
-import duke.Ui.Ui;
-import javafx.fxml.LoadException;
-
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+
+import duke.Exceptions.DukeException;
+import duke.Ui.Ui;
 
 /**
  * Initialises a list to store all tasks captured in duke.
@@ -131,7 +128,7 @@ public class TaskList {
      */
     public ArrayList<String> convertToFile() {
         ArrayList<String> dataFile = new ArrayList<>();
-        for (Task task: this.listOfTasks){
+        for (Task task: this.listOfTasks) {
             dataFile.add(task.toData());
         }
         return dataFile;
@@ -161,6 +158,12 @@ public class TaskList {
         }
     }
 
+    /**
+     * Parses the list of tasks fetched from the data file.
+     * Populates the taskList with the user's task history.
+     * @param listOfTasks Fetched from the data file.
+     * @throws DukeException
+     */
     public void parseFile(ArrayList<String> listOfTasks) throws DukeException {
 
         for (String t: listOfTasks) {
@@ -170,7 +173,8 @@ public class TaskList {
             }
 
             if (!task[1].equals("1") && !task[1].equals("0")) {
-                throw new DukeException("    Error encountered in reading task done status." + !task[1].equals("0") + task[1]);
+                throw new DukeException("    Error encountered in reading task done status."
+                        + !task[1].equals("0") + task[1]);
             }
 
             switch (task[0]) {

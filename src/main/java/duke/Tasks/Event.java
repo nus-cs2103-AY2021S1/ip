@@ -32,7 +32,7 @@ public class Event extends Task {
      * @return The string representation of the task for the data file.
      */
     @Override
-    public String toData(){
+    public String toData() {
         return "E///" + super.toData() + localDate.toString() + ' ' + localTime.toString();
     }
 
