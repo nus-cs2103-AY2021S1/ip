@@ -19,12 +19,14 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Delete the task with the specified taskNumber.
+     * Deletes the task with the specified taskNumber from TaskList, formats a feedback String to be displayed
+     * to user and updates the Storage.
      *
-     * @param tasks task list containing all tasks
-     * @param ui ui for interaction with user
-     * @param storage storage to retrieve and store tasks entered by user
+     * @param tasks TaskList containing all tasks
+     * @param ui Ui for formatting of message Strings to be displayed to user
+     * @param storage Storage to retrieve and store Tasks entered by user
      * @throws NoSuchTaskException if invalid taskNumber was provided
+     * @return Response object containing the feedback String to be displayed by the GUI
      */
     @Override
     public Response execute(TaskList tasks, Ui ui, Storage storage) throws NoSuchTaskException {

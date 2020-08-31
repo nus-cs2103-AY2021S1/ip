@@ -25,8 +25,7 @@ public class TaskList {
     }
 
     /**
-     * Gets an ordered List object containing all Tasks.
-     * List to be returned is ordered in increasing order of time since addition of the Task.
+     * Gets an unordered List object containing all Tasks stored in this TaskList.
      *
      * @return a List object containing all Tasks
      */
@@ -36,6 +35,7 @@ public class TaskList {
 
     /**
      * Sets the Task with the given taskNumber as completed.
+     * taskNumber is determined by the implementation of the specific TaskList
      *
      * @param taskNumber taskNumber of the Task to be completed
      * @return new Task object that represents a completed state of the original Task
@@ -52,6 +52,7 @@ public class TaskList {
 
     /**
      * Deletes the Task with the given taskNumber.
+     * taskNumber is determined by the implementation of the specific TaskList
      *
      * @param taskNumber taskNumber of the Task to be deleted
      * @return the Task that was deleted
@@ -85,6 +86,13 @@ public class TaskList {
         return result;
     }
 
+    /**
+     * Returns a List containing the mapping of all Tasks stored in this TaskList and whose description matches a given
+     * keyword, to their assigned taskNumber.
+     *
+     * @param keyword keyword to find Tasks by
+     * @return a List of NumberedTasks created from Tasks stored in this TaskList that match the given keyword
+     */
     public List<NumberedTask> getMatchingTasks(String keyword) {
         List<NumberedTask> result = new ArrayList<>();
         for (int i = 0; i < taskList.size(); i++) {

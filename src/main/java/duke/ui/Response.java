@@ -5,7 +5,10 @@ package duke.ui;
  */
 public class Response {
 
+    /** Whether the GUI should exit **/
     private boolean isExit;
+
+    /** Message the GUI should display to user **/
     private String message;
 
     public Response(boolean isExit, String message) {

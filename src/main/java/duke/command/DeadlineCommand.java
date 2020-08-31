@@ -25,13 +25,14 @@ public class DeadlineCommand extends Command {
     }
 
     /**
-     * Create a Deadline with the user entered description and due-datetime String, store it in TaskList,
-     * print feedback to user and store the new Deadline in Storage.
+     * Creates a Deadline with the user entered description and due-datetime String, store it in TaskList,
+     * formats a feedback String to user and store the new Deadline in Storage.
      *
-     * @param tasks task list containing all tasks
-     * @param ui ui for interaction with user
-     * @param storage storage to retrieve and store tasks entered by user
+     * @param tasks TaskList containing all tasks
+     * @param ui Ui for formatting of message Strings to be displayed to user
+     * @param storage Storage to retrieve and store Tasks entered by user
      * @throws DukeException if invalid date String provided
+     * @return Response object containing the formatted feedback String to be displayed by the GUI
      */
     @Override
     public Response execute(TaskList tasks, Ui ui, Storage storage) throws WrongDateFormatException {

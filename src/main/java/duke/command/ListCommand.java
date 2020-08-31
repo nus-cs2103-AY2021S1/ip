@@ -14,11 +14,12 @@ import java.util.List;
 public class ListCommand extends Command {
 
     /**
-     * Print out each Task sequentially in TaskList.
+     * Gets all Tasks stored in TaskList and format a String to display all the Tasks to the user.
      *
-     * @param tasks task list containing all tasks
-     * @param ui ui for interaction with user
-     * @param storage storage to retrieve and store tasks entered by user
+     * @param tasks TaskList containing all tasks
+     * @param ui Ui for formatting of message Strings to be displayed to user
+     * @param storage Storage to retrieve and store Tasks entered by user
+     * @return Response object containing the formatted String to be displayed to the user by the GUI
      */
     @Override
     public Response execute(TaskList tasks, Ui ui, Storage storage) {

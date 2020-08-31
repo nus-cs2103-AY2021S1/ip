@@ -7,7 +7,7 @@ import duke.ui.Response;
 import duke.ui.Ui;
 
 /**
- * Command to create a Todo Task. Created by using "todo description"
+ * Represents a command to create a Todo Task. Created by using "todo description"
  */
 public class TodoCommand extends Command {
 
@@ -18,12 +18,13 @@ public class TodoCommand extends Command {
     }
 
     /**
-     * Create a Todo with the user entered description, store it in TaskList,
-     * print feedback to user and store the new Todo in Storage.
+     * Creates a Todo with the user entered description, store it in TaskList, format a feedback String to be displayed
+     * to user and store the new Todo in Storage.
      *
-     * @param tasks task list containing all tasks
-     * @param ui ui for interaction with user
-     * @param storage storage to retrieve and store tasks entered by user
+     * @param tasks TaskList containing all tasks
+     * @param ui Ui for formatting of message Strings to be displayed to user
+     * @param storage Storage to retrieve and store Tasks entered by user
+     * @return Response object containing the feedback String to be displayed by the GUI
      */
     @Override
     public Response execute(TaskList tasks, Ui ui, Storage storage) {

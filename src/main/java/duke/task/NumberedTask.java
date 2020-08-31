@@ -1,7 +1,7 @@
 package duke.task;
 
 /**
- * Represents a mapping of a taskNumber to a task
+ * Represents a mapping of a taskNumber to a Task
  */
 public class NumberedTask {
 

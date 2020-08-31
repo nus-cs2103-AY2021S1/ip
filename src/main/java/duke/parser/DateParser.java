@@ -7,7 +7,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 /**
- * Parse Strings representing date and time.
+ * Parses Strings representing date and time.
  */
 public class DateParser {
 
@@ -16,7 +16,7 @@ public class DateParser {
     private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern(format);
 
     /**
-     * Parse a datetime String into a LocalDateTime object.
+     * Parses a datetime String into a LocalDateTime object.
      * String should be in the format "DD MMM YYYY hhmm"
      *
      * @param dateTime String representing date and time
@@ -33,7 +33,7 @@ public class DateParser {
     }
 
     /**
-     * Parse a ISO datetime format String into a LocalDateTime Object.
+     * Parses a ISO datetime format String into a LocalDateTime Object.
      * The ISO datetime format should be of the following structure: "YYYY-MM-DDTHH:MM";
      *
      * @param isoString - ISO datetime format String

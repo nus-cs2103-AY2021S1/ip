@@ -11,11 +11,12 @@ import duke.ui.Response;
 public class ByeCommand extends Command {
 
     /**
-     * Print goodbye message to user.
+     * Instructs the GUI to exit after displaying a given goodbye message to user.
      *
-     * @param tasks task list containing all tasks
-     * @param ui ui for interaction with user
-     * @param storage storage to retrieve and store tasks entered by user
+     * @param tasks TaskList containing all tasks
+     * @param ui Ui for formatting of message Strings to be displayed to user
+     * @param storage Storage to retrieve and store Tasks entered by user
+     * @return Response containing a goodbye message to be displayed by the GUI and an instruction for the GUI to exit
      */
     @Override
     public Response execute(TaskList tasks, Ui ui, Storage storage) {

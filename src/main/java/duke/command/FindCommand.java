@@ -19,6 +19,15 @@ public class FindCommand extends Command {
         this.searchString = searchString;
     }
 
+    /**
+     * Searches through all Tasks in the TaskList and gets all Tasks whose description matches the given searchString
+     * and format a String to display all found Tasks to the user.
+     *
+     * @param tasks TaskList containing all tasks
+     * @param ui Ui for formatting of message Strings to be displayed to user
+     * @param storage Storage to retrieve and store Tasks entered by user
+     * @return Response object containing the String to be displayed to the user by the GUI
+     */
     @Override
     public Response execute(TaskList tasks, Ui ui, Storage storage) {
         List<NumberedTask> foundTasks = tasks.getMatchingTasks(searchString);

@@ -12,17 +12,18 @@ import duke.exceptions.DukeException;
 public abstract class Command {
 
     /**
-     * Execute the appropriate action for the Command.
+     * Executes the appropriate action for the Command and return a Response containing data the GUI requires.
      *
-     * @param tasks task list containing all tasks
-     * @param ui ui for interaction with user
-     * @param storage storage to retrieve and store tasks entered by user
+     * @param tasks TaskList containing all tasks
+     * @param ui Ui for formatting of message Strings to be displayed to user
+     * @param storage Storage to retrieve and store Tasks entered by user
      * @throws DukeException if there is a problem when executing the action due to invalid user input
+     * @return Response object containing data for the GUI to use
      */
     public abstract Response execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
 
     /**
-     * Whether the Command causes the app to exit.
+     * Returns whether the Command causes the app to exit.
      *
      * @return true if Command causes the app to exit, false otherwise
      */

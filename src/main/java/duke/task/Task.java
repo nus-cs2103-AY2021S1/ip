@@ -1,9 +1,9 @@
 package duke.task;
 
 /**
- * Represent tasks which user enter into the app.
+ * Represents tasks which user enter into the app.
  */
-public class Task {
+public abstract class Task {
 
     protected boolean isCompleted;
     protected String description;
@@ -20,16 +20,14 @@ public class Task {
     }
 
     /**
-     * Mark a Task as completed.
+     * Marks a Task as completed.
      *
      * @return new Task object which has isCompleted set to true
      */
-    public Task markCompleted() {
-        return new Task(description, true);
-    }
+    public abstract Task markCompleted();
 
     /**
-     * Get a String representation of the Task that is used for storage.
+     * Gets a String representation of the Task that is used for storage.
      *
      * @return a String representation of the Task for storage
      */
