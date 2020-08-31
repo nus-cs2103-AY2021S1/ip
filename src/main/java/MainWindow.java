@@ -47,5 +47,8 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
+        if (duke.getExitProgram()) {
+            System.exit(0);
+        }
     }
 }

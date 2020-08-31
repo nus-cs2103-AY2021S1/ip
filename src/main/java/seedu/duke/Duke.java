@@ -8,6 +8,7 @@ public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
+    private boolean exitProgram;
 
     /**
      * Initializes Duke with the file path of the data file to be used for storage
@@ -17,37 +18,30 @@ public class Duke {
     public Duke(String filePath) {
         this.ui = new Ui();
         this.storage = new Storage(filePath);
+        this.exitProgram = false;
         try {
             this.tasks = new TaskList(this.storage.load());
         } catch (DukeException e) {
-            ui.showLoadingError();
             this.tasks = new TaskList();
         }
     }
 
     /**
-     * Runs the chat bot program continuously until the user gives the exit program command.
+     * Returns the output of Duke based on the user's input and decide whether to exit program
      */
-    public void run() {
-        ui.showWelcome();
-        boolean exitProgram = false;
-        while (!exitProgram) {
-            try {
-                ui.showBlankLine();
-                String fullCommand = ui.readCommand();
-                ui.showLine();
-                Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
-                exitProgram = c.isExit();
-            } catch (DukeException err) {
-                ui.showError(err.getMessage());
-            } finally {
-                ui.showLine();
-            }
+    public String getResponse(String input) {
+        ui.clearOutputMessage();
+        try {
+            Command c = Parser.parse(input);
+            c.execute(tasks, ui, storage);
+            this.exitProgram = c.isExit();
+        } catch (DukeException err) {
+            ui.showError(err.getMessage());
         }
+        return ui.getOutputMessage();
     }
 
-    public String getResponse(String input) {
-        return input;
+    public boolean getExitProgram() {
+        return this.exitProgram;
     }
 }

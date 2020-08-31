@@ -2,28 +2,38 @@ package seedu.duke;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Scanner;
 import java.util.List;
 
 /**
- * Handles all interaction with the user, including the reading of user input and outputting text.
+ * Handles the output to the user
  */
 public class Ui {
-    private final Scanner scanner;
+    private String outputMessage;
 
     /**
      * Initializes the Ui object.
      */
     public Ui() {
-        scanner = new Scanner(System.in);
+        this.outputMessage = "";
     }
 
     /**
-     * Reads the user input and return it.
-     * @return User's input.
+     * Clear the current output message
      */
-    public String readCommand() {
-        return scanner.nextLine();
+    public void clearOutputMessage() {
+        this.outputMessage = "";
+    }
+
+    /**
+     * Get the current output message
+     */
+    public String getOutputMessage() {
+        return this.outputMessage;
+    }
+
+    private void outputLine(String message) {
+        this.outputMessage += message;
+        this.outputMessage += "\n";
     }
 
     /**
@@ -31,26 +41,22 @@ public class Ui {
      */
     public void showWelcome() {
         String name = "Omega";
-        printHorizontalLine();
-        System.out.println("Hi! I am " + name + ", your personal assistant.");
-        System.out.println("How may I help you today?");
-        printHorizontalLine();
+        this.outputLine("Hi! I am " + name + ", your personal assistant.");
+        this.outputLine("How may I help you today?");
     }
 
     /**
      * Shows goodbye message to user.
      */
     public void showGoodbye() {
-        System.out.println("Goodbye! Shutting down now...");
+        this.outputLine("Goodbye! Shutting down now...");
     }
 
     /**
      * Shows loading data from disk error to user.
      */
     public void showLoadingError() {
-        printHorizontalLine();
-        System.out.println("Sorry, there is an error loading the data");
-        printHorizontalLine();
+        this.outputLine("Sorry, there is an error loading the data");
     }
 
     /**
@@ -58,7 +64,7 @@ public class Ui {
      * @param errorMessage Error message to be shown to the user.
      */
     public void showError(String errorMessage) {
-        System.out.println(errorMessage);
+        this.outputLine(errorMessage);
     }
 
     /**
@@ -66,7 +72,7 @@ public class Ui {
      * @param taskList The list of tasks to be shown.
      */
     public void showAllTasks(List<Task> taskList) {
-        System.out.println("Here are the tasks in your list:");
+        this.outputLine("Here are the tasks in your list:");
         showTasks(taskList);
     }
 
@@ -76,7 +82,7 @@ public class Ui {
      * @param date The date used to filter the deadlines and events.
      */
     public void showTasksOnDate(List<Task> taskList, LocalDate date) {
-        System.out.println(String.format(
+        this.outputLine(String.format(
                 "Here are the tasks in your list on %s:",
                 date.format(DateTimeFormatter.ofPattern("MMM d yyyy"))));
         showTasks(taskList);
@@ -88,17 +94,17 @@ public class Ui {
      */
     public void showTasksFound(List<Task> taskList) {
         if (taskList.size() > 0) {
-            System.out.println("Here are the matching tasks in your list:");
+            this.outputLine("Here are the matching tasks in your list:");
             showTasks(taskList);
         } else {
-            System.out.println("There are no matching tasks in your list :(");
+            this.outputLine("There are no matching tasks in your list :(");
         }
     }
 
     public void showTasks(List<Task> taskList) {
         int idx = 1;
         for (Task task : taskList) {
-            System.out.println(String.format("%d.%s", idx, task.toString()));
+            this.outputLine(String.format("%d.%s", idx, task.toString()));
             idx += 1;
         }
     }
@@ -108,7 +114,7 @@ public class Ui {
      * @param task The task that has been marked as done.
      */
     public void showTaskDone(Task task) {
-        System.out.println("Nice! I've marked this task as done:");
+        this.outputLine("Nice! I've marked this task as done:");
         printWithIndent(task.toString());
     }
 
@@ -118,9 +124,9 @@ public class Ui {
      * @param numTasksLeft The total number of tasks left.
      */
     public void showTaskDeleted(Task task, int numTasksLeft) {
-        System.out.println("Noted. I've removed this task:");
+        this.outputLine("Noted. I've removed this task:");
         printWithIndent(task.toString());
-        System.out.println(String.format("Now you have %d tasks in the list.", numTasksLeft));
+        this.outputLine(String.format("Now you have %d tasks in the list.", numTasksLeft));
     }
 
     /**
@@ -129,31 +135,12 @@ public class Ui {
      * @param numTasksLeft The total number of tasks left.
      */
     public void showTaskAdded(Task task, int numTasksLeft) {
-        System.out.println("Got it. I've added this task:");
+        this.outputLine("Got it. I've added this task:");
         printWithIndent(task.toString());
-        System.out.println(String.format("Now you have %d tasks in the list.", numTasksLeft));
-    }
-
-    /**
-     * Shows a blank line to the user.
-     */
-    public void showBlankLine() {
-        System.out.println();
-    }
-
-    /**
-     * Shows a horizontal line to the user.
-     */
-    public void showLine() {
-        this.printHorizontalLine();
-    }
-
-    private void printHorizontalLine() {
-        String horizontalLine = "---------------------------------------------";
-        System.out.println(horizontalLine);
+        this.outputLine(String.format("Now you have %d tasks in the list.", numTasksLeft));
     }
 
     private void printWithIndent(String str) {
-        System.out.println("  " + str);
+        this.outputLine("  " + str);
     }
 }
