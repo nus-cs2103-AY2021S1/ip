@@ -32,6 +32,10 @@ public class TaskList {
         System.out.println(str);
     }
 
+    public static void addStoredTask(Task task) {
+        tasks.add(task);
+    }
+
     /**
      * Prints user's list of tasks.
      *
