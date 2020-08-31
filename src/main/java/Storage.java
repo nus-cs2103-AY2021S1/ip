@@ -17,6 +17,8 @@ public class Storage {
         this.pathString = pathString;
     }
 
+    private static String HORIZONTAL_LINE = "    ____________________________________________________________\n";
+
     public TaskList getListFromStorage() {
         Path path = Path.of(pathString);
         File savedListFile = new File(pathString);
@@ -27,18 +29,18 @@ public class Storage {
             if (!doesSavedListExist) {
                 List<String> contents = Files.readAllLines(path, StandardCharsets.UTF_8);
                 if (contents.size() > 0) {
-                    System.out.printf(horizontalLine + "     Found an existing list at %s%n" + horizontalLine,
+                    System.out.printf(HORIZONTAL_LINE + "     Found an existing list at %s%n" + HORIZONTAL_LINE,
                                             path);
                 } else {
-                    System.out.printf(horizontalLine + "     Found an existing list, but it was empty!%n" +
-                                        horizontalLine);
+                    System.out.printf(HORIZONTAL_LINE + "     Found an existing list, but it was empty!%n" +
+                            HORIZONTAL_LINE);
                 }
 
                 for (String taskLine : contents) {
                     taskList.addTask(parser.parseFromStorage(taskLine));
                 }
             } else {
-                System.out.printf(horizontalLine + "     Existing list not found, creating new list\n" + horizontalLine);
+                System.out.printf(HORIZONTAL_LINE + "     Existing list not found, creating new list\n" + HORIZONTAL_LINE);
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
