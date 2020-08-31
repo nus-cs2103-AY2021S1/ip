@@ -15,7 +15,9 @@ public class Task {
         isDone = true;
     }
 
-    public String saveAs() { return isDone + " | " + description; }
+    public String saveAs() {
+        return isDone + " | " + description;
+    }
 
     @Override
     public String toString() {
