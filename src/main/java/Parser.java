@@ -4,8 +4,8 @@ import java.time.format.DateTimeParseException;
  * Parser processes strings.
  */
 public class Parser {
-    static int whichTask = -1;
-    static String searchText = "";
+    private static int whichTask = -1;
+    private static String searchText = "";
 
     /**
      * All valid command types.
@@ -26,13 +26,21 @@ public class Parser {
         return true;
     }
 
+    public static int getWhichTask() {
+        return whichTask;
+    }
+
+    public static String getSearchText() {
+        return searchText;
+    }
+
     /**
      * Processes string and assign it to a command type.
      * @param s command as a String
      * @param size size of tasklist
      * @return a Command enum item
      */
-    static Command parse(String s, int size) {
+    public static Command parse(String s, int size) {
         String[] done = s.split(" ");
         if (s.equals("bye")) {
             return Command.BYE;
@@ -62,7 +70,7 @@ public class Parser {
      * @param s command as a String
      * @return a Task item
      */
-    static Task createTask(String s) throws DukeException, DateTimeParseException {
+    public static Task createTask(String s) throws DukeException, DateTimeParseException {
         String[] task = s.split(" ");
         Task.Type type;
         if (task.length > 0) {

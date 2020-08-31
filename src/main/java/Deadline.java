@@ -1,20 +1,16 @@
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 /**
  * Deadline is a type of Task with deadline.
  */
 class Deadline extends Task {
-    LocalDate deadline;
-
-    DateTimeFormatter in = DateTimeFormatter.ISO_LOCAL_DATE;
-    DateTimeFormatter out = DateTimeFormatter.ofPattern("MMM dd yyyy");
+    private LocalDate deadline;
 
     Deadline(String name, String time) {
         super(name, Type.DEADLINE);
         try {
-            this.deadline = LocalDate.parse(time, in);
+            this.deadline = LocalDate.parse(time, DATE_FORMAT_IN);
         } catch (DateTimeParseException e) {
             throw e;
         }
@@ -26,6 +22,6 @@ class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + deadline.format(out) + ")";
+        return "[D]" + super.toString() + " (by: " + deadline.format(DATE_FORMAT_OUT) + ")";
     }
 }

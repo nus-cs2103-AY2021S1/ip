@@ -1,19 +1,19 @@
+import java.time.format.DateTimeFormatter;
+
 /**
  * Task is the parent class of Todo, Deadline and Event.
  * Contains functions used by all 3 subclasses.
  */
 class Task {
-    boolean completed = false;
-    String name;
-    Type type;
+    public static final DateTimeFormatter DATE_FORMAT_OUT = DateTimeFormatter.ofPattern("MMM dd yyyy");
+    public static final DateTimeFormatter DATE_FORMAT_IN = DateTimeFormatter.ISO_LOCAL_DATE;
+    private String name;
+    private Type type;
+    private boolean completed = false;
 
     Task(String name, Type type) {
         this.name = name;
         this.type = type;
-    }
-
-    public void setCompleted() {
-        completed = true;
     }
 
     public String getName() {
@@ -26,6 +26,10 @@ class Task {
 
     public boolean getCompleted() {
         return completed;
+    }
+
+    public void setCompleted() {
+        completed = true;
     }
 
     @Override

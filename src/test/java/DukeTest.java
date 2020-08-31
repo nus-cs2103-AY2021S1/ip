@@ -1,23 +1,20 @@
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.File;
 import java.io.IOException;
 import java.time.format.DateTimeParseException;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
+import org.junit.jupiter.api.Test;
 
 public class DukeTest {
     @Test
-    public void parserTest(){
+    public void parserTest() {
         assertEquals(Parser.parse("list", 0), Parser.Command.LIST);
         assertEquals(Parser.parse("bye", 0), Parser.Command.BYE);
         assertEquals(Parser.parse("delete 2", 0), Parser.Command.OTHERS);
         assertEquals(Parser.parse("done 1", 0), Parser.Command.OTHERS);
         assertEquals(Parser.parse("delete 2", 5), Parser.Command.DELETE);
-        assertEquals(Parser.whichTask, 1);
         assertEquals(Parser.parse("done 5", 5), Parser.Command.DONE);
-        assertEquals(Parser.whichTask, 4);
     }
 
     @Test
@@ -49,19 +46,16 @@ public class DukeTest {
     }
 
     @Test
-    public void storageTest() {
+    public void storageTest() throws IOException {
         File file = new File(System.getProperty("user.dir") + "/src/test/testfile");
-//            File file = new File("/Users/xzz/Desktop/ip/src/testfile/testfile");
         Storage s = new Storage(file);
-//            s.file = file;
         TaskList taskList = new TaskList(s);
-        System.out.println(taskList.taskList);
         Todo task1 = new Todo("Hng");
         task1.setCompleted();
         Deadline task2 = new Deadline("hehe", "2020-12-12");
         assertEquals(task1.getCompleted(), taskList.get(0).getCompleted());
         assertEquals(task1.getName(), taskList.get(0).getName());
         assertEquals(task2.getType(), taskList.get(1).getType());
-        assertEquals(task2.getDeadline(), ((Deadline)taskList.get(1)).getDeadline());
+        assertEquals(task2.getDeadline(), ((Deadline) taskList.get(1)).getDeadline());
     }
 }

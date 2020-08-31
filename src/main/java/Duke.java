@@ -2,7 +2,6 @@ import java.io.File;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.io.IOException;
 
 /**
  * Duke asks user for their todos and makes a todo list.
@@ -13,8 +12,20 @@ public class Duke {
     private TaskList tasks;
     private Parser parser;
 
+    /**
+     * The default constructor for a Duke object.
+     */
     public Duke() {
         storage = new Storage();
+        tasks = new TaskList(storage);
+        parser = new Parser();
+    }
+
+    /**
+     * This constructor takes in the file to save data.
+     */
+    public Duke(File file) {
+        storage = new Storage(file);
         tasks = new TaskList(storage);
         parser = new Parser();
     }
@@ -47,19 +58,19 @@ public class Duke {
                 }
                 break;
             case DONE:
-                tasks.setCompleted(parser.whichTask);
-                Ui.doneMessage(tasks.get(parser.whichTask));
+                tasks.setCompleted(parser.getWhichTask());
+                Ui.doneMessage(tasks.get(parser.getWhichTask()));
                 break;
             case DELETE:
-                Task deleted = tasks.get(parser.whichTask);
-                tasks.remove(parser.whichTask);
+                Task deleted = tasks.get(parser.getWhichTask());
+                tasks.remove(parser.getWhichTask());
                 Ui.deleteMessage(deleted, tasks.size());
                 break;
             case LIST:
                 Ui.list(tasks);
                 break;
             case FIND:
-                ArrayList<Task> found = tasks.find(parser.searchText);
+                ArrayList<Task> found = tasks.find(parser.getSearchText());
                 Ui.searchResult(found);
                 break;
             }

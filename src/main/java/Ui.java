@@ -5,29 +5,28 @@ import java.util.ArrayList;
  */
 public class Ui {
     private static void print(String s) {
-        System.out.println("\t____________________________________________________________\n" +
-                s +
-                "\t____________________________________________________________\n");
+        System.out.println("\t____________________________________________________________\n" + s
+                + "\t____________________________________________________________\n");
     }
 
     public static void welcomeMessage() {
-        print("\tHello! I'm Duke\n" +
-                "\tWhat can I do for you?\n");
+        print("\tHello! I'm Duke\n"
+                + "\tWhat can I do for you?\n");
     }
 
     public static void doneMessage(Task task) {
-        print("\tNice! I've marked this task as done:\n" +
-                "\t" + task + "\n");
+        print("\tNice! I've marked this task as done:\n"
+                + "\t" + task + "\n");
     }
 
     public static void deleteMessage(Task task, int total) {
-        print("\tNoted. I've removed this task:\n" +
-                "\t" + task + "\n" +
-                "\tNow you have " + total + " tasks in the list.\n");
+        print("\tNoted. I've removed this task:\n"
+                + "\t" + task + "\n"
+                + "\tNow you have " + total + " tasks in the list.\n");
     }
 
     public static void list(TaskList tasks) {
-        ArrayList<Task> list = tasks.taskList;
+        ArrayList<Task> list = tasks.getTaskList();
         String temp = "";
         for (int i = 0; i < list.size(); i++) {
             temp += "\t" + (i + 1) + ". " + list.get(i) + "\n";
@@ -38,15 +37,15 @@ public class Ui {
     public static void searchResult(ArrayList<Task> tasks) {
         String temp = "";
         for (int i = 0; i < tasks.size(); i++) {
-            temp += "\t" + (i+1) + ". " + tasks.get(i) + "\n";
+            temp += "\t" + (i + 1) + ". " + tasks.get(i) + "\n";
         }
         print("\tHere are the matching tasks in your list:\n" + temp);
     }
 
     public static void addTaskMessage(Task task, int total) {
-        print("\tGot it. I've added this task: \n" +
-                "\t" + task + "\n" +
-                "\tNow you have " + total + " tasks in the list.\n");
+        print("\tGot it. I've added this task: \n"
+                + "\t" + task + "\n"
+                + "\tNow you have " + total + " tasks in the list.\n");
     }
 
     public static void ignoreMessage() {

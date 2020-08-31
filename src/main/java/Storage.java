@@ -1,10 +1,10 @@
-import java.io.File;
-import java.io.IOException;
-import java.io.FileReader;
 import java.io.BufferedReader;
-import java.io.FileWriter;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,8 +13,8 @@ import java.util.List;
  * when the program restarts.
  */
 public class Storage {
-    File file;
-    boolean added = false;
+    private File file;
+    private boolean added = false;
 
     Storage(File file) {
         this.file = file;
@@ -43,8 +43,8 @@ public class Storage {
      * Makes the storage file empty.
      */
     void reset() {
-        try (BufferedWriter bufferedWriter
-                     = new BufferedWriter(new FileWriter(file.getAbsolutePath()))) {
+        try (BufferedWriter bufferedWriter =
+                     new BufferedWriter(new FileWriter(file.getAbsolutePath()))) {
             bufferedWriter.write("");
             added = false;
         } catch (IOException e) {
@@ -58,8 +58,8 @@ public class Storage {
     ArrayList<Task> load() {
         System.out.println("reading... ");
         ArrayList<Task> list = new ArrayList<>();
-        try (BufferedReader bufferedReader
-                     = new BufferedReader(new FileReader(file.getAbsolutePath()))) {
+        try (BufferedReader bufferedReader =
+                     new BufferedReader(new FileReader(file.getAbsolutePath()))) {
             String line = bufferedReader.readLine();
             while (line != null) {
                 String[] parts = line.split("</>");
@@ -104,8 +104,8 @@ public class Storage {
         if (added) {
             return;
         }
-        try (BufferedReader bufferedReader
-                     = new BufferedReader(new FileReader(file.getAbsolutePath()))) {
+        try (BufferedReader bufferedReader =
+                     new BufferedReader(new FileReader(file.getAbsolutePath()))) {
             String line = bufferedReader.readLine();
             while (line != null) {
                 String[] parts = line.split("</>");
@@ -146,8 +146,8 @@ public class Storage {
      * @param task the task to be added
      */
     void addTask(Task task) {
-        try (BufferedWriter bufferedWriter
-                     = new BufferedWriter(new FileWriter(file.getAbsolutePath(), true))) {
+        try (BufferedWriter bufferedWriter =
+                     new BufferedWriter(new FileWriter(file.getAbsolutePath(), true))) {
             String separator = "</>";
             Task.Type type = task.getType();
             String fileContent = type.toString() + separator
@@ -170,17 +170,8 @@ public class Storage {
      * @param list the list containing the tasks to be added
      */
     void addAll(List<Task> list) {
-        try (BufferedWriter bufferedWriter
-                     = new BufferedWriter(new FileWriter(file.getAbsolutePath(), true))) {
-            for (Task t : list) {
-                addTask(t);
-            }
-        } catch (FileNotFoundException e) {
-            // Exception handling
-            System.out.println(e.getMessage());
-        } catch (IOException e) {
-            // Exception handling
-            System.out.println(e.getMessage());
+        for (Task t : list) {
+            addTask(t);
         }
     }
 }

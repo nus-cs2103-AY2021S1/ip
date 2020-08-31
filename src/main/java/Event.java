@@ -1,20 +1,16 @@
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 /**
  * Event is a type of Task with time.
  */
 class Event extends Task {
-    LocalDate time;
-
-    DateTimeFormatter in = DateTimeFormatter.ISO_LOCAL_DATE;
-    DateTimeFormatter out = DateTimeFormatter.ofPattern("MMM dd yyyy");
+    private LocalDate time;
 
     Event(String name, String time) {
         super(name, Type.EVENT);
         try {
-            this.time = LocalDate.parse(time, in);
+            this.time = LocalDate.parse(time, DATE_FORMAT_IN);
         } catch (DateTimeParseException e) {
             throw e;
         }
@@ -26,6 +22,6 @@ class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + time.format(out) + ")";
+        return "[E]" + super.toString() + " (at: " + time.format(DATE_FORMAT_OUT) + ")";
     }
 }

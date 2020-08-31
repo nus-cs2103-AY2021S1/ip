@@ -1,34 +1,59 @@
 import java.util.ArrayList;
 
 /**
- * TaskList handles the list functions (get, add, remove, size) in the program and the storage.
+ * TaskList is the list of tasks and handles the list functions (get, add, remove, size) in the program and the storage.
  */
 public class TaskList {
-    Storage storage;
-    ArrayList<Task> taskList;
+    private Storage storage;
+    private ArrayList<Task> taskList;
 
+    /**
+     * The constructor that takes in Storage for saving and loading data.
+     */
     public TaskList(Storage storage) {
         this.storage = storage;
         taskList = storage.load();
     }
 
+    public ArrayList<Task> getTaskList() {
+        return taskList;
+    }
+
+    /**
+     * Adds a task to list and updates saved data in storage.
+     * @param task task to be added
+     */
     public void addTask(Task task) {
         taskList.add(task);
         storage.addTask(task);
     }
 
+    /**
+     * Returns the number of tasks in list.
+     */
     public int size() {
         return taskList.size();
     }
 
+    /**
+     * Gets the task at the list index.
+     * @param index list index
+     * @return the task at list index
+     */
     public Task get(int index) {
         return taskList.get(index);
     }
 
-    public void remove(int index) {
-        taskList.remove(index);
+    /**
+     * Removes the task at the list index.
+     * @param index list index
+     * @return the task removed at list index
+     */
+    public Task remove(int index) {
+        Task temp = taskList.remove(index);
         storage.reset();
         storage.addAll(taskList);
+        return temp;
     }
 
     public void setCompleted(int whichTask) {
@@ -37,6 +62,11 @@ public class TaskList {
         storage.addAll(taskList);
     }
 
+    /**
+     * Finds tasks containing search text.
+     * @param searchText phrase to be searched for
+     * @return the list of tasks containing the search text
+     */
     public ArrayList<Task> find(String searchText) {
         ArrayList<Task> list = new ArrayList<>();
         for (Task t : taskList) {
