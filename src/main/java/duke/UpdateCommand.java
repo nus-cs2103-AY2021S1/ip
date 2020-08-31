@@ -22,7 +22,7 @@ public class UpdateCommand extends Command{
             int itemNumber = Integer.parseInt(description);
             tasks.get(itemNumber - 1).isDone = true;
             output += "Nice, I've marked this item as done:\n\t" + tasks.get(itemNumber - 1);
-            ui.showOutput(output);
+            ui.showOutputOnScreen(output);
             storage.writeToFile(tasks);
         } catch (NumberFormatException | IndexOutOfBoundsException ex) {
             throw new DukeException("Please key in a valid number for \"done\"");

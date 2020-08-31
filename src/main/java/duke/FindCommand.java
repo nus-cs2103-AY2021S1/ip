@@ -32,7 +32,7 @@ public class FindCommand extends Command {
                 }
             }
         }
-        ui.showOutput(output.toString());
+        ui.showOutputOnScreen(output.toString());
     }
 
     @Override
