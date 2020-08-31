@@ -25,11 +25,11 @@ public class AddToDoCommand extends AddCommand {
      * @throws EmptyTaskException If the task detail is empty.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws EmptyTaskException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws EmptyTaskException {
         if (getTaskDetails().isEmpty()) {
             throw new EmptyTaskException(TaskType.TODO);
         } else {
-            addTask(new ToDo(getTaskDetails()), tasks, ui, storage);
+            return addTask(new ToDo(getTaskDetails()), tasks, ui, storage);
         }
     }
 }

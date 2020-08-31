@@ -29,15 +29,15 @@ public class FindCommand extends Command {
      * @param storage Storage object.
      * @throws EmptyFindException If no task matches the user input.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws EmptyFindException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws EmptyFindException {
         if (input.isEmpty()) {
             throw new EmptyFindException();
         } else {
             TaskList taskList = tasks.matchAll(input);
             if (taskList.isEmpty()) {
-                ui.emptyFind(input);
+                return ui.emptyFind(input);
             } else {
-                ui.showTaskList(taskList, "matching");
+                return ui.showTaskList(taskList, "matching");
             }
         }
     }

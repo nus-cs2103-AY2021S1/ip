@@ -37,7 +37,7 @@ public class SimpleCommand extends Command {
      * @param storage Storage object.
      * @throws DukeException If an error is found in the user input.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (checkIfNumber(input)) {
             int digit = Integer.parseInt(input);
             if (tasks.checkIfValid(digit)) {
@@ -47,11 +47,13 @@ public class SimpleCommand extends Command {
                         throw new TaskAlreadyDoneException();
                     } else {
                         current.markAsDone();
-                        ui.markTaskAsDone(current);
+                        storage.update(tasks);
+                        return ui.markTaskAsDone(current);
                     }
                 } else {
                     tasks.delete(digit - 1);
-                    ui.deleteTask(current, tasks.size());
+                    storage.update(tasks);
+                    return ui.deleteTask(current, tasks.size());
                 }
             } else {
                 throw new InvalidTaskNumberException(tasks.size());
@@ -63,7 +65,6 @@ public class SimpleCommand extends Command {
                 throw new InvalidDeleteException();
             }
         }
-        storage.update(tasks);
     }
 
     private static boolean checkIfNumber(String s) {
