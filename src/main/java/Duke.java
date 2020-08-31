@@ -15,6 +15,10 @@ public class Duke {
         }
     }
 
+    /**
+     * Main method for Duke.
+     * @param args
+     */
     public static void main(String[] args) {
         System.out.println(UI.getMessage("LOGO") + UI.getMessage("WELCOME_MSG"));
         UI.printLine();

@@ -15,9 +15,19 @@ import java.io.OutputStream;
 import java.io.BufferedReader;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Helps to parse through both user inputs and the save file.
+ */
 public class Parser {
     private static FileReader taskReader;
 
+    /**
+     * Reads save file and fills up the list
+     * with the old save file's tasks, including
+     * status.
+     * @param tmpFile file containing the saved tasks
+     * @throws DukeExceptions
+     */
     public static void readSave(File tmpFile) throws DukeExceptions {
         try {
             taskReader = new FileReader(tmpFile);
@@ -30,10 +40,17 @@ public class Parser {
             });
             System.setOut(dummyOut);
             BufferedReader bufferedTaskReader = new BufferedReader(taskReader);
+            String lineWithStatus;
+            String status;
             String line;
-            while ((line = bufferedTaskReader.readLine()) != null) {
+            while ((lineWithStatus = bufferedTaskReader.readLine()) != null) {
+                line = lineWithStatus.substring(0, lineWithStatus.length() - 4);
+                status = lineWithStatus.substring(lineWithStatus.length() - 4);
                 parseAndAddToList(line);
-                System.out.println(line);
+                if (status.equals("done")) {
+                    TaskList.markDone(TaskList.getThingsOnListSize() - 1);
+                }
+                System.out.println();
             }
             System.setOut(oldOutput);
             System.out.println("    BARK WOOF: (You have these tasks currently: )");
@@ -43,6 +60,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses through input text to check for commands
+     * then adds a type of Task to the ArrayList of tasks.
+     * @param input User-input string.
+     * @throws DukeExceptions
+     */
     public static void parseAndAddToList(String input) throws DukeExceptions {
         int startingSize = TaskList.getThingsOnListSize();
         if (!input.isEmpty()) {
@@ -54,7 +77,8 @@ public class Parser {
                 TaskList.viewList();
             } else if (!input.isEmpty()) {
                 int spaceIndex = input.indexOf(" ");
-                if (spaceIndex != -1 && spaceIndex != input.length() - 1 && (input.contains(UI.getMessage("DELETE"))
+                if (spaceIndex != -1 && spaceIndex != input.length() - 1
+                        && (input.contains(UI.getMessage("DELETE"))
                         || input.contains(UI.getMessage("DONE")))) {
                     try {
                         int x = Integer.parseInt(input.substring(spaceIndex + 1)) - 1;
@@ -86,7 +110,8 @@ public class Parser {
                                 TaskList.addToList(new Events(input));
                             }
                         } catch (DateTimeParseException | StringIndexOutOfBoundsException e) {
-                            throw new DukeExceptions("    Bark (Please make sure format of Date/Time is yyyy-MM-dd HHmm)");
+                            throw new DukeExceptions(
+                                    "    Bark (Please make sure format of Date/Time is yyyy-MM-dd HHmm)");
                         }
                     } else if (input.contains("todo") && !(input.substring(input.length() - 4).contains("todo"))) {
                         if (input.substring(5).isEmpty()) {

@@ -101,30 +101,55 @@ public class UI {
     private static final Messages[] ERROR_MESSAGES = {Messages.WRONG_INPUT, Messages.MISSING_INPUT,
             Messages.MISSING_INPUT, Messages.DONE_ERROR};
 
+    /**
+     * Prints GOODBYE_MSG.
+     */
     public static void printGoodbye() {
         System.out.println(Messages.GOODBYE_MSG);
     }
+
+    /**
+     * Prints a standard line to create spacing.
+     */
     public static void printLine() {
         System.out.println("    ************************************************************");
     }
+
+    /**
+     * Prints logo of a dog.
+     */
     protected static void printLogo() {
         System.out.println(Messages.LOGO);
     }
 
+    /**
+     * Prints a random message chosen from ERROR_MESSAGES
+     */
     public static void printWrongInput() {
         int rnd = new Random().nextInt(ERROR_MESSAGES.length);
         System.out.println(ERROR_MESSAGES[rnd].toString());
     }
 
+    /**
+     * Stops the programme from running.
+     */
     public static void stop() {
         stillGoing = false;
-
     }
 
+    /**
+     * Retrieves messages of the title cmd.
+     * @param cmd
+     * @return String value stored in Messages.cmd.toString()
+     */
     public static String getMessage(String cmd) {
         return Messages.valueOf(cmd).toString();
     }
 
+    /**
+     * Starts the UI, and the rest of the programme.
+     * @throws DukeExceptions
+     */
     public static void start() throws DukeExceptions {
         stillGoing = true;
         while (sc.hasNextLine()) {
