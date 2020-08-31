@@ -9,18 +9,6 @@ import java.util.Scanner;
 public class UI {
 
     /**
-     * Reads command entered by user.
-     * @return string representation of command entered.
-     */
-    protected String readCommand() {
-        Scanner sc = new Scanner(System.in);
-
-        String message = sc.nextLine();
-
-        return message;
-    }
-
-    /**
      * Greets the user upon launch.
      */
     protected void greetUser() {
