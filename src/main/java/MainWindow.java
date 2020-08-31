@@ -25,7 +25,13 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
+    // Images from https://www.pngguru.com
+    // License: PNGGuru is an open community for users to share PNG cliparts,
+    // all PNG cliparts in PNGGuru are for Non-Commercial Use, no attribution required.
+
+    // Image from https://www.pngguru.com/free-transparent-background-png-clipart-kwdio
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/User.png"));
+    // Image from https://www.pngguru.com/free-transparent-background-png-clipart-mnsxw
     private Image botImage = new Image(this.getClass().getResourceAsStream("/images/Bot.png"));
 
     @FXML

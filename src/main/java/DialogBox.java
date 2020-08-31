@@ -27,7 +27,8 @@ public class DialogBox extends HBox {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        dialog.setText(text);
+        this.setAlignment(Pos.CENTER_RIGHT);
+        dialog.setText(removeNewline(text));
         displayPicture.setImage(img);
         Circle mask = new Circle(displayPicture.getFitHeight() / 2);
         mask.setCenterX(displayPicture.getFitHeight() / 2);
@@ -45,10 +46,18 @@ public class DialogBox extends HBox {
     }
 
     private DialogBox flip() {
-        this.setAlignment(Pos.TOP_LEFT);
+        this.setAlignment(Pos.CENTER_LEFT);
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
         FXCollections.reverse(tmp);
         this.getChildren().setAll(tmp);
         return this;
+    }
+
+    private String removeNewline(String content) {
+        if (content.endsWith("\n")) {
+            return content.substring(0, content.length() - 1);
+        } else {
+            return content;
+        }
     }
 }
