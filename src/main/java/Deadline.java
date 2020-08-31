@@ -1,3 +1,8 @@
+/**
+ * The Deadline class is a Task that has a due time, represented as a TaskDate.
+ *
+ * @author Jaya Rengam
+ */
 public class Deadline extends Task {
     private TaskDate dueTime;
 
