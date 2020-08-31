@@ -25,6 +25,12 @@ public class Duke {
     private Storage storage;
     private TaskList taskList;
 
+    /**
+     * Instantiate a Duke Object with the filepath as that name
+     * of the file which the lists will be saved to.
+     *
+     * @param filePath
+     */
     public Duke(String filePath) {
         this.taskList = TaskList.createTaskList();
         this.storage = Storage.createDukeFile(filePath);
