@@ -1,9 +1,8 @@
 package duke.command;
 
 import duke.Storage;
-import duke.Ui;
 import duke.task.TaskList;
-
+import duke.ui.Ui;
 
 /**
  * Encapsulates a command that will show all the current tasks in the task list.
@@ -15,13 +14,14 @@ public class ListCommand extends Command {
      * @param taskList  The list of tasks known by the chat bot.
      * @param ui        The Ui that is used by the chat bot.
      * @param storage   The storage used by the chat bot.
+     * @return          Chat bot message
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
         if (taskList.size() == 0) {
-            ui.showError("No tasks found");
+            return ui.showError("No tasks found");
         } else {
-            ui.replyList(taskList.toString());
+            return ui.replyList(taskList.toString());
         }
     }
 }

@@ -1,8 +1,8 @@
 package duke.command;
 
 import duke.Storage;
-import duke.Ui;
 import duke.task.TaskList;
+import duke.ui.Ui;
 
 /**
  * Encapsulates a command that will find a list of tasks corresponding to the given keyword.
@@ -29,14 +29,15 @@ public class FindCommand extends Command {
      * @param taskList  The list of tasks known by the chat bot.
      * @param ui        The Ui that is used by the chat bot.
      * @param storage   The storage used by the chat bot.
+     * @return          Chat bot message
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
         TaskList filtered = taskList.findTask(input);
         if (filtered.size() == 0) {
-            ui.replyNoTasksFound();
+            return ui.replyNoTasksFound();
         } else {
-            ui.replyFoundTasks(filtered.toString());
+            return ui.replyFoundTasks(filtered.toString());
         }
     }
 }

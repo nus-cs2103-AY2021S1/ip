@@ -5,11 +5,11 @@ package duke.exception;
  */
 public class DukeException extends Exception {
     /**
-     * Initializes a new instance with a <code>☹ OOPS!!!</code> followed by the error message.
+     * Initializes a new instance with a <code>OOPS!!!</code> followed by the error message.
      *
      * @param message the error message.
      */
     public DukeException(String message) {
-        super("☹ OOPS!!! " + message);
+        super("OOPS!!! " + message);
     }
 }
