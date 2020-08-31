@@ -1,9 +1,19 @@
 package duke;
 
+import java.io.IOException;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
-import java.io.IOException;
-import command.*;
+
+import command.ByeCommand;
+import command.Command;
+import command.DateCommand;
+import command.DeadLineCommand;
+import command.DelCommand;
+import command.DoneCommand;
+import command.EventCommand;
+import command.FindCommand;
+import command.ListCommand;
+import command.TodoCommand;
 import task.Task;
 /**
  * The Dukebot programme implements an application that assists the user in managing their tasks.
@@ -70,7 +80,7 @@ public class Duke {
      */
 
 
-    private void addTaskHandler(Command command) throws DukeExceptions.IncompleteCommandException { ;
+    private void addTaskHandler(Command command) throws DukeExceptions.IncompleteCommandException {
         if (!command.isEmpty()) {
             Task newTask = this.taskList.addTask(command);
             this.ui.printAddedNewTask(newTask, this.taskList.getNoTask());
@@ -88,7 +98,7 @@ public class Duke {
      * @throws DukeExceptions.NoTaskToDeleteException if tasklist is empty
      */
 
-    private void deleteTaskHandler(String[] parameters) throws  DukeExceptions.NoTaskToDeleteException {
+    private void deleteTaskHandler(String[] parameters) throws DukeExceptions.NoTaskToDeleteException {
         if (!this.taskList.isEmpty()) {
             int index = Integer.parseInt(parameters[0].strip()) - 1;
             Task task = this.taskList.deleteTask(index);
@@ -145,7 +155,7 @@ public class Duke {
             }
         } else if (command.getClass() == TodoCommand.class
                 || command.getClass() == EventCommand.class
-                || command.getClass() == DeadLineCommand.class ) {
+                || command.getClass() == DeadLineCommand.class) {
             try {
                 this.addTaskHandler(command);
             } catch (DukeExceptions.IncompleteCommandException e) {
@@ -155,7 +165,7 @@ public class Duke {
             } catch (DateTimeParseException e) {
                 DukeExceptions.printIncorrectDateFormatError();
             }
-        } else if (command.getClass() == DelCommand.class ) {
+        } else if (command.getClass() == DelCommand.class) {
             try {
                 this.deleteTaskHandler(command.getParameters());
             } catch (DukeExceptions.NoTaskToDeleteException e) {
@@ -165,13 +175,17 @@ public class Duke {
             } catch (NumberFormatException e) {
                 DukeExceptions.noIndexKeyedError();
             }
-        } else if (command.getClass() == DateCommand.class ) {
+        } else if (command.getClass() == DateCommand.class) {
             ui.printGetTaskOnDThisDate(command.getParameters()[0], this.taskList);
         } else if (command.getClass() == FindCommand.class) {
             ui.printFindKeyword(command.getParameters()[0], this.taskList);
         }
     }
 
+    /**
+     * main method of duke.java where duke is runned
+     * @param args
+     */
     public static void main(String[] args) {
 
         Duke duke = new Duke("./data/data.txt");

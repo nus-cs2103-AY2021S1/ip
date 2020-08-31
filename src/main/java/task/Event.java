@@ -2,7 +2,7 @@ package task;
 
 import java.time.LocalDateTime;
 
-public class Event extends Task{
+public class Event extends Task {
 
     public Event(String description, LocalDateTime dueDate, boolean done) {
         super(description, dueDate, done);
@@ -13,7 +13,7 @@ public class Event extends Task{
     }
 
     public String writeToFile() {
-        return "E|" + super.writeToFile() + "|" + super.dueDate;
+        return "E|" + super.writeToFile() + "|" + super.getDueDate();
     }
 
     @Override

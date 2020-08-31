@@ -1,8 +1,9 @@
 package duke;
-import command.Command;
 
 public class DukeExceptions {
-
+    /**
+     * Exception for scenario where an incomplete command is given
+     */
     public static class IncompleteCommandException extends Exception {
         public IncompleteCommandException(String commandName) {
             super(commandName);
@@ -13,6 +14,9 @@ public class DukeExceptions {
         }
     }
 
+    /**
+     * Exception for scenario where user attempts to do tasks manipulation on an empty task list
+     */
     public static class NoUndoneTaskException extends Exception {
         public NoUndoneTaskException() {
             super();
@@ -23,6 +27,9 @@ public class DukeExceptions {
         }
     }
 
+    /**
+     * Exception for scenario where user attempts to delete a task on an empty task list
+     */
     public static class NoTaskToDeleteException extends Exception {
         public NoTaskToDeleteException() {
             super();
@@ -33,6 +40,9 @@ public class DukeExceptions {
         }
     }
 
+    /**
+     * error message for when the user does not input a task number for task manipulation
+     */
     public static void noIndexKeyedError() {
         System.out.println(
             "----------------------------------------------------------------------------\n"
@@ -41,6 +51,9 @@ public class DukeExceptions {
         );
     }
 
+    /**
+     * error message when the user inputs an invalid task number for task manipulation
+     */
     public static void printIndexSizeMismatchError() {
         System.out.println(
             "----------------------------------------------------------------------------\n"
@@ -49,6 +62,9 @@ public class DukeExceptions {
         );
     }
 
+    /**
+     * error message for when the user tries to mark a task as done when the task list is empty
+     */
     public static void printNoUndoneTaskError() {
         System.out.println(
             "----------------------------------------------------------------------------\n"
@@ -57,6 +73,9 @@ public class DukeExceptions {
         );
     }
 
+    /**
+     * error message for when the user fails to input additional parameters for the command
+     */
     public static void printIncompleteCommandError() {
         System.out.println(
             "----------------------------------------------------------------------------\n"
@@ -65,6 +84,9 @@ public class DukeExceptions {
         );
     }
 
+    /**
+     * error message for when a user inputs an unrecognisable command
+     */
     public static void printUnrecognizableCommandError() {
         System.out.println(
             "----------------------------------------------------------------------------\n"
@@ -73,6 +95,9 @@ public class DukeExceptions {
         );
     }
 
+    /**
+     * error message for when the user attempts to delete a task from an empty task list
+     */
     public static void printNoTaskToDeleteError() {
         System.out.println(
             "----------------------------------------------------------------------------\n"
@@ -81,6 +106,9 @@ public class DukeExceptions {
         );
     }
 
+    /**
+     * error message for user not inputting a date for a task with a deadline
+     */
     public static void printNoDateInput() {
         System.out.println(
             "----------------------------------------------------------------------------\n"
@@ -89,6 +117,9 @@ public class DukeExceptions {
         );
     }
 
+    /**
+     * error message for user inputting wrong datetime format
+     */
     public static void printIncorrectDateFormatError() {
         System.out.println(
             "----------------------------------------------------------------------------\n"

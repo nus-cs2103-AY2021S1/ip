@@ -1,34 +1,42 @@
 package duke;
 
-import java.io.IOException;
-import java.io.FileReader;
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+
 import command.Command;
-import command.TodoCommand;
 import command.EventCommand;
+import command.TodoCommand;
 import task.Deadline;
 import task.Event;
 import task.Task;
 import task.Todo;
 
 public class TaskList {
-
     private final ArrayList<Task> taskList;
     private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm");
 
-    public TaskList(){
+    /**
+     * Constructor for empty taskList
+     */
+    public TaskList() {
         this.taskList = new ArrayList<Task>();
     }
 
+    /**
+     *
+     * @param savedTasks
+     * @throws IOException
+     */
     public TaskList (File savedTasks) throws IOException {
         this.taskList = new ArrayList<Task>();
-        FileReader fr = new FileReader(savedTasks);   //reads the file
-        BufferedReader br = new BufferedReader(fr);  //creates a buffering character input stream
+        FileReader fr = new FileReader(savedTasks); //reads the file
+        BufferedReader br = new BufferedReader(fr); //creates a buffering character input stream
         String line;
         while ((line = br.readLine()) != null) {
             String[] parameters = line.split("\\|");
@@ -38,7 +46,7 @@ public class TaskList {
             Task task;
             if (taskType.equals("T")) {
                 task = new Todo(taskDescription, completionStatus);
-            } else if (taskType.equals("E")){
+            } else if (taskType.equals("E")) {
                 task = new Event(taskDescription, LocalDateTime.parse(parameters[3].strip()), completionStatus);
             } else {
                 task = new Deadline(taskDescription, LocalDateTime.parse(parameters[3].strip()), completionStatus);
@@ -59,11 +67,11 @@ public class TaskList {
         if (task.getClass() == TodoCommand.class) {
             newTask = new Todo(task.getParameters()[0]);
         } else if (task.getClass() == EventCommand.class) {
-            newTask = new Event(task.getParameters()[0].strip()
-                    , LocalDateTime.parse(task.getParameters()[1].strip(), formatter));
+            newTask = new Event(task.getParameters()[0].strip(),
+                    LocalDateTime.parse(task.getParameters()[1].strip(), formatter));
         } else {
-            newTask = new Deadline(task.getParameters()[0].strip()
-                    , LocalDateTime.parse(task.getParameters()[1].strip(), formatter));
+            newTask = new Deadline(task.getParameters()[0].strip(),
+                    LocalDateTime.parse(task.getParameters()[1].strip(), formatter));
         }
         this.taskList.add(newTask);
         return newTask;
@@ -87,7 +95,7 @@ public class TaskList {
      * @param dueDate a string representation of the due/event date for the tasks to be searched up
      * @return the string representation of all the task due on that date
      */
-    public String getTaskDueOn(String dueDate){
+    public String getTaskDueOn(String dueDate) {
         String output = "";
 
         for (Task task : this.taskList) {
@@ -95,7 +103,7 @@ public class TaskList {
                 output += task.toString() + "\n";
             }
         }
-        return (output == "" ? "None\n" : output) ;
+        return (output == "" ? "None\n" : output);
     }
 
     /**
@@ -113,9 +121,13 @@ public class TaskList {
                 output += task.toString() + "\n";
             }
         }
-        return (output == "" ? "None\n" : output) ;
+        return (output == "" ? "None\n" : output);
     }
 
+    /**
+     * Returns True if all the tasks in the taskList is done.
+     * @return True if all tasks in the taskList are marked done, false otherwise
+     */
     public boolean allDone() {
         for (Task task : this.taskList) {
             if (!task.isDone()) {
@@ -125,7 +137,7 @@ public class TaskList {
         return true;
     }
 
-    public void completeTask(int index){
+    public void completeTask(int index) {
         this.taskList.get(index).markDone();
     }
 
@@ -133,13 +145,17 @@ public class TaskList {
         return this.taskList.get(index);
     }
 
-    public int getNoTask() { return  this.taskList.size(); }
+    public int getNoTask() {
+        return this.taskList.size();
+    }
 
-    public ArrayList getTaskList(){
+    public ArrayList<Task> getTaskList() {
         return this.taskList;
     }
 
-    public boolean isEmpty() { return this.taskList.isEmpty();}
+    public boolean isEmpty() {
+        return this.taskList.isEmpty();
+    }
 
     @Override
     public String toString() {

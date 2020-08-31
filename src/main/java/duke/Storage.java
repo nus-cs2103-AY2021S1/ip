@@ -1,11 +1,12 @@
 package duke;
 
-import task.Task;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+
+import task.Task;
 /**
  * The Storage class to encapsulate the storing & loading of tasks to the hard disk and to the Duke bot respectively
  *
@@ -15,7 +16,7 @@ public class Storage {
     /** file path of desired storage locationn */
     private final String filePath;
 
-    public Storage(String filePath){
+    public Storage(String filePath) {
         this.filePath = filePath;
     }
 

@@ -7,7 +7,7 @@ package command;
  */
 public class Command {
     /** array of strings where each element represents a parameter tagged to the command */
-    public String[] parameters;
+    private final String[] parameters;
 
     /**
      * Instantiate command without parameters
@@ -39,6 +39,7 @@ public class Command {
      *
      * @return an array of parameters represented as strings.
      */
-    public String[] getParameters() { return this.parameters ; }
-
+    public String[] getParameters() {
+        return this.parameters;
+    }
 }

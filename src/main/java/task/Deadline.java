@@ -2,9 +2,9 @@ package task;
 
 import java.time.LocalDateTime;
 
-public class Deadline extends Task{
+public class Deadline extends Task {
 
-    public Deadline(String description, LocalDateTime dueDate,boolean done) {
+    public Deadline(String description, LocalDateTime dueDate, boolean done) {
         super(description, dueDate, done);
     }
 
@@ -13,7 +13,7 @@ public class Deadline extends Task{
     }
 
     public String writeToFile() {
-        return "D|" + super.writeToFile() + "|" + super.dueDate;
+        return "D|" + super.writeToFile() + "|" + super.getDueDate();
     }
 
     @Override
