@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
@@ -20,6 +21,9 @@ public class LandingScene extends AnchorPane {
     @FXML
     private Button sendButton;
     
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.png"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/duke.png"));
+    
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
@@ -33,6 +37,10 @@ public class LandingScene extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         System.out.println(input);
+        dialogContainer.getChildren().addAll(
+                DialogBox.getUserDialog(input, userImage),
+                DialogBox.getDukeDialog(input, dukeImage)
+        );
         userInput.clear();
     }
 }
