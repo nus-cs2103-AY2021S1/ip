@@ -24,7 +24,7 @@ public class Storage {
     /**
      * Constructor for a Storage object.
      *
-     * @param filePath
+     * @param filePath A String representation of the filepath
      */
     public Storage(String filePath) {
         this.filePath = filePath;
