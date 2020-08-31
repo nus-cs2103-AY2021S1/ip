@@ -25,8 +25,8 @@ public class TaskList {
     }
 
     /**
-     * Get an ordered List object containing all Tasks.
-     * List to be returned is ordered in increasing order of time since creation of the Task.
+     * Gets an ordered List object containing all Tasks.
+     * List to be returned is ordered in increasing order of time since addition of the Task.
      *
      * @return a List object containing all Tasks
      */
@@ -35,8 +35,7 @@ public class TaskList {
     }
 
     /**
-     * Set the Task with the given taskNumber as completed.
-     * taskNumber is determined based on numbers assigned to Tasks in the String returned from TaskList.tasksToString()
+     * Sets the Task with the given taskNumber as completed.
      *
      * @param taskNumber taskNumber of the Task to be completed
      * @return new Task object that represents a completed state of the original Task
@@ -52,8 +51,7 @@ public class TaskList {
     }
 
     /**
-     * Delete the Task with the given taskNumber.
-     * taskNumber is determined based on numbers assigned to Tasks in the String returned from TaskList.tasksToString()
+     * Deletes the Task with the given taskNumber.
      *
      * @param taskNumber taskNumber of the Task to be deleted
      * @return the Task that was deleted
@@ -73,21 +71,18 @@ public class TaskList {
     }
 
     /**
-     * Creates a String that sequentially lists the Tasks in the TaskList in increasing order of time since creation.
-     * In the String, each Task is assigned a number that will be used to select that particular task.
+     * Returns a List containing the mapping of all Tasks stored in this TaskList to their
+     * assigned taskNumber.
      *
-     * @return a String that displays all Tasks in the TaskList
+     * @return a List of NumberedTasks created from all Tasks stored in this TaskList
      */
-    public String tasksToString() {
-        System.out.println(taskList.size());
-        StringBuilder tasks = new StringBuilder("Here are the tasks in your list: \n");
+    public List<NumberedTask> tasksToString() {
+        List<NumberedTask> result = new ArrayList<>();
         for (int i = 0; i < taskList.size(); i++) {
-            tasks.append(String.format("%d. %s", i + 1, taskList.get(i)));
-            if (i != taskList.size() - 1) {
-                tasks.append('\n');
-            }
+            Task currentTask = taskList.get(i);
+            result.add(new NumberedTask(i + 1 , currentTask));
         }
-        return tasks.toString();
+        return result;
     }
 
     public List<NumberedTask> getMatchingTasks(String keyword) {

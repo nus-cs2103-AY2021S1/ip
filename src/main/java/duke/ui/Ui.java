@@ -28,6 +28,17 @@ public class Ui {
         return scanner.nextLine();
     }
 
+    public String allTasksToString(List<NumberedTask> taskList) {
+        StringBuilder tasks = new StringBuilder("Here are the tasks in your list: \n");
+        for (int i = 0; i < taskList.size(); i++) {
+            tasks.append(taskList.get(i).toString());
+            if (i != taskList.size() - 1) {
+                tasks.append('\n');
+            }
+        }
+        return tasks.toString();
+    }
+
     public String foundTasksToString(List<NumberedTask> taskList) {
         StringBuilder tasks = new StringBuilder("Here are the matching tasks in your list: \n");
         for (int i = 0; i < taskList.size(); i++) {
