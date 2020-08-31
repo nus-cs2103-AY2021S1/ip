@@ -7,11 +7,18 @@ import java.util.Scanner;
 import java.io.FileWriter;
 import java.io.IOException;
 
-
+/**
+ * Store and Retrieve tasks from the task list
+ */
 public class Storage {
-    public static String  folderPath = "Data";
-    public static String writePath = "Data/Duke.txt";
-    
+    private static String  folderPath = "Data";
+    private static String writePath = "Data/Duke.txt";
+
+    /**
+     * Writes tasks to file
+     * @param taskList List of tasks to be written to the file
+     * @throws IOException
+     */
     public static void writeToFile(TaskList taskList) throws IOException {
         FileWriter fw = new FileWriter(writePath);
         fw.write("");
@@ -20,7 +27,12 @@ public class Storage {
         }
         fw.close();
     }
-    
+
+    /**
+     * Loads tasks from Database to be stored in the taskList
+     * @return list of Tasks
+     * @throws IOException
+     */
     public static List<Task> loadFile() throws IOException {
         List<Task> tasks = new ArrayList<>();
         File f = new File(writePath);
@@ -38,7 +50,12 @@ public class Storage {
             return tasks;
         }
     }
-    
+
+    /**
+     * Reads tasks from the database
+     * @param taskString Storage string that represents the task
+     * @return the actual task object
+     */
     public static Task generateTask(String taskString) {
         Task task = null;
         String [] arr = taskString.split("\\s+");
@@ -55,7 +72,7 @@ public class Storage {
         return task;
     }
     
-    public static Deadline generateDeadline(String[] arr, boolean isCompleted) {
+    private static Deadline generateDeadline(String[] arr, boolean isCompleted) {
         String deadline = arr[arr.length-2] + " " +arr[arr.length-1];
         String description = arr[2];
         int i;

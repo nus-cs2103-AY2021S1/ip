@@ -1,9 +1,17 @@
 package duke;
 import java.util.List;
 
+/**
+ * Stores tasks in a list
+ */
+
 public class TaskList {
     private List<Task> taskList;
-    
+
+    /**
+     * Constructor to initialize the tasks 
+     * @param taskList
+     */
     public TaskList(List<Task> taskList) {
         this.taskList = taskList;
     }

@@ -1,4 +1,8 @@
 package duke;
+
+/**
+ * Deals with user interactions
+ */
 public class UI {
     private static final String LOGO = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
@@ -8,20 +12,34 @@ public class UI {
 
     private static Printable greetingMessage = () -> "Hello! I'm Duke \nWhat can I do for you?";
     private static Printable goodbyeMessage = () -> "Bye. Hope to see you again soon!";
-    
+
+    /**
+     * Generates greeting message for user
+     */
     public void greetUser() {
         System.out.println("Hello from\n" + LOGO);
         speak(greetingMessage);
     }
-    
+
+    /**
+     * Generates goodbye message for user
+     */
     public void goodbye() {
         speak(goodbyeMessage);
     }
-    
+
+    /**
+     * Generates Task completion message for user
+     * @param task Completed Task as input
+     */
     public void taskCompletedMessage(Task task) {
         speak(() -> "Nice! I've marked this task as done:\n[✓] " + task.toString());
     }
-    
+
+    /**
+     * Generates task deletion message for user
+     * @param task Task to be deleted as input
+     */
     public void taskDeletedMessage (Task task) {
         speak(() -> String.format("Noted. I've removed this task:\n" +
                 "%s%s %s\n" +
@@ -33,6 +51,10 @@ public class UI {
                 "Now you have %d tasks in the list.", task.getTaskSymbol(), task.getSymbol(), task.toString(), Task.remainingTasks()));
     }
 
+    /**
+     * Lists completed tasks for user
+     * @param taskList list of tasks as input
+     */
     public static void listTasks (TaskList taskList) {
         int i;
         StringBuilder sb = new StringBuilder();
@@ -50,7 +72,7 @@ public class UI {
     }
     
 
-    public static void speak(Printable printable) {
+    private static void speak(Printable printable) {
         System.out.println("------------------------------------------------------");
         System.out.println(printable.print() + "\n");
         System.out.println("------------------------------------------------------");
