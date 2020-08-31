@@ -8,7 +8,7 @@ public class TaskDate {
 
     TaskDate(LocalDate date, String time) {
         this.dateTime = date.atTime(LocalTime.parse(time,
-                                                    DateTimeFormatter.ofPattern("HHmm")));
+                                    DateTimeFormatter.ofPattern("HHmm")));
     }
     TaskDate(LocalDateTime dateTime) {
         this.dateTime = dateTime;
@@ -19,7 +19,8 @@ public class TaskDate {
     }
 
     public String getTime() {
-        return this.dateTime.toLocalTime().format(DateTimeFormatter.ofPattern("HHmm"));
+        return this.dateTime.toLocalTime().format(
+                             DateTimeFormatter.ofPattern("HHmm"));
     }
 
     @Override
