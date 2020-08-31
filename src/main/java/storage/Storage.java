@@ -19,7 +19,11 @@ public class Storage {
     private String filepath;
 
     public Storage(String filepath) {
-        this.filepath = filepath;
+        if (filepath == null) {
+            throw new NullPointerException();
+        } else {
+            this.filepath = filepath;
+        }
     }
 
     /**
