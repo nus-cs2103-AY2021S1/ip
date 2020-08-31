@@ -20,12 +20,11 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * The Parser class takes in inputs from the user and convert
- * into commands.
+ * The Parser class takes in inputs from the user and convert into commands.
  */
 public class Parser {
 
-    private static List<String> dateFormats = Arrays.asList("yyyy/MM/dd HHmm", "y/M/d HHmm", "y-M-d HHmm");
+    private static final List<String> DATE_FORMATS = Arrays.asList("yyyy/MM/dd HHmm", "y/M/d HHmm", "y-M-d HHmm");
     private static final String BYE = "bye";
     private static final String LIST = "list";
     private static final String DONE = "done";
@@ -67,8 +66,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Parse the date given by user.
+     * @param dateString Date provided by user in the form of string.
+     * @return Date in LocalDateTime.
+     */
     public static LocalDateTime parseDate(String dateString) {
-        for (String format : dateFormats) {
+        for (String format : DATE_FORMATS) {
             try {
                 return LocalDateTime.parse(dateString, DateTimeFormatter.ofPattern(format));
             } catch (DateTimeParseException e) {
@@ -78,6 +82,11 @@ public class Parser {
         return null;
     }
 
+    /**
+     * Return the ToDo the user specified.
+     * @param input The todo details given by user.
+     * @return A ToDo with the input given.
+     */
     public static ToDo parseTodo(String input) throws DukeException {
         if (input.equals("")) {
             throw new DukeException("Oops! Todo cannot be empty");
@@ -86,8 +95,9 @@ public class Parser {
     }
 
     /**
-     * Return the deadline the user specified.
-     * @return A deadline with the details and date given by user.
+     * Return the Deadline the user specified.
+     * @param input The deadline details given by user.
+     * @return A Deadline with the input given.
      */
     public static Deadline parseDeadline(String input) throws DukeException {
         if (input.equals("")) {
@@ -106,8 +116,9 @@ public class Parser {
     }
 
     /**
-     * Return the event the user specified.
-     * @return A event with the details and date given by user.
+     * Return the Event the user specified.
+     * @param input The event details given by user.
+     * @return A Event with the input given.
      */
     public static Event parseEvent(String input) throws DukeException {
         if (input.trim().equals("")) {
@@ -125,6 +136,11 @@ public class Parser {
         return new Event(detail, date);
     }
 
+    /**
+     * Parse the number given by user.
+     * @param input The number given by user in string.
+     * @return An integer representing task number.
+     */
     public static int parseNumber(String input) throws DukeException {
         try {
             return Integer.parseInt(input.trim());

@@ -22,10 +22,19 @@ public class Duke {
         this.taskList = new TaskList(storage.load());
     }
 
+    /**
+     * Set the ui of Duke.
+     * @param dialogContainer The dialogContainer for Ui.
+     */
     public void setUi(VBox dialogContainer) {
         this.ui = new Ui(dialogContainer);
     }
 
+    /**
+     * Get the response from Duke.
+     * @param input Input of user.
+     * @return The response of Duke.
+     */
     public boolean getResponse(String input) {
         try {
             Command c = Parser.parse(input);
@@ -37,6 +46,7 @@ public class Duke {
         return false;
     }
 
+    /** Greet the user. */
     public void greet() {
         ui.greet();
     }
