@@ -5,7 +5,6 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 import duke.Storage;
-
 import duke.exception.DateParseException;
 import duke.exception.InvalidTaskException;
 import duke.exception.StorageException;
@@ -51,6 +50,8 @@ public class TaskList {
                 case "E":
                     newTaskList.taskList.add(Event.existingEvent(t[2], t[1].equals("1"), LocalDate.parse(t[3])));
                     break;
+                default:
+                    break;
                 }
             });
         } catch (DateTimeParseException e) {
@@ -89,8 +90,9 @@ public class TaskList {
             Deadline newDeadline = Deadline.newDeadline(taskName, taskDate);
             this.taskList.add(newDeadline);
             return newDeadline;
+        default:
+            throw new InvalidTaskException("Oh dear! I'm not sure what kind of task to add ;A;");
         }
-        throw new InvalidTaskException("Oh dear! I'm not sure what kind of task to add ;A;");
     }
 
     /**
@@ -121,6 +123,11 @@ public class TaskList {
         return task;
     }
 
+    /**
+     * Finds tasks that match the search term
+     * @param matchString A string representing the search term
+     * @return An ArrayList containing all Tasks that match the search term provided
+     */
     public ArrayList<Task> findTasks(String matchString) {
         ArrayList<Task> filteredList = new ArrayList<>();
         for (Task task : this.taskList) {

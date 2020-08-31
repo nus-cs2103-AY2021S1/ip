@@ -60,8 +60,8 @@ public class Event extends Task {
      * @return A string representation of the event for printing.
      */
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ", " +
-                date.getDayOfWeek().getDisplayName(TextStyle.FULL, Locale.getDefault()) + ")";
+        return "[E]" + super.toString() + " (at: " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ", "
+                + date.getDayOfWeek().getDisplayName(TextStyle.FULL, Locale.getDefault()) + ")";
     }
 
     /**

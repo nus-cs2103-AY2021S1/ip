@@ -4,13 +4,11 @@ import java.time.LocalDate;
 
 import duke.Storage;
 import duke.Ui;
-
+import duke.exception.InvalidTaskException;
+import duke.exception.StorageException;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.task.TaskType;
-
-import duke.exception.InvalidTaskException;
-import duke.exception.StorageException;
 
 /**
  * Represents a Command given by the user to add a Task.
@@ -65,6 +63,8 @@ public class AddTaskCommand extends Command {
             storage.appendTaskStorage(newTask.toSaveString());
             Ui.addTaskMessage(newTask, list.taskListSize());
             break;
+        default:
+            throw new InvalidTaskException("Oh dear! I'm not sure what kind of task to add ;A;");
         }
     }
 }
