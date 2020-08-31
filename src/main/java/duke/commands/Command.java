@@ -12,7 +12,7 @@ import duke.ui.Ui;
  * Class that simulates the command of the user.
  */
 
-public class Command {
+public abstract class Command {
     private static final String KEYWORD_ERR = "Sorry something went wrong. Duke crashed X.X";
     protected String[] inputArr;
     private boolean isExit = false;
@@ -68,8 +68,6 @@ public class Command {
      * @param ui Object that deals with interactions with the user.
      * @param storage Object that deals with loading tasks from the file and saving tasks in the file
      */
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws InvalidFormatDeadlineException,
-            InvalidFormatEventException, InvalidFormatDateException, UnknownCommandException {
-        return "";
-    }
+    public abstract String execute(TaskList tasks, Ui ui, Storage storage) throws UnknownCommandException, 
+            InvalidFormatDeadlineException, InvalidFormatEventException, InvalidFormatDateException;
 }

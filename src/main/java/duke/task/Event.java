@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Class the simulates the event task that user has inputted.
+ * Class that simulates the event task that user has inputted.
  */
 
 public class Event extends Task {

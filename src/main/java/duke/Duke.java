@@ -27,7 +27,7 @@ public class Duke  {
         storage = new Storage();
         tasks = new TaskList();
         storage.retrieve(tasks);
-        this.ui = new Ui();
+        ui = new Ui();
     }
     
     //@@ Oleg Mikhailov

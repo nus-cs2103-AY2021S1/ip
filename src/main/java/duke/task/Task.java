@@ -1,10 +1,10 @@
 package duke.task;
 
 /**
- * Class the simulates the task that user has inputted.
+ * Class that simulates the task that user has inputted.
  */
 
-public class Task {
+public abstract class Task {
     private static final String TASK_MARKED_BEFORE = "This task has already been marked!";
     private static final String TASK_MARKED = "Nice! I've marked this task as done:";
     //@@author Damith C. Rajapakse

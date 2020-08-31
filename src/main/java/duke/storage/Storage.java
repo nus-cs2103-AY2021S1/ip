@@ -19,7 +19,7 @@ import duke.task.ToDo;
 import duke.tasklist.TaskList;
 
 /**
- * Class the simulates the storing and retrieving of information into the hard-disk
+ * Class that simulates the storing and retrieving of information into the hard-disk
  */
 public class Storage {
     // might use it at the end

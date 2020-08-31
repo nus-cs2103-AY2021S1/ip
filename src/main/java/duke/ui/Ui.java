@@ -3,7 +3,7 @@ package duke.ui;
 import java.util.Scanner;
 
 /**
- * Class the simulates the reaction of duke to the user's input
+ * Class that simulates the reaction of duke to the user's input
  */
 
 public class Ui {

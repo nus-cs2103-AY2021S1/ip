@@ -10,7 +10,7 @@ import duke.ui.Ui;
 
 
 /**
- * Class the simulates the delete command.
+ * Class that simulates the delete command.
  */
 
 public class DeleteCommand extends Command {

@@ -47,8 +47,8 @@ public class AddCommand extends Command {
      * @throws InvalidFormatEventException Throws an exception when the format of 'message' is wrong.
      * @throws InvalidFormatDateException Throws an exception when the format of 'message' is wrong.
      */
-    private String addTask(String type, String message, Ui ui, TaskList tasks)
-            throws InvalidFormatDeadlineException, InvalidFormatEventException, InvalidFormatDateException {
+    private String addTask(String type, String message, Ui ui, TaskList tasks) throws InvalidFormatDeadlineException, 
+            InvalidFormatEventException, InvalidFormatDateException {
         Task task;
         String[] dateTime;
         if (Parser.isToDo(type)) {

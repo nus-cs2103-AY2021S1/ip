@@ -96,7 +96,7 @@ public class Parser {
      * @param type The inputted user's type.
      * @return boolean value of true if user's inputted type is bye, false otherwise.
      */
-    private static boolean isEnd(String type) {
+    private static boolean isBye(String type) {
         return type.equals(KEYWORD_BYE);
     }
 
@@ -147,8 +147,8 @@ public class Parser {
      * @throws InvalidFormatDateException If the inputted user's timing is not of the correct format,
      * YYYY-MM-DD HHMM or YYYY-MM-DD HMMM, an exception will be thrown to notify the user.
      */
-    public static LocalDateTime formatDateTime(String s) throws InvalidFormatDateException {
-        String[] dateFormat = s.split(" ", 2);
+    public static LocalDateTime formatDateTime(String dateAndTime) throws InvalidFormatDateException {
+        String[] dateFormat = dateAndTime.split(" ", 2);
         String[] date = dateFormat[0].split("-");
         String time;
         if (dateFormat.length == 1) {
@@ -192,7 +192,7 @@ public class Parser {
             InvalidFormatDoneException, EmptyTextException, InvalidFormatDeleteException, InvalidFormatFindException {
         String[] inputArr = s.trim().replaceAll("  +", " ").split(" ", 2);
         inputArr[0] = inputArr[0].toLowerCase();
-        if (isEnd(inputArr[0])) {
+        if (isBye(inputArr[0])) {
             if (inputArr.length != 1) {
                 throw new InvalidFormatByeException();
             }

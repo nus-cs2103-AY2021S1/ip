@@ -6,7 +6,7 @@ import duke.tasklist.TaskList;
 import duke.ui.Ui;
 
 /**
- * Class the simulates an unknown command.
+ * Class that simulates an unknown command.
  */
 
 public class UnknownCommand extends Command {

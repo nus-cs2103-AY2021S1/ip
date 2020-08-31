@@ -40,10 +40,10 @@ public class DoneCommand extends Command {
      */
     private String marking(int pos, Ui ui, TaskList tasks) {
         if (pos <= 0 || tasks.size() < pos) {
-            return ui.messageFormatter(new String[]{INVALID_INPUT});
+            return ui.messageFormatter(INVALID_INPUT);
         } else {
             Task task = tasks.get(pos - 1);
-            return ui.messageFormatter(new String[]{task.markAsDone()});
+            return ui.messageFormatter(task.markAsDone());
         }
     }
 }

@@ -1,7 +1,7 @@
 package duke.task;
 
 /**
- * Class the simulates the todo task that user has inputted.
+ * Class that simulates the todo task that user has inputted.
  */
 
 public class ToDo extends Task {
