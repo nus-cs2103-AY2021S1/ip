@@ -59,7 +59,7 @@ public class AddCommand extends Command {
             default:
                 throw new DukeException("Please key in a valid command");
             }
-            ui.showOutput(output);
+            ui.showOutputOnScreen(output);
         } catch (IOException | DateTimeException ex) {
             throw new DukeException(ex.getMessage());
         } catch (ArrayIndexOutOfBoundsException ex) {

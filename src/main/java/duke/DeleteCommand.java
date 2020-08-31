@@ -23,7 +23,7 @@ public class DeleteCommand extends Command {
             output += "Noted. I've removed this task:\n\t" + tasks.get(itemNumber - 1);
             tasks.remove(itemNumber - 1);
             output += "\nYou now have " + tasks.size() + " tasks in the list.";
-            ui.showOutput(output);
+            ui.showOutputOnScreen(output);
             storage.writeToFile(tasks);
         } catch (NumberFormatException | IndexOutOfBoundsException ex) {
             throw new DukeException("Please key in a valid number for \"delete\"");

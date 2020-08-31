@@ -56,6 +56,14 @@ public class Ui {
     }
 
     /**
+     * Prints specified output message for user on the GUI
+     * @param output Message for the user.
+     */
+    public void showOutputOnScreen(String output) {
+        Duke.outputLabel.setText(output);
+    }
+
+    /**
      * Prints a dividing line.
      */
     public void showLine() {
