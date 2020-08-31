@@ -8,11 +8,20 @@ import duke.tasklist.TaskList;
  */
 public class Ui {
 
+    private String stringFormatter(String ... args) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < args.length - 1; i++) {
+            sb.append(args[i]).append("\n");
+        }
+        sb.append(args[args.length - 1]);
+        return sb.toString();
+    }
+
     /**
      * Greets the user upon starting the program.
      */
     public String greetings() {
-        return "Hello, I'm Duke!\nWhat can I do for you?";
+        return stringFormatter("Hello, I'm Duke!", "What can I do for you?");
     }
 
     /**
@@ -26,21 +35,21 @@ public class Ui {
      * Prints the file creation message.
      */
     public String fileCreationError() {
-        return "Error in creating file.\n";
+        return "Error in creating file";
     }
 
     /**
      * Prints the file update error.
      */
     public String fileUpdateError() {
-        return "Error in updating file\n";
+        return "Error in updating file";
     }
 
     /**
      * Prints the file read error when reading from the CSV file.
      */
     public String fileReadingError() {
-        return "Error in reading from csv file\n";
+        return "Error in reading from csv file";
     }
 
     /**
@@ -49,7 +58,7 @@ public class Ui {
      * @param current Input task.
      */
     public String markTaskAsDone(Task current) {
-        return String.format("Nice! I've marked this task as done:\n      %s", current);
+        return stringFormatter("Nice! I've marked this task as done:", String.format("    %s", current));
     }
 
     /**
@@ -59,8 +68,8 @@ public class Ui {
      * @param size Size of task list.
      */
     public String deleteTask(Task current, int size) {
-        return String.format("Noted. I've removed this task:\n      %s\n"
-            + "Now you have %d tasks in the list.", current, size);
+        return stringFormatter("Noted. I've removed this task:", String.format("    %s", current),
+            String.format("Now you have %d tasks in the list.", size));
     }
 
     /**
@@ -70,8 +79,8 @@ public class Ui {
      * @param size Size of task list.
      */
     public String addTask(Task newTask, int size) {
-        return String.format("Got it. I've added this task:\n      %s\n"
-            + "Now you have %d tasks in the list.", newTask, size);
+        return stringFormatter("Got it. I've added this task:", String.format("    %s", newTask),
+            String.format("Now you have %d tasks in the list.", size));
     }
 
     /**
