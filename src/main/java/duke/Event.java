@@ -24,7 +24,7 @@ public class Event extends TimedTask {
      */
     @Override
     protected String getTxtFormat() {
-        return "event, " + super.getTxtFormat() + "/at" + this.dateTime.format(Event.inputFormatter);
+        return "event, " + super.getTxtFormat() + "/at" + this.dateTime.format(Event.INPUT_FORMAT);
     }
 
     /**

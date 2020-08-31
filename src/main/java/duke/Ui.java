@@ -7,7 +7,8 @@ import java.util.Scanner;
  */
 public class Ui {
     private final Scanner sc = new Scanner(System.in);
-    private final String line = "------------------------------------------------------------";;
+    private final String line = "------------------------------"
+            + "------------------------------";;
 
     /**
      * Prints out the Duke logo.
