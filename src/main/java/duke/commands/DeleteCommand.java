@@ -2,7 +2,6 @@ package duke.commands;
 
 import duke.DukeException;
 import duke.Storage;
-import duke.Ui;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
 
@@ -25,11 +24,10 @@ public class DeleteCommand extends Command {
      *
      *
      * @param tasklist list of all the tasks stored in Duke so far.
-     * @param ui prints out messages notifying user of what is being done.
      * @param storage stores all the tasks being added so far into user's local storage.
      * @throws DukeException when task number does not exist
      */
-    public void execute(TaskList tasklist, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasklist, Storage storage) throws DukeException {
         try {
             int index = Integer.parseInt(description.split(" ")[0]);
             if (tasklist.getSize() < index || index <= 0) {
@@ -37,7 +35,7 @@ public class DeleteCommand extends Command {
             }
             Task temp = tasklist.get(index - 1);
             tasklist.delete(index - 1);
-            ui.showMessage("Removed this task for you!\n"
+            return ("Removed this task for you!\n"
                     + temp + "\nYou have "
                     + tasklist.getSize() + " tasks in the list.");
         } catch (NumberFormatException e) {

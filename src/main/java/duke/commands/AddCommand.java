@@ -2,7 +2,6 @@ package duke.commands;
 
 import duke.DukeException;
 import duke.Storage;
-import duke.Ui;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.TaskList;
@@ -30,32 +29,28 @@ public class AddCommand extends Command {
      * Adds the task into <code>tasklist</code>.
      *
      * @param tasklist list of all the tasks stored in Duke so far.
-     * @param ui prints out messages notifying user of what is being done.
      * @param storage stores all the tasks being added so far into user's local storage.
      */
     @Override
-    public void execute(TaskList tasklist, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasklist, Storage storage) throws DukeException {
         switch (c) {
         case TODO:
             tasklist.add(new Todo(description));
-            ui.showMessage("Hi there, I've added this task:\n"
+            return ("Hi there, I've added this task:\n"
                     + tasklist.get(tasklist.getSize() - 1) + "\nYou have "
                     + tasklist.getSize() + " tasks in the list.");
-            break;
         case DEADLINE:
             String[] descriptions = description.split("/by ");
             tasklist.add(new Deadline(descriptions[0], descriptions[1]));
-            ui.showMessage("Hi there, I've added this task:\n"
+            return ("Hi there, I've added this task:\n"
                     + tasklist.get(tasklist.getSize() - 1) + "\nYou have "
                     + tasklist.getSize() + " tasks in the list.");
-            break;
         case EVENT:
             String[] descriptions2 = description.split("/at ");
             tasklist.add(new Event(descriptions2[0], descriptions2[1]));
-            ui.showMessage("Hi there, I've added this task:\n"
+            return ("Hi there, I've added this task:\n"
                     + tasklist.get(tasklist.getSize() - 1) + "\nYou have "
                     + tasklist.getSize() + " tasks in the list.");
-            break;
         default:
             throw new DukeException("invalid command.");
         }

@@ -2,7 +2,6 @@ package duke.commands;
 
 import duke.DukeException;
 import duke.Storage;
-import duke.Ui;
 import duke.tasks.TaskList;
 
 /**
@@ -14,11 +13,10 @@ public abstract class Command {
      * Abstract method to be implemented by all Command subclasses, with each Command applying different executions.
      *
      * @param tasklist list of all the tasks stored in Duke so far.
-     * @param ui prints out messages notifying user of what is being done.
      * @param storage stores all the tasks being added so far into user's local storage.
      * @throws DukeException throw when error occurs while executing commands
      */
-    public abstract void execute(TaskList tasklist, Ui ui, Storage storage) throws DukeException;
+    public abstract String execute(TaskList tasklist, Storage storage) throws DukeException;
 
     /**
      * Decides if program should terminate.
