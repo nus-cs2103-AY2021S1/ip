@@ -47,6 +47,18 @@ public class Ui {
         echo(toEcho);
     }
 
+    /**
+     * String version of taskAdded
+     * @param task the task to be added
+     * @param storage where the tasks are stored
+     * @return String of task added
+     */
+    public static String stringTaskAdded(Task task, List<Task> storage) {
+        return "Task added: \n"
+                + task + "\n"
+                + "You now have " + storage.size() + " task(s).";
+    }
+
 
     /**
      * lists out every task
@@ -61,6 +73,21 @@ public class Ui {
             System.out.println((i + 1) + ". " + currentTask);
         }
         line();
+    }
+
+    /**
+     * string version of listOut
+     * @param storage where tasks are stored
+     * @return String of list of tasks
+     */
+    public static String stringListOut(ArrayList<Task> storage) {
+        StringBuilder response = new StringBuilder("Here's your tasks \n");
+        for (int i = 0; i < storage.size(); i++) {
+            // list starts from 1
+            Task currentTask = storage.get(i);
+            response.append(i + 1).append(". ").append(currentTask).append("\n");
+        }
+        return response.toString();
     }
 
     /**
@@ -79,6 +106,24 @@ public class Ui {
             }
         }
         line();
+    }
+
+    /**
+     * String version of filterList
+     * @param words words to be searched
+     * @param storage where tasks are stored
+     * @return
+     */
+    public static String stringFilterList(String words, ArrayList<Task> storage) {
+        StringBuilder response = new StringBuilder("Here's your matching tasks \n");
+        for (int i = 0; i < storage.size(); i++) {
+            // list starts from 1
+            Task currentTask = storage.get(i);
+            if (currentTask.toString().contains(words)) {
+                response.append(i + 1).append(". ").append(currentTask).append("\n");
+            }
+        }
+        return response.toString();
     }
 
     public static class DukeException extends Exception {

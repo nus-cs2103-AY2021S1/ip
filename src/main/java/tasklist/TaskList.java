@@ -3,6 +3,7 @@ package tasklist;
 import static data.task.Task.containsDate;
 import static ui.Ui.echo;
 import static ui.Ui.line;
+import static ui.Ui.stringTaskAdded;
 import static ui.Ui.taskAdded;
 
 import java.util.ArrayList;
@@ -58,6 +59,20 @@ public class TaskList {
         line();
     }
 
+    /**
+     * String version of markComplete
+     * @param taskNumber index number of task
+     * @return string output of task that's marked complete
+     */
+    public String stringMarkComplete(int taskNumber) {
+        StringBuilder response = new StringBuilder();
+        Task currentTask = storage.get(taskNumber);
+        currentTask.complete();
+        response.append("Marked task ").append(taskNumber + 1).append(" as complete. \n");
+        response.append(currentTask);
+        return response.toString();
+    }
+
 
     /**
      * Adds a task to the task storage
@@ -75,6 +90,7 @@ public class TaskList {
         }
         taskAdded(taskToAdd, storage);
     }
+
 
     /**
      * Overloaded store that reads from save file
@@ -104,7 +120,7 @@ public class TaskList {
                     // this shouldn't happen
                     type = null;
                 }
-                completionStatus = String.valueOf(typeCompletion.charAt(4)).equals("✓");
+                completionStatus = typeCompletion.charAt(4) != 'X';
             } else {
                 throw Ui.DukeException.fileError();
             }
@@ -133,6 +149,25 @@ public class TaskList {
             echo(e.getMessage());
         }
     }
+
+    /**
+     * String version of store
+     * @param type type of task
+     * @param name name of task
+     * @return String output of task added
+     */
+    public String stringStore(String type, String name) {
+        Task taskToAdd = new Task(type, name);
+        storage.add(taskToAdd);
+        if (taskToAdd.hasDate()) {
+            if (!dateStorage.containsKey(taskToAdd.getDate())) {
+                dateStorage.put(taskToAdd.getDate(), new ArrayList<>());
+            }
+            dateStorage.get(taskToAdd.getDate()).add(taskToAdd);
+        }
+        return stringTaskAdded(taskToAdd, storage);
+    }
+
     /**
      * Deletes a certain task
      * @param taskNumber the index number of the task
@@ -145,5 +180,19 @@ public class TaskList {
         storage.remove(taskNumber);
         System.out.println("There are now " + storage.size() + " task(s) remaining.");
         line();
+    }
+
+    /**
+     * String version of delete
+     * @param taskNumber index of task to be deleted
+     * @return String stating task deleted
+     */
+    public String stringDelete(int taskNumber) {
+        StringBuilder response = new StringBuilder("Deleted task:");
+        Task currentTask = storage.get(taskNumber);
+        response.append(currentTask).append("\n");
+        storage.remove(taskNumber);
+        response.append("There are now ").append(storage.size()).append(" task(s) remaining.");
+        return response.toString();
     }
 }

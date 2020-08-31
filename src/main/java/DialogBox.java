@@ -34,6 +34,22 @@ public class DialogBox extends HBox {
         }
 
         dialog.setText(text);
+        // counts number of lines past profile pic to increase box height
+        int heightCounter = 0;
+        for (int i = 0; i < text.length(); i++) {
+            if (text.charAt(i) == '\n') {
+                heightCounter++;
+            }
+        }
+        // profile pic can display 4-5 lines by itself
+        if (heightCounter > 4) {
+            heightCounter -= 4;
+        } else {
+            heightCounter = 0;
+        }
+        // also thanks to my team mate aqcd for telling me about setMinHeight
+        // and for these magic numbers
+        dialog.setMinHeight(heightCounter * 15 + 100);
         displayPicture.setImage(img);
     }
 
