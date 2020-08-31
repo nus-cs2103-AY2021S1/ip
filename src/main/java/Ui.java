@@ -44,4 +44,15 @@ public class Ui {
         return "Noted. I've removed this task:\n" + "  " + toRemove + "\n"
                     + "Now you have " + size + " tasks in the list.\n";
     }
+
+    public String unknownInputLine() {
+        return "Below are the list of commands:\n"
+                + "list\n"
+                + "find [keyword]\n"
+                + "todo [taskname]\n"
+                + "deadline [taskname] /by [yyyy-MM-dd HHmm]\n"
+                + "event [taskname] /at [yyy-MM-dd HHmm]\n"
+                + "remove [index or all]\n"
+                + "bye";
+    }
 }

@@ -134,7 +134,7 @@ public class Parser {
             } else if (checkList(text)) {
                 return taskList.displayList();
             } else {
-                return text;
+                return ui.unknownInputLine();
             }
         }
     }
