@@ -68,5 +68,21 @@ public class TaskList {
         }
     }
 
-
+    /**
+     * Searches the list for the key word, and prints a new list containing tasks with the key word.
+     * @param keyWord Key word for the search
+     */
+    public static void find(String keyWord) {
+        boolean printed = false;
+        System.out.println("Woof bark: (Here are the tasks that match your key word: )");
+        for (int i = 0; i < thingsOnList.size(); i++) {
+            if (thingsOnList.get(i).toString().contains(keyWord)) {
+                System.out.println(    (i + 1) + ". "  + thingsOnList.get(i));
+                printed = true;
+            }
+        }
+        if (!printed) {
+            System.out.println("Bark bar :< (There were no tasks that matched :<)");
+        }
+    }
 }

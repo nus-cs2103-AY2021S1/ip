@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 public class UI {
     private static Scanner sc = new Scanner(System.in);
-    private static boolean stillGoing = true;
+    private static boolean isStillGoing = true;
     private enum Messages {
         WRONG_INPUT("    Bark bark? (This doesn't make sense?)"),
         MISSING_INPUT("    Bork bark?? Bark bark woof. (What does this command mean?? Try again with todo *task*, " +
@@ -17,6 +17,7 @@ public class UI {
         LIST("list"),
         DONE("done"),
         DELETE("delete"),
+        FIND("find"),
         GOODBYE_MSG("    BARK! (Come back soon!)"),
         WELCOME_MSG("    BARK BARK WOOF! (Welcome! Tell me your tasks and I'll help you keep track of them!)"),
         LOGO("                    ........,.....\n" +
@@ -134,7 +135,7 @@ public class UI {
      * Stops the programme from running.
      */
     public static void stop() {
-        stillGoing = false;
+        isStillGoing = false;
     }
 
     /**
@@ -151,13 +152,12 @@ public class UI {
      * @throws DukeExceptions
      */
     public static void start() throws DukeExceptions {
-        stillGoing = true;
+        isStillGoing = true;
         while (sc.hasNextLine()) {
             Parser.parseAndAddToList(sc.nextLine());
-            if(!stillGoing) {
+            if(!isStillGoing) {
                 break;
             }
         }
-        sc.close();
     }
 }

@@ -36,6 +36,6 @@ public class Task {
      * @return
      */
     public String toString() {
-        return done ? "[✓] " + task : "[✗] " + task;
+        return done ? "[Barked] " + task : "[Not barked yet] " + task;
     }
 }
