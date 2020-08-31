@@ -15,7 +15,7 @@ import duke.ui.Ui;
 
 public class DeleteCommand extends Command {
     private static final String INVALID_INPUT = "Invalid input for delete";
-    private static final String DELETE_NOTIFICATION = "Noted. I've removed this duke.task:";
+    private static final String DELETE_NOTIFICATION = "Noted. I've removed this task:";
     /**
      * Creates a DeleteCommand object.
      * 

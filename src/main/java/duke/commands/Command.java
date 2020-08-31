@@ -13,7 +13,7 @@ import duke.ui.Ui;
  */
 
 public class Command {
-    private static final String KEYWORD_ERR = "Sorry something went wrong. duke.Duke crashed X.X";
+    private static final String KEYWORD_ERR = "Sorry something went wrong. Duke crashed X.X";
     protected String[] inputArr;
     private boolean isExit = false;
     /**

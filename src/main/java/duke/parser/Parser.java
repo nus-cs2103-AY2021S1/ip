@@ -190,7 +190,7 @@ public class Parser {
      */
     public static Command parse(String s) throws InvalidFormatByeException, InvalidFormatListException,
             InvalidFormatDoneException, EmptyTextException, InvalidFormatDeleteException, InvalidFormatFindException {
-        String[] inputArr = s.trim().split(" ", 2);
+        String[] inputArr = s.trim().replaceAll("  +", " ").split(" ", 2);
         inputArr[0] = inputArr[0].toLowerCase();
         if (isEnd(inputArr[0])) {
             if (inputArr.length != 1) {

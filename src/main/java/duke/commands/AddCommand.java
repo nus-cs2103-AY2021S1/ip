@@ -18,7 +18,7 @@ import duke.ui.Ui;
  */
 
 public class AddCommand extends Command {
-    private static final String ADDED_NOTIFICATION = "Got it. I've added this duke.task:";
+    private static final String ADDED_NOTIFICATION = "Got it. I've added this task:";
     /**
      * Creates an AddCommand object.
      * 
