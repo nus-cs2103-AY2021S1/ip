@@ -31,7 +31,8 @@ public class FindCommand extends Command {
      * @param storage Storage use by Duke to save and load files.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public CommandResponse execute(TaskList tasks, Ui ui, Storage storage) {
+        String responseMessage = "";
         StringBuffer sb = new StringBuffer();
         int index = 1;
         sb.append("Here are the matching tasks in your list:\n\t ");
@@ -46,9 +47,23 @@ public class FindCommand extends Command {
             }
         }
         if (hasTasks) {
-            ui.printMessage(sb.delete(sb.length() - 3, sb.length() - 1).toString());
+            responseMessage = sb.delete(sb.length() - 3, sb.length() - 1).toString();
         } else {
-            ui.printMessage("You do not have any tasks containing " + "\"" + content + "\"!");
+            responseMessage = "You do not have any tasks containing " + "\"" + content + "\"!";
+        }
+        boolean shouldExit = getIsExit();
+        return new CommandResponse(responseMessage, shouldExit);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        } else if (obj instanceof FindCommand) {
+            FindCommand c = (FindCommand) obj;
+            return c.content.equals(this.content) && c.getIsExit() == this.getIsExit();
+        } else {
+            return false;
         }
     }
 }

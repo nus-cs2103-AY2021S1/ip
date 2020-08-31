@@ -43,16 +43,18 @@ public class AddDeadlineCommand extends Command {
      * @throws InvalidTaskDateTimeException If date and time format is invalid.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws InvalidTaskDateTimeException {
+    public CommandResponse execute(TaskList tasks, Ui ui, Storage storage) throws InvalidTaskDateTimeException {
         try {
             Task task = new Deadline(description, by);
             tasks.addTask(task);
             storage.save(tasks);
-            ui.printMessage("Got it. I've added this deadline: \n\t   "
+            String responseMessage = "Got it. I've added this deadline: \n\t   "
                     + task + "\n\t "
                     + "Now you have "
                     + getTaskDescription(tasks.getNumberOfTask())
-                    + " in the list.");
+                    + " in the list.";
+            boolean shouldExit = getIsExit();
+            return new CommandResponse(responseMessage, shouldExit);
         } catch (DateTimeParseException e) {
             throw new InvalidTaskDateTimeException();
         }
@@ -72,5 +74,17 @@ public class AddDeadlineCommand extends Command {
             taskDescription = noOfTask + " task";
         }
         return taskDescription;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        } else if (obj instanceof AddDeadlineCommand) {
+            AddDeadlineCommand c = (AddDeadlineCommand) obj;
+            return c.description.equals(this.description) && c.getIsExit() == this.getIsExit();
+        } else {
+            return false;
+        }
     }
 }

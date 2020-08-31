@@ -2,14 +2,8 @@ package duke.command;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
-
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.task.Deadline;
 import duke.task.Event;
@@ -19,21 +13,9 @@ import duke.tasklist.TaskList;
 import duke.ui.Ui;
 
 public class FindCommandTest {
-    private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-    private final PrintStream originalOut = System.out;
-
-    @BeforeEach
-    public void setUpStreams() {
-        System.setOut(new PrintStream(outContent));
-    }
-
-    @AfterEach
-    public void restoreStreams() {
-        System.setOut(originalOut);
-    }
 
     @Test
-    public void testExecute() throws DukeException {
+    public void testExecute() {
         TaskList tasks = new TaskList();
         Task task1 = new Todo("borrow book");
         Task task2 = new Deadline("readbook", "12/02/2012 12:12");
@@ -48,12 +30,13 @@ public class FindCommandTest {
         Ui ui = new Ui();
         Storage storage = new Storage();
         FindCommand findCommand = new FindCommand("book");
-        findCommand.execute(tasks, ui, storage);
-        String expectedPrintStatement = "\t Here are the matching tasks in your list:\n"
+        CommandResponse actual = findCommand.execute(tasks, ui, storage);
+        String expectedMessage = "Here are the matching tasks in your list:\n"
                 + "\t 1.[T][✘] borrow book\n"
                 + "\t 2.[D][✘] readbook (by: 12 February 2012, 12:12 PM)\n"
-                + "\t 3.[E][✘] return book (at: 12 April 2014, 12:14 PM) \n";
-        assertEquals(expectedPrintStatement, outContent.toString());
+                + "\t 3.[E][✘] return book (at: 12 April 2014, 12:14 PM) ";
+        CommandResponse expected = new CommandResponse(expectedMessage, false);
+        assertEquals(expected, actual);
     }
 }
 

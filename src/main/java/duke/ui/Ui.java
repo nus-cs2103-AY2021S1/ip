@@ -23,7 +23,6 @@ public class Ui {
 
     /**
      * Sends a greeting to users.
-     *
      */
     public void sendGreeting() {
         String logo = " ____        _        \n\t "
@@ -36,7 +35,6 @@ public class Ui {
 
     /**
      * Displays a LINE.
-     *
      */
     public void showLine() {
         System.out.println(LINE);
@@ -54,6 +52,7 @@ public class Ui {
     /**
      * Displays error message of an Exception.
      *
+     * @param e Exception that occurred.
      */
     public void showError(Exception e) {
         System.out.println("\t " + e.getMessage());

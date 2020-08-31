@@ -1,12 +1,12 @@
 package duke;
 
 import duke.command.Command;
+import duke.command.CommandResponse;
 import duke.exception.DukeException;
 import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
-
 
 /**
  * The Duke programme implements an application that allow users
@@ -27,7 +27,6 @@ public class Duke {
 
     /** Ui to interact with the users */
     private Ui ui;
-
     /**
      * Constructs a <code>Duke</code> object.
      */
@@ -35,6 +34,22 @@ public class Duke {
         ui = new Ui();
         storage = new Storage();
         tasks = new TaskList(storage.load());
+    }
+
+    /**
+     * Get response from Duke.
+     *
+     * @param input Input from user.
+     * @return Response base on the Command executed.
+     */
+    public CommandResponse getResponse(String input) {
+        try {
+            Command c = Parser.parse(input, tasks);
+            CommandResponse response = c.execute(tasks, ui, storage);
+            return response;
+        } catch (DukeException e) {
+            return new CommandResponse(e.getMessage(), false);
+        }
     }
 
     /**
@@ -50,8 +65,9 @@ public class Duke {
                 String fullCommand = ui.readCommand();
                 ui.showLine();
                 Command c = Parser.parse(fullCommand, tasks);
-                c.execute(tasks, ui, storage);
-                isExit = c.getIsExit();
+                CommandResponse response = c.execute(tasks, ui, storage);
+                isExit = response.getShouldExit();
+                ui.printMessage(response.getResponseMessage());
             } catch (DukeException e) {
                 ui.showError(e);
             } finally {

@@ -24,8 +24,9 @@ public class ListCommand extends Command {
      * @param storage Storage use by Duke to save and load files.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.printMessage(tasks.toString());
+    public CommandResponse execute(TaskList tasks, Ui ui, Storage storage) {
+        String responseMessage = tasks.toString();
+        boolean shouldExit = getIsExit();
+        return new CommandResponse(responseMessage, shouldExit);
     }
-
 }
