@@ -1,4 +1,8 @@
-import java.util.Scanner;
+import Duke.command.Command;
+import Duke.exceptions.DukeException;
+import Duke.task.TaskList;
+import Duke.utils.Parser;
+import Duke.utils.Ui;
 
 public class Duke {
 

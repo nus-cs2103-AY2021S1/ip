@@ -1,3 +1,7 @@
+package Duke.model;
+
+import Duke.task.Task;
+
 public class Event extends Task {
     private String time;
     public Event(String description, String time) {

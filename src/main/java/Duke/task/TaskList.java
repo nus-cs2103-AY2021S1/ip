@@ -1,3 +1,10 @@
+package Duke.task;
+
+import Duke.model.Deadline;
+import Duke.model.Event;
+import Duke.model.ToDo;
+import Duke.utils.FileHelper;
+
 import java.util.ArrayList;
 import java.util.List;
 

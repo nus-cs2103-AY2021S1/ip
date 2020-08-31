@@ -1,3 +1,5 @@
+package Duke.task;
+
 import java.lang.annotation.Inherited;
 
 public enum TaskType {
