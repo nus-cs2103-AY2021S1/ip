@@ -6,6 +6,12 @@ import java.time.format.DateTimeFormatter;
 public class Event extends Task {
     private LocalDateTime at;
 
+    /**
+     * Creates an Event task.
+     *
+     * @param description Details of the Event task.
+     * @param at Date and time of the Event.
+     */
     public Event (String description, String at) {
         super(description);
         this.at = LocalDateTime.parse(at, DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm"));
@@ -17,6 +23,11 @@ public class Event extends Task {
         return "[E]" + super.toString() + " (at: " + at.format(formatter) + ")";
     }
 
+    /**
+     * Method for writing the task to text format.
+     *
+     * @return Text format to be saved.
+     */
     public String toWrite() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
         return "[E]" + super.toString() + " /at " + at.format(formatter);

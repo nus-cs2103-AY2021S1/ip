@@ -10,12 +10,12 @@ public class Parser {
      * into ENUM format.
      * @param input User input in string.
      * @return Choice ENUM
-     * @throws DukeException
+     * @throws DukeException Duke Custom Exception
      */
     public Choice parseCommand(String input) throws DukeException {
         ArrayList<String> commands = new ArrayList<>(
                 Arrays.asList("DONE", "LIST", "DEADLINE", "EVENT", "TODO", "BYE", "DELETE", "FIND"));
-        String arr[] = input.split(" ");
+        String[] arr = input.split(" ");
         String command = arr[0].toUpperCase();
         if (!commands.contains(command)) {
             String errMsg = "\n____________________________________________________________\n"

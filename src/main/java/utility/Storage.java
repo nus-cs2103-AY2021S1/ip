@@ -1,16 +1,17 @@
 package utility;
 
-import tasks.Deadline;
-import tasks.Event;
-import tasks.Task;
-import tasks.Todo;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import tasks.Deadline;
+import tasks.Event;
+import tasks.Task;
+import tasks.Todo;
+
 
 public class Storage {
     /**
@@ -56,27 +57,29 @@ public class Storage {
             char taskType = line.charAt(1);
             char isDone = line.charAt(4);
             switch (taskType) {
-                case 'T':
-                    newList.add(new Todo(line.substring(7)));
-                    break;
-                case 'E':
-                    int posE = getPosition(line, '/');
-                    newList.add(new Event(line.substring(7, posE), line.substring(posE + 4)));
-                case 'D':
-                    int posD = getPosition(line, '/');
-                    /*
-                    System.out.println("posD " +  posD);
-                    System.out.println(line);
-                    System.out.println(line.substring(7, posD));
-                    System.out.println(line.substring(posD + 4));
-                    */
-                    newList.add(new Deadline(line.substring(7, posD), line.substring(posD + 4)));
-                default:
-                    System.out.println("Can't read line - load()");
+            case 'T':
+                newList.add(new Todo(line.substring(7)));
+                break;
+            case 'E':
+                int posE = getPosition(line, '/');
+                newList.add(new Event(line.substring(7, posE), line.substring(posE + 4)));
+                break;
+            case 'D':
+                int posD = getPosition(line, '/');
+                /*
+                System.out.println("posD " +  posD);
+                System.out.println(line);
+                System.out.println(line.substring(7, posD));
+                System.out.println(line.substring(posD + 4));
+                */
+                newList.add(new Deadline(line.substring(7, posD), line.substring(posD + 4)));
+                break;
+            default:
+                System.out.println("Can't read line - load()");
             }
         }
         // NO IDEA WHY IS THERE ANOTHER LAST ELEMENT CAUSING EXCEPTION BUT JUST DELETE IT WTV
-        newList.remove(newList.size()-1);
+        newList.remove(newList.size() - 1);
         return newList;
     }
 

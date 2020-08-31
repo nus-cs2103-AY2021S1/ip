@@ -1,11 +1,11 @@
 package utility;
 
+import java.util.ArrayList;
+
 import tasks.Deadline;
 import tasks.Event;
 import tasks.Task;
 import tasks.Todo;
-
-import java.util.ArrayList;
 
 public class TaskList {
     /**
@@ -15,7 +15,7 @@ public class TaskList {
 
     /**
      * Data structure for managing tasks.
-     * @param taskList
+     * @param taskList arraylist of tasks
      */
     public TaskList(ArrayList<Task> taskList) {
         this.taskList = taskList;
@@ -69,45 +69,45 @@ public class TaskList {
         System.out.println("Here are the tasks in your list:");
         for (int i = 0; i < taskList.size(); i++) {
             if (taskList.get(i).isDone()) {
-                System.out.println((i+1)+  ". " + taskList.get(i));
+                System.out.println((i + 1) + ". " + taskList.get(i));
             } else {
-                System.out.println((i+1)+  ". " + taskList.get(i));
+                System.out.println((i + 1) + ". " + taskList.get(i));
             }
         }
     }
 
     /**
      * Search for tasks for the same name.
-     * @param input
+     * @param input the name of the task to search for.
      */
     public void findTasks(String input) {
         String query = input.substring(5);
         for (int i = 0; i < taskList.size(); i++) {
             Task t = taskList.get(i);
             if (t.getDescription().contains(query)) {
-                System.out.println((i+1) + ". " + t);
+                System.out.println((i + 1) + ". " + t);
             }
         }
     }
 
     /**
      * Mark a task as done.
-     * @param input
+     * @param input the number of the task to be marked as complete.
      */
     public void completeTask(String input) {
         // mark task as done
         int position = Integer.parseInt(input.substring(5));
-        taskList.get(position-1).markDone();
+        taskList.get(position - 1).markDone();
 
         // print out
         System.out.println("Nice! I've marked this task as done:");
-        System.out.println(taskList.get(position-1));
+        System.out.println(taskList.get(position - 1));
     }
 
     /**
      * Add an Event Task, which contains a datetime as well.
-     * @param input
-     * @throws DukeException
+     * @param input name of the event task
+     * @throws DukeException Custom Duke Exception
      */
     public void addEvent(String input) throws DukeException {
         if (input.length() <= 6) {
@@ -122,8 +122,8 @@ public class TaskList {
 
     /**
      * Add a Deadline Task, which contains a datetime as well.
-     * @param input
-     * @throws DukeException
+     * @param input name of deadline task
+     * @throws DukeException Custom Duke Exception
      */
     public void addDeadline(String input) throws DukeException {
         if (input.length() <= 9) {
@@ -138,7 +138,8 @@ public class TaskList {
 
     /**
      * Add a Todo task.
-     * @param input
+     *
+     * @param input name of Todo task.
      */
     public void addTodo(String input) {
         taskList.add(new Todo(input.substring(5)));
@@ -147,8 +148,9 @@ public class TaskList {
 
     /**
      * Remove a task from the bot.
-     * @param input
-     * @throws DukeException
+     *
+     * @param input position of task to be deleted.
+     * @throws DukeException Custom Duke Exception.
      */
     public void deleteTask(String input) throws DukeException {
         if (input.length() <= 7) {
@@ -156,8 +158,8 @@ public class TaskList {
         }
         int position = Integer.parseInt(input.substring(7));
         System.out.println("Noted. I've removed this task:");
-        System.out.println(this.taskList.get(position-1));
-        this.taskList.remove(position-1);
+        System.out.println(this.taskList.get(position - 1));
+        this.taskList.remove(position - 1);
     }
 
 

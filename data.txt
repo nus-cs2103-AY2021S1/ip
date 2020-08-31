@@ -1,3 +1,2 @@
 [T][✗] somehting
 [T][✗] this
-[E][✗] project meeting      /at 08/10/2020 2000

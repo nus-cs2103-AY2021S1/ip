@@ -1,7 +1,13 @@
-import utility.*;
-
 import java.io.FileNotFoundException;
 import java.util.Scanner;
+
+import utility.Choice;
+import utility.DukeException;
+import utility.Parser;
+import utility.Storage;
+import utility.TaskList;
+import utility.Ui;
+
 
 public class Duke {
 
@@ -45,7 +51,7 @@ public class Duke {
      * Starts the Duke personal assistant bot.
      */
     public void run() {
-        Scanner sc = new Scanner(System.in);  // Create a Scanner object
+        Scanner sc = new Scanner(System.in); // Create a Scanner object
         ui.showWelcome();
         while (true) {
             String input = sc.nextLine();
@@ -53,34 +59,35 @@ public class Duke {
             try {
                 Choice c = parser.parseCommand(input);
                 switch (c) {
-                    case BYE:
-                        System.out.println("Bye. Hope to see you again soon!");
-                        storage.writeToFile(tasks.getTaskList());
-                        System.exit(0); // End program
-                    case DELETE:
-                        tasks.deleteTask(input);
-                        break;
-                    case DONE:
-                        tasks.completeTask(input);
-                        break;
-                    case LIST:
-                        tasks.listAllTasks();
-                        break;
-                    case TODO:
-                        tasks.addTodo(input);
-                        break;
-                    case EVENT:
-                        tasks.addEvent(input);
-                        break;
-                    case DEADLINE:
-                        tasks.addDeadline(input);
-                        break;
-                    case FIND:
-                        tasks.findTasks(input);
-                        break;
-                    default:
-                        System.out.println("Error in switch - Default case");
-                        break;
+                case BYE:
+                    System.out.println("Bye. Hope to see you again soon!");
+                    storage.writeToFile(tasks.getTaskList());
+                    System.exit(0); // End program
+                    break;
+                case DELETE:
+                    tasks.deleteTask(input);
+                    break;
+                case DONE:
+                    tasks.completeTask(input);
+                    break;
+                case LIST:
+                    tasks.listAllTasks();
+                    break;
+                case TODO:
+                    tasks.addTodo(input);
+                    break;
+                case EVENT:
+                    tasks.addEvent(input);
+                    break;
+                case DEADLINE:
+                    tasks.addDeadline(input);
+                    break;
+                case FIND:
+                    tasks.findTasks(input);
+                    break;
+                default:
+                    System.out.println("Error in switch - Default case");
+                    break;
                 }
             } catch (Exception e) {
                 System.out.println(e);
@@ -92,9 +99,9 @@ public class Duke {
 
     /**
      * Main program
-     * @param args
-     * @throws DukeException
-     * @throws FileNotFoundException
+     * @param args main args
+     * @throws DukeException Custom Duke Exception
+     * @throws FileNotFoundException No file found
      */
     public static void main(String[] args) throws DukeException, FileNotFoundException {
         new Duke("data.txt").run();

@@ -6,6 +6,12 @@ import java.time.format.DateTimeFormatter;
 public class Deadline extends Task {
     private LocalDate by;
 
+    /**
+     * Creates a Deadline Task
+     *
+     * @param description details of the Task.
+     * @param by Deadline the task is due by.
+     */
     public Deadline(String description, String by) {
         super(description);
         this.by = LocalDate.parse(by, DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm"));
@@ -17,6 +23,11 @@ public class Deadline extends Task {
         return "[D]" + super.toString() + " (by: " + by.format(formatter) + ")";
     }
 
+    /**
+     * Method for writing the task to text format.
+     *
+     * @return Text format to be saved.
+     */
     public String toWrite() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
         return "[D]" + super.toString() + " /by " + by.format(formatter);
