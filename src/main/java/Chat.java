@@ -1,10 +1,9 @@
-
 enum Chat {
-    todo,
-    deadline,
-    event,
-    done,
-    bye,
-    delete,
-    list
+    TODO,
+    DEADLINE,
+    EVENT,
+    DONE,
+    BYE,
+    DELETE,
+    LIST
 }
