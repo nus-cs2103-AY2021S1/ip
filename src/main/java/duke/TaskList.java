@@ -7,7 +7,7 @@ import java.util.ArrayList;
  * @param <Task> the duke.Task objects
  */
 public class TaskList<Task> {
-    ArrayList<Task> taskList;
+    private ArrayList<Task> taskList;
 
     /**
      * Instantiates new duke.TaskList object to store Tasks.

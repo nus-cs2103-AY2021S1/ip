@@ -1,8 +1,8 @@
 package duke;
 
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
 
 public class DukeTest {
 
@@ -31,7 +31,7 @@ public class DukeTest {
      */
     @Test
     public void eventTest() {
-        assertEquals(new Event("Hackathon ", "NUS Utown").toString(),
-                "[EVENT] [✘] Hackathon (at:NUS Utown)");
+        assertEquals(new Event("Hackathon ", "NUS U town").toString(),
+                "[EVENT] [✘] Hackathon (at:NUS U town)");
     }
 }

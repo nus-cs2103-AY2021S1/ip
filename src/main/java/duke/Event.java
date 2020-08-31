@@ -4,7 +4,7 @@ package duke;
  * Encapsulates an duke.Event task
  */
 public class Event extends Task {
-    String timing;
+    private String timing;
 
     /**
      * Instantiates an event with a description of it.
@@ -37,7 +37,7 @@ public class Event extends Task {
     }
 
     /**
-     * Overriden toString() method.
+     * Overridden toString() method.
      * @return custom String
      */
     @Override

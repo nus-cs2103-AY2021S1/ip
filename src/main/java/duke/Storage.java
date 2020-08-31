@@ -11,7 +11,7 @@ import java.util.Scanner;
  * Encapsulates data storage functionality
  */
 public class Storage {
-    File file;
+    private File file;
 
     /**
      * Instantiates a storage item that can read and write data.
@@ -31,7 +31,7 @@ public class Storage {
             file.getParentFile().mkdirs();
             file.createNewFile();
             return readContentToProgram(file);
-        }  catch (IOException e) {
+        } catch (IOException e) {
             throw new DukeException("File not Found");
         }
     }
@@ -45,7 +45,7 @@ public class Storage {
     ArrayList<Task> readContentToProgram(File file) throws FileNotFoundException {
         Scanner sc = new Scanner(file); // create a Scanner using file as the source
         ArrayList<Task> tasks = new ArrayList<>();
-        while(sc.hasNext()) {
+        while (sc.hasNext()) {
             // take the content and make an arraylist of tasks
             String dataEntry = sc.nextLine();
             String[] parsedData = dataEntry.split("\\|");

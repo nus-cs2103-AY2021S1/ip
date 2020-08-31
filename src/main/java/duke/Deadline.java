@@ -4,7 +4,7 @@ package duke;
  * Encapsulates a duke.Deadline item
  */
 public class Deadline extends Task {
-    String endDate;
+    private String endDate;
 
     /**
      * Instantiates a duke.Deadline with a description of it.
