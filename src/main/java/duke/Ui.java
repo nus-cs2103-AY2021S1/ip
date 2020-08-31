@@ -12,13 +12,13 @@ public class Ui {
      * Prints a welcome message.
      */
     public static void welcomeMessage() {
-        String catLogo = "        /\\_____/\\\n" +
-                "       /  o   o  \\\n" +
-                "      ( ==  ^  == )\n" +
-                "       )         (\n" +
-                "      (           )\n" +
-                "     ( (  )   (  ) )\n" +
-                "    (__(__)___(__)__)";
+        String catLogo = "        /\\_____/\\\n"
+                + "       /  o   o  \\\n"
+                + "      ( ==  ^  == )\n"
+                + "       )         (\n"
+                + "      (           )\n"
+                + "     ( (  )   (  ) )\n"
+                + "    (__(__)___(__)__)";
         System.out.println(catLogo);
 
         System.out.println("    ____________________________________________________________");
@@ -69,6 +69,10 @@ public class Ui {
         System.out.println("    ____________________________________________________________");
     }
 
+    /**
+     * Prints all tasks that match the search term provided
+     * @param taskList An ArrayList containing all Tasks that match the search term provided
+     */
     public static void findMessage(ArrayList<Task> taskList) {
         if (taskList.size() == 0) {
             System.out.println("    ____________________________________________________________");
@@ -78,7 +82,7 @@ public class Ui {
             System.out.println("    ____________________________________________________________");
             System.out.println("    Here are your search results!!");
             int index = 1;
-            for(Task task: taskList) {
+            for (Task task: taskList) {
                 System.out.println("    " + index + ". " + task);
                 index++;
             }
@@ -91,7 +95,7 @@ public class Ui {
      * @param task The Task that has been added.
      * @param size An integer value representing the new size of the TaskList.
      */
-    public static void addTaskMessage(Task task, int size){
+    public static void addTaskMessage(Task task, int size) {
         System.out.println("    ____________________________________________________________");
         System.out.println("     Okies! I've added this task~");
         System.out.println("       " + task);
@@ -125,11 +129,11 @@ public class Ui {
 
     /**
      * Prints out the error message of the exception that occurred.
-     * @param UiMessage The error message of the exception that occurred.
+     * @param uiMessage The error message of the exception that occurred.
      */
-    public static void errorMessage(String UiMessage) {
+    public static void errorMessage(String uiMessage) {
         System.out.println("    ____________________________________________________________");
-        System.out.println("    " + UiMessage);
+        System.out.println("    " + uiMessage);
         System.out.println("    ____________________________________________________________");
     }
 }

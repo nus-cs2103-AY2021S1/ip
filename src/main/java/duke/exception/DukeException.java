@@ -1,14 +1,14 @@
 package duke.exception;
 
 public class DukeException extends Exception {
-    private String UiMessage;
+    private String uiMessage;
 
     public DukeException(String errorMessage) {
         super(errorMessage);
-        this.UiMessage = errorMessage;
+        this.uiMessage = errorMessage;
     }
 
     public String getUiMessage() {
-        return this.UiMessage;
+        return this.uiMessage;
     }
 }

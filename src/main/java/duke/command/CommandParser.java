@@ -1,15 +1,14 @@
 package duke.command;
 
-import java.time.format.DateTimeParseException;
 import java.time.LocalDate;
-
-import duke.task.TaskType;
+import java.time.format.DateTimeParseException;
 
 import duke.exception.DateParseException;
 import duke.exception.IncompleteTaskException;
 import duke.exception.InvalidSearchException;
 import duke.exception.InvalidTaskException;
 import duke.exception.UnknownCommandException;
+import duke.task.TaskType;
 
 /**
  * CommandParser is a class that parses input from the user, and returns a relevant command.
@@ -33,9 +32,9 @@ public class CommandParser {
             return new ListCommand();
         } else if (command.equals("today")) {
             return new TodayCommand();
-        } else if (command.length() >= 4 && command.substring(0, 4).equals("find")){
+        } else if (command.length() >= 4 && command.substring(0, 4).equals("find")) {
             return parseFindCommand(command);
-        } else if (command.length() >= 4 && command.substring(0, 4).equals("done")){
+        } else if (command.length() >= 4 && command.substring(0, 4).equals("done")) {
             return parseDoneCommand(command);
         } else if (command.length() >= 6 && command.substring(0, 6).equals("delete")) {
             return parseDeleteCommand(command);
@@ -52,8 +51,8 @@ public class CommandParser {
      * @return A boolean value that indicates whether the user input string constitutes a valid command to add a task.
      */
     private boolean validAddTaskCommand(String command) {
-        return command.split(" ")[0].equals("todo") || command.split(" ")[0].equals("deadline") ||
-                command.split(" ")[0].equals("event");
+        return command.split(" ")[0].equals("todo") || command.split(" ")[0].equals("deadline")
+                || command.split(" ")[0].equals("event");
     }
 
     private FindCommand parseFindCommand(String command) throws InvalidSearchException {
@@ -133,8 +132,9 @@ public class CommandParser {
                 String deadlineName = command.substring(command.indexOf("deadline ") + 9, command.indexOf(" /by"));
                 String deadlineDate = command.substring(command.indexOf("/by ") + 4);
                 return new AddTaskCommand(TaskType.DEADLINE, deadlineName, LocalDate.parse(deadlineDate));
+            default:
+                throw new UnknownCommandException("Oh noes! I'm not sure what that means ;A;");
             }
-            throw new UnknownCommandException("Oh noes! I'm not sure what that means ;A;");
         } catch (DateTimeParseException e) {
             throw new DateParseException("Oops! Please make sure your date is of YYYY-MM-DD format ;A;");
         }
