@@ -12,7 +12,9 @@ public class Ui {
     }
 
     public String readNextLine() {
-        return scanner.nextLine();
+        String query = "";
+        query = scanner.nextLine();
+        return query;
     }
 
     public void printDoneMessage(Task doneTask) {
