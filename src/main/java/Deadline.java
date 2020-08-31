@@ -9,7 +9,7 @@ import java.time.format.DateTimeFormatter;
  * @author Lio
  */
 class Deadline extends Task {
-    LocalDate by;
+    private LocalDate by;
 
     /**
      * Constructor

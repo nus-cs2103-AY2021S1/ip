@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
  * @author Lio
  */
 public class TaskList {
-    List<Task> list = new ArrayList<>();
+    private List<Task> list = new ArrayList<>();
 
     /**
      * Constructor of empty list
@@ -27,6 +27,12 @@ public class TaskList {
         this.list = list;
     }
 
+    /**
+     * Converts the TaskList from data form
+     *
+     * @param data A list of Tasks in data form
+     * @return The converted TaskList
+     */
     public static TaskList fromData(List<String> data) throws Exception {
         List<Task> list = new ArrayList<>();
 
@@ -39,6 +45,8 @@ public class TaskList {
 
     /**
      * Converts the TaskList to data form
+     *
+     * @return A list of Tasks in data form
      */
     public List<String> toData() {
         List<String> data = new ArrayList<>();
@@ -84,7 +92,7 @@ public class TaskList {
      */
     public Task setDone(int id) {
         Task task = list.get(id - 1);
-        task.done = true;
+        task.setDone();
         return task;
     }
 
@@ -92,20 +100,20 @@ public class TaskList {
     public String toString() {
         String str = "";
         for (int i = 0; i < list.size(); i++) {
-            str += (i+1) + "." + list.get(i) + "\n";
+            str += (i + 1) + "." + list.get(i) + "\n";
         }
         return str;
     }
 
-    public Task setDone(int id) {
-        Task task = list.get(id - 1);
-        task.done = true;
-        return task;
-    }
-
-    public TaskList filterByKeyword(String keyword) throws Exception {
+    /**
+     * Filters a TaskList for Tasks containing a keyword
+     *
+     * @param keyword the keyword that we filter with
+     * @return A TaskList with only Tasks that contain the keyword
+     */
+    public TaskList filterByKeyword(String keyword) {
         List<Task> filteredList = list.stream()
-                .filter(t -> t.name.contains(keyword)).collect(Collectors.toList());
+                .filter(t -> t.contains(keyword)).collect(Collectors.toList());
         return new TaskList(filteredList);
     }
 }

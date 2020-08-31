@@ -6,7 +6,7 @@ package main.java;
  * @author Lio
  */
 public class AddCommand extends Command {
-    String data;
+    private String data;
 
     /**
      * Constructor

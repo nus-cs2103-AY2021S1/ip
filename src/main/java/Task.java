@@ -6,8 +6,8 @@ package main.java;
  * @author Lio
  */
 class Task {
-    String name;
-    boolean done = false;
+    private final String name;
+    private boolean done = false;
 
     /**
      * Constructor
@@ -57,5 +57,13 @@ class Task {
     @Override
     public String toString() {
         return "[" + (done ? "✓" : "✗") + "] " + name;
+    }
+
+    public boolean contains(String keyword) {
+        return this.name.contains(keyword);
+    }
+
+    public void setDone() {
+        this.done = true;
     }
 }

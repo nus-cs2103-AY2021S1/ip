@@ -1,7 +1,7 @@
 package main.java;
 
 public class FindCommand extends Command {
-    String keyword;
+    private String keyword;
 
     public FindCommand(String keyword) {
         this.keyword = keyword;
