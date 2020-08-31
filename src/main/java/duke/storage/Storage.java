@@ -8,6 +8,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -64,6 +65,8 @@ public class Storage {
 			return task;
 		} catch (IndexOutOfBoundsException e) {
 			throw new DukeException("Saved file text format error");
+		} catch (DateTimeParseException e) {
+			throw new DukeException("Saved file text format error");
 		}
 	}
 
@@ -72,10 +75,10 @@ public class Storage {
 			ArrayList<Task> taskList = new ArrayList<>();
 			if (fileExists(SAVED_TASK_PATH)) {
 				File file = new File(SAVED_TASK_PATH);
-				//System.out.println(file.getAbsolutePath());
 				Scanner s = new Scanner(file);
 				while (s.hasNext()) {
-					String[] strArray = s.nextLine().split(" \\| ");
+					String line = s.nextLine();
+					String[] strArray = line.split(" \\| ");
 					Task task = createTaskFromFile(strArray);
 					taskList.add(task);
 				}
@@ -141,7 +144,6 @@ public class Storage {
 				throw new DukeException("Could not create a save file at " + newFile.getAbsolutePath());
 			}
 		} catch (IOException e) {
-			System.out.println(e.getMessage());
 			throw new DukeException("Could not create a save file at " + newFile.getAbsolutePath());
 		}
 	}

@@ -17,7 +17,7 @@ public class StorageTest {
 	@Test
 	public void invalidStorageFile() {
 		try {
-			Storage storage = new Storage("data/invalidDuke.txt");
+			Storage storage = new Storage("src/test/data/invalidDuke.txt");
 			storage.load();
 			fail("Should have thrown an exception due to invalid storage text file");
 		} catch (DukeException e) {
@@ -28,7 +28,7 @@ public class StorageTest {
 	@Test
 	public void validStorageFile() {
 		try {
-			Storage storage = new Storage("data/duke.txt");
+			Storage storage = new Storage("src/test/data/duke.txt");
 			storage.load();
 		} catch (DukeException e) {
 			fail("Should not have thrown an exception due to valid storage text file");

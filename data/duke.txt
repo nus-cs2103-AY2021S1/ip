@@ -1,4 +1,2 @@
-T | 1 | description
 T | 0 | description
-T | 0 | description
-E | 1 | description | 2012-02-12 | 16:30
+D | 0 | description | 2012-02-12 | 16:00
