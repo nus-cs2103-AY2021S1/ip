@@ -19,6 +19,10 @@ public abstract class Task {
         this.isDone = true;
     }
 
+    public String getName() {
+        return this.name;
+    }
+
     @Override
     public String toString() {
         if (this.isDone) {
