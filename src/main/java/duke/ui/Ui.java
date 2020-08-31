@@ -1,7 +1,6 @@
 package duke.ui;
 
 import java.util.List;
-import java.util.Scanner;
 
 import duke.task.Task;
 
@@ -20,27 +19,6 @@ public class Ui {
      * The exit message to be shown when the programme terminates.
      */
     private static final String GOODBYE = "Goodbye! Hope to see you again soon!";
-
-    /**
-     * A scanner object to take in user input.
-     */
-    private final Scanner sc;
-
-    /**
-     * Initializes a Ui object with the scanner ready to take in inputs.
-     */
-    public Ui() {
-        sc = new Scanner(System.in);
-    }
-
-    /**
-     * Returns the next line of user input.
-     *
-     * @return The next line of user input.
-     */
-    public String readCommand() {
-        return sc.nextLine();
-    }
 
     /**
      * Returns string representation of the welcome message to the user.
@@ -82,7 +60,7 @@ public class Ui {
      * @return The message indicating a task has been deleted.
      */
     public String showDeleteMessage(Task task, int numTasks) {
-        String message = "Noted. The following task is removed:";
+        String message = "Noted. The following task is removed:\n";
         message = message.concat(task.toString() + "\n");
         message = message.concat("Now you have " + numTasks + " task(s) in the list." + "\n");
         return message;
@@ -95,18 +73,9 @@ public class Ui {
      * @return The message indicating a task has been marked as done.
      */
     public String showDoneMessage(Task task) {
-        String message = "Good job! I've marked this task as done:";
+        String message = "Good job! I've marked this task as done:\n";
         message = message.concat(task + "\n");
         return message;
-    }
-
-    /**
-     * Displays the error message when an error occurred.
-     *
-     * @param message The error message to be displayed.
-     */
-    public void showErrorMessage(String message) {
-        System.out.println(message);
     }
 
     /**

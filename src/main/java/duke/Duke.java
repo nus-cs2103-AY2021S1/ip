@@ -44,13 +44,6 @@ public class Duke {
     }
 
     /**
-     * Initializes a duke instance for the GUI.
-     */
-    public Duke() {
-        this("data/duke.txt");
-    }
-
-    /**
      * Returns string representation of the response by Duke.
      *
      * @param input The input message by the user.
