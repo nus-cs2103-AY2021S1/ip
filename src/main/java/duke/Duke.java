@@ -24,7 +24,7 @@ public class Duke {
      * Replace this stub with your completed method.
      */
     String getResponse(String input) throws Exception {
-        return "Duke heard: \n" + this.run(input);
+        return this.run(input);
     }
 
     public String run(String input) throws Exception {
@@ -33,7 +33,7 @@ public class Duke {
 
     public static void main(String[] args) throws Exception {
         // remember to change filepath to "../../../data/duke.ser" during jar build
-        Duke duke = new Duke("data/duke.ser");
+        // Duke duke = new Duke("data/duke.ser");
         // duke.run();
     }
 }
