@@ -1,34 +1,37 @@
 package duke.storage;
 
-import duke.task.*;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-
-import java.nio.file.Path;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
-
+import java.time.LocalDate;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import java.time.LocalDate;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.Todo;
+
+
 
 /**
  * Storage class is used to interact with the File System and gather the save data from the last use session.
  */
 public class Storage {
 
+    private static final Pattern pattern = Pattern.compile("^\\[(.)]\\s\\[(.)]\\s(.*?)(?:\\s/..\\s(.*))?$");
+
     private String currentDir = System.getProperty("user.dir");
     private Path dataDir = Paths.get(currentDir, "src", "main", "data");
     private Path fileDir = Paths.get(currentDir, "src", "main", "data", "list.txt");
-
-    private static final Pattern pattern = Pattern.compile("^\\[(.)]\\s\\[(.)]\\s(.*?)(?:\\s/..\\s(.*))?$");
-
     /**
      * Checks if the /data directory exists.
+     *
      * @return True if it exists, False otherwise.
      */
     private boolean dirExists() {
@@ -37,6 +40,7 @@ public class Storage {
 
     /**
      * Checks if the /data/list.txt file exists.
+     *
      * @return True if it exists, False otherwise.
      */
     private boolean fileExists() {
@@ -45,6 +49,7 @@ public class Storage {
 
     /**
      * Private method to create the list.txt file in the /data directory.
+     *
      * @return list.txt File
      */
     private File createFile() {
@@ -63,6 +68,7 @@ public class Storage {
     /**
      * Private method that gets the list.txt file if present, else a new
      * file is created.
+     *
      * @return list.txt File
      */
     private File getFile() {
@@ -79,6 +85,7 @@ public class Storage {
     /**
      * Updates the list.txt File with the current list. If list.txt file is not
      * present, a new file is created.
+     *
      * @param list The TaskList that is used to update the list.
      * @return True if update is successful, False otherwise.
      */
@@ -103,6 +110,7 @@ public class Storage {
 
     /**
      * Gets the TaskList that has been saved in list.txt File.
+     *
      * @return TaskList.
      */
     public TaskList getList() {
@@ -130,6 +138,8 @@ public class Storage {
                     case ("E"):
                         list.addItem(new Event(task, done, localDate));
                         break;
+                    default:
+                        return null;
                     }
                 }
             }

@@ -6,8 +6,8 @@ package duke.task;
  */
 public abstract class Task {
 
-    boolean done;
-    String task;
+    private boolean done;
+    private String task;
 
     Task(String task) {
         this.done = false;
@@ -18,17 +18,37 @@ public abstract class Task {
         this.done = done;
         this.task = task;
     }
+    public boolean isDone() {
+        return this.done;
+    }
+    public String getDescription() {
+        return this.task;
+    }
 
-    String markDone() {
+    /**
+     * Marks the Task as completed.
+     *
+     * @return The Task that has been completed.
+     */
+    public String markDone() {
         this.done = true;
         return "Great job, keep it up!\n" + this.toString();
     }
 
-    String revertDone() {
+    /**
+     * Marks the Task as not completed.
+     *
+     * @return The Task that has been marked as not complete.
+     */
+    public String revertDone() {
         this.done = false;
         return "Guess you made a mistake huh?\n" + this.toString();
     }
 
+    /** Provides the string representation of the Task when it is saved.
+     *
+     * @return The string representation of the Task to be used in saving.
+     */
     public String getSaveString() {
         String result = "";
         if (this.done) {

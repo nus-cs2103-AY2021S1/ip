@@ -22,7 +22,7 @@ public class TaskList {
     private TaskList(List<Task> list) {
         this.list = list;
         for (Task t : this.list) {
-            if (t.done) {
+            if (t.isDone()) {
                 this.completedTasks += 1;
             } else {
                 this.activeTasks += 1;
@@ -45,13 +45,13 @@ public class TaskList {
             return "Task is null! Nothing was added.";
         }
         this.list.add(item);
-        if (item.done) {
+        if (item.isDone()) {
             this.completedTasks += 1;
         } else {
             this.activeTasks += 1;
         }
-        return "added: " + item + "\nActive Tasks: " +
-                this.activeTasks + "\nCompleted Tasks: " + this.completedTasks;
+        return "added: " + item + "\nActive Tasks: "
+                + this.activeTasks + "\nCompleted Tasks: " + this.completedTasks;
     }
 
     /**
@@ -65,10 +65,14 @@ public class TaskList {
             return "Please choose a valid task to delete";
         }
         Task deletedTask = this.list.remove(index);
-        if (deletedTask.done) this.completedTasks -= 1; else this.activeTasks -= 1;
+        if (deletedTask.isDone()) {
+            this.completedTasks -= 1;
+        } else {
+            this.activeTasks -= 1;
+        }
         return "Noted. I have deleted the following task: \n"
-                + deletedTask + "\nActive Tasks: " +
-                this.activeTasks + "\nCompleted Tasks: " + this.completedTasks;
+                + deletedTask + "\nActive Tasks: "
+                + this.activeTasks + "\nCompleted Tasks: " + this.completedTasks;
     }
 
     /**
@@ -81,11 +85,11 @@ public class TaskList {
         if (index >= this.list.size() || index < 0) {
             return "Please choose a valid task to mark as done";
         }
-        if (!this.list.get(index).done) {
+        if (!this.list.get(index).isDone()) {
             this.activeTasks -= 1;
             this.completedTasks += 1;
-            return this.list.get(index).markDone() + "\nActive Tasks: " +
-                    this.activeTasks + "\nCompleted Tasks: " + this.completedTasks;
+            return this.list.get(index).markDone() + "\nActive Tasks: "
+                    + this.activeTasks + "\nCompleted Tasks: " + this.completedTasks;
         }
         return "The task is already done!";
     }
@@ -99,11 +103,11 @@ public class TaskList {
         if (index >= this.list.size() || index < 0) {
             return "Please choose a valid task to mark as not done";
         }
-        if (this.list.get(index).done) {
+        if (this.list.get(index).isDone()) {
             this.activeTasks += 1;
             this.completedTasks -= 1;
-            return this.list.get(index).revertDone() + "\nActive Tasks: " +
-                    this.activeTasks + "\nCompleted Tasks: " + this.completedTasks;
+            return this.list.get(index).revertDone() + "\nActive Tasks: "
+                    + this.activeTasks + "\nCompleted Tasks: " + this.completedTasks;
         }
         return "The task is not yet done!";
     }
@@ -116,7 +120,7 @@ public class TaskList {
     public String findWord(String word) {
         List<Task> filteredList = new ArrayList<>(this.list);
         filteredList = filteredList.stream()
-                .filter(task -> task.task.contains(word))
+                .filter(task -> task.getDescription().contains(word))
                 .collect(Collectors.toList());
         return "Using keyword: " + word + "\n" + new TaskList(filteredList).toString();
     }
@@ -136,8 +140,8 @@ public class TaskList {
         for (int i = 1; i <= this.list.size(); i++) {
             result += i + ". " + this.list.get(i - 1) + "\n";
         }
-        result += "\nActive Tasks: " +
-                this.activeTasks + "\nCompleted Tasks: " + this.completedTasks;
+        result += "\nActive Tasks: "
+                + this.activeTasks + "\nCompleted Tasks: " + this.completedTasks;
         return result;
     }
 }

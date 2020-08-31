@@ -1,11 +1,11 @@
-package duke.taskTest;
+package duke.task;
 
-import duke.task.TaskList;
-
-import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class taskTest {
+import org.junit.jupiter.api.Test;
+
+
+public class TaskListTest {
 
     @Test
     public void invalidIndex_deleteItem() {

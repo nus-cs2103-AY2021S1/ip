@@ -9,13 +9,27 @@ import java.time.format.FormatStyle;
  */
 public class Event extends Task {
 
-    LocalDate date;
+    private LocalDate date;
 
+    /**
+     * Constructor for Event Task object.
+     *
+     * @param task The description of the task.
+     * @param date The LocalDate object that specifies the due date.
+     */
     public Event(String task, LocalDate date) {
         super(task);
         this.date = date;
     }
 
+    /**
+     * Constructor for creating a Event Task object
+     * however allowing the done property to be written.
+     *
+     * @param task The description of the task.
+     * @param done Where the task is done yet.
+     * @param date The LocalDate object that specifies the due date.
+     */
     public Event(String task, boolean done, LocalDate date) {
         super(task, done);
         this.date = date;

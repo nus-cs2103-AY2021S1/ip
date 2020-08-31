@@ -3,7 +3,6 @@ package duke.command;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -21,6 +20,11 @@ public class Parser {
     private TaskList list;
     private boolean isExit;
 
+    /**
+     * Constructor for Parser object.
+     *
+     * @param list The TaskList that the Parser object interacts with.
+     */
     public Parser(TaskList list) {
         this.list = list;
         this.isExit = false;
@@ -28,6 +32,7 @@ public class Parser {
 
     /**
      * Checks if the command to exit has been issued
+     *
      * @return True if 'bye' command has been issued, False otherwise.
      */
     public boolean isExit() {
@@ -37,6 +42,7 @@ public class Parser {
     /**
      * The function that processes the incoming command and executes different
      * functions depending on the command.
+     *
      * @param command String command provided by the user.
      * @return String result of the provided command.
      * @throws DukeException A custom Exception that carries a message for the user if thrown.
@@ -55,18 +61,18 @@ public class Parser {
             return "Bye! Hope to see you again soon!";
         }
         if (command.equals("help")) {
-            return "Accepted commands:\n" +
-                    "hello - hello!\n" +
-                    "list - show current list\n" +
-                    "bye - saves the current list and exits the program\n" +
-                    "\n" +
-                    "todo <description> - create a todo Task\n" +
-                    "event <description> /at <dd/MM/yyyy> - create an event Task (date is optional)\n" +
-                    "deadline <description> /by <dd/MM/yyyy> - create a deadline Task (date is optional)\n" +
-                    "\n" +
-                    "done <index> - mark the specified task as done\n" +
-                    "undo <index> - mark the specified task as not done\n" +
-                    "delete <index> - deletes the specified task from the list";
+            return "Accepted commands:\n"
+                    + "hello - hello!\n"
+                    + "list - show current list\n"
+                    + "bye - saves the current list and exits the program\n"
+                    + "\n"
+                    + "todo <description> - create a todo Task\n"
+                    + "event <description> /at <dd/MM/yyyy> - create an event Task (date is optional)\n"
+                    + "deadline <description> /by <dd/MM/yyyy> - create a deadline Task (date is optional)\n"
+                    + "\n"
+                    + "done <index> - mark the specified task as done\n"
+                    + "undo <index> - mark the specified task as not done\n"
+                    + "delete <index> - deletes the specified task from the list";
         }
         if (matcher.find()) {
             String com = matcher.group(1);
@@ -85,6 +91,9 @@ public class Parser {
             case ("deadline"):
             case ("event"):
                 return this.processTask(com, task, date);
+            default:
+                throw new DukeException("Sorry, I did not understand: " + command
+                        + ".\nUse \"help\" to look at available commands.");
             }
         }
         throw new DukeException("Sorry, I did not understand: " + command
@@ -93,6 +102,7 @@ public class Parser {
 
     /**
      * Helper function to process Task related commands.
+     *
      * @param com The type of Task.
      * @param task The description of the Task.
      * @param date The date of the Task to be done at or by (if applicable).
@@ -103,7 +113,7 @@ public class Parser {
 
         switch(com) {
         case("todo"):
-        if (!task.equals("")) {
+            if (!task.equals("")) {
                 return list.addItem(new Todo(task));
             } else {
                 throw new DukeException("Please write a task to be done, with \"todo <task>\"");
@@ -112,7 +122,7 @@ public class Parser {
             if (!task.equals("")) {
                 try {
                     return list.addItem(new Deadline(task, Parser.convertDate(date)));
-                } catch (DateTimeParseException e){
+                } catch (DateTimeParseException e) {
                     throw new DukeException("Please write your date in the format \"dd/MM/yyyy\"");
                 }
             } else {
@@ -135,6 +145,7 @@ public class Parser {
 
     /**
      * Helper function to process list related commands.
+     *
      * @param com The command keyword that interacts with the list.
      * @param index The index of which the command wishes to act on.
      * @return String result of the function executed.
@@ -174,6 +185,7 @@ public class Parser {
 
     /**
      * Helper function to convert a date String into a LocalDate object.
+     *
      * @param date The date String to be converted.
      * @return LocalDate object that follows the input date String.
      * @throws DateTimeParseException thrown if the inputted date is invalid.

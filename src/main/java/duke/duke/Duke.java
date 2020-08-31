@@ -2,9 +2,7 @@ package duke.duke;
 
 import duke.command.DukeException;
 import duke.command.Parser;
-
 import duke.storage.Storage;
-
 import duke.task.TaskList;
 
 /**
@@ -17,6 +15,9 @@ public class Duke {
     private Ui ui;
     private Parser parser;
 
+    /**
+     * Constructor for Duke object.
+     */
     public Duke() {
         this.storage = new Storage();
         this.list = storage.getList();

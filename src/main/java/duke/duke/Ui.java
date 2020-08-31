@@ -7,7 +7,7 @@ import java.util.Scanner;
  */
 public class Ui {
 
-    Scanner scanner = new Scanner(System.in);
+    private Scanner scanner = new Scanner(System.in);
 
     /**
      * Reads the next line provided by the user.

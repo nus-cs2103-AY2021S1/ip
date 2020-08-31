@@ -1,15 +1,13 @@
-package duke.commandTest;
+package duke.command;
 
-import duke.command.DukeException;
-import duke.command.Parser;
-
-import duke.task.TaskList;
-
-import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
-public class commandTest {
+import org.junit.jupiter.api.Test;
+
+import duke.task.TaskList;
+
+public class ParserTest {
 
     @Test
     public void emptyCommand_errorThrown() {
@@ -18,7 +16,8 @@ public class commandTest {
             parser.processCommand("");
             fail();
         } catch (DukeException e) {
-            assertEquals("Sorry, I did not understand: ", e.getMessage());
+            assertEquals("Sorry, I did not understand: .\n"
+                    + "Use \"help\" to look at available commands.", e.getMessage());
         }
     }
 
