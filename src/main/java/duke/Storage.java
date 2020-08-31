@@ -60,7 +60,7 @@ public class Storage {
             // file does not exist
             file.createNewFile();
         }
-        FileWriter fw = new FileWriter("./data/duke.txt");
+        FileWriter fw = new FileWriter("../data/duke.txt");
         fw.write(output);
         fw.close();
     }
