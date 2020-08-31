@@ -1,10 +1,10 @@
 package duke.command;
 
+import java.io.IOException;
+
+import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
-import duke.Storage;
-
-import java.io.IOException;
 
 public class DoneCommand implements Command {
     private final String item;
