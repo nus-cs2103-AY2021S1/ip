@@ -53,16 +53,16 @@ public class Ui {
      * @return String containing task info
      */
     public String printTask(Task task, ActionType action) {
-        String taskString = "";
+        String taskString;
         switch(action){
         case MARK_DONE:
-            taskString += "Task marked complete: \n";
+            taskString = "Task marked complete: \n";
             break;
         case DELETE:
-            taskString += "Task deleted: \n";
+            taskString = "Task deleted: \n";
             break;
         default:
-            taskString += "Added: \n";
+            taskString = "Added: \n";
         }
         taskString += task.toString();
         return taskString;

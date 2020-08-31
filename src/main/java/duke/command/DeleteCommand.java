@@ -38,7 +38,7 @@ public class DeleteCommand extends Command {
         } else {
             Task deletedTask = tasks.delete(taskIndex);
             storage.updateFile(tasks);
-            return ui.printTask(deletedTask, ActionType.MARK_DONE);
+            return ui.printTask(deletedTask, ActionType.DELETE);
         }
     }
 }
