@@ -57,6 +57,7 @@ public class TaskList {
         return numberedItems.toString();
     }
 
+    @Override
     public String toString() {
         return enumerateItems(this.items);
     }

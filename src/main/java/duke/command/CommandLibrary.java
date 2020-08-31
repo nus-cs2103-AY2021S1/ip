@@ -10,30 +10,30 @@ import duke.task.TaskList;
 import duke.task.Todo;
 
 class CommandLibrary {
-    static final CommandExecutable deadlineCommand = (taskList, ui, args) -> {
+    static final CommandExecutable DEADLINE_COMMAND = (taskList, ui, args) -> {
         String description = args[0].trim();
-        if (args.length != 2 || description.equals("")) {
+        if (args.length != 2 || "".equals(description)) {
             throw DukeException.Errors.DEADLINE_BAD_FORMAT.create();
         }
         String time = args[1];
         ui.systemMessage(taskList.add(new Deadline(description, time)));
     };
-    static final CommandExecutable eventCommand = (taskList, ui, args) -> {
+    static final CommandExecutable EVENT_COMMAND = (taskList, ui, args) -> {
         String description = args[0].trim();
-        if (args.length != 2 || description.equals("")) {
+        if (args.length != 2 || "".equals(description)) {
             throw DukeException.Errors.EVENT_BAD_FORMAT.create();
         }
         String time = args[1];
         ui.systemMessage(taskList.add(new Event(description, time)));
     };
-    static final CommandExecutable todoCommand = (taskList, ui, args) -> {
+    static final CommandExecutable TODO_COMMAND = (taskList, ui, args) -> {
         String description = args[0];
-        if (description.equals("")) {
+        if ("".equals(description)) {
             throw DukeException.Errors.TODO_EMPTY_DESCRIPTION.create();
         }
         ui.systemMessage(taskList.add(new Todo(description)));
     };
-    static final CommandExecutable deleteCommand = (taskList, ui, args) -> {
+    static final CommandExecutable DELETE_COMMAND = (taskList, ui, args) -> {
         int idx = Integer.parseInt(args[0]);
         if (idx > taskList.size()) {
             throw DukeException.Errors.DELETE_OUT_OF_RANGE.create();
@@ -41,7 +41,7 @@ class CommandLibrary {
         Task selected = taskList.deleteItem(idx - 1);
         ui.systemMessage("sir this task has been remove sir:\n  " + selected);
     };
-    static final CommandExecutable doneCommand = (taskList, ui, args) -> {
+    static final CommandExecutable DONE_COMMAND = (taskList, ui, args) -> {
         int idx = Integer.parseInt(args[0]);
         if (idx > taskList.size()) {
             throw DukeException.Errors.DONE_OUT_OF_RANGE.create();
@@ -49,13 +49,13 @@ class CommandLibrary {
         Task selected = taskList.markItem(idx - 1);
         ui.systemMessage("afternoon sir i have mark this task done sir:\n  " + selected);
     };
-    static final CommandExecutable listCommand = (taskList, ui, args) ->
+    static final CommandExecutable LIST_COMMAND = (taskList, ui, args) ->
         ui.systemMessage(taskList.toString());
-    static final CommandExecutable byeCommand = (taskList, ui, args) -> {
+    static final CommandExecutable BYE_COMMAND = (taskList, ui, args) -> {
         ui.close();
         ui.systemMessage("bye sir thanks for using me sir hope to see you again sir");
     };
-    static final CommandExecutable findCommand = (taskList, ui, args) -> {
+    static final CommandExecutable FIND_COMMAND = (taskList, ui, args) -> {
         List<Task> items = taskList.getItemsList();
         for (int i = 0; i < items.size(); i++) {
             // if description does not contain string

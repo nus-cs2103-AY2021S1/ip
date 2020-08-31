@@ -29,8 +29,8 @@ import duke.task.Todo;
  * Class to store TaskList objects as json files.
  */
 public class Storage {
-    private static final GsonBuilder gsonBuilder = new GsonBuilder();
-    private static final JsonSerializer<TaskList> taskListSerializer = (src, typeOfSrc, context) -> {
+    private static final GsonBuilder GSON_BUILDER = new GsonBuilder();
+    private static final JsonSerializer<TaskList> TASK_LIST_SERIALIZER = (src, typeOfSrc, context) -> {
         JsonArray list = new JsonArray();
         for (Task task : src.getItemsList()) {
             JsonElement elem = context.serialize(task);
@@ -39,7 +39,7 @@ public class Storage {
         }
         return list;
     };
-    private static final JsonDeserializer<TaskList> taskListDeserializer = (json, typeOfT, context) -> {
+    private static final JsonDeserializer<TaskList> TASK_LIST_DESERIALIZER = (json, typeOfT, context) -> {
         List<Task> tasks = new ArrayList<>();
         JsonArray taskElems = json.getAsJsonArray();
         for (JsonElement elem : taskElems) {
@@ -74,8 +74,8 @@ public class Storage {
     };
 
     static {
-        gsonBuilder.registerTypeAdapter(TaskList.class, taskListSerializer);
-        gsonBuilder.registerTypeAdapter(TaskList.class, taskListDeserializer);
+        GSON_BUILDER.registerTypeAdapter(TaskList.class, TASK_LIST_SERIALIZER);
+        GSON_BUILDER.registerTypeAdapter(TaskList.class, TASK_LIST_DESERIALIZER);
     }
 
     private final String filePath;
@@ -87,7 +87,7 @@ public class Storage {
      */
     public Storage(String filePath) {
         this.filePath = filePath;
-        this.gsonObject = gsonBuilder.create();
+        this.gsonObject = GSON_BUILDER.create();
     }
 
     private static String parseDate(JsonElement elem) throws JsonParseException {

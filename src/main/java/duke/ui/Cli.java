@@ -6,7 +6,7 @@ import java.util.Scanner;
  * Class implementing Ui as a command line interface (stdio).
  */
 public class Cli implements Ui {
-    private static final String logo =
+    private static final String LOGO =
         "               /,   ,|   ,|     \n"
             + "           /| /(  ,' / ,//      \n"
             + "        \\`( |/ /,'  (,/ |      \n"
@@ -20,7 +20,7 @@ public class Cli implements Ui {
             + "            \\=`   ==,\\..        how may i be of service sir\n"
             + "             \\ -. `,' (        \n"
             + "             \\`--''    \\.     \n";
-    private static final String horizontalRule =
+    private static final String HORIZONTAL_RULE =
         "    ____________________________________________________________\n";
     private final Scanner scanner;
     private boolean isActive;
@@ -33,10 +33,12 @@ public class Cli implements Ui {
         this.isActive = true;
     }
 
+    @Override
     public String nextLine() {
         return this.scanner.nextLine();
     }
 
+    @Override
     public boolean isActive() {
         return this.isActive;
     }
@@ -49,12 +51,14 @@ public class Cli implements Ui {
         this.isActive = false;
     }
 
+    @Override
     public void start() {
-        this.systemMessage(logo);
+        this.systemMessage(LOGO);
     }
 
+    @Override
     public void systemMessage(String input) {
-        System.out.println(horizontalRule + indent(input) + "\n" + horizontalRule);
+        System.out.println(HORIZONTAL_RULE + indent(input) + "\n" + HORIZONTAL_RULE);
     }
 
     private String indent(String original) {

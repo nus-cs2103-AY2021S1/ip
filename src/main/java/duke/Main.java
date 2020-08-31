@@ -17,7 +17,7 @@ public class Main {
      * @param args command line arguments.
      */
     public static void main(String[] args) {
-        if (args.length > 0 && args[0] == "--cli") {
+        if (args.length > 0 && args[0].equals("--cli")) {
             Ui ui = new Cli();
             Duke duke = new Duke(ui);
             while (ui.isActive()) {
