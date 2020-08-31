@@ -21,9 +21,27 @@ public class ListCommand extends Command {
     @Override
     public void execute(Storage storage, TaskList taskList, Ui ui) {
         try {
-            taskList.printList();
+            ui.showSuccess(taskList.printList());
         } catch (DukeException e) {
             ui.showError(e.getMessage());
+        }
+    }
+
+    /**
+     * Returns string of success/error information from execution of
+     * printing of task list.
+     *
+     * @param storage Storage data in hard disk.
+     * @param taskList TaskList where task list is printed.
+     * @param ui Ui that shows error message from the action.
+     * @return String string of success/error information
+     */
+    @Override
+    public String executeToString(Storage storage, TaskList taskList, Ui ui) {
+        try {
+            return taskList.printList();
+        } catch (DukeException e) {
+            return e.getMessage();
         }
     }
 }

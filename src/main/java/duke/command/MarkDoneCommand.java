@@ -28,4 +28,22 @@ public class MarkDoneCommand extends Command {
             ui.showError(e.getMessage());
         }
     }
+
+    /**
+     * Returns string success/error information after execution of
+     * marking done of task in TaskList.
+     *
+     * @param storage Storage where marking done of task is written in hard disk.
+     * @param taskList TaskList where task is marked done.
+     * @param ui Ui that shows success/error messages from the marking done action.
+     * @return String success/error information
+     */
+    @Override
+    public String executeToString(Storage storage, TaskList taskList, Ui ui) {
+        try {
+            return taskList.markDone(storage, this.input);
+        } catch (DukeException e) {
+            return e.getMessage();
+        }
+    }
 }

@@ -22,4 +22,17 @@ public class ByeCommand extends Command {
     public void execute(Storage storage, TaskList taskList, Ui ui) {
         ui.bye();
     }
+
+    /**
+     * Returns closing string to user before Dino closes.
+     *
+     * @param storage Storage data of tasks in hard disk.
+     * @param taskList TaskList where task actions are done.
+     * @param ui Ui that shows closing message.
+     * @return String closing message
+     */
+    @Override
+    public String executeToString(Storage storage, TaskList taskList, Ui ui) {
+        return "Rawr. Hope to see you again soon! ><";
+    }
 }

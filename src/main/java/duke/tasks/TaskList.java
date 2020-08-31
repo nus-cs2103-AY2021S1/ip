@@ -19,20 +19,24 @@ public class TaskList {
     }
 
     /**
-     * Prints list of Task in the task list.
+     * Returns string of list of Task in the task list.
      *
+     * @return String of tasks in task list
      * @throws DukeException  If there is no task in the list.
      */
-    public void printList() throws DukeException {
+    public String printList() throws DukeException {
+        StringBuilder result = new StringBuilder();
+
         if (this.taskList.size() != 0) {
             // Dino lists out all items in list
-            System.out.println("Dino lists your tasks:");
+            result.append("Dino lists your tasks:");
             for (int i = 0; i < this.taskList.size(); i++) {
                 int index = i + 1;
-                System.out.println(index + ". " + this.taskList.get(i));
+                result.append("\n").append(index).append(". ").append(this.taskList.get(i));
             }
-            System.out.println("To mark off a task after completion"
+            result.append("\nTo mark off a task after completion"
                     + ", input 'done <task number>'.");
+            return result.toString();
         } else {
             throw new DukeException("Rawr! Dino could not find any items in your task list."
                     + "\nGet started by entering a task. "

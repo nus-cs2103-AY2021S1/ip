@@ -19,5 +19,7 @@ public abstract class Command {
      * @param ui Ui that shows relevant messages to user.
      */
     public abstract void execute(Storage storage, TaskList taskList, Ui ui) throws DukeException;
+
+    public abstract String executeToString(Storage storage, TaskList taskList, Ui ui) throws DukeException;
 }
 
