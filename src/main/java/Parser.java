@@ -51,16 +51,15 @@ public class Parser {
      *
      * @param input The user input which is to be parsed.
      */
-    protected void parseUserInput(String input) throws DukeException, IOException {
-        System.out.print("\n");
+    protected Ui parseUserInput(String input) throws DukeException, IOException {
+        String uiMessage = "\n";
 
             if (input.equals("list")) {
-                System.out.println("Here are your tasks:");
-                System.out.println(list);
+                uiMessage += "Here are your tasks:\n" + list;
             } else if (input.startsWith("done")) {
                 try {
                     int listIndex = Integer.parseInt(input.substring(5));
-                    list.markTaskDone(listIndex);
+                    uiMessage += list.markTaskDone(listIndex);
                 } catch (Exception error) {
                     throw new DukeException("OOPS!!! Please choose a valid task index to mark as done.\n");
                 }
@@ -69,7 +68,7 @@ public class Parser {
                     throw new DukeException("OOPS!!! The description of a todo cannot be empty.\n");
                 }
                 ToDo toDoTask = new ToDo(input.substring(5));
-                list.addTask(toDoTask);
+                uiMessage += list.addTask(toDoTask);
             } else if (input.startsWith("deadline")) {
                 if (input.equals("deadline")) {
                     throw new DukeException("OOPS!!! The description of a deadline cannot be empty.\n");
@@ -79,7 +78,7 @@ public class Parser {
                 LocalDate deadline = LocalDate.parse(input.substring(index + 4),
                         DateTimeFormatter.ofPattern("dd-MM-yyyy"));
                 Deadline deadlineTask = new Deadline(task, deadline);
-                list.addTask(deadlineTask);
+                uiMessage += list.addTask(deadlineTask);
             } else if (input.startsWith("event")) {
                 if (input.equals("event")) {
                     throw new DukeException("OOPS!!! The description of an event cannot be empty.\n");
@@ -88,11 +87,11 @@ public class Parser {
                 String task = input.substring(6, index - 1);
                 String time = input.substring(index + 4);
                 Event eventTask = new Event(task, time);
-                list.addTask(eventTask);
+                uiMessage += list.addTask(eventTask);
             } else if (input.startsWith("delete")) {
                 try {
                     int listIndex = Integer.parseInt(input.substring(7));
-                    list.deleteTask(listIndex);
+                    uiMessage += list.deleteTask(listIndex);
                 } catch (Exception error) {
                     throw new DukeException("OOPS!!! Please choose a valid task index to delete.\n");
                 }
@@ -100,10 +99,12 @@ public class Parser {
                 if (input.equals("find")) {
                     throw new DukeException("OOPS!!! Please give me a keyword to search.\n");
                 }
-                list.findTask(input.substring(5));
+                uiMessage += list.findTask(input.substring(5));
             } else {
                 //unrecognised command
                 throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means.\n");
             }
+
+            return Ui.makeUi(uiMessage);
     }
 }
