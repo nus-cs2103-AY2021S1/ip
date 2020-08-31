@@ -6,7 +6,7 @@
  *
  * @author jun siang
  */
-package king;
+package ui;
 
 import tasks.TaskList;
 
