@@ -1,5 +1,9 @@
-import java.util.ArrayList;
+package duke;
+
+import duke.task.Task;
+
 import java.util.List;
+import java.util.ArrayList;
 
 public class TaskList {
     private final List<Task> tasks;
@@ -35,6 +39,7 @@ public class TaskList {
     public void markAsDone(int index) {
         tasks.get(index).markAsDone();
     }
+
     @Override
     public String toString() {
         StringBuilder allTasks = new StringBuilder();
