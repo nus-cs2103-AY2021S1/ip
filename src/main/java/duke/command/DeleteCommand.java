@@ -1,5 +1,7 @@
 package duke.command;
 
+import java.io.IOException;
+
 import duke.Storage;
 import duke.Ui;
 import duke.exception.DukeException;
@@ -7,8 +9,6 @@ import duke.exception.InvalidArgumentException;
 import duke.exception.StorageAccessException;
 import duke.task.Task;
 import duke.task.TaskList;
-
-import java.io.IOException;
 
 public class DeleteCommand extends Command {
     /**

@@ -2,12 +2,9 @@ package duke.task;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
  * The TaskList class is a list of {@link Task}s.
@@ -90,7 +87,8 @@ public class TaskList {
      * @return A formatted String of all the tasks that happen on or due at the provided date.
      */
     public String showTasksOnDate(LocalDate date) {
-        List<Task> filtered = list.stream().filter(task -> task.getDate() != null && task.getDate().equals(date)).collect(Collectors.toList());
+        List<Task> filtered = list.stream()
+                .filter(task -> task.getDate() != null && task.getDate().equals(date)).collect(Collectors.toList());
         if (filtered.size() == 0) {
             return "There are no tasks happening on: " + date.format(DateTimeFormatter.ofPattern("MMMM d yyyy"));
         }
@@ -109,7 +107,8 @@ public class TaskList {
      * @return A formatted String of all pending {@link Task}s.
      */
     public String showPendingTasks() {
-        List<Task> pendingTasks = list.stream().filter(task -> !task.isTaskDone()).collect(Collectors.toList());
+        List<Task> pendingTasks = list.stream()
+                .filter(task -> !task.isTaskDone()).collect(Collectors.toList());
         if (pendingTasks.size() == 0) {
             return "Congratulations! You have completed all your tasks!";
         }
@@ -117,7 +116,8 @@ public class TaskList {
         output.append("Here are the tasks that are pending: \n");
 
         for (int i = 0; i < pendingTasks.size(); i++) {
-            output.append(String.format("\t %d. %s" + (i == pendingTasks.size() - 1 ? "" : "\n"), i + 1, pendingTasks.get(i)));
+            output.append(String.format("\t %d. %s" + (i == pendingTasks.size() - 1 ? "" : "\n"),
+                    i + 1, pendingTasks.get(i)));
         }
 
         return output.toString();
@@ -136,7 +136,8 @@ public class TaskList {
         output.append("Here are the tasks that have been completed: \n");
 
         for (int i = 0; i < completedTasks.size(); i++) {
-            output.append(String.format("\t %d. %s" + (i == completedTasks.size() - 1 ? "" : "\n"), i + 1, completedTasks.get(i)));
+            output.append(String.format("\t %d. %s" + (i == completedTasks.size() - 1 ? "" : "\n"),
+                    i + 1, completedTasks.get(i)));
         }
 
         return output.toString();
@@ -148,7 +149,8 @@ public class TaskList {
      * @return A formatted String of {@link Task}s with description that includes this keyword.
      */
     public String showMatchingTasks(String keyword) {
-        List<Task> matchingTasks = list.stream().filter(task -> task.includesKeyword(keyword)).collect(Collectors.toList());
+        List<Task> matchingTasks = list.stream()
+                .filter(task -> task.includesKeyword(keyword)).collect(Collectors.toList());
         if (matchingTasks.size() == 1) {
             return "There are no tasks containing keyword: " + keyword;
         }
@@ -156,7 +158,8 @@ public class TaskList {
         output.append("Here are the tasks containing keyword: ").append(keyword).append("\n");
 
         for (int i = 0; i < matchingTasks.size(); i++) {
-            output.append(String.format("\t %d. %s" + (i == matchingTasks.size() - 1 ? "" : "\n"), i + 1, matchingTasks.get(i)));
+            output.append(String.format("\t %d. %s" + (i == matchingTasks.size() - 1 ? "" : "\n"),
+                    i + 1, matchingTasks.get(i)));
         }
 
         return output.toString();

@@ -1,13 +1,21 @@
 package duke;
 
-import duke.command.*;
-import duke.exception.DukeException;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
+import duke.command.AddCommand;
+import duke.command.ByeCommand;
+import duke.command.Command;
+import duke.command.CompletedCommand;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.ListCommand;
+import duke.command.PendingCommand;
+import duke.command.ShowCommand;
+import duke.exception.DukeException;
 
 public class ParserTest {
     @Test

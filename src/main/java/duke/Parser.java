@@ -3,12 +3,25 @@ package duke;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
-import duke.command.*;
+import duke.command.AddCommand;
+import duke.command.ByeCommand;
+import duke.command.Command;
+import duke.command.CompletedCommand;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
+import duke.command.PendingCommand;
+import duke.command.ShowCommand;
 import duke.exception.DukeException;
 import duke.exception.InvalidArgumentException;
 import duke.exception.InvalidCommandException;
 import duke.exception.InvalidTaskTypeException;
-import duke.task.*;
+import duke.task.CommandType;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.TaskType;
+import duke.task.ToDo;
 
 /**
  * The Parser class parses and processes user input.
@@ -45,9 +58,11 @@ public class Parser {
         } else if (fullCommandArray[0].equals(CommandType.BYE.getType())) {
             throw new InvalidArgumentException("☹ OOPS!!! The bye command does not take any additional argument(s).");
         } else if (fullCommandArray[0].equals(CommandType.PENDING.getType())) {
-            throw new InvalidArgumentException("☹ OOPS!!! The pending command does not take any additional argument(s).");
+            throw new InvalidArgumentException(
+                    "☹ OOPS!!! The pending command does not take any additional argument(s).");
         } else if (fullCommandArray[0].equals(CommandType.COMPLETED.getType())) {
-            throw new InvalidArgumentException("☹ OOPS!!! The completed command does not take any additional argument(s).");
+            throw new InvalidArgumentException(
+                    "☹ OOPS!!! The completed command does not take any additional argument(s).");
         } else if (fullCommandArray[0].equals(CommandType.SHOW.getType())) {
             try {
                 LocalDate date = LocalDate.parse(fullCommandArray[1]);
@@ -64,12 +79,21 @@ public class Parser {
         } else {
             String type = fullCommand.split(" ")[0];
             String temp = fullCommand.strip();
-            if (temp.equals(TaskType.TODO.getType()) || temp.equals(TaskType.DEADLINE.getType()) || temp.equals(TaskType.EVENT.getType())) {
-                throw new InvalidArgumentException("☹ OOPS!!! The description of " + (temp.equals(TaskType.EVENT.getType()) ? "an " : "a ") + temp + " cannot be empty.");
+            if (temp.equals(TaskType.TODO.getType())
+                    || temp.equals(TaskType.DEADLINE.getType())
+                    || temp.equals(TaskType.EVENT.getType())) {
+                throw new InvalidArgumentException(
+                        "☹ OOPS!!! The description of "
+                                + (temp.equals(TaskType.EVENT.getType()) ? "an " : "a ")
+                                + temp
+                                + " cannot be empty.");
             } else if (temp.equals("")) {
                 throw new InvalidTaskTypeException("☹ OOPS!!! The type of a task cannot be empty.");
             }
-            if (type == null || (!type.equals(TaskType.TODO.getType()) && !type.equals(TaskType.DEADLINE.getType()) && !type.equals(TaskType.EVENT.getType()))) {
+            if (type == null
+                    || (!type.equals(TaskType.TODO.getType())
+                    && !type.equals(TaskType.DEADLINE.getType())
+                    && !type.equals(TaskType.EVENT.getType()))) {
                 throw new InvalidTaskTypeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
             String details = fullCommand.substring(type.length());

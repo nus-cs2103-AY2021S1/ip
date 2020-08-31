@@ -101,7 +101,14 @@ public class Task {
      * @return A String encoding of the Task.
      */
     public String encode() {
-        return (getId() + " | " + getType() + " | " + (isCompleted ? "1" : "0") + " | " + description + (getDate() != null ? (" | " + getDate()) : ""));
+        return (getId()
+                + " | "
+                + getType()
+                + " | "
+                + (isCompleted ? "1" : "0")
+                + " | "
+                + description
+                + (getDate() != null ? (" | " + getDate()) : ""));
     }
 
     public boolean includesKeyword(String keyword) {

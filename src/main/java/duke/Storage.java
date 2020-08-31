@@ -1,19 +1,19 @@
 package duke;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 
-import java.time.LocalDate;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
 
 /**
  * The Storage class handles the read and write of data from and to the local disk.
@@ -22,16 +22,16 @@ public class Storage {
     /**
      * Data file path.
      */
-    private final String FILE_PATH;
+    private final String filePath;
 
     /**
      * Instantiates a Storage object with a file path.
      * @param path File path to read from and write to.
      */
     Storage(String path) {
-        FILE_PATH = path;
+        filePath = path;
         try {
-            File f = new File(FILE_PATH);
+            File f = new File(filePath);
             if (!f.exists()) {
                 if (f.getParentFile().mkdirs() && f.createNewFile()) {
                     System.out.println("\tStorage space for you tasks has been initialized successfully.");
@@ -49,7 +49,7 @@ public class Storage {
      * @throws IOException Exception when reading from storage file.
      */
     List<Task> processStorage() throws IOException {
-        File f = new File(FILE_PATH);
+        File f = new File(filePath);
         Scanner sc = new Scanner(f);
         List<Task> list = new ArrayList<>();
         while (sc.hasNext()) {
@@ -78,7 +78,7 @@ public class Storage {
      * @throws IOException Exception when writing to storage file.
      */
     public void writeData(List<Task> list) throws IOException {
-        FileWriter fw = new FileWriter(FILE_PATH);
+        FileWriter fw = new FileWriter(filePath);
         for (Task t: list) {
             String toWrite = "";
             toWrite += (t.encode() + "\n");
