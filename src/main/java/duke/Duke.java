@@ -124,6 +124,11 @@ public class Duke extends Application {
         dialogueContainer = new VBox();
         dialogueContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
 
+        // Makes the scroll
+        dialogueContainer.heightProperty().addListener(observable -> {
+            scrollPane.setVvalue(1.0);
+        });
+
 
         // Add the content to the scroll pane for a scrollable content
         scrollPane.setContent(dialogueContainer);
