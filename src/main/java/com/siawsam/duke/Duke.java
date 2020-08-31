@@ -2,7 +2,12 @@ package com.siawsam.duke;
 
 import java.io.IOException;
 
+import com.siawsam.duke.controllers.LandingScene;
+
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 /**
@@ -16,8 +21,12 @@ public class Duke extends Application {
     
     @Override
     public void start(Stage primaryStage) throws Exception {
-        primaryStage.setTitle("My First JavaFX App");
-
+        primaryStage.setTitle("Duke Chatbot");
+        FXMLLoader loader = new FXMLLoader(Duke.class.getResource("/view/LandingScene.fxml"));
+        loader.setController(new LandingScene());
+        AnchorPane ap = loader.load();
+        Scene scene = new Scene(ap);
+        primaryStage.setScene(scene);
         primaryStage.show();
     }
 
@@ -40,7 +49,7 @@ public class Duke extends Application {
                 parser = new Parser(storage);
             }
             
-            Ui.readUserInput(parser);
+//            Ui.readUserInput(parser);
         } catch (IOException e) {
             Ui.showErrorMessage("An exception occurred:", e);
         } catch (ClassNotFoundException e) {
