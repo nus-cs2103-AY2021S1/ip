@@ -10,12 +10,12 @@ public class Ui {
      */
     static final String WELCOME_MESSAGE = "Hello! I'm Duke\nWhat can I do for you?";
     static final String EXIT_MESSAGE = "Bye. Hope to see you again soon!";
-    static final String LIST_MESSAGE = "Here are the tasks in your list:\n";
-    static final String DONE_MESSAGE = "Nice! I've marked this task as done:\n";
-    static final String TASK_ADDED_MESSAGE = "Got it. I've added this task:\n";
-    static final String DELETE_MESSAGE = "Noted. I've removed this task:\n";
+    static final String LIST_MESSAGE = "Here are the tasks in your list:";
+    static final String DONE_MESSAGE = "Nice! I've marked this task as done:";
+    static final String TASK_ADDED_MESSAGE = "Got it. I've added this task:";
+    static final String DELETE_MESSAGE = "Noted. I've removed this task:";
     static final String TASK_NOT_FOUND_MESSAGE = "No matching tasks found!";
-    static final String TASK_FOUND_MESSAGE = "Here are the matching tasks in your list:\n";
+    static final String TASK_FOUND_MESSAGE = "Here are the matching tasks in your list:";
     static final String LOADING_ERROR_MESSAGE = "Something went wrong when loading previously saved tasks!\n"
             + "Starting with an empty tasks list instead...";
 
@@ -25,8 +25,14 @@ public class Ui {
      * @param message the message to send.
      * @return chat bot reply.
      */
-    public String botReply(String message) {
-        return message;
+    public String botReply(String... message) {
+        StringBuilder out = new StringBuilder();
+
+        for (String s : message) {
+            out.append(s).append("\n");
+        }
+
+        return out.toString();
     }
 
     /**
@@ -63,7 +69,7 @@ public class Ui {
      * @return chat bot reply.
      */
     public String replyList(String content) {
-        return this.botReply(Ui.LIST_MESSAGE + content);
+        return this.botReply(Ui.LIST_MESSAGE, content);
     }
 
     /**
@@ -73,7 +79,7 @@ public class Ui {
      * @return chat bot reply.
      */
     public String replyDone(String content) {
-        return this.botReply(Ui.DONE_MESSAGE + content);
+        return this.botReply(Ui.DONE_MESSAGE, content);
     }
 
     /**
@@ -83,7 +89,7 @@ public class Ui {
      * @return chat bot reply.
      */
     public String replyAdd(String content) {
-        return this.botReply(Ui.TASK_ADDED_MESSAGE + content);
+        return this.botReply(Ui.TASK_ADDED_MESSAGE, content);
     }
 
     /**
@@ -93,7 +99,7 @@ public class Ui {
      * @return chat bot reply.
      */
     public String replyDelete(String content) {
-        return this.botReply(Ui.DELETE_MESSAGE + content);
+        return this.botReply(Ui.DELETE_MESSAGE, content);
     }
 
     /**
@@ -112,7 +118,7 @@ public class Ui {
      * @return chat bot reply.
      */
     public String replyFoundTasks(String content) {
-        return this.botReply(Ui.TASK_FOUND_MESSAGE + content);
+        return this.botReply(Ui.TASK_FOUND_MESSAGE, content);
     }
 
     /**
