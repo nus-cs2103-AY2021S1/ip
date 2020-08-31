@@ -11,11 +11,11 @@ import duke.tasks.TaskList;
 import duke.tasks.Task;
 
 
-public class TaskStorage {
+public class Storage {
 
     private TaskList taskList = new TaskList();
 
-    public TaskStorage(TaskList taskList){
+    public Storage(TaskList taskList){
         this.taskList = taskList;
     }
 

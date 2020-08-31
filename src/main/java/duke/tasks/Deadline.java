@@ -19,6 +19,16 @@ public class Deadline extends Task {
         this.dueDate = dueDate;
     }
 
+    @Override
+    public String getType(){
+        return "D";
+    }
+
+    @Override
+    public String getTime(){
+        return dueDate;
+    }
+
     /**
      * Override the toString method.
      *

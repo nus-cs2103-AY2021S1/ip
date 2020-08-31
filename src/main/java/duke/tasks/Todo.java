@@ -9,6 +9,12 @@ public class Todo extends Task {
     public Todo(String name){
         super(name);
     }
+
+    @Override
+    public String getType(){
+        return "T";
+    }
+
     /**
      * The toString method of Todo.
      * @return The required String format of a todo

@@ -16,6 +16,16 @@ public class Event extends Task {
         this.timePeriod = timePeriod;
     }
 
+    @Override
+    public String getType(){
+        return "E";
+    }
+
+    @Override
+    public String getTime(){
+        return timePeriod;
+    }
+
     /**
      * The toString method of Event.
      * @return The required String format of an event

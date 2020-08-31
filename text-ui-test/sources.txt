@@ -1,3 +1,4 @@
+../src/test/DukeTest.java
 ../src/main/java/duke/ui/Ui.java
 ../src/main/java/duke/tasks/TaskList.java
 ../src/main/java/duke/tasks/Event.java
@@ -12,4 +13,5 @@
 ../src/main/java/duke/exceptions/InvalidKeyException.java
 ../src/main/java/duke/exceptions/InvalidTodoException.java
 ../src/main/java/duke/exceptions/InvalidTimeException.java
+../src/main/java/duke/storage/Storage.java
 ../src/main/java/duke/Duke.java

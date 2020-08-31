@@ -5,6 +5,7 @@ import duke.exceptions.InvalidEventException;
 import duke.exceptions.InvalidKeyException;
 import duke.exceptions.InvalidRequestException;
 import duke.tasks.*;
+import duke.storage.Storage;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -241,9 +242,9 @@ public class Parser {
 
                     processCommand(command);
 
-                    TaskStorage taskStorage = new TaskStorage(taskListManager);
+                    Storage storage = new Storage(taskList);
 
-                    taskStorage.saveDataToFile();
+                    storage.saveDataToFile();
 
                 }
             } catch(Exception e){

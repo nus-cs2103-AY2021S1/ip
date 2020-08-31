@@ -14,6 +14,5 @@ public class Duke {
 
         Ui ui = new Ui();
         ui.run();
-
     }
 }
