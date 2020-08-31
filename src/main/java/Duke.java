@@ -196,7 +196,21 @@ public class Duke {
      * Replace this stub with your completed method.
      */
     public String getResponse(String input) {
-        return "Duke heard: " + input;
+        //String cmd = sc.nextLine().trim().toLowerCase();
+        if (!input.equals("bye") && input.length() != 0) {
+            try {
+                Parser.process(input, this.taskList, this.storage);
+            } catch (DukeException e) {
+                Ui.showError(e.getMessage());
+            }
+        } else {
+            try {
+                Ui.showSaving();
+                this.storage.saveToFile();
+            } catch (IOException e) {
+                Ui.showError(e.getMessage());
+            }
+            Ui.goodbyeMessage();
     }
 
 
