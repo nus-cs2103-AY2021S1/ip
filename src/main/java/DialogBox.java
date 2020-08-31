@@ -10,6 +10,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.shape.Circle;
 
 public class DialogBox extends HBox {
     @FXML
@@ -26,9 +27,12 @@ public class DialogBox extends HBox {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         dialog.setText(text);
         displayPicture.setImage(img);
+        Circle mask = new Circle(displayPicture.getFitHeight() / 2);
+        mask.setCenterX(displayPicture.getFitHeight() / 2);
+        mask.setCenterY(displayPicture.getFitWidth() / 2);
+        displayPicture.setClip(mask);
     }
 
 
