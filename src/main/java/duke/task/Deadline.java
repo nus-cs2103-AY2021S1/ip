@@ -1,9 +1,10 @@
 package duke.task;
 
-import duke.exceptions.DukeException;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+
+import duke.exceptions.DukeException;
+
 
 /**
  * Represents a Deadline object that has a task description and a deadline timing.
@@ -11,6 +12,13 @@ import java.time.format.DateTimeFormatter;
 public class Deadline extends Task {
     private LocalDateTime deadline;
 
+    /**
+     * Constructor to create a deadline object.
+     *
+     * @param detail is the description entered by the user.
+     * @param deadline is the time for the deadline entered by the user.
+     * @throws DukeException if the detail entered is invalid.
+     */
     public Deadline(String detail, LocalDateTime deadline) throws DukeException {
         super(detail);
         this.deadline = deadline;

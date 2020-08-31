@@ -1,8 +1,8 @@
 package duke.commands;
 
 import duke.storage.Storage;
-import duke.ui.Ui;
 import duke.task.TaskList;
+import duke.ui.Ui;
 
 /**
  * Represents the command given by the user.
@@ -18,6 +18,13 @@ public abstract class Command {
         this.command = command;
     }
 
+    /**
+     * Sets the respective fields for Command object.
+     *
+     * @param taskList is the current state of the user's task list.
+     * @param ui is the ui object that handles output.
+     * @param storage is the database of the user.
+     */
     public void init(TaskList taskList, Ui ui, Storage storage) {
         this.ui = ui;
         this.storage = storage;

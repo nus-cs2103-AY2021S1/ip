@@ -1,16 +1,23 @@
 package duke.commands;
 
-import duke.storage.Storage;
-import duke.ui.Ui;
-import duke.task.TaskList;
-
 import java.io.FileWriter;
 import java.io.IOException;
+
+import duke.storage.Storage;
+import duke.task.TaskList;
+import duke.ui.Ui;
+
 
 /**
  * Saves all current tasks to the database and exits the program.
  */
 public class ExitCommand extends Command {
+
+    /**
+     * Sets the exit status of the command to true.
+     *
+     * @param command is the user input.
+     */
     public ExitCommand(String command) {
         super(command);
         super.isExit = true;

@@ -1,16 +1,17 @@
 package duke.commands;
 
-import duke.storage.Storage;
-import duke.ui.Ui;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 import duke.exceptions.DukeException;
+import duke.storage.Storage;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.TaskList;
 import duke.task.Todo;
+import duke.ui.Ui;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 
 /**
  * Adds a task to the task list.
@@ -22,6 +23,12 @@ public class AddCommand extends Command {
         TODO, DEADLINE, EVENT
     }
 
+    /**
+     * Creates AddCommand object that handles adding of todo, deadline and event.
+     *
+     * @param type differentiates between todo, deadline and event.
+     * @param command is the description entered by the user.
+     */
     public AddCommand(Type type, String command) {
         super(command);
         this.type = type;
@@ -30,12 +37,15 @@ public class AddCommand extends Command {
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         super.init(taskList, ui, storage);
-        if (type == Type.TODO)
+        if (type == Type.TODO) {
             addTodo();
-        if (type == Type.DEADLINE)
+        }
+        if (type == Type.DEADLINE) {
             addDeadline();
-        if (type == Type.EVENT)
+        }
+        if (type == Type.EVENT) {
             addEvent();
+        }
     }
 
     private void addTodo() {

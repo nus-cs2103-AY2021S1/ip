@@ -1,9 +1,10 @@
 package duke.task;
 
-import duke.exceptions.DukeException;
-
 import java.util.ArrayList;
 import java.util.function.Consumer;
+
+import duke.exceptions.DukeException;
+
 
 /**
  * Represents a list that stores all tasks.
@@ -28,6 +29,13 @@ public class TaskList {
         this.taskList.add(task);
     }
 
+    /**
+     * Method to delete the task at the specified index.
+     *
+     * @param index is the index of the task to be deleted.
+     * @return the task object that is being deleted.
+     * @throws DukeException if the index specified by the user is invalid.
+     */
     public Task deleteTask(int index) throws DukeException {
         if (isIndexInRange(index)) {
             return this.taskList.remove(index - 1);

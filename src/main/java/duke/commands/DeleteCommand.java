@@ -1,10 +1,10 @@
 package duke.commands;
 
-import duke.storage.Storage;
-import duke.ui.Ui;
 import duke.exceptions.DukeException;
+import duke.storage.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
+import duke.ui.Ui;
 
 /**
  * Deletes the specified task from the task list.
@@ -12,6 +12,12 @@ import duke.task.TaskList;
 public class DeleteCommand extends Command {
     private int index;
 
+    /**
+     * Creates a Command object for task deletion.
+     *
+     * @param command is the input given from the user.
+     * @param index is the index of the task to be deleted.
+     */
     public DeleteCommand(String command, String index) {
         super(command);
         try {

@@ -1,9 +1,9 @@
 package duke.task;
 
-import duke.exceptions.DukeException;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+
+import duke.exceptions.DukeException;
 
 /**
  * Represents an event object that has the event description and time of event.
@@ -11,6 +11,13 @@ import java.time.format.DateTimeFormatter;
 public class Event extends Task {
     private LocalDateTime timing;
 
+    /**
+     * Constructor to create an event object.
+     *
+     * @param detail is the description entered by the user.
+     * @param timing is the timing for the event entered by the user
+     * @throws DukeException if the details entered by the user is invalid.
+     */
     public Event(String detail, LocalDateTime timing) throws DukeException {
         super(detail);
         this.timing = timing;

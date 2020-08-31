@@ -1,11 +1,12 @@
 package duke;
 
 import duke.commands.Command;
+import duke.exceptions.DukeException;
 import duke.parser.Parser;
 import duke.storage.Storage;
-import duke.ui.Ui;
-import duke.exceptions.DukeException;
 import duke.task.TaskList;
+import duke.ui.Ui;
+
 
 /**
  * Represents the chat bot Duke.
@@ -15,7 +16,9 @@ public class Duke {
     private Storage storage;
     private Ui ui;
 
-
+    /**
+     * Represents the chat bot duke.
+     */
     public Duke() {
         storage = Storage.dbInstance();
         taskList = storage.getTaskListFromDatabase();
