@@ -1,5 +1,6 @@
 package duke;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -83,6 +84,19 @@ public class TaskList {
         Task cur = tasks.remove(num);
         Ui.delete(cur, tasks);
         storage.write(tasks);
+    }
+
+    /**
+     * list all tasks in the list
+     */
+    public void find(String pattern) {
+        List<Task> foundTasks = new ArrayList<>();
+        for (Task task : tasks) {
+            if (task.desc.contains(pattern)) {
+                foundTasks.add(task);
+            }
+        }
+        Ui.find(foundTasks);
     }
 
     /**

@@ -32,6 +32,8 @@ class Parser {
                     taskList.addTask(command);
                 } else if (command.startsWith("delete")) {
                     taskList.delete(command.substring(7));
+                } else if (command.startsWith("find")) {
+                    taskList.find(command.substring(5));
                 } else {
                     throw new IllegalArgumentException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
