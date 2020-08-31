@@ -2,6 +2,7 @@ package duke;
 
 import duke.Task;
 import duke.TaskType;
+import duke.Ui;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -16,30 +17,23 @@ import java.util.Scanner;
 
 public class Duke {
     private static String TASKS_PATHNAME = "data/tasks.txt";
+    private Ui ui;
+
+    public Duke(String filePath) {
+        ui = new Ui();
+    }
 
     public static void main(String[] args) {
-        greet();
         try {
-            run();
+            new Duke(TASKS_PATHNAME).run();
         } catch(IOException e) {
-            System.err.println(e);
+
         }
     }
 
-    public static void greet() {
-        String logo = "____________________________________________________________\n"
-                /*+ " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n"*/
-                + " Hello I'm Duke\n"
-                + " What can I do for you?\n"
-                + "____________________________________________________________\n";
-        System.out.println(logo);
-    }
+    public void run() throws IOException, SecurityException {
+        ui.showWelcome();
 
-    public static void run() throws IOException, SecurityException {
         File tasks = new File(TASKS_PATHNAME);
         if(tasks.getParentFile() != null){
             tasks.getParentFile().mkdirs();
@@ -81,12 +75,11 @@ public class Duke {
                 }
         }
 
-        sc = new Scanner(System.in);
         boolean isRunning = true;
         String input;
         while(isRunning) {
-            input = sc.nextLine();
-            printLine();
+            input = ui.readCommand();
+            ui.showLine();
             if(input.equals("list")){
                 list(list);
             } else if (input.equals("bye")) {
@@ -106,9 +99,9 @@ public class Duke {
                 save(list);
             }
             else{
-                error();
+                ui.showError();
             }
-            printLine();
+            ui.showLine();
         }
     }
 
@@ -279,10 +272,6 @@ public class Duke {
 
     public static void printLine(){
         System.out.println("____________________________________________________________\n");
-    }
-
-    public static void error(){
-        System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
     }
 
     public static void save(ArrayList<Task> list) throws IOException {
