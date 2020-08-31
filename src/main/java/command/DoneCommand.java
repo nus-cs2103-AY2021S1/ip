@@ -27,10 +27,14 @@ public class DoneCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws InvalidInputException, InvalidSaveFileException {
-        if (super.input.length() <= 5) {
+
+        final int INPUT_INDEX = 5;
+        //Check if task was specified
+        if (super.input.length() <= INPUT_INDEX) {
             throw new InvalidInputException("\t☹ OOPS!!! Please specify which task you want to complete!");
         }
-        int completed = Integer.parseInt(super.input.substring(5));
+
+        int completed = Integer.parseInt(super.input.substring(INPUT_INDEX));
         try {
             Task current = tasks.getTasks().get(completed - 1);
             current.completeTask();
@@ -39,14 +43,5 @@ public class DoneCommand extends Command {
             throw new InvalidInputException("\tIndex out of bounds! Please try again.");
         }
         storage.saveFile(tasks.getTasks());
-    }
-
-    /**
-     * Lets the main logic know to continue running.
-     * @return False to prevent loop exit.
-     */
-    @Override
-    public boolean isExit() {
-        return false;
     }
 }

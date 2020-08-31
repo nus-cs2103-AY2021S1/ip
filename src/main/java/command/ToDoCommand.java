@@ -5,7 +5,7 @@ import exception.InvalidSaveFileException;
 import logic.Storage;
 import logic.Ui;
 import tasks.TaskList;
-import tasks.ToDos;
+import tasks.ToDo;
 
 /**
  * Adds the todos entry into logic.Duke's list.
@@ -26,22 +26,17 @@ public class ToDoCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws InvalidInputException, InvalidSaveFileException {
-        if (super.input.length() <= 5) {
+
+        final int INPUT_INDEX = 5;
+
+        //Check if input is empty.
+        if (super.input.length() <= INPUT_INDEX) {
             throw new InvalidInputException("\t☹ OOPS!!! The description of a todo cannot be empty.");
         }
-        ToDos task = new ToDos(super.input.substring(5));
+        ToDo task = new ToDo(super.input.substring(INPUT_INDEX));
         tasks.getTasks().add(task);
         ui.printOutput("\tGot it. I've added this task:\n" + "\t" + task.toString()
                 + "\n\tNow you have " + tasks.getTasks().size() + " tasks in the list.");
         storage.saveFile(tasks.getTasks());
-    }
-
-    /**
-     * Lets the main logic know that it can not quit yet.
-     * @return False to prevent the loop for exiting.
-     */
-    @Override
-    public boolean isExit() {
-        return false;
     }
 }

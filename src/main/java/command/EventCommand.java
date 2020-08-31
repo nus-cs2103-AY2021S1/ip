@@ -9,7 +9,7 @@ import exception.InvalidInputException;
 import exception.InvalidSaveFileException;
 import logic.Storage;
 import logic.Ui;
-import tasks.Events;
+import tasks.Event;
 import tasks.TaskList;
 
 /**
@@ -36,15 +36,20 @@ public class EventCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws InvalidDateTimeFormatException,
             InvalidInputException, InvalidSaveFileException {
-        if (super.input.length() <= 6) {
+
+        final int INPUT_INDEX = 6;
+        final int EVENT_INDEX = 3;
+        //Check if event is specified
+        if (super.input.length() <= INPUT_INDEX) {
             throw new InvalidInputException("\t☹ OOPS!!! The description of an event cannot be empty.");
         }
+
         String[] splitWord = super.input.split("/");
-        String desc = splitWord[0].substring(6, splitWord[0].length() - 1);
-        String timing = splitWord[1].substring(3);
-        Events task;
+        String desc = splitWord[0].substring(INPUT_INDEX, splitWord[0].length() - 1);
+        String timing = splitWord[1].substring(EVENT_INDEX);
+        Event task;
         try {
-            task = new Events(desc, LocalDateTime.parse(timing, dateTimeFormat));
+            task = new Event(desc, LocalDateTime.parse(timing, dateTimeFormat));
         } catch (DateTimeParseException e) {
             throw new InvalidDateTimeFormatException(
                     "\tEvent timing input must follow a certain format: yyyy-mm-dd HH:mm "
@@ -54,14 +59,5 @@ public class EventCommand extends Command {
         System.out.println("\tGot it. I've added this task:\n" + "\t" + task.toString()
                 + "\n\tNow you have " + tasks.getTasks().size() + " tasks in the list.");
         storage.saveFile(tasks.getTasks());
-    }
-
-    /**
-     * Lets the main logic know that it can not exit.
-     * @return False to prevent loop from exiting.
-     */
-    @Override
-    public boolean isExit() {
-        return false;
     }
 }

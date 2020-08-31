@@ -6,7 +6,7 @@ import java.time.format.DateTimeFormatter;
 /**
  * Represents the events that the user inputs.
  */
-public class Events extends Task {
+public class Event extends Task {
 
     protected LocalDateTime timing;
 
@@ -16,7 +16,7 @@ public class Events extends Task {
      * @param taskDesc Description of the task.
      * @param timing Timing to finish the task.
      */
-    public Events(String taskDesc, LocalDateTime timing) {
+    public Event(String taskDesc, LocalDateTime timing) {
         super(taskDesc);
         this.timing = timing;
     }

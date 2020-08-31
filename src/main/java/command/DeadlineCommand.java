@@ -9,7 +9,7 @@ import exception.InvalidInputException;
 import exception.InvalidSaveFileException;
 import logic.Storage;
 import logic.Ui;
-import tasks.Deadlines;
+import tasks.Deadline;
 import tasks.TaskList;
 
 /**
@@ -19,12 +19,13 @@ import tasks.TaskList;
 public class DeadlineCommand extends Command {
 
     private static DateTimeFormatter dateTimeFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+    private final int deadlineIndex = 3;
     public DeadlineCommand(String input) {
         super(input);
     }
 
     /**
-     * Add deadline entry to the Arraylist.
+     * Adds deadline entry to the Arraylist.
      *
      * @param tasks List of tasks given.
      * @param ui Handles the output to print.
@@ -36,15 +37,21 @@ public class DeadlineCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws InvalidDateTimeFormatException,
             InvalidInputException, InvalidSaveFileException {
-        if (super.input.length() <= 9) {
+        final int INPUT_INDEX = 9;
+
+        //Check if the description is empty
+        if (super.input.length() <= INPUT_INDEX) {
             throw new InvalidInputException("\t☹ OOPS!!! The description of a deadline cannot be empty.");
         }
+
+        final int DEADLINE_INDEX = 3;
         String[] splitWord = super.input.split("/");
-        String desc = splitWord[0].substring(9, splitWord[0].length() - 1);
-        String deadline = splitWord[1].substring(3);
-        Deadlines task;
+
+        String desc = splitWord[0].substring(INPUT_INDEX, splitWord[0].length() - 1);
+        String deadline = splitWord[1].substring(DEADLINE_INDEX);
+        Deadline task;
         try {
-            task = new Deadlines(desc, LocalDateTime.parse(deadline, dateTimeFormat));
+            task = new Deadline(desc, LocalDateTime.parse(deadline, dateTimeFormat));
         } catch (DateTimeParseException e) {
             throw new InvalidDateTimeFormatException(
                     "\tDeadline input must follow a certain format: yyyy-mm-dd HH:mm "
@@ -54,14 +61,5 @@ public class DeadlineCommand extends Command {
         ui.printOutput("\tGot it. I've added this task:\n" + "\t" + task.toString()
                 + "\n\tNow you have " + tasks.getTasks().size() + " tasks in the list.");
         storage.saveFile(tasks.getTasks());
-    }
-
-    /**
-     * Lets the main logic know that it cannot exit.
-     * @return False to prevent loop from exiting.
-     */
-    @Override
-    public boolean isExit() {
-        return false;
     }
 }

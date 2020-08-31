@@ -10,10 +10,10 @@ import java.util.List;
 import java.util.Scanner;
 
 import exception.InvalidSaveFileException;
-import tasks.Deadlines;
-import tasks.Events;
+import tasks.Deadline;
+import tasks.Event;
 import tasks.Task;
-import tasks.ToDos;
+import tasks.ToDo;
 
 /**
  * Handles saving of the list and reading it upon startup.
@@ -43,9 +43,9 @@ public class Storage {
                 Scanner s = new Scanner(file);
                 while (s.hasNext()) {
                     String entry = s.nextLine();
-                    DateTimeFormatter dtf2 = DateTimeFormatter.ofPattern("HH:mm MMM d yyyy");
+                    DateTimeFormatter dateTimeFormat2 = DateTimeFormatter.ofPattern("HH:mm MMM d yyyy");
                     if (entry.startsWith("[T]")) {
-                        ToDos t = new ToDos(entry.substring(7));
+                        ToDo t = new ToDo(entry.substring(7));
                         if (entry.contains("✓")) {
                             t.completeTask();
                         }
@@ -53,23 +53,26 @@ public class Storage {
                     } else if (entry.startsWith("[D]")) {
                         int index = entry.indexOf("(");
                         String datetime = entry.substring(index + 5, entry.length() - 1);
-                        LocalDateTime ldt = LocalDateTime.parse(datetime, dtf2);
-                        Deadlines d = new Deadlines(entry.substring(7, index - 1),
+                        LocalDateTime ldt = LocalDateTime.parse(datetime, dateTimeFormat2);
+                        Deadline d = new Deadline(entry.substring(7, index - 1),
                                 ldt);
                         if (entry.contains("✓")) {
                             d.completeTask();
                         }
                         toDoList.add(d);
-                    } else {
+                    } else if (entry.startsWith("[E]")) {
                         int index = entry.indexOf("(");
                         String datetime = entry.substring(index + 5, entry.length() - 1);
-                        LocalDateTime ldt = LocalDateTime.parse(datetime, dtf2);
-                        Events e = new Events(entry.substring(7, index - 1),
+                        LocalDateTime ldt = LocalDateTime.parse(datetime, dateTimeFormat2);
+                        Event e = new Event(entry.substring(7, index - 1),
                                 ldt);
                         if (entry.contains("✓")) {
                             e.completeTask();
                         }
                         toDoList.add(e);
+                    } else {
+                        throw new InvalidSaveFileException("Hmmmm.....there seems to be an entry"
+                                + "that does not follow the convention!");
                     }
                 }
             }

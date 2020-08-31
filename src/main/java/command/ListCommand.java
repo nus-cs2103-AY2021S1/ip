@@ -31,13 +31,4 @@ public class ListCommand extends Command {
             }
         }
     }
-
-    /**
-     * Lets main logic know that it can not stop running.
-     * @return False to prevent loop from exiting.
-     */
-    @Override
-    public boolean isExit() {
-        return false;
-    }
 }

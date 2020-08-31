@@ -27,11 +27,15 @@ public class DeleteCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws InvalidInputException, InvalidSaveFileException {
-        if (super.input.length() <= 7) {
+
+        final int INPUT_INDEX = 7;
+        //Check if description is empty
+        if (super.input.length() <= INPUT_INDEX) {
             throw new InvalidInputException(
                     "\t☹ OOPS!!! The description of a delete operation cannot be empty / invalid index.");
         }
-        int index = Integer.parseInt(super.input.substring(7));
+
+        int index = Integer.parseInt(super.input.substring(INPUT_INDEX));
         if (index >= tasks.getTasks().size() || index < 0) {
             throw new InvalidInputException(
                     "\t☹ OOPS!!! The description of a delete operation cannot be empty / invalid index.");
@@ -41,14 +45,5 @@ public class DeleteCommand extends Command {
         ui.printOutput("\tNoted. I've removed this task:\n" + "\t" + task.toString()
                 + "\n\tNow you have " + tasks.getTasks().size() + " tasks in the list.");
         storage.saveFile(tasks.getTasks());
-    }
-
-    /**
-     * Lets main logic know that it cannot exit loop.
-     * @return False to prevent exiting.
-     */
-    @Override
-    public boolean isExit() {
-        return false;
     }
 }

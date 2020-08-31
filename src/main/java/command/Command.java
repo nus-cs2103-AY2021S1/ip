@@ -9,7 +9,6 @@ import tasks.TaskList;
  * Abstract class of all the commands that is created
  * after parsing the user's input
  */
-
 public abstract class Command {
 
     public final String input;
@@ -18,5 +17,7 @@ public abstract class Command {
         this.input = input;
     }
     public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
-    public abstract boolean isExit();
+    public boolean isExit() {
+        return false;
+    };
 }

@@ -2,19 +2,19 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
-import tasks.ToDos;
+import tasks.ToDo;
 
-public class ToDosTest {
+public class ToDoTest {
     @Test
     public void constructorTest() {
-        ToDos events = new ToDos("kiwis");
+        ToDo events = new ToDo("kiwis");
         assertEquals(
                 "[T][" + "\u2718" + "] kiwis", events.toString());
     }
 
     @Test
     public void completionTest() {
-        ToDos events = new ToDos("kiwis");
+        ToDo events = new ToDo("kiwis");
         events.completeTask();
         assertEquals("[T][" + "\u2713" + "] kiwis", events.toString());
     }

@@ -6,7 +6,7 @@ import java.time.format.DateTimeFormatter;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import tasks.Events;
+import tasks.Event;
 
 public class EventTest {
 
@@ -20,16 +20,16 @@ public class EventTest {
     }
     @Test
     public void constructorTest() {
-        Events events = new Events("kiwis", localDateTime);
+        Event event = new Event("kiwis", localDateTime);
         assertEquals(
-                "[E][" + "\u2718" + "] kiwis (at: 18:00 Aug 23 2020)", events.toString());
+                "[E][" + "\u2718" + "] kiwis (at: 18:00 Aug 23 2020)", event.toString());
     }
 
     @Test
     public void completionTest() {
-        Events events = new Events("kiwis", localDateTime);
-        events.completeTask();
-        assertEquals("[E][" + "\u2713" + "] kiwis (at: 18:00 Aug 23 2020)", events.toString());
+        Event event = new Event("kiwis", localDateTime);
+        event.completeTask();
+        assertEquals("[E][" + "\u2713" + "] kiwis (at: 18:00 Aug 23 2020)", event.toString());
     }
 
 }

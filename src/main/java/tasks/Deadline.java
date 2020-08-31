@@ -6,7 +6,7 @@ import java.time.format.DateTimeFormatter;
 /**
  * Represents the deadlines that the user wants to remember.
  */
-public class Deadlines extends Task {
+public class Deadline extends Task {
 
     protected LocalDateTime deadline;
 
@@ -16,7 +16,7 @@ public class Deadlines extends Task {
      * @param taskDesc Description of the Deadlines.
      * @param deadline Deadline of task.
      */
-    public Deadlines(String taskDesc, LocalDateTime deadline) {
+    public Deadline(String taskDesc, LocalDateTime deadline) {
         super(taskDesc);
         this.deadline = deadline;
     }

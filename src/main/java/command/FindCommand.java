@@ -20,10 +20,14 @@ public class FindCommand extends Command {
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws InvalidInputException {
-        if (super.input.length() <= 5) {
+
+        final int INPUT_INDEX = 5;
+
+        //Check if description of task to find is non-empty.
+        if (super.input.length() <= INPUT_INDEX) {
             throw new InvalidInputException("\tDescription of item to find cannot be empty! Please try again!");
         }
-        List<Task> foundTasks = tasks.findTasks(super.input.substring(5));
+        List<Task> foundTasks = tasks.findTasks(super.input.substring(INPUT_INDEX));
         if (foundTasks.size() == 0) {
             ui.printOutput("\tThere is no item that matches your description!");
         } else {
@@ -32,10 +36,5 @@ public class FindCommand extends Command {
                 ui.printOutput("\t" + (x + 1) + "." + foundTasks.get(x).toString());
             }
         }
-    }
-
-    @Override
-    public boolean isExit() {
-        return false;
     }
 }

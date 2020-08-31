@@ -4,8 +4,8 @@ package tasks;
  * Represents the todos of the user that he input
  * into logic.Duke
  */
-public class ToDos extends Task {
-    public ToDos (String taskDesc) {
+public class ToDo extends Task {
+    public ToDo(String taskDesc) {
         super(taskDesc);
     }
 
