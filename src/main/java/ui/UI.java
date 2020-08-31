@@ -138,13 +138,13 @@ public class UI {
      * @param taskList taskList of the items found.
      * @return String formatted printable list
      */
-    public static String showFoundItems(TaskList taskList, String keyword) {
+    public static String showFoundItems(TaskList taskList) {
         StringBuilder formatted = new StringBuilder();
         int len = taskList.size();
         for (int number = 0; number < len; number++) {
             formatted.append("\n\t  " + (number + 1) + ". " + taskList.get(number).toString());
         }
-        return kingChatBox("I found " + len + " items with the " + keyword + " keyword:"
+        return kingChatBox("I found " + len + " items with the given keyword(s):"
                 + formatted.toString());
     }
 

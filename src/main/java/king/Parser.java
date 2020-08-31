@@ -123,8 +123,8 @@ public class Parser {
                 throw new KingException("Please follow the syntax: delete <item no.>", e);
             }
         } else if (phrase.startsWith("find ") || (phrase.startsWith("find") && phraseLength == 4)) {
-            String keyword = phrase.substring(4).trim();
-            return UI.showFoundItems(storage.find(keyword), keyword);
+            String[] keywords = phrase.substring(4).trim().split(" ");
+            return UI.showFoundItems(storage.find(keywords));
         } else {
             throw new KingException("I don't understand you!", new Throwable("invalid command"));
         }

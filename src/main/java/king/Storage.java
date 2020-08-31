@@ -120,17 +120,19 @@ public class Storage {
      * and returns the corresponding tasks found in
      * a taskList.
      *
-     * @param keyword keyword to search for.
+     * @param keywords keyword to search for.
      * @return TaskList containing the tasks with the keywords
      */
-    public TaskList find(String keyword) {
+    public TaskList find(String ... keywords) {
         TaskList tasksFound = new TaskList();
         try {
             Scanner scanner = new Scanner(data);
             while (scanner.hasNextLine()) {
                 String item = scanner.nextLine();
-                if (item.contains(keyword)) {
-                    tasksFound.add(dataToTask(item));
+                for (String keyword : keywords) {
+                    if (item.contains(keyword)) {
+                        tasksFound.add(dataToTask(item));
+                    }
                 }
             }
         } catch (IOException e) {
