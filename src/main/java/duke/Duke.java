@@ -37,13 +37,14 @@ public class Duke extends Application {
     /**
      * Initialises Duke and objects required.
      */
+    @SuppressWarnings("checkstyle:WhitespaceAround")
     public Duke() {
         ui = new Ui();
         storage = new Storage();
         tasks = new TaskList();
         try {
             storage.load(tasks);
-        } catch (Exception e){
+        } catch (Exception e) {
             Ui.showLoadingError();
         }
     }

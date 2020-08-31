@@ -15,7 +15,7 @@ public class Ui {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         String greet = "\n____________________________________________________________"
-                + "\n Hello! I'm duke.Duke"
+                + "\n Hello! I'm Duke"
                 + "\n What can I do for you?"
                 + "\n____________________________________________________________\n";
         System.out.println(logo + greet);

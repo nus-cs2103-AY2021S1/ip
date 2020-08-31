@@ -42,7 +42,9 @@ public class Task {
      * Returns number representation about the completion status of the task.
      * @return 1 (completed) or 0 (not completed)
      */
-    public String getStatusIndex() { return (isDone ? "1" : "0" );}
+    public String getStatusIndex() {
+        return (isDone ? "1" : "0");
+    }
 
     /**
      * Marks task as done.
