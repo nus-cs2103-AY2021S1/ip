@@ -1,12 +1,21 @@
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.net.URL;
+import java.time.LocalDate;
+import java.util.ArrayList;
+
+
+
 /**
  * Encapsulates a Storage
  * Deals with loading tasks from the file and saving tasks in the file
  */
-
-import java.io.*;
-import java.net.URL;
-import java.time.LocalDate;
-import java.util.ArrayList;
 
 public class Storage {
     protected String fileName;
@@ -73,8 +82,9 @@ public class Storage {
             e.printStackTrace();
         } finally {
             try {
-                if (objReader != null)
+                if (objReader != null) {
                     objReader.close();
+                }
             } catch (IOException ex) {
                 ex.printStackTrace();
             }

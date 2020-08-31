@@ -5,6 +5,11 @@ public class EmptyDescriptionException extends DukeException {
         this.type = type;
     }
 
+    /**
+     * Gives the String representation of the Exception
+     *
+     * @return a String
+     */
     public String toString() {
         return "____________________________________________________________"
                 + "\n"

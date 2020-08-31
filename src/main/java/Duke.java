@@ -1,8 +1,8 @@
+import java.util.Scanner;
+
 /**
  * Main body of application Duke
  */
-
-import java.util.Scanner;
 
 public class Duke {
     private Storage storage;
