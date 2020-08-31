@@ -24,22 +24,16 @@ public class Ui {
         sc = new Scanner(System.in);
     }
 
-    public void showWelcome() {
-        System.out.println("Hello from\n" + LOGO);
-
-        System.out.println(LINE_BREAK);
-        System.out.println(SPACE1 + "Hey, I'm Emilia ♥ !\n" + SPACE1 +
-                "What can I do for you?");
-        System.out.println(LINE_BREAK);
+    public String showWelcome() {
+        return "Hello from\n" + LOGO + "\nHey, I'm Emilia \u2764 !\nWhat can I do for you?";
     }
 
-    public void showError(String errorMessage) {
-        System.out.println(SPACE1 + errorMessage);
+    public String showError(String errorMessage) {
+        return errorMessage;
     }
 
-    public void showErrorLoad(String errorMessage) {
-        System.out.println("\n" + errorMessage);
-        System.out.println("Initialize an empty TaskList!\n");
+    public String showErrorLoad(String errorMessage) {
+        return errorMessage + "\n" + "Initialize an empty TaskList!\n";
     }
     public void showLine() {
         System.out.println(LINE_BREAK);
@@ -49,46 +43,42 @@ public class Ui {
         return sc.nextLine().trim().toLowerCase();
     }
 
-    public void showBye() {
-        System.out.println(SPACE1 + "Welcome back ♥ !" );
+    public String showBye() {
+        return "Welcome back \u2764 !";
     }
 
-    public void showList() {
-        System.out.println(SPACE1 + "Please take a look at the tasks:");
+    public String showList() {
+        return "Please take a look at the tasks:";
     }
 
-    public void showTask(int count, Task task) {
-        System.out.println(SPACE1 + count + ". " + task);
+    public String showTask(int count, Task task) {
+        return count + ". " + task;
     }
 
-    public void showDone(Task task) {
-        System.out.println(SPACE1 + "Understood, I've marked this " +
-                "task as done:\n" + SPACE2 + task);
+    public String showDone(Task task) {
+        return "Understood, I've marked this task as done:\n" + task;
     }
 
-    public void showDelete(Task task, TaskList list) {
-        System.out.println(SPACE1 + "Understood, I've deleted this task\n" +
-                SPACE2 + task + "\n" + SPACE1 + "You have " + list.getSize() +
-                " tasks in your list now!");
+    public String showDelete(Task task, TaskList list) {
+        return "Understood, I've deleted this task\n" + task + "\n" + "You have " +
+                list.getSize() + " tasks in your list now!";
     }
 
-    public void showCheck() {
-        System.out.println(SPACE1 + "Hey! I have printed out the tasks that match the date:");
+    public String showCheck() {
+        return "Hey! I have printed out the tasks that match the date:";
     }
 
-    public void showAdd(Task current, TaskList list) {
-        System.out.println(SPACE1 + "Understood! I've added this task:\n" +
-                SPACE2 + current);
-        System.out.println(SPACE1 + "You have " +
-                list.getSize() + " tasks in your list now!");
+    public String showAdd(Task current, TaskList list) {
+        return "Understood! I've added this task:\n" + current + "\n You have " +
+                list.getSize() + " tasks in your list now!";
     }
 
-    public void showFind() {
-        System.out.println(SPACE1 + "Hey! I have printed out the tasks that match the name:");
+    public String showFind() {
+        return "Hey! I have printed out the tasks that match the name:";
     }
 
-    public void showNothingFound() {
-        System.out.println(SPACE1 + "Hmm, I didn't find anything that match your input");
+    public String showNothingFound() {
+        return "Hmm, I didn't find anything that match your input";
     }
 
 }

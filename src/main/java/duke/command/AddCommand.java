@@ -35,7 +35,7 @@ public class AddCommand extends Command {
      * @throws DukeException if the user input does not follow the convention
      */
     @Override
-    public void execute(TaskList list, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList list, Ui ui, Storage storage) throws DukeException {
         Task current;
         try {
             switch (this.taskType) {
@@ -70,7 +70,7 @@ public class AddCommand extends Command {
 
             list.add(current);
             storage.appendTxt(current);
-            ui.showAdd(current, list);
+            return ui.showAdd(current, list);
 
         } catch (NumberFormatException | DateTimeException e) {
             throw new DukeException("Invalid date format detected!");

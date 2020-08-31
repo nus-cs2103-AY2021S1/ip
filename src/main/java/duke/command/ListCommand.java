@@ -7,13 +7,14 @@ import duke.task.Task;
 
 public class ListCommand extends Command {
     @Override
-    public void execute(TaskList list, Ui ui, Storage storage) {
-        ui.showList();
+    public String execute(TaskList list, Ui ui, Storage storage) {
+        String out = ui.showList() + "\n";
         int count = 1;
         for (Task task : list.getList()) {
-            ui.showTask(count, task);
+            out = out + ui.showTask(count, task) + "\n";
             count++;
         }
+        return out;
     }
 
     @Override

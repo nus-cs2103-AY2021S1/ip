@@ -22,7 +22,7 @@ public abstract class Task {
     }
 
     public String toString() {
-        return "[" + (status ? "✔" : "✘") + "] " + this.name.trim();
+        return "[" + (status ? "\u2713" : "\u2718") + "] " + this.name.trim();
     }
 
     public String getName() {

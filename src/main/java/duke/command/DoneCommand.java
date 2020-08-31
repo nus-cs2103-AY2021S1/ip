@@ -17,12 +17,12 @@ public class DoneCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList list, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList list, Ui ui, Storage storage) throws DukeException {
         try{
             Task task = list.getList().get(index);
             task.markAsDone();
-            ui.showDone(task);
             storage.generateTxt(list);
+            return ui.showDone(task);
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Sorry, I can't seem to find the task...");
         }

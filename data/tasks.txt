@@ -1,5 +1,5 @@
-T | 1 |    eat
 D | 1 | return book | 2/12/2019 1800
-T | 1 |    asldjasljkd
+T | 1 |            asldjasljkd
 E | 0 | return book | 2/12/2019 1800
-T | 1 |  sleep
+T | 1 |          sleep
+T | 0 | wow
