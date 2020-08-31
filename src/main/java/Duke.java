@@ -1,3 +1,5 @@
+import javafx.application.Platform;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
@@ -15,43 +17,62 @@ public class Duke {
     private Storage storage;
     private TaskList taskList;
     private Parser parser;
-    private Ui ui;
+    private static final String FILE_PATH = "data/Duke.txt";
 
-    public Duke(String filePath) throws FileNotFoundException, DukeException {
-        this.storage = new Storage(filePath);
+    public Duke() throws FileNotFoundException{
+        this.storage = new Storage(FILE_PATH);
         this.taskList = new TaskList(storage);
         this.parser = new Parser(taskList);
-        this.ui = new Ui();
+    }
+
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    protected String getResponseForGui(String input) {
+        String response = "";
+        try {
+            Ui ui = parser.parseUserInput(input);
+            response = ui.getMessage();
+        } catch (DukeException | IOException error) {
+            response = Ui.makeErrorUi(error).getMessage();
+        }
+        return response;
+    }
+
+    protected void checkFilePath() throws IOException {
+        if (!Files.exists(Paths.get("data"))) {
+            Files.createDirectory(Paths.get("data"));
+        }
+        if (!Files.exists(Paths.get(FILE_PATH))) {
+            Files.createFile(Paths.get(FILE_PATH));
+        }
     }
 
     /**
      * Initiates and runs the main programme.
      */
-    public void run() {
+    public void run() throws IOException {
+
+        checkFilePath();
         Scanner sc = new Scanner(System.in);
         String input;
-        ui.start();
+        Ui.makeStartUi().printMessage();
         input = sc.nextLine();
         while (!input.equals("bye")) {
             try {
-                parser.parseUserInput(input);
-            } catch (DukeException | IOException e) {
-                ui.showError(e);
+                Ui ui = parser.parseUserInput(input);
+                ui.printMessage();
+            } catch (DukeException | IOException error) {
+                Ui.makeErrorUi(error).printMessage();
             }
             input = sc.nextLine();
         }
-        ui.end();
+        Ui.makeEndUi().printMessage();
     }
 
-    public static void main(String[] args) throws IOException, DukeException {
-        if (!Files.exists(Paths.get("data"))) {
-            Files.createDirectory(Paths.get("data"));
-        }
-        if (!Files.exists(Paths.get("data/Duke.txt"))) {
-            Files.createFile(Paths.get("data/Duke.txt"));
-        }
-
-        new Duke("data/Duke.txt").run();
+    public static void main(String[] args) throws IOException {
+        new Duke().run();
     }
 
 }

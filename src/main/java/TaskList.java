@@ -30,10 +30,11 @@ public class TaskList {
      *
      * @param task Task to be added.
      */
-    protected void addTask(Task task) throws IOException {
+    protected String addTask(Task task) throws IOException {
         list.add(task);
-        System.out.println("Added: " + task + "\n");
+        //System.out.println("Added: " + task + "\n");
         storage.saveTasks(toString());
+        return "Added: " + task + "\n";
     }
 
     /**
@@ -41,12 +42,13 @@ public class TaskList {
      *
      * @param listIndex Index of the task in the list to be marked as done.
      */
-    protected void markTaskDone(int listIndex) throws IOException {
+    protected String markTaskDone(int listIndex) throws IOException {
             Task task = list.get(listIndex - 1);
             task.markDone();
-            System.out.printf("Hurray! %s is now done.\n", task.getTask());
-            System.out.println(task + "\n");
+            //System.out.printf("Hurray! %s is now done.\n", task.getTask());
+            //System.out.println(task + "\n");
             storage.saveTasks(toString());
+            return String.format("Hurray! %s is now done.\n%s\n", task.getTask(), task);
     }
 
     /**
@@ -54,13 +56,16 @@ public class TaskList {
      *
      * @param listIndex Index of the task in the list to be marked deleted.
      */
-    protected void deleteTask(int listIndex) throws IOException {
+    protected String deleteTask(int listIndex) throws IOException {
             Task task = list.get(listIndex - 1);
             list.remove(listIndex - 1);
-            System.out.printf("Okay %s has been deleted.\n", task.getTask());
-            System.out.println(task);
-            System.out.println("You now have " + list.size() + " tasks.\n");
+            //System.out.printf("Okay %s has been deleted.\n", task.getTask());
+            //System.out.println(task);
+            //System.out.println("You now have " + list.size() + " tasks.\n");
             storage.saveTasks(toString());
+            return String.format("Okay %s has been deleted.\n", task.getTask())
+                    + task + "\n"
+                    + "You now have " + list.size() + " tasks.\n";
     }
 
     /**
@@ -68,20 +73,19 @@ public class TaskList {
      *
      * @param keyword The keyword to be matched.
      */
-    protected void findTask(String keyword) {
-        String result = "Here are the matching tasks I could find:\n";
+    protected String findTask(String keyword) {
+        String uiMessage = "Here are the matching tasks I could find:\n";
         int count = 1;
         for (Task task : list) {
             String description = task.getTask();
             if (description.contains(keyword)) {
-                result += count++ + "." + task.toString() + "\n";
+                uiMessage += count++ + "." + task.toString() + "\n";
             }
         }
         if (count == 1) {
-            System.out.println("Sorry, I could not find any matching tasks :(\n");
-        } else {
-            System.out.println(result);
+            uiMessage = "Sorry, I could not find any matching tasks :(\n";
         }
+        return uiMessage;
     }
 
     @Override
