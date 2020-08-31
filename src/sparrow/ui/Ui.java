@@ -1,5 +1,8 @@
-package sparrow;
+package sparrow.ui;
 
+import sparrow.data.task.Task;
+
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -7,10 +10,14 @@ import java.util.Scanner;
  */
 public class Ui {
 
+    private static final String DIVIDER = "    ________________________________________";
+
+    private static final String MESSAGE_PREFIX = "    ";
+
     /**
      * Welcomes the user to the program.
      */
-    public static void greet() {
+    public void greet() {
         String welcome = "  _  _ _   ___ _                    \n" +
                 " | || (_) |_ _( )_ __               \n" +
                 " | __ | |  | ||/| '  \\              \n" +
@@ -20,21 +27,34 @@ public class Ui {
                 " |___/ .__/\\__,_|_| |_| \\___/\\_/\\_/ \n" +
                 "     |_|                            ";
         System.out.println(welcome);
-        reply("How can I help ye?");
+        replyToUser("How can I help ye?");
     }
+
 
     /**
      * Sends a reply to the user in a standard format.
      * @param message Reply to be formatted.
      */
-    public static void reply(String message) {
-        System.out.println("    ________________________________________");
+    public void replyToUser(String message) {
+        System.out.println(DIVIDER);
         Scanner sc = new Scanner(message);
         while (sc.hasNextLine()) {
             String line = sc.nextLine();
-            System.out.println("      " + line);
+            System.out.println(MESSAGE_PREFIX + line);
         }
-        System.out.println("    ________________________________________");
+        System.out.println(DIVIDER);
         sc.close();
+    }
+
+    /**
+     * Converts input list to string.
+     */
+    public String taskListToString(ArrayList<Task> tasks) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < tasks.size(); i++) {
+            String temp = String.format("%d. %s\n", i + 1, tasks.get(i));
+            sb.append(temp);
+        }
+        return sb.toString();
     }
 }

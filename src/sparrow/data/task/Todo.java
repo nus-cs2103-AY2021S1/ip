@@ -1,4 +1,4 @@
-package sparrow;
+package sparrow.data.task;
 
 /**
  * Represents a Todo.

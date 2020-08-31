@@ -1,4 +1,4 @@
-package sparrow;
+package sparrow.data.task;
 
 /**
  * Represents a Task in the task list. Child classes include Todo, Deadline and Event.
