@@ -1,9 +1,9 @@
-package duke.Commands;
+package duke.command;
 
-import duke.Exceptions.DukeException;
-import duke.Storage.Storage;
-import duke.Tasks.TaskList;
-import duke.Ui.Ui;
+import duke.exception.DukeException;
+import duke.storage.Storage;
+import duke.task.TaskList;
+import duke.ui.Ui;
 
 /**
  * A command to find tasks from task list via a keyword.

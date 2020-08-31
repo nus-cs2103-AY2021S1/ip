@@ -1,12 +1,12 @@
-package duke.Commands;
+package duke.command;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-import duke.Exceptions.DukeException;
-import duke.Storage.Storage;
-import duke.Tasks.TaskList;
-import duke.Ui.Ui;
+import duke.exception.DukeException;
+import duke.storage.Storage;
+import duke.task.TaskList;
+import duke.ui.Ui;
 
 
 
@@ -64,15 +64,15 @@ public class AddCommand extends Command {
         switch (taskType) {
         case "todo" :
             tasks.addTodo(ui, this.description);
-            storage.Save(tasks.convertToFile());
+            storage.save(tasks.convertToFile());
             break;
         case "event" :
             tasks.addEvent(ui, this.description, this.localDate, this.localTime);
-            storage.Save(tasks.convertToFile());
+            storage.save(tasks.convertToFile());
             break;
         case "deadline" :
             tasks.addDeadline(ui, this.description, this.localDate, this.localTime);
-            storage.Save(tasks.convertToFile());
+            storage.save(tasks.convertToFile());
             break;
         default:
             break;

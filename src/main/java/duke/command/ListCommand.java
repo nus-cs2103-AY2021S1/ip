@@ -1,8 +1,8 @@
-package duke.Commands;
+package duke.command;
 
-import duke.Storage.Storage;
-import duke.Tasks.TaskList;
-import duke.Ui.Ui;
+import duke.storage.Storage;
+import duke.task.TaskList;
+import duke.ui.Ui;
 
 /**
  * A command to display the tasks in the task list.

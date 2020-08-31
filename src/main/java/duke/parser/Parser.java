@@ -1,18 +1,18 @@
-package duke.Parser;
+package duke.parser;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-import duke.Commands.AddCommand;
-import duke.Commands.Command;
-import duke.Commands.DeleteCommand;
-import duke.Commands.DoneCommand;
-import duke.Commands.ExitCommand;
-import duke.Commands.FindCommand;
-import duke.Commands.ListCommand;
-import duke.Exceptions.DukeException;
+import duke.command.AddCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.ExitCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
+import duke.exception.DukeException;
 
 /**
  * Parses and understands user commands.

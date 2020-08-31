@@ -1,4 +1,4 @@
-package duke.Exceptions;
+package duke.exception;
 
 /**
  * Creates a DukeException to handle duke related errors

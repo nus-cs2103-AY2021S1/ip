@@ -1,19 +1,20 @@
-package duke.Commands;
+package duke.command;
 
-import duke.Exceptions.DukeException;
-import duke.Storage.Storage;
-import duke.Tasks.Deadline;
-import duke.Tasks.Event;
-import duke.Tasks.TaskList;
-import duke.Tasks.ToDo;
-import duke.Ui.Ui;
-
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
+
+import duke.exception.DukeException;
+import duke.storage.Storage;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.TaskList;
+import duke.task.ToDo;
+import duke.ui.Ui;
 
 public class AddCommandTest {
     @Test
@@ -37,7 +38,8 @@ public class AddCommandTest {
         Ui ui = new Ui();
         Storage storage = new Storage("./src/test/java/duke/Data/data.txt", "./src/test/java/duke/Data");
         try {
-            Command addCommand = new AddCommand("deadline", "pass test 2", LocalDate.parse("2020-12-01"), LocalTime.parse("12:00"));
+            Command addCommand = new AddCommand("deadline", "pass test 2",
+                    LocalDate.parse("2020-12-01"), LocalTime.parse("12:00"));
             addCommand.execute(list, ui, storage);
         } catch (DukeException e) {
             System.out.println(e.getMessage());
@@ -52,7 +54,8 @@ public class AddCommandTest {
         Ui ui = new Ui();
         Storage storage = new Storage("./src/test/java/duke/Data/data.txt", "./src/test/java/duke/Data");
         try {
-            Command addCommand = new AddCommand("event", "pass test 3", LocalDate.parse("2029-12-01"), LocalTime.parse("17:00"));
+            Command addCommand = new AddCommand("event", "pass test 3",
+                    LocalDate.parse("2029-12-01"), LocalTime.parse("17:00"));
             addCommand.execute(list, ui, storage);
         } catch (DukeException e) {
             System.out.println(e.getMessage());

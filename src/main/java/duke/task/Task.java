@@ -1,6 +1,6 @@
-package duke.Tasks;
+package duke.task;
 
-import duke.Exceptions.DukeException;
+import duke.exception.DukeException;
 
 /**
  * An abstract class providing the blueprint for a task.

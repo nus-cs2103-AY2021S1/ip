@@ -1,12 +1,12 @@
-package duke.Tasks;
+package duke.task;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
-import duke.Exceptions.DukeException;
-import duke.Ui.Ui;
+import duke.exception.DukeException;
+import duke.ui.Ui;
 
 /**
  * Initialises a list to store all tasks captured in duke.

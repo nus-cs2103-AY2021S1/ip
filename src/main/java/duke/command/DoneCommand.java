@@ -1,25 +1,25 @@
-package duke.Commands;
+package duke.command;
 
-import duke.Exceptions.DukeException;
-import duke.Storage.Storage;
-import duke.Tasks.TaskList;
-import duke.Ui.Ui;
+import duke.exception.DukeException;
+import duke.storage.Storage;
+import duke.task.TaskList;
+import duke.ui.Ui;
 
 /**
- * A command to delete a specific task.
+ * A command to mark a task as completed.
  */
-public class DeleteCommand extends Command {
+public class DoneCommand extends Command {
 
     /**
-     * Index of the task to be deleted.
+     * Index of the task to be completed.
      */
     private int index;
 
     /**
-     * Creates a delete command with the appropriate task index.
+     * Creates a done command with the appropriate task index.
      * @param size Task index.
      */
-    public DeleteCommand(int size) {
+    public DoneCommand(int size) {
         this.index = size;
     }
 
@@ -33,8 +33,8 @@ public class DeleteCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (index >= 0 && index < tasks.listSize()) {
-            tasks.taskDelete(index, ui);
-            storage.Save(tasks.convertToFile());
+            tasks.taskDone(index, ui);
+            storage.save(tasks.convertToFile());
         } else {
             throw new DukeException("    Invalid index entry for done command.");
         }

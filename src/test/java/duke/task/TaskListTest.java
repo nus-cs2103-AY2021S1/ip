@@ -1,8 +1,12 @@
-package duke.Tasks;
+package duke.task;
 
-import duke.Ui.Ui;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+
+import duke.ui.Ui;
 
 public class TaskListTest {
 
@@ -23,9 +27,9 @@ public class TaskListTest {
         list.addTodo(new Ui(), "item 2");
         list.addTodo(new Ui(), "item 3");
 
-        assertFalse( list.getListOfTasks().get(1) instanceof Deadline);
-        assertFalse( list.getListOfTasks().get(1) instanceof Event);
-        assertTrue( list.getListOfTasks().get(1) instanceof ToDo);
+        assertFalse (list.getListOfTasks().get(1) instanceof Deadline);
+        assertFalse(list.getListOfTasks().get(1) instanceof Event);
+        assertTrue(list.getListOfTasks().get(1) instanceof ToDo);
     }
 
     @Test

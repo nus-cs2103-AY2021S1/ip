@@ -1,11 +1,11 @@
 package duke;
 
-import duke.Commands.Command;
-import duke.Exceptions.DukeException;
-import duke.Parser.Parser;
-import duke.Storage.Storage;
-import duke.Tasks.TaskList;
-import duke.Ui.Ui;
+import duke.command.Command;
+import duke.exception.DukeException;
+import duke.parser.Parser;
+import duke.storage.Storage;
+import duke.task.TaskList;
+import duke.ui.Ui;
 
 /**
  * Initialises a functional chat-bot to save and display various tasks added by the user.
@@ -32,7 +32,7 @@ public class Duke {
         storage = new Storage(filePath, folderPath);
 
         try {
-            tasks = new TaskList(storage.Load());
+            tasks = new TaskList(storage.load());
         } catch (DukeException e) {
             ui.showLoadingError(e.getMessage());
             tasks = new TaskList();

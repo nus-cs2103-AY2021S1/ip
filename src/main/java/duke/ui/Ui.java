@@ -1,8 +1,8 @@
-package duke.Ui;
+package duke.ui;
 
 import java.util.Scanner;
 
-import duke.Tasks.Task;
+import duke.task.Task;
 
 /**
  * Contains and executes all user interaction methods.

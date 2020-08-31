@@ -1,4 +1,4 @@
-package duke.Storage;
+package duke.storage;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -8,7 +8,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import duke.Exceptions.DukeException;
+import duke.exception.DukeException;
 
 /**
  * Initialises a storage object to save and load from the data file for duke.
@@ -59,7 +59,7 @@ public class Storage {
      * @return ArrayList of string to be converted into tasks.
      * @throws DukeException
      */
-    public ArrayList<String> Load() throws DukeException {
+    public ArrayList<String> load() throws DukeException {
         File savedFolder = new File(folderPath);
         File savedFile = new File(filePath);
 
@@ -97,7 +97,7 @@ public class Storage {
      * @param listOfTasks List of tasks to be saved to data file.
      * @throws DukeException
      */
-    public void Save(ArrayList<String> listOfTasks) throws DukeException {
+    public void save(ArrayList<String> listOfTasks) throws DukeException {
         try {
             FileWriter writer = new FileWriter(filePath);
             for (String task : listOfTasks) {
