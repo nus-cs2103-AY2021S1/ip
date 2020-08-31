@@ -6,22 +6,35 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.scene.layout.Region;
+import ui.DialogBox;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 
 
 public class Launcher extends Application{
 
+
+    private Image user = new Image(new FileInputStream("data/images/gunter.png"));
+    private Image king = new Image(new FileInputStream("C:/Users/Austi/Desktop/GitHub/ip/data/images/king.jpg"));
+    private TextField userInput = new TextField();
+    private VBox dialogContainer = new VBox();
+
+    public Launcher() throws FileNotFoundException {
+    }
+
     @Override
     public void start(Stage stage) {
         //The container for the content of the chat to scroll.
-        ScrollPane scrollPane = new ScrollPane();
-        VBox dialogContainer = new VBox();
+        ScrollPane scrollPane = new ScrollPane();;
         scrollPane.setContent(dialogContainer);
 
-        TextField userInput = new TextField();
         Button sendButton = new Button("Send");
 
         AnchorPane mainLayout = new AnchorPane();
@@ -61,25 +74,37 @@ public class Launcher extends Application{
         //Scroll down to the end every time dialogContainer's height changes.
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
 
-
+        //Part 3. Add functionality to handle user input.
         sendButton.setOnMouseClicked((event) -> {
-            dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
-            userInput.clear();
+            handleUserInput();
         });
 
         userInput.setOnAction((event) -> {
-            dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
-            userInput.clear();
+            handleUserInput();
         });
-
         stage.show();
     }
-    private Label getDialogLabel(String text) {
-        // You will need to import `javafx.scene.control.Label`.
-        Label textToAdd = new Label(text);
-        textToAdd.setWrapText(true);
+    /**
+     * Iteration 2:
+     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
+     * the dialog container. Clears the user input after processing.
+     */
+    private void handleUserInput() {
+        Label userText = new Label(userInput.getText());
+        Label dukeText = new Label(getResponse(userInput.getText()));
+        dialogContainer.getChildren().addAll(
+                DialogBox.getKingDialog(dukeText, new ImageView(king)),
+                DialogBox.getUserDialog(userText, new ImageView(user))
+        );
+        userInput.clear();
+    }
 
-        return textToAdd;
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    private String getResponse(String input) {
+        return "Duke heard: " + input;
     }
 
     public static void main(String[] args) {
