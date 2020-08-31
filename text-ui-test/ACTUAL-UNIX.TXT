@@ -22,56 +22,60 @@ added: [D][✘] project (by: May 22 2020)
 Now you have 2 tasks in the list.
 added: [E][✘] meeting tomorrow (at: home)
 Now you have 3 tasks in the list.
-**************************************************************************
-Here are the tasks in your list:
-1.[T][✘] eat chocolate
-2.[D][✘] project (by: May 22 2020)
-3.[E][✘] meeting tomorrow (at: home)
-**************************************************************************
-Nice! I've marked this task as done:
-[D][✓] project (by: May 22 2020)
-**************************************************************************
-Here are the tasks in your list:
-1.[T][✘] eat chocolate
-2.[D][✓] project (by: May 22 2020)
-3.[E][✘] meeting tomorrow (at: home)
-**************************************************************************
 added: [E][✘] run a marathon (at: sentosa)
 Now you have 4 tasks in the list.
 --------------------------------------------------------------------------
 ☹ OOPS! The deadline in an incorrect format! Please indicate the date as <yyyy-mm-dd>
 --------------------------------------------------------------------------
-added: [T][✘] throw chocolate wrapper
+added: [T][✘] write book
 Now you have 5 tasks in the list.
 added: [T][✘] wash dishes
 Now you have 6 tasks in the list.
+added: [E][✘] book event (at: library)
+Now you have 7 tasks in the list.
 **************************************************************************
 Here are the tasks in your list:
 1.[T][✘] eat chocolate
-2.[D][✓] project (by: May 22 2020)
+2.[D][✘] project (by: May 22 2020)
 3.[E][✘] meeting tomorrow (at: home)
 4.[E][✘] run a marathon (at: sentosa)
-5.[T][✘] throw chocolate wrapper
+5.[T][✘] write book
 6.[T][✘] wash dishes
+7.[E][✘] book event (at: library)
 **************************************************************************
+Nice! I've marked this task as done:
+[D][✓] project (by: May 22 2020)
 Nice! I've marked this task as done:
 [E][✓] run a marathon (at: sentosa)
 The following task has been deleted:
-[T][✘] throw chocolate wrapper
+[E][✘] meeting tomorrow (at: home)
 --------------------------------------------------------------------------
 ☹ Please indicate which task you'd like to delete!
 OOPS! The keyword 'delete' is used to delete tasks as follows:   delete <task index>
-Nice! I've marked this task as done:
-[E][✓] meeting tomorrow (at: home)
+**************************************************************************
+Here are the matching tasks in your list:
+1.[T][✘] write book
+2.[E][✘] book event (at: library)
+**************************************************************************
+**************************************************************************
+Here are the matching tasks in your list:
+1.[T][✘] eat chocolate
+2.[D][✓] project (by: May 22 2020)
+3.[E][✓] run a marathon (at: sentosa)
+4.[T][✘] write book
+5.[T][✘] wash dishes
+6.[E][✘] book event (at: library)
+**************************************************************************
 OOPS! This task index does not exist! Type 'list' to check out your tasks.
 OOPS! This task index does not exist! Type 'list' to check out your tasks.
 **************************************************************************
 Here are the tasks in your list:
 1.[T][✘] eat chocolate
 2.[D][✓] project (by: May 22 2020)
-3.[E][✓] meeting tomorrow (at: home)
-4.[E][✓] run a marathon (at: sentosa)
+3.[E][✓] run a marathon (at: sentosa)
+4.[T][✘] write book
 5.[T][✘] wash dishes
+6.[E][✘] book event (at: library)
 **************************************************************************
 --------------------------------------------------------------------------
 ☹ OOPS! The description of todo cannot be empty.
@@ -92,9 +96,10 @@ Here are the tasks in your list:
 Here are the tasks in your list:
 1.[T][✘] eat chocolate
 2.[D][✓] project (by: May 22 2020)
-3.[E][✓] meeting tomorrow (at: home)
-4.[E][✓] run a marathon (at: sentosa)
+3.[E][✓] run a marathon (at: sentosa)
+4.[T][✘] write book
 5.[T][✘] wash dishes
+6.[E][✘] book event (at: library)
 **************************************************************************
  _____  ___  ___  _____
 |  __ \ \  \/  / |  ___|
