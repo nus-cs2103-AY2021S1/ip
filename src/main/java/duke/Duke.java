@@ -1,15 +1,12 @@
 package duke;
 
-import duke.command.Command;
-import duke.command.ExitCommand;
-import duke.exception.DukeException;
-import duke.ui.TextUi;
-import duke.ui.Ui;
-
 import java.io.IOException;
 import java.util.Scanner;
 
-
+import duke.command.Command;
+import duke.exception.DukeException;
+import duke.ui.TextUi;
+import duke.ui.Ui;
 /**
  * Drives the personal assistant using a UI, along with a parser to make sense of user inputs and executing commands on
  * a list of tasks that are read/written from local storage
@@ -19,7 +16,6 @@ public class Duke extends Thread {
     private final Ui ui;
     private boolean canExit;
     private final Parser parser;
-    
     /**
      * Creates UI and loads saved tasks from hard drive along with Duke
      */
@@ -35,7 +31,6 @@ public class Duke extends Thread {
             this.ui.displayLoadError();
             this.tasks = new TaskList();
         }
-        
         currentRuntime.addShutdownHook(new Thread(() -> {
             try {
                 Storage.save(tasks);
@@ -45,7 +40,6 @@ public class Duke extends Thread {
             this.ui.bidFarewell();
         }));
     }
-    
     /**
      * Starts the application, invokes UI interaction and execution of Commands
      *
@@ -63,13 +57,11 @@ public class Duke extends Thread {
             } catch (DukeException e) {
                 this.ui.displayError(e.getMessage());
             }
-            
         }
         sc.close();
         Storage.save(tasks);
         // todo: handle the ctrl-c event handling for sudden
     }
-    
     public static void main(String[] args) throws IOException {
         new Duke().runDuke();
     }

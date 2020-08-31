@@ -1,21 +1,18 @@
 package duke.ui;
 
-import duke.enums.Message;
-
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import duke.enums.Message;
+
 public class TextUi implements Ui {
-    
     // constant strings:
     private static final String LINE_BREAK = "____________________________________________________________";
     private static final String INDENT = "    ";
-    
     @Override
     public String readCommand(Scanner sc) {
         return sc.nextLine();
     }
-    
     @Override
     public void greet() {
         ArrayList<String> greeting = new ArrayList<>();
@@ -23,32 +20,28 @@ public class TextUi implements Ui {
         greeting.add("What can I do for you?");
         display(greeting);
     }
-    
     @Override
     public void bidFarewell() {
         ArrayList<String> lines = new ArrayList<>();
         lines.add(Message.EXIT_GREETING.getMsg());
         this.display(lines);
     }
-    
     @Override
     public void display(ArrayList<String> lines) {
         printResponse(prettify(lines));
     }
-    
     @Override
     public void displayError(String message) {
         ArrayList<String> lines = new ArrayList<>();
         lines.add(message);
         this.display(lines);
     }
-    
     @Override
     public void displayLoadError() { //todo: add this error display
     }
-    
     /**
      * Prints out collection of lines to the Command Line
+     *
      * @param response Collection of confirmed lines
      */
     private static void printResponse(ArrayList<String> response) {
@@ -56,8 +49,6 @@ public class TextUi implements Ui {
             System.out.println(s);
         }
     }
-    
-    
     /**
      * Makes UI message lines pretty by encapsulating in line breaks and indenting them
      *
@@ -70,7 +61,6 @@ public class TextUi implements Ui {
         rawResponse.add(rawResponse.size(), LINE_BREAK);
         return indentLines(rawResponse);
     }
-    
     /**
      * Indents a collection of lines
      *
@@ -86,5 +76,4 @@ public class TextUi implements Ui {
         }
         return result;
     }
-    
 }

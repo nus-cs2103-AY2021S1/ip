@@ -1,20 +1,20 @@
 package duke.command;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
+
 import duke.TaskList;
 import duke.exception.DukeException;
 import duke.ui.TextUi;
 import duke.ui.Ui;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+
 
 public class FindCommandTest {
-    
-    public static TaskList testTaskList = new TaskList();
-    public static Ui ui = new TextUi();
-    
+    private static TaskList testTaskList = new TaskList();
+    private static final Ui ui = new TextUi();
     public static void initTest() throws DukeException {
         String[] parsedInput1 = {"T", "kill me now"};
         String[] parsedInput2 = {"T", "i want me ice cream"};
@@ -27,7 +27,6 @@ public class FindCommandTest {
         testTaskList.addEntry(parsedInput4, "D");
         testTaskList.completeTask(2);
     }
-    
     @ParameterizedTest
     @ValueSource(strings = {"find want", "find i", "find me", "find xxx"})
     public void findSuccessfully_queryTaskList_returnsTrue(String s) throws DukeException {
@@ -35,9 +34,7 @@ public class FindCommandTest {
         FindCommand cmd = new FindCommand(s);
         cmd.execute(testTaskList, ui);
         testTaskList = new TaskList();
-        
     }
-    
     @ParameterizedTest
     @ValueSource(strings = {"i", "world i", "world ", "hi"})
     public void testHelperContains_matchExactSearchTerm_returnsTrue(String query) {

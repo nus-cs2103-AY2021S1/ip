@@ -1,5 +1,7 @@
 package duke;
 
+import java.util.StringTokenizer;
+
 import duke.command.AddCommand;
 import duke.command.Command;
 import duke.command.DeleteCommand;
@@ -11,18 +13,14 @@ import duke.enums.CommandWord;
 import duke.enums.Message;
 import duke.exception.DukeException;
 
-import java.util.StringTokenizer;
 
 /**
  * Parses the user input to determine what command the user intends to make
  */
 public class Parser {
-    
     private static final String DEADLINE_DELIMITER = "/by";
     private static final String EVENT_DELIMITER = "/at";
     private static final String TIME_DELIMITER = "-";
-    
-    
     /**
      * Returns the correct command after parsing the user's input
      *
@@ -58,7 +56,6 @@ public class Parser {
             }
         }
     }
-    
     /**
      * Parses user input that is related to the done and delete commands
      *
@@ -85,13 +82,12 @@ public class Parser {
                ? new DeleteCommand(parsedInput)
                : new DoneCommand(parsedInput);
     }
-    
     /**
      * Parses user input that is related to the todo
      *
      * @param input User input related to todo command
      *
-     * @return String array of format: {<"T"><description of todo>}
+     * @return String[] array of format: description of todo
      *
      * @throws DukeException If no description is passed in
      */
@@ -107,13 +103,12 @@ public class Parser {
         }
         return new String[]{"T", description.toString().stripTrailing()};
     }
-    
     /**
      * Parses user input that is related to the Deadline command
      *
      * @param input User input related to Deadline command
      *
-     * @return String array of format: {<"D"><description of Deadline><String representation for the date>}
+     * @return String array of format: description of Deadline String representation for the date
      *
      * @throws DukeException If the format is wrong or if it lacks proper description
      */
@@ -137,13 +132,12 @@ public class Parser {
                             description,
                             dateString};
     }
-    
     /**
      * Parses user input that is related to the Event command
      *
      * @param input User input related to Event command
      *
-     * @return String array of format: {<"E"><description of Event><String representation for the date><start time><end
+     * @return String array of format: "E" description of Event String representation for the date start time end
      *         time>}
      *
      * @throws DukeException If the format is wrong or if it lacks proper description
@@ -156,18 +150,15 @@ public class Parser {
         }
         String[] words = separatedInput[0].split(" ");
         String[] timeInfo = separatedInput[1].split(" ");
-        
         String duration = timeInfo[timeInfo.length - 1];
         String[] separatedTime = duration.split(TIME_DELIMITER);
         if (separatedTime.length <= 1) {
             throw new DukeException(Message.ERROR_EVENT_TIME.getMsg());
         }
-        
         StringBuilder dateStringBuilder = new StringBuilder();
         for (int i = 0; i < timeInfo.length - 2; i++) {
             dateStringBuilder.append(timeInfo[i]).append(" ");
         }
-        
         dateStringBuilder.append(timeInfo[timeInfo.length - 2]);
         String dateString = dateStringBuilder.toString();
         if (dateString.isEmpty()) {
@@ -186,7 +177,6 @@ public class Parser {
                             startTime,
                             endTime};
     }
-    
     /**
      * Checks if input is a string representation of an integer
      *
@@ -197,5 +187,4 @@ public class Parser {
     private boolean isInteger(String s) {
         return s.matches("\\d+");
     }
-    
 }

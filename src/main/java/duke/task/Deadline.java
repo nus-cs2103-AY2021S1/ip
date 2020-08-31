@@ -1,13 +1,13 @@
 package duke.task;
 
-import duke.enums.DateTimeFormat;
-import duke.enums.Message;
-import duke.exception.DukeException;
-
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+import duke.enums.DateTimeFormat;
+import duke.enums.Message;
+import duke.exception.DukeException;
 
 /**
  * Contains information about a Task to be done by a particular date and time along with its description
@@ -16,12 +16,19 @@ public class Deadline extends Task {
     private static final String DELIMITER = "by";
     private LocalDate date;
     private LocalTime time;
-    
+    /**
+     * Constructs the Deadline object
+     *
+     * @param description String description attribute for Deadline
+     * @param dateString  String representation for the date
+     * @param newTaskID   Task number to assign to the new deadline task
+     *
+     * @throws DukeException If there are issues writing onto the savedData upon adding
+     */
     public Deadline(String description, String dateString, int newTaskID) throws DukeException {
         super(description, newTaskID);
         setDateTime(dateString);
     }
-    
     /**
      * Creates a Deadline by extracting out relevant information from the parsed user input
      *
@@ -34,20 +41,16 @@ public class Deadline extends Task {
         String dateString = parsedInput[2];
         return new Deadline(description, dateString, newTaskID);
     }
-    
     @Override
     public boolean isComplete() {
         return super.isComplete();
     }
-    
     @Override
     public String toString() {
         String date = this.date.format(DateTimeFormat.DATE_OUTPUT_FORMATTER1.getFormat());
         String time = this.time.format(DateTimeFormat.TIME_FORMATTER.getFormat());
-        return "[D]" + super.toString()
-                + " (" + DELIMITER + ":" + date + ", time:" + time + ")";
+        return "[D]" + super.toString() + " (" + DELIMITER + ":" + date + ", time:" + time + ")";
     }
-    
     /**
      * Sets the Date and Time attributes of a Deadline by choosing the correct formatter and formatting the user input
      * information for these fields
@@ -62,7 +65,6 @@ public class Deadline extends Task {
             String[] dateTimeSeparated = dateString.split(" ");
             String date = dateTimeSeparated[0];
             String time = dateTimeSeparated[1];
-            
             DateTimeFormatter chosenDateFormatter = chooseDateFormatter(date);
             DateTimeFormatter chosenTimeFormatter = chooseTimeFormatter(time);
             LocalDate localDate = LocalDate.parse(date, chosenDateFormatter);
@@ -74,7 +76,6 @@ public class Deadline extends Task {
             // todo: send this throwing of exception to the parser
         }
     }
-    
     /**
      * Filters through the Enumeration for DateTime formatters and selects the correct Formatter based on the format
      * that the user inputs the Date information in
@@ -86,18 +87,16 @@ public class Deadline extends Task {
      * @throws DukeException If the User's date format isn't supported by the existing Formatters in the Enumeration
      */
     private DateTimeFormatter chooseDateFormatter(String date) throws DukeException {
-        return DateTimeFormat.getFormatterStream().filter
-                (formatter -> {
-                    try {
-                        LocalDate.parse(date, formatter);
-                        return true;
-                    } catch (DateTimeParseException ignored) {
-                        // ON PURPOSE: ignored because we only want the formatter that handles things properly
-                    }
-                    return false;
-                }).findAny().orElseThrow(() -> new DukeException(Message.ERROR_NO_DATE_FORMATTER.getMsg()));
+        return DateTimeFormat.getFormatterStream().filter(formatter -> {
+            try {
+                LocalDate.parse(date, formatter);
+                return true;
+            } catch (DateTimeParseException ignored) {
+                // ON PURPOSE: ignored because we only want the formatter that handles things properly
+            }
+            return false;
+        }).findAny().orElseThrow(() -> new DukeException(Message.ERROR_NO_DATE_FORMATTER.getMsg()));
     }
-    
     /**
      * Filters through the Enumeration for DateTime formatters and selects the correct Formatter based on the format
      * that the user inputs the Date information in
@@ -109,17 +108,14 @@ public class Deadline extends Task {
      * @throws DukeException If the User's time format isn't supported by the existing Formatters in the Enumeration
      */
     private DateTimeFormatter chooseTimeFormatter(String time) throws DukeException {
-        return DateTimeFormat.getFormatterStream().filter
-                (formatter -> {
-                    try {
-                        LocalTime.parse(time, formatter);
-                        return true;
-                    } catch (Exception ignored) {
-                        // ON PURPOSE: ignored because we only want the formatter that handles things properly
-                    }
-                    return false;
-                }).findAny().orElseThrow(() -> new DukeException(Message.ERRR_NO_TIME_FORMATTER.getMsg()));
+        return DateTimeFormat.getFormatterStream().filter(formatter -> {
+            try {
+                LocalTime.parse(time, formatter);
+                return true;
+            } catch (Exception ignored) {
+                // ON PURPOSE: ignored because we only want the formatter that handles things properly
+            }
+            return false;
+        }).findAny().orElseThrow(() -> new DukeException(Message.ERRR_NO_TIME_FORMATTER.getMsg()));
     }
 }
-    
-

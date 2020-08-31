@@ -1,13 +1,13 @@
 package duke;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+
 import duke.exception.DukeException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
-
-import java.io.Serializable;
-import java.util.ArrayList;
 
 // todo: find a better way to assign numbers to the tasks. the current error is that after loading,
 //  Task class is restarting the counter from 0. changed the counter to be kept at TaskList, but for some
@@ -20,13 +20,13 @@ import java.util.ArrayList;
 public class TaskList implements Serializable {
     private final ArrayList<Task> taskList;
     private int currentTaskCount;
-    
+    /**
+     * Constructs a TaskList of tasks
+     */
     public TaskList() {
         this.taskList = new ArrayList<>();
         this.currentTaskCount = 0;
     }
-    
-    
     /**
      * Creates a task and adds it as an entry to the tasklist.
      *
@@ -57,7 +57,6 @@ public class TaskList implements Serializable {
             return "ugh how did we get here";
         }
     }
-    
     /**
      * Marks a Task as complete and modifies the TaskList
      *
@@ -72,7 +71,6 @@ public class TaskList implements Serializable {
         taskList.set(taskID - 1, taskList.get(taskID - 1).complete());
         return taskList.get(taskID - 1).toString();
     }
-    
     /**
      * Deletes the specified Task and modifies the TaskList by decrementing the IDs of the remaining tasks
      *
@@ -93,7 +91,6 @@ public class TaskList implements Serializable {
         Task.decrementTaskCount();
         return toDelete.toString();
     }
-    
     /**
      * Verifies the validity of the task to be handled, whether it exists in the TaskList or not
      *
@@ -108,11 +105,9 @@ public class TaskList implements Serializable {
             throw new DukeException("invalid task: task id < 1");
         }
     }
-    
     public ArrayList<Task> getAllTasks() {
         return taskList;
     }
-    
     /**
      * Returns the String description of the remaining undone tasks in the list
      *
@@ -129,7 +124,6 @@ public class TaskList implements Serializable {
                                                     ? " undone task"
                                                     : " undone tasks") + " in the list.";
     }
-    
     public int getCurrentTaskCount() {
         return this.currentTaskCount;
     }

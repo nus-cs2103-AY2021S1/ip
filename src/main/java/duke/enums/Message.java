@@ -28,18 +28,13 @@ public enum Message {
     ERROR_EVENT_TIME("invalid event command: you need to pass in a start and end time for your event"),
     ERROR_EVENT_DATE("invalid event command: you didn't pass in the date!"),
     INVALID;
-    
-    
-    private String msg;
     private static Map<String, Message> keyableMap;
-    
+    private String msg;
     Message() {
     } // constructor for INVALID
-    
     Message(String msg) {
         this.msg = msg;
     }
-    
     /*
      * An Initialisation for the Hashmap that allows us to access keys from their values (message-label pairs)
      */
@@ -50,7 +45,6 @@ public enum Message {
         }
         Message.keyableMap = messageLabelMap;
     }
-    
     /**
      * Returns the string representation for that Message
      *
@@ -59,10 +53,7 @@ public enum Message {
     public String getMsg() {
         return this.msg;
     }
-    
     public static Message getLabel(String msg) {
         return keyableMap.getOrDefault(msg, Message.INVALID);
     }
-    
-    
 }

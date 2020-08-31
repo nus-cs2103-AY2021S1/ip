@@ -14,12 +14,10 @@ import java.nio.file.Paths;
  * Handles the loading and saving of data onto the local storage by serialising the TaskList object
  */
 public class Storage {
-    
     // hardcoded for now:
-    final public static Path ROOT_PATH = Paths.get("").toAbsolutePath();
-    final public static Path DATA_DIR_PATH = Paths.get(ROOT_PATH.toAbsolutePath().toString(), "data");
-    final public static Path SAVE_FILE_PATH = Paths.get(DATA_DIR_PATH.toAbsolutePath().toString(), "savedData");
-    
+    public static final Path ROOT_PATH = Paths.get("").toAbsolutePath();
+    public static final Path DATA_DIR_PATH = Paths.get(ROOT_PATH.toAbsolutePath().toString(), "data");
+    public static final Path SAVE_FILE_PATH = Paths.get(DATA_DIR_PATH.toAbsolutePath().toString(), "savedData");
     /**
      * Saves the current TaskList object by serialising it and writing onto the default file
      *
@@ -39,7 +37,6 @@ public class Storage {
             ioe.printStackTrace();
         }
     }
-    
     /**
      * Reads saved data from the default save location and returns TaskList, if it exists, or constructs a new TaskList
      * for Duke to use
@@ -62,7 +59,6 @@ public class Storage {
         }
         return savedTasks;
     }
-    
     /**
      * Initialises the Storage location by creating the Data dir and SaveFile, if required
      *
@@ -72,7 +68,6 @@ public class Storage {
         createDataDir();
         createSaveFile();
     }
-    
     /**
      * Creates the data directory if that path doesn't exist
      *
@@ -82,9 +77,7 @@ public class Storage {
         if (!Files.exists(DATA_DIR_PATH)) {
             Files.createDirectory(DATA_DIR_PATH);
         }
-        
     }
-    
     /**
      * Creates the save file if the directory exists but file doesn't
      *
@@ -96,5 +89,4 @@ public class Storage {
             Files.createFile(SAVE_FILE_PATH);
         }
     }
-    
 }

@@ -1,24 +1,21 @@
 package duke.command;
 
+import java.io.IOException;
+import java.util.ArrayList;
+
 import duke.Storage;
 import duke.TaskList;
 import duke.enums.Message;
 import duke.exception.DukeException;
 import duke.ui.Ui;
-
-import java.io.IOException;
-import java.util.ArrayList;
-
 /**
  * Marks a specific task from the TaskList as completed and invokes appropriate UI messages about it
  */
 public class DoneCommand implements Command {
     private final String[] parsedInput;
-    
     public DoneCommand(String[] parsedInput) {
         this.parsedInput = parsedInput;
     }
-    
     /**
      * Prints out a done message and displays the newly done task
      *
@@ -35,7 +32,6 @@ public class DoneCommand implements Command {
         ui.display(lines);
         Storage.save(tasks);
     }
-    
     @Override
     public boolean isExit() {
         return false;

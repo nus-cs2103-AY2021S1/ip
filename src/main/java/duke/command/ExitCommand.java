@@ -7,10 +7,7 @@ import duke.ui.Ui;
  * Exits the Duke program
  */
 public class ExitCommand implements Command {
-    
-    public ExitCommand() {
-    }
-    
+    public ExitCommand() {}
     /**
      * Initiates the System shutdown for the VM
      *
@@ -21,7 +18,6 @@ public class ExitCommand implements Command {
     public void execute(TaskList tasks, Ui ui) {
         System.exit(0);
     }
-    
     @Override
     public boolean isExit() {
         return true;
