@@ -2,9 +2,6 @@ package duke.task;
 
 /**
  * The ToDo class encapsulates information and methods pertaining to a ToDo.
- *
- * @author  Yen Pin Hsuan
- * @version 1.0
  */
 public class ToDo extends Task {
 
@@ -34,7 +31,7 @@ public class ToDo extends Task {
     @Override
     public String store() {
         String done = this.isDone ? "T " : "F ";
-        return "T " + done + this.details + "\n";
+        return "T " + done + this.details;
     }
 
     /**

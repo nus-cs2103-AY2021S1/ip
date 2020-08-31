@@ -6,9 +6,6 @@ import duke.Ui;
 
 /**
  * The Command class contains methods pertaining to the Command.
- *
- *  @author  Yen Pin Hsuan
- *  @version 1.0
  */
 public abstract class Command {
     /**

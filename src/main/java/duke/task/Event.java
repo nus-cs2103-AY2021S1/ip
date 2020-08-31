@@ -7,9 +7,6 @@ import java.util.Locale;
 /**
  * The Event class encapsulates information and methods pertaining to an
  * Event.
- *
- * @author  Yen Pin Hsuan
- * @version 1.0
  */
 public class Event extends Task {
     private LocalDateTime date;
@@ -44,7 +41,7 @@ public class Event extends Task {
     @Override
     public String store() {
         String done = this.isDone ? "T " : "F ";
-        return "E " + done + this.details + " /at " + this.date + "\n";
+        return "E " + done + this.details + " /at " + this.date;
     }
 
     /**

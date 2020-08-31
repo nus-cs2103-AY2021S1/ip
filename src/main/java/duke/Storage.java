@@ -20,9 +20,6 @@ import duke.task.ToDo;
 
 /**
  * The Storage class deals with loading tasks from the file and saving tasks in the file.
- *
- * @author  Yen Pin Hsuan
- * @version 1.0
  */
 public class Storage {
 
@@ -94,7 +91,7 @@ public class Storage {
         try {
             BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(
                     new FileOutputStream(String.valueOf(path), true), "UTF-8"));
-            bufferedWriter.write(data);
+            bufferedWriter.write(data + "\n");
             bufferedWriter.close();
         } catch (IOException e) {
             e.printStackTrace();

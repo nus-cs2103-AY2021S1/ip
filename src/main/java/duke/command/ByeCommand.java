@@ -6,9 +6,6 @@ import duke.Ui;
 
 /**
  * The ByeCommand class contains methods pertaining to the ByeCommand.
- *
- *  @author  Yen Pin Hsuan
- *  @version 1.0
  */
 public class ByeCommand extends Command {
 
