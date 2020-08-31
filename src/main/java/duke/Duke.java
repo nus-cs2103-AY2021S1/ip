@@ -43,6 +43,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Initializes a duke instance for the GUI.
+     */
     public Duke() {
         this("data/duke.txt");
     }

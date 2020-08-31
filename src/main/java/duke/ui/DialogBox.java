@@ -18,19 +18,30 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 
+/**
+ * Represents the dialog box that is shown to the user which contains the dialog and display picture.
+ */
 public class DialogBox extends HBox {
 
+    /**
+     * A label instance of the dialog box.
+     */
     @FXML
     private Label dialog;
+
+    /**
+     * The image view of the display picture.
+     */
     @FXML
     private ImageView displayPicture;
 
     /**
      * Constructs a dialog box that stores the text and display picture.
+     *
      * @param text The dialog text to be stored.
      * @param image The image of the display picture.
      */
-    public DialogBox(String text, Image image) {
+    private DialogBox(String text, Image image) {
         super(20);
 
         try {
@@ -67,6 +78,7 @@ public class DialogBox extends HBox {
 
     /**
      * Returns a DialogBox object storing the user's input and display picture.
+     *
      * @param input The text representing the user input.
      * @param image The image of the display picture.
      * @return DialogBox object.
@@ -77,6 +89,7 @@ public class DialogBox extends HBox {
 
     /**
      * Returns a DialogBox object storing Duke's response and display picture.
+     *
      * @param response The text representing Duke's response.
      * @param image The image of the display picture.
      * @return DialogBox object.
