@@ -12,7 +12,7 @@ public class Message {
     public static final String MESSAGE_FIND = "Here are the matching tasks in your list:";
     public static final String MESSAGE_NO_TASK = "There are currently no tasks in your list";
     public static final String MESSAGE_LIST = "Here are the tasks in your list:";
-    public static final String MESSAGE_LOADING_ERROR = "Failed to load tasks. An empty list is created.";
+    public static final String MESSAGE_LOADING_ERROR = "Failed to load tasks. An empty list is created.\n";
 
     /**
      * Prints the total number of tasks in the task list.

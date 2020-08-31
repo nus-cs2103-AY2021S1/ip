@@ -24,7 +24,7 @@ public class Storage {
     
     private String filePath;
 
-    public static final String STORAGE_FILEPATH = "./data/duke.txt";
+    public static final String STORAGE_FILEPATH = "duke.txt";
 
     /**
      * Constructs a <code>Storage</code> Object using filePath.
