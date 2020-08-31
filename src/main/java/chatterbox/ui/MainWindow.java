@@ -10,7 +10,6 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 
 /**
@@ -61,13 +60,9 @@ public class MainWindow extends AnchorPane {
             System.exit(0);
         }
         String response = chatterbox.getResponse(input);
-        DialogBox userDialog = DialogBox.getUserDialog(input, userImage);
-        DialogBox chatterboxDialog = DialogBox.getChatterboxDialog(response, chatterboxImage);
-        userDialog.setMinHeight(Region.USE_PREF_SIZE);
-        chatterboxDialog.setMinHeight(Region.USE_PREF_SIZE);
         dialogContainer.getChildren().addAll(
-                userDialog,
-                chatterboxDialog
+                DialogBox.getUserDialog(input, userImage),
+                DialogBox.getChatterboxDialog(response, chatterboxImage)
         );
         userInput.clear();
     }
