@@ -27,7 +27,7 @@ public class TaskList {
     public String listToString() {
         String output = "";
         for (int i = 0; i < dukeList.size(); i++) {
-            output = output + (i + 1) + ". " + dukeList.get(i).toString() + System.lineSeparator();
+            output = output + (i + 1) + ". " + dukeList.get(i).toString() + "\n";
         }
 
         return output;

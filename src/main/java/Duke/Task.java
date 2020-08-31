@@ -1,6 +1,9 @@
 package Duke;
 
 public class Task {
+    public final static String TICK = "\u2713";
+    public final static String CROSS = "\u2718";
+
     protected String name;
     protected boolean done;
 
@@ -26,7 +29,7 @@ public class Task {
     }
 
     public String toString(){
-        String symbol = done ? "\u2713" : "\u2718";
+        String symbol = done ? Task.TICK : Task.CROSS;
         return "[" + symbol + "] " + name;
     }
 }

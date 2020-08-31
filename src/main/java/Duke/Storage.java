@@ -52,7 +52,7 @@ public class Storage {
     }
 
     public void addData(Task task) throws IOException{
-        writeData(task.getParsedData() + System.lineSeparator(), true);
+        writeData(task.getParsedData() + "\n", true);
     }
 
     public void markDoneData(int order, String parsedData) throws IOException{
@@ -61,10 +61,10 @@ public class Storage {
 
         for (int i = 0; reader.hasNextLine(); i++){
             if (i == order - 1) {
-                newData = newData + parsedData + System.lineSeparator();
+                newData = newData + parsedData + "\n";
                 reader.nextLine();
             } else {
-                newData = newData + reader.nextLine() + System.lineSeparator();
+                newData = newData + reader.nextLine() + "\n";
             }
         }
 
@@ -77,7 +77,7 @@ public class Storage {
         String newData = "";
         for (int i = 0; reader.hasNextLine(); i++){
             if(i != order - 1){
-                newData = newData + reader.nextLine() + System.lineSeparator();
+                newData = newData + reader.nextLine() + "\n";
             }else{
                 reader.nextLine();
             }

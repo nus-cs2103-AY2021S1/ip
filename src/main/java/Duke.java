@@ -1,8 +1,8 @@
 import Duke.DukeException;
+import Duke.Task;
 import Duke.Ui;
 import Duke.Parser;
 import Duke.Storage;
-import Duke.Task;
 import Duke.TaskList;
 import java.io.IOException;
 
@@ -68,7 +68,7 @@ public class Duke {
                     }
 
                 } catch (DukeException e) {
-                    System.out.println(e.getMessage());
+                    ui.showError(e.getMessage());
                 }
             }
         } catch(IOException e){
