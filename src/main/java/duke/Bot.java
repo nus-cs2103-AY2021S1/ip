@@ -13,7 +13,7 @@ public interface Bot {
     /**
      * Make Duke say the given String.
      *
-     * @param string the String for Duke to say
+     * @param string the String for Duke to say.
      */
     public void sayLine(String string);
 }

@@ -21,19 +21,19 @@ public class TaskListStorage {
     /**
      * Creates a new TaskListStorage which which read from and write to the specified file.
      *
-     * @param filepath the path to the file where the TaskList should be loaded from and saved to
+     * @param filepath the path to the file where the TaskList should be loaded from and saved to.
     */
     public TaskListStorage(String filepath) {
         this.filepath = filepath;
     }
 
     /**
-     * Try to load an existing TaskList from a file (specified in the constructor). A new TaskList is created
+     * Tries to load an existing TaskList from a file (specified in the constructor). A new TaskList is created
      * if an existing file cannot be found or read, or if the file has an invalid format. The TaskList returned
      * will attempt to save to the file every time it is modified.
      *
-     * @param bot
-     * @return an existing or new TaskList which saves to the file every time it is modified
+     * @param bot the Bot this TaskList can interact with to display error or other messages to the user.
+     * @return an existing or new TaskList which saves to the file every time it is modified.
     */
     public TaskList load(Bot bot) {
         final String CREATE_NEW_LIST_MESSAGE = "I'll create a new list of tasks.";

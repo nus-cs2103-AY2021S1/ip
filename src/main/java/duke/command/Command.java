@@ -11,8 +11,8 @@ public interface Command {
     /**
      * Executes this Command.
      *
-     * @param bot the bot which the Command can interact with
-     * @param list the TaskList which the Command can read and modify
+     * @param bot the bot which the Command can interact with.
+     * @param list the TaskList which the Command can read and modify.
      */
     public void execute(Bot bot, TaskList list);
 }

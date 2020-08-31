@@ -12,7 +12,7 @@ public class Ui {
      * Prints the given string to the console as a response from Duke, wrapping lines that exceed 68
      * characters in length.
      *
-     * @param string the string to print
+     * @param string the string to print.
      */
     public void say(String string) {
         final String INDENT = "  ";
@@ -32,9 +32,9 @@ public class Ui {
      * account for characters of differing widths (eg. tab character, or if non-monospace fonts are
      * used).
      *
-     * @param string the string to split
-     * @param lineLength the maximum number of characters per line
-     * @return a list of strings where each string corresponds to 1 line
+     * @param string the string to split.
+     * @param lineLength the maximum number of characters per line.
+     * @return a list of strings where each string corresponds to 1 line.
      */
     List<String> splitIntoLines(String string, int lineLength) {
         // TODO: should this method be private instead?

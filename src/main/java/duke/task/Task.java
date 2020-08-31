@@ -10,7 +10,7 @@ public class Task {
     /**
      * Creates a Task which has not been completed.
      *
-     * @param description description of the Task
+     * @param description description of the Task.
      */
     public Task(String description) {
         this(description, false);
@@ -19,8 +19,8 @@ public class Task {
     /**
      * Creates a Task.
      *
-     * @param description description of the Task
-     * @param isDone whether this Task has been done
+     * @param description description of the Task.
+     * @param isDone whether this Task has been done.
      */
     public Task(String description, boolean isDone) {
         this.description = sanitizeString(description);
@@ -30,7 +30,7 @@ public class Task {
     /**
      * Returns whether this Task has been done.
      *
-     * @return true if the task has been done, false otherwise
+     * @return true if the task has been done, false otherwise.
      */
     public boolean isDone() {
         return done;
@@ -46,7 +46,7 @@ public class Task {
     /**
      * Returns a String describing this Task for Duke to display to the user.
      *
-     * @return a String describing this Task
+     * @return a String describing this Task.
      */
     public String displayString() {
         String doneString = done ? "✓" : "✗";
@@ -56,7 +56,7 @@ public class Task {
     /**
      * Returns the abbreviated type of this task used in the displayString() method.
      *
-     * @return a String describing the type of this Task
+     * @return a String describing the type of this Task.
      */
     protected String taskTypeString() {
         return "T";
@@ -75,8 +75,8 @@ public class Task {
      * Sanitizes the given String by replacing tabs with 4 spaces so that the Task can be safely serialized
      * as a tab delimited file.
      *
-     * @param s the string to sanitize
-     * @return the sanitized string
+     * @param s the string to sanitize.
+     * @return the sanitized string.
      */
     protected static String sanitizeString(String s) {
         return s.replaceAll("\t", "    ");

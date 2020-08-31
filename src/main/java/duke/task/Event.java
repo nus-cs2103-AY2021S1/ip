@@ -12,10 +12,10 @@ public class Event extends Task {
     /**
      * Creates an Event.
      *
-     * @param description description of the Event
-     * @param isDone whether the Event has been done
-     * @param start start Date of the Event
-     * @param end ending Date of the Event
+     * @param description description of the Event.
+     * @param isDone whether the Event has been done.
+     * @param start start Date of the Event.
+     * @param end ending Date of the Event.
      */
     public Event(String description, boolean isDone, Date start, Date end) {
         super(description, isDone);
@@ -26,9 +26,9 @@ public class Event extends Task {
     /**
      * Creates an Event which has not been completed.
      *
-     * @param description description of the Event
-     * @param start start Date of the Event
-     * @param end ending Date of the Event
+     * @param description description of the Event.
+     * @param start start Date of the Event.
+     * @param end ending Date of the Event.
      */
     public Event(String description, Date start, Date end) {
         this(description, false, start, end);
@@ -47,7 +47,7 @@ public class Event extends Task {
     /**
      * Returns the start date of this Event.
      *
-     * @return the start date
+     * @return the start date.
      */
     public Date getStart() {
         return start;
@@ -56,7 +56,7 @@ public class Event extends Task {
     /**
      * Returns the end date of this Event.
      *
-     * @return the end ate
+     * @return the end date.
      */
     public Date getEnd() {
         return end;

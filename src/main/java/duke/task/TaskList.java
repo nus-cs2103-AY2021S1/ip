@@ -21,7 +21,7 @@ public class TaskList {
     /**
      * Set the save function for this list. The save function will be run whenver the list changes.
      *
-     * @param function the save function
+     * @param function the save function.
      */
     public void connectStorage(SaveFunction function) {
         saveFunction = function;
@@ -30,7 +30,7 @@ public class TaskList {
     /**
      * Adds a task to this list.
      *
-     * @param task the task to add
+     * @param task the task to add.
      */
     public void add(Task task) {
         list.add(task);
@@ -40,8 +40,8 @@ public class TaskList {
     /**
      * Removes a task from this list.
      *
-     * @param index the index of the task to be removed
-     * @return the task removed
+     * @param index the index of the task to be removed.
+     * @return the task removed.
      */
     public Task delete(int index) {
         Task removed = list.remove(index);
@@ -52,8 +52,8 @@ public class TaskList {
     /**
      * Retrieves a task from this list.
      *
-     * @param index the index of the task to be retrieved
-     * @return a task
+     * @param index the index of the task to be retrieved.
+     * @return a task.
      */
     public Task get(int index) {
         return list.get(index);
@@ -62,7 +62,7 @@ public class TaskList {
     /**
      * Get the number of tasks in this list.
      *
-     * @return the number of tasks
+     * @return the number of tasks.
      */
     public int size() {
         return list.size();
@@ -71,7 +71,7 @@ public class TaskList {
     /**
      * Marks a task as done.
      *
-     * @param index the index of the task to mark as done
+     * @param index the index of the task to mark as done.
      */
     public void markAsDone(int index) {
         get(index).markAsDone();
@@ -81,7 +81,7 @@ public class TaskList {
     /**
      * Returns the Tasks in this TaskList as a Stream.
      *
-     * @return a Stream of Tasks
+     * @return a Stream of Tasks.
      */
     public Stream<Task> toStream() {
         return IntStream.range(0, size()).mapToObj(list::get);
@@ -91,7 +91,7 @@ public class TaskList {
      * Returns the Tasks in this TaskList as a List. It is not possible to modify the Tasks in the returned list,
      * and changes in the returned list will also not be reflected in this TaskList.
      *
-     * @return a List of Tasks
+     * @return a List of Tasks.
      */
     public List<Task> toList() {
         return new ArrayList<>(list);

@@ -1,12 +1,17 @@
 package duke.parser;
 
-import duke.command.*;
-
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
+import duke.command.AddCommand;
+import duke.command.ByeCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.ErrorCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -19,8 +24,8 @@ public class Parser {
     /**
      * Returns the appropriate Command based on the given user input.
      *
-     * @param input the user input
-     * @return a Command that should be executed in response to the user input
+     * @param input the user input.
+     * @return a Command that should be executed in response to the user input.
      */
     public static Command parse(String input) {
         input = input.strip();
