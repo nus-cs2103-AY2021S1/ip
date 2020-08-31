@@ -42,7 +42,7 @@ public class ToDoCommand extends Command {
      * @return Resultant duke object.
      */
     @Override
-    public IDuke execute() {
+    public String execute() {
         if (duke == null) {
             throw new RuntimeException(Message.ERR_DUKE_NOT_INIT.toString());
         }
@@ -54,21 +54,21 @@ public class ToDoCommand extends Command {
      * Creates a new todo task and store it in the returning Duke object.
      *
      * @param description Description of the event.
-     * @return The resulting duke object after adding the todo.
+     * @return Resulting string prompt.
      * @throws DukeIllegalArgumentException If the description is incorrect.
      */
-    private IDuke handleToDo(String description) throws DukeIllegalArgumentException {
+    private String handleToDo(String description) throws DukeIllegalArgumentException {
         if (description.matches("\\s*")) {
             throw new DukeIllegalArgumentException(
                     "The description of todo cannot be empty!");
         }
         ITask task = ToDo.getToDo(description);
-        IDuke newDuke = storeTask(task);
-        System.out.print(TextFormatter.getFormattedText(
-                "Got it. I've added this task:\n\t" + task.toString()
-                        + "\nNow you have "
-                        +  newDuke.getNumTask() + " task(s) in the list."));
-        return newDuke;
+        storeTask(task);
+        String output = "Got it. I've added this task:\n\t" + task.toString()
+                + "\nNow you have "
+                +  duke.getNumTask() + " task(s) in the list.";
+        System.out.print(TextFormatter.getFormattedText(output));
+        return output;
     }
 
     /**
@@ -76,14 +76,12 @@ public class ToDoCommand extends Command {
      * Also invokes storage class to store task list on disk.
      *
      * @param task The tasks to be stored.
-     * @return The resultant Duke object with the task stored.
      */
-    public IDuke storeTask(ITask task) {
+    public void storeTask(ITask task) {
         Storage storage = duke.getStorage();
-        TaskList newList = new TaskList(duke.getTasks().getList());
-        newList.add(task);
-        storage.save(newList.getList());
-        return new Duke(newList, storage);
+        TaskList list = duke.getTasks();
+        list.add(task);
+        storage.save(list.getList());
     }
 
     @Override

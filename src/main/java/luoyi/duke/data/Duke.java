@@ -14,7 +14,7 @@ import luoyi.duke.ui.Ui;
 import java.util.Scanner;
 
 /**
- * Immutable Duke chatbot class to encapsulate the behavior of the chatbot.
+ * Duke chatbot class to encapsulate the behavior of the chatbot.
  * Task id starts from 1.
  */
 public class Duke implements IDuke {
@@ -22,7 +22,7 @@ public class Duke implements IDuke {
     private final TaskList list;
     private final Storage storage;
 
-    public Duke(TaskList list, Storage storage) {
+    private Duke(TaskList list, Storage storage) {
         this.list = new TaskList(list.getList());
         this.storage = storage;
     }
@@ -41,17 +41,18 @@ public class Duke implements IDuke {
      * {@inheritDoc}
      */
     @Override
-    public void greet() {
-        Ui.greet();
+    public String greet() {
+        return Ui.greet();
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void bye() {
-       Ui.bye();
+    public void storeTask(ITask task) {
+        this.list.add(task);
     }
+
 
     /**
      * {@inheritDoc}
@@ -85,22 +86,23 @@ public class Duke implements IDuke {
      * {@inheritDoc}
      */
     @Override
-    public IDuke handleCommand(String command) {
+    public String handleCommand(String command) {
         try {
             Command c = Parser.parse(command);
             return c.setDuke(this).execute();
         } catch (DukeIllegalArgumentException e) {
-            System.out.print(TextFormatter.getFormattedText(
-                    "Meow?!! " + e.getMessage()));
+            String output = "Meow?!! " + e.getMessage();
+            System.out.print(output);
+            return output;
         } catch (DukeUnrecognizedArgumentException e) {
-            System.out.print(TextFormatter.getFormattedText(
-                    Message.CAT_DOUBT.toString()));
+            String output = Message.CAT_DOUBT.toString();
+            System.out.print(TextFormatter.getFormattedText(output));
+            return output;
         } catch (Exception e) {
-            System.out.print(TextFormatter.getFormattedText(
-                    Message.CAT_CRY.toString() + e));
+            String output = Message.CAT_CRY.toString() + e;
+            System.out.print(TextFormatter.getFormattedText(output));
+            return output;
         }
-
-        return this;
     }
 
     /**
@@ -110,6 +112,11 @@ public class Duke implements IDuke {
      */
     public Storage getStorage() {
         return storage;
+    }
+
+    @Override
+    public String getResponse(String input) {
+        return handleCommand(input);
     }
 
 }

@@ -35,10 +35,10 @@ public class DeleteCommand extends Command {
      * Executes command and delete the task at targetIndex in duke.
      * Duke object duke must be first initiated.
      *
-     * @return Resultant Duke object.
+     * @return Result string.
      */
     @Override
-    public IDuke execute() {
+    public String execute() {
         if (duke == null) {
             throw new RuntimeException(Message.ERR_DUKE_NOT_INIT.toString());
         }
@@ -49,38 +49,35 @@ public class DeleteCommand extends Command {
      * Handles delete operation on duke.
      *
      * @param index Index of task to delete.
-     * @return The resultant Duke object.
+     * @return Result string.
      * @throws DukeIllegalArgumentException If index is invalid.
      */
-    private IDuke handleDelete(int index) throws DukeIllegalArgumentException {
+    private String handleDelete(int index) throws DukeIllegalArgumentException {
         if (index < 1 || index > duke.getNumTask()) {
             throw new DukeIllegalArgumentException("Task index out of bound!");
         }
-        IDuke newDuke = deleteTask(index);
-        System.out.print(TextFormatter.getFormattedText(
-                Message.REMOVED_TASK.toString() + "\n\t" + duke.getTask(index)
-                + "\n Now you have " + newDuke.getNumTask() + " task(s) in the list."));
-        return newDuke;
+        deleteTask(index);
+        String output = Message.REMOVED_TASK.toString() + "\n\t" + duke.getTask(index)
+                        + "\n Now you have " + duke.getNumTask() + " task(s) in the list.";
+        System.out.print(TextFormatter.getFormattedText(output));
+        return output;
     }
 
     /**
      * Removes a specified task.
      * Task to be removed is specified by its index id.
      *
-     * @return Duke with task removed.
      * @throws DukeIllegalArgumentException If index out of bound.
      */
-    private IDuke deleteTask(int id) throws DukeIllegalArgumentException {
+    private void deleteTask(int id) throws DukeIllegalArgumentException {
         TaskList list = duke.getTasks();
         Storage storage = duke.getStorage();
         if (id - 1 > list.size() || id < 0) {
             throw new DukeIllegalArgumentException(
                     "Cannot delete task! Task id out of bound!");
         }
-        TaskList newList = new TaskList(list.getList());
-        newList.remove(id - 1);
-        storage.save(newList.getList());
-        return new Duke(newList, storage);
+        list.remove(id - 1);
+        storage.save(list.getList());
     }
 
     /**

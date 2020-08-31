@@ -35,10 +35,10 @@ public class DoneCommand extends Command {
      * Executes the done command.
      * Duke object duke must be initiated.
      *
-     * @return Resultant duke object.
+     * @return Resultant string prompt.
      */
     @Override
-    public IDuke execute() {
+    public String execute() {
         if (duke == null) {
             throw new RuntimeException(Message.ERR_DUKE_NOT_INIT.toString());
         }
@@ -50,28 +50,26 @@ public class DoneCommand extends Command {
      * Marks the task at index {@code index} as done.
      *
      * @param index Index of task to be marked done.
-     * @return Resultant duke object.
+     * @return Prompt string from duke.
      * @throws DukeIllegalArgumentException If index is invalid.
      */
-    private IDuke handleDone(int index) throws DukeIllegalArgumentException {
+    private String handleDone(int index) throws DukeIllegalArgumentException {
         if (index < 1 || index > duke.getNumTask()) {
             throw new DukeIllegalArgumentException("Task index out of bound!");
         }
-        IDuke newDuke = doneTask(index);
-        System.out.print(TextFormatter.getFormattedText(
-                Message.MARKED_DONE.toString() + newDuke.getTask(index)));
-        newDuke.getStorage().save(newDuke.getTasks().getList());
-        return newDuke;
+        String output = Message.MARKED_DONE.toString() + duke.getTask(index);
+        System.out.print(TextFormatter.getFormattedText(output));
+        doneTask(index);
+        return output;
     }
 
     /**
      * Marks a specified task as done.
      * Task to be done is specified by its index id.
      *
-     * @return Duke with task done.
      * @throws DukeIllegalArgumentException If index is invalid.
      */
-    private IDuke doneTask(int id) throws DukeIllegalArgumentException {
+    private void doneTask(int id) throws DukeIllegalArgumentException {
         TaskList list = duke.getTasks();
         Storage storage = duke.getStorage();
         if (id - 1 > list.size() || id < 0) {
@@ -81,10 +79,8 @@ public class DoneCommand extends Command {
             throw new DukeIllegalArgumentException(
                     "Cannot done task! Task is already done!");
         }
-        TaskList newList = new TaskList(list.getList());
-        newList.replace(id - 1, newList.get(id - 1).markComplete());
-        storage.save(newList.getList());
-        return new Duke(newList, storage);
+        list.replace(id - 1, list.get(id - 1).markComplete());
+        storage.save(list.getList());
     }
 
     @Override
