@@ -41,7 +41,6 @@ public class Storage {
             }
             input.close();
         } catch (Exception e) {
-            e.printStackTrace();
         }
         return result;
     }
@@ -53,7 +52,7 @@ public class Storage {
             // System.getProperty("ip"), "duke_save_data.txt"
             FileWriter output = new FileWriter(file);
             for (Task task : tasks) {
-                String taskType = task.getClass().getName().toLowerCase();
+                String taskType = task.getClass().getSimpleName().toLowerCase();
                 TaskType type = TaskType.getTaskType(taskType);
                 String saveLine = type.generateSaveLine(task.isDone, task.taskName, task.getDate());
                 output.write(saveLine);
