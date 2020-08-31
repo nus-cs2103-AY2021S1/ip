@@ -26,7 +26,7 @@ class Storage {
             if (!taskListFile.exists() && !taskListFile.createNewFile()) {
                 throw new DukeException("Failed to create new text file.");
             }
-        } catch (IOException e) {
+        } catch (Exception e) {
             throw new DukeException("Exception while opening task list file: " + e);
         }
 
@@ -82,6 +82,8 @@ class Storage {
             if (taskListFile.exists()) {
                 taskListFile.delete();
                 taskListFile.createNewFile();
+            } else {
+                throw new IOException("No file found at the specified path.");
             }
             if (taskList.getSize() > 0) {
                 FileWriter taskWriter = new FileWriter(taskListFile);
