@@ -16,6 +16,10 @@ public class Event extends Task {
         this.timePeriod = timePeriod;
     }
 
+    /**
+     * The toString method of Event.
+     * @return The required String format of an event
+     */
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + timePeriod + ")";

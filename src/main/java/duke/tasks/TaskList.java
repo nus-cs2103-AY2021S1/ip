@@ -2,6 +2,9 @@ package duke.tasks;
 
 import java.util.ArrayList;
 
+/**
+ * List of tasks.
+ */
 public class TaskList {
 
     private ArrayList<Task> listOfTasks = new ArrayList<>();
@@ -9,22 +12,23 @@ public class TaskList {
     /**
      * Construct a new TaskList.
      */
-    public TaskList(){
+    public TaskList() {
         listOfTasks = new ArrayList<>();
     }
 
     /**
      * Find the size of the list of tasks.
+     *
      * @return the size.
      */
-    public int findListSize(){
+    public int findListSize() {
      return listOfTasks.size();
     }
 
     /**
      * Print out the tasks in the list one by one.
      */
-    public void printTaskList(){
+    public void printTaskList() {
         System.out.println("Here are the tasks in your list:");
 
         int number = listOfTasks.size();
@@ -38,9 +42,10 @@ public class TaskList {
 
     /**
      * Remove the task from the list.
+     *
      * @param index The position index of the task in the list.
      */
-    public void deleteTask(int index){
+    public void deleteTask(int index) {
 
         Task toBeDeletedTask = listOfTasks.get(index-1);
 
@@ -54,7 +59,12 @@ public class TaskList {
 
     }
 
-    public ArrayList<Task> findTask(String keyWord){
+    /**
+     * Find the task that fit the keyword.
+     * @param keyWord The keyword to be used for searching
+     * @return An ArrayList of tasks that meet the searching requirements
+     */
+    public ArrayList<Task> findTask(String keyWord) {
         ArrayList<Task> tasksFound = new ArrayList<>();
         for(Task task: listOfTasks){
             String[] words = task.name.split(" ");
@@ -70,9 +80,10 @@ public class TaskList {
 
     /**
      * Add the task to the list.
+     *
      * @param task The task to be added.
      */
-    public void addTask(Task task){
+    public void addTask(Task task) {
 
         listOfTasks.add(task);
 
@@ -89,7 +100,7 @@ public class TaskList {
      * Mark the task as done.
      * @param index The position index of the task.
      */
-    public void markAsDone(int index){
+    public void markAsDone(int index) {
 
         listOfTasks.get(index - 1).markAsDone();
 

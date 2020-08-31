@@ -14,7 +14,7 @@ import java.util.Scanner;
  */
 public class Parser {
 
-    static String logo = "      ____        _        \n"
+    public static String logo = "      ____        _        \n"
             + "     |  _ \\ _   _| | _____ \n"
             + "     | | | | | | | |/ / _ \\\n"
             + "     | |_| | |_| |   <  __/\n"
@@ -22,7 +22,8 @@ public class Parser {
 
     static TaskList taskList;
 
-    /** Construct a new paerser.
+    /**
+     * Construct a new paerser.
      * No parameter. Assign a new TaskList to taskList.
      */
     public Parser(){
@@ -56,7 +57,7 @@ public class Parser {
     }
 
     /**
-     * Process a command sentence
+     * Process a command sentence.
      * @param command Take in the command to be processed.
      * @throws Exception Throws an exception if the command can not be interpreted.
      */

@@ -8,7 +8,9 @@ public class Deadline extends Task {
 
     private String dueDate;
 
-    /** Construct a new Deadline.
+    /**
+     * Construct a new Deadline.
+     *
      * @param name Name or description of the deadline.
      * @param dueDate The due date of the deadline.
      */
@@ -17,7 +19,9 @@ public class Deadline extends Task {
         this.dueDate = dueDate;
     }
 
-    /** Override the toString method.
+    /**
+     * Override the toString method.
+     *
      * @return the description and due date of the deadline.
      */
     @Override

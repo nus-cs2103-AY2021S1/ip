@@ -1,5 +1,8 @@
 package duke.tasks;
 
+/**
+ * A task has a name/description and a status of whether it is done or not.
+ */
 public class Task {
     public String name;
     public boolean isDone;
@@ -37,6 +40,10 @@ public class Task {
 
 
     @Override
+    /**
+     * The toString method ofTask
+     * Print the correct format of a task.
+     */
     public String toString(){
 
         String isDoneSymbol;

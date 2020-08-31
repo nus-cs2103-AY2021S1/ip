@@ -5,6 +5,9 @@ import duke.exceptions.InvalidTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * TimeConverter can convert the time in input into the MMM dd yyyy LocalTime format.
+ */
 public class TimeConverter {
     /**
      * Construct a time converter.
