@@ -16,13 +16,13 @@ public class ParserTest {
             fail();
         } catch (DukeException error) {
             assertEquals("Catastrophe detected! I'm sorry, but '" + testCommand
-                         + "' is not within my realm of knowledge. ☹", error.getMessage());
+                    + "' is not within my realm of knowledge. " + "\u2620 ", error.getMessage());
         }
     }
 
     @Test
     public void setDone_validInput_success() {
-        String correctOutput = "[E][✓] project meeting (at: 17th of July 2015, 6:42pm)";
+        String correctOutput = "[E][\u2714] project meeting (at: 17th of July 2015, 6:42pm)";
         event.setDone();
         assertEquals(event.toString(), correctOutput);
     }

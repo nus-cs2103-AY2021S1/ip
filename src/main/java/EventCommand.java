@@ -21,12 +21,13 @@ public class EventCommand extends Command {
      * @param arrayOfTasks Array of tasks that we have parsed.
      * @param ui Ui object to aid in program execution.
      * @param storage Storage object to aid in program execution.
+     * @return Response object
      */
-    public void runCommand(TaskList arrayOfTasks, Ui ui, Storage storage) {
-        ui.addedMessage(eventTask);
+    public Response runCommand(TaskList arrayOfTasks, Ui ui, Storage storage) {
         arrayOfTasks.addTask(eventTask);
         ui.printTaskCount();
         storage.changeFile();
+        return ui.addedMessage(eventTask);
     }
 
     /**

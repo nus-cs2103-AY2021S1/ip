@@ -1,5 +1,4 @@
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
 
@@ -21,118 +20,140 @@ public class Ui {
     /**
      * Outputs the total number of tasks in ArrayList.
      */
-    public void printTaskCount() {
+    public String printTaskCount() {
         if (Task.totalTasks > 1) {
-            System.out.println("You have a total of " + Task.totalTasks + " tasks in the list.");
+            return "You have a total of " + Task.totalTasks + " tasks in the list.";
         } else {
-            System.out.println("You have a total of " + Task.totalTasks + " task in the list.");
+            return "You have a total of " + Task.totalTasks + " task in the list.";
         }
-        printBorder();
     }
 
     /**
      * Outputs welcome message.
      */
-    public void printWelcomeMessage() {
-        String logo = " ______   _____  _____  ___  ____   ________  \n"
-                + "|_   _ `.|_   _||_   _||_  ||_  _| |_   __  | \n"
-                + "  | | `. \\ | |    | |    | |_/ /     | |_ \\_| \n"
-                + "  | |  | | | '    ' |    |  __'.     |  _| _  \n"
-                + " _| |_.' /  \\ \\__/ /    _| |  \\ \\_  _| |__/ | \n"
-                + "|______.'    `.__.'    |____||____||________| ";
-        System.out.println("Hello there! My name is \n" + logo + "\nHow may I assist you today?");
-        printBorder();
+    public String printWelcomeMessage() {
+        String message = "Hello there! My name is Duke. \nHow may I assist you?";
+        return message;
     }
 
     /**
      * Outputs exit message after exiting program.
+     * @return Response object
      */
-    public void printByeMessage() {
-        System.out.println("Goodbye. Hope to see you again soon!");
+    public Response printByeMessage() {
+        String goodbye = "Goodbye. Hope to see you again soon!";
+        Response responseObject = new Response(goodbye, true);
+        return responseObject;
     }
 
     /**
      * Outputs done message after task is completed.
-     * @param task Task that is added.
+     * @param doneTask Task that is added.
+     * @return Response object
      */
-    public void doneMessage(Task task) {
-        System.out.println("Great job! This task has been marked as done:");
-        System.out.println(task);
-        printBorder();
+    public Response doneMessage(Task doneTask) {
+        String done = "Great job! This task has been marked as done:";
+        String finalOutput = done + "\n" + doneTask;
+        Response responseObject = new Response(finalOutput);
+        return responseObject;
     }
 
     /**
      * Outputs added message after task is added.
+     * @return Response object
      */
-    public void addedMessage(Task task) {
-        System.out.println("Thank you for your input. The following task has been added to the list:");
-        String outputString = task.toString();
-        System.out.println(" " + outputString);
+    public Response addedMessage(Task newTask) {
+        String added = "Thank you for your input. The following task has been added to the list:";
+        String finalOutput = added + "\n" + " " + newTask.toString() + "\n" + printTaskCount();
+        Response responseObject = new Response(finalOutput);
+        return responseObject;
     }
 
     /**
      * Outputs remove message after task is removed.
+     * @return Response object
      */
-    public void removeMessage(Task task) {
-        System.out.println("The following task has been successfully removed:");
-        System.out.println(task);
-    }
-
-    /**
-     * Parses input lines.
-     * @return String that is desired.
-     */
-    public String parseInput() {
-        try {
-            return inputReader.readLine();
-        } catch (IOException error) {
-            System.out.println("Error reading user input.");
-            return null;
-        }
-    }
-
-    /**
-     * Exits program.
-     */
-    public void exitProgram() {
-        try {
-            inputReader.close();
-        } catch (IOException error) {
-            System.out.println("Error closing user input stream.");
-        }
+    public Response removeMessage(Task deletedTask) {
+        String removeMsg = "The following task has been successfully removed:";
+        String finalOutput = removeMsg + "\n" + deletedTask + "\n" + printTaskCount();
+        Response responseObject = new Response(finalOutput);
+        return responseObject;
     }
 
     /**
      * Lists tasks in ArrayList.
      * @param arrayOfTasks Our main ArrayList.
+     * @return Response object
      */
-    public void listTasks(TaskList arrayOfTasks) {
-        String output = arrayOfTasks.toString();
-        System.out.println(output);
-        printBorder();
-    }
-
-    /**
-     * Prints border for easier reading of output.
-     */
-    public void printBorder() {
-        System.out.print("---------------------------\n");
+    public Response listTasks(TaskList arrayOfTasks) {
+        String listMsg = "These are the tasks in your list:";
+        String finalOutput = listMsg + "\n" + arrayOfTasks.toString();
+        Response responseObject = new Response(finalOutput);
+        return responseObject;
     }
 
     /**
      * Prints message to show matching tasks.
+     * @return Response object
      */
-    public void matchingMessage(TaskList arrayOfTasks) {
-        System.out.println("These are the matching tasks in your list:");
-        System.out.println(arrayOfTasks.toString());
-        printBorder();
+    public Response matchingMessage(TaskList arrayOfTasks) {
+        String matchingMsg = "Here are your matching tasks in your list";
+        String finalOutput = matchingMsg + "\n" + arrayOfTasks.toString();
+        Response responseObject = new Response(finalOutput);
+        return responseObject;
     }
 
     /**
      * Prints message to say that there are no matching tasks found.
+     * @return Response object
      */
-    public void noMatchMessage() {
-        System.out.println("There are no matching tasks in your list.");
-        printBorder();
+    public Response noMatchMessage() {
+        String noMatchMsg = "There are no matching tasks!";
+        Response responseObject = new Response(noMatchMsg);
+        return responseObject;
+    }
+
+    /**
+     * Output error message if unable to write to file path.
+     * @return Response object
+     */
+    public Response writeError() {
+        String goodbye = "Bye. Hope to see you again!";
+        String finalOutput = "Tasks could not be saved to 'duke.txt'. Please check that you have a 'data' folder "
+                             + "containing 'duke.txt'." + "\n\n" + goodbye;
+        Response responseObject = new Response(finalOutput, true);
+        return responseObject;
+    }
+
+    /**
+     * Output message if done writing to file path.
+     * @return Response object
+     */
+    public Response finishWriting() {
+        String goodbye = "Goodbye. Hope to see you again soon!";
+        String finalOutput = "Tasks have been successfully saved to duke.txt!" + "\n\n" + goodbye;
+        Response responseObject = new Response(finalOutput, true);
+        return responseObject;
+    }
+
+    /**
+     * Output generic error message.
+     * @return Response object
+     */
+    public Response returnError(String errorMessage) {
+        Response responseObject = new Response(errorMessage);
+        return responseObject;
+    }
+
+    /**
+     * Output error message for list command failure.
+     * @return Response object
+     */
+    public Response listError() {
+        String output = "Failed to list tasks. There can be two reasons:\n"
+                + "1. Missing 'duke.txt' in 'data' folder of project directory.\n "
+                + "2. Your list of tasks is currently empty.";
+        Response responseObject = new Response(output);
+        return responseObject;
     }
 }

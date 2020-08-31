@@ -20,11 +20,11 @@ public class TodoCommand extends Command {
      * @param ui Ui object to aid in program execution.
      * @param storage Storage object to aid in program execution.
      */
-    public void runCommand(TaskList arrayOfTasks, Ui ui, Storage storage) {
-        ui.addedMessage(toDoTask);
+    public Response runCommand(TaskList arrayOfTasks, Ui ui, Storage storage) {
         arrayOfTasks.addTask(toDoTask);
         ui.printTaskCount();
         storage.changeFile();
+        return ui.addedMessage(toDoTask);
     }
 
     /**

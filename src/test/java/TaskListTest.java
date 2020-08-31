@@ -24,7 +24,7 @@ public class TaskListTest {
         taskList.addTask(event);
         String toDoTask = taskList.get(0).toString();
         String eventTask = taskList.get(1).toString();
-        assertEquals("[T][✘] sleep", toDoTask);
-        assertEquals("[E][✘] project meeting (at: 17th of November 2015, 3:32pm)", eventTask);
+        assertEquals("[T][\u2718] sleep", toDoTask);
+        assertEquals("[E][\u2718] project meeting (at: 17th of November 2015, 3:32pm)", eventTask);
     }
 }

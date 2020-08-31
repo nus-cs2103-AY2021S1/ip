@@ -68,7 +68,7 @@ public class TaskList {
         while (index < size) {
             Task curr = arrayOfTasks.get(index);
             output.append(index + 1);
-            output.append(".");
+            output.append(". ");
             output.append(curr.toString());
             output.append("\n");
             index++;

@@ -10,18 +10,16 @@ public class ListCommand extends Command {
      * @param arrayOfTasks Array of tasks that we have parsed.
      * @param ui Ui object to aid in program execution.
      * @param storage Storage object to aid in program execution.
+     * @return Response object
      */
-    public void runCommand(TaskList arrayOfTasks, Ui ui, Storage storage) {
+    public Response runCommand(TaskList arrayOfTasks, Ui ui, Storage storage) {
         try {
-            int arraySize = arrayOfTasks.taskArraySize();
-            if (arraySize == 0) {
+            if (arrayOfTasks.taskArraySize() == 0) {
                 throw new DukeException("There is nothing to list as the list is currently empty.");
-            } else {
-                System.out.println("These are the tasks in your list:");
-                ui.listTasks(arrayOfTasks);
             }
+            return ui.listTasks(arrayOfTasks);
         } catch (DukeException error) {
-            System.err.println(error);
+            return ui.listError();
         }
     }
 

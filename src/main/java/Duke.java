@@ -16,64 +16,51 @@ public class Duke {
     }
 
     /**
-     * Loads input file and starts parsing.
-     * @throws DukeException if there is an issue.
+     * Loads input from duke.txt
      */
-    public void execute() throws DukeException {
+    public Duke() {
+        this.ui = new Ui();
+        this.storage = new Storage("data/duke.txt");
         try {
-            TaskList inputArray = new TaskList(storage.load());
-            arrayOfTasks = inputArray;
+            this.arrayOfTasks = new TaskList(storage.load());
         } catch (DukeException error) {
-            arrayOfTasks = new TaskList();
-            throw new DukeException("Unable to load data from 'duke.txt'. Please ensure that you have"
-                                    + " a 'data' folder that contains 'duke.txt' in project directory.");
+            System.out.println("Error loading from specified file path");
+            this.arrayOfTasks = new TaskList();
         }
-
-        ui.printWelcomeMessage();
-
-        boolean isDone = false;
-        Command parsedCommand;
-        String command = ui.parseInput();
-
-        while (command != null && !isDone) {
-            try {
-                parsedCommand = Parser.parse(command);
-                isDone = parsedCommand.exitCheck();
-                parsedCommand.runCommand(arrayOfTasks, ui, storage);
-            } catch (DukeException error) {
-                System.err.println(error);
-            }
-            if (isDone) {
-                // Do nothing.
-            } else {
-                command = ui.parseInput();
-            }
-        }
-
-        ui.exitProgram();
-
-        if (!storage.isStorageChanged()) {
-            // Do nothing.
-        } else {
-            try {
-                storage.saveToDisk(arrayOfTasks);
-                ui.printBorder();
-                System.out.println("Tasks have been successfully saved to duke.txt!");
-            } catch (DukeException error) {
-                System.err.println("Tasks cannot be saved to specified file path('data/duke.txt'). Please ensure "
-                                   + "that there is a 'data' folder containing 'duke.txt' and try again.");
-            }
-        }
-        ui.printByeMessage();
     }
 
     /**
-     * Instantiates and run Duke program.
-     * @param args CMD arguments
-     * @throws DukeException if there is an issue.
+     * Gets UI object.
+     *
+     * @return UI object
      */
-    public static void main(String[] args) throws DukeException {
-        Duke runDuke = new Duke("data/duke.txt");
-        runDuke.execute();
+    public Ui getUI() {
+        return ui;
+    }
+
+    /**
+     * Gets Response object.
+     * @return Response object
+     */
+    public Response getResponse(String userInput) {
+        Response response = execute(userInput);
+        return response;
+    }
+
+    /**
+     * Parses command.
+     * @param userInput command to be parsed
+     * @return Response object
+     */
+    private Response execute(String userInput) {
+        Response responseObject;
+        try {
+            Command parsedCommand = Parser.parse(userInput);
+            responseObject = parsedCommand.runCommand(arrayOfTasks, ui, storage);
+        } catch (DukeException error) {
+            String errorMsg = error.getMessage();
+            responseObject = ui.returnError(errorMsg);
+        }
+        return responseObject;
     }
 }

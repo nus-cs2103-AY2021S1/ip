@@ -40,7 +40,7 @@ public class Parser {
 
         case "todo":
             if (numOfInput == 1) {
-                throw new DukeException("☹ Oh no! The description of a todo task cannot be empty.");
+                throw new DukeException("\u2620 Oh no! The description of a todo task cannot be empty.");
             }
             StringBuilder todoString = new StringBuilder();
             int j = 1;
@@ -56,11 +56,11 @@ public class Parser {
         case "event":
             try {
                 if (numOfInput == 1) {
-                    throw new DukeException("☹ Oh no! The description of an event task cannot be empty.");
+                    throw new DukeException("\u2620 Oh no! The description of an event task cannot be empty.");
                 }
 
                 if (numOfInput < 4) {
-                    throw new DukeException("☹ Oh no! The correct way to log an event is: (event) "
+                    throw new DukeException("\u2620 Oh no! The correct way to log an event is: (event) "
                             + "(description) (/at) (date)");
                 }
 
@@ -101,7 +101,7 @@ public class Parser {
                 newTaskObject = new EventCommand(outputEventDesc, outputEventDate, outputEventTime);
             } catch (ArrayIndexOutOfBoundsException error) {
                 throw new DukeException("Error encountered while parsing event command. Please ensure "
-                                        + "that your event command is in the following format: "
+                                        + "that the event command is in the following format: "
                                         + "(event) (description) (/at) (date).");
             }
 
@@ -110,13 +110,13 @@ public class Parser {
         case "deadline":
             try {
                 if (numOfInput == 1) {
-                    throw new DukeException("☹ Oh no! The description of a deadline task "
-                            + "cannot be empty.");
+                    throw new DukeException("\u2620 Oh no! The description of a deadline task "
+                                            + "cannot be empty.");
                 }
 
                 if (numOfInput < 4) {
-                    throw new DukeException("☹ Oh no! The correct way to log a deadline is: (deadline) "
-                            + "(description) (/by) (date)");
+                    throw new DukeException("\u2620 Oh no! The correct way to log a deadline is: (deadline) "
+                                           + "(description) (/by) (date)");
                 }
 
                 boolean checkForDate = false;
@@ -129,7 +129,7 @@ public class Parser {
 
                 if (noOfElements != 2) {
                     throw new DukeException("Date and Timing fields has not been specified correctly. "
-                            + "Please try again!");
+                                            + "Please try again.");
                 }
 
                 int m = 1;
@@ -156,7 +156,7 @@ public class Parser {
                 newTaskObject = new DeadlineCommand(outputDeadlineDesc, outputDeadlineDate, outputDeadlineTime);
             } catch (ArrayIndexOutOfBoundsException error) {
                 throw new DukeException("Error encountered while parsing deadline command. Please ensure "
-                                        + "that your deadline command is in the following format: "
+                                        + "that the deadline command is in the following format: "
                                         + "(deadline) (description) (/by) (date).");
             }
             break;
@@ -192,7 +192,7 @@ public class Parser {
 
         default:
             throw new DukeException("Catastrophe detected! I'm sorry, but '" + commandCheck
-                                    + "' is not within my realm of knowledge. ☹");
+                                    + "' is not within my realm of knowledge. " + "\u2620 ");
         }
         return newTaskObject;
     }

@@ -21,17 +21,17 @@ public class DeleteCommand extends Command {
      * @param storage Storage object to aid in program execution.
      * @throws DukeException if there is an issue.
      */
-    public void runCommand(TaskList arrayOfTasks, Ui ui, Storage storage) throws DukeException {
+    public Response runCommand(TaskList arrayOfTasks, Ui ui, Storage storage) throws DukeException {
         int arraySize = arrayOfTasks.taskArraySize();
         if (taskIndex < 0 || taskIndex >= arraySize) {
-            throw new DukeException("The task number" + " (" + (taskIndex + 1) + ") " + "that you want to "
-                                    + "delete can not be found in your list.");
+            throw new DukeException("The task number that you want to delete " + "(" + (taskIndex + 1) + ") "
+                                    + "can not be found in your list.");
         }
         Task taskToDelete = arrayOfTasks.get(taskIndex);
-        ui.removeMessage(taskToDelete);
         arrayOfTasks.deleteTask(taskIndex);
         ui.printTaskCount();
         storage.changeFile();
+        return ui.removeMessage(taskToDelete);
     }
 
     /**

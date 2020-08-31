@@ -11,8 +11,17 @@ public class ByeCommand extends Command {
      * @param ui Ui object to aid in program execution.
      * @param storage Storage object to aid in program execution.
      */
-    public void runCommand(TaskList taskList, Ui ui, Storage storage) {
-        // Exit program.
+    public Response runCommand(TaskList taskList, Ui ui, Storage storage) {
+        Response responseObject = ui.printByeMessage();
+        if (storage.isStorageChanged()) {
+            try {
+                storage.saveToDisk(taskList);
+                responseObject = ui.finishWriting();
+            } catch (DukeException error) {
+                return ui.writeError();
+            }
+        }
+        return responseObject;
     }
 
     /**
