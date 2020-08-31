@@ -1,6 +1,8 @@
 // Main.java
 // Copyright (c) 2020, zhiayang, Apache License 2.0.
 
+package ikura;
+
 import java.util.Scanner;
 import java.io.IOException;
 
