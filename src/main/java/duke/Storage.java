@@ -1,10 +1,5 @@
 package duke;
 
-import duke.task.Task;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.ToDo;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -12,6 +7,11 @@ import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
 
 /**
  * The Storage class will deal with loading tasks from the file
@@ -75,7 +75,7 @@ public class Storage {
      */
     public void updateDataFile(ArrayList<Task> list) throws IOException {
         FileWriter writer = new FileWriter(filePath);
-        PrintWriter print_line = new PrintWriter(writer);
+        PrintWriter printLine = new PrintWriter(writer);
         for (Task task : list) {
             String[] details = new String[4];
             details[2] = task.getName();
@@ -95,8 +95,8 @@ public class Storage {
             }
             String textLine = details[0] + " | " + details[1] + " | " + details[2]
                     + " | " + details[3];
-            print_line.printf("%s" + "%n", textLine);
+            printLine.printf("%s\n", textLine);
         }
-        print_line.close();
+        printLine.close();
     }
 }
