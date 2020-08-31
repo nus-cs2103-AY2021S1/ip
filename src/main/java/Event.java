@@ -1,5 +1,5 @@
-import java.time.LocalTime;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 public class Event extends Task {
@@ -22,13 +22,13 @@ public class Event extends Task {
      * @return Event task
      * @throws DukeException if the format of the task description is wrong
      */
-    public static Event create(String taskDescription) throws DukeException{
+    public static Event create(String taskDescription) throws DukeException {
         if (!taskDescription.contains("/at")) {
             throw new DukeException("Please include '/at' in front of the event time period");
         }
-        String[] NameTimePair = taskDescription.split(" /at");
-        String taskName = NameTimePair[0];
-        String taskTime = NameTimePair[1];
+        String[] nameTimePair = taskDescription.split(" /at");
+        String taskName = nameTimePair[0];
+        String taskTime = nameTimePair[1];
         return new Event(taskName, taskTime);
     }
 
@@ -46,18 +46,18 @@ public class Event extends Task {
      * @throws DukeException if the format of the task date/time is wrong
      */
     private void parseTime(String taskDateTime) throws DukeException {
-        String[] dateTime = taskDateTime.replace("/","-").split(" ",2);
+        String[] dateTime = taskDateTime.replace("/", "-").split(" ", 2);
         try {
             this.atDate = LocalDate.parse(dateTime[0]);
-        } catch(DateTimeParseException e) {
+        } catch (DateTimeParseException e) {
             throw new DukeException("please enter a valid yyyy-mm-dd format");
         }
 
-        try{
-            if(dateTime.length == 2) {
+        try {
+            if (dateTime.length == 2) {
                 this.atTime = LocalTime.parse(dateTime[1]);
             }
-        } catch(DateTimeParseException e) {
+        } catch (DateTimeParseException e) {
             throw new DukeException("please enter a valid HH:MM format");
         }
     }
@@ -72,11 +72,11 @@ public class Event extends Task {
     public String toString() {
         String symbol = isDone ? "\u2713" : "\u2718";
         if (atTime != null) {
-            return String.format("[%s][%s] %s (at: %s %s)", tag, symbol, taskName
-                    , atDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")), atTime.toString());
+            return String.format("[%s][%s] %s (at: %s %s)", tag, symbol, taskName,
+            atDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")), atTime.toString());
         } else {
-            return String.format("[%s][%s] %s (at: %s)", tag, symbol, taskName
-                    , atDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
+            return String.format("[%s][%s] %s (at: %s)", tag, symbol, taskName,
+                    atDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
         }
     }
 

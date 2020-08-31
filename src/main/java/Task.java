@@ -11,7 +11,7 @@ public abstract class Task {
      *Class constructor
      *
      */
-    public Task(String taskName){
+    public Task(String taskName) {
         this.taskName = taskName;
     }
 
@@ -19,7 +19,7 @@ public abstract class Task {
      * Mark the task as completed
      *
      */
-    public void complete(){
+    public void complete() {
         this.isDone = true;
     }
 
@@ -29,7 +29,7 @@ public abstract class Task {
      */
     public void printAddTask() {
         System.out.println(
-                String.format("Got it. I've added this task:\n  %s",this.toString())
+                String.format("Got it. I've added this task:\n  %s", this.toString())
         );
     }
 
@@ -39,7 +39,7 @@ public abstract class Task {
      */
     public void printDeleteTask() {
         System.out.println(
-                String.format("Noted. I've removed this task:\n %s",this.toString())
+                String.format("Noted. I've removed this task:\n %s", this.toString())
         );
     }
 
@@ -49,7 +49,7 @@ public abstract class Task {
      *
      * @return String of the stored task
      */
-    public String safeFileFormat(){
+    public String safeFileFormat() {
         return "";
     }
 
@@ -58,7 +58,7 @@ public abstract class Task {
      *
      * @return Boolean on whether the description matches
      */
-    public boolean fitsTask(String description){
+    public boolean fitsTask(String description) {
         return taskName.contains(description);
     }
 

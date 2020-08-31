@@ -1,3 +1,3 @@
-public enum Commands{
-    LIST,FIND,BYE,TODO,DEADLINE,EVENT,DELETE,DONE,UNKNOWN
+public enum Commands {
+    LIST, FIND, BYE, TODO, DEADLINE, EVENT, DELETE, DONE, UNKNOWN
 }

@@ -10,7 +10,7 @@ public class TaskList {
     /**
      *Class constructor
      */
-    public TaskList(){
+    public TaskList() {
         this.taskList = new ArrayList<>();
     }
 
@@ -22,7 +22,7 @@ public class TaskList {
      */
 
     public void doneTask(int index) throws DukeException {
-        if(index < 0 || index > taskList.size() - 1){
+        if (index < 0 || index > taskList.size() - 1) {
             throw new DukeException("please give a correct task index");
         }
         Task doneTask = taskList.get(index);
@@ -36,7 +36,7 @@ public class TaskList {
      *
      */
 
-    public void listTask(){
+    public void listTask() {
         for (int i = 0; i < taskList.size(); i++) {
             System.out.println(String.format("%d. %s", i + 1, taskList.get(i).toString()));
         }
@@ -48,24 +48,23 @@ public class TaskList {
      * @param newTask The task to be added into taskList
      * @param print If true, prints out the details of the task being added into the list
      */
-    public void addTask(Task newTask, Boolean print){
+    public void addTask(Task newTask, Boolean print) {
         taskList.add(newTask);
-        if(print) {
+        if (print) {
             newTask.printAddTask();
             printNumberOfTask(taskList.size());
         }
     }
 
     /**
-     * return the size of the taskList
+     * Find and print out task that matches to the description
      *
-     * @return size of the taskList
+     * @param description of the task
      */
-
     public void findTask(String description) {
         ArrayList<Task> taskMatchingDescription = new ArrayList<>();
 
-        for (Task task : taskList){
+        for (Task task : taskList) {
             if (task.fitsTask(description)) {
                 taskMatchingDescription.add(task);
             }
@@ -75,8 +74,12 @@ public class TaskList {
             System.out.println(String.format("%d. %s", i + 1, taskMatchingDescription.get(i).toString()));
         }
     }
-
-    public int getTaskListSize(){
+    /**
+     * return the size of the taskList
+     *
+     * @return size of the taskList
+     */
+    public int getTaskListSize() {
         return taskList.size();
     }
 
@@ -84,7 +87,7 @@ public class TaskList {
      * set isUpdating to false
      *
      */
-    public void setTaskListNotUpdating(){
+    public void setTaskListNotUpdating() {
         this.isUpdating = false;
     }
 
@@ -94,7 +97,7 @@ public class TaskList {
      * @param index The index of the task in the taskList
      * @return The task with the corresponding index from the taskList
      */
-    public Task getTask(int index){
+    public Task getTask(int index) {
         return taskList.get(index);
     }
 
@@ -103,7 +106,7 @@ public class TaskList {
      *
      * @return the boolean isUpdating
      */
-    public boolean isUpdating(){
+    public boolean isUpdating() {
         return isUpdating;
     }
 
@@ -115,7 +118,7 @@ public class TaskList {
      */
 
     public void deleteTask(int index) throws DukeException {
-        if(index < 0 || index > taskList.size() - 1){
+        if (index < 0 || index > taskList.size() - 1) {
             throw new DukeException("please give a correct task index");
         }
         taskList.get(index).printDeleteTask();
@@ -128,7 +131,7 @@ public class TaskList {
      *
      * @param i The number of tasks in the list
      */
-    static void printNumberOfTask(int i){
-        System.out.println(String.format("Now you have %d tasks in the list.",i));
+    static void printNumberOfTask(int i) {
+        System.out.println(String.format("Now you have %d tasks in the list.", i));
     }
 }
