@@ -16,15 +16,14 @@ public class Duke {
     private static final Path filepath = Paths.get(".", "data", "duke.txt");
     private Storage storage;
     private TaskList taskList;
-    private final Ui ui;
-    private boolean isGreeted = false;
+//    private final Ui ui;
 
     /**
      * Creates an instance of Duke, instance of ui created too. TaskList initialised.
      * with empty list of tasks if file lookup is unsuccessful.
      */
     public Duke() {
-        ui = new Ui();
+//        ui = new Ui();
         storage = new Storage(filepath);
         try {
             taskList = new TaskList(storage.getListOfTasks());
@@ -38,6 +37,10 @@ public class Duke {
         Duke duke = new Duke();
         Application.launch(Main.class, args);
 //        duke.run();
+    }
+
+    public String getGreeting() {
+        return "Hello and welcome to the GeNiaaz personal assistant";
     }
 
     /**
@@ -63,10 +66,6 @@ public class Duke {
 //    }
 
     public String getResponse(String input) {
-        if (!isGreeted) {
-            isGreeted = true;
-            return "Hello and welcome to the GeNiaaz personal assistant";
-        }
         Gui gui = new Gui();
         ArrayList<String> responseList = new ArrayList<>();
         String response = "";
