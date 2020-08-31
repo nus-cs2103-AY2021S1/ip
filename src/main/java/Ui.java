@@ -22,10 +22,10 @@ public class Ui{
 		return scanner.nextLine();
 	}
 
-/*	public  void showLoadingError() {
-
+	public  void showLoadingError() {
+		System.out.println("No storage file found.");
 	}
-*/
+
 	public void showLine() {
 		System.out.println("____________________________________________________________\n");
 	}

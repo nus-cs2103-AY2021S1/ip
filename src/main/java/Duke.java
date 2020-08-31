@@ -4,6 +4,8 @@ import duke.Task;
 import duke.TaskType;
 import duke.Ui;
 import duke.TaskList;
+import duke.Storage;
+import duke.DukeException;
 
 import java.io.FileNotFoundException;
 import java.time.LocalDateTime;
@@ -21,58 +23,16 @@ public class Duke {
     private static String TASKS_PATHNAME = "data/tasks.txt";
     private Ui ui;
     private TaskList taskList;
+    private Storage storage;
 
     public Duke(String filePath) {
         ui = new Ui();
-
-        //load tasks from file
-        File file = new File(filePath);
-        if(file.getParentFile() != null){
-            file.getParentFile().mkdirs();
-        }
+        storage = new Storage(filePath);
         try {
-            file.createNewFile();
-        } catch (IOException e) {
-            ui.showOutput(e.getMessage());
-        }
-        try {
-            Scanner sc = new Scanner(file);
-            ArrayList<Task> list = new ArrayList<>();
-            String task, taskString;
-            TaskType taskType;
-            boolean isDone;
-            LocalDateTime dateTime;
-            while(sc.hasNext()) {
-                task = sc.nextLine();
-                if(task.charAt(1) == 'T') {
-                    taskType = TaskType.TODO;
-                }
-                else if(task.charAt(1) == 'D') {
-                    taskType = TaskType.DEADLINE;
-                }
-                else {
-                    taskType = TaskType.EVENT;
-                }
-
-                if(task.charAt(4) == '✓') {
-                    isDone = true;
-                }
-                else {
-                    isDone = false;
-                }
-                taskString = task.substring(6);
-                if(taskType == TaskType.DEADLINE){
-                    int index = task.indexOf("(by:");
-                    dateTime = LocalDateTime.parse(task.substring(index + 4, task.length()-1), DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM, FormatStyle.SHORT));
-                    list.add(new Task(taskType, isDone, taskString, Optional.of(dateTime)));
-                }
-                else {
-                    list.add(new Task(taskType, isDone, taskString));
-                }
-            }
-            taskList = new TaskList(list);
-        } catch (FileNotFoundException e) {
-            ui.showOutput(e.getMessage());
+            taskList = new TaskList(storage.load());
+        } catch (DukeException e) {
+            ui.showLoadingError();
+            taskList = new TaskList();
         }
     }
 
@@ -280,19 +240,6 @@ public class Duke {
 
 
     public void save() {
-        try {
-            FileWriter fileWriter = new FileWriter(TASKS_PATHNAME);
-            Task task;
-
-            for (int listIndex = 0; listIndex < taskList.size(); listIndex++) {
-                task = taskList.get(listIndex);
-                fileWriter.write(task.getTypeString() + task.getDoneString() + task.getString() + System.lineSeparator());
-            }
-            fileWriter.close();
-
-            ui.showOutput("Tasks have been saved! ");
-        } catch (IOException e) {
-            ui.showOutput(e.getMessage());
-        }
+        ui.showOutput(storage.save(taskList));
     }
 }
