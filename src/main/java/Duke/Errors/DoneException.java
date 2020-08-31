@@ -10,15 +10,14 @@ public class DoneException extends DukeException{
      * If ID is not present it is true, else it is false
      */
     private boolean IDabsent;
-    private boolean deleted;
+
     /**
      * constructor that assigns tne 2 variables its respective values
      * @param IDabsent input, depending on whether the ID is present or not in the input.txt file. If present it is false
      *   else it is true.
      */
-    public DoneException(boolean IDabsent, boolean deleted){
+    public DoneException(boolean IDabsent){
         this.IDabsent = IDabsent;
-        this.deleted = deleted;
     }
 
     /**
@@ -28,9 +27,6 @@ public class DoneException extends DukeException{
      */
     @Override
     public String toString() {
-        if(deleted){
-            return "  '\u2639' OOPS!!! This task has already been deleted.";
-        }
         if(IDabsent){
             return "  '\u2639' OOPS!!! The description of a done cannot be empty.";
         }

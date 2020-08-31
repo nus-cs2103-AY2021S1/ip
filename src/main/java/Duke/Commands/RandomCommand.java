@@ -1,6 +1,5 @@
 package Duke.Commands;
 
-import Duke.Errors.DukeException;
 import Duke.Errors.WrongInputException;
 import Duke.Helpers.Storage;
 import Duke.Helpers.TaskList;
@@ -23,9 +22,10 @@ public class RandomCommand extends Command {
      * @param tasks
      * @param ui
      * @param storage
+     * @return String returns the string of the output that informs the action has been complete.
      * @throws WrongInputException is thrown
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws WrongInputException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws WrongInputException {
         throw new WrongInputException();
     }
 }

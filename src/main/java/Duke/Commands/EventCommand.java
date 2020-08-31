@@ -2,10 +2,10 @@ package Duke.Commands;
 
 import Duke.Errors.DukeException;
 import Duke.Errors.EventException;
+import Duke.Errors.FileAbsentException;
 import Duke.Helpers.Storage;
 import Duke.Helpers.TaskList;
 import Duke.Helpers.Ui;
-
 import Duke.Tasks.event;
 
 import java.io.IOException;
@@ -30,8 +30,8 @@ public class EventCommand extends AddCommand{
     private static event provide(String name, String string, String end) throws DukeException {
         event e;
         try{
-            LocalDate parsedDate = localDate(string);
-            LocalDate endDate = localDate(end);
+            LocalDate parsedDate = stringToLocalDate(string);
+            LocalDate endDate = stringToLocalDate(end);
             if(parsedDate.isAfter(endDate)){
                 throw new EventException(false, false, true, false);
             }
@@ -41,8 +41,8 @@ public class EventCommand extends AddCommand{
             throw new EventException(false, false, true, false);
         }catch (DateTimeException d) {
             try {
-                LocalDateTime parsedDate = localDateTime(string);
-                LocalDateTime endDate = localDateTime(end);
+                LocalDateTime parsedDate = stringToLocalDateTime(string);
+                LocalDateTime endDate = stringToLocalDateTime(end);
                 if(parsedDate.isAfter(endDate)){
                     throw new EventException(false, false, true, false);
                 }
@@ -53,8 +53,8 @@ public class EventCommand extends AddCommand{
             }
             catch (DateTimeException g) {
                 try {
-                    LocalTime parsedDate = localTime(string);
-                    LocalTime endDate = localTime(end);
+                    LocalTime parsedDate = stringToLocalTime(string);
+                    LocalTime endDate = stringToLocalTime(end);
                     if(parsedDate.isAfter(endDate)){
                         throw new EventException(false, false, true, false);
                     }
@@ -74,11 +74,12 @@ public class EventCommand extends AddCommand{
      * is used to add event task or handle exceptions
      * @param tasks to change the taskList if necessary when no error
      * @param ui
-     * @param storage to change the file in the if necessary when no erro
+     * @param storage to change the file in the if necessary when no error
+     * @return String returns the string of the output that informs the action has been complete.
      * @throws DukeException if there no description after event no time or time is wrong format
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        if (string.length() == 5 || string.length() == 6) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        if (commandDescription.length() == 5 || commandDescription.length() == 6) {
             throw new EventException(true, false, false, false);
         }
         String s = "";
@@ -87,21 +88,21 @@ public class EventCommand extends AddCommand{
         boolean duration = false;
         boolean time = false;
         String start = "";
-        for (int i = 5; i < string.length(); i++) {
-            if (string.charAt(i) == '/') {
+        for (int i = 5; i < commandDescription.length(); i++) {
+            if (commandDescription.charAt(i) == '/') {
                 index = i;
                 time = true;
                 break;
             }
-            s = s + string.charAt(i);
+            s = s + commandDescription.charAt(i);
         }
-        for (int i = index + 1; i < string.length(); i++) {
-            if (string.charAt(i) == '-' && i != string.length() - 1) {
+        for (int i = index + 1; i < commandDescription.length(); i++) {
+            if (commandDescription.charAt(i) == '-' && i != commandDescription.length() - 1) {
                 end = i;
                 duration = true;
                 break;
             }
-            start = start + string.charAt(i);
+            start = start + commandDescription.charAt(i);
         }
         if (!time) {
             throw new EventException(false, false, false, false);
@@ -109,12 +110,12 @@ public class EventCommand extends AddCommand{
         if (!duration) {
             throw new EventException(false, true, false, false);
         }
-        event d = provide(s.substring(1, s.length() - 1), string.substring(index + 4, end), string.substring(end + 1));
+        event d = provide(s.substring(1, s.length() - 1), commandDescription.substring(index + 4, end), commandDescription.substring(end + 1));
         try {
-            update(storage, d, tasks);
+            return updateTaskList(storage, d, tasks);
 
         } catch (IOException i) {
-
+            throw new FileAbsentException(storage.getFilePath());
         }
     }
 }

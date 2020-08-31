@@ -7,7 +7,6 @@ import Duke.Helpers.Storage;
 import Duke.Helpers.TaskList;
 import Duke.Helpers.Ui;
 
-
 import java.io.FileWriter;
 import java.io.IOException;
 
@@ -23,10 +22,10 @@ public class DeleteCommand extends Command {
         super(string);
     }
 
-    private void rewrite(Storage storage, TaskList tasks, int ID) throws FileAbsentException {
-        System.out.println("   Noted. I've removed this task:");
-        System.out.println("   " + tasks.getAllTasks().get(ID - 1).toString());
-        System.out.println("  Now you have " + (tasks.getAllTasks().size() - 1) + " tasks in the list.");
+    private String rewrite(Storage storage, TaskList tasks, int ID)  throws DukeException{
+        System.out.println("   Noted. I've removed this task:\n" +
+                "   " + tasks.getAllTasks().get(ID - 1).toString() + "\n" +
+                "  Now you have " + (tasks.getAllTasks().size() - 1) + " tasks in the list.");
         tasks.getAllTasks().remove(ID - 1);
         String s = "";
         for(int i = 0; i < tasks.getAllTasks().size(); i++){
@@ -36,6 +35,9 @@ public class DeleteCommand extends Command {
             FileWriter fw = new FileWriter(storage.getFilePath());
             fw.write(s);
             fw.close();
+           return "   Noted. I've removed this task:\n" +
+            "   " + tasks.getAllTasks().get(ID - 1).toString() + "\n" +
+            "  Now you have " + (tasks.getAllTasks().size() - 1) + " tasks in the list.";
         } catch (IOException i) {
             throw new FileAbsentException(storage.getFilePath());
         }
@@ -46,19 +48,34 @@ public class DeleteCommand extends Command {
      * @param tasks to change the taskList since item is deleted
      * @param ui
      * @param storage to change the file since item is deleted
+     * @return String returns the string of the output that informs the delete action has been complete.
      * @throws DukeException thrown if the ID is more than number of ID is absent
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        if (string.length() == 4 || string.length() == 5) {
-           throw new DeleteException(true, false);
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        if (commandDescription.length() == 4 || commandDescription.length() == 5) {
+           throw new DeleteException(true);
         }else{
-            int ID = Integer.parseInt(string.substring(7));
+            int ID = Integer.parseInt(commandDescription.substring(7));
             if (ID > tasks.getAllTasks().size()) {
-                throw new DeleteException(false, false);
+                throw new DeleteException(false);
             }else {
-                rewrite(storage, tasks, ID);
+                return rewrite(storage, tasks, ID);
             }
         }
     }
+
+
+    /*public String run(TaskList tasks, Storage storage) {
+        if (string.length() == 4 || string.length() == 5) {
+            return new DeleteException(true, false).toString();
+        }else{
+            int ID = Integer.parseInt(string.substring(7));
+            if (ID > tasks.getAllTasks().size()) {
+                return new DeleteException(false, false).toString();
+            }else {
+                return rewrite(storage, tasks, ID);
+            }
+        }
+    }*/
 }

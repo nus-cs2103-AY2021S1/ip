@@ -1,9 +1,9 @@
 package Duke.Commands;
+
 import Duke.Errors.DukeException;
 import Duke.Helpers.Storage;
 import Duke.Helpers.TaskList;
 import Duke.Helpers.Ui;
-import Duke.Tasks.Task;
 
 /**
  * used to handle case when list is the keyword
@@ -22,12 +22,16 @@ public class ListCommand extends Command {
      * @param tasks to access the list and print them
      * @param ui
      * @param storage
+     * @return String returns the string of the output that informs the action has been complete.
      * @throws DukeException
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        String s = "";
         for(int i = 0; i < tasks.getAllTasks().size(); i++){
             System.out.println("  " + tasks.getAllTasks().get(i));
+            s = s + "\n" + "  " + tasks.getAllTasks().get(i);
         }
+        return s;
     }
 
 }

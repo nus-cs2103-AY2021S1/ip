@@ -7,11 +7,11 @@ package Duke.Errors;
 
 public class DeadlineException extends DukeException{
     /**
-     * description tests shows whether the description is present in the input of the user or not.
+     * descriptionPresent tests shows whether the description is present in the input of the user or not.
      * If description is not present it is true, else it is false
      */
-    private boolean description;
-    private boolean format;
+    private boolean descriptionPresent;
+    private boolean formatPresent;
 
     /**
      *constructor for deadline exception that assigns description and format values
@@ -19,8 +19,8 @@ public class DeadlineException extends DukeException{
      *   else it is true.
      */
     public DeadlineException(boolean description, boolean format){
-        this.description = description;
-        this.format = format;
+        this.descriptionPresent = description;
+        this.formatPresent = format;
     }
 
     /**
@@ -29,10 +29,10 @@ public class DeadlineException extends DukeException{
      * false, it means that the date is absent and it informs accordingly.
      */
     public String toString(){
-        if(this.description){
+        if(this.descriptionPresent){
             return "  '\u2639' OOPS!!! The description of a deadline cannot be empty.";
         }
-        if(this.format){
+        if(this.formatPresent){
             return "  '\u2639' OOPS!!! The formats of date and/ or include " +
                     "yyyy MM dd/ yyyy MM dd, HH:mm/ HH:mm";
         }
