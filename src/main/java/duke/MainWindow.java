@@ -1,15 +1,18 @@
 package duke;
 
-import duke.DialogBox;
-import duke.Duke;
-
 import javafx.fxml.FXML;
+import javafx.scene.SnapshotParameters;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.image.WritableImage;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -25,12 +28,30 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/pingu1.png"));
-    private Image pingu = new Image(this.getClass().getResourceAsStream("/images/pingu2.png"));
+    private Image user = new Image(this.getClass().getResourceAsStream("/images/pingu1.jpg"));
+    private Image pingu = new Image(this.getClass().getResourceAsStream("/images/pingu2.jpg"));
+    private ImageView pingu1 = new ImageView(user);
+    private ImageView pingu2 = new ImageView(pingu);
 
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        makeRoundImage(pingu1);
+        makeRoundImage(pingu2);
+    }
+
+    private void makeRoundImage(ImageView imageView) {
+        Rectangle rect = new Rectangle(475, 475);
+        rect.setArcWidth(475);
+        rect.setArcHeight(475);
+
+        SnapshotParameters parameters = new SnapshotParameters();
+        parameters.setFill(Color.TRANSPARENT);
+
+        imageView.setClip(rect);
+        WritableImage writableImage = imageView.snapshot(parameters, null);
+        imageView.setImage(writableImage);
+
     }
 
     public void setDuke(Duke d) {
@@ -45,9 +66,10 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         String response = duke.getResponse(input);
+
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, user),
-                DialogBox.getDukeDialog(response, pingu)
+                DialogBox.getUserDialog(input, pingu1.getImage()),
+                DialogBox.getDukeDialog(response, pingu2.getImage())
         );
         userInput.clear();
     }

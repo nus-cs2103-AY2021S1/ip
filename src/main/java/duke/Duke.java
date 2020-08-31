@@ -8,6 +8,7 @@ import duke.util.Parser;
 import duke.util.Storage;
 import duke.util.TaskList;
 import duke.util.Ui;
+import duke.DialogBox;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -138,11 +139,12 @@ public class Duke extends Application {
      * the dialog container. Clears the user input after processing.
      */
     private void handleUserInput() {
-        Label userText = new Label(userInput.getText());
-        Label dukeText = new Label(getResponse(userInput.getText()));
+        String userText = userInput.getText();
+
+        String dukeText = getResponse(userInput.getText());
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(userText, new ImageView(user)),
-                DialogBox.getDukeDialog(dukeText, new ImageView(pingu))
+                DialogBox.getUserDialog(userText, user),
+                DialogBox.getUserDialog(dukeText, pingu)
         );
         userInput.clear();
     }

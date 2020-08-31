@@ -1,5 +1,7 @@
-T , 0 , homework , 
 D , 1 , return book , 2020-07-30
 E , 1 , read book , 2020-08-01
 E , 0 , eat book , 2015-04-12
-D , 0 , dinner , 2012-01-02
+D , 1 , dinner , 2012-01-02
+T , 1 , book taxi , 
+T , 0 , hi , 
+E , 0 , bye , 2020-03-31
