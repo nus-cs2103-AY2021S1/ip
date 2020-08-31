@@ -8,4 +8,5 @@ delete 3
 event presentation /at 20th Sept 2pm
 event 4th event /at 20-10-2021 1245
 list
+find coffee
 bye
