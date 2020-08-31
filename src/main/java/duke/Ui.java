@@ -1,18 +1,20 @@
 package duke;
 
-import duke.task.Task;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
+import duke.task.Task;
 
 /**
  * Handles interactions with the user.
  */
 public class Ui {
 
-    /** Scanner to read user inputs. */
-    Scanner scanner;
+    /**
+     * Scanner to read user inputs.
+     */
+    private Scanner scanner;
 
     /**
      * Creates a new Ui object.
@@ -41,6 +43,7 @@ public class Ui {
 
     /**
      * Adds dividers to the message.
+     *
      * @param s Message to add dividers to.
      * @return Message with dividers.
      */
@@ -52,6 +55,7 @@ public class Ui {
 
     /**
      * Formats string to follow indent alignment.
+     *
      * @param s String to be indented.
      * @return Indented string.
      */
@@ -68,6 +72,7 @@ public class Ui {
 
     /**
      * Formats string and then prints the formmatted string.
+     *
      * @param s String to be printed.
      */
     public void printString(String s) {
@@ -76,13 +81,14 @@ public class Ui {
 
     /**
      * Prints message that task was added to TaskList.
+     *
      * @param task Task that was added.
      * @param size Size of TaskList.
      */
     public void printAddTask(Task task, int size) {
-        String s = "Got it. I've added this task: \n" +
-                task.toString() + '\n' +
-                "Now you have " + size + " tasks in the list. \n";
+        String s = "Got it. I've added this task: \n"
+                + task.toString() + '\n'
+                + "Now you have " + size + " tasks in the list. \n";
         System.out.println(formatString(s));
     }
 
@@ -96,6 +102,7 @@ public class Ui {
 
     /**
      * Prints message that task has been deleted from TaskList.
+     *
      * @param task Task that was deleted from TaskList.
      * @param size Size of TaskList.
      */
@@ -109,6 +116,7 @@ public class Ui {
 
     /**
      * Prints message that task has been marked as done.
+     *
      * @param task Task that is marked as done.
      */
     public void printMarkedTask(Task task) {
@@ -119,6 +127,7 @@ public class Ui {
 
     /**
      * Prints TaskList.
+     *
      * @param list TaskList to be printed.
      */
     public void printList(List<Task> list) {
@@ -136,12 +145,18 @@ public class Ui {
 
     /**
      * Reads in user input.
+     *
      * @return User input as String.
      */
     public String readInput() {
         return scanner.nextLine();
     }
 
+
+    /**
+     * Prints Tasks that have been found.
+     * @param foundTasks ArrayList of found tasks.
+     */
     public void printFoundTasks(ArrayList<Task> foundTasks) {
         String printedList = "";
         if (foundTasks.size() > 0) {

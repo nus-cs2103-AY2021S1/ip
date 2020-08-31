@@ -1,18 +1,21 @@
 package duke;
 
-import duke.task.Task;
-
 import java.util.ArrayList;
+
+import duke.task.Task;
 
 /**
  * Represent a list for containing tasks.
  */
 public class TaskList {
-    /** ArrayList that stores the tasks */
+    /**
+     * ArrayList that stores the tasks
+     */
     private ArrayList<Task> tasks;
 
     /**
      * Creates a TaskList that contains tasks.
+     *
      * @param tasks ArrayList that will be placed inside the TaskList.
      */
     public TaskList(ArrayList<Task> tasks) {
@@ -28,6 +31,7 @@ public class TaskList {
 
     /**
      * Returns the ArrayList that is inside the TaskList.
+     *
      * @return ArrayList inside the TaskList.
      */
     public ArrayList<Task> getTasks() {
@@ -36,6 +40,7 @@ public class TaskList {
 
     /**
      * Marks a task as done.
+     *
      * @param taskNumber Represents the task to be marked as done.
      * @return Task that is marked as done.
      * @throws DukeException if the task number is not within the range of the TaskList.
@@ -52,6 +57,7 @@ public class TaskList {
 
     /**
      * Deletes task from TaskList.
+     *
      * @param taskNumber Represents the task to be deleted.
      * @return Task that is deleted
      * @throws DukeException if the task number is not within the range of the TaskList.
@@ -68,6 +74,7 @@ public class TaskList {
 
     /**
      * Returns the size of the TaskList.
+     *
      * @return size of TaskList.
      */
     public int size() {
@@ -76,6 +83,7 @@ public class TaskList {
 
     /**
      * Adds task into TaskList.
+     *
      * @param task Task to be added into the TaskList.
      */
     public void addTask(Task task) {
@@ -84,6 +92,7 @@ public class TaskList {
 
     /**
      * Finds tasks using keyword.
+     *
      * @param keyword Keyword that is used to find tasks.
      * @return ArrayList of tasks containing tasks that match the keyword.
      */

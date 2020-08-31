@@ -56,6 +56,8 @@ public class Event extends Task {
     @Override
     public String toStoredTextString() {
         String s = isTime ? "MMM dd yyyy hh:mma" : "MMM dd yyyy";
-        return "E | " + super.toStoredTextString() + " | " + new SimpleDateFormat(s).format(date) + " | " + (isTime ? "1" : "0");
+        return "E | " + super.toStoredTextString() + " | "
+                + new SimpleDateFormat(s).format(date) + " | "
+                + (isTime ? "1" : "0");
     }
 }
