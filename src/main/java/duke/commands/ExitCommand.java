@@ -1,5 +1,6 @@
 package duke.commands;
 
+import duke.exceptions.DukeException;
 import duke.exceptions.StorageOperationException;
 
 import duke.storage.Storage;
@@ -7,8 +8,7 @@ import duke.storage.Storage;
 import duke.task.TaskManager;
 
 import duke.utils.Colour;
-import duke.utils.ResourceHandler;
-import duke.utils.Ui;
+import duke.utils.Messages;
 
 /**
  * Represents the command which will display the farewell message to the user upon execution.
@@ -16,17 +16,12 @@ import duke.utils.Ui;
 
 public class ExitCommand extends Command {
     @Override
-    public void executeCommand(TaskManager taskManager, Ui formatter, Storage storage) {
-        formatter.print(ResourceHandler.getMessage("commandline.farewellMessage"));
+    public CommandOutput executeCommand(TaskManager taskManager, Storage storage) throws DukeException {
         try {
             storage.save(taskManager);
+            return new CommandOutput(Messages.FAREWELL_MESSAGE, true);
         } catch (StorageOperationException e) {
-            formatter.print(Colour.convertTextToRed(e.getMessage()));
+            throw new DukeException(Colour.convertTextToRed(e.getMessage()));
         }
-    }
-
-    @Override
-    public boolean isExit() {
-        return true;
     }
 }

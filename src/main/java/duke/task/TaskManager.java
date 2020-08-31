@@ -61,10 +61,8 @@ public class TaskManager {
         }
         boolean isPluralCompletedTasks = getCompletedTasks() >= 2;
         boolean isPluralUncompletedTasks = getUncompletedTasks() >= 2;
-        String completedTasks = Colour.convertTextToGreen(getCompletedTasks()
-                + (isPluralCompletedTasks ? " tasks" : " task"));
-        String uncompletedTasks = Colour.convertTextToRed(getUncompletedTasks()
-                + (isPluralUncompletedTasks ? " tasks." : " task"));
+        String completedTasks = getCompletedTasks() + (isPluralCompletedTasks ? " tasks" : " task");
+        String uncompletedTasks = getUncompletedTasks() + (isPluralUncompletedTasks ? " tasks." : " task");
         stringBuilder.append("You have completed " + completedTasks + " and have yet to complete "
                 + uncompletedTasks);
         return stringBuilder.toString();

@@ -1,5 +1,6 @@
 package duke.commands;
 
+import duke.exceptions.DukeException;
 import duke.exceptions.StorageOperationException;
 
 import duke.storage.Storage;
@@ -9,7 +10,6 @@ import duke.task.TaskManager;
 
 import duke.utils.Colour;
 import duke.utils.ResourceHandler;
-import duke.utils.Ui;
 
 /**
  * Represents the command which will delete a particular task when it is executed.
@@ -22,17 +22,17 @@ public class DeleteCommand extends Command {
         this.taskIndex = taskIndex;
     }
 
-    public void executeCommand(TaskManager taskManager, Ui formatter, Storage storage) {
+    public CommandOutput executeCommand(TaskManager taskManager, Storage storage) throws DukeException {
         try {
             Task deletedTask = taskManager.getTask(taskIndex - 1);
             taskManager.deleteTask(taskIndex);
             storage.save(taskManager);
-            String output = "Noted. I have removed the task: \n";
-            formatter.print(output + Colour.convertTextToRed(deletedTask.toString()));
+            String output = "Noted. I have removed the task: \n" + Colour.convertTextToRed(deletedTask.toString());
+            return new CommandOutput(output, false);
         } catch (StorageOperationException e) {
-            formatter.print(Colour.convertTextToRed(e.getMessage()));
+            throw new DukeException(Colour.convertTextToRed(e.getMessage()));
         } catch (IndexOutOfBoundsException e) {
-            formatter.print(Colour.convertTextToRed(ResourceHandler.getMessage(
+            throw new DukeException(Colour.convertTextToRed(ResourceHandler.getMessage(
                     "commandline.invalidTaskIndexErrorMessage")));
         }
     }

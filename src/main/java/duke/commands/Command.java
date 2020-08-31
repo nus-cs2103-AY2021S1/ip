@@ -1,10 +1,9 @@
 package duke.commands;
 
+import duke.exceptions.DukeException;
 import duke.storage.Storage;
 
 import duke.task.TaskManager;
-
-import duke.utils.Ui;
 
 /**
  * Represents a user command. Different types of command should extend
@@ -13,7 +12,7 @@ import duke.utils.Ui;
  */
 
 public abstract class Command {
-    public abstract void executeCommand(TaskManager taskManger, Ui formatter, Storage storage);
+    public abstract CommandOutput executeCommand(TaskManager taskManger, Storage storage) throws DukeException;
 
     public boolean isExit() {
         return false;

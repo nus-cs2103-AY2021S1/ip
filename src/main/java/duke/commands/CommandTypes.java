@@ -2,7 +2,7 @@ package duke.commands;
 
 import duke.exceptions.DukeException;
 
-import duke.utils.ResourceHandler;
+import duke.utils.Messages;
 
 import java.util.regex.Pattern;
 
@@ -16,7 +16,7 @@ public enum CommandTypes {
         public void checkInput(String input) throws DukeException {
             String patternString = "^(?)bye\\s*$";
             if (!Pattern.matches(patternString, input)) {
-                throw new DukeException(ResourceHandler.getMessage("commandline.invalidCommandInputMessage"));
+                throw new DukeException(Messages.INVALID_COMMAND_INPUT_MESSAGE);
             }
         }
     },
@@ -25,7 +25,7 @@ public enum CommandTypes {
         public void checkInput(String input) throws DukeException {
             String patternString = "^(?)list\\s*$";
             if (!Pattern.matches(patternString, input)) {
-                throw new DukeException(ResourceHandler.getMessage("commandline.invalidCommandInputMessage"));
+                throw new DukeException(Messages.INVALID_COMMAND_INPUT_MESSAGE);
             }
         }
     },
@@ -34,7 +34,7 @@ public enum CommandTypes {
         public void checkInput(String input) throws DukeException {
             String content = input.replaceFirst("^todo", "");
             if (content.isBlank()) {
-                throw new DukeException(ResourceHandler.getMessage("command.invalidTodoCommand"));
+                throw new DukeException(Messages.INVALID_TODO_COMMAND);
             }
         }
     },
@@ -46,11 +46,11 @@ public enum CommandTypes {
             try {
                 String task = inputArgs[0];
                 if (task.isBlank()) {
-                    throw new DukeException(ResourceHandler.getMessage("command.invalidEventCommand"));
+                    throw new DukeException(Messages.INVALID_EVENT_COMMAND);
                 }
                 String dateTime = inputArgs[1];
             } catch (ArrayIndexOutOfBoundsException e) {
-                throw new DukeException(ResourceHandler.getMessage("command.missingDateAndTimeForEvent"));
+                throw new DukeException(Messages.MISSING_DATE_AND_TIME_FOR_EVENT);
             }
         }
     },
@@ -62,11 +62,11 @@ public enum CommandTypes {
             try {
                 String task = inputArgs[0];
                 if (task.isBlank()) {
-                    throw new DukeException(ResourceHandler.getMessage("command.invalidDeadlineCommand"));
+                    throw new DukeException(Messages.INVALID_DEADLINE_COMMAND);
                 }
                 String dateTime = inputArgs[1];
             } catch (ArrayIndexOutOfBoundsException e) {
-                throw new DukeException(ResourceHandler.getMessage("command.missingDateAndTimeForDeadline"));
+                throw new DukeException(Messages.MISSING_DATE_AND_TIME_FOR_DEADLINE);
             }
         }
     },
@@ -75,7 +75,7 @@ public enum CommandTypes {
         public void checkInput(String input) throws DukeException {
             String patternString = "^(?i)done\\s+\\d+\\s*$";
             if (!Pattern.matches(patternString, input)) {
-                throw new DukeException(ResourceHandler.getMessage("commandline.invalidTaskIndexErrorMessage"));
+                throw new DukeException(Messages.INVALID_TASK_INDEX_ERROR_MESSAGE);
             }
         }
     },
@@ -84,7 +84,7 @@ public enum CommandTypes {
         public void checkInput(String input) throws DukeException {
             String patternString = "^(?i)delete\\s+\\d+\\s*$";
             if (!Pattern.matches(patternString, input)) {
-                throw new DukeException(ResourceHandler.getMessage("commandline.invalidTaskIndexErrorMessage"));
+                throw new DukeException(Messages.INVALID_TASK_INDEX_ERROR_MESSAGE);
             }
 
         }
@@ -94,7 +94,7 @@ public enum CommandTypes {
         public void checkInput(String input) throws DukeException {
             String content = input.replaceFirst("^find", "");
             if (content.isBlank()) {
-                throw new DukeException(ResourceHandler.getMessage("command.invalidFindCommand"));
+                throw new DukeException(Messages.INVALID_FIND_COMMAND);
             }
         }
     };

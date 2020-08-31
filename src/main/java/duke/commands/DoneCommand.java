@@ -1,5 +1,6 @@
 package duke.commands;
 
+import duke.exceptions.DukeException;
 import duke.exceptions.StorageOperationException;
 
 import duke.storage.Storage;
@@ -8,8 +9,8 @@ import duke.task.Task;
 import duke.task.TaskManager;
 
 import duke.utils.Colour;
+import duke.utils.Messages;
 import duke.utils.ResourceHandler;
-import duke.utils.Ui;
 
 /**
  * Represents the command which will mark a particular task as completed upon execution.
@@ -23,20 +24,19 @@ public class DoneCommand extends Command {
     }
 
     @Override
-    public void executeCommand(TaskManager taskManger, Ui formatter, Storage storage) {
+    public CommandOutput executeCommand(TaskManager taskManger, Storage storage) throws DukeException {
         try {
             Task completedTask = taskManger.getTask(completedTaskIndex - 1);
             taskManger.markTaskAsDone(completedTaskIndex);
             storage.save(taskManger);
-            String taskDoneMessage = ResourceHandler.getMessage("taskManager.taskDoneMessage");
+            String taskDoneMessage = Messages.TASK_MARKED_AS_DONE_MESSAGE;
             StringBuilder stringBuilder = new StringBuilder(taskDoneMessage);
-            stringBuilder.append(Colour.convertTextToGreen(completedTask.toString()));
-            formatter.print(stringBuilder.toString());
+            stringBuilder.append(completedTask.toString());
+            return new CommandOutput(stringBuilder.toString(), false);
         } catch (StorageOperationException e) {
-            formatter.print(Colour.convertTextToRed(e.getMessage()));
+            throw new DukeException(e.getMessage());
         } catch (IndexOutOfBoundsException e) {
-            formatter.print(Colour.convertTextToRed(ResourceHandler.getMessage(
-                    "commandline.invalidTaskIndexErrorMessage")));
+            throw new DukeException(Messages.INVALID_TASK_INDEX_ERROR_MESSAGE);
         }
     }
 }

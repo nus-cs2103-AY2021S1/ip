@@ -1,5 +1,6 @@
 package duke.commands;
 
+import duke.exceptions.DukeException;
 import duke.exceptions.StorageOperationException;
 
 import duke.storage.Storage;
@@ -8,7 +9,6 @@ import duke.task.Task;
 import duke.task.TaskManager;
 
 import duke.utils.Colour;
-import duke.utils.Ui;
 
 /**
  * Represents the user command which will add a task to the taskManager
@@ -25,19 +25,21 @@ public class AddCommand extends Command {
     /**
      * Adds the specified task in the constructor to the taskManager and prints the respective message.
      * @param taskManager The taskManager that the task is being added to.
-     * @param formatter The formatter which will be used to format the output result
      * @param storage The storage that the task will be saved into.
+     * @return The output of the command execution
+     * @throws DukeException If the file path is invalid (does not end with ".txt").
      */
-    public void executeCommand(TaskManager taskManager, Ui formatter, Storage storage) {
+    public CommandOutput executeCommand(TaskManager taskManager, Storage storage) throws DukeException {
         taskManager.addTask(task);
         int totalNumberOfTasks = taskManager.getTotalNumberOfTasks();
         String output = "Got it. I've added this task:\n " + Colour.convertTextToGreen(task.toString()) + "\n";
         String numberOfTasks = totalNumberOfTasks < 2 ? " task in the list." : " tasks in the list.";
-        formatter.print(output + "Now you have a total of " + String.valueOf(totalNumberOfTasks) + numberOfTasks);
+        String finalOutput = output + "Now you have a total of " + String.valueOf(totalNumberOfTasks) + numberOfTasks;
         try {
             storage.save(taskManager);
+            return new CommandOutput(finalOutput, false);
         } catch (StorageOperationException e) {
-            formatter.print(Colour.convertTextToRed(e.getMessage()));
+            throw new DukeException(e.getMessage());
         }
     }
 }
