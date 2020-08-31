@@ -2,6 +2,7 @@ package duke.ui;
 
 import java.util.Scanner;
 
+
 public class Ui {
 
     private static String INDENTATION = "    ";
@@ -38,6 +39,7 @@ public class Ui {
         }
         showLine();
     }
+
 
     /**
      * Reads a line of command from the CLI and returns it as a String.

@@ -20,13 +20,19 @@ public class ExitCommand extends Command {
         ui.printMessage(EXIT_MESSAGE);
     }
 
-    /**
-     * Returns true since this is a ExitCommand.
-     *
-     * @return true.
-     */
-    @Override
-    public boolean isExitCommand() {
-        return true;
-    }
+	@Override
+	public String execute(TaskList taskList, Storage storage) {
+		return EXIT_MESSAGE;
+	}
+
+	/**
+	 * Returns true since this is a ExitCommand.
+	 *
+	 * @return true.
+	 */
+	@Override
+	public boolean isExitCommand() {
+		return true;
+	}
+
 }
