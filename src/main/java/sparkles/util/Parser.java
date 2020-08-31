@@ -1,6 +1,12 @@
 package sparkles.util;
 
-import sparkles.command.*;
+import sparkles.command.Command;
+import sparkles.command.DeleteCommand;
+import sparkles.command.DoneCommand;
+import sparkles.command.ExitCommand;
+import sparkles.command.ShowListCommand;
+import sparkles.command.FindCommand;
+import sparkles.command.TaskUnclearCommand;
 import sparkles.command.addcommand.AddCommand;
 import sparkles.command.addcommand.AddDeadlineCommand;
 import sparkles.command.addcommand.AddEventCommand;
