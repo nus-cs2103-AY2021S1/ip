@@ -13,12 +13,13 @@ public class ListCommand extends Command {
      * @param storage a storage working on data file.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         int i = 1;
-        System.out.println(LIST_TITLE);
+        String output = LIST_TITLE + "\n";
         for (Task task : tasks.getTaskList()) {
-            System.out.println(TAB + " " + i++ + "." + task);
+            output += TAB + " " + i++ + "." + task + "\n";
         }
+        return output;
     }
 
     /**

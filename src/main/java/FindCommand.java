@@ -26,7 +26,7 @@ public class FindCommand extends Command {
      * @throws FindException to show incorrect user input.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws FindException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws FindException {
         ArrayList<Task> store = tasks.getTaskList();
         ArrayList<Task> filteredList = new ArrayList<>();
 
@@ -51,10 +51,11 @@ public class FindCommand extends Command {
             throw new FindException(" ☹ OOPS!!! There is no task with this keyword.");
         }
         int i = 1;
-        System.out.println(FIND_TITLE);
+        String output = FIND_TITLE + "\n";
         for (Task task : filteredList) {
-            System.out.println(TAB + " " + i++ + "." + task);
+            output += TAB + " " + i++ + "." + task + "\n";
         }
+        return output;
     }
 
     /**

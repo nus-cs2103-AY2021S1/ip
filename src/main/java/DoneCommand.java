@@ -26,7 +26,7 @@ public class DoneCommand extends Command {
      * @throws DoneException exception for invalid input.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DoneException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DoneException {
         ArrayList<Task> store = tasks.getTaskList();
         if (input.length == 1) { //incomplete done command
             throw new DoneException(" ☹ OOPS!!! The description of a done cannot be empty.");
@@ -42,9 +42,8 @@ public class DoneCommand extends Command {
         Task markedTask = markingTask.markAsDone();
         store.set(indexOfMarkingTask, markedTask);
         storage.save(new TaskList(store));
-
-        System.out.println(DONE_TITLE);
-        System.out.println(TAB + "   " + markedTask);
+        return DONE_TITLE + "\n"
+                + TAB + "   " + markedTask;
     }
 
     /**
