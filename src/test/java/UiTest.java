@@ -42,7 +42,7 @@ public class UiTest {
     @Test
     public void deleteSuccessTest() {
         String deadlineTaskExpected = "Okay. I will delete this task:\n"
-                + "  " + "[D][X] Sample task (by: Jan 01 2020 00:00)\n"
+                + "  " + "[D][O] Sample task (by: Jan 01 2020 00:00)\n"
                 + "Now you have 1 task in the list.";
         Assertions.assertEquals(deadlineTaskExpected, ui.deleteSuccess(deadlineTask, 1));
     }
@@ -50,7 +50,7 @@ public class UiTest {
     @Test
     public void addSuccessTest() {
         String eventTaskExpected = "Okay. I will add this task:\n"
-                + "  " + "[E][O] Sample task (at: Jan 01 2020 00:00)\n"
+                + "  " + "[E][X] Sample task (at: Jan 01 2020 00:00)\n"
                 + "Now you have 3 tasks in the list.";
         Assertions.assertEquals(eventTaskExpected, ui.addSuccess(eventTask, 3));
     }
@@ -73,7 +73,7 @@ public class UiTest {
     @Test
     public void showTaskAfterTest() {
         TaskList taskList = new TaskList();
-        LocalDate dateTest = LocalDate.parse("2019-01-01 0000");
+        LocalDate dateTest = LocalDate.parse("2019-01-01");
 
         taskList.addTask(toDoTask);
         taskList.addTask(deadlineTask);
@@ -89,15 +89,15 @@ public class UiTest {
     @Test
     public void showTaskBeforeTest() {
         TaskList taskList = new TaskList();
-        LocalDate dateTest = LocalDate.parse("2021-01-01 0000");
+        LocalDate dateTest = LocalDate.parse("2021-01-01");
 
         taskList.addTask(toDoTask);
         taskList.addTask(deadlineTask);
         taskList.addTask(eventTask);
 
         String expectedOutput = "Here is the tasks before Jan 01 2021:\n"
-                + "1. [D][X] Sample task (by: Jan 01 2020 00:00)\n"
-                + "2. [E][O] Sample task (at: Jan 01 2020 00:00)";
+                + "1. [D][O] Sample task (by: Jan 01 2020 00:00)\n"
+                + "2. [E][X] Sample task (at: Jan 01 2020 00:00)";
 
         Assertions.assertEquals(expectedOutput, ui.showTaskBefore(dateTest, taskList));
     }
