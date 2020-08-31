@@ -1,5 +1,7 @@
 package duke.command;
 
+import java.util.regex.Pattern;
+
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
@@ -7,9 +9,7 @@ import duke.exception.DukeCommandException;
 import duke.exception.DukeStorageException;
 import duke.task.Todo;
 
-import java.util.regex.Pattern;
-
-public class TodoCommand extends Command{
+public class TodoCommand extends Command {
     public TodoCommand(String inputCommand) {
         super(inputCommand);
     }
@@ -18,7 +18,7 @@ public class TodoCommand extends Command{
     public void execute(TaskList list, Storage storage, Ui ui) throws DukeCommandException, DukeStorageException {
         Pattern pattern = Pattern.compile("todo ([a-zA-z0-9_-]+)((?: [a-zA-z0-9_-]+)*)");
 
-        if(!pattern.matcher(getInputCommand()).matches()) {
+        if (!pattern.matcher(getInputCommand()).matches()) {
             throw new DukeCommandException("\u2639 OOPS!!! Wrong 'todo' command format!");
         } else {
             Todo todo = new Todo(getInputCommand().substring(5));

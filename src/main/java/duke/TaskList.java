@@ -1,9 +1,9 @@
 package duke;
 
-import duke.task.Task;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import duke.task.Task;
 
 /**
  * A tasklist to store a list of tasks
@@ -18,7 +18,11 @@ public class TaskList {
         this.list = list;
     }
 
-    public List<Task> getList() { return list; }
+    public List<Task> getList() {
+        return list;
+    }
 
-    public void setList(List<Task> list) { this.list = list; }
+    public void setList(List<Task> list) {
+        this.list = list;
+    }
 }

@@ -1,5 +1,10 @@
 package duke.command;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.regex.Pattern;
+
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
@@ -7,12 +12,9 @@ import duke.exception.DukeCommandException;
 import duke.exception.DukeStorageException;
 import duke.task.Event;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-import java.util.regex.Pattern;
 
-public class EventCommand extends Command{
+
+public class EventCommand extends Command {
     public EventCommand(String inputCommand) {
         super(inputCommand);
     }
@@ -20,7 +22,7 @@ public class EventCommand extends Command{
     @Override
     public void execute(TaskList list, Storage storage, Ui ui) throws DukeCommandException, DukeStorageException {
         Pattern pattern = Pattern.compile("event ([a-zA-z0-9_-]+)((?: [a-zA-z0-9_-]+)*) /at [0-9]{1,2}/[0-9]{1,2}/[0-9]{4,4} [0-9]{4,4}");
-        if(!pattern.matcher(getInputCommand()).matches()) {
+        if (!pattern.matcher(getInputCommand()).matches()) {
             throw new DukeCommandException("\u2639 OOPS!!! Wrong 'event' command format!");
         } else {
             String[] s = getInputCommand().substring(6).split(" /at ");

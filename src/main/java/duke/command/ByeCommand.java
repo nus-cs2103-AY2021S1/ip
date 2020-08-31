@@ -5,7 +5,7 @@ import duke.TaskList;
 import duke.Ui;
 import duke.exception.DukeCommandException;
 
-public class ByeCommand extends Command{
+public class ByeCommand extends Command {
     public ByeCommand(String inputCommand) {
         super(inputCommand);
     }

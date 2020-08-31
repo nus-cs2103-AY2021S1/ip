@@ -22,7 +22,9 @@ public class Ui {
      * Reads a line from the terminal and return it as a string.
      * @return command line detected
      */
-    public String readCommand() { return scanner.nextLine(); }
+    public String readCommand() {
+        return scanner.nextLine();
+    }
 
     /**
      * Prints a line to alert failure to load.
@@ -34,7 +36,9 @@ public class Ui {
     /**
      * Standard spacing line used for duke interactions.
      */
-    public void showLine() { System.out.println("        ____________________________________________________________"); }
+    public void showLine() {
+        System.out.println("        ____________________________________________________________");
+    }
 
     /**
      * Sends a message with fixed spacing before the string.
@@ -48,5 +52,7 @@ public class Ui {
      * Sends an error message with the standard spacing in front.
      * @param errorMsg Error message to be sent
      */
-    public void showError(String errorMsg) { System.out.println("        " + errorMsg); }
+    public void showError(String errorMsg) {
+        System.out.println("        " + errorMsg);
+    }
 }

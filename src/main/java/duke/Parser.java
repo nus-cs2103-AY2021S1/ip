@@ -25,7 +25,7 @@ public class Parser {
      */
     public static Command parse(String inputCommand) throws DukeParseException {
 
-        if(inputCommand == null || inputCommand.length() == 0) {
+        if (inputCommand == null || inputCommand.length() == 0) {
             throw new DukeParseException("Empty command!");
         }
 
@@ -33,10 +33,10 @@ public class Parser {
         boolean isCommand = false;
         Command command = null;
 
-        try{
+        try {
             String className = "duke.command." + Character.toUpperCase(commandName.charAt(0)) + commandName.substring(1) + "Command";
-            for(DukeCommand comm: DukeCommand.values()) {
-                if(commandName.equals(comm.getCommand())) {
+            for (DukeCommand comm: DukeCommand.values()) {
+                if (commandName.equals(comm.getCommand())) {
                     command = (Command) Class.forName(className).getConstructor(String.class).newInstance(inputCommand);
                     isCommand = true;
                     break;
@@ -48,7 +48,7 @@ public class Parser {
         }
 
 
-        if(isCommand) {
+        if (isCommand) {
             return command;
         } else {
             throw new DukeParseException("Command '" + commandName + "' not found!");

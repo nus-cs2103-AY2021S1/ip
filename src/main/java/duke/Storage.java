@@ -1,9 +1,5 @@
 package duke;
 
-import duke.exception.DukeStorageException;
-import duke.task.Task;
-import duke.util.SerializeUtil;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -11,13 +7,19 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import duke.exception.DukeStorageException;
+import duke.task.Task;
+import duke.util.SerializeUtil;
+
+
+
 /**
  * A storage class to handle the loading and save of the tasks.
  */
-public class Storage{
+public class Storage {
 
     private final String path;
-    private final String FILENAME = "saved.duke";
+    private final String filename = "saved.duke";
 
     /**
      * Public constructor of storage
@@ -44,15 +46,15 @@ public class Storage{
     public List<Task> load() throws DukeStorageException {
         List<Task> list = new ArrayList<>();
 
-        try{
-            File file = new File(this.path + this.FILENAME);
-            if(file.exists()) {
+        try {
+            File file = new File(this.path + this.filename);
+            if (file.exists()) {
                 FileInputStream fis = new FileInputStream(file);
 
 
                 list = (ArrayList<Task>) SerializeUtil.deserialize(fis.readAllBytes());
             }
-        } catch(Exception e) {
+        } catch (Exception e) {
             throw new DukeStorageException("Failed to load saved list.");
         }
         return list;
@@ -66,14 +68,14 @@ public class Storage{
      * @param tasks TaskList to be stored
      * @throws DukeStorageException If fails to create file or serialize the tasklist object
      */
-    public void save(TaskList tasks) throws DukeStorageException{
-        try{
+    public void save(TaskList tasks) throws DukeStorageException {
+        try {
             File tempFile = new File(path);
-            if(!tempFile.exists()){
+            if (!tempFile.exists()) {
                 tempFile.mkdirs();
             }
 
-            File file = new File(this.path + this.FILENAME);
+            File file = new File(this.path + this.filename);
             file.delete();
             file.createNewFile();
 

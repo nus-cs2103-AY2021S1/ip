@@ -23,7 +23,9 @@ public abstract class Command {
      * Requires an input command in the form of <code>[commandType] [arguments if any]</code>
      * @param inputCommand A command line of String type
      */
-    public Command(String inputCommand) { this.inputCommand = inputCommand; }
+    public Command(String inputCommand) {
+        this.inputCommand = inputCommand;
+    }
 
 
     /**
@@ -47,5 +49,7 @@ public abstract class Command {
      */
     public abstract boolean isExit();
 
-    public String getInputCommand() { return inputCommand; }
+    public String getInputCommand() {
+        return inputCommand;
+    }
 }
