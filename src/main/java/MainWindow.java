@@ -33,6 +33,7 @@ public class MainWindow extends AnchorPane {
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         String text = ui.startUp(duke.getTaskList(), duke.getStorage());
+        dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(text, dukeImage));
     }
 
     public void setDuke(Duke d) {
@@ -54,7 +55,7 @@ public class MainWindow extends AnchorPane {
         if (Parser.checkBye(input)) {
             Node source = userInput.getParent();
             Stage stage = (Stage) source.getScene().getWindow();
-            PauseTransition delay = new PauseTransition(Duration.seconds(3));
+            PauseTransition delay = new PauseTransition(Duration.seconds(2));
             delay.setOnFinished(event -> stage.close());
             delay.play();
         }
