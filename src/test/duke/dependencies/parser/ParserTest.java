@@ -1,6 +1,5 @@
 package duke.dependencies.parser;
 
-import duke.Duke;
 import duke.dependencies.dukeexceptions.DukeException;
 import duke.dependencies.executable.CommandType;
 import duke.dependencies.executable.Executable;

@@ -14,6 +14,9 @@ import duke.dependencies.task.TaskDate;
 import java.util.Locale;
 import java.util.regex.Pattern;
 
+/**
+ * A Class to parse commands.
+ */
 class Parser {
     private final Executable command;
 
@@ -54,6 +57,7 @@ class Parser {
     }
 
     /**
+     *
      *
      * @param pw Password/name to be checked with.
      * @return
@@ -161,9 +165,11 @@ class Parser {
             Task t = Task.createMiscTask(task);
             e = Command.createFindCommand(t);
         }
+        /* CHECK AUTHENTICATION COMMAND */
         else if (checkForWord(s, "clear data")) {
             e = Command.createCheckAuthCommand(null);
         }
+        /* CLEAR CACHE(TASK LIST) COMMAND */
         else if (checkForWord(s, "authentication::success")) {
             e = Command.createClearCacheCommand(null);
         }
@@ -177,9 +183,10 @@ class Parser {
 
     /**
      * Case insensitive check for a word.
-     * @param line
-     * @param word
-     * @return
+     *
+     * @param line Line to check.
+     * @param word Word to check for.
+     * @return True if the word is in the line.
      */
     private static boolean checkForWord(String line, String word) {
         return Pattern.compile(
@@ -191,9 +198,10 @@ class Parser {
 
     /**
      * Case insensitive cutting out of the word.
-     * @param line
-     * @param cmd
-     * @return
+     *
+     * @param line Line to cut from.
+     * @param cmd Command to cut out.
+     * @return Line without the command.
      */
     private static String cutOutTheWord(String line, String cmd) {
         String c2 = cmd.toUpperCase(Locale.UK);

@@ -1,11 +1,14 @@
 package duke;
 
+import duke.uicomponents.DialogueBox;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
@@ -20,11 +23,19 @@ import java.util.Scanner;
  */
 public class Duke extends Application {
 
+    /* --------------------------------------------------GUI COMPONENTS---------------------------------------------- */
     private Button sendButton;
     private TextField userInputTextField;
     private ScrollPane scrollPane;
     private VBox dialogueContainer;
     private Scene scene;
+    {
+//        System.out.println("Path: " + getClass().getResource(".").toExternalForm());
+    }
+    private Image userImg = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+    private Image dukeImg =  new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    /* -------------------------------------------------------------------------------------------------------------- */
+
 
     /**
      * Entry point of Duke. Simulates and main application loop.
@@ -92,10 +103,7 @@ public class Duke extends Application {
 
 
         // Set send button event handlers
-        sendButton.setOnMouseClicked(event -> {
-            dialogueContainer.getChildren().add(getDialogLabel(userInputTextField.getText()));
-            userInputTextField.clear();
-        });
+        sendButton.setOnMouseClicked(event -> handleUserInput());
 
 
         // Create the scroll pane
@@ -114,10 +122,7 @@ public class Duke extends Application {
 
 
         // Sets the action on text change
-        userInputTextField.setOnAction(event -> {
-            dialogueContainer.getChildren().add(getDialogLabel(userInputTextField.getText()));
-            userInputTextField.clear();
-        });
+        userInputTextField.setOnAction(event -> handleUserInput());
 
 
         // Create the vertical box pane for the dialogue container
@@ -152,6 +157,7 @@ public class Duke extends Application {
 
         // Sets the scene for the stage
         primaryStage.setScene(scene);
+        primaryStage.setTitle("Duke");
         primaryStage.show();
     }
 
@@ -168,4 +174,29 @@ public class Duke extends Application {
 
         return textToAdd;
     }
+
+    /**
+     * Iteration 2:
+     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
+     * the dialog container. Clears the user input after processing.
+     */
+    private void handleUserInput() {
+        Label userText = new Label(userInputTextField.getText());
+        Label dukeText = new Label(getResponse(userInputTextField.getText()));
+        dialogueContainer.getChildren().addAll(
+                new DialogueBox(userText, new ImageView(userImg)),
+                new DialogueBox(dukeText, new ImageView(dukeImg))
+        );
+        userInputTextField.clear();
+    }
+
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    private String getResponse(String input) {
+        return "Duke heard: " + input;
+    }
+
+
 }

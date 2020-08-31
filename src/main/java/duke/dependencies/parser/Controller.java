@@ -74,18 +74,14 @@ public class Controller {
                 parser = Parser.parseAndCheck(command);
             } catch (EmptyTaskException e) {
                 return "You have to tell me what you want from me\nbefore I can do anything!!! O.o";
-
             } catch (UnspecifiedDateException e) {
                 return "You need to give me the date!!!";
-
             } catch (UnknownCommandException e) {
                 return "C'mon, you know I don't understand this!";
-
             } catch (InvalidDateException e) {
                 return "I don't understand the date you are giving -_-\n" +
                         "Please give in either format:\n" +
                         "1. MM/dd/yyyy\n2. yyyy-MM-dd";
-
             } catch (DukeException e) {
                 return "HUH???" + e.getMessage();
             }
@@ -99,38 +95,38 @@ public class Controller {
             reply = exe.receiveAndExec(e);
 
             switch (e.getType()) {
-                case LIST:
-                    return String.format("Here are the tasks in your list:\n%s", reply);
+            case LIST:
+                return String.format("Here are the tasks in your list:\n%s", reply);
 
-                case DONE:
-                    return String.format("Congratz! I will marked this task as completed for you!\n%s\n" +
-                                    "Keep up the good work and continue to stay motivated.\n" +
-                                    "You've only got %d task left to be completed!",
-                            reply,
-                            exe.getNumOfIncompleteTasks());
+            case DONE:
+                return String.format("Congratz! I will marked this task as completed for you!\n%s\n" +
+                                "Keep up the good work and continue to stay motivated.\n" +
+                                "You've only got %d task left to be completed!",
+                        reply,
+                        exe.getNumOfIncompleteTasks());
 
-                case DELETE:
-                    return String.format("Noted. I've removed this task:\n%s\n" +
-                                    "Now you have %d tasks left in the list.",
-                            reply,
-                            exe.getListSize());
+            case DELETE:
+                return String.format("Noted. I've removed this task:\n%s\n" +
+                                "Now you have %d tasks left in the list.",
+                        reply,
+                        exe.getListSize());
 
-                case AUTHCHECK:
-                    isInUserAuthenticationMode = true;
-                    return "Please enter your password before I clear your whole list.";
+            case AUTHCHECK:
+                isInUserAuthenticationMode = true;
+                return "Please enter your password before I clear your whole list.";
 
-                case FIND:
-                    return String.format("Here are the tasks matching: %s\n" +
-                            reply, e.getTask().showTaskDescription());
+            case FIND:
+                return String.format("Here are the tasks matching: %s\n" +
+                        reply, e.getTask().showTaskDescription());
 
-                case ADD:
-                    return String.format("Got it! I have added the task:\n%s\n"
-                                    + "Now you have %s tasks in the list.",
-                            reply,
-                            exe.getListSize());
+            case ADD:
+                return String.format("Got it! I have added the task:\n%s\n"
+                                + "Now you have %s tasks in the list.",
+                        reply,
+                        exe.getListSize());
 
-                default:
-                    return "Something is not right. This should not be printed. Error in Controller.java";
+            default:
+                return "Something is not right. This should not be printed. Error in Controller.java";
             }
         } else {
             try {
