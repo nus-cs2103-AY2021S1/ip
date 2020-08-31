@@ -1,10 +1,10 @@
 package duke.command;
 
 import duke.DukeException;
-import duke.storage.Storage;
-import duke.util.TaskList;
 import duke.Ui;
+import duke.storage.Storage;
 import duke.task.Task;
+import duke.util.TaskList;
 
 /**
  * Command that deletes a Task (by index) from the TaskList and broadcasts the appropriate update.

@@ -1,9 +1,9 @@
 package duke.task;
 
-import duke.DukeException;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import duke.DukeException;
 
 /**
  * Class handles parsing of strings inputs (from users) into the apporpriate task object.
@@ -18,12 +18,12 @@ public class TaskParser {
     protected static final String EVENT = "event";
 
     /** collections of the valid indicator strings */
-    protected static final List<String> validTaskTypes;
+    protected static final List<String> VALID_TASK_TYPES;
     static {
-        validTaskTypes = new ArrayList<>();
-        validTaskTypes.add(TO_DO);
-        validTaskTypes.add(DEADLINE);
-        validTaskTypes.add(EVENT);
+        VALID_TASK_TYPES = new ArrayList<>();
+        VALID_TASK_TYPES.add(TO_DO);
+        VALID_TASK_TYPES.add(DEADLINE);
+        VALID_TASK_TYPES.add(EVENT);
     }
 
     /**
@@ -33,7 +33,7 @@ public class TaskParser {
      */
     public static Task parse(String taskDescription) {
         String[] details = taskDescription.split(" ", 2);
-        if (details.length == 1 && validTaskTypes.contains(details[0])) {
+        if (details.length == 1 && VALID_TASK_TYPES.contains(details[0])) {
             throw new DukeException("The description of a " + details[0] + " cannot be empty.");
         }
         Task addedTask;

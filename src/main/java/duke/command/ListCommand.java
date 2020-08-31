@@ -1,8 +1,8 @@
 package duke.command;
 
+import duke.Ui;
 import duke.storage.Storage;
 import duke.util.TaskList;
-import duke.Ui;
 
 /**
  * Command that outputs the current state of the task list as an update.

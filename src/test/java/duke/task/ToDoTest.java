@@ -1,8 +1,8 @@
 package duke.task;
 
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
 
 public class ToDoTest {
 
@@ -14,8 +14,8 @@ public class ToDoTest {
     public void createToDo_validStrings_success() {
         String input1 = "meeting";
         String input2 = "clown around";
-        String output1 = "[T][✘] meeting";
-        String output2 = "[T][✓] clown around";
+        String output1 = "[T][\u2718] meeting";
+        String output2 = "[T][\u2713] clown around";
         ToDo toDo2 = new ToDo(input2);
         toDo2.markDone();
         assertEquals(output1, new ToDo(input1).toString());

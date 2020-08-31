@@ -1,10 +1,10 @@
 package duke.task;
 
-import duke.datetime.DateTimeHandler;
-import duke.DukeException;
-import duke.util.Pair;
-
 import java.time.LocalDateTime;
+
+import duke.DukeException;
+import duke.datetime.DateTimeHandler;
+import duke.util.Pair;
 
 /**
  * Encapsulates an Event.
@@ -54,8 +54,8 @@ public class Event extends Task {
     private void processEventTimingString(String timing) {
         Pair<LocalDateTime, LocalDateTime> pair =
                 DateTimeHandler.parseEventTimings(timing);
-        startTiming = pair.first;
-        endTiming = pair.second;
+        startTiming = pair.getFirst();
+        endTiming = pair.getSecond();
     }
 
     /**
@@ -90,7 +90,7 @@ public class Event extends Task {
     public String getSummary() {
         return String.format("%s|%d|%s|%s",
                 SYMBOL,
-                (isCompleted() ? 1 : 0),
+                isCompleted() ? 1 : 0,
                 getTaskDescription(),
                 getTimingString());
     }

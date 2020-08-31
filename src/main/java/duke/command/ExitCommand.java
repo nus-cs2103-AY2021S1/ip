@@ -1,8 +1,8 @@
 package duke.command;
 
+import duke.Ui;
 import duke.storage.Storage;
 import duke.util.TaskList;
-import duke.Ui;
 
 /**
  * Command that signals exiting the bot and broadcasts the appropriate update.

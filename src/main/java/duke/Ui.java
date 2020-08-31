@@ -53,7 +53,7 @@ public class Ui {
      * @return formatted message that will be sent
      */
     protected static String processString(String string) {
-        return LINE_BREAK  + PRESPACING
+        return LINE_BREAK + PRESPACING
                 + string.replaceAll("\n", '\n' + PRESPACING)
                 + '\n' + LINE_BREAK;
     }

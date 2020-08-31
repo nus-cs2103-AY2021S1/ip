@@ -1,10 +1,10 @@
 package duke.command;
 
-import duke.storage.Storage;
-import duke.util.TaskList;
-import duke.task.TaskParser;
 import duke.Ui;
+import duke.storage.Storage;
 import duke.task.Task;
+import duke.task.TaskParser;
+import duke.util.TaskList;
 
 /**
  * Command that adds a new Task to the given TaskList and broadcasts the appropriate update.

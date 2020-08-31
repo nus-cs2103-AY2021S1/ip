@@ -1,9 +1,9 @@
 package duke.task;
 
-import duke.datetime.DateTimeHandler;
-import duke.DukeException;
-
 import java.time.LocalDateTime;
+
+import duke.DukeException;
+import duke.datetime.DateTimeHandler;
 
 /**
  * Encapsulates Tasks with deadlines.
@@ -72,7 +72,7 @@ public class Deadline extends Task {
     public String getSummary() {
         return String.format("%s|%d|%s|%s",
                 SYMBOL,
-                (isCompleted() ? 1 : 0),
+                isCompleted() ? 1 : 0,
                 getTaskDescription(),
                 getTimingString());
     }
