@@ -1,8 +1,8 @@
 package duke;
 
-import duke.task.TaskList;
 import duke.command.Command;
 import duke.exception.DukeException;
+import duke.task.TaskList;
 
 /**
  * Represents a chat bot that functions as a task manager.
@@ -14,7 +14,7 @@ public class Duke {
     /** Storage object that handles file operations. */
     private final Storage storage;
     /** TaskList object containing the user's list of tasks. */
-    private final TaskList taskList;
+    private final TaskList tasks;
 
     /**
      * Creates and initialises a new Duke object that has a Ui, Storage and TaskList object.
@@ -22,7 +22,7 @@ public class Duke {
     public Duke() {
         this.ui = new Ui();
         this.storage = new Storage();
-        this.taskList = this.storage.readFile();
+        this.tasks = this.storage.readFile();
     }
 
     /**
@@ -36,13 +36,23 @@ public class Duke {
                 String fullCommand = ui.readCommand();
                 ui.showLine();
                 Command command = Parser.parse(fullCommand);
-                command.execute(taskList, ui, storage);
+                command.execute(tasks, ui, storage);
                 isExit = command.isExit();
             } catch (DukeException ex) {
                 ui.showError(ex.getMessage());
             } finally {
                 ui.showLine();
             }
+        }
+    }
+
+    public String getResponse(String input) {
+        try {
+            Command command = Parser.parse(input);
+            String response = command.execute(tasks, ui, storage);
+            return response;
+        } catch (DukeException ex) {
+            ui.showError(ex.getMessage());
         }
     }
 
