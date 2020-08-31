@@ -7,8 +7,8 @@ import java.util.Scanner;
 
 public class Storage {
 
-    private File file;
     private static final String SPLITTER = "|";
+    private File file;
 
     public Storage(String filePath) {
         this.file = new File(filePath);
