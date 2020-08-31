@@ -1,2 +1,1 @@
-T | 1 | say hi
-T | 1 | byebye
+T | 0 | i

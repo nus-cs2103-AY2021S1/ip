@@ -2,6 +2,7 @@ package duke;
 
 import java.io.IOException;
 
+import duke.tool.ValidInput;
 import duke.ui.DialogBox;
 import duke.ui.Ui;
 import javafx.application.Application;

@@ -50,13 +50,13 @@ public class Parser {
     public static Task parse(String order, TaskList tl) {
         try {
             int numOfOrders = tl.getNumOfTasks();
-            if (order.equals("bye")) {
-                return new Exit();
-            } else if (order.equals("list")) {
-                return new List();
-            } else if (order != null) {
+            if (order != null) {
                 String[] command = order.split(" ", 2);
-                if (command[0].equals("done")) {
+                if (ValidInput.getCmdType(command[0]).name().equals("EXIT")) {
+                    return new Exit();
+                } else if (ValidInput.getCmdType(command[0]).name().equals("LIST")) {
+                    return new List();
+                }else if (ValidInput.getCmdType(command[0]).name().equals("DONE")) {
                     if (command.length == 1) {
                         throw new NoTaskChosenException(command[0]);
                     } else if (!isInteger(command[1])
@@ -65,7 +65,7 @@ public class Parser {
                     } else {
                         return new Done(Integer.parseInt(command[1]) - 1);
                     }
-                } else if (command[0].equals("delete")) {
+                } else if (ValidInput.getCmdType(command[0]).name().equals("DELETE")) {
                     if (command.length == 1) {
                         throw new NoTaskChosenException(command[0]);
                     } else if (!isInteger(command[1])
@@ -74,26 +74,26 @@ public class Parser {
                     } else {
                         return new Delete((Integer.parseInt(command[1]) - 1));
                     }
-                } else if (command[0].equals("find")) {
+                } else if (ValidInput.getCmdType(command[0]).name().equals("FIND")) {
                     return new Find(command[1]);
                 } else {
                     if (command.length == 1) {
                         throw new NoDescriptionException(command[0]);
-                    } else if (command[0].equals("deadline")) {
+                    } else if (ValidInput.getCmdType(command[0]).name().equals("DEADLINE")) {
                         String[] splitAgain = command[1].split("/by ");
                         if (splitAgain.length == 1) {
                             throw new NoTimeException(command[0]);
                         }
                         return new Deadline(splitAgain[0],
                                 LocalDateTime.parse(splitAgain[1], VALID_FORMAT), false);
-                    } else if (command[0].equals("event")) {
+                    } else if (ValidInput.getCmdType(command[0]).name().equals("EVENT")) {
                         String[] splitAgain = command[1].split("/at ");
                         if (splitAgain.length == 1) {
                             throw new NoTimeException(command[0]);
                         }
                         return new Event(splitAgain[0],
                                 LocalDateTime.parse(splitAgain[1], VALID_FORMAT), false);
-                    } else if (command[0].equals("todo")) {
+                    } else if (ValidInput.getCmdType(command[0]).name().equals("TODO")) {
                         return new Todo(command[1], false);
                     } else {
                         throw new NoSuchOrderException();
