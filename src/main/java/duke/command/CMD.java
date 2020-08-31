@@ -1,4 +1,6 @@
-enum CMD {
+package duke.command;
+
+public enum CMD {
     BYE,
     LIST,
     TODO,

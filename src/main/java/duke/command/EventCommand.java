@@ -1,3 +1,10 @@
+package duke.command;
+
+import duke.*;
+import duke.storage.Storage;
+import duke.task.TaskList;
+import duke.ui.Ui;
+
 public class EventCommand extends Command {
     private String taskName;
     private String by;

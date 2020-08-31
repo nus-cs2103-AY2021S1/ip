@@ -1,3 +1,7 @@
+package duke.ui;
+
+import duke.task.TaskList;
+
 import java.util.Scanner;
 
 public class Ui {
@@ -33,7 +37,7 @@ public class Ui {
 
     private static final String line = "-------------------------------------------------------------------------------";
 
-    private String botName = "Duke";
+    private String botName = "duke.Duke";
     private String userName = "You";
 
     private Scanner scanner;

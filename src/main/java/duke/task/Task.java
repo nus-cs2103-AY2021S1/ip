@@ -1,3 +1,5 @@
+package duke.task;
+
 public class Task {
     public static final String ICON_TICK = "✓";
     public static final String ICON_CROSS = "✗";

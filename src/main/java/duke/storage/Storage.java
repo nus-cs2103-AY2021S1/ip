@@ -1,3 +1,8 @@
+package duke.storage;
+
+import duke.DukeException;
+import duke.task.TaskList;
+
 import java.io.BufferedWriter;
 import java.io.BufferedReader;
 import java.io.File;
@@ -25,7 +30,7 @@ public class Storage {
     public void save(TaskList taskList) throws DukeException {
         try (BufferedWriter writer = Files.newBufferedWriter(this.filePath)) {
             LocalDateTime now = LocalDateTime.now();
-            String msg = "Task list (Last updated "
+            String msg = "duke.task.Task list (Last updated "
                     + now.format(DateTimeFormatter.ofPattern("MMM d yyyy, HH:mm:ss a"))
                     + "):\n";
             writer.write(msg + taskList.toString());

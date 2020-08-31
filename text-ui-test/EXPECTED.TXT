@@ -9,27 +9,27 @@ Hi, my nmae is
 How can I hlep you taody?
 ------------------------------------------------------------------
 You said: ------------------------------------------------------------------
-Duke said: I hvae adedd a new tsak:
+duke.Duke said: I hvae adedd a new tsak:
   [T][✗] read book
 You now hvae 1 tskas in yuor lsit.
 ------------------------------------------------------------------
 You said: ------------------------------------------------------------------
-Duke said: I hvae adedd a new tsak:
+duke.Duke said: I hvae adedd a new tsak:
   [T][✗] eat lunch
 You now hvae 2 tskas in yuor lsit.
 ------------------------------------------------------------------
 You said: ------------------------------------------------------------------
-Duke said: I hvae adedd a new tsak:
+duke.Duke said: I hvae adedd a new tsak:
   [D][✗] finish book (by: Saturday)
 You now hvae 3 tskas in yuor lsit.
 ------------------------------------------------------------------
 You said: ------------------------------------------------------------------
-Duke said: I hvae adedd a new tsak:
+duke.Duke said: I hvae adedd a new tsak:
   [E][✗] project meeting (at: June 6th)
 You now hvae 4 tskas in yuor lsit.
 ------------------------------------------------------------------
 You said: ------------------------------------------------------------------
-Duke said: 
+duke.Duke said:
 Hree are yuor tkass:
 1. [T][✗] read book
 2. [T][✗] eat lunch
@@ -37,15 +37,15 @@ Hree are yuor tkass:
 4. [E][✗] project meeting (at: June 6th)
 ------------------------------------------------------------------
 You said: ------------------------------------------------------------------
-Duke said: Mkread tsak as cteopmle.
+duke.Duke said: Mkread tsak as cteopmle.
   [T][✓] eat lunch
 ------------------------------------------------------------------
 You said: ------------------------------------------------------------------
-Duke said: Mkread tsak as cteopmle.
+duke.Duke said: Mkread tsak as cteopmle.
   [D][✓] finish book (by: Saturday)
 ------------------------------------------------------------------
 You said: ------------------------------------------------------------------
-Duke said: 
+duke.Duke said:
 Hree are yuor tkass:
 1. [T][✗] read book
 2. [T][✓] eat lunch
@@ -53,8 +53,8 @@ Hree are yuor tkass:
 4. [E][✗] project meeting (at: June 6th)
 ------------------------------------------------------------------
 You said: ------------------------------------------------------------------
-Duke said: Nteod wtih tnakhs.
+duke.Duke said: Nteod wtih tnakhs.
 ------------------------------------------------------------------
 You said: ------------------------------------------------------------------
-Duke said: Bye, hpoe to nveer see you aiagn.
+duke.Duke said: Bye, hpoe to nveer see you aiagn.
 ------------------------------------------------------------------
