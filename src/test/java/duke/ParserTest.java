@@ -1,12 +1,23 @@
 package duke;
 
-import duke.exception.*;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.time.format.DateTimeParseException;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
+import org.junit.jupiter.api.Test;
+
+import duke.exception.DeleteOutOfRangeException;
+import duke.exception.DoneOutOfRangeException;
+import duke.exception.EmptyDeadlineException;
+import duke.exception.EmptyEventException;
+import duke.exception.EmptyTodoException;
+import duke.exception.MissingDeadlineDateException;
+import duke.exception.MissingDeleteArgumentException;
+import duke.exception.MissingDoneArgumentException;
+import duke.exception.MissingEventDateException;
+import duke.exception.MissingFindArgumentException;
+import duke.exception.UnknownCommandException;
 
 public class ParserTest {
     @Test
@@ -32,13 +43,14 @@ public class ParserTest {
     @Test
     public void parseInvalidDeadlineDate_throwsDateTimeParseException() throws DeleteOutOfRangeException,
             UnknownCommandException, MissingDoneArgumentException, EmptyEventException, MissingEventDateException,
-            EmptyDeadlineException, MissingDeadlineDateException, DoneOutOfRangeException, MissingDeleteArgumentException,
-            EmptyTodoException, MissingFindArgumentException {
+            EmptyDeadlineException, MissingDeadlineDateException, DoneOutOfRangeException,
+            MissingDeleteArgumentException, EmptyTodoException, MissingFindArgumentException {
         try {
             assertEquals(false, Parser.parseAndExecute("deadline test /by xddd", new TaskList(), new Ui()));
             fail(); //the test should not reach this line
         } catch (DateTimeParseException e) {
-            assertEquals("java.time.format.DateTimeParseException: Text 'xddd' could not be parsed at index 0", e.toString());
+            assertEquals("java.time.format.DateTimeParseException: Text 'xddd' could not be parsed at index 0",
+                    e.toString());
         }
     }
 

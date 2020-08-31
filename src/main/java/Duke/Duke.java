@@ -1,5 +1,9 @@
 package duke;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.time.format.DateTimeParseException;
+
 import duke.exception.DeleteOutOfRangeException;
 import duke.exception.DoneOutOfRangeException;
 import duke.exception.EmptyDeadlineException;
@@ -11,12 +15,9 @@ import duke.exception.MissingDoneArgumentException;
 import duke.exception.MissingEventDateException;
 import duke.exception.MissingFindArgumentException;
 import duke.exception.UnknownCommandException;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.time.format.DateTimeParseException;
 
 /**
- * Duke Bot is a program that can schedule tasks and mark them as done, delete
+ * Duke Bot is a program that c an schedule tasks and mark them as done, delete
  * and save them on a file.
  *
  * @author Lim Jin Feng
@@ -57,8 +58,8 @@ public class Duke {
         while (!userInput.equals("bye")) {
             this.ui.sendBar();
             try {
-                if(
-                Parser.parseAndExecute(userInput, this.tasks, this.ui)
+                if (
+                    Parser.parseAndExecute(userInput, this.tasks, this.ui)
                 ) {
                     this.storage.save(tasks);
                 }

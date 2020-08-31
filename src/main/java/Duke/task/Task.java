@@ -6,13 +6,14 @@ import java.time.format.DateTimeFormatter;
  * Represents a task that can be added to Duke's Task List.
  */
 public class Task {
+    public static final DateTimeFormatter INPUT_DATE_TIME_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    public static final DateTimeFormatter PRINT_DATE_TIME_FORMAT = DateTimeFormatter.ofPattern("MMM dd yyyy");
     private String description;
     private boolean isDone;
-    public final static DateTimeFormatter INPUT_DATE_TIME_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-    public final static DateTimeFormatter PRINT_DATE_TIME_FORMAT = DateTimeFormatter.ofPattern("MMM dd yyyy");
 
     /**
      * Constructs the task with given description.
+     *
      * @param description  String of the description of the task.
      */
     public Task(String description) {
@@ -22,6 +23,7 @@ public class Task {
 
     /**
      * Overloaded constructor that constructs the task with done status.
+     *
      * @param description  String of the description of the task.
      * @param isDone  Whether the task is already done.
      */
@@ -39,6 +41,7 @@ public class Task {
 
     /**
      * Gets the description of the task.
+     *
      * @return  Description of the task.
      */
     public String getDescription() {
@@ -47,6 +50,7 @@ public class Task {
 
     /**
      * String representation of the task.
+     *
      * @return  String representation of the task.
      */
     @Override
@@ -56,6 +60,7 @@ public class Task {
 
     /**
      * String representation of the task to be written to a file.
+     *
      * @return  String representation of the task to be written to a file.
      */
     public String fileText() {

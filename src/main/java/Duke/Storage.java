@@ -14,8 +14,8 @@ import java.util.stream.Stream;
  */
 public class Storage {
 
-    File outputFile;
-    File dir;
+    private File outputFile;
+    private File dir;
 
     /**
      * Constructs a Storage object.

@@ -99,11 +99,11 @@ public class Parser {
             if (input.length() == 8 || input.indexOf("/") <= 9) {
                 throw new EmptyDeadlineException();
             }
-            String description = input.substring(9,index-1);
+            String description = input.substring(9, index - 1);
             if (description.length() == 0) {
                 throw new EmptyDeadlineException();
             }
-            String date = input.substring(index+4);
+            String date = input.substring(index + 4);
             if (date.length() == 0) {
                 throw new MissingDeadlineDateException();
             }
@@ -123,11 +123,11 @@ public class Parser {
             if (input.length() == 5 || input.indexOf("/") <= 6) {
                 throw new EmptyEventException();
             }
-            String description = input.substring(6,index-1);
+            String description = input.substring(6, index - 1);
             if (description.length() == 0) {
                 throw new EmptyEventException();
             }
-            String date = input.substring(index+4);
+            String date = input.substring(index + 4);
             if (date.length() == 0) {
                 throw new MissingEventDateException();
             }
@@ -150,8 +150,7 @@ public class Parser {
             String keyword = input.substring(5);
             ui.findTasks(tasks, keyword);
             return false;
-        }
-        else {
+        } else {
             throw new UnknownCommandException();
         }
     }

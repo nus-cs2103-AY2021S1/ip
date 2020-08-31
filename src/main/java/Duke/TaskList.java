@@ -1,13 +1,13 @@
 package duke;
 
+import java.util.ArrayList;
+import java.util.Optional;
+import java.util.stream.Stream;
+
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
-
-import java.util.ArrayList;
-import java.util.Optional;
-import java.util.stream.Stream;
 
 /**
  * A class that stores a list of tasks.

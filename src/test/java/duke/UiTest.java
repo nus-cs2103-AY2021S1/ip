@@ -1,10 +1,11 @@
 package duke;
 
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
 
 public class UiTest {
     @Test
@@ -23,7 +24,8 @@ public class UiTest {
         ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outputStreamCaptor));
         new Ui().sendBar();
-        assertEquals("____________________________________________________________", outputStreamCaptor.toString().trim());
+        assertEquals("____________________________________________________________",
+                outputStreamCaptor.toString().trim());
         System.setOut(standardOut);
     }
 }
