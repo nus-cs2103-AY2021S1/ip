@@ -1,10 +1,12 @@
 package duke.command;
 
+import duke.Storage;
 import duke.TaskList;
 import duke.enums.Message;
 import duke.exception.DukeException;
 import duke.ui.Ui;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -26,11 +28,12 @@ public class DoneCommand implements Command {
      * @throws DukeException
      */
     @Override
-    public void execute(TaskList tasks, Ui ui) throws DukeException {
+    public void execute(TaskList tasks, Ui ui) throws DukeException, IOException {
         ArrayList<String> lines = new ArrayList<>();
         lines.add(Message.DONE_MSG.getMsg());
         lines.add(tasks.completeTask(Integer.parseInt(this.parsedInput[1])));
         ui.display(lines);
+        Storage.save(tasks);
     }
     
     @Override
