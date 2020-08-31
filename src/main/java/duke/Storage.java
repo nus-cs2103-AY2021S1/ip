@@ -10,19 +10,31 @@ import java.io.IOException;
 import java.util.List;
 import java.util.ArrayList;
 
+/**
+ * Deals with loading tasks from the file and saving tasks in the file.
+ */
 public class Storage {
     private final File file;
 
+    /**
+     * Creates a new Storage file where tasks can be loaded from and saved to.
+     * @param filepath represents the path of the file.
+     */
     public Storage(String filepath) {
         this.file = new File(filepath);
         file.getParentFile().mkdir();
         try {
-            file.createNewFile(); // returns true if filepath does not exist and a new file is created
+            file.createNewFile();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
+    /**
+     * Loads tasks from the file.
+     * @return a list of all the tasks from the file.
+     * @throws DukeException when there are problems with loading from the file.
+     */
     public List<Task> load() throws DukeException {
         try {
             Scanner sc = new Scanner(file);
@@ -49,12 +61,17 @@ public class Storage {
         }
     }
 
+    /**
+     * Saves tasks into the file.
+     * @param tasks takes in a list of tasks to be saved into the file.
+     * @throws DukeException when there are problems saving into the file.
+     */
     public void save(List<Task> tasks) throws DukeException {
         try {
             FileWriter fw = new FileWriter(file);
             for (Task task : tasks) {
                 int isFinished = task.getIsDone() ? 1 : 0;
-                fw.write(task.save(isFinished) + "\n"); // write the task onto txt file with the | format
+                fw.write(task.save(isFinished) + "\n");
             }
             fw.close();
         } catch (IOException e) {
