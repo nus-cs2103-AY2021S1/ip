@@ -11,13 +11,13 @@ import java.util.stream.Collectors;
  * It supports the basic operations of manipulating tasks and answering queries.
  */
 public class TaskList {
-    private List<Task> list;
+    private List<Task> tasks;
 
     /**
      * Instantiates an empty list of {@link Task}s.
      */
     public TaskList() {
-        this.list = new ArrayList<>();
+        tasks = new ArrayList<>();
     }
 
     /**
@@ -25,7 +25,7 @@ public class TaskList {
      * @param tasks A list of {@link Task}s.
      */
     public TaskList(List<Task> tasks) {
-        list = tasks;
+        this.tasks = tasks;
     }
 
     /**
@@ -33,7 +33,7 @@ public class TaskList {
      * @param task A task to be added to the list.
      */
     public void addTask(Task task) {
-        list.add(task);
+        tasks.add(task);
     }
 
     /**
@@ -41,7 +41,7 @@ public class TaskList {
      * @param index The index of the task to be marked as completed.
      */
     public void markDone(int index) {
-        this.list.get(index - 1).markAsDone();
+        tasks.get(index - 1).markAsDone();
     }
 
     /**
@@ -50,7 +50,7 @@ public class TaskList {
      * @return The task at the provided index.
      */
     public Task getTask(int index) {
-        return list.get(index - 1);
+        return tasks.get(index - 1);
     }
 
     /**
@@ -58,7 +58,7 @@ public class TaskList {
      * @return The current size of the list.
      */
     public int getSize() {
-        return list.size();
+        return tasks.size();
     }
 
     /**
@@ -66,7 +66,7 @@ public class TaskList {
      * @return The list of tasks.
      */
     public List<Task> getTasks() {
-        return new ArrayList<>(list);
+        return new ArrayList<>(tasks);
     }
 
     /**
@@ -75,8 +75,12 @@ public class TaskList {
      */
     public String listTasks() {
         StringBuilder output = new StringBuilder();
-        for (int i = 0; i < this.list.size(); i++) {
-            output.append("\t ").append(i + 1).append(".").append(list.get(i)).append(i == list.size() - 1 ? "" : "\n");
+        for (int i = 0; i < tasks.size(); i++) {
+            output.append("\t ")
+                    .append(i + 1)
+                    .append(".")
+                    .append(tasks.get(i))
+                    .append(i == tasks.size() - 1 ? "" : "\n");
         }
         return output.toString();
     }
@@ -87,16 +91,17 @@ public class TaskList {
      * @return A formatted String of all the tasks that happen on or due at the provided date.
      */
     public String showTasksOnDate(LocalDate date) {
-        List<Task> filtered = list.stream()
+        List<Task> filteredTasks = tasks.stream()
                 .filter(task -> task.getDate() != null && task.getDate().equals(date)).collect(Collectors.toList());
-        if (filtered.size() == 0) {
+        if (filteredTasks.size() == 0) {
             return "There are no tasks happening on: " + date.format(DateTimeFormatter.ofPattern("MMMM d yyyy"));
         }
         StringBuilder output = new StringBuilder();
         output.append("Here are the tasks happening on: ").append(date).append("\n");
 
-        for (int i = 0; i < filtered.size(); i++) {
-            output.append(String.format("\t %d. %s" + (i == filtered.size() - 1 ? "" : "\n"), i + 1, filtered.get(i)));
+        for (int i = 0; i < filteredTasks.size(); i++) {
+            output.append(String.format("\t %d. %s" + (i == filteredTasks.size() - 1 ? "" : "\n"),
+                    i + 1, filteredTasks.get(i)));
         }
 
         return output.toString();
@@ -107,7 +112,7 @@ public class TaskList {
      * @return A formatted String of all pending {@link Task}s.
      */
     public String showPendingTasks() {
-        List<Task> pendingTasks = list.stream()
+        List<Task> pendingTasks = tasks.stream()
                 .filter(task -> !task.isTaskDone()).collect(Collectors.toList());
         if (pendingTasks.size() == 0) {
             return "Congratulations! You have completed all your tasks!";
@@ -128,7 +133,7 @@ public class TaskList {
      * @return A formatted String of all completed {@link Task}s.
      */
     public String showCompletedTasks() {
-        List<Task> completedTasks = list.stream().filter(Task::isTaskDone).collect(Collectors.toList());
+        List<Task> completedTasks = tasks.stream().filter(Task::isTaskDone).collect(Collectors.toList());
         if (completedTasks.size() == 0) {
             return "☹ OOPS!!! You have not completed any task yet.";
         }
@@ -149,7 +154,7 @@ public class TaskList {
      * @return A formatted String of {@link Task}s with description that includes this keyword.
      */
     public String showMatchingTasks(String keyword) {
-        List<Task> matchingTasks = list.stream()
+        List<Task> matchingTasks = tasks.stream()
                 .filter(task -> task.includesKeyword(keyword)).collect(Collectors.toList());
         if (matchingTasks.size() == 1) {
             return "There are no tasks containing keyword: " + keyword;
@@ -170,6 +175,6 @@ public class TaskList {
      * @param index The index of the {@link Task} to be deleted.
      */
     public void deleteTask(int index) {
-        this.list.remove(index - 1);
+        tasks.remove(index - 1);
     }
 }

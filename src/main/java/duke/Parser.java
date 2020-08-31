@@ -28,6 +28,7 @@ import duke.task.ToDo;
  */
 public class Parser {
     /**
+     * Parses the given command based on different keywords.
      * Returns the appropriate {@link Command} to execute next.
      * @param fullCommand A String read from user input.
      * @return The corresponding {@link Command} for the input.
@@ -37,6 +38,11 @@ public class Parser {
         fullCommand = fullCommand.toLowerCase();
         String[] fullCommandArray = fullCommand.split(" ");
         fullCommand = fullCommand.strip();
+
+        /*
+        Returns the correct command based on user input.
+        Invalid input will cause respective Exceptions to be thrown.
+         */
         if (fullCommand.equals(CommandType.BYE.getType())) {
             return new ByeCommand();
         } else if (fullCommand.equals(CommandType.LIST.getType())) {
