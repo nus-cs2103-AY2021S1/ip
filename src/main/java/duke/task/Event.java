@@ -5,12 +5,19 @@ import java.time.format.DateTimeFormatter;
 
 /**
  * Implements event objects.
- * 
+ *
  * @author Audrey Felicio Anwar
  */
 public class Event extends Task {
     private LocalDate time;
 
+    /**
+     * Initializes an Event object.
+     *
+     * @param description The task description.
+     * @param done Indicates whether the task is done.
+     * @param time Indicates the date of task.
+     */
     public Event(String description, boolean done, LocalDate time) {
         super(description, done);
         this.time = time;
@@ -23,8 +30,8 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " +
-                time.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+        return "[E]" + super.toString() + " (at: "
+                + time.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 
     /**

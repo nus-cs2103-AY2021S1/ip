@@ -1,5 +1,8 @@
 package duke.parser;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+
 import duke.command.ByeCommand;
 import duke.command.Command;
 import duke.command.DeadlineCommand;
@@ -11,12 +14,9 @@ import duke.command.ListCommand;
 import duke.command.ToDoCommand;
 import duke.exception.DukeException;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
-
 /**
  * Implements user input parser.
- * 
+ *
  * @author Audrey Felicio Anwar
  */
 public class Parser {
@@ -33,7 +33,7 @@ public class Parser {
 
     /**
      * Parses user input into command.
-     * 
+     *
      * @param input User input.
      * @return Command to be executed.
      * @throws DukeException If there is parsing error.
@@ -114,7 +114,7 @@ public class Parser {
                     break;
                 }
                 break;
-            case FIND:
+            default:
                 if (separated.length <= 1) {
                     isError = true;
                     errorMessage = " Keyword cannot be empty :(";
@@ -128,9 +128,9 @@ public class Parser {
                 throw new DukeException(errorMessage);
             }
             return command;
-        } catch(IllegalArgumentException error) {
+        } catch (IllegalArgumentException error) {
             throw new DukeException(" Command not recognized :(");
-        } catch(DateTimeParseException error) {
+        } catch (DateTimeParseException error) {
             throw new DukeException(" I cannot recognize the date you put in :(");
         }
     }

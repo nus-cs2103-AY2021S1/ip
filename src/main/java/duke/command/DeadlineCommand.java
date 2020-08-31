@@ -1,12 +1,13 @@
 package duke.command;
 
+import java.time.LocalDate;
+
 import duke.storage.Storage;
 import duke.task.Deadline;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
-import java.time.LocalDate;
 
 /**
  * Implements deadline command objects.
@@ -17,6 +18,11 @@ public class DeadlineCommand extends Command {
     private String description;
     private LocalDate time;
 
+    /**
+     * Initializes a DeadlineCommand object.
+     * @param description The task description.
+     * @param time The task deadline time.
+     */
     public DeadlineCommand(String description, LocalDate time) {
         this.description = description;
         this.time = time;
@@ -24,7 +30,7 @@ public class DeadlineCommand extends Command {
 
     /**
      * Executes the given command.
-     * 
+     *
      * @param tasks Task list the user currently have.
      * @param ui Tool to interact with user.
      * @param storage Storage to load and save data.

@@ -1,25 +1,33 @@
 package duke.task;
 
+import java.util.ArrayList;
+
 import duke.ui.Ui;
 
-import java.util.ArrayList;
 
 /**
  * Implements the list of tasks.
- * 
+ *
  * @author Audrey Felicio Anwar
  */
 public class TaskList {
     private ArrayList<Task> tasks;
     private int taskCount;
     private Ui ui;
-    
+
+    /**
+     * Initializes an empty TaskList object.
+     */
     public TaskList() {
         this.tasks = new ArrayList<>();
         this.taskCount = 0;
         this.ui = new Ui();
     }
-    
+
+    /**
+     * Initializes a TaskList object.
+     * @param savedTasks Tasks gathered from save file.
+     */
     public TaskList(ArrayList<Task> savedTasks) {
         this.tasks = savedTasks;
         this.taskCount = savedTasks.size();
@@ -28,7 +36,7 @@ public class TaskList {
 
     /**
      * Returns user current tasks.
-     * 
+     *
      * @return User current tasks.
      */
     public ArrayList<Task> getTasks() {
@@ -37,7 +45,7 @@ public class TaskList {
 
     /**
      * Adds task to task list.
-     * 
+     *
      * @param task Task to be added.
      */
     public void addTask(Task task) {
@@ -50,7 +58,7 @@ public class TaskList {
 
     /**
      * Deletes a specific task.
-     * 
+     *
      * @param index Position of the task to be deleted.
      */
     public void deleteTask(int index) {
@@ -84,7 +92,7 @@ public class TaskList {
 
     /**
      * Marks a specific task as done.
-     * 
+     *
      * @param index Position of the task to be completed.
      */
     public void markAsDone(int index) {
@@ -100,7 +108,7 @@ public class TaskList {
 
     /**
      * Finds all tasks that match the keyword.
-     * 
+     *
      * @param keyword Keyword to be searched.
      * @return Tasks that match the keyword.
      */

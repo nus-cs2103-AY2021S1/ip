@@ -1,30 +1,35 @@
 package duke.storage;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Scanner;
+
 import duke.exception.DukeException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
 
-import java.time.LocalDate;
-
-import java.util.ArrayList;
-import java.util.Scanner;
 
 /**
  * Implements file storage.
- * 
+ *
  * @author Audrey Felicio Anwar
  */
 public class Storage {
     private File data;
-    
+
+    /**
+     * Intializes a Storage object.
+     * @param filePath The location of the storage.
+     * @throws DukeException If directory not found.
+     */
     public Storage(String filePath) throws DukeException {
         try {
             File data = new File(filePath);
@@ -39,7 +44,7 @@ public class Storage {
 
     /**
      * Generates list of tasks from save file.
-     * 
+     *
      * @return List of tasks generated from save file.
      * @throws DukeException If there is file reading error.
      */
@@ -71,7 +76,7 @@ public class Storage {
 
     /**
      * Saves task to hard disk.
-     * 
+     *
      * @param tasks Tasks user currently have.
      * @throws DukeException If there is writing file error.
      */
