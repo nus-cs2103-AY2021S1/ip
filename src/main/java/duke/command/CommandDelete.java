@@ -10,6 +10,7 @@ import duke.task.Task;
  */
 public class CommandDelete implements Command {
     private int index;
+    private String message = "";
 
     /**
      * Construct a new command to delete a task at specified index.
@@ -32,8 +33,11 @@ public class CommandDelete implements Command {
         Task deleted = tasks.getList().get(index);
         tasks.remove(index);
         ui.printLine("Noted! I've removed this task:");
+        message += "Noted! I've removed this task:\n";
         ui.printLine(deleted.toString());
+        message += deleted.toString() + "\n";
         ui.printLine("Now you have " + tasks.size() + " tasks in the list.");
+        message += "Now you have " + tasks.size() + " tasks in the list.";
     }
 
     /**
@@ -42,5 +46,9 @@ public class CommandDelete implements Command {
      */
     public boolean isExit() {
         return false;
+    }
+
+    public String getMessage() {
+        return message;
     }
 }

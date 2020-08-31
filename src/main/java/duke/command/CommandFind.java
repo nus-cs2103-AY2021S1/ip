@@ -11,6 +11,7 @@ import duke.task.Task;
  */
 public class CommandFind implements Command {
     private final String keyword;
+    private String message = "";
 
     /**
      * Construct a new find command with search keyword.
@@ -34,9 +35,15 @@ public class CommandFind implements Command {
         }
         if (results.size() == 0) {
             ui.printLine("No tasks containing " + keyword + " found!");
+            message += "No tasks containing " + keyword + " found!";
         } else {
             ui.printLine("Found " + results.size() + " tasks:");
             ui.printList(results);
+            message += "Found " + results.size() + " tasks:\n";
+            message += "Here are the tasks in your list:\n";
+            for (int i = 1; i <= results.size(); i++) {
+                message += i + "." + results.get(i - 1) + "\n";
+            }
         }
     }
 
@@ -46,5 +53,9 @@ public class CommandFind implements Command {
      */
     public boolean isExit() {
         return false;
+    }
+
+    public String getMessage() {
+        return message;
     }
 }
