@@ -13,6 +13,7 @@ public class AddEventOperation extends AddOperation {
 
     /**
      * Constructor method.
+     *
      * @param description the description of the <code>Event</code>.
      * @param time the time when the <code>Event</code> occurs.
      * @param taskList the <code>TaskList</code> that <code>Event</code> is to be added into.
@@ -24,6 +25,7 @@ public class AddEventOperation extends AddOperation {
 
     /**
      * Creates the associated <code>Event</code>.
+     *
      * @return an uncompleted <code>Event</code>.
      */
     @Override

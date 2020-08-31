@@ -13,6 +13,7 @@ public class StartOperation extends Operation {
 
     /**
      * Constructor method.
+     *
      * @param taskList the <code>TaskList</code> for the storage file to be loaded onto.
      * @param taskStorage the <code>TaskStorage</code> instance that will read in the storage file.
      */
@@ -23,6 +24,7 @@ public class StartOperation extends Operation {
 
     /**
      * Specifies that this is not an <code>ExitOperation</code>.
+     *
      * @return <code>false</code>.
      */
     @Override
@@ -32,6 +34,7 @@ public class StartOperation extends Operation {
 
     /**
      * Executes the operation by loading the storage file into <code>TaskList</code>.
+     *
      * @return a <code>Result</code> containing the status of the loading.
      */
     @Override

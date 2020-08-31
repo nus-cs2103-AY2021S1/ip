@@ -19,6 +19,7 @@ public class TaskList implements Iterable<Task> {
 
     /**
      * Implements the <code>Iterable</code> interface in order for <code>TaskList</code> to be iterable.
+     *
      * @return the iterator form of <code>TaskList</code>.
      */
     @Override
@@ -28,6 +29,7 @@ public class TaskList implements Iterable<Task> {
 
     /**
      * Gets the number of <code>Tasks</code> that are being stored currently.
+     *
      * @return the number of <code>Tasks</code>.
      */
     public int getCurrCapacity() {
@@ -36,6 +38,7 @@ public class TaskList implements Iterable<Task> {
 
     /**
      * Checks if the given <code>index</code> is within the capacity of <code>TaskList</code>.
+     *
      * @param index the value to be checked on.
      * @return <code>true</code> if <code>index</code> is within the capacity.
      */
@@ -45,6 +48,7 @@ public class TaskList implements Iterable<Task> {
 
     /**
      * Adds the given <code>Task</code> into <code>TaskList</code>.
+     *
      * @param task the <code>Task</code> that is to be added.
      * @return the <code>Task</code> that has been added.
      */
@@ -55,6 +59,7 @@ public class TaskList implements Iterable<Task> {
 
     /**
      * Changes the specified <code>Task</code> in <code>TaskList</code> to completed.
+     *
      * @param index the index of the <code>Task</code> that is to be changed.
      * @return the <code>Task</code> that has been completed.
      */
@@ -66,6 +71,7 @@ public class TaskList implements Iterable<Task> {
 
     /**
      * Removes a specified <code>Task</code> from <code>TaskList</code>.
+     *
      * @param index the index of the <code>Task</code> that is to be deleted.
      * @return the <code>Task</code> that has been removed.
      */
@@ -75,6 +81,7 @@ public class TaskList implements Iterable<Task> {
 
     /**
      * Converts the <code>TaskList</code> to a representative <code>String</code>.
+     *
      * This <code>String</code> contains all details of <code>Tasks</code> stored in <code>TaskList</code>.
      * @return the <code>String</code> representing <code>TaskList</code>.
      */
@@ -94,6 +101,7 @@ public class TaskList implements Iterable<Task> {
 
     /**
      * Finds all <code>Tasks</code> containing the specified search word.
+     *
      * @param searchWord the <code>String</code> that is to be search with.
      * @return a <code>String</code> containing all <code>Tasks</code> that are found.
      */

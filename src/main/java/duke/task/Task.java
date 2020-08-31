@@ -14,6 +14,7 @@ public abstract class Task {
 
     /**
      * Constructor method of <code>Task</code>.
+     *
      * @param description the description of the <code>Task</code>.
      * @param isCompleted indicates if the <code>Task</code> has been completed.
      */
@@ -25,6 +26,7 @@ public abstract class Task {
     /**
      * Converts the <code>Task</code> to a <code>String</code>.
      * Indicates the completion status of the <code>Task</code> and its description.
+     *
      * @return a <code>String</code> representing the <code>Task</code>.
      */
     public String toStringSuffix() {
@@ -47,6 +49,7 @@ public abstract class Task {
 
     /**
      * Gets the description of the <code>Task</code>.
+     *
      * @return the <code>String</code> of the <code>Task</code> description.
      */
     public String getTaskDescription() {
@@ -55,6 +58,7 @@ public abstract class Task {
 
     /**
      * Gets the completion status of the <code>Task</code>.
+     *
      * @return <code>true</code> if the <code>Task</code> is completed
      * and <code>false</code> if not.
      */
@@ -64,12 +68,14 @@ public abstract class Task {
 
     /**
      * Gets the task symbol of the subtype of <code>Task</code>.
+     *
      * @return the task symbol <code>String</code>.
      */
     public abstract String getTaskSymbol();
 
     /**
      * Gets the formatted <code>String</code> of the <code>Datetime</code> of the <code>Task</code>.
+     *
      * @return an <code>Optional</code> containing the formatted <code>Datetime String</code>.
      */
     public abstract Optional<String> getTaskDatetime();

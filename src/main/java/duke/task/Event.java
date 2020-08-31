@@ -18,6 +18,7 @@ public class Event extends Task {
     private final Datetime time;
     /**
      * Constructor method.
+     *
      * @param description the description of the <code>Event</code>.
      * @param isCompleted the completion status of the <code>Event</code>.
      * @param time the <code>LocalDateTime</code> the <code>Event</code> task is to be completed by.
@@ -29,6 +30,7 @@ public class Event extends Task {
 
     /**
      * Creates an <code>Event</code> that is not completed.
+     *
      * @param description the description of the <code>Event</code>.
      * @param time the <code>LocalDateTime</code> the <code>Event</code> task is to be completed by.
      * @return an uncompleted <code>Event</code>.
@@ -38,7 +40,8 @@ public class Event extends Task {
     }
 
     /**
-     * Converts the <code>Event</code> to a <code>String</code>,
+     * Converts the <code>Event</code> to a <code>String</code>.
+     *
      * @return a <code>String</code> representing the <code>Event</code>.
      */
     @Override
@@ -50,6 +53,7 @@ public class Event extends Task {
 
     /**
      * Checks if the other object is equivalent to the <code>Event</code>.
+     *
      * @param other the object to be compared to.
      * @return <code>true</code> if both objects are equal.
      */
@@ -67,6 +71,7 @@ public class Event extends Task {
 
     /**
      * Retrieves the symbol of <code>Event</code>.
+     *
      * @return the <code>String</code> symbol of <code>Event</code>.
      */
     @Override
@@ -76,6 +81,7 @@ public class Event extends Task {
 
     /**
      * Gets the datetime <code>String</code> of <code>Event</code>.
+     *
      * @return an <code>Optional</code> containing the formatted <code>String</code>.
      */
     @Override

@@ -11,6 +11,7 @@ public class ListOperation extends Operation {
 
     /**
      * Constructor method.
+     *
      * @param taskList the <code>TaskList</code> that is to be printed.
      */
     public ListOperation(TaskList taskList) {
@@ -19,6 +20,7 @@ public class ListOperation extends Operation {
 
     /**
      * Specifies that this is not an <code>ExitOperation</code>.
+     *
      * @return <code>false</code>.
      */
     @Override
@@ -28,6 +30,7 @@ public class ListOperation extends Operation {
 
     /**
      * Executes the operation by retrieving all <code>Tasks</code> in <code>TaskList</code>.
+     *
      * @return a <code>Result</code> containing all <code>Tasks</code> stored in <code>TaskList</code>.
      */
     @Override

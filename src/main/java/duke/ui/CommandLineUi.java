@@ -48,6 +48,7 @@ public class CommandLineUi {
 
     /**
      * Prints out the loading status of Duke.
+     *
      * @param loadStatus the status <code>String</code> to be printed.
      */
     public void showLoadStatus(String loadStatus) {
@@ -57,6 +58,7 @@ public class CommandLineUi {
 
     /**
      * Prints out the message from Duke, after a user has input a command.
+     *
      * @param msg the message to be printed.
      */
     public void showStatus(String msg) {
@@ -68,6 +70,7 @@ public class CommandLineUi {
 
     /**
      * Reads in the user input as a line.
+     *
      * @return the <code>String</code> of the user input.
      */
     public String readUserInput() {

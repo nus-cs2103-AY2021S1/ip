@@ -13,6 +13,7 @@ public abstract class AddOperation extends Operation {
 
     /**
      * Constructor method.
+     *
      * @param description the description of the <code>Task</code>.
      * @param taskList the <code>TaskList</code> that <code>Task</code> is to be added into.
      */
@@ -23,6 +24,7 @@ public abstract class AddOperation extends Operation {
 
     /**
      * Specifies that this is not an <code>ExitOperation</code>.
+     *
      * @return <code>false</code>.
      */
     @Override
@@ -32,12 +34,14 @@ public abstract class AddOperation extends Operation {
 
     /**
      * Creates the associated <code>Task</code>.
+     *
      * @return an uncompleted <code>Task</code>.
      */
     public abstract Task createTask();
 
     /**
      * Adds the <code>Task</code> into the <code>TaskList</code>.
+     *
      * @return a <code>Result</code> specifying the <code>Task</code> that has been added and
      * the total number of <code>Tasks</code> in <code>TaskList</code>.
      */

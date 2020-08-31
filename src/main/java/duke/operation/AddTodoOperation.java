@@ -10,6 +10,7 @@ public class AddTodoOperation extends AddOperation {
 
     /**
      * Constructor method.
+     *
      * @param description the description of the <code>Todo</code>.
      * @param taskList the <code>TaskList</code> that <code>Todo</code> is to be added into.
      */
@@ -19,6 +20,7 @@ public class AddTodoOperation extends AddOperation {
 
     /**
      * Creates the associated <code>Todo</code>.
+     *
      * @return an uncompleted <code>Todo</code>.
      */
     @Override

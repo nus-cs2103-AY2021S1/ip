@@ -13,6 +13,7 @@ public class AddDeadlineOperation extends AddOperation {
 
     /**
      * Constructor method.
+     *
      * @param description the description of the <code>Deadline</code>.
      * @param dateTime the datetime when the <code>Deadline</code> occurs.
      * @param taskList the <code>TaskList</code> that <code>Deadline</code> is to be added into.
@@ -24,6 +25,7 @@ public class AddDeadlineOperation extends AddOperation {
 
     /**
      * Creates the associated <code>Deadline</code>.
+     *
      * @return an uncompleted <code>Deadline</code>.
      */
     @Override

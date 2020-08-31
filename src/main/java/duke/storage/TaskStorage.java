@@ -31,6 +31,7 @@ public class TaskStorage {
      * Creates a <code>TaskStorage</code>.
      * The path to the file used is pre determined by default.
      * If the path directory does not exist, the file will then be saved into the root of the directory.
+     *
      * @return a preconfigured <code>TaskStorage</code>.
      */
     public static TaskStorage createTaskStorage() {
@@ -43,6 +44,7 @@ public class TaskStorage {
 
     /**
      * Loads the <code>TaskList</code> from the text file.
+     *
      * @param taskList the <code>TaskList</code> to be loaded onto.
      * @return a <code>String</code> indicating the status of the loading.
      */
@@ -81,6 +83,7 @@ public class TaskStorage {
 
     /**
      * Saves the <code>TaskList</code> into the text file.
+     *
      * @param taskList the <code>TaskList</code> that is to be saved.
      * @throws DukeException if the text file cannot be written onto.
      */

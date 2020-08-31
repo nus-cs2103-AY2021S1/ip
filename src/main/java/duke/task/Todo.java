@@ -11,6 +11,7 @@ public class Todo extends Task {
 
     /**
      * Constructor method.
+     *
      * @param description the description of the <code>Todo</code>.
      * @param isCompleted the completion status of the <code>Todo</code>.
      */
@@ -20,6 +21,7 @@ public class Todo extends Task {
 
     /**
      * Creates a <code>Todo</code> that is not completed.
+     *
      * @param description the description of the <code>Todo</code>.
      * @return an uncompleted <code>Todo</code>.
      */
@@ -28,7 +30,8 @@ public class Todo extends Task {
     }
 
     /**
-     * Converts the <code>Todo</code> to a <code>String</code>,
+     * Converts the <code>Todo</code> to a <code>String</code>.
+     *
      * @return a <code>String</code> representing the <code>Todo</code>.
      */
     @Override
@@ -38,6 +41,7 @@ public class Todo extends Task {
 
     /**
      * Checks if the other object is equivalent to a <code>Todo</code>.
+     *
      * @param other the object to be compared to.
      * @return <code>true</code> if both objects are equal.
      */
@@ -54,6 +58,7 @@ public class Todo extends Task {
 
     /**
      * Retrieves the symbol of <code>Todo</code>.
+     *
      * @return the <code>String</code> symbol of <code>Todo</code>.
      */
     @Override
@@ -64,6 +69,7 @@ public class Todo extends Task {
     /**
      * Gets the datetime of <code>Todo</code>.
      * Since <code>Todo</code> does not have a datetime attribute, it will be empty.
+     *
      * @return an empty <code>Optional</code> object.
      */
     @Override

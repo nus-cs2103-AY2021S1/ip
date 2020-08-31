@@ -13,6 +13,7 @@ public class DeleteOperation extends Operation {
 
     /**
      * Constructor method.
+     *
      * @param taskList taskList the <code>TaskList</code> containing the
      *                 <code>Task</code> that is to be removed.
      * @param index the associated index of the <code>Task</code>.
@@ -24,6 +25,7 @@ public class DeleteOperation extends Operation {
 
     /**
      * Specifies that this is not an <code>ExitOperation</code>.
+     *
      * @return <code>false</code>.
      */
     @Override
@@ -33,6 +35,7 @@ public class DeleteOperation extends Operation {
 
     /**
      * Removes the given <code>Task</code> from the <code>TaskList</code>.
+     *
      * @return a <code>Result</code> indicating the task that has been removed.
      */
     @Override

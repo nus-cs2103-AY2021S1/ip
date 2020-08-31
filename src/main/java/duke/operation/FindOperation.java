@@ -12,6 +12,7 @@ public class FindOperation extends Operation {
 
     /**
      * Constructor method.
+     *
      * @param taskList the <code>TaskList</code> that is to be searched on.
      * @param searchWord the <code>String</code> that <code>TaskList</code> is to be search with.
      */
@@ -22,6 +23,7 @@ public class FindOperation extends Operation {
 
     /**
      * Specifies that this is not an <code>ExitOperation</code>.
+     *
      * @return <code>false</code>.
      */
     @Override
@@ -32,6 +34,7 @@ public class FindOperation extends Operation {
     /**
      * Executes the operation by retrieving all <code>Tasks</code> in
      * <code>TaskList</code> containing the search word.
+     *
      * @return a <code>Result</code> containing all <code>Tasks</code> found.
      */
     @Override

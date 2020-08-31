@@ -19,6 +19,7 @@ public class Deadline extends Task {
 
     /**
      * Constructor method.
+     *
      * @param description the description of the <code>Deadline</code>.
      * @param isCompleted the completion status of the <code>Deadline</code>.
      * @param datetime the <code>LocalDateTime</code> the <code>Deadline</code> task is to be completed by.
@@ -30,6 +31,7 @@ public class Deadline extends Task {
 
     /**
      * Creates a <code>Deadline</code> that is not completed.
+     *
      * @param description the description of the <code>Deadline</code>.
      * @param datetime the <code>LocalDateTime</code> the <code>Deadline</code> task is to be completed by.
      * @return an uncompleted <code>Deadline</code>.
@@ -40,6 +42,7 @@ public class Deadline extends Task {
 
     /**
      * Converts the <code>Deadline</code> to a <code>String</code>.
+     *
      * @return a <code>String</code> representing the <code>Deadline</code>.
      */
     @Override
@@ -51,6 +54,7 @@ public class Deadline extends Task {
 
     /**
      * Checks if the other object is equivalent to <code>Deadline</code>.
+     *
      * @param other the object to be compared to.
      * @return <code>true</code> if both objects are equal.
      */
@@ -68,6 +72,7 @@ public class Deadline extends Task {
 
     /**
      * Retrieves the symbol of <code>Deadline</code>.
+     *
      * @return the <code>String</code> symbol of <code>Deadline</code>.
      */
     @Override
@@ -77,6 +82,7 @@ public class Deadline extends Task {
 
     /**
      * Gets the datetime <code>String</code> of <code>Deadline</code>.
+     *
      * @return an <code>Optional</code> containing the formatted <code>String</code>.
      */
     @Override

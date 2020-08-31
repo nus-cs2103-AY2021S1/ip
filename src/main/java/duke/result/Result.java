@@ -11,6 +11,7 @@ public class Result {
 
     /**
      * Constructor method.
+     *
      * @param isSuccessful indicates if the <code>Operation</code> is successful.
      * @param message indicates the message of the <code>Operation</code>.
      * @param isExit indicates if Duke should stop running.
@@ -23,6 +24,7 @@ public class Result {
 
     /**
      * Determines if the executed <code>Operation</code> was an <code>ExitOperation</code>.
+     *
      * @return <code>true</code> if it is an <code>ExitOperation</code>.
      */
     public boolean isExit() {
@@ -31,6 +33,7 @@ public class Result {
 
     /**
      * Gets the message of the executed <code>Operation</code>.
+     *
      * @return the message <code>String</code>.
      */
     public String getMessage() {

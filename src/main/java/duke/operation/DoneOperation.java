@@ -13,6 +13,7 @@ public class DoneOperation extends Operation {
 
     /**
      * Constructor method.
+     *
      * @param taskList the <code>TaskList</code> containing the <code>Task</code> that is to be changed.
      * @param index the associated index of the <code>Task</code>.
      */
@@ -23,6 +24,7 @@ public class DoneOperation extends Operation {
 
     /**
      * Specifies that this is not an <code>ExitOperation</code>.
+     *
      * @return <code>false</code>.
      */
     @Override
@@ -32,6 +34,7 @@ public class DoneOperation extends Operation {
 
     /**
      * Executes the operation by converting the specified <code>Task</code> into completed.
+     *
      * @return a <code>Result</code> indicating if the <code>Task</code> has been completed.
      */
     @Override

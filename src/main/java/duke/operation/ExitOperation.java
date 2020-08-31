@@ -14,6 +14,7 @@ public class ExitOperation extends Operation {
 
     /**
      * Constructor method.
+     *
      * @param storage the <code>TaskStorage</code> that allows the
      *                <code>taskList</code> to be saved into a text file.
      * @param taskList the <code>TaskList</code> that is to be saved.
@@ -25,6 +26,7 @@ public class ExitOperation extends Operation {
 
     /**
      * Specifies that this is an <code>ExitOperation</code>.
+     *
      * @return <code>true</code>.
      */
     @Override
@@ -35,6 +37,7 @@ public class ExitOperation extends Operation {
     /**
      * Saves the <code>Tasks</code> in <code>TaskList</code> into a text file.
      * If the file cannot be saved, Duke will not exit.
+     *
      * @return a goodbye message and an indication if the <code>Tasks</code> cannot be saved.
      */
     @Override
