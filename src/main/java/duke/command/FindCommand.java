@@ -38,18 +38,18 @@ public class FindCommand extends Command {
      * @throws InvalidDateFormatException If the date cannot be parsed
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws InvalidDateFormatException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws InvalidDateFormatException {
         Optional<LocalDate> optDate = DateParser.parse(keyword);
         if (optDate.isPresent()) {
             LocalDate date = optDate.get();
-            TaskList filtered = tasks.filter((task) -> 
+            TaskList filteredTasks = tasks.filter((task) ->
                     ((task instanceof Deadline && ((Deadline) task).isDueOn(date))
                     || (task instanceof Event && ((Event) task).isOccuringOn(date))));
-            ui.showFindResult(filtered);
+            return ui.showFindResult(filteredTasks);
         } else {
-            TaskList filtered = tasks.filter((task) -> 
+            TaskList filteredTasks = tasks.filter((task) ->
                     task.toString().toLowerCase().contains(keyword.toLowerCase()));
-            ui.showFindResult(filtered);
+            return ui.showFindResult(filteredTasks);
         }
     }
 }
