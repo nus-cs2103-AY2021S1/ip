@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 public class ParserTest {
 
     TaskList tasklist = new TaskList();
-    Storage storage = new Storage("data/test/parserTest.txt");
+    Storage storage = new Storage("data/test/parser/parserTest.txt");
 
     @Test
     public void parseTodoTest() {
