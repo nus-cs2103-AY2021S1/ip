@@ -9,24 +9,24 @@ import duke.ui.UI;
 import duke.ui.UiException;
 
 /**
- * Consolidates the various elements.
- * Drives the application.
+ * Handles the logic for the application.
  */
 public class Duke {
+    private static final String FILE_PATH = "./data/taskList.txt";
+
     private TaskList taskList;
     private Storage storage;
     private final UI ui;
 
     /**
      * Creates an instance of Duke.
-     *
-     * @param filepath Valid path relative to current root directory
+     * The filepath defaults to "./data/taskList.txt".
      */
-    public Duke(String filepath) {
+    public Duke() {
         ui = new UI();
         taskList = new TaskList();
         try {
-            storage = new Storage(filepath);
+            storage = new Storage(FILE_PATH);
             storage.load(taskList);
         } catch (StorageException e) {
             ui.showErrorMessage(e.getMessage());
@@ -63,6 +63,10 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke("./data/taskList.txt").run();
+        new Duke().run();
+    }
+
+    public String getResponse(String input) {
+        return "Duke heard: " + input;
     }
 }
