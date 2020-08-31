@@ -9,11 +9,19 @@ public class Ui {
     private final Scanner scanner;
     private final Parser parser;
 
+    /**
+     * Constructs a ui object to handle user inputs.
+     */
     public Ui(){
         scanner = new Scanner(System.in);
         parser = new Parser();
     }
 
+    /**
+     * Work horse of the Duke project, handles all possible user inputs exactly.
+     * Currently, the designing of deal() function is not in line with our 2103 coding
+     * standards, I will continue to work on it :).
+     */
     public void deal(){
         for (int i = 0; i < 100000; i++) {
 
