@@ -33,7 +33,7 @@ public class Storage {
         } catch (IOException e) {
             System.out.println("unable to read file " + e.getMessage());
         }
-        LoadFile();
+        loadFile();
     }
 
     /**
@@ -42,7 +42,7 @@ public class Storage {
      *
      * @throws DukeException If the file is unable to be opened
      */
-    public void LoadFile() throws DukeException {
+    public void loadFile() throws DukeException {
         try {
             BufferedReader bf = new BufferedReader(new FileReader(storageFilePath.toString()));
             String task = bf.readLine();
@@ -76,7 +76,7 @@ public class Storage {
                     if (inputs[1].equals("1")) {
                         newTask.complete();
                     }
-                    taskList.AddTask(newTask, false);
+                    taskList.addTask(newTask, false);
                     task = bf.readLine();
                 } catch (DukeException e) {
                     System.out.println(e.getMessage());

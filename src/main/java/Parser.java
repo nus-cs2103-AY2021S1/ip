@@ -30,11 +30,11 @@ public class Parser {
             switch (command) {
             case DONE: {
                 int index = Integer.parseInt(taskDescription) - 1;
-                taskList.DoneTask(index);
+                taskList.doneTask(index);
                 break;
             }
             case LIST: {
-                taskList.ListTask();
+                taskList.listTask();
                 break;
             }
             case BYE: {
@@ -42,24 +42,28 @@ public class Parser {
                 taskList.setTaskListNotUpdating();
                 break;
             }
+            case FIND: {
+                taskList.findTask(taskDescription);
+                break;
+            }
             case TODO: {
                 Task newTask = new Todo(taskDescription);
-                taskList.AddTask(newTask,true);
+                taskList.addTask(newTask,true);
                 break;
             }
             case DEADLINE: {
                 Task newTask = Deadline.create(taskDescription);
-                taskList.AddTask(newTask,true);
+                taskList.addTask(newTask,true);
                 break;
             }
             case EVENT: {
                 Task newTask = Event.create(taskDescription);
-                taskList.AddTask(newTask,true);
+                taskList.addTask(newTask,true);
                 break;
             }
             case DELETE: {
                 int index = Integer.parseInt(taskDescription) - 1;
-                taskList.DeleteTask(index);
+                taskList.deleteTask(index);
             }
             default: {
                 throw new DukeException("smlj??????");

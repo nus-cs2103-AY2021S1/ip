@@ -43,14 +43,23 @@ public abstract class Task {
         );
     }
 
+
     /**
      * get the string format of the stored task in the hard drive
      *
      * @return String of the stored task
      */
-
-    public String safeFileFormat() {
+    public String safeFileFormat(){
         return "";
+    }
+
+    /**
+     * Check if input description is the same as task description
+     *
+     * @return Boolean on whether the description matches
+     */
+    public boolean fitsTask(String description){
+        return taskName.contains(description);
     }
 
 }
