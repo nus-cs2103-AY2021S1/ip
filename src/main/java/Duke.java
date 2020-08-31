@@ -1,3 +1,4 @@
+import java.io.File;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -13,13 +14,9 @@ public class Duke {
     private Parser parser;
 
     public Duke() {
-        try {
-            storage = new Storage();
-            tasks = new TaskList(storage);
-            parser = new Parser();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        storage = new Storage();
+        tasks = new TaskList(storage);
+        parser = new Parser();
     }
 
     /**
@@ -34,37 +31,37 @@ public class Duke {
         while ((command = Parser.parse(s = scanner.nextLine(), tasks.size()))
                 != Parser.Command.BYE) {
             switch (command) {
-                default:
-                    try {
-                        Task task = Parser.createTask(s);
-                        tasks.addTask(task);
-                        Ui.addTaskMessage(tasks.get(tasks.size() - 1), tasks.size());
-                    } catch (DukeException e) {
-                        if (e.getMessage().equals(DukeException.IGNORE)) {
-                            Ui.ignoreMessage();
-                        } else if (e.getMessage().equals(DukeException.EMPTY_TODO)) {
-                            Ui.emptyTodoMessage();
-                        }
-                    } catch (DateTimeParseException e) {
-                        Ui.dateFormatReminder();
+            default:
+                try {
+                    Task task = Parser.createTask(s);
+                    tasks.addTask(task);
+                    Ui.addTaskMessage(tasks.get(tasks.size() - 1), tasks.size());
+                } catch (DukeException e) {
+                    if (e.getMessage().equals(DukeException.IGNORE)) {
+                        Ui.ignoreMessage();
+                    } else if (e.getMessage().equals(DukeException.EMPTY_TODO)) {
+                        Ui.emptyTodoMessage();
                     }
-                    break;
-                case DONE:
-                    tasks.setCompleted(parser.whichTask);
-                    Ui.doneMessage(tasks.get(parser.whichTask));
-                    break;
-                case DELETE:
-                    Task deleted = tasks.get(parser.whichTask);
-                    tasks.remove(parser.whichTask);
-                    Ui.deleteMessage(deleted, tasks.size());
-                    break;
-                case LIST:
-                    Ui.list(tasks);
-                    break;
-                case FIND:
-                    ArrayList<Task> found = tasks.find(parser.searchText);
-                    Ui.searchResult(found);
-                    break;
+                } catch (DateTimeParseException e) {
+                    Ui.dateFormatReminder();
+                }
+                break;
+            case DONE:
+                tasks.setCompleted(parser.whichTask);
+                Ui.doneMessage(tasks.get(parser.whichTask));
+                break;
+            case DELETE:
+                Task deleted = tasks.get(parser.whichTask);
+                tasks.remove(parser.whichTask);
+                Ui.deleteMessage(deleted, tasks.size());
+                break;
+            case LIST:
+                Ui.list(tasks);
+                break;
+            case FIND:
+                ArrayList<Task> found = tasks.find(parser.searchText);
+                Ui.searchResult(found);
+                break;
             }
         }
         Ui.exitMessage();

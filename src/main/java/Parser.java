@@ -79,21 +79,21 @@ public class Parser {
             throw new DukeException(DukeException.EMPTY);
         }
         switch (type) {
-            case DEADLINE:
-                if ((task = s.split(" /by ")).length != 2) {
-                    throw new DukeException(DukeException.WRONG_DEADLINE);
-                }
-                return new Deadline(task[0].replaceFirst("deadline ", ""), task[1]);
-            case EVENT:
-                if ((task = s.split(" /at ")).length != 2) {
-                    throw new DukeException(DukeException.WRONG_EVENT);
-                }
-                return new Event(task[0].replaceFirst("event ", ""), task[1]);
-            default:
-                if ((s.split(" ")).length < 2) {
-                    throw new DukeException(DukeException.EMPTY_TODO);
-                }
-                return new Todo(s.replaceFirst("todo ", ""));
+        case DEADLINE:
+            if ((task = s.split(" /by ")).length != 2) {
+                throw new DukeException(DukeException.WRONG_DEADLINE);
+            }
+            return new Deadline(task[0].replaceFirst("deadline ", ""), task[1]);
+        case EVENT:
+            if ((task = s.split(" /at ")).length != 2) {
+                throw new DukeException(DukeException.WRONG_EVENT);
+            }
+            return new Event(task[0].replaceFirst("event ", ""), task[1]);
+        default:
+            if ((s.split(" ")).length < 2) {
+                throw new DukeException(DukeException.EMPTY_TODO);
+            }
+            return new Todo(s.replaceFirst("todo ", ""));
         }
     }
 }

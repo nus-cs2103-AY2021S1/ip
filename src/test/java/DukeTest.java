@@ -50,20 +50,18 @@ public class DukeTest {
 
     @Test
     public void storageTest() {
-        try {
-            File file = new File("test");
-            Storage s = new Storage();
-            s.file = file;
-            TaskList taskList = new TaskList(s);
-            Todo task1 = new Todo("Hng");
-            task1.setCompleted();
-            Deadline task2 = new Deadline("hehe", "2020-12-12");
-            assertEquals(task1.getCompleted(), taskList.get(0).getCompleted());
-            assertEquals(task1.getName(), taskList.get(0).getName());
-            assertEquals(task2.getType(), taskList.get(1).getType());
-            assertEquals(task2.getDeadline(), ((Deadline)taskList.get(1)).getDeadline());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        File file = new File(System.getProperty("user.dir") + "/src/test/testfile");
+//            File file = new File("/Users/xzz/Desktop/ip/src/testfile/testfile");
+        Storage s = new Storage(file);
+//            s.file = file;
+        TaskList taskList = new TaskList(s);
+        System.out.println(taskList.taskList);
+        Todo task1 = new Todo("Hng");
+        task1.setCompleted();
+        Deadline task2 = new Deadline("hehe", "2020-12-12");
+        assertEquals(task1.getCompleted(), taskList.get(0).getCompleted());
+        assertEquals(task1.getName(), taskList.get(0).getName());
+        assertEquals(task2.getType(), taskList.get(1).getType());
+        assertEquals(task2.getDeadline(), ((Deadline)taskList.get(1)).getDeadline());
     }
 }

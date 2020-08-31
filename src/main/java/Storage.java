@@ -16,18 +16,26 @@ public class Storage {
     File file;
     boolean added = false;
 
-    Storage() throws IOException {
-        String dir = System.getProperty("user.dir") + "/data";
-        File path = new File(dir);
-        if (!path.exists()) {
-            path.mkdir();
-        }
-        file = new File(path + "/duke.txt");
-        boolean result = file.createNewFile();
-        if (result) {
-            System.out.println("file created " + file.getCanonicalPath());
-        } else {
-            System.out.println("file exists at: " + file.getCanonicalPath());
+    Storage(File file) {
+        this.file = file;
+    }
+
+    Storage() {
+        try {
+            String dir = System.getProperty("user.dir") + "/data";
+            File path = new File(dir);
+            if (!path.exists()) {
+                path.mkdir();
+            }
+            file = new File(path + "/duke.txt");
+            boolean result = file.createNewFile();
+            if (result) {
+                System.out.println("file created " + file.getCanonicalPath());
+            } else {
+                System.out.println("file exists at: " + file.getCanonicalPath());
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 

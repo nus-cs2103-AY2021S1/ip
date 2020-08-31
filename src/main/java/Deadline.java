@@ -11,7 +11,7 @@ class Deadline extends Task {
     DateTimeFormatter in = DateTimeFormatter.ISO_LOCAL_DATE;
     DateTimeFormatter out = DateTimeFormatter.ofPattern("MMM dd yyyy");
 
-    Deadline(String name, String time) throws DateTimeParseException {
+    Deadline(String name, String time) {
         super(name, Type.DEADLINE);
         try {
             this.deadline = LocalDate.parse(time, in);
