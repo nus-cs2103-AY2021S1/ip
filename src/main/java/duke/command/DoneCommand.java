@@ -19,5 +19,10 @@ public class DoneCommand extends Command {
         storage.save(taskList);
         ui.display("TASK IZ NAO DUNZ!!!!1!11!\n" + "  " + taskList.getTaskByIdx(this.idx));
     }
+
+    @Override
+    public String toString() {
+        return cmd.toString() + ": " + idx;
+    }
 }
 

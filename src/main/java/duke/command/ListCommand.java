@@ -43,4 +43,9 @@ public class ListCommand extends Command {
             }
         }
     }
+
+    @Override
+    public String toString() {
+        return cmd.toString() + (by.isEmpty() ? "" : " (" + by + ")");
+    }
 }

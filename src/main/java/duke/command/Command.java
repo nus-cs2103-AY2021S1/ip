@@ -21,4 +21,9 @@ public class Command {
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         ui.display("CAN I HAZ CHEEZBURGER?");
     }
+
+    @Override
+    public String toString() {
+        return cmd.toString();
+    }
 }

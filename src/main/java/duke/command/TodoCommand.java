@@ -20,4 +20,9 @@ public class TodoCommand extends Command {
                     + "\nNAO U HAS " + taskList.getNumberOfTasks() + " FINGS IN DA LIST LULZIES");
         storage.save(taskList);
     }
+
+    @Override
+    public String toString() {
+        return cmd.toString() + ": " + taskName;
+    }
 }
