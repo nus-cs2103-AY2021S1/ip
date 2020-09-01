@@ -1,7 +1,7 @@
 package duke;
 
 /**
- * Todo class represents a Todo Task that stores instructions from user
+ * Todo class represents a Todo Task that stores instructions from user.
  */
 public class Todo extends Task {
 

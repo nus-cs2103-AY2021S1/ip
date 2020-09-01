@@ -4,7 +4,7 @@ import duke.Storage;
 import duke.TaskList;
 
 /**
- * FindCommand executes a filter on TaskList based on what user is finding
+ * FindCommand executes a filter on TaskList based on what user is finding.
  */
 public class FindCommand extends Command {
     public FindCommand(String command, TaskList list, Storage storage) {
