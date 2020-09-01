@@ -4,6 +4,7 @@ import duke.Repl;
 
 import duke.messages.DukeResponse;
 
+import duke.utils.ResourceHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -39,6 +40,8 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        dialogContainer.getChildren().add(
+                DialogBox.getDukeDialog(ResourceHandler.getString("repl.greeting"), dukeImage));
     }
 
     /**
