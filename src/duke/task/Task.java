@@ -19,7 +19,8 @@ public class Task {
 
     /**
      * Method that generate the status icon of whether or not the task is completed.
-     * @return  a String of the status icon
+     *
+     * @return a String of the status icon
      */
     public String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
@@ -35,15 +36,17 @@ public class Task {
 
     /**
      * Method that get the description of the Task
-     * @return  a String that describes the Task
+     *
+     * @return a String that describes the Task
      */
-    public String getDescription(){
+    public String getDescription() {
         return this.description;
     }
 
     /**
      * To String method of Task
-     * @return  a String that describes the Task
+     *
+     * @return a String that describes the Task
      */
     @Override
     public String toString() {

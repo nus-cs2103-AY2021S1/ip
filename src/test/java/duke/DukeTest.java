@@ -1,10 +1,18 @@
+package duke;
+
 import duke.DukeException;
 import duke.Parser;
-import duke.command.*;
-import duke.task.*;
+import duke.command.Command;
+import duke.command.ExitCommand;
+import duke.command.ShowListCommand;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.TaskList;
+import duke.task.Todo;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.*;
+
 
 public class DukeTest {
 
@@ -13,6 +21,7 @@ public class DukeTest {
         Deadline deadline = new Deadline("return book", "2020-12-12 14:23");
         assertEquals("[D][✘] return book (by: Dec 12 2020 02:23 pm)", deadline.toString());
     }
+
     @Test
     public void deadlineTest2() {
         Deadline deadline = new Deadline("return book", "tomorrow");
@@ -75,7 +84,6 @@ public class DukeTest {
         Command c = Parser.parse("bye");
         assertTrue(c instanceof ExitCommand);
     }
-
 
 
 }

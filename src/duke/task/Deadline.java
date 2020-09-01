@@ -1,4 +1,5 @@
 package duke.task;
+
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -17,8 +18,7 @@ public class Deadline extends Task {
      * Deadline Class constructor. Create a new Deadline with task description and time to be completed.
      *
      * @param description give the description of the Task
-     * @param by    the deadline of the task
-     *
+     * @param by          the deadline of the task
      */
     public Deadline(String description, String by) {
         super(description);
@@ -35,12 +35,13 @@ public class Deadline extends Task {
 
     /**
      * To String method of deadline
-     * @return  a String that describes the deadline task
+     *
+     * @return a String that describes the deadline task
      */
     @Override
     public String toString() {
         if (isFormatted) {
-            return "[D]" + super.toString() + " (by: " + this.date.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + " " +this.time.format(DateTimeFormatter.ofPattern("hh:mm a")) + ")";
+            return "[D]" + super.toString() + " (by: " + this.date.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + " " + this.time.format(DateTimeFormatter.ofPattern("hh:mm a")) + ")";
         } else {
             return "[D]" + super.toString() + " (by: " + by + ")";
         }

@@ -16,6 +16,7 @@ public class DeleteTaskCommand extends Command {
 
     /**
      * DeleteTaskCommand Class constructor
+     *
      * @param command the command from the user
      */
     public DeleteTaskCommand(String command) {
@@ -24,8 +25,9 @@ public class DeleteTaskCommand extends Command {
 
     /**
      * Method that execute the current DeleteTaskCommand object
-     * @param list TaskList object from the current Duke instance
-     * @param ui    UI object from the current Duke instance
+     *
+     * @param list     TaskList object from the current Duke instance
+     * @param ui       UI object from the current Duke instance
      * @param saveData Storage object from the current Duke instance
      */
     public void execute(TaskList list, Ui ui, Storage saveData) {
@@ -36,8 +38,8 @@ public class DeleteTaskCommand extends Command {
                 throw new DukeException("☹ OOPS!!! Task not in the list");
             }
             int index = Character.getNumericValue(this.command.charAt(7));
-            Task toRemove = list.get(index-1);
-            list.remove(index-1);
+            Task toRemove = list.get(index - 1);
+            list.remove(index - 1);
             ui.saySomthing("Noted. I've removed this task:\n" + toRemove.toString() + "\n" + String.format("Now you have %d tasks in the list.", list.size()));
             saveData.deleteTask(index);
         } catch (DukeException | IOException e) {
@@ -47,6 +49,7 @@ public class DeleteTaskCommand extends Command {
 
     /**
      * Method that return isExit of the current Command
+     *
      * @return boolean object showing if Duke should terminate
      */
     @Override

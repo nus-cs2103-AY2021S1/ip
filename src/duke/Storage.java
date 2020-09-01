@@ -1,9 +1,9 @@
 package duke;
+
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
-
 
 import java.io.*;
 import java.util.ArrayList;
@@ -47,7 +47,8 @@ public class Storage {
 
     /**
      * Method that load saved data (past records) from the directory
-     * @return      a List of Task objects
+     *
+     * @return a List of Task objects
      */
     public List<Task> loadSavedData() {
         List<Task> list = new ArrayList<>();
@@ -57,7 +58,7 @@ public class Storage {
             FileReader fr = new FileReader(file);
             BufferedReader br = new BufferedReader(fr);
             String line;
-            while((line = br.readLine()) != null){
+            while ((line = br.readLine()) != null) {
                 String[] splited = line.split(">");
                 Task currTask = null;
                 if (splited[0].equals("T")) {
@@ -72,7 +73,7 @@ public class Storage {
                 }
                 list.add(currTask);
             }
-        } catch(IOException e) {
+        } catch (IOException e) {
             System.out.println(e.toString());
         }
         return list;
@@ -81,7 +82,7 @@ public class Storage {
     /**
      * Method that add Task data to the save data txt file
      *
-     * @param task  task in a String format
+     * @param task task in a String format
      */
     public void addTask(String task) throws IOException {
         File file = new File(txt_path);
@@ -94,7 +95,8 @@ public class Storage {
 
     /**
      * Method that mark a specific task as complete in the saved data
-     * @param number    index of the Task to be completed
+     *
+     * @param number index of the Task to be completed
      */
     public void completeTask(int number) throws IOException {
         File file = new File(txt_path);
@@ -103,7 +105,7 @@ public class Storage {
         String line;
         int line_no = 0;
         String final_line = "";
-        while((line = br.readLine()) != null) {
+        while ((line = br.readLine()) != null) {
             line_no += 1;
             if (line_no == number) {
                 StringBuilder updated = new StringBuilder(line);
@@ -121,7 +123,8 @@ public class Storage {
 
     /**
      * Method that delete a specific task from the saved data
-     * @param number    index of the Task to be deleted
+     *
+     * @param number index of the Task to be deleted
      */
     public void deleteTask(int number) throws IOException {
         File file = new File(txt_path);
@@ -130,7 +133,7 @@ public class Storage {
         String line;
         int line_no = 0;
         String final_line = "";
-        while((line = br.readLine()) != null) {
+        while ((line = br.readLine()) != null) {
             line_no += 1;
             if (line_no == number) {
                 continue;

@@ -10,8 +10,7 @@ public class Event extends Task {
      * Event Class constructor. Create a new Event with task description and time of the event.
      *
      * @param description give the description of the event
-     * @param at    the time of the event
-     *
+     * @param at          the time of the event
      */
     public Event(String description, String at) {
         super(description);
@@ -20,7 +19,8 @@ public class Event extends Task {
 
     /**
      * To String method of event
-     * @return  a String that describes the event task
+     *
+     * @return a String that describes the event task
      */
     @Override
     public String toString() {

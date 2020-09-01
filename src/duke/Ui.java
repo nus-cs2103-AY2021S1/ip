@@ -11,7 +11,8 @@ public class Ui {
 
     /**
      * Method that simply scan the user's input and change it to a command.
-     * @return      a user command as String
+     *
+     * @return a user command as String
      */
     public String readCommand() {
         Scanner sc = new Scanner(System.in);
@@ -22,14 +23,14 @@ public class Ui {
     /**
      * Method that load and print the task list.
      *
-     * @param list  a Tasklist object
+     * @param list a Tasklist object
      */
     public void showList(TaskList list) {
         String print = "";
         print += "Here are the tasks in your list:\n";
         for (int i = 0; i < list.size(); i++) {
-            if (i == list.size()-1) {
-                print += String.format("%d. ", i+1) + list.get(i);
+            if (i == list.size() - 1) {
+                print += String.format("%d. ", i + 1) + list.get(i);
             } else {
                 print += String.format("%d. ", i + 1) + list.get(i) + "\n";
             }
@@ -39,7 +40,6 @@ public class Ui {
 
     /**
      * Method that print the welcome message.
-     *
      */
     public void sayHi() {
         String logo = " ____        _        \n"
@@ -54,7 +54,7 @@ public class Ui {
     /**
      * Method that wrap lines around text that Duke send out.
      *
-     * @param str   text in String to be wrapped
+     * @param str text in String to be wrapped
      */
     public void saySomthing(String str) {
         System.out.println("------------------------------------------------------------------------");

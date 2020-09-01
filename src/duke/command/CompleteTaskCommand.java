@@ -2,8 +2,8 @@ package duke.command;
 
 import duke.DukeException;
 import duke.Storage;
-import duke.task.TaskList;
 import duke.Ui;
+import duke.task.TaskList;
 
 import java.io.IOException;
 
@@ -14,6 +14,7 @@ public class CompleteTaskCommand extends Command {
 
     /**
      * CompleteTaskCommand Class constructor
+     *
      * @param command the command from the user
      */
     public CompleteTaskCommand(String command) {
@@ -22,8 +23,9 @@ public class CompleteTaskCommand extends Command {
 
     /**
      * Method that execute the current CompleteTaskCommand object
-     * @param list TaskList object from the current Duke instance
-     * @param ui    UI object from the current Duke instance
+     *
+     * @param list     TaskList object from the current Duke instance
+     * @param ui       UI object from the current Duke instance
      * @param saveData Storage object from the current Duke instance
      */
     public void execute(TaskList list, Ui ui, Storage saveData) {
@@ -34,8 +36,8 @@ public class CompleteTaskCommand extends Command {
                 throw new DukeException("☹ OOPS!!! Task not in the list");
             }
             int index = Character.getNumericValue(this.command.charAt(5));
-            list.get(index-1).markAsDone();
-            ui.saySomthing("Nice! I've marked this task as done:\n" + list.get(index-1).toString());
+            list.get(index - 1).markAsDone();
+            ui.saySomthing("Nice! I've marked this task as done:\n" + list.get(index - 1).toString());
             saveData.completeTask(index);
         } catch (DukeException | IOException e) {
             ui.saySomthing(e.getMessage());
@@ -44,6 +46,7 @@ public class CompleteTaskCommand extends Command {
 
     /**
      * Method that return isExit of the current Command
+     *
      * @return boolean object showing if Duke should terminate
      */
     @Override

@@ -16,6 +16,7 @@ public class AddEventCommand extends Command {
 
     /**
      * AddEventCommand Class constructor
+     *
      * @param command the command from the user
      */
     public AddEventCommand(String command) {
@@ -24,8 +25,9 @@ public class AddEventCommand extends Command {
 
     /**
      * Method that execute the current AddEventCommand object
-     * @param list TaskList object from the current Duke instance
-     * @param ui    UI object from the current Duke instance
+     *
+     * @param list     TaskList object from the current Duke instance
+     * @param ui       UI object from the current Duke instance
      * @param saveData Storage object from the current Duke instance
      */
     public void execute(TaskList list, Ui ui, Storage saveData) {
@@ -43,7 +45,7 @@ public class AddEventCommand extends Command {
             list.add(task);
             ui.saySomthing("Got it. I've added this task:\n" + task.toString() + "\n" + String.format("Now you have %d tasks in the list.", list.size()));
 
-            String save = "E>0>"+description+">"+at;
+            String save = "E>0>" + description + ">" + at;
             saveData.addTask(save);
         } catch (DukeException | IOException e) {
             ui.saySomthing(e.getMessage());
@@ -52,6 +54,7 @@ public class AddEventCommand extends Command {
 
     /**
      * Method that return isExit of the current Command
+     *
      * @return boolean object showing if Duke should terminate
      */
     @Override

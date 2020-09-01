@@ -11,9 +11,8 @@ public class TaskList {
 
     /**
      * TaskList Class constructor. Create a new empty TaskList.
-     *
      */
-    public TaskList(){
+    public TaskList() {
         this.list = new ArrayList<>();
     }
 
@@ -28,8 +27,9 @@ public class TaskList {
 
     /**
      * Method that return the specific task at the given index.
+     *
      * @param index index of task
-     * @return  a specific task object
+     * @return a specific task object
      */
     public Task get(int index) {
         return list.get(index);
@@ -37,6 +37,7 @@ public class TaskList {
 
     /**
      * Method that remove a specific task at the given index.
+     *
      * @param index index of task
      */
     public void remove(int index) {
@@ -45,7 +46,8 @@ public class TaskList {
 
     /**
      * Method that return the number of Task in the TaskList
-     * @return  the number of Task in the TaskList
+     *
+     * @return the number of Task in the TaskList
      */
     public int size() {
         return list.size();
@@ -53,6 +55,7 @@ public class TaskList {
 
     /**
      * Method that add a Task to the TaskList.
+     *
      * @param task the Task to be added into the TaskList
      */
     public void add(Task task) {

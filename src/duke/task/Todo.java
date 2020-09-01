@@ -16,7 +16,8 @@ public class Todo extends Task {
 
     /**
      * To String method of Todo Task
-     * @return  a String that describes the Todo Task
+     *
+     * @return a String that describes the Todo Task
      */
     public String toString() {
         return "[T]" + super.toString();

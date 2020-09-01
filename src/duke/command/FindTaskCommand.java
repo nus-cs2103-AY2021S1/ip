@@ -12,6 +12,7 @@ public class FindTaskCommand extends Command {
 
     /**
      * FindTaskCommand Class constructor
+     *
      * @param command the command from the user
      */
     public FindTaskCommand(String command) {
@@ -20,8 +21,9 @@ public class FindTaskCommand extends Command {
 
     /**
      * Method that execute the current FindTaskCommand object
-     * @param list TaskList object from the current Duke instance
-     * @param ui    UI object from the current Duke instance
+     *
+     * @param list     TaskList object from the current Duke instance
+     * @param ui       UI object from the current Duke instance
      * @param saveData Storage object from the current Duke instance
      */
     public void execute(TaskList list, Ui ui, Storage saveData) {
@@ -44,6 +46,7 @@ public class FindTaskCommand extends Command {
 
     /**
      * Method that return isExit of the current Command
+     *
      * @return boolean object showing if Duke should terminate
      */
     @Override
