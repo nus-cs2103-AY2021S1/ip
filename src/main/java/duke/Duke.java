@@ -136,6 +136,10 @@ public class Duke extends Application {
         }
     }
 
+    public static String sendWelcomeMessage() {
+        return Ui.welcomeMessage();
+    }
+
     /**
      * Iteration 2:
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
