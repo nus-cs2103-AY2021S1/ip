@@ -64,20 +64,36 @@ public class Duke {
         }
     }
 
+    String getStartupMessage() {
+        String[] strings = ui.getHelloStrings();
+        StringBuilder output;
+
+        if (strings.length >= 1) {
+            output = new StringBuilder(strings[0]);
+            for (int i = 1; i < strings.length; i++) {
+                output.append("\n");
+                output.append(strings[i]);
+            }
+            return output.toString();
+        } else {
+            return "Hello!";
+        }
+    }
+
     /**
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
     String getResponse(String input) {
         Command command = Parser.parse(input);
-        String[] outputStrings = command.execute(storage, tasks, ui);
+        String[] strings = command.execute(storage, tasks, ui);
         StringBuilder output;
 
-        if (outputStrings.length >= 1) {
-            output = new StringBuilder(outputStrings[0]);
-            for (int i = 1; i < outputStrings.length; i++) {
+        if (strings.length >= 1) {
+            output = new StringBuilder(strings[0]);
+            for (int i = 1; i < strings.length; i++) {
                 output.append("\n");
-                output.append(outputStrings[i]);
+                output.append(strings[i]);
             }
             return output.toString();
         } else {
