@@ -11,11 +11,7 @@ import java.util.Scanner;
  */
 public class Ui {
 
-    private TaskList taskList;
-    private Storage storage;
-    private Parser parser;
-
-    private static final String HELP_TEXT = "Duke Bot Commands:\n"
+    public static final String HELP_TEXT = "Duke Bot Commands:\n"
             + "list : list out all current tasks\n"
             + "find <keyword> : find all task that corresponds to the keyword\n"
             + "done <task number> : marks the specified task as done\n"
@@ -24,6 +20,10 @@ public class Ui {
             + "deadline <task name> /by YYYY-MM-DD : adds a Deadline task\n"
             + "event <task name> /at YYYY-MM-DD TT:TT-TT:TT : adds an Event task\n"
             + "Do note that Date and Time must have the specified format\n";
+
+    private TaskList taskList;
+    private Storage storage;
+    private Parser parser;
 
     /**
      * Constructor for Ui class.
