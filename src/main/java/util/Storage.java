@@ -1,3 +1,7 @@
+package util;
+
+import util.task.*;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -14,7 +18,9 @@ public class Storage {
     private String filePath;
 
     /**
-     * Constructor.
+     * Constructor for Storage class.
+     *
+     * @param filePath File path string for Duke's data.
      */
     public Storage(String filePath) {
         this.filePath = filePath;
@@ -27,7 +33,6 @@ public class Storage {
      * @return Array list of Tasks deciphered from save file.
      * @throws FileNotFoundException  If no save file detected.
      */
-    /** Retrieved from https://nus-cs2103-ay2021s1.github.io/website/book/cppToJava/misc/fileAccess/ */
     public ArrayList<Task> loadFileContents() throws FileNotFoundException {
         // Initialize list to be returned
         ArrayList<Task> list = new ArrayList<>(100);
@@ -84,7 +89,6 @@ public class Storage {
      *
      * @param list ArrayList of Tasks Duke currently has.
      * @throws DukeException  If Duke is unable to save into file.
-     * @throws IOException If unable to create or write into specified file path.
      */
     public void saveToFile(ArrayList<Task> list) throws DukeException {
         try {
@@ -95,7 +99,7 @@ public class Storage {
             clearTheFile();
 
         } catch (IOException e) {
-            throw new DukeException("☹️Sorry, something went wrong and I couldn't save my data... ");
+            throw new DukeException("Sorry, something went wrong and I couldn't save my data... ");
         }
         for (int i = 0; i < list.size(); i++) {
             // Try to write into save file

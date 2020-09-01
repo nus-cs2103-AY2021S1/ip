@@ -1,3 +1,5 @@
+package util;
+
 /**
  * Duke's Custom Exception Class.
  */
