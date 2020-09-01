@@ -7,6 +7,7 @@ import botbot.exceptions.BotbotException;
 /**
  * Represents the chatbot.
  */
+@SuppressWarnings("checkstyle:Regexp")
 public class Botbot {
     private Storage storage;
     private TaskList tasks;
@@ -14,9 +15,10 @@ public class Botbot {
 
     /**
      * Creates a chatbot.
-     * 
+     *
      * @param filePath Filepath where data of the chat is stored.
      */
+    @SuppressWarnings("checkstyle:Regexp")
     public Botbot(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);

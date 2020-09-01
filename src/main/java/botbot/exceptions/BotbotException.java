@@ -6,7 +6,7 @@ package botbot.exceptions;
 public class BotbotException extends Exception {
     /**
      * Creates a botbot exception.
-     * 
+     *
      * @param e Error message.
      */
     public BotbotException(String e) {

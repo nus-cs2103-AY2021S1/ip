@@ -1,11 +1,11 @@
 package botbot.tasks;
 
-import botbot.Parser;
-import botbot.exceptions.InvalidFormatException;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+import botbot.Parser;
+import botbot.exceptions.InvalidFormatException;
 
 /**
  * Represents an event with a description, time and completion status.
