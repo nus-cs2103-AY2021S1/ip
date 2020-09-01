@@ -1,8 +1,5 @@
 package duke;
 
-import main.java.duke.DateTimeConverter;
-import main.java.duke.Parser;
-import main.java.duke.Deadline;
 import org.junit.jupiter.api.Test;
 
 import java.time.format.FormatStyle;

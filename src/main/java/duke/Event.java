@@ -1,4 +1,4 @@
-package main.java.duke;
+package duke;
 
 public class Event extends Task {
 
