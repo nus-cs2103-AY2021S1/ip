@@ -9,9 +9,30 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<fx:root alignment="TOP_RIGHT" maxWidth="1.7976931348623157E308" prefHeight="114.0" prefWidth="324.0" style="-fx-background-color: lightblue; -fx-background-radius: 30; -fx-border-color: black; -fx-border-radius: 2em;" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root alignment="TOP_RIGHT" maxWidth="1.7976931348623157E308" prefHeight="114.0" prefWidth="324.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-      <Text fx:id="dialog" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+      <HBox alignment="CENTER" prefHeight="84.0" prefWidth="105.0" style="-fx-background-color: lightblue; -fx-background-radius: 30; -fx-border-color: black; -fx-border-radius: 2em;">
+         <children>
+            <BorderPane prefHeight="200.0" prefWidth="200.0">
+               <center>
+                  <HBox alignment="TOP_RIGHT" prefHeight="73.0" prefWidth="187.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <Text fx:id="dialog" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+                     </children>
+                  </HBox>
+               </center>
+               <top>
+                  <Region prefHeight="9.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+               </top>
+               <left>
+                  <Region prefHeight="82.0" prefWidth="16.0" BorderPane.alignment="CENTER" />
+               </left>
+               <right>
+                  <Region prefHeight="82.0" prefWidth="24.0" BorderPane.alignment="CENTER" />
+               </right>
+            </BorderPane>
+         </children>
+      </HBox>
       <Region prefHeight="118.0" prefWidth="9.0" />
       <VBox nodeOrientation="RIGHT_TO_LEFT" prefHeight="118.0" prefWidth="52.0">
          <children>
@@ -23,7 +44,6 @@
                   <Label fx:id="displayName" contentDisplay="RIGHT" text="displayName" textAlignment="CENTER" BorderPane.alignment="CENTER" />
                </bottom>
             </BorderPane>
-            <Region prefHeight="5.0" prefWidth="99.0" />
          </children>
       </VBox>
     </children>

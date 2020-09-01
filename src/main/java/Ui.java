@@ -61,6 +61,6 @@ public class Ui {
                 + "deadline [taskname] /by [yyyy-MM-dd HHmm]\n"
                 + "event [taskname] /at [yyy-MM-dd HHmm]\n"
                 + "remove [index or all]\n"
-                + "bye";
+                + "bye\n";
     }
 }

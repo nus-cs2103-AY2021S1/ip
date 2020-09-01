@@ -62,7 +62,7 @@ public class DialogBox extends HBox {
         getChildren().setAll(tmp);
         setAlignment(Pos.TOP_LEFT);
         getChildren().get(0).setNodeOrientation(NodeOrientation.LEFT_TO_RIGHT);
-        setStyle(cssLayout);
+//        setStyle(cssLayout);
     }
 
     public static DialogBox getUserDialog(String text, Image img) {

@@ -4,13 +4,11 @@
 public class Duke {
     private final Storage storage;
     private final TaskList taskList;
-    private final Ui ui;
 
     /**
      * Creates a Duke bot.
      */
     public Duke() {
-        this.ui = new Ui();
         this.taskList = new TaskList();
         this.storage = new Storage(taskList, "duke");
     }
@@ -24,10 +22,6 @@ public class Duke {
     }
 
     public String getResponse(String input) {
-        if (input.equals("start")) {
-            return ui.startUp(taskList, storage);
-        } else {
-            return Parser.parse(taskList, storage, input);
-        }
+        return Parser.parse(taskList, storage, input);
     }
 }
