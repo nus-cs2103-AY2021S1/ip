@@ -1,7 +1,8 @@
 package duke.tasks;
 
-import duke.utils.ResourceHandler;
 import java.text.MessageFormat;
+
+import duke.utils.ResourceHandler;
 
 /**
  * A specialised {@code Task} that does not have any date/time attached to it.
