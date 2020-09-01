@@ -58,13 +58,6 @@ public class UI {
     }
 
     /**
-     * Prints logo of a dog.
-     */
-    protected static void printLogo() {
-        System.out.println(Messages.LOGO);
-    }
-
-    /**
      * Prints a random message chosen from ERROR_MESSAGES
      */
     public static void printWrongInput() {
