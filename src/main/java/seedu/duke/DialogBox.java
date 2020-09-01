@@ -18,8 +18,8 @@ public class DialogBox extends HBox {
         displayPicture = iv;
 
         text.setWrapText(true);
-        displayPicture.setFitWidth(100.0);
-        displayPicture.setFitHeight(100.0);
+        displayPicture.setFitWidth(150.0);
+        displayPicture.setFitHeight(150.0);
 
         this.setAlignment(Pos.TOP_RIGHT);
         this.getChildren().addAll(text, displayPicture);

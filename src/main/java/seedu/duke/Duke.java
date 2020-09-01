@@ -218,16 +218,50 @@ public class Duke extends Application {
         PrintStream oldOut = System.out;
         System.setOut(printStr);
 
+        boolean isExit = false;
+
         try {
             this.ui.linePrinter();
             Command c = new Parser().parse(input);
             c.execute(this.tasklist, this.ui);
+            isExit = c.isExit();
         } catch (DukeException e) {
             this.ui.showError(e.getMessage());
         } catch (DateTimeException e) {
             this.ui.showError("Can't read your date man. Put it like this ok? --> 25 Mar 2020 1930");
         } finally {
-            this.ui.linePrinter();
+            if (!isExit) {
+                this.ui.linePrinter();
+            }
+        }
+
+        if (isExit) {
+            try {
+
+                String tasks = "";
+
+                for (Task t : this.tasklist.getList()) {
+                    String check = "";
+                    if (t.isComplete()) {
+                        check = "\u2713";
+                    } else {
+                        check = "\u2718";
+                    }
+                    String toAdd = t.getType() + "*" + check + "*" + t.toString();
+                    String addition = "";
+                    if (t.getTime() == null) {
+                        addition = "\n";
+                    } else {
+                        addition = "*" + t.getTime().format(FORMATTER) + "\n";
+                    }
+                    tasks = tasks + toAdd + addition;
+                }
+
+                this.storage.save(tasks);
+            } catch (IOException e) {
+                this.ui.showError("Whoops! Some kind of error :/ see here: " + e.getMessage());
+            }
+            this.ui.bye();
         }
 
         System.out.flush();

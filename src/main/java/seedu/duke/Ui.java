@@ -25,7 +25,7 @@ public class Ui {
      * Prints a line separator.
      */
     public void linePrinter() {
-        System.out.println("\n------------------------------------------------\n");
+        System.out.println("\n---------------------------------------\n");
     }
 
     /**
