@@ -58,7 +58,7 @@ public class Storage {
 			}
 			return tasks;
 		} catch (IOException | DukeException ex) {
-			Ui.showResponse(ex.getMessage());
+			System.out.println(ex.getMessage());
 			return new ArrayList<>();
 		}
 	}
