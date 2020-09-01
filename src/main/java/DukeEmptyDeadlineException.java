@@ -9,6 +9,6 @@ public class DukeEmptyDeadlineException extends DukeException {
      * @param s Represents the error message.
      */
     DukeEmptyDeadlineException(String s) {
-        super(s);
+        super("OOPS!!! The description of a deadline cannot be empty.");
     }
 }

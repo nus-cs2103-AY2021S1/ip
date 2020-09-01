@@ -10,6 +10,6 @@ public class DukeEmptyToDoException extends DukeException {
      * @param s Represents the error message.
      */
     DukeEmptyToDoException(String s) {
-        super(s);
+        super("OOPS!!! The description of a todo cannot be empty.");
     }
 }

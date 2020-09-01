@@ -9,7 +9,6 @@ public class DukeEmptyEventException extends DukeException {
      * @param s Represents the error message.
      */
     DukeEmptyEventException(String s) {
-
-        super(s);
+        super("OOPS!!! The description of a event cannot be empty.");
     }
 }

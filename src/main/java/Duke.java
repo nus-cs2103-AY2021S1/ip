@@ -20,17 +20,10 @@ public class Duke {
             this.ui = new UI();
 
         } catch (IOException e) {
-            UI.printFormattedMessage("ERROR: File Loading error!");
+            ui.printFormattedMessage("OOPS!!! File Loading error!");
         }
     }
 
-    /**
-     * Runs the whole duke program
-     */
-    public static void main(String[] args) {
-        Duke dukeMessager = new Duke();
-        dukeMessager.run();
-    }
 
     /**
      * Runs the duke program and will terminate upon input "bye"
@@ -45,69 +38,65 @@ public class Duke {
      * @throws DukeDeleteException            If there are any other exceptions.
      * @throws DateTimeParseException         If there is time passed in the wrong format.
      */
-    public void run() {
-        Scanner sc = new Scanner(System.in);
-        UI.printGreeting();
-        if (sc.hasNext()) {
-            String input = sc.nextLine();
-            while (!Parser.isBye(input)) {
+    public String run(String input) {
+        String message = "";
                 try {
                     if (Parser.isList(input)) {
                         ListCommand list = new ListCommand(input);
-                        list.execute(this.tasks, this.ui);
+                        message = list.execute(this.tasks, this.ui);
                     } else if (Parser.isDone(input)) {
                         DoneCommand done = new DoneCommand(input);
-                        done.execute(this.tasks, this.ui);
+                        message = done.execute(this.tasks, this.ui);
                     } else if (Parser.isToDo(input)) {
                         ToDoCommand todo = new ToDoCommand(input);
-                        todo.execute(this.tasks, this.ui);
+                        message = todo.execute(this.tasks, this.ui);
                     } else if (Parser.isDeadline(input)) {
                         DeadlineCommand deadline = new DeadlineCommand(input);
-                        deadline.execute(this.tasks, this.ui);
+                        message = deadline.execute(this.tasks, this.ui);
                     } else if (Parser.isEvent(input)) {
                         EventCommand event = new EventCommand(input);
-                        event.execute(this.tasks, ui);
+                        message = event.execute(this.tasks, ui);
                     } else if (Parser.isDelete(input)) {
                         DeleteCommand delete = new DeleteCommand(input);
-                        delete.execute(this.tasks, ui);
+                        message = delete.execute(this.tasks, ui);
                     } else if (Parser.isFind(input)) {
                         FindCommand find = new FindCommand(input);
-                        find.execute(this.tasks, this.ui);
+                        message = find.execute(this.tasks, this.ui);
                     } else {
                         throw new DukeUnknownInputException(input);
                     }
                 } catch (DukeUnknownInputException e) {
-                    UI.printFormattedMessage("OOPS!!! I'm sorry, but I don't know what that means :-(");
+                    message = e.getMessage();
                 } catch (DukeEmptyDeadlineException e) {
-                    UI.printFormattedMessage("OOPS!!! The description of a deadline cannot be empty.");
+                    message = e.getMessage();
                 } catch (DukeInvalidDoneNumException e) {
-                    UI.printFormattedMessage("OOPS!!! The invalid done number.");
+                    message = e.getMessage();
                 } catch (DukeEmptyDeadlineTimeException e) {
-                    UI.printFormattedMessage("OOPS!!! The description of a deadline time cannot be empty.");
+                    message = e.getMessage();
                 } catch (DukeDeleteException e) {
-                    UI.printFormattedMessage("OOPS!!! The invalid delete number.");
+                    message = e.getMessage();
                 } catch (DateTimeParseException e) {
-                    UI.printFormattedMessage("OOPS!!! The invalid date format has "
-                            + "been keyed in. PLease enter in dd-MM-yyyy HH:mm format");
+                    message = e.getMessage();
                 } catch (DukeEmptyFindException e) {
-                    UI.printFormattedMessage("ERROR: Empty find body!");
+                    message = e.getMessage();
                 } catch (DukeEmptyEventTimeException e) {
-                    UI.printFormattedMessage("OOPS!!! The description of a event time cannot be empty.");
+                    message = e.getMessage();
                 } catch (DukeEmptyEventException e) {
-                    UI.printFormattedMessage("OOPS!!! The description of a event cannot be empty.");
+                    message = e.getMessage();
                 } catch (DukeEmptyToDoException e) {
-                    UI.printFormattedMessage("OOPS!!! The description of a todo cannot be empty.");
+                    message = e.getMessage();
                 } catch (DukeEmptyTaskListException e) {
-                    ui.printFormattedMessage("OOPS!!! There are no tasks entered!.");
+                    message = e.getMessage();
                 } catch (DukeNoMatchesExcpetion e) {
-                    ui.printFormattedMessage("ERROR: No matches found!");
+                    message = e.getMessage();
+                } catch (DukeTimeParseException e) {
+                    message = e.getMessage();
                 }
-                if (sc.hasNext()) {
-                    input = sc.nextLine();
-                }
+
+            if(Parser.isBye(input)) {
+                message = ui.printByeMessage();
             }
-            UI.printByeMessage();
-        }
-        storage.save(storage.convertArrayToSaveFormat(this.tasks));
+            storage.save(storage.convertArrayToSaveFormat(this.tasks));
+            return message;
     }
 }

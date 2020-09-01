@@ -10,7 +10,7 @@ public class DukeUnknownInputException extends DukeException {
      * @param s Represents the error message.
      */
     DukeUnknownInputException(String s) {
-        super(s);
+        super("OOPS!!! I'm sorry, but I don't know what that means :-(");
     }
 
 }

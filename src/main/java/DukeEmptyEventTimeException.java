@@ -9,7 +9,7 @@ public class DukeEmptyEventTimeException extends DukeException {
      * @param s Represents the error message.
      */
     DukeEmptyEventTimeException(String s) {
-        super(s);
+        super("OOPS!!! The description of a event time cannot be empty.");
     }
 }
 

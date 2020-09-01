@@ -9,7 +9,7 @@ public class DukeNoMatchesExcpetion extends DukeException {
      * @param s Represents the error message.
      */
     DukeNoMatchesExcpetion(String s) {
-        super(s);
+        super("OOPS!!! No matches found!");
     }
 
 }

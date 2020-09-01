@@ -6,7 +6,8 @@ public class DeadlineCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasklist, UI ui) throws DukeEmptyDeadlineException, DukeEmptyDeadlineTimeException {
+    public String execute(TaskList tasklist, UI ui) throws DukeEmptyDeadlineException, DukeEmptyDeadlineTimeException {
+        String message = "";
         try {
             if (command.split(" ").length == 1) {
                 throw new DukeEmptyDeadlineException(command);
@@ -18,12 +19,12 @@ public class DeadlineCommand extends Command {
             }
             Deadline deadlineTask = new Deadline(deadlinerparts[0], deadlinerparts[1]);
             tasklist.addTask(deadlineTask);
-            ui.printTaskAdd(deadlineTask, tasklist.numOfTasks());
+            message = ui.printTaskAdd(deadlineTask, tasklist.numOfTasks());
         } catch (DukeEmptyDeadlineException e) {
-            ui.printFormattedMessage("OOPS!!! The description of a deadline cannot be empty.");
+            message = e.getMessage();
         } catch (DukeEmptyDeadlineTimeException e) {
-            ui.printFormattedMessage("OOPS!!! The description of a deadline time cannot be empty.");
+            message = e.getMessage();
         }
-
+        return message;
     }
 }

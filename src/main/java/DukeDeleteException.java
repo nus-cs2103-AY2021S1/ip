@@ -10,6 +10,6 @@ public class DukeDeleteException extends DukeException {
      * @param s Represents the error message.
      */
     DukeDeleteException(String s) {
-        super(s);
+        super("OOPS!!! The invalid delete number.");
     }
 }

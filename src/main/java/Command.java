@@ -1,3 +1,3 @@
 public abstract class Command {
-    public abstract void execute(TaskList taskList, UI ui) throws DukeException;
+    public abstract String execute(TaskList taskList, UI ui) throws DukeException;
 }

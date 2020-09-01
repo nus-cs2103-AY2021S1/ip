@@ -1,3 +1,5 @@
+import java.time.format.DateTimeParseException;
+
 public class EventCommand extends Command {
     private String command;
 
@@ -7,7 +9,8 @@ public class EventCommand extends Command {
 
 
     @Override
-    public void execute(TaskList tasklist, UI ui) throws DukeEmptyEventTimeException, DukeEmptyEventException {
+    public String execute(TaskList tasklist, UI ui) throws DukeEmptyEventTimeException, DukeEmptyEventException, DukeTimeParseException {
+        String message = "";
         try {
 
             if (this.command.split(" ").length == 1) {
@@ -20,12 +23,15 @@ public class EventCommand extends Command {
             }
             Event eventTask = new Event(eventParts[0], eventParts[1]);
             tasklist.addTask(eventTask);
-            UI.printTaskAdd(eventTask, tasklist.numOfTasks());
+            message = ui.printTaskAdd(eventTask, tasklist.numOfTasks());
         } catch (DukeEmptyEventTimeException e) {
-            UI.printFormattedMessage("OOPS!!! The description of a event time cannot be empty.");
+            message = e.getMessage();
         } catch (DukeEmptyEventException e) {
-            UI.printFormattedMessage("OOPS!!! The description of a event cannot be empty.");
+            message = e.getMessage();
+        } catch (DateTimeParseException e) {
+            throw new DukeTimeParseException("");
         }
+        return message;
 
     }
 

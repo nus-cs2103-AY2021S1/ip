@@ -6,18 +6,20 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasklist, UI ui) throws DukeEmptyFindException, DukeNoMatchesExcpetion {
+    public String execute(TaskList tasklist, UI ui) throws DukeEmptyFindException, DukeNoMatchesExcpetion {
+        String message = "";
         try {
             String[] findParts = command.split(" ");
             if (findParts.length == 1) {
                 throw new DukeEmptyFindException(command);
             } else {
-                ui.printKeywordTasks(findParts[1], tasklist.getTasks());
+                message = ui.printKeywordTasks(findParts[1], tasklist.getTasks());
             }
         } catch (DukeEmptyFindException e) {
-            ui.printFormattedMessage("OOPS!!! Empty find body!");
+            message = e.getMessage();
         } catch (DukeNoMatchesExcpetion e) {
-            ui.printFormattedMessage("OOPS!!! No matches found!");
+            message = e.getMessage();
         }
+        return message;
     }
 }

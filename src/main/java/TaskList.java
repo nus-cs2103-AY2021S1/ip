@@ -15,19 +15,21 @@ public class TaskList {
         this.tasks.add(task);
     }
 
-    public void markAsDone(int value) throws IndexOutOfBoundsException {
+    public String markAsDone(int value) throws IndexOutOfBoundsException {
+        String message = "";
         try {
-            this.tasks.get(value).markAsDone();
+            message = this.tasks.get(value).markAsDone();
         } catch (IndexOutOfBoundsException e) {
-            UI.printFormattedMessage("ERROR: Invalid Done Number!");
+            e.getMessage();
         }
+        return message;
     }
 
     public void deleteTask(int value) throws IndexOutOfBoundsException {
         try {
             this.tasks.remove(value);
         } catch (IndexOutOfBoundsException e) {
-            UI.printFormattedMessage("ERROR: Invalid Done Number!");
+            e.getMessage();
         }
     }
 

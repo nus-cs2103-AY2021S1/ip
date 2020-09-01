@@ -8,6 +8,6 @@ public class DukeEmptyFindException extends DukeException {
      * @param s Represents the error message.
      */
     DukeEmptyFindException(String s) {
-        super(s);
+        super("OOPS!!! Empty find body!");
     }
 }

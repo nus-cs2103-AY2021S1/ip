@@ -6,7 +6,8 @@ public class ToDoCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasklist, UI ui) throws DukeEmptyToDoException {
+    public String execute(TaskList tasklist, UI ui) throws DukeEmptyToDoException {
+        String message = "";
         try {
             if (command.split(" ").length == 1) {
                 throw new DukeEmptyToDoException(command);
@@ -14,9 +15,10 @@ public class ToDoCommand extends Command {
             String tasker = Parser.stringBuilder(command.split(" "), 1, command.split(" ").length - 1);
             ToDo todoTask = new ToDo(tasker);
             tasklist.addTask(todoTask);
-            UI.printTaskAdd(todoTask, tasklist.numOfTasks());
+            message = ui.printTaskAdd(todoTask, tasklist.numOfTasks());
         } catch (DukeEmptyToDoException e) {
-            UI.printFormattedMessage("OOPS!!! The description of a todo cannot be empty.");
+            message = e.getMessage();
         }
+        return message;
     }
 }

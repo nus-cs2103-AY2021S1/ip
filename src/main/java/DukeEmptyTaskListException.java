@@ -5,6 +5,6 @@ public class DukeEmptyTaskListException extends DukeException {
      * @param s Represents the error message.
      */
     DukeEmptyTaskListException(String s) {
-        super(s);
+        super("OOPS!!! There are no tasks entered!.");
     }
 }

@@ -10,7 +10,7 @@ public class DukeInvalidDoneNumException extends DukeException {
      * @param s Represents the error message.
      */
     DukeInvalidDoneNumException(String s) {
-        super(s);
+        super("OOPS!!! The invalid done number.");
     }
 
 }

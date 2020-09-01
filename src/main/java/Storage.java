@@ -44,10 +44,10 @@ public class Storage {
         try {
             return convertTextToTask(Files.readAllLines(path));
         } catch (FileNotFoundException e) {
-            UI.printFormattedMessage("ERROR: There is an error in reading the files");
+            e.getMessage();
             return new TaskList();
         } catch (IOException e) {
-            UI.printFormattedMessage("ERROR: There is an error with the inputs from the txt file");
+            e.getMessage();
             return new TaskList();
         }
     }
@@ -91,7 +91,7 @@ public class Storage {
                 tasks.addTask(currTask);
             }
         } catch (ArrayIndexOutOfBoundsException e) {
-            UI.printFormattedMessage("ERROR: Incorrect inputs in data file!");
+            e.getMessage();
         }
         return tasks;
 
@@ -107,7 +107,7 @@ public class Storage {
         try {
             Files.write(path, strings);
         } catch (IOException e) {
-            UI.printFormattedMessage("ERROR: There is error in writing to file");
+            e.getMessage();
         }
 
     }

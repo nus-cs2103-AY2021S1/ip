@@ -24,9 +24,9 @@ public class Task {
     /**
      * Marks if the task is done.
      */
-    public void markAsDone() {
+    public String markAsDone() {
         this.isDone = true;
-        UI.printMarkAsDone(this);
+        return UI.printMarkAsDone(this);
     }
 
 

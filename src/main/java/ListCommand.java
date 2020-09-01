@@ -6,14 +6,16 @@ public class ListCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasklist, UI ui) throws DukeEmptyTaskListException {
+    public String execute(TaskList tasklist, UI ui) throws DukeEmptyTaskListException {
+        String message = "";
         try {
             if (tasklist.numOfTasks() < 1) {
                 throw new DukeEmptyTaskListException(command);
             }
-            ui.printListOfTasks(tasklist.getTasks());
+            message = ui.printListOfTasks(tasklist.getTasks());
         } catch (DukeEmptyTaskListException e) {
-            ui.printFormattedMessage("OOPS!!! There are no tasks entered!.");
+            message = e.getMessage();
         }
+        return message;
     }
 }
