@@ -22,3 +22,8 @@ text-ui-test/data/
 
 # ignore settings for jar
 src/main/java/META-INF/
+# Ignore Gradle project-specific cache directory
+.gradle
+
+# Ignore Gradle build output directory
+build
