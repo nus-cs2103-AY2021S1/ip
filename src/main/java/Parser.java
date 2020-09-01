@@ -2,8 +2,6 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class Parser {
-    Scanner scanner;
-
     /**
      * Returns appropriate task after processing userInput. Calls on ui to give user a response
      * @param userInput

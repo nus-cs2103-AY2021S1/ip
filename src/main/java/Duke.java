@@ -33,22 +33,6 @@ public class Duke {
         }
     }
 
-    /**
-     * Called by ui to give users a list view of all their tasks
-     * @return list view of all tasks
-     */
-    public String returnList() {
-        String returnString = "";
-        int counter = 0;
-        Iterator<Task> taskIterator = storage.taskList.getList().iterator();
-        while (taskIterator.hasNext()) {
-            Task thisTask = taskIterator.next();
-            returnString += "\n" + (counter + 1) + ". " + thisTask.toString();
-            counter++;
-        }
-        return returnString;
-    }
-
     private void response(Scanner scanner, TaskList taskList) throws DukeException, IOException {
         String userInput = scanner.nextLine();
         ui.showBorder();
@@ -65,5 +49,21 @@ public class Duke {
         }
         storage.saveToDisk();
         response(scanner, taskList);
+    }
+
+    /**
+     * Called by ui to give users a list view of all their tasks
+     * @return list view of all tasks
+     */
+    public String returnList() {
+        String returnString = "";
+        int counter = 0;
+        Iterator<Task> taskIterator = storage.taskList.getList().iterator();
+        while (taskIterator.hasNext()) {
+            Task thisTask = taskIterator.next();
+            returnString += "\n" + (counter + 1) + ". " + thisTask.toString();
+            counter++;
+        }
+        return returnString;
     }
 }

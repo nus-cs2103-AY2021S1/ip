@@ -16,36 +16,11 @@ public class TaskList {
     }
 
     /**
-     * Called by Storage when Duke is initialised. Looks for the on hard disc storage of the list. If found, retrieves it to be used by Duke
-     * Else the text file is created to be used for future storing on hard disc
-     * @param File
+     * getter for the size of the ArrayList
      * @return
-     * @throws IOException
      */
-    public static TaskList retrieveTaskList(Path File) throws IOException {
-        TaskList returnTaskList = new TaskList();
-        if (java.nio.file.Files.exists(File)) {
-            Scanner scanner = new Scanner(File);
-            while (scanner.hasNextLine()) {
-                String taskData = scanner.nextLine();
-                String[] taskDataDivided = taskData.split(" ~ ");
-                boolean isDone = taskDataDivided[2].equals("1");
-                switch (taskDataDivided[0]) {
-                    case "E":
-                        returnTaskList.add(new Event(taskDataDivided[2], taskDataDivided[3], isDone));
-                        break;
-                    case "D":
-                        returnTaskList.add(new Deadline(taskDataDivided[2], taskDataDivided[3], isDone));
-                        break;
-                    case "T":
-                        returnTaskList.add(new Task(taskDataDivided[2], isDone));
-                        break;
-                }
-            }
-            return returnTaskList;
-        } else {
-            return returnTaskList;
-        }
+    public int getSize() {
+        return taskList.size();
     }
 
     /**
@@ -89,13 +64,33 @@ public class TaskList {
     }
 
     /**
-     * getter for the size of the ArrayList
+     * Called by Storage when Duke is initialised. Looks for the on hard disc storage of the list. If found, retrieves it to be used by Duke
+     * Else the text file is created to be used for future storing on hard disc
+     * @param File
      * @return
+     * @throws IOException
      */
-    public int getSize() {
-        return taskList.size();
+    public static TaskList retrieveTaskList(Path File) throws IOException {
+        TaskList returnTaskList = new TaskList();
+        if (java.nio.file.Files.exists(File)) {
+            Scanner scanner = new Scanner(File);
+            while (scanner.hasNextLine()) {
+                String taskData = scanner.nextLine();
+                String[] taskDataDivided = taskData.split(" ~ ");
+                boolean isDone = taskDataDivided[2].equals("1");
+                switch (taskDataDivided[0]) {
+                    case "E":
+                        returnTaskList.add(new Event(taskDataDivided[2], taskDataDivided[3], isDone));
+                        break;
+                    case "D":
+                        returnTaskList.add(new Deadline(taskDataDivided[2], taskDataDivided[3], isDone));
+                        break;
+                    case "T":
+                        returnTaskList.add(new Task(taskDataDivided[2], isDone));
+                        break;
+                }
+            }
+        }
+        return returnTaskList;
     }
-
-
-
 }
