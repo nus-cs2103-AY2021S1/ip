@@ -38,10 +38,10 @@ public class Ui {
                 + "                     | |_| ||     |    | |           \n"
                 + "                     |_____/|_____|    |_|           \n";
 
-        String greeting = "  Hello! I am JonasBot! Nice to meet you :) \n"
-                + text + "  \n  I am a task manager bot that will keep track of all your tasks. \n"
-                + "  \n  To view a list of all my commands, input '/commands' \n"
-                + "  \n  Now that you are familiar with the commands, how may I assist you today?";
+        String greeting = "Hello! I am JonasBot! Nice to meet you :) \n"
+                + text + "  \nI am a task manager bot that will keep track of all your tasks. \n"
+                + "  \nTo view a list of all my commands, input '/commands' \n"
+                + "  \nNow that you are familiar with the commands, how may I assist you today?";
 
         // this.showLine();
         return (greeting);
