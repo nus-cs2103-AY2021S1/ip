@@ -42,11 +42,8 @@ public class ToDoCommand extends Command {
         String todoInfo = this.retrieveTodoInfo();
         Task toAdd = new Todo(todoInfo.trim());
         tasks.addTask(toAdd);
-        String successReply = "Success! This todo task has been added: \n\t"
-                + toAdd.toString() + "\nYou have " + tasks.getListSize()
-                + " tasks in your list now.";
         storage.saveToFile(tasks);
-        return ui.printReply(successReply);
+        return ui.printNewTask(toAdd, tasks.getListSize());
     }
 
     /**

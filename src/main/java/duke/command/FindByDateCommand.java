@@ -13,6 +13,9 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+import java.util.List;
+import java.util.ArrayList;
+
 /**
  * Represents a command to search for tasks by date.
  */
@@ -42,28 +45,16 @@ public class FindByDateCommand extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
-            String response = "";
             String date = parsedCommand[1].trim();
             DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("d/M/yyyy");
             LocalDate dateToSearch = LocalDate.parse(date, dateFormatter);
-            int index = 1;
-            // ui.printReply("Search Results:");
-            response += "Search Results:\n";
+            List<Task> searchResults = new ArrayList<>();
             for (Task task : tasks.getTaskList()) {
-                if (task.getDate() != null) {
-                    if (task.getDate().isEqual(dateToSearch)) {
-                        // String results = String.format("%d. %s", index, task);
-                        // ui.printReply(results);
-                        response += String.format("%d. %s", index, task) + "\n";
-                        index++;
-                    }
+                if (task.getDate() != null && task.getDate().isEqual(dateToSearch)) {
+                    searchResults.add(task);
                 }
             }
-            if (index == 1) {
-                return ui.printReply("No tasks found! Please search using a different date!");
-            } else {
-                return ui.printReply(response);
-            }
+            return ui.printTasks(searchResults);
         } catch (ArrayIndexOutOfBoundsException ex) {
             String err = "No task date provided. Please input a valid date using the format: 'dd/mm/yyyy' \n"
                     + "Type '/commands' to view the correct command for task search by date! ";

@@ -49,7 +49,7 @@ public class Storage {
             while (sc.hasNextLine()) {
                 String[] taskData = sc.nextLine().split(" \\|");
                 if (taskData[0].equals("T")) {
-                    Task toAdd = new Todo(taskData[2]);
+                    Task toAdd = new Todo(taskData[2].trim());
                     if (taskData[1].equals(" 1")) {
                         toAdd.markAsDone();
                     }
@@ -60,13 +60,13 @@ public class Storage {
                     LocalDate taskDate = LocalDate.parse(dateTimeArray[0]);
                     LocalTime taskTime = LocalTime.parse(dateTimeArray[1]);
                     if (taskData[0].equals("D")) {
-                        Task toAdd = new Deadline(taskData[2], taskDate, taskTime);
+                        Task toAdd = new Deadline(taskData[2].trim(), taskDate, taskTime);
                         if (taskData[1].equals(" 1")) {
                             toAdd.markAsDone();
                         }
                         taskList.add(toAdd);
                     } else if (taskData[0].equals("E")) {
-                        Task toAdd = new Event(taskData[2], taskDate, taskTime);
+                        Task toAdd = new Event(taskData[2].trim(), taskDate, taskTime);
                         if (taskData[1].equals(" 1")) {
                             toAdd.markAsDone();
                         }

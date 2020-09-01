@@ -44,7 +44,7 @@ public class Event extends Task {
      */
     @Override
     public String convertTaskToFileString() {
-        return "E | " + (hasBeenCompleted() ? "1 |" : "0 |") + getDescription() + " | "
+        return "E | " + (hasBeenCompleted() ? "1 | " : "0 | ") + getDescription() + " | "
                 + this.eventDate.toString() + " " + this.eventTime.toString();
     }
 

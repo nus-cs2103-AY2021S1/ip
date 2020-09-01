@@ -9,6 +9,9 @@ import duke.exception.InvalidFunctionException;
 import duke.task.Task;
 import duke.task.TaskList;
 
+import java.util.List;
+import java.util.ArrayList;
+
 /**
  * Represents a command to search for tasks using a keyword.
  */
@@ -38,24 +41,14 @@ public class FindByKeywordCommand extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
-            String response = "";
             String keyword = this.parsedCommand[1].trim().toLowerCase();
-            int index = 1;
-            // ui.printReply("Search Results:");
-            response += "Search Results: \n";
+            List<Task> searchResults = new ArrayList<>();
             for (Task task : tasks.getTaskList()) {
                 if (task.getDescription().toLowerCase().contains(keyword)) {
-                    // String results = String.format("%d. %s", index, task);
-                    // ui.printReply(results);
-                    response += String.format("%d. %s", index, task) + "\n";
-                    index++;
+                    searchResults.add(task);
                 }
             }
-            if (index == 1) {
-                return ui.printReply("No tasks found! Please search using a different keyword!");
-            } else {
-                return ui.printReply(response);
-            }
+            return ui.printTasks(searchResults);
         } catch (ArrayIndexOutOfBoundsException ex) {
             String err = "No keyword for the search was entered. Please enter a keyword!";
             throw new InvalidFunctionException(err);

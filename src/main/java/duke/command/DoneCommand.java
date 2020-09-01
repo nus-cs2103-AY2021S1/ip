@@ -38,28 +38,15 @@ public class DoneCommand extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
-            String response;
             int index = Integer.parseInt(this.parsedCommand[1]);
-            if (index > tasks.getListSize()) {
-                String err = "Invalid Task! The task does not exist. "
+            if (index > tasks.getListSize() || index <= 0) {
+                String err = "Invalid Task! The task ID you provided is not valid. "
                         + "Input 'list' to view the correct task ID of your desired task.";
                 throw new InvalidTaskException(err);
-            } else if (index <= 0) {
-                String err = "The task ID you provided is not valid. "
-                        + "Input 'list' to view the correct task ID of your desired task.";
-                throw new InvalidFunctionException(err);
             } else {
-                if (tasks.getTask(index - 1).hasBeenCompleted()) {
-                    response = "This task has already been completed:";
-                    // return ui.printReply(message);
-                } else {
-                    tasks.completeTask(index - 1);
-                    response = "Nice! I've marked this task as done:\n";
-                    // return ui.printReply(message);
-                }
-                response += "\t" + tasks.getTask(index - 1);
+                tasks.completeTask(index - 1);
                 storage.saveToFile(tasks);
-                return ui.printReply(response);
+                return ui.printDoneTask(tasks.getTask(index - 1));
             }
         } catch (ArrayIndexOutOfBoundsException ex) {
             String err = "No Task ID provided! Please input the ID of the task you wish to mark as completed.";

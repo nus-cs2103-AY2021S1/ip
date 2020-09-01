@@ -13,7 +13,7 @@ public class Duke {
 
     /** Ui object that functions as the user interface. */
     private final Ui ui;
-    /** Storage object that handles file operations. */
+    /** Storage object that handles file opera:tions. */
     private final Storage storage;
     /** TaskList object containing the user's list of tasks. */
     private final TaskList tasks;
@@ -41,20 +41,19 @@ public class Duke {
                 System.out.println(command.execute(tasks, ui, storage));
                 isExit = command.isExit();
             } catch (DukeException ex) {
-                System.out.println(ui.showError(ex.getMessage()));
+                System.out.println(ex.getMessage());
             } finally {
                 ui.showLine();
             }
         }
     }
 
-
     public String getResponse(String input) {
         try {
             Command command = Parser.parse(input);
             return command.execute(tasks, ui, storage);
         } catch (DukeException ex) {
-            return ui.showError(ex.getMessage());
+            return ex.getMessage();
         }
     }
 
