@@ -16,7 +16,7 @@ public class Parser {
      *
      * @param inputs the array of command and taskDescription obtain from user
      */
-    public void parseCommand(String[] inputs) {
+    public String parseCommand(String[] inputs) {
 
         try {
             Commands command = getCommand(inputs[0]);
@@ -30,48 +30,41 @@ public class Parser {
             switch (command) {
             case DONE: {
                 int index = Integer.parseInt(taskDescription) - 1;
-                taskList.doneTask(index);
-                break;
+                taskList.getTask(index).complete();
+                return taskList.getTask(index).toString();
             }
             case LIST: {
-                taskList.listTask();
-                break;
+                return taskList.listTask();
             }
             case BYE: {
-                System.out.println("Bye, Have a Great Time!");
                 taskList.setTaskListNotUpdating();
-                break;
+                return "Bye, Have a Great Time!";
             }
             case FIND: {
-                taskList.findTask(taskDescription);
-                break;
+                return taskList.findTask(taskDescription);
             }
             case TODO: {
                 Task newTask = new Todo(taskDescription);
-                taskList.addTask(newTask, true);
-                break;
+                return taskList.addTask(newTask, true);
             }
             case DEADLINE: {
                 Task newTask = Deadline.create(taskDescription);
-                taskList.addTask(newTask, true);
-                break;
+                return taskList.addTask(newTask, true);
             }
             case EVENT: {
                 Task newTask = Event.create(taskDescription);
-                taskList.addTask(newTask, true);
-                break;
+                return taskList.addTask(newTask, true);
             }
             case DELETE: {
                 int index = Integer.parseInt(taskDescription) - 1;
-                taskList.deleteTask(index);
-                break;
+                return taskList.deleteTask(index);
             }
             default: {
                 throw new DukeException("smlj??????");
             }
             }
         } catch (DukeException e) {
-            System.out.println(e.getMessage());
+           return e.getMessage();
         }
     }
 

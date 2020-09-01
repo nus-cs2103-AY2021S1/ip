@@ -140,7 +140,7 @@ public class Duke extends Application{
 
         //Scroll down to the end every time dialogContainer's height changes.
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
-         //more code to be added here later
+        //more code to be added here later
     }
 
     /**
@@ -161,7 +161,11 @@ public class Duke extends Application{
      * Replace this stub with your completed method.
      */
     private String getResponse(String input) {
-        return "Duke heard: " + input;
+        return parser.parseCommand(splitCommand(input));
+    }
+
+    private String[] splitCommand(String input){
+        return input.trim().split(" ", 2);
     }
 
 }

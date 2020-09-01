@@ -27,20 +27,16 @@ public abstract class Task {
      * Prints add task message for the current task
      *
      */
-    public void printAddTask() {
-        System.out.println(
-                String.format("Got it. I've added this task:\n  %s", this.toString())
-        );
+    public String printAddTask() {
+        return String.format("Got it. I've added this task:\n  %s", this.toString());
     }
 
     /**
      * Prints delete task message for the current task
      *
      */
-    public void printDeleteTask() {
-        System.out.println(
-                String.format("Noted. I've removed this task:\n %s", this.toString())
-        );
+    public String printDeleteTask() {
+        return String.format("Noted. I've removed this task:\n %s", this.toString());
     }
 
 
