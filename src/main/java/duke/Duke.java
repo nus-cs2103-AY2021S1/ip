@@ -1,18 +1,19 @@
 package duke;
 
 import java.util.Scanner;
+
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import javafx.scene.control.Label;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 
 /**
  * The Duke program can record down todos, deadlines and events and save it on your computer.
@@ -33,6 +34,26 @@ public class Duke extends Application {
     private Scene scene;
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+
+    /**
+     * Duke constructor to initialize a Duke object, initializes a Ui, Storage and TaskList object.
+     * @exception DukeException On input error and file path error.
+     */
+    public Duke() throws DukeException {
+        String logo =
+                " ____        _        \n"
+                        + "|  _ \\ _   _| | _____ \n"
+                        + "| | | | | | | |/ / _ \\\n"
+                        + "| |_| | |_| |   <  __/\n"
+                        + "|____/ \\__,_|_|\\_\\___|\n";
+        System.out.println("Hello from\n" + logo);
+        ui = new Ui();
+        javafxUi = new JavafxUi();
+        ui.drawLine();
+        storage = new Storage();
+        taskList = new TaskList(storage.loadFile());
+
+    }
 
     @Override
     public void start(Stage stage) throws DukeException {
@@ -103,28 +124,8 @@ public class Duke extends Application {
         try {
             return javafxBot(input);
         } catch (DukeException e) {
-           return e.getMessage();
+            return e.getMessage();
         }
-    }
-
-    /**
-     * Duke constructor to initialize a Duke object, initializes a Ui, Storage and TaskList object.
-     * @exception DukeException On input error and file path error.
-     */
-    public Duke() throws DukeException{
-        String logo =
-                  " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        ui = new Ui();
-        javafxUi = new JavafxUi();
-        ui.drawLine();
-        storage = new Storage();
-        taskList = new TaskList(storage.loadFile());
-
     }
 
     /*
@@ -207,13 +208,13 @@ public class Duke extends Application {
             output += javafxUi.drawLine();
             storage.saveFile(taskList.getList());
         // user creates a new task
-        } else if (first.equals("todo")|| first.equals("deadline") || first.equals("event")) {
+        } else if (first.equals("todo") || first.equals("deadline") || first.equals("event")) {
             output += javafxUi.addTask(taskList.add(input));
             output += javafxUi.listCount(taskList.countList());
             output += javafxUi.drawLine();
             storage.saveFile(taskList.getList());
         // user deletes a task
-        } else if (first.equals("delete")){
+        } else if (first.equals("delete")) {
             output += javafxUi.deleteTask(taskList.delete(input));
             output += javafxUi.listCount(taskList.countList());
             output += javafxUi.drawLine();

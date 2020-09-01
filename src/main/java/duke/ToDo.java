@@ -22,8 +22,8 @@ public class ToDo extends Task {
      * @return String
      */
     @Override
-    public String toString(){
-        if (super.getDone()){
+    public String toString() {
+        if (super.getDone()) {
             return "[T]" + "[" + "C" + "] " + super.getName();
         } else {
             return "[T]" + "[" + "X" + "] " + super.getName();

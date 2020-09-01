@@ -10,34 +10,34 @@ import java.util.List;
  * @since   27/8/2020
  */
 public class JavafxUi {
-    final String OUTPUT_LINE = "--------------------------";
+    final String outputLine = "--------------------------";
 
     /**
      * JavafxUi constructor
      */
-    JavafxUi(){
+    JavafxUi() {
 
     }
 
     /**
      * drawLine method which returns a line
      */
-    public String drawLine(){
-        return OUTPUT_LINE;
+    public String drawLine() {
+        return outputLine;
     }
 
     /**
      * addTask method which returns the task information
      */
-    public String addTask(Task task){
+    public String addTask(Task task) {
         return "added: " + task.toString() + "\n";
     }
 
     /**
      * deleteTask method which returns the task information
      */
-    public String deleteTask(Task task){
-        if (task == null){
+    public String deleteTask(Task task) {
+        if (task == null) {
             return deleteAll();
         } else {
             return "Noted. I've removed this task: " + "\n" + task.toString() + "\n";
@@ -48,30 +48,30 @@ public class JavafxUi {
     /**
      * doneTask method which returns the task information
      */
-    public String doneTask(Task task){
+    public String doneTask(Task task) {
         return "Nice! I've marked this task as done: \n" + task.toString();
     }
 
     /**
      * listCount method which returns the number of tasks
      */
-    public String listCount(int count){
-       return "Now you have "+count+" tasks in the list.\n" +
-        drawLine();
+    public String listCount(int count) {
+        return "Now you have " + count + " tasks in the list. \n"
+               + drawLine();
     }
 
     /**
      * bye method which returns a message when the user exits
      */
-    public String bye(){
-        return "Bye. Hope to see you again soon!+\n"+
-        drawLine();
+    public String bye() {
+        return "Bye. Hope to see you again soon! \n"
+                + drawLine();
     }
 
     /**
      * deleteAll method which returns a message when the user deletes all tasks
      */
-    public String deleteAll(){
+    public String deleteAll() {
         return "All tasks have been deleted!" + "\n";
     }
 
@@ -79,19 +79,23 @@ public class JavafxUi {
      * printList method which returns all the tasks in the list
      * @param list list of tasks
      */
-    public String printList(List<Task> list){
+    public String printList(List<Task> list) {
         String temp = "";
         int tempIndex = 1;
-        for (Task x: list){
-           temp += tempIndex + "." + x.toString() +"\n";
+        for (Task x: list) {
+            temp += tempIndex + "." + x.toString() + "\n";
             tempIndex += 1;
         }
         temp += drawLine();
         return temp;
     }
 
-    public String foundWord(List<Task> list){
-        return "Here are the matching tasks in your list:\n" +
-        printList(list);
+    /**
+     * foundWord method which returns all the tasks in the list that contain the word
+     * @param list list of tasks in the list that contain the word
+     */
+    public String foundWord(List<Task> list) {
+        return "Here are the matching tasks in your list:\n"
+                + printList(list);
     }
 }

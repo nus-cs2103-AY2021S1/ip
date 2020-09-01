@@ -21,7 +21,6 @@ public class Storage {
 
     // file path to direct the program where to save the file
     private Path path;
-    public static final String STORAGE_FILEPATH = "./data/duke.txt";
 
     /**
      * Storage constructor to initialize a storage object which directs the path and creates a file
@@ -65,15 +64,14 @@ public class Storage {
                     contents += temp;
                 }
             }
-                fw.write(contents);
-                System.out.println(contents);
-                fw.close();
+            fw.write(contents);
+            fw.close();
         } catch (IOException e) {
-           throw new DukeException("File cannot be located or opened");
+            throw new DukeException("File cannot be located or opened");
         }
     }
 
-        /**
+    /**
      * loadFile method which retrieves the file from the path and returns the data
      *
      * @return returns the list of tasks retrieved from the file on the computer
