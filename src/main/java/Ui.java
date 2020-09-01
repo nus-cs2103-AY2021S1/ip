@@ -2,7 +2,7 @@ package duke;
 
 import java.util.Scanner;
 
-public class Ui{
+public class Ui {
 
 	public void showWelcome() {
 		String logo = "____________________________________________________________\n"

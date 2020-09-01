@@ -15,7 +15,7 @@ import java.util.Optional;
 
 public class Parser {
 	public static Command parse(String fullCommand) throws DukeException {
-		if(fullCommand.equals("list")){
+		if(fullCommand.equals("list")) {
 			return list();
 		} else if (fullCommand.equals("bye")) {
 			return bye();
@@ -29,11 +29,9 @@ public class Parser {
 			return event(fullCommand);
 		} else if (getWord(fullCommand).equals("delete")) {
 			return delete(fullCommand);
-		}
-		else if(getWord(fullCommand).equals("save")){
+		} else if(getWord(fullCommand).equals("save")) {
 			return save();
-		}
-		else{
+		} else {
 			throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
 		}
 	}
@@ -91,30 +89,32 @@ public class Parser {
 		return new Command() {
 			@Override
 			public String execute(TaskList taskList, Ui ui, Storage storage) {
-				StringBuilder stringBuilder = new StringBuilder();
+				StringBuilder outputStringBuilder = new StringBuilder();
 				String input = string.substring(4);
 				String temp;
 				if (input.isEmpty()) {
 					temp = "☹ OOPS!!! The description of a todo cannot be empty.";
-					stringBuilder.append(temp);
+					outputStringBuilder.append(temp);
 					ui.showOutput(temp);
-				} else {
-					duke.Task task = new duke.Task(duke.TaskType.TODO, false, input);
-					taskList.add(task);
-
-					temp = "Got it. I've added this task:";
-					ui.showOutput(temp);
-					stringBuilder.append(temp).append("\n");
-
-					temp = " " + task.getTypeString() + task.getDoneString() + input;
-					ui.showOutput(temp);
-					stringBuilder.append(temp).append("\n");
-
-					temp ="Now you have " + taskList.size() + " tasks in the list.";
-					ui.showOutput(temp);
-					stringBuilder.append(temp);
+					return outputStringBuilder.toString();
 				}
-				return stringBuilder.toString();
+
+				duke.Task task = new duke.Task(duke.TaskType.TODO, false, input);
+				taskList.add(task);
+
+				temp = "Got it. I've added this task:";
+				ui.showOutput(temp);
+				outputStringBuilder.append(temp).append("\n");
+
+				temp = " " + task.getTypeString() + task.getDoneString() + input;
+				ui.showOutput(temp);
+				outputStringBuilder.append(temp).append("\n");
+
+				temp ="Now you have " + taskList.size() + " tasks in the list.";
+				ui.showOutput(temp);
+				outputStringBuilder.append(temp);
+
+				return outputStringBuilder.toString();
 			}
 
 			@Override
@@ -131,12 +131,16 @@ public class Parser {
 				String input = string.substring(8);
 				String temp;
 				StringBuilder outputStringBuilder = new StringBuilder();
+
+				//No description
 				if (input.isEmpty()) {
 					temp = "☹ OOPS!!! The description of a deadline cannot be empty.";
 					ui.showOutput(temp);
 					outputStringBuilder.append(temp);
 					return outputStringBuilder.toString();
 				}
+
+				//No /by
 				int index = input.indexOf("/by");
 				if (index == -1) {
 					temp = "☹ OOPS!!! The description of a deadline must have a indicated deadline.";
@@ -144,6 +148,8 @@ public class Parser {
 					outputStringBuilder.append(temp);
 					return outputStringBuilder.toString();
 				}
+
+				//Convert user date into string which is readable by LocalDateTime class.
 				StringBuilder dateStringBuilder = new StringBuilder();
 				String[] strings = new String[1];
 				if(input.length() >= index + 4) {
@@ -161,7 +167,9 @@ public class Parser {
 							.append(":")
 							.append(strings[2].substring(7, 9));
 				}
-				try{
+
+				//Try to input date if it a valid is date is used.
+				try {
 					LocalDateTime localDateTime = LocalDateTime.parse(dateStringBuilder.toString(), DateTimeFormatter.ISO_LOCAL_DATE_TIME);
 					StringBuilder taskStringBuilder = new StringBuilder();
 					taskStringBuilder.append(input.substring(0, index))
@@ -200,7 +208,7 @@ public class Parser {
 		};
 
 	}
-	public static Command event(String string){
+	public static Command event(String string) {
 		return new Command() {
 			@Override
 			public String execute(TaskList taskList, Ui ui, Storage storage) {
@@ -211,32 +219,35 @@ public class Parser {
 					temp = "☹ OOPS!!! The description of a event cannot be empty.";
 					ui.showOutput(temp);
 					outputStringBuilder.append(temp);
-				}else {
-					int index = input.indexOf("/at");
-					if (index == -1) {
-						temp ="☹ OOPS!!! The description of an event must have a indicated deadline.";
-						ui.showOutput(temp);
-						outputStringBuilder.append(temp);
-					} else {
-						StringBuilder taskStringBuilder = new StringBuilder();
-						taskStringBuilder.append(input.substring(0, index)).append("(at:").append(input.substring(index + 3)).append(")");
-						input = taskStringBuilder.toString();
-						duke.Task task = new duke.Task(duke.TaskType.DEADLINE, false, input);
-						taskList.add(task);
-
-						temp = "Got it. I've added this task:";
-						ui.showOutput(temp);
-						outputStringBuilder.append(temp).append("\n");
-
-						temp = " " + task.getTypeString() + task.getDoneString() + input;
-						ui.showOutput(temp);
-						outputStringBuilder.append(temp).append("\n");
-
-						temp = "Now you have " + taskList.size() + " tasks in the list.";
-						ui.showOutput(temp);
-						outputStringBuilder.append(temp);
-					}
+					return outputStringBuilder.toString();
 				}
+
+				int index = input.indexOf("/at");
+				if (index == -1) {
+					temp ="☹ OOPS!!! The description of an event must have a indicated deadline.";
+					ui.showOutput(temp);
+					outputStringBuilder.append(temp);
+					return outputStringBuilder.toString();
+				}
+
+				StringBuilder taskStringBuilder = new StringBuilder();
+				taskStringBuilder.append(input.substring(0, index)).append("(at:").append(input.substring(index + 3)).append(")");
+				input = taskStringBuilder.toString();
+				duke.Task task = new duke.Task(duke.TaskType.DEADLINE, false, input);
+				taskList.add(task);
+
+				temp = "Got it. I've added this task:";
+				ui.showOutput(temp);
+				outputStringBuilder.append(temp).append("\n");
+
+				temp = " " + task.getTypeString() + task.getDoneString() + input;
+				ui.showOutput(temp);
+				outputStringBuilder.append(temp).append("\n");
+
+				temp = "Now you have " + taskList.size() + " tasks in the list.";
+				ui.showOutput(temp);
+				outputStringBuilder.append(temp);
+
 				return outputStringBuilder.toString();
 			}
 
@@ -247,7 +258,7 @@ public class Parser {
 		};
 	}
 
-	public static Command done(String string){
+	public static Command done(String string) {
 		return new Command() {
 			@Override
 			public String execute(TaskList taskList, Ui ui, Storage storage) {
@@ -258,42 +269,46 @@ public class Parser {
 					temp = "☹ OOPS!!! Please indicate which task is done.";
 					ui.showOutput(temp);
 					outputStringBuilder.append(temp);
-				}else{
-					input = input.substring(1);
-					boolean isInteger = true;
-					for(int i = 0; i < input.length(); i++){
-						if(!Character.isDigit(input.charAt(i))){
-							isInteger = false;
-							break;
-						}
-					}
-					if(isInteger){
-						int tasknumber = Integer.parseInt(input);
-						if( (tasknumber == 0) ||(tasknumber >taskList.size()) ){
-							temp = "☹ OOPS!!! Task number is not found in the list.";
-							ui.showOutput(temp);
-							outputStringBuilder.append(temp);
-						}
-						else{
-							duke.Task task =taskList.remove(tasknumber - 1);
-							duke.Task newTask = new duke.Task(task.taskType, true, task.toString());
-							taskList.add(tasknumber-1, newTask);
+					return outputStringBuilder.toString();
+				}
 
-							temp = "Nice! I've marked this task as done:";
-							ui.showOutput(temp);
-							outputStringBuilder.append(temp).append("\n");
-
-							temp = " " + newTask.getTypeString() + newTask.getDoneString() + newTask.toString();
-							ui.showOutput(temp);
-							outputStringBuilder.append(temp);
-						}
-					}
-					else{
-						temp = "☹ OOPS!!! Incorrect entry for finished task.";
-						ui.showOutput(temp);
-						outputStringBuilder.append(temp);
+				input = input.substring(1);
+				boolean isInteger = true;
+				for(int charIndex = 0; charIndex < input.length(); charIndex++){
+					if(!Character.isDigit(input.charAt(charIndex))){
+						isInteger = false;
+						break;
 					}
 				}
+				if(!isInteger) {
+					temp = "☹ OOPS!!! Incorrect entry for finished task.";
+					ui.showOutput(temp);
+					outputStringBuilder.append(temp);
+					return outputStringBuilder.toString();
+				}
+
+				int tasknumber = Integer.parseInt(input);
+				if( (tasknumber == 0) ||(tasknumber >taskList.size()) ){
+					temp = "☹ OOPS!!! Task number is not found in the list.";
+					ui.showOutput(temp);
+					outputStringBuilder.append(temp);
+					return outputStringBuilder.toString();
+				}
+
+				duke.Task task = taskList.remove(tasknumber - 1);
+				Task newTask = task.done();
+				taskList.add(tasknumber - 1, newTask);
+
+
+				temp = "Nice! I've marked this task as done:";
+				ui.showOutput(temp);
+				outputStringBuilder.append(temp).append("\n");
+
+				temp = " " + newTask.getTypeString() + newTask.getDoneString() + newTask.toString();
+				ui.showOutput(temp);
+				outputStringBuilder.append(temp);
+
+
 				return outputStringBuilder.toString();
 			}
 
@@ -311,48 +326,50 @@ public class Parser {
 				String input = string.substring(6);
 				StringBuilder outputStringBuilder = new StringBuilder();
 				String temp;
-				if(input.isEmpty()){
+				if(input.isEmpty()) {
 					temp = "☹ OOPS!!! Please indicate which task is done.";
 					ui.showOutput(temp);
 					outputStringBuilder.append(temp);
-				}else{
-					input = input.substring(1);
-					boolean isInteger = true;
-					for(int i = 0; i < input.length(); i++){
-						if(!Character.isDigit(input.charAt(i))){
-							isInteger = false;
-							break;
-						}
-					}
-					if(isInteger){
-						int tasknumber = Integer.parseInt(input);
-						if( (tasknumber == 0) ||(tasknumber > taskList.size()) ){
-							temp = "☹ OOPS!!! Task number is not found in the list.";
-							ui.showOutput(temp);
-							outputStringBuilder.append(temp);
-						}
-						else{
-							duke.Task task = taskList.remove(tasknumber - 1);
+					return outputStringBuilder.toString();
+				}
 
-							temp = "Noted. I've removed this task:";
-							ui.showOutput(temp);
-							outputStringBuilder.append(temp).append("\n");
-
-							temp = " " + task.getTypeString() + task.getDoneString() + task.toString();
-							ui.showOutput(temp);
-							outputStringBuilder.append(temp).append("\n");
-
-							temp = "Now you have " + taskList.size() + " tasks in the list.";
-							ui.showOutput(temp);
-							outputStringBuilder.append(temp);
-						}
-					}
-					else{
-						temp = "☹ OOPS!!! Incorrect entry for finished task.";
-						ui.showOutput(temp);
-						outputStringBuilder.append(temp);
+				input = input.substring(1);
+				boolean isInteger = true;
+				for(int charIndex = 0; charIndex < input.length(); charIndex++){
+					if(!Character.isDigit(input.charAt(charIndex))){
+						isInteger = false;
+						break;
 					}
 				}
+				if(!isInteger) {
+					temp = "☹ OOPS!!! Incorrect entry for finished task.";
+					ui.showOutput(temp);
+					outputStringBuilder.append(temp);
+					return outputStringBuilder.toString();
+				}
+
+				int tasknumber = Integer.parseInt(input);
+				if( (tasknumber == 0) ||(tasknumber > taskList.size()) ){
+					temp = "☹ OOPS!!! Task number is not found in the list.";
+					ui.showOutput(temp);
+					outputStringBuilder.append(temp);
+					return outputStringBuilder.toString();
+				}
+
+				duke.Task task = taskList.remove(tasknumber - 1);
+
+				temp = "Noted. I've removed this task:";
+				ui.showOutput(temp);
+				outputStringBuilder.append(temp).append("\n");
+
+				temp = " " + task.getTypeString() + task.getDoneString() + task.toString();
+				ui.showOutput(temp);
+				outputStringBuilder.append(temp).append("\n");
+
+				temp = "Now you have " + taskList.size() + " tasks in the list.";
+				ui.showOutput(temp);
+				outputStringBuilder.append(temp);
+
 				return outputStringBuilder.toString();
 			}
 

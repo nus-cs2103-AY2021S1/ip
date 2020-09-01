@@ -15,7 +15,7 @@ public class Task{
 		this.string = string;
 		this.dateTime = Optional.empty();
 	}
-	public Task(duke.TaskType taskType, boolean isDone, String string, Optional<LocalDateTime> date) {
+	public Task(duke.TaskType taskType, boolean isDone, String string, Optional<LocalDateTime> dateTime) {
 		this.taskType = taskType;
 		this.isDone = isDone;
 		this.string = string;
