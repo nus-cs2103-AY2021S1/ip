@@ -11,8 +11,6 @@ public class Duke {
 
 
 
-    public Duke() {}
-
     /**
      * Creates a Duke object containing a Ui object, Storage object, and TaskList Object.
      * @param filepath filepath where the text file containing the list is stored.
@@ -53,6 +51,16 @@ public class Duke {
 
 
     String getResponse(String input) {
-        return "Duke heard: " + input;
+        try {
+            Command c = new Parser().parse(input);
+            String output = c.getExecuteString(taskList, ui, storage);
+            return output;
+        } catch (DukeException e) {
+            return e.getMessage();
+        }
+    }
+
+    public TaskList getTaskList() {
+        return taskList;
     }
 }
