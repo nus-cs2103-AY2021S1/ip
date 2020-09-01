@@ -55,4 +55,8 @@ public class Parser {
 
         return new Event (description.substring(0,description.length()-1),false,duration.substring(0,duration.length()-1));
     }
+    
+    public static String parseKeyWord(String command) {
+        return command.substring(5);
+    }
 }
