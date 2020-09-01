@@ -7,6 +7,13 @@ public class Event extends Task {
 
     private final Date at;
 
+    /**
+     * Creates a new Event.
+     *
+     * @param description Description of Event.
+     * @param at          Time of Event.
+     * @param isDone      true if event is over, false if event if in the future.
+     */
     public Event(String description, Date at, boolean isDone) {
         super(description, TaskType.EVENT, isDone);
         this.at = at;
@@ -26,5 +33,5 @@ public class Event extends Task {
     public String toString() {
         return super.toString() + " (at: " + Ui.formatDate(at) + ")";
     }
-    
+
 }

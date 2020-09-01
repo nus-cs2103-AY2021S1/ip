@@ -7,6 +7,11 @@ public class Duke {
     private final TaskList tasks;
     private final Ui ui;
 
+    /**
+     * Creates a new Duke.
+     *
+     * @param filePath file path where a file containing taskList from last execution of Duke is stored.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);

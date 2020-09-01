@@ -10,6 +10,14 @@ public abstract class Task {
     protected boolean isDone;
     protected final TaskType taskType;
 
+    /**
+     * Creates a new Task.
+     * Constructor used by subclasses since Task is an abstract class.
+     *
+     * @param description Description of task.
+     * @param taskType    Type of Task.
+     * @param isDone      true if Task is done, false if Task is yet to be done.
+     */
     public Task(String description, TaskType taskType, boolean isDone) {
         this.description = description;
         this.taskType = taskType;
@@ -37,8 +45,16 @@ public abstract class Task {
         return false;
     }
 
+    /**
+     * Checks if Task fulfil date and keyword criteria.
+     *
+     * @param date Date that Task must be on or null.
+     * @param keyWord Keyword that Task description must contain or null.
+     * @return boolean indiating whether Task passed the criteria.
+     */
     public boolean fulfilCriteria(Date date, String keyWord) {
-        return (date == null || isOccuringOn(date)) && (keyWord == null || description.toLowerCase().contains(keyWord.toLowerCase()));
+        return (date == null || isOccuringOn(date)) && (keyWord == null
+                || description.toLowerCase().contains(keyWord.toLowerCase()));
     }
 
     @Override
