@@ -12,6 +12,7 @@ public class CommandResponse {
     /**
      * Creates a new command response with the specified string response and a boolean to indicate if the
      * response is an exit response.
+     *
      * @param response The string response of this command response.
      * @param isExit Indicates if the command response is an exit command response.
      */
@@ -22,6 +23,7 @@ public class CommandResponse {
 
     /**
      * Gets the response in string representation.
+     *
      * @return The response in string representation.
      */
     public String getResponse() {
@@ -30,6 +32,7 @@ public class CommandResponse {
 
     /**
      * Indicates if the response is an exit response.
+     *
      * @return A boolean to indicate if the response is an exit response.
      */
     public boolean isExit() {

@@ -13,6 +13,7 @@ public abstract class Task {
 
     /**
      * Creates a new task with the specified description.
+     *
      * @param description The description of the task.
      */
     public Task(String description, TaskType taskType) {
@@ -24,6 +25,7 @@ public abstract class Task {
     /**
      * Gets the status icon.
      * "✓" indicates this task is completed and "✘" indicates this task is not completed.
+     *
      * @return A string of the status icon.
      */
     public String getStatusIcon() {
@@ -32,6 +34,7 @@ public abstract class Task {
 
     /**
      * If this task is done, returns true, otherwise false.
+     *
      * @return True, if this task is done, otherwise false.
      */
     public boolean getIsDone() {
@@ -40,6 +43,7 @@ public abstract class Task {
 
     /**
      * Gets the description of this task.
+     *
      * @return The description of this task.
      */
     public String getDescription() {
@@ -48,6 +52,7 @@ public abstract class Task {
 
     /**
      * Gets the short form string representation of this task.
+     *
      * @return The short form string representation of this task.
      */
     public String getShortForm() {
@@ -63,6 +68,7 @@ public abstract class Task {
 
     /**
      * Returns a string representation of this task.
+     *
      * @return A string representation of this task.
      */
     @Override

@@ -79,6 +79,7 @@ public class Parser {
 
     /**
      * Parses input dates in the valid date formats of d/M/y and y-M-d into the local date format.
+     *
      * @param string The date to be parsed.
      * @return Local date format of the input date.
      * @throws DateTimeParseException If the input date is not of an acceptable format.

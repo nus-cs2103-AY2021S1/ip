@@ -15,6 +15,7 @@ public class DeleteCommand extends Command {
 
     /**
      * Creates a new delete command with the specified number of the task to be deleted.
+     *
      * @param taskNumber The number of the task to be deleted.
      */
     public DeleteCommand(int taskNumber) {
@@ -23,6 +24,7 @@ public class DeleteCommand extends Command {
 
     /**
      * Deletes the task with the task number from the specified task list.
+     *
      * @param tasks The task list the command is executed with.
      * @param storage The storage the command is executed with.
      * @return A command response that represents the result of completing a delete command.
