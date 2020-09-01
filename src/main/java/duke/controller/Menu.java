@@ -14,7 +14,9 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
-
+/**
+ * Encapsulates a Menu class that represents the menu for the program.
+ */
 public class Menu {
     @FXML
     private VBox dukeLogo;
@@ -22,6 +24,9 @@ public class Menu {
     @FXML
     private Button startButton;
 
+    /**
+     * Initializes the Menu instance.
+     */
     @FXML
     public void initialize() {
         Label labelMessage = new Label(Messenger.LOGO);
@@ -30,6 +35,11 @@ public class Menu {
         dukeLogo.setAlignment(Pos.CENTER);
     }
 
+    /**
+     * Switches the current scene to MainWindow.
+     *
+     * @throws IOException an IOException in trying to retrieve the fxml file.
+     */
     @FXML
     public void switchToMain() throws IOException {
         Stage stage;

@@ -1,6 +1,6 @@
 package TextFxJava;
 
-import duke.ui.Main;
+import duke.controller.Main;
 import javafx.stage.Stage;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;

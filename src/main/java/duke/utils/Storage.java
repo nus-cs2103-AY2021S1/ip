@@ -7,7 +7,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
-import duke.controller.AlertBox;
+import duke.ui.AlertBox;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
 import duke.types.TaskType;

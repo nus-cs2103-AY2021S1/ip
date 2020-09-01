@@ -1,6 +1,7 @@
 package duke.controller;
 
 import duke.tasks.TaskList;
+import duke.ui.DataSaver;
 import duke.utils.Storage;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -13,7 +14,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
 /**
- * Controller for MainWindow. Provides the layout for the other controls.
+ * Encapsulates the MainWindow class, representing the main window for the program.
  */
 public class MainWindow extends AnchorPane {
     @FXML
@@ -58,6 +59,9 @@ public class MainWindow extends AnchorPane {
         userInput.clear();
     }
 
+    /**
+     * Saves the data to a load file.
+     */
     @FXML
     private void handleSaveFile() {
         DataSaver.save(storage);
@@ -66,6 +70,9 @@ public class MainWindow extends AnchorPane {
         }
     }
 
+    /**
+     * Loads data from a load file.
+     */
     private void loadFile() {
         String readFileMessage = storage.readSavedFile();
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(readFileMessage, dukeImage));

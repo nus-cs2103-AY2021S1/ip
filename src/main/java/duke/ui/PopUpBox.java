@@ -1,4 +1,4 @@
-package duke.controller;
+package duke.ui;
 
 /**
  * Encapsulates an interface that represents a customised dialog box.

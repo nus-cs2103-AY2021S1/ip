@@ -22,7 +22,6 @@ class StorageTest extends TestFXJUnitAppRunner {
 
     @Test
     void readSavedFile() throws IOException {
-        Label label = new Label();
         TaskList list = new TaskList();
         Storage storage = new Storage(list);
 
@@ -30,8 +29,7 @@ class StorageTest extends TestFXJUnitAppRunner {
         System.setOut(new PrintStream(outContent));
 
         makeBackup();
-        storage.readSavedFile(label);
-        String actual = label.getText() + list.printList();
+        String actual = storage.readSavedFile() + list.printList();
         recover();
 
         String expected = "Hold a while, trying to retrieve where you were last time...\n"
@@ -50,7 +48,7 @@ class StorageTest extends TestFXJUnitAppRunner {
         TaskList list = new TaskList();
         Storage storage = new Storage(list);
         makeBackup();
-        storage.readSavedFile(label);
+        storage.readSavedFile();
         list.addTask("test content", "todo");
         storage.saveDataToFile(label);
         StringBuilder sb = new StringBuilder();

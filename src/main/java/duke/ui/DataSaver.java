@@ -1,5 +1,6 @@
-package duke.controller;
+package duke.ui;
 
+import duke.ui.PopUpBox;
 import duke.utils.Storage;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
