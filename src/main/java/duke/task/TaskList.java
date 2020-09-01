@@ -82,7 +82,7 @@ public class TaskList {
             int intIndex = Integer.parseInt(index) - 1;
             return completeTask(intIndex);
         } catch (NumberFormatException e) {
-            throw new InvalidTaskIndexException("Invalid task index");
+            throw new InvalidTaskIndexException("Invalid task index while marking as complete.");
         }
     }
 
@@ -90,7 +90,7 @@ public class TaskList {
         try {
             return taskList.get(index).completeTask();
         } catch (IndexOutOfBoundsException e) {
-            throw new InvalidTaskIndexException("Invalid task index.");
+            throw new InvalidTaskIndexException("Invalid task index while marking as complete.");
         }
     }
 
@@ -108,7 +108,7 @@ public class TaskList {
             int intIndex = Integer.parseInt(index) - 1;
             return deleteTask(intIndex);
         } catch (NumberFormatException e) {
-            throw new InvalidTaskIndexException("Invalid task index");
+            throw new InvalidTaskIndexException("Invalid task index while deleting.");
         }
     }
 

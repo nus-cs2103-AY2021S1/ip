@@ -45,7 +45,8 @@ public class Deadline extends Task {
     public static Deadline create(String args) throws TaskException {
         String[] argsList = args.split(DELIMITER_COMMAND);
         if (argsList.length < 2) {
-            throw new TaskException("Not enough arguments");
+            throw new TaskException("I need more arguments for to track an Event.\n"
+                    + "The format should be <description> /by <time in DD/MM/YYYY HH:mm>");
         } else {
             LocalDateTime date = LocalDateTime.parse(argsList[1], Task.READER_FORMAT);
             return new Deadline(argsList[0], date);

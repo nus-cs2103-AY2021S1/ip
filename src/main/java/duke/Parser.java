@@ -27,9 +27,9 @@ public class Parser {
      *
      * @param fullCommand user's input
      * @return one of the subclasses of Command that represents the application logic
-     * @throws DukeUnknownCommandException if the user's command is unknown
+     * @throws UnknownCommandException if the user's command is unknown
      */
-    public static Command parse(String fullCommand) throws DukeUnknownCommandException {
+    public static Command parse(String fullCommand) throws UnknownCommandException {
         StringBuilder commandInput = new StringBuilder();
         StringBuilder argsInput = new StringBuilder();
         boolean commandFound = false;
@@ -63,7 +63,7 @@ public class Parser {
         } else if (command.equals(COMMAND_FIND)) {
             return new FindCommand(args);
         } else {
-            throw new DukeUnknownCommandException("Unknown command");
+            throw new UnknownCommandException("Unknown command");
         }
     }
 }

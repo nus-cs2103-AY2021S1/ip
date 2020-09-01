@@ -45,7 +45,8 @@ public class Event extends Task {
     public static Event create(String args) throws TaskException {
         String[] argsList = args.split(DELIMITER_COMMAND);
         if (argsList.length < 2) {
-            throw new TaskException("Not enough arguments");
+            throw new TaskException("I need more arguments for to track an Event.\n"
+            + "The format should be <description> /at <time in DD/MM/YYYY HH:mm>");
         } else {
             LocalDateTime date = LocalDateTime.parse(argsList[1], Task.READER_FORMAT);
             return new Event(argsList[0], date);

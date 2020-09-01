@@ -53,7 +53,7 @@ public class Duke {
                 ui.showLine();
                 ui.showErrorMessage(e.getMessage());
                 ui.showLine();
-            } catch (DukeUnknownCommandException | StorageException | TaskException e) {
+            } catch (UnknownCommandException | StorageException | TaskException e) {
                 ui.showErrorMessage(e.getMessage());
                 ui.showLine();
             }
@@ -75,8 +75,14 @@ public class Duke {
             String result = command.execute(taskList, storage);
             hasExited = command.isExit();
             return result;
-        } catch (StorageException | TaskException | DukeUnknownCommandException e) {
-            return e.getMessage();
+        } catch (StorageException e) {
+            e.printStackTrace();
+            return "I couldn't store your data properly.";
+        } catch (TaskException e) {
+            return "I couldn't create or update a task.\n"
+                + e.getMessage();
+        } catch (UnknownCommandException e) {
+            return "I couldn't understand this command.";
         }
     }
 

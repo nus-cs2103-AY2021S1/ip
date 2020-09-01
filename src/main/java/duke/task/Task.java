@@ -43,7 +43,7 @@ public abstract class Task {
      */
     private void verifyArgs(String description) throws TaskException {
         if (description.equals("")) {
-            throw new TaskException("Did you provide any description for this todo task?");
+            throw new TaskException("Did you provide any description for this task?");
         }
     }
 
