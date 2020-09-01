@@ -1,4 +1,8 @@
 E | 1 | project meeting | Sunday
 D | 0 | pay money | Saturday
 T | 0 | make lunch
-D | 0 | bank in money | Monday
+D | 1 | bank in money | Monday
+T | 0 | read book
+T | 0 | read book
+T | 0 | return book
+T | 0 | omega domega long task we are testing this out

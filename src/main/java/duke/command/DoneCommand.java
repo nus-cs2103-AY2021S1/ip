@@ -12,13 +12,13 @@ public class DoneCommand extends Command {
         this.isExit = false;
     }
 
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws InvalidIndexException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws InvalidIndexException {
         int taskNumber = Integer.parseInt(fullCommand.substring(5));
 
         Task task = tasks.done(taskNumber);
 
-        System.out.println(doneTaskMessage(task, tasks));
         storage.save(tasks);
+        return doneTaskMessage(task, tasks);
     }
 
     public String doneTaskMessage(Task deletedTask, TaskList tasks) {

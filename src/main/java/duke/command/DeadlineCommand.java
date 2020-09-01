@@ -13,10 +13,10 @@ public class DeadlineCommand extends TaskCommand {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws EmptyDescriptionException, EmptyDateException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws EmptyDescriptionException, EmptyDateException {
         Deadline deadline = new Deadline(fullCommand);
         tasks.add(deadline);
         storage.save(tasks);
-        System.out.println(addedTaskMessage(deadline, tasks));
+        return addedTaskMessage(deadline, tasks);
     }
 }

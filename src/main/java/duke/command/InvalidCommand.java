@@ -12,7 +12,7 @@ public class InvalidCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        throw new DukeException("oops! im sorry, but i do not know what that means :-(");
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        return "oops! im sorry, but i do not know what that means :-(";
     }
 }

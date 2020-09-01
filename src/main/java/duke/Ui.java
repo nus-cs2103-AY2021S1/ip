@@ -7,13 +7,12 @@ import java.util.Scanner;
  */
 
 public class Ui {
-    public void showWelcome() {
+    public String showWelcome() {
         StringBuilder sb = new StringBuilder();
         sb.append("\n")
                 .append("hello! i'm duke :-)\n")
-                .append("how may i help you?\n")
-                .append("--------------------------------------------------------------");
-        System.out.println(sb.toString());
+                .append("how may i help you?\n");
+        return sb.toString();
     }
 
     public void showLoadingError() {
