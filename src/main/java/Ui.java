@@ -13,6 +13,7 @@ public class Ui {
     private static final String DELETE_REPLY = "Good good... Okay removed! Looks more apt for a lazy ass like you. \n";
     private static final String ADD_REPLY_TOP = "Wow, another task. Added. You sure you can finish them all? \n";
     private static final String ADD_REPLY_BOT = "Now you have a grand total of %d";
+    private static final String DONE_REPLY = "Wah finally. Wondering how long more I need to wait... \n";
 
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
     private VBox dialogContainer;
@@ -45,8 +46,13 @@ public class Ui {
     }
 
     public void replyDelete(Task taskDeleted) {
-        String task =  taskDeleted.toString();
+        String task = taskDeleted.toString();
         print(DELETE_REPLY + task);
+    }
+
+    public void replyDone(Task taskDone) {
+        String task = taskDone.toString();
+        print(DONE_REPLY + task);
     }
 
     public void replyFind(TaskManager taskManager, ArrayList<Task> foundTasks) {

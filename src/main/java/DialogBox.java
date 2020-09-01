@@ -24,7 +24,7 @@ public class DialogBox extends HBox {
     @FXML
     private Label dialog;
     @FXML
-    private Circle displayPicture;
+    private ImageView displayPicture;
 
     private DialogBox(String text, Image img) {
         try {
@@ -39,7 +39,7 @@ public class DialogBox extends HBox {
                 + "-fx-border-color: #00CED1; -fx-border-radius: 10; "
                 + "-fx-border-width: 10; -fx-background-radius: 10");
         dialog.setText(text);
-        displayPicture.setFill(new ImagePattern(img));
+        displayPicture.setImage(img);
     }
 
     /**

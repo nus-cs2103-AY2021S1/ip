@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class Duke  {
-
     private Ui ui;
     private TaskSaveAndLoadManager taskSaveAndLoadManager = new TaskSaveAndLoadManager();
     private TaskManager taskManager;
@@ -21,10 +20,11 @@ public class Duke  {
         this.ui = new Ui(dialogContainer);
     }
 
-    public boolean getResponse(String input) {
+    public boolean getResponse(String input) throws IOException {
         try {
             Command c = Parser.parse(input);
             c.execute(taskManager, ui);
+            taskSaveAndLoadManager.saveTaskManager(this.taskManager);
             return c.isBye();
         } catch (DukeException e) {
             ui.print(e.getMessage());

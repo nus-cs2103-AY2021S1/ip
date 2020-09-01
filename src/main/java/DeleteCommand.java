@@ -1,13 +1,14 @@
 public class DeleteCommand extends Command {
-    private final int taskNum;
+    private final int taskIndex;
 
     public DeleteCommand(int taskNum) {
-        this.taskNum = taskNum;
+        this.taskIndex = taskNum;
     }
 
     @Override
     public void execute(TaskManager taskManager, Ui ui) {
-        taskManager.removeTask(taskNum);
+        ui.replyDelete(taskManager.getTask(taskIndex - 1));
+        taskManager.removeTask(taskIndex - 1);
     }
 
     @Override
