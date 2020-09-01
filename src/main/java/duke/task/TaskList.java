@@ -69,55 +69,54 @@ public class TaskList {
     }
 
     /**
-     * Completes a task at the given index.
+     * Completes tasks at the given indexes.
+     * The given indexes should be as given in the list command.
      *
-     * The given index should be offset by 1 (i.e. the first index is 1).
-     *
-     * @param index The index of the task to complete.
-     * @return The task that was completed.
-     * @throws InvalidTaskIndexException If the index is invalid.
+     * @param indexes An array of indexes whose tasks should be completed.
+     * @return Tasks that were completed.
+     * @throws InvalidTaskIndexException If any one index is invalid.
      */
-    public Task completeTask(String index) throws InvalidTaskIndexException {
-        try {
-            int intIndex = Integer.parseInt(index) - 1;
-            return completeTask(intIndex);
-        } catch (NumberFormatException e) {
-            throw new InvalidTaskIndexException("Invalid task index while marking as complete.");
+    public List<Task> completeTasks(String... indexes) throws InvalidTaskIndexException {
+        List<Task> tasks = verifyIndexes(indexes);
+        for (Task task : tasks) {
+            task.completeTask();
         }
-    }
-
-    private Task completeTask(int index) throws InvalidTaskIndexException {
-        try {
-            return taskList.get(index).completeTask();
-        } catch (IndexOutOfBoundsException e) {
-            throw new InvalidTaskIndexException("Invalid task index while marking as complete.");
-        }
+        return tasks;
     }
 
     /**
      * Deletes a task at the given index.
+     * The given index should be as given in the list command.
      *
-     * The given index should be offset by 1 (i.e. the first index is 1).
-     *
-     * @param index The index of the task to delete.
-     * @return The task that was deleted.
+     * @param index The index whose task should be deleted.
+     * @return The deleted task.
      * @throws InvalidTaskIndexException If the index is invalid.
      */
     public Task deleteTask(String index) throws InvalidTaskIndexException {
-        try {
-            int intIndex = Integer.parseInt(index) - 1;
-            return deleteTask(intIndex);
-        } catch (NumberFormatException e) {
-            throw new InvalidTaskIndexException("Invalid task index while deleting.");
-        }
+        verifyIndexes(index);
+        int taskIndex = Integer.parseInt(index) - 1;
+        return taskList.remove(taskIndex);
     }
 
-    private Task deleteTask(int index) throws InvalidTaskIndexException {
-        try {
-            return taskList.remove(index);
-        } catch (IndexOutOfBoundsException e) {
-            throw new InvalidTaskIndexException("Invalid task index while deleting.");
+    /**
+     * Verifies if the given list of indexes are valid and within the taskList range.
+     *
+     * @param indexes List of indexes to verify. Each index should be based on the list command.
+     * @return List of tasks corresponding to the list in the list command.
+     * @throws InvalidTaskIndexException If the given list contains one or more invalid indexes.
+     */
+    private List<Task> verifyIndexes(String... indexes) throws InvalidTaskIndexException {
+        List<Task> tasks = new ArrayList<>();
+        for (String index : indexes) {
+            try {
+                int taskIndex = Integer.parseInt(index) - 1;
+                tasks.add(taskList.get(taskIndex));
+            } catch (NumberFormatException | IndexOutOfBoundsException e) {
+                throw new InvalidTaskIndexException("One or more indexes is not valid."
+                        + "Please check the list again.");
+            }
         }
+        return tasks;
     }
 
     /**
