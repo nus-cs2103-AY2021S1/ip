@@ -1,7 +1,7 @@
 package duke;
 
 class ToDo extends Task {
-    static String SYMBOL = "[T]";
+    private static String SYMBOL = "[T]";
 
     public ToDo(String name) {
         super(name, TaskType.ToDo);
