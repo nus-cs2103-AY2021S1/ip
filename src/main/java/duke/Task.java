@@ -19,7 +19,8 @@ public class Task {
      * This method takes no parameters and returns the Task object as a string
      * in the form "[<Done Status>] <Task Description>".
      * This method overrides the method from parent class.
-     * @return String this returns the Task object as a string
+     *
+     * @return String this returns the Task object as a string.
      */
     public String toString() {
         return "[" + getStatusIcon() + "] "
@@ -31,7 +32,8 @@ public class Task {
      * This method takes no parameters and returns the Task object as a string
      * in the form "[<Done Status>] <Task Description>".
      * This method overrides the method from parent class.
-     * @return String this returns the Task object as a string
+     *
+     * @return String this returns the Task object as a string.
      */
     public String toStringFileFormat() {
         return "[" + getStatusIcon() + "] "
@@ -39,16 +41,16 @@ public class Task {
     }
 
     /**
-     * Sets done status of Task object as done
+     * Sets done status of Task object as done.
      */
     public void setDone() {
         this.isDone = true;
     }
 
     /**
-     * Returns this task's description
+     * Returns this task's description.
      *
-     * @return String task's description
+     * @return String task's description.
      */
     public String getDescription() {
         return this.description;
@@ -57,7 +59,7 @@ public class Task {
     /**
      * Returns icon associated with Task object's done status.
      *
-     * @return String status icon representing done status of Task object
+     * @return String status icon representing done status of Task object.
      */
     public String getStatusIcon() {
         return (isDone ? "Done" : "Not Done");

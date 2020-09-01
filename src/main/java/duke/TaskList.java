@@ -15,7 +15,7 @@ public class TaskList {
     /**
      * Returns task list.
      *
-     * @return ArrayList<Task> task list
+     * @return ArrayList<Task> task list.
      */
     public ArrayList<Task> getTaskList() {
         return this.taskList;
@@ -71,7 +71,7 @@ public class TaskList {
      * Returns a String containing all the tasks in the task list.
      * String is in a format suitable to be printed by Duke Ui object.
      *
-     * @return String task list converted to a string
+     * @return String task list converted to a string.
      */
     @Override
     public String toString() {

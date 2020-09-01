@@ -18,8 +18,9 @@ public class Deadline extends Task {
      * Deadline object constructor overrides Task constructor.
      * Takes in a deadline in addition to the task description
      * and parses into LocalDate and LocalTime format.
-     * @param description description of task
-     * @param by deadline of task
+     *
+     * @param description description of task.
+     * @param by deadline of task.
      */
     public Deadline(String description, String by) {
         super(description);
@@ -32,7 +33,8 @@ public class Deadline extends Task {
      * This method takes no parameters and returns the Deadline object as a string
      * in the form "[D][<Done Status>] <Deadline Description> (by: <Date> <Time>)".
      * This method overrides the method from parent class.
-     * @return String this returns the deadline object as a string
+     *
+     * @return String this returns the deadline object as a string.
      */
     @Override
     public String toString() {
@@ -49,7 +51,8 @@ public class Deadline extends Task {
      * as a string format suitable for being parsed into a Deadline object.
      * String is in the form "[D][<Done Status>] <Deadline Description> (by: <Date> <Time>)".
      * This method overrides the method from parent class.
-     * @return String this returns the deadline object as a string
+     *
+     * @return String this returns the deadline object as a string.
      */
     @Override
     public String toStringFileFormat() {

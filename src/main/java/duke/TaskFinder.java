@@ -11,8 +11,8 @@ public class TaskFinder {
      * returns an array list of all tasks in the task list
      * that were marked as done.
      *
-     * @param taskList list of tasks to filter
-     * @return ArrayList<Task> list of done tasks
+     * @param taskList list of tasks to filter.
+     * @return ArrayList<Task> list of done tasks.
      */
     public ArrayList<Task> findAllDone(ArrayList<Task> taskList) {
         ArrayList<Task> tasksDone = new ArrayList<Task>();
@@ -29,8 +29,8 @@ public class TaskFinder {
      * returns an array list of all tasks in the task list
      * that were not marked as done.
      *
-     * @param taskList list of tasks to filter
-     * @return ArrayList<Task> list of done tasks
+     * @param taskList list of tasks to filter.
+     * @return ArrayList<Task> list of done tasks.
      */
     public ArrayList<Task> findAllNotDone(ArrayList<Task> taskList) {
         ArrayList<Task> tasksNotDone = new ArrayList<Task>();
@@ -46,8 +46,8 @@ public class TaskFinder {
      * Searches through task list and
      * returns an array list of all to do tasks.
      *
-     * @param taskList list of tasks to filter
-     * @return ArrayList<Task> list of done tasks
+     * @param taskList list of tasks to filter.
+     * @return ArrayList<Task> list of done tasks.
      */
     public ArrayList<Task> findToDos(ArrayList<Task> taskList) {
         ArrayList<Task> toDos = new ArrayList<Task>();
@@ -64,8 +64,8 @@ public class TaskFinder {
      * returns an array list of all to do tasks
      * that were marked as done.
      *
-     * @param taskList list of tasks to filter
-     * @return ArrayList<Task> list of done tasks
+     * @param taskList list of tasks to filter.
+     * @return ArrayList<Task> list of done tasks.
      */
     public ArrayList<Task> findToDosDone(ArrayList<Task> taskList) {
         ArrayList<Task> toDosDone = new ArrayList<Task>();
@@ -83,8 +83,8 @@ public class TaskFinder {
      * returns an array list of all to do tasks
      * that were not marked as done.
      *
-     * @param taskList list of tasks to filter
-     * @return ArrayList<Task> list of done tasks
+     * @param taskList list of tasks to filter.
+     * @return ArrayList<Task> list of done tasks.
      */
     public ArrayList<Task> findToDosNotDone(ArrayList<Task> taskList) {
         ArrayList<Task> toDosNotDone = new ArrayList<Task>();
@@ -101,8 +101,8 @@ public class TaskFinder {
      * Searches through task list and
      * returns an array list of all tasks with a deadline.
      *
-     * @param taskList list of tasks to filter
-     * @return ArrayList<Task> list of done tasks
+     * @param taskList list of tasks to filter.
+     * @return ArrayList<Task> list of done tasks.
      */
     public ArrayList<Task> findDeadlines(ArrayList<Task> taskList) {
         ArrayList<Task> deadlines = new ArrayList<Task>();
@@ -119,8 +119,8 @@ public class TaskFinder {
      * returns an array list of all tasks with a deadline
      * that were marked as done.
      *
-     * @param taskList list of tasks to filter
-     * @return ArrayList<Task> list of done tasks
+     * @param taskList list of tasks to filter.
+     * @return ArrayList<Task> list of done tasks.
      */
     public ArrayList<Task> findDeadlinesDone(ArrayList<Task> taskList) {
         ArrayList<Task> deadlinesDone = new ArrayList<Task>();
@@ -138,8 +138,8 @@ public class TaskFinder {
      * returns an array list of all tasks with a deadline
      * that were not marked as done.
      *
-     * @param taskList list of tasks to filter
-     * @return ArrayList<Task> list of done tasks
+     * @param taskList list of tasks to filter.
+     * @return ArrayList<Task> list of done tasks.
      */
     public ArrayList<Task> findDeadlinesNotDone(ArrayList<Task> taskList) {
         ArrayList<Task> deadlinesNotDone = new ArrayList<Task>();
@@ -156,8 +156,8 @@ public class TaskFinder {
      * Searches through task list and
      * returns an array list of all events.
      *
-     * @param taskList list of tasks to filter
-     * @return ArrayList<Task> list of done tasks
+     * @param taskList list of tasks to filter.
+     * @return ArrayList<Task> list of done tasks.
      */
     public ArrayList<Task> findEvents(ArrayList<Task> taskList) {
         ArrayList<Task> events = new ArrayList<Task>();
@@ -174,8 +174,8 @@ public class TaskFinder {
      * returns an array list of all events
      * that were marked as done.
      *
-     * @param taskList list of tasks to filter
-     * @return ArrayList<Task> list of done tasks
+     * @param taskList list of tasks to filter.
+     * @return ArrayList<Task> list of done tasks.
      */
     public ArrayList<Task> findEventsDone(ArrayList<Task> taskList) {
         ArrayList<Task> eventsDone = new ArrayList<Task>();
@@ -193,8 +193,8 @@ public class TaskFinder {
      * returns an array list of all events
      * that were not marked as done.
      *
-     * @param taskList list of tasks to filter
-     * @return ArrayList<Task> list of done tasks
+     * @param taskList list of tasks to filter.
+     * @return ArrayList<Task> list of done tasks.
      */
     public ArrayList<Task> findEventsNotDone(ArrayList<Task> taskList) {
         ArrayList<Task> eventsNotDone = new ArrayList<Task>();
@@ -212,9 +212,9 @@ public class TaskFinder {
      * returns an array list of all tasks containing
      * given keyword.
      *
-     * @param taskList list of tasks to filter
-     * @param keyword key word to be used to filter tasks
-     * @return ArrayList<Task> list of tasks containing given keyword
+     * @param taskList list of tasks to filter.
+     * @param keyword key word to be used to filter tasks.
+     * @return ArrayList<Task> list of tasks containing given keyword.
      */
     public ArrayList<Task> findByKeyword(ArrayList<Task> taskList, String keyword) {
         ArrayList<Task> filteredTasks = new ArrayList<Task>();

@@ -19,9 +19,10 @@ public class Event extends Task {
      * Event object constructor overrides Task constructor.
      * Takes in date of event, start and end time of event in addition to the task description
      * and parses into LocalDate and LocalTime format.
-     * @param description description of task
-     * @param at date of event
-     * @param timeRange start and end time of event
+     *
+     * @param description description of task.
+     * @param at date of event.
+     * @param timeRange start and end time of event.
      */
     public Event (String description, String at, String timeRange) {
         super(description);
@@ -35,7 +36,8 @@ public class Event extends Task {
      * This method takes no parameters and returns the Event object as a string
      * in the form "[E][<Done Status>] <Event Description> (at: <Date> <Start>-<End>)".
      * This method overrides the method from parent class.
-     * @return String this returns the event object as a string
+     *
+     * @return String this returns the event object as a string.
      */
     @Override
     public String toString() {
@@ -53,7 +55,8 @@ public class Event extends Task {
      * as a string format suitable for being parsed into a Deadline object.
      * String is in the form "[E][<Done Status>] <Event Description> (at: <Date> <Start>-<End>)".
      * This method overrides the method from parent class.
-     * @return String this returns the Event object as a string
+     *
+     * @return String this returns the Event object as a string.
      */
     @Override
     public String toStringFileFormat() {

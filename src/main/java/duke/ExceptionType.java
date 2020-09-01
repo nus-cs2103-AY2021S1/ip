@@ -2,7 +2,7 @@ package duke;
 
 /**
  * This is the enum class to store the types of
- * exceptions Duke throws in the chatbot
+ * exceptions Duke throws in the chatbot.
  */
 public enum ExceptionType {
     EMPTY_INPUT,

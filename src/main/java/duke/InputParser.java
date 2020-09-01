@@ -22,7 +22,7 @@ public class InputParser {
      * Reads and returns the input from user
      * as a string.
      *
-     * @return String input from user
+     * @return String input from user.
      */
     public String getInput() {
         return myObj.nextLine().trim();
@@ -31,8 +31,9 @@ public class InputParser {
     /**
      * Takes the given input and parses it to
      * return the appropriate command enum type.
-     * @param input input from the user
-     * @return CommandType type of command to be executed
+     *
+     * @param input input from the user.
+     * @return CommandType type of command to be executed.
      */
     public CommandType parseInput(String input) {
         if (input.isEmpty()) {
@@ -143,8 +144,8 @@ public class InputParser {
      * Returns true if the input requests a task to be
      * created without a description.
      *
-     * @param input input from user
-     * @return boolean true if description is missing
+     * @param input input from user.
+     * @return boolean true if description is missing.
      */
     public boolean isEmptyDescription(String input) {
         return input.split(" ").length == 1;
@@ -154,8 +155,8 @@ public class InputParser {
      * Returns true if the input requests a deadline to
      * be created without a date and time.
      *
-     * @param input input from user
-     * @return boolean true if date and time is missing
+     * @param input input from user.
+     * @return boolean true if date and time is missing.
      */
     public boolean hasDeadlineBy(String input) {
         return input.contains("/by")
@@ -166,9 +167,8 @@ public class InputParser {
      * Returns true if the input requests an event to
      * be created without a start and end date and time
      *
-     * @param input input from user
-     * @return boolean true if start and end date and time
-     *         is missing
+     * @param input input from user.
+     * @return boolean true if start and end date and time is missing.
      */
     public boolean hasEventStartEndTime(String input) {
         return input.contains("/at")

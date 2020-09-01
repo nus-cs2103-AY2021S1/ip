@@ -7,33 +7,29 @@ import java.util.ArrayList;
  * chatbot. Ui object will print directly to the output.
  */
 public class Ui {
-    private final String SERVANT_SPEAK;
-    private final String USER_PROMPT;
 
-    public Ui () {
-        // Initialise strings to separate messages from Duke
-        // and commands from CLI
-        this.SERVANT_SPEAK = "Duke:\n";
-        this.USER_PROMPT = "Your Command Sire:";
-    }
+    // Initialise strings to separate messages from Duke
+    // and commands from CLI
+    private final String SERVANT_SPEAK = "Duke:\n";
+    private final String USER_PROMPT = "Your Command Sire:";
 
     /**
      * Returns an indicator that the following messages
-     * are from Duke
+     * are from Duke.
      *
      * @return String
      */
     public String getServantSpeak() {
-        return this.SERVANT_SPEAK;
+        return SERVANT_SPEAK;
     }
 
     /**
-     * Returns a message to prompt the user for his/her input
+     * Returns a message to prompt the user for his/her input.
      *
      * @return String
      */
     public String getUserPrompt() {
-        return this.USER_PROMPT;
+        return USER_PROMPT;
     }
 
     /**
@@ -265,7 +261,7 @@ public class Ui {
      * that have been filtered according to given keyword.
      *
      * @param filteredTasks This is the list of tasks to be printed.
-     * @param keyword given keyword used by filter
+     * @param keyword given keyword used by filter.
      */
     public void printFilteredTasksByKeyword(ArrayList<Task> filteredTasks, String keyword) {
         System.out.println(SERVANT_SPEAK

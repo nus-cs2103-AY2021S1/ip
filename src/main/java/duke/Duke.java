@@ -3,7 +3,7 @@ package duke;
 import java.util.ArrayList;
 
 /**
- * This class handles the logic behind the Duke chatbot
+ * This class handles the logic behind the Duke chatbot.
  */
 public class Duke {
 
@@ -20,7 +20,7 @@ public class Duke {
     /**
      * Runs the Duke chat bot.
      *
-     * @throws DukeException
+     * @throws DukeException a duke specific exception will be thrown.
      */
     public void run() throws DukeException {
         // Print Duke welcome message

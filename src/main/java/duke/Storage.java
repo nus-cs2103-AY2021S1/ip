@@ -23,8 +23,8 @@ public class Storage {
     /**
      * Returns tasks stored as a String.
      *
-     * @param taskList given list of tasks
-     * @return String list of tasks in String format
+     * @param taskList given list of tasks.
+     * @return String list of tasks in String format.
      */
     // Loop through every task and transform it into a string file format
     public String listToString(ArrayList<Task> taskList) {
@@ -38,7 +38,7 @@ public class Storage {
     /**
      * Saves list of tasks as a text file on the hard drive.
      *
-     * @param userTasks list of tasks to be saved
+     * @param userTasks list of tasks to be saved.
      */
     public void saveToFile(ArrayList<Task> userTasks) {
         // Check if data folder exists, if not create
@@ -65,7 +65,7 @@ public class Storage {
      * Reads tasks from text file in hard drive
      * and returns them as a list.
      *
-     * @return ArrayList<Task> list of tasks read from file
+     * @return ArrayList<Task> list of tasks read from file.
      */
     public ArrayList<Task> readFromFile() {
         // Check if data folder exists, if not create
@@ -93,7 +93,7 @@ public class Storage {
                 String taskString = taskReader.nextLine();
 
                 // Only work with non empty lines
-                if (taskString != "") {
+                if (!taskString.equals("")) {
                     switch (taskString.charAt(1)) {
                     case 'T':
                         boolean isDone = taskString.split("  ")[0]

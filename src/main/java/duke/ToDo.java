@@ -7,8 +7,9 @@ package duke;
  */
 public class ToDo extends Task {
     /**
-     * A ToDo object uses its parent class constructor
-     * @param description description of to do task
+     * A ToDo object uses its parent class constructor.
+     *
+     * @param description description of to do task.
      */
     public ToDo (String description) {
         super(description);
@@ -19,7 +20,8 @@ public class ToDo extends Task {
      * This method takes no parameters and returns the ToDo object as a string
      * in the form "[T][<Done Status>] <ToDo Description>".
      * This method overrides the method from parent class.
-     * @return String this returns the ToDo object as a string
+     *
+     * @return String this returns the ToDo object as a string.
      */
     @Override
     public String toString() {
@@ -32,7 +34,8 @@ public class ToDo extends Task {
      * suitable for being parsed into a ToDo object.
      * String is in the form "[T][<Done Status>] <ToDo Description>".
      * This method overrides the method from parent class.
-     * @return String this returns the ToDo object as a string
+     *
+     * @return String this returns the ToDo object as a string.
      */
     @Override
     public String toStringFileFormat() {
