@@ -5,80 +5,92 @@
 
 public class Ui {
 
-    private static final String LINE = "____________________________________________________________";
+    protected static final String LINE = "______________________________________________________";
 
-    private static final String GREETING = "____________________________________________________________\n"
+    protected static final String GREETING = "____________________________________________________________\n"
             + "Hello! I'm Duke\n"
             + "What can I do for you?\n"
             + "____________________________________________________________";
 
     /**
-     * Prints out the greeting message
+     * Returns the farewell message
+     *
+     * @return String
      */
-    protected void greet() {
-        System.out.println(GREETING);
+    protected String farewell() {
+        return this.LINE + "\n" + "Bye. Hope to see you again soon!" + "\n" + this.LINE;
     }
 
     /**
-     * Prints out the farewell message
+     * Returns the farewell message as a String
+     *
+     * @return String
      */
-    protected void farewell() {
-        System.out.println(LINE);
-        System.out.println("Bye. Hope to see you again soon!");
-        System.out.println(LINE);
+    protected String farewellMsg() {
+        return this.LINE + "Bye. Hope to see you again soon!" + this.LINE;
     }
 
     /**
-     * Prints out a line
+     * Returns a line in String form
+     *
+     * @return String of lines
      */
-    protected void printLines() {
-        System.out.println(LINE);
+    protected String lines() {
+        return this.LINE;
     }
 
     /**
-     * Prints out the message when TaskList is shown
+     * Returns the message when TaskList is shown in String form
+     *
+     * @return String
      */
-    protected void provideListMsg() {
-        System.out.println("Here are the tasks in your list:");
+    protected String listMsg() {
+        return "Here are the tasks in your list:";
     }
 
     /**
-     * Prints out the message when a Task is marked as done
+     * Returns the message when a Task is marked as done
+     *
+     * @return String
      */
-    protected void markAsDoneMsg(Task chosen) {
-        System.out.println(LINE);
-        System.out.println("Nice! I've marked this task as done: ");
-        System.out.println(chosen);
-        System.out.println(LINE);
+    protected String markAsDoneMsg(Task chosen) {
+        return this.LINE + "\n"
+                + "Nice! I've marked this task as done: " + "\n"
+                + chosen + "\n"
+                + this.LINE;
     }
 
     /**
      * Prints out the message when a Task is deleted
      */
-    protected void deleteMsg(int i, Task chosen) {
-        System.out.println(LINE);
-        System.out.println(" Noted. I've removed this task: ");
-        System.out.println(chosen);
-        System.out.println(" Now you have " + i + " tasks in the list.");
-        System.out.println(LINE);
+    protected String returnDeleteMsg(int i, Task chosen) {
+        return this.LINE + "\n"
+                            + " Noted. I've removed this task: " + "\n"
+                            + chosen + "\n"
+                            + " Now you have " + i + " tasks in the list." + "\n"
+                            + this.LINE;
     }
 
     /**
-     * Prints out the message when a Task is added to the TaskList
+     * Returns the message when a Task is added to the TaskList
+     *
+     * @return String message
      */
-    protected void addTaskToTasklistMsg(Task task, int i) {
-        System.out.println(LINE);
-        System.out.println(" Got it. I've added this task: ");
-        System.out.println("  " + task);
-        System.out.println(" Now you have " + i + " tasks in the list.");
-        System.out.println(LINE);
+    protected String addTaskToTasklistMsg(Task task, int i) {
+        return this.LINE + "\n"
+                    + " Got it. I've added this task: " + "\n"
+                    + "  " + task + "\n"
+                    + " Now you have " + i + " tasks in the list." + "\n"
+                    + this.LINE;
     }
 
     /**
-     * Prints out the message when results are found
+     * Returns the message when results are found in String form
+     *
+     * @return String
      */
-    protected void findMsg() {
-        System.out.println(" Here are the matching tasks in your list:");
+    protected String findMsg() {
+        return " Here are the matching tasks in your list:";
     }
 
 }

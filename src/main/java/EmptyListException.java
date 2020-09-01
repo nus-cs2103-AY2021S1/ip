@@ -6,10 +6,10 @@ public class EmptyListException extends DukeException {
      * @return a String
      */
     public String toString() {
-        return "____________________________________________________________"
+        return "______________________________________________________"
                 + "\n"
-                + " ☹ OOPS!!! Your list is currently empty!"
+                + " OOPS!!! Your list is currently empty!"
                 + "\n"
-                + "____________________________________________________________";
+                + "______________________________________________________";
     }
 }

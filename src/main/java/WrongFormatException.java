@@ -12,25 +12,25 @@ public class WrongFormatException extends DukeException {
      */
     public String toString() {
         if (type.equals("todo")) {
-            return "____________________________________________________________"
+            return "______________________________________________________"
                     + "\n"
-                    + " ☹ OOPS!!! Proper input format required! Proper format: todo{space}{description}"
+                    + " OOPS!!! Proper input format required! Proper format: todo{space}{description}"
                     + "\n"
-                    + "____________________________________________________________";
+                    + "______________________________________________________";
         } else if (type.equals("deadline")) {
-            return "____________________________________________________________"
+            return "______________________________________________________"
                     + "\n"
-                    + " ☹ OOPS!!! Proper input format required!"
+                    + " OOPS!!! Proper input format required!"
                     + " Proper format: deadline{space}{description}{space}/by{space}{YYYY-MM-DD} ."
                     + "\n"
-                    + "____________________________________________________________";
+                    + "______________________________________________________";
         } else if (type.equals("event")) {
-            return "____________________________________________________________"
+            return "______________________________________________________"
                     + "\n"
-                    + " ☹ OOPS!!! Proper input format required!"
+                    + " OOPS!!! Proper input format required!"
                     + " Proper format: deadline{space}{description}{space}/at{space}{time-slot}."
                     + "\n"
-                    + "____________________________________________________________";
+                    + "______________________________________________________";
         } else {
             return "No such Task type";
         }
