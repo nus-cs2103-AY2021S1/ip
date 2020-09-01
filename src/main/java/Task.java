@@ -27,12 +27,12 @@ public class Task {
     }
 
     /**
-     * Retrieves done status and returns icon corresponding to the status.
+     * Retrieves completion status of task.
      *
-     * @return Icon corresponding to status.
+     * @return Status of task.
      */
-    protected String getStatusIcon() {
-        return (isDone ? "✓" : "X");
+    protected String getStatus() {
+        return (isDone ? "done" : "not done");
     }
 
     /**
@@ -61,6 +61,6 @@ public class Task {
     }
 
     public String toString() {
-        return "[" + getStatusIcon() + "] " + description;
+        return "[" + getStatus() + "] " + description;
     }
 }
