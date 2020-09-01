@@ -2,6 +2,7 @@ package duke.tasks;
 
 import duke.utils.ResourceHandler;
 import java.text.MessageFormat;
+import java.util.Arrays;
 
 /**
  * Represents a task within <i>Duke</i>.
@@ -49,13 +50,13 @@ public abstract class Task {
     }
 
     /**
-     * Checks whether the {@code Task} contains the keyword in its name.
+     * Checks whether the {@code Task} contains any of the keywords in its name.
      *
-     * @param keyword the keyword that is being searched.
-     * @return whether the {@code Task} contains the keyword in its name.
+     * @param keywords the keywords that are being searched.
+     * @return whether the {@code Task} contains any of the keywords in its name.
      */
-    public boolean containsKeyword(String keyword) {
-        return name.toLowerCase().contains(keyword.toLowerCase());
+    public boolean matchesKeywords(String... keywords) {
+        return Arrays.stream(keywords).anyMatch(keyword -> name.toLowerCase().contains(keyword.toLowerCase()));
     }
 
     /**

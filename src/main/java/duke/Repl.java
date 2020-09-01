@@ -90,8 +90,8 @@ public class Repl {
                 }
                 case FIND: {
                     String lineWithoutCommand = line.replaceFirst("^find", "");
-                    String searchKeyword = lineWithoutCommand.trim();
-                    prettyPrinter.print(taskManager.getMatchingTasks(searchKeyword));
+                    String[] searchKeywords = lineWithoutCommand.trim().split("\\s+");
+                    prettyPrinter.print(taskManager.getMatchingTasks(searchKeywords));
                     break;
                 }
                 case LIST: {
