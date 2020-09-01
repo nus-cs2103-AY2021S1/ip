@@ -34,15 +34,15 @@ public class DoneCommand extends Command {
      * @param ui      Ui allows execute to carry out ui methods to print to the console.
      * @param storage Storage allows execute to write and read files.
      */
-    public void execute(TaskList lst, Ui ui, Storage storage) {
+    public String execute(TaskList lst, Ui ui, Storage storage) {
         int lineNum = taskNum - 1;
         Task task = lst.get(lineNum);
         task.markAsDone();
         try {
             storage.modifyLine(lineNum);
         } catch (IOException e) {
-            ui.showError(e.getMessage());
+            return ui.showError(e.getMessage());
         }
-        ui.showDoneTask(task, taskNum);
+        return ui.showDoneTask(task, taskNum);
     }
 }

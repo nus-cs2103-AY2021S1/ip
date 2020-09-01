@@ -64,35 +64,37 @@ public class AddCommand extends Command {
      * @param ui      Ui allows execute to carry out ui methods to print to the console.
      * @param storage Storage allows execute to write and read files.
      */
-    public void execute(TaskList lst, Ui ui, Storage storage) {
+    public String execute(TaskList lst, Ui ui, Storage storage) {
+        String result = "";
         try {
             Task task;
-            int taskNum = lst.size();
+            int taskNum = lst.size() + 1;
             switch (taskType) {
             case TODO:
                 task = new ToDoTask(taskDesc, false);
                 lst.add(task);
                 storage.addLine("TODO | 0 | " + taskDesc);
-                ui.showAddTask(task, taskNum);
+                result = ui.showAddTask(task, taskNum);
                 break;
             case EVENT:
                 task = new EventTask(taskDesc, false, taskDate);
                 lst.add(task);
                 storage.addLine("EVENT | 0 | " + taskDesc + "| " + taskDate);
-                ui.showAddTask(task, taskNum);
+                result = ui.showAddTask(task, taskNum);
                 break;
             case DEADLINE:
                 task = new DeadlineTask(taskDesc, false, taskDate);
                 lst.add(task);
                 storage.addLine("DEADLINE | 0 | " + taskDesc + "| " + taskDate);
-                ui.showAddTask(task, taskNum);
+                result = ui.showAddTask(task, taskNum);
                 break;
             default:
                 break;
             }
         } catch (IOException e) {
-            ui.showError(e.getMessage());
+            result = ui.showError(e.getMessage());
         }
+        return result;
     }
 
     /**

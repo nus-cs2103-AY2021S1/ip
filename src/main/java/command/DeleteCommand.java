@@ -34,15 +34,17 @@ public class DeleteCommand extends Command {
      * @param ui      Ui allows execute to carry out ui methods to print to the console.
      * @param storage Storage allows execute to write and read files.
      */
-    public void execute(TaskList lst, Ui ui, Storage storage) {
+    public String execute(TaskList lst, Ui ui, Storage storage) {
+        String result;
         try {
             int lineNum = taskNum - 1;
             Task task = lst.get(lineNum);
             storage.deleteLine(lineNum);
             lst.remove(task);
-            ui.showDeleteTask(task, taskNum);
+            result = ui.showDeleteTask(task, taskNum);
         } catch (IOException e) {
-            ui.showError(e.getMessage());
+            result = ui.showError(e.getMessage());
         }
+        return result;
     }
 }

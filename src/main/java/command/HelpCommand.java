@@ -16,7 +16,7 @@ public class HelpCommand extends Command {
      * @param ui      Ui allows execute to carry out ui methods to print to the console.
      * @param storage Storage allows execute to write and read files.
      */
-    public void execute(TaskList lst, Ui ui, Storage storage) {
-        ui.showHelp();
+    public String execute(TaskList lst, Ui ui, Storage storage) {
+        return ui.showHelp();
     }
 }

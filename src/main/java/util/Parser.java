@@ -39,7 +39,8 @@ public class Parser {
             throw new DukeException("Command description cannot be empty");
         }
         if (type == Action.DEADLINE) {
-            if (!result.contains("/by") || result.split("/by").length <= 2 || result.split("/by")[0].isEmpty()) {
+            System.out.println(result);
+            if (!result.contains("/by") || result.split("/by").length <= 1 || result.split("/by")[0].isEmpty()) {
                 throw new DukeException("Be sure to include a task description and date in the correct format.");
             }
         }
