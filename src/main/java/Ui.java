@@ -43,10 +43,6 @@ public class Ui {
 
     }
 
-    public void print(String myStr){
-        System.out.println(myStr);
-    }
-
 
 }
 

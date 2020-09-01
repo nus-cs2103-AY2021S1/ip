@@ -21,10 +21,6 @@ public class Duke extends Application {
     Parser myParser = new Parser();
     TaskList myTaskList = new TaskList();
 
-
-
-
-
     private Image user = new Image(this.getClass().getResourceAsStream("/images/SeanDuke.JPG"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/SeanDuke.JPG"));
 
@@ -33,24 +29,6 @@ public class Duke extends Application {
     private TextField userInput;
     private Button sendButton;
     private Scene scene;
-
-    public static void main(String[] args) {
-
-        Ui myDukeBot = new Ui();
-        Storage myStorage = new Storage();
-        Parser myParser = new Parser();
-        TaskList myTaskList = new TaskList();
-
-        myDukeBot.greeting();
-        myStorage.createDirectory("To##Do");
-        myStorage.populateList(myTaskList);
-        myTaskList.list();
-
-        myParser.listener(myTaskList, myDukeBot);
-
-        myStorage.updateDirectory(myTaskList);
-        System.out.println("End");
-    }
 
     @Override
     public void start(Stage stage) throws Exception {
