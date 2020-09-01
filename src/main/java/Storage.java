@@ -16,14 +16,14 @@ public class Storage {
         Class taskType = task.getClass();
 
         if (taskType.equals(Event.class)) {
-            printWriter.print("E | ");
+            printWriter.print("E ~ ");
         } else if (taskType.equals(Deadline.class)) {
-            printWriter.print("D | ");
+            printWriter.print("D ~ ");
         } else {
-            printWriter.print("T | ");
+            printWriter.print("T ~ ");
         }
 
-        printWriter.print(task.isDone ? "1 | " : "0 | ");
+        printWriter.print(task.isDone ? "1 ~ " : "0 ~ ");
         printWriter.print(task.getDescription() + "\n");
 
     }
@@ -50,18 +50,17 @@ public class Storage {
             Scanner scanner = new Scanner(FILE);
             while(scanner.hasNextLine()) {
                 String taskData = scanner.nextLine();
-                System.out.println(taskData);
-                String[] taskDataDivided = taskData.split(" | ");
+                String[] taskDataDivided = taskData.split(" ~ ");
                 boolean isDone = taskDataDivided[2].equals("1");
                 switch (taskDataDivided[0]) {
                     case "E":
-                        taskList.add(new Event(taskDataDivided[4], taskDataDivided[4], isDone));
+                        taskList.add(new Event(taskDataDivided[2], taskDataDivided[3], isDone));
                         break;
                     case "D":
-                        taskList.add(new Deadline(taskDataDivided[4], taskDataDivided[4], isDone));
+                        taskList.add(new Deadline(taskDataDivided[2], taskDataDivided[3], isDone));
                         break;
                     case "T":
-                        taskList.add(new Task(taskDataDivided[4], isDone));
+                        taskList.add(new Task(taskDataDivided[2], isDone));
                         break;
                 }
             }

@@ -14,7 +14,7 @@ public class Event extends Task{
 
     @Override
     public String getDescription() {
-        return super.getDescription() + " | " + this.timeFrame;
+        return super.getDescription() + " ~ " + this.timeFrame;
     }
 
     @Override
