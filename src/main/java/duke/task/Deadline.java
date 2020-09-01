@@ -1,17 +1,33 @@
-package duke.task;//@@author {FooJingYi}-reused
-//Reused from https://nus-cs2103-ay2021s1.github.io/website/schedule/week2/project.html with minor modifications
+package duke.task;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents a task to be completed by a given deadline.
+ *
+ * Adapted from https://nus-cs2103-ay2021s1.github.io/website/schedule/week2/project.html .
+ */
 public class Deadline extends Task {
+    /** Represents the date and time at which to complete the task by */
     protected LocalDateTime dateTime;
 
+    /**
+     * Public constructor.
+     *
+     * @param taskName Name of the task as given by user.
+     * @param dateTime LocalDateTime object representing the deadline of the task.
+     */
     public Deadline(String taskName, LocalDateTime dateTime)  {
         super(taskName);
         this.dateTime = dateTime;
     }
 
+    /**
+     * Returns the date and time at which to complete the task by.
+     *
+     * @return LocalDateTime object representing the deadline of the task.
+     */
     public LocalDateTime getDateTime() {
         return dateTime;
     }

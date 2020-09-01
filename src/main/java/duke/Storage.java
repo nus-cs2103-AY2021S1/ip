@@ -10,19 +10,39 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Represents the hard disk storage used by the bot.
+ * While this class does not store the data within the class objects,
+ * each <code>Storage</code> object keeps a link to an actual file where
+ * data is stored, and handles loading and writing to this file.
+ */
 public class Storage {
+    /** File where data is stored */
     private final File taskFile;
 
+    /**
+     * Public constructor.
+     *
+     * @param filePath Relative file path.
+     */
     public Storage(String filePath) {
         this.taskFile = new File(filePath);
     }
 
+    /**
+     * Loads list of tasks from <code>taskFile</code>.
+     *
+     * @return List of tasks to be passed to a <code>TaskList</code> object
+     * @throws DukeException If file cannot be created, read or parsed.
+     */
     public List<Task> load() throws DukeException {
         if (!this.taskFile.exists()) {
             File dir = this.taskFile.getParentFile();
@@ -57,6 +77,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Updates file by added a new task.
+     *
+     * @param task Task to be added to file.
+     * @throws DukeException If task cannot be parsed or file cannot be written to.
+     */
     public void update(Task task) throws DukeException {
         try {
             FileWriter fileWriter = new FileWriter(this.taskFile, true);
@@ -67,6 +93,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Updates file with list when tasks are marked or deleted.
+     *
+     * @param list Updated list given by <code>TaskList</code> object.
+     * @throws DukeException If tasks cannot be parsed or file cannot be written to.
+     */
     public void update(List<Task> list) throws DukeException {
         try {
             FileWriter fileWriter = new FileWriter(this.taskFile);
@@ -83,9 +115,20 @@ public class Storage {
         }
     }
 
-    public String parseToStorage(Task task) throws DukeException {
+    /**
+     * Parses <code>Task</code> objects into strings to be written to the
+     * file on the hard disk.
+     *
+     * @param task <code>Task</code> object to be parsed
+     * @return String representation of the task. Note that this string is
+     *          different from the string returned by <code>task.toString()</code>.
+     *          e.g. "[T][✓] Homework" from <code>task.toString()</code> will be
+     *          represented as "T | 1 | Homework".
+     * @throws DukeException If the type of the task cannot be recognised.
+     */
+    protected String parseToStorage(Task task) throws DukeException {
         String taskType = "";
-        String status = task.isDone() ? "1" : "0";
+        String status = task.isDone() ? "1" : "0"; // 1 for done and 0 for not done
         String taskDescription = "";
 
         if (task instanceof Todo) {
@@ -114,7 +157,15 @@ public class Storage {
                 taskDescription;
     }
 
-    public Task parseFromStorage(String storedTask) throws DukeException {
+    /**
+     * Parses string representation of task stored in the file on the hard disk
+     * to create a <code>Task</code> object.
+     *
+     * @param storedTask String representation of the task
+     * @return Task represented by the string input.
+     * @throws DukeException If the string is in the wrong format.
+     */
+    protected Task parseFromStorage(String storedTask) throws DukeException {
         String[] taskElements = storedTask.split(" \\| ", 4);
 
         try {

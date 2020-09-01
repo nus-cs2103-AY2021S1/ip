@@ -1,5 +1,8 @@
 package duke.dukeexception;
 
+/**
+ * Exception thrown when a non-valid user command is inputted.
+ */
 public class NoCommandException extends DukeException {
 
     public NoCommandException() {

@@ -1,7 +1,15 @@
 package duke.dukeexception;
 
+/**
+ * Represents exceptions unique to the bot.
+ */
 public class DukeException extends Exception {
 
+    /**
+     * Public constructor.
+     *
+     * @param message Error message.
+     */
     public DukeException(String message) {
         super(message);
     }

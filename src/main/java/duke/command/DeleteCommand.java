@@ -1,14 +1,25 @@
 package duke.command;
 
 import duke.dukeexception.DukeException;
+import duke.dukeexception.WrongItemIndexException;
+
 import duke.Storage;
 import duke.TaskList;
-import duke.dukeexception.WrongItemIndexException;
+
 import duke.task.Task;
 
+/**
+ * Command that deletes a task from the user's list when executed.
+ */
 public class DeleteCommand extends Command {
+    /** A string representation of the number corresponding to the task to be deleted */
     private final String description;
 
+    /**
+     * Public constructor.
+     * @param description String representation of the number
+     *                    corresponding to the task to be deleted.
+     */
     public DeleteCommand(String description) {
         this.description = description;
     }
