@@ -9,7 +9,7 @@ public class Ui {
     /**
      * Shows initial start up ASCII art of Duke.
      */
-    public String showWelcome() {
+    public static String showWelcome() {
         String horizontalLine = "____________________________________\n";
         String logo = " _ .-') _               .-. .-')     ('-.  \n"
                 + "( (  OO) )              \\  ( OO )  _(  OO)  \n"

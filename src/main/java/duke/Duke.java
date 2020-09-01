@@ -24,19 +24,11 @@ public class Duke {
     }
 
     /**
-     * Initialises the Duke bot.
-     * @throws Exception File not found exception
-     */
-    public String run(String input) throws Exception {
-        return this.ui.initialise(tasks, storage, input);
-    }
-
-    /**
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
     String getResponse(String input) throws Exception {
-        return this.run(input);
+        return this.ui.initialise(tasks, storage, input);
     }
 
     /**

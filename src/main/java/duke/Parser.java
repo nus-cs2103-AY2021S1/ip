@@ -16,11 +16,6 @@ import duke.command.TodoCommand;
  */
 public class Parser {
     /**
-<<<<<<< HEAD
-     * Generating a Command object based on user input.
-=======
-     * Generating a Command object based on user input
->>>>>>> branch-Level-10
      * @param command User input as String
      * @param list Current list of tasks
      * @param storage Access to duke.ser
