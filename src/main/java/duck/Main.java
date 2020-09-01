@@ -1,21 +1,33 @@
 package duck;
 
-import duck.storage.LocalStorage;
-import duck.storage.Storage;
-import duck.ui.ConsoleUi;
-import duck.ui.Ui;
+import java.io.IOException;
 
+import duck.ui.MainWindow;
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
-public class Main {
-    /**
-     * Creates components needed by the bot and runs the bot.
-     *
-     * @param args Arguments to be supplied to the program.
-     */
-    public static void main(String[] args) {
-        Ui ui = new ConsoleUi();
-        Storage storage = new LocalStorage("data/data.ser");
-        Duck bot = new Duck(ui, storage);
-        bot.run();
+public class Main extends Application {
+
+    private Duck duck = new Duck();
+
+    @Override
+    public void start(Stage stage) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
+            MainWindow mainWindow = new MainWindow();
+            fxmlLoader.setController(mainWindow);
+            fxmlLoader.setRoot(mainWindow);
+            fxmlLoader.load();
+            Scene scene = new Scene(mainWindow);
+            scene.getStylesheets().add("view/styles.css");
+            stage.setResizable(false);
+            stage.setScene(scene);
+            fxmlLoader.<MainWindow>getController().setDuck(duck);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

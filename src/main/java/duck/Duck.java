@@ -3,17 +3,17 @@ package duck;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
-import java.util.Scanner;
 
 import duck.exception.DuckException;
+import duck.storage.LocalStorage;
 import duck.storage.Storage;
 import duck.task.Task;
 import duck.task.TaskFactory;
 import duck.task.TaskList;
-import duck.ui.Ui;
-
 
 
 /**
@@ -22,21 +22,15 @@ import duck.ui.Ui;
  */
 public class Duck {
 
-    private Ui ui;
-    private Storage storage;
+    private final Storage storage = new LocalStorage("data/data.ser");
     private TaskList taskList;
-    private List<String> responses;
+    private final List<String> responses;
 
     /**
      * Initializes the components needed by the bot.
      * Loads the existing data from storage if present.
-     *
-     * @param ui Object that implements the Ui interface.
-     * @param storage Object that implements the Storage interface.
      */
-    public Duck(Ui ui, Storage storage) {
-        this.ui = ui;
-        this.storage = storage;
+    public Duck() {
         try {
             this.taskList = storage.load();
         } catch (DuckException e) {
@@ -51,13 +45,13 @@ public class Duck {
     }
 
     /**
-     * Greets user when user first sees the bot.
+     * Returns default greetings when user first sees the bot.
      */
-    private void greet() {
+    private String[] greet() {
         List<String> welcomeMessage = new ArrayList<>();
         welcomeMessage.add("Hello! I'm Duck");
         welcomeMessage.add("What can I do for you?");
-        ui.respond(welcomeMessage);
+        return welcomeMessage.toArray(String[]::new);
     }
 
     /**
@@ -78,6 +72,7 @@ public class Duck {
     private void shutdown() {
         responses.add("Bye. Hope to see you again soon!");
         save();
+        System.exit(0);
     }
 
     /**
@@ -86,9 +81,7 @@ public class Duck {
     private void listTasks() {
         responses.add("Here are the tasks in your list");
         String[] statuses = this.taskList.getStatuses();
-        for (int i = 0; i < statuses.length; i++) {
-            responses.add(statuses[i]);
-        }
+        responses.addAll(Arrays.asList(statuses));
     }
 
     /**
@@ -110,9 +103,7 @@ public class Duck {
         }
 
         String[] statusesByDueDate = this.taskList.getStatusesByDate(optionalDate);
-        for (int i = 0; i < statusesByDueDate.length; i++) {
-            responses.add(statusesByDueDate[i]);
-        }
+        responses.addAll(Arrays.asList(statusesByDueDate));
     }
 
 
@@ -127,9 +118,7 @@ public class Duck {
 
         String[] statusesByFind = this.taskList.getStatusesByFind(input);
         responses.add("Here are the matching tasks in your list:");
-        for (int i = 0; i < statusesByFind.length; i++) {
-            responses.add(statusesByFind[i]);
-        }
+        Collections.addAll(responses, statusesByFind);
 
     }
 
@@ -182,57 +171,46 @@ public class Duck {
      * Receives input continuously until "bye" command is given.
      * Main loop of the bot.
      */
-    public void run() {
-        greet();
-        Runtime.getRuntime().addShutdownHook(new Thread() {
-            @Override
-            public void run() {
+    public String[] handleInput(String input) {
+        responses.clear();
+        Option option = Parser.parseOption(input);
+        try {
+            switch (option) {
+            case BYE:
                 shutdown();
-            }
-        });
-        boolean run = true;
-        Scanner sc = new Scanner(System.in);
-        while (run) {
-            String input = sc.nextLine();
-            responses.clear();
-            Option option = Parser.parseOption(input);
-            try {
-                switch (option) {
-                case BYE:
-                    shutdown();
-                    run = false;
-                    break;
-                case LIST:
-                    listTasks();
-                    break;
-                case DONE:
-                    markTaskAsDone(input);
-                    break;
-                case DELETE:
-                    deleteTask(input);
-                    break;
-                case DUE:
-                    listByDueDate(input);
-                    break;
-                case FIND:
-                    listByFind(input);
-                    break;
-                case TODO:
-                case DEADLINE:
-                case EVENT:
-                    createNewTask(input);
-                    break;
-                case UNRECOGNIZED:
-                default:
-                    throw new DuckException("Instruction not recognized");
+                break;
+            case LIST:
+                listTasks();
+                break;
+            case DONE:
+                markTaskAsDone(input);
+                break;
+            case DELETE:
+                deleteTask(input);
+                break;
+            case DUE:
+                listByDueDate(input);
+                break;
+            case FIND:
+                listByFind(input);
+                break;
+            case TODO:
+            case DEADLINE:
+            case EVENT:
+                createNewTask(input);
+                break;
+            case UNRECOGNIZED:
+            default:
+                throw new DuckException("Instruction not recognized");
 
-                }
-            } catch (DuckException e) {
-                responses.add(e.toString());
-            } finally {
-                ui.respond(responses);
             }
+        } catch (DuckException e) {
+            responses.add(e.toString());
         }
+
+        return responses.toArray(String[]::new);
+
     }
 }
+
 

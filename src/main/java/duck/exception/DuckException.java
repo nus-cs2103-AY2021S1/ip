@@ -11,6 +11,6 @@ public class DuckException extends Exception {
 
     @Override
     public String toString() {
-        return super.toString();
+        return this.getMessage();
     }
 }
