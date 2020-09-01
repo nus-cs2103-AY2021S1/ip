@@ -26,7 +26,7 @@ public class TaskList {
     /**
      * @return Number of tasks in the list.
      */
-    public int getNumOfTasks() {
+    public int getNumberOfTasks() {
         return this.tasks.size();
     }
 

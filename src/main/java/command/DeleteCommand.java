@@ -28,7 +28,7 @@ public class DeleteCommand extends Command {
         // gets the deleted task number
         int taskNumber = Integer.valueOf(inputMsg.split(" ")[1]);
 
-        if (currList.getNumOfTasks() < taskNumber || taskNumber <= 0) {
+        if (currList.getNumberOfTasks() < taskNumber || taskNumber <= 0) {
             throw new DukeException("There is no such task number!");
         } else {
             Task currTask = currList.get(taskNumber - 1);

@@ -24,7 +24,7 @@ public class Ui {
         currList.add(newTask);
         String outputMsg = "Got it. I've added this task:\n"
                 + newTask.toString()
-                + "\nYou have " + currList.getNumOfTasks() + " tasks in the list.";
+                + "\nYou have " + currList.getNumberOfTasks() + " tasks in the list.";
         return outputMsg;
     }
 
@@ -40,7 +40,7 @@ public class Ui {
         currList.remove(taskNumber - 1);
         String output = "Noted. I've removed this task:\n"
                 + currTask.toString()
-                + "\nNow you have " + currList.getNumOfTasks() + " tasks in the list.";
+                + "\nNow you have " + currList.getNumberOfTasks() + " tasks in the list.";
         return output;
     }
 

@@ -44,7 +44,7 @@ public class Storage {
      */
     public void writeToFile(TaskList tasks) throws IOException {
         String output = "";
-        if (tasks.getNumOfTasks() == 0) {
+        if (tasks.getNumberOfTasks() == 0) {
             // user has not added any task
             output = "Nothing has been added to the list yet!";
         } else {
