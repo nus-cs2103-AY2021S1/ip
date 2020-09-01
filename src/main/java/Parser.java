@@ -27,6 +27,7 @@ public class Parser {
         }
     }
 
+    public static String msg;
     /**
      * Handles reading add task commands and creating the task.
      * @param in The string to be parsed.
@@ -38,17 +39,17 @@ public class Parser {
         if (in.startsWith("todo ")){
             taskName = in.substring(5);
             if (taskName.length() == 0) {
-                Ui.errorMsg("the task description cannot be nothing D:");
+                msg = Ui.errorMsg("the task description cannot be nothing D:");
             } else {
                 temp = new ToDo(taskName);
             }
         } else if (in.startsWith("deadline ")){
             int ind = in.indexOf("/by ");
             if (ind < 0 || ind == in.length() - 4) {
-                Ui.errorMsg("you haven't entered a time that this task is due by. you can do that by typing \"deadline xxx /by dd/mm/yy hhmm\". \n" +
+                msg = Ui.errorMsg("you haven't entered a time that this task is due by. you can do that by typing \"deadline xxx /by dd/mm/yy hhmm\". \n" +
                         "e.g.: deadline read textbook /by 12/3/20 1500");
             } else if (ind - 1 <= 9) {
-                Ui.errorMsg("the task description cannot be nothing D:");
+                msg = Ui.errorMsg("the task description cannot be nothing D:");
             } else {
                 taskName = in.substring(9,ind - 1);
                 LocalDateTime dead = LocalDateTime.parse(in.substring(ind + 4), DateTimeFormatter.ofPattern("d/M/yy HHmm"));
@@ -57,10 +58,10 @@ public class Parser {
         } else if (in.startsWith("event ")){
             int ind = in.indexOf("/at ");
             if (ind < 0 || ind == in.length() - 4) {
-                Ui.errorMsg("you haven't entered a time that this task happens at. you can do that by typing \"event xxx /at dd/mm/yy hhmm\". \n" +
+                msg = Ui.errorMsg("you haven't entered a time that this task happens at. you can do that by typing \"event xxx /at dd/mm/yy hhmm\". \n" +
                         "e.g.: event read textbook /at 12/3/20 1500");
             } else if (ind - 1 <= 6) {
-                Ui.errorMsg("the task description cannot be nothing D:");
+                msg = Ui.errorMsg("the task description cannot be nothing D:");
             } else {
                 taskName = in.substring(6,ind - 1);
                 LocalDateTime time = LocalDateTime.parse(in.substring(ind + 4), DateTimeFormatter.ofPattern("d/M/yy HHmm"));
