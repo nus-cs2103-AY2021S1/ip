@@ -1,23 +1,21 @@
-package willy.test;
+package willy.task;
 
 import org.junit.jupiter.api.Test;
 import willy.store.TaskStore;
-import willy.task.Task;
-import willy.task.TaskList;
-import willy.task.TaskSymbol;
-import willy.task.ToDoTask;
 
+import static org.junit.jupiter.api.Assertions.*;
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
-public class JUnitTesting {
+class TaskListTest {
     TaskStore store = new TaskStore();
     ArrayList<Task> listOfTask;
     TaskList list;
 
     @Test
-    public void addTaskToList_success() {
+    void getList() {
+    }
+    @Test
+    void addToList() {
         // clear text file first, store.clearFile() not working
         store.clearFile();
         listOfTask = store.retrieveStorage();
@@ -27,9 +25,8 @@ public class JUnitTesting {
         list.addToList(newTask);
         assertEquals(1,list.getList().size(), "Number of Lists after adding a task");
     }
-
     @Test
-    public void removeTaskFromList_success() {
+    void removeTask() {
         // Clear text file first, store.clearFile() not working
         store.clearFile();
         listOfTask = store.retrieveStorage();
@@ -43,5 +40,13 @@ public class JUnitTesting {
         list.removeTask(1);
         assertEquals(1, list.getList().size(), "Number of Tasks after adding 2 tasks and removing 1 task");
     }
-
+    @Test
+    void readList() {
+    }
+    @Test
+    void setTaskDone() {
+    }
+    @Test
+    void findTask() {
+    }
 }
