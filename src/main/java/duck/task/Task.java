@@ -6,7 +6,7 @@ import java.io.Serializable;
  * A general Task class to be extended by other classes.
  * Provides the necessary default implementations of a Task.
  */
-abstract public class Task implements Serializable {
+public abstract class Task implements Serializable {
     private String description;
     private boolean isDone;
 

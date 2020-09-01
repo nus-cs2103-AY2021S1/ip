@@ -1,10 +1,10 @@
 package duck.task;
 
+import java.time.LocalDate;
+
 import duck.Option;
 import duck.Parser;
 import duck.exception.DuckException;
-
-import java.time.LocalDate;
 
 /**
  * Factory class to create Tasks based on user input

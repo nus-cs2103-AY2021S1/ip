@@ -1,5 +1,12 @@
 package duck;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.Scanner;
+
 import duck.exception.DuckException;
 import duck.storage.Storage;
 import duck.task.Task;
@@ -7,13 +14,7 @@ import duck.task.TaskFactory;
 import duck.task.TaskList;
 import duck.ui.Ui;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Optional;
-import java.util.Scanner;
 
 /**
  * Duck is the bot that handles all user input and calls the
@@ -100,8 +101,8 @@ public class Duck {
         Optional<LocalDate> optionalDate;
         try {
             optionalDate = Optional.ofNullable(Parser.parseDate(input));
-            responses.add("Here are the tasks up to the date: " +
-                    optionalDate.get().format(DateTimeFormatter.ofPattern("MMM d yyyy")));
+            responses.add("Here are the tasks up to the date: "
+                    + optionalDate.get().format(DateTimeFormatter.ofPattern("MMM d yyyy")));
         } catch (DuckException e) {
             optionalDate = Optional.empty();
             responses.add("Here are the tasks sorted by date");

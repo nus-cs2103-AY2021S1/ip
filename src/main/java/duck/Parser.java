@@ -1,9 +1,9 @@
 package duck;
 
-import duck.exception.DuckException;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+
+import duck.exception.DuckException;
 
 /**
  * Parser is a helper class that contains static methods for
