@@ -1,7 +1,8 @@
 package duke.task;
 
-import duke.util.DukeException;
 import java.util.regex.Pattern;
+
+import duke.util.DukeException;
 
 /**
  * Task class that represents a task.
@@ -59,14 +60,14 @@ public abstract class Task {
         try {
             boolean isDone = input[1].equals("1");
             switch (input[0]) {
-                case "T":
-                    return new ToDo(input[2], isDone);
-                case "D":
-                    return new Deadline(input[2], input[3], isDone);
-                case "E":
-                    return new Event(input[2], input[3], isDone);
-                default:
-                    throw new DukeException("One or more Tasks are wrongly tagged!");
+            case "T":
+                return new ToDo(input[2], isDone);
+            case "D":
+                return new Deadline(input[2], input[3], isDone);
+            case "E":
+                return new Event(input[2], input[3], isDone);
+            default:
+                throw new DukeException("One or more Tasks are wrongly tagged!");
             }
         } catch (ArrayIndexOutOfBoundsException aiooe) {
             throw new DukeException("One or more Tasks have too few arguments!");

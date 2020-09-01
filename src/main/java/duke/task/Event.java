@@ -10,7 +10,7 @@ import java.time.format.DateTimeParseException;
 
 public class Event extends Task {
 
-    LocalDateTime time;
+    private final LocalDateTime time;
 
     /**
      * Constructor that creates an Event object that has a description of the
