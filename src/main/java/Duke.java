@@ -55,7 +55,7 @@ public class Duke {
             } else if(msg.contains("find")) {
                 find(msg.replace("find ", ""));
             } else {
-                System.out.println(sadFace + spacing + "Sorry, Poco does not understand. Try again?");
+                System.out.println(sadFace + spacing + "Sorry, Poco didn't understand. Try again?");
             }
 
             msg = sc.nextLine();
