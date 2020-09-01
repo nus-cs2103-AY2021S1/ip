@@ -55,7 +55,7 @@ public class Ui {
      */
     public static String goodbyeMessage() {
         return "_________________________________________\n"
-                + "Closing now. Hope to see you again soon!\n"
+                + "Closing now, hope to see you again soon!\n"
                 + "_________________________________________";
     }
 
