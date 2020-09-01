@@ -4,6 +4,12 @@ import java.io.File;
 import java.util.Scanner;
 
 public class TaskLoader {
+    /**
+     * loadTasks is used to populate TaskList object, with tasks from a txt
+     * file
+     * @param prev_tasks File object that has all previous tasks
+     * @param tasks TaskList object to be populated
+     */
     public static void load_tasks(File prev_tasks, TaskList tasks) {
         try {
             Scanner sc_file = new Scanner(prev_tasks);

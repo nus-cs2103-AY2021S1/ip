@@ -5,6 +5,11 @@ import java.io.File;
 import java.io.FileWriter;
 
 public class TaskStorage {
+    /**
+     * saveTask is used to store current tasks into a txt file
+     * @param prev_tasks File object to be written to
+     * @param tasks TaskList to be saved
+     */
     public static void save_task(File prev_tasks, TaskList tasks) {
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(prev_tasks));
