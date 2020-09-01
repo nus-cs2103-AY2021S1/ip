@@ -4,21 +4,27 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Scanner;
 
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
+
 /**
  * Represents a Duke object that acts like a program.
  * Contains the main method.
  */
-public class Duke {
+public class Duke extends Application {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
     private boolean isLoadingSuccess;
+    private String filepath;
 
     /**
      * Creates a Duke object.
      * It is to start the Duke program.
      *
-     * @param filepath is directory to the duke.txt file where
+     * Variable filepath is directory to the duke.txt file where
      * reading and writing of the file occurs.
      *
      * Initialises Ui, Storage classes.
@@ -26,7 +32,11 @@ public class Duke {
      *
      * Loads the file contents.
      */
-    public Duke(String filepath) {
+    public Duke() {
+        String home = System.getProperty("user.home");
+        Path path = Paths.get(home, "Desktop", "CS2103T", "ip", "data", "duke.txt");
+
+        this.filepath = path.toString();
         this.ui = new Ui();
         this.storage = new Storage(filepath);
         this.isLoadingSuccess = true;
@@ -39,6 +49,14 @@ public class Duke {
             System.out.println(e);
             this.isLoadingSuccess = false;
         }
+    }
+
+    public void start(Stage stage) {
+        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
+        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
+
+        stage.setScene(scene); // Setting the stage to show our screen
+        stage.show(); // Render the stage.
     }
 
     /**
@@ -87,9 +105,7 @@ public class Duke {
      * Creates a Duke object and runs it.
      */
     public static void main(String[] args) {
-        String home = System.getProperty("user.home");
-        Path path = Paths.get(home, "Desktop", "CS2103T", "ip", "data", "duke.txt");
-        Duke duke = new Duke(path.toString());
+        Duke duke = new Duke();
         duke.run();
     }
 }
