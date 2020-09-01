@@ -12,7 +12,7 @@ public class FindCommand extends Command {
         this.matchString = matchString;
     }
     @Override
-    public void execute(TaskList list, Storage storage) throws DukeException {
-        Ui.findMessage(list.findTasks(this.matchString));
+    public String execute(TaskList list, Storage storage) {
+        return Ui.findMessage(list.findTasks(this.matchString));
     }
 }

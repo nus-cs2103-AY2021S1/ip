@@ -2,6 +2,8 @@ package duke;
 
 import java.io.IOException;
 
+import duke.exception.DateParseException;
+import duke.exception.StorageException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -12,8 +14,18 @@ import javafx.stage.Stage;
  * A GUI for Duke using FXML.
  */
 public class Main extends Application {
+    private Duke duke;
 
-    private Duke duke = new Duke();
+    public Main() {
+        // TODO: handle exceptions
+        try {
+            this.duke = new Duke();
+        } catch (DateParseException e) {
+            e.printStackTrace();
+        } catch (StorageException e) {
+            e.printStackTrace();
+        }
+    }
 
     @Override
     public void start(Stage stage) {

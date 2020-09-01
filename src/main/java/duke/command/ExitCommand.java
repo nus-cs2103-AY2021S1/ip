@@ -14,8 +14,8 @@ public class ExitCommand extends Command {
      * @param storage A Storage object that handles the storage of tasks in local storage, allowing them to persist.
      */
     @Override
-    public void execute(TaskList list, Storage storage) {
-        Ui.goodbyeMessage();
+    public String execute(TaskList list, Storage storage) {
+        return Ui.goodbyeMessage();
     }
 
     /**

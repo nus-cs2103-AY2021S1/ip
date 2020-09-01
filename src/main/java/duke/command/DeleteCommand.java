@@ -31,9 +31,9 @@ public class DeleteCommand extends Command {
      * @throws StorageException if the Tasks cannot be written to local storage.
      */
     @Override
-    public void execute(TaskList list, Storage storage) throws InvalidTaskException, StorageException {
+    public String execute(TaskList list, Storage storage) throws InvalidTaskException, StorageException {
         Task deletedTask = list.deleteTask(index);
         storage.writeTaskStorage(list.getSaveString());
-        Ui.deleteTaskMessage(deletedTask, list.taskListSize());
+        return Ui.deleteTaskMessage(deletedTask, list.taskListSize());
     }
 }

@@ -4,12 +4,13 @@ import java.util.Scanner;
 
 import duke.command.Command;
 import duke.command.CommandParser;
+import duke.exception.DateParseException;
 import duke.exception.DukeException;
+import duke.exception.StorageException;
 import duke.task.TaskList;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -22,6 +23,9 @@ import javafx.stage.Stage;
  * Duke is the class encapsulating all application processes.
  */
 public class Duke extends Application {
+    private Storage storage;
+    private TaskList taskList;
+
     private ScrollPane scrollPane;
     private VBox dialogContainer;
     private TextField userInput;
@@ -30,6 +34,16 @@ public class Duke extends Application {
 
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/neko.png"));
+
+    /**
+     * Initialises Duke class.
+     * @throws DateParseException if Task created from file information cannot be stored in local storage.
+     * @throws StorageException if Task date (if any) cannot be parsed into LocalDate object.
+     */
+    public Duke() throws DateParseException, StorageException {
+        this.storage = new Storage();
+        this.taskList = TaskList.initialiseTaskList(this.storage);
+    }
 
     @Override
     public void start(Stage stage) {
@@ -92,6 +106,7 @@ public class Duke extends Application {
 
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
     }
+
     /**
      * Launches and runs the application.
      * @param args Standard arguments
@@ -139,6 +154,12 @@ public class Duke extends Application {
      * Replace this stub with your completed method.
      */
     public String getResponse(String input) {
-        return "Duke heard: " + input;
+        try {
+            String userCommand = input;
+            Command parsedCommand = CommandParser.parseCommand(userCommand);
+            return parsedCommand.execute(taskList, storage);
+        } catch (DukeException e) {
+            return Ui.errorMessage(e.getUiMessage());
+        }
     }
 }

@@ -14,7 +14,7 @@ public abstract class Command {
      * @param storage A Storage object that handles the storage of tasks in local storage, allowing them to persist.
      * @throws DukeException if any specific exceptions occur when executed.
      */
-    public abstract void execute(TaskList list, Storage storage) throws DukeException;
+    public abstract String execute(TaskList list, Storage storage) throws DukeException;
 
     /**
      * Gets whether the command represents an ExitCommand.
