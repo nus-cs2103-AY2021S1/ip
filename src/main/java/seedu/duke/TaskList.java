@@ -1,6 +1,7 @@
 package seedu.duke;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 
 /**
@@ -15,7 +16,7 @@ public class TaskList {
      * @param listOfTasks Arraylist of Tasks to be completed.
      */
     public TaskList(ArrayList<Task> listOfTasks) {
-        this.taskLists = listOfTasks;
+        taskLists = listOfTasks;
     }
 
     /**
@@ -47,7 +48,7 @@ public class TaskList {
                     Ui.print("This task has already been completed!");
                 } else {
                     taskLists.get(index - 1).markAsDone();
-                    Storage.completeTask(index - 1, taskLists.size());
+                    Storage.completeTaskOnFile(index - 1, taskLists.size());
                     String info = "  Nice! I have marked this task as done:\n";
                     info += taskLists.get(index - 1).toString() + "\n";
                     Ui.print(info);
@@ -55,6 +56,8 @@ public class TaskList {
             }
         } catch (StringIndexOutOfBoundsException e) {
             Ui.print("Index out of range! Try again.\n");
+        } catch (ArrayIndexOutOfBoundsException e) {
+            Ui.print("Missing index! Try again.\n");
         }
     }
 
@@ -66,6 +69,9 @@ public class TaskList {
      */
     public String completeTaskToString(String userInput) {
         try {
+            if  (userInput.length() < 5) {
+                return ("No index found! Try Again.\n");
+            }
             String[] splitUserInput = userInput.split(" ");
             int index = Integer.parseInt(splitUserInput[1]);
             if (index < 1 || index > taskLists.size()) {
@@ -75,7 +81,7 @@ public class TaskList {
                     return ("This task has already been completed!");
                 } else {
                     taskLists.get(index - 1).markAsDone();
-                    Storage.completeTask(index - 1, taskLists.size());
+                    Storage.completeTaskOnFile(index - 1, taskLists.size());
                     String info = "  Nice! I have marked this task as done:\n";
                     info += taskLists.get(index - 1).toString() + "\n";
                     return info;
@@ -83,6 +89,8 @@ public class TaskList {
             }
         } catch (StringIndexOutOfBoundsException e) {
             return "Index out of range! Try again.\n";
+        } catch (ArrayIndexOutOfBoundsException e) {
+            return "Missing index! Try again.\n";
         }
     }
 
@@ -100,7 +108,7 @@ public class TaskList {
             String info = "Noted. I have removed this task:\n";
             info += "  " + taskLists.get(index - 1).toString() + "\n";
             taskLists.remove(index - 1);
-            Storage.deleteTask(index - 1, taskLists.size());
+            Storage.deleteTaskOnFile(index - 1, taskLists.size());
             info += "Now you have " + taskLists.size() + " tasks in the list" + "\n";
             Ui.print(info);
         }
@@ -120,7 +128,7 @@ public class TaskList {
             String info = "Noted. I have removed this task:\n";
             info += "  " + taskLists.get(index - 1).toString() + "\n";
             taskLists.remove(index - 1);
-            Storage.deleteTask(index - 1, taskLists.size());
+            Storage.deleteTaskOnFile(index - 1, taskLists.size());
             info += "Now you have " + taskLists.size() + " tasks in the list" + "\n";
             return info;
         }
@@ -133,13 +141,13 @@ public class TaskList {
      */
     public void addToDo(String userInput) {
         try {
-            this.checkForItem(userInput.substring(4), "todo");
+            checkForItem(userInput.substring(4), "todo");
             String task = userInput.substring(5);
             String info = ("Got it. I have added this task:\n");
             Todo tempTodo = new Todo(task);
             Storage.addTask(tempTodo.getStorageString("T"));
             info += "  " + tempTodo.toString() + "\n";
-            this.taskLists.add(tempTodo);
+            taskLists.add(tempTodo);
             info += "Now you have " + taskLists.size() + " tasks in the list\n";
             Ui.print(info);
         } catch (DukeException err) {
@@ -157,13 +165,13 @@ public class TaskList {
      */
     public String addToDoToString(String userInput) {
         try {
-            this.checkForItem(userInput.substring(4), "todo");
+            checkForItem(userInput.substring(4), "todo");
             String task = userInput.substring(5);
             String info = ("Got it. I have added this task:\n");
             Todo tempTodo = new Todo(task);
             Storage.addTask(tempTodo.getStorageString("T"));
             info += "  " + tempTodo.toString() + "\n";
-            this.taskLists.add(tempTodo);
+            taskLists.add(tempTodo);
             info += "Now you have " + taskLists.size() + " tasks in the list\n";
             return info;
         } catch (DukeException err) {
@@ -289,8 +297,8 @@ public class TaskList {
             checkForItem(input.substring(5), "find");
             String keyword = input.substring(5);
             ArrayList<Task> keywordInTasks = new ArrayList<>();
-            for (int i = 0; i < this.taskLists.size(); i++) {
-                Task current = this.taskLists.get(i);
+            for (int i = 0; i < taskLists.size(); i++) {
+                Task current = taskLists.get(i);
                 if (current.toString().contains(keyword)) {
                     keywordInTasks.add(current);
                 }
@@ -320,8 +328,8 @@ public class TaskList {
             checkForItem(input.substring(5), "find");
             String keyword = input.substring(5);
             ArrayList<Task> keywordInTasks = new ArrayList<>();
-            for (int i = 0; i < this.taskLists.size(); i++) {
-                Task current = this.taskLists.get(i);
+            for (int i = 0; i < taskLists.size(); i++) {
+                Task current = taskLists.get(i);
                 if (current.toString().contains(keyword)) {
                     keywordInTasks.add(current);
                 }

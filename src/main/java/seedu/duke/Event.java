@@ -19,9 +19,9 @@ public class Event extends Task {
     public Event(String event, String date) {
         super(event);
         LocalDate formatDate = LocalDate.parse(date);
-        this.localDate = formatDate;
+        localDate = formatDate;
         String convertedDate = formatDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
-        this.date = convertedDate;
+        date = convertedDate;
     }
 
     /**
@@ -33,7 +33,7 @@ public class Event extends Task {
      */
     public Event(String task, boolean isDone, String date) {
         super(task, isDone);
-        this.date = date;
+        date = date;
     }
 
     /**
@@ -42,7 +42,7 @@ public class Event extends Task {
      * @return Formatted version of date.
      */
     public String getFormattedDate() {
-        return this.date;
+        return date;
     }
 
     /**
@@ -52,6 +52,6 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + this.date + ")";
+        return "[E]" + super.toString() + " (at: " + date + ")";
     }
 }

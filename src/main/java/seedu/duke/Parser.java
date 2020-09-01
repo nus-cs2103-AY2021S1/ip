@@ -9,10 +9,10 @@ public class Parser {
     /**
      * Initializes an instance of a Parser.
      *
-     * @param taskLists List of Tasks stored in a TaskList class.
+     * @param tasks List of Tasks stored in a TaskList class.
      */
-    public Parser(TaskList taskLists) {
-        this.taskLists = taskLists;
+    public Parser(TaskList tasks) {
+        taskLists = tasks;
     }
 
     /**
@@ -22,33 +22,21 @@ public class Parser {
      * @throws DukeException if input does not contain any of the keywords in the method.
      */
     public void checkForInvalidInput(String input) throws DukeException {
-        if (!input.contains("todo")) {
-            if (!input.contains("deadline")) {
-                if (!input.contains("event")) {
-                    if (!input.contains("done")) {
-                        if (!input.contains("bye")) {
-                            if (!input.contains("list")) {
-                                if (!input.contains("delete")) {
-                                    if (!input.contains("find")) {
-                                        Ui.printLines();
-                                        throw new DukeException("I don't know what that means! Try again.\n"
-                                                + "\n-----------------------------------------------\n");
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
+        if (!input.contains("todo") && !input.contains("deadline") && !input.contains("event")
+                && !input.contains("done") && !input.contains("bye") && !input.contains("list")
+                && !input.contains("delete") && !input.contains("find")) {
+            Ui.printLines();
+            throw new DukeException("I don't know what that means! Try again.\n"
+                    + "\n-----------------------------------------------\n");
         }
     }
 
     /**
-     * Processes input by user and execute accordingly.
+     * Processes input by user from CLI and execute accordingly.
      *
      * @param input String input by user.
      */
-    public void read(String input) {
+    public void readCliInput(String input) {
         try {
             this.checkForInvalidInput(input);
             if (input.equals("list")) {
@@ -77,7 +65,7 @@ public class Parser {
      * @param input String input by user.
      * @return String output processed by Duke.
      */
-    public String readInput(String input) {
+    public String readGuiInput(String input) {
         try {
             this.checkForInvalidInput(input);
             if (input.equals("list")) {

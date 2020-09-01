@@ -15,7 +15,7 @@ public class UiTest {
     @Test
     public void stopDuke_setStatusToFalse_success() {
         Ui stopDuke = new Ui(new Parser(new TaskList(new ArrayList<Task>())));
-        stopDuke.disContinue();
+        stopDuke.discontinue();
         assertEquals(false, stopDuke.checkDukeStatus());
     }
 }

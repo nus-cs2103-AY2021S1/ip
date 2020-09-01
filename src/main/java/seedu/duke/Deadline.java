@@ -19,9 +19,9 @@ public class Deadline extends Task {
     public Deadline(String description, String due) {
         super(description);
         LocalDate formatDate = LocalDate.parse(due);
-        this.localDate = formatDate;
+        localDate = formatDate;
         String convertedDate = formatDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
-        this.due = convertedDate;
+        due = convertedDate;
     }
 
     /**
@@ -33,16 +33,16 @@ public class Deadline extends Task {
      */
     public Deadline(String task, boolean isDone, String due) {
         super(task, isDone);
-        this.due = due;
+        due = due;
     }
 
     /**
-     * Date of deadline formatted.
+     * Gets access to the formatted date.
      *
      * @return Formatted version of date.
      */
     public String getFormattedDate() {
-        return this.due;
+        return due;
     }
 
     /**
@@ -52,6 +52,6 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + this.due + ")";
+        return "[D]" + super.toString() + " (by: " + due + ")";
     }
 }

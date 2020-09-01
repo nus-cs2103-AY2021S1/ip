@@ -8,8 +8,7 @@ import java.util.TimerTask;
 import javafx.application.Platform;
 
 /**
- * Main class to run Duke program.
- * Creates and stores tasks such as todo, event and deadline.
+ * Main class to run Duke program. Creates and stores tasks such as todo, event and deadline.
  */
 
 public class Duke {
@@ -23,23 +22,25 @@ public class Duke {
      */
     public Duke() {
         try {
-            this.storage = new Storage();
+            storage = new Storage();
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
         try {
-            taskLists = new TaskList(storage.load(new ArrayList<Task>()));
-            this.parser = new Parser(taskLists);
-            this.ui = new Ui(parser);
+            taskLists = new TaskList(storage.loadFromStorage(new ArrayList<Task>()));
+            parser = new Parser(taskLists);
+            ui = new Ui(parser);
         } catch (IOException e) {
-            this.parser = new Parser(taskLists);
-            this.ui = new Ui(parser);
+            parser = new Parser(taskLists);
+            ui = new Ui(parser);
         }
     }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Returns the output string for GUI.
+     *
+     * @param input user inputs command.
+     * @return String output for GUI.
      */
     public String getResponse(String input) {
         if (input.equals("bye")) {
@@ -54,7 +55,7 @@ public class Duke {
     }
 
     /**
-     * Method to run Duke program.
+     * Runs the Duke program.
      */
     public void run() {
         ui.intro();

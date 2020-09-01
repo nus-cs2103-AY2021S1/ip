@@ -68,7 +68,7 @@ public class Storage {
      * @throws FileNotFoundException If no file is found on the local directory.
      * @throws IOException If invalid input given.
      */
-    public static ArrayList<Task> load(ArrayList<Task> listOfTasks) throws FileNotFoundException, IOException {
+    public static ArrayList<Task> loadFromStorage(ArrayList<Task> listOfTasks) throws FileNotFoundException, IOException {
         File data = new File(STORAGE_PATH);
         FileReader fr = new FileReader(data);
         BufferedReader br = new BufferedReader(fr);
@@ -119,7 +119,7 @@ public class Storage {
      * @param taskNo Index of the task.
      * @param size Size of tasklist.
      */
-    public static void completeTask(int taskNo, int size) {
+    public static void completeTaskOnFile(int taskNo, int size) {
         try {
             File data = new File(STORAGE_PATH);
             FileReader fr = new FileReader(data);
@@ -148,7 +148,7 @@ public class Storage {
      * @param index Index of the task.
      * @param size Size of the tasklist.
      */
-    public static void deleteTask(int index, int size) {
+    public static void deleteTaskOnFile(int index, int size) {
         try {
             File data = new File(STORAGE_PATH);
             FileReader fr = new FileReader(data);

@@ -16,11 +16,11 @@ public class Ui {
     /**
      * Initializes an instance of Ui.
      *
-     * @param parse Parser to be part of Ui.
+     * @param parser Parser to be part of Ui.
      */
-    public Ui(Parser parse) {
-        this.sc = new Scanner(System.in);
-        this.parse = parse;
+    public Ui(Parser parser) {
+        sc = new Scanner(System.in);
+        parse = parser;
     }
 
     public Ui() throws NullPointerException {}
@@ -40,21 +40,27 @@ public class Ui {
     }
 
     /**
-     * Gets userInput from user.
+     * Gets userInput from user on CLI.
      */
     public void getNewInput() {
-        this.userInput = sc.nextLine();
-        parse.read(this.userInput);
-        if (this.userInput.equals("bye")) {
-            this.disContinue();
+        userInput = sc.nextLine();
+        parse.readCliInput(userInput);
+        if (userInput.equals("bye")) {
+            discontinue();
         }
     }
 
+    /**
+     * Gets userInput from GUI users.
+     *
+     * @param input string input from GUI.
+     * @return String output by DUI on GUI.
+     */
     public String getUserInput(String input) {
         if (input.equals("bye")) {
             return Ui.endDuke();
         } else {
-            String output = parse.readInput(input);
+            String output = parse.readGuiInput(input);
             return output;
         }
     }
@@ -65,14 +71,14 @@ public class Ui {
      * @return false if "bye" command is input by user. Otherwise, true.
      */
     public boolean checkDukeStatus() {
-        return this.isAlive;
+        return isAlive;
     }
 
     /**
      * Sets boolean isAlive to false. s duke program.
      */
-    public void disContinue() {
-        this.isAlive = false;
+    public void discontinue() {
+        isAlive = false;
     }
 
     /**

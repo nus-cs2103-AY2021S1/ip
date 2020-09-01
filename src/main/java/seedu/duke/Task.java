@@ -10,22 +10,22 @@ public class Task {
     /**
      * Initializes a task class that is not completed.
      *
-     * @param task Name of the task.
+     * @param taskName Name of the task.
      */
-    public Task(String task) {
-        this.task = task;
-        this.isDone = false;
+    public Task(String taskName) {
+        task = taskName;
+        isDone = false;
     }
 
     /**
      * Initializes a task class that is not completed.
      *
-     * @param task Name of the task.
-     * @param isDone Status of the task.
+     * @param taskName Name of the task.
+     * @param status Status of the task.
      */
-    public Task(String task, boolean isDone) {
-        this.task = task;
-        this.isDone = isDone;
+    public Task(String taskName, boolean status) {
+        task = taskName;
+        isDone = status;
     }
 
     /**
@@ -34,14 +34,14 @@ public class Task {
      * @return Status of a task.
      */
     public String getStatus() {
-        return this.isDone ? "[DONE]" : "[NOT DONE]";
+        return isDone ? "[DONE]" : "[NOT DONE]";
     }
 
     /**
      * Marks task as done.
      */
     public void markAsDone() {
-        this.isDone = true;
+        isDone = true;
     }
 
     /**
@@ -50,7 +50,7 @@ public class Task {
      * @return Description of a task.
      */
     public String getTask() {
-        return this.task;
+        return task;
     }
 
     /**
@@ -59,12 +59,12 @@ public class Task {
      * @return true or false depending on whether a task is completed.
      */
     public boolean getIsDone() {
-        return this.isDone;
+        return isDone;
     }
 
     @Override
     public String toString() {
-        return this.getStatus() + " " + this.getTask();
+        return getStatus() + " " + getTask();
     }
 
     /**
@@ -76,12 +76,12 @@ public class Task {
      */
     public String getStorageString(String task) {
         String done = "";
-        if (this.isDone) {
+        if (isDone) {
             done = "1";
         } else {
             done = "0";
         }
-        return task + " ~ " + done + " ~ " + this.getTask();
+        return task + " ~ " + done + " ~ " + getTask();
     }
 
     /**
@@ -92,12 +92,6 @@ public class Task {
      * @return String formatted to be saved in a txt file.
      */
     public String getStorageString(String task, String date) {
-        String done = "";
-        if (this.isDone) {
-            done = "1";
-        } else {
-            done = "0";
-        }
-        return task + " ~ " + done + " ~ " + this.getTask() + " ~ " + date;
+        return task + " ~ " + (isDone ? "1" : "0") + " ~ " + getTask() + " ~ " + date;
     }
 }
