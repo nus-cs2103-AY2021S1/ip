@@ -8,6 +8,7 @@ import exception.DukeErrorException;
 import exception.InvalidDeadlineException;
 import exception.InvalidEventException;
 import exception.InvalidTodoException;
+import ui.Ui;
 
 /**
  * Represents a {@code Tasklist} object to store tasks in memory
@@ -22,7 +23,7 @@ public class TaskList {
      * @param isNew Boolean value that indicates the task is new or not
      * @param isDone Boolean value that indicates the state of the task
      */
-    public void addDeadline(Ui ui, ArrayList<Task> list, String str, boolean isNew, boolean isDone)
+    public String addDeadline(Ui ui, ArrayList<Task> list, String str, boolean isNew, boolean isDone)
             throws InvalidDeadlineException {
         String[] deadline;
         if (isNew) {
@@ -44,11 +45,12 @@ public class TaskList {
             Deadline curr = new Deadline(description, isDone, LocalDate.parse(deadline[1].trim()));
             list.add(curr);
             if (isNew) {
-                ui.describeTask(list, curr);
+                return ui.describeTask(list, curr);
             }
         } catch (DateTimeParseException e) {
-            System.out.println("Invalid Date format! Must be (yyyy-mm-dd).");
+            return "Invalid Date format! Must be (yyyy-mm-dd).";
         }
+        return "";
     }
 
     /**
@@ -59,7 +61,7 @@ public class TaskList {
      * @param isNew Boolean value that indicates the task is new or not
      * @param isDone Boolean value that indicates the state of the task
      */
-    public void addEvent(Ui ui, ArrayList<Task> list, String str, boolean isNew, boolean isDone)
+    public String addEvent(Ui ui, ArrayList<Task> list, String str, boolean isNew, boolean isDone)
             throws InvalidEventException {
         String[] event;
         if (isNew) {
@@ -81,11 +83,12 @@ public class TaskList {
             Event curr = new Event(description, isDone, LocalDate.parse(event[1].trim()));
             list.add(curr);
             if (isNew) {
-                ui.describeTask(list, curr);
+                return ui.describeTask(list, curr);
             }
         } catch (DateTimeParseException e) {
-            System.out.println("Invalid Date format! Must be (yyyy-mm-dd).");
+            return "Invalid Date format! Must be (yyyy-mm-dd).";
         }
+        return "";
     }
 
     /**
@@ -96,7 +99,7 @@ public class TaskList {
      * @param isNew Boolean value that indicates the task is new or not
      * @param isDone Boolean value that indicates the state of the task
      */
-    public void addTodo(Ui ui, ArrayList<Task> list, String str, boolean isNew, boolean isDone)
+    public String addTodo(Ui ui, ArrayList<Task> list, String str, boolean isNew, boolean isDone)
             throws InvalidTodoException {
         String description = str.trim();
         if (description.equals("")) {
@@ -105,8 +108,9 @@ public class TaskList {
         Todo curr = new Todo(description, isDone);
         list.add(curr);
         if (isNew) {
-            ui.describeTask(list, curr);
+            return ui.describeTask(list, curr);
         }
+        return "";
     }
 
     /**
@@ -114,12 +118,12 @@ public class TaskList {
      * @param list The task list
      * @param index The index of the target object
      */
-    public void deleteTask(ArrayList<Task> list, int index) throws DukeErrorException {
+    public String deleteTask(ArrayList<Task> list, int index) throws DukeErrorException {
         if (index >= list.size() || index < 0) {
             throw new DukeErrorException("Operation: delete " + (index + 1) + " fails ☹.");
         }
         Task deleted = list.remove(index);
-        Ui.printDeleted(deleted, list);
+        return Ui.printDeleted(deleted, list);
     }
 
     /**
@@ -127,12 +131,12 @@ public class TaskList {
      * @param list The task list
      * @param index The index of the target object
      */
-    public void makeDone(ArrayList<Task> list, int index) throws DukeErrorException {
+    public String makeDone(ArrayList<Task> list, int index) throws DukeErrorException {
         if (index >= list.size() || index < 0) {
             throw new DukeErrorException("Operation: done " + (index + 1) + " fails ☹.");
         }
         list.set(index, list.get(index).completeTask());
-        Ui.printDone(list, index);
+        return Ui.printDone(list, index);
     }
 
     /**
