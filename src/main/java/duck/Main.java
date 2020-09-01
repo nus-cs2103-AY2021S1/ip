@@ -6,7 +6,6 @@ import duck.ui.MainWindow;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 public class Main extends Application {
@@ -22,6 +21,8 @@ public class Main extends Application {
             fxmlLoader.setRoot(mainWindow);
             fxmlLoader.load();
             Scene scene = new Scene(mainWindow);
+            scene.getStylesheets().add("view/styles.css");
+            stage.setResizable(false);
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setDuck(duck);
             stage.show();

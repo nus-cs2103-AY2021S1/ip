@@ -9,6 +9,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 
 /**
@@ -26,8 +27,8 @@ public class MainWindow extends AnchorPane {
 
     private Duck duck;
 
-    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.jpg"));
-    private final Image duckImage = new Image(this.getClass().getResourceAsStream("/images/duck.jpg"));
+    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.png"));
+    private final Image duckImage = new Image(this.getClass().getResourceAsStream("/images/duck.png"));
 
     @FXML
     public void initialize() {
@@ -59,7 +60,11 @@ public class MainWindow extends AnchorPane {
     }
 
     private String concatResponseLines(String... response) {
-        return Arrays.stream(response)
-                .reduce("", (line1, line2) -> line1 + "\n" + line2);
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < response.length; i++) {
+            sb.append(response[i]);
+            sb.append("\n");
+        }
+        return sb.toString();
     }
 }
