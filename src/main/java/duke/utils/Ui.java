@@ -17,6 +17,7 @@ public class Ui {
         System.out.println("Hello! I'm KK\n" +
                 " What can I do for you?");
     }
+
     public String readCommand() {
         Scanner scanner = new Scanner(System.in);  // Create a Scanner object
         String input = scanner.nextLine();  // Read user input
@@ -52,7 +53,7 @@ public class Ui {
         System.out.println(message);
     }
 
-    public void showLine(){
+    public void showLine() {
         System.out.println("-----------------------");
     }
 

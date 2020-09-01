@@ -20,9 +20,9 @@ public class Event extends Task {
     }
 
     @Override
-    public String toStoreFormat(){
+    public String toStoreFormat() {
         String type = "E";
-        String status = isDone ? "1" : "0";
+        String status = super.isDone ? "1" : "0";
         String connect = " | ";
         return type + connect + status + connect + description + connect + time;
     }

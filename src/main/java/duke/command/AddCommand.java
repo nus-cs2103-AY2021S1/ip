@@ -26,9 +26,9 @@ public class AddCommand extends Command {
 
         Task task;
 
-        if(taskType.equals("todo")) {
+        if (taskType.equals("todo")) {
             task = new ToDo(info);
-        } else if(taskType.equals("deadline")) {
+        } else if (taskType.equals("deadline")) {
             String[] deadlineParts = info.split(" /by ");
             task = new Deadline(deadlineParts[0], deadlineParts[1]);
         } else { // event
@@ -37,7 +37,6 @@ public class AddCommand extends Command {
         }
 
         tasks.addTask(task);
-
         ui.showAddMessage(task, tasks);
 
     }

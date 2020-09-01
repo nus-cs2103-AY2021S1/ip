@@ -22,7 +22,7 @@ public class TaskList {
 
     private void loadDataFromFile() {
         List<String> data = FileHelper.ReadFromFile(path, fileName);
-        for(int i = 0; i < data.size(); i++) {
+        for (int i = 0; i < data.size(); i++) {
             addTask(data.get(i));
         }
     }
@@ -35,18 +35,19 @@ public class TaskList {
     public void addTask(String data) {
         Task task;
         String[] parts = data.split("( \\| )");
-        switch(parts[0]){
-            case("T"):
-                task = new ToDo(Integer.parseInt(parts[1]) == 1, parts[2]);
-                break;
-            case("D"):
-                task = new Deadline(Integer.parseInt(parts[1]) == 1, parts[2], parts[3]);
-                break;
-            case("E"):
-                task = new Event(Integer.parseInt(parts[1]) == 1, parts[2], parts[3]);
-                break;
-            default:
-                task = new Task("default task");
+
+        switch (parts[0]) {
+        case("T"):
+            task = new ToDo(Integer.parseInt(parts[1]) == 1, parts[2]);
+            break;
+        case("D"):
+            task = new Deadline(Integer.parseInt(parts[1]) == 1, parts[2], parts[3]);
+            break;
+        case("E"):
+            task = new Event(Integer.parseInt(parts[1]) == 1, parts[2], parts[3]);
+            break;
+        default:
+            task = new Task("default task");
         }
         tasks.add(task);
         save();
@@ -77,7 +78,7 @@ public class TaskList {
 
     private List<String> getStringifiedList(){
         List <String> data = new ArrayList<>();
-        for(int i = 0; i <this.tasks.size(); i++) {
+        for (int i = 0; i < this.tasks.size(); i++) {
             data.add(tasks.get(i).toStoreFormat());
         }
         return data;
@@ -86,7 +87,7 @@ public class TaskList {
     public void printList() {
         System.out.println("Here are the tasks in your list:");
         int size = tasks.size();
-        for (int i = 0; i < size; ++i) {
+        for (int i = 0; i < size; i++) {
             System.out.println((i + 1) + "." + tasks.get(i).toString());
         }
     }
