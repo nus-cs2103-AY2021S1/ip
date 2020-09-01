@@ -9,7 +9,7 @@ public class TextUi {
     /**
      * prints hello message with DUKE logo
      */
-    public static void printHello() {
+    public static String printHello() {
         String logo = " ____        _\n"
                 + "|  _ \\ _   _| | _____\n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -17,7 +17,7 @@ public class TextUi {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
 
-        System.out.println(DIVIDER + "Hello! I'm Duke\n" + "What can I do for you?\n" + DIVIDER);
+        return ("Hello! I'm Duke\n" + "What can I do for you?\n");
     }
 
     /**
@@ -25,8 +25,8 @@ public class TextUi {
      *
      * @param description
      */
-    public static void printNewTasks(String description) {
-        System.out.println(DIVIDER + "Got it. I've added this task: \n" + description);
+    public static String printNewTasks(String description) {
+        return ("Got it. I've added this task: \n" + description);
     }
 
     /**
@@ -34,24 +34,24 @@ public class TextUi {
      *
      * @param taskLength
      */
-    public static void printTaskSummary(int taskLength) {
-        System.out.println(String.format("Now you have %d tasks in the list. \n", taskLength) + DIVIDER);
+    public static String printTaskSummary(int taskLength) {
+        return (String.format("Now you have %d tasks in the list. \n", taskLength));
     }
 
     /**
      * prints messages when error is encountered
      * @param exception
      */
-    public static void printError(Exception exception) {
-        System.out.println(DIVIDER + "☹ OOPS!!!" + exception.getMessage() + "Try again!\n" + DIVIDER);
+    public static String printError(Exception exception) {
+        return ("☹ OOPS!!!" + exception.getMessage() + "Try again!\n");
     }
 
     /**
      * prints message for Done, Delete, List, Bye commands
      * @param description
      */
-    public static void printMessage(String description) {
-        System.out.println(DIVIDER + description + "\n" + DIVIDER);
+    public static String printMessage(String description) {
+        return (description + "\n");
 
     }
 }

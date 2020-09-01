@@ -1,10 +1,10 @@
 import java.io.IOException;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
+
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -14,6 +14,8 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class Duke extends Application {
+    private static TaskList taskList;
+
     private Image user = new Image(this.getClass().getResourceAsStream("/images/SpongeBob.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/Patrick.png"));
     private ScrollPane scrollPane;
@@ -22,11 +24,16 @@ public class Duke extends Application {
     private Button sendButton;
     private Scene scene;
 
-    public static void main(String[] args) throws IOException, ClassNotFoundException {
+    /**
+     * main function
+     * @throws IOException
+     * @throws ClassNotFoundException
+     */
+    public static void duke() throws IOException, ClassNotFoundException {
         TextUi.printHello();
         Scanner sc = new Scanner(System.in);
         String input;
-        TaskList taskList = Storage.load();
+        taskList = Storage.load();
 
         while (true) {
             try {
@@ -86,7 +93,7 @@ public class Duke extends Application {
         AnchorPane.setBottomAnchor(sendButton, 1.0);
         AnchorPane.setRightAnchor(sendButton, 1.0);
 
-        AnchorPane.setLeftAnchor(userInput , 1.0);
+        AnchorPane.setLeftAnchor(userInput, 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
         sendButton.setOnMouseClicked((event) -> {
@@ -101,20 +108,6 @@ public class Duke extends Application {
 
         // more code to be added here later
     }
-//
-//    /**
-//     * Iteration 1:
-//     * Creates a label with the specified text and adds it to the dialog container.
-//     * @param text String containing text to add
-//     * @return a label with the specified text that has word wrap enabled.
-//     */
-//    private Label getDialogLabel(String text) {
-//        // You will need to import `javafx.scene.control.Label`.
-//        Label textToAdd = new Label(text);
-//        textToAdd.setWrapText(true);
-//
-//        return textToAdd;
-//    }
 
     /**
      * Iteration 2:
@@ -132,13 +125,92 @@ public class Duke extends Application {
     }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * handles response from the user input
+     * @param input
+     * @return
      */
-    String getResponse(String input) {
-        return "hello";
-    }
+    public String getResponse(String input) {
+        TaskList task = new TaskList();
+        String category = Parser.getCategory(input);
+        String description = Parser.getDescription(input);
+
+        switch (category) {
+        case "todo":
+            if (description.equals("")) {
+                return TextUi.printError(new IllegalArgumentException("The description of a todo cannot be empty."));
+            } else {
+                Command command = Parser.decideCategory(input);
+                command.execute(task);
+                return TextUi.printNewTasks(task.toString()) + TextUi.printTaskSummary(task.getTaskLength());
+            }
+        case "deadline":
+            String[] descriptionArray = description.split("/by");
+            if (descriptionArray[0].equals("")) {
+                return TextUi.printError(new IllegalArgumentException("The description of a deadline cannot be empty. "));
+            } else if (descriptionArray.length == 1) { //no "/at" present
+                return TextUi.printError(new IllegalArgumentException("Invalid input, no deadline stated. "));
+            } else if (descriptionArray.length > 2) {
+                return TextUi.printError(new IllegalArgumentException("Invalid input, multiple deadlines stated. "));
+            } else {
+                Command command = Parser.decideCategory(input);
+                command.execute(task);
+                return TextUi.printNewTasks(task.toString()) + TextUi.printTaskSummary(task.getTaskLength());
+            }
+        case "event":
+            String[] descriptionArray2 = description.split("/at");
+            if (descriptionArray2[0].equals("")) {
+                return TextUi.printError(new IllegalArgumentException("The description of an event cannot be empty. "));
+            } else if (descriptionArray2.length == 1) { //no "/at" present
+                return TextUi.printError(new IllegalArgumentException("Invalid input, no event time stated. "));
+            } else if (descriptionArray2.length > 2) {
+                return TextUi.printError(new IllegalArgumentException("Invalid input, multiple deadlines stated. "));
+            } else {
+                Command command = Parser.decideCategory(input);
+                command.execute(task);
+                return TextUi.printNewTasks(task.toString()) + TextUi.printTaskSummary(task.getTaskLength());
+            }
+        case "done":
+            if (description.equals("")) {
+                return TextUi.printError(new IllegalArgumentException("Not sure which task is to be indicated as done."));
+            } else {
+                Command command = Parser.decideCategory(input);
+                command.execute(task);
+                return TextUi.printMessage(task.toString());
+            }
+        case "delete":
+            if (description.equals("")) {
+                return TextUi.printError(new IllegalArgumentException("Not sure which task is to be deleted. "));
+            } else {
+                Command command = Parser.decideCategory(input);
+                command.execute(task);
+                return TextUi.printMessage(task.toString());
+            }
+        case "bye":
+            if (!description.equals("")) {
+                return TextUi.printError(new IllegalArgumentException(" Invalid input. "));
+            } else {
+                Command command = Parser.decideCategory(input);
+                command.execute(task);
+                return TextUi.printMessage(task.toString());
+            }
+        case "find":
+            if (description.equals("")) {
+                return TextUi.printError(new IllegalArgumentException("No keyword found. "));
+            } else {
+                return TextUi.printMessage(task.toString());
+            }
+        case "list":
+            if (!description.equals("")) {
+                return TextUi.printError(new IllegalArgumentException(" Invalid input. "));
+            } else {
+                return TextUi.printMessage(task.toString()) + task.toString();
+            }
+        default:
+            return TextUi.printError(new IllegalArgumentException("Invalid input."));
+        }
+        }
 }
+
 
 
 
