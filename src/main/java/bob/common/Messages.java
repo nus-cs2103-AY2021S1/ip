@@ -18,8 +18,8 @@ public class Messages {
     public static final String INVALID_DATE_AND_TIME =
             "Sorry, I don't recognize your date and time. Please enter a valid date"
                     + " and time in this format \"YY/MM/DD HHmm\" after \"/by\" or \"/at\".\n"
-                    + "For example, \"deadline return book /by 2020/08/23 1930\".\n"
-                    + "Or, \"event birthday /at 2020/12/09 0000\".\n";
+                    + "For example, \"deadline return book /by 2020/08/23 1930\"."
+                    + " Or, \"event birthday /at 2020/12/09 0000\".\n";
     public static final String INVALID_NUMBER =
             "Sorry but there is no valid task number. Please enter a valid task number.\n";
     public static final String EMPTY_FIND =

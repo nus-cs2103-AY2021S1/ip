@@ -11,6 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
@@ -27,15 +28,22 @@ public class MainWindow extends AnchorPane {
     private TextField userInput;
     @FXML
     private Button sendButton;
+    @FXML
+    private ImageView imageView;
     private Bob bob;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/User.png"));
     private Image bobImage = new Image(this.getClass().getResourceAsStream("/images/Bob.png"));
+    private Image imageTitle = new Image(this.getClass().getResourceAsStream("/images/titleImage.png"));
+
+
+
     /**
      * Initializes MainWindow with an introduction message.
      */
     @FXML
     public void initialize() {
+        imageView.setImage(imageTitle);
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         dialogContainer.getChildren().addAll(
                 DialogBox.getBobDialog(MsgGenerator.generateIntroMessage(), bobImage)
