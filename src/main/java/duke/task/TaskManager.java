@@ -1,7 +1,5 @@
 package duke.task;
 
-import duke.utils.Colour;
-
 import java.util.ArrayList;
 import java.util.List;
 

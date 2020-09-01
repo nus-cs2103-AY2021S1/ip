@@ -1,6 +1,5 @@
 package duke.parser;
 
-import duke.Duke;
 import duke.commands.AddCommand;
 import duke.commands.Command;
 import duke.commands.CommandTypes;

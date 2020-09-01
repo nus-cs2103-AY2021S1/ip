@@ -9,7 +9,7 @@ import duke.task.Task;
 import duke.task.TaskManager;
 
 import duke.utils.Colour;
-import duke.utils.ResourceHandler;
+import duke.utils.Messages;
 
 /**
  * Represents the command which will delete a particular task when it is executed.
@@ -32,8 +32,7 @@ public class DeleteCommand extends Command {
         } catch (StorageOperationException e) {
             throw new DukeException(Colour.convertTextToRed(e.getMessage()));
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException(Colour.convertTextToRed(ResourceHandler.getMessage(
-                    "commandline.invalidTaskIndexErrorMessage")));
+            throw new DukeException(Colour.convertTextToRed(Messages.INVALID_TASK_INDEX_ERROR_MESSAGE));
         }
     }
 }

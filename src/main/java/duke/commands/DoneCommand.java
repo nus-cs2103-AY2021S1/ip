@@ -8,9 +8,7 @@ import duke.storage.Storage;
 import duke.task.Task;
 import duke.task.TaskManager;
 
-import duke.utils.Colour;
 import duke.utils.Messages;
-import duke.utils.ResourceHandler;
 
 /**
  * Represents the command which will mark a particular task as completed upon execution.

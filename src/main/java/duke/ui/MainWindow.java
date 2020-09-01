@@ -4,7 +4,6 @@ import duke.Duke;
 
 import duke.commands.CommandOutput;
 
-import duke.exceptions.DukeException;
 import duke.parser.CommandLineInterfaceParser;
 
 import duke.utils.Messages;
