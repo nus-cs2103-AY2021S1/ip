@@ -10,7 +10,7 @@ public class TaskList {
     /**
      * Construct a TaskList object
      */
-    public TaskList(){
+    public TaskList() {
         list = new ArrayList<>();
     }
 
@@ -18,7 +18,7 @@ public class TaskList {
      * Construct a TaskList object
      * @param list an ArrayList of Task
      */
-    public TaskList(ArrayList<Task> list){
+    public TaskList(ArrayList<Task> list) {
         this.list = list;
     }
 
@@ -28,9 +28,9 @@ public class TaskList {
      * @throws IOException
      */
     public TaskList(BufferedReader reader) throws IOException {
-        if(reader == null){
+        if (reader == null) {
             list = new ArrayList<>();
-        } else{
+        } else {
             list = readTextFile2List(reader);
         }
     }
@@ -44,13 +44,13 @@ public class TaskList {
     public static ArrayList<Task> readTextFile2List(BufferedReader reader) throws IOException {
         ArrayList<Task> list = new ArrayList<>();
         String line;
-        while((line = reader.readLine()) != null){
+        while ((line = reader.readLine()) != null) {
             String[] part = line.split("\\|");
-            if(part[0].equals("T")){
+            if (part[0].equals("T")) {
                 list.add(new Todo(part[2], part[1].equals("1")));
-            } else if(part[0].equals("D")){
+            } else if (part[0].equals("D")) {
                 list.add(Deadline.of(part[2], part[3], part[1].equals("1")));
-            } else{
+            } else {
                 list.add(Event.of(part[2], part[3], part[1].equals("1")));
             }
         }
@@ -62,15 +62,15 @@ public class TaskList {
      * @param index the index of the Task
      * @return the Task at the specified index
      */
-    public Task get(int index){
+    public Task get(int index) {
         return list.get(index);
     }
 
     /**
      * Prints all the Tasks in the TaskList object
      */
-    public void printList(){
-        for(int i = 0; i < list.size(); i++){
+    public void printList() {
+        for (int i = 0; i < list.size(); i++) {
             System.out.println((i + 1) + list.get(i).toString());
         }
     }
@@ -80,11 +80,11 @@ public class TaskList {
      * @param index the index of the Task
      * @return the Task that is marked as done
      */
-    public Task markTaskDone(int index){
-        if(index < list.size()){
+    public Task markTaskDone(int index) {
+        if (index < list.size()) {
             list.get(index).markAsDone();
             return list.get(index);
-        } else{
+        } else {
             return null;
         }
     }
@@ -93,7 +93,7 @@ public class TaskList {
      * Gets the size of the TaskList
      * @return the size of the TaskList
      */
-    public int getSize(){
+    public int getSize() {
         return list.size();
     }
 
@@ -102,10 +102,10 @@ public class TaskList {
      * @param index the index of the Task
      * @return the removed Task
      */
-    public Task delete(int index){
-        if(index < list.size()){
+    public Task delete(int index) {
+        if (index < list.size()) {
             return list.remove(index);
-        } else{
+        } else {
             return null;
         }
     }
@@ -114,7 +114,7 @@ public class TaskList {
      * Adds the Task to TaskList
      * @param task the Task to be added
      */
-    public void add(Task task){
+    public void add(Task task) {
         list.add(task);
     }
 }

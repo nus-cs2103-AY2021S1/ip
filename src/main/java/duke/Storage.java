@@ -16,7 +16,7 @@ public class Storage {
     public Storage(String filePath) throws FileNotFoundException {
         this.filePath = filePath;
         File outputFile = new File(filePath);
-        if(outputFile.exists()){
+        if (outputFile.exists()) {
             fileExist = true;
             reader = new BufferedReader(new FileReader(filePath));
         }
@@ -27,24 +27,24 @@ public class Storage {
      * @param list the TaskList to be written to text file
      * @param fileWriter the fileWriter to write the file
      */
-    public static void writeArrayList2file(TaskList list, FileWriter fileWriter){
-        try{
-            for(int i = 0; i < list.getSize(); i++){
-                if(list.get(i) instanceof Todo){
-                    Todo todo = (Todo)list.get(i);
+    public static void writeArrayList2file(TaskList list, FileWriter fileWriter) {
+        try {
+            for (int i = 0; i < list.getSize(); i++) {
+                if (list.get(i) instanceof Todo) {
+                    Todo todo = (Todo) list.get(i);
                     fileWriter.write("T|" + (todo.isDone ? "1" : "0") + "|" + todo.getDescription() + "\n");
-                } else if(list.get(i) instanceof Deadline){
-                    Deadline ddl = (Deadline)list.get(i);
-                    fileWriter.write("D|" + (ddl.isDone ? "1" : "0") + "|" + ddl.getDescription() +
-                            "|" + ddl.getBy() + "\n");
-                } else{
-                    Event event = (Event)list.get(i);
-                    fileWriter.write("E|" + (event.isDone ? "1" : "0") + "|" + event.getDescription() +
-                            "|" + event.getAt() + "\n");
+                } else if (list.get(i) instanceof Deadline) {
+                    Deadline ddl = (Deadline) list.get(i);
+                    fileWriter.write("D|" + (ddl.isDone ? "1" : "0") + "|" + ddl.getDescription()
+                            + "|" + ddl.getBy() + "\n");
+                } else {
+                    Event event = (Event) list.get(i);
+                    fileWriter.write("E|" + (event.isDone ? "1" : "0") + "|" + event.getDescription()
+                            + "|" + event.getAt() + "\n");
                 }
             }
             fileWriter.close();
-        } catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -53,7 +53,7 @@ public class Storage {
      * Returns the BufferedReader for ./data/main.java.duke.txt
      * @return the BufferedReader for ./data/main.java.duke.txt
      */
-    public BufferedReader load(){
+    public BufferedReader load() {
         return reader;
     }
 
@@ -61,7 +61,7 @@ public class Storage {
      * Returns whether ./data/main.java.duke.txt exists
      * @return whether ./data/main.java.duke.txt exists
      */
-    public boolean isFileExist(){
+    public boolean isFileExist() {
         return fileExist;
     }
 
@@ -71,7 +71,7 @@ public class Storage {
      * @throws IOException
      */
     public void writeFile(TaskList list) throws IOException {
-        if(!fileExist){
+        if (!fileExist) {
             new File("./data").mkdir();
         }
         FileWriter fileWriter = new FileWriter("./data/main.java.duke.txt");

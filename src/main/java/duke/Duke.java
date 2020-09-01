@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class Duke {
 
-    enum TaskType{
+    enum TaskType {
         TODO,
         DEADLINE,
         EVENT
@@ -42,7 +42,7 @@ public class Duke {
         String inputCommand;
         Scanner sc = new Scanner(System.in);
         int condition = 1;
-        while(condition == 1){
+        while (condition == 1) {
             inputCommand = sc.nextLine();
             condition = parser.parse(inputCommand, tasks);
         }

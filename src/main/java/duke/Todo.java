@@ -7,9 +7,9 @@ public class Todo extends Task {
      * @param s the todo input by user
      * @return the description of the Todo
      */
-    public static String getDescription(String s){
+    public static String getDescription(String s) {
         int start = 0;
-        while(!s.substring(start, start + 4).equals("todo")){
+        while (!s.substring(start, start + 4).equals("todo")) {
             start++;
         }
         return s.substring(start + 5);
@@ -20,9 +20,9 @@ public class Todo extends Task {
      * @param input input by user
      * @return the Todo object
      */
-    public static Todo of(String input){
+    public static Todo of(String input) {
         String description = getDescription(input);
-        if(description.equals("")){
+        if (description.equals("")) {
             return null;
         }
         return new Todo(description);

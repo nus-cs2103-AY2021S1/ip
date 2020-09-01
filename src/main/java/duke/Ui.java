@@ -14,7 +14,7 @@ public class Ui {
     /**
      * Prints the welcome message
      */
-    public void showWelcomeMessage(){
+    public void showWelcomeMessage() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -23,23 +23,23 @@ public class Ui {
         System.out.println("Hello from\n" + logo);
 
         // print greetings of chatbot
-        System.out.println("____________________________________________________________\n" +
-                "Hello! I'm Duke\n" +
-                "What can I do for you?" +
-                "\n____________________________________________________________");
+        System.out.println("____________________________________________________________\n"
+                + "Hello! I'm Duke\n"
+                + "What can I do for you?"
+                + "\n____________________________________________________________");
     }
 
     /**
      * Prints the load file error
      */
-    public void showLoadingError(){
+    public void showLoadingError() {
         System.out.println("no ./data/main.java.duke.txt found");
     }
 
     /**
      * Prints the input empty error
      */
-    public void showInputEmtyError(){
+    public void showInputEmtyError() {
         System.out.println("____________________________________________________________");
         System.out.println("\uD83D\uDE43 OOPS!!! input cannot be empty.");
         System.out.println("____________________________________________________________");
@@ -48,17 +48,17 @@ public class Ui {
     /**
      * Prints the bye message
      */
-    public void showByeMessage(){
-        System.out.println("____________________________________________________________\n" +
-                "Bye. Hope to see you again soon!" +
-                "\n____________________________________________________________");
+    public void showByeMessage() {
+        System.out.println("____________________________________________________________\n"
+                + "Bye. Hope to see you again soon!"
+                + "\n____________________________________________________________");
     }
 
     /**
      * Prints Task mark as done
      * @param task
      */
-    public void showTaskMarkAsDone(Task task){
+    public void showTaskMarkAsDone(Task task) {
         System.out.println("Nice! I've marked this task as done: ");
         System.out.println("[" + task.getStatusIcon() + "] " + task.getDescription());
     }
@@ -68,21 +68,21 @@ public class Ui {
      * @param taskNumber the specified task number
      * @param listSize the size of the TaskList
      */
-    public void showTaskNumberExceed(int taskNumber, int listSize){
+    public void showTaskNumberExceed(int taskNumber, int listSize) {
         System.out.println("no such task: task " + taskNumber + " as you only have " + listSize + " in total");
     }
 
     /**
      * Prints wrong format after the word "done" in done command
      */
-    public void wrongFormatAfterDone(){
+    public void wrongFormatAfterDone() {
         System.out.println("\uD83D\uDE43 wrong input after the word \"done\"");
     }
 
     /**
      * Prints wrong format after the word "delete" in delete command
      */
-    public void wrongFormatAfterDelete(){
+    public void wrongFormatAfterDelete() {
         System.out.println("\uD83D\uDE43 wrong input after the word \"delete\"");
     }
 
@@ -91,7 +91,7 @@ public class Ui {
      * @param task the Task to be deleted
      * @param list the TaskList object
      */
-    public void showDeleteMessage(Task task, TaskList list){
+    public void showDeleteMessage(Task task, TaskList list) {
         System.out.println("Noted. I've removed this task:");
         System.out.println(task.toString());
         System.out.println(String.format("Now you have %d tasks in the list.", list.getSize()));
@@ -100,7 +100,7 @@ public class Ui {
     /**
      * Prints description empty message
      */
-    public void descriptionEmpty(){
+    public void descriptionEmpty() {
         System.out.println("____________________________________________________________");
         System.out.println("\uD83D\uDE43 OOPS!!! The description of a todo cannot be empty.");
         System.out.println("____________________________________________________________");
@@ -112,79 +112,79 @@ public class Ui {
      * @param type the type of Task
      * @param listSize the size of TaskList
      */
-    public void MessageAfterAdd(Task task, int type, int listSize){
-        if(type == TODO){
-            Todo newTodo = (Todo)task;
-            System.out.println("____________________________________________________________\n" +
-                    "Got it. I've added this task:\n" +
-                    newTodo.toString() + "\n" +
-                    String.format("Now you have %d tasks in the list.", listSize) +
-                    "\n____________________________________________________________");
-        } else if(type == DEADLINE){
-            Deadline ddl = (Deadline)task;
-            System.out.println("Got it. I've added this task:\n" +
-                    ddl.toString() + "\n" +
-                    String.format("Now you have %d tasks in the list.", listSize) +
-                    "\n____________________________________________________________");
-        } else{
-            Event event = (Event)task;
-            System.out.println("Got it. I've added this task:\n" +
-                    event.toString() + "\n" +
-                    String.format("Now you have %d tasks in the list.", listSize) +
-                    "\n____________________________________________________________");
+    public void MessageAfterAdd(Task task, int type, int listSize) {
+        if (type == TODO) {
+            Todo newTodo = (Todo) task;
+            System.out.println("____________________________________________________________\n"
+                    + "Got it. I've added this task:\n"
+                    + newTodo.toString() + "\n"
+                    + String.format("Now you have %d tasks in the list.", listSize)
+                    + "\n____________________________________________________________");
+        } else if (type == DEADLINE) {
+            Deadline ddl = (Deadline) task;
+            System.out.println("Got it. I've added this task:\n"
+                    + ddl.toString() + "\n"
+                    + String.format("Now you have %d tasks in the list.", listSize)
+                    + "\n____________________________________________________________");
+        } else {
+            Event event = (Event) task;
+            System.out.println("Got it. I've added this task:\n"
+                    + event.toString() + "\n"
+                    + String.format("Now you have %d tasks in the list.", listSize)
+                    + "\n____________________________________________________________");
         }
     }
 
     /**
      * Prints wrong deadline format
      */
-    public void wrongDeadlineFormat(){
+    public void wrongDeadlineFormat() {
         System.out.println("____________________________________________________________");
-        System.out.println("\uD83D\uDE43 OOPS!!! The description and time of a deadline cannot be empty." +
-                " Or maybe you used \"at\" instead of \"by\"?");
+        System.out.println("\uD83D\uDE43 OOPS!!! The description and time of a deadline cannot be empty."
+                + " Or maybe you used \"at\" instead of \"by\"?");
         System.out.println("____________________________________________________________");
     }
 
     /**
      * Prints wrong event format
      */
-    public void wrongEventFormat(){
+    public void wrongEventFormat() {
         System.out.println("____________________________________________________________");
-        System.out.println("\uD83D\uDE43 OOPS!!! The description and time of a event cannot be empty." +
-                " Or maybe you used \"by\" instead of \"at\"?");
+        System.out.println("\uD83D\uDE43 OOPS!!! The description and time of a event cannot be empty."
+                + " Or maybe you used \"by\" instead of \"at\"?");
         System.out.println("____________________________________________________________");
     }
 
     /**
      * Prints wrong date format
      */
-    public void wrongDateFormat(){
+    public void wrongDateFormat() {
         System.out.println("Wrong date input format. Correct format should be \"YYYY-MM-DD\"");
     }
 
     /**
      * Prints wrong time format
      */
-    public void wrongTimeFormat(){
+    public void wrongTimeFormat() {
         System.out.println("Wrong time format. Correct format should be \"HH:MM\"");
     }
 
     /**
      * Prints no such command message
      */
-    public void noSuchCommand(){
-        System.out.println("\uD83D\uDE43 Sorry~ please specify whether this is a todo or a deadline or a event\n" +
-                "put the word \"todo\" or \"deadline\" or \"event\" in front of your description");
+    public void noSuchCommand() {
+        System.out.println("\uD83D\uDE43 Sorry~ please specify whether this is a todo or a deadline or a event\n"
+                + "put the word \"todo\" or \"deadline\" or \"event\" in front of your description");
     }
 
     /**
      * Prints the Tasks of finding result for matching keyword
      * @param list the list oof Tasks that contains matching keyword
      */
-    public static void printFindResult(ArrayList<Task> list){
+    public static void printFindResult(ArrayList<Task> list) {
         System.out.println("____________________________________________________________");
         System.out.println("Here are the matching tasks in your list:");
-        for(int i = 0; i < list.size(); i++){
+        for (int i = 0; i < list.size(); i++) {
             System.out.println(String.format("%d. ", i + 1) + list.get(i).toString());
         }
         System.out.println("____________________________________________________________");
@@ -193,7 +193,7 @@ public class Ui {
     /**
      * Prints the wrong find format error
      */
-    public void wrongFindFormat(){
+    public void wrongFindFormat() {
         System.out.println("Wrong \"find\" command format.");
         System.out.println("Correct is \"find {keyword}\" where {keyword} is the keyword you want to search");
     }

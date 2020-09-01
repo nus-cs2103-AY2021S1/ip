@@ -15,19 +15,21 @@ public class Deadline extends Task {
      * @param s user input
      * @return the description of the deadline
      */
-    public static String getDescription(String s){
+    public static String getDescription(String s) {
         String firstWord = "deadline", secondWord = "/by";
         int start = 0, len = s.length();
-        while(!s.substring(start, start + 8).equals(firstWord)){
+        while (!s.substring(start, start + 8).equals(firstWord)) {
             start++;
         }
         start += 9;
-        if(start >= len) return s.substring(len);
+        if (start >= len) {
+            return s.substring(len);
+        }
         int end = start + 1;
-        while(end + 3 < len && !s.substring(end, end + 3).equals(secondWord)){
+        while (end + 3 < len && !s.substring(end, end + 3).equals(secondWord)) {
             end++;
         }
-        if(end + 3 >= len){
+        if (end + 3 >= len) {
             end = len + 1;
         }
         return s.substring(start, end - 1);
@@ -38,10 +40,10 @@ public class Deadline extends Task {
      * @param s user input
      * @return the time of the deadline
      */
-    public static String getTime(String s){
+    public static String getTime(String s) {
         String word = "/by";
         int i = 0, len = s.length();
-        while(i + 3 < len && !s.substring(i, i + 3).equals(word)){
+        while (i + 3 < len && !s.substring(i, i + 3).equals(word)) {
             i++;
         }
         return i + 3 == len ? "" : s.substring(i + 4);
@@ -52,11 +54,11 @@ public class Deadline extends Task {
      * @param command user input
      * @return the formatted date
      */
-    public static String changeDateFormat(String[] command){
+    public static String changeDateFormat(String[] command) {
         String word = "/by";
-        for(int i = 0; i < command.length; i++){
-            if(command[i].equals(word)){
-                if(i + 1 < command.length){
+        for (int i = 0; i < command.length; i++) {
+            if (command[i].equals(word)) {
+                if (i + 1 < command.length) {
                     command[i + 1] = command[i + 1].replace('/', '-');
                     return command[i + 1];
                 }
@@ -70,14 +72,13 @@ public class Deadline extends Task {
      * @param command user input
      * @return the time in user input
      */
-    public static String getLocalTime(String[] command){
+    public static String getLocalTime(String[] command) {
         String word = "/by";
-        for(int i = 0; i < command.length; i++) {
-            if(command[i].equals(word)){
-                if(i + 2 < command.length){
+        for (int i = 0; i < command.length; i++) {
+            if (command[i].equals(word)) {
+                if (i + 2 < command.length) {
                     return command[i + 2];
-                }
-                else{
+                } else {
                     return null;
                 }
             }
@@ -90,27 +91,27 @@ public class Deadline extends Task {
      * @param input user input
      * @return a Deadline object
      */
-    public static Deadline of(String input){
+    public static Deadline of(String input) {
         String by = getTime(input), description = getDescription(input);
         String[] command = input.split(" ");
         int ptr = 0;
-        while(command[ptr].equals("")){
+        while (command[ptr].equals("")) {
             ptr++;
         }
-        if(description.equals("") || by.equals("") || command[command.length - 1].equals("/by") || ptr == command.length - 1){
+        if (description.equals("") || by.equals("") || command[command.length - 1].equals("/by") || ptr == command.length - 1) {
             return null;
         }
         Deadline deadline = new Deadline(description, by);
-        try{
+        try {
             LocalDate date = LocalDate.parse(changeDateFormat(command));
             deadline.setDate(date);
-        } catch(Exception e){
+        } catch (Exception e) {
 
         }
-        try{
+        try {
             LocalTime time = LocalTime.parse(getLocalTime(command));
             deadline.setTime(time);
-        } catch (Exception e){
+        } catch (Exception e) {
 
         }
         return deadline;
@@ -123,19 +124,19 @@ public class Deadline extends Task {
      * @param isDone whether the deadline is done
      * @return a Deadline object
      */
-    public static Deadline of(String description, String by, boolean isDone){
+    public static Deadline of(String description, String by, boolean isDone) {
         Deadline ddl = new Deadline(description, by, isDone);
         String[] dateAndTime = by.replace('/', '-').split(" ");
-        try{
+        try {
             LocalDate d = LocalDate.parse(dateAndTime[0]);
             ddl.setDate(d);
-        } catch (Exception e){
+        } catch (Exception e) {
 
         }
-        try{
+        try {
             LocalTime t = LocalTime.parse(dateAndTime[1]);
             ddl.setTime(t);
-        } catch (Exception e){
+        } catch (Exception e) {
 
         }
         return ddl;
@@ -166,7 +167,7 @@ public class Deadline extends Task {
      * Returns by
      * @return by
      */
-    public String getBy(){
+    public String getBy() {
         return by;
     }
 
@@ -182,7 +183,7 @@ public class Deadline extends Task {
      * Sets the time of the deadline
      * @param time time to be set
      */
-    public void setTime(LocalTime time){
+    public void setTime(LocalTime time) {
         this.time = time;
     }
 
@@ -190,7 +191,7 @@ public class Deadline extends Task {
      * Returns the date
      * @return the date
      */
-    public LocalDate getDate(){
+    public LocalDate getDate() {
         return date;
     }
 
@@ -198,7 +199,7 @@ public class Deadline extends Task {
      * Returns the time
      * @return the time
      */
-    public LocalTime getTime(){
+    public LocalTime getTime() {
         return time;
     }
 
@@ -206,7 +207,9 @@ public class Deadline extends Task {
      * Returns whether is done
      * @return whether is done
      */
-    public boolean getIsDone(){return isDone;}
+    public boolean getIsDone() {
+        return isDone;
+    }
 
     /**
      * Overrides the toString method
@@ -214,8 +217,8 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " +
-                (date == null ? by : (date.toString() + " (" + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")")) +
-                (time != null ? " " + time.toString() : "") + ")";
+        return "[D]" + super.toString() + " (by: "
+                + (date == null ? by : (date.toString() + " (" + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")"))
+                + (time != null ? " " + time.toString() : "") + ")";
     }
 }
