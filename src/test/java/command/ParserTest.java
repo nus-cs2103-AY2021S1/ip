@@ -23,7 +23,7 @@ public class ParserTest {
         TaskList tasklist = TaskList.createTaskList();
         try {
             Parser.process("todo read book", tasklist, storage);
-            assertEquals("[T][✘] read book", tasklist.getTask(0).toString());
+            assertEquals("[T][\u2718] read book", tasklist.getTask(0).toString());
         } catch (DukeException e) {
             fail(e.getMessage());
         }
@@ -36,7 +36,7 @@ public class ParserTest {
         try {
             Parser.process("todo read book", tasklist, storage);
             Parser.process("done 1", tasklist, storage);
-            assertEquals("[T][✓] read book", tasklist.getTask(0).toString());
+            assertEquals("[T][\u2713] read book", tasklist.getTask(0).toString());
         } catch (DukeException e) {
             fail(e.getMessage());
         }
@@ -51,7 +51,7 @@ public class ParserTest {
             Parser.process("todo read 2nd book", tasklist, storage);
             Parser.process("delete 1", tasklist, storage);
             assertEquals(1, tasklist.getListSize());
-            assertEquals("[T][✘] read 2nd book", tasklist.getTask(0).toString());
+            assertEquals("[T][\u2718] read 2nd book", tasklist.getTask(0).toString());
         } catch (DukeException e) {
             fail(e.getMessage());
         }
