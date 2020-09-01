@@ -17,7 +17,7 @@ public class ExitCommand extends Command {
      */
     @Override
     void execute(TaskList<Task> tasks, Ui ui, Storage storage) {
-        System.out.println("Sayonara! See you again my friend!");
+        ui.appendMessage("Sayonara! See you again my friend!\n");
     }
 
     /**

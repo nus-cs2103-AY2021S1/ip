@@ -34,10 +34,10 @@ public class DeleteCommand extends Command {
             }
 
             Task currentTask = tasks.get(taskNumber - 1);
-            System.out.println("Hai! This task has been deleted!");
+            ui.appendMessage("Hai! This task has been deleted!");
             tasks.remove(currentTask);
-            System.out.println(currentTask);
-            printToDoListSize(tasks);
+            ui.appendMessage(currentTask.toString());
+            printToDoListSize(tasks, ui);
 
         } catch (NumberFormatException e) {
             throw new DukeException("'" + getParsedCommand()[1] + "'" + " is not an integer!\n");
@@ -49,19 +49,19 @@ public class DeleteCommand extends Command {
      * @param tasks the tasklist containing tasks so far
      * @param taskToAdd the task to add to tasklist
      */
-    void addTask(TaskList<Task> tasks, Task taskToAdd) {
+    void addTask(TaskList<Task> tasks, Task taskToAdd, Ui ui) {
         tasks.add(taskToAdd);
-        System.out.println("Hai! I have added this task to your list:\n"
-                + taskToAdd);
-        printToDoListSize(tasks);
+        ui.appendMessage("Hai! I have added this task to your list:\n"
+                + taskToAdd + "\n");
+        printToDoListSize(tasks, ui);
     }
 
     /**
      * Prints list size.
      * @param tasks the tasklists
      */
-    void printToDoListSize(TaskList<Task> tasks) {
-        System.out.println("You now have "
+    void printToDoListSize(TaskList<Task> tasks, Ui ui) {
+        ui.appendMessage("You now have "
                 + tasks.size()
                 + " tasks in your list. Gambatte!\n");
     }

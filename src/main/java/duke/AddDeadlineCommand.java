@@ -65,7 +65,7 @@ public class AddDeadlineCommand extends Command {
         }
 
         Task taskToAdd = new Deadline(deadlineName, formattedDeadline);
-        addTask(tasks, taskToAdd);
+        addTask(tasks, taskToAdd, ui);
     }
 
     /**
@@ -73,19 +73,19 @@ public class AddDeadlineCommand extends Command {
      * @param tasks the tasklist containing tasks so far
      * @param taskToAdd the task to add to tasklist
      */
-    void addTask(TaskList<Task> tasks, Task taskToAdd) {
+    void addTask(TaskList<Task> tasks, Task taskToAdd, Ui ui) {
         tasks.add(taskToAdd);
-        System.out.println("Hai! I have added this task to your list:\n"
+        ui.appendMessage("Hai! I have added this task to your list:\n"
                 + taskToAdd);
-        printToDoListSize(tasks);
+        printToDoListSize(tasks, ui);
     }
 
     /**
      * Prints list size.
      * @param tasks the tasklists
      */
-    void printToDoListSize(TaskList<Task> tasks) {
-        System.out.println("You now have "
+    void printToDoListSize(TaskList<Task> tasks, Ui ui) {
+        ui.appendMessage("You now have "
                 + tasks.size()
                 + " tasks in your list. Gambatte!\n");
     }

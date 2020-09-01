@@ -71,7 +71,7 @@ public class Storage {
      * Iterates through taskList and writes tasks to file storage
      * @param tasks the taskList containing the tasks
      */
-    void writeToFile(TaskList<Task> tasks) {
+    void writeToFile(TaskList<Task> tasks) throws DukeException {
         try {
             ArrayList<Task> taskArrayList = tasks.exportList();
             FileWriter fw = new FileWriter(file);
@@ -80,7 +80,7 @@ public class Storage {
             }
             fw.close();
         } catch (IOException e) {
-            System.out.println("Error with writing tasks to storage");
+            throw new DukeException("Error with writing tasks to storage");
         }
     }
 }
