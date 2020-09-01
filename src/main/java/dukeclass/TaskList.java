@@ -29,6 +29,11 @@ public class TaskList {
         return this.taskList.get(i);
     }
 
+    /**
+     * Returns a string representation of the TaskList.
+     *
+     * @return String representation of the TaskList.
+     */
     public String toString() {
         String finalString = "";
         for (int i = 0; i < this.taskList.size(); i++) {

@@ -9,6 +9,12 @@ public abstract class Task {
     protected String taskString;
     protected Boolean status;
 
+    /**
+     * Constructor for Task.
+     * Status is set to false.
+     *
+     * @param taskString  the task given by the user
+     */
     public Task(String taskString) {
         this.taskString = taskString;
         this.status = false;

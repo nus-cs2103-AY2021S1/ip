@@ -1,11 +1,9 @@
 package dukeclass;
 
 import java.io.File;
-import java.io.FileWriter;
-
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
-
 import java.util.Scanner;
 
 
@@ -24,12 +22,12 @@ public class Storage {
         File f = new File("data/task.txt");
         try {
             if (!d.exists()) {
-                if(d.mkdir()) {
+                if (d.mkdir()) {
                     System.out.println("New data directory created");
                 }
             }
 
-            if(f.createNewFile()) {
+            if (f.createNewFile()) {
                 System.out.println("new task data file created");
             }
 
@@ -47,7 +45,7 @@ public class Storage {
      * @return Task of a specific type e.g. todo, deadline.
      * @throws InvalidInputException  If the data is not correctly formatted.
      */
-    public static Task parseDatabase(String input) throws InvalidInputException{
+    public static Task parseDatabase(String input) throws InvalidInputException {
         String[] splitString = input.split("//");
 
         if (splitString[0].equals("todo")) {
@@ -129,7 +127,7 @@ public class Storage {
     public static void writeToFile(File f, TaskList list) throws IOException {
         FileWriter fw = new FileWriter(f);
         String stringToWrite = "";
-        for(int i =0; i < list.size(); i++) {
+        for (int i = 0; i < list.size(); i++) {
             Task t = list.get(i);
             stringToWrite = stringToWrite + t.toDataString() + System.lineSeparator();
         }

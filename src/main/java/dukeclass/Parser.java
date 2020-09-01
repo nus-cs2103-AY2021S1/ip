@@ -14,7 +14,7 @@ public class Parser {
      * @return Task of a specific type e.g. todo, deadline.
      * @throws InvalidInputException  If the user did not enter the entry in the correct format.
      */
-    public static Task parseTask(String rawInput) throws InvalidInputException{
+    public static Task parseTask(String rawInput) throws InvalidInputException {
         String[] splitString = rawInput.split(" ");
         int splitStringLength = splitString.length;
 
@@ -67,6 +67,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Continually parse the input String by the user until an ending command is given.
+     *
+     * @param list of tasks.
+     * @return list of a tasks
+     * @throws InvalidInputException  If the user did not enter the entry in the correct format.
+     */
     public static TaskList parseCommands(TaskList list) throws InvalidInputException {
 
         Scanner sc = new Scanner(System.in);
