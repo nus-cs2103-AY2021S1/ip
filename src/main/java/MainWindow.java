@@ -32,9 +32,13 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        dialogContainer.getChildren().add(new Label("Hello I'm Verzachtend \n"
+        /*dialogContainer.getChildren().add(new Label("Hello I'm Verzachtend \n"
         + "What can I do for you?\n"
-            + "BE YOURSELF, NEVER SURRENDER AND KEEP A SMILE ON YOUR FACE"));
+            + "BE YOURSELF, NEVER SURRENDER AND KEEP A SMILE ON YOUR FACE"));*/
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog("Hello I'm Verzachtend \n"
+            + "What can I do for you?\n"
+            + "BE YOURSELF, NEVER SURRENDER AND KEEP A SMILE ON YOUR FACE" , dukeImage));
+
     }
 
     public void setDuke(Duke d) {
