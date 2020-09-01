@@ -54,7 +54,7 @@ public class Storage {
         return tasks;
     }
 
-    public void saveToFile(Task task) {
+    public void save(Task task) {
         try {
             FileWriter fileWriter = new FileWriter("data.txt", true);
             String[] strings = task.toString().split("\\|");
