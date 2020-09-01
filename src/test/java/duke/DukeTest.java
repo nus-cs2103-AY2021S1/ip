@@ -52,7 +52,7 @@ public class DukeTest {
         clearPath();
         System.setOut(new PrintStream(OUT_CONTENT));
         System.out.println();
-        BufferedReader reader = new BufferedReader(new FileReader(Paths.get("input.txt").toString()));
+        BufferedReader reader = new BufferedReader(new FileReader(Paths.get("duke-test", "input.txt").toString()));
         String[] input = reader.lines().toArray(String[]::new);
         reader.close();
         ByteArrayInputStream inputStream = new ByteArrayInputStream(String.join("\n", input).getBytes());
@@ -71,7 +71,8 @@ public class DukeTest {
         Duke duke = new Duke(TEST_FILE_PATH);
         duke.run();
 
-        File file = new File("EXPECTED.txt");
+        String expectedFilePath = Paths.get("duke-test", "EXPECTED.txt").toString();
+        File file = new File(expectedFilePath);
         FileInputStream fis = new FileInputStream(file);
         byte[] data = new byte[(int) file.length()];
         fis.read(data);
@@ -80,7 +81,8 @@ public class DukeTest {
 
         String actualOutput = OUT_CONTENT.toString();
 
-        FileWriter myWriter = new FileWriter("ACTUAL.txt");
+        String actualFilePath = Paths.get("duke-test", "ACTUAL.txt").toString();
+        FileWriter myWriter = new FileWriter(actualFilePath);
         myWriter.write(actualOutput);
         myWriter.close();
 
