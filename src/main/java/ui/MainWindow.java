@@ -48,7 +48,8 @@ public class MainWindow extends BorderPane {
         output.appendText(inputString + "\n\n");
     }
 
-    private void output(String outputString) {
+    private void output(String... outputStrings) {
+        final String outputString = String.join("\n", outputStrings);
         output.appendText(HORIZONTAL_LINE + "\n");
         output.appendText(outputString + "\n");
         output.appendText(HORIZONTAL_LINE + "\n");
