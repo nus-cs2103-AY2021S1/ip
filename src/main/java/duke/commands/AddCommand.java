@@ -36,35 +36,35 @@ public class AddCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         switch(commandType) {
-            case TODO:
-                if (description.equals("")) {
-                    throw new DukeException("Todo description cannot be empty lah!");
-                }
-                Task todo = new ToDo(description);
-                addThenSave(tasks, ui, storage, todo);
-                break;
-            case DEADLINE:
-                if (description.equals("")) {
-                    throw new DukeException("Deadline description cannot be empty lah!");
-                } else if (timeOfTask.equals("")) {
-                    throw new DukeException("Date and time of deadline cannot be empty lah!");
-                } else {
-                    Task deadline = new Deadline(description, timeOfTask);
-                    addThenSave(tasks, ui, storage, deadline);
-                }
-                break;
-            case EVENT:
-                if (description.equals("")) {
-                    throw new DukeException("Event description cannot be empty lah!");
-                } else if (timeOfTask.equals("")) {
-                    throw new DukeException("Date and time of event cannot be empty lah!");
-                } else {
-                    Task event = new Event(description, timeOfTask);
-                    addThenSave(tasks, ui, storage, event);
-                }
-                break;
-            default:
-                throw new DukeException("Unknown add command lah!");
+        case TODO:
+            if (description.equals("")) {
+                throw new DukeException("Todo description cannot be empty lah!");
+            }
+            Task todo = new ToDo(description);
+            addThenSave(tasks, ui, storage, todo);
+            break;
+        case DEADLINE:
+            if (description.equals("")) {
+                throw new DukeException("Deadline description cannot be empty lah!");
+            } else if (timeOfTask.equals("")) {
+                throw new DukeException("Date and time of deadline cannot be empty lah!");
+            } else {
+                Task deadline = new Deadline(description, timeOfTask);
+                addThenSave(tasks, ui, storage, deadline);
+            }
+            break;
+        case EVENT:
+            if (description.equals("")) {
+                throw new DukeException("Event description cannot be empty lah!");
+            } else if (timeOfTask.equals("")) {
+                throw new DukeException("Date and time of event cannot be empty lah!");
+            } else {
+                Task event = new Event(description, timeOfTask);
+                addThenSave(tasks, ui, storage, event);
+            }
+            break;
+        default:
+            throw new DukeException("Unknown add command lah!");
         }
     }
 
