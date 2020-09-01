@@ -69,9 +69,9 @@ public class Task {
     public String toString() {
         // By default print task name and status
         if(isDone) {
-            return "[✓] " + this.name;
+            return "[Done] " + this.name;
         } else {
-            return "[✗] " + this.name;
+            return "[X] " + this.name;
         }
     }
 }

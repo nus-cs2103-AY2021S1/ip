@@ -20,6 +20,8 @@ public class Ui {
     // Other variable
     private Scanner scanner;
 
+    private String greetings = "";
+
     /**
      * Constructors.
      */
@@ -39,12 +41,42 @@ public class Ui {
     }
 
     /**
+     * Sets Duke's load message as a string.
+     */
+    public void setGreetings(String loadMessage) {
+        this.greetings = loadMessage + "\n";
+    }
+
+    /**
+     * Returns Duke's greetings as a string.
+     *
+     * @return Duke's greetings as a String
+     */
+    public String getGreetings() {
+        return greetings +
+                "\nHello, I'm Duke! " +
+                "What can I help you with today?" +
+                "\n" + lineBreaker + "\n";
+    }
+
+    /**
      * Print's Duke's farewell to user.
      */
     public void displayFarewells() {
         System.out.print(outputBreaker);
         System.out.println("Bye! Hoped I helped!");
         System.out.println("\n" + lineBreaker);
+    }
+
+    /**
+     * Gets Duke's farewell to user.
+     *
+     * @return Duke's farewell as a String
+     */
+    public String getFarewells() {
+        return outputBreaker +
+                "Bye! Hoped I helped!" +
+                "\n" + lineBreaker;
     }
 
     /**
@@ -65,11 +97,29 @@ public class Ui {
     }
 
     /**
+     * Prints Duke's symbols before response.
+     *
+     * @return The string containing output symbols.
+     */
+    public String getOutputSymbol() {
+        return lineBreaker + "\n" + outputBreaker;
+    }
+
+    /**
      * Prints a line.
      */
     public void printLineBreaker() {
         System.out.println(lineBreaker);
         System.out.println();
+    }
+
+    /**
+     * Returns the line breaker string.
+     *
+     * @returns Line break as String.
+     */
+    public String getLineBreaker() {
+        return lineBreaker + "\n";
     }
 
     /**
@@ -91,6 +141,27 @@ public class Ui {
     }
 
     /**
+     * Prints messages from commands.
+     *
+     * @param s The message to print.
+     */
+    public void printMessage(String s) {
+        printOutputSymbol();
+        System.out.println(s);
+        System.out.println();
+    }
+
+    /**
+     * Prints error messages from DukeException.
+     *
+     * @param e The DukeException to print message of.
+     * @return String message of exception.
+     */
+    public String getError(DukeException e) {
+        return e.getMessage() + "\n";
+    }
+
+    /**
      * Prints all tasks within a TaskList (if any).
      * Else prints a list is empty message.
      *
@@ -105,5 +176,23 @@ public class Ui {
             list.printAllTasks();
         }
         System.out.println();
+    }
+
+    /**
+     * Returns all tasks within a TaskList (if any).
+     * Else prints a list is empty message.
+     *
+     * @param list TaskList of Duke.
+     * @return List of tasks in String.
+     */
+    public String getList(TaskList list) {
+        String output = "Here is what I have! ^^\n";
+        if (list.isListEmpty()) {
+            // Handles printing empty list
+            output += "Whoops! I don't have anything of note yet...";
+        } else {
+            output += list.getAllTasks();
+        }
+        return output;
     }
 }
