@@ -15,16 +15,15 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import ikura.Bot;
-import ikura.Frontend;
 import ikura.Database;
 import ikura.TaskList;
+import ikura.TextFrontend;
 
 import ikura.util.Pair;
 import ikura.util.Either;
 
 public class MainTest {
 
-    private static final String BOT_NAME  = "ikurabowl";
     private static final String DB_PATH   = "data/tasks.txt";
 
     private Either<String, Pair<String, String>> getTestCase() {
@@ -55,16 +54,12 @@ public class MainTest {
         var test = res.fromRight();
         var buffer = new ByteArrayOutputStream();
 
-        var ui = new Frontend(BOT_NAME,
+        var frontend = new TextFrontend(tasks,
             new Scanner(test.fst()),
             new PrintStream(buffer, /* autoFlush: */ true)
         );
 
-        var bot = new Bot(ui, tasks);
-
-        ui.greet();
-        while (ui.readLine().map(bot::processCommand).orElse(false))
-            ;
+        frontend.run();
 
         var output = buffer.toString().lines()
             .map(x -> x.stripTrailing())

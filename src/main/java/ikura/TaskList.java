@@ -105,12 +105,12 @@ public class TaskList {
     }
 
     /**
-     * Returns the list of tasks, as a List.
+     * Returns the list of tasks, as a new, immutable List.
      *
      * @return the list of tasks.
      */
     public List<Task> getTasks() {
-        return this.tasks;
+        return List.copyOf(this.tasks);
     }
 
     /**
