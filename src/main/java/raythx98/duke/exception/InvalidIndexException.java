@@ -1,4 +1,4 @@
-package duke.exception;
+package raythx98.duke.exception;
 
 /**
  * Checked exception as a result of an invalid index.

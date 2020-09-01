@@ -31,7 +31,7 @@ test {
 }
 
 application {
-    mainClassName = "Duke"
+    mainClassName = "raythx98/duke/Duke"
 }
 
 shadowJar {

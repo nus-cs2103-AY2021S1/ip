@@ -1,0 +1,12 @@
+package raythx98.duke.command;
+
+import raythx98.duke.exception.DukeException;
+import raythx98.duke.storage.Storage;
+import raythx98.duke.task.TaskList;
+import raythx98.duke.ui.Ui;
+
+public class InvalidCommand extends Command {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        System.out.println("lol");
+    }
+}

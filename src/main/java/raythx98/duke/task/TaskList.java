@@ -1,13 +1,9 @@
-package duke;
+package raythx98.duke.task;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import duke.exception.InvalidIndexException;
-import duke.task.Task;
-import duke.task.ToDos;
-import duke.task.Deadline;
-import duke.task.Event;
+import raythx98.duke.exception.InvalidIndexException;
 
 /**
  * Deals with manipulation on the list of tasks
@@ -38,56 +34,6 @@ public class TaskList {
 
     public void addTask(Task task) {
         taskList.add(task);
-    }
-
-    /**
-     * Creates a task and adds it into the List of tasks.
-     *
-     * @param taskType Type of task.
-     * @param description Description of task.
-     * @param deadline Deadline of task.
-     * @return a String representation of the task added.
-     */
-    public String addTask(Task.TaskType taskType, String description, String deadline) {
-        Task task = null;
-        switch (taskType) {
-        case TODOS:
-            task = new ToDos(description.trim(), deadline);
-            taskList.add(task);
-            break;
-        case DEADLINE:
-            task = new Deadline(description.trim(), deadline);
-            taskList.add(task);
-            break;
-        case EVENT:
-            task = new Event(description.trim(), deadline);
-            taskList.add(task);
-            break;
-        }
-
-        return "Got it, here yur task bij\n" + task.toString()
-                + "\nNow you have " + taskList.size() + " tasks in the list.";
-    }
-
-    public String addTask(Task.TaskType taskType, String description) {
-        Task task = null;
-        switch (taskType) {
-        case TODOS:
-            task = new ToDos(description);
-            taskList.add(task);
-            break;
-        case DEADLINE:
-            task = new Deadline(description);
-            taskList.add(task);
-            break;
-        case EVENT:
-            task = new Event(description);
-            taskList.add(task);
-            break;
-        }
-
-        return "Got it, here yur task bij\n" + task.toString()
-                + "\nNow you have " + taskList.size() + " tasks in the list.";
     }
 
     /**

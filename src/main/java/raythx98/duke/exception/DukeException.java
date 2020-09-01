@@ -1,4 +1,4 @@
-package duke.exception;
+package raythx98.duke.exception;
 
 /**
  * Checked exceptions for all errors as a result of Duke.

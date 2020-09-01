@@ -1,9 +1,15 @@
-package duke;
+package raythx98.duke.ui;
+
+import java.util.Scanner;
 
 /**
  * Deals with the user interface.
  */
 public class Ui {
+    private Scanner scanner;
+    public Ui() {
+        scanner = new Scanner(System.in);
+    }
 
     /**
      * Prints a greeting message.
@@ -22,12 +28,18 @@ public class Ui {
                 + "dun wanna see yu ever agin";
         System.out.println(farewell);
     }
+    public String readCommand() {
+        return scanner.nextLine();
+    }
 
     /**
      * Prints a horizontal line.
      */
     public void showLine() {
         System.out.println("________________________________________");
+    }
+    public void showOnScreen(String string) {
+        System.out.println(string);
     }
 
     /**

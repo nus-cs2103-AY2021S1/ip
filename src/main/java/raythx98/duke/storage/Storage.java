@@ -1,27 +1,24 @@
-package duke;
-
-import duke.exception.DukeException;
-import duke.exception.UnknownCommandException;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.ToDos;
+package raythx98.duke.storage;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Scanner;
+
+import raythx98.duke.exception.DukeException;
+import raythx98.duke.exception.UnknownCommandException;
+import raythx98.duke.task.Deadline;
+import raythx98.duke.task.Event;
+import raythx98.duke.task.ToDos;
+import raythx98.duke.task.TaskList;
 
 /**
  * Deals with the manipulation of loading and saving data.
  */
 public class Storage {
 
-    public final static String TODO = "T";
-    public final static String DEADLINE = "D";
-    public final static String EVENT = "E";
+    public static final String TODO = "T";
+    public static final String DEADLINE = "D";
+    public static final String EVENT = "E";
 
     private String filepath;
     private TaskList tasks;
