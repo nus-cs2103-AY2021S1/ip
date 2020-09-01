@@ -37,10 +37,10 @@ shadowJar {
     archiveClassifier = null
 }
 
-checkstyle {
-    toolVersion = '8.23'
-}
-
 run{
     standardInput = System.in
+}
+
+checkstyle {
+    toolVersion = '8.29'
 }

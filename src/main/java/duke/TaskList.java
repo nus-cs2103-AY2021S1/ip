@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * TaskList object stores the List of Tasks
+ * TaskList object stores the List of Tasks.
  */
 public class TaskList {
     private List<Task> list;
@@ -22,7 +22,7 @@ public class TaskList {
     }
 
     /**
-     * Iterates through the list of Tasks stored
+     * Iterates through the list of Tasks stored.
      * @return A String of List of Tasks stored
      */
     public String iterateToDo() {
@@ -40,7 +40,7 @@ public class TaskList {
     }
 
     /**
-     * Removes a specified Task from the list of Tasks
+     * Removes a specified Task from the list of Tasks.
      * @param number Position of Task to delete
      */
     public void deleteTask(int number) {
@@ -48,7 +48,7 @@ public class TaskList {
     }
 
     /**
-     * Adds a specified Task to the list of Tasks
+     * Adds a specified Task to the list of Tasks.
      * @param counter Position to add Task
      * @param task Specified Task to be added
      */
@@ -57,14 +57,14 @@ public class TaskList {
     }
 
     /**
-     * Filters through list of Tasks for appropriate keyword within instructions
+     * Filters through list of Tasks for appropriate keyword within instructions.
      * @param keyword Word to filter by
      * @return A String of filtered Lists of Tasks
      */
     public String filter(String keyword) {
         List<Task> filteredList = new ArrayList<>();
         String loweredCaseKeyword = keyword.toLowerCase();
-        for (Task task : this.list ) {
+        for (Task task : this.list) {
             if (task.instructions.toLowerCase().contains(loweredCaseKeyword)) {
                 filteredList.add(task);
             }
@@ -73,7 +73,7 @@ public class TaskList {
     }
 
     /**
-     * Helper function to iterate through filtered list
+     * Helper function to iterate through filtered list.
      * @param list A list of filtered Tasks
      * @return A String format of list of filtered Tasks
      */

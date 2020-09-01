@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TaskListTest {
     @Test
-    public void testEmptyTaskList(){
+    public void testEmptyTaskList() {
         assertEquals("", new TaskList().iterateToDo());
     }
 
