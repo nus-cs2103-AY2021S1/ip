@@ -1,6 +1,7 @@
 package duke;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -9,6 +10,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * The main class for Project Duke.
@@ -48,10 +52,6 @@ public class Duke {
         return textToAdd;
     }
 
-    /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
-     */
     public String getResponse(String input) {
         try {
             if (tasks == null) {
@@ -64,7 +64,13 @@ public class Duke {
                     ui.showLoadingError(e);
                 }
             }
-            return Parser.parse(input, tasks, true);
+            String response = Parser.parse(input, tasks, true);
+            if (response.equals(ui.goodbye(true))) {
+                new Timer().schedule(new TimerTask() {
+                    public void run () { Platform.exit(); }
+                }, 2000);
+            }
+            return response;
         } catch (DukeException e) {
             return e.getMessage();
         }
