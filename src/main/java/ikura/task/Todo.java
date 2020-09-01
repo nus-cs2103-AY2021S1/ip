@@ -27,7 +27,7 @@ public class Todo extends Task {
     @Override
     public boolean equals(Object other) {
         return (other instanceof Todo)
-            && ((Todo) other).getName().equals(this.getName());
+            && ((Todo) other).getTitle().equals(this.getTitle());
     }
 
     /**

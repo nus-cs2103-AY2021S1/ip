@@ -44,7 +44,7 @@ public class Event extends Task {
     @Override
     public boolean equals(Object other) {
         return (other instanceof Event)
-            && ((Event) other).getName().equals(this.getName())
+            && ((Event) other).getTitle().equals(this.getTitle())
             && ((Event) other).getEventDate().equals(this.getEventDate());
     }
 

@@ -215,7 +215,7 @@ public class Database {
 
                             return String.format("%c%c|%s", 'T',
                                 task.isDone() ? '1' : '0',
-                                task.getName());
+                                task.getTitle());
 
                         } else if (task instanceof Event) {
 
@@ -223,7 +223,7 @@ public class Database {
                             return String.format("%c%c%s|%s", 'E',
                                 task.isDone() ? '1' : '0',
                                 event.getEventDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")),
-                                task.getName());
+                                task.getTitle());
 
                         } else if (task instanceof Deadline) {
 
@@ -231,7 +231,7 @@ public class Database {
                             return String.format("%c%c%s|%s", 'D',
                                 task.isDone() ? '1' : '0',
                                 deadline.getDeadline().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")),
-                                task.getName());
+                                task.getTitle());
                         } else {
                             // asdf?!
                             return "";

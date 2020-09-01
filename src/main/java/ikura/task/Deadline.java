@@ -45,7 +45,7 @@ public class Deadline extends Task {
     @Override
     public boolean equals(Object other) {
         return (other instanceof Deadline)
-            && ((Deadline) other).getName().equals(this.getName())
+            && ((Deadline) other).getTitle().equals(this.getTitle())
             && ((Deadline) other).getDeadline().equals(this.getDeadline());
     }
 

@@ -30,7 +30,7 @@ public class TaskListTest {
         list.addTask(new Todo("three"));
 
         assertEquals(list.count(), 3);
-        assertEquals(list.getTaskByNumber(3).get().getName(), "three");
+        assertEquals(list.getTaskByNumber(3).get().getTitle(), "three");
     }
 
     @Test
@@ -39,7 +39,7 @@ public class TaskListTest {
 
         var task = list.getTaskByNumber(1);
         assertNotEquals(task, Optional.empty());
-        assertEquals(task.get().getName(), "one");
+        assertEquals(task.get().getTitle(), "one");
     }
 
     @Test

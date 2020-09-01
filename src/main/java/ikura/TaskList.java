@@ -155,7 +155,7 @@ public class TaskList {
 
         return StreamUtils.indexed(this.tasks.stream())
             .filter(x -> {
-                var words = Arrays.stream(x.snd().getName().split(" "));
+                var words = Arrays.stream(x.snd().getTitle().split(" "));
                 return words.anyMatch(w -> keywords.contains(w));
             })
             .collect(Collectors.toList());

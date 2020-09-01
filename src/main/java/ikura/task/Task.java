@@ -9,27 +9,58 @@ package ikura.task;
  */
 public abstract class Task {
 
-    private String name;
+    private String title;
+    private String description;
+
     private boolean done;
 
     /**
      * Constructs a new Task with the given description. It is set to uncompleted by default.
      *
-     * @param name the task's description.
+     * @param title the task's title.
      */
-    protected Task(String name) {
+    protected Task(String title) {
 
-        this.name = name;
+        this.title = title;
         this.done = false;
+    }
+
+    /**
+     * Gets the title of the task.
+     *
+     * @return the task's title.
+     */
+    public String getTitle() {
+        return this.title;
+    }
+
+    /**
+     * Sets the title of the task to the new title, which can neither be null nor empty.
+     *
+     * @param title the new title
+     */
+    public void setTitle(String title) {
+        assert title != null && !title.isEmpty();
+        this.title = title;
     }
 
     /**
      * Gets the description of the task.
      *
-     * @return name the task's description.
+     * @return the description of the task.
      */
-    public String getName() {
-        return this.name;
+    public String getDescription() {
+        return this.description;
+    }
+
+    /**
+     * Sets the description of the task, which can be empty but not null.
+     *
+     * @param description the new description
+     */
+    public void setDescription(String description) {
+        assert description != null;
+        this.description = description;
     }
 
     /**
@@ -53,6 +84,6 @@ public abstract class Task {
 
     @Override
     public String toString() {
-        return String.format("[%s] %s", this.done ? "\u2713" : "\u2718", this.name);
+        return String.format("[%s] %s", this.done ? "\u2713" : "\u2718", this.title);
     }
 }

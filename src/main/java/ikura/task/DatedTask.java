@@ -25,6 +25,7 @@ public class DatedTask {
      * @param dateSpec the keyword for specifying the date (after the slash); either 'at' or 'by'.
      * @param usage    the correct usage for the command (used for the error message).
      * @return a Pair of strings; first is the description, and second is the date.
+     * @throws InvalidInputException when the input is malformed.
      */
     public static Pair<String, String> parse(String kind, String input, String dateSpec, String usage)
         throws InvalidInputException {
