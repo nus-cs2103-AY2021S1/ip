@@ -3,27 +3,27 @@
  */
 public class Ui {
     /**
-     * Prints the welcome message on application start.
+     * Returns the welcome message on application start.
      */
-    public void showWelcomeMessage() {
+    public String showWelcomeMessage() {
         String message = "Hello! I'm Duke\n"
                 + "What can I do for you?\n";
-        System.out.println(message);
+        return message;
     }
 
     /**
-     * Prints the exit message on application termination.
+     * Returns the exit message on application termination.
      */
-    public void showExitMessage() {
+    public String showExitMessage() {
         String message = "Bye. Hope to see you again soon!";
-        System.out.println(message);
+        return message;
     }
 
     /**
-     * Prints the result of a command execution.
+     * Returns the result of a command execution.
      * @param result contains a String message after a command has been executed
      */
-    public void showResponse(CommandResult result) {
-        System.out.println(result.responseToUser);
+    public String showResponse(CommandResult result) {
+        return result.responseToUser;
     }
 }

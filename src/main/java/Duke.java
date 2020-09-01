@@ -1,5 +1,3 @@
-import java.util.Scanner;
-
 /**
  * Responsible for running the Duke application, and responding to user.
  * Initializes and terminates the application.
@@ -7,11 +5,12 @@ import java.util.Scanner;
 public class Duke {
     private TaskList tasks;
     private Storage storage;
-    private Ui ui;
 
-    Duke() {
+    /**
+     * Constructor.
+     */
+    public Duke() {
         this.storage = new Storage();
-        this.ui = new Ui();
         try {
             this.tasks = storage.loadFile();
         } catch (Exception e) {
@@ -20,31 +19,14 @@ public class Duke {
         }
     }
 
-    /**
-     * Reads user command and executes it.
-     * Application is terminated when an exit command is given.
-     */
-    public void run() {
-        this.ui.showWelcomeMessage();
-        Scanner sc = new Scanner(System.in);
-
-        while (sc.hasNextLine()) {
-            String fullCommand = sc.nextLine();
-
-            try {
-                Command command = Parser.parseCommand(fullCommand);
-                CommandResult commandResult = command.execute(this.tasks, this.storage);
-                this.ui.showResponse(commandResult);
-                if (command.isExit()) {
-                    break;
-                }
-            } catch (DukeException e) {
-                System.err.println(e);
-            }
+    protected CommandResult acceptInput(String input) {
+        try {
+            Command command = Parser.parseCommand(input);
+            return command.execute(this.tasks, this.storage);
+        } catch (DukeException e) {
+            System.err.println(e);
         }
-    }
 
-    public static void main(String[] args) {
-        new Duke().run();
+        return new CommandResult("Oops! Something went wrong");
     }
 }
