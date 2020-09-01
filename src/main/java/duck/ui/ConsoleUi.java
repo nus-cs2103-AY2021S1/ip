@@ -7,8 +7,8 @@ import java.util.List;
  * and indentation.
  */
 public class ConsoleUi implements Ui {
-    private final String LINE = "____________________________________________________________";
-    private final String INDENT = "    ";
+    private static final String LINE = "____________________________________________________________";
+    private static final String INDENT = "    ";
 
 
     public void printLine() {

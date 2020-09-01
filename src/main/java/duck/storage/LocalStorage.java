@@ -1,8 +1,5 @@
 package duck.storage;
 
-import duck.exception.DuckException;
-import duck.task.TaskList;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -10,10 +7,13 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
+import duck.exception.DuckException;
+import duck.task.TaskList;
+
 /**
  * LocalStorage makes use of Serializable objects to write to a local file.
  */
-public class LocalStorage implements Storage{
+public class LocalStorage implements Storage {
     private String filePath;
 
     /**

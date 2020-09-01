@@ -6,7 +6,7 @@ import java.time.format.DateTimeFormatter;
 /**
  * A more specific class of Task that has a date to specify a due date.
  */
-abstract public class TaskWithDate extends Task {
+public abstract class TaskWithDate extends Task {
     private LocalDate date;
 
     /**

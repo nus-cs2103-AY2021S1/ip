@@ -21,8 +21,9 @@ public enum Option {
     FIND("find"),
     UNRECOGNIZED;
 
-    private String name;
     private static final Map<String, Option> mappings;
+    private String name;
+
 
     Option() { }
 

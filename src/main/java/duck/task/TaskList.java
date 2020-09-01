@@ -1,16 +1,16 @@
 package duck.task;
 
+import java.io.Serializable;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
 import duck.Parser;
 import duck.exception.DuckException;
 
 
-import java.io.Serializable;
 
-import java.time.LocalDate;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
 
 /**
  * Class to handle all operations regarding the current list of tasks

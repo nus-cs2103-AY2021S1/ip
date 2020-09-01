@@ -1,18 +1,18 @@
 package duck;
 
-import duck.exception.DuckException;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.time.LocalDate;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
+import duck.exception.DuckException;
 
 public class ParserTest {
     @Test
     public void parseOptionCorrectly() {
-        String[] inputs = {"bye", "list", "done 2","deadline abc /by 2020-12-12",
+        String[] inputs = {"bye", "list", "done 2", "deadline abc /by 2020-12-12",
                 "todo something", "event abc /at 2020-12-12", "due", ":("};
         Option[] expected = {Option.BYE, Option.LIST, Option.DONE, Option.DEADLINE, Option.TODO,
                 Option.EVENT, Option.DUE, Option.UNRECOGNIZED};
@@ -52,7 +52,7 @@ public class ParserTest {
     @Test
     public void parseTaskNumberCorrectly() {
         String[] inputs = {"done 3", "delete 5"};
-        int[] expected = {3,5};
+        int[] expected = {3, 5};
         for (int i = 0; i < inputs.length; i++) {
             try {
                 assertEquals(expected[i], Parser.parseTaskNumber(inputs[i]));
