@@ -17,11 +17,11 @@ public class Ui {
      * Prints the welcome message
      */
     public String showWelcome() {
-        String logo = " ____           _" + "\n"
-                + "|   _  \\ _   __|  |  _  __" + "\n"
-                + "|  |  |  |  |  |  |  |/  /  _ \\" + "\n"
-                + "|  |_|   |  |_|  |     \\   __/" + "\n"
-                + "|____/ \\__,_ |_ |\\_ \\___|" + "\n";
+        String logo = " ____        _        \n"
+                + "|  _ \\ _   _| | _____ \n"
+                + "| | | | | | | |/ / _ \\\n"
+                + "| |_| | |_| |   <  __/\n"
+                + "|____/ \\__,_|_|\\_\\___|";
         String greeting = "Hello human, I'm Duke the supporting chatbot\n"
                 + "What can I do for you?";
         return logo + "\n" + horizontalLine + "\n" + greeting;
