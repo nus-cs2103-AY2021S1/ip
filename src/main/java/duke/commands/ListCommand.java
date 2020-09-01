@@ -6,15 +6,11 @@ import duke.Ui;
 
 public class ListCommand extends Command {
 
-    public static final String commandWord = "add";
-
-    public ListCommand(String attributes) {
-
-    }
+    public ListCommand() {}
 
     @Override
     public boolean run(TaskList taskList, Storage storage, Ui ui) {
-
+        ui.writeOutput(taskList.listTasks());
         return true;
     }
 }

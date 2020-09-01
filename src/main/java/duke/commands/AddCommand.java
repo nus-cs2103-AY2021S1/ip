@@ -9,9 +9,8 @@ import duke.tasks.TaskType;
 
 public class AddCommand extends Command {
 
-    public static final String commandWord = "add";
+    private final TaskType taskType;
 
-    private TaskType taskType;
 
     public AddCommand(String attributes, TaskType taskType) {
         this.attributes = attributes;

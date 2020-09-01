@@ -6,14 +6,11 @@ import duke.Ui;
 
 public class ExitCommand extends Command {
 
-    public static final String commandWord = "add";
-
-    public ExitCommand(String attributes) {
-
-    }
+    public ExitCommand() {}
 
     @Override
     public boolean run(TaskList taskList, Storage storage, Ui ui) {
+        ui.exit();
         return false;
     }
 }
