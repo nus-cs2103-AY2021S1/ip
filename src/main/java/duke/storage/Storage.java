@@ -1,13 +1,23 @@
 package duke.storage;
 
-import java.io.*;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import duke.task.*;
+
+import duke.task.Deadlines;
+import duke.task.Events;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.TaskType;
+import duke.task.ToDos;
 
 /**
  * The class Storage denotes a storage object.
@@ -67,19 +77,24 @@ public class Storage {
                     String when = strArr.length > 3 ? strArr[3].trim() : "";
                     switch (taskTypeChar) {
                     case 'T' :
-                        ToDos todo = Integer.parseInt(doneStatus) == Task.doneNo ?
-                                new ToDos(taskInfo).doneTask() : new ToDos(taskInfo);
+                        ToDos todo = Integer.parseInt(doneStatus) == Task.DONENO
+                            ? new ToDos(taskInfo).doneTask()
+                            : new ToDos(taskInfo);
                         taskList.add(todo);
                         break;
                     case 'D' :
-                        Deadlines deadline = Integer.parseInt(doneStatus) == Task.doneNo ?
-                                new Deadlines(taskInfo, when).doneTask() : new Deadlines(taskInfo, when);
+                        Deadlines deadline = Integer.parseInt(doneStatus) == Task.DONENO
+                                ? new Deadlines(taskInfo, when).doneTask()
+                                : new Deadlines(taskInfo, when);
                         taskList.add(deadline);
                         break;
                     case 'E' :
-                        Events event = Integer.parseInt(doneStatus) == Task.doneNo ?
-                                new Events(taskInfo, when).doneTask() : new Events(taskInfo, when);
+                        Events event = Integer.parseInt(doneStatus) == Task.DONENO
+                                ? new Events(taskInfo, when).doneTask()
+                                : new Events(taskInfo, when);
                         taskList.add(event);
+                        break;
+                    default :
                         break;
                     }
                 }
@@ -93,13 +108,13 @@ public class Storage {
     /**
      * Saves lists of tasks into storage.
      */
-    public void saveTaskList() throws DukeIOException{
+    public void saveTaskList(TaskList tasks) throws DukeIOException {
         try {
             File file = new File(filePath);
             FileWriter fw = new FileWriter(file.getAbsoluteFile());
             BufferedWriter bw = new BufferedWriter(fw);
-            for (int i = 0; i < TaskList.taskList.size(); i++) {
-                Task task = TaskList.taskList.get(i);
+            for (int i = 0; i < tasks.size(); i++) {
+                Task task = tasks.get(i);
                 TaskType taskType = task.returnTaskType();
                 char taskTypeChar = taskType.toString().charAt(1);
                 int status = task.returnDoneStatus();
@@ -107,12 +122,14 @@ public class Storage {
                 String when = "";
                 switch(taskTypeChar) {
                 case 'D' :
-                    Deadlines deadline = (Deadlines)TaskList.taskList.get(i);
+                    Deadlines deadline = (Deadlines) tasks.get(i);
                     when = " : " + deadline.returnTime().trim();
                     break;
                 case 'E' :
-                    Events event = (Events)TaskList.taskList.get(i);
+                    Events event = (Events) tasks.get(i);
                     when = " : " + event.returnTime().trim();
+                    break;
+                default :
                     break;
                 }
                 String toWrite = taskType.toString().trim() + " : " + status + " : " + taskInfo.trim() + when;

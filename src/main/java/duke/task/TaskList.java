@@ -1,11 +1,11 @@
 package duke.task;
 
-import duke.command.DukeIndexOutOfBoundsException;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import duke.command.DukeIndexOutOfBoundsException;
 
 public class TaskList {
     /**
@@ -13,7 +13,7 @@ public class TaskList {
      *
      * @author Alvin Chee
      */
-    public static List<Task> taskList;
+    private static List<Task> taskList;
 
     /**
      * Constructs a TaskList.
@@ -87,7 +87,7 @@ public class TaskList {
         int taskNo;
         try {
             taskNo = Integer.parseInt(taskNoString);
-        } catch (NumberFormatException err){
+        } catch (NumberFormatException err) {
             throw new DukeNumberFormatException("Please input a number for the task you want to delete.");
         }
         if (taskNo < 1 || taskNo > taskList.size()) {
@@ -99,19 +99,25 @@ public class TaskList {
         System.out.println(String.format("\tNow you have %d tasks in the list.", taskList.size()));
     }
 
+    /**
+     * Returns a list of task matching the keyword.
+     *
+     * @param matchWords  All the keywords from user
+     */
     public List<Task> returnMatchingTasks(String[] matchWords) {
         List<Task> matchList = new ArrayList<>();
         for (int i = 0; i < taskList.size(); i++) {
             for (int j = 0; j < matchWords.length; j++) {
-                    if (matchWords[j].equals("")) {
-                        continue;   //In case of having alot of spaces in between two words.
-                    }
-                    String pattern = "\\b" + matchWords[j] + "\\b";
-                    Pattern p = Pattern.compile(pattern);
-                    Matcher m = p.matcher(taskList.get(i).toString());
-                    if (m.find()) {
-                        matchList.add(taskList.get(i));
-                    }
+                //In case of having alot of spaces in between two words.
+                if (matchWords[j].equals("")) {
+                    continue;
+                }
+                String pattern = "\\b" + matchWords[j] + "\\b";
+                Pattern p = Pattern.compile(pattern);
+                Matcher m = p.matcher(taskList.get(i).toString());
+                if (m.find()) {
+                    matchList.add(taskList.get(i));
+                }
             }
         }
         return matchList;

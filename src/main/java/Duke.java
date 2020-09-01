@@ -1,11 +1,12 @@
-import java.nio.file.Paths;
 import java.nio.file.Path;
-import duke.UI.UI;
+import java.nio.file.Paths;
+
 import duke.command.Command;
 import duke.command.DukeRunTimeException;
 import duke.parser.Parser;
 import duke.storage.Storage;
-import duke.task.*;
+import duke.task.TaskList;
+import duke.ui.UI;
 
 /**
  * The class Duke denotes the faithful robot.

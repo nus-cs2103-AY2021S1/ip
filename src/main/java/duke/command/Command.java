@@ -1,10 +1,16 @@
 package duke.command;
 
+import java.util.List;
+
 import duke.storage.DukeIOException;
 import duke.storage.Storage;
-import duke.task.*;
-
-import java.util.List;
+import duke.task.Deadlines;
+import duke.task.DukeDateTimeParseException;
+import duke.task.DukeNumberFormatException;
+import duke.task.Events;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.ToDos;
 
 /**
  * The class Command denotes a command object.
@@ -20,8 +26,8 @@ public class Command {
     /**
      * Constructs a command
      *
-     * @param commandType  Type of command.
-     * @param taskInfo  Description of task.
+     * @param commandType Type of command.
+     * @param taskInfo    Description of task.
      */
     public Command(CommandType commandType, String taskInfo) {
         this.commandType = commandType;
@@ -31,8 +37,8 @@ public class Command {
     /**
      * Executes a command
      *
-     * @param tasks  The list of tasks for user.
-     * @param storage   Storage object to store task list.
+     * @param tasks   The list of tasks for user.
+     * @param storage Storage object to store task list.
      */
     public void execute(TaskList tasks, Storage storage) {
         try {
@@ -45,7 +51,7 @@ public class Command {
                 break;
             case MARKTASKDONE:
                 markTaskDone(tasks, taskInfo);
-                storage.saveTaskList();
+                storage.saveTaskList(tasks);
                 break;
             case HANDLETODO:
                 handleToDo(tasks, taskInfo);
@@ -59,15 +65,15 @@ public class Command {
             case DELETETASK:
                 tasks.deleteTask(taskInfo);
                 break;
-            default :
+            default:
                 isExit = false;
                 if (!foundMatchingTasks(tasks, taskInfo)) {
                     throw new DukeInvalidCommandException("Sorry handsome but I'm not sure about this command :)");
                 }
                 break;
             }
-            storage.saveTaskList();
-        }  catch (DukeInvalidCommandException err) {
+            storage.saveTaskList(tasks);
+        } catch (DukeInvalidCommandException err) {
             System.out.println("\t" + err.getMessage());
         } catch (DukeIndexOutOfBoundsException err) {
             System.out.println("\t" + err.getMessage());
@@ -97,11 +103,11 @@ public class Command {
     /**
      * Prints the list of tasks.
      *
-     * @param tasks  List of tasks to print.
+     * @param tasks List of tasks to print.
      */
     public void printList(TaskList tasks) {
         System.out.println("\tHere are the tasks in your list:");
-        for(int i = 0; i < tasks.size(); i++) {
+        for (int i = 0; i < tasks.size(); i++) {
             System.out.println(String.format("\t%d. %s", i + 1, tasks.get(i)));
         }
     }
@@ -109,10 +115,10 @@ public class Command {
     /**
      * Marks task with task index in taskInfo as done.
      *
-     * @param tasks  List of user's tasks.
-     * @param taskInfo  Description of task.
+     * @param tasks    List of user's tasks.
+     * @param taskInfo Description of task.
      */
-    public void markTaskDone(TaskList tasks, String taskInfo) throws DukeIndexOutOfBoundsException{
+    public void markTaskDone(TaskList tasks, String taskInfo) throws DukeIndexOutOfBoundsException {
         if (taskInfo.length() <= 5) {
             throw new DukeIndexOutOfBoundsException("The task you want to mark is invalid");
         }
@@ -120,7 +126,7 @@ public class Command {
         int taskNo;
         try {
             taskNo = Integer.parseInt(taskInfo);
-        } catch (NumberFormatException err){
+        } catch (NumberFormatException err) {
             throw new DukeIndexOutOfBoundsException("The task you want to mark is invalid");
         }
         if (taskNo < 1 || taskNo > tasks.size()) {
@@ -136,10 +142,10 @@ public class Command {
     /**
      * Adds todos task to list of tasks.
      *
-     * @param tasks  List of user's tasks.
-     * @param taskInfo  Description of todos task.
+     * @param tasks    List of user's tasks.
+     * @param taskInfo Description of todos task.
      */
-    public void handleToDo(TaskList tasks, String taskInfo) throws DukeInvalidCommandException{
+    public void handleToDo(TaskList tasks, String taskInfo) throws DukeInvalidCommandException {
         if (taskInfo.trim().equals("todo")) {
             throw new DukeInvalidCommandException("The command is incomplete handsome :D");
         }
@@ -150,10 +156,11 @@ public class Command {
     /**
      * Adds deadline task to list of tasks.
      *
-     * @param tasks  List of user's tasks.
-     * @param taskInfo  Description of deadline task.
+     * @param tasks    List of user's tasks.
+     * @param taskInfo Description of deadline task.
      */
-    public void handleDeadLine(TaskList tasks, String taskInfo) throws DukeInvalidCommandException, DukeDateTimeParseException{
+    public void handleDeadLine(TaskList tasks, String taskInfo)
+        throws DukeInvalidCommandException, DukeDateTimeParseException {
         taskInfo = taskInfo.replace("deadline", "");
         String[] stringArr = taskInfo.split("/by", 2);
         if (stringArr.length != 2) {
@@ -167,10 +174,11 @@ public class Command {
     /**
      * Adds event task to list of tasks.
      *
-     * @param tasks  List of user's tasks.
-     * @param taskInfo  Description of event task.
+     * @param tasks    List of user's tasks.
+     * @param taskInfo Description of event task.
      */
-    public void handleEvent(TaskList tasks, String taskInfo) throws DukeInvalidCommandException, DukeDateTimeParseException{
+    public void handleEvent(TaskList tasks, String taskInfo)
+        throws DukeInvalidCommandException, DukeDateTimeParseException {
         taskInfo = taskInfo.replace("event", "");
         String[] stringArr = taskInfo.split("/at", 2);
         if (stringArr.length != 2) {
@@ -184,15 +192,15 @@ public class Command {
     /**
      * Prints out the task if user input matches any word from task.
      *
-     * @param tasks  List of user's tasks.
-     * @param taskInfo  Description of todos task.
+     * @param tasks    List of user's tasks.
+     * @param taskInfo Description of todos task.
      * @return True if user input matches any word from any task in tasks list.
      */
     public boolean foundMatchingTasks(TaskList tasks, String taskInfo) {
         boolean matched = false;
         String[] taskInfos = taskInfo.trim().split(" ");
         List<Task> matchList = tasks.returnMatchingTasks(taskInfos);
-        for(int i = 0; i < matchList.size(); i++) {
+        for (int i = 0; i < matchList.size(); i++) {
             if (i == 0) {
                 System.out.println("\tHere are the matching tasks in your list:");
             }
