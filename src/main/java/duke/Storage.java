@@ -53,7 +53,7 @@ public class Storage {
             checkIfSaveFileExists();
             this.listFromFile = loadListFromFile();
         } catch (DukeException e) {
-            e.printStackTrace(System.out);
+            System.out.println(e.getMessage());
             this.listFromFile = resetSaveFile();
         }
     }
@@ -154,7 +154,7 @@ public class Storage {
                 this.saveToFile(newList);
                 Ui.greet();
             } catch (DukeException e1) {
-                e1.printStackTrace(System.out);
+                System.out.println(e1);
             }
             return newList;
         } else {

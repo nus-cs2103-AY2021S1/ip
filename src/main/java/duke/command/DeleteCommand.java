@@ -33,7 +33,7 @@ public class DeleteCommand extends AbstractModifyTaskCommand {
             Ui.printSuccess("delete", task, tasks.size());
             storage.saveToFile(tasks);
         } catch (DukeException e) {
-            e.printStackTrace(System.out);
+            System.out.println(e.getMessage());
             DukeException.tryAgain();
         }
     }

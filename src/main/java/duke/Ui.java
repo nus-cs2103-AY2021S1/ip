@@ -1,5 +1,7 @@
 package duke;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
@@ -14,6 +16,7 @@ public class Ui {
     protected static boolean isRunning = true;
     protected final TaskListHandler handler;
     protected final Storage storage;
+    protected static String logo;
 
     /**
      * Initializes the Ui with the task list and storage.
@@ -50,7 +53,7 @@ public class Ui {
                 // Encounter end of file, terminate
                 isRunning = false;
             } catch (DukeException e) {
-                e.printStackTrace(System.out);
+                System.out.println(e.getMessage());
                 DukeException.tryAgain();
             }
         }
@@ -60,16 +63,14 @@ public class Ui {
      * Draws the top border of the chatbot's response.
      */
     public static void drawTopBorder() {
-        System.out.println(" ______________________________________________________________ ");
-        System.out.println("*                                                              *");
+        System.out.println("___________________________________");
     }
 
     /**
      * Draws the bottom border of the chatbot's response.
      */
     public static void drawBottomBorder() {
-        System.out.println();
-        System.out.println("*______________________________________________________________*");
+        System.out.println("___________________________________");
 
     }
 
@@ -118,28 +119,31 @@ public class Ui {
      */
     public static void greet() {
         drawTopBorder();
-        String logo = "\n"
-            + "     ___              ___                  \n"
-            + "    (   )            (   )                 \n"
-            + "  .-.| |   ___  ___   | |   ___     .--.   \n"
-            + " /   \\ |  (   )(   )  | |  (   )   /    \\  \n"
-            + "|  .-. |   | |  | |   | |  ' /    |  .-. ; \n"
-            + "| |  | |   | |  | |   | |,' /     |  | | | \n"
-            + "| |  | |   | |  | |   | .  '.     |  |/  | \n"
-            + "| |  | |   | |  | |   | | `. \\    |  ' _.' \n"
-            + "| '  | |   | |  ; '   | |   \\ \\   |  .'.-. \n"
-            + "' `-'  /   ' `-'  /   | |    \\ .  '  `-' / \n"
-            + " `.__,'     '.__.'   (___ ) (___)  `.__.'  \n"
-            + "                                           \n"
-            + "                                           \n";
-        System.out.println(logo);
-        String greeting = "Hey! I'm Duke the chatbot!";
-        String doForYou = "What can I do for you?";
-        indent(1);
-        System.out.println(greeting);
-        indent(1);
-        System.out.println(doForYou);
+        System.out.println(getGreeting());
         drawBottomBorder();
     }
 
+    public static String getGreeting() {
+        setLogo();
+        String greeting = "    Hey! I'm Duke the chatbot!";
+        String doForYou = "    What can I do for you?";
+        return logo + "\n" + greeting + "\n" + doForYou;
+    }
+
+    public static void setLogo() {
+        logo = "\n" +
+            "     ___              ___                  \n" +
+            "    (   )            (   )                 \n" +
+            "  .-.| |   ___  ___   | |   ___     .--.   \n" +
+            " /   \\ |  (   )(   )  | |  (   )   /    \\  \n" +
+            "|  .-. |   | |  | |   | |  ' /    |  .-. ; \n" +
+            "| |  | |   | |  | |   | |,' /     |  | | | \n" +
+            "| |  | |   | |  | |   | .  '.     |  |/  | \n" +
+            "| |  | |   | |  | |   | | `. \\    |  ' _.' \n" +
+            "| '  | |   | |  ; '   | |   \\ \\   |  .'.-. \n" +
+            "' `-'  /   ' `-'  /   | |    \\ .  '  `-' / \n" +
+            " `.__,'     '.__.'   (___ ) (___)  `.__.'  \n" +
+            "                                           \n" +
+            "                                           \n";
+    }
 }

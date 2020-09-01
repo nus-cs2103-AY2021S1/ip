@@ -34,7 +34,7 @@ public abstract class AddAbstractTaskCommand extends Command {
             Ui.printSuccess("add", newTask, taskList.size());
             storage.saveToFile(taskList);
         } catch (DukeException e) {
-            e.printStackTrace(System.out);
+            System.out.println(e.getMessage());
             DukeException.tryAgain();
         }
     }
