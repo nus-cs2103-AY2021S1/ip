@@ -11,19 +11,23 @@ import java.util.List;
 
 
 /**
- * Finds tasks that contain a given keyword when executed.
+ * Command that finds tasks that contain a given keyword when executed.
  */
 public class FindCommand extends Command{
     /** Keyword to be searched for */
     private final String description;
 
     /**
-     * Public constructor.
+     * Public constructor. Removes whitespaces of <code>description</code>
+     * when assigning to class variable, and converts keyword to lower case
+     * for simplicity.
      *
      * @param description Keyword that user wants to search for amongst tasks.
      */
     public FindCommand(String description) {
-        this.description = description;
+        this.description = description.
+            replaceAll("\\s","").
+            toLowerCase();
     }
 
     @Override
@@ -32,8 +36,7 @@ public class FindCommand extends Command{
 
         for (int i = 1; i <= tasks.getListLength(); i++) {
             Task task = tasks.getTask(i);
-            System.out.println(task.getTaskName());
-            if (task.getTaskName().contains(this.description)) {
+            if (task.getTaskName().toLowerCase().contains(this.description)) {
                 resultList.add(task);
             }
         }
