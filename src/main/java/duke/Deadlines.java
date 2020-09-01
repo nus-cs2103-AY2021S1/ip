@@ -66,9 +66,9 @@ public class Deadlines extends Task {
     @Override
     public String toString() {
         if (super.isDone) {
-            return "[D]" + "[" + "✓" + "] " + super.getName() + "(by: " + printDateTime() + ")";
+            return "[D]" + "[" + "C" + "] " + super.getName() + "(by: " + printDateTime() + ")";
         } else {
-            return "[D]" + "[" + "✗" + "] " + super.getName() + "(by: " + printDateTime() + ")";
+            return "[D]" + "[" + "X" + "] " + super.getName() + "(by: " + printDateTime() + ")";
         }
     }
 }
