@@ -1,30 +1,20 @@
-//public class Duke {
-//    public static void main(String[] args) {
-//        String logo = " ____        _        \n"
-//                + "|  _ \\ _   _| | _____ \n"
-//                + "| | | | | | | |/ / _ \\\n"
-//                + "| |_| | |_| |   <  __/\n"
-//                + "|____/ \\__,_|_|\\_\\___|\n";
-//        System.out.println("Hello from\n" + logo);
-//    }
-//}
-import dukeclass.Parser;
-import dukeclass.Storage;
-import dukeclass.Task;
-import dukeclass.TaskList;
-import dukeclass.Ui;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Scanner;
 
+import dukeclass.Parser;
+import dukeclass.Storage;
+import dukeclass.TaskList;
+import dukeclass.Ui;
 
 /**
  * Encapsulates a chat robot that you can chat with to set tasks for yourself.
  */
 public class Duke {
 
+    /**
+     * Duke to be started, create files for storage, run commands and write to files.
+     */
     public static void startDuke() {
         TaskList taskList = new TaskList();
 
@@ -60,6 +50,9 @@ public class Duke {
 
     }
 
+    /**
+     * Main method to start Duke
+     */
     public static void main(String[] args) throws FileNotFoundException {
 
         Duke.startDuke();
