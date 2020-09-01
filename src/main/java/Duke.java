@@ -1,4 +1,6 @@
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.PrintStream;
 
 public class Duke {
     private Storage storage;
@@ -38,11 +40,23 @@ public class Duke {
     }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Get reply from Duke.
      */
     public String getResponse(String input) {
-        return "Duke heard: " + input;
+        ByteArrayOutputStream formattedOutput = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(formattedOutput));
+
+        try {
+            Command c = Parser.parse(input);
+            c.execute(tasks, ui, storage);
+        } catch (DukeException e) {
+            ui.showError(e.getMessage());
+        }
+        String reply = formattedOutput.toString();
+
+        reply = reply.trim();
+        System.setOut(System.out);
+        return reply;
     }
 
     /**
