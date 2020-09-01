@@ -1,8 +1,14 @@
 package duke;
 
-
-import duke.command.*;
+import duke.command.AddDeadlineCommand;
+import duke.command.AddEventCommand;
+import duke.command.AddTodoCommand;
+import duke.command.Command;
+import duke.command.CompleteTaskCommand;
+import duke.command.DeleteTaskCommand;
+import duke.command.ExitCommand;
 import duke.command.FindTaskCommand;
+import duke.command.ShowListCommand;
 
 /**
  * Parser class that deals with making sense of the user command
@@ -10,13 +16,14 @@ import duke.command.FindTaskCommand;
 public class Parser {
 
     /**
-     * Static method that takes in the user's command and return a Command object. If no command matches, it will throw a DukeException
+     * Static method that takes in the user's command and return a Command object.
+     * If no command matches, it will throw a DukeException
      *
      * @param command input from the user
      * @return a Command object
      */
     public static Command parse(String command) throws DukeException {
-        String arr[] = command.split(" ");
+        String[] arr = command.split(" ");
         String keyWord = arr[0];
 
         if (keyWord.equals("bye")) {

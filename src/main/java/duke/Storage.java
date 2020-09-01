@@ -1,20 +1,24 @@
 package duke;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 
-import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Storage class that deals with loading tasks from the file and saving tasks in the file.
  */
 public class Storage {
-    private final String dir_path = "data";
-    private final String txt_path = "data/duke.txt";
+    private final String dirPath = "data";
+    private final String txtPath = "data/duke.txt";
     private String path;
 
     /**
@@ -35,10 +39,10 @@ public class Storage {
      * Method that creates a new folder at the root directory if there isn't one
      */
     private void createFolder() throws IOException {
-        File dir_folder = new File(dir_path);
-        File txt = new File(txt_path);
-        if (!dir_folder.exists()) {
-            dir_folder.mkdir();
+        File dirFolder = new File(dirPath);
+        File txt = new File(txtPath);
+        if (!dirFolder.exists()) {
+            dirFolder.mkdir();
         }
         if (!txt.exists()) {
             txt.createNewFile();
@@ -54,7 +58,7 @@ public class Storage {
         List<Task> list = new ArrayList<>();
 
         try {
-            File file = new File(txt_path);
+            File file = new File(txtPath);
             FileReader fr = new FileReader(file);
             BufferedReader br = new BufferedReader(fr);
             String line;
@@ -85,7 +89,7 @@ public class Storage {
      * @param task task in a String format
      */
     public void addTask(String task) throws IOException {
-        File file = new File(txt_path);
+        File file = new File(txtPath);
         FileWriter writer = new FileWriter(file, true);
         writer.write(task);
         writer.write('\n');
@@ -99,24 +103,24 @@ public class Storage {
      * @param number index of the Task to be completed
      */
     public void completeTask(int number) throws IOException {
-        File file = new File(txt_path);
+        File file = new File(txtPath);
         FileReader fr = new FileReader(file);
         BufferedReader br = new BufferedReader(fr);
         String line;
-        int line_no = 0;
-        String final_line = "";
+        int lineNo = 0;
+        String finalLine = "";
         while ((line = br.readLine()) != null) {
-            line_no += 1;
-            if (line_no == number) {
+            lineNo += 1;
+            if (lineNo == number) {
                 StringBuilder updated = new StringBuilder(line);
                 updated.setCharAt(2, '1');
-                final_line += updated + "\n";
+                finalLine += updated + "\n";
             } else {
-                final_line += line + "\n";
+                finalLine += line + "\n";
             }
         }
         FileWriter writer = new FileWriter(file, false);
-        writer.write(final_line);
+        writer.write(finalLine);
         writer.flush();
         writer.close();
     }
@@ -127,22 +131,22 @@ public class Storage {
      * @param number index of the Task to be deleted
      */
     public void deleteTask(int number) throws IOException {
-        File file = new File(txt_path);
+        File file = new File(txtPath);
         FileReader fr = new FileReader(file);
         BufferedReader br = new BufferedReader(fr);
         String line;
-        int line_no = 0;
-        String final_line = "";
+        int lineNo = 0;
+        String finalLine = "";
         while ((line = br.readLine()) != null) {
-            line_no += 1;
-            if (line_no == number) {
+            lineNo += 1;
+            if (lineNo == number) {
                 continue;
             } else {
-                final_line += line + "\n";
+                finalLine += line + "\n";
             }
         }
         FileWriter writer = new FileWriter(file, false);
-        writer.write(final_line);
+        writer.write(finalLine);
         writer.flush();
         writer.close();
     }

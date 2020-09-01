@@ -1,11 +1,13 @@
 package duke.command;
 
+import java.io.IOException;
+
 import duke.DukeException;
 import duke.Storage;
 import duke.Ui;
 import duke.task.TaskList;
 
-import java.io.IOException;
+
 
 /**
  * CompleteTaskCommand class that represents complete task commands
@@ -30,12 +32,13 @@ public class CompleteTaskCommand extends Command {
      */
     public void execute(TaskList list, Ui ui, Storage saveData) {
         try {
-            if (this.command.trim().length() == 4) {
+            if (this.getCommand().trim().length() == 4) {
                 throw new DukeException("☹ OOPS!!! Check done formatting, include which task to complete.");
-            } else if (Character.getNumericValue(this.command.charAt(5)) > list.size() || Character.getNumericValue(this.command.charAt(5)) == 0) {
+            } else if (Character.getNumericValue(this.getCommand().charAt(5)) > list.size()
+                    || Character.getNumericValue(this.getCommand().charAt(5)) == 0) {
                 throw new DukeException("☹ OOPS!!! Task not in the list");
             }
-            int index = Character.getNumericValue(this.command.charAt(5));
+            int index = Character.getNumericValue(this.getCommand().charAt(5));
             list.get(index - 1).markAsDone();
             ui.saySomthing("Nice! I've marked this task as done:\n" + list.get(index - 1).toString());
             saveData.completeTask(index);
@@ -51,6 +54,6 @@ public class CompleteTaskCommand extends Command {
      */
     @Override
     public boolean isExit() {
-        return isExit;
+        return getIsExit();
     }
 }

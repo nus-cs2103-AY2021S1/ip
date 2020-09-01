@@ -8,8 +8,8 @@ import duke.task.TaskList;
  * Command abstract class that represents specific commands
  */
 public abstract class Command {
-    boolean isExit;
-    String command;
+    private boolean isExit;
+    private String command;
 
     /**
      * Command Abstract Class constructor
@@ -22,6 +22,23 @@ public abstract class Command {
     }
 
     /**
+     * Getter function that return isExit attribute
+     *
+     * @return isExit
+     */
+    boolean getIsExit() {
+        return this.isExit;
+    }
+
+    /**
+     * Getter function that return command attribute
+     *
+     * @return command
+     */
+    String getCommand() {
+        return this.command;
+    }
+    /**
      * Method that execute the current Command object
      *
      * @param list     TaskList object from the current Duke instance
@@ -31,8 +48,6 @@ public abstract class Command {
     public void execute(TaskList list, Ui ui, Storage saveData) {
     }
 
-    ;
-
     /**
      * Method that return isExit of the current Command
      *
@@ -41,6 +56,4 @@ public abstract class Command {
     public boolean isExit() {
         return isExit;
     }
-
-    ;
 }

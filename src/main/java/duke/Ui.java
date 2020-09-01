@@ -1,8 +1,10 @@
 package duke;
 
+import java.util.Scanner;
+
 import duke.task.TaskList;
 
-import java.util.Scanner;
+
 
 /**
  * UI class that deals with interactions with the user.

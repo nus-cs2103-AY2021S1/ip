@@ -1,13 +1,14 @@
 package duke.command;
 
 
+import java.io.IOException;
+
 import duke.DukeException;
 import duke.Storage;
 import duke.Ui;
 import duke.task.Event;
 import duke.task.TaskList;
 
-import java.io.IOException;
 
 /**
  * AddEventCommand class that represents add event commands
@@ -32,18 +33,19 @@ public class AddEventCommand extends Command {
      */
     public void execute(TaskList list, Ui ui, Storage saveData) {
         try {
-            if (this.command.trim().length() == 5) {
+            if (this.getCommand().trim().length() == 5) {
                 throw new DukeException("☹ OOPS!!! Check event formatting, include description and /at.");
-            } else if (!this.command.contains("/at")) {
+            } else if (!this.getCommand().contains("/at")) {
                 throw new DukeException("☹ OOPS!!! Check event formatting, include /at.");
             }
-            String holder[] = this.command.split("event")[1].split("/at ");
+            String[] holder = this.getCommand().split("event")[1].split("/at ");
             String description = holder[0].trim();
             String at = holder[1].trim();
             Event task = new Event(description, at);
 
             list.add(task);
-            ui.saySomthing("Got it. I've added this task:\n" + task.toString() + "\n" + String.format("Now you have %d tasks in the list.", list.size()));
+            ui.saySomthing("Got it. I've added this task:\n" + task.toString()
+                    + "\n" + String.format("Now you have %d tasks in the list.", list.size()));
 
             String save = "E>0>" + description + ">" + at;
             saveData.addTask(save);
@@ -59,7 +61,7 @@ public class AddEventCommand extends Command {
      */
     @Override
     public boolean isExit() {
-        return isExit;
+        return getIsExit();
     }
 
 }

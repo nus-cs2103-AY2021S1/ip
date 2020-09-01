@@ -1,7 +1,11 @@
 package duke;
 
-import duke.DukeException;
-import duke.Parser;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
+
+import org.junit.jupiter.api.Test;
+
 import duke.command.Command;
 import duke.command.ExitCommand;
 import duke.command.ShowListCommand;
@@ -9,9 +13,7 @@ import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.TaskList;
 import duke.task.Todo;
-import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
 
 
 public class DukeTest {
@@ -84,6 +86,4 @@ public class DukeTest {
         Command c = Parser.parse("bye");
         assertTrue(c instanceof ExitCommand);
     }
-
-
 }

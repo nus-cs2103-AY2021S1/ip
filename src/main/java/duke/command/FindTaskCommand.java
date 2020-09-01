@@ -28,10 +28,10 @@ public class FindTaskCommand extends Command {
      */
     public void execute(TaskList list, Ui ui, Storage saveData) {
         try {
-            if (this.command.trim().length() == 4) {
+            if (this.getCommand().trim().length() == 4) {
                 throw new DukeException("☹ OOPS!!! Check find formatting, include keyword");
             }
-            String keyword = this.command.substring(5);
+            String keyword = this.getCommand().substring(5);
             TaskList searchedList = new TaskList();
             for (int i = 0; i < list.size(); i++) {
                 if (list.get(i).getDescription().contains(keyword)) {
@@ -51,6 +51,6 @@ public class FindTaskCommand extends Command {
      */
     @Override
     public boolean isExit() {
-        return isExit;
+        return getIsExit();
     }
 }
