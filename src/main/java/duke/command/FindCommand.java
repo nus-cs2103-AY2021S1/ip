@@ -32,4 +32,16 @@ public class FindCommand extends Command {
         }
         ui.printFoundTask(finding);
     }
+
+    @Override
+    public String executeChat(TaskList list, Ui ui, Storage storage) {
+        TaskList finding = new TaskList();
+        String keyWord = command.substring(5);
+        for (Task t : list.getList()) {
+            if (t.getDescription().contains(keyWord)) {
+                finding.add(t);
+            }
+        }
+        return ui.printFoundTask(finding, true);
+    }
 }

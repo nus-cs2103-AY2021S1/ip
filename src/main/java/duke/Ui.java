@@ -25,8 +25,24 @@ public class Ui {
     /**
      * Displays an indicator that the list is about to be shown
      */
-    public static void tasks() {
+    public static void tasks(TaskList list) {
         System.out.println("        Here are the tasks in your list:");
+        int counter = 1;
+        for (Task t : list.getList()) {
+            System.out.println("        " + counter + "." + t.toString());
+            counter++;
+        }
+    }
+
+    public static String tasks(TaskList list, boolean isChat) {
+        String string1 = "Here are the tasks in your list:\n";
+        String string2 = "";
+        int counter = 1;
+        for (Task t : list.getList()) {
+            string2 += counter + "." + t.toString() + "\n";
+            counter++;
+        }
+        return string1 + string2;
     }
 
     /**
@@ -39,11 +55,16 @@ public class Ui {
         System.out.println("------------------------------------------------------");
     }
 
+
     /**
      * Displays a goodbye message.
      */
     public static void finish() {
         System.out.println("        Bye have a good day!");
+    }
+
+    public static String finish(boolean isChat) {
+        return "Bye have a good day!";
     }
 
     /**
@@ -57,6 +78,13 @@ public class Ui {
         System.out.println("        you now have " + listSize + " tasks on the list");
     }
 
+    public static String deleteMessage(String deleted, int listSize, boolean isChat) {
+        String string1 = "\nNoted I've removed this task\n";
+        String string2 = deleted + "\n";
+        String string3 = "you now have " + listSize + " tasks on the list";
+        return string1 + string2 + string3;
+    }
+
     /**
      * Displays to the user the task that has been added.
      * @param task the added task
@@ -66,6 +94,13 @@ public class Ui {
         System.out.println("        Got it I have added this task:");
         System.out.println("        " + task.toString());
         System.out.println("        you now have " + listSize + " tasks on the list");
+    }
+
+    public static String addedTaskMessage(Task task, int listSize, boolean isChat) {
+        String string1 = "\nGot it I have added this task:\n";
+        String string2 = task.toString() + "\n";
+        String string3 = "you now have " + listSize + " tasks on the list";
+        return string1 + string2 + string3;
     }
 
     /**
@@ -78,6 +113,12 @@ public class Ui {
         System.out.println("        [" + isDone + "] " + description);
     }
 
+    public static String doneMessage(boolean isDone, String description, boolean isChat) {
+        String string1 = "\nI have marked this as done:\n";
+        String string2 = "[" + isDone + "] " + description + "\n";
+        return string1 + string2;
+    }
+
     /**
      * Displays to the user a list of all the tasks which watch the given phrase.
      * @param list a new condensed list which match the phrase
@@ -87,5 +128,14 @@ public class Ui {
         for (Task t : list.getList()) {
             System.out.println("        " + t.toString());
         }
+    }
+
+    public static String printFoundTask(TaskList list, boolean isChat) {
+        String string1 = ("I have found these matching tasks in your list:");
+        String fullList = "";
+        for (Task t : list.getList()) {
+            fullList += t.toString() + "\n";
+        }
+        return fullList;
     }
 }

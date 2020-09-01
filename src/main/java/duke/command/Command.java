@@ -24,4 +24,6 @@ public abstract class Command {
      * @param storage Storage of tasks in a txt file.
      */
     public abstract void execute(TaskList list, Ui ui, Storage storage);
+
+    public abstract String executeChat(TaskList list, Ui ui, Storage storage);
 }

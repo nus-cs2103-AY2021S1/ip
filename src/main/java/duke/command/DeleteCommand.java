@@ -46,4 +46,18 @@ public class DeleteCommand extends Command {
             ui.errorEncounter(e);
         }
     }
+
+    @Override
+    public String executeChat(TaskList list, Ui ui, Storage storage) {
+        try {
+            if (num < 0 || num > list.size()) {
+                return "☹ OOPS!!! there is no such task";
+            } else {
+            Task deleted = list.delete(num - 1);
+            storage.deleteTask(num);
+            return ui.deleteMessage(deleted.toString(), list.size(), true);
+        } }catch (IOException e) {
+            return e.getMessage();
+        }
+    }
 }

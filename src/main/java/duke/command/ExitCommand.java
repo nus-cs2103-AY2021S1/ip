@@ -22,4 +22,9 @@ public class ExitCommand extends Command {
     public void execute(TaskList list, Ui ui, Storage storage) {
         ui.finish();
     }
+
+    @Override
+    public String executeChat(TaskList list, Ui ui, Storage storage) {
+        return ui.finish(true);
+    }
 }

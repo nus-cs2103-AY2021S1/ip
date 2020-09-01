@@ -17,16 +17,6 @@ public class TaskList {
         this.list = list;
     }
 
-    /**
-     * Displays all the tasks that the user has
-     */
-    public void showTasks() {
-        int counter = 1;
-        for (Task t : list) {
-            System.out.println("        " + counter + "." + t.toString());
-            counter++;
-        }
-    }
 
     public void add(Task task) {
         list.add(task);

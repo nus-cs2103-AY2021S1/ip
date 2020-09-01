@@ -23,7 +23,11 @@ public class ListCommand extends Command {
      * @param storage Storage of tasks in a txt file.
      */
     public void execute(TaskList list, Ui ui, Storage storage) {
-        ui.tasks();
-        list.showTasks();
+        ui.tasks(list);
+    }
+
+    @Override
+    public String executeChat(TaskList list, Ui ui, Storage storage) {
+        return ui.tasks(list, true);
     }
 }

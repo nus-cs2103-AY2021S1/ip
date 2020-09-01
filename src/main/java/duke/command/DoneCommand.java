@@ -46,4 +46,20 @@ public class DoneCommand extends Command {
             ui.errorEncounter(e);
         }
     }
+
+    @Override
+    public String executeChat(TaskList list, Ui ui, Storage storage) {
+        try {
+            if (num <= list.size()) {
+                Task current = list.get(num - 1);
+                current.markAsDone();
+                storage.editFile(num - 1);
+                return ui.doneMessage(current.getDone(), current.getDescription(), true);
+            } else {
+                throw new DukeException("☹ OOPS!!! there is no such task");
+            }
+        } catch (DukeException | IOException e) {
+            return e.getMessage();
+        }
+    }
 }
