@@ -28,9 +28,9 @@ public class LocalDateTimeAdapter implements JsonSerializer<LocalDateTime>, Json
      * {@code src} object itself since that will cause an infinite loop (Gson will call your
      * call-back method again).</p>
      *
-     * @param src       the object that needs to be converted to Json.
+     * @param src the object that needs to be converted to Json.
      * @param typeOfSrc the actual type (fully genericized version) of the source object.
-     * @param context
+     * @param context the context for serialization.
      * @return a JsonElement corresponding to the specified object.
      */
     @Override
@@ -48,11 +48,11 @@ public class LocalDateTimeAdapter implements JsonSerializer<LocalDateTime>, Json
      * the same type passing {@code json} since that will cause an infinite loop (Gson will call your
      * call-back method again).
      *
-     * @param json    The Json data being deserialized
-     * @param typeOfT The type of the Object to deserialize to
-     * @param context
-     * @return a deserialized object of the specified type typeOfT which is a subclass of {@code T}
-     * @throws JsonParseException if json is not in the expected format of {@code typeofT}
+     * @param json the Json data being deserialized.
+     * @param typeOfT the type of the Object to deserialize to.
+     * @param context the context for deserialization.
+     * @return a deserialized object of the specified type typeOfT which is a subclass of {@code T}.
+     * @throws JsonParseException if json is not in the expected format of {@code typeofT}.
      */
     @Override
     public LocalDateTime deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)

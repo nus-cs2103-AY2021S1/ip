@@ -55,7 +55,7 @@ public class TaskManager {
     }
 
     /**
-     * Mark a {@code Task} as done.
+     * Marks a {@code Task} as done.
      *
      * @param listIndex the index of the {@code Task} in the {@code TaskManager} list.
      * @return a string representation of the action of marking a {@code Task} as done.

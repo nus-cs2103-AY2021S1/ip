@@ -1,13 +1,12 @@
 package duke;
 
-import duke.utils.ResourceHandler;
-
 import java.io.FileDescriptor;
 import java.io.FileOutputStream;
 import java.io.PrintStream;
 import java.io.UnsupportedEncodingException;
 import java.text.MessageFormat;
 
+import duke.utils.ResourceHandler;
 import javafx.application.Application;
 
 /**

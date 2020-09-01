@@ -1,11 +1,8 @@
 package duke.controllers;
 
 import duke.Repl;
-
 import duke.messages.DukeResponse;
-
 import duke.utils.ResourceHandler;
-
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.BooleanBinding;
 import javafx.fxml.FXML;

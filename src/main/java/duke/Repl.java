@@ -28,7 +28,7 @@ public class Repl {
     private static final Scanner scanner = new Scanner(System.in);
     /** {@code PrettyPrinter} object for formatting the REPL output. */
     private static final PrettyPrinter prettyPrinter = new PrettyPrinter(LEFT_PADDING_SIZE, DIVIDER_LENGTH);
-    /** {@code TaskManager} object to keep track of tasks */
+    /** {@code TaskManager} object to keep track of tasks. */
     private static final TaskManager taskManager = new TaskManager();
 
     /**
@@ -131,7 +131,9 @@ public class Repl {
             case UPCOMING: {
                 response = taskManager.getUpcomingTasks();
                 break;
-            } // I'm aware that this bracket looks very weird; you can thank the CS2103T style guide for this.
+            }
+            default:
+                break;
             }
         } catch (DukeException e) {
             response = e.getMessage();
