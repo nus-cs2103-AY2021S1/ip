@@ -7,9 +7,9 @@ public class TaskListTest {
 
     public TaskList setup() {
         TaskList taskList = new TaskList();
-        taskList.addTask("Task 1");
-        taskList.addTask("Task 2");
-        taskList.addTask("Task 3");
+        taskList.addTodo("Task 1");
+        taskList.addTodo("Task 2");
+        taskList.addTodo("Task 3");
         return taskList;
     }
 
@@ -17,7 +17,7 @@ public class TaskListTest {
     public void addTask_addTodo_todoAdded() {
         TaskList taskList = setup();
 
-        Task added = taskList.addTask("New Todo");
+        Task added = taskList.addTodo("New Todo");
         assert taskList.getList().contains(added);
     }
 
@@ -25,7 +25,7 @@ public class TaskListTest {
     public void deleteTask_deleteTaskInList_taskDeleted() {
         TaskList taskList = setup(); // 3 Tasks in list
 
-        Task temp = taskList.addTask("Temp Task");
+        Task temp = taskList.addTodo("Temp Task");
         boolean added = taskList.getList().contains(temp);
         try {
             taskList.deleteTask(4);

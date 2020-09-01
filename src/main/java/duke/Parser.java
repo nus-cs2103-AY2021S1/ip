@@ -43,17 +43,17 @@ public class Parser {
                 if (inputSplits.length < 2) {
                     throw new DukeException("The description of a todo cannot be empty");
                 }
-                ui.writeAdd(taskList.addTask(inputSplits[1]), taskList.getSize());
+                ui.writeAdd(taskList.addTodo(inputSplits[1]), taskList.getSize());
             } else if (Command.DEADLINE.check(inputSplits[0])) {
                 if (inputSplits.length < 2) {
                     throw new DukeException("The description of a deadline cannot be empty");
                 }
-                ui.writeAdd(taskList.addTask(inputSplits[1], false), taskList.getSize());
+                ui.writeAdd(taskList.addDDLTask(inputSplits[1], false), taskList.getSize());
             } else if (Command.EVENT.check(inputSplits[0])) {
                 if (inputSplits.length < 2) {
                     throw new DukeException("The description of an event cannot be empty");
                 }
-                ui.writeAdd(taskList.addTask(inputSplits[1], true), taskList.getSize());
+                ui.writeAdd(taskList.addDDLTask(inputSplits[1], true), taskList.getSize());
             } else if (Command.DONE.check(inputSplits[0])) {
                 if (inputSplits.length < 2) {
                     throw new DukeException("Task number cannot be empty");

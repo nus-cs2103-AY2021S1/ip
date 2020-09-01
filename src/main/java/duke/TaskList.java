@@ -1,10 +1,7 @@
 package duke;
 
 import duke.commands.Command;
-import duke.tasks.Deadline;
-import duke.tasks.Event;
-import duke.tasks.Task;
-import duke.tasks.Todo;
+import duke.tasks.*;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
@@ -62,11 +59,11 @@ public class TaskList {
         String[] lineSplit = line.split("\\|");
         boolean done = lineSplit[2].equals("1");
         if (lineSplit[0].equals("T")) {
-            addTask(lineSplit[1], 1, "", done);
+            addTask(lineSplit[1], TaskType.TODO, "", done);
         } else if (lineSplit[0].equals("D")) {
-            addTask(lineSplit[1], 2, lineSplit[3], done);
+            addTask(lineSplit[1], TaskType.DEADLINE, lineSplit[3], done);
         } else {
-            addTask(lineSplit[1], 3, lineSplit[3], done);
+            addTask(lineSplit[1], TaskType.EVENT, lineSplit[3], done);
         }
     }
 
@@ -78,11 +75,11 @@ public class TaskList {
      * @param ddl Task deadline
      * @param done whether task has been marked done
      */
-    private void addTask(String task, int type, String ddl, boolean done) {
+    private void addTask(String task, TaskType type, String ddl, boolean done) {
         Task newTask;
-        if (type == 1) {
+        if (type == TaskType.TODO) {
             newTask = new Todo(task);
-        } else if (type == 2) {
+        } else if (type == TaskType.DEADLINE) {
             newTask = new Deadline(task, LocalDate.parse(ddl));
         } else {
             newTask = new Event(task, LocalDate.parse(ddl));
@@ -100,7 +97,7 @@ public class TaskList {
      * @param task Todo name
      * @return Task object added
      */
-    public Task addTask(String task) {
+    public Task addTodo(String task) {
         return addTask(new Todo(task));
     }
 
@@ -112,7 +109,7 @@ public class TaskList {
      * @return Task object added
      * @throws DukeException Duke-related exception due to erroneous inputs
      */
-    public Task addTask(String taskAttr, boolean isEvent) throws DukeException {
+    public Task addDDLTask(String taskAttr, boolean isEvent) throws DukeException {
         Task newTask;
         String[] taskSplit;
         if (isEvent) {
