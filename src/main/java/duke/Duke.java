@@ -6,8 +6,8 @@ import duke.command.Command;
  * Represents a personalized chat bot where a user can keep track of different tasks.
  */
 public class Duke {
-    private Ui ui;
-    private Storage storage;
+    private final Ui ui;
+    private final Storage storage;
     private TaskList tasks;
 
     /**
@@ -26,7 +26,7 @@ public class Duke {
     }
 
     /**
-     * Executes the chat bot and represents the main driver of the program
+     * Executes the chat bot and represents the main driver of the program.
      */
     public void run() {
         ui.printWelcome();
