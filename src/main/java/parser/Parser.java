@@ -1,5 +1,7 @@
 package parser;
 
+import java.time.LocalDate;
+
 import data.Deadline;
 import data.Events;
 import data.Task;
@@ -14,7 +16,10 @@ import exception.TrackingException;
 
 import storage.Storage;
 
-import java.time.LocalDate;
+
+
+
+
 
 
 /**
@@ -60,9 +65,7 @@ public class Parser {
                 }
                 this.tasks.find(fullInput.substring(5));
 
-            }
-
-            else if (fullInput.startsWith("todo ")) {
+            } else if (fullInput.startsWith("todo ")) {
                 if (fullInput.length() <= 5) {
                     throw new DescriptionException("todo");
                 }
@@ -98,8 +101,8 @@ public class Parser {
                 }
                 String[] dateTime = deadlineString.split("-");
                 // Checks if the date and time are in the correct format.
-                if (dateTime.length != 3 ||
-                    dateTime[0].length() != 4 && dateTime[1].length() != 2 && dateTime[2].length() != 2) {
+                if (dateTime.length != 3
+                    || dateTime[0].length() != 4 && dateTime[1].length() != 2 && dateTime[2].length() != 2) {
                     throw new DateTimeException();
                 }
                 LocalDate by = LocalDate.of(Integer.parseInt(dateTime[0]), Integer.parseInt(dateTime[1]),
@@ -134,8 +137,8 @@ public class Parser {
                 String[] dateTime = atString.split("-");
 
                 // Check if the date and time are in the correct format.
-                if (dateTime.length != 3 ||
-                    dateTime[0].length() != 4 && dateTime[1].length() != 2 && dateTime[2].length() != 2 ) {
+                if (dateTime.length != 3
+                    || dateTime[0].length() != 4 && dateTime[1].length() != 2 && dateTime[2].length() != 2) {
                     throw new DateTimeException();
                 }
                 LocalDate at = LocalDate.of(Integer.parseInt(dateTime[0]), Integer.parseInt(dateTime[1]),
@@ -145,8 +148,8 @@ public class Parser {
                 //Adds task into task list.
                 this.tasks.add(task);
 
-            } else if (fullInput.equals("event") || fullInput.equals("deadline") || fullInput.equals("todo") ||
-                fullInput.equals("done") || fullInput.equals("find")) {
+            } else if (fullInput.equals("event") || fullInput.equals("deadline") || fullInput.equals("todo")
+                || fullInput.equals("done") || fullInput.equals("find")) {
 
                 throw new DescriptionException(fullInput);
             } else {

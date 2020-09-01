@@ -3,7 +3,9 @@ import parser.Parser;
 import storage.Storage;
 import ui.Ui;
 
-
+/**
+ * Encapsulates Duke, a chatbot that manages and stores a task list.
+ */
 public class Duke {
     private String filePath;
     private Storage storage;

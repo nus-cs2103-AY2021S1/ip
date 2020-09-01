@@ -95,6 +95,11 @@ public class TaskList {
         return tasks.size();
     }
 
+    /**
+     * Finds and prints task that contains a substring in the description
+     * @param substring Substring that the task is to contain.
+     */
+
     public void find(String substring) {
         int counter = 1;
         for (int i = 0; i < tasks.size(); i++) {

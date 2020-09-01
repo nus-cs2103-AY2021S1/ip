@@ -1,17 +1,21 @@
-package data;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
+import data.Task;
+import data.TaskList;
+import data.ToDo;
+
+
 
 /**
  * Test the TaskList.
  */
+
 public class TaskListTest {
-    TaskList tasks = new TaskList(new ArrayList<Task>());
+    private TaskList tasks = new TaskList(new ArrayList<Task>());
 
     @Test
     public void getTask_tasksEmpty_nullResult() {

@@ -1,10 +1,22 @@
 package storage;
 
-import data.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 
-import java.io.*;
 import java.time.LocalDate;
+
 import java.util.ArrayList;
+
+import data.Deadline;
+import data.Events;
+import data.Task;
+import data.TaskList;
+import data.ToDo;
+
+
 
 /**
  * Encapsulates a Storage class.
@@ -21,7 +33,10 @@ public class Storage {
     }
 
 
-
+    /**
+     * Loads the task list from the hard drive.
+     * @throws IOException Exception when the file is not able to be created successfully.
+     */
     private void initTaskList() throws IOException {
 
         try {
@@ -36,7 +51,7 @@ public class Storage {
         FileReader fr = new FileReader(file);
         BufferedReader br = new BufferedReader(fr);
         String line;
-        while((line = br.readLine()) != null){
+        while ((line = br.readLine()) != null) {
             //process the line
             Task task;
             char taskType = line.charAt(1);
@@ -92,7 +107,7 @@ public class Storage {
         try { //write the list to file
             FileWriter myWriter = new FileWriter(filePath);
             for (int i = 0; i < tasks.size(); i++) {
-                myWriter.write(tasks.get(i)+ "\n");
+                myWriter.write(tasks.get(i) + "\n");
             }
             myWriter.close();
         } catch (IOException e) {
