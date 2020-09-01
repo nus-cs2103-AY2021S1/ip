@@ -1,6 +1,7 @@
 package main.java.emily.app;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -42,8 +43,7 @@ public class Main extends Application {
         sendButton = new Button("Send");
 
         AnchorPane mainLayout = new AnchorPane();
-        mainLayout.getChildren().addAll(scrollPane, dialogContainer, userInput, sendButton,
-                new DialogBox(getDialogLabel(intro), new ImageView()));
+        mainLayout.getChildren().addAll(scrollPane, dialogContainer, userInput, sendButton);
 
 
         scene = new Scene(mainLayout);
@@ -84,6 +84,12 @@ public class Main extends Application {
 
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
 
+
+        dialogContainer.getChildren().addAll(
+                new DialogBox(getDialogLabel(intro), new ImageView())
+        );
+
+
         // more code to be added here later
         //Part 3. Add functionality to handle user input.
         sendButton.setOnMouseClicked((event) -> {
@@ -117,6 +123,11 @@ public class Main extends Application {
      * Replace this stub with your completed method.
      */
     private String getResponse(String input) {
+
+        if(input.equals("bye")){
+            Platform.exit();
+        }
+
         return "Emily receiving: " + input + "\n"
                 + bot.receiveCommandLine(input);
     }
