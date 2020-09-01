@@ -5,14 +5,6 @@ package bob.common;
  */
 public class Messages {
     public static final String INTRO = "/*----------------- Welcome to BOB -----------------*/\n"
-            + "                   _           _\n"
-            + "                  | |         | |\n"
-            + "                  | |__   ___ | |__\n"
-            + "                  | '_ \\ / _ \\| '_ \\\n"
-            + "                  | |_) | (_) | |_) |\n"
-            + "                  |_.__/ \\___/|_.__/\n"
-            + "            Also known as BERY ORDINARY BOT\n"
-            + "\n"
             + "Hi, my name is BOB.\n"
             + "What can I do for you?";
     public static final String OUTRO = "Good bye boss, see you soon.";
@@ -39,23 +31,5 @@ public class Messages {
     public static final String INVALID_PATHNAME =
             "Couldn't recognise the file name. Please restart Bob with a different file path name.\n";
 
-    public static String genFindMessage(String input) {
-        return "I found these tasks containing \"" + input + "\" in your list.\n";
-    }
 
-    public static String genNoTaskFoundMessage(String input) {
-        return "I can't find any task containing \"" + input + "\" in your list.\n";
-    }
-
-    /**
-     * Generates a ListIndexOutOfBounds error message.
-     * @param totalNoOfTasks Total number of tasks.
-     * @param taskNo Task number.
-     * @param action The command that was supposed to be executed.
-     * @return String message.
-     */
-    public static String genListIndexOutOfBoundsMsgGenerator(int totalNoOfTasks, int taskNo, String action) {
-        return "Erm, you are asking me to " + action + " task " + taskNo + " but there is/are only "
-                + totalNoOfTasks + " tasks. Please enter the correct number instead.";
-    }
 }

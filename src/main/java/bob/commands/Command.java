@@ -7,7 +7,7 @@ import bob.exceptions.BobInvalidDateAndTimeException;
 import bob.exceptions.BobInvalidNumberException;
 import bob.exceptions.BobListIndexOutOfBoundsException;
 import bob.storage.Storage;
-import bob.ui.Ui;
+//import bob.ui.Ui;
 
 
 /**
@@ -16,7 +16,7 @@ import bob.ui.Ui;
 public abstract class Command {
     public abstract boolean isExited();
 
-    public abstract void execute(Tasklist tasks, Ui ui, Storage storage)
+    public abstract String execute(Tasklist tasks, Storage storage)
              throws IOException, BobInvalidDateAndTimeException, BobInvalidNumberException,
              BobListIndexOutOfBoundsException;
 }
