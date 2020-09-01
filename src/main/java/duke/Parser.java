@@ -1,11 +1,21 @@
 package duke;
 
-import duke.commands.Command;
+import duke.commands.*;
+import duke.tasks.TaskType;
 
 /**
  * Class to parse user input and process it.
  */
 public class Parser {
+
+    static final String BYE = "bye";
+    static final String LIST = "list";
+    static final String TODO = "todo";
+    static final String DDL = "deadline";
+    static final String EVENT = "event";
+    static final String DELETE = "delete";
+    static final String DONE = "done";
+    static final String FIND = "find";
 
     TaskList taskList;
     Storage storage;
@@ -13,16 +23,8 @@ public class Parser {
 
     /**
      * Creates a Parser with the given classes.
-     *
-     * @param taskList Class to store and manage tasks
-     * @param storage Class to write task data to disk
-     * @param ui Class to define interface with user
      */
-    public Parser(TaskList taskList, Storage storage, Ui ui) {
-        this.taskList = taskList;
-        this.storage = storage;
-        this.ui = ui;
-    }
+    public Parser() {}
 
     /**
      * Parses and processes the input string.
@@ -31,61 +33,56 @@ public class Parser {
      * @return false if the user exits
      * @throws DukeException Duke-related exception due to erroneous inputs
      */
-    public boolean processInput(String input) throws DukeException {
-        if (Command.BYE.check(input)) {
-            exit();
-            return false;
-        } else if (Command.LIST.check(input)) {
-            ui.writeOutput(taskList.listTasks());
+    public Command processInput(String input) throws DukeException {
+        if (input.equals(BYE)) {
+            return new ExitCommand();
+        } else if (input.equals(LIST)) {
+            return new ListCommand();
         } else {
             String[] inputSplits = input.split(" ", 2);
-            if (Command.TODO.check(inputSplits[0])) {
+            String command = inputSplits[0];
+            switch (command) {
+            case TODO:
                 if (inputSplits.length < 2) {
                     throw new DukeException("The description of a todo cannot be empty");
                 }
-                ui.writeAdd(taskList.addTodo(inputSplits[1]), taskList.getSize());
-            } else if (Command.DEADLINE.check(inputSplits[0])) {
+                return new AddCommand(inputSplits[1], TaskType.TODO);
+            case DDL:
                 if (inputSplits.length < 2) {
                     throw new DukeException("The description of a deadline cannot be empty");
                 }
-                ui.writeAdd(taskList.addDDLTask(inputSplits[1], false), taskList.getSize());
-            } else if (Command.EVENT.check(inputSplits[0])) {
+                return new AddCommand(inputSplits[1], TaskType.DEADLINE);
+            case EVENT:
                 if (inputSplits.length < 2) {
                     throw new DukeException("The description of an event cannot be empty");
                 }
-                ui.writeAdd(taskList.addDDLTask(inputSplits[1], true), taskList.getSize());
-            } else if (Command.DONE.check(inputSplits[0])) {
+                return new AddCommand(inputSplits[1], TaskType.EVENT);
+            case DONE:
                 if (inputSplits.length < 2) {
                     throw new DukeException("Task number cannot be empty");
                 }
                 try {
-                    ui.writeDone(taskList.markDone(Integer.parseInt(inputSplits[1])));
+                    return new DoneCommand(inputSplits[1]);
                 } catch (NumberFormatException ex) {
                     throw new DukeException("Task number must be a valid integer");
                 }
-            } else if (Command.DELETE.check(inputSplits[0])) {
+            case DELETE:
                 if (inputSplits.length < 2) {
                     throw new DukeException("Task number cannot be empty");
                 }
                 try {
-                    ui.writeDelete(taskList.deleteTask(Integer.parseInt(inputSplits[1])), taskList.getSize());
+                    return new DeleteCommand(inputSplits[1]);
                 } catch (NumberFormatException ex) {
                     throw new DukeException("Task number must be a valid integer");
                 }
-            } else if (Command.FIND.check((inputSplits[0]))) {
-                if (inputSplits.length != 2) {
+            case FIND:
+                if (inputSplits.length < 2) {
                     throw new DukeException("Search key cannot be empty");
                 }
-                ui.writeSearch(taskList.findTasks(inputSplits[1]));
-            } else {
-                    throw new DukeException("I'm sorry, but I don't know what that means :(");
+                return new FindCommand(inputSplits[1]);
+            default:
+                throw new DukeException("I'm sorry, but I don't know what that means :(");
             }
-                storage.storeList(taskList.getList());
         }
-        return true;
-    }
-
-    private void exit() {
-        ui.exit();
     }
 }

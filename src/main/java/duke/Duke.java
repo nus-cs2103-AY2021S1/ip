@@ -1,5 +1,7 @@
 package duke;
 
+import duke.commands.Command;
+
 import java.io.IOException;
 import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Path;
@@ -22,6 +24,7 @@ public class Duke {
      */
     public Duke() {
         ui = new Ui();
+        parser = new Parser();
 
         String home = System.getProperty("user.dir");
         Path DIR_PATH = java.nio.file.Paths.get(home, "data");
@@ -46,7 +49,6 @@ public class Duke {
         }
 
         ui.welcome();
-        parser = new Parser(taskList, storage, ui);
     }
 
     public static void main(String[] args) {
@@ -59,11 +61,13 @@ public class Duke {
      */
     public void run() {
         boolean keepGoing = true;
+        Command command;
         String input;
         while (keepGoing) {
             input = ui.readInput();
             try {
-                keepGoing = parser.processInput(input);
+                command = parser.processInput(input);
+                keepGoing = command.run(taskList, storage, ui);
             } catch (DukeException de) {
                 ui.writeOutput(de.getMessage());
             }
