@@ -1,6 +1,6 @@
 package Command;
 
-import TaskList.*;
+import TaskList.TaskList;
 
 /**
  * A class to handle user commands.
@@ -20,5 +20,5 @@ public abstract class Command {
         return type;
     }
 
-    public abstract void act(TaskList list);
+    public abstract String act(TaskList list);
 }

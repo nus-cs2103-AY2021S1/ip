@@ -12,8 +12,8 @@ public class DoneCommand extends Command {
     }
 
     @Override
-    public void act(TaskList list) {
+    public String act(TaskList list) {
         list.setCompleted(whichTask);
-        Ui.doneMessage(list.get(whichTask));
+        return Ui.doneMessage(list.get(whichTask));
     }
 }

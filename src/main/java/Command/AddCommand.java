@@ -13,8 +13,8 @@ public class AddCommand extends Command {
     }
 
     @Override
-    public void act(TaskList list) {
+    public String act(TaskList list) {
         list.addTask(task);
-        Ui.addTaskMessage(task, list.size());
+        return Ui.addTaskMessage(task, list.size());
     }
 }

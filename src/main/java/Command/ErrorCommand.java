@@ -14,18 +14,18 @@ public class ErrorCommand extends Command {
     }
 
     @Override
-    public void act(TaskList list) {
+    public String act(TaskList list) {
         if (e instanceof DukeException) {
             switch (e.getMessage()) {
             case DukeException.EMPTY_TODO:
-                Ui.emptyTodoMessage();
+                return Ui.emptyTodoMessage();
             default:
-                Ui.ignoreMessage();
+                return Ui.ignoreMessage();
             }
         } else if (e instanceof DateTimeParseException) {
-            Ui.dateFormatReminder();
+            return Ui.dateFormatReminder();
         } else {
-            Ui.ignoreMessage();
+            return Ui.ignoreMessage();
         }
     }
 }

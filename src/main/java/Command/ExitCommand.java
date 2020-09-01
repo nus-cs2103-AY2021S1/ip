@@ -9,7 +9,7 @@ public class ExitCommand extends Command{
     }
 
     @Override
-    public void act(TaskList list) {
-        Ui.exitMessage();
+    public String act(TaskList list) {
+        return Ui.exitMessage();
     }
 }

@@ -12,7 +12,7 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public void act(TaskList list) {
-        Ui.deleteMessage(list.remove(whichTask), list.size());
+    public String act(TaskList list) {
+        return Ui.deleteMessage(list.remove(whichTask), list.size());
     }
 }

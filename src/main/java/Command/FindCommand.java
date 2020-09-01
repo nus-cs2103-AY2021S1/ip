@@ -12,7 +12,7 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public void act(TaskList list) {
-        Ui.searchResult(list.find(searchText));
+    public String act(TaskList list) {
+        return Ui.searchResult(list.find(searchText));
     }
 }

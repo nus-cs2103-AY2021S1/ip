@@ -9,7 +9,7 @@ public class ListCommand extends Command{
     }
 
     @Override
-    public void act(TaskList list) {
-        Ui.list(list);
+    public String act(TaskList list) {
+        return Ui.list(list);
     }
 }
