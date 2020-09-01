@@ -29,7 +29,7 @@ test {
 }
 
 application {
-    mainClassName = "Main"
+    mainClassName = "dude.Main"
 }
 
 shadowJar {
