@@ -1,16 +1,11 @@
-package seedu.duke;
+package duke;
 
-import seedu.duke.commands.Command;
-
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.stage.Stage;
+import duke.commands.Command;
 
 /**
  * Represents the main Duke who acts as the user's personal assistant.
  */
-public class Duke extends Application {
+public class Duke {
 
     private Storage storage;
     private TaskList tasks;
@@ -55,12 +50,23 @@ public class Duke extends Application {
         new Duke().run();
     }
 
-    @Override
-    public void start(Stage stage) {
-        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
-        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
-
-        stage.setScene(scene); // Setting the stage to show our screen
-        stage.show(); // Render the stage.
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    public String getResponse(String input) {
+        // return response here
+        try {
+            String fullCommand = ui.readCommand();
+            ui.showLine();
+            Command c = Parser.parse(fullCommand);
+            c.execute(tasks, ui, storage);
+            // isExit = c.isExit();
+        } catch (DukeException e) {
+            ui.showError(e.getMessage());
+        } finally {
+            ui.showLine();
+        }
+        return "Duke heard: " + input;
     }
 }

@@ -1,4 +1,4 @@
-package seedu.duke;
+package duke;
 
 /**
  * Encapsulates all exceptions that are related to Duke.

@@ -1,15 +1,15 @@
-package seedu.duke;
+package duke;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.duke.todo.Task;
-import seedu.duke.todo.Todo;
+import duke.todo.Task;
+import duke.todo.Todo;
 
 public class TaskTest {
     @Test
-    public void markAsDoneTest(){
+    public void markAsDoneTest() {
         Task task = new Todo("borrow book");
         assertEquals("\u2718", task.getStatusIcon()); // cross
         task.markAsDone();

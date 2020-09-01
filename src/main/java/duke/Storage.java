@@ -1,11 +1,11 @@
-package seedu.duke;
+package duke;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
-import seedu.duke.todo.Task;
+import duke.todo.Task;
 
 /**
  * Represents a storage. Allow Duke to read and write to local disk.

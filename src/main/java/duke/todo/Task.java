@@ -1,4 +1,4 @@
-package seedu.duke.todo;
+package duke.todo;
 
 import java.time.LocalDate;
 

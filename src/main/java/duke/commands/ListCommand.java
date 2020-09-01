@@ -1,9 +1,9 @@
-package seedu.duke.commands;
+package duke.commands;
 
-import seedu.duke.TaskList;
-import seedu.duke.Ui;
-import seedu.duke.Storage;
-import seedu.duke.DukeException;
+import duke.DukeException;
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
 
 /**
  * Represents the command to list out all the task.

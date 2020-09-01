@@ -1,21 +1,21 @@
-package seedu.duke;
+package duke;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.regex.Pattern;
 
-import seedu.duke.commands.AddCommand;
-import seedu.duke.commands.Command;
-import seedu.duke.commands.DateCommand;
-import seedu.duke.commands.DeleteCommand;
-import seedu.duke.commands.DoneCommand;
-import seedu.duke.commands.ExitCommand;
-import seedu.duke.commands.FindCommand;
-import seedu.duke.commands.ListCommand;
-import seedu.duke.todo.Deadline;
-import seedu.duke.todo.Event;
-import seedu.duke.todo.Task;
-import seedu.duke.todo.Todo;
+import duke.commands.AddCommand;
+import duke.commands.Command;
+import duke.commands.DateCommand;
+import duke.commands.DeleteCommand;
+import duke.commands.DoneCommand;
+import duke.commands.ExitCommand;
+import duke.commands.FindCommand;
+import duke.commands.ListCommand;
+import duke.todo.Deadline;
+import duke.todo.Event;
+import duke.todo.Task;
+import duke.todo.Todo;
 
 /**
  * Used for parsing strings for Duke project.

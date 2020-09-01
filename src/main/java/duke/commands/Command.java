@@ -1,9 +1,9 @@
-package seedu.duke.commands;
+package duke.commands;
 
-import seedu.duke.DukeException;
-import seedu.duke.Storage;
-import seedu.duke.TaskList;
-import seedu.duke.Ui;
+import duke.DukeException;
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
 
 /**
  * Represents the command given by the user.

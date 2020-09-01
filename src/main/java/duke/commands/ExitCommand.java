@@ -1,8 +1,8 @@
-package seedu.duke.commands;
+package duke.commands;
 
-import seedu.duke.TaskList;
-import seedu.duke.Ui;
-import seedu.duke.Storage;
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
 
 /**
  * Represents the command to exit the program.

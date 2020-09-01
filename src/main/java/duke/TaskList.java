@@ -1,10 +1,10 @@
-package seedu.duke;
+package duke;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
-import seedu.duke.todo.Task;
+import duke.todo.Task;
 
 /**
  * Represents a list of tasks. A task list supports various modifications of the task list.

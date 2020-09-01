@@ -1,4 +1,4 @@
-package seedu.duke.todo;
+package duke.todo;
 
 /**
  * Represent a todo item.

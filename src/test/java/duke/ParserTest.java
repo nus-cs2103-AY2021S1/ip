@@ -1,13 +1,10 @@
-package seedu.duke;
+package duke;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.duke.Parser;
-import seedu.duke.todo.Task;
-
-
+import duke.todo.Task;
 
 public class ParserTest {
     @Test

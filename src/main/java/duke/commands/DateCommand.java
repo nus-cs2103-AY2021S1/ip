@@ -1,11 +1,11 @@
-package seedu.duke.commands;
-
-import seedu.duke.DukeException;
-import seedu.duke.Storage;
-import seedu.duke.TaskList;
-import seedu.duke.Ui;
+package duke.commands;
 
 import java.time.LocalDate;
+
+import duke.DukeException;
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
 
 /**
  * Represents the command to list out tasks on a specific date.

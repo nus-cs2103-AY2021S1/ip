@@ -1,9 +1,9 @@
-package seedu.duke.commands;
+package duke.commands;
 
-import seedu.duke.DukeException;
-import seedu.duke.TaskList;
-import seedu.duke.Ui;
-import seedu.duke.Storage;
+import duke.DukeException;
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
 
 /**
  * Represents the command to delete task.
