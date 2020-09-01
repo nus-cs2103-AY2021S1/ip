@@ -45,6 +45,15 @@ public class Ui {
         printWithDivider("Got it. I've added this task:\n\t" + task + getNumOfTasks(taskList));
     }
 
+    /**
+     * Prints a numbered list of the tasks with the specified keyword.
+     * @param keyword is the keyword used to find the tasks.
+     * @param taskList is the task list to find the tasks with keyword from.
+     */
+    public void printFindTasks(String keyword, TaskList taskList) {
+        printWithDivider("Here are the matching tasks in your list:" + taskList.getMatchingTasks(keyword));
+    }
+
     public String getNumOfTasks(TaskList taskList) {
         int numOfTasks = taskList.getNumOfTasks();
         String msg = "";

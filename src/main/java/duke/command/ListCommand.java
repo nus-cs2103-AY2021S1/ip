@@ -8,7 +8,7 @@ public class ListCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        ui.printList(tasks); // don't have to save tasks when listing
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
+        ui.printList(tasks);
     }
 }
