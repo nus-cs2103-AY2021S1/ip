@@ -14,6 +14,7 @@ public class Ui {
 
     /**
      * Utilises the parser to parse user commands.
+     *
      * @param line User input text.
      * @return Command understood from user text.
      */
@@ -24,18 +25,18 @@ public class Ui {
     /**
      * Returns a line to the user.
      */
-    public void lineBreak() {
-        System.out.println(LINE);
+    public String lineBreak() {
+        return LINE + "\n";
     }
 
     /**
      * Outputs the introduction messages to the user.
      */
-    public void intro() {
-        this.lineBreak();
-        System.out.println("Yo what's up! The name's Juke");
-        System.out.println("What do you need?");
-        this.lineBreak();
+    public String intro() {
+        return this.lineBreak()
+                + "Yo what's up! The name's Juke\n"
+                + "What do you need?\n"
+                + this.lineBreak();
     }
 
 }

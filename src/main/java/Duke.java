@@ -13,6 +13,7 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
+
     /**
      * Builds an instance of the Duke Chatbot.
      */
@@ -26,53 +27,39 @@ public class Duke {
      * Runs the chatbot instance.
      * Chatbot will begin listening for commands with this method.
      */
-    public void run() {
+    private String run(String inputText) {
         try {
-            ui.intro();
-            Scanner input = new Scanner(System.in);
+            Command command = ui.parseCommand(inputText);
+            String output = "";
 
-            // Uses user input text and acts accordingly.
-            loop:
-            while (input.hasNextLine()) {
-                String line = input.nextLine();
-                Command command = ui.parseCommand(line);
-                ui.lineBreak();
-
-                switch (command.name) {
-                case "find":
-                    tasks.findTasks(command.message);
-                    break;
-                case "bye":
-                    System.out.println("That's it? That's a shame. Well, see you later then.");
-                    ui.lineBreak();
-                    storage.saveTasks();
-                    break loop;
-                case "list":
-                    tasks.printList();
-                    break;
-                case "done":
-                    tasks.taskDone(command.index);
-                    break;
-                case "delete":
-                    tasks.removeFromList(command.index);
-                    break;
-                case "error":
-                    System.out.println(command.message);
-                    break;
-                default:
-                    tasks.addToList(command.task);
-                }
-                ui.lineBreak();
+            switch (command.name) {
+            case "find":
+                return tasks.findTasks(command.message);
+            case "bye":
+                storage.saveTasks();
+                return "That's it? That's a shame. Well, see you later then.";
+            case "list":
+                return tasks.printList();
+            case "done":
+                return tasks.taskDone(command.index);
+            case "delete":
+                return tasks.removeFromList(command.index);
+            case "error":
+                return command.message;
+            default:
+                return tasks.addToList(command.task);
             }
-
-            input.close();
         } catch (IOException ex) {
-            System.out.println(ex.getMessage());
+            return ex.getMessage();
         }
     }
 
-    public static void main(String[] args) {
-        Duke duke = new Duke();
-        duke.run();
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    protected String getResponse(String input) {
+        return this.run(input);
     }
+
 }
