@@ -80,16 +80,11 @@ public class Ui {
     }
 
     /**
-     * Prints message that task was added to TaskList.
-     *
+     * Returns message that task was added to TaskList.
      * @param task Task that was added.
      * @param size Size of TaskList.
+     * @return String of message.
      */
-    public void printAddTask(Task task, int size) {
-        String s = getAddTaskString(task, size);
-        System.out.println(formatString(s));
-    }
-
     public String getAddTaskString(Task task, int size) {
         String s = "Got it. I've added this task: \n"
                 + task.toString() + '\n'
@@ -110,17 +105,11 @@ public class Ui {
     }
 
     /**
-     * Prints message that task has been deleted from TaskList.
-     *
+     * Returns message that task has been deleted from TaskList.
      * @param task Task that was deleted from TaskList.
      * @param size Size of TaskList.
+     * @return String of message.
      */
-    public void printDeletedTask(Task task, int size) {
-        String success = getDeletedTaskString(task, size);
-        System.out.println(formatString(success));
-
-    }
-
     public String getDeletedTaskString(Task task, int size) {
         String success = "Noted. I've removed this task: \n"
                 + task.toString() + "\n"
@@ -129,15 +118,10 @@ public class Ui {
     }
 
     /**
-     * Prints message that task has been marked as done.
-     *
+     * Returns message that task has been marked as done.
      * @param task Task that is marked as done.
+     * @return String of message.
      */
-    public void printMarkedTask(Task task) {
-        String success = getMarkedTaskString(task);
-        System.out.println(formatString(success));
-    }
-
     public String getMarkedTaskString(Task task) {
         return "Nice! I've marked this task as done: \n"
                 + task + "\n";
@@ -145,7 +129,6 @@ public class Ui {
 
     /**
      * Prints TaskList.
-     *
      * @param list TaskList to be printed.
      */
     public void printList(List<Task> list) {
@@ -177,14 +160,10 @@ public class Ui {
 
 
     /**
-     * Prints Tasks that have been found.
+     * Returns message of tasks that have been found.
      * @param foundTasks ArrayList of found tasks.
+     * @return String of message.
      */
-    public void printFoundTasks(ArrayList<Task> foundTasks) {
-        String printedList = getFoundTasksString(foundTasks);
-        System.out.println(formatString(printedList));
-    }
-
     public String getFoundTasksString(ArrayList<Task> foundTasks) {
         String printedList = "";
         if (foundTasks.size() > 0) {

@@ -7,6 +7,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
@@ -14,6 +15,10 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
+/**
+ * DialogBox containing the String produced by the Ui from Duke, and an ImageView to represent
+ * the profiles of Duke and the User.
+ */
 public class DialogBox extends HBox {
     @FXML
     private Label dialog;
@@ -29,7 +34,7 @@ public class DialogBox extends HBox {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+        dialog.setPadding(new Insets(10, 10, 10, 10));
         dialog.setText(text);
         displayPicture.setImage(img);
     }

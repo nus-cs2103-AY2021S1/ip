@@ -15,10 +15,18 @@ public abstract class Command {
      * @param tasks TaskList that is being executed on.
      * @param ui Ui to update the user.
      * @param storage Storage to update the text file.
-     * @throws DukeException If there is errors.
+     * @throws DukeException If there is an error.
      */
     public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
 
+    /**
+     * Returns executed message, depending on child classes.
+     * @param tasks TaskList that is being executed on.
+     * @param ui Ui to update the user.
+     * @param storage Storage to update the text file.
+     * @return String of executed message
+     * @throws DukeException If there is an error.
+     */
     public abstract String getExecuteString(TaskList tasks, Ui ui, Storage storage) throws DukeException;
 
     /**

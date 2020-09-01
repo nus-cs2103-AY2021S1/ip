@@ -26,6 +26,13 @@ public class ListCommand extends Command {
         ui.printList(tasks.getTasks());
     }
 
+    /**
+     * Returns string returned by Ui, containing the tasks inside TaskList.
+     * @param tasks TaskList that is being executed on.
+     * @param ui Ui to update the user.
+     * @param storage Storage to update the text file.
+     * @return String of message.
+     */
     @Override
     public String getExecuteString(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         return ui.getListString(tasks.getTasks());
