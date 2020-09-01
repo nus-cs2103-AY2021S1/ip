@@ -1,4 +1,4 @@
 [T][✓] kiwis
 [T][✘] oranges
-[T][✘] kiwi
 [E][✘] kiwis (at: 18:00 Sep 30 2020)
+[T][✘] oranges
