@@ -39,10 +39,10 @@ public class DukeException extends Throwable {
         case INVALID_NUMBER_INPUT:
             return TASK_NUMBER_FORMAT;
         case NO_TIMEFRAME_PROVIDED:
-            return "This task requires a date. Please follow the following format: " +
-                    "\ndeadline [description] /by [date]" +
-                    "\nOR:" +
-                    "\nevent [description] /at [date]";
+            return "This task requires a date. Please follow the following format: "
+                    + "\ndeadline [description] /by [date]"
+                    + "\nOR:"
+                    + "\nevent [description] /at [date]";
         case NO_DESCRIPTION_PROVIDED:
             return TASK_NO_DESCRIPTION;
         case UNEXPECTED_INPUT_IN_FILE:

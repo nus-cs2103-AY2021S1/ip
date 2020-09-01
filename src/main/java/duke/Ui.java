@@ -1,14 +1,11 @@
 package duke;
 
-import duke.task.Task;
-
 import java.util.Scanner;
+
+import duke.task.Task;
 
 public class Ui {
 
-    private static final String DASH = ("\u2500").repeat(5);
-    private static final String GREETING = "Hello! I'm Duke \n" +
-            "What can I do for you?";
     public static final String TASK_LIST_NUMBER = "\nNow you have %d tasks in the list";
     public static final String TASK_REMOVED = "Noted. I've removed this task: \n";
     private static final String TASK_READ = "Here are the tasks in your list: \n";
@@ -16,6 +13,9 @@ public class Ui {
     private static final String TASK_COMPLETED = "Nice! I've marked this task as complete. \n";
     private static final String ERROR = "Whoops! There was an error. \n";
     private static final String FAREWELL = "Bye. Hope to see you again soon.";
+    private static final String DASH = ("\u2500").repeat(5);
+    private static final String GREETING = "Hello! I'm Duke \n"
+            + "What can I do for you?";
 
     private Scanner sc;
 
