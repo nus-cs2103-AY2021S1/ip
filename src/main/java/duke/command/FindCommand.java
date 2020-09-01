@@ -28,8 +28,8 @@ public class FindCommand extends Command {
      * @param storage Storage of tasks in hard disk.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         String tasksString = tasks.findTasks(keyword);
-        ui.showAction(String.format("\t Here are the tasks that match %s:\n" + tasksString, keyword));
+        return ui.showAction(String.format("\t Here are the tasks that match %s:\n" + tasksString, keyword));
     }
 }

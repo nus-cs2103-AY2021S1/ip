@@ -31,15 +31,15 @@ public class DeleteCommand extends Command {
      * @throws DukeException If command is invalid.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
             Task t = tasks.deleteTask(i);
-            ui.showAction(String.format("\t Noted. I've removed this task:\n"
+            storage.save(tasks);
+            return ui.showAction(String.format("\t Noted. I've removed this task:\n"
                     + "\t   %s\n"
                     + "\t Now you have %d tasks in the list.\n", t, tasks.numTasks()));
         } catch (IndexOutOfBoundsException ex) {
             throw new DukeException("Can't delete a task that does not exist.");
         }
-        storage.save(tasks);
     }
 }

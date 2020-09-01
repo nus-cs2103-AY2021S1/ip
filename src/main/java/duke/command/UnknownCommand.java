@@ -30,7 +30,7 @@ public class UnknownCommand extends Command {
      * @throws DukeException Always throws exception as input is invalid.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         throw new DukeException(String.format(
                 "I'm sorry, but I don't know what \"%s\" means :-(\n"
                 + "\t type \"help\" for a list of commands!", gibberish));

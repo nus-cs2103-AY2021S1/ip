@@ -16,14 +16,14 @@ public class HelpCommand extends Command {
     }
 
     /**
-     * Executes the command to list the possible Duke commands.
+     * Executes the command to list the possible duke.Duke commands.
      *
      * @param tasks Tasklist containing current tasks.
      * @param ui Ui for displaying output.
      * @param storage Storage of tasks in hard disk.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         String commandsList =
                 "\t These are the common Nite commands used in various situations:\n"
                 + "\t add a task\n\t\t todo <description>\n"
@@ -34,6 +34,6 @@ public class HelpCommand extends Command {
                 + "\t list all tasks\n\t\t list\n"
                 + "\t find a task\n\t\t find <keyword>\n"
                 + "\t exit Nite\n\t\t bye\n";
-        ui.showAction(commandsList);
+        return ui.showAction(commandsList);
     }
 }
