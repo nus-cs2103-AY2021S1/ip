@@ -1,4 +1,4 @@
-package duke;
+package duke.Gui;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -28,6 +28,12 @@ public class DialogBox extends HBox {
     @FXML
     private ImageView displayPicture;
 
+    /**
+     * constructor for DialogBox instance
+     * @param text message to be shown to user
+     * @param img image of user to be shown in display window
+     * @param isAssistant boolean to check if is assistant or user
+     */
     private DialogBox(String text, Image img, boolean isAssistant) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
@@ -77,10 +83,22 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * returns new instance of dialogbox
+     * @param text message to be shown to user
+     * @param img image of user to be shown in display window
+     * @return new instance of dialogbox
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img, false);
     }
 
+    /**
+     * returns new instance of dialogbox
+     * @param text message to be shown to user
+     * @param img image of user to be shown in display window
+     * @return new instance of dialogbox
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img, true);
         db.flip();

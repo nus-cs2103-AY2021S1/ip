@@ -1,4 +1,4 @@
-package duke;
+package duke.Gui;
 
 import duke.task.Task;
 
@@ -30,10 +30,6 @@ public class Gui {
 
         return responseList;
     }
-
-//    public String showLine() {
-//        return ("_____________________________________________________");
-//    }
 
     public String showError(String e) {
         return (e);
@@ -119,10 +115,6 @@ public class Gui {
         }
         return responseList;
     }
-
-//    public String print(String s) {
-//        return (s);
-//    }
 
     /**
      * shows icon based on whether task is done or not.

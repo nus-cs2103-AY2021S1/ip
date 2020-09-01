@@ -1,5 +1,6 @@
 package duke;
 
+import duke.Gui.Gui;
 import duke.command.Command;
 import duke.component.DukeException;
 import duke.component.Parser;
@@ -15,6 +16,7 @@ public class Duke {
     private static final Path filepath = Paths.get(".", "data", "duke.txt");
     private Storage storage;
     private TaskList taskList;
+    private boolean isExtracted = true;
 
     /**
      * Creates an instance of Duke, instance of ui created too. TaskList initialised.
@@ -25,20 +27,37 @@ public class Duke {
         try {
             taskList = new TaskList(storage.getListOfTasks());
         } catch (DukeException e) {
-            System.out.println("Error in extracting tasks from saved file");
+            isExtracted = false;
             taskList = new TaskList();
         }
     }
 
+    /**
+     * executes logic in this class
+     * @param args default style for this method
+     */
     public static void main(String[] args) {
         Duke duke = new Duke();
         Application.launch(Main.class, args);
     }
 
+    /**
+     * Greets user with welcome message
+     * @return String of message to the duke.Gui application
+     */
     public String getGreeting() {
-        return "Hello and welcome to the GeNiaaz personal assistant";
+        String response = "Hello and welcome to the GeNiaaz personal assistant";
+        if (!this.isExtracted) {
+            return response + "\n\nData was not extracted successfully, new list created";
+        }
+        return response;
     }
 
+    /**
+     * Gets string of response to be shown to user
+     * @param input command given by user
+     * @return string of response to show user
+     */
     public String getResponse(String input) {
         Gui gui = new Gui();
         ArrayList<String> responseList = new ArrayList<>();

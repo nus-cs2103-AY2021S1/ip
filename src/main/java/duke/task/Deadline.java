@@ -72,7 +72,8 @@ public class Deadline extends Task {
         char status = this.isDone ? '1' : '0';
         DateTimeFormatter dtfDate = DateTimeFormatter.ofPattern("MMM dd yyyy");
         DateTimeFormatter dtfTime = DateTimeFormatter.ISO_LOCAL_TIME;
-        return "D " + "| " + status + " | " + this.description + "| " + this.date.format(dtfDate) + " " + this.time.format(dtfTime);
+        return "D " + "| " + status + " | " + this.description + "| " + this.date.format(dtfDate) + " " +
+                this.time.format(dtfTime);
     }
 
 }
