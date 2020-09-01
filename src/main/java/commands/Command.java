@@ -30,6 +30,8 @@ public enum Command {
                 throw new DukeInvalidParameterException(strings.getString("error.list"), parameters);
             }
 
+            System.out.println(tasks);
+
             return IntStream.range(0, tasks.size())
                     .mapToObj(index -> (index + 1) + ". " + tasks.get(index) + "\t")
                     .reduce("", (x, y) -> x + y)
