@@ -19,6 +19,10 @@ public class Task {
         return task_info;
     }
 
+    public void complete() {
+        task_completion = true;
+    }
+
     @Override
     public String toString() {
         return String.format("[%s] %s", task_completion ?  "Done" : "!!!!", task_info);
