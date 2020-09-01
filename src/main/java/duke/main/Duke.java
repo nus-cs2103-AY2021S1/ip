@@ -1,9 +1,11 @@
 package duke.main;
 
+import java.util.Scanner;
+
+import javafx.application.Application;
+
 import duke.command.Command;
 import duke.exception.DukeException;
-
-import java.util.Scanner;
 
 /**
  * Duke is a chatbot that can help us manage and store our various kinds of Task.
@@ -15,7 +17,7 @@ public class Duke {
     /** Storage to store data to hard disk */
     private final Storage storage;
     /** Ui for interacting with user. */
-    private final Ui ui;
+    private final Ui  ui;
 
     /**
      * Constructs a Duke.
@@ -35,6 +37,8 @@ public class Duke {
      * Runs Duke.
      */
     public void run() {
+        // Launch GUI
+        Application.launch(Ui.class, "");
         // Display greeting message
         ui.showLine();
         ui.showGreetingMessage();
