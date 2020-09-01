@@ -15,6 +15,7 @@ public class AddCommand extends Command {
 
     /**
      * Creates a new add command with the specified task to be added.
+     *
      * @param task The task to be added.
      */
     public AddCommand(Task task) {
@@ -23,6 +24,7 @@ public class AddCommand extends Command {
 
     /**
      * Adds the task to the specified task list.
+     *
      * @param tasks The task list the command is executed with.
      * @param storage The storage the command is executed with.
      * @return A command response that represents the result of completing an add command.

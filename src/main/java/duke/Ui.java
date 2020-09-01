@@ -13,6 +13,7 @@ public class Ui {
 
     /**
      * Returns a response to the user, enclosed within two divider lines.
+     *
      * @param response The response to be printed.
      * @return The response within two divider lines.
      */
@@ -22,6 +23,7 @@ public class Ui {
 
     /**
      * Returns a welcome message to the user.
+     *
      * @return The welcome message to the user.
      */
     public static String greet() {
@@ -35,6 +37,7 @@ public class Ui {
 
     /**
      * Returns an exit message to the user.
+     *
      * @return The exit message to the user.
      */
     public static String respondExit() {
@@ -43,6 +46,7 @@ public class Ui {
 
     /**
      * Returns all the tasks in the specified Task list.
+     *
      * @param taskList The task list that contains the list of tasks to be printed.
      * @return The list of tasks from the specified task list.
      */
@@ -53,6 +57,7 @@ public class Ui {
     /**
      * Returns a message to the user indicating that the specified task has been added to the
      * specified task list.
+     *
      * @param task The task that was added.
      * @param taskList The task list that the task was added to.
      * @return An acknowledgement that the task has been added.
@@ -64,6 +69,7 @@ public class Ui {
     /**
      * Returns a message to the user indicating that the specified task has been deleted from the
      * specified task list.
+     *
      * @param task The task that was deleted.
      * @param taskList The task list that the task was deleted from.
      * @return An acknowledgement that the task has been removed.
@@ -74,6 +80,7 @@ public class Ui {
 
     /**
      * Returns a message to the user indicating that the specified task has been marked done.
+     *
      * @param task The task that was marked done.
      * @return An acknowledgement that the task has been marked as done.
      */
@@ -83,6 +90,7 @@ public class Ui {
 
     /**
      * Prints the tasks that occur on the specified date.
+     *
      * @param taskList The task list to get the tasks from.
      * @param localDate The date that you want to get the tasks for.
      * @return The tasks that occur on the specified date.
@@ -97,6 +105,7 @@ public class Ui {
 
     /**
      * Prints the tasks that contain the specified keyword.
+     *
      * @param taskList The task list to find the tasks in.
      * @param keyword The string that the tasks you are finding should contain.
      * @return The tasks that contain the keyword.
@@ -108,6 +117,7 @@ public class Ui {
 
     /**
      * Gets the number of tasks in the specified task list.
+     *
      * @param taskList The task list to get the number of tasks from.
      * @return A string indicating the number of tasks in the specified task list.
      */
@@ -124,6 +134,7 @@ public class Ui {
 
     /**
      * Returns the error message of the exception.
+     *
      * @param e The exception to get the message from.
      * @return The error message of the exception.
      */
