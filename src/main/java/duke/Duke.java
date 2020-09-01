@@ -4,7 +4,7 @@ import java.io.IOException;
 
 /**
  * The Duke program represents a person assistant
- * chatbot that helps the user manage tasks and store them 
+ * chatbot that helps the user manage tasks and store them
  * in a list according to the user input.
  * 
  * @author York Tat
@@ -30,7 +30,6 @@ public class Duke {
             this.taskList = new TaskList();
         }
     }
-    
     /**
      * Runs the chatbot until an exit command is issued.
      */
