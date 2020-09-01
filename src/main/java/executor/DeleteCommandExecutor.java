@@ -23,8 +23,8 @@ public class DeleteCommandExecutor extends CommandExecutor {
             List<String> responses = Arrays.asList(DukeConstants.DELETE_OUTPUT, response, additionalResponse);
             DukeOutput.output(responses, Collections.singletonList(1));
         } catch (NumberFormatException exception) {
-            DukeOutput.output("☹ OOPS!!! the task number has to be a positive integer.");
+            DukeOutput.output("\u2639 OOPS!!! the task number has to be a positive integer.");
         } catch (IndexOutOfBoundsException exception) {
-            DukeOutput.output("☹ OOPS!!! the task number has to be valid");
+            DukeOutput.output("\u2639 OOPS!!! the task number has to be valid");
         }    }
 }

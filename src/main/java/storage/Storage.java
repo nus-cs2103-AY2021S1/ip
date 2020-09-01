@@ -52,7 +52,7 @@ public class Storage {
                 list.add(task);
             }
         } catch (FileNotFoundException e) {
-            System.out.println("OOPS! some error saving the list.");
+            System.out.println("\u2639 OOPS! some error saving the list.");
             e.printStackTrace();
         }
         return list;
@@ -70,7 +70,7 @@ public class Storage {
                 fileWriter.write("\n");
             }
         } catch (IOException e) {
-            System.out.println("OOPS! some error saving the list." );
+            System.out.println("\u2639 OOPS! some error saving the list." );
             e.printStackTrace();
         }
     }

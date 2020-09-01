@@ -32,7 +32,7 @@ public class TaskParser {
             String[] titleComponents = title.split("/by", 2);
             return new DeadlineTask(titleComponents[0].trim(), titleComponents[1].trim());
         } catch (IndexOutOfBoundsException exception) {
-            throw new IndexOutOfBoundsException("☹ OOPS!!! The start and end time of an event cannot be empty.");
+            throw new IndexOutOfBoundsException("\u2639 OOPS!!! The start and end time of an event cannot be empty.");
         }
     }
 
@@ -44,7 +44,7 @@ public class TaskParser {
             return new EventTask(titleComponents[0].trim(),
                     dateAndTime[0].trim(), times[0].trim(), times[1].trim());
         } catch (IndexOutOfBoundsException exception) {
-            throw new IndexOutOfBoundsException("☹ OOPS!!! The start and end time of an event cannot be empty.");
+            throw new IndexOutOfBoundsException("\u2639 OOPS!!! The start and end time of an event cannot be empty.");
         }
     }
 }

@@ -20,9 +20,9 @@ public class DoneCommandExecutor extends CommandExecutor {
             List<String> responses = Arrays.asList(DukeConstants.DONE_OUTPUT, response);
             DukeOutput.output(responses, Collections.singletonList(1));
         } catch (NumberFormatException exception) {
-            DukeOutput.output("☹ OOPS!!! the task number has to be a postive integer.");
+            DukeOutput.output("\u2639 OOPS!!! the task number has to be a postive integer.");
         } catch (IndexOutOfBoundsException exception) {
-            DukeOutput.output("☹ OOPS!!! the task number has to be valid");
+            DukeOutput.output("\u2639 OOPS!!! the task number has to be valid");
         }
     }
 }

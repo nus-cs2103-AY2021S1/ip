@@ -50,7 +50,7 @@ public class Ui {
     }
 
     private void handleInvalidInput() {
-        DukeOutput.output("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+        DukeOutput.output("\u2639 OOPS!!! I'm sorry, but I don't know what that means :-(");
     }
 
     private void printGreetingMessage() {

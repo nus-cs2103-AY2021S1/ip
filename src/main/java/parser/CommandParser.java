@@ -60,7 +60,7 @@ public class CommandParser {
         try {
             return input.split("\\s+", 2)[1];
         } catch(IndexOutOfBoundsException exception) {
-            throw new IndexOutOfBoundsException("☹ OOPS!!! The description of a deadline cannot be empty.");
+            throw new IndexOutOfBoundsException("\u2639 OOPS!!! The description of a deadline cannot be empty.");
         }
     }
 }
