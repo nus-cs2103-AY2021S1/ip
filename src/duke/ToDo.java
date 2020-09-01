@@ -1,3 +1,5 @@
+package duke;
+
 /**
  * Todo class is a subclass of task, it holds
  * information of a todo task without date and time.

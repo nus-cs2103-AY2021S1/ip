@@ -1,3 +1,5 @@
+package duke;
+
 /**
  * A class which stores key words of commands and various comparing methods
  * used for checking and validation.

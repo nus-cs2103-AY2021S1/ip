@@ -1,3 +1,5 @@
+package duke;
+
 /**
  * Event class is a subclass of Task which holds information of an Event
  * with an occuring time and date.

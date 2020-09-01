@@ -1,3 +1,7 @@
+package java;
+
+import duke.Parser;
+import duke.DukeException;
 import org.junit.Test;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
