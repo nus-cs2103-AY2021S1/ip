@@ -1,9 +1,9 @@
-package main.java.duke.command;
+package duke.command;
 
-import main.java.duke.Storage;
-import main.java.duke.task.Task;
-import main.java.duke.TaskList;
-import main.java.duke.Ui;
+import duke.Storage;
+import duke.task.Task;
+import duke.TaskList;
+import duke.Ui;
 
 /**
  * Encapsulates a command to complete a task

@@ -1,6 +1,6 @@
-package main.java.duke;
+package duke;
 
-import main.java.duke.command.*;
+import duke.command.*;
 
 import java.time.LocalDate;
 
