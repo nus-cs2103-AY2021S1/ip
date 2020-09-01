@@ -46,7 +46,8 @@ public class AddCommand extends Command {
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         Task task = taskList.addTask(this.type, this.description, this.dateTime);
         ui.showPrompt("Got it. I've added this task:\n  "
-                + task + "\n" + "Now you have " + taskList.getTasks().size()
+                + task + "\n"
+                + "Now you have " + taskList.getTasks().size()
                 + (taskList.getTasks().size() == 1 ? " task" : " tasks") + " in the list.");
         storage.save(taskList.getTasks());
     }

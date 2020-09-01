@@ -34,7 +34,9 @@ public class Parser {
     public static LocalDateTime parseDateTime(String dateTime) throws DukeException {
         String[] dateTimes = dateTime.split("\\s+");
         String date = dateTimes[0];
-        String time = dateTimes.length > 1 ? String.join(" ", Arrays.copyOfRange(dateTimes, 1, dateTimes.length)) : "";
+        String time = dateTimes.length > 1
+                ? String.join(" ", Arrays.copyOfRange(dateTimes, 1, dateTimes.length))
+                : "";
 
         return LocalDateTime.of(Parser.parseDate(date), Parser.parseTime(time));
     }

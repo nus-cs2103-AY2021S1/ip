@@ -28,7 +28,8 @@ public class DeleteCommand extends Command {
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         Task task = taskList.deleteTask(this.taskNo);
         ui.showPrompt("Noted. I've removed this task:\n  "
-                + task + "\n" + "Now you have " + taskList.getTasks().size()
+                + task + "\n"
+                + "Now you have " + taskList.getTasks().size()
                 + (taskList.getTasks().size() == 1 ? " task" : " tasks") + " in the list.");
     }
 
