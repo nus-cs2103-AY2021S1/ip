@@ -6,16 +6,16 @@ import java.util.Scanner;
 
 public class Ui {
 
-    private static final String dash = ("\u2500").repeat(5);
-    private static final String greeting = "Hello! I'm Duke \n" +
+    private static final String DASH = ("\u2500").repeat(5);
+    private static final String GREETING = "Hello! I'm Duke \n" +
             "What can I do for you?";
-    public static final String task_list_number = "\nNow you have %d tasks in the list";
-    public static final String task_removed = "Noted. I've removed this task: \n";
-    private static final String task_read = "Here are the tasks in your list: \n";
-    private static final String task_added = "Got it. I've added this task: \n";
-    private static final String task_completed = "Nice! I've marked this task as complete. \n";
+    public static final String TASK_LIST_NUMBER = "\nNow you have %d tasks in the list";
+    public static final String TASK_REMOVED = "Noted. I've removed this task: \n";
+    private static final String TASK_READ = "Here are the tasks in your list: \n";
+    private static final String TASK_ADDED = "Got it. I've added this task: \n";
+    private static final String TASK_COMPLETED = "Nice! I've marked this task as complete. \n";
     private static final String ERROR = "Whoops! There was an error. \n";
-    private static final String farewell = "Bye. Hope to see you again soon.";
+    private static final String FAREWELL = "Bye. Hope to see you again soon.";
 
     private Scanner sc;
 
@@ -30,27 +30,27 @@ public class Ui {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         printMessage("Hello from\n" + logo);
-        printMessage(greeting);
+        printMessage(GREETING);
     }
 
     public void displayTaskAdd(Task t, int numberOfItems) {
-        printMessage(task_added + t.toString() + String.format(
-                task_list_number, numberOfItems
+        printMessage(TASK_ADDED + t.toString() + String.format(
+                TASK_LIST_NUMBER, numberOfItems
         ));
     }
 
     public void displayTaskComplete(Task t) {
-        printMessage(task_completed + t.toString());
+        printMessage(TASK_COMPLETED + t.toString());
     }
 
     public void displayTaskDelete(Task t, int numberOfItems) {
-        printMessage(task_removed + t.toString() + String.format(
-                task_list_number, numberOfItems
+        printMessage(TASK_REMOVED + t.toString() + String.format(
+                TASK_LIST_NUMBER, numberOfItems
         ));
     }
 
     public void listTasks(TaskList tl) {
-        printMessage(task_read + tl);
+        printMessage(TASK_READ + tl);
     }
 
     public void showError(String message) {
@@ -59,11 +59,11 @@ public class Ui {
 
     public void exit() {
         sc.close();
-        printMessage(farewell);
+        printMessage(FAREWELL);
     }
 
     private void printMessage(String message) {
-        System.out.println(dash + "\n" + message + "\n" + dash);
+        System.out.println(DASH + "\n" + message + "\n" + DASH);
     }
 
     public String readCommand() {
