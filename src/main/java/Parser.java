@@ -1,6 +1,7 @@
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 public class Parser {
 
@@ -30,22 +31,22 @@ public class Parser {
             }
             break;
         case "todo":
-            if (isValidTFormat(body)) {
+            if (isValidFormat(body, Task.Type.TODO)) {
                 tasks.addTask(new Todo(body), ui);
             } else {
                 throw new DukeException("Invalid task format");
             }
             break;
         case "deadline":
-            if (isValidDFormat(body)) {
-                tasks.addTask(new Deadline(getDescription(body), getDeadline(body)), ui);
+            if (isValidFormat(body, Task.Type.DEADLINE) && isValidTime(body, Task.Type.DEADLINE)) {
+                tasks.addTask(new Deadline(getDescription(body), getTime(body, Task.Type.DEADLINE)), ui);
             } else {
                 throw new DukeException("Invalid task format");
             }
             break;
         case "event":
-            if (isValidEFormat(body)) {
-                tasks.addTask(new Event(getDescription(body), getEventTime(body)), ui);
+            if (isValidFormat(body, Task.Type.EVENT) && isValidTime(body, Task.Type.EVENT)) {
+                tasks.addTask(new Event(getDescription(body), getTime(body, Task.Type.EVENT)), ui);
             } else {
                 throw new DukeException("Invalid task format");
             }
@@ -83,29 +84,46 @@ public class Parser {
         return body.split(" /", 2)[0];
     }
 
-    private static boolean isValidTFormat(String body) {
-        return !body.equals("");
+    private static boolean isValidFormat(String body, Task.Type type) {
+        if (type == Task.Type.TODO) {
+            return !body.equals("");
+        }
+        if (type == Task.Type.DEADLINE) {
+            return body.split(" /by ", 2).length == 2;
+        }
+        if (type == Task.Type.EVENT) {
+            return body.split(" /at ", 2).length == 2;
+        }
+        return false;
     }
 
-    private static boolean isValidDFormat(String body) {
-        return body.split(" /by ", 2).length == 2;
-    }
-
-    private static String getDeadline(String body) {
-        String time = body.split(" /by ", 2)[1];
+    private static boolean isValidTime(String body, Task.Type type) throws DateTimeParseException {
+        String time = "";
+        if (type == Task.Type.DEADLINE) {
+            time = body.split(" /by ", 2)[1];
+        }
+        if (type == Task.Type.EVENT) {
+            time = body.split(" /at ", 2)[1];
+        }
         if (time.equals("now")) {
-            return LocalDate.now().format(DateTimeFormatter.ofPattern("d MMM yyyy"));
-        } else {
-            return LocalDate.parse(time).format(DateTimeFormatter.ofPattern("d MMM yyyy"));
+            return true;
+        }
+        try {
+            LocalDate.parse(time);
+            return true;
+        } catch (DateTimeParseException e) {
+            return false;
         }
     }
 
-    private static boolean isValidEFormat(String body) {
-        return body.split(" /at ", 2).length == 2;
-    }
-
-    private static String getEventTime(String body) {
-        String time = body.split(" /at ", 2)[1];
+    private static String getTime(String body, Task.Type type) {
+        String time = "";
+        if (type == Task.Type.DEADLINE) {
+            time = body.split(" /by ", 2)[1];
+        }
+        if (type == Task.Type.EVENT) {
+            time = body.split(" /at ", 2)[1];
+        }
         if (time.equals("now")) {
             return LocalDate.now().format(DateTimeFormatter.ofPattern("d MMM yyyy"));
         } else {
