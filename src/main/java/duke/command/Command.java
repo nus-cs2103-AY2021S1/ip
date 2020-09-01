@@ -24,7 +24,7 @@ public abstract class Command {
      * @return A boolean value, 1 if it is an ExitCommand, 0 otherwise.
      */
     public boolean isExit() {
-        return this.getContent().get(0).equals("bye");
+        return false;
     }
 
     /**

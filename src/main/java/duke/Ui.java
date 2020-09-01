@@ -14,7 +14,7 @@ public class Ui {
      * Returns a welcome message in the chat bot.
      * @return The greeting String.
      */
-    public static String greet() {
+    public static String showGreeting() {
         return "Hello! I'm Jarvis\n"
                 + "What can I do for you?";
     }
@@ -22,7 +22,7 @@ public class Ui {
     /**
      * Prints welcome message in the chat bot.
      */
-    public void showWelcome() {
+    public void showWelcomeMessage() {
         System.out.println("Hello! I'm Jarvis.\n"
                 + "What can I do for you?");
     }

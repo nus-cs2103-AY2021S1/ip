@@ -5,7 +5,7 @@ import duke.DukeException;
 
 /** A subclass of Command which sends request to mark a task in list as done */
 public class DoneCommand extends Command {
-
+    private static final String DONE_REQUEST = "update";
     /**
      * Creates a DoneCommand.
      *
@@ -17,7 +17,9 @@ public class DoneCommand extends Command {
             throw new DukeException("☹ OOPS!!! Please enter a value");
         } else if (!(Character.isDigit(content.charAt(0)))) {
             throw new DukeException("☹ OOPS!!! Please enter a numerical value");
-        } else if (Integer.parseInt(content) > CommandAgent.listSize() | Integer.parseInt(content) <= 0) {
+        } else if (Integer.parseInt(content) > CommandAgent.listSize()) {
+            throw new DukeException("☹ OOPS!!! Please enter a valid index");
+        } else if (Integer.parseInt(content) <= 0) {
             throw new DukeException("☹ OOPS!!! Please enter a valid index");
         } else {
             this.content = content;
@@ -26,6 +28,6 @@ public class DoneCommand extends Command {
 
     @Override
     public String sendRequest() {
-        return "update";
+        return DONE_REQUEST;
     }
 }

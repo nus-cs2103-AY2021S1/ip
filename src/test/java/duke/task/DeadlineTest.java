@@ -33,6 +33,6 @@ public class DeadlineTest {
     public void formatTest() {
         LocalDate schedule = LocalDate.parse("2020-08-20");
         Deadline deadline = new Deadline("deadline1", false, schedule);
-        assertEquals("D | 0 | deadline1 | Aug 20 2020", deadline.format());
+        assertEquals("D | 0 | deadline1 | Aug 20 2020", deadline.formatTask());
     }
 }

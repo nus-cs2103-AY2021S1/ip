@@ -19,14 +19,15 @@ public class DeadlineCommand extends AddCommand {
     public DeadlineCommand(String content) throws DukeException {
         if (!content.contains("/by")) {
             throw new DukeException("☹ OOPS!!! The information contains invalid delimiter");
+        }
+
+        String[] contentParts = content.split(" /by ");
+
+        if (contentParts[0].equals("") || contentParts[1].equals("")) {
+            throw new DukeException("☹ OOPS!!! The information of a deadline cannot be empty.");
         } else {
-            String[] contentParts = content.split(" /by ");
-            if (contentParts[0].equals("") || contentParts[1].equals("")) {
-                throw new DukeException("☹ OOPS!!! The information of a deadline cannot be empty.");
-            } else {
-                this.name = contentParts[0];
-                this.schedule = contentParts[1];
-            }
+            this.name = contentParts[0];
+            this.schedule = contentParts[1];
         }
     }
 

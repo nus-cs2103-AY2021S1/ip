@@ -21,7 +21,7 @@ public class TodoTest {
     @Test
     public void formatTest() {
         Todo todo = new Todo("todo1", false);
-        assertEquals("T | 0 | todo1", todo.format());
+        assertEquals("T | 0 | todo1", todo.formatTask());
     }
 }
 

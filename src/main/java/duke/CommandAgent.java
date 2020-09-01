@@ -60,9 +60,10 @@ public class CommandAgent {
      */
     public static String executeCommand(Command command) {
         String response = "";
+        String commandRequest = command.sendRequest();
         int taskId;
         try {
-            switch (command.sendRequest()) {
+            switch (commandRequest) {
             case "end":
                 response += "Bye. Hope to see you again soon!";
                 break;
@@ -114,24 +115,25 @@ public class CommandAgent {
     public static Task createTask(List<String> taskInfo) throws DateTimeParseException, DukeException {
         String identifier = taskInfo.get(0);
         String name = taskInfo.get(1);
+
         if (!taskList.findTasksByKeyword(name).equals("")) {
             throw new DukeException("☹ OOPS!!! This task has already been stored in the list!");
-        } else {
-            String schedule;
-            switch (identifier) {
-            case "E":
-                schedule = taskInfo.get(2);
-                LocalDate eventTime = LocalDate.parse(schedule);
-                return new Event(name, false, eventTime);
-            case "D":
-                schedule = taskInfo.get(2);
-                LocalDate deadlineTime = LocalDate.parse(schedule);
-                return new Deadline(name, false, deadlineTime);
-            case "T":
-                return new Todo(name, false);
-            default:
-                throw new DukeException("☹ OOPS!!! This type of task cannot be created by me!");
-            }
+        }
+
+        String schedule;
+        switch (identifier) {
+        case "E":
+            schedule = taskInfo.get(2);
+            LocalDate eventTime = LocalDate.parse(schedule);
+            return new Event(name, false, eventTime);
+        case "D":
+            schedule = taskInfo.get(2);
+            LocalDate deadlineTime = LocalDate.parse(schedule);
+            return new Deadline(name, false, deadlineTime);
+        case "T":
+            return new Todo(name, false);
+        default:
+            throw new DukeException("☹ OOPS!!! This type of task cannot be created by me!");
         }
     }
 

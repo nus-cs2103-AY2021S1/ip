@@ -1,15 +1,13 @@
 package duke.task;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.Locale;
 
 /** Represents an deadline task */
 public class Deadline extends Task {
     private final LocalDate schedule;
 
     /**
-     * Initializes an instance of deadline object.
+     * Creates an instance of deadline object.
      *
      * @param name The name of the deadline task.
      * @param isDone The boolean indicating if the task is done.
@@ -26,18 +24,18 @@ public class Deadline extends Task {
      * @return The string representation of the schedule.
      */
     public String getSchedule() {
-        return this.schedule.format(DateTimeFormatter.ofPattern("MMM d yyyy", Locale.ENGLISH));
+        return this.schedule.format(Task.FORMATTER);
     }
 
     @Override
     public Deadline complete() {
-        return new Deadline(this.getName(), true, this.schedule);
+        return new Deadline(this.name, true, this.schedule);
     }
 
     @Override
-    public String format() {
+    public String formatTask() {
         int isDoneSignal = this.isDoneTask() ? 1 : 0;
-        return "D | " + isDoneSignal + " | " + name + " | " + this.getSchedule();
+        return "D | " + isDoneSignal + " | " + this.name + " | " + this.getSchedule();
     }
 
     @Override

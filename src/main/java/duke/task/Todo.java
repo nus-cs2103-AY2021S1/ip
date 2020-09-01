@@ -8,13 +8,13 @@ public class Todo extends Task {
 
     @Override
     public Todo complete() {
-        return new Todo(this.getName(), true);
+        return new Todo(this.name, true);
     }
 
     @Override
-    public String format() {
+    public String formatTask() {
         int isDoneSignal = this.isDoneTask() ? 1 : 0;
-        return "T | " + isDoneSignal + " | " + name;
+        return "T | " + isDoneSignal + " | " + this.name;
     }
 
     @Override

@@ -20,7 +20,6 @@ import duke.task.Todo;
 
 /** Storage class to manage the saving of TaskList into hard disk */
 public class Storage {
-
     private final Path filePath;
     private final Path folderPath;
 

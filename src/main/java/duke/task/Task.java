@@ -1,7 +1,11 @@
 package duke.task;
 
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
+
 /** Task is a class for each task specified from the user commands */
 public abstract class Task {
+    protected static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("MMM d yyyy", Locale.ENGLISH);
     protected final String name;
     protected final boolean isDone;
 
@@ -32,7 +36,7 @@ public abstract class Task {
      * @return A String showing the name of the task.
      */
     public String getName() {
-        return name;
+        return this.name;
     }
 
     /**
@@ -41,7 +45,7 @@ public abstract class Task {
      * @return A boolean indicating if the task is done.
      */
     public boolean isDoneTask() {
-        return isDone;
+        return this.isDone;
     }
 
     /**
@@ -56,7 +60,7 @@ public abstract class Task {
      *
      * @return A string to represent the task.
      */
-    public abstract String format();
+    public abstract String formatTask();
 
     /**
      * Displays the task object as a string

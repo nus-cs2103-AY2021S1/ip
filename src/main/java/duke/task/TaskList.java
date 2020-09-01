@@ -52,6 +52,7 @@ public class TaskList {
 
     /**
      * Deletes a task in the list via its taskId.
+     * The taskId is the index of the task in the task list.
      *
      * @param taskId The displayed id in the list.
      * @return A new TaskList containing all the update tasks.
@@ -64,7 +65,8 @@ public class TaskList {
     }
 
     /**
-     * Sets a task with input id in the list as done.
+     * Marks the task with the input id in the list as done.
+     * The taskId is the index of the task in the task list.
      *
      * @param taskId The displayed id in the list.
      * @return A new TaskList containing all the update tasks.
@@ -76,10 +78,11 @@ public class TaskList {
             throw new DukeException("☹ OOPS!!! This task is already done!");
         } else {
             Task doneTask = currentTask.complete();
-
             int index = taskId - 1;
+
             List<Task> newTaskList = this.tasks;
             newTaskList.set(index, doneTask);
+
             return new TaskList(newTaskList);
         }
     }
@@ -90,12 +93,10 @@ public class TaskList {
      * @return A String shows all tasks in a formatted way.
      */
     public String printTasks() {
-        String result = IntStream.range(0, this.getSize())
+        return IntStream.range(0, this.getSize())
                 .mapToObj((id) -> String.format("\n%d.%s", id + 1, tasks.get(id)))
                 .reduce((a, b) -> a + b)
                 .orElse("");
-
-        return result;
     }
 
     /**
@@ -106,7 +107,7 @@ public class TaskList {
     public List<String> formatTaskList() {
         List<String> formattedTaskList = new ArrayList<>();
         for (Task t: this.tasks) {
-            formattedTaskList.add(t.format());
+            formattedTaskList.add(t.formatTask());
         }
         return formattedTaskList;
     }

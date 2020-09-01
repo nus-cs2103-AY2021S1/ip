@@ -19,12 +19,14 @@ public class Duke {
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
+
         TaskList tasks = new TaskList();
         try {
             tasks = storage.load();
         } catch (DukeException e) {
             ui.showLoadingError();
         }
+
         agent = new CommandAgent(tasks);
     }
 
@@ -34,7 +36,7 @@ public class Duke {
      * The running will terminate when an ExitCommand is called.
      */
     public void run() {
-        ui.showWelcome();
+        ui.showWelcomeMessage();
         boolean isExit = false;
         while (!isExit) {
             try {

@@ -1,8 +1,6 @@
 package duke.task;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.Locale;
 
 /** Represents an event task */
 public class Event extends Task {
@@ -26,18 +24,18 @@ public class Event extends Task {
      * @return The string representation of the schedule.
      */
     public String getSchedule() {
-        return this.schedule.format(DateTimeFormatter.ofPattern("MMM d yyyy", Locale.ENGLISH));
+        return this.schedule.format(Task.FORMATTER);
     }
 
     @Override
     public Event complete() {
-        return new Event(this.getName(), true, this.schedule);
+        return new Event(this.name, true, this.schedule);
     }
 
     @Override
-    public String format() {
+    public String formatTask() {
         int isDoneSignal = this.isDoneTask() ? 1 : 0;
-        return "E | " + isDoneSignal + " | " + name + " | " + this.getSchedule();
+        return "E | " + isDoneSignal + " | " + this.name + " | " + this.getSchedule();
     }
 
     @Override

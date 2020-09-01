@@ -7,6 +7,7 @@ import duke.DukeException;
 
 /** A subclass of Command which find a task via a keyword */
 public class FindCommand extends Command {
+    protected static final String FIND_REQUEST = "search";
     private static final int KEYWORD_LENGTH = 1;
     private final String keyword;
 
@@ -31,7 +32,7 @@ public class FindCommand extends Command {
 
     @Override
     public String sendRequest() {
-        return "search";
+        return FIND_REQUEST;
     }
 
     @Override

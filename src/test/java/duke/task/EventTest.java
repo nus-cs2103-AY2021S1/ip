@@ -33,6 +33,6 @@ public class EventTest {
     public void formatTest() {
         LocalDate schedule = LocalDate.parse("2020-08-20");
         Event event = new Event("event1", false, schedule);
-        assertEquals("E | 0 | event1 | Aug 20 2020", event.format());
+        assertEquals("E | 0 | event1 | Aug 20 2020", event.formatTask());
     }
 }

@@ -19,13 +19,13 @@ public class Parser {
      *
      * @param userInput A String from user's input.
      * @return A Command to be processed by the agent.
-     * @throws DukeException If the command construction involves error or
-     * the DateTime parsing involves error.
+     * @throws DukeException If the command construction involves error or the DateTime parsing involves error.
      */
     public static Command parse(String userInput) throws DukeException {
         String[] words = userInput.split(" ");
         String commandWord = words[0];
-        String content = words.length == 1 ? "" : Parser.generateContent(words);
+        boolean hasOnlyOneWord = words.length == 1;
+        String content = hasOnlyOneWord ? "" : Parser.generateContent(words);
 
         try {
             switch (commandWord) {
