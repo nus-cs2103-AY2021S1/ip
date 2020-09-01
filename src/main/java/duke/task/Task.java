@@ -7,8 +7,8 @@ import java.util.Objects;
  */
 public abstract class Task {
 
-    private static final String SYMBOL_DONE = "✓";
-    private static final String SYMBOL_UNDONE = "✗";
+    private static final String SYMBOL_DONE = "X";
+    private static final String SYMBOL_UNDONE = "O";
 
     private boolean isCompleted;
     private String description;
