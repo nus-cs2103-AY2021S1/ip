@@ -32,7 +32,7 @@ public class Task {
      * Converts the task into an array of the type, completion status, and name in Strings.
      * @return Array of Task details.
      */
-    public String[] toArray() {
+    public String[] toSaveFormatArray() {
         String[] strings = new String[3];
         strings[0] = "[T]";
         strings[1] = completed ? "1" : "0";

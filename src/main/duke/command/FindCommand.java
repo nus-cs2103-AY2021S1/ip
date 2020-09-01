@@ -20,11 +20,6 @@ public class FindCommand extends Command {
         keyword = input.toLowerCase();
     }
 
-    @Override
-    public boolean shouldExit() {
-        return super.shouldExit();
-    }
-
     /**
      * Attempts to find all Tasks containing the keyword within the Storage's list,
      * then uses Ui to print the list out.

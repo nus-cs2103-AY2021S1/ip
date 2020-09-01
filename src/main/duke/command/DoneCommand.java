@@ -28,11 +28,6 @@ public class DoneCommand extends Command {
         }
     }
 
-    @Override
-    public boolean shouldExit() {
-        return super.shouldExit();
-    }
-
     /**
      * Attempts to mark the Task object at the index of the Storage object as completed.
      *

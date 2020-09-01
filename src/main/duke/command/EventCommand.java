@@ -36,11 +36,6 @@ public class EventCommand extends Command {
         }
     }
 
-    @Override
-    public boolean shouldExit() {
-        return super.shouldExit();
-    }
-
     /**
      * Attempts to add the Event object to the storage.
      *

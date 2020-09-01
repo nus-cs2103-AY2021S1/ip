@@ -28,11 +28,6 @@ public class DeleteCommand extends Command {
         }
     }
 
-    @Override
-    public boolean shouldExit() {
-        return super.shouldExit();
-    }
-
     /**
      * Attempts to delete the Task object at the index of the Storage object.
      *

@@ -36,7 +36,7 @@ public class Event extends Task {
 
 
     @Override
-    public String[] toArray() {
+    public String[] toSaveFormatArray() {
         String[] strings = new String[4];
         strings[0] = "[E]";
         strings[1] = completed ? "1" : "0";

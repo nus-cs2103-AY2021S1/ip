@@ -23,11 +23,6 @@ public class TodoCommand extends Command {
         this.todo = new Todo(name);
     }
 
-    @Override
-    public boolean shouldExit() {
-        return super.shouldExit();
-    }
-
     /**
      * Attempts to add the Todo object to the storage.
      *

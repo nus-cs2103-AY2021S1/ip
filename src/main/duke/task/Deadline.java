@@ -35,7 +35,7 @@ public class Deadline extends Task {
     }
 
     @Override
-    public String[] toArray() {
+    public String[] toSaveFormatArray() {
         String[] strings = new String[4];
         strings[0] = "[D]";
         strings[1] = completed ? "1" : "0";

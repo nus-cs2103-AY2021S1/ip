@@ -35,11 +35,6 @@ public class DeadlineCommand extends Command {
         }
     }
 
-    @Override
-    public boolean shouldExit() {
-        return super.shouldExit();
-    }
-
     /**
      * Attempts to add the Deadline object to the storage.
      *

@@ -68,7 +68,7 @@ public final class Parser {
      * @return the String representation of the Task to be used in the data file.
      */
     public static String convertTask(Task task) {
-        String[] args = task.toArray();
+        String[] args = task.toSaveFormatArray();
         String result = "";
         for (String s : args) {
             result = result.concat(String.format("%s%s", s, REGEX_SEPARATOR));
