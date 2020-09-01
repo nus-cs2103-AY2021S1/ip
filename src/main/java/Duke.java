@@ -1,8 +1,8 @@
-import Duke.Tool.*;
-import Duke.Task.*;
+import duke.tool.*;
+import duke.task.*;
 
 /**
- * Represent Duke, a task scheduling bot.
+ * Represents Duke, a task scheduling bot.
  */
 public class Duke {
     
@@ -13,7 +13,8 @@ public class Duke {
     private Command command;
 
     /**
-     * Construct a new Duke object.
+     * Constructs a new Duke object.
+     * 
      * @param filePath path of file storing the data.
      */
     public Duke(String filePath) {
@@ -25,12 +26,12 @@ public class Duke {
     }
 
     /**
-     * Execute the bot.
+     * Executes the bot.
      */
     public void run() {
-        this.ui.printWelcomeMessage();
+        ui.printWelcomeMessage();
         parser.parse(storage, ui, taskList, command);
-        this.ui.sendBye();
+        ui.sendBye();
     }
 
     //run bot

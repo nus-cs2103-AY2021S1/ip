@@ -1,4 +1,4 @@
-package Duke.Task;
+package duke.task;
 
 import java.util.ArrayList;
 
@@ -10,7 +10,8 @@ public class TaskList {
     protected ArrayList<Task> taskList;
 
     /**
-     * Construct a TaskList object.
+     * Constructs a TaskList object.
+     * 
      * @param taskList a list of tasks
      */
     public TaskList(ArrayList<Task> taskList) {
@@ -26,7 +27,8 @@ public class TaskList {
     }
 
     /**
-     * Count the number of tasks in the list.
+     * Counts the number of tasks in the list.
+     * 
      * @return number of tasks in the list in string format
      */
     public String countNum() {
@@ -35,7 +37,8 @@ public class TaskList {
     }
 
     /**
-     * Count the number of tasks in the list.
+     * Counts the number of tasks in the list.
+     * 
      * @return number of tasks in the list.
      */
     public int getSize() {
@@ -43,16 +46,18 @@ public class TaskList {
     }
 
     /**
-     * Get a specific task from the list.
+     * Gets a specific task from the list.
+     * 
      * @param num index.
-     * @return task at index num
+     * @return task at index num.
      */
     public Task get(int num) {
         return taskList.get(num);
     }
 
     /**
-     * Remove a specific task from the list.
+     * Removes a specific task from the list.
+     * 
      * @param num index.
      */
     public void remove(int num) {
@@ -60,7 +65,8 @@ public class TaskList {
     }
 
     /**
-     * Add a new To-do task to the list.
+     * Adds a new To-do task to the list.
+     * 
      * @param newToDo new to-do item.
      */
     public void addToDo(Todo newToDo) {
@@ -68,7 +74,8 @@ public class TaskList {
     }
 
     /**
-     * Add a new deadline task to the list.
+     * Adds a new deadline task to the list.
+     * 
      * @param newDdl new deadline.
      */
     public void addDeadline(Deadline newDdl) {
@@ -76,7 +83,8 @@ public class TaskList {
     }
 
     /**
-     * Add a new event task to the list.
+     * Adds a new event task to the list.
+     * 
      * @param newEvent new event.
      */
     public void addEvent(Event newEvent) {

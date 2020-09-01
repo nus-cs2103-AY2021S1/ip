@@ -1,17 +1,18 @@
-package Duke.Task;
+package duke.task;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Represent a deadline object with a deadline timing.
+ * Represents a deadline object with a deadline timing.
  */
 public class Deadline extends Task {
     
     protected LocalDateTime by;
 
     /**
-     * Construct a deadline object.
+     * Constructs a deadline object.
+     * 
      * @param description title of the deadline.
      * @param by deadline timing.
      * @param isDone status.
@@ -29,6 +30,7 @@ public class Deadline extends Task {
 
     /**
      * Represents the string written into data.txt.
+     * 
      * @return A string written into the data.txt.
      */
     @Override

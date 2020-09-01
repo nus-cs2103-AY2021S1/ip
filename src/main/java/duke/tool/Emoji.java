@@ -1,4 +1,4 @@
-package Duke.Tool;
+package duke.tool;
 
 /**
  * Represents emoji symbol class.
@@ -12,7 +12,8 @@ public enum Emoji {
     private final int code;
 
     /**
-     * Construct an emoji object.
+     * Constructs an emoji object.
+     * 
      * @param emoji unicode of the emoji.
      */
     private Emoji(int emoji) {

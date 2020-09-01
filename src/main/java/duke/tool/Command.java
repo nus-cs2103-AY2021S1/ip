@@ -1,6 +1,10 @@
-package Duke.Tool;
+package duke.tool;
 
-import Duke.Task.*;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.TaskList;
+import duke.task.Todo;
+
 import java.time.LocalDateTime;
 
 /**
@@ -10,6 +14,7 @@ public class Command {
 
     /**
      * Handles invalid user input.
+     * 
      * @throws DukeException exception indicating invalid input.
      */
     public void invalidInput() throws DukeException {
@@ -17,7 +22,8 @@ public class Command {
     }
 
     /**
-     * Mark task as done.
+     * Marks task as done.
+     * 
      * @param num index.
      * @param taskList a list of tasks.
      * @throws DukeException indicates that the task is not found.
@@ -38,7 +44,8 @@ public class Command {
     }
 
     /**
-     * List all the tasks in the list.
+     * Lists all the tasks in the list.
+     * 
      * @param taskList a list of tasks.
      */
     public void list(TaskList taskList) {
@@ -53,7 +60,8 @@ public class Command {
     }
 
     /**
-     * Delete a task from the list.
+     * Deletes a task from the list.
+     * 
      * @param num index of the task.
      * @param taskList a list of tasks.
      * @throws DukeException indicates that the task is not found.
@@ -76,6 +84,7 @@ public class Command {
 
     /**
      * Handles to-do task.
+     * 
      * @param instruction to-do instructions
      * @param taskList a list of tasks.
      * @param ui handles system output.
@@ -96,6 +105,7 @@ public class Command {
 
     /**
      * Handles deadline task.
+     * 
      * @param instruction deadline-instructions.
      * @param taskList a list of tasks.
      * @param ui
@@ -138,6 +148,7 @@ public class Command {
 
     /**
      * Handles event.
+     * 
      * @param instruction event-instruction.
      * @param taskList a list of tasks.
      * @param ui Handles system output.
@@ -179,7 +190,8 @@ public class Command {
     }
 
     /**
-     * Find a task by searching for a keyword.
+     * Finds a task by searching for a keyword.
+     * 
      * @param taskList a list of tasks.
      * @param input find instructions.
      * @throws DukeException indicates that the instruction is empty.

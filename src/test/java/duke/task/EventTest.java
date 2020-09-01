@@ -1,6 +1,5 @@
-package Duke.Task;
+package duke.task;
 
-import Duke.Tool.Parser;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;

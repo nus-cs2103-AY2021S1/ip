@@ -1,4 +1,4 @@
-package Duke.Tool;
+package duke.tool;
 
 /**
  * Represents the exception thrown by Duke.
@@ -6,7 +6,8 @@ package Duke.Tool;
 public class DukeException extends Exception {
 
     /**
-     * Construct a Duke exception.
+     * Constructs a Duke exception.
+     * 
      * @param message message of the exception.
      */
     public DukeException(String message) {
@@ -14,7 +15,8 @@ public class DukeException extends Exception {
     }
 
     /**
-     * Output exception as a string.
+     * Outputs exception as a string.
+     * 
      * @return string representation of the exception.
      */
     @Override

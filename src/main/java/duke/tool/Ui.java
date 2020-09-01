@@ -1,6 +1,10 @@
-package Duke.Tool;
+package duke.tool;
 
-import Duke.Task.*;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.TaskList;
+import duke.task.Todo;
+
 
 /**
  * Handles system output.
@@ -8,7 +12,7 @@ import Duke.Task.*;
 public class Ui {
 
     /**
-     * Print welcome message.
+     * Prints welcome message.
      */
     public void printWelcomeMessage() {
         String emoji = Emoji.CHICKEN.toString();
@@ -21,7 +25,7 @@ public class Ui {
     }
 
     /**
-     * Print bye message.
+     * Prints bye message.
      */
     public void sendBye() {
         String msgForBye = "    ____________________________________________________________\n"
@@ -31,7 +35,8 @@ public class Ui {
     }
 
     /**
-     * Output the number of tasks.
+     * Outputs the number of tasks.
+     * 
      * @param i number of tasks.
      */
     public void sendCount(int i) {
@@ -39,7 +44,8 @@ public class Ui {
     }
 
     /**
-     * Print the newly added to-do item.
+     * Prints the newly added to-do item.
+     * 
      * @param tl a list of tasks.
      * @param todo a to-do item.
      */
@@ -53,7 +59,8 @@ public class Ui {
     }
 
     /**
-     * Print the newly added deadline item.
+     * Prints the newly added deadline item.
+     * 
      * @param tl a list of tasks.
      * @param ddl a deadline item.
      */
@@ -67,7 +74,8 @@ public class Ui {
     }
 
     /**
-     * Print the newly added event item.
+     * Prints the newly added event item.
+     * 
      * @param tl a list of tasks.
      * @param event a event item.
      */
@@ -81,7 +89,7 @@ public class Ui {
     }
 
     /**
-     * Print loading error.
+     * Prints loading error.
      */
     public void showLoadingError() {
         System.out.println("Loading error!");

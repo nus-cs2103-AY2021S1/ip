@@ -1,6 +1,6 @@
-package Duke.Tool;
+package duke.tool;
 
-import Duke.Task.*;
+import duke.task.*;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -11,14 +11,15 @@ import java.util.Scanner;
 import java.io.File;
 
 /**
- * Load and write data to data.txt.
+ * Loads and writes data to data.txt.
  */
 public class Storage {
     
     private String filePath;
 
     /**
-     * Construct a storage class.
+     * Constructs a storage class.
+     * 
      * @param filePath path of the file
      */
     public Storage(String filePath) {
@@ -26,7 +27,8 @@ public class Storage {
     }
 
     /**
-     * Find the index of nth occurrence of a string.
+     * Finds the index of nth occurrence of a string.
+     * 
      * @param str input string
      * @param target target string
      * @param n nth occurrence.
@@ -40,7 +42,8 @@ public class Storage {
     }
 
     /**
-     * Load the data from the file.
+     * Loads the data from the file.
+     * 
      * @return a list of tasks containing all the data.
      */
     public ArrayList<Task> load() {
@@ -90,7 +93,8 @@ public class Storage {
     }
 
     /**
-     * Write a list of tasks into the file.
+     * Writes a list of tasks into the file.
+     * 
      * @param taskList a list of tasks.
      */
     public void writeData(ArrayList<Task> taskList) {

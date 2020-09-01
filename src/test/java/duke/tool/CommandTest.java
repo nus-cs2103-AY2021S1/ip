@@ -1,8 +1,8 @@
-package Duke.Tool;
+package duke.tool;
 
-import Duke.Task.Event;
-import Duke.Task.Task;
-import Duke.Task.TaskList;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.TaskList;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;

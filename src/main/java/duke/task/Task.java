@@ -1,4 +1,4 @@
-package Duke.Task;
+package duke.task;
 
 /**
  * Represents an upcoming task in to-do list.
@@ -10,6 +10,7 @@ public class Task {
 
     /**
      * Construct a task item.
+     * 
      * @param taskDescription title of the task.
      * @param isDone status of the task.
      */
@@ -18,12 +19,18 @@ public class Task {
         this.isDone = isDone;
     }
 
+    /**
+     * Outputs the description of the task.
+     * 
+     * @return the description of the task.
+     */
     public String getTaskDescription() {
         return this.taskDescription;
     }
 
     /**
-     * Get the corresponding symbol based on the status of task.
+     * Gets the corresponding symbol based on the status of task.
+     * 
      * @return symbol corresponding to the status of task.
      */
     public String getStatusIcon() {
@@ -31,7 +38,7 @@ public class Task {
     }
 
     /**
-     * Change the status of task.
+     * Marks the task as completed.
      */
     public void markAsDone() {
         this.isDone = true;
@@ -45,6 +52,7 @@ public class Task {
 
     /**
      * Represents the string written into data.txt.
+     * 
      * @return A string written into the data.txt.
      */
     public String toWrite() {
