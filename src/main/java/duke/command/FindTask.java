@@ -15,11 +15,11 @@ public class FindTask extends Command {
         String filterWord;
         try {
             filterWord = parser.getFilterWord(arr);
-            ArrayList<Task> shallowCopy = new ArrayList<>(tasks);
-            shallowCopy.removeIf(task ->
+            ArrayList<Task> tasksCopy = new ArrayList<>(tasks);
+            tasksCopy.removeIf(task ->
                     !(task.containsWord(filterWord))
             );
-            return layout.printTaskList(true, shallowCopy);
+            return layout.printTaskList(true, tasksCopy);
         } catch (DukeException e) {
             return layout.print(e.getMessage());
         }
