@@ -5,7 +5,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
-import duke.exception.DukeException;
 import duke.exception.DukeOperationException;
 import duke.exception.DukeParseException;
 import duke.parser.StorageParser;
@@ -17,7 +16,7 @@ import duke.task.TaskList;
  */
 public class TaskStorage {
     private static final String DEFAULT_FILENAME = "taskstorage.txt";
-    private static final String DEFAULT_FILEPATH = "src/main/java/duke/storage/";
+    private static final String DEFAULT_FILEPATH = "data/";
 
     private final File file;
     private final StorageParser storageParser;
@@ -29,17 +28,22 @@ public class TaskStorage {
 
     /**
      * Creates a <code>TaskStorage</code>.
-     * The path to the file used is pre determined by default.
-     * If the path directory does not exist, the file will then be saved into the root of the directory.
+     * The path to the file can be predetermined. If not, the default will be used.
+     * If the path directory does not exist, it will be created.
      *
+     * @param path the directory for the file to be stored in.
      * @return a preconfigured <code>TaskStorage</code>.
      */
-    public static TaskStorage createTaskStorage() {
-        File f = new File(DEFAULT_FILEPATH);
-        File actualFile = f.exists()
-                ? new File(DEFAULT_FILEPATH + DEFAULT_FILENAME)
-                : new File(DEFAULT_FILENAME);
-        return new TaskStorage(actualFile);
+    public static TaskStorage createTaskStorage(String... path) {
+        String actualPath = path.length == 0
+                ? DEFAULT_FILEPATH
+                : path[0];
+        File dir = new File(actualPath);
+        if (!dir.exists()) {
+            dir.mkdir();
+        }
+        File f = new File(actualPath + DEFAULT_FILENAME);
+        return new TaskStorage(f);
     }
 
     /**
@@ -85,7 +89,7 @@ public class TaskStorage {
      * Saves the <code>TaskList</code> into the text file.
      *
      * @param taskList the <code>TaskList</code> that is to be saved.
-     * @throws DukeException if the text file cannot be written onto.
+     * @throws DukeOperationException if the text file cannot be written onto.
      */
     public void saveToDisk(TaskList taskList) throws DukeOperationException {
         StringBuilder sb = new StringBuilder();
