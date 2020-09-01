@@ -61,6 +61,10 @@ public class Parser {
         storage.writeFile(tasks);
     }
 
+    public static boolean isBye(String input){
+        return input.split(" ", 2)[0].equals("bye");
+    }
+
     private static boolean isValidSize(String body, TaskList tasks) {
         if (body.length() > 0) {
             String num = body;
@@ -129,9 +133,5 @@ public class Parser {
         } else {
             return LocalDate.parse(time).format(DateTimeFormatter.ofPattern("d MMM yyyy"));
         }
-    }
-
-    public static boolean isBye(String input){
-        return input.split(" ", 2)[0].equals("bye");
     }
 }
