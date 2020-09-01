@@ -21,16 +21,20 @@ public class TaskList {
      * Lists out all the tasks in the list.
      * @throws DukeException
      */
-    public void listTasks() throws DukeException {
+    public String listTasks() throws DukeException {
         if (tasks.size() <= 0) {
             throw new DukeException("You don't have any tasks.");
         }
-        System.out.println("Here are the tasks in your list:");
+
+        String response = "Here are the tasks in your list:\n";
+//        System.out.println("Here are the tasks in your list:");
         for (int i = 0; i < tasks.size(); i++) {
             int taskNo = i + 1;
             Task task = tasks.get(i);
-            System.out.println(taskNo + "." + task);
+//            System.out.println(taskNo + "." + task);
+            response = response + taskNo + "." + task + "\n";
         }
+        return response;
     }
 
     /**
@@ -38,7 +42,7 @@ public class TaskList {
      * @param date The specific date.
      * @throws DukeException If there is no task on that day.
      */
-    public void listTasksOn(LocalDate date) throws DukeException {
+    public String listTasksOn(LocalDate date) throws DukeException {
         if (tasks.size() <= 0) {
             throw new DukeException("You don't have any tasks.");
         }
@@ -52,40 +56,54 @@ public class TaskList {
             }
         }
 
+        String response;
         if (taskList.size() > 0) {
-            System.out.println("Here are the tasks happening on: " + date.format(formatter));
+            response = "Here are the tasks happening on: " + date.format(formatter) + "\n";
+//            System.out.println("Here are the tasks happening on: " + date.format(formatter));
             for (int i = 0; i < taskList.size(); i++) {
                 int taskNo = i + 1;
                 Task task = taskList.get(i);
-                System.out.println(taskNo + "." + task);
+//                System.out.println(taskNo + "." + task);
+                response = response + taskNo + "." + task + "\n";
             }
         } else {
-            System.out.println("You don't have anything on: " + date.format(formatter) + " :)))");
+            response = "You don't have anything on: " + date.format(formatter) + " :)))\n";
+//            System.out.println("You don't have anything on: " + date.format(formatter) + " :)))");
         }
+        return response;
     }
 
     /**
      * Marks the task as done.
      * @param taskNo The task number in the list.
      */
-    public void doneTask(int taskNo) {
-        System.out.println("Nice! I've marked this task as done:");
+    public String doneTask(int taskNo) {
+//        System.out.println("Nice! I've marked this task as done:");
         Task completedTask = tasks.get(taskNo - 1);
         completedTask.markAsDone();
-        System.out.println(" " + " "
+//        System.out.println(" " + " "
+//                + "[" + completedTask.getStatusIcon() + "] "
+//                + completedTask.getDescription());
+        String response = "Nice! I've marked this task as done:\n"
+                + " " + " "
                 + "[" + completedTask.getStatusIcon() + "] "
-                + completedTask.getDescription());
+                + completedTask.getDescription() + "\n";
+        return response;
     }
 
     /**
      * Adds a task to the task list.
      * @param newTask The new task to add.
      */
-    public void addTask(Task newTask) {
-        System.out.println("Got it. I've added this task:");
+    public String addTask(Task newTask) {
+//        System.out.println("Got it. I've added this task:");
         tasks.add(newTask);
-        System.out.println(newTask);
-        System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+//        System.out.println(newTask);
+//        System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+        String response = "Got it. I've added this task:\n"
+                + newTask + "\n"
+                + "Now you have " + tasks.size() + " tasks in the list.\n";
+        return response;
     }
 
     /**
@@ -93,19 +111,26 @@ public class TaskList {
      * @param taskNo The task number of the to be deleted task on the list.
      * @throws DukeException If there is nothing to delete and the task number exceeds total number of tasks.
      */
-    public void deleteTask(int taskNo) throws DukeException {
+    public String deleteTask(int taskNo) throws DukeException {
         if (tasks.size() <= 0) {
             throw new DukeException("Nothing to delete.");
         } else if (taskNo > tasks.size()) {
             throw new DukeException("Please provide a correct task number.");
         } else {
-            System.out.println("Noted. I've removed this task:");
+            String response;
+//            System.out.println("Noted. I've removed this task:");
             Task taskToBeDeleted = tasks.get(taskNo - 1);
             tasks.remove(taskNo - 1);
-            System.out.println(" " + " "
+//            System.out.println(" " + " "
+//                    + "[" + taskToBeDeleted.getStatusIcon() + "] "
+//                    + taskToBeDeleted.getDescription());
+//            System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+            response = "Noted. I've removed this task:\n"
+                    + " " + " "
                     + "[" + taskToBeDeleted.getStatusIcon() + "] "
-                    + taskToBeDeleted.getDescription());
-            System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+                    + taskToBeDeleted.getDescription() + "\n"
+                    + "Now you have " + tasks.size() + " tasks in the list.\n";
+            return response;
         }
     }
 
@@ -114,10 +139,11 @@ public class TaskList {
      * @param keyword The keyword provided by the user.
      * @throws DukeException
      */
-    public void searchKeyword(String keyword) throws DukeException {
+    public String searchKeyword(String keyword) throws DukeException {
         if (tasks.size() <= 0) {
             throw new DukeException("You don't have any tasks.");
         }
+
         ArrayList<Task> taskList = new ArrayList<>();
         for (Task task: tasks) {
             if (task.getDescription().contains(keyword)) {
@@ -125,15 +151,20 @@ public class TaskList {
             }
         }
 
+        String response;
         if (taskList.size() > 0) {
-            System.out.println("Here are the matching tasks in your list:");
+            response = "Here are the matching tasks in your list:\n";
+//            System.out.println("Here are the matching tasks in your list:");
             for (int i = 0; i < taskList.size(); i++) {
                 int taskNo = i + 1;
                 Task task = taskList.get(i);
-                System.out.println(taskNo + "." + task);
+//                System.out.println(taskNo + "." + task);
+                response = response + taskNo + "." + task + "\n";
             }
         } else {
-            System.out.println("You don't have anything related to " + "\"" + keyword + "\"");
+            response = "You don't have anything related to " + "\"" + keyword + "\"" + "\n";
+//            System.out.println("You don't have anything related to " + "\"" + keyword + "\"");
         }
+        return response;
     }
 }

@@ -28,8 +28,8 @@ public class AddCommand extends Command {
      * @param storage The storage of Duke.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        tasks.addTask(newTask);
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        return tasks.addTask(newTask);
     }
 
 

@@ -26,9 +26,8 @@ public class DoneCommand extends Command {
      * @param storage The storage of Duke.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-
-        tasks.doneTask(taskNo);
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        return tasks.doneTask(taskNo);
         // ui.showDoneMessage();
     }
 

@@ -28,8 +28,8 @@ public class DeleteCommand extends Command {
      * @throws DukeException If there is the task number does not exist.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        tasks.deleteTask(taskNo);
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        return tasks.deleteTask(taskNo);
     }
 
     @Override

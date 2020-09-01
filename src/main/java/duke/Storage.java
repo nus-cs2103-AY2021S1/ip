@@ -22,7 +22,7 @@ public class Storage {
     /**
      * Reads files from local disk and print out the content.
      */
-    public void readFile() {
+    public String readFile() {
         // load the file first
         File directory = new File(DIRECTORY_PATH);
         if (!directory.exists()) {
@@ -30,26 +30,33 @@ public class Storage {
         }
 
         File f = new File(FILE_PATH);
+        String savedFiles;
         try {
             if (f.createNewFile()) {
                 // file does not exist
-                System.out.println("A data file has been created for you");
+                savedFiles = "A data file has been created for you\n";
+//                System.out.println("A data file has been created for you");
             } else {
                 // file exist
-                System.out.println("Here are your existing tasks");
+                savedFiles = "Here are your existing tasks";
+//                System.out.println("Here are your existing tasks");
                 Scanner s = new Scanner(f);
                 while (s.hasNext()) {
                     String taskStr = s.nextLine();
-                    System.out.println(taskStr);
+                    savedFiles = savedFiles + taskStr + "\n";
+//                    System.out.println(taskStr);
                     // load the task
                     Task savedTask = Parser.parseTaskFromStorage(taskStr);
                     taskList.getTasks().add(savedTask);
                 }
             }
-            System.out.println("What do you want to do today?");
+            savedFiles = savedFiles + "What do you want to do today?\n";
+//            System.out.println("What do you want to do today?");
         } catch (IOException e) {
-            System.out.println(e.getMessage());
+//            System.out.println(e.getMessage());
+            savedFiles = e.getMessage();
         }
+        return savedFiles;
     }
 
     /**

@@ -2,6 +2,8 @@ package duke;
 
 import duke.commands.Command;
 
+import javax.swing.*;
+
 /**
  * Represents the main Duke who acts as the user's personal assistant.
  */
@@ -18,6 +20,11 @@ public class Duke {
         this.tasks = new TaskList();
         this.storage = new Storage(this.tasks);
         this.ui = new Ui();
+    }
+
+    public String getSavedFile() {
+        String savedFiles = storage.readFile();
+        return savedFiles;
     }
 
     /**
@@ -56,17 +63,20 @@ public class Duke {
      */
     public String getResponse(String input) {
         // return response here
+        String response;
         try {
-            String fullCommand = ui.readCommand();
-            ui.showLine();
-            Command c = Parser.parse(fullCommand);
-            c.execute(tasks, ui, storage);
-            // isExit = c.isExit();
+//            String fullCommand = ui.readCommand();
+//            ui.showLine();
+            Command c = Parser.parse(input);
+            response = c.execute(tasks, ui, storage);
+//            isExit = c.isExit();
         } catch (DukeException e) {
-            ui.showError(e.getMessage());
+//            ui.showError(e.getMessage());
+            response = e.getMessage();
         } finally {
-            ui.showLine();
+//            ui.showLine();
+//            response = response + "reached finally block";
         }
-        return "Duke heard: " + input;
+        return response;
     }
 }

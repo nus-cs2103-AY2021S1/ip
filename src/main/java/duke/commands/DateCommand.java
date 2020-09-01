@@ -30,8 +30,8 @@ public class DateCommand extends Command {
      * @throws DukeException If there is no date provided.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        tasks.listTasksOn(time);
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        return tasks.listTasksOn(time);
     }
 
     @Override

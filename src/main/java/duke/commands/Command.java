@@ -22,7 +22,7 @@ public abstract class Command {
      * @param storage The storage of Duke.
      * @throws DukeException Depends on the actual command.
      */
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
+    public abstract String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
 
     public abstract boolean isExit();
 }

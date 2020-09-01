@@ -23,11 +23,12 @@ public class ExitCommand extends Command {
      * @param storage The storage of Duke.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         storage.saveTasks(tasks);
         ui.closeScanner();
         ui.showByeMessage();
-        return;
+        System.exit(0);
+        return "";
     }
 
     @Override
