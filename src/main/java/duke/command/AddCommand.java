@@ -4,7 +4,6 @@ import duke.Gui;
 import duke.component.DukeException;
 import duke.component.EnumUserInstruction;
 import duke.component.Storage;
-import duke.component.Ui;
 import duke.task.*;
 
 import java.util.ArrayList;

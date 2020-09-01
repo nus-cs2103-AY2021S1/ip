@@ -5,11 +5,11 @@ import duke.task.Task;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Ui {
+public class CliUi {
     private static final String INDENT = "  ";
     Scanner scan;
 
-    public Ui() {
+    public CliUi() {
         this.scan = new Scanner(System.in);
     }
 

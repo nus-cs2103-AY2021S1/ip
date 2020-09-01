@@ -44,19 +44,21 @@ public class Gui {
      * @param list list of tasks.
      */
     public ArrayList<String> listAllTasks(ArrayList<Task> list) {
-        ArrayList<String> reponseList = new ArrayList<>();
+        ArrayList<String> responseList = new ArrayList<>();
+        responseList.add("Here are the tasks in your list: ");
 
         int LENGTH_OF_LIST = list.size();
         if (LENGTH_OF_LIST > 0) {
             int counter = 1;
             for (Task task : list) {
-                reponseList.add("  " + counter + "." + task);
+                responseList.add("  " + counter + "." + task);
                 counter++;
             }
         } else {
-            reponseList.add("No tasks found, add a task now!");
+            responseList.remove(0);
+            responseList.add("No tasks found, add a task now!");
         }
-        return reponseList;
+        return responseList;
     }
 
     /**
@@ -99,7 +101,8 @@ public class Gui {
      */
     public ArrayList<String> deleteMessage(Task task, int tasksLeft) {
         ArrayList<String> responseList = new ArrayList<>();
-        responseList.add ("Noted. I have removed this task:\n" + INDENT + INDENT + task + "\n" + this.taskLeftMessage(tasksLeft));
+        responseList.add ("Noted. I have removed this task:\n" + INDENT + INDENT + task + "\n" +
+                this.taskLeftMessage(tasksLeft));
         return responseList;
     }
 
