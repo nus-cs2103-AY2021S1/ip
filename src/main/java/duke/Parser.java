@@ -1,7 +1,16 @@
 package duke;
 
-import duke.command.*;
-import duke.task.*;
+import duke.command.AddCommand;
+import duke.command.Command;
+import duke.command.CommandTypes;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.ExitCommand;
+import duke.command.ListCommand;
+
+import duke.task.ToDo;
+import duke.task.Deadline;
+import duke.task.Event;
 
 import java.time.format.DateTimeParseException;
 
@@ -9,6 +18,7 @@ import java.time.format.DateTimeParseException;
  * Deals with making sense of the user command.
  */
 public class Parser {
+
     /**
      * Parses the command from the user so that the chat bot can understand.
      * @param fullCommand is the actual full command from the user.

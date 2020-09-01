@@ -1,6 +1,8 @@
 package duke.command;
 
-import duke.*;
+import duke.TaskList;
+import duke.Ui;
+import duke.Storage;
 
 /**
  * Represents a command to list all the tasks.
@@ -18,10 +20,9 @@ public class ListCommand extends Command {
      * @param tasks is the task list that the command will execute with.
      * @param ui is the ui that the command will execute with.
      * @param storage is the storage that the command will execute with.
-     * @throws DukeException when there is a problem executing the command.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
         ui.printList(tasks);
     }
 }

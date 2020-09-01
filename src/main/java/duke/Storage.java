@@ -1,14 +1,17 @@
 package duke;
 
-import duke.task.*;
+import duke.task.Task;
+import duke.task.ToDo;
+import duke.task.Deadline;
+import duke.task.Event;
 
-import java.util.Scanner;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  * Deals with loading tasks from the file and saving tasks in the file.
@@ -39,6 +42,7 @@ public class Storage {
         try {
             Scanner sc = new Scanner(file);
             List<Task> taskList = new ArrayList<>();
+
             while (sc.hasNextLine()) {
                 String loadTask = sc.nextLine();
                 Task task;
