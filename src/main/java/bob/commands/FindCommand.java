@@ -1,9 +1,9 @@
 package bob.commands;
 
+import bob.common.MsgGenerator;
 import bob.data.task.Tasklist;
 import bob.exceptions.BobEmptyFindException;
 import bob.storage.Storage;
-import bob.ui.Ui;
 
 /**
  * Finds all tasks containing specific keyword.
@@ -35,14 +35,14 @@ public class FindCommand extends Command {
 
 
     @Override
-    public void execute(Tasklist tasks, Ui ui, Storage storage) {
+    public String execute(Tasklist tasks, Storage storage) {
         String tasksFound = tasks.findTasks(this.input);
 
         // Ui shows message to user based on number of tasks found
         if (tasksFound.length() == 0) {
-            ui.showNoTaskFoundMessage(this.input);
+            return MsgGenerator.generateNoTaskFoundMessage(this.input);
         } else {
-            ui.showTasksFoundMessage(input, tasksFound);
+            return MsgGenerator.generateTasksFoundMessage(input, tasksFound);
         }
     }
 }

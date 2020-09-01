@@ -1,6 +1,6 @@
 package bob.exceptions;
 
-import bob.common.Messages;
+import bob.common.MsgGenerator;
 
 /**
  * Exception representing index out of bounds for DONE and DELETE commands.
@@ -18,7 +18,7 @@ public class BobListIndexOutOfBoundsException extends BobException {
      * @param action Intended action based on command.
      */
     public BobListIndexOutOfBoundsException (int totalNoOfTasks, int taskNo, String action) {
-        super(Messages.genListIndexOutOfBoundsMsgGenerator(totalNoOfTasks, taskNo, action));
+        super(MsgGenerator.generateListIndexOutOfBoundsMsg(totalNoOfTasks, taskNo, action));
         this.totalNoOfTasks = totalNoOfTasks;
         this.taskNo = taskNo;
         this.action = action;
@@ -26,7 +26,6 @@ public class BobListIndexOutOfBoundsException extends BobException {
 
     @Override
     public String toString() {
-        String errMsg = Messages.genListIndexOutOfBoundsMsgGenerator(totalNoOfTasks, taskNo, action);
-        return errMsg;
+        return MsgGenerator.generateListIndexOutOfBoundsMsg(totalNoOfTasks, taskNo, action);
     }
 }

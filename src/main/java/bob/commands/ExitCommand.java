@@ -1,8 +1,8 @@
 package bob.commands;
 
+import bob.common.MsgGenerator;
 import bob.data.task.Tasklist;
 import bob.storage.Storage;
-import bob.ui.Ui;
 
 /**
  * Exits and cease Bob.
@@ -15,7 +15,7 @@ public class ExitCommand extends Command {
     }
 
     @Override
-    public void execute(Tasklist tasks, Ui ui, Storage storage) {
-        ui.showExitMessage();
+    public String execute(Tasklist tasks, Storage storage) {
+        return MsgGenerator.generateExitMessage();
     }
 }

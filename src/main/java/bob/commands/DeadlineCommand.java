@@ -2,12 +2,12 @@ package bob.commands;
 
 import java.io.IOException;
 
+import bob.common.MsgGenerator;
 import bob.data.task.Deadline;
 import bob.data.task.Tasklist;
 import bob.exceptions.BobEmptyTaskException;
 import bob.exceptions.BobInvalidDateAndTimeException;
 import bob.storage.Storage;
-import bob.ui.Ui;
 
 /**
  * Adds a deadline to the Bob's tasklist.
@@ -97,13 +97,12 @@ public class DeadlineCommand extends Command {
     /**
      * Executes deadline command.
      * @param tasks Bob's tasklist.
-     * @param ui Bob's ui.
      * @param storage Bob's storage.
      * @throws BobInvalidDateAndTimeException if no/invalid date and time is stated.
      * @throws IOException If an error occurs while updating file.
      */
     @Override
-    public void execute(Tasklist tasks, Ui ui, Storage storage) throws BobInvalidDateAndTimeException, IOException {
+    public String execute(Tasklist tasks, Storage storage) throws BobInvalidDateAndTimeException, IOException {
         String[] splitD = input.split("/by");
         if (splitD.length == 1) {
             throw new BobInvalidDateAndTimeException();
@@ -114,6 +113,6 @@ public class DeadlineCommand extends Command {
 
         tasks.addTask(deadline);
         tasks.updateData(storage);
-        ui.showAddMessage(deadline, tasks);
+        return MsgGenerator.generateAddMessage(deadline, tasks);
     }
 }

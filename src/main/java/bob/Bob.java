@@ -3,13 +3,11 @@ package bob;
 import java.io.IOException;
 
 import bob.commands.Command;
-import bob.common.Messages;
+import bob.common.MsgGenerator;
 import bob.data.task.Tasklist;
 import bob.exceptions.BobException;
 import bob.parser.Parser;
 import bob.storage.Storage;
-import bob.ui.Ui;
-
 
 /**
  * Represents the task-managing ChatBot.
@@ -17,67 +15,55 @@ import bob.ui.Ui;
 public class Bob {
     private final Storage storage;
     private final Tasklist tasks;
-    private final Ui ui;
-
+    private boolean hasExited;
     /**
      * Creates a Bob.
      *
      * @throws IOException If saved file can't be loaded.
      */
-    public Bob() throws IOException {
-        //File path of saved task list
-        String filePath = System.getProperty("user.dir").endsWith("text-ui-test")
+
+    public Bob() throws IOException, BobException {
+        boolean ifPathDirIsTest = System.getProperty("user.dir").endsWith("text-ui-test");
+        boolean ifPathDirIsIp = System.getProperty("user.dir").endsWith("ip");
+        String filePath = ifPathDirIsTest
                 ? "test.txt"
-                : System.getProperty("user.dir").endsWith("ip")
+                : ifPathDirIsIp
                 ? "data/bob.txt"
                 // Creates a save file on the user's home directory if user is not in ip directory
                 : System.getProperty("user.home") + "/bob.txt";
-        Tasklist tempTasks;
-        this.ui = new Ui();
+        Tasklist tempTasks = null;
         this.storage = new Storage(filePath);
         try {
             tempTasks = new Tasklist(storage);
         } catch (BobException | IOException e) {
-            System.out.println(Messages.LOADING_ERROR);
             tempTasks = new Tasklist();
-        }
-        this.tasks = tempTasks;
-    }
-
-    /**
-     * Runs Bob.
-     */
-    public void run() {
-        ui.showIntroMessage();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                ui.showDivider();
-                Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExited();
-            } catch (IOException e) {
-                ui.showUpdatingError();
-            } catch (BobException e) {
-                ui.showError(e);
-            } finally {
-                ui.showDivider();
-            }
+            throw e;
+        } finally {
+            this.tasks = tempTasks;
+            this.hasExited = false;
         }
     }
 
     /**
-     * The main environment where Bob runs.
-     *
-     * @param args Command line arguments.
+     * Executes an action based on user input
+     * @param userInput User input.
+     * @return Response message to user.
      */
-    public static void main(String[] args) {
 
+    public String nextAction(String userInput) {
         try {
-            new Bob().run();
+            Command c = Parser.parse(userInput);
+            String replyMessage = c.execute(tasks, storage);
+            this.hasExited = c.isExited();
+            return replyMessage;
         } catch (IOException e) {
-            System.out.println(Messages.INVALID_PATHNAME);
+            return MsgGenerator.generateUpdatingError();
+        } catch (BobException e) {
+            return MsgGenerator.generateError(e);
         }
+    }
+
+    public boolean checkExited() {
+        return this.hasExited;
     }
 }

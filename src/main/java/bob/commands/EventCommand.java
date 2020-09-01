@@ -2,12 +2,12 @@ package bob.commands;
 
 import java.io.IOException;
 
+import bob.common.MsgGenerator;
 import bob.data.task.Event;
 import bob.data.task.Tasklist;
 import bob.exceptions.BobEmptyTaskException;
 import bob.exceptions.BobInvalidDateAndTimeException;
 import bob.storage.Storage;
-import bob.ui.Ui;
 
 /**
  * Adds an event to Bob's tasklist.
@@ -100,13 +100,12 @@ public class EventCommand extends Command {
      * Executes event command.
      *
      * @param tasks Bob's tasklist.
-     * @param ui Bob's ui.
      * @param storage Bob's storage.
      * @throws BobInvalidDateAndTimeException if no/invalid date and time is stated.
      * @throws IOException If an error occurs while updating file.
      */
     @Override
-    public void execute(Tasklist tasks, Ui ui, Storage storage) throws BobInvalidDateAndTimeException, IOException {
+    public String execute(Tasklist tasks, Storage storage) throws BobInvalidDateAndTimeException, IOException {
         String[] split = input.split("/at");
         if (split.length == 1) {
             throw new BobInvalidDateAndTimeException();
@@ -117,7 +116,7 @@ public class EventCommand extends Command {
 
         tasks.addTask(event);
         tasks.updateData(storage);
-        ui.showAddMessage(event, tasks);
+        return MsgGenerator.generateAddMessage(event, tasks);
     }
 
 }
