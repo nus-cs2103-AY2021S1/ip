@@ -27,6 +27,9 @@ public class MainWindow extends AnchorPane {
     private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.png"));
     private final Image duckImage = new Image(this.getClass().getResourceAsStream("/images/duck.png"));
 
+    /**
+     * Initializes JavaFX and binds scrollPane to dialogContainer.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
@@ -34,6 +37,8 @@ public class MainWindow extends AnchorPane {
 
     public void setDuck(Duck d) {
         duck = d;
+        dialogContainer.getChildren().add(
+                DialogBox.getDuckDialog(concatResponseLines(duck.greet()), duckImage));
     }
 
     /**

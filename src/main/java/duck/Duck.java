@@ -47,7 +47,7 @@ public class Duck {
     /**
      * Returns default greetings when user first sees the bot.
      */
-    private String[] greet() {
+    public String[] greet() {
         List<String> welcomeMessage = new ArrayList<>();
         welcomeMessage.add("Hello! I'm Duck");
         welcomeMessage.add("What can I do for you?");
