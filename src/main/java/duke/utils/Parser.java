@@ -4,8 +4,20 @@ import duke.command.*;
 import duke.exceptions.DukeException;
 import duke.task.TaskType;
 
+/**
+ * A helper class that contains method dealing with command parsing.
+ * such as parsing a string to a command.
+ */
 public class Parser {
 
+    /**
+     * Parse the command in string to the correct Command Object.
+     *
+     * @param command the string that wants to be parsed.
+     * @return a Command which can be either ExitCommd, ListCommand, DoneCommand,
+     * DeleteCommand or a AddCommand.
+     * @throws DukeException  If the input string is not in the correct format.
+     */
     public static Command parse(String command) throws DukeException {
         if(command.equals("bye")) {
             return new ExitCommand();

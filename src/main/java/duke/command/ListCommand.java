@@ -3,6 +3,9 @@ package duke.command;
 import duke.task.TaskList;
 import duke.utils.Ui;
 
+/**
+ * Represents command that displays current task list in Duke upon execution.
+ */
 public class ListCommand extends Command {
 
     @Override
@@ -10,6 +13,12 @@ public class ListCommand extends Command {
         return false;
     }
 
+    /**
+     * Uses ui to display the tasks info.
+     *
+     * @param tasks  a TaskList object which contains a list of task
+     * @param ui a UI object which can prints message to console
+     */
     @Override
     public void execute(TaskList tasks, Ui ui) {
         ui.showListMessage(tasks);

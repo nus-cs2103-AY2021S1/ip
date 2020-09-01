@@ -1,5 +1,8 @@
 package duke.task;
 
+/**
+ * Represents a Task which have 3 child class: ToDo, Event and Deadline.
+ */
 public class Task {
     protected boolean isDone;
     protected String description;
@@ -18,7 +21,7 @@ public class Task {
         isDone = true;
     }
 
-    public String getStatusIcon() {
+    private String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
 

@@ -1,11 +1,12 @@
-package duke.model;
-
-import duke.task.Task;
+package duke.task;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents a Deadline Task.
+ */
 public class Deadline extends Task {
 
     private String time;

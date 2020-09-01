@@ -1,8 +1,5 @@
 package duke.task;
 
-import duke.model.Deadline;
-import duke.model.Event;
-import duke.model.ToDo;
 import duke.utils.FileHelper;
 
 import java.util.ArrayList;

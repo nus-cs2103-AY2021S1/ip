@@ -1,7 +1,8 @@
-package duke.model;
+package duke.task;
 
-import duke.task.Task;
-
+/**
+ * Represents a ToDo Task.
+ */
 public class ToDo extends Task {
 
     public ToDo(String description) {

@@ -4,6 +4,9 @@ import duke.task.TaskList;
 import duke.utils.Parser;
 import duke.utils.Ui;
 
+/**
+ * Represents a chat bot call Duke.
+ */
 public class Duke {
 
     private TaskList tasks;
@@ -14,6 +17,9 @@ public class Duke {
         tasks = new TaskList(path, fileName);
     }
 
+    /**
+     * The chat bot starts running and interact with user.
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;

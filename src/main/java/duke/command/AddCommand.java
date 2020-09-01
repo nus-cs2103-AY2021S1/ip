@@ -1,11 +1,15 @@
 package duke.command;
 
-import duke.model.Deadline;
-import duke.model.Event;
-import duke.model.ToDo;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.ToDo;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.utils.Ui;
+
+/**
+ * Represents command that add a task to the Duke's task list upon execution
+ */
 
 public class AddCommand extends Command {
     String taskType;
@@ -21,6 +25,12 @@ public class AddCommand extends Command {
         return false;
     }
 
+    /**
+     * Adds new task to the tasks provided and shows add message through ui.
+     *
+     * @param tasks  a TaskList object which contains a list of task
+     * @param ui a UI object which can prints message to console
+     */
     @Override
     public void execute(TaskList tasks, Ui ui) {
 
