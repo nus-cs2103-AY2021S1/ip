@@ -1,13 +1,15 @@
-import org.omg.CORBA.DynAnyPackage.Invalid;
+package duke.exception;
+
+
 
 public class InvalidArgumentException {
   String errorMessage;
 
-  InvalidArgumentException() {
+  public InvalidArgumentException() {
     this.errorMessage = "Sorry, Duke does not recognize your command!";
   }
 
-  InvalidArgumentException(String errorMessage) {
+  public InvalidArgumentException(String errorMessage) {
     this.errorMessage = errorMessage;
   }
 

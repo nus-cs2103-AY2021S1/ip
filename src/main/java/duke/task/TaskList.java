@@ -1,3 +1,6 @@
+package duke.task;
+
+import duke.userinterface.Printer;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -6,24 +9,28 @@ import java.util.Optional;
 public class TaskList {
   List<Task> tasks;
 
-  TaskList() {
+  public TaskList() {
     this.tasks = new ArrayList<>();
   }
 
-  List<Task> getTaskList() {
+  public List<Task> getTaskList() {
     return tasks;
   }
 
-  /** Iterate through a list and prints its contents. */
-  void iterate() {
+  /**
+   * Iterate through all Tasks.
+   *
+   * @return String containing all tasks.
+   */
+  public String iterate() {
     if (tasks.size() == 0) {
-      System.out.println("Hooray! You have no tasks in the list");
-      return;
+      return "Hooray! You have no tasks in the list";
     }
-    System.out.println("Here are the tasks in your list:");
+    StringBuilder output = new StringBuilder("Here are the tasks in your list: \n");
     for (int i = 0; i < tasks.size(); i++) {
-      System.out.println((i + 1) + ". " + tasks.get(i));
+      output.append(i + 1).append(". ").append(tasks.get(i)).append("\n");
     }
+    return output.toString();
   }
 
   /**
@@ -32,7 +39,7 @@ public class TaskList {
    * @param search Array of words
    * @return List of all matching tasks
    */
-  List<Task> findMatchingTasks(String[] search) {
+  public List<Task> findMatchingTasks(String[] search) {
     List<Task> matchingTasks = new ArrayList<>();
     for (Task t : tasks) {
       if (t.matchesWordList(search)) {
@@ -47,27 +54,29 @@ public class TaskList {
    *
    * @return size of List
    */
-  int size() {
+  public int size() {
     return tasks.size();
   }
 
   /**
-   * Adds a Task to the List.
+   * Adds a duke.task.Task to the List.
    *
-   * @param t Task to be added
+   * @param t duke.task.Task to be added
    * @return Whether operation succeeded
    */
-  boolean addTask(Task t) {
+  public boolean addTask(Task t) {
     tasks.add(t);
     return true;
   }
 
   /**
-   * Removes a Task from a given index
-   * @param index Index of Task to be removed from
-   * @return Optional<Task> if the removal was successful, otherwise an empty Optional object.
+   * Removes a duke.task.Task from a given index
+   *
+   * @param index Index of duke.task.Task to be removed from
+   * @return Optional<duke.task.Task> if the removal was successful, otherwise an empty Optional
+   *     object.
    */
-  Optional<Task> removeTask(int index) {
+  public Optional<Task> removeTask(int index) {
     try {
       return Optional.of(tasks.remove(index));
     } catch (Exception e) {
@@ -76,11 +85,13 @@ public class TaskList {
   }
 
   /**
-   * Sets a Task status to Done
-   * @param index Index of Task to change
-   * @return Optional<Task> if the task was set as done, otherwise an empty Optional object.
+   * Sets a duke.task.Task status to Done
+   *
+   * @param index Index of duke.task.Task to change
+   * @return Optional<duke.task.Task> if the task was set as done, otherwise an empty Optional
+   *     object.
    */
-  Optional<Task> setAsDone(int index) {
+  public Optional<Task> setAsDone(int index) {
     try {
       Task originalTask = tasks.get(index);
       Task newTask = originalTask.setTaskAsCompleted();

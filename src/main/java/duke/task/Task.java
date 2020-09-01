@@ -1,25 +1,25 @@
-import java.util.Arrays;
+package duke.task;
 
 public class Task {
   String taskName;
   boolean isCompleted;
 
   /**
-   * Create a new Task.
+   * Create a new duke.task.Task.
    *
-   * @param task Name of the Task
+   * @param task Name of the duke.task.Task
    */
-  Task(String task) {
+  public Task(String task) {
     this.taskName = task;
     this.isCompleted = false;
   }
 
   /**
    * Create a new task whose status is isCompleted.
-   * @param task Task name
+   * @param task duke.task.Task name
    * @param isCompleted Whether it is completed
    */
-  Task(String task, boolean isCompleted) {
+  public Task(String task, boolean isCompleted) {
     this.taskName = task;
     this.isCompleted = isCompleted;
   }
@@ -42,7 +42,7 @@ public class Task {
    * @param words Array of words
    * @return Whether task name matches
    */
-  boolean matchesWordList(String[] words) {
+  public boolean matchesWordList(String[] words) {
     String[] getWords = taskName.split(" ");
     boolean matchesTask = false;
     for (String word : words) {
@@ -56,7 +56,7 @@ public class Task {
   /**
    * Sets a task as completed.
    *
-   * @return A new Task whose status is completed
+   * @return A new duke.task.Task whose status is completed
    */
   public Task setTaskAsCompleted() {
     return new Task(taskName, true);

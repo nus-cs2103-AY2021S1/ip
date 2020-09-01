@@ -1,46 +1,54 @@
+package duke.userinterface;
+
+import duke.exception.EmptyArgumentException;
+import duke.task.Task;
+
 /** Handles printing of messages to the User. */
 public class Printer {
 
   /**
    * Prints the message that is shown to user after a task is deleted.
    *
-   * @param deletedTask Task that was deleted
+   * @param deletedTask duke.task.Task that was deleted
    * @param lengthAfterDeletion Number of tasks left after deletion
+   * @return Output of operation
    */
-  static void printSuccessDeleteTask(Task deletedTask, int lengthAfterDeletion) {
-    System.out.println("Noted. I've removed this task:\n" + deletedTask);
-    String numberTasks =
+  static String printSuccessDeleteTask(Task deletedTask, int lengthAfterDeletion) {
+    String output = String.format("Noted. I've removed this task:\n" + deletedTask + "\n");
+    output +=
         String.format(
             "Now you have %s %s in the list.",
             lengthAfterDeletion, lengthAfterDeletion == 1 ? "task" : "tasks");
-    System.out.println(numberTasks);
+    return output;
   }
 
   /**
    * Prints the message that is shown to user after a task is successfully set as down.
    *
-   * @param successDone Task that was set as done
+   * @param successDone duke.task.Task that was set as done
+   * @return Success message
    */
-  static void printSuccessSetTaskAsDone(Task successDone) {
-    System.out.println("Nice! I've marked this task as done: \n" + successDone);
+  static String printSuccessSetTaskAsDone(Task successDone) {
+    String output = String.format("Nice! I've marked this task as done: \n" + successDone);
+    return output;
   }
 
   /**
    * Prints the message that is shown to user after a task is successfully added.
-   *
-   * @param toDo Task that was added
+   * @param toDo duke.task.Task that was added
    * @param size Number of tasks left after the task was added
+   * @return Success message
    */
-  static void printSuccessAddTask(Task toDo, int size) {
-    System.out.println("Got it. I've added this task:");
-    System.out.println(toDo);
+  static String printSuccessAddTask(Task toDo, int size) {
+    String output = "Got it. I've added this task: " + toDo.toString() + "\n";
     String numberTasks =
         String.format("Now you have %s %s in the list.", size, size == 1 ? "task" : "tasks");
-    System.out.println(numberTasks);
+    output += numberTasks;
+    return output;
   }
 
-  /** Prints an error message when the Task to be operated on couldn't be found. */
-  static void printTaskNotFound() {
+  /** Prints an error message when the duke.task.Task to be operated on couldn't be found. */
+  public static void printTaskNotFound() {
     System.out.println(new EmptyArgumentException("Sorry! Duke could not find the task"));
   }
 

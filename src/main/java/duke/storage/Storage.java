@@ -1,3 +1,5 @@
+package duke.storage;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -10,7 +12,7 @@ public class Storage {
   String filePath;
   File file;
 
-  Storage(String filePath) {
+  public Storage(String filePath) {
     this.filePath = filePath;
     this.file = new File(filePath);
   }
@@ -20,7 +22,7 @@ public class Storage {
    *
    * @return List of Strings
    */
-  List<String> readFile() {
+  public List<String> readFile() {
     List<String> items = new ArrayList<>();
     if (!this.file.exists()) {
       return items; // empty list
@@ -43,7 +45,7 @@ public class Storage {
    * @param sentences List of Sentences
    * @return Whether operation succeeded
    */
-  boolean updateFile(List<String> sentences) {
+  public boolean updateFile(List<String> sentences) {
     try {
       FileWriter fw = new FileWriter(this.filePath);
       boolean hasError = false;

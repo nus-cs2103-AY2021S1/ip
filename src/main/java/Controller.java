@@ -12,8 +12,6 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import javafx.application.Application;
@@ -25,8 +23,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-
-public class Duke extends Application implements Initializable {
+public class Controller extends Application implements Initializable {
   public TextField command;
   public TextArea console;
   static TaskList taskList;
@@ -45,8 +42,10 @@ public class Duke extends Application implements Initializable {
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-    console.setStyle("-fx-control-inner-background:#000000; -fx-font-family: Consolas; -fx-highlight-fill: #ffffff; -fx-highlight-text-fill: #000000; -fx-text-fill: #00f7ff; ");
-    command.setStyle("-fx-control-inner-background:#000000; -fx-font-family: Consolas; -fx-highlight-fill: #ffffff; -fx-highlight-text-fill: #000000; -fx-text-fill: #ffffff; ");
+    console.setStyle(
+        "-fx-control-inner-background:#000000; -fx-font-family: Consolas; -fx-highlight-fill: #ffffff; -fx-highlight-text-fill: #000000; -fx-text-fill: #00f7ff; ");
+    command.setStyle(
+        "-fx-control-inner-background:#000000; -fx-font-family: Consolas; -fx-highlight-fill: #ffffff; -fx-highlight-text-fill: #000000; -fx-text-fill: #ffffff; ");
     String home = System.getProperty("user.home");
     String filePath = home + "/tasks.txt";
     taskList = new TaskList();
@@ -62,6 +61,7 @@ public class Duke extends Application implements Initializable {
 
   /**
    * Loads a file from a given file path.
+   *
    * @param filePath Location of the file
    */
   static void loadFile(String filePath) {
@@ -95,7 +95,8 @@ public class Duke extends Application implements Initializable {
         Task toBeAdded = isCompleted ? new Todo(taskName, true) : new Todo(taskName);
         taskList.addTask(toBeAdded);
       } else if (sentence.startsWith("[D]")) {
-        // Sentence is in the form [D][<Status of duke.task.Task>]  <duke.task.Task Name>  (<duke.task.Deadline>)
+        // Sentence is in the form [D][<Status of duke.task.Task>]  <duke.task.Task Name>
+        // (<duke.task.Deadline>)
         // remove [D]
         index = sentence.indexOf("]");
         if (index == -1 || index >= sentence.length() - 1) {
@@ -265,10 +266,11 @@ public class Duke extends Application implements Initializable {
     String commandWord = command.getText();
     command.clear();
     if (commandWord.startsWith("bye")) {
-      console.appendText("See you again soon!\n");
+      console.appendText("See you again soon!");
       Stage stage = (Stage) console.getScene().getWindow();
       // do what you have to do
       stage.close();
+      return;
     }
     String output = ui.handleInteraction(commandWord);
     console.appendText(printLine());
@@ -280,5 +282,3 @@ public class Duke extends Application implements Initializable {
     launch(args);
   }
 }
-
-

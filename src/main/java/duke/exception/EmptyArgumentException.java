@@ -1,7 +1,9 @@
+package duke.exception;
+
 public class EmptyArgumentException {
   String errorMessage;
 
-  EmptyArgumentException(String errorMessage) {
+  public EmptyArgumentException(String errorMessage) {
     this.errorMessage = errorMessage;
   }
 

@@ -1,3 +1,11 @@
+package duke.userinterface;
+
+import duke.storage.Storage;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.Todo;
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.util.List;
@@ -9,10 +17,10 @@ public class Parser {
   Storage storage;
 
   /**
-   * Constructor for Parser.
+   * Constructor for duke.userinterface.Parser.
    *
-   * @param taskList List of tasks that the Parser interacts with
-   * @param storage Storage that the Parser interacts with
+   * @param taskList List of tasks that the duke.userinterface.Parser interacts with
+   * @param storage duke.storage.Storage that the duke.userinterface.Parser interacts with
    */
   Parser(TaskList taskList, Storage storage) {
     this.storage = storage;
@@ -32,7 +40,7 @@ public class Parser {
    * @param command Command given
    * @return Whether operation was successful
    */
-  boolean handleCommand(String command) {
+  String handleCommand(String command) {
     if (command.startsWith("delete")) {
       return handleDelete(command);
     } else if (command.startsWith("done")) {
@@ -44,93 +52,92 @@ public class Parser {
     } else if (command.startsWith("event")) {
       return handleAddEvent(command);
     } else if (command.startsWith("list")) {
-      handleList();
-      return true;
+      return handleList();
     } else if (command.startsWith("find")) {
       return handleSearchTask(command);
     } else if (command.startsWith("bye")) {
-      return false;
+      return "";
     } else {
-      return false;
+      Printer.printCustomStatement("Sorry, command not recognized!");
+      return "";
     }
   }
 
-  private boolean handleSearchTask(String command) {
+  private String handleSearchTask(String command) {
     if (command.length() < 6) {
       Printer.printCustomStatement("Command must be in the form 'find <task name>'");
-      return false;
+      return "Command must be in the form 'find <task name>'";
     }
     String name = command.substring(5); // remove everything before "find"
     String[] words = name.split(" ");
     List<Task> tasksThatMatched = taskList.findMatchingTasks(words);
+    String output = "";
     if (tasksThatMatched.size() > 0) {
       Printer.printCustomStatement("Here's what you were looking for");
+      output += "Here's what you were looking for";
       for (Task t : tasksThatMatched) {
-        Printer.printCustomStatement(t.toString());
+        output += String.format("\n %s", t.toString());
       }
     } else {
-      Printer.printCustomStatement("No matching tasks found! Try again?");
+      output = "No matching tasks found! Try again?";
     }
-    return true;
+    return output;
   }
 
-  private boolean handleDelete(String command) {
+  private String handleDelete(String command) {
     int index;
     try {
       index = Integer.parseInt(command.substring(7));
     } catch (IndexOutOfBoundsException e) {
       // no proper number given
       Printer.printTaskNotFound();
-      return false;
+      return "No task name given";
     }
     Optional<Task> task = taskList.removeTask(index);
     if (task.isPresent()) {
-      Printer.printSuccessDeleteTask(task.get(), taskList.size());
+      String output = Printer.printSuccessDeleteTask(task.get(), taskList.size());
       updateStorage();
-      return true;
+      return output;
     } else {
-      return false;
+      return "Task deletion failed! Try again?";
     }
   }
 
-  private boolean handleDone(String command) {
+  private String handleDone(String command) {
     int index = Character.getNumericValue(command.charAt(5));
     Optional<Task> task = taskList.setAsDone(index);
     if (task.isPresent()) {
-      Printer.printSuccessSetTaskAsDone(task.get());
+      String output = Printer.printSuccessSetTaskAsDone(task.get());
       updateStorage();
-      return true;
+      return output;
     } else {
-      Printer.printTaskNotFound();
-      return false;
+      return "Sorry! Task not found";
     }
   }
 
-  private boolean handleAddTodo(String command) {
+  private String handleAddTodo(String command) {
     int index = command.indexOf(" ");
     if (index == -1) {
-      Printer.printEmptyArgument();
-      return false;
+      return "No task name given";
     }
     command = command.substring(index + 1);
     Task toDo = new Todo(command);
     boolean isSuccess = taskList.addTask(toDo);
     if (isSuccess) {
-      Printer.printSuccessAddTask(toDo, taskList.size());
+      String output = Printer.printSuccessAddTask(toDo, taskList.size());
       updateStorage();
-      return true;
+      return output;
     } else {
-      Printer.printEmptyArgument();
-      return false;
+      return "No task name given";
     }
   }
 
-  private boolean handleAddDeadline(String command) {
+  private String handleAddDeadline(String command) {
     int index = command.indexOf(' ');
 
     // get content after the space
     if (index == -1 || index == command.length() - 1) {
-      Printer.printEmptyArgument();
+      return "No task name given";
     }
     // get stuff after the space if there are still characters after the space
     String content = command.substring(index + 1);
@@ -139,14 +146,11 @@ public class Parser {
     // get content after the slash
     if (index == -1 || index == content.length() - 1) {
       // nothing after the slash, or slash is not found
-      Printer.printCustomStatement("No deadline given!");
-      return false;
+      return "No deadline given!";
     }
     // for String formatting reasons, check if there is a space before the slash
     if (index == 0 || content.charAt(index - 1) != ' ') {
-      Printer.printCustomStatement(
-          "Command must be in the format 'deadline <task name> /by <yyyy-mm-dd>' ");
-      return false;
+      return "Command must be in the format 'deadline <task name> /by <yyyy-mm-dd>' ";
     }
     String taskName = content.substring(0, index - 1);
     // get keyword, e.g. "by" or "at"
@@ -154,8 +158,8 @@ public class Parser {
     boolean matches = keyword.equals("by");
 
     if (!matches) {
-      Printer.printCustomStatement("Task name does not start with proper arguments");
-      return false;
+      Printer.printCustomStatement("duke.task.Task name does not start with proper arguments");
+      return "Task name does not start with proper arguments";
     }
 
     try {
@@ -165,26 +169,25 @@ public class Parser {
       Task newTask = new Deadline(taskName, dateTime);
       boolean isSuccessful = taskList.addTask(newTask);
       if (isSuccessful) {
-        Printer.printSuccessAddTask(newTask, taskList.size());
+        String output = Printer.printSuccessAddTask(newTask, taskList.size());
         updateStorage();
+        return output;
+      } else {
+        return "Sorry! Addition failed. Try again?";
       }
-      return isSuccessful;
     } catch (IndexOutOfBoundsException e) {
-      Printer.printEmptyArgument();
-      return false;
+      return "No task name given";
     } catch (DateTimeException e) {
-      Printer.printCustomStatement("Time given must be in the format yyyy-mm-dd");
-      return false;
+      return "Time given must be in the format yyyy-mm-dd";
     }
   }
 
-  private boolean handleAddEvent(String command) {
+  private String handleAddEvent(String command) {
     int index = command.indexOf(' ');
 
     // get content after the space
     if (index == -1 || index == command.length() - 1) {
-      Printer.printCustomStatement("No task name given");
-      return false;
+      return "No task name given";
     }
     // get stuff after the space if there are still characters after the space
     String content = command.substring(index + 1);
@@ -192,16 +195,12 @@ public class Parser {
 
     // get content after the slash
     if (index == -1 || index == content.length() - 1) {
-      // nothing after the slash, or slash is not found
-      Printer.printCustomStatement("No deadline given!");
-      return false;
+      return "No deadline given!";
     }
 
     // for String formatting reasons, check if there is a space before the slash
     if (index == 0 || content.charAt(index - 1) != ' ') {
-      Printer.printCustomStatement(
-          "Command must be in the format 'event <task name> /at <yyyy-mm-dd>' ");
-      return false;
+      return "Command must be in the format 'event <task name> /at <yyyy-mm-dd>' ";
     }
 
     String taskName = content.substring(0, index - 1);
@@ -210,9 +209,7 @@ public class Parser {
     boolean matches = keyword.equals("at");
 
     if (!matches) {
-      System.out.println(
-          new EmptyArgumentException("Task name does not start with proper arguments"));
-      return false;
+      return "Task name does not start with proper arguments";
     }
 
     try {
@@ -223,20 +220,20 @@ public class Parser {
       boolean isSuccessful = taskList.addTask(newTask);
       if (isSuccessful) {
         updateStorage();
-        Printer.printSuccessAddTask(newTask, taskList.size());
+        String output = Printer.printSuccessAddTask(newTask, taskList.size());
+        return output;
+      } else {
+        return "Sorry! Adding task failed";
       }
-      return isSuccessful;
     } catch (IndexOutOfBoundsException e) {
-      System.out.println(new EmptyArgumentException("No task name given"));
-      return false;
+      String output = "No task name given";
+      return output;
     } catch (DateTimeException e) {
-      System.out.println(
-          new InvalidArgumentException("Time given must be in the format yyyy-mm-dd"));
-      return false;
+      return "Time given must be in the format yyyy-mm-dd";
     }
   }
 
-  private void handleList() {
-    taskList.iterate();
+  private String handleList() {
+    return taskList.iterate();
   }
 }

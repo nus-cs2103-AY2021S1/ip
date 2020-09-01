@@ -1,29 +1,31 @@
+package duke.userinterface;
+
+import duke.storage.Storage;
+import duke.task.TaskList;
 import java.util.Scanner;
 import java.util.stream.Stream;
 
 public class Ui {
-  Scanner sc;
   TaskList taskList;
   Parser parser;
   static final char LINE = '*';
 
-  Ui(TaskList taskList, Storage storage) {
-    this.sc = new Scanner(System.in);
+  public Ui(TaskList taskList, Storage storage) {
     this.taskList = taskList;
     this.parser = new Parser(taskList, storage);
     start();
   }
 
-  /** Handles I/O interaction with users and passes the command to the Parser. */
-  void handleInteraction() {
-    boolean isValid = true;
-    while (sc.hasNext() && isValid) {
-      String input = sc.nextLine();
-      printTopLine();
-      isValid = parser.handleCommand(input);
-      printBottomLine();
+  /** Handles I/O interaction with users and passes the command to the duke.userinterface.Parser. */
+  public String handleInteraction(String input) {
+    printTopLine();
+    String output = parser.handleCommand(input);
+    printBottomLine();
+    if (output == "") {
+      return "Sorry! Command not recognized \n";
+    } else {
+      return output + "\n";
     }
-    Printer.printCustomStatement("Goodbye!");
   }
 
   /** Prints a welcome message to the user. */
