@@ -9,6 +9,12 @@ public class TaskList {
 
     private final ArrayList<Task> taskList = new ArrayList<>();
 
+    /**
+     * Adds an task object to this TaskList object
+     * Prints out a graphic saying the task has been added and how many there are total
+     *
+     * @param task
+     */
     public void addTask(Task task) {
         taskList.add(task);
         TextPrinter.standardPrint("Got it. I've added this task:\n  " +
@@ -16,6 +22,12 @@ public class TaskList {
                 "Now you have " + size() + " tasks in the list.");
     }
 
+    /**
+     * Adds an task object to this TaskList object
+     * Does not print anything
+     *
+     * @param task
+     */
     public void loadInTask(Task task) {
         taskList.add(task);
     }
@@ -24,6 +36,10 @@ public class TaskList {
         return taskList.size();
     }
 
+    /**
+     * Prints out all the tasks in this list
+     * Prints along with the top and bottom graphic from TextStore
+     */
     public void printOut() {
         StringBuilder temp = new StringBuilder("Here are the tasks in your list:");
         int counter = 1;
@@ -35,6 +51,11 @@ public class TaskList {
         TextPrinter.standardPrint(temp.toString());
     }
 
+    /**
+     * Finds and returns all tasks with descriptions that contains the string provided
+     *
+     * @param string
+     */
     public void search(String string) {
         StringBuilder temp = new StringBuilder("Here are the matching tasks in your list:");
         int counter = 1;
@@ -48,6 +69,11 @@ public class TaskList {
         TextPrinter.standardPrint(temp.toString());
     }
 
+    /**
+     * Constructs a string from tasks that can be saved into a text file and can be read by FileManager
+     *
+     * @return A long string of all the tasks to be saved
+     */
     public String allSaveString() {
         if (taskList.size() == 0) {
             return "";

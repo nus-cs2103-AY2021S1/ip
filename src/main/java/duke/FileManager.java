@@ -13,6 +13,12 @@ import java.time.format.DateTimeParseException;
 
 public class FileManager {
 
+    /**
+     * Saves the tasks in taskList into a txt file located at the provided path
+     *
+     * @param taskList tasks to be saved
+     * @param path saved location
+     */
     public static void saveList(TaskList taskList, Path path) {
         try {
             FileWriter fw = new FileWriter(path.toFile());
@@ -27,6 +33,14 @@ public class FileManager {
         }
     }
 
+    /**
+     * Tries to read the file from the given path and create a TaskList object from save file
+     * Returns a TaskList object with no tasks if file is empty or not found
+     * Prints relevant status messages
+     *
+     * @param path path to the save file
+     * @return TaskList object containing tasks read from the save file
+     */
     public static TaskList readFromSave(Path path) {
         TaskList taskList = new TaskList();
         try {

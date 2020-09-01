@@ -16,6 +16,11 @@ public class CommandParserAndLogic {
         this.taskList = taskList;
     }
 
+    /**
+     * Splits the string and uses commandCheck method for further logic
+     *
+     * @param input a string input
+     */
     public void handleInput(String input) {
         current = input.split(" ", 2);
         commandCheck(current[0]);
