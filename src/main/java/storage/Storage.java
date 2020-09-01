@@ -37,26 +37,26 @@ public class Storage {
             String[] taskInfo = s.nextLine().split(",", 4);
             if (taskInfo[0].equals("T")) {
                 if (taskInfo[1].equals("1")) {
-                    Todos todo = new Todos(taskInfo[2], true);
+                    Todo todo = new Todo(taskInfo[2], true);
                     list.add(todo);
                 } else {
-                    Todos todo = new Todos(taskInfo[2], false);
+                    Todo todo = new Todo(taskInfo[2], false);
                     list.add(todo);
                 }
             } else if (taskInfo[0].equals("D")) {
                 if (taskInfo[1].equals("1")) {
-                    Deadlines deadline = new Deadlines(taskInfo[2], taskInfo[3], true);
+                    Deadline deadline = new Deadline(taskInfo[2], taskInfo[3], true);
                     list.add(deadline);
                 } else {
-                    Deadlines deadline = new Deadlines(taskInfo[2], taskInfo[3], false);
+                    Deadline deadline = new Deadline(taskInfo[2], taskInfo[3], false);
                     list.add(deadline);
                 }
             } else {
                 if (taskInfo[1].equals("1")) {
-                    Events event = new Events(taskInfo[2], taskInfo[3], true);
+                    Event event = new Event(taskInfo[2], taskInfo[3], true);
                     list.add(event);
                 } else {
-                    Events event = new Events(taskInfo[2], taskInfo[3], false);
+                    Event event = new Event(taskInfo[2], taskInfo[3], false);
                     list.add(event);
                 }
             }
@@ -105,7 +105,7 @@ public class Storage {
     }
 
     private static String formatString(Task task) {
-        if (task instanceof Todos) {
+        if (task instanceof Todo) {
             if (task.checkDone()) {
                 String s = "T,1," + task.getDescription();
                 return s;
@@ -113,20 +113,20 @@ public class Storage {
                 String s = "T,0," + task.getDescription();
                 return s;
             }
-        } else if (task instanceof Deadlines) {
+        } else if (task instanceof Deadline) {
             if (task.checkDone()) {
-                String s = "D,1," + task.getDescription() + "," + ((Deadlines) task).getDeadline();
+                String s = "D,1," + task.getDescription() + "," + ((Deadline) task).getDeadline();
                 return s;
             } else {
-                String s = "D,0," + task.getDescription() + "," + ((Deadlines) task).getDeadline();
+                String s = "D,0," + task.getDescription() + "," + ((Deadline) task).getDeadline();
                 return s;
             }
         } else {
             if (task.checkDone()) {
-                String s = "E,1," + task.getDescription() + "," + ((Events) task).checkAt();
+                String s = "E,1," + task.getDescription() + "," + ((Event) task).checkAt();
                 return s;
             } else {
-                String s = "E,0," + task.getDescription() + "," + ((Events) task).checkAt();
+                String s = "E,0," + task.getDescription() + "," + ((Event) task).checkAt();
                 return s;
             }
         }

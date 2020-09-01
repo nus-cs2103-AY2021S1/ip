@@ -4,17 +4,17 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Encapsulates an Events object in Duke.
+ * Encapsulates an Event object in Duke.
  */
-public class Events extends Task {
+public class Event extends Task {
     protected LocalDateTime at;
 
-    public Events(String task, LocalDateTime at) {
+    public Event(String task, LocalDateTime at) {
         super(task);
         this.at = at;
     }
 
-    public Events(String task, String at, boolean isDone) {
+    public Event(String task, String at, boolean isDone) {
         super(task, isDone);
         LocalDateTime dateTime = LocalDateTime.parse(at, DateTimeFormatter.ISO_LOCAL_DATE_TIME);
         this.at = dateTime;

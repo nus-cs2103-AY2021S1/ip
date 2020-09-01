@@ -24,13 +24,17 @@ public class TaskList {
      * Adds a task to the list and store it in storage.
      * @param task The task to be added.
      */
-    public void addTask(Task task) {
+    public String addTask(Task task) {
+        String text = "";
         String path = System.getProperty("user.dir") + "/data/duke.txt";
 
         Storage.saveTask(path, this.todoList, task);
         this.todoList.add(task);
-        System.out.println("     Got it. I've added this task:" + "\n" + "       " + task.toString());
-        System.out.println("     Now you have " + this.todoList.size() + " tasks in the list.");
+        //System.out.println("     Got it. I've added this task:" + "\n" + "       " + task.toString());
+        //System.out.println("     Now you have " + this.todoList.size() + " tasks in the list.");
+        text = "Got it. I've added this task:" + "\n" + task.toString() + "\n" +
+                "Now you have " + this.todoList.size() + " tasks in the list.";
+        return text;
     }
 
     public Task get(int index) {
@@ -45,29 +49,37 @@ public class TaskList {
      * Removes a task from the list and update storage.
      * @param index The task number to be removed.
      */
-    public void removeTask(int index) {
+    public String removeTask(int index) {
+        String text = "";
         String path = System.getProperty("user.dir") + "/data/duke.txt";
 
         Task removedTask = this.todoList.get(index);
         this.todoList.remove(index);
-        System.out.println("     Noted. I've removed this task:" + "\n" + "      " + removedTask.toString());
-        System.out.println("     Now you have " + this.todoList.size() + " tasks in the list.");
+        //System.out.println("     Noted. I've removed this task:" + "\n" + "      " + removedTask.toString());
+        //System.out.println("     Now you have " + this.todoList.size() + " tasks in the list.");
+        text += "Noted. I've removed this task:" + "\n" + removedTask.toString() + "\n" +
+                "Now you have " + this.todoList.size() + " tasks in the list.";
 
         Storage.rewriteList(path, this.todoList);
 
+        return text;
     }
 
     /**
      * Lists all the tasks in the TaskList.
      */
-    public void listTasks() {
-        System.out.println("     Here are the tasks in your list:");
+    public String listTasks() {
+        String text = "";
+        //System.out.println("     Here are the tasks in your list:");
+        text = text + "Here are the tasks in your list:";
         for (int i = 0; i < this.todoList.size(); i++) {
             int listNumber = i + 1;
             Task currentTask = todoList.get(i);
 
-            System.out.println("     " + listNumber + "." + currentTask.toString());
+            //System.out.println("     " + listNumber + "." + currentTask.toString());
+            text += "\n" + listNumber + "." + currentTask.toString();
         }
+        return text;
     }
 
     public ArrayList<Task> findTasks(String keyword) {

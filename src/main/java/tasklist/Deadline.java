@@ -4,17 +4,17 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Encapsulates a Deadlines object in Duke.
+ * Encapsulates a Deadline object in Duke.
  */
-public class Deadlines extends Task {
+public class Deadline extends Task {
     protected LocalDateTime deadline;
 
-    public Deadlines(String task, LocalDateTime deadline) {
+    public Deadline(String task, LocalDateTime deadline) {
         super(task);
         this.deadline = deadline;
     }
 
-    public Deadlines(String task, String deadline, boolean isDone) {
+    public Deadline(String task, String deadline, boolean isDone) {
         super(task,isDone);
         LocalDateTime dateTime = LocalDateTime.parse(deadline, DateTimeFormatter.ISO_LOCAL_DATE_TIME);
         this.deadline = dateTime;
