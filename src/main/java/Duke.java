@@ -1,9 +1,10 @@
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Scanner;
 
 public class Duke {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -11,32 +12,40 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println(logo + "\nHello im Eu Zin's Duke, he spent thursday afternoon creating me cuz he forgot abt the iP");
 
-        ArrayList<Task> taskList = new ArrayList<>();
+        Storage.loadFromDisk();
         Scanner scanner = new Scanner(System.in);
         while(scanner.hasNextLine()) {
             try {
-                Duke.response(scanner, taskList);
+                Duke.response(scanner, Storage.taskList);
             } catch (DukeException e) {
                 System.out.println(e.toString());
+            } catch (IOException IOe) {
+                IOe.printStackTrace();
             }
         }
     }
 
-    static void response(Scanner scanner, ArrayList<Task> taskList) throws DukeException {
+    static String returnList() {
+        String returnString = "";
+        int counter = 0;
+        Iterator<Task> taskIterator = Storage.taskList.iterator();
+        while (taskIterator.hasNext()) {
+            Task thisTask = taskIterator.next();
+            returnString += "\n" + (counter + 1) + ". " + thisTask.toString();
+            counter++;
+        }
+        return returnString;
+    }
+
+    static void response(Scanner scanner, ArrayList<Task> taskList) throws DukeException, IOException {
         String userInput = scanner.nextLine();
         String borders = "\n\\   / \\   / \\   / \\   / im not very creative \\   / \\   / \\   / \\   /\n \\ /   \\ /   \\ /   \\ /      EuZin's Duke      \\ /   \\ /   \\ /   \\ /\n\n";
         String addedMessage = "ok can i've added it\n";
         if (userInput.equals("bye")) {
             System.out.println(borders + "Bye. Hope to see you again soon!" + borders);
         } else if (userInput.equals("list")) {
-            int counter = 0;
             String returnString = borders + "faster do don't netflix already";
-            Iterator<Task> taskIterator = taskList.iterator();
-            while (taskIterator.hasNext()) {
-                Task thisTask = taskIterator.next();
-                returnString += "\n" + (counter + 1) + ". " + thisTask.toString();
-                counter++;
-            }
+            returnString += Duke.returnList();
             System.out.println(returnString + "\n" + borders);
             response(scanner, taskList);
         } else if (userInput.startsWith("done")) {
@@ -46,13 +55,15 @@ public class Duke {
             thisTask.done();
             returnString += thisTask.toString();
             System.out.println(returnString + "\n" + borders);
+            Storage.saveToDisk();
             response(scanner, taskList);
         } else if (userInput.startsWith("todo")) {
             if (userInput.equals("todo")) throw new ToDoException();
-            Task thisTask = new Task(userInput);
+            Task thisTask = new Task(userInput.replace("todo ", ""));
             taskList.add(thisTask);
             System.out.println(borders + addedMessage + thisTask.toString().replace("todo ","") + "\n" +
                     "Now got " + taskList.size() + " task in the list\n" + borders);
+            Storage.saveToDisk();
             Duke.response(scanner, taskList);
         } else if (userInput.startsWith("deadline")) {
             if (userInput.equals("deadline")) {
@@ -63,7 +74,8 @@ public class Duke {
             taskList.add(thisTask);
             System.out.println(borders + addedMessage + thisTask.toString() + "\n" +
                     "Now got " + taskList.size() + " task in the list\n" + borders);
-            Duke.response(scanner, taskList);
+            Storage.saveToDisk();
+            response(scanner, taskList);
         } else if (userInput.startsWith("event")) {
             if (userInput.equals("event")) throw new eventException();
             String[] StringArr = userInput.split(" /at");
@@ -71,7 +83,8 @@ public class Duke {
             taskList.add(thisTask);
             System.out.println(borders + addedMessage + thisTask.toString() + "\n" +
                     "Now got " + taskList.size() + " task in the list\n" + borders);
-            Duke.response(scanner, taskList);
+            Storage.saveToDisk();
+            response(scanner, taskList);
         } else if (userInput.startsWith("delete")) {
             if (userInput.equals("delete")) throw new deleteException();
             int indexDeleted = Integer.parseInt(userInput.replace("delete ", ""));
@@ -80,7 +93,8 @@ public class Duke {
                 Task thisTask = taskList.get(indexDeleted - 1);
                 taskList.remove(indexDeleted - 1);
                 System.out.println(borders + "ok delete this task alr:\n" + thisTask + "\nNow you left " + taskList.size() + " task(s) left\n" + borders);
-                Duke.response(scanner, taskList);
+                Storage.saveToDisk();
+                response(scanner, taskList);
             }
         } else {
             throw new DukeException();
