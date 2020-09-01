@@ -35,24 +35,24 @@ public class DukeException extends Exception {
     public String toString() {
         String errorMessage = "";
         switch (exceptionType) {
-            case EMPTY_INPUT:
-                errorMessage = MESSAGE_ALL_TASKS_EMPTY_INPUT;
-                break;
-            case INVALID_COMMAND:
-                errorMessage = MESSAGE_ALL_TASKS_INVALID_COMMAND;
-                break;
-            case EMPTY_DESCRIPTION:
-                errorMessage = MESSAGE_ALL_TASKS_EMPTY_DESCRIPTION;
-                break;
-            case DEADLINE_NO_BY:
-                errorMessage = MESSAGE_DEADLINE_NO_BY;
-                break;
-            case EVENT_NO_START_END:
-                errorMessage = MESSAGE_EVENT_NO_START_END;
-                break;
-            case INDEX_OUT_OF_BOUNDS:
-                errorMessage = MESSAGE_INDEX_OUT_OF_BOUNDS;
-                break;
+        case EMPTY_INPUT:
+            errorMessage = MESSAGE_ALL_TASKS_EMPTY_INPUT;
+            break;
+        case INVALID_COMMAND:
+            errorMessage = MESSAGE_ALL_TASKS_INVALID_COMMAND;
+            break;
+        case EMPTY_DESCRIPTION:
+            errorMessage = MESSAGE_ALL_TASKS_EMPTY_DESCRIPTION;
+            break;
+        case DEADLINE_NO_BY:
+            errorMessage = MESSAGE_DEADLINE_NO_BY;
+            break;
+        case EVENT_NO_START_END:
+            errorMessage = MESSAGE_EVENT_NO_START_END;
+            break;
+        case INDEX_OUT_OF_BOUNDS:
+            errorMessage = MESSAGE_INDEX_OUT_OF_BOUNDS;
+            break;
         }
         return errorMessage;
     }
