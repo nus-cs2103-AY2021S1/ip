@@ -10,18 +10,10 @@ import java.util.Scanner;
 public class Ui {
     static String HOME = System.getProperty("user.home");
     java.nio.file.Path PATH = java.nio.file.Paths.get(HOME, "ip", "data.txt");
+    String line = "______________________";
+    String enter = "\n";
 
     Parser p = new Parser();
-
-    Scanner sc;
-
-    Ui(Scanner sc) {
-        this.sc = sc;
-    }
-
-    static void printLine() {
-        System.out.println("______________________");
-    }
 
     /**
      * Greets user.
@@ -29,25 +21,28 @@ public class Ui {
      * @return Next line that user inputs.
      */
     public String greet() {
+        String result = "";
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|";
-        printLine();
-        System.out.println(logo);
-        System.out.println("welcome to my crib");
-        printLine();
 
-        return sc.nextLine();
+        result += logo + enter;
+        result += "welcome to my crib" + enter;
+
+        return result;
     }
 
     /**
      * Bids user farewell.
      */
-    public void exit() {
-        System.out.println("ok u can leave lmao");
-        printLine();
+    public String exit() {
+        String result = "";
+
+        result += "ok u can leave lmao";
+
+        return result;
     }
 
     /**
@@ -55,18 +50,24 @@ public class Ui {
      *
      * @return Next line that user inputs.
      */
-    public String list() throws IOException {
-        int counter = 1;
-        Scanner myReader = new Scanner(PATH);
-        myReader.nextLine();
+    public String list() {
+        String result = "";
 
-        while (myReader.hasNextLine()) {
-            String data = myReader.nextLine();
-            System.out.println(counter + ". " + p.stringToTask(data));
-            counter++;
+        try {
+            int counter = 1;
+            Scanner myReader = new Scanner(PATH);
+            myReader.nextLine();
+
+            while (myReader.hasNextLine()) {
+                String data = myReader.nextLine();
+                result += counter + ". " + p.stringToTask(data) + enter;
+                counter++;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        printLine();
-        return sc.nextLine();
+
+        return result;
     }
 
     /**
@@ -75,12 +76,13 @@ public class Ui {
      * @return Next line that user inputs.
      */
     public String complete(Task t) {
-        System.out.println("gfy youve managed to finish the following...");
-        t = t.completeTask();
-        System.out.println(t);
-        printLine();
+        String result = "";
 
-        return sc.nextLine();
+        result += "gfy youve managed to finish the following..." + enter;
+        t = t.completeTask();
+        result += t + enter;
+
+        return result;
     }
 
     /**
@@ -89,12 +91,13 @@ public class Ui {
      * @return Next line that user inputs.
      */
     public String delete(Task t, int total) {
-        System.out.println("removed!! ^^");
-        System.out.println(t);
-        System.out.println("total task: " + total + "\n:o");
-        printLine();
+        String result = "";
 
-        return sc.nextLine();
+        result += "removed!! ^^" + enter;
+        result += t + enter;
+        result += "total task: " + total + "\n:o";
+
+        return result;
     }
 
     /**
@@ -103,12 +106,13 @@ public class Ui {
      * @return Next line that user inputs.
      */
     public String add(Task t, int total) {
-        System.out.println("added!");
-        System.out.println(t);
-        System.out.println("total task: " + total + "\n:o");
-        printLine();
+        String result = "";
 
-        return sc.nextLine();
+        result += "added!" + enter;
+        result += t + enter;
+        result += "total task: " + total + "\n:o";
+
+        return result;
     }
 
     /**
@@ -117,28 +121,34 @@ public class Ui {
      * @return Next line that user inputs.
      */
     public String handleException(Exception e) {
-        System.out.println(e.getMessage());
-        printLine();
+        String result = "";
 
-        return sc.nextLine();
+        result += e.getMessage();
+
+        return result;
     }
 
-    String find(String keyword) throws IOException {
-        int counter = 1;
-        Scanner reader = new Scanner(PATH);
+    public String find(String keyword) throws IOException {
+        String result = "";
 
-        String line = reader.nextLine();
-        line = reader.nextLine();
+            int counter = 1;
+            Scanner reader = new Scanner(PATH);
 
-        while (reader.hasNextLine()) {
-            if (line.contains(keyword)) {
-                System.out.println(counter + ". " + p.stringToTask(line));
-                counter++;
+            int total = reader.nextInt(); // to skip the first integer
+            String line = reader.nextLine();
+
+            while (reader.hasNextLine()) {
+                if (line.contains(keyword)) {
+                    result += counter + ". " + p.stringToTask(line) + enter;
+                    counter++;
+                }
+                line = reader.nextLine();
             }
-            line = reader.nextLine();
+
+        if (line.contains(keyword)) {
+            result += counter + ". " + p.stringToTask(line) + enter;
         }
 
-        printLine();
-        return sc.nextLine();
+        return result;
     }
 }

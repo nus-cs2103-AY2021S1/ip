@@ -1,11 +1,9 @@
 import org.junit.jupiter.api.Test;
 
-import java.util.Scanner;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class UiTest {
-    Ui ui = new Ui(new Scanner(System.in));
+    Ui ui = new Ui();
 
     @Test
     public void dummyTest(){
