@@ -1,0 +1,11 @@
+#dialog {
+    -fx-background-color: honeydew;
+}
+
+#dialogField {
+    -fx-background-color: black;
+}
+
+#dialogContainer {
+    -fx-background-color: black;
+}

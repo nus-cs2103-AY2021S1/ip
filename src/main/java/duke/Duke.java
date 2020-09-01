@@ -29,9 +29,9 @@ public class Duke {
             this.storage = new Storage();
             this.taskManager = storage.load();
         } catch (InvalidFilePathException e) {
-            ui.print(Colour.convertTextToRed(e.getMessage()));
+            ui.print(e.getMessage());
         } catch (StorageOperationException e) {
-            ui.print(Colour.convertTextToRed(e.getMessage()));
+            ui.print(e.getMessage());
         }
     }
 

@@ -27,12 +27,12 @@ public class DeleteCommand extends Command {
             Task deletedTask = taskManager.getTask(taskIndex - 1);
             taskManager.deleteTask(taskIndex);
             storage.save(taskManager);
-            String output = "Noted. I have removed the task: \n" + Colour.convertTextToRed(deletedTask.toString());
+            String output = "Noted. I have removed the task: \n" + deletedTask.toString();
             return new CommandOutput(output, false);
         } catch (StorageOperationException e) {
-            throw new DukeException(Colour.convertTextToRed(e.getMessage()));
+            throw new DukeException(e.getMessage());
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException(Colour.convertTextToRed(Messages.INVALID_TASK_INDEX_ERROR_MESSAGE));
+            throw new DukeException(Messages.INVALID_TASK_INDEX_ERROR_MESSAGE);
         }
     }
 }

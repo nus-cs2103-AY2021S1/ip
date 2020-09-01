@@ -32,7 +32,7 @@ public class AddCommand extends Command {
     public CommandOutput executeCommand(TaskManager taskManager, Storage storage) throws DukeException {
         taskManager.addTask(task);
         int totalNumberOfTasks = taskManager.getTotalNumberOfTasks();
-        String output = "Got it. I've added this task:\n " + Colour.convertTextToGreen(task.toString()) + "\n";
+        String output = "Got it. I've added this task:\n " + task.toString() + "\n";
         String numberOfTasks = totalNumberOfTasks < 2 ? " task in the list." : " tasks in the list.";
         String finalOutput = output + "Now you have a total of " + String.valueOf(totalNumberOfTasks) + numberOfTasks;
         try {
