@@ -44,7 +44,7 @@ test {
 }
 
 application {
-    mainClassName = "duke.Duke";
+    mainClassName = "duke.Launcher";
 }
 
 shadowJar {
@@ -52,10 +52,10 @@ shadowJar {
     archiveClassifier = null
 }
 
-//task(runMain, dependsOn: 'classes', type: JavaExec) {
-//    main = 'duke.Duke'
-//    classpath = sourceSets.main.runtimeClasspath
-//}
+task(runGUI, dependsOn: 'classes', type: JavaExec) {
+    main = 'duke.Launcher'
+    classpath = sourceSets.main.runtimeClasspath
+}
 
 checkstyle {
     toolVersion = '8.29'

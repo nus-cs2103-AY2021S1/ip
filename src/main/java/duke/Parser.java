@@ -1,13 +1,22 @@
 package duke;
 
-import duke.command.*;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+
+import duke.command.ByeCommand;
+import duke.command.ClearCommand;
+import duke.command.Command;
+import duke.command.DeadlineCommand;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.EventCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
+import duke.command.ToDoCommand;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
-
-import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
 
 /**
  * Represents Parser Object which parses user reply and execute appropriate response.
@@ -15,7 +24,7 @@ import java.time.format.DateTimeParseException;
 public class Parser {
     /**
      * Parses user input and returns appropriate Command Object for execution in Duke class.
-     * 
+     *
      * @param reply user message input into Intrubot.
      * @return Command to be executed by Duke class.
      * @throws DukeException if invalid command or arguments specified.
@@ -65,5 +74,5 @@ public class Parser {
                 throw new DukeException(String.format("Invalid arguments specified for %s", command));
             }
         }
-    }   
+    }
 }

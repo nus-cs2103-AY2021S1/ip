@@ -1,10 +1,5 @@
 package duke;
 
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.ToDo;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -12,6 +7,11 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
 
 /**
  * Represents the Storage Object containing logic to writing and storing task list to memory.
@@ -21,7 +21,7 @@ public class Storage {
 
     /**
      * Initializes Storage object to be used for saving and loading task list throughout Duke.
-     * 
+     *
      * @param filePath specified file for Storage object to read from and write to.
      */
     public Storage(String filePath) {
@@ -31,12 +31,12 @@ public class Storage {
 
     /**
      * Handles logic where ./data or duke.txt does not exists by creating them.
-     * 
-     * @param savedTasks File Object for loading and saving tasks. 
+     *
+     * @param savedTasks File Object for loading and saving tasks.
      * @throws IOException if File object cannot create new file.
      */
     private void handleFileOrDirectoryDoesNotExist(File savedTasks) throws IOException {
-        if(savedTasks.getParentFile().mkdirs()) {
+        if (savedTasks.getParentFile().mkdirs()) {
             System.out.println("./data directory created");
         }
         if (savedTasks.createNewFile()) {
@@ -46,7 +46,7 @@ public class Storage {
 
     /**
      * Saves tasks list to memory.
-     * 
+     *
      * @param taskItems tasks list to be saved to memory.
      * @throws DukeException if task cannot be written to memory if file created in path.
      */
@@ -81,7 +81,7 @@ public class Storage {
 
     /**
      * Loads Tasks array from memory, else returns an empty array.
-     * 
+     *
      * @return List Object containing tasks loaded from memory.
      */
     public List<Task> loadTasksFromMemory() throws DukeException {
@@ -117,7 +117,7 @@ public class Storage {
                     taskToAdd = new Event(description, isDone, LocalDate.parse(time));
                     break;
                 default:
-                   throw new DukeException("Task cannot be read from Duke.txt");
+                    throw new DukeException("Task cannot be read from Duke.txt");
                 }
                 storedTasks.add(taskToAdd);
             }

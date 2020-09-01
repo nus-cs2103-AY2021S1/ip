@@ -8,7 +8,6 @@ import duke.Ui;
  * Represents the Command where user exits the program.
  */
 public class ByeCommand extends Command {
-    
     /**
      * Renders good bye message.
      *
@@ -17,7 +16,7 @@ public class ByeCommand extends Command {
      * @param storage   Object for saving and loading tasks list to hard disk.
      */
     @Override
-    public String execute(TaskList taskItems, Ui ui, Storage storage)  {
+    public String execute(TaskList taskItems, Ui ui, Storage storage) {
         return ui.sayGoodbye();
     }
 

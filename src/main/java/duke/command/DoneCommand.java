@@ -2,9 +2,9 @@ package duke.command;
 
 import duke.DukeException;
 import duke.Storage;
-import duke.task.Task;
 import duke.TaskList;
 import duke.Ui;
+import duke.task.Task;
 
 /**
  * Represents the done command when user wants to mark task as complete from task list.
@@ -14,7 +14,7 @@ public class DoneCommand extends Command {
 
 
     /**
-     * Initializes the DoneCommand Object. 
+     * Initializes the DoneCommand Object.
      * @param args task to mark as complete.
      */
     public DoneCommand(String args) {

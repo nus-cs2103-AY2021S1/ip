@@ -47,7 +47,7 @@ public class MainWindow extends AnchorPane {
         String input = userInput.getText();
         String response;
         try {
-            response= duke.getResponse(input);
+            response = duke.getResponse(input);
         } catch (DukeException e) {
             response = Ui.showError(e.getMessage());
         }

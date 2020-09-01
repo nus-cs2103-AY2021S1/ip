@@ -13,7 +13,7 @@ public class DeleteCommand extends Command {
     private String args;
 
     /**
-     * Initializes the DeleteCommand Object. 
+     * Initializes the DeleteCommand Object.
      * @param args task to delete.
      */
     public DeleteCommand(String args) {

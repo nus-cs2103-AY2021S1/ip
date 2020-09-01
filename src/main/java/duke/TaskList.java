@@ -1,9 +1,9 @@
 package duke;
 
-import duke.task.Task;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import duke.task.Task;
 
 /**
  * Representation of list of tasks added by user.
@@ -17,7 +17,7 @@ public class TaskList {
     public TaskList() {
         this.taskList = new ArrayList<>();
     }
-    
+
     /**
      * Initializes task list object with specified Task List.
      */
@@ -27,7 +27,7 @@ public class TaskList {
 
     /**
      * Adds tasks to task list.
-     * 
+
      * @param task to be added to task list.
      */
     public void addTask(Task task) {
@@ -36,7 +36,7 @@ public class TaskList {
 
     /**
      * Remove task from task list.
-     * 
+     *
      * @param index index of task to be removed.
      * @return Task object which is removed.
      */
@@ -47,7 +47,7 @@ public class TaskList {
 
     /**
      * Gets all the tasks in the task list.
-     * 
+     *
      * @return List Object with all tasks in the TaskList.
      */
     public List<Task> getAll() {
@@ -56,7 +56,7 @@ public class TaskList {
 
     /**
      * Get task from task list.
-     * 
+     *
      * @param taskIndex index of task to be retrieved.
      * @return Task Object retrieved based on index.
      */
@@ -66,11 +66,11 @@ public class TaskList {
 
     /**
      * Gets size of task list.
-     * 
+     *
      * @return number of items int taskList.
      */
     public int getSize() {
-       return taskList.size();
+        return taskList.size();
     }
 
     /**
@@ -89,10 +89,10 @@ public class TaskList {
      */
     @Override
     public String toString() {
-            String formattedListString = "";
-            for (int i = 0; i < taskList.size(); i ++) {
-                formattedListString+= String.format("%d. %s\n", i + 1, taskList.get(i));
-            }
-            return formattedListString;
+        String formattedListString = "";
+        for (int i = 0; i < taskList.size(); i++) {
+            formattedListString += String.format("%d. %s\n", i + 1, taskList.get(i));
+        }
+        return formattedListString;
     }
 }

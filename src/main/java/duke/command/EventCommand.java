@@ -2,9 +2,9 @@ package duke.command;
 
 import duke.DukeException;
 import duke.Storage;
-import duke.task.Task;
 import duke.TaskList;
 import duke.Ui;
+import duke.task.Task;
 
 /**
  * Represents the command where user specifies adding Event task.
@@ -27,7 +27,7 @@ public class EventCommand extends ToDoCommand {
      * @param taskItems represents the tasks which is added to the task list.
      * @param ui        ui component which user interacts with or sees.
      * @param storage   Object for saving and loading tasks list to hard disk.
-     * @throws duke.DukeException if there is error saving task to storage. 
+     * @throws duke.DukeException if there is error saving task to storage.
      */
     @Override
     public String execute(TaskList taskItems, Ui ui, Storage storage) throws DukeException {

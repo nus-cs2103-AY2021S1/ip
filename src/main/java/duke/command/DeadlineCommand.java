@@ -12,14 +12,14 @@ import duke.task.Task;
 public class DeadlineCommand extends ToDoCommand {
     /**
      * Instantiates the DeadlineCommand Object.
-     * 
+     *
      * @param task Stores Deadline object associated with command.
      */
     public DeadlineCommand(Task task) {
         super(task);
     }
 
-     /**
+    /**
      * Adds the task to task list.
      * Renders the Ui for feedback when user adds task successfully.
      * Saves task to storage across sessions.
@@ -27,7 +27,7 @@ public class DeadlineCommand extends ToDoCommand {
      * @param taskItems represents the tasks which is added to the task list.
      * @param ui        ui component which user interacts with or sees.
      * @param storage   Object for saving and loading tasks list to hard disk.
-     * @throws duke.DukeException if there is error saving task to storage. 
+     * @throws duke.DukeException if there is error saving task to storage.
      */
     @Override
     public String execute(TaskList taskItems, Ui ui, Storage storage) throws DukeException {

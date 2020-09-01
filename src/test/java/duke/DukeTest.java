@@ -5,7 +5,8 @@ public class DukeTest {
     @Test
     public void dummyTest() {
 //        featureUnderTest_testScenario_expectedBehavior 
-        Duke duke = new Duke(Duke.FILE_PATH);
+        Duke duke = new Duke();
+        
     }
     
 }

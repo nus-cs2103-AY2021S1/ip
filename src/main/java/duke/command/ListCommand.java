@@ -9,7 +9,6 @@ import duke.Ui;
  * Represents the list command when user wants to list all task in TaskList.
  */
 public class ListCommand extends Command {
-    
     /**
      * Renders view of all tasks in task list.
      *

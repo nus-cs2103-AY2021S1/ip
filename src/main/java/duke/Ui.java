@@ -1,9 +1,9 @@
 package duke;
 
-import duke.task.Task;
-
 import java.util.List;
 import java.util.Scanner;
+
+import duke.task.Task;
 
 /**
  * Represents Ui Components for user interaction and displaying messages.
@@ -17,7 +17,8 @@ public class Ui {
      * @return String representation of greeting message.
      */
     public String greetUser() {
-        String greetingLogo = "8888888 888b    888 88888888888 8888888b.  888     888 888888b.    .d88888b. 88888888888 \n"
+        String greetingLogo =
+                "8888888 888b    888 88888888888 8888888b.  888     888 888888b.    .d88888b. 88888888888 \n"
                 + "  888   8888b   888     888     888   Y88b 888     888 888  \"88b  d88P\" \"Y88b    888     \n"
                 + "  888   88888b  888     888     888    888 888     888 888  .88P  888     888    888     \n"
                 + "  888   888Y88b 888     888     888   d88P 888     888 8888888K.  888     888    888     \n"
@@ -29,7 +30,7 @@ public class Ui {
     }
 
     /**
-     * Sends good bye message to user. 
+     * Sends good bye message to user.
      *
      * @return String with good bye message.
      */
@@ -57,7 +58,7 @@ public class Ui {
      */
     public static String listFormatter(List<Task> taskItems) {
         StringBuilder formattedListString = new StringBuilder();
-        for (int i = 0; i < taskItems.size(); i ++) {
+        for (int i = 0; i < taskItems.size(); i++) {
             formattedListString.append(String.format("%d. %s\n", i + 1, taskItems.get(i)));
         }
         return formattedListString.toString();
@@ -88,8 +89,8 @@ public class Ui {
      * @param task which is added.
      */
     public String addTaskReply(Task task, TaskList taskItems) {
-        return String.format("Got it. I've added this task:\n    %s\nNow you have %d tasks in the list"
-                , task.toString(), taskItems.getSize());
+        return String.format("Got it. I've added this task:\n    %s\nNow you have %d tasks in the list",
+                task.toString(), taskItems.getSize());
     }
 
     /**
@@ -99,8 +100,8 @@ public class Ui {
      * @return String representation of delete message
      */
     public String deleteTaskReply(Task task, TaskList taskItems) {
-        return String.format("HAI. I've deleted this task:\n    %s\nNow you have %d tasks in the list"
-                , task.toString(), taskItems.getSize());
+        return String.format("HAI. I've deleted this task:\n    %s\nNow you have %d tasks in the list",
+                task.toString(), taskItems.getSize());
     }
 
 
@@ -111,7 +112,7 @@ public class Ui {
      * @return String representation of delete message
      */
     public String findTaskReply(List<Task> matchingTasks) {
-        return String.format("HAI. Here are matching tasks:\n%s",listFormatter(matchingTasks));
+        return String.format("HAI. Here are matching tasks:\n%s", listFormatter(matchingTasks));
     }
 
     /**

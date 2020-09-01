@@ -2,17 +2,15 @@ package duke;
 import duke.command.Command;
 
 public class Duke {
-
+    public static final String FILE_PATH = "data/duke.txt";
     /** File path for storage object to write to. */
     private Storage storage;
     private TaskList taskItems;
     private Ui ui;
     private Parser parser;
-    public static final String FILE_PATH = "data/duke.txt";
 
     /**
-     * Instantiates Duke Object which initializes variables needed throughout program. 
-     * 
+     * Instantiates Duke Object which initializes variables needed throughout program.
      */
     public Duke() {
         ui = new Ui();
@@ -30,27 +28,29 @@ public class Duke {
      * Reads User input and execute appropriate command.
      */
     public void run() {
-        ui.greetUser();
+        System.out.println(ui.greetUser());
         boolean isExit = false;
-        while(!isExit) {
+        while (!isExit) {
             try {
                 String fullCommand = ui.readCommand();
-                Command c = Parser.parse(fullCommand);
+                Command c = parser.parse(fullCommand);
                 System.out.println(ui.formatReply(c.execute(taskItems, ui, storage)));
                 isExit = c.isExit();
             } catch (DukeException duked) {
-                ui.showError(duked.getMessage());
+                System.out.println(ui.formatReply(ui.showError(duked.getMessage())));
             } finally {
             }
         }
     }
 
+    /**
+     * Returns responses after parsing user commands.
+     */
     public String getResponse(String input) throws DukeException {
         return Parser.parse(input).execute(taskItems, ui, storage);
     }
-    
-    /**
-     * Executes the Duke process.
+
+    /** * Executes the Duke process.
      *
      * @param args command line argument it is a collection of variables in the string format.
      */
