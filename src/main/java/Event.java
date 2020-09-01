@@ -18,10 +18,10 @@ public class Event extends Task {
     @Override
     public String toString() {
         String formattedDate = at.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
-        return "[D]" + super.toString() + "(at: " + formattedDate + ")";
+        return "[E]" + super.toString() + "(at: " + formattedDate + ")";
     }
 
     public String toDataString() {
-        return String.format("D|%s|%s|%s", super.isDone, super.description, this.at);
+        return String.format("E|%s|%s|%s", super.isDone, super.description, this.at);
     }
 }
