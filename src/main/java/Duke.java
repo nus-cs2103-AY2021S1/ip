@@ -1,27 +1,38 @@
+import javafx.scene.layout.VBox;
+
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class Duke  {
+    private Ui ui;
+    private TaskSaveAndLoadManager taskSaveAndLoadManager = new TaskSaveAndLoadManager();
+    private TaskManager taskManager;
 
-    public static void main(String[] args) throws IOException {
-        String separationLine = "     _____________________________________________________\n";
-        String indentation = "      ";
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println(separationLine + logo);
-
-        System.out.print(indentation + "Ah another dude trying to be productive. Sure. \n");
-        System.out.print(indentation + "Let's see how long it takes. \n");
-        System.out.print(indentation + "So, tell me, what do you want, sweetie? \n" + separationLine);
-
-        /*IoHandler handler = new IoHandler();
-
-        handler.handleInput();*/
+    public Duke() throws IOException {
+        if (taskSaveAndLoadManager.loadTaskManager() != null) {
+            this.taskManager = taskSaveAndLoadManager.loadTaskManager();
+        } else {
+            this.taskManager = new TaskManager(new ArrayList<>());
+        }
     }
 
-    String getResponse(String input) throws DukeException, IOException {
-        return NewIoHandler.handleInputAndReply(input);
+    public void setUi(VBox dialogContainer) {
+        this.ui = new Ui(dialogContainer);
+    }
+
+    public boolean getResponse(String input) throws IOException {
+        try {
+            Command c = Parser.parse(input);
+            c.execute(taskManager, ui);
+            taskSaveAndLoadManager.saveTaskManager(this.taskManager);
+            return c.isBye();
+        } catch (DukeException e) {
+            ui.print(e.getMessage());
+        }
+        return false;
+    }
+
+    public void greet() {
+        ui.greet();
     }
 }

@@ -1,5 +1,5 @@
 public class MissingTaskIndexException extends DukeException {
-    public MissingTaskIndexException(InputType inputType) {
+    public MissingTaskIndexException(TaskType inputType) {
         super(inputType.toString().toLowerCase() + " what?");
     }
 }

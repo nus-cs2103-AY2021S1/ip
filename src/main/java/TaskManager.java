@@ -97,7 +97,7 @@ public class TaskManager {
                 result = result + index + givenTaskList.get(i).toString();
                 break;
             }
-            result = result + index + givenTaskList.get(i).toString() + "\n" + "      ";
+            result = result + index + givenTaskList.get(i).toString() + "\n";
         }
         return result;
     }
