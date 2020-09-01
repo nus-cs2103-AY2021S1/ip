@@ -2,14 +2,12 @@ package tasklist;
 
 import java.util.ArrayList;
 
-import task.Task;
-import task.Deadline;
-import task.Todo;
-import task.Event;
-
 import duke.DukeException;
-
 import parser.Parser;
+import task.Deadline;
+import task.Event;
+import task.Task;
+import task.Todo;
 
 /**
  * TaskList contains the list of tasks and the functions that change the list of
@@ -60,7 +58,9 @@ public class TaskList {
             String output = "";
             Task item = todoList.get(Integer.valueOf(indexString) - 1);
             item.completeTask();
-            output += "     \\\\(^o^)/ *.*.* \\\\(^o^)/"+ "\n  Yay! This task has been completed:" + "\n  " + item.getItem();
+            output += "     \\\\(^o^)/ *.*.* \\\\(^o^)/"
+                    + "\n  Yay! This task has been completed:"
+                    + "\n  " + item.getItem();
             return output;
         } catch (Exception e) {
             throw new DukeException("Oops! Invalid task number. Please try again >.<");

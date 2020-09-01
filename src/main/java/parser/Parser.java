@@ -3,13 +3,11 @@ package parser;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-import tasklist.TaskList;
-import storage.Storage;
-
 import duke.DukeException;
-
+import storage.Storage;
 import task.Deadline;
 import task.Event;
+import tasklist.TaskList;
 
 /**
  * Parser parses the commands inputted by the user into the Java Duke Program

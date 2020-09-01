@@ -1,18 +1,20 @@
 package parser;
 
-import duke.DukeException;
-import org.junit.jupiter.api.Test;
-import java.time.LocalDate;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.time.LocalDate;
+
+import org.junit.jupiter.api.Test;
+
+import duke.DukeException;
+
 public class ParserTest {
-    LocalDate date1 = LocalDate.parse("2020-04-23");
-    LocalDate date2 = LocalDate.parse("2020-12-05");
+    private LocalDate date1 = LocalDate.parse("2020-04-23");
+    private LocalDate date2 = LocalDate.parse("2020-12-05");
 
     @Test
     public void formatDateTest1 () throws DukeException {
-        assertEquals("Apr 23 2020 11.30pm", Parser.formatDateString(date1,"23/04/2020 2330"));
+        assertEquals("Apr 23 2020 11.30pm", Parser.formatDateString(date1, "23/04/2020 2330"));
     }
 
     @Test
