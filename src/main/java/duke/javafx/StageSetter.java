@@ -9,8 +9,8 @@ public class StageSetter extends Application {
 
     @Override
     public void start(Stage stage) {
-        Label helloWorld = new Label("Fuck You!"); // Creating a new Label control
-        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
+        Label label = new Label("Fuck You!"); // Creating a new Label control
+        Scene scene = new Scene(label); // Setting the scene to be our Label
 
         stage.setScene(scene); // Setting the stage to show our screen
         stage.show(); // Render the stage.
