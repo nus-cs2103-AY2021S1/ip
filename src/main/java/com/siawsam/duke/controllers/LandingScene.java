@@ -3,6 +3,8 @@ package com.siawsam.duke.controllers;
 import com.siawsam.duke.Duke;
 import com.siawsam.duke.Response;
 
+import java.io.IOException;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -39,6 +41,20 @@ public class LandingScene extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+    
+        String initializationMessage;
+        try {
+            Response loadOperationResponse = duke.loadFromDisk();
+            initializationMessage = loadOperationResponse.getMessage();
+        } catch (IOException ex) {
+            initializationMessage = "An error occurred while trying to read the save file.";
+        } catch (ClassNotFoundException ex) {
+            initializationMessage = "The save file does not contain a saved Duke task list.";
+        }
+    
+        dialogContainer.getChildren().add(
+                DialogBox.getDukeDialog(initializationMessage, dukeImage)
+        );
     }
     
     /**

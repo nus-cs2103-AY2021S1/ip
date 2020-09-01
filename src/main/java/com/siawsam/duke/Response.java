@@ -33,4 +33,8 @@ public class Response {
     public boolean isTerminating() {
         return isTerminating;
     }
+    
+    public boolean isEmpty() {
+        return isEmpty();
+    }
 }
