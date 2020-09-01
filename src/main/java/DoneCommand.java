@@ -1,7 +1,7 @@
 /**
  * Represents a done command.
  */
-public class DoneCommand extends Command{
+public class DoneCommand extends Command {
 
     DoneCommand(String str) {
         super(str);
@@ -18,7 +18,7 @@ public class DoneCommand extends Command{
     public void execute(TaskList list, Ui ui, Storage storage) {
         try {
             int num = Integer.parseInt(str.split(" ")[1]);
-            list.getList().get(num-1).markDone();
+            list.getList().get(num - 1).markDone();
             ui.printDone(list, num);
         } catch (IndexOutOfBoundsException e) {
             ui.printInvalidNumber();

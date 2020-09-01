@@ -1,7 +1,6 @@
-import java.io.FileWriter;
 import java.io.IOException;
 
-public class ByeCommand extends Command{
+public class ByeCommand extends Command {
 
     ByeCommand(String str) {
         super(str);

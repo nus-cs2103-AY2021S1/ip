@@ -1,7 +1,7 @@
 /**
  * Represents a event task.
  */
-public class Event extends Task{
+public class Event extends Task {
     private String time;
 
     public Event(String description, String time) {

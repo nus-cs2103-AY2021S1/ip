@@ -1,4 +1,4 @@
-public class TodoCommand extends Command{
+public class TodoCommand extends Command {
 
     TodoCommand(String str) {
         super(str);

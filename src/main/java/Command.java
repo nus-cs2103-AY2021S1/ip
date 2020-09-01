@@ -4,12 +4,16 @@ import java.io.IOException;
  * Represents a command to be executed.
  */
 public abstract class Command {
-    String str;
-    boolean isExit = false;
+    protected String str;
+    protected boolean isExit = false;
 
+    /**
+     * Creates a command.
+     * @param str user input
+     */
     public Command(String str) {
-        this.str = str;
         isExit = false;
+        this.str = str;
     }
 
     // different command class will have different execute implementation

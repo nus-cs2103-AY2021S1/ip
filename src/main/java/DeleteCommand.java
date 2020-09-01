@@ -2,7 +2,7 @@
  * Represents a delete command from a user
  * which will lead to the deletion of a task in the task list.
  */
-public class DeleteCommand extends Command{
+public class DeleteCommand extends Command {
 
     DeleteCommand(String str) {
         super(str);
@@ -20,7 +20,7 @@ public class DeleteCommand extends Command{
         try {
             int num = Integer.parseInt(str.split(" ")[1]);
             ui.printDelete(list, num);
-            list.getList().remove(num-1);
+            list.getList().remove(num - 1);
         } catch (IndexOutOfBoundsException e) {
             ui.printInvalidNumber();
         }

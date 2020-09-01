@@ -5,7 +5,7 @@ import java.time.format.DateTimeParseException;
 /**
  * Represents a event command from a user.
  */
-public class EventCommand extends Command{
+public class EventCommand extends Command {
 
     EventCommand(String str) {
         super(str);

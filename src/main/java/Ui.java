@@ -63,7 +63,7 @@ public class Ui {
 
     public void printDone(TaskList list, int num) {
         System.out.println("\t" + line + "\n\tNice! I've marked this task as done:\n\t  "
-                + list.getList().get(num-1)
+                + list.getList().get(num - 1)
                 + "\n\t" + line);
     }
 
@@ -77,7 +77,7 @@ public class Ui {
 
     public void printDelete(TaskList list, int num) {
         System.out.println("\t" + line + "\n\tNoted. I've removed this task:\n\t  "
-                + list.getList().get(num-1)
+                + list.getList().get(num - 1)
                 + "\n\tNow you have " + (list.getList().size() - 1) + " tasks in the list."
                 + "\n\t" + line);
     }

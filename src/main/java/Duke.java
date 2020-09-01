@@ -6,6 +6,10 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Initialises duke.
+     * @param filePath
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);

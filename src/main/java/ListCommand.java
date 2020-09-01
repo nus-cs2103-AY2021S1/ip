@@ -1,7 +1,7 @@
 /**
  * Represents a list command from a user.
  */
-public class ListCommand extends Command{
+public class ListCommand extends Command {
 
     ListCommand(String str) {
         super(str);
