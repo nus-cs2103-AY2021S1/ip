@@ -6,7 +6,6 @@ import java.io.FileReader;
 import java.io.BufferedReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.FileNotFoundException;
 
 public class Storage {
     String filePath;
@@ -17,31 +16,29 @@ public class Storage {
             File dataFile = new File(filePath);
             if (!dataFile.getParentFile().exists()) {
                 if (dataFile.mkdirs()) {
-                    System.out.println("Data Directory is created...");
+                    new Ui("Data Directory is created...").printMessage();
                 } else {
-                    System.out.println("Oops...the data directory cannot be created :(");
+                    new Ui("Oops...the data directory cannot be created :(").printMessage();
                 }
             } else {
-                System.out.println("Data directory located...");
+                new Ui("Data directory located...").printMessage();
             }
             if (!dataFile.exists()) {
                 if (dataFile.createNewFile()) {
-                    System.out.println("Data file is created...");
-                    System.out.println("Initialization complete!");
+                    new Ui("Data file is created...\nInitialization complete!\n").printMessage();
                 } else {
-                    System.out.println("Oops...the data file cannot be created :(");
+                    new Ui("Oops...the data file cannot be created :(").printMessage();
                 }
             } else {
-                System.out.println("Data file located...");
+                new Ui("Data file located...").printMessage();
                 loadExistingData();
-                System.out.println("Initialization complete!");
+                new Ui("Initialization complete!").printMessage();
             }
         } catch (IOException e) {
-            System.out.println("An error occurred.");
+            new Ui("An error occurred.").printMessage();
             e.printStackTrace();
         } catch (DukeException e) {
-            System.out.print("Initialization failed. ");
-            System.out.println(e.getMessage());
+            new Ui("Initialization failed.\ne.getMessage()\n").printMessage();
         }
     }
 

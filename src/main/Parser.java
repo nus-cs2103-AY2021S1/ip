@@ -1,10 +1,7 @@
-import java.util.ArrayList;
-import java.util.Scanner;
-
 import java.io.IOException;
 
 public class Parser {
-    public void parse(String input, TaskList taskList, Storage storage, Ui ui, Scanner sc) {
+    public void parse(String input, TaskList taskList, Storage storage, Ui ui) {
         String[] inputInfo = input.split(" ", 2);
         String command = inputInfo[0];
         try {
@@ -60,9 +57,9 @@ public class Parser {
                     throw new DukeException("I'm sorry, but I don't know what that means :-(\n");
             }
         } catch (DukeException e) {
-            System.out.println(e.getMessage());
+            new Ui(e.getMessage()).printMessage();
         } catch (IOException e) {
-            System.out.println("An error occured while retrieving the data.");
+            new Ui("An error occurred while retrieving the data.").printMessage();
         }
     }
 

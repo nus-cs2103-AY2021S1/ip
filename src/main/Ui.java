@@ -2,15 +2,29 @@ import java.util.ArrayList;
 
 public class Ui {
     String message;
+    String divider;
 
-    public Ui() {}
+    public Ui() {
+        divider = "____________________________________________________\n";
+    }
 
     public Ui(String message) {
+        this.message = message;
+        divider = "____________________________________________________\n";
+    }
+
+    public void setMessage(String message) {
         this.message = message;
     }
 
     public void printMessage() {
         System.out.println(message);
+    }
+
+    public void printMessageWithBorders() {
+        System.out.println(divider);
+        System.out.println(message);
+        System.out.println(divider);
     }
 
     public void printLogo() {
@@ -22,59 +36,44 @@ public class Ui {
         System.out.println(logo);
     }
 
-    public void printWelcome() {
-        String welcomeMessage = "____________________________________________________\n" +
-                "Hello, I'm Duke!\n\n";
-        System.out.println(welcomeMessage);
-    }
-
-    public void printWhatCanIDo() {
-        String whatCanIDoMessage = "What can I do for you?\n" +
-                "____________________________________________________\n";
-        System.out.println(whatCanIDoMessage);
-    }
-
-    public void printExistingTasks(ArrayList<Task> taskList) {
-        String currentTasks = "";
+    public void printWelcome(ArrayList<Task> taskList) {
+        message = "Hello, I'm Duke!\n\n";
         if (taskList.size() < 1) {
-            currentTasks += "You currently have no tasks. ";
+            message += "You currently have no tasks. ";
         } else {
-            currentTasks +=  "Here are your existing tasks:\n";
+            message +=  "Here are your existing tasks:\n";
             for (int i = 0; i < taskList.size(); i++) {
                 Task task = taskList.get(i);
-                String taskString = String.valueOf(i + 1) + "." + task.toString() + "\n";
-                currentTasks += taskString;
+                message += i + 1 + "." + task.toString() + "\n";
             }
-            currentTasks += "\n";
+            message += "\n";
         }
-        System.out.println(currentTasks);
+        message += "What can I do for you?\n";
+        setMessage(message);
+        printMessageWithBorders();
     }
 
     public void printLoadingError() {
-        String loadingError = "An error occured while loading the data...";
-        System.out.println(loadingError);
+        message = "An error occurred while loading the data...";
+        printMessage();
     }
 
     public void printTasks(ArrayList<Task> taskList) {
-        String tasks = "____________________________________________________\n";
         if (taskList.size() < 1) {
-            tasks += "You currently have no tasks.\n";
+            message = "You currently have no tasks.\n";
         } else {
-            tasks += "Here are the tasks in your list:\n";
+            message = "Here are the tasks in your list:\n";
             for (int i = 0; i < taskList.size(); i++) {
                 Task task = taskList.get(i);
-                String taskString = String.valueOf(i + 1) + "." + task.toString() + "\n";
-                tasks += taskString;
+                String taskString = i + 1 + "." + task.toString() + "\n";
+                message += taskString;
             }
         }
-        tasks += "____________________________________________________\n";
-        System.out.println(tasks);
+        printMessageWithBorders();
     }
 
     public void printGoodbye() {
-        String goodbyeMessage = "____________________________________________________\n" +
-                "Bye. Hope to see you again soon!\n" +
-                "____________________________________________________\n";
-        System.out.println(goodbyeMessage);
+        message = "Bye. Hope to see you again soon!\n";
+        printMessageWithBorders();
     }
 }
