@@ -4,18 +4,18 @@ public class DukeEmptyDescException extends DukeException {
 
     DukeEmptyDescException(TaskType taskType) {
         switch (taskType) {
-            case TODO:
-                type = "todo";
-                break;
-            case EVENT:
-                type = "event";
-                break;
-            case DEADLINE:
-                type = "deadline";
-                break;
-            default:
-                type = "";
-                break;
+        case TODO:
+            type = "todo";
+            break;
+        case EVENT:
+            type = "event";
+            break;
+        case DEADLINE:
+            type = "deadline";
+            break;
+        default:
+            type = "";
+            break;
         }
     }
 

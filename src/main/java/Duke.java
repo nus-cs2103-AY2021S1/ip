@@ -2,8 +2,8 @@ import java.time.format.DateTimeFormatter;
 
 public class Duke {
 
-    static TaskList taskList = new TaskList();
-    static DateTimeFormatter dateTimeFormat = DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm");
+    protected static DateTimeFormatter dateTimeFormat = DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm");
+    private static TaskList taskList = new TaskList();
 
     public static void main(String[] args) {
         try {

@@ -19,7 +19,7 @@ public class Deadline extends Task {
      */
     public static void newDeadline(String inputSuffix, TaskList taskList, boolean isDone, boolean shouldAnnounce)
             throws DukeException {
-        String[] deadlineParts = inputSuffix.split("/by",2);
+        String[] deadlineParts = inputSuffix.split("/by", 2);
         String deadlineName = deadlineParts[0];
         if (deadlineParts.length == 1) {
             throw new DukeEmptyDescException(TaskType.EVENT);

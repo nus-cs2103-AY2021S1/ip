@@ -1,4 +1,9 @@
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class Storage {
 
@@ -42,7 +47,7 @@ public class Storage {
             BufferedReader br = new BufferedReader(new FileReader(filePath));
             br.lines().forEach(s -> {
                 try {
-                    convertToTask(s,taskList);
+                    convertToTask(s, taskList);
                 } catch (DukeException e) {
                     Ui.printWithLines(e.toString());
                 }
@@ -65,17 +70,17 @@ public class Storage {
         }
 
         switch (line.charAt(1)) {
-            case 'T':
-                taskList.addTask(new Todo(line.substring(7)), false);
-                break;
-            case 'D':
-                Deadline.newDeadline(line.substring(7), taskList, isDone, false);
-                break;
-            case 'E':
-                Event.newEvent(line.substring(7), taskList, isDone, false);
-                break;
-            default:
-                throw new DukeException();
+        case 'T':
+            taskList.addTask(new Todo(line.substring(7)), false);
+            break;
+        case 'D':
+            Deadline.newDeadline(line.substring(7), taskList, isDone, false);
+            break;
+        case 'E':
+            Event.newEvent(line.substring(7), taskList, isDone, false);
+            break;
+        default:
+            throw new DukeException();
         }
     }
 
