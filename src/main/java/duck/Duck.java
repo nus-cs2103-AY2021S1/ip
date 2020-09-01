@@ -3,10 +3,13 @@ package duck;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
 import duck.exception.DuckException;
+import duck.storage.LocalStorage;
 import duck.storage.Storage;
 import duck.task.Task;
 import duck.task.TaskFactory;
@@ -19,18 +22,15 @@ import duck.task.TaskList;
  */
 public class Duck {
 
-    private Storage storage;
+    private final Storage storage = new LocalStorage("data/data.ser");
     private TaskList taskList;
-    private List<String> responses;
+    private final List<String> responses;
 
     /**
      * Initializes the components needed by the bot.
      * Loads the existing data from storage if present.
-     *
-     * @param storage Object that implements the Storage interface.
      */
-    public Duck(Storage storage) {
-        this.storage = storage;
+    public Duck() {
         try {
             this.taskList = storage.load();
         } catch (DuckException e) {
@@ -72,6 +72,7 @@ public class Duck {
     private void shutdown() {
         responses.add("Bye. Hope to see you again soon!");
         save();
+        System.exit(0);
     }
 
     /**
@@ -80,9 +81,7 @@ public class Duck {
     private void listTasks() {
         responses.add("Here are the tasks in your list");
         String[] statuses = this.taskList.getStatuses();
-        for (int i = 0; i < statuses.length; i++) {
-            responses.add(statuses[i]);
-        }
+        responses.addAll(Arrays.asList(statuses));
     }
 
     /**
@@ -104,9 +103,7 @@ public class Duck {
         }
 
         String[] statusesByDueDate = this.taskList.getStatusesByDate(optionalDate);
-        for (int i = 0; i < statusesByDueDate.length; i++) {
-            responses.add(statusesByDueDate[i]);
-        }
+        responses.addAll(Arrays.asList(statusesByDueDate));
     }
 
 
@@ -121,9 +118,7 @@ public class Duck {
 
         String[] statusesByFind = this.taskList.getStatusesByFind(input);
         responses.add("Here are the matching tasks in your list:");
-        for (int i = 0; i < statusesByFind.length; i++) {
-            responses.add(statusesByFind[i]);
-        }
+        Collections.addAll(responses, statusesByFind);
 
     }
 
@@ -211,9 +206,10 @@ public class Duck {
             }
         } catch (DuckException e) {
             responses.add(e.toString());
-        } finally {
-            return responses.toArray(String[]::new);
         }
+
+        return responses.toArray(String[]::new);
+
     }
 }
 

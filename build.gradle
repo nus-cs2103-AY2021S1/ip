@@ -44,7 +44,7 @@ test {
 }
 
 application {
-    mainClassName = "duck.Main"
+    mainClassName = "duck.Launcher"
 }
 
 shadowJar {
