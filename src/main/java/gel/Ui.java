@@ -1,8 +1,8 @@
 package gel;
 
-import gel.task.Task;
-
 import java.util.List;
+
+import gel.task.Task;
 
 /**
  * Deals with interactions with the user.

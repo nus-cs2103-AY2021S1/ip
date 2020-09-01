@@ -1,10 +1,10 @@
 package gel;
 
-import gel.exception.GelException;
-
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.Scanner;
+
+import gel.exception.GelException;
 
 /**
  * Deals with making sense of the user command.
@@ -89,7 +89,7 @@ public class Parser {
                         throw new GelException("    Yoyoyo please input a valid number after delete");
                     }
                 }
-                case "deadline": {//deadline
+                case "deadline": { //deadline
                     int dateIndex = input.lastIndexOf("/");
                     if (dateIndex == -1) {
                         throw new GelException("    Bruh you need the /by tag for deadlines");
@@ -105,7 +105,7 @@ public class Parser {
                     taskList.addDeadline(input, dateIndex);
                     break;
                 }
-                case "event": {//event
+                case "event": { //event
                     int dateIndex = input.lastIndexOf("/");
                     if (dateIndex == -1) {
                         throw new GelException("    Bruh you need the /at tag for events");
