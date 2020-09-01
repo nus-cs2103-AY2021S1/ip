@@ -1,7 +1,7 @@
 package duke;
 
-import duke.command.Command;
 import duke.command.ByeCommand;
+import duke.command.Command;
 import duke.command.DeadlineCommand;
 import duke.command.DeleteCommand;
 import duke.command.DoneCommand;

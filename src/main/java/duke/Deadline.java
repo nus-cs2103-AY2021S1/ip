@@ -9,11 +9,25 @@ import java.time.format.DateTimeFormatter;
 public class Deadline extends Task {
     private LocalDate date;
 
+    /**
+     * Constructor for Deadline object.
+     * @param isComplete Boolean to indicate if deadline is complete
+     * @param index Index position of Task in TaskList
+     * @param instructions Task description
+     * @param date Deadline
+     */
     public Deadline(boolean isComplete, int index, String instructions, String date) {
         super(isComplete, index, instructions);
         this.date = parseTime(date);
     }
 
+    /**
+     * Constructor for Deadline object
+     * @param isComplete Boolean to indicate if deadline is complete
+     * @param index Index position of Task in TaskList
+     * @param instructions Task description
+     * @param date Deadline in LocalDate form
+     */
     public Deadline(boolean isComplete, int index, String instructions, LocalDate date) {
         super(isComplete, index, instructions);
         this.date = date;

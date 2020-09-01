@@ -1,11 +1,11 @@
 package duke;
 
 import java.io.FileInputStream;
-import java.io.ObjectInputStream;
 import java.io.FileNotFoundException;
-import java.io.ObjectOutputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,7 +13,7 @@ import java.util.List;
  * Storage class has access to duke.ser file for reading and writing of data.
  */
 public class Storage {
-    String filePath;
+    private String filePath;
 
     public Storage(String filePath) {
         this.filePath = filePath;

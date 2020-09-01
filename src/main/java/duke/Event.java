@@ -9,11 +9,25 @@ import java.time.format.DateTimeFormatter;
 public class Event extends Task {
     private LocalDate time;
 
+    /**
+     * Constructor for Event object.
+     * @param isComplete Boolean to indicate if event is complete
+     * @param index Index position of Task in TaskList
+     * @param instructions Event description
+     * @param time Time of event
+     */
     public Event(boolean isComplete, int index, String instructions, String time) {
         super(isComplete, index, instructions);
         this.time = parseTime(time);
     }
 
+    /**
+     * Constructor for Event object.
+     * @param isComplete Boolean to indicate if event is complete
+     * @param index Index position of Task in TaskList
+     * @param instructions Event description
+     * @param time Time of event in LocalDate format
+     */
     public Event(boolean isComplete, int index, String instructions, LocalDate time) {
         super(isComplete, index, instructions);
         this.time = time;
