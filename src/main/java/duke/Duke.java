@@ -7,7 +7,6 @@ import duke.storage.Storage;
 import duke.storage.TaskList;
 import duke.ui.Ui;
 
-
 /**
  * Represents a chatbot that maintains a task list for users.
  */
@@ -33,6 +32,19 @@ public class Duke {
     }
 
     /**
+     * Constructs a Duke object with no parameters.
+     */
+    public Duke() {
+        this.storage = new Storage("data/tasks");
+        this.ui = new Ui();
+        try {
+            this.tasks = storage.load();
+        } catch (StorageException e) {
+            ui.showErrorMessage(e);
+        }
+    }
+
+    /**
      * Runs the Duke program to help users maintain a task list.
      */
     private void run() {
@@ -48,6 +60,13 @@ public class Duke {
         }
     }
 
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    public String getResponse(String input) {
+        return Parser.parseCommands(input, ui, storage);
+    }
     public static void main(String[] args) {
         new Duke("data/tasks").run();
     }
