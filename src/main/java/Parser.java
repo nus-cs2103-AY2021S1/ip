@@ -1,8 +1,5 @@
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -50,7 +47,7 @@ public class Parser {
 
     private static ToDoTask parseTodo(String detail) throws DukeException {
         if (detail.equals("")) {
-            throw new MissingDescriptionException(InputType.TODO);
+            throw new MissingDescriptionException(TaskType.TODO);
         } else {
             return new ToDoTask(detail, false);
         }
@@ -58,7 +55,7 @@ public class Parser {
 
     private static DeadlineTask parseDeadline(String detail) throws DukeException {
         if (detail.equals("")) {
-            throw new MissingDescriptionException(InputType.DEADLINE);
+            throw new MissingDescriptionException(TaskType.DEADLINE);
         } else {
             String descriptionAndTime = detail.replace("/by", "%");
             String description = descriptionAndTime.split("%")[0];
@@ -70,7 +67,7 @@ public class Parser {
 
     private static EventTask parseEvent(String detail) throws DukeException {
         if (detail.equals("")) {
-            throw new MissingDescriptionException(InputType.EVENT);
+            throw new MissingDescriptionException(TaskType.EVENT);
         } else {
             String descriptionAndTime = detail.replace("/at", "%");
             String description = descriptionAndTime.split("%")[0];
