@@ -1,4 +1,4 @@
-package duke;
+package duke.tasks;
 
 import java.io.Serializable;
 
@@ -6,9 +6,9 @@ public abstract class Task implements Serializable {
     private String name;
     private Boolean isDone;
 
-    public Task (String s, Boolean b) {
+    public Task (String s) {
         name = s;
-        isDone = b;
+        isDone = false;
     }
 
     public String getName() {
@@ -19,8 +19,8 @@ public abstract class Task implements Serializable {
         return isDone;
     }
 
-    public void setStatus(boolean b) {
-        isDone = b;
+    public void setAsDone() {
+        isDone = true;
     }
 
 }

@@ -1,11 +1,11 @@
-package duke;
+package duke.tasks;
 
 import java.io.Serializable;
 
 public class ToDo extends Task implements Serializable {
 
-    public ToDo(String s, Boolean b) {
-        super(s, b);
+    public ToDo(String s) {
+        super(s);
     }
 
     @Override

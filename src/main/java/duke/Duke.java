@@ -1,5 +1,7 @@
 package duke;
 
+import duke.commands.Command;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
@@ -11,26 +13,26 @@ import java.util.Scanner;
  */
 public class Duke {
     private Storage storage;
-    private TaskList tList;
+    private TaskList tasks;
     private Ui ui;
-    static boolean running = true;
+    private boolean isRunning = true;
 
     /**
      * Creates bot object while initializing necessary components / classes
      *
      * @param filePath relative path to the task list text file
      */
-    public Duke(String filePath) {
+    public Duke(String filePath) throws DukeException {
         ui = new Ui();
         ui.showWelcomeMessage();
         storage = new Storage(filePath);
         try {
-            tList = storage.load();
+            tasks = storage.load();
         } catch (FileNotFoundException e) {
-            ui.showLoadingError();
-            tList = new TaskList();
+            tasks = new TaskList();
+            ui.showNewSaveFileMessage();
         } catch (IOException | ClassNotFoundException e) {
-            ui.showUnexpectedLoadingError();
+            throw new DukeException("loading failed lah."); // when to catch and when to throw exception?
         }
     }
 
@@ -40,19 +42,19 @@ public class Duke {
     public void run() {
         Scanner sc = new Scanner(System.in);
 
-        while(sc.hasNextLine() && running) {
+        while(sc.hasNextLine() && isRunning) {
             try {
-                Parser p = new Parser(sc.nextLine(), ui, storage, tList);
-                p.parseCommand();
-            } catch (StringIndexOutOfBoundsException e) {
-                ui.showUnexpectedCommandMessage();
-            } catch (IOException e) {
-                ui.showUnexpectedSavingError();
+                Parser p = new Parser();
+                Command c = p.parseCommand(sc.nextLine());
+                c.execute(tasks, ui, storage);
+                this.isRunning = !c.isExitCommand();
+            } catch (DukeException e) {
+                System.out.println(e);
             }
         }
     }
 
-    public static void main(String[] args) throws IOException, ClassNotFoundException {
+    public static void main(String[] args) throws DukeException {
         new Duke("./task_list.txt").run();
     }
 }

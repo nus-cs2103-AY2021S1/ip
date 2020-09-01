@@ -1,100 +1,74 @@
 package duke;
 
-import java.io.IOException;
+import duke.commands.*;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 public class Parser {
-    String command;
-    Ui ui;
-    Storage storage;
-    TaskList tList;
-
-    public Parser (String command, Ui ui, Storage storage, TaskList tList) {
-        this.command = command;
-        this.ui = ui;
-        this.storage = storage;
-        this.tList = tList;
-    }
 
     /**
-     * Parses the user command and completes the task accordingly
+     * Parses the user command
+     * @param command given user input in string format
      */
-    public void parseCommand() throws IOException {
-        if (command.equals("bye")) {
-            ui.showByeMessage();
-            Duke.running = false; // DONT KNOW IF THIS IS OK
-        } else if (command.equals("list")) {
-            ui.printList(tList, "Here are the task(s) in your list:");
-        } else if (command.substring(0, 4).equals("find")) {
-            String search = command.substring(5);
-            TaskList tClone = new TaskList();
-            for (Task t : tList) {
-                if (t.getName().contains(search)) {
-                    tClone.add(t);
-                }
-            }
-            if (tClone.size() == 0) {
-                ui.showNoResultsMessage();
+    public Command parseCommand(String command) throws DukeException {
+        String[] simpleSplitArgs = command.split(" ", 2);
+        String commandType = simpleSplitArgs[0];
+
+        if (commandType.equals(CommandType.BYE.getName())) {
+            return new ExitCommand();
+        } else if (commandType.equals(CommandType.LIST.getName())) {
+            return new ListCommand();
+        } else if (commandType.equals(CommandType.DONE.getName())) {
+            return new DoneCommand(Integer.parseInt(simpleSplitArgs[1]));
+        } else if (commandType.equals(CommandType.DELETE.getName())) {
+            if (simpleSplitArgs.length > 1) {
+                return new DeleteCommand(Integer.parseInt(simpleSplitArgs[1]));
             } else {
-                ui.printList(tClone, "Here are the matching tasks in your list:");
+                throw new DukeException("you need index for deleting (hint: delete <index>)!");
             }
-        } else if (command.substring(0, 4).equals("done")) {
-            int index = Integer.parseInt(command.substring(5)) - 1;
-            tList.get(index).setStatus(true);
-            ui.showDoneMessage(tList, index);
-            storage.save(tList);
-        } else if (command.substring(0, 6).equals("delete")) {
-            int index = Integer.parseInt(command.substring(7)) - 1;
-            try {
-                ui.showDeleteMessage(tList, index);
-                tList.remove(index);
-                storage.save(tList);
-            } catch (IndexOutOfBoundsException e) {
-                ui.showIndexErrorMessage();
+        } else if (commandType.equals(CommandType.FIND.getName())) {
+            if (simpleSplitArgs.length > 1) {
+                return new FindCommand(simpleSplitArgs[1]);
+            } else {
+                throw new DukeException("you need keyword for filtering (hint: find <index>)!");
             }
-        } else if (command.substring(0, 4).equals("todo")) {
-            try {
-                String name = command.substring(5);
-                ToDo t = new ToDo(name, false);
-                tList.add(t);
-                ui.showAddTaskMessage(tList, t);
-                storage.save(tList);
-            } catch (IndexOutOfBoundsException e) {
-                ui.showFormatErrorMessage();
+        } else if (commandType.equals(CommandType.TODO.getName())) {
+            if (simpleSplitArgs.length > 1) {
+                return new AddCommand(CommandType.TODO, simpleSplitArgs[1], null);
+            } else {
+                throw new DukeException("you need description for todo (hint: todo <some description>)!");
             }
-        } else if (command.substring(0, 5).equals("event")) {
-            try {
-                int escapeIndex = command.lastIndexOf("/");
-                String name = command.substring(6, escapeIndex - 1);
-                LocalDate date = LocalDate.parse(command.substring(escapeIndex + 4), DateTimeFormatter.ISO_DATE);
-                Event e = new Event(name, false, date);
-                tList.add(e);
-                ui.showAddTaskMessage(tList, e);
-                storage.save(tList);
-            } catch (IndexOutOfBoundsException e) {
-                ui.showFormatErrorMessage();
-            } catch(DateTimeParseException e) {
-                ui.showDateFormatErrorMessage();
+        } else if (commandType.equals(CommandType.DEADLINE.getName())) {
+            String[] allSplitArgs = simpleSplitArgs[1].split(" /by ");
+            if (allSplitArgs.length > 1) {
+                return new AddCommand(CommandType.DEADLINE, allSplitArgs[0], parseDateAndTime(allSplitArgs[1]));
+            } else {
+                throw new DukeException("you need date and time for deadline (hint: deadline something /by YYYY-MM-DD)!");
             }
-        } else if (command.substring(0, 8).equals("deadline")) {
-            try {
-                int escapeIndex = command.lastIndexOf("/");
-                String name = command.substring(9, escapeIndex - 1);
-                LocalDate date = LocalDate.parse(command.substring(escapeIndex + 4), DateTimeFormatter.ISO_DATE);
-                Deadline d = new Deadline(name, false, date);
-                tList.add(d);
-                ui.showAddTaskMessage(tList, d);
-                storage.save(tList);
-            } catch (IndexOutOfBoundsException e) {
-                ui.showFormatErrorMessage();
-            } catch (DateTimeParseException e) {
-                ui.showDateFormatErrorMessage();
+        } else if (commandType.equals(CommandType.EVENT.getName())) {
+            String[] allSplitArgs = simpleSplitArgs[1].split(" /at ");
+            if (allSplitArgs.length > 1) {
+                return new AddCommand(CommandType.EVENT, allSplitArgs[0], parseDateAndTime(allSplitArgs[1]));
+            } else {
+                throw new DukeException("you need date and time for event (hint: event something /at YYY-MM-DD)!");
             }
         } else {
-            ui.showUnexpectedCommandMessage();
+            throw new DukeException("I dunno any command like that!");
         }
     }
 
+    /**
+     * Parses the date and time String into a LocalDate object
+     * @param dateAndTime string containing date and time info
+     * @return date LocalDate object corresponding to input String
+     */
+    private LocalDate parseDateAndTime (String dateAndTime) throws DukeException {
+        try {
+            return LocalDate.parse(dateAndTime, DateTimeFormatter.ISO_DATE);
+        } catch(DateTimeParseException e) {
+            throw new DukeException("wrong date format lah! Use YYYY-MM-DD.");
+        }
+    }
 }

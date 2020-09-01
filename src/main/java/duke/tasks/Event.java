@@ -1,4 +1,4 @@
-package duke;
+package duke.tasks;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -7,8 +7,8 @@ import java.time.format.DateTimeFormatter;
 public class Event extends Task implements Serializable{
     private LocalDate time;
 
-    public Event(String s, Boolean b, LocalDate t) {
-        super(s, b);
+    public Event(String s, LocalDate t) {
+        super(s);
         time = t;
     }
     
