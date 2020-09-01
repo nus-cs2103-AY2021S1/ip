@@ -2,16 +2,21 @@ package duke;
 
 import duke.command.Command;
 import duke.exception.DukeException;
-import javafx.application.Application;
+import duke.exception.InvalidCommandException;
+import duke.exception.InvalidInputException;
+import duke.exception.InvalidTaskTypeException;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.stage.Stage;
+import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.layout.VBox;
 
 /**
  * Entry point of Duke chatbot.
  * Initializes the chatbot and starts interaction with user.
  */
-public class Duke extends Application {
+public class Duke {
 
     private static final String DATA_PATHNAME = "data/duke.txt";
     private TaskList tasks;
@@ -50,6 +55,15 @@ public class Duke extends Application {
         }
     }
 
+    public String getResponse(String input) {
+        try {
+            Command c = Parser.parse(input);
+            return c.execute(tasks, ui, storage);
+        } catch (DukeException e) {
+            return ui.printReply(e.getMessage());
+        }
+    }
+
     /**
      * Runs the Duke Chatbot.
      */
@@ -58,12 +72,4 @@ public class Duke extends Application {
         duke.run();
     }
 
-    @Override
-    public void start(Stage stage) throws Exception {
-        Label helloWorld = new Label("Hello Duke!"); // Creating a new Label control
-        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
-
-        stage.setScene(scene); // Setting the stage to show our screen
-        stage.show(); // Render the stage.
-    }
 }

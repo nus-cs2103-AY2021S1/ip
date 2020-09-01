@@ -23,9 +23,9 @@ public class FindCommand extends Command {
      * @param storage Storage associated with command.
      * @throws DukeException If there is error during execution of command.
      */
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         List<Task> searchResults = taskList.findTasks(keyword);
-        ui.printSearchResults(searchResults);
+        return ui.printSearchResults(searchResults);
     }
 
     public String getKeyword() {
