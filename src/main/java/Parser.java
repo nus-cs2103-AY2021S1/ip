@@ -17,22 +17,23 @@ public class Parser {
      * @param tasks TaskList to hold tasks that the parser can interact with
      * @param ui Ui to display results and errors to the user
      */
-    public static void parse(String input, Storage storage, TaskList tasks, Ui ui) {
-        ui.showDivider();
+    public static String parse(String input, Storage storage, TaskList tasks, Ui ui) {
+        String output = ui.showDivider();
+
         try {
             if (input.equals("bye")) {
-                ui.showGoodbyeMessage();
+                output += ui.showGoodbyeMessage();
                 done = true;
             } else if (input.equals("list")) {
-                ui.showAllTasks(tasks);
+                output += ui.showAllTasks(tasks);
             } else if (input.startsWith("done")) {
-                markAsDone(input, tasks, ui);
+                output += markAsDone(input, tasks, ui);
                 storage.saveTasks(tasks, ui);
             } else if (input.startsWith("delete")) {
-                deleteTask(input, tasks, ui);
+                output += deleteTask(input, tasks, ui);
                 storage.saveTasks(tasks, ui);
             } else if (input.startsWith("find")) {
-                findTask(input, tasks, ui);
+                output += findTask(input, tasks, ui);
             } else {
 
                 Task currTask = null;
@@ -44,21 +45,21 @@ public class Parser {
                 } else if (input.startsWith("event")) {
                     currTask = createEvent(input);
                 } else { // Invalid Command
-                    ui.showInvalidCommandMessage();
+                    output += ui.showInvalidCommandMessage();
                 }
 
                 if (currTask != null) {
-                    addTask(currTask, tasks, ui);
+                    output += addTask(currTask, tasks, ui);
                     storage.saveTasks(tasks, ui);
                 }
             }
-            ui.showDivider();
+            return output + "\n" + ui.showDivider();
         } catch (DukeException e) {
-            ui.showError(e.getMessage());
+            return ui.showError(e.getMessage());
         }
     }
 
-    private static void findTask(String input, TaskList tasks, Ui ui) throws DukeException {
+    private static String findTask(String input, TaskList tasks, Ui ui) throws DukeException {
         if (input.equals("find")) {
             throw new DukeException("Sorry sir you will have to try again and this time " +
                     "tell me which task you want me to find");
@@ -74,7 +75,7 @@ public class Parser {
             }
         }
 
-        ui.showAllTasks(searchResults);
+        return ui.showAllTasks(searchResults);
     }
 
     /**
@@ -85,7 +86,7 @@ public class Parser {
      * @param ui Ui to display results and errors to the user
      * @throws DukeException Thrown when the user does not specify a task
      */
-    public static void markAsDone(String input, TaskList tasks, Ui ui) throws DukeException {
+    public static String markAsDone(String input, TaskList tasks, Ui ui) throws DukeException {
         if (input.equals("done")) { // Input does not contain which task to mark as done
             throw new DukeException("Sorry sir you will have to try again and this time " +
                     "tell me which task you want me to mark as done");
@@ -93,7 +94,7 @@ public class Parser {
         int index = Integer.parseInt(input.split(" ")[1]);
         Task task = tasks.getTask(index - 1);
         task.markAsDone();
-        ui.showDoneTask(task);
+        return ui.showDoneTask(task);
     }
 
     /**
@@ -104,14 +105,14 @@ public class Parser {
      * @param ui Ui to display results and errors to the user
      * @throws DukeException Thrown when the user does not specify a task
      */
-    private static void deleteTask(String input, TaskList tasks, Ui ui) throws DukeException {
+    private static String deleteTask(String input, TaskList tasks, Ui ui) throws DukeException {
         if (input.equals("delete")) { // Input does not contain which task to mark as done
             throw new DukeException("Sorry sir you will have to try again and this time " +
                     "tell me which task you want me to delete");
         }
         int index = Integer.parseInt(input.split(" ")[1]);
         Task deletedTask = tasks.deleteTask(index - 1); // Subtract 1 due to offset
-        ui.showDeleteTask(deletedTask, tasks);
+        return ui.showDeleteTask(deletedTask, tasks);
     }
 
     /**
@@ -201,9 +202,9 @@ public class Parser {
      * @param tasks TaskList that the given task is to be added to
      * @param ui Ui to display results to the user
      */
-    private static void addTask(Task task, TaskList tasks, Ui ui) {
+    private static String addTask(Task task, TaskList tasks, Ui ui) {
         tasks.addTask(task);
-        ui.showAddTask(task, tasks);
+        return ui.showAddTask(task, tasks);
     }
 
     public static boolean isDone() {
