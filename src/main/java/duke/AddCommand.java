@@ -83,7 +83,6 @@ public class AddCommand extends Command {
             storage.writeToFile(tasks.getTasks());
             return ui.printAddTodo(todo, tasks);
         } else {
-            System.out.println(Ui.getLine());
             System.out.println(Ui.getBot());
             throw new DukeException("The description of todo cannot be empty!");
         }
@@ -112,19 +111,16 @@ public class AddCommand extends Command {
                 storage.writeToFile(tasks.getTasks());
                 return ui.printAddDeadline(deadline, tasks);
             } catch (PatternSyntaxException | ArrayIndexOutOfBoundsException ex) {
-                System.out.println(Ui.getLine());
                 System.out.println(Ui.getBot());
                 throw new DukeException(
                         "You have keyed in an invalid input for 'deadline'!");
             } catch (DateTimeParseException | IOException ex) {
-                System.out.println(Ui.getLine());
                 System.out.println(Ui.getBot());
                 throw new DukeException(
                         "Please key in your deadline in the form:\n" +
                                 " /by <dd/MM/yyyy hh:mm AM/PM>");
             }
         } else {
-            System.out.println(Ui.getLine());
             System.out.println(Ui.getBot());
             throw new DukeException("The description of deadline cannot be empty!");
         }
@@ -153,18 +149,15 @@ public class AddCommand extends Command {
                 storage.writeToFile(tasks.getTasks());
                 return ui.printAddEvent(event, tasks);
             } catch (PatternSyntaxException | ArrayIndexOutOfBoundsException ex ) {
-                System.out.println(Ui.getLine());
                 System.out.println(Ui.getBot());
                 throw new DukeException("You have keyed in an " +
                         "invalid input for 'event'!");
             } catch (DateTimeParseException | IOException ex) {
-                System.out.println(Ui.getLine());
                 System.out.println(Ui.getBot());
                 throw new DukeException("Please key in your event " +
                         "in the form:\n /at <dd/MM/yyyy hh:mm AM/PM>");
             }
         } else {
-            System.out.println(Ui.getLine());
             System.out.println(Ui.getBot());
             throw new DukeException("The description of an event cannot be empty!");
         }

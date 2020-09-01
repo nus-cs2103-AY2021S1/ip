@@ -11,10 +11,6 @@ public class Ui {
     /** Bot's reply prefix */
     private static final String bot = "Dave says:";
 
-    /** Line separator */
-    private static final String line = "______________________" +
-            "_________________________________________";
-
     /** Scanner object */
     Scanner scanner;
 
@@ -29,10 +25,8 @@ public class Ui {
      * Prints greetings.
      */
     public String printGreetings() {
-        System.out.println(line);
         System.out.println(bot);
-        return "Greetings from me, Dave!\n" + "How can I help you? ^_^\n" +
-                line;
+        return "Greetings from me, Dave!\n" + "How can I help you? ^_^\n";
     }
 
     /**
@@ -45,18 +39,12 @@ public class Ui {
     }
 
     /**
-     * Returns line separator.
-     * @return Line separator.
-     */
-    public static String getLine() {
-        return Ui.line;
-    }
+
 
     /**
      * Prints goodbye and terminates.
      */
     public String printBye() {
-        System.out.println(line);
         System.out.println(bot);
         return "Goodbye! Hope to see you again soon! ^_^";
         //System.out.println(line);
@@ -86,12 +74,9 @@ public class Ui {
 
     public String printTaskList(TaskList tasks) {
         if (tasks.getTasks().isEmpty()) {
-            System.out.println(line);
             System.out.println(bot);
-            return "There are no tasks in your list yet! >_< \n" +
-            line;
+            return "There are no tasks in your list yet! >_< \n";
         } else {
-            System.out.println(line);
             System.out.println(bot);
             StringBuilder res = new StringBuilder();
             for (int i = 0; i < tasks.size(); i++) {
@@ -107,7 +92,6 @@ public class Ui {
                 String toDelete = userInput.substring(7);
                 int index = Integer.parseInt(toDelete);
                 if (index <= taskList.size() && index > 0) {
-                    System.out.println(Ui.getLine());
                     System.out.println(Ui.getBot());
                     taskList.getTasks().remove(index - 1);
                     return "Noted! I've deleted this task:\n" +
@@ -135,7 +119,6 @@ public class Ui {
     public String printDone(ArrayList<Task> tasks, int pos) throws DukeException {
         if (pos <= tasks.size() && pos > 0) {
             tasks.get(pos - 1).markAsDone(); //marking task as done
-            System.out.println(line);
             System.out.println(bot);
             return "Great work! I've marked this task as done:\n" +
             tasks.get(pos - 1).toString() +
@@ -152,7 +135,6 @@ public class Ui {
      */
     public String printFindings(ArrayList<Task> findings) throws DukeException {
         StringBuilder res = new StringBuilder();
-        System.out.println(line);
         System.out.println(bot);
         if (findings.isEmpty()) {
             throw new DukeException("There are no such tasks with this keyword! :(");
@@ -177,8 +159,6 @@ public class Ui {
      * @param tasks TaskList to add task to.
      */
     public String printAddTodo(ToDo todoTask, TaskList tasks) {
-        System.out.println(line);
-        System.out.println(bot);
         return "Got it! I've added this task:\n" +
         todoTask.toString() +
        "\nNow you have " + tasks.size() + " tasks in the list.";
@@ -191,7 +171,6 @@ public class Ui {
      * @param tasks TaskList to add task to.
      */
     public String printAddEvent(Event eventTask, TaskList tasks) {
-        System.out.println(line);
         System.out.println(bot);
         return "Got it! I've added this task:\n" +
         eventTask.toString() +
@@ -205,7 +184,6 @@ public class Ui {
      * @param tasks TaskList to add task to.
      */
     public String printAddDeadline(Deadline deadlineTask, TaskList tasks) {
-        System.out.println(line);
         System.out.println(bot);
         return "Got it! I've added this task:\n" +
         deadlineTask.toString() +

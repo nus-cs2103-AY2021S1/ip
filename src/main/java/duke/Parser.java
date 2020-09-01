@@ -20,7 +20,6 @@ public class Parser {
             String extractCommand = input[0];
             command = CommandEnum.valueOf(extractCommand.toUpperCase());
         } catch (NullPointerException | IllegalArgumentException ex) {
-            System.out.println(Ui.getLine());
             System.out.println(Ui.getBot());
             throw new DukeException(
                     "You have keyed in an invalid command or formatting!\n" +
@@ -46,7 +45,6 @@ public class Parser {
             case FIND:
                 return new FindCommand(userInput);
             default:
-                System.out.println(Ui.getLine());
                 System.out.println(Ui.getBot());
                 throw new DukeException(
                         "You have keyed in an invalid command!\n" +
