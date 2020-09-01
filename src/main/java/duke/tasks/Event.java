@@ -21,7 +21,7 @@ public class Event extends Task {
         return time;
     }
 
-    public boolean getHasTime(){
+    public boolean getHasTime() {
         return hasTime;
     }
 
@@ -34,6 +34,6 @@ public class Event extends Task {
 
     @Override
     public String data() {
-        return  "T" + super.data() + " | " + time;
+        return "T" + super.data() + " | " + time;
     }
 }

@@ -17,6 +17,6 @@ public class Todo extends Task {
     }
 
     public String data() {
-        return  "T" + super.data();
+        return "T" + super.data();
     }
 }

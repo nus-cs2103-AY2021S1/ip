@@ -1,8 +1,8 @@
 package duke.tasklist;
 
-import duke.tasks.Task;
-
 import java.util.ArrayList;
+
+import duke.tasks.Task;
 
 public class TaskList {
     protected ArrayList<Task> tasks;
@@ -24,8 +24,8 @@ public class TaskList {
      * Get the task with at the specific index in the array
      * @return a Task
      */
-    public Task getTask(int index){
-         return getTasks().get(index);
+    public Task getTask(int index) {
+        return getTasks().get(index);
     }
 
     /**

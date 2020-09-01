@@ -21,7 +21,7 @@ public class Deadline extends Task {
         return time;
     }
 
-    public boolean getHasTime(){
+    public boolean getHasTime() {
         return hasTime;
     }
 
@@ -34,7 +34,7 @@ public class Deadline extends Task {
 
     @Override
     public String data() {
-        return  "D" + super.data() + " | " + time;
+        return "D" + super.data() + " | " + time;
     }
 
 }

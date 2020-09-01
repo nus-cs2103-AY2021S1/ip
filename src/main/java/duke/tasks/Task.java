@@ -3,18 +3,26 @@ package duke.tasks;
 import java.time.LocalDate;
 
 public class Task {
+    protected static int numberOfTasks = 0;
     protected String description;
     protected boolean isDone;
     protected boolean hasTime;
-    protected static int numberOfTasks = 0;
 
-
+    /**
+     * Creates a new Task object which is not done
+     * @param description
+     */
     public Task(String description) {
         this.description = description;
         this.isDone = false;
         numberOfTasks++;
     }
 
+    /**
+     * Creates a new Task object with description and isDone status
+     * @param description
+     * @param isDone
+     */
     public Task(String description, int isDone) {
         this.description = description;
         if (isDone == 0) {
@@ -40,15 +48,15 @@ public class Task {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
 
-    public boolean getHasTime(){
+    public boolean getHasTime() {
         return hasTime;
     }
 
-    public LocalDate getTime(){
+    public LocalDate getTime() {
         return null;
     }
 
-    public String getDescription(){
+    public String getDescription() {
         return description;
     }
 
@@ -96,8 +104,8 @@ public class Task {
      * @return A string
      */
     public String data() {
-        return  " | " + (isDone
+        return " | " + (isDone
                 ? "1"
-                : "0" ) + " | " + description;
+                : "0") + " | " + description;
     }
 }

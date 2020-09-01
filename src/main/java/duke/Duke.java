@@ -39,26 +39,29 @@ public class Duke {
     /**
      * Run a Duke object while isExit is not changed to true
      */
-//    public void run() {
-//        ui.displayWelcome();
-//        boolean isExit = false;
-//        while (!isExit) {
-//            try {
-//                String fullCommand = ui.readCommand();
-//                ui.showLine(); // show the divider line ("_______")
-//                Command c = Parser.parse(fullCommand);
-//                c.execute(tasks, ui, storage);
-//                isExit = c.isExit();
-//            } catch (DukeException e) {
-//                ui.displayErrorMessage(e);
-//            } finally {
-//                ui.showLine();
-//            }
-//        }
-//    }
+    //    public void run() {
+    //        ui.displayWelcome();
+    //        boolean isExit = false;
+    //        while (!isExit) {
+    //            try {
+    //                String fullCommand = ui.readCommand();
+    //                ui.showLine(); // show the divider line ("_______")
+    //                Command c = Parser.parse(fullCommand);
+    //                c.execute(tasks, ui, storage);
+    //                isExit = c.isExit();
+    //            } catch (DukeException e) {
+    //                ui.displayErrorMessage(e);
+    //            } finally {
+    //                ui.showLine();
+    //            }
+    //        }
+    //    }
 
-    public String getResponse(String input){
-        try{
+    public String welcome() {
+        return ui.displayWelcome();
+    }
+    public String getResponse(String input) {
+        try {
             Command c = Parser.parse(input);
             String output = c.execute(tasks, ui, storage);
             return output;
@@ -69,8 +72,8 @@ public class Duke {
 
 
 
-//    public static void main(String[] args) {
-//        new Duke("/data.txt").run();
-//    }
+    //    public static void main(String[] args) {
+    //        new Duke("/data.txt").run();
+    //    }
 
 }

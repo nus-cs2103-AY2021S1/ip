@@ -1,29 +1,30 @@
 package duke.storage;
 
-import duke.tasklist.TaskList;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
 import duke.exceptions.PathNoFoundException;
+import duke.tasklist.TaskList;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.Task;
 import duke.tasks.Todo;
-import java.util.ArrayList;
-import java.util.List;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.time.LocalDate;
 
 public class Storage {
     private final String filePath;
 
-    public Storage(String filePath){
+    public Storage(String filePath) {
         this.filePath = filePath;
     }
 
     /**
-     * Return an arraylist in which individual task is constructed from the data txt file
-     * @return
+     * Returns an arraylist in which individual task is constructed from the data txt file.
+     * @return ArrayList
      * @throws PathNoFoundException
      */
     public ArrayList<Task> readFile() throws PathNoFoundException {
@@ -56,6 +57,8 @@ public class Storage {
                         Event newEvent = new Event(title, complete, timeInLocalDate);
                         tasks.add(newEvent);
                         break;
+                    default:
+
                     }
                 }
             }
@@ -70,7 +73,7 @@ public class Storage {
      * Save the modified TaskArray in the hard disc
      * @param tasklist
      */
-    public void saveFile(TaskList tasklist){
+    public void saveFile(TaskList tasklist) {
         try {
             String cwd = System.getProperty("user.dir");
             FileWriter fw = new FileWriter(cwd + filePath);

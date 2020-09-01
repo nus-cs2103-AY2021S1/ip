@@ -9,7 +9,7 @@ import duke.ui.Ui;
  * When the command is executed, the data structure will be modified and relevant message will be displayed.
  */
 public abstract class Command {
-    public Command(){
+    public Command() {
     }
 
     public boolean isExit() {

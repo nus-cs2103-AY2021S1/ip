@@ -1,10 +1,10 @@
 package duke.parser;
 
-import duke.commands.*;
-import duke.exceptions.*;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+
+import duke.commands.*;
+import duke.exceptions.*;
 
 public class Parser {
     public Parser() {
@@ -14,14 +14,14 @@ public class Parser {
      * Cut an user-input String to smaller piece of information
      * Returns different command constructed with the info pieces
      * @param fullCommand
-     * @return
+     * @return Command
      * @throws EmptyTaskException
      * @throws EmptyTimeException
      * @throws CommandNotFoundException
      * @throws WrongDateFormatException
      */
-    public static Command parse(String fullCommand) throws EmptyTaskException, EmptyTimeException, CommandNotFoundException,
-            WrongDateFormatException, IncompleteMessageException {
+    public static Command parse(String fullCommand) throws EmptyTaskException, EmptyTimeException,
+            CommandNotFoundException, WrongDateFormatException, IncompleteMessageException {
 
         String[] parseArray = fullCommand.trim().split(" ", 2);
         String type = parseArray[0];
@@ -30,7 +30,7 @@ public class Parser {
         switch(type) {
 
         case "bye":
-            command =  new ExitCommand();
+            command = new ExitCommand();
             break;
         case "list":
             if (parseArray.length == 1) {
@@ -79,7 +79,7 @@ public class Parser {
                 switch(type) {
                 case "todo":
                     command = new AddCommand(type, rest, null);
-                break;
+                    break;
                 case "deadline":
                     if (rest.split("/").length == 1) {
                         throw new EmptyTimeException("Please specify deadline using \"/by\". (´∀`)");
@@ -104,15 +104,18 @@ public class Parser {
                         try {
                             String time = rest.split(" /")[1].split(" ", 2)[1];
                             LocalDate date = LocalDate.parse(time);
-                            command =  new AddCommand(type, description, date);
+                            command = new AddCommand(type, description, date);
                         } catch (ArrayIndexOutOfBoundsException ex) {
                             throw new EmptyTimeException("Please don't leave the event time blank~ (´∀`)");
                         } catch (DateTimeParseException ex) {
                             throw new WrongDateFormatException();
                         }
                     }
+                    break;
+                default:
+
                 }
-            break;
+                break;
             }
         default:
             throw new CommandNotFoundException();
