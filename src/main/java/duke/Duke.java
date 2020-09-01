@@ -86,6 +86,7 @@ public class Duke {
      */
     String getResponse(String input) {
         Command command = Parser.parse(input);
+
         String[] strings = command.execute(storage, tasks, ui);
         StringBuilder output;
 

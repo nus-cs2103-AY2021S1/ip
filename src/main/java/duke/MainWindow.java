@@ -7,6 +7,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+import main.java.duke.command.Command;
+import main.java.duke.command.ExitCommand;
+
+import java.util.concurrent.TimeUnit;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -23,6 +28,8 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
+    private Stage stage;
+
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
@@ -31,8 +38,29 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
+    @FXML
+    public void setStage(Stage s) {
+        stage = s;
+    }
+
+    @FXML
     public void setDuke(Duke d) {
         duke = d;
+    }
+
+    void handleExit(String input) {
+        String response = duke.getResponse(input);
+        System.out.println(response);
+        dialogContainer.getChildren().addAll(
+                DialogBox.getUserDialog(input, userImage),
+                DialogBox.getDukeDialog(response, dukeImage)
+        );
+        userInput.clear();
+        try {
+            TimeUnit.SECONDS.sleep(1);
+        } catch (InterruptedException ignored) {
+        }
+        stage.close();
     }
 
     @FXML
@@ -41,13 +69,24 @@ public class MainWindow extends AnchorPane {
         dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(startupMessage, dukeImage));
     }
 
+    @FXML
+    private void handleUserInput() {
+        String input = userInput.getText();
+
+        Command command = Parser.parse(input);
+
+        if (command instanceof ExitCommand) {
+            handleExit(input);
+        } else {
+            handleNonExitUserInput(input);
+        }
+    }
+
     /**
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
-    @FXML
-    private void handleUserInput() {
-        String input = userInput.getText();
+    private void handleNonExitUserInput(String input) {
         String response = duke.getResponse(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
