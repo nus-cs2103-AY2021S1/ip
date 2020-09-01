@@ -16,6 +16,7 @@ public abstract class Command {
      * @param storage Storage
      * @param tasks Task list
      * @param ui Ui
+     * @return Output strings
      */
-    public abstract void execute(Storage storage, TaskList tasks, Ui ui);
+    public abstract String[] execute(Storage storage, TaskList tasks, Ui ui);
 }

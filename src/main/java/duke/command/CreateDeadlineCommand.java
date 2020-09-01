@@ -41,10 +41,11 @@ public class CreateDeadlineCommand extends Command {
      * @param storage Storage
      * @param tasks Task list
      * @param ui Ui
+     * @return Output strings
      */
     @Override
-    public void execute(Storage storage, TaskList tasks, Ui ui) {
+    public String[] execute(Storage storage, TaskList tasks, Ui ui) {
         Deadline deadline = tasks.addDeadline(this.description, this.isComplete, this.date);
-        ui.printCreateTask(tasks, deadline);
+        return ui.getCreateTaskStrings(tasks, deadline);
     }
 }

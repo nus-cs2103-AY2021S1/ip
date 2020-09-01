@@ -29,15 +29,16 @@ public class DeleteTaskCommand extends Command {
      * @param storage Storage
      * @param tasks Task list
      * @param ui Ui
+     * @return Output strings
      */
     @Override
-    public void execute(Storage storage, TaskList tasks, Ui ui) {
+    public String[] execute(Storage storage, TaskList tasks, Ui ui) {
         Task task = tasks.deleteTaskAt(this.taskIndex);
 
         if (task != null) {
-            ui.printDeleteTask(tasks, task);
+            return ui.getDeleteTaskStrings(tasks, task);
         } else {
-            ui.printInvalidTaskIndex();
+            return ui.getInvalidTaskIndexStrings();
         }
     }
 }

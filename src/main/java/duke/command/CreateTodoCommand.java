@@ -33,10 +33,11 @@ public class CreateTodoCommand extends Command {
      * @param storage Storage
      * @param tasks Task list
      * @param ui Ui
+     * @return Output strings
      */
     @Override
-    public void execute(Storage storage, TaskList tasks, Ui ui) {
+    public String[] execute(Storage storage, TaskList tasks, Ui ui) {
         ToDo todo = tasks.addTodo(this.description, this.isComplete);
-        ui.printCreateTask(tasks, todo);
+        return ui.getCreateTaskStrings(tasks, todo);
     }
 }

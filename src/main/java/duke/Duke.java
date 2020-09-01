@@ -10,18 +10,42 @@ import java.util.Scanner;
  */
 public class Duke {
 
+    /** Pathname of the local data file */
+    final String PATH_NAME = "./data/duke_data.csv";
+
+    /** Storage */
+    Storage storage;
+
+    /** Task list*/
+    TaskList tasks;
+
+    /** User Interface using command line */
+    Ui ui;
+
     /**
-     * Main method of duke
+     * Constructor
+     */
+    Duke() {
+        this.storage = new Storage(PATH_NAME);
+        this.tasks = storage.loadTasks();
+        this.ui = new Ui();
+    }
+
+    /**
+     * Main method of Duke
      *
      * @param args String arguments (not necessary)
      */
     public static void main(String[] args) {
+        Duke duke = new Duke();
+        duke.runDukeOnCli();
+    }
 
-        // Initialize variables
-        String pathName = "./data/duke_data.csv";
-        Storage storage = new Storage(pathName);
-        TaskList tasks = storage.loadTasks();
-        Ui ui = new Ui();
+    /**
+     * Runs Duke on the command line
+     */
+    public void runDukeOnCli() {
+
         ui.printHello();
 
         // Initialize scanner to receive user inputs
@@ -30,12 +54,34 @@ public class Duke {
         while (sc.hasNextLine()) {
             String input = sc.nextLine();
             Command command = Parser.parse(input);
-            command.execute(storage, tasks, ui);
+            String[] outputStrings = command.execute(storage, tasks, ui);
+            ui.print(outputStrings);
 
             // Exit command exits the program
             if (command instanceof ExitCommand) {
                 break;
             }
+        }
+    }
+
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    String getResponse(String input) {
+        Command command = Parser.parse(input);
+        String[] outputStrings = command.execute(storage, tasks, ui);
+        StringBuilder output;
+
+        if (outputStrings.length >= 1) {
+            output = new StringBuilder(outputStrings[0]);
+            for (int i = 1; i < outputStrings.length; i++) {
+                output.append("\n");
+                output.append(outputStrings[i]);
+            }
+            return output.toString();
+        } else {
+            return "No response";
         }
     }
 }

@@ -15,11 +15,12 @@ public class ExitCommand extends Command {
      * @param storage Storage
      * @param tasks Task list
      * @param ui Ui
+     * @return Output strings
      */
     @Override
-    public void execute(Storage storage, TaskList tasks, Ui ui) {
+    public String[] execute(Storage storage, TaskList tasks, Ui ui) {
         storage.resetFile();
         storage.saveTaskList(tasks);
-        ui.printExit();
+        return ui.getExitStrings();
     }
 }

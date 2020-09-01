@@ -20,10 +20,10 @@ public class Ui {
     private final String exitMessage = "Bye. Hope to see you again soon!";
 
     /** String to print at the start of a sublist of matched tasks */
-    private String foundTasksMessage = "Here are the matching tasks in your list:";
+    private final String foundTasksMessage = "Here are the matching tasks in your list:";
 
     /** String to print if no matched tasks were found */
-    private String foundZeroTasksMessage = "I'm sorry, but none of the tasks match the keyword";
+    private final String foundZeroTasksMessage = "I'm sorry, but none of the tasks match the keyword";
 
     /** Strings to print on start-up */
     private final String[] greetMessage = new String[] {"Hello! I'm Duke", "What can I do for you?"};
@@ -66,20 +66,6 @@ public class Ui {
     }
 
     /**
-     * Prints the strings with top and bottom horizontal lines and indentation
-     *
-     * @param strings Array of strings to be printed
-     */
-    void print(String[] strings) {
-        System.out.println(this.horizontalLine);
-        for(String string : strings) {
-            System.out.print(this.textIndentation);
-            System.out.println(string);
-        }
-        System.out.println(this.horizontalLine);
-    }
-
-    /**
      * Prints strings upon completing a task
      *
      * @param task Completed task
@@ -87,6 +73,17 @@ public class Ui {
     public void printCompleteTask(Task task) {
         String[] strings = new String[] {this.completeTaskMessage, task.toString()};
         this.print(strings);
+    }
+
+    /**
+     * Gets output strings upon completing a task
+     *
+     * @param task Completed task
+     * @return Output strings upon completing a task
+     */
+    public String[] getCompleteTaskStrings(Task task) {
+        String[] strings = new String[] {this.completeTaskMessage, task.toString()};
+        return strings;
     }
 
     /**
@@ -101,6 +98,18 @@ public class Ui {
     }
 
     /**
+     * Gets output strings upon creating a new task
+     *
+     * @param tasks Current task list
+     * @param task Created task
+     * @return Output strings upon creating a new task
+     */
+    public String[] getCreateTaskStrings(TaskList tasks, Task task) {
+        String[] strings = new String[] {this.addTaskMessage, task.toString(), getNumOfTasksString(tasks)};
+        return strings;
+    }
+
+    /**
      * Prints strings upon deleting a task
      *
      * @param tasks Current task list
@@ -112,6 +121,18 @@ public class Ui {
     }
 
     /**
+     * Gets strings upon deleting a task
+     *
+     * @param tasks Current task list
+     * @param task Deleted task
+     * @return Output strings upon deleting a task
+     */
+    public String[] getDeleteTaskStrings(TaskList tasks, Task task) {
+        String[] strings = new String[] {this.deleteTaskMessage, task.toString(),getNumOfTasksString(tasks)};
+        return strings;
+    }
+
+    /**
      * Prints strings upon exit
      */
     public void printExit() {
@@ -120,10 +141,29 @@ public class Ui {
     }
 
     /**
+     * Gets strings upon exit
+     *
+     * @return Output strings upon exit
+     */
+    public String[] getExitStrings() {
+        String[] strings = new String[] {this.exitMessage};
+        return strings;
+    }
+
+    /**
      * Prints strings upon start-up
      */
     void printHello() {
         this.print(this.greetMessage);
+    }
+
+    /**
+     * Gets strings upon start-up
+     *
+     * @return Output strings upon start-up
+     */
+    String[] getHelloStrings() {
+        return this.greetMessage;
     }
 
     /**
@@ -135,11 +175,31 @@ public class Ui {
     }
 
     /**
+     * Gets strings upon handling an invalid input
+     *
+     * @return Output strings upon handling an invalid input
+     */
+    public String[] getInvalidInputStrings() {
+        String[] strings = new String[] {this.invalidSyntaxMessage};
+        return strings;
+    }
+
+    /**
      * Prints strings upon receiving an invalid task index
      */
     public void printInvalidTaskIndex() {
         String[] strings = new String[] {this.invalidTaskIndexMessage};
         this.print(strings);
+    }
+
+    /**
+     * Gets strings upon receiving an invalid task index
+     *
+     * @return Output strings upon receiving an invalid task index
+     */
+    public String[] getInvalidTaskIndexStrings() {
+        String[] strings = new String[] {this.invalidTaskIndexMessage};
+        return strings;
     }
 
     /**
@@ -160,9 +220,28 @@ public class Ui {
         }
     }
 
+    /**
+     * Gets string representation of all tasks
+     *
+     * @param tasks Current task list
+     * @return Output string representation of all tasks
+     */
+    public String[] getTaskListStrings(TaskList tasks) {
+        if (tasks.isEmpty()) {
+            return new String[] {this.zeroTasksMessage};
+        } else {
+            String[] strings = new String[tasks.getNumOfTasks() + 1];
+            strings[0] = this.listTasksMessage;
+            for (int i = 1; i < strings.length; i++) {
+                strings[i] = tasks.getTaskAt(i - 1).toString();
+            }
+            return strings;
+        }
+    }
 
     /**
      * Prints strings upon finding matching tasks
+     *
      * @param tasks Sublist of tasks
      */
     public void printTasksWithKeyword(Task[] tasks) {
@@ -176,5 +255,38 @@ public class Ui {
             }
         }
         this.print(strings);
+    }
+
+    /**
+     * Gets strings upon finding matching tasks
+     *
+     * @param tasks Sublist of tasks
+     * @return Output strings upon finding matching tasks
+     */
+    public String[] getTasksWithKeywordStrings(Task[] tasks) {
+        String[] strings = new String[tasks.length + 1];
+        if (tasks.length == 0) {
+            strings[0] = this.foundZeroTasksMessage;
+        } else {
+            strings[0] = this.foundTasksMessage;
+            for (int i = 1; i < strings.length; i++) {
+                strings[i] = tasks[i - 1].toString();
+            }
+        }
+        return strings;
+    }
+
+    /**
+     * Prints the strings with top and bottom horizontal lines and indentation
+     *
+     * @param strings Array of strings to be printed
+     */
+    public void print(String[] strings) {
+        System.out.println(this.horizontalLine);
+        for(String string : strings) {
+            System.out.print(this.textIndentation);
+            System.out.println(string);
+        }
+        System.out.println(this.horizontalLine);
     }
 }

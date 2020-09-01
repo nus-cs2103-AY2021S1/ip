@@ -41,10 +41,11 @@ public class CreateEventCommand extends Command {
      * @param storage Storage
      * @param tasks Task list
      * @param ui Ui
+     * @return Output strings
      */
     @Override
-    public void execute(Storage storage, TaskList tasks, Ui ui) {
+    public String[] execute(Storage storage, TaskList tasks, Ui ui) {
         Event event = tasks.addEvent(description, isComplete, date);
-        ui.printCreateTask(tasks, event);
+        return ui.getCreateTaskStrings(tasks, event);
     }
 }

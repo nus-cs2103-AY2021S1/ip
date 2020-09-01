@@ -28,14 +28,15 @@ public class CompleteTaskCommand extends Command {
      * @param storage Storage
      * @param tasks Task list
      * @param ui Ui
+     * @return Output strings
      */
     @Override
-    public void execute(Storage storage, TaskList tasks, Ui ui) {
+    public String[] execute(Storage storage, TaskList tasks, Ui ui) {
         Task task = tasks.completeTaskAt(this.taskIndex);
         if (task != null) {
-            ui.printCompleteTask(task);
+            return ui.getCompleteTaskStrings(task);
         } else {
-            ui.printInvalidTaskIndex();
+            return ui.getInvalidTaskIndexStrings();
         }
     }
 }

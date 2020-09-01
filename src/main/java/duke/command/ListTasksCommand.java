@@ -15,9 +15,10 @@ public class ListTasksCommand extends Command {
      * @param storage Storage
      * @param tasks Task list
      * @param ui Ui
+     * @return Output strings
      */
     @Override
-    public void execute(Storage storage, TaskList tasks, Ui ui) {
-        ui.printTaskList(tasks);
+    public String[] execute(Storage storage, TaskList tasks, Ui ui) {
+        return ui.getTaskListStrings(tasks);
     }
 }
