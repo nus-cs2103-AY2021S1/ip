@@ -63,7 +63,7 @@ public abstract class FileToTaskListConverter {
                 String type = task.getType();
 
                 sb.append(type + "//");
-                sb.append(task.isDone() ? "✓" : "✘");
+                sb.append(task.isDone() ? "O" : "X");
                 sb.append("//");
                 sb.append(task.getDescription() + "//");
 

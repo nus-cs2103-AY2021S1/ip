@@ -2,7 +2,7 @@ package processor;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.function.Consumer;
+import java.util.function.Function;
 
 import exception.DukeException;
 import exception.EmptyActionException;
@@ -23,14 +23,14 @@ import task.ToDoTask;
  */
 public class CommandProcessor {
     private TaskList taskList;
-    private final HashMap<String, Consumer<String>> map = setUpCommandMap();
+    private final HashMap<String, Function<String, String>> map = setUpCommandMap();
 
     CommandProcessor(TaskList taskList) {
         this.taskList = taskList;
     }
 
-    private HashMap<String, Consumer<String>> setUpCommandMap() {
-        HashMap<String, Consumer<String>> map = new HashMap<>();
+    private HashMap<String, Function<String, String>> setUpCommandMap() {
+        HashMap<String, Function<String, String>> map = new HashMap<>();
 
         map.put("list", (command) -> listCommand());
         map.put("done", (command) -> doneCommand(command));
@@ -47,25 +47,26 @@ public class CommandProcessor {
      * Prints error message if command is invalid.
      *
      * @param command the command entered by user.
+     * @return reply to the command given
      */
-    public void runCommand(String command) {
-        Consumer<String> action = map.get(command.replaceAll(" .*", ""));
+    public String runCommand(String command) {
+        Function<String, String> action = map.get(command.replaceAll(" .*", ""));
         try {
             if (action == null) {
                 throw new InvalidCommandException();
             } else {
-                action.accept(command);
+                return action.apply(command);
             }
         } catch (DukeException e) {
-            System.out.println(e);
+            return e.toString();
         }
     }
 
-    private void listCommand() {
-        this.taskList.showList();
+    private String listCommand() {
+        return this.taskList.showList();
     }
 
-    private void doneCommand(String command) {
+    private String doneCommand(String command) {
         try {
             int length = command.length();
             if (length < 5) {
@@ -79,23 +80,22 @@ public class CommandProcessor {
                         throw new InvalidActionException(); // "done 0"
                     }
                     this.taskList.getTask(index - 1).markAsDone();
-                    System.out.println("    ____________________________________________________________\n"
+                    return "    ____________________________________________________\n"
                             + "     Nice! I've marked this task as done:\n"
                             + "     "
                             + this.taskList.getTask(index - 1)
                             + "\n"
-                            + "    ____________________________________________________________\n"
-                    );
+                            + "    ____________________________________________________\n";
                 } catch (NumberFormatException e) {
                     throw new InvalidActionException(); // "done 1A" etc
                 }
             }
         } catch (DukeException e) {
-            System.out.println(e);
+            return e.toString();
         }
     }
 
-    private void toDoCommand(String command) {
+    private String toDoCommand(String command) {
         try {
             int spaceIndex = command.indexOf(" ");
 
@@ -111,14 +111,14 @@ public class CommandProcessor {
                 throw new EmptyActionException(); // "todo     "
             } else {
                 Task task = new ToDoTask(command.substring(spaceIndex + 1));
-                this.taskList.addToTaskList(task);
+                return this.taskList.addToTaskList(task);
             }
         } catch (DukeException e) {
-            System.out.println(e);
+            return e.toString();
         }
     }
 
-    private void deadlineCommand(String command) {
+    private String deadlineCommand(String command) {
         try {
             int spaceIndex = command.indexOf(" ");
             int slashIndex = command.indexOf("/by");
@@ -132,15 +132,15 @@ public class CommandProcessor {
                 String time = command.substring(slashIndex + 4);
 
                 Task task = new DeadlineTask(description, time);
-                this.taskList.addToTaskList(task);
+                return this.taskList.addToTaskList(task);
             }
 
         } catch (DukeException e) {
-            System.out.println(e);
+            return e.toString();
         }
     }
 
-    private void eventCommand(String command) {
+    private String eventCommand(String command) {
         try {
             int spaceIndex = command.indexOf(" ");
             int slashIndex = command.indexOf("/at");
@@ -154,15 +154,15 @@ public class CommandProcessor {
                 String time = command.substring(slashIndex + 4);
 
                 Task task = new EventTask(description, time);
-                this.taskList.addToTaskList(task);
+                return this.taskList.addToTaskList(task);
             }
 
         } catch (DukeException e) {
-            System.out.println(e);
+            return e.toString();
         }
     }
 
-    private void deleteCommand(String command) {
+    private String deleteCommand(String command) {
         try {
             int length = command.length();
             if (length < 7) {
@@ -175,17 +175,17 @@ public class CommandProcessor {
                     if (index == 0 || index > this.taskList.size()) {
                         throw new InvalidActionException(); // "delete 0"
                     }
-                    this.taskList.deleteFromTaskList(index - 1);
+                    return this.taskList.deleteFromTaskList(index - 1);
                 } catch (NumberFormatException e) {
                     throw new InvalidActionException(); // "delete 1A" etc
                 }
             }
         } catch (DukeException e) {
-            System.out.println(e);
+            return e.toString();
         }
     }
 
-    private void findCommand(String command) {
+    private String findCommand(String command) {
         try {
             if (command.length() < 6) { // find
                 throw new EmptyActionException();
@@ -207,9 +207,9 @@ public class CommandProcessor {
             }
 
             TaskList filterList = new TaskList(list);
-            filterList.showList();
+            return filterList.showList();
         } catch (DukeException e) {
-            System.out.println(e);
+            return e.toString();
         }
     }
 }

@@ -40,10 +40,11 @@ public class TaskList {
      * Add a task to the list.
      *
      * @param task the task to be added.
+     * @return string containing information on deletion and list size.
      */
-    public void addToTaskList(task.Task task) {
+    public String addToTaskList(task.Task task) {
         this.taskList.add(task);
-        System.out.println("    ____________________________________________________________\n"
+        return "    ____________________________________________________\n"
                 + "     Got it. I've added this task:\n"
                 + "     "
                 + task
@@ -51,8 +52,7 @@ public class TaskList {
                 + "     Now you have "
                 + size()
                 + " task(s) in the list.\n"
-                + "    ____________________________________________________________\n"
-        );
+                + "    ____________________________________________________\n";
     }
 
     /**
@@ -60,11 +60,12 @@ public class TaskList {
      * IndexOutOfBoundsException will still be thrown if index exceeds size or is negative.
      *
      * @param index the index of task to be delete.
+     * @return string containing information on deletion and list size.
      */
-    public void deleteFromTaskList(int index) {
+    public String deleteFromTaskList(int index) {
         task.Task task = getTask(index);
         this.taskList.remove(index);
-        System.out.println("    ____________________________________________________________\n"
+        return "    ____________________________________________________\n"
                 + "     Noted. I've removed this task:\n"
                 + "     "
                 + task
@@ -72,8 +73,7 @@ public class TaskList {
                 + "     Now you have "
                 + size()
                 + " task(s) in the list.\n"
-                + "    ____________________________________________________________\n"
-        );
+                + "    ____________________________________________________\n";
     }
 
     /**
@@ -98,13 +98,22 @@ public class TaskList {
 
     /**
      * Displays the full content of this object.
+     *
+     * @return string representing the display of TaskList contents
      */
-    public void showList() {
-        System.out.print("    ____________________________________________________________\n");
-        System.out.print("     Here are the tasks in your list:\n");
+    public String showList() {
+        StringBuilder listDisplay = new StringBuilder();
+        listDisplay.append("    ____________________________________________________\n");
+        listDisplay.append("     Here are the tasks in your list:\n");
         for (int i = 1; i <= this.taskList.size(); i++) {
-            System.out.println("     " + i + "." + this.taskList.get(i - 1));
+            listDisplay.append("     ");
+            listDisplay.append(i);
+            listDisplay.append(".");
+            listDisplay.append(this.taskList.get(i - 1));
+            listDisplay.append("\n");
         }
-        System.out.println("    ____________________________________________________________\n");
+        listDisplay.append("    ____________________________________________________\n");
+
+        return listDisplay.toString();
     }
 }
