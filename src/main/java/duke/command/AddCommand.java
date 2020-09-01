@@ -5,16 +5,17 @@ import duke.parts.Storage;
 import duke.parts.TaskList;
 import duke.parts.Ui;
 import duke.task.Deadline;
+import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
-import duke.task.Event;
+
 
 /**
  * Represents a command which is used to add a task to the list.
  * It is executed when the execute method is called.
  */
-public class AddCommand extends Command{
-    String input;
+public class AddCommand extends Command {
+    private String input;
 
     public AddCommand(String input) {
         this.input = input;
@@ -30,23 +31,23 @@ public class AddCommand extends Command{
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws IncorrectFormat {
-        int space = input.indexOf(" ");
-        int slash = input.indexOf("/");
+        int indexOfSpace = input.indexOf(" ");
+        int indexOfSlash = input.indexOf("/");
         int length = input.length();
         Task newTask;
-        switch(input.substring(0, space)) {
+        switch(input.substring(0, indexOfSpace)) {
         case "todo":
-            newTask = new ToDo(input.substring(space, length));
+            newTask = new ToDo(input.substring(indexOfSpace, length));
             ui.printNew(newTask, "ToDo", tasks.numTask() + 1);
             break;
         case "deadline":
-            String dateStringDeadline = input.substring(slash + 1, input.length());
-            newTask = new Deadline(input.substring(space, slash), dateStringDeadline);
+            String dateStringDeadline = input.substring(indexOfSlash + 1, input.length());
+            newTask = new Deadline(input.substring(indexOfSpace, indexOfSlash), dateStringDeadline);
             ui.printNew(newTask, "Deadline", tasks.numTask() + 1);
             break;
         case "event":
-            String dateStringEvent = input.substring(slash + 1, input.length());
-            newTask = new Event(input.substring(space, slash), dateStringEvent);
+            String dateStringEvent = input.substring(indexOfSlash + 1, input.length());
+            newTask = new Event(input.substring(indexOfSpace, indexOfSlash), dateStringEvent);
             ui.printNew(newTask, "Event", tasks.numTask() + 1);
             break;
         default:

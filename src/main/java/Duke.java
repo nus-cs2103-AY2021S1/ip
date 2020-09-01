@@ -4,7 +4,7 @@ import duke.parts.Storage;
 import duke.parts.TaskList;
 import duke.parts.Ui;
 
-public class Duke {
+public class Duke  {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
