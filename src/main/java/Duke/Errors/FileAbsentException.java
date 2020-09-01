@@ -7,6 +7,7 @@ public class FileAbsentException extends DukeException {
     private String filePathAbsent;
     /**
      * This assigns filePath variable to a value
+     *
      * @param filePathAbsent the value assigned to filePath
      */
     public FileAbsentException(String filePathAbsent){
@@ -15,6 +16,7 @@ public class FileAbsentException extends DukeException {
 
     /**
      * This overrides the toString() method
+     *
      * @return a String for the exception is printed.
      */
     @Override

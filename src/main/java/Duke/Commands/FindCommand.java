@@ -17,7 +17,8 @@ public class FindCommand extends Command {
     private List<Task> tasks = new ArrayList<>();
 
     /**
-     * assigns string to a value of string
+     * Assigns string to a value of string
+     *
      * @param string assigns string to this this.string
      */
     public FindCommand(String string) {
@@ -46,7 +47,8 @@ public class FindCommand extends Command {
     }
 
     /**
-     * used to find the tasks which contains keyword in string
+     * Finds the tasks which contains keyword in string
+     *
      * @param tasks to look for the task's string value
      * @param ui
      * @param storage no need

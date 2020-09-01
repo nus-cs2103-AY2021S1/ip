@@ -15,6 +15,7 @@ public class Main extends Application {
 
     /**
      * Implements the abstract start method in Application class
+     *
      * @param stage it is to show the main screen
      */
     @Override

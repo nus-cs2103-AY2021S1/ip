@@ -20,7 +20,8 @@ import java.time.format.DateTimeFormatter;
  */
 public class EventCommand extends AddCommand{
     /**
-     * assigns string to a value of string
+     * Assigns string to a value of string
+     *
      * @param string assigns string to this this.string
      */
     public EventCommand(String string) {
@@ -71,7 +72,8 @@ public class EventCommand extends AddCommand{
     }
 
     /**
-     * is used to add Event task or handle exceptions
+     * Adds Event task or handle exceptions
+     *
      * @param tasks to change the taskList if necessary when no error
      * @param ui
      * @param storage to change the file in the if necessary when no error

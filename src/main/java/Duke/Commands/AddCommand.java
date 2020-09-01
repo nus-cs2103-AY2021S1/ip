@@ -1,4 +1,5 @@
 package Duke.Commands;
+
 import Duke.Helpers.Storage;
 import Duke.Helpers.TaskList;
 import Duke.Tasks.Task;
@@ -17,6 +18,7 @@ import java.time.format.DateTimeFormatter;
 abstract public class AddCommand extends Command {
     /**
      * constructor that assigns string value of string
+     *
      * @param string passes it to super class constructor
      */
     public AddCommand(String string) {
@@ -25,6 +27,7 @@ abstract public class AddCommand extends Command {
 
     /**
      * adds the task to list of task in taskList and into the file in storage
+     *
      * @param storage where the file here is updated
      * @param task this task is added into storage and taskList
      * @param taskList where the tasks here is updated with task added
@@ -45,6 +48,7 @@ abstract public class AddCommand extends Command {
 
     /**
      * converts string to date
+     *
      * @param string string to convert to date
      * @return local date which is converted from string, if cannot then DateTimeException thrown
      */
@@ -59,6 +63,7 @@ abstract public class AddCommand extends Command {
     }
     /**
      * converts string to dateTime
+     *
      * @param string string to convert to dateTime
      * @return local dateTime which is converted from string, if cannot then DateTimeException thrown
      */
@@ -74,6 +79,7 @@ abstract public class AddCommand extends Command {
 
     /**
      * converts string to time
+     *
      * @param string string to convert to time
      * @return local time which is converted from string, if cannot then DateTimeException thrown
      */

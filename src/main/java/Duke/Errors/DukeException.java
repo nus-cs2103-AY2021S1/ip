@@ -7,6 +7,7 @@ package Duke.Errors;
 abstract public class DukeException extends Exception {
     /**
      * overrides getMessage of an error
+     *
      * @return string of the exception
      */
     public String getMessage(){

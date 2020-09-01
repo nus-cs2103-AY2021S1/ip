@@ -17,6 +17,7 @@ abstract public class Task {
 
     /**
      * constructor assigns name variable a value
+     *
      * @param name this assigns the name of the Task to the name being given in the constructor.
      */
     Task(String name) {
@@ -27,6 +28,7 @@ abstract public class Task {
 
     /**
      * constructor assigns name and done a value.
+     *
      * @param name assigns name to this.name
      * @param done assigns name to this.done
      */
@@ -37,6 +39,7 @@ abstract public class Task {
     }
     /**
      * gives name of task
+     *
      * @return name of task
      */
     public String getName() {
@@ -45,6 +48,7 @@ abstract public class Task {
 
     /**
      * setter that sets Done to the done value stated
+     *
      * @param done value given to set it to done var
      */
     public void setDone(boolean done) {
@@ -52,7 +56,8 @@ abstract public class Task {
     }
 
     /**
-     * gives a specific string representation for that in the tasks.txt file
+     * Gives a specific string representation for that in the tasks.txt file
+     *
      * @return the string representation
      */
     public String inputListFormat(){

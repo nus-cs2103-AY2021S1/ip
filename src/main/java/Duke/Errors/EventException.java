@@ -31,6 +31,7 @@ public class EventException extends DukeException {
 
     /**
      * doesn't take in any arguments, overrides the in-built toString() method.
+     *
      * @return returns a string informing that the description is empty if description is true.
      * If endTime is absent is true, end time is absent and then a description mentioning this would be returned.
      * Else, if startAfterEnd is true, start would be more than end then a description describing this would be printed

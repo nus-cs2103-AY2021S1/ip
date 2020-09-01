@@ -39,7 +39,8 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
-     * also ensures that the getDukeDialog prints hello when opened
+     * Also ensures that the getDukeDialog prints hello when opened
+     *
      * @param d assigns duke value of d
      * @param stage assigns stage value of stage
      */

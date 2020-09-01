@@ -11,7 +11,8 @@ import java.util.List;
 public class TaskList {
     private List<Task> allTasks;
     /**
-     * assigns allTasks a value
+     * Assigns allTasks a value
+     *
      * @param tasks assings the mem var a value of allTasks
      */
     public TaskList(List<Task> tasks){
@@ -26,7 +27,8 @@ public class TaskList {
     }
 
     /**
-     * returns the List<Task> value
+     * Returns the List<Task> value
+     *
      * @return the List<Task> value
      */
     public List<Task> getAllTasks(){

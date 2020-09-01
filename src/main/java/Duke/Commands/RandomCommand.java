@@ -10,7 +10,8 @@ import Duke.Helpers.Ui;
  */
 public class RandomCommand extends Command {
     /**
-     * assigns string to a value of string
+     * Assigns string to a value of string
+     *
      * @param string assigns string to this this.string
      */
     public RandomCommand(String string) {
@@ -18,7 +19,8 @@ public class RandomCommand extends Command {
     }
 
     /**
-     * gives wrong input exception
+     * Gives wrong input exception
+     *
      * @param tasks
      * @param ui
      * @param storage

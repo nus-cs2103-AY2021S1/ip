@@ -20,7 +20,7 @@ import java.util.Scanner;
 public class Storage {
     private String filePath;
     /**
-     * constructor assigns filePath to filePath
+     * Constructor assigns filePath to filePath
      * @param filePath assigns this value to variable
      */
     public Storage(String filePath){
@@ -28,7 +28,8 @@ public class Storage {
     }
 
     /**
-     * converts the string form of tasks on the file to Task objects
+     * Converts the string form of tasks on the file to Task objects
+     *
      * @return the List of tasks containing Task instead of String
      * @throws DukeException when a file with FilePath doesnt exist.
      */
@@ -79,8 +80,9 @@ public class Storage {
                 }
             if(tasks.size() == 0){
                 throw new FIleEmptyException();
+            }else {
+                return tasks;
             }
-            return tasks;
         } catch (IOException error){
             throw new FileAbsentException(this.filePath);
         }

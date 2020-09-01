@@ -5,7 +5,8 @@ package Duke.Tasks;
 
 public class ToDo extends Task {
     /**
-     * assigns name to name value
+     * Assigns name to name value
+     *
      * @param name super(name) so that it does whatever is mentioned in the parent class
      */
     public ToDo(String name) {
@@ -13,7 +14,8 @@ public class ToDo extends Task {
     }
 
     /**
-     * assigns name and done to values
+     * Assigns name and done to values
+     *
      * @param name assigns name to this.name
      * @param done assigns done to this.done
      */
@@ -22,7 +24,8 @@ public class ToDo extends Task {
     }
 
     /**
-     * takes no arguments and overrides the toString method
+     * Takes no arguments and overrides the toString method
+     *
      * @return the specific representation for ToDo class as mentioned with [T] indicating that it is a ToDo class
      *
      */
@@ -32,8 +35,9 @@ public class ToDo extends Task {
     }
 
     /**
-     * gives a specific string representation for that in the tasks.txt file and overrides that in Task to make
+     * Gives a specific string representation for that in the tasks.txt file and overrides that in Task to make
      * it unique to that for ToDo
+     *
      * @return the string representation
      */
     public String inputListFormat(){

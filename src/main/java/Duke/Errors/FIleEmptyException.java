@@ -6,6 +6,7 @@ package Duke.Errors;
 public class FIleEmptyException extends DukeException {
     /**
      * this overrides the toString() method
+     *
      * @return a String representation of FileEmptyException
      */
     @Override

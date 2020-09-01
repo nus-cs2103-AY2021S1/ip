@@ -6,7 +6,8 @@ package Duke.Tasks;
 public class Deadline extends Task {
     private String day = null;
     /**
-     * this assigns the name and day values
+     * Assigns the name and day values
+     *
      * @param name super(name) so that it does whatever is mentioned in the parent class
      * @param day assigns this.day to day value
      */
@@ -16,7 +17,8 @@ public class Deadline extends Task {
     }
 
     /**
-     * this assigns the nam, done and day values
+     * Assigns the nam, done and day values
+     *
      * @param name argument in super class constructor
      * @param done argument in super class constructor
      * @param day assigns to this.day
@@ -27,7 +29,8 @@ public class Deadline extends Task {
     }
 
     /**
-     * takes no arguments and overrides the toString method
+     * Takes no arguments and overrides the toString method
+     *
      * @return the specific representation for deadline class as mentioned with [D] indicating that it is a deadline class
      * and also mentions the deadline.
      */
@@ -36,8 +39,9 @@ public class Deadline extends Task {
     }
 
     /**
-     * gives a specific string representation for that in the tasks.txt file and overrides that in Task to make
+     * Gives a specific string representation for that in the tasks.txt file and overrides that in Task to make
      * it unique to that for Deadline
+     *
      * @return the string representation
      */
     public String inputListFormat() {

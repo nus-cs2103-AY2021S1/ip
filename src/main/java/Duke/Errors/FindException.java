@@ -9,6 +9,7 @@ public class FindException extends DukeException {
 
     /**
      * constructor assigns values of description and string
+     *
      * @param descriptionAbsent value is assigned to this.description
      * @param description value is assigned to this.string
      */
@@ -19,6 +20,7 @@ public class FindException extends DukeException {
 
     /**
      * overrides the toString() method
+     *
      * @return if description is present error is due to no matches being present and an error message informing
      * them would be printed. If it is not present than error is due to keywords being absent therefore an error
      * message regarding that would be released.

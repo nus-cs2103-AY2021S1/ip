@@ -17,7 +17,8 @@ abstract public class Command {
     boolean isExit = false;
 
     /**
-     * used to assign string to a value
+     * Assigns string to a value
+     *
      * @param commandDescription assigns this.string to string
      */
     Command(String commandDescription){
@@ -33,7 +34,8 @@ abstract public class Command {
     }
 
     /**
-     * executes the necessary task
+     * Executes the necessary task
+     *
      * @param tasks used to access tasks in its list and change if necessary
      * @param ui
      * @param storage to change the input there if necessary

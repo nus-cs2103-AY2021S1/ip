@@ -7,7 +7,8 @@ import Duke.Commands.*;
  */
 public class Parser {
     /**
-     * This returns a Command, depending on the string being input
+     * Returns a Command, depending on the string being input
+     *
      * @param string where the first words determines command to be returned
      * @return Command is returned based on the first word of param string
      */

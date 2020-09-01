@@ -44,7 +44,8 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * used to do deleted task and handle error
+     * Deletes task and handles error
+     *
      * @param tasks to change the taskList since item is deleted
      * @param ui
      * @param storage to change the file since item is deleted
@@ -65,17 +66,4 @@ public class DeleteCommand extends Command {
         }
     }
 
-
-    /*public String run(TaskList tasks, Storage storage) {
-        if (string.length() == 4 || string.length() == 5) {
-            return new DeleteException(true, false).toString();
-        }else{
-            int ID = Integer.parseInt(string.substring(7));
-            if (ID > tasks.getAllTasks().size()) {
-                return new DeleteException(false, false).toString();
-            }else {
-                return rewrite(storage, tasks, ID);
-            }
-        }
-    }*/
 }

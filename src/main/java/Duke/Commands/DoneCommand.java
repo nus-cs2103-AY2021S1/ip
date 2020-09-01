@@ -42,7 +42,7 @@ public class DoneCommand extends Command {
     }
 
     /**
-     * is used to complete done task and handle error
+     * Completes done task and handle error
      * @param tasks to change the taskList as a task is completed
      * @param ui
      * @param storage to change the file as task is completed

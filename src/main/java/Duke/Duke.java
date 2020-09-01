@@ -21,6 +21,7 @@ public class Duke {
 
     /**
      * This gives the boolean value of isExit
+     *
      * @return returns the value of isExit.
      */
     public boolean isExit(){
@@ -29,6 +30,7 @@ public class Duke {
 
     /**
      * This gives the respective output based on the input
+     *
      * @param inputs what the user inputs in the GUI, can be multiple inputs.
      * @return the output based on the output.
      */
@@ -47,8 +49,9 @@ public class Duke {
         return output.substring(1);
     }
     /**
-     * assigns the above member variables with the appropriate values, and throws certain exceptions if file in
+     * Assigns the above member variables with the appropriate values, and throws certain exceptions if file in
      * the filePath mentioned is empty or absent
+     *
      * @param filePath represents where the filepath of where the file may exist.
      */
     public Duke(String filePath) {

@@ -21,6 +21,7 @@ import java.time.format.DateTimeFormatter;
 public class DeadlineCommand extends AddCommand {
     /**
      * assigns string to a value of string
+     *
      * @param string assigns string to this this.string
      */
     public DeadlineCommand(String string) {
@@ -48,7 +49,8 @@ public class DeadlineCommand extends AddCommand {
     }
 
     /**
-     * to add deadline into a task list in TaskList,
+     * to add deadline into a task list in TaskList
+     *
      * @param tasks to change the taskList if necessary
      * @param ui
      * @param storage to change the file in the if necessary

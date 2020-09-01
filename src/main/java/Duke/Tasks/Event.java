@@ -8,6 +8,7 @@ public class Event extends Task {
     private String end;
 
     /**
+     * Initializes the Event class
      *
      * @param name super(name) so that it does whatever is mentioned in the parent class
      * @param dateTime assigns this.dayTime to dayTime value
@@ -19,7 +20,8 @@ public class Event extends Task {
     }
 
     /**
-     * this assigns the nam, done and day values
+     * Assigns the nam, done and day values
+     *
      * @param name argument in super class constructor
      * @param done argument in super class constructor
      */
@@ -30,7 +32,8 @@ public class Event extends Task {
     }
 
     /**
-     *  Overrides the toString methods
+     * Overrides the toString methods
+     *
      * @return the specific representation for Event class as mentioned with [E] indicating that it is a Event class
      *      * and also mentions the Event.
      */
@@ -39,8 +42,9 @@ public class Event extends Task {
     }
 
     /**
-     * gives a specific string representation for that in the tasks.txt file and overrides that in Task to make
+     * Gives a specific string representation for that in the tasks.txt file and overrides that in Task to make
      * it unique to that for Event
+     *
      * @return the string representation
      */
     public String inputListFormat(){

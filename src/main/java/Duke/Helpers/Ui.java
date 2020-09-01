@@ -5,7 +5,6 @@ import Duke.Errors.FileAbsentException;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-
 import java.util.Scanner;
 
 /**
@@ -26,7 +25,8 @@ public class Ui {
 
     }
     /**
-     * this prints out if there is an error when tasks are loaded
+     * This prints out if there is an error when tasks are loaded
+     *
      * @param d this is the error that is thrown whose string message gets printed
      */
     public void showLoadingError(DukeException d){
@@ -42,14 +42,15 @@ public class Ui {
     }
 
     /**
-     * this prints the ____ for easier readability
+     * This prints the ____ for easier readability
      */
     public void showLine(){
         System.out.println("  ____________________________________________________________\n");
     }
 
     /**
-     * this prints the next line of code to execute if it exists
+     * This prints the next line of code to execute if it exists
+     *
      * @return the string of command
      */
     public String readCommand(){
@@ -61,7 +62,8 @@ public class Ui {
     }
 
     /**
-     * prints out the error
+     * Prints out the error
+     *
      * @param s s is the error that is printed
      */
     public void showError(String s){

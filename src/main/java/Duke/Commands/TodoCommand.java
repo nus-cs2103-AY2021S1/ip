@@ -15,7 +15,8 @@ import java.io.IOException;
  */
 public class TodoCommand extends AddCommand{
     /**
-     * assigns string to a value of string
+     * Assigns string to a value of string
+     *
      * @param string assigns string to this this.string
      */
     public TodoCommand(String string) {
@@ -23,7 +24,8 @@ public class TodoCommand extends AddCommand{
     }
 
     /**
-     * to add deadline into a task list in TaskList,
+     * Adds deadline into a task list in TaskList.
+     *
      * @param tasks to change the taskList if necessary
      * @param ui
      * @param storage to change the file in the if necessary

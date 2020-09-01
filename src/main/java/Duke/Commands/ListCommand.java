@@ -10,7 +10,8 @@ import Duke.Helpers.Ui;
  */
 public class ListCommand extends Command {
     /**
-     * assigns string to a value of string
+     * Assigns string to a value of string
+     *
      * @param string assigns string to this this.string
      */
     public ListCommand(String string) {
@@ -18,7 +19,8 @@ public class ListCommand extends Command {
     }
 
     /**
-     * lists all the tasks that are currently present in the tasks.
+     * Lists all the tasks that are currently present in the tasks.
+     *
      * @param tasks to access the list and print them
      * @param ui
      * @param storage

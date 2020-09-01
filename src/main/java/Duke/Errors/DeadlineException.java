@@ -15,6 +15,7 @@ public class DeadlineException extends DukeException{
 
     /**
      *constructor for deadline exception that assigns description and format values
+     *
      * @param description input, depneding on whether the description is present or not in the input.txt file. If present it is false
      *   else it is true.
      */
@@ -25,6 +26,7 @@ public class DeadlineException extends DukeException{
 
     /**
      * doesn't take in any arguments, overrides the in-built toString() method.
+     *
      * @return returns a string informing that the description is empty if description is true. Else, if description is
      * false, it means that the date is absent and it informs accordingly.
      */

@@ -17,7 +17,8 @@ public class ExitCommand extends Command {
     }
 
     /**
-     * prints bye message
+     * Prints bye message
+     *
      * @param tasks no change made
      * @param ui
      * @param storage no change made
@@ -30,7 +31,8 @@ public class ExitCommand extends Command {
     }
 
     /**
-     * returns true to exit program
+     * Returns true to exit program
+     *
      * @return true to exit program
      */
     @Override
