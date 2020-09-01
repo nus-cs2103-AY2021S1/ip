@@ -37,7 +37,7 @@ public class Parser {
         String finalString;
         if (stringarr[0].equals("list")) {
             String response = processorList(taskList);
-            finalString = Ui.showResponse(response, command);
+            finalString = Ui.showCommandMessage(response);
         } else if (stringarr[0].equals("done")) {
             int index = Integer.parseInt(stringarr[1]);
             String response = taskList.updateTask(index);
@@ -51,7 +51,7 @@ public class Parser {
         } else if (stringarr[0].equals("find")) {
             String key = stringarr[1];
             String response = processorFind(taskList, key);
-            finalString = Ui.showResponse(response, command);
+            finalString = Ui.showCommandMessage(response);
         } else {
             String response = processorAdd(command, taskList);
             storage.saveRecord(response);
@@ -63,7 +63,7 @@ public class Parser {
     private static String processorFind(TaskList taskList, String key) {
         int counter = 1;
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(Ui.showCommandMessage("Here are the matching tasks in your list:"));
+        stringBuilder.append("Here are the matching tasks in your list: \n");
         for (int i = 0; i < taskList.getListSize(); i++) {
             if (taskList.getTask(i).getTask().contains(key)) {
                 String findResponse = counter + "." + taskList.getTask(i).toString() + "\n";
@@ -77,7 +77,7 @@ public class Parser {
 
     private static String processorList(TaskList taskList) {
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(Ui.showCommandMessage("Here are the tasks in your list:"));
+        stringBuilder.append("Here are the tasks in your list: \n");
         for (int i = 0; i < taskList.getListSize(); i++) {
             int index = i + 1;
             String listResponse = index + "." + taskList.getTask(i).toString() + "\n";
