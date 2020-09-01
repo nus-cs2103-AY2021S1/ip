@@ -14,11 +14,11 @@ public class FindCommand extends Command {
      * @param ui a user interface in charge of Duke's I/O.
      * @param storage a storage system that handles .txt file manipulation.
      */
-    public void execute(TaskList list, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList list, Ui ui, Storage storage) throws DukeException {
         TaskList keywordTasks = list.findTask(keyword);
         String output = "Here are your tasks with keyword(s) \"" + this.keyword + "\" :\n";
         output += keywordTasks;
-        ui.printLine(output);
+        return ui.getLine(output);
     }
 
 }
