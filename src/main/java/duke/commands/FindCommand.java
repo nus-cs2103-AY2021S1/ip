@@ -1,5 +1,6 @@
 package duke.commands;
 
+import duke.util.OutputUi;
 import duke.util.Storage;
 import duke.tasks.Task;
 import duke.util.TaskList;
@@ -13,7 +14,7 @@ import java.util.ArrayList;
  * Locates tasks that contain the given keyword, storing them in an arraylist.
  */
 public class FindCommand extends Command {
-    String keyword;
+    static String keyword;
 
     public FindCommand(String keyword) {
         this.keyword = keyword.trim();
@@ -26,25 +27,30 @@ public class FindCommand extends Command {
      * @param storage Storage object that handles saving Tasks to hard disk.
      * @throws DukeException DukeException.
      * @throws IOException IOException.
+     * @return
      */
-    @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+//    @Override
+    public String execute(TaskList tasks, OutputUi ui, Storage storage) {
         ArrayList<Task> relevantTasks = new ArrayList<>();
         for (Task t : tasks.getTasklist()) {
-            System.out.println("TASK: " + t);
             if (t.getDescription().contains(keyword)) {
                 relevantTasks.add(t);
             }
         }
 
-        ui.printDivider();
-        ui.printMsg("Here are the matching tasks Mr Camel found:");
-        int counter = 1;
-        for (Task t : relevantTasks) {
-            ui.printMsg(counter + ". " + t.toString());
-            counter++;
+        ui.reset();
+
+        if (relevantTasks.isEmpty()) {
+            ui.addSentence("no matching tasks!");
+        } else {
+            ui.addSentence("pingu found these matching tasks:");
+            int count = 1;
+            for (Task t : relevantTasks) {
+                ui.addSentence(count + ". " + t.toString());
+                count++;
+            }
         }
 
-        ui.printDivider();
+        return ui.getResponse();
     }
 }

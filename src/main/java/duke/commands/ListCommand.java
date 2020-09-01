@@ -1,5 +1,6 @@
 package duke.commands;
 
+import duke.util.OutputUi;
 import duke.util.Storage;
 import duke.tasks.Task;
 import duke.util.TaskList;
@@ -18,17 +19,19 @@ public class ListCommand extends Command {
      * @param ui Ui object that handles printing of any necessary output.
      * @param storage Storage object that handles saving Tasks to hard disk.
      * @throws DukeException DukeException.
+     * @return
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, OutputUi ui, Storage storage) {
         ArrayList<Task> tasklist = tasks.getTasklist();
 
-        ui.printDivider();
-        ui.printMsg("Tasks");
-
-        for (int i = 1; i < tasklist.size() + 1; i++) {
-            ui.printMsg("\t" + i + ". " + tasklist.get(i-1));
+        ui.reset();
+        ui.addSentence("here is ur list");
+        int count = 1;
+        for (Task t : tasklist) {
+            ui.addSentence("\t" + count + ". " + t);
+            count++;
         }
 
-        ui.printDivider();
+        return ui.getResponse();
     }
 }

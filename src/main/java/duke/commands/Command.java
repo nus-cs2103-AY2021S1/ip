@@ -1,5 +1,6 @@
 package duke.commands;
 
+import duke.util.OutputUi;
 import duke.util.Storage;
 import duke.util.TaskList;
 import duke.util.Ui;
@@ -32,7 +33,9 @@ public class Command {
      * @throws DukeException DukeException.
      * @throws IOException IOException.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException {
+    public String execute(TaskList tasks, OutputUi ui, Storage storage) throws DukeException {
         storage.update(tasks);
+
+        return "command received";
     }
 }

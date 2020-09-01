@@ -2,6 +2,7 @@ package duke.commands;
 
 import duke.*;
 import duke.tasks.Task;
+import duke.util.OutputUi;
 import duke.util.Storage;
 import duke.util.TaskList;
 import duke.util.Ui;
@@ -12,7 +13,8 @@ import java.io.IOException;
  * Command invoked when a task is called to be marked as done.
  */
 public class DoneCommand extends Command {
-    int taskIndex;
+    private static int taskIndex;
+//    int taskIndex;
 
     /**
      * Constructor.
@@ -30,14 +32,15 @@ public class DoneCommand extends Command {
      * @throws DukeException DukeException.
      * @throws IOException IOException.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException {
+    public String execute(TaskList tasks, OutputUi ui, Storage storage) throws DukeException {
         Task t = tasks.doneTask(taskIndex);
 
-        ui.printDivider();
-        ui.printMsg("Mr Camel will mark this task as done:\n");
-        ui.printMsg("\t" + t);
-        ui.printDivider();
+        ui.reset();
+        ui.addSentence("pingu mark this task as done");
+        ui.addSentence("\t" + t);
 
         super.execute(tasks, ui, storage);
+
+        return ui.getResponse();
     }
 }

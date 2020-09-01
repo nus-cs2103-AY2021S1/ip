@@ -1,5 +1,6 @@
 package duke.commands;
 
+import duke.util.OutputUi;
 import duke.util.Storage;
 import duke.tasks.Task;
 import duke.util.TaskList;
@@ -12,7 +13,7 @@ import java.io.IOException;
  * Carries out the deletion of tasks from tasklist, and saves the changes to hard disk.
  */
 public class DeleteCommand extends Command {
-    int taskIndex;
+    private static int taskIndex;
 
     /**
      * Constructor.
@@ -30,15 +31,16 @@ public class DeleteCommand extends Command {
      * @throws DukeException DukeException.
      * @throws IOException IOException.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException {
+    public String execute(TaskList tasks, OutputUi ui, Storage storage) throws DukeException {
         Task t = tasks.deleteTask(taskIndex);
 
-        ui.printDivider();
-        ui.printMsg("Mr Camel will delete this task:\n");
-        ui.printMsg("\t" + t);
-        ui.printMsg("Number of tasks: " + tasks.getTasklist().size());
-        ui.printDivider();
+        ui.reset();
+        ui.addSentence("pingu delete this task");
+        ui.addSentence("\t" + t);
+        ui.addSentence("number of tasks: " + tasks.getTasklist().size());
 
         super.execute(tasks, ui, storage);
+
+        return ui.getResponse();
     }
 }

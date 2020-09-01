@@ -1,5 +1,6 @@
 package duke;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.control.Button;
@@ -12,6 +13,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+
+import java.util.NoSuchElementException;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -38,6 +41,8 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         makeRoundImage(pingu1);
         makeRoundImage(pingu2);
+
+        dialogContainer.getChildren().addAll(DialogBox.getDukeDialog("NOOT NOOT! Pingu says hi", pingu));
     }
 
     private void makeRoundImage(ImageView imageView) {
@@ -64,13 +69,25 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     private void handleUserInput() {
-        String input = userInput.getText();
-        String response = duke.getResponse(input);
+        try {
+            String input = userInput.getText();
+            String response = duke.getResponse(input);
 
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, pingu1.getImage()),
-                DialogBox.getDukeDialog(response, pingu2.getImage())
-        );
-        userInput.clear();
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getUserDialog(input, pingu1.getImage()),
+                    DialogBox.getDukeDialog(response, pingu2.getImage())
+            );
+            userInput.clear();
+
+        } catch (NoSuchElementException e) {
+            this.dialogContainer.getChildren().addAll(
+                    DialogBox.getDukeDialog("huh1", pingu));
+            this.userInput.clear();
+        } catch (DukeException e) {
+            this.dialogContainer.getChildren().addAll(
+                    DialogBox.getDukeDialog("huh2", pingu));
+            this.userInput.clear();
+        }
+
     }
 }

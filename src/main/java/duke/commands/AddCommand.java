@@ -1,6 +1,7 @@
 package duke.commands;
 
 import duke.*;
+import duke.util.OutputUi;
 import duke.util.Storage;
 import duke.util.TaskList;
 import duke.tasks.Task;
@@ -12,7 +13,7 @@ import java.io.IOException;
  * Command when a new Task is to be added to TaskList.
  */
 public class AddCommand extends Command {
-    String[] words;
+    static String[] words;
 
     /**
      * Constructor.
@@ -37,28 +38,30 @@ public class AddCommand extends Command {
      * @throws DukeException a DukeException.
      * @throws IOException an IOException.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException {
-        String command = this.words[0];
+    public String execute(TaskList tasks, OutputUi ui, Storage storage) throws DukeException {
+        String command = words[0];
         Task t = new Task("null");
-        try {
-            switch (command) {
-            case "todo":
-                t = tasks.addToDo(this.words[1]);
-                break;
-            case "deadline":
-                t = tasks.addDeadline(this.words[1], this.words[2]);
-                break;
-            case "event":
-                t = tasks.addEvent(this.words[1], this.words[2]);
-                break;
-            default:
-                throw new DukeException("Word not recognised!");
-            }
-        } catch (DukeException e) {
-            ui.printError(e);
+
+        switch (command) {
+        case "todo":
+            t = tasks.addToDo(words[1]);
+            break;
+        case "deadline":
+            t = tasks.addDeadline(words[1], words[2]);
+            break;
+        case "event":
+            t = tasks.addEvent(words[1], words[2]);
+            break;
+        default:
+            throw new DukeException("Word not recognised!");
         }
-        
-        printAddedOutput(t, tasks, ui);
+
+        ui.reset();
+        ui.addSentence("pingu has added: " + t);
+        ui.addSentence("\tnumber of tasks: " + tasks.getTasklist().size());
+
         super.execute(tasks, ui, storage);
+        return ui.getResponse();
     }
+
 }

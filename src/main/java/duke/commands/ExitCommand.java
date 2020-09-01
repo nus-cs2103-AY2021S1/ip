@@ -1,8 +1,8 @@
 package duke.commands;
 
+import duke.util.OutputUi;
 import duke.util.Storage;
 import duke.util.TaskList;
-import duke.util.Ui;
 import duke.DukeException;
 
 import java.io.IOException;
@@ -19,10 +19,16 @@ public class ExitCommand extends Command {
      * @param storage Storage object that handles saving Tasks to hard disk.
      * @throws DukeException DukeException.
      * @throws IOException IOException.
+     * @return
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException {
+    public String execute(TaskList tasks, OutputUi ui, Storage storage) throws DukeException {
         isExit = true;
-        ui.printGoodbye();
+
+        ui.reset();
+        ui.addSentence("byebye pingu miss u");
+
         super.execute(tasks, ui, storage);
+
+        return ui.getResponse();
     }
 }
