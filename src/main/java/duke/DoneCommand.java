@@ -37,8 +37,8 @@ public class DoneCommand extends Command {
             Task currentTask = tasks.get(taskNumber - 1);
             Task newTask = currentTask.markAsDone();
             tasks.set(taskNumber - 1, newTask);
-            System.out.println("Sugoi! This task is done!");
-            System.out.println(newTask + "\n");
+            ui.appendMessage("Sugoi! This task is done!\n");
+            ui.appendMessage(newTask + "\n");
 
         } catch (NumberFormatException e) {
             throw new DukeException(getParsedCommand()[1] + " is not an integer!\n");

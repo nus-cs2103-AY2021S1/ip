@@ -1,0 +1,5 @@
+Todo|0|eat
+Todo|1|study
+Todo|1|go to school
+Todo|0|do homework
+Todo|0|buy food

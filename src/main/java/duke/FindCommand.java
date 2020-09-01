@@ -14,19 +14,19 @@ public class FindCommand extends Command {
 
         String inputDescription = getParsedCommand()[1].trim();
         boolean taskFound = false;
-        System.out.println("Here are the matching tasks in your list:");
+        ui.appendMessage("Here are the matching tasks in your list:\n");
         for (int i = 0; i < tasks.size(); i++) {
             if (tasks.get(i)
                     .getDescription()
                     .contains(inputDescription)) {
                 taskFound = true;
-                System.out.println((i + 1) + ". " + tasks.get(i));
+                ui.appendMessage((i + 1) + ". " + tasks.get(i) + "\n");
             }
         }
         if (!taskFound) {
-            System.out.println("Nothing matches your search!\n");
+            ui.appendMessage("Nothing matches your search!\n");
         } else {
-            System.out.println(); // print empty line for easier visualisation
+            ui.appendMessage("\n"); // print empty line for easier visualisation
         }
     }
 }

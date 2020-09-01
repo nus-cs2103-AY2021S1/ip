@@ -22,6 +22,6 @@ public class ClearCommand extends Command {
     @Override
     void execute(TaskList<Task> tasks, Ui ui, Storage storage) throws DukeException {
         tasks.clearList();
-        System.out.println("All your tasks have been removed!\n");
+        ui.appendMessage("All your tasks have been removed!\n");
     }
 }
