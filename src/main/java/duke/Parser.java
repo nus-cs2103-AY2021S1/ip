@@ -6,8 +6,24 @@ import duke.exception.DukeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Contains methods for processing user input, converting it to a {@link Command}
+ * that can be executed.
+ */
+
 public class Parser {
 
+    /**
+     * Converts user input into a {@link Command} that can be executed.
+     *
+     * @param input String input entered by user.
+     * @return {@link Command} that can be executed.
+     * @throws DukeException When no integer input is provided after "done" or "delete".
+     * @throws DukeException When no description is provided for a task.
+     * @throws DukeException When there is no date flagged by "/by" for a deadline, or "/at" for an event.
+     * @throws DukeException When the date input for a deadline or event does not follow YYYY-MM-DD format.
+     * @throws DukeException When unsupported input is entered.
+     */
     public static Command parse(String input) throws DukeException {
         try {
             //Splits input into parts by spaces
