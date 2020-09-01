@@ -1,13 +1,17 @@
 package duke;
 
 import javafx.application.Application;
-import javafx.geometry.Insets;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 /**
@@ -20,10 +24,10 @@ import javafx.stage.Stage;
 
 public class Duke extends Application {
 
-    public static TaskList taskList = new TaskList();
-    public static Storage storage = new Storage(taskList);
-    public static Parser parser = new Parser();
-    public static Ui ui = new Ui(taskList, storage, parser);
+    private static TaskList taskList = new TaskList();
+    private static Storage storage = new Storage(taskList);
+    private static Parser parser = new Parser();
+    private static Ui ui = new Ui(taskList, storage, parser);
 
     private Stage window;
     // output
@@ -67,6 +71,7 @@ public class Duke extends Application {
         // main layout
         AnchorPane mainLayout = new AnchorPane();
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
+        dialogContainer.setStyle("-fx-background-color: #424242;");
 
         // create new scene
         scene = new Scene(mainLayout);
@@ -116,8 +121,8 @@ public class Duke extends Application {
 
         // Start up message
         dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(
-                new Label("Hello! I'm Duke. \nWhat can I do for you?\n" +
-                        "Enter 'help' to see the list of commands"), new ImageView(duke)));
+                new Label("Hello! I'm Duke. \nWhat can I do for you?\n"
+                        + "Enter 'help' to see the list of commands"), new ImageView(duke)));
     }
 
     /**

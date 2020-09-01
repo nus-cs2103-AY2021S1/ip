@@ -19,6 +19,11 @@ public class DialogBox extends HBox {
     private Label text;
     private ImageView displayPicture;
 
+    /**
+     * Constructor for DialogBox.
+     * @param l Contents of the dialog box
+     * @param iv Display picture of dialog box
+     */
     public DialogBox(Label l, ImageView iv) {
         text = l;
         displayPicture = iv;
@@ -50,7 +55,7 @@ public class DialogBox extends HBox {
      */
     public static DialogBox getUserDialog(Label l, ImageView iv) {
         var db = new DialogBox(l, iv);
-        db.setBackground(new Background(new BackgroundFill(Color.CYAN,null,null)));
+        db.setBackground(new Background(new BackgroundFill(Color.CYAN, null, null)));
         return db;
     }
 
@@ -63,7 +68,7 @@ public class DialogBox extends HBox {
     public static DialogBox getDukeDialog(Label l, ImageView iv) {
         var db = new DialogBox(l, iv);
         db.flip();
-        db.setBackground(new Background(new BackgroundFill(Color.DARKORANGE,null,null)));
+        db.setBackground(new Background(new BackgroundFill(Color.DARKORANGE, null, null)));
         return db;
     }
 }

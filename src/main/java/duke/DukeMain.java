@@ -11,10 +11,10 @@ package duke;
 
 public class DukeMain {
 
-    public static TaskList taskList = new TaskList();
-    public static Storage storage = new Storage(taskList);
-    public static Parser parser = new Parser();
-    public static Ui ui = new Ui(taskList, storage, parser);
+    private static TaskList taskList = new TaskList();
+    private static Storage storage = new Storage(taskList);
+    private static Parser parser = new Parser();
+    private static Ui ui = new Ui(taskList, storage, parser);
 
 
 

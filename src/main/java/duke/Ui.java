@@ -15,15 +15,15 @@ public class Ui {
     private Storage storage;
     private Parser parser;
 
-    private final String HELP_TEXT = "Duke Bot Commands:\n" +
-            "list : list out all current tasks\n" +
-            "find <keyword> : find all task that corresponds to the keyword\n" +
-            "done <task number> : marks the specified task as done\n" +
-            "delete <task number> : deletes the specified task\n" +
-            "todo <task name> : adds a ToDo task\n" +
-            "deadline <task name> /by YYYY-MM-DD : adds a Deadline task\n" +
-            "event <task name> /at YYYY-MM-DD TT:TT-TT:TT : adds an Event task\n" +
-            "Do note that Date and Time must have the specified format\n";
+    private static final String HELP_TEXT = "Duke Bot Commands:\n"
+            + "list : list out all current tasks\n"
+            + "find <keyword> : find all task that corresponds to the keyword\n"
+            + "done <task number> : marks the specified task as done\n"
+            + "delete <task number> : deletes the specified task\n"
+            + "todo <task name> : adds a ToDo task\n"
+            + "deadline <task name> /by YYYY-MM-DD : adds a Deadline task\n"
+            + "event <task name> /at YYYY-MM-DD TT:TT-TT:TT : adds an Event task\n"
+            + "Do note that Date and Time must have the specified format\n";
 
     /**
      * Constructor for Ui class.
