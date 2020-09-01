@@ -7,7 +7,7 @@ import java.time.temporal.ChronoUnit;
 /**
  * Duke is a small educational project which acts
  * based on user input.
- * @author Xia Liyi
+ * @author Xia Liyi.
  */
 public class Duke {
     public static void main(String[] args) {
