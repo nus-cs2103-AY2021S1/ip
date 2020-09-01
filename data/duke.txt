@@ -1,9 +1,9 @@
-[T][0] read book
-[D][1] return book (by: June 6 2020)
-[E][1] project meeting (at: Aug 6 2020)
-[E][0] lunch with JC friends (at: Sep 1 2020)
-[D][0] finish Black Clover (by: Aug 27 2020)
-[T][1] watch anime
-[D][1] finish Wudong Qiankun novel (by: Oct 5 2020)
-[T][0] rewatch Re:Zero
-[D][0] CS2103T Week 4 ip (by: Sep 1 2020)
+[T][?] read book
+[D][?] return book (by: June 6 2020)
+[E][?] project meeting (at: Aug 6 2020)
+[E][?] lunch with JC friends (at: Sep 1 2020)
+[D][?] finish Black Clover (by: Aug 27 2020)
+[T][?] watch anime
+[D][?] finish Wudong Qiankun novel (by: Oct 5 2020)
+[T][?] rewatch Re:Zero
+[D][?] CS2103T Week 4 ip (by: Sep 1 2020)
