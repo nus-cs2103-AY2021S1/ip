@@ -1,8 +1,13 @@
 package main.java;
 
 import javafx.application.Application;
+import javafx.scene.layout.Region;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
+import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import main.java.commands.Command;
@@ -12,10 +17,16 @@ import main.java.parser.Parser;
 import main.java.storage.Storage;
 import main.java.ui.Ui;
 
-public class Duke extends Application{
+public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
+
+    private ScrollPane scrollPane;
+    private VBox dialogContainer;
+    private TextField userInput;
+    private Button sendButton;
+    private Scene scene;
 
     public Duke() {
 
@@ -32,18 +43,6 @@ public class Duke extends Application{
         }
     }
 
-    @Override
-    public void start(Stage stage) {
-        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
-        Label jianhan = new Label("Jianhan Cute???"); // Creating a new Label control
-
-        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
-        Scene scene2 = new Scene(jianhan); // Setting the scene to be our Label
-
-        stage.setScene(scene); // Setting the stage to show our screen
-        stage.setScene(scene2);
-        stage.show(); // Render the stage.
-    }
 
     /**
      * Run a Duke object while isExit is not changed to true
@@ -65,6 +64,17 @@ public class Duke extends Application{
             }
         }
     }
+
+    public String getResponse(String input){
+        try{
+            Command c = Parser.parse(input);
+            c.execute(tasks, ui, storage);
+        } catch (DukeException ex) {
+            return ex.getMessage();
+        }
+    }
+
+
 
     public static void main(String[] args) {
         new Duke("/data.txt").run();
