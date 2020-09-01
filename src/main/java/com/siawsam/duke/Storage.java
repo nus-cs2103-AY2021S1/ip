@@ -33,9 +33,10 @@ public class Storage {
      * Saves a TaskList instance to disk.
      *
      * @param taskList The TaskList instance to save.
+     * @return A response representing the result of the save operation.
      */
-    void save(TaskList taskList) {
-        Writer.writeListToFile(taskList, filePath);
+    Response save(TaskList taskList) {
+        return Writer.writeListToFile(taskList, filePath);
     }
 
     /**

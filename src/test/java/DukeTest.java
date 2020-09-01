@@ -2,24 +2,18 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import com.siawsam.duke.Deadline;
 import com.siawsam.duke.DukeException;
 import com.siawsam.duke.Event;
-import com.siawsam.duke.Parser;
-import com.siawsam.duke.Storage;
+import com.siawsam.duke.Response;
 import com.siawsam.duke.Task;
 import com.siawsam.duke.TaskList;
 import com.siawsam.duke.TaskSearcher;
@@ -30,49 +24,20 @@ public class DukeTest {
     private final PrintStream standardOut = System.out;
     private final ByteArrayOutputStream outputCaptor = new ByteArrayOutputStream();
 
-    @BeforeEach
-    public void setUp() {
-        System.setOut(new PrintStream(outputCaptor));
-    }
-
-    @AfterEach
-    public void tearDown() {
-        // discard all previous contents
-        outputCaptor.reset();
-        System.setOut(standardOut);
-    }
-
     @Test
     public void testWelcomeMessage() {
-        Ui.showWelcomeMessage();
         assertEquals(
                "Hi I'm Duke, your personal task-tracker bot!\n"
-                       + "You can add todos, deadlines, or events to my list.\n",
-               outputCaptor.toString()
+                       + "You can add todos, deadlines, or events to my list.",
+               Ui.showWelcomeMessage()
         );
     }
 
     @Test
     public void testNoExistingSave() {
-        Ui.showNoExistingSave();
-        assertEquals("You don't have an existing saved task list.\n",
-                outputCaptor.toString()
+        assertEquals("You don't have an existing saved task list.",
+                     Ui.showNoExistingSave()
         );
-    }
-
-    @Test
-    public void testByeCommand() throws IOException {
-        String command = "bye\n";
-        // store original System.in stream
-        InputStream standardIn = System.in;
-        ByteArrayInputStream testInputStream = new ByteArrayInputStream(command.getBytes());
-        System.setIn(testInputStream);
-
-        Parser parser = new Parser(new Storage("test"));
-        parser.scan();
-        // restore System.in
-        System.setIn(standardIn);
-        assertEquals("Bye. Hope to see you again\n", outputCaptor.toString());
     }
 
     @Test
@@ -131,11 +96,11 @@ public class DukeTest {
         taskList.addItem("todo borrow umbrella");
         
         TaskSearcher searcher = new TaskSearcher(taskList);
-        searcher.searchAndDisplay("borrow");
+        Response searchResponse = searcher.searchAndDisplay("borrow");
         
         String expectedMessage = "Here are the matching tasks in your list:\n"
                 + "[T] [✘] borrow book\n"
                 + "[T] [✘] borrow umbrella\n";
-        assertEquals(expectedMessage, outputCaptor.toString());
+        assertEquals(expectedMessage, searchResponse.getMessage());
     }
 }
