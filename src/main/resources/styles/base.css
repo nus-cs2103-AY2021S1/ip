@@ -1,0 +1,28 @@
+.button {
+    -fx-background-color: #23272A;
+    -fx-text-fill: #FFFFFF;
+}
+
+.label {
+    -fx-text-fill: #23272A;
+}
+
+.root {
+    -fx-background: #2C2F33;
+    -fx-focus-color: transparent;
+}
+
+.scroll-pane {
+    -fx-background: #2C2F33;
+    -fx-padding: 0px;
+}
+
+.speech-bubble {
+    -fx-background-color: white;
+    -fx-background-radius: 15px;
+}
+
+.text-field {
+    -fx-background-color: #4D5259;
+    -fx-text-fill: #FFFFFF;
+}
