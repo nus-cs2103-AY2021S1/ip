@@ -1,10 +1,9 @@
 package duke;
 
-import javafx.application.Platform;
-import javafx.scene.control.Label;
-
 import java.util.Timer;
 import java.util.TimerTask;
+
+import javafx.application.Platform;
 
 /**
  * The main class for Project Duke.
@@ -45,7 +44,8 @@ public class Duke {
             String response = Parser.parse(input, tasks, true);
             if (response.equals(ui.goodbye(true))) {
                 new Timer().schedule(new TimerTask() {
-                    public void run () { Platform.exit(); }
+                    public void run () {
+                        Platform.exit(); }
                 }, 2000);
             }
             return response;

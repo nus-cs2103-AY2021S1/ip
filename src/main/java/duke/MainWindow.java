@@ -26,6 +26,9 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.jpg"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.jpg"));
 
+    /**
+     * Initializes the JavaFX GUI.
+     */
     @FXML
     public void initialize() {
         String dukeIntro = "Hello! I'm Duke\n" + "What can I do for you?";
