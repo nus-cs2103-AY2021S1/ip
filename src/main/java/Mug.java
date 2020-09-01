@@ -11,15 +11,13 @@ public class Mug {
 
     private final Ui ui;
     private final TaskList tasks;
-
     /**
      * Constructs a Mug Object that create/read the file from the given filepath
      * and pass the information from the file to TaskList.
-     * @param filePath Filepath
      */
-    public Mug(String filePath) {
+    public Mug() {
         this.ui = new Ui();
-        Storage storage = new Storage(filePath);
+        Storage storage = new Storage("mug.txt");
         this.tasks = new TaskList(storage);
     }
 
@@ -32,7 +30,7 @@ public class Mug {
         while (sc.hasNext()) {
             String input = sc.nextLine();
             System.out.println(this.ui.readCommand(input, this.tasks));
-            if (input.trim().equals("bye")) {
+            if (input.trim().toUpperCase().equals("BYE")) {
                 break;
             }
         }
@@ -43,6 +41,11 @@ public class Mug {
      * @param args Arguments.
      */
     public static void main(String[] args) {
-        new Mug("mug.txt").run();
+        new Mug().run();
+    }
+
+    public String getResponse(String input) {
+        new Mug();
+        return this.ui.readCommand(input, this.tasks);
     }
 }

@@ -8,4 +8,8 @@
 ../src/main/java/mugexception/MugException.java
 ../src/main/java/parser/Parser.java
 ../src/main/java/storage/Storage.java
+../src/main/java/DialogBox.java
+../src/main/java/Main.java
+../src/main/java/MainWindow.java
 ../src/main/java/command/Command.java
+../src/main/java/Launcher.java
