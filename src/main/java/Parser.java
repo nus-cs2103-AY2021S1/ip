@@ -8,30 +8,47 @@ public class Parser {
         String[] parsed = input.split(" ", 2);
         String keyword = parsed[0];
         String body = "";
-        if (parsed.length > 1) body = parsed[1];
+        if (parsed.length > 1) {
+            body = parsed[1];
+        }
         switch (keyword) {
         case "list":
             tasks.printList(ui);
             break;
         case "done":
-            if (isValidSize(body, tasks)) tasks.done(getNumber(body), ui);
-            else throw new DukeException("Invalid number");
+            if (isValidSize(body, tasks)) {
+                tasks.done(getNumber(body), ui);
+            } else {
+                throw new DukeException("Invalid number");
+            }
             break;
         case "delete":
-            if (isValidSize(body, tasks)) tasks.delete(getNumber(body), ui);
-            else throw new DukeException("Invalid number");
+            if (isValidSize(body, tasks)) {
+                tasks.delete(getNumber(body), ui);
+            } else {
+                throw new DukeException("Invalid number");
+            }
             break;
         case "todo":
-            if (isValidTFormat(body)) tasks.addTask(new Todo(body), ui);
-            else throw new DukeException("Invalid task format");
+            if (isValidTFormat(body)) {
+                tasks.addTask(new Todo(body), ui);
+            } else {
+                throw new DukeException("Invalid task format");
+            }
             break;
         case "deadline":
-            if (isValidDFormat(body)) tasks.addTask(new Deadline(desc(body), deadline(body)), ui);
-            else throw new DukeException("Invalid task format");
+            if (isValidDFormat(body)) {
+                tasks.addTask(new Deadline(desc(body), deadline(body)), ui);
+            } else {
+                throw new DukeException("Invalid task format");
+            }
             break;
         case "event":
-            if (isValidEFormat(body)) tasks.addTask(new Event(desc(body), eventTime(body)), ui);
-            else throw new DukeException("Invalid task format");
+            if (isValidEFormat(body)) {
+                tasks.addTask(new Event(desc(body), eventTime(body)), ui);
+            } else {
+                throw new DukeException("Invalid task format");
+            }
             break;
         case "find":
             tasks.findTask(body, ui);

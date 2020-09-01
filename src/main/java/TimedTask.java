@@ -3,7 +3,7 @@ public class TimedTask extends Task {
 
     public TimedTask(String description, String when) {
         super(description);
-        time = when;
+        this.time = when;
     }
 
     @Override

@@ -4,7 +4,7 @@ public class Ui {
     private Scanner scanner;
 
     public Ui() {
-        scanner = new Scanner(System.in);
+        this.scanner = new Scanner(System.in);
     }
 
     public String receive() {

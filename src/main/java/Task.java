@@ -8,9 +8,9 @@ public class Task {
     }
 
     protected Task(String desc) {
-        description = desc;
-        isDone = false;
-        type = Type.NONE;
+        this.description = desc;
+        this.isDone = false;
+        this.type = Type.NONE;
     }
 
     @Override
