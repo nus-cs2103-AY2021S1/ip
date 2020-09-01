@@ -13,27 +13,33 @@ import java.io.IOException;
  * taking in the input.
  */
 public class Duke {
+    private boolean isExit = false;
     private Storage storage;
     private TaskList tasks;
     private Ui ui = new Ui();
     public Duke(){}
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * This gives the boolean value of isExit
+     * @return returns the value of isExit.
      */
-    String getResponse(String input)  {
-        if(input == null){
-            return "Hello";
-        }else {
-            Command c = Parser.parse(input);
-            try {
-                return c.execute(tasks, new Ui(), storage);
-            } catch (DukeException e) {
-                return e.getMessage();
-            }
-        }
+    public boolean isExit(){
+        return isExit;
+    }
 
+    /**
+     * This gives the respective output based on the input
+     * @param input what the user inputs in the GUI
+     * @return the output based on the output.
+     */
+    public String getResponse(String input)  {
+        Command c = Parser.parse(input);
+        try {
+            isExit = c.isExit();
+            return c.execute(tasks, new Ui(), storage);
+        } catch (DukeException e) {
+            return e.getMessage();
+        }
     }
     /**
      * assigns the above member variables with the appropriate values, and throws certain exceptions if file in
