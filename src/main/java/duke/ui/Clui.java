@@ -5,7 +5,7 @@ import java.util.Scanner;
 /**
  * The {@code Clui} class manages program input and output.
  */
-public class Clui implements Ui {
+public class Clui {
 
     private static final String DIVIDER = "________________________________________________________\n";
 

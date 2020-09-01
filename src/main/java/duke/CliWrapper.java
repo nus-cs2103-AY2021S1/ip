@@ -1,5 +1,6 @@
 package duke;
 
+import duke.command.Response;
 import duke.exceptions.DukeException;
 import duke.exceptions.DukeStorageException;
 import duke.exceptions.IncompleteDukeCommandException;
@@ -23,7 +24,7 @@ public class CliWrapper {
 
     private void run() {
         ui.greet();
-        Boolean isExit = false;
+        boolean isExit = false;
         while (!isExit) {
             try {
                 String fullCommand = ui.readCommand();

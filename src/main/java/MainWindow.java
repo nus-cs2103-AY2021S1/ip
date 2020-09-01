@@ -1,5 +1,5 @@
 import duke.Duke;
-import duke.Response;
+import duke.command.Response;
 import duke.exceptions.DukeException;
 import duke.exceptions.DukeStorageException;
 import javafx.animation.PauseTransition;
