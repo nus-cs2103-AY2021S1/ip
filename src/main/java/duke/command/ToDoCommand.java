@@ -2,8 +2,10 @@ package duke.command;
 
 import duke.Storage;
 import duke.Ui;
+
 import duke.exception.DukeException;
 import duke.exception.InvalidTaskException;
+
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.task.Todo;
@@ -11,17 +13,17 @@ import duke.task.Todo;
 /**
  * Represents a command to add a new todo task to the user's list of tasks.
  */
-public class AddTodoCommand extends Command {
+public class ToDoCommand extends Command {
 
     /** Parsed commands containing details of the todo task. */
     private final String[] parsedCommand;
 
     /**
-     * Creates and initialises a new AddTodoCommand object.
+     * Creates and initialises a new ToDoCommand object.
      *
      * @param parsedCommand String array that contains the todo task information.
      */
-    public AddTodoCommand(String[] parsedCommand) {
+    public ToDoCommand(String[] parsedCommand) {
         this.parsedCommand = parsedCommand;
     }
 

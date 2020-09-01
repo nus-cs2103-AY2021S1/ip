@@ -2,41 +2,43 @@ package duke.command;
 
 import duke.Storage;
 import duke.Ui;
+
 import duke.exception.DukeException;
 import duke.exception.InvalidFunctionException;
 import duke.exception.InvalidTaskException;
-import duke.task.Task;
+
 import duke.task.TaskList;
 
 /**
- * Represents a command to delete a task from the user's list of tasks.
+ * Represents a command to mark a task as done.
  */
-public class DeleteTaskCommand extends Command {
+public class DoneCommand extends Command {
 
-    /** Parsed commands containing details of the task to be deleted. */
+    /** Parsed commands containing details of the task to be marked as done. */
     private final String[] parsedCommand;
 
     /**
-     * Creates and initialises a new DeleteTaskCommand object.
+     * Creates and initialises a new DoneCommand object.
      *
-     * @param parsedCommand String array that contains information of the task to be deleted.
+     * @param parsedCommand String array that contains information of the task to be marked as done.
      */
-    public DeleteTaskCommand(String[] parsedCommand) {
+    public DoneCommand(String[] parsedCommand) {
         this.parsedCommand = parsedCommand;
     }
 
     /**
-     * Deletes the task from the user's list of tasks and updates the task list
+     * Marks the task as done and updates it accordingly in the user's list of tasks
      * stored in the designated file.
      *
      * @param tasks List of tasks belonging to the user.
      * @param ui Ui object created for the Duke object.
      * @param storage Storage object used by the Duke object for file operations.
-     * @throws DukeException If the task cannot be deleted due to invalid arguments.
+     * @throws DukeException If the task cannot be mark completed due to invalid arguments.
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
+            String response;
             int index = Integer.parseInt(this.parsedCommand[1]);
             if (index > tasks.getListSize()) {
                 String err = "Invalid Task! The task does not exist. "
@@ -47,20 +49,24 @@ public class DeleteTaskCommand extends Command {
                         + "Input 'list' to view the correct task ID of your desired task.";
                 throw new InvalidFunctionException(err);
             } else {
-                Task toRemove = tasks.getTask(index - 1);
-                tasks.removeTask(index - 1);
-                String successReply = "Found it! This task has been successfully deleted: \n\t"
-                        + toRemove.toString() + "\nYou have " + tasks.getListSize()
-                        + " tasks in your list now.";
+                if (tasks.getTask(index - 1).hasBeenCompleted()) {
+                    response = "This task has already been completed:";
+                    // return ui.printReply(message);
+                } else {
+                    tasks.completeTask(index - 1);
+                    response = "Nice! I've marked this task as done:\n";
+                    // return ui.printReply(message);
+                }
+                response += "\t" + tasks.getTask(index - 1);
                 storage.saveToFile(tasks);
-                return ui.printReply(successReply);
+                return ui.printReply(response);
             }
         } catch (ArrayIndexOutOfBoundsException ex) {
-            String err = "No Task ID provided! Please input the ID of the task you wish to delete.";
+            String err = "No Task ID provided! Please input the ID of the task you wish to mark as completed.";
             throw new InvalidFunctionException(err);
         } catch (NumberFormatException ex) {
             String err = "Your input is not a recognised command. You have to provide the ID of "
-                    + "the task you wish to delete. \n"
+                    + "the task you wish to mark as done. \n"
                     + "Input '/commands' to view a list of my commands. ";
             throw new InvalidFunctionException(err);
         }

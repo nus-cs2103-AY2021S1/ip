@@ -2,9 +2,11 @@ package duke.command;
 
 import duke.Storage;
 import duke.Ui;
+
 import duke.exception.DukeException;
 import duke.exception.InvalidFunctionException;
 import duke.exception.InvalidTaskException;
+
 import duke.task.Deadline;
 import duke.task.Task;
 import duke.task.TaskList;
@@ -17,17 +19,17 @@ import java.time.format.DateTimeParseException;
 /**
  * Represents a command to add a new deadline task to the user's list of tasks.
  */
-public class AddDeadlineCommand extends Command {
+public class DeadlineCommand extends Command {
 
     /** Parsed commands containing details of the deadline task. */
     private final String[] parsedCommand;
 
     /**
-     * Creates and initialises a new AddDeadlineCommand object.
+     * Creates and initialises a new DeadlineCommand object.
      *
      * @param parsedCommand String array that contains the deadline task information.
      */
-    public AddDeadlineCommand(String[] parsedCommand) {
+    public DeadlineCommand(String[] parsedCommand) {
         this.parsedCommand = parsedCommand;
     }
 

@@ -1,17 +1,18 @@
 package duke;
 
-import duke.command.AddDeadlineCommand;
-import duke.command.AddEventCommand;
-import duke.command.AddTodoCommand;
+import duke.command.DeadlineCommand;
+import duke.command.EventCommand;
+import duke.command.ToDoCommand;
 import duke.command.Command;
-import duke.command.CompleteTaskCommand;
-import duke.command.DeleteTaskCommand;
+import duke.command.DoneCommand;
+import duke.command.DeleteCommand;
 import duke.command.ExitCommand;
 import duke.command.FindByDateCommand;
 import duke.command.FindByKeywordCommand;
 import duke.command.InvalidCommand;
 import duke.command.ListCommand;
-import duke.command.ViewFunctionsCommand;
+import duke.command.FunctionsCommand;
+
 import duke.exception.InvalidFunctionException;
 
 /**
@@ -46,25 +47,25 @@ public class Parser {
         if (message.equals(Parser.END_COMMAND)) {
             return new ExitCommand();
         } else if (message.equals(Parser.VIEW_FUNCTION_COMMAND)) {
-            return new ViewFunctionsCommand();
+            return new FunctionsCommand();
         } else if (message.isEmpty()) {
             String err = "No input was entered! Please enter something!";
             throw new InvalidFunctionException(err);
         } else if (message.equals(Parser.LIST_COMMAND)) {
             return new ListCommand();
         } else if (function.equals(Parser.DONE_COMMAND)) {
-            return new CompleteTaskCommand(parsedCommand);
+            return new DoneCommand(parsedCommand);
         } else if (function.equals(Parser.ADD_TODO_COMMAND)) {
             parsedCommand = message.split("todo");
-            return new AddTodoCommand(parsedCommand);
+            return new ToDoCommand(parsedCommand);
         } else if (function.equals(Parser.ADD_DEADLINE_COMMAND)) {
             parsedCommand = message.split("deadline");
-            return new AddDeadlineCommand(parsedCommand);
+            return new DeadlineCommand(parsedCommand);
         } else if (function.equals(Parser.ADD_EVENT_COMMAND)) {
             parsedCommand = message.split("event");
-            return new AddEventCommand(parsedCommand);
+            return new EventCommand(parsedCommand);
         } else if (function.equals(Parser.DELETE_COMMAND)) {
-            return new DeleteTaskCommand(parsedCommand);
+            return new DeleteCommand(parsedCommand);
         } else if (function.equals(Parser.FIND_BY_DATE_COMMAND)) {
             return new FindByDateCommand(parsedCommand);
         } else if (function.equals(Parser.FIND_BY_KEYWORD_COMMAND)) {

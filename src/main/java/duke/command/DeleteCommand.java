@@ -2,41 +2,43 @@ package duke.command;
 
 import duke.Storage;
 import duke.Ui;
+
 import duke.exception.DukeException;
 import duke.exception.InvalidFunctionException;
 import duke.exception.InvalidTaskException;
+
+import duke.task.Task;
 import duke.task.TaskList;
 
 /**
- * Represents a command to mark a task as completed.
+ * Represents a command to delete a task from the user's list of tasks.
  */
-public class CompleteTaskCommand extends Command {
+public class DeleteCommand extends Command {
 
-    /** Parsed commands containing details of the task to be completed. */
+    /** Parsed commands containing details of the task to be deleted. */
     private final String[] parsedCommand;
 
     /**
-     * Creates and initialises a new CompleteTaskCommand object.
+     * Creates and initialises a new DeleteCommand object.
      *
-     * @param parsedCommand String array that contains information of the task to be completed.
+     * @param parsedCommand String array that contains information of the task to be deleted.
      */
-    public CompleteTaskCommand(String[] parsedCommand) {
+    public DeleteCommand(String[] parsedCommand) {
         this.parsedCommand = parsedCommand;
     }
 
     /**
-     * Marks the task as completed and updates it accordingly in the user's list of tasks
+     * Deletes the task from the user's list of tasks and updates the task list
      * stored in the designated file.
      *
      * @param tasks List of tasks belonging to the user.
      * @param ui Ui object created for the Duke object.
      * @param storage Storage object used by the Duke object for file operations.
-     * @throws DukeException If the task cannot be mark completed due to invalid arguments.
+     * @throws DukeException If the task cannot be deleted due to invalid arguments.
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
-            String response;
             int index = Integer.parseInt(this.parsedCommand[1]);
             if (index > tasks.getListSize()) {
                 String err = "Invalid Task! The task does not exist. "
@@ -47,24 +49,20 @@ public class CompleteTaskCommand extends Command {
                         + "Input 'list' to view the correct task ID of your desired task.";
                 throw new InvalidFunctionException(err);
             } else {
-                if (tasks.getTask(index - 1).hasBeenCompleted()) {
-                    response = "This task has already been completed:";
-                    // return ui.printReply(message);
-                } else {
-                    tasks.completeTask(index - 1);
-                    response = "Nice! I've marked this task as done:\n";
-                    // return ui.printReply(message);
-                }
-                response += "\t" + tasks.getTask(index - 1);
+                Task toRemove = tasks.getTask(index - 1);
+                tasks.removeTask(index - 1);
+                String successReply = "Found it! This task has been successfully deleted: \n\t"
+                        + toRemove.toString() + "\nYou have " + tasks.getListSize()
+                        + " tasks in your list now.";
                 storage.saveToFile(tasks);
-                return ui.printReply(response);
+                return ui.printReply(successReply);
             }
         } catch (ArrayIndexOutOfBoundsException ex) {
-            String err = "No Task ID provided! Please input the ID of the task you wish to mark as completed.";
+            String err = "No Task ID provided! Please input the ID of the task you wish to delete.";
             throw new InvalidFunctionException(err);
         } catch (NumberFormatException ex) {
             String err = "Your input is not a recognised command. You have to provide the ID of "
-                    + "the task you wish to mark as done. \n"
+                    + "the task you wish to delete. \n"
                     + "Input '/commands' to view a list of my commands. ";
             throw new InvalidFunctionException(err);
         }

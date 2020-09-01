@@ -2,12 +2,13 @@ package duke.command;
 
 import duke.Storage;
 import duke.Ui;
+
 import duke.task.TaskList;
 
 /**
  * Represents a command to view a list of Duke's function and the function commands.
  */
-public class ViewFunctionsCommand extends Command {
+public class FunctionsCommand extends Command {
 
     /**
      * Prints all of Duke's functions and the commands for each function.

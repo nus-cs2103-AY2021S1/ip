@@ -2,9 +2,11 @@ package duke.command;
 
 import duke.Storage;
 import duke.Ui;
+
 import duke.exception.DukeException;
 import duke.exception.InvalidFunctionException;
 import duke.exception.InvalidTaskException;
+
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.TaskList;
@@ -17,17 +19,17 @@ import java.time.format.DateTimeParseException;
 /**
  * Represents a command to add a new event task to the user's list of tasks.
  */
-public class AddEventCommand extends Command {
+public class EventCommand extends Command {
 
     /** Parsed commands containing details of the event task. */
     private final String[] parsedCommand;
 
     /**
-     * Creates and initialises a new AddEventCommand object.
+     * Creates and initialises a new EventCommand object.
      *
      * @param parsedCommand String array that contains the event task information.
      */
-    public AddEventCommand(String[] parsedCommand) {
+    public EventCommand(String[] parsedCommand) {
         this.parsedCommand = parsedCommand;
     }
 
