@@ -1,7 +1,7 @@
 package duke.command;
 
 import duke.TaskList;
-import duke.Ui;
+import duke.ui.Ui;
 
 /**
  * Represents command to leave conversation.

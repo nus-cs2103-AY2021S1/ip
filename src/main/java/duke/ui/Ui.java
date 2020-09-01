@@ -1,4 +1,4 @@
-package duke;
+package duke.ui;
 
 /**
  * Prints necessary output to user.

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import duke.task.Task;
+import duke.ui.Ui;
 
 /**
  * Handles actions by user with regards to all their tasks.

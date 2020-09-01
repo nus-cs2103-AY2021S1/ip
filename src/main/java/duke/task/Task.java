@@ -1,6 +1,6 @@
 package duke.task;
 
-import duke.Ui;
+import duke.ui.Ui;
 
 /**
  * Represents a Task that user wishes to add.
