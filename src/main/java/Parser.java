@@ -13,6 +13,11 @@ import java.time.format.DateTimeParseException;
 import java.time.format.FormatStyle;
 import java.util.Optional;
 
+/**
+ * Parser deals with the full commands given by the user.
+ * Inputs given are deciphered and corresponding responses are outputted.
+ */
+
 public class Parser {
 	public static Command parse(String fullCommand) throws DukeException {
 		if(fullCommand.equals("list")){
@@ -37,6 +42,14 @@ public class Parser {
 			throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
 		}
 	}
+
+	/**
+	 * Returns the first word in the string indicated by the first blank space.
+	 * If there are no blank space, the entire string is returned.
+	 *
+	 * @param string
+	 * @return
+	 */
 	public static String getWord(String string) {
 
 		int firstSpaceIndex = string.indexOf(' ');
@@ -46,6 +59,11 @@ public class Parser {
 		return string.substring(0, firstSpaceIndex);
 	}
 
+	/**
+	 * Returns an implemented instance of the Command interface when the list command is invoked.
+	 *
+	 * @return
+	 */
 	public static Command list() {
 		return new Command() {
 			@Override

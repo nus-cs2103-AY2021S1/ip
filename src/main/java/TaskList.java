@@ -4,6 +4,10 @@ import duke.Task;
 
 import java.util.ArrayList;
 
+/**
+ * TaskList contains an ArrayList of Task.
+ * It serves as a barrier to directly using the ArrayList class so as to limit the functions available to the client.
+ */
 public class TaskList {
 	private ArrayList<Task> tasks;
 

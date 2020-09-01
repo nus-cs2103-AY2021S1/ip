@@ -3,6 +3,11 @@ package duke;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
+/**
+ * Task stores it type, a boolean indicating whether the task has been completed, a string describing the task and a
+ * time.
+ */
+
 public class Task{
 	duke.TaskType taskType;
 	boolean isDone;

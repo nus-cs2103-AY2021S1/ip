@@ -21,12 +21,28 @@ import java.util.ArrayList;
 import java.util.Optional;
 import java.util.Scanner;
 
+/**
+ * Class contains main method of the Duke application.
+ * Duke manages, stores and track tasks as specified by the user.
+ */
 public class Duke {
     private static String TASKS_PATHNAME = "data/tasks.txt";
     private Ui ui;
     private TaskList taskList;
     private Storage storage;
 
+    /**
+     * main method of Duke
+     * @param args
+     */
+    public static void main(String[] args) {
+        new Duke(TASKS_PATHNAME).run();
+    }
+
+    /**
+     * Constructor which takes in file path of the storage file.
+     * @param filePath
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -36,10 +52,6 @@ public class Duke {
             ui.showLoadingError();
             taskList = new TaskList();
         }
-    }
-
-    public static void main(String[] args) {
-        new Duke(TASKS_PATHNAME).run();
     }
 
     public void run() {
