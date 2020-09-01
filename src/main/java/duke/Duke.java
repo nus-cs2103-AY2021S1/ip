@@ -8,7 +8,7 @@ import javafx.stage.Stage;
 /**
  * Encapsulates the greenfield project Duke that manages user tasks.
  */
-public class Duke extends Application {
+public class Duke {
     private Ui ui;
     private Parser parser;
     private TaskManager taskManager;
@@ -30,13 +30,21 @@ public class Duke extends Application {
         this.taskManager.manage();
     }
 
-    @Override
-    public void start(Stage stage) {
-        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
-        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
+//    @Override
+//    public void start(Stage stage) {
+//        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
+//        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
+//
+//        stage.setScene(scene); // Setting the stage to show our screen
+//        stage.show(); // Render the stage.
+//    }
 
-        stage.setScene(scene); // Setting the stage to show our screen
-        stage.show(); // Render the stage.
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    public String getResponse(String input) {
+        return "Duke heard: " + input;
     }
 
     /**
