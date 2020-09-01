@@ -74,4 +74,8 @@ public class Duke {
                 || (other instanceof Duke // instanceof handles nulls
                         && this.taskList.equals(((Duke) other).taskList));
     }
+
+    public String getResponse(String input) {
+        return "sadfasd";
+    }
 }
