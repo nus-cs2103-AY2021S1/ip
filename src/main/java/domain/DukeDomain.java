@@ -10,34 +10,23 @@ public class DukeDomain {
     private final Storage storage = new Storage();
     private final TaskList taskList = new TaskList(storage.load());
 
-    public void markTaskDone(int idx) {
+    public String markTaskDone(int idx) {
         Task task = this.taskList.markDone(idx);
         String response = String.format("%s\n%s%s[%s] %s", DukeConstants.DONE_OUTPUT,
                 DukeConstants.IDENT, DukeConstants.IDENT,
                 task.getStatusIcon(), task.getTitle());
-        printResponse(response);
+        return response;
     }
 
-
-    public void printResponseWithListSize(String response) {
-        System.out.println(DukeConstants.LINE);
-        System.out.printf("%s%s\n", DukeConstants.IDENT, response);
-        System.out.printf("%sNow you have %d tasks in the list.%n",
-                DukeConstants.IDENT, taskList.getSize());
-        System.out.println(DukeConstants.LINE);
-    }
-
-    public void deleteTask(int idx) {
+    public String deleteTask(int idx) {
         Task task = this.taskList.delete(idx);
         String response = String.format("%s\n%s%s%s", DukeConstants.DELETE_OUTPUT,
                 DukeConstants.IDENT, DukeConstants.IDENT, task);
-        printResponseWithListSize(response);
+        return response;
     }
 
-    public void printResponse(String response) {
-        System.out.println(DukeConstants.LINE);
-        System.out.printf("%s%s\n", DukeConstants.IDENT, response);
-        System.out.println(DukeConstants.LINE);
+    public int getCurrentTaskListSize() {
+        return this.taskList.getSize();
     }
 
     public void outputTask(Task task) {
@@ -53,14 +42,14 @@ public class DukeDomain {
         taskList.add(task);
     }
 
+    public void saveList() {
+        this.storage.save(this.taskList.getList());
+    }
+
     public void printList() {
         System.out.println(DukeConstants.LINE);
         System.out.println(DukeConstants.IDENT + DukeConstants.LIST_OUTPUT);
         this.taskList.print();
         System.out.println(DukeConstants.LINE);
-    }
-
-    public void saveList() {
-        this.storage.save(this.taskList.getList());
     }
 }

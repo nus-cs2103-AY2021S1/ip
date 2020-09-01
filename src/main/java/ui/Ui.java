@@ -1,5 +1,6 @@
 package ui;
 
+import dukeoutput.DukeOutput;
 import parser.Parser;
 import command.Command;
 import constant.DukeConstants;
@@ -11,7 +12,7 @@ import java.util.Scanner;
 public class Ui {
 
     private final DukeService dukeService = new DukeService();
-
+    private final DukeOutput dukeOutput = new DukeOutput();
     private final Scanner scanner = new Scanner(System.in);
 
     private final Parser parser = new Parser();
@@ -30,10 +31,9 @@ public class Ui {
         }
     }
 
-
     private void exit() {
-        dukeService.printResponse(DukeConstants.EXIT_RESPONSE);
-        dukeService.saveList();
+        this.dukeOutput.printResponse(DukeConstants.EXIT_RESPONSE);
+        this.dukeService.saveList();
         this.isOn = false;
     }
 
@@ -47,12 +47,12 @@ public class Ui {
     }
 
     private void handleInvalidInput() {
-        this.dukeService.printResponse("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+        this.dukeOutput.printResponse("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
     }
 
     private void printGreetingMessage() {
-        System.out.println("Hello from\n" + DukeConstants.LOGO);
-        this.dukeService.printResponse(DukeConstants.INITIAL_RESPONSE);
+        this.dukeOutput.outputGreeting();
+        this.dukeOutput.printResponse(DukeConstants.INITIAL_RESPONSE);
     }
 
     private String getInput() {
