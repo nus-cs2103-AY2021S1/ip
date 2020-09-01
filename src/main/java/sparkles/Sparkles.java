@@ -11,12 +11,12 @@ import sparkles.util.Ui;
  */
 public class Sparkles {
 
-    private final Storage storage;
+    private Storage storage;
     private TaskList tasks;
-    private final Ui ui;
+    private Ui ui;
 
     /**
-     * Creates the Sparkles object with the destinated filepath.
+     * Creates the Sparkles object with the designated filepath.
      * Initialised the Ui, Storage and TaskList object.
      *
      * @param filePath file path where task.txt is to be created
@@ -30,6 +30,9 @@ public class Sparkles {
             ui.showLoadingError();
             tasks = new TaskList();
         }
+    }
+
+    public Sparkles() {
     }
 
     private void run() {
@@ -52,5 +55,9 @@ public class Sparkles {
 
     public static void main(String[] args) {
         new Sparkles("data/tasks.txt").run();
+    }
+
+    public String getResponse(String input) {
+        return input;
     }
 }
