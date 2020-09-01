@@ -1,4 +1,5 @@
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
@@ -19,8 +20,6 @@ public class MainWindow extends AnchorPane {
     private TextField userInput;
     @FXML
     private Button sendButton;
-    @FXML
-    private Button exitButton;
 
     private Duke duke;
 
@@ -46,10 +45,12 @@ public class MainWindow extends AnchorPane {
         String input = userInput.getText();
         String response = duke.getResponse(input);
         if (response.equals(Ui.byeMessage())) {
+            Button exitButton = new Button("Exit");
+            exitButton.setPadding(new Insets(10,10,10,10));
             dialogContainer.getChildren().addAll(
                     DialogBox.getDukeDialog(response, dukeImage),
-                    exitButton
-            );
+                    exitButton);
+            exitButton.setOnAction(e -> closeStage());
         } else {
             dialogContainer.getChildren().addAll(
                     DialogBox.getUserDialog(input, userImage),
