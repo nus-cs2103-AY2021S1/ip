@@ -80,6 +80,8 @@ public class Ui extends Application {
         stage.setScene(scene);
         // Render the stage
         stage.show();
+
+        dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
     }
 
     private Label getDialogLabel(String text) {
