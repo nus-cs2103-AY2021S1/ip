@@ -23,11 +23,11 @@ public class DukeException extends Exception {
      */
     @Override
     public String toString() {
-        String errorMessage = "    ____________________________________________________________\n"
-                + "     ☹ OOPS!!! "
+        String errorMessage = "    ____________________________________________________\n"
+                + "     (~.^.~)  OOPS!!! "
                 + getMessage()
                 + "\n"
-                + "    ____________________________________________________________\n";
+                + "    ____________________________________________________\n";
 
         return errorMessage;
     }
