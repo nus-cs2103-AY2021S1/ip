@@ -18,7 +18,7 @@ public class Ui {
      * Prints out a line to mark an individual message
      */
     public static String showLine() {
-        return "\n_________________________________________\n";
+        return "_________________________________________\n";
     }
 
     public static String showCommandMessage(String message) {

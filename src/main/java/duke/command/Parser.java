@@ -49,8 +49,7 @@ public class Parser {
             storage.deleteRecord(index);
             finalString = Ui.showResponse(response, command);
         } else if (stringarr[0].equals("find")) {
-            String key = stringarr[1];
-            String response = processorFind(taskList, key);
+            String response = processorFind(command, taskList);
             finalString = Ui.showCommandMessage(response);
         } else {
             String response = processorAdd(command, taskList);
@@ -60,19 +59,28 @@ public class Parser {
         return finalString;
     }
 
-    private static String processorFind(TaskList taskList, String key) {
+    private static String processorFind(String command, TaskList taskList) {
         int counter = 1;
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("Here are the matching tasks in your list: \n");
-        for (int i = 0; i < taskList.getListSize(); i++) {
-            if (taskList.getTask(i).getTask().contains(key)) {
-                String findResponse = counter + "." + taskList.getTask(i).toString() + "\n";
-                stringBuilder.append(findResponse);
-                counter++;
+        try {
+            String[] stringarr = command.split(" ", 2);
+            String key = stringarr[1];
+            if (key.length() == 0) {
+                return Ui.showError("Please provide a key");
             }
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.append("Here are the matching tasks in your list: \n");
+            for (int i = 0; i < taskList.getListSize(); i++) {
+                if (taskList.getTask(i).getTask().contains(key)) {
+                    String findResponse = counter + "." + taskList.getTask(i).toString() + "\n";
+                    stringBuilder.append(findResponse);
+                    counter++;
+                }
+            }
+            stringBuilder.append(Ui.showLine());
+            return stringBuilder.toString();
+        } catch (Exception e) {
+            return Ui.showError("Please give a key");
         }
-        stringBuilder.append(Ui.showLine());
-        return stringBuilder.toString();
     }
 
     private static String processorList(TaskList taskList) {
