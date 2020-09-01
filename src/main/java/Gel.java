@@ -1,11 +1,11 @@
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.Scanner;
+
 import gel.Parser;
 import gel.Storage;
 import gel.TaskList;
 import gel.Ui;
-
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.Scanner;
 
 /**
  * Gel is an task planner. A <code>Gel</code> object is a bot which

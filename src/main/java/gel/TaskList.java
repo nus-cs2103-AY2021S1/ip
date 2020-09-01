@@ -1,14 +1,14 @@
 package gel;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
 import gel.exception.GelException;
 import gel.task.Deadline;
 import gel.task.Event;
 import gel.task.Task;
 import gel.task.Todo;
-
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Contains the task list e.g., it has operations to add/delete tasks in the list.
@@ -102,3 +102,4 @@ public class TaskList {
         return this.listOfTasks;
     }
 }
+

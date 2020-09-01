@@ -1,14 +1,18 @@
 package gel;
 
+
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.List;
+import java.util.Scanner;
+
 import gel.task.Deadline;
 import gel.task.Event;
 import gel.task.Task;
 import gel.task.Todo;
-
-
-import java.io.*;
-import java.util.List;
-import java.util.Scanner;
 
 /**
  * Storage deals with loading tasks from the file and saving tasks in the file.
@@ -86,7 +90,7 @@ public class Storage {
      *
      * @param ui Required to create a <code>TaskList</code> object.
      * @return <code>TaskList</code> object containing a list of tasks.
-     * @throws FileNotFoundException If scanner could not detect file.
+     * @throws java.io.FileNotFoundException If scanner could not detect file.
      */
 
     public TaskList load(Ui ui) throws FileNotFoundException {
@@ -96,7 +100,7 @@ public class Storage {
         while (sc.hasNextLine()) {
             String description = sc.nextLine();
             String[] desArr = description.split(",");
-            switch (desArr[0]){
+            switch (desArr[0]) {
             case "T":
                 taskList.addTodoFromFile(desArr[2], Integer.parseInt(desArr[1]));
                 break;
@@ -105,6 +109,8 @@ public class Storage {
                 break;
             case "E":
                 taskList.addEventFromFile(desArr[2], desArr[3], Integer.parseInt(desArr[1]));
+                break;
+            default:
                 break;
             }
         }
