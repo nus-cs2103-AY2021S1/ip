@@ -38,8 +38,8 @@ public class Parser {
         return s.equals("list");
     }
 
-    private static boolean checkFind(String test) {
-        return test.equals("find");
+    private static boolean checkFind(String s) {
+        return s.equals("find");
     }
 
     public static boolean checkDone(String s) {
@@ -48,6 +48,10 @@ public class Parser {
 
     public static boolean checkDel(String s) {
         return s.equals("delete");
+    }
+
+    private static boolean checkHelp(String s) {
+        return s.equals("help");
     }
 
     /**
@@ -95,6 +99,8 @@ public class Parser {
                 return ui.exitLine();
             } else if (checkList(text)) {
                 return taskList.displayList();
+            } else if (checkHelp(text.toLowerCase())) {
+                return ui.helpLine();
             } else {
                 return ui.unknownInputLine();
             }

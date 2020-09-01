@@ -11,7 +11,7 @@ public class Ui {
     }
 
     /**
-     * Prints the Welcome message depending on the save state.
+     * Returns String for Welcome message depending on the save state.
      * @param taskList The handler for task list calls
      * @param storage The handler for storage calls
      * @return String for welcome message
@@ -28,7 +28,7 @@ public class Ui {
     }
 
     /**
-     * Prints the line for adding tasks.
+     * Returns String for adding tasks.
      * @param toAdd The new task to add to the list
      * @param size  The size of current list
      * @return String for adding tasks
@@ -39,7 +39,7 @@ public class Ui {
     }
 
     /**
-     * Prints the line for removing tasks.
+     * Returns string for removing a task.
      * @param toRemove The task to remove
      * @param size The size of current list
      * @return String for removing tasks
@@ -50,17 +50,26 @@ public class Ui {
     }
 
     /**
-     * Prints the line for an unknown input.
-     * @return String for unknown input line
+     * Returns String for help command.
+     * @return String for help command
      */
-    public String unknownInputLine() {
+    public String helpLine() {
         return "Below are the list of commands:\n"
                 + "list\n"
                 + "find [keyword]\n"
                 + "todo [taskname]\n"
                 + "deadline [taskname] /by [yyyy-MM-dd HHmm]\n"
                 + "event [taskname] /at [yyy-MM-dd HHmm]\n"
-                + "remove [index or all]\n"
+                + "delete [index or all]\n"
                 + "bye\n";
+    }
+
+    /**
+     * Return String for unknown input.
+     * @return String for unknown input
+     */
+    public String unknownInputLine() {
+        return "OOPS!!! I'm sorry, but I don't know what that means :(\n"
+                + "Type 'help' for list of commands.";
     }
 }
