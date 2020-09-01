@@ -165,11 +165,11 @@ public class Duke extends Application {
             try {
                 return this.doneHandler(command.getParameters());
             } catch (DukeExceptions.NoUndoneTaskException e) {
-                DukeExceptions.printNoUndoneTaskError();
+                return DukeExceptions.printNoUndoneTaskError();
             } catch (IndexOutOfBoundsException e) {
-                DukeExceptions.printIndexSizeMismatchError();
+                return DukeExceptions.printIndexSizeMismatchError();
             } catch (NumberFormatException e) {
-                DukeExceptions.noIndexKeyedError();
+                return DukeExceptions.noIndexKeyedError();
             }
         } else if (command.getClass() == TodoCommand.class
                 || command.getClass() == EventCommand.class
@@ -177,21 +177,21 @@ public class Duke extends Application {
             try {
                 return this.addTaskHandler(command);
             } catch (DukeExceptions.IncompleteCommandException e) {
-                DukeExceptions.printIncompleteCommandError();
+                return DukeExceptions.printIncompleteCommandError();
             } catch (ArrayIndexOutOfBoundsException e) {
-                DukeExceptions.printNoDateInput();
+                return DukeExceptions.printNoDateInput();
             } catch (DateTimeParseException e) {
-                DukeExceptions.printIncorrectDateFormatError();
+                return DukeExceptions.printIncorrectDateFormatError();
             }
         } else if (command.getClass() == DelCommand.class) {
             try {
                 return this.deleteTaskHandler(command.getParameters());
             } catch (DukeExceptions.NoTaskToDeleteException e) {
-                DukeExceptions.printNoTaskToDeleteError();
+                return DukeExceptions.printNoTaskToDeleteError();
             } catch (IndexOutOfBoundsException e) {
-                DukeExceptions.printIndexSizeMismatchError();
+                return DukeExceptions.printIndexSizeMismatchError();
             } catch (NumberFormatException e) {
-                DukeExceptions.noIndexKeyedError();
+                return DukeExceptions.noIndexKeyedError();
             }
         } else if (command.getClass() == DateCommand.class) {
             return ui.printGetTaskOnDThisDate(command.getParameters()[0], this.taskList);
@@ -208,8 +208,6 @@ public class Duke extends Application {
 
         return textToAdd;
     }
-
-
 
     private void handleUserInput() {
         Label userText = new Label(userInput.getText());

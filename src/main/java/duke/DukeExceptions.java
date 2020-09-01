@@ -43,89 +43,57 @@ public class DukeExceptions {
     /**
      * error message for when the user does not input a task number for task manipulation
      */
-    public static void noIndexKeyedError() {
-        System.out.println(
-            "----------------------------------------------------------------------------\n"
-            + "Master please enter a task number so that I know which to handle.\n"
-            + "----------------------------------------------------------------------------\n"
-        );
+    public static String noIndexKeyedError() {
+        return "Master please enter a task number so that I know which to handle.\n";
     }
 
     /**
      * error message when the user inputs an invalid task number for task manipulation
      */
-    public static void printIndexSizeMismatchError() {
-        System.out.println(
-            "----------------------------------------------------------------------------\n"
-            + "Master that is not a valid task number.\n"
-            + "----------------------------------------------------------------------------\n"
-        );
+    public static String printIndexSizeMismatchError() {
+        return "Master that is not a valid task number.\n";
     }
 
     /**
      * error message for when the user tries to mark a task as done when the task list is empty
      */
-    public static void printNoUndoneTaskError() {
-        System.out.println(
-            "----------------------------------------------------------------------------\n"
-            + "Master there is no task that is undone.\n"
-            + "----------------------------------------------------------------------------\n"
-        );
+    public static String printNoUndoneTaskError() {
+        return "Master there is no task that is undone.\n";
     }
 
     /**
      * error message for when the user fails to input additional parameters for the command
      */
-    public static void printIncompleteCommandError() {
-        System.out.println(
-            "----------------------------------------------------------------------------\n"
-            + "Master there is no description entered !\n"
-            + "----------------------------------------------------------------------------\n"
-        );
+    public static String printIncompleteCommandError() {
+        return "Master there is no description entered !\n" ;
     }
 
     /**
      * error message for when a user inputs an unrecognisable command
      */
-    public static void printUnrecognizableCommandError() {
-        System.out.println(
-            "----------------------------------------------------------------------------\n"
-            + "I am sorry master but I do not understand that command.\n"
-            + "----------------------------------------------------------------------------\n"
-        );
+    public static String printUnrecognizableCommandError() {
+        return "I am sorry master but I do not understand that command.\n";
     }
 
     /**
      * error message for when the user attempts to delete a task from an empty task list
      */
-    public static void printNoTaskToDeleteError() {
-        System.out.println(
-            "----------------------------------------------------------------------------\n"
-            + "I am sorry master but the task list is empty.\n"
-            + "----------------------------------------------------------------------------\n"
-        );
+    public static String printNoTaskToDeleteError() {
+        return "I am sorry master but the task list is empty.\n";
     }
 
     /**
      * error message for user not inputting a date for a task with a deadline
      */
-    public static void printNoDateInput() {
-        System.out.println(
-            "----------------------------------------------------------------------------\n"
-            + "Master Please enter the date for your task.\n"
-            + "----------------------------------------------------------------------------\n"
-        );
+    public static String printNoDateInput() {
+        return "Master Please enter the date for your task.\n";
     }
 
     /**
      * error message for user inputting wrong datetime format
      */
-    public static void printIncorrectDateFormatError() {
-        System.out.println(
-            "----------------------------------------------------------------------------\n"
-            + "Master the input date should be dd-mm-yyyy hhmm !\n"
-            + "----------------------------------------------------------------------------\n"
-        );
+    public static String printIncorrectDateFormatError() {
+        return "Master the input date should be dd-mm-yyyy hhmm !\n";
     }
 
 }
