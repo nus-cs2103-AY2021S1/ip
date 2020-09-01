@@ -51,7 +51,10 @@ public class Task {
      * @return the String representation of the task when it is stored in a data file
      */
     public String toStorageString() {
-        if (isDone) return "? | 1 | " + description;
-        else return "? | 0 | " + description;
+        if (isDone) {
+            return "? | 1 | " + description;
+        } else {
+            return "? | 0 | " + description;
+        }
     }
 }

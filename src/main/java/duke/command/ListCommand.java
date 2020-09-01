@@ -1,6 +1,9 @@
 package duke.command;
 
-import duke.component.*;
+import duke.component.DukeException;
+import duke.component.Storage;
+import duke.component.TaskList;
+import duke.component.Ui;
 
 /**
  * Command that prints out the task list
@@ -9,6 +12,7 @@ public class ListCommand implements Command {
 
     /**
      * Returns whether this is an exit command
+     *
      * @return false at all times
      */
     @Override

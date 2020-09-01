@@ -7,7 +7,7 @@ import java.util.Scanner;
  */
 public class Ui {
     private static final String divider = "\t____________________________________________________________\n";
-    Scanner sc;
+    private Scanner sc;
 
     /**
      * Initializes a Ui object with a new scanner
@@ -18,6 +18,7 @@ public class Ui {
 
     /**
      * Displays loading error message on the screen
+     *
      * @param e the exception describing what errors occured
      */
     public void showLoadingError(DukeException e) {
@@ -34,9 +35,10 @@ public class Ui {
 
     /**
      * Displays the task list given
+     *
      * @param taskList the task list to be displayed
      */
-    public void displayList(TaskList taskList, String description){
+    public void displayList(TaskList taskList, String description) {
 
         String list = description + "\n";
         for (int i = 1; i <= taskList.size(); i++) {
@@ -44,7 +46,7 @@ public class Ui {
         }
 
         //remove the extra "\n"
-        if(!list.isEmpty()) {
+        if (!list.isEmpty()) {
             list = list.substring(0, list.length() - 1);
         }
 
@@ -52,7 +54,8 @@ public class Ui {
     }
 
     /**
-     * Gets the next input
+     * Gets the next input.
+     *
      * @return the next input in String format
      */
     public String getInput() {
@@ -60,11 +63,10 @@ public class Ui {
     }
 
     /**
-     * Prints out greeting
+     * Prints out greeting.
      */
     public void greeting() {
-        String greeting = "Hello! I'm Duke\n" +
-                "\t What can I do for you?";
+        String greeting = "Hello! I'm Duke\n" + "\t What can I do for you?";
         giveResponse(greeting);
     }
 

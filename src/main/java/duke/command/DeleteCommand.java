@@ -1,16 +1,20 @@
 package duke.command;
 
-import duke.component.*;
+import duke.component.DukeException;
+import duke.component.Storage;
+import duke.component.TaskList;
+import duke.component.Ui;
 import duke.task.Task;
 
 /**
  * Command that delete a task in task list and storage
  */
 public class DeleteCommand implements Command {
-    private int index;
+    private final int index;
 
     /**
      * Initializes an DeleteCommand with the given index
+     *
      * @param index the index given
      */
     public DeleteCommand(int index) {
@@ -19,6 +23,7 @@ public class DeleteCommand implements Command {
 
     /**
      * Returns whether this is an exit command
+     *
      * @return false at all times
      */
     @Override
@@ -31,10 +36,10 @@ public class DeleteCommand implements Command {
      * and print the response using the given ui
      *
      * @param taskList the task list to be updated
-     * @param ui the ui that handles inputs and outputs
-     * @param storage the permanent storage of task list
+     * @param ui       the ui that handles inputs and outputs
+     * @param storage  the permanent storage of task list
      * @throws DukeException if the user has entered an illegal index,
-     *                      or the task list cannot be saved to the storage
+     *                       or the task list cannot be saved to the storage
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
@@ -45,9 +50,9 @@ public class DeleteCommand implements Command {
         taskList.remove(index);
         storage.saveList(taskList);
 
-        ui.giveResponse(" Noted. I've removed this task:\n       " +
-                task +
-                "\n\t Now you have " + taskList.size() +
-                " task" + (taskList.size() > 1 ? "s" : "") + " in the list.");
+        ui.giveResponse(" Noted. I've removed this task:\n       "
+            + task
+            + "\n\t Now you have " + taskList.size()
+            + " task" + (taskList.size() > 1 ? "s" : "") + " in the list.");
     }
 }
