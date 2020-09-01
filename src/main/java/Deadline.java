@@ -2,7 +2,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
-    LocalDate deadline;
+    protected LocalDate deadline;
 
     Deadline(String s, String deadline) {
         super(s);
@@ -20,12 +20,12 @@ public class Deadline extends Task {
     }
 
     @Override
-    String getType() {
+    public String getType() {
         return "deadline";
     }
 
     @Override
-    String getTime() {
+    public String getTime() {
         return deadline.toString();
     }
 
@@ -36,6 +36,7 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[deadline]" + super.toString() + " (by: " + this.deadline.format(DateTimeFormatter.ofPattern("d MMM yyyy")) + ")";
+        return "[deadline]" + super.toString()
+                + " (by: " + this.deadline.format(DateTimeFormatter.ofPattern("d MMM yyyy")) + ")";
     }
 }

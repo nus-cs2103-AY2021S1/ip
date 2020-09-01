@@ -2,7 +2,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class Event extends Task {
-    LocalDate time;
+    protected LocalDate time;
 
     Event(String s, String time) {
         super(s);
@@ -14,18 +14,18 @@ public class Event extends Task {
         this.time = LocalDate.parse(time);
     }
 
-    Event(String name, boolean completed, LocalDate time) {
+    private Event(String name, boolean completed, LocalDate time) {
         super(name, completed);
         this.time = time;
     }
 
     @Override
-    String getType() {
+    public String getType() {
         return "event";
     }
 
     @Override
-    String getTime() {
+    public String getTime() {
         return time.toString();
     }
 
@@ -36,6 +36,7 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[event]" + super.toString() + " (at: " + this.time.format(DateTimeFormatter.ofPattern("d MMM yyyy")) + ")";
+        return "[event]" + super.toString()
+                + " (at: " + this.time.format(DateTimeFormatter.ofPattern("d MMM yyyy")) + ")";
     }
 }

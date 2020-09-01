@@ -8,12 +8,12 @@ public class Todo extends Task {
     }
 
     @Override
-    String getType() {
+    public String getType() {
         return "todo";
     }
 
     @Override
-    String getTime() {
+    public String getTime() {
         return "0";
     }
 
