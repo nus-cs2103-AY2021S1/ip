@@ -3,6 +3,7 @@ package duke.main;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
@@ -65,10 +66,27 @@ public class Ui extends Application {
         AnchorPane.setLeftAnchor(userInput , 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
+        sendButton.setOnMouseClicked((event) -> {
+            dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
+            userInput.clear();
+        });
+
+        userInput.setOnAction((event) -> {
+            dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
+            userInput.clear();
+        });
+
         // Set the stage
         stage.setScene(scene);
         // Render the stage
         stage.show();
+    }
+
+    private Label getDialogLabel(String text) {
+        Label textToAdd = new Label(text);
+        textToAdd.setWrapText(true);
+
+        return textToAdd;
     }
 
     /**
