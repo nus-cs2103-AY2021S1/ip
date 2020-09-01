@@ -11,10 +11,23 @@ public class Storage {
 
     // Read file
     private File f;
-    private String path;
-    public Storage(String path) {
-        this.path = path;
-        this.f = new File(path);
+    private String dir;
+    private String fileName;
+    public Storage(String dest, String filename) throws IOException, DukeException{
+        this.dir = dest;
+        this.fileName = filename;
+        File dir = new File(dest);
+        this.f = new File(this.dir, filename);
+        if(!dir.exists()){
+            if (!dir.mkdir()){
+                throw new DukeException("Cannot create directory");
+            }
+        }
+        if(!f.exists()){
+            if(!this.f.createNewFile()){
+                throw new DukeException("Cannot create data text file");
+            }
+        }
     }
 
     public ArrayList<Task> load() throws IOException{
@@ -89,7 +102,7 @@ public class Storage {
     }
 
     public void writeData(String text, Boolean appendMode) throws IOException{
-        BufferedWriter bw = new BufferedWriter(new FileWriter(this.path, appendMode));
+        BufferedWriter bw = new BufferedWriter(new FileWriter(this.dir + "/" + this.fileName, appendMode));
         bw.write(text);
         bw.close();
     }

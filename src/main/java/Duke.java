@@ -10,12 +10,11 @@ public class Duke {
 
     public static void main(String[] args){
         //Destination
-        String dest = "data/duke.txt";
+        String dest = "data";
+        String filename = "duke.txt";
 
-        //Initialise Storage
         Ui ui = new Ui();
         Parser parser = new Parser();
-        Storage data = new Storage(dest);
 
         // Show Welcome
         ui.showWelcome();
@@ -24,6 +23,9 @@ public class Duke {
         boolean exit = false;
 
         try {
+            // Initialise Storage
+            Storage data = new Storage(dest, filename);
+
             // Creates list
             TaskList list = new TaskList(data.load());
 
@@ -71,9 +73,9 @@ public class Duke {
                     ui.showError(e.getMessage());
                 }
             }
-        } catch(IOException e){
-            System.out.println(e.getMessage());
-        }finally{
+        } catch( IOException | DukeException e) {
+            ui.showError(e.getMessage());
+        } finally{
             ui.goodbye();
             ui.close();
         }
