@@ -2,6 +2,7 @@ package duke;
 
 import duke.enums.Command;
 import duke.exceptions.DukeException;
+import duke.messages.DukeResponse;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.TaskManager;
@@ -37,20 +38,25 @@ public class Repl {
         prettyPrinter.print(ResourceHandler.getString("repl.greeting"));
         while (scanner.hasNextLine()) {
             String line = scanner.nextLine();
-            prettyPrinter.print(getResponse(line));
+            DukeResponse dukeResponse = getResponse(line);
+            prettyPrinter.print(dukeResponse.toString());
+            if (dukeResponse.shouldExit()) {
+                break;
+            }
         }
     }
 
     /**
-     * Processes the user's input and returns a response.
+     * Processes the user's input and returns a {@code DukeResponse}.
      *
      * @param input the user's input
-     * @return a string in response to the user's input
+     * @return a {@code DukeResponse}
      */
-    public static String getResponse(String input) {
+    public static DukeResponse getResponse(String input) {
         String firstToken = input.split(" ")[0];
         // This should never be displayed as all possible responses should already be covered.
         String response = ResourceHandler.getString("repl.internalError");
+        boolean shouldExit = false;
         try {
             Command command = Command.valueOf(firstToken.toUpperCase());
             // Check that the user input is of the correct format for the command.
@@ -58,6 +64,7 @@ public class Repl {
             switch (command) {
             case BYE:
                 response = ResourceHandler.getString("repl.farewell");
+                shouldExit = true;
                 break;
             case DEADLINE: {
                 String lineWithoutCommand = input.replaceFirst("^deadline", "");
@@ -131,6 +138,6 @@ public class Repl {
         } catch (IllegalArgumentException e) {
             response = ResourceHandler.getString("repl.unknownCommand");
         }
-        return response;
+        return new DukeResponse(response, shouldExit);
     }
 }
