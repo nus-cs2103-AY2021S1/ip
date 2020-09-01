@@ -1,25 +1,28 @@
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+
 import duke.DukeException;
 import duke.Parser;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Todo;
 
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class DukeTest {
 
     @Test
     public void getTodoDescription_descriptionEmpty_exceptionThrown() {
         Exception e = Assertions.assertThrows(DukeException.class, () -> {
-            Parser.getTodoDescription("");});
+            Parser.getTodoDescription(""); });
     }
 
     @Test
     public void parseCommand_invalidCommand_exceptionThrown() {
         Exception e = Assertions.assertThrows(DukeException.class, () -> {
-            Parser.parse("Banana");});
+            Parser.parse("Banana"); });
     }
 
     @Test

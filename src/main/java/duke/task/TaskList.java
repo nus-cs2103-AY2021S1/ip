@@ -1,9 +1,10 @@
 package duke.task;
 
-import duke.DukeException;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import duke.DukeException;
+
 
 /**
  * Represents tasks of user.

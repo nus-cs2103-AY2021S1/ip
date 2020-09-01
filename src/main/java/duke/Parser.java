@@ -1,16 +1,16 @@
 package duke;
 
-import duke.command.Command;
-import duke.command.ExitCommand;
-import duke.command.AddCommand;
-import duke.command.DoneCommand;
-import duke.command.DeleteCommand;
-import duke.command.InputCommand;
-import duke.command.GetCommand;
-import duke.command.ListCommand;
-import duke.command.FindCommand;
-
 import java.time.LocalDate;
+
+import duke.command.AddCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.ExitCommand;
+import duke.command.FindCommand;
+import duke.command.GetCommand;
+import duke.command.InputCommand;
+import duke.command.ListCommand;
 
 /**
  * Represents a parser that parses the input of users.
@@ -69,7 +69,7 @@ public class Parser {
         int index;
         try {
             index = Integer.parseInt(stringArray[1]);
-        } catch(Exception e) {
+        } catch (Exception e) {
             return false;
         }
         return index <= tasksNumber && index > 0;
@@ -91,10 +91,10 @@ public class Parser {
      * @return String description of Todo object.
      * @throws DukeException if Todo description is empty.
      */
-    public static String getTodoDescription(String input) throws DukeException{
+    public static String getTodoDescription(String input) throws DukeException {
         try {
             return input.substring(5);
-        } catch (Exception e){
+        } catch (Exception e) {
             throw new DukeException("Todo cannot be empty!");
         }
     }

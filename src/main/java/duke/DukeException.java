@@ -5,8 +5,12 @@ package duke;
  */
 public class DukeException extends Exception {
 
-    String message;
+    private String message;
 
+    /**
+     * Creates DukeExcpetion object.
+     * @param input Custom message to be printed in DukeException message.
+     */
     public DukeException(String input) {
         super(input);
         message = input;

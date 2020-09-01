@@ -1,10 +1,10 @@
 package duke.command;
 
-import duke.Parser;
-import duke.Ui;
-import duke.Storage;
-import duke.task.TaskList;
 import duke.DukeException;
+import duke.Parser;
+import duke.Storage;
+import duke.Ui;
+import duke.task.TaskList;
 
 /**
  * Represents command that is specific to the delete command.
@@ -13,6 +13,10 @@ public class DeleteCommand extends Command {
 
     private String input;
 
+    /**
+     * Creates DeleteCommand object.
+     * @param input input of user.
+     */
     public DeleteCommand(String input) {
         this.exit = false;
         this.input = input;

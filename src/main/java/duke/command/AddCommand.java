@@ -1,12 +1,12 @@
 package duke.command;
 
-import duke.Parser;
-import duke.Ui;
-import duke.Storage;
-import duke.task.TaskList;
 import duke.DukeException;
+import duke.Parser;
+import duke.Storage;
+import duke.Ui;
 import duke.task.Deadline;
 import duke.task.Event;
+import duke.task.TaskList;
 import duke.task.Todo;
 
 /**
@@ -17,6 +17,11 @@ public class AddCommand extends Command {
     private String input;
     private InputCommand inputCommand;
 
+    /**
+     * Creates AddCommand object.
+     * @param input input of user.
+     * @param inputCommand the InputCommand enum value of object.
+     */
     public AddCommand(String input, InputCommand inputCommand) {
         this.exit = false;
         this.input = input;

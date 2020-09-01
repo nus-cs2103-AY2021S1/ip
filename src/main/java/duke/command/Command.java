@@ -2,8 +2,8 @@ package duke.command;
 
 import duke.DukeException;
 import duke.Storage;
-import duke.task.TaskList;
 import duke.Ui;
+import duke.task.TaskList;
 
 /**
  * Represents command object that is based on user command.

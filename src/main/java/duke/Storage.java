@@ -1,29 +1,29 @@
 package duke;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
+
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
-
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.Files;
-import java.io.File;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Stores all storage related methods and variables.
  */
 public class Storage {
 
-    List<Task> tasks = new ArrayList<>();
-    String filePath;
-    File dataFile;
+    private List<Task> tasks = new ArrayList<>();
+    private String filePath;
+    private File dataFile;
 
     public Storage(String filePath) {
         this.filePath = filePath;
@@ -34,7 +34,7 @@ public class Storage {
      * @return List of tasks in file.
      * @throws DukeException if file cannot be created or reader cannot read next line.
      */
-    public List<Task> load() throws DukeException{
+    public List<Task> load() throws DukeException {
 
         Path directoryPath = Paths.get("data");
         boolean directoryExists = Files.exists(directoryPath);

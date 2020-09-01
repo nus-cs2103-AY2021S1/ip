@@ -8,6 +8,11 @@ import java.time.format.DateTimeFormatter;
  */
 public class Deadline extends Task {
 
+    /**
+     * Creates Deadline object.
+     * @param description Description of the Deadline object.
+     * @param by string representation of deadline of Deadline object.
+     */
     public Deadline(String description, String by) {
         super(description);
         this.date = LocalDate.parse(by);

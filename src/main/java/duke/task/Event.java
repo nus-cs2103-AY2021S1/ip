@@ -8,6 +8,11 @@ import java.time.format.DateTimeFormatter;
  */
 public class Event extends Task {
 
+    /**
+     * Creates Event object.
+     * @param description Description of the Event object.
+     * @param at string representation of time of Event object.
+     */
     public Event(String description, String at) {
         super(description);
         this.date = LocalDate.parse(at);
